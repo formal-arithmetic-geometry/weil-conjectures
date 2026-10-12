@@ -1,0 +1,122 @@
+{
+ "id": "new-etale-affine-singleton-tensor-pure-cofaces",
+ "kind": "statement",
+ "title": "Pure-tensor coface equation for normalized singleton sections",
+ "statement": "Let X,F,U,W,g,A,B,M,C,T be as in the singleton tensor-section construction, without requiring U or W affine. Suppose e(n):T.X(n)≅C.X(n) satisfy IsSingletonTensorDegreeComparison for every n. For each n, j:Fin(n+2), m in M and b:Fin(n+1)→B, the composites e(n).hom followed by the j-th Cech coface and the lifted Amitsur j-th coface followed by e(n+1).hom agree when evaluated at ULift(m tensor tprod(b)). This states only the equation on a single indexed pure tensor; it asserts no bijectivity and constructs no complex isomorphism. [new-etale-affine-singleton-tensor-degree-comparison] [lem-sc-etale-qcoherent-presheaf-functorial]",
+ "stmt_deps": [
+  "new-etale-affine-singleton-tensor-degree-comparison",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, Theorem 59.22.4, affine-case proof, singleton Cech/Amitsur calculation; https://stacks.math.columbia.edu/tag/03P2"
+ },
+ "proof": [
+  {
+   "text": "The Amitsur coface maps the indexed pure tensor tprod(b) to tprod(j.insertNth 1 b). Express tprod(b) as a product of single-factor inclusions and use amitsurMap_comp_singleAlgHom. Under the degree normalization this is the product of the retained projection functions times the restriction of m.",
+   "uses": [
+    "lem-pc-cech-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the Cech coface at the unique tuple: it is section restriction along the product map omitting j. Semilinearity moves the product of projection functions through restriction; composition of restrictions gives the direct coefficient restriction.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The product projection equations identify the retained functions, while the inserted one is a unit. Thus the evaluated sections agree; singleton evaluation and ULift are injective, so the original group elements agree.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cech-exact",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 03P2 affine calculation, expanded using Tag 03DR section restrictions, the affine sections formula, and tensor generators."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Cech complex of quasi coherent sections on an affine singleton cover is identified with the Amitsur tensor complex by pure tensors",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No absence verdict from this service. Loogle, LeanFinder, and source grep were run.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme fiber product indexed tensor power global sections quasi coherent module canonical pure tensor isomorphism",
+   "results": "Eight hits. pullbackSpecIso and its projection equations are the binary affine product step, not the indexed coefficient section comparison. No direct match.",
+   "verdict": "Use the binary affine pullback theorem in the geometric step; no full comparison found.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PiTensorProduct\", \"tprod\"",
+   "results": "Twelve hits include tprod and span_tprod_eq_top, the generator facts. None identifies affine section groups or their cofaces.",
+   "verdict": "Generator facts used for the proved extension step.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "coface.*tprod|amitsurMap|productUniqueIso",
+   "results": "Eight Mathlib hits include productUniqueIso and its projection formula; library rg found amitsurMap_comp_singleAlgHom, the algebraic factor inclusion formula. No geometric pure-tensor coface theorem.",
+   "verdict": "Useful product and tensor primitives, no duplicate geometric comparison.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorAmitsur",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-etale-affine-singleton-tensor-amitsur",
+   "place": "Affine singleton Cech/Amitsur calculation: separate terms from cofaces and then assemble the alternating differential.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaces",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSingletonTensorPureCofaces.lean",
+  "declaration": "AlgebraicGeometry.Scheme.singletonTensorDegreeComparison_pure_coface",
+  "statement": "theorem singletonTensorDegreeComparison_pure_coface\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U)\n    (e : ∀ n : ℕ, (singletonTensorAmitsur X F U W g).X n ≅\n      (singletonTensorCech X F U W g).X n)\n    (he : ∀ n, IsSingletonTensorDegreeComparison X F U W g n (e n)) :\n    letI : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra\n    ∀ (n : ℕ) (j : Fin (n + 2))\n      (m : Γ((Modules.tensorPullback U.hom).obj F, ⊤))\n      (b : Fin (n + 1) → Γ(W.left, ⊤)),\n      ((e n).hom ≫ (singletonTensorCechCosimplicial X F U W g).δ j)\n        (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b)) =\n      ((singletonTensorForget U.left).map\n        ((Algebra.TensorProduct.amitsurCosimplicialObject Γ(U.left, ⊤) Γ(W.left, ⊤)\n          Γ((Modules.tensorPullback U.hom).obj F, ⊤)).δ j) ≫ (e (n + 1)).hom)\n            (ULift.up (m ⊗ₜ[Γ(U.left, ⊤)] PiTensorProduct.tprod Γ(U.left, ⊤) b))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1686901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1686901",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

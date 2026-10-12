@@ -1,0 +1,132 @@
+{
+ "id": "new-etale-affine-singleton-tensor-degree-comparison",
+ "kind": "statement",
+ "title": "Normalized degree comparisons for affine singleton tensor sections",
+ "statement": "Let X be a scheme, F a quasi-coherent X-module, U,W affine etale X-schemes, and g:W→U. Set A=Γ(U,O), B=Γ(W,O), and M=Γ(U,U*F). Let C be the lifted tensor-section singleton Cech complex and T the lifted, scalar-forgotten Amitsur complex A,B,M. There are isomorphisms e(n):T.X(n)→C.X(n) for all n. Let P(n) be the categorical product of n+1 copies of W→U in Over U, q(k):P(n)→W its projections, and π(n) evaluation of the singleton outer section product at the unique tuple. For all m in M and functions b:Fin(n+1)→B, π(n)(e(n)(ULift(m tensor tprod(b)))).down equals (product over k of q(k)^sharp(b(k))) times the tensor-section restriction of m along P(n)→U. This is IsSingletonTensorDegreeComparison in Lean. No differential compatibility is asserted. [def-sc-etale-qcoherent-module] [lem-pc-cech-exact] [lem-sc-etale-qcoherent-presheaf-functorial]",
+ "stmt_deps": [
+  "def-sc-etale-qcoherent-module",
+  "lem-pc-cech-exact",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, Theorem 59.22.4, affine-case proof, singleton Cech/Amitsur calculation; https://stacks.math.columbia.edu/tag/03P2"
+ },
+ "proof": [
+  {
+   "text": "Compare tensor pullback with Mathlib pullback as left adjoints to pushforward, and transport quasi-coherence of F to its tensor pullback on U. Use the unit-normalized composition comparison to identify coefficients on P(n).",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n using affine charts and pullbackSpecIso with its projection equations: P(n) is affine and its functions are the indexed tensor power of B over A. Apply the affine pullback sections formula to the coefficient module on U. On m tensor tprod(b), this is the product of the pulled-back b(k) times the restricted coefficient.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The outer product has a unique index. Use productUniqueIso to invert evaluation at that tuple, and lift the additive section isomorphism with ULift. The pure-tensor equation fixes the degree isomorphism; it gives zero groups for empty W and the tensor-unit comparison for identity g.",
+   "uses": [
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 03P2 affine calculation, expanded using Tag 03DR section restrictions, the affine sections formula, and tensor generators."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Cech complex of quasi coherent sections on an affine singleton cover is identified with the Amitsur tensor complex by pure tensors",
+   "results": "UNAVAILABLE: service returned Internal Server Error. No absence verdict from this service. Loogle, LeanFinder, and source grep were run.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine scheme fiber product indexed tensor power global sections quasi coherent module canonical pure tensor isomorphism",
+   "results": "Eight hits. pullbackSpecIso and its projection equations are the binary affine product step, not the indexed coefficient section comparison. No direct match.",
+   "verdict": "Use the binary affine pullback theorem in the geometric step; no full comparison found.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PiTensorProduct\", \"tprod\"",
+   "results": "Twelve hits include tprod and span_tprod_eq_top, the generator facts. None identifies affine section groups or their cofaces.",
+   "verdict": "Generator facts used for the proved extension step.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "coface.*tprod|amitsurMap|productUniqueIso",
+   "results": "Eight Mathlib hits include productUniqueIso and its projection formula; library rg found amitsurMap_comp_singleAlgHom, the algebraic factor inclusion formula. No geometric pure-tensor coface theorem.",
+   "verdict": "Useful product and tensor primitives, no duplicate geometric comparison.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorAmitsur",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-etale-affine-singleton-tensor-amitsur",
+   "place": "Affine singleton Cech/Amitsur calculation: separate terms from cofaces and then assemble the alternating differential.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorDegreeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSingletonTensorDegreeComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_singletonTensorDegreeComparison",
+  "statement": "theorem exists_singletonTensorDegreeComparison\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left) :\n    ∃ e : ∀ n : ℕ, (singletonTensorAmitsur X F U W g).X n ≅\n      (singletonTensorCech X F U W g).X n,\n      ∀ n, IsSingletonTensorDegreeComparison X F U W g n (e n)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1686901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1686901",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

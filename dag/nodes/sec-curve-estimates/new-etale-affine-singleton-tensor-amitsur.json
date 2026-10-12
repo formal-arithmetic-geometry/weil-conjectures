@@ -14,41 +14,33 @@
  },
  "proof": [
   {
-   "text": "Compare tensorPullback with Mathlib pullback by uniqueness of left adjoints to pushforward, with the unit-compatible comparison, and transport the proved quasi-coherence instance across this isomorphism. The normalized composition comparison identifies restricted tensor sections over X with sections of that pullback over U.",
+   "text": "Obtain normalized degree isomorphisms from exists_singletonTensorDegreeComparison. This performs the affine fibre-product and pullback-section step without yet claiming coface compatibility.",
    "uses": [
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-pc-module-pullback-identity-composition"
+    "new-etale-affine-singleton-tensor-degree-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Use affine charts and pullbackSpecIso inductively to identify the (p+1)-fold fibre product ring with the indexed tensor power of B over A. Apply the affine pullback-sections formula to identify its coefficient sections with M tensor that ring. Its pure-tensor equation and the normalized composition unit equation identify omitted-factor restrictions with insertion of one.",
+   "text": "Apply singletonTensorDegreeComparison_coface. Its proved double tensor induction extends the pure-tensor coface equation to every element.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-pc-module-pullback-identity-composition"
+    "new-etale-affine-singleton-tensor-cofaces"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate the singleton product over maps Fin (p+1)→Fin 1 at the unique tuple. Lift the resulting additive isomorphisms and inverses. Every coface agrees by the preceding pure-tensor formula, so their alternating sums agree and the component isomorphisms give a complex isomorphism. Empty W gives zero rings and zero sections; identity maps give the usual tensor-unit comparison.",
-   "uses": [
-    "def-sc-etale-qcoherent-module"
-   ],
-   "elementary": false
+   "text": "For adjacent degrees, unfold the two alternating coface differentials. The forget-and-ULift functor preserves sums and integer multiples; composition distributes over these sums. Sum the coface equations with signs (-1)^j. Build the Amitsur-to-Cech complex isomorphism with HomologicalComplex.Hom.isoOfComponents and invert it. For nonadjacent degrees the complex constructor supplies zero differentials.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "def-sc-etale-qcoherent-module"
+  "new-etale-affine-singleton-tensor-degree-comparison",
+  "new-etale-affine-singleton-tensor-cofaces"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project",
-  "place": "Tag 03P2, affine-case proof, paragraph identifying the singleton Cech complex with (B/A) tensor M before exactness; https://stacks.math.columbia.edu/tag/03P2"
+  "place": "Tag 03P2 affine singleton calculation, decomposed into normalized term comparisons and pure-tensor coface equations; Q2 supplied the double tensor induction and alternating-sum assembly in Lean."
  },
  "mathlib_searches": [
   {
@@ -125,9 +117,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T110259-L-613579",
+  "landing": "20261012T135305-L-1686901",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

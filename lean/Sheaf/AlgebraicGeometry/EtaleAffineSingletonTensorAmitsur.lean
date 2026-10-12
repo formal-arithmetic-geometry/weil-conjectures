@@ -8,9 +8,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorCofaces
 
 /-! # Singleton affine tensor-section Čech complexes
 Source: Stacks Project, Tag 03P2, affine tensor-product calculation.
@@ -61,6 +59,26 @@ theorem nonempty_etale_affine_singleton_tensor_amitsur_iso
       (((forget₂ (ModuleCat.{u} Γ(U.left, ⊤)) AddCommGrpCat.{u}) ⋙
         AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex (.up ℕ)).obj
           (Algebra.TensorProduct.amitsurComplex Γ(U.left, ⊤) Γ(W.left, ⊤)
-            Γ((Modules.tensorPullback U.hom).obj F, ⊤))) := by sorry
+            Γ((Modules.tensorPullback U.hom).obj F, ⊤))) := by
+  classical
+  let : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra
+  obtain ⟨e, he⟩ := exists_singletonTensorDegreeComparison X F U W g hU hW
+  have hc := singletonTensorDegreeComparison_coface X F U W g e he
+  refine ⟨(HomologicalComplex.Hom.isoOfComponents e ?_).symm⟩
+  intro i j hij
+  have hj : i + 1 = j := hij
+  subst j
+  change (e i).hom ≫ ((AlgebraicTopology.alternatingCofaceMapComplex _).obj
+    (singletonTensorCechCosimplicial X F U W g)).d i (i + 1) =
+      (singletonTensorForget U.left).map
+        ((Algebra.TensorProduct.amitsurComplex Γ(U.left, ⊤) Γ(W.left, ⊤)
+          Γ((Modules.tensorPullback U.hom).obj F, ⊤)).d i (i + 1)) ≫ (e (i + 1)).hom
+  simp only [Algebra.TensorProduct.amitsurComplex,
+    AlgebraicTopology.alternatingCofaceMapComplex,
+    AlgebraicTopology.AlternatingCofaceMapComplex.obj, CochainComplex.of_d]
+  simp only [AlgebraicTopology.AlternatingCofaceMapComplex.objD,
+    Functor.map_sum, Functor.map_zsmul, Preadditive.comp_sum, Preadditive.sum_comp,
+    Preadditive.comp_zsmul, Preadditive.zsmul_comp]
+  exact Finset.sum_congr rfl (fun k _ ↦ congrArg (fun f ↦ (-1 : ℤ) ^ k.val • f) (hc i k))
 
 end AlgebraicGeometry.Scheme
