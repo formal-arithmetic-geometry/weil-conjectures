@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
-import Sheaf.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-!
 # Binary direct sums of quasi-coherent modules
@@ -58,7 +58,29 @@ Proof:
 theorem isQuasicoherent_biprod {X : Scheme.{u}} (F₁ F₂ : X.Modules)
     [F₁.IsQuasicoherent] [F₂.IsQuasicoherent] :
     (F₁ ⊞ F₂).IsQuasicoherent := by
-  sorry
+  let M : ULift.{u} Bool → X.Modules :=
+    fun i ↦ Bool.rec F₁ F₂ i.down
+  have hM : ∀ i, (M i).IsQuasicoherent := by
+    intro ⟨i⟩
+    cases i
+    · change F₁.IsQuasicoherent
+      infer_instance
+    · change F₂.IsQuasicoherent
+      infer_instance
+  have hcop : (∐ M).IsQuasicoherent := @isQuasicoherent_sigma X _ M hM
+  let e : F₁ ⊞ F₂ ≅ ∐ M :=
+    { hom := biprod.desc (Sigma.ι M ⟨false⟩) (Sigma.ι M ⟨true⟩)
+      inv := Sigma.desc (fun i ↦
+        show M i ⟶ F₁ ⊞ F₂ from
+          Bool.rec (motive := fun j ↦ Bool.rec F₁ F₂ j ⟶ F₁ ⊞ F₂)
+            biprod.inl biprod.inr i.down)
+      hom_inv_id := by
+        apply biprod.hom_ext' <;> simp [M]
+      inv_hom_id := by
+        apply Sigma.hom_ext
+        intro ⟨i⟩
+        cases i <;> simp [M] }
+  exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e.symm hcop
 
 end
 
