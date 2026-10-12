@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-zero-dimensional-singleton-neighbourhoods",
+ "kind": "statement",
+ "title": "Strictly henselian singleton open neighbourhoods",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure], and $C$ a separated finite-type $k$-scheme [def-weil-pbc-scheme-conventions] of topological Krull dimension at most zero [def-kun-topological-krull-dimension]. For each $c\\in C$, let $s_c:\\operatorname{Spec}\\Omega_c\\to C$ be a geometric point [def-weil-geometric-point] with image $c$. Then there are opens $U_c\\subset C$ [def-weil-open-immersion] with underlying sets $\\{c\\}$ and morphisms $t_c:\\operatorname{Spec}\\Omega_c\\to U_c$ satisfying $t_c\\circ\\iota_c=s_c$. For every $c$ there is a commutative local ring $R_c$ which is strictly henselian [def-weil-pbc-henselian-terminology] and an isomorphism $e_c:U_c\\cong\\operatorname{Spec}R_c$ [def-weil-affine-spectrum], such that $e_c\\circ t_c$ has image the closed point of $\\operatorname{Spec}R_c$.",
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "def-kun-topological-krull-dimension",
+  "def-weil-geometric-point",
+  "def-weil-open-immersion",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KH (lemma-Noetherian-dimension-0), 00FV (theorem-nullstellensatz), and 06RS (lemma-local-dimension-zero-henselian); singleton-open construction in parent proof steps 1-2"
+ },
+ "proof": [
+  {
+   "text": "By [new-zdbp-geometry], C is discrete. Set U_c to the open singleton {c}. The image of s_c is {c}, so Mathlib IsOpenImmersion.lift gives t_c with t_c followed by the inclusion equal to s_c. These constructions are pointwise, including empty C.",
+   "uses": [
+    "new-zdbp-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Parent proof step 1; definition of an open immersion and its factorization property"
+   }
+  },
+  {
+   "text": "Mathlib AlgebraicGeometry.Limits gives IsAffine for any singleton scheme. Put R_c = Gamma(U_c, top), and use U_c.isoSpec. Its prime spectrum is a nonempty singleton, so R_c is nonzero, its maximal spectrum is a singleton, and IsLocalRing.of_singleton_maximalSpectrum makes it local. The singleton prime spectrum gives Ring.KrullDimLE 0 R_c, equivalently ringKrullDim R_c = 0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Parent proof step 1; Mathlib AlgebraicGeometry.Limits singleton IsAffine instance, RingTheory.LocalRing.MaximalIdeal.Basic and KrullDimension.Zero"
+   }
+  },
+  {
+   "text": "The composite Spec R_c -> U_c -> C -> Spec k is locally of finite type, since isomorphisms and open immersions are so. Its closed point is closed in the singleton spectrum. Apply [lem-weil-pbc-closed-point-residue-field-base], implemented by residueFieldIsoBase. The stalkClosedPointIso and IsLocalRing.ResidueField.mapEquiv identify the scheme residue field with the local-ring residue field. Thus the latter is algebraically closed, hence separably closed.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FV (theorem-nullstellensatz), applied to the singleton open"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-dimension-zero-local-strictly-henselian] to R_c and take its strictly henselian conclusion. The image of t_c followed by e_c is the only prime, hence the closed point. This supplies all the required data.",
+   "uses": [
+    "lem-weil-pbc-dimension-zero-local-strictly-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06RS (lemma-local-dimension-zero-henselian)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-zdbp-geometry",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-dimension-zero-local-strictly-henselian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00KH (lemma-Noetherian-dimension-0), 00FV (theorem-nullstellensatz), and 06RS (lemma-local-dimension-zero-henselian); singleton-open construction in parent proof steps 1-2; the Lean assembly is written by N1 from the cited existing declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scheme whose underlying space is a singleton is affine and is isomorphic to the spectrum of its local stalk ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an etale sheaf on a zero dimensional scheme are the product of geometric stalks",
+   "results": "8 hits: AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc, AlgebraicGeometry.Scheme.instSubsingletonCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensBot, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.Scheme.evaluation",
+   "date": "2026-10-12",
+   "verdict": "No whole-statement match; the point and stalk results are tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "forget_preservesFilteredColimits|toPresheafFiber_presheafFiberCompIso_hom_app|isAffine.*subsingleton",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+   "date": "2026-10-12",
+   "verdict": "Mathlib gives the singleton affine instance; strict henselianity uses the existing project theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-field-extension",
+   "place": "Proof: the degree-zero identification of sections on the zero-dimensional fibre with the product of its geometric stalks; this is Strictly henselian singleton open neighbourhoods",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-sections-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ZeroDimensionalSingletonNeighbourhoods",
+  "file": "lean/Sheaf/AlgebraicGeometry/ZeroDimensionalSingletonNeighbourhoods.lean",
+  "declaration": "AlgebraicGeometry.Scheme.zeroDimensional_singleton_neighbourhoods",
+  "statement": "theorem zeroDimensional_singleton_neighbourhoods (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsSeparated (C ↘ Spec (.of k))] [LocallyOfFiniteType (C ↘ Spec (.of k))] [QuasiCompact (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C ≤ 0) (Ω : C → Type u) [∀ c, Field (Ω c)] [∀ c, IsAlgClosed (Ω c)] (s : ∀ c, Spec (.of (Ω c)) ⟶ C) (hs : ∀ c, s c default = c) : ∃ (U : C → C.Opens) (t : ∀ c, Spec (.of (Ω c)) ⟶ (U c).toScheme), ∀ c, t c ≫ (U c).ι = s c ∧ (U c : Set C) = {c} ∧ ∃ (R : Type u) (_ : CommRing R) (_ : IsLocalRing R), IsStrictlyHenselianLocalRing R ∧ ∃ e : (U c).toScheme ≅ Spec (.of R), (t c ≫ e.hom) default = IsLocalRing.closedPoint R",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T025055-L-1225101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T025055-L-1225101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

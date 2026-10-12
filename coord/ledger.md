@@ -5870,3 +5870,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:49 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangeGeometricPoints (stage 3; reviewer PASS; after a return; landing 20261012T024851-L-1212006 (proof); modules 1; new nodes 0)
 - 02:49 L: merged deliver/Z2/lem-sc-hilb-dominating-power (stage 2; reviewer PASS; first push; WeilConjectures.AlgebraicGeometry.Hilbert.Curve AlgebraicGeometry.exists_surjective_of_representableBy_hilbertPresheaf_curve; existing declaration)
 - 02:50 L: returned deliver/M1/Sheaf.Topology.CohomologyReductionConstantSubsheaves (reviewer RETURN: (the landing tools, head 86a05e638) the delivery did not land: NOT MERGED Sheaf.Topology.CohomologyReductionConstantSubs)
+- 02:52 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks (stage 3; reviewer PASS; first push; landing 20261012T025055-L-1225101 (interface); modules 3; new nodes 3)

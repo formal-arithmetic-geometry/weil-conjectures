@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-disjoint-etale-sections-product",
+ "kind": "statement",
+ "title": "Sections of a sheaf over a disjoint etale cover",
+ "statement": "Let $X$ be a scheme, $A$ a category, and $G$ an $A$-valued sheaf on its small etale site [def-weil-pbc-etale-site]. Let $V$ be an object of the site, $W_i$ an indexed family of objects, and $\\pi_i:W_i\\to V$ monomorphisms. Assume that their generated sieve is covering and that the images of the underlying scheme maps $\\pi_i$ and $\\pi_j$ are disjoint whenever $i\\ne j$. If the categorical product of the $G(W_i)$ exists, the restriction map $G(V)\\to\\prod_iG(W_i)$ is an isomorphism. The index set is arbitrary, including empty.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P9 (section-etale-site), sheaf condition for a disjoint etale covering; implemented in the proved source theorem Etale.isIso_piLift_of_disjoint"
+ },
+ "proof": [
+  {
+   "text": "A family of maps from an arbitrary test object E to G(W_i) is compatible on overlaps. For identical indices compatibility follows by the monomorphism cancellation property. For distinct indices the overlap has empty underlying space by disjointness; G has terminal sections there, by the empty-cover sheaf condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover, Etale.comp_map_eq_of_disjoint"
+   }
+  },
+  {
+   "text": "The sheaf condition existsUnique_amalgamation_ofArrows gives a unique section map E -> G(V) with these restrictions. Hence the restriction map induces a bijection on morphisms out of every E. Apply isIso_of_yoneda_map_bijective, giving the asserted isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover, Etale.isIso_piLift_of_disjoint"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03P9 (section-etale-site), disjoint-cover sheaf condition; existing proved source theorem Etale.isIso_piLift_of_disjoint by Christian Merten, recorded by N1 without adding or rewriting its Lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "existsUnique_amalgamation_ofArrows|ofArrows_mem_smallEtaleTopology_iff|isTerminalOfBotCover",
+   "results": "9 hits: Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/CategoryTheory/Sites/Subcanonical.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean, Mathlib/CategoryTheory/Sites/Sheaf.lean",
+   "date": "2026-10-12",
+   "verdict": "Found the sheaf-condition primitives; the exact theorem is already proved in WeilConjectures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale sheaf sends a cover by pairwise disjoint monomorphisms to a categorical product of sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ofArrows_mem_smallEtaleTopology_iff",
+   "results": "1 hits: AlgebraicGeometry.Scheme.ofArrows_mem_smallEtaleTopology_iff",
+   "date": "2026-10-12",
+   "verdict": "Found the amalgamation and empty-cover primitives; the exact proved theorem is in WeilConjectures."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-field-extension",
+   "place": "Proof: the degree-zero identification of sections on the zero-dimensional fibre with the product of its geometric stalks; this is Sections of a sheaf over a disjoint etale cover",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-sections-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover",
+  "declaration": "AlgebraicGeometry.Scheme.Etale.isIso_piLift_of_disjoint",
+  "statement": "theorem Etale.isIso_piLift_of_disjoint [∀ i, Mono (π i)] (hcov : Sieve.ofArrows W π ∈ X.smallEtaleTopology V) (hdisj : ∀ i j, i ≠ j → Disjoint (Set.range (π i).left.base) (Set.range (π j).left.base)) [HasProduct fun i ↦ G.obj.obj (op (W i))] : IsIso (Pi.lift fun i ↦ G.obj.map (π i).op)",
+  "branch": "slopmaster2",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T025055-L-1225101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T025055-L-1225101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

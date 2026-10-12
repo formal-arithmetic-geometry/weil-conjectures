@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-abelian-strictly-henselian-open-germ",
+ "kind": "statement",
+ "title": "Abelian stalk germs on strictly henselian open subschemes",
+ "statement": "Let $T$ be a scheme, $U\\subset T$ an open subscheme with inclusion $\\iota$ [def-weil-open-immersion], $R$ a strictly henselian commutative local ring [def-weil-pbc-henselian-terminology], and $e:U\\cong\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $s:\\operatorname{Spec}\\Omega\\to T$ be a geometric point [def-weil-geometric-point], with factorization $t:\\operatorname{Spec}\\Omega\\to U$ satisfying $t\\circ\\iota=s$ and $e\\circ t$ lying over the closed point of $\\operatorname{Spec}R$. For every abelian etale sheaf $F$ [def-weil-pbc-abelian-etale-sheaves], its germ map from $F(U)$ to $F_s$ at the pointed neighbourhood $(U,t)$ [def-weil-pbc-geometric-stalks] is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), its set-valued stalk identification applied inside the open subscheme U"
+ },
+ "proof": [
+  {
+   "text": "Compose F with the forgetful functor from abelian groups to sets. Apply [lem-weil-pbc-sets-strictly-henselian-open-sections-stalk] to this sheaf and the given pointed open neighbourhood. This gives a bijection for the set-valued germ, hence an isomorphism in Type.",
+   "uses": [
+    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QO, set-valued assertion"
+   }
+  },
+  {
+   "text": "The forgetful functor preserves filtered colimits (Mathlib.Algebra.Category.Grp.FilteredColimits). Shrink this preservation instance to the universe of the pointed neighbourhood category. Point.presheafFiberCompIso compares the set-valued stalk with the underlying set of the abelian stalk. Point.toPresheafFiber_presheafFiberCompIso_hom_app identifies the composite of the set-valued germ with this comparison with the forgetful image of the abelian germ.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 040R (definition-stalk); Mathlib.CategoryTheory.Sites.Point.Basic, filtered-colimit comparison"
+   }
+  },
+  {
+   "text": "Both factors of this composite are isomorphisms. The forgetful functor reflects isomorphisms, so the abelian germ is an isomorphism. This works for any coefficient universe at least the one required for these colimits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Mathlib ConcreteCategory isIso_iff_bijective and isIso_of_reflects_iso"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO (lemma-vanishing-etale-cohomology-strictly-henselian), its set-valued stalk identification applied inside the open subscheme U; the Lean assembly is written by N1 from the cited existing declarations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The forgetful functor from abelian groups preserves filtered colimits and reflects isomorphisms, so a stalk germ is an isomorphism when its underlying set map is bijective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.Point.presheafFiberCompIso",
+   "results": "5 hits: CategoryTheory.GrothendieckTopology.Point.presheafFiberCompIso, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberCompIso_hom_app, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberCompIso_hom_app_assoc, CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_inv_app",
+   "date": "2026-10-12",
+   "verdict": "Found the exact filtered-colimit comparison and compatibility with germs."
+  },
+  {
+   "tool": "grep",
+   "query": "forget_preservesFilteredColimits|toPresheafFiber_presheafFiberCompIso_hom_app|isAffine.*subsingleton",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/Grp/FilteredColimits.lean, Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean, Mathlib/Algebra/Category/Ring/FilteredColimits.lean",
+   "date": "2026-10-12",
+   "verdict": "Found the forgetful filtered-colimit preservation and the germ comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zero-dimensional-field-extension",
+   "place": "Proof: the degree-zero identification of sections on the zero-dimensional fibre with the product of its geometric stalks; this is Abelian stalk germs on strictly henselian open subschemes",
+   "via": [
+    "lem-weil-pbc-zero-dimensional-sections-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianStrictlyHenselianOpenGerm",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianStrictlyHenselianOpenGerm.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictlyHenselianOpen_abelian_germ_isIso",
+  "statement": "theorem strictlyHenselianOpen_abelian_germ_isIso {T : Scheme.{u}} (U : T.Opens) {R : Type u} [CommRing R] [IsLocalRing R] (hR : IsStrictlyHenselianLocalRing R) (e : U.toScheme ≅ Spec (.of R)) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ T) (t : Spec (.of Ω) ⟶ U.toScheme) (ht : t ≫ U.ι = s) (hclosed : (t ≫ e.hom) default = IsLocalRing.closedPoint R) (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{(max u v) + 1}) : IsIso ((pointSmallEtale s).toPresheafFiber (Etale.mk U.ι) (Over.homMk t ht) F.obj)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T025055-L-1225101",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T025055-L-1225101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
