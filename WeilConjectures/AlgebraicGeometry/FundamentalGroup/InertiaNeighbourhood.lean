@@ -290,6 +290,44 @@ theorem exists_etale_lift_of_forall_inertia_of_isIntegral (Z : U.FiniteEtale)
     refine (congrArg (· ≫ (Scheme.Hom.pullbackFromNormalizationIso Z.obj.hom j).hom) h).trans ?_
     simp
 
+include hϖ hWU m in
+/-- **A point of a cover fixed by inertia extends to an étale neighbourhood.** Let `U` be
+connected, with connected finite étale `U`-schemes integral (e.g. `U` normal), `Z` a finite étale
+`U`-scheme and `t` a point of `Z` over the generic geometric point `η` fixed by the inertia group
+of `Q`. Then there are an étale `C`-scheme `V`, a lift `ℓ : Spec B_Q ⟶ V` of `Spec B_Q ⟶ C` and
+a `U`-morphism `V ×_C U ⟶ Z` sending the point `(ℓ|_{Spec Ω}, η)` to `t`. -/
+theorem exists_etale_lift_of_forall_inertia [ConnectedSpace U]
+    (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
+    (Z : U.FiniteEtale) (t : (fiber (pointOfAlgebra Ω (genericPointLift j))).obj Z)
+    (ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
+      (galoisToAut (genericPointLift j) σ).hom.app Z t = t) :
+    ∃ (V : C.Etale) (ℓ : Spec (.of (Localization.AtPrime Q)) ⟶ V.left)
+      (hℓ : ℓ ≫ V.hom = specAtPrime hW Q) (g : Limits.pullback V.hom j ⟶ Z.obj.left),
+      g ≫ Z.obj.hom = pullback.snd _ _ ∧
+      pullback.lift (Spec.map (CommRingCat.ofHom (Ideal.atPrimeToField Q)) ≫ ℓ)
+        (pointOfAlgebra Ω (genericPointLift j))
+        (by rw [Category.assoc, hℓ, pointOfAlgebra_comp_eq_specAtPrime j hW Q]) ≫ g = t.left := by
+  obtain ⟨Y, i, y, rfl, hY, hi⟩ :=
+    PreGaloisCategory.fiber_in_connected_component (fiber (pointOfAlgebra Ω (genericPointLift j)))
+      Z t
+  have := hint Y hY
+  have hinj : Function.Injective ((fiber (pointOfAlgebra Ω (genericPointLift j))).map i) :=
+    (ConcreteCategory.mono_iff_injective_of_preservesPullback _).1
+      inferInstance
+  have hy : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
+      (galoisToAut (genericPointLift j) σ).hom.app Y y = y := by
+    intro σ hσ
+    apply hinj
+    rw [← ht σ hσ]
+    exact (ConcreteCategory.congr_hom
+      ((galoisToAut (genericPointLift j) σ).hom.naturality i) y).symm
+  obtain ⟨V, ℓ, hℓ, g, hg, hgy⟩ :=
+    exists_etale_lift_of_forall_inertia_of_isIntegral j hW ϖ hϖ hWU m Q Y y hy
+  refine ⟨V, ℓ, hℓ, g ≫ i.hom.left, ?_, ?_⟩
+  · rw [Category.assoc, MorphismProperty.Over.w i.hom, hg]
+  · rw [← Category.assoc, hgy]
+    rfl
+
 end Scheme.FiniteEtale
 
 end AlgebraicGeometry
