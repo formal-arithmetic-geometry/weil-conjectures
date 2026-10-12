@@ -5,10 +5,15 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapComp
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
@@ -94,6 +99,7 @@ theorem bijective_cohomologyMap_of_isAlgClosed {k k' : Type u} [Field k] [IsAlgC
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
   sorry
 
+open Etale Limits in
 /-- **Passage between separably closed fields.** Let `k ⊆ k'` be separably closed fields, `C`
 a proper curve over `k` and `F` a torsion étale sheaf of `Λ`-modules on `C`. If the cohomology
 of proper curves is invariant under extensions of algebraically closed fields (the hypothesis
@@ -130,8 +136,41 @@ theorem bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed
     {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C} (h : IsPullback ι' f' f ι)
     (F : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionSheaf F] (q : ℕ) :
     Function.Bijective (Etale.cohomologyMap ι'
-      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) :=
-  sorry
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F) q) := by
+  obtain ⟨φ, rfl⟩ := Spec.map_surjective ι
+  let : Algebra k k' := φ.hom.toAlgebra
+  let j : AlgebraicClosure k →ₐ[k] AlgebraicClosure k' := IsAlgClosed.lift
+  let a := Spec.map (CommRingCat.ofHom (algebraMap k (AlgebraicClosure k)))
+  let a' := Spec.map (CommRingCat.ofHom (algebraMap k' (AlgebraicClosure k')))
+  let b : Spec (.of (AlgebraicClosure k')) ⟶ Spec (.of (AlgebraicClosure k)) :=
+    Spec.map (CommRingCat.ofHom j.toRingHom)
+  have hab : b ≫ a = a' ≫ Spec.map φ := by
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+    ext x
+    simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom, RingHom.coe_comp,
+      Function.comp_apply, AlgHom.toRingHom_eq_coe, RingHom.coe_coe, AlgHom.commutes]
+    rw [IsScalarTower.algebraMap_apply k k' (AlgebraicClosure k'), RingHom.algebraMap_toAlgebra]
+  let ψ := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+  have hm : (pullback.fst f' a' ≫ ι') ≫ f = (pullback.snd f' a' ≫ b) ≫ a := by
+    rw [Category.assoc, h.w, ← Category.assoc, pullback.condition, Category.assoc, ← hab,
+      Category.assoc]
+  let m := pullback.lift _ _ hm
+  have hsq : IsPullback m (pullback.snd f' a') (pullback.snd f a) b := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ hm) (IsPullback.of_hasPullback f a)
+    rw [pullback.lift_fst, hab]
+    exact (IsPullback.of_hasPullback f' a').paste_horiz h
+  have : IsCurve (pullback.snd f a) :=
+    { krullDim_le_one := by
+        rw [IsHomeomorph.topologicalKrullDim_eq _ (pullback.fst f a).isHomeomorph]
+        exact IsCurve.krullDim_le_one f }
+  have hH := H (pullback.snd f a) hsq ((pullback.fst f a)^*[ModuleCat.{u + 1} Λ].obj F) q
+  rw [← bijective_cohomologyMap_iff_of_iso m
+    (asIso (upperStarForget₂Comparison Λ (pullback.fst f a) F))] at hH
+  have h₁ := (bijective_cohomologyMap_comp_iff m (pullback.fst f a) _
+    (pullback.lift_fst _ _ hm) ψ q).1 (hH.comp (cohomologyMap_bijective _ ψ q))
+  rw [← bijective_cohomologyMap_comp_iff _ _ _ rfl] at h₁
+  exact ((cohomologyMap_bijective _ _ q).of_comp_iff' _).1 h₁
 
 /-- **Invariance of the cohomology of a proper curve under extension of separably closed
 fields.** Let `k ⊆ k'` be separably closed fields, `C` a proper curve over `k` (a proper

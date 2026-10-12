@@ -109,7 +109,7 @@ category of `A`-valued sheaves on the small étale site of `X` and that of `Y`.
 
 This is the sheaf-level form of the equivalence of sites
 `AlgebraicGeometry.Scheme.Hom.isDenseSubsite_etale`.
-(blueprint: `prop:weil-pbc-universal-homeomorphism-topos`) -/
+(blueprint: `prop-weil-pbc-universal-homeomorphism-topos`) -/
 @[stacks 03SI]
 noncomputable def sheafEquivalence :
     Sheaf X.smallEtaleTopology A ≌ Sheaf Y.smallEtaleTopology A :=
@@ -126,7 +126,7 @@ lemma lowerStar_eq_sheafEquivalence_functor : (f)_*[A] = (sheafEquivalence A f).
 
 /-- **Topological invariance of the small étale topos**, [Stacks 03SI]: the pushforward along
 a universal homeomorphism is an equivalence of categories of étale sheaves.
-(blueprint: `prop:weil-pbc-universal-homeomorphism-topos`) -/
+(blueprint: `prop-weil-pbc-universal-homeomorphism-topos`) -/
 @[stacks 03SI]
 theorem isEquivalence_lowerStar : ((f)_*[A]).IsEquivalence :=
   inferInstanceAs ((sheafEquivalence A f).functor.IsEquivalence)
@@ -150,7 +150,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **Topological invariance of the small étale topos**, [Stacks 03SI]: the pullback along a
 universal homeomorphism `f : X ⟶ Y` is an equivalence between the category of `A`-valued
 sheaves on the small étale site of `Y` and that of `X`.
-(blueprint: `prop:weil-pbc-universal-homeomorphism-topos`) -/
+(blueprint: `prop-weil-pbc-universal-homeomorphism-topos`) -/
 @[stacks 03SI]
 theorem isEquivalence_upperStar : ((f)^*[A]).IsEquivalence :=
   Functor.isEquivalence_of_iso (upperStarIsoInverse A f).symm
@@ -217,7 +217,7 @@ attribute [local instance] isEquivalence_upperStar
 /-- **Topological invariance of étale cohomology**, [Stacks 03SI]: for a universal
 homeomorphism `f : X ⟶ Y` the comparison map `AlgebraicGeometry.Etale.cohomologyMap` on
 étale cohomology is bijective in every degree.
-(blueprint: `prop:weil-pbc-universal-homeomorphism-topos`) -/
+(blueprint: `prop-weil-pbc-universal-homeomorphism-topos`) -/
 @[stacks 03SI]
 theorem cohomologyMap_bijective : Function.Bijective (cohomologyMap f F n) :=
   Sheaf.H.mapFunctor_bijective _ _ F n
@@ -227,7 +227,7 @@ homeomorphism `f : X ⟶ Y` the pullback induces an isomorphism
 `H^n(Y_ét, F) ≃+ H^n(X_ét, f^* F)` in every degree. This is
 `AlgebraicGeometry.Etale.cohomologyMap`, which is bijective by
 `AlgebraicGeometry.Etale.cohomologyMap_bijective`.
-(blueprint: `prop:weil-pbc-universal-homeomorphism-topos`) -/
+(blueprint: `prop-weil-pbc-universal-homeomorphism-topos`) -/
 @[stacks 03SI]
 noncomputable def cohomologyEquiv :
     Sheaf.H F n ≃+ Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj F) n :=
