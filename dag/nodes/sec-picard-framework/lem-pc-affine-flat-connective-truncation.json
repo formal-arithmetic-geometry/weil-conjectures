@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-affine-flat-connective-truncation",
+ "kind": "statement",
+ "title": "Flat finite-presentation lower truncation of a universally connective affine complex",
+ "statement": "Let S be an affine scheme [def-pc-scheme]. Let C be a cochain complex of O_S-modules [def-pc-cochain-complex-modules] concentrated in [a,b], for a∈ℤ and b∈ℕ. Assume its terms are flat over S, quasi-coherent and finitely presented [def-pc-morphism-conventions]. Assume that for every scheme map g:S′→S the homology H^i(g*C) vanishes for all i<0 [def-pc-base-change]. The canonical lower truncation B=C.truncGE 0 (zero in degrees <0, coker(d^(-1)) in degree 0, C in positive degrees) has flat, quasi-coherent, finitely presented terms. For every g:S′→S and q∈ℕ there is an isomorphism H^q(g*B)≅H^q(g*C). No proper morphism or coefficient sheaf is part of this assertion.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0653 (more-algebra-lemma-last-one-flat) and 0654 (Tor-amplitude flat model)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-cochain-complex-modules",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine quasi-coherent equivalence to write C as the associated-sheaf complex of its global-section complex P over A. Each term is finitely presented and flat, hence finite projective. For any A-module N form the square-zero algebra A ⊕ N and base change to its spectrum. As A-modules the resulting tensor complex is P ⊕ (P tensor N), so universal negative vanishing implies exactness of P tensor N in degree -1. Apply the flat-opcycle criterion at a = 0 to conclude that coker(d^(-1)) is flat.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-module-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel of a map between finitely presented modules is finitely presented: take finitely many generators of the source and add their images as finitely many relations in a finite presentation of the target. Sheafification preserves this cokernel. C.truncGE 0 has this cokernel in degree zero, zero terms below zero and the terms of C above zero; its terms are consequently flat, quasi-coherent and finitely presented.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pullback is a left adjoint and right exact, so it preserves the degree-zero cokernel and identifies g*(C.truncGE 0) with the lower truncation of g*C. The canonical projection to truncation induces an isomorphism on every nonnegative homology: in degree zero both homologies are ker(d^0)/im(d^(-1)), and in positive degrees the short complexes are unchanged except for the same quotient at degree zero. Invert these isomorphisms. This argument is sheaf-local and hence applies to arbitrary new bases. For empty S or zero C every object is zero; when b = 0 the same cokernel computation applies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0653 (more-algebra-lemma-last-one-flat) and 0654 (Tor-amplitude flat model); source read online; specialization and square-zero testing written by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite projective modules with no negative cohomology after every base change has a flat finitely presented degree zero cokernel",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero cokernel of a bounded complex of finite projective modules is flat when all base changes have zero negative cohomology",
+   "results": "8 hits: Module.Flat.of_projective, Rep.isZero_Tor_succ_of_projective, Module.Flat.projective_of_finitePresentation, CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, isZero_Ext_succ_of_projective",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncGE|opcycles_of_exactAt",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncGE",
+   "results": "Second reading: 12 results, including truncGEXIsoOpcycles, truncGEXIso and quasiIsoAt_πTruncGE; none supplies affine termwise flatness and finite presentation after arbitrary pullback.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatFinitePresentationModel",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), lower truncation of the perfect model to a nonnegative finite-projective complex",
+   "via": [
+    "lem-pc-proper-flat-finite-presentation-model",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFlatConnectiveTruncation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFlatConnectiveTruncation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_flat_connective_truncation",
+  "statement": "theorem affine_flat_connective_truncation (S : Scheme.{u}) (hS : IsAffine S)\n    (C : CochainComplex S.Modules ℤ) (a : ℤ) (b : ℕ)\n    (hCge : C.IsStrictlyGE a) (hCle : C.IsStrictlyLE b)\n    (hCflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 S))\n    (hCqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)\n    (hCfp : ∀ n : ℤ, (C.X n).IsFinitePresentation)\n    (hneg : ∀ {S' : Scheme.{u}} (g : S' ⟶ S) (i : ℤ), i < 0 →\n      IsZero ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology i)) :\n    (∀ n : ℤ, ((C.truncGE 0).X n).IsFlatOver (𝟙 S)) ∧\n    (∀ n : ℤ, ((C.truncGE 0).X n).IsQuasicoherent) ∧\n    (∀ n : ℤ, ((C.truncGE 0).X n).IsFinitePresentation) ∧\n    ∀ {S' : Scheme.{u}} (g : S' ⟶ S) (q : ℕ),\n      Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj\n          (C.truncGE 0)).homology q ≅\n        (((Modules.pullback g).mapHomologicalComplex _).obj C).homology q)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T202300-L-711145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T202300-L-711145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

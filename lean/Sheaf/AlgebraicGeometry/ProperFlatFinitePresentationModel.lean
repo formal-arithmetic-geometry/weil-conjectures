@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModel
+import Sheaf.AlgebraicGeometry.AffineFlatConnectiveTruncation
 import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
@@ -63,6 +65,22 @@ theorem exists_proper_flat_finitePresentation_model {X T : Scheme.{u}}
       ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')
         [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj B).homology q ≅
-          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by sorry
+          (higherDirectImage f' q).obj ((Modules.pullback g').obj F)) := by
+  obtain ⟨C, a, b, hCge, hCle, hCflat, hCqc, hCfp, hneg, hcompare⟩ :=
+    exists_proper_flat_boundedPresentation_model f F hF U hU
+  obtain ⟨hBflat, hBqc, hBfp, htrunc⟩ :=
+    affine_flat_connective_truncation U.toScheme hU C a b hCge hCle
+      hCflat hCqc hCfp hneg
+  have : C.IsStrictlyLE (b : ℤ) := hCle
+  have hBle : (C.truncGE 0).IsStrictlyLE (b : ℤ) := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    have hi0 : (0 : ℤ) < i := lt_of_le_of_lt (Int.natCast_nonneg b) hi
+    exact (C.isZero_of_isStrictlyLE b i hi).of_iso (C.truncGEXIso 0 i hi0)
+  refine ⟨C.truncGE 0, b, inferInstance, hBle, hBflat, hBqc, hBfp, ?_⟩
+  intro T' X' g g' f' _ hsquare q
+  obtain ⟨e⟩ := htrunc g q
+  obtain ⟨e'⟩ := hcompare g g' f' hsquare q
+  exact ⟨e ≪≫ e'⟩
 
 end AlgebraicGeometry.Scheme.Modules

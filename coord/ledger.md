@@ -9422,3 +9422,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/X3/Sheaf.AlgebraicGeometry.EtaleLimitCompatibleExactSystems (stage 3; reviewer PASS; first push; landing 20261012T202258-L-710815 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/X3/Sheaf.Paper.LocalStalkSectionsDescentEquality (stage 3; reviewer PASS; first push; landing 20261012T202259-L-710948 (interface); batch 20261012T202227; modules 2; new nodes 1)
 - 20:22 L: merged deliver/X3/Sheaf.RingTheory.SmoothConormalBasisEtalePolynomialChart (stage 3; reviewer PASS; first push; landing 20261012T202259-L-711047 (proof); batch 20261012T202227; modules 1; new nodes 1)
+- 20:23 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.ProperFlatFinitePresentationModel (stage 3; reviewer PASS; first push; landing 20261012T202300-L-711145 (interface); batch 20261012T202227; modules 3; new nodes 2)

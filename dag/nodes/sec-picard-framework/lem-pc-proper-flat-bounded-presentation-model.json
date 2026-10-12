@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-proper-flat-bounded-presentation-model",
+ "kind": "statement",
+ "title": "Bounded proper flat perfect model before lower truncation",
+ "statement": "Let f:X→T be proper, locally of finite presentation and quasi-compact, with injective resolutions in X.Modules. Let F be a finitely presented O_X-module flat over f [def-pc-morphism-conventions], and U an affine open of T [def-pc-scheme]. There exist a cochain complex C of O_U-modules [def-pc-cochain-complex-modules], a∈ℤ and b∈ℕ, with C concentrated in [a,b], and all terms flat over U, quasi-coherent and finitely presented. Every pullback g*C for any scheme map g:S→U has zero homology in all negative degrees [def-pc-base-change]. For every cartesian square X′→X over T′→U→T, with injective resolutions on X′, H^q(g*C) is isomorphic to R^q f′_*(g′*F) for every q∈ℕ [def-pc-derived-direct-image]. The complex need not vanish termwise in negative degrees.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0B91(2), 0A1H and 08EB"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-pc-cochain-complex-modules",
+  "def-pc-base-change",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Restrict f and F to U. Apply the proper-support perfect-direct-image theorem to the structure sheaf in degree zero and F in degree zero. Properness supplies proper support; the structure sheaf is perfect. The result is perfect and commutes with arbitrary base change. Its proof uses the Noetherian approximation and proper coherence route required by the unit.",
+   "uses": [
+    "lem-pc-proper-support-perfect-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify U with Spec A, A = global sections. The affine perfect-object criterion yields a bounded finite-projective A-complex P representing the perfect direct image. Sheafify P and transport back to U to get C. Finite projective terms are flat and finitely presented; associated sheaves are quasi-coherent. Keep its integer lower bound a and enlarge the upper bound to a natural number b. There is no lower-tail cancellation in this step.",
+   "uses": [
+    "lem-pc-perfect-affine-bounded-projective",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A bounded flat complex computes derived pullback by ordinary pullback. Compose its derived-model isomorphism with derived base change. Taking homology identifies nonnegative homology with higher direct image of the pulled-back F and shows negative homology is zero because this sheaf lies in degree zero. For any supplied cartesian square, use its canonical isomorphism with the standard fibre product. These are global derived isomorphisms, so nonaffine new bases are included. Empty U or zero F are handled by C = 0 with a = b = 0.",
+   "uses": [
+    "lem-pc-rf-base-change-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-perfect-affine-bounded-projective",
+  "lem-pc-proper-support-perfect-direct-image",
+  "lem-pc-rf-base-change-complex",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0B91(2), 0A1H and 08EB; source read online; affine bounded-model specialization written by Y2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper finite presentation relatively flat coherent sheaf has perfect direct image compatible with arbitrary base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper finitely presented morphism and relatively flat finitely presented sheaf have a bounded flat finitely presented complex representing cohomology universally on an affine base",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*directImage|exists.*bounded.*model",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.higherDirectImage",
+   "results": "Second reading: unknown identifier in the public Loogle index; 0 results. Library source search and LeanFinder found no existing bounded-model theorem.",
+   "date": "2026-10-13",
+   "verdict": "index does not contain the upstream declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatFinitePresentationModel",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Coherence unit part (a), Noetherian approximation and bounded perfect model, before lower truncation",
+   "via": [
+    "lem-pc-proper-flat-finite-presentation-model",
+    "lem-pc-proper-flat-cohomology-model-properties",
+    "lem-pc-proper-flat-cohomology-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatBoundedPresentationModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatBoundedPresentationModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_proper_flat_boundedPresentation_model",
+  "statement": "theorem exists_proper_flat_boundedPresentation_model {X T : Scheme.{u}}\n    (f : X ⟶ T) (F : X.Modules)\n    [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f]\n    [HasInjectiveResolutions X.Modules] [F.IsFinitePresentation]\n    (hF : F.IsFlatOver f) (U : T.Opens) (hU : IsAffine U.toScheme) :\n    ∃ (C : CochainComplex U.toScheme.Modules ℤ) (a : ℤ) (b : ℕ),\n      C.IsStrictlyGE a ∧ C.IsStrictlyLE b ∧\n      (∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme)) ∧\n      (∀ n : ℤ, (C.X n).IsQuasicoherent) ∧\n      (∀ n : ℤ, (C.X n).IsFinitePresentation) ∧\n      (∀ {S : Scheme.{u}} (g : S ⟶ U.toScheme) (i : ℤ), i < 0 →\n        IsZero ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology i)) ∧\n      ∀ {T' X' : Scheme.{u}} (g : T' ⟶ U.toScheme) (g' : X' ⟶ X) (f' : X' ⟶ T')\n        [HasInjectiveResolutions X'.Modules], IsPullback g' f' f (g ≫ U.ι) → ∀ q : ℕ,\n        Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj C).homology q ≅\n          (higherDirectImage f' q).obj ((Modules.pullback g').obj F))",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T202300-L-711145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T202300-L-711145",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
