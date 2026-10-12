@@ -28,21 +28,18 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the projections are smooth).* Put $R=R_1\\times R_2$, $e_1=(1,0)$, and let $p_1:R\\to R_1$, $(r_1,r_2)\\mapsto r_1$, be the first projection, a surjective ring homomorphism making $R_1$ an $R$-algebra. We show that $R_1$ has a standard smooth presentation over $R$ [def-weil-pbc-standard-smooth-algebra] with $n=c=1$ and $f_1=f=e_1x-1\\in R[x]$ [def-weil-pbc-mv-polynomial-ring]. Writing a polynomial $P=\\sum_k (a_k,b_k)x^k\\in R[x]$ as the pair $(P_1,P_2)=(\\sum_k a_kx^k,\\sum_k b_kx^k)$ identifies $R[x]$ with the product ring $R_1[x]\\times R_2[x]$ (sums and products of polynomials are computed from sums and products of coefficients, which are componentwise in $R$); under it $f=(x-1,-1)$. Let $\\pi:R[x]\\to R_1$, $P\\mapsto P_1(1)$; it is a ring homomorphism (evaluation at $1$ after the first projection), it restricts to $p_1$ on $R$, so it is an $R$-algebra map, and it is surjective (the constant $(r_1,0)$ maps to $r_1$). Its kernel is $(f)$: $\\pi(f)=1-1=0$; conversely if $P_1(1)=0$ then $P_1=(x-1)Q_1$ for some $Q_1\\in R_1[x]$ (division by the monic $x-1$, remainder $P_1(1)=0$), and then $P=(P_1,P_2)=(x-1,-1)\\cdot(Q_1,-P_2)=f\\cdot(Q_1,-P_2)$. So $\\pi$ induces an $R$-algebra isomorphism $\\alpha:R[x]/(f)\\xrightarrow{\\sim}R_1$. The $1\\times1$ Jacobian determinant is $g=\\partial f/\\partial x=e_1$, whose image in $R_1$ is $\\pi(e_1)=p_1(e_1)=1$, a unit. Hence $p_1:R\\to R_1$ is standard smooth, and smooth by [lem-weil-pbc-standard-smooth-is-smooth]. By symmetry (with $e_2=(0,1)$ and $f=e_2x-1$) the second projection $p_2:R\\to R_2$ is smooth.",
+   "text": "Put R = R₁ × R₂ and equip R₁ and R₂ with the algebra structures induced by RingHom.fst and RingHom.snd. Mathlib.RingTheory.Etale.Basic supplies Algebra.Etale R R₁ and Algebra.Etale R R₂ for these exact structures, in independent universes. The étale-to-smooth instance gives smoothness of both projections. These instances use localization away from (1,0) and (0,1), respectively; no polynomial presentation is needed.",
    "uses": [
-    "def-weil-pbc-standard-smooth-algebra",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-standard-smooth-is-smooth",
     "def-weil-pbc-smooth-ring-map"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00T7 (lemma-standard-smooth, line 37274), part (1), applied to the presentation R_1 = R[x]/((1,0)x-1) of the item's source line; the kernel computation is written out by the agent"
+    "place": "Principal localization at the two idempotents, as in the original source; implemented by the proved product-projection instances in Mathlib.RingTheory.Etale.Basic."
    }
   },
   {
-   "text": "*Step 2 (each factor is smooth over $R$).* Make $A_1$ an $R$-algebra by $\\psi_1=\\varphi_1\\circ p_1:R\\to R_1\\to A_1$, $(r_1,r_2)\\mapsto\\varphi_1(r_1)$, and $A_2$ by $\\psi_2=\\varphi_2\\circ p_2$. Since $p_1$ is smooth (Step 1) and $\\varphi_1$ is smooth (hypothesis), the composite $\\psi_1$ is smooth by [lem-weil-pbc-smooth-ring-map-base-change-composition] (2); likewise $\\psi_2$ is smooth.",
+   "text": "Equip A₁ with the R-algebra structure induced by φ₁ composed with fst, and A₂ with that induced by φ₂ composed with snd. Each scalar-tower law holds definitionally, proved by IsScalarTower.of_algebraMap_eq' rfl. Apply Algebra.Smooth.comp [lem-weil-pbc-smooth-ring-map-base-change-composition] to each smooth projection and the corresponding hypothesis to obtain Smooth R A₁ and Smooth R A₂.",
    "uses": [
     "lem-weil-pbc-smooth-ring-map-base-change-composition",
     "def-weil-pbc-smooth-ring-map"
@@ -50,11 +47,11 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00TD (lemma-compose-smooth, line 37597)"
+    "place": "Algebra, Lemma Tag 00TD (lemma-compose-smooth)"
    }
   },
   {
-   "text": "*Step 3 (the product).* By Step 2, $A_1$ and $A_2$ are smooth $R$-algebras via $\\psi_1,\\psi_2$, so by [lem-weil-pbc-smooth-product-algebra] (with $S'=A_1$, $S''=A_2$) the product ring $A_1\\times A_2$ is smooth over $R$ via $r\\mapsto(\\psi_1(r),\\psi_2(r))$. For $r=(r_1,r_2)$ this is $(\\varphi_1(r_1),\\varphi_2(r_2))=(\\varphi_1\\times\\varphi_2)(r)$, so the structure map of $A_1\\times A_2$ over $R$ is exactly $\\varphi_1\\times\\varphi_2$, which is therefore a smooth ring map [def-weil-pbc-smooth-ring-map].",
+   "text": "Apply Algebra.Smooth.prod [lem-weil-pbc-smooth-product-algebra] over R. Prod.algebra for the two composite structure maps is definitionally RingHom.toAlgebra (RingHom.prodMap φ₁ φ₂), so its conclusion is exactly the required Smooth structure without any transport or change of statement.",
    "uses": [
     "lem-weil-pbc-smooth-product-algebra",
     "def-weil-pbc-smooth-ring-map"
@@ -62,22 +59,19 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth, line 37613), direction 'if'"
+    "place": "Algebra, Lemma Tag 0GIF (lemma-product-smooth), direction 'if'"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-standard-smooth-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-standard-smooth-is-smooth",
   "def-weil-pbc-smooth-ring-map",
   "lem-weil-pbc-smooth-ring-map-base-change-composition",
   "lem-weil-pbc-smooth-product-algebra"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "C4 stage 3",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "agent-written from Algebra, Lemmas Tag 00T7 (lemma-standard-smooth, line 37274), Tag 00TD (lemma-compose-smooth, line 37597) and Tag 0GIF (lemma-product-smooth, line 37613); no Stacks lemma states the item"
+  "place": "Original localization/composition/product argument, using proved Mathlib étale projection instances instead of the standard smooth polynomial presentation; composition by Mathlib Algebra.Smooth.comp, product by the existing Sheaf Algebra.Smooth.prod."
  },
  "mathlib_searches": [
   {
@@ -167,5 +161,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261012T225302-L-1802218",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

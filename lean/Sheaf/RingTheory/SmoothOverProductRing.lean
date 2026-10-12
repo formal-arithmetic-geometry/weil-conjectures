@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.RingTheory.Smooth.Basic
+import Mathlib.RingTheory.Etale.Basic
 import Sheaf.RingTheory.SmoothProductAlgebra
 
 /-!
@@ -50,6 +51,18 @@ theorem smooth_over_product_ring
     (h₁ : @Algebra.Smooth R₁ _ A₁ _ (RingHom.toAlgebra φ₁))
     (h₂ : @Algebra.Smooth R₂ _ A₂ _ (RingHom.toAlgebra φ₂)) :
     @Algebra.Smooth (R₁ × R₂) _ (A₁ × A₂) _ (RingHom.toAlgebra (RingHom.prodMap φ₁ φ₂)) := by
-  sorry
+  let : Algebra R₁ A₁ := φ₁.toAlgebra
+  let : Algebra R₂ A₂ := φ₂.toAlgebra
+  let : Smooth R₁ A₁ := h₁
+  let : Smooth R₂ A₂ := h₂
+  let : Algebra (R₁ × R₂) R₁ := (RingHom.fst R₁ R₂).toAlgebra
+  let : Algebra (R₁ × R₂) R₂ := (RingHom.snd R₁ R₂).toAlgebra
+  let : Algebra (R₁ × R₂) A₁ := (φ₁.comp (RingHom.fst R₁ R₂)).toAlgebra
+  let : Algebra (R₁ × R₂) A₂ := (φ₂.comp (RingHom.snd R₁ R₂)).toAlgebra
+  let : IsScalarTower (R₁ × R₂) R₁ A₁ := IsScalarTower.of_algebraMap_eq' rfl
+  let : IsScalarTower (R₁ × R₂) R₂ A₂ := IsScalarTower.of_algebraMap_eq' rfl
+  let : Smooth (R₁ × R₂) A₁ := Smooth.comp (R₁ × R₂) R₁ A₁
+  let : Smooth (R₁ × R₂) A₂ := Smooth.comp (R₁ × R₂) R₂ A₂
+  exact Smooth.prod (R₁ × R₂) A₁ A₂
 
 end Algebra

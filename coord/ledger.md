@@ -9876,3 +9876,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/C3/Sheaf.CategoryTheory.CartanEilenbergConeFiltrationProperties (stage 3; reviewer PASS; first push; landing 20261012T225301-L-1801793 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/C3/Sheaf.Topology.StalkDirectSums (stage 3; reviewer PASS; first push; landing 20261012T225301-L-1801975 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/C4/Sheaf.RingTheory.SmoothOverEssentiallySmoothBase (stage 3; reviewer PASS; first push; landing 20261012T225301-L-1802120 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/C4/Sheaf.RingTheory.SmoothOverProductRing (stage 3; reviewer PASS; first push; landing 20261012T225302-L-1802218 (proof); batch 20261012T225253; modules 1; new nodes 0)
