@@ -13,11 +13,9 @@
  ],
  "proof": [
   {
-   "text": "Use the stage adjunction hom equivalence: its value on a sheaf map is composition with the unit. Equality of its components gives equality of natural transformations, and injectivity gives uniqueness of the sheaf map. Identify composite restriction functors using F.map_id, F.map_comp, Under.w and V.w.",
+   "text": "The private set-valued helper sheaf_unit_unique applies the injective hom equivalence of sheafAdjunctionContinuous. Equality of the unit composites as Arrow objects gives equality of presheaf components by Arrow.mk_inj, hence equality of natural transformations and sheaf maps. No conjugate isomorphism is needed.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -26,10 +24,11 @@
    }
   },
   {
-   "text": "The identity map and the composite of two transitions satisfy the required unit equations. For composition, first compose the unit with the first transition, use its unit equation, and then the second transition unit equation, transporting along the strict functor equality. The same calculation with the later alpha yields the earlier alpha. Uniqueness proves the sheaf-level identity, composition and cocone laws.",
+   "text": "The private helpers sheaf_triangle_id and sheaf_triangle_comp substitute the strict functor equalities, and compare unit composites. For identity compare with the identity natural transformation; for composition use associativity and the two unit equations, then uniqueness. In the main proof F.map_id, F.map_comp and Under.w give the transition triangles; V.w gives the triangles for the limit legs. These yield the evaluated Arrow equalities hid, hcomp and hcone at arbitrary stage objects.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
    "source": {
@@ -38,7 +37,7 @@
    }
   },
   {
-   "text": "Evaluate at the image of U. The given Arrow equalities identify each m and c with the corresponding section map, including their endpoint transports. These transports preserve identity and composition; the evaluated three sheaf equalities give the stated laws.",
+   "text": "Define concrete section maps mm and k by evaluating theta and alpha and composing with eqToHom of the endpoint equalities. Arrow.arrow_mk_comp_eqToHom removes the terminal transports in Arrow equalities. For composition and cocone naturality, use naturality of theta and alpha at eqToHom of the stage-object equality to move the middle transport across the later component; use eqToHom_map and associativity. This proves hmm_id, hmm_comp and hk. The hypotheses hm and hc and Arrow.mk_injective identify the given m and c with mm and k, respectively. Rewrite by these identifications to conclude all three laws.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
@@ -52,12 +51,12 @@
  "proof_deps": [
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph; direct adjunction uniqueness, adapted to Type u from the proved private helpers in Sheaf.CategoryTheory.ColimitSiteAbelianSectionDiagram"
  },
  "mathlib_searches": [
   {
@@ -137,10 +136,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T165542-L-2943109",
-  "kind": "interface",
+  "landing": "20261012T184255-L-4001710",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
