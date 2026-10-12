@@ -22,7 +22,90 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/- The compatible residue maps give a surjection to the relative separable closure.
+/-- The colimit comparison supplies the residue map and its algebraic properties.
+Source: Stacks Project, Tag 04HX.
+
+Proof: Choose an affine chart through the point. The neighbourhood/triple
+comparison identifies the chosen small coordinate-ring colimit with the triple
+colimit. Transport the triple theorem's surjection across this ring isomorphism.
+The open immersion identifies the chart residue field with the residue field of
+Y. After restriction of scalars along this field isomorphism, the chart's separable
+closure is a separable closure of the latter field. The equivalence of separable
+closures identifies it abstractly with the specified relative separable closure.
+Compose the surjection with that equivalence. A surjective map from a local ring
+to a field has kernel its maximal ideal. This existential assertion requires no
+compatibility of the chosen equivalence with the embedding into Ω; it does not
+assert that every such surjection is pointed.
+(blueprint: lem-weil-pbc-strict-henselization-pointed-map-core) -/
+theorem strictHenselizationPointedMap_core
+    {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
+    (barY : Spec (.of Ω) ⟶ Y)
+    [Algebra (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω]
+    (hΩ : algebraMap (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω =
+      (Scheme.descResidueField (Scheme.stalkClosedPointTo barY)).hom)
+    [IsLocalRing (Scheme.strictHenselizationRing barY)] :
+    ∃ ψ : Scheme.strictHenselizationRing barY →+*
+        separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω,
+      Function.Surjective ψ ∧
+      RingHom.ker ψ = IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing barY) := by
+  classical
+  have _hcompat := hΩ
+  obtain ⟨A, i, hi, hx, _⟩ := Scheme.exists_affine_mem_range_and_range_subset
+    (x := barY (IsLocalRing.closedPoint Ω)) (U := ⊤) (by simp)
+  let := hi
+  have hrange : Set.range barY ⊆ Set.range i := by
+    rintro _ ⟨z, rfl⟩
+    simpa only [Subsingleton.elim z (IsLocalRing.closedPoint Ω)] using hx
+  let xU := IsOpenImmersion.lift i barY hrange
+  have hfac : xU ≫ i = barY := IsOpenImmersion.lift_fac i barY hrange
+  let p := (Scheme.SpecToEquivOfField Ω (Spec A) xU).1
+  let F := (Spec A).residueField p
+  let e := (Scheme.SpecToEquivOfField Ω (Spec A) xU).2
+  let : Algebra F Ω := e.hom.toAlgebra
+  let K := separableClosure F Ω
+  obtain ⟨_, _, _, _, E, δ, _, cn, cu, ct, ⟨hcn⟩, ⟨_⟩, ⟨hct⟩, r, s, _, _⟩ :=
+    Scheme.etale_local_ring_triples Y Ω A i xU
+  obtain ⟨_, c, ⟨hc⟩, hlocal, ρ, ψ, _, _, hsurj, _, _, _, _, _⟩ :=
+    Scheme.strictHenselization_triples A p K
+  let Nall := (Scheme.pointSmallEtale (xU ≫ i)).fiber.Elements
+  let P : ObjectProperty Nall := fun n ↦ IsAffine n.1.left
+  let D := (P.ι ⋙ CategoryOfElements.π (Scheme.pointSmallEtale (xU ≫ i)).fiber ⋙
+    Scheme.Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
+  let : HasColimit D := ⟨⟨cn, hcn⟩⟩
+  let incl := Scheme.strictHenselizationAffineInclusion (xU ≫ i)
+  let : incl.IsEquivalence :=
+    Scheme.strictHenselizationAffineInclusion_isEquivalence (xU ≫ i)
+  let rep := (equivSmallModel.{v}
+    (Scheme.strictHenselizationNeighbourhoods (xU ≫ i))).inverse
+  let q := (rep ⋙ incl).op
+  let cmp : Scheme.strictHenselizationRing (xU ≫ i) ≅ cn.pt :=
+    (HasColimit.isoOfEquivalence q.asEquivalence (Iso.refl _)) ≪≫
+      colimit.isoColimitCocone ⟨cn, hcn⟩
+  let ringIso : Scheme.strictHenselizationRing barY ≅ c.pt :=
+    eqToIso (congrArg Scheme.strictHenselizationRing hfac.symm) ≪≫
+      cmp ≪≫ s ≪≫ hct.coconePointUniqueUpToIso hc
+  let G := Y.residueField (barY (IsLocalRing.closedPoint Ω))
+  have hp : i p = barY (IsLocalRing.closedPoint Ω) :=
+    congrArg (fun f : Spec (.of Ω) ⟶ Y ↦ f (IsLocalRing.closedPoint Ω)) hfac
+  let b : G ≅ F := (Y.residueFieldCongr hp).symm ≪≫ asIso (i.residueFieldMap p)
+  let : Algebra G K := ((algebraMap F K).comp b.hom.hom).toAlgebra
+  have : Algebra.IsSeparable G K :=
+    Algebra.IsSeparable.of_equiv_equiv b.symm.commRingCatIsoToRingEquiv
+      (RingEquiv.refl K) (by
+        apply RingHom.ext
+        intro x
+        change algebraMap F K (b.hom.hom (b.inv.hom x)) = algebraMap F K x
+        exact congrArg (algebraMap F K)
+          (ConcreteCategory.congr_hom b.inv_hom_id x))
+  have : IsSepClosed K := IsSepClosure.sep_closed F
+  have : IsSepClosure G K := ⟨inferInstance, inferInstance⟩
+  let k := IsSepClosure.equiv G K (separableClosure G Ω)
+  let φ := k.toRingHom.comp (ψ.comp ringIso.hom.hom)
+  have hφ : Function.Surjective φ :=
+    k.surjective.comp (hsurj.comp ringIso.commRingCatIsoToRingEquiv.surjective)
+  exact ⟨φ, hφ, IsLocalRing.ker_eq_maximalIdeal φ hφ⟩
+
+/-- The compatible residue maps give a surjection to the relative separable closure.
 Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP
 (blueprint: lem-weil-pbc-strict-henselization-pointed-map).
 
@@ -42,58 +125,6 @@ factorization for neighbourhoods over the chart. Every neighbourhood receives a
 pointed map from one over the chart. Cone naturality and the equation defining a
 pointed map extend that factorization to every representative j.
 -/
-/-- The colimit comparison supplies the residue map and its algebraic properties.
-Source: Stacks Project, Tag 04HX.
-
-Proof: Construct the compatible residue maps on the affine etale neighbourhood
-diagram and pass to its colimit.  The comparison with the strict henselization
-triple identifies the resulting map with `ψ`; the triple computation gives
-surjectivity and identifies its kernel with the maximal ideal.  The residue
-embedding is identified using `hΩ`.
-(blueprint: lem-weil-pbc-strict-henselization-pointed-map-core) -/
-theorem strictHenselizationPointedMap_core
-    {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
-    (barY : Spec (.of Ω) ⟶ Y)
-    [Algebra (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω]
-    (hΩ : algebraMap (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω =
-      (Scheme.descResidueField (Scheme.stalkClosedPointTo barY)).hom)
-    [IsLocalRing (Scheme.strictHenselizationRing barY)] :
-    ∃ ψ : Scheme.strictHenselizationRing barY →+*
-        separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω,
-      Function.Surjective ψ ∧
-      RingHom.ker ψ = IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing barY) := by
-  sorry
-
-/-- The residue map is compatible with every chosen neighbourhood leg.
-Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
-
-Proof: For a representative neighbourhood, use the coprojection equation in
-the strict henselization triple and the pointed transition maps.  Naturality
-of the cone transports the equality from representatives over the chosen
-affine chart to every small model.
-(blueprint: lem-weil-pbc-strict-henselization-pointed-map-factorization)
--/
-theorem strictHenselizationPointedMap_factorization
-    {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
-    (barY : Spec (.of Ω) ⟶ Y)
-    [Algebra (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω]
-    (hΩ : algebraMap (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω =
-      (Scheme.descResidueField (Scheme.stalkClosedPointTo barY)).hom)
-    [IsLocalRing (Scheme.strictHenselizationRing barY)] :
-    ∀ ψ : Scheme.strictHenselizationRing barY →+*
-        separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω,
-      (∀ j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barY),
-        Spec.map (CommRingCat.ofHom
-          ((IntermediateField.val
-            (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
-              ψ)) ≫
-          (Scheme.strictHenselizationCone barY).π.app (Opposite.op (Opposite.op j)) ≫
-          (Spec (Opposite.unop ((equivSmallModel.{v}
-            (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)).isoSpec.inv =
-          ((equivSmallModel.{v}
-            (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2.left) := by
-  sorry
-
 theorem strictHenselizationPointedMap
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (barY : Spec (.of Ω) ⟶ Y)
@@ -115,9 +146,7 @@ theorem strictHenselizationPointedMap
             (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)).isoSpec.inv =
           ((equivSmallModel.{v}
             (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2.left := by
-  obtain ⟨ψ, hsurj, hker⟩ := strictHenselizationPointedMap_core barY hΩ
-  refine ⟨ψ, hsurj, hker, ?_⟩
-  exact strictHenselizationPointedMap_factorization barY hΩ ψ
+  sorry
 
 
 end AlgebraicGeometry

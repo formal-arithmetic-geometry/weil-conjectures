@@ -17,22 +17,35 @@
  ],
  "proof": [
   {
-   "text": "Apply the core theorem to obtain the residue map, surjectivity, and kernel equality, then apply the factorization theorem to the same map.",
+   "text": "Choose an affine chart through barY. Identify the chart residue field and its relative separable closure with those of Y through their embeddings into Ω, using hΩ. Evaluation followed by the pointed residue embedding gives a compatible residue cocone on the affine neighbourhood diagram; residue extensions are finite separable. The neighbourhood/triple comparison identifies this cocone with the triple residue cocone.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-pointed-map-core",
-    "lem-weil-pbc-strict-henselization-pointed-map-factorization"
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-limit"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use the coprojection equation of strictHenselization_triples to identify the cocone-induced colimit map with its specific triple residue map. Transport this map through the colimit comparison and the embedding-compatible closure identification. The triple theorem proves surjectivity for this same map; IsLocalRing.ker_eq_maximalIdeal identifies its kernel for the given local-ring instance. The abstract existential core alone cannot give properties of this specific map.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Spec to the coprojection equations and the affine-scheme isomorphisms to obtain the pointed factorization over the chart. Any neighbourhood admits an affine pointed refinement over the chart. Cone naturality and pointed transition compatibility extend the equation to every SmallModel representative. This direct compatible-cocone argument remains the named hole strictHenselizationPointedMap; no universal-factorization theorem is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-pointed-map-core",
-  "lem-weil-pbc-strict-henselization-pointed-map-factorization"
+  "lem-weil-pbc-etale-local-ring-triples",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-triples"
  ],
  "proof_origin": {
-  "by": "P1",
+  "by": "Y2 repair",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04HX; Lean reduction via split core and factorization statements"
+  "place": "Tag 04HX, with algebra.tex Tags 04GW and 04GP; compatible residue-cocone construction remains the named existential hole after deletion of the false universal factorization"
  },
  "mathlib_searches": [
   {
@@ -101,11 +114,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "X-9bb65",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T053947-L-2642278",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T160146-L-2567767",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered module, node records, change record, report, and direct importer against the review brief; all delivered files compile cleanly."
  }
 }
