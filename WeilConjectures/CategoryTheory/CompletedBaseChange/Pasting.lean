@@ -62,8 +62,10 @@ def id {upperF : 𝒴 ⥤ 𝒳} {lowerF : 𝒳 ⥤ 𝒴} (adj : upperF ⊣ lower
 /-- **Identity law**: the exchange map of an identity square is the identity. -/
 lemma exchange_id {upperF : 𝒴 ⥤ 𝒳} {lowerF : 𝒳 ⥤ 𝒴} (adj : upperF ⊣ lowerF) (K : 𝒳) :
     (id adj).exchange.natTrans.app K = 𝟙 _ := by
-  have h := congr_arg (fun α ↦ α.natTrans.app K) (mateEquiv_unitors adj)
-  simpa [exchange, isoSquare] using h
+  change (mateEquiv adj adj (TwoSquare.mk (𝟭 𝒴) upperF upperF (𝟭 𝒳)
+    ((Functor.leftUnitor upperF).hom ≫ (Functor.rightUnitor upperF).inv))).natTrans.app K = _
+  rw [mateEquiv_unitors]
+  simp
 
 variable {𝒳'' : Type u₅} {𝒴'' : Type u₆} [Category.{v₅} 𝒳''] [Category.{v₆} 𝒴'']
 
@@ -121,6 +123,7 @@ lemma exchange_hcomp_app (𝔇 : BaseChangeSquare 𝒳 𝒴 𝒳' 𝒴') {upperF
         (𝔇.right adjF'' upperG₂ upperG₂' iso₂).exchange.natTrans.app (𝔇.upperG'.obj K) := by
   rw [exchange_hcomp]
   simp [TwoSquare.vComp]
+  exact Category.id_comp _
 
 variable {𝒵 : Type u₇} {𝒵' : Type u₈} [Category.{v₇} 𝒵] [Category.{v₈} 𝒵']
 
@@ -183,10 +186,13 @@ lemma exchange_vcomp_app (𝔇 : BaseChangeSquare 𝒳 𝒴 𝒳' 𝒴') {upperH
         lowerH'.map (𝔇.exchange.natTrans.app K) := by
   rw [exchange_vcomp]
   simp [TwoSquare.hComp]
+  exact Category.id_comp _
 
 end Laws
 
 section Completed
+
+open Limits
 
 variable {𝒳 : Type u₁} {𝒴 : Type u₂} {𝒳' : Type u₃} {𝒴' : Type u₄}
   [Category.{v₁} 𝒳] [Category.{v₂} 𝒴] [Category.{v₃} 𝒳'] [Category.{v₄} 𝒴']
@@ -197,7 +203,6 @@ variable {𝒳 : Type u₁} {𝒴 : Type u₂} {𝒳' : Type u₃} {𝒴' : Type
   [HasZeroObject 𝒴'] [HasShift 𝒴' ℤ] [Preadditive 𝒴']
   [∀ n : ℤ, (shiftFunctor 𝒴' n).Additive] [Pretriangulated 𝒴']
 
-open Limits
 
 namespace CompletionDatum
 

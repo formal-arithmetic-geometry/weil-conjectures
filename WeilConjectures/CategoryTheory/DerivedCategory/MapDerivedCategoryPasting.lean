@@ -33,28 +33,49 @@ variable {C₀ C₁ C₂ C₃ C₄ : Type*} [Category* C₀] [Category* C₁] [C
   [HasDerivedCategory C₀] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
   [HasDerivedCategory C₃] [HasDerivedCategory C₄]
 
-/-- The identification `D(G)(D(F)(Q K)) ≅ Q(G(F K))` for exact functors `F` and `G`. -/
+/-- The identification `D(G)(D(F)(Q K)) ⟶ Q(G(F K))` for exact functors `F` and `G`. -/
 noncomputable def mapDerivedCategoryFactors₂ (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : CochainComplex C₀ ℤ) :
-    G.mapDerivedCategory.obj (F.mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≅
+    G.mapDerivedCategory.obj (F.mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ⟶
       DerivedCategory.Q.obj ((G.mapHomologicalComplex _).obj
         ((F.mapHomologicalComplex _).obj K)) :=
-  G.mapDerivedCategory.mapIso (F.mapDerivedCategoryFactors.app K) ≪≫
-    G.mapDerivedCategoryFactors.app _
+  G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
+    G.mapDerivedCategoryFactors.hom.app _
 
-/-- The identification `D(H)(D(G)(D(F)(Q K))) ≅ Q(H(G(F K)))` for exact functors `F`, `G`
+/-- The identification `D(H)(D(G)(D(F)(Q K))) ⟶ Q(H(G(F K)))` for exact functors `F`, `G`
 and `H`. -/
 noncomputable def mapDerivedCategoryFactors₃ (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₂ ⥤ C₃)
     [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [G.Additive]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G] [H.Additive]
     [PreservesFiniteLimits H] [PreservesFiniteColimits H] (K : CochainComplex C₀ ℤ) :
     H.mapDerivedCategory.obj (G.mapDerivedCategory.obj
-        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj K))) ≅
+        (F.mapDerivedCategory.obj (DerivedCategory.Q.obj K))) ⟶
       DerivedCategory.Q.obj ((H.mapHomologicalComplex _).obj ((G.mapHomologicalComplex _).obj
         ((F.mapHomologicalComplex _).obj K))) :=
-  H.mapDerivedCategory.mapIso (mapDerivedCategoryFactors₂ F G K) ≪≫
-    H.mapDerivedCategoryFactors.app _
+  H.mapDerivedCategory.map (mapDerivedCategoryFactors₂ F G K) ≫
+    H.mapDerivedCategoryFactors.hom.app _
+
+section
+
+variable (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₂ ⥤ C₃)
+  [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [G.Additive]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G] [H.Additive]
+  [PreservesFiniteLimits H] [PreservesFiniteColimits H] (K : CochainComplex C₀ ℤ)
+
+instance : IsIso (mapDerivedCategoryFactors₂ F G K) := by
+  dsimp [mapDerivedCategoryFactors₂]; infer_instance
+
+instance : IsIso (mapDerivedCategoryFactors₃ F G H K) := by
+  dsimp [mapDerivedCategoryFactors₃]; infer_instance
+
+lemma mapDerivedCategoryFactors₃_eq :
+    mapDerivedCategoryFactors₃ F G H K =
+      H.mapDerivedCategory.map (G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K)) ≫
+        mapDerivedCategoryFactors₂ G H ((F.mapHomologicalComplex _).obj K) := by
+  simp [mapDerivedCategoryFactors₃, mapDerivedCategoryFactors₂]
+
+end
 
 variable {F₁ : C₀ ⥤ C₁} {F₂ : C₁ ⥤ C₂} {G₁ : C₀ ⥤ C₃} {G₂ : C₃ ⥤ C₂}
   [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
@@ -68,21 +89,20 @@ applied to `K`. -/
 lemma mapDerivedCategorySquareIso_hom_app_Q_obj (τ : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
     (K : CochainComplex C₀ ℤ) :
     (mapDerivedCategorySquareIso τ).hom.app (DerivedCategory.Q.obj K) ≫
-        (mapDerivedCategoryFactors₂ G₁ G₂ K).hom =
-      (mapDerivedCategoryFactors₂ F₁ F₂ K).hom ≫
+        mapDerivedCategoryFactors₂ G₁ G₂ K =
+      mapDerivedCategoryFactors₂ F₁ F₂ K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ.hom _).app K) := by
   have hF := mapDerivedCategoryCompIso_fac F₁ F₂ K
   have hG := mapDerivedCategoryCompIso_fac G₁ G₂ K
   have he := mapDerivedCategoryNatIso_fac τ K
-  have hr : ∀ {D₀ D₁ D₂ : Type*} [Category* D₀] [Category* D₁] [Category* D₂] [Abelian D₀]
-      [Abelian D₁] [Abelian D₂] [HasDerivedCategory D₂] (A : D₀ ⥤ D₁) (B : D₁ ⥤ D₂)
-      [A.Additive] [B.Additive] (L : CochainComplex D₀ ℤ),
-      DerivedCategory.Q.map ((mapHomologicalComplexCompIso (Iso.refl (A ⋙ B))
-        (ComplexShape.up ℤ)).hom.app L) = 𝟙 _ := fun A B _ _ L ↦
-    DerivedCategory.Q.map_id ((B.mapHomologicalComplex _).obj ((A.mapHomologicalComplex _).obj L))
-  rw [hr, Category.comp_id] at hF hG
-  simp only [mapDerivedCategoryFactors₂, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
-    Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+  have hF₀ : (mapHomologicalComplexCompIso (Iso.refl (F₁ ⋙ F₂)) (ComplexShape.up ℤ)).hom.app K =
+    𝟙 _ := rfl
+  have hG₀ : (mapHomologicalComplexCompIso (Iso.refl (G₁ ⋙ G₂)) (ComplexShape.up ℤ)).hom.app K =
+    𝟙 _ := rfl
+  rw [hF₀, CategoryTheory.Functor.map_id, Category.comp_id] at hF
+  rw [hG₀, CategoryTheory.Functor.map_id, Category.comp_id] at hG
+  simp only [mapDerivedCategoryFactors₂, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Category.assoc]
   rw [hG, he, ← hF, Iso.inv_hom_id_app_assoc]
 
 variable {F₀ : C₄ ⥤ C₀} [F₀.Additive] [PreservesFiniteLimits F₀] [PreservesFiniteColimits F₀]
@@ -93,13 +113,13 @@ variable {F₀ : C₄ ⥤ C₀} [F₀.Additive] [PreservesFiniteLimits F₀] [Pr
 lemma map_mapDerivedCategorySquareIso_hom_app_Q_obj (τ : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂)
     (K : CochainComplex C₀ ℤ) :
     H.mapDerivedCategory.map ((mapDerivedCategorySquareIso τ).hom.app (DerivedCategory.Q.obj K)) ≫
-        (mapDerivedCategoryFactors₃ G₁ G₂ H K).hom =
-      (mapDerivedCategoryFactors₃ F₁ F₂ H K).hom ≫
+        mapDerivedCategoryFactors₃ G₁ G₂ H K =
+      mapDerivedCategoryFactors₃ F₁ F₂ H K ≫
         DerivedCategory.Q.map ((H.mapHomologicalComplex _).map
           ((NatTrans.mapHomologicalComplex τ.hom _).app K)) := by
-  simp only [mapDerivedCategoryFactors₃, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom]
+  simp only [mapDerivedCategoryFactors₃, Category.assoc]
   rw [← Functor.map_comp_assoc, mapDerivedCategorySquareIso_hom_app_Q_obj, Functor.map_comp,
-    Category.assoc, Category.assoc, mapDerivedCategoryFactors_hom_naturality]
+    Category.assoc, mapDerivedCategoryFactors_hom_naturality]
 
 /-- The square induced by `τ`, preceded by an inner functor `D(F₀)`, on the image of a
 complex. -/
@@ -108,19 +128,15 @@ lemma mapDerivedCategorySquareIso_hom_app_mapDerivedCategory_obj_Q_obj
     (τ : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) (K : CochainComplex C₄ ℤ) :
     (mapDerivedCategorySquareIso τ).hom.app
         (F₀.mapDerivedCategory.obj (DerivedCategory.Q.obj K)) ≫
-        (mapDerivedCategoryFactors₃ F₀ G₁ G₂ K).hom =
-      (mapDerivedCategoryFactors₃ F₀ F₁ F₂ K).hom ≫
+        mapDerivedCategoryFactors₃ F₀ G₁ G₂ K =
+      mapDerivedCategoryFactors₃ F₀ F₁ F₂ K ≫
         DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ.hom _).app
           ((F₀.mapHomologicalComplex _).obj K)) := by
-  have h := (mapDerivedCategorySquareIso τ).hom.naturality (F₀.mapDerivedCategoryFactors.hom.app K)
+  have h := (mapDerivedCategorySquareIso τ).hom.naturality
+    (F₀.mapDerivedCategoryFactors.hom.app K)
   simp only [Functor.comp_map] at h
-  simp only [mapDerivedCategoryFactors₃, mapDerivedCategoryFactors₂, Iso.trans_hom,
-    Functor.mapIso_hom, Iso.app_hom, Functor.map_comp, Category.assoc]
-  rw [reassoc_of% h]
-  simp only [← Category.assoc]
-  congr 1
-  simp only [Category.assoc]
-  exact mapDerivedCategorySquareIso_hom_app_Q_obj τ _
+  rw [mapDerivedCategoryFactors₃_eq, mapDerivedCategoryFactors₃_eq, ← reassoc_of% h,
+    mapDerivedCategorySquareIso_hom_app_Q_obj, Category.assoc]
 
 end Factors
 
@@ -185,7 +201,7 @@ lemma mapDerivedCategorySquareIso_cube (θ : a ⋙ b ≅ c ⋙ e) (θ' : a' ⋙ 
     simpa [lhs, rhs] using congr_app hlr K
   refine Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso Y (.up ℤ))
     (fun k ↦ ?_)
-  rw [← cancel_mono (mapDerivedCategoryFactors₃ νY c' e' k).hom]
+  rw [← cancel_mono (mapDerivedCategoryFactors₃ νY c' e' k)]
   have hk : νX'.mapHomologicalComplex _ |>.map
         ((NatTrans.mapHomologicalComplex θ.hom _).app k) ≫
       (NatTrans.mapHomologicalComplex τe.hom _).app ((c.mapHomologicalComplex _).obj k) ≫

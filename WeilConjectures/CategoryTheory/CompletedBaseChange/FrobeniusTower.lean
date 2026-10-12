@@ -373,9 +373,7 @@ noncomputable def weilCompletedExchange : 𝔠.weilS 𝔉 𝔣 K ϑ ⟶ 𝔠.wei
 
 lemma weilCompletedExchange_hom_f :
     (𝔠.weilCompletedExchange 𝔉 𝔣 K ϑ).hom.f = 𝔠.completedExchange.app K := by
-  simp only [weilCompletedExchange, weilLimitExchange, IsoAlgebra.comp_hom_f,
-    TowerLimitFormalism.FrobeniusCompat.rlimWeil, IsoAlgebra.mapOfNatIso_map_hom_f,
-    completedExchange, towerExchange, NatTrans.comp_app]
+  rw [completedExchange_app']
   rfl
 
 /-- **Completed proper base change is Frobenius-equivariant** (Blueprint

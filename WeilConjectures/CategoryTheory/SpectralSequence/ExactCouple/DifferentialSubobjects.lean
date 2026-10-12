@@ -49,11 +49,11 @@ lemma imageSubobject_arrow_comp_congr {B Z : C} {S T : Subobject B} (h : S = T) 
 lemma kernelSubobject_comp_eq_pullback {A B Z : C} (u : A ⟶ B) (v : B ⟶ Z) :
     kernelSubobject (u ≫ v) = (Subobject.pullback u).obj (kernelSubobject v) := by
   refine le_antisymm (Subobject.le_of_factors ?_) (Subobject.le_of_factors ?_)
-  · rw [Subobject.pullback_factors_iff, kernelSubobject_factors_iff, assoc,
+  · rw [pullback_factors_iff, kernelSubobject_factors_iff, assoc,
       kernelSubobject_arrow_comp]
   · rw [kernelSubobject_factors_iff, ← assoc]
     exact (kernelSubobject_factors_iff _ _).1
-      ((Subobject.pullback_factors_iff _ _).1 (Subobject.factors_self _))
+      ((pullback_factors_iff _ _ _).1 (Subobject.factors_self _))
 
 /-- `ker (d : E^{p,q} ⟶ E^{p',q'}) = f⁻¹ (ker g)` for `f : E^{p,q} ⟶ D^{a,b}` and
 `g : D^{a,b} ⟶ E^{p',q'}` (`lem-sp-derived-couple-exact`, claim 1). -/
@@ -72,7 +72,7 @@ lemma kernelSubobject_d_eq_pullback_imageSubobject_α (p q p' q' a b : ℤ)
       (Subobject.pullback (X.f p q a b ha hb)).obj
         (imageSubobject (X.α (a + 1) (b - 1) a b (by lia) (by lia))) := by
   rw [X.kernelSubobject_d p q p' q' a b hp hq ha hb,
-    ShortComplex.exact_iff_image_eq_kernel.1
+    ← (ShortComplex.exact_iff_image_eq_kernel _).1
       (X.exact_α_g (a + 1) (b - 1) a b p' q' (by lia) (by lia) (by lia) (by lia))]
 
 /-- `im (d : E^{p,q} ⟶ E^{p',q'}) = g (im f)` for `f : E^{p,q} ⟶ D^{a,b}` and
@@ -82,8 +82,9 @@ lemma imageSubobject_d (p q p' q' a b : ℤ) (hp : p + s + 2 = p') (hq : q' + s 
     imageSubobject (X.d p q p' q' hp hq) =
       imageSubobject ((imageSubobject (X.f p q a b ha hb)).arrow ≫
         X.g a b p' q' (by lia) (by lia)) := by
-  rw [X.d_eq p q p' q' a b hp hq ha hb, ← imageSubobject_arrow_comp (X.f p q a b ha hb), assoc,
-    imageSubobject_epi_comp]
+  rw [X.d_eq p q p' q' a b hp hq ha hb]
+  conv_lhs => rw [← imageSubobject_arrow_comp (X.f p q a b ha hb)]
+  rw [assoc, imageSubobject_epi_comp]
 
 /-- `im (d : E^{p,q} ⟶ E^{p',q'}) = g (ker α)` for `α : D^{a,b} ⟶ D^{a-1,b+1}` and
 `g : D^{a,b} ⟶ E^{p',q'}` (`lem-sp-derived-couple-exact`, claim 1). -/
@@ -93,7 +94,7 @@ lemma imageSubobject_d_eq_image_kernelSubobject_α (p q p' q' a b : ℤ) (hp : p
       imageSubobject ((kernelSubobject (X.α a b (a - 1) (b + 1) (by lia) (by lia))).arrow ≫
         X.g a b p' q' (by lia) (by lia)) := by
   rw [X.imageSubobject_d p q p' q' a b hp hq ha hb]
-  exact imageSubobject_arrow_comp_congr (ShortComplex.exact_iff_image_eq_kernel.1
+  exact imageSubobject_arrow_comp_congr ((ShortComplex.exact_iff_image_eq_kernel _).1
     (X.exact_f_α p q a b (a - 1) (b + 1) ha hb (by lia) (by lia))) _
 
 end ExactCouple

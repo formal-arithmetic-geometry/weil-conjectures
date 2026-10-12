@@ -65,6 +65,8 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 
 /-- The isomorphism `Lg^* ⋙ Lf'^* ≅ Lf^* ⋙ Lg'^*` of a commutative square `g' ≫ f = f' ≫ g`
 commutes with the tensor comparisons of the derived pullbacks. -/
+set_option maxHeartbeats 2000000 in
+-- The kernel needs extra heartbeats to unfold the composites of derived pullbacks.
 @[reassoc]
 lemma leftDerivedUpperStarSquareIso_hom_tensor (sq : CommSq g' f' f g)
     (a b : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
@@ -93,6 +95,8 @@ lemma leftDerivedUpperStarSquareIso_hom_tensor (sq : CommSq g' f' f g)
 /-- **The adjoint form of the derived base change map**: for `K` in `D(X_proét)`, the composite
 `Lf'^* Lg^* Rf_* K ⟶ Lf'^* Rf'_* Lg'^* K ⟶ Lg'^* K` of `Lf'^*(Ex_*)` and the counit of
 `Lf'^* ⊣ Rf'_*` is the square isomorphism followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`. -/
+set_option maxHeartbeats 2000000 in
+-- The kernel needs extra heartbeats to unfold the composites of derived pullbacks.
 @[reassoc]
 lemma derivedUpperStar_map_derivedBaseChangeMap_app_counit (sq : CommSq g' f' f g)
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) :

@@ -54,6 +54,7 @@ lemma Functor.imageSubobject_map_arrow {X Y : C} (u : X ⟶ Y) :
   conv_rhs => rw [← imageSubobject_arrow_comp u, Φ.map_comp]
   exact (ExactCouple.imageSubobject_epi_comp (Φ.map (factorThruImageSubobject u)) _).symm
 
+omit [Abelian C] [Φ.Additive] [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ] in
 lemma Functor.imageSubobject_map_arrow_congr {Y : C} {S T : Subobject Y} (h : S = T) :
     imageSubobject (Φ.map S.arrow) = imageSubobject (Φ.map T.arrow) := by
   subst h
@@ -134,7 +135,7 @@ lemma map_homologyπ_mapExactE'Iso_hom (p q : ℤ) :
   have h := ShortComplex.homologyπ_mapHomologyIso_hom Φ (X.dSc p q)
   have h' : Φ.map (X.dSc p q).homologyπ = ((X.dSc p q).mapCyclesIso Φ).inv ≫
       (((X.dSc p q).map Φ).homologyπ ≫ ((X.dSc p q).mapHomologyIso Φ).hom) :=
-    ((Iso.inv_comp_eq _).2 h.symm).symm
+    ((Iso.inv_comp_eq _).2 h).symm
   rw [h']
   simp [mapExactE'Iso, mapExactCycles, ShortComplex.homologyπ_naturality]
 
@@ -230,10 +231,14 @@ lemma mapExactIterIso_hom_hD_map_ιIter (k : ℕ) (p q : ℤ) :
     (X.mapExactIterIso Φ k).hom.hD p q ≫ Φ.map (X.ιIter k p q) =
       (X.mapExact Φ).ιIter k p q := by
   induction k with
-  | zero => simp [mapExactIterIso]
+  | zero =>
+    simp [mapExactIterIso]
+    rfl
   | succ k ih =>
     have h : ((X.iter k).mapExactDerivedIso Φ).inv.hD p q ≫ Φ.map ((X.iter k).ι' p q) =
         ((X.iter k).mapExact Φ).ι' p q := by
+      have : IsIso (((X.iter k).mapExactDerivedIso Φ).hom.hD p q) :=
+        inferInstanceAs (IsIso (((X.iter k).mapExactDerivedHom Φ).hD p q))
       rw [← cancel_epi (((X.iter k).mapExactDerivedIso Φ).hom.hD p q), ← comp_hD_assoc,
         Iso.hom_inv_id, id_hD, id_comp]
       exact ((X.iter k).kernelComparison_ι' Φ p q).symm
@@ -269,7 +274,8 @@ lemma mapExact_αPow {s : ℕ} (X : ExactCouple C s) (k : ℕ) (a b p q : ℤ) (
   | zero =>
     obtain rfl : a = p := by lia
     obtain rfl : b = q := by lia
-    simp [αPow_zero']
+    simp
+    rfl
   | succ k ih =>
     rw [αPow_succ, αPow_succ, ih, Φ.map_comp, mapExact_α]
 

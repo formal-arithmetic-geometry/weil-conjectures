@@ -74,7 +74,7 @@ theorem rightDerivedFunctorPlusBaseChange_mateEquiv (adj : L ‚ä£ R) (adj' : L' ‚
     Functor.associator_inv_app, Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
     Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app, Functor.map_id, id_comp, comp_id,
     assoc]
-  exact h
+  simpa using h.symm
 
 /-- **The derived base change of a mate is compatible with the derived counits**: with the
 notation and hypotheses of `CategoryTheory.Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv`,

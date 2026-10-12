@@ -49,7 +49,7 @@ variable {𝒯 : Type u₁} [Category.{v₁} 𝒯] {T : Type u₂} [Category.{v�
 
 /-- A *reconstruction system* for a derived limit formalism: finite reductions
 `red n : T ⥤ T` (`M ↦ M ⊗ᴸ P_n`) with quotient maps `q n : red (n + 1) ⟶ red n`, and natural
-reconstruction maps `rec n : red n (R lim M_•) ⟶ M_n` compatible with the quotients and the
+reconstruction maps `recon n : red n (R lim M_•) ⟶ M_n` compatible with the quotients and the
 transitions (the derived counit of `lem-weil-pbc-finite-reduction-reconstruction`). -/
 structure ReconstructionSystem where
   /-- The finite reduction `- ⊗ᴸ P_n`. -/
@@ -57,10 +57,10 @@ structure ReconstructionSystem where
   /-- The quotient map `- ⊗ᴸ P_{n+1} ⟶ - ⊗ᴸ P_n`. -/
   q (n : ℕ) : red (n + 1) ⟶ red n
   /-- The reconstruction map `(R lim M_•) ⊗ᴸ P_n ⟶ M_n`. -/
-  rec (n : ℕ) : 𝔏.rlim ⋙ red n ⟶ 𝔏.ev n
+  recon (n : ℕ) : 𝔏.rlim ⋙ red n ⟶ 𝔏.ev n
   /-- Reconstruction is compatible with the quotients and the transitions. -/
-  rec_comm (n : ℕ) (M : 𝒯) :
-    (q n).app (𝔏.rlim.obj M) ≫ (rec n).app M = (rec (n + 1)).app M ≫ (𝔏.transition n).app M
+  recon_comm (n : ℕ) (M : 𝒯) :
+    (q n).app (𝔏.rlim.obj M) ≫ (recon n).app M = (recon (n + 1)).app M ≫ (𝔏.transition n).app M
 
 end TowerLimitFormalism
 
@@ -100,7 +100,7 @@ lemma completedExchange_app_eq_comp (K : 𝒳) :
 def reductionσ (n : ℕ) :
     (𝔯.red n).obj ((𝔇.lowerF ⋙ 𝔠.completedPullback).obj K) ⟶
       (𝔠.limY'.ev n).obj (𝔠.ρ.cornerA.obj K) :=
-  (𝔯.rec n).app (𝔠.ρ.cornerA.obj K)
+  (𝔯.recon n).app (𝔠.ρ.cornerA.obj K)
 
 variable [IsIso (𝔠.ρ.arrowH'.app K)]
 
@@ -109,7 +109,7 @@ variable [IsIso (𝔠.ρ.arrowH'.app K)]
 noncomputable def reductionτ (n : ℕ) :
     (𝔯.red n).obj (𝔇.lowerF'.obj (𝔠.completedPullback'.obj K)) ⟶
       (𝔠.limY'.ev n).obj (𝔠.ρ.cornerC.obj K) :=
-  (𝔯.red n).map (inv (𝔠.directImageCompletion K)) ≫ (𝔯.rec n).app (𝔠.ρ.cornerC.obj K)
+  (𝔯.red n).map (inv (𝔠.directImageCompletion K)) ≫ (𝔯.recon n).app (𝔠.ρ.cornerC.obj K)
 
 /-- The edge `α_n = h_n σ_n : S ⊗ᴸ P_n ⟶ B_n`. -/
 noncomputable def reductionα (n : ℕ) :
@@ -134,7 +134,7 @@ def reductionξ (n : ℕ) :
 lemma reductionξ_comp_reductionτ (n : ℕ) :
     𝔠.reductionξ 𝔯 K n ≫ 𝔠.reductionτ 𝔯 K n =
       𝔠.reductionσ 𝔯 K n ≫ (𝔠.limY'.ev n).map (𝔠.ρ.arrowV.app K) := by
-  have h := (𝔯.rec n).naturality (𝔠.ρ.arrowV.app K)
+  have h := (𝔯.recon n).naturality (𝔠.ρ.arrowV.app K)
   dsimp at h
   simp only [reductionξ, reductionτ, reductionσ, completedExchange_app_eq_comp,
     Functor.map_comp, Category.assoc, ← Functor.map_comp_assoc, IsIso.hom_inv_id,
@@ -165,14 +165,14 @@ lemma reductionξ_eq (n : ℕ) [IsIso (𝔠.reductionδ 𝔯 K n)] :
 lemma reductionσ_comm (n : ℕ) :
     (𝔯.q n).app _ ≫ 𝔠.reductionσ 𝔯 K n =
       𝔠.reductionσ 𝔯 K (n + 1) ≫ (𝔠.limY'.transition n).app (𝔠.ρ.cornerA.obj K) :=
-  𝔯.rec_comm n _
+  𝔯.recon_comm n _
 
 /-- The edge `τ_n` commutes with the quotient maps `n + 1 ⟶ n`. -/
 @[reassoc]
 lemma reductionτ_comm (n : ℕ) :
     (𝔯.q n).app _ ≫ 𝔠.reductionτ 𝔯 K n =
       𝔠.reductionτ 𝔯 K (n + 1) ≫ (𝔠.limY'.transition n).app (𝔠.ρ.cornerC.obj K) := by
-  rw [reductionτ, reductionτ, ← (𝔯.q n).naturality_assoc, Category.assoc, 𝔯.rec_comm]
+  rw [reductionτ, reductionτ, ← (𝔯.q n).naturality_assoc, Category.assoc, 𝔯.recon_comm]
   rfl
 
 /-- The edge `ξ̄_n` commutes with the quotient maps `n + 1 ⟶ n`. -/
@@ -189,10 +189,12 @@ lemma reductionα_δ_comm (n : ℕ) :
       (𝔯.q n).app _ ≫ 𝔠.reductionδ 𝔯 K n =
         𝔠.reductionδ 𝔯 K (n + 1) ≫ (𝔠.limY'.transition n).app (𝔠.ρ.cornerD.obj K) := by
   constructor
-  · rw [reductionα, reductionα, reductionσ_comm_assoc, Category.assoc, Category.assoc,
-      ← 𝔠.limY'.map_tower_comm]
-  · rw [reductionδ, reductionδ, reductionτ_comm_assoc, Category.assoc, Category.assoc,
-      ← 𝔠.limY'.map_tower_comm]
+  · simp only [reductionα, Category.assoc]
+    rw [← 𝔠.limY'.map_tower_comm]
+    exact reassoc_of% (𝔠.reductionσ_comm 𝔯 K n)
+  · simp only [reductionδ, Category.assoc]
+    rw [← 𝔠.limY'.map_tower_comm]
+    exact reassoc_of% (𝔠.reductionτ_comm 𝔯 K n)
 
 /-- The completed reduction square is natural in `K`: for `φ : K ⟶ K'` (e.g. a tower
 compatible endomorphism), the edges `α_n`, `δ_n`, `ξ̄_n` intertwine the induced maps. -/
@@ -202,7 +204,7 @@ lemma reduction_naturality {K' : 𝒳} [IsIso (𝔠.ρ.arrowH'.app K')] (φ : K 
       𝔠.reductionξ 𝔯 K n ≫ (𝔯.red n).map ((𝔠.completedPullback' ⋙ 𝔇.lowerF').map φ) =
         (𝔯.red n).map ((𝔇.lowerF ⋙ 𝔠.completedPullback).map φ) ≫ 𝔠.reductionξ 𝔯 K' n := by
   constructor
-  · have h₁ := (𝔯.rec n).naturality (𝔠.ρ.cornerA.map φ)
+  · have h₁ := (𝔯.recon n).naturality (𝔠.ρ.cornerA.map φ)
     have h₂ := 𝔠.ρ.arrowH.naturality φ
     dsimp at h₁
     simp only [reductionα, reductionσ, Category.assoc, ← Functor.map_comp, ← h₂]

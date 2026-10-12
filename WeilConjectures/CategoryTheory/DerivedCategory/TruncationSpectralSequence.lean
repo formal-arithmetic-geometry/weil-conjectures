@@ -62,11 +62,14 @@ lemma truncLEι_app_eq (q q' : ℤ) (h : q ≤ q') :
 lemma truncationCouple_α_abutmentMap (p q p' q' : ℤ) (hp : p' + 1 = p) (hq : q + 1 = q') :
     (truncationCouple F K).α p q p' q' hp hq ≫ truncationCoupleAbutmentMap F K p' q' =
       truncationCoupleAbutmentMap F K p q ≫ eqToHom (by rw [show p + q = p' + q' by lia]) := by
-  dsimp only [truncationCouple, TriangleTower.exactCouple, truncationCoupleAbutmentMap,
-    TriangleTower.map_i, truncLETower_i]
+  have e : (K.truncLETower.map F).i q q' (by lia) ≫ F.map ((truncLEι C q').app K) =
+      F.map ((truncLEι C q).app K) := by
+    change F.map ((truncLEMapOfLE C q q' (by lia)).app K) ≫ F.map ((truncLEι C q').app K) = _
+    rw [← F.map_comp, ← truncLEι_app_eq]
+  dsimp only [truncationCouple, TriangleTower.exactCouple, truncationCoupleAbutmentMap]
   rw [assoc, eqToHom_comp_map_of_eq (homologyFunctor D 0).shift (show p + q = p' + q' by lia)
       (F.map ((truncLEι C q').app K)) _ (by rw [show p + q = p' + q' by lia]),
-    ← Functor.map_comp_assoc, ← F.map_comp, ← truncLEι_app_eq]
+    ← Functor.map_comp_assoc, e]
 
 /-- The iterates `αᵏ` of the truncation couple are compatible with the abutment maps. -/
 @[reassoc]
@@ -78,7 +81,7 @@ lemma truncationCouple_αPow_abutmentMap (k : ℕ) (a b p q : ℤ) (ha : p + k =
   | zero =>
     obtain rfl : a = p := by lia
     obtain rfl : b = q := by lia
-    simp [ExactCouple.αPow_zero']
+    simp
   | succ k ih =>
     rw [ExactCouple.αPow_succ, assoc, ih (a - 1) (b + 1) (by lia) (by lia),
       truncationCouple_α_abutmentMap_assoc, eqToHom_trans]

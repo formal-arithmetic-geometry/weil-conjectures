@@ -42,14 +42,22 @@ noncomputable def functorEquivalenceInverseCompMapHomologicalComplexLim
     (Hom.isoOfComponents (fun i ↦ IsLimit.conePointUniqueUpToIso (limit.isLimit _)
         (isLimitOfPreserves (eval C c i) (limit.isLimit F))) (fun i j _ ↦
           (isLimitOfPreserves (eval C c j) (limit.isLimit F)).hom_ext fun k ↦ by
-            simp only [Category.assoc]
-            erw [IsLimit.conePointUniqueUpToIso_hom_comp]
-            simp [← comp_f]))) (by
-          intro F G f
+            have h₁ := IsLimit.conePointUniqueUpToIso_hom_comp (limit.isLimit (F ⋙ eval C c i))
+              (isLimitOfPreserves (eval C c i) (limit.isLimit F)) k
+            have h₂ := (limit.π F k).comm i j
+            dsimp at h₁ h₂ ⊢
+            simp only [Category.assoc, ← h₂, reassoc_of% h₁]
+            simp))) (fun {F G} f ↦ by
           ext i
-          dsimp
-          ext j
-          simp [← comp_f])
+          refine (isLimitOfPreserves (eval C c i) (limit.isLimit G)).hom_ext fun k ↦ ?_
+          have h₁ := IsLimit.conePointUniqueUpToIso_hom_comp (limit.isLimit (G ⋙ eval C c i))
+            (isLimitOfPreserves (eval C c i) (limit.isLimit G)) k
+          have h₂ := IsLimit.conePointUniqueUpToIso_hom_comp (limit.isLimit (F ⋙ eval C c i))
+            (isLimitOfPreserves (eval C c i) (limit.isLimit F)) k
+          dsimp at h₁ h₂ ⊢
+          simp only [Hom.isoOfComponents_hom_f, Category.assoc, h₁]
+          rw [← comp_f, limMap_π, comp_f, reassoc_of% h₂]
+          simp)
 
 variable {C : Type*} [Category* C] [Abelian C] {ι : Type*} {c : ComplexShape ι}
   {J : Type*} [Category* J] [HasLimitsOfShape J C] [HasExactLimitsOfShape J C]

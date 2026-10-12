@@ -70,7 +70,7 @@ variable {𝔇 : BaseChangeSquare 𝒳 𝒴 𝒳' 𝒴'} {𝔗 : BaseChangeSquar
 @[reassoc]
 lemma arrowH_app (K : 𝒳) : ρ.arrowH.app K = 𝔗.upperG.map (ρ.projF.natTrans.app K) := by
   dsimp [arrowH]
-  rw [Category.id_comp, Category.comp_id]
+  erw [Category.id_comp, Category.comp_id]
 
 @[reassoc]
 lemma arrowV_app (K : 𝒳) :

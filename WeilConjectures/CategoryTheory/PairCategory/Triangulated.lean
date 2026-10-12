@@ -67,6 +67,7 @@ lemma transitionId_inv_shift (k : ι) (h : k ≤ k) (n : ℤ) (K : F.obj ⟨k⟩
     Iso.hom_inv_id_app, Functor.map_id, id_comp,
     ← cancel_epi (((F.transition h).commShiftIso n).hom.app K), Iso.hom_inv_id_app,
     reassoc_of% e, Iso.hom_inv_id_app]
+  rfl
 
 end ShiftUnit
 
@@ -133,6 +134,7 @@ variable [∀ i : ι, Preadditive (F.obj ⟨i⟩)] [∀ i : ι, HasZeroObject (F
   [∀ ⦃i j : ι⦄ (h : i ≤ j), (F.transition h).Additive]
   [∀ ⦃i j : ι⦄ (h : i ≤ j), (F.transition h).CommShift ℤ]
   [∀ ⦃i j : ι⦄ (h : i ≤ j), (F.transition h).IsTriangulated] [ShiftCompatible F ℤ]
+  [Nonempty ι]
 
 variable (F) in
 /-- Blueprint `def-weil-pbc-common-stage-cones`: a triangle of the pair category is
@@ -186,7 +188,9 @@ lemma exists_cocone_mem_distTriangles {X Y : PairCategory F} (f : X ⟶ Y) :
   · simp [homMk_eq]
     rfl
   · simp
+    rfl
   · simp [← Functor.map_comp]
+    rfl
 
 lemma rotate_mem_distTriangles {T : Triangle (PairCategory F)} (hT : T ∈ distTriangles F) :
     T.rotate ∈ distTriangles F := by
@@ -209,16 +213,15 @@ lemma complete_morphism_of_iso {T₁ T₂ T₁' T₂' : Triangle (PairCategory F
     (a : T₁.obj₁ ⟶ T₂.obj₁) (b : T₁.obj₂ ⟶ T₂.obj₂) (comm : T₁.mor₁ ≫ b = a ≫ T₂.mor₁) :
     ∃ c, T₁.mor₂ ≫ c = b ≫ T₂.mor₂ ∧ T₁.mor₃ ≫ a⟦(1 : ℤ)⟧' = c ≫ T₂.mor₃ := by
   obtain ⟨c, hc₂, hc₃⟩ := H (e₁.inv.hom₁ ≫ a ≫ e₂.hom.hom₁) (e₁.inv.hom₂ ≫ b ≫ e₂.hom.hom₂) (by
-    rw [reassoc_of% e₁.inv.comm₁, reassoc_of% comm, e₂.hom.comm₁])
+    rw [reassoc_of% e₁.inv.comm₁, reassoc_of% comm, e₂.hom.comm₁]
+    simp only [assoc])
   refine ⟨e₁.hom.hom₃ ≫ c ≫ e₂.inv.hom₃, ?_, ?_⟩
-  · rw [reassoc_of% e₁.hom.comm₂, reassoc_of% hc₂, ← e₂.inv.comm₂]
-    simp only [assoc, Triangle.hom_inv_id_hom₂_assoc, Triangle.hom_inv_id_hom₂, comp_id]
-    erw [Iso.hom_inv_id_triangle_hom₂_assoc]
-  · rw [← cancel_mono (e₂.hom.hom₃), assoc, assoc, assoc, e₂.inv_hom_id_triangle_hom₃, comp_id,
-      e₂.hom.comm₃, ← reassoc_of% hc₃]
-    rw [← cancel_epi e₁.inv.hom₃, e₁.inv_hom_id_triangle_hom₃_assoc, reassoc_of% e₁.inv.comm₃]
-    simp only [Functor.map_comp, assoc]
-    rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  · rw [reassoc_of% e₁.hom.comm₂, reassoc_of% hc₂]
+    simp only [assoc]
+    rw [e₂.inv.comm₂, Iso.hom_inv_id_triangle_hom₂_assoc, Iso.hom_inv_id_triangle_hom₂_assoc]
+  · simp only [assoc]
+    rw [← e₂.inv.comm₃, ← reassoc_of% hc₃, ← reassoc_of% e₁.hom.comm₃, ← Functor.map_comp,
+      ← Functor.map_comp]
     simp
 
 /-- TR3 for images of distinguished triangles of a stage `k`, for morphisms which are images of
@@ -245,7 +248,11 @@ lemma complete_morphism_incl_of_stage {k m : ι} (h : k ≤ m) {S₁ S₂ : Tria
     simp [Φ, ψ, homMk_incl_eq]
   have e₂ : Φ.hom₂ = homMk (X := (incl F k).obj S₁.obj₂) (Y := (incl F k).obj S₂.obj₂) h h b := by
     simp [Φ, ψ, homMk_incl_eq]
-  exact ⟨Φ.hom₃, e₂ ▸ Φ.comm₂, e₁ ▸ Φ.comm₃⟩
+  refine ⟨Φ.hom₃, ?_, ?_⟩
+  · rw [← e₂]
+    exact Φ.comm₂
+  · rw [← e₁]
+    exact Φ.comm₃
 
 /-- TR3 for images of distinguished triangles of a common stage. -/
 lemma complete_morphism_incl {k : ι} {S₁ S₂ : Triangle (F.obj ⟨k⟩)}
@@ -278,7 +285,6 @@ lemma complete_morphism_of_mem_distTriangles {T₁ T₂ : Triangle (PairCategory
   exact complete_morphism_of_iso (e₁ ≪≫ (inclMapTriangleTransIso F hk).app S₁) e₂
     (complete_morphism_incl ((F.transition hk).map_distinguished _ hS₁) hS₂) a b comm
 
-variable [Nonempty ι]
 
 /-- Blueprint `def-weil-pbc-common-stage-cones`: the pair category of a directed system of
 pretriangulated categories is pretriangulated, the distinguished triangles being the triangles
@@ -287,7 +293,7 @@ noncomputable instance pretriangulated : Pretriangulated (PairCategory F) where
   distinguishedTriangles := distTriangles F
   isomorphic_distinguished _ hT _ e := mem_distTriangles_of_iso e hT
   contractible_distinguished := contractible_mem_distTriangles
-  distinguished_cocone_triangle _ _ := exists_cocone_mem_distTriangles
+  distinguished_cocone_triangle f := exists_cocone_mem_distTriangles f
   rotate_distinguished_triangle T :=
     ⟨rotate_mem_distTriangles, fun h ↦ mem_distTriangles_of_iso
       ((rotCompInvRot (C := PairCategory F)).app T) (invRotate_mem_distTriangles h)⟩
@@ -332,6 +338,14 @@ lemma exists_iso_cone_triangle {T : Triangle (PairCategory F)} (hT : T ∈ distT
       Nonempty (T ≅ (incl F k).mapTriangle.obj S) :=
   hT
 
+/-- Two composable morphisms of the pair category are represented at a common stage. -/
+lemma exists_homMk_comp {X₁ X₂ X₃ : PairCategory F} (u₁₂ : X₁ ⟶ X₂) (u₂₃ : X₂ ⟶ X₃) :
+    ∃ (k : ι) (h₁ : X₁.idx ≤ k) (h₂ : X₂.idx ≤ k) (h₃ : X₃.idx ≤ k) (f : X₁.at_ h₁ ⟶ X₂.at_ h₂)
+      (g : X₂.at_ h₂ ⟶ X₃.at_ h₃), u₁₂ = homMk h₁ h₂ f ∧ u₂₃ = homMk h₂ h₃ g := by
+  obtain ⟨k₁, -, h₁, h₂, f, rfl⟩ := exists_homMk_ge u₁₂ X₁.idx
+  obtain ⟨k, hk, h₂', h₃, g, rfl⟩ := exists_homMk_ge u₂₃ k₁
+  exact ⟨k, h₁.trans hk, h₂', h₃, _, g, (homMk_trHom hk h₁ h₂ _ h₂' f).symm, rfl⟩
+
 section Octahedron
 
 variable [∀ i : ι, IsTriangulated (F.obj ⟨i⟩)]
@@ -341,16 +355,13 @@ open Triangulated in
 instance isTriangulated : IsTriangulated (PairCategory F) := by
   apply IsTriangulated.mk
   intro X₁ X₂ X₃ Z₁₂ Z₂₃ Z₁₃ u₁₂ u₂₃ u₁₃ comm v₁₂ w₁₂ h₁₂ v₂₃ w₂₃ h₂₃ v₁₃ w₁₃ h₁₃
-  obtain ⟨k₁, -, h₁, h₂, f, rfl⟩ := exists_homMk_ge u₁₂ X₁.idx
-  obtain ⟨k, hk, h₂', h₃, g, rfl⟩ := exists_homMk_ge u₂₃ k₁
-  rw [← homMk_trHom hk h₁ h₂ (h₁.trans hk) h₂' f] at comm h₁₂ h₁₃
-  set f' := trHom hk h₁ h₂ (h₁.trans hk) h₂' f
-  obtain ⟨_, _, _, h₁₂'⟩ := distinguished_cocone_triangle f'
+  obtain ⟨k, h₁, h₂, h₃, f, g, rfl, rfl⟩ := exists_homMk_comp u₁₂ u₂₃
+  subst comm
+  obtain ⟨_, _, _, h₁₂'⟩ := distinguished_cocone_triangle f
   obtain ⟨_, _, _, h₂₃'⟩ := distinguished_cocone_triangle g
-  obtain ⟨_, _, _, h₁₃'⟩ := distinguished_cocone_triangle (f' ≫ g)
-  exact ⟨Octahedron.ofIso (e₁ := (isoToStage X₁ (h₁.trans hk)))
-    (e₂ := isoToStage X₂ h₂') (e₃ := isoToStage X₃ h₃)
-    (comm₁₂ := by simp [homMk_eq]) (comm₂₃ := by simp [homMk_eq])
+  obtain ⟨_, _, _, h₁₃'⟩ := distinguished_cocone_triangle (f ≫ g)
+  exact ⟨Octahedron.ofIso (e₁ := isoToStage X₁ h₁) (e₂ := isoToStage X₂ h₂)
+    (e₃ := isoToStage X₃ h₃) (comm₁₂ := by simp [homMk_eq]) (comm₂₃ := by simp [homMk_eq])
     (H := (someOctahedron rfl h₁₂' h₂₃' h₁₃').map (incl F k)) ..⟩
 
 end Octahedron

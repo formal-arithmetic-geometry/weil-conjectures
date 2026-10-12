@@ -40,7 +40,7 @@ lemma towerEvalQhIso_inv_naturality {n n' : ℕᵒᵖ} (f : n ⟶ n')
       Qh.map ((NatTrans.mapHomotopyCategory ((evaluation ℕᵒᵖ A).map f) _).app Y) ≫
         (towerEvalQhIso A n').inv.app Y := by
   dsimp [towerEvalQhIso, towerEval, Functor.rightDerivedFunctorNatTrans]
-  exact rightDerivedNatTrans_app _ _ _ _ _ _ Y
+  exact Functor.rightDerivedNatTrans_app _ _ _ _ _ _ Y
 
 /-- For a complex of towers `Y`, the inverse system `(evₙ (Q Y))ₙ` of `D(A)` is the image
 under `Q` of the inverse system of complexes `(Yₙ)ₙ`, naturally in `Y`. -/
@@ -52,16 +52,29 @@ noncomputable def towerFunctorQIso :
       ((towerEval A).obj n).mapIso ((quotientCompQhIso _).app Y).symm ≪≫
         (towerEvalQhIso A n).app ((HomotopyCategory.quotient _ _).obj Y) ≪≫
           (quotientCompQhIso A).app _) (fun {n n'} f ↦ by
-      dsimp
-      rw [← cancel_epi ((towerEvalQhIso A n).inv.app ((HomotopyCategory.quotient _ _).obj Y)),
-        Category.assoc, Category.assoc, Iso.inv_hom_id_app_assoc]
       have h₁ := ((towerEval A).map f).naturality ((quotientCompQhIso (ℕᵒᵖ ⥤ A)).inv.app Y)
       have h₂ := towerEvalQhIso_inv_naturality A f ((HomotopyCategory.quotient _ _).obj Y)
-      dsimp at h₁ h₂
-      sorry))
-    (fun {Y Y'} g ↦ by
+      have h₂' : ((towerEval A).map f).app (Qh.obj ((HomotopyCategory.quotient _ _).obj Y)) ≫
+          (towerEvalQhIso A n').hom.app _ = (towerEvalQhIso A n).hom.app _ ≫
+            Qh.map ((NatTrans.mapHomotopyCategory ((evaluation ℕᵒᵖ A).map f) _).app
+              ((HomotopyCategory.quotient _ _).obj Y)) := by
+        rw [← cancel_epi ((towerEvalQhIso A n).inv.app _), reassoc_of% h₂]
+        simp
+      have h₃ := (quotientCompQhIso A).hom.naturality
+        ((NatTrans.mapHomologicalComplex ((evaluation ℕᵒᵖ A).map f) _).app Y)
+      dsimp at h₁ h₃ ⊢
+      rw [← reassoc_of% h₁, reassoc_of% h₂']
+      rw [cancel_epi, cancel_epi]
+      exact h₃.symm))
+    (fun {Y Y'} (g : Y ⟶ Y') ↦ by
       ext n
-      dsimp
-      sorry)
+      have h₁ := (quotientCompQhIso (ℕᵒᵖ ⥤ A)).inv.naturality g
+      have h₂ := (towerEvalQhIso A n).hom.naturality ((HomotopyCategory.quotient _ _).map g)
+      have h₃ := (quotientCompQhIso A).hom.naturality
+        ((((evaluation ℕᵒᵖ A).obj n).mapHomologicalComplex _).map g)
+      dsimp at h₁ h₂ h₃ ⊢
+      rw [← Functor.map_comp_assoc, ← h₁, Functor.map_comp_assoc, reassoc_of% h₂]
+      rw [cancel_epi, cancel_epi]
+      exact h₃)
 
 end DerivedCategory
