@@ -7583,3 +7583,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:39 L: merged deliver/S2/Sheaf.RingTheory.FiniteSubringGenericFormalFiber (stage 3; reviewer PASS; first push; landing 20261012T113950-L-822087 (interface); batch 20261012T113943; modules 3; new nodes 2)
 - 11:39 L: merged deliver/Y2/Sheaf.RingTheory.GRingPairsOfPrimes (stage 3; reviewer PASS; first push; landing 20261012T113950-L-822283 (interface); batch 20261012T113943; modules 3; new nodes 2)
 - 11:39 L: merged deliver/Y2/Sheaf.Topology.SkyscraperComplex (stage 3; reviewer PASS; first push; landing 20261012T113950-L-822418 (interface); batch 20261012T113943; modules 3; new nodes 2)
+- 11:49 L: returned deliver/Q3/Sheaf.Algebra.Homology.LowerTruncationTransitionKernel (reviewer RETURN: (the landing tools, head 6c93e0e4a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
