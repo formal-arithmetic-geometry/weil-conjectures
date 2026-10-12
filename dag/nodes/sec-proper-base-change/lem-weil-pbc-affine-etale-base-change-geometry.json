@@ -18,62 +18,62 @@
  },
  "proof": [
   {
-   "text": "1. The cone projections are affine by uniqueness of limits and\n   lem-weil-pbc-limit-affine-transition. Affine morphism permanence makes base change\n   preserve affine objects; étaleness is stable under base change.",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-etale-base-change-finite-limits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
-   }
+   "text": "The limit cone projections are affine by the closed Mathlib theorem AlgebraicGeometry.isAffineHom_π_app D c hc. Install these instances; no existence-of-limit theorem is needed for the already supplied cone.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "2. Choose identity functors on diagonal indices, ordinary restricted base change on\n   other indices, and base change along the cone projections for v. The first projections\n   give natural transformations p and q. For diagonal indices use the identity projection.",
+   "text": "Apply the normalized cartesian-system theorem to obtain U, v, p, q, gamma, delta, diagonal normalizations, cartesian object squares, and the two comparison first-projection equations.",
    "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
-   }
-  },
-  {
-   "text": "3. Pullback pasting and uniqueness give natural comparisons gamma and delta compatible\n   with the first projections. Use identity comparisons on diagonal indices. Both sides\n   of every cocycle have the same two projections, hence agree by pullback uniqueness.",
-   "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
-   }
-  },
-  {
-   "text": "Base change preserves finite jointly surjective étale covers and cospan pullbacks, including the empty cover. Apply Mathlib Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy to the generated topologies. No sheaf adjunction is asserted here.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-etale-base-change-finite-limits"
+    "lem-weil-pbc-affine-etale-normalized-cartesian-system"
    ],
    "elementary": false
+  },
+  {
+   "text": "Prove the associativity and cone cocycles directly. Equality of arrows into a cartesian affine étale object is tested by its first and structure projections (cartesian_hom_ext). The structure projections agree because these arrows are over the final base. For associativity, use the gamma projection equations and naturality of p_kl on gamma_ijk(A) to make both first projections p_kl(U_jk(U_ij(A))) followed by p_jk(U_ij(A)) followed by p_ij(A). For the cone cocycle use the delta projection equations, naturality of q_k on gamma_ijk(A), and the gamma projection equation; both first projections become q_k(U_jk(U_ij(A))) followed by p_jk(U_ij(A)) followed by p_ij(A).",
+   "uses": [
+    "lem-weil-pbc-affine-etale-normalized-cartesian-system",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any cartesian realization F of base change with natural first projection p, cancel the objectwise cartesian square below each arrow square using IsPullback.of_bot. The arrow square is cartesian. Étaleness of a covering arrow transfers by MorphismProperty.of_isPullback; joint surjectivity transfers by Scheme.exists_preimage_of_isPullback. Presieve.map_ofArrows retains the same finite index set, including Fin 0. This proves both transition and cone covering clauses.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback uniqueness gives a natural isomorphism from F followed by the affine inclusion to ordinary étale pullback after the source inclusion. Affine objects are closed under WalkingCospan limits, by Scheme.isAffine_of_isLimit, so the inclusions preserve and reflect these limits. Ordinary étale pullback preserves finite limits. Transport preservation across the natural isomorphism and reflect through the target inclusion to prove preservation of every cospan pullback.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use fullAffineEtalePrecoverage_isPretopology to express the generated topology as that pretopology topology. Presieve.isSheaf_pretopology and Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks identify the source sheaf condition with the target sheaf condition on the image covering. Cover preservation supplies membership of that image. Apply this argument to every U_ij and v_i, then assemble the unchanged sixteen geometric clauses.",
+   "uses": [
+    "def-weil-pbc-full-affine-etale-site"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-affine-etale-normalized-cartesian-system",
   "def-pc-fibre-product",
   "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-etale-base-change-continuous"
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-weil-pbc-full-affine-etale-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "0EYL, geometric base-change system in the qcqs case; Sites 00X1; source read online; adapted to full affine subcategories and Type u"
+  "place": "0EYL geometric construction: only normalized cartesian comparison data remains open; both cocycles and all six site clauses are proved in Lean using pullback uniqueness, point lifting, finite-limit preservation, and the pretopology sheaf criterion. Mathlib supplies affineness of the supplied limit projections. R3, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -220,11 +220,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-12add",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T095901-L-316164",
+  "landing": "20261012T121319-L-1002261",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged item signature and reduction with its node, both helper statements with their Lean signatures and sources, and import changes with the sole user's imports; compilation and axiom checks pass."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

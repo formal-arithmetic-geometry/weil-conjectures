@@ -7645,3 +7645,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:12 L: merged deliver/R2/Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionIsos (stage 3; reviewer PASS; first push; landing 20261012T121215-L-997152 (interface); batch 20261012T120425; modules 4; new nodes 3)
 - 12:12 L: merged deliver/R2/Sheaf.AlgebraicGeometry.ProjTwistTransportedData (stage 3; reviewer PASS; first push; landing 20261012T121231-L-998146 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:13 L: merged deliver/R3/Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps (stage 3; reviewer PASS; first push; landing 20261012T121303-L-1001429 (interface); batch 20261012T120425; modules 4; new nodes 3)
+- 12:13 L: merged deliver/R3/Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeGeometry (stage 3; reviewer PASS; first push; landing 20261012T121319-L-1002261 (interface); batch 20261012T120425; modules 3; new nodes 2)
