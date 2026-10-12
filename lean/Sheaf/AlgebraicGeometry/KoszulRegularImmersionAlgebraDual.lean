@@ -16,13 +16,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
-import Sheaf.AlgebraicGeometry.AffineDerivedHomEvaluationCounit
-import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
-import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
-import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
-import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
-
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionAlgebraDualHomology
+import Sheaf.AlgebraicGeometry.ClosedImmersionRankedCohomologyReconstruction
 /-! # Algebra-linear Koszul duality
 
 Source: Stacks Project, Tag 0BQZ, Tag 0AX3 and Tag 0AVW
@@ -101,6 +96,20 @@ theorem koszulRegularImmersion_algebraDual {Z Y : Scheme.{u}} (i : Z ⟶ Y)
         H.obj ((DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
             (SheafOfModules.unit Y.ringCatSheaf))) := by
-  sorry
+  have : CompactSpace Z := i.isClosedEmbedding.compactSpace
+  have hfinite : (Set.range r).Finite := r.range_finite
+  let M := SheafOfModules.homObj (R := Z.sheaf)
+    ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
+    (SheafOfModules.unit Z.ringCatSheaf)
+  let K := H.obj ((DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj
+      (SheafOfModules.unit Y.ringCatSheaf))
+  have hK : ∀ n : ℤ, Nonempty ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K ≅
+        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj
+          (Scheme.Modules.locallyRankedExteriorTerm M r n)) := by
+    intro n
+    exact koszulRegularImmersion_algebraDual_homology i hregular r hr H adjH n
+  exact closedImmersion_rankedCohomology_reconstruction i M r hfinite K hK
 
 end AlgebraicGeometry

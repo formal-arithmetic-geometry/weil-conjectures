@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+ "kind": "statement",
+ "title": "Finite rank-stratum reconstruction over a closed-immersion algebra",
+ "statement": "Let $i:Z\\to Y$ be a closed immersion of schemes [def-pc-scheme], [def-weil-closed-immersion], put $A=i_*\\mathcal O_Z$ and let $g:(Z,\\mathcal O_Z)\\to(Y,A)$ be [def-sc-direct-image-algebra-derived-category]. Choose derived categories on $Z$ and over $A$ with independent universes [def-pc-derived-category]. Let $M$ be any $\\mathcal O_Z$-module sheaf, and $r:Z\\to\\mathbb N$ a locally constant function with finite image. Suppose $K\\in D(A)$ has for every $n\\in\\mathbb Z$ an isomorphism of $A$-module sheaves $H^n(K)\\cong g_*\\operatorname{locallyRankedExteriorTerm}(M,r,n)$, with the terms of [def-sc-locally-ranked-exterior-complex]. Then $Rg_*Q(\\operatorname{locallyRankedExteriorComplex}(M,r))\\cong K$, with the derived direct image of [def-pc-ringed-spaces-derived-direct-image]. No regularity, normal-sheaf condition on $M$, scalar right adjoint, or quasi-coherence hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Parent proof step 3: rank-idempotent splitting and single-degree truncation; Tag 0BQZ and Tag 0AVW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-derived-category",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "For the closed embedding underlying i, a direct-image stalk on the image is the corresponding source stalk, since inverse-image opens are cofinal among neighborhoods; off the image it is zero, since the closed image has open complement. Thus g_* on modules is exact. The derived functor is its termwise action followed by localization, for any representative; the natural K-injective resolution map remains a quasi-isomorphism after applying g_*. The zero-differential complex has homology its terms.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finitely many nonempty clopen fibers of r partition Z. Glue sections 1 on each fiber and 0 on its complement. They give global mutually orthogonal idempotents of i_*OZ, summing to 1. On each representative algebra-module complex split multiplication by these idempotents termwise into image complexes. Abelian module sheaves have images, the differentials preserve the images, and the finite sum of inclusions and projections gives an actual chain isomorphism. This splitting commutes with quasi-isomorphisms and homology.",
+   "uses": [
+    "def-sc-direct-image-algebra-derived-category",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the image of the idempotent for rank n, hK identifies homology with the corresponding summand of g_* of the exterior term. This homology is zero in every degree other than n. Canonical truncation at n above and below gives a zigzag of quasi-isomorphisms to its degree-n homology placed in degree n (Mathlib DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE). The same holds for the corresponding summand of the termwise pushed-forward exterior complex. Apply the given homology isomorphism in the single degree.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sum the finitely many summand isomorphisms and compose with the splitting chain isomorphisms, and with the exact-direct-image comparison from step 1. This yields the required derived isomorphism in any chosen universes. No rank fiber is required to be open in Y. For empty Z all algebra-module stalks vanish; for rank zero only degree zero remains.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "V2",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Parent proof step 3: rank-idempotent splitting and single-degree truncation; Tag 0BQZ and Tag 0AVW"
+  },
+  "note": "Makes the indicated steps of the parent plan precise; source pages obtained in scratchpad/sources.",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Parent proof step 3: rank-idempotent splitting and single-degree truncation; Tag 0BQZ and Tag 0AVW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A derived module sheaf over the direct image algebra of a closed immersion with cohomology supported on disjoint clopen strata is isomorphic to its cohomology with zero differentials",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no verdict for this search.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of sheaves of modules with homology in a single degree on each clopen rank stratum is isomorphic to its graded cohomology complex",
+   "results": "Eight hits include CochainComplex.exists_iso_single, which concerns strict termwise concentration, and connected-complex homology. No rank-stratified algebra-module reconstruction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "results": "Found the single-degree reconstruction theorem in Mathlib.Algebra.Homology.DerivedCategory.TStructure; it does not give the rank-idempotent splitting or the closed-embedding derived-direct-image comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyRankedExteriorTerm|locallyRankedExteriorComplex|IsClosedEmbedding.*preservesFiniteColimits",
+   "results": "No hits in Mathlib. Library search finds the explicit complex and scalar Koszul comparison, but neither the degreewise algebra-valued cohomology comparison nor the general finite-rank reconstruction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionAlgebraDual",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "diagonal Koszul calculation: Parent proof step 3: rank-idempotent splitting and single-degree truncation; Tag 0BQZ and Tag 0AVW",
+   "via": [
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionRankedCohomologyReconstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionRankedCohomologyReconstruction.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_rankedCohomology_reconstruction",
+  "statement": "theorem closedImmersion_rankedCohomology_reconstruction\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{wA} (SheafOfModules.{u}\n      (moduleRings (directImageAlgebraSpace i)))]\n    (M : Z.Modules) (r : LocallyConstant Z ℕ) (hfinite : (Set.range r).Finite)\n    (K : DerivedCategory (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))))\n    (hK : ∀ n : ℤ, Nonempty ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i))) n).obj K ≅\n        (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).obj\n          (Scheme.Modules.locallyRankedExteriorTerm M r n))) :\n    Nonempty ((RingedSpace.derivedModuleDirectImage\n      (toDirectImageAlgebraSpace i)).obj (DerivedCategory.Q.obj\n        (Scheme.Modules.locallyRankedExteriorComplex M r)) ≅ K)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T144154-L-2110126",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T144154-L-2110126",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
