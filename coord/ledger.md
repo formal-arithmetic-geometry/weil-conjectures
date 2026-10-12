@@ -7703,3 +7703,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:19 L: merged deliver/S1/Sheaf.Paper.ZariskiEtalePushedResolution (stage 3; reviewer PASS; first push; landing 20261012T131917-L-1402366 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 13:20 L: merged deliver/S3/Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction (stage 3; reviewer PASS; first push; landing 20261012T132034-L-1411087 (interface); batch 20261012T120425; modules 2; new nodes 1)
 - 13:21 L: merged deliver/T1/Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic (stage 3; reviewer PASS; after a return; landing 20261012T132138-L-1417565 (interface); batch 20261012T120425; modules 2; new nodes 1)
+- 13:23 L: returned deliver/E2/Sheaf.AlgebraicGeometry.FieldEquivariantGermFamilySection (reviewer RETURN: (reviewer X-27111, head 27111c00c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
