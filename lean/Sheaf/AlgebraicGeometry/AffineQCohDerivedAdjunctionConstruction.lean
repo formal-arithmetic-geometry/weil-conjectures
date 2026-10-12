@@ -5,6 +5,8 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import Mathlib.CategoryTheory.Adjunction.Restrict
 
 @[expose] public section
 
@@ -44,6 +46,45 @@ theorem affineQCohDerivedAdjunction_construction (A : Type u) [CommRing A]
       Nonempty (G ≅ (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
         (RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙
           ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom).rightDerivedFunctor) := by
-  sorry
+  let L : ModuleCat.{u} A ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace) :=
+    tilde.functor (.of A)
+  let R := RingedSpace.globalSectionsFunctor (Spec (.of A)).toRingedSpace ⋙
+    ModuleCat.restrictScalars (Scheme.ΓSpecIso (.of A)).inv.hom
+  let : L.Additive := instAdditiveModuleCatCarrierModulesSpecOfFunctor
+  have adj : L ⊣ R := tilde.adjunction
+  let : L.IsLeftAdjoint := adj.isLeftAdjoint
+  let : Limits.PreservesFiniteColimits L := inferInstance
+  let : L.PreservesMonomorphisms := ⟨by
+    intro M N f hf
+    let : Mono f := hf
+    apply (SheafOfModules.forget _).mono_of_mono_map
+    apply PresheafOfModules.mono_of_injective
+    intro U s t h
+    apply Subtype.ext
+    funext x
+    apply IsLocalizedModule.map_injective x.1.asIdeal.primeCompl
+      (LocalizedModule.mkLinearMap x.1.asIdeal.primeCompl M)
+      (LocalizedModule.mkLinearMap x.1.asIdeal.primeCompl N)
+      f.hom ((ModuleCat.mono_iff_injective f).mp inferInstance)
+    exact congrArg (fun z ↦ z.val x) h⟩
+  let : L.PreservesHomology :=
+    Functor.preservesHomology_of_preservesMonos_and_cokernels L
+  let : Limits.PreservesFiniteLimits L := L.preservesFiniteLimits_of_preservesHomology
+  let P := schemeDerivedQCohProperty (Spec (.of A))
+  have hL : ∀ K, P (L.mapDerivedCategory.obj K) := by
+    intro K n
+    let e := (L.mapDerivedCategoryHomologyFunctorIso n).app K
+    apply (SheafOfModules.isQuasicoherent
+      (moduleRings (Spec (.of A)).toRingedSpace)).prop_of_iso e
+    exact instIsQuasicoherentOpensCarrierCarrierCommRingCatSpecOfCarrierObjModuleCatModulesFunctor _
+  let F := P.lift L.mapDerivedCategory hL
+  let G := P.ι ⋙ R.rightDerivedFunctor
+  let dadj := adj.mapDerivedCategoryRightDerivedAdjunction
+  refine ⟨F, G, ?_, ?_, ⟨Iso.refl _⟩⟩
+  · exact ⟨dadj.restrictFullyFaithful (Functor.FullyFaithful.id _) P.fullyFaithfulι
+      ((Functor.leftUnitor _) ≪≫ (P.liftCompιIso _ hL).symm)
+      (Functor.rightUnitor _).symm⟩
+  · exact ⟨L.mapDerivedCategoryFactors⟩
 
 end AlgebraicGeometry
