@@ -10,7 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.LinearAlgebra.Matrix.ToLin
-import Sheaf.LinearAlgebra.TriangularChangeOfBasis
+import Sheaf.LinearAlgebra.KernelBasisOfUnitValue
+import Sheaf.Algebra.Homology.SplitIdentityFromFunctionals
 
 /-!
 # Splitting off a unit entry in a finite free chain complex
@@ -41,21 +42,20 @@ of summand elements, hence on every element of the binary direct sum.
 The equivalences `e` and `f` identify the two nonzero terms of `T` with `R`; their compatibility
 says that the differential becomes the identity under those identifications.
 
-Proof: (1) Move the unit coefficient to the first position. Replace the first target basis
-vector by the image of the first source basis vector. The triangular coefficient matrix has
-unit diagonal, so this is a basis by `lem-weil-pbc-triangular-change-of-basis`.
-(2) Subtract from each remaining source basis vector its first image coefficient times the
-first source basis vector. Again the triangular change of basis has unit diagonal, by that
-same lemma. The differential now has an isolated identity entry.
-(3) The spans of the remaining basis vectors give finite free complementary modules in the
-two degrees, with one fewer basis vector in each (`def-weil-pbc-free-module`).
-(4) The incoming differential lands in the source complement: its image has first coefficient
-zero because two consecutive differentials compose to zero.
-(5) The outgoing differential kills the first target basis vector, since it is itself an image.
-(6) Restrict the differentials to obtain `C'`. Take `T` to be the identity on `R` in the two
-degrees and zero elsewhere. Add the two complementary components to define `ψ` degreewise
-(`def-weil-pbc-direct-sum-modules`). Steps (3)--(5) give linear bijectivity and compatibility
-with every differential; the restricted differentials still square to zero. -/
+Proof: Put `z = b i p`, `w = d_i z`, and let `u` be the unit coefficient. Define `β` as
+`u⁻¹` times the `q`-coordinate functional on the target, and `α = β ∘ d_i`. Then
+`α z = β w = 1`, and `β` takes the unit value `u⁻¹` on the original target pivot vector.
+The kernels of `α` and `β` have bases with one fewer vector by
+`lem-weil-pbc-kernel-basis-unit-value` (proved by explicit coordinate elimination).
+The incoming map lands in `ker α` since `α d_{i+1} = β d_i d_{i+1} = 0`, and the outgoing
+map kills `w` since `d_{i-1} w = d_{i-1} d_i z = 0`.
+Apply `lem-weil-pbc-split-identity-from-functionals` to assemble the complementary complex
+and identity complex. Transfer the kernel bases to its two special terms using the
+provided linear equivalences; elsewhere transfer the original bases through the top
+submodule equivalence. Set `n' j` to `n j - 1` in the two special degrees and `n j`
+elsewhere. The indices `p`, `q` imply positivity, so the asserted rank equalities follow.
+This keeps the source's pivot elimination and restriction argument without requiring a
+general triangular-change-of-basis theorem. -/
 theorem exists_splitting_of_isUnit_entry
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ)
     (n : ℤ → ℕ) (b : ∀ j : ℤ, Module.Basis (Fin (n j)) R (C.X j))
@@ -80,6 +80,73 @@ theorem exists_splitting_of_isUnit_entry
                     ((C'.d j (j - 1)).hom x) +
                   DirectSum.lof R Bool (fun s ↦ M (j - 1) s) true
                     ((T.d j (j - 1)).hom t)) := by
-  sorry
+  classical
+  let a := LinearMap.toMatrix (b i) (b (i - 1)) (C.d i (i - 1)).hom q p
+  obtain ⟨u, hu⟩ := hunit
+  have hcoord : (b (i - 1)).coord q ((C.d i (i - 1)).hom ((b i) p)) = a := by
+    simp [a, LinearMap.toMatrix_apply, Module.Basis.coord_apply]
+  let β : C.X (i - 1) →ₗ[R] R := (↑(u⁻¹) : R) • (b (i - 1)).coord q
+  let α : C.X i →ₗ[R] R := β.comp (C.d i (i - 1)).hom
+  let z : C.X i := (b i) p
+  let w : C.X (i - 1) := (C.d i (i - 1)).hom z
+  have hw : β w = 1 := by
+    change (↑(u⁻¹) : R) * (b (i - 1)).coord q
+      ((C.d i (i - 1)).hom ((b i) p)) = 1
+    rw [hcoord]
+    change (↑(u⁻¹) : R) *
+      LinearMap.toMatrix (b i) (b (i - 1)) (C.d i (i - 1)).hom q p = 1
+    rw [← hu]
+    simp
+  have hz : α z = 1 := hw
+  have hα : IsUnit (α ((b i) p)) := by rw [hz]; exact isUnit_one
+  have hβ : IsUnit (β ((b (i - 1)) q)) := by
+    simp [β, Module.Basis.coord_apply]
+  obtain ⟨bi⟩ := (b i).exists_basis_ker_of_isUnit_value α p hα
+  obtain ⟨bj⟩ := (b (i - 1)).exists_basis_ker_of_isUnit_value β q hβ
+  have hin : ∀ x, α ((C.d (i + 1) i).hom x) = 0 := by
+    intro x
+    have hzero : (C.d i (i - 1)).hom ((C.d (i + 1) i).hom x) = 0 := by
+      have h := congrArg (fun f => f.hom x) (C.d_comp_d (i + 1) i (i - 1))
+      change (C.d i (i - 1)).hom ((C.d (i + 1) i).hom x) = 0 at h
+      exact h
+    change β ((C.d i (i - 1)).hom ((C.d (i + 1) i).hom x)) = 0
+    rw [hzero, map_zero]
+  have hout : (C.d (i - 1) (i - 2)).hom w = 0 := by
+    have h := congrArg (fun f => f.hom z) (C.d_comp_d i (i - 1) (i - 2))
+    change (C.d (i - 1) (i - 2)).hom ((C.d i (i - 1)).hom z) = 0 at h
+    exact h
+  obtain ⟨C', T, g, hT, e, f, hef, ψ, hψ⟩ :=
+    exists_splitting_of_split_functionals C i α β z w hz hw (fun _ => rfl) rfl hin hout
+  let S : ∀ j : ℤ, Submodule R (C.X j) := fun j ↦
+    if h : j = i then h ▸ LinearMap.ker α
+    else if h : j = i - 1 then h ▸ LinearMap.ker β else ⊤
+  change ∀ j, C'.X j ≃ₗ[R] S j at g
+  let n' : ℤ → ℕ := fun j => if j = i then n i - 1
+    else if j = i - 1 then n (i - 1) - 1 else n j
+  have hii : i - 1 ≠ i := by omega
+  refine ⟨C', T, n', ?_, ?_, ?_, ?_, hT, e, f, hef, ψ, hψ⟩
+  · intro j
+    by_cases hi : j = i
+    · subst j
+      have hS : S i = LinearMap.ker α := by simp [S]
+      let g' := (g i).trans (LinearEquiv.ofEq _ _ hS)
+      simpa only [n', if_true] using Nonempty.intro (bi.map g'.symm)
+    · by_cases hj : j = i - 1
+      · subst j
+        have hS : S (i - 1) = LinearMap.ker β := by simp [S, hii]
+        let g' := (g (i - 1)).trans (LinearEquiv.ofEq _ _ hS)
+        simpa only [n', if_neg hii, if_true] using Nonempty.intro (bj.map g'.symm)
+      · have hS : S j = ⊤ := by simp [S, hi, hj]
+        let g' := (g j).trans (LinearEquiv.ofEq _ _ hS)
+        let e' := g'.trans (Submodule.topEquiv : _ ≃ₗ[R] _)
+        simpa only [n', if_neg hi, if_neg hj] using Nonempty.intro ((b j).map e'.symm)
+  · have hp := p.isLt
+    simp only [n', if_true]
+    omega
+  · have hq := q.isLt
+    simp only [n', if_neg hii, if_true]
+    omega
+  · intro j hi hj
+    simp [n', hi, hj]
 
 end ChainComplex

@@ -32,79 +32,70 @@
  ],
  "proof": [
   {
-   "text": "(Normalising the unit entry.) Write $n_j$ for the rank of $C_j$. Choose the finite bases $e_1,\\dots,e_{n_i}$ of $C_i$ and $g_1,\\dots,g_{n_{i-1}}$ of $C_{i-1}$ in which a coefficient of $d_i$ is a unit, and write $d_i(e_j)=\\sum_k a_{jk}g_k$. Renumbering both bases we may assume that $u=a_{11}$ is the unit coefficient (so $n_i,n_{i-1}\\ge1$). Put $f_1=d_i(e_1)=\\sum_k a_{1k}g_k$ and $f_k=g_k$ for $2\\le k\\le n_{i-1}$. The coefficient matrix of $(f_k)$ in the basis $(g_k)$ has first row $(a_{11},a_{12},\\dots)$ and $k$-th row the $k$-th unit row for $k\\ge2$: it vanishes below the diagonal and its diagonal entries $a_{11},1,\\dots,1$ are units. By [lem-weil-pbc-triangular-change-of-basis], $f_1,\\dots,f_{n_{i-1}}$ is a basis of $C_{i-1}$, and $d_i(e_1)=f_1$. This is the source's 'after a change of basis of $R^{n_i}$ and $R^{n_{i-1}}$ the first basis vector of $R^{n_i}$ is mapped to the first basis vector of $R^{n_{i-1}}$'.",
+   "text": "Write z=b_i(p), w=d_i(z), and choose the unit u equal to the pivot coefficient. Let β=u⁻¹ times target coordinate q and α=βd_i. Direct multiplication by u⁻¹ proves β(w)=α(z)=1; β(b_(i−1)(q))=u⁻¹ is also a unit.",
    "uses": [
-    "lem-weil-pbc-triangular-change-of-basis",
     "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+   }
+  },
+  {
+   "text": "Apply the proved kernel basis lemma to α on b_i and β on b_(i−1). This gives bases indexed by Fin(n_i−1) and Fin(n_(i−1)−1) in their kernels.",
+   "uses": [
+    "lem-weil-pbc-kernel-basis-unit-value"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT, proof lines 24630--24638"
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
    }
   },
   {
-   "text": "(Clearing the first column.) Write $d_i(e_j)=\\sum_k b_{jk}f_k$ in the new basis of $C_{i-1}$; by Step 1, $b_{11}=1$ and $b_{1k}=0$ for $k\\ge2$. Put $e'_1=e_1$ and $e'_j=e_j-b_{j1}e_1$ for $2\\le j\\le n_i$. The coefficient matrix of $(e'_j)$ in the basis $(e_j)$ has $-b_{j1}$ in position $(j,1)$ for $j\\ge2$, $1$ on the diagonal and $0$ elsewhere, so it vanishes above the diagonal with unit diagonal, and by [lem-weil-pbc-triangular-change-of-basis] $e'_1,\\dots,e'_{n_i}$ is a basis of $C_i$. By linearity $d_i(e'_j)=d_i(e_j)-b_{j1}f_1=\\sum_{k\\ge2}b_{jk}f_k$ for $j\\ge2$: in the new bases the coefficient of $f_1$ in $d_i(e'_j)$ vanishes for $j>1$ (the source's '$a_{j1}=0$ for $j>1$').",
+   "text": "For every incoming x, α(d_(i+1)(x))=β(d_i d_(i+1)(x))=0 by the complex relation. Also d_(i−1)(w)=d_(i−1)d_i(z)=0 by the same relation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+   }
+  },
+  {
+   "text": "Apply the assembly theorem with these explicit functionals and vectors. Its complement is identified degreewise with the two kernels and the original top submodules elsewhere, and its identity summand and DirectSum isomorphisms give exactly the required differential compatibility.",
    "uses": [
-    "lem-weil-pbc-triangular-change-of-basis"
+    "lem-weil-pbc-split-identity-from-functionals",
+    "def-weil-pbc-direct-sum-modules"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT, proof lines 24638--24641"
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
    }
   },
   {
-   "text": "(The two decompositions.) Let $C'_i\\subset C_i$ be the submodule spanned by $e'_2,\\dots,e'_{n_i}$ and $C'_{i-1}\\subset C_{i-1}$ the submodule spanned by $f_2,\\dots,f_{n_{i-1}}$. Since $(e'_j)$ and $(f_k)$ are bases, every $x\\in C_i$ is uniquely $x=r e'_1+y$ with $r\\in R$, $y\\in C'_i$, and every $z\\in C_{i-1}$ is uniquely $z=s f_1+w$ with $s\\in R$, $w\\in C'_{i-1}$; $e'_2,\\dots,e'_{n_i}$ is a basis of $C'_i$ and $f_2,\\dots,f_{n_{i-1}}$ a basis of $C'_{i-1}$ (a subfamily of a basis is a basis of its span), so $C'_i$, $C'_{i-1}$ are free of ranks $n_i-1$, $n_{i-1}-1$. By Steps 1 and 2, $d_i(e'_1)=f_1$ and $d_i(C'_i)\\subset C'_{i-1}$.",
+   "text": "Define n′_j=n_j−1 for j=i,i−1 and n′_j=n_j elsewhere. Transfer the two kernel bases and the original bases using the supplied equivalences and Submodule.topEquiv. Since p and q exist, n_i,n_(i−1)>0; arithmetic gives n′_i+1=n_i and n′_(i−1)+1=n_(i−1).",
    "uses": [
     "def-weil-pbc-free-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT, proof lines 24636--24641"
-   }
-  },
-  {
-   "text": "(The incoming differential avoids $e'_1$.) Let $x\\in C_{i+1}$ and write $d_{i+1}(x)=r e'_1+y$ as in Step 3. Then $0=d_id_{i+1}(x)=r f_1+d_i(y)$ with $d_i(y)\\in C'_{i-1}$; by uniqueness of the decomposition of $C_{i-1}$ in Step 3, $r=0$. Hence $d_{i+1}(C_{i+1})\\subset C'_i$ (the source's 'the image of $R^{n_{i+1}}\\to R^{n_i}$ is contained in the subspace spanned by $e_j$, $j>1$').",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT, proof lines 24641--24644"
-   }
-  },
-  {
-   "text": "(The outgoing differential kills $f_1$.) $d_{i-1}(f_1)=d_{i-1}d_i(e'_1)=0$ (the source's '$R^{n_{i-1}}\\to R^{n_{i-2}}$ has to annihilate $f_1$ since it is in the image').",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT, proof lines 24644--24646"
-   }
-  },
-  {
-   "text": "(Assembling the splitting.) Define $C'_\\bullet$ by $C'_j=C_j$ for $j\\notin\\{i,i-1\\}$ and $C'_i$, $C'_{i-1}$ as in Step 3, with differentials $d'_j=d_j$ for $j\\notin\\{i+1,i,i-1\\}$, $d'_{i+1}=d_{i+1}:C_{i+1}\\to C'_i$ (allowed by Step 4), $d'_i=d_i|_{C'_i}:C'_i\\to C'_{i-1}$ (Step 3) and $d'_{i-1}=d_{i-1}|_{C'_{i-1}}:C'_{i-1}\\to C_{i-2}$; each $d'_{j-1}d'_j$ is a restriction of $d_{j-1}d_j=0$, so $C'_\\bullet$ is a chain complex of finite free modules with the stated ranks (Step 3). Let $T_\\bullet$ be $R\\xrightarrow{1}R$ in degrees $i,i-1$ and $0$ elsewhere, and $C'_\\bullet\\oplus T_\\bullet$ the degreewise direct sum [def-weil-pbc-direct-sum-modules] with differential $d'_j\\oplus d^T_j$. Define $\\psi_j:C'_j\\oplus T_j\\to C_j$ by $\\psi_j(y,t)=y$ for $j\\notin\\{i,i-1\\}$, $\\psi_i(y,r)=y+re'_1$ and $\\psi_{i-1}(w,s)=w+sf_1$; each $\\psi_j$ is $R$-linear and bijective (Step 3). Compatibility $d_j\\psi_j=\\psi_{j-1}(d'_j\\oplus d^T_j)$: in degree $i+1$ both sides send $x$ to $d_{i+1}x$ (Step 4, $T_i$-component $0$); in degree $i$, $d_i(y+re'_1)=d_i(y)+rf_1=\\psi_{i-1}(d_iy,r)$ (Step 3); in degree $i-1$, $d_{i-1}(w+sf_1)=d_{i-1}(w)$ by Step 5, which is $\\psi_{i-2}(d'_{i-1}w,0)$; in every other degree both sides are $d_j$. So $\\psi$ is an isomorphism of chain complexes $C'_\\bullet\\oplus T_\\bullet\\cong C_\\bullet$ (the source's 'these conditions and the shape of the matrix imply the lemma').",
-   "uses": [
-    "def-weil-pbc-direct-sum-modules",
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT, proof lines 24646--24648"
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-triangular-change-of-basis",
+  "def-weil-pbc-direct-sum-modules",
   "def-weil-pbc-free-module",
-  "def-weil-pbc-direct-sum-modules"
+  "lem-weil-pbc-kernel-basis-unit-value",
+  "lem-weil-pbc-split-identity-from-functionals"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), statement and proof lines 24608--24650"
+  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
  },
  "mathlib_searches": [
   {
@@ -191,5 +182,15 @@
   "group": "C1",
   "result": "fix",
   "note": "CommRing R; ChainComplex ModuleCat Z with d_{i-1}d_i=0 built in; finite bases b j : Basis (Fin (n j)); unit entry IsUnit (toMatrix (b i) (b (i-1)) d_i q p) (FIX from repr form, same value); C' finite free with sizes n' i+1=n i, n'(i-1)+1=n(i-1), n' j=n j elsewhere; T subsingleton off i,i-1, R-1->R via e,f; psi_j linear equivs on Bool DirectSum commuting with d'+d^T on lof false x + lof true t (all elements, checked); zero ring and empty bases ok"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T173825-L-3295447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

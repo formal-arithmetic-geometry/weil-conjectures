@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-kernel-basis-unit-value",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof, final sentence: 'Every finite etale $Y_0$-scheme is the restriction of a finite etale $Y$-scheme, the lifting input of the henselian-pair proper-base-change package'",
+   "via": [
+    "lem-weil-pbc-free-complex-unit-entry-splits",
+    "lem-weil-pbc-minimal-finite-free-resolution-local",
+    "lem-weil-pbc-residue-field-pd-ge-embedding-dimension",
+    "lem-weil-pbc-finite-gl-dim-regular-local",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The kernel of a functional with a unit basis value has one fewer basis vector",
+ "statement": "Let R be a commutative ring, F an R-module, n a natural number, b a basis of F indexed by Fin n [def-weil-pbc-free-module], ℓ:F→R an R-linear functional and p∈Fin n. If ℓ(b(p)) is a unit, ker ℓ has a basis indexed by Fin(n−1). The zero ring is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the inverse unit u⁻¹ of ℓ(b(p)). Restrict the basis coordinate map to ker ℓ and forget coordinate p, obtaining L:ker ℓ→({k∈Fin n | k≠p}→R).",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+   }
+  },
+  {
+   "text": "L is injective: if its value at x is zero, all coordinates of x except p are zero, so x=r b(p). Applying ℓ gives r u=0. Multiplication by u⁻¹ gives r=0 and x=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+   }
+  },
+  {
+   "text": "L is surjective: given off-pivot coordinates c, extend them by zero at p and take their inverse image v under b.equivFun. The vector v−(u⁻¹ ℓ(v)) b(p) is in ker ℓ and has coordinates c away from p. The proved bijective linear map L is therefore a linear equivalence. Pull back the standard function-space basis and reindex by finSuccAboveEquiv to Fin(n−1). The case n=0 is impossible because p exists.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24648"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of linear functional on a finite free module with a unit value on a basis vector",
+   "results": "UNAVAILABLE: service returned Internal Server Error; other search kinds used.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of a linear functional on a finite free module with a unit value on a basis vector has a basis with one fewer vector",
+   "results": "Basis.flag_le_ker_coord and field-only exists_basis_of_pairing_ne_zero; neither gives this over an arbitrary commutative ring.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, LinearMap.ker",
+   "results": "Basis.toDual_ker, Matrix.ker_toLin_eq_bot, field-only basis results; no match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "basis.*ker|ker.*basis in Mathlib/LinearAlgebra; read Basis/Defs.lean and Pi.lean",
+   "results": "Basis.ofEquivFun, Basis.coord_equivFun_symm, finSuccAboveEquiv are constructors used in the proof; no ready-made theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.UnitEntrySplits",
+  "date": "2026-10-13",
+  "group": "F3"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.KernelBasisOfUnitValue",
+  "file": "lean/Sheaf/LinearAlgebra/KernelBasisOfUnitValue.lean",
+  "declaration": "Module.Basis.exists_basis_ker_of_isUnit_value",
+  "statement": "theorem exists_basis_ker_of_isUnit_value\n    {R : Type u} [CommRing R] {F : Type v} [AddCommGroup F] [Module R F]\n    {n : ℕ} (b : Module.Basis (Fin n) R F) (ℓ : F →ₗ[R] R) (p : Fin n)\n    (hunit : IsUnit (ℓ (b p))) :\n    Nonempty (Module.Basis (Fin (n - 1)) R (LinearMap.ker ℓ))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T173825-L-3295447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T173825-L-3295447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
