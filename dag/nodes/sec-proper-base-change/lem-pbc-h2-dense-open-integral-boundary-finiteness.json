@@ -18,31 +18,51 @@
  ],
  "proof": [
   {
-   "text": "The curve is Noetherian. Density excludes every generic point, so the closed complement is zero-dimensional with finitely many closed points; their residue fields are k. Its reduction is a finite union of spectra of k. Etale cohomology is invariant under reduction.",
+   "text": "Apply exists_dense_irreducible_opens to U. Its dense union W lies inside U and its complement has dimension at most zero. The closed immersion i:Z -> X embeds Z into X minus W; monotonicity of topological Krull dimension for inducing maps gives dim Z <= 0. The composite Z -> X -> Spec k is separated and finite type, since i is a closed immersion. No reducedness assumption on X is used.",
    "uses": [
     "def-weil-pbc-curve-setting",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-weil-pbc-closed-point-residue-field-base"
+    "lem-pbc-q1-dense-irreducible-opens"
    ],
    "elementary": false
   },
   {
-   "text": "Finite direct image is exact, and the Leray comparison identifies the cohomology of i_*i^*F with that on Z. Apply the zero-dimensional calculation: every positive-degree group is zero. Relate derived cohomology to Sheaf.H using the recorded comparison.",
+   "text": "The counit of the equivalence between integral modules and abelian groups, whiskered sectionwise with P.F, identifies the underlying abelian sheaf of the integral encoding F with P.F. Apply pullback_forget_modules_iso to i and compose with the pullback of that counit: the underlying abelian sheaf B of i^*F is isomorphic to the abelian inverse image i^*P.F. Forgetting module structure commutes definitionally with direct image, which is precomposition, so the underlying boundary sheaf is i_*B.",
    "uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the private finite_constructible_stalk helper: choose the constructible stratification S of the underlying set sheaf. Any geometric point s belongs to one stratum. Its immersion is surjective on stalks, so the residue-field map at a preimage point is an isomorphism. Compose the field-valued point with its inverse residue-field map and the residue-field point of the stratum; this gives a lift t with t followed by the immersion equal to s (the proved source-library exists_comp_eq_of_mem_range). The set stalk at t is finite by the finite-lisse clause of constructibility. etaleInverseImageAlgebraicStructures identifies the set restriction with the underlying set sheaf of abelian inverse image; Point.sheafFiberCompIso commutes the stalk with forgetting. upperStarCompSheafFiberIso identifies its abelian stalk with the original stalk at s. Transfer finiteness along these explicit equivalences. Apply this helper at every geometric point Z.algClosurePoint z followed by i. The stalk isomorphism for i and the isomorphism B = i^*P.F then prove all chosen stalks of B finite.",
+   "uses": [
+    "def-weil-pbc-constructible-torsion",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-surjective-stalks-residue-field-iso",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use zeroDimensional_sections_stalks on Z, with algebraic closures of the residue fields as chosen geometric points. This supplies Finite Z and an isomorphism from B(Z) to the categorical product of its stalks. The product is finite: its projections inject its underlying set into the finite dependent function type of the stalk sets (Concrete.to_product_injective_of_isLimit). Consequently B(Z) is finite. The Ext degree-zero equivalence Sheaf.H.equiv₀ for the terminal etale object Z -> Z transfers finiteness to Sheaf.H B 0. The argument also covers empty Z, whose product is over the empty index type.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-sections-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q=n+1 use zero_dimensional_etale_cohomology on Z to obtain a subsingleton derived cohomology group. The natural comparison nonempty_sheafH_extDerivedIso evaluated at B identifies Sheaf.H B q with that group. Injectivity of its additive equivalence proves Sheaf.H B q subsingleton, and hence finite.",
+   "uses": [
     "lem-weil-pbc-zero-dimensional-cohomology",
     "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Degree-zero sections on the finite complement are the finite product of stalks. Pullback and the integral encoding leave the underlying abelian stalks unchanged. Constructibility as a set sheaf makes each of these stalks finite. Thus degree zero is finite, and the zero positive-degree groups are finite. The empty complement gives the zero sheaf.",
+   "text": "The closed immersion i is finite. Apply bijective_edgeMap_of_isFinite to B in each degree. Its injectivity embeds Sheaf.H (i_*B) q into the already finite Sheaf.H B q. Finite.of_injective finishes the unchanged boundary theorem. This uses the existing cohomology edge-map theorem directly, rather than constructing another derived Leray comparison.",
    "uses": [
-    "lem-weil-pbc-zero-dimensional-sections-stalks",
-    "def-weil-pbc-constructible-torsion",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-finite-pushforward-cohomology"
    ],
    "elementary": false
   }
@@ -52,18 +72,20 @@
   "def-weil-pbc-curve-setting",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-pbc-q1-dense-irreducible-opens",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-finite-pushforward-cohomology",
   "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-weil-pbc-surjective-stalks-residue-field-iso",
   "lem-weil-pbc-zero-dimensional-cohomology",
   "lem-weil-pbc-zero-dimensional-sections-stalks",
-  "lemma-weil-pbc-finite-direct-image-exact"
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-etale-pullback-forget-modules"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJA (lemma-restrict-to-open), proof, closed complement and its finite degree-zero stalk product; Tag 095L (lemma-ses-j-shriek); explicit integral-coefficient Lean reduction by H2."
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof, closed complement and its finite degree-zero stalk product; Tag 095L (lemma-ses-j-shriek); F1 Lean proof using dense irreducible opens, constructible finite stalks, zero-dimensional sections and cohomology, and the finite-morphism edge map."
  },
  "mathlib_searches": [
   {
@@ -147,10 +169,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T070538-L-3471476",
-  "kind": "interface",
+  "landing": "20261012T085233-L-12192",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
