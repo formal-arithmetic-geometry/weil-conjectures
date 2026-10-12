@@ -118,3 +118,12 @@ theorem MvPolynomial.height_eq_of_isMaximal {k : Type*} [Field k] :
     have : M'.LiesOver p := ⟨rfl⟩
     rw [hM, Polynomial.height_eq_height_add_one p M', MvPolynomial.height_eq_of_isMaximal n p]
     norm_cast
+
+/-- For a field `k` and a maximal ideal `M` of `P = k[X₁, …, Xₙ]`, the localization `P_M` has
+Krull dimension `n` (Stacks `00OP`): its dimension is the height of `M`, which is `n`.
+(blueprint: `lem-weil-pbc-polynomial-ring-maximal-localization-dimension`) -/
+theorem MvPolynomial.ringKrullDim_localization_atPrime_of_isMaximal {k : Type*} [Field k]
+    (n : ℕ) (M : Ideal (MvPolynomial (Fin n) k)) [M.IsMaximal] :
+    ringKrullDim (Localization.AtPrime M) = n := by
+  rw [IsLocalization.AtPrime.ringKrullDim_eq_height M, MvPolynomial.height_eq_of_isMaximal n M]
+  rfl

@@ -44,3 +44,14 @@ theorem ringKrullDim_eq_of_isIntegral (R S : Type*) [CommRing R] [CommRing S] [A
   have := hP.2
   obtain ⟨L, hL, -, -⟩ := Ideal.exists_ltSeries_of_hasGoingUp l P
   exact hL ▸ Order.LTSeries.length_le_krullDim L
+
+/-- An integral ring map `f : A →+* B` does not raise Krull dimension, `dim B ≤ dim A`, and every
+maximal ideal of `B` lies over a maximal ideal of `A` (Stacks `00OJ`).
+(blueprint: `lem-weil-pbc-integral-extension-dimension`) -/
+theorem RingHom.IsIntegral.ringKrullDim_le_and_isMaximal_comap {A B : Type*} [CommRing A]
+    [CommRing B] {f : A →+* B} (hf : f.IsIntegral) :
+    ringKrullDim B ≤ ringKrullDim A ∧ ∀ n : Ideal B, n.IsMaximal → (n.comap f).IsMaximal := by
+  letI := f.toAlgebra
+  have : Algebra.IsIntegral A B := ⟨hf⟩
+  exact ⟨ringKrullDim_le_of_isIntegral A B,
+    fun n hn ↦ Ideal.isMaximal_comap_of_isIntegral_of_isMaximal (R := A) n⟩
