@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionTransfer
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit
-import Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyData
+import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData
 import Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality
 
 /-!
@@ -103,9 +103,10 @@ theorem exists_resolutionSection_homology_comparison
     (∀ W q x, eOY (g ⁻¹ᵁ W) q (HomologicalComplex.homologyMap
       (openResolutionSectionTransfer g I.cocomplex J.cocomplex α W) q x) =
       openCohomologyPullback g W G q (eOX W q x)) := by
-  obtain ⟨eX, eOX, eY, eOY, _⟩ :=
-    exists_resolutionSection_homology_data g G I J α hα
-  refine ⟨eX, eOX, eY, eOY, ?_⟩
-  exact resolutionSection_homology_naturality g G I J α hα eX eOX eY eOY
+  obtain ⟨cX⟩ := exists_resolutionSection_canonical_comparison G I
+  obtain ⟨cY⟩ := exists_resolutionSection_canonical_comparison
+    ((upperStar AddCommGrpCat.{u + 1} g).obj G) J
+  refine ⟨cX.globalEquiv, cX.openEquiv, cY.globalEquiv, cY.openEquiv, ?_⟩
+  exact resolutionSection_homology_naturality g G I J α hα cX cY
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-etale-resolution-section-canonical-transfer",
+ "kind": "statement",
+ "title": "EtaleResolutionSectionCanonicalTransfer",
+ "statement": "Let $g:Y\\to X$ be a scheme morphism, $G$ an abelian etale sheaf on $X$, $I$ an injective resolution of $G$, and $J$ an injective resolution of $g^{-1}G$. Suppose $\\alpha:I\\to g_*J$ is a chain map with $I.\\iota^0\\alpha^0=\\eta_{g,G}g_*(J.\\iota^0)$. Let $c_X,c_Y$ be normalized comparisons for these two resolutions [def-weil-pbc-etale-resolution-section-canonical-comparison]. Then they carry the global section transfer of $\\alpha$ to $\\operatorname{cohomologyMap}(g)$ and the open section transfer over each $W\\subseteq X$ to $\\operatorname{openCohomologyPullback}(g,W)$, with its prescribed coefficient transport [def-weil-pbc-etale-resolution-section-transfer], [def-weil-pbc-cohomology-pullback]. Only these two transfer identities are asserted; no comparisons are constructed and no restriction identities are asserted.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Tag 01F8 and Remark 01FB, functoriality via resolutions. Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Adjoint alpha to beta from the inverse image of I to J. Exactness of inverse image makes its source a resolution, and the augmentation equation says beta preserves this augmentation. The derived-category formula for extMk or homotopy independence of comparison lifts computes the inverse-image Ext class by beta applied to the pulled-back cocycle.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of this cocycle at 1 is alpha at the terminal etale object followed by terminalSectionPullback, the global section transfer. On W use the free representable and identity generator; unit naturality and inverse-image composition give the specified open coefficient transport and openSectionPullback. Apply both comparison normalizations and the surjectivity of homology pi to obtain the global and open identities.",
+   "uses": [
+    "def-weil-pbc-etale-resolution-section-canonical-comparison",
+    "def-weil-pbc-etale-resolution-section-transfer",
+    "def-weil-pbc-etale-open-object-cohomology-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-open-object-cohomology-map",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Tag 01F8 and Remark 01FB, functoriality via resolutions. Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology computed by sections of an injective resolution natural comparison Ext",
+   "results": "Actual search returned 8 hits: CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk",
+   "date": "2026-10-12",
+   "verdict": "Read matching Ext and resolution APIs; no declaration supplies the normalized scheme section comparisons or their prescribed transfer identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "results": "Actual search returned 5 hits: CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply, CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass_symm_apply, CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass_apply",
+   "date": "2026-10-12",
+   "verdict": "Read matching Ext and resolution APIs; no declaration supplies the normalized scheme section comparisons or their prescribed transfer identities."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*[Rr]esolution|[Rr]esolution.*[Ee]quiv",
+   "results": "Actual search returned 21 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean",
+   "date": "2026-10-12",
+   "verdict": "Read matching Ext and resolution APIs; no declaration supplies the normalized scheme section comparisons or their prescribed transfer identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical Ext comparison for homology of sections of an injective sheaf resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The resolution-section comparison: normalized Hom cocycles, their restriction, and their augmentation-preserving pullback transfer, below the Mayer-Vietoris comparison.",
+   "via": [
+    "lem-weil-pbc-etale-resolution-section-homology-naturality",
+    "lem-weil-pbc-etale-resolution-section-homology",
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionCanonicalTransfer.lean",
+  "declaration": "AlgebraicGeometry.Etale.resolutionSection_canonical_transfer",
+  "statement": "theorem resolutionSection_canonical_transfer {X Y : Scheme.{u}} (g : Y ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) (J : InjectiveResolution ((upperStar AddCommGrpCat.{u + 1} g).obj G)) (α : I.cocomplex ⟶ ((lowerStar AddCommGrpCat.{u + 1} g).mapHomologicalComplex (.up ℕ)).obj J.cocomplex) (hα : I.ι.f 0 ≫ α.f 0 = (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.app G ≫ (lowerStar AddCommGrpCat.{u + 1} g).map (J.ι.f 0)) (cX : ResolutionSectionCanonicalComparison G I) (cY : ResolutionSectionCanonicalComparison ((upperStar AddCommGrpCat.{u + 1} g).obj G) J) : (∀ q x, cY.globalEquiv q (HomologicalComplex.homologyMap (globalResolutionSectionTransfer g I.cocomplex J.cocomplex α) q x) = cohomologyMap g G q (cX.globalEquiv q x)) ∧ (∀ W q x, cY.openEquiv (g ⁻¹ᵁ W) q (HomologicalComplex.homologyMap (openResolutionSectionTransfer g I.cocomplex J.cocomplex α W) q x) = openCohomologyPullback g W G q (cX.openEquiv W q x))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f41c",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T194154-L-469615",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f41c",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T194154-L-469615",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, cocycle normalization, six identities, DAG records, change record and repaired second reading. All six modules compile cleanly; direct importer EtaleResolutionSectionHomology and its importer EtaleMayerVietorisSectionComparison compile. Original caller fails exactly as reported; adaptation preserves signatures and changes only necessary lines. Axioms are standard plus sorryAx from the three documented obligations. Targets unchanged."
+ }
+}

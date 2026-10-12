@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-etale-resolution-section-canonical-data",
+ "kind": "statement",
+ "title": "EtaleResolutionSectionCanonicalData",
+ "statement": "For every scheme $X$, abelian sheaf $G$ on its small etale site, and injective resolution $I$ of $G$ [def-sp-injective-resolutions], there is a normalized comparison for $I$ [def-weil-pbc-etale-resolution-section-canonical-comparison]. This assertion involves one resolution on one scheme and no morphism between schemes, no chain lift, and no naturality conclusion.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use the constant-sheaf/sections adjunction and evaluation at 1 in each resolution term. Its naturality identifies cocycles and boundaries, and the injective-resolution Ext equivalence sends the class represented by f to extMk f. This gives the normalized global comparison in every degree.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the sheafification/free/Yoneda sections equivalence at every open W in each term; it commutes with differentials. The same Ext computation gives the section homology to free-representable Ext comparison. Compose with the independently constructed bijective open-object cohomology map; its values on cocycles are the required normalized values.",
+   "uses": [
+    "def-weil-pbc-etale-open-comparison-data",
+    "lem-weil-pbc-etale-open-object-cohomology-map-bijective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-open-comparison-data",
+  "lem-weil-pbc-etale-open-object-cohomology-map-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology computed by sections of an injective resolution natural comparison Ext",
+   "results": "Actual search returned 8 hits: CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk",
+   "date": "2026-10-12",
+   "verdict": "Read matching Ext and resolution APIs; no declaration supplies the normalized scheme section comparisons or their prescribed transfer identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass",
+   "results": "Actual search returned 5 hits: CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.InjectiveResolution.extAddEquivCohomologyClass_symm_apply, CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass_symm_apply, CategoryTheory.InjectiveResolution.extLinearEquivCohomologyClass_apply",
+   "date": "2026-10-12",
+   "verdict": "Read matching Ext and resolution APIs; no declaration supplies the normalized scheme section comparisons or their prescribed transfer identities."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*[Rr]esolution|[Rr]esolution.*[Ee]quiv",
+   "results": "Actual search returned 21 hits: Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/FiniteCyclic.lean",
+   "date": "2026-10-12",
+   "verdict": "Read matching Ext and resolution APIs; no declaration supplies the normalized scheme section comparisons or their prescribed transfer identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical Ext comparison for homology of sections of an injective sheaf resolution",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality",
+  "date": "2026-10-13",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The resolution-section comparison: normalized Hom cocycles, their restriction, and their augmentation-preserving pullback transfer, below the Mayer-Vietoris comparison.",
+   "via": [
+    "lem-weil-pbc-etale-resolution-section-homology-naturality",
+    "lem-weil-pbc-etale-resolution-section-homology",
+    "lem-weil-pbc-etale-mayer-vietoris-section-comparison",
+    "lem-weil-pbc-etale-mayer-vietoris-section-diagram",
+    "lem-weil-pbc-etale-mayer-vietoris-connecting-pullback",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalData",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleResolutionSectionCanonicalData.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_resolutionSection_canonical_comparison",
+  "statement": "theorem exists_resolutionSection_canonical_comparison {X : Scheme.{u}} (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G) : Nonempty (ResolutionSectionCanonicalComparison G I)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f41c",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T194154-L-469615",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f41c",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T194154-L-469615",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures, cocycle normalization, six identities, DAG records, change record and repaired second reading. All six modules compile cleanly; direct importer EtaleResolutionSectionHomology and its importer EtaleMayerVietorisSectionComparison compile. Original caller fails exactly as reported; adaptation preserves signatures and changes only necessary lines. Axioms are standard plus sorryAx from the three documented obligations. Targets unchanged."
+ }
+}
