@@ -26,78 +26,27 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the target sheaf $\\mathcal H$ and the comparison map $\\psi:i_p\\mathcal G\\to\\mathcal H$).* On $Z$ let $\\mathcal H(U)=\\mathrm{LC}(U\\cap Z',S)$ for $U\\subseteq Z$ open, with restriction of maps; so $\\mathcal H(Z)=\\mathrm{LC}(Z\\cap Z',S)$. $\\mathcal H$ is a sheaf of sets: maps on the members of an open covering of $U\\cap Z'$ that agree on overlaps glue to a unique map, and it is locally constant because local constancy is a local condition. For $U\\subseteq Z$ open and $V\\subseteq X$ open with $V\\supseteq U$ put $\\psi^U_V:\\mathcal G(V)\\to\\mathcal H(U)$, $g\\mapsto g|_{U\\cap Z'}$ (defined since $U\\cap Z'\\subseteq V\\cap Z'$; a restriction of a locally constant map is locally constant). For $V'\\subseteq V$ both containing $U$, $\\psi^U_{V'}(g|_{V'\\cap Z'})=\\psi^U_V(g)$, so the $\\psi^U_V$ form a cocone on the diagram defining $i_p\\mathcal G(U)=\\varinjlim_{V\\supseteq U}\\mathcal G(V)$ [def-weil-pbc-topological-inverse-image] (2), and there is a unique map $\\psi_U:i_p\\mathcal G(U)\\to\\mathcal H(U)$ with $\\psi_U\\circ\\iota^U_V=\\psi^U_V$ [def-weil-pbc-category-colimit]. For $U'\\subseteq U$ open in $Z$ the two maps $\\rho^{\\mathcal H}_{U'U}\\circ\\psi_U$ and $\\psi_{U'}\\circ\\rho^{i_p\\mathcal G}_{U'U}$ agree on every $\\iota^U_V(g)$ (both give $g|_{U'\\cap Z'}$, since the restriction of $i_p\\mathcal G$ sends $\\iota^U_V$ to $\\iota^{U'}_V$), and every element of $i_p\\mathcal G(U)$ is such an $\\iota^U_V(g)$ (the index set is directed) [lem-weil-pbc-filtered-colimit-sets-elementwise] (1); so $\\psi:i_p\\mathcal G\\to\\mathcal H$ is a morphism of presheaves of sets on $Z$.",
+   "text": "Apply the existing inverse-image closed-pushforward theorem to the inclusion i:Z→X and the closed subset Z' of X. It supplies the sheaves of locally constant functions G and Q, a comparison b from the sheaf pullback to Q, bijective on every open, and its prescribed unit compatibility. The named section presheaf is definitionally the inline presheaf of the statement.",
    "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+    "lem-weil-pbc-inverse-image-closed-pushforward-constant",
+    "def-weil-pbc-closed-pushforward-constant-presheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), lines 15145-15151, stated without proof; the comparison on stalks follows the proof of Sheaves, Lemma 00AE (sheaves.tex, lemma-stalks-closed-pushforward, line 4936); written by an agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (definition of $\\beta$ and the compatibility).* Since $\\mathcal H$ is a sheaf, the universal property of the sheafification $\\theta:i_p\\mathcal G\\to\\mathcal G|_Z$ [def-weil-pbc-sheafification] gives a unique morphism of sheaves $\\varphi:\\mathcal G|_Z\\to\\mathcal H$ with $\\varphi\\circ\\theta=\\psi$. Put $\\beta=\\varphi_Z:\\Gamma(Z,\\mathcal G|_Z)\\to\\mathcal H(Z)=\\mathrm{LC}(Z\\cap Z',S)$. For $V\\subseteq X$ open and $g\\in\\mathcal G(V)$ write $\\eta_V(g)=\\theta_{V\\cap Z}(\\iota^{V\\cap Z}_V(g))\\in(\\mathcal G|_Z)(V\\cap Z)$, the unit of $i^{-1}\\dashv i_*$ [def-weil-pbc-topological-inverse-image] (3), a morphism of presheaves $\\mathcal G\\to i_*(\\mathcal G|_Z)$, so $\\eta_V(g)|_{V'\\cap Z}=\\eta_{V'}(g|_{V'\\cap Z'})$ for $V'\\subseteq V$. Then $(*)$ $\\varphi_{V\\cap Z}(\\eta_V(g))=\\psi_{V\\cap Z}(\\iota^{V\\cap Z}_V(g))=g|_{V\\cap Z\\cap Z'}$. For $V=X$ this is the asserted compatibility $\\beta(\\theta_Z(\\iota^Z_X(g)))=g|_{Z\\cap Z'}$ for $g\\in\\Gamma(X,\\mathcal G)=\\mathrm{LC}(Z',S)$. It remains to show that $\\beta$ is bijective (Steps 3-5).",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-topological-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), lines 15145-15151, stated without proof; the comparison on stalks follows the proof of Sheaves, Lemma 00AE (sheaves.tex, lemma-stalks-closed-pushforward, line 4936); written by an agent"
-   }
-  },
-  {
-   "text": "*Step 3 ($\\varphi$ is injective on stalks).* Stalks and germs are colimits of sets over open neighbourhoods, as in [lem-weil-pbc-sets-inverse-image-stalk]; since $\\varphi$ commutes with restrictions it induces $\\varphi_z:(\\mathcal G|_Z)_z\\to\\mathcal H_z$, $t_z\\mapsto(\\varphi_U(t))_z$, for $z\\in Z$. By [lem-weil-pbc-sets-inverse-image-stalk] for $f=i$ and $x=y=z$, the map $c:\\mathcal G_z\\to(\\mathcal G|_Z)_z$ is bijective with $c(g_z)=(\\eta_V(g))_z$, so every element of $(\\mathcal G|_Z)_z$ is $(\\eta_V(g))_z$ for an open $V\\ni z$ of $X$ and $g\\in\\mathcal G(V)$ (every element of $\\mathcal G_z$ is a germ [lem-weil-pbc-filtered-colimit-sets-elementwise] (1)). Let $(\\eta_V(g))_z$, $(\\eta_{V'}(g'))_z$ have the same image under $\\varphi_z$. By $(*)$, $(g|_{V\\cap Z\\cap Z'})_z=(g'|_{V'\\cap Z\\cap Z'})_z$ in $\\mathcal H_z$, so by [lem-weil-pbc-filtered-colimit-sets-elementwise] (2) (open neighbourhoods of $z$ in $Z$ are the $W\\cap Z$, $W\\subseteq X$ open) there is an open $W\\ni z$ of $X$, $W\\subseteq V\\cap V'$, with $g=g'$ on $W\\cap Z\\cap Z'$. We find an open $W'\\ni z$, $W'\\subseteq V\\cap V'$, with $g|_{W'\\cap Z'}=g'|_{W'\\cap Z'}$: if $z\\notin Z'$ take $W'=(V\\cap V')\\setminus Z'$ (open, $Z'$ closed), where both restrictions are the empty map; if $z\\in Z'$ then $z\\in W\\cap Z\\cap Z'$, so $g(z)=g'(z)$, and as $g,g'$ are locally constant on $V\\cap Z'$, $V'\\cap Z'$ there is an open $W'\\ni z$ of $X$, $W'\\subseteq V\\cap V'$, on whose trace $W'\\cap Z'$ both are constant, hence both equal to $g(z)$. Then $\\eta_V(g)|_{W'\\cap Z}=\\eta_{W'}(g|_{W'\\cap Z'})=\\eta_{W'}(g'|_{W'\\cap Z'})=\\eta_{V'}(g')|_{W'\\cap Z}$ (Step 2), so $(\\eta_V(g))_z=(\\eta_{V'}(g'))_z$. Hence $\\varphi_z$ is injective. (This is the stalk computation of Sheaves 00AE: $\\mathcal G_z=\\{*\\}$ for $z\\notin Z'$ and $\\mathcal G_z\\cong S$ for $z\\in Z'$.)",
-   "uses": [
-    "lem-weil-pbc-sets-inverse-image-stalk",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), lines 15145-15151, stated without proof; the comparison on stalks follows the proof of Sheaves, Lemma 00AE (sheaves.tex, lemma-stalks-closed-pushforward, line 4936); written by an agent"
-   }
-  },
-  {
-   "text": "*Step 4 ($\\varphi$ is injective on sections; $\\beta$ is injective).* Let $U\\subseteq Z$ be open and $t,t'\\in(\\mathcal G|_Z)(U)$ with $\\varphi_U(t)=\\varphi_U(t')$. For every $z\\in U$, $\\varphi_z(t_z)=(\\varphi_U(t))_z=(\\varphi_U(t'))_z=\\varphi_z(t'_z)$, so $t_z=t'_z$ by Step 3. As $\\mathcal G|_Z$ is a sheaf [def-weil-pbc-sheafification], $t=t'$ [lem-weil-pbc-sheaf-sections-determined-by-germs]. For $U=Z$: $\\beta=\\varphi_Z$ is injective.",
-   "uses": [
-    "lem-weil-pbc-sheaf-sections-determined-by-germs",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), lines 15145-15151, stated without proof; the comparison on stalks follows the proof of Sheaves, Lemma 00AE (sheaves.tex, lemma-stalks-closed-pushforward, line 4936); written by an agent"
-   }
-  },
-  {
-   "text": "*Step 5 ($\\beta$ is surjective).* Let $h\\in\\mathrm{LC}(Z\\cap Z',S)$. For each $z\\in Z$ choose an open $W_z\\ni z$ of $X$ and $g^z\\in\\mathcal G(W_z)=\\mathrm{LC}(W_z\\cap Z',S)$ with $g^z|_{W_z\\cap Z\\cap Z'}=h|_{W_z\\cap Z\\cap Z'}$: if $z\\notin Z'$, take $W_z=X\\setminus Z'$ and $g^z$ the empty map (both sides are maps on $\\emptyset$); if $z\\in Z'$, $h$ is constant, say equal to $s$, on a neighbourhood of $z$ in $Z\\cap Z'$, which contains one of the form $W_z\\cap Z\\cap Z'$ with $W_z\\ni z$ open in $X$; take $g^z$ the constant map $s$ on $W_z\\cap Z'$. Put $U_z=W_z\\cap Z$ and $t^z=\\eta_{W_z}(g^z)\\in(\\mathcal G|_Z)(U_z)$; by $(*)$ of Step 2, $\\varphi_{U_z}(t^z)=h|_{U_z\\cap Z'}$. The $U_z$ cover $Z$. On $U_z\\cap U_{z'}$, $\\varphi(t^z|)=h|=\\varphi(t^{z'}|)$ ($\\varphi$ commutes with restrictions), so $t^z|_{U_z\\cap U_{z'}}=t^{z'}|_{U_z\\cap U_{z'}}$ by Step 4. Since $\\mathcal G|_Z$ is a sheaf [def-weil-pbc-sheafification], the $t^z$ glue to $t\\in\\Gamma(Z,\\mathcal G|_Z)$ with $t|_{U_z}=t^z$. Then $\\beta(t)|_{U_z\\cap Z'}=\\varphi_{U_z}(t^z)=h|_{U_z\\cap Z'}$ for all $z$, and the $U_z\\cap Z'$ cover $Z\\cap Z'$, so $\\beta(t)=h$. With Step 4, $\\beta$ is bijective, and Step 2 gives the compatibility; for $Z'=X$ this is $\\Gamma(Z,\\underline S_X|_Z)\\cong\\mathrm{LC}(Z,S)$ compatibly with restriction.",
-   "uses": [
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 59.82.1 (Tag 09ZG), lines 15145-15151, stated without proof; the comparison on stalks follows the proof of Sheaves, Lemma 00AE (sheaves.tex, lemma-stalks-closed-pushforward, line 4936); written by an agent"
-   }
+   "text": "Use Mathlib TopCat.Sheaf.pullbackIso to identify the sheaf pullback with the explicit sheafification of the presheaf pullback. Adjunction.unit_leftAdjointUniq_hom_app identifies the corresponding units. On the top open, compose the inverse comparison component, b, and the explicit locally constant comap equivalence between the nested subtype on Z and the intersection subtype on X. Cancel the comparison isomorphism, reduce the identity P.map, and apply the two unit formulas to establish the displayed compatibility pointwise.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-topological-inverse-image",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sets-inverse-image-stalk",
-  "lem-weil-pbc-sheaf-sections-determined-by-germs"
+  "lem-weil-pbc-inverse-image-closed-pushforward-constant",
+  "def-weil-pbc-closed-pushforward-constant-presheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Etale Cohomology, proof of Lemma 59.82.1 (Tag 09ZG), lines 15145-15151: the identification Γ(X,(Z_i→X)_*S_i|_Z)=Γ(Z∩Z_i,S_i) is stated without proof; the proof, by a comparison map to the sheaf U ↦ LC(U∩Z',S) on Z checked on stalks, follows the pattern of Sheaves, Lemma 00AE (sheaves.tex, lemma-stalks-closed-pushforward, line 4936) and is written by an agent"
+  "place": "09ZG displayed identification, reduced to existing closed-pushforward inverse-image theorem (00AE, 007T) and Mathlib pullbackIso/unit uniqueness; explicit top-section subtype transport"
  },
  "mathlib_searches": [
   {
@@ -201,5 +150,15 @@
   "group": "C1",
   "result": "pass",
   "note": "X:TopCat, Z,Z' closed (both kept), S:Type u; G = explicit V|->LC(V∩Z',S) with comap restriction; i_p = Presheaf.pullback (Opens.map i).op.lan (CostructuredArrow colimit = V ⊇ i(U)); theta = sheafificationAdjunction unit (CategoryTheory.presheafToSheaf, #check'd); iota^Z_X = lanAdjunction unit at ⊤ then P.map ⊤≤i⁻¹⊤ (same encoding as landed topologicalPullbackSectionMap); beta : Equiv to LC(Z∩Z',S) chosen before ∀g; RHS comap = g|Z∩Z'; Z'=X is the Set.univ specialization; no Inhabited/finite added"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T053945-L-2641588",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
