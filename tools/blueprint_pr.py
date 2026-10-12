@@ -147,6 +147,30 @@ def write(path, text):
         path.write_text(text)
 
 
+def rendered(text, ns):
+    # Mathlib leaves remain citations, never blueprint objects.
+    def replace(match):
+        ident = match.group(1)
+        node = ns.get(ident, {})
+        if node.get('status') != 'mathlib' or (node.get('blueprint') or {}).get('is'):
+            return match.group(0)
+        found = node.get('mathlib_match') or {}
+        if isinstance(found, list):
+            found = found[0] if found else {}
+        if not isinstance(found, dict):
+            found = {}
+        decl = found.get('declaration') or ident
+        file = found.get('file', '')
+        if file.startswith('Mathlib/'):
+            return '[' + str(decl) + '](https://leanprover-community.github.io/mathlib4_docs/' + file.removesuffix('.lean') + '.html#' + str(decl) + ')'
+        return '`' + str(decl) + '` (Mathlib)'
+    return re.sub(r'\[([A-Za-z0-9_.-]+)\](?!\()', replace, text)
+
+
+def dependencies(values, ns):
+    return sorted({ident for ident in values if not (ident in ns and ns[ident].get('status') == 'mathlib' and not (ns[ident].get('blueprint') or {}).get('is'))})
+
+
 def node_text(node, ns):
     meta = {'id': node['id'], 'kind': 'definition' if node['kind'] == 'definition' else 'lemma'}
     if node.get('title'):
@@ -164,7 +188,7 @@ def node_text(node, ns):
     source = node.get('source') or {}
     if source:
         meta['source'] = (str(source.get('document', '')) + ', ' + str(source.get('place', ''))).strip(', ')
-    return fields(meta) + node.get('statement', '').strip() + '\n'
+    return fields(meta) + rendered(node.get('statement', '').strip(), ns) + '\n'
 
 
 def cut(args):
@@ -179,6 +203,9 @@ def cut(args):
             if not path.exists():
                 write(path, text)
         selected = [r for r in classify(ns, bp) if r['chapter'] == args.chapter and (not args.sketch or r['sketch'] == args.sketch)]
+        if getattr(args, 'ids', None):
+            chosen = set(json.loads(pathlib.Path(args.ids).read_text()))
+            selected = [r for r in selected if r['id'] in chosen]
         ask = []
         for row in selected:
             ident, mode = row['id'], row['change']
@@ -190,7 +217,14 @@ def cut(args):
             node = ns[ident]
             if mode == 'new':
                 ancestor = (node.get('blueprint') or {}).get('from') or {}
-                target = ancestor.get('node')
+                target = ancestor.get('node') if isinstance(ancestor, dict) else ancestor
+                seen = set()
+                while target in ns and target not in bp and target not in seen:
+                    seen.add(target)
+                    a = (ns[target].get('blueprint') or {}).get('from') or {}
+                    target = a.get('node') if isinstance(a, dict) else a
+                if target not in bp and node.get('unit') in bp:
+                    target = node['unit']
                 if target not in bp:
                     ask.append({'id': ident, 'proposal': 'placement', 'reason': 'No existing blueprint ancestor', 'statement': node['statement']})
                     continue
@@ -205,20 +239,20 @@ def cut(args):
                 dest = parent / (ident + '.md')
                 write(out / dest, node_text(node, ns))
                 if node.get('proof'):
-                    uses = sorted(set(node.get('proof_deps') or []))
+                    uses = dependencies(node.get('proof_deps') or [], ns)
                     meta = {'kind': 'proof', 'of': ident}
                     if uses: meta['uses'] = uses
-                    write(out / dest.with_name(ident + '.proof.md'), fields(meta) + proof_body(node) + '\n')
+                    write(out / dest.with_name(ident + '.proof.md'), fields(meta) + rendered(proof_body(node), ns) + '\n')
             else:
                 path, front, body = bp[ident]
                 if mode == 'statement':
                     write(out / path, fields(front) + node['statement'].strip() + '\n')
                 if node.get('proof'):
                     proof_path = bp.get(ident + '.proof', (path.with_name(ident + '.proof.md'),))[0]
-                    uses = sorted(set(node.get('proof_deps') or []))
+                    uses = dependencies(node.get('proof_deps') or [], ns)
                     meta = {'kind': 'proof', 'of': ident}
                     if uses: meta['uses'] = uses
-                    write(out / proof_path, fields(meta) + proof_body(node) + '\n')
+                    write(out / proof_path, fields(meta) + rendered(proof_body(node), ns) + '\n')
         manifest = {'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
         write(out / '.blueprint-cut.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     changed = [str(p.relative_to(out)) for p in (out / 'blueprint').rglob('*.md') if baseline.get(str(p.relative_to(out))) != p.read_text()]
@@ -341,7 +375,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
     cmd = commands.add_parser('diff'); cmd.add_argument('--blueprint', required=True); cmd.add_argument('--json', action='store_true'); cmd.set_defaults(fn=diff)
-    cmd = commands.add_parser('cut'); cmd.add_argument('chapter'); cmd.add_argument('--sketch'); cmd.add_argument('--blueprint', required=True); cmd.add_argument('--out', required=True); cmd.set_defaults(fn=cut)
+    cmd = commands.add_parser('cut'); cmd.add_argument('chapter'); cmd.add_argument('--sketch'); cmd.add_argument('--ids', help='JSON list of ids for a dependency-ordered part'); cmd.add_argument('--blueprint', required=True); cmd.add_argument('--out', required=True); cmd.set_defaults(fn=cut)
     cmd = commands.add_parser('check'); cmd.add_argument('dir'); cmd.set_defaults(fn=check)
     args = parser.parse_args()
     try:
