@@ -11,8 +11,9 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ExactSequence
-import Sheaf.RingTheory.DepthInSES
 import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.CohenMacaulayFreeResolutionConstruction
+import Sheaf.RingTheory.CohenMacaulayFreeResolutionMCM
 
 /-!
 # Finite free resolutions ending in maximal Cohen–Macaulay modules
@@ -69,6 +70,19 @@ theorem exists_finite_free_resolution_to_maximalCohenMacaulay
          ∃ hK : Module.Finite R K,
            letI := hK
            Subsingleton K ∨ depth (R := R) K = (d : ℕ∞)) := by
-  sorry
+  have hbound : (depth (R := R) M : WithBot ℕ∞) ≤ (d : WithBot ℕ∞) := by
+    calc
+      (depth (R := R) M : WithBot ℕ∞) ≤ Module.supportDim R M := depth_le_supportDim M
+      _ ≤ ringKrullDim R := Module.supportDim_le_ringKrullDim R M
+      _ = (d : WithBot ℕ∞) := hdim
+  have hle : depth (R := R) M ≤ (d : ℕ∞) := WithBot.coe_le_coe.mp hbound
+  have hfinite : depth (R := R) M ≠ ⊤ := ne_top_of_le_ne_top (ENat.natCast_ne_top d) hle
+  obtain ⟨e, he⟩ := ENat.ne_top_iff_exists.mp hfinite
+  have hed : e ≤ d := ENat.natCast_le_natCast.mp (he ▸ hle)
+  obtain ⟨S, hS, h0, hlast, hM, hfree⟩ :=
+    exists_finite_free_resolution_data (R := R) M (d - e)
+  refine ⟨e, he.symm, hed, S, hS, h0, hlast, hM, hfree, ?_⟩
+  exact first_term_is_maximalCohenMacaulay M d e hdim hcm he.symm hed
+    S hS h0 hlast hM hfree
 
 end IsLocalRing

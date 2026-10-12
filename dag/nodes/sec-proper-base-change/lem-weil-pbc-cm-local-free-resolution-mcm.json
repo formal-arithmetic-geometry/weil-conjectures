@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-cm-local-free-resolution-mcm",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cm-local-free-resolution-to-mcm",
+   "place": "stage-3 decomposition",
+   "via": [
+    "lem-weil-pbc-cm-local-free-resolution-to-mcm"
+   ]
+  }
+ },
+ "kind": "statement",
+ "title": "Maximal Cohen–Macaulay property of the first term",
+ "statement": "Let R be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring] of finite Krull dimension d [def-weil-pbc-krull-dimension-ring], with depth(R) ≥ d [def-weil-pbc-depth]. Let M be a nonzero finite R-module [def-weil-finitely-generated-module] of depth e, where e ≤ d. For any exact sequence [def-weil-pbc-exact-sequence] 0 → K → F_{d-e-1} → ⋯ → F_0 → M → 0 with each F_i finite free [def-weil-pbc-free-module], K is finite and either zero or has depth d. For e=d, exactness identifies K with M, so the conclusion follows from depth(M)=d. The universe-lifted sequence may identify its penultimate object with M by a linear equivalence.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-depth",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-pbc-free-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tags 00NG and 00NE, whose proof refers to 00LX, part (3), and 00LK for the upper bound; https://stacks.math.columbia.edu/tag/00NG"
+ },
+ "proof": [
+  {
+   "text": "Read the sequence from M to K as short exact sequences 0 → N_{j+1} → F_j → N_j → 0, with N_0 isomorphic to M. Each N_{j+1} is finite by the Noetherian submodule theorem.",
+   "uses": [
+    "def-weil-pbc-exact-sequence",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every nonzero finite free term has depth at least d: every R-regular sequence acts componentwise regularly on R^n for n≥1. A finite basis transports this fact to F_j. Taking suprema of lengths gives depth(F_j) ≥ depth(R) ≥ d.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on j to obtain depth(N_j) ≥ min(d,e+j) whenever N_j is nonzero. For nonzero terms use part (3) of the depth lemma. If N_j=0, N_{j+1} is isomorphic to F_j and the free-module bound applies; if F_j=0 its kernel is zero. A zero next kernel needs no depth estimate, and the induction continues with the zero-quotient case. Depth is preserved by the linear isomorphisms since regular sequences are preserved.",
+   "uses": [
+    "lem-weil-pbc-depth-in-ses",
+    "def-weil-pbc-depth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At j=d-e, e≤d makes the lower bound d. For nonzero K, depth(K) ≤ dim Supp(K) ≤ dim R=d supplies the opposite inequality. If K is zero use the subsingleton alternative. When e=d the endpoint exactness gives K ≅ M directly.",
+   "uses": [
+    "lem-weil-pbc-depth-le-support-dimension",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-depth",
+  "lem-weil-pbc-depth-in-ses",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tags 00NG and 00NE, whose proof refers to 00LX, part (3), and 00LK for the upper bound; https://stacks.math.columbia.edu/tag/00NG; finite truncation/depth induction written out by E1 second reader"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "depth|IsRegular.*[Pp]i|IsRegular.*[Ee]quiv",
+   "results": "Mathlib/RingTheory/Regular/LinearMap.lean, Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; related results do not supply this finite-sequence statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Free, RingTheory.Sequence.IsRegular",
+   "results": "No results",
+   "date": "2026-10-13",
+   "verdict": "No exact match; related results do not supply this finite-sequence statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The depth of the nth kernel in an exact sequence of finite free modules over a Cohen Macaulay local ring is at least the minimum of the ring dimension and the module depth plus n",
+   "results": "Module.supportDim_add_length_eq_supportDim_of_isRegular, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.length_eq_add_of_exact, Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal, Module.supportDim_le_supportDim_quotSMulTop_succ, ringKrullDim_le_ringKrullDim_add_spanFinrank, Module.supportDim_quotSMulTop_succ_eq_supportDim, ringKrullDim_le_ringKrullDim_add_card",
+   "date": "2026-10-13",
+   "verdict": "No exact match; related results do not supply this finite-sequence statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A syzygy of order dimension minus depth over a Cohen Macaulay Noetherian local ring is either zero or has depth equal to dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CohenMacaulayFreeResolution",
+  "date": "2026-10-13",
+  "group": "E1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CohenMacaulayFreeResolutionMCM",
+  "file": "lean/Sheaf/RingTheory/CohenMacaulayFreeResolutionMCM.lean",
+  "declaration": "IsLocalRing.first_term_is_maximalCohenMacaulay",
+  "statement": "theorem first_term_is_maximalCohenMacaulay\n    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]\n    (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]\n    (d e : ℕ) (hdim : ringKrullDim R = (d : WithBot ℕ∞))\n    (hcm : (d : ℕ∞) ≤ depth (R := R) R)\n    (he : depth (R := R) M = (e : ℕ∞)) (hed : e ≤ d)\n    (S : ComposableArrows (ModuleCat.{max u v} R) (d - e + 3))\n    (hS : S.Exact) (hzero0 : IsZero (S.obj' 0))\n    (hzero1 : IsZero (S.obj' (d - e + 3)))\n    (hM : Nonempty ((S.obj' (d - e + 2)) ≃ₗ[R] M))\n    (hfree : ∀ i : Fin (d - e),\n      Module.Free R (S.obj' (i.val + 2) (by omega)) ∧\n      Module.Finite R (S.obj' (i.val + 2) (by omega))) :\n    (let K := S.obj' 1\n     ∃ hK : Module.Finite R K,\n       letI := hK\n       Subsingleton K ∨ depth (R := R) K = (d : ℕ∞))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T194107-L-453882",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T194107-L-453882",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
