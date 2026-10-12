@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-first-quadrant-column-augmentation",
+ "kind": "statement",
+ "title": "A first-quadrant resolution-column augmentation induces a total quasi-isomorphism",
+ "statement": "Let C be an abelian category [def-sp-abelian], K a first-quadrant double complex [def-sp-double-complex-total], A a nonnegative cochain complex, and a:A→K.X 0 a chain map satisfying a≫K.d 0 1=0. Let b:A→Tot(K) be a chain map whose degree-n component is a.f n followed by the (0,n) total inclusion. Assume for every n that the map from A.X n concentrated in resolution degree zero to the resolution column K.flip.X n, with degree-zero component a.f n, is a quasi-isomorphism (meaning an isomorphism on every homology object). Then b is a quasi-isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, variant involving the second variable"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Form the augmented bicomplex whose resolution columns are the mapping cones of the specified column augmentations, with resolution degree shifted by one. Its total identifies, up to the usual shift and total signs, with the cone of b because hb specifies all augmentation components. Extend by zero and transpose to use the resolution direction as inner homology. Every such column is acyclic by the column quasi-isomorphism hypothesis.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the first-quadrant spectral sequence [thm-sp-double-complex-spectral-sequences]. All column homology objects vanish, so its second page and subsequent pages vanish. Each total degree has a finite diagonal filtration; the associated graded pieces of cone homology are all zero, and induction on the filtration makes cone homology zero. Thus b is a quasi-isomorphism. This is also a finite diagonal chase: exactness removes components successively in increasing Cech degree, while the resolution degree decreases until the bound is reached.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, variant involving the second variable"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant double complex map which is a quasi-isomorphism on each column induces a quasi-isomorphism on total complexes",
+   "results": "{\"t\": \"2026-10-12T10:15:39Z\", \"tool\": \"leanfinder\", \"query\": \"A first quadrant double complex map which is a quasi-isomorphism on each column induces a quasi-isomorphism on total complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"quasiIsoAt_iff'\", \"quasiIsoAt_of_comp_right\", \"QuasiIsoAt\", \"quasiIsoAt_of_comp_left\", \"QuasiIso.quasiIsoAt\", \"quasiIso_iff\", \"HomologicalComplex.HomologySequence.quasiIso_\\u03c4\\u2083\"], \"digest\": \"31bd06bc8bd981d1\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso",
+   "results": "{\"t\": \"2026-10-12T10:15:40Z\", \"tool\": \"loogle\", \"query\": \"QuasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"QuasiIso\", \"HomotopyEquiv.quasiIso_hom\", \"HomotopyEquiv.quasiIso_inv\", \"QuasiIso.quasiIsoAt\", \"quasiIso_iff\", \"quasiIso_of_isIso\", \"QuasiIso.mk\", \"HomologicalComplex.mem_quasiIso_iff\"], \"digest\": \"66e3f9d01c2aba24\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*total|total.*quasiIso|column.*augmentation",
+   "results": "{\"t\": \"2026-10-12T10:30:55Z\", \"tool\": \"grep\", \"query\": \"quasiIso.*total|total.*quasiIso|column.*augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An augmentation from a complex to a first quadrant bicomplex total complex is a quasi-isomorphism if all augmented columns are exact",
+   "results": "{\"t\": \"2026-10-12T10:33:52Z\", \"tool\": \"leansearch\", \"query\": \"An augmentation from a complex to a first quadrant bicomplex total complex is a quasi-isomorphism if all augmented columns are exact\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of section complexes of an injective resolution on acyclic open subsets are quasi-isomorphic to sections in degree zero",
+   "results": "{\"t\": \"2026-10-12T10:33:52Z\", \"tool\": \"leanfinder\", \"query\": \"Products of section complexes of an injective resolution on acyclic open subsets are quasi-isomorphic to sections in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.instQuasiIsoInt\\u03b9'\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.IsKInjective\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.InjectiveResolution.hasHomology\"], \"digest\": \"91d6333cbe5db4fc\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*quasi|quasi.*cech|rightDerived.*prod|prod.*rightDerived",
+   "results": "{\"t\": \"2026-10-12T10:33:52Z\", \"tool\": \"grep\", \"query\": \"cech.*quasi|quasi.*cech|rightDerived.*prod|prod.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 1: canonical affine-cover Cech identification, affine acyclicity of the beta augmentation",
+   "via": [
+    "lem-sc-module-cech-beta-affine-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FirstQuadrantAugmentation",
+  "file": "lean/Sheaf/Algebra/Homology/FirstQuadrantAugmentation.lean",
+  "declaration": "HomologicalComplex₂.quasiIso_of_column_augmentation",
+  "statement": "theorem quasiIso_of_column_augmentation {C : Type u} [Category.{v} C] [Abelian C] (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)) (A : CochainComplex C ℕ) (a : A ⟶ K.X 0) (ha : a ≫ K.d 0 1 = 0) (b : A ⟶ K.total (ComplexShape.up ℕ)) (hb : ∀ n : ℕ, b.f n = a.f n ≫ K.ιTotal (ComplexShape.up ℕ) 0 n n (by simp)) (hcol : ∀ n : ℕ, QuasiIso ((CochainComplex.fromSingle₀Equiv (K.flip.X n) (A.X n)).symm ⟨a.f n, by simpa using congrArg (fun f ↦ f.f n) ha⟩)) : QuasiIso b",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T112844-L-769483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T112844-L-769483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

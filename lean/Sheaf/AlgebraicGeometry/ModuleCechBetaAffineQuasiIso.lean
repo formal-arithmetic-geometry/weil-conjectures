@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.Topology.RestrictInjectiveResolution
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.AlgebraicGeometry.ModuleCechResolutionColumns
+import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # Affine acyclicity makes the beta augmentation a quasi-isomorphism
 
@@ -49,6 +49,24 @@ theorem moduleCechBeta_quasiIso_of_affine {X : Scheme.{u}} {ι : Type u}
     (hU : ∀ (n : ℕ) (y : Fin (n + 1) → ι), IsAffineOpen (⨅ l, U (y l)))
     (F : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) F]
     (I : InjectiveResolution F) : QuasiIso (moduleCechBeta U I) := by
-  sorry
+  let A := (CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat
+  let a : A ⟶ (moduleCechDouble U I).X 0 :=
+    (CategoryTheory.cechComplexFunctor U).map
+      ((PresheafOfModules.forgetToPresheafModuleCat (Opposite.op ⊤) isTerminalTop.op).map
+        (I.ι.f 0).val)
+  have ha : a ≫ (moduleCechDouble U I).d 0 1 = 0 := by
+    let G := SheafOfModules.forget X.ringCatSheaf ⋙
+      PresheafOfModules.forgetToPresheafModuleCat (Opposite.op ⊤) isTerminalTop.op ⋙
+        CategoryTheory.cechComplexFunctor U
+    change G.map (I.ι.f 0) ≫ G.map (I.cocomplex.d 0 1) = 0
+    rw [← G.map_comp, I.ι_f_zero_comp_complex_d, G.map_zero]
+  have hcol := moduleCech_resolution_columns U F I (by
+    intro n y p hp
+    exact subsingleton_openModuleCohomology_of_isAffineOpen X F _ (hU n y) p hp) ha
+  apply HomologicalComplex₂.quasiIso_of_column_augmentation
+    (moduleCechDouble U I) A a ha (moduleCechBeta U I)
+  · intro n
+    rfl
+  · exact hcol
 
 end AlgebraicGeometry.Scheme.Modules

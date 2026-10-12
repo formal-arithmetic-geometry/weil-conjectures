@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-module-cech-resolution-columns",
+ "kind": "statement",
+ "title": "Acyclic intersection section complexes give Cech resolution columns",
+ "statement": "Let X be a scheme [def-pc-scheme], F an O_X-module [def-weil-sheaf-of-modules-category], U a family of opens, and I an injective resolution of F [def-sp-injective-resolutions]. Suppose every positive open module cohomology group [def-sc-open-module-cohomology] of F on every finite intersection is zero. The augmentation in [def-sc-module-cech-comparison], evaluated in each Cech degree n, induces a quasi-isomorphism from the complex concentrated at zero at Cech n-cochains of F to the resolution-direction column (moduleCechDouble U I).flip.X n. The morphism in degree zero is precisely the Cech n-component of the image of I.ι.f 0; in higher degrees it is zero.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01ET",
+  "place": "Intersection cohomology vanishing hypothesis, expanded using evaluation of injective resolutions as in Tag 01DZ and the beta construction of Tag 01EQ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sc-open-module-cohomology",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation of the supplied injective resolution computes open module cohomology. Equivalently, restrict it by [lem-sc-ringed-space-restrict-injective-resolution] and evaluate sections. Positive cohomology is zero by the hypothesis, while left exactness identifies the degree-zero kernel with sections of F. Restriction of scalars does not change exactness.",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed Cech degree n take products over all tuples. Kernels are coordinatewise and products of surjections are surjective by choosing coordinate preimages. The product augmentation is exactly the displayed Cech augmentation component. Its induced homology maps are isomorphisms in degree zero and between zero objects in positive degrees. The supplied proof ha makes the fromSingle augmentation a chain map.",
+   "uses": [
+    "def-sc-module-cech-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01ET",
+  "place": "Intersection cohomology vanishing hypothesis, expanded using evaluation of injective resolutions as in Tag 01DZ and the beta construction of Tag 01EQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A first quadrant double complex map which is a quasi-isomorphism on each column induces a quasi-isomorphism on total complexes",
+   "results": "{\"t\": \"2026-10-12T10:15:39Z\", \"tool\": \"leanfinder\", \"query\": \"A first quadrant double complex map which is a quasi-isomorphism on each column induces a quasi-isomorphism on total complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"quasiIsoAt_iff'\", \"quasiIsoAt_of_comp_right\", \"QuasiIsoAt\", \"quasiIsoAt_of_comp_left\", \"QuasiIso.quasiIsoAt\", \"quasiIso_iff\", \"HomologicalComplex.HomologySequence.quasiIso_\\u03c4\\u2083\"], \"digest\": \"31bd06bc8bd981d1\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso",
+   "results": "{\"t\": \"2026-10-12T10:15:40Z\", \"tool\": \"loogle\", \"query\": \"QuasiIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"QuasiIso\", \"HomotopyEquiv.quasiIso_hom\", \"HomotopyEquiv.quasiIso_inv\", \"QuasiIso.quasiIsoAt\", \"quasiIso_iff\", \"quasiIso_of_isIso\", \"QuasiIso.mk\", \"HomologicalComplex.mem_quasiIso_iff\"], \"digest\": \"66e3f9d01c2aba24\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso.*total|total.*quasiIso|column.*augmentation",
+   "results": "{\"t\": \"2026-10-12T10:30:55Z\", \"tool\": \"grep\", \"query\": \"quasiIso.*total|total.*quasiIso|column.*augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An augmentation from a complex to a first quadrant bicomplex total complex is a quasi-isomorphism if all augmented columns are exact",
+   "results": "{\"t\": \"2026-10-12T10:33:52Z\", \"tool\": \"leansearch\", \"query\": \"An augmentation from a complex to a first quadrant bicomplex total complex is a quasi-isomorphism if all augmented columns are exact\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of section complexes of an injective resolution on acyclic open subsets are quasi-isomorphic to sections in degree zero",
+   "results": "{\"t\": \"2026-10-12T10:33:52Z\", \"tool\": \"leanfinder\", \"query\": \"Products of section complexes of an injective resolution on acyclic open subsets are quasi-isomorphic to sections in degree zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.InjectiveResolution.instQuasiIsoInt\\u03b9'\", \"CategoryTheory.InjectiveResolution.quasiIso\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.IsKInjective\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.InjectiveResolution.hasHomology\"], \"digest\": \"91d6333cbe5db4fc\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*quasi|quasi.*cech|rightDerived.*prod|prod.*rightDerived",
+   "results": "{\"t\": \"2026-10-12T10:33:52Z\", \"tool\": \"grep\", \"query\": \"cech.*quasi|quasi.*cech|rightDerived.*prod|prod.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic quasi-isomorphism infrastructure"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCechBetaAffineQuasiIso",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "Proof Step 1: canonical affine-cover Cech identification, affine acyclicity of the beta augmentation",
+   "via": [
+    "lem-sc-module-cech-beta-affine-quasi-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechResolutionColumns",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechResolutionColumns.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCech_resolution_columns",
+  "statement": "theorem moduleCech_resolution_columns {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (F : X.Modules) (I : InjectiveResolution F) (hvan : ∀ n : ℕ, ∀ y : Fin (n + 1) → ι, ∀ p : ℕ, 0 < p → Subsingleton ((RingedSpace.openModuleCohomology X.toRingedSpace p (⨅ l, U (y l))).obj F)) : let A := (CategoryTheory.cechComplexFunctor U).obj F.presheafModuleCat let a : A ⟶ (moduleCechDouble U I).X 0 := (CategoryTheory.cechComplexFunctor U).map ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map (I.ι.f 0).val) ∀ ha : a ≫ (moduleCechDouble U I).d 0 1 = 0, ∀ n : ℕ, QuasiIso ((CochainComplex.fromSingle₀Equiv ((moduleCechDouble U I).flip.X n) (A.X n)).symm ⟨a.f n, by simpa using congrArg (fun f ↦ f.f n) ha⟩)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T112844-L-769483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T112844-L-769483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
