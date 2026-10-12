@@ -14,29 +14,33 @@
  },
  "proof": [
   {
-   "text": "Unpack the finite constructible stratification. Each immersion identifies its domain with a subspace of the Noetherian space X. Every such subspace is Noetherian and quasi-compact. On each stratum choose its trivializing etale cover. The images are open and cover the stratum, so compactness gives a finite subcover. Delete empty members. This argument uses Mathlib IsCompact.elim_finite_subcover and the open-map property of etale maps.",
+   "text": "Unpack the constructible stratification S. Each immersion is an embedding into the Noetherian space X; IsInducing.noetherianSpace makes its source Noetherian and hence compact. For each stratum use its locally constant trivializing etale cover. Choose its constant values and isomorphisms via Sheaf.mem_essImage_of_isConstant. These choices determine the values up to equivalence, and only their Nat.card is used. The images of the etale cover members are open by Scheme.Hom.isOpenMap and cover the stratum by Cover.exists_eq. IsCompact.elim_finite_subcover yields a finite set I of members.",
    "uses": [
     "def-weil-pbc-etale-sheaves"
    ],
    "elementary": false
   },
   {
-   "text": "On a retained nonempty cover member choose an algebraic-closure residue-field point. Localize the site point at that lift. The restricted stalk equals the stratum stalk, by the initial over-category forgetful functor and its colimit isomorphism. The local constant-sheaf isomorphism identifies this stalk with the constant value. The general-site sheafFiberConstantSheafIso, valid for Type-valued sheaves too, proves this by sheafification and a connected constant colimit. Finiteness of the stratum stalk therefore makes the value finite. No group operation table or integral coefficient comparison is needed.",
+   "text": "The proved private definition constantChartPullbackIso transports the localized constant chart to the small etale site of its domain. The constructed set pullback and localization restriction are left adjoint to the same pushforward (sheafAdjunctionContinuous and mapPullbackAdj.sheafPushforwardContinuous), so Adjunction.leftAdjointUniq identifies them. Etale.overSheafEquiv and Etale.etaleToOverCompForgetIso identify localization restriction with transport from the localized site; Equivalence.constantSheafSheafCongrIso preserves the constant value. Apply the point fiber to this isomorphism, then Point.sheafFiberConstantSheafIso, and compare with the original stalk using etaleSetInverseImageStalkGerm. Nat.card_congr proves that every geometric stalk through a chart has Nat.card equal to that chart value.",
    "uses": [
-    "lem-weil-pbc-colimit-constant-connected-diagram"
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
    ],
    "elementary": false
   },
   {
-   "text": "Take the maximum of these finitely many cardinalities, using zero if there are no retained members. For any algebraic-closure residue-field point of X, choose the unique stratum containing its image. The point factors through the stratum immersion: the open part contains the image and the closed-part ideal vanishes in the field. Lift this point to a selected etale cover member using the geometric lift lemma. The constant-value stalk comparison gives a finite set of cardinality at most the maximum.",
+   "text": "Define the bound for a locally constant set sheaf on a compact scheme as I.sup of the Nat.card values. Any geometric point belongs to an image of one selected member. Scheme.exists_fac_of_etale_of_isSepClosed lifts it to that member. The preceding chart computation and Finset.le_sup bound its Nat.card. Empty members need not be discarded, since no point is lifted through them; even infinite constant values are harmless here, since finiteness is obtained separately from the given finite-stalk hypothesis.",
    "uses": [
-    "lem-weil-pbc-etale-cover-geometric-point-lift"
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
    ],
    "elementary": false
   },
   {
-   "text": "The bijective set-valued comparison etaleSetInverseImageStalkGerm identifies the stratum stalk with the original stalk. Forgetting abelian groups commutes with stalks because it preserves the filtered colimits over pointed neighbourhoods (Point.sheafFiberCompIso). Hence the same cardinality and finiteness hold for the abelian stalk. For the empty scheme all assertions are vacuous; for the zero sheaf the cardinality is one.",
+   "text": "Choose the bound N_i on each compact stratum and take Finset.univ.sup N. For x in X, the stratification covers x, so choose i containing it. Scheme.exists_comp_eq_of_mem_range lifts X.algClosurePoint x through its immersion; immersions are surjective on stalks. The stratum finite-stalk hypothesis gives Finite at this lifted point. etaleSetInverseImageStalkGerm transfers finiteness and Nat.card to the original set stalk. Its cardinal is bounded by N_i and then by the finite supremum. Point.sheafFiberCompIso for forget AddCommGrpCat transfers these assertions to the original abelian stalk. Supply the size-u filtered-colimit-preservation instance with preservesFilteredColimitsOfSize_shrink. The empty scheme is vacuous and empty finite suprema are zero.",
    "uses": [
+    "def-weil-pbc-etale-sheaves",
     "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
    ],
    "elementary": false
@@ -49,9 +53,9 @@
   "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "J1 stage-3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Finite bound part of original annihilator proof, excluding all finite-group annihilation and all morphism extensionality."
+  "place": "Tags 03RW and 095E, finite trivializing-cover argument; fully implemented using the generic constant-sheaf, site-equivalence, inverse-image-stalk and forgetting comparisons. Finiteness is transferred separately, so no deletion of empty charts or choice of a point in every chart is required."
  },
  "mathlib_searches": [
   {
@@ -128,10 +132,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T085346-L-42550",
-  "kind": "interface",
+  "landing": "20261012T110306-L-616753",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
