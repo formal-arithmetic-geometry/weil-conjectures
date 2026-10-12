@@ -1,8 +1,21 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group G3
+-/
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Mathlib.AlgebraicGeometry.Gluing
+import Sheaf.AlgebraicGeometry.GluedModelStructure
+
+/-!
+# Gluing the maps from local effective models
+
+Source: Stacks Project, Descent, Tag 0AP4.
+-/
 
 @[expose] public section
 universe u
@@ -32,6 +45,21 @@ theorem exists_glued_model_data
       (∀ i, IsOpenImmersion (j i)) ∧
       (∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w) ∧
       (∀ i, j i ≫ W₀.hom = (W i).hom) ∧
-      (∀ i, q i ≫ j i = (U i).ι ≫ q₀) := by sorry
+      (∀ i, q i ≫ j i = (U i).ι ≫ q₀) := by
+  classical
+  obtain ⟨W₀, j, hopen, hcover₀, hover, hagree⟩ :=
+    exists_glued_model_structure hp D U hcover E hcompat W q hcart hinv
+  have hU : TopologicalSpace.IsOpenCover U := by
+    change iSup U = ⊤
+    apply top_le_iff.mp
+    intro x hx
+    exact TopologicalSpace.Opens.mem_iSup.mpr (hcover x)
+  let 𝒰 := V.left.openCoverOfIsOpenCover U hU
+  have hf : ∀ i k, pullback.fst (𝒰.f i) (𝒰.f k) ≫ (q i ≫ j i) =
+      pullback.snd (𝒰.f i) (𝒰.f k) ≫ (q k ≫ j k) := hagree
+  refine ⟨W₀, 𝒰.glueMorphisms (fun i ↦ q i ≫ j i) hf, j,
+    hopen, hcover₀, hover, ?_⟩
+  intro i
+  exact (𝒰.ι_glueMorphisms (fun i ↦ q i ≫ j i) hf i).symm
 
 end CategoryTheory.Over.DescentDatum
