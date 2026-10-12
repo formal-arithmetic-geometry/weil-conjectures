@@ -7,9 +7,8 @@ module
 
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Jacobson.Ideal
-import Sheaf.Paper.IntegralClosureFiniteFibrePartLocalization
-import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
-import Sheaf.RingTheory.FiniteGabberPolynomial
+import Mathlib.RingTheory.Smooth.Flat
+import Sheaf.RingTheory.GabberIntegralSectionFactor
 import Sheaf.RingTheory.ZariskiPairFlatIntegralIsomorphism
 
 /-!
@@ -72,6 +71,25 @@ theorem exists_etale_section_lift_of_gabber_roots
           ∃ α : A, α - 1 ∈ I ∧ f.IsRoot α)
     (B : Type v) [CommRing B] [Algebra A B] [Etale A B] (σ : B →ₐ[A] A ⧸ I) :
     ∃ τ : B →ₐ[A] A, (Ideal.Quotient.mkₐ A I).comp τ = σ := by
-  sorry
+  classical
+  obtain ⟨e, _he, hint, hquot, ρ, hρ⟩ :=
+    exists_gabber_integral_section_factor A I hI hroots B σ
+  have hbij : Function.Bijective (algebraMap A (Localization.Away e)) :=
+    RingHom.zariskiPair_flat_integral_finitePresentation_isIso
+      (algebraMap A (Localization.Away e)) I (by simpa only [Ideal.jacobson_bot] using hI)
+      (RingHom.flat_algebraMap_iff.mpr inferInstance) hint
+      (RingHom.finitePresentation_algebraMap.mpr inferInstance) hquot
+  let Φ : A ≃ₐ[A] Localization.Away e := AlgEquiv.ofBijective (Algebra.ofId A _) hbij
+  let τ : B →ₐ[A] A := Φ.symm.toAlgHom.comp (IsScalarTower.toAlgHom A B _)
+  refine ⟨τ, ?_⟩
+  apply AlgHom.ext
+  intro x
+  change Ideal.Quotient.mkₐ A I (Φ.symm (algebraMap B (Localization.Away e) x)) = σ x
+  rw [← hρ x]
+  calc
+    _ = ρ (algebraMap A (Localization.Away e)
+        (Φ.symm (algebraMap B (Localization.Away e) x))) := (ρ.commutes _).symm
+    _ = ρ (algebraMap B (Localization.Away e) x) :=
+      congrArg ρ (Φ.apply_symm_apply _)
 
 end Algebra
