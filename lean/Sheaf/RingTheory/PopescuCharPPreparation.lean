@@ -11,23 +11,9 @@ public import Sheaf.RingTheory.StrictlyStandardElement
 public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-public import Mathlib.RingTheory.FiniteStability
-public import Mathlib.RingTheory.Localization.Submodule
-public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 
-import Sheaf.AlgebraicGeometry.Ogoma
-import Sheaf.RingTheory.EssentiallySmoothComp
-import Sheaf.RingTheory.ImprovePresentation
-import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
-import Sheaf.RingTheory.PopescuSolutionModulo
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularRingSmoothAscent
-import Sheaf.RingTheory.RegularSequencePolynomialVariables
-import Sheaf.RingTheory.RegularSequencePowers
-import Sheaf.RingTheory.SingularIdealLocalizationSmooth
-import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
-import Sheaf.RingTheory.StrictlyStandardBaseChange
-import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.PopescuCharPPreparationCore
+import Sheaf.RingTheory.PopescuCharPPreparationQuotient
 
 /-!
 # The auxiliary eighth-power problem in positive characteristic
@@ -145,6 +131,22 @@ theorem exists_popescu_char_p_preparation
                 g.comp f = Algebra.TensorProduct.lift (Algebra.ofId P L)
                   ((IsScalarTower.toAlgHom R₀ Λ₀ L).comp γ₀)
                   (fun _ _ ↦ Commute.all _ _)) := by
-  sorry
+  obtain ⟨m, instΛ, towerΛ, C, instC, algC, algRC, towerC, fpC, β, γ,
+    hcomp, hideal, r, π, hparam⟩ :=
+    exists_popescu_char_p_preparation_core p hp α q hreg hminimal
+  let _ := instΛ
+  let _ := towerΛ
+  let _ := instC
+  let _ := algC
+  let _ := algRC
+  let _ := towerC
+  let _ := fpC
+  refine ⟨m, inferInstance, inferInstance, C, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance, β, γ, hcomp, hideal, r, π, ?_⟩
+  obtain ⟨hr, hπq, hR, hΛ, hstandard, hconstruction⟩ := hparam
+  refine ⟨hr, hπq, hR, hΛ, hstandard, ?_⟩
+  exact popescu_char_p_preparation_quotient p hp α q m C β γ r π
+    ⟨hcomp, hideal⟩ ⟨hr, hπq, hR, hΛ, hstandard⟩ hconstruction
+
 
 end Algebra

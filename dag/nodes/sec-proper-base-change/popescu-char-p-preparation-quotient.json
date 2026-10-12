@@ -1,0 +1,224 @@
+{
+ "id": "popescu-char-p-preparation-quotient",
+ "kind": "statement",
+ "title": "Popescu preparation quotient factorization",
+ "statement": "Let k be a field of characteristic p>0, A and Λ commutative k-algebras, A finitely presented over k and Λ Noetherian. For an algebra map h define H(h) to be the radical of the extended singular ideal. Let α:A→Λ be a k-algebra map and q a prime of Λ. A polynomial-base datum consists of an integer m, R=k[X_1,…,X_m], compatible k-algebra structures R→Λ and R→C on a commutative ring C finitely presented over R, and maps β:A→C over k and γ:C→Λ over R, such that γβ=α and H(α)⊆H(γ). A parameter datum consists of an integer r≥1 and π_0,…,π_(r-1) in R. Each π_i maps into q. For each i let B_i be R/(π_j^8:j<i) and T_i be Λ/(image(π_j)^8:j<i). Multiplication by π_i and by π_i² have identical kernels on both B_i and T_i. Each image of π_i in C is strictly standard over R. Define J=(π_i^8) in R, J_C=JC, J_Λ=JΛ, Q=R_(q∩R), L=Λ_q, JQ=J·Q and JL=J·L. Use the induced algebra map Q→L. An auxiliary thickening datum consists of n>0 with m_L^n⊆JL, ideals I⊆Q and K⊆L with I⊆JQ, K⊆JL and IL⊆K, a commutative Q-algebra D, a compatible Q/I-algebra structure on D, and algebra maps f:Q⊗_R C→D and g:D→L/K over Q. Require D to be essentially smooth over Q/I and gf to equal the canonical tensor map induced by Q→L/K and C→Λ→L/K. Given polynomial-base, parameter and auxiliary thickening data as described above, put R₀=R/J, C₀=C/J_C and Λ₀=Λ/J_Λ. Then C₀ is finitely presented over R₀, and there exist an R₀-algebra map γ₀:C₀→Λ₀ and a prime q₀ of Λ₀ such that γ₀ composed with C→C₀ equals γ composed with Λ→Λ₀, and the inverse image of q₀ is q. Either H(γ₀) is not contained in q₀, or q₀ is minimal over H(γ₀), the ring L₀=(Λ₀)_q₀ has Krull dimension zero, and, with P=(R₀)_(q₀∩R₀), there exist a commutative P-algebra E essentially smooth over P and P-algebra maps F:P⊗_(R₀)C₀→E and G:E→L₀ whose composite is the canonical tensor map induced by P→L₀ and γ₀ followed by Λ₀→L₀. The carriers C,D,E have representatives in Type(max u v), where k:Type u and A:Type v; Λ may have an independent universe.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma 07FJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-strictly-standard-element",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Let R=k[X_1,…,X_m], J=(π_i^8), J_C=JC and J_Λ=JΛ. Membership of the parameter images in q gives J_Λ⊆q. The quotient universal property gives γ₀:C/JC→Λ/JΛ; the quotient prime correspondence gives q₀=q/JΛ. Both satisfy the displayed commutative squares. C/JC is finitely presented over R/J by base change. Put Q=R_(q∩R), L=Λ_q. Localization of a quotient identifies P=(R/J)_(q₀∩(R/J)) with Q/JQ and L₀=(Λ/JΛ)_q₀ with L/JL. These identifications preserve the structure maps.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+   }
+  },
+  {
+   "text": "The supplied positive n and containment m_L^n⊆JL imply that the maximal ideal of L/JL is nilpotent. L is Noetherian since Λ is Noetherian. Thus the nonzero quotient L/JL is Artinian local by the power bound, and has Krull dimension zero. If popescuIdeal γ₀ is not contained in q₀ choose the first alternative. Otherwise any prime containing popescuIdeal γ₀ and contained in q₀ localizes to a prime of L₀, hence its unique prime. The prime correspondence for localization then makes it equal to q₀. This proves minimality. Neither dimension nor minimality is inferred from the annihilator equalities.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-popescu-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+   }
+  },
+  {
+   "text": "Use the supplied I⊆JQ, K⊆JL, IL⊆K, f:Q⊗_R C→D and g:D→L/K, with D essentially smooth over Q/I. The first containment defines Q/I→P; the second defines L/K→L₀. Set E=P⊗_(Q/I)D. Tensor universality gives E→L₀ from the compatible maps. The map Q⊗_R C→D→E kills JC since J is zero in P, hence descends to P⊗_(R/J)(C/JC)→E. On pure tensors the composite is the required tensor lift, by the supplied equation gf composed with L/K→L₀. Pure tensors generate, so this is the required algebra-homomorphism equality.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+   }
+  },
+  {
+   "text": "Present D as a localization of a smooth Q/I-algebra S. Base change S to P; it is smooth over P. Localization base change identifies E with its localization at the image of the multiplicative subset. Thus E is essentially smooth over P. The carriers Q,P,D live in Type(max u v) or smaller, so their tensor product E has a representative there; transport structures and maps along this representative. Combine this factorization with the dimension and minimality from step 2 to obtain the second alternative.",
+   "uses": [
+    "def-weil-pbc-essentially-smooth-ring-map",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-pbc-essentially-smooth-ring-map",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FJ, items item-power through item-eighth-resolve and item-done"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "essentially smooth algebra factorization descends through quotient and localization",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no search verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A factorization through an essentially smooth algebra modulo a smaller ideal descends by base change to a larger quotient ideal; localization of the quotient has dimension zero when a maximal ideal power is killed",
+   "results": "Algebra.IsSmoothAt, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.Smooth.exists_finiteType, Algebra.FormallySmooth.of_isLocalization, Algebra.Smooth. None constructs the complete auxiliary thickening data or quotient alternative.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth.baseChange",
+   "results": "Algebra.Smooth.baseChange: smoothness of B⊗_R A over B. Useful for the descent proof, not the complete construction or quotient alternative.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg Popescu|popescu and isArtinianRing_iff_isNilpotent_maximalIdeal; localization of quotient nodes",
+   "results": "Existing 07FH and 07FI interfaces supply construction steps, while localization-at-prime-of-quotient, smooth-base-change and Noetherian-local-quotient-Artinian nodes supply descent. No full interface for these combined witnesses was found.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially smooth algebra remains essentially smooth after a base change and quotienting the base ring",
+   "results": "Algebra.Smooth.comp, Algebra.Smooth.baseChange and standard-smooth base-change lemmas. These give individual tools, not the combined construction or descent statement.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"Quotient\"",
+   "results": "IsLocalization.instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap supplies quotient localization. No full preparation or combined factorization match.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_popescu_char_p_preparation|char_p_preparation|preparation_quotient; maximalIdeal.*nilpotent",
+   "results": "No preparation implementation in upstream WeilConjectures; only the original sorry and its caller in lean/Sheaf. HopkinsLevitzki.isArtinianRing_iff_isNilpotent_maximalIdeal supplies the nilpotent-local step.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth.baseChange",
+   "results": "Independent current second reading: exact smooth tensor base-change instance; no complete preparation or quotient-descent interface.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local noetherian ring with nilpotent maximal ideal has Krull dimension zero and quotient localization commutes with tensor base change",
+   "results": "Independent current second reading: finite dimension and cotangent-space lemmas, no combined descent theorem. Local rg confirms HopkinsLevitzki.isArtinianRing_iff_isNilpotent_maximalIdeal and localization quotient tools.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuCharPPreparation",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuCharPPreparationQuotient",
+  "file": "lean/Sheaf/RingTheory/PopescuCharPPreparationQuotient.lean",
+  "declaration": "Algebra.popescu_char_p_preparation_quotient",
+  "statement": "theorem popescu_char_p_preparation_quotient\n    {k : Type u} {A : Type v} {Λ : Type w}\n    [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]\n    [FinitePresentation k A] [IsNoetherianRing Λ]\n    (p : ℕ) [CharP k p] (hp : 0 < p)\n    (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ)\n    (m : ℕ) [Algebra (MvPolynomial (Fin m) k) Λ]\n      [IsScalarTower k (MvPolynomial (Fin m) k) Λ]\n    (C : Type (max u v)) [CommRing C] [Algebra k C]\n      [Algebra (MvPolynomial (Fin m) k) C]\n      [IsScalarTower k (MvPolynomial (Fin m) k) C]\n      [FinitePresentation (MvPolynomial (Fin m) k) C]\n    (β : A →ₐ[k] C) (γ : C →ₐ[MvPolynomial (Fin m) k] Λ)\n    (r : ℕ) (π : Fin r → MvPolynomial (Fin m) k)\n    (hbase : (γ.restrictScalars k).comp β = α ∧ popescuIdeal α ≤ popescuIdeal γ)\n    (hparam : 1 ≤ r ∧\n      (∀ i, algebraMap (MvPolynomial (Fin m) k) Λ (π i) ∈ q.asIdeal) ∧\n      (∀ (i : Fin r)\n        (x : MvPolynomial (Fin m) k ⧸ Ideal.span\n          {y | ∃ j : Fin r, j.val < i.val ∧ y = π j ^ 8}),\n        π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n      (∀ (i : Fin r)\n        (x : Λ ⧸ Ideal.span\n          {y | ∃ j : Fin r, j.val < i.val ∧\n            y = algebraMap (MvPolynomial (Fin m) k) Λ (π j) ^ 8}),\n        π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n      (∀ i, IsStrictlyStandardElement\n        (R := MvPolynomial (Fin m) k)\n        (algebraMap (MvPolynomial (Fin m) k) C (π i))))\n    (hconstruction :\n    let R := MvPolynomial (Fin m) k\n    let J := Ideal.span (Set.range (fun i : Fin r ↦ π i ^ 8))\n    let Q := Localization.AtPrime (q.asIdeal.under R)\n    let L := Localization.AtPrime q.asIdeal\n    letI := Localization.AtPrime.algebraOfLiesOver (q.asIdeal.under R) q.asIdeal\n    let JQ := J.map (algebraMap R Q)\n    let JL := (J.map (algebraMap R Λ)).map (algebraMap Λ L)\n    ∃ (n : ℕ), 0 < n ∧ IsLocalRing.maximalIdeal L ^ n ≤ JL ∧\n      ∃ (I : Ideal Q) (K : Ideal L),\n        I ≤ JQ ∧ K ≤ JL ∧ I.map (algebraMap Q L) ≤ K ∧\n        ∃ (D : Type (max u v)) (_ : CommRing D) (_ : Algebra Q D)\n          (_ : Algebra (Q ⧸ I) D) (_ : IsScalarTower Q (Q ⧸ I) D),\n          EssentiallySmooth (Q ⧸ I) D ∧\n          ∃ (f : Q ⊗[R] C →ₐ[Q] D) (g : D →ₐ[Q] L ⧸ K),\n            g.comp f = Algebra.TensorProduct.lift (Algebra.ofId Q (L ⧸ K))\n              ((Ideal.Quotient.mkₐ R K).comp\n                ((IsScalarTower.toAlgHom R Λ L).comp γ))\n              (fun _ _ ↦ Commute.all _ _)) :\n    let R := MvPolynomial (Fin m) k\n    let J := Ideal.span (Set.range (fun i : Fin r ↦ π i ^ 8))\n    let J_C := J.map (algebraMap R C)\n    let J_Λ := J.map (algebraMap R Λ)\n    let R₀ := R ⧸ J\n    let C₀ := C ⧸ J_C\n    let Λ₀ := Λ ⧸ J_Λ\n    ∃ (_ : FinitePresentation R₀ C₀) (γ₀ : C₀ →ₐ[R₀] Λ₀)\n      (q₀ : PrimeSpectrum Λ₀),\n      γ₀.toRingHom.comp (Ideal.Quotient.mk J_C) =\n        (Ideal.Quotient.mk J_Λ).comp γ.toRingHom ∧\n      PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧\n      (¬ popescuIdeal γ₀ ≤ q₀.asIdeal ∨\n        q₀.asIdeal ∈ (popescuIdeal γ₀).minimalPrimes ∧\n        ringKrullDim (Localization.AtPrime q₀.asIdeal) = 0 ∧\n        let P := Localization.AtPrime (q₀.asIdeal.under R₀)\n        let L := Localization.AtPrime q₀.asIdeal\n        letI := Localization.AtPrime.algebraOfLiesOver\n          (q₀.asIdeal.under R₀) q₀.asIdeal\n        ∃ (E : Type (max u v)) (_ : CommRing E) (_ : Algebra P E),\n          EssentiallySmooth P E ∧\n          ∃ (f : P ⊗[R₀] C₀ →ₐ[P] E) (g : E →ₐ[P] L),\n            g.comp f = Algebra.TensorProduct.lift (Algebra.ofId P L)\n              ((IsScalarTower.toAlgHom R₀ Λ₀ L).comp γ₀)\n              (fun _ _ ↦ Commute.all _ _))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7, essential-surjectivity approximation: auxiliary construction in the positive-characteristic Popescu resolution",
+   "via": [
+    "lem-weil-pbc-popescu-char-p-preparation",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "V3 repair worker",
+  "what": "Strengthen the construction boundary with actual thickening data, fixing the false arbitrary-parameter quotient interface. The main theorem signature is unchanged.",
+  "old_statement": "theorem popescu_char_p_preparation_quotient\n    {k : Type u} {A : Type v} {Λ : Type w}\n    [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]\n    [FinitePresentation k A] [IsNoetherianRing Λ]\n    (p : ℕ) [CharP k p] (hp : 0 < p)\n    (α : A →ₐ[k] Λ) (q : PrimeSpectrum Λ)\n    (m : ℕ) [Algebra (MvPolynomial (Fin m) k) Λ]\n      [IsScalarTower k (MvPolynomial (Fin m) k) Λ]\n    (C : Type (max u v)) [CommRing C] [Algebra k C]\n      [Algebra (MvPolynomial (Fin m) k) C]\n      [IsScalarTower k (MvPolynomial (Fin m) k) C]\n      [FinitePresentation (MvPolynomial (Fin m) k) C]\n    (β : A →ₐ[k] C) (γ : C →ₐ[MvPolynomial (Fin m) k] Λ)\n    (r : ℕ) (π : Fin r → MvPolynomial (Fin m) k)\n    (hbase : (γ.restrictScalars k).comp β = α ∧ popescuIdeal α ≤ popescuIdeal γ)\n    (hparam : 1 ≤ r ∧\n      (∀ i, algebraMap (MvPolynomial (Fin m) k) Λ (π i) ∈ q.asIdeal) ∧\n      (∀ (i : Fin r)\n        (x : MvPolynomial (Fin m) k ⧸ Ideal.span\n          {y | ∃ j : Fin r, j.val < i.val ∧ y = π j ^ 8}),\n        π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n      (∀ (i : Fin r)\n        (x : Λ ⧸ Ideal.span\n          {y | ∃ j : Fin r, j.val < i.val ∧\n            y = algebraMap (MvPolynomial (Fin m) k) Λ (π j) ^ 8}),\n        π i • x = 0 ↔ π i ^ 2 • x = 0) ∧\n      (∀ i, IsStrictlyStandardElement\n        (R := MvPolynomial (Fin m) k)\n        (algebraMap (MvPolynomial (Fin m) k) C (π i)))) :\n    let R := MvPolynomial (Fin m) k\n    let J := Ideal.span (Set.range (fun i : Fin r ↦ π i ^ 8))\n    let J_C := J.map (algebraMap R C)\n    let J_Λ := J.map (algebraMap R Λ)\n    let R₀ := R ⧸ J\n    let C₀ := C ⧸ J_C\n    let Λ₀ := Λ ⧸ J_Λ\n    ∃ (_ : FinitePresentation R₀ C₀) (γ₀ : C₀ →ₐ[R₀] Λ₀)\n      (q₀ : PrimeSpectrum Λ₀),\n      γ₀.toRingHom.comp (Ideal.Quotient.mk J_C) =\n        (Ideal.Quotient.mk J_Λ).comp γ.toRingHom ∧\n      PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧\n      (¬ popescuIdeal γ₀ ≤ q₀.asIdeal ∨\n        q₀.asIdeal ∈ (popescuIdeal γ₀).minimalPrimes ∧\n        ringKrullDim (Localization.AtPrime q₀.asIdeal) = 0 ∧\n        let P := Localization.AtPrime (q₀.asIdeal.under R₀)\n        let L := Localization.AtPrime q₀.asIdeal\n        letI := Localization.AtPrime.algebraOfLiesOver\n          (q₀.asIdeal.under R₀) q₀.asIdeal\n        ∃ (E : Type (max u v)) (_ : CommRing E) (_ : Algebra P E),\n          EssentiallySmooth P E ∧\n          ∃ (f : P ⊗[R₀] C₀ →ₐ[P] E) (g : E →ₐ[P] L),\n            g.comp f = Algebra.TensorProduct.lift (Algebra.ofId P L)\n              ((IsScalarTower.toAlgHom R₀ Λ₀ L).comp γ₀)\n              (fun _ _ ↦ Commute.all _ _))",
+  "citers_checked": [
+   {
+    "id": "lem-weil-pbc-popescu-char-p-preparation",
+    "holds": true,
+    "note": "Caller supplies the auxiliary data from the strengthened core theorem; unchanged target signature."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-bd8f8",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T150958-L-2232705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-bd8f8",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T150958-L-2232705",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged main signature, both new Lean statements and proof plans with their DAG records and Stacks 07FJ; verified compilation, axioms, import visibility and the earlier repairs."
+ }
+}
