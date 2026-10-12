@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
+import Sheaf.RingTheory.DimensionAtPointComponents
 
 /-!
 # Dimension at a closed point of an affine scheme over a field
@@ -62,6 +62,11 @@ theorem topologicalKrullDimAt_eq_ringKrullDim_localizationAtMaximal
     (m : Ideal S) [m.IsMaximal] :
     topologicalKrullDimAt (⟨m, inferInstance⟩ : Spec (CommRingCat.of S)) =
       ringKrullDim (Localization.AtPrime m) := by
-  sorry
+  have : Algebra.FiniteType k S := Algebra.FiniteType.iff_quotient_mvPolynomial''.mpr hfg
+  obtain ⟨qs, hqs, hne, n, hdim, hcomponents, hattained, hquotients, hquotient,
+    hlower, m', hm', hle, hlocal⟩ := dimension_at_point_components (k := k) m
+  have hmax : m = m' := Ideal.IsMaximal.eq_of_le inferInstance hm'.ne_top hle
+  subst m'
+  exact hdim.trans hlocal.symm
 
 end AlgebraicGeometry
