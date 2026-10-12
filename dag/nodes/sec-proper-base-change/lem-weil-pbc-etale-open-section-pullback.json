@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-etale-open-section-pullback",
+ "kind": "statement",
+ "title": "Pullback of a classified section between nested opens",
+ "statement": "Let X be a scheme [def-pc-scheme], V ⊆ U two opens [def-weil-open-immersion], i : V → U their inclusion, F an abelian sheaf on the small étale site of X, and m : Z_U → j_U^*F a map from the constant ULift Z sheaf [def-weil-pbc-inverse-image]. Let b_W be the terminal étale object of W, v_W its image on X, rho_W : j_W^*F ≅ F restricted to W the specified localization comparison, and f : v_V → v_U the inclusion. Write sigma_W for the constant-sheaf adjunction followed by evaluation at 1, and c : j_V^* ≅ i^*j_U^* for the specified composition comparison [lem-weil-pbc-inverse-image-composition]. Then sigma_V(z_i^{-1} ≫ i^*(m) ≫ c_F^{-1}) = rho_V^{-1}(F(f)(rho_U(sigma_U(m)))). All terms are sections at b_V; the restriction F(f) is contravariant. This holds for every F and m, including empty and equal opens.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Lemma 21.7.1, localization restriction; explicit unit compatibility calculation of lem-weil-pbc-open-restriction-pullback-unit, specialized to nested opens."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Expand z_i as leftAdjointUniq between the composite of the constant-sheaf adjunction with the inverse-image adjunction and the constant-sheaf adjunction on V. Its inverse changes adjunctions without changing the adjoint map. Thus sigma_V of the displayed composite is obtained from sigma_U(m) by the inverse-image unit for i, evaluation on the terminal pullback, and then c_F inverse. Naturality moves m through this calculation.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the open restriction pullback unit calculation for g = U.ι and W = V. Identify V times_X U with V using V ≤ U and monomorphy of U.ι. The map i is the resulting restricted projection. The identity pullback unit cancels its identity comparison; the composition unit equation leaves c_F inverse followed by the V localization comparison. Consequently the section map of the first step, followed by rho_V, is rho_U followed by F(f).",
+   "uses": [
+    "lem-weil-pbc-open-restriction-pullback-unit",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel rho_V and evaluate the equality of group homomorphisms on sigma_U(m). Naturality of rho_U identifies the source expression and gives the asserted formula. Terminal object uniqueness treats equal opens; none of the identifications uses nonemptiness, so the empty open also satisfies the formula.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-open-restriction-pullback-unit",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03F3",
+  "place": "Explicit adjunction-unit argument specialized from the existing open restriction calculation; D3, 2026-10-12."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf adjunction classifying a section commutes with pullback and restriction along nested open immersions",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "free abelian representable sheaf identity generator naturality restriction open subscheme",
+   "date": "2026-10-12",
+   "results": "Found Scheme restriction identities and SheafOfModules free-generator naturality, but no comparison of the specified abelian étale inverse images and their constant-sheaf adjunctions.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_right",
+   "date": "2026-10-12",
+   "results": "Found the generic adjunction naturality lemma; it handles the formal adjunction step but not the localization/composition compatibility.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*(restriction|pullback)|localizationRestriction.*[Cc]omp",
+   "date": "2026-10-12",
+   "results": "No exact comparison in Mathlib CategoryTheory/Sites or source SixFunctors/Etale. Existing library open_restriction_pullback_unit concerns general cartesian restriction and requires the nested-open terminal identifications.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleOpenFreeSheafUnitCoherence",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Identity-generator coherence, proof step 2: general section calculation for nested opens.",
+   "via": [
+    "lem-weil-pbc-etale-open-free-sheaf-unit-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenSectionPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenSectionPullback.lean",
+  "declaration": "AlgebraicGeometry.etaleOpenSection_pullback",
+  "declarations": [
+   "AlgebraicGeometry.etaleOpenSection_pullback"
+  ],
+  "statement": "theorem etaleOpenSection_pullback {X : Scheme.{u}}\n    (U V : X.Opens) (h : V ≤ U)\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (m : (constantSheaf U.toScheme.smallEtaleTopology AddCommGrpCat.{u + 1}).obj\n        (AddCommGrpCat.of (ULift ℤ)) ⟶\n      (Etale.upperStar AddCommGrpCat.{u + 1} U.ι).obj F) :\n    let bU := Scheme.Etale.mk (𝟙 U.toScheme)\n    let bV := Scheme.Etale.mk (𝟙 V.toScheme)\n    let vU := (MorphismProperty.Over.map ⊤ (inferInstance : Etale U.ι)).obj bU\n    let vV := (MorphismProperty.Over.map ⊤ (inferInstance : Etale V.ι)).obj bV\n    let f : vV ⟶ vU := MorphismProperty.Over.homMk (X.homOfLE h)\n      (by\n        change X.homOfLE h ≫ (𝟙 U.toScheme ≫ U.ι) = 𝟙 V.toScheme ≫ V.ι\n        simpa only [Category.id_comp] using X.homOfLE_ι h) trivial\n    AddCommGrpCat.uliftZMultiplesAddEquiv _\n      ((constantSheafAdj V.toScheme.smallEtaleTopology AddCommGrpCat.{u + 1}\n        (show IsTerminal bV from IsTerminal.ofUniqueHom\n          (fun a ↦ MorphismProperty.Over.homMk a.hom (Category.comp_id _))\n          (fun a f ↦ by\n            apply MorphismProperty.Over.Hom.ext\n            exact (Category.comp_id _).symm.trans (MorphismProperty.Over.w f)))).homEquiv _ _\n        ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1}\n          (X.homOfLE h)).inv.app (AddCommGrpCat.of (ULift ℤ)) ≫\n          (Etale.upperStar AddCommGrpCat.{u + 1} (X.homOfLE h)).map m ≫\n          (Etale.upperStarComp AddCommGrpCat.{u + 1} (X.homOfLE h) U.ι V.ι\n            (X.homOfLE_ι h).symm).inv.app F)) =\n      (((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} V.ι\n        inferInstance).inv.app F).hom.app (op bV))\n        (F.obj.map f.op\n          ((((Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} U.ι\n            inferInstance).hom.app F).hom.app (op bU))\n            (AddCommGrpCat.uliftZMultiplesAddEquiv _\n              ((constantSheafAdj U.toScheme.smallEtaleTopology AddCommGrpCat.{u + 1}\n                (show IsTerminal bU from IsTerminal.ofUniqueHom\n                  (fun a ↦ MorphismProperty.Over.homMk a.hom (Category.comp_id _))\n                  (fun a f ↦ by\n                    apply MorphismProperty.Over.Hom.ext\n                    exact (Category.comp_id _).symm.trans\n                      (MorphismProperty.Over.w f)))).homEquiv _ _ m))))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T135226-L-1658964",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T135226-L-1658964",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,18 +15,23 @@
  ],
  "proof": [
   {
-   "text": "Apply the constant-sheaf adjunction at the terminal object of V. The free-sheaf map a sends the identity generator of V to the inclusion generator V to U, by naturality of free abelian groups and sheafification.",
+   "text": "Apply the constant-sheaf adjunction on V and evaluation of maps from ULift Z at 1. Cancel the inverse-image composition isomorphism to reduce the target to equality of sections of the direct inverse image along V.",
    "uses": [
     "def-weil-pbc-etale-open-object-cohomology-map"
    ],
    "elementary": true
   },
   {
-   "text": "Use open_restriction_pullback_unit with g=U.ι and W=V. Since V is contained in U, the open fibre product V times_X U identifies with V. Cancel the identity unit and its comparison. The composition-unit equation identifies successive restriction comparisons with the direct comparison for V. The constant pullback comparison sends 1 to 1. Thus both morphisms classify the same inclusion generator. The adjunction bijection proves equality, including equal opens and the empty open.",
+   "text": "Naturality of the localization restriction comparison and of toSheafify shows that the free-sheaf map sends the identity generator t of V to the generator t followed by the inclusion into U. This is proved directly in Lean.",
    "uses": [
-    "lem-weil-pbc-open-restriction-pullback-unit",
-    "lem-weil-pbc-open-fibre-product",
-    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-etale-open-object-cohomology-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the general section pullback compatibility to F equal to the free sheaf at U and m equal to the identity-generator map at U. Cancel the localization isomorphism at U. Naturality of toSheafify for the inclusion between the localized terminal objects sends the identity generator at U to the inclusion generator. The two composites of site arrows agree by the unit laws. Injectivity of the two adjunction equivalences concludes.",
+   "uses": [
+    "lem-weil-pbc-etale-open-section-pullback",
     "def-weil-pbc-etale-open-object-cohomology-map"
    ],
    "elementary": false
@@ -34,14 +39,12 @@
  ],
  "proof_deps": [
   "def-weil-pbc-etale-open-object-cohomology-map",
-  "lem-weil-pbc-open-restriction-pullback-unit",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-etale-open-section-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/03F3",
-  "place": "Lemma cohomology-of-open, proof by restriction of an injective resolution; free-representable/Yoneda and constant-sheaf adjunctions. Explicit identity-generator construction and unit compatibility supplied by F2."
+  "place": "Localization restriction; D3 explicit free-generator calculation and reduction to arbitrary-section pullback compatibility, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -122,9 +125,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T110300-L-614220",
+  "landing": "20261012T135226-L-1658964",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
