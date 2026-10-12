@@ -33,137 +33,26 @@
  ],
  "proof": [
   {
-   "text": "(Notation; $d$ is a positive integer; a maximal regular sequence.) Write $d=\\dim\\operatorname{Supp}(M)$. Since $R$ is local, every $s\\in R\\setminus\\mathfrak m$ is a unit, so the localization map $M\\to M_{\\mathfrak m}$ [def-weil-pbc-module-localization] is bijective ($m/s=s^{-1}m/1$, and $tm=0$ with $t$ a unit forces $m=0$); as $M\\neq0$, $\\mathfrak m\\in\\operatorname{Supp}(M)$. A chain of primes in $\\operatorname{Supp}(M)$ is a chain of primes of $R$, so $0\\le d\\le\\dim R$ [def-weil-pbc-krull-dimension-ring], and $\\dim R$ is finite by [lem-weil-pbc-noetherian-local-finite-krull-dimension]; thus $d$ is an integer $\\ge0$. Moreover $d\\neq0$: if $d=0$, the hypothesis says $\\dim(\\operatorname{Supp}(M)\\cap V(g))=-1$, which is impossible since $\\mathfrak m\\in\\operatorname{Supp}(M)\\cap V(g)$ (as $g\\in\\mathfrak m$) makes this set nonempty, of dimension $\\ge0$ (Stacks: 'The case $d=0$ does not occur'). So $d\\ge1$. Since $\\operatorname{depth}(M)=d$ is finite, by [def-weil-pbc-depth] we have $\\mathfrak mM\\neq M$ and $d$ is the supremum of the lengths of the $M$-regular sequences in $\\mathfrak m$; a supremum of a set of integers that equals the integer $d$ is attained, so there is an $M$-regular sequence $f_1,\\dots,f_d\\in\\mathfrak m$ [def-weil-pbc-regular-sequence] (Stacks: 'Choose a $M$-regular sequence $f_1,\\ldots,f_d$ with $d=\\dim(\\operatorname{Supp}(M))$').",
+   "text": "Apply the auxiliary existence theorem to obtain d and fs with the required maximal-ideal, regularity, and support-dimension conditions. Apply the good-sequence element theorem to fs and g; its first two conclusions give regularity of g and Cohen–Macaulayness of the quotient. Rewrite the depth of M using the Cohen–Macaulay equality and the returned depth value, then simplify the natural-number subtraction using 1 ≤ d.",
    "uses": [
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-    "def-weil-pbc-depth",
-    "def-weil-pbc-regular-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "(The claim proved by induction on $d$.) For an integer $e\\ge1$ let $P(e)$ be the assertion: for every nonzero finite Cohen–Macaulay $R$-module $N$ with $\\dim\\operatorname{Supp}(N)=e$ and every $y\\in\\mathfrak m$ with $\\dim(\\operatorname{Supp}(N)\\cap V(y))=e-1$, (a) $y$ is a nonzerodivisor on $N$ and (b) $N/yN$ is Cohen–Macaulay with $\\operatorname{depth}(N/yN)=\\operatorname{depth}(N)-1$. By step 1 the item is the statement that $P(e)$ holds for all $e\\ge1$. We prove $P(1)$ (step 3) and, for $e\\ge2$, $P(e-1)\\Rightarrow P(e)$ (steps 4-9, written for $N=M$, $y=g$, $e=d\\ge2$, with $f_1,\\dots,f_d$ as in step 1; only the hypotheses of $P(d)$ are used, and step 1 applies to any such $N$, $y$). This is the induction on $d$ of the source ('the pair $(M/hM,g)$ satisfies the induction hypothesis').",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "(If $g$ is good, in particular if $d=1$.) Suppose $g$ is good with respect to $(M,f_1,\\dots,f_d)$, i.e. $\\dim(\\operatorname{Supp}(M)\\cap V(g,f_1,\\dots,f_i))=d-i-1$ for $i=0,\\dots,d-1$. Then [lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor] gives (a) $g$ is a nonzerodivisor on $M$, and (b) $M/gM$ is Cohen–Macaulay with $\\operatorname{depth}(M/gM)=\\dim\\operatorname{Supp}(M/gM)=d-1=\\operatorname{depth}(M)-1$; so the item holds ('we win by Lemma 00N4'). For $d=1$ the goodness condition consists of the single case $i=0$, $\\dim(\\operatorname{Supp}(M)\\cap V(g))=0=d-1$, which is the hypothesis; hence $P(1)$ holds ('In particular the lemma holds if $d=1$'). From now on $d\\ge2$ and we assume $P(d-1)$.",
-   "uses": [
+    "lem-weil-pbc-cm-module-good-element-setup",
     "lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "(The supports involved and their dimensions.) For $0\\le i\\le d$ put $M_i=M/(f_1,\\dots,f_i)M$ (so $M_0=M$), a finite $R$-module, and note $M_i\\cong M_{i-1}/f_iM_{i-1}$ for $i\\ge1$ (the submodule $(f_1,\\dots,f_i)M$ is the preimage in $M$ of $f_iM_{i-1}$). By [lem-weil-pbc-support-quotient-ideal-module] (with $I=(f_1,\\dots,f_i)$, resp. $I=(g)$), $\\operatorname{Supp}(M_i)=\\operatorname{Supp}(M)\\cap V(f_1,\\dots,f_i)$ and $\\operatorname{Supp}(M/gM)=\\operatorname{Supp}(M)\\cap V(g)$. By the definition of a regular sequence [def-weil-pbc-regular-sequence], $f_i\\in\\mathfrak m$ is a nonzerodivisor on $M_{i-1}$ for $1\\le i\\le d$, so clause (2) of [lem-weil-pbc-support-dimension-quotient-element-equality] gives $\\dim\\operatorname{Supp}(M_i)+1=\\dim\\operatorname{Supp}(M_{i-1})$; by induction on $i$ from $\\dim\\operatorname{Supp}(M_0)=d$, $\\dim\\operatorname{Supp}(M_i)=d-i$ for $0\\le i\\le d$. Also $\\dim\\operatorname{Supp}(M/gM)=d-1$ by the hypothesis. In particular the $d+1$ modules $N\\in\\{M_0,\\dots,M_{d-1},M/gM\\}$ all have $\\dim\\operatorname{Supp}(N)\\ge1$, as $d-i\\ge1$ for $i\\le d-1$ and $d-1\\ge1$. These $\\operatorname{Supp}(N)$ are the closed sets $\\operatorname{Supp}(M)$, $\\operatorname{Supp}(M)\\cap V(f_1,\\dots,f_i)$ ($1\\le i\\le d-1$) and $\\operatorname{Supp}(M)\\cap V(g)$ of the source.",
-   "uses": [
-    "lem-weil-pbc-support-quotient-ideal-module",
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-support-dimension-quotient-element-equality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "(Choice of $h$ by prime avoidance.) For each $N$ of step 4, $\\operatorname{Supp}(N)=V(\\operatorname{Ann}_R(N))$ by [lem-weil-pbc-finite-module-support-annihilator], so the minimal elements of the closed set $\\operatorname{Supp}(N)$ are the primes minimal over $\\operatorname{Ann}_R(N)$. These correspond (by $\\mathfrak q\\mapsto\\mathfrak q/\\operatorname{Ann}_R(N)$) to the minimal prime ideals of $R/\\operatorname{Ann}_R(N)$, which is Noetherian (its ideals are the images of the ideals of $R$ containing $\\operatorname{Ann}_R(N)$ [def-weil-pbc-noetherian-ring]); by [lem-weil-pbc-noetherian-finitely-many-minimal-primes] there are finitely many. Let $\\mathfrak q_1,\\dots,\\mathfrak q_r$ be all primes minimal over $\\operatorname{Ann}_R(N)$ for the $d+1$ modules $N$ of step 4 (a finite list; $r\\ge1$ since $\\operatorname{Supp}(M)\\neq\\emptyset$). No $\\mathfrak q_j$ equals $\\mathfrak m$: if $\\mathfrak m$ were minimal over $\\operatorname{Ann}_R(N)$, then every prime $\\mathfrak p\\in\\operatorname{Supp}(N)=V(\\operatorname{Ann}_R(N))$ satisfies $\\operatorname{Ann}_R(N)\\subseteq\\mathfrak p\\subseteq\\mathfrak m$ ($R$ local), hence $\\mathfrak p=\\mathfrak m$, so $\\operatorname{Supp}(N)=\\{\\mathfrak m\\}$ and $\\dim\\operatorname{Supp}(N)=0$, contradicting step 4. As $\\mathfrak q_j\\subsetneq\\mathfrak m$, $\\mathfrak m\\not\\subseteq\\mathfrak q_j$ for every $j$, and prime avoidance [lem-weil-pbc-prime-avoidance] (with $J=\\mathfrak m$ and the primes $\\mathfrak q_j$) gives $h\\in\\mathfrak m$ with $h\\notin\\mathfrak q_j$ for all $j$ (Stacks: 'None of these $\\mathfrak q_j$ is equal to $\\mathfrak m$ and hence we may find $h\\in\\mathfrak m$, $h\\notin\\mathfrak q_j$ by Lemma 00DS').",
-   "uses": [
-    "lem-weil-pbc-finite-module-support-annihilator",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-    "lem-weil-pbc-prime-avoidance"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "($h$ satisfies (i) and (ii).) Let $N$ be one of the modules of step 4. Since $h\\in\\mathfrak m$ lies in no prime minimal over $\\operatorname{Ann}_R(N)$, clause (1) of [lem-weil-pbc-support-dimension-quotient-element-equality] gives $\\dim\\operatorname{Supp}(N/hN)=\\dim\\operatorname{Supp}(N)-1$, and by [lem-weil-pbc-support-quotient-ideal-module] $\\operatorname{Supp}(N/hN)=\\operatorname{Supp}(N)\\cap V(h)$. For $N=M_i$ ($0\\le i\\le d-1$) this reads, with step 4 and $V(f_1,\\dots,f_i)\\cap V(h)=V(h,f_1,\\dots,f_i)$: (i) $\\dim(\\operatorname{Supp}(M)\\cap V(h,f_1,\\dots,f_i))=d-i-1$ for $i=0,\\dots,d-1$, i.e. $h$ is good with respect to $(M,f_1,\\dots,f_d)$. For $N=M/gM$: (ii) $\\dim(\\operatorname{Supp}(M)\\cap V(h,g))=(d-1)-1=d-2$ (Stacks: 'It is clear that $h$ satisfies (i) and (ii)').",
-   "uses": [
-    "lem-weil-pbc-support-dimension-quotient-element-equality",
-    "lem-weil-pbc-support-quotient-ideal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "($M/hM$ and the induction hypothesis.) By (i) and [lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor] applied to $h$: $h$ is a nonzerodivisor on $M$, and $M':=M/hM$ is Cohen–Macaulay with $\\dim\\operatorname{Supp}(M')=d-1$. So $M'$ is a nonzero (its support has dimension $d-1\\ge1$, so is nonempty) finite Cohen–Macaulay $R$-module with $\\dim\\operatorname{Supp}(M')=d-1$, $g\\in\\mathfrak m$, and by [lem-weil-pbc-support-quotient-ideal-module] $\\operatorname{Supp}(M')\\cap V(g)=\\operatorname{Supp}(M)\\cap V(h)\\cap V(g)=\\operatorname{Supp}(M)\\cap V(h,g)$, of dimension $d-2=(d-1)-1$ by (ii). Hence $P(d-1)$ applies to $(M',g)$: $g$ is a nonzerodivisor on $M/hM$, and $M'/gM'=M/(h,g)M$ is Cohen–Macaulay with $\\operatorname{depth}(M/(h,g)M)=\\operatorname{depth}(M')-1=d-2$ (and $\\operatorname{Supp}(M/(h,g)M)=\\operatorname{Supp}(M)\\cap V(h,g)$ is nonempty, of dimension $d-2\\ge0$, so $M/(h,g)M\\neq0$).",
-   "uses": [
-    "lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor",
-    "lem-weil-pbc-support-quotient-ideal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "((a): $g$ is a nonzerodivisor on $M$, and $h$ on $M/gM$.) By step 7, $h$ is a nonzerodivisor on $M$, $g$ is a nonzerodivisor on $M/hM$, and $M/(h,g)M\\neq0$: so $h,g$ is an $M$-regular sequence [def-weil-pbc-regular-sequence]. By [lem-weil-pbc-regular-sequence-permutation-noetherian-local] ($R$ Noetherian local, $M$ finite), $g,h$ is an $M$-regular sequence: $g$ is a nonzerodivisor on $M$, which is (a), and $h$ is a nonzerodivisor on $M/gM$ (Stacks: 'By Lemma 00LJ we see that $g:M\\to M$ and $h:M/gM\\to M/gM$ are injective').",
-   "uses": [
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-regular-sequence-permutation-noetherian-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
-   }
-  },
-  {
-   "text": "((b): $M/gM$ is Cohen–Macaulay of depth $d-1$.) Put $\\bar M=M/gM$; it is finite, and nonzero since $\\operatorname{Supp}(\\bar M)=\\operatorname{Supp}(M)\\cap V(g)$ has dimension $d-1\\ge0$ (step 4). Lower bound: by step 7 $\\operatorname{depth}(M/(h,g)M)=d-2$ is finite, so by [def-weil-pbc-depth] there is an $M/(h,g)M$-regular sequence $y_1,\\dots,y_{d-2}\\in\\mathfrak m$ (as in step 1). Since $\\bar M/h\\bar M=M/(g,h)M$ and, for each $k$, $\\bar M/(h,y_1,\\dots,y_k)\\bar M=(M/(h,g)M)/(y_1,\\dots,y_k)(M/(h,g)M)$, and $h$ is a nonzerodivisor on $\\bar M$ (step 8), the sequence $h,y_1,\\dots,y_{d-2}\\in\\mathfrak m$ is $\\bar M$-regular [def-weil-pbc-regular-sequence], of length $d-1$. Upper bound: [lem-weil-pbc-depth-le-support-dimension] applied to $\\bar M\\neq0$ gives $\\operatorname{depth}(\\bar M)\\le\\dim\\operatorname{Supp}(\\bar M)=d-1$; in particular $\\operatorname{depth}(\\bar M)\\neq\\infty$, so by [def-weil-pbc-depth] it is the supremum of lengths of $\\bar M$-regular sequences in $\\mathfrak m$, which is $\\ge d-1$ by the lower bound. Hence $\\operatorname{depth}(\\bar M)=d-1=\\dim\\operatorname{Supp}(\\bar M)$: $M/gM$ is Cohen–Macaulay, of depth $\\operatorname{depth}(M)-1$. This proves $P(d)$ and completes the induction (Stacks: 'Combined with the fact that $M/(g,h)M$ is Cohen–Macaulay this finishes the proof').",
-   "uses": [
-    "def-weil-pbc-depth",
-    "def-weil-pbc-regular-sequence",
-    "lem-weil-pbc-depth-le-support-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048"
+    "place": "Algebra, Lemma Tag 00N5 (lemma-CM-one-g), reduced via the auxiliary setup theorem"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-localization",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
-  "def-weil-pbc-depth",
-  "def-weil-pbc-regular-sequence",
-  "lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor",
-  "lem-weil-pbc-support-quotient-ideal-module",
-  "lem-weil-pbc-support-dimension-quotient-element-equality",
-  "lem-weil-pbc-finite-module-support-annihilator",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-prime-avoidance",
-  "lem-weil-pbc-regular-sequence-permutation-noetherian-local",
-  "lem-weil-pbc-depth-le-support-dimension"
+  "lem-weil-pbc-cm-module-good-element-setup",
+  "lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00N5 (lemma-CM-one-g, line 25018), proof lines 25026-25048; it uses Lemma Tag 00N4 (lemma-good-element), Lemma Tag 00LJ (lemma-permute-xi), Lemma Tag 00DS (lemma-silly)"
+  "place": "Algebra, Lemma Tag 00N5, using the auxiliary setup theorem and Lemma Tag 00N4"
  },
  "mathlib_searches": [
   {
@@ -264,5 +153,15 @@
   "group": "J1",
   "result": "fix",
   "note": "Noetherian local R; finite nonzero M (Module.Finite, Nontrivial); CM as coerced depth = supportDim (node's equality, Tag 00N3); g in maximalIdeal; dim(Supp M ∩ V(g))+1 = supportDim (equivalent to -1 drop, d=0 and bottom excluded); (a) IsSMulRegular M g (fix: was Function.Injective, defeq); (b) QuotSMulTop g M CM and depth+1 = depth M; #check confirmed Module.support/supportDim/QuotSMulTop"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T230751-L-1906859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Regular.IsSMulRegular
 import Sheaf.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.IsSMulRegularOfGoodSequence
+import Sheaf.RingTheory.CmModuleGoodElementSetup
 
 /-!
 # A dimension-cutting element on a Cohen–Macaulay module
@@ -80,6 +81,17 @@ theorem cm_module_good_element_nonzerodivisor
       (IsLocalRing.depth (R := R) (QuotSMulTop g M) : WithBot ℕ∞) =
         supportDim R (QuotSMulTop g M) ∧
       IsLocalRing.depth (R := R) (QuotSMulTop g M) + 1 = IsLocalRing.depth (R := R) M :=
-  sorry
+  by
+    exact (exists_good_sequence_for_cm_element M hCM g hg hdim).elim (fun d hd =>
+    hd.2.2.elim (fun fs hfs =>
+      let T := isSMulRegular_of_good_sequence M d hd.1 hCM hd.2.1 fs hfs.1 hfs.2.1
+        hfs.2.2.1 g hg hfs.2.2.2
+      have hdepthM : IsLocalRing.depth (R := R) M = d := by
+        simpa only [WithBot.coe_eq_coe] using hCM.trans hd.2.1
+      ⟨T.1, T.2.1, by
+        rw [T.2.2.1, hdepthM]
+        simpa [Nat.cast_sub hd.1] using
+          (tsub_add_cancel_of_le
+            (Nat.cast_le.mpr hd.1 : (1 : ℕ∞) ≤ d))⟩))
 
 end Module

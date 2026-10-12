@@ -9995,3 +9995,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: returned deliver/P4/Sheaf.AlgebraicGeometry.Curve.NilIdealUnitImageRelativeKernel (reviewer RETURN: (the landing tools, head 801f72d92) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 23:07 L: merged deliver/A2/Sheaf.CategoryTheory.Sites.PresheafCechSheafResolution (stage 3; reviewer PASS; first push; landing 20261012T230751-L-1906656 (interface); batch 20261012T230749; modules 3; new nodes 2)
 - 23:07 L: merged deliver/A2/Sheaf.Topology.ConstantSubsheafPositiveRefinement (stage 3; reviewer PASS; first push; landing 20261012T230751-L-1906756 (interface); batch 20261012T230749; modules 3; new nodes 2)
+- 23:07 L: merged deliver/A3/Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor (stage 3; reviewer PASS; first push; landing 20261012T230751-L-1906859 (interface); batch 20261012T230749; modules 2; new nodes 1)
