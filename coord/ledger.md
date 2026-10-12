@@ -6704,3 +6704,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:56 L: returned deliver/U2/Sheaf.Paper.StrictHenselizationPointedMap (reviewer RETURN: (reviewer X-8b116, head 8b1160538) E2 (false statement left with sorry): lean/Sheaf/Paper/StrictHenselizationPointedMap.)
 - 07:56 L: returned deliver/Q1/Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian (reviewer RETURN: (reviewer X-90660, head 90660d193) A/F (review point 2: incomplete import-change record and inaccurate report): In coord)
 - 07:56 L: returned deliver/U3/Sheaf.CategoryTheory.SheafAlgebrasDirectedColimitModuleCore (reviewer RETURN: (reviewer X-2d9f7, head 2d9f7ac8f) E1 / brief point 4: the theorem left with sorry is false. For singleton X and I, the )
+- 07:56 L: returned deliver/M2/Sheaf.CategoryTheory.SiteSystemStrictificationData (reviewer RETURN: (reviewer X-ac044, head ac044e9c6) E2 / review point 4: CategoryTheory.exists_site_system_strictification_data remains a)
