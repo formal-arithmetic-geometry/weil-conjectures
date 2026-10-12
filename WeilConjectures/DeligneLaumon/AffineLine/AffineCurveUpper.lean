@@ -142,47 +142,6 @@ theorem LisseOnDenseOpen.hasWeightsAtMostOver_compactlySupportedCohomology_one_o
     (hG : ((upperStar W.ι).obj ((higherLowerShriek k₀ l H 0).obj D.sheaf)).IsLisse)
     {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.sheaf.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
-  let a := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))
-  let K := (higherLowerShriek k₀ l H 0).obj D.sheaf
-  let G := (upperStar W.ι).obj K
-  have hGw : G.IsPunctuallyPureOfWeight ι w :=
-    (hw.higherLowerShriek_zero_of_quasiFinite (f := H)).upperStar W.ι
-  have := isNoetherian_of_locallyOfFiniteType
-    (ProjectiveLine (Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
-  have := W.isSeparated (k₀ := k₀)
-  have := W.locallyOfFiniteType (k₀ := k₀)
-  have : QuasiCompact (W.toScheme ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over W.ι]
-    infer_instance
-  -- the part `V` of `W` in the affine chart; its complement in `W` lies over `∞`
-  let V : W.toScheme.Opens := W.ι ⁻¹ᵁ a.opensRange
-  have := isNoetherian_of_locallyOfFiniteType (W.toScheme ↘ Spec (CommRingCat.of k₀))
-  have := V.isSeparated (k₀ := k₀)
-  have := V.locallyOfFiniteType (k₀ := k₀)
-  have : QuasiCompact (V.toScheme ↘ Spec (CommRingCat.of k₀)) := by
-    rw [← comp_over V.ι]
-    infer_instance
-  have hVfin : ((Set.range V.ι.base)ᶜ).Finite := by
-    rw [Scheme.Opens.range_ι]
-    refine ((Set.finite_singleton (ProjectiveLine.infinity (Spec (CommRingCat.of k₀))
-      (IsLocalRing.closedPoint k₀))).preimage W.ι.isOpenEmbedding.injective.injOn).subset ?_
-    intro x hx
-    have : W.ι.base x ∈ ((a.opensRange : Set (ProjectiveLine (Spec (CommRingCat.of k₀))))ᶜ) :=
-      hx
-    rwa [ProjectiveLine.compl_opensRange_affineChart_eq_singleton] at this
-  -- the open immersion `j : V ⟶ 𝔸¹`
-  have hr : Set.range (V.ι ≫ W.ι).base ⊆ Set.range a.base := by
-    rintro _ ⟨x, rfl⟩
-    exact x.2
-  let j : V.toScheme ⟶ affineLine k₀ := IsOpenImmersion.lift a (V.ι ≫ W.ι) hr
-  have hj : j ≫ a = V.ι ≫ W.ι := IsOpenImmersion.lift_fac _ _ _
-  have : IsOpenImmersion j := by
-    have : IsOpenImmersion (j ≫ a) := hj ▸ inferInstance
-    exact IsOpenImmersion.of_comp j a
-  have : j.IsOver (Spec (CommRingCat.of k₀)) := IsOpenImmersion.isOver_lift _ _ hr
-  have : QuasiCompact j := by
-    have : QuasiCompact (j ≫ a) := hj ▸ inferInstance
-    exact quasiCompact_of_comp_isOpenImmersion?
   sorry
 
 end WeilSheaf

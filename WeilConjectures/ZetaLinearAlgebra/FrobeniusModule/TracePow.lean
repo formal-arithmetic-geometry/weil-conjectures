@@ -106,12 +106,6 @@ namespace FrobeniusModule
 
 variable {K : Type v} [Field K]
 
-/-- Isomorphic Frobenius modules have the same traces of powers of the Frobenius. -/
-theorem Equiv.trace_frobeniusEnd_pow {M N : FrobeniusModule.{u, v} K} (e : M.Equiv N) (n : ℕ) :
-    LinearMap.trace K N.carrier (N.frobeniusEnd ^ n) =
-      LinearMap.trace K M.carrier (M.frobeniusEnd ^ n) := by
-  rw [e.frobeniusEnd_eq_conj, LinearEquiv.conj_pow, LinearMap.trace_conj']
-
 /-- The traces of the powers of the Frobenius of a zero module vanish. -/
 theorem trace_frobeniusEnd_pow_eq_zero_of_subsingleton (M : FrobeniusModule.{u, v} K)
     [Subsingleton M.carrier] (n : ℕ) :
