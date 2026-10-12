@@ -6554,3 +6554,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:46 L: returned deliver/J1/Sheaf.CategoryTheory.ColimitSites (reviewer RETURN: (reviewer X-fd72c, head fd72ca3a5) E6 / review point 4: ColimitSites.lean retains the false exists_colimit_site_reduced )
 - 06:51 L: returned deliver/G1/Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem (reviewer RETURN: (reviewer X-fb28c, head fb28c9d72) B7: dag/nodes/sec-proper-base-change/lem-weil-pbc-affine-etale-cartesian-sheaf-adjunc)
 - 06:51 L: returned deliver/T1/Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification (reviewer RETURN: (reviewer X-09b43, head 09b43402b) D1 — The delivery relocates all mathematical content into two sorry theorems: exists_)
+- 06:51 L: returned deliver/F2/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (reviewer RETURN: (reviewer X-2abac, head 2abac3c04) E5 (brief point 4): The three remaining obligations lack the required complete writte)
