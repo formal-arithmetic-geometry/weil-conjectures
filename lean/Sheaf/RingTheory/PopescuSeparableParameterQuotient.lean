@@ -10,13 +10,11 @@ public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Sheaf.Algebra.PopescuLiftNilpotent
-import Sheaf.FieldTheory.SeparableSmoothColimit
-import Sheaf.RingTheory.FlatOverRegular
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
 import Sheaf.RingTheory.PopescuDelocalizeHeightZero
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.PopescuResolutionIdentity
+import Sheaf.RingTheory.PopescuParameterQuotientData
+import Sheaf.RingTheory.PopescuParameterQuotientLocalResolution
+import Sheaf.RingTheory.PopescuParameterQuotientPrimeGeometry
 
 /-!
 # Resolving the nilpotent parameter quotient
@@ -85,6 +83,18 @@ theorem exists_popescu_resolution_parameter_quotient
       γ₀.toRingHom.comp (Ideal.Quotient.mk J_C) =
         (Ideal.Quotient.mk J_Λ).comp γ.toRingHom ∧
       PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q ∧
-      CanBePopescuResolved γ₀ q₀ := by sorry
+      CanBePopescuResolved γ₀ q₀ := by
+  let := φ.toRingHom.toAlgebra
+  dsimp
+  obtain ⟨hfp, γ₀, q₀, hcompat, hcomap⟩ :=
+    parameter_quotient_data d c hc φ γ q hgen
+  refine ⟨hfp, γ₀, q₀, hcompat, hcomap, ?_⟩
+  obtain ⟨hdim₀, hminimal⟩ :=
+    parameter_quotient_prime_geometry d c φ q hgen hfp γ₀ q₀ hcomap
+  by_cases hle : popescuIdeal γ₀ ≤ q₀.asIdeal
+  · exact canBePopescuResolved_of_local_height_zero γ₀ q₀ (hminimal hle)
+      (parameter_quotient_local_resolution d c hc φ γ q hdim hgen hsep
+        hfp γ₀ q₀ hcompat hcomap) hdim₀
+  · exact canBePopescuResolved_of_ideal_not_le γ₀ q₀ hle
 
 end Algebra

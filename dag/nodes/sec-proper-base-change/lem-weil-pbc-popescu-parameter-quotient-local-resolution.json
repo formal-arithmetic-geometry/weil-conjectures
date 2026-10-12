@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-popescu-parameter-quotient-local-resolution",
+ "kind": "statement",
+ "title": "Local resolution of the powered parameter quotient",
+ "statement": "Under the hypotheses of the parent parameter-quotient statement, for any finitely presented quotient C/JC over R/J and any compatible quotient map γ₀ with quotient prime q₀ contracting to q, the canonical localization of γ₀ at q₀ is Popescu resolvable. This asserts no global quotient resolution.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FE (lemma-resolve-special), final powered-parameter reduction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-popescu-resolution",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "At q the d generators are a regular sequence in the d-dimensional regular local ring. The regular-local polynomial-origin ring has the same dimension. The flat-over-regular lemma makes R_p→Λ_q flat; quotient base change makes the reduced local map flat.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-weil-pbc-polynomial-ring-origin-regular-local",
+    "lem-weil-pbc-flat-over-regular",
+    "lem-weil-pbc-flat-module-quotient-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For e=8c, the maximal ideal in R_p/J is nilpotent: degree d(e−1)+1 forces some variable exponent ≥e. Its residue field is k and the target fiber is κ(q). Separability gives that fiber as a filtered colimit of smooth k-algebras. Nilpotent lifting then gives the reduced local target as a filtered colimit of smooth algebras over the reduced local base.",
+   "uses": [
+    "lem-kun-separable-smooth-colimit",
+    "lem-weil-pbc-popescu-lift-nilpotent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor the finitely presented reduced local source through a smooth stage. Its singular ideal is the unit ideal, so this is a local resolution.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+    "def-weil-pbc-singular-ideal",
+    "def-weil-pbc-popescu-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-polynomial-ring-origin-regular-local",
+  "lem-weil-pbc-flat-over-regular",
+  "lem-weil-pbc-flat-module-quotient-flat",
+  "lem-kun-separable-smooth-colimit",
+  "lem-weil-pbc-popescu-lift-nilpotent",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-popescu-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07FE (lemma-resolve-special), final powered-parameter reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ind.*mooth|nilpotent.*mooth|factor.*mooth",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "Ingredients only; no exact statement. Used Mathlib ingredients where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat algebra over an Artinian local ring with separable residue field fiber is a filtered colimit of smooth algebras and any finitely presented algebra map factors through a smooth algebra",
+   "date": "2026-10-12",
+   "results": "8 hits: Algebra.Smooth.exists_finiteType, Algebra.smooth_iff, Algebra.Smooth.flat, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.Smooth.exists_subalgebra_fg, RingHom.smooth_def, Algebra.Smooth, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing",
+   "verdict": "Ingredients only; no exact statement. Used Mathlib ingredients where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Algebra.FinitePresentation",
+   "date": "2026-10-12",
+   "results": "6 hits: Algebra.Smooth.finitePresentation, Algebra.Smooth.mk, Algebra.smooth_iff, Algebra.basicOpen_subset_smoothLocus_iff_smooth, Algebra.IsSmoothAt.exists_notMem_smooth, Algebra.Smooth.of_formallySmooth_fiber",
+   "verdict": "Ingredients only; no exact statement. Used Mathlib ingredients where applicable."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat maps with nilpotent base ideal and separable closed fiber are filtered colimits of smooth algebras",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative verdict"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuSeparableParameterQuotient",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Subsidiary Lemma 07FE, powered-parameter reduction within the finite-etale-lifting essential-surjectivity proof",
+   "via": [
+    "lem-weil-pbc-popescu-separable-parameter-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuParameterQuotientLocalResolution",
+  "file": "lean/Sheaf/RingTheory/PopescuParameterQuotientLocalResolution.lean",
+  "declaration": "Algebra.parameter_quotient_local_resolution",
+  "statement": "theorem parameter_quotient_local_resolution\n    {k : Type u} {C : Type v} {Λ : Type w}\n    [Field k] [CommRing C] [CommRing Λ] [Algebra k Λ]\n    (d c : ℕ) (hc : 1 ≤ c) (φ : MvPolynomial (Fin d) k →ₐ[k] Λ)\n    [Algebra (MvPolynomial (Fin d) k) C]\n    [FinitePresentation (MvPolynomial (Fin d) k) C]\n    (γ : letI := φ.toRingHom.toAlgebra; C →ₐ[MvPolynomial (Fin d) k] Λ)\n    (q : PrimeSpectrum Λ) [IsNoetherianRing Λ]\n    [IsRegularLocalRing (Localization.AtPrime q.asIdeal)]\n    (hdim : ringKrullDim (Localization.AtPrime q.asIdeal) = (d : WithBot ℕ∞))\n    (hgen : Ideal.span (Set.range (fun i : Fin d ↦\n      algebraMap Λ (Localization.AtPrime q.asIdeal) (φ (MvPolynomial.X i)))) =\n      IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal))\n    (hsep : IsSeparableExtension k q.asIdeal.ResidueField) :\n    letI := φ.toRingHom.toAlgebra\n    let J : Ideal (MvPolynomial (Fin d) k) :=\n      Ideal.span (Set.range (fun i : Fin d ↦ (MvPolynomial.X i ^ c) ^ 8))\n    let J_C := Ideal.map (algebraMap (MvPolynomial (Fin d) k) C) J\n    let J_Λ := Ideal.map (algebraMap (MvPolynomial (Fin d) k) Λ) J\n    ∀ (_ : FinitePresentation (MvPolynomial (Fin d) k ⧸ J) (C ⧸ J_C))\n      (γ₀ : (C ⧸ J_C) →ₐ[MvPolynomial (Fin d) k ⧸ J] (Λ ⧸ J_Λ))\n      (q₀ : PrimeSpectrum (Λ ⧸ J_Λ)),\n      γ₀.toRingHom.comp (Ideal.Quotient.mk J_C) =\n          (Ideal.Quotient.mk J_Λ).comp γ.toRingHom →\n      PrimeSpectrum.comap (Ideal.Quotient.mk J_Λ) q₀ = q →\n    letI := Localization.AtPrime.algebraOfLiesOver\n      (q₀.asIdeal.under (MvPolynomial (Fin d) k ⧸ J)) q₀.asIdeal\n    CanBePopescuResolved\n      (Algebra.TensorProduct.lift\n        (Algebra.ofId (Localization.AtPrime (q₀.asIdeal.under (MvPolynomial (Fin d) k ⧸ J)))\n          (Localization.AtPrime q₀.asIdeal))\n        ((IsScalarTower.toAlgHom (MvPolynomial (Fin d) k ⧸ J) (Λ ⧸ J_Λ)\n          (Localization.AtPrime q₀.asIdeal)).comp γ₀)\n        (fun _ _ => Commute.all _ _))\n      ⟨IsLocalRing.maximalIdeal (Localization.AtPrime q₀.asIdeal), inferInstance⟩",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T135227-L-1659464",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T135227-L-1659464",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
