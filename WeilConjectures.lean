@@ -137,9 +137,11 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantSheafOfTypes
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.DecompositionGroup
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.EtaleDescent
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverInertia
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ExtendOverPoints
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Extension
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteColimits
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Frobenius
@@ -291,6 +293,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalizationChart
@@ -586,6 +589,7 @@ public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 public import WeilConjectures.CategoryTheory.Idempotents.Shift
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
 public import WeilConjectures.CategoryTheory.Idempotents.Triangulated
+public import WeilConjectures.CategoryTheory.Limits.CoequalizerOfMonoidQuotient
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ProjectionPairing
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
@@ -1691,6 +1695,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.UniversalHomeomorphismInvariance
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Finite.Exact
