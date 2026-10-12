@@ -14,45 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Restrict the short exact sequence to U. Restrictions preserve exactness: the local lifting conditions for opens contained in U are unchanged. Compose g with the last map and let K3 be its kernel. Coherence restricts to U by applying the same finite-generator and relation conditions on opens of U, which are opens of X. Thus K3 is finite type by coherence of the last term.",
+   "text": "Restrict S to U with SheafOfModules.overFunctor. Its existing finite-limit and finite-colimit preservation instances give ShortExact.map_of_exact. Set q = g followed by the restricted last map. The relation clause of coherence of the last term, applied directly at U to q, says kernel q is finite type. No separate coherence-restriction theorem is needed here.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
     "pqf-def-coherent",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The map K3 to the middle term lands in the first term because its composite into the last term is zero. The universal property of a short exact kernel supplies this map. Its kernel is the kernel of g: equivalently the snake lemma applied to the top row zero-free-free with identity gives the exact sequence zero-kernel g-K3-first.",
+   "text": "Apply ShortExact.fIsKernel to the restricted sequence. The composite kernel q -> free -> middle term is killed by the last map, so it factors uniquely as phi : kernel q -> first term. Construct kernel phi -> kernel g by composing the two kernel inclusions and lifting into kernel g. Conversely, lift kernel g -> free into kernel q, then into kernel phi: its composite with phi is zero after the monic first map, hence zero. Cancellation of the three kernel inclusions proves the two lifts are inverse. This is the private extension_kernel_iso proof, using no snake lemma.",
    "uses": [
-    "lem-weil-pbc-abelian-short-exact-kernel",
-    "lem-weil-pbc-snake-lemma-abelian",
-    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift"
+    "lem-weil-pbc-abelian-short-exact-kernel"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The first term restricted to U is coherent, again directly from the open-local definition. The kernel of a map from the finite type K3 to this coherent first term is finite type by the finite type kernel lemma. Transport along the kernel identification from the preceding step.",
+   "text": "Apply the open-slice finite type kernel lemma to phi, whose source kernel q is finite type and whose target is the restriction of the coherent first term. Transport finite local generating families along kernel phi isomorphic to kernel g: keep the same cover and finite indexing sets, and compose each local free epimorphism with the restricted isomorphism. Epimorphisms and finiteness are preserved, giving the required finite type kernel.",
    "uses": [
-    "pqf-def-coherent",
-    "lem-weil-pbc-coherent-finite-type-sub-kernel"
+    "lem-weil-pbc-coherent-finite-type-kernel-over",
+    "pqf-def-coherent"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
   "pqf-def-coherent",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-abelian-short-exact-kernel",
-  "lem-weil-pbc-snake-lemma-abelian",
-  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
-  "lem-weil-pbc-coherent-finite-type-sub-kernel"
+  "lem-weil-pbc-coherent-finite-type-kernel-over"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BY (lemma-coherent-abelian), proof of (4), relation-kernel diagram"
+  "place": "Modules, Lemma 01BY (lemma-coherent-abelian), proof of (4); Definition 01BV and part (2) for open restrictions"
  },
  "mathlib_searches": [
   {
@@ -142,11 +136,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-eb846",
-  "group": "T1",
+  "reviewer": "COMPILER",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T211618-L-1058419",
+  "landing": "20261012T223409-L-1638181",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with node statements, dependency records, Stacks 01BY, repository diffs, clean compilation and axiom probes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
