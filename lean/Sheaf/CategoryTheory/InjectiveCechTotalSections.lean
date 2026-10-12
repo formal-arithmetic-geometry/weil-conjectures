@@ -5,10 +5,12 @@ Released under Apache 2.0 license.
 module
 
 public import Sheaf.CategoryTheory.CechResolutionDoubleComplex
+import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.SiteCechMathlibComparison
+import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-!
 # Total Čech cohomology of a complex of injective sheaves
@@ -25,6 +27,29 @@ namespace CategoryTheory
 open Limits Opposite
 
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
+
+/-- Row augmentation before extension by zero.
+Source: blueprint lem-sc-injective-cech-total-sections, proof Steps 1--3.
+(blueprint: lem-sc-injective-cech-total-sections-nat)
+Proof: Apply injective Čech acyclicity and the chosen-product comparison to each
+row, then apply the first-quadrant column augmentation criterion. -/
+theorem injective_cech_total_sections_nat
+    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
+    [HasFiniteWidePullbacks C] [HasSheafify J AddCommGrpCat.{v}]
+    (K : CochainComplex (Sheaf J AddCommGrpCat.{v}) ℕ)
+    (hK : ∀ q : ℕ, Injective (K.X q)) (X : C)
+    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X)
+    (hπ : Sieve.ofArrows U π ∈ J X) (n : ℕ) :
+    Nonempty
+      (((HomologicalComplex₂.flip
+        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙
+          (Functor.whiskeringLeft _ _ AddCommGrpCat.{v}).obj (Over.forget X).op ⋙
+          cechComplexFunctor (fun i ↦ Over.mk (π i))).mapHomologicalComplex
+            (.up ℕ)).obj K)).total (.up ℕ)).homology n ≅
+        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙
+          (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex
+            (.up ℕ)).obj K).homology n) := by
+  sorry
 
 /-- Row augmentation identifies total Čech cohomology with section-complex cohomology.
 This is a statement about any nonnegative complex of injective sheaves, with no
@@ -71,6 +96,14 @@ theorem injective_cech_total_sections
         (((sheafToPresheaf J AddCommGrpCat.{v} ⋙
           (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex
             (.up ℤ)).obj (K.extend ComplexShape.embeddingUpNat)).homology (n : ℤ)) := by
-  sorry
+  obtain ⟨e⟩ := injective_cech_total_sections_nat K hK X π hπ n
+  let S := ((sheafToPresheaf J AddCommGrpCat.{v} ⋙
+    (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex
+      (.up ℕ)).obj K
+  let G := sheafToPresheaf J AddCommGrpCat.{v} ⋙
+    (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)
+  let m := HomologicalComplex.mapExtendIso K ComplexShape.embeddingUpNat G
+  exact ⟨e ≪≫ (S.extendHomologyIso ComplexShape.embeddingUpNat (by rfl)).symm ≪≫
+    (asIso (HomologicalComplex.homologyMap m.hom (n : ℤ))).symm⟩
 
 end CategoryTheory

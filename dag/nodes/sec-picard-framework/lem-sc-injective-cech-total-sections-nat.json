@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-injective-cech-total-sections-nat",
+ "kind": "statement",
+ "title": "Row comparison before extension",
+ "statement": "theorem injective_cech_total_sections_nat\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasFiniteWidePullbacks C] [HasSheafify J AddCommGrpCat.{v}]\n    (K : CochainComplex (Sheaf J AddCommGrpCat.{v}) ℕ)\n    (hK : ∀ q : ℕ, Injective (K.X q)) (X : C)\n    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X)\n    (hπ : Sieve.ofArrows U π ∈ J X) (n : ℕ) :\n    Nonempty\n      (((HomologicalComplex₂.flip\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (Functor.whiskeringLeft _ _ AddCommGrpCat.{v}).obj (Over.forget X).op ⋙\n          cechComplexFunctor (fun i ↦ Over.mk (π i))).mapHomologicalComplex\n            (.up ℕ)).obj K)).total (.up ℕ)).homology n ≅\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex\n            (.up ℕ)).obj K).homology n)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 3; Row augmentation for a nonnegative complex of injective sheaves"
+ },
+ "stmt_deps": [
+  "def-sc-cech-resolution-double-complex",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Pass from J to its precoverage and choose the covering fibre products. Apply injective Cech acyclicity in the aligned universe v. The chosen-product comparison transports this result to the Mathlib Cech complex. Thus augmenting a row by K^q(X) gives an exact row: degree-zero cohomology is sections and positive cohomology vanishes.",
+   "uses": [
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-weil-pbc-site-cech-mathlib-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction into the (0,q) summand of the total complex defines the augmentation. Its Cech differential vanishes, restriction commutes with K differential, and the vertical sign is one. The mapping cone, with augmented Cech degrees starting at -1, is bounded below; its row filtration is finite in every total degree.",
+   "uses": [
+    "def-sc-cech-resolution-double-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The row spectral sequence of this cone has zero first page, hence zero abutment by finite convergence. The cone is acyclic and the augmentation is a quasi-isomorphism. Invert its homology isomorphism and use extension-by-zero homology comparison in nonnegative degrees. Degree zero has zero incoming differential. For an empty covering, the sheaf condition forces all sections on X to be zero, so the argument still applies.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-cech-resolution-double-complex",
+  "lem-weil-pbc-site-cech-mathlib-comparison",
+  "lem-weil-pbc-site-injective-cech-acyclic",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 3, row augmentation and injective-resolution computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "row augmentation total complex",
+   "results": "No direct match",
+   "verdict": "No direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.extendHomologyIso",
+   "results": "Found",
+   "verdict": "Used",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExtendIso",
+   "results": "Found",
+   "verdict": "Used",
+   "date": "2026-10-12"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InjectiveCechTotalSections",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-resolution-total",
+   "place": "Steps 1--2"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InjectiveCechTotalSections",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveCechTotalSections.lean",
+  "declaration": "CategoryTheory.injective_cech_total_sections_nat",
+  "statement": "theorem injective_cech_total_sections_nat\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasFiniteWidePullbacks C] [HasSheafify J AddCommGrpCat.{v}]\n    (K : CochainComplex (Sheaf J AddCommGrpCat.{v}) ℕ)\n    (hK : ∀ q : ℕ, Injective (K.X q)) (X : C)\n    {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X)\n    (hπ : Sieve.ofArrows U π ∈ J X) (n : ℕ) :\n    Nonempty\n      (((HomologicalComplex₂.flip\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (Functor.whiskeringLeft _ _ AddCommGrpCat.{v}).obj (Over.forget X).op ⋙\n          cechComplexFunctor (fun i ↦ Over.mk (π i))).mapHomologicalComplex\n            (.up ℕ)).obj K)).total (.up ℕ)).homology n ≅\n        (((sheafToPresheaf J AddCommGrpCat.{v} ⋙\n          (evaluation Cᵒᵖ AddCommGrpCat.{v}).obj (op X)).mapHomologicalComplex\n            (.up ℕ)).obj K).homology n)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T135238-L-1667176",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T135238-L-1667176",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
