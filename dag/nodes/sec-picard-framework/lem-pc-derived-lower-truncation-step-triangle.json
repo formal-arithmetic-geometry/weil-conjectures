@@ -28,56 +28,42 @@
  ],
  "proof": [
   {
-   "text": "Choose a cochain-complex representative K of E. By [def-sbc-standard-tstructure-derived-category], for each m the truncation \\tau_{\\ge m}E is represented by the quotient complex K/\\tau_{\\le m-1}K, and the transition \\tau_{\\ge m}E\\to\\tau_{\\ge m+1}E by the quotient map K/\\tau_{\\le m-1}K\\to K/\\tau_{\\le m}K. Elementary (Stacks Tag 08J5, the factorization of K\\to\\tau_{\\ge a+1}K through a quasi-isomorphism K/\\tau_{\\le a}K\\to\\tau_{\\ge a+1}K): the evident surjection K/\\tau_{\\le m-1}K\\to\\tau_{\\ge m}K (zero in degree m-1, K^m\\to K^m/\\operatorname{im}(d^{m-1}) in degree m, the identity above) has degreewise kernel the two-term complex K^{m-1}/\\ker(d^{m-1})\\xrightarrow{\\sim}\\operatorname{im}(d^{m-1}), which is acyclic, so it is a quasi-isomorphism; and these quasi-isomorphisms for m=-n and m=-n+1 commute with the quotient maps K/\\tau_{\\le -n-1}K\\to K/\\tau_{\\le -n}K and q_{-n}. Hence E_n and E_{n-1} are represented by the canonical complexes \\tau_{\\ge -n}K and \\tau_{\\ge -n+1}K, and the canonical transition is represented by the quotient map q_{-n}:\\tau_{\\ge -n}K\\to\\tau_{\\ge -n+1}K. Applying [lem-pc-derived-lower-truncation-step-ses] with m=-n gives a degreewise short exact sequence 0\\to C_{-n}(K)\\to\\tau_{\\ge -n}K\\to\\tau_{\\ge -n+1}K\\to0, together with a quasi-isomorphism H^{-n}(K)[n]\\to C_{-n}(K). The latter complex represents H^{-n}(E)[n].",
+   "text": "Put m=-n, B=τ≥m E, and A=τ<m+1 B. Mathlib TStructure.triangleLTGE_distinguished gives A → B → τ≥m+1 B → A[1]. The generic truncation bounds give A both ≥m and ≤m.",
    "uses": [
-    "lem-pc-derived-lower-truncation-step-ses",
-    "def-sbc-standard-tstructure-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle), canonical lower-truncation triangle"
-   }
-  },
-  {
-   "text": "Applying [lem-weil-pbc-complex-ses-triangle] to the short exact sequence from Step 1 gives a distinguished triangle C_{-n}(K)\\to E_n\\to E_{n-1}\\to C_{-n}(K)[1] in the derived category; the second arrow is the canonical transition because it is induced by q_{-n}.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle",
-    "def-weil-triangulated-category",
-    "lem-pc-derived-lower-truncation-step-ses"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle), canonical lower-truncation triangle"
-   }
-  },
-  {
-   "text": "The quasi-isomorphism H^{-n}(K)[n]\\to C_{-n}(K) becomes an isomorphism in D(\\mathcal A) by the definition of the derived category. Transporting the distinguished triangle of Step 2 across this isomorphism, using (TR1) that a triangle isomorphic to a distinguished triangle is distinguished, yields H^{-n}(E)[n]\\to E_n\\to E_{n-1}\\to H^{-n}(E)[n+1]. Naturality follows from the naturality asserted in [lem-pc-derived-lower-truncation-step-ses] and [lem-weil-pbc-complex-ses-triangle].",
-   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
     "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-pc-derived-lower-truncation-step-ses",
-    "lem-weil-pbc-complex-ses-triangle"
+    "def-weil-triangulated-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle), canonical lower-truncation triangle"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Upstream proved isIso_homologyFunctor_map_truncGEπ_app and isIso_homologyFunctor_map_truncLTι_app identify H^m(A) with H^m(E). These follow from the long homology sequence and vanishing of the adjacent homology of the complementary truncations. Mathlib exists_iso_singleFunctor_obj_of_isGE_of_isLE identifies A with single_m(Y); singleFunctorCompHomologyFunctorIso identifies Y with H^m(A). The singleFunctors shift isomorphism therefore gives H^m(E)[-m] ≅ A.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib isIso_truncGE_map_truncGEπ_app gives τ≥m+1 E ≅ τ≥m+1 B. Naturality of truncGEπ and the identity π_natTransTruncGEOfLE_app show that transporting the middle arrow along its inverse yields the canonical transition τ≥m E → τ≥m+1 E (use from_truncGE_obj_ext). Transport triangleLTGE along these two object isomorphisms with Triangle.isoMk and isomorphic_distinguished.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-abstract-derived-category",
-  "def-weil-triangulated-category",
-  "lem-pc-derived-lower-truncation-step-ses",
-  "lem-weil-pbc-complex-ses-triangle"
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker P1",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
+  "place": "Tag 08J5; Mathlib standard t-structure truncation triangle, with proved upstream homology truncation isomorphisms from WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure"
  },
  "mathlib_searches": [
   {
@@ -162,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-3c398",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T120904-L-979625",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, node, change record, and report matched the packet and base; delivered tree and all three direct importers compiled successfully, and theorem axioms are limited to propext, Classical.choice, and Quot.sound."
  }
 }
