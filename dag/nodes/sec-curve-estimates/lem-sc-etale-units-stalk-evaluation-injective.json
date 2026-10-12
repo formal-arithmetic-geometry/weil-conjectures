@@ -12,7 +12,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Example 03QV (2); the geometric-point interpretation of 03QU"
+  "place": "Example 03QV (2); injectivity via a singleton open refinement, using proved source-library and Mathlib lemmas"
  },
  "mathlib_searches": [
   {
@@ -76,21 +76,34 @@
  "statement": "Let $K$ be a field, $K^{sep}$ its separable closure, $\\Omega$ its algebraic closure, $p$ its geometric point [def-weil-pbc-geometric-stalks], and $\\mathbb G_m$ its units sheaf [def-sc-gm-torsor]. Suppose an additive homomorphism $f:(\\mathbb G_m)_p\\to (K^{sep})^\\times$ [def-sc-galois-units-cohomology] satisfies the evaluation formula on every unit germ: its image embedded into $\\Omega$ is the value of the representing unit at the geometric lift. Then $f$ is injective. This conclusion has no Galois action or equivariance clause.",
  "proof": [
   {
-   "text": "Represent two stalk elements by unit germs on pointed etale neighbourhoods. Choose an affine open around the image of each geometric lift. An etale algebra of finite type over a field is a finite product of finite separable extensions; restrict to the factor selected by the lift. Thus both germs are represented on spectra of finite separable fields embedded in the algebraic closure. The compositum of their images is again finite separable over K, so its spectrum is a common pointed etale refinement. If the two images under f agree, the evaluation formula makes their values in the algebraic closure equal. The embedding of the compositum is injective, hence the pulled-back units have equal underlying values and are equal as units. Restriction preserves their germs, so their images in the filtered colimit defining the stalk agree. This proves injectivity. Only separable extensions are used, including when K is imperfect.",
+   "text": "Use the proved Mathlib theorem Point.toPresheafFiber_jointly_surjective₂ to represent both stalk elements by units z₁ and z₂ on the same pointed etale neighbourhood (X,x). Equality of their f-images and the two evaluation formulas imply equality of their pulled-back section values in Ω. Cancel the ring equivalence ΓSpecIso to obtain equality in Γ(Spec Ω, top).",
    "uses": [
-    "lem-weil-pbc-finite-separable-extension-etale",
+    "def-weil-pbc-geometric-stalks",
     "def-sc-gm-torsor",
-    "def-sc-galois-units-cohomology",
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing proved source-library lemma Scheme.discreteTopology_of_etale_of_unique (WeilConjectures.AlgebraicGeometry.Sites.PointFunctions) to make the singleton of x(default) an open U. Scheme.exists_pointSmallEtale_fiber_ofOpens from that module lifts x to a point y on Y = Etale.ofOpens X U, with refinement g:Y -> X and p.fiber.map g y = x. Y is nonempty and subsingleton. The existing proved source-library lemma Scheme.isField_of_etale_of_subsingleton (WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale) makes Γ(Y,top) a field, so the ring homomorphism y.appTop into Γ(Spec Ω,top) is injective.",
+   "uses": [
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Pullback of functions along y followed by g equals pullback along x by Hom.comp_appTop and the pointed refinement equality. Thus injectivity of y.appTop makes the underlying values of the two restricted units equal. Units.ext, injectivity of Additive.toMul and ULift.ext give equality of their restricted sections of Gm. Apply Mathlib Point.toPresheafFiber_eq_iff′ with Y,g,y to conclude equality of the original germs.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-separable-extension-etale",
+  "def-weil-pbc-geometric-stalks",
   "def-sc-gm-torsor",
-  "def-sc-galois-units-cohomology",
-  "def-weil-pbc-geometric-stalks"
+  "def-sc-galois-units-cohomology"
  ],
  "created": {
   "by": "worker",
@@ -130,10 +143,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261012T184349-L-4021810",
-  "kind": "interface",
+  "landing": "20261012T225315-L-1807964",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
