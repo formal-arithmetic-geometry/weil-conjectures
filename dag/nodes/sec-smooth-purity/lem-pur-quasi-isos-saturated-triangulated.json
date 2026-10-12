@@ -27,100 +27,48 @@
  ],
  "proof": [
   {
-   "text": "The class $S$ is well defined, since homotopic morphisms induce the same maps on every $H^r$. By the existing multiplicative-system result, $S$ admits both a left and a right calculus of fractions, which comprises (MS1), (MS2) and (MS3), and $D(\\mathcal A)$ with $Q$ is the localization $S^{-1}K(\\mathcal A)$.",
-   "uses": [
-    "lem-pc-quasi-isomorphisms-multiplicative-system"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05RT"
-   }
-  },
-  {
-   "text": "$K(\\mathcal A)$, with the shift and with the distinguished triangles those isomorphic to cone triangles, is a triangulated category, and $Q:K(\\mathcal A)\\to D(\\mathcal A)$ commutes with the shifts and carries distinguished triangles to distinguished triangles, i.e. is exact.",
-   "uses": [
-    "lem-pur-homotopy-category-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05RT and Section 13.9"
-   }
-  },
-  {
-   "text": "(MS4): by the definition of the shift, $(K[n])^r=K^{r+n}$ with differential $(-1)^nd_K$, so $H^r(K[n])=H^{r+n}(K)$ functorially and $H^r(s[n])=H^{r+n}(s)$; hence $s[n]\\in S$ whenever $s\\in S$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05RT"
-   }
-  },
-  {
-   "text": "(MS5): by (TR3) in the triangulated category $K(\\mathcal A)$ (Step 2) there is $c:Z\\to Z'$ with $c\\circ v=v'\\circ s'$ and $s[1]\\circ w=w'\\circ c$. Applying the exact functor $Q$ (Step 2) gives a morphism $(Q s,Qs',Qc)$ of distinguished triangles of $D(\\mathcal A)$; since $H^n\\circ Q\\cong H^n$ [def-weil-abstract-derived-category], the cohomology ladder of this morphism is a morphism of the long exact cohomology sequences, with $H^n(s),H^n(s'),H^{n+1}(s),H^{n+1}(s')$ isomorphisms in the four positions around $H^n(c)$. By the five lemma $H^n(c)$ is an isomorphism for every $n$, so $s''=c\\in S$.",
-   "uses": [
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-triangulated-category",
-    "def-weil-abstract-derived-category",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-derived-cohomology-ladder",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05RT (via Lemma 05RS and lemma-operations)"
-   }
-  },
-  {
-   "text": "(MS6), two-out-of-three and retracts, by applying each $H^r$: if $H^r(h\\circ f)$ and $H^r(f\\circ g)$ are isomorphisms then $H^r(f)$ has the left inverse $H^r(h\\circ f)^{-1}H^r(h)$ and the right inverse $H^r(g)H^r(f\\circ g)^{-1}$, so it is an isomorphism; two-out-of-three for $S$ is two-out-of-three for isomorphisms applied to each $H^r$; and a retract of a quasi-isomorphism induces on each $H^r$ a retract of an isomorphism, which is an isomorphism.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05RT (lemma-acyclic)"
-   }
-  },
-  {
-   "text": "For every morphism of complexes, the morphism is a quasi-isomorphism exactly when its mapping cone is acyclic; hence a morphism of $K(\\mathcal A)$ lies in $S$ exactly when its cone is acyclic.",
-   "uses": [
-    "lem-pur-quasi-iso-cone-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 05RT"
-   }
-  },
-  {
-   "text": "Steps 1 to 5 show that $S$ is a saturated multiplicative system on the triangulated category $K(\\mathcal A)$ compatible with the triangulated structure, with localization $Q:K(\\mathcal A)\\to D(\\mathcal A)$ exact by Step 2; taking $\\mathcal D=K(\\mathcal A)$ and this $S$ gives exactly the hypotheses of Situation 05S8 on $\\mathcal D$ and $S$.",
+   "text": "Rewrite the quasi-isomorphism property using Mathlib HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic. The acyclic subcategory is triangulated, so Mathlib supplies both calculi of fractions and compatibility with triangulation for its trW. The homotopy category is triangulated.",
    "uses": [
     "lem-pc-quasi-isomorphisms-multiplicative-system",
-    "lem-pur-homotopy-category-triangulated",
-    "def-weil-triangulated-category"
+    "lem-pur-homotopy-category-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Situation Tag 05S8 preceding Proposition Tag 05SE"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For MS6, fix a degree n and apply the homology functor. The isomorphism H^n(f) ≫ H^n(h) makes H^n(f) monic, and the isomorphism H^n(g) ≫ H^n(f) makes it epic. An abelian category is balanced, so H^n(f) is an isomorphism. This holds in every degree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved upstream instance HomotopyCategory.hasTwoOutOfThreeProperty_quasiIso from WeilConjectures.Mathlib.Algebra.Homology.Localization. It expresses quasi-isomorphisms as the intersection of inverse images of isomorphisms under all homology functors. For retract stability map the retract of arrows by each homology functor and use retract stability of isomorphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a distinguished triangle T, rewrite quasi-isomorphisms as the trW of the acyclic subcategory and apply ObjectProperty.trW_iff_of_distinguished. This gives precisely the equivalence between quasi-isomorphism of T.mor₁ and acyclicity of T.obj₃, without choosing a representative complex or a particular cone.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the Mathlib instances asserting that DerivedCategory.Qh is a localization at quasi-isomorphisms and a triangulated functor, and assemble the nine conclusions.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-quasi-isomorphisms-multiplicative-system",
   "lem-pur-homotopy-category-triangulated",
-  "def-weil-triangulated-category",
-  "def-weil-abstract-derived-category",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-derived-cohomology-ladder",
-  "lem-weil-pbc-five-lemma",
-  "lem-pur-quasi-iso-cone-acyclic"
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "R1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma Tag 05RT and Situation Tag 05S8 preceding Proposition Tag 05SE"
+  "place": "Lemma Tag 05RT and Situation Tag 05S8; direct application of Mathlib triangulated-subcategory infrastructure and degreewise homology arguments"
  },
  "mathlib_searches": [
   {
@@ -208,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34425",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
