@@ -1,0 +1,111 @@
+{
+ "id": "def-weil-pbc-idempotent-charpoly",
+ "kind": "definition",
+ "title": "Determinant polynomial of an idempotent summand",
+ "statement": "Let $A$ be a commutative ring and $T,P$ square matrices indexed by a finite set $J$. Define $D(T,P)=\\det(1-C(P)+(X1-C(T))C(P))\\in A[X]$, where $C$ applies the constant-polynomial map entrywise. The characteristic matrix $X1-C(T)$ is the one defining the free characteristic polynomial [def-weil-pbc-charpoly-free-module]. The formula is defined for arbitrary $T,P$, without idempotence or commutation hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), splitting and characteristic-polynomial paragraphs; matrix formula and omitted details written out by G2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-charpoly-free-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "name": "G2 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, proof of (3) implies (1); an explicit determinant realization of its characteristic polynomials, with omitted details filled in"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The determinant of one minus an idempotent matrix plus the characteristic matrix times the idempotent",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no mathematical absence verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.det, IsIdempotentElem",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact existing declaration; related hits checked against the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "idempotentCharpoly|det.*[Ii]dempotent|[Ii]dempotent.*det",
+   "date": "2026-10-12",
+   "results": "1 hits: Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Idempotent.lean",
+   "verdict": "No exact existing declaration; related hits checked against the statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MonicFactorizationOfIdempotent",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); determinant realization of the lifted-idempotent monic-factorization step",
+   "via": [
+    "lem-weil-pbc-idempotent-splitting-monic-factorization",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.IdempotentCharpoly",
+  "file": "lean/Sheaf/LinearAlgebra/IdempotentCharpoly.lean",
+  "declaration": "Matrix.idempotentCharpoly",
+  "statement": "def idempotentCharpoly (T P : Matrix n n A) : Polynomial A",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

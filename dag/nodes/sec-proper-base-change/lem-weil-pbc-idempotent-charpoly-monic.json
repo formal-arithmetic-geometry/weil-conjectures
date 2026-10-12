@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-idempotent-charpoly-monic",
+ "kind": "statement",
+ "title": "Monic reduction forces monicity for a commuting idempotent determinant",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq\\operatorname{Jac}(A)$ an ideal, and $T,P\\in\\operatorname{Mat}_J(A)$ for a finite set $J$. Assume $P^2=P$, $TP=PT$, and the reduction of $D(T,P)$ [def-weil-pbc-idempotent-charpoly] in $(A/I)[X]$ is monic. Then $D(T,P)$ is monic.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), splitting and characteristic-polynomial paragraphs; matrix formula and omitted details written out by G2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-idempotent-charpoly"
+ ],
+ "proof": [
+  {
+   "text": "The identities P²=P and P+(1-P)=1 give a split decomposition of A^J into the images of P and 1-P. Both are finite projective. Obtain finite standard free covers for both and refine to their product cover so both summands have bases.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "T preserves both images because TP=PT. In their concatenated local basis P is diag(1,0), T is block diagonal, and 1-P+(X-T)P is diag(X-T_image,1). Its determinant is the ordinary characteristic polynomial on the image of P, monic of its local rank. Determinant invariance under conjugation and determinant base change justify these comparisons.",
+   "uses": [
+    "def-weil-pbc-idempotent-charpoly",
+    "lem-weil-pbc-charpoly-free-module-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If A is nonzero, A/I is nonzero since I is in the Jacobson radical. Let d be the degree of the monic reduction. At every prime containing I, reduce the local determinant to the residue field. Degree preservation of the monic reduction and of the local monic determinant show that the image of P has rank d there. Its rank is locally constant. The closed locus where the rank differs from d, if nonempty, contains a maximal ideal. Every maximal ideal contains I, giving a contradiction. The rank is consequently d everywhere.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-rank-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each nonzero localization of the standard cover the determinant therefore has coefficient 1 at degree d and zero coefficients above d; these same equations hold on zero localizations. Injectivity on a standard cover gives these equations over A. They imply monicity. When A is zero its only polynomial is monic.",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "def-weil-pbc-idempotent-charpoly",
+  "lem-weil-pbc-charpoly-free-module-properties",
+  "lem-weil-pbc-finite-projective-rank-locally-constant",
+  "lem-weil-pbc-localized-span-eq-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "G2 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, proof of (3) implies (1); an explicit determinant realization of its characteristic polynomials, with omitted details filled in"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An idempotent matrix commuting with an endomorphism has a monic determinant polynomial if its reduction modulo a Jacobson radical ideal is monic",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no mathematical absence verdict"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic, Ideal.jacobson",
+   "date": "2026-10-12",
+   "results": "1 hits: HenselianRing.mk",
+   "verdict": "No exact existing declaration; related hits checked against the statement."
+  },
+  {
+   "tool": "grep",
+   "query": "monic.*jacobson|jacobson.*monic",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact existing declaration; related hits checked against the statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MonicFactorizationOfIdempotent",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); determinant realization of the lifted-idempotent monic-factorization step",
+   "via": [
+    "lem-weil-pbc-idempotent-splitting-monic-factorization",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.IdempotentCharpolyMonic",
+  "file": "lean/Sheaf/LinearAlgebra/IdempotentCharpolyMonic.lean",
+  "declaration": "Matrix.idempotentCharpoly_monic_of_map_monic",
+  "statement": "theorem idempotentCharpoly_monic_of_map_monic {A : Type u} [CommRing A] {n : Type v} [Fintype n] [DecidableEq n] (I : Ideal A) (hI : I ≤ Ideal.jacobson (⊥ : Ideal A)) (T P : Matrix n n A) (hP : P * P = P) (hTP : T * P = P * T) (hmonic : ((idempotentCharpoly T P).map (Ideal.Quotient.mk I)).Monic) : (idempotentCharpoly T P).Monic",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

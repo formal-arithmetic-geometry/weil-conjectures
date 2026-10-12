@@ -24,78 +24,54 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*Setup.* Put $d=\\deg f$, $n_1=\\deg g_0$, $n_2=\\deg h_0$ (natural degrees; if $A/I\\neq0$ then $n_1+n_2=d$, as reduction preserves the degree of monic polynomials). By [lem-weil-pbc-monic-quotient-free], $B=A[T]/(f)$ is a free $A$-module with basis $1,t,\\dots,t^{d-1}$ ($t$ the class of $T$), $B/IB\\cong(A/I)[T]/(\\overline f)$, and $(A/I)[T]/(g_0)$, $(A/I)[T]/(h_0)$ are free $A/I$-modules of ranks $n_1$, $n_2$ with bases the powers of the class of $T$. Since $g_0,h_0$ generate the unit ideal, $(g_0)\\cap(h_0)=(g_0h_0)=(\\overline f)$ and the Chinese remainder theorem gives an isomorphism of $(A/I)[T]$-algebras $\\gamma:B/IB\\cong(A/I)[T]/(g_0)\\times(A/I)[T]/(h_0)$ with $\\gamma(\\bar e)=(1,0)$, $\\gamma(1-\\bar e)=(0,1)$; it is compatible with multiplication by $T$ on both sides.",
+   "text": "Take the power basis of the monic quotient. Let T and P be multiplication matrices for X and e. Since leftMulMatrix is an algebra homomorphism, e²=e gives P²=P and commutativity of the quotient gives TP=PT. The complement 1-P is also idempotent and commutes with T.",
    "uses": [
     "lem-weil-pbc-monic-quotient-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), 'Set $B=A[T]/(f)$. Let $\\overline e$ be the idempotent of $B/IB$ corresponding to the decomposition $B/IB=A/I[T]/(g_0)\\times A/I[T]/(h_0)$' and 'Note that $B$ is free of rank $\\deg(f)$ as an $A$-module'"
-   }
+   "elementary": true
   },
   {
-   "text": "*The splitting $B=eB\\oplus(1-e)B$ and its reduction.* As $e$ is idempotent and $B$ commutative, $B=eB\\oplus(1-e)B$ as $B$-modules, hence as $A$-modules ($x=ex+(1-e)x$; $eB\\cap(1-e)B=0$ since $y=ey'=(1-e)y''$ gives $y=ey=e(1-e)y''=0$). Multiplication by $t$, $\\mu_t:B\\to B$, preserves both summands; write $\\varphi_1=\\mu_t|_{eB}$, $\\varphi_2=\\mu_t|_{(1-e)B}$, so $\\mu_t=\\varphi_1\\oplus\\varphi_2$. Each summand is a direct summand of the finite free $A$-module $B$. Reducing modulo $I$: $IB=I\\,eB\\oplus I(1-e)B$, so $B/IB=eB/I\\,eB\\oplus(1-e)B/I(1-e)B$ and the first summand is the image of $eB$, i.e. $\\bar e(B/IB)$. Hence $eB\\otimes_AA/I=eB/I\\,eB\\cong\\bar e(B/IB)\\xrightarrow{\\gamma}(A/I)[T]/(g_0)\\times0$, an isomorphism of $A/I$-modules carrying $\\varphi_1\\otimes1$ to multiplication by $T$ on $(A/I)[T]/(g_0)$; likewise $(1-e)B\\otimes_AA/I\\cong(A/I)[T]/(h_0)$ carrying $\\varphi_2\\otimes1$ to multiplication by $T$. In particular $eB\\otimes_AA/I$ and $(1-e)B\\otimes_AA/I$ are free $A/I$-modules of ranks $n_1$ and $n_2$.",
+   "text": "Define g=D(T,P) and h=D(T,1-P). The two residue conditions and the coprime factorization give gbar=g0 and hbar=h0 by the CRT determinant calculation.",
+   "uses": [
+    "def-weil-pbc-idempotent-charpoly",
+    "lem-weil-pbc-adjoinRoot-idempotent-charpoly-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The prescribed reductions are monic. Apply the Jacobson monicity lemma separately to P and 1-P to prove g and h monic.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-monic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The complementary determinant product identity gives gh=charpoly(T). Apply charpoly_leftMulMatrix to the quotient power basis. Prove minpoly(X)=f using minpoly.unique': f annihilates X, and any nonzero polynomial annihilating X has degree at least the dimension of the power basis. Hence charpoly(T)=f. In the zero base ring equality is immediate.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-mul-complement",
+    "lem-weil-pbc-charpoly-mul-T-monic-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assemble g,h, their monicity, the product equality, and the two coefficient-reduction equalities.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), 'This gives a product decomposition $B=eB\\times(1-e)B$'"
-   }
-  },
-  {
-   "text": "*$eB$ and $(1-e)B$ are finite locally free of constant ranks $n_1$, $n_2$.* Let $P=eB$ (the case $(1-e)B$, $n_2$ is the same). By [lem-weil-pbc-finite-projective-rank-locally-constant] ($P$ is a direct summand of the finite free $B$), $P_{\\mathfrak p}$ is free over $A_{\\mathfrak p}$ for every prime $\\mathfrak p$ and $\\rho(\\mathfrak p)=\\operatorname{rank}_{A_{\\mathfrak p}}P_{\\mathfrak p}$ is locally constant on $\\operatorname{Spec}A$. (a) For $\\mathfrak p\\supseteq I$: $\\dim_{\\kappa(\\mathfrak p)}P\\otimes_A\\kappa(\\mathfrak p)=\\rho(\\mathfrak p)$, and also $P\\otimes_A\\kappa(\\mathfrak p)=(P\\otimes_AA/I)\\otimes_{A/I}\\kappa(\\mathfrak p)$ has dimension $n_1$ by step 2; so $\\rho=n_1$ on $V(I)$. (b) Let $Z=\\{\\mathfrak p:\\rho(\\mathfrak p)\\neq n_1\\}$. Since $\\rho$ is locally constant, $Z$ and its complement are open, so $Z$ is closed, $Z=V(J)$ for an ideal $J$. If $Z\\neq\\emptyset$ then $J\\neq A$, so $J\\subseteq\\mathfrak m$ for a maximal ideal $\\mathfrak m$, and $\\mathfrak m\\in V(J)=Z$. But $I$ lies in the Jacobson radical, so $I\\subseteq\\mathfrak m$, $\\mathfrak m\\in V(I)$ and $\\rho(\\mathfrak m)=n_1$ by (a): contradiction. Hence $\\rho\\equiv n_1$ on $\\operatorname{Spec}A$. (c) By [lem-weil-pbc-finite-projective-standard-free-cover] there are $f_1,\\dots,f_r\\in A$ generating the unit ideal with $P_{f_i}$ finite free over $A_{f_i}$, say of rank $m_i$. If $A_{f_i}=0$ then $P_{f_i}=0$ is free of rank $n_1$ too. Otherwise pick a prime $\\mathfrak q$ of $A_{f_i}$, lying over $\\mathfrak p\\in D(f_i)$; then $P_{\\mathfrak p}=(P_{f_i})_{\\mathfrak q}$ is free of rank $m_i$ over $A_{\\mathfrak p}=(A_{f_i})_{\\mathfrak q}\\neq0$, so $m_i=\\rho(\\mathfrak p)=n_1$. Thus $P_{f_i}\\cong A_{f_i}^{n_1}$ for all $i$: $eB$ is finite locally free of constant rank $n_1$, and $(1-e)B$ of constant rank $n_2$, in the sense of [def-weil-pbc-charpoly-locally-free]. (Stacks: 'since $eB$ and $(1-e)B$ have constant rank $\\deg(g_0)$ and $\\deg(h_0)$ over $A/I$ we find that the same is true over $\\operatorname{Spec}(A)$'; (b) writes out why, using only that every nonempty closed subset of $\\operatorname{Spec}A$ contains a maximal ideal.)",
-   "uses": [
-    "lem-weil-pbc-finite-projective-rank-locally-constant",
-    "lem-weil-pbc-finite-projective-standard-free-cover",
-    "def-weil-pbc-charpoly-locally-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), 'Hence $eB$ and $(1-e)B$ are finite locally free $A$-modules. However, since $eB$ and $(1-e)B$ have constant rank $\\deg(g_0)$ and $\\deg(h_0)$ over $A/I$ we find that the same is true over $\\operatorname{Spec}(A)$'; finite locally free from Algebra Lemma Tag 00NX"
-   }
-  },
-  {
-   "text": "*Definition of $g,h$ and $f=gh$.* Put $g=\\mathrm{CharPol}_A(\\varphi_1:eB\\to eB)$ and $h=\\mathrm{CharPol}_A(\\varphi_2:(1-e)B\\to(1-e)B)$ [def-weil-pbc-charpoly-locally-free], defined by step 3; by [lem-weil-pbc-charpoly-locally-free-existence] $g=T^{n_1}+\\dots$ and $h=T^{n_2}+\\dots$ are monic. By [lem-weil-pbc-charpoly-locally-free-direct-sum], $B=eB\\oplus(1-e)B$ is finite locally free of constant rank $n_1+n_2$ and $\\mathrm{CharPol}_A(\\mu_t:B\\to B)=gh$. On the other hand $B$ is itself free over $A$ (step 1); if $A\\neq0$ its rank $d$ equals $n_1+n_2$ (compare ranks at any prime), and the characterizing property of [lem-weil-pbc-charpoly-locally-free-existence] for the ring map $A\\to A'=A$ says $\\mathrm{CharPol}_A(\\mu_t:B\\to B)$ is the ordinary characteristic polynomial of $\\mu_t$ on $B$, which is $f$ by [lem-weil-pbc-charpoly-mul-T-monic-quotient]. Hence $f=gh$. (If $A=0$ every polynomial is $0$ and $f=gh$ trivially.)",
-   "uses": [
-    "def-weil-pbc-charpoly-locally-free",
-    "lem-weil-pbc-charpoly-locally-free-existence",
-    "lem-weil-pbc-charpoly-locally-free-direct-sum",
-    "lem-weil-pbc-charpoly-mul-T-monic-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), 'We conclude that $f=\\mathrm{CharPol}_A(T:B\\to B)=\\mathrm{CharPol}_A(T:eB\\to eB)\\,\\mathrm{CharPol}_A(T:(1-e)B\\to(1-e)B)$ is a factorization into monic polynomials'"
-   }
-  },
-  {
-   "text": "*Reductions modulo $I$.* Apply the characterizing property of [lem-weil-pbc-charpoly-locally-free-existence] to $M=eB$, $\\varphi=\\varphi_1$, $n=n_1$ and the ring map $A\\to A'=A/I$: by step 2, $eB\\otimes_AA/I$ is free of rank $n_1$, so the image $\\overline g$ of $g$ in $(A/I)[T]$ is the characteristic polynomial of $\\varphi_1\\otimes1$ on $eB\\otimes_AA/I$. Under the isomorphism of step 2 with $(A/I)[T]/(g_0)$, $\\varphi_1\\otimes1$ becomes multiplication by $T$, and the characteristic polynomial is invariant under such an isomorphism (conjugate matrices have the same determinant $\\det(T-\\cdot)$; Mathlib LinearEquiv.charpoly_conj). By [lem-weil-pbc-charpoly-mul-T-monic-quotient] over the ring $A/I$ with the monic $g_0$, this characteristic polynomial is $g_0$. So $\\overline g=g_0$, and likewise $\\overline h=h_0$. Together with step 4: $g,h\\in A[T]$ are monic, $f=gh$, and they reduce to $g_0,h_0$.",
-   "uses": [
-    "lem-weil-pbc-charpoly-locally-free-existence",
-    "lem-weil-pbc-charpoly-mul-T-monic-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1), '... is a factorization into monic polynomials reducing to the given factorization modulo $I$' ('Details omitted. Thus (3) implies (1)')"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-finite-projective-rank-locally-constant",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "def-weil-pbc-charpoly-locally-free",
-  "lem-weil-pbc-charpoly-locally-free-existence",
-  "lem-weil-pbc-charpoly-locally-free-direct-sum",
+  "def-weil-pbc-idempotent-charpoly",
+  "lem-weil-pbc-adjoinRoot-idempotent-charpoly-map",
+  "lem-weil-pbc-idempotent-charpoly-monic",
+  "lem-weil-pbc-idempotent-charpoly-mul-complement",
   "lem-weil-pbc-charpoly-mul-T-monic-quotient"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "name": "G2 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XI (lemma-characterize-henselian-pair, line 2553), proof of (3)$\\Rightarrow$(1); the omitted details (constant rank, CharPol of a finite locally free module, its multiplicativity and reduction modulo $I$) written out by the worker"
+  "place": "Tag 09XI (3) implies (1); explicit determinant on the ambient free module replaces gluing the two locally free characteristic polynomials. The unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -185,5 +161,15 @@
   "group": "E1",
   "result": "pass",
   "note": "A CommRing Type u; I <= jacobson bot; f Monic; g0 h0 Monic, IsCoprime, f.map mk I = g0*h0 (G1 55a7d6399 spellings); B = AdjoinRoot f; ebar via AdjoinRoot.map residues 1 mod g0, 0 mod h0 (CRT-injective, equals lift of ebar); e IsIdempotentElem; conclusion monic g h, f=gh, reductions g0 h0; names #check'd to Mathlib inside namespace Polynomial; hypotheses satisfiable (Z, I=0, X(X-1), e=1-X)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T053933-L-2635992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
