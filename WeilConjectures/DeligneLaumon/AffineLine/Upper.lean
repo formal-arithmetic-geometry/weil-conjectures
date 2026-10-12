@@ -5,10 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 
 /-!
 # The Deligne–Laumon estimate on the affine line
@@ -17,7 +18,7 @@ Let `j : U₀ ↪ 𝔸¹_{𝔽_q}` be a dense open immersion and `F` a lisse Wei
 punctually `ι`-pure of weight `w` and unramified at infinity. Then `H_c^r(𝔸¹, j_*F)` has
 weights at most `w + r` for every `r`.
 
-The endpoint lemmas of `WeilConjectures.DeligneLaumon.AffineLine.Endpoints` settle every degree
+The endpoint lemmas of `WeilConjectures.WeilSheaf.CurveEndpoints` settle every degree
 except one: degree zero vanishes and degree two is pure of weight `w + 2`. For degree one,
 choose a finite composition filtration of the Weil representation of `F`; its lisse irreducible
 factors are still pure of weight `w`, their stalk spectra being subquotient spectra, and still

@@ -6,10 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
+public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
@@ -28,7 +29,7 @@ because `C` has no isolated points, so `E ≅ j'_* j'^* E` for the inclusion `j'
 `f_* E ≅ f_* j'_* j'^* E ≅ (f ∘ j')_* j'^* E = (j ∘ f')_* j'^* E ≅ j_* f'_* j'^* E`.
 
 Hence `R⁰f₀! E ≅ f_* E` is the direct image `j_* H` of the lisse sheaf `H = f'_* j'^* E`, and the
-endpoint estimates on `𝔸¹` of `WeilConjectures.DeligneLaumon.AffineLine.Endpoints` apply to it.
+endpoint estimates on `𝔸¹` of `WeilConjectures.WeilSheaf.CurveEndpoints` apply to it.
 
 ## Main statements
 

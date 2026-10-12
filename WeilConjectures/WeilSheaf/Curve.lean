@@ -8,8 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Curve.Boundary
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.LFunction

@@ -839,7 +839,6 @@ public import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 public import WeilConjectures.Convergence
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
-public import WeilConjectures.DeligneLaumon.AffineLine.Endpoints
 public import WeilConjectures.DeligneLaumon.AffineLine.Exactness
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
@@ -2124,6 +2123,7 @@ public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.Curve
+public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DirectImageRestriction
 public import WeilConjectures.WeilSheaf.DirectImageStalk

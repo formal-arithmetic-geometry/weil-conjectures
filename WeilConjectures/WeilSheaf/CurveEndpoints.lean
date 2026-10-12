@@ -7,10 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.WeilSheaf.Defs
 
 /-!
-# The two endpoints of the compactly supported cohomology of a middle extension
+# The two endpoints of the compactly supported cohomology of a direct image on a curve
 
 For a dense open immersion `j : U₀ ↪ C₀` into a smooth geometrically connected affine curve
 and a lisse Weil sheaf `F` on `U₀`, all the compactly supported cohomology of the ordinary
