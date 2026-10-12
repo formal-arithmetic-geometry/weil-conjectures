@@ -7,12 +7,8 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.GlobalDimension
-import Sheaf.Algebra.ProjectiveDimensionWellDefined
-import Sheaf.RingTheory.CohenMacaulayFreeResolution
-import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.GlobalDimensionFiniteModules
-import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.RingTheory.RegularLocalMaximalCohenMacaulayFree
+import Sheaf.RingTheory.RegularLocalFiniteModuleResolution
 
 /-!
 # Global dimension of a regular local ring
@@ -56,6 +52,9 @@ theorem hasGlobalDimensionLE_of_ringKrullDim_eq
     (R : Type u) [CommRing R] [IsRegularLocalRing R]
     (d : ℕ) (hd : ringKrullDim R = (d : WithBot ℕ∞)) :
     Ring.HasGlobalDimensionLE.{u, max u v} R d := by
-  sorry
+  have hfinite : ∀ M : ModuleCat.{max u v} R, Module.Finite R M →
+      ModuleCat.HasProjectiveResolutionLE M d :=
+    finiteModule_hasProjectiveResolutionLE R d hd
+  exact (Ring.hasGlobalDimensionLE_iff_finite_iff_cyclic R d).1.mpr hfinite
 
 end IsRegularLocalRing
