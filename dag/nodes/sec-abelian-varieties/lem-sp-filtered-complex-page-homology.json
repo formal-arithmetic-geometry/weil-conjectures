@@ -15,42 +15,50 @@
  ],
  "proof": [
   {
-   "text": "Compute the kernel of the outgoing representative differential. A class in Z_r/B_r is killed precisely when, locally along an epimorphism, its representative x has dx equal modulo F^(p+r+1) to dy for y in F^(p+1). Replacing x by x-y preserves its graded class and yields a representative in the (r+1)-cycles. Conversely such a representative is killed. Therefore the kernel is Z_(r+1)/B_r. The representative equation of D supplies the differential used in this calculation. Local lifting is pullback along an epimorphism, so no projectivity or elementwise assumption on the category is needed.",
+   "text": "Successor graded cycles are contained in the current graded cycles: antitonicity of F.step passes through degreewise images, pullback, intersection, sum and graded image. This inclusion is proved directly in Lean.",
    "uses": [
-    "lem-sp-filtered-complex-page-differential",
-    "def-sp-filtered-complex-subquotients"
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the successor-cycle cover to obtain an epimorphism f from Z_(r+1) onto the kernel of the outgoing page differential, with its restriction equation.",
+   "uses": [
+    "lem-sp-filtered-complex-successor-cycles-cover"
    ],
    "elementary": false
   },
   {
-   "text": "Compute the image of the incoming representative differential. Its source filtration degree is p-r. Its differential lands in F^p; this is exactly the defining incoming image for B_(r+1). Taking the image after projection into the page gives B_(r+1)/B_r, with both containments witnessed by the same representative equation and epimorphic local lifts.",
+   "text": "The inverse image under f of the incoming image in page cycles is exactly the inclusion of B_(r+1) in Z_(r+1).",
    "uses": [
-    "lem-sp-filtered-complex-page-differential",
-    "def-sp-filtered-complex-subquotients"
+    "lem-sp-filtered-complex-successor-boundaries-image",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
    ],
    "elementary": false
   },
   {
-   "text": "Boundaries lie in cycles by the proved inclusion. Apply the abelian quotient-of-quotients isomorphism to the kernel modulo the incoming image: (Z_(r+1)/B_r)/(B_(r+1)/B_r) is Z_(r+1)/B_(r+1). It is the constructed cokernel Q_(r+1). Every operation is a finite subobject/image/cokernel operation.",
+   "text": "Mathlib homologyIsCokernel identifies the kernel of the homology projection with the incoming image. Inverse image commutes with kernel, proved here from factorization criteria. Therefore the inclusion of B_(r+1) and f followed by the homology projection form an exact short complex. Both f and the homology projection are epic. Mathlib ShortComplex.Exact.gIsCokernel makes their composite a cokernel of that inclusion. Uniqueness of cokernels identifies its target with the constructed next page object.",
    "uses": [
-    "lem-sp-filtered-complex-boundaries-le-cycles",
-    "lem-sp-filtered-complex-page-differential",
     "def-sp-abelian",
-    "def-sp-filtered-complex-subquotients"
+    "lem-sp-filtered-complex-page-differential"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-abelian",
   "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
   "lem-sp-filtered-complex-boundaries-le-cycles",
-  "lem-sp-filtered-complex-page-differential"
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-successor-boundaries-image",
+  "lem-sp-filtered-complex-successor-cycles-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+  "place": "H2: steps 1–2 split into representative calculations; step 3 proved using Mathlib homologyIsCokernel, exact_iff_image_eq_kernel, Exact.gIsCokernel and colimit uniqueness."
  },
  "mathlib_searches": [
   {
@@ -120,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "X-466b3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T144052-L-2088584",
+  "landing": "20261012T194117-L-457028",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean statements and proof with their DAG nodes, Tag 012K, preserved interfaces, clean compilation, and axiom probes."
  }
 }

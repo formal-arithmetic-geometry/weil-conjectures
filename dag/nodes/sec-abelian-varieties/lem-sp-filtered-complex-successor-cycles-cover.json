@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-filtered-complex-successor-cycles-cover",
+ "kind": "statement",
+ "title": "Successor filtered cycles cover the page differential kernel",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K$ an integer-indexed cochain complex and $F$ a decreasing filtration [def-sp-filtration]. Let $r\\ge1$, let $D$ be differential data on the concrete quotient page [lem-sp-filtered-complex-page-differential], and let $i=(p,q)$, $n=p+q$. Write $Z_s^{p,q}$ for the graded cycles [def-sp-filtered-complex-subquotients]. For the inclusion $h:Z_{r+1}^{p,q}\\le Z_r^{p,q}$, there is an epimorphism $f:Z_{r+1}^{p,q}\\to\\ker(d_r^{p,q})$ such that its composite with the kernel inclusion equals the inclusion into $Z_r^{p,q}$ followed by the quotient projection into $Q_r^{p,q}$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof": [
+  {
+   "text": "Write n = p+q. The composite from Z_(r+1) into Z_r/B_r is killed by d_r: a representative has differential in F^(p+r+1), so its target graded class is zero. The representative equation for D proves this after pulling back the epimorphism from unquotiented representatives to graded cycles. Thus the composite factors uniquely through the kernel, giving f. To see that f is epic, locally lift a page cycle to an r-cycle representative x. Since its differential is an r-boundary in the target graded piece, after another epimorphic pullback write dx = dy modulo F^(p+r+1), with y in F^(p+1). Then x-y has the same source graded class and lies in the (r+1)-cycle representatives. These local lifts show that the image of f is the whole kernel. Pullbacks of epimorphisms remain epic in an abelian category, so this proves the assertion without projectivity assumptions.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "H2: componentwise kernel/image extraction from Tag 012K and steps 1–2 of lem-sp-filtered-complex-page-homology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Successor filtered cycles map epimorphically onto the kernel of a spectral sequence page differential",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Successor filtered cycles map epimorphically onto the kernel of a spectral sequence page differential",
+   "results": "8 hits: HomologicalComplex.HomologySequence.instEpiMap'ComposableArrows₃OfNatNat, HomologicalComplex.HomologySequence.epi_homologyMap_τ₃, HomologicalComplex.instEpiHomologyπ, HomologicalComplex.epi_homologyMap_of_epi_of_not_rel, DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff, HomologicalComplex.instEpiPOpcycles, DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff, CategoryTheory.ShortComplex.ShortExact.epi_δ; none identify the concrete filtered subquotients.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(cycle|boundar)|spectral.*kernel",
+   "results": "0 hits: ; none identify the concrete filtered subquotients.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexPageHomology",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Outgoing-kernel calculation for successor homology of the concrete filtered-complex page, Tag 012K.",
+   "via": [
+    "lem-sp-filtered-complex-page-homology",
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexSuccessorCyclesCover",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexSuccessorCyclesCover.lean",
+  "declaration": "CategoryTheory.filteredComplex_successor_cycles_cover",
+  "statement": "theorem filteredComplex_successor_cycles_cover\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ)\n    (hZ : F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) ≤\n      F.complexCycles pq.1 (pq.1 + pq.2) r) :\n    ∃ f : (F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) : C) ⟶ D.page.cycles pq,\n      Epi f ∧ f ≫ D.page.iCycles pq =\n        Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-466b3",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T194117-L-457028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-466b3",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T194117-L-457028",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proof with their DAG nodes, Tag 012K, preserved interfaces, clean compilation, and axiom probes."
+ }
+}

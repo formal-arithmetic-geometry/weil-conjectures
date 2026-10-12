@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-filtered-complex-successor-boundaries-image",
+ "kind": "statement",
+ "title": "Inverse image of incoming page boundaries is successor boundaries",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K$ an integer-indexed cochain complex and $F$ a decreasing filtration [def-sp-filtration]. Let $r\\ge1$, $D$ differential data on the concrete quotient page [lem-sp-filtered-complex-page-differential], $i=(p,q)$ and $n=p+q$. Write $Z_s,B_s$ for its graded cycles and boundaries [def-sp-filtered-complex-subquotients]. Suppose $h:Z_{r+1}^{p,q}\\le Z_r^{p,q}$ and $f:Z_{r+1}^{p,q}\\to D.\\mathrm{page}.\\mathrm{cycles}(i)$ satisfies $f\\,\\iota=\\mathrm{incl}_h\\,\\pi_r$. Let $t:D.\\mathrm{page}.X(\\mathrm{prev}(i))\\to D.\\mathrm{page}.\\mathrm{cycles}(i)$ be the incoming differential factored through the kernel. Then $f^{-1}(\\operatorname{im}t)$ is the subobject of $Z_{r+1}^{p,q}$ represented by the inclusion $B_{r+1}^{p,q}\\hookrightarrow Z_{r+1}^{p,q}$ [lem-sp-filtered-complex-boundaries-le-cycles].",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-boundaries-le-cycles"
+ ],
+ "proof": [
+  {
+   "text": "Write n = p+q. The image of the incoming page differential consists of classes of dx with x in F^(p-r)K^(n-1) and dx in F^pK^n. These are exactly the classes defining B_(r+1), modulo B_r. Indeed, the incoming r-cycle condition at filtration degree p-r is precisely that its differential lands in F^p. Use the representative equation for D in both directions, locally lifting along the epimorphic representative and quotient projections. The inverse image of this incoming image under f is B_(r+1) inside Z_(r+1): the additional ambiguity B_r already lies in B_(r+1). Both containments are therefore equalities of subobjects. All lifts used here are pullbacks along epimorphisms in the abelian category.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-boundaries-le-cycles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012K, displayed cycle, boundary and differential formulas and lemma-spectral-sequence-filtered-complex"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-filtered-complex-boundaries-le-cycles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "H2: componentwise kernel/image extraction from Tag 012K and steps 1–2 of lem-sp-filtered-complex-page-homology"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of incoming page boundaries in successor cycles is the next filtered boundary subobject",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of incoming page boundaries in successor cycles is the next filtered boundary subobject",
+   "results": "8 hits: ComplexShape.Embedding.not_boundaryGE_next', ComplexShape.Embedding.prev_f_of_not_boundaryGE, ComplexShape.Embedding.next_f_of_not_boundaryLE, ComplexShape.Embedding.not_boundaryLE_prev', ComplexShape.Embedding.boundaryGE, ComplexShape.Embedding.BoundaryGE, ComplexShape.Embedding.boundaryLE, ComplexShape.Embedding.BoundaryLE; none identify the concrete filtered subquotients.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*(cycle|boundar)|spectral.*kernel",
+   "results": "0 hits: ; none identify the concrete filtered subquotients.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredComplexPageHomology",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Incoming-image calculation for successor homology of the concrete filtered-complex page, Tag 012K.",
+   "via": [
+    "lem-sp-filtered-complex-page-homology",
+    "lem-sp-filtered-complex-positive-pages",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredComplexSuccessorBoundariesImage",
+  "file": "lean/Sheaf/CategoryTheory/FilteredComplexSuccessorBoundariesImage.lean",
+  "declaration": "CategoryTheory.filteredComplex_successor_boundaries_image",
+  "statement": "theorem filteredComplex_successor_boundaries_image\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)\n    (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ)\n    (hZ : F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) ≤\n      F.complexCycles pq.1 (pq.1 + pq.2) r)\n    (f : (F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) : C) ⟶ D.page.cycles pq)\n    (hf : f ≫ D.page.iCycles pq =\n        Subobject.ofLE _ _ hZ ≫ filteredComplexPageπ K F r pq) :\n    (Subobject.pullback f).obj\n      (imageSubobject (D.page.toCycles ((ComplexShape.up' (r, 1 - r)).prev pq) pq)) =\n      Subobject.mk (Subobject.ofLE _ _\n        (filteredComplex_boundaries_le_cycles K F pq.1 (pq.1 + pq.2) (r + 1)))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-466b3",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T194117-L-457028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-466b3",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T194117-L-457028",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean statements and proof with their DAG nodes, Tag 012K, preserved interfaces, clean compilation, and axiom probes."
+ }
+}
