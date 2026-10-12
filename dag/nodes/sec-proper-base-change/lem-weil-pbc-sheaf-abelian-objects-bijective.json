@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-sheaf-abelian-objects-bijective",
+ "kind": "statement",
+ "title": "Sectionwise abelian-object functors are bijective on objects",
+ "statement": "Let C be a category with Grothendieck topology J. Work in any universe of sets at least as large as the object and morphism universes of C. Let F be a functor from abelian sheaves to internal commutative group objects of sheaves of sets. Suppose hF identifies its underlying-set composite with sectionwise forgetting, as an equality of functors. Suppose the transported internal multiplication, unit and inverse of F(A), on each section, agree with the addition, zero and negation of A. Then F.obj is bijective.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR (section-sheaves-algebraic-structures), quadruple (D1)-(D4), (A1)-(A3) before Proposition 00YV (proposition-functoriality-algebraic-structures-topoi)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For an internal object R evaluate multiplication, unit and inverse on sections. Evaluate the internal diagrams to get an additive commutative group structure on every R(U). Naturality makes restrictions homomorphisms. Thus this defines an abelian-group-valued presheaf whose underlying sets are the original sheaf R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the underlying-set sheaf criterion to make the reconstructed presheaf an abelian sheaf A.",
+   "uses": [
+    "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For surjectivity hF identifies underlying sheaves of F(A) and R; the assumed operation formulas identify their multiplication, unit and inverse maps. Sectionwise equality identifies natural transformations, and proof irrelevance removes law witnesses. Hence F(A)=R. For injectivity, an equality F(A)=F(B) identifies underlying set presheaves through hF. The same operation formulas identify all section additions. AddCommGroup.ext shows equality of the whole section group structures, including auxiliary scalar multiplication and subtraction operations. Restriction homomorphisms agree by their underlying functions, and sheaf witnesses agree by proof irrelevance, giving A=B.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-sheaf-iff-underlying-sets"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR (section-sheaves-algebraic-structures), quadruple (D1)-(D4), (A1)-(A3) before Proposition 00YV (proposition-functoriality-algebraic-structures-topoi)",
+  "note": "Omitted sectionwise quadruple verifications written out by S2; follows the same argument as the original node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "commGrp|CommGrp|commGroup",
+   "results": "20 hits: Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; ",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match; Mathlib contains type-level commutative-group equivalences and general abelian sheaf facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommGrp",
+   "results": "0 hits: ; loogle: unknown identifier 'CommGrp'",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match; Mathlib contains type-level commutative-group equivalences and general abelian sheaf facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian group objects in the category of sheaves are equivalent to sheaves of abelian groups",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, SheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, instAbelianLightCondMod, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, CategoryTheory.instPreadditiveSheaf, CategoryTheory.Sheaf.Hom.addCommGroup, CondensedAb; ",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match; Mathlib contains type-level commutative-group equivalences and general abelian sheaf facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sectionwise abelian group object sheaf reconstruct abelian sheaf bijective on objects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "sheaf-level algebraic inverse-image prerequisites: sectionwise abelian quadruple construction and reconstruction",
+   "via": [
+    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheafAbelianObjectsBijective",
+  "file": "lean/Sheaf/CategoryTheory/SheafAbelianObjectsBijective.lean",
+  "declaration": "CategoryTheory.sheafAbelianObjects_bijective",
+  "statement": "theorem sheafAbelianObjects_bijective {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w)))) (hF : F ⋙ CommGrp.forget _ = sheafCompose J (forget AddCommGrpCat.{max u v w})) (hsections : (∀ (A : Sheaf J AddCommGrpCat.{max u v w}) (U : Cᵒᵖ), (∀ a b : (F.obj A).X.obj.obj U, ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) = (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) + (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧ (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U, ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) = (0 : A.obj.obj U)) ∧ (∀ a : (F.obj A).X.obj.obj U, ((eqToIso hF).hom.app A).hom.app U ((GrpObj.inv (X := (F.obj A).X)).hom.app U a) = -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a)))) : Function.Bijective F.obj",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T110318-L-621503",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T110318-L-621503",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
