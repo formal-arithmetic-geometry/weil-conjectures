@@ -7966,3 +7966,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/V1/Sheaf.AlgebraicGeometry.TruncatedDirectImageAffineFiniteSupport (stage 3; reviewer PASS; after a return; landing 20261012T135326-L-1696976 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:53 L: merged deliver/V1/Sheaf.CategoryTheory.SiteLerayDegenerate (stage 3; reviewer PASS; first push; landing 20261012T135326-L-1697097 (interface); batch 20261012T135212; modules 1; new nodes 0; change records: coord/changes/site-leray-degenerate-imports.md)
 - 13:53 L: merged deliver/V1/Sheaf.Topology.ConstantSubsheafNormalizedCore (stage 3; reviewer PASS; first push; landing 20261012T135327-L-1697221 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:53 L: merged deliver/V2/Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf (stage 3; reviewer PASS; first push; landing 20261012T135327-L-1697420 (proof); batch 20261012T135212; modules 1; new nodes 0)

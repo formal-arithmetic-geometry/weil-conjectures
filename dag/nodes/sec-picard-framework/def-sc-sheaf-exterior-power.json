@@ -14,9 +14,29 @@
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph, lines 140-147: determinant as top exterior power and its local wedge formula"
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "For each restriction U to V, form the O_X(U)-alternating map sending a tuple to the wedge of its restricted entries in the O_X(V)-exterior power, viewed by restriction of scalars as an O_X(U)-module. Additivity follows from the restriction map and the wedge being additive in each entry; scalar compatibility follows from PresheafOfModules.map_smul and wedge multilinearity; equal entries give zero. Apply Mathlib exteriorPower.alternatingMapLinearEquiv to extend it to the exterior power. The pure-wedge formula is alternatingMapLinearEquiv_apply_ιMulti, and linearMap_ext proves uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity comparison map acts identically on every pure wedge, by the module-presheaf identity law. The composite comparison sends a pure wedge first to the wedge of the f-restrictions and then to the wedge of their g-restrictions, equal to restriction along the composite by PresheafOfModules.map_comp_apply. The uniqueness just established proves both restriction laws.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "In degree zero use Mathlib exteriorPower.zeroEquiv on every open, sending the empty wedge to 1. The restriction formula and the fact that a ring restriction preserves 1 show naturality on pure wedges; linearMap_ext extends this to all elements. These equivalences give a presheaf isomorphism to the unit presheaf. Sheafify it and compose with the invertible counit at the unit sheaf. The sheafification adjunction sends this isomorphism back to the sectionwise zeroEquiv map, proving the required empty-wedge formula. Any other isomorphism with that formula has the same image under the adjunction, because pure wedges span and all Fin 0 tuples are equal; injectivity of the adjunction and Iso.ext prove uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
+  "place": "Proof of (*), determinant paragraph, lines 140-147: determinant as top exterior power and its local wedge formula"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -121,5 +141,15 @@
   "group": "E1",
   "result": "fix",
   "note": "X scheme; S ShortComplex X.Modules + ShortExact (mono/epi, sheaf exactness); 3 IsFiniteLocallyFreeOfRank r_i + r2=r1+r3; det = exteriorSheaf (sheafified sectionwise ⋀[O(U)]^n, now in Mathlib notation), det(0)=O_X via exteriorSheaf_zero_iso; 3 IsInvertible; ∃! iso det E2 ≅ det E1 ⊗ det E3 characterized on wedges on every open, lifts arbitrary, f(a) before c; edge ranks 0, char 2, empty X"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-59220",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T135327-L-1697420",
+  "kind": "proof",
+  "note": "independent Codex review: Matched delivery 59220bc87cae against the unchanged declarations and def-sc-sheaf-exterior-power; verified proofs, node, report, permitted axioms, clean module compilation and all 15 direct importers."
  }
 }

@@ -36,6 +36,9 @@ noncomputable abbrev exteriorSheafObj (M : X.Modules) (n : ℕ) (U : X.Opensᵒ�
     ModuleCat.{u} (X.ringCatSheaf.obj.obj U) :=
   ModuleCat.of _ (⋀[X.presheaf.obj U]^n (M.val.obj U))
 
+set_option maxHeartbeats 800000 in
+-- The scheme and ring-sheaf module interfaces require additional elaboration.
+set_option backward.isDefEq.respectTransparency false in
 /-- Restrictions extend uniquely from wedges of sections. Apply the universal property of the
 exterior power to the alternating map taking a tuple to the wedge of its restrictions, with
 scalars restricted along `O_X(U) → O_X(V)`. Uniqueness follows because pure wedges span.
@@ -48,7 +51,48 @@ theorem exteriorSheafRestriction_existsUnique (M : X.Modules) (n : ℕ)
       ∀ a : Fin n → M.val.obj U,
         r (exteriorPower.ιMulti (X.presheaf.obj U) n a) =
           exteriorPower.ιMulti (X.presheaf.obj V) n (fun i => M.val.map f (a i)) := by
-  sorry
+  classical
+  let A : (M.val.obj U) [⋀^Fin n]→ₗ[X.presheaf.obj U]
+      ((ModuleCat.restrictScalars (X.ringCatSheaf.obj.map f).hom).obj
+        (exteriorSheafObj M n V)) :=
+    { toFun := fun a ↦ exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V)
+        (fun i ↦ M.val.map f (a i))
+      map_update_add' := by
+        intro _ a i x y
+        simp only [← Function.comp_def, Function.comp_update]
+        exact (congrArg (fun z ↦ exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V)
+          (Function.update (fun j ↦ M.val.map f (a j)) i z))
+          ((M.val.map f).hom.map_add x y)).trans
+          ((exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V)).map_update_add _ _ _ _)
+      map_update_smul' := by
+        intro _ a i c x
+        simp only [← Function.comp_def, Function.comp_update]
+        exact (congrArg (fun z ↦ exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V)
+          (Function.update (fun j ↦ M.val.map f (a j)) i z))
+          (M.val.map_smul f c x)).trans
+          ((exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V)).map_update_smul _ _ _ _)
+      map_eq_zero_of_eq' := by
+        intro a i j hij hne
+        exact (exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V)).map_eq_zero_of_eq
+          _ (congrArg (fun x ↦ M.val.map f x) hij) hne }
+  refine ⟨ModuleCat.ofHom (X := exteriorSheafObj M n U)
+    (Y := (ModuleCat.restrictScalars (X.ringCatSheaf.obj.map f).hom).obj
+      (exteriorSheafObj M n V))
+    (exteriorPower.alternatingMapLinearEquiv (R := X.presheaf.obj U) A), ?_, ?_⟩
+  · intro a
+    exact exteriorPower.alternatingMapLinearEquiv_apply_ιMulti (R := X.presheaf.obj U) A a
+  · intro r hr
+    apply ModuleCat.hom_ext
+    apply exteriorPower.linearMap_ext (R := X.presheaf.obj U)
+      (N := (ModuleCat.restrictScalars (X.ringCatSheaf.obj.map f).hom).obj
+        (exteriorSheafObj M n V))
+    apply DFunLike.ext
+    intro a
+    exact (hr a).trans
+      (exteriorPower.alternatingMapLinearEquiv_apply_ιMulti
+        (R := X.presheaf.obj U)
+        (N := (ModuleCat.restrictScalars (X.ringCatSheaf.obj.map f).hom).obj
+          (exteriorSheafObj M n V)) A a).symm
 
 /-- The unique exterior-power restriction characterized on pure wedges.
 Source: blueprint, Riemann--Roch determinant paragraph (blueprint: def-sc-sheaf-exterior-power). -/
@@ -56,6 +100,16 @@ noncomputable def exteriorSheafRestriction (M : X.Modules) (n : ℕ)
     {U V : X.Opensᵒᵖ} (f : U ⟶ V) :=
   Classical.choose (exteriorSheafRestriction_existsUnique M n f)
 
+private theorem exteriorSheafRestriction_wedge (M : X.Modules) (n : ℕ)
+    {U V : X.Opensᵒᵖ} (f : U ⟶ V) (a : Fin n → M.val.obj U) :
+    (exteriorSheafRestriction M n f).hom
+        (exteriorPower.ιMulti (X.presheaf.obj U) n (M := M.val.obj U) a) =
+      exteriorPower.ιMulti (X.presheaf.obj V) n (M := M.val.obj V)
+        (fun i ↦ M.val.map f (a i)) :=
+  (Classical.choose_spec (exteriorSheafRestriction_existsUnique M n f)).1 a
+
+set_option maxHeartbeats 800000 in
+-- The scheme and ring-sheaf module interfaces require additional elaboration.
 /-- Restriction preserves identities and composition. Check both equalities on pure wedges,
 where they reduce to the presheaf laws of `M` and the structure sheaf; then use uniqueness in
 `exteriorSheafRestriction_existsUnique`.
@@ -69,7 +123,30 @@ theorem exteriorSheafRestriction_laws (M : X.Modules) (n : ℕ) :
         (ModuleCat.restrictScalars _).map (exteriorSheafRestriction M n g) ≫
         (ModuleCat.restrictScalarsComp' _ _ _
           (congrArg RingCat.Hom.hom (X.ringCatSheaf.obj.map_comp f g))).inv.app _) := by
-  sorry
+  constructor
+  · intro U
+    apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n (𝟙 U))).2
+      _ ?_).symm
+    intro a
+    change exteriorPower.ιMulti (X.presheaf.obj U) n (M := M.val.obj U) a =
+      exteriorPower.ιMulti (X.presheaf.obj U) n (M := M.val.obj U)
+        (fun i ↦ M.val.map (𝟙 U) (a i))
+    apply congrArg (exteriorPower.ιMulti (X.presheaf.obj U) n (M := M.val.obj U))
+    funext i
+    exact (CategoryTheory.congr_fun (M.val.map_id U) (a i)).symm
+  · intro U V W f g
+    apply ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M n (f ≫ g))).2
+      _ ?_).symm
+    intro a
+    change (exteriorSheafRestriction M n g).hom
+        ((exteriorSheafRestriction M n f).hom
+          (exteriorPower.ιMulti (X.presheaf.obj U) n (M := M.val.obj U) a)) =
+      exteriorPower.ιMulti (X.presheaf.obj W) n (M := M.val.obj W)
+        (fun i ↦ M.val.map (f ≫ g) (a i))
+    rw [exteriorSheafRestriction_wedge, exteriorSheafRestriction_wedge]
+    apply congrArg (exteriorPower.ιMulti (X.presheaf.obj W) n (M := M.val.obj W))
+    funext i
+    exact (M.val.map_comp_apply f g (a i)).symm
 
 /-- The presheaf `U ↦ ⋀^n M(U)`, with the uniquely induced semilinear restrictions.
 Source: blueprint, Riemann--Roch determinant paragraph (blueprint: def-sc-sheaf-exterior-power). -/
@@ -94,6 +171,8 @@ noncomputable def exteriorSheafSection (M : X.Modules) (n : ℕ) (U : X.Opens)
   ((PresheafOfModules.sheafificationAdjunction.{u} (𝟙 X.ringCatSheaf.obj)).unit.app
     (exteriorSheafPresheaf M n)).app (op U) (exteriorPower.ιMulti (X.presheaf.obj (op U)) n a)
 
+set_option maxHeartbeats 800000 in
+-- The scheme and ring-sheaf module interfaces require additional elaboration.
 /-- Degree zero is the structure sheaf. Sectionwise, the empty wedge generates the zeroth
 exterior power freely over `O_X(U)`; these identifications commute with restrictions and
 therefore sheafify to an isomorphism with `O_X`, already a sheaf. The empty wedge maps
@@ -104,6 +183,65 @@ theorem exteriorSheaf_zero_iso (M : X.Modules) :
     ∃! e : exteriorSheaf M 0 ≅ SheafOfModules.unit X.ringCatSheaf,
       ∀ U : X.Opens, e.hom.val.app (op U) (exteriorSheafSection M 0 U Fin.elim0) =
         (1 : X.presheaf.obj (op U)) := by
-  sorry
+  let e₀ : exteriorSheafPresheaf M 0 ≅ (SheafOfModules.unit X.ringCatSheaf).val :=
+    PresheafOfModules.isoMk
+      (fun U ↦ (exteriorPower.zeroEquiv (X.presheaf.obj U) (M.val.obj U)).toModuleIso)
+      (by
+        intro U V f
+        apply ModuleCat.hom_ext
+        apply exteriorPower.linearMap_ext (R := X.presheaf.obj U)
+        apply AlternatingMap.ext
+        intro a
+        change exteriorPower.zeroEquiv (X.presheaf.obj V) (M.val.obj V)
+            (exteriorSheafRestriction M 0 f
+              (exteriorPower.ιMulti (X.presheaf.obj U) 0 a)) =
+          X.presheaf.map f
+            (exteriorPower.zeroEquiv (X.presheaf.obj U) (M.val.obj U)
+              (exteriorPower.ιMulti (X.presheaf.obj U) 0 a))
+        exact (congrArg (exteriorPower.zeroEquiv (X.presheaf.obj V) (M.val.obj V))
+          ((Classical.choose_spec (exteriorSheafRestriction_existsUnique M 0 f)).1 a)).trans
+          ((exteriorPower.zeroEquiv_ιMulti _).trans
+            ((congrArg (fun x ↦ X.presheaf.map f x)
+              (exteriorPower.zeroEquiv_ιMulti a)).trans
+              (X.presheaf.map f).hom.map_one).symm))
+  let adj := PresheafOfModules.sheafificationAdjunction.{u} (𝟙 X.ringCatSheaf.obj)
+  let e : exteriorSheaf M 0 ≅ SheafOfModules.unit X.ringCatSheaf :=
+    (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapIso e₀ ≪≫
+      asIso (C := SheafOfModules.{u} X.ringCatSheaf)
+        (adj.counit.app (SheafOfModules.unit X.ringCatSheaf))
+  have he : adj.homEquiv _ _ e.hom = e₀.hom := by
+    apply (adj.homEquiv _ _).symm.injective
+    rw [Equiv.symm_apply_apply, adj.homEquiv_counit]
+    rfl
+  refine ⟨e, ?_, ?_⟩
+  · intro U
+    have h := congrArg
+      (fun k ↦ k.app (op U) (exteriorPower.ιMulti (X.presheaf.obj (op U)) 0
+        (M := M.val.obj (op U)) Fin.elim0)) he
+    change e.hom.val.app (op U) (exteriorSheafSection M 0 U Fin.elim0) =
+      exteriorPower.zeroEquiv (X.presheaf.obj (op U)) (M.val.obj (op U))
+        (exteriorPower.ιMulti (X.presheaf.obj (op U)) 0 Fin.elim0) at h
+    exact h.trans (exteriorPower.zeroEquiv_ιMulti
+      (R := X.presheaf.obj (op U)) (M := M.val.obj (op U)) _)
+  · intro e' he'
+    apply Iso.ext
+    apply (adj.homEquiv _ _).injective
+    rw [he]
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply exteriorPower.linearMap_ext (R := X.presheaf.obj U)
+    apply DFunLike.ext
+    intro a
+    change e'.hom.val.app U
+        (((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).unit.app
+          (exteriorSheafPresheaf M 0)).app U
+          (exteriorPower.ιMulti (X.presheaf.obj U) 0 a)) =
+      exteriorPower.zeroEquiv (X.presheaf.obj U) (M.val.obj U)
+        (exteriorPower.ιMulti (X.presheaf.obj U) 0 a)
+    have ha : a = Fin.elim0 := Subsingleton.elim _ _
+    subst a
+    exact (he' U.unop).trans
+      (exteriorPower.zeroEquiv_ιMulti (R := X.presheaf.obj U) (M := M.val.obj U) _).symm
 
 end AlgebraicGeometry.Scheme.Modules
