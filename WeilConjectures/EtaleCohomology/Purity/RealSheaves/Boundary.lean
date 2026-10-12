@@ -51,9 +51,11 @@ points, which is what makes the residue degree `e_s` meaningful.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension` : the
-  restriction of `j_* ℱ` to a point of a smooth curve is finite locally constant.
-- `AlgebraicGeometry.Scheme.isConstructibleSheaf_lowerStar` : `j_* ℱ` is constructible.
+- `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth` :
+  the restriction of `j_* ℱ` to a point of a smooth curve is finite locally constant.
+- `AlgebraicGeometry.Scheme.isConstructibleSheaf_lowerStar` : `j_* ℱ` is constructible, and
+  `AlgebraicGeometry.Scheme.isConstructibleSheaf_lowerStar_of_smooth`, its case of a smooth
+  curve.
 - `AlgebraicGeometry.Scheme.isIso_unit_upperStarLowerStarAdjunction` : a finite locally
   constant sheaf on a smooth curve is the direct image of its restriction to a dense open.
 
@@ -330,19 +332,38 @@ namespace Scheme
 
 variable {j : U ⟶ C} [IsOpenImmersion j] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
+/-- Let `j : U₀ ↪ C₀` be an open immersion into a curve, `ℱ` a finite locally constant sheaf of
+`Λ`-modules on `U₀` and `s` a closed point of `C₀` outside `U₀`. Then the restriction of the
+middle extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
+
+This is an auxiliary finiteness input, weaker than the blueprint lemma
+`lem-wf-boundary-stalk-invariants`, which identifies the stalk of `j_* ℱ` at a geometric point
+`s̄` over `s`, Frobenius-equivariantly, with the inertia invariants `ℱ_η̄ ^ I_s`. That
+identification implies this statement, since a sheaf on `Spec k(s)` is the continuous Galois
+module of its geometric stalk, and `ℱ_η̄ ^ I_s` is finite. For a smooth curve this is
+`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth`. -/
+theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension
+    (p : C ⟶ Spec (.of K)) [IsCurve p] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) (hs : IsClosed {s})
+    (hsj : s ∉ Set.range j.base) :
+    Scheme.IsFiniteLocallyConstantSheaf
+      ((C.fromSpecResidueField s)^*[ModuleCat.{u + 1} Λ].obj
+        ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F)) := by
+  sorry
+
 omit [Finite K] in
 /-- Let `j : U₀ ↪ C₀` be an open immersion into a smooth curve, `ℱ` a finite locally constant
 sheaf of `Λ`-modules on `U₀` and `s` a point of `C₀`. Then the restriction of the middle
 extension `j_* ℱ` to the point `Spec k(s)` is finite locally constant.
 
 This is the finiteness part of the blueprint lemma `lem-wf-boundary-stalk-invariants` (step 1 of
-the proof of `sk-i-real-boundary`): the geometric stalks of `j_* ℱ` are finite
+the proof of `sk-i-real-boundary`) for a smooth curve: the geometric stalks of `j_* ℱ` are finite
 (`AlgebraicGeometry.Etale.finite_sheafFiber_lowerStar`), since a germ of `j_* ℱ` is a section of
 `ℱ` over the punctured part `V ×_{C₀} U₀` of an irreducible étale neighbourhood `V`, which is
 irreducible, and such sections inject into a stalk of `ℱ`. A sheaf on the one-point scheme
 `Spec k(s)` with finite stalks is finite locally constant
 (`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_of_subsingleton`). -/
-theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension
+theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth
     (p : C ⟶ Spec (.of K)) [IsCurve p] [Smooth p]
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [Scheme.IsFiniteLocallyConstantSheaf F] (s : C) :
@@ -363,20 +384,17 @@ theorem isFiniteLocallyConstantSheaf_upperStar_middleExtension
   exact Finite.of_equiv _ ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ)
     (C.fromSpecResidueField s) t).app _).toLinearEquiv.toEquiv.symm
 
-omit [Finite K] in
-/-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
-Also `lem-wf-dense-open-pi1-surjective`, part (5).
-
-The direct image `j_* ℱ` of a finite locally constant sheaf along an open immersion into a
-smooth curve `C₀` with finite complement is constructible. The complement consists of closed
-points, since `C₀` is a Jacobson space, so the range of `j` and the boundary points stratify `C₀`
-(`AlgebraicGeometry.Scheme.Stratification.ofOpenImmersion`). On `U₀` the restriction of
-`j_* ℱ` is `ℱ`, and at a boundary point it is finite locally constant by
-`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension`. -/
-theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p] [Smooth p]
+omit [Finite K] [Finite Λ] in
+/-- The direct image `j_* ℱ` of a finite locally constant sheaf along an open immersion into a
+curve `C₀` with finite complement is constructible, provided its restriction to every closed
+point outside `U₀` is finite locally constant. -/
+private theorem isConstructibleSheaf_lowerStar_of_upperStar (p : C ⟶ Spec (.of K)) [IsCurve p]
     (hfin : (Set.range j.base)ᶜ.Finite)
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [Scheme.IsFiniteLocallyConstantSheaf F] :
+    [Scheme.IsFiniteLocallyConstantSheaf F]
+    (h : ∀ s : C, IsClosed {s} → s ∉ Set.range j.base → Scheme.IsFiniteLocallyConstantSheaf
+      ((C.fromSpecResidueField s)^*[ModuleCat.{u + 1} Λ].obj
+        ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F))) :
     Scheme.IsConstructibleSheaf ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F) := by
   have : JacobsonSpace C := LocallyOfFiniteType.jacobsonSpace p
   have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian p
@@ -391,7 +409,40 @@ theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p] [Smo
     exact IsFiniteLocallyConstantSheaf.of_iso (F := F)
       (asIso ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit.app F)).symm
   | succ i =>
-    exact isFiniteLocallyConstantSheaf_upperStar_middleExtension p F _
+    have := hfin.to_subtype
+    have hx := ((Finite.equivFin ↥(Set.range j.base)ᶜ).symm i).2
+    exact h _ (hcl _ hx) hx
+
+/-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
+Also `lem-wf-dense-open-pi1-surjective`, part (5).
+
+The direct image `j_* ℱ` of a finite locally constant sheaf along an open immersion into a
+curve `C₀` with finite complement is constructible. The complement consists of closed points,
+since `C₀` is a Jacobson space, so the range of `j` and the boundary points stratify `C₀`
+(`AlgebraicGeometry.Scheme.Stratification.ofOpenImmersion`). On `U₀` the restriction of
+`j_* ℱ` is `ℱ`, and at a boundary point it is finite locally constant by
+`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension`. -/
+theorem isConstructibleSheaf_lowerStar (p : C ⟶ Spec (.of K)) [IsCurve p]
+    (hfin : (Set.range j.base)ᶜ.Finite)
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsFiniteLocallyConstantSheaf F] :
+    Scheme.IsConstructibleSheaf ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F) :=
+  isConstructibleSheaf_lowerStar_of_upperStar p hfin F fun s hs hsj ↦
+    isFiniteLocallyConstantSheaf_upperStar_middleExtension p F s hs hsj
+
+omit [Finite K] in
+/-- Blueprint `sk-i-real-boundary` for a smooth curve: the direct image `j_* ℱ` of a finite
+locally constant sheaf along an open immersion into a smooth curve `C₀` with finite complement
+is constructible. This is `AlgebraicGeometry.Scheme.isConstructibleSheaf_lowerStar`, with the
+boundary input proved by
+`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth`. -/
+theorem isConstructibleSheaf_lowerStar_of_smooth (p : C ⟶ Spec (.of K)) [IsCurve p] [Smooth p]
+    (hfin : (Set.range j.base)ᶜ.Finite)
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [Scheme.IsFiniteLocallyConstantSheaf F] :
+    Scheme.IsConstructibleSheaf ((Etale.middleExtension (ModuleCat.{u + 1} Λ) j).obj F) :=
+  isConstructibleSheaf_lowerStar_of_upperStar p hfin F fun s _ _ ↦
+    isFiniteLocallyConstantSheaf_upperStar_middleExtension_of_smooth p F s
 
 omit [Finite K] [Finite Λ] in
 /-- Blueprint `sk-i-real-boundary`: Boundary stalks and restriction to an open.
