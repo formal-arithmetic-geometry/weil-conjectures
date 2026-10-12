@@ -11,9 +11,11 @@ public import Mathlib.RingTheory.Spectrum.Prime.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Sheaf.RingTheory.JacobiZariskiQuotientSmooth
-import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.OrzechProperty
+import Mathlib.RingTheory.Localization.BaseChange
+import Mathlib.RingTheory.Flat.Stability
+import Mathlib.LinearAlgebra.TensorProduct.Basis
+import Mathlib.Algebra.Module.LocalizedModule.Exact
 
 /-! # Cotangent vanishing after quotienting a section differential basis
 
@@ -28,6 +30,42 @@ open scoped TensorProduct
 
 namespace Algebra
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem span_conormal_generators (D : Type u) [CommRing D]
+    (n : ℕ) (f : Fin n → D) :
+    let a := Ideal.span (Set.range f)
+    let g : Fin n → a.Cotangent := fun j ↦
+      a.toCotangent ⟨f j, Ideal.subset_span (Set.mem_range_self j)⟩
+    Submodule.span (D ⧸ a) (Set.range g) = ⊤ := by
+  dsimp only
+  let a := Ideal.span (Set.range f)
+  let g : Fin n → a.Cotangent := fun j ↦
+    a.toCotangent ⟨f j, Ideal.subset_span (Set.mem_range_self j)⟩
+  have hD : Submodule.span D (Set.range g) = ⊤ := by
+    apply top_unique
+    intro y _
+    obtain ⟨x, rfl⟩ := a.toCotangent_surjective y
+    refine Submodule.span_induction
+      (p := fun z hz ↦ a.toCotangent ⟨z, hz⟩ ∈ Submodule.span D (Set.range g))
+      ?_ ?_ ?_ ?_ x.property
+    · rintro z ⟨j, rfl⟩
+      exact Submodule.subset_span (Set.mem_range_self j)
+    · change a.toCotangent 0 ∈ _
+      rw [map_zero]
+      exact Submodule.zero_mem _
+    · intro x y hx hy hxx hyy
+      change a.toCotangent (⟨x, hx⟩ + ⟨y, hy⟩) ∈ _
+      rw [map_add]
+      exact Submodule.add_mem _ hxx hyy
+    · intro r x hx hxx
+      change a.toCotangent (r • ⟨x, hx⟩) ∈ _
+      rw [map_smul]
+      exact Submodule.smul_mem _ r hxx
+  apply (Submodule.restrictScalars_eq_top_iff D (D ⧸ a) a.Cotangent).mp
+  rw [Submodule.restrictScalars_span D (D ⧸ a) Ideal.Quotient.mk_surjective]
+  exact hD
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Quotienting by kernel elements whose differentials form a basis along a smooth
 section kills both localized cotangent obstructions at every prime along that section.
 The quotient and its section are supplied explicitly; no algebra is chosen here.
@@ -68,6 +106,137 @@ theorem localized_cotangent_vanishes_of_section_differential_basis
         Subsingleton (LocalizedModule q.asIdeal.primeCompl
           (H1Cotangent R (D ⧸ Ideal.span (Set.range f)))) ∧
         Subsingleton (LocalizedModule q.asIdeal.primeCompl
-          (KaehlerDifferential R (D ⧸ Ideal.span (Set.range f)))) := by sorry
+          (KaehlerDifferential R (D ⧸ Ideal.span (Set.range f)))) := by
+  classical
+  have _ := hf
+  let a := Ideal.span (Set.range f)
+  let C := D ⧸ a
+  have hσ : Function.Surjective σ.toRingHom := by
+    intro y
+    obtain ⟨r, hr⟩ := hπ y
+    exact ⟨algebraMap R D r, (σ.commutes r).trans hr⟩
+  obtain ⟨i, δ, w, hi, hiδ, hδw, hw, hδ, _⟩ :=
+    jacobiZariski_quotient_smooth R D a
+  intro q hq
+  let S := q.asIdeal.primeCompl
+  have hbasis : ∃ b : Module.Basis (Fin n) (Localization S)
+      (LocalizedModule S (C ⊗[D] KaehlerDifferential R D)),
+      ∀ j, b j = LocalizedModule.mk
+        (1 ⊗ₜ[D] KaehlerDifferential.D R D (f j)) 1 := by
+    let v : Fin n → KaehlerDifferential R D := fun j ↦ KaehlerDifferential.D R D (f j)
+    let M := KaehlerDifferential R D
+    have : Module.FinitePresentation D M := Module.finitePresentation_of_projective D M
+    let L := Localization S
+    let K := IsLocalRing.ResidueField L
+    let N := C ⊗[D] M
+    let N' := LocalizedModule S N
+    have hτ' : τ.comp (algebraMap D C) = σ.toRingHom := hτ
+    have hτsurj : Function.Surjective τ := by
+      intro y
+      obtain ⟨d, hd⟩ := hσ y
+      refine ⟨algebraMap D C d, ?_⟩
+      rw [← RingHom.comp_apply, hτ', hd]
+    have hker : RingHom.ker τ ≤ RingHom.ker (algebraMap C K) := by
+      intro c hc
+      rw [RingHom.mem_ker, IsScalarTower.algebraMap_apply C L K]
+      change IsLocalRing.residue L (algebraMap C L c) = 0
+      rw [IsLocalRing.residue_eq_zero_iff]
+      exact (IsLocalization.AtPrime.to_map_mem_maximal_iff L q.asIdeal c).mpr (hq hc)
+    let ρ : Q →+* K := τ.liftOfSurjective hτsurj ⟨algebraMap C K, hker⟩
+    have hρ : ρ.comp τ = algebraMap C K :=
+      τ.liftOfSurjective_comp hτsurj ⟨algebraMap C K, hker⟩
+    let : Algebra D Q := σ.toRingHom.toAlgebra
+    let : Algebra Q K := ρ.toAlgebra
+    have : IsScalarTower D Q K := IsScalarTower.of_algebraMap_eq' (by
+      change algebraMap D K = ρ.comp σ.toRingHom
+      rw [← hτ', ← RingHom.comp_assoc, hρ, ← IsScalarTower.algebraMap_eq D C K])
+    obtain ⟨b, hb⟩ := hb
+    let eQ := TensorProduct.AlgebraTensorModule.cancelBaseChange D Q K K M
+    let bK := (b.baseChange K).map eQ
+    have hbK : ∀ j, bK j = 1 ⊗ₜ[D] v j := by
+      intro j
+      simp only [bK, eQ, Module.Basis.map_apply, Module.Basis.baseChange_apply, hb]
+      rw [TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul]
+      simp only [one_smul, v]
+    let e := LocalizedModule.equivTensorProduct S N
+    let eK : (K ⊗[L] N') ≃ₗ[K] (K ⊗[D] M) :=
+      (LinearEquiv.baseChange L K _ _ e).trans
+        ((TensorProduct.AlgebraTensorModule.cancelBaseChange C L K K N).trans
+          (TensorProduct.AlgebraTensorModule.cancelBaseChange D C K K M))
+    let bres := bK.map eK.symm
+    have hbres : ∀ j, bres j = 1 ⊗ₜ[L] LocalizedModule.mk (1 ⊗ₜ[D] v j) 1 := by
+      intro j
+      apply eK.injective
+      simp only [bres, Module.Basis.map_apply, eK, LinearEquiv.apply_symm_apply, hbK,
+        LinearEquiv.trans_apply]
+      rw [LinearEquiv.baseChange_tmul]
+      dsimp only [e]
+      rw [LocalizedModule.equivTensorProduct_apply_mk]
+      rw [TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul]
+      simp only [Localization.mk_one, one_smul]
+      rw [TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul]
+      simp only [one_smul]
+    have : Module.FinitePresentation L N' := by infer_instance
+    have : Module.Flat L N' := by infer_instance
+    apply Module.exists_basis_of_basis_baseChange (R := L) (M := N')
+      (fun j ↦ LocalizedModule.mk (1 ⊗ₜ[D] v j) 1)
+    · have hv : (TensorProduct.mk L K N' 1 ∘
+          (fun j ↦ LocalizedModule.mk (1 ⊗ₜ[D] v j) 1)) = bres :=
+        funext fun j ↦ (hbres j).symm
+      rw [hv]
+      exact bres.linearIndependent
+    · have hv : (TensorProduct.mk L K N' 1 ∘
+          (fun j ↦ LocalizedModule.mk (1 ⊗ₜ[D] v j) 1)) = bres :=
+        funext fun j ↦ (hbres j).symm
+      rw [hv]
+      exact bres.span_eq
+    · exact Module.Flat.rTensor_preserves_injective_linearMap _ Subtype.val_injective
+  obtain ⟨b, hb'⟩ := hbasis
+  let g : Fin n → a.Cotangent := fun j ↦
+    a.toCotangent ⟨f j, Ideal.subset_span (Set.mem_range_self j)⟩
+  let g' : Fin n → LocalizedModule S a.Cotangent := fun j ↦ LocalizedModule.mk (g j) 1
+  have hspan : Submodule.span (Localization S) (Set.range g') = ⊤ := by
+    have h := span_eq_top_of_isLocalizedModule (Localization S) S
+      (LocalizedModule.mkLinearMap S a.Cotangent) (span_conormal_generators D n f)
+    change Submodule.span (Localization S)
+      (Set.range (LocalizedModule.mkLinearMap S a.Cotangent ∘ g)) = ⊤
+    rw [Set.range_comp]
+    exact h
+  let ψ := Finsupp.linearCombination (Localization S) g'
+  have hψ : Function.Surjective ψ :=
+    (span_range_eq_top_iff_surjective_finsuppLinearCombination (Localization S)).mp hspan
+  let δ' := LocalizedModule.map S δ
+  have hδg : δ' ∘ g' = b := by
+    funext j
+    simpa only [δ', g', g, Function.comp_apply, LocalizedModule.map_mk, hδ]
+      using (hb' j).symm
+  have hcomp : δ'.comp ψ = Finsupp.linearCombination (Localization S) b := by
+    rw [← Finsupp.linearCombination_linear_comp, hδg]
+  have hδinj : Function.Injective δ' := by
+    intro x y hxy
+    obtain ⟨xx, rfl⟩ := hψ x
+    obtain ⟨yy, rfl⟩ := hψ y
+    have h := congrArg b.repr hxy
+    rw [← LinearMap.comp_apply, ← LinearMap.comp_apply, hcomp,
+      b.repr_linearCombination, b.repr_linearCombination] at h
+    exact congrArg ψ h
+  have hδsurj : Function.Surjective δ' := by
+    intro y
+    refine ⟨ψ (b.repr y), ?_⟩
+    rw [← LinearMap.comp_apply, hcomp, b.linearCombination_repr]
+  have hi' := LocalizedModule.map_injective S i hi
+  have hw' := LocalizedModule.map_surjective S w hw
+  have hiδ' : Function.Exact (LocalizedModule.map S i) δ' :=
+    LocalizedModule.map_exact S i δ hiδ
+  have hδw' : Function.Exact δ' (LocalizedModule.map S w) :=
+    LocalizedModule.map_exact S δ w hδw
+  have hizero := (LinearMap.injective_iff_eq_zero_of_exact hiδ').mp hδinj
+  have hwzero := (LinearMap.surjective_iff_eq_zero_of_exact hδw').mp hδsurj
+  constructor
+  · exact ⟨fun x y ↦ hi' (by simp only [hizero, LinearMap.zero_apply])⟩
+  · refine ⟨fun x y ↦ ?_⟩
+    obtain ⟨xx, rfl⟩ := hw' x
+    obtain ⟨yy, rfl⟩ := hw' y
+    simp only [hwzero, LinearMap.zero_apply]
 
 end Algebra
