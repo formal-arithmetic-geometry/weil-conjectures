@@ -1,0 +1,149 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07PR, proof, finite-model and derivation paragraphs (https://stacks.math.columbia.edu/tag/07PR)"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PR, binomial presentation; ordinary simple-field presentation and tensor base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degree p purely inseparable extension generic formal fibre presentation hypersurface derivation unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, TensorProduct",
+   "results": "12 hits about Kaehler differentials and tensor maps; no formal-fibre presentation",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree p inseparable generic formal fibre binomial quotient with coefficient derivation unit",
+   "results": "8 hits on standard etale algebras, differential structures on characteristic-zero root extensions and field smoothness; no matching formal-fibre presentation",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "formalFiber|formalFibre|degree_p.*regular; blueprint search degree p formal fibre presentation and hypersurface formal fibre",
+   "results": "No Mathlib formal-fibre theorem. Existing PolynomialLinearFormalFiberPresentation concerns nonzero primes of a one-variable polynomial ring with linear residue field, not a degree-p change of a generic fibre. Blueprint searches returned zero matches.",
+   "verdict": "no duplicate or matching theorem",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change a simple degree p purely inseparable field extension gives a binomial polynomial quotient",
+   "results": "Eight hits on purely inseparable minimal polynomials; none state the full combined result.",
+   "verdict": "no complete match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "AdjoinRoot.tensorAlgEquiv; IntermediateField.adjoin.powerBasis; formalFiber.*degree in both library roots; blueprint_refs search degree p formal fibre",
+   "results": "Mathlib supplies quotient base change and simple field presentations separately. No complete matching statement; zero blueprint hits.",
+   "verdict": "no complete match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product base change of monogenic extension minimal polynomial quotient",
+   "results": "8 hits on base change of generators/presentations and characteristic polynomials; none is the specified simple field extension tensor quotient statement.",
+   "verdict": "no complete match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Derivation, IsUnit",
+   "results": "One hit: Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top; does not construct an absolute derivation of a formal fibre.",
+   "verdict": "no match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "adjoinRootEquivAdjoin|tensorAlgEquiv|cancelBaseChange; formalFiber|isUnit.*deriv in lean/Sheaf and lean/WeilConjectures",
+   "results": "Mathlib has simple field presentations and tensor/base-change equivalences separately; Sheaf has consumer regularity criteria and the parent statement, no complete component duplicate. Quotient closure requires combining these equivalences, not one existing theorem.",
+   "verdict": "no complete match",
+   "date": "2026-10-13"
+  }
+ ],
+ "id": "new-lem-weil-pbc-degree-p-quotient-component",
+ "kind": "statement",
+ "title": "Specified-coefficient degree-p quotient component",
+ "status": "split",
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PowerSeriesPolynomialFormalFiberDegreePPresentation",
+  "group": "J2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-helper-g-ring-char-p",
+   "place": "Tag 07PR: base change of the binomial presentation",
+   "via": [
+    "lem-weil-pbc-power-series-polynomial-degree-p-presentation",
+    "new-lem-weil-pbc-helper-g-ring-char-p-geometric-component"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalFiberDegreePQuotient",
+  "file": "lean/Sheaf/RingTheory/FormalFiberDegreePQuotient.lean",
+  "declaration": "MvPowerSeries.FormalFiberDegreePQuotient",
+  "statement": "theorem FormalFiberDegreePQuotient\n    (K L : Type u) [Field K] [Field L] [Algebra K L]\n    (M : IntermediateField K L)\n    (F : Type u) [CommRing F] [Algebra K F]\n    (p : ℕ) [Fact p.Prime] (z : L)\n    (hz : IntermediateField.adjoin M ({z} : Set L) = ⊤)\n    (a : M) (ha : z ^ p = (a : L)) (hdeg : Module.finrank M L = p) :\n    Nonempty ((Polynomial (TensorProduct K M F) ⧸\n      Ideal.span ({Polynomial.X ^ p - Polynomial.C\n        (Algebra.TensorProduct.includeLeftRingHom a)} :\n          Set (Polynomial (TensorProduct K M F)))) ≃+* TensorProduct K L F)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "statement": "Let K be a field, L a field extension of K and M an intermediate field [def-pc-field-extension]. Let F be a commutative K-algebra, p a prime, z in L with M(z)=L, and a in M with z^p=a and [L:M]=p. Put R=M tensor_K F and T=L tensor_K F [def-weil-pbc-module-tensor-product], and i(a)=a tensor 1. Then R[Z]/(Z^p-i(a)) [def-weil-polynomial-ring] is isomorphic as a ring to T.",
+ "proof": [
+  {
+   "text": "The monic polynomial X^p-a vanishes at z. Its degree is p=[L:M], because z generates L. Thus it equals the minimal polynomial of z. Evaluation gives the M-algebra isomorphism M[Z]/(Z^p-a) = L (Mathlib IntermediateField.adjoinRootEquivAdjoin and the adjoin-equals-top equivalence).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Tensor the presentation with R=M tensor_K F. AdjoinRoot.tensorAlgEquiv gives the base-changed binomial quotient, while tensor associativity and cancelBaseChange identify L tensor_M R with L tensor_K F. The coefficient maps send a to a tensor 1. Compose these equivalences and forget algebra structure. The argument permits F=0.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T220522-L-1393962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T220522-L-1393962",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

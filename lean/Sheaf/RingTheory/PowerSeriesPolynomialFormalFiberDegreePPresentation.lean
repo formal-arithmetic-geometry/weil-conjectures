@@ -13,16 +13,11 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.Algebra.Polynomial.Basic
 
-import Sheaf.RingTheory.FiniteSubalgebraFractionField
-import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.CompletionFiniteQuotient
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.Derivation.DetectNonPthPower
-import Sheaf.RingTheory.PurelyInseparableIntegralPrimeUnique
-import Sheaf.RingTheory.RadicialPrimeUniqueDegreeP
-import Sheaf.RingTheory.RegularRingNormal
-import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
-import Sheaf.RingTheory.RegularLocalLocalization
+import all Mathlib.RingTheory.OreLocalization.Basic
+import all Mathlib.Algebra.MonoidAlgebra.Defs
+
+import Sheaf.RingTheory.FormalFiberDegreePDerivation
+import Sheaf.RingTheory.FormalFiberDegreePQuotient
 
 /-!
 # Degree-p presentations of extended generic formal fibres
@@ -37,6 +32,8 @@ universe u
 
 namespace MvPowerSeries
 
+set_option maxHeartbeats 1000000 in
+-- Comparing the nested formal-fibre tensor ring instances needs extra elaboration heartbeats.
 /-- A degree-p final step in a purely inseparable extension presents the extended formal
 fibre as a binomial hypersurface over the preceding fibre. A derivation of that fibre
 sends its constant coefficient to a unit.
@@ -45,31 +42,15 @@ paragraphs; Tags 07N9, 07PH and 07PE.
 (blueprint: lem-weil-pbc-power-series-polynomial-degree-p-presentation)
 
 Proof:
-Write A = k[[x]][y], K = Frac(A), and F = K tensor_A completion(A_q).
-Choose a finite A-subalgebra B of M with fraction field M. Since A is regular, it is
-normal, and the finite purely inseparable extension gives a unique prime r above q.
-Write z^p = f in M and clear denominators: if f = b/s, replace z by sz and f by
-s^(p-1)b in B. This keeps M(z) = L, degree p, and failure to be a pth power in M.
-The monic quotient E = B[Z]/(Z^p-f) is finite free over B. Its map to L is injective
-because the minimal polynomial of z over M has degree p; its fraction field is L.
-Every pth power in E lies in B. Thus E has a unique prime t over r, and localizing
-E at B minus r is already the local ring E_t: any prime contracts inside r, and the
-pth-power condition puts that prime inside t. The completion of E_t is
-completion(B_r)[Z]/(Z^p-f), by the finite-quotient completion theorem.
-Apply the finite-extension completion decomposition to A -> B and A -> E. Each
-product has one factor, by uniqueness of the primes over q. Tensor the first with M,
-and the second with L. Tensor associativity, quotient base change and exchange of
-factors identify M tensor_K F with R = completion(B_r) tensor_B M, and L tensor_K F
-with R[Z]/(Z^p-f).
-The domain B is finite type over the complete Noetherian power-series local ring.
-Tag 07PH gives an absolute derivation D of B nonzero on f, since f is not a pth power
-in M. Extend D through B_r, its completion, and its localization R using Tag 07PE.
-Its value on f is the image of the nonzero field element D(f) in M, hence a unit
-of R. Transport f and D to M tensor_K F using the first equivalence, and transport
-the binomial quotient presentation along the induced coefficient isomorphism. These
-are the required witnesses. No regularity of the preceding fibre is used in this
-construction. Extending D coefficientwise and applying the regularity criterion are
-left to the consumer of this presentation.
+Choose a in M with z^p = a, and put f = a tensor 1 in R. The specified-coefficient
+formal-fibre derivation component gives an absolute derivation D of R with D(f) a
+unit. It uses the finite A-subalgebra model of M, the singleton finite-extension
+completion comparison, and extension of derivations through localizations and
+completion; clearing denominators by a pth power preserves the unit conclusion
+for this original coefficient a. Independently, the quotient component base changes
+the simple field presentation L = M[Z]/(Z^p-a), giving R[Z]/(Z^p-f) isomorphic to T.
+Both components use the same a, so their witnesses give the required conjunction.
+No regularity of the preceding fibre is assumed or concluded.
 
 Edge cases: n or m may be zero. A zero formal fibre causes no exception: its
 polynomial quotient and the extended fibre are zero rings, where zero is a unit.
@@ -104,6 +85,11 @@ theorem formalFiber_polynomial_degreePPresentation
     ∃ (f : R) (D : Derivation ℤ R R), IsUnit (D f) ∧
       Nonempty ((Polynomial R ⧸
         Ideal.span ({Polynomial.X ^ p - Polynomial.C f} : Set (Polynomial R))) ≃+* T) := by
-  sorry
+  intro A K C R T
+  obtain ⟨a, ha⟩ := hpow
+  obtain ⟨D, hD⟩ := FormalFiberDegreePDerivation k p n m q L M z hz a ha hdeg
+  have hiso := FormalFiberDegreePQuotient K L M ((⊥ : Ideal A).Fiber C)
+    p z hz a ha hdeg
+  exact ⟨Algebra.TensorProduct.includeLeftRingHom a, D, hD, hiso⟩
 
 end MvPowerSeries
