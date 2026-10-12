@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.Ring.Constructions
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
+import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Quasi-coherent algebras on nested affine opens
@@ -67,6 +68,74 @@ theorem quasi_coherent_algebra_affine_inclusion
     (∀ U : S.affineOpens,
       Spec.map (A.right.obj.map (homOfLE (le_refl U.1)).op) =
         𝟙 (Spec (A.right.obj.obj (op U.1)))) := by
-  sorry
+  constructor
+  · intro U V hUV
+    have hpush : IsPushout (A.hom.hom.app (op V.1))
+        (S.presheaf.map (homOfLE hUV).op) (A.right.obj.map (homOfLE hUV).op)
+        (A.hom.hom.app (op U.1)) := by
+      let R := S.presheaf.obj (op V.1)
+      let B := A.right.obj.obj (op V.1)
+      let T := S.presheaf.obj (op U.1)
+      let C := A.right.obj.obj (op U.1)
+      let f := (A.hom.hom.app (op V.1)).hom
+      let g := (S.presheaf.map (homOfLE hUV).op).hom
+      let i := (A.right.obj.map (homOfLE hUV).op).hom
+      let j := (A.hom.hom.app (op U.1)).hom
+      let : Algebra R B := f.toAlgebra
+      let : Algebra R T := g.toAlgebra
+      let : Algebra R C := (i.comp f).toAlgebra
+      have hn : i.comp f = j.comp g := by
+        exact congrArg CommRingCat.Hom.hom (A.hom.hom.naturality (homOfLE hUV).op).symm
+      let fi : B →ₐ[R] C := { i with commutes' := fun r ↦ rfl }
+      let gj : T →ₐ[R] C := { j with
+        commutes' := fun r ↦ (DFunLike.congr_fun hn r).symm }
+      let q := Algebra.TensorProduct.productMap fi gj
+      have : A.toModule.IsQuasicoherent := hA
+      obtain ⟨c, hc, _, hct⟩ :=
+        Scheme.Modules.quasiCoherent_affine_section_baseChange S A.toModule U V hUV
+      have he : ∀ t, q t = c t := by
+        intro t
+        induction t using TensorProduct.induction_on with
+        | zero => simp
+        | tmul b t =>
+          rw [Algebra.TensorProduct.productMap_apply_tmul, hct]
+          change i b * j t = j t * i b
+          exact mul_comm _ _
+        | add x y hx hy => simp [hx, hy]
+      have hq : Function.Bijective q := by
+        change Function.Bijective (fun t ↦ q t)
+        rw [show (fun t ↦ q t) = (fun t ↦ c t) from funext he]
+        exact hc
+      let e := (RingEquiv.ofBijective q.toRingHom hq).toCommRingCatIso
+      refine (CommRingCat.isPushout_tensorProduct R B T).of_iso
+        (Iso.refl _) (Iso.refl _) (Iso.refl _) e (by rfl) (by rfl) ?_ ?_
+      · ext b
+        change q (TensorProduct.tmul R b 1) = i b
+        exact Algebra.TensorProduct.productMap_left_apply fi gj b
+      · ext t
+        change q (TensorProduct.tmul R 1 t) = j t
+        exact Algebra.TensorProduct.productMap_right_apply fi gj t
+    have hp := isPullback_SpecMap_of_isPushout _ _ _ _
+      hpush
+    have hc : Spec.map (S.presheaf.map (homOfLE hUV).op) ≫ V.2.isoSpec.inv =
+        U.2.isoSpec.inv ≫ S.homOfLE hUV := by
+      rw [← cancel_mono V.1.ι, Category.assoc, Category.assoc, S.homOfLE_ι]
+      exact V.2.map_fromSpec U.2 (homOfLE hUV).op
+    have h : IsPullback (Spec.map (A.right.obj.map (homOfLE hUV).op))
+        (Spec.map (A.hom.hom.app (op U.1)) ≫ U.2.isoSpec.inv)
+        (Spec.map (A.hom.hom.app (op V.1)) ≫ V.2.isoSpec.inv) (S.homOfLE hUV) :=
+      hp.of_iso (Iso.refl _) (Iso.refl _) U.2.isoSpec.symm V.2.isoSpec.symm
+        (by simp) (by simp) (by simp) hc
+    have hi : IsOpenImmersion (Spec.map (A.right.obj.map (homOfLE hUV).op)) :=
+      MorphismProperty.of_isPullback h.flip inferInstance
+    refine ⟨hpush, h, hi, ?_⟩
+    simpa using Scheme.image_preimage_eq_of_isPullback h.flip Set.univ
+  · constructor
+    · intro U V W hUV hVW
+      rw [← Spec.map_comp, ← A.right.obj.map_comp]
+      rfl
+    · intro U
+      change Spec.map (A.right.obj.map (𝟙 (op U.1))) = _
+      rw [A.right.obj.map_id, Spec.map_id]
 
 end AlgebraicGeometry

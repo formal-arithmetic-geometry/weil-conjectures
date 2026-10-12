@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "*Sections over nested affine opens.* Forgetting the algebra multiplication, apply [lem-weil-pbc-quasi-coherent-affine-section-base-change] to the quasi-coherent underlying module of $\\mathcal A$. The resulting isomorphism $A'\\otimes_{R'}R\\cong A$ is compatible with multiplication and units because restriction and the tensor map are induced by the sheaf's $\\mathcal O_S$-algebra structure; hence it is an isomorphism of $R$-algebras.",
+   "text": "For U ⊆ V, let R=O(V), B=A(V), T=O(U), C=A(U). Naturality gives i ∘ f = j ∘ g for the four ring maps. With these maps as algebra structures, Algebra.TensorProduct.productMap defines q : B ⊗[R] T → C, b ⊗ t ↦ i(b)j(t). Apply [lem-weil-pbc-quasi-coherent-affine-section-base-change] to A.toModule. Its bijective linear comparison c has the same pure-tensor formula, since scalar multiplication in A.toModule is multiplication by the structure map j and C is commutative. TensorProduct.induction_on shows q=c as functions. Thus q is bijective and RingEquiv.ofBijective gives a ring isomorphism. Transport CommRingCat.isPushout_tensorProduct along this isomorphism; productMap_left_apply and productMap_right_apply identify the transported legs with i and j.",
    "uses": [
     "lem-weil-pbc-quasi-coherent-affine-section-base-change"
    ],
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "*The cartesian square and the open immersion.* The fibre product of $\\operatorname{Spec}(A')\\to\\operatorname{Spec}(R')$ with $U=\\operatorname{Spec}(R)\\to U'=\\operatorname{Spec}(R')$ is, by [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}(A'\\otimes_{R'}R)$. Step 1 identifies this ring with $A$, so the canonical square with $\\operatorname{Spec}(A)\\to\\operatorname{Spec}(A')$ is cartesian. Since $U\\hookrightarrow U'$ is an open immersion, its base change is an open immersion; thus $\\operatorname{Spec}(A)\\to\\operatorname{Spec}(A')$ identifies $\\operatorname{Spec}(A)$ with the preimage of $U$.",
+   "text": "Apply isPullback_SpecMap_of_isPushout to the ring pushout, the Mathlib spectrum-pushout interface to [lem-weil-pbc-fibre-product-affine-spectra]. Transport the lower vertices along U.2.isoSpec.symm and V.2.isoSpec.symm using IsPullback.of_iso. Compatibility of the lower edge with S.homOfLE follows from V.2.map_fromSpec U.2 after cancelling the monomorphism V.ι and using S.homOfLE_ι. Base change of the open immersion U → V makes the top edge an open immersion (MorphismProperty.of_isPullback). The image is its inverse image description [lem-weil-pbc-open-preimage-fibre-product], expressed directly by Scheme.image_preimage_eq_of_isPullback for the flipped square and Set.univ.",
    "uses": [
     "lem-weil-pbc-fibre-product-affine-spectra",
     "lem-weil-pbc-open-preimage-fibre-product"
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "*Transitivity.* For affine opens $U\\subseteq U'\\subseteq U''$, the restriction maps of the sheaf algebra compose, so the corresponding maps of spectra compose contravariantly. The identity restriction for $U=U'$ gives the identity morphism. Therefore the composite through $\\operatorname{Spec}\\mathcal A(U')$ equals the direct morphism from $\\operatorname{Spec}\\mathcal A(U)$ to $\\operatorname{Spec}\\mathcal A(U'')$.",
+   "text": "For U ⊆ V ⊆ W, rewrite backwards using Spec.map_comp and A.right.obj.map_comp; the composite opposite inclusions equal the opposite transitive inclusion by proof irrelevance. For self-restriction, change the inclusion to the identity and apply A.right.obj.map_id and Spec.map_id.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -70,7 +70,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Lemmas 01LN and 01LO"
+  "place": "Constructions, Lemmas 01LN and 01LO; tensor comparison checked on pure tensors and transported through the affine charts"
  },
  "mathlib_searches": [
   {
@@ -148,5 +148,15 @@
   "group": "J1",
   "result": "pass",
   "note": "S : Scheme, A : S.CommAlgebraSheaf + A.toModule.IsQuasicoherent (STATE QC-algebra line, hA not instance-derivable); U V : S.affineOpens, U.1 ≤ V.1; (i) IsPushout σ_V res_O res_A σ_U = A(V)⊗_{O(V)}O(U) ≅ A(U) via isPushout_tensorProduct; (ii) IsPullback Spec res_A / Spec σ ≫ isoSpec.inv / S.homOfLE, IsOpenImmersion, range = preimage; (iii) Spec contravariant composition and identity; names #check'd to Mathlib"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T053959-L-2648506",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
