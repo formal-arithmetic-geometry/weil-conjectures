@@ -9,13 +9,10 @@ public import Sheaf.RingTheory.StrictlyStandardElement
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
-import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
-import Sheaf.RingTheory.EquationCountFibreDimensionFlat
-import Sheaf.RingTheory.StandardSmoothDimensionAtPoints
-import Sheaf.RingTheory.StrictlyStandardLocalizationSmooth
-import WeilConjectures.Mathlib.Topology.KrullDimension
+
+import Sheaf.RingTheory.PopescuDesingularizationQuotientData
+import Sheaf.RingTheory.QuadraticRelationsSmoothQuotient
+import Mathlib.RingTheory.FiniteType
 
 /-!
 # The desingularization lemma
@@ -104,6 +101,35 @@ theorem exists_desingularization
         β.comp aB = α ∧
         Ideal.span ((algebraMap R B) ''
           {r : R | ∀ x : R, π ^ 2 * x = 0 → r * π * x = 0}) ≤ singularIdeal R B := by
-  sorry
+  obtain ⟨S, instS, algS, hSfp, K, hdiv, hquad, hBfp, β, aB, hcomp, haway, hlocal⟩ :=
+    exists_desingularization_quotient_data R Λ A π α hΛ hstandard hρ
+  let : CommRing S := instS
+  let : Algebra R S := algS
+  let : FinitePresentation R S := hSfp
+  let : IsNoetherianRing S := FiniteType.isNoetherianRing R S
+  refine ⟨S ⧸ K, inferInstance, inferInstance, hBfp, β, aB, hcomp, ?_⟩
+  let J : Ideal (S ⧸ K) := Ideal.span ((algebraMap R (S ⧸ K)) ''
+    {r : R | ∀ x : R, π ^ 2 * x = 0 → r * π * x = 0})
+  have hV : PrimeSpectrum.zeroLocus (singularIdeal R (S ⧸ K) : Set (S ⧸ K)) ⊆
+      PrimeSpectrum.zeroLocus (J : Set (S ⧸ K)) := by
+    intro q hq
+    have hnsm : ¬ IsSmoothAtPrime R q := by
+      rw [(singularIdeal_zeroLocus R (S ⧸ K)).1] at hq
+      exact hq
+    change J ≤ q.asIdeal
+    apply Ideal.span_le.mpr
+    rintro _ ⟨r, hr, rfl⟩
+    by_contra hrq
+    apply hnsm
+    by_cases hπ : algebraMap R (S ⧸ K) π ∈ q.asIdeal
+    · have hπ' : algebraMap R S π ∈
+          (PrimeSpectrum.comap (Ideal.Quotient.mk K) q).asIdeal := hπ
+      obtain ⟨hsm, hflat⟩ := hlocal _ hπ'
+      exact smoothAtPrime_quotient_of_quadratic_relations π K hdiv hquad q hπ
+        hsm hflat r hr hrq
+    · exact ⟨algebraMap R (S ⧸ K) π, hπ, haway⟩
+  have hle := (PrimeSpectrum.zeroLocus_subset_zeroLocus_iff
+    (singularIdeal R (S ⧸ K)) J).mp hV
+  exact hle.trans (singularIdeal_isRadical R (S ⧸ K)).radical.le
 
 end Algebra

@@ -1,0 +1,178 @@
+{
+ "id": "lem-weil-pbc-quadratic-relations-smooth-quotient",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 10–11 of lem-weil-pbc-popescu-desingularize; local elimination followed by a smooth principal neighbourhood, used in step 7 of thm-weil-pbc-finite-etale-lifting",
+   "via": [
+    "lem-weil-pbc-popescu-desingularize",
+    "lem-weil-pbc-popescu-desingularize-strictly-standard",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smoothness of a quotient by quadratic relations at an annihilator-good prime",
+ "statement": "Let R and S be commutative rings, with S a Noetherian R-algebra [def-weil-pbc-noetherian-ring]. Let π∈R, K⊆S an ideal with K⊆(π²) and (π)K⊆K², and q∈Spec(S/K). Suppose π∈q. Put p=q∩S. Assume R→S is smooth at p [def-weil-pbc-singular-ideal] and S_p [def-weil-pbc-localization-at-prime] is flat over R [def-weil-pbc-flat-ring-map]. If r∈R has rπx=0 whenever π²x=0 in R, and the image of r is outside q, then R→S/K is smooth at q. This statement has no input algebra A, section modulo π⁴, strictly standard hypothesis, or global singular-ideal conclusion.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Set p=q∩S, T=S_p, J=KT, and t=image of π in T. Localization carries the two ideal containments to J⊆(t²) and (t)J⊆J². T is Noetherian and local and t belongs to its maximal ideal. Thus N=(t)J satisfies N⊆J²⊆(t²)J=(t)N. N is finitely generated, and (t) is contained in the Jacobson radical. Apply Nakayama to obtain N=0.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+   }
+  },
+  {
+   "text": "Flat base change of annihilators gives Ann_T(t²)=Ann_R(π²)T. For each generator x in Ann_R(π²), the assumption on r gives rπx=0; induction over the ideal span proves image(r)t z=0 for every z∈Ann_T(t²). Since image(r) is a unit in T, tz=0. Hence Ann_T(t²)=Ann_T(t). If x∈J, write x=t²z. As (t)J=0, t³z=0. Apply annihilator stability first to tz, giving t²z=0 (equivalently apply it twice to obtain tz=0). Thus x=0 and J=0.",
+   "uses": [
+    "lem-weil-pbc-annihilator-element-flat-base-change",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+   }
+  },
+  {
+   "text": "Choose finitely many generators of K. Since their images vanish in S_p, each is killed by some denominator outside p. The product s of these denominators is outside p and kills every generator, hence all of K, by linearity. The empty generating set uses s=1.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+   }
+  },
+  {
+   "text": "Choose g outside p whose principal localization S_g is smooth. Put e=sg. Localize S_g further at s, and identify this iterated localization with S_e; smooth composition shows S_e is smooth. The canonical localization map S_e→(S/K)_e is surjective. Its injectivity criterion says every x∈K must be killed by a power of e; the first power works since sK=0. Therefore this map is an R-algebra isomorphism and (S/K)_e is smooth. The image of e lies outside q, proving smoothness at q.",
+   "uses": [
+    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-smooth-ring-map-principal-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-nakayama-jacobson",
+  "lem-weil-pbc-annihilator-element-flat-base-change",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-localization-of-localization",
+  "lem-weil-pbc-smooth-ring-map-principal-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat noetherian algebra quotient quadratic relations ideal K contained in pi squared and pi K contained in K squared smooth at prime",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal K contained in pi squared with pi K contained in K squared vanishes in flat local algebra where annihilator obstruction is invertible",
+   "results": "Algebra.FormallyUnramified.iff_comp_injective, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallyUnramified.iff_comp_injective_of_small, Ideal.cotangentIdeal_square, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyUnramified.comp_injective, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField",
+   "date": "2026-10-13",
+   "verdict": "no match for the stated intermediate theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "desingular|quadratic.*ideal|strictly.?standard",
+   "results": "none",
+   "date": "2026-10-13",
+   "verdict": "no match for the stated intermediate theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuDesingularize",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.QuadraticRelationsSmoothQuotient",
+  "declaration": "Algebra.smoothAtPrime_quotient_of_quadratic_relations",
+  "file": "lean/Sheaf/RingTheory/QuadraticRelationsSmoothQuotient.lean",
+  "statement": "theorem smoothAtPrime_quotient_of_quadratic_relations {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing S] (π : R) (K : Ideal S) (hdiv : K ≤ Ideal.span {(algebraMap R S π) ^ 2}) (hquad : Ideal.span {algebraMap R S π} * K ≤ K ^ 2) (q : PrimeSpectrum (S ⧸ K)) (hπ : algebraMap R (S ⧸ K) π ∈ q.asIdeal) (hsmooth : IsSmoothAtPrime R (PrimeSpectrum.comap (Ideal.Quotient.mk K) q)) (hflat : Module.Flat R (Localization.AtPrime (PrimeSpectrum.comap (Ideal.Quotient.mk K) q).asIdeal)) (r : R) (hr : ∀ x : R, π ^ 2 * x = 0 → r * π * x = 0) (hrq : algebraMap R (S ⧸ K) r ∉ q.asIdeal) : IsSmoothAtPrime R q",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T184240-L-3994880",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T184240-L-3994880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
