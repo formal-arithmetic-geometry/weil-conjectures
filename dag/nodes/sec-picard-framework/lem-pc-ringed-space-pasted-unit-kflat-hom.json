@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-ringed-space-pasted-unit-kflat-hom",
+ "kind": "statement",
+ "title": "Pasted derived direct-image unit on K-flat Hom tests",
+ "statement": "Let f:X\\to Y and g:Y\\to Z be morphisms of ringed spaces [def-weil-locally-ringed-space-morphism]. Let I be a K-injective cochain complex of O_X-modules [def-pur-kinjective-complex] and K a K-flat cochain complex of O_Z-modules [def-pc-kflat-complex]. Use the module direct images, derived direct images and right-derived units of [def-pc-ringed-spaces-derived-direct-image], and write Q for localization. Postcomposition with the pasted unit induces a bijection Hom_{D(O_Z)}(QK,Q(g_*f_*I)) → Hom_{D(O_Z)}(QK,Rg_*Rf_*QI), sending a to a ≫ η_g(f_*I) ≫ Rg_*(η_f(I)). This assertion is only for localized K-flat test complexes, and imposes no boundedness or flatness on f or g.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "lemma-adjoint (079W), lemma-derived-pullback-composition (0D5S), and the mate calculation in the argument of lemma-derived-pushforward-composition (0D5T)"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-pur-kinjective-complex",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "For a K-flat complex K on Z, successive tensor pullbacks along g and f remain K-flat by [lem-pc-kflat-pullback-preservation]. They therefore compute Lf* Lg* QK for the derived pullbacks supplied by [lem-pc-ringed-spaces-derived-adjoint-general]. No pullback-composition identification is needed for this Hom test.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-ringed-spaces-derived-adjoint-general"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The induced derived adjunctions and [lem-weil-pbc-kinjective-hom-derived] identify Hom(QK,Rg* Rf* QI) with Hom_H(f* g* K,I). To identify localized maps QK→Q(g* f* I), represent one by a roof K ←s K′ →a g* f* I and resolve K′ by a K-flat K″ using [lem-pc-kflat-resolution]. The new s has K-flat endpoints; successive derived pullback shows its tensor pullback is a quasi-isomorphism. Take the underived adjunct b:f* g* K″→I and form Q(b) after the inverse of Q(f* g* s). K-injectivity gives a unique homotopy class f* g* K→I. Naturality makes it invariant under roof refinements. Its underived adjunct localized is inverse to this construction: after precomposition with s it is homotopic to a, because the adjuncts agree in the derived category and localization is faithful for maps into I. Common roof refinements prove injectivity as well as surjectivity. K-flatness is not confused with K-projectivity.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the counit compatibility of the derived adjunction induced from the underived adjunction [lem-sc-derived-adjunction-from-underived], twice. Taking adjuncts shows that the Hom identification just constructed sends a to a followed by ηg(f* I) followed by Rg*(ηf(I)). This is the pasted-unit mate calculation of Stacks 079W and 0D5T. Hence precisely the displayed postcomposition function is bijective.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-ringed-spaces-derived-adjoint-general",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-kflat-resolution",
+  "lem-sc-derived-adjunction-from-underived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 079W, 0D5S, 0D5T; explicit Hom/roof and pasted-unit calculation on K-flat tests"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward adjunction K-flat complex K-injective Hom comparison",
+   "results": "Internal Server Error; unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "postcomposition with pasted derived direct image units gives bijection from K-flat test complexes",
+   "results": "Eight hits, including exact-functor derived comparison isomorphisms and K-injective Qh_map_bijective; none is the ringed-space pasted-unit Hom comparison.",
+   "date": "2026-10-12",
+   "verdict": "no usable match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|rightDerivedFunctorCompUnit",
+   "results": "No Mathlib matches. Local source inspection found rightDerivedFunctorCompUnit in WeilConjectures; its invertibility theorem assumes preservation of K-injective complexes and cannot be applied here.",
+   "date": "2026-10-12",
+   "verdict": "no usable match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization Hom K-flat source successive pushforward of K-injective complex derived units bijective",
+   "results": "Second reader: Qh_map_bijective for K-injective targets, Qh_map_bijective for K-projective sources, and DerivedCategory.right_fac for roofs were found. None proves the specified pasted-unit function bijective.",
+   "date": "2026-10-12",
+   "verdict": "no usable match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.isIso_of_yoneda_map_bijective",
+   "results": "Second reader: one exact Mathlib hit, already used in the target reduction. It does not supply the K-flat Hom comparison.",
+   "date": "2026-10-12",
+   "verdict": "match for the already proved outer reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComp|KFlat.*Hom|Hom.*KFlat",
+   "results": "Second reader: Mathlib returned generic rightDerivedFunctorComparison declarations. Local inspection of unbounded Comp.lean found preservation-of-K-injectivity hypotheses; injective-module direct-image acyclicity declarations concern bounded/object or sections cohomology. No replacement for this unbounded ringed-space comparison.",
+   "date": "2026-10-12",
+   "verdict": "no usable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof: derived direct image composition on K-injective representatives, Hom comparison before Yoneda and cancellation",
+   "via": [
+    "lem-pc-ringed-spaces-derived-direct-image-composition",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-sc-proper-upper-shriek-composition",
+    "lem-pc-derived-sections-pushforward-comparison",
+    "lem-pc-ringed-space-direct-image-kinjective-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RingedSpacePastedUnitKFlatHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/RingedSpacePastedUnitKFlatHom.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.moduleDirectImage_pastedUnit_kFlat_hom_bijective",
+  "statement": "theorem moduleDirectImage_pastedUnit_kFlat_hom_bijective\n    {X Y Z : RingedSpace.{u}}\n    [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]\n    [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y))]\n    [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z))]\n    (f : X ⟶ Y) (g : Y ⟶ Z)\n    (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) [I.IsKInjective]\n    (K : CochainComplex (SheafOfModules.{u} (moduleRings Z)) ℤ) (hK : K.IsKFlat) :\n    Function.Bijective (fun\n      (a : DerivedCategory.Q.obj K ⟶ DerivedCategory.Qh.obj\n        (((moduleDirectImage g).mapHomotopyCategory (ComplexShape.up ℤ)).obj\n          (((moduleDirectImage f).mapHomotopyCategory (ComplexShape.up ℤ)).obj\n            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I)))) =>\n      a ≫ (moduleDirectImage g).rightDerivedFunctorUnit.app\n          (((moduleDirectImage f).mapHomotopyCategory (ComplexShape.up ℤ)).obj\n            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I)) ≫\n        (derivedModuleDirectImage g).map\n          ((moduleDirectImage f).rightDerivedFunctorUnit.app\n            ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I)))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085220-L-6021",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T085220-L-6021",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
