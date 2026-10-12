@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.AlgebraicGeometry.FunctionField
+import Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjectiveCore
 import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 import Sheaf.RingTheory.LocalDomainDimOnePrincipalLocalization
 
@@ -72,6 +73,14 @@ theorem Scheme.separated_affine_functionField_surjective
         (algebraMap B K).toIntAlgHom
         (fun _ _ => Commute.all _ _)
     Function.Surjective φ := by
-  sorry
+  dsimp only
+  let f : TensorProduct ℤ (Γ(X, U)) (X.presheaf.stalk x) →ₐ[ℤ] X.functionField :=
+    Algebra.TensorProduct.lift
+      (X.germToFunctionField U).hom.toIntAlgHom
+      (algebraMap (X.presheaf.stalk x) X.functionField).toIntAlgHom
+      (fun _ _ => Commute.all _ _)
+  change Function.Surjective f
+  let hclosed := Scheme.isClosedImmersion_specMap_tensor_functionField X U hU x hx hdim
+  exact @surjective_of_isClosedImmersion_specMap _ _ (CommRingCat.ofHom f.toRingHom) hclosed
 
 end AlgebraicGeometry

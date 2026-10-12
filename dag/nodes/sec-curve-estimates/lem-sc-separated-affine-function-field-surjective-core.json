@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-separated-affine-function-field-surjective-core",
+ "kind": "statement",
+ "title": "Separated affine function-field charts give a closed immersion",
+ "statement": "Under the hypotheses of lem-sc-separated-affine-function-field-surjective, the spectrum map induced by the canonical tensor-product map from Γ(X,U) ⊗_ℤ O_{X,x} to X.functionField is a closed immersion.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NB, separatedness paragraph"
+ },
+ "stmt_deps": [
+  "lem-sc-separated-affine-function-field-surjective"
+ ],
+ "proof": [
+  {
+   "text": "Construct the pullback of the diagonal of the separated scheme along the two affine charts, identify the pullback with Spec of the function field using the one-dimensional local calculation, and transport the resulting closed immersion through the affine spectrum identifications.",
+   "uses": [
+    "lem-sc-separated-affine-function-field-surjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-separated-affine-function-field-surjective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties Lemma 09NB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "surjectivity of a ring map whose spectrum map is a closed immersion",
+   "results": "service unavailable; no exact declaration established",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsClosedImmersion.isAffine_surjective_of_isAffine",
+   "results": "IsClosedImmersion.isAffine_surjective_of_isAffine",
+   "date": "2026-10-13",
+   "verdict": "exact declaration found and used"
+  },
+  {
+   "tool": "loogle",
+   "query": "[IsClosedImmersion (Spec.map f)] → Function.Surjective f",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.isAffine_surjective_of_isAffine",
+   "results": "Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion.lean",
+   "date": "2026-10-13",
+   "verdict": "exact supporting declaration found"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-separated-affine-function-field-surjective",
+   "place": "09NB proof"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjectiveCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedAffineFunctionFieldSurjectiveCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isClosedImmersion_specMap_tensor_functionField",
+  "statement": "theorem Scheme.isClosedImmersion_specMap_tensor_functionField\n    (X : Scheme.{u}) [IsIntegral X]\n    [hsep : X.IsSeparated]\n    (U : X.Opens) (hU : IsAffineOpen U) [hUn : Nonempty U]\n    (x : X) (hx : x ∉ U)\n    [IsNoetherianRing (X.presheaf.stalk x)]\n    (hdim : ringKrullDim (X.presheaf.stalk x) = 1) :\n    let A : Type u := Γ(X, U)\n    let B : Type u := X.presheaf.stalk x\n    let K : Type u := X.functionField\n    let φ : TensorProduct ℤ A B →ₐ[ℤ] K :=\n      Algebra.TensorProduct.lift\n        (X.germToFunctionField U).hom.toIntAlgHom\n        (algebraMap B K).toIntAlgHom\n        (fun _ _ => Commute.all _ _)\n    IsClosedImmersion (Spec.map (CommRingCat.ofHom φ.toRingHom))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T173858-L-3304401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T173858-L-3304401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
