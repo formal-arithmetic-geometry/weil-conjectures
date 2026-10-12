@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-etale-ring-inverse-image-counit",
+ "kind": "statement",
+ "title": "EtaleRingInverseImageCounit",
+ "statement": "Let $U,V$ be schemes [def-pc-scheme] and $f:U\\to V$. Let $b:V_{\\mathrm{Et}}\\to U_{\\mathrm{Et}}$ be base change on the small etale sites [def-weil-pbc-etale-site]. Write $L=\\mathrm{Scheme.etaleSetPullback}(f)$ for the inverse image of set sheaves [def-weil-pbc-etale-sheaves], $R$ for sectionwise set direct image, and $R_r$ for sectionwise commutative-ring direct image. Let $F_U,F_V$ forget ring coefficients, and $a:L\\dashv R$ be the recorded set adjunction with unit $\\eta^a$ and counit $\\varepsilon^a$. Assume that $L$ preserves finite limits. Suppose a functor $L_r$ between the ring-sheaf categories, an isomorphism $e:L_rF_U\\cong F_VL$, and a natural transformation $\\eta:\\mathrm{id}\\to L_rR_r$ are given, satisfying $F_V(\\eta_G)=\\eta^a_{F_VG}\\mathbin{\\gg}R(e_G^{-1})$ for every ring sheaf $G$. Then there is a natural transformation $\\varepsilon:R_rL_r\\to\\mathrm{id}$ of ring sheaves such that $F_U(\\varepsilon_H)=e_{R_rH}\\mathbin{\\gg}\\varepsilon^a_{F_UH}$ for every ring sheaf $H$. No ring-sheaf adjunction or triangle identity is assumed. Functor products in these formulas are in diagrammatic order, as in the Lean statement.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, proof of (2), ring paragraph; Section 00YR, sextuples"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Define beta_H = e_(Rr H) followed by the set counit. The unit comparison and the set right triangle give F_V(eta_(Rr H)) followed by R(beta_H) = identity.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For binary operations put X=F_V(Rr H), Y=F_U(Lr(Rr H)). The comparison q:L(X times X) -> Y times Y is invertible. Its adjunct t has projections eta followed by the two projections of X times X, by unit naturality. Precompose the desired operation equality by q and apply the injective set hom-bijection. On sections the projections of t become the ring unit of each coordinate. Use that eta is a ring map, then beta cancels eta by step 1. This proves preservation of addition and multiplication.",
+   "uses": [
+    "def-weil-category-product",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose the constant equalities with the invertible terminal comparison, apply the set hom-bijection, and use the ring-unit constant equations and step 1. This proves preservation of zero and one. For arbitrary pairs of sections, map the sectionwise Cartesian tensor product to the chosen categorical binary product by its projections. To evaluate constants, map the singleton Cartesian unit to the categorical terminal object. Evaluation yields the four ring-homomorphism axioms for each beta component.",
+   "uses": [
+    "def-weil-category-product",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The beta component is already a natural morphism of set sheaves, so the constructed ring homomorphisms give a ring-sheaf morphism. Naturality of e and of the set counit gives naturality in H, forming epsilon. Its forgetful formula is the definition of beta.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunct-counit-identity",
+  "def-weil-category-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Details of the ring paragraph of Proposition 00YV, supplied by V1; source read at https://stacks.math.columbia.edu/tag/00YV and https://stacks.math.columbia.edu/tag/00YR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A product preserving inverse image on sheaves of sets lifts to sheaves of commutative rings with a forgetful comparison",
+   "results": "CategoryTheory.Sheaf.cartesianMonoidalCategoryLift_val; LightCondensed.ofSheafForgetLightProfinite_val; CategoryTheory.Sheaf.cartesianMonoidalCategory; CategoryTheory.Sheaf.cartesianMonoidalCategoryFst_val; SheafOfModules.toSheafCompSheafToPresheafIso; TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst; CategoryTheory.Sheaf.instHasFiniteProducts; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd",
+   "date": "2026-10-12",
+   "digest": "70d09656fe6b4883",
+   "verdict": "No exact sheaf-ring unit or counit lift among these results; signatures and local sources checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.sheafCompose",
+   "results": "CategoryTheory.sheafComposeNatIso; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans; CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions_of_hasSheafCompose; CategoryTheory.sheafComposeNatTrans; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.sheafComposeNatTrans_app_uniq; CategoryTheory.Sheaf.adjunction; CategoryTheory.Sheaf.adjunction_counit_app_hom",
+   "date": "2026-10-12",
+   "digest": "b65a96bc51c7a24c",
+   "verdict": "No exact sheaf-ring unit or counit lift among these results; signatures and local sources checked."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(unit|counit).*CommRing|CommRing.*(unit|counit).*sheaf",
+   "results": "Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean",
+   "date": "2026-10-12",
+   "digest": "f1c3696295ebde83",
+   "verdict": "No exact sheaf-ring unit or counit lift among these results; signatures and local sources checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unit of a finite product preserving adjunction lifts to sheaves of commutative rings and the underlying counit is a ring homomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a ring valued lift of a left exact inverse image and a compatible ring unit, the set counit preserves ring operations",
+   "results": "CommSemiring.counit_apply; CommRingCat.monoidAlgebraAdj; CommRingCat.adj; RingHom.liftOfRightInverse; CommRingCat.forget₂Adj; RingHom.liftOfRightInverseAux; CommRingCat.instIsRightAdjointForget; RingEquiv.ofLeftInverse",
+   "date": "2026-10-12",
+   "digest": "2d779a0b790be2e5",
+   "verdict": "No exact sheaf-ring unit or counit lift among these results; signatures and local sources checked."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageRingAdjunction",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Ring inverse-image adjunction in the algebraic inverse-image compatibility used by derived exchange: construction and transport of the unit and counit (steps 2 and 3 of lem-weil-pbc-etale-inverse-image-ring-adjunction).",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-ring-adjunction",
+    "lem-weil-pbc-etale-inverse-image-ring-lift",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRingInverseImageCounit",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRingInverseImageCounit.lean",
+  "declaration": "AlgebraicGeometry.etaleRingInverseImageCounit",
+  "statement": "theorem etaleRingInverseImageCounit (U V : Scheme.{u}) (f : U ⟶ V)\n    (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let L := Scheme.etaleSetPullback f\n    let R := b.sheafPushforwardContinuous (Type (u + 1))\n      (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)\n    let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1}\n      (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)\n    let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology\n    let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology\n    let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b\n      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)\n      (U.smallGrothendieckTopology @Etale)\n    ∀ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤\n          Sheaf U.smallEtaleTopology CommRingCat.{u + 1})\n      (er : Lr ⋙ FrU ≅ FrV ⋙ L) (η : 𝟭 _ ⟶ Lr ⋙ Rr),\n      (∀ G, FrV.map (η.app G) = a.unit.app (FrV.obj G) ≫ R.map (er.inv.app G)) →\n      ∃ ε : Rr ⋙ Lr ⟶ 𝟭 _,\n        ∀ F, FrU.map (ε.app F) = er.hom.app (Rr.obj F) ≫ a.counit.app (FrU.obj F)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T085351-L-44543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T085351-L-44543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

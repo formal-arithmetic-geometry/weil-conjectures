@@ -14,34 +14,31 @@
  ],
  "proof": [
   {
-   "text": "The base-change functor is continuous. The recorded set inverse image is left adjoint to its sectionwise set direct image by Mathlib.sheafAdjunctionContinuous. The assumed finite-limit preservation implies finite-product preservation.",
+   "text": "Obtain Lr, e and the compatible ring-valued unit eta from the unit construction.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-etale-ring-inverse-image-unit"
    ],
    "elementary": false
   },
   {
-   "text": "Use the ring clause of the sheaf/internal-object identification on the source and target sites; its section formulas identify the structure maps with the actual sectionwise operations. Apply the corresponding clause of the product-preserving lifted adjunction to the set adjunction.",
+   "text": "Apply the counit lifting theorem to these same Lr, e, eta and the given finite-limit preservation, obtaining epsilon and its forgetful formula.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-etale-ring-inverse-image-counit"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the lifted ring-object adjunction through the two inverse sheaf/internal-object functors. Its right functor has the underlying sectionwise direct image. Its structure maps, evaluated at a base-changed object, are those of the given ring sheaf, so the underlying comparison and its inverse preserve all operations. These maps are natural in both the site object and the ring sheaf, giving a right-functor isomorphism to the recorded direct image. Transport the adjunction along that isomorphism, and compose the left forgetful comparisons. The generic lift hom-set equation gives the claimed identity after cancelling the right comparison.",
+   "text": "Define the adjunction with unit eta and counit epsilon. To prove the left triangle, apply the faithful F_U, use naturality of e at eta, substitute the unit formula, and use set-counit naturality to reduce to the left set triangle followed by e and its inverse. For the right triangle apply faithful F_V, substitute both formulas, cancel inverse components of e under R, and use the right set triangle. Finally expand the adjunct as eta followed by Rr(h), forget it, substitute the unit formula and combine the two R-images. This is exactly the required set adjunct. No ring adjunct identity is assumed.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-adjunct-counit-identity"
    ],
    "elementary": false
   }
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Proposition 00YV, proof of (2) and its paragraph on rings; discussion of quadruples and sextuples in Section 00YR"
+  "place": "Proposition 00YV, ring paragraph: unit/counit reduction; explicit triangle and hom-set calculations by V1"
  },
  "mathlib_searches": [
   {
@@ -137,10 +134,9 @@
   "date": "2026-10-12"
  },
  "proof_deps": [
-  "lem-weil-pbc-etale-base-change-continuous",
-  "def-weil-pbc-etale-sheaves",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+  "lem-weil-pbc-etale-ring-inverse-image-unit",
+  "lem-weil-pbc-etale-ring-inverse-image-counit",
+  "lem-weil-pbc-adjunct-counit-identity"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -156,9 +152,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T063520-L-3159779",
+  "landing": "20261012T085351-L-44543",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
