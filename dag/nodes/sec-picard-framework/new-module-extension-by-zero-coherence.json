@@ -17,16 +17,22 @@
  ],
  "proof": [
   {
-   "text": "For W=W', the sectionwise identity restriction transport identifies the displayed transpose with the unit, which is the transpose of identity. For a chain of inclusions, transpose the composite, use naturality of the units and the coherence of restriction transport, and use injectivity of the hom-equivalence. Transposing iota followed by the later counit and using the right triangle identity similarly proves the general counit equation.",
+   "text": "Apply injectivity of the chosen adjunction hom-equivalence. For equal opens the restriction transport is sectionwise identity, so the transpose is the unit, hence the transition is identity. For arbitrary nested opens transpose the transition followed by the later counit, use naturality of overFunctorMap and the right triangle identities at both opens, and obtain the general counit compatibility equation.",
    "uses": [
     "lem-sc-derived-open-restriction-adjunction-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The inside-open stalk comparison and its germ formula identify the stalk of the chosen unit with an isomorphism. The right triangle identity identifies the counit stalk as its inverse after the usual restriction-stalk comparison. Invert this counit stalk to obtain e. Apply the stalk functor to the general counit equation from the first step, and cancel e(W,x) and e(W',x) to prove compatibility.",
+   "text": "The chosen unit is invertible by [lem-sc-module-extension-by-zero-unit-isiso]. The right triangle identity therefore makes the restricted counit its inverse. For W contained in W′, transport and further restriction show that R_W of the W′ counit is invertible. To prove composition, transpose both candidate maps at W, cancel R_W of the W′′ counit, and apply the general counit equation twice. Specializing that equation to the top gives the required top-counit equation.",
    "uses": [
-    "lem-sc-module-extension-by-zero-stalk-maps-inside",
+    "lem-sc-module-extension-by-zero-unit-isiso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in W, forget the restricted counit to abelian presheaves on W. Its components are invertible because the restricted module counit is invertible. The restriction-stalk isomorphisms conjugate its stalk map to the underlying abelian stalk map of the global counit; prove this equation on germs using restrictStalkIso_hom_eq_germ and stalkFunctor_map_germ. Thus the global counit stalk map is invertible on abelian groups, and the module forgetful functor reflects this isomorphism. Define e(W,x) as the inverse of asIso of that stalk map. Its inverse formula is definitional. Cancel e(W′,x).inv in the final compatibility equation, use stalk functoriality and the general counit equation, and finish with the two hom-inv identities.",
+   "uses": [
     "def-pc-module-stalk-functor"
    ],
    "elementary": false
@@ -34,13 +40,13 @@
  ],
  "proof_deps": [
   "lem-sc-derived-open-restriction-adjunction-exact",
-  "lem-sc-module-extension-by-zero-stalk-maps-inside",
+  "lem-sc-module-extension-by-zero-unit-isiso",
   "def-pc-module-stalk-functor"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tags 00A7 (2)-(4), 00A5, with the adjunction argument expanded in the docstring"
+  "place": "Tags 00A7 (4), 00A5; adjunction triangle identities and naturality, with composition proved by cancellation of the restricted counit; Mathlib.Geometry.RingedSpace.Stalks restriction-stalk germ formulas"
  },
  "mathlib_searches": [
   {
@@ -117,10 +123,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T161504-L-2648950",
-  "kind": "interface",
+  "landing": "20261012T184310-L-4007145",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
