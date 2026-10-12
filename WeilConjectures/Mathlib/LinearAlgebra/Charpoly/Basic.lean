@@ -82,7 +82,7 @@ variable {R V : Type*} [CommRing R] [AddCommGroup V] [Module R V] [Module.Free R
 /-- If an endomorphism preserves a submodule `W` with `W` and `V ⧸ W` finite free, its
 characteristic polynomial is the product of the characteristic polynomials of the induced
 endomorphisms of `W` and of `V ⧸ W`.
-(blueprint: `sk-p-linear-filtration`) -/
+(blueprint: `sk-p-linear-filtration`, `p-linear-filtration`) -/
 theorem charpoly_eq_charpoly_restrict_mul_charpoly_mapQ (f : V →ₗ[R] V) (W : Submodule R V)
     [Module.Free R W] [Module.Finite R W] [Module.Free R (V ⧸ W)] [Module.Finite R (V ⧸ W)]
     (hW : W ≤ W.comap f) :
