@@ -343,7 +343,11 @@ the constant field extension and the homography of the blueprint.
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isPunctuallyPureOfWeight
     (D : LisseOnDenseOpen k₀ l) {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :
     (D.sheaf.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
-  sorry
+  have := D.nonempty_U
+  obtain ⟨H, _, _, _, _, _, W, hWtop, hWfin, _, _⟩ :=
+    ProjectiveLine.exists_toProjectiveLine_isFinite_etale_near_infinity D.j
+  exact hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine H W hWtop hWfin
+    (isLisse_upperStar_higherLowerShriek_zero_of_isFinite_of_etale H W D.lisse) hw
 
 /-- **The compact-support upper bound on a dense open of the line.** Let `𝓕` be lisse on the
 dense open `U₀ ⊆ 𝔸¹`, punctually `ι`-pure of weight `w`. Then `H_c^r(U, 𝓕)` has weights at most
