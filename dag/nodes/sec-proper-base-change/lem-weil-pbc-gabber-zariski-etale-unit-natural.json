@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-gabber-zariski-etale-unit-natural",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, the injectivity of the base change map i^{-1}(F|_{X_Zar}) -> (i^{-1}_small F)|_{Z_Zar} (first paragraph of the proof of 09ZF) and the injectivity of Gamma(X,F) -> Gamma(Z,i^{-1}F) deduced from it (second paragraph); The transported etale unit is natural on opens",
+   "via": [
+    "lem-weil-pbc-gabber-zariski-etale-restriction-injective",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The transported etale unit is natural on opens",
+ "statement": "Let $X$ and $Z$ be schemes [def-pc-scheme], and let $i:Z\\to X$ be a closed immersion [def-weil-closed-immersion]. Let $F$ be a sheaf of sets on $X_{\\Et}$ [def-weil-pbc-etale-sheaf-of-sets]. Write $b_i:X_{\\Et}\\to Z_{\\Et}$ for base change, $i^*F$ for its sheaf inverse image with adjunction unit $\\eta^{\\Et}$ [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], and $j_X,j_Z$ for the open-subscheme inclusion functors. Suppose $A$ and $G$ are topological sheaves of sets on $X$ and $Z$, with presheaf isomorphisms $e_X:A\\cong F\\circ j_X$ and $e_Z:G\\cong (i^*F)\\circ j_Z$. For each open $W\\subseteq X$, choose an isomorphism $a_W:j_Z(i^{-1}W)\\cong b_i(j_X(W))$ of etale $Z$-schemes whose first pullback projection is the restricted morphism $i|_W:i^{-1}W\\to W$ [def-pc-fibre-product]. Define the function $r_W:A(W)\\to G(i^{-1}W)$ by $r_W(s)=e_Z^{-1}((i^*F)(a_W)(\\eta^{\\Et}_{j_X(W)}(e_X(s))))$, where $(i^*F)(a_W)$ denotes contravariant restriction along the hom of $a_W$. Then there exists a morphism of topological sheaves $\\alpha:A\\to i_*G$ [def-weil-pbc-topological-inverse-image] with $\\alpha_W(s)=r_W(s)$ for every open $W\\subseteq X$ and every $s\\in A(W)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, proof, first paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-topological-inverse-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "For an inclusion of opens, compare the two morphisms from the restricted preimage open to the base-changed larger open. Their first projections agree by the assumed projection equation and naturality of the restricted scheme morphism. Their second projections agree since the isomorphisms are over Z. Pullback uniqueness proves the comparison square commutes.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the presheaf comparison eX, the etale unit restricted to opens, contravariant restriction by a, and the comparison eZ inverse. Naturality of the unit and both comparisons, and the square just proved, show that the composite components form a natural transformation. Regard it as a sheaf morphism; the component formula is definitional.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, first proof paragraph, details expanded from the original node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "naturality of comparison between topological inverse image and etale inverse image of sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of etale sheaf inverse image to Zariski topology injective comparison map",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf; TopCat.Presheaf.stalkFunctor_map_injective_of_app_injective; CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff; TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective; CategoryTheory.Sheaf.isLocallyInjective_iff_injective; TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective; CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff; CategoryTheory.Sheaf.isLocallyInjective_forget",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "zariski.*etale|etale.*zariski",
+   "results": "Mathlib/AlgebraicGeometry/Sites/Etale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GabberZariskiEtaleRestrictionInjective",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GabberZariskiEtaleUnitNatural",
+  "file": "lean/Sheaf/Paper/GabberZariskiEtaleUnitNatural.lean",
+  "declaration": "AlgebraicGeometry.gabber_zariski_etale_unit_natural",
+  "statement": "theorem gabber_zariski_etale_unit_natural {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (F : Sheaf X.smallEtaleTopology (Type (max (u + 1) v))) (Fzar : TopCat.Sheaf (Type (max (u + 1) v)) X.carrier) (eX : Fzar.obj ≅ (MorphismProperty.Comma.lift (P := @Etale) (Q := ⊤) (W := ⊤) X.restrictFunctor (fun U => (inferInstance : Etale U.ι)) (fun _ => trivial) (fun _ => trivial)).op ⋙ F.obj) (iFzar : TopCat.Sheaf (Type (max (u + 1) v)) Z.carrier) (eZ : iFzar.obj ≅ (MorphismProperty.Comma.lift (P := @Etale) (Q := ⊤) (W := ⊤) Z.restrictFunctor (fun U => (inferInstance : Etale U.ι)) (fun _ => trivial) (fun _ => trivial)).op ⋙ ((Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj F).obj) (a : ∀ W : X.Opens, Scheme.Etale.mk (i ⁻¹ᵁ W).ι ≅ (MorphismProperty.Over.pullback @Etale ⊤ i).obj (Scheme.Etale.mk W.ι)) (ha : ∀ W : X.Opens, (a W).hom.left ≫ pullback.fst W.ι i = i ∣_ W) : ∃ alpha : Fzar ⟶ ((Opens.map i.base).sheafPushforwardContinuous (Type (max (u + 1) v)) (Opens.grothendieckTopology X.carrier) (Opens.grothendieckTopology Z.carrier)).obj iFzar, ∀ (W : X.Opens) (s : Fzar.obj.obj (op W)), alpha.hom.app (op W) s = eZ.inv.app (op (i ⁻¹ᵁ W)) (((Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).obj F).obj.map (a W).hom.op (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ i) (Type (max (u + 1) v)) (X.smallGrothendieckTopology @Etale) (Z.smallGrothendieckTopology @Etale)).unit.app F).hom.app (op (Scheme.Etale.mk W.ι)) (eX.hom.app (op W) s)))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032811",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032811",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
