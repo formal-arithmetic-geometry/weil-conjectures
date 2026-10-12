@@ -12,7 +12,7 @@
  },
  "proof": [
   {
-   "text": "on an object X take the underlying object F(X). Define addition and\nmultiplication by F of the original binary operation precomposed with the inverse\nproduct comparison, zero and one using the inverse terminal comparison, and\nnegation by F of negation. For any term in n variables, its transported evaluation\ncomposed with the comparison F(X^n) -> F(X)^n equals F of its original evaluation.\nProve this by induction: projections follow from the defining comparison;\nconstants follow from uniqueness of maps to the terminal object; operations follow\nfrom naturality of binary comparisons and functoriality. Applying this identity to\nboth sides of associativity, units, inverses, commutativity and distributivity and\ncancelling the comparison proves all CommRingObj axioms. Send a ring morphism f to\nF(f). Naturality of the comparisons proves preservation of addition, multiplication,\nzero and one; negation follows from the additive group structure. Functoriality\nfollows from that of F. The underlying objects and maps were chosen literally as\nF(X) and F(f), so the forgetful equality holds strictly. Its eqToIso components\nare identities, giving the displayed operation equations.",
+   "text": "Equip F with Mathlib Functor.Braided.ofChosenFiniteProducts. Use the existing monoidal transports Functor.addGrpObjObj and Functor.monObjObj for the additive group and multiplicative monoid. Commutativity of multiplication is Functor.isCommMonObj_obj; commutativity of addition follows by the same braided naturality equation. For left distributivity precompose with the invertible ternary comparison δ F X (X ⊗ X) followed by the inner δ; expand the operations and use comp_lift_assoc, δ naturality, δ_fst/δ_snd, lift_δ and δ_μ to reduce to F.map applied to RingObj.mul_add X. Right distributivity is the analogous argument for (X ⊗ X) ⊗ X and RingObj.add_mul X. Package these proved structures into FF.obj, and use the existing IsAddMonHom and IsMonHom instances on F.map f.hom to define FF.map. The forgetful equality is rfl. Its eqToIso components simplify to identities; μ_of_cartesianMonoidalCategory and ε_of_cartesianMonoidalCategory yield the required operation formulas.",
    "uses": [
     "def-weil-category-product"
    ],
@@ -25,7 +25,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Proposition 00YV, paragraph on rings as sextuples; transport of operations and axioms; details supplied by G1"
+  "place": "Proposition 00YV, paragraph on rings as sextuples; proof implemented by T1 using Mathlib monoidal and braided transport APIs"
  },
  "mathlib_searches": [
   {
@@ -106,10 +106,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T053932-L-2635229",
-  "kind": "interface",
+  "landing": "20261012T070552-L-3477761",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
