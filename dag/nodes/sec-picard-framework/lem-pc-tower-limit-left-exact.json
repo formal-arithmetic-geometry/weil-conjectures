@@ -27,40 +27,29 @@
  ],
  "proof": [
   {
-   "text": "Since morphisms of towers are levelwise, for a morphism of towers u:(A_n)→(B_n) the levelwise kernels ker(u_n), with the transition maps induced by those of (A_n), form a tower which is a kernel of u in the category of towers (the universal property is checked level by level). An element of the inverse limit is a compatible tuple. The kernel of the induced map on limits is therefore the subgroup of compatible tuples whose nth component lies in ker(u_n) for every n; this is exactly the inverse limit of the levelwise kernel tower. Thus the inverse-limit functor preserves kernels.",
-   "uses": [
-    "def-weil-inverse-system",
-    "lem-pc-tower-abelian"
-   ],
+   "text": "For morphisms f and g of towers, the induced maps on the limit are equal after composing with every limit projection to a component, because each projection is additive. The limit hom extensionality lemma therefore proves that the map induced by f + g equals the sum of the induced maps.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 setup and proof of the kernel description"
+    "document": "Mathlib CategoryTheory limits and preadditive functors",
+    "place": "limit.hom_ext and componentwise additivity"
    }
   },
   {
-   "text": "Finite biproducts and the zero object in the category of towers are computed levelwise (direct check of the universal properties, morphisms being levelwise). Compatible tuples in a finite biproduct of towers are exactly pairs of compatible tuples, and the zero compatible tuple is unique. Componentwise addition therefore identifies the inverse limit of a finite biproduct with the corresponding biproduct of inverse limits and identifies the inverse limit of the zero tower with zero. Hence inverse limit is additive; together with kernel preservation from the preceding argument, it is left exact by the definition of an additive left exact functor.",
-   "uses": [
-    "def-weil-inverse-system",
-    "def-sp-left-exact-additive",
-    "lem-pc-tower-abelian"
-   ],
+   "text": "The limit functor is a right adjoint to the constant functor, so Mathlib provides an instance that it preserves all limits; this specializes to finite limits.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 setup for the inverse-limit functor"
+    "document": "Mathlib CategoryTheory Adjunction Limits",
+    "place": "CategoryTheory.lim_preservesLimits"
    }
   }
  ],
- "proof_deps": [
-  "def-weil-inverse-system",
-  "lem-pc-tower-abelian",
-  "def-sp-left-exact-additive"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07KW, Lemma 15.88.1 setup for the inverse-limit functor"
+  "by": "mathlib",
+  "document": "Mathlib",
+  "place": "CategoryTheory.lim_preservesLimits and componentwise limit hom extensionality"
  },
  "mathlib_searches": [
   {
@@ -134,8 +123,8 @@
   "file": "lean/Sheaf/CategoryTheory/Limits/TowerLimitAdditiveLeftExact.lean",
   "statement": "theorem towerLimitAdditiveLeftExact : (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).Additive ∧ PreservesFiniteLimits (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u})",
   "branch": "sheaf-dag",
-  "by": "J1",
-  "date": "2026-10-11",
+  "by": "E3",
+  "date": "2026-10-12",
   "existing": false
  },
  "reviewed_lean": {
@@ -157,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T110259-L-613676",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

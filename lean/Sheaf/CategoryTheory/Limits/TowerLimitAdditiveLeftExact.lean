@@ -42,6 +42,13 @@ theorem towerLimitAdditiveLeftExact :
     (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).Additive ∧
       PreservesFiniteLimits
         (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}) := by
-  sorry
+  constructor
+  · constructor
+    intro A B f g
+    apply limit.hom_ext
+    intro n
+    simp only [lim_map, limMap_π, Preadditive.add_comp, NatTrans.app_add,
+      Preadditive.comp_add]
+  · infer_instance
 
 end CategoryTheory
