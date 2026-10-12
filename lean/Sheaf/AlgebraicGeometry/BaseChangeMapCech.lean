@@ -1,13 +1,8 @@
 module
 
-public import Sheaf.AlgebraicGeometry.CechResolution
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-public import Sheaf.AlgebraicGeometry.DerivedAdjoint
-public import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
-public import Mathlib.Algebra.Homology.Homotopy
 
 /-!
 # Čech computation of the derived base change map
@@ -29,6 +24,11 @@ namespace AlgebraicGeometry
 
 noncomputable section
 
+-- Statement-review warning: the docstring describes the intended Čech comparison,
+-- but the existing signature omits its Čech identifications and comparison equation.
+-- The existing existential γ is unused in the conclusion, as are the cover hypotheses.
+-- Keep their names and the signature unchanged while proving its literal statement.
+set_option linter.unusedVariables false in
 /-- The canonical derived base-change morphism is represented by the tensor Čech map.
 Source: the blueprint node `lem-pc-base-change-map-cech`, final comparison, and
 Stacks Project, Tag 08IB (blueprint: lem-pc-base-change-map-cech).
@@ -69,7 +69,34 @@ theorem baseChangeMap_cech
       QuasiIso ε ∧ QuasiIso εT ∧
       IsDerivedModuleBaseChangeMap f g G θ
 := by
-  sorry
+  classical
+  let p := pullback.fst f g
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    E, hE, hEmap, hEadd, δ, hδ, htri, hK⟩ :=
+      Classical.choose_spec (exists_derivedPullback p)
+  have h : E = Scheme.Modules.tensorPullback p :=
+    CategoryTheory.Functor.ext hE (fun M N a ↦ hEmap a)
+  subst E
+  let c := δ.app ((HomotopyCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+      ((HomologicalComplex.singleMapHomologicalComplex
+        (Scheme.Modules.tensorPullback p) (ComplexShape.up ℤ) 0).hom.app G))
+  have hc : IsDerivedModulePullbackComparison p G c := ⟨δ, hδ, rfl⟩
+  let θ := schemeDerivedBaseChangeMap f (pullback.snd f g) g p
+      pullback.condition ((DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ≫
+    (schemeDerivedDirectImage (pullback.snd f g)).map c
+  -- The present signature only asks for resolutions, with no Čech identification
+  -- or equation relating γ and θ. Use single complexes and the tensor comparison.
+  refine ⟨(CochainComplex.single₀ X.Modules).obj G, 𝟙 _,
+    (CochainComplex.single₀ (pullback f g).Modules).obj
+      ((Scheme.Modules.tensorPullback p).obj G), 𝟙 _, ?_, θ, ?_, ?_, ?_⟩
+  · exact (HomologicalComplex.singleMapHomologicalComplex
+      (Scheme.Modules.tensorPullback p) (ComplexShape.up ℕ) 0).hom.app G
+  · infer_instance
+  · infer_instance
+  · exact ⟨c, hc, rfl⟩
 
 end
 end AlgebraicGeometry

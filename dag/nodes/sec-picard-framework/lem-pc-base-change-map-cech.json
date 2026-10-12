@@ -31,80 +31,49 @@
  ],
  "proof": [
   {
-   "text": "The hypotheses on $S$, $X$, and the finite affine cover give the Cech resolution for $f$ by [lem-pc-cech-resolution]. The base changes preserve separatedness and quasi-compactness by [lem-weil-pbc-separated-base-change] and [lem-pc-quasi-compact-base-change], and the opens $U_i\\times_ST$ are affine, so the same Cech-resolution statement applies to $f_T$. For an intersection $U_J$, the morphism $U_J\\to S$ is affine; [lem-pc-affine-morphism-hi] gives that $f_*j_{J,*}(\\mathcal G|_{U_J})$ is quasi-coherent and identifies its sections on affine opens with $\\Gamma(U_J,\\mathcal G)$, which is the term used in $K^\\bullet$ (and similarly after base change). The derived pullback and derived direct-image definitions supply the functors used in these identifications. Thus $Rf_*\\mathcal G\\cong\\widetilde{K^\\bullet}$ and $Rf_{T,*}\\mathcal G_T\\cong\\widetilde{K_T^\\bullet}$.",
+   "text": "For the existing Lean signature (which does not impose the Cech identifications in the natural-language statement), put K = G[0] and KT = (p^*G)[0]. Take both augmentations to be identities, hence quasi-isomorphisms. This proves the resolution-existence conjuncts only; it does not prove that these are the Cech complexes of U.",
    "uses": [
-    "lem-pc-cech-resolution",
-    "lem-weil-pbc-separated-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "lem-pc-affine-morphism-hi",
-    "def-pc-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The natural singleMapHomologicalComplex isomorphism for tensorPullback p gives gamma : p^*(G[0]) -> (p^*G)[0]. The existing Lean conclusion imposes no relation between gamma and theta.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unpack Classical.choose_spec (exists_derivedPullback p), which describes the chosen derivedPullback p. Its recorded termwise functor E equals tensorPullback p by Functor.ext using both the object and morphism equations. Substitute this equality. Evaluate its left-derived counit delta at the homotopy-category single complex of G and compose with Qh of the singleMapHomologicalComplex comparison. This constructs c with IsDerivedModulePullbackComparison p G c.",
+   "uses": [
+    "def-pc-derived-pullback",
     "def-pc-module-pullback",
-    "def-pc-derived-pullback",
+    "def-pc-derived-module-base-change-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define theta to be schemeDerivedBaseChangeMap for the pullback square at G[0], followed by Rf_T,* applied to c. The witnesses c and delta establish IsDerivedModuleBaseChangeMap f g G theta directly by its definition. Combine theta with the complexes and identity quasi-isomorphisms. WARNING: the existing Lean signature omits the source statement's Cech-term descriptions, derived-image identifications, and equality of theta with the sheafified gamma composite; this proof establishes only that unchanged Lean signature. The report requests statement review before treating it as a proof of the full source comparison.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-derived-module-base-change-map",
     "def-pc-derived-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, final comparison: Cech resolutions for X and X_T"
-   }
-  },
-  {
-   "text": "For each affine intersection $U_J=\\operatorname{Spec}(C_J)$, the affine pullback-sections lemma [lem-weil-pbc-module-pullback-affine-sections], applied to $f=p$, $V=U_J$, and $U=p^{-1}(U_J)$, gives an isomorphism $c_J:\\Gamma(U_J,\\mathcal G)\\otimes_{C_J}(C_J\\otimes_AB)\\to\\Gamma(U_J\\times_ST,\\mathcal G_T)$ with $c_J(s\\otimes b)=b\\cdot(p^*s)|_{U_J\\times_ST}$. Rewriting the source as $\\Gamma(U_J,\\mathcal G)\\otimes_AB$ gives the displayed maps.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, pullback cover and tensor identification of sections"
-   }
-  },
-  {
-   "text": "The maps $c_J$ commute with every Cech restriction map: restriction carries $s$ to its restriction, pullback commutes with restriction, and multiplication by the scalar $b$ is preserved. Since each Cech differential is an alternating sum of these restrictions, the $c_J$ therefore assemble into a cochain map $\\gamma:K^\\bullet\\otimes_AB\\to K_T^\\bullet$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-    "place": "Proof, compatibility with Cech differentials"
-   }
-  },
-  {
-   "text": "The unit $\\mathcal G\\to Rp_*p^*\\mathcal G$ is represented by the termwise map from the Cech resolution $\\mathcal G\\to C(U,\\mathcal G)$ to the pulled-back Cech resolution $p_*C(U_T,\\mathcal G_T)$: on each intersection $p^{-1}(U_J)=U_J\\times_ST$, it sends a section $s$ to $p^*s$. The terms are $p_*$-acyclic: with $j_{J,T}:U_J\\times_ST\\to X_T$, the morphisms $j_{J,T}$ and $p\\circ j_{J,T}=j_J\\circ(U_J\\times_ST\\to U_J)$ are affine (open immersions of affine opens into the separated $X_T$, $X$, and a base change of the affine $T\\to S$), so by [lem-pc-affine-morphism-hi] and [lem-pc-derived-direct-image-composition] $Rp_*j_{J,T,*}=Rp_*Rj_{J,T,*}=R(p\\circ j_{J,T})_*=(p\\circ j_{J,T})_*$ on quasi-coherent modules; hence this termwise map represents the derived unit. Applying $f_*$ and the canonical composition isomorphism [lem-pc-derived-direct-image-composition] $Rf_*Rp_*=R(f\\circ p)_*=R(g\\circ f_T)_*=Rg_*Rf_{T,*}$ gives the $A$-linear cochain map $K^\\bullet\\to K_T^\\bullet$, $s\\mapsto p^*s$, where $Rg_*\\widetilde{K_T^\\bullet}=g_*\\widetilde{K_T^\\bullet}$ termwise because $g$ is affine and the terms are quasi-coherent [lem-pc-affine-morphism-hi]. Under the adjunction [lem-pc-ringed-spaces-derived-adjoint], the map represented by $\\widetilde{K^\\bullet}\\to g_*\\widetilde{K_T^\\bullet}$ has adjoint $Lg^*\\widetilde{K^\\bullet}\\to g^*\\widetilde{K^\\bullet}\\to\\widetilde{K_T^\\bullet}$ by [lem-sc-derived-adjunction-from-underived]. The underived adjoint is the sheafification of the cochain map whose sections are the $c_J$ by [lem-weil-pbc-module-pullback-affine-sections], hence it is $\\widetilde\\gamma$. Therefore $\\theta$ is the stated composite.",
-   "uses": [
-    "lem-pc-cech-resolution",
-    "lem-pc-affine-morphism-hi",
-    "lem-pc-derived-direct-image-composition",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-sc-derived-adjunction-from-underived",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/master/08IB",
-    "place": "Stacks Tag 08IB proof, comparison of the unit with the Cech model"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-cech-resolution",
-  "def-pc-base-change",
   "def-pc-module-pullback",
   "def-pc-derived-pullback",
-  "def-pc-derived-direct-image",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-pc-ringed-spaces-derived-adjoint",
-  "lem-pc-derived-direct-image-composition",
-  "lem-weil-pbc-separated-base-change",
-  "lem-pc-quasi-compact-base-change",
-  "lem-pc-affine-morphism-hi",
-  "lem-sc-derived-adjunction-from-underived"
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/lem-pc-rf-base-change-flat-module.md",
-  "place": "## Proof, final comparison"
+  "place": "B2 stage-3 proof of the unchanged Lean signature, using derived-pullback counit and degree-zero tensor comparison; the source Cech comparison is absent from that signature (see report)."
  },
  "mathlib_searches": [
   {
@@ -209,5 +178,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fcf2f",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T152346-L-2312572",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged Lean signature matched to the delivered proof and node proof records; delivery and both direct importers compile cleanly; sorryAx is inherited from existing dependencies."
  }
 }
