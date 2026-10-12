@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Sites.InjectiveModuleAcyclic
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
+public import WeilConjectures.SixFunctors.Etale.Gabber
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.AffineVanishing
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapEtale
@@ -81,8 +84,8 @@ lemma Etale.upperStarFreeSheafHomEquivSections_map {W W' : X.Etale} (g : W' ⟶ 
       C.obj.map ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h).map g).op
         (Etale.upperStarFreeSheafHomEquivSections Λ h W C s) := by
   simp only [Etale.upperStarFreeSheafHomEquivSections, Equiv.trans_apply,
-    Adjunction.homEquiv_naturality_left, Etale.freeSheafHomEquiv_map]
-  rfl
+    Adjunction.homEquiv_naturality_left]
+  exact Etale.freeSheafHomEquiv_map Λ g _ _
 
 lemma Etale.upperStarFreeSheafHomEquivSections_zero (W : X.Etale)
     (C : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -98,15 +101,7 @@ section Terminal
 
 variable {Y : Scheme.{u}}
 
-/-- The structure morphism of the terminal object of the small étale site of a scheme `S` is
-an isomorphism. -/
-instance Etale.isIso_terminal_hom (S : Scheme.{u}) : IsIso (⊤_ S.Etale).hom := by
-  let φ := (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale S).from (⊤_ S.Etale)
-  have : IsIso φ := isIso_of_isTerminal terminalIsTerminal
-    (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale S) φ
-  have hφ : φ.left ≫ 𝟙 S = (⊤_ S.Etale).hom := MorphismProperty.Over.w φ
-  rw [← hφ, Category.comp_id]
-  exact inferInstanceAs (IsIso ((MorphismProperty.Over.forget _ _ S ⋙ Over.forget S).map φ))
+attribute [local instance] Etale.isIso_terminal_hom
 
 /-- The étale `Y`-scheme `V`, seen as the image of the terminal object of `V_ét`, maps to `V`. -/
 noncomputable def Etale.overMapTerminalHom (V : Y.Etale) :
@@ -142,14 +137,17 @@ lemma Etale.upperStarIsoLocalizationRestriction_hom_app_equiv₀_cohomologyMap_c
           (Etale.cohomologyMap k.left _ 0 (Etale.classOfSection V a))) =
       A.obj.map (Etale.overMapOverMapTerminalIso k).hom.op (A.obj.map k.op a) := by
   rw [Etale.upperStarIsoLocalizationRestriction_hom_app_equiv₀_cohomologyMap,
-    Etale.classOfSection, AddEquiv.apply_symm_apply]
+    Etale.classOfSection]
+  erw [AddEquiv.apply_symm_apply]
   change A.obj.map _ (A.obj.map _ a) = _
   rw [← ConcreteCategory.comp_apply, ← ConcreteCategory.comp_apply, ← Functor.map_comp,
-    ← Functor.map_comp, ← op_comp, ← op_comp]
-  congr 3
-  apply MorphismProperty.Over.Hom.ext
+    ← Functor.map_comp]
+  refine congrArg (fun φ ↦ A.obj.map φ a) ?_
+  apply Quiver.Hom.unop_inj
+  refine MorphismProperty.Over.Hom.ext (P := @AlgebraicGeometry.Etale) (Q := ⊤) ?_
   change _ ≫ (⊤_ V.left.Etale).hom = (⊤_ V'.left.Etale).hom ≫ k.left
-  exact MorphismProperty.Over.w _
+  exact MorphismProperty.Over.w (terminal.from ((MorphismProperty.Over.map ⊤
+    (inferInstance : AlgebraicGeometry.Etale k.left)).obj (⊤_ V'.left.Etale)))
 
 /-- A section of a presheaf which vanishes after restriction along an isomorphism vanishes. -/
 lemma Etale.eq_zero_of_map_iso_hom_op {A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}}
@@ -157,7 +155,7 @@ lemma Etale.eq_zero_of_map_iso_hom_op {A : Sheaf Y.smallEtaleTopology AddCommGrp
     x = 0 := by
   have := congrArg (A.obj.map e.inv.op) hx
   rwa [map_zero, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp, e.inv_hom_id,
-    op_id, Functor.map_id, ConcreteCategory.id_apply] at this
+    op_id, CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] at this
 
 end Terminal
 
@@ -181,6 +179,41 @@ lemma Etale.shortExact_map_localizationRestriction
   exact hS.map_of_exact _
 
 end Exactness
+
+section Connecting
+
+variable {X Y : Scheme.{u}} (f : X ⟶ Y)
+  {S : ShortComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})} (hS : S.ShortExact)
+
+/-- The comparison map on cohomology commutes with the connecting maps `Sheaf.H.δSucc`. -/
+lemma Etale.cohomologyMap_δSucc (n : ℕ) (x : Sheaf.H S.X₃ n) :
+    Etale.cohomologyMap f S.X₁ (n + 1) (Sheaf.H.δSucc hS n x) =
+      Sheaf.H.δSucc (hS.map_of_exact ((f)^*[AddCommGrpCat.{u + 1}])) n
+        (Etale.cohomologyMap f S.X₃ n x) := by
+  rw [Sheaf.H.δSucc_apply, Sheaf.H.δSucc_apply]
+  exact Etale.cohomologyMap_comp_extClass f hS x
+
+/-- If the image under the connecting map of a class `x` dies after pullback along `f`, then
+the pullback of `x` comes from the middle term. -/
+lemma Etale.exists_map_eq_cohomologyMap_of_δSucc (n : ℕ) (x : Sheaf.H S.X₃ n)
+    (hx : Etale.cohomologyMap f S.X₁ (n + 1) (Sheaf.H.δSucc hS n x) = 0) :
+    ∃ y : Sheaf.H ((f)^*[AddCommGrpCat.{u + 1}].obj S.X₂) n,
+      Sheaf.H.map ((f)^*[AddCommGrpCat.{u + 1}].map S.g) n y =
+        Etale.cohomologyMap f S.X₃ n x := by
+  rw [Etale.cohomologyMap_δSucc] at hx
+  exact (Sheaf.H.exact_map_δSucc (hS.map_of_exact ((f)^*[AddCommGrpCat.{u + 1}])) n _).1 hx
+
+/-- If the image under the connecting map of a class `x` dies after pullback along `f` and the
+pullback of the middle term has no cohomology in the degree of `x`, the pullback of `x` dies. -/
+lemma Etale.cohomologyMap_eq_zero_of_δSucc (n : ℕ) (x : Sheaf.H S.X₃ n)
+    [Subsingleton (Sheaf.H ((f)^*[AddCommGrpCat.{u + 1}].obj S.X₂) n)]
+    (hx : Etale.cohomologyMap f S.X₁ (n + 1) (Sheaf.H.δSucc hS n x) = 0) :
+    Etale.cohomologyMap f S.X₃ n x = 0 := by
+  obtain ⟨y, hy⟩ := Etale.exists_map_eq_cohomologyMap_of_δSucc f hS n x hx
+  rw [← hy, Subsingleton.elim y 0, map_zero]
+
+end Connecting
+
 
 section DieLocally
 
@@ -222,10 +255,6 @@ def Etale.ClassesDieLocally (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} �
       (Ext.mk₀ ((h)^*[ModuleCat.{u + 1} Λ].map ((Etale.freeSheaf Λ X).map g))).comp β
         (zero_add n) = 0
 
-/-- The underlying abelian sheaf of a sheaf of `Λ`-modules. -/
-local notation "forget₂Sheaf" =>
-  sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
-
 /-- The short exact sequence `0 ⟶ G ⟶ I ⟶ I / G ⟶ 0` for the chosen embedding of `G` into an
 injective sheaf. -/
 noncomputable abbrev Etale.injectiveShortComplex
@@ -256,7 +285,8 @@ lemma Etale.subsingleton_H_upperStar_localizationRestriction_forget₂ (V : Y.Et
     (I : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] (m : ℕ) :
     Subsingleton (Sheaf.H ((V'.hom)^*[AddCommGrpCat.{u + 1}].obj
       ((Etale.localizationRestriction AddCommGrpCat.{u + 1} V.hom V.prop).obj
-        ((forget₂Sheaf).obj I))) (m + 1)) := by
+        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj I)))
+      (m + 1)) := by
   have hV : AlgebraicGeometry.Etale V.hom := V.prop
   have hV' : AlgebraicGeometry.Etale V'.hom := V'.prop
   have : Injective ((Etale.localizationRestriction (ModuleCat.{u + 1} Λ) V.hom V.prop).obj I) :=
@@ -265,7 +295,9 @@ lemma Etale.subsingleton_H_upperStar_localizationRestriction_forget₂ (V : Y.Et
   have : Injective ((V'.hom)^*[ModuleCat.{u + 1} Λ].obj
       ((Etale.localizationRestriction (ModuleCat.{u + 1} Λ) V.hom V.prop).obj I)) :=
     Etale.injective_upperStar_obj_of_etale Λ V'.hom _
-  have := Scheme.subsingleton_H_forget₂_of_injective Λ V'.left _ m
+  have := Scheme.subsingleton_H_forget₂_of_injective Λ V'.left
+    ((V'.hom)^*[ModuleCat.{u + 1} Λ].obj
+      ((Etale.localizationRestriction (ModuleCat.{u + 1} Λ) V.hom V.prop).obj I)) m
   exact (Etale.injective_sheafHMap_of_isIso
     (Etale.upperStarForget₂Iso V' ((Etale.localizationRestriction (ModuleCat.{u + 1} Λ) V.hom
       V.prop).obj I)).hom (m + 1)).subsingleton
@@ -277,12 +309,16 @@ sheaf of the injective sheaf `I` has no cohomology in degree `m + 1` over the qu
 quasi-separated schemes `W' ×_X Y`, `W'` affine. -/
 lemma Etale.classesDieLocallyAb_cokernel [QuasiCompact h] [QuasiSeparated h]
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (m : ℕ)
-    (hG : Etale.ClassesDieLocallyAb h ((forget₂Sheaf).obj G) (m + 2)) :
-    Etale.ClassesDieLocallyAb h ((forget₂Sheaf).obj (cokernel (Injective.ι G))) (m + 1) := by
+    (hG : Etale.ClassesDieLocallyAb h
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) (m + 2)) :
+    Etale.ClassesDieLocallyAb h
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (cokernel (Injective.ι G))) (m + 1) := by
   intro W hW γ
   let F := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h
   let R := Etale.localizationRestriction AddCommGrpCat.{u + 1} (F.obj W).hom (F.obj W).prop
-  let SW := ((Etale.injectiveShortComplex Λ G).map forget₂Sheaf).map R
+  let SW := ((Etale.injectiveShortComplex Λ G).map
+    (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).map R
   have hSW : SW.ShortExact := Etale.shortExact_map_localizationRestriction _ _
     (Etale.shortExact_map_forget₂ Λ (Etale.shortExact_injectiveShortComplex Λ G))
   obtain ⟨S, hS, hz⟩ := hG W hW (Sheaf.H.δSucc hSW (m + 1) γ)
@@ -290,16 +326,15 @@ lemma Etale.classesDieLocallyAb_cokernel [QuasiCompact h] [QuasiSeparated h]
   have key : ∀ ⦃W' : X.Etale⦄ (g : W' ⟶ W), S g → IsAffine W'.left →
       Etale.cohomologyMap (F.map g).left _ (m + 1) γ = 0 := by
     intro W' g hg hW'
-    have h₁ := hz g hg
-    rw [Sheaf.H.δSucc_apply, Etale.cohomologyMap_comp_extClass] at h₁
-    obtain ⟨y, hy⟩ := (Sheaf.H.exact_map_δSucc
-      (hSW.map_of_exact ((F.map g).left)^*[AddCommGrpCat.{u + 1}]) (m + 1) _).1 h₁
-    obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback_of_isAffine h W'
+    obtain ⟨h₁, h₂⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback_of_isAffine h W'
+    let V' : (F.obj W).left.Etale := MorphismProperty.Over.mk ⊤ (F.map g).left inferInstance
+    have : CompactSpace V'.left := h₁
+    have : QuasiSeparatedSpace V'.left := h₂
     have : Subsingleton (Sheaf.H (((F.map g).left)^*[AddCommGrpCat.{u + 1}].obj SW.X₂)
         (m + 1)) :=
-      Etale.subsingleton_H_upperStar_localizationRestriction_forget₂ Λ (F.obj W)
-        (MorphismProperty.Over.mk ⊤ (F.map g).left inferInstance) (Injective.under G) m
-    rw [← hy, Subsingleton.elim y 0, map_zero]
+      Etale.subsingleton_H_upperStar_localizationRestriction_forget₂ Λ (F.obj W) V'
+        (Injective.under G) m
+    exact Etale.cohomologyMap_eq_zero_of_δSucc (F.map g).left hSW (m + 1) γ (hz g hg)
   refine ⟨⟨fun W' g ↦ Etale.cohomologyMap (F.map g).left _ (m + 1) γ = 0,
     fun {W' W''} g hg k ↦ ?_⟩, ?_, fun W' g hg ↦ hg⟩
   · change Etale.cohomologyMap (F.map (k ≫ g)).left _ (m + 1) γ = 0
@@ -319,16 +354,20 @@ lemma Etale.classesDieLocallyAb_cokernel [QuasiCompact h] [QuasiSeparated h]
 /-- In degree `0` the classes of `G` are the sections of `G` over `W ×_X Y`, whose restrictions
 are the pullbacks of the corresponding abelian classes. -/
 lemma Etale.classesDieLocally_zero (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hG : Etale.ClassesDieLocallyAb h ((forget₂Sheaf).obj G) 0) :
+    (hG : Etale.ClassesDieLocallyAb h
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) 0) :
     Etale.ClassesDieLocally Λ h G 0 := by
   intro W hW β
   obtain ⟨s, rfl⟩ := (Ext.mk₀_bijective _ _).2 β
   let F := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h
-  obtain ⟨S, hS, hz⟩ := hG W hW (Etale.classOfSection (F.obj W) (A := (forget₂Sheaf).obj G)
+  obtain ⟨S, hS, hz⟩ := hG W hW (Etale.classOfSection (F.obj W)
+      (A := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
     (Etale.upperStarFreeSheafHomEquivSections Λ h W G s))
   refine ⟨S, hS, fun W' g hg ↦ ?_⟩
   have h₁ := Etale.upperStarIsoLocalizationRestriction_hom_app_equiv₀_cohomologyMap_classOfSection
-    (F.map g) (A := (forget₂Sheaf).obj G) (Etale.upperStarFreeSheafHomEquivSections Λ h W G s)
+    (F.map g)
+      (A := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G)
+      (Etale.upperStarFreeSheafHomEquivSections Λ h W G s)
   rw [hz g hg, map_zero, map_zero] at h₁
   have h₂ := Etale.eq_zero_of_map_iso_hom_op _ _ h₁.symm
   change G.obj.map (F.map g).op (Etale.upperStarFreeSheafHomEquivSections Λ h W G s) = 0 at h₂
@@ -342,7 +381,8 @@ lemma Etale.classesDieLocally_zero (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u
 the injective sheaf `I`, and a class dies exactly when the section lifts to `I`; on the abelian
 side the obstruction to lifting is the connecting map. -/
 lemma Etale.classesDieLocally_one (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hG : Etale.ClassesDieLocallyAb h ((forget₂Sheaf).obj G) 1) :
+    (hG : Etale.ClassesDieLocallyAb h
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) 1) :
     Etale.ClassesDieLocally Λ h G 1 := by
   intro W hW β
   have hS := Etale.shortExact_injectiveShortComplex Λ G
@@ -350,24 +390,26 @@ lemma Etale.classesDieLocally_one (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u 
   obtain ⟨s, rfl⟩ := (Ext.mk₀_bijective _ _).2 γ
   let F := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h
   let R := Etale.localizationRestriction AddCommGrpCat.{u + 1} (F.obj W).hom (F.obj W).prop
-  let SW := ((Etale.injectiveShortComplex Λ G).map forget₂Sheaf).map R
+  let SW := ((Etale.injectiveShortComplex Λ G).map
+    (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}))).map R
   have hSW : SW.ShortExact := Etale.shortExact_map_localizationRestriction _ _
     (Etale.shortExact_map_forget₂ Λ hS)
   let C := cokernel (Injective.ι G)
   let π := cokernel.π (Injective.ι G)
   let c := Etale.upperStarFreeSheafHomEquivSections Λ h W C s
-  obtain ⟨S, hS', hz⟩ := hG W hW
-    (Sheaf.H.δSucc hSW 0 (Etale.classOfSection (F.obj W) (A := (forget₂Sheaf).obj C) c))
+  let ξ : Sheaf.H SW.X₃ 0 := Etale.classOfSection (F.obj W)
+    (A := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj C) c
+  obtain ⟨S, hS', hz⟩ := hG W hW (Sheaf.H.δSucc hSW 0 ξ)
   refine ⟨S, hS', fun W' g hg ↦ ?_⟩
-  have h₁ := hz g hg
-  rw [Sheaf.H.δSucc_apply, Etale.cohomologyMap_comp_extClass] at h₁
-  obtain ⟨y, hy⟩ := (Sheaf.H.exact_map_δSucc
-    (hSW.map_of_exact ((F.map g).left)^*[AddCommGrpCat.{u + 1}]) 0 _).1 h₁
+  obtain ⟨y, hy⟩ := Etale.exists_map_eq_cohomologyMap_of_δSucc (F.map g).left hSW 0 ξ (hz g hg)
   let ι := Etale.upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} (F.map g).left
     inferInstance
   let e := Etale.overMapOverMapTerminalIso (F.map g)
-  have h₂ := Etale.upperStarIsoLocalizationRestriction_hom_app_equiv₀_cohomologyMap_classOfSection
-    (F.map g) (A := (forget₂Sheaf).obj C) c
+  have h₂ : (ι.hom.app SW.X₃).hom.app (op (⊤_ (F.obj W').left.Etale))
+      (Sheaf.H.equiv₀ _ terminalIsTerminal (Etale.cohomologyMap (F.map g).left SW.X₃ 0 ξ)) = _ :=
+    Etale.upperStarIsoLocalizationRestriction_hom_app_equiv₀_cohomologyMap_classOfSection
+      (F.map g)
+      (A := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj C) c
   rw [← hy, ← Sheaf.H.equiv₀_naturality] at h₂
   let t := (ι.hom.app SW.X₂).hom.app (op (⊤_ (F.obj W').left.Etale))
     (Sheaf.H.equiv₀ _ terminalIsTerminal y)
@@ -381,8 +423,10 @@ lemma Etale.classesDieLocally_one (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u 
   let t' := (Injective.under G).obj.map e.inv.op t
   have h₅ : C.obj.map (F.map g).op c = π.hom.app _ t' := by
     change _ = π.hom.app _ ((Injective.under G).obj.map e.inv.op t)
-    rw [← NatTrans.naturality_apply π.hom, ← h₄, ← ConcreteCategory.comp_apply,
-      ← Functor.map_comp, ← op_comp, e.inv_hom_id, op_id, Functor.map_id,
+    rw [NatTrans.naturality_apply π.hom]
+    refine Eq.trans ?_ (congrArg (C.obj.map e.inv.op) h₄)
+    rw [← ConcreteCategory.comp_apply,
+      ← Functor.map_comp, ← op_comp, e.inv_hom_id, op_id, CategoryTheory.Functor.map_id,
       ConcreteCategory.id_apply]
   have h₆ : (h)^*[ModuleCat.{u + 1} Λ].map ((Etale.freeSheaf Λ X).map g) ≫ s =
       (Etale.upperStarFreeSheafHomEquivSections Λ h W' _).symm t' ≫ π :=
@@ -401,7 +445,8 @@ for `W` affine étale over `X`, dies on an étale cover of `W`, then so does eve
 `H^n(W ×_X Y, G|) = Ext^n(h^* Λ[W], G)`. -/
 theorem Etale.classesDieLocally_of_classesDieLocallyAb [QuasiCompact h] [QuasiSeparated h]
     (n : ℕ) (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hG : Etale.ClassesDieLocallyAb h ((forget₂Sheaf).obj G) n) :
+    (hG : Etale.ClassesDieLocallyAb h
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) n) :
     Etale.ClassesDieLocally Λ h G n := by
   induction n generalizing G with
   | zero => exact Etale.classesDieLocally_zero Λ h G hG
@@ -476,18 +521,6 @@ theorem Etale.isZero_higherDirectImage_of_forall_isAffine_exists (q : ℤ)
 
 end Vanishing
 
-/-- Precomposing a morphism `X[0] ⟶ Y[0][n]` of the bounded below derived category with the
-image of `a : X' ⟶ X` corresponds to composing the `Ext`-class with `a`. -/
-lemma _root_.DerivedCategory.Plus.singleFunctorHomEquivExt_singleFunctor_map_comp {C : Type*}
-    [Category* C] [Abelian C] [HasDerivedCategory C] [HasExt C] {X X' Y : C} (a : X' ⟶ X)
-    {n : ℕ} (t : (singleFunctor C 0).obj X ⟶ ((singleFunctor C 0).obj Y)⟦(n : ℤ)⟧) :
-    singleFunctorHomEquivExt X' Y n ((singleFunctor C 0).map a ≫ t) =
-      (Ext.mk₀ a).comp (singleFunctorHomEquivExt X Y n t) (zero_add n) := by
-  ext
-  rw [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp]
-  simp [singleFunctorHomEquivExt]
-  rfl
-
 section Constant
 
 variable {X Y : Scheme.{u}} (h : Y ⟶ X)
@@ -533,7 +566,7 @@ lemma Etale.constantClassesDieLocally_of_sum_eq_id {W : X.Etale} {q : ℕ}
     h).obj W).left.smallEtaleTopology AddCommGrpCat.{u + 1}
   have hη : η = ∑ k, Sheaf.H.map (c.map (ι k)) q (Sheaf.H.map (c.map (π k)) q η) := by
     have hc : ∑ k, c.map (π k) ≫ c.map (ι k) = 𝟙 _ := by
-      simp only [← Functor.map_comp, ← Functor.map_sum, hsum, Functor.map_id]
+      simp only [← Functor.map_comp, ← Functor.map_sum, hsum, CategoryTheory.Functor.map_id]
     simp only [Sheaf.H.map_apply, Ext.comp_assoc_of_third_deg_zero, Ext.mk₀_comp_mk₀,
       ← Ext.comp_sum, ← Ext.mk₀_sum, hc, Ext.comp_mk₀_id]
   choose S hS hz using fun k ↦ hZ k (Sheaf.H.map (c.map (π k)) q η)
@@ -559,7 +592,7 @@ def Etale.cyclicFactorOrder : Fin n ⊕ ι → ℕ :=
 
 /-- The projections of `(Fin n →₀ ℤ) × ⨁ i, ZMod (p i ^ e i)` to its cyclic factors. -/
 noncomputable def Etale.cyclicFactorProj :
-    ∀ k : Fin n ⊕ ι, ((Fin n →₀ ℤ) × ⨁ i, ZMod (p i ^ e i)) →+
+    ∀ k : Fin n ⊕ ι, ((Fin n →₀ ℤ) × DirectSum ι fun i ↦ ZMod (p i ^ e i)) →+
       ZMod (Etale.cyclicFactorOrder p e k)
   | .inl j => (Finsupp.applyAddHom j).comp (AddMonoidHom.fst _ _)
   | .inr i => (DFinsupp.evalAddMonoidHom (β := fun i ↦ ZMod (p i ^ e i)) i).comp
@@ -568,7 +601,7 @@ noncomputable def Etale.cyclicFactorProj :
 /-- The inclusions of the cyclic factors of `(Fin n →₀ ℤ) × ⨁ i, ZMod (p i ^ e i)`. -/
 noncomputable def Etale.cyclicFactorIncl [DecidableEq ι] :
     ∀ k : Fin n ⊕ ι, ZMod (Etale.cyclicFactorOrder p e k) →+
-      ((Fin n →₀ ℤ) × ⨁ i, ZMod (p i ^ e i))
+      ((Fin n →₀ ℤ) × DirectSum ι fun i ↦ ZMod (p i ^ e i))
   | .inl j => (AddMonoidHom.inl _ _).comp (Finsupp.singleAddHom j)
   | .inr i => (AddMonoidHom.inr _ _).comp (DirectSum.of (fun i ↦ ZMod (p i ^ e i)) i)
 
@@ -576,25 +609,24 @@ lemma Etale.cyclicFactorProj_cyclicFactorIncl [DecidableEq ι] (k : Fin n ⊕ ι
     (z : ZMod (Etale.cyclicFactorOrder p e k)) :
     Etale.cyclicFactorProj p e k (Etale.cyclicFactorIncl p e k z) = z := by
   cases k with
-  | inl j => simp [Etale.cyclicFactorProj, Etale.cyclicFactorIncl]
-  | inr i =>
-    simp only [Etale.cyclicFactorProj, Etale.cyclicFactorIncl, AddMonoidHom.coe_comp,
-      Function.comp_apply, AddMonoidHom.inr_apply, AddMonoidHom.snd_apply]
-    exact DirectSum.of_eq_same i z
+  | inl j => exact Finsupp.single_eq_same
+  | inr i => exact DirectSum.of_eq_same (β := fun i ↦ ZMod (p i ^ e i)) i z
 
 lemma Etale.sum_cyclicFactorIncl_cyclicFactorProj [DecidableEq ι]
-    (x : (Fin n →₀ ℤ) × ⨁ i, ZMod (p i ^ e i)) :
+    (x : (Fin n →₀ ℤ) × DirectSum ι fun i ↦ ZMod (p i ^ e i)) :
     ∑ k, Etale.cyclicFactorIncl p e k (Etale.cyclicFactorProj p e k x) = x := by
+  have h₁ (j : Fin n) :
+      Etale.cyclicFactorIncl p e (.inl j) (Etale.cyclicFactorProj p e (.inl j) x) =
+      (Finsupp.single j (x.1 j), 0) := rfl
+  have h₂ (i : ι) :
+      Etale.cyclicFactorIncl p e (.inr i) (Etale.cyclicFactorProj p e (.inr i) x) =
+      (0, DirectSum.of (fun i ↦ ZMod (p i ^ e i)) i (x.2 i)) := rfl
   rw [Fintype.sum_sum_type]
+  simp only [h₁, h₂]
   ext1
-  · simp only [Prod.fst_add, Prod.fst_sum, Etale.cyclicFactorIncl, Etale.cyclicFactorProj,
-      AddMonoidHom.coe_comp, Function.comp_apply, AddMonoidHom.inl_apply,
-      AddMonoidHom.inr_apply, Finsupp.singleAddHom_apply, Finsupp.applyAddHom_apply,
-      AddMonoidHom.fst_apply, Finset.sum_const_zero, add_zero]
+  · simp only [Prod.fst_add, Prod.fst_sum, Finset.sum_const_zero, add_zero]
     exact Finsupp.univ_sum_single x.1
-  · simp only [Prod.snd_add, Prod.snd_sum, Etale.cyclicFactorIncl, Etale.cyclicFactorProj,
-      AddMonoidHom.coe_comp, Function.comp_apply, AddMonoidHom.inl_apply,
-      AddMonoidHom.inr_apply, AddMonoidHom.snd_apply, Finset.sum_const_zero, zero_add]
+  · simp only [Prod.snd_add, Prod.snd_sum, Finset.sum_const_zero, zero_add]
     exact DirectSum.sum_univ_of x.2
 
 end FiniteGeneration
@@ -623,14 +655,17 @@ lemma Etale.constantClassesDieLocally_of_addGroupFG {W : X.Etale} {q d : ℕ}
     AddCommGrpCat.ofHom (φ.symm.toAddMonoidHom.comp
       ((Etale.cyclicFactorIncl p e k).comp AddEquiv.ulift.toAddMonoidHom))
   have hπι (k : Fin n ⊕ ι) (z) : π k (ι' k z) = z := by
-    simp [π, ι', Etale.cyclicFactorProj_cyclicFactorIncl]
+    change AddEquiv.ulift.symm (Etale.cyclicFactorProj p e k
+      (φ (φ.symm (Etale.cyclicFactorIncl p e k (AddEquiv.ulift z))))) = z
+    rw [AddEquiv.apply_symm_apply, Etale.cyclicFactorProj_cyclicFactorIncl]
+    rfl
   refine Etale.constantClassesDieLocally_of_sum_eq_id h _ π ι' ?_ fun k ↦ hZ _ ?_
   · ext m
-    simp only [AddCommGrpCat.hom_sum, AddCommGrpCat.hom_comp, AddMonoidHom.finset_sum_apply,
-      AddCommGrpCat.hom_id, AddMonoidHom.id_apply, AddCommGrpCat.hom_ofHom,
-      AddMonoidHom.coe_comp, Function.comp_apply, π, ι']
-    simp only [AddEquiv.toAddMonoidHom_eq_coe, AddMonoidHom.coe_coe, AddEquiv.apply_symm_apply,
-      ← map_sum, Etale.sum_cyclicFactorIncl_cyclicFactorProj, AddEquiv.symm_apply_apply]
+    change (∑ k, π k ≫ ι' k).hom m = m
+    rw [show (∑ k, π k ≫ ι' k).hom = ∑ k, (π k ≫ ι' k).hom from
+      map_sum AddCommGrpCat.homAddEquiv _ _, AddMonoidHom.finset_sum_apply]
+    change ∑ k, φ.symm (Etale.cyclicFactorIncl p e k (Etale.cyclicFactorProj p e k (φ m))) = m
+    rw [← map_sum, Etale.sum_cyclicFactorIncl_cyclicFactorProj, AddEquiv.symm_apply_apply]
   · rw [← ZMod.natCast_eq_zero_iff, ← nsmul_one]
     have := congrArg (π k) (hM (ι' k (ULift.up 1)))
     rw [map_nsmul, hπι, map_zero] at this
@@ -655,6 +690,8 @@ lemma Etale.constantClassesDieLocally_of_forall_fg [QuasiCompact h] [QuasiSepara
   let c : Cocone D :=
     { pt := A
       ι := { app s := AddCommGrpCat.ofHom (AddSubgroup.closure (s : Set A)).subtype } }
+  have : ReflectsColimitsOfShape (Finset A) (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
   have hc : IsColimit c := by
     refine isColimitOfReflects (CategoryTheory.forget AddCommGrpCat.{u + 1})
       (Types.FilteredColimit.isColimitOf' _ _ (fun x ↦ ?_) (fun s x y hxy ↦ ?_))
@@ -669,7 +706,11 @@ lemma Etale.constantClassesDieLocally_of_forall_fg [QuasiCompact h] [QuasiSepara
     (isColimitOfPreserves C hc) q).1 η
   obtain ⟨S, hS, hz⟩ := hA s y
   refine ⟨S, hS, fun W' g hg ↦ ?_⟩
-  rw [← hy, Etale.cohomologyMap_map, hz g hg, map_zero]
+  rw [← hy]
+  erw [Etale.cohomologyMap_map]
+  have h₁ := hz g hg
+  erw [h₁]
+  exact map_zero _
 
 end Constant
 
@@ -694,6 +735,7 @@ lemma Etale.constantClassesDieLocally_zmod {q e : ℕ}
     Etale.ConstantClassesDieLocally h W q (AddCommGrpCat.of (ULift.{u + 1} (ZMod e))) := by
   intro η
   have : AlgebraicGeometry.Etale W.hom := W.prop
+  have : IsAffine ((𝟭 Scheme).obj W.left) := inferInstanceAs (IsAffine W.left)
   let σ := pullbackSymmetry h W.hom
   obtain ⟨ι, V, v, hv, hsurj, hkill⟩ := H W.hom (Sheaf.H.map
     ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} σ.hom).hom.app _) q
@@ -702,7 +744,7 @@ lemma Etale.constantClassesDieLocally_zmod {q e : ℕ}
   refine ⟨Sieve.ofArrows (fun i ↦ (MorphismProperty.Over.mk ⊤ (v i ≫ W.hom)
     (inferInstance : AlgebraicGeometry.Etale (v i ≫ W.hom)) : X.Etale))
     (fun i ↦ MorphismProperty.Over.homMk (v i) rfl), ?_, ?_⟩
-  · rw [ofArrows_mem_smallEtaleTopology_iff]
+  · rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
     refine Set.eq_univ_of_forall fun x ↦ ?_
     obtain ⟨i, y, rfl⟩ := hsurj x
     exact Set.mem_iUnion.2 ⟨i, y, rfl⟩
@@ -712,11 +754,17 @@ lemma Etale.constantClassesDieLocally_zmod {q e : ℕ}
     rw [Functor.map_comp]
     refine Etale.cohomologyMap_comp_eq_zero (F.map k).left _ _ _ _ ?_
     have h₁ := hkill i
-    rw [Etale.cohomologyMap_map_eq_zero_iff, Etale.cohomologyMap_cohomologyMap_eq_zero_iff_comp]
-      at h₁
-    have h₂ := Etale.cohomologyMap_comp_eq_zero (pullbackSymmetry h (v i ≫ W.hom)).inv _ _ _ _ h₁
-    convert h₂ using 2
-    apply pullback.hom_ext <;> simp [σ, F]
+    rw [Etale.cohomologyMap_map_eq_zero_iff] at h₁
+    have h₁' := (Etale.cohomologyMap_cohomologyMap_eq_zero_iff_comp _ σ.hom _ _ η).1 h₁
+    have h₂ := Etale.cohomologyMap_comp_eq_zero (pullbackSymmetry h (v i ≫ W.hom)).inv _ _ _ _ h₁'
+    refine (congrArg (fun φ ↦ Etale.cohomologyMap φ _ q η = 0) ?_).mpr h₂
+    apply pullback.hom_ext <;> simp [σ, F] <;> rfl
+
+/-- Taking underlying abelian groups preserves sheafification, being a left adjoint. -/
+instance Etale.preservesSheafification_forget₂ (S : Scheme.{u}) :
+    S.smallEtaleTopology.PreservesSheafification
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+  Sheaf.preservesSheafification_of_adjunction _ (ModuleCat.forget₂CoinduceAdj Λ)
 
 /-- The underlying abelian sheaf of the constant sheaf `Λ/dΛ`, restricted to `W ×_X Y`, is the
 constant sheaf with value the abelian group `Λ/dΛ`. -/
@@ -761,7 +809,7 @@ filtered colimits (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`); a
 finitely generated subgroup is a finite direct sum of cyclic groups `ℤ/e` with `e ∣ d`, for
 which the classes die locally by hypothesis. -/
 @[stacks 03Q8]
-theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists_tmp {X Y : Scheme.{u}}
+theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ)
     (H : ∀ e : ℕ, e ∣ d → ∀ ⦃U : Scheme.{u}⦄ (u : U ⟶ X) [Etale u] [IsAffine U]
       (ξ : Sheaf.H ((pullback h u).constantZMod e) q),
@@ -771,7 +819,8 @@ theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists_tmp {X 
           (by simp)) _ q ξ = 0) :
     IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) := by
   -- the classes of the underlying abelian sheaf die locally
-  have hAb : Etale.ClassesDieLocallyAb h ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
+  have hAb : Etale.ClassesDieLocallyAb h
+      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ)
       AddCommGrpCat.{u + 1})).obj (Etale.constantModSheaf Λ Y d)) q := by
     intro W hW ξ
     let A := (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj
@@ -789,14 +838,11 @@ theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists_tmp {X 
     exact ⟨S, hS, fun W' g hg ↦ (Etale.cohomologyMap_map_eq_zero_iff _ _ _ _).1 (hz g hg)⟩
   refine Etale.isZero_higherDirectImage_of_forall_isAffine_exists Λ h q _ fun W hW t ↦ ?_
   obtain ⟨S, hS, hz⟩ := Etale.classesDieLocally_of_classesDieLocallyAb Λ h q _ hAb W hW
-    (DerivedCategory.Plus.singleFunctorHomEquivExt.{u + 1} _ _ q t)
-  refine ⟨S, hS, fun W' g hg ↦ (DerivedCategory.Plus.singleFunctorHomEquivExt.{u + 1}
-    _ _ q).injective ?_⟩
-  have h₀ := DerivedCategory.Plus.singleFunctorHomEquivExt_singleFunctor_map_comp
-    ((h)^*[ModuleCat.{u + 1} Λ].map ((Etale.freeSheaf Λ X).map g)) t
-  have h₁ := DerivedCategory.Plus.singleFunctorHomEquivExt_singleFunctor_map_comp
-    (0 : (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W') ⟶ _) t
-  rw [Functor.map_zero, Limits.zero_comp, Ext.mk₀_zero, Ext.zero_comp] at h₁
-  exact h₀.trans ((hz g hg).trans h₁.symm)
+    (DerivedCategory.Plus.singleFunctorHomEquivExt _ _ q t)
+  refine ⟨S, hS, fun W' g hg ↦ (DerivedCategory.Plus.singleFunctorHomEquivExt _ _ q :
+    _ ≃ Ext.{u + 1} _ _ q).injective ?_⟩
+  exact (DerivedCategory.Plus.singleFunctorHomEquivExt_singleFunctor_map_comp
+    ((h)^*[ModuleCat.{u + 1} Λ].map ((Etale.freeSheaf Λ X).map g)) t).trans
+    ((hz g hg).trans (DerivedCategory.Plus.singleFunctorHomEquivExt_zero _ _ _).symm)
 
 end AlgebraicGeometry
