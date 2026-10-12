@@ -10065,3 +10065,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:16 L: merged deliver/T3/Sheaf.RingTheory.StrictlyStandardLocalizedConormalSplit (stage 3; reviewer PASS; first push; landing 20261012T231642-L-1964100 (proof); batch 20261012T231631; modules 1; new nodes 0)
 - 23:16 L: merged deliver/U2/Sheaf.RingTheory.FiniteIntegralConductor (stage 3; reviewer PASS; first push; landing 20261012T231642-L-1964198 (proof); batch 20261012T231631; modules 1; new nodes 0)
 - 23:16 L: merged deliver/U3/Sheaf.Algebra.Homology.LocalizedRestrictionExtensionExists (stage 3; reviewer PASS; first push; landing 20261012T231642-L-1964295 (proof); batch 20261012T231631; modules 1; new nodes 0)
+- 23:16 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties (stage 3; reviewer PASS; first push; landing 20261012T231643-L-1964425 (interface); batch 20261012T231631; modules 6; new nodes 5)

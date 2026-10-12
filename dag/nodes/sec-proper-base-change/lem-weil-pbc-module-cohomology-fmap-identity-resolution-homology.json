@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-identity-resolution-homology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent); identity clause of lem-weil-pbc-module-cohomology-fmap-basic-properties; resolution homology factorization in the identity clause",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-identity",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Identity-resolution horizontal map factors through the vertical sections comparison",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme], $G,F$ be $\\mathcal O_Z$-modules [def-weil-sheaf-of-modules-category], and $\\psi:G\\to F$ a morphism. Fix any resolution data $D$ for the identity-scheme map [def-weil-pbc-module-cohomology-fmap]: injective resolutions $I$ of $F$ and $J$ of $G$, a natural-indexed injective complex $K$, a quasi-isomorphism $\\lambda:(\\mathrm{id}_Z)_*I\\to K$, a map $\\beta:J\\to K$ satisfying the augmentation equation, and the pinned sections isomorphism $a:\\Gamma(Z,I)\\to\\Gamma(Z,(\\mathrm{id}_Z)_*I)$. Let $\\alpha:J\\to I$ be the standard descent of $\\psi$ between the two injective resolutions [def-sp-injective-resolutions]. For every $p\\in\\mathbb N$, on the homology of the underlying additive sections complexes one has $H^p(\\Gamma\\beta)=H^p(\\mu)\\circ H^p(\\Gamma\\alpha)$, where $\\mu=(\\Gamma\\lambda)\\circ a$. This asserts only an identity of maps between sections-complex homologies; no transport to right derived functors is included.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 01FB, identity-scheme specialization; homotopy uniqueness from Derived Categories Tag 013S."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Take the standard resolution descent alpha of psi. Use the inverse identity-pushforward comparison degreewise to define l : I to K by composing it with lambda. The augmentation formula for alpha and the compatibility equation for beta imply equality of their composites with the augmentation of J.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend J and K by zero to integer indices. K is bounded below termwise injective and the augmentation of J is a quasi-isomorphism. Uniqueness up to homotopy after that quasi-isomorphism gives beta homotopic to alpha followed by l. Restrict the homotopy back to natural indices. The additive sections functor preserves the homotopy, so taking homology gives H(Gamma beta) = H(Gamma l) composed with H(Gamma alpha).",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The component formula pinning a to restriction along the equality id^{-1}(Z)=Z identifies a with Gamma of the inverse pushforward-identity comparison. Substitute Gamma l = a followed by Gamma lambda into the preceding homology equation.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Remark 01FB, identity-scheme specialization; homotopy uniqueness from Derived Categories Tag 013S."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homotopy.*quasiIso|Homotopy.homologyMap_eq",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean; Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean; Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean; Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean; Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean; Mathlib/Algebra/Homology/HomotopyCategory/Acyclic.lean; Mathlib/Algebra/Homology/Localization.lean; Mathlib/Algebra/Homology/Localization.lean",
+   "verdict": "generic homotopy tools only, no exact match for the pinned scheme-resolution square"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy.homologyMap_eq",
+   "date": "2026-10-12",
+   "results": "Homotopy.homologyMap_eq",
+   "verdict": "generic homotopy tools only, no exact match for the pinned scheme-resolution square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two lifts from an injective resolution agreeing on the augmentation are homotopic and induce the same cohomology map",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IdentityResolutionHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdentityResolutionHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_identity_resolution_homology",
+  "statement": "theorem moduleCohomologyFMap_identity_resolution_homology {Z : Scheme.{u}}\n    (G F : SheafOfModules.{u} Z.ringCatSheaf) (ψ : G ⟶ F)\n    (D : ModuleCohomologyFMapData (𝟙 Z) G F ψ) (p : ℕ) :\n    let Γ := RingedSpace.globalSectionsFunctor Z.toRingedSpace ⋙ forget₂ _ AddCommGrpCat.{u}\n    let Γc := Γ.mapHomologicalComplex (ComplexShape.up ℕ)\n    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p\n    H.map (Γc.map D.β) =\n      H.map (Γc.map (InjectiveResolution.desc ψ D.I D.J)) ≫\n        H.map (D.a.hom ≫ Γc.map D.lambda)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

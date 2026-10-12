@@ -1,0 +1,208 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-basic-restriction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent); restriction clause of lem-weil-pbc-module-cohomology-fmap-basic-properties",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Restriction property of module cohomology maps",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $G$ an $\\mathcal O_Y$-module [def-weil-sheaf-of-modules-category], and $p\\in\\mathbb N$. For every open subset $U\\subseteq Y$, with inclusion $j:U\\to Y$, there exists a module isomorphism $\\kappa:G|_U\\to j^*G$ between restriction [lem-weil-pbc-module-restriction-open-immersion-colimits] and tensor pullback [def-pc-module-pullback] such that $H^p(U,\\kappa)\\circ\\rho^*=\\eta^*$ [pqf-def-cohomology] [def-weil-pbc-module-cohomology-fmap]. Here $\\rho:G\\to j_*(G|_U)$ is the restriction-adjunction unit and $\\eta:G\\to j_*j^*G$ is the unit of the chosen tensor-pullback adjunction.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Equation 01F9 (equation-functorial-derived, the arrow lives in $D^+(\\mathcal O_Y(Y))$, which gives (1)), Equation 01FA (equation-functorial), Lemma 01F8 (lemma-functoriality) with $f=\\mathrm{id}$ for (3), Remark 01FB (remark-explain-arrow); (2) and (4) are not stated in Stacks (statement assembled by the agent; for (4) see also literature/stacks-project/sheaves.tex Lemma 00A0, lemma-j-pullback)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "def-weil-pbc-module-cohomology-fmap"
+ ],
+ "proof": [
+  {
+   "text": "*Set-up: the identifications and the module structures.* $\\Mod(\\mathcal O_Y)$ and $\\Mod(\\mathcal O_X)$ have enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], and $H^p(Y,-)$ is the $p$-th right derived functor of the additive functor $\\Gamma(Y,-)$ on $\\Mod(\\mathcal O_Y)$ [pqf-def-cohomology]. So [lem-weil-pbc-derived-functor-map-via-lift] (with $v=\\Gamma(Y,-)$) gives, for every injective resolution $s_{\\mathcal G}:\\mathcal G\\to\\mathcal J^\\bullet$ with $\\mathcal J^n=0$ for $n<0$, an isomorphism $\\iota_{\\mathcal J}:H^p(Y,\\mathcal G)\\xrightarrow{\\sim}H^p(\\Gamma(Y,\\mathcal J^\\bullet))$, and for every morphism $u:\\mathcal G\\to\\mathcal G_1$, every such resolution $\\mathcal G_1\\to\\mathcal J_1^\\bullet$ and every morphism of complexes $t:\\mathcal J^\\bullet\\to\\mathcal J_1^\\bullet$ with $t^0s_{\\mathcal G}=s_{\\mathcal G_1}u$ one has $H^p(u)=\\iota_{\\mathcal J_1}^{-1}H^p(\\Gamma(Y,t))\\iota_{\\mathcal J}$; likewise on $X$. The identifications $H^p(Y,\\mathcal G)=H^p(\\Gamma(Y,\\mathcal J^\\bullet))$, $H^p(X,\\mathcal F)=H^p(\\Gamma(X,\\mathcal I^\\bullet))$ of [def-weil-pbc-module-cohomology-fmap] are $\\iota_{\\mathcal J}$, $\\iota_{\\mathcal I}$, so for the choices $(\\mathcal I^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet,\\lambda,\\beta)$ of that definition $\\varphi^*=\\iota_{\\mathcal I}^{-1}\\circ H^p(\\mu)^{-1}\\circ H^p(\\Gamma(Y,\\beta))\\circ\\iota_{\\mathcal J}$ with $\\mu=\\Gamma(Y,\\lambda)$. The module structure of the statement: each $\\Gamma(Y,\\mathcal J^n)=\\mathcal J^n(Y)$ is an $\\mathcal O_Y(Y)$-module and the differentials $d^n_Y$ are $\\mathcal O_Y(Y)$-linear (components of morphisms of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category]), so cycles, boundaries and $H^p(\\Gamma(Y,\\mathcal J^\\bullet))$ are $\\mathcal O_Y(Y)$-modules, and $H^p(Y,\\mathcal G)$ gets the structure transported by $\\iota_{\\mathcal J}$. It does not depend on $\\mathcal J^\\bullet$: for a second resolution $\\mathcal G\\to\\mathcal J_2^\\bullet$, [lem-weil-pbc-lift-along-injective-quasi-iso] (applied to the augmentation $\\mathcal G[0]\\to\\mathcal J^\\bullet$, a termwise monomorphism and quasi-isomorphism, and to $s_{\\mathcal G_2}:\\mathcal G[0]\\to\\mathcal J_2^\\bullet$) gives $t:\\mathcal J^\\bullet\\to\\mathcal J_2^\\bullet$ with $t^0s_{\\mathcal G}=s_{\\mathcal G_2}$, and the displayed formula for $u=\\mathrm{id}_{\\mathcal G}$ ($H^p(\\mathrm{id})=\\mathrm{id}$, $H^p(Y,-)$ being a functor) gives $\\iota_{\\mathcal J_2}=H^p(\\Gamma(Y,t))\\circ\\iota_{\\mathcal J}$, where $H^p(\\Gamma(Y,t))$ is $\\mathcal O_Y(Y)$-linear because every $t^n_Y$ is. The same holds on $X$ with $\\mathcal O_X(X)$.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'The complex on the bottom left represents $R\\Gamma(Y,\\mathcal G)$ and the complex on the top right represents $R\\Gamma(X,\\mathcal F)$'; Equation 01F9 (equation-functorial-derived) places the arrow in $D^+(\\mathcal O_Y(Y))$; comparison of resolutions: literature/stacks-project/derived.tex Lemma 013P (lemma-morphisms-lift)"
+   }
+  },
+  {
+   "text": "*Clause (4), the two $j$-maps and a common resolution on $Y$.* Let $\\rho=\\rho_{\\mathcal G}:\\mathcal G\\to j_*(\\mathcal G|_U)$ (on $V\\subseteq Y$ the restriction $\\mathcal G(V)\\to\\mathcal G(V\\cap U)$) and $\\eta:\\mathcal G\\to j_*j^*\\mathcal G$ the unit, so $\\mathrm{res}^Y_U=\\rho^*$ and $j^*=\\eta^*$ [def-weil-pbc-module-cohomology-fmap] (a),(b). The unit of $(-)|_U\\dashv j_*$ of [lem-weil-pbc-open-immersion-module-pullback-restriction] is, on $V\\subseteq Y$, the restriction $\\mathcal G(V)\\to\\mathcal G(j(j^{-1}V))=\\mathcal G(V\\cap U)$, i.e. it is $\\rho$, so that lemma gives $j_*(\\kappa)\\circ\\rho=\\eta$, i.e. $\\rho=j_*(\\kappa^{-1})\\circ\\eta$ and $\\eta=j_*(\\kappa)\\circ\\rho$. Fix choices for $\\rho^*$: $(\\mathcal J^\\bullet,s_{\\mathcal G})$ on $Y$, an injective resolution $s_{\\mathcal I}:\\mathcal G|_U\\to\\mathcal I^\\bullet$ in $\\Mod(\\mathcal O_U)$, $\\lambda:j_*\\mathcal I^\\bullet\\to\\mathcal J'^\\bullet$, $\\beta$ with $\\beta^0s_{\\mathcal G}=\\lambda^0j_*(s_{\\mathcal I})\\rho$, $\\mu=\\Gamma(Y,\\lambda)$; and for $\\eta^*$: $(\\mathcal J_2^\\bullet,s_2)$ on $Y$, $s':j^*\\mathcal G\\to\\mathcal I'^\\bullet$, $\\lambda':j_*\\mathcal I'^\\bullet\\to\\mathcal J''^\\bullet$, $\\beta'$ with $\\beta'^0s_2=\\lambda'^0j_*(s')\\eta$, $\\mu'=\\Gamma(Y,\\lambda')$. As in Step 1, [lem-weil-pbc-lift-along-injective-quasi-iso] gives $t:\\mathcal J^\\bullet\\to\\mathcal J_2^\\bullet$ with $t^0s_{\\mathcal G}=s_2$ and [lem-weil-pbc-derived-functor-map-via-lift] (with $u=\\mathrm{id}_{\\mathcal G}$) gives $\\iota_{\\mathcal J_2}=H^p(\\Gamma(Y,t))\\iota_{\\mathcal J}$. Put $\\beta''=\\beta't:\\mathcal J^\\bullet\\to\\mathcal J''^\\bullet$; then $\\beta''^0s_{\\mathcal G}=\\beta'^0s_2=\\lambda'^0j_*(s')\\eta$ and $j^*=\\iota_{\\mathcal I'}^{-1}H^p(\\mu')^{-1}H^p(\\Gamma(Y,\\beta'))\\iota_{\\mathcal J_2}=\\iota_{\\mathcal I'}^{-1}H^p(\\mu')^{-1}H^p(\\Gamma(Y,\\beta''))\\iota_{\\mathcal J}$.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves, Lemma 00A0 (lemma-j-pullback): $j^{-1}\\mathcal G=\\mathcal G|_U$ for an open immersion; literature/stacks-project/cohomology.tex Remark 01FB (remark-explain-arrow) for the data; clause (4) is not stated in Stacks, argument written by the agent"
+   }
+  },
+  {
+   "text": "*Clause (4), comparing the resolutions on $U$ and the complexes $\\mathcal J'',\\mathcal J'$.* The augmentation $j^*\\mathcal G[0]\\to\\mathcal I'^\\bullet$ is a termwise monomorphism and a quasi-isomorphism and $s_{\\mathcal I}\\kappa^{-1}:j^*\\mathcal G[0]\\to\\mathcal I^\\bullet$ is a morphism of complexes into a bounded below complex of injective $\\mathcal O_U$-modules, so [lem-weil-pbc-lift-along-injective-quasi-iso] gives $c:\\mathcal I'^\\bullet\\to\\mathcal I^\\bullet$ with $c^0s'=s_{\\mathcal I}\\kappa^{-1}$, and [lem-weil-pbc-derived-functor-map-via-lift] (for $v=\\Gamma(U,-)$ on $\\Mod(\\mathcal O_U)$, which has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives]) gives $H^p(\\kappa^{-1})=\\iota_{\\mathcal I}^{-1}H^p(\\Gamma(U,c))\\iota_{\\mathcal I'}$. Next, $\\mathcal J'^\\bullet$ is a bounded below complex of injectives, so every morphism from an acyclic complex to it is null-homotopic [lem-weil-pbc-acyclic-map-to-injective-nullhomotopy]; by [lem-weil-pbc-kinjective-hom-derived] the localization $Q$ to the derived category of $\\Mod(\\mathcal O_Y)$ induces bijections $\\operatorname{Hom}_{K}(N,\\mathcal J'^\\bullet)\\to\\operatorname{Hom}_{D}(QN,Q\\mathcal J'^\\bullet)$ for every complex $N$. Since $Q(\\lambda')$ is an isomorphism ($\\lambda'$ is a quasi-isomorphism), precomposition with $\\lambda'$, $\\operatorname{Hom}_K(\\mathcal J''^\\bullet,\\mathcal J'^\\bullet)\\to\\operatorname{Hom}_K(j_*\\mathcal I'^\\bullet,\\mathcal J'^\\bullet)$, corresponds under these bijections to precomposition with $Q(\\lambda')$ and is bijective. Hence there is a morphism of complexes $e:\\mathcal J''^\\bullet\\to\\mathcal J'^\\bullet$ with $e\\lambda'$ chain-homotopic to $\\lambda\\circ j_*(c)$ ($j_*(c)$ is a morphism of complexes, $j_*$ being additive [def-pc-module-pullback]). Applying the additive functor $\\Gamma(Y,-)$ (which preserves homotopies) and $H^p$, and using $\\Gamma(Y,j_*(c))=c_{j^{-1}Y}=\\Gamma(U,c)$ under $\\Gamma(Y,j_*\\mathcal I^n)=\\mathcal I^n(U)$ [def-pc-module-pullback]: $H^p(\\Gamma(Y,e))\\circ H^p(\\mu')=H^p(\\mu)\\circ H^p(\\Gamma(U,c))$.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 05TG (lemma-morphisms-into-injective-complex): $\\Mor_{K(\\mathcal A)}(L^\\bullet,I^\\bullet)=\\Mor_{D(\\mathcal A)}(L^\\bullet,I^\\bullet)$ for $I^\\bullet$ bounded below of injectives; Lemma 013P (lemma-morphisms-lift)"
+   }
+  },
+  {
+   "text": "*Clause (4), $e\\beta''$ is homotopic to $\\beta$.* With $\\alpha:\\mathcal G[0]\\to\\mathcal J^\\bullet$ the augmentation (a quasi-isomorphism), $\\beta''\\alpha=\\lambda'\\circ j_*(s')\\circ\\eta$ and $\\beta\\alpha=\\lambda\\circ j_*(s_{\\mathcal I})\\circ\\rho$ as morphisms $\\mathcal G[0]\\to\\mathcal J''^\\bullet$, resp. $\\mathcal J'^\\bullet$ (Step 5; here $s'$, $s_{\\mathcal I}$ are viewed as morphisms of complexes from the modules in degree $0$). Composition preserves homotopy, so by Step 6 $e\\beta''\\alpha=(e\\lambda')j_*(s')\\eta$ is homotopic to $\\lambda j_*(c)j_*(s')\\eta=\\lambda j_*(c^0s')\\eta=\\lambda j_*(s_{\\mathcal I})j_*(\\kappa^{-1})\\eta=\\lambda j_*(s_{\\mathcal I})\\rho=\\beta\\alpha$, using $c^0s'=s_{\\mathcal I}\\kappa^{-1}$ (Step 6) and $j_*(\\kappa^{-1})\\eta=\\rho$ (Step 5). Since $\\mathcal J'^\\bullet$ is a bounded below complex of injectives and $\\alpha$ a quasi-isomorphism, [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy] gives that $e\\beta''$ and $\\beta$ are chain-homotopic; hence $H^p(\\Gamma(Y,\\beta))=H^p(\\Gamma(Y,e))\\circ H^p(\\Gamma(Y,\\beta''))$.",
+   "uses": [
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories, Lemma 013S (lemma-morphisms-equal-up-to-homotopy)"
+   }
+  },
+  {
+   "text": "*Clause (4), conclusion.* $H^p(\\mu)$ and $H^p(\\mu')$ are bijective [lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso]; multiplying the identity of Step 6 by $H^p(\\mu)^{-1}$ on the left and $H^p(\\mu')^{-1}$ on the right gives $H^p(\\mu)^{-1}H^p(\\Gamma(Y,e))=H^p(\\Gamma(U,c))H^p(\\mu')^{-1}$. With Steps 1, 5 and 7: $\\mathrm{res}^Y_U=\\rho^*=\\iota_{\\mathcal I}^{-1}H^p(\\mu)^{-1}H^p(\\Gamma(Y,\\beta))\\iota_{\\mathcal J}=\\iota_{\\mathcal I}^{-1}H^p(\\mu)^{-1}H^p(\\Gamma(Y,e))H^p(\\Gamma(Y,\\beta''))\\iota_{\\mathcal J}=\\iota_{\\mathcal I}^{-1}H^p(\\Gamma(U,c))H^p(\\mu')^{-1}H^p(\\Gamma(Y,\\beta''))\\iota_{\\mathcal J}=\\bigl(\\iota_{\\mathcal I}^{-1}H^p(\\Gamma(U,c))\\iota_{\\mathcal I'}\\bigr)\\circ\\bigl(\\iota_{\\mathcal I'}^{-1}H^p(\\mu')^{-1}H^p(\\Gamma(Y,\\beta''))\\iota_{\\mathcal J}\\bigr)=H^p(\\kappa^{-1})\\circ j^*$, for every choice of the data of both maps.",
+   "uses": [
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): the arrow is the horizontal map composed with the inverse of the vertical quasi-isomorphism; computation written by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Parent argument, restriction clause, expanded in the new module docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive map on sheaf cohomology induced by a scheme morphism is linear over global sections and equals the derived functor map for the identity scheme morphism",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.Hom.id_app; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; AlgebraicGeometry.Scheme.Modules.mapPresheaf_app; AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app; AlgebraicGeometry.Scheme.Modules.toPresheaf_map; AlgebraicGeometry.Scheme.Modules.Hom.comp_app; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObj'",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap|isoRightDerivedObj",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map on cohomology of sheaves of modules along a morphism of ringed spaces is linear over global sections and agrees with global sections in degree zero",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BasicPropertiesRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_basic_restriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/BasicPropertiesRestriction.lean",
+  "statement": "theorem moduleCohomologyFMap_basic_restriction {Y : Scheme.{u}}\n    (G : SheafOfModules.{u} Y.ringCatSheaf) (p : ℕ) :\n    ∀ (U : Y.Opens),\n      ∃ κ : (restrictFunctor U.ι).obj G ≅ (tensorPullback U.ι).obj G,\n        moduleCohomologyFMap U.ι ((restrictAdjunction U.ι).unit.app G) p ≫\n            (forget₂ _ AddCommGrpCat).map\n              (((U : Scheme).toRingedSpace.moduleCohomology p).map κ.hom) =\n          moduleCohomologyFMap U.ι\n            ((Classical.choose (exists_tensorPullbackAdjunction U.ι)).unit.app G) p",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

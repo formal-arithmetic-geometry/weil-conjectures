@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-basic-degree-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent); degree-zero clause of lem-weil-pbc-module-cohomology-fmap-basic-properties",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "DegreeZero property of module cohomology maps",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-pc-scheme], $G$ an $\\mathcal O_Y$-module and $F$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], and $\\varphi:G\\to h_*F$ a module morphism [def-pc-module-pullback]. There exist module isomorphisms $e_G:H^0(Y,G)\\to\\Gamma(Y,G)$ and $e_F:H^0(X,F)\\to\\Gamma(X,F)$ [pqf-def-cohomology] such that, on underlying additive groups, $\\Gamma(Y,\\varphi)e_G=e_F\\varphi^*$, with $\\varphi^*$ the degree-zero map of [def-weil-pbc-module-cohomology-fmap] and $\\Gamma(Y,h_*F)=\\Gamma(X,F)$ via restriction along $h^{-1}(Y)=X$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Equation 01F9 (equation-functorial-derived, the arrow lives in $D^+(\\mathcal O_Y(Y))$, which gives (1)), Equation 01FA (equation-functorial), Lemma 01F8 (lemma-functoriality) with $f=\\mathrm{id}$ for (3), Remark 01FB (remark-explain-arrow); (2) and (4) are not stated in Stacks (statement assembled by the agent; for (4) see also literature/stacks-project/sheaves.tex Lemma 00A0, lemma-j-pullback)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-cohomology-fmap",
+  "pqf-def-cohomology",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "*Set-up: the identifications and the module structures.* $\\Mod(\\mathcal O_Y)$ and $\\Mod(\\mathcal O_X)$ have enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], and $H^p(Y,-)$ is the $p$-th right derived functor of the additive functor $\\Gamma(Y,-)$ on $\\Mod(\\mathcal O_Y)$ [pqf-def-cohomology]. So [lem-weil-pbc-derived-functor-map-via-lift] (with $v=\\Gamma(Y,-)$) gives, for every injective resolution $s_{\\mathcal G}:\\mathcal G\\to\\mathcal J^\\bullet$ with $\\mathcal J^n=0$ for $n<0$, an isomorphism $\\iota_{\\mathcal J}:H^p(Y,\\mathcal G)\\xrightarrow{\\sim}H^p(\\Gamma(Y,\\mathcal J^\\bullet))$, and for every morphism $u:\\mathcal G\\to\\mathcal G_1$, every such resolution $\\mathcal G_1\\to\\mathcal J_1^\\bullet$ and every morphism of complexes $t:\\mathcal J^\\bullet\\to\\mathcal J_1^\\bullet$ with $t^0s_{\\mathcal G}=s_{\\mathcal G_1}u$ one has $H^p(u)=\\iota_{\\mathcal J_1}^{-1}H^p(\\Gamma(Y,t))\\iota_{\\mathcal J}$; likewise on $X$. The identifications $H^p(Y,\\mathcal G)=H^p(\\Gamma(Y,\\mathcal J^\\bullet))$, $H^p(X,\\mathcal F)=H^p(\\Gamma(X,\\mathcal I^\\bullet))$ of [def-weil-pbc-module-cohomology-fmap] are $\\iota_{\\mathcal J}$, $\\iota_{\\mathcal I}$, so for the choices $(\\mathcal I^\\bullet,\\mathcal J^\\bullet,\\mathcal J'^\\bullet,\\lambda,\\beta)$ of that definition $\\varphi^*=\\iota_{\\mathcal I}^{-1}\\circ H^p(\\mu)^{-1}\\circ H^p(\\Gamma(Y,\\beta))\\circ\\iota_{\\mathcal J}$ with $\\mu=\\Gamma(Y,\\lambda)$. The module structure of the statement: each $\\Gamma(Y,\\mathcal J^n)=\\mathcal J^n(Y)$ is an $\\mathcal O_Y(Y)$-module and the differentials $d^n_Y$ are $\\mathcal O_Y(Y)$-linear (components of morphisms of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category]), so cycles, boundaries and $H^p(\\Gamma(Y,\\mathcal J^\\bullet))$ are $\\mathcal O_Y(Y)$-modules, and $H^p(Y,\\mathcal G)$ gets the structure transported by $\\iota_{\\mathcal J}$. It does not depend on $\\mathcal J^\\bullet$: for a second resolution $\\mathcal G\\to\\mathcal J_2^\\bullet$, [lem-weil-pbc-lift-along-injective-quasi-iso] (applied to the augmentation $\\mathcal G[0]\\to\\mathcal J^\\bullet$, a termwise monomorphism and quasi-isomorphism, and to $s_{\\mathcal G_2}:\\mathcal G[0]\\to\\mathcal J_2^\\bullet$) gives $t:\\mathcal J^\\bullet\\to\\mathcal J_2^\\bullet$ with $t^0s_{\\mathcal G}=s_{\\mathcal G_2}$, and the displayed formula for $u=\\mathrm{id}_{\\mathcal G}$ ($H^p(\\mathrm{id})=\\mathrm{id}$, $H^p(Y,-)$ being a functor) gives $\\iota_{\\mathcal J_2}=H^p(\\Gamma(Y,t))\\circ\\iota_{\\mathcal J}$, where $H^p(\\Gamma(Y,t))$ is $\\mathcal O_Y(Y)$-linear because every $t^n_Y$ is. The same holds on $X$ with $\\mathcal O_X(X)$.",
+   "uses": [
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-lift-along-injective-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow): 'The complex on the bottom left represents $R\\Gamma(Y,\\mathcal G)$ and the complex on the top right represents $R\\Gamma(X,\\mathcal F)$'; Equation 01F9 (equation-functorial-derived) places the arrow in $D^+(\\mathcal O_Y(Y))$; comparison of resolutions: literature/stacks-project/derived.tex Lemma 013P (lemma-morphisms-lift)"
+   }
+  },
+  {
+   "text": "*Clause (2), degree zero.* $\\Gamma(Y,-)$ is additive and preserves kernels (kernels in $\\Mod(\\mathcal O_Y)$ are computed sectionwise [def-weil-sheaf-of-modules-category]), so it is left exact [def-sp-left-exact-additive], and by [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2) the map $\\mathcal G(Y)\\to H^0(\\Gamma(Y,\\mathcal J^\\bullet))=\\ker(d^0_Y)$, $s\\mapsto[s_{\\mathcal G}(s)]$, is an isomorphism (since $\\mathcal J^{-1}=0$, $H^0$ is the group of $0$-cycles); likewise $\\mathcal F(X)\\cong H^0(\\Gamma(X,\\mathcal I^\\bullet))$, $t\\mapsto[s_{\\mathcal F}(t)]$. These are the identifications of the statement (composed with $\\iota^{-1}$; by Step 1 a change of resolution $t:\\mathcal J^\\bullet\\to\\mathcal J_2^\\bullet$ sends $[s_{\\mathcal G}(s)]$ to $[t^0s_{\\mathcal G}(s)]=[s_{\\mathcal G_2}(s)]$, so they do not depend on the resolution). Let $s\\in\\mathcal G(Y)$ and $t=\\varphi_Y(s)\\in(h_*\\mathcal F)(Y)=\\mathcal F(h^{-1}Y)=\\mathcal F(X)$ [def-pc-module-pullback]. The element $s_{\\mathcal F,X}(t)\\in\\mathcal I^0(X)$ is a $0$-cycle ($d^0s_{\\mathcal F}=0$), and, since $(h_*s_{\\mathcal F})_Y=s_{\\mathcal F,X}$ and $\\mu^0=\\lambda^0_Y$, $\\mu^0(s_{\\mathcal F,X}(t))=(\\lambda^0\\circ h_*(s_{\\mathcal F})\\circ\\varphi)_Y(s)=(\\beta^0\\circ s_{\\mathcal G})_Y(s)=\\beta^0_Y(s_{\\mathcal G,Y}(s))$ by the defining equation of $\\beta$ [def-weil-pbc-module-cohomology-fmap]. So $H^0(\\mu)[s_{\\mathcal F}(t)]=H^0(\\Gamma(Y,\\beta))[s_{\\mathcal G}(s)]$, i.e. $H^0(\\mu)^{-1}H^0(\\Gamma(Y,\\beta))[s_{\\mathcal G}(s)]=[s_{\\mathcal F}(\\varphi_Y(s))]$: under the identifications, $\\varphi^*$ in degree $0$ is $s\\mapsto\\varphi_Y(s)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-left-exact-additive",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-pc-module-pullback",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Remark 01FB (remark-explain-arrow), the commutative square (equation-choice) read in degree $0$ on global sections; not stated in Stacks, computation written by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Parent argument, degree-zero clause, expanded in the new module docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive map on sheaf cohomology induced by a scheme morphism is linear over global sections and equals the derived functor map for the identity scheme morphism",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.Hom.id_app; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; AlgebraicGeometry.Scheme.Modules.mapPresheaf_app; AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app; AlgebraicGeometry.Scheme.Modules.toPresheaf_map; AlgebraicGeometry.Scheme.Modules.Hom.comp_app; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObj'",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap|isoRightDerivedObj",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map on cohomology of sheaves of modules along a morphism of ringed spaces is linear over global sections and agrees with global sections in degree zero",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BasicPropertiesDegreeZero",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_basic_degree_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/BasicPropertiesDegreeZero.lean",
+  "statement": "theorem moduleCohomologyFMap_basic_degree_zero {X Y : Scheme.{u}} (h : X ⟶ Y)\n    {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}\n    (φ : G ⟶ (pushforward h).obj F) :\n    ∃ eG : (Y.toRingedSpace.moduleCohomology 0).obj G ≅\n          (RingedSpace.globalSectionsFunctor Y.toRingedSpace).obj G,\n      ∃ eF : (X.toRingedSpace.moduleCohomology 0).obj F ≅\n          (RingedSpace.globalSectionsFunctor X.toRingedSpace).obj F,\n        (forget₂ _ AddCommGrpCat).map eG.hom ≫\n            (forget₂ _ AddCommGrpCat).map\n              ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).map φ) =\n          moduleCohomologyFMap h φ 0 ≫\n            (forget₂ _ AddCommGrpCat).map eF.hom",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

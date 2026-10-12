@@ -6,11 +6,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
-import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.BasicPropertiesLinearity
+import Sheaf.AlgebraicGeometry.BasicPropertiesDegreeZero
+import Sheaf.AlgebraicGeometry.BasicPropertiesIdentity
+import Sheaf.AlgebraicGeometry.BasicPropertiesRestriction
 
 /-! # Basic properties of maps on module cohomology
 
@@ -83,6 +82,10 @@ theorem moduleCohomologyFMap_basic_properties {X Y : Scheme.{u}} (h : X ⟶ Y)
           moduleCohomologyFMap U.ι
             ((Classical.choose (exists_tensorPullbackAdjunction U.ι)).unit.app G) p)
  := by
-  sorry
+  refine ⟨moduleCohomologyFMap_basic_linearity h φ p, ?_, ?_, ?_⟩
+  · exact moduleCohomologyFMap_basic_degree_zero h φ
+  · intro Z GZ FZ ψ
+    exact moduleCohomologyFMap_basic_identity GZ FZ ψ p
+  · exact moduleCohomologyFMap_basic_restriction G p
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-basic-identity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent); identity clause of lem-weil-pbc-module-cohomology-fmap-basic-properties",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Identity property of module cohomology maps",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme], $G,F$ be $\\mathcal O_Z$-modules [def-weil-sheaf-of-modules-category], $\\psi:G\\to F$ a morphism, and $p\\in\\mathbb N$. Then the map $\\psi^*$ along the identity scheme morphism [def-weil-pbc-module-cohomology-fmap] is the underlying additive morphism of $H^p(Z,\\psi)$ [pqf-def-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7 (section-functoriality): Equation 01F9 (equation-functorial-derived, the arrow lives in $D^+(\\mathcal O_Y(Y))$, which gives (1)), Equation 01FA (equation-functorial), Lemma 01F8 (lemma-functoriality) with $f=\\mathrm{id}$ for (3), Remark 01FB (remark-explain-arrow); (2) and (4) are not stated in Stacks (statement assembled by the agent; for (4) see also literature/stacks-project/sheaves.tex Lemma 00A0, lemma-j-pullback)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-module-cohomology-fmap",
+  "pqf-def-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "For the choices D defining moduleCohomologyFMap, apply the identity-resolution sections homology factorization. Expand D.map and cancel the invertible vertical homology map using D.invertible.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-identity-resolution-homology",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the forgetful homology comparison carries the remaining sections homology map back to module-valued homology. Apply isoRightDerivedObj_hom_naturality to the standard descent alpha of psi between J and I. Cancel the resolution isomorphisms to obtain the underlying map of H^p(Z,psi). Enough injectives supplies the resolutions; no h-map independence theorem is used.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-module-cohomology-fmap-identity-resolution-homology",
+  "lem-weil-pbc-scheme-modules-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Resolution homology factorization, inverse cancellation, and Mathlib right-derived comparison naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive map on sheaf cohomology induced by a scheme morphism is linear over global sections and equals the derived functor map for the identity scheme morphism",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward_map_app; AlgebraicGeometry.Scheme.Modules.Hom.id_app; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; AlgebraicGeometry.Scheme.Modules.mapPresheaf_app; AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app; AlgebraicGeometry.Scheme.Modules.toPresheaf_map; AlgebraicGeometry.Scheme.Modules.Hom.comp_app; AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "loogle",
+   "query": "InjectiveResolution.isoRightDerivedObj",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObj'",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyFMap|isoRightDerivedObj",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "verdict": "no exact match for this project-specific map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map on cohomology of sheaves of modules along a morphism of ringed spaces is linear over global sections and agrees with global sections in degree zero",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties",
+  "date": "2026-10-13",
+  "group": "W2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BasicPropertiesIdentity",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCohomologyFMap_basic_identity",
+  "file": "lean/Sheaf/AlgebraicGeometry/BasicPropertiesIdentity.lean",
+  "statement": "theorem moduleCohomologyFMap_basic_identity {Z : Scheme.{u}}\n    (GZ FZ : SheafOfModules.{u} Z.ringCatSheaf) (ψ : GZ ⟶ FZ) (p : ℕ) :\n    moduleCohomologyFMap (𝟙 Z) ψ p =\n        (forget₂ _ AddCommGrpCat).map ((Z.toRingedSpace.moduleCohomology p).map ψ)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T231643-L-1964425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
