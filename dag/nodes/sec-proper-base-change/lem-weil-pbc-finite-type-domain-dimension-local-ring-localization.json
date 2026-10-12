@@ -14,34 +14,40 @@
  },
  "proof": [
   {
-   "text": "Use a polynomial presentation of S, prime correspondence, and the finite polynomial maximal-chain height theorem to identify both dimensions with the same height difference.",
+   "text": "Apply the existing common maximal-chain length theorem to obtain a natural number d, dim S = d, and length d for every maximal prime LTSeries. In particular the spectrum is finite-dimensional.",
    "uses": [
-    "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the given maximal ideal m, Mathlib Ideal.exists_ltSeries_length_eq_height gives a prime LTSeries c ending at m with length equal to height(m). The height of c at each index is that index. Hence its head is minimal and adjacent terms cover one another: an intervening prime would force two height increments between consecutive indices. Its last term is maximal because m is maximal. A finite saturated chain with minimal head and maximal last term is a maximal chain: any extra comparable element must lie below every term, above every term, or strictly between adjacent terms, all impossible. Both order-theoretic arguments are fully proved as local facts within the target theorem; no helper declaration is added.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the common-chain-length theorem to c. Its length is d, so height(m) = d = dim S. This includes d = 0, when the chain has one term and no covering conditions.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use IsLocalization.AtPrime.ringKrullDim_eq_height to rewrite the dimension of S_m as height(m), and conclude dim S_m = dim S.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-finite-type-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal",
-  "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-krull-dimension-ring",
-  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains",
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00OS"
+  "place": "Algebra, Lemma Tag 00OS, final inference from the common maximal-chain length; reuse the sibling chains declaration and prove the finite-order glue in Lean. Official source consulted at https://stacks.math.columbia.edu/tag/00OS."
  },
  "mathlib_searches": [
   {
@@ -107,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T184349-L-4021911",
-  "kind": "interface",
+  "landing": "20261012T225304-L-1803178",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
