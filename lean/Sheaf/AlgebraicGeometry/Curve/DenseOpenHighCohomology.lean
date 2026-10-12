@@ -8,12 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.Paper.ZeroDimensionalCohomology
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.OpenClosed.Exact
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomologyHigh
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomologyPullback
 
 /-! # Higher cohomology across a dense open -/
 
@@ -56,6 +52,9 @@ theorem dense_open_high_cohomology (Λ : Type (u + 1)) [CommRing Λ]
     (∀ q : ℕ, 1 < q → Function.Bijective (Sheaf.H.map ε q)) ∧
       (∀ {W : Scheme.{u}} (a : W ⟶ X) [IsOpenImmersion a],
         Function.Bijective
-          (Sheaf.H.map (((a)^*[AddCommGrpCat.{u + 1}]).map ε) 2)) := by sorry
+          (Sheaf.H.map (((a)^*[AddCommGrpCat.{u + 1}]).map ε) 2)) := by
+  dsimp
+  exact ⟨dense_open_high_cohomology_high Λ f F U hU,
+    dense_open_high_cohomology_pullback Λ f F U hU⟩
 
 end AlgebraicGeometry.IsCurve

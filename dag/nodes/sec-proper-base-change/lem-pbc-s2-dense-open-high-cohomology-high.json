@@ -1,0 +1,112 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-pbc-s2-dense-open-high-cohomology"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-pbc-s2-dense-open-high-cohomology-high",
+ "title": "Higher-degree component of dense-open cohomology comparison",
+ "statement": "For the data of lem-pbc-s2-dense-open-high-cohomology, the counit map on underlying abelian sheaves induces bijections on H^q for every q > 1.",
+ "proof": [
+  {
+   "text": "Use the reduced closed complement of the dense open. Curve dimension and density make it a finite union of closed points with algebraically closed residue fields. The open-closed short exact sequence, exact finite direct image, the cohomology comparison for the closed immersion, and vanishing on the zero-dimensional complement give vanishing of the two adjacent terms in the long exact sequence, hence bijectivity in every degree q > 1.",
+   "uses": [
+    "def-weil-pbc-curve-setting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-zero-dimensional-cohomology",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-curve-setting",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-zero-dimensional-cohomology",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomologyHigh",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseOpenHighCohomologyHigh.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.dense_open_high_cohomology_high",
+  "statement": "theorem dense_open_high_cohomology_high (Λ : Type (u + 1)) [CommRing Λ]\n    {k : Type u} [Field k] [IsAlgClosed k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (U : X.Opens) (hU : Dense (U : Set X)) :\n    let ε := (sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map\n        ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).counit.app F)\n    ∀ q : ℕ, 1 < q → Function.Bijective (Sheaf.H.map ε q)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dense open etale cohomology bijective",
+   "results": "No direct matching theorem found.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dense open etale cohomology bijective",
+   "results": "No direct matching theorem found.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "dense_open cohomology",
+   "results": "No existing theorem in library.",
+   "date": "2026-10-12",
+   "verdict": "No match."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T054003-L-2650053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T054003-L-2650053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
