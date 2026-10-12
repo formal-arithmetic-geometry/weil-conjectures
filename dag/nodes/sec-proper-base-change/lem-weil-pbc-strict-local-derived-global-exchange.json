@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-strict-local-derived-global-exchange",
+ "kind": "statement",
+ "title": "Strict-local exchange on derived global cohomology",
+ "statement": "Let $A\\to B$ be a local homomorphism of strictly henselian local rings [def-weil-pbc-henselian-terminology]. Let $f:X\\to\\operatorname{Spec}A$, $f':X'\\to\\operatorname{Spec}B$, and $g':X'\\to X$ form a cartesian square with $g:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ [def-weil-pbc-cartesian-square]. Let $K$ be any bounded below derived object of abelian etale sheaves on $X$ [def-weil-pbc-derived-categories], and $q\\in\\mathbb Z$. Let $t$ be the geometric closed B-point with residue field $\\kappa(B)$ [def-weil-pbc-geometric-stalks], and put $S=H^q(g^{-1}Rf_*K)$ and $T=H^q(Rf'_*g'^{-1}K)$, using [def-weil-pbc-derived-inverse-image] and [def-weil-pbc-direct-image]. Let $e:S\\to T$ be homology of the derived exchange [def-weil-pbc-derived-exchange]. Write $P=R\\Gamma(X,-)$ and $P'=R\\Gamma(X',-)$ [def-weil-pbc-etale-cohomology], $U=H^q(PK)$ and $V=H^q(P'(g'^{-1}K))$. Let $p:U\\to V$ be $H^q$ of $P$ applied to the derived adjunction unit $K\\to Rg'_*g'^{-1}K$ [prop-weil-pbc-derived-inverse-image-adjunction], followed by the Leray identification [lem-weil-pbc-cohomology-pullback-derived-unit]. There exist additive equivalences $c_1:S_t\\xrightarrow{\\sim}U$ and $c_2:T_t\\xrightarrow{\\sim}V$ such that $c_2(e_t(x))=p(c_1(x))$ for every $x\\in S_t$. No properness, quasi-compactness, torsion, or concentration in degree zero is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO, and Tag 095T final map-on-stalks paragraph, specialized to strict-local bases before closed-fibre comparison."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-etale-cohomology",
+  "prop-weil-pbc-derived-inverse-image-adjunction",
+  "lem-weil-pbc-cohomology-pullback-derived-unit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded below injective representative I of K and a bounded below injective replacement J of its exact inverse image. Direct images preserve K-injectives because their left adjoints are exact. Thus the derived images are computed by f_*I and f prime_*J.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "prop-weil-pbc-inverse-image-exact",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Strict-local global germs identify sections with the closed-point stalk, naturally. Locality gives a closed A-image for the B-point. Apply inverse-image stalk comparison, using the germ construction for separably closed points (or extending to algebraic closures, which are purely inseparable over them). Apply exact stalks to both complexes and commute them with homology. Leray identifies their section complexes with the complexes of global sections on X and X prime; their homologies give c1 and c2.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The termwise exchange formula computes the map as underived exchange on I followed by f prime_* of the replacement to J. The germ compatibility identifies this map with pullback of sections followed by replacement. The derived-unit description identifies that map with p; taking homology yields the commuting equation.",
+   "uses": [
+    "lem-weil-pbc-derived-exchange-termwise",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-cohomology-pullback-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All replacement comparisons are unique in the homotopy category into K-injectives. Consequently they induce the comparison isomorphisms used by the actual derived functors, and the equality survives these comparisons.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-cohomology-resolution-independent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "prop-weil-pbc-cohomology-resolution-independent",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "T2 stage 3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QO, and Tag 095T final map-on-stalks paragraph, specialized to strict-local bases before closed-fibre comparison.",
+  "note": "Expansion of the stated steps of lem-weil-pbc-strict-local-abelian-total-exchange; no unit step is bypassed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "closed point stalk of higher direct image over strictly henselian local ring equals total space etale cohomology",
+   "date": "2026-10-12",
+   "results": "8 hits: AlgebraicGeometry.Scheme.stalkClosedPointTo, AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv",
+   "verdict": "No exact derived stalk/global-sections exchange statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "date": "2026-10-12",
+   "results": "12 hits: CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.subsingleton_H_of_isZero, CategoryTheory.Sheaf.functorH_obj_coe, CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat, CategoryTheory.Sheaf.H.map, CategoryTheory.Sheaf.H.equiv₀, CategoryTheory.Sheaf.functorH_map, CategoryTheory.Sheaf.H.map_id_apply",
+   "verdict": "No exact derived stalk/global-sections exchange statement."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*(Ext|[Cc]ohomology)|(Ext|[Cc]ohomology).*homology",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean",
+   "verdict": "No exact derived stalk/global-sections exchange statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "strictly henselian closed point stalk derived direct image global sections base change map",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalAbelianTotalExchange",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-local-exchange",
+   "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; Strict-local exchange on derived global cohomology",
+   "via": [
+    "lem-weil-pbc-strict-local-abelian-total-exchange",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalDerivedGlobalExchange",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalDerivedGlobalExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_addEquiv_strictLocal_derivedGlobal_exchange",
+  "statement": "theorem Etale.exists_addEquiv_strictLocal_derivedGlobal_exchange {A B : Type u} [CommRing A] [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] [CommRing B] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField B)] (φ : A →+* B) [IsLocalHom φ] {X X' : Scheme.{u}} (f : X ⟶ Spec (.of A)) (f' : X' ⟶ Spec (.of B)) (g' : X' ⟶ X) (sq : IsPullback g' f' f (Spec.map (CommRingCat.ofHom φ))) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (q : ℤ) : let g := Spec.map (CommRingCat.ofHom φ) let S := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙ D+((g)^*[AddCommGrpCat.{u + 1}])).obj K) let T := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙ R+((f')_*[AddCommGrpCat.{u + 1}])).obj K) let e := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K) let t := pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) let P := (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus let P' := (Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus let U := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (P.obj K) let V := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj (P'.obj (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K)) let p := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map (P.map ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').derivedPlus.unit.app K) ≫ (@Functor.rightDerivedFunctorPlusCompIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _ (lowerStar AddCommGrpCat.{u + 1} g') (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) _ _ _ _ (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g')) (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g')).hom.app (((g')^*[AddCommGrpCat.{u + 1}]).mapDerivedCategoryPlus.obj K)) ∃ (c₁ : ((t.sheafFiber (A := AddCommGrpCat.{u + 1})).obj S) ≃+ U) (c₂ : ((t.sheafFiber (A := AddCommGrpCat.{u + 1})).obj T) ≃+ V), ∀ x, c₂ (((t.sheafFiber (A := AddCommGrpCat.{u + 1})).map e).hom x) = p.hom (c₁ x)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T063521-L-3160240",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T063521-L-3160240",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

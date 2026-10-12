@@ -9,12 +9,8 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.AbelianDerivedGlobalExtPullback
+import Sheaf.AlgebraicGeometry.StrictLocalDerivedGlobalExchange
 
 /-! # Strict-local exchange with abelian coefficients
 
@@ -76,6 +72,13 @@ theorem Etale.exists_addEquiv_strictLocal_abelian_total_exchange
         Sheaf.H ((g')^*[AddCommGrpCat.{u + 1}].obj G) q),
       ∀ x, a₂ (((t.sheafFiber (A := AddCommGrpCat.{u + 1})).map e).hom x) =
         Etale.cohomologyMap g' G q (a₁ x) := by
-  sorry
+  obtain ⟨c₁, c₂, hc⟩ := Etale.exists_addEquiv_strictLocal_derivedGlobal_exchange
+    φ f f' g' sq ((DerivedCategory.Plus.singleFunctor _ 0).obj G) (q : ℤ)
+  obtain ⟨b₁, b₂, hb⟩ := Etale.exists_addEquiv_derivedGlobal_ext_pullback g' G q
+  refine ⟨c₁.trans b₁, c₂.trans b₂, ?_⟩
+  intro x
+  change b₂ (c₂ _) = Etale.cohomologyMap g' G q (b₁ (c₁ x))
+  rw [hc]
+  exact hb (c₁ x)
 
 end AlgebraicGeometry
