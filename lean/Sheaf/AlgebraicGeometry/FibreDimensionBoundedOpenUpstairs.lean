@@ -4,9 +4,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
-import Sheaf.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
-import Sheaf.RingTheory.QuasiFiniteFourRings
-import Sheaf.Topology.DimensionSupremumLocalDimensions
+import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairsAux
 
 /-!
 # Fibre dimension is bounded on a neighbourhood
@@ -49,6 +47,14 @@ theorem fibre_dimension_bounded_open_upstairs
           topologicalKrullDimAt
               (PrimeSpectrum.preimageEquivFiber R S (PrimeSpectrum.comap (algebraMap R S) q')
                 ⟨q', rfl⟩) ≤ (d : WithBot ℕ∞) := by
-  sorry
+  intro hdim
+  obtain ⟨g, hg, f, hft, hq⟩ :=
+    exists_quasiFinite_over_polynomial_algebra R S q d hdim
+  refine ⟨(PrimeSpectrum.basicOpen g : Set (PrimeSpectrum S)),
+    PrimeSpectrum.isOpen_basicOpen, ?_, ?_⟩
+  · exact (PrimeSpectrum.mem_basicOpen g q).2 hg
+  · intro q' hq'
+    exact fibre_dimension_le_of_quasiFinite_polynomial_localization
+      g d f hft hq q' ((PrimeSpectrum.mem_basicOpen g q').1 hq')
 
 end Algebra
