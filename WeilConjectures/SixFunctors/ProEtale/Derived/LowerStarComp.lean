@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
@@ -204,15 +205,6 @@ lemma rightDerivedFunctorIdIso_fac_app (K : HomotopyCategory C (ComplexShape.up 
 
 end Identity
 
-
-/-- A composite of functors preserving K-injective complexes preserves K-injective complexes. -/
-instance preservesKInjectiveComplexes_comp {C : Type u₁} {D : Type u₂} {E : Type u₃}
-    [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Abelian C] [Abelian D] [Abelian E]
-    (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive] [F.PreservesKInjectiveComplexes]
-    [G.PreservesKInjectiveComplexes] : (F ⋙ G).PreservesKInjectiveComplexes where
-  isKInjective_map K _ :=
-    inferInstanceAs (CochainComplex.IsKInjective ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)))
 section Coherence
 
 variable {C : Type u₁} {D : Type u₂} {E : Type u₃} {E' : Type*}
