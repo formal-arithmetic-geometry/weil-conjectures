@@ -9097,3 +9097,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/V2/Sheaf.CategoryTheory.FilteredColimitPreservesPullback (stage 3; reviewer PASS; first push; landing 20261012T184353-L-4023222 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/V2/Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension (stage 3; reviewer PASS; first push; landing 20261012T184353-L-4023367 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/V3/Sheaf.AlgebraicGeometry.IntegralIdealProperCohomology (stage 3; reviewer PASS; first push; landing 20261012T184353-L-4023465 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/V3/Sheaf.AlgebraicGeometry.SupportedOpenUnitConeProperties (stage 3; reviewer PASS; first push; landing 20261012T184354-L-4023572 (interface); batch 20261012T184234; modules 3; new nodes 2)

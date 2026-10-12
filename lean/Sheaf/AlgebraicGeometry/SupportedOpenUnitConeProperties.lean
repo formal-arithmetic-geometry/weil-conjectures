@@ -8,9 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Topology.QuasiSeparated
 
-import Sheaf.AlgebraicGeometry.OpenRestrictionSupportTriangle
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
+import Sheaf.AlgebraicGeometry.SupportedOpenUnitImageProperties
+import Sheaf.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
 
 /-! # Support of the open unit cone
 
@@ -68,6 +68,32 @@ theorem supported_open_unit_cone_properties
         Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj C).val.presheaf x))) ∧
       IsZero ((SheafOfModules.overFunctor.{u}
-        (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj C) := by sorry
+        (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj C) := by
+  let L := (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory
+  let D := Pretriangulated.Triangle.mk (adj.unit.app K.obj) g h
+  let P := supportedProperty X T
+  let : P.IsTriangulated := supported_qcoh_isTriangulated X T
+  have hK : P K.obj := ⟨K.property, hKT⟩
+  have hR : P (R.obj (L.obj K.obj)) :=
+    supported_open_unit_image_properties X T hT U hU R adj K hKT
+  obtain ⟨C', hC', ⟨e⟩⟩ := P.ext_of_isTriangulatedClosed₃' D htri hK hR
+  have hqc : schemeDerivedQCohProperty X C := by
+    intro n
+    exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+      ((DerivedCategory.homologyFunctor _ n).mapIso e.symm) (hC'.1 n)
+  have hs : ∀ (n : ℤ) (x : X), x ∉ T → Subsingleton (↑(TopCat.Presheaf.stalk
+      ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace))
+        n).obj C).val.presheaf x)) := by
+    intro n x hx
+    let F := SheafOfModules.forget.{u} (moduleRings X.toRingedSpace) ⋙
+      PresheafOfModules.toPresheaf.{u} (moduleRings X.toRingedSpace).obj ⋙
+      TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x
+    let e' := F.mapIso ((DerivedCategory.homologyFunctor _ n).mapIso e)
+    refine ⟨fun a b ↦ (ConcreteCategory.bijective_of_isIso e'.hom).1 ?_⟩
+    exact (hC'.2 n x hx).elim _ _
+  have hi := derived_open_unit_restriction_isIso X U R adj K.obj
+  have hz : IsZero (L.obj C) :=
+    (L.mapTriangle.obj D).isZero₃_of_isIso₁ (L.map_distinguished D htri) hi
+  exact ⟨hqc, hs, hz⟩
 
 end AlgebraicGeometry

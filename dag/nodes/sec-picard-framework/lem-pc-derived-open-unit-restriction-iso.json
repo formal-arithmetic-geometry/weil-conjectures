@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-derived-open-unit-restriction-iso",
+ "kind": "statement",
+ "title": "Derived restriction of the open adjunction unit is invertible",
+ "statement": "For a scheme X [def-weil-pbc-scheme-conventions], open U, chosen derived module categories on X and its over-site [def-pc-derived-category], and any adjunction from exact derived restriction L to R, the morphism L(unit(K)) is an isomorphism for every K in D(O_X). No quasi-coherence or support hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "lemma-restrict-K-injective-to-open (08BS) and lemma-restrict-direct-image-open (08FE); exact open extension and restriction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete exact extension by zero G and its adjunction to over-site restriction F. Localize the termwise complex adjunction at quasi-isomorphisms to get G_D left adjoint to F_D.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive the extension/restriction composition isomorphism to identify G_D followed by F_D with the identity. Hence G_D is fully faithful. Adjoint triple full-faithfulness equivalence implies the supplied R is fully faithful; the adjunction triangle identity then makes F_D(unit(K)) invertible.",
+   "uses": [
+    "lem-pc-open-extension-restriction-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-open-extension-restriction-iso",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "lemma-restrict-K-injective-to-open (08BS) and lemma-restrict-direct-image-open (08FE); exact open extension and restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso.*map.*unit|map.*unit.*isIso|[Ff]ullyFaithful.*[Cc]ounit|[Cc]ounit.*[Ff]ullyFaithful|[Qq]uasicoherent.*direct",
+   "date": "2026-10-13",
+   "results": "25 hits; Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Triple.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean; Mathlib/CategoryTheory/Adjunction/Reflective.lean",
+   "verdict": "Related categorical or underived facts; no exact derived over-site statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme and open subset the derived restriction of the adjunction unit to derived direct image is an isomorphism; derived direct image of a supported quasi coherent complex remains supported",
+   "date": "2026-10-13",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; HomologicalComplex.isSupported_iff_of_quasiIso",
+   "verdict": "Related categorical or underived facts; no exact derived over-site statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"counit\"",
+   "date": "2026-10-13",
+   "results": "12 hits; CategoryTheory.Adjunction.mkOfUnitCounit; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ofNatIsoLeft_counit; CategoryTheory.Adjunction.ofNatIsoRight_counit; CategoryTheory.Adjunction.counit_naturality; CategoryTheory.Adjunction.counit_naturality_assoc; CategoryTheory.Adjunction.toEquivalence_counitIso_hom_app",
+   "verdict": "Related categorical or underived facts; no exact derived over-site statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived restriction to an open sends the right adjunction unit to an isomorphism and derived direct image preserves supported quasi coherent cohomology",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedOpenUnitConeProperties",
+  "group": "V3",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-supported-open-unit-cone-properties",
+   "place": "Derived restriction of the open adjunction unit is invertible",
+   "via": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedOpenUnitRestrictionIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedOpenUnitRestrictionIso.lean",
+  "declaration": "AlgebraicGeometry.derived_open_unit_restriction_isIso",
+  "statement": "theorem derived_open_unit_restriction_isIso\n    (X : Scheme.{u}) (U : X.Opens)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (R : DerivedCategory\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ⥤\n      schemeDerivedCategory X)\n    (adj : (SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory ⊣ R)\n    (K : schemeDerivedCategory X) :\n    IsIso ((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapDerivedCategory.map\n      (adj.unit.app K))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T184354-L-4023572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T184354-L-4023572",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
