@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-adjoinRoot-crt-matrix-root-block",
+ "kind": "statement",
+ "title": "Root multiplication block coordinates",
+ "statement": "Let A be a commutative ring, I an ideal with nonzero R=A/I, f in A[X] monic, and g,h in R[X] monic and coprime with f.map(mk I)=g*h. Use the power bases of the three monic quotients [lem-weil-pbc-monic-quotient-free]. There exist d: Fin deg f ≃ Fin deg g ⊕ Fin deg h and a unit U on this sum index over R such that U reindex_d(T.map(mk I)) U^-1 = blockdiag(Tg,Th), where T,Tg,Th are multiplication by the respective roots in these power bases.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, proof of (3) implies (1), the decomposition of B/IB; matrix coordinate details via monic division, CRT and power bases (https://stacks.math.columbia.edu/tag/09XI)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof": [
+  {
+   "text": "Reduce the monic power-basis multiplication matrix coefficientwise. Monic division commutes with coefficient reduction by uniqueness of remainder, and monicity over the nonzero residue ring preserves degree.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply CRT to the comaximal principal ideals (g) and (h), whose intersection is (g*h), obtaining the algebra equivalence to the two polynomial quotients and carrying the root to the pair of roots.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Concatenate the two power bases; their dimensions sum to deg f by monicity. Reindex the reduced basis by an equivalence d. The coordinate matrix U of CRT is invertible, with inverse the coordinate matrix of the inverse equivalence.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Intertwine root multiplication by CRT and use the matrix-of-composition identity to obtain the root conjugation identity. Empty power bases handle either constant factor and the constant parent polynomial.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "V3 second reader",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, proof of (3) implies (1), the decomposition of B/IB; matrix coordinate details via monic division, CRT and power bases (https://stacks.math.columbia.edu/tag/09XI)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The matrix of multiplication by the root in a monic polynomial quotient is similar to block matrices after a coprime factorization",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chinese remainder coordinates conjugate root multiplication matrices of monic polynomial quotients",
+   "date": "2026-10-12",
+   "results": "8 hits: PowerBasis.quotientEquivQuotientMinpolyMap_apply_mk, PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply_mk, ConjRootClass.minpoly.map_eq_prod, sum_smul_minpolyDiv_eq_X_pow, PowerBasis.quotientEquivQuotientMinpolyMap_apply, PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply, AdjoinRoot.powerBasisAux'_repr_symm_apply, RingOfIntegers.ZModXQuotSpanEquivQuotSpan_mk_apply",
+   "verdict": "Read the returned hits: quotient and power-basis equivalences are available, but none states the root-matrix CRT conjugation or its lift consequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, RingEquiv",
+   "date": "2026-10-12",
+   "results": "12 hits: AdjoinRoot.mapRingEquiv, AdjoinRoot.symm_mapRingEquiv, AdjoinRoot.coe_mapRingEquiv, AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot, AdjoinRoot.quotMapOfEquivQuotMapCMapMk, AdjoinRoot.quotEquivQuotMap_apply, AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot_mk_of, AdjoinRoot.quotEquivQuotMap_symm_apply",
+   "verdict": "Read the returned hits: quotient and power-basis equivalences are available, but none states the root-matrix CRT conjugation or its lift consequence."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientMulEquivQuotientProd|isCoprime_span_singleton_iff|AdjoinRoot.*(product|prod|equiv)",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/Data/ZMod/QuotientRing.lean, Mathlib/FieldTheory/Isaacs.lean, Mathlib/FieldTheory/Isaacs.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+   "verdict": "Read the returned hits: quotient and power-basis equivalences are available, but none states the root-matrix CRT conjugation or its lift consequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinRootCRTMatrix",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-adjoinRoot-crt-matrix"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinRootCRTRootBlock",
+  "file": "lean/Sheaf/RingTheory/AdjoinRootCRTRootBlock.lean",
+  "declaration": "Polynomial.adjoinRoot_crt_matrix_root_block",
+  "statement": "theorem adjoinRoot_crt_matrix_root_block {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)] (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X]) (hg : g.Monic) (hh : h.Monic) (hcoprime : IsCoprime g h) (hfactor : f.map (Ideal.Quotient.mk I) = g * h) : let b := (AdjoinRoot.powerBasis' hf).basis let T := Algebra.leftMulMatrix b (AdjoinRoot.root f) let Tg := Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hg).basis (AdjoinRoot.root g) let Th := Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hh).basis (AdjoinRoot.root h) ∃ (d : Fin f.natDegree ≃ (Fin g.natDegree ⊕ Fin h.natDegree)) (U : (Matrix (Fin g.natDegree ⊕ Fin h.natDegree) (Fin g.natDegree ⊕ Fin h.natDegree) (A ⧸ I))ˣ), U.val * Matrix.reindex d d (T.map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks Tg 0 0 Th",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135330-L-1698644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135330-L-1698644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

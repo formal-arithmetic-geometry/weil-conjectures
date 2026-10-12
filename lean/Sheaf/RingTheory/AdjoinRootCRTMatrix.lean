@@ -10,6 +10,9 @@ public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.LinearAlgebra.Matrix.Reindex
 public import Mathlib.RingTheory.Coprime.Basic
 
+import Sheaf.RingTheory.AdjoinRootCRTRootBlock
+import Sheaf.RingTheory.AdjoinRootCRTLiftBlock
+
 /-! # Simultaneous CRT coordinates for multiplication matrices
 
 Source: Stacks Project, Tag 09XI, proof of (3) implies (1).
@@ -61,6 +64,11 @@ theorem adjoinRoot_crt_matrix
       U.val * Matrix.reindex d d (T.map (Ideal.Quotient.mk I)) * U⁻¹.val =
         Matrix.fromBlocks Tg 0 0 Th ∧
       U.val * Matrix.reindex d d (P.map (Ideal.Quotient.mk I)) * U⁻¹.val =
-        Matrix.fromBlocks 1 0 0 0 := by sorry
+        Matrix.fromBlocks 1 0 0 0 := by
+  classical
+  dsimp
+  obtain ⟨d, U, hT⟩ := adjoinRoot_crt_matrix_root_block I f hf g h hg hh hcoprime hfactor
+  refine ⟨d, U, hT, ?_⟩
+  exact adjoinRoot_crt_matrix_lift_block I f hf g h hg hh hfactor e he₁ he₀ d U hT
 
 end Polynomial

@@ -1,0 +1,107 @@
+{
+ "id": "lem-weil-pbc-adjoinRoot-crt-matrix-lift-block",
+ "kind": "statement",
+ "title": "Lift multiplication follows from root coordinates",
+ "statement": "Let A be a commutative ring, I an ideal with nonzero R=A/I, f in A[X] monic, and g,h in R[X] monic with f.map(mk I)=g*h. Use their power bases [lem-weil-pbc-monic-quotient-free]. Let e in AdjoinRoot f have canonical images one and zero in AdjoinRoot g and AdjoinRoot h. Given an index equivalence d and a unit U such that U reindex_d(T.map(mk I)) U^-1 = blockdiag(Tg,Th) for the three root multiplication matrices, one has U reindex_d(P.map(mk I)) U^-1 = blockdiag(1,0), where P is multiplication by e. Coprimality is unnecessary once the root-coordinate identity is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, proof of (3) implies (1), the decomposition of B/IB; matrix coordinate details via monic division, CRT and power bases (https://stacks.math.columbia.edu/tag/09XI)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof": [
+  {
+   "text": "Form ring homomorphisms F (left multiplication, coefficient reduction, reindexing and conjugation) and G (block diagonal left multiplication through the two residue maps). AlgHom.commutes and scalar-matrix identities show agreement on coefficients.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The assumed root conjugation identity hT shows agreement on the root. Apply Mathlib AdjoinRoot.ringHom_ext, then evaluate at e and simplify its images one and zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "name": "V3 second reader",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, proof of (3) implies (1), the decomposition of B/IB; matrix coordinate details via monic division, CRT and power bases (https://stacks.math.columbia.edu/tag/09XI)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The matrix of multiplication by the root in a monic polynomial quotient is similar to block matrices after a coprime factorization",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chinese remainder coordinates conjugate root multiplication matrices of monic polynomial quotients",
+   "date": "2026-10-12",
+   "results": "8 hits: PowerBasis.quotientEquivQuotientMinpolyMap_apply_mk, PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply_mk, ConjRootClass.minpoly.map_eq_prod, sum_smul_minpolyDiv_eq_X_pow, PowerBasis.quotientEquivQuotientMinpolyMap_apply, PowerBasis.quotientEquivQuotientMinpolyMap_symm_apply, AdjoinRoot.powerBasisAux'_repr_symm_apply, RingOfIntegers.ZModXQuotSpanEquivQuotSpan_mk_apply",
+   "verdict": "Read the returned hits: quotient and power-basis equivalences are available, but none states the root-matrix CRT conjugation or its lift consequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdjoinRoot, RingEquiv",
+   "date": "2026-10-12",
+   "results": "12 hits: AdjoinRoot.mapRingEquiv, AdjoinRoot.symm_mapRingEquiv, AdjoinRoot.coe_mapRingEquiv, AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot, AdjoinRoot.quotMapOfEquivQuotMapCMapMk, AdjoinRoot.quotEquivQuotMap_apply, AdjoinRoot.quotAdjoinRootEquivQuotPolynomialQuot_mk_of, AdjoinRoot.quotEquivQuotMap_symm_apply",
+   "verdict": "Read the returned hits: quotient and power-basis equivalences are available, but none states the root-matrix CRT conjugation or its lift consequence."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientMulEquivQuotientProd|isCoprime_span_singleton_iff|AdjoinRoot.*(product|prod|equiv)",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/Data/ZMod/QuotientRing.lean, Mathlib/FieldTheory/Isaacs.lean, Mathlib/FieldTheory/Isaacs.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean",
+   "verdict": "Read the returned hits: quotient and power-basis equivalences are available, but none states the root-matrix CRT conjugation or its lift consequence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.AdjoinRootCRTMatrix",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-adjoinRoot-crt-matrix"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdjoinRootCRTLiftBlock",
+  "file": "lean/Sheaf/RingTheory/AdjoinRootCRTLiftBlock.lean",
+  "declaration": "Polynomial.adjoinRoot_crt_matrix_lift_block",
+  "statement": "theorem adjoinRoot_crt_matrix_lift_block {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)] (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X]) (hg : g.Monic) (hh : h.Monic) (hfactor : f.map (Ideal.Quotient.mk I) = g * h) (e : AdjoinRoot f) (he₁ : AdjoinRoot.map (Ideal.Quotient.mk I) f g (hfactor.symm ▸ dvd_mul_right g h) e = 1) (he₀ : AdjoinRoot.map (Ideal.Quotient.mk I) f h (hfactor.symm ▸ dvd_mul_left h g) e = 0) (d : Fin f.natDegree ≃ (Fin g.natDegree ⊕ Fin h.natDegree)) (U : (Matrix (Fin g.natDegree ⊕ Fin h.natDegree) (Fin g.natDegree ⊕ Fin h.natDegree) (A ⧸ I))ˣ) (hT : U.val * Matrix.reindex d d ((Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hf).basis (AdjoinRoot.root f)).map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks (Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hg).basis (AdjoinRoot.root g)) 0 0 (Algebra.leftMulMatrix (AdjoinRoot.powerBasis' hh).basis (AdjoinRoot.root h))) : let b := (AdjoinRoot.powerBasis' hf).basis let P := Algebra.leftMulMatrix b e U.val * Matrix.reindex d d (P.map (Ideal.Quotient.mk I)) * U⁻¹.val = Matrix.fromBlocks 1 0 0 0",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135330-L-1698644",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135330-L-1698644",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
