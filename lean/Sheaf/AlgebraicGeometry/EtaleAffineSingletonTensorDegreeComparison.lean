@@ -10,8 +10,6 @@ public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Degreewise affine singleton tensor comparison
 Source: Stacks Project, Tag 03P2, affine tensor-product calculation.
@@ -95,13 +93,30 @@ of the pulled-back b(k) times the restriction of m. The outer product is indexed
 by functions to Fin 1, so evaluation at its unique index is an isomorphism.
 Apply ULift and invert this evaluation to obtain e. Tensor generators prove the
 stated normalization and also make e unique. For an empty W the section groups
-and tensors are zero; for n=0 this is the ordinary affine sections formula. -/
+and tensors are zero; for n=0 this is the ordinary affine sections formula.
+Fixed-degree form: (blueprint: new-etale-affine-singleton-tensor-degree-comparison-degree) -/
+/- Fixed-degree affine tensor-section calculation. The geometric proof identifies the
+degree-n affine fibre product with the indexed tensor power, applies the affine pullback
+sections formula, and checks the displayed normalization on pure tensors; tensor
+generators then extend it to all sections. (blueprint: new-etale-affine-singleton-
+tensor-degree-comparison-degree) -/
+theorem exists_singletonTensorDegreeComparison_degree
+    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
+    (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)
+    (n : ℕ) :
+    ∃ e : (singletonTensorAmitsur X F U W g).X n ≅
+      (singletonTensorCech X F U W g).X n,
+      IsSingletonTensorDegreeComparison X F U W g n e := by sorry
+
 theorem exists_singletonTensorDegreeComparison
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left) :
     ∃ e : ∀ n : ℕ, (singletonTensorAmitsur X F U W g).X n ≅
       (singletonTensorCech X F U W g).X n,
-      ∀ n, IsSingletonTensorDegreeComparison X F U W g n (e n) := by sorry
+      ∀ n, IsSingletonTensorDegreeComparison X F U W g n (e n) := by
+  choose e he using fun n ↦
+    exists_singletonTensorDegreeComparison_degree X F U W g hU hW n
+  exact ⟨e, he⟩
 
 end
 end AlgebraicGeometry.Scheme
