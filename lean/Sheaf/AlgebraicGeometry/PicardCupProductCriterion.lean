@@ -6,6 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageRankLocus
+import Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux
 
 /-! # The cup-product criterion for the Picard evaluation map
 
@@ -69,6 +70,8 @@ theorem exists_picardCupProductCriterion {X S : Scheme.{u}} (f : X ⟶ S)
           IsIso ((Classical.choose
             (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).counit.app
               ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E)) := by
-  sorry
+  have hD := picard_dual_directImage_isFiniteLocallyFree f hO E j hW
+  refine ⟨hD, ?_⟩
+  exact picard_cupProductCriterion_of_finiteLocallyFree f hO E j hW hD
 
 end AlgebraicGeometry.Scheme

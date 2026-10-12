@@ -1,0 +1,108 @@
+{
+ "id": "new-picard-cup-product-equivalence",
+ "kind": "statement",
+ "title": "Cup product criterion after finite local freeness",
+ "statement": "Under the hypotheses of lem-sc-picard-cup-product-criterion, and assuming the direct image of the pulled-back dual module is finite locally free, there exists a morphism from that direct image to the dual of the direct image of the module whose pullback is invertible exactly when the canonical adjunction counit is invertible after every base change.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final two proof paragraphs, cup product and local dual bases, before the determinant-open assertion"
+ },
+ "stmt_deps": [
+  "lem-sc-picard-cup-product-criterion"
+ ],
+ "proof": [
+  {
+   "text": "Use the local finite-free rank decomposition and dual-basis argument described in the Stacks Project proof.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "final two proof paragraphs, cup product and local dual bases, before the determinant-open assertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat family with universal pushforward of the structure sheaf equal to the structure sheaf and universally rank matched direct images, the transpose of cup product between the direct images of a vector bundle and its dual is an isomorphism if and only if the adjunction counit is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cup product pairing between the direct images of a vector bundle and its dual is perfect if and only if the pullback pushforward evaluation counit is invertible, under equal rank and base change assumptions",
+   "results": "8 hits: FGModuleCat.exactPairing, LinearMap.toPerfPair, LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.compl₁₂, LinearMap.apply_toPerfPair_flip, LinearMap.IsPerfPair.congr, LinearEquiv.instIsPerfPair, RootPairing.isPerfPair_toLinearMap",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cup.?product.*counit|counit.*cup.?product|[Pp]erfect[Pp]airing",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardCupProductCriterion",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-cup-product-criterion",
+   "place": "stage-3 decomposition of the proof",
+   "via": [
+    "lem-sc-picard-cup-product-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardCupProductCriterionAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardCupProductCriterionAux.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_cupProductCriterion_of_finiteLocallyFree",
+  "statement": "theorem picard_cupProductCriterion_of_finiteLocallyFree {X S : Scheme.{u}} (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f] (hO : ∀ {T : Scheme.{u}} (g : T ⟶ S), IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction (pullback.snd f g))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (E : X.Modules) [E.IsFiniteLocallyFree] {W : Scheme.{u}} (j : W ⟶ S) (hW : ∀ {T : Scheme.{u}} (h : T ⟶ W), PicardDirectImageRankCondition f E (h ≫ j)) (hD : ((Modules.pushforward (pullback.snd f j)).obj ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))).IsFiniteLocallyFree) : ∃ φ : ((Modules.pushforward (pullback.snd f j)).obj ((Modules.tensorPullback (pullback.fst f j)).obj (Modules.dual E))) ⟶ Modules.dual ((Modules.pushforward (pullback.snd f j)).obj ((Modules.tensorPullback (pullback.fst f j)).obj E)), ∀ {T : Scheme.{u}} (h : T ⟶ W), IsIso ((Modules.tensorPullback h).map φ) ↔ IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction (pullback.snd f (h ≫ j)))).counit.app ((Modules.tensorPullback (pullback.fst f (h ≫ j))).obj E))",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T220521-L-1393803",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T220521-L-1393803",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
