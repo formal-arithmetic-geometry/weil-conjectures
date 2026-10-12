@@ -8906,3 +8906,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/D2/Sheaf.Paper.StrictHenselianStalkSectionsComparisonIso (stage 3; reviewer PASS; first push; landing 20261012T184248-L-3998926 (interface); batch 20261012T184234; modules 4; new nodes 3)
 - 18:42 L: merged deliver/D3/Sheaf.AlgebraicGeometry.AffineCohomologyLocalization (stage 3; reviewer PASS; first push; landing 20261012T184248-L-3999160 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/D3/Sheaf.CategoryTheory.AbutmentFinitePageComparison (stage 3; reviewer PASS; first push; landing 20261012T184248-L-3999316 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:42 L: merged deliver/D3/Sheaf.RingTheory.StrictlyStandardBaseChange (stage 3; reviewer PASS; first push; landing 20261012T184249-L-3999454 (proof); batch 20261012T184234; modules 1; new nodes 0)
