@@ -6138,3 +6138,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:36 L: returned deliver/V1/Sheaf.Paper.StrictHenselianZariskiEtaleComparison (reviewer RETURN: (reviewer X-bac03, head bac0379e6) E2 / H3 (review point 4): lean/Sheaf/Paper/StrictHenselianZariskiEtaleComparison.lean)
 - 05:36 L: returned deliver/F2/Sheaf.RingTheory.EtaleResidueTriplesSurjective (reviewer RETURN: (reviewer X-1f505, head 1f5058930) C2: In dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-triples-colimit-polynomial)
 - 05:39 L: returned deliver/A2/Sheaf.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization (reviewer RETURN: (the landing tools, head 53a1d7788) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 05:39 L: returned deliver/C2/Sheaf.RingTheory.EtaleResidueTriplesColimit (reviewer RETURN: (the landing tools, head 056831630) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
