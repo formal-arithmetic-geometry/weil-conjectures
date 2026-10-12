@@ -1,6 +1,6 @@
 # Work queue
 
-50 items; claim with `tools/claim.py next <group> [--stage N]`.
+53 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -24,21 +24,25 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (40)
+## Stage 3: modules to prove (43)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty` | 0 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial` | 1 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 7 | proof |
+| `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 6 | proof |
+| `Sheaf.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
+| `WeilConjectures.ConstructibleSheaf.KernelCokernel` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
+| `WeilConjectures.SixFunctors.Etale.Gabber` | 2 | 5 | proof |
 | `Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions` | 3 | 1 | proof |
@@ -57,7 +61,6 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit` | 4 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder` | 5 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `Sheaf.Topology.FiniteClosedCoverCohomologyVanishing` | 6 | 1 | proof |
 | `Sheaf.Topology.IrreducibleIntegerExtensionVanishing` | 6 | 1 | proof |
@@ -73,4 +76,4 @@ Waiting, not claimable: 1 modules whose proof uses a node that has no Lean decla
 
 | module | distance to a target | sorry |
 |---|---|---|
-| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 4 | 4 |
+| `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 4 |
