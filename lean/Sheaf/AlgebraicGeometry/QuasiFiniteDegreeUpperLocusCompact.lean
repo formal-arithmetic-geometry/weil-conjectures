@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompactAux
 
 /-! # Quasi-compactness of upper fibre-degree loci -/
 
@@ -49,6 +50,9 @@ theorem isCompact_successor_degree_locus_inter_affine {X S : Scheme.{u}} (f : X 
     (hWge : ∀ s : S, s ∈ W → r ≤ (f.fiberToSpecResidueField s).finrankΓ) :
     IsCompact ({s : S | r + 1 ≤ (f.fiberToSpecResidueField s).finrankΓ} ∩
       (W : Set S)) := by
-  sorry
+  obtain ⟨U, hUcompact, hUeq⟩ :=
+    exists_compact_open_successor_degree_locus_inter_affine f hf r W hW hclosed hdegree hWge
+  rw [← hUeq]
+  exact hUcompact
 
 end AlgebraicGeometry.Scheme.Hom
