@@ -29,9 +29,10 @@ of étale sheaves on `X`, where `μₙ` is the sheaf of `n`-th roots of unity on
 ## Proof
 
 We argue on sheaves rather than on stalks. The Kummer sequence `0 ⟶ μₙ ⟶ 𝔾ₘ ⟶ 𝔾ₘ ⟶ 0` on
-`Spec k(X)` and `R¹η_* 𝔾ₘ = 0` (`AlgebraicGeometry.Scheme.epi_lowerStar_map_cokernelπ_upperStar_gmSheaf`,
-Hilbert 90) identify `R¹η_* μₙ` with the cokernel of multiplication by `n` on `η_* 𝔾ₘ`, the
-quotient map being the Kummer coboundary. The divisor sequence
+`Spec k(X)` and `R¹η_* 𝔾ₘ = 0` (Hilbert 90, see
+`AlgebraicGeometry.Scheme.epi_lowerStar_map_cokernelπ_upperStar_gmSheaf`) identify `R¹η_* μₙ`
+with the cokernel of multiplication by `n` on `η_* 𝔾ₘ`, the quotient map being the Kummer
+coboundary. The divisor sequence
 `0 ⟶ 𝔾ₘ ⟶ η_* 𝔾ₘ ⟶ ⨁_x i_{x*} ℤ ⟶ 0` (`AlgebraicGeometry.Scheme.shortExact_divisorSequence`),
 on whose first term multiplication by `n` is an epimorphism by the Kummer sequence on `X`,
 identifies this cokernel with the cokernel of `n` on `⨁_x i_{x*} ℤ`, which is
@@ -123,7 +124,7 @@ lemma nsmul_id_comp_pointConstantIntToZMod (x : X) :
   have : n • 𝟙 (X.pointConstantInt x) =
       (Etale.lowerStar AddCommGrpCat.{u + 1} (X.fromSpecResidueField x)).map
         ((constantSheaf _ AddCommGrpCat.{u + 1}).map (n • 𝟙 _)) := by
-    simp [pointConstantInt, Functor.map_nsmul]
+    simp [pointConstantInt]
   rw [this, pointConstantIntToZMod, ← Functor.map_comp, ← Functor.map_comp,
     AddCommGrpCat.nsmul_id_comp_uliftIntToZMod, Functor.map_zero, Functor.map_zero]
 
@@ -203,11 +204,15 @@ theorem isZero_rightDerived_one_lowerStar_gmSheaf_fromSpecFunctionField :
 
 variable {X n}
 
+omit [IsNoetherian X] [IsRegular X] in
+/-- An integer invertible on `X` is invertible on the generic point of `X`. -/
 lemma isUnit_natCast_functionField (hn : IsUnit (n : Γ(X, ⊤))) :
     IsUnit (n : Γ(Spec X.functionField, ⊤)) := by
   simpa using hn.map X.fromSpecFunctionField.appTop.hom
 
+omit [IsNoetherian X] [IsRegular X] in
 variable (n) in
+/-- The direct image of the `n`-th power map of `𝔾ₘ` is the `n`-th power map. -/
 lemma lowerStar_map_kummerSequence_g :
     (Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).map
       ((Spec X.functionField).kummerSequence n).g = n • 𝟙 ((Etale.lowerStar AddCommGrpCat.{u + 1}
@@ -216,11 +221,13 @@ lemma lowerStar_map_kummerSequence_g :
     (n • 𝟙 (Spec X.functionField).gmSheaf) = _
   rw [Functor.map_nsmul, CategoryTheory.Functor.map_id]
 
+omit [IsNoetherian X] [IsRegular X] in
 variable (n) in
 /-- The Kummer coboundary `η_* 𝔾ₘ ⟶ R¹η_* μₙ` along the generic point `η : Spec k(X) ⟶ X`: the
 connecting morphism of the long exact sequence of the right derived functors of `η_*` attached
 to the Kummer sequence `0 ⟶ μₙ ⟶ 𝔾ₘ ⟶ 𝔾ₘ ⟶ 0` on `Spec k(X)`. On the sections over an étale
-`X`-scheme `V` it sends a rational function on `V` to its Kummer class. -/
+`X`-scheme `V`, it is classically described as sending a rational function on `V` to its
+Kummer class. -/
 def genericKummerδ (hn : IsUnit (n : Γ(X, ⊤))) :
     (Etale.lowerStar AddCommGrpCat.{u + 1} X.fromSpecFunctionField).obj
         (Spec X.functionField).gmSheaf ⟶
@@ -229,6 +236,7 @@ def genericKummerδ (hn : IsUnit (n : Γ(X, ⊤))) :
   ((Spec X.functionField).kummerSequence_shortExact n
     (isUnit_natCast_functionField hn)).rightDerivedZeroδ _
 
+omit [IsNoetherian X] [IsRegular X] in
 @[reassoc (attr := simp)]
 lemma nsmul_id_comp_genericKummerδ (hn : IsUnit (n : Γ(X, ⊤))) :
     (n • 𝟙 _) ≫ genericKummerδ n hn = 0 := by
@@ -251,6 +259,7 @@ section Divisors
 
 variable (hX : topologicalKrullDim X = 1)
 
+omit [IsNoetherian X] [IsRegular X] in
 include hX in
 /-- On an integral scheme of dimension one, the points of codimension one are the closed
 points. -/
@@ -262,18 +271,21 @@ variable (n)
   (cD : Cofan fun x : {x : X // coheight x = 1} ↦ X.pointConstantInt x.1) (hcD : IsColimit cD)
   (c : Cofan fun x : {x : X // IsClosed ({x} : Set X)} ↦ X.pointConstantZMod n x.1)
 
+omit [IsNoetherian X] [IsRegular X] in
 /-- The reduction map `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ ⟶ ⨁_{x closed} i_{x*} ℤ/n` of an integral scheme of
 dimension one, between the vertices of a colimit cofan `cD` and of a cofan `c`. -/
 def divisorsModNMap : cD.pt ⟶ c.pt :=
   Cofan.IsColimit.desc hcD fun x ↦
     X.pointConstantIntToZMod n x.1 ≫ c.inj (coheightOneEquivClosedPoints hX x)
 
+omit [IsNoetherian X] [IsRegular X] in
 @[reassoc (attr := simp)]
 lemma inj_divisorsModNMap (x : {x : X // coheight x = 1}) :
     cD.inj x ≫ divisorsModNMap n hX cD hcD c =
       X.pointConstantIntToZMod n x.1 ≫ c.inj (coheightOneEquivClosedPoints hX x) :=
   Cofan.IsColimit.fac _ _ _
 
+omit [IsNoetherian X] [IsRegular X] in
 @[reassoc (attr := simp)]
 lemma nsmul_id_comp_divisorsModNMap :
     (n • 𝟙 cD.pt) ≫ divisorsModNMap n hX cD hcD c = 0 := by
@@ -281,6 +293,7 @@ lemma nsmul_id_comp_divisorsModNMap :
   rw [Limits.comp_zero, ← nsmul_id_comp_eq_comp_nsmul_id_assoc, inj_divisorsModNMap,
     nsmul_id_comp_pointConstantIntToZMod_assoc, Limits.zero_comp]
 
+omit [IsNoetherian X] [IsRegular X] in
 /-- The reduction map `⨁_{x ∈ X⁽¹⁾} i_{x*} ℤ ⟶ ⨁_{x closed} i_{x*} ℤ/n` is a cokernel of
 multiplication by `n`. -/
 def isColimitDivisorsModNMap (hc : IsColimit c) :
@@ -382,9 +395,9 @@ lemma genericKummerResidueIso_spec
     (hcD : IsColimit cD) :
     X.genericGmIso.hom ≫ genericKummerδ n hn ≫ (genericKummerResidueIso hX hn c hc).hom =
       X.divisorSequenceMap cD hcD ≫ divisorsModNMap n hX cD hcD c := by
-  haveI : HasColimitsOfSize.{u + 1, u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+  have : HasColimitsOfSize.{u + 1, u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
     IsGrothendieckAbelian.hasColimits _
-  haveI : HasColimitsOfSize.{u, u} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+  have : HasColimitsOfSize.{u, u} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
     hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} _
   rw [← Category.assoc]
   refine (IsColimit.comp_coconePointUniqueUpToIso_hom
