@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-smooth-conormal-chart-differential-basis",
+ "kind": "statement",
+ "title": "A differential basis for the stabilized smooth conormal chart",
+ "statement": "Let R be a commutative ring, n,c natural numbers, P=R[x_1,...,x_n], f:Fin c -> P, J=span(range f), and C=P/J [def-weil-pbc-mv-polynomial-ring]. Suppose C is smooth over R [def-weil-pbc-smooth-ring-map] and a C-basis of J/J^2 indexed by Fin c is given. For every g in D=C[y_1,...,y_c], the module of Kahler differentials Omega(D_g/R) [def-weil-pbc-kahler-differentials] has a D_g-basis indexed by Fin n [def-weil-ring-localization-away]. This statement uses no map from P to D_g and no unramifiedness assumption.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma 07CH, split conormal sequence and polynomial extension; localization via Tags 00RV and 00RX, source checked at https://stacks.math.columbia.edu/tag/07CH"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Apply Algebra.FormallySmooth.iff_split_injection to the quotient P -> C. The exact conormal sequence and Function.Exact.split_tfae' give C tensor_P Omega(P/R) isomorphic to (J/J^2) times Omega(C/R). Identify the quotient kernel with J by Ideal.mk_ker and Ideal.Cotangent.equivOfEq, and extend the P-linear splitting to C using surjectivity of P -> C.",
+   "uses": [
+    "lem-weil-pbc-presentation-split-conormal-smooth",
+    "lem-weil-pbc-jacobi-zariski-differential-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The base-changed polynomial differential basis and the given conormal basis identify C^n with Omega(C/R) times C^c. Base-change this equivalence to D. Distribute tensor products over the product and identify D tensor_C C^c with D^c using TensorProduct.equivPiOfFiniteBasis. Apply KaehlerDifferential.exists_polynomial_extension_equiv to identify the result with Omega(D/R), giving a Fin n basis.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-kahler-differentials-polynomial-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base-change the constructed basis along D -> D_g. The formally etale localization equivalence KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale R D D_g identifies its underlying module with Omega(D_g/R). The resulting basis is the asserted witness, with no unproved data chosen.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-kahler-differentials-polynomial-extension",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-presentation-split-conormal-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Linear-algebra form of the split conormal sequence in 07CH, combined with the proved polynomial-extension and localization identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A smooth polynomial quotient with free conormal module has free differentials after adjoining variables of conormal rank",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differentials smooth quotient polynomial extension conormal free basis",
+   "results": "mvPolynomialBasis, IsStandardSmooth.free_kaehlerDifferential and SubmersivePresentation.basisKaehler; none is the stabilized conormal-chart basis statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Standard-smoothness hypotheses are not supplied here."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Module.Basis",
+   "results": "Polynomial and submersive-presentation bases; no exact stabilized quotient basis.",
+   "date": "2026-10-13",
+   "verdict": "Use existing polynomial basis as an ingredient."
+  },
+  {
+   "tool": "grep",
+   "query": "split_tfae|tensorKaehlerEquivOfFormallyEtale|exists_polynomial_extension_equiv|basis.*conormal; rg on lean/Sheaf and Mathlib/RingTheory",
+   "results": "Smooth.Basic splitting, Etale.Kaehler localization equivalence, and the already proved Sheaf KaehlerDifferentialsPolynomialExtension decomposition. No duplicate theorem found.",
+   "date": "2026-10-13",
+   "verdict": "Combine existing ingredients; no new sorry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.UnramifiedSmoothConormalChartFlat",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-unramified-smooth-conormal-chart-flat",
+   "place": "Step 1, split conormal sequence stabilized by c polynomial variables",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothConormalChartDifferentialBasis",
+  "file": "lean/Sheaf/RingTheory/SmoothConormalChartDifferentialBasis.lean",
+  "declaration": "KaehlerDifferential.nonempty_basis_smooth_conormal_chart",
+  "statement": "theorem nonempty_basis_smooth_conormal_chart\n    (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)\n    [Algebra.Smooth R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))]\n    (b : Module.Basis (Fin c)\n      (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))\n      (Ideal.span (Set.range f)).Cotangent)\n    (g : MvPolynomial (Fin c) (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f))) :\n    Nonempty (Module.Basis (Fin n) (Localization.Away g)\n      (KaehlerDifferential R (Localization.Away g)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93e3b",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T231633-L-1961725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93e3b",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T231633-L-1961725",
+  "kind": "interface",
+  "note": "independent Codex review: Lean declarations match their node statements; existing signature is byte-identical; both delivered modules and direct importer Sheaf.RingTheory.SmoothConormalBasisEtalePolynomialChart compile cleanly; both proved declarations use only permitted axioms; public PDeriv visibility and the unit route remain intact."
+ }
+}
