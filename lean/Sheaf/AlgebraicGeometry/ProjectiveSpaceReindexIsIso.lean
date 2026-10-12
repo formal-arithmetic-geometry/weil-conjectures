@@ -6,8 +6,7 @@ Authors: SHEAF group C2
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexChart
 
 /-! # Invertibility of the coordinate reindexing morphism
 
@@ -53,6 +52,80 @@ theorem isIso_homOfIsFreeGenerator_reindex (β γ : Type u) (b : γ ≃ β)
       isFreeGenerator_pullbackSection_twistOneSection (𝟙 ℙ(β; S)) (b j)
     let hU : ⨆ j, U j = ⊤ := (b.iSup_comp).trans (iSup_standardOpen β S)
     IsIso (homOfIsFreeGenerator s U hs (ℙ(β; S) ↘ S) hU) := by
-  sorry
+  dsimp only
+  let φ := homOfIsFreeGenerator
+    (fun j : γ ↦ Scheme.Modules.pullbackSection (𝟙 ℙ(β; S))
+      (twistOneSection β S (b j)))
+    (fun j : γ ↦ standardOpen β S (b j))
+    (fun j : γ ↦ isFreeGenerator_pullbackSection_twistOneSection (𝟙 ℙ(β; S)) (b j))
+    (ℙ(β; S) ↘ S) ((b.iSup_comp).trans (iSup_standardOpen β S))
+  let ψ := homOfIsFreeGenerator
+    (fun j : β ↦ Scheme.Modules.pullbackSection (𝟙 ℙ(γ; S))
+      (twistOneSection γ S (b.symm j)))
+    (fun j : β ↦ standardOpen γ S (b.symm j))
+    (fun j : β ↦
+      isFreeGenerator_pullbackSection_twistOneSection (𝟙 ℙ(γ; S)) (b.symm j))
+    (ℙ(γ; S) ↘ S) ((b.symm.iSup_comp).trans (iSup_standardOpen γ S))
+  have hφ := ι_homOfIsFreeGenerator_reindex β γ b S
+  have hψ := ι_homOfIsFreeGenerator_reindex γ β b.symm S
+  dsimp only at hφ hψ
+  change IsIso φ
+  refine ⟨⟨ψ, ?_, ?_⟩⟩
+  · apply Scheme.Opens.hom_ext_of_iSup_eq_top
+      (fun i : γ ↦ standardOpen β S (b i))
+      ((b.iSup_comp).trans (iSup_standardOpen β S))
+    intro i
+    rw [← Category.assoc, hφ i (b i) rfl]
+    simp only [Category.assoc]
+    rw [hψ (b i) i (b.symm_apply_apply i)]
+    simp only [Iso.inv_hom_id_assoc]
+    have hc :
+        AffineSpace.reindex
+          (fun j : {j : γ // j ≠ i} ↦
+            (⟨b j.1, fun he ↦ j.2 (b.injective (he.trans rfl))⟩ :
+              {j : β // j ≠ b i})) S ≫
+        AffineSpace.reindex
+          (fun j : {j : β // j ≠ b i} ↦
+            (⟨b.symm j.1, fun he ↦
+              j.2 (b.symm.injective (he.trans (b.symm_apply_apply i).symm))⟩ :
+              {j : γ // j ≠ i})) S = 𝟙 _ := by
+      apply AffineSpace.hom_ext
+      · simp
+      · intro j
+        simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+          AffineSpace.reindex_appTop_coord, Scheme.Hom.id_appTop, CommRingCat.id_apply]
+        congr 1
+        apply Subtype.ext
+        exact b.apply_symm_apply j.1
+    rw [reassoc_of% hc]
+    simp
+  · apply Scheme.Opens.hom_ext_of_iSup_eq_top
+      (fun i : β ↦ standardOpen γ S (b.symm i))
+      ((b.symm.iSup_comp).trans (iSup_standardOpen γ S))
+    intro i
+    rw [← Category.assoc, hψ i (b.symm i) rfl]
+    simp only [Category.assoc]
+    rw [hφ (b.symm i) i (b.apply_symm_apply i)]
+    simp only [Iso.inv_hom_id_assoc]
+    have hc :
+        AffineSpace.reindex
+          (fun j : {j : β // j ≠ i} ↦
+            (⟨b.symm j.1, fun he ↦ j.2 (b.symm.injective (he.trans rfl))⟩ :
+              {j : γ // j ≠ b.symm i})) S ≫
+        AffineSpace.reindex
+          (fun j : {j : γ // j ≠ b.symm i} ↦
+            (⟨b j.1, fun he ↦
+              j.2 (b.injective (he.trans (b.apply_symm_apply i).symm))⟩ :
+              {j : β // j ≠ i})) S = 𝟙 _ := by
+      apply AffineSpace.hom_ext
+      · simp
+      · intro j
+        simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+          AffineSpace.reindex_appTop_coord, Scheme.Hom.id_appTop, CommRingCat.id_apply]
+        congr 1
+        apply Subtype.ext
+        exact b.symm_apply_apply j.1
+    rw [reassoc_of% hc]
+    simp
 
 end AlgebraicGeometry.ProjectiveSpace
