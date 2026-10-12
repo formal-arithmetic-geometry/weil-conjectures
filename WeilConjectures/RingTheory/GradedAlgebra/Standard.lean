@@ -303,6 +303,72 @@ theorem finite_away {l₀ l₁ : S} (h₀ : l₀ ∈ 𝒜 1) (h₁ : l₁ ∈ �
   obtain ⟨n, x, hx, rfl⟩ := Away.mk_surjective 𝒜 h₀ z
   exact key n x hx
 
+/-- Let `S` be a standard graded `k`-algebra whose degree-one part is spanned by a family
+`l : ι → S₁`. Then the degree-zero part `S_(lᵢ)` of `S[lᵢ⁻¹]` is generated as a `k`-algebra
+by the quotients `lⱼ / lᵢ`. -/
+theorem adjoin_away_eq_top {ι : Type*} {l : ι → S} (hl : ∀ j, l j ∈ 𝒜 1)
+    (hspan : 𝒜 1 ≤ Submodule.span k (Set.range l)) (i : ι) :
+    Algebra.adjoin k (Set.range fun j ↦ Away.mk 𝒜 (hl i) 1 (l j) (by simpa using hl j)) =
+      ⊤ := by
+  set R := Algebra.adjoin k (Set.range fun j ↦ Away.mk 𝒜 (hl i) 1 (l j) (by simpa using hl j))
+  have hspan' : Submodule.span k (Set.range l) ≤ 𝒜 (1 • 1) := Submodule.span_le.mpr (by
+    rintro _ ⟨j, rfl⟩
+    simpa using hl j)
+  have hL (x : S) (hx : x ∈ Submodule.span k (Set.range l)) (hx' : x ∈ 𝒜 (1 • 1)) :
+      Away.mk 𝒜 (hl i) 1 x hx' ∈ R := by
+    induction hx using Submodule.span_induction with
+    | mem x hx =>
+      obtain ⟨j, rfl⟩ := hx
+      exact Algebra.subset_adjoin ⟨j, rfl⟩
+    | zero =>
+      rw [Away.mk_zero]
+      exact zero_mem R
+    | add x y hx hy ihx ihy =>
+      rw [Away.mk_add 𝒜 (hl i) 1 x y (hspan' hx) (hspan' hy)]
+      exact add_mem (ihx _) (ihy _)
+    | smul c x hx ih =>
+      rw [Away.mk_smul 𝒜 (hl i) 1 c x (hspan' hx)]
+      exact Subalgebra.smul_mem R (ih _) c
+  have key (n : ℕ) (x : S) (hx : x ∈ 𝒜 (n • 1)) : Away.mk 𝒜 (hl i) n x hx ∈ R := by
+    induction n generalizing x with
+    | zero =>
+      have hx0 : x ∈ (1 : Submodule k S) := by
+        rw [← grade_zero_eq_one (𝒜 := 𝒜)]
+        simpa using hx
+      obtain ⟨c, rfl⟩ := Submodule.mem_one.mp hx0
+      have h1 : (1 : S) ∈ 𝒜 (0 • 1) := by simpa using SetLike.GradedOne.one_mem (A := 𝒜)
+      have : Away.mk 𝒜 (hl i) 0 (algebraMap k S c) hx = c • Away.mk 𝒜 (hl i) 0 1 h1 := by
+        rw [← Away.mk_smul]
+        congr 1
+        exact Algebra.algebraMap_eq_smul_one c
+      rw [this, Away.mk_one]
+      exact Subalgebra.smul_mem R (one_mem R) c
+    | succ n ih =>
+      have hx' : x ∈ 𝒜 1 * 𝒜 n := by
+        rw [grade_eq_pow 𝒜 n, ← pow_succ', ← grade_eq_pow 𝒜 (n + 1)]
+        simpa using hx
+      revert hx
+      induction hx' using Submodule.mul_induction_on' with
+      | mem_mul_mem a ha y hy =>
+        intro hx
+        have hyn : y ∈ 𝒜 (n • 1) := by simpa using hy
+        have ha' : a ∈ 𝒜 (1 • 1) := by simpa using ha
+        rw [Away.mk_eq_mk_of_mul_pow_eq 𝒜 (hl i) hx
+          (add_smul 1 n 1 ▸ SetLike.mul_mem_graded ha' hyn) (by rw [add_comm 1 n]),
+          ← Away.mk_mul 𝒜 (hl i) 1 n a y ha' hyn]
+        exact mul_mem (hL a (hspan ha) ha') (ih y hyn)
+      | add a ha b hb iha ihb =>
+        intro hx
+        have hle (z : S) (hz : z ∈ 𝒜 1 * 𝒜 n) : z ∈ 𝒜 ((n + 1) • 1) := by
+          have : 𝒜 1 * 𝒜 n ≤ 𝒜 (1 + n) :=
+            Submodule.mul_le.mpr fun a ha b hb => SetLike.mul_mem_graded ha hb
+          simpa [add_comm] using this hz
+        rw [Away.mk_add 𝒜 (hl i) _ a b (hle a ha) (hle b hb)]
+        exact add_mem (iha _) (ihb _)
+  refine eq_top_iff.mpr fun z _ => ?_
+  obtain ⟨n, x, hx, rfl⟩ := Away.mk_surjective 𝒜 (hl i) z
+  exact key n x hx
+
 end IsStandard
 
 end GradedAlgebra
