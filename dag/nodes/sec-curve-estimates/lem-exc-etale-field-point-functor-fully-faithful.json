@@ -1,125 +1,120 @@
 {
-  "id": "lem-exc-etale-field-point-functor-fully-faithful",
-  "kind": "statement",
-  "title": "Full faithfulness of the concrete geometric-point functor",
-  "statement": "Let K be a field [def-pc-field-extension], Ksep a separable closure, and G=Gal(Ksep/K) with its Krull topology. For etale K-schemes [def-weil-etale-morphism], let P be the functor taking X to the continuous discrete G-set Hom_K(Spec Ksep,X), whose action is constructed in [lem-exc-etale-field-geometric-action-continuous], and taking a map to postcomposition. Then P is full and faithful: every equivariant map P(X)->P(Y) comes from a unique K-morphism X->Y.",
-  "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03QR, Lemma lemma-sheaves-point; read at https://stacks.math.columbia.edu/tag/03QR; full-faithfulness part of the equivalence, using finite-spectrum Galois classification"
+ "id": "lem-exc-etale-field-point-functor-fully-faithful",
+ "kind": "statement",
+ "title": "Full faithfulness of the concrete geometric-point functor",
+ "statement": "Let K be a field [def-pc-field-extension], Ksep a separable closure, and G=Gal(Ksep/K) with its Krull topology. For etale K-schemes [def-weil-etale-morphism], let P be the functor taking X to the continuous discrete G-set Hom_K(Spec Ksep,X), whose action is constructed in [lem-exc-etale-field-geometric-action-continuous], and taking a map to postcomposition. Then P is full and faithful: every equivariant map P(X)->P(Y) comes from a unique K-morphism X->Y.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR, Lemma lemma-sheaves-point; read at https://stacks.math.columbia.edu/tag/03QR; full-faithfulness part of the equivalence, using finite-spectrum Galois classification"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-etale-morphism",
+  "lem-exc-etale-field-geometric-action-continuous"
+ ],
+ "proof": [
+  {
+   "text": "Realize an equivariant map on neighbourhoods using [lem-exc-etale-field-point-map-local]. On each overlap, [lem-exc-etale-field-geometric-points-detect] shows that both local maps coincide, since they induce the same geometric-point map. Glue them with Scheme.Cover.glueMorphisms. Cover extensionality proves the base equation; factor each geometric point through a covering open to check the glued map induces the original action morphism.",
+   "uses": [
+    "lem-exc-etale-field-point-map-local",
+    "lem-exc-etale-field-geometric-points-detect"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-pc-field-extension",
-    "def-weil-etale-morphism",
-    "lem-exc-etale-field-geometric-action-continuous"
-  ],
-  "proof": [
-    {
-      "text": "Use the S=Spec K specialization of the fibre decomposition [lem-weil-pbc-etale-fibre-discrete-separable-points], and the canonical identification with the fibre over the unique point of Spec K, to write each etale K-scheme as the disjoint union of singleton open spectra of finite separable extensions of K. Geometric points of the coproduct factor through a unique component.",
-      "uses": [
-        "lem-weil-pbc-etale-fibre-discrete-separable-points"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The embedding G-set on each source component is nonempty and transitive by [lem-exc-etale-field-galois-classification]. Hence an equivariant map takes it into exactly one target orbit. That node gives a bijection between equivariant maps of these embedding sets and K-morphisms of the corresponding spectra.",
-      "uses": [
-        "lem-exc-etale-field-galois-classification"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Assemble the unique component maps by the coproduct universal property. Their geometric-point maps are the prescribed equivariant map, proving fullness. Any two K-morphisms with the same geometric-point map coincide on every component by the same finite-spectrum Hom-bijection, hence coincide by the coproduct universal property, proving faithfulness. The argument also covers empty coproducts.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-exc-etale-field-galois-classification",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Tag 03QR; full-faithfulness part of the equivalence, using finite-spectrum Galois classification"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Galois action on geometric points of an etale scheme is continuous with open stabilizers",
-      "results": "Unavailable: Internal Server Error from service (msearch.py).",
-      "date": "2026-10-12"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "geometric point functor etale schemes field full faithful essentially surjective Galois action",
-      "results": "Scheme.Etale.forgetFullyFaithful concerns the forgetful functor to Over, not the geometric-point functor. Scheme.SpecToEquivOfField describes individual geometric points. No exact categorical equivalence or full-faithfulness/essential-surjectivity result.",
-      "date": "2026-10-12",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "continuousSMul_iff_stabilizer_isOpen",
-      "results": "General criterion for continuity of discrete group actions; used for the proved continuity node.",
-      "date": "2026-10-12",
-      "verdict": "tool, not an exact statement"
-    },
-    {
-      "tool": "grep",
-      "query": "rg pointSmallEtale|DiscreteContAction|etaleFieldGsets|galois.*Equivalence lean/WeilConjectures lean/Sheaf; rg stabilizer.*Open Mathlib/FieldTheory Mathlib/Topology/Algebra",
-      "results": "Mathlib provides exists_fac_of_etale_of_isSepClosed and pointSmallEtaleFiberObjToPreimage_surjective, used to prove covers; stabilizer_isOpen_of_isIntegral and continuousSMul_iff_stabilizer_isOpen prove continuity. Existing library supplies finite-field classification and fibre decomposition, but not the passage to arbitrary etale schemes.",
-      "date": "2026-10-12",
-      "verdict": "tools found; no exact result for the categorical gaps"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.EtaleFieldGsets",
-    "date": "2026-10-12",
-    "group": "K1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-exc-field-discrete-modules",
-      "place": "proof, first paragraph: finite etale objects correspond to finite continuous G-sets; full-faithfulness part of the equivalence, using finite-spectrum Galois classification",
-      "via": [
-        "lem-exc-etale-field-gsets"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-h2",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.EtaleFieldPointFunctor",
-    "file": "lean/Sheaf/AlgebraicGeometry/EtaleFieldPointFunctor.lean",
-    "declaration": "AlgebraicGeometry.etaleFieldPointFunctor_fullyFaithful",
-    "statement": "theorem etaleFieldPointFunctor_fullyFaithful : (etaleFieldPointFunctor K Ksep).Full ∧ (etaleFieldPointFunctor K Ksep).Faithful",
-    "branch": "sheaf-dag",
-    "by": "K1",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "K1",
-    "result": "pass",
-    "landing": "20261012T085256-L-21906",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "K1",
-    "result": "pass",
-    "landing": "20261012T085256-L-21906",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "For faithfulness, equality of action morphisms gives equality after every geometric point. Apply [lem-exc-etale-field-geometric-points-detect] and the faithful forgetful functor from etale objects to Over.",
+   "uses": [
+    "lem-exc-etale-field-geometric-points-detect"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-exc-etale-field-geometric-points-detect",
+  "lem-exc-etale-field-point-map-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 03QR; finite-spectrum local realization followed by proved gluing and geometric-point detection"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois action on geometric points of an etale scheme is continuous with open stabilizers",
+   "results": "Unavailable: Internal Server Error from service (msearch.py).",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "geometric point functor etale schemes field full faithful essentially surjective Galois action",
+   "results": "Scheme.Etale.forgetFullyFaithful concerns the forgetful functor to Over, not the geometric-point functor. Scheme.SpecToEquivOfField describes individual geometric points. No exact categorical equivalence or full-faithfulness/essential-surjectivity result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "continuousSMul_iff_stabilizer_isOpen",
+   "results": "General criterion for continuity of discrete group actions; used for the proved continuity node.",
+   "date": "2026-10-12",
+   "verdict": "tool, not an exact statement"
+  },
+  {
+   "tool": "grep",
+   "query": "rg pointSmallEtale|DiscreteContAction|etaleFieldGsets|galois.*Equivalence lean/WeilConjectures lean/Sheaf; rg stabilizer.*Open Mathlib/FieldTheory Mathlib/Topology/Algebra",
+   "results": "Mathlib provides exists_fac_of_etale_of_isSepClosed and pointSmallEtaleFiberObjToPreimage_surjective, used to prove covers; stabilizer_isOpen_of_isIntegral and continuousSMul_iff_stabilizer_isOpen prove continuity. Existing library supplies finite-field classification and fibre decomposition, but not the passage to arbitrary etale schemes.",
+   "date": "2026-10-12",
+   "verdict": "tools found; no exact result for the categorical gaps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFieldGsets",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, first paragraph: finite etale objects correspond to finite continuous G-sets; full-faithfulness part of the equivalence, using finite-spectrum Galois classification",
+   "via": [
+    "lem-exc-etale-field-gsets"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFieldPointFunctor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFieldPointFunctor.lean",
+  "declaration": "AlgebraicGeometry.etaleFieldPointFunctor_fullyFaithful",
+  "statement": "theorem etaleFieldPointFunctor_fullyFaithful : (etaleFieldPointFunctor K Ksep).Full ∧ (etaleFieldPointFunctor K Ksep).Faithful",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085256-L-21906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-38027",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T130429-L-1295874",
+  "kind": "interface"
+ }
 }
