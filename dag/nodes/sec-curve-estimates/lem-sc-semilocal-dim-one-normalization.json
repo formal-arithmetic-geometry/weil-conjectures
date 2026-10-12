@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sc-integral-closure-dedekind-surjective-fibres] with L = K. It gives that B' is a Dedekind domain and that $\\operatorname{Spec}(B') \\to \\operatorname{Spec}(B)$ is surjective with finite fibres. The fact that a maximal ideal of B' contracts to a maximal ideal of B is [lem-weil-pbc-integral-maximal-contracts-maximal], applied to the integral inclusion B \\to B'.",
+   "text": "Set F = FractionRing B, in the same universe as B. Apply [lem-sc-integral-closure-dedekind-surjective-fibres] with fraction field and extension field both F. It gives that C = integralClosure B F is Dedekind of dimension one and that Spec(C) → Spec(B) has finite fibres. By [lem-weil-pbc-integral-maximal-contracts-maximal], every maximal ideal of C contracts to a maximal ideal of B.",
    "uses": [
     "lem-sc-integral-closure-dedekind-surjective-fibres",
     "lem-weil-pbc-integral-maximal-contracts-maximal"
@@ -43,7 +43,7 @@
    }
   },
   {
-   "text": "The semilocal ring B has finitely many maximal ideals. By [lem-weil-pbc-integral-maximal-contracts-maximal], every maximal ideal of B' contracts to one of these, and each fibre of $\\operatorname{Spec}(B') \\to \\operatorname{Spec}(B)$ is finite by [lem-sc-integral-closure-dedekind-surjective-fibres]. Therefore the maximal ideals of B' form a finite union of finite fibres, so B' is semilocal.",
+   "text": "Map a maximal ideal x of C to the pair consisting of its contracted maximal ideal y of B and its underlying prime ideal in the spectral fibre over y. This map is injective because the underlying prime ideal determines x. The sigma type of these fibres is finite: MaximalSpectrum B is finite and each spectral fibre is finite by [lem-sc-integral-closure-dedekind-surjective-fibres]. Thus MaximalSpectrum C is finite. The canonical B-algebra equivalence F ≃ K induces an equivalence integralClosure B F ≃ integralClosure B K. Pullback of ideals under this ring equivalence is injective and preserves maximality, giving semilocality for integralClosure B K. Noetherianity, dimension at most one, integral closedness and Krull dimension transfer under the same equivalence, giving the Dedekind and dimension-one conclusions.",
    "uses": [
     "lem-sc-integral-closure-dedekind-surjective-fibres",
     "lem-weil-pbc-integral-maximal-contracts-maximal"
@@ -55,7 +55,7 @@
    }
   },
   {
-   "text": "Because $B \\subseteq B'$ and $B' \\subseteq K$, the fraction field of B' is both contained in K and contains the fraction field K of B. Hence the fraction field of B' is K.",
+   "text": "Apply Mathlib integralClosure.isFractionRing_of_finite_extension with fraction field and extension field both K. The identity extension is finite dimensional, so K is the fraction field of integralClosure B K. This formalizes the inclusions B ⊆ integralClosure B K ⊆ K and the denominator argument of the source.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -71,7 +71,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemma 09IG, with the semilocality and fraction-field argument in Varieties Lemma 09N2"
+  "place": "Algebra Lemma 09IG and Varieties Lemma 09N2; Lean universe bridge via the canonical fraction field, Q1, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -151,5 +151,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T230802-L-1910363",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
