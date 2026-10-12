@@ -13,6 +13,10 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
+import all Sheaf.CategoryTheory.ColimitSiteCoveringConstructionParts
+import Sheaf.CategoryTheory.ColimitSiteRawSectionSeparated
+import Sheaf.CategoryTheory.ColimitSiteRawSectionAmalgamation
+
 /-! # ColimitSiteRawSectionSheaf
 
 Source: Stacks Project, Sites, Tag 0A35.
@@ -27,6 +31,30 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
+
+private theorem finite_map_cover
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    (U : C ⥤ D) {X : C} (R : Presieve X) [Finite R.uncurry] :
+    Finite (R.map U).uncurry := by
+  let f : R.uncurry → (R.map U).uncurry := fun a ↦
+    ⟨⟨U.obj a.val.1, U.map a.val.2⟩, .of a.property⟩
+  apply Finite.of_surjective f
+  rintro ⟨⟨Y, g⟩, hg⟩
+  cases hg with
+  | of h => exact ⟨⟨⟨_, _⟩, h⟩, rfl⟩
+
+private theorem isSheaf_of_finite_cover_conditions
+    {C : Type u} [SmallCategory C] (P : Precoverage C)
+    [P.IsStableUnderFiniteBaseChange] [P.HasPullbacks]
+    (hfinite : ∀ (X : C) (R : Presieve X), R ∈ P X → Finite R.uncurry)
+    (H : Cᵒᵖ ⥤ Type u)
+    (h : ∀ (X : C) (R : Presieve X), R ∈ P X → Presieve.IsSheafFor H R) :
+    Presheaf.IsSheaf P.toGrothendieck H := by
+  rw [isSheaf_iff_isSheaf_of_type, P.isSheaf_toGrothendieck_iff]
+  intro X Y g R hR
+  have := P.hasPullbacks_of_mem g hR
+  rw [← Sieve.pullbackArrows_comm, ← Presieve.isSheafFor_iff_generate]
+  exact h Y (R.pullbackArrows g) (finite_pullback_cover P hfinite R hR g)
 
 /-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
 presentation construction and adjunction paragraphs.
@@ -110,6 +138,20 @@ theorem colimit_site_raw_section_isSheaf
       Arrow.mk ((θ t t' b).hom.app (op X) ≫
         (β t').app (op ((F.map b.right).toFunctor.obj X))))
  :
-    Presheaf.IsSheaf Q.toGrothendieck (colimit B) := by sorry
+    Presheaf.IsSheaf Q.toGrothendieck (colimit B) := by
+  have hQfinite : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y → Finite R.uncurry := by
+    intro Y R hR
+    obtain ⟨j, X, S, rfl, hS, rfl⟩ := (hQ Y R).mp hR
+    have : Finite S.uncurry := hfinite j X S hS
+    exact finite_map_cover (V.ι.app j).toFunctor S
+  apply isSheaf_of_finite_cover_conditions Q hQfinite (colimit B)
+  intro Y R hR
+  obtain ⟨j, X, S, rfl, hS, rfl⟩ := (hQ Y R).mp hR
+  have hsep := colimit_site_raw_section_isSeparatedFor J F P hfinite hcover hpullback
+    V hobjects harrows Q hVpullback i G θ hθ B β hβ hβmap j X S hS
+  apply hsep.isSheafFor
+  intro x hx
+  exact colimit_site_raw_section_exists_amalgamation J F P hfinite hcover hpullback
+    V hobjects harrows Q hVpullback i G θ hθ B β hβ hβmap j X S hS x hx
 
 end CategoryTheory
