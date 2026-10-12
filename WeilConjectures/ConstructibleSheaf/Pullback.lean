@@ -98,7 +98,8 @@ instance : etalePrecoverage.{u}.IsStableUnderBaseChange :=
   inferInstanceAs (precoverage @Etale).IsStableUnderBaseChange
 
 omit [HasSmallSiteSheafify A] in
-/-- Locally constant sheaves are invariant under isomorphism. -/
+/-- Locally constant sheaves are invariant under isomorphism.
+(blueprint: `lemma-constructible-iso-invariance`) -/
 lemma IsLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsLocallyConstantSheaf F] : IsLocallyConstantSheaf F' := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
@@ -137,7 +138,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 omit [HasSmallSiteSheafify A] in
-/-- Finite sheaves are invariant under isomorphism. -/
+/-- Finite sheaves are invariant under isomorphism.
+(blueprint: `lemma-constructible-iso-invariance`) -/
 lemma IsFiniteSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsFiniteSheaf F] : IsFiniteSheaf F' where
   isFinitelyGenerated_sheafFiber Ω _ _ s :=
@@ -154,7 +156,8 @@ theorem IsFiniteSheaf.upperStar (g : Y ⟶ X) (F : Sheaf X.smallEtaleTopology A)
       (s ≫ g)).of_iso ((Etale.upperStarCompSheafFiberIso A g s).app F).symm
 
 omit [HasSmallSiteSheafify A] in
-/-- Finite locally constant sheaves are invariant under isomorphism. -/
+/-- Finite locally constant sheaves are invariant under isomorphism.
+(blueprint: `lemma-constructible-iso-invariance`) -/
 lemma IsFiniteLocallyConstantSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsFiniteLocallyConstantSheaf F] : IsFiniteLocallyConstantSheaf F' where
   toIsLocallyConstantSheaf := IsLocallyConstantSheaf.of_iso i
@@ -197,7 +200,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 omit [HasSmallSiteSheafify A] in
-/-- Constructible sheaves are invariant under isomorphism. -/
+/-- Constructible sheaves are invariant under isomorphism.
+(blueprint: `lemma-constructible-iso-invariance`) -/
 lemma IsConstructibleSheaf.of_iso {F F' : Sheaf X.smallEtaleTopology A} (i : F ≅ F')
     [IsConstructibleSheaf F] : IsConstructibleSheaf F' := by
   obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification (FA := FA) (CA := CA) (F := F)

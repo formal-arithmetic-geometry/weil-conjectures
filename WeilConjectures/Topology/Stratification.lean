@@ -51,7 +51,7 @@ retrocompact range and along closed embeddings with retrocompact complement
 (`Topology.IsConstructible.image_of_isOpenEmbedding`,
 `Topology.IsConstructible.image_of_isClosedEmbedding`), and finite intersections. On a
 Noetherian space every locally closed subset is constructible, see
-`Topology.Stratification.ofNoetherianSpace`. -/
+`Topology.Stratification.ofNoetherianSpace`. (blueprint: `def-constructible-stratification`) -/
 @[stacks 09XZ]
 structure Stratification (X : Type*) [TopologicalSpace X] where
   /-- The number of strata. -/

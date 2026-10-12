@@ -180,7 +180,8 @@ noncomputable def Etale.localizationRestrictionLowerStarAdjunction :
 
 /-- For an étale `f`, the pullback `f^*` is computed by restriction along the localization
 functor: both are left adjoint to `f_*`. In particular `f^*` needs no sheafification in this
-case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`. -/
+case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`.
+(blueprint: `lem-weil-pbc-etale-inverse-image-restriction`) -/
 noncomputable def Etale.upperStarIsoLocalizationRestriction :
     (f)^*[A] ≅ Etale.localizationRestriction A f h :=
   (Etale.upperStarLowerStarAdjunction A f).leftAdjointUniq

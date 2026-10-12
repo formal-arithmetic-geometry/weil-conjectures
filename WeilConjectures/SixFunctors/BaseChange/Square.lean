@@ -49,8 +49,8 @@ The pasting laws for the base change maps of horizontally or vertically composed
 follow from `CategoryTheory.mateEquiv_vcomp` and `CategoryTheory.mateEquiv_hcomp` together
 with the coherence of `AlgebraicGeometry.Etale.upperStarComp`; they are left to a later
 file.
-(blueprint: `def:weil-pbc-cartesian-square`, `def:weil-pbc-underived-exchange`,
-`lemma:weil-pbc-underived-exchange-naturality`)
+(blueprint: `def:weil-pbc-cartesian-square`, `def-weil-pbc-underived-exchange`,
+`lemma-weil-pbc-underived-exchange-naturality`)
 
 -/
 
@@ -81,7 +81,7 @@ noncomputable def Etale.squareUpperStarIso (sq : CommSq g' f' f g) :
 /-- **The base change map** `g^* f_* ⟶ f'_* g'^*` of a commutative square, as a natural
 transformation `f_* ⋙ g^* ⟶ g'^* ⋙ f'_*`: the mate of the square isomorphism
 `AlgebraicGeometry.Etale.squareUpperStarIso` with respect to the adjunctions `f^* ⊣ f_*` and
-`f'^* ⊣ f'_*`. (blueprint: `def:weil-pbc-underived-exchange`) -/
+`f'^* ⊣ f'_*`. (blueprint: `def-weil-pbc-underived-exchange`) -/
 noncomputable def Etale.baseChangeMap (sq : CommSq g' f' f g) :
     (f)_*[A] ⋙ (g)^*[A] ⟶ (g')^*[A] ⋙ (f')_*[A] :=
   (mateEquiv (Etale.upperStarLowerStarAdjunction A f)
@@ -99,7 +99,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **The adjoint of the base change map** is the square isomorphism followed by the counit:
 for a sheaf `F` on `X`,
 `f'^* (baseChangeMap F) ≫ ε_{f'} = squareUpperStarIso (f_* F) ≫ g'^* (ε_f F)`.
-(blueprint: `def:weil-pbc-underived-exchange`) -/
+(blueprint: `def-weil-pbc-underived-exchange`) -/
 lemma Etale.upperStar_map_baseChangeMap_app_counit (sq : CommSq g' f' f g)
     (F : Sheaf X.smallEtaleTopology A) :
     ((f')^*[A]).map ((Etale.baseChangeMap A sq).app F) ≫
@@ -121,7 +121,7 @@ lemma Etale.map_unit_baseChangeMap_app (sq : CommSq g' f' f g)
 
 omit [HasSmallSiteSheafify A] in
 /-- **Naturality of the base change map** in the sheaf.
-(blueprint: `lemma:weil-pbc-underived-exchange-naturality`) -/
+(blueprint: `lemma-weil-pbc-underived-exchange-naturality`) -/
 lemma Etale.baseChangeMap_naturality (sq : CommSq g' f' f g)
     {F F' : Sheaf X.smallEtaleTopology A} (u : F ⟶ F') :
     ((g)^*[A]).map (((f)_*[A]).map u) ≫ (Etale.baseChangeMap A sq).app F' =

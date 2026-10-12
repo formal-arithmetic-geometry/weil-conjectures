@@ -124,6 +124,9 @@ noncomputable def mapHomologicalComplexCompShortComplexFunctorIso
     F.mapHomologicalComplex c ⋙ HomologicalComplex.shortComplexFunctor D c i ≅
       HomologicalComplex.shortComplexFunctor C c i ⋙ F.mapShortComplex := Iso.refl _
 
+/-- A functor preserving homology (e.g. an exact functor between abelian categories) commutes
+with the homology of complexes: `H^i(F K) ≅ F(H^i K)`, naturally in `K`.
+(blueprint: `lem-weil-pbc-exact-functor-complex-cohomology`) -/
 noncomputable def mapHomologicalComplexHomologyIso [F.PreservesHomology]
     {ι : Type*} (c : ComplexShape ι) (i : ι) :
     F.mapHomologicalComplex c ⋙ HomologicalComplex.homologyFunctor D c i ≅
