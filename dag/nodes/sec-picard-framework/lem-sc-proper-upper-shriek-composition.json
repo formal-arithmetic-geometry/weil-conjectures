@@ -25,52 +25,32 @@
  ],
  "proof": [
   {
-   "text": "For the proper morphisms in the statement, the derived direct images on quasi-coherent complexes compose canonically: $R(g\\circ f)_*\\cong Rg_*\\circ Rf_*$. This is the proper direct-image composition statement [lem-pc-proper-derived-direct-image-composition], and its unit and associativity conventions are part of that statement.",
-   "uses": [
-    "lem-pc-proper-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0ATX, Lemma 48.16.3, proof of the proper case"
-   }
+   "text": "The comparison c and restricted-functor comparisons eRf, eRg and eRfg are hypotheses of the Lean statement. Compose their whiskerings and functor associators to obtain (Rf followed by Rg) followed by the inclusion isomorphic to Rfg followed by the inclusion. Cancel the fully faithful inclusion using Functor.fullyFaithfulCancelRight to obtain q : Rf ⋙ Rg ≅ Rfg.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The schemes $X$, $Y$, $Z$ are Noetherian, so $Rf_*$, $Rg_*$ and $R(g\\circ f)_*$ map quasi-coherent complexes to quasi-coherent complexes and have right adjoints on $D_{\\mathrm{QCoh}}$ [lem-pc-noetherian-derived-direct-image-right-adjoint]. The adjunctions $Rf_*\\dashv f^!$, $Rg_*\\dashv g^!$, and $R(g\\circ f)_*\\dashv(g\\circ f)^!$ are the right-adjoint data in [def-pc-upper-shriek-right-adjoint]. Composing the first two adjunctions gives a right adjoint $f^!\\circ g^!$ to $Rg_*\\circ Rf_*$. Transporting this adjunction across the direct-image isomorphism of Step 1 and applying the canonical uniqueness isomorphism for right adjoints [lem-cat-right-adjoint-composition] yields $(g\\circ f)^!\\cong f^!\\circ g^!$.",
-   "uses": [
-    "lem-pc-noetherian-derived-direct-image-right-adjoint",
-    "def-pc-upper-shriek-right-adjoint",
-    "lem-pc-proper-derived-direct-image-composition",
-    "lem-cat-right-adjoint-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0ATX, Lemma 48.16.3, composition of upper shriek"
-   }
-  },
-  {
-   "text": "By the unit and counit formulas for the composite adjunction in [lem-cat-right-adjoint-composition], the displayed isomorphism identifies the counit of $(g\\circ f)^!$ with the composite counit obtained by first applying $f^!$ and then the counit of $g^!$. Hence it is natural in $K$ and compatible with the adjunction counits of $f$, $g$, and $g\\circ f$.",
+   "text": "Compose the supplied adjunctions af and ag using Adjunction.comp, then transport the left adjoint along q using Adjunction.ofNatIsoLeft. Apply Adjunction.rightAdjointUniq to afg and this transported adjunction to obtain ufg ≅ ug ⋙ uf.",
    "uses": [
     "lem-cat-right-adjoint-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0ATX, Lemma 48.16.3, compatibility with units and counits"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Map Adjunction.rightAdjointUniq_hom_app_counit through the inclusion. Expand the transported counit and Adjunction.comp_counit_app; Functor.map_preimage identifies the inverse of q after inclusion with the inverse of the whiskered comparison. Finally the naturality equation for eRg.inv at af.counit.app (ug.obj K) gives precisely the displayed composite counit.",
+   "uses": [
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-derived-direct-image-composition",
-  "def-pc-upper-shriek-right-adjoint",
-  "lem-cat-right-adjoint-composition",
-  "lem-pc-noetherian-derived-direct-image-right-adjoint"
+  "lem-cat-right-adjoint-composition"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0ATX, Lemma 48.16.3"
+  "document": "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+  "place": "Adjunction.rightAdjointUniq_hom_app_counit; Adjunction.comp; Adjunction.ofNatIsoLeft; Functor.fullyFaithfulCancelRight"
  },
  "mathlib_searches": [
   {
@@ -163,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T060734-L-2905912",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

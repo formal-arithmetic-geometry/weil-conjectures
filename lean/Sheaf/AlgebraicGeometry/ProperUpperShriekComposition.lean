@@ -9,9 +9,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition
-import Sheaf.AlgebraicGeometry.UpperShriekRightAdjoint
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Composition of coherent upper shriek for proper morphisms
 
@@ -90,6 +88,30 @@ theorem exists_properUpperShriekComposition
           eRg.inv.app (ug.obj K) ≫
           (schemeDerivedQCohProperty Z).ι.map (ag.counit.app K) =
         (schemeDerivedQCohProperty Z).ι.map (afg.counit.app K) := by
-  sorry
+  have _canonicalComparison := hc
+  let b : (Rf ⋙ Rg) ⋙ (schemeDerivedQCohProperty Z).ι ≅
+      Rfg ⋙ (schemeDerivedQCohProperty Z).ι :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft Rf eRg ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight eRf _ ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ c ≪≫ eRfg.symm
+  let q : Rf ⋙ Rg ≅ Rfg :=
+    Functor.fullyFaithfulCancelRight (schemeDerivedQCohProperty Z).ι b
+  let a : Rfg ⊣ ug ⋙ uf := (af.comp ag).ofNatIsoLeft q
+  refine ⟨afg.rightAdjointUniq a, ?_⟩
+  intro K
+  have h := congrArg ((schemeDerivedQCohProperty Z).ι.map)
+    (afg.rightAdjointUniq_hom_app_counit a K)
+  simp only [a, q, Adjunction.ofNatIsoLeft_counit, Adjunction.comp_counit_app,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.fullyFaithfulCancelRight_inv_app,
+    Functor.map_comp, Functor.map_preimage] at h
+  simp only [b, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_inv_app, Functor.associator_hom_app,
+    Category.id_comp, Category.comp_id, Category.assoc, Functor.comp_obj] at h
+  have hn := eRg.inv.naturality (af.counit.app (ug.obj K))
+  simp only [Functor.comp_map, Functor.comp_obj] at hn
+  rw [← reassoc_of% hn] at h
+  exact h
 
 end AlgebraicGeometry
