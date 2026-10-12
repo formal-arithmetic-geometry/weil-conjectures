@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleActionLaws
+import Mathlib.CategoryTheory.Limits.Types.Products
 /-! # Transporting modules through the etale inverse image
 
 Source: Stacks Project, Tags 03D1 and 03D2
@@ -24,6 +25,41 @@ namespace AlgebraicGeometry
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+
+private noncomputable def sectionProdIso (V : Scheme.{u})
+    (R A : Sheaf V.smallEtaleTopology (Type (u + 1))) (W : V.Etaleᵒᵖ) :
+    (R ⨯ A).obj.obj W ≅ R.obj.obj W × A.obj.obj W :=
+  asIso (prodComparison (sheafToPresheaf V.smallEtaleTopology (Type (u + 1)) ⋙
+    (evaluation _ _).obj W) R A) ≪≫ Types.binaryProductIso _ _
+private theorem sectionProdIso_fst (V : Scheme.{u})
+    (R A : Sheaf V.smallEtaleTopology (Type (u + 1)))
+    (W : V.Etaleᵒᵖ) (r : R.obj.obj W) (x : A.obj.obj W) :
+    (prod.fst : R ⨯ A ⟶ R).hom.app W ((sectionProdIso V R A W).inv (r,x)) = r := by
+  have h : (sectionProdIso V R A W).inv ≫
+      (prod.fst : R ⨯ A ⟶ R).hom.app W = ↾(fun p : R.obj.obj W × A.obj.obj W ↦ p.1) := by
+    change (Types.binaryProductIso _ _).inv ≫
+      inv (prodComparison (sheafToPresheaf V.smallEtaleTopology (Type (u + 1)) ⋙
+        (evaluation _ _).obj W) R A) ≫
+        (sheafToPresheaf V.smallEtaleTopology (Type (u + 1)) ⋙
+          (evaluation _ _).obj W).map prod.fst = _
+    rw [inv_prodComparison_map_fst, Types.binaryProductIso_inv_comp_fst]
+    rfl
+  exact congrArg (fun k : R.obj.obj W × A.obj.obj W ⟶ R.obj.obj W ↦ k (r,x)) h
+
+private theorem sectionProdIso_snd (V : Scheme.{u})
+    (R A : Sheaf V.smallEtaleTopology (Type (u + 1)))
+    (W : V.Etaleᵒᵖ) (r : R.obj.obj W) (x : A.obj.obj W) :
+    (prod.snd : R ⨯ A ⟶ A).hom.app W ((sectionProdIso V R A W).inv (r,x)) = x := by
+  have h : (sectionProdIso V R A W).inv ≫
+      (prod.snd : R ⨯ A ⟶ A).hom.app W = ↾(fun p : R.obj.obj W × A.obj.obj W ↦ p.2) := by
+    change (Types.binaryProductIso _ _).inv ≫
+      inv (prodComparison (sheafToPresheaf V.smallEtaleTopology (Type (u + 1)) ⋙
+        (evaluation _ _).obj W) R A) ≫
+        (sheafToPresheaf V.smallEtaleTopology (Type (u + 1)) ⋙
+          (evaluation _ _).obj W).map prod.snd = _
+    rw [inv_prodComparison_map_snd, Types.binaryProductIso_inv_comp_snd]
+    rfl
+  exact congrArg (fun k : R.obj.obj W × A.obj.obj W ⟶ A.obj.obj W ↦ k (r,x)) h
 
 /-- Objectwise transport of the scalar action, before constructing maps or a functor.
 Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module; the object part of
@@ -98,6 +134,76 @@ theorem etaleInverseImageModuleObject (U V : Scheme.{u}) (f : U ⟶ V)
               ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj HG)) ⟶
                 FaU.obj (FU.obj HG)).hom.app W x : HG.val.obj W)) ∧
           L.map muV = prodComparison L (FrV.obj O) (FaV.obj (FV.obj G)) ≫
-            prod.map (er.inv.app O) iG.inv ≫ muU ≫ iG.hom := by sorry
+            prod.map (er.inv.app O) iG.inv ≫ muU ≫ iG.hom := by
+  dsimp only
+  intro Lr ar er ea h G
+  let : PreservesFiniteLimits (Scheme.etaleSetPullback f) :=
+    (etaleInverseImageAlgebraicStructures U V f).1
+  obtain ⟨m, hm⟩ := etaleInverseImageModuleActionLaws U V f O Lr ar er ea h G
+  let A := (Etale.upperStar AddCommGrpCat.{u + 1} f).obj
+    ((SheafOfModules.toSheaf _).obj G)
+  let OR := (sheafCompose U.smallEtaleTopology
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj O)
+  let (W : U.Etaleᵒᵖ) : Module (OR.obj.obj W) (A.obj.obj W) := m W
+  let mu := prod.map (er.hom.app O) (ea.hom.app ((SheafOfModules.toSheaf _).obj G)) ≫
+    inv (prodComparison (Scheme.etaleSetPullback f)
+      ((sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj O)
+      ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+        ((SheafOfModules.toSheaf _).obj G))) ≫
+    (Scheme.etaleSetPullback f).map (etaleModuleScalarAction V O G) ≫
+      ea.inv.app ((SheafOfModules.toSheaf _).obj G)
+  have linear : ∀ ⦃W Z : U.Etaleᵒᵖ⦄ (i : W ⟶ Z)
+      (r : OR.obj.obj W) (x : A.obj.obj W),
+      A.obj.map i (r • x) = OR.obj.map i r • A.obj.map i x := by
+    intro W Z i r x
+    let y := (sectionProdIso U
+      ((sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).obj (Lr.obj O))
+      ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj A) W).inv
+      (r, x)
+    have hW := hm W y
+    have hZ := hm Z (((sheafForget (D := CommRingCat.{u + 1})
+      U.smallEtaleTopology).obj (Lr.obj O) ⨯
+      (sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj A).obj.map i y)
+    have hn := ConcreteCategory.congr_hom (mu.hom.naturality i) y
+    have hf := ConcreteCategory.congr_hom
+      ((prod.fst : _ ⟶ (sheafForget (D := CommRingCat.{u + 1})
+        U.smallEtaleTopology).obj (Lr.obj O)).hom.naturality i) y
+    have hs := ConcreteCategory.congr_hom
+      ((prod.snd : _ ⟶ (sheafForget (D := AddCommGrpCat.{u + 1})
+        U.smallEtaleTopology).obj A).hom.naturality i) y
+    dsimp at hn hf hs
+    have hf0 := sectionProdIso_fst U
+      ((sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).obj (Lr.obj O))
+      ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj A) W r x
+    have hs0 := sectionProdIso_snd U
+      ((sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology).obj (Lr.obj O))
+      ((sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology).obj A) W r x
+    rw [hf0, hs0] at hW
+    erw [hf0] at hf
+    erw [hs0] at hs
+    erw [hf, hs] at hZ
+    exact (congrArg (fun z ↦ A.obj.map i z) hW).trans (hn.symm.trans hZ.symm)
+  let HG : SheafOfModules.{u + 1} OR :=
+    ⟨PresheafOfModules.ofPresheaf A.obj linear, A.property⟩
+  let eG : (SheafOfModules.toSheaf OR).obj HG ≅ A := Iso.refl _
+  refine ⟨HG, eG, etaleModuleScalarAction V O G,
+    etaleModuleScalarAction U (Lr.obj O) HG, ?_, ?_, ?_⟩
+  · intro W x
+    rfl
+  · intro W x
+    rfl
+  · have heq : etaleModuleScalarAction U (Lr.obj O) HG = mu := by
+      ext W x
+      exact hm W x
+    change (Scheme.etaleSetPullback f).map (etaleModuleScalarAction V O G) =
+      prodComparison (Scheme.etaleSetPullback f)
+        ((sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology).obj O)
+        ((sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology).obj
+          ((SheafOfModules.toSheaf _).obj G)) ≫
+      prod.map (er.inv.app O) (ea.inv.app ((SheafOfModules.toSheaf _).obj G)) ≫
+      etaleModuleScalarAction U (Lr.obj O) HG ≫ ea.hom.app ((SheafOfModules.toSheaf _).obj G)
+    rw [heq]
+    simp [mu, ← Category.assoc, prod.map_map]
+    simp [Category.assoc]
 
 end AlgebraicGeometry
