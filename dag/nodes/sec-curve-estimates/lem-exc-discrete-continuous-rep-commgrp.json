@@ -1,0 +1,125 @@
+{
+ "id": "lem-exc-discrete-continuous-rep-commgrp",
+ "kind": "statement",
+ "title": "Commutative group objects in discrete continuous G-sets are discrete integer representations",
+ "statement": "Let $G:\\mathrm{Type}(u)$ be a group with a topology making it a topological group, and let $w$ be any universe. Let $\\mathcal D=\\mathrm{DiscreteContAction}(\\mathrm{Type}(w),G)$ be the category of continuous $G$-actions on discrete carriers and equivariant maps. Equip $\\mathcal D$ with any Cartesian monoidal structure and braiding. Let $\\mathcal R=\\mathrm{DiscreteContinuousRep}_{\\mathbb Z}(G)$ [def-exc-discrete-modules-category] have carriers in $\\mathrm{Type}(w)$, let $U:\\mathcal R\\to\\mathrm{Rep}_{\\mathbb Z}(G)$ be the inclusion, and let $V:\\mathcal D\\to\\mathrm{Action}(\\mathrm{Type}(w),G)$ forget continuity. Then there exist an equivalence $B:\\mathrm{CommGrp}(\\mathcal D)\\simeq\\mathcal R$ and a natural isomorphism $B U\\,\\mathrm{RepToAction}\\,\\mathrm{forget}_{\\mathbb Z}.\\mathrm{mapAction}(G)\\cong\\mathrm{CommGrp.forget}\\, V$. Here commutative group objects carry multiplication, unit and inverse satisfying the commutative group diagrams with respect to the Cartesian products. No site or set-valued sheaf equivalence is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+ },
+ "stmt_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the commutative group object on its underlying discrete carrier. Cartesian product and terminal comparison maps turn its multiplication, unit and inverse into an abelian group law. The internal diagrams imply the ordinary laws on elements. Give this abelian group its unique integer module structure. Since the operation maps are equivariant, every action map is additive, hence integer-linear; its inverse is the action of the inverse group element. Retain the existing continuous action and use continuity of the orbit map to see that each stabilizer is open. This constructs the forward functor to [def-exc-discrete-modules-category].",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a discrete continuous integer representation, put the discrete topology on its carrier. At (g,x), the product of the open coset g Stab(x) with the singleton {x} maps constantly to g x; this proves joint continuity. Addition, zero and negation commute with the action because it is linear. Use the Cartesian comparison isomorphisms to regard these equivariant maps as internal operations. Their identities are checked on elements. This constructs the inverse functor. Open stabilizers suffice; no compactness, finiteness or Hausdorff assumption is used.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both functors retain the underlying equivariant maps. A map preserving multiplication and unit is additive and thus integer-linear; conversely a linear map preserves all group operations. Recovering the original carrier operations gives the unit and counit isomorphisms, with underlying identity maps, and their naturality follows from the retained maps. Whiskering the underlying comparisons gives the stated natural isomorphism in the category of all actions. Different Cartesian product choices are related by their unique comparison isomorphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "commutative group objects in discrete continuous group actions equivalent to integer representations",
+   "results": "Internal Server Error; the service was unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "commutative group objects in discrete continuous group actions equivalent to integer representations",
+   "results": "Eight hits: DiscreteContAction and its category instance, and fundamental-group/Galois-category results. None gives this equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DiscreteContAction, CategoryTheory.Equivalence",
+   "results": "Zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommGrp.*Discrete|Discrete.*CommGrp|Rep.*commGrp",
+   "results": "Eight hits, including CommGrpObj.ofRepresentableBy and categorical exact-limit instances, but no discrete representation equivalence. Repository rg also found no existing such identification.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianSheavesGModulesTransport",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-field-discrete-modules",
+   "place": "proof, abelian enhancement of the set-valued G-set equivalence: a G-module is a G-set with an equivariant commutative group law",
+   "via": [
+    "lem-exc-abelian-sheaves-gmodules-transport",
+    "lem-exc-abelian-sheaves-gmodules-core",
+    "lem-exc-abelian-sheaves-gmodules"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DiscreteContinuousRepCommGrp",
+  "file": "lean/Sheaf/CategoryTheory/DiscreteContinuousRepCommGrp.lean",
+  "declaration": "Rep.discreteContinuousRep_commGrp",
+  "statement": "theorem discreteContinuousRep_commGrp\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CartesianMonoidalCategory (DiscreteContAction (Type w) G)]\n    [BraidedCategory (DiscreteContAction (Type w) G)] :\n    let D := DiscreteContinuousRep.{0, u, w} ℤ G\n    let U : D ⥤ Rep.{w} ℤ G := ObjectProperty.ι _\n    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type w) (G := G)) ⋙\n      ObjectProperty.ι (Action.IsContinuous (V := Type w) (G := G))\n    ∃ E : CommGrp (DiscreteContAction (Type w) G) ≌ D,\n      Nonempty (E.functor ⋙ U ⋙ RepToAction ℤ G ⋙\n        (CategoryTheory.forget (ModuleCat.{w} ℤ)).mapAction G ≅\n          CommGrp.forget _ ⋙ V)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T095927-L-325800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T095927-L-325800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

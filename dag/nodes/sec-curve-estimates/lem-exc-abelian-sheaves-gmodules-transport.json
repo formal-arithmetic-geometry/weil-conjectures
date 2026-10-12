@@ -12,10 +12,19 @@
  ],
  "proof": [
   {
-   "text": "For a category C, Grothendieck topology J and topological group G as in the statement, identify abelian-group-valued sheaves with internal integer modules [def-pod-internal-module] in set-valued sheaves. In one direction give the underlying sheaf its sectionwise addition, zero, negation and integer multiplication. In the other, evaluate all operation diagrams at every object of C to obtain an abelian group and integer-module structure on each set of sections; naturality of the operations makes all restriction maps additive. The sheaf condition is equivalent to its underlying-set condition because limits of abelian groups are computed on their sets. Operation-preserving maps are precisely natural transformations with additive components, so the constructions are inverse on objects and morphisms.",
+   "text": "Apply [lem-weil-pbc-sheaf-algebraic-structures-abelian-component] to obtain the sectionwise functor F from abelian sheaves to commutative group objects in set sheaves and inverse H. The strict inverse identities give A = CategoryTheory.Equivalence.mk F H (eqToIso hFH).symm (eqToIso hHF). Its underlying functor identity is hF.",
    "uses": [
-    "def-pod-internal-module"
+    "lem-weil-pbc-sheaf-algebraic-structures-abelian-component"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
+   }
+  },
+  {
+   "text": "Transfer finite products from set sheaves to discrete continuous G-sets along Eset.inverse by Mathlib Adjunction.hasLimitsOfShape_of_equivalence, one finite discrete diagram at a time. Choose the Cartesian monoidal structure ofHasFiniteProducts and its canonical braiding. Give Eset.functor and Eset.inverse their braided structures ofChosenFiniteProducts. Mathlib Equivalence.mapCommGrp lifts Eset to an equivalence of commutative group objects. Its underlying functor is Eset.functor by definition.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
@@ -23,21 +32,9 @@
    }
   },
   {
-   "text": "Identify internal integer modules [def-pod-internal-module] in discrete continuous G-sets with the category in [def-exc-discrete-modules-category]. Equivariant operations on a G-set give its carrier an abelian group and unique integer-module structure; equivariance of addition and zero makes each G-action map integer-linear. Conversely a representation supplies equivariant operation maps. The stabilizer condition is equivalent to joint continuity of the action on the discrete carrier: at (g,x) take g times an open stabilizer of x; conversely continuity at (1,x) gives an open neighbourhood inside the stabilizer, whose translates make the entire stabilizer open. Maps preserving the operations are exactly equivariant integer-linear maps. Thus the two constructions are inverse and preserve the underlying action.",
+   "text": "Obtain B and the underlying-action comparison hB from [lem-exc-discrete-continuous-rep-commgrp]. Set E = (A.trans Eset.mapCommGrp).trans B. Whisker hB on the left by F followed by Eset.functor.mapCommGrp. The underlying functor of mapCommGrp is the original functor, so reassociation is definitionally the identity isomorphism. Finally whisker eqToIso hF on the right by Eset.functor followed by V. Composition gives the required natural isomorphism beta; it is an isomorphism of action functors and is thus equivariant.",
    "uses": [
-    "def-pod-internal-module",
-    "def-exc-discrete-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point"
-   }
-  },
-  {
-   "text": "The categories of set-valued sheaves and discrete continuous G-sets have finite products; the latter use the diagonal action on a finite product, with stabilizer the finite intersection of open stabilizers. Apply [lem-pod-equivalence-induces-module-objects] with R equal to the integers and e equal to Eset, and compose with the two identifications of the preceding steps. This gives E. The equality of underlying functors from that theorem and the underlying-action comparisons of the identifications compose to beta. The transported unit and counit are operation-preserving by naturality, so E is an equivalence. This construction uses no point or stalk isomorphism.",
-   "uses": [
-    "lem-pod-equivalence-induces-module-objects"
+    "lem-exc-discrete-continuous-rep-commgrp"
    ],
    "elementary": false,
    "source": {
@@ -47,9 +44,8 @@
   }
  ],
  "proof_deps": [
-  "def-exc-discrete-modules-category",
-  "def-pod-internal-module",
-  "lem-pod-equivalence-induces-module-objects"
+  "lem-weil-pbc-sheaf-algebraic-structures-abelian-component",
+  "lem-exc-discrete-continuous-rep-commgrp"
  ],
  "proof_origin": {
   "by": "document",
@@ -139,9 +135,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T085404-L-49434",
+  "landing": "20261012T095927-L-325800",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

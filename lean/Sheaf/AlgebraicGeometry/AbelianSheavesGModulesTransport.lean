@@ -8,8 +8,9 @@ module
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
-import Sheaf.CategoryTheory.EquivalenceInternalModule
-import Sheaf.CategoryTheory.InternalModule
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import Sheaf.CategoryTheory.DiscreteContinuousRepCommGrp
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Transport of abelian group objects across a set-valued sheaf equivalence
@@ -61,6 +62,38 @@ theorem abelianSheaves_transport
             (CategoryTheory.forget (ModuleCat.{max (u + 1) v} ℤ)).mapAction G ≅
           sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v}) ⋙
             Eset.functor ⋙ V) := by
-  sorry
+  classical
+  dsimp only
+  intro Eset
+  let : Limits.HasFiniteProducts
+      (DiscreteContAction (Type (max (u + 1) v)) G) :=
+    ⟨fun _ ↦ Adjunction.hasLimitsOfShape_of_equivalence Eset.inverse⟩
+  let : CartesianMonoidalCategory
+      (DiscreteContAction (Type (max (u + 1) v)) G) :=
+    CartesianMonoidalCategory.ofHasFiniteProducts
+  let : BraidedCategory (DiscreteContAction (Type (max (u + 1) v)) G) :=
+    BraidedCategory.ofCartesianMonoidalCategory
+  let : Eset.functor.Braided := Functor.Braided.ofChosenFiniteProducts _
+  let : Eset.inverse.Braided := Functor.Braided.ofChosenFiniteProducts _
+  obtain ⟨F, H, hF, _, hFH, hHF, _, _⟩ :=
+    sheavesAlgebraicStructuresAbelian.{u + 1, u, v} J
+  let A := CategoryTheory.Equivalence.mk F H (eqToIso hFH).symm (eqToIso hHF)
+  obtain ⟨B, ⟨hB⟩⟩ := Rep.discreteContinuousRep_commGrp G
+  let E := (A.trans Eset.mapCommGrp).trans B
+  refine ⟨E, ⟨?_⟩⟩
+  let W := (ObjectProperty.ι
+    (fun X : Rep.{max (u + 1) v} ℤ G ↦ ∀ x : X.V, IsOpen {g : G | X.ρ g x = x})) ⋙
+    Rep.RepToAction ℤ G ⋙
+    (CategoryTheory.forget (ModuleCat.{max (u + 1) v} ℤ)).mapAction G
+  let V := ObjectProperty.ι
+    (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G)) ⋙
+    ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
+  change (F ⋙ Eset.functor.mapCommGrp ⋙ B.functor) ⋙ W ≅ _
+  calc
+    (F ⋙ Eset.functor.mapCommGrp ⋙ B.functor) ⋙ W ≅
+        (F ⋙ Eset.functor.mapCommGrp) ⋙ (CommGrp.forget _ ⋙ V) :=
+      Functor.isoWhiskerLeft (F ⋙ Eset.functor.mapCommGrp) hB
+    _ ≅ (F ⋙ CommGrp.forget _) ⋙ Eset.functor ⋙ V := Iso.refl _
+    _ ≅ _ := Functor.isoWhiskerRight (eqToIso hF) (Eset.functor ⋙ V)
 
 end AlgebraicGeometry.Scheme
