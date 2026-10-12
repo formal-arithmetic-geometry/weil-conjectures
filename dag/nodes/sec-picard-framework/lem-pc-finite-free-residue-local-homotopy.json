@@ -16,30 +16,33 @@
  ],
  "proof": [
   {
-   "text": "At the local ring at g(z), choose finite bases of the terms and repeatedly split a unit differential entry, using the chain-complex cancellation theorem with the integer indexing reversed. The bounded support gives finite total rank and each step decreases it by two, so the procedure terminates. The complement has only maximal-ideal entries in its differentials.",
+   "text": "Apply lem-pc-finite-free-residue-stalk-homotopy at y = g(z) to obtain a homotopy equivalence over Spec(O_{Y,y}) with the pullback of the single free rank-r complex in degree i.",
    "uses": [
-    "lem-weil-pbc-free-complex-unit-entry-splits"
+    "lem-pc-finite-free-residue-stalk-homotopy"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Reduction of the remaining complex modulo the maximal ideal has zero differential. Cancellation removes contractible summands, so preserves residue cohomology. In negative degrees the terms are zero by support; in nonnegative degrees the hypothesis says that the minimal remainder has r basis vectors in degree i and none elsewhere. Thus the local-ring complex is homotopy equivalent to the rank-r single complex.",
-   "uses": [],
    "elementary": true
   },
   {
-   "text": "The finitely many matrices for the basis changes, their inverses and contracting homotopies have entries in the local ring. Represent all entries on a common open neighbourhood and shrink until all finite matrix identities and invertibility relations hold. The stalks of the finite free terms outside the remaining degree are zero because their basis sizes are zero. Pull back this neighbourhood to Y\\prime and pull back the explicit maps and homotopies termwise. They remain a homotopy equivalence on the inverse-image open U, which contains z.",
+   "text": "Apply lem-pc-finite-free-stalk-homotopy-spread to obtain an open neighbourhood V of g(z) and a homotopy equivalence between the restrictions of P and that single complex.",
+   "uses": [
+    "lem-pc-finite-free-stalk-homotopy-spread"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Take U = g^{-1}(V); its membership condition is z in U because g(z) lies in V. Pull back the equivalence along g restricted to V. The natural isomorphisms identifying restriction with pullback, pullback of a composition, and pullback along equal morphisms identify the source with (g^*P)|_U. The single-complex comparison and restriction/pullback of a free sheaf identify the target with the single rank-r free complex on U. Compose the induced homotopy equivalences of these isomorphisms with the pulled-back equivalence. This is the complete Lean proof.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-complex-unit-entry-splits"
+  "lem-pc-finite-free-residue-stalk-homotopy",
+  "lem-pc-finite-free-stalk-homotopy-spread"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof step 4, as recorded in the assigned criterion node and Lean docstring; explicit local normal form and fibre calculation."
+  "place": "Proof, first two paragraphs and forward base-change direction; local-ring and spreading steps split into separate statements, with base change proved using Mathlib natural isomorphisms."
  },
  "mathlib_searches": [
   {
@@ -127,7 +130,7 @@
   "reviewer": "COMPILER",
   "group": "M2",
   "result": "pass",
-  "landing": "20261012T144127-L-2101646",
+  "landing": "20261012T153011-L-2351158",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

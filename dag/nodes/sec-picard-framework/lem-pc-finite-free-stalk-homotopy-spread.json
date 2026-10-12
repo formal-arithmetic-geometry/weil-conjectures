@@ -1,0 +1,130 @@
+{
+ "id": "lem-pc-finite-free-stalk-homotopy-spread",
+ "kind": "statement",
+ "title": "Spreading a single free homotopy normal form from a local ring",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme], $P$ a cochain complex of $\\mathcal O_Y$-modules [def-pc-derived-category] with finite free terms [def-weil-pbc-free-module], supported in degrees $0$ through $d\\in\\mathbb N$. Fix $y\\in Y$, $i\\in\\mathbb Z$ and $r\\in\\mathbb N$. Let $Q=\\mathcal O_Y^r[-i]$ be the single cochain complex in degree $i$, and let $s:\\operatorname{Spec}\\mathcal O_{Y,y}\\to Y$ be the canonical morphism. Suppose the termwise pullbacks [def-pc-derived-pullback] $s^*P$ and $s^*Q$ are homotopy equivalent. Then there is an open neighbourhood $V$ of $y$ such that $P|_V$ and $Q|_V$ are homotopy equivalent. Here a homotopy equivalence consists of chain maps in both directions whose composites are chain homotopic to the respective identities. No residue cohomology hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood of y, and bases of the finite free terms. Over Spec(O_{Y,y}), the maps in the given equivalence and the two contracting homotopies are matrices over O_{Y,y}. P has finite support in [0,d] and the single complex has support {i}; hence only finitely many matrix coefficients occur.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Represent every coefficient by a section on a neighbourhood of y, then intersect this finite family of opens. The chain-map equations and both contracting-homotopy identities are finitely many entrywise equalities, since the complexes are bounded and all terms are finite free. Each equality holds after taking the germ at y, so the equality criterion for a stalk gives a smaller neighbourhood on which it holds. Intersect the finitely many smaller neighbourhoods.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "On the resulting open V the represented matrices define chain maps and homotopies for the restricted complexes. Outside the finite support all components are unique maps from or to zero objects; the chain and homotopy equations there are automatic. The two homotopy identities give the desired equivalence. This argument uses the actual given local-ring homotopy equivalence, and uses neither residue cohomology nor a change of base.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A homotopy equivalence of bounded finite free complexes over a scheme stalk extends to an open neighbourhood of the point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homotopy equivalence of bounded finite free complexes over a scheme stalk extends to an open neighbourhood of the point",
+   "results": "AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.exists_lift_of_germInjective_aux, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, AlgebraicGeometry.spread_out_unique_of_isGermInjective, AlgebraicGeometry.isLocalIso_iff, AlgebraicGeometry.IsLocalIso; no theorem of the stated form.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*homotopy|homotopy.*stalk|homotopy.*neighbou?r|neighbou?r.*homotopy",
+   "results": "No hits; no theorem of the stated form.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomotopyEquiv, AlgebraicGeometry.Scheme.fromSpecStalk",
+   "results": "Second reading: successful query, 0 hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeResidueLocalHomotopy",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof, extension of finite basis changes to a neighbourhood",
+   "via": [
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopySpread",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkHomotopySpread.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_restrict_homotopyEquiv_single_of_stalk",
+  "statement": "theorem exists_restrict_homotopyEquiv_single_of_stalk {Y : Scheme.{u}} (P : CochainComplex Y.Modules ℤ) (d : ℕ) (hge : P.IsStrictlyGE 0) (hle : P.IsStrictlyLE d) (hfree : ∀ n : ℤ, ∃ s : ℕ, Nonempty (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s)))) (i : ℤ) (r : ℕ) (y : Y) (hy : Nonempty (HomotopyEquiv (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P) (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj ((CochainComplex.singleFunctor Y.Modules i).obj (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))))) : ∃ V : Y.Opens, y ∈ V ∧ Nonempty (HomotopyEquiv (((restrictFunctor V.ι).mapHomologicalComplex _).obj P) (((restrictFunctor V.ι).mapHomologicalComplex _).obj ((CochainComplex.singleFunctor Y.Modules i).obj (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))))))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T153011-L-2351158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T153011-L-2351158",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

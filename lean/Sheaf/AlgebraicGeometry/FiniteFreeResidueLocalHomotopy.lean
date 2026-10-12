@@ -11,6 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 public import Mathlib.Algebra.Homology.Homotopy
 
+import Sheaf.AlgebraicGeometry.FiniteFreeResidueStalkHomotopy
+import Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopySpread
+
 /-! # Local homotopy normal form after pullback at a good residue point
 
 Source: blueprint lem-pc-perfect-locus, proof step 4.
@@ -54,6 +57,28 @@ theorem exists_restrict_homotopyEquiv_single_of_residue
         (((Modules.pullback g).mapHomologicalComplex _).obj P))
       ((CochainComplex.singleFunctor U.toScheme.Modules (i : ℤ)).obj
         (SheafOfModules.free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))) := by
-  sorry
+  obtain ⟨V, hzV, ⟨e⟩⟩ := exists_restrict_homotopyEquiv_single_of_stalk
+    P d hge hle hfree (i : ℤ) r (g.base z)
+    (nonempty_stalk_homotopyEquiv_single_of_residue P d hge hle hfree i r (g.base z) hz)
+  let U : Y'.Opens := g ⁻¹ᵁ V
+  let f : U.toScheme ⟶ V.toScheme := g ∣_ V
+  let baseChange : Modules.pullback g ⋙ restrictFunctor U.ι ≅
+      restrictFunctor V.ι ⋙ Modules.pullback f :=
+    Functor.isoWhiskerLeft _ (restrictFunctorIsoPullback U.ι) ≪≫
+      Modules.pullbackComp U.ι g ≪≫
+      Modules.pullbackCongr (morphismRestrict_ι g V).symm ≪≫
+      (Modules.pullbackComp f V.ι).symm ≪≫
+      Functor.isoWhiskerRight (restrictFunctorIsoPullback V.ι).symm _
+  let eP := (NatIso.mapHomologicalComplex baseChange (ComplexShape.up ℤ)).app P
+  let F := restrictFunctor V.ι ⋙ Modules.pullback f
+  let eQ := (HomologicalComplex.singleMapHomologicalComplex F
+    (ComplexShape.up ℤ) (i : ℤ)).app
+      (SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin r))) ≪≫
+    (CochainComplex.singleFunctor U.toScheme.Modules (i : ℤ)).mapIso
+      ((Modules.pullback f).mapIso (restrictFreeIso V.ι (ULift.{u} (Fin r))) ≪≫
+        pullbackFreeIso f (ULift.{u} (Fin r)))
+  refine ⟨U, hzV, ?_⟩
+  exact ⟨(HomotopyEquiv.ofIso eP).trans
+    (((Modules.pullback f).mapHomotopyEquiv e).trans (HomotopyEquiv.ofIso eQ))⟩
 
 end AlgebraicGeometry.Scheme.Modules
