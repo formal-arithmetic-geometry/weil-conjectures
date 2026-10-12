@@ -8,8 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.TensorProduct.Map
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
 
 /-!
 # Sections of module pullback on affine opens
@@ -27,6 +26,11 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+-- The instance lambda uses G through the inferred section-module type.
+set_option linter.unusedVariables.funArgs false in
 /-- The affine sections comparison is a bijective linear map, linear also for the action
 of `B` on the second tensor factor, with its canonical pure-tensor formula and naturality.
 The `B`-action on `G(V) ⊗[A] B` is written by swapping to `B ⊗[A] G(V)`, applying the usual
@@ -75,6 +79,76 @@ theorem exists_tensorPullback_affine_sections
           (a : G ⟶ G') (t : Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)),
         ((tensorPullback f).map a).app U.1 (c G hG t) =
           c G' hG' (TensorProduct.map (a.val.app (op V.1)).hom LinearMap.id t)) := by
-  sorry
+  classical
+  dsimp only
+  let : Algebra Γ(Y, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra
+  let : ∀ G : Y.Modules, Module Γ(Y, V.1) Γ((tensorPullback f).obj G, U.1) :=
+    fun G ↦ Module.compHom _ (f.appLE V.1 U.1 hUV).hom
+  let e (G : Y.Modules) : Γ(G, V.1) →ₗ[Γ(Y, V.1)]
+      Γ((tensorPullback f).obj G, U.1) :=
+    { toFun := fun s ↦ ((tensorPullback f).obj G).presheaf.map (homOfLE hUV).op
+        (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G).val.app
+          (op V.1) s)
+      map_add' := by
+        intro s t
+        rw [((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G).val.app
+          (op V.1) |>.hom.map_add]
+        exact (((tensorPullback f).obj G).presheaf.map (homOfLE hUV).op).hom.map_add _ _
+      map_smul' := by
+        intro a s
+        rw [((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G).val.app
+          (op V.1) |>.hom.map_smul]
+        change ((tensorPullback f).obj G).presheaf.map (homOfLE hUV).op
+          ((f.app V.1).hom a • _) = _
+        rw [Scheme.Modules.map_smul]
+        rfl }
+  let c (G : Y.Modules) : (Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)) →ₗ[Γ(Y, V.1)]
+      Γ((tensorPullback f).obj G, U.1) :=
+    TensorProduct.lift (LinearMap.mk₂ Γ(Y, V.1) (fun s b ↦ b • e G s)
+      (by intros; simp [smul_add])
+      (by
+        intro a s b
+        rw [LinearMap.map_smul]
+        change b • ((f.appLE V.1 U.1 hUV).hom a • e G s) =
+          (f.appLE V.1 U.1 hUV).hom a • (b • e G s)
+        exact smul_comm _ _ _)
+      (by intros; simp [add_smul])
+      (by
+        intro a s b
+        change ((f.appLE V.1 U.1 hUV).hom a * b) • e G s =
+          (f.appLE V.1 U.1 hUV).hom a • (b • e G s)
+        exact mul_smul _ _ _))
+  have hp (G : Y.Modules) (s : Γ(G, V.1)) (b : Γ(X, U.1)) :
+      c G (s ⊗ₜ[Γ(Y, V.1)] b) = b • e G s := by
+    exact TensorProduct.lift.tmul _ _
+  refine ⟨fun G _ ↦ c G, ?_, ?_, ?_, ?_⟩
+  · intro G hG
+    apply tensorPullback_affine_sections_bijective f V U hUV G hG (c G)
+    exact hp G
+  · intro G hG b t
+    induction t using TensorProduct.induction_on with
+    | zero => simp
+    | tmul s d => simp [hp, TensorProduct.smul_tmul', mul_smul]
+    | add t t' ht ht' => simp_all only [map_add, smul_add]
+  · intro G hG s b
+    exact hp G s b
+  · intro G G' hG hG' a t
+    induction t using TensorProduct.induction_on with
+    | zero => simp
+    | tmul s b =>
+      simp only [TensorProduct.map_tmul, LinearMap.id_apply, hp]
+      rw [Hom.app_smul]
+      congr 1
+      have hn := (Classical.choose (exists_tensorPullbackAdjunction f)).unit_naturality a
+      have hv := congrArg (fun q ↦ q.val.app (op V.1) s) hn
+      have hr := ((tensorPullback f).map a).val.naturality (homOfLE hUV).op
+      have hr' := congrArg (fun q ↦ q
+        (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G).val.app
+          (op V.1) s)) hr
+      change ((tensorPullback f).map a).app U.1
+          (((tensorPullback f).obj G).presheaf.map (homOfLE hUV).op _) = _
+      exact hr'.trans (congrArg (fun z ↦
+        ((tensorPullback f).obj G').presheaf.map (homOfLE hUV).op z) hv)
+    | add t t' ht ht' => simp_all only [map_add]
 
 end AlgebraicGeometry.Scheme.Modules

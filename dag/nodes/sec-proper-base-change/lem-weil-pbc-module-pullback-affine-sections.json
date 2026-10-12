@@ -32,110 +32,38 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the affine charts).* Let $\\iota_V:\\operatorname{Spec}A\\to Y$ and $\\iota_U:\\operatorname{Spec}B\\to X$ be the canonical open immersions with images $V$ and $U$ [lem-weil-pbc-affine-open-spec-points]. Since $U$ and $V$ are affine schemes [def-pc-scheme] and $\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$, $\\Gamma(\\operatorname{Spec}A,\\mathcal O)=A$ [def-weil-affine-spectrum], the isomorphisms $\\operatorname{Spec}B\\cong U$, $\\operatorname{Spec}A\\cong V$ induce the identity on global sections; so $\\iota_U^\\sharp$ on sections over $U$ is the identity of $B=\\mathcal O_X(U)$ and $\\iota_V^\\sharp$ over $V$ the identity of $A=\\mathcal O_Y(V)$. Moreover $\\iota_V^{-1}(V)=\\operatorname{Spec}A$ and, as $U\\subseteq f^{-1}(V)$, $\\iota_U^{-1}(f^{-1}V)=\\iota_U^{-1}(U)=\\operatorname{Spec}B$. Since $f(U)\\subseteq V$, [lem-weil-pbc-affine-opens-induced-ring-map-spec-square] applies to $f$, $U$, $V$, and its ring map ($f^\\sharp_V$ followed by restriction to $U$) is $\\rho$: with $\\psi:=\\operatorname{Spec}\\rho:\\operatorname{Spec}B\\to\\operatorname{Spec}A$ we have $g:=\\iota_V\\circ\\psi=f\\circ\\iota_U$.",
-   "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I1 (lemma-morphism-into-affine) and Lemma 01I2 (lemma-category-affine-schemes): the reduction to a morphism of affine schemes Spec B -> Spec A, as Stacks does when it applies Lemma 01I9 affine-locally (e.g. Cohomology of Schemes, Lemma 02KG, lemma-affine-base-change, proof, coherent.tex)"
-   }
-  },
-  {
-   "text": "*Step 2 ($\\mathcal G$ on $V$ is $\\widetilde M$).* Put $M=\\mathcal G(V)$, an $A$-module, and let $\\mathcal N=\\mathcal G|_{\\operatorname{Spec}A}$ be the restriction of $\\mathcal G$ along the open immersion $\\iota_V$ [lem-weil-pbc-module-restriction-open-immersion-colimits]: $\\mathcal N(W)=\\mathcal G(\\iota_V(W))$, so $\\Gamma(\\operatorname{Spec}A,\\mathcal N)=\\mathcal G(V)=M$, with $A=\\Gamma(\\operatorname{Spec}A,\\mathcal O)$ acting through $\\iota_V^\\sharp$, i.e. by the given $A$-module structure (Step 1). By clause (2) of that node $\\mathcal N$ is quasi-coherent. Let $\\widetilde M$ and $\\tau:M\\to\\Gamma(\\operatorname{Spec}A,\\widetilde M)$ be as in [lem-weil-pbc-spec-module-tilde-sections]. By [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) the counit $\\varepsilon:\\widetilde M\\to\\mathcal N$, the morphism corresponding to $\\mathrm{id}_M$ under the bijection $\\alpha\\mapsto\\alpha_{\\operatorname{Spec}A}\\circ\\tau$ of (1), is an isomorphism of $\\mathcal O_{\\operatorname{Spec}A}$-modules, and $\\varepsilon_{\\operatorname{Spec}A}(\\tau(s))=s$ for $s\\in M$.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01IA (lemma-quasi-coherent-affine): a quasi-coherent module on Spec A is the sheaf associated to its global sections; Lemma 01HV (lemma-spec-sheaves) (2)"
-   }
-  },
-  {
-   "text": "*Step 3 (pullback along the charts is restriction).* By [lem-weil-pbc-open-immersion-module-pullback-restriction] for $\\iota_V$ there is an isomorphism $\\kappa_V:\\mathcal N\\to\\iota_V^*\\mathcal G$ of $\\mathcal O_{\\operatorname{Spec}A}$-modules with $\\kappa_V(h|_{\\iota_V(\\iota_V^{-1}W)})=\\eta_{\\iota_V}(h)$ for $h\\in\\mathcal G(W)$; for $W=V$ ($\\iota_V(\\iota_V^{-1}V)=V$, Step 1) this reads $\\kappa_V(s)=\\eta_{\\iota_V}(s)$ for $s\\in M=\\mathcal N(\\operatorname{Spec}A)$. Likewise, with $\\mathcal P=(f^*\\mathcal G)|_{\\operatorname{Spec}B}$ the restriction along $\\iota_U$ [lem-weil-pbc-module-restriction-open-immersion-colimits], there is an isomorphism $\\kappa_U:\\mathcal P\\to\\iota_U^*f^*\\mathcal G$ with $\\kappa_U(t|_U)=\\eta_{\\iota_U}(t)$ for $t\\in(f^*\\mathcal G)(f^{-1}V)$ (take $W=f^{-1}V$; $\\iota_U(\\iota_U^{-1}W)=U$ by Step 1). Here $\\Gamma(\\operatorname{Spec}B,\\mathcal P)=(f^*\\mathcal G)(U)$, and $B=\\Gamma(\\operatorname{Spec}B,\\mathcal O)$ acts through $\\iota_U^\\sharp$, i.e. by the given $B=\\mathcal O_X(U)$-module structure (Step 1).",
-   "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A0 (lemma-j-pullback), last sentence: for an open immersion the pullback of modules is the restriction"
-   }
-  },
-  {
-   "text": "*Step 4 (composition of pullbacks).* For morphisms of schemes $a:Z\\to Z'$, $b:Z'\\to Z''$ the functors $(b\\circ a)_*$ and $b_*a_*$ are equal (both send $\\mathcal H$ to $W\\mapsto\\mathcal H(a^{-1}b^{-1}W)$ with the same module structure, $(b\\circ a)^\\sharp=b_*(a^\\sharp)\\circ b^\\sharp$) [def-pc-module-pullback]. Composing the adjunctions $b^*\\dashv b_*$ and $a^*\\dashv a_*$ gives the composite adjunction $a^*b^*\\dashv b_*a_*$ with unit $b_*(\\eta_{a,b^*\\mathcal H})\\circ\\eta_{b,\\mathcal H}$ [def-weil-pbc-composite-adjunction]; applying [lem-weil-pbc-conjugate-iso-unit-equation] to it, to $(b\\circ a)^*\\dashv(b\\circ a)_*$ and to $\\delta=\\mathrm{id}:(b\\circ a)_*\\to b_*a_*$ gives an isomorphism $c_{b,a}:a^*b^*\\to(b\\circ a)^*$ of functors with $(b\\circ a)_*(c_{b,a,\\mathcal H})\\circ b_*(\\eta_{a,b^*\\mathcal H})\\circ\\eta_{b,\\mathcal H}=\\eta_{b\\circ a,\\mathcal H}$; on sections over an open $W\\subseteq Z''$: $c_{b,a}(\\eta_a(\\eta_b(h)))=\\eta_{b\\circ a}(h)$ in $\\Gamma(a^{-1}b^{-1}W,(b\\circ a)^*\\mathcal H)$ for $h\\in\\mathcal H(W)$. Apply this to $(b,a)=(f,\\iota_U)$ and to $(b,a)=(\\iota_V,\\psi)$, whose composites are both $g$ (Step 1), and put $\\Lambda=c_{\\iota_V,\\psi,\\mathcal G}^{-1}\\circ c_{f,\\iota_U,\\mathcal G}:\\iota_U^*f^*\\mathcal G\\to\\psi^*\\iota_V^*\\mathcal G$, an isomorphism of $\\mathcal O_{\\operatorname{Spec}B}$-modules. For $s\\in M=\\mathcal G(V)$ (with $g^{-1}V=\\operatorname{Spec}B$) both $\\eta_{\\iota_U}(\\eta_f(s))$ and $\\eta_\\psi(\\eta_{\\iota_V}(s))$ go to $\\eta_g(s)$, so $\\Lambda(\\eta_{\\iota_U}(\\eta_f(s)))=\\eta_\\psi(\\eta_{\\iota_V}(s))$.",
+   "text": "Restrict the chosen tensor-pullback adjunction unit from f^{-1}V to U. It is A-linear by linearity of the unit and the restriction scalar formula, with scalar map f.appLE. Extend (s,b) mapping to b times this restricted unit through TensorProduct.lift. Tensor induction proves B-linearity on the second factor.",
    "uses": [
     "def-pc-module-pullback",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 0097 (lemma-push-pull-composition-modules): (g o f)_* = g_* o f_* and the canonical isomorphism (g o f)^* = f^* o g^* obtained from it by uniqueness of adjoints"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 5 (Schemes 01I9 (1) for $\\psi$).* By [lem-weil-pbc-tilde-pullback-base-change] applied to $\\rho:A\\to B$ and $\\psi=\\operatorname{Spec}\\rho$, there is an isomorphism $\\theta:\\psi^*\\widetilde M\\to\\widetilde{B\\otimes_AM}$ of $\\mathcal O_{\\operatorname{Spec}B}$-modules with $\\theta(\\eta_\\psi(\\tau(s)))=\\tau(1\\otimes s)$ for $s\\in M$. The morphism $\\kappa_V\\circ\\varepsilon:\\widetilde M\\to\\iota_V^*\\mathcal G$ is an isomorphism (Steps 2, 3), hence so is $\\psi^*(\\kappa_V\\circ\\varepsilon)$ (a functor [def-pc-module-pullback] preserves isomorphisms), and naturality of the unit of $\\psi^*\\dashv\\psi_*$ gives $\\psi^*(\\kappa_V\\varepsilon)(\\eta_\\psi(\\tau(s)))=\\eta_\\psi(\\kappa_V(\\varepsilon(\\tau(s))))=\\eta_\\psi(\\kappa_V(s))=\\eta_\\psi(\\eta_{\\iota_V}(s))$ in $\\Gamma(\\operatorname{Spec}B,\\psi^*\\iota_V^*\\mathcal G)$ (Steps 2, 3).",
+   "text": "Apply the affine pure-tensor-map bijectivity theorem to the constructed map.",
    "uses": [
-    "lem-weil-pbc-tilde-pullback-base-change",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-module-pullback-affine-sections-bijective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback) (1): psi^* M~ = (S (x)_R M)~ functorially in M"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 6 (the isomorphism on sections).* Let $\\Omega=\\theta\\circ\\psi^*(\\kappa_V\\varepsilon)^{-1}\\circ\\Lambda\\circ\\kappa_U:\\mathcal P\\to\\widetilde{B\\otimes_AM}$, a composite of isomorphisms of $\\mathcal O_{\\operatorname{Spec}B}$-modules (Steps 3, 4, 5). On global sections it gives a bijection $\\Omega_{\\operatorname{Spec}B}:(f^*\\mathcal G)(U)\\to\\Gamma(\\operatorname{Spec}B,\\widetilde{B\\otimes_AM})$ which is $B$-linear (a morphism of $\\mathcal O_{\\operatorname{Spec}B}$-modules is linear over $\\Gamma(\\operatorname{Spec}B,\\mathcal O)=B$ on global sections, and by Step 3 this is the given $B$-structure of $(f^*\\mathcal G)(U)$). By [lem-weil-pbc-affine-tilde-gamma-adjunction] (2) (over $B$), $\\tau:B\\otimes_AM\\to\\Gamma(\\operatorname{Spec}B,\\widetilde{B\\otimes_AM})$ is a $B$-linear bijection; put $\\Phi=\\tau^{-1}\\circ\\Omega_{\\operatorname{Spec}B}:(f^*\\mathcal G)(U)\\to B\\otimes_AM$, a $B$-linear bijection. For $s\\in M$, with $f^*s=\\eta_f(s)\\in(f^*\\mathcal G)(f^{-1}V)$: $\\kappa_U((f^*s)|_U)=\\eta_{\\iota_U}(\\eta_f(s))$ (Step 3), $\\Lambda$ sends it to $\\eta_\\psi(\\eta_{\\iota_V}(s))$ (Step 4), $\\psi^*(\\kappa_V\\varepsilon)^{-1}$ to $\\eta_\\psi(\\tau(s))$ and $\\theta$ to $\\tau(1\\otimes s)$ (Step 5); hence $\\Phi((f^*s)|_U)=1\\otimes s$ and, by $B$-linearity, $\\Phi(b\\cdot(f^*s)|_U)=b\\otimes s$. Let $\\sigma:\\mathcal G(V)\\otimes_AB\\to B\\otimes_A\\mathcal G(V)$, $s\\otimes b\\mapsto b\\otimes s$, be the swap isomorphism of $B$-modules. Then $\\Phi^{-1}\\circ\\sigma$ is a $B$-linear isomorphism sending $s\\otimes b$ to $b\\cdot(f^*s)|_U$; it is therefore the map $c_{\\mathcal G}$ of the statement, which is thus well defined and an isomorphism of $B$-modules.",
+   "text": "Naturality of the chosen adjunction unit and compatibility of the pulled-back morphism with restrictions prove naturality on pure tensors. Its B-linearity moves b outside. Additivity and tensor induction handle every tensor.",
    "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01HV (lemma-spec-sheaves) (2): Gamma(Spec R, M~) = M; Lemma 01I9 (lemma-widetilde-pullback) (1)"
-   }
-  },
-  {
-   "text": "*Step 7 (naturality).* Let $u:\\mathcal G\\to\\mathcal G'$ be $\\mathcal O_Y$-linear between quasi-coherent modules. Both $(f^*u)_U\\circ c_{\\mathcal G}$ and $c_{\\mathcal G'}\\circ(u_V\\otimes1_B)$ are $B$-linear maps $\\mathcal G(V)\\otimes_AB\\to(f^*\\mathcal G')(U)$, and $\\mathcal G(V)\\otimes_AB$ is generated as a $B$-module by the $s\\otimes1$, so it suffices to compare them there. Naturality of the unit of $f^*\\dashv f_*$ [def-pc-module-pullback], $f_*f^*(u)\\circ\\eta_{f,\\mathcal G}=\\eta_{f,\\mathcal G'}\\circ u$, on sections over $V$ gives $(f^*u)_{f^{-1}V}(f^*s)=f^*(u_V(s))$; as $f^*u$ commutes with restriction to $U$, $(f^*u)_U(c_{\\mathcal G}(s\\otimes1))=(f^*u)_U((f^*s)|_U)=(f^*(u_Vs))|_U=c_{\\mathcal G'}(u_V(s)\\otimes1)$.",
-   "uses": [
-    "def-pc-module-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01I9 (lemma-widetilde-pullback) (1), 'functorially in the R-module M'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-spec-points",
-  "def-pc-scheme",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
   "def-pc-module-pullback",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-tilde-pullback-base-change"
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-affine-sections-bijective"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemmas 01I9 (lemma-widetilde-pullback) (1), 01IA (lemma-quasi-coherent-affine) and 01HV (lemma-spec-sheaves) (2), applied affine-locally as in Cohomology of Schemes, Lemma 02KG (lemma-affine-base-change, coherent.tex, proof); Sheaves, Lemmas 00A0 (lemma-j-pullback) and 0097 (lemma-push-pull-composition-modules) for the reduction to the charts (literature/stacks-project/sheaves.tex). Stacks states no single lemma for an affine U over an affine V; the assembly of these lemmas and the check that the composite is the map s(x)b -> b f^*s|_U are written out here."
+  "place": "Tags 01I9, 01IA and 01HV, using the existing proved standard-pullback implementation in WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde and transporting it by uniqueness of left adjoints. Tensor construction and naturality are proved directly; the affine-chart unit computation is lem-weil-pbc-module-pullback-affine-chart-unit."
  },
  "mathlib_searches": [
   {
@@ -239,5 +167,15 @@
   "group": "M1",
   "result": "pass",
   "note": "f:X⟶Y arbitrary schemes; V,U affineOpens with U ≤ f⁻¹ᵁV; A=Γ(Y,V), B=Γ(X,U), rho=f.appLE (algebra by inlined letI, both letIs needed, #print shows no let); G ranges over Y.Modules with SheafOfModules.IsQuasicoherent; c A-linear on Γ(G,V)⊗[A]B, bijective, B-linear on the second factor via comm conjugation; c(s⊗b)=b•(unit of Classical.choose exists_tensorPullbackAdjunction at op V, restricted along homOfLE hUV) s; naturality (f^*a)_U∘c_G = c_G'∘(a_V⊗id) for all a:G⟶G' quasi-coherent; no new definitions, name unused on sheaf-dag"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-feba0",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T060755-L-2916227",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, and repository comparison agree; all three delivered Lean files compile successfully with no mechanical findings or remaining sorry declarations."
  }
 }

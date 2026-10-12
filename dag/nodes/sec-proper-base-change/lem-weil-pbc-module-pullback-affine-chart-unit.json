@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-module-pullback-affine-chart-unit",
+ "kind": "statement",
+ "title": "Unit compatibility for the affine-chart pullback square",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $V\\subseteq Y$ and $U\\subseteq X$ affine opens with $U\\subseteq f^{-1}V$, and $G$ an $\\mathcal O_Y$-module [def-weil-sheaf-of-modules-category]. Put $A=\\mathcal O_Y(V)$, $B=\\mathcal O_X(U)$, $\\rho=f^\\sharp|_U:A\\to B$, $\\psi=\\operatorname{Spec}\\rho$, and let $j_V:\\operatorname{Spec}A\\to Y$, $j_U:\\operatorname{Spec}B\\to X$ be the canonical charts [def-weil-affine-spectrum]. Use the standard pullback/direct-image adjunctions and restriction along open immersions [def-pc-module-pullback], [lem-weil-pbc-module-restriction-open-immersion-colimits]. Let $e_V:\\Gamma(\\operatorname{Spec}A,G|_{j_V})\\to G(V)$ and $e_U:\\Gamma(\\operatorname{Spec}B,(f^*G)|_{j_U})\\to(f^*G)(U)$ be the canonical section identifications, inverse to restriction to the image of the chart. The equality $\\psi j_V=j_U f$ gives the right-adjoint isomorphism $\\delta:\\psi_*j_{V*}\\cong j_{U*}f_*$ by pushforward composition. Let $k:j_V^{\\mathrm{res}}\\psi^*\\cong f^*j_U^{\\mathrm{res}}$ be the unique left-adjoint comparison obtained by transporting the second composite adjunction through $\\delta^{-1}$. Then for every $s\\in G(V)$, $$e_U(k_{G,\\operatorname{Spec}B}(\\eta_\\psi(e_V^{-1}s)))=\\eta_f(s)|_U.$$ No quasi-coherence assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00A0 (lemma-j-pullback) and 0097 (lemma-push-pull-composition-modules), specialized to the affine-chart square; original affine-sections proof steps 3 and 4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "Form the two composite adjunctions for restriction along j_V followed by pullback along psi, and pullback along f followed by restriction along j_U. The affine chart square identifies their composite pushforwards, giving delta and hence k.",
+   "uses": [
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit equation for uniqueness of left adjoints carries the first composite unit to the transported second composite unit. Evaluate this equality on s over V, and restrict its value along psi^{-1}(j_V^{-1}V)=Spec B to the top open.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The units of the restriction adjunctions are section restriction maps. The inverse of e_V is restriction from V to j_V(Spec A). Naturality of the psi unit and of k with respect to the equalities of inverse-image opens turns the left side into e_U(k(eta_psi(e_V^{-1}s))). On the right, delta^{-1}, the restriction unit for j_U, and e_U are restrictions or transports along inclusions of opens. Their composite inclusion is U contained in f^{-1}V, so functoriality of the presheaf gives precisely eta_f(s)|_U.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 00A0 (lemma-j-pullback) and 0097 (lemma-push-pull-composition-modules), specialized to the affine-chart square; original affine-sections proof steps 3 and 4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "uniqueness of left adjoints affine chart pullback restriction unit compatibility sections",
+   "results": "Service unavailable: Internal Server Error. No no-match conclusion drawn.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit of uniqueness of left adjoints compatible with restriction of sheaf modules along an affine chart square",
+   "results": "restrictAdjunction_unit_app_app, restrictAdjunction, restrictAdjunction_counit_app_app; these give the restriction units but not the assembled affine-chart section equation.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "affineChart_pullback_unit|tensorPullback_affine_sections_bijective|sectionsRestrictFromSpecLinearEquiv",
+   "results": "0 hits in Mathlib. Local source rg found sectionsRestrictFromSpecLinearEquiv in WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine and pullbackSpecΓEquiv in WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde; both are reused.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModulePullbackAffineSections",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module pullback used there, Unit compatibility for the affine-chart pullback square",
+   "via": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-formal-systems-pullback",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackAffineChartUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackAffineChartUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affineChart_pullback_unit",
+  "statement": "theorem affineChart_pullback_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.affineOpens) (U : X.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) (G : Y.Modules) (s : Γ(G, V.1)) : let jV := V.2.fromSpec let jU := U.2.fromSpec let ρ := f.appLE V.1 U.1 hUV let ψ := Spec.map ρ let hsq : ψ ≫ jV = jU ≫ f := V.2.SpecMap_appLE_fromSpec f U.2 hUV let adj₁ := (restrictAdjunction jV).comp (pullbackPushforwardAdjunction ψ) let adj₂ := (pullbackPushforwardAdjunction f).comp (restrictAdjunction jU) let rightIso : pushforward ψ ⋙ pushforward jV ≅ pushforward jU ⋙ pushforward f := pushforwardComp ψ jV ≪≫ pushforwardCongr hsq ≪≫ (pushforwardComp jU f).symm let k : restrictFunctor jV ⋙ pullback ψ ≅ pullback f ⋙ restrictFunctor jU := adj₁.leftAdjointUniq (adj₂.ofNatIsoRight rightIso.symm) let eV := sectionsRestrictFromSpecLinearEquiv G V.2 let eU := sectionsRestrictFromSpecLinearEquiv ((pullback f).obj G) U.2 eU (((k.hom.app G).app ⊤) ((pullbackUnit ψ (G.restrict jV)).app ⊤ (eV.symm s))) = ((pullback f).obj G).presheaf.map (homOfLE hUV).op ((pullbackUnit f G).app V.1 s)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-feba0",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T060755-L-2916227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-feba0",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T060755-L-2916227",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, and repository comparison agree; all three delivered Lean files compile successfully with no mechanical findings or remaining sorry declarations."
+ }
+}

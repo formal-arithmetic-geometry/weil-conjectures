@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-module-pullback-affine-sections-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of the affine pure-tensor sections map",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme], $V\\subseteq Y$ and $U\\subseteq X$ affine opens with $U\\subseteq f^{-1}V$, $A=\\mathcal O_Y(V)$ and $B=\\mathcal O_X(U)$ with its $A$-algebra structure induced by $f$. Let $G$ be a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent], [def-weil-sheaf-of-modules-category], and use the specified tensor-formula pullback and its specified adjunction unit [def-pc-module-pullback], [lem-pc-module-pullback-adjunction]. Any $A$-linear map $c:G(V)\\otimes_A B\\to(f^*G)(U)$ satisfying $c(s\\otimes b)=b\\,\\eta_f(s)|_U$ for every $s\\in G(V)$ and $b\\in B$ is bijective.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I9 (lemma-widetilde-pullback) (1), 01IA (lemma-quasi-coherent-affine), 01HV (lemma-spec-sheaves) (2); Sheaves Tags 0097 and 00A0, as assembled in original affine-sections steps 1–6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Restrict G to N on Spec A. Quasi-coherence is preserved by restriction. The inverse restriction maps identify Gamma(N) with G(V), as A-modules, and Gamma((standard f*G)|Spec B) with (standard f*G)(U), as B-modules.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already-proved standard-pullback implementation of the affine tilde-Gamma counit and tilde base change: pullbackSpecΓEquiv rho N from WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde is a B-linear equivalence from extension of scalars of Gamma(N) to Gamma(psi*N). Its one-tensor formula is pullbackSpecΓEquiv_one_tmul. This realizes Schemes 01I9/01IA/01HV for the standard left adjoint.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-tilde-pullback-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the right adjoints of the two routes through the chart square. Their unique left-adjoint comparison k is an isomorphism. Compose its map on global sections with the section identifications of step 1, the equivalence of step 2, the tensor swap and the native-tensor/ModuleCat extension-of-scalars equivalence. This is a bijection.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-chart-unit",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the specified tensor pullback with the standard pullback by uniqueness of left adjoints. The unit equation, its naturality with restriction, and chart-unit compatibility show on s tensor b that the transported c equals the composite bijection: first reduce b tensor s to b times (1 tensor s), then use the one-tensor formula of step 2 and chart-unit compatibility. Tensor induction extends equality over zero and sums. Injectivity and surjectivity now follow from the component equivalences.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-chart-unit",
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-tilde-pullback-base-change",
+  "lem-weil-pbc-module-pullback-affine-chart-unit",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I9 (lemma-widetilde-pullback) (1), 01IA (lemma-quasi-coherent-affine), 01HV (lemma-spec-sheaves) (2); Sheaves Tags 0097 and 00A0, as assembled in original affine-sections steps 1–6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "uniqueness of left adjoints affine chart pullback restriction unit compatibility sections",
+   "results": "Service unavailable: Internal Server Error. No no-match conclusion drawn.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit of uniqueness of left adjoints compatible with restriction of sheaf modules along an affine chart square",
+   "results": "restrictAdjunction_unit_app_app, restrictAdjunction, restrictAdjunction_counit_app_app; these give the restriction units but not the assembled affine-chart section equation.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "affineChart_pullback_unit|tensorPullback_affine_sections_bijective|sectionsRestrictFromSpecLinearEquiv",
+   "results": "0 hits in Mathlib. Local source rg found sectionsRestrictFromSpecLinearEquiv in WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine and pullbackSpecΓEquiv in WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde; both are reused.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModulePullbackAffineSections",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); affine module pullback used there, Bijectivity of the affine pure-tensor sections map",
+   "via": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-formal-systems-pullback",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModulePullbackAffineSectionsBijective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModulePullbackAffineSectionsBijective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullback_affine_sections_bijective",
+  "statement": "theorem tensorPullback_affine_sections_bijective {X Y : Scheme.{u}} (f : X ⟶ Y) (V : Y.affineOpens) (U : X.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) : letI : Algebra Γ(Y, V.1) Γ(X, U.1) := (f.appLE V.1 U.1 hUV).hom.toAlgebra letI : ∀ G : Y.Modules, Module Γ(Y, V.1) Γ((tensorPullback f).obj G, U.1) := fun G ↦ Module.compHom Γ((tensorPullback f).obj G, U.1) (f.appLE V.1 U.1 hUV).hom ∀ (G : Y.Modules) (_ : G.IsQuasicoherent) (c : (Γ(G, V.1) ⊗[Γ(Y, V.1)] Γ(X, U.1)) →ₗ[Γ(Y, V.1)] Γ((tensorPullback f).obj G, U.1)), (∀ (s : Γ(G, V.1)) (b : Γ(X, U.1)), c (s ⊗ₜ[Γ(Y, V.1)] b) = b • ((tensorPullback f).obj G).presheaf.map (homOfLE hUV).op (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app G).val.app (op V.1) s)) → Function.Bijective c",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-feba0",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T060755-L-2916227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-feba0",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T060755-L-2916227",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG records, report, and repository comparison agree; all three delivered Lean files compile successfully with no mechanical findings or remaining sorry declarations."
+ }
+}
