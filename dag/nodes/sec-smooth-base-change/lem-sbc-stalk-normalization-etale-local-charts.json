@@ -15,18 +15,40 @@
  ],
  "proof": [
   {
-   "text": "Use the local normalization, purity, and split-section argument of Stacks Tag 0EYJ to identify each affine chart with a finite etale algebra.",
+   "text": "On the original open C_U, pull back f along its open inclusion. The pullback is the finite etale map P to C_U. An integral morphism has invertible toNormalization; smooth base change along the open inclusion identifies the two normalizations. Transporting etaleness through these isomorphisms proves that f.fromNormalization restricted to C_U is etale. This is the proved local helper normalization_etale_restrict using Mathlib Normalization.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the section-neighbourhood theorem to the assumed finite local normalization. Form the local section tau by pullback.lift of a followed by sigma and the identity. Its closed-point image belongs to the etale open W.",
+   "uses": [
+    "lem-sbc-stalk-normalization-section-neighbourhood"
+   ],
    "elementary": false
+  },
+  {
+   "text": "The equation sigma followed by c equals the identity gives tau followed by l followed by c equals a. The closed point of Spec O(S,s) maps to s, so W meets the missing fibre. Combine this witness, etaleness on C_U, and finiteness with fibre purity to prove etaleness everywhere.",
+   "uses": [
+    "lem-sbc-stalk-normalization-fibre-purity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the resulting Etale structure to obtain etaleness of each affine-chart appLE ring map via Etale.etale_appLE.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-stalk-normalization-section-neighbourhood",
+  "lem-sbc-stalk-normalization-fibre-purity"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "A2",
+  "by": "E2",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ, local claim",
-  "note": "The affine-chart algebra computation is the substantive geometric step."
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim",
+  "note": "The assembly is proved in Lean. The section calculation and propagation across the special fibre are separate strictly smaller statements; etaleness on the original open is proved directly from Mathlib normalization."
  },
  "mathlib_searches": [
   {
@@ -107,11 +129,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-8bc48",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T184239-L-3994736",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T205628-L-931505",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet declarations and DAG nodes; all modules and the direct importer compile without errors or warnings, with only the two documented sorry theorem statements remaining."
  }
 }

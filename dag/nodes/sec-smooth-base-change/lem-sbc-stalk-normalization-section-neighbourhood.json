@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-stalk-normalization-section-neighbourhood",
+ "kind": "statement",
+ "title": "Etaleness of the finite local normalization near the section",
+ "statement": "Let $S$ be a normal integral Noetherian quasi-separated scheme, $c:C\\to S$ a quasi-compact quasi-separated smooth morphism with geometrically connected fibres, $\\sigma:S\\to C$ a section, and $G$ a finite group with order invertible in $\\Gamma(S,\\mathcal O_S)$ [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms]. Let $q:C_\\eta\\to\\operatorname{Spec}k(S)$ and $j:C_\\eta\\to C$ exhibit the generic fibre [def-pc-fibre-product], with a section $s_\\eta$ satisfying $q s_\\eta=1$ and $j s_\\eta=\\sigma a_\\eta$. Let $Z\\to C_\\eta$ be a finite etale $G$-torsor with a rational point above $s_\\eta$. Let $U\\subset S$ contain $\\eta$, let $P\\to C_U$ be finite etale, and let $j_U:C_\\eta\\to C_U$ and $\\psi:Z\\to P$ exhibit its generic restriction, with $i_Uj_U=j$. Let $s\\notin U$ be such that every $t\\notin U$ specializing to $s$ equals $s$. Put $a:\\operatorname{Spec}\\mathcal O_{S,s}\\to S$, $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$, $l:L\\to C$, and let $N\\to C$ be the concrete relative normalization of $P\\to C_U\\to C$. If $n:N\\times_C L\\to L$ is finite, then there is an open $W\\subset L$ containing the closed-point image of the induced section $\\tau=(a\\sigma,1):\\operatorname{Spec}\\mathcal O_{S,s}\\to L$ such that $n|_W$ is etale.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim: etaleness near the section; Tags 0EYI, 0EY6, 0EY9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Localize at s; minimality identifies U with the punctured local spectrum. Extend the G-action and the generically split section fibre by normal generic full faithfulness.",
+   "uses": [
+    "lem-sbc-normal-integral-generic-hom-full",
+    "lem-sbc-generic-fibre-action-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a one-dimensional local base, use the tame normalization forms and the split-section trait test to obtain etaleness near the local section. The finite model is the normalization by uniqueness of integral closure.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "In dimension at least two normality and the flat depth formula give depth at least two along the missing fibre. The finite normal algebra is the unique depth-two extension. Complete a smooth affine chart at the section ideal. The resulting power series cover is split on the punctured section and hence split on the punctured completion by full faithfulness; in relative dimension zero this is immediate. Flat base change and uniqueness split the completed finite model. Faithfully flat descent at the section gives etaleness there. Finiteness makes the image of the non-etale locus closed, whose complement gives W.",
+   "uses": [
+    "lem-weil-pbc-normal-local-depth-two",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-sbc-generic-fibre-action-extension",
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E2",
+  "document": "Stacks Project",
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim: etaleness near the section; Tags 0EYI, 0EY6, 0EY9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite normalization of a smooth scheme over a normal local base is etale if etale on the punctured base and on an open meeting the closed fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etaleness of a finite normalization near a section and propagation from a dense open of the special fibre by purity",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus, Algebra.Etale.of_isLocalizationAway, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale.of_isLocalization_Away; no normalization section or fibre-purity theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(etale|section)|purity.*(finite|etale)",
+   "results": "0 hits: ; no normalization section or fibre-purity theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationEtale",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim: etaleness near the section; Tags 0EYI, 0EY6, 0EY9",
+   "via": [
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationSectionNeighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationSectionNeighbourhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.stalk_normalization_section_neighbourhood",
+  "statement": "theorem GaloisCover.stalk_normalization_section_neighbourhood {S C : Scheme.{u}} [IsNoetherian S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S)\n    (G : Type (u + 1)) [Group G] [Finite G]\n    (hG : IsUnit (Nat.card G : Γ(S, ⊤)))\n    {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C)\n    (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c)\n    (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _)\n    (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ)\n    (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη)\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (jU : Cη ⟶ (c ⁻¹ᵁ U).toScheme) (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (ψ : Z.P ⟶ PA.obj.left) (hjU : jU ≫ (c ⁻¹ᵁ U).ι = j)\n    (hψ : IsPullback ψ Z.π PA.obj.hom jU)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    IsFinite (pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n      (pullback.fst c (S.fromSpecStalk s))) →\n    let a := S.fromSpecStalk s\n    let τ : Spec (S.presheaf.stalk s) ⟶ pullback c a :=\n      pullback.lift (a ≫ σ) (𝟙 _) (by simp [Category.assoc, hσ])\n    ∃ W : (pullback c a).Opens,\n      τ (IsLocalRing.closedPoint (S.presheaf.stalk s)) ∈ W ∧\n      Etale ((pullback.snd (PA.obj.hom ≫ (c ⁻¹ᵁ U).ι).fromNormalization\n        (pullback.fst c a)) ∣_ W)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8bc48",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T205628-L-931505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8bc48",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T205628-L-931505",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet declarations and DAG nodes; all modules and the direct importer compile without errors or warnings, with only the two documented sorry theorem statements remaining."
+ }
+}

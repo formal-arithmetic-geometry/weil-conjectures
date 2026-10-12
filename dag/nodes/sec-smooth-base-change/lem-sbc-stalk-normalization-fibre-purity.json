@@ -1,0 +1,137 @@
+{
+ "id": "lem-sbc-stalk-normalization-fibre-purity",
+ "kind": "statement",
+ "title": "Purity from an etale neighbourhood meeting the local special fibre",
+ "statement": "Let $S$ be a normal integral Noetherian quasi-separated scheme and $c:C\\to S$ a quasi-compact quasi-separated smooth morphism with geometrically connected fibres [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-sbc-smooth-morphisms]. Let $U\\subset S$ contain its generic point, let $P\\to C_U$ be finite etale, and let $s\\notin U$ satisfy: every $t\\notin U$ specializing to $s$ equals $s$. Put $f:P\\to C_U\\to C$, let $N\\to C$ be its concrete relative normalization, and put $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$ with projection $l:L\\to C$ [def-pc-fibre-product]. Assume $n:N\\times_C L\\to L$ is finite and $(N\\to C)|_{C_U}$ is etale. If there exist an open $W\\subset L$ and $x\\in W$ with $c(l(x))=s$ such that $n|_W$ is etale, then $n$ is etale. No group, torsor, section or rational-point assumption is made.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYE (purity across a regular Cartier divisor), 0EYB (fibrewise dense open purity), and 0EY6, as used in Tag 0EYJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Localize at s. The normalization commutes with localization. It is etale away from the special fibre by the assumed restriction and base change. A smooth geometrically connected fibre is geometrically integral, so W contains its generic point.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "In dimension one the local base is a DVR and the special fibre is a regular effective Cartier divisor. Etaleness at its generic point excludes ramification in codimension one. Purity extends the punctured cover etale across the divisor. Normal finite algebras are integral closures in their generic algebras, identifying this extension with N after localization.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "In dimension at least two, normality and flatness give depth at least two along the missing fibre. The finite normalization is normal and satisfies the depth-two condition, hence is the unique extension of the punctured cover. The union of W with the punctured open is fibrewise dense and contains every fibre over a base point of depth at most one. Apply fibrewise purity to extend the cover on this union etale everywhere; uniqueness identifies it with the normalization. Dimension zero is excluded by eta in U and s outside U.",
+   "uses": [
+    "lem-weil-pbc-normal-local-depth-two",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-normal-local-depth-two",
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E2",
+  "document": "Stacks Project",
+  "place": "Tags 0EYE (purity across a regular Cartier divisor), 0EYB (fibrewise dense open purity), and 0EY6, as used in Tag 0EYJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite normalization of a smooth scheme over a normal local base is etale if etale on the punctured base and on an open meeting the closed fibre",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etaleness of a finite normalization near a section and propagation from a dense open of the special fibre by purity",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.etaleLocus, Algebra.Etale.of_isLocalizationAway, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale.of_isLocalization_Away; no normalization section or fibre-purity theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(etale|section)|purity.*(finite|etale)",
+   "results": "0 hits: ; no normalization section or fibre-purity theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationEtale",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tags 0EYE (purity across a regular Cartier divisor), 0EYB (fibrewise dense open purity), and 0EY6, as used in Tag 0EYJ",
+   "via": [
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFibrePurity",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationFibrePurity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_etale_of_fibre_neighbourhood",
+  "statement": "theorem stalk_normalization_etale_of_fibre_neighbourhood {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c]\n    (U : S.Opens) (hηU : genericPoint S ∈ U)\n    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) (hs : s ∉ U)\n    (hmin : ∀ t : S, t ⤳ s → t ∉ U → t = s) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι\n    let l := pullback.fst c (S.fromSpecStalk s)\n    let n := pullback.snd f.fromNormalization l\n    IsFinite n → Etale (f.fromNormalization ∣_ (c ⁻¹ᵁ U)) →\n    (∃ (W : (pullback c (S.fromSpecStalk s)).Opens)\n      (x : (pullback c (S.fromSpecStalk s) : Scheme.{u})),\n      x ∈ W ∧ (l ≫ c) x = s ∧ Etale (n ∣_ W)) → Etale n",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8bc48",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T205628-L-931505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8bc48",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T205628-L-931505",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the packet declarations and DAG nodes; all modules and the direct importer compile without errors or warnings, with only the two documented sorry theorem statements remaining."
+ }
+}
