@@ -71,6 +71,14 @@ theorem flatComplexDerivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
               (DerivedCategory.Qh.obj
                 ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K)),
           e.inv = ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K) := by
-  sorry
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    F, hF, hFmap, hFadd, ε, hderived, htri, hε⟩ :=
+    Classical.choose_spec (exists_derivedPullback g)
+  refine ⟨F, hF, hFmap, hFadd, ε, hderived, ?_⟩
+  have hK := CochainComplex.isKFlat_of_boundedAbove_flat_ringedSpace
+    S.toRingedSpace K hbounded hflat
+  have := hε K hK
+  exact ⟨(asIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))).symm,
+    rfl⟩
 
 end AlgebraicGeometry
