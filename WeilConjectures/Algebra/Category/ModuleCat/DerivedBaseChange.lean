@@ -318,4 +318,71 @@ theorem isDerivedBaseChange_Q_map_complexMap [HasDerivedCategory.{u} (ModuleCat.
 
 end Reduction
 
+section Comp
+
+variable {A A' A'' : Type u} [CommRing A] [CommRing A'] [CommRing A'']
+  [HasDerivedCategory.{u} (ModuleCat.{u} A)] [HasDerivedCategory.{u} (ModuleCat.{u} A')]
+  [HasDerivedCategory.{u} (ModuleCat.{u} A'')] {f : A →+* A'} {g : A' →+* A''} {gf : A →+* A''}
+
+/-- On complexes, restricting scalars along `g` and then along `f` is restricting scalars along
+`g ∘ f`: the identity maps, as a chain map. -/
+noncomputable def restrictScalarsCompComplexMap (hgf : gf = g.comp f)
+    (L : CochainComplex (ModuleCat.{u} A'') ℤ) :
+    ((restrictScalars.{u} f).mapHomologicalComplex _).obj
+        (((restrictScalars.{u} g).mapHomologicalComplex _).obj L) ⟶
+      ((restrictScalars.{u} gf).mapHomologicalComplex _).obj L :=
+  (NatTrans.mapHomologicalComplex (restrictScalarsComp' f g gf hgf).inv (.up ℤ)).app L
+
+omit [HasDerivedCategory.{u} (ModuleCat.{u} A)] [HasDerivedCategory.{u} (ModuleCat.{u} A')]
+  [HasDerivedCategory.{u} (ModuleCat.{u} A'')] in
+/-- The chain map `restrictScalarsCompComplexMap` is the identity on elements. -/
+@[simp]
+lemma restrictScalarsCompComplexMap_f_apply (hgf : gf = g.comp f)
+    (L : CochainComplex (ModuleCat.{u} A'') ℤ) (i : ℤ) (x : L.X i) :
+    ((restrictScalarsCompComplexMap hgf L).f i).hom x = x :=
+  rfl
+
+/-- The image in the derived category of a chain map `K ⟶ Res_g L`, restricted along `f`, is
+the restriction along `f` of its image, up to the composition isomorphism
+`derivedRestrictScalarsCompIso`. -/
+lemma Q_map_restrictScalars_comp (hgf : gf = g.comp f) {K : CochainComplex (ModuleCat.{u} A') ℤ}
+    {L : CochainComplex (ModuleCat.{u} A'') ℤ}
+    (χ : K ⟶ ((restrictScalars.{u} g).mapHomologicalComplex _).obj L) :
+    DerivedCategory.Q.map (((restrictScalars.{u} f).mapHomologicalComplex _).map χ ≫
+        restrictScalarsCompComplexMap hgf L) ≫
+        (restrictScalars.{u} gf).mapDerivedCategoryFactors.inv.app L =
+      (restrictScalars.{u} f).mapDerivedCategoryFactors.inv.app K ≫
+        (derivedRestrictScalars f).map (DerivedCategory.Q.map χ ≫
+          (restrictScalars.{u} g).mapDerivedCategoryFactors.inv.app L) ≫
+        (derivedRestrictScalarsCompIso hgf).hom.app (DerivedCategory.Q.obj L) := by
+  rw [← cancel_mono ((restrictScalars.{u} gf).mapDerivedCategoryFactors.hom.app L),
+    Category.assoc, Iso.inv_hom_id_app]
+  simp only [Functor.comp_obj, Category.comp_id, Category.assoc]
+  have h₁ : (derivedRestrictScalarsCompIso hgf).hom.app (DerivedCategory.Q.obj L) ≫
+      (restrictScalars.{u} gf).mapDerivedCategoryFactors.hom.app L =
+        (derivedRestrictScalars f).map
+          ((restrictScalars.{u} g).mapDerivedCategoryFactors.hom.app L) ≫
+        (restrictScalars.{u} f).mapDerivedCategoryFactors.hom.app
+          (((restrictScalars.{u} g).mapHomologicalComplex _).obj L) ≫
+        DerivedCategory.Q.map (restrictScalarsCompComplexMap hgf L) := by
+    simp only [derivedRestrictScalarsCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Category.assoc]
+    rw [Functor.mapDerivedCategoryNatIso_fac,
+      ← Functor.mapDerivedCategoryCompIso_fac (restrictScalars g) (restrictScalars f) L]
+    simp only [Functor.comp_obj, Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app_assoc]
+    have h₂ : (Functor.mapHomologicalComplexCompIso
+        (Iso.refl (restrictScalars.{u} g ⋙ restrictScalars.{u} f)) (.up ℤ)).hom.app L ≫
+          (NatTrans.mapHomologicalComplex (restrictScalarsComp' f g gf hgf).inv (.up ℤ)).app L =
+        restrictScalarsCompComplexMap hgf L := by
+      ext i x
+      rfl
+    rw [← Functor.map_comp, h₂]
+  rw [h₁, Functor.map_comp_assoc, ← Functor.map_comp_assoc (derivedRestrictScalars f)
+    ((restrictScalars.{u} g).mapDerivedCategoryFactors.inv.app L), Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp,
+    Functor.mapDerivedCategoryFactors_hom_naturality_assoc, Iso.inv_hom_id_app_assoc,
+    Functor.map_comp]
+
+end Comp
+
 end ModuleCat
