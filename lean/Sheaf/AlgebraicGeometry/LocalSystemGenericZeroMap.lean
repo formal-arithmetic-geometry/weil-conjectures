@@ -6,7 +6,9 @@ Authors: SHEAF group K2
 module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.GenericStalkVanishingPropagation
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Generic detection of maps into a local system -/
 
@@ -43,6 +45,15 @@ theorem eq_zero_of_generic_sheafFiber_eq_zero
     [IsLocallyConstantSheaf G] (φ : F ⟶ G)
     (hφ : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
       s (IsLocalRing.closedPoint Ω) = η → (pointSmallEtale s).sheafFiber.map φ = 0) :
-    φ = 0 := by sorry
+    φ = 0 := by
+  have : Limits.HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+    Limits.hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+  apply sheafHom_ext_of_sheafFiber_map_algClosurePoint
+  intro x
+  have : ((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).Additive :=
+    (pointSmallEtale (X.algClosurePoint x)).sheafFiber_additive
+  simpa only [Functor.map_zero] using
+    all_sheafFiber_map_eq_zero_of_generic η hη φ hφ _ (X.algClosurePoint x)
 
 end AlgebraicGeometry.Scheme
