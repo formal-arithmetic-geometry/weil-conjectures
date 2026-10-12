@@ -3,10 +3,37 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.PopescuLifting
+import Sheaf.RingTheory.PopescuLiftingWitnessControl
 
 @[expose] public section
 universe u v w z
 namespace Algebra
+
+/-- Equal annihilators of the first two powers give equal annihilators of powers four
+and eight, by cancellation and induction. Source: Stacks 07F0, applying 07CP with π⁴. -/
+private theorem annihilator_four_eight (T : Type*) [CommRing T] (p : T)
+    (h : Module.annihilator T (Ideal.span ({p} : Set T)) =
+      Module.annihilator T (Ideal.span ({p ^ 2} : Set T))) :
+    Module.annihilator T (Ideal.span ({p ^ 4} : Set T)) =
+      Module.annihilator T (Ideal.span ({p ^ 8} : Set T)) := by
+  have hb (x : T) : x * p ^ 2 = 0 ↔ x * p = 0 := by
+    have he := SetLike.ext_iff.mp h x
+    change x ∈ (Ideal.span ({p} : Set T)).annihilator ↔
+      x ∈ (Ideal.span ({p ^ 2} : Set T)).annihilator at he
+    simpa only [Submodule.mem_annihilator_span_singleton, smul_eq_mul] using he.symm
+  have hn (n : ℕ) : ∀ x : T, x * p ^ (n + 1) = 0 ↔ x * p = 0 := by
+    induction n with
+    | zero => intro x; simp
+    | succ n ih =>
+      intro x
+      rw [show x * p ^ (n + 1 + 1) = (x * p) * p ^ (n + 1) by ring,
+        ih, mul_assoc, ← pow_two]
+      exact hb x
+  ext x
+  change x ∈ (Ideal.span ({p ^ 4} : Set T)).annihilator ↔
+    x ∈ (Ideal.span ({p ^ 8} : Set T)).annihilator
+  simp only [Submodule.mem_annihilator_span_singleton, smul_eq_mul]
+  exact (hn 3 x).trans (hn 7 x).symm
 
 /-- The lifting part of Stacks 07F0, before desingularization. It provides the
 compatible fourth-power quotient map, the singular-ideal element, and the comparison
@@ -69,6 +96,80 @@ theorem popescu_lifting_witness
           Ideal.map
             (Ideal.Quotient.mk (Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R))))
             (Ideal.map δ.toRingHom (singularIdeal R D)).radical := by
-  sorry
+  have hp8 : (π ^ 4) ^ 2 = π ^ 8 := by rw [← pow_mul]
+  have hmap8 : Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R)) =
+      Ideal.span ({algebraMap R Λ (π ^ 8)} : Set Λ) := by
+    rw [Ideal.map_span, Set.image_singleton]
+  let : Algebra R C := ((algebraMap (R ⧸ Ideal.span ({π ^ 8} : Set R)) C).comp
+    (Ideal.Quotient.mk _)).toAlgebra
+  have : IsScalarTower R (R ⧸ Ideal.span ({π ^ 8} : Set R)) C :=
+    IsScalarTower.of_algebraMap_eq (fun _ ↦ rfl)
+  have lift := @popescu_lifting R Λ C _ _ _ _ _ _ (π ^ 4)
+    (by rw [hp8]; exact annihilator_four_eight R π hAnnR)
+    (by
+      rw [hp8, map_pow, map_pow]
+      exact annihilator_four_eight Λ (algebraMap R Λ π) hAnnΛ)
+  rw [hp8, ← hmap8] at lift
+  let j := τ.restrictScalars R
+  obtain ⟨D, iD, iRD, δ, ψ, red, c, cmod, hfp, hψ, hred, hc,
+      _hcmod, haway, hover, _hrelative⟩ := @lift inferInstance inferInstance inferInstance j
+  let : CommRing D := iD
+  let : Algebra R D := iRD
+  let : FinitePresentation R D := hfp
+  revert ψ red c cmod haway
+  rw [map_pow (algebraMap R D), map_pow (algebraMap R Λ) π 4]
+  intro ψ red c cmod hψ hred hc _hcmod haway hover _hrelative
+  have hπ : algebraMap R D π ∈ singularIdeal R D := by
+    rw [← (singularIdeal_isRadical R D).radical, Ideal.radical_eq_sInf]
+    apply Ideal.mem_sInf.mpr
+    rintro p ⟨hp, hprime⟩
+    by_contra hn
+    have hs := haway ⟨p, hprime⟩ (fun hpow ↦ hn (hprime.mem_of_pow_mem 4 hpow))
+    have hz : (⟨p, hprime⟩ : PrimeSpectrum D) ∈
+        PrimeSpectrum.zeroLocus (singularIdeal R D : Set D) := hp
+    rw [(singularIdeal_zeroLocus R D).1] at hz
+    exact hz hs
+  let β : A →ₐ[R] C := (σ.restrictScalars R).comp
+    (Ideal.Quotient.mkₐ R (Ideal.map (algebraMap R A) (Ideal.span ({π ^ 8} : Set R))))
+  let f := c.comp β
+  have hkill : ∀ a ∈ Ideal.span {(algebraMap R A π) ^ 4}, f a = 0 := by
+    change Ideal.span {(algebraMap R A π) ^ 4} ≤ RingHom.ker f.toRingHom
+    rw [Ideal.span_singleton_le_iff_mem, RingHom.mem_ker]
+    calc
+      f ((algebraMap R A π) ^ 4) =
+          Ideal.Quotient.mk _ ((algebraMap R D π) ^ 4) := by
+        simp only [map_pow, f.commutes, Ideal.Quotient.mk_algebraMap]
+      _ = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (by simp))
+  let φ := Ideal.Quotient.liftₐ _ f hkill
+  refine ⟨D, iD, iRD, hfp, δ, ⟨φ, ?_⟩, hπ, ?_⟩
+  · intro a d had
+    have hfa : f a = Ideal.Quotient.mk _ d := had
+    have hcompat : ψ (f a) = Ideal.Quotient.mk _ (α a) := by
+      change (ψ.comp c.toRingHom) (β a) = _
+      rw [hc]
+      change red (j (β a)) = _
+      have hj : j (β a) = Ideal.Quotient.mk
+          (Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R))) (α a) := by
+        exact hfactor a
+      rw [hj]
+      exact DFunLike.congr_fun hred (α a)
+    have hd : ψ (Ideal.Quotient.mk _ d) = Ideal.Quotient.mk _ (δ d) :=
+      DFunLike.congr_fun hψ d
+    exact hcompat.symm.trans ((congrArg ψ hfa).trans hd)
+  · have hL : Ideal.span ({(algebraMap R Λ π) ^ 4} : Set Λ) ≤
+        (Ideal.map δ.toRingHom (singularIdeal R D)).radical := by
+      apply (Ideal.span_singleton_le_iff_mem _).mpr
+      have hm := Ideal.mem_map_of_mem δ.toRingHom hπ
+      change δ (algebraMap R D π) ∈ Ideal.map δ.toRingHom (singularIdeal R D) at hm
+      rw [δ.commutes] at hm
+      exact Ideal.le_radical
+        ((Ideal.map δ.toRingHom (singularIdeal R D)).pow_mem_of_mem hm 4 (by decide))
+    have ht := popescu_lifting_witness_control R
+      (R ⧸ Ideal.span ({π ^ 8} : Set R)) C D Λ
+      (Ideal.span {(algebraMap R D π) ^ 4})
+      (Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R)))
+      (Ideal.span {(algebraMap R Λ π) ^ 4}) δ.toRingHom ψ red c.toRingHom
+      j.toRingHom hψ hred hc hL hover
+    exact ht
 
 end Algebra
