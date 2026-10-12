@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-smooth-polynomial-factorization",
+ "kind": "statement",
+ "title": "Finite polynomial solutions factor through a smooth algebra",
+ "statement": "Let $A$ and $\\Lambda$ be commutative Noetherian rings [def-weil-pbc-noetherian-ring] and let $A\\to\\Lambda$ be a regular ring map [def-weil-pbc-g-ring]. For $m,n\\geq0$, let $f_j\\in A[x_1,\\ldots,x_n]$ ($1\\leq j\\leq m$), and let $a_k\\in\\Lambda$ satisfy $f_j(a)=0$. There exist a commutative $A$-algebra $B$ whose affine structure morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is smooth, an $A$-algebra map $\\psi:B\\to\\Lambda$, and $b_1,\\ldots,b_n\\in B$ such that $f_j(b)=0$ and $\\psi(b_k)=a_k$. Smoothness means locally of finite presentation, flat, with geometrically regular fibres. Polynomial rings here consist of finite sums of monomials with coefficients in $A$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 0AH5 (lemma-henselian-pair), proof second paragraph; Theorem Tag 07GC; Algebra Lemma Tag 00QO"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Form C=A[x_1,...,x_n]/(f_1,...,f_m). The finite range of f generates its defining ideal, so Mathlib Algebra.FinitePresentation.quotient gives finite presentation. Evaluation at a kills that ideal and descends by Ideal.Quotient.liftₐ to an A-algebra map C→Λ. These are elementary polynomial-presentation and quotient constructions; the Lean proof writes them explicitly.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Popescu to the regular map A→Λ of Noetherian rings, obtaining a filtered diagram of smooth A-algebras with colimit Λ in commutative rings and A-algebra coprojections.",
+   "uses": [
+    "lem-weil-pbc-popescu-smoothing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor the finitely presented algebra C through one stage using RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit. Its structural-map compatibility turns the resulting ring hom into an A-algebra hom.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let b_k be the stage image of the class of x_k. Applying the stage hom to the defining relations gives f_j(b)=0. Evaluating the factorization equality at x_k gives ψ(b_k)=a_k. Both calculations are written in Lean using MvPolynomial.eval₂_comp_left and quotient evaluation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Lemma Tag 0AH5 (lemma-henselian-pair), proof second paragraph; Theorem Tag 07GC; Algebra Lemma Tag 00QO"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite system polynomial equations solution along regular Noetherian ring map factors through smooth algebra",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular ring map finite polynomial solution factors through smooth algebra",
+   "results": "RingHom.IsStandardSmooth, RingHom.IsStandardSmooth.toAlgebra, Algebra.IsStandardSmooth, Algebra.Smooth.exists_finiteType, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.SubmersivePresentation.isStandardSmooth",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "Popescu|ArtinApprox|smooth.*polynomial.*solution",
+   "results": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselianPairApproximation",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Proof, approximation of polynomial equations: the smooth factorization paragraph of 0AH5, carried by step 2 of lem-weil-pbc-henselian-pair-approximation.",
+   "via": [
+    "lem-weil-pbc-henselian-pair-approximation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothPolynomialFactorization",
+  "file": "lean/Sheaf/RingTheory/SmoothPolynomialFactorization.lean",
+  "declaration": "exists_smooth_polynomial_factorization",
+  "statement": "theorem exists_smooth_polynomial_factorization\n    {A Λ : Type u} [CommRing A] [CommRing Λ] [Algebra A Λ]\n    [IsNoetherianRing A] [IsNoetherianRing Λ]\n    (hreg : RingHom.IsRegular (algebraMap A Λ)) {m n : ℕ}\n    (f : Fin m → MvPolynomial (Fin n) A) (a : Fin n → Λ)\n    (hzero : ∀ j, MvPolynomial.eval₂ (algebraMap A Λ) a (f j) = 0) :\n    ∃ (B : CommAlgCat.{u} A),\n      Smooth (Scheme.Spec.map (CommRingCat.ofHom (algebraMap A B)).op) ∧\n      ∃ (ψ : B →ₐ[A] Λ) (b : Fin n → B),\n        (∀ j, MvPolynomial.eval₂ (algebraMap A B) b (f j) = 0) ∧\n        (∀ k, ψ (b k) = a k)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

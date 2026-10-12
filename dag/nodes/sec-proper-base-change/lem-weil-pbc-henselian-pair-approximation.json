@@ -40,10 +40,9 @@
    }
   },
   {
-   "text": "*Factorization through a smooth $A$-algebra (Popescu).* Let $C=A[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ and let $\\varphi:C\\to A^\\wedge$ be the $A$-algebra map $x_k\\mapsto\\hat a_k$; it is well defined because $f_j^\\iota(\\hat a_1,\\ldots,\\hat a_n)=0$ for all $j$. By step 1, $\\iota$ is a regular map of Noetherian rings, so by [lem-weil-pbc-popescu-smoothing] $A^\\wedge$ is the colimit in commutative rings of a filtered diagram $j\\mapsto B_j$ of $A$-algebras with $\\operatorname{Spec}B_j\\to\\operatorname{Spec}A$ smooth, with $A$-algebra coprojections $\\iota_j:B_j\\to A^\\wedge$. By [lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit] (with $R=A$, $\\Lambda=A^\\wedge$, $g=\\varphi$) there are $j$ and an $A$-algebra map $g':C\\to B_j$ with $\\iota_j\\circ g'=\\varphi$. Put $B=B_j$, $\\psi=\\iota_j:B\\to A^\\wedge$ and $b_k=g'(x_k)\\in B$. Then $f_j(b_1,\\ldots,b_n)=g'(f_j(x_1,\\ldots,x_n))=0$ in $B$ for all $j$ ($g'$ is an $A$-algebra map, so it commutes with evaluating polynomials with coefficients in $A$), and $\\psi(b_k)=\\varphi(x_k)=\\hat a_k$.",
+   "text": "Apply [lem-weil-pbc-smooth-polynomial-factorization] to the regular completion map obtained in step 1, the finite equations f, and ahat. Obtain a smooth A-algebra B, an A-algebra map ψ:B→A^, and b with f_j(b)=0 and ψ(b_k)=ahat_k. The cited theorem is proved by Popescu and the finite-presentation colimit factorization, exactly the previous step 2.",
    "uses": [
-    "lem-weil-pbc-popescu-smoothing",
-    "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit"
+    "lem-weil-pbc-smooth-polynomial-factorization"
    ],
    "elementary": false,
    "source": {
@@ -64,10 +63,9 @@
    }
   },
   {
-   "text": "*A retraction $\\chi:A'\\to A$ (henselian pair).* Since $(A,I)$ is henselian [def-weil-pbc-henselian-terminology], by [lem-weil-pbc-henselian-factorization-criterion] (i) $I$ lies in the Jacobson radical of $A$ and (ii) factorizations into coprime monic factors modulo $I$ of monic polynomials over $A$ lift to factorizations into monic factors. Gabber's root condition follows: let $h(T)=T^r(T-1)+c_rT^r+\\cdots+c_1T+c_0$ with $r\\ge1$ and $c_0,\\ldots,c_r\\in I$; it is monic with $\\bar h=T^r\\cdot(T-1)$ in $(A/I)[T]$, and $T^r$, $T-1$ are monic and generate the unit ideal of $(A/I)[T]$ ($1=T^r-(T-1)(T^{r-1}+\\cdots+T+1)$). By (ii) $h=gu$ with $g,u\\in A[T]$ monic, $\\bar g=T^r$, $\\bar u=T-1$; as $u$ is monic of degree $1$, $u=T-\\beta$ with $\\beta\\equiv1$ modulo $I$, and $h(\\beta)=g(\\beta)u(\\beta)=0$: $h$ has a root $\\beta\\in1+I$. By (i), this root condition and [lem-weil-pbc-gabber-root-criterion-etale-section-lifting], applied to the etale $A\\to A'$ of step 3 and the $A$-algebra map $\\sigma_1=\\rho\\circ\\alpha^{-1}\\circ q:A'\\to A/I$ (with $\\rho:A/I^N\\to A/I$ the reduction), there is an $A$-algebra map $\\chi:A'\\to A$ with $\\pi_1\\circ\\chi=\\sigma_1$ ($\\pi_1:A\\to A/I$ the quotient map).",
+   "text": "The HenselianRing hypothesis gives I≤jacobson(0) directly by HenselianRing.jac. For a Gabber polynomial, reduction modulo I gives X^r(X−1), which has root 1 and derivative 1 at 1. Apply Mathlib HenselianRing.is_henselian to lift this simple root to β with β−1∈I. The private helper proves these reductions explicitly. Apply [lem-weil-pbc-gabber-root-criterion-etale-section-lifting] to the étale A-algebra A′ and the section A′→A/I induced by the inverse quotient isomorphism of step 3 followed by A/I^N→A/I. This gives χ:A′→A. Henselianity is only used for I, never asserted for I^N.",
    "uses": [
     "def-weil-pbc-henselian-terminology",
-    "lem-weil-pbc-henselian-factorization-criterion",
     "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
    ],
    "elementary": false,
@@ -102,18 +100,16 @@
   "def-weil-pbc-noetherian-ring",
   "lem-weil-pbc-adic-completion-noetherian",
   "lem-weil-pbc-g-ring-completion-regular",
-  "lem-weil-pbc-popescu-smoothing",
-  "lem-weil-pbc-finite-presentation-algebra-factors-filtered-colimit",
+  "lem-weil-pbc-smooth-polynomial-factorization",
   "lem-weil-pbc-adic-completion-mod-power",
   "lem-weil-pbc-smooth-section-etale-lift",
   "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-henselian-factorization-criterion",
   "lem-weil-pbc-gabber-root-criterion-etale-section-lifting"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, Lemma Tag 0AH5 (lemma-henselian-pair, line 3389), case (2), and its proof (lines 3415-3437)"
+  "place": "Lemma Tag 0AH5 (lemma-henselian-pair), case (2); same six-step route, with simple-root Hensel replacing monic-factorization criterion in step 4."
  },
  "mathlib_searches": [
   {
@@ -190,5 +186,15 @@
   "group": "J1",
   "result": "fix",
   "note": "HenselianRing A I = henselian pair; IsGRing A (Noetherian inside); AdicCompletion I A with algebraMap = iota; f : Fin m -> MvPolynomial (Fin n) A; hzero eval2 along algebraMap = f^iota(ahat)=0; forall N, 1<=N; a : Fin n -> A with eval2 id = 0 and ahat k - iota(a k) in Ideal.map iota (I^N) = I^N A^; inferInstance fails for HenselianRing and IsGRing; m=n=0 admitted; docstring proof added"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T053923-L-2631743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
