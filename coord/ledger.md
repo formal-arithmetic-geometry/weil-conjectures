@@ -8092,3 +8092,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/F3/Sheaf.Paper.EtaleKInjectivePullbackAbutment (stage 3; reviewer PASS; first push; landing 20261012T144110-L-2094772 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/F3/Sheaf.Paper.FiniteSurjectiveCoherentGenericSupport (stage 3; reviewer PASS; first push; landing 20261012T144110-L-2094908 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/G1/Sheaf.AlgebraicGeometry.QuasiFiniteDegreeUpperLocusCompact (stage 3; reviewer PASS; first push; landing 20261012T144111-L-2095045 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:41 L: merged deliver/G1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsos (stage 3; reviewer PASS; first push; landing 20261012T144111-L-2095191 (interface); batch 20261012T144049; modules 3; new nodes 2)
