@@ -1,0 +1,102 @@
+{
+ "id": "lem-sbc-etale-chart-sections-object-comparison",
+ "kind": "statement",
+ "title": "Compatible object isomorphisms for chart sections arrows",
+ "statement": "In the setting of lem-sbc-etale-chart-sections-arrow-comparison, the source and target module objects of the two section arrows admit isomorphisms making the square commute.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZX, comparison of section objects."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct the localization and inverse-image composition comparisons and verify compatibility with the adjunction units.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZX."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible isomorphisms making a square commute between arrows in a category",
+   "results": "No exact match found; service unavailable for this query.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arrow.isoMk object isomorphisms commuting square",
+   "results": "Arrow.isoMk found as the generic constructor; no theorem constructing these specific comparisons.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg Arrow.isoMk upperStarComp unit compatibility",
+   "results": "Only generic Arrow.isoMk usages; no specific chart-sections comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleChartSectionsArrowComparison",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-etale-chart-sections-arrow-comparison",
+   "place": "Step 2 and Step 4",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartSectionsObjectComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartSectionsObjectComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleChartSections_objectComparison",
+  "statement": "theorem etaleChartSections_objectComparison\n    (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)\n    (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    {V : S.Etale} {W : X.Etale}\n    (φ : W ⟶ (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ p).obj V) :\n    let a := Arrow.mk\n      (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app G).hom.app (op V) ≫\n        ((p)^*[ModuleCat.{u + 1} Λ].obj G).obj.map φ.op)\n    let b := Arrow.mk\n      (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)\n          (φ.left ≫ pullback.fst V.hom p)).unit.app\n            ((V.hom)^*[ModuleCat.{u + 1} Λ].obj G)).hom.app\n              (op (Scheme.Etale.mk (𝟙 V.left))))\n    Nonempty (∃ (e₁ : a.left ≅ b.left) (e₂ : a.right ≅ b.right),\n      e₁.hom ≫ b.hom = a.hom ≫ e₂.hom)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053919-L-2629305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053919-L-2629305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

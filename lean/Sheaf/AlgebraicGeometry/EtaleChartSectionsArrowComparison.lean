@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.EtaleChartSectionsObjectComparison
 
 /-!
 # Restricting inverse-image sections to an etale chart
@@ -63,6 +64,8 @@ theorem nonempty_etaleChartSections_arrowIso
           (φ.left ≫ pullback.fst V.hom p)).unit.app
             ((V.hom)^*[ModuleCat.{u + 1} Λ].obj G)).hom.app
               (op (Scheme.Etale.mk (𝟙 V.left))))) := by
-  sorry
+  obtain ⟨e₁, e₂, h⟩ :=
+    (etaleChartSections_objectComparison Λ p G φ).some
+  exact ⟨Arrow.isoMk e₁ e₂ h⟩
 
 end AlgebraicGeometry.Etale
