@@ -8,7 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.StalkIso
-public import WeilConjectures.WeilSheaf.TraceFormula
+public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 
 /-!
 # Trace energies of Weil complexes and the Plancherel identity

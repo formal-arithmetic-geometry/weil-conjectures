@@ -333,4 +333,97 @@ theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_fiber
   rw [h₁, h₂]
   exact ⟨WeilSheaf.globalSectionsEquivOfIso Ψ⟩
 
+/-- **The fibre over a closed point.** Let `f : X ⟶ Y` be a separated morphism of finite type of
+`k₀`-schemes and `y` a closed point of `Y` of degree `d = [κ(y) : k₀]`. The fibre
+`X' = X ×_Y Spec κ(y)`, with its map `g : X' ⟶ X`, is a separated `k₀`-scheme of finite type,
+and compact support base change identifies the stalks of the `Rⁱf₀!F` at `y` with the compactly
+supported cohomology of the fibre: `H_c^i(X' ⊗ k̄, g^*F)` vanishes if `Rⁱf₀!F` does, and
+
+`det (1 - T^d F_y ∣ (Rⁱf₀!F)_ȳ) = det (1 - T F ∣ H_c^i(X' ⊗ k̄, g^*F))`
+
+(blueprint: `thm-cbc-qbar`, at the spectrum of a residue field). -/
+theorem WeilSheaf.exists_fiber_expand_charpolyRev_stalk_higherLowerShriek (y : Y.finitePoints) :
+    ∃ (X' : Scheme.{u}) (_ : X'.Over (Spec (CommRingCat.of k₀))) (g : X' ⟶ X)
+      (_ : g.IsOver (Spec (CommRingCat.of k₀)))
+      (_ : IsSeparated (X' ↘ Spec (CommRingCat.of k₀)))
+      (_ : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)))
+      (_ : QuasiCompact (X' ↘ Spec (CommRingCat.of k₀))), ∀ (F : WeilSheaf k₀ l X) (i : ℕ),
+        (IsZero ((WeilSheaf.higherLowerShriek k₀ l f i).obj F) →
+          Subsingleton (((WeilSheaf.upperStar g).obj F).compactlySupportedCohomology i).carrier) ∧
+        Polynomial.expand _ ((Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1)
+          (((WeilSheaf.higherLowerShriek k₀ l f i).obj F).stalk y).frobeniusEnd.charpolyRev =
+        (((WeilSheaf.upperStar g).obj F).compactlySupportedCohomology
+          i).frobeniusEnd.charpolyRev := by
+  -- the closed point `y`, as the spectrum of its residue field, a finite extension of `k₀`
+  let Z : Scheme.{u} := Spec (Y.residueField y.1)
+  let t : Z ⟶ Y := Y.fromSpecResidueField y.1
+  let : Z.Over (Spec (CommRingCat.of k₀)) := ⟨t ≫ Y ↘ Spec (CommRingCat.of k₀)⟩
+  have : t.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : Finite (Y.residueField y.1) := y.2
+  have hfin : IsFinite (t ≫ Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← Scheme.Hom.specMap_residueFieldAlgebraMap, IsFinite.SpecMap_iff]
+    let := ((Y ↘ Spec (CommRingCat.of k₀)).residueFieldAlgebraMap y.1).toAlgebra
+    exact Module.Finite.of_finite
+  have : IsFinite (Z ↘ Spec (CommRingCat.of k₀)) := hfin
+  have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f (Spec (CommRingCat.of k₀))]
+    infer_instance
+  -- the fibre `X' = X ×_Y Spec κ(y)`
+  obtain ⟨X', g, f', hH⟩ : ∃ (X' : Scheme.{u}) (g : X' ⟶ X) (f' : X' ⟶ Z),
+      IsPullback g f' f t :=
+    ⟨_, _, _, IsPullback.of_hasPullback f t⟩
+  let instX : X'.Over (Spec (CommRingCat.of k₀)) := ⟨g ≫ X ↘ Spec (CommRingCat.of k₀)⟩
+  have : g.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have hf' : f' ≫ t ≫ Y ↘ Spec (CommRingCat.of k₀) = g ≫ X ↘ Spec (CommRingCat.of k₀) := by
+    rw [← Category.assoc, ← hH.w, Category.assoc, comp_over]
+  have : f'.IsOver (Spec (CommRingCat.of k₀)) := ⟨hf'⟩
+  have : IsSeparated f' := MorphismProperty.of_isPullback hH ‹_›
+  have : LocallyOfFiniteType f' := MorphismProperty.of_isPullback hH inferInstance
+  have : QuasiCompact f' := MorphismProperty.of_isPullback hH ‹_›
+  have hX : X' ↘ Spec (CommRingCat.of k₀) = f' ≫ Z ↘ Spec (CommRingCat.of k₀) :=
+    (comp_over f' _).symm
+  have : IsSeparated (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hX]
+    infer_instance
+  have : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hX]
+    infer_instance
+  have : QuasiCompact (X' ↘ Spec (CommRingCat.of k₀)) := by
+    rw [hX]
+    infer_instance
+  refine ⟨X', instX, g, ‹_›, ‹_›, ‹_›, ‹_›, fun F i ↦ ?_⟩
+  -- compact support base change
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_fiber hH F i
+  refine ⟨fun h ↦ ?_, ?_⟩
+  · have : Subsingleton (((WeilSheaf.upperStar t).obj ((WeilSheaf.higherLowerShriek k₀ l f
+        i).obj F)).compactlySupportedCohomology 0).carrier :=
+      WeilSheaf.subsingleton_globalSections_of_isZero <| (WeilComplex.homologySheaf 0).map_isZero <|
+        (WeilComplex.derivedLowerShriek k₀ l (Z ↘ Spec (CommRingCat.of k₀))).map_isZero <|
+          WeilSheaf.toComplex.map_isZero <| (WeilSheaf.upperStar t).map_isZero h
+    exact E.toLinearEquiv.symm.injective.subsingleton
+  -- the degree `d` of `y` and the unique point `z₀` of `Z`
+  set d := (Y ↘ Spec (CommRingCat.of k₀)).degreeOver y.1 with hd_def
+  have hd : d ≠ 0 := Scheme.Hom.degreeOver_ne_zero _ y.2
+  let z₀ : Z := IsLocalRing.closedPoint (Y.residueField y.1)
+  have hiz (z : Z) : t.base z = y.1 := Scheme.fromSpecResidueField_apply _ _
+  have (z : Z) : IsIso (t.residueFieldMap z) := Scheme.Hom.isIso_residueFieldMap t z
+  have hz₀ : z₀ ∈ Z.finitePoints :=
+    (Scheme.Hom.mem_finitePoints_iff_of_isIso t z₀).1 ((hiz z₀).symm ▸ y.2)
+  have hdegZ (z : Z) : (Z ↘ Spec (CommRingCat.of k₀)).degreeOver z = d :=
+    (Scheme.Hom.degreeOver_comp_of_isIso t (Y ↘ Spec (CommRingCat.of k₀)) z).trans
+      (congrArg _ (hiz z))
+  have hy : (⟨t.base z₀, Scheme.Hom.map_mem_finitePoints t hz₀⟩ : Y.finitePoints) = y :=
+    Subtype.ext (hiz z₀)
+  -- `H_c^0` of the point `Spec κ(y)`
+  have hZ : (((WeilSheaf.upperStar t).obj ((WeilSheaf.higherLowerShriek k₀ l f i).obj
+      F)).compactlySupportedCohomology 0).frobeniusEnd.charpolyRev = Polynomial.expand _ d
+        (((WeilSheaf.higherLowerShriek k₀ l f i).obj F).stalk y).frobeniusEnd.charpolyRev := by
+    rw [WeilSheaf.charpolyRev_compactlySupportedCohomology_zero_of_subsingleton _ ⟨z₀, hz₀⟩,
+      hdegZ, LinearMap.charpolyRev_def, LinearMap.charpolyRev_def,
+      WeilSheaf.charpoly_frobeniusEnd_stalk_upperStar, hy, hdegZ, hiz, ← hd_def,
+      Nat.div_self (Nat.pos_of_ne_zero hd), pow_one]
+  have hE := E.localPolynomial_eq
+  rw [FrobeniusModule.localPolynomial, FrobeniusModule.localPolynomial] at hE
+  exact hZ.symm.trans hE
+
 end AlgebraicGeometry
