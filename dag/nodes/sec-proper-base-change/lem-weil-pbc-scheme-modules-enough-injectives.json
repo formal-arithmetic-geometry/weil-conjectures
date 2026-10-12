@@ -31,99 +31,36 @@
  ],
  "proof": [
   {
-   "text": "*Injective hulls at the points.* For every $x\\in X$ the stalk $\\mathcal F_x$ is an $\\mathcal O_{X,x}$-module [def-weil-pbc-module-stalk]. By [lem-weil-pbc-ring-modules-enough-injectives] applied to the ring $R=\\mathcal O_{X,x}$ and $M=\\mathcal F_x$, choose for each $x\\in X$ an injective object $J_x$ of the abelian category $\\Mod(\\mathcal O_{X,x})$ and an injective $\\mathcal O_{X,x}$-linear map $j_x:\\mathcal F_x\\to J_x$ (the source takes the functorial embedding $j:\\mathcal F_x\\to J_{\\mathcal O_{X,x}}(\\mathcal F_x)$ of More on Algebra 01DD; only its existence is used here).",
+   "text": "The opens of a scheme X : Scheme.{u} form a small site, and its structure sheaf is X.ringCatSheaf. The Grothendieck-abelian assertion of [lem-pur-ringed-site-grothendieck-abelian] is already proved independently of its additional localized-generator clause by SheafOfModules.isGrothendieckAbelian in WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian. Apply that proved theorem to X.ringCatSheaf to obtain IsGrothendieckAbelian.{u} X.Modules. The small-site sheafification hypotheses are inferred by Mathlib; X.Modules is definitionally SheafOfModules.{u} X.ringCatSheaf.",
    "uses": [
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-ring-modules-enough-injectives"
+    "lem-pur-ringed-site-grothendieck-abelian"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 01DI (lemma-sheaves-modules-space), proof, first sentence; More on Algebra, Lemma 01DD (more-algebra.tex, lemma-injectives-modules)"
+    "document": "lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+    "place": "SheafOfModules.isGrothendieckAbelian"
    }
   },
   {
-   "text": "*Each skyscraper $i_{x,*}J_x$ is injective in $\\Mod(\\mathcal O_X)$.* Fix $x$. The stalk functor $u:\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_{X,x})$, $\\mathcal G\\mapsto\\mathcal G_x$, $\\varphi\\mapsto\\varphi_x$, is a functor between abelian categories ($\\Mod(\\mathcal O_X)$ by [def-weil-sheaf-of-modules-category], $\\Mod(\\mathcal O_{X,x})$ by [lem-weil-pbc-ring-modules-enough-injectives]); it is additive, since $(\\varphi+\\psi)_x(s_x)=(\\varphi_U(s)+\\psi_U(s))_x=\\varphi_x(s_x)+\\psi_x(s_x)$ by the definition of stalk maps [def-weil-pbc-module-stalk], and it is exact: by [lem-weil-pbc-module-stalk-exact] (5) a sequence $\\mathcal F'\\to\\mathcal F\\to\\mathcal F''$ of $\\mathcal O_X$-modules that is exact at $\\mathcal F$ has $\\mathcal F'_x\\to\\mathcal F_x\\to\\mathcal F''_x$ exact at $\\mathcal F_x$, so $u$ carries short exact sequences to short exact sequences. By [lem-weil-pbc-module-skyscraper-stalk-adjunction] (1)-(3), $u$ has the right adjoint $u_*:A\\mapsto i_{x,*}A$ (the bijection $\\Hom_{\\mathcal O_X}(\\mathcal G,i_{x,*}A)\\cong\\Hom_{\\mathcal O_{X,x}}(\\mathcal G_x,A)$ natural in $\\mathcal G$ and $A$). Hence by [lem-sp-right-adjoint-preserves-injectives] $u_*$ carries the injective object $J_x$ of $\\Mod(\\mathcal O_{X,x})$ to an injective object $i_{x,*}J_x$ of $\\Mod(\\mathcal O_X)$ [def-sp-injective-resolutions]. (The source: 'Hence it is clear that each $i_{x,*}I_x$ is an injective $\\mathcal O_X$-module (see Homology, Lemma 015Z or argue directly)'.)",
+   "text": "Apply [lem-sp-grothendieck-enough-injectives], namely the Mathlib instance CategoryTheory.IsGrothendieckAbelian.enoughInjectives, to this Grothendieck abelian structure. This gives EnoughInjectives X.Modules and hence an injective presentation of every module sheaf, including on an empty scheme.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-ring-modules-enough-injectives",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-module-skyscraper-stalk-adjunction",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "def-sp-injective-resolutions"
+    "lem-sp-grothendieck-enough-injectives"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 01DI, proof, second paragraph; Sheaves, Lemma 009C (sheaves.tex, lemma-stalk-skyscraper-adjoint); Homology, Lemma 015Z (homology.tex, lemma-adjoint-preserve-injectives)"
-   }
-  },
-  {
-   "text": "*The product $\\mathcal I=\\prod_{x\\in X}i_{x,*}J_x$ exists, is computed on sections, and is injective.* By [lem-weil-pbc-module-sheaves-limits-sectionwise], applied to the discrete diagram indexed by the set $X$ (the topological space $X$ viewed as a site whose objects are the opens), the family $(i_{x,*}J_x)_{x\\in X}$ has a product $\\mathcal I$ in $\\Mod(\\mathcal O_X)$ with $\\mathcal I(U)=\\prod_{x\\in X}(i_{x,*}J_x)(U)$, componentwise $\\mathcal O_X(U)$-action and restriction maps, and projections $p_x:\\mathcal I\\to i_{x,*}J_x$ the coordinate projections. Since $(i_{x,*}J_x)(U)=0$ for $x\\notin U$, $\\mathcal I(U)=\\prod_{x\\in U}J_x$ (the sheaf $U\\mapsto\\prod_{x\\in U}J_x$ of the source), with $r\\in\\mathcal O_X(U)$ acting by $r\\cdot(a_x)_{x\\in U}=(r_xa_x)_{x\\in U}$ and restriction to $V\\subseteq U$ the projection onto the factors $x\\in V$. Every factor $i_{x,*}J_x$ is injective by step 2, and $\\Mod(\\mathcal O_X)$ is abelian [def-weil-sheaf-of-modules-category], so $\\mathcal I$ is injective by [lem-weil-pbc-product-injectives].",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-product-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 01DI, proof: 'Note that I = prod_{x in X} i_{x,*}I_x is the product of the skyscraper sheaves' and 'Hence the injectivity of I follows from Homology, Lemma 0137 (lemma-product-injectives)'; the sheaf U -> prod_{x in U} I_x: Sheaves, Examples 006X, 007R"
-   }
-  },
-  {
-   "text": "*The map $\\alpha:\\mathcal F\\to\\mathcal I$.* For each $x$ let $\\alpha^x:\\mathcal F\\to i_{x,*}J_x$ be the morphism of $\\mathcal O_X$-modules that corresponds to $j_x:\\mathcal F_x\\to J_x$ under the bijection of [lem-weil-pbc-module-skyscraper-stalk-adjunction] (2): $\\alpha^x_U(s)=j_x(s_x)$ for $s\\in\\mathcal F(U)$ if $x\\in U$, and $\\alpha^x_U=0$ if $x\\notin U$. By the universal property of the product (step 3, [lem-weil-pbc-module-sheaves-limits-sectionwise]) there is a unique morphism $\\alpha:\\mathcal F\\to\\mathcal I$ with $p_x\\circ\\alpha=\\alpha^x$ for all $x$; on sections, $\\alpha_U(s)=(j_x(s_x))_{x\\in U}\\in\\prod_{x\\in U}J_x$, which is the canonical map of the source.",
-   "uses": [
-    "lem-weil-pbc-module-skyscraper-stalk-adjunction",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 01DI, proof: 'There is a canonical map F -> I given by mapping s in F(U) to prod_{x in U} j(s_x)'"
-   }
-  },
-  {
-   "text": "*$\\alpha$ is a monomorphism.* Let $U\\subseteq X$ be open and $s\\in\\mathcal F(U)$ with $\\alpha_U(s)=0$. Then $j_x(s_x)=0$ for every $x\\in U$, hence $s_x=0=0_x$ for every $x\\in U$ because $j_x$ is injective (step 1). The underlying sheaf of sets of the $\\mathcal O_X$-module $\\mathcal F$ is a sheaf [def-weil-sheaf-of-modules-category], so $s$ and $0\\in\\mathcal F(U)$, having the same germ at every point of $U$, are equal [lem-weil-pbc-sheaf-sections-determined-by-germs]. Thus every $\\alpha_U$ is injective. Then $\\alpha$ is a monomorphism of $\\Mod(\\mathcal O_X)$: if $a,b:\\mathcal G\\to\\mathcal F$ satisfy $\\alpha\\circ a=\\alpha\\circ b$, then $\\alpha_U(a_U(t))=\\alpha_U(b_U(t))$ for all $U$ and $t\\in\\mathcal G(U)$, so $a_U=b_U$ for all $U$ and $a=b$.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-sheaf-sections-determined-by-germs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 01DI, proof: 'This map is injective, see Sheaves, Lemma 0079 (lemma-sheaf-subset-stalks)'"
-   }
-  },
-  {
-   "text": "*Conclusion.* $\\alpha:\\mathcal F\\to\\mathcal I$ is a monomorphism (step 5) into an injective object (step 3) of $\\Mod(\\mathcal O_X)$. As $\\mathcal F$ was arbitrary, $\\Mod(\\mathcal O_X)$ has enough injectives in the sense of [def-sp-injective-resolutions].",
-   "uses": [
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Injectives, Lemma 01DI (label lemma-sheaves-modules-space, line 498), proof"
+    "document": "Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean",
+    "place": "instance CategoryTheory.IsGrothendieckAbelian.enoughInjectives, lines 380-381"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-ring-modules-enough-injectives",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-module-skyscraper-stalk-adjunction",
-  "lem-sp-right-adjoint-preserves-injectives",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-weil-pbc-product-injectives",
-  "lem-weil-pbc-sheaf-sections-determined-by-germs"
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/injectives.tex",
-  "place": "Injectives, Lemma 01DI (label lemma-sheaves-modules-space, line 498), proof (lines 505-548), with Sheaves Lemmas 0079, 009C, Homology Lemmas 015Z, 0137, More on Algebra Lemma 01DD; the additivity and exactness of the stalk functor, the identification of the product with U -> prod_{x in U} J_x and the monomorphism check are written out by the worker"
+  "document": "lean/WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
+  "place": "SheafOfModules.isGrothendieckAbelian, specialized to X.ringCatSheaf; Mathlib CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives.lean, instance IsGrothendieckAbelian.enoughInjectives. Shorter established route to Stacks 01DI; no change to the unit statement or its realized steps."
  },
  "mathlib_searches": [
   {
@@ -232,5 +169,15 @@
   "group": "E1",
   "result": "pass",
   "note": "X : Scheme.{u} = def-pc-scheme; Mod(O_X) = X.Modules (SheafOfModules on X.ringCatSheaf, Mathlib instAbelian); enough injectives = CategoryTheory.EnoughInjectives; no extra hypotheses; Mathlib has no EnoughInjectives X.Modules instance (inferInstance fails), source only has stronger isGrothendieckAbelian"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085255-L-21299",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
