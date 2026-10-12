@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.Algebra.Homology.FreeResolutionSesSplit
+import Sheaf.Algebra.TorDimensionShiftNatural
 
 /-!
 # Dimension shifting for Tor along a free presentation
@@ -58,6 +58,14 @@ theorem tor_dimension_shift_free
         (((Tor' (ModuleCat.{u} R) i).obj S.X₁).obj N))) ∧
     (Limits.IsZero (((Tor' (ModuleCat.{u} R) 2).obj S.X₃).obj N) ↔
       Limits.IsZero (((Tor' (ModuleCat.{u} R) 1).obj S.X₁).obj N)) := by
-  sorry
+  have hshift : ∀ i : ℕ, 1 ≤ i →
+      Nonempty ((((Tor' (ModuleCat.{u} R) (i + 1)).obj S.X₃).obj N) ≅
+        (((Tor' (ModuleCat.{u} R) i).obj S.X₁).obj N)) := by
+    intro i hi
+    obtain ⟨θ, _⟩ := tor_dimension_shift_natural S hS i hi
+    exact ⟨θ N⟩
+  refine ⟨hshift, ?_⟩
+  obtain ⟨e⟩ := hshift 1 (by decide)
+  exact ⟨fun h ↦ h.of_iso e.symm, fun h ↦ h.of_iso e⟩
 
 end CategoryTheory

@@ -8913,3 +8913,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/E1/Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth (stage 3; reviewer PASS; after a return; landing 20261012T184250-L-4000068 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:42 L: merged deliver/E1/Sheaf.Paper.DerivedTotalResolutionColumnZero (stage 3; reviewer PASS; first push; landing 20261012T184250-L-4000167 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/E1/Sheaf.RingTheory.LocalizationFiniteGlobalDimension (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000267 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:42 L: merged deliver/E2/Sheaf.Algebra.TorDimensionShiftFree (stage 3; reviewer PASS; first push; landing 20261012T184251-L-4000364 (proof); batch 20261012T184234; modules 1; new nodes 0)

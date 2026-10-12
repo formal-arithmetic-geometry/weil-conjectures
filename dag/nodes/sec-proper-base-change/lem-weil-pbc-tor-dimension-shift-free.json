@@ -29,50 +29,25 @@
  ],
  "proof": [
   {
-   "text": "A free resolution of $K$. Apply [lem-weil-pbc-free-resolution-ses-split] to the short exact sequence $0\\to K\\xrightarrow{\\mathrm{id}_K}K\\to0\\to0$ ($\\mathrm{id}_K$ injective, $\\ker(K\\to0)=K=\\operatorname{im}\\mathrm{id}_K$, $K\\to0$ surjective) and keep only its first resolution: this gives a chain complex $G_\\bullet$ ($n\\ge0$, differentials $e_n:G_n\\to G_{n-1}$ for $n\\ge1$) of free $R$-modules with an $R$-linear augmentation $\\eta:G_0\\to K$ such that $\\cdots\\to G_2\\xrightarrow{e_2}G_1\\xrightarrow{e_1}G_0\\xrightarrow{\\eta}K\\to0$ is exact.",
+   "text": "Apply the already proved natural dimension-shifting theorem [lem-sc-p1-tor-dimension-shift-natural] to S and each i >= 1. Evaluate its family of isomorphisms at the given N and retain the isomorphism, obtaining the first conjunct. Its hypotheses are exactly the commutative ring, short exact sequence, and free middle module assumed here.",
    "uses": [
-    "lem-weil-pbc-free-resolution-ses-split"
+    "lem-sc-p1-tor-dimension-shift-natural"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00LY (section-tor, lines 18215--18236): 'Choose a resolution $F_\\bullet$ of $M$ by free $R$-modules'"
-   }
+   "elementary": false
   },
   {
-   "text": "Splicing. Define $F'_0=F$ and $F'_{n+1}=G_n$ for $n\\ge0$, with differentials $d'_1=j\\circ\\eta:G_0\\to F$ and $d'_{n+1}=e_n:G_n\\to G_{n-1}$ for $n\\ge1$, and augmentation $p:F'_0=F\\to M$. All $F'_n$ are free ($F$ by hypothesis, $G_n$ by Step 1) [def-weil-pbc-free-module]. The augmented complex $\\cdots\\to F'_2\\xrightarrow{d'_2}F'_1\\xrightarrow{d'_1}F'_0\\xrightarrow{p}M\\to0$ is exact [def-weil-pbc-exact-sequence]: $p$ is surjective; $pd'_1=pj\\eta=0$ and $\\operatorname{im}d'_1=j(\\eta(G_0))=j(K)=\\ker p$ because $\\eta$ is surjective and the given sequence is exact; $d'_1d'_2=j\\eta e_1=0$ and $\\ker d'_1=\\ker(j\\eta)=\\ker\\eta=\\operatorname{im}e_1=\\operatorname{im}d'_2$ because $j$ is injective; for $n\\ge2$, $d'_n d'_{n+1}=e_{n-1}e_n=0$ and $\\ker d'_n=\\ker e_{n-1}=\\operatorname{im}e_n=\\operatorname{im}d'_{n+1}$ by exactness of Step 1. So $(F'_\\bullet,p)$ is a free resolution of $M$.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-exact-sequence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35476--35477 ('Since $N^0$ is free, we also see that $\\text{Tor}_2^B(H^0, C) = \\text{Tor}_1^B(M, C)$'), stated there without proof; argument written by the agent"
-   }
-  },
-  {
-   "text": "Comparison in degrees $\\ge2$. Free modules are allowed as the projective resolutions of [def-weil-pbc-tor-modules], so by that definition (independence of the resolution up to canonical isomorphism) $\\operatorname{Tor}^R_{i+1}(M,N)\\cong H_{i+1}(F'_\\bullet\\otimes_RN)$ and $\\operatorname{Tor}^R_i(K,N)\\cong H_i(G_\\bullet\\otimes_RN)$, as $R$-modules. Let $i\\ge1$. In $F'_\\bullet\\otimes_RN$ the part around degree $i+1$ is $F'_{i+2}\\otimes N\\xrightarrow{d'_{i+2}\\otimes1}F'_{i+1}\\otimes N\\xrightarrow{d'_{i+1}\\otimes1}F'_i\\otimes N$; since $i+1\\ge2$ and $i+2\\ge2$, Step 2 gives $d'_{i+2}=e_{i+1}$, $d'_{i+1}=e_i$ and $F'_{i+2}=G_{i+1}$, $F'_{i+1}=G_i$, $F'_i=G_{i-1}$, so this is literally $G_{i+1}\\otimes N\\xrightarrow{e_{i+1}\\otimes1}G_i\\otimes N\\xrightarrow{e_i\\otimes1}G_{i-1}\\otimes N$, the part of $G_\\bullet\\otimes_RN$ around degree $i$. Hence $H_{i+1}(F'_\\bullet\\otimes N)=\\ker(e_i\\otimes1)/\\operatorname{im}(e_{i+1}\\otimes1)=H_i(G_\\bullet\\otimes N)$, and composing, $\\operatorname{Tor}^R_{i+1}(M,N)\\cong\\operatorname{Tor}^R_i(K,N)$ as $R$-modules. (For $i=0$ the argument fails since $d'_1=j\\eta\\neq e_0$; this is why the statement requires $i\\ge1$.) The case $i=1$ gives $\\operatorname{Tor}^R_2(M,N)\\cong\\operatorname{Tor}^R_1(K,N)$, so one is $0$ iff the other is.",
-   "uses": [
-    "def-weil-pbc-tor-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00LY (section-tor, lines 18215--18236): Tor as homology of $F_\\bullet\\otimes_RN$ for a free resolution $F_\\bullet$; Lemma Tag 00LZ (lemma-tor-welldefined, line 18239): independence of the resolution"
-   }
+   "text": "Specialize the first conjunct to i = 1 to obtain e : Tor_2(S.X3,N) ≅ Tor_1(S.X1,N). If the source is zero, transport zero-ness along e.symm using Mathlib Limits.IsZero.of_iso; if the target is zero, transport along e. Pair these implications to obtain the second conjunct.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-free-resolution-ses-split",
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-exact-sequence",
-  "def-weil-pbc-tor-modules"
+  "lem-sc-p1-tor-dimension-shift-natural"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 00S2 (lemma-exact-sequence-NL), lines 35476--35477, where the fact is stated without proof; the splicing argument is written by the agent from the definition of Tor in Section Tag 00LY and Lemma Tag 00LZ"
+  "place": "Tags 00LY, 00LZ and proof of 00S2; E2 reuses the proved natural dimension-shifting theorem, which implements the projective-resolution splice argument, and transports zero-ness along its degree-two isomorphism."
  },
  "mathlib_searches": [
   {
@@ -199,5 +174,15 @@
   "group": "S1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T184251-L-4000364",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
