@@ -1,132 +1,130 @@
 {
- "id": "new-lem-sc-nested-slice-extension-stalks",
- "kind": "statement",
- "title": "Nested slice extension stalk maps",
- "statement": "Let $X$ be a topological space, $F$ an abelian sheaf on its open-set site [def-weil-pbc-sites-and-cohomology], and $V\\subseteq U$ open subsets. Write $P_W$ for the slice extension presheaf [def-weil-pbc-site-extension-by-zero-presheaf] of the restriction of $F$ to the slice over $W$. Thus $P_W(A)=\\bigoplus_{A\\to W}F(A)$, with restrictions given by precomposition of indices and restriction in $F$. There exists a presheaf morphism $g:P_V\\to P_U$ whose stalk map [def-weil-pbc-module-stalk] is an isomorphism at every $x\\in V$.",
- "source": {
-  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
-  "place": "Lemma 0A38 final paragraph; Lemma 00A5(3), (4) (lemma-j-shriek-abelian); presheaf direct-sum construction as in Modules on Sites, 03DI and 03EJ"
- },
- "stmt_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-site-extension-by-zero-presheaf",
-  "def-weil-pbc-module-stalk"
- ],
- "proof": [
-  {
-   "text": "Construct the canonical presheaf morphism by reindexing each direct-sum summand along composition with V → U; direct-sum extensionality and associativity prove naturality.",
-   "uses": [
+  "id": "new-lem-sc-nested-slice-extension-stalks",
+  "kind": "statement",
+  "title": "Nested slice extension stalk maps",
+  "statement": "Let $X$ be a topological space, $F$ an abelian sheaf on its open-set site [def-weil-pbc-sites-and-cohomology], and $V\\subseteq U$ open subsets. Write $P_W$ for the slice extension presheaf [def-weil-pbc-site-extension-by-zero-presheaf] of the restriction of $F$ to the slice over $W$. Thus $P_W(A)=\\bigoplus_{A\\to W}F(A)$, with restrictions given by precomposition of indices and restriction in $F$. There exists a presheaf morphism $g:P_V\\to P_U$ whose stalk map [def-weil-pbc-module-stalk] is an isomorphism at every $x\\in V$.",
+  "source": {
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+    "place": "Lemma 0A38 final paragraph; Lemma 00A5(3), (4) (lemma-j-shriek-abelian); presheaf direct-sum construction as in Modules on Sites, 03DI and 03EJ"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-site-extension-by-zero-presheaf",
+    "def-weil-pbc-module-stalk"
+  ],
+  "proof": [
+    {
+      "text": "Reindex each direct-sum summand W→V by composition W→V→U and use direct-sum extensionality to verify naturality.",
+      "uses": [
+        "def-weil-pbc-site-extension-by-zero-presheaf"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "At x in V, replace every neighborhood A by A intersect V. These form a cofinal neighborhood system. For A contained in V both index sets are singleton, so the component of g identifies the unique copies of F(A). Surjectivity on germs follows by restricting a representative to A intersect V. If two image germs agree, shrink to a common neighborhood witnessing equality and intersect with V; injectivity of the component map there gives equality of the original germs. Thus the stalk map is bijective and is an isomorphism of abelian groups.",
+      "uses": [],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-site-extension-by-zero-presheaf"
-   ],
-   "elementary": false
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
+    "place": "Lemma 0A38 final paragraph; Lemma 00A5(3), (4) (lemma-j-shriek-abelian); presheaf direct-sum construction as in Modules on Sites, 03DI and 03EJ"
   },
-  {
-   "text": "Apply the canonical nested-slice stalk argument: opens contained in V are cofinal at points of V, and on these opens the map is the identity between the unique summands, yielding a stalk isomorphism.",
-   "uses": [
-    "new-node-nested-slice-extension-stalk-iso"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "nested open subsets extension by zero presheaf stalk isomorphism",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-12",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Reindex direct sums over morphisms into nested open subsets to obtain a natural presheaf morphism",
+      "results": "PresheafedSpace gluing and open-image/preimage maps; no nested slice extension theorem.",
+      "date": "2026-10-12",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "loogle",
+      "query": "DirectSum.toAddMonoid",
+      "results": "DirectSum.toAddMonoid and toAddMonoid_of give the component construction and computation; no complete natural transformation or stalk statement.",
+      "date": "2026-10-12",
+      "verdict": "useful ingredients, no exact match"
+    },
+    {
+      "tool": "grep",
+      "query": "extensionByZero.*(map|stalk)|siteExtensionByZero.*[Nn]ested",
+      "results": "0 Mathlib hits; local search additionally found abelianOpenExtensionPresheaf_stalk, for extension from an open subspace, not this slice presheaf morphism.",
+      "date": "2026-10-12",
+      "verdict": "no exact match"
+    }
+  ],
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Topology.AbelianIntegerOpenInclusion",
+    "date": "2026-10-12",
+    "group": "S1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-pic-proper-ntorsion",
+      "place": "nested-open integer inclusion in the finite filtration argument of Lemma 0A38, final paragraph",
+      "via": [
+        "lem-sc-abelian-integer-open-inclusion",
+        "lem-sc-constant-subsheaf-peel-layer",
+        "lem-sc-noetherian-extension-by-zero-reduction",
+        "lem-sc-constant-subsheaf-finite-filtration"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-thm-curveestimate",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Topology.NestedSliceExtensionStalks",
+    "file": "lean/Sheaf/Topology/NestedSliceExtensionStalks.lean",
+    "declaration": "TopCat.Sheaf.nested_slice_extension_stalks",
+    "statement": "theorem nested_slice_extension_stalks {X : TopCat.{u}} (F : TopCat.Sheaf AddCommGrpCat.{u} X) (U V : Opens X) (hVU : V ≤ U) : ∃ g : (siteExtensionByZeroPresheaf V).obj (F.over V).obj ⟶ (siteExtensionByZeroPresheaf U).obj (F.over U).obj, ∀ x : X, x ∈ V → IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map g)",
+    "branch": "sheaf-dag",
+    "by": "S1",
+    "date": "2026-10-12"
+  },
+  "mathlib_match": null,
+  "merged_into": null,
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "none"
+    }
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "S1",
+    "result": "pass",
+    "landing": "20261012T110317-L-621215",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "S1",
+    "result": "pass",
+    "landing": "20261012T110317-L-621215",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-weil-pbc-site-extension-by-zero-presheaf",
-  "new-node-nested-slice-extension-stalk-iso"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/sheaves.tex",
-  "place": "Lemma 0A38 final paragraph; Lemma 00A5(3), (4) (lemma-j-shriek-abelian); presheaf direct-sum construction as in Modules on Sites, 03DI and 03EJ"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "nested open subsets extension by zero presheaf stalk isomorphism",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-12",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Reindex direct sums over morphisms into nested open subsets to obtain a natural presheaf morphism",
-   "results": "PresheafedSpace gluing and open-image/preimage maps; no nested slice extension theorem.",
-   "date": "2026-10-12",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "loogle",
-   "query": "DirectSum.toAddMonoid",
-   "results": "DirectSum.toAddMonoid and toAddMonoid_of give the component construction and computation; no complete natural transformation or stalk statement.",
-   "date": "2026-10-12",
-   "verdict": "useful ingredients, no exact match"
-  },
-  {
-   "tool": "grep",
-   "query": "extensionByZero.*(map|stalk)|siteExtensionByZero.*[Nn]ested",
-   "results": "0 Mathlib hits; local search additionally found abelianOpenExtensionPresheaf_stalk, for extension from an open subspace, not this slice presheaf morphism.",
-   "date": "2026-10-12",
-   "verdict": "no exact match"
-  }
- ],
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Topology.AbelianIntegerOpenInclusion",
-  "date": "2026-10-12",
-  "group": "S1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-pic-proper-ntorsion",
-   "place": "nested-open integer inclusion in the finite filtration argument of Lemma 0A38, final paragraph",
-   "via": [
-    "lem-sc-abelian-integer-open-inclusion",
-    "lem-sc-constant-subsheaf-peel-layer",
-    "lem-sc-noetherian-extension-by-zero-reduction",
-    "lem-sc-constant-subsheaf-finite-filtration"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Topology.NestedSliceExtensionStalks",
-  "file": "lean/Sheaf/Topology/NestedSliceExtensionStalks.lean",
-  "declaration": "TopCat.Sheaf.nested_slice_extension_stalks",
-  "statement": "theorem nested_slice_extension_stalks {X : TopCat.{u}} (F : TopCat.Sheaf AddCommGrpCat.{u} X) (U V : Opens X) (hVU : V ≤ U) : ∃ g : (siteExtensionByZeroPresheaf V).obj (F.over V).obj ⟶ (siteExtensionByZeroPresheaf U).obj (F.over U).obj, ∀ x : X, x ∈ V → IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map g)",
-  "branch": "sheaf-dag",
-  "by": "S1",
-  "date": "2026-10-12"
- },
- "mathlib_match": null,
- "merged_into": null,
- "lean_audit": {
-  "master": {
-   "state": "none"
-  },
-  "slopmaster2": {
-   "state": "none"
-  }
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S1",
-  "result": "pass",
-  "landing": "20261012T110317-L-621215",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
-  "result": "pass",
-  "landing": "20261012T124352-L-1169438",
-  "kind": "interface"
- }
 }

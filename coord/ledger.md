@@ -7649,17 +7649,11 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:38 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.ConstantGroupScheme (reviewer RETURN: (reviewer X-420c0, head 420c06c7a) H10 (review points 2 and 8): Deliver the forced adaptation of lean/Sheaf/AlgebraicGeo)
 
 - 20:39 L: batch 20261012T120425 bisection test completed
-- 12:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback (stage 3; reviewer PASS; after a return; landing 20261012T124043-L-1149106 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:40 L: returned deliver/T1/Sheaf.FieldTheory.EtaleFieldGaloisClassification (reviewer RETURN: (reviewer X-9844c, head 9844c8bb4) Point 2 / F: In coord/changes/etale-field-galois-classification-imports.md replace `|)
 - 12:41 L: returned deliver/G1/Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence (reviewer RETURN: (reviewer X-2e7f1, head 2e7f17323) H9 (proof imports; stages/2-statements.md §3.7 and stages/3-proving-and-pruning.md §2)
 - 12:41 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts (reviewer RETURN: (reviewer X-a6c3f, head a6c3f1089) A3/G1: The forced adaptations are unnecessary under the stated compiler-failure crite)
-- 12:41 L: merged deliver/C3/Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexIsIso (stage 3; reviewer PASS; after a return; landing 20261012T124146-L-1155887 (interface); batch 20261012T120425; modules 2; new nodes 1; change records: coord/changes/reindex-chart.md)
-- 12:42 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ThickeningIntegral (stage 3; reviewer PASS; first push; landing 20261012T124250-L-1162832 (interface); batch 20261012T120425; modules 2; new nodes 1)
-- 12:43 L: merged deliver/D2/Sheaf.Topology.NestedSliceExtensionStalks (stage 3; reviewer PASS; first push; landing 20261012T124352-L-1169438 (interface); batch 20261012T120425; modules 2; new nodes 1)
-- 12:44 L: merged deliver/D3/Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat (stage 3; reviewer PASS; first push; landing 20261012T124409-L-1170435 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:44 L: returned deliver/P2/Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts (reviewer RETURN: (reviewer X-95e09, head 95e090418) B2/B3/B4: In dag/nodes/sec-proper-base-change/new-normalized-generic-data-lifts.json,)
-- 12:45 L: merged deliver/G1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsos (stage 3; reviewer PASS; first push; landing 20261012T124541-L-1178320 (interface); batch 20261012T120425; modules 3; new nodes 2)
 - 12:46 L: returned deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero (reviewer RETURN: (reviewer X-7dba8, head 7dba89394) B3: In each new node file lem-weil-pbc-etale-limit-affine-degree-zero-kernel.json, le)
 - 12:46 L: returned deliver/K2/Sheaf.CategoryTheory.CohomologyColimitSitesExactLadder (reviewer RETURN: (reviewer X-55e83, head 55e83616c) B6 / brief point 6: Correct two Mathlib declaration records. (1) In dag/nodes/sec-pro)
-- 12:46 L: merged deliver/H1/Sheaf.CategoryTheory.IdentityDerivedHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T124628-L-1182825 (proof); batch 20261012T120425; modules 1; new nodes 2)
-- 12:47 L: merged deliver/H3/Sheaf.Algebra.Homology.FilteredColimitsTensor (stage 3; reviewer PASS; first push; landing 20261012T124732-L-1187782 (interface); batch 20261012T120425; modules 2; new nodes 1)
+
+- 20:48 L: batch 20261012T120425 bisection test completed
