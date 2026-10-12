@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-etale-polynomial-standard-smooth",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); helper for 07CH: Final paragraph of Lemma 07CH; Algebra Lemma 00U9; Mathlib Smooth/StandardSmoothOfFree.lean:50,90 and Smooth/StandardSmooth.lean:138",
+   "via": [
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "An etale algebra over a finite polynomial algebra is standard smooth",
+ "statement": "Let $R$ and $B$ be commutative rings with an $R$-algebra structure, $n\\ge0$, and let $\\theta:R[z_1,\\ldots,z_n]\\to B$ be an $R$-algebra homomorphism [def-weil-pbc-mv-polynomial-ring]. If $B$ is etale over $R[z_1,\\ldots,z_n]$ through $\\theta$ in the ring-map sense of [lem-weil-pbc-etale-ring-map-iff-etale-affine], then $B$ is standard smooth over $R$ [def-weil-pbc-standard-smooth-algebra].",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Final paragraph of Lemma 07CH; Algebra Lemma 00U9; Mathlib Smooth/StandardSmoothOfFree.lean:50,90 and Smooth/StandardSmooth.lean:138; source read at https://stacks.math.columbia.edu/tag/07CH"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-pbc-standard-smooth-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Give B its polynomial-algebra structure through theta. The R-algebra homomorphism property supplies the scalar tower. Mathlib Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero makes this algebra standard smooth of relative dimension zero, hence standard smooth.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The polynomial differential basis consists of D(X_i). Apply Mathlib Algebra.IsStandardSmooth.of_basis_kaehlerDifferential to that basis; finite presentation and vanishing H1 are the polynomial instances. Thus the finite polynomial algebra is standard smooth over R.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the two standard smooth algebras with Mathlib Algebra.IsStandardSmooth.trans. This is the concatenation of the submersive presentations, using the scalar tower supplied by theta.",
+   "uses": [
+    "def-weil-pbc-standard-smooth-algebra"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "lem-weil-pbc-polynomial-ring-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "07CH final paragraph, implemented by the checked Mathlib characterizations and composition instead of rebuilding square presentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An etale algebra over a finite polynomial ring is standard smooth over the base ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "unavailable": true
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmooth.trans",
+   "results": "Algebra.IsStandardSmooth.trans",
+   "date": "2026-10-13",
+   "verdict": "No single theorem states the required conclusion; the listed results provide ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsStandardSmooth.trans|iff_isStandardSmoothOfRelativeDimension_zero|of_basis_kaehlerDifferential",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; Mathlib/RingTheory/Smooth/StandardSmooth.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/RingHom/LocallyStandardSmooth.lean",
+   "date": "2026-10-13",
+   "verdict": "No single theorem states the required conclusion; the listed results provide ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothStandardSmoothRetract",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtalePolynomialStandardSmooth",
+  "file": "lean/Sheaf/RingTheory/EtalePolynomialStandardSmooth.lean",
+  "declaration": "Algebra.isStandardSmooth_of_etale_polynomial",
+  "statement": "theorem isStandardSmooth_of_etale_polynomial\n    (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B] (n : ℕ)\n    (θ : MvPolynomial (Fin n) R →ₐ[R] B)\n    (hθ : @Etale (MvPolynomial (Fin n) R) B _ _ θ.toRingHom.toAlgebra) :\n    IsStandardSmooth R B",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184401-L-4026121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184401-L-4026121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
