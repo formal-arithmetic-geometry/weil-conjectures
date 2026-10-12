@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "The comparison in Step 1 preserves vanishing of cohomology in every degree, so $E\\in D_{\\mathrm{QCoh}}^{\\le n}(X)$ implies $Rf_*E\\in D_{\\mathrm{QCoh}}^{\\le n}(Y)$ and similarly for the lower bound. Conversely, if $Rf_*E$ has either bound, each corresponding $f_*H^i(E)$ vanishes; applying the cohomology comparison [lem-sc-affine-derived-cohomology] to the object $H^i(E)[0]$ of $D_{\\mathrm{QCoh}}(X)$ shows $Rf_*(H^i(E)[0])$ has all cohomology sheaves zero, so $Rf_*$ of the zero morphism $H^i(E)[0]\\to0$ is an isomorphism and the affine conservativity statement [lem-sc-affine-derived-pushforward-conservative] forces $H^i(E)=0$, giving the reverse implications. This is exactly t-exactness for the standard t-structures [def-sbc-standard-tstructure-derived-category].",
+   "text": "The affine comparison transfers cohomology vanishing from E to Rf_*E because ordinary module direct image is additive and therefore preserves zero objects. To reflect vanishing, let M = H^i(E). Place M in degree zero as S = M[0]. The degree-zero cohomology of S is M, and all other cohomology is zero; zero sheaves are quasi-coherent (use the free sheaf on the empty type), so S belongs to D_QCoh(X). If f_*M is zero, the affine cohomology comparison gives zero cohomology for Rf_*S in degree zero and, by the single-object bounds, in every other degree. Use DerivedCategory.isZero_of_forall_isZero_homology to conclude Rf_*S is zero. Consequently the image of the zero endomorphism of S is invertible. Affine conservativity makes the zero endomorphism of S invertible, hence S is zero, and applying H^0 and the single-functor cohomology isomorphism makes M zero. Thus vanishing of each cohomology sheaf is equivalent before and after Rf_*. DerivedCategory.isLE_iff and isGE_iff (def-sbc-standard-tstructure-derived-category) turn these pointwise equivalences into the two bound equivalences.",
    "uses": [
     "lem-sc-affine-derived-cohomology",
     "lem-sc-affine-derived-pushforward-conservative",
@@ -69,7 +69,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 0AVW and 08I8"
+  "place": "Tags 0AVW and 08I8; formalized by A3 using zero endomorphisms in the converse vanishing step"
  },
  "mathlib_searches": [
   {
@@ -155,5 +155,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T070526-L-3465285",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

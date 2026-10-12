@@ -6565,3 +6565,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/A2/Sheaf.Topology.ConstructibleInConstructible (stage 3; reviewer PASS; first push; landing 20261012T070525-L-3464674 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/A3/Sheaf.AlgebraicGeometry.AffineDerivedCohomology (stage 3; reviewer PASS; first push; landing 20261012T070525-L-3464841 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/A3/Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde (stage 3; reviewer PASS; first push; landing 20261012T070525-L-3465067 (proof); batch 20261012T070523; modules 1; new nodes 0)
+- 07:05 L: merged deliver/A3/Sheaf.AlgebraicGeometry.AffineDerivedPushforwardTExact (stage 3; reviewer PASS; first push; landing 20261012T070526-L-3465285 (proof); batch 20261012T070523; modules 1; new nodes 0)
