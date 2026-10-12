@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.FinitePresentation
+import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+import Mathlib.RingTheory.Flat.Rank
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.RingTheory.ZariskiPairRankOnePropagation
@@ -60,6 +62,21 @@ theorem zariskiPair_flat_integral_finitePresentation_isIso
     (hquotient : Function.Bijective
       (Ideal.quotientMap (Ideal.map f I) f (Ideal.le_comap_map))) :
     Function.Bijective f := by
-  sorry
+  let : Algebra R S := f.toAlgebra
+  have hft : f.FiniteType := RingHom.FiniteType.of_finitePresentation hfinitePresentation
+  have : Module.Finite R S := hintegral.to_finite hft
+  have : Algebra.FinitePresentation R S := hfinitePresentation
+  have : Module.FinitePresentation R S :=
+    Module.FinitePresentation.of_finite_of_finitePresentation R S
+  have : Module.Flat R S := hflat
+  have hrank : Module.rankAtStalk (R := R) S = 1 := by
+    funext p
+    obtain ⟨e⟩ := zariskiPair_rank_one_propagation I
+      (by simpa only [Ideal.jacobson_bot] using hI) hflat hquotient p.asIdeal
+    change Module.finrank (Localization.AtPrime p.asIdeal)
+      (LocalizedModule p.asIdeal.primeCompl S) = 1
+    rw [e.finrank_eq]
+    exact Module.finrank_self _
+  exact Module.algebraMap_bijective_of_rankAtStalk hrank
 
 end RingHom
