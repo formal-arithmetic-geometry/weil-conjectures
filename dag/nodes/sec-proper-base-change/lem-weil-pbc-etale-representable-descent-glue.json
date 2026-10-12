@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-etale-representable-descent-glue",
+ "kind": "statement",
+ "title": "Gluing the represented sheaf after effective descent",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $E$ a sheaf of sets [def-weil-pbc-etale-sheaf-of-sets] on $T_{et}$ [def-weil-pbc-etale-site], and $g:U\\to T$ an etale surjection. Let $V\\to U$ be etale with a descent datum $D$ [def-pd-descent-datum]. Suppose $e:E|_U\\simeq h_V$ on the localized site carries each section over an etale $W\\to T$ with two lifts $a,b:W\\to U$ to points related by the transport of $D$. Let $P\\to T$ be etale and $q:V\\to P$ exhibit $V$ as $P\\times_T U$. Suppose transport preserves the composite with $q$. Then $E\\simeq h_P$ as presheaves on $T_{et}$. No finiteness assumption on $V$ or $P$ is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV (lemma-characterize-finite-locally-constant), converse; Descent Tag 02W5 (lemma-descent-data-sheaves)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "The pullback universal property gives an isomorphism from the represented presheaf of V on the localized site to the restriction of h_P: send a point z to z followed by q; the inverse is the unique pullback lift. The projection equations prove naturality and both inverse identities.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose e with this local isomorphism. The compatibility equation for e and invariance of q under transport show the resulting map is independent of the chosen lift to U. The generic helper amalgamates its maps over the covering sieve of objects mapping to U. Naturality and uniqueness follow from the sheaf axiom. Its restriction is the given local isomorphism, so Sheaf.isIso_of_coversTop makes it an isomorphism. Mathlib supplies subcanonicity directly: Subcanonical.of_le applied to etaleTopology_le_proetaleTopology, followed by subcanonical_of_full_of_faithful for Etale.forget T. This supplies the sheaf h_P, and the surjection U to T makes the sieve covering at every object by base change.",
+   "uses": [
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV and Descent Tag 02W5, small-site details expanded by A3; local literature checkout absent, online text checked"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant sheaf of finite sets on the small etale site is represented by a finite etale scheme",
+   "results": "AlgebraicGeometry.Scheme.etaleTopology, CompHausLike.LocallyConstant.functor, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.smallEtaleTopology, CompHausLike.LocallyConstant.functor_obj_val, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, CategoryTheory.PresheafIsFinite, LightCondensed.IsDiscrete",
+   "date": "2026-10-12",
+   "verdict": "Supporting interfaces only; no exact match for this scheme/sheaf compatibility theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local representations of a sheaf on the small etale site give compatible descent data and compatible local isomorphisms glue to a representation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "represent.*descent|descent.*represent|over.*[Ii]so|[Ii]so.*over",
+   "results": "Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/PseudofunctorSheafOver.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Point/Over.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean",
+   "date": "2026-10-12",
+   "verdict": "Supporting interfaces only; no exact match for this scheme/sheaf compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local representable sheaves yield a descent datum by the fully faithful Yoneda embedding",
+   "results": "CategoryTheory.Pseudofunctor.bijective_toDescentData_map_iff, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, CategoryTheory.Pseudofunctor.isPrestackFor_iff, CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv_toCompatible_presheafHomObjHomEquiv, CategoryTheory.Pseudofunctor.isPrestackFor_ofArrows_iff, CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff, CategoryTheory.Pseudofunctor.DescentData.subtypeCompatibleHomEquiv",
+   "date": "2026-10-12",
+   "verdict": "Supporting interfaces only; no exact match for this scheme/sheaf compatibility theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible isomorphisms of sheaves on a covering object glue to a global sheaf isomorphism",
+   "results": "TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.map_f₂₄_op_glue, TopCat.Presheaf.isGluing_iff_pairwise",
+   "date": "2026-10-12",
+   "verdict": "Supporting interfaces only; no exact match for this scheme/sheaf compatibility theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isIso_of_coversTop",
+   "results": "CategoryTheory.Sheaf.isIso_of_coversTop, Mathlib.CategoryTheory.Sites.LocalProperties",
+   "date": "2026-10-12",
+   "verdict": "Second reader: supporting theorem already used by the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsDescent",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+   "place": "Gluing the represented sheaf after effective descent in the converse descent argument",
+   "via": [
+    "lem-weil-pbc-finite-locally-constant-sets-descent",
+    "lem-weil-pbc-finite-locally-constant-sets-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRepresentableDescentGlue",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRepresentableDescentGlue.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleRepresentable_descentGlue",
+  "statement": "theorem etaleRepresentable_descentGlue\n    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (U : T.Etale) [Surjective U.hom]\n    (D : Over.DescentDataCategory U.hom) [Etale D.V.hom]\n    (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙\n      uliftYoneda.{u + 1}.obj (Etale.mk D.V.hom))\n    (hcompat : ∀ (W : T.Etale) (a b : W ⟶ U) (s : E.obj.obj (op W)),\n      (D.datum.transport a.left b.left\n        ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm)\n        (Over.homMk ((e.hom.app (op (Over.mk a))) s).down.left\n          (MorphismProperty.Over.w ((e.hom.app (op (Over.mk a))) s).down))).left =\n        ((e.hom.app (op (Over.mk b))) s).down.left)\n    (P : Scheme.{u}) (π : P ⟶ T) [Etale π] (q : D.V.left ⟶ P)\n    (hp : IsPullback q D.V.hom π U.hom)\n    (ht : ∀ {W : Scheme.{u}} (a b : W ⟶ U.left) (h : a ≫ U.hom = b ≫ U.hom)\n      (z : Over.mk a ⟶ D.V), (D.datum.transport a b h z).left ≫ q = z.left ≫ q) :\n    Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Etale.mk π))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T070526-L-3465419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T070526-L-3465419",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
