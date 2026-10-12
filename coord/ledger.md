@@ -8566,3 +8566,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/P2/Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerCokernel (stage 3; reviewer PASS; first push; landing 20261012T163617-L-2786369 (interface); batch 20261012T163610; modules 2; new nodes 1)
 - 16:36 L: merged deliver/P3/Sheaf.CategoryTheory.RoosAcyclicResolution (stage 3; reviewer PASS; first push; landing 20261012T163617-L-2786473 (interface); batch 20261012T163610; modules 4; new nodes 3; change records: coord/changes/roos-prefix-interface.md)
 - 16:36 L: merged deliver/Q1/Sheaf.RingTheory.PopescuLiftOne (stage 3; reviewer PASS; first push; landing 20261012T163618-L-2786600 (proof); batch 20261012T163610; modules 1; new nodes 0)
+- 16:36 L: merged deliver/Q2/Sheaf.RingTheory.PolynomialQuotientCompletionFibreIso (stage 3; reviewer PASS; first push; landing 20261012T163618-L-2786744 (interface); batch 20261012T163610; modules 2; new nodes 1)

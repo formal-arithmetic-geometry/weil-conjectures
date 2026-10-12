@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-completion-surjective-base-change",
+ "kind": "statement",
+ "title": "Completion of a prime localization under a surjective base change",
+ "statement": "Let R and B be commutative rings, with R Noetherian and B an R-algebra whose structure map f is surjective. Let Q be a prime ideal of R and q a prime ideal of B with Q = f⁻¹(q). Put A = R_Q and D = B_q, and let Cp and C be their completions at their local maximal ideals. Then C is isomorphic as a B-algebra to B ⊗[R] Cp.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CT and 00MA (2), (3); https://stacks.math.columbia.edu/tag/00CT and https://stacks.math.columbia.edu/tag/00MA"
+ },
+ "proof": [
+  {
+   "text": "The localization map φ : R_Q → B_q is surjective (RingHom.SurjectiveOnStalks.localRingHom_surjective) and has kernel (ker f)R_Q (IsLocalization.ker_map). This is localization of a quotient, after identifying B with R/ker f.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surjective local-ring map sends the maximal ideal onto the maximal ideal. Apply AdicCompletion.exists_local_completion_quotient to obtain C ≃ Cp/(ker f)Cp and its compatibility with structure maps.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The compatibility makes this an R-algebra equivalence. Algebra.TensorProduct.quotIdealMapEquivQuotTensor identifies Cp/(ker f)Cp with (R/ker f) ⊗[R] Cp. Transport the first factor along f.quotientKerEquivOfSurjective to B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend the resulting R-algebra equivalence to a B-algebra equivalence by AlgEquiv.extendScalarsOfSurjective, since f is surjective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-local-completion-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00CT and 00MA (2), (3), combined with tensor-quotient and scalar-extension equivalences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completion of a localized Noetherian ring commutes with surjective base change as a tensor product",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian and related module-completion theorems found; no prime-localization B-algebra equivalence. These results underlie the already proved local completion quotient theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.quotIdealMapEquivQuotTensor",
+   "results": "Algebra.TensorProduct.quotIdealMapEquivQuotTensor and its mk formula found and used in the proof; this does not itself identify the target completion.",
+   "date": "2026-10-13",
+   "verdict": "component match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*TensorProduct|TensorProduct.*AdicCompletion",
+   "results": "Six Mathlib hits, all module completion tensor maps or imports. Repository search for nonempty_surjective_baseChange and completion/baseChange found no duplicate. FormalFibreQuotientIso gives the prime-quotient formal-fibre specialization; its construction informed this generic completion lemma.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of a prime localization of a Noetherian ring commutes with surjective base change",
+   "results": "service unavailable: Internal Server Error; used LeanFinder, Loogle and source grep instead",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialQuotientCompletionFibreIso",
+  "date": "2026-10-13",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-polynomial-quotient-completion-fibre-iso",
+   "place": "completion comparison, original step 2"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionSurjectiveBaseChange",
+  "file": "lean/Sheaf/RingTheory/CompletionSurjectiveBaseChange.lean",
+  "declaration": "AdicCompletion.nonempty_surjective_baseChange",
+  "statement": "theorem nonempty_surjective_baseChange\n    (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B]\n    [IsNoetherianRing R] (hf : Function.Surjective (algebraMap R B))\n    (Q : Ideal R) [Q.IsPrime] (q : Ideal B) [q.IsPrime]\n    (hc : Q = q.comap (algebraMap R B)) :\n    let A := Localization.AtPrime Q\n    let D := Localization.AtPrime q\n    let Cp := AdicCompletion (IsLocalRing.maximalIdeal A) A\n    let C := AdicCompletion (IsLocalRing.maximalIdeal D) D\n    Nonempty (C ≃ₐ[B] TensorProduct R B Cp)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T163618-L-2786744",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T163618-L-2786744",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
