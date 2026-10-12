@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-koszul-ext-determinant-multiplication",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-koszul-regular-sequence-dual-complex",
+   "place": "Strict decomposition of intrinsic determinant argument",
+   "via": [
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Intrinsic Ext determinant is quotient-linear",
+ "statement": "The intrinsic Ext determinant isomorphism is linear for the quotient action.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, lemma-regular-immersion-ext, local Koszul-complex computation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-weil-pbc-koszul-complex",
+  "def-sc-koszul-dual-complex",
+  "def-sc-koszul-conormal-comparison"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding strictly smaller part of the intrinsic determinant argument in Tag 0BQZ, separated from the other clause so that the parent theorem is obtained by conjunction.",
+   "uses": [
+    "lem-sc-koszul-regular-sequence-dual-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-koszul-regular-sequence-dual-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ; conormal basis from More on Algebra Tag 062I; augmentation and change of generators retain their proved routes. Normalized comparison existence is split off and uniqueness is proved from conormal basis coordinates. Ext and localization remain open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "dual of Koszul complex on a regular sequence is exterior power shifted",
+   "results": "exteriorPower.presentation and ModuleCat.exteriorPower declarations only; no Koszul-dual quasi-isomorphism",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Koszul exterior power shift",
+   "results": "0 hits; unknown identifier Koszul",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|exterior.*power|regular.*sequence in Mathlib",
+   "results": "none in Mathlib source",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dual of Koszul complex on a regular sequence",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-koszul-regular-sequence-dual-complex",
+  "worker": "stage1",
+  "summary": "Checked that no sorry-free project declaration states the item. The proof is split into the finite-free Koszul resolution, the exterior-power dual pairing, the inductive dual-complex calculation, and localization and generator-independence. Added the Mathlib pairing leaf used to identify dual exterior-power terms.",
+  "blueprint": "Realizes the proof place ‘proof of the diagonal Koszul calculation: the Koszul-complex computation of the derived sheaf Hom’ of lem-sc-finite-duality through its affine Koszul calculation.",
+  "tool_uses": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulRegularSequenceDualComplex",
+  "file": "lean/Sheaf/RingTheory/KoszulRegularSequenceDualComplex.lean",
+  "declaration": "ExteriorAlgebra.intrinsic_ext_determinant_multiplication",
+  "statement": "theorem intrinsic_ext_determinant_multiplication (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)] (I : Ideal A) (r : ℕ) (hex : ∃ f : Fin r → A, RingTheory.Sequence.IsKoszulRegular f ∧ Ideal.span (Set.range f) = I) : ∃ e : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r ≃ₗ[A] koszulNormalDeterminant A I r, ∀ (b : A ⧸ I) (x : Abelian.Ext (ModuleCat.of A (A ⧸ I)) (ModuleCat.of A A) r), e ((Abelian.Ext.mk₀ (ModuleCat.ofHom (b • (LinearMap.id : (A ⧸ I) →ₗ[A] (A ⧸ I))))).comp x (zero_add r)) = @SMul.smul (A ⧸ I) (⋀[A ⧸ I]^r (Module.Dual (A ⧸ I) I.Cotangent)) inferInstance b (e x)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-kdc",
+  "group": "E1",
+  "result": "fix",
+  "note": "A comm ring, f:Fin r->A IsKoszulRegular, I=span f, B=A/I, C=I.Cotangent, N=Dual, D=wedge^r N restricted; exists-unique determinant-normalized quasi-iso Hom(K,A)->D[r] (any sign gives a cochain map: x∘d_r(top) in I); H^i=0 i≠r over Z; H^r≅D as B-modules tied to φ; Ext^r iso chosen per I before f, tied on every roof; change of generators via g∘t=f; localization square. New defs: no landed dual Koszul (shiftedKoszulComplex is K itself in degrees ≤0); dual sign matches Mathlib HomComplex δ. FIX: derived iso was bare Nonempty, now IsIso (Q.map (extendMap φ embeddingUpNat))"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T184335-L-4016930",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T184335-L-4016930",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
