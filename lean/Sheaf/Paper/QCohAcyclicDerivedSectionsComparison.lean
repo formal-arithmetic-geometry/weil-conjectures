@@ -9,15 +9,8 @@ public import Sheaf.AlgebraicGeometry.DerivedSectionPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
-import Sheaf.CategoryTheory.TruncationHypercohomology
-import Sheaf.Topology.RestrictInjectiveResolution
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
-import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
+import Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSections
+import Sheaf.Paper.QCohAcyclicDerivedSectionsComparisonSheafification
 
 /-! # Derived sections for acyclic quasi-coherent pushforward
 
@@ -81,6 +74,10 @@ theorem qcoh_acyclic_derived_sections_comparison {X Y : Scheme.{u}}
       ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedSectionPresheaf f i ⋙
           PresheafOfModules.sheafification.{u} (𝟙 (moduleRings Y.toRingedSpace).obj) ≅
         (schemeDerivedQCohProperty X).ι ⋙ schemeHigherDirectImage f i) := by
-  sorry
+  obtain ⟨sectionsIso⟩ :=
+    qcoh_acyclic_derived_sections_comparison_sections f hacyc i
+  obtain ⟨sheafificationIso⟩ :=
+    qcoh_acyclic_derived_sections_comparison_sheafification f hacyc i
+  exact ⟨⟨sectionsIso⟩, ⟨sheafificationIso⟩⟩
 
 end AlgebraicGeometry

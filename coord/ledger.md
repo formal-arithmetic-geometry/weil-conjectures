@@ -7586,3 +7586,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:49 L: returned deliver/Q3/Sheaf.Algebra.Homology.LowerTruncationTransitionKernel (reviewer RETURN: (the landing tools, head 6c93e0e4a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 11:49 L: merged deliver/C3/Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal (stage 3; reviewer PASS; first push; landing 20261012T114942-L-874556 (proof); batch 20261012T114925; modules 1; new nodes 0)
 - 11:50 L: merged deliver/E3/Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic (stage 3; reviewer PASS; first push; landing 20261012T115005-L-875809 (interface); batch 20261012T114925; modules 2; new nodes 1)
+- 11:50 L: merged deliver/F3/Sheaf.Paper.QCohAcyclicDerivedSectionsComparison (stage 3; reviewer PASS; first push; landing 20261012T115021-L-877059 (interface); batch 20261012T114925; modules 3; new nodes 2)

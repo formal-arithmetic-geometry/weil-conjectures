@@ -28,74 +28,28 @@
  ],
  "proof": [
   {
-   "text": "Fix an affine open V of Y and put U=f^{-1}(V), with v=\\Gamma(U,-):\\mathrm{Mod}(\\mathcal O_X)\\to\\mathrm{Ab} and f_V:U\\to V the induced morphism, again quasi-compact and quasi-separated. Let F be a quasi-coherent O_X-module; then F|_U is quasi-coherent. By [lem-sc-ringed-space-restrict-injective-resolution] an injective resolution F\\to I^\\bullet restricts to an injective resolution of F|_U, so R^p v(F)=H^p(U,F|_U), and by [lem-pc-restrict-derived-direct-image-open] applied to F[0] we have (R^pf_*F)|_V\\cong R^p(f_V)_*(F|_U); the hypothesis therefore gives R^p(f_V)_*(F|_U)=0 for p>0. The higher direct images R^q(f_V)_*(F|_U) are quasi-coherent by [lem-pc-finite-support-hi], and V is affine, so H^p(V,R^q(f_V)_*(F|_U))=0 for p>0 by [lem-pc-affine-vanishing]. The Leray degeneration statement [lem-pc-leray-degenerate-sections] (2) for f_V then identifies H^p(U,F|_U) with \\Gamma(V,R^p(f_V)_*(F|_U))=0 for p>0, so R^p v(F)=0 for p>0 and every quasi-coherent F. Finally v commutes with countable products by the product universal property (a map into a product is exactly a family of maps into its factors).",
+   "text": "Obtain the affine-open presheaf comparison from the sections component theorem.",
    "uses": [
-    "lem-sc-ringed-space-restrict-injective-resolution",
-    "lem-pc-restrict-derived-direct-image-open",
-    "lem-pc-finite-support-hi",
-    "lem-pc-affine-vanishing",
-    "lem-pc-leray-degenerate-sections",
-    "def-pc-derived-direct-image"
+    "new-qcoh-acyclic-sections-component"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4 hypotheses and Tag 08D5 proof over affine opens; Tags 01E1 and 08FE for restriction to the open U and V; Tags 01XJ and 01XB for quasi-coherence and affine vanishing"
-   }
+   "elementary": false
   },
   {
-   "text": "For any integer i, shift E so that it suffices to prove the assertion in degree 0. Apply the cohomological-bound statement [lem-pc-unbounded-derived-functor-cohomological-bound] to v with N=1 and the truncation \\tau_{\\le -1}E: its cohomology vanishes above -1, hence H^j(Rv(\\tau_{\\le -1}E))=0 for every j\\ge0. The triangle \\tau_{\\le -1}E\\to E\\to\\tau_{\\ge0}E\\to therefore gives a natural isomorphism H^0(RvE)\\cong H^0(Rv\\tau_{\\ge0}E).",
+   "text": "Obtain the sheafification comparison from the sheafification component theorem and package both Nonempty isomorphisms.",
    "uses": [
-    "lem-pc-unbounded-derived-functor-cohomological-bound",
-    "def-pc-derived-category"
+    "new-qcoh-acyclic-sheafification-component"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4, part (3), applied to the standard truncation triangle"
-   }
-  },
-  {
-   "text": "The bounded-below complex \\tau_{\\ge0}E has quasi-coherent cohomology, and every positive derived functor R^p v on those cohomology sheaves vanishes by Step 1. Apply the truncation hypercohomology spectral sequence [thm-sp-truncation-e2] to v and \\tau_{\\ge0}E. Its E_2-page is E_2^{p,q}=R^p v(H^q(E)); all entries with p>0 are zero, so the finite filtration in its abutment has only the p=0 graded piece. Consequently H^0(Rv\\tau_{\\ge0}E)\\cong v(H^0(E)) naturally in E. Undoing the shift gives H^i(R\\Gamma(U,E))\\cong\\Gamma(U,H^i(E)). The construction is natural in E and restriction-compatible because all truncation, spectral-sequence, and section maps are functorial.",
-   "uses": [
-    "thm-sp-truncation-e2",
-    "def-pc-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 08D4, parts (1) and (2), and Tag 08D5 derived-category truncation argument"
-   }
-  },
-  {
-   "text": "Represent E by a K-injective complex I^\\bullet of O_X-modules. By the definition of the derived functors [def-pc-derived-direct-image] (computed on K-injective representatives), Rf_*E=f_*I^\\bullet and, for every open V of Y, R\\Gamma(f^{-1}(V),E)=\\Gamma(f^{-1}(V),I^\\bullet)=(f_*I^\\bullet)(V), compatibly with restriction maps. The cohomology sheaf H^i(f_*I^\\bullet)=H^i(Rf_*E) is the quotient sheaf of the kernel sheaf (computed sectionwise) by the image of f_*I^{i-1}; a quotient of sheaves of modules is the sheafification of the presheaf quotient, so H^i(Rf_*E) is the sheafification [def-weil-pbc-sheafification] of V\\mapsto H^i((f_*I^\\bullet)(V))=H^i(R\\Gamma(f^{-1}(V),E)) (Stacks Tag 0D5X); since affine opens form a basis, the same holds for this presheaf on affine opens V. Naturality in E follows from the functoriality of K-injective representatives. (Combined with Step 3, the presheaf is also identified on affines with V\\mapsto\\Gamma(V,f_*H^i(E)).)",
-   "uses": [
-    "def-pc-derived-direct-image",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Cohomology, Lemma 0D5X (cohomology-lemma-unbounded-describe-higher-direct-images); Tag 0AVW use of it"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-finite-support-hi",
-  "lem-pc-affine-vanishing",
-  "lem-pc-leray-degenerate-sections",
-  "def-pc-derived-direct-image",
-  "lem-pc-unbounded-derived-functor-cohomological-bound",
-  "def-pc-derived-category",
-  "thm-sp-truncation-e2",
-  "def-weil-pbc-sheafification",
-  "lem-sc-ringed-space-restrict-injective-resolution",
-  "lem-pc-restrict-derived-direct-image-open"
+  "new-qcoh-acyclic-sections-component",
+  "new-qcoh-acyclic-sheafification-component"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker decomposition",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tags 08D4, 08D5 and 0AVW"
+  "place": "Tags 08D4, 08D5, 0AVW"
  },
  "mathlib_searches": [
   {
@@ -212,5 +166,15 @@
   "reviewer": "R-qad",
   "group": "N1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T115021-L-877059",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
