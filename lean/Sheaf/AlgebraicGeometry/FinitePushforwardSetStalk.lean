@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
 import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkAux
+import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalkFiberFinite
 
 /-!
 # Stalks of finite direct images of étale sheaves of sets
@@ -81,6 +83,7 @@ theorem finite_pushforward_set_stalk_bijective
             (colimit.pre
               ((CategoryOfElements.π (Scheme.pointSmallEtale t.1).fiber).op ⋙ H.obj)
               (Etale.baseChangeNbhd f y t).op) a) := by
-  sorry
+  let hfin := finite_pushforward_set_stalk_fiber_finite f y
+  exact ⟨hfin, finite_pushforward_set_stalk_map_bijective_of_finite f H y hfin⟩
 
 end AlgebraicGeometry

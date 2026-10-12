@@ -6180,3 +6180,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/E2/Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence (stage 3; reviewer PASS; first push; landing 20261012T053927-L-2633324 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/E2/Sheaf.RingTheory.EtaleResidueTriplesSimpleRoots (stage 3; reviewer PASS; first push; landing 20261012T053927-L-2633420 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/F1/Sheaf.AlgebraicGeometry.Curve.PrimeBiproductAssertions (stage 3; reviewer PASS; first push; landing 20261012T053927-L-2633522 (interface); batch 20261012T053916; modules 4; new nodes 3)
+- 05:39 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk (stage 3; reviewer PASS; first push; landing 20261012T053928-L-2633622 (interface); batch 20261012T053916; modules 3; new nodes 2)
