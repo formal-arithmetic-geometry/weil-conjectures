@@ -182,6 +182,21 @@ theorem isIso_verdierDualDoubleDual_app
     IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
   sorry
 
+/-- Blueprint `thm-weil-etale-geometric-biduality`: Finite-stage étale Verdier biduality.
+
+For `X` separated of finite type over an algebraically closed field `k` and a finite coefficient
+ring `Λ` whose exponent is invertible on `k`, the double-dual morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an
+isomorphism for every `K ∈ Dctf(X_ét, Λ)`; the anti-equivalence of `Dctf(X_ét, Λ)` is
+`AlgebraicGeometry.Etale.verdierDualEquivalence`. This is the case of an algebraically closed
+field of the general biduality `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`, which is
+proved over an algebraically closed field by induction on `dim X`, through the geometric generic
+fibres of the maps `X ⟶ 𝔸¹_k` (`lem-weil-geometric-generic-duality`). -/
+theorem isIso_verdierDualDoubleDual_app_of_isAlgClosed [IsAlgClosed k]
+    {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+    IsIso ((verdierDualDoubleDual (ModuleCat.{u + 1} Λ) a).app K) :=
+  isIso_verdierDualDoubleDual_app Λ a hK
+
 /-- Blueprint `sk-prop-sf-biduality-general`: General Verdier biduality.
 
 For `X` separated of finite type over a field `k` and a finite coefficient ring `Λ` whose
