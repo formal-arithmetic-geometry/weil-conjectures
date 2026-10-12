@@ -15,48 +15,24 @@
  ],
  "proof": [
   {
-   "text": "($\\mathcal G$ is locally finitely presented.) Let $x\\in X$. Since $\\mathcal G$ is of finite type [pqf-def-coherent] there are an open $U\\ni x$ and a surjection $\\psi:\\mathcal O_U^{\\oplus n}\\to\\mathcal G|_U$. By the second condition of coherence [pqf-def-coherent] the kernel $\\mathcal K=\\operatorname{Ker}\\psi$ (sectionwise [def-weil-sheaf-of-modules-category]) is of finite type, so there are an open $V$ with $x\\in V\\subseteq U$ and a surjection $\\mathcal O_V^{\\oplus m}\\to\\mathcal K|_V$. Since kernels are computed sectionwise, $\\mathcal K|_V=\\operatorname{Ker}(\\psi|_V)$, and the composite $\\mathcal O_V^{\\oplus m}\\to\\mathcal K|_V\\subseteq\\mathcal O_V^{\\oplus n}$ gives an exact sequence $\\mathcal O_V^{\\oplus m}\\xrightarrow{a}\\mathcal O_V^{\\oplus n}\\xrightarrow{\\psi|_V}\\mathcal G|_V\\to0$ of $\\mathcal O_V$-modules. Thus $X$ is covered by opens $V$ each carrying such a presentation of $\\mathcal G|_V$.",
+   "text": "Apply coherent_local_finite_presentation to G and x, obtaining a neighbourhood V, ranks m,n, a map a and a cokernel isomorphism e.",
    "uses": [
-    "pqf-def-coherent",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-module-finite-type-presentation"
+    "lem-weil-pbc-coherent-local-finite-presentation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01BW (lemma-coherent-finite-presentation, line 1596) and its proof, cited as 'finitely presented' in Lemma 01CQ"
-   }
+   "elementary": true
   },
   {
-   "text": "(Restriction to $V$.) For an open $V\\subseteq X$ the restriction $\\mathcal Hom_{\\mathcal O_X}(\\mathcal G,\\mathcal F)|_V$ equals $\\mathcal Hom_{\\mathcal O_V}(\\mathcal G|_V,\\mathcal F|_V)$ as $\\mathcal O_V$-modules: by the definition of the sheaf Hom [def-pur-sheaf-hom] both have as sections over an open $W\\subseteq V$ the $\\mathcal O_W$-module $\\operatorname{Hom}_{\\mathcal O_W}(\\mathcal G|_W,\\mathcal F|_W)$, with the same restriction maps and the same module structure.",
+   "text": "Apply homObj_locally_kernel_of_local_presentation to this specified a and e on V, with target F. It supplies alpha and its kernel isomorphism on V. Use x in V to assemble the required existential witnesses.",
    "uses": [
-    "def-pur-sheaf-hom"
+    "lem-weil-pbc-coherent-hom-local-kernel-from-presentation"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 04TT (sites-modules-section-internal-hom), definition of the internal Hom and its restriction to a localized site (Lemma 0E8H, lemma-internal-hom-restriction, line 3775)"
-   }
-  },
-  {
-   "text": "Apply the left exact precomposition sequence [lem-weil-pbc-sheaf-hom-finite-presentation-kernel] to the finite free presentation on $U$ from step 1. Evaluation on a finite free basis identifies Hom from each free term with the finite biproduct of copies of $\\mathcal F|_U$ [def-weil-pbc-module-finite-type-presentation, def-pur-sheaf-hom]. Transport the two maps along these isomorphisms. Exactness at the first two terms says that the first map is monic and identifies its source with the kernel of the next map [def-weil-sheaf-of-modules-category]. Combine with the restriction identification of step 2. The same universal properties apply when either rank is zero.",
-   "uses": [
-    "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
-    "def-weil-pbc-module-finite-type-presentation",
-    "def-pur-sheaf-hom",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01CQ (lemma-internal-hom-locally-kernel-direct-sum, line 3739), first assertion, proved in the proof of Lemma 01CP (lemma-stalk-internal-hom, line 3619) via Lemma 01CO (lemma-internal-hom-exact)"
-   }
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Lemmas 01BW and 01CQ, and the proof of 01CP; restriction identification from Sites, Modules, Lemma 0E8H."
+  "place": "Lemma 01BW followed by the finite presentation argument of Lemma 01CQ (proof of 01CP); implemented as two strictly smaller intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -138,11 +114,8 @@
   "existing": false
  },
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-weil-pbc-module-finite-type-presentation",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-sheaf-hom-finite-presentation-kernel",
-  "pqf-def-coherent"
+  "lem-weil-pbc-coherent-local-finite-presentation",
+  "lem-weil-pbc-coherent-hom-local-kernel-from-presentation"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -158,9 +131,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T194115-L-456621",
+  "landing": "20261012T214705-L-1269493",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

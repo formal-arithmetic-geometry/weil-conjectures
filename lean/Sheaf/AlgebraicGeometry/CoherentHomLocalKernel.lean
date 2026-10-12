@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
+import Sheaf.AlgebraicGeometry.CoherentLocalFinitePresentation
+import Sheaf.AlgebraicGeometry.HomLocalKernelOfPresentation
 
 /-!
 # Local kernel models for Hom out of a coherent module
@@ -55,6 +56,8 @@ theorem homObj_locally_kernel_of_coherent (X : Scheme.{u}) (G F : X.Modules)
         (⨁ fun _ : Fin m ↦ F.restrict U.ι)),
       Nonempty ((restrictFunctor U.ι).obj
         (SheafOfModules.homObj (R := X.sheaf) G F) ≅ kernel α) := by
-  sorry
+  obtain ⟨V, hxV, m, n, a, ⟨e⟩⟩ := coherent_local_finite_presentation X G hG x
+  obtain ⟨α, hα⟩ := homObj_locally_kernel_of_local_presentation X G F V m n a e
+  exact ⟨V, hxV, m, n, α, hα⟩
 
 end AlgebraicGeometry.Scheme.Modules
