@@ -10,6 +10,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
 public import WeilConjectures.DeligneLaumon.AffineLine.GeometricSMul
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.WeilSheaf.LisseFiltration
+public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
@@ -46,25 +47,26 @@ noncomputable def dualIsoOfIso {F F' : WeilSheaf k₀ l X} (hF : F.IsLisse) (hF'
 
 end WeilSheaf
 
-/-- **The inverse of a linear Artin–Schreier sheaf**: `(ℒ_{ψ(a x)})^∨ ≅ ℒ_{ψ(-a x)}`.
-(blueprint: `lem-fd-as-characters`, the clause `(ℒ_{ψ,f})^{-1} ≅ ℒ_{ψ,-f}` for `f = a x`) -/
-theorem nonempty_iso_dual_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
-    Nonempty ((artinSchreier ψ a).dual (isLisse_artinSchreier ψ a) ≅ artinSchreier ψ (-a)) :=
-  sorry
-
 /-- **The inverse character**: `ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}`.
 (blueprint: `lem-fd-as-characters`, the clause `ℒ_{ψ^{-1},f} ≅ ℒ_{ψ,-f}` for `f = a x`) -/
 theorem nonempty_iso_artinSchreier_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
     Nonempty (artinSchreier ψ⁻¹ a ≅ artinSchreier ψ (-a)) :=
   sorry
 
+/-- **The inverse of a linear Artin–Schreier sheaf**: `(ℒ_{ψ(a x)})^∨ ≅ ℒ_{ψ⁻¹(a x)} ≅
+ℒ_{ψ(-a x)}`. (blueprint: `lem-fd-as-characters`, the clause `(ℒ_{ψ,f})^{-1} ≅ ℒ_{ψ,-f}` for
+`f = a x`) -/
+theorem nonempty_iso_dual_artinSchreier_neg (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
+    Nonempty ((artinSchreier ψ a).dual (isLisse_artinSchreier ψ a) ≅ artinSchreier ψ (-a)) :=
+  ⟨(nonempty_iso_dual_artinSchreier ψ a).some ≪≫ (nonempty_iso_artinSchreier_inv ψ a).some⟩
+
 /-- The double dual of the inverse character is `ℒ_{ψ(-x)}`:
 `(ℒ_{ψ⁻¹(x)})^∨∨ ≅ (ℒ_{ψ⁻¹(-x)})^∨ ≅ ℒ_{ψ⁻¹(x)} ≅ ℒ_{ψ(-x)}`. -/
 theorem nonempty_iso_dual_dual_artinSchreier_inv (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (((artinSchreier ψ⁻¹ 1).dual (isLisse_artinSchreier ψ⁻¹ 1)).dual
       (isLisse_artinSchreier ψ⁻¹ 1).dual ≅ artinSchreier ψ (-1)) := by
-  obtain ⟨e₁⟩ := nonempty_iso_dual_artinSchreier ψ⁻¹ 1
-  obtain ⟨e₂⟩ := nonempty_iso_dual_artinSchreier ψ⁻¹ (-1)
+  obtain ⟨e₁⟩ := nonempty_iso_dual_artinSchreier_neg ψ⁻¹ 1
+  obtain ⟨e₂⟩ := nonempty_iso_dual_artinSchreier_neg ψ⁻¹ (-1)
   obtain ⟨e₃⟩ := nonempty_iso_artinSchreier_inv ψ 1
   rw [neg_neg] at e₂
   exact ⟨WeilSheaf.dualIsoOfIso _ (isLisse_artinSchreier ψ⁻¹ (-1)) e₁ ≪≫ e₂ ≪≫ e₃⟩

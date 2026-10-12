@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.LSeries
-public import WeilConjectures.WeilSheaf.StalkTensor
+public import WeilConjectures.WeilSheaf.StalkTensorTrace
 
 /-!
 # The `L`-series of a lisse Weil sheaf on an affine curve

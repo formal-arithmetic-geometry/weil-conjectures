@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.StalkConstantTwist
 public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Trace
@@ -160,36 +161,12 @@ theorem IsLisse.exists_forall_finrank_stalk_le [QuasiCompact (X ↘ Spec (CommRi
   obtain ⟨N, hN⟩ := ProEtale.IsAdicLisseSheaf.exists_forall_finrank_le hF
   exact ⟨N, fun x ↦ hN _ _⟩
 
-
-
-/-- Isomorphic Weil sheaves have isomorphic stalks, with their Frobenius. -/
-theorem nonempty_equiv_stalkAt_of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    Nonempty ((F.stalkAt s m hs).Equiv (G.stalkAt s m hs)) := by
-  have h₁ : (stalkAtMap s m hs e.hom).comp (stalkAtMap s m hs e.inv) = .id := by
-    refine LinearMap.ext fun y ↦ ?_
-    change stalkAtMap s m hs e.hom (stalkAtMap s m hs e.inv y) = y
-    rw [← stalkAtMap_comp, e.inv_hom_id, stalkAtMap_id]
-  have h₂ : (stalkAtMap s m hs e.inv).comp (stalkAtMap s m hs e.hom) = .id := by
-    refine LinearMap.ext fun y ↦ ?_
-    change stalkAtMap s m hs e.inv (stalkAtMap s m hs e.hom y) = y
-    rw [← stalkAtMap_comp, e.hom_inv_id, stalkAtMap_id]
-  let E : (F.stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier :=
-    LinearEquiv.ofLinearMap _ _ h₁ h₂
-  have hc : ⇑E = ⇑(stalkAtMap s m hs e.hom) := LinearEquiv.coe_ofLinearMap _ _ h₁ h₂
-  -- passing through `LinearEquiv.coe_ofLinearMap` explicitly keeps the kernel check fast
-  exact ⟨⟨E, fun x ↦ (congrFun hc _).trans
-    ((stalkAtMap_frobenius s m hs e.hom x).trans
-      (congrArg (G.stalkAt s m hs).frobenius (congrFun hc x).symm))⟩⟩
-
 /-- Isomorphic Weil sheaves have the same trace function. -/
 theorem traceFunction_eq_of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (n : ℕ)
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ n)) :
     F.traceFunction n y = G.traceFunction n y := by
   rw [traceFunction_eq_trace, traceFunction_eq_trace]
-  obtain ⟨e'⟩ := nonempty_equiv_stalkAt_of_iso e _ _
+  obtain ⟨e'⟩ := nonempty_equiv_stalkAt_of_iso _ _ _ e
     (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
       (X ↘ Spec (CommRingCat.of k₀)) (finitePointOfFieldPoint y))
   exact (e'.trace_frobeniusEnd_pow _).symm

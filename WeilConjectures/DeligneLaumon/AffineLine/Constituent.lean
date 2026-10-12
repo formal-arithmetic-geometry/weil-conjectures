@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.Defs
+public import WeilConjectures.DeligneLaumon.AffineLine.DenseOpen
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.GeometricConstituent
@@ -179,16 +179,6 @@ theorem WeilSheaf.nonempty_iso_upperStar_geometricSMul_zero_artinSchreier
 namespace WeilSheaf.LisseOnDenseOpen
 
 variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
-
-/-- The geometric fiber `Ū = U₀ ⊗ k̄` of a dense open `U₀` of the affine line is irreducible:
-it is a nonempty open of the irreducible `𝔸¹_{k̄}`. -/
-theorem irreducibleSpace_geometricFiber :
-    IrreducibleSpace (D.U ↘ Spec (CommRingCat.of k₀)).geometricFiber := by
-  have : Nonempty (affineLine k₀) :=
-    ⟨(affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiberProj (Classical.arbitrary _)⟩
-  have : Nonempty D.U := D.j.denseRange.nonempty
-  have := Scheme.Hom.nonempty_geometricFiber k₀ D.U
-  exact (Scheme.Hom.geometricFiberMap D.j (comp_over D.j _)).isOpenEmbedding.irreducibleSpace
 
 /-- The trivial linear character `ℒ_{ψ(0 · x)}|_Ū`, the target of the constituents in
 `AlgebraicGeometry.WeilSheaf.HasLinearArtinSchreierConstituent` for `a = 0`, is the constant

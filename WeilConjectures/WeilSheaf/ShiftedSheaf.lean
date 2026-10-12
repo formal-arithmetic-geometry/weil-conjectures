@@ -83,7 +83,7 @@ theorem isZero_homologySheaf_toShiftedComplex {a : ℤ} (ha : a ≠ -1) (G : Wei
 /-- Isomorphic Weil sheaves have the same upper weight bounds. -/
 theorem HasWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X} (e : F ≅ G)
     {w : ℝ} (hF : F.HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := fun x ↦
-  (hF x).of_equiv (nonempty_equiv_stalkAt_of_iso e.symm _ _ _).some
+  (hF x).of_equiv (nonempty_equiv_stalkAt_of_iso _ _ _ e.symm).some
 
 end WeilSheaf
 

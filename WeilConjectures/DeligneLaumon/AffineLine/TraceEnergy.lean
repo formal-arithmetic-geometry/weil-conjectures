@@ -23,7 +23,7 @@ public import WeilConjectures.WeilSheaf.EulerProduct
 public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.LSeries
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
-public import WeilConjectures.WeilSheaf.StalkTensor
+public import WeilConjectures.WeilSheaf.StalkTensorTrace
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
@@ -633,7 +633,7 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     have hrank : Module.finrank (PadicAlgCl l) (T.stalk x).carrier ≠ 0 := by
       have e₁ : (T.stalk x).carrier ≃ₗ[PadicAlgCl l]
           (((G.dual hlisse).stalk x).carrier →ₗ[PadicAlgCl l] (G.stalk x).carrier) :=
-        stalkAtTensorObjEquiv _ _ _ G G hlisse
+        stalkAtTensorObjLinearEquiv _ _ _ hlisse G
       have e₂ : ((G.dual hlisse).stalk x).carrier ≃ₗ[PadicAlgCl l]
           Module.Dual (PadicAlgCl l) (G.stalk x).carrier :=
         (stalkAtDualEquiv _ _ _ G hlisse).toLinearEquiv

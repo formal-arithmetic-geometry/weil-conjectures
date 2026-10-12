@@ -103,9 +103,8 @@ For any braiding of `D(X_proét)`, the coefficient-dual biduality `K ⟶ K^∨�
 complex is an isomorphism. -/
 theorem isIso_toIhomIhomUnit
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsDualizable K) :
-    IsIso (MonoidalClosed.toIhomIhomUnit K) := by
-  obtain ⟨_⟩ := hK
-  exact MonoidalClosed.isIso_toIhomIhomUnit K
+    IsIso (MonoidalClosed.toIhomIhomUnit K) :=
+  MonoidalClosed.isIso_toIhomIhomUnit_of_isDualizable hK
 
 /-- The isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `𝔻_X K ≅ K^∨ ⊗ᴸ T`. -/
 noncomputable def verdierDualVerdierDualIso
