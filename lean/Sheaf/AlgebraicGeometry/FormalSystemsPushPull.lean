@@ -8,28 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FormalSystemsPullback
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.AssociatedModulePullback
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.FormalSystemsPushPullCore
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
-import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Comparison of a formal system with a proper pushforward
 
@@ -105,6 +85,23 @@ theorem exists_formalSystemsPushPull {X Y : Scheme.{u}} [IsNoetherian Y]
             (Scheme.idealSheafPower K.toModulesι t).2 (k.pt.obj.obj (op n)))) ∧
           (∀ n : ℕ, IsZero (Scheme.idealModuleProduct
             (Scheme.idealSheafPower K.toModulesι t).2 (c.pt.obj.obj (op n)))) := by
-  sorry
+  obtain ⟨h, α, t, ht, hn⟩ :=
+    exists_formalSystemsPushPull_core J K f _hV G F _β
+  refine ⟨h, α, ?_⟩
+  let H := (completion Y J).obj
+    ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩
+  have htf := coherentFormalModule_annihilated_iff Y J K G H α
+  have hfirst : (∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ,
+      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
+        (kernel (α.hom.app (op n)))) ∧
+      IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
+        (cokernel (α.hom.app (op n))))) := ⟨t, ht, hn⟩
+  have h04 := (List.TFAE.out htf 0 3).mp hfirst
+  obtain ⟨k, c, hk, hc, t', ht', ha⟩ := h04
+  refine ⟨t', k, c, ht', hk, hc, ?_, ?_⟩
+  · intro n
+    exact (ha n).1
+  · intro n
+    exact (ha n).2
 
 end AlgebraicGeometry

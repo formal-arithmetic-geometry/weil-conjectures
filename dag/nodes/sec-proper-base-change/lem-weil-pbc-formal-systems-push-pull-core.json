@@ -1,0 +1,101 @@
+{
+ "id": "lem-weil-pbc-formal-systems-push-pull-core",
+ "kind": "statement",
+ "title": "Core comparison morphism and termwise annihilation",
+ "statement": "Under the hypotheses of lem-weil-pbc-formal-systems-push-pull, the pushforward is coherent and there exist a comparison morphism from G to its completion and an exponent t >= 1 such that the ideal power K^t annihilates the kernels and cokernels of every component.",
+ "stmt_deps": [
+  "lem-weil-pbc-formal-systems-push-pull"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 088B and Remark 0888"
+ },
+ "proof": [
+  {
+   "text": "Construct the comparison morphism by the theorem on formal functions, glue over affine opens, pass to the adic completion, algebraize the formal system, and use that the adjunction is an isomorphism away from V(K); the support and reduction arguments give one uniform exponent for all component kernels and cokernels.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-push-pull"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-systems-push-pull"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 088B and Remark 0888"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper pushforward formal completion kernel cokernel annihilated by ideal power",
+   "results": "no match; theorem is project-specific",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Modules.pushforward completion KernelFork",
+   "results": "no match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalSystemsPushPull core comparison",
+   "results": "only the target module; no existing theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalSystemsPushPull",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-systems-push-pull",
+   "place": "strict intermediate statement"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalSystemsPushPullCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalSystemsPushPullCore.lean",
+  "declaration": "AlgebraicGeometry.exists_formalSystemsPushPull_core",
+  "statement": "theorem exists_formalSystemsPushPull_core {X Y : Scheme.{u}} [IsNoetherian Y] (J K : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f] (_hV : IsIso (pullback.snd f (Scheme.Opens.ι K.support.compl))) (G : CoherentFormalModule Y J) (F : CoherentModules X) (_β : G.obj ⋙ Scheme.Modules.tensorPullback f ≅ formalCompletionSystem (J.comap f) F.obj) : ∃ h : RingedSpace.IsCoherent Y.toRingedSpace ((Scheme.Modules.pushforward f).obj F.obj), ∃ α : G ⟶ (completion Y J).obj ⟨(Scheme.Modules.pushforward f).obj F.obj, h⟩, ∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (kernel (α.hom.app (op n)))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (cokernel (α.hom.app (op n))))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T184318-L-4009738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T184318-L-4009738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
