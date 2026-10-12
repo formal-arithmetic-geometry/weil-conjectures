@@ -28,52 +28,57 @@
  ],
  "proof": [
   {
-   "text": "For each i let B'_i be the integral closure of B_i in K. The canonical map A tensor B'_i to K remains surjective because its image contains the image of the already-surjective map A tensor B_i to K. By [lem-sc-semilocal-dim-one-conductor] each B'_i is a semilocal Dedekind domain with fraction field K. It is enough to prove the assertion for the B'_i: suppose x in A is nonzero and x^{-1} lies in the Jacobson radical of every B'_i. Then x^{-1} is a nonzero element of that Jacobson radical, and [lem-sc-semilocal-dim-one-conductor] applied to x^{-1} and y=1 gives n_i>0 with x^{-n_i} in B_i; replacing x by x^N with N=n_1...n_r (which keeps x^{-1} in each Jacobson radical, an ideal) puts x^{-1} in every B_i. Now let m be a maximal ideal of B_i. The inclusion B_i into B'_i is injective and B'_i is integral over B_i, so by lying over [lem-weil-pbc-integral-injective-lying-over] there is a prime q of B'_i with q cap B_i = m; let n be a maximal ideal of B'_i containing q. Then n cap B_i is a proper ideal containing m, hence equals m, and x^{-1} in n cap B_i = m. So x^{-1} lies in the Jacobson radical of B_i. Thus we may assume every B_i is a semilocal Dedekind domain.",
+   "text": "Pass from each B_i to its integral closure C_i in K. The conductor theorem [lem-sc-semilocal-dim-one-conductor] provides semilocal Dedekind and fraction-field instances, dimension one, and the conductor power property for C_i. Tensor surjectivity passes to C_i: map the right tensor factor by B_i to C_i, and the scalar-tower identity proves that the new multiplication map composed with this tensor map is the old multiplication map.",
    "uses": [
-    "lem-sc-semilocal-dim-one-conductor",
-    "lem-weil-pbc-integral-injective-lying-over"
+    "lem-sc-semilocal-dim-one-conductor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof, paragraphs beginning 'Let B_i' and 'Thus we may assume'"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-semilocal-dedekind-dvr-reduction] to each semilocal Dedekind B_i: it has finitely many maximal ideals m, each localization (B_i)_m is a discrete valuation ring with fraction field K, and an element of K lies in the Jacobson radical of B_i exactly when it lies in the maximal ideal of every (B_i)_m. Since B_i is contained in (B_i)_m, the map A tensor (B_i)_m to K is again surjective. Replacing each B_i by its finitely many localizations therefore reduces the claim to a finite family of discrete valuation rings with fraction field K and surjective maps from A tensor each of them to K: a nonzero f in A whose inverse lies in the maximal ideal of every resulting DVR has f^{-1} in the Jacobson radical of each original B_i.",
+   "text": "Use [lem-sc-semilocal-dedekind-dvr-reduction] for each C_i. Index the resulting DVRs by the finite dependent sum of i and the maximal ideals of C_i. Their algebras into K are exactly the canonical localization algebras in that theorem. Tensor surjectivity passes to each localization by the same tensor-factor map. Fix the canonical integer algebra structure on these localizations, avoiding the competing localization-derived integer algebra instance.",
    "uses": [
     "lem-sc-semilocal-dedekind-dvr-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09N5 proof, paragraph 'If B_i is not local'"
-   }
+   "elementary": false
   },
   {
-   "text": "For a single resulting DVR B with normalized valuation v, [lem-sc-dvr-tensor-surjective-negative-valuation] supplies a nonzero x in A with v(x)<0. For finitely many valuations v_1,...,v_r, argue by induction on r. The case r=1 is this base case. For r>1, choose by induction a nonzero x in A with v_i(x)<0 for i<r. If v_r(x)<0 we are done. Otherwise use the base case for v_r to choose nonzero y in A with v_r(y)<0. By [lem-sc-dvr-valuation-arithmetic], after replacing x by a sufficiently large positive power we have v_i(x)<v_i(y) for every i<r. Then z=x+y has v_i(z)=v_i(x)<0 for i<r and v_r(z)=v_r(y)<0, again by the unequal-value sum rule. Since v_r(x) is nonnegative and v_r(y) is negative, z is nonzero. For a DVR B with normalized valuation v and maximal ideal m_B, an element z of K^\\times satisfies z^{-1} in m_B exactly when v(z^{-1})=-v(z)>0, i.e. v(z)<0. Thus z is the required element.",
+   "text": "For one DVR D, use its normalized multiplicative valuation v:K to the multiplicative integers with zero, as supplied by the DVR convention [def-sc-discrete-valuation-ring]. Suppose every image of a in A has value at most one. Every image of d in D has value at most one (Mathlib HeightOneSpectrum.valuation_le_one). Tensor induction, using multiplication and the nonarchimedean sum inequality from [lem-sc-dvr-valuation-arithmetic], then gives v(p(z)) at most one for every tensor z. The normalized valuation is surjective (Mathlib HeightOneSpectrum.valuation_surjective); take k with v(k)=exp(1)>1. Tensor surjectivity supplies z with p(z)=k, a contradiction. Hence some a in A has value greater than one, and is nonzero because the value at zero is zero. This proves the single-DVR base case directly, without the subring-specific statement module.",
    "uses": [
-    "lem-sc-dvr-tensor-surjective-negative-valuation",
+    "def-sc-discrete-valuation-ring",
     "lem-sc-dvr-valuation-arithmetic"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09N5 proof, induction on r"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Induct over a finite set of valuations. For the empty set take 1. Given nonzero x with v_j(x)>1 at the preceding places, keep x if it also works at the new place i. Otherwise v_i(x) is at most one; choose y with v_i(y)>1 by the preceding base case. For each preceding j choose n_j with v_j(x) to the power n_j greater than max(1,v_j(y)); this is Archimedean growth in the multiplicative integers with zero, with the zero case handled separately. Set N=1+sum n_j. Then N is at least every n_j and powers of a value greater than one increase. Thus v_j(x^N)>max(1,v_j(y)). At the new place v_i(x^N) is at most one and smaller than v_i(y). The unequal-value sum formula [lem-sc-dvr-valuation-arithmetic] gives v_j(x^N+y)=v_j(x^N)>1 at every preceding place and v_i(x^N+y)=v_i(y)>1 at the new place. The latter also proves that x^N+y is nonzero.",
+   "uses": [
+    "lem-sc-dvr-valuation-arithmetic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resulting f has v_j(f)>1 at all localizations. Its inverse has value less than one. The Mathlib lifting statement [lem-sc-dvr-nonnegative-valuation-in-ring] produces an element d of each DVR with image f^{-1}; HeightOneSpectrum.valuation_lt_one_iff_mem puts d in its maximal ideal. The radical-membership equivalence [lem-sc-semilocal-dedekind-dvr-reduction] now gives c_i in the Jacobson radical of C_i with image f^{-1}. This c_i is nonzero by injectivity and f nonzero. Apply [lem-sc-semilocal-dim-one-conductor] to c_i and 1 to obtain positive n_i and b_i in B_i with image f^{-n_i}. Set P=product n_i, positive also for the empty family. Write P=n_i k_i. The element b_i^{k_i} has image f^{-P} and maps to c_i^P in C_i by injectivity. Since P>0, c_i^P remains in the Jacobson radical of C_i. Integral lying-over [lem-weil-pbc-integral-injective-lying-over], in Mathlib maximal-ideal form Ideal.exists_ideal_over_maximal_of_isIntegral, lifts every maximal ideal of B_i to one of C_i with that contraction. Therefore b_i^{k_i} belongs to every maximal ideal of B_i. Return f^P; its image has inverse f^{-P} and f^P is nonzero.",
+   "uses": [
+    "lem-sc-dvr-nonnegative-valuation-in-ring",
+    "lem-sc-semilocal-dedekind-dvr-reduction",
+    "lem-sc-semilocal-dim-one-conductor",
+    "lem-weil-pbc-integral-injective-lying-over"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-semilocal-dim-one-conductor",
-  "lem-weil-pbc-integral-injective-lying-over",
   "lem-sc-semilocal-dedekind-dvr-reduction",
-  "lem-sc-dvr-tensor-surjective-negative-valuation",
-  "lem-sc-dvr-valuation-arithmetic"
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-sc-dvr-nonnegative-valuation-in-ring",
+  "lem-weil-pbc-integral-injective-lying-over"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof"
+  "place": "Varieties Lemma 09N5 (varieties-lemma-create-globally-generated), proof; Q3 Lean realization with a direct tensor-induction proof of the DVR base case and explicit finite valuation induction"
  },
  "mathlib_searches": [
   {
@@ -151,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T184335-L-4016813",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
