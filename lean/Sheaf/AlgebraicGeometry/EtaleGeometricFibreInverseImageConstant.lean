@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.EtaleGeometricPointSectionsStalkNatural
+import Sheaf.AlgebraicGeometry.EtaleConstantTrivializationPullback
 import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 
 /-!
@@ -27,6 +27,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Étale Cohomology, Lemma 59.39.3 (Tag 0A3H), final paragraph
 (blueprint: lem-weil-pbc-etale-geometric-fibre-inverse-image-constant).
 The inverse image along `h ≫ s` is naturally the constant sheaf of the geometric stalk.
@@ -106,6 +107,91 @@ theorem etaleGeometricFibreInverseImageConstant
             ((Functor.const V.Etaleᵒᵖ).obj
               ((Scheme.pointSmallEtale s).sheafFiber.obj F))).app
                 (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e) := by
-  sorry
+  classical
+  obtain ⟨c, hc⟩ := etaleGeometricPointSectionsStalkNatural S Ω s
+  let P := Spec (.of Ω)
+  let L := Scheme.etaleSetPullback (𝟙 P ≫ s)
+  let C := constantSheaf P.smallEtaleTopology (Type (u + 1))
+  let hT : CategoryTheory.Limits.IsTerminal (Scheme.Etale.mk (𝟙 P)) :=
+    CategoryTheory.Limits.IsTerminal.ofUniqueHom
+      (fun W ↦ MorphismProperty.Over.homMk W.hom)
+      (fun W f ↦ by
+        apply MorphismProperty.Over.Hom.ext
+        have hf : f.left ≫ 𝟙 P = W.hom := f.w
+        change f.left = W.hom
+        exact (Category.comp_id f.left).symm.trans hf)
+  let A₀ := constantSheafAdj P.smallEtaleTopology (Type (u + 1))
+    CategoryTheory.Limits.terminalIsTerminal
+  have : ∀ G : Sheaf P.smallEtaleTopology (Type (u + 1)),
+      IsIso (A₀.counit.app G) := fun G ↦
+    (Scheme.spec_algClosed_etale_sheaf_constant Ω G).1
+  have : IsIso A₀.counit := NatIso.isIso_of_isIso_app _
+  let τ := CategoryTheory.Limits.terminalIsTerminal.uniqueUpToIso hT
+  let Riso := (sheafSections P.smallEtaleTopology (Type (u + 1))).mapIso τ.op
+  let ff := A₀.fullyFaithfulROfIsIsoCounit.ofIso Riso.symm
+  have := ff.full
+  have := ff.faithful
+  let A := constantSheafAdj P.smallEtaleTopology (Type (u + 1)) hT
+  let δ : L ⋙ (sheafSections P.smallEtaleTopology (Type (u + 1))).obj
+    (op (Scheme.Etale.mk (𝟙 P))) ⋙ C ≅ L := asIso (Functor.whiskerLeft L A.counit)
+  let β : L ≅ (Scheme.pointSmallEtale s).sheafFiber ⋙ C :=
+    δ.symm ≪≫ Functor.isoWhiskerRight c C
+  obtain ⟨α, hα, hcompat⟩ :=
+    etaleConstantTrivializationPullback S P s (Scheme.pointSmallEtale s).sheafFiber β
+  refine ⟨α, ?_, hcompat⟩
+  intro F W t a σ ha
+  rw [hα]
+  dsimp [β]
+  let x := ((L.obj F).obj.map a.op)
+    (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (MorphismProperty.Over.pullback @Etale ⊤ (𝟙 P ≫ s))
+      (Type (u + 1)) (S.smallGrothendieckTopology @Etale)
+      (P.smallGrothendieckTopology @Etale)).unit.app F).hom.app
+        (op W) σ)
+  have hinv :
+      (((δ.inv.app F).hom.app (op (Scheme.Etale.mk (𝟙 P)))) x) =
+        (toSheafify P.smallEtaleTopology
+          ((Functor.const P.Etaleᵒᵖ).obj ((L.obj F).obj.obj
+            (op (Scheme.Etale.mk (𝟙 P)))))).app (op (Scheme.Etale.mk (𝟙 P))) x := by
+    apply (CategoryTheory.injective_of_mono
+      ((δ.hom.app F).hom.app (op (Scheme.Etale.mk (𝟙 P)))))
+    have hi := congrArg (fun q ↦ q.hom.app (op (Scheme.Etale.mk (𝟙 P))))
+      (δ.app F).inv_hom_id
+    have hie := congrArg (fun q ↦ q x) hi
+    dsimp at hie
+    refine hie.trans ?_
+    change x = ((A.counit.app (L.obj F)).hom.app (op (Scheme.Etale.mk (𝟙 P))))
+      ((toSheafify P.smallEtaleTopology
+        ((Functor.const P.Etaleᵒᵖ).obj ((L.obj F).obj.obj
+          (op (Scheme.Etale.mk (𝟙 P)))))).app (op (Scheme.Etale.mk (𝟙 P))) x)
+    simp only [Functor.comp_obj, Functor.flip_obj_obj, ObjectProperty.ι_obj, Functor.id_obj,
+      constantSheafAdj_counit_app, ObjectProperty.FullSubcategory.comp_hom,
+      sheafificationAdjunction_counit_app_val, sheafifyMap_sheafifyLift,
+      Category.comp_id, Functor.const_obj_obj, A]
+    have hg := congrArg (fun q ↦ q.app (op (Scheme.Etale.mk (𝟙 P))))
+      (toSheafify_sheafifyLift P.smallEtaleTopology
+        ((constantPresheafAdj (Type (u + 1)) hT).counit.app (L.obj F).obj)
+        (L.obj F).property)
+    have hge := congrArg (fun q ↦ q x) hg
+    dsimp at hge
+    have hself : hT.from (Scheme.Etale.mk (𝟙 P)) = 𝟙 _ :=
+      hT.hom_ext _ _
+    change _ = (L.obj F).obj.map (hT.from (Scheme.Etale.mk (𝟙 P))).op x at hge
+    rw [hself] at hge
+    have hm := congrArg (fun q ↦ q x)
+      ((L.obj F).obj.map_id (op (Scheme.Etale.mk (𝟙 P))))
+    exact hm.symm.trans hge.symm
+  change ((C.map (c.hom.app F)).hom.app (op (Scheme.Etale.mk (𝟙 P))))
+    (((δ.inv.app F).hom.app (op (Scheme.Etale.mk (𝟙 P)))) x) = _
+  rw [hinv]
+  have hn := congrArg (fun q ↦ q.app (op (Scheme.Etale.mk (𝟙 P))))
+    (toSheafify_naturality P.smallEtaleTopology
+      ((Functor.const P.Etaleᵒᵖ).map (c.hom.app F)))
+  have he := congrArg (fun q ↦ q x) hn
+  dsimp [C, constantSheaf] at he ⊢
+  rw [← he]
+  exact congrArg (fun z ↦ (toSheafify P.smallEtaleTopology
+    ((Functor.const P.Etaleᵒᵖ).obj ((Scheme.pointSmallEtale s).sheafFiber.obj F))).app
+      (op (Scheme.Etale.mk (𝟙 P))) z) (hc F W t a σ ha)
 
 end AlgebraicGeometry

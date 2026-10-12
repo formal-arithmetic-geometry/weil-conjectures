@@ -32,65 +32,49 @@
  ],
  "proof": [
   {
-   "text": "Put $G=\\bar s^{-1}F$, a sheaf of sets on $(\\operatorname{Spec}\\Omega)_{\\Et}$. By [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], the canonical map from the constant sheaf with value $\\Gamma(\\operatorname{Spec}\\Omega,G)$ to $G$ is an isomorphism, naturally in $G$.",
+   "text": "Apply [lem-weil-pbc-geometric-point-sections-stalk-natural] to obtain the natural global-section comparison c and its pulled-section germ formula. By [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], the constant-sheaf counit is an isomorphism at every sheaf on Spec Omega. The global-section evaluation at Mathlib's chosen terminal object is fully faithful; transport this property along the unique terminal-object isomorphism to the explicit identity etale neighbourhood. Its constant-sheaf adjunction therefore also has invertible counit. Whisker this counit with the inverse-image functor and invert it; compose with c whiskered by the constant-sheaf functor to construct beta.",
    "uses": [
+    "lem-weil-pbc-geometric-point-sections-stalk-natural",
     "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Remark 59.23.2 (Tag 03P5), applied to the sheaf on Spec Omega"
+    "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
    }
   },
   {
-   "text": "The identity geometric point of Spec Omega gives, by [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], a canonical identification $\\Gamma(\\operatorname{Spec}\\Omega,G)\\cong G_{\\mathrm{id}}$. The set-valued inverse-image stalk comparison [lem-weil-pbc-sets-etale-inverse-image-stalk-germ], applied to $\\bar s: \\operatorname{Spec}\\Omega\\to S$, identifies $G_{\\mathrm{id}}$ with $F_{\\bar s}$ and sends the germ of every pulled-back section to the corresponding germ of the original section. Therefore the isomorphism of Step 1 is canonically an isomorphism with the constant sheaf of value $F_{\\bar s}$.",
+   "text": "Apply [lem-weil-pbc-etale-constant-trivialization-pullback] to beta with P = Spec Omega and E the geometric stalk functor. This supplies alpha, normalization alpha_{P,id} = beta and the displayed generator compatibility for every morphism over P.",
    "uses": [
-    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+    "lem-weil-pbc-etale-constant-trivialization-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph, using Lemma 59.39.1 (Tag 03Q1) for the stalk comparison"
+    "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
    }
   },
   {
-   "text": "Put $E=F_{\\bar s}$ and let $\\alpha:\\underline E_{\\operatorname{Spec}\\Omega}\\xrightarrow{\\sim}G$ be the isomorphism of Steps 1 and 2. By [lem-weil-pbc-sets-etale-inverse-image-composition-units] there is a canonical isomorphism $c_{\\bar s,h,F}:h^{-1}G=h^{-1}\\bar s^{-1}F\\xrightarrow{\\sim}(\\bar s\\circ h)^{-1}F$ on $U_{\\Et}$. By [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf] applied to $h:U\\to\\operatorname{Spec}\\Omega$ and the set $E$, there is a canonical isomorphism $\\gamma_h:h^{-1}\\underline E_{\\operatorname{Spec}\\Omega}\\xrightarrow{\\sim}\\underline E_U$. Hence $\\gamma_h\\circ h^{-1}(\\alpha)^{-1}\\circ c_{\\bar s,h,F}^{-1}:(\\bar s\\circ h)^{-1}F\\xrightarrow{\\sim}\\underline E_U$ is the required isomorphism with the constant sheaf on $U_{\\Et}$ with value $F_{\\bar s}$.",
+   "text": "For a unit-pulled section restricted along a, normalization reduces alpha at the identity to beta. Evaluating the sheafification universal property at the identity neighbourhood proves that the inverse constant-sheaf counit sends each section x to its constant-presheaf generator. Naturality of toSheafify moves c through this generator map, and the germ formula of [lem-weil-pbc-geometric-point-sections-stalk-natural] gives the required equality. The compatibility clause is exactly the clause already obtained in the preceding step.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+    "lem-weil-pbc-geometric-point-sections-stalk-natural"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph: 'since F|_{T_sbar} is the pullback of F|_sbar it is a constant sheaf with value F_sbar'"
-   }
-  },
-  {
-   "text": "Naturality. In $F$: $\\alpha$ is natural in $F$ by the naturality clause of [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] and the uniqueness characterization of the germ comparison in [lem-weil-pbc-sets-etale-inverse-image-stalk-germ]; $c_{\\bar s,h,F}$ is natural in $F$ by [lem-weil-pbc-sets-etale-inverse-image-composition-units]. In pullback along an $\\Omega$-morphism $v:V\\to U$: the composition isomorphisms satisfy associativity (2) of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and $\\gamma_{h\\circ v}$ agrees with $\\gamma_v\\circ v^{-1}(\\gamma_h)$ composed with $c_{h,v}$, since both send $(h\\circ v)^*\\eta(e)$ to $\\eta_V(e)$ (by (1) and (0) of [lem-weil-pbc-sets-etale-inverse-image-composition-units]) and such a morphism is unique by [lem-weil-pbc-sets-etale-inverse-image-constant-sheaf]. Naturality in $U$ is the case of pullback along $\\Omega$-morphisms.",
-   "uses": [
-    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph and functoriality of inverse image"
+    "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-geometric-point-sections-stalk-natural",
   "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
-  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf"
+  "lem-weil-pbc-etale-constant-trivialization-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 59.39.3 (Tag 0A3H), final paragraph"
+  "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
  },
  "mathlib_searches": [
   {
@@ -167,5 +151,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T053937-L-2637444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

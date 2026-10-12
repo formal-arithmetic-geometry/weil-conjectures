@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-etale-constant-trivialization-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "The geometric-fibre comparison in the underived-exchange proof: pulling the base constant identification back to each scheme over the geometric point and its compatibility with further morphisms.",
+   "via": [
+    "lem-weil-pbc-etale-geometric-fibre-inverse-image-constant",
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "lem-weil-pbc-sections-base-field-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "title": "Coherent inverse-image extension of a constant trivialization",
+ "statement": "Let $S,P$ be schemes [def-pc-scheme] and $s:P\\to S$ a morphism. Let $E:\\operatorname{Sh}(S_{\\mathrm{Et}},\\mathrm{Set})\\to\\mathrm{Set}$ be a functor, with sets in the same universe as the sheaf values [def-weil-pbc-etale-sheaf-of-sets]. Let $\\beta:(\\mathrm{id}_P\\circ s)^{-1}\\xrightarrow{\\sim} E\\circ\\underline{(-)}_P$ be a natural isomorphism, where inverse images and their canonical composition comparison $c_{f,g}$ are those of [lem-weil-pbc-sets-etale-inverse-image-composition-units], and constant sheaves and generators $\\eta_U(e)$ are given by sheafification [def-weil-pbc-constant-sheaf]. Then there is a family of natural isomorphisms $\\alpha_{U,h}:(s\\circ h)^{-1}\\xrightarrow{\\sim} E\\circ\\underline{(-)}_U$ for every scheme $U$ and $h:U\\to P$, with $\\alpha_{P,\\mathrm{id}_P}=\\beta$. For every $v:V\\to U$, sheaf $F$, etale $W\\to U$ and $e\\in E(F)$, the composition comparison carries the unit pullback of $\\alpha_{U,h,F}^{-1}(\\eta_U(e)|_W)$ to $\\alpha_{V,h\\circ v,F}^{-1}(\\eta_V(e)|_{W\\times_U V})$, with the associativity transport from $v\\circ(h\\circ s)$ to $(v\\circ h)\\circ s$ as in the Lean statement. No field, geometric-point or smallness hypothesis on $E(F)$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof": [
+  {
+   "text": "Use the constant sheafification adjunction [def-weil-pbc-constant-sheaf] and compose it with the inverse-image adjunction [def-weil-pbc-composite-adjunction]. The composite right adjoint evaluates direct image at the terminal P-neighbourhood. Base change of that neighbourhood is terminal over U, so this is canonically global sections on U. Uniqueness of left adjoints with their unit equation [lem-weil-pbc-conjugate-iso-unit-equation] supplies a natural isomorphism gamma_h from h^{-1} constant_P to constant_U. Its unit equation sends pulled generators to equal-valued generators. Restricting from the terminal neighbourhood and using unit naturality proves this formula on every W. The argument applies directly to the full coefficient universe.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
+   }
+  },
+  {
+   "text": "Transport beta from inverse image along identity composed with s to inverse image along s. Define alpha_{U,h} as the inverse composition comparison c_{s,h}^{-1}, followed by h^{-1}(beta), followed by gamma_h, with functor associators. All factors are natural isomorphisms in F.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
+   }
+  },
+  {
+   "text": "For h = identity, the identity inverse-image adjunction and the unit equations identify this composite with beta. Indeed, the inverse-image identity comparison and gamma_identity carry the corresponding units to themselves; uniqueness in the inverse-image adjunction and [lem-weil-pbc-conjugate-iso-unit-equation] gives equality of those morphisms, including the identity-composition transport.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
+   }
+  },
+  {
+   "text": "For v:V to U, substitute the composite formula for both alpha inverses. Clause (2) of [lem-weil-pbc-sets-etale-inverse-image-composition-units] pastes the two inverse-image comparisons with the displayed associativity transport. Clause (0) moves the pullback of beta across the inverse-image unit. The two gamma composites have the same unit equation on each constant generator; uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] or in the sheafification adjunction equates them. Evaluating the equality at the base-changed W gives the required generator identity.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q1 (lemma-stalk-pullback), part (3), 03P5, and 0A3H (lemma-sections-upstairs), final proof paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant sheaf trivialization extends coherently under inverse image along all morphisms over a scheme, preserving constant sheafification generators",
+   "results": "Service unavailable: HTTP Internal Server Error. No search result was obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical natural isomorphism constantSheaf compose sheafPullback to constantSheaf preserving generators and associativity of pullback",
+   "results": "SheafOfModules.pullbackIso, freeFunctorCompPullbackIso, TopCat.Sheaf.pullbackIso, Functor.sheafPullbackConstruction.sheafPullbackIso and constant sheaf composition results. No normalized coherent family of the stated kind.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(pullback|Pullback)|sheafPullback.*constant|constantSheafAdj.*counit|sections.*sheafFiber",
+   "results": "constantSheafAdj counit isomorphism criteria in Sites/ConstantSheaf.lean and counit_w uses in Condensed/Discrete/Module.lean. No pullback trivialization family.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleConstantTrivializationPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleConstantTrivializationPullback.lean",
+  "declaration": "AlgebraicGeometry.etaleConstantTrivializationPullback",
+  "statement": "theorem etaleConstantTrivializationPullback\n    (S P : Scheme.{u}) (s : P ⟶ S)\n    (E : Sheaf S.smallEtaleTopology (Type (u + 1)) ⥤ Type (u + 1))\n    (β : Scheme.etaleSetPullback (𝟙 P ≫ s) ≅\n      E ⋙ constantSheaf P.smallEtaleTopology (Type (u + 1))) :\n    ∃ α : ∀ (U : Scheme.{u}) (h : U ⟶ P),\n      Scheme.etaleSetPullback (h ≫ s) ≅\n        E ⋙ constantSheaf U.smallEtaleTopology (Type (u + 1)),\n      α P (𝟙 P) = β ∧\n      ∀ (U V : Scheme.{u}) (h : U ⟶ P) (v : V ⟶ U)\n        (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n        (W : U.Etale) (e : E.obj F),\n        (((Classical.choose etaleSetInverseImageCompositionUnits.2.2)\n          S U V (h ≫ s) v).hom.app F).hom.app\n          (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W))\n          (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n            (MorphismProperty.Over.pullback @Etale ⊤ v) (Type (u + 1))\n            (U.smallGrothendieckTopology @Etale)\n            (V.smallGrothendieckTopology @Etale)).unit.app\n              ((Scheme.etaleSetPullback (h ≫ s)).obj F)).hom.app (op W)\n            (((α U h).inv.app F).hom.app (op W)\n              ((toSheafify U.smallEtaleTopology\n                ((Functor.const U.Etaleᵒᵖ).obj\n                  (E.obj F))).app (op W) e))) =\n        (((α V (v ≫ h)).inv.app F ≫\n          eqToHom (congrArg\n            (fun k : V ⟶ S => (Scheme.etaleSetPullback k).obj F)\n            (Category.assoc v h s))).hom.app\n              (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)))\n          ((toSheafify V.smallEtaleTopology\n            ((Functor.const V.Etaleᵒᵖ).obj\n              (E.obj F))).app\n                (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T053937-L-2637444",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T053937-L-2637444",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
