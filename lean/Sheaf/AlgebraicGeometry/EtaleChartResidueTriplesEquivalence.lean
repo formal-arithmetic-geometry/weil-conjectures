@@ -50,6 +50,74 @@ point over x. Its kernel is q, since both field embeddings are injective; unique
 of residue-field factorization recovers φ. ΓSpecIso identifies the reconstructed
 ring with B, giving essential surjectivity. The fully faithful, essentially
 surjective functor is an equivalence, with δ and the stated formulas unchanged. -/
+/- The affine chart construction supplies an equivalence of the indexing categories.
+The construction follows affine-spectrum duality and residue-point factorization.
+The proof constructs object and morphism maps, proves full faithfulness by
+cancellation over the open immersion, and proves essential surjectivity from the
+spectrum of each triple. (blueprint: split-etale-chart-functor) -/
+theorem etale_chart_residue_triples_equivalence_functor
+    (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
+    (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]
+    (xU : Spec (.of Ω) ⟶ Spec A) :
+    let x := xU ≫ i
+    let p := (SpecToEquivOfField Ω (Spec A) xU).1
+    let F := (Spec A).residueField p
+    let e := (SpecToEquivOfField Ω (Spec A) xU).2
+    letI : Algebra F Ω := e.hom.toAlgebra
+    let K := separableClosure F Ω
+    let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K)
+    let Nall := (pointSmallEtale x).fiber.Elements
+    let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left
+    let N := P.FullSubcategory
+    let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom
+    let NU := Q.FullSubcategory
+    let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+      Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
+    let DU := Q.ι.op ⋙ D
+    let T := EtaleResidueTriples A p K χ
+    let DT := etaleResidueTriplesRingDiagram A p K χ
+    (∀ (c : NU) (z : c.obj.obj.1.left.residueField
+          (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1),
+        (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → Nonempty (NUᵒᵖ ≌ T)
+ := by sorry
+
+/-- Under the chart equivalence, global sections identify with the triple ring and
+satisfy the two point and structure-map formulas. (blueprint: split-etale-chart-ring-iso) -/
+theorem etale_chart_residue_triples_equivalence_ring_iso
+    (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
+    (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]
+    (xU : Spec (.of Ω) ⟶ Spec A) :
+    let x := xU ≫ i
+    let p := (SpecToEquivOfField Ω (Spec A) xU).1
+    let F := (Spec A).residueField p
+    let e := (SpecToEquivOfField Ω (Spec A) xU).2
+    letI : Algebra F Ω := e.hom.toAlgebra
+    let K := separableClosure F Ω
+    let χ : F ⟶ CommRingCat.of K := CommRingCat.ofHom (algebraMap F K)
+    let Nall := (pointSmallEtale x).fiber.Elements
+    let P : ObjectProperty Nall := fun c ↦ IsAffine c.1.left
+    let N := P.FullSubcategory
+    let Q : ObjectProperty N := fun c ↦ ∃ g : c.obj.1.left ⟶ Spec A, g ≫ i = c.obj.1.hom
+    let NU := Q.FullSubcategory
+    let D := (P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+      Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
+    let DU := Q.ι.op ⋙ D
+    let T := EtaleResidueTriples A p K χ
+    let DT := etaleResidueTriplesRingDiagram A p K χ
+    (∀ (c : NU) (z : c.obj.obj.1.left.residueField
+          (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1),
+        (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) →
+      ∀ (E : NUᵒᵖ ≌ T), ∃ (δ : DU ≅ E.functor ⋙ DT),
+        ∀ c : NU,
+          let t := E.functor.obj (op c)
+          (∀ g : c.obj.obj.1.left ⟶ Spec A, g ≫ i = c.obj.obj.1.hom →
+            (ΓSpecIso A).inv ≫ g.appTop ≫ δ.hom.app (op c) = t.α) ∧
+          c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ =
+            Spec.map (CommRingCat.ofHom K.subtype) ≫
+              Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫
+              Spec.map (δ.hom.app (op c))
+ := by sorry
+
 theorem etale_chart_residue_triples_equivalence
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]
@@ -82,6 +150,13 @@ theorem etale_chart_residue_triples_equivalence
           c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ =
             Spec.map (CommRingCat.ofHom K.subtype) ≫
               Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫
-              Spec.map (δ.hom.app (op c))) := by sorry
+              Spec.map (δ.hom.app (op c)))  := by
+  intros x p F e K χ Nall P N Q NU D DU T DT h
+  obtain ⟨E⟩ := etale_chart_residue_triples_equivalence_functor (Y := Y) (Ω := Ω)
+    (A := A) (i := i) (xU := xU) h
+  obtain ⟨δ, hδ⟩ := etale_chart_residue_triples_equivalence_ring_iso (Y := Y) (Ω := Ω)
+    (A := A) (i := i) (xU := xU) h E
+  exact ⟨E, δ, hδ⟩
+
 
 end AlgebraicGeometry.Scheme
