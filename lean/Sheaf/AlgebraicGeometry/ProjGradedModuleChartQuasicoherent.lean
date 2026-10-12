@@ -8,9 +8,7 @@ module
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
-import Sheaf.Algebra.Module.GradedModuleAwayRestriction
-import Sheaf.Topology.SheafOfModulesFromBasis
-import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.ProjGradedModuleChartTildeComparison
 
 /-!
 # Quasi-coherence from graded-module charts
@@ -48,6 +46,37 @@ local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 local notation "ModX" => SheafOfModules (moduleRings (Proj 𝒜).toRingedSpace)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem chartOverQuasicoherent (X : Scheme.{u}) (U : X.Opens)
+    (F : X.Modules) (h : (Scheme.Modules.restrict F U.ι).IsQuasicoherent) :
+    (F.over U).IsQuasicoherent := by
+  let G := Scheme.Modules.restrict F U.ι
+  have : G.IsQuasicoherent := h
+  have : ∀ W, (Over.post (X := W) U.overEquivalence.symm.inverse).IsContinuous
+      (((Opens.grothendieckTopology X).over U).over W)
+      ((Opens.grothendieckTopology ↥U).over _) := fun W ↦
+    Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
+      ((CoverPreserving.of_isContinuous U.overEquivalence.symm.inverse _ _).overPost W)
+  have hG : ((Scheme.Modules.overEquiv U).inverse.obj G).IsQuasicoherent := by
+    apply SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint
+      U.overEquivalence.symm.inverse _
+      (U.sheafOfModulesEquivOverInverseUnit (moduleRings X.toRingedSpace))
+  let e : (Scheme.Modules.overEquiv U).inverse.obj G ≅ F.over U :=
+    (Scheme.Modules.overEquiv U).inverse.mapIso
+      ((Scheme.Modules.overFunctorEquiv U).app F).symm ≪≫
+        ((Scheme.Modules.overEquiv U).unitIso.app (F.over U)).symm
+  exact (SheafOfModules.isQuasicoherent.{u} (X.ringCatSheaf.over U)).prop_of_iso e hG
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem quasicoherent_of_tildeChart {X : Scheme.{u}} {R : CommRingCat.{u}}
+    (N : ModuleCat.{u} R) (e : X ≅ Spec R) (F : X.Modules)
+    (h : F ≅ Scheme.Modules.restrict (tilde N) e.hom) : F.IsQuasicoherent := by
+  have hN : (Scheme.Modules.restrict (tilde N) e.hom).IsQuasicoherent := inferInstance
+  exact (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso h.symm hN
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- A sheaf with the degree-zero localization charts is quasi-coherent.
 Source: Stacks Project, Constructions, Lemmas 01M4, 01M7 (2) and 01MB;
 Schemes, Lemma 01IA.
@@ -106,6 +135,27 @@ theorem gradedModuleChart_quasicoherent
     (hrestriction : ∀ (f g : Fidx) (i : D[g] ≤ D[f])
       (s : F.val.obj (op D[f])),
       alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)) :
-    F.IsQuasicoherent := by sorry
+    F.IsQuasicoherent := by
+  classical
+  obtain hcomparison := gradedModuleChart_tildeComparison 𝒜 𝓜 h𝓜 hsmul Z hZ
+    rhoS rho hlaws hcanonical F alpha hscalar hrestriction
+  have hchart (f : Fidx) : (F.over D[f]).IsQuasicoherent := by
+    apply chartOverQuasicoherent (Proj 𝒜) D[f] F
+    exact quasicoherent_of_tildeChart (X := D[f].toScheme) (R := CommRingCat.of R[f])
+      (ModuleCat.of R[f] (Z f))
+      (basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1)
+      (Scheme.Modules.restrict F D[f].ι) (hcomparison f).some
+  have hcover : (⨆ f : Fidx, D[f]) = ⊤ := by
+    apply top_le_iff.mp
+    intro x hx
+    have hxcover : x ∈ ⨆ j, ((affineOpenCover 𝒜).openCover.f j).opensRange := by
+      rw [Scheme.OpenCover.iSup_opensRange]
+      trivial
+    obtain ⟨j, hj⟩ := Opens.mem_iSup.mp hxcover
+    change x ∈ (awayι 𝒜 j.2.1 j.2.2 j.1.2).opensRange at hj
+    rw [opensRange_awayι] at hj
+    exact Opens.mem_iSup.mpr ⟨⟨⟨j.2.1, j.1⟩, j.1.2, j.2.2⟩, hj⟩
+  exact SheafOfModules.IsQuasicoherent.of_coversTop F (fun f : Fidx ↦ D[f])
+    ((Opens.coversTop_iff _ _).mpr hcover)
 
 end AlgebraicGeometry.Proj

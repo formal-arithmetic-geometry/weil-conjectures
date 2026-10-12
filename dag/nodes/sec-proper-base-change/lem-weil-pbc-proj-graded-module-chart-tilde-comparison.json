@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-proj-graded-module-chart-tilde-comparison",
+ "kind": "statement",
+ "title": "Affine tilde comparison for one positive homogeneous graded-module chart",
+ "statement": "Let $S$ be an $\\mathbb N$-graded commutative ring with grading $\\mathcal A$, and $M$ a $\\mathbb Z$-graded $S$-module with internal grading $\\mathcal M$ compatible with scalar multiplication. Set $X=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Index charts by pairs $f=(a,d)$ with $d>0$ and $a\\in S_d$, put $D_f=D_+(a)$, $R_f=S_{(a)}$ [def-nagata-homogeneous-localization-degree-zero], and let $Z_f$ be submodules of $M_a$ whose carriers are precisely the equal-degree fractions [def-sc-degree-zero-module-fractions]. Suppose additive maps $\\rho_{f,g}:Z_f\\to Z_g$ and ring maps $\\rho^S_{f,g}:R_f\\to R_g$ are given for every $D_g\\subseteq D_f$. Suppose each inclusion admits a homogeneous relation $g^e=bf$ with $e>0$, each $\\rho$ is semilinear over $\\rho^S$, and for every such relation it sends $y/f^m$ to $b^my/g^{em}$. Assume identities, composition and bijectivity when chart opens coincide. Assume moreover every ring restriction is induced by a ring map $S_f\\to S_g$ commuting with $S$. Let $F$ be any sheaf of $\\mathcal O_X$-modules with additive identifications $F(D_f)\\cong Z_f$, scalar compatible via awayToSection and restriction compatible with $\\rho$. Then, for each positive homogeneous chart $f$, the restriction $F|_{D_f}$ is isomorphic as an $\\mathcal O_{D_f}$-module to the restriction of $\\widetilde{Z_f}$ [lem-weil-pbc-spec-module-tilde-sections] along the canonical isomorphism $D_f\\cong\\operatorname{Spec} R_f$ [lem-weil-pbc-proj-basic-open-intersection]. The conclusion is an affine chart comparison, not an assertion of global quasi-coherence.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB (lemma-proj-scheme), last paragraph and its displayed affine tilde comparison; Lemma 01M4 (lemma-standard-open) (1)(e),(g),(h); Lemma 01M7 (lemma-proj-sheaves) (2),(3); Lemma 01MA (lemma-standard-open-proj)"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk",
+  "def-sc-degree-zero-module-fractions",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-proj-basic-open-intersection"
+ ],
+ "proof": [
+  {
+   "text": "Fix f of degree d>0 and represent r in S_(f) by a/f^n with a homogeneous of degree n*d. Set h=f*a, of positive degree (n+1)*d. The chart preimage formula identifies D_+(h) with D(r^d)=D(r). Localization at r^d equals localization at r since d>0; the inverse to r is r^(d-1)/r^d. These opens realize every principal open on Spec S_(f), including the empty open when r=0.",
+   "uses": [
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply gradedModuleAwayRestriction. Identify its submodules with Z using the carrier equalities hZ. For D_+(g) contained in D_+(f), the given and constructed restrictions agree: choose the homogeneous relation g^e=b*f from hlaws and represent an arbitrary section by y/f^m. Both restrictions send it to b^m*y/g^(e*m), by their stated fraction formulas, and the target submodule inclusion is injective. For ring maps, hcanonical and uniqueness of maps out of S_f identify the ambient maps and injectivity of S_(g) into S_g identifies the degree-zero maps. Thus theta induces the canonical localization comparison for the specified Z and rho.",
+   "uses": [
+    "lem-weil-pbc-graded-module-away-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose alpha with these localization comparisons and the tilde.toOpen identifications of principal-open sections. Scalar compatibility follows from hscalar and the agreement of the ring maps. Restriction compatibility follows from hrestriction and the comparison composition law: on a nested principal localization the two maps agree on Z_f, and localization uniqueness makes them equal everywhere. The ring chart is basicOpenIsoSpec, so these are linear equivalences for the actual structure sheaf.",
+   "uses": [
+    "lem-weil-pbc-graded-module-away-restriction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-proj-basic-open-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the compatible linear equivalences and their inverses off the principal-open basis by the basis-extension universal property. Their composites restrict to identities on each basis open, hence are identities by uniqueness. Transport along basicOpenIsoSpec to obtain the stated isomorphism on D_f. Nilpotent denominators give empty charts and zero localized modules, so no nonemptiness assumption is needed.",
+   "uses": [
+    "lem-weil-pbc-sheaf-of-modules-from-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-basic-open-intersection",
+  "lem-weil-pbc-graded-module-away-restriction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-sheaf-of-modules-from-basis"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R2",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Lemma 01MB (lemma-proj-scheme), last paragraph",
+  "note": "Read in the local Stacks source copy. This isolates steps 1--3 of the parent plan; the parent proves the global locality step in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf on a positive homogeneous standard open of Proj is isomorphic to the tilde of the degree zero localization of a graded module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism between restriction of graded module sheaf on D plus f and tilde of M degree zero localization",
+   "results": "No matching graded-module sheaf comparison. Hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.Proj.basicOpenToSpec_app_top, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "gradedModuleChart_tildeComparison|gradedModule.*[Tt]ilde|Proj.*[Tt]ilde",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartQuasicoherent",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-finite",
+   "place": "Steps 2 and 9, projective-space chart construction via the graded-module sheaf: the affine tilde comparison of Lemma 01MB",
+   "via": [
+    "lem-weil-pbc-proj-graded-module-chart-quasicoherent",
+    "lem-weil-pbc-proj-graded-module-sheaf-extension",
+    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-weil-pbc-projective-space-twisting-sheaf-charts",
+    "lem-weil-pbc-projective-morphism-chart-preimage"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjGradedModuleChartTildeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjGradedModuleChartTildeComparison.lean",
+  "declaration": "AlgebraicGeometry.Proj.gradedModuleChart_tildeComparison",
+  "statement": "theorem gradedModuleChart_tildeComparison (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M), a ∈ 𝒜 n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z)) (Z : ∀ f : Fidx, Submodule R[f] N[f]) (hZ : (∀ f : Fidx, (Z f : Set N[f]) = degreeZeroFractions (fun n : ℕ ↦ (𝒜 n : Set S)) (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f.val.1))) (rhoS : ∀ (f g : Fidx), D[g] ≤ D[f] → R[f] →+* R[g]) (rho : ∀ (f g : Fidx), D[g] ≤ D[f] → Z f →+ Z g) (hlaws : (∀ (f g : Fidx) (i : D[g] ≤ D[f]), (∃ (e k : ℕ) (a : S), 0 < e ∧ a ∈ 𝒜 k ∧ g.val.1 ^ e = a * f.val.1) ∧ (∀ (r : R[f]) (q : Z f), rho f g i (r • q) = rhoS f g i r • rho f g i q) ∧ (∀ (e k : ℕ) (a : S), 0 < e → a ∈ 𝒜 k → g.val.1 ^ e = a * f.val.1 → ∀ (m : ℕ) (y : M) (q : Z f), (q : N[f]) = mk y (⟨f.val.1 ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f.val.1) → (rho f g i q : N[g]) = mk (a ^ m • y) (⟨g.val.1 ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g.val.1))) ∧ (∀ (f : Fidx) (i : D[f] ≤ D[f]) (q : Z f), rho f f i q = q) ∧ (∀ (f g h : Fidx) (i : D[g] ≤ D[f]) (j : D[h] ≤ D[g]) (q : Z f), rho g h j (rho f g i q) = rho f h (j.trans i) q) ∧ (∀ (f g : Fidx) (i : D[g] ≤ D[f]), D[f] = D[g] → Function.Bijective (rho f g i))) (hcanonical : ∀ (f g : Fidx) (i : D[g] ≤ D[f]), ∃ l : Localization.Away f.val.1 →+* Localization.Away g.val.1, (∀ a : S, l (algebraMap S (Localization.Away f.val.1) a) = algebraMap S (Localization.Away g.val.1) a) ∧ ∀ r : R[f], (rhoS f g i r).val = l r.val) (F : ModX) (alpha : ∀ f : Fidx, F.val.obj (op D[f]) ≃+ Z f) (hscalar : ∀ (f : Fidx) (r : R[f]) (s : F.val.obj (op D[f])), alpha f ((awayToSection 𝒜 f.val.1 r) • s) = r • alpha f s) (hrestriction : ∀ (f g : Fidx) (i : D[g] ≤ D[f]) (s : F.val.obj (op D[f])), alpha g (F.val.map (homOfLE i).op s) = rho f g i (alpha f s)) : ∀ f : Fidx, Nonempty (Scheme.Modules.restrict F D[f].ι ≅ Scheme.Modules.restrict (tilde (ModuleCat.of R[f] (Z f))) (basicOpenIsoSpec 𝒜 f.val.1 f.property.2 f.property.1).hom)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b1c4",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T135309-L-1689297",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1b1c4",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T135309-L-1689297",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proof route matched both DAG nodes, cited dependencies, Stacks 01MB, report accounting, axiom checks, and clean delivery/direct-importer compilation."
+ }
+}

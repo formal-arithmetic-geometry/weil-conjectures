@@ -17,50 +17,45 @@
  ],
  "proof": [
   {
-   "text": "1. Fix f. Identify its affine standard open with Spec R[f] using basicOpenIsoSpec.\n   Given r in R[f], write r=a/f^n with a homogeneous of degree n*deg(f). The homogeneous\n   element h=f*a has positive degree, even when a=0, and D[h] inside D[f] corresponds\n   to the principal open D(r), by awayι_preimage_basicOpen. Its principal generator is\n   r^deg(f). Localizing at r or this positive power gives the same module.",
+   "text": "Apply gradedModuleChart_tildeComparison to obtain, on each positive homogeneous chart f, an isomorphism between the restriction of F and the tilde sheaf of Z_f transported along basicOpenIsoSpec. This is exactly the affine comparison from steps 1--3 of the original proof.",
    "uses": [
-    "lem-weil-pbc-proj-basic-open-intersection"
+    "lem-weil-pbc-proj-graded-module-chart-tilde-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "2. The comparisons in gradedModuleAwayRestriction identify Z[h] with Z[f] localized\n   at this generator, hence at r. The given rho agrees with the canonical maps by its\n   fraction formula: represent every section by y/f^m and compare the prescribed image\n   for a homogeneous relation h^e=b*f. The ring map agrees by ambient localization\n   uniqueness and injectivity of the homogeneous inclusion.",
-   "uses": [
-    "lem-weil-pbc-graded-module-away-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "3. Use hscalar and hrestriction to identify the sections of F on these principal opens\n   with those of the tilde sheaf of the R[f]-module Z[f]. For nested opens the comparison\n   composition law identifies both restrictions with the same localization map.\n   The basis-extension uniqueness theorem therefore gives an isomorphism on D[f].",
+   "text": "Mathlib tilde is quasi-coherent and restriction along the chart isomorphism preserves quasi-coherence. Transport through the comparison isomorphism. The private, fully proved chartOverQuasicoherent transports the result from the open subscheme to F.over D_f via overEquiv and its inverse; these preserve the structure module and local presentations.",
    "uses": [
     "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-weil-pbc-sheaf-of-modules-from-basis"
+    "pqf-def-coherent"
    ],
    "elementary": false
   },
   {
-   "text": "4. Mathlib's tilde sheaf is quasi-coherent. Quasi-coherence is local, and the positive\n   homogeneous standard opens cover Proj, so F is quasi-coherent. On an empty chart its\n   denominator is nilpotent and both the ring and module localizations vanish; the tilde\n   comparison remains valid. If Proj is empty, the local criterion is vacuous.",
+   "text": "Reindex Mathlib affineOpenCover: an index j consisting of a positive degree and a homogeneous element gives f=(j.2.1,j.1). Its opensRange is D_f by opensRange_awayι. Therefore every point belongs to one of the D_f, so their supremum is top. This also handles empty Proj.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib SheafOfModules.IsQuasicoherent.of_coversTop to the cover f↦D_f and the quasi-coherent restrictions F.over D_f.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
     "pqf-def-coherent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-basic-open-intersection",
-  "lem-weil-pbc-graded-module-away-restriction",
+  "lem-weil-pbc-proj-graded-module-chart-tilde-comparison",
   "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-sheaf-of-modules-from-basis",
   "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q2",
+  "group": "R2",
   "date": "2026-10-12",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Section 01M3, text before Definition 01M6; Lemma 01M7 (1)--(3); Lemma 01MB",
-  "note": "Source argument specialized to the existing Lean chart interfaces."
+  "place": "Lemma 01MB (lemma-proj-scheme), last paragraph",
+  "note": "Compiling reduction: the single-chart comparison is isolated; transfer of quasi-coherence and the standard-open cover locality are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -130,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q2",
+  "reviewer": "X-1b1c4",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T110315-L-620526",
+  "landing": "20261012T135309-L-1689297",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered Lean signatures and proof route matched both DAG nodes, cited dependencies, Stacks 01MB, report accounting, axiom checks, and clean delivery/direct-importer compilation."
  }
 }
