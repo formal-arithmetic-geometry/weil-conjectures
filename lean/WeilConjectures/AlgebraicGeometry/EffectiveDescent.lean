@@ -9,14 +9,10 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
-public import Mathlib.CategoryTheory.Sites.Over
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.Morphisms.Projective
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Effective descent for schemes
@@ -87,8 +83,36 @@ theorem existsUnique_hom_of_isPullback [Flat p] [Surjective p] [QuasiCompact p] 
     (ψ : V ⟶ W)
     (hψ : ∀ {T : Scheme.{u}} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
       E.transport f₁ f₂ h (a ≫ ψ) = D.transport f₁ f₂ h a ≫ ψ) :
-    ∃! ψ₀ : V₀ ⟶ W₀, ψ.left ≫ qW = qV ≫ ψ₀.left :=
-  sorry
+    ∃! ψ₀ : V₀ ⟶ W₀, ψ.left ≫ qW = qV ≫ ψ₀.left := by
+  have : Flat qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : Surjective qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have : QuasiCompact qV := MorphismProperty.of_isPullback hqV.flip inferInstance
+  have hc : ∀ {T : Scheme.{u}} (a b : T ⟶ V.left),
+      a ≫ qV = b ≫ qV → a ≫ (ψ.left ≫ qW) = b ≫ (ψ.left ≫ qW) := by
+    intro T a b hab
+    have hf : (a ≫ V.hom) ≫ p = (b ≫ V.hom) ≫ p := by
+      simpa only [Category.assoc, ← hqV.w] using congrArg (· ≫ V₀.hom) hab
+    let aa : Over.mk (a ≫ V.hom) ⟶ V := Over.homMk a
+    let bb : Over.mk (b ≫ V.hom) ⟶ V := Over.homMk b
+    have ht : D.transport (a ≫ V.hom) (b ≫ V.hom) hf aa = bb := by
+      ext : 1
+      apply hqV.hom_ext
+      · exact (hDV _ _ hf aa).trans hab
+      · simp
+    have hw := hEW (a ≫ V.hom) (b ≫ V.hom) hf (aa ≫ ψ)
+    rw [hψ, ht] at hw
+    exact hw.symm
+  let ψ₀ := EffectiveEpi.desc qV (ψ.left ≫ qW) hc
+  have hfac : qV ≫ ψ₀ = ψ.left ≫ qW := EffectiveEpi.fac _ _ _
+  have hover : ψ₀ ≫ W₀.hom = V₀.hom := by
+    apply (cancel_epi qV).1
+    rw [← Category.assoc, hfac, Category.assoc, hqW.w, ← Category.assoc,
+      Over.w ψ, hqV.w]
+  refine ⟨Over.homMk ψ₀ hover, hfac.symm, ?_⟩
+  intro z hz
+  ext : 1
+  apply (cancel_epi qV).1
+  exact hz.symm.trans hfac.symm
 
 /-- The point `qV ∘ a` of `V₀` over `Y` induced by a point `a` of `V` over `f`, for a projection
 `qV : V ⟶ V₀` exhibiting `V` as the base change of `V₀` along `p`. -/

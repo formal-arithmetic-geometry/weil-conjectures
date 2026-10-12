@@ -21,7 +21,7 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The functor from schemes over $Y$ to schemes over $X$ equipped with a\n[def-pd-descent-datum] is fully faithful, by Stacks Project, Descent,\nLemma 35.35.11, Tag\n[02W0](https://stacks.math.columbia.edu/tag/02W0); the essential image of\nthat functor consists of the effective data, the passage from a scheme over\n$Y$ to a scheme over $X$ being the base change of\n[def-pc-base-change]. Full faithfulness says exactly that a compatible\nmorphism $\\psi$, which is a morphism between two objects in\nthe essential image, is the base change of a unique $\\psi_0$ over $Y$. The\nfull faithfulness also shows that the descent data on $V$ and $W$ are\ndetermined by $V_0$ and $W_0$, so no choice is involved.",
+   "text": "Use the effective descent projections and transport data of [def-pd-descent-datum], with the pullback square of [def-pc-base-change]. Base-change stability gives Flat, Surjective and QuasiCompact for qV. Mathlib.AlgebraicGeometry.Sites.Fpqc supplies EffectiveEpi qV. For a,b:T→V with a≫qV=b≫qV, the pullback square implies equality of their composites to Y. Transport of a to the X-component of b equals b by the pullback universal property and hDV. Compatibility hψ and hEW then show a≫ψ≫qW=b≫ψ≫qW. EffectiveEpi.desc and EffectiveEpi.fac give a unique underlying map ψ₀:V₀→W₀. Cancelling the epi qV shows ψ₀ is over Y, and cancellation again gives uniqueness as an Over morphism. This proves full faithfulness under the unchanged Lean fpqc hypotheses.",
    "uses": [
     "def-pd-descent-datum",
     "def-pc-base-change"
@@ -35,8 +35,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian-descent/lem-pd-morphisms-descend.md",
-  "place": "## Proof"
+  "document": "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/CategoryTheory/EffectiveEpi/Basic.lean",
+  "place": "fpqc EffectiveEpi instance and EffectiveEpi.desc/fac, applied to the base-change projection; T1 stage-3 proof"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -91,5 +91,15 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-77546",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T034515-L-1528473",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered files against the packet, node, repository, and scratch compilation: clean compile, unchanged target and existing signatures, valid proof axioms, consistent imports/change record/report, and matching DAG proof metadata."
  }
 }
