@@ -1,0 +1,194 @@
+{
+ "id": "lem-sc-power-map-pullback",
+ "kind": "statement",
+ "title": "Pullback of the constant-sheaf global-unit power map",
+ "statement": "Let $g:X\\to Y$ be a morphism of schemes [def-weil-scheme-over-base], and let $n>0$. Write $\\mathbf G_{m,Z}$ for the sheaf of units on the small etale site of $Z$ [def-sc-gm-torsor], and $\\underline{\\mathbf Z/n\\mathbf Z}_Z$ for the sheafification [def-weil-pbc-sheafification] of the constant presheaf. Given global units $\\zeta\\in\\Gamma(Y,\\mathcal O_Y)^\\times$ and $\\eta\\in\\Gamma(X,\\mathcal O_X)^\\times$ with $\\zeta^n=\\eta^n=1$ and $g^*\\zeta=\\eta$, let $m_\\zeta$ and $m_\\eta$ be the sheafified maps sending a natural-number class $a$ to the restriction of $\\zeta^a$ and $\\eta^a$, as in the precursor to [def-sc-mu-trivialization]. Let $c_g:g^{-1}\\mathbf G_{m,Y}\\to\\mathbf G_{m,X}$ be the adjoint of pullback of units and $\\alpha_g:g^{-1}\\underline{\\mathbf Z/n\\mathbf Z}_Y\\simeq\\underline{\\mathbf Z/n\\mathbf Z}_X$ the canonical constant-sheaf comparison from uniqueness of left adjoints [def-weil-pbc-inverse-image]. Then $g^{-1}(m_\\zeta)\\mathbin{;}c_g=\\alpha_g\\mathbin{;}m_\\eta$. No primitivity, field, or nonemptiness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, proper case: compatible primitive-root trivializations"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-sheafification",
+  "def-sc-mu-trivialization",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the adjunction obtained by composing constant-sheaf/global-sections on Y with inverse-image/direct-image, and transporting its right adjoint by the terminal-sections comparison. Its left-adjoint uniqueness isomorphism is exactly alpha_g. Apply its Hom equivalence to the desired equality. Hom-equivalence naturality and homEquiv_leftAdjointUniq_hom_app turn the right side into the constant-sheaf/global-sections transpose of m_eta, and the left side into the transpose of m_zeta followed by pullback of units and the terminal-sections comparison.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The constant-sheaf adjunction is the composite of the constant-presheaf/evaluation and sheafification adjunctions. Its transpose of a map m is the terminal component of toSheafify followed by m. The defining sheafifyLift identities for m_zeta and m_eta therefore reduce the equality to the corresponding constant-presheaf maps evaluated on terminal objects.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-sc-mu-trivialization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let T_Y and T_X be terminal small-etale objects, and q:T_X to g.Etale(T_Y) the inverse terminal comparison. Evaluate on an arbitrary ZMod class and write it as its natural-number representative a. The left side is q.left.appTop applied to pullback.fst.appTop applied to T_Y.hom.appTop(zeta)^a; the right is T_X.hom.appTop(eta)^a. Ring maps preserve powers. The pullback square and the equation q.left followed by pullback.snd equals T_X.hom give q.left followed by pullback.fst followed by T_Y.hom equals T_X.hom followed by g. Contravariant functoriality of global sections and g^*zeta=eta identify these expressions. Extensionality of homomorphisms, ULift, Additive and units completes the equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification",
+  "def-sc-mu-trivialization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "proof, proper case: compatible primitive-root trivializations; global-unit precursor, complete adjunction and section calculation by P1"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T06:07:09Z",
+   "tool": "leanfinder",
+   "query": "Naturality of constant sheaf to multiplicative group sheaf map given by powers of a global unit under scheme pullback",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "AlgebraicGeometry.Scheme.Hom.naturality",
+    "AlgebraicGeometry.Scheme.Hom.naturality_assoc",
+    "SheafOfModules.unitHomEquiv_comp_apply",
+    "AlgebraicGeometry.AffineSpace.comp_homOfVector",
+    "SheafOfModules.unitHomEquiv_symm_comp",
+    "AlgebraicGeometry.Scheme.comp_appTop_assoc",
+    "AlgebraicGeometry.StructureSheaf.comap_const",
+    "AlgebraicGeometry.Spec_Γ_naturality_assoc"
+   ],
+   "digest": "413ab294fe1ba360",
+   "date": "2026-10-12",
+   "results": [
+    "AlgebraicGeometry.Scheme.Hom.naturality",
+    "AlgebraicGeometry.Scheme.Hom.naturality_assoc",
+    "SheafOfModules.unitHomEquiv_comp_apply",
+    "AlgebraicGeometry.AffineSpace.comp_homOfVector",
+    "SheafOfModules.unitHomEquiv_symm_comp",
+    "AlgebraicGeometry.Scheme.comp_appTop_assoc",
+    "AlgebraicGeometry.StructureSheaf.comap_const",
+    "AlgebraicGeometry.Spec_Γ_naturality_assoc"
+   ],
+   "verdict": "No matching theorem found."
+  },
+  {
+   "t": "2026-10-12T06:07:36Z",
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "sub": "",
+   "ok": true,
+   "n_hits": 12,
+   "note": "",
+   "top": [
+    "CategoryTheory.Adjunction.leftAdjointUniq",
+    "CategoryTheory.Adjunction.leftAdjointUniq_refl",
+    "CategoryTheory.Adjunction.leftAdjointUniq_inv_app",
+    "CategoryTheory.Adjunction.leftAdjointUniq_hom_counit",
+    "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom",
+    "CategoryTheory.Adjunction.leftAdjointUniq_trans",
+    "CategoryTheory.Adjunction.leftAdjointUniq_trans_app",
+    "CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit"
+   ],
+   "digest": "8f4b9f122e53b213",
+   "date": "2026-10-12",
+   "results": [
+    "CategoryTheory.Adjunction.leftAdjointUniq",
+    "CategoryTheory.Adjunction.leftAdjointUniq_refl",
+    "CategoryTheory.Adjunction.leftAdjointUniq_inv_app",
+    "CategoryTheory.Adjunction.leftAdjointUniq_hom_counit",
+    "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom",
+    "CategoryTheory.Adjunction.leftAdjointUniq_trans",
+    "CategoryTheory.Adjunction.leftAdjointUniq_trans_app",
+    "CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit"
+   ],
+   "verdict": "No matching theorem; adjunction uniqueness supplies part of the proof."
+  },
+  {
+   "t": "2026-10-12T06:07:36Z",
+   "tool": "grep",
+   "query": "constantZModToGmSheaf|upperStarConstantSheafIso",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": [],
+   "verdict": "No matching theorem found."
+  },
+  {
+   "t": "2026-10-12T06:18:00Z",
+   "tool": "leansearch",
+   "query": "Pullback of the map from the constant ZMod sheaf to the sheaf of units induced by a global root of unity",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.RootTrivializationBaseChange",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "proof, proper case: compatible primitive-root trivializations, global-unit power-map square",
+   "via": [
+    "lem-sc-root-trivialization-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PowerMapPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PowerMapPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.constantZModToGmSheaf_pullback",
+  "statement": "theorem constantZModToGmSheaf_pullback {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (n : ℕ) [NeZero n] (ζ : Γ(Y, ⊤)ˣ) (hζ : ζ ^ n = 1)\n    (η : Γ(X, ⊤)ˣ) (hη : η ^ n = 1)\n    (h : Units.map g.appTop.hom.toMonoidHom ζ = η) :\n    (Etale.upperStar AddCommGrpCat.{u + 1} g).map\n        (Y.constantZModToGmSheaf n ζ hζ) ≫ upperStarGmSheafToGmSheaf g =\n      ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).app\n        (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))).hom ≫\n      X.constantZModToGmSheaf n η hη",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T070545-L-3474983",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T070545-L-3474983",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
