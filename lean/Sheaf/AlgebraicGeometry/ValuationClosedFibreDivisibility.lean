@@ -12,8 +12,8 @@ public import Mathlib.RingTheory.Valuation.ValuationRing
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionVanishing
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ValuationClosedFibreIntegral
+import Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionDivisible
 
 /-! # Vanishing on the closed fibre implies divisibility
 
@@ -64,6 +64,7 @@ theorem closed_fibre_vanishing_is_divisible
         (f.fiberι (IsLocalRing.closedPoint A)))).unit.app L).val.app (op ⊤) s = 0 →
         ∃ π : A, π ∈ IsLocalRing.maximalIdeal A ∧ ∃ t : Γ(L, ⊤),
           ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom π • t = s) := by
-  sorry
+  refine ⟨closed_fibre_is_integral A X f hX₀, ?_⟩
+  exact closed_fibre_section_is_divisible A X f L hX₀ s
 
 end AlgebraicGeometry.Scheme.Modules
