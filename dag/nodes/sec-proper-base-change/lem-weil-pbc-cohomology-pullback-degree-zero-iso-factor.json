@@ -26,34 +26,47 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded-below injective resolution of G and use the left-exact degree-zero comparison to identify its sections with degree-zero homology.",
+   "text": "The category of abelian etale sheaves is Grothendieck abelian, hence has enough injectives. Choose its ordinary natural-number-indexed injective resolution R of G and extend by zero to integers. The incoming differential at degree zero vanishes in both G[0] and R. Global sections are additive and preserve finite limits; Functor.preservesLeftHomology_of_zero_f and ShortComplex.quasiIso_map_of_preservesLeftHomology therefore show that H^0(Gamma(R.ι')) is an isomorphism. This implements the left-exact degree-zero comparison without computing an explicit kernel comparison.",
    "uses": [
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-module-sheaves-enough-injectives"
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Use resolution independence and homotopy naturality to transport the isomorphism to the given K-injective resolution; the equality hz identifies the transported augmentation with z ≫ homologyπ.",
+   "text": "R is bounded below and termwise injective, hence K-injective. By the bijection from homotopy-category maps to derived-category maps into I, lift Q(s) Q(R.ι')^{-1} to a chain map a : R -> I. Naturality of quotientCompQhIso and injectivity of that bijection give a homotopy R.ι' ≫ a ∼ s. Its image Q(a) is invertible, so a is a quasi-isomorphism; between the two K-injective complexes it is a homotopy equivalence.",
    "uses": [
-    "prop-weil-pbc-cohomology-resolution-independent",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply Gamma to this homotopy equivalence and the augmentation homotopy. The homotopy equivalence induces an isomorphism H^0(Gamma(a)); homotopy invariance and composition of homology maps identify H^0(Gamma(s)) with H^0(Gamma(R.ι')) ≫ H^0(Gamma(a)), hence it is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-homotopic-maps-equal-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the Gamma-image of G[0], the cycle inclusion and homology projection in degree zero are isomorphisms because both adjacent differentials are zero. Set c = Gamma(singleObjXSelf.inv) ≫ iCycles^{-1}. Cancel the monic cycle inclusion using hz to identify z with c ≫ cyclesMap(Gamma(s)). Naturality of homologyπ then gives z ≫ homologyπ = c ≫ homologyπ ≫ H^0(Gamma(s)), a composite of isomorphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
   "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "prop-weil-pbc-cohomology-resolution-independent"
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 05TD (3), with transport to arbitrary K-injective resolutions via homotopy equivalence"
+  "place": "Tag 05TD (3) and Tag 013K, with augmentation-compatible K-injective comparison from Tag 070I; fully implemented by C1 using Mathlib left-homology preservation, Qh_map_bijective, quasiIso_iff, and mapHomotopy."
  },
  "mathlib_searches": [
   {
@@ -118,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-40f69",
-  "group": "E1",
+  "reviewer": "X-2b206",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T015708-L-934080",
-  "kind": "interface",
-  "note": "independent Codex review: The delivered files compile cleanly; the target statement and existing declarations are unchanged, the cycle-factor proof and new auxiliary node agree, the sole remaining named sorry has a matching node and proof docstring, imports are used, and the report documents pruning and second reading."
+  "landing": "20261012T022813-L-1078913",
+  "kind": "proof",
+  "note": "independent Codex review: The unchanged Lean signature and completed proof match the node’s degree-zero cycle-factor statement; proof dependencies and report agree, compilation is clean, and all three proved declarations use only the permitted axioms."
  }
 }
