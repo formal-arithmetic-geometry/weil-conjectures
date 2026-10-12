@@ -1,0 +1,145 @@
+{
+ "id": "lem-pc-flat-model-opcycles-flat-zero",
+ "kind": "statement",
+ "title": "Flatness of degree-zero opcycles of a bounded-above free model",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $d$ a natural number, and $C^\\bullet,Q^\\bullet$ cochain complexes of structure-sheaf modules [def-pc-cochain-complex-modules]. Assume $C^n=0$ for $n<0$ and $n>d$, $Q^n=0$ for $n>d$, each $C^n$ is flat over the identity of $X$ [def-pc-scheme-module-flat-over], and for every integer $n$ there is a natural number $r_n$ and an isomorphism $Q^n\\cong\\mathcal O_X^{r_n}$. Let $e:Q^\\bullet\\to C^\\bullet$ be a quasi-isomorphism [def-pc-quasi-iso-modules]. Then the actual cokernel $Q^0/\\operatorname{im}(Q^{-1}\\to Q^0)$ is flat over the identity of $X$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0653, label lemma-last-one-flat, applied at every stalk; affine localization comparisons are Tags 01U4 and 00HT. Source text checked on the Stacks website; the local source checkout is absent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Fix x and an affine neighbourhood V with coordinate ring A. Affine neighbourhoods W of x contained in V are cofinal among neighbourhoods. IsFlatOver for each C term gives flatness of its sections on every such W over A. Express the stalk as their filtered colimit; filtered-colimit flatness gives flatness over A. The stalk ring is the localization of A at the prime of x, so flatness over A is equivalent to flatness over this stalk ring. Q has finite free stalks. Both complexes retain their upper bound, and C retains its nonnegative lower bound.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact stalk functor carries e to a quasi-isomorphism of module complexes. Both bounded-above flat stalk complexes are K-flat. A quasi-isomorphism between K-flat complexes stays a quasi-isomorphism after tensoring with any module N in degree zero. Its target is concentrated in nonnegative degrees, so the source tensor complex is exact in degree -1. The module formulation of the tensor comparison is the one-point-site formulation, transported through the equivalence with modules.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-kflat-tensor-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the flat-opcycles Tor criterion to the stalk complex of Q at a=0. Its terms are free, hence flat, and tensor exactness in degree -1 was just established. Stalks preserve the cokernel, so the conclusion is flatness of the stalk of Q.opcycles(0).",
+   "uses": [
+    "lem-pc-module-flat-opcycles-tor-criterion",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cokernel of Q^(-1) to Q^0 has a finite free presentation, hence is quasi-coherent. On any affine V the stalks are the localizations of its section module by the affine section/stalk tensor identification. The module local flatness criterion gives flatness of sections on V. For affine W contained in V, the section module on W is flat over its own coordinate ring, and that ring is flat over the ring of V since the inclusion is an open immersion. Transitivity gives exactly IsFlatOver for the identity. The zero module and the empty scheme need no nontriviality hypothesis.",
+   "uses": [
+    "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+    "lem-pc-affine-sections-flat-over-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-sections-flat-over-base",
+  "lem-pc-intrinsic-flat-module-stalk-tensor-presentation",
+  "lem-pc-kflat-tensor-quasi-iso",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-module-flat-opcycles-tor-criterion",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0653 stalkwise; explicit affine section/stalk and flatness comparisons"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "zeroth opcycles of bounded above finite free sheaf complex quasi isomorphic to nonnegative bounded flat sheaf complex are flat",
+   "results": "Service unavailable: Internal Server Error; request recorded in searches.jsonl.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "zeroth opcycles of bounded above finite free sheaf complex quasi isomorphic to nonnegative bounded flat sheaf complex are flat",
+   "results": "DerivedCategory.isGE_iff, isGE_Q_obj_iff, isLE_iff and support results; no scheme flat-opcycles comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFlatOver.*opcycles|opcycles.*IsFlatOver",
+   "results": "No matches in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, IsLocalization",
+   "results": "Module.flat_iff_of_isLocalization and IsLocalization.flat confirm the localization step. Module.Flat.of_isLocalizedModule supplies localization stability; none proves the complex comparison or the scheme opcycles conclusion. Independently checked in the second reading.",
+   "date": "2026-10-13",
+   "verdict": "partial matches, no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeTruncation",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-model-finite-free-truncation-zero",
+   "place": "Proof step 1, flatness of the degree-zero cokernel, before finite presentation and local freeness are combined",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatModelOpcyclesFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModelOpcyclesFlat.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFlatOver_opcycles_zero_of_quasiIso",
+  "statement": "theorem isFlatOver_opcycles_zero_of_quasiIso {X : Scheme.{u}}\n    (C Q : CochainComplex X.Modules ℤ) (d : ℕ)\n    (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d)\n    (hCflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 X))\n    (hQle : Q.IsStrictlyLE d)\n    (hQfree : ∀ n : ℤ, ∃ r : ℕ,\n      Nonempty (Q.X n ≅ SheafOfModules.free\n        (R := X.ringCatSheaf) (ULift.{u} (Fin r))))\n    (e : Q ⟶ C) (he : QuasiIso e) :\n    (Q.opcycles 0).IsFlatOver (𝟙 X)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T225319-L-1809584",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T225319-L-1809584",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
