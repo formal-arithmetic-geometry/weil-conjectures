@@ -7413,3 +7413,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/T2/Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles (stage 3; reviewer PASS; first push; landing 20261012T110319-L-621806 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/T3/Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp (stage 3; reviewer PASS; first push; landing 20261012T110319-L-621902 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/T3/Sheaf.AlgebraicGeometry.SerreSectionModuleConstruction (stage 3; reviewer PASS; first push; landing 20261012T110319-L-622047 (interface); batch 20261012T110249; modules 2; new nodes 1)
+- 11:03 L: merged deliver/U1/Sheaf.Algebra.Homology.KFlatModuleBaseChange (stage 3; reviewer PASS; first push; landing 20261012T110320-L-622160 (interface); batch 20261012T110249; modules 2; new nodes 1)

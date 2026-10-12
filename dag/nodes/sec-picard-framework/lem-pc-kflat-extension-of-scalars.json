@@ -13,28 +13,20 @@
  ],
  "proof": [
   {
-   "text": "Restriction of scalars sends L to an acyclic A-complex: all kernels and images are the same additive subgroups, so exactness is unchanged. This is also Mathlib exactness preservation for ModuleCat.restrictScalars, which preserves limits and colimits.",
+   "text": "Restriction of scalars preserves and reflects exactness at every degree. Preservation applies ShortComplex.Exact.map; reflection applies ShortComplex.exact_map_iff_of_faithful. The ChangeOfRingsExact instances supply exactness preservation. These are proved as private acyclicity lemmas in the module.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "For a B-module N and A-module M, the balanced maps n⊗(b⊗m)↦(b n)⊗m and n⊗m↦n⊗(1⊗m) are inverse A-linear maps between the restriction of N⊗_B(B⊗_A M) and (restriction N)⊗_A M. Verify well-definedness using ρ, then inverseness on pure tensors. Apply these maps to each summand of total degree p+q=n. Their naturality commutes with both differentials and the sign (-1)^p, so they give an isomorphism of the restricted total tensor complex with the A-total tensor complex. Infinite direct sums cause no issue since the maps are defined summandwise.",
+   "text": "Apply hK to the restricted L, using preservation of acyclicity. Use the tensor comparison isomorphism to transfer exactness at each degree to the restriction of the B-total tensor complex (HomologicalComplex.ExactAt.of_iso), then reflect acyclicity back to B.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply K-flatness of K to restricted L to obtain acyclicity of the A-total tensor complex. Transfer exactness degreewise across the chain isomorphism. Restriction of scalars reflects exactness for the same kernel/image reason from step 1, giving acyclicity over B.",
-   "uses": [
-    "def-pc-module-kflat-complex"
+    "lem-pc-tensor-restrict-extend-scalars"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-module-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
+  "lem-pc-tensor-restrict-extend-scalars"
  ],
  "proof_origin": {
   "by": "document",
@@ -110,9 +102,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T085327-L-35102",
+  "landing": "20261012T110320-L-622160",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

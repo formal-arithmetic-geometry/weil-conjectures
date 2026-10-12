@@ -1,0 +1,118 @@
+{
+ "id": "lem-pc-tensor-restrict-extend-scalars",
+ "kind": "statement",
+ "title": "Tensor total complexes commute with restriction after extension of scalars",
+ "statement": "Let A and B be commutative rings in the same universe, and let $\\rho:A\\to B$ be a unital ring homomorphism. Let L be any integer-indexed cochain complex of B-modules and K any integer-indexed cochain complex of A-modules. Write Res for termwise restriction of scalars along $\\rho$ and Ext for termwise extension of scalars [def-weil-module-base-change]. There exists an isomorphism of A-module cochain complexes $\\operatorname{Res}(\\operatorname{Tot}(L\\otimes_B\\operatorname{Ext}(K)))\\cong\\operatorname{Tot}(\\operatorname{Res}(L)\\otimes_A K)$, using ordinary module tensors [def-weil-pbc-module-tensor-product] and the direct-sum total tensor construction [def-pc-tensor-complex-sheaves]. There are no acyclicity, flatness or boundedness hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y1, lemma-base-change-K-flat, proof; read at https://stacks.math.columbia.edu/tag/06Y1"
+ },
+ "stmt_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "In every bidegree (p,q), the balanced A-linear maps l tensor (b tensor k) -> (b l) tensor k and l tensor k -> l tensor (1 tensor k) are inverse. The A-balancing follows from the action through the ring map, and the B-balancing from associativity of the B-action. Tensor induction verifies both composites. This is the underlying module comparison of TensorProduct.AlgebraTensorModule.cancelBaseChange, with scalar actions induced by the given ring map.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality commutes with both differentials: the first identity follows from B-linearity of the differential of L; the second follows from A-linearity of the differential of K. Apply the maps to every coproduct summand with p+q=n. Restriction of scalars preserves coproducts (ModuleCat.preservesColimit_restrictScalars), so these give inverse A-linear maps on the total degree terms. Coproduct extensionality and the two differential identities show they commute with the signed total differential. They form inverse cochain maps. No boundedness or flatness assumption is used.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y1, lemma-base-change-K-flat, proof; read at https://stacks.math.columbia.edu/tag/06Y1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensor product after extension of scalars identifies with tensor over original ring",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of a tensor complex with extension of scalars is isomorphic to the tensor of the restricted complex",
+   "results": "ChangeOfRings adjunction and TensorProduct.Tower restriction lemmas only; no total-complex comparison. Loogle cancelBaseChange finds TensorProduct.AlgebraTensorModule.cancelBaseChange and naturality in the second factor. These are module-level ingredients.",
+   "date": "2026-10-12",
+   "verdict": "no matching complex theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|tensor.*restrictScalars|cancelBaseChange|mapBifunctor.*Iso",
+   "results": "Mathlib TensorProduct.Tower provides cancelBaseChange (line 436) and pure-tensor/naturality lemmas; no ring-change comparison for mapBifunctor. Library KFlatPullback uses the current item, not an independent proof. Blueprint search tensor restriction scalars returned no match.",
+   "date": "2026-10-12",
+   "verdict": "module-level ingredients only; no existing complex comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KFlatModuleBaseChange",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "ring-level base-change argument in derived pullback composition, specifically the tensor identity of Tag 06Y1; step 2 of lem-pc-kflat-extension-of-scalars",
+   "via": [
+    "lem-pc-kflat-pullback-preservation",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-kflat-extension-of-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorRestrictExtendScalars",
+  "file": "lean/Sheaf/Algebra/Homology/TensorRestrictExtendScalars.lean",
+  "declaration": "CochainComplex.nonempty_tensorRestrictExtendScalarsIso",
+  "statement": "theorem nonempty_tensorRestrictExtendScalarsIso\n    {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)\n    (L : CochainComplex (ModuleCat.{u} B) ℤ)\n    (K : CochainComplex (ModuleCat.{u} A) ℤ) :\n    Nonempty\n      ((((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).obj\n          (mapBifunctor L\n            (((ModuleCat.extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj K)\n            (curriedTensor _))) ≅\n        mapBifunctor\n          (((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).obj L)\n          K (curriedTensor _))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T110320-L-622160",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T110320-L-622160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

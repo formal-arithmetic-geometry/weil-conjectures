@@ -1,0 +1,58 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group U1
+-/
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.BifunctorShift
+
+/-!
+# Tensor total complexes and restriction of scalars
+
+Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
+(blueprint: lem-pc-tensor-restrict-extend-scalars)
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory MonoidalCategory
+
+namespace CochainComplex
+
+/-- Restricting a tensor total complex after extension of the second factor agrees
+with tensoring its restriction with the original second factor.
+Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
+(blueprint: lem-pc-tensor-restrict-extend-scalars)
+
+Proof: in bidegree (p,q), define the A-linear map on balanced pure tensors by
+`l ⊗ (b ⊗ k) ↦ (b • l) ⊗ k`. The inverse is `l ⊗ k ↦ l ⊗ (1 ⊗ k)`.
+The A-balancing relations follow from the restricted action through the ring homomorphism;
+the B-balancing relation follows from associativity of the B-action on L. Tensor induction
+shows both composites are identities. These maps are natural in both module factors:
+B-linearity of each differential of L handles the first factor, and A-linearity of the
+differentials of K handles the second. Hence they commute with both bicomplex differentials.
+Restriction of scalars preserves coproducts. Apply the bidegree maps on every summand
+p+q=n and the coproduct universal property to obtain inverse degreewise maps. Their
+compatibility with both differentials also implies compatibility with the total differential,
+including its sign (-1)^p. Thus they define inverse cochain maps. The construction uses no
+flatness or boundedness: coproduct maps have finite support on each input, even for an
+unbounded complex, and the same tensor formulas hold for zero rings. -/
+theorem nonempty_tensorRestrictExtendScalarsIso
+    {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)
+    (L : CochainComplex (ModuleCat.{u} B) ℤ)
+    (K : CochainComplex (ModuleCat.{u} A) ℤ) :
+    Nonempty
+      ((((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).obj
+          (mapBifunctor L
+            (((ModuleCat.extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj K)
+            (curriedTensor _))) ≅
+        mapBifunctor
+          (((ModuleCat.restrictScalars ρ).mapHomologicalComplex (.up ℤ)).obj L)
+          K (curriedTensor _)) := by sorry
+
+end CochainComplex
