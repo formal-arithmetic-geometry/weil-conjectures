@@ -3,6 +3,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
+import Sheaf.CategoryTheory.ColimitSiteCoveringPullbackStagePresentation
 import Sheaf.CategoryTheory.FilteredColimitPreservesPullback
 
 @[expose] public section
@@ -53,6 +54,17 @@ theorem colimit_site_covering_axioms_FiniteBaseChange
     (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔
           ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),
             S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)) :
-        Q.IsStableUnderFiniteBaseChange := by sorry
+        Q.IsStableUnderFiniteBaseChange := by
+  constructor
+  intro ι _inst S X f hR Y g P' p₁ p₂ h
+  obtain ⟨j₀, T₀, R₀, e₀, hR₀, himage⟩ := (hQ S (Presieve.ofArrows X f)).mp hR
+  obtain ⟨j, T, A, a, B, b, D, q₁, q₂, e, ha, hsquares, hlegs⟩ :=
+    colimit_site_covering_pullback_stage_presentation J F P hfinite hcover hpullback V
+      hobjects harrows j₀ T₀ R₀ hR₀ e₀ f himage g p₁ p₂ h
+  have hbase : Presieve.ofArrows D q₁ ∈ P j B :=
+    Precoverage.IsStableUnderFiniteBaseChange.mem_coverings_of_isPullback
+      a ha b q₁ q₂ hsquares
+  exact (hQ Y (Presieve.ofArrows P' p₁)).mpr
+    ⟨j, B, Presieve.ofArrows D q₁, e, hbase, hlegs⟩
 
 end CategoryTheory

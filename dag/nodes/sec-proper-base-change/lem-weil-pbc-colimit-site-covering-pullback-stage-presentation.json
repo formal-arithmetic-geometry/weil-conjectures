@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-colimit-site-covering-pullback-stage-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-axioms-finitebasechange",
+   "place": "Tag 09YL",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Common stage presentation of prescribed covering pullback squares",
+ "statement": "Let J be a small filtered category [def-weil-pbc-category-colimit], F : J → Cat a strict diagram, and V a cocone whose object and arrow cocones [def-weil-pbc-arrows-functor] are colimits of sets. Let P_j be precoverages [def-weil-pbc-finite-precoverage] with pullbacks of covering arrows and finite uncurried covering presieves. Assume transition functors map covers to covers and preserve pullbacks of covering arrows along arbitrary arrows. Given a stage covering R₀ of T₀ and an equality from its transported cocone image to a finite indexed family f : X_i → S, an arrow g : Y → S, and prescribed pullback squares with first legs p₁_i : P_i → Y and second legs p₂_i : P_i → X_i, there exist a stage j, objects T and B, an indexed stage cover a_i : A_i → T, an arrow b : B → T, and pullback squares q₁_i : D_i → B, q₂_i : D_i → A_i of b and a_i, such that V_j(B) = Y and the transported image of the presieve of q₁ equals the presieve of p₁. No finite base-change or composition stability of P_j is assumed, and no covering conclusion for q₁ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite-diagram and covering-pullback paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Match the finite stage presieve R₀ and the finite indexed family f in both directions using their image equality. Lift g and endpoint data and enforce all arrow equalities at a common refinement of the original stage, using surjectivity and eventual equality of set colimits. The resulting indexed presieve equals the transition image of R₀, hence is covering. Empty indices force R₀ to be empty.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form stage pullbacks of each member of that cover along the lifted g. Their preservation by every further transition implies preservation by the cocone functor. Thus each prescribed colimit pullback is uniquely isomorphic to the corresponding image square, compatibly with the legs.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-preserves-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the finitely many prescribed vertices, comparison isomorphisms and inverses. Enforce the inverse and leg equations at one further stage by eventual equality. Transport the stage pullback vertices along the resulting isomorphisms, preserving pullbackness and the transitioned source cover. The mapped presieve of their first projections is exactly the prescribed one. This step does not assert these first projections cover.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimit-preserves-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite-diagram and covering-pullback paragraphs; expanded by B2 second reader for arbitrary specified pullbacks, repeated arrows and empty indices."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "simultaneous finite diagram representatives in filtered colimit of categories pullback squares",
+   "results": "8 hits including IsFiltered.sup_exists, sup_objs_exists, bowtie and presentability tools. None supplies a common stage covering pullback presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsPullback",
+   "results": "Service responded unknown identifier; earlier IsPullback, Presieve.map also returned unknown identifier. No usable result.",
+   "date": "2026-10-13",
+   "verdict": "unavailable for this identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "Presieve.*map|map.*ofArrows; stage.*pullback|pullback.*stage|finite.*lift",
+   "results": "Mathlib Presieve.map_ofArrows and Precoverage base-change tools; Sheaf filteredColimit_category_finite_lift, finite_functor_lift, filteredColimit_preservesPullback and colimit_site_covering_axioms_HasPullbacks inspected. These provide finite diagrams or individual pullbacks, not a finite covering family with prescribed pullback vertices at a common stage. No duplicate in lean/WeilConjectures.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite covering family and its prescribed pullback squares in a filtered colimit category admit a common stage presentation",
+   "results": "Service unavailable: Internal Server Error. No results could be inspected.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsFiniteBaseChange",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCoveringPullbackStagePresentation",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCoveringPullbackStagePresentation.lean",
+  "declaration": "CategoryTheory.colimit_site_covering_pullback_stage_presentation",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13",
+  "statement": "theorem colimit_site_covering_pullback_stage_presentation\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (j₀ : J) (T₀ : F.obj j₀) (R₀ : Presieve T₀) (hR₀ : R₀ ∈ P j₀ T₀)\n    {ι : Type (max u u)} [Finite ι] {S : V.pt} {X : ι → V.pt}\n    (e₀ : (V.ι.app j₀).toFunctor.obj T₀ = S) (f : ∀ i, X i ⟶ S)\n    (himage : e₀ ▸ R₀.map (V.ι.app j₀).toFunctor = Presieve.ofArrows X f)\n    {Y : V.pt} (g : Y ⟶ S) {P' : ι → V.pt}\n    (p₁ : ∀ i, P' i ⟶ Y) (p₂ : ∀ i, P' i ⟶ X i)\n    (h : ∀ i, IsPullback (p₁ i) (p₂ i) g (f i)) :\n    ∃ (j : J) (T : F.obj j) (A : ι → F.obj j) (a : ∀ i, A i ⟶ T)\n      (B : F.obj j) (b : B ⟶ T) (D : ι → F.obj j)\n      (q₁ : ∀ i, D i ⟶ B) (q₂ : ∀ i, D i ⟶ A i)\n      (e : (V.ι.app j).toFunctor.obj B = Y),\n      Presieve.ofArrows A a ∈ P j T ∧\n      (∀ i, IsPullback (q₁ i) (q₂ i) b (a i)) ∧\n      e ▸ (Presieve.ofArrows D q₁).map (V.ι.app j).toFunctor =\n        Presieve.ofArrows P' p₁"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T202230-L-700917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T202230-L-700917",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
