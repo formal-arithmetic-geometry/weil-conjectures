@@ -1,0 +1,116 @@
+{
+ "id": "lem-pd-glued-effective-model-charts-aux",
+ "kind": "statement",
+ "title": "Glued effective model data",
+ "statement": "theorem exists_glued_model_data : the ambient scheme, open chart embeddings, and glued morphism exist with the stated covering and over-base properties.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Descent, Tag 0AP4, proof"
+ },
+ "stmt_deps": [
+  "lem-pd-glued-effective-model-charts"
+ ],
+ "proof": [
+  {
+   "text": "Construct the descended overlaps and glue the schemes and morphisms, then verify the claimed property.",
+   "uses": [
+    "lem-pd-glued-effective-model-charts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-glued-effective-model-charts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Descent, Tag 0AP4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "scheme gluing pullback exact theorem",
+   "results": "No exact theorem; query executed",
+   "verdict": "no exact match after inspection",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "glued scheme chart pullback exact theorem",
+   "results": "No exact theorem; query executed",
+   "verdict": "no exact match after inspection",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "GlueData pullback chart exact theorem",
+   "results": "No exact theorem; query executed",
+   "verdict": "no exact match after inspection",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "msearch",
+   "query": "scheme gluing descent charts",
+   "results": "No exact theorem",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "gluing local effective models with cartesian open charts",
+   "results": "No exact theorem found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GluedEffectiveModelCharts",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pd-glued-effective-model-charts",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-jacobian-descent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/GluedEffectiveModelChartsAux.lean",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_glued_model_data",
+  "statement": "theorem exists_glued_model_data\n    {X Y : Scheme.{u}} {p : X ⟶ Y}\n    (hp : Presieve.singleton p ∈ Scheme.fpqcPrecoverage Y)\n    {V : Over X} (D : Over.DescentDatum p V)\n    {I : Type u} (U : I → V.left.Opens)\n    (hcover : ∀ x : V.left, ∃ i, x ∈ U i)\n    (E : ∀ i, Over.DescentDatum p (Over.mk ((U i).ι ≫ V.hom)))\n    (hcompat : ∀ (i : I) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X)\n      (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ Over.mk ((U i).ι ≫ V.hom)),\n      ((E i).transport f₁ f₂ h a).left ≫ (U i).ι =\n        (D.transport f₁ f₂ h (Over.homMk (a.left ≫ (U i).ι)\n          (by simpa only [Over.mk_hom, Category.assoc] using Over.w a))).left)\n    (W : I → Over Y) (q : ∀ i, (U i).toScheme ⟶ (W i).left)\n    (hcart : ∀ i, IsPullback (q i) ((U i).ι ≫ V.hom) (W i).hom p)\n    (hinv : ∀ (i : I) {T : Scheme.{u}} (f₁ f₂ : T ⟶ X)\n      (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ Over.mk ((U i).ι ≫ V.hom)),\n      ((E i).transport f₁ f₂ h a).left ≫ q i = a.left ≫ q i) :\n    ∃ (W₀ : Over Y) (q₀ : V.left ⟶ W₀.left) (j : ∀ i, (W i).left ⟶ W₀.left),\n      (∀ i, IsOpenImmersion (j i)) ∧\n      (∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w) ∧\n      (∀ i, j i ≫ W₀.hom = (W i).hom) ∧\n      (∀ i, q i ≫ j i = (U i).ι ≫ q₀)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T110321-L-622709",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T110321-L-622709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

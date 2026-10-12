@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
 import Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsAux
+import Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback
 
 /-!
 # Gluing local effective models along descended overlaps
@@ -68,6 +70,10 @@ theorem exists_glued_effective_model_charts
       (∀ i, IsOpenImmersion (j i)) ∧
       (∀ w : W₀.left, ∃ i, ∃ z : (W i).left, j i z = w) ∧
       (∀ i, j i ≫ W₀.hom = (W i).hom) ∧
-      (∀ i, IsPullback (q i) (U i).ι (j i) q₀) := by sorry
+      (∀ i, IsPullback (q i) (U i).ι (j i) q₀) := by
+  obtain ⟨W₀, q₀, j, hopen, hcover₀, hover, hcomm⟩ :=
+    exists_glued_model_data hp D U hcover E hcompat W q hcart hinv
+  refine ⟨W₀, q₀, j, hopen, hcover₀, hover, ?_⟩
+  exact glued_model_chart_pullbacks U W q W₀ q₀ j hcart hopen hcover₀ hover hcomm
 
 end CategoryTheory.Over.DescentDatum
