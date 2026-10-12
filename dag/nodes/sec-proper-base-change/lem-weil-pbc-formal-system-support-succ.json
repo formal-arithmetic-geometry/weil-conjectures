@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-formal-system-support-succ",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-system-support-constant",
+   "place": "consecutive-level step of its split",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Consecutive levels of a coherent formal module have equal support",
+ "statement": "Let X be a Noetherian scheme, I an ideal sheaf, and F a coherent formal module. For every n ≥ 0, the support of F at level n+1 equals the support at level n.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, proof of Lemma 0CYV, first sentence of proof of (1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-weil-pbc-closed-subset-proper-over-base"
+ ],
+ "proof": [
+  {
+   "text": "Identify the stalk at level n with the quotient of the stalk at level n+1 by the nth ideal power, and use the annihilation condition to show the quotient vanishes exactly when the original stalk vanishes; extensionality then gives equality of supports.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module",
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "proof of Lemma 0CYV, first sentence of proof of (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-ideal-module-product-stalk"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "proof of Lemma 0CYV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "consecutive supports coherent formal module",
+   "results": "no direct match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equality of supports of consecutive formal module levels",
+   "results": "no direct match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton stalk support equality",
+   "results": "no direct match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formalModule_support_succ",
+   "results": "no existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalModuleSupportConstant",
+  "date": "2026-10-13",
+  "group": "H2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalModuleSupportSucc",
+  "declaration": "AlgebraicGeometry.formalModule_support_succ",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalModuleSupportSucc.lean",
+  "statement": "theorem formalModule_support_succ {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F : CoherentFormalModule X I) (n : ℕ) : {x : X | ¬ Subsingleton ((F.obj.obj (op (n + 1))).presheaf.stalk x)} = {x : X | ¬ Subsingleton ((F.obj.obj (op n)).presheaf.stalk x)}",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T184304-L-4004954",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T184304-L-4004954",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

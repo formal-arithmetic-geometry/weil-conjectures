@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.FormalModuleSupportSucc
 import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.Topology.PresheafModuleStalkFunctor
 
@@ -47,6 +48,9 @@ theorem formalModule_support_eq {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I) (n : ℕ) :
     {x : X | ¬ Subsingleton ((F.obj.obj (op n)).presheaf.stalk x)} =
       {x : X | ¬ Subsingleton ((F.obj.obj (op 0)).presheaf.stalk x)} := by
-  sorry
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    exact (formalModule_support_succ I F n).trans ih
 
 end AlgebraicGeometry
