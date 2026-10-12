@@ -1,0 +1,125 @@
+{
+ "id": "lem-sbc-higher-image-raw-pullback-functorial",
+ "kind": "statement",
+ "title": "Functorial additive raw cohomology pullback",
+ "statement": "Let $\\Lambda$ be a commutative ring, $k:W\\to S$ a scheme morphism, $G$ a $\\Lambda$-module sheaf on $W_{\\mathrm{et}}$, $q\\in\\mathbf Z$, and $U\\to S$ an etale object. Write $P_A(U)$ and $r_f:P_B(U)\\to P_A(U)$ for the raw groups and explicit pullbacks of [sbc-lem-higher-image-raw-over-naturality]. For every morphism $f:A\\to B$ in $\\mathrm{Over}(W)$, $r_f(0)=0$ and $r_f(x+y)=r_f(x)+r_f(y)$. For every $A$, $r_{\\mathrm{id}_A}=\\mathrm{id}_{P_A(U)}$. For composable $f:A\\to B$ and $g:B\\to C$, $r_{g\\circ f}=r_f\\circ r_g$. There are no limit or quasi-compactness hypotheses.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09Z1 (lemma-relative-colimit), 0EZM (lemma-colimit-variant-complexes), 03FD (lemma-cohomology-modules-abelian); formal interface follows the existing canonical-map Lean declarations"
+ },
+ "stmt_deps": [
+  "sbc-lem-higher-image-raw-over-naturality",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Derived inverse image is additive and composition is bilinear; hence the five-factor raw formula preserves zero and addition.",
+   "uses": [
+    "sbc-lem-higher-image-raw-over-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the identity use the unit coherence of inverse image, naturality of its single-functor comparison, and shift compatibility to cancel inverse comparisons. For a composite expand both five-factor formulas, move the inner formula through derived pullback, cancel adjacent single-functor comparisons, and use the associativity coherence of inverse images on source and coefficient sheaves. The surviving source, shift, and coefficient factors are those for the composite.",
+   "uses": [
+    "sbc-lem-higher-image-raw-over-naturality",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition",
+  "sbc-lem-higher-image-raw-over-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Explicit derived-Hom interface for Tags 09Z1, 0EZM and 03FD, F1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functoriality of raw etale cohomology pullbacks under identity and composition",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of raw etale cohomology pullbacks under identity and composition",
+   "date": "2026-10-12",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, CategoryTheory.GrothendieckTopology.overMapPullbackComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, CategoryTheory.GrothendieckTopology.overMapPullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_assoc",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImageRawOverPullback",
+   "date": "2026-10-12",
+   "results": "No Mathlib hits.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineClassVanishing",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Proof: raw cohomology on affine etale objects, its continuity, and the canonical maps",
+   "via": [
+    "sbc-lem-higher-image-raw-affine-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawDiagram.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImageRawOverPullback_functorial",
+  "statement": "theorem higherDirectImageRawOverPullback_functorial (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale) : (∀ (A B : Over W) (f : A ⟶ B), higherDirectImageRawOverPullback Λ k G q f U 0 = 0) ∧ (∀ (A B : Over W) (f : A ⟶ B) (x y : (higherDirectImageRawOverPresheaf Λ k G q B).obj (op U)), higherDirectImageRawOverPullback Λ k G q f U (x + y) = higherDirectImageRawOverPullback Λ k G q f U x + higherDirectImageRawOverPullback Λ k G q f U y) ∧ (∀ (A : Over W) (z : (higherDirectImageRawOverPresheaf Λ k G q A).obj (op U)), higherDirectImageRawOverPullback Λ k G q (𝟙 A) U z = z) ∧ (∀ (A B C : Over W) (f : A ⟶ B) (g : B ⟶ C) (z : (higherDirectImageRawOverPresheaf Λ k G q C).obj (op U)), higherDirectImageRawOverPullback Λ k G q (f ≫ g) U z = higherDirectImageRawOverPullback Λ k G q f U (higherDirectImageRawOverPullback Λ k G q g U z))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T173822-L-3294335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T173822-L-3294335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

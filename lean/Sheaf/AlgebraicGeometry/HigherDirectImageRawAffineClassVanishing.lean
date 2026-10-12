@@ -6,10 +6,8 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageRawOverNaturality
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Eventual zero of raw affine cohomology classes
 
@@ -61,6 +59,21 @@ theorem exists_higher_image_raw_affine_class_eq_zero
     (hz : higherDirectImageRawOverPullback Λ k G q (c.π.app i) U z = 0) :
     ∃ (j : I) (f : j ⟶ i),
       higherDirectImageRawOverPullback Λ k G q (D.map f) U z = 0 := by
-  sorry
+  have s := nonempty_higherDirectImageRaw_complex_presentation Λ k G q D c hc U
+  obtain ⟨hB⟩ := s.isColimit
+  have := preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1}
+    (forget AddCommGrpCat.{u + 1})
+  have hzero :
+      (higherDirectImageRawCocone Λ k G q D c U).ι.app (op i) z =
+        (higherDirectImageRawCocone Λ k G q D c U).ι.app (op i) 0 := by
+    change higherDirectImageRawOverPullback Λ k G q (c.π.app i) U z = _
+    rw [hz, map_zero]
+  obtain ⟨j, f, hf⟩ := (Types.FilteredColimit.isColimit_eq_iff'
+    (isColimitOfPreserves (forget AddCommGrpCat.{u + 1}) hB) z 0).mp hzero
+  refine ⟨j.unop, f.unop, ?_⟩
+  change (higherDirectImageRawDiagram Λ k G q D U).map f z = 0
+  change (higherDirectImageRawDiagram Λ k G q D U).map f z =
+    (higherDirectImageRawDiagram Λ k G q D U).map f 0 at hf
+  simpa only [map_zero] using hf
 
 end AlgebraicGeometry.Etale
