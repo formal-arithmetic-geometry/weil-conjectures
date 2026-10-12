@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIso
+import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientMaps
 
 /-! # Finite quotient cohomology on the local base change
 
@@ -71,5 +73,10 @@ theorem formalFunctions_finite_quotient_comparison {X Y : Scheme.{u}} (f : X ⟶
       ∀ a : formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]
           formalFunctionsLocalCohomology f y F p,
         IsFormalFunctionsLocalComparison f y F p a →
-          ∀ n : ℕ, IsFormalFunctionsTheta f y F p n ((r n).comp a) := by sorry
+          ∀ n : ℕ, IsFormalFunctionsTheta f y F p n ((r n).comp a) := by
+  dsimp
+  obtain ⟨b, r, hr, hpull⟩ := formalFunctions_finite_quotient_iso f F hF y p
+  refine ⟨b, r, hr, ?_⟩
+  intro a ha n
+  exact formalFunctions_finite_quotient_maps f F hF y p n (r n) (hpull n) a ha
 end AlgebraicGeometry
