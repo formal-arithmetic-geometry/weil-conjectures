@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-product-residue-h1-injective",
+ "kind": "statement",
+ "title": "Joint H1 injectivity of residue-field product slices",
+ "statement": "Let $f:X\\to S$ and $g:Y\\to S$ be proper morphisms of schemes [def-weil-proper-morphism, def-pc-scheme], with sections $\\sigma:S\\to X$ and $\\tau:S\\to Y$ [def-pc-section]. Suppose their canonical structure-pushforward units are isomorphisms after every base change [def-pc-base-change, lem-pc-module-pullback-adjunction]. For $s\\in S$ put $p:X\\times_S Y\\to S$ [def-pc-fibre-product] and let $i_X=(1,\\tau f):X\\to X\\times_S Y$ and $i_Y=(\\sigma g,1):Y\\to X\\times_S Y$. Then the base changes of these maps along $\\operatorname{Spec}\\kappa(s)\\to S$ induce an injective map $H^1((X\\times_S Y)_s,\\mathcal O)\\to H^1(X_s,\\mathcal O)\\times H^1(Y_s,\\mathcal O)$ [def-sc-structure-sheaf-cohomology-pullback, def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF3, first sentence of proof: Kunneth injectivity on the special fibre (Tag 0BED)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-scheme-over-base",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-weil-proper-morphism",
+  "def-pc-section",
+  "def-sc-structure-sheaf-cohomology-pullback",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate universal structure pushforward at Spec κ(s). Identify the canonical scalar maps with its maps on global sections to obtain H0(X_s,O)=κ(s) and H0(Y_s,O)=κ(s). Base change the sections to rational points. Properness is stable under base change. Apply picard_h1_product_injective over κ(s).",
+   "uses": [
+    "lem-sc-picard-h1-product-injective",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback pasting identifies the chosen residue fibre of X×_S Y with X_s×_κ(s)Y_s and identifies its base-changed section maps with the two rational-point slices. Functoriality of structure-sheaf cohomology transports the preceding injectivity along this isomorphism.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sc-structure-sheaf-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-h1-product-injective",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-fibre-product",
+  "def-sc-structure-sheaf-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BF3, first sentence of proof: Kunneth injectivity on the special fibre (Tag 0BED)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "residue field product H1 cohomology jointly injective rational point slices",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "H1 cohomology of product of proper schemes over residue field injective pair of section slice pullbacks",
+   "results": "Eight unrelated Mathlib hits, including Scheme.pointsPi_injective and cotangent-complex H1 results; no structure-sheaf H1 product theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pullbackRightPullbackFstIso|structureSheafCohomologyPullback",
+   "results": "Mathlib has canonical unit and pullback-pasting lemmas; the project has StructureSheafCohomologyPullback and PicardH1ProductInjective, but no residue-product transport theorem",
+   "date": "2026-10-12",
+   "verdict": "no Mathlib exact match; project dependencies found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardProductOpenData",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BF3, first sentence of proof: Kunneth injectivity on the special fibre (Tag 0BED)",
+   "via": [
+    "lem-sc-picard-product-open-data",
+    "lem-sc-picard-product-open-core",
+    "lem-sc-picard-product-open",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProductResidueH1Injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProductResidueH1Injective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.product_residue_h1_injective",
+  "statement": "theorem product_residue_h1_injective {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [IsProper f] [IsProper g] (σ : S ⟶ X) (τ : S ⟶ Y) (hσ : σ ≫ f = 𝟙 S) (hτ : τ ≫ g = 𝟙 S) (hX : ∀ {T : Scheme.{u}} (t : T ⟶ S), IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction (pullback.snd f t))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (hY : ∀ {T : Scheme.{u}} (t : T ⟶ S), IsIso ((Classical.choose (Modules.exists_tensorPullbackAdjunction (pullback.snd g t))).unit.app (SheafOfModules.unit T.ringCatSheaf))) (s : S) : let p := pullback.fst f g ≫ f let iX := pullback.lift (𝟙 X) (f ≫ τ) (by simp [hτ]) let iY := pullback.lift (g ≫ σ) (𝟙 Y) (by simp [hσ]) let hiX : iX ≫ p = f := by dsimp only [p] rw [← Category.assoc, pullback.lift_fst, Category.id_comp] let hiY : iY ≫ p = g := by dsimp only [p] rw [← Category.assoc, pullback.lift_fst, Category.assoc, hσ, Category.comp_id] Function.Injective (fun x : Sheaf.H (structureSheafAb (pullback p (S.fromSpecResidueField s))) 1 ↦ (structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk f) (V := Over.mk p) iX hiX)).left) 1 x, structureSheafCohomologyPullback (((Over.pullback (S.fromSpecResidueField s)).map (Over.homMk (U := Over.mk g) (V := Over.mk p) iY hiY)).left) 1 x))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T184306-L-4005694",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T184306-L-4005694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
