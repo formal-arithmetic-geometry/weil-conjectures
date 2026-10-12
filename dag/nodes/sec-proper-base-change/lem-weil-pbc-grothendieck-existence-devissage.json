@@ -35,72 +35,72 @@
  ],
  "proof": [
   {
-   "text": "For each e >= 1, the closed immersion i_e : X_e -> X has ideal K^e. By [lem-weil-pbc-closed-immersion-coherent-equivalence], coherent modules on X_e identify with coherent O_X-modules annihilated by K^e, and the corresponding formal systems identify with the full subcategory of Coh(X,I) annihilated by K^e. Under this identification, hypothesis (1) says that the completion functor gives an equivalence between these two categories.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6961--6968; Lemma 087T"
-   }
-  },
-  {
-   "text": "Apply that equivalence to the quotient system (F_n / K^e F_n)_n to obtain a coherent O_X-module G_e annihilated by K^e, together with its identification with the quotient formal system. The quotient maps for e+1 -> e correspond to maps G_{e+1} -> G_e inducing isomorphisms G_{e+1}/K^e G_{e+1} = G_e. Thus (G_e)_e is an object of Coh(X,K).",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6969--6977"
-   }
-  },
-  {
-   "text": "The map alpha : (F_n) -> H^ induces maps F_n/K^e F_n -> H/(I^n + K^e)H, hence, through the same equivalence, maps G_e -> H/K^e H. Choose t >= 1 annihilating the kernels and cokernels of the component maps of alpha. The commutative-algebra assertion in [lem-weil-pbc-formal-systems-annihilated-by-power] first gives a K^(2t) bound after quotienting by K^e, and applying the same assertion to the induced map of the K-adic systems gives a K^(4t) bound for the kernels and cokernels of G_e -> H/K^e H.",
+   "text": "Convert the formal kernel-fork and cokernel-cofork annihilation hypothesis to a uniform componentwise bound using conditions (4) and (1) of the four-way equivalence.",
    "uses": [
     "lem-weil-pbc-formal-systems-annihilated-by-power"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6978--6993; Remark 0888"
+    "place": "Tag 0888"
    }
   },
   {
-   "text": "The maps G_e -> H/K^e H therefore satisfy the hypotheses of [lem-weil-pbc-grothendieck-existence-easy], part (1), with ideal K. We obtain a coherent O_X-module F, a map a:F -> H whose kernel and cokernel are killed by a power of K, and an isomorphism beta:(G_e) = (F/K^e F)_e compatible with a.",
+   "text": "Construct the second K-adic system N, its comparison delta, the natural double-quotient isomorphism sigma, and the canonical quotient interchange theta. Retain the comparison square and the uniform componentwise torsion bound for delta.",
    "uses": [
-    "lem-weil-pbc-grothendieck-existence-easy"
+    "lem-weil-pbc-devissage-second-adic-system"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6994--6997; Lemma 0889"
+    "place": "Tag 088A, first four proof paragraphs"
    }
   },
   {
-   "text": "Fix n. Reduce alpha_n and the comparison beta modulo I^n. The resulting map from F_n/K^e F_n to H/(I^n + K^e)H and the corresponding map from F/I^n F form a triple to which the uniqueness clause of [lem-weil-pbc-grothendieck-existence-easy] applies. It gives an isomorphism F/I^n F = F_n; uniqueness makes these isomorphisms compatible with all transition maps. Hence F^ is isomorphic to (F_n) in Coh(X,I).",
+   "text": "Apply easy algebraization with ideal K, retaining the torsion bound on the actual map a:F to H as well as beta and its comparison equation.",
    "uses": [
-    "lem-weil-pbc-grothendieck-existence-easy",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0889(1), invoked in Tag 088A"
+   }
+  },
+  {
+   "text": "Recover the I-level isomorphisms from the double comparison and the torsion-controlled algebraization triple. Their transition compatibility makes a natural isomorphism of diagrams.",
+   "uses": [
+    "lem-weil-pbc-devissage-recover-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A, final paragraph"
+   }
+  },
+  {
+   "text": "Use NatIso.ofComponents to assemble the level isomorphisms and ObjectProperty.isoMk to lift to the full subcategory Coh(X,I). This provides the required coherent F and completion isomorphism.",
+   "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 088A, proof lines 6998--7012"
+    "place": "Tag 088A, final sentence"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
   "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-formal-systems-annihilated-by-power",
-  "lem-weil-pbc-grothendieck-existence-easy"
+  "lem-weil-pbc-devissage-recover-levels",
+  "lem-weil-pbc-devissage-second-adic-system",
+  "lem-weil-pbc-easy-algebraization-torsion-triple",
+  "lem-weil-pbc-formal-systems-annihilated-by-power"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 088A (lemma-existence-tricky), proof lines 6955--7012"
+  "place": "Tag 088A with Tag 0889(1)(b) torsion retained; stage-3 Lean decomposition by C1, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -177,5 +177,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a4305",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T194102-L-451972",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures with their node records and the decomposition with Stacks 088A/0889; all modules compile cleanly, with only standard axioms and expected sorryAx."
  }
 }

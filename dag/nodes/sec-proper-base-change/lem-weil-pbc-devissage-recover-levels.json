@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-devissage-recover-levels",
+ "kind": "statement",
+ "title": "Recovery of compatible original levels from a torsion-controlled second-ideal triple",
+ "statement": "Let $X$ be Noetherian, $I,K$ quasi-coherent ideals, $M\\in\\operatorname{Coh}(X,I)$, and $H$ coherent, as in [pqf-def-locnoeth], [pqf-def-coherent], [def-weil-pbc-coherent-formal-module]. Suppose $\\alpha:M\\to\\widehat H_I$ has component kernels and cokernels killed by one positive power of $K$. Let $N\\in\\operatorname{Coh}(X,K)$, $\\delta:N\\to\\widehat H_K$, and an isomorphism of double diagrams $\\sigma_{e,n}:N_e/I^nN_e\\simeq M_n/K^eM_n$ be given. Let $\\theta_{e,n}:(H/K^eH)/I^n\\simeq(H/I^nH)/K^e$ be the quotient interchange characterized by the projections from $H$, and assume the comparison square with $\\alpha_n$ and $\\delta_e$ commutes. Let $F$ be coherent, $a:F\\to H$ have actual kernel and cokernel killed by one positive power of $K$, and $\\beta:N\\simeq\\widehat F_K$ satisfy $\\delta=\\widehat a_K\\circ\\beta$. Then there exist isomorphisms $\\varphi_n:F/I^nF\\simeq M_n$ for all positive $n$, compatible with every transition of the I-adic diagrams.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A, final paragraph"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "For each positive n, evaluate the doubly indexed comparison in the I-index. Reduce beta modulo I^n and commute the two quotients using their cokernel universal properties. The projection equation for theta and the square identify the completed map with the K-completion of alpha_n.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A, final paragraph"
+   }
+  },
+  {
+   "text": "Remark 0888 bounds the kernel and cokernel of a modulo I^n by K^(2s). Thus F/I^n F with its reduced map and M_n with alpha_n are torsion-controlled triples for the same K-completed map. The torsion-controlled uniqueness statement gives a canonical isomorphism between their coherent sources.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-annihilated-by-power",
+    "lem-weil-pbc-easy-algebraization-torsion-triple"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A, final paragraph; Tag 0889(1)"
+   }
+  },
+  {
+   "text": "For a transition, the two composites agree after K-completion by the naturality of sigma and beta. Away from V(K), the torsion-controlled comparison maps to the corresponding quotient of H are invertible, so the composites agree there as well. On an affine open, injectivity in the formal gluing complex makes maps agreeing on the completion and those localizations equal. Local equality then gives global equality, proving transition compatibility.",
+   "uses": [
+    "lem-weil-pbc-formal-glueing-complex-exact",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 088A, final paragraph; Tag 0889 uniqueness argument; Tag 05EK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-easy-algebraization-torsion-triple",
+  "lem-weil-pbc-formal-glueing-complex-exact",
+  "lem-weil-pbc-formal-systems-annihilated-by-power",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tags 088A and 0889; source proof expressed as a stage-3 interface by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Recover coherent formal module levels by uniqueness of algebraization after switching ideals",
+   "results": "HTTP Internal Server Error; service unavailable; no search verdict.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover coherent formal module levels by uniqueness of algebraization after switching ideals",
+   "results": "Eight ring-level hits, including Algebra.FormallyUnramified.ext_of_iInf, formally-smooth lifting and IsAdicComplete.algHom_ext. No coherent-formal level recovery.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "secondAdicSystem|recoverLevels|torsionTriple|existence_tricky",
+   "results": "msearch: zero Mathlib hits. Local rg over both Lean roots and DAG: no existing declarations; original easy algebraization has an unusable unrestricted uniqueness clause. Blueprint searches second adic, torsion triple, recover levels each found zero blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceDevissage",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7, complete Noetherian essential surjectivity via Grothendieck existence; Tag 088A Recovery of compatible original levels from a torsion-controlled second-ideal triple",
+   "via": [
+    "lem-weil-pbc-grothendieck-existence-devissage",
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckDevissageRecoverLevels",
+  "declaration": "AlgebraicGeometry.grothendieckDevissage_recoverLevels",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckDevissageRecoverLevels.lean",
+  "statement": "theorem grothendieckDevissage_recoverLevels {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (M : CoherentFormalModule X I) (H : CoherentModules X) (α : M ⟶ (completion X I).obj H) (htorsion : ∃ t : ℕ, 1 ≤ t ∧ ∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (kernel (α.hom.app (op n)))) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (cokernel (α.hom.app (op n))))) (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H) (σ : N.obj ⋙ formalCompletionFunctor I ≅ (M.obj ⋙ formalCompletionFunctor K).flip) (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅ (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip) (hθ : ∀ e n : ℕ, formalModuleQuotientπ K (e + 1) H.obj ≫ formalModuleQuotientπ I (n + 1) (formalModuleQuotient K (e + 1) H.obj) ≫ (θ.hom.app (op e)).app (op n) = formalModuleQuotientπ I (n + 1) H.obj ≫ formalModuleQuotientπ K (e + 1) (formalModuleQuotient I (n + 1) H.obj)) (hsquare : ∀ e n : ℕ, (σ.hom.app (op e)).app (op n) ≫ formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) = formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫ (θ.hom.app (op e)).app (op n)) (F : CoherentModules X) (a : F ⟶ H) (β : N ≅ (completion X K).obj F) (hβ : δ = β.hom ≫ (completion X K).map a) (ha : ∃ s : ℕ, 1 ≤ s ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι s).2 (kernel a.hom)) ∧ IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι s).2 (cokernel a.hom))) : ∃ φ : ∀ n : ℕᵒᵖ, ((completion X I).obj F).obj.obj n ≅ M.obj.obj n, ∀ (n m : ℕᵒᵖ) (f : n ⟶ m), ((completion X I).obj F).obj.map f ≫ (φ m).hom = (φ n).hom ≫ M.obj.map f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a4305",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T194102-L-451972",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a4305",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T194102-L-451972",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures with their node records and the decomposition with Stacks 088A/0889; all modules compile cleanly, with only standard axioms and expected sorryAx."
+ }
+}

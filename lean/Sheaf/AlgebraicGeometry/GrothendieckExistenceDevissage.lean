@@ -7,9 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystem
+import Sheaf.AlgebraicGeometry.GrothendieckExistenceEasyTorsionTriple
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageRecoverLevels
 
 /-!
 # Grothendieck existence by devissage
@@ -70,6 +71,17 @@ theorem grothendieck_existence_devissage
         (∀ n : ℕ, IsZero (Scheme.idealModuleProduct
           (Scheme.idealSheafPower K.toModulesι t).2 (c.pt.obj.obj (op n))))) :
     ∃ F : CoherentModules X, Nonempty ((completion X I).obj F ≅ M) := by
-  sorry
+  obtain ⟨t, ht, k, c, hk, hc, hkt, hct⟩ := htorsion
+  have hcomponent := ((coherentFormalModule_annihilated_iff X I K M
+    ((completion X I).obj H) α).out 3 0 rfl rfl).mp
+    ⟨k, c, hk, hc, t, ht, fun n ↦ ⟨hkt n, hct n⟩⟩
+  obtain ⟨N, δ, σ, θ, hθ, hsquare, hδ⟩ :=
+    grothendieckDevissage_secondAdicSystem I K M hthick H α hcomponent
+  obtain ⟨F, a, β, hβ, ha, _⟩ :=
+    grothendieckExistenceEasy_torsionTriple K H N δ hδ
+  obtain ⟨φ, hφ⟩ := grothendieckDevissage_recoverLevels I K M H α hcomponent
+    N δ σ θ hθ hsquare F a β hβ ha
+  refine ⟨F, ⟨?_⟩⟩
+  exact ObjectProperty.isoMk _ (NatIso.ofComponents φ (fun {_ _} f ↦ hφ _ _ f))
 
 end AlgebraicGeometry
