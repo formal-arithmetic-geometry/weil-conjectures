@@ -1,0 +1,106 @@
+{
+ "id": "lem-sc-hom-complex-projections",
+ "kind": "statement",
+ "title": "Specified projections for the chosen Hom-complex",
+ "statement": "For any category, topology and commutative ring sheaf with the required composition instance, the chosen Hom-complex bifunctor admits product-limit projections satisfying the defining differential and chain-map formulas.",
+ "stmt_deps": [
+  "def-pur-hom-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, the Hom-complex construction; evaluation-at-one reduction"
+ },
+ "proof": [
+  {
+   "text": "apply `Classical.choose_spec` to `homComplex_exists`; its chosen first\ncomponent is precisely `homComplexFunctor`. This exposes the projection\nspecification without repeatedly reducing the large bifunctor existence type.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "Degreewise reduction of the cited Hom-complex construction, using the source library evaluation-at-one isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection from a product with all factors zero except one is an isomorphism",
+   "date": "2026-10-12",
+   "results": "Binary prodZeroIso and zeroProdIso, Pi.ι_π. These supply ingredients but not the sheaf-valued evaluation with its specified Hom-complex projections.",
+   "verdict": "No exact match; use the limit fan and evaluation-at-one constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLimit, IsZero",
+   "date": "2026-10-12",
+   "results": "Unknown unqualified identifier IsLimit; no hits.",
+   "verdict": "Uninformative search; supplemented by leanfinder and local grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation at one internal Hom from the unit sheaf naturally identifies with the target module",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict."
+  },
+  {
+   "tool": "grep",
+   "query": "homObjUnitIso|singleObjXSelf|homComplexUnitEvaluation",
+   "date": "2026-10-12",
+   "results": "Source InternalHomFree supplies homObjUnitIso; Mathlib Single supplies singleObjXSelf; external HomComplexSingle supplies fromSingleEquiv. Local repository rg found no existing sheaf-valued unit evaluation or compatibility theorem.",
+   "verdict": "Use the existing underived evaluation iso and single-complex iso; new statements concern the specified sheaf-valued Hom-complex."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomComplexUnitIso",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-complex-unit-iso",
+   "place": "degreewise evaluation, differential compatibility, and chain-map compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexProjections",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexProjections.lean",
+  "declaration": "CategoryTheory.homComplex_projections_exists",
+  "statement": "theorem homComplex_projections_exists : let F := homComplexFunctor.{u, v, w, r} (C := C) (J := J) (R := R); ∃ π : ∀ (L M : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (n p q : ℤ), p + n = q → (((F.obj (op L)).obj M).X n ⟶ SheafOfModules.homObj (L.X p) (M.X q)), (∀ (L M : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (n : ℤ), Nonempty (IsLimit (Fan.mk (((F.obj (op L)).obj M).X n) (fun p : ℤ ↦ π L M n p (p + n) rfl)))) ∧ (∀ (L M : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (n m p q q' p' : ℤ) (_hnm : n + 1 = m) (hpq : p + m = q) (hq' : p + n = q') (hp' : p' + n = q), ((F.obj (op L)).obj M).d n m ≫ π L M m p q hpq = π L M n p q' hq' ≫ SheafOfModules.homObjMap (𝟙 (L.X p)) (M.d q' q) - n.negOnePow • (π L M n p' q hp' ≫ SheafOfModules.homObjMap (L.d p p') (𝟙 (M.X q)))) ∧ (∀ (L L' M M' : CochainComplex (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (f : L' ⟶ L) (g : M ⟶ M') (n p q : ℤ) (hpq : p + n = q), (((F.map f.op).app M) ≫ (F.obj (op L')).map g).f n ≫ π L' M' n p q hpq = π L M n p q hpq ≫ SheafOfModules.homObjMap (f.f p) (g.f q))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144120-L-2099018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144120-L-2099018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8120,3 +8120,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/J1/Sheaf.AlgebraicGeometry.SerreCriterionAffineness (stage 3; reviewer PASS; first push; landing 20261012T144119-L-2098725 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/J1/Sheaf.Paper.TorLongExactFirstVariable (stage 3; reviewer PASS; first push; landing 20261012T144119-L-2098823 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/J1/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections (stage 3; reviewer PASS; after a return; landing 20261012T144119-L-2098920 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/J2/Sheaf.Algebra.Homology.HomComplexUnitIso (stage 3; reviewer PASS; after a return; landing 20261012T144120-L-2099018 (interface); batch 20261012T144049; modules 6; new nodes 5)

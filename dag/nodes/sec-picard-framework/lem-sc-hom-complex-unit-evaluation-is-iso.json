@@ -1,0 +1,112 @@
+{
+ "id": "lem-sc-hom-complex-unit-evaluation-is-iso",
+ "kind": "statement",
+ "title": "Unit evaluation is an isomorphism in each degree",
+ "statement": "For every complex M and integer n, the explicit evaluation homComplexUnitEvaluation J R M n is an isomorphism.",
+ "stmt_deps": [
+  "def-sc-hom-complex-unit-evaluation",
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, the Hom-complex construction; evaluation-at-one reduction"
+ },
+ "proof": [
+  {
+   "text": "the specified projections form a limit fan. For nonzero source degree p,\nthe single complex has zero object, and its internal Hom to any target is zero:\nevery localized linear map from zero is zero. Thus projection to degree zero\nis an isomorphism. Its inverse is the limit lift with identity at zero and zero\nat every other index. The limit hom-ext principle proves both inverse identities.\nTransport from the source's zero degree to the unit is an isomorphism under\ninternal Hom. Finally evaluation at one is `SheafOfModules.homObjUnitIso`.\nTheir composite is therefore an isomorphism. This includes zero rings, empty\nsites, zero complexes, and every integer target degree.",
+   "uses": [
+    "def-sc-hom-complex-unit-evaluation",
+    "lem-sc-hom-complex-projections",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-hom-complex-unit-evaluation",
+  "lem-sc-hom-complex-projections",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "description": "Degreewise reduction of the cited Hom-complex construction, using the source library evaluation-at-one isomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection from a product with all factors zero except one is an isomorphism",
+   "date": "2026-10-12",
+   "results": "Binary prodZeroIso and zeroProdIso, Pi.ι_π. These supply ingredients but not the sheaf-valued evaluation with its specified Hom-complex projections.",
+   "verdict": "No exact match; use the limit fan and evaluation-at-one constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLimit, IsZero",
+   "date": "2026-10-12",
+   "results": "Unknown unqualified identifier IsLimit; no hits.",
+   "verdict": "Uninformative search; supplemented by leanfinder and local grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation at one internal Hom from the unit sheaf naturally identifies with the target module",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict."
+  },
+  {
+   "tool": "grep",
+   "query": "homObjUnitIso|singleObjXSelf|homComplexUnitEvaluation",
+   "date": "2026-10-12",
+   "results": "Source InternalHomFree supplies homObjUnitIso; Mathlib Single supplies singleObjXSelf; external HomComplexSingle supplies fromSingleEquiv. Local repository rg found no existing sheaf-valued unit evaluation or compatibility theorem.",
+   "verdict": "Use the existing underived evaluation iso and single-complex iso; new statements concern the specified sheaf-valued Hom-complex."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.HomComplexUnitIso",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hom-complex-unit-iso",
+   "place": "degreewise evaluation, differential compatibility, and chain-map compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.HomComplexUnitEvaluationIsIso",
+  "file": "lean/Sheaf/Algebra/Homology/HomComplexUnitEvaluationIsIso.lean",
+  "declaration": "CategoryTheory.homComplex_unit_evaluation_isIso",
+  "statement": "theorem homComplex_unit_evaluation_isIso (M : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (n : ℤ) : IsIso (homComplexUnitEvaluation J R M n)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144120-L-2099018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T144120-L-2099018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
