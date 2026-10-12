@@ -15,46 +15,22 @@
  },
  "proof": [
   {
-   "text": "Regard O' as an O-module S in degree zero by restriction of scalars [def-pc-sheaf-restrict-scalars]. Choose a K-flat resolution r: R → S [lem-pc-kflat-resolution]. Its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]. K-flatness of K [def-pc-kflat-complex] gives acyclicity of Tot(Cone(r) ⊗ K). The tensor-cone comparison [lem-pc-tensor-mapping-cone-iso] and the cone criterion make Tot(r ⊗ id_K) a quasi-isomorphism.",
+   "text": "Apply lem-pur-acyclic-kflat-tensor-arbitrary to K and each test complex F. This proves the universal tensor-acyclicity premise of lem-pur-change-of-rings-tensor-acyclic. Apply the latter with φ, E, h and hm to conclude that E(K) is acyclic.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pc-kflat-resolution",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-pc-kflat-complex",
-    "lem-pc-tensor-mapping-cone-iso"
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "lem-pur-change-of-rings-tensor-acyclic"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Since R is K-flat and K is acyclic, Tot(K ⊗ R) is acyclic by [def-pc-kflat-complex]. The signed symmetry identifies it with Tot(R ⊗ K): in degrees p,q, multiply the module braiding [lem-pc-sheaf-modules-tensor-closed] by (-1)^(pq). For d_K the two exponents are (p+1)q and pq+q; for d_R they are p+p(q+1) and pq, equal modulo 2. Thus it commutes with the differential, and its reverse is its inverse. Hence the quasi-isomorphism in the first step gives acyclicity of Tot(S ⊗ K).",
-   "uses": [
-    "def-pc-kflat-complex",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Only the degree-zero term of S is nonzero. The total tensor is therefore the restriction of the termwise extension of scalars [def-pur-sheaf-tensor-product]. Restriction of scalars [def-pc-sheaf-restrict-scalars] has the same underlying sheaf of abelian groups, so computes the same kernels and cokernels; it is exact and faithful and reflects acyclicity. The prescribed h and hm identify E with extension of scalars by a natural isomorphism: its component is eqToHom(h M) and naturality is hm after cancellation. Mapping that isomorphism termwise transports acyclicity to E(K).",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
-  "lem-pc-kflat-resolution",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "def-pc-kflat-complex",
-  "lem-pc-tensor-mapping-cone-iso",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "def-pur-sheaf-tensor-product"
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pur-change-of-rings-tensor-acyclic"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YT and 06YY; cone reformulation of quasi-isomorphism preservation"
+  "place": "Tags 06YT and 06YY; original steps 1-2 proved in the tensor lemma, step 3 isolated as scalar comparison"
  },
  "mathlib_searches": [
   {
@@ -138,9 +114,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T110315-L-620178",
+  "landing": "20261012T135332-L-1699593",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

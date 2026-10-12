@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-acyclic-kflat-tensor-arbitrary",
+ "kind": "statement",
+ "title": "An acyclic K-flat complex tensors acyclically with every complex",
+ "statement": "Let O be a sheaf of commutative rings on a site. If K is an acyclic K-flat cochain complex of O-modules, then for every cochain complex F of O-modules, the direct-sum total tensor complex Tot(F ⊗_O K) is acyclic. The tensor product and K-flatness are the existing constructions of def-pc-kflat-complex. No boundedness or flatness of the terms of F is required.",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-acyclic-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06Y0 and 06YT; K-flat resolution from Tag 06YS"
+ },
+ "proof": [
+  {
+   "text": "Choose a K-flat resolution r : P → F using lem-pc-kflat-resolution. Its cone is acyclic by the quasi-isomorphism cone criterion. K-flatness of K makes Tot(Cone(r) ⊗ K) acyclic. Tensor-cone comparison then shows that Tot(r ⊗ id_K) is a quasi-isomorphism.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "K-flatness of P applied to acyclic K gives acyclicity of Tot(K ⊗ P). Construct the bicomplex braiding from module braidings using HomologicalComplex.Hom.isoOfComponents twice; its naturality in each direction follows from braiding naturality. Totalize this isomorphism and compose with Mathlib HomologicalComplex.mapBifunctorFlipIso to obtain the signed symmetry Tot(K ⊗ P) ≅ Tot(P ⊗ K). Transport acyclicity across it, then across the quasi-isomorphism from the first step using quasiIsoAt_iff_exactAt in each degree.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06Y0 and 06YT; K-flat resolution from Tag 06YS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic K-flat complex tensored with any complex is acyclic",
+   "results": "Returned Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Acyclic",
+   "results": "loogle: unknown identifier 'Acyclic'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*Single|restrictScalars.*(Exact|exact|homology)|Acyclic.*tensor",
+   "results": "Returned Mathlib/FieldTheory/Extension.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total tensor of a complex with a module in degree zero is the termwise tensor complex and restriction of scalars reflects acyclicity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ChangeOfRingsAcyclicKFlat",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-change-of-rings-acyclic-kflat",
+   "place": "proof steps 1-2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.AcyclicKFlatTensor",
+  "file": "lean/Sheaf/Algebra/Homology/AcyclicKFlatTensor.lean",
+  "declaration": "SheafOfModules.tensor_acyclic_of_isKFlat",
+  "statement": "theorem tensor_acyclic_of_isKFlat {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} {O : Sheaf J CommRingCat.{u}} (K : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ) (hK : K.IsKFlat) (hA : K.Acyclic) (F : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ) : (letI := monoidalCategory O (CochainComplex.mapBifunctor F K (curriedTensor _)).Acyclic)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T135332-L-1699593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T135332-L-1699593",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-change-of-rings-tensor-acyclic",
+ "kind": "statement",
+ "title": "Change of rings of a universally tensor-acyclic complex",
+ "statement": "Let O → O' be a morphism φ of commutative ring sheaves on a site with the sheafification hypotheses of lem-pur-change-of-rings-acyclic-kflat. Let E be an additive functor whose objects and maps are changeOfRings φ and changeOfRingsHom φ via equalities h and hm with equality transports. Let K be a cochain complex of O-modules such that Tot(F ⊗_O K) is acyclic for every cochain complex F of O-modules. Then termwise E(K) is acyclic as a complex of O'-modules. No K-flatness or acyclicity hypothesis on K is part of this comparison theorem.",
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-acyclic-complex-modules",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; degree-zero total tensor comparison"
+ },
+ "proof": [
+  {
+   "text": "Let S be O' viewed as an O-module by restriction of scalars, and apply the universal tensor-acyclicity hypothesis to the single complex S[0]. All summands of degree n except S ⊗ K^n vanish, and the remaining differential is id_S ⊗ d_K. Sheafification of sectionwise tensor products identifies this complex with the restriction of termwise extension of scalars; naturality holds for every differential. Restriction of scalars has the same underlying abelian sheaf, is exact and faithful, and thus reflects acyclicity. The h and hm equalities give a natural isomorphism from E to extension of scalars, including all equality transports. Applying it termwise gives the claimed acyclicity. This argument also works for the zero ring and zero modules, and does not use flatness of the scalar extension.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; degree-zero total tensor comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An acyclic K-flat complex tensored with any complex is acyclic",
+   "results": "Returned Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Acyclic",
+   "results": "loogle: unknown identifier 'Acyclic'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*Single|restrictScalars.*(Exact|exact|homology)|Acyclic.*tensor",
+   "results": "Returned Mathlib/FieldTheory/Extension.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean, Mathlib/CategoryTheory/GradedObject/Unitor.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total tensor of a complex with a module in degree zero is the termwise tensor complex and restriction of scalars reflects acyclicity",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ChangeOfRingsAcyclicKFlat",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-change-of-rings-acyclic-kflat",
+   "place": "proof step 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ChangeOfRingsTensorAcyclic",
+  "file": "lean/Sheaf/Algebra/Homology/ChangeOfRingsTensorAcyclic.lean",
+  "declaration": "SheafOfModules.changeOfRings_acyclic_of_tensor_acyclic",
+  "statement": "theorem changeOfRings_acyclic_of_tensor_acyclic {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] {O O' : Sheaf J CommRingCat.{u}} (φ : O ⟶ O') (E : SheafOfModules.{u} (𝓡 O) ⥤ SheafOfModules.{u} (𝓡 O')) (h : ∀ M : SheafOfModules.{u} (𝓡 O), E.obj M = changeOfRings.{u, u, u} φ M) (hm : ∀ {M N : SheafOfModules.{u} (𝓡 O)} (a : M ⟶ N), E.map a = eqToHom (h M) ≫ changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (h N).symm) [E.Additive] (K : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ) (hT : ∀ F : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ, letI := monoidalCategory O (CochainComplex.mapBifunctor F K (curriedTensor _)).Acyclic) : ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T135332-L-1699593",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T135332-L-1699593",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

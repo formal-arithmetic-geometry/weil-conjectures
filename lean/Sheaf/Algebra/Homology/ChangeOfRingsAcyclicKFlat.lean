@@ -7,10 +7,8 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Homology.KFlatResolution
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Algebra.Homology.AcyclicKFlatTensor
+import Sheaf.Algebra.Homology.ChangeOfRingsTensorAcyclic
 
 /-!
 # Extension of scalars of acyclic K-flat complexes
@@ -62,6 +60,9 @@ theorem changeOfRings_acyclic_of_isKFlat
     [E.Additive]
     (K : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ)
     (hK : K.IsKFlat) (hA : K.Acyclic) :
-    ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic := by sorry
+    ((E.mapHomologicalComplex (ComplexShape.up ℤ)).obj K).Acyclic  := by
+  apply changeOfRings_acyclic_of_tensor_acyclic φ E h hm K
+  intro F
+  exact tensor_acyclic_of_isKFlat K hK hA F
 
 end SheafOfModules
