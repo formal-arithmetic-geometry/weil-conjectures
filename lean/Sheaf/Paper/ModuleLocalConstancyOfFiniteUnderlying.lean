@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Sites.Adjunction
+import Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlyingOperationCompatibleCover
 import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
@@ -50,6 +51,8 @@ theorem module_localConstancy_of_finite_underlying
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : IsFiniteLocallyConstantEtaleSheafOfSets
       ((sheafForget Y.smallEtaleTopology).obj F)) :
-    IsLocallyConstantSheaf F := by sorry
+    IsLocallyConstantSheaf F := by
+  rcases hF.1 with ⟨𝒰, h𝒰⟩
+  exact module_operationCompatibleCover F _ rfl 𝒰 h𝒰
 
 end AlgebraicGeometry.Scheme

@@ -8543,3 +8543,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: returned deliver/R1/Sheaf.AlgebraicGeometry.AffineQuotientRestrictedIso (reviewer RETURN: (the landing tools, head 8532cc1b3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 16:36 L: merged deliver/A2/Sheaf.Algebra.Homology.ZigzagBoundaryReduction (stage 3; reviewer PASS; after a return; landing 20261012T163610-L-2783757 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/A3/Sheaf.RingTheory.PowerSeriesQuotientVariables (stage 3; reviewer PASS; first push; landing 20261012T163610-L-2783854 (proof); batch 20261012T163610; modules 1; new nodes 0)
+- 16:36 L: merged deliver/B2/Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying (stage 3; reviewer PASS; first push; landing 20261012T163611-L-2783953 (interface); batch 20261012T163610; modules 2; new nodes 1)

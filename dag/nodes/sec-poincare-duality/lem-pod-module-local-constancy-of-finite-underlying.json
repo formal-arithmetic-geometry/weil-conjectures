@@ -15,46 +15,15 @@
  ],
  "proof": [
   {
-   "text": "Trivialize the underlying set sheaf on an etale cover. On each nonempty member choose a geometric point. Its stalk identifies the constant value with a finite set, by the finite-stalk hypothesis. On an empty member every sheaf is the unique sheaf; retain it separately and use the zero module later.",
+   "text": "Apply the finite operation refinement theorem, then package its cover and constancy witnesses as a LocallyConstantDatum.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-etale-site"
+    "lem-pod-module-local-constancy-of-finite-underlying-operation-compatible-cover"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects"
-   }
-  },
-  {
-   "text": "Trivialize products using the same finite constant set. Addition has source the square of that set, negation and each scalar multiplication have that set as source, and zero has singleton source. For each element of any of these finite sources, its image is a section of the constant target. Sheafification of a constant presheaf is locally represented by constant sections, so an etale refinement makes that image one specified constant section. Take successive fiber-product refinements over all source elements and all operations. There are finitely many such choices because the sources and the coefficient ring are finite. This gives a covering on each member on which every operation is induced by a function of finite constant sets, the finite-source argument of 093S (1).",
-   "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects"
-   }
-  },
-  {
-   "text": "On a nonempty refined member, evaluate the equations of module operations at a geometric point. The constant-sheaf fiber is its value, so addition, zero, negation and scalar multiplication on that value satisfy exactly the left-module axioms. Transporting the original underlying-set trivialization identifies the module sheaf with the constant sheaf of this module: its section maps preserve addition and scalar multiplication, their inverses do too, and naturality is inherited. On an empty refined member use the constant zero module. Composing the refined covers gives a LocallyConstantDatum of the original module sheaf. No finiteness of the module constant models is asserted in the conclusion.",
-   "uses": [
-    "def-constructible-locally-constant"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-constructible-locally-constant",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site"
+  "lem-pod-module-local-constancy-of-finite-underlying-operation-compatible-cover"
  ],
  "proof_origin": {
   "by": "agent",
@@ -130,11 +99,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-6fb62",
-  "group": "H3",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T150952-L-2230666",
+  "landing": "20261012T163611-L-2783953",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with both nodes, unchanged existing signatures and definitions, the DAG route, report, and Stacks 0DV5/093S; both modules and both direct importers compile cleanly, and axiom checks show only permitted axioms plus sorryAx from the named remaining theorem."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

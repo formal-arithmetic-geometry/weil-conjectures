@@ -1,0 +1,104 @@
+{
+ "id": "lem-pod-module-local-constancy-of-finite-underlying-operation-compatible-cover",
+ "kind": "statement",
+ "title": "Operation lifting from an underlying constant trivialization",
+ "statement": "Let Y be a scheme, Λ a finite ring, F a sheaf of left Λ-modules, G the underlying sheaf of sets with hG identifying it with the underlying sheaf of F, and 𝒰 an etale cover on which G is constant. Then F is locally constant as a sheaf of Λ-modules.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DV5 proof of (2)--(3), expanded with Tag 093S (1)"
+ },
+ "proof": [
+  {
+   "text": "Refine the given trivialization successively for addition, zero, negation and scalar multiplication over the finite ring; evaluate the module identities on geometric points and package the resulting constant module sheaves.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DV5 and 093S (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally constant sheaf module operations constant etale cover",
+   "results": "Service unavailable; no result",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite locally constant module sheaf underlying set",
+   "results": "No applicable result",
+   "date": "2026-10-12",
+   "verdict": "no applicable match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstantSheaf module constant",
+   "results": "No applicable result",
+   "date": "2026-10-12",
+   "verdict": "no applicable match"
+  },
+  {
+   "tool": "grep",
+   "query": "module local constancy finite underlying",
+   "results": "No duplicate found",
+   "date": "2026-10-12",
+   "verdict": "no applicable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pod-module-local-constancy-of-finite-underlying",
+   "place": "finite operation refinement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlyingOperationCompatibleCover",
+  "file": "lean/Sheaf/Paper/ModuleLocalConstancyOfFiniteUnderlyingOperationCompatibleCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.module_operationCompatibleCover",
+  "statement": "theorem module_operationCompatibleCover\n    {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (G : Sheaf Y.smallEtaleTopology (Type (u + 1)))\n    (hG : G = (sheafForget Y.smallEtaleTopology).obj F)\n    (𝒰 : Cover.{u} etalePrecoverage Y)\n    (h𝒰 : ∀ i : 𝒰.I₀,\n      (G.over (𝒰.etalePrecoverageToEtale i)).IsConstant\n        (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i))) :\n    IsLocallyConstantSheaf F",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T163611-L-2783953",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T163611-L-2783953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
