@@ -62,6 +62,24 @@ theorem etale_sections_base_field_extension
           (Spec.map (CommRingCat.ofHom (algebraMap k K)))).smallGrothendieckTopology
             @Etale)).unit.app F).hom.app
             (op (Scheme.Etale.mk (𝟙 S)))) := by
-  sorry
+  refine etaleSet_sections_bijective_of_flat_qc_connected_geometricFibres
+    (pullback.fst (S ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ?_ F
+  intro s
+  let L := AlgebraicClosure (S.residueField s)
+  let g : Spec (.of L) ⟶ S :=
+    Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) L)) ≫
+      S.fromSpecResidueField s
+  let a := S ↘ Spec (.of k)
+  let b := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  let φ := (Spec.preimage (g ≫ a)).hom
+  let : Algebra k L := φ.toAlgebra
+  have hg : g ≫ a = Spec.map (CommRingCat.ofHom (algebraMap k L)) := by
+    exact (Spec.map_preimage (g ≫ a)).symm
+  let e := pullbackSymmetry (pullback.fst a b) g ≪≫
+    pullbackRightPullbackFstIso a b g ≪≫
+    pullback.congrHom hg rfl ≪≫ pullbackSpecIso k L K
+  exact e.schemeIsoToHomeo.connectedSpace_iff.mpr
+    (IsSepClosed.field_tensor_unique_minimalPrime k L K).2.2
 
 end AlgebraicGeometry
