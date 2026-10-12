@@ -9223,3 +9223,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/M2/Sheaf.AlgebraicGeometry.DerivedGlobalSectionsAffinizationComparison (stage 3; reviewer PASS; first push; landing 20261012T194124-L-459267 (interface); batch 20261012T194054; modules 2; new nodes 1)
 - 19:41 L: merged deliver/M2/Sheaf.FieldTheory.BrauerScalarDefectTensorSplit (stage 3; reviewer PASS; first push; landing 20261012T194124-L-459378 (interface); batch 20261012T194054; modules 4; new nodes 3)
 - 19:41 L: merged deliver/M2/Sheaf.RingTheory.CompletionFiniteQuotient (stage 3; reviewer PASS; first push; landing 20261012T194124-L-459516 (interface); batch 20261012T194054; modules 2; new nodes 1)
+- 19:41 L: merged deliver/M2/Sheaf.RingTheory.Derivation.DetectNonPthPower (stage 3; reviewer PASS; first push; landing 20261012T194125-L-459635 (proof); batch 20261012T194054; modules 1; new nodes 2)

@@ -37,6 +37,41 @@ universe u v w
 
 namespace Derivation
 
+/-- A fraction-field derivation detecting `f` can be produced from the
+  normalization and differential argument in the blueprint.  This is the
+  field-valued part of that argument; the remaining denominator-clearing
+  step is isolated in `exists_domain_derivation_of_fraction_derivation`.
+(blueprint: lem-weil-pbc-fraction-field-derivation-nonzero)
+Proof: carry out Steps 1--5 of the parent Lemma 07PH proof (complete-local
+quotient, power-series normalization, Noether normalization, and the
+Kähler-differential/p-basis argument) to obtain a derivation of the fraction
+field nonzero on the chosen element. -/
+theorem exists_fraction_field_derivation_of_not_pth_power
+    (p : ℕ) [Fact p.Prime]
+    (B : Type u) [CommRing B] [IsDomain B] [CharP B p]
+    (M : Type v) [Field M] [Algebra B M] [IsFractionRing B M]
+    (R₀ : Type w) [CommRing R₀] [IsNoetherianRing R₀] [IsLocalRing R₀]
+    [IsAdicComplete (IsLocalRing.maximalIdeal R₀) R₀]
+    [Algebra R₀ B] [Algebra.FiniteType R₀ B]
+    (f : B) (hf : ¬ ∃ x : M, x ^ p = algebraMap B M f) :
+    ∃ D : Derivation ℤ M M, D (algebraMap B M f) ≠ 0 := by
+  sorry
+
+/-- Denominator clearing for a finite type domain.
+(blueprint: lem-weil-pbc-domain-derivation-from-fraction)
+Proof: multiply the fraction-field derivation by the product of denominators
+of its values on finite module generators, as in Step 6 of Lemma 07PH. -/
+theorem exists_domain_derivation_of_fraction_derivation
+    (p : ℕ) [Fact p.Prime]
+    (B : Type u) [CommRing B] [IsDomain B] [CharP B p]
+    (M : Type v) [Field M] [Algebra B M] [IsFractionRing B M]
+    (R₀ : Type w) [CommRing R₀] [IsNoetherianRing R₀] [IsLocalRing R₀]
+    [IsAdicComplete (IsLocalRing.maximalIdeal R₀) R₀]
+    [Algebra R₀ B] [Algebra.FiniteType R₀ B]
+    (f : B) (D : Derivation ℤ M M) (hD : D (algebraMap B M f) ≠ 0) :
+    ∃ D' : Derivation ℤ B B, D' f ≠ 0 := by
+  sorry
+
 /-- Stacks Project, More on Algebra, Lemma 07PH (`lemma-find-D`).
 (blueprint: lem-weil-pbc-derivation-nonzero-on-non-pth-power)
 A non-pth-power in the fraction field of a characteristic-p domain of finite type over a
@@ -81,6 +116,8 @@ theorem exists_apply_ne_zero_of_not_pth_power
     [Algebra R₀ B] [Algebra.FiniteType R₀ B]
     (f : B) (hf : ¬ ∃ x : M, x ^ p = algebraMap B M f) :
     ∃ D : Derivation ℤ B B, D f ≠ 0 := by
-  sorry
+  obtain ⟨D, hD⟩ := exists_fraction_field_derivation_of_not_pth_power
+    p B M R₀ f hf
+  exact exists_domain_derivation_of_fraction_derivation p B M R₀ f D hD
 
 end Derivation
