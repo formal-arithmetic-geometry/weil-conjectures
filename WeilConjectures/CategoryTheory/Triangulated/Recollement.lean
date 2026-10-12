@@ -64,7 +64,7 @@ lemma Adjunction.isIso_mateEquiv_app (adj : i ⊣ G) (adj' : i' ⊣ G') (hi' : i
     rw [← hi'.map_preimage (α.app (G.obj K) ≫ f.hom)]
     congr 1
     apply (adj'.homEquiv _ _).symm.injective
-    simp only [Adjunction.homEquiv_counit, Functor.map_preimage, Category.assoc, hf]
+    simp only [Adjunction.homEquiv_counit, hi'.map_preimage, Category.assoc, hf]
     exact mateEquiv_counit adj adj' α K
   have : IsIso (i'.map ((mateEquiv adj adj' α).natTrans.app K)) := by
     rw [h]
