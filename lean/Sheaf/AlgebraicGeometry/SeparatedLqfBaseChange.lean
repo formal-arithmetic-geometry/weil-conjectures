@@ -12,7 +12,6 @@ import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
 import Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
-import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Base change of separated and locally quasi-finite morphisms
@@ -55,6 +54,22 @@ theorem separated_lqf_base_change {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' �
     (IsSeparated f → IsSeparated (pullback.snd f g)) ∧
       (Scheme.Hom.IsLocallyQuasiFinite f →
         Scheme.Hom.IsLocallyQuasiFinite (pullback.snd f g)) := by
-  sorry
+  constructor
+  · intro hf
+    have : IsSeparated f := hf
+    infer_instance
+  · intro hf
+    have : LocallyOfFiniteType f := f.locallyOfFiniteType_of_isLocallyQuasiFinite hf
+    intro x'
+    have hisolated := isolated_fiber_point_base_change f g x'
+      (f.quasiFiniteAtPoint_isolated_in_fiber (pullback.fst f g x')
+        (hf (pullback.fst f g x'))).1
+    obtain ⟨V, hV, hxV, _⟩ := exists_isAffineOpen_mem_and_subset
+      (show (pullback.snd f g) x' ∈ (⊤ : S'.Opens) from trivial)
+    obtain ⟨U, hU, hxU, hUV⟩ := exists_isAffineOpen_mem_and_subset
+      (show x' ∈ (pullback.snd f g) ⁻¹ᵁ V from hxV)
+    refine ⟨U, hxU, hU, V, hV, hUV, ?_⟩
+    exact (pullback.snd f g).isQuasiFiniteAtPrime_of_isOpen_singleton_asFiber
+      x' hisolated U V hU hV hxU hUV
 
 end AlgebraicGeometry

@@ -6915,3 +6915,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/K3/Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution (stage 3; reviewer PASS; first push; landing 20261012T085301-L-23938 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/K3/Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjTwistInverseTransport (stage 3; reviewer PASS; first push; landing 20261012T085301-L-24046 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/K3/Sheaf.AlgebraicGeometry.PullbackSectionsDiagram (stage 3; reviewer PASS; first push; landing 20261012T085301-L-24142 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085302-L-24243 (proof); batch 20261012T085205; modules 1; new nodes 0)
