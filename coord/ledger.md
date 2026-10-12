@@ -7606,3 +7606,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 19:58 L: (the batch landing, head 02772da77) the global build refused the delivery; it was taken out of the library again (landing 20261012T115053-L-879077 reverted) and the item is yours t
 - 12:00 L: returned deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero (reviewer RETURN: (reviewer X-34936, head 349367e6f) 6: Update dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-limit-affine-eventual-z)
 - 12:01 L: returned deliver/Q3/WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf (reviewer RETURN: (reviewer X-f41e9, head f41e93b45) Stage-3 mechanical finding (d): `coord/changes/cohomology-presheaf-local-caching.md` )
+- 12:01 L: returned deliver/S2/Sheaf.Paper.DerivedTotalResolutionQuasiIso (reviewer RETURN: (reviewer X-67169, head 67169ba3f) B2: Both new node statements are not self-contained. In dag/nodes/sec-picard-framewor)
