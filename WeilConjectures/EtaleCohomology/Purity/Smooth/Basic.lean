@@ -145,10 +145,7 @@ theorem nonempty_iso_sectionInvariant_diagonal :
       dualizingComplex (ModuleCat.{u + 1} Λ) f) := by
   obtain ⟨e⟩ := nonempty_iso_dualizingComplex_pullbackFst Λ (d := d) f
   exact ⟨(L((pullback.diagonal f)^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫
-    ((leftDerivedUpperStarComp _ (pullback.diagonal f) (pullback.snd f f) (𝟙 X)
-      (pullback.diagonal_snd f).symm).app _).symm ≪≫
-    (Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId _ X) ≪≫
-      (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _).app _⟩
+    (leftDerivedUpperStarCompSectionIso _ _ _ (pullback.diagonal_snd f)).app _⟩
 
 /-- Blueprint `sk-thm-smooth-purity`: Finite-coefficient smooth purity
 

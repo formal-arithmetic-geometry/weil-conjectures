@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 
 /-!
@@ -20,6 +20,9 @@ of the underived pullbacks, read through the counits of the derived pullbacks.
 
 ## Main statements
 
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarId`: `L(𝟙 X)^* ≅ 𝟭`.
+- `AlgebraicGeometry.Etale.leftDerivedUpperStarCompSectionIso`: `Lp^* ⋙ Ls^* ≅ 𝟭` for
+  `s ≫ p = 𝟙`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarComp_id_left_hom_app`
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarComp_id_right_hom_app`
 - `AlgebraicGeometry.Etale.leftDerivedUpperStar_map_comp_compSectionIso`: restricting along a
@@ -46,6 +49,18 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 namespace Etale
 
 open DerivedCategory
+
+/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on étale sheaves. -/
+noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
+  -- the derived functor of `Etale.upperStarId`, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`
+  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId A X) ≪≫
+    (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- For a section `s` of `p`, pulling back along `p` and then along `s` is the identity:
+`Lp^* ⋙ Ls^* ≅ L(s ≫ p)^* = L(𝟙)^* ≅ 𝟭`. -/
+noncomputable def leftDerivedUpperStarCompSectionIso {X Y : Scheme.{u}} (s : Y ⟶ X) (p : X ⟶ Y)
+    (h : s ≫ p = 𝟙 Y) : L((p)^*[A]) ⋙ L((s)^*[A]) ≅ 𝟭 _ :=
+  (leftDerivedUpperStarComp A s p (𝟙 Y) h.symm).symm ≪≫ leftDerivedUpperStarId A Y
 
 variable {X : Scheme.{u}}
 
@@ -197,7 +212,16 @@ lemma leftDerivedUpperStarComp_id_left_hom_app (p : Y ⟶ X)
 /-- **Sections commute with base change.** Let `a : P ⟶ B` have a section `i`, let `a' : P' ⟶ B'`
 have a section `i'`, and let `v : P' ⟶ P` lie over `u : B' ⟶ B` and carry `i'` to `i`. Then the
 two identifications `Li'^* Lv^* La^* C ≅ Lu^* C` — through `Lv^* La^* ≅ La'^* Lu^*` and
-`Li'^* La'^* ≅ 𝟭`, or through `Li'^* Lv^* ≅ Lu^* Li^*` and `Li^* La^* ≅ 𝟭` — agree. -/
+`Li'^* La'^* ≅ 𝟭`, or through `Li'^* Lv^* ≅ Lu^* Li^*` and `Li^* La^* ≅ 𝟭` — agree, i.e. the
+square
+```
+Li'^* Lv^* La^* C --(Lv^* La^* ≅ La'^* Lu^*)--> Li'^* La'^* Lu^* C
+        |                                               |
+(Li'^* Lv^* ≅ Lu^* Li^*)                         (Li'^* La'^* ≅ 𝟭)
+        v                                               v
+Lu^* Li^* La^* C ------------(Li^* La^* ≅ 𝟭)-----------> Lu^* C
+```
+commutes. -/
 lemma leftDerivedUpperStar_map_comp_compSectionIso {B B' P P' : Scheme.{u}} (u : B' ⟶ B)
     (a : P ⟶ B) (a' : P' ⟶ B') (v : P' ⟶ P) (i : B ⟶ P) (i' : B' ⟶ P')
     (hv : v ≫ a = a' ≫ u) (hi : i' ≫ v = u ≫ i) (h : i ≫ a = 𝟙 B) (h' : i' ≫ a' = 𝟙 B')

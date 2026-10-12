@@ -20,21 +20,15 @@ outside degree `r` (`AlgebraicGeometry.Etale.isZero_homology_of_leftDerivedUpper
 Together with `DerivedCategory.nonempty_iso_singleFunctor_obj_homologyFunctor_obj` this is the
 blueprint lemma `lem-pur-concentrated-complex-shift`.
 
-The file also records the identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback, and the
-resulting identification `Ls^* ⋙ Lp^* ≅ 𝟭` for a section `s` of `p`.
-
 ## Main statements
 
-- `AlgebraicGeometry.Etale.leftDerivedUpperStarId`: `L(𝟙 X)^* ≅ 𝟭`.
-- `AlgebraicGeometry.Etale.leftDerivedUpperStarCompSectionIso`: `Lp^* ⋙ Ls^* ≅ 𝟭` for
-  `s ≫ p = 𝟙`.
 - `AlgebraicGeometry.Etale.isZero_homology_of_leftDerivedUpperStar_iso`,
   `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_homology_of_leftDerivedUpperStar_iso`
 -/
 
 @[expose] public section
 
-universe u u'
+universe u
 
 open CategoryTheory Limits MonoidalCategory
 
@@ -45,26 +39,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace Etale
-
-section
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-
-/-- The identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on étale sheaves. -/
-noncomputable def leftDerivedUpperStarId (X : Scheme.{u}) : L((𝟙 X)^*[A]) ≅ 𝟭 _ :=
-  -- the derived functor of `Etale.upperStarId`, followed by `L(𝟭) ≅ D(𝟭) ≅ 𝟭`
-  Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId A X) ≪≫
-    (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
-
-/-- For a section `s` of `p`, pulling back along `p` and then along `s` is the identity:
-`Lp^* ⋙ Ls^* ≅ L(s ≫ p)^* = L(𝟙)^* ≅ 𝟭`. -/
-noncomputable def leftDerivedUpperStarCompSectionIso {X Y : Scheme.{u}} (s : Y ⟶ X) (p : X ⟶ Y)
-    (h : s ≫ p = 𝟙 Y) : L((p)^*[A]) ⋙ L((s)^*[A]) ≅ 𝟭 _ :=
-  (leftDerivedUpperStarComp A s p (𝟙 Y) h.symm).symm ≪≫ leftDerivedUpperStarId A Y
-
-end
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {U T : Scheme.{u}} (u : U ⟶ T) [Etale u] [Surjective u]
   {K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {r : ℤ}

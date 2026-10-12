@@ -10,9 +10,9 @@ public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
-public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!

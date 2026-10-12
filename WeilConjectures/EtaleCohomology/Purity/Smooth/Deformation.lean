@@ -632,6 +632,10 @@ Existence: `Ψ` is `i₀^*` of the comparison `κ` normalized against `θ₁`, w
 `B'` is read off from `e` by the uniqueness of `prop-pur-dnc-family-constancy` (3).
 Uniqueness: `𝒞(g, s)` is invertible and `Lu^*` is faithful on its automorphisms
 (`lem-pur-lisse-rank-one-aut`). -/
+-- TODO(unify): thm-pur-dnc-invariance — the blueprint also asks that `Ψ` be compatible with
+-- étale localization and arbitrary base change in `B`. Only the family comparison `κ` has this
+-- (`Scheme.Hom.DeformationToNormalConeData.leftDerivedUpperStar_familyObject_iso_baseChange`);
+-- stating it for `Ψ` needs the base change of the deformation datum `D` along `B' ⟶ B`.
 theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d : ℕ)
     (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V)
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]

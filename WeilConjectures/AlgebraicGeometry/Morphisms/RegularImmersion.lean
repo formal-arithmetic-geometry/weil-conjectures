@@ -101,9 +101,10 @@ yet be constructed; it is taken as a hypothesis wherever a normal cone is needed
 -- TODO(unify): sk-def-purity-conv — construct the datum for every regular immersion.
 -- TODO: nothing ties the datum to `i`: any smooth rank-`c` projection with a closed zero section
 -- is accepted, which makes the existence of a deformation to the normal cone
--- (`nonempty_deformationToNormalConeData`) false as stated. Smooth purity
--- (`nonempty_iso_dualizingComplex_twistShift`) uses this to pass the trivial bundle for the
--- diagonal; pin the datum down and undo that shortcut.
+-- (`nonempty_deformationToNormalConeData`) false as stated. Pin the datum down. Smooth purity
+-- (`nonempty_iso_dualizingComplex_twistShift`) is `sorry` until the normal bundle of the
+-- diagonal is constructed as such a datum; its proof then goes through
+-- `nonempty_iso_sectionInvariant_normalCone`.
 structure NormalConeData (c : ℕ) (i : Z ⟶ X) where
   /-- The normal cone `N_{Z/X}`. -/
   scheme : Scheme.{u}
