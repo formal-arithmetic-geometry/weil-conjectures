@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-filtered-cohomology-image-presentation",
+ "kind": "statement",
+ "title": "Graded cohomology image cycle presentation",
+ "statement": "Let C be an abelian category [def-sp-abelian], K an integer-indexed cochain complex, L a decreasing filtration by subcomplexes [def-sp-filtration], and p,n integers. Put A=L.complexStep p n, A'=L.complexStep (p+1) n as in [def-sp-filtered-complex-subquotients], Z=ker(K.d n (n+1)) as the pullback of bottom, and B=im(K.d (n-1) n). Let I_n be the cohomology image filtration defined in [lem-sp-filtered-cohomology-image-finite]. The graded object gr^p I_n is isomorphic to the cokernel of the arrow of the pullback, along (A intersection Z).arrow, of (A intersection B)+(A' intersection Z). This is the quotient (A intersection Z)/((A intersection B)+(A' intersection Z)), with no finiteness or outer-tail hypothesis.",
+ "source": {
+  "document": "Stacks Project, Homology, https://stacks.math.columbia.edu/tag/012Q",
+  "place": "Tag 012Q, final displayed quotient calculation; Equation 12.24.5.2 in Tag 012P"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-filtered-cohomology-image-finite"
+ ],
+ "proof": [
+  {
+   "text": "The cycles of L^p K identify with A intersection Z under its degree-n inclusion. Functoriality of homology identifies the image of their cycle projection in H^n(K) with I_n^p. The cycle projection onto H^n(L^p K) is epic, so its composite has the same image as the induced cohomology map.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-cohomology-image-finite",
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map from A intersection Z onto I_n^p has kernel A intersection B, since vanishing in ambient cohomology is precisely being an ambient boundary. The next filtration image I_n^(p+1) is similarly the image of A′ intersection Z. Thus the inverse image of that next image in A intersection Z is (A intersection B)+(A′ intersection Z). This sum is contained in A intersection Z by d squared zero and antitonicity, so pulling it back along the numerator arrow gives that kernel.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration",
+    "lem-sp-filtered-cohomology-image-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the epic cycle map with the projection I_n^p onto its quotient by I_n^(p+1). The first isomorphism theorem identifies the cokernel of its kernel with that quotient, which is gradedPiece p of the image filtration.",
+   "uses": [
+    "def-sp-abelian",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-cohomology-image-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homology",
+  "place": "Tag 012Q final quotient calculation, Equation 12.24.5.2; categorical expansion of step 3 of lem-sp-filtered-stable-subquotient-at-bounds"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quotient of two images of subobjects in an abelian category and graded image filtration on cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graded image of cohomology of nested subcomplexes equals the quotient of the cycles in the larger subcomplex by the sum of ambient boundaries and the cycles in the smaller subcomplex",
+   "results": "CochainComplex.HomComplex.leftHomologyData'_π, CochainComplex.HomComplex.leftHomologyData', groupCohomology.isoCocycles₁_hom_comp_i, groupCohomology.isoCocycles₁_inv_comp_iCocycles, groupCohomology.isoCocycles₂_hom_comp_i, CochainComplex.HomComplex.leftHomologyData'_i, groupCohomology.mapCocycles₁_comp_i, groupCohomology.isoCocycles₂_inv_comp_iCocycles",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(sup|inf)|(sup|inf).*cokernel",
+   "results": "Mathlib/Algebra/Module/LinearMap/Index.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/Algebra/Module/Presentation/RestrictScalars.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Analysis/Normed/Group/SemiNormedGrp/Kernels.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Mathlib ShortComplex.Abelian and project Abelian.Subobject; blueprint search cycle quotient, cohomology image filtration, 012Q",
+   "results": "No duplicate blueprint statement. Source library has noetherIso and cokernelOfLEIsoExistsObj; Mathlib has coimageIsoImage and homology kernel/cokernel APIs, but no normalized filtered quotient or graded cohomology image presentation.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredStableSubquotient",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Stationary cycle/boundary quotient identification: graded cohomology image presentation",
+   "via": [
+    "lem-sp-filtered-stable-subquotient-at-bounds",
+    "lem-sp-degreewise-filtered-stable-quotient",
+    "lem-sp-cartan-eilenberg-second-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredCohomologyImagePresentation",
+  "file": "lean/Sheaf/CategoryTheory/FilteredCohomologyImagePresentation.lean",
+  "declaration": "CategoryTheory.DecreasingFiltration.cohomologyImage_graded_presentation",
+  "statement": "theorem cohomologyImage_graded_presentation\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ) :\n  let A := L.complexStep p n\n  let A' := L.complexStep (p + 1) n\n  let Z := (Subobject.pullback (K.d n (n + 1))).obj ⊥\n  let B := imageSubobject (K.d (n - 1) n)\n  Nonempty ((L.cohomologyImage n).gradedPiece p ≅\n    cokernel ((Subobject.pullback (A ⊓ Z).arrow).obj\n      ((A ⊓ B) ⊔ (A' ⊓ Z))).arrow)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T194129-L-461225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T194129-L-461225",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
