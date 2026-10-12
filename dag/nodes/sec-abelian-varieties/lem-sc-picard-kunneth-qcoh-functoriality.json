@@ -17,36 +17,39 @@
  ],
  "proof": [
   {
-   "text": "Functoriality. Let u:X'\\to X and v:Y'\\to Y be morphisms of schemes over k and w = u x_k v : X' x_k Y' \\to X x_k Y, so that pr_1 o w = u o pr_1' and pr_2 o w = v o pr_2' (def-pc-fibre-product); identify w^*(pr_1^*F tensor pr_2^*G) with pr_1'^*u^*F tensor pr_2'^*v^*G by lem-pc-module-pullback-identity-composition and lem-weil-pbc-module-pullback-tensor. The claim is w^*(pr_1^*a cup pr_2^*b) = pr_1'^*u^*a cup pr_2'^*v^*b for a in H^p(X,F), b in H^q(Y,G). With U, V, W as in Step 1, a = c_U(alpha) and b = c_V(beta) for Cech cocycles alpha, beta (lem-sc-cech-comparison-map-iso-affine). Use the covers u^{-1}U, v^{-1}V and W' = w^{-1}W, which refines pr_1'^{-1}u^{-1}U and pr_2'^{-1}v^{-1}V by (i,j) \\mapsto i, j since w^{-1}(U_i x V_j) is contained in w^{-1}pr_1^{-1}U_i = pr_1'^{-1}u^{-1}U_i. By lem-sc-picard-cech-cup-pullback-compat (a), each pullback in the claim is computed by the refinement cochain map, whose components are pullbacks of sections; by lem-pc-module-pullback-identity-composition the cochains obtained from alpha along w after pr_1 and along pr_1' after u coincide (both are pullback of the components along pr_1 o w = u o pr_1'), and likewise for beta. By lem-weil-pbc-module-pullback-tensor (w^*(s tensor t) = w^*s tensor w^*t) the refinement cochain map along w sends the signed Cech cup product of two cochains to the cup product of their images. By lem-sc-picard-cech-cup-pullback-compat (b) the Cech cup products induce the sheaf cup products on X x_k Y and on X' x_k Y'. Hence both sides of the claim are c_{W'} of the same cochain, which proves the functoriality clause. The scalar Ext comparison transports the normalized sectionwise pullback unit and tensor coefficient map to scalarCohomologyPullback and scalarCohomologyCup; evaluate on injective-resolution representatives to identify these operations with the Cech formulas. No Cech comparison isomorphism is needed on the arbitrary schemes X' or Y': the pullback comparison square for the inverse-image covers suffices.",
+   "text": "Unfold externalCup as the cup product of the projection pullbacks, and externalCupPullbackIso as the tensor-pullback comparison followed by the tensor of the two scalarPullbackSquareIso comparisons. Derive that w is over k from h1 and hu by associativity of composition.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-pc-module-pullback-identity-composition",
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-sc-cech-comparison-map-iso-affine",
-    "lem-sc-picard-affine-diagonal-intersections",
-    "lem-sc-picard-cech-cup-pullback-compat",
     "def-sc-field-linear-module-cohomology-operations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties, Lemma varieties-lemma-kunneth, definition of the map through pullback and cup product (Tags 01FD, 07MB)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply scalarCup_pullback_coefficient_naturality to w and the two coefficient morphisms given by the square comparisons. This changes pullback of the cup product to the cup of the coefficient-adjusted pullbacks.",
+   "uses": [
+    "lem-sc-scalar-cup-pullback-coefficient-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalarCohomologyPullback_square to the first projection square using h1 and hu, and to the second using h2 and hv. The structure-map equality for the second projections is the fibre-product condition. The two factors become the projection pullbacks of u* a and v* b, whose cup is the required external cup. These are the two explicit rewrites in the Lean proof.",
+   "uses": [
+    "lem-sc-scalar-cohomology-pullback-square",
+    "def-sc-field-linear-module-cohomology-operations"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
   "def-sc-field-linear-module-cohomology-operations",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-sc-cech-comparison-map-iso-affine",
-  "lem-sc-picard-affine-diagonal-intersections",
-  "lem-sc-picard-cech-cup-pullback-compat",
-  "lem-weil-pbc-module-pullback-tensor"
+  "lem-sc-scalar-cup-pullback-coefficient-naturality",
+  "lem-sc-scalar-cohomology-pullback-square"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "S4",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties, Lemma varieties-lemma-kunneth (Lemma Kunneth)"
+  "place": "Tag 0BED; functoriality Step 8 decomposed into cup naturality and the two projection-square identities."
  },
  "mathlib_searches": [
   {
@@ -126,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T194157-L-470577",
+  "landing": "20261012T234224-L-2126777",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

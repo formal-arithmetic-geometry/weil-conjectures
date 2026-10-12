@@ -1,0 +1,149 @@
+{
+ "id": "lem-sc-scalar-cup-pullback-coefficient-naturality",
+ "kind": "statement",
+ "title": "Scalar cup product compatibility with pullback and coefficient maps",
+ "statement": "Let $k$ be a field [def-weil-field], $X,Y$ schemes [def-pc-scheme] with structure morphisms $f:X\\to\\operatorname{Spec}(k)$ and $g:Y\\to\\operatorname{Spec}(k)$, and $t:Y\\to X$ satisfy $f\\circ t=g$. Let $F,G$ be module sheaves on $X$ and $F',G'$ module sheaves on $Y$, using the scalar cohomology and cup operations of [def-sc-field-linear-module-cohomology-operations]. Let $\\varphi:t^*F\\to F'$ and $\\psi:t^*G\\to G'$ be module morphisms, with tensor pullback as in [def-pc-module-pullback]. Write $\\tau:t^*(F\\otimes G)\\to t^*F\\otimes t^*G$ for the hom of the normalized tensor-pullback comparison of [def-sc-field-linear-module-cohomology-operations]. For $p,q\\in\\mathbb N$, $a\\in H_k^p(X,F)$ and $b\\in H_k^q(X,G)$, the equality is $H_k^{p+q}((\\varphi\\otimes\\psi)\\circ\\tau)(t^*(a\\smile b))=H_k^p(\\varphi)(t^*a)\\smile H_k^q(\\psi)(t^*b)$. The coefficient maps are the maps of the recorded module-cohomology derived functor; there are no compactness, affine-diagonal or quasi-coherence hypotheses.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01FD (lemma-functoriality-cech), 07MB (equation-needs-signs), 0FKV (lemma-diagrams-commute); tensor-section argument of lem-sc-picard-kunneth-qcoh Step 8. Official source https://stacks.math.columbia.edu/tag/0FKV"
+ },
+ "proof": [
+  {
+   "text": "Use the injective-resolution comparison defining scalarCohomologyExtEquiv.\nEvaluation of a morphism from the structure sheaf at 1 identifies its Hom complex\nwith the sections complex. Restriction to k and precomposition by scalarUnitMorphism\nidentify this with Ext from the constant k-sheaf, so this comparison is natural in\ncoefficients. The scalarPullbackCoefficient is adjoint to the normalized module\npullback unit. The resolution diagram of Tag 01FD therefore computes the same\npullback as scalarCohomologyPullback. The Yoneda tensor pairing defining scalarExtCup\nis represented by the signed resolution tensor pairing of Tag 07MB. Tag 0FKV\nidentifies that pairing with the cohomology cup product after augmentation to the\nordinary tensor. On sections, pullback of a tensor is the tensor of the pullbacks;\nthe tensor-pullback comparison has this normalization. Applying phi and psi gives\nthe tensor of their images. These equalities commute with the differentials and\naugmentations, and the sign is unchanged because the degrees p and q are unchanged.\nTransport the resulting equality of classes back through scalarCohomologyExtEquiv.\nNaturality in coefficients identifies the final coefficient map with the recorded\nderived-functor map scalarCohomologyMap, giving exactly the displayed composite.\nThis uses no affine-cover comparison inverse. At degree zero it is the section\ntensor identity; a zero coefficient or an empty scheme gives zero on both sides.",
+   "uses": [
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology Tags 01FD (lemma-functoriality-cech), 07MB (equation-needs-signs), 0FKV (lemma-diagrams-commute); tensor-section argument of lem-sc-picard-kunneth-qcoh Step 8. Official source https://stacks.math.columbia.edu/tag/0FKV"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S4",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology Tags 01FD (lemma-functoriality-cech), 07MB (equation-needs-signs), 0FKV (lemma-diagrams-commute); tensor-section argument of lem-sc-picard-kunneth-qcoh Step 8. Official source https://stacks.math.columbia.edu/tag/0FKV",
+  "note": "Source argument specialized to the recorded scalar Ext comparisons; normalization glue written by S4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology cup product naturality under pullback and coefficient morphisms",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology cup product is natural under pullback and composition of scheme morphisms",
+   "results": "Eight scheme pullback-composition and section-map hits, none stating scalar cohomology cup or cohomology square compatibility.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.scalarCohomologyPullback",
+   "results": "Unknown identifier: this is a project definition, not a Mathlib declaration.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCohomology(Cup|Pullback)|scalarPullbackSquareIso",
+   "results": "No Mathlib hits. Searches of both library roots and synchronized Sheaf sources find only the defining module and the Kunneth declarations, with no generic compatibility lemma.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext Yoneda tensor product functorial exact functor change coefficients",
+   "results": "Eight hits: Ext functors and mapExactFunctor/linear-map declarations. None supplies the normalized scheme-module scalar cup or square identity.",
+   "date": "2026-10-13",
+   "verdict": "no matching scalar compatibility theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "Twelve hits, including mapExactFunctor_comp, comp_mapExactFunctor and mapExactFunctor_comp_mk₀_natTransApp. These give generic Ext transport algebra, but not the coefficient, unit and module-derived-functor comparison equalities required here.",
+   "date": "2026-10-13",
+   "verdict": "useful lower algebra; no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor.*comp|comp.*mapExactFunctor|leftAdjointUniq; scalarCohomologyPullback|scalarCohomologyCup|scalarPullbackSquareIso|scalarExtCup in both Lean roots",
+   "results": "Mathlib supplies Ext composition and adjunction uniqueness. Project MayerVietorisExtFunctorSquare and EtaleCohomologyPullbackFunctorial handle different coefficients and units. No existing generic scalar compatibility statement.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate; closing either hole requires additional normalization and comparison proofs"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardKunnethQcohFunctoriality",
+  "date": "2026-10-13",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof, Kunneth pullback functoriality: pullback and coefficient maps carry the cup product to the cup of the two images",
+   "via": [
+    "lem-sc-picard-kunneth-qcoh-functoriality",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ScalarCupPullbackCoefficientNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarCupPullbackCoefficientNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scalarCup_pullback_coefficient_naturality",
+  "statement": "theorem scalarCup_pullback_coefficient_naturality\n    (k : Type w) [Field k] (X Y : Scheme.{w})\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    (t : Y ⟶ X) (ht : t ≫ f = g) (F G : X.Modules) (F' G' : Y.Modules)\n    (φ : (tensorPullback t).obj F ⟶ F') (ψ : (tensorPullback t).obj G ⟶ G')\n    (p q : ℕ) (a : scalarCohomology f F p) (b : scalarCohomology f G q) :\n    scalarCohomologyMap g\n        (((Classical.choose (module_pullback_tensor t)) F G).hom ≫\n          (@id (((tensorPullback t).obj F ⊗ (tensorPullback t).obj G) ⟶ (F' ⊗ G'))\n            (φ ⊗ₘ ψ))) (p + q)\n        (scalarCohomologyPullback f g t ht (@id X.Modules (F ⊗ G)) (p + q)\n          (scalarCohomologyCup f F G p q a b)) =\n      scalarCohomologyCup g F' G' p q\n        (scalarCohomologyMap g φ p (scalarCohomologyPullback f g t ht F p a))\n        (scalarCohomologyMap g ψ q (scalarCohomologyPullback f g t ht G q b))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261012T234224-L-2126777",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261012T234224-L-2126777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
