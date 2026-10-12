@@ -1,0 +1,113 @@
+{
+ "id": "lem-exc-etale-lift-sepclosed-base",
+ "kind": "statement",
+ "title": "Etale lifts descend along an extension of a separably closed field",
+ "statement": "Let f : X -> S be an etale morphism of schemes [def-weil-etale-morphism], L a separably closed field [def-pc-separably-closed], Omega a field, and beta : L -> Omega a field embedding. Let tau : Spec L -> S and g : Spec Omega -> X satisfy g followed by f = Spec(beta) followed by tau. Then there exists gprime : Spec L -> X such that Spec(beta) followed by gprime = g and gprime followed by f = tau.",
+ "source": {
+  "document": "WeilConjectures/AlgebraicGeometry/EtaleFiniteRefinement/GeometricLifts.lean",
+  "place": "Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed; proved source-library theorem implementing residue-field descent (Stacks 03QW, paragraph before Theorem 59.56.3)"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-pc-separably-closed",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "proof": [
+  {
+   "text": "Factor g and tau through the residue fields of their image points using lem-weil-pbc-morphism-from-spec-field. The compatibility with f identifies the image of g with the image of tau and gives compatible residue-field embeddings. The residue-field extension induced by the etale f is separable, by lem-weil-pbc-etale-residue-field-extension-separable. Every image element of this separable extension has a separable minimal polynomial. Its image polynomial splits over L, and its root in Omega belongs to the image of beta (Polynomial.Splits.mem_range_of_isRoot). Thus the residue-field embedding into Omega factors through beta; the proved RingHom.exists_comp_eq_of_isSepClosed constructs this factorization as a ring homomorphism. Compose its Spec map with the residue-field inclusion into X to obtain gprime. Residue-field naturality and the factorization identity prove the first equality. Injectivity of beta cancels it in the compatible residue-field diagram, proving the equality over S. This is exactly the complete proof of the existing Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-etale-residue-field-extension-separable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-etale-residue-field-extension-separable"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "WeilConjectures/AlgebraicGeometry/EtaleFiniteRefinement/GeometricLifts.lean",
+  "place": "Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed; proved source-library theorem implementing residue-field descent (Stacks 03QW, paragraph before Theorem 59.56.3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale scheme over a separably closed field has the same rational points after extending the field",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod and Algebra.FormallyEtale.iff_isSeparable; no exact scheme lift theorem in Mathlib.",
+   "date": "2026-10-12",
+   "verdict": "pieces only; exact theorem in source library"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, Algebra.IsSeparable",
+   "results": "IsSepClosed.algebraMap_bijective, algebraMap_surjective and lift; pieces only.",
+   "date": "2026-10-12",
+   "verdict": "pieces only"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_SpecMap_comp_eq_of_isSepClosed|EtaleFiniteRefinement.GeometricLifts|SpecMap_comp_injective",
+   "results": "Exact proved source theorem in GeometricLifts.lean; Scheme.SpecMap_comp_injective in the proved source ResidueField.lean. Existing stalk comparison already uses these results, but no node records the exact lift theorem.",
+   "date": "2026-10-12",
+   "verdict": "exact source-library match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An etale morphism admits descent of every field valued lift along an extension of a separably closed field",
+   "results": "Service unavailable: Internal Server Error; relied on the other searches and exact source-library reading.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GaloisPointActionCore",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-galois-point-action",
+   "place": "Core action proof: descent of geometric etale lifts to the separable closure",
+   "via": [
+    "lem-exc-galois-point-action-core"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed",
+  "statement": "lemma Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed (f : X ⟶ S) [Etale f] {L Ω : Type u}\n    [Field L] [IsSepClosed L] [Field Ω] (β : CommRingCat.of L ⟶ CommRingCat.of Ω)\n    (τ : Spec (.of L) ⟶ S) (g : Spec (.of Ω) ⟶ X) (hg : g ≫ f = Spec.map β ≫ τ) :\n    ∃ g' : Spec (.of L) ⟶ X, Spec.map β ≫ g' = g ∧ g' ≫ f = τ",
+  "branch": "slopmaster2",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T135313-L-1690902",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T135313-L-1690902",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

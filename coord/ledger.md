@@ -7924,3 +7924,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/R3/Sheaf.Paper.StrictHenselianCohomologyLocallyZero (stage 3; reviewer PASS; first push; landing 20261012T135312-L-1690456 (interface); batch 20261012T135212; modules 3; new nodes 2; change records: coord/changes/strictHenselian_cohomology_locally_zero_commands.md)
 - 13:53 L: merged deliver/S1/Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine (stage 3; reviewer PASS; first push; landing 20261012T135312-L-1690654 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/S1/Sheaf.AlgebraicGeometry.CoherentPseudoCoherent (stage 3; reviewer PASS; first push; landing 20261012T135313-L-1690777 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:53 L: merged deliver/S1/Sheaf.AlgebraicGeometry.GaloisPointActionCore (stage 3; reviewer PASS; first push; landing 20261012T135313-L-1690902 (proof); batch 20261012T135212; modules 1; new nodes 1)

@@ -14,20 +14,38 @@
  },
  "proof": [
   {
-   "text": "The construction extends field automorphisms and acts by precomposition; finite separable residue fields ensure independence and openness.",
+   "text": "Apply the already proved lem-exc-etale-lift-sepclosed-base to each Omega-valued lift along an etale X -> Spec K, with L = Ks and tau = Spec(K -> Ks). The scalar tower identity identifies Spec(Ks -> Omega) followed by tau with Spec(K -> Omega). The lemma gives a Ks-valued lift and both required equalities. This proves surjectivity of precomposition on fibres.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "lem-exc-etale-lift-sepclosed-base"
    ],
    "elementary": false
+  },
+  {
+   "text": "The proved Scheme.SpecMap_comp_injective shows that precomposition with the field embedding Ks -> Omega is injective on scheme morphisms; extensionality of Over morphisms gives injectivity on fibre elements. Naturality is associativity, and these componentwise bijections assemble to a natural isomorphism e.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the Ks action directly: g acts on a lift y by Spec(g) followed by y. Its over-K condition is g.toAlgHom.comp_algebraMap; naturality is associativity. Spec.map_comp and reflexivity prove the unit and multiplication laws. Transport this monoid homomorphism through e by rho(g) = e.inv followed by a(g) followed by e.hom. The inverse identities of e prove the transported monoid laws.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For an Omega lift x put y = e.inv_X(x). The inverse identity gives Spec(Ks -> Omega) followed by y = x. The assumed equality (Ks -> Omega) composed with g = tau composed with (Ks -> Omega), mapped contravariantly through Spec and followed by y, gives the required extension formula. This argument uses no existence or choice of extending automorphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  "lem-exc-etale-lift-sepclosed-base",
+  "lem-weil-pbc-morphism-from-spec-field"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03QW"
+  "place": "Tag 03QW, paragraph before Theorem 59.56.3; S1 implements descent and action transport using the proved Scheme.Hom.exists_SpecMap_comp_eq_of_isSepClosed and Scheme.SpecMap_comp_injective, rather than extending automorphisms."
  },
  "mathlib_searches": [
   {
@@ -97,10 +115,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T110321-L-622579",
-  "kind": "interface",
+  "landing": "20261012T135313-L-1690902",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
