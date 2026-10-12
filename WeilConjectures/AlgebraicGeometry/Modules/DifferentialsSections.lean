@@ -78,51 +78,88 @@ lemma fromSpec_comp_eq_specMap : hU.fromSpec ≫ g = Spec.map (g.specStructureMa
   rw [← IsAffineOpen.SpecMap_appLE_fromSpec g (isAffineOpen_top (Spec R)) hU le_top,
     IsAffineOpen.fromSpec_top, Scheme.isoSpec_Spec_inv, specStructureMap, Spec.map_comp]
 
-/-- The map `Γ(Ω¹_{X/R}, U) → Ω[Γ(X, U)⁄R]` for an affine open `U`, through the sections of
-`Ω¹_{Spec Γ(X, U) / Spec R}`. -/
-noncomputable def sectionsToKaehler (m : Γ(g.relativeDifferentials, U)) :
-    CommRingCat.KaehlerDifferential (g.specStructureMap U) :=
-  (relativeDifferentialsSpecΓIso (g.specStructureMap U)).hom.hom
-    (((g.relativeDifferentialsRestrictIso hU.fromSpec).hom ≫
-      (relativeDifferentialsCongr _ (g.fromSpec_comp_eq_specMap hU)).hom).app ⊤
-      (g.relativeDifferentials.presheaf.map (homOfLE hU.image_fromSpec_top.le).op m))
+/-- Restricting a section of `𝒪_X` over the affine open `U` to `hU.fromSpec ''ᵁ ⊤ = U` and
+transporting it to `Γ(Spec Γ(X, U), ⊤)` is the inverse of `Scheme.ΓSpecIso`. -/
+lemma _root_.AlgebraicGeometry.IsAffineOpen.map_eqToHom_comp_appIso_hom :
+    X.presheaf.map (eqToHom hU.image_fromSpec_top).op ≫ (hU.fromSpec.appIso ⊤).hom =
+      (Scheme.ΓSpecIso Γ(X, U)).inv := by
+  rw [Scheme.Hom.appIso_hom', Scheme.Hom.map_appLE, Scheme.Hom.appLE, hU.fromSpec_app_self,
+    Category.assoc, ← Functor.map_comp, Subsingleton.elim (_ ≫ _) (𝟙 _),
+    CategoryTheory.Functor.map_id,
+    Category.comp_id]
 
-end AlgebraicGeometry.Scheme.Hom
+/-- Elementwise version of `IsAffineOpen.map_eqToHom_comp_appIso_hom`. -/
+lemma _root_.AlgebraicGeometry.IsAffineOpen.map_eqToHom_apply (a : Γ(X, U)) :
+    X.presheaf.map (eqToHom hU.image_fromSpec_top).op a =
+      (hU.fromSpec.appIso ⊤).inv ((Scheme.ΓSpecIso Γ(X, U)).inv a) := by
+  rw [← hU.map_eqToHom_comp_appIso_hom, ConcreteCategory.comp_apply,
+    ← ConcreteCategory.comp_apply, Iso.hom_inv_id, CategoryTheory.id_apply]
 
-namespace AlgebraicGeometry.Scheme.Hom
+variable {g} in
+/-- `relativeDifferentialsCongr` is compatible with the universal derivations. -/
+lemma relativeDifferentialsCongr_hom_app_d {g' : X ⟶ Spec R} (e : g = g') {W : X.Opensᵒᵖ}
+    (x : X.presheaf.obj W) :
+    (relativeDifferentialsCongr g e).hom.val.app W (g.relativeDifferentialsDerivation.d x) =
+      g'.relativeDifferentialsDerivation.d x := by
+  subst e
+  rw [relativeDifferentialsCongr, eqToIso_refl, Iso.refl_hom]
+  rfl
 
-variable {X : Scheme.{u}} {R : Type u} [CommRing R] (g : X ⟶ Spec (.of R)) (U : X.Opens)
-  [Algebra R Γ(X, U)]
+/-- The identity map from the sections over `⊤` of an `𝒪_{Spec A}`-module `N` to the underlying
+group of the `A`-module `moduleSpecΓFunctor.obj N`. Stating it for an arbitrary `N` keeps the
+unification of the two (definitionally equal) additive structures cheap. -/
+def _root_.AlgebraicGeometry.Scheme.Modules.toModuleSpecΓ {A : CommRingCat.{u}}
+    (N : (Spec A).Modules) : N.val.obj (op ⊤) →+ (moduleSpecΓFunctor (R := A)).obj N where
+  toFun x := x
+  map_zero' := rfl
+  map_add' _ _ := rfl
 
+lemma _root_.AlgebraicGeometry.Scheme.Modules.toModuleSpecΓ_smul {A : CommRingCat.{u}}
+    (N : (Spec A).Modules) (a : A) (x : N.val.obj (op ⊤)) :
+    N.toModuleSpecΓ ((Scheme.ΓSpecIso A).inv a • x) = a • N.toModuleSpecΓ x :=
+  rfl
 
-/-- The universal derivation `d : Γ(X, U) → Γ(Ω¹_{X/R}, U)` as an `R`-derivation, for any
-`R`-algebra structure on `Γ(X, U)` given by the structure map and any compatible `R`-module
-structure on `Γ(Ω¹_{X/R}, U)`. -/
-noncomputable def sectionsDerivation
-    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) [Module R Γ(g.relativeDifferentials, U)]
-    [IsScalarTower R Γ(X, U) Γ(g.relativeDifferentials, U)] :
-    Derivation R Γ(X, U) Γ(g.relativeDifferentials, U) :=
-  sorry
+lemma _root_.AlgebraicGeometry.Scheme.Modules.toModuleSpecΓ_bijective {A : CommRingCat.{u}}
+    (N : (Spec A).Modules) : Function.Bijective N.toModuleSpecΓ :=
+  Function.bijective_id
 
-@[simp]
-lemma sectionsDerivation_apply
-    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) [Module R Γ(g.relativeDifferentials, U)]
-    [IsScalarTower R Γ(X, U) Γ(g.relativeDifferentials, U)] (b : Γ(X, U)) :
-    g.sectionsDerivation U h b = g.sectionsD U b :=
-  sorry
+/-- For an isomorphism of sheaves of modules, the maps on sections are bijective. -/
+lemma _root_.AlgebraicGeometry.Scheme.Modules.bijective_val_app {Y : Scheme.{u}}
+    {M N : Y.Modules} (e : M ≅ N) (W : Y.Opensᵒᵖ) : Function.Bijective (e.hom.val.app W) := by
+  refine Function.bijective_iff_has_inverse.2 ⟨e.inv.val.app W, fun x ↦ ?_, fun y ↦ ?_⟩
+  · exact congr($(e.hom_inv_id).val.app W x)
+  · exact congr($(e.inv_hom_id).val.app W y)
 
-/-- **Sections of the sheaf of differentials over an affine open.** For an affine open `U` of a
-scheme `X` over `Spec R`, the `Γ(X, U)`-linear map `Ω[Γ(X, U)⁄R] → Γ(Ω¹_{X/R}, U)`,
-`D b ↦ d b`, is an isomorphism. -/
-noncomputable def kaehlerSectionsEquiv
-    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) (hU : IsAffineOpen U) :
-    Ω[Γ(X, U)⁄R] ≃ₗ[Γ(X, U)] Γ(g.relativeDifferentials, U) :=
-  sorry
+variable {M : X.Modules} {N : (Spec Γ(X, U)).Modules} (θ : M.restrict hU.fromSpec ≅ N)
+  {K : ModuleCat Γ(X, U)} (ε : (moduleSpecΓFunctor (R := Γ(X, U))).obj N ≅ K)
 
-@[simp]
-lemma kaehlerSectionsEquiv_D
-    (h : algebraMap R Γ(X, U) = (g.specStructureMap U).hom) (hU : IsAffineOpen U) (b : Γ(X, U)) :
-    g.kaehlerSectionsEquiv U h hU (KaehlerDifferential.D R Γ(X, U) b) = g.sectionsD U b :=
-  sorry
+/-- Given identifications `θ : M|_{Spec Γ(X, U)} ≅ N` and `ε : Γ(N, ⊤) ≅ K`, the map
+`Γ(M, U) → K` obtained by restricting along `hU.fromSpec`. -/
+noncomputable def sectionsMapOfIso (m : Γ(M, U)) : K :=
+  ε.hom.hom (N.toModuleSpecΓ (θ.hom.val.app (op ⊤) (M.presheaf.map (eqToHom hU.image_fromSpec_top).op m)))
+
+set_option maxHeartbeats 20000 in
+lemma sectionsMapOfIso_add (m m' : Γ(M, U)) :
+    sectionsMapOfIso hU θ ε (m + m') = sectionsMapOfIso hU θ ε m + sectionsMapOfIso hU θ ε m' := by
+  simp only [sectionsMapOfIso, map_add]
+
+set_option maxHeartbeats 20000 in
+lemma sectionsMapOfIso_smul (a : Γ(X, U)) (m : Γ(M, U)) :
+    sectionsMapOfIso hU θ ε (a • m) = a • sectionsMapOfIso hU θ ε m := by
+  have h1 : M.presheaf.map (eqToHom hU.image_fromSpec_top).op (a • m) =
+      (Scheme.ΓSpecIso Γ(X, U)).inv a • (M.restrictAppIso hU.fromSpec ⊤).inv
+        (M.presheaf.map (eqToHom hU.image_fromSpec_top).op m) := by
+    rw [Scheme.Modules.map_smul, hU.map_eqToHom_apply]
+    rfl
+  refine (congrArg (fun x ↦ ε.hom.hom (N.toModuleSpecΓ (θ.hom.val.app (op ⊤) x))) h1).trans ?_
+  refine (congrArg (fun x ↦ ε.hom.hom (N.toModuleSpecΓ x))
+    ((θ.hom.val.app (op ⊤)).hom.map_smul _ _)).trans ?_
+  refine (congrArg (fun x ↦ ε.hom.hom x) (N.toModuleSpecΓ_smul _ _)).trans ?_
+  exact ε.hom.hom.map_smul _ _
+
+set_option maxHeartbeats 20000 in
+lemma sectionsMapOfIso_bijective : Function.Bijective (sectionsMapOfIso hU θ ε) :=
+  ε.toLinearEquiv.bijective.comp ((Scheme.Modules.toModuleSpecΓ_bijective _).comp
+    ((Scheme.Modules.bijective_val_app _ _).comp (ConcreteCategory.bijective_of_isIso _)))
 
 end AlgebraicGeometry.Scheme.Hom
