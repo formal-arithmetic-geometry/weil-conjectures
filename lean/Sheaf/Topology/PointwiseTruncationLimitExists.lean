@@ -4,26 +4,22 @@ public import Sheaf.Topology.OpenModuleCohomology
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
-import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
-import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
-import Sheaf.Topology.DerivedLimitStalkInjective
-import Sheaf.Topology.RingedSpaceRGammaDerivedLimit
 
 @[expose] public section
 
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
+set_option linter.unusedVariables false in
 /-- Existence part of pointwise truncation reconstruction
 (blueprint: lem-pc-ringed-space-pointwise-truncation-limit-exists).
 
 Proof: for each standard lower truncation, use its canonical truncation map from `E`.
-These maps are compatible with the transition maps. The product of their differences
+These maps are compatible with the transition maps. Their product map
 is killed by `1 - s`, where `s` is the shift on the product. Exactness of Hom into the
 Roos derived-limit triangle lifts this compatible family through `π`, producing a map
-`c : E ⟶ K`. The local cohomology bounds imply that the relevant transition maps are
-eventual isomorphisms; the Roos abelian-group lemma therefore removes the obstruction in
-the derived-limit triangle. This is the existence half of Stacks, Cohomology, Tag 0D62. -/
+`c : E ⟶ K`. Local cohomology bounds are not needed for this existence argument.
+Source: Stacks, Derived Categories, Tag 0H72, as invoked in Cohomology, Tag 0D62. -/
 theorem pointwise_truncation_limit_exists (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     (E : DerivedCategory (SheafOfModules.{u} (moduleRings X)))
@@ -47,6 +43,26 @@ theorem pointwise_truncation_limit_exists (X : RingedSpace.{u})
       c ≫ π ≫ Pi.π (fun n : ℕ =>
         (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E) n =
           (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E) := by
-  sorry
+  -- Local bounds are needed for the isomorphism part, not for this lift.
+  let T : ℕ → DerivedCategory (SheafOfModules.{u} (moduleRings X)) := fun n =>
+    (DerivedCategory.TStructure.t.truncGE (-(n : ℤ))).obj E
+  let f : ∀ n, T (n + 1) ⟶ T n := fun n =>
+    (DerivedCategory.TStructure.t.natTransTruncGEOfLE
+      (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by omega)).app E
+  let a : E ⟶ ∏ᶜ T := Pi.lift (fun n =>
+    (DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app E)
+  have ha : a ≫ towerTransitionEndomorphism f = 0 := by
+    apply Pi.hom_ext
+    intro n
+    simp [a, towerTransitionEndomorphism, towerProductShift, Category.assoc,
+      CategoryTheory.Triangulated.TStructure.π_natTransTruncGEOfLE_app, f, T]
+  obtain ⟨c, hc⟩ := Pretriangulated.Triangle.coyoneda_exact₂
+    (Pretriangulated.Triangle.mk π (towerTransitionEndomorphism f) δ) hK a ha
+  change E ⟶ K at c
+  change a = c ≫ π at hc
+  refine ⟨c, ?_⟩
+  intro n
+  rw [← Category.assoc, ← hc]
+  exact Pi.lift_π _ n
 
 end AlgebraicGeometry.RingedSpace
