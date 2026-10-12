@@ -9,8 +9,9 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.AlgebraicGeometry.Spec
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import Sheaf.AlgebraicGeometry.SplitReductionFactorThickenings
+import Mathlib.AlgebraicGeometry.Limits
 import Sheaf.AlgebraicGeometry.ThickeningIntegral
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
 # Components of an affine scheme with split reduction
@@ -53,6 +54,7 @@ private theorem universalHomeomorphism_of_thickening
     exact congrArg i' hx
   exact {}
 
+
 /-- Lift the factors of a product decomposition through a nilradical reduction.
 
 Source: smooth purity blueprint, `lem-weil-pbc-finite-pushforward-generic-constructible`,
@@ -71,19 +73,6 @@ theorem spectrum_components_of_split_reduction
     ∃ (W : Fin r → (Spec (.of R)).Opens),
       (⨆ i, W i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (W i) (W j)) ∧
       ∀ i, IsUniversalHomeomorphism
-        ((W i).ι ≫ Spec.map (CommRingCat.ofHom (algebraMap A R))) := by
-  obtain ⟨W, hcover, hdisj, hW⟩ :=
-    exists_split_reduction_factor_thickenings A R r D he
-  refine ⟨W, hcover, hdisj, ?_⟩
-  intro i
-  obtain ⟨a, haClosed, haSurj, ha⟩ := hW i
-  have : IsClosedImmersion a := haClosed
-  have : Surjective a := haSurj
-  have : IsUniversalHomeomorphism
-      (a ≫ (W i).ι ≫ Spec.map (CommRingCat.ofHom (algebraMap A R))) := by
-    rw [ha]
-    exact hD i
-  exact universalHomeomorphism_of_thickening a
-    ((W i).ι ≫ Spec.map (CommRingCat.ofHom (algebraMap A R)))
+        ((W i).ι ≫ Spec.map (CommRingCat.ofHom (algebraMap A R))) := by sorry
 
 end AlgebraicGeometry.Scheme

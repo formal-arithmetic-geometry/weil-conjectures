@@ -1,130 +1,130 @@
 {
- "id": "lem-pc-milnor-boundary-factorization",
- "kind": "statement",
- "title": "Natural injection obtained from the Roos connecting map",
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-pc-derived-limit-milnor-sequence",
-   "place": "proof, the corresponding kernel/cokernel half of the five-term sequence",
-   "via": []
+  "id": "lem-pc-milnor-boundary-factorization",
+  "kind": "statement",
+  "title": "Natural injection obtained from the Roos connecting map",
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-pc-derived-limit-milnor-sequence",
+      "place": "proof, the corresponding kernel/cokernel half of the five-term sequence",
+      "via": []
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "statement": "Let $K:\\mathbf N^{op}\\to D(\\mathrm{Ab})$ [def-weil-inverse-system, def-weil-abstract-derived-category] be a tower whose product exists. Write $c_i:H^i(\\prod K_n)\\to\\prod H^i(K_n)$ for the comparison induced by the product projections [def-weil-category-product]. For each integer $i$, there is a simultaneous family of maps $a_{K,L,p,\\delta}:R^1\\lim H^{i-1}(K)\\to H^i(L)$ [lem-pc-derived-limit-roos-abelian-groups], defined for all triples $(L,p,\\delta)$. If the specified Roos triangle is distinguished [def-weil-derived-limit], $a$ is mono and the complex $R^1\\lim H^{i-1}(K)\\xrightarrow{a}H^i(L)\\xrightarrow{H^i(p)c_i}\\prod H^i(K_n)$ has zero composite and is exact at its middle term. For every morphism of specified distinguished Roos triangles $(\\varphi,g)$, satisfying the squares for $p$ and $\\delta$, the family satisfies $R^1\\lim H^{i-1}(\\varphi)\\,a_{K\\prime}=a_K H^i(g)$. No assertion about a map to the inverse limit or its surjectivity is included.",
- "stmt_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-limit",
-  "def-weil-inverse-system",
-  "def-weil-category-product",
-  "lem-pc-derived-limit-roos-abelian-groups"
- ],
- "source": {
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07KY, kernel and cokernel of the five-term cohomology sequence; Tag 07KW; derived.tex Tag 07KC"
- },
- "proof": [
-  {
-   "text": "Use the Mathlib AB4Star instance for abelian groups and derivedCategory_countableProducts_and_towerLimit to make the cohomology product comparisons isomorphisms. Projectionwise computation (comparison_transition) identifies the image of the transition endomorphism with the Roos map.",
-   "uses": [
+  "statement": "Let $K:\\mathbf N^{op}\\to D(\\mathrm{Ab})$ [def-weil-inverse-system, def-weil-abstract-derived-category] be a tower whose product exists. Write $c_i:H^i(\\prod K_n)\\to\\prod H^i(K_n)$ for the comparison induced by the product projections [def-weil-category-product]. For each integer $i$, there is a simultaneous family of maps $a_{K,L,p,\\delta}:R^1\\lim H^{i-1}(K)\\to H^i(L)$ [lem-pc-derived-limit-roos-abelian-groups], defined for all triples $(L,p,\\delta)$. If the specified Roos triangle is distinguished [def-weil-derived-limit], $a$ is mono and the complex $R^1\\lim H^{i-1}(K)\\xrightarrow{a}H^i(L)\\xrightarrow{H^i(p)c_i}\\prod H^i(K_n)$ has zero composite and is exact at its middle term. For every morphism of specified distinguished Roos triangles $(\\varphi,g)$, satisfying the squares for $p$ and $\\delta$, the family satisfies $R^1\\lim H^{i-1}(\\varphi)\\,a_{K\\prime}=a_K H^i(g)$. No assertion about a map to the inverse limit or its surjectivity is included.",
+  "stmt_deps": [
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-limit",
+    "def-weil-inverse-system",
+    "def-weil-category-product",
+    "lem-pc-derived-limit-roos-abelian-groups"
+  ],
+  "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KY, kernel and cokernel of the five-term cohomology sequence; Tag 07KW; derived.tex Tag 07KC"
+  },
+  "proof": [
+    {
+      "text": "Exact countable products of abelian groups and the derived-product theorem identify the cohomology product comparison with an isomorphism, preserving every projection. Consequently the transition endomorphism becomes the Roos map on the cohomology tower.",
+      "uses": [
+        "lem-pc-abelian-groups-exact-products",
+        "lem-weil-derived-limit-existence",
+        "def-weil-derived-limit"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply the long exact cohomology sequence to the specified Roos triangle in degrees i-1 and i. Descend its connecting map through the cokernel of the Roos map. Exactness at the source makes the descended arrow mono; exactness at H^i(L) makes its image the kernel of H^i(p), hence of its composite with the product comparison.",
+      "uses": [
+        "lem-sf-derived-homology-long-exact"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Compose the descended arrow with the natural R^1-limit-to-cokernel isomorphism. Naturality of connecting maps and cancellation of the cokernel epimorphism prove the required square. Choose zero for nondistinguished triples; this does not affect the square, which is required only on distinguished triples.",
+      "uses": [
+        "lem-pc-derived-limit-roos-abelian-groups",
+        "lem-sf-derived-homology-long-exact"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-derived-limit",
     "lem-pc-abelian-groups-exact-products",
-    "lem-weil-derived-limit-existence",
-    "def-weil-derived-limit"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For each distinguished Roos triangle, conjugate HomologySequence.exact₃ by the product comparison. Descend the connecting arrow through the Roos cokernel; mono_cokernelDesc proves it mono. Conjugate HomologySequence.exact₁ by the product comparisons, and transport exactness along the cokernel projection (exact_iff_of_epi_of_isIso_of_mono). Compose with the Roos R¹-limit-to-cokernel isomorphism and transport exactness once more.",
-   "uses": [
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Define the family explicitly by the inverse product comparison, the homology connecting map, cokernel.desc, and the Roos isomorphism; use zero outside distinguished triangles. A tower morphism gives a triangle morphism by transition naturality. Apply homologySequenceδ_naturality and the Roos isomorphism naturality, then cokernel.map_desc and projectionwise comparison_natural to prove the displayed square.",
-   "uses": [
     "lem-pc-derived-limit-roos-abelian-groups",
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-derived-limit",
-  "lem-pc-abelian-groups-exact-products",
-  "lem-pc-derived-limit-roos-abelian-groups",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-derived-limit-existence"
- ],
- "proof_origin": {
-  "by": "worker",
-  "group": "N2",
-  "date": "2026-10-12",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07KY, kernel and cokernel of the five-term cohomology sequence; Tag 07KW; derived.tex Tag 07KC",
-  "note": "Lean proof of the planned factorization using Mathlib long-exact-sequence and cokernel APIs; independently read and checked by N2. No new holes or statement changes."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "connecting homomorphism distinguished triangle factors through cokernel mono exact sequence natural",
-   "results": "DerivedCategory.triangleOfSESδ; CochainComplex.mappingCone.homologySequenceδ_triangleh; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj; DerivedCategory.triangleOfSES_mor₃; CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₃; CategoryTheory.ShortComplex.ShortExact.singleδ; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc; DerivedCategory.HomologySequence.δ_comp_assoc",
-   "verdict": "no direct match; generic tools inspected",
-   "date": "2026-10-12"
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-derived-limit-existence"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "group": "W3",
+    "date": "2026-10-12",
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07KY, kernel and cokernel of the five-term cohomology sequence; Tag 07KW; derived.tex Tag 07KC",
+    "note": "Agent-written detailed factorization of the cited long-exact-sequence argument."
   },
-  {
-   "tool": "leansearch",
-   "query": "natural cokernel injection from first derived inverse limit to cohomology of a Roos triangle",
-   "results": "service unavailable: Internal Server Error",
-   "verdict": "unavailable",
-   "date": "2026-10-12"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "connecting homomorphism distinguished triangle factors through cokernel mono exact sequence natural",
+      "results": "DerivedCategory.triangleOfSESδ; CochainComplex.mappingCone.homologySequenceδ_triangleh; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj; DerivedCategory.triangleOfSES_mor₃; CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₃; CategoryTheory.ShortComplex.ShortExact.singleδ; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc; DerivedCategory.HomologySequence.δ_comp_assoc",
+      "verdict": "no direct match; generic tools inspected",
+      "date": "2026-10-12"
+    },
+    {
+      "tool": "leansearch",
+      "query": "natural cokernel injection from first derived inverse limit to cohomology of a Roos triangle",
+      "results": "service unavailable: Internal Server Error",
+      "verdict": "unavailable",
+      "date": "2026-10-12"
+    },
+    {
+      "tool": "grep",
+      "query": "mono_cokernelDesc|homologySequenceδ_naturality",
+      "results": "Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+      "verdict": "no direct match; generic tools inspected",
+      "date": "2026-10-12"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.CategoryTheory.Triangulated.MilnorSequence",
+    "date": "2026-10-12",
+    "group": "W3"
   },
-  {
-   "tool": "grep",
-   "query": "mono_cokernelDesc|homologySequenceδ_naturality",
-   "results": "Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
-   "verdict": "no direct match; generic tools inspected",
-   "date": "2026-10-12"
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.CategoryTheory.Triangulated.MilnorBoundaryFactorization",
+    "file": "lean/Sheaf/CategoryTheory/Triangulated/MilnorBoundaryFactorization.lean",
+    "declaration": "CategoryTheory.milnor_boundary_factorization",
+    "statement": "theorem milnor_boundary_factorization [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) : ∃ (a : ∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] (L : DerivedCategory AddCommGrpCat.{u}) (_p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (_δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧), ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).obj (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1)) ⟶ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj L), (∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] (L : DerivedCategory AddCommGrpCat.{u}) (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ → Mono (a K L p δ) ∧ ∃ hz : a K L p δ ≫ ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map p ≫ piComparison (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (fun n : ℕ => K.obj (Opposite.op n))) = 0, (ShortComplex.mk (a K L p δ) ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map p ≫ piComparison (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (fun n : ℕ => K.obj (Opposite.op n))) hz).Exact) ∧ ∀ (K K' : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] [HasProduct (fun n : ℕ => K'.obj (Opposite.op n))] (L L' : DerivedCategory AddCommGrpCat.{u}) (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (p' : L' ⟶ ∏ᶜ fun n : ℕ => K'.obj (Opposite.op n)) (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧) (δ' : (∏ᶜ fun n : ℕ => K'.obj (Opposite.op n)) ⟶ L'⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ → IsDerivedLimitTriangle (fun n => K'.map (homOfLE (Nat.le_succ n)).op) L' p' δ' → ∀ (φ : K ⟶ K') (g : L ⟶ L'), p ≫ Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) = g ≫ p' → δ ≫ (shiftFunctor _ (1 : ℤ)).map g = Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) ≫ δ' → ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).map (Functor.whiskerRight φ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1))) ≫ a K' L' p' δ' = a K L p δ ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map g",
+    "branch": "sheaf-dag",
+    "by": "W3",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "W3",
+    "result": "pass",
+    "landing": "20261012T085359-L-47693",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "W3",
+    "result": "pass",
+    "landing": "20261012T085359-L-47693",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.CategoryTheory.Triangulated.MilnorSequence",
-  "date": "2026-10-12",
-  "group": "W3"
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.Triangulated.MilnorBoundaryFactorization",
-  "file": "lean/Sheaf/CategoryTheory/Triangulated/MilnorBoundaryFactorization.lean",
-  "declaration": "CategoryTheory.milnor_boundary_factorization",
-  "statement": "theorem milnor_boundary_factorization [HasDerivedCategory.{v} AddCommGrpCat.{u}] (i : ℤ) : ∃ (a : ∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] (L : DerivedCategory AddCommGrpCat.{u}) (_p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (_δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧), ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).obj (K ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1)) ⟶ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).obj L), (∀ (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] (L : DerivedCategory AddCommGrpCat.{u}) (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ → Mono (a K L p δ) ∧ ∃ hz : a K L p δ ≫ ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map p ≫ piComparison (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (fun n : ℕ => K.obj (Opposite.op n))) = 0, (ShortComplex.mk (a K L p δ) ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map p ≫ piComparison (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i) (fun n : ℕ => K.obj (Opposite.op n))) hz).Exact) ∧ ∀ (K K' : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u}) [HasProduct (fun n : ℕ => K.obj (Opposite.op n))] [HasProduct (fun n : ℕ => K'.obj (Opposite.op n))] (L L' : DerivedCategory AddCommGrpCat.{u}) (p : L ⟶ ∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) (p' : L' ⟶ ∏ᶜ fun n : ℕ => K'.obj (Opposite.op n)) (δ : (∏ᶜ fun n : ℕ => K.obj (Opposite.op n)) ⟶ L⟦(1 : ℤ)⟧) (δ' : (∏ᶜ fun n : ℕ => K'.obj (Opposite.op n)) ⟶ L'⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n => K.map (homOfLE (Nat.le_succ n)).op) L p δ → IsDerivedLimitTriangle (fun n => K'.map (homOfLE (Nat.le_succ n)).op) L' p' δ' → ∀ (φ : K ⟶ K') (g : L ⟶ L'), p ≫ Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) = g ≫ p' → δ ≫ (shiftFunctor _ (1 : ℤ)).map g = Limits.Pi.map (fun n : ℕ => φ.app (Opposite.op n)) ≫ δ' → ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).map (Functor.whiskerRight φ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} (i - 1))) ≫ a K' L' p' δ' = a K L p δ ≫ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} i).map g",
-  "branch": "sheaf-dag",
-  "by": "W3",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W3",
-  "result": "pass",
-  "landing": "20261012T085359-L-47693",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "X-67565",
-  "group": "N2",
-  "result": "pass",
-  "landing": "20261012T120848-L-978450",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered proof, unchanged theorem signature and node, report, axioms, and direct importer all verified; clean compilation succeeded."
- }
 }

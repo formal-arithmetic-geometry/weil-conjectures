@@ -1,122 +1,118 @@
 {
- "id": "lem-sc-topological-induced-cohomology-cocycle",
- "kind": "statement",
- "title": "Induced topological cohomology map on resolution cocycles",
- "statement": "Let f:Z -> X be a continuous map of topological spaces. Let HX and HZ be the recorded abelian-sheaf cohomology functors evaluated at the terminal opens, identified by specified equalities [def-sc-topological-abelian-cohomology]. Assume the sectionwise direct-image functor is additive [def-sp-left-exact-additive]. There exists a natural map edge_p:HX^p(f_*F) -> HZ^p(F), and a map a from the free abelian terminal sheaf KX to f_*KZ, sending each sheafification generator h:U -> X to the generator f^{-1}(h) followed by f^{-1}(X)=Z. For every injective resolution I of F, every injective resolution J of f_*F, every chain map phi:J -> f_*I over f_*F, and every pair of degree-p cocycles s:KX -> J^p and z:KZ -> I^p satisfying a composed with f_*z = s composed with phi^p, edge_p sends the Ext class represented by s in J to the class represented by z in I, after transporting by the specified HX,HZ equalities. This statement asserts no spectral-sequence data.",
- "source": {
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Section 01DZ, composition comparison of Section 20.13; Tag 01F2"
- },
- "stmt_deps": [
-  "def-sc-topological-abelian-cohomology",
-  "def-sp-left-exact-additive"
- ],
- "proof": [
-  {
-   "text": "Use the exact inverse-image/direct-image adjunction on abelian sheaves. The free abelian sheaf on the terminal representable represents global sections. Sectionwise equality of terminal sections identifies inverse image of KX with KZ. The adjunction unit under this identification constructs a. By the free/sheafification adjunction it sends each generator h to inverse image of h composed with the terminal-open equality, exactly as stated, and this rule uniquely determines a.",
-   "uses": [
-    "def-weil-pbc-topological-inverse-image",
-    "def-sc-topological-abelian-cohomology"
-   ],
-   "elementary": false
+  "id": "lem-sc-topological-induced-cohomology-cocycle",
+  "kind": "statement",
+  "title": "Induced topological cohomology map on resolution cocycles",
+  "statement": "Let f:Z -> X be a continuous map of topological spaces. Let HX and HZ be the recorded abelian-sheaf cohomology functors evaluated at the terminal opens, identified by specified equalities [def-sc-topological-abelian-cohomology]. Assume the sectionwise direct-image functor is additive [def-sp-left-exact-additive]. There exists a natural map edge_p:HX^p(f_*F) -> HZ^p(F), and a map a from the free abelian terminal sheaf KX to f_*KZ, sending each sheafification generator h:U -> X to the generator f^{-1}(h) followed by f^{-1}(X)=Z. For every injective resolution I of F, every injective resolution J of f_*F, every chain map phi:J -> f_*I over f_*F, and every pair of degree-p cocycles s:KX -> J^p and z:KZ -> I^p satisfying a composed with f_*z = s composed with phi^p, edge_p sends the Ext class represented by s in J to the class represented by z in I, after transporting by the specified HX,HZ equalities. This statement asserts no spectral-sequence data.",
+  "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Section 01DZ, composition comparison of Section 20.13; Tag 01F2"
   },
-  {
-   "text": "Apply the exact inverse-image functor to Ext(KX,f_*F), identify the inverse image of KX with KZ, and compose with the derived counit to F. This defines natural additive maps on Ext, and hence edge on the recorded H-prime functors. Compute on injective resolutions J and I: direct image of each I^n is injective, and a comparison phi over f_*F induces the same map on global-section cohomology. Source resolution exactness and target termwise injectivity imply that any two such comparisons are homotopic, so the computation is independent of them. Chain maps preserve cycles and boundaries; if a composed with f_*z equals s composed with phi, the image of the cocycle class represented by s is the class represented by z. Use the Ext computation by InjectiveResolution.extMk and transport through hX,hZ. The zero sheaf gives zero maps; the identity map gives the identity; degree zero gives the usual terminal-section map.",
-   "uses": [
-    "lem-sc-topological-pushforward-injective",
+  "stmt_deps": [
     "def-sc-topological-abelian-cohomology",
-    "def-weil-pbc-topological-inverse-image"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-topological-inverse-image",
-  "def-sc-topological-abelian-cohomology",
-  "lem-sc-topological-pushforward-injective"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/01DZ",
-  "place": "Source construction specialized to abelian sheaves; explicit naturality and cocycle glue expanded by Q3"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "A continuous map induces cohomology of direct image to source sheaf cohomology via resolution cocycles",
-   "results": "Search service returned Internal Server Error; no absence verdict inferred",
-   "verdict": "unavailable",
-   "date": "2026-10-12"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Leray bottom edge natural spectral sequence equals the map of global cocycles of injective resolutions",
-   "results": "Resolution API and sheaf additive declarations, no matching theorem",
-   "verdict": "no match",
-   "date": "2026-10-12"
-  },
-  {
-   "tool": "grep",
-   "query": "rg on Mathlib/CategoryTheory/Sites/SheafCohomology, Mathlib/CategoryTheory/Abelian/Injective/Ext, and library spectral-sequence modules; blueprint_refs search Leray edge and cohomology cocycle",
-   "results": "Ext cocycle computations and objectwise Grothendieck construction exist, but no natural topological bottom-edge realization or cross-space induced cohomology cocycle theorem",
-   "verdict": "no match",
-   "date": "2026-10-12"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.Topology.TopologicalLeraySpectralSequence",
-  "date": "2026-10-12",
-  "group": "Q3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-pic-proper-ntorsion",
-   "place": "proof of Cohomology Lemma 02UV invokes Leray; induced-map comparison underlying the bottom edge",
-   "via": [
-    "lem-sc-topological-leray-spectral-sequence",
-    "lem-sc-leray-closed-pushforward-cohomology"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-thm-curveestimate",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Topology.TopologicalInducedCohomologyCocycle",
-  "file": "lean/Sheaf/Topology/TopologicalInducedCohomologyCocycle.lean",
-  "declaration": "CategoryTheory.exists_topological_induced_cohomology_cocycle",
-  "statement": "theorem exists_topological_induced_cohomology_cocycle\n    {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]\n    (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (HZ : ℕ → (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙\n      (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))\n    (hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙\n      (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)) :\n    ∃ edge : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,\n      ∃ a : (presheafToSheaf (Opens.grothendieckTopology X)\n        AddCommGrpCat.{u}).obj\n        (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n      (TopCat.Sheaf.pushforwardAb f).obj\n        ((presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)),\n      (∀ (U : Opens X) (h : U ⟶ (⊤ : Opens X)),\n        a.hom.app (op U)\n          ((toSheafify (Opens.grothendieckTopology X)\n            (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app\n              (op U) (FreeAbelianGroup.of h)) =\n          (toSheafify (Opens.grothendieckTopology Z)\n            (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app\n              (op ((Opens.map f).obj U))\n              (FreeAbelianGroup.of ((Opens.map f).map h ≫\n                eqToHom (Opens.map_top f)))) ∧\n      (∀ (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u})\n        (I : InjectiveResolution F)\n        (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F))\n        (φ : J.cocomplex ⟶\n          ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj I.cocomplex)\n        (_hφ : J.ι.f 0 ≫ φ.f 0 =\n          (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0)) (p : ℕ)\n        (s : (presheafToSheaf (Opens.grothendieckTopology X)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n            J.cocomplex.X p)\n        (hs : s ≫ J.cocomplex.d p (p + 1) = 0)\n        (z : (presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶\n            I.cocomplex.X p)\n        (hz : z ≫ I.cocomplex.d p (p + 1) = 0)\n        (_hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),\n        (eqToHom (congrArg (fun Q ↦ Q.obj F) (hZ p)))\n          ((edge p).app F\n            ((eqToHom (congrArg (fun Q ↦ Q.obj\n              ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)\n              (J.extMk s (p + 1) rfl hs))) =\n            I.extMk z (p + 1) rfl hz)",
-  "branch": "sheaf-dag",
-  "by": "Q3",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q3",
-  "result": "pass",
-  "landing": "20261012T095920-L-323475",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y2",
-  "result": "pass",
-  "landing": "20261012T121511-L-1009544",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.exists_topological_induced_cohomology_cocycle"
+    "def-sp-left-exact-additive"
   ],
-  "sorry_after": []
- }
+  "proof": [
+    {
+      "text": "Use the exact inverse-image/direct-image adjunction on abelian sheaves. The free abelian sheaf on the terminal representable represents global sections. Sectionwise equality of terminal sections identifies inverse image of KX with KZ. The adjunction unit under this identification constructs a. By the free/sheafification adjunction it sends each generator h to inverse image of h composed with the terminal-open equality, exactly as stated, and this rule uniquely determines a.",
+      "uses": [
+        "def-weil-pbc-topological-inverse-image",
+        "def-sc-topological-abelian-cohomology"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply the exact inverse-image functor to Ext(KX,f_*F), identify the inverse image of KX with KZ, and compose with the derived counit to F. This defines natural additive maps on Ext, and hence edge on the recorded H-prime functors. Compute on injective resolutions J and I: direct image of each I^n is injective, and a comparison phi over f_*F induces the same map on global-section cohomology. Source resolution exactness and target termwise injectivity imply that any two such comparisons are homotopic, so the computation is independent of them. Chain maps preserve cycles and boundaries; if a composed with f_*z equals s composed with phi, the image of the cocycle class represented by s is the class represented by z. Use the Ext computation by InjectiveResolution.extMk and transport through hX,hZ. The zero sheaf gives zero maps; the identity map gives the identity; degree zero gives the usual terminal-section map.",
+      "uses": [
+        "lem-sc-topological-pushforward-injective",
+        "def-sc-topological-abelian-cohomology",
+        "def-weil-pbc-topological-inverse-image"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-topological-inverse-image",
+    "def-sc-topological-abelian-cohomology",
+    "lem-sc-topological-pushforward-injective"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "https://stacks.math.columbia.edu/tag/01DZ",
+    "place": "Source construction specialized to abelian sheaves; explicit naturality and cocycle glue expanded by Q3"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "A continuous map induces cohomology of direct image to source sheaf cohomology via resolution cocycles",
+      "results": "Search service returned Internal Server Error; no absence verdict inferred",
+      "verdict": "unavailable",
+      "date": "2026-10-12"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Leray bottom edge natural spectral sequence equals the map of global cocycles of injective resolutions",
+      "results": "Resolution API and sheaf additive declarations, no matching theorem",
+      "verdict": "no match",
+      "date": "2026-10-12"
+    },
+    {
+      "tool": "grep",
+      "query": "rg on Mathlib/CategoryTheory/Sites/SheafCohomology, Mathlib/CategoryTheory/Abelian/Injective/Ext, and library spectral-sequence modules; blueprint_refs search Leray edge and cohomology cocycle",
+      "results": "Ext cocycle computations and objectwise Grothendieck construction exist, but no natural topological bottom-edge realization or cross-space induced cohomology cocycle theorem",
+      "verdict": "no match",
+      "date": "2026-10-12"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Topology.TopologicalLeraySpectralSequence",
+    "date": "2026-10-12",
+    "group": "Q3"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-pic-proper-ntorsion",
+      "place": "proof of Cohomology Lemma 02UV invokes Leray; induced-map comparison underlying the bottom edge",
+      "via": [
+        "lem-sc-topological-leray-spectral-sequence",
+        "lem-sc-leray-closed-pushforward-cohomology"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-thm-curveestimate",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Topology.TopologicalInducedCohomologyCocycle",
+    "file": "lean/Sheaf/Topology/TopologicalInducedCohomologyCocycle.lean",
+    "declaration": "CategoryTheory.exists_topological_induced_cohomology_cocycle",
+    "statement": "theorem exists_topological_induced_cohomology_cocycle\n    {Z X : TopCat.{u}} (f : Z ⟶ X) [(TopCat.Sheaf.pushforwardAb f).Additive]\n    (HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (HZ : ℕ → (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u}))\n    (hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙\n      (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤))\n    (hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙\n      (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)) :\n    ∃ edge : ∀ p : ℕ, TopCat.Sheaf.pushforwardAb f ⋙ HX p ⟶ HZ p,\n      ∃ a : (presheafToSheaf (Opens.grothendieckTopology X)\n        AddCommGrpCat.{u}).obj\n        (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n      (TopCat.Sheaf.pushforwardAb f).obj\n        ((presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)),\n      (∀ (U : Opens X) (h : U ⟶ (⊤ : Opens X)),\n        a.hom.app (op U)\n          ((toSheafify (Opens.grothendieckTopology X)\n            (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free)).app\n              (op U) (FreeAbelianGroup.of h)) =\n          (toSheafify (Opens.grothendieckTopology Z)\n            (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free)).app\n              (op ((Opens.map f).obj U))\n              (FreeAbelianGroup.of ((Opens.map f).map h ≫\n                eqToHom (Opens.map_top f)))) ∧\n      (∀ (F : Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u})\n        (I : InjectiveResolution F)\n        (J : InjectiveResolution ((TopCat.Sheaf.pushforwardAb f).obj F))\n        (φ : J.cocomplex ⟶\n          ((TopCat.Sheaf.pushforwardAb f).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj I.cocomplex)\n        (_hφ : J.ι.f 0 ≫ φ.f 0 =\n          (TopCat.Sheaf.pushforwardAb f).map (I.ι.f 0)) (p : ℕ)\n        (s : (presheafToSheaf (Opens.grothendieckTopology X)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens X) ⋙ AddCommGrpCat.free) ⟶\n            J.cocomplex.X p)\n        (hs : s ≫ J.cocomplex.d p (p + 1) = 0)\n        (z : (presheafToSheaf (Opens.grothendieckTopology Z)\n          AddCommGrpCat.{u}).obj\n          (yoneda.obj (⊤ : Opens Z) ⋙ AddCommGrpCat.free) ⟶\n            I.cocomplex.X p)\n        (hz : z ≫ I.cocomplex.d p (p + 1) = 0)\n        (_hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),\n        (eqToHom (congrArg (fun Q ↦ Q.obj F) (hZ p)))\n          ((edge p).app F\n            ((eqToHom (congrArg (fun Q ↦ Q.obj\n              ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)\n              (J.extMk s (p + 1) rfl hs))) =\n            I.extMk z (p + 1) rfl hz)",
+    "branch": "sheaf-dag",
+    "by": "Q3",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "Q3",
+    "result": "pass",
+    "landing": "20261012T095920-L-323475",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "Q3",
+    "result": "pass",
+    "landing": "20261012T095920-L-323475",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }

@@ -1,119 +1,115 @@
 {
- "id": "lem-weil-pbc-finite-local-model-compatible-transport-cocycle",
- "kind": "statement",
- "title": "Cocycle law for compatible transport",
- "statement": "Under the hypotheses of the compatible-transport structure [def-weil-pbc-finite-local-model-compatible-transport], for any scheme W and three lifts a,b,c to U with equal composite to T, successive transport from a to b and b to c equals direct transport from a to c.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03RV and Descent Tag 02W5"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-etale-sheaf-of-sets",
-  "def-weil-pbc-finite-etale-category",
-  "def-weil-pbc-finite-local-model-compatible-transport"
- ],
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Natural transport of scheme points satisfying a cocycle from representation of an etale sheaf",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-12",
-   "verdict": "unavailable"
+  "id": "lem-weil-pbc-finite-local-model-compatible-transport-cocycle",
+  "kind": "statement",
+  "title": "Cocycle law for compatible transport",
+  "statement": "Under the hypotheses of the compatible-transport structure [def-weil-pbc-finite-local-model-compatible-transport], for any scheme W and three lifts a,b,c to U with equal composite to T, successive transport from a to b and b to c equals direct transport from a to c.",
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RV and Descent Tag 02W5"
   },
-  {
-   "tool": "leanfinder",
-   "query": "A representation of a sheaf on the small etale site gives compatible transport on a representing scheme",
-   "results": "Etale.forget, LocalRepresentability.representableBy, Etale.forgetFullyFaithful; no exact transport result",
-   "date": "2026-10-12"
-  },
-  {
-   "tool": "grep",
-   "query": "overTransport|descentDatum",
-   "results": "msearch returned zero hits; local rg found canonical Over transport from a big-site representation, not a small-site representation",
-   "date": "2026-10-12"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.uliftYoneda",
-   "results": "ULiftYoneda.fullyFaithful, uliftYonedaEquiv and Functor.FullyFaithful.homNatIso supply Yoneda comparisons but no extension from small-site compatible transport to arbitrary scheme points or its laws. Second-reader search.",
-   "date": "2026-10-12",
-   "verdict": "Supporting lemmas only; no duplicate statement."
-  }
- ],
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransport",
-  "date": "2026-10-12",
-  "group": "H2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
-   "place": "Yoneda comparison, then diagonal and cocycle laws of local representatives",
-   "via": [
-    "lem-weil-pbc-finite-local-models-descent-datum-compatibility",
-    "lem-weil-pbc-finite-local-models-descent-datum",
-    "lem-weil-pbc-finite-locally-constant-sets-descent",
-    "lem-weil-pbc-finite-locally-constant-sets-representability"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "proof": [
-  {
-   "text": "Put R = Q ×_T U ×_T U, with its three maps to U. Since Q → U and\nU → T are etale, R → T is etale. Its projection to Q is the universal point\nabove the first lift. Apply e inverse to that point to obtain a section s of\nE on R. Compatibility identifies the first transport with the point obtained\nfrom s above the second lift, and its subsequent transport with the point\nobtained from s above the third lift. Direct transport also equals the third\npoint, so these transports coincide. Given arbitrary W, x, a, b, c, the maps\nx.left, b, c have equal composites to T. The pullback universal property\ntherefore gives W → R whose composites are the given maps. Apply naturality\nthree times to pull back the universal equality. Functoriality of composition\nthen gives the displayed equality. Proof irrelevance identifies the equalities\nof composites used as transport arguments. Empty schemes satisfy the same\nuniversal properties; neither surjectivity nor nonemptiness is needed.",
-   "uses": [
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets",
+    "def-weil-pbc-finite-etale-category",
     "def-weil-pbc-finite-local-model-compatible-transport"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-finite-local-model-compatible-transport"
- ],
- "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03RV and 02W5"
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportCocycle",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalModelsDescentDatumCompatibilityTransportCocycle.lean",
-  "declaration": "AlgebraicGeometry.Scheme.finiteLocalModels_descentDatum_compatibility_transport_cocycle",
-  "statement": "theorem finiteLocalModels_descentDatum_compatibility_transport_cocycle (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (U : T.Etale) (Q : U.left.FiniteEtale) (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙ uliftYoneda.{u + 1}.obj Q.obj) (t : FiniteLocalModelCompatibleTransport T E U Q e) : ∀ (W : Scheme.{u}) (a b c : W ⟶ U.left) (hab : a ≫ U.hom = b ≫ U.hom) (hbc : b ≫ U.hom = c ≫ U.hom) (x : Over.mk a ⟶ Over.mk Q.obj.hom), t.transport b c hbc (t.transport a b hab x) = t.transport a c (hab.trans hbc) x",
-  "branch": "sheaf-dag",
-  "by": "H2",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
-  "result": "pass",
-  "landing": "20261012T110305-L-616379",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "Q1",
-  "result": "pass",
-  "landing": "20261012T121111-L-991415",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.finiteLocalModels_descentDatum_compatibility_transport_cocycle"
   ],
-  "sorry_after": []
- }
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Natural transport of scheme points satisfying a cocycle from representation of an etale sheaf",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-12",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A representation of a sheaf on the small etale site gives compatible transport on a representing scheme",
+      "results": "Etale.forget, LocalRepresentability.representableBy, Etale.forgetFullyFaithful; no exact transport result",
+      "date": "2026-10-12"
+    },
+    {
+      "tool": "grep",
+      "query": "overTransport|descentDatum",
+      "results": "msearch returned zero hits; local rg found canonical Over transport from a big-site representation, not a small-site representation",
+      "date": "2026-10-12"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.uliftYoneda",
+      "results": "ULiftYoneda.fullyFaithful, uliftYonedaEquiv and Functor.FullyFaithful.homNatIso supply Yoneda comparisons but no extension from small-site compatible transport to arbitrary scheme points or its laws. Second-reader search.",
+      "date": "2026-10-12",
+      "verdict": "Supporting lemmas only; no duplicate statement."
+    }
+  ],
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransport",
+    "date": "2026-10-12",
+    "group": "H2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+      "place": "Yoneda comparison, then diagonal and cocycle laws of local representatives",
+      "via": [
+        "lem-weil-pbc-finite-local-models-descent-datum-compatibility",
+        "lem-weil-pbc-finite-local-models-descent-datum",
+        "lem-weil-pbc-finite-locally-constant-sets-descent",
+        "lem-weil-pbc-finite-locally-constant-sets-representability"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "proof": [
+    {
+      "text": "Put R = Q ×_T U ×_T U, with its three maps to U. Since Q → U and\nU → T are etale, R → T is etale. Its projection to Q is the universal point\nabove the first lift. Apply e inverse to that point to obtain a section s of\nE on R. Compatibility identifies the first transport with the point obtained\nfrom s above the second lift, and its subsequent transport with the point\nobtained from s above the third lift. Direct transport also equals the third\npoint, so these transports coincide. Given arbitrary W, x, a, b, c, the maps\nx.left, b, c have equal composites to T. The pullback universal property\ntherefore gives W → R whose composites are the given maps. Apply naturality\nthree times to pull back the universal equality. Functoriality of composition\nthen gives the displayed equality. Proof irrelevance identifies the equalities\nof composites used as transport arguments. Empty schemes satisfy the same\nuniversal properties; neither surjectivity nor nonemptiness is needed.",
+      "uses": [
+        "def-weil-pbc-finite-local-model-compatible-transport"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-finite-local-model-compatible-transport"
+  ],
+  "proof_origin": {
+    "by": "worker",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03RV and 02W5"
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransportCocycle",
+    "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalModelsDescentDatumCompatibilityTransportCocycle.lean",
+    "declaration": "AlgebraicGeometry.Scheme.finiteLocalModels_descentDatum_compatibility_transport_cocycle",
+    "statement": "theorem finiteLocalModels_descentDatum_compatibility_transport_cocycle (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (U : T.Etale) (Q : U.left.FiniteEtale) (e : (E.over U).obj ≅ (Etale.overToEtale U).op ⋙ uliftYoneda.{u + 1}.obj Q.obj) (t : FiniteLocalModelCompatibleTransport T E U Q e) : ∀ (W : Scheme.{u}) (a b c : W ⟶ U.left) (hab : a ≫ U.hom = b ≫ U.hom) (hbc : b ≫ U.hom = c ≫ U.hom) (x : Over.mk a ⟶ Over.mk Q.obj.hom), t.transport b c hbc (t.transport a b hab x) = t.transport a c (hab.trans hbc) x",
+    "branch": "sheaf-dag",
+    "by": "H2",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "H2",
+    "result": "pass",
+    "landing": "20261012T110305-L-616379",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "H2",
+    "result": "pass",
+    "landing": "20261012T110305-L-616379",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }

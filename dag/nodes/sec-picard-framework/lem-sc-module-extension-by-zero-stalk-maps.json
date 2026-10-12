@@ -1,141 +1,160 @@
 {
- "id": "lem-sc-module-extension-by-zero-stalk-maps",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "proper-flat support proof: Mayer–Vietoris triangle for the two-open cover; the stalk check of the underlying extension-by-zero short exact sequence (Stacks 08BU proof via Sheaves 00A7)",
-   "via": [
-    "lem-sc-derived-open-mayer-vietoris-ses",
-    "lem-sc-derived-mayer-vietoris-triangle",
-    "lem-sc-derived-hom-mayer-vietoris"
-   ]
+  "id": "lem-sc-module-extension-by-zero-stalk-maps",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "proper-flat support proof: Mayer–Vietoris triangle for the two-open cover; the stalk check of the underlying extension-by-zero short exact sequence (Stacks 08BU proof via Sheaves 00A7)",
+      "via": [
+        "lem-sc-derived-open-mayer-vietoris-ses",
+        "lem-sc-derived-mayer-vietoris-triangle",
+        "lem-sc-derived-hom-mayer-vietoris"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Stalks of extension by zero of modules on a ringed space, and the maps between them",
- "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism] and $F$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For an open $W\\subseteq X$ with inclusion $j_W$ write $j_{W,!}:\\operatorname{Mod}(\\mathcal O_X|_W)\\to\\operatorname{Mod}(\\mathcal O_X)$ for extension by zero, the left adjoint of restriction [lem-sc-derived-open-restriction-adjunction-exact], and use stalks as in [def-weil-pbc-module-stalk]. (1) For an $\\mathcal O_X|_W$-module $G$ and $x\\in X$: if $x\\notin W$ then $(j_{W,!}G)_x=0$; if $x\\in W$ there is an isomorphism of $\\mathcal O_{X,x}$-modules $G_x\\cong(j_{W,!}G)_x$, natural in $G$. (2) For opens $W\\subseteq W'\\subseteq X$ there is a canonical morphism of $\\mathcal O_X$-modules $\\iota_{W,W'}:j_{W,!}(F|_W)\\to j_{W',!}(F|_{W'})$, adjoint to the restriction to $W$ of the unit $F|_{W'}\\to(j_{W',!}(F|_{W'}))|_{W'}$ of the adjunction (with $j_{X,!}$ the identity functor and identity unit); $\\iota_{W,X}$ is the counit $j_{W,!}(F|_W)\\to F$ of the adjunction, $\\iota_{W,W}$ is the identity, and $\\iota_{W',W''}\\circ\\iota_{W,W'}=\\iota_{W,W''}$ for $W\\subseteq W'\\subseteq W''$. (3) For $x\\in W$, under the isomorphisms of (1) with $G=F|_W$ and $G=F|_{W'}$ (and $(F|_{W'})_x=F_x=(F|_W)_x$), the stalk $(\\iota_{W,W'})_x$ is the identity of $F_x$.",
- "source": {
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves Tag 00A7 (sheaves-lemma-j-shriek-modules), clauses (2)-(4), and the definition of $j_{p!}$ for presheaves of modules preceding it"
- },
- "stmt_deps": [
-  "def-weil-locally-ringed-space-morphism",
-  "def-weil-sheaf-of-modules-category",
-  "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-weil-pbc-module-stalk"
- ],
- "proof": [
-  {
-   "text": "Assemble outside stalk vanishing, the natural inside comparison with its germ formula, and the transition/counit laws as the three conjuncts.",
-   "uses": [
-    "lem-sc-module-extension-by-zero-stalk-maps-outside",
-    "lem-sc-module-extension-by-zero-stalk-maps-inside",
-    "lem-sc-module-extension-by-zero-stalk-maps-transitions"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-sc-module-extension-by-zero-stalk-maps-outside",
-  "lem-sc-module-extension-by-zero-stalk-maps-inside",
-  "lem-sc-module-extension-by-zero-stalk-maps-transitions"
- ],
- "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves Lemmas 00A7 and 00A5; conjunct decomposition by R3"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "stalk of extension by zero of a sheaf of modules along an open immersion of ringed spaces is the stalk inside the open and zero outside",
-   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso (stalk of restriction along an open immersion), ModuleCat.Tilde.* germ lemmas; no extension by zero of modules",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "created": {
-  "item": "lem-sc-derived-open-mayer-vietoris-ses",
-  "by": "reviewer",
-  "date": "2026-10-11"
- },
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-sc-module-extension-by-zero-stalk-maps",
-  "worker": "stage1",
-  "summary": "No matching Lean declaration or blueprint duplicate was found. The item is split in three steps: the existing arbitrary-ringed-space extension-by-zero adjunction and the topological extension-by-zero stalk lemma give the module stalk formula; adjunction transposes define the maps for nested opens and give their identity and composition laws; the topological naturality clause gives the identity on stalks, with module linearity supplied by the stalk definition.",
-  "blueprint": "Realizes the proper-flat support proof's Mayer–Vietoris stalk check, namely the stalk calculation for extension-by-zero terms and the compatibility maps.",
+  "kind": "statement",
+  "title": "Stalks of extension by zero of modules on a ringed space, and the maps between them",
+  "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism] and $F$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category]. For an open $W\\subseteq X$ with inclusion $j_W$ write $j_{W,!}:\\operatorname{Mod}(\\mathcal O_X|_W)\\to\\operatorname{Mod}(\\mathcal O_X)$ for extension by zero, the left adjoint of restriction [lem-sc-derived-open-restriction-adjunction-exact], and use stalks as in [def-weil-pbc-module-stalk]. (1) For an $\\mathcal O_X|_W$-module $G$ and $x\\in X$: if $x\\notin W$ then $(j_{W,!}G)_x=0$; if $x\\in W$ there is an isomorphism of $\\mathcal O_{X,x}$-modules $G_x\\cong(j_{W,!}G)_x$, natural in $G$. (2) For opens $W\\subseteq W'\\subseteq X$ there is a canonical morphism of $\\mathcal O_X$-modules $\\iota_{W,W'}:j_{W,!}(F|_W)\\to j_{W',!}(F|_{W'})$, adjoint to the restriction to $W$ of the unit $F|_{W'}\\to(j_{W',!}(F|_{W'}))|_{W'}$ of the adjunction (with $j_{X,!}$ the identity functor and identity unit); $\\iota_{W,X}$ is the counit $j_{W,!}(F|_W)\\to F$ of the adjunction, $\\iota_{W,W}$ is the identity, and $\\iota_{W',W''}\\circ\\iota_{W,W'}=\\iota_{W,W''}$ for $W\\subseteq W'\\subseteq W''$. (3) For $x\\in W$, under the isomorphisms of (1) with $G=F|_W$ and $G=F|_{W'}$ (and $(F|_{W'})_x=F_x=(F|_W)_x$), the stalk $(\\iota_{W,W'})_x$ is the identity of $F_x$.",
+  "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves Tag 00A7 (sheaves-lemma-j-shriek-modules), clauses (2)-(4), and the definition of $j_{p!}$ for presheaves of modules preceding it"
+  },
+  "stmt_deps": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-weil-pbc-module-stalk"
+  ],
+  "proof": [
+    {
+      "text": "For an $\\mathcal O_X|_W$-module $G$ let $P_G$ be the presheaf of $\\mathcal O_X$-modules with $P_G(V)=G(V)$ for opens $V\\subseteq W$ and $P_G(V)=0$ otherwise, restriction maps those of $G$ between opens inside $W$ and zero otherwise, $\\mathcal O_X(V)=(\\mathcal O_X|_W)(V)$ acting through $G$ when $V\\subseteq W$. Let $\\theta_G:P_G\\to P_G^\\#$ be its sheafification as a presheaf of $\\mathcal O_X$-modules [def-weil-presheaf-modules-sheafification]; its underlying abelian sheaf is the abelian sheafification of $P_G$. For an $\\mathcal O_X$-module $H$, a morphism of presheaves of $\\mathcal O_X$-modules $P_G\\to H$ is the same as a morphism $G\\to H|_W$ (its components on opens $V\\subseteq W$; the other components are zero, and compatibility with restriction from $V\\not\\subseteq W$ holds because $P_G(V)=0$). With the universal property of $\\theta_G$ this gives bijections $\\operatorname{Hom}(P_G^\\#,H)\\cong\\operatorname{Hom}(G,H|_W)$, natural in $G$ and $H$; so $G\\mapsto P_G^\\#$ is a left adjoint of restriction, and by uniqueness of left adjoints up to a unique natural isomorphism compatible with the adjunction bijections, $j_{W,!}G\\cong P_G^\\#$ for the left adjoint of [lem-sc-derived-open-restriction-adjunction-exact]. Under this isomorphism the counit $j_{W,!}(H|_W)\\to H$ is the morphism induced by the presheaf map $P_{H|_W}\\to H$ that is the identity on opens $V\\subseteq W$ and zero otherwise. The underlying abelian presheaf of $P_G$ is the presheaf $j_{p!}G$ of [lem-sc-topological-extension-by-zero-stalks], so that lemma gives $(j_{W,!}G)_x=0$ for $x\\notin W$ and, for $x\\in W$, the isomorphism $G_x\\cong(j_{W,!}G)_x$, $s_x\\mapsto\\theta_G(s)_x$, natural in $G$. This isomorphism is induced by the $\\mathcal O_X$-linear maps $G(V)=P_G(V)\\to P_G^\\#(V)$ for opens $x\\in V\\subseteq W$, which are cofinal among the neighbourhoods of $x$, so it is $\\mathcal O_{X,x}$-linear by the module structure on stalks in [def-weil-pbc-module-stalk].",
+      "uses": [
+        "def-weil-presheaf-modules-sheafification",
+        "lem-sc-derived-open-restriction-adjunction-exact",
+        "lem-sc-topological-extension-by-zero-stalks",
+        "def-weil-pbc-module-stalk"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Sheaves Lemma 00A7 (lemma-j-shriek-modules), clauses (2)-(3), with Definition 00A4 and the stalk calculation in Lemma 00A5"
+      }
+    },
+    {
+      "text": "Write $\\eta^{W'}:F|_{W'}\\to(j_{W',!}(F|_{W'}))|_{W'}$ for the unit of $j_{W',!}\\dashv(-)|_{W'}$ [lem-sc-derived-open-restriction-adjunction-exact], with $j_{X,!}$ the identity functor and $\\eta^X=\\mathrm{id}_F$. For a morphism $g:F|_W\\to H|_W$ of $\\mathcal O_X|_W$-modules let $g^\\flat:j_{W,!}(F|_W)\\to H$ be its transpose, the unique morphism with $(g^\\flat)|_W\\circ\\eta^W=g$. By definition $\\iota_{W,W'}=(\\eta^{W'}|_W)^\\flat$. For $W'=X$ this is $(\\mathrm{id}_{F|_W})^\\flat$, the counit. For $W'=W$, the identity satisfies $\\mathrm{id}|_W\\circ\\eta^W=\\eta^W$, so $\\iota_{W,W}=\\mathrm{id}$. For $W\\subseteq W'\\subseteq W''$, restricting the defining identities $(\\iota_{W,W'})|_W\\circ\\eta^W=\\eta^{W'}|_W$ and $(\\iota_{W',W''})|_{W'}\\circ\\eta^{W'}=\\eta^{W''}|_{W'}$ to $W$ gives $(\\iota_{W',W''}\\circ\\iota_{W,W'})|_W\\circ\\eta^W=\\eta^{W''}|_W$, so $\\iota_{W',W''}\\circ\\iota_{W,W'}$ and $\\iota_{W,W''}$ are both transposes of $\\eta^{W''}|_W$ and are equal by uniqueness of transposes.",
+      "uses": [
+        "lem-sc-derived-open-restriction-adjunction-exact"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Sheaves Lemma 00A7 (lemma-j-shriek-modules), clause (2), and the adjunction identities"
+      }
+    },
+    {
+      "text": "Let $x\\in W\\subseteq W'$. By Step 1 the counit $\\iota_{W,X}:j_{W,!}(F|_W)\\to F$ is induced by the presheaf map that is the identity on opens inside $W$ and zero otherwise, so the adjunction-map clause of [lem-sc-topological-extension-by-zero-stalks] (for the open $W$ and the underlying abelian sheaf of $F$) identifies $(\\iota_{W,X})_x$ with $\\mathrm{id}_{F_x}$ under the isomorphism of (1); likewise $(\\iota_{W',X})_x=\\mathrm{id}_{F_x}$ since $x\\in W'$. By Step 2, $\\iota_{W',X}\\circ\\iota_{W,W'}=\\iota_{W,X}$, and stalk maps are functorial [def-weil-pbc-module-stalk], so $(\\iota_{W',X})_x\\circ(\\iota_{W,W'})_x=(\\iota_{W,X})_x$; hence $(\\iota_{W,W'})_x=\\mathrm{id}_{F_x}$ under the isomorphisms of (1) for $F|_W$ and $F|_{W'}$. Stalk maps of morphisms of $\\mathcal O_X$-modules are $\\mathcal O_{X,x}$-linear [def-weil-pbc-module-stalk], so this is an equality of $\\mathcal O_{X,x}$-linear maps.",
+      "uses": [
+        "lem-sc-topological-extension-by-zero-stalks",
+        "def-weil-pbc-module-stalk"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sheaves.tex",
+        "place": "Sheaves Lemma 00A5 (lemma-j-shriek-abelian), clauses (2), (3), (5), applied to the presheaf map defining the adjunction morphism"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sc-topological-extension-by-zero-stalks",
+    "def-weil-pbc-module-stalk"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Sheaves Lemma 00A7 and Lemma 00A5"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "stalk of extension by zero of a sheaf of modules along an open immersion of ringed spaces is the stalk inside the open and zero outside",
+      "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso (stalk of restriction along an open immersion), ModuleCat.Tilde.* germ lemmas; no extension by zero of modules",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "created": {
+    "item": "lem-sc-derived-open-mayer-vietoris-ses",
+    "by": "reviewer",
+    "date": "2026-10-11"
+  },
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-sc-module-extension-by-zero-stalk-maps",
+    "worker": "stage1",
+    "summary": "No matching Lean declaration or blueprint duplicate was found. The item is split in three steps: the existing arbitrary-ringed-space extension-by-zero adjunction and the topological extension-by-zero stalk lemma give the module stalk formula; adjunction transposes define the maps for nested opens and give their identity and composition laws; the topological naturality clause gives the identity on stalks, with module linearity supplied by the stalk definition.",
+    "blueprint": "Realizes the proper-flat support proof's Mayer–Vietoris stalk check, namely the stalk calculation for extension-by-zero terms and the compatibility maps.",
+    "tool_uses": [
+      {
+        "node": "lem-sc-topological-extension-by-zero-stalks",
+        "why": "The module stalk calculation uses the underlying abelian sheafification and its natural extension-by-zero stalk formula; the Picard-duality unit has no more specific module stalk node."
+      },
+      {
+        "node": "def-weil-presheaf-modules-sheafification",
+        "why": "Generic sheafification of presheaves of modules, used to identify the left adjoint with the sheafified extension-by-zero presheaf."
+      }
+    ]
+  },
   "tool_uses": [
-   {
-    "node": "lem-sc-topological-extension-by-zero-stalks",
-    "why": "The module stalk calculation uses the underlying abelian sheafification and its natural extension-by-zero stalk formula; the Picard-duality unit has no more specific module stalk node."
-   },
-   {
-    "node": "def-weil-presheaf-modules-sheafification",
-    "why": "Generic sheafification of presheaves of modules, used to identify the left adjoint with the sheafified extension-by-zero presheaf."
-   }
-  ]
- },
- "tool_uses": [
-  "def-weil-presheaf-modules-sheafification",
-  "lem-sc-topological-extension-by-zero-stalks",
-  "def-weil-presheaf-modules-sheafification"
- ],
- "reviewed": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-ezs0041",
-  "group": "G1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ezs0041 (reviewer sub-agent of L); spot-checked: Read Stacks 00A7/00A5, the adjunction node (statement+proof), lem-sc-topological-extension-by-zero-stalks, def-weil-presheaf-modules-sheafification, the citer fc4269c2e; duplicate check: lem-weil-pbc-module-extension-by-zero-adjunction is the scheme-only (sk-thm-p1) version, not a duplicate of this ringed-space node. FIX more, RETURN less: (1) C4/C1 Step 1 claimed the adjunction node's statement identifies j_! with the sheafified presheaf (only its proof does): replaced by sheafification universal property [def-weil-presheaf-modules-sheafification, now cited and declared tool use] + uniqueness of left adjoints, with the counit described as the presheaf map; dropped unused lem-weil-pbc-stalk-sheafification-space (inside the topological node). (2) Step 2 restricted the counit j_{W',!}(F|_{W'})->F to W and called it a map F|_W->(...)|_W (wrong direction): rewritten with the unit eta^{W'}|_W and explicit transpose identities; statement clause (2) reworded accordingly (E7). (3) C4 Step 3 applied the topological counit-stalk clause 'to the inclusions W in W'' which it does not cover: now stalks of iota_{W,X}, iota_{W',X} are identity by that clause and iota_{W,W'} follows from the composition law of Step 2.; 1 file(s) fixed by the reviewer"
- },
- "lead_note": "2026-10-11 L (R-ezs0041): E7: clause (2) statement reworded: the morphism F|_W -> (j_{W',!}F|_{W'})|_W is now named as the restriction of the unit (old 'corresponding to the identity' was undefined), j_{X,!}=id made explicit so iota_{W,X} is the counit as the citer lem-sc-derived-open-mayer-vietoris-ses uses it",
- "lean": {
-  "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps",
-  "declaration": "AlgebraicGeometry.module_extensionByZero_stalk_maps",
-  "statement": "theorem module_extensionByZero_stalk_maps (X : RingedSpace.{u}) : (∀ (W : Opens X) (G : SheafOfModules.{u} ((moduleRings X).over W)) (x : X), x ∉ W → IsZero ((RingedSpace.moduleStalkFunctor X x).obj ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj G))) ∧ (∀ (W : Opens X) (x : X) (hx : x ∈ W), ∃ e : (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙ RingedSpace.moduleStalkFunctor (X.restrict (Opens.isOpenEmbedding W)) ⟨x, hx⟩ ⋙ ModuleCat.restrictScalars (X.toPresheafedSpace.restrictStalkIso (Opens.isOpenEmbedding W) ⟨x, hx⟩).inv.hom ≅ (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)) ⋙ RingedSpace.moduleStalkFunctor X x, ∀ (G : SheafOfModules.{u} ((moduleRings X).over W)) (V : Opens W) (hV : (⟨x, hx⟩ : W) ∈ V) (s : ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.obj (op V)), (e.hom.app G) (TopCat.Presheaf.germ (C := Ab.{u}) (X := (X.restrict (Opens.isOpenEmbedding W)).carrier) ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.presheaf V ⟨x, hx⟩ hV s) = TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier) ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj G).val.presheaf ((Opens.isOpenEmbedding W).isOpenMap.functor.obj V) x ⟨⟨x, hx⟩, hV, rfl⟩ (((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G).val.app (op (Over.mk (homOfLE (Set.image_subset_iff.2 (fun y _ => y.2))))) s)) ∧ (∀ F : SheafOfModules.{u} (moduleRings X), IsIso ((Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F) ∧ ∃ iota : (∀ (W W' : Opens X), W ≤ W' → ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W).obj F) ⟶ (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F))), (∀ (W W' : Opens X) (h : W ≤ W'), (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).homEquiv _ _ (iota W W' h) = (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).inv.app F ≫ (SheafOfModules.overMap (moduleRings X) (homOfLE h)).map ((Classical.choice (open_restriction_adjunction_exact X W').2.2.2.2).unit.app ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F)) ≫ (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).hom.app ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F))) ∧ (∀ W : Opens X, iota W W le_rfl = 𝟙 _) ∧ (∀ (W W' W'' : Opens X) (h : W ≤ W') (h' : W' ≤ W''), iota W W' h ≫ iota W' W'' h' = iota W W'' (h.trans h')) ∧ (∀ W : Opens X, iota W ⊤ le_top ≫ (Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F = (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app F) ∧ ∃ e : (∀ (W : Opens X) (x : X), x ∈ W → ((RingedSpace.moduleStalkFunctor X x).obj F ≅ (RingedSpace.moduleStalkFunctor X x).obj ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W).obj F)))), (∀ (W : Opens X) (x : X) (hx : x ∈ W), (e W x hx).inv = (RingedSpace.moduleStalkFunctor X x).map ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app F)) ∧ (∀ (W W' : Opens X) (h : W ≤ W') (x : X) (hx : x ∈ W), (e W x hx).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (iota W W' h) = (e W' x (h hx)).hom))",
-  "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-11",
-  "existing": false,
-  "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroStalkMaps.lean",
-  "note": "Extension by zero is written out as the landed extensionByZeroPresheaf ⋙ sheafification and its adjunction is Classical.choice of open_restriction_adjunction_exact (the form of the citer open_extension_mayer_vietoris_shortExact), so iota and the counits are those of the landed adjunction. Clause (1) inside W is a natural O_{X,x}-linear isomorphism G_x ≅ (j_!G)_x of ambient stalks (scalars restricted along restrictStalkIso), tied by the germ-of-unit formula. Top-open extension is identified with the identity by the counit isomorphism, so the top transition equals the counit after that identification.",
-  "fixed_by": "R-ezs1406"
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "R-ezs1406",
-  "group": "E1",
-  "result": "fix",
-  "note": "X ringed space, F/G modules, W ≤ W' opens; j_! = extensionByZeroPresheaf ⋙ sheafification with adjunction Classical.choice of open_restriction_adjunction_exact (matches landed MV SES counits); (1) zero stalk off W, ambient natural O_X,x-iso G_x ≅ (j_!G)_x tied by germ-of-unit (was restricted-stalk only, over a ∃-chosen adjunction); (2) iota via homEquiv of restricted unit, iota_WW = id, composition, iota_{W,⊤} ≫ ε_⊤ = ε_W with ε_⊤ iso; (3) e.inv = stalk of counit, e ≫ iota_x = e'; private abbrevs inlined"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sc-topological-extension-by-zero-stalks",
+    "def-weil-presheaf-modules-sheafification"
+  ],
+  "reviewed": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-ezs0041",
+    "group": "G1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ezs0041 (reviewer sub-agent of L); spot-checked: Read Stacks 00A7/00A5, the adjunction node (statement+proof), lem-sc-topological-extension-by-zero-stalks, def-weil-presheaf-modules-sheafification, the citer fc4269c2e; duplicate check: lem-weil-pbc-module-extension-by-zero-adjunction is the scheme-only (sk-thm-p1) version, not a duplicate of this ringed-space node. FIX more, RETURN less: (1) C4/C1 Step 1 claimed the adjunction node's statement identifies j_! with the sheafified presheaf (only its proof does): replaced by sheafification universal property [def-weil-presheaf-modules-sheafification, now cited and declared tool use] + uniqueness of left adjoints, with the counit described as the presheaf map; dropped unused lem-weil-pbc-stalk-sheafification-space (inside the topological node). (2) Step 2 restricted the counit j_{W',!}(F|_{W'})->F to W and called it a map F|_W->(...)|_W (wrong direction): rewritten with the unit eta^{W'}|_W and explicit transpose identities; statement clause (2) reworded accordingly (E7). (3) C4 Step 3 applied the topological counit-stalk clause 'to the inclusions W in W'' which it does not cover: now stalks of iota_{W,X}, iota_{W',X} are identity by that clause and iota_{W,W'} follows from the composition law of Step 2.; 1 file(s) fixed by the reviewer"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "lead_note": "2026-10-11 L (R-ezs0041): E7: clause (2) statement reworded: the morphism F|_W -> (j_{W',!}F|_{W'})|_W is now named as the restriction of the unit (old 'corresponding to the identity' was undefined), j_{X,!}=id made explicit so iota_{W,X} is the counit as the citer lem-sc-derived-open-mayer-vietoris-ses uses it",
+  "lean": {
+    "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps",
+    "declaration": "AlgebraicGeometry.module_extensionByZero_stalk_maps",
+    "statement": "theorem module_extensionByZero_stalk_maps (X : RingedSpace.{u}) : (∀ (W : Opens X) (G : SheafOfModules.{u} ((moduleRings X).over W)) (x : X), x ∉ W → IsZero ((RingedSpace.moduleStalkFunctor X x).obj ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj G))) ∧ (∀ (W : Opens X) (x : X) (hx : x ∈ W), ∃ e : (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙ RingedSpace.moduleStalkFunctor (X.restrict (Opens.isOpenEmbedding W)) ⟨x, hx⟩ ⋙ ModuleCat.restrictScalars (X.toPresheafedSpace.restrictStalkIso (Opens.isOpenEmbedding W) ⟨x, hx⟩).inv.hom ≅ (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)) ⋙ RingedSpace.moduleStalkFunctor X x, ∀ (G : SheafOfModules.{u} ((moduleRings X).over W)) (V : Opens W) (hV : (⟨x, hx⟩ : W) ∈ V) (s : ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.obj (op V)), (e.hom.app G) (TopCat.Presheaf.germ (C := Ab.{u}) (X := (X.restrict (Opens.isOpenEmbedding W)).carrier) ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.presheaf V ⟨x, hx⟩ hV s) = TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier) ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj G).val.presheaf ((Opens.isOpenEmbedding W).isOpenMap.functor.obj V) x ⟨⟨x, hx⟩, hV, rfl⟩ (((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G).val.app (op (Over.mk (homOfLE (Set.image_subset_iff.2 (fun y _ => y.2))))) s)) ∧ (∀ F : SheafOfModules.{u} (moduleRings X), IsIso ((Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F) ∧ ∃ iota : (∀ (W W' : Opens X), W ≤ W' → ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W).obj F) ⟶ (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F))), (∀ (W W' : Opens X) (h : W ≤ W'), (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).homEquiv _ _ (iota W W' h) = (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).inv.app F ≫ (SheafOfModules.overMap (moduleRings X) (homOfLE h)).map ((Classical.choice (open_restriction_adjunction_exact X W').2.2.2.2).unit.app ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F)) ≫ (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE h)).hom.app ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W' ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W').obj F))) ∧ (∀ W : Opens X, iota W W le_rfl = 𝟙 _) ∧ (∀ (W W' W'' : Opens X) (h : W ≤ W') (h' : W' ≤ W''), iota W W' h ≫ iota W' W'' h' = iota W W'' (h.trans h')) ∧ (∀ W : Opens X, iota W ⊤ le_top ≫ (Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F = (Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app F) ∧ ∃ e : (∀ (W : Opens X) (x : X), x ∈ W → ((RingedSpace.moduleStalkFunctor X x).obj F ≅ (RingedSpace.moduleStalkFunctor X x).obj ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙ PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj ((SheafOfModules.overFunctor.{u} (moduleRings X) W).obj F)))), (∀ (W : Opens X) (x : X) (hx : x ∈ W), (e W x hx).inv = (RingedSpace.moduleStalkFunctor X x).map ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).counit.app F)) ∧ (∀ (W W' : Opens X) (h : W ≤ W') (x : X) (hx : x ∈ W), (e W x hx).hom ≫ (RingedSpace.moduleStalkFunctor X x).map (iota W W' h) = (e W' x (h hx)).hom))",
+    "branch": "sheaf-dag",
+    "by": "E1",
+    "date": "2026-10-11",
+    "existing": false,
+    "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroStalkMaps.lean",
+    "note": "Extension by zero is written out as the landed extensionByZeroPresheaf ⋙ sheafification and its adjunction is Classical.choice of open_restriction_adjunction_exact (the form of the citer open_extension_mayer_vietoris_shortExact), so iota and the counits are those of the landed adjunction. Clause (1) inside W is a natural O_{X,x}-linear isomorphism G_x ≅ (j_!G)_x of ambient stalks (scalars restricted along restrictStalkIso), tied by the germ-of-unit formula. Top-open extension is identified with the identity by the counit isomorphism, so the top transition equals the counit after that identification.",
+    "fixed_by": "R-ezs1406"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "R-ezs1406",
+    "group": "E1",
+    "result": "fix",
+    "note": "X ringed space, F/G modules, W ≤ W' opens; j_! = extensionByZeroPresheaf ⋙ sheafification with adjunction Classical.choice of open_restriction_adjunction_exact (matches landed MV SES counits); (1) zero stalk off W, ambient natural O_X,x-iso G_x ≅ (j_!G)_x tied by germ-of-unit (was restricted-stalk only, over a ∃-chosen adjunction); (2) iota via homEquiv of restricted unit, iota_WW = id, composition, iota_{W,⊤} ≫ ε_⊤ = ε_W with ε_⊤ iso; (3) e.inv = stalk of counit, e ≫ iota_x = e'; private abbrevs inlined"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
-  "result": "pass",
-  "landing": "20261012T121303-L-1001429",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

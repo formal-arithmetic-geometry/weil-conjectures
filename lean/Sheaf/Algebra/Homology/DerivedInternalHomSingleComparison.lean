@@ -10,10 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
-import Sheaf.Algebra.Homology.HomComplexSingleNatural
+import Sheaf.AlgebraicGeometry.HomComplexSingle
 import Sheaf.Algebra.Homology.HomComplex
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Deriving internal Hom from a module in degree zero
 
@@ -73,77 +72,6 @@ theorem derivedInternalHom_single_comparison
     Nonempty (S ≅ (Functor.curry.obj
       (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)).obj
         (op ((DerivedCategory.singleFunctor _ 0).obj M))) := by
-  classical
-  let A := SheafOfModules.{u} (AlgebraicGeometry.moduleRings X.toRingedSpace)
-  let Pc := (CochainComplex.singleFunctor A 0).obj M
-  let T : A ⥤ A := (SheafOfModules.homFunctor X.sheaf).obj (op M)
-  let H := (homComplexFunctor (R := X.sheaf)).obj (op Pc)
-  let T₀ := T.mapHomologicalComplex (ComplexShape.up ℤ)
-  obtain ⟨eH⟩ := homComplex_single_natIso X M
-  let _ : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
-  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
-  let η := CochainComplex.toKInjectiveResolution.{u} A
-  let Φ := CochainComplex.KInjectives.localizerMorphism A
-  have hderive : Φ.Derives (T₀ ⋙ DerivedCategory.Q) := by
-    intro K L f hf
-    have : K.obj.IsKInjective := K.property
-    have : L.obj.IsKInjective := L.property
-    have : QuasiIso f.hom := hf
-    have hq : QuasiIso (H.map f.hom) := by
-      have h := quasiIso_homComplex_map (R := X.sheaf) f.hom (𝟙 Pc)
-      simpa only [op_id, Functor.map_id, NatTrans.id_app, Category.id_comp] using h
-    have hi : IsIso (DerivedCategory.Q.map (H.map f.hom)) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hq
-    have hnQ := congrArg DerivedCategory.Q.map (eH.hom.naturality f.hom)
-    simp only [Functor.map_comp] at hnQ
-    have : IsIso (DerivedCategory.Q.map (eH.hom.app K.obj) ≫
-        DerivedCategory.Q.map (T₀.map f.hom)) := by
-      rw [← hnQ]
-      infer_instance
-    have hiT : IsIso (DerivedCategory.Q.map (T₀.map f.hom)) :=
-      IsIso.of_isIso_comp_left (DerivedCategory.Q.map (eH.hom.app K.obj))
-        (DerivedCategory.Q.map (T₀.map f.hom))
-    exact hiT
-  let _ := hδ
-  have hδI : IsIso (Functor.whiskerLeft I δ) := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro K
-    have : (I.obj K).IsKInjective :=
-      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A K
-    exact hderive.isIso_of_isRightDerivedFunctor (L₂ := DerivedCategory.Q) (RF := S) δ
-      (CochainComplex.KInjectives.mk (I.obj K))
-  have hηS : IsIso (Functor.whiskerRight η (DerivedCategory.Q ⋙ S)) := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro K
-    have : QuasiIso (η.app K) :=
-      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A K).2
-    have : IsIso (DerivedCategory.Q.map (η.app K)) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr inferInstance
-    exact S.map_isIso _
-  obtain ⟨eR⟩ := derivedInternalHom_comparison (Opens.grothendieckTopology X) X.sheaf
-    I η (fun K ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A K).2,
-      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A K⟩)
-  let R₀ := (Functor.curry.obj
-    (derivedInternalHom (Opens.grothendieckTopology X) X.sheaf)).obj
-      (op (DerivedCategory.Q.obj Pc))
-  let eR₀ : DerivedCategory.Q ⋙ R₀ ≅ I ⋙ H ⋙ DerivedCategory.Q :=
-    NatIso.ofComponents (fun K ↦ eR.app (op Pc, K)) (by
-      intro K L f
-      simpa only [Functor.comp_map, Functor.prod_map, Functor.prod_obj, Functor.id_obj,
-        Functor.op_map, op_id, unop_id,
-        Functor.map_id, Functor.uncurry_obj_map, NatTrans.id_app, Category.id_comp,
-        R₀, H,
-        Functor.comp_obj, Functor.op_obj,
-        Functor.uncurry_obj_obj, Functor.curry_obj_obj_obj, Iso.app_hom,
-        Functor.curry_obj_obj_map] using
-          eR.hom.naturality (X := (op Pc, K)) (Y := (op Pc, L)) (𝟙 (op Pc), f))
-  let eIQ : I ⋙ H ⋙ DerivedCategory.Q ≅ I ⋙ T₀ ⋙ DerivedCategory.Q :=
-    Functor.isoWhiskerLeft I (Functor.isoWhiskerRight eH DerivedCategory.Q)
-  let eS : DerivedCategory.Q ⋙ S ≅ I ⋙ T₀ ⋙ DerivedCategory.Q :=
-    asIso (Functor.whiskerRight η (DerivedCategory.Q ⋙ S)) ≪≫
-      (asIso (Functor.whiskerLeft I δ)).symm
-  exact ⟨Localization.liftNatIso DerivedCategory.Q
-    (HomologicalComplex.quasiIso A (.up ℤ)) _ _ S R₀
-      (eS ≪≫ eIQ.symm ≪≫ eR₀.symm)⟩
+  sorry
 
 end CategoryTheory

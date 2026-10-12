@@ -1,147 +1,144 @@
 {
- "id": "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-proper-underived-exchange",
-   "place": "proof, paragraph beginning 'The base Y_(ybar) is strictly henselian local': pullback of the coproduct representing the constant sheaf along v",
-   "via": [
-    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
-    "lem-weil-pbc-constant-sheaf-set-sections-connected-natural"
-   ]
+  "id": "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-proper-underived-exchange",
+      "place": "proof, paragraph beginning 'The base Y_(ybar) is strictly henselian local': pullback of the coproduct representing the constant sheaf along v",
+      "via": [
+        "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+        "lem-weil-pbc-constant-sheaf-set-sections-connected-natural"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Base change of an indexed coproduct of copies of a scheme",
- "statement": "Let $U$ and $V$ be schemes [def-pc-scheme], let $v:V\\to U$ be a morphism, let $E$ be a set, and let $U_E=\\coprod_{e\\in E}U$ and $V_E=\\coprod_{e\\in E}V$ be the coproducts of copies of the schemes [lem-weil-pbc-scheme-coproduct-family], with codiagonals to $U$ and $V$. Then the morphism of schemes over $V$ $$V_E\\longrightarrow V\\times_U U_E$$ whose restriction to the $e$-th summand is the unique morphism with projections $\\operatorname{id}_V:V\\to V$ and $\\iota_e\\circ v:V\\to U_E$ is an isomorphism. Under this isomorphism, the $e$-th coprojection of $V_E$ corresponds to the base change of the $e$-th coprojection of $U_E$.",
- "source": {
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemmas Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes), applied to the coproduct family after base change, with the universal property of fibre products in Section 26.17"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-scheme-coproduct-family"
- ],
- "proof": [
-  {
-   "text": "Let c be the codiagonal of the coproduct of copies of U and j_e the pullback lift with projections identity and v followed by the e-th coprojection. Base change the coproduct open cover using Mathlib Scheme.Pullback.openCoverOfRight. Its e-th source is pullback v (Sigma.ι e ≫ c). Since Sigma.ι e ≫ c is the identity, construct an explicit isomorphism a_e from V to this source, with inverse pullback.fst; both inverse identities follow from pullback.hom_ext and pullback.condition. The equations of pullback.map show j_e = a_e.hom followed by the e-th cover map. Thus all j_e are open immersions and their images cover the pullback.",
-   "uses": [
+  "kind": "statement",
+  "title": "Base change of an indexed coproduct of copies of a scheme",
+  "statement": "Let $U$ and $V$ be schemes [def-pc-scheme], let $v:V\\to U$ be a morphism, let $E$ be a set, and let $U_E=\\coprod_{e\\in E}U$ and $V_E=\\coprod_{e\\in E}V$ be the coproducts of copies of the schemes [lem-weil-pbc-scheme-coproduct-family], with codiagonals to $U$ and $V$. Then the morphism of schemes over $V$ $$V_E\\longrightarrow V\\times_U U_E$$ whose restriction to the $e$-th summand is the unique morphism with projections $\\operatorname{id}_V:V\\to V$ and $\\iota_e\\circ v:V\\to U_E$ is an isomorphism. Under this isomorphism, the $e$-th coprojection of $V_E$ corresponds to the base change of the $e$-th coprojection of $U_E$.",
+  "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes), applied to the coproduct family after base change, with the universal property of fibre products in Section 26.17"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+  ],
+  "proof": [
+    {
+      "text": "By [lem-weil-pbc-scheme-coproduct-family], the coprojections of $U_E$ and $V_E$ are open immersions with pairwise disjoint images covering their targets; hence each summand is open and closed. For every $e$, the pair of maps $\\operatorname{id}_V:V\\to V$ and $\\iota_e\\circ v:V\\to U_E$ has equal composites to $U$, so the universal property of the fibre product [def-pc-fibre-product] gives a unique map $j_e:V\\to V\\times_U U_E$ over $V$. The maps $j_e$ assemble, by the coproduct universal property, to the displayed morphism $j:V_E\\to V\\times_UU_E$.",
+      "uses": [
+        "def-pc-fibre-product",
+        "lem-weil-pbc-scheme-coproduct-family"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/schemes.tex",
+        "place": "Schemes, Lemmas Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes), with the universal property of fibre products"
+      }
+    },
+    {
+      "text": "For each $e$, apply [lem-weil-pbc-open-fibre-product] to the open subscheme $\\iota_e(U)\\subseteq U_E$ and the identity open subscheme of $V$: it identifies $V\\times_U\\iota_e(U)\\cong V\\times_UU\\cong V$ with the open subscheme $W_e=q^{-1}(\\iota_e(U))$ of $V\\times_UU_E$, and the resulting open immersion $V\\to V\\times_UU_E$ has projections $\\operatorname{id}_V$ and $\\iota_e\\circ v$, so by the uniqueness in [def-pc-fibre-product] it is $j_e$, the base change of $\\iota_e$; thus $j_e$ is an isomorphism $V\\to W_e$. The $W_e$ are pairwise disjoint because the $\\iota_e(U)$ are, and they cover $V\\times_UU_E$ because every point of $U_E$ lies in one $\\iota_e(U)$ [lem-weil-pbc-scheme-coproduct-family]. By [lem-weil-pbc-scheme-morphism-gluing] applied to the open covering $(W_e)_{e\\in E}$ (the overlap condition is vacuous for $e\\ne e'$), the morphisms $\\iota'_e\\circ j_e^{-1}:W_e\\to V_E$, with $\\iota'_e$ the coprojections of $V_E$, glue to $g:V\\times_UU_E\\to V_E$. Then $g\\circ j\\circ\\iota'_e=\\iota'_e$ for every $e$, so $g\\circ j=\\operatorname{id}$ by the uniqueness in [lem-weil-pbc-scheme-coproduct-family]; and $j\\circ g$ restricts to the inclusion on every $W_e$, so $j\\circ g=\\operatorname{id}$ by the uniqueness in [lem-weil-pbc-scheme-morphism-gluing]. Thus $j$ is an isomorphism, and its restriction to the $e$-th summand is exactly the base change of $\\iota_e$.",
+      "uses": [
+        "def-pc-fibre-product",
+        "lem-weil-pbc-scheme-coproduct-family",
+        "lem-weil-pbc-open-fibre-product",
+        "lem-weil-pbc-scheme-morphism-gluing"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/schemes.tex",
+        "place": "Schemes, Lemmas Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes), applied to the coproduct family after base change"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-pc-fibre-product",
     "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-open-fibre-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The ranges of j_e and j_e' are disjoint for distinct indices: apply pullback.snd to any purported common point and use the disjointness of the coprojections, in Lean sigmaι_eq_iff. Mathlib isOpenImmersion_sigmaDesc then makes Sigma.desc j an open immersion. This criterion follows from the cited image-isomorphism and gluing statements: put O = ⋃ e, range(j_e); identify each V with its open image using lem-weil-pbc-open-immersion-iso-onto-image, and glue the inverses followed by the coprojections V → ∐ V over the disjoint open cover of O using lem-weil-pbc-scheme-morphism-gluing. The overlaps for distinct indices are empty, and the two composites are identities by gluing uniqueness and the coproduct universal property. Thus ∐ V → O is an isomorphism and its composite with O → pullback v c is an open immersion. Every point of the pullback comes from some component of the base-changed open cover; use a_e.inv to give its preimage in V and then the e-th coprojection into the coproduct of copies of V. Hence the range of Sigma.desc j is top. Apply isIso_of_isOpenImmersion_of_opensRange_eq_top, the full-image case of the open-immersion image isomorphism. Finally the displayed restriction equality is Sigma.ι_desc.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-open-immersion-iso-onto-image",
+    "lem-weil-pbc-open-fibre-product",
     "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-pc-fibre-product",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-open-immersion-iso-onto-image",
-  "lem-weil-pbc-scheme-morphism-gluing"
- ],
- "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Tags 01JB and 01JC and Section 26.17, implemented using Mathlib Scheme.Pullback.openCoverOfRight, isOpenImmersion_sigmaDesc and the full-image open-immersion criterion; P2 stage 3, 2026-10-12"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "base change of a coproduct of copies of a scheme is the coproduct of copies of the base changed scheme",
-   "results": "AlgebraicGeometry.isPullback_inr_inr_coprodMap (Mathlib/AlgebraicGeometry/Limits); AlgebraicGeometry.isPullback_inl_inl_coprodMap (same); AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall (same); no declaration for arbitrary indexed base-change distribution",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Schemes, Lemmas Tags 01JB and 01JC (lemma-glue and lemma-glue-schemes), applied to the coproduct family after base change"
   },
-  {
-   "tool": "loogle",
-   "query": "FinitaryExtensive, Scheme, universal finite coproducts",
-   "results": "no declarations (unknown identifier FinitaryExtensive)",
-   "date": "2026-10-11",
-   "verdict": "no match"
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "base change of a coproduct of copies of a scheme is the coproduct of copies of the base changed scheme",
+      "results": "AlgebraicGeometry.isPullback_inr_inr_coprodMap (Mathlib/AlgebraicGeometry/Limits); AlgebraicGeometry.isPullback_inl_inl_coprodMap (same); AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall (same); no declaration for arbitrary indexed base-change distribution",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "loogle",
+      "query": "FinitaryExtensive, Scheme, universal finite coproducts",
+      "results": "no declarations (unknown identifier FinitaryExtensive)",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rn 'sigmaOpenCover|isUniversal_finiteCoproducts' Mathlib/AlgebraicGeometry",
+      "results": "no matching declaration returned by the search command",
+      "date": "2026-10-11",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
+    "by": "worker",
+    "date": "2026-10-10"
   },
-  {
-   "tool": "grep",
-   "query": "grep -rn 'sigmaOpenCover|isUniversal_finiteCoproducts' Mathlib/AlgebraicGeometry",
-   "results": "no matching declaration returned by the search command",
-   "date": "2026-10-11",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-weil-pbc-sets-etale-inverse-image-constant-sheaf",
-  "by": "worker",
-  "date": "2026-10-10"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-iff",
- "split_report": {
-  "date": "2026-10-11",
-  "item": "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
-  "worker": "stage1",
-  "summary": "Checked that no sorry-free project declaration states this arbitrary-index base-change lemma. The existing finite-coproduct result is only a finite specialization, so it is not a duplicate. Split the proof into construction of the canonical map and the Stacks gluing argument showing that base change preserves the disjoint coproduct decomposition; no new nodes were needed.",
-  "blueprint": "Realizes the paragraph beginning 'The base Y_(ybar) is strictly henselian local' in blueprint node lemma-weil-pbc-proper-underived-exchange, specifically the pullback of the coproduct representing the constant sheaf along v.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-cbc1806",
-  "group": "C1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cbc1806 (reviewer sub-agent of L); spot-checked: Statement correct (empty/singleton E). No cycle: cited nodes are generic scheme facts, parent lem-weil-pbc-sets-etale-inverse-image-constant-sheaf cites this item; no sheafification in this node. Step 1 elementary, fine. FIX more, RETURN less: C1/C4 step 2 claimed the coproduct universal property of lem-weil-pbc-scheme-coproduct-family glues maps OUT OF V x_U U_E, which is not a coproduct by that statement; repaired by citing existing mathlib leaf lem-weil-pbc-scheme-morphism-gluing on the disjoint open cover W_e, writing g and both composites explicitly, and identifying j_e with the base change of iota_e via fibre-product uniqueness; uses/proof_deps updated. Second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange",
-  "declaration": "AlgebraicGeometry.baseChange_sigmaScheme_iso",
-  "file": "lean/Sheaf/Paper/SetsEtaleInverseImageConstantBaseChange.lean",
-  "statement": "theorem baseChange_sigmaScheme_iso (U V : Scheme.{u}) (v : V ⟶ U) (E : Type u) : IsIso (Sigma.desc (fun e ↦ pullback.lift (f := v) (g := Sigma.desc (fun _ : E ↦ 𝟙 U)) (𝟙 V) (v ≫ Sigma.ι (fun _ : E ↦ U) e) (by simp))) ∧ ∀ e : E, Sigma.ι (fun _ : E ↦ V) e ≫ Sigma.desc (fun e ↦ pullback.lift (f := v) (g := Sigma.desc (fun _ : E ↦ 𝟙 U)) (𝟙 V) (v ≫ Sigma.ι (fun _ : E ↦ U) e) (by simp)) = pullback.lift (f := v) (g := Sigma.desc (fun _ : E ↦ 𝟙 U)) (𝟙 V) (v ≫ Sigma.ι (fun _ : E ↦ U) e) (by simp)",
-  "branch": "sheaf-dag",
-  "by": "E1",
-  "date": "2026-10-11",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "E1",
-  "result": "pass",
-  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-iff",
+  "split_report": {
+    "date": "2026-10-11",
+    "item": "lem-weil-pbc-sets-etale-inverse-image-constant-base-change",
+    "worker": "stage1",
+    "summary": "Checked that no sorry-free project declaration states this arbitrary-index base-change lemma. The existing finite-coproduct result is only a finite specialization, so it is not a duplicate. Split the proof into construction of the canonical map and the Stacks gluing argument showing that base change preserves the disjoint coproduct decomposition; no new nodes were needed.",
+    "blueprint": "Realizes the paragraph beginning 'The base Y_(ybar) is strictly henselian local' in blueprint node lemma-weil-pbc-proper-underived-exchange, specifically the pullback of the coproduct representing the constant sheaf along v.",
+    "tool_uses": []
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-cbc1806",
+    "group": "C1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cbc1806 (reviewer sub-agent of L); spot-checked: Statement correct (empty/singleton E). No cycle: cited nodes are generic scheme facts, parent lem-weil-pbc-sets-etale-inverse-image-constant-sheaf cites this item; no sheafification in this node. Step 1 elementary, fine. FIX more, RETURN less: C1/C4 step 2 claimed the coproduct universal property of lem-weil-pbc-scheme-coproduct-family glues maps OUT OF V x_U U_E, which is not a coproduct by that statement; repaired by citing existing mathlib leaf lem-weil-pbc-scheme-morphism-gluing on the disjoint open cover W_e, writing g and both composites explicitly, and identifying j_e with the base change of iota_e via fibre-product uniqueness; uses/proof_deps updated. Second reading by C1 missed this.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange",
+    "declaration": "AlgebraicGeometry.baseChange_sigmaScheme_iso",
+    "file": "lean/Sheaf/Paper/SetsEtaleInverseImageConstantBaseChange.lean",
+    "statement": "theorem baseChange_sigmaScheme_iso (U V : Scheme.{u}) (v : V ⟶ U) (E : Type u) : IsIso (Sigma.desc (fun e ↦ pullback.lift (f := v) (g := Sigma.desc (fun _ : E ↦ 𝟙 U)) (𝟙 V) (v ≫ Sigma.ι (fun _ : E ↦ U) e) (by simp))) ∧ ∀ e : E, Sigma.ι (fun _ : E ↦ V) e ≫ Sigma.desc (fun e ↦ pullback.lift (f := v) (g := Sigma.desc (fun _ : E ↦ 𝟙 U)) (𝟙 V) (v ≫ Sigma.ι (fun _ : E ↦ U) e) (by simp)) = pullback.lift (f := v) (g := Sigma.desc (fun _ : E ↦ 𝟙 U)) (𝟙 V) (v ≫ Sigma.ι (fun _ : E ↦ U) e) (by simp)",
+    "branch": "sheaf-dag",
+    "by": "E1",
+    "date": "2026-10-11",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "E1",
+    "result": "pass",
+    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "X-2f163",
-  "group": "P2",
-  "result": "pass",
-  "landing": "20261012T121008-L-985345",
-  "kind": "interface",
-  "note": "independent Codex review: Unchanged Lean signature matches the node; proof matches the repaired DAG and cited dependencies. Delivered module and sole direct importer compile cleanly; axioms are exactly propext, Classical.choice, Quot.sound; public import closure is preserved."
- }
 }

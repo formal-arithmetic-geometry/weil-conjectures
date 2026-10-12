@@ -1,121 +1,121 @@
 {
- "id": "lem-sc-affine-algebra-module-adjunction-isos",
- "kind": "statement",
- "title": "Exact underived affine algebra adjunction",
- "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme], and let $g:(X,\\mathcal O_X)\\to(Y,f_*\\mathcal O_X)$ be the canonical map [def-sc-direct-image-algebra-derived-category]. For any functor $P:\\operatorname{Mod}(f_*\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] and any adjunction $a:P\\dashv g_*$, where $g_*$ is [def-pc-ringed-spaces-derived-direct-image], $P$ preserves finite limits. The unit of $a$ at any quasi-coherent $f_*\\mathcal O_X$-module and the counit of $a$ at any quasi-coherent $\\mathcal O_X$-module are isomorphisms. Quasi-coherence is the module property of [lem-weil-pbc-affine-module-correspondence].",
- "source": {
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-sc-direct-image-algebra-derived-category",
-  "def-weil-sheaf-of-modules-category",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "lem-weil-pbc-affine-module-correspondence"
- ],
- "proof": [
-  {
-   "text": "The supplied adjunction makes G a right adjoint. Let b be its canonical adjunction. Use the three component results for b. Transport finite-limit preservation across b.leftAdjointUniq a. Use b.unit followed by G.map of the adjunction comparison equals a.unit, and the adjunction comparison followed by b.counit equals a.counit, to transport invertibility. Combine the three results by conjunction introduction.",
-   "uses": [
-    "new-affine-algebra-module-finite-limits",
-    "new-affine-algebra-module-unit-iso",
-    "new-affine-algebra-module-counit-iso"
-   ],
-   "elementary": false
+  "id": "lem-sc-affine-algebra-module-adjunction-isos",
+  "kind": "statement",
+  "title": "Exact underived affine algebra adjunction",
+  "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [def-pc-scheme], and let $g:(X,\\mathcal O_X)\\to(Y,f_*\\mathcal O_X)$ be the canonical map [def-sc-direct-image-algebra-derived-category]. For any functor $P:\\operatorname{Mod}(f_*\\mathcal O_X)\\to\\operatorname{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category] and any adjunction $a:P\\dashv g_*$, where $g_*$ is [def-pc-ringed-spaces-derived-direct-image], $P$ preserves finite limits. The unit of $a$ at any quasi-coherent $f_*\\mathcal O_X$-module and the counit of $a$ at any quasi-coherent $\\mathcal O_X$-module are isomorphisms. Quasi-coherence is the module property of [lem-weil-pbc-affine-module-correspondence].",
+  "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+  },
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-sc-direct-image-algebra-derived-category",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-weil-pbc-affine-module-correspondence"
+  ],
+  "proof": [
+    {
+      "text": "Cover Y by affine opens Spec B with inverse images Spec A. At a point p\nabove q the ring map for g is A localized at q to A localized at p. It is a\nlocalization and hence flat. Tensor pullback is therefore exact, as can be checked\non stalks; it preserves finite limits and, being a left adjoint, finite colimits.\nThe underived tensor pullback agrees with the two tensor operations of\nScheme.Modules.affine_module_correspondence, by associativity of tensor products.\nIts counit is that theorem's alpha: the map from the tensor pullback of the\npushforward to the original sheaf. Its unit is that theorem's beta: the map\nadjoint to the tensor unit. Their components on quasi-coherent modules are\nisomorphisms by the correspondence. For an arbitrary P and adjunction a to the\nfixed moduleDirectImage g, uniqueness of left adjoints supplies the natural\nisomorphism from P to tensor pullback that is compatible with both adjunctions.\nIt transports finite-limit preservation and the unit and counit isomorphisms.\nNo surjectivity of f, finiteness of its algebra, or nonzero ring is needed.\nFor empty schemes or zero modules the comparisons are between zero objects;\nfor the identity morphism they are the identity comparisons.",
+      "uses": [
+        "lem-weil-pbc-affine-module-correspondence"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/perfect.tex",
+        "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-affine-module-correspondence"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW proof; detailed cohomology comparison and adjunction-uniqueness argument"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Exact pullback for affine morphism to direct image algebra has invertible unit and counit on quasicoherent modules",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-12",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Exact pullback for affine morphism to direct image algebra has invertible unit and counit on quasicoherent modules",
+      "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackIso",
+      "date": "2026-10-12",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "loogle",
+      "query": "SheafOfModules.pullbackPushforwardAdjunction",
+      "results": "SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+      "date": "2026-10-12",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "grep",
+      "query": "affine.*module.*adjunction|affine.*pullback.*exact",
+      "results": "No hits",
+      "date": "2026-10-12",
+      "verdict": "no exact match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionIsos",
+    "date": "2026-10-12",
+    "group": "A2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-sc-finite-duality",
+      "place": "proof, affine derived equivalence for the finite morphism: Exact underived affine algebra adjunction",
+      "via": [
+        "lem-sc-affine-algebra-derived-adjunction-isos",
+        "lem-sc-finite-affine-derived-equivalence",
+        "lem-sc-finite-duality-derived-hom"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-picard-framework",
+  "unit": "sk-thm-picard-duality",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionIsos",
+    "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraModuleAdjunctionIsos.lean",
+    "declaration": "AlgebraicGeometry.affine_algebra_module_adjunction_isos",
+    "statement": "theorem affine_algebra_module_adjunction_isos\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{v} (moduleRings X.toRingedSpace))\n    (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)) :\n    Limits.PreservesFiniteLimits P ∧\n    (∀ M : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)),\n      M.IsQuasicoherent → IsIso (a.unit.app M)) ∧\n    (∀ K : SheafOfModules.{v} (moduleRings X.toRingedSpace),\n      K.IsQuasicoherent → IsIso (a.counit.app K))",
+    "branch": "sheaf-dag",
+    "by": "A2",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "A2",
+    "result": "pass",
+    "landing": "20261012T110253-L-611484",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "A2",
+    "result": "pass",
+    "landing": "20261012T110253-L-611484",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "new-affine-algebra-module-finite-limits",
-  "new-affine-algebra-module-unit-iso",
-  "new-affine-algebra-module-counit-iso"
- ],
- "proof_origin": {
-  "by": "R2 stage 3",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW proof, Mathlib Adjunction.Unique transport"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Exact pullback for affine morphism to direct image algebra has invertible unit and counit on quasicoherent modules",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-12",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Exact pullback for affine morphism to direct image algebra has invertible unit and counit on quasicoherent modules",
-   "results": "AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullbackIso",
-   "date": "2026-10-12",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "loogle",
-   "query": "SheafOfModules.pullbackPushforwardAdjunction",
-   "results": "SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
-   "date": "2026-10-12",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "grep",
-   "query": "affine.*module.*adjunction|affine.*pullback.*exact",
-   "results": "No hits",
-   "date": "2026-10-12",
-   "verdict": "no exact match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionIsos",
-  "date": "2026-10-12",
-  "group": "A2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-sc-finite-duality",
-   "place": "proof, affine derived equivalence for the finite morphism: Exact underived affine algebra adjunction",
-   "via": [
-    "lem-sc-affine-algebra-derived-adjunction-isos",
-    "lem-sc-finite-affine-derived-equivalence",
-    "lem-sc-finite-duality-derived-hom"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-picard-framework",
- "unit": "sk-thm-picard-duality",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionIsos",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraModuleAdjunctionIsos.lean",
-  "declaration": "AlgebraicGeometry.affine_algebra_module_adjunction_isos",
-  "statement": "theorem affine_algebra_module_adjunction_isos\n    {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]\n    (P : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)) ⥤\n      SheafOfModules.{v} (moduleRings X.toRingedSpace))\n    (a : P ⊣ RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)) :\n    Limits.PreservesFiniteLimits P ∧\n    (∀ M : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)),\n      M.IsQuasicoherent → IsIso (a.unit.app M)) ∧\n    (∀ K : SheafOfModules.{v} (moduleRings X.toRingedSpace),\n      K.IsQuasicoherent → IsIso (a.counit.app K))",
-  "branch": "sheaf-dag",
-  "by": "A2",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
-  "result": "pass",
-  "landing": "20261012T110253-L-611484",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R2",
-  "result": "pass",
-  "landing": "20261012T121215-L-997152",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

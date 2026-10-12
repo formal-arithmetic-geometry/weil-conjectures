@@ -1,208 +1,202 @@
 {
- "id": "lem-weil-pbc-affine-etale-cartesian-sheaf-adjunction",
- "kind": "statement",
- "title": "Left exact sheaf adjunction for cartesian affine étale functors",
- "statement": "Let S,T be schemes in universe u and f:T→S an affine morphism. Let F:S.FullAffineEtale→T.FullAffineEtale be continuous for their finite standard étale topologies [def-weil-pbc-full-affine-etale-site]. Suppose there is a natural first projection p on underlying schemes such that for every A the square with p_A, the structure map of F(A), A→S, and f is cartesian. Then continuous sheaf pushforward along F on Type u sheaves has a left adjoint preserving finite limits. No directed system or coherence data is required.",
- "stmt_deps": [
-  "def-weil-pbc-full-affine-etale-site",
-  "pqf-def-affine-morphism",
-  "def-pc-fibre-product"
- ],
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "03Q1(2), and Topologies 04HR"
- },
- "proof": [
-  {
-   "text": "The proved private cartesianEtaleIso uses (hp A).isoPullback as each component. Naturality follows by pullback.hom_ext, naturality of p for the first projection, and the over-morphism equation for the second. It identifies F followed by affine inclusion with ordinary étale base change following inclusion.",
-   "uses": [
+  "id": "lem-weil-pbc-affine-etale-cartesian-sheaf-adjunction",
+  "kind": "statement",
+  "title": "Left exact sheaf adjunction for cartesian affine étale functors",
+  "statement": "Let S,T be schemes in universe u and f:T→S an affine morphism. Let F:S.FullAffineEtale→T.FullAffineEtale be continuous for their finite standard étale topologies [def-weil-pbc-full-affine-etale-site]. Suppose there is a natural first projection p on underlying schemes such that for every A the square with p_A, the structure map of F(A), A→S, and f is cartesian. Then continuous sheaf pushforward along F on Type u sheaves has a left adjoint preserving finite limits. No directed system or coherence data is required.",
+  "stmt_deps": [
+    "def-weil-pbc-full-affine-etale-site",
+    "pqf-def-affine-morphism",
     "def-pc-fibre-product"
-   ],
-   "elementary": false
+  ],
+  "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "03Q1(2), and Topologies 04HR"
   },
-  {
-   "text": "Prove the ordinary étale Type u adjunction in the private theorem etale_smallUniverse_sheafAdjunction. Compose coefficient ULift with the actual ordinary Type(u+1) inverse image. By etale_setPullback_small its values are u-small. Shrink the values by FunctorToTypes.shrink, transport the sheaf condition along its explicit natural isomorphism, and use fully faithful coefficient lift to construct a functor on Type u sheaves. Restrict the existing continuous sheaf adjunction with Adjunction.restrictFullyFaithful; direct image commutes definitionally with coefficient lift. Left exactness in Type(u+1) follows from the proved source preservesFiniteLimits_op_lan_of_flat and exact sheafification. The coefficient lift preserves finite limits, while its full faithfulness reflects them, so finite-limit preservation descends to Type u. The construction is unique up to natural isomorphism; no data are chosen from an unproved existence theorem.",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-small-universe",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-sheafification-sets-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use fullAffineEtale_sets_equivalence at S and T and the inclusion continuity from FullAffineEtaleTopos. Functor.sheafPushforwardContinuousComp' applied to cartesianEtaleIso yields RT composed with Q isomorphic to R composed with RS. Whisker with the inverse of RT and cancel its counit to obtain the natural isomorphism from the conjugated ordinary direct image to Q. Compose the two equivalence adjunctions with the ordinary adjunction and transport its right side through this natural isomorphism. The chosen left adjoint is eS.inverse composed with L composed with eT.functor. Equivalences preserve finite limits, so this composite does too.",
-   "uses": [
+  "proof": [
+    {
+      "text": "Pullback uniqueness and naturality of p identify F after affine inclusion with ordinary étale base change along f.",
+      "uses": [
+        "def-pc-fibre-product"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Use the restriction equivalences of 04HR. Under restriction the continuous pushforward agrees with ordinary étale direct image, since both evaluate at the same cartesian object and its arrows.",
+      "uses": [
+        "lem-weil-pbc-affine-etale-site-topos",
+        "lem-weil-pbc-etale-base-change-continuous"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Conjugate the ordinary étale inverse-image adjunction by these equivalences. Its left adjoint preserves finite limits by 03Q1(2); equivalences preserve limits. Carry out the argument for Type u throughout.",
+      "uses": [
+        "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-pc-fibre-product",
     "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-affine-etale-sets_equivalence"
-   ],
-   "elementary": false
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "03Q1(2), and Topologies 04HR; source read online; adapted to full affine subcategories and Type u"
+  },
+  "mathlib_searches": [
+    {
+      "t": "2026-10-12T05:17:59Z",
+      "tool": "leanfinder",
+      "query": "pullback functor affine etale site continuous left exact sheaf adjoint",
+      "sub": "",
+      "ok": true,
+      "n_hits": 8,
+      "note": "",
+      "top": [
+        "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+        "SheafOfModules.pullbackIso",
+        "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+        "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+        "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+        "SheafOfModules.instIsLeftAdjointPullback",
+        "SheafOfModules.pullback",
+        "CategoryTheory.Functor.sheafPullback"
+      ],
+      "digest": "76775910a27603d7",
+      "date": "2026-10-12",
+      "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback, CategoryTheory.Functor.sheafPullback",
+      "verdict": "no exact match after checking the relevant signatures"
+    },
+    {
+      "t": "2026-10-12T05:18:01Z",
+      "tool": "loogle",
+      "query": "Functor.IsContinuous",
+      "sub": "",
+      "ok": true,
+      "n_hits": 0,
+      "note": "loogle: unknown identifier 'Functor.IsContinuous'",
+      "top": [],
+      "digest": "4f53cda18c2baa0c",
+      "date": "2026-10-12",
+      "results": "loogle: unknown identifier 'Functor.IsContinuous'",
+      "verdict": "query failed to resolve its identifier; no absence verdict"
+    },
+    {
+      "t": "2026-10-12T05:18:52Z",
+      "tool": "grep",
+      "query": "pullbackComp|isContinuous_toGrothendieck_of_pullbacksPreservedBy|sheafAdjunctionContinuous",
+      "sub": "",
+      "ok": true,
+      "n_hits": 25,
+      "note": "",
+      "top": [
+        "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+        "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+        "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+        "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+        "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+        "Mathlib/CategoryTheory/Subobject/MonoOver.lean",
+        "Mathlib/CategoryTheory/Subobject/MonoOver.lean",
+        "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean"
+      ],
+      "digest": "dc244a9a3d00a7de",
+      "date": "2026-10-12",
+      "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+      "verdict": "no exact match after checking the relevant signatures"
+    },
+    {
+      "t": "2026-10-12T05:20:29Z",
+      "tool": "grep",
+      "query": "isContinuous_toGrothendieck_of_pullbacksPreservedBy|sheafAdjunctionContinuous",
+      "sub": "CategoryTheory/Sites",
+      "ok": true,
+      "n_hits": 7,
+      "note": "",
+      "top": [
+        "Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+        "Mathlib/CategoryTheory/Sites/Pullback.lean",
+        "Mathlib/CategoryTheory/Sites/Pullback.lean",
+        "Mathlib/CategoryTheory/Sites/Pullback.lean",
+        "Mathlib/CategoryTheory/Sites/Pullback.lean",
+        "Mathlib/CategoryTheory/Sites/Pullback.lean",
+        "Mathlib/CategoryTheory/Sites/Continuous.lean"
+      ],
+      "digest": "b9bfafe26205d26e",
+      "date": "2026-10-12",
+      "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Continuous.lean",
+      "verdict": "no exact match after checking the relevant signatures"
+    },
+    {
+      "t": "2026-10-12T05:20:29Z",
+      "tool": "leansearch",
+      "query": "coherent affine etale base change functors cartesian sheaf pushforward left adjoint finite limits",
+      "sub": "",
+      "ok": false,
+      "n_hits": 0,
+      "note": "service unavailable: Internal Server Error",
+      "top": [],
+      "digest": "4f53cda18c2baa0c",
+      "date": "2026-10-12",
+      "results": "service unavailable: Internal Server Error",
+      "verdict": "unavailable; no absence verdict"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem",
+    "date": "2026-10-12",
+    "group": "G1"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+      "place": "affine-case proof via pair henselization and the limit theorem 09YQ: coherent affine étale base change underlying the affine-site colimit",
+      "via": [
+        "lem-weil-pbc-affine-etale-base-change-system",
+        "lem-weil-pbc-affine-etale-site-colimit",
+        "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction",
+    "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleCartesianSheafAdjunction.lean",
+    "declaration": "AlgebraicGeometry.Scheme.affineEtale_cartesian_sheafAdjunction",
+    "statement": "theorem affineEtale_cartesian_sheafAdjunction\n    {S T : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]\n    (F : S.FullAffineEtale ⥤ T.FullAffineEtale)\n    (p : F ⋙ fullAffineEtaleInclusion T ⋙ Etale.forget T ⋙ Over.forget T ⟶\n      fullAffineEtaleInclusion S ⋙ Etale.forget S ⋙ Over.forget S)\n    (hp : ∀ A : S.FullAffineEtale,\n      IsPullback (p.app A) (F.obj A).obj.hom A.obj.hom f)\n    [F.IsContinuous (fullAffineEtaleTopology S) (fullAffineEtaleTopology T)] :\n    ∃ L : Sheaf (fullAffineEtaleTopology S) (Type u) ⥤\n        Sheaf (fullAffineEtaleTopology T) (Type u),\n      Nonempty (L ⊣ F.sheafPushforwardContinuous (Type u)\n        (fullAffineEtaleTopology S) (fullAffineEtaleTopology T)) ∧\n      PreservesFiniteLimits L",
+    "branch": "sheaf-dag",
+    "by": "G1",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "X-12add",
+    "group": "G1",
+    "result": "pass",
+    "landing": "20261012T095901-L-316164",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "X-12add",
+    "group": "G1",
+    "result": "pass",
+    "landing": "20261012T095901-L-316164",
+    "kind": "interface",
+    "note": "independent Codex review: Matched the unchanged item signature and reduction with its node, both helper statements with their Lean signatures and sources, and import changes with the sole user's imports; compilation and axiom checks pass."
   }
- ],
- "proof_deps": [
-  "def-pc-fibre-product",
-  "lem-weil-pbc-affine-etale-sets_equivalence",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-inverse-image-small-universe",
-  "lem-weil-pbc-sheafification-sets-exact"
- ],
- "proof_origin": {
-  "by": "S3 stage 3",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "03Q0/03Q1(2),(3), Topologies 04HR; fully proved universe descent through the new smallness lemma, cartesian naturality, and conjugation of the ordinary adjunction"
- },
- "mathlib_searches": [
-  {
-   "t": "2026-10-12T05:17:59Z",
-   "tool": "leanfinder",
-   "query": "pullback functor affine etale site continuous left exact sheaf adjoint",
-   "sub": "",
-   "ok": true,
-   "n_hits": 8,
-   "note": "",
-   "top": [
-    "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
-    "SheafOfModules.pullbackIso",
-    "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
-    "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
-    "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
-    "SheafOfModules.instIsLeftAdjointPullback",
-    "SheafOfModules.pullback",
-    "CategoryTheory.Functor.sheafPullback"
-   ],
-   "digest": "76775910a27603d7",
-   "date": "2026-10-12",
-   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback, CategoryTheory.Functor.sheafPullback",
-   "verdict": "no exact match after checking the relevant signatures"
-  },
-  {
-   "t": "2026-10-12T05:18:01Z",
-   "tool": "loogle",
-   "query": "Functor.IsContinuous",
-   "sub": "",
-   "ok": true,
-   "n_hits": 0,
-   "note": "loogle: unknown identifier 'Functor.IsContinuous'",
-   "top": [],
-   "digest": "4f53cda18c2baa0c",
-   "date": "2026-10-12",
-   "results": "loogle: unknown identifier 'Functor.IsContinuous'",
-   "verdict": "query failed to resolve its identifier; no absence verdict"
-  },
-  {
-   "t": "2026-10-12T05:18:52Z",
-   "tool": "grep",
-   "query": "pullbackComp|isContinuous_toGrothendieck_of_pullbacksPreservedBy|sheafAdjunctionContinuous",
-   "sub": "",
-   "ok": true,
-   "n_hits": 25,
-   "note": "",
-   "top": [
-    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
-    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
-    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
-    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
-    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
-    "Mathlib/CategoryTheory/Subobject/MonoOver.lean",
-    "Mathlib/CategoryTheory/Subobject/MonoOver.lean",
-    "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean"
-   ],
-   "digest": "dc244a9a3d00a7de",
-   "date": "2026-10-12",
-   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
-   "verdict": "no exact match after checking the relevant signatures"
-  },
-  {
-   "t": "2026-10-12T05:20:29Z",
-   "tool": "grep",
-   "query": "isContinuous_toGrothendieck_of_pullbacksPreservedBy|sheafAdjunctionContinuous",
-   "sub": "CategoryTheory/Sites",
-   "ok": true,
-   "n_hits": 7,
-   "note": "",
-   "top": [
-    "Mathlib/CategoryTheory/Sites/Point/Comap.lean",
-    "Mathlib/CategoryTheory/Sites/Pullback.lean",
-    "Mathlib/CategoryTheory/Sites/Pullback.lean",
-    "Mathlib/CategoryTheory/Sites/Pullback.lean",
-    "Mathlib/CategoryTheory/Sites/Pullback.lean",
-    "Mathlib/CategoryTheory/Sites/Pullback.lean",
-    "Mathlib/CategoryTheory/Sites/Continuous.lean"
-   ],
-   "digest": "b9bfafe26205d26e",
-   "date": "2026-10-12",
-   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Continuous.lean",
-   "verdict": "no exact match after checking the relevant signatures"
-  },
-  {
-   "t": "2026-10-12T05:20:29Z",
-   "tool": "leansearch",
-   "query": "coherent affine etale base change functors cartesian sheaf pushforward left adjoint finite limits",
-   "sub": "",
-   "ok": false,
-   "n_hits": 0,
-   "note": "service unavailable: Internal Server Error",
-   "top": [],
-   "digest": "4f53cda18c2baa0c",
-   "date": "2026-10-12",
-   "results": "service unavailable: Internal Server Error",
-   "verdict": "unavailable; no absence verdict"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem",
-  "date": "2026-10-12",
-  "group": "G1"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
-   "place": "affine-case proof via pair henselization and the limit theorem 09YQ: coherent affine étale base change underlying the affine-site colimit",
-   "via": [
-    "lem-weil-pbc-affine-etale-base-change-system",
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleCartesianSheafAdjunction.lean",
-  "declaration": "AlgebraicGeometry.Scheme.affineEtale_cartesian_sheafAdjunction",
-  "statement": "theorem affineEtale_cartesian_sheafAdjunction\n    {S T : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]\n    (F : S.FullAffineEtale ⥤ T.FullAffineEtale)\n    (p : F ⋙ fullAffineEtaleInclusion T ⋙ Etale.forget T ⋙ Over.forget T ⟶\n      fullAffineEtaleInclusion S ⋙ Etale.forget S ⋙ Over.forget S)\n    (hp : ∀ A : S.FullAffineEtale,\n      IsPullback (p.app A) (F.obj A).obj.hom A.obj.hom f)\n    [F.IsContinuous (fullAffineEtaleTopology S) (fullAffineEtaleTopology T)] :\n    ∃ L : Sheaf (fullAffineEtaleTopology S) (Type u) ⥤\n        Sheaf (fullAffineEtaleTopology T) (Type u),\n      Nonempty (L ⊣ F.sheafPushforwardContinuous (Type u)\n        (fullAffineEtaleTopology S) (fullAffineEtaleTopology T)) ∧\n      PreservesFiniteLimits L",
-  "branch": "sheaf-dag",
-  "by": "G1",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "X-12add",
-  "group": "G1",
-  "result": "pass",
-  "landing": "20261012T095901-L-316164",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S3",
-  "result": "pass",
-  "landing": "20261012T121351-L-1004034",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

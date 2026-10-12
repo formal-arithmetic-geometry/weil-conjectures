@@ -8,9 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionFiniteLimits
-import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionUnitIso
-import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso
+import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 
 /-! # The underived affine algebra adjunction
 
@@ -56,22 +54,6 @@ theorem affine_algebra_module_adjunction_isos
     (∀ M : SheafOfModules.{v} (moduleRings (directImageAlgebraSpace f)),
       M.IsQuasicoherent → IsIso (a.unit.app M)) ∧
     (∀ K : SheafOfModules.{v} (moduleRings X.toRingedSpace),
-      K.IsQuasicoherent → IsIso (a.counit.app K)) := by
-  let G := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f)
-  let : G.IsRightAdjoint := a.isRightAdjoint
-  let b := Adjunction.ofIsRightAdjoint G
-  let : Limits.PreservesFiniteLimits G.leftAdjoint :=
-    affine_algebra_module_adjunction_preserves_finite_limits f
-  refine ⟨Limits.preservesFiniteLimits_of_natIso (b.leftAdjointUniq a), ?_, ?_⟩
-  · intro M hM
-    have hunit : IsIso (b.unit.app M) := affine_algebra_module_adjunction_unit_iso f M hM
-    let := hunit
-    rw [← b.unit_leftAdjointUniq_hom_app a M]
-    infer_instance
-  · intro K hK
-    have hcounit : IsIso (b.counit.app K) := affine_algebra_module_adjunction_counit_iso f K hK
-    let := hcounit
-    rw [← a.leftAdjointUniq_hom_app_counit b K]
-    infer_instance
+      K.IsQuasicoherent → IsIso (a.counit.app K)) := by sorry
 
 end AlgebraicGeometry

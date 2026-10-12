@@ -9,8 +9,6 @@ public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.CategoryTheory.Monoidal.CommGrp_
 public import Mathlib.Algebra.Category.Grp.Limits
-import Sheaf.CategoryTheory.SheafAbelianObjectsSurjective
-import Sheaf.CategoryTheory.SheafAbelianObjectsInjective
 
 /-!
 # Sectionwise abelian sheaves and commutative group objects
@@ -56,7 +54,6 @@ theorem sheafAbelianObjects_bijective
           ((eqToIso hF).hom.app A).hom.app U ((GrpObj.inv (X := (F.obj A).X)).hom.app U a) =
             -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a)))) :
     Function.Bijective F.obj := by
-  exact ⟨sheafAbelianObjects_injective J F hF hsections,
-    sheafAbelianObjects_surjective J F hF hsections⟩
+  sorry
 
 end CategoryTheory
