@@ -1,6 +1,6 @@
 # Work queue
 
-25 items; claim with `tools/claim.py next <group> [--stage N]`.
+35 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (3)
 
@@ -22,7 +22,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (17)
+## Stage 3: modules to prove (27)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -31,16 +31,26 @@ Not open yet: 42 nodes that wait for stage 1, 6 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine` | 0 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInvariant` | 1 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction` | 1 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 9 | proof |
+| `WeilConjectures.AlgebraicGeometry.Curve.Reductions` | 1 | 7 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit` | 2 | 2 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero` | 2 | 4 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison` | 2 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints` | 2 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections` | 2 | 1 | proof |
+| `Sheaf.Paper.ZeroDimensionalCohomology` | 2 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 3 | proof |
+| `Sheaf.AlgebraicGeometry.BaseChangeConventions` | 3 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.TensorPullback` | 4 | 6 | proof |
 | `Sheaf.Topology.NoetherianTopologicalCohomologyVanishing` | 4 | 1 | proof |
+| `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct` | 5 | 4 | proof |
+| `Sheaf.Topology.InverseImageModule` | 5 | 2 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex` | 5 | 3 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
 
