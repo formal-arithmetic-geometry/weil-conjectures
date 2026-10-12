@@ -6,9 +6,9 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
-public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.RingTheory.EtaleResidueTriplesPolynomialLift
 
 /-!
 # The residue map of the pointed etale colimit is surjective
@@ -53,6 +53,10 @@ theorem etaleResidueTriples_colimit_surjective
       f.eval₂ ψ a₀ = 0 → f.derivative.eval₂ ψ a₀ ≠ 0 →
         ∃ a : c.pt, f.IsRoot a ∧ ψ a = a₀) :
     Function.Surjective ψ := by
-  sorry
+  intro a₀
+  obtain ⟨f, hf, hfa, hfd⟩ :=
+    etaleResidueTriples_polynomial_lift R p K c hc ψ hψ hunit a₀
+  obtain ⟨a, ha, hₐ⟩ := hroot f hf a₀ hfa hfd
+  exact ⟨a, hₐ⟩
 
 end AlgebraicGeometry.Scheme

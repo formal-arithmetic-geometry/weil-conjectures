@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-etale-triples-colimit-polynomial-lift",
+ "kind": "lemma",
+ "title": "Polynomial lifting for etale residue colimit",
+ "statement": "theorem etaleResidueTriples_polynomial_lift\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K]\n    (c : Cocone (etaleResidueTriplesRingDiagram R p K\n      (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K))))\n    (hc : IsColimit c)\n    (ψ : c.pt →+* K)\n    (hψ : ∀ t, ψ.comp (c.ι.app t).hom =\n      ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom)\n    (hunit : ∀ x : c.pt, ψ x ≠ 0 → IsUnit x) :\n    ∀ a₀ : K, ∃ f : Polynomial c.pt, f.Monic ∧\n      f.eval₂ ψ a₀ = 0 ∧ f.derivative.eval₂ ψ a₀ ≠ 0",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04GW and 00UH"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-pc-separably-closed",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put C = c.pt and F = im(ψ) as a subring of K. The ring-homomorphism laws give 0, 1 in F and closure under addition, subtraction and multiplication, and 0 != 1 because K is a field. If y = ψ(x) != 0, hunit gives a unit u of C with underlying element x. Its inverse v satisfies xv = vx = 1, so y ψ(v) = ψ(v) y = 1. Uniqueness of inverses in K gives ψ(v) = y^{-1}, hence y^{-1} belongs to F. Together with 0^{-1} = 0 this makes F a subfield of K. This uses only the given hunit and the field axioms, not injectivity of ψ or of R -> C.",
+   "uses": [
+    "def-weil-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the identity residue triple t0: B = R, α = id_R, q = p, φ = χ = algebraMap κ(p) K. It is a triple by [def-weil-pbc-etale-residue-triples]: Spec(id_R) is the identity, hence etale (the identity ring map is finitely presented and flat, and its diagonal is an isomorphism, so it is unramified), and its over and compatible equations reduce to identity laws. Apply hψ at t0. For every r in R, ψ((c.ι.app t0)(r)) is χ(π(r)), where π = (ΓSpecIso R).inv followed by Γevaluation p. Thus F contains the canonical image of R in K. No filteredness or choice of an arbitrary triple is required.",
+   "uses": [
+    "def-weil-pbc-etale-residue-triples",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the scheme residue field κ(p) with p.asIdeal.ResidueField using [lem-weil-pbc-spec-residue-field-identification]; the identification commutes with π. By [def-weil-pbc-localization-at-prime] this field is R_p / pR_p. Every element lifts to R_p under the quotient map and is represented by r/s with s outside p. Its image under χ is χ(π(r)) / χ(π(s)). Here π(s) is nonzero: s/1 is a unit in R_p, so its class is a unit in the nonzero residue field; χ is an injective homomorphism of fields. Step 2 puts numerator and denominator in F, and Step 1 puts the inverse denominator in F. Their product belongs to F. Consequently every χ(b), b in κ(p), belongs to im(ψ), which is exactly the coefficient-preimage assertion needed below. This also treats nonmaximal primes; surjectivity of R -> κ(p) is not asserted.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a0 in K put k = κ(p) and g = minpoly k a0. The IsSepClosure k K hypothesis includes Algebra.IsSeparable k K, as recorded by [def-pc-separably-closed] and [def-weil-pbc-separable-algebraic-extension]. Thus a0 is integral over k and g is monic, g.eval₂ χ a0 = 0, and g is separable. The minimal polynomial is taken over the original residue field k, so no theorem about separability over the larger image field is needed. Algebraicity and separability here follow from the given separable-closure hypothesis; separably closedness of K alone would not imply them.",
+   "uses": [
+    "def-pc-separably-closed",
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let n = g.natDegree. For each i < n choose b_i in C with ψ(b_i) = χ(g.coeff i), using Step 3. Define f = X^n + sum_{i < n} C(b_i) X^i in C[X]. Its leading coefficient is 1 and all lower summands have exponent < n, so f is monic. Since g is monic, its coefficient at n is 1 and its coefficients above n are zero; coefficient-by-coefficient comparison gives f.map ψ = g.map χ. This construction also works when n = 0, with an empty sum and f = 1 (in the present root situation n = 0 is excluded by g.eval₂ χ a0 = 0). Evaluation commutes with coefficient mapping, yielding f.eval₂ ψ a0 = g.eval₂ χ a0 = 0. Only finitely many coefficient choices are needed; no additive or multiplicative section of ψ is assumed. Mathlib already provides this monic coefficient-lifting construction as Polynomial.lifts_iff_coeff_lifts and Polynomial.lifts_and_natDegree_eq_and_monic (Mathlib.Algebra.Polynomial.Lifts); use these for this step instead of re-proving it.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [def-pc-separable-polynomial], separability of g means there are U,V in k[X] with Ug + Vg' = 1. Evaluate this identity in K via χ at a0. Since g evaluates to zero, V.eval₂ χ a0 times g.derivative.eval₂ χ a0 equals 1, hence g.derivative.eval₂ χ a0 != 0. Finally derivative commutes with coefficient maps: each coefficient i*c maps to i*χ(c) because χ and ψ preserve natural-number multiples. The coefficient identity in Step 5 therefore gives f.derivative.eval₂ ψ a0 = g.derivative.eval₂ χ a0 != 0. Together with Step 5 this is the required monic polynomial and both evaluation conditions.",
+   "uses": [
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-field",
+  "def-weil-pbc-etale-residue-triples",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-separably-closed",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial"
+ ],
+ "proof_origin": "Split by worker F2 from the surjectivity proof; repaired for reviewer X-1f505 C1 and C2 with explicit image-field, residue-containment, separability, coefficient-lifting, and derivative steps citing existing nodes. Second reader F2 checked the source and added the existing Mathlib monic-lifting route for step 5.",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleResidueTriplesSurjective",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-triples-colimit-surjective",
+   "place": "proof step",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleResidueTriplesPolynomialLift",
+  "file": "lean/Sheaf/RingTheory/EtaleResidueTriplesPolynomialLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleResidueTriples_polynomial_lift",
+  "statement": "theorem etaleResidueTriples_polynomial_lift\n    (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]\n    [Algebra ((Spec R).residueField p) K] [IsSepClosure ((Spec R).residueField p) K]\n    (c : Cocone (etaleResidueTriplesRingDiagram R p K\n      (CommRingCat.ofHom (algebraMap ((Spec R).residueField p) K))))\n    (hc : IsColimit c)\n    (ψ : c.pt →+* K)\n    (hψ : ∀ t, ψ.comp (c.ι.app t).hom =\n      ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ).hom)\n    (hunit : ∀ x : c.pt, ψ x ≠ 0 → IsUnit x) :\n    ∀ a₀ : K, ∃ f : Polynomial c.pt, f.Monic ∧\n      f.eval₂ ψ a₀ = 0 ∧ f.derivative.eval₂ ψ a₀ ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monic polynomial simple root separable field coefficient lifting",
+   "results": "no direct result found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.Monic derivative eval₂",
+   "results": "no direct result found",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsSepClosure.*eval₂.*derivative",
+   "results": "no existing declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0e7f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T070536-L-3470601",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0e7f",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T070536-L-3470601",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, dependency statements, report, and import-change record; both modules compile cleanly, and axioms are standard plus sorryAx from the documented polynomial-lifting theorem."
+ }
+}
