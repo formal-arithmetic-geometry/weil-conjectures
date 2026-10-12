@@ -6,6 +6,8 @@ Authors: SHEAF group U2
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Exterior sheaves under restriction to the full open
 
@@ -51,6 +53,14 @@ theorem exteriorSheaf_fullOpen_pushforward_iso {X : Scheme.{u}} (M : X.Modules)
     (d : ℕ) :
     Nonempty ((pushforward (⊤ : X.Opens).ι).obj
       (exteriorSheaf ((restrictFunctor (⊤ : X.Opens).ι).obj M) d) ≅
-        exteriorSheaf M d) := by sorry
+        exteriorSheaf M d) := by
+  have : IsIso (⊤ : X.Opens).ι := inferInstanceAs (IsIso X.topIso.hom)
+  obtain ⟨e⟩ := exteriorSheaf_restrict_iso M d (⊤ : X.Opens)
+  exact ⟨(pushforward (⊤ : X.Opens).ι).mapIso
+      (e.symm ≪≫ (restrictFunctorIsoPullback (⊤ : X.Opens).ι).app _ ≪≫
+        (pullbackIsoPushforwardInv (⊤ : X.Opens).ι).app _) ≪≫
+    (pushforwardComp (inv (⊤ : X.Opens).ι) (⊤ : X.Opens).ι).app _ ≪≫
+    (pushforwardCongr (IsIso.inv_hom_id (⊤ : X.Opens).ι)).app _ ≪≫
+    (pushforwardId X).app _⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -14,39 +14,20 @@
  ],
  "proof": [
   {
-   "text": "The full-open inclusion j is the canonical scheme isomorphism X.topIso.hom. Its image and preimage operations on opens are inverse; they identify the structure sheaves, module restriction and pushforward, and covering families. Thus module sections and their scalar rings on corresponding opens are identified, compatibly with restriction.",
+   "text": "Apply exteriorSheaf_restrict_iso M d to the full open. Its inverse identifies the exterior sheaf of the restricted module with the restriction of the exterior sheaf. Compose with Mathlib restrictFunctorIsoPullback and the upstream pullbackIsoPushforwardInv for the scheme isomorphism X.topIso.hom. Push this isomorphism forward. The pushforwardComp, pushforwardCongr for inv j ≫ j = 𝟙 X, and pushforwardId isomorphisms identify the resulting pushforward along the inverse and then j with the original exterior sheaf. These functor isomorphisms apply to every module sheaf, including degree zero and the empty scheme.",
    "uses": [
-    "def-pc-scheme",
-    "def-weil-sheaf-of-modules-category"
+    "lem-sc-exterior-sheaf-restrict-iso"
    ],
    "elementary": true
-  },
-  {
-   "text": "On corresponding opens, use the exterior-power universal property to transport pure wedges through the section and scalar identifications. The inverse section identification gives the inverse exterior map. Both composites are identity on pure wedges, hence on every element since pure wedges span. Naturality follows by checking the two restriction composites on pure wedges using the characterized exterior restrictions. These maps give an isomorphism of exterior presheaves after transport through the equivalence of opens.",
-   "uses": [
-    "def-sc-sheaf-exterior-power"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Transport the module-sheafification universal property through the equivalence of opens, which preserves covers. Given a map from the transported exterior presheaf to an X-module sheaf, restrict both target and map along j. The sheafification adjunction factors it uniquely through the exterior sheaf on the full-open subscheme. Pushing the factorization forward gives a unique factorization on X. Thus the pushforward of this exterior sheaf and exteriorSheaf M d are sheafifications of isomorphic exterior presheaves. Factor their two unit maps by these universal properties. Uniqueness makes the resulting maps inverse. For empty X all sheaves are zero; for d=0 the same construction uses the zeroth exterior power. No basis or local freeness is used.",
-   "uses": [
-    "def-sc-sheaf-exterior-power",
-    "lem-pc-presheaf-module-sheafification-ring"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-scheme",
-  "def-weil-sheaf-of-modules-category",
-  "def-sc-sheaf-exterior-power",
-  "lem-pc-presheaf-module-sheafification-ring"
+  "lem-sc-exterior-sheaf-restrict-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BR0, expression wedge^r N[-r]; full-open identification in the constant-rank specialization"
+  "place": "Tag 0BR0 full-open identification; formal reduction via the existing open-restriction comparison and upstream pushforward/pullback functor isomorphisms"
  },
  "mathlib_searches": [
   {
@@ -129,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2910f",
-  "group": "U2",
+  "reviewer": "COMPILER",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T135323-L-1695480",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files match recorded node statements and proof metadata; both modules and direct importer compile cleanly with lcompile.py."
+  "landing": "20261012T160136-L-2564050",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
