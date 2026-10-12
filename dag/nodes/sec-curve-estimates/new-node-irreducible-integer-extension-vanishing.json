@@ -1,0 +1,146 @@
+{
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof"
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-sc-topological-abelian-cohomology",
+  "def-sc-abelian-open-extension-by-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof; finite closed-cover formulation of its component argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "integer constant sheaf extension by zero irreducible acyclic dimension induction",
+   "results": "8 hits; no matching theorem (injective dimensions or general cohomology definitions only)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H'",
+   "results": "12 hits: cohomology definition and open Mayer-Vietoris maps; no closed-cover or integer-generator vanishing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|closed.*cover|IsZero.*H'; rg vanishing and finite covers on lean/Sheaf/Topology and upstream topology",
+   "results": "No matching theorem; existing 02UX, open-closed sequence, closed-pushforward comparison and constant acyclicity are reused in the plan",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher sheaf cohomology of extension by zero constant integer sheaf",
+   "results": "service unavailable; no result returned",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.NoetherianVanishingByIrreducibleComponents",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proposition 02UZ proof",
+   "via": [
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "id": "new-node-irreducible-integer-extension-vanishing",
+ "kind": "statement",
+ "title": "Irreducible integer extension by zero vanishing",
+ "statement": "Let X be an irreducible Noetherian topological space and d a nonnegative integer with dim X <= d [def-kun-topological-krull-dimension]. Assume that for every nonnegative integer e<d, every Noetherian topological space Y with dim Y <= e, every abelian sheaf G on Y, and every nonnegative integer r>e, H^r(Y,G) [def-sc-topological-abelian-cohomology] is zero. Then for every nonnegative integer p>d and every quasi-compact open U of X, H^p(X,j_! Z_U) is zero, where Z_U is the constant integer sheaf on U and j_! is abelian open extension by zero [def-sc-abelian-open-extension-by-zero].",
+ "proof": [
+  {
+   "text": "If U is empty, extension by zero is zero (its presheaf has empty sums), so all cohomology vanishes.",
+   "uses": [
+    "def-sc-abelian-open-extension-by-zero",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonempty U, if d=0 a proper nonempty closed subset would supply an irreducible closed chain of length one, contradicting the bound. Thus U=X and constant-sheaf acyclicity applies.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "lem-sc-irreducible-noetherian-constant-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For d>0, Z=X\\U is a proper closed Noetherian subspace of dimension at most d-1: append the irreducible closed set X to each chain in Z. Restriction of the constant integer sheaf is the constant integer sheaf (canonically on stalks); the open-closed sequence therefore has terms j_!Z_U, Z_X and i_*Z_Z.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-sc-abelian-open-extension-by-zero",
+    "lem-sc-topological-extension-by-zero-stalks",
+    "lem-sc-noetherian-open-closed-cohomology-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p>d the constant term has zero degree-p cohomology. Closed-immersion comparison and hlower at e=d-1 kill degree p-1 on the closed complement. The long exact sequence kills degree p of the integer extension; p-1>d-1 follows from p>d.",
+   "uses": [
+    "lem-sc-irreducible-noetherian-constant-acyclic",
+    "lem-sc-cohomology-closed-immersion-pushforward",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-irreducible-noetherian-constant-acyclic",
+  "lem-sc-noetherian-open-closed-cohomology-sequence",
+  "lem-sc-topological-extension-by-zero-stalks"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.IrreducibleIntegerExtensionVanishing",
+  "file": "lean/Sheaf/Topology/IrreducibleIntegerExtensionVanishing.lean",
+  "declaration": "TopCat.irreducible_integer_extension_vanishing",
+  "statement": "theorem irreducible_integer_extension_vanishing\n    (X : TopCat.{u}) [NoetherianSpace X] [IrreducibleSpace X]\n    (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    (hlower : ∀ (e : ℕ), e < d →\n      ∀ (Y : Type u) [TopologicalSpace Y] [NoetherianSpace Y]\n        (hdimY : topologicalKrullDim Y ≤ (e : WithBot ℕ∞))\n        (G : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u})\n        (r : ℕ), e < r → IsZero (CategoryTheory.Sheaf.H' G r (⊤ : Opens Y)))\n    (p : ℕ) (hp : d < p) (U : Opens X) (hU : IsCompact (U : Set X)) :\n    IsZero (CategoryTheory.Sheaf.H'\n      ((TopCat.Sheaf.abelianOpenExtensionByZero U).obj\n        ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj U))\n          AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) p\n      (⊤ : Opens X))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aacdc",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T012259-L-793100",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aacdc",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T012259-L-793100",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node statements/dependencies, proofs, report, and Lean compilation matched the packet and stage-3 requirements; all three modules compiled cleanly."
+ }
+}

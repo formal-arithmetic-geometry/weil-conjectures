@@ -1,0 +1,127 @@
+{
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof"
+ },
+ "stmt_deps": [
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof; finite closed-cover formulation of its component argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomological dimension union of closed subspaces abelian sheaves",
+   "results": "8 hits; no matching theorem (injective dimensions or general cohomology definitions only)",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H'",
+   "results": "12 hits: cohomology definition and open Mayer-Vietoris maps; no closed-cover or integer-generator vanishing theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|closed.*cover|IsZero.*H'; rg vanishing and finite covers on lean/Sheaf/Topology and upstream topology",
+   "results": "No matching theorem; existing 02UX, open-closed sequence, closed-pushforward comparison and constant acyclicity are reused in the plan",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite closed cover sheaf cohomology vanishing",
+   "results": "service unavailable; no result returned",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.NoetherianVanishingByIrreducibleComponents",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proposition 02UZ proof",
+   "via": [
+    "lem-sc-noetherian-topological-cohomology-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "id": "new-node-finite-closed-cover-cohomology-vanishing",
+ "kind": "statement",
+ "title": "Finite closed cover cohomology vanishing",
+ "statement": "Let X be a Noetherian topological space, let q be a nonnegative integer, and let S be a finite collection of closed subsets whose union is X. If H^q(Z,G) [def-sc-topological-abelian-cohomology] is zero for every Z in S and every abelian sheaf G on Z with its subspace topology, then H^q(X,F) is zero for every abelian sheaf F on X.",
+ "proof": [
+  {
+   "text": "Induct on the number of closed cover members. An empty cover forces X empty; the empty-cover sheaf axiom gives zero cohomology in every degree.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a chosen member Z and the closed union W of the remaining members, let U=X\\Z and apply the open-closed short exact sequence. Since closure(U) is contained in W, its support clause writes the left term as a closed pushforward from W, by composing the inclusion of closure(U) into W.",
+   "uses": [
+    "lem-sc-noetherian-open-closed-cohomology-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining cover members, regarded as closed subspaces of W, have the same intrinsic topology as before. Induction kills the cohomology of every sheaf on W; the cover hypothesis kills every sheaf on Z. Closed-immersion comparison and the long exact sequence then kill the middle degree-q group. At q=0 use left exactness.",
+   "uses": [
+    "lem-sc-cohomology-closed-immersion-pushforward",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-noetherian-open-closed-cohomology-sequence"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.FiniteClosedCoverCohomologyVanishing",
+  "file": "lean/Sheaf/Topology/FiniteClosedCoverCohomologyVanishing.lean",
+  "declaration": "TopCat.cohomology_vanishing_of_finite_closed_cover",
+  "statement": "theorem cohomology_vanishing_of_finite_closed_cover\n    (X : Type u) [TopologicalSpace X] [NoetherianSpace X]\n    (S : Finset (Closeds X)) (hcover : S.sup id = ⊤) (q : ℕ)\n    (hvanish : ∀ Z ∈ S,\n      ∀ G : Sheaf (Opens.grothendieckTopology (Z : Set X)) AddCommGrpCat.{u},\n        IsZero (Sheaf.H' G q (⊤ : Opens (Z : Set X))))\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :\n    IsZero (Sheaf.H' F q (⊤ : Opens X))",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aacdc",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T012259-L-793100",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aacdc",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T012259-L-793100",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files, node statements/dependencies, proofs, report, and Lean compilation matched the packet and stage-3 requirements; all three modules compiled cleanly."
+ }
+}

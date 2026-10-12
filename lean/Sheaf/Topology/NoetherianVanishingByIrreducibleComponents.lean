@@ -8,6 +8,10 @@ public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
 
+import Sheaf.Topology.FiniteClosedCoverCohomologyVanishing
+import Sheaf.Topology.IrreducibleIntegerExtensionVanishing
+import Sheaf.Topology.NoetherianExtensionByZeroReduction
+
 @[expose] public section
 
 universe u
@@ -15,6 +19,23 @@ universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace TopCat
+
+/-- Fixed-bound version of the finite irreducible closed-cover reduction. -/
+private theorem vanishing_at_bound_of_irreducible
+    (d q : ℕ)
+    (hIrred : ∀ (Y : Type u) [TopologicalSpace Y] [NoetherianSpace Y]
+      [IrreducibleSpace Y], topologicalKrullDim Y ≤ (d : WithBot ℕ∞) →
+      ∀ G : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u},
+        IsZero (Sheaf.H' G q (⊤ : Opens Y)))
+    (X : Type u) [TopologicalSpace X] [NoetherianSpace X]
+    (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+    (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :
+    IsZero (Sheaf.H' F q (⊤ : Opens X)) := by
+  obtain ⟨S, hS, hcover⟩ := NoetherianSpace.exists_finset_irreducible (⊤ : Closeds X)
+  apply cohomology_vanishing_of_finite_closed_cover X S hcover.symm q _ F
+  intro Z hZ G
+  have : IrreducibleSpace (Z : Set X) := Subtype.irreducibleSpace (hS ⟨Z, hZ⟩)
+  exact hIrred (Z : Set X) ((topologicalKrullDim_subspace_le X _).trans hdim) G
 
 /-- The irreducible case of Grothendieck vanishing for Noetherian spaces.
 Source: literature/stacks-project/cohomology.tex, Proposition 02UZ, irreducible case
@@ -62,8 +83,26 @@ theorem noetherian_vanishing_irreducible
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     (q : ℕ) (hq : d < q) :
     IsZero (Sheaf.H' F q (⊤ : Opens X)) := by
-  sorry
+  have hall : ∀ (e : ℕ) (Y : Type u) [TopologicalSpace Y] [NoetherianSpace Y],
+      topologicalKrullDim Y ≤ (e : WithBot ℕ∞) →
+      ∀ (G : CategoryTheory.Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u})
+        (r : ℕ), e < r → IsZero (Sheaf.H' G r (⊤ : Opens Y)) := by
+    intro e
+    induction e using Nat.strong_induction_on with
+    | h e ih =>
+      intro Y _ _ hdimY G r hr
+      apply vanishing_at_bound_of_irreducible e r ?_ Y hdimY G
+      intro Z _ _ _ hdimZ H
+      apply noetherian_extensionByZero_reduction (TopCat.of Z) e ?_ ?_ ?_ H r hr
+      · intro U hU z hz
+        exact ⟨U, hU, NoetherianSpace.isCompact U, hz, Set.Subset.rfl⟩
+      · intro U V _ _ _ _
+        exact NoetherianSpace.isCompact (U ∩ V)
+      · exact irreducible_integer_extension_vanishing (TopCat.of Z) e hdimZ ih
+  exact hall d X hdim F q hq
 
+-- Preserve the existing names of the unused binders inside `hIrred`.
+set_option linter.unusedVariables false in
 /-- The component induction step in Grothendieck vanishing for Noetherian spaces.
 Source: literature/stacks-project/cohomology.tex, Proposition 02UZ, proof by induction
 on the finite number of irreducible components (blueprint: new-node-noetherian-components).
@@ -93,6 +132,8 @@ theorem noetherian_vanishing_of_irreducible_components
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     (q : ℕ) (hq : d < q) :
     IsZero (Sheaf.H' F q (⊤ : Opens X)) := by
-  sorry
+  apply vanishing_at_bound_of_irreducible d q ?_ X hdim F
+  intro Y _ _ _ hdimY G
+  exact hIrred Y d hdimY G q hq
 
 end TopCat

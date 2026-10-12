@@ -13,39 +13,35 @@
  ],
  "proof": [
   {
-   "text": "Fix d and q and induct on the finite number of irreducible components, using lem-sc-noetherian-finite-irreducible-components; the zero-component case is the empty space and the one-component case is the irreducible hypothesis.",
+   "text": "Use NoetherianSpace.exists_finset_irreducible on the whole closed space to obtain a finite irreducible closed cover; each member is Noetherian and irreducible and has dimension at most the ambient bound by topologicalKrullDim_subspace_le.",
    "uses": [
-    "lem-sc-noetherian-finite-irreducible-components"
+    "lem-sc-noetherian-finite-irreducible-components",
+    "def-kun-topological-krull-dimension"
    ],
    "elementary": false
   },
   {
-   "text": "For multiple components choose an irreducible component Z, put U = X \\ Z and Z' = closure(U). The closed subspace Z' is the union of the remaining components, hence has fewer components; Z and Z' are Noetherian and satisfy dim <= d.",
+   "text": "The private fixed-bound helper applies finite closed-cover vanishing to the irreducible vanishing hypothesis on each member.",
    "uses": [
-    "lem-sc-noetherian-finite-irreducible-components"
+    "new-node-finite-closed-cover-cohomology-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the open-closed cohomology sequence; its closed-support clause and closed-immersion pushforward comparison identify the terms on Z and Z'. Exactness reduces H^q(X,F) to Z, where hIrred is applied, and Z', where the component induction hypothesis applies.",
-   "uses": [
-    "lem-sc-noetherian-open-closed-cohomology-sequence",
-    "lem-sc-cohomology-closed-immersion-pushforward",
-    "def-sc-topological-abelian-cohomology"
-   ],
-   "elementary": false
+   "text": "At the fixed bound d and degree q, specialize hIrred to each cover member and its inherited dimension inequality, and apply the private helper.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-kun-topological-krull-dimension",
   "lem-sc-noetherian-finite-irreducible-components",
-  "lem-sc-noetherian-open-closed-cohomology-sequence",
-  "lem-sc-cohomology-closed-immersion-pushforward",
-  "def-sc-topological-abelian-cohomology"
+  "new-node-finite-closed-cover-cohomology-vanishing"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Proposition 02UZ proof"
+  "document": "https://stacks.math.columbia.edu/tag/02UZ",
+  "place": "Proposition 02UZ proof; finite closed-cover formulation of its component argument"
  },
  "mathlib_searches": [
   {
@@ -117,11 +113,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-30a49",
-  "group": "H1",
+  "reviewer": "X-aacdc",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T001958-L-539284",
+  "landing": "20261012T012259-L-793100",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, cited dependencies, Stacks 02UZ/02UX, and the earlier return; compilation and axiom checks passed."
+  "note": "independent Codex review: Delivered files, node statements/dependencies, proofs, report, and Lean compilation matched the packet and stage-3 requirements; all three modules compiled cleanly."
  }
 }
