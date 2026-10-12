@@ -27,48 +27,44 @@
  ],
  "proof": [
   {
-   "text": "At degree $m$ the map $C_m(K)\\to\\tau_{\\ge m}K$ is the identity of $K^m/\\operatorname{im}(d^{m-1})$, and at degree $m+1$ it is the inclusion $\\operatorname{im}(d^m)\\hookrightarrow K^{m+1}$; it is zero in all other degrees. By the definition of the lower truncation in the statement, $q_m$ is zero in degree $m$ (where $\\tau_{\\ge m+1}K$ is zero), the quotient $K^{m+1}\\to K^{m+1}/\\operatorname{im}(d^m)$ in degree $m+1$, and the identity of $K^r$ in degrees $r>m+1$. Thus the displayed sequence is exact in every degree: in degree $m$ it is $0\\to K^m/\\operatorname{im}(d^{m-1})\\xrightarrow{\\mathrm{id}}K^m/\\operatorname{im}(d^{m-1})\\to0\\to0$, in degrees $r>m+1$ it is $0\\to0\\to K^r\\xrightarrow{\\mathrm{id}}K^r\\to0$, in degrees below $m$ all terms are zero, and in degree $m+1$ the kernel of the quotient $K^{m+1}\\to K^{m+1}/\\operatorname{im}(d^m)$ is $\\operatorname{im}(d^m)$. The maps commute with the differentials: in degree $m$ because the differential of $C_m(K)$ is induced by $d^m$, and in degree $m+1$ because $d^{m+1}d^m=0$, so $d^{m+1}$ vanishes on $\\operatorname{im}(d^m)$. Hence it is a short exact sequence of complexes. This is the lower-truncation construction of Stacks Tag 0118.",
-   "uses": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category"
-   ],
+   "text": "Construct $q_m$ as truncGEMap of $\\pi_{m+1}$ at $m$, followed by the inverse projection of the already strictly $\\ge m+1$ complex at $m$. Projection naturality gives $\\pi_m q_m=\\pi_{m+1}$; epimorphicity gives that $q_m$ is epi. The kernel sequence is short exact by ShortComplex.exact_kernel. Compute projection components using liftExtend_f to derive zero, quotient, and identity formulas for $q_m$.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients"
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
    }
   },
   {
-   "text": "The degree-$m$ component of $H^m(K)[-m]\\to C_m(K)$ is the canonical inclusion $\\ker(d^m)/\\operatorname{im}(d^{m-1})\\hookrightarrow K^m/\\operatorname{im}(d^{m-1})$, and the other components are zero. This is a morphism of complexes because the source has zero differential and the differential of $C_m(K)$, induced by $d^m$, vanishes on $\\ker(d^m)$. The cohomology of $C_m(K)$ in degree $m$ is the kernel of the map $K^m/\\operatorname{im}(d^{m-1})\\to\\operatorname{im}(d^m)$ induced by $d^m$, namely $\\ker(d^m)/\\operatorname{im}(d^{m-1})=H^m(K)$, and the map above induces the identity on it; its cohomology in degree $m+1$ is $\\operatorname{im}(d^m)/\\operatorname{im}(d^m)=0$ since that map is an epimorphism; all other cohomology objects vanish, as do those of $H^m(K)[-m]$ outside degree $m$. Therefore the map is a quasi-isomorphism by the definition of quasi-isomorphism.",
+   "text": "Apply [lem-pc-lower-truncation-transition-kernel] separately to each constructed $q_m$. Its characterized homology inclusion uniquely determines $\\varphi_m$, so choose these maps. Obtain the kernel isomorphisms, differential formula, vanishing outside the two degrees, and quasi-isomorphism.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-pc-lower-truncation-transition-kernel"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (homology-section-truncations), identification of the successive quotient with H^m(K)[-m]"
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
    }
   },
   {
-   "text": "For a morphism of complexes $f:K\\to L$, $f$ maps $\\operatorname{im}(d_K^{r})$ into $\\operatorname{im}(d_L^{r})$ and $\\ker(d_K^r)$ into $\\ker(d_L^r)$ and induces the corresponding maps on quotients and images. The maps $f^m$ and $f^{m+1}$ therefore define a morphism $C_m(K)\\to C_m(L)$, and $f$ induces morphisms $\\tau_{\\ge m}K\\to\\tau_{\\ge m}L$ and $\\tau_{\\ge m+1}K\\to\\tau_{\\ge m+1}L$ forming a morphism between the two short exact sequences. The inclusion $H^m(K)[-m]\\to C_m(K)$ commutes with these induced maps because it is the canonical map from cycles modulo boundaries and $H^m(f)$ is induced by $f^m$. Thus the short exact sequences and the quasi-isomorphisms are natural in $K$.",
+   "text": "Cancel the epi $\\pi_m$ and use projection naturality to prove naturality of $q_m$. Define the induced kernel morphism by kernel.map. To prove naturality of $\\varphi_m$, postcompose with the monic kernel inclusion, use from_single_hom_ext to restrict to degree $m$, and precompose with the inverse single-object isomorphism. The component equation from the kernel lemma identifies this composite with homology inclusion followed by the inverse opcycles truncation isomorphism. Projection naturality at degree $m$, after cancelling pOpcycles, identifies truncGEMap with opcyclesMap under these isomorphisms. The required equality is then homologyι_naturality.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "lem-pc-lower-truncation-transition-kernel"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118 (homology-section-truncations), functoriality of canonical truncations"
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
    }
   }
  ],
  "proof_deps": [
-  "def-sp-abelian",
-  "def-weil-abstract-derived-category"
+  "lem-pc-lower-truncation-transition-kernel"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 0118 (homology-section-truncations)"
+  "place": "Tag 0118: canonical quotient truncations; Lean construction and naturality by universal properties"
  },
  "mathlib_searches": [
   {
@@ -152,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T095916-L-321750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

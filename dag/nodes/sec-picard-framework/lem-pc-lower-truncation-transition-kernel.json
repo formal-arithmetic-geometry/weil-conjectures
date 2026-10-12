@@ -1,0 +1,160 @@
+{
+ "id": "lem-pc-lower-truncation-transition-kernel",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step, uniform upper truncation bound: the truncation triangle H^{-n}(E)[n] -> E_n -> E_{n-1}",
+   "via": [
+    "lem-pc-derived-lower-truncation-step-ses",
+    "lem-pc-derived-lower-truncation-step-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kernel geometry and homology of a fixed successive lower truncation transition",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], $K$ a cochain complex, and $m\\in\\mathbf Z$ [def-weil-abstract-derived-category]. Let $q:\\tau_{\\ge m}K\\to\\tau_{\\ge m+1}K$ satisfy $\\pi_m q=\\pi_{m+1}$, where canonical lower truncation is zero below the cutoff, opcycles at the cutoff, and $K$ above. Write $B=\\ker q$. There is a morphism $\\varphi:H^m(K)[-m]\\to B$ and isomorphisms $e_0:B^m\\simeq K^m/\\operatorname{im}d^{m-1}$ and $e_1:B^{m+1}\\simeq\\operatorname{im}d^m$. Under these isomorphisms the kernel inclusion is the identity at $m$ and the image inclusion at $m+1$, the differential is induced by $d^m$, and $\\varphi^m$ is the canonical homology inclusion into opcycles. All other terms of $B$ vanish, and $\\varphi$ is a quasi-isomorphism. These conditions determine $\\varphi$ uniquely.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For an abelian category $\\mathcal A$, a cochain complex $K$, and $m\\in\\mathbf Z$, assume $q:\\tau_{\\ge m}K\\to\\tau_{\\ge m+1}K$ satisfies $\\pi_m q=\\pi_{m+1}$. The canonical projection is degreewise epi, so this identity uniquely determines every component of $q$. At $m$ the target is zero; at $m+1$ the first projection is invertible and the second is the opcycles quotient. Above $m+1$ both projections are invertible. Evaluation preserves kernels, so its kernel in degree $m$ is opcycles, in degree $m+1$ is the image of $d^m$, and is zero elsewhere. The resulting isomorphisms are characterized by their composites with the kernel inclusion. Below $m$ the source vanishes, and in higher degrees the kernel of an isomorphism vanishes.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
+   }
+  },
+  {
+   "text": "The chain map identity for the kernel inclusion gives $\\iota^m d_C=d_{\\tau}^m\\iota^{m+1}$. Substitute the two kernel isomorphisms and the truncation differential formula. Cancellation of the image inclusion yields the differential from $K^m/\\operatorname{im}d^{m-1}$ onto $\\operatorname{im}d^m$. Its composite with the image inclusion is precisely the map induced by $d^m$, giving the displayed differential equality.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
+   }
+  },
+  {
+   "text": "The homology inclusion $H^m(K)\\to K^m/\\operatorname{im}d^{m-1}$ lies in the kernel of this induced differential. Transport it by the degree-$m$ isomorphism and construct a chain map from the single complex: all its other components are zero. The differential condition is the vanishing just stated. The component formula and the monic kernel inclusion determine this chain map uniquely, including in the zero and acyclic cases.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
+   }
+  },
+  {
+   "text": "Since the kernel has no term before $m$, its degree-$m$ cohomology is the kernel of the induced differential, namely $H^m(K)$, and the single-complex map induces the identity. The induced differential onto the image is epi, so degree-$m+1$ cohomology is zero. All remaining cohomology groups vanish because the corresponding terms are zero. The single complex has cohomology only in degree $m$, so all homology maps are invertible, which is the quasi-isomorphism condition.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118 (homology-section-truncations), lower canonical truncations and their degreewise quotients; Tag 08J5 (derived-remark-truncation-distinguished-triangle)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Degreewise kernel and cohomology computation from Tag 0118, read at https://stacks.math.columbia.edu/tag/0118"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "kernel of quotient transition between successive canonical lower truncations is a two term complex quasi isomorphic to the single homology object",
+   "results": "HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g and truncation quasi-isomorphism lemmas, but no successive transition kernel description.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.from_single_hom_ext",
+   "results": "HomologicalComplex.from_single_hom_ext, Mathlib.Algebra.Homology.Single; useful for uniqueness, not the kernel computation.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*truncGE|truncGE.*kernel|lowerTruncationTransitionKernel",
+   "results": "AreComplementary.lean cokernel comparison and TruncGEHomology.lean kernel fork for the homology inclusion; no successive transition kernel theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel of successive canonical truncation cochain complex quasi-isomorphism homology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.LowerTruncationStepSES",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LowerTruncationTransitionKernel",
+  "file": "lean/Sheaf/Algebra/Homology/LowerTruncationTransitionKernel.lean",
+  "declaration": "CochainComplex.exists_lowerTruncationTransitionKernel",
+  "statement": "theorem exists_lowerTruncationTransitionKernel\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (m : ℤ)\n    (q : K.truncGE m ⟶ K.truncGE (m + 1))\n    (hq : K.πTruncGE m ≫ q = K.πTruncGE (m + 1)) :\n    ∃ (φ : ((singleFunctor C m).obj (K.homology m)) ⟶ kernel q),\n      (∃ (e₀ : (kernel q).X m ≅ K.opcycles m)\n            (e₁ : (kernel q).X (m + 1) ≅\n              Abelian.image (K.d m (m + 1))),\n            e₀.inv ≫ (kernel.ι q).f m =\n              (K.truncGEXIsoOpcycles m).inv ∧\n            e₁.inv ≫ (kernel.ι q).f (m + 1) ≫\n              (K.truncGEXIso m (m + 1)).hom =\n                Abelian.image.ι (K.d m (m + 1)) ∧\n            e₀.inv ≫ (kernel q).d m (m + 1) ≫ e₁.hom ≫\n              Abelian.image.ι (K.d m (m + 1)) =\n                K.fromOpcycles m (m + 1) ∧\n            (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) m\n                (K.homology m)).inv ≫ φ.f m ≫ e₀.hom =\n                  K.homologyι m) ∧\n      (∀ (r : ℤ), r ≠ m → r ≠ m + 1 → IsZero ((kernel q).X r)) ∧\n      QuasiIso φ",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T095916-L-321750",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T095916-L-321750",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
