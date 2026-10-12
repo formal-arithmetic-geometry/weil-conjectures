@@ -31,120 +31,117 @@
  ],
  "proof": [
   {
-   "text": "*Conventions.* Call a sheaf of $\\Lambda_T$-modules on $T_{\\Et}$ (for a scheme $T$) *FLC* if it satisfies the equivalent conditions (1), (2), (3) of [lem-weil-pbc-finite-locally-constant-module-values]; (1) is the working definition and (2) says: locally constant [def-constructible-locally-constant] and finite (every geometric stalk is a finite set) [def-constructible-finite], i.e. finite locally constant [def-constructible-finite-locally-constant] for the coefficient category of $\\Lambda$-modules. For an etale $e:T\\to Z$ and a sheaf $G$ of $\\Lambda_Z$-modules, $G|_e$ (or $G|_T$) is the restriction $(G|_e)(V\\to T)=G(V\\to T\\xrightarrow{e}Z)$ of that lemma. Two elementary facts. (a) *Isomorphism invariance:* if $G\\cong G'$ as sheaves of $\\Lambda_Z$-modules and $G$ is FLC with data $\\{U_i\\to Z\\}$, $G|_{U_i}\\cong\\underline{M_i}$ as in (1), then $G'|_{U_i}\\cong G|_{U_i}\\cong\\underline{M_i}$ (an isomorphism restricts to an isomorphism: its components at the objects $V\\to U_i\\to Z$), so $G'$ is FLC. (b) *Locality:* let $\\{g_a:U_a\\to Z\\}_a$ be an etale covering and suppose each $G|_{U_a}$ is FLC, with data $\\{h_{ab}:U_{ab}\\to U_a\\}_b$ and finite $M_{ab}$, $(G|_{U_a})|_{U_{ab}}\\cong\\underline{M_{ab}}$. The composites $g_ah_{ab}$ are etale ([lem-weil-pbc-etale-composition-cancellation] (2)) and jointly surjective (a point of $Z$ is $g_a(u)$ for some $a$ and $u\\in U_a$, and $u=h_{ab}(v)$ for some $b$ and $v$), so they form an etale covering of $Z$ [def-weil-pbc-etale-site]; and $G|_{U_{ab}}$ (restriction along $g_ah_{ab}$) is literally $(G|_{U_a})|_{U_{ab}}$, both having sections $G(V\\to U_{ab}\\to U_a\\to Z)$ over $V\\to U_{ab}$. So $G$ is FLC by (1).",
+   "text": "Work directly with IsFiniteLocallyConstantSheaf, whose two fields are local constancy and finitely generated geometric stalks. Use the proved source lemmas IsFiniteLocallyConstantSheaf.upperStar and .of_iso (combining their locally constant and finite clauses) for pullback and isomorphism invariance. For etale maps, upperStarIsoLocalizationRestriction transports this to literal restriction.",
    "uses": [
-    "lem-weil-pbc-finite-locally-constant-module-values",
     "def-constructible-locally-constant",
     "def-constructible-finite",
     "def-constructible-finite-locally-constant",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095B (lemma-pushforward-locally-constant), proof, lines 9982-9991"
-   }
-  },
-  {
-   "text": "*Restriction along an etale morphism preserves FLC* (Stacks 095A, lemma-pullback-locally-constant, for $e^{-1}$, plus stalks). Let $Z$ be a scheme, $G$ an FLC sheaf of $\\Lambda_Z$-modules and $e:T\\to Z$ etale. By [lem-weil-pbc-finite-locally-constant-module-values] (1)$\\Rightarrow$(2), $G$ is locally constant and finite. The inverse image $e^{-1}G$ [def-weil-pbc-inverse-image] (the same functor on sheaves of $\\Lambda$-modules) is locally constant by [lemma-constructible-pullback-locally-constant] (coefficient category the $\\Lambda$-modules), and for a geometric point $\\bar t$ of $T$, $(e^{-1}G)_{\\bar t}\\cong G_{e\\circ\\bar t}$ by [lem-weil-pbc-inverse-image-stalk-germ] (applied to the underlying abelian sheaf), a finite set; so $e^{-1}G$ satisfies (2) [def-constructible-finite, def-constructible-finite-locally-constant] and is FLC. By [lem-weil-pbc-etale-inverse-image-restriction] (1) there is an isomorphism of abelian sheaves $\\rho_G:e^{-1}G\\xrightarrow{\\sim}G|_T$, natural in the abelian sheaf $G$. It is $\\Lambda$-linear: for $\\lambda\\in\\Lambda$ multiplication $m_\\lambda$ by $\\lambda$ is an endomorphism of the abelian sheaf $G$, $e^{-1}m_\\lambda$ is multiplication by $\\lambda$ on $e^{-1}G$ (this is how $e^{-1}$ acts on module sheaves) and $m_\\lambda|_T$ is multiplication by $\\lambda$ on $G|_T$, and naturality of $\\rho$ at $m_\\lambda$ says $\\rho_G\\circ e^{-1}m_\\lambda=m_\\lambda|_T\\circ\\rho_G$ (the argument of step 2 of [lem-weil-pbc-finite-locally-constant-module-values]). So $G|_T\\cong e^{-1}G$ as sheaves of $\\Lambda_T$-modules and $G|_T$ is FLC by step 1 (a).",
-   "uses": [
-    "lem-weil-pbc-finite-locally-constant-module-values",
-    "def-weil-pbc-inverse-image",
     "lemma-constructible-pullback-locally-constant",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "def-constructible-finite",
-    "def-constructible-finite-locally-constant",
+    "lemma-constructible-pullback-finite",
     "lem-weil-pbc-etale-inverse-image-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095A (lemma-pullback-locally-constant), line ~9960"
+    "place": "Lemma 095B (lemma-pushforward-locally-constant), line 9973, module clause"
    }
   },
   {
-   "text": "*The construction of $f_*$ commutes with etale localization* (Stacks 095B, proof, first sentence). Let $g:U\\to X$ be etale, $Y_U=Y\\times_XU$ [def-pc-fibre-product] with projections $f_U:Y_U\\to U$ and $g':Y_U\\to Y$; $g'$ is the base change of the etale $g$ along $f$, hence etale ([lem-weil-pbc-etale-base-change-finite-limits] (1)). We show $(f_*F)|_U\\cong(f_U)_*(F|_{g'})$ as sheaves of $\\Lambda_U$-modules. For an object $W\\to U$ of $U_{\\Et}$: $((f_*F)|_U)(W)=(f_*F)(W\\to U\\to X)=F(W\\times_XY)$ and $((f_U)_*(F|_{g'}))(W)=(F|_{g'})(W\\times_UY_U)=F(W\\times_UY_U\\to Y_U\\xrightarrow{g'}Y)$ [def-weil-pbc-direct-image]. In the diagram $W\\times_UY_U\\to Y_U\\to Y$ over $W\\to U\\to X$ both squares are cartesian, so by [lem-weil-pbc-cartesian-square-pasting] $W\\times_UY_U$, with its projections to $W$ and (via $g'$) to $Y$, is a fibre product of $W\\to X$ and $f$; hence the unique morphism $\\kappa_W:W\\times_UY_U\\to W\\times_XY$ compatible with the projections to $W$ and to $Y$ is an isomorphism [def-pc-fibre-product], and as a morphism over $Y$ it is an isomorphism of $Y_{\\Et}$. So $F(\\kappa_W):F(W\\times_XY)\\to F(W\\times_UY_U)$ is bijective and $\\Lambda$-linear (restriction maps of a sheaf of $\\Lambda_Y$-modules are linear over the constant $\\Lambda$ [def-weil-sheaf-of-modules-category]). For $h:W'\\to W$ in $U_{\\Et}$, $\\kappa_W\\circ(h\\times_U\\mathrm{id}_{Y_U})=(h\\times_X\\mathrm{id}_Y)\\circ\\kappa_{W'}$, both sides being the morphism $W'\\times_UY_U\\to W\\times_XY$ with components $h\\circ\\mathrm{pr}_{W'}$ and $g'\\circ\\mathrm{pr}_{Y_U}$ (uniqueness in [def-pc-fibre-product]); so the $F(\\kappa_W)$ commute with the restriction maps and form an isomorphism of sheaves of $\\Lambda_U$-modules $(f_*F)|_U\\xrightarrow{\\sim}(f_U)_*(F|_{g'})$.",
+   "text": "Establish closure under finite products in the private helper finiteLocallyConstant_product. The property is closed under isomorphisms and binary products, since a binary product is isomorphic to the binary biproduct. It contains zero: the zero sheaf is constant with zero value and has zero, hence finitely generated, stalks. Mathlib ObjectProperty.IsClosedUnderFiniteProducts.mk' upgrades binary and empty-product closure to arbitrary finite-product closure, including empty index types. This is the finite-product induction in step 5 of the original proof, using the source zero-sheaf lemma and the Mathlib finite-product constructor.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095B (lemma-pushforward-locally-constant), proof, lines 9982-9991"
-   }
-  },
-  {
-   "text": "*A finite etale morphism is etale locally split* (Stacks 095B, proof, second sentence: Etale Morphisms, Lemma 04HN). $f$ is finite and etale [def-weil-pbc-finite-etale-category]. For each $x\\in X$, [lem-weil-pbc-finite-etale-etale-local-split] gives an etale $g_x:U_x\\to X$, a point $u_x\\in U_x$ with $g_x(u_x)=x$, a finite set $J_x$ and a decomposition $Y_{U_x}=Y\\times_XU_x=\\coprod_{j\\in J_x}V_{x,j}$ into pairwise disjoint open and closed subschemes such that each $\\mathrm{pr}_2|_{V_{x,j}}:V_{x,j}\\to U_x$ is an isomorphism. The family $\\{g_x:U_x\\to X\\}_{x\\in X}$ is etale and jointly surjective ($x=g_x(u_x)$), an etale covering of $X$ [def-weil-pbc-etale-site].",
-   "uses": [
-    "def-weil-pbc-finite-etale-category",
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095B (lemma-pushforward-locally-constant), proof, lines 9982-9991"
-   }
-  },
-  {
-   "text": "*The split case: $f_*F$ is FLC on each $U_x$* (Stacks 095B, proof: 'the lemma says that if $\\mathcal F_i$ are (finite) locally constant then $\\prod\\mathcal F_i$ is too'). Fix $x$ and write $U=U_x$, $J=J_x$, $f_U=\\mathrm{pr}_2:Y_U\\to U$, $g':Y_U\\to Y$ as in step 3. Apply [lem-weil-pbc-direct-image-split-cover-product] to $f_U$ with the decomposition $(V_{x,j})_{j\\in J}$ of step 4 and $H=F|_{g'}$: with $s_j:U\\to Y_U$ the inverse of $f_U|_{V_{x,j}}$ followed by the inclusion (etale), $(f_U)_*H\\cong\\prod_{j\\in J}H|_{s_j}$ as sheaves of $\\Lambda_U$-modules. Here $H|_{s_j}$ is literally $F|_{g'\\circ s_j}$ (sections $F(V\\to U\\xrightarrow{s_j}Y_U\\xrightarrow{g'}Y)$), and $g'\\circ s_j:U\\to Y$ is etale ([lem-weil-pbc-etale-composition-cancellation] (2); $g'$ is etale by step 3), so each $H|_{s_j}$ is FLC by step 2 applied to $Z=Y$, $G=F$, $e=g's_j$. If $J\\neq\\varnothing$: the finite product $\\prod_jH|_{s_j}$ in the additive category of sheaves of $\\Lambda_U$-modules is their finite direct sum (biproduct), which is finite locally constant by [lemma-constructible-flc-biproduct] (coefficient category the $\\Lambda$-modules, condition (2) of [lem-weil-pbc-finite-locally-constant-module-values]), hence FLC. If $J=\\varnothing$: the product is the zero sheaf $0$, which is FLC with the covering $\\{\\mathrm{id}_U\\}$ and $M=0$, the zero presheaf being a sheaf and so its own sheafification, the constant sheaf $\\underline0$ [def-weil-pbc-constant-sheaf]. By step 3, $(f_*F)|_{U_x}\\cong(f_U)_*(F|_{g'})=(f_U)_*H\\cong\\prod_jH|_{s_j}$, so $(f_*F)|_{U_x}$ is FLC by step 1 (a).",
-   "uses": [
-    "lem-weil-pbc-direct-image-split-cover-product",
-    "lem-weil-pbc-etale-composition-cancellation",
     "lemma-constructible-flc-biproduct",
-    "lem-weil-pbc-finite-locally-constant-module-values",
+    "def-constructible-finite-locally-constant",
     "def-weil-pbc-constant-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095B (lemma-pushforward-locally-constant), proof, lines 9982-9991"
+    "place": "Lemma 095B (lemma-pushforward-locally-constant), line 9973, module clause"
    }
   },
   {
-   "text": "*Conclusion.* $f_*F$ is a sheaf of $\\Lambda_X$-modules [def-weil-pbc-direct-image]. The family $\\{g_x:U_x\\to X\\}_{x\\in X}$ is an etale covering (step 4) and each $(f_*F)|_{U_x}$ is FLC (step 5), so $f_*F$ is FLC by step 1 (b), i.e. finite locally constant in the sense of [lem-weil-pbc-finite-locally-constant-module-values].",
+   "text": "Prove the split case in finiteLocallyConstant_lowerStar_split. Given a finite coproduct of clopen pieces V_j over the base, with isomorphisms e_j:V_j ≅ X, put t_j=e_j.inv and s_j=t_j followed by the inclusion. The inverse identities supply exactly hinv1 and hinv2 of directImage_splitCover_product. Each restriction along s_j is finite locally constant by step 1. Step 2 makes their product finite locally constant; transport along the inverse of the split direct-image product isomorphism.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-finite-locally-constant-module-values"
+    "lem-weil-pbc-direct-image-split-cover-product",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lemma-constructible-flc-biproduct",
+    "lem-weil-pbc-etale-inverse-image-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 095B (lemma-pushforward-locally-constant), proof, lines 9982-9991"
+    "place": "Lemma 095B (lemma-pushforward-locally-constant), line 9973, module clause"
+   }
+  },
+  {
+   "text": "For every x in X choose the neighbourhood, point, finite index type, clopen coproduct, and component isomorphisms provided by finite_etale_etale_local_split. The neighbourhood maps g_x form an etale cover: the selected point a_x satisfies g_x(a_x)=x. Package this using Scheme.Cover.mkOfCovers.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 095B (lemma-pushforward-locally-constant), line 9973, module clause"
+   }
+  },
+  {
+   "text": "For each chosen g_x let H be the pullback of F along pullback.fst f g_x. It is finite locally constant by step 1, and its direct image along pullback.snd is finite locally constant by the split case. Etale.isIso_baseChangeMap_flip_of_isPullback, applied to the flipped chosen pullback square, identifies this direct image with the pullback of f_*F along g_x. This source theorem is the module-valued version of the already closed etale underived exchange/restriction node; it needs only etaleness of g_x and its base change, with no proper-base-change theorem.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-etale-underived-exchange-restriction",
+    "lemma-constructible-pullback-finite",
+    "lemma-constructible-pullback-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 095B (lemma-pushforward-locally-constant), line 9973, module clause"
+   }
+  },
+  {
+   "text": "Descend the two fields. Local constancy descends by the proved IsLocallyConstantSheaf.of_cover, which composes the trivializing covers. For finiteness, take any separably closed geometric point s of X, choose a covering point b over s(default), and lift s to t along that etale cover member using Mathlib exists_fac_of_etale_of_isSepClosed. The stalk of the locally finite pullback at t is finitely generated. Transport it through upperStarCompSheafFiberIso and the equality t followed by the covering map equals s. Construct the original IsFiniteLocallyConstantSheaf with these two fields.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-constructible-finite",
+    "def-constructible-finite-locally-constant",
+    "def-weil-pbc-etale-site",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 095B (lemma-pushforward-locally-constant), line 9973, module clause"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-locally-constant-module-values",
   "def-constructible-locally-constant",
   "def-constructible-finite",
   "def-constructible-finite-locally-constant",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-inverse-image",
   "lemma-constructible-pullback-locally-constant",
-  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-constructible-pullback-finite",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-finite-etale-category",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-direct-image-split-cover-product",
   "lemma-constructible-flc-biproduct",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-direct-image-split-cover-product",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 095B (lemma-pushforward-locally-constant), proof, lines 9982-9991; Lemma 095A (lemma-pullback-locally-constant) for step 2"
+  "place": "Stacks 095B proof, original node steps 1-6, assembled from existing Lean declarations by Y2; finite-product induction from Mathlib ObjectProperty.FiniteProducts and the source Biproduct/zero APIs."
  },
  "mathlib_searches": [
   {
@@ -224,5 +221,15 @@
   "group": "F1",
   "result": "pass",
   "note": "f:Y->X [IsFinite f][Etale f] (no surjectivity); Λ:Type(u+1) CommRing Finite; F : Sheaf Y_et (ModuleCat Λ) with IsFiniteLocallyConstantSheaf (= node cond (2), bridged to (1)/(3) by finite_locally_constant_module_values_iff); conclusion IsFiniteLocallyConstantSheaf of recorded Etale.lowerStar (ModuleCat Λ) f; names checked by #check with pp.fullNames"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T054003-L-2650172",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

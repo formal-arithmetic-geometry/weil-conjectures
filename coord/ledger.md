@@ -6311,3 +6311,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:40 L: merged deliver/X2/WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations (stage 3; reviewer PASS; first push; landing 20261012T054002-L-2649820 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:40 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange (stage 3; reviewer PASS; after a return; landing 20261012T054003-L-2649936 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:40 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology (stage 3; reviewer PASS; first push; landing 20261012T054003-L-2650053 (interface); batch 20261012T053916; modules 3; new nodes 2)
+- 05:40 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant (stage 3; reviewer PASS; first push; landing 20261012T054003-L-2650172 (proof); batch 20261012T053916; modules 1; new nodes 0)
