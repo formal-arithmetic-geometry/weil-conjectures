@@ -21,15 +21,16 @@
 | `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
 | `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
-## Stage 2: nodes to state (1)
+## Stage 2: nodes to state (2)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
+| `lem-weil-matrix-rank-field-extension` | 1 | state | 0 |
 | `lemma-nagata-final-descended-model` | 3 | state | 0 |
 
 Not open yet: 47 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (1817)
+## Stage 3: modules to prove (1816)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -1006,7 +1007,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.Topology.Sheaves.LerayAcyclicComparison` | 9 | 1 | proof |
 | `Sheaf.Topology.SpectralLimitConstructibleClosed` | 9 | 1 | proof |
 | `Sheaf.Topology.SpectralLimitConstructibleClosedNonempty` | 9 | 1 | proof |
-| `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Semicontinuity` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.Serre` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic` | 9 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket` | 9 | 9 | proof |
@@ -1276,6 +1276,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian` | 11 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatModulePullbackExact` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional` | 11 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension` | 11 | 1 | proof |
@@ -1415,6 +1416,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat` | 12 | 1 | proof |
 | `Sheaf.Algebra.Homology.AcyclicLimitOrdinal` | 12 | 1 | proof |
 | `Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic` | 12 | 1 | proof |
+| `Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat` | 12 | 1 | proof |
 | `Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic` | 12 | 1 | proof |
 | `Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution` | 12 | 1 | proof |
 | `Sheaf.Algebra.Homology.FilteredColimitsTensor` | 12 | 1 | proof |
@@ -1439,7 +1441,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct` | 12 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GlueComponentLineBundles` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralDimOneAmple` | 12 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent` | 12 | 1 | proof |
@@ -1536,7 +1537,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor` | 13 | 2 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact` | 13 | 1 | proof |
 | `Sheaf.Algebra.Homology.BaseChangeRHomPerfect` | 13 | 1 | proof |
-| `Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat` | 13 | 1 | proof |
+| `Sheaf.Algebra.Homology.BoundedFlatKFlat` | 13 | 1 | proof |
 | `Sheaf.Algebra.Homology.KFlatTensorQuasiIso` | 13 | 1 | proof |
 | `Sheaf.Algebra.Homology.TorAmplitudeFlatModel` | 13 | 1 | proof |
 | `Sheaf.Algebra.Homology.UnitEntrySplits` | 13 | 1 | proof |
@@ -1564,6 +1565,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FlatPrecomposePus` | 13 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.FlatSheafStalk` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso` | 13 | 4 | proof |
 | `Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections` | 13 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle` | 13 | 1 | proof |
@@ -1640,7 +1642,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `WeilConjectures.AlgebraicGeometry.Cohomology.Projective` | 13 | 5 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension` | 14 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal` | 14 | 1 | proof |
-| `Sheaf.Algebra.Homology.BoundedFlatKFlat` | 14 | 1 | proof |
 | `Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion` | 14 | 1 | proof |
 | `Sheaf.Algebra.Homology.HomTensorTotal` | 14 | 1 | proof |
 | `Sheaf.Algebra.Homology.KFlatTensorProduct` | 14 | 1 | proof |
@@ -1667,7 +1668,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.DirectImageQCSupportReduction` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.FiniteSectionsCover` | 14 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.FlatSheafStalk` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.GlobalDerivedHom` | 14 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction` | 14 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.InvertSCOhomology` | 14 | 1 | proof |
@@ -1851,9 +1851,10 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.RingTheory.FiniteMaximalsOverElement` | 20 | 1 | proof |
 | `Sheaf.RingTheory.Flat.LocalizationPreservesFlatness` | 20 | 1 | proof |
 
-Waiting, not claimable: 2 modules whose proof uses a node that has no Lean declaration yet.
+Waiting, not claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 4 |
 | `WeilConjectures.AlgebraicGeometry.Picard.Jacobian` | 7 | 2 |
+| `Sheaf.AlgebraicGeometry.Modules.ConstantRankComplexHomology` | 10 | 1 |
