@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.Pi
+import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Finite free resolutions over Noetherian rings
@@ -46,6 +47,23 @@ theorem exists_finite_free_resolution
       (d : ∀ i : ℕ, (Fin (n (i + 1)) → R) →ₗ[R] (Fin (n i) → R)),
       Function.Surjective ε ∧ LinearMap.ker ε = LinearMap.range (d 0) ∧
         ∀ i : ℕ, LinearMap.ker (d i) = LinearMap.range (d (i + 1)) := by
-  sorry
+  classical
+  obtain ⟨n₀, ε, hε⟩ := Module.Finite.exists_fin' R M
+  have covers (n : ℕ) (K : Submodule R (Fin n → R)) :
+      ∃ (m : ℕ) (f : (Fin m → R) →ₗ[R] (Fin n → R)), LinearMap.range f = K := by
+    exact (Submodule.fg_iff_exists_fin_linearMap R (Fin n → R)).mp
+      (Submodule.FG.of_le Module.Finite.fg_top le_top)
+  -- A state records a finite free term and the kernel to be covered next.
+  choose rank map range_map using covers
+  let next : (Σ n : ℕ, Submodule R (Fin n → R)) →
+      (Σ n : ℕ, Submodule R (Fin n → R)) :=
+    fun s ↦ ⟨rank s.1 s.2, LinearMap.ker (map s.1 s.2)⟩
+  -- The successor stores precisely the kernel of the map just chosen.
+  let s : ℕ → Σ n : ℕ, Submodule R (Fin n → R) :=
+    Nat.rec ⟨n₀, LinearMap.ker ε⟩ (fun _ t ↦ next t)
+  refine ⟨fun i ↦ (s i).1, ε, fun i ↦ map (s i).1 (s i).2, hε, ?_, ?_⟩
+  · exact (range_map n₀ (LinearMap.ker ε)).symm
+  · intro i
+    exact (range_map (s (i + 1)).1 (s (i + 1)).2).symm
 
 end Module

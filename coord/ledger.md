@@ -9195,3 +9195,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/G3/Sheaf.AlgebraicGeometry.ProjTwistFiniteLocalRepresentatives (stage 3; reviewer PASS; first push; landing 20261012T194113-L-455918 (interface); batch 20261012T194054; modules 3; new nodes 2; change records: coord/changes/suppress-unused-hspan.md)
 - 19:41 L: merged deliver/G3/Sheaf.AlgebraicGeometry.StructureSheafHomotopyGlobalSections (stage 3; reviewer PASS; first push; landing 20261012T194114-L-456070 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/G3/Sheaf.CategoryTheory.BoundedFilteredPageConstruction (stage 3; reviewer PASS; first push; landing 20261012T194114-L-456216 (interface); batch 20261012T194054; modules 3; new nodes 2)
+- 19:41 L: merged deliver/G3/Sheaf.RingTheory.FiniteFreeResolution (stage 3; reviewer PASS; first push; landing 20261012T194115-L-456318 (proof); batch 20261012T194054; modules 1; new nodes 0)
