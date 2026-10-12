@@ -193,51 +193,57 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_kunn
     ((-⊗ᴸ-(pullback b₁ b₂)[A]).mapIso e₁.symm).app _ ≪≫
     ((-⊗ᴸ-(pullback b₁ b₂)[A]).obj _).mapIso e₂.symm⟩
 
-/-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for
-general coefficients, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
+/-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a
+finite coefficient ring, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
 `Y₁ ×_S Y₂ ⟶ Yᵢ` and the composition isomorphism `R(f₁ × f₂)_! ≅ Re_! ⋙ Rh_!` of
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase`; both hold for torsion
 coefficients. It is the relative product theorem
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` over
 `B = Y₁ ×_S Y₂`, transported along `pullback.mapOverBaseIso`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange
-    [UpperStarPreservesFlat A] [ConcreteCategory.FiniteOfIsFinitelyGenerated A]
     [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
-    {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A)}
-    {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology A)}
-    (hM₁ : DerivedCategory.constructibleFiniteTor A X₁ M₁)
-    (hM₂ : DerivedCategory.constructibleFiniteTor A X₂ M₂)
+    {M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hM₁ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₁ M₁)
+    (hM₂ : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X₂ M₂)
     [HasCompactification (pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom]
     [HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
       (pullback.snd f₂ (pullback.snd b₁ b₂)))]
-    (hcomp : Nonempty (R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A] ≅
-      R((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom)_![A] ⋙
+    (hcomp : Nonempty (R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ] ≅
+      R((pullback.mapOverBaseIso f₁ f₂ b₁ b₂).hom)_![ModuleCat.{u + 1} Λ] ⋙
         R(pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
-          (pullback.snd f₂ (pullback.snd b₁ b₂)))_![A]))
-    (hbc₁ : Nonempty ((L((pullback.fst b₁ b₂)^*[A])).obj ((R(f₁)_![A]).obj M₁) ≅
-      (R(pullback.snd f₁ (pullback.fst b₁ b₂))_![A]).obj
-        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[A])).obj M₁)))
-    (hbc₂ : Nonempty ((L((pullback.snd b₁ b₂)^*[A])).obj ((R(f₂)_![A]).obj M₂) ≅
-      (R(pullback.snd f₂ (pullback.snd b₁ b₂))_![A]).obj
-        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[A])).obj M₂))) :
-    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![A]).obj
-        (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
-      externalProduct A b₁ b₂ ((R(f₁)_![A]).obj M₁) ((R(f₂)_![A]).obj M₂)) := by
-  obtain ⟨t⟩ := nonempty_iso_rightDerivedLowerShriek_mapOverBase A b₁ b₂ f₁ f₂ hcomp
-    (externalProduct A (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂)
-  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct A b₁ b₂ f₁ f₂
-    M₁ M₂
-  obtain ⟨ku⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct A
+          (pullback.snd f₂ (pullback.snd b₁ b₂)))_![ModuleCat.{u + 1} Λ]))
+    (hbc₁ : Nonempty ((L((pullback.fst b₁ b₂)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁) ≅
+      (R(pullback.snd f₁ (pullback.fst b₁ b₂))_![ModuleCat.{u + 1} Λ]).obj
+        ((L((pullback.fst f₁ (pullback.fst b₁ b₂))^*[ModuleCat.{u + 1} Λ])).obj M₁)))
+    (hbc₂ : Nonempty ((L((pullback.snd b₁ b₂)^*[ModuleCat.{u + 1} Λ])).obj
+        ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂) ≅
+      (R(pullback.snd f₂ (pullback.snd b₁ b₂))_![ModuleCat.{u + 1} Λ]).obj
+        ((L((pullback.fst f₂ (pullback.snd b₁ b₂))^*[ModuleCat.{u + 1} Λ])).obj M₂))) :
+    Nonempty ((R(pullback.mapOverBase f₁ f₂ b₁ b₂)_![ModuleCat.{u + 1} Λ]).obj
+        (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂) ≅
+      externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ ((R(f₁)_![ModuleCat.{u + 1} Λ]).obj M₁)
+        ((R(f₂)_![ModuleCat.{u + 1} Λ]).obj M₂)) := by
+  obtain ⟨t⟩ := nonempty_iso_rightDerivedLowerShriek_mapOverBase (ModuleCat.{u + 1} Λ) b₁ b₂ f₁
+    f₂ hcomp (externalProduct (ModuleCat.{u + 1} Λ) (f₁ ≫ b₁) (f₂ ≫ b₂) M₁ M₂)
+  obtain ⟨p⟩ := nonempty_iso_leftDerivedUpperStar_mapOverBaseIso_externalProduct
+    (ModuleCat.{u + 1} Λ) b₁ b₂ f₁ f₂ M₁ M₂
+  have : QuasiCompact (pullback.snd f₁ (pullback.fst b₁ b₂)) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (IsPullback.of_hasPullback f₁ (pullback.fst b₁ b₂)) inferInstance
+  have : QuasiCompact (pullback.snd f₂ (pullback.snd b₁ b₂)) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (IsPullback.of_hasPullback f₂ (pullback.snd b₁ b₂)) inferInstance
+  obtain ⟨ku⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct Λ
     (pullback.snd f₁ (pullback.fst b₁ b₂)) (pullback.snd f₂ (pullback.snd b₁ b₂))
-    (constructibleFiniteTor_leftDerivedUpperStar A (pullback.fst f₁ _) hM₁)
-    (constructibleFiniteTor_leftDerivedUpperStar A (pullback.fst f₂ _) hM₂)
+    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) (pullback.fst f₁ _) hM₁)
+    (constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) (pullback.fst f₂ _) hM₂)
   obtain ⟨e₁⟩ := hbc₁
   obtain ⟨e₂⟩ := hbc₂
-  exact ⟨t ≪≫ (R(_)_![A]).mapIso p ≪≫ ku ≪≫ (e₁.symm ⊗ᵢ e₂.symm)⟩
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
-/-- Blueprint `sk-def-sf-kv-maps` (i), `def-sf-kv-maps` (i): the `!`-Künneth isomorphism.
+  exact ⟨t ≪≫ (R(_)_![ModuleCat.{u + 1} Λ]).mapIso p ≪≫ ku ≪≫ (e₁.symm ⊗ᵢ e₂.symm)⟩
 
 Let `fᵢ : Xᵢ ⟶ Yᵢ` be separated of finite type between schemes over `S`, let `Λ` be a finite
 coefficient ring and `Mᵢ` in `Dctf(Xᵢ, Λ)`. Writing `f = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`,
