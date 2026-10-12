@@ -5803,3 +5803,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:38 L: merged deliver/S1/Sheaf.Topology.AbelianOpenExtensionByZero (stage 3; reviewer PASS; first push; landing 20261012T013854-L-857871 (proof); modules 1; new nodes 0)
 - 01:39 L: merged deliver/V1/Sheaf.CategoryTheory.ExtensionByZeroPresheaf (stage 3; reviewer PASS; first push; landing 20261012T013924-L-859831 (proof); modules 1; new nodes 0)
 - 01:42 L: merged deliver/G1/WeilConjectures.AlgebraicGeometry.Curve.Reductions (stage 3; reviewer PASS; after a return; landing 20261012T014114-L-867356 (interface); modules 2; new nodes 1)
+- 01:43 L: merged deliver/T1/Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound (stage 3; reviewer PASS; after a return; landing 20261012T014245-L-874691 (interface); modules 3; new nodes 2)

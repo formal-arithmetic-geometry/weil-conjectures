@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-affine-local-acyclic-open-restriction",
+ "kind": "statement",
+ "title": "Affine-local acyclicity is inherited by open restriction",
+ "statement": "Let $\\Lambda$ be a commutative ring of universe $u+1$, let $X,Z$ be schemes of universe $u$ [def-weil-pbc-scheme-conventions], let $i:Z\\to X$ be a morphism, and let $J$ be a sheaf of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Write $K(p,F)$ for the underlying abelian sheaf of the module inverse image $p^*F$ [def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves], and $H^q(F)$ for Sheaf.H [def-weil-pbc-etale-cohomology]. Suppose that for every affine open $T\\subseteq X$ and every $q>0$, $H^q(K(\\operatorname{pr}_1:T\\times_XZ\\to T,J|_T))$ is subsingleton. Then for every open $W\\subseteq X$, every affine open $O\\subseteq W$, and every $q>0$, $H^q(K(\\operatorname{pr}_1:O\\times_W(W\\times_XZ)\\to O,(J|_W)|_O))$ is subsingleton. No separatedness, closed-immersion, injectivity, or torsion hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "Proof, Mayer--Vietoris induction, with the affine vanishing supplied explicitly; coefficient and inverse-image identifications from Tag 03D3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The image T of an affine open O of W is affine, because its inclusion into X is an open immersion and is an isomorphism onto its image. Apply hlocal to T.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-iso-onto-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fibre products O ×_W (W ×_X Z) and T ×_X Z are canonically isomorphic. Construct mutually inverse maps from their projections by the pullback universal properties and the isomorphism O ≅ T; their composites are identities by uniqueness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The inverse-image composition isomorphisms identify the coefficient sheaves under that scheme isomorphism. Forgetting module structure commutes with inverse image. Cohomology respects sheaf isomorphisms, and topological invariance along a scheme isomorphism identifies the cohomology groups. Transport the local vanishing.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-iso-onto-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0A51 and 03D3",
+  "place": "The restriction and gluing steps of the finite-affine-cover induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an open subscheme preserves affine-local vanishing of etale sheaf cohomology",
+   "results": "UNAVAILABLE: leansearch returned Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a sheaf to an open subscheme inherits vanishing on inverse images of affine opens",
+   "results": "8 leanfinder hits about structure-sheaf sections and basic opens, none about etale Sheaf.H restriction acyclicity.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_local_acyclic|mayerVietoris.*vanish|subsingleton_H.*(open|cover)",
+   "results": "No Mathlib hits. Local Sheaf and upstream searches inspected inverse-image composition, topological invariance and module-forgetting, but found no affine-local inheritance statement.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-affine-cover-restriction-bound",
+   "place": "Mayer--Vietoris induction; split by the second reader",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLocalAcyclicOpenRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLocalAcyclicOpenRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.affine_local_acyclic_open_restriction",
+  "statement": "theorem Etale.affine_local_acyclic_open_restriction\n    (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)\n    (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hlocal : ∀ (W : X.Opens), IsAffineOpen W → ∀ (q : ℕ), 0 < q →\n      Subsingleton (Sheaf.H\n        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n          ((pullback.fst W.ι i)^*[ModuleCat.{u + 1} Λ].obj\n            ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J))) q))\n    (W : X.Opens) :\n    ∀ (O : W.toScheme.Opens), IsAffineOpen O → ∀ (q : ℕ), 0 < q →\n      Subsingleton (Sheaf.H\n        ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n          ((pullback.fst O.ι (pullback.fst W.ι i))^*[ModuleCat.{u + 1} Λ].obj\n            ((O.ι)^*[ModuleCat.{u + 1} Λ].obj\n              ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J)))) q)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7dcf0",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T014245-L-874691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7dcf0",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T014245-L-874691",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all delivered Lean signatures with their nodes, the induction with its proof metadata, and the remaining lemmas with their sources; compilation and axiom checks pass."
+ }
+}

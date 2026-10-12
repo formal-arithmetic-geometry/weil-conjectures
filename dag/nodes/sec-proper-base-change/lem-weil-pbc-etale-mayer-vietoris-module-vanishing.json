@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-module-vanishing",
+ "kind": "statement",
+ "title": "Two-open Mayer--Vietoris vanishing for inverse images of module sheaves",
+ "statement": "Let $\\Lambda$ be a commutative ring of universe $u+1$, let $X,Z$ be schemes of universe $u$ [def-weil-pbc-scheme-conventions], let $i:Z\\to X$ be a morphism, and let $J$ be a sheaf of $\\Lambda$-modules on the small etale site of $X$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. For an open $T\\subseteq X$, write $F_T$ for the underlying abelian sheaf of $(\\operatorname{pr}_1:T\\times_XZ\\to T)^*(J|_T)$, and write $F$ for the underlying abelian sheaf of $i^*J$ [def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves]. Let $U,V\\subseteq X$ be opens with $U\\cup V=X$, and let $r\\in\\mathbb N$. If $H^{r+1}(F_U)$, $H^{r+1}(F_V)$ and $H^r(F_{U\\cap V})$ are subsingleton, then $H^{r+1}(F)$ is subsingleton, with H understood as Sheaf.H [def-weil-pbc-etale-cohomology]. No affineness, separatedness, closed-immersion, injectivity, or torsion hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A51",
+  "place": "Proof, Mayer--Vietoris induction, with the affine vanishing supplied explicitly; coefficient and inverse-image identifications from Tag 03D3"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Base change of each open inclusion is an open immersion; its image is the inverse-image open in Z. The two images cover Z, and the base change of U ∩ V identifies with their intersection. Identify each base-change scheme with its image.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-open-immersion-iso-onto-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse-image composition and forgetting module structure identify the restrictions of the underlying abelian sheaf of i^*J with the displayed sheaves; transport across the scheme isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the two-open Mayer--Vietoris vanishing criterion to the abelian sheaf on Z. The natural comparison between Sheaf.H and derived global sections transports each of the three given vanishings to the derived-cohomology criterion.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the exact segment H^r(intersection) → H^(r+1)(Z) → H^(r+1)(U) × H^(r+1)(V), both outer groups are zero, hence the middle group is zero.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-immersion-iso-onto-image",
+  "lem-weil-pbc-inverse-image-composition",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0A51 and 03D3",
+  "place": "The restriction and gluing steps of the finite-affine-cover induction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of sheaf cohomology from a two-open Mayer Vietoris exact sequence",
+   "results": "UNAVAILABLE: leansearch returned Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of higher etale sheaf cohomology from vanishing on two opens and their intersection one degree lower",
+   "results": "8 leanfinder hits include MayerVietorisSquare.shortComplex_exact and shortComplex_shortExact, but no exact vanishing theorem for these module pullback groups. Existing etale_mayerVietoris is for derived global sections and still needs coefficient and base-change identifications.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_local_acyclic|mayerVietoris.*vanish|subsingleton_H.*(open|cover)",
+   "results": "No Mathlib hits. Searched the local Sheaf and upstream sources; EtaleMayerVietoris and EtaleMayerVietorisPullback have different, larger signatures, not this vanishing statement.",
+   "date": "2026-10-12",
+   "verdict": "no matching result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-affine-cover-restriction-bound",
+   "place": "Mayer--Vietoris induction; split by the second reader",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisModuleVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.subsingleton_H_of_two_open_pullback_cover",
+  "statement": "theorem Etale.subsingleton_H_of_two_open_pullback_cover\n    (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} (i : Z ⟶ X)\n    (J : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (U V : X.Opens) (hcover : U ⊔ V = ⊤) (r : ℕ)\n    (hU : Subsingleton (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((pullback.fst U.ι i)^*[ModuleCat.{u + 1} Λ].obj\n          ((U.ι)^*[ModuleCat.{u + 1} Λ].obj J))) (r + 1)))\n    (hV : Subsingleton (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((pullback.fst V.ι i)^*[ModuleCat.{u + 1} Λ].obj\n          ((V.ι)^*[ModuleCat.{u + 1} Λ].obj J))) (r + 1)))\n    (hI : Subsingleton (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((pullback.fst (U ⊓ V).ι i)^*[ModuleCat.{u + 1} Λ].obj\n          (((U ⊓ V).ι)^*[ModuleCat.{u + 1} Λ].obj J))) r))\n    : Subsingleton (Sheaf.H\n      ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((i)^*[ModuleCat.{u + 1} Λ].obj J)) (r + 1))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7dcf0",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T014245-L-874691",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7dcf0",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T014245-L-874691",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all delivered Lean signatures with their nodes, the induction with its proof metadata, and the remaining lemmas with their sources; compilation and axiom checks pass."
+ }
+}

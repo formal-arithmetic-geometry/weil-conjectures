@@ -17,45 +17,56 @@
  ],
  "proof": [
   {
-   "text": "For n=0 the single affine member is all of X. Apply the local hypothesis through the identity pullback and inverse-image comparisons.",
+   "text": "Induct on n simultaneously for all schemes X and Z over the fixed affine base and all morphisms and sheaves satisfying hlocal. For n = 0, the only affine open is top. Apply hlocal there. The pullback second projection is an isomorphism; use inverse-image composition, the pullback commutativity relation, module-forgetting and topological invariance to transport vanishing back to Z.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "prop-weil-pbc-universal-homeomorphism-topos"
    ],
    "elementary": false
   },
   {
-   "text": "For n+1 split the cover into an affine U and the union V of n+1 other affine opens. Since X is separated over an affine scheme, each intersection U with an affine member is affine, giving n+1 affine opens covering U intersect V.",
+   "text": "In the successor case split off W = U 0 and let V be the union of the remaining n+1 affine opens. Fin.cases proves W ⊔ V = top. Preimages of the remaining affine opens under V.ι are affine by IsAffineOpen.preimage_of_isOpenImmersion and form a cover of V.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-iso-onto-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The intersections W ∩ U(j.succ) are affine by isAffineHom_diagonal_iff: separatedness of f makes its diagonal a closed immersion and hence affine. These opens lie in W ∩ V; their preimages cover that open scheme, by distributivity and preimage_iSup.",
    "uses": [
     "lem-weil-pbc-separated-affine-open-intersection"
    ],
    "elementary": false
   },
   {
-   "text": "The affine-local hypothesis descends to the restrictions on V and U intersect V by composition of inverse images and associativity of pullbacks. Induction gives bounds n on both; U has bound zero.",
+   "text": "Use the open-restriction inheritance theorem on V and W ∩ V. The induction hypothesis, which now quantifies over these open schemes and their pullback schemes, gives the degree q vanishing on V and degree q-1 vanishing on the intersection. The chosen affine W has positive-degree vanishing directly from hlocal.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-affine-local-acyclic-open-restriction"
    ],
    "elementary": false
   },
   {
-   "text": "Pull back U,V to a cover of Z. The Mayer-Vietoris exact segment has degree q-1 on the intersection on its left and degree q on each open on its right. For q>n+1 these outer groups vanish, so its middle group is zero. Transport the derived-global-sections computation to the canonical abelian cohomology groups.",
+   "text": "Write q = r+1. From n+1 < q infer n < q and n < r. Apply the two-open module-pullback Mayer--Vietoris vanishing theorem to W,V with the three vanishing hypotheses.",
    "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lemma-weil-pbc-leray-acyclicity"
+    "lem-weil-pbc-etale-mayer-vietoris-module-vanishing"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-inverse-image-composition",
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-open-immersion-iso-onto-image",
   "lem-weil-pbc-separated-affine-open-intersection",
-  "lem-weil-pbc-etale-mayer-vietoris",
-  "lemma-weil-pbc-leray-acyclicity"
+  "lem-weil-pbc-affine-local-acyclic-open-restriction",
+  "lem-weil-pbc-etale-mayer-vietoris-module-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Tag 0A51",
-  "place": "Proof, Mayer-Vietoris induction (step 6 of the parent node); specialized to constant coefficients and the library Sheaf.H encoding"
+  "place": "Mayer--Vietoris induction with explicit affine-local acyclicity; Lean proves the base case, cover splitting, affine intersections and induction, leaving only restriction inheritance and two-open vanishing"
  },
  "mathlib_searches": [
   {
@@ -129,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a3709",
-  "group": "C1",
+  "reviewer": "X-7dcf0",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T003530-L-597800",
+  "landing": "20261012T014245-L-874691",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compile cleanly; target and existing declarations are unchanged in signature, proofs and DAG metadata align, new sorry statements are documented and represented by nodes, and axiom checks show only permitted axioms plus recorded sorryAx dependencies."
+  "note": "independent Codex review: Matched all delivered Lean signatures with their nodes, the induction with its proof metadata, and the remaining lemmas with their sources; compilation and axiom checks pass."
  }
 }
