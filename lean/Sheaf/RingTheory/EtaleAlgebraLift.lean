@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.JacobianPresentationLift
 public import Mathlib.RingTheory.Etale.Basic
 import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+import Sheaf.RingTheory.EtaleAlgebraLiftEtaleFP
+import Sheaf.RingTheory.EtaleAlgebraLiftReduction
 
 /-!
 # Étale algebras lift across arbitrary quotients
@@ -52,7 +54,9 @@ theorem SquareJacobianPresentation.CoefficientLift.etale_and_reduction_equiv
       ∃ e : (L.LiftRing ⧸ I.map (algebraMap A L.LiftRing)) ≃+* B,
         ∀ x : L.LiftRing,
           e (Ideal.Quotient.mk (I.map (algebraMap A L.LiftRing)) x) = L.reduction x := by
-  sorry
+  obtain ⟨hef, hfp⟩ := coefficientLift_etale_fp I P L
+  obtain ⟨e, he⟩ := coefficientLift_reduction_equiv I P L
+  exact ⟨hef, hfp, e, he⟩
 
 /-- Every étale finite-presentation algebra over an arbitrary quotient admits the explicit
 Jacobian lift and its reduction isomorphism. Source: Stacks Project, Tag 04D1; blueprint node
@@ -76,6 +80,20 @@ theorem exists_etale_coefficientLift
         ∃ e : (L.LiftRing ⧸ I.map (algebraMap A L.LiftRing)) ≃+* B,
           ∀ x : L.LiftRing,
             e (Ideal.Quotient.mk (I.map (algebraMap A L.LiftRing)) x) = L.reduction x := by
-  sorry
+  classical
+  obtain ⟨ι, hι, ⟨P⟩⟩ :=
+    Etale.iff_exists_squareJacobianPresentation.mp (inferInstance : Etale (A ⧸ I) B)
+  let e : Fin (Nat.card ι) ≃ ι := (Finite.equivFin ι).symm
+  let Q : SquareJacobianPresentation (A ⧸ I) B (Fin (Nat.card ι)) :=
+    { P.toSubmersivePresentation.reindex e e with
+      map_eq_id := by
+        ext i
+        simp [SubmersivePresentation.reindex, PreSubmersivePresentation.reindex,
+          P.map_eq_id] }
+  have hs := MvPolynomial.map_surjective (σ := Fin (Nat.card ι))
+    (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
+  choose f hf using fun i => hs (Q.relation i)
+  let L : SquareJacobianPresentation.CoefficientLift I Q := ⟨f, hf⟩
+  exact ⟨Nat.card ι, Q, L, L.etale_and_reduction_equiv I Q⟩
 
 end Algebra

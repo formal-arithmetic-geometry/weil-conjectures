@@ -1,0 +1,110 @@
+{
+ "id": "lem-exc-etale-algebra-lift-etale-fp",
+ "kind": "statement",
+ "title": "Etale and finite presentation of coefficient lift",
+ "statement": "For every commutative ring A, ideal I, square Jacobian presentation P of an A/I-algebra B as in [lem-exc-etale-jacobian-presentation], and chosen coefficient lift L of [def-exc-etale-algebra-lift], L.LiftRing is etale and finitely presented over A.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
+  "place": "Proof, first paragraph"
+ },
+ "stmt_deps": [
+  "def-exc-etale-algebra-lift",
+  "lem-exc-etale-jacobian-presentation"
+ ],
+ "proof": [
+  {
+   "text": "The Option (Fin m)-indexed quotient presentation has block triangular Jacobian with determinant Delta squared. The last relation t * Delta = 1 makes this a unit. Its square Jacobian presentation gives etaleness, and Algebra.Etale includes finite presentation.",
+   "uses": [
+    "def-exc-etale-algebra-lift",
+    "lem-exc-etale-jacobian-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-exc-etale-algebra-lift",
+  "lem-exc-etale-jacobian-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
+  "place": "Proof, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient with equal numbers of equations and variables and invertible determinant of partial derivatives is etale",
+   "results": "Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.toSubmersivePresentation, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.toSubmersivePresentation_jacobian, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair.instEtaleRing, StandardEtalePresentation, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-12",
+   "verdict": "Related tools only; no exact theorem for this specified coefficient lift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra presented by a square system of polynomial equations with invertible Jacobian determinant is etale and finitely presented",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.ker, RingEquiv",
+   "results": "RingHom.ker_equiv_comp, RingHom.ker_coe_equiv, RingHom.quotientKerEquivOfSurjective, RingHom.quotientKerEquivOfRightInverse, RingHom.quotientKerEquivRangeS, RingHom.quotientKerEquivRange, RingHom.quotientKerEquivOfRightInverse.apply, RingHom.quotientKerEquivOfSurjective_apply_mk",
+   "date": "2026-10-12",
+   "verdict": "Related tools only; no exact theorem for this specified coefficient lift."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*equiv|equiv.*quotient",
+   "results": "Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/CotangentBaseChange.lean, Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean, Mathlib/RingTheory/Ideal/Int.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Cotangent.lean, Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean, Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean",
+   "date": "2026-10-12",
+   "verdict": "Related tools only; no exact theorem for this specified coefficient lift."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.EtaleAlgebraLift",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-etale-algebra-lift",
+   "place": "first paragraph"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.EtaleAlgebraLiftEtaleFP",
+  "file": "lean/Sheaf/RingTheory/EtaleAlgebraLiftEtaleFP.lean",
+  "declaration": "Algebra.coefficientLift_etale_fp",
+  "statement": "theorem coefficientLift_etale_fp {A : Type u} [CommRing A] (I : Ideal A) {B : Type v} [CommRing B] [Algebra (A ⧸ I) B] {m : ℕ} (P : Algebra.SquareJacobianPresentation (A ⧸ I) B (Fin m)) (L : Algebra.SquareJacobianPresentation.CoefficientLift I P) : Algebra.Etale A L.LiftRing ∧ Algebra.FinitePresentation A L.LiftRing",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T144134-L-2103544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T144134-L-2103544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

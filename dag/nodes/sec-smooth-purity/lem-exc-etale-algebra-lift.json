@@ -24,49 +24,34 @@
  ],
  "proof": [
   {
-   "text": "For the lifted algebra, regard the $m+1$ relations as equations in the $m+1$ variables $(x_1,\\ldots,x_m,t)$. The last column of their Jacobian has zero entries in the first $m$ rows and last entry $\\Delta$, while the upper-left block is the Jacobian of the $f_i$. Thus the determinant is $\\Delta^2$. Since $t\\Delta=1$ in the quotient, this determinant is a unit, so the displayed presentation is a square Jacobian presentation and [lem-exc-etale-jacobian-presentation] gives that the lift is etale of finite presentation.",
+   "text": "Apply [lem-exc-etale-algebra-lift-etale-fp] and [lem-exc-etale-algebra-lift-reduction] to the specified P and L, and combine their conclusions.",
    "uses": [
-    "def-exc-etale-algebra-lift",
-    "lem-exc-etale-jacobian-presentation"
+    "lem-exc-etale-algebra-lift-etale-fp",
+    "lem-exc-etale-algebra-lift-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
-    "place": "## Proof, first paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "After quotienting by $I$, the relations become $\\overline f_i=0$ and $t\\overline\\Delta=1$. In the quotient algebra the element $\\overline\\Delta$ is already invertible, so adjoining $t$ with this relation identifies $t$ uniquely with $\\overline\\Delta^{-1}$. The resulting map $B^{\\mathrm{lift}}/IB^{\\mathrm{lift}}\\to\\overline B$ is therefore an isomorphism by the universal property of the presented quotient.",
+   "text": "For an etale A/I-algebra, obtain a finite square Jacobian presentation from [lem-exc-etale-jacobian-presentation]. Reindex both relations and variables by Fin (Nat.card iota) using the same equivalence. The reindexed map is the identity. Surjectivity of the quotient map induces surjectivity on multivariate polynomials, so choose a preimage of each relation and form the genuine CoefficientLift data of [def-exc-etale-algebra-lift]. Apply the preceding conjunction theorem to this lift.",
    "uses": [
-    "def-exc-etale-algebra-lift"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
-    "place": "## Proof, reduction modulo I"
-   }
-  },
-  {
-   "text": "Conversely, let an etale finite-presentation algebra over $A/I$ be given. By [lem-exc-etale-jacobian-presentation] it admits a square Jacobian presentation, which can be used in [def-exc-etale-algebra-lift] by choosing coefficientwise lifts of its finitely many relations. Steps 1 and 2 then construct an etale finite-presentation $A$-algebra whose reduction is the given algebra. No nilpotence condition on $I$ was used.",
-   "uses": [
+    "lem-exc-etale-jacobian-presentation",
     "def-exc-etale-algebra-lift",
-    "lem-exc-etale-jacobian-presentation"
+    "lem-exc-etale-algebra-lift-etale-fp",
+    "lem-exc-etale-algebra-lift-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
-    "place": "## Proof, final sentence"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-exc-etale-algebra-lift",
+  "lem-exc-etale-algebra-lift-etale-fp",
+  "lem-exc-etale-algebra-lift-reduction",
   "lem-exc-etale-jacobian-presentation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/lem-exc-etale-algebra-lift.md",
-  "place": "## Proof"
+  "place": "Proof, with the determinant and reduction components split off; P1 second reading"
  },
  "mathlib_searches": [
   {
@@ -198,5 +183,15 @@
   "group": "H1",
   "result": "fix",
   "note": "arbitrary A, ideal I (no nilpotence), specified P : SquareJacobianPresentation over A/I and lifts L of def-exc-etale-algebra-lift; Etale+FP of L.LiftRing; reduction iso tied as e ∘ mk = L.reduction; existence for every [Algebra.Etale (A/I) B]; no Mathlib analogue (FormallyEtale lifts homs, not algebras); fix: qualified Algebra.Etale/FinitePresentation/SquareJacobianPresentation"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T144134-L-2103544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
