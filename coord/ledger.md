@@ -6912,3 +6912,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/K2/Sheaf.RingTheory.EtaleResidueTriplesPolynomialLift (stage 3; reviewer PASS; first push; landing 20261012T085300-L-23600 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/K2/Sheaf.RingTheory.GradedKernelFinite (stage 3; reviewer PASS; first push; landing 20261012T085300-L-23699 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/K3/Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields (stage 3; reviewer PASS; first push; landing 20261012T085301-L-23797 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/K3/Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution (stage 3; reviewer PASS; first push; landing 20261012T085301-L-23938 (proof); batch 20261012T085205; modules 1; new nodes 0)

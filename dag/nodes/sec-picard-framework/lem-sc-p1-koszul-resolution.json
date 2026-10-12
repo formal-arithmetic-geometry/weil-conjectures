@@ -22,59 +22,54 @@
  ],
  "proof": [
   {
-   "text": "The shifts make multiplication by x_1 and x_0 degree-preserving: an element of S(-2) has its internal degree raised by two, while the target copies S(-1) are raised by one, and similarly for the map to S. The composite is (x_1,-x_0) followed by (x_0,x_1), namely x_1x_0-x_0x_1=0 because S is commutative. The final map S\\to k is the quotient map, so its kernel is the ideal (x_0,x_1), exactly the image of (x_0,x_1).",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
-   ],
+   "text": "Define the S-linear maps f by the product of right multiplication by x_1 and the negative of right multiplication by x_0, g by the coproduct of right multiplication by x_0 and x_1, and q as the ideal quotient linear map. Their displayed formulas follow by evaluation. Commutativity gives g(f(a))=0 by expansion.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "statement and proof of the Koszul resolution: checking the displayed maps and their composite"
+    "place": "statement, source note: graded global dimension two of S=k[x_0,x_1] (Koszul resolution of k on the regular sequence x_0,x_1)"
    }
   },
   {
-   "text": "The ring S is an integral domain, so multiplication by either nonzero variable x_0 or x_1 is injective. Hence if a in S maps to (a x_1,-a x_0)=0, then a x_0=0 and therefore a=0. This proves exactness at S(-2).",
+   "text": "The polynomial ring over k is a domain by [lem-weil-pbc-polynomial-ring-domain]. Equality f(a)=f(b) implies ax_1=bx_1 by the first coordinate. Since x_1 is nonzero, cancellation proves a=b.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-domain"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "statement source note: Koszul resolution on the regular sequence x_0,x_1"
+    "place": "statement, source note: graded global dimension two of S=k[x_0,x_1] (Koszul resolution of k on the regular sequence x_0,x_1)"
    }
   },
   {
-   "text": "If (a,b) in S(-1) direct sum S(-1) lies in the kernel, then a x_0+b x_1=0. By the two-variable syzygy statement [lem-sc-p1-linear-syzygy], there is c with a=c x_1 and b=-c x_0, so (a,b)=c(x_1,-x_0), which is in the image of the first map. Conversely every such image is killed by the second map by Step 1. Thus exactness holds at the middle term.",
+   "text": "For g(a,b)=0, apply [lem-sc-p1-linear-syzygy] to obtain c with a=cx_1 and b=-cx_0. Thus (a,b)=f(c). The converse follows from the zero composite, proving Function.Exact f g.",
    "uses": [
     "lem-sc-p1-linear-syzygy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "statement source note: Koszul resolution on the regular sequence x_0,x_1"
+    "place": "statement, source note: graded global dimension two of S=k[x_0,x_1] (Koszul resolution of k on the regular sequence x_0,x_1)"
    }
   },
   {
-   "text": "The preceding kernel-image computations at S(-2), S(-1) direct sum S(-1), and S, together with the quotient identification at k, give exactness of the full displayed graded complex. The degree shifts are precisely those in the statement, so all maps are homogeneous of degree zero.",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
-   ],
+   "text": "The quotient kernel is the defining ideal by Ideal.Quotient.eq_zero_iff_mem. Ideal.mem_span_pair identifies membership in (x_0,x_1) with an expression bx_0+cx_1, giving Function.Exact g q; the quotient map is surjective by Submodule.mkQ_surjective. Multiplication of homogeneous elements adds their degrees, and negation and addition preserve degree, so the required degree checks for f and g follow from MvPolynomial.IsHomogeneous.mul, neg and add and isHomogeneous_X. Finally Set.range X for Fin 2 is {x_0,x_1}. By MvPolynomial.mem_pow_idealOfVars_iff at exponent one, an element belongs to this ideal exactly when all supported monomials have degree at least one. A homogeneous element of degree n+1 satisfies this immediately. Therefore q kills every positive-degree homogeneous element. These computations give every conjunction of the stated resolution; the shift convention is already expressed by its degree n+1 clauses.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "statement source note: graded global dimension two of S=k[x_0,x_1]"
+    "place": "statement, source note: graded global dimension two of S=k[x_0,x_1] (Koszul resolution of k on the regular sequence x_0,x_1)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proj-twisting-sheaf",
   "lem-weil-pbc-polynomial-ring-domain",
   "lem-sc-p1-linear-syzygy"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "statement source note and explicit proof of the Koszul exactness"
+  "place": "statement, source note: graded global dimension two of S=k[x_0,x_1] (Koszul resolution of k on the regular sequence x_0,x_1); explicit Lean kernel-image and homogeneous support calculations by K3"
  },
  "mathlib_searches": [
   {
@@ -162,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T085301-L-23938",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

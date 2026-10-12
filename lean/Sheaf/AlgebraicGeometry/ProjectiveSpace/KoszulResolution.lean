@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 import Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Mathlib.RingTheory.MvPolynomial.Ideal
 
 /-!
 # The graded Koszul resolution on two polynomial variables
@@ -84,6 +84,70 @@ theorem koszul_resolution {k : Type u} [Field k] :
         g p ∈ homogeneousSubmodule (Fin 2) k (n + 1)) ∧
       (∀ (n : ℕ) (a : MvPolynomial (Fin 2) k),
         a ∈ homogeneousSubmodule (Fin 2) k (n + 1) → q a = 0) := by
-  sorry
+  let S := MvPolynomial (Fin 2) k
+  let I : Ideal S := Ideal.span ({X 0, X 1} : Set S)
+  let f : S →ₗ[S] S × S :=
+    (LinearMap.mulRight S (X 1)).prod (-(LinearMap.mulRight S (X 0 : S)))
+  let g : S × S →ₗ[S] S :=
+    (LinearMap.mulRight S (X 0)).coprod (LinearMap.mulRight S (X 1))
+  let q : S →ₗ[S] S ⧸ I := I.mkQ
+  have hf (a : S) : f a = (a * X 1, -a * X 0) := by
+    change (a * X 1, -(a * X 0)) = (a * X 1, -a * X 0)
+    rw [neg_mul]
+  have hg (p : S × S) : g p = p.1 * X 0 + p.2 * X 1 := rfl
+  have hq (a : S) : q a = Ideal.Quotient.mk I a := rfl
+  have hker (a : S) : q a = 0 ↔ a ∈ I := Ideal.Quotient.eq_zero_iff_mem
+  have hcomp (a : S) : g (f a) = 0 := by
+    rw [hg, hf]
+    ring
+  have hinj : Function.Injective f := by
+    intro a b hab
+    have h := congrArg Prod.fst hab
+    rw [hf, hf] at h
+    exact mul_right_cancel₀ (X_ne_zero (1 : Fin 2)) h
+  have hfg : Function.Exact f g := by
+    intro p
+    constructor
+    · intro hp
+      obtain ⟨c, hc, hd⟩ := exists_eq_mul_X_and_eq_neg_mul_X p.1 p.2 ((hg p).symm.trans hp)
+      exact ⟨c, by rw [hf]; exact Prod.ext hc.symm hd.symm⟩
+    · rintro ⟨a, rfl⟩
+      exact hcomp a
+  have hgq : Function.Exact g q := by
+    intro a
+    rw [hker, Ideal.mem_span_pair]
+    constructor
+    · rintro ⟨b, c, hbc⟩
+      exact ⟨(b, c), hbc⟩
+    · rintro ⟨p, hp⟩
+      exact ⟨p.1, p.2, (hg p).symm.trans hp⟩
+  refine ⟨f, g, q, hf, hg, hq, hinj, hfg, hgq, I.mkQ_surjective,
+    hker, hcomp, ?_, ?_, ?_⟩
+  · intro n a ha
+    rw [hf]
+    exact ⟨ha.mul (isHomogeneous_X k 1), ha.neg.mul (isHomogeneous_X k 0)⟩
+  · intro n p ha hb
+    rw [hg]
+    exact (ha.mul (isHomogeneous_X k 0)).add (hb.mul (isHomogeneous_X k 1))
+  · intro n a ha
+    apply (hker a).mpr
+    have hrange : Set.range (X : Fin 2 → S) = ({X 0, X 1} : Set S) := by
+      ext x
+      simp only [Set.mem_range, Set.mem_insert_iff, Set.mem_singleton_iff]
+      constructor
+      · rintro ⟨i, rfl⟩
+        fin_cases i <;> simp
+      · rintro (rfl | rfl)
+        · exact ⟨0, rfl⟩
+        · exact ⟨1, rfl⟩
+    change a ∈ Ideal.span ({X 0, X 1} : Set S)
+    rw [← hrange]
+    change a ∈ idealOfVars (Fin 2) k
+    rw [← pow_one (idealOfVars (Fin 2) k), mem_pow_idealOfVars_iff]
+    intro d hd
+    have hdeg : d.degree = n + 1 := by
+      rw [Finsupp.degree_eq_weight_one]
+      exact ha (mem_support_iff.mp hd)
+    omega
 
 end AlgebraicGeometry.ProjectiveLine
