@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Sheaf.CategoryTheory.ArrowsFunctor
+import Sheaf.CategoryTheory.ColimitSiteCoveringConstructionParts
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
@@ -81,6 +82,11 @@ theorem colimit_site_covering_construction
             ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
               PreservesLimit (cospan f g) (V.ι.app j).toFunctor) ∧
           Nonempty (∀ j : J, (V.ι.app j).toFunctor.IsContinuous
-            (P j).toGrothendieck Q.toGrothendieck) := by sorry
+            (P j).toGrothendieck Q.toGrothendieck) := by
+  obtain ⟨hisos, hcomp, hbase, hpb, _⟩ :=
+    colimit_site_covering_axioms J F P hfinite hcover hpullback V hobjects harrows Q hQ
+  obtain ⟨hpres, hcontinuous⟩ :=
+    colimit_site_covering_continuity J F P hfinite hcover hpullback V hobjects harrows Q hQ
+  exact ⟨hisos, hcomp, hbase, hpb, hpres, hcontinuous⟩
 
 end CategoryTheory

@@ -1,0 +1,102 @@
+{
+ "id": "lem-weil-pbc-colimit-site-covering-axioms",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-construction",
+   "place": "Tag 09YL",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite covering axioms for the transported precoverage",
+ "statement": "Under the hypotheses of lem-weil-pbc-colimit-site-covering-construction, the transported precoverage Q has HasIsos, IsStableUnderFiniteComposition, IsStableUnderFiniteBaseChange, and HasPullbacks.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-colimit-site-covering-construction"
+ ],
+ "proof": [
+  {
+   "text": "Follow the corresponding finite-stage lifting, eventual equality, pullback, and sheaf equalizer argument from the cited Stacks tags; all data are transported from a common stage using filteredness.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-covering-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-colimit-site-covering-construction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite covering axioms transported along filtered colimit of categories",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuity of cocone functor for transported precoverage",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit site covering continuity",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringConstruction",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCoveringConstructionParts",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCoveringConstructionParts.lean",
+  "declaration": "CategoryTheory.colimit_site_covering_axioms",
+  "statement": "theorem colimit_site_covering_axioms\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition]\n    [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n          ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),\n            S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)) :\n        ∃ (_ : Q.HasIsos) (_ : Q.IsStableUnderFiniteComposition)\n          (_ : Q.IsStableUnderFiniteBaseChange) (_ : Q.HasPullbacks), True",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T160133-L-2562837",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T160133-L-2562837",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
