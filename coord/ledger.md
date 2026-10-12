@@ -6402,3 +6402,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion (stage 3; reviewer PASS; first push; landing 20261012T060748-L-2912790 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FpqcRefinementFullyFaithful (stage 3; reviewer PASS; first push; landing 20261012T060749-L-2912928 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FpqcSingletonAffineRefinement (stage 3; reviewer PASS; first push; landing 20261012T060749-L-2913050 (proof); batch 20261012T060728; modules 1; new nodes 0)
+- 06:07 L: merged deliver/P2/Sheaf.RingTheory.PairHenselizationNoetherianCompletion (stage 3; reviewer PASS; first push; landing 20261012T060749-L-2913152 (interface); batch 20261012T060728; modules 3; new nodes 2)

@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-henselization-completion-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical completion comparison from quotient-power isomorphisms",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative rings and $I\\subset A$ an ideal. Suppose the induced maps $q_n:A/I^n\\to B/I^nB$ are bijective for every $n\\geq1$. Put $J=IB$. For the adic completions [def-weil-pbc-adic-completion], there is a ring isomorphism $\\theta:\\widehat A_I\\xrightarrow{\\sim}\\widehat B_J$ such that, for every $n\\geq0$, $x\\in\\widehat A_I$ and $a\\in A$, if $x_n=a\\bmod I^n$ then $(\\theta x)_n=f(a)\\bmod J^n$. If $c_A:A\\to\\widehat A_I$ and $c_B:B\\to\\widehat B_J$ are the completion maps, then $\\theta^{-1}\\circ c_B\\circ f=c_A$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AGV (more-algebra-lemma-henselization-Noetherian-pair)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ring homomorphism inducing isomorphisms modulo all powers of an ideal induces an isomorphism of adic completions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.liftRingHom",
+   "results": "AdicCompletion.liftRingHom; AdicCompletion.evalₐ_liftRingHom; AdicCompletion.evalₐ_comp_liftRingHom; AdicCompletion.factor_eval_liftRingHom; IsAdicComplete.of_liftRingHom; IsAdicComplete.ofAlgEquiv_comp_liftRingHom",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*equiv|equiv.*completion|liftRingHom",
+   "results": "Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "proof": [
+  {
+   "text": "Identify $I^nB=(IB)^n$ by products of ideal generators. For $n=0$ both quotients are zero rings. Turn each bijective quotient map into a ring isomorphism $e_n$. The transition squares commute: both routes send the class of $a$ to the class of $f(a)$.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "By the inverse-limit definition [def-weil-pbc-adic-completion], send a compatible sequence $(x_n)$ to $(e_n(x_n))$. Inverse transition compatibility follows by applying the injective $e_m$ to the desired equality. Hence $(y_n)\\mapsto(e_n^{-1}(y_n))$ is the inverse. Coordinate evaluation gives the claimed identity and, on completion images of elements $a$, the equality of composite ring maps. In Lean these maps are constructed by AdicCompletion.liftRingHom and their inverse laws checked by AdicCompletion.ext_evalₐ.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AGV (lemma-henselization-Noetherian-pair, line 3142) and its proof"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselizationNoetherianCompletion",
+  "group": "P2",
+  "date": "2026-10-12"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PairHenselizationCompletionData",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationCompletionData.lean",
+  "declaration": "RingTheory.pair_henselization_completion_data",
+  "statement": "theorem pair_henselization_completion_data (A : Type u) [CommRing A] (B : Type v) [CommRing B] (I : Ideal A) (f : A →+* B) (hf : ∀ n : ℕ, 1 ≤ n → Function.Bijective (Ideal.quotientMap ((I ^ n).map f) f Ideal.le_comap_map)) : ∃ θ : AdicCompletion I A ≃+* AdicCompletion (I.map f) B, (∀ (n : ℕ) (x : AdicCompletion I A) (a : A), AdicCompletion.evalₐ I n x = Ideal.Quotient.mk (I ^ n) a → AdicCompletion.evalₐ (I.map f) n (θ x) = Ideal.Quotient.mk ((I.map f) ^ n) (f a)) ∧ (θ.symm.toRingHom.comp (algebraMap B (AdicCompletion (I.map f) B))).comp f = algebraMap A (AdicCompletion I A)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T060749-L-2913152",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T060749-L-2913152",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
