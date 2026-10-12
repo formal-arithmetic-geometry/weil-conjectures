@@ -25,10 +25,8 @@
  ],
  "proof": [
   {
-   "text": "For finite separable L/K, K-embeddings L\\to K^sep correspond contravariantly to geometric points of Spec L. The embedding set is nonempty by [lem-exc-etale-embedding-extension-sepclosed] applied with E=L, F=K, intermediate field K, and f the inclusion K\\to K^sep: every element of L is algebraic over K and its minimal polynomial is separable, hence splits in the separably closed K^sep. It is finite elementarily: choose a K-basis a_1,\\ldots,a_n of L; an embedding is determined by the images of the a_i, and each image is one of finitely many roots in K^sep of the minimal polynomial of a_i. The extension K^sep/K is Galois: it is separable algebraic by [def-pd-separable-closure], and it is normal because every separable minimal polynomial over K splits in the separably closed K^sep. Given two embeddings sigma and tau, the map tau\\circ sigma^{-1}:sigma(L)\\to tau(L) extends by [lem-exc-etale-embedding-extension-sepclosed] to a K-algebra endomorphism phi:K^sep\\to K^sep; its hypotheses hold because K^sep is algebraic over K and the relevant separable minimal polynomials split there. This endomorphism is bijective by [lem-exc-etale-algebraic-endomorphism-bijective], hence is an element of G, proving transitivity. The stabilizer is {g | g\\circ sigma=sigma}=Gal(K^sep/sigma(L)) by the definition of the fixing subgroup. This subgroup is open by [lem-exc-etale-finite-subextension-fixing-subgroup-open], since sigma(L) is finite-dimensional over K; therefore the action on the discrete embedding set is continuous.",
+   "text": "For finite separable L/K, geometric points are K-algebra embeddings L into Ksep. Mathlib IsSepClosed.lift supplies an embedding, and AlgHom.fintype supplies finiteness. Given embeddings sigma and tau, compose sigma.equivFieldRange.symm with tau.equivFieldRange and extend this isomorphism of intermediate fields using AlgEquiv.liftNormal Ksep. Its liftNormal_commutes identity gives g composed with sigma = tau. Normality is inferred from IsSepClosure. This packaged automorphism construction replaces the separate embedding-extension and algebraic-endomorphism-bijectivity leaves. The stabilizer is the fixing subgroup of IntermediateField.map sigma top, proved pointwise. The range is finite-dimensional via sigma.equivFieldRange.toLinearEquiv; IntermediateField.fixingSubgroup_isOpen [lem-exc-etale-finite-subextension-fixing-subgroup-open] makes the stabilizer open.",
    "uses": [
-    "lem-exc-etale-embedding-extension-sepclosed",
-    "lem-exc-etale-algebraic-endomorphism-bijective",
     "lem-exc-etale-finite-subextension-fixing-subgroup-open"
    ],
    "elementary": false,
@@ -38,7 +36,7 @@
    }
   },
   {
-   "text": "Let S be a finite transitive discrete continuous G-set and H the stabilizer of a point. Continuity makes H open and the orbit map identifies S with G/H. By [lem-exc-etale-open-subgroup-fixed-field], L=(K^sep)^H is finite separable over K and H=Gal(K^sep/L). By step 1, the embedding G-set of L is transitive with stabilizer of the inclusion equal to Gal(K^sep/L)=H, so it is G-isomorphic to G/H and hence to S.",
+   "text": "Choose a point y of the nonempty pretransitive G-set Y and let H be its stabilizer, open by the hypothesis. Apply openSubgroup_fixedField_finite_separable [lem-exc-etale-open-subgroup-fixed-field] to construct E = IntermediateField.fixedField H, finite separable over K, with E.fixingSubgroup = H. The embeddings of E are pretransitive by step 1, and the stabilizer of E.val is H. Identify both actions with G/H: the orbit maps on the quotient are well-defined and injective by equality of stabilizers, and surjective by pretransitivity. Their inverse composite is an equivariant equivalence Y with the embeddings of E. The private transitive_actions_equiv helper proves this quotient construction explicitly, using Mathlib MulAction.ofQuotientStabilizer and its injectivity and equivariance lemmas.",
    "uses": [
     "lem-exc-etale-open-subgroup-fixed-field"
    ],
@@ -49,7 +47,7 @@
    }
   },
   {
-   "text": "For finite separable L/K and L'/K, injectivity of precomposition follows because field embeddings are injective and L has an embedding into K^sep (step 1). For surjectivity, let phi be equivariant and fix an embedding sigma_0:L\\to K^sep; put tau=phi(sigma_0). Equivariance gives Gal(K^sep/sigma_0(L))\\subseteq Gal(K^sep/tau(L')). Hence tau(L') lies in the fixed field of the fixing subgroup of sigma_0(L), which is sigma_0(L) by [lem-exc-etale-galois-fixed-field-subgroup], applicable since K^sep/K is Galois (step 1). Thus tau=sigma_0\\circ psi for a unique K-map psi:L'\\to L, and equivariance plus transitivity from step 1 gives phi=psi^* everywhere. Therefore the displayed Hom map is bijective.",
+   "text": "Injectivity of precomposition follows by evaluating at an embedding sigma of L and using sigma.injective. For surjectivity, given equivariant phi put tau = phi(sigma). Every automorphism fixing sigma.fieldRange fixes sigma, hence fixes tau by equivariance. InfiniteGalois.fixedField_fixingSubgroup [lem-exc-etale-galois-fixed-field-subgroup], with the Galois instance inferred from IsSepClosure, implies tau takes values in sigma.fieldRange. Define tau prime by AlgHom.codRestrict and f = sigma.equivFieldRange.symm.toAlgHom composed with tau prime. The inverse equivalence identity proves sigma composed with f = tau. Transitivity from step 1 and equivariance give rho composed with f = phi(rho) for every embedding rho, establishing surjectivity.",
    "uses": [
     "lem-exc-etale-galois-fixed-field-subgroup"
    ],
@@ -61,8 +59,6 @@
   }
  ],
  "proof_deps": [
-  "lem-exc-etale-embedding-extension-sepclosed",
-  "lem-exc-etale-algebraic-endomorphism-bijective",
   "lem-exc-etale-finite-subextension-fixing-subgroup-open",
   "lem-exc-etale-open-subgroup-fixed-field",
   "lem-exc-etale-galois-fixed-field-subgroup"
@@ -70,7 +66,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tags 03SF and 03QR, finite Galois correspondence and full faithfulness"
+  "place": "Tags 03SF and 03QR, finite Galois correspondence and full faithfulness; Lean realization uses IsSepClosed.lift, AlgHom.fintype, AlgEquiv.liftNormal, and the explicit quotient-of-stabilizer construction"
  },
  "mathlib_searches": [
   {
@@ -150,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5168b",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T135317-L-1692755",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature and all three proof clauses match the node; only proof metadata changed. Delivered module and direct importers EtaleFieldPointFunctor and EtaleFieldPointFunctorEssSurj compile cleanly; theorem and helpers use only permitted axioms. Import changes are recorded, pruning preserves the unit route, and mechanical findings are empty."
  }
 }
