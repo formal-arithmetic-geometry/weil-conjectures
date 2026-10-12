@@ -80,7 +80,8 @@ noncomputable def map {X Y : Cᵒᵖ} (f : X ⟶ Y) :
       (ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
         (ModuleCat.of ((R ⋙ forget₂ CommRingCat RingCat).obj Y)
           (⋀[(R ⋙ forget₂ CommRingCat RingCat).obj Y]^r (M.obj Y))) :=
-  ModuleCat.ofHom (Y := (ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
+  ModuleCat.ofHom
+    (Y := (ModuleCat.restrictScalars ((R ⋙ forget₂ CommRingCat RingCat).map f).hom).obj
         (ModuleCat.of ((R ⋙ forget₂ CommRingCat RingCat).obj Y)
           (⋀[(R ⋙ forget₂ CommRingCat RingCat).obj Y]^r (M.obj Y))))
     (exteriorPower.alternatingMapLinearEquiv (mapAlternating M r f))
