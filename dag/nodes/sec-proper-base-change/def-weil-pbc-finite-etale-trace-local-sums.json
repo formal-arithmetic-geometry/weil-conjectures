@@ -1,0 +1,108 @@
+{
+ "id": "def-weil-pbc-finite-etale-trace-local-sums",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "Trace retraction in the locally constant reduction; lem-weil-pbc-finite-etale-trace-exists-existence: Local sum characterization on every split site object",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-exists-existence",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Local sum characterization on every split site object",
+ "statement": "Let $f:Y\\to X$ be an etale morphism of schemes [def-weil-pbc-scheme-conventions], $F$ an abelian sheaf on $X_{\\mathrm{Et}}$ [def-weil-pbc-etale-site, def-weil-pbc-abelian-etale-sheaves], and $\\tau:f_*f^{-1}F\\to F$ a sheaf morphism [def-weil-pbc-direct-image, def-weil-pbc-inverse-image]. For each object $W\\to X$ put $B_fW=W\\times_XY$ with its composite map to $X$ [def-pc-fibre-product], and let $c_{F,W}:(f_*f^{-1}F)(W)\\simeq F(B_fW)$ be the restriction isomorphism [lem-weil-pbc-etale-inverse-image-restriction]. The predicate $\\operatorname{LocalSums}(f,F,\\tau)$ means that for every $W$ and every finite coproduct cofan $(V_j\\xrightarrow{i_j}B_fW)_{j\\in J}$ of open and closed immersions [def-weil-open-immersion, def-weil-closed-immersion] for which $i_j$ followed by $B_fW\\to W$ has inverse $t_j:W\\to V_j$, $\\tau_Wc_{F,W}^{-1}=\\sum_{j\\in J}F(i_j\\circ t_j):F(B_fW)\\to F(W)$. The finite index set may be empty. This is only a predicate; it chooses no trace.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "predicate that a finite etale sheaf trace is the sum of restrictions on every clopen splitting",
+   "results": "HTTP Internal Server Error; service unavailable. Not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "predicate that a finite etale sheaf trace is the sum of restrictions on every clopen splitting",
+   "results": "Etale locus results, Scheme.zero_of_zero_cover and field etale-algebra decompositions; none states this predicate.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceLocalSums|finiteEtaleTrace|finite.*etale.*trace",
+   "results": "msearch grep: 0 Mathlib hits. Project trace definition depends on the original existence theorem; it cannot be used without an import cycle.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceExistsExistence",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalSums",
+  "declaration": "AlgebraicGeometry.Etale.FiniteEtaleTraceLocalSums",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceLocalSums.lean",
+  "statement": "def FiniteEtaleTraceLocalSums {X Y : Scheme.{u}} (f : Y ⟶ X) (hf : Etale f) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (τ : (lowerStar AddCommGrpCat.{u + 1} f).obj ((upperStar AddCommGrpCat.{u + 1} f).obj F) ⟶ F) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,178 @@
+{
+ "id": "lem-weil-pbc-finite-etale-trace-section-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "Trace retraction in the locally constant reduction; lem-weil-pbc-finite-etale-trace-exists-existence: Unique section obtained by descent of locally split sums",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-exists-existence",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Unique section obtained by descent of locally split sums",
+ "statement": "Let $f:Y\\to X$ be finite etale [def-weil-pbc-scheme-conventions], $F$ an abelian sheaf on $X_{\\mathrm{Et}}$ [def-weil-pbc-etale-site, def-weil-pbc-abelian-etale-sheaves]. Write $B_fW=W\\times_XY$ over $X$ [def-pc-fibre-product]. For every site object $W$ and every $s\\in F(B_fW)$ there is exactly one $u\\in F(W)$ such that the following holds. For every site morphism $h:T\\to W$ and every finite clopen coproduct $(V_j\\xrightarrow{i_j}B_fT)_{j\\in J}$ in which each projection to $T$ has inverse $t_j:T\\to V_j$ [def-weil-open-immersion, def-weil-closed-immersion], $F(h)(u)=\\sum_j F(i_j\\circ t_j)(F(B_fh)(s))$. The finite set may be empty.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale splitting neighbourhood over each point using [lem-weil-pbc-finite-etale-etale-local-split]. Pull them back to $W$; [lem-weil-pbc-etale-covering-base-change] gives an etale jointly surjective cover of $W$ on which $B_f$ splits. Composition and finite limits make these objects and overlaps objects of the small site.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "A local splitting determines the additive sum of restrictions along its sections. Pulling its pieces back preserves their clopen partition and isomorphisms to the base. The pullback universal property identifies the new sections and proves that sums commute with restriction.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "Two splittings have equal sums: intersect their clopen pieces and project the intersections to the base using the isomorphism on each piece. For each fixed sheet these images partition the base. At each point membership determines a bijection between the two sets of sheets. The intersections corresponding to each bijection are open and cover the base. On each such open corresponding sections both invert the same isomorphism of the intersection piece, so are equal. Reindex the finite sum and use sheaf separatedness. Unequal cardinalities force an empty base, whose group of sections is zero by the empty covering.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "Apply these two conclusions on each overlap of the chosen cover to see that its local sums agree. Glue by the sheaf condition. For arbitrary $h:T\\to W$ and a splitting, pull the chosen cover back to $T$, compare the local sums there, and apply separatedness to get the claimed formula on $T$. Two sections having the formulas agree on the original cover, so separatedness also gives uniqueness.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "unique glued section from sums over locally split finite etale covering",
+   "results": "HTTP Internal Server Error; service unavailable. Not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unique glued section from sums over locally split finite etale covering",
+   "results": "Scheme.GlueData.sheafValGluedMk and TopCat.Sheaf.existsUnique_gluing supply generic gluing, not the finite etale sums and compatibility on overlaps.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceLocalSums|finiteEtaleTrace|finite.*etale.*trace",
+   "results": "msearch grep: 0 Mathlib hits. Project trace definition depends on the original existence theorem; it cannot be used without an import cycle.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceExistsExistence",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSectionDescent",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleTrace_section_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceSectionDescent.lean",
+  "statement": "theorem finiteEtaleTrace_section_descent {X Y : Scheme.{u}} (f : Y ⟶ X) (hfin : IsFinite f) (hf : Etale f) : let B := MorphismProperty.Over.pullback @Etale ⊤ f ⋙ MorphismProperty.Over.map ⊤ hf ∀ (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (W : X.Etale) (s : F.obj.obj (op (B.obj W))), ∃! u : F.obj.obj (op W), ∀ (T : X.Etale) (h : T ⟶ W) (J : Type u) [Fintype J] (V : J → Scheme.{u}) (i : ∀ j, V j ⟶ pullback T.hom f) (t : ∀ j, T.left ⟶ V j) (_ : IsColimit (Cofan.mk (pullback T.hom f) i)) (hinv₁ : ∀ j, t j ≫ i j ≫ pullback.fst T.hom f = 𝟙 T.left) (_ : ∀ j, i j ≫ pullback.fst T.hom f ≫ t j = 𝟙 (V j)) (_ : ∀ j, IsOpenImmersion (i j)) (_ : ∀ j, IsClosedImmersion (i j)), F.obj.map h.op u = ∑ j, F.obj.map (MorphismProperty.Over.homMk (A := T) (B := B.obj T) (t j ≫ i j) (by change (t j ≫ i j) ≫ pullback.snd T.hom f ≫ f = T.hom rw [← pullback.condition] simpa [← Category.assoc] using congrArg (fun k ↦ k ≫ T.hom) (hinv₁ j))).op (F.obj.map (B.map h).op s)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

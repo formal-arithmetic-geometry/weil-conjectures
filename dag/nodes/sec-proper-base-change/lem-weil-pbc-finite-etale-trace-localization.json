@@ -1,0 +1,187 @@
+{
+ "id": "lem-weil-pbc-finite-etale-trace-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "Trace retraction in the locally constant reduction; lem-weil-pbc-finite-etale-trace-exists-existence: Local sums identify traces under etale localization",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-exists-existence",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local sums identify traces under etale localization",
+ "statement": "Let $f:Y\\to X$ be finite etale and $g:X^{\\prime}\\to X$ etale [def-weil-pbc-scheme-conventions]. Put $Y^{\\prime}=Y\\times_XX^{\\prime}$ and $f^{\\prime}:Y^{\\prime}\\to X^{\\prime}$, and for an abelian sheaf $F$ on $X_{\\mathrm{Et}}$ put $F^{\\prime}=g^{-1}F$ [def-pc-fibre-product, def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-inverse-image]. Suppose $\\tau:f_*f^{-1}F\\to F$ and $\\tau^{\\prime}:f^{\\prime}_*(f^{\\prime})^{-1}F^{\\prime}\\to F^{\\prime}$ both satisfy their local sum predicates [def-weil-pbc-direct-image, def-weil-pbc-finite-etale-trace-local-sums]. For every object $W$ over $X^{\\prime}$ and every pasting isomorphism $\\kappa_W:W\\times_{X^{\\prime}}Y^{\\prime}\\simeq W\\times_XY$ whose projections are $\\mathrm{id}_W$ and the projection to $Y$ [lem-weil-pbc-cartesian-square-pasting], the transported trace components satisfy $\\rho^g_F(W)\\circ\\overline\\tau^{\\prime}_W=\\overline\\tau_W\\circ F(\\kappa_W^{-1})\\circ\\rho^g_F(W\\times_{X^{\\prime}}Y^{\\prime})$. Here $\\rho^g_F:g^{-1}F\\simeq F|_{X^{\\prime}}$ and each bar denotes composition with the inverse restriction isomorphism [lem-weil-pbc-etale-inverse-image-restriction]. No relationship between the choices of $\\tau$ and $\\tau^{\\prime}$ is assumed beyond these predicates.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-finite-etale-trace-local-sums",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-cartesian-square-pasting"
+ ],
+ "proof": [
+  {
+   "text": "The pullback $f^{\\prime}$ is finite etale. For each $W$ over $X^{\\prime}$ choose an etale jointly surjective covering on which its pullback of $Y^{\\prime}$ splits; use finite etale local splitting and covering base change. Regard its members as objects over $X$ by composition.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "Transport each splitting across the pullback pasting isomorphism. Its two projection identities show that the transported section has exactly the identity projection to the covering object and the same map to $Y$; the pullback universal property identifies the sections in the two descriptions. Transport along the inverse preserves the clopen coproduct and the inverse identities.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "On a covering member apply both local sum hypotheses. Naturality of $g^{-1}F\\simeq F|_{X^{\\prime}}$ makes restriction along each transported section commute with its components. Therefore the two displayed maps are the same finite sum on that member.",
+   "uses": [
+    "def-weil-pbc-finite-etale-trace-local-sums",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "Naturality of both sheaf morphisms, of the restriction isomorphism, and of the pasting maps makes these equalities exactly the restrictions of the desired component equality at $W$. For each input section use separatedness of $F|_{X^{\\prime}}$ on the covering to get equality at $W$, then use extensionality of group homomorphisms. Empty objects and empty splittings are included by the empty-cover sheaf condition.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-etale-trace-local-sums",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite etale sheaf trace local sum characterization implies etale localization compatibility",
+   "results": "HTTP Internal Server Error; service unavailable. Not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale sheaf trace local sum characterization implies etale localization compatibility",
+   "results": "Only ring-theoretic etale localization lemmas; none concerns sheaf trace components.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtaleTraceLocalSums|finiteEtaleTrace|finite.*etale.*trace",
+   "results": "msearch grep: 0 Mathlib hits. Project trace definition depends on the original existence theorem; it cannot be used without an import cycle.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceExistsExistence",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalization",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleTrace_localization_of_localSums",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceLocalization.lean",
+  "statement": "theorem finiteEtaleTrace_localization_of_localSums {X Y X' : Scheme.{u}} (f : Y ⟶ X) (hfin : IsFinite f) (hf : Etale f) (g : X' ⟶ X) (hg : Etale g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : let A := AddCommGrpCat.{u + 1} let B := fun {S Z : Scheme.{u}} (q : Z ⟶ S) (hq : Etale q) (W : S.Etale) ↦ (MorphismProperty.Over.map ⊤ hq).obj ((MorphismProperty.Over.pullback @Etale ⊤ q).obj W) letI := hfin letI := hf let f' := pullback.snd f g let hf' : Etale f' := inferInstance let F' := (upperStar A g).obj F ∀ (τ : (lowerStar A f).obj ((upperStar A f).obj F) ⟶ F) (τ' : (lowerStar A f').obj ((upperStar A f').obj F') ⟶ F'), FiniteEtaleTraceLocalSums f hf F τ → FiniteEtaleTraceLocalSums f' hf' F' τ' → ∀ (W : X'.Etale) (κ : (MorphismProperty.Over.map ⊤ hg).obj (B f' hf' W) ≅ B f hf ((MorphismProperty.Over.map ⊤ hg).obj W)), κ.hom.left ≫ pullback.fst (W.hom ≫ g) f = pullback.fst W.hom f' → κ.hom.left ≫ pullback.snd (W.hom ≫ g) f = pullback.snd W.hom f' ≫ pullback.fst f g → (((upperStarIsoLocalizationRestriction A f' hf').app F').inv.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f').obj W))) ≫ τ'.hom.app (op W) ≫ ((upperStarIsoLocalizationRestriction A g hg).app F).hom.hom.app (op W) = ((upperStarIsoLocalizationRestriction A g hg).app F).hom.hom.app (op (B f' hf' W)) ≫ F.obj.map κ.inv.op ≫ (((upperStarIsoLocalizationRestriction A f hf).app F).inv.hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj ((MorphismProperty.Over.map ⊤ hg).obj W)))) ≫ τ.hom.app (op ((MorphismProperty.Over.map ⊤ hg).obj W))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32790",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085321-L-32790",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

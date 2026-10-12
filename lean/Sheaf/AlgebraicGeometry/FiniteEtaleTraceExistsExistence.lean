@@ -7,8 +7,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDescent
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalization
+import Sheaf.AlgebraicGeometry.FiniteEtaleTracePullbackSum
 
 @[expose] public section
 universe u
@@ -108,6 +109,28 @@ theorem finiteEtaleTrace_exists :
             (pullback.lift (𝟙 W.left) (W.hom ≫ t j ≫ i j)
               (by simp [Category.assoc, hinv₁]))
             (by simp [B, Category.assoc, hinv₁])).op) := by
-  sorry
+  classical
+  dsimp only
+  choose τ hτ using fun (X Y : Scheme.{u}) (f : Y ⟶ X)
+    (hfin : IsFinite f) (hf : Etale f) ↦ finiteEtaleTrace_descent f hfin hf
+  refine ⟨fun X Y f hfin hf F ↦ (τ X Y f hfin hf).app F, ?_, ?_, ?_⟩
+  · intro X Y f hfin hf F G φ
+    exact ((τ X Y f hfin hf).naturality φ).symm
+  · intro X Y X' f hfin hf g hg F
+    let := hfin
+    let := hf
+    dsimp only
+    intro W κ hfst hsnd
+    simpa only [Category.assoc] using
+      finiteEtaleTrace_localization_of_localSums f hfin hf g hg F
+        ((τ X Y f hfin hf).app F)
+        ((τ X' (pullback f g) (pullback.snd f g) inferInstance inferInstance).app
+          ((upperStar AddCommGrpCat.{u + 1} g).obj F))
+        (hτ X Y f hfin hf F)
+        (hτ X' (pullback f g) (pullback.snd f g) inferInstance inferInstance
+          ((upperStar AddCommGrpCat.{u + 1} g).obj F)) W κ hfst hsnd
+  · intro X Y f hfin hf F J hJ V i t hc hinv₁ hinv₂ hopen hclosed W
+    exact finiteEtaleTrace_sum_of_localSums f hf F ((τ X Y f hfin hf).app F)
+      (hτ X Y f hfin hf F) J V i t hc hinv₁ hinv₂ hopen hclosed W
 
 end AlgebraicGeometry.Etale

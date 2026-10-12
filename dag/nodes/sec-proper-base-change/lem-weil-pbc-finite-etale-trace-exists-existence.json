@@ -32,146 +32,61 @@
  ],
  "proof": [
   {
-   "text": "*Reduction to presheaf maps $F(W_Y)\\to F(W)$.* For $F\\in\\Ab(X_{\\Et})$ let $P_F$ be the presheaf of abelian groups on $X_{\\Et}$ with $P_F(W)=F(W_Y)$ and, for a morphism $h:W'\\to W$ of $X_{\\Et}$, restriction $F(h_Y)$, where $h_Y=h\\times_X\\mathrm{id}_Y:W'_Y\\to W_Y$ [def-pc-fibre-product]; $h_Y$ is a morphism over $X$ between objects of $X_{\\Et}$ ($W_Y\\to X$ is etale as the composite of the base change $p_W$ of the etale $f$ with $w$ [lem-weil-pbc-etale-base-change-finite-limits(1), lem-weil-pbc-etale-composition-cancellation(2)]), and $(h\\circ h')_Y=h_Y\\circ h'_Y$, $(\\mathrm{id}_W)_Y=\\mathrm{id}$ by the uniqueness in [def-pc-fibre-product]. By the definition of direct image [def-weil-pbc-direct-image], $P_F$ is literally $f_*(F|_Y)$ ($F|_Y(W_Y\\to Y)=F(W_Y\\to Y\\to X)$, and $W_Y\\to Y\\to X$ equals $w\\circ p_W$), so $P_F$ is an abelian sheaf, and $c_F=f_*(\\rho^f_F):f_*f^{-1}F\\xrightarrow{\\sim}P_F$, with components $c_{F,W}$, is an isomorphism of abelian sheaves natural in $F$, since $\\rho^f$ is natural in $F$ [lem-weil-pbc-etale-inverse-image-restriction(1)] ($f$ is etale) and $f_*$ is a functor. Hence giving a morphism $\\operatorname{tr}:f_*f^{-1}F\\to F$ is the same as giving a morphism of presheaves $\\overline{\\operatorname{tr}}=\\operatorname{tr}\\circ c_F^{-1}:P_F\\to F$, i.e. maps $\\overline{\\operatorname{tr}}_W:F(W_Y)\\to F(W)$ that are additive and satisfy $F(h)\\circ\\overline{\\operatorname{tr}}_W=\\overline{\\operatorname{tr}}_{W'}\\circ F(h_Y)$ for all $h:W'\\to W$ ($\\Ab(X_{\\Et})$ is a full subcategory of presheaves [def-weil-pbc-abelian-etale-sheaves]); and $\\operatorname{tr}$ is natural in $F$ in the sense of (0) iff $\\overline{\\operatorname{tr}}$ is, i.e. $\\varphi_W\\circ\\overline{\\operatorname{tr}}_{f,F,W}=\\overline{\\operatorname{tr}}_{f,G,W}\\circ\\varphi_{W_Y}$ for $\\varphi:F\\to G$ (because $c_G\\circ f_*f^{-1}\\varphi=f_*(\\varphi|_Y)\\circ c_F$ and $f_*(\\varphi|_Y)$ has components $\\varphi_{W_Y}$). The base change $f'$ in (1) is finite etale by [lem-weil-pbc-finite-morphism-permanence(a)] and [lem-weil-pbc-etale-base-change-finite-limits(1)], so (1) makes sense; and $\\kappa_W$ is an isomorphism over $W$ by [lem-weil-pbc-cartesian-square-pasting] (the squares $W\\times_{X'}Y'\\to Y'\\to Y$ over $W\\to X'\\to X$), hence an isomorphism of $X_{\\Et}$.",
+   "text": "For each finite etale morphism choose the natural transformation supplied by [lem-weil-pbc-finite-etale-trace-descent], together with its local sum characterizations. Define the global family by evaluating each chosen natural transformation at the sheaf $F$.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-abelian-etale-sheaves",
+    "lem-weil-pbc-finite-etale-trace-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "The naturality identity for the chosen natural transformation, reversed and with the composite functor unfolded, is exactly property (0).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+   }
+  },
+  {
+   "text": "For each etale localization, apply [lem-weil-pbc-finite-etale-trace-localization] to the chosen component for $f,F$ and the chosen component for $f^{\\prime},g^{-1}F$. Their local sum characterizations are part of the chosen witnesses. Associativity gives precisely property (1), for every isomorphism with the two specified projection identities.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-trace-localization",
     "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-etale-base-change-finite-limits"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
    }
   },
   {
-   "text": "*Splittings and local sums.* For an object $T$ of $X_{\\Et}$, a *splitting* $D$ of $T_Y$ is a finite set $J$ and pairwise disjoint open and closed subschemes $V_j\\subseteq T_Y$ ($j\\in J$) covering $T_Y$ such that each $p_T|_{V_j}:V_j\\to T$ is an isomorphism; its *sections* are $\\sigma_j:T\\to T_Y$, the inverse of $p_T|_{V_j}$ followed by the inclusion, so $p_T\\circ\\sigma_j=\\mathrm{id}_T$ and $\\sigma_j$ is a morphism over $T$, hence over $X$, i.e. a morphism of $X_{\\Et}$. For $F\\in\\Ab(X_{\\Et})$ the *local sum* is $\\Sigma_D:F(T_Y)\\to F(T)$, $\\Sigma_D(t)=\\sum_{j\\in J}F(\\sigma_j)(t)$ (zero if $J=\\varnothing$). It is additive (each $F(\\sigma_j)$ is a homomorphism) and natural in $F$: for $\\varphi:F\\to G$, $\\varphi_T\\circ\\Sigma^F_D=\\Sigma^G_D\\circ\\varphi_{T_Y}$, since $\\varphi_T\\circ F(\\sigma_j)=G(\\sigma_j)\\circ\\varphi_{T_Y}$ ($\\varphi$ is a natural transformation [def-weil-pbc-abelian-etale-sheaves]) and $\\varphi_T$ is additive. In this notation property (2) says: if $Y$ is split by $(V_j)$ with sections $s_j$, then $\\overline{\\operatorname{tr}}_{f,F,W}=\\Sigma_{D_W}$ where $D_W$ is the splitting of $W_Y$ with sections $\\sigma_{j,W}$ (that $D_W$ is a splitting is step 3 applied to $w:W\\to X$, see step 8).",
+   "text": "For a global finite clopen splitting, apply [lem-weil-pbc-finite-etale-trace-pullback-sum] to the chosen component and its local sum characterization. This is property (2) for every site object, including the empty splitting.",
    "uses": [
-    "def-weil-pbc-abelian-etale-sheaves"
+    "lem-weil-pbc-finite-etale-trace-pullback-sum"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
-   }
-  },
-  {
-   "text": "*Pulling back a splitting.* Let $D=(V_j,\\sigma_j)_{j\\in J}$ be a splitting of $T_Y$ and $h:T'\\to T$ a morphism of $X_{\\Et}$. In the diagram $T'_Y\\xrightarrow{h_Y}T_Y\\to Y$ over $T'\\xrightarrow{h}T\\to X$ the right square and the outer rectangle are cartesian, so the left square is cartesian [lem-weil-pbc-cartesian-square-pasting]: $T'_Y=T'\\times_TT_Y$ with projections $p_{T'}$ and $h_Y$. Put $V'_j=h_Y^{-1}(V_j)$: these are pairwise disjoint open and closed subschemes covering $T'_Y$ (preimages of such), and $V'_j=T'\\times_TV_j$ as open subscheme of $T'\\times_TT_Y$ [lem-weil-pbc-open-fibre-product], with $p_{T'}|_{V'_j}$ the base change of the isomorphism $p_T|_{V_j}$ along $h$, hence an isomorphism (the base change of an isomorphism is one, by the universal property [def-pc-fibre-product]). Let $\\sigma'_j:T'\\to T'_Y$ be the unique morphism with $p_{T'}\\circ\\sigma'_j=\\mathrm{id}_{T'}$ and $h_Y\\circ\\sigma'_j=\\sigma_j\\circ h$ (it exists since $p_T\\circ\\sigma_j\\circ h=h$); as $h_Y\\sigma'_j$ lands in $V_j$, $\\sigma'_j$ lands in $V'_j$, so it is the inverse of the isomorphism $p_{T'}|_{V'_j}$ followed by the inclusion. Thus $h^*D=(V'_j,\\sigma'_j)_{j\\in J}$ is a splitting of $T'_Y$, and for $t\\in F(T_Y)$\n$$F(h)(\\Sigma_D(t))=\\sum_jF(\\sigma_j\\circ h)(t)=\\sum_jF(h_Y\\circ\\sigma'_j)(t)=\\Sigma_{h^*D}(F(h_Y)(t)),$$\nusing that $F$ is a functor to abelian groups. Also $(h\\circ h'')^*D$ and $h''^*h^*D$ have the same pieces.",
-   "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-open-fibre-product",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
-   }
-  },
-  {
-   "text": "*The local sum does not depend on the splitting.* Let $D=(V_j,\\sigma_j)_{j\\in J}$ and $E=(V'_k,\\sigma'_k)_{k\\in K}$ be two splittings of the same $T_Y$ and $t\\in F(T_Y)$; we show $\\Sigma_D(t)=\\Sigma_E(t)$. (This is the point the earlier attempt left unargued; Stacks and SGA 4 leave it to 'the usual descent argument'.) For $j\\in J,k\\in K$ the set $V_j\\cap V'_k$ is open and closed in $V_j$, and $p_T|_{V_j}$ is an isomorphism, so $T_{jk}=p_T(V_j\\cap V'_k)$ is an open (and closed) subset of $T$, and $p_T$ restricts to an isomorphism of the open subschemes $V_j\\cap V'_k\\xrightarrow{\\sim}T_{jk}$. (a) For fixed $j$ the $T_{jk}$, $k\\in K$, are pairwise disjoint and cover $T$ (the $V_j\\cap V'_k$ partition $V_j$ and $p_T|_{V_j}$ is bijective onto $T$); for fixed $k$ the $T_{jk}$, $j\\in J$, are pairwise disjoint and cover $T$ (same argument with $V'_k$). (b) $\\sigma_j|_{T_{jk}}=\\sigma'_k|_{T_{jk}}$: since $\\sigma_j$ is inverse to $p_T|_{V_j}$, $\\sigma_j(T_{jk})=V_j\\cap V'_k$, and likewise $\\sigma'_k(T_{jk})=V_j\\cap V'_k$; so both restrictions factor through the open subscheme $V_j\\cap V'_k$ [def-weil-open-immersion], and both are right inverses of the isomorphism $p_T:V_j\\cap V'_k\\to T_{jk}$ (as $p_T\\sigma_j=p_T\\sigma'_k=\\mathrm{id}_T$), hence both equal its inverse. (c) For a point $x\\in T$ let $\\pi_x(j)$ be the unique $k$ with $x\\in T_{jk}$ (by (a)); $\\pi_x:J\\to K$ is injective (if $\\pi_x(j)=\\pi_x(j')=k$ then $x\\in T_{jk}\\cap T_{j'k}$, so $j=j'$ by (a)) and surjective ($x$ lies in some $T_{jk}$ for each $k$ by (a)), so it is a bijection. For each bijection $\\pi:J\\to K$ let $T_\\pi=\\bigcap_{j\\in J}T_{j\\pi(j)}$, an open subscheme of $T$ with inclusion $\\iota_\\pi$; then $x\\in T_{\\pi_x}$, so the finitely many $\\iota_\\pi$ are jointly surjective open immersions, which are etale [lem-weil-pbc-etale-composition-cancellation(1)]; so $T_\\pi\\to T\\to X$ is an object of $X_{\\Et}$ (ibid. (2)) and $\\{\\iota_\\pi:T_\\pi\\to T\\}_\\pi$ is a covering of $T$ in $X_{\\Et}$ [def-weil-pbc-etale-site] (the empty family if $T=\\varnothing$, which covers $\\varnothing$). (d) By (b), $\\sigma_j\\circ\\iota_\\pi=\\sigma'_{\\pi(j)}\\circ\\iota_\\pi$ for all $j$, so, reindexing the sum by the bijection $\\pi$,\n$$F(\\iota_\\pi)(\\Sigma_D(t))=\\sum_{j\\in J}F(\\sigma_j\\iota_\\pi)(t)=\\sum_{j\\in J}F(\\sigma'_{\\pi(j)}\\iota_\\pi)(t)=\\sum_{k\\in K}F(\\sigma'_k\\iota_\\pi)(t)=F(\\iota_\\pi)(\\Sigma_E(t)).$$\nSince $F$ is a sheaf, $F(T)\\to\\prod_\\pi F(T_\\pi)$ is injective [def-weil-pbc-abelian-etale-sheaves], so $\\Sigma_D(t)=\\Sigma_E(t)$. (If $|J|\\ne|K|$ there is no $\\pi$, $T=\\varnothing$ and $F(T)=0$.)",
-   "uses": [
-    "def-weil-open-immersion",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
-   }
-  },
-  {
-   "text": "*Splitting coverings exist.* Let $T$ be an object of $X_{\\Et}$. For each $x\\in X$, [lem-weil-pbc-finite-etale-etale-local-split] (Stacks 04HN) gives an etale $g_x:U_x\\to X$, a point $u_x\\in U_x$ over $x$, and a decomposition of $Y\\times_XU_x$ into pairwise disjoint open and closed subschemes each mapped isomorphically onto $U_x$ by the second projection; transporting it along the canonical isomorphism $Y\\times_XU_x\\cong U_x\\times_XY=(U_x)_Y$ over $U_x$ [def-pc-fibre-product] gives a splitting $D_x$ of $(U_x)_Y$ (with $U_x$ an object of $X_{\\Et}$ via $g_x$). The family $(g_x)_{x\\in X}$ is etale and jointly surjective, so by [lem-weil-pbc-etale-covering-base-change] the projections $q_x:T_x=T\\times_XU_x\\to T$ are etale and jointly surjective; $T_x$ with $T_x\\to T\\to X$ is an object of $X_{\\Et}$ [lem-weil-pbc-etale-composition-cancellation(2)], $\\{q_x\\}_x$ is a covering of $T$ in $X_{\\Et}$ [def-weil-pbc-etale-site], and the second projection $r_x:T_x\\to U_x$ is a morphism of $X_{\\Et}$, so $r_x^*D_x$ is a splitting of $(T_x)_Y$ by step 3. So every object of $X_{\\Et}$ has a covering in $X_{\\Et}$ by objects $T_a$ with $(T_a)_Y$ split. This is where finiteness of $f$ enters; it is the statement 'every finite etale morphism is etale locally on $X$ of the form (2)' of Stacks 03SH / 'tout revetement etale est localement constant' of SGA 4 IX 5.1.",
-   "uses": [
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
-   }
-  },
-  {
-   "text": "*Construction of $\\overline{\\operatorname{tr}}_W$ by descent.* Fix $F$, an object $W$ of $X_{\\Et}$ and $t\\in F(W_Y)$. Claim: there is exactly one $u\\in F(W)$ such that\n(*) for every morphism $h:T\\to W$ of $X_{\\Et}$ and every splitting $D$ of $T_Y$, $F(h)(u)=\\Sigma_D(F(h_Y)(t))$.\n*Uniqueness:* take a covering $\\{h_a:W_a\\to W\\}$ with splittings $D_a$ of $(W_a)_Y$ (step 5); two such $u$ have the same image in every $F(W_a)$, hence are equal since $F$ is separated [def-weil-pbc-abelian-etale-sheaves]. *Existence:* with this covering put $u_a=\\Sigma_{D_a}(F((h_a)_Y)(t))\\in F(W_a)$. For indices $a,b$ let $W_{ab}=W_a\\times_WW_b$ (an object of $X_{\\Et}$, the fibre product in $X_{\\Et}$ [lem-weil-pbc-etale-base-change-finite-limits(2)]) with projections $\\mathrm{pr}_a,\\mathrm{pr}_b$, and $e=h_a\\mathrm{pr}_a=h_b\\mathrm{pr}_b$. By step 3, $F(\\mathrm{pr}_a)(u_a)=\\Sigma_{\\mathrm{pr}_a^*D_a}(F((\\mathrm{pr}_a)_Y)F((h_a)_Y)(t))=\\Sigma_{\\mathrm{pr}_a^*D_a}(F(e_Y)(t))$ and likewise $F(\\mathrm{pr}_b)(u_b)=\\Sigma_{\\mathrm{pr}_b^*D_b}(F(e_Y)(t))$: two local sums of the same element over two splittings of $(W_{ab})_Y$, equal by step 4. By the sheaf condition [def-weil-pbc-abelian-etale-sheaves] there is $u\\in F(W)$ with $F(h_a)(u)=u_a$ for all $a$. *$u$ satisfies (*):* let $h:T\\to W$ and $D$ be given; the projections $q_a:T_a=T\\times_WW_a\\to T$ form a covering of $T$ [lem-weil-pbc-etale-covering-base-change, def-weil-pbc-etale-site], with second projections $r_a:T_a\\to W_a$, $hq_a=h_ar_a$. Then $F(q_a)F(h)(u)=F(r_a)(u_a)=\\Sigma_{r_a^*D_a}(F((h_ar_a)_Y)(t))$ and $F(q_a)(\\Sigma_D(F(h_Y)(t)))=\\Sigma_{q_a^*D}(F((hq_a)_Y)(t))$ (step 3 twice); these are local sums of one element over two splittings of $(T_a)_Y$, equal by step 4. So $F(h)(u)$ and $\\Sigma_D(F(h_Y)(t))$ agree on a covering of $T$ and are equal. Define $\\tau_{f,F,W}(t)=u$.",
-   "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "SGA 4 Expose IX, 5.1: 'Le morphisme trace est caracterise par les deux proprietes suivantes ... L'unicite est triviale a partir de (i), (ii) puisque tout revetement etale est localement constant. Ayant l'unicite, l'existence s'ensuit par l'argument usuel de descente.'"
-   }
-  },
-  {
-   "text": "*$\\tau$ is a morphism of sheaves, natural in $F$; definition of the trace and (0).* All three facts follow from the uniqueness in (*) (step 6). Additivity: if $u,u'$ satisfy (*) for $t,t'$, then $u+u'$ satisfies (*) for $t+t'$ ($F(h)$, $F(h_Y)$ and $\\Sigma_D$ are additive, step 2), so $\\tau_W(t+t')=\\tau_W(t)+\\tau_W(t')$. Compatibility with restriction: for $k:W'\\to W$ in $X_{\\Et}$, the element $F(k)(\\tau_W(t))$ satisfies (*) for $(W',F(k_Y)(t))$: for $h:T\\to W'$ and a splitting $D$ of $T_Y$, $F(h)F(k)(\\tau_W(t))=F(kh)(\\tau_W(t))=\\Sigma_D(F((kh)_Y)(t))=\\Sigma_D(F(h_Y)F(k_Y)(t))$ (step 1: $(kh)_Y=k_Yh_Y$); so $F(k)\\circ\\tau_W=\\tau_{W'}\\circ F(k_Y)$, i.e. $\\tau_{f,F}:P_F\\to F$ is a morphism of presheaves, hence of abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. Naturality in $F$: for $\\varphi:F\\to G$, $\\varphi_W(\\tau^F_W(t))$ satisfies (*) for $G$ and $\\varphi_{W_Y}(t)$: $G(h)\\varphi_W(\\tau^F_W(t))=\\varphi_T(F(h)\\tau^F_W(t))=\\varphi_T(\\Sigma_D(F(h_Y)t))=\\Sigma_D(G(h_Y)\\varphi_{W_Y}(t))$ (naturality of $\\varphi$ and of $\\Sigma_D$, step 2); so $\\varphi_W\\circ\\tau^F_W=\\tau^G_W\\circ\\varphi_{W_Y}$. Define $\\operatorname{tr}_{f,F}=\\tau_{f,F}\\circ c_F:f_*f^{-1}F\\to F$, so $\\overline{\\operatorname{tr}}_{f,F}=\\tau_{f,F}$; by step 1 it is a morphism of abelian sheaves and satisfies (0).",
-   "uses": [
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
-   }
-  },
-  {
-   "text": "*Property (2).* Suppose $Y=\\coprod_{j\\in J}V_j$ as in (2), with sections $s_j:X\\to Y$. Regard $X$ (with $\\mathrm{id}_X$) as an object of $X_{\\Et}$; under the canonical isomorphism $X_Y=X\\times_XY\\cong Y$ over $X$ [def-pc-fibre-product] the $V_j$ give a splitting $D_X$ of $X_Y$ with sections $(\\mathrm{id}_X,s_j)$. For an object $w:W\\to X$, step 3 applied to the morphism $w:W\\to X$ of $X_{\\Et}$ gives the splitting $w^*D_X$ of $W_Y$, whose sections $\\sigma'_j$ are characterized by $p_W\\sigma'_j=\\mathrm{id}_W$ and $w_Y\\sigma'_j=(\\mathrm{id}_X,s_j)\\circ w$, i.e. (composing with the projection to $Y$) $\\sigma'_j=(\\mathrm{id}_W,s_j\\circ w)=\\sigma_{j,W}$. Applying (*) of step 6 with $h=\\mathrm{id}_W$ and $D=w^*D_X$: $\\overline{\\operatorname{tr}}_{f,F,W}(t)=\\tau_W(t)=\\sum_jF(\\sigma_{j,W})(t)$, which is (2). For $Y=\\coprod_{i=1}^dX$ the images $V_i$ of the coprojections are open (and closed, their complement being the union of the others), pairwise disjoint and cover $Y$, and each coprojection is an open immersion inverse to $f|_{V_i}$ [lem-weil-pbc-scheme-coproduct-copies], so this case is included with $s_i$ the coprojections.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-scheme-coproduct-copies"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
-   }
-  },
-  {
-   "text": "*Property (1).* Let $g:X'\\to X$, $f':Y'\\to X'$ be as in (1); $Y'$ is finite etale over $X'$ (step 1), so steps 2-7 apply to $f'$. First take the abelian sheaf $F|_{X'}$ on $X'_{\\Et}$ [lem-weil-pbc-etale-inverse-image-restriction(1)]. For an object $W$ of $X'_{\\Et}$ and $t'\\in F|_{X'}(W\\times_{X'}Y')=F(W\\times_{X'}Y')$ put $u=\\tau_{f,F,W}(F(\\kappa_W)^{-1}t')$; we check that $u$ satisfies (*) of step 6 for $(f',F|_{X'},W,t')$. Let $h:T\\to W$ be a morphism of $X'_{\\Et}$ (also one of $X_{\\Et}$) and $D'=(V'_j,\\sigma'_j)$ a splitting of $T\\times_{X'}Y'$ over $T$. Since $\\kappa_T$ is an isomorphism over $T$, $D=(\\kappa_T(V'_j),\\kappa_T\\sigma'_j)$ is a splitting of $T_Y$. The two morphisms $h_Y\\kappa_T$ and $\\kappa_Wh_{Y'}$ from $T\\times_{X'}Y'$ to $W_Y$ agree after composing with both projections to $W$ and to $Y$, hence are equal [def-pc-fibre-product]. So, using (*) for $u$ (step 6, for $f$),\n$$F(h)(u)=\\Sigma_D(F(h_Y)F(\\kappa_W)^{-1}t')=\\sum_jF(\\sigma'_j)F(\\kappa_T)F(h_Y)F(\\kappa_W)^{-1}t'=\\sum_jF(\\sigma'_j)F(h_{Y'})t'=\\Sigma_{D'}(F|_{X'}(h_{Y'})t'),$$\nsince $F(\\kappa_T)F(h_Y)=F(h_Y\\kappa_T)=F(\\kappa_Wh_{Y'})=F(h_{Y'})F(\\kappa_W)$. By uniqueness in (*) for $f'$, $\\tau_{f',F|_{X'},W}=\\tau_{f,F,W}\\circ F(\\kappa_W)^{-1}$. Now $\\rho^g_F:g^{-1}F\\to F|_{X'}$ is a morphism of abelian sheaves on $X'_{\\Et}$, so naturality of $\\tau_{f'}$ in the sheaf (step 7) gives $\\rho^g_F(W)\\circ\\tau_{f',g^{-1}F,W}=\\tau_{f',F|_{X'},W}\\circ\\rho^g_F(W\\times_{X'}Y')=\\tau_{f,F,W}\\circ F(\\kappa_W)^{-1}\\circ\\rho^g_F(W\\times_{X'}Y')$. As $\\overline{\\operatorname{tr}}=\\tau$ (step 7), this is (1). (The parenthetical reformulation in (1) is the componentwise reading through $\\rho^g$, which by [lem-weil-pbc-etale-inverse-image-restriction(1)] turns $g^{-1}$ of a morphism $\\psi$ into the family of its components $\\psi_W$ at the objects $W\\to X'\\to X$.)",
-   "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
+    "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-open-immersion",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "lem-weil-pbc-open-fibre-product",
-  "lem-weil-pbc-scheme-coproduct-copies"
+  "lem-weil-pbc-finite-etale-trace-descent",
+  "lem-weil-pbc-finite-etale-trace-localization",
+  "lem-weil-pbc-finite-etale-trace-pullback-sum",
+  "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 03SH, after Definition 03SE; detailed descent argument adapted from the original node, existence steps 1–9 and uniqueness by local splitting and separatedness."
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1. Q2: Lean assembly by choice and natural transformations; sectionwise descent and localization split into independent theorems."
  },
  "mathlib_searches": [
   {
@@ -308,9 +223,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T060731-L-2904190",
+  "landing": "20261012T085321-L-32790",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
