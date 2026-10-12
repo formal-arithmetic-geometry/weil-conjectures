@@ -16,75 +16,33 @@
  ],
  "proof": [
   {
-   "text": "Reindex the filtered opposite category by a nonempty directed cofinal system. Restrict the scheme limit cone and complex colimit cocone to that system; their universal properties are preserved. A representative in the restricted system gives an original-stage representative. For eventual vanishing of a class at an arbitrary original stage, finality first supplies an arrow to a reindexed stage in the filtered opposite category; transfer the class along it, obtain a later zero witness, and compose the arrows.",
+   "text": "Initially every stage class lies in image-filtration degree a: use T=F_i, the given lower support bound, the identity map, and the same class as witness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Induct on n to find an arrow j→i with the transition of x in filtration degree a+n. The base uses the identity. For the successor, the cocone equation B.w keeps the transitioned class in the kernel of B. Transport this zero equation across hB and the additive map eB.hom to get canonical limit vanishing. Apply the one-step deepening theorem and compose its arrow with the previously obtained arrow; H.map_comp identifies the composite transition.",
    "uses": [
-    "lem-weil-pbc-filtered-category-directed-cofinal"
+    "lem-weil-pbc-etale-complex-filtration-deepening"
    ],
    "elementary": false
   },
   {
-   "text": "Put $\\mathcal F^\\bullet=\\varinjlim_i f_i^{-1}\\mathcal F_i^\\bullet$ termwise. For every pair of integers $(p,n)$, apply the sheaf continuity theorem [lem-weil-pbc-etale-cohomology-limit-of-schemes] to the system of sheaves $\\mathcal F_i^n$ and its compatible transition maps. Its hypotheses are exactly the quasi-compact quasi-separated stages, affine transitions, and the colimit sheaf $\\mathcal F^n$, so it gives a canonical isomorphism $\\varinjlim_i H^p((X_i)_{\\Et},\\mathcal F_i^n)\\cong H^p(X_{\\Et},\\mathcal F^n)$.",
+   "text": "Take n=(p-a+1).toNat. Integer arithmetic gives p<a+n even when p<a. High-filtration vanishing shows that the cohomology representative (eH j).hom (H.map f.op x) is zero. Apply (eH j).inv and the inverse-isomorphism equation to conclude H.map f.op x=0.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EZM, proof lines 7794-7802, invoking Theorem Tag 09YQ"
-   }
-  },
-  {
-   "text": "Use [thm-sp-if-e1] with the global-sections functor, as identified for etale sheaves by [def-sp-etale-dictionary] and for complexes by [def-sp-kinjective-bridge]. Its indexing is $E_{1,i}^{p,q}=H^p((X_i)_{\\Et},\\mathcal F_i^q)$ and $E_1^{p,q}=H^p(X_{\\Et},\\mathcal F^q)$: $p$ is the cohomological degree and $q$ is the filtration degree. The comparison [lem-weil-pbc-complex-spectral-sequence-comparison] has four hypotheses. (i) Step 2 gives $\\varinjlim_i E_{1,i}^{p,q}\\cong E_1^{p,q}$ for every $p,q$, and [lem-weil-pbc-hypercohomology-e1-pullback-functorial] identifies this with the map of $E_1$ pages. (ii) Each row resolution starts in cohomological degree $p=0$, while $\\mathcal F_i^q=\\mathcal F^q=0$ for $q<a$, so all $E_1$ terms vanish for $p<0$ or $q<a$. (iii) In total degree $n$, only $a\\leq q\\leq n$ and $p=n-q\\geq0$ occur, uniformly in $i$; these bounds force stabilization of each page entry. (iv) The filtration by the second degree in [thm-sp-if-e1] and its finite-filtration convergence [thm-sp-spectral-object-yields] give $F^qA_i^n=A_i^n$ and $F^qA^n=A^n$ for $q\\leq a$, zero for $q>n$, and $E_\\infty^{p,q}=\\operatorname{gr}^q A^{p+q}$ (similarly at each stage). The functoriality node supplies the compatible spectral-sequence maps, filtered abutment maps, and graded compatibility. Thus the comparison node gives $\\varinjlim_i A_i^n\\cong A^n$.",
-   "uses": [
-    "thm-sp-if-e1",
-    "def-sp-etale-dictionary",
-    "def-sp-kinjective-bridge",
-    "thm-sp-spectral-object-yields",
-    "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
-    "lem-weil-pbc-complex-spectral-sequence-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EZM, proof lines 7803-7823; Derived Categories Lemma Tag 015J"
-   }
-  },
-  {
-   "text": "A class vanishing in the limit has leading graded component vanishing on the stable page. The stable-page comparison is injective on filtered colimits, so this component vanishes at a later stage. The class then lies one filtration step deeper. Repeat through the finite range from a to p; eventually the class is in the zero step. Compose the finite chain of transition arrows.",
-   "uses": [
-    "lem-weil-pbc-complex-spectral-sequence-comparison"
+    "lem-weil-pbc-etale-hypercohomology-filtration-zero"
    ],
    "elementary": false
-  },
-  {
-   "text": "By [def-sp-kinjective-bridge] and [def-weil-pbc-etale-cohomology], the abutments $A_i^n$ and $A^n$ of Step 3 are $H^n((X_i)_{\\Et},\\mathcal F_i^\\bullet)$ and $H^n(X_{\\Et},\\mathcal F^\\bullet)$ defined by derived global sections. For a transition $f_{i'i}$ use the pair $(f_{i'i},\\varphi_{i'i})$ in [lem-weil-pbc-hypercohomology-e1-pullback-functorial]; for the map to $X$ use $(f_i,\\iota_i)$, where $\\iota_i:f_i^{-1}\\mathcal F_i^\\bullet\\to\\mathcal F^\\bullet$ is the colimit coprojection. The identity and composition clauses of that node, together with the cocycle condition in the statement, show that these give the compatible transition and target maps required in Step 3. Its abutment clause identifies each $b_i^n$ with the canonical derived pullback map, so the isomorphism from Step 3 is exactly the displayed one.",
-   "uses": [
-    "def-sp-kinjective-bridge",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-hypercohomology-e1-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EZM, proof lines 7823-7828"
-   }
   }
  ],
  "proof_deps": [
-  "def-sp-etale-dictionary",
-  "def-sp-kinjective-bridge",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-complex-spectral-sequence-comparison",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-filtered-category-directed-cofinal",
-  "lem-weil-pbc-hypercohomology-e1-pullback-functorial",
-  "thm-sp-if-e1",
-  "thm-sp-spectral-object-yields"
+  "lem-weil-pbc-etale-complex-filtration-deepening",
+  "lem-weil-pbc-etale-hypercohomology-filtration-zero"
  ],
  "proof_origin": {
-  "by": "worker R1",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EZM, finite-term comparison; vanishing half (details expanded by R1)"
+  "by": "worker D2",
+  "document": "Stacks Project, Tags 0EZM and 015J",
+  "place": "Finite-term comparison: explicit natural-number induction through image-filtration steps; spectral comparison and high-filtration vanishing split off"
  },
  "mathlib_searches": [
   {
@@ -159,9 +117,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T044752-L-2038888",
+  "landing": "20261012T060733-L-2905578",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

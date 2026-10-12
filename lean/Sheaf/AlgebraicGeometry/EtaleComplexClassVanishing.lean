@@ -9,13 +9,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.KInjectiveBridge
-import Sheaf.CategoryTheory.SpectralSequenceComparison
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleComplexFiltrationDeepening
+import Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration
 
 /-! # Etale complex class vanishing
 
@@ -137,6 +132,43 @@ theorem exists_etale_complex_class_eq_zero
         (cohomology AddCommGrpCat.{u + 1} c.pt p).map
           (DerivedCategory.Q.map ((eG i).inv ≫ L.ι.app (op i)))) :
     ∀ (i : I) (x : H.obj (op i)), B.ι.app (op i) x = 0 →
-      ∃ (j : I) (f : j ⟶ i), H.map f.op x = 0 := by sorry
+      ∃ (j : I) (f : j ⟶ i), H.map f.op x = 0 := by
+  intro i x hx
+  have hsteps : ∀ n : ℕ, ∃ (j : I) (f : j ⟶ i),
+      InEtaleHypercohomologyFiltration (D.obj j) (F j) p (a + n)
+        ((eH j).hom (H.map f.op x)) := by
+    intro n
+    induction n with
+    | zero =>
+      refine ⟨i, 𝟙 i, ?_⟩
+      simp only [Nat.cast_zero, add_zero]
+      refine ⟨F i, hbelow i, 𝟙 _, (eH i).hom x, ?_⟩
+      simp
+    | succ n ih =>
+      obtain ⟨j, f, hf⟩ := ih
+      have hz : B.ι.app (op j) (H.map f.op x) = 0 := by
+        have hn := congrArg (fun t => t x) (B.w f.op)
+        change B.ι.app (op j) (H.map f.op x) = B.ι.app (op i) x at hn
+        exact hn.trans hx
+      have hcanon : ((eH j).hom ≫ P (c.π.app j) (F j) ≫
+          (cohomology AddCommGrpCat.{u + 1} c.pt p).map
+            (DerivedCategory.Q.map ((eG j).inv ≫ L.ι.app (op j))))
+          (H.map f.op x) = 0 := by
+        rw [← hB j]
+        simpa using congrArg (fun y => eB.hom y) hz
+      obtain ⟨k, g, hg⟩ := exists_etale_complex_class_in_next_filtration
+        D c hc F φ hidentity hcomposition a hbelow G eG hG p P hP H eH hH L hL
+        (a + n) j (H.map f.op x) hf hcanon
+      refine ⟨k, g ≫ f, ?_⟩
+      simpa only [Nat.cast_succ, ← add_assoc, op_comp, Functor.map_comp,
+        AddCommGrpCat.comp_apply] using hg
+  obtain ⟨j, f, hf⟩ := hsteps (p - a + 1).toNat
+  have hp : p < a + ((p - a + 1).toNat : ℤ) := by omega
+  have hz := eq_zero_of_inEtaleHypercohomologyFiltration (D.obj j) (F j) p
+    (a + ((p - a + 1).toNat : ℤ)) hp ((eH j).hom (H.map f.op x)) hf
+  refine ⟨j, f, ?_⟩
+  have h := congrArg (fun y => (eH j).inv y) hz
+  simpa using h
+
 
 end AlgebraicGeometry.Etale

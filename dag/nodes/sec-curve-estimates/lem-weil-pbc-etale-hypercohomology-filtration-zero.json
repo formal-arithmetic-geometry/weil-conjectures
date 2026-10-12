@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-etale-hypercohomology-filtration-zero",
+ "kind": "statement",
+ "title": "Vanishing of the high image-filtration steps in etale hypercohomology",
+ "statement": "For a scheme X, a complex K of abelian etale sheaves, and integers p < q, any x in H^p(X,K) in the image filtration from complexes supported in degrees at least q is zero. Here image-filtration membership means there exist a complex T with T^n=0 for n<q, a map f:T→K and y in H^p(X,T) with H^p(f)(y)=x. This is the image from the stupid truncation at q: any such f factors through the stupid truncation, and its inclusion is itself a witness.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Lemma 13.21.3, first spectral sequence and finite abutment filtration"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof": [
+  {
+   "text": "Choose witness T,f,y. Establish T.IsStrictlyGE q from the support condition. Apply Mathlib CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T q to obtain a quasi-isomorphic complex J of injectives with the same strict lower bound. CochainComplex.isKInjective_of_injective J q makes J K-injective. Global sections sends zero objects to zero objects, so the termwise global-sections complex M has the same lower bound. The source-library proved isomorphism Functor.rightDerivedFunctorObjQIso J, composed with the image of the quasi-isomorphism, identifies RΓ(T) with Q(M). DerivedCategory.isZero_of_isGE shows its p-th homology is zero when p<q. Transport along the homology isomorphism, use AddCommGrpCat.subsingleton_of_isZero to get y=0, and conclude by map_zero. These are direct applications of proved Mathlib and source-library tools; no spectral-sequence theorem or other postponed proof is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker D2",
+  "document": "Stacks Project Tag 015J; Mathlib bounded-below injective replacement and source-library K-injective computation",
+  "place": "Vanishing below the support bound, proved directly via injective replacement without spectral sequences"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of derived global sections of bounded below complex vanishes below its lower bound",
+   "results": "DerivedCategory.isZero_of_isGE and CochainComplex.isZero_of_isGE concern ordinary homology; no derived-global-sections connectivity statement or filtration-deepening lemma found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.isZero_of_isGE",
+   "results": "Found homology vanishing under IsGE. This does not establish IsGE of derived global sections and does not supply filtration deepening.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*isZero|isZero.*cohomology; image.*filtration; isGE|IsGE",
+   "results": "Read source derived-global-sections definitions and HypercohomologyFiltrations. The latter uses canonical truncation E2 filtrations, not the stupid-truncation E1 image filtration here. No exact match. Blueprint searches hypercohomology filtration zero and filtration deepening returned no matches.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded below injective resolution preserving lower degree bound cochain complex",
+   "results": "UNAVAILABLE: Internal Server Error. Used LeanFinder, Loogle and Mathlib source grep instead.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexClassVanishing",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "Second proof, bounded-below K-injective derived continuity argument; finite-term complex comparison in its continuity input",
+   "via": [
+    "lem-weil-pbc-etale-complex-class-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleHypercohomologyFiltration",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleHypercohomologyFiltration.lean",
+  "declaration": "AlgebraicGeometry.Etale.eq_zero_of_inEtaleHypercohomologyFiltration",
+  "statement": "theorem eq_zero_of_inEtaleHypercohomologyFiltration\n    (X : Scheme.{u})\n    (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    (p q : ℤ) (hpq : p < q)\n    (x : (cohomology AddCommGrpCat.{u + 1} X p).obj (DerivedCategory.Q.obj K))\n    (hx : InEtaleHypercohomologyFiltration X K p q x) : x = 0",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Etale.InEtaleHypercohomologyFiltration",
+   "AlgebraicGeometry.Etale.eq_zero_of_inEtaleHypercohomologyFiltration"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T060733-L-2905578",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T060733-L-2905578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
