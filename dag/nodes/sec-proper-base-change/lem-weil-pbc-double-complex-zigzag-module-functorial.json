@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "(b) Let $a\\in Z_n(A)$ and $r\\ge1$, $s\\ge0$, $r+s=n$. Since $\\Phi$ commutes with $d$ and $\\delta$ [def-weil-pbc-module-double-complex], $d_{r,s}(\\Phi_{r,s}a_{r,s})=\\Phi_{r-1,s}(d_{r,s}a_{r,s})=\\Phi_{r-1,s}(\\delta_{r-1,s+1}a_{r-1,s+1})=\\delta_{r-1,s+1}(\\Phi_{r-1,s+1}a_{r-1,s+1})$, so $\\Phi(a)\\in Z_n(B)$ [def-weil-pbc-double-complex-zigzag-module]. For $b\\in T_{n+1}(A)$ and $p+q=n$: $\\Phi(D_{n+1}b)_{p,q}=\\Phi_{p,q}(d_{p+1,q}b_{p+1,q}+\\delta_{p,q+1}b_{p,q+1})=d_{p+1,q}\\Phi_{p+1,q}(b_{p+1,q})+\\delta_{p,q+1}\\Phi_{p,q+1}(b_{p,q+1})=D_{n+1}(\\Phi b)_{p,q}$ by linearity of $\\Phi_{p,q}$ and the two commutation rules (at the boundary both sides are $0$ by the zero convention). Hence $\\Phi(B_n(A))=\\Phi D_{n+1}(T_{n+1}(A))=D_{n+1}(\\Phi(T_{n+1}(A)))\\subseteq D_{n+1}(T_{n+1}(B))=B_n(B)$. The componentwise map $\\Phi:T_n(A)\\to T_n(B)$ is $R$-linear, since each $\\Phi_{p,q}$ is.",
+   "text": "(b) Let $a\\in Z_n(A)$ and $r\\ge1$, $s\\ge0$, $r+s=n$. Since $\\Phi$ commutes with $d$ and $\\delta$ [def-weil-pbc-module-double-complex], $d_{r,s}(\\Phi_{r,s}a_{r,s})=\\Phi_{r-1,s}(d_{r,s}a_{r,s})=\\Phi_{r-1,s}(\\delta_{r-1,s+1}a_{r-1,s+1})=\\delta_{r-1,s+1}(\\Phi_{r-1,s+1}a_{r-1,s+1})$, so $\\Phi(a)\\in Z_n(B)$ [def-weil-pbc-double-complex-zigzag-module]. For $b\\in T_{n+1}(A)$ and $p+q=n$: $\\Phi(D_{n+1}b)_{p,q}=\\Phi_{p,q}(d_{p+1,q}b_{p+1,q}+\\delta_{p,q+1}b_{p,q+1})=d_{p+1,q}\\Phi_{p+1,q}(b_{p+1,q})+\\delta_{p,q+1}\\Phi_{p,q+1}(b_{p,q+1})=D_{n+1}(\\Phi b)_{p,q}$ by linearity of $\\Phi_{p,q}$ and the two commutation rules (at the boundary both sides are $0$ by the zero convention). Hence $\\Phi(B_n(A))=\\Phi D_{n+1}(T_{n+1}(A))=D_{n+1}(\\Phi(T_{n+1}(A)))\\subseteq D_{n+1}(T_{n+1}(B))=B_n(B)$. The componentwise map $\\Phi:T_n(A)\\to T_n(B)$ is $R$-linear, since each $\\Phi_{p,q}$ is. Lean implementation of the preservation part: HomologicalComplex₂.zigzagTotalMap_preserves in Sheaf.Algebra.Homology.ZigzagModule proves the projection formula by DirectSum.linearMap_ext and component.of, extracts horizontal and vertical commutation with HomologicalComplex.congr_hom and ConcreteCategory.congr_hom, and applies these equations to the cycle relations. It proves the boundary-map equality on DirectSum.lof generators using toModule_lof and all four cases of the two positive-coordinate tests, then maps each range witness b to zigzagTotalMap Φ (n + 1) b. This closes the preservation obligation without new statements; the other clauses of zigzagModule_functorial are outside this delivery.",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-module-double-complex"
@@ -172,5 +172,15 @@
   "group": "F1",
   "result": "pass",
   "note": "R CommRing, A B C : HomologicalComplex₂ (ModuleCat R) (down ℕ) (down ℕ) per def-weil-pbc-module-double-complex mathlib_match, Φ Ψ bicomplex morphisms, n : ℕ; (a) B≤Z and Z⊓B=B; (b) map Z≤Z, Φ∘D=D∘Φ on T_{n+1}(A)→T_n(B), map B≤B; (c) representative formula + uniqueness of every linear f against recorded zigzagMap; (d) comp in categorical order and id; all names #check'd to HomologicalComplex₂.zigzag* of the recorded ZigzagModule"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T161503-L-2648702",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

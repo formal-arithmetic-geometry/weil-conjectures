@@ -126,6 +126,7 @@ noncomputable def zigzagTotalMap {A B : HomologicalComplex₂ (ModuleCat R) (Com
       (fun j : ZigzagIndex n => (B.X j.1.1).X j.1.2) i).comp
       ((Φ.f i.1.1).f i.1.2).hom)
 
+set_option backward.isDefEq.respectTransparency false in
 open Classical in
 /-- (blueprint: lem-weil-pbc-double-complex-zigzag-module-functorial)
 The componentwise map preserves zig-zags and trivial zig-zags
@@ -143,7 +144,50 @@ theorem zigzagTotalMap_preserves
       (ComplexShape.down ℕ)} (Φ : A ⟶ B) (n : ℕ) :
     (zigzagCycles A n).map (zigzagTotalMap Φ n) ≤ zigzagCycles B n ∧
       (zigzagBoundaries A n).map (zigzagTotalMap Φ n) ≤ zigzagBoundaries B n := by
-  sorry
+  classical
+  have component_map (m : ℕ) (i : ZigzagIndex m) (a : zigzagTotal A m) :
+      DirectSum.component R (ZigzagIndex m) (fun j ↦ (B.X j.1.1).X j.1.2) i
+        (zigzagTotalMap Φ m a) =
+      (Φ.f i.1.1).f i.1.2
+        (DirectSum.component R (ZigzagIndex m) (fun j ↦ (A.X j.1.1).X j.1.2) i a) := by
+    suffices h :
+        (DirectSum.component R (ZigzagIndex m) (fun j ↦ (B.X j.1.1).X j.1.2) i).comp
+          (zigzagTotalMap Φ m) =
+        ((Φ.f i.1.1).f i.1.2).hom.comp
+          (DirectSum.component R (ZigzagIndex m) (fun j ↦ (A.X j.1.1).X j.1.2) i) by
+      exact LinearMap.congr_fun h a
+    apply DirectSum.linearMap_ext
+    intro j
+    ext x
+    by_cases hj : j = i
+    · subst j
+      simp [LinearMap.comp_apply, zigzagTotalMap]
+    · simp [LinearMap.comp_apply, zigzagTotalMap, DirectSum.component.of, hj]
+  have horizontal (p r q : ℕ) (x : (A.X p).X q) :
+      (B.d p r).f q ((Φ.f p).f q x) = (Φ.f r).f q ((A.d p r).f q x) := by
+    exact ConcreteCategory.congr_hom (HomologicalComplex.congr_hom (Φ.comm p r) q) x
+  have vertical (p q s : ℕ) (x : (A.X p).X q) :
+      (B.X p).d q s ((Φ.f p).f q x) = (Φ.f p).f s ((A.X p).d q s x) := by
+    exact ConcreteCategory.congr_hom ((Φ.f p).comm q s) x
+  constructor
+  · rintro _ ⟨a, ha, rfl⟩
+    intro p q h
+    change zigzagRelation B n p q h (zigzagTotalMap Φ n a) = 0
+    dsimp only [zigzagRelation, LinearMap.sub_apply, LinearMap.comp_apply]
+    rw [component_map, component_map, horizontal, vertical, ← map_sub]
+    exact congrArg ((Φ.f p).f q) (ha p q h) |>.trans (map_zero _)
+  · have boundary_map : (zigzagTotalMap Φ n).comp (zigzagBoundary A n) =
+        (zigzagBoundary B n).comp (zigzagTotalMap Φ (n + 1)) := by
+      apply DirectSum.linearMap_ext
+      intro i
+      ext x
+      simp only [LinearMap.comp_apply, zigzagBoundary, DirectSum.toModule_lof,
+        zigzagTotalMap]
+      dsimp only [zigzagBoundaryComponent]
+      split_ifs <;>
+        simp [map_add, LinearMap.comp_apply, horizontal, vertical]
+    rintro _ ⟨a, ⟨b, rfl⟩, rfl⟩
+    exact ⟨zigzagTotalMap Φ (n + 1) b, (LinearMap.congr_fun boundary_map b).symm⟩
 
 open Classical in
 /-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The map
