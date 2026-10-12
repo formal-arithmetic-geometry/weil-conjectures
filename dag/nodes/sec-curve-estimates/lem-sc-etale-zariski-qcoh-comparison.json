@@ -31,99 +31,46 @@
  ],
  "proof": [
   {
-   "text": "For $u:U\\to X$ put $\\mathcal F_{\\mathrm{et}}(u)=\\Gamma(U,u^*\\mathcal F)$ and for an $X$-morphism $g:U'\\to U$ use the pullback restriction $\\rho_g$ of [def-sc-etale-qcoherent-module]. The presheaf functoriality statement [lem-sc-etale-qcoherent-presheaf-functorial] proves that these restrictions are additive and compose, while [lem-sc-etale-qcoherent-descent] proves the presheaf is a sheaf. Applying the same pullback functor to an $\\mathcal O_X$-linear $\\varphi$ gives the maps $\\Gamma(U,u^*\\varphi)$; their compatibility with the restrictions is the naturality asserted in the presheaf-functoriality statement, so they define a morphism $\\varphi_{\\mathrm{et}}$ of [def-weil-pbc-abelian-etale-sheaves].",
+   "text": "Construct m with component evaluation of tensorPullback.map phi. Prove section-unit naturality from the pullback adjunction unit and the module-map presheaf naturality. Combine this with naturality of tensorSectionsComp and of equality transport to prove compatibility with every etale restriction. Hence these components form an actual abelian sheaf morphism.",
    "uses": [
-    "def-sc-etale-qcoherent-module",
     "lem-sc-etale-qcoherent-presheaf-functorial",
-    "lem-sc-etale-qcoherent-descent",
-    "def-weil-pbc-abelian-etale-sheaves"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Section 35.8, Tags 03DR and 03DT, equation (35.8.1): the associated etale sheaf and its functoriality"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $\\epsilon:X_{\\mathrm{Et}}\\to X_{\\rm Zar}$ be the morphism of sites induced by the inclusion of open subschemes, as in [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites], so $(\\epsilon_*\\mathcal F_{\\mathrm{et}})(U)=\\mathcal F_{\\mathrm{et}}(j_U)=\\Gamma(U,j_U^*\\mathcal F)$ for an open $U\\subseteq X$ with inclusion $j_U:U\\to X$. Its pullback on cohomology [lem-weil-pbc-site-cohomology-pullback] over the final object $X$, followed by $H^q$ of the counit $\\epsilon^{-1}\\epsilon_*\\mathcal F_{\\mathrm{et}}\\to\\mathcal F_{\\mathrm{et}}$, is the map $e^q:H^q(X_{\\rm Zar},\\epsilon_*\\mathcal F_{\\mathrm{et}})\\to H^q(X_{\\mathrm{Et}},\\mathcal F_{\\mathrm{et}})$; in degree zero it is the identity of $\\Gamma(X,\\mathcal F_{\\mathrm{et}})$ by the triangle identity. Next, the identification $\\epsilon_*\\mathcal F_{\\mathrm{et}}\\cong\\mathcal F_{ab}$, with $\\mathcal F_{ab}$ the underlying abelian sheaf of $\\mathcal F$ on $X_{\\rm Zar}$: for an open $U$ let $\\theta_U:\\mathcal F(U)=(\\mathcal F|_U)(U)\\to\\Gamma(U,j_U^*\\mathcal F)$ be the map on sections over $U$ of the isomorphism $\\kappa_{\\mathcal F}:\\mathcal F|_U\\xrightarrow{\\sim}j_U^*\\mathcal F$ of [lem-weil-pbc-open-immersion-module-pullback-restriction]; it is an isomorphism of groups, and by the unit clause of that statement (with the open $U$ of $X$) $\\theta_U(t)=\\eta^{j_U}(t)=j_U^*t$. For opens $W\\subseteq U$ with inclusion $g:W\\to U$, so $j_W=j_U\\circ g$, the restriction of $\\mathcal F_{\\mathrm{et}}$ along $g$ is $\\rho_g(s)=c_{g,j_U}(g^*s)$ [def-sc-etale-qcoherent-module], and the normalization of $c_{g,j_U}$ by the units in [lem-sc-etale-qcoherent-presheaf-functorial] gives $\\rho_g(\\theta_U(t))=c_{g,j_U}(g^*j_U^*t)=j_W^*t=\\eta^{j_W}(t)=\\theta_W(t|_W)$, the last equality again by the unit clause of [lem-weil-pbc-open-immersion-module-pullback-restriction] (for $j_W$ and the open $U$, $j_W^{-1}U=W$). Hence $\\theta:\\mathcal F_{ab}\\xrightarrow{\\sim}\\epsilon_*\\mathcal F_{\\mathrm{et}}$ is an isomorphism of abelian sheaves on $X_{\\rm Zar}$. For an $\\mathcal O_X$-linear $\\varphi:\\mathcal F\\to\\mathcal G$ the naturality of $\\kappa$ in the module gives $\\Gamma(U,j_U^*\\varphi)\\circ\\theta_U=\\theta_U\\circ\\varphi_U$, i.e. $\\epsilon_*(\\varphi_{\\mathrm{et}})\\circ\\theta=\\theta\\circ\\varphi_{ab}$. Finally [lem-sc-zariski-module-abelian-cohomology-agree] gives $\\alpha^q:H^q(X,\\mathcal F)\\xrightarrow{\\sim}H^q(X_{\\rm Zar},\\mathcal F_{ab})$. Define $c^q_{\\mathcal F}=e^q\\circ H^q(X_{\\rm Zar},\\theta)\\circ\\alpha^q:H^q(X,\\mathcal F)\\to H^q(X_{\\mathrm{Et}},\\mathcal F_{\\mathrm{et}})$.",
-   "uses": [
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-sc-zariski-cohomology",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-sc-etale-qcoherent-module",
-    "lem-sc-etale-qcoherent-presheaf-functorial",
-    "lem-sc-zariski-module-abelian-cohomology-agree"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Proposition 03DW, part (2), and etale-cohomology.tex Lemma 09AX: the comparison map induced by the inclusion of the Zariski site"
-   }
-  },
-  {
-   "text": "For every affine open $U\\subseteq X$, [lem-weil-pbc-etale-cohomology-over-open] identifies the value of the higher-direct-image presheaf with $H^q(U_{\\mathrm{Et}},(\\mathcal F|_U)_{\\mathrm{et}})$, which is zero for $q>0$ by [lem-sc-etale-affine-qcoherent]. Hence the presheaf $P^q(U)=H^q(U_{\\mathrm{Et}},(\\mathcal F|_U)_{\\mathrm{et}})$ is zero on the affine basis. Every open has an affine covering, so the sheafification $ (P^q)^\\# $ is zero; the sheafification description [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf] therefore gives $R^q\\epsilon_*\\mathcal F_{\\mathrm{et}}=0$ for $q>0$.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-over-open",
-    "lem-sc-etale-affine-qcoherent",
-    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-    "def-weil-pbc-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 03P2 (theorem-zariski-fpqc-quasi-coherent), affine case and the preceding Lemma Tag 03P1"
-   }
-  },
-  {
-   "text": "Apply the Leray degeneration statement [lem-weil-pbc-site-leray-degenerate] to $\\epsilon$ and the vanishing of its higher direct images from Step 3. The edge map in that lemma is therefore an isomorphism for every $q$, so the map $e^q$ of Step 2 (the edge map $e^q_{X,\\mathcal F_{\\mathrm{et}}}$ for the final object $X$) is an isomorphism, and hence so is $c^q_{\\mathcal F}=e^q\\circ H^q(\\theta)\\circ\\alpha^q$. This proves the asserted comparison for every scheme, including non-separated schemes.",
-   "uses": [
-    "lem-weil-pbc-site-leray-degenerate",
-    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Proposition Tag 03DW, proof after the separated case: injective resolutions and the comparison of the two Cech spectral sequences"
-   }
-  },
-  {
-   "text": "For $\\varphi:\\mathcal F\\to\\mathcal G$, the naturality square for $c^q$ is the composite of four commuting squares: (i) the naturality square of the module/underlying-abelian comparison [lem-sc-zariski-module-abelian-cohomology-agree]; (ii) $H^q(X_{\\rm Zar},-)$ applied to the square $\\epsilon_*(\\varphi_{\\mathrm{et}})\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal G}\\circ\\varphi_{ab}$ of Step 2; (iii) the naturality square for the site-cohomology pullback [lem-weil-pbc-site-cohomology-pullback]; and (iv) the square for the counit $\\epsilon^{-1}\\epsilon_*\\to\\mathrm{id}$, which is natural by the adjunction. Thus $c^q_{\\mathcal G}\\circ H^q(X,\\varphi)=H^q(X_{\\mathrm{Et}},\\varphi_{\\mathrm{et}})\\circ c^q_{\\mathcal F}$. In degree zero, $e^0$ is the identity by the triangle identity (Step 2) and $\\alpha^0$ is the identity by the degree-zero clause of [lem-sc-zariski-module-abelian-cohomology-agree], so $c^0_{\\mathcal F}=\\theta_X$, which is the identity of $\\Gamma(X,\\mathcal F)$ under the identification $\\Gamma(X,\\mathcal F)=\\Gamma(X,\\mathrm{id}_X^*\\mathcal F)=\\mathcal F_{\\mathrm{et}}(X)$ given by $\\kappa$ for $j_X=\\mathrm{id}_X$.",
+   "text": "For q=n+1, compose the additive equivalence given by the component of zariskiModuleAbelianCohomologyAgree with etaleZariskiAbelianPositiveComparison applied to the constructed m. Evaluation of the first natural isomorphism's naturality equation, followed by the new theorem's naturality equation, proves naturality of this composite.",
    "uses": [
     "lem-sc-zariski-module-abelian-cohomology-agree",
-    "lem-weil-pbc-site-cohomology-pullback"
+    "lem-sc-etale-zariski-abelian-positive-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Proposition Tag 03DW, statement and proof: canonical comparison isomorphisms are natural in the quasi-coherent module"
-   }
+   "elementary": true
+  },
+  {
+   "text": "In degree zero use the right-derived-zero isomorphism of the left-exact module global-sections functor. The structure morphism a of the chosen terminal etale object is an isomorphism, by comparing this terminal object with id_X. Pushforward along a is an equivalence, so the unit of tensorPullback a adjoint to pushforward a is an isomorphism. Evaluation and the preimage-top restriction give an additive equivalence tensorSectionsUnit a F on global sections. Compose the right-derived-zero equivalence, this unit, and the inverse of Sheaf.H.equiv_0. Naturalities of these three maps prove degree-zero naturality. The cancellation of toRightDerivedZero with rightDerivedZeroIsoSelf and the cancellation of equiv_0 with its inverse give exactly the prescribed unit value on every section. Finally combine zero and positive degrees by Nat.casesOn, simultaneously for every quasi-coherent module.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-etale-qcoherent-module",
   "lem-sc-etale-qcoherent-presheaf-functorial",
-  "lem-sc-etale-qcoherent-descent",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-sc-zariski-cohomology",
-  "def-weil-pbc-etale-cohomology",
+  "lem-pc-module-pullback-adjunction",
   "lem-sc-zariski-module-abelian-cohomology-agree",
-  "lem-sc-etale-affine-qcoherent",
-  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-site-leray-degenerate",
-  "lem-weil-pbc-etale-cohomology-over-open",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-sc-etale-zariski-abelian-positive-comparison",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-etale-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "N2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Proposition Tag 03DW, part (2), with the affine calculation from etale-cohomology.tex Theorem Tag 03P2"
+  "place": "Proposition Tag 03DW (descent-proposition-same-cohomology-quasi-coherent), part (2); etale-cohomology.tex, Theorem Tag 03P2 (etale-cohomology-theorem-zariski-fpqc-quasi-coherent); sites-cohomology.tex, Tags 03F3, 072W and 0733(1)",
+  "note": "Actual Lean reduction: construct sheaf maps and all degree-zero data directly; compose the existing module/abelian comparison with a positive-degree abelian comparison. The latter is the one remaining new theorem."
  },
  "mathlib_searches": [
   {
@@ -269,5 +216,15 @@
   "group": "U1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6934d",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T150954-L-2231233",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery 6934d1f5da53 matches its packet and node; modules and all four direct importers compile cleanly."
  }
 }
