@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftData
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftCompatibility
 
 /-! # Compatible algebraization before the torsion estimate
 
@@ -81,6 +83,10 @@ theorem grothendieckDevissage_secondAdicSystem_lift
         (σ.hom.app (op e)).app (op n) ≫
           formalModuleQuotientMap K (α.hom.app (op n)) (Nat.le_refl (e + 1)) =
         formalModuleQuotientMap I (δ.hom.app (op e)) (Nat.le_refl (n + 1)) ≫
-          (θ.hom.app (op e)).app (op n) := by sorry
+          (θ.hom.app (op e)).app (op n) := by
+  obtain ⟨N, δ, σ, _⟩ :=
+    grothendieckDevissage_secondAdicSystem_lift_data I K M hthick H α θ hθ
+  refine ⟨N, δ, σ, ?_⟩
+  exact grothendieckDevissage_secondAdicSystem_lift_compatibility I K M H α θ δ σ
 
 end AlgebraicGeometry

@@ -1,0 +1,99 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A"
+ },
+ "status": "split",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 088A"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic system algebraization",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CoherentFormalModule completion equivalence",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckDevissage_secondAdicSystem_lift",
+   "results": "local declaration only",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-devissage-second-adic-system-lift"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLift",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "id": "lem-weil-pbc-devissage-second-adic-system-lift-data",
+ "title": "Algebraized system data",
+ "statement": "Under the hypotheses of the lift theorem, there exist N, δ and σ as in its conclusion.",
+ "stmt_deps": [
+  "lem-weil-pbc-devissage-second-adic-system-lift"
+ ],
+ "proof": [
+  {
+   "text": "The categorical construction and faithfulness argument of Tag 088A establishes the stated intermediate conclusion.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-coherent-equivalence"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLiftData",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckDevissageSecondAdicSystemLiftData.lean",
+  "declaration": "AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_lift_data",
+  "statement": "theorem grothendieckDevissage_secondAdicSystem_lift_data\n    {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)\n    (M : CoherentFormalModule X I)\n    (hthick : ∀ (e : ℕ), 1 ≤ e →\n      ∀ (hZ : IsNoetherian (K ^ e).subscheme),\n        Functor.IsEquivalence\n          (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι)))\n    (H : CoherentModules X) (α : M ⟶ (completion X I).obj H)\n    (θ : formalCompletionSystem K H.obj ⋙ formalCompletionFunctor I ≅\n      (formalCompletionSystem I H.obj ⋙ formalCompletionFunctor K).flip)\n    (hθ : ∀ e n : ℕ,\n        formalModuleQuotientπ K (e + 1) H.obj ≫\n          formalModuleQuotientπ I (n + 1) (formalModuleQuotient K (e + 1) H.obj) ≫\n          (θ.hom.app (op e)).app (op n) =\n        formalModuleQuotientπ I (n + 1) H.obj ≫\n          formalModuleQuotientπ K (e + 1) (formalModuleQuotient I (n + 1) H.obj)) :\n    ∃ (N : CoherentFormalModule X K) (δ : N ⟶ (completion X K).obj H)\n      (σ : N.obj ⋙ formalCompletionFunctor I ≅\n        (M.obj ⋙ formalCompletionFunctor K).flip), True",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T232141-L-1993172",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T232141-L-1993172",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
