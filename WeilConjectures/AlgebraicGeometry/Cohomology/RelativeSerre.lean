@@ -16,7 +16,8 @@ Let `Y` be a locally noetherian scheme, `e : Y' ⟶ ℙ(n; Y)` a closed immersio
 `π = e ≫ (ℙ(n; Y) ↘ Y)`. For a coherent `𝒪_{Y'}`-module `𝒢`:
 
 - the direct image `π_* 𝒢` is coherent
-  (`AlgebraicGeometry.Scheme.Modules.isFinitePresentation_pushforward_of_isClosedImmersion_projectiveSpace`);
+  (`isFinitePresentation_higherDirectImage_zero_of_projectiveSpace` in the namespace
+  `AlgebraicGeometry.Scheme.Modules`);
 - if `Y` is quasi-compact, `R^q π_* (𝒢(m)) = 0` for all `q > 0` and `m ≫ 0`, where
   `𝒢(m) = 𝒢 ⊗ e^* 𝒪(m)`
   (`AlgebraicGeometry.Scheme.Modules.exists_isZero_higherDirectImage_tensorObj_twistRestrict`).
@@ -68,15 +69,15 @@ lemma isZero_higherDirectImage_of_subsingleton_H {R : CommRingCat.{u}} {P : Sche
   exact isZero_of_subsingleton_sections_top _ he.1.subsingleton
 
 /-- **Finiteness along a bijective semilinear map.** Let `σ : R →+* S`, `e : M →ₛₗ[σ] N`
-bijective and `τ : A →+* R` surjective. If `N` is finite over `A`, acting through `σ ∘ τ`, then
-`M` is finite over `R`. -/
+bijective and `τ : A →+* R` a ring homomorphism. If `N` is finite over `A`, acting through
+`σ ∘ τ`, then `M` is finite over `R`. -/
 lemma Module.Finite.of_bijective_semilinearMap {R S A M N : Type*} [CommRing R] [CommRing S]
     [CommRing A] {σ : R →+* S} [AddCommGroup M] [Module R M] [AddCommGroup N] [Module S N]
-    (e : M →ₛₗ[σ] N) (he : Function.Bijective e) (τ : A →+* R) (hτ : Function.Surjective τ)
+    (e : M →ₛₗ[σ] N) (he : Function.Bijective e) (τ : A →+* R)
     (h : letI := Module.compHom N (σ.comp τ); Module.Finite A N) : Module.Finite R M := by
-  letI := Module.compHom N (σ.comp τ)
-  letI : Algebra A R := τ.toAlgebra
-  letI : Module A M := Module.compHom M τ
+  let := Module.compHom N (σ.comp τ)
+  let : Algebra A R := τ.toAlgebra
+  let : Module A M := Module.compHom M τ
   have : IsScalarTower A R M := ⟨fun a r m ↦ by
     change (τ a * r) • m = τ a • r • m
     rw [mul_smul]⟩
@@ -106,6 +107,7 @@ abbrev chartLift {R : CommRingCat.{u}} (g : Spec R ⟶ Y) :
   ProjectiveSpace.liftBaseChange (g := g) (pullback.snd π g) (pullback.fst π g ≫ e)
     (by rw [Category.assoc, he, pullback.condition])
 
+omit [Finite n] in
 include he in
 lemma isClosedImmersion_chartLift {R : CommRingCat.{u}} (g : Spec R ⟶ Y) :
     IsClosedImmersion (chartLift he g) := by
@@ -115,6 +117,7 @@ lemma isClosedImmersion_chartLift {R : CommRingCat.{u}} (g : Spec R ⟶ Y) :
   exact MorphismProperty.of_isPullback (ProjectiveSpace.isPullback_liftBaseChange _ h _)
     inferInstance
 
+omit [Finite n] [IsClosedImmersion e] in
 include he in
 lemma chartLift_over {R : CommRingCat.{u}} (g : Spec R ⟶ Y) :
     chartLift he g ≫ ℙ(n; Spec R) ↘ Spec R = pullback.snd π g :=
@@ -221,8 +224,7 @@ theorem isFinitePresentation_higherDirectImage_zero_of_projectiveSpace (G : Y'.M
     rw [chartLift_over he g] at hfin
     have : Module.Finite Γ(Spec Γ(Y, V), ⊤) Γ((higherDirectImage (pullback.snd π g) 0).obj
         ((Modules.pullback (pullback.fst π g)).obj G), ⊤) :=
-      Module.Finite.of_bijective_semilinearMap σ hσ (Scheme.ΓSpecIso Γ(Y, V)).inv.hom
-        (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso Γ(Y, V)).inv).2 hfin
+      Module.Finite.of_bijective_semilinearMap σ hσ (Scheme.ΓSpecIso Γ(Y, V)).inv.hom hfin
     let φ : Γ((higherDirectImage (pullback.snd π g) 0).obj
         ((Modules.pullback (pullback.fst π g)).obj G), ⊤) →ₗ[Γ(Spec Γ(Y, V), ⊤)]
         Γ(((higherDirectImage π 0).obj G).restrict g, ⊤) :=

@@ -62,6 +62,7 @@ lemma freeHomOfSections_app (M : Y.Modules) {I : Type u} [Fintype I] [DecidableE
   rfl
 
 /-- The `i`-th column of a matrix, as a composite of the inclusion of the `i`-th summand. -/
+@[reassoc]
 lemma ιFree_freeHomOfMatrix {I J : Type u} [Fintype I] [DecidableEq I] [Fintype J]
     (A : Matrix J I Γ(Y, ⊤)) (i : I) :
     ιFree i ≫ freeHomOfMatrix A = ∑ j, (Modules.unit Y).smulHom (A j i) ≫ ιFree j := by
@@ -148,8 +149,7 @@ noncomputable def freeComplexHom (K : CochainComplex Y.Modules ℕ)
     refine Finset.sum_congr rfl fun j _ ↦ ?_
     rw [Category.assoc, ιFree_freeHomOfSections, Hom.comp_app, ConcreteCategory.comp_apply,
       smulHom_app_apply, homOfGlobalSection_app, presheaf_map_id_apply]
-    congr 1
-    exact (mul_one _).symm
+    rw [smul_eq_mul, mul_one, Scheme.presheaf_map_id_apply]
 
 lemma freeComplexHom_f (K : CochainComplex Y.Modules ℕ) (c : ∀ k : ℕ, ι k → Γ(K.X k, ⊤))
     (hc : ∀ (k : ℕ) (i : ι k), (K.d k (k + 1)).app ⊤ (c k i) =

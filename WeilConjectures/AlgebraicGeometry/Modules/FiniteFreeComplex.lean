@@ -78,8 +78,8 @@ outside the bounds. -/
 lemma IsFiniteFreeComplex.exists_iso_free_of_rank_eq_zero {P : CochainComplex X.Modules ℤ}
     {d : ℕ} (hP : IsFiniteFreeComplex P d) :
     ∃ r : ℤ → ℕ, (∀ n : ℤ, n < 0 ∨ d < n → r n = 0) ∧
-      Nonempty (∀ n, P.X n ≅ SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin (r n)))) :=
-    by
+      Nonempty (∀ n, P.X n ≅
+        SheafOfModules.free (R := X.ringCatSheaf) (ULift.{u} (Fin (r n)))) := by
   classical
   choose r₀ e₀ using hP.exists_iso_free
   have := hP.isStrictlyGE

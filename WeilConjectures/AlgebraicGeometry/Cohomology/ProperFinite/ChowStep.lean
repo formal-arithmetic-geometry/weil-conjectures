@@ -71,15 +71,18 @@ lemma bijective_pullbackSection_of_isIso_morphismRestrict {X Y : Scheme.{u}} (π
     (hV : IsAffineOpen V) (hVU : V ≤ U) :
     Function.Bijective (pullbackSection π : Γ(G, V) → Γ((pullback π).obj G, π ⁻¹ᵁ V)) := by
   obtain ⟨V', rfl⟩ : ∃ V' : U.toScheme.Opens, U.ι ''ᵁ V' = V :=
-    ⟨U.ι ⁻¹ᵁ V, by rw [Hom.image_preimage_eq_opensRange_inf, Opens.opensRange_ι, inf_eq_right.2 hVU]⟩
+    ⟨U.ι ⁻¹ᵁ V, by
+      rw [Hom.image_preimage_eq_opensRange_inf, Opens.opensRange_ι, inf_eq_right.2 hVU]⟩
   have hV' : IsAffineOpen V' := (U.ι.isAffineOpen_iff_of_isOpenImmersion).1 hV
   have hpre : (π ⁻¹ᵁ U).ι ''ᵁ ((π ∣_ U) ⁻¹ᵁ V') = π ⁻¹ᵁ (U.ι ''ᵁ V') :=
     image_morphismRestrict_preimage π U V'
   have hA : IsAffineOpen (π ⁻¹ᵁ (U.ι ''ᵁ V')) :=
     hpre ▸ (hV'.preimage (π ∣_ U)).image_of_isOpenImmersion _
   have hbij : Function.Bijective (π.appLE (U.ι ''ᵁ V') (π ⁻¹ᵁ (U.ι ''ᵁ V')) le_rfl) := by
-    have h₁ : Function.Bijective ((π ∣_ U).app V') := ConcreteCategory.bijective_of_isIso _
-    rw [morphismRestrict_app'] at h₁
+    have h₁ : Function.Bijective (π.appLE (U.ι ''ᵁ V') ((π ⁻¹ᵁ U).ι ''ᵁ ((π ∣_ U) ⁻¹ᵁ V'))
+        (image_morphismRestrict_preimage π U V').le) := by
+      have := ConcreteCategory.bijective_of_isIso ((π ∣_ U).app V')
+      rwa [morphismRestrict_app'] at this
     have h₂ : Function.Bijective (X.presheaf.map (homOfLE hpre.ge).op) := by
       have : ∀ {A B : X.Opens} (h : B ≤ A), A = B → IsIso (X.presheaf.map (homOfLE h).op) := by
         rintro A B h rfl
@@ -88,14 +91,13 @@ lemma bijective_pullbackSection_of_isIso_morphismRestrict {X Y : Scheme.{u}} (π
       have := this hpre.ge hpre
       exact ConcreteCategory.bijective_of_isIso _
     rw [← π.appLE_map (image_morphismRestrict_preimage π U V').le (homOfLE hpre.ge).op]
-    convert h₂.comp h₁ using 1
-    funext z
-    exact ConcreteCategory.comp_apply _ _ z
+    rw [CategoryTheory.hom_comp]
+    exact h₂.comp h₁
   obtain ⟨e, he⟩ := exists_linearEquiv_pullback_sections π G hV hA le_rfl
   let := (π.appLE (U.ι ''ᵁ V') (π ⁻¹ᵁ (U.ι ''ᵁ V')) le_rfl).hom.toAlgebra
   have hb := TensorProduct.bijective_one_tmul_of_surjective (M := Γ(G, U.ι ''ᵁ V'))
     (S := Γ(X, π ⁻¹ᵁ (U.ι ''ᵁ V'))) hbij.2 fun a ha m ↦ by
-      rw [show a = 0 from hbij.1 (by simpa using ha), zero_smul]
+      rw [show a = 0 from hbij.1 ((RingHom.mem_ker.1 ha).trans (map_zero _).symm), zero_smul]
   have hid : (homOfLE (le_rfl : π ⁻¹ᵁ (U.ι ''ᵁ V') ≤ π ⁻¹ᵁ (U.ι ''ᵁ V'))).op = 𝟙 _ :=
     Subsingleton.elim _ _
   have key : (pullbackSection π : Γ(G, U.ι ''ᵁ V') → _) =
@@ -201,9 +203,11 @@ theorem exists_hasFiniteH_hom_isIso_restrict {Y : Scheme.{u}} (p : Y ⟶ Spec (.
   have := (pullbackPushforwardAdjunction π).rightAdjoint_preservesLimits.{0, 0}
   let E := (Functor.rightDerivedZeroIsoSelf (pushforward π)).app (F ⊗ L)
   have hqc : ((pushforward π).obj (F ⊗ L)).IsQuasicoherent :=
-    (SheafOfModules.isQuasicoherent _).prop_of_iso E
+    (SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso E
       (isQuasicoherent_higherDirectImage π (F ⊗ L) 0)
-  have := isFinitePresentation_higherDirectImage_zero_of_projectiveSpace he (F ⊗ L)
+  have : SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf)
+      (((pushforward π).rightDerived 0).obj (F ⊗ L)) :=
+    isFinitePresentation_higherDirectImage_zero_of_projectiveSpace he (F ⊗ L)
   have hfp : SheafOfModules.IsFinitePresentation (R := Y.ringCatSheaf)
       ((pushforward π).obj (F ⊗ L)) := isFinitePresentation_of_iso E
   refine ⟨_, hqc, hfp, φ, W, ⟨_, hxW⟩, ?_, ?_⟩

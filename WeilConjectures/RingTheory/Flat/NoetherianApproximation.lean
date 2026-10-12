@@ -540,8 +540,8 @@ theorem flat_of_forall_flat_localizedModule {R S N : Type*} [CommRing R] [CommRi
     (Flat.iff_lTensor_injective'.1 (h m) J) y hy
   exact ht (hle (LinearMap.mem_ker.2 hty))
 
-/-- **Openness of the flat locus of a base change** (Stacks, Tag 00RC). -/
 omit [Module R₀ M₀] [IsScalarTower R₀ S₀ M₀] in
+/-- **Openness of the flat locus of a base change** (Stacks, Tag 00RC). -/
 theorem isOpen_setOf_flat_localizedModule_baseChange [Algebra.FiniteType R₀ S₀]
     [Module.Finite S₀ M₀] (R : Type u) [CommRing R] [Algebra R₀ R] [IsNoetherianRing R] :
     IsOpen {Q : PrimeSpectrum (R ⊗[R₀] S₀) |

@@ -84,9 +84,10 @@ theorem exists_isFiniteFreeComplex_higherDirectImage (hℱ : ℱ.IsFlatOver f) (
 `𝒪_X`-module, the global sections `Γ(T, R^q f_* ℱ) = H^q(X, ℱ)` of the higher direct image form a
 finite `Γ(T, ⊤)`-module for every `q` [Stacks, Tag 02O6], [EGA III₁, 3.2.1].
 
-This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`; for a general proper `f`
-the blueprint discharges it by the cited classical input (Chow's lemma and the projective case,
-Stacks 02O5/02O6). It is the only input to
+This is the affine clause of the blueprint lemma `lem-pc-coherent-hi`. Since `T` is affine,
+`Γ(T, R^q f_* ℱ) ≅ H^q(X, ℱ)`, and the finiteness of `H^q(X, ℱ)` is
+`AlgebraicGeometry.Scheme.Modules.hasFiniteH_of_isProper` (Chow's lemma, the projective case
+and noetherian induction, Stacks 02O6). It is the only input to
 `AlgebraicGeometry.Scheme.Modules.isFinitePresentation_higherDirectImage` beyond the formal
 properties of the higher direct images.
 
@@ -98,8 +99,7 @@ theorem finite_sections_higherDirectImage [IsAffine T] [IsNoetherianRing Γ(T, �
   have h := hasFiniteH_of_isProper p ℱ q
   obtain ⟨e, he⟩ := exists_bijective_semilinearMap_sections_higherDirectImage_H f ℱ q
   exact Module.Finite.of_bijective_semilinearMap e he
-    ((Scheme.ΓSpecIso (.of Γ(T, ⊤))).inv ≫ T.isoSpec.hom.appTop).hom
-    (ConcreteCategory.bijective_of_isIso _).2 h
+    ((Scheme.ΓSpecIso (.of Γ(T, ⊤))).inv ≫ T.isoSpec.hom.appTop).hom h
 
 /-- **Coherence of the higher direct images over a locally Noetherian base.** With
 `f : X ⟶ T` proper, `T` locally Noetherian and `ℱ` a coherent `𝒪_X`-module, the higher direct

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatOver
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 public import WeilConjectures.RingTheory.Flat.NoetherianApproximation
 
