@@ -2,11 +2,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
-import WeilConjectures.AlgebraicGeometry.Curve.Reductions
-import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+import Sheaf.AlgebraicGeometry.Curve.FiniteEtaleCoverReducedCompactification
+import Sheaf.AlgebraicGeometry.Curve.OpenLowerShriekConstantFiltrationSteps
+import Sheaf.AlgebraicGeometry.Curve.PrimeModuleFiniteOpenAssertionsTransfer
 
 @[expose] public section
 universe u
@@ -55,6 +53,27 @@ theorem filteredFiniteCoverLowerShriekTransfer_core {k : Type u} [Field k] [IsAl
       ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj
         ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj
           ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj G))) :=
-  by sorry
+  by
+  classical
+  obtain ⟨Y, p, a, hp, hg, hY, ha, sq⟩ :=
+    exists_reduced_cartesian_finite_cover_compactification f j v
+  let : IsFinite p := hp
+  let : IsCurve (p ≫ f) := hg
+  let : IsReduced Y := hY
+  let : IsOpenImmersion a := ha
+  obtain ⟨hbase, hstep⟩ := open_lowerShriek_constant_filtration_steps
+    (p ≫ f) a r n W ι hzero hquot (hconstant (p ≫ f) a)
+  have hW : ∀ i ≤ n, Assertions (ULift.{u + 1} (ZMod r)) (p ≫ f)
+      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) a).obj
+        (W i)) := by
+    intro i
+    induction i with
+    | zero => intro _; exact hbase
+    | succ i ih =>
+      intro hi
+      exact hstep i (Nat.lt_of_succ_le hi) (ih (Nat.le_of_succ_le hi))
+  obtain ⟨e⟩ := hend
+  exact prime_module_finite_open_assertions_transfer f p j a v sq r (W n) _ e
+    (hW n le_rfl)
 
 end AlgebraicGeometry.IsCurve

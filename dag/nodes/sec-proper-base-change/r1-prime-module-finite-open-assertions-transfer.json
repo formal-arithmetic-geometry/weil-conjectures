@@ -1,0 +1,147 @@
+{
+ "id": "r1-prime-module-finite-open-assertions-transfer",
+ "kind": "statement",
+ "title": "Finite-open transfer with prime module coefficients",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure], $f:X\\to\\operatorname{Spec}k$ and $f\\circ p:Y\\to\\operatorname{Spec}k$ separated finite-type curves of dimension at most one [def-weil-pbc-curve-setting], with $p:Y\\to X$ finite [def-weil-finite-integral-morphism]. Let $j:U\\to X$ and $a:V\\to Y$ be open immersions [def-weil-open-immersion], and $v:V\\to U$ make $(a,v,p,j)$ cartesian [def-weil-pbc-cartesian-square]. Let $r$ be prime, $R=\\operatorname{ULift}(\\mathbf Z/r\\mathbf Z)$, $F,H$ sheaves of $R$-modules on $V_{\\mathrm{et}}$, and $e:F\\simeq H$. If all eight assertions [def-weil-pbc-eight-curve-assertions] hold for $a_!F$ [def-weil-pbc-extension-by-zero] on $Y$, they hold for $j_!v_*H$ [def-weil-pbc-direct-image] on $X$. This is independent of any filtration or constant-case hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0A5D (lemma-finite-pushforward-statements); 0GJ1 (lemma-compatible-shriek-push-finite)"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-curve-setting",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Apply a_! to e and transfer assertions along the resulting sheaf isomorphism. All sheaves are r-torsion. Apply the finite-pushforward curve assertions to the underlying abelian sheaf, comparing its integral coefficient realization with the prime module realization. Cohomology and primary/invertible torsion depend only on the underlying abelian sheaf. For C4/C5 use constructibility descent from finite pushforward when the conditional hypotheses hold; equivalence of the integral and prime module notions over a finite coefficient ring supplies the coefficient bridge.",
+   "uses": [
+    "lem-weil-pbc-curve-assertions-finite-pushforward"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-open exchange gives j_! v_* H isomorphic to p_* a_! H. Naturality transports the cohomology and comparison maps, hence all eight assertions, across this isomorphism.",
+   "uses": [
+    "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "def-weil-pbc-finite-open-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-curve-assertions-finite-pushforward",
+  "lemma-weil-pbc-finite-pushforward-extension-zero",
+  "def-weil-pbc-finite-open-comparison"
+ ],
+ "proof_origin": "Stacks proof, expanded into an interface by R1; see declaration docstring.",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "curve assertions stable under extension by zero finite filtration constant quotients",
+   "results": "8 hits: Ideal.Filtration.Stable.bounded_difference, Ideal.Filtration.Stable.exists_forall_le, MeasureTheory.Filtration.rightCont_eq_of_exists_gt, MeasureTheory.Filtration.rightCont_eq_self, MeasureTheory.Filtration.rightCont_self, MeasureTheory.Filtration.const_apply, MeasureTheory.Filtration.rightCont, Field.Emb.Cardinal.iSup_filtration",
+   "date": "2026-10-12",
+   "verdict": "No exact statement of these specialized interfaces; signatures of local candidates read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\", \"IsFinite\"",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No exact statement of these specialized interfaces; signatures of local candidates read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale cover reduced compactification cartesian open immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Assertions|finiteOpenComparison|exists_isOpenImmersion_isFinite",
+   "results": "23 hits: Mathlib/GroupTheory/SpecificGroups/Alternating.lean, Mathlib/Topology/TietzeExtension.lean, Mathlib/Analysis/Complex/RiemannMapping.lean, Mathlib/Algebra/Module/ZLattice/Basic.lean, Mathlib/Analysis/Calculus/FDeriv/Mul.lean, Mathlib/Analysis/Calculus/FDeriv/CompCLM.lean, Mathlib/Analysis/Calculus/FDeriv/Prod.lean, Mathlib/Analysis/Calculus/FDeriv/RestrictScalars.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact statement of these specialized interfaces; signatures of local candidates read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite morphism compactify cover of open subscheme reduced scheme cartesian square",
+   "results": "Second reading: 8 hits concerning finite subcovers and normalization open covers; none gives the reduced finite cartesian compactification or finite-open assertion transfer.",
+   "date": "2026-10-12",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCurve\", \"Assertions\"",
+   "results": "Second reading: 0 hits.",
+   "date": "2026-10-12",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*pushforward.*assert|compactif.*reduc|assert.*isomorph",
+   "results": "Second reading msearch: 0 hits. Local rg found finite_pushforward_assertions (integral coefficient realization), Assertions.of_shortExact, finiteOpenComparison, and private assertions_of_iso in ReducedConstantLowerShriekAssertions. Signatures inspected; no exact reusable theorem.",
+   "date": "2026-10-12",
+   "verdict": "Use existing devissage; retain two strictly smaller holes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-algebraically-closed-extension",
+   "place": "03SD reduction to constant coefficients via a finite cover, compactification and filtration",
+   "via": [
+    "k1-filtered-finite-cover-lower-shriek-transfer-core",
+    "k1-filtered-finite-cover-lower-shriek-transfer",
+    "e1-prime-coefficient-curve-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimeModuleFiniteOpenAssertionsTransfer",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimeModuleFiniteOpenAssertionsTransfer.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.prime_module_finite_open_assertions_transfer",
+  "statement": "theorem prime_module_finite_open_assertions_transfer\n    {k : Type u} [Field k] [IsAlgClosed k] {X U V Y : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsCurve f] (p : Y ⟶ X) [IsFinite p]\n    [IsCurve (p ≫ f)] (j : U ⟶ X) [IsOpenImmersion j]\n    (a : V ⟶ Y) [IsOpenImmersion a] (v : V ⟶ U) (sq : IsPullback a v p j)\n    (r : ℕ) [Fact r.Prime]\n    (F H : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))\n    (e : F ≅ H)\n    (hF : Assertions (ULift.{u + 1} (ZMod r)) (p ≫ f)\n      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) a).obj\n        F)) :\n    Assertions (ULift.{u + 1} (ZMod r)) f\n      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj\n        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj H))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T153650-L-2395509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T153650-L-2395509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

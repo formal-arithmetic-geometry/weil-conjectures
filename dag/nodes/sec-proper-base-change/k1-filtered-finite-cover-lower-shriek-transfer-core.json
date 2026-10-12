@@ -19,55 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Apply Zariski main theorem to j composed with v and replace the finite compactification by the reduced closure of V. Etale over reduced implies V reduced, so V remains a dense open in the reduced compactification Y. Finiteness gives the separated finite-type curve structure and the dimension bound by integral incomparability. The inclusion V -> p^{-1}(U) is finite by permanence over a separated scheme; hence its dense open image is closed and is all of p^{-1}(U). A surjective open immersion is an isomorphism, giving the cartesian square.",
+   "text": "Obtain the reduced finite compactification and cartesian square; install the supplied curve, reducedness, finite and open-immersion hypotheses.",
    "uses": [
-    "thm-pqf-zmt-factorization",
-    "etale-proposition-etale-reduced",
-    "def-nagata-scheme-theoretic-closure",
-    "def-weil-pbc-scheme-reduction",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-composition",
-    "lem-weil-pbc-finite-over-separated-finite-type",
-    "lem-weil-pbc-integral-incomparability",
-    "lem-weil-pbc-finite-permanence-over-separated",
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-qc-open-immersion-finite-type"
+    "r1-finite-etale-cover-reduced-cartesian-compactification"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The constant-case hypothesis gives assertions for j'_! R on Y. Exact extension by zero and short-exact devissage inductively establish them for the finite filtration, beginning with the zero object, and the terminal isomorphism gives them for j'_! v^*G. Finite pushforward and its exchange with extension by zero identify the resulting sheaf with j_! v_*v^*G.",
+   "text": "Apply hconstant on this compactification and obtain zero and successor assertion steps. Natural-number induction for i<=n gives assertions for a_! W_n.",
    "uses": [
-    "def-weil-pbc-extension-by-zero",
-    "lemma-weil-pbc-eight-curve-devissage",
-    "lemma-weil-pbc-finite-pushforward-extension-zero",
-    "def-weil-pbc-finite-open-comparison",
-    "lem-weil-pbc-curve-assertions-finite-pushforward"
+    "r1-open-lower-shriek-constant-filtration-steps"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Unpack the supplied terminal isomorphism and apply prime-module finite-open transfer to a_! W_n. This gives exactly the core conclusion, with no retract argument.",
+   "uses": [
+    "r1-prime-module-finite-open-assertions-transfer"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-pqf-zmt-factorization",
-  "etale-proposition-etale-reduced",
-  "def-nagata-scheme-theoretic-closure",
-  "def-weil-pbc-scheme-reduction",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-finite-composition",
-  "lem-weil-pbc-finite-over-separated-finite-type",
-  "lem-weil-pbc-integral-incomparability",
-  "lem-weil-pbc-finite-permanence-over-separated",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-qc-open-immersion-finite-type",
-  "def-weil-pbc-extension-by-zero",
-  "lemma-weil-pbc-eight-curve-devissage",
-  "lemma-weil-pbc-finite-pushforward-extension-zero",
-  "def-weil-pbc-finite-open-comparison",
-  "lem-weil-pbc-curve-assertions-finite-pushforward"
+  "r1-finite-etale-cover-reduced-cartesian-compactification",
+  "r1-open-lower-shriek-constant-filtration-steps",
+  "r1-prime-module-finite-open-assertions-transfer"
  ],
- "proof_origin": "Stacks 03SD: compactify the supplied finite etale cover, apply the constant-case hypothesis and filtration devissage, then finite pushforward and finite-open exchange; no retract descent is performed.",
+ "proof_origin": "Stacks 03SD route: reduced cartesian compactification; explicit Lean induction from zero/successor devissage; finite-open assertion transfer with terminal isomorphism. R1 2026-10-12.",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -142,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T030255-L-1281385",
+  "landing": "20261012T153650-L-2395509",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
