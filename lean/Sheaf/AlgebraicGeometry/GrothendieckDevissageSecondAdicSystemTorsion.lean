@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 import Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal
+import Sheaf.AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_torsion_kernel
+import Sheaf.AlgebraicGeometry.grothendieckDevissage_secondAdicSystem_torsion_cokernel
 
 /-! # Uniform torsion bound for a compatible second-ideal algebraization
 
@@ -94,6 +96,12 @@ theorem grothendieckDevissage_secondAdicSystem_torsion
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (4 * t)).2
         (kernel (δ.hom.app (op e)))) ∧
       IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (4 * t)).2
-        (cokernel (δ.hom.app (op e)))) := by sorry
+        (cokernel (δ.hom.app (op e)))) := by
+  intro e
+  exact ⟨
+    grothendieckDevissage_secondAdicSystem_torsion_kernel I K M hthick H α θ N δ σ
+      hsquare t ht hα e,
+    grothendieckDevissage_secondAdicSystem_torsion_cokernel I K M hthick H α θ N δ σ
+      hsquare t ht hα e⟩
 
 end AlgebraicGeometry
