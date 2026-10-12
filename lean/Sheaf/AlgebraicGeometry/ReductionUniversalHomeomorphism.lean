@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+
 /-!
 # The reduction is a universal homeomorphism
 
@@ -51,6 +53,18 @@ theorem reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorph
       IsClosedImmersion X.nilradical.subschemeι ∧
         Surjective X.nilradical.subschemeι ∧
           (topologically IsHomeomorph).universally X.nilradical.subschemeι := by
-  sorry
+  have hsurj : Surjective X.nilradical.subschemeι := by
+    constructor
+    rw [← Set.range_eq_univ, Scheme.IdealSheafData.range_subschemeι,
+      Scheme.support_nilradical]
+    rfl
+  refine ⟨inferInstance, inferInstance, hsurj, ?_⟩
+  intro X' Y' i₁ i₂ f' h
+  have : IsClosedImmersion f' :=
+    CategoryTheory.MorphismProperty.IsStableUnderBaseChange.of_isPullback
+      h.flip (inferInstance : IsClosedImmersion X.nilradical.subschemeι)
+  have : Surjective f' :=
+    CategoryTheory.MorphismProperty.IsStableUnderBaseChange.of_isPullback h.flip hsurj
+  exact isHomeomorph_iff_isEmbedding_surjective.mpr ⟨f'.isEmbedding, f'.surjective⟩
 
 end AlgebraicGeometry

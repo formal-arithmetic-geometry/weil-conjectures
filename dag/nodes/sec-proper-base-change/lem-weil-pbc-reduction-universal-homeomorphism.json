@@ -1,7 +1,7 @@
 {
  "proof": [
   {
-   "text": "(i_X is a surjective closed immersion and a homeomorphism.) By the definition of the reduction [def-weil-pbc-scheme-reduction], $X_{\\mathrm{red}}$ is the closed subscheme of $X$ cut out by the nilradical $\\mathcal N_X$, $i_X$ is its canonical closed immersion [def-weil-closed-immersion], and $i_X$ is the identity on underlying sets: the support of $\\mathcal O_X/\\mathcal N_X$ is all of $X$, since on an affine open $\\operatorname{Spec}R$ we have $V(\\mathrm{nil}(R))=\\operatorname{Spec}R$ (every prime contains every nilpotent). Hence $i_X$ is surjective [def-weil-surjective-morphism]. A closed immersion is a homeomorphism onto its (closed) image, here all of $X$, so $i_X$ is a homeomorphism of underlying spaces. (Mathlib: $i_X$ is `X.nilradical.subschemeι`, a closed immersion by the instance at Morphisms/ClosedImmersion.lean:94; surjectivity is `range_subschemeι` (IdealSheaf/Subscheme.lean:493) with `Scheme.support_nilradical : X.nilradical.support = ⊤` (IdealSheaf/Basic.lean:533).)",
+   "text": "The reduction map is X.nilradical.subschemeι [def-weil-pbc-scheme-reduction]. Mathlib supplies IsClosedImmersion for every subscheme inclusion [def-weil-closed-immersion]. Its range is X.nilradical.support by Scheme.IdealSheafData.range_subschemeι; Scheme.support_nilradical identifies this with the whole space. Set.range_eq_univ therefore proves Surjective [def-weil-surjective-morphism].",
    "uses": [
     "def-weil-pbc-scheme-reduction",
     "def-weil-closed-immersion",
@@ -14,7 +14,7 @@
    }
   },
   {
-   "text": "($X_{\\mathrm{red}}$ is reduced.) Let $x\\in X_{\\mathrm{red}}$ and let $U=\\operatorname{Spec}R\\subseteq X$ be an affine open [def-weil-affine-spectrum] containing $i_X(x)$. By [def-weil-pbc-scheme-reduction] the sections of $\\mathcal N_X$ over $U$ form the nilradical $\\mathrm{nil}(R)$, so the open subscheme $i_X^{-1}(U)$ of $X_{\\mathrm{red}}$ is $\\operatorname{Spec}(R/\\mathrm{nil}(R))$ (the closed subscheme of $\\operatorname{Spec}R$ cut out by the quasi-coherent ideal $\\widetilde{\\mathrm{nil}(R)}$, as in the proof of Stacks 01J3: $Z\\cap U=\\operatorname{Spec}(R/I)$). The ring $R/\\mathrm{nil}(R)$ is reduced: if $\\bar f^n=0$ then $f^n\\in\\mathrm{nil}(R)$, so $f^{nm}=0$ for some $m$, so $f\\in\\mathrm{nil}(R)$ and $\\bar f=0$. Hence $\\operatorname{Spec}(R/\\mathrm{nil}(R))$ is reduced [lem-weil-pbc-affine-scheme-reduced-iff], so the local ring $\\mathcal O_{X_{\\mathrm{red}},x}$, which is the local ring of the open subscheme $i_X^{-1}(U)$ at $x$, is reduced. As $x$ was arbitrary, $X_{\\mathrm{red}}$ is reduced [def-pc-reduced-scheme]. (Mathlib route: `subschemeCover` (IdealSheaf/Subscheme.lean:507) covers $X_{\\mathrm{red}}$ by `Spec (Γ(X, U) ⧸ X.nilradical.ideal U)`, where `X.nilradical.ideal U = (⊥ : Ideal _).radical` by `radical_ideal`; `Ideal.isRadical_iff_quotient_reduced`, `affine_isReduced_iff` and `IsReduced.of_openCover` (Properties.lean:133) conclude. The source repository proves exactly this pattern for `vanishingIdeal Z` in `Scheme.IdealSheafData.isReduced_subscheme_vanishingIdeal`, and Mathlib's `vanishingIdeal_top : vanishingIdeal ⊤ = X.nilradical` (IdealSheaf/Basic.lean:646) specializes it to $Z=X$.)",
+   "text": "For reducedness [def-pc-reduced-scheme] of X.nilradical.subscheme [def-weil-pbc-scheme-reduction], use the already proved instance AlgebraicGeometry.Scheme.isReduced_nilradical_subscheme in WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme. It specializes isReduced_subscheme_vanishingIdeal to the whole closed subset using vanishingIdeal_top. That existing proof follows precisely the affine argument: its subschemeCover consists of spectra [def-weil-affine-spectrum] of quotients by radical ideals; Ideal.isRadical_iff_quotient_reduced, affine_isReduced_iff [lem-weil-pbc-affine-scheme-reduced-iff], and IsReduced.of_openCover conclude. No new unproved dependency is introduced.",
    "uses": [
     "def-weil-pbc-scheme-reduction",
     "def-weil-affine-spectrum",
@@ -28,7 +28,7 @@
    }
   },
   {
-   "text": "($i_X$ is a universal homeomorphism.) Let $g:X'\\to X$ be a morphism of schemes and $p:X_{\\mathrm{red}}\\times_XX'\\to X'$ the projection from the fibre product [def-pc-fibre-product]. Since $i_X$ is a closed immersion (step 1), $p$ is a closed immersion [lem-weil-pbc-closed-immersion-base-change]; since $i_X$ is surjective (step 1), $p$ is surjective [lem-weil-pbc-surjective-base-change]. By [def-weil-closed-immersion], $p$ is a homeomorphism of $|X_{\\mathrm{red}}\\times_XX'|$ onto the closed subset $p(|X_{\\mathrm{red}}\\times_XX'|)$ of $X'$, and this subset is all of $X'$ because $p$ is surjective. So $p$ is a homeomorphism of underlying spaces (an embedding that is surjective is a homeomorphism; Mathlib `isHomeomorph_iff_isEmbedding_surjective`, Topology/Homeomorph/Lemmas.lean:520). As $g$ was arbitrary, $i_X$ is a universal homeomorphism [def-weil-universal-homeomorphism].",
+   "text": "Introduce an arbitrary cartesian square IsPullback f′ i₁ i₂ X.nilradical.subschemeι, as quantified by universally [def-weil-universal-homeomorphism; def-pc-fibre-product]. Apply IsStableUnderBaseChange.of_isPullback to the flipped square, separately for IsClosedImmersion [lem-weil-pbc-closed-immersion-base-change; def-weil-closed-immersion] and Surjective [lem-weil-pbc-surjective-base-change]. The resulting f′.isEmbedding and f′.surjective imply IsHomeomorph by isHomeomorph_iff_isEmbedding_surjective. This proves the universal assertion directly for every pullback square.",
    "uses": [
     "def-pc-fibre-product",
     "lem-weil-pbc-closed-immersion-base-change",
@@ -57,8 +57,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 054M (proof omitted in Stacks; written out by the agent from the hint of the lemma and the argument of Lemma 04DF with 01QR, 01S1); reducedness follows the proof of Schemes, Lemma 01J3 (schemes.tex) for T = X"
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+  "place": "Morphisms Lemma 054M, via base-change stability (01QR, 01S1); Schemes Lemma 01J3/Definition 01J4. V2 translates the three steps into Lean, reusing the proved nilradical reducedness instance in WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme."
  },
  "merged_into": null,
  "created": {
@@ -199,5 +199,15 @@
   "group": "M1",
   "result": "pass",
   "note": "X : Scheme.{u} arbitrary; X_red = X.nilradical.subscheme, i_X = subschemeι (recorded match); IsReduced, IsClosedImmersion, Surjective, (topologically IsHomeomorph).universally as recorded on def-weil-universal-homeomorphism; no added hypotheses; node statement unchanged"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T042424-L-1823281",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
