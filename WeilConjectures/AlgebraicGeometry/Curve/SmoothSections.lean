@@ -28,6 +28,28 @@ universe u
 
 open CategoryTheory Opposite
 
+/-- If every element of a finitely generated module has a multiple by a power of `t` lying in a
+submodule `N`, then a single power of `t` works for all elements. -/
+theorem Submodule.exists_pow_smul_mem_of_forall {R M : Type*} [CommSemiring R] [AddCommMonoid M]
+    [Module R M] [Module.Finite R M] (N : Submodule R M) (t : R)
+    (h : ∀ m : M, ∃ n : ℕ, t ^ n • m ∈ N) : ∃ n : ℕ, ∀ m : M, t ^ n • m ∈ N := by
+  classical
+  obtain ⟨S, hS⟩ := Module.Finite.fg_top (R := R) (M := M)
+  choose n hn using h
+  refine ⟨S.sup n, fun m => ?_⟩
+  have hm : m ∈ Submodule.span R (S : Set M) := hS ▸ Submodule.mem_top
+  induction hm using Submodule.span_induction with
+  | mem x hx =>
+    rw [← Nat.sub_add_cancel (Finset.le_sup hx : n x ≤ S.sup n), pow_add, mul_smul]
+    exact N.smul_mem _ (hn x)
+  | zero => simp
+  | add x y _ _ hx hy =>
+    rw [smul_add]
+    exact N.add_mem hx hy
+  | smul a x _ hx =>
+    rw [smul_comm]
+    exact N.smul_mem a hx
+
 namespace AlgebraicGeometry.Scheme.Hom
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) {V : Y.Opens}
@@ -108,7 +130,42 @@ theorem exists_kaehlerDifferential_generator [SmoothOfRelativeDimension 1 (X ↘
     (hU : IsAffineOpen U) [Algebra k Γ(X, U)]
     (h : algebraMap k Γ(X, U) = ((X ↘ Spec (.of k)).specStructureMap U).hom)
     (q : Ideal Γ(X, U)) [q.IsPrime] :
-    ∃ ω₀ : Ω[Γ(X, U)⁄k], ∃ s ∉ q, ∀ ω : Ω[Γ(X, U)⁄k], ∃ b : Γ(X, U), s • ω = b • ω₀ :=
-  sorry
+    ∃ ω₀ : Ω[Γ(X, U)⁄k], ∃ s ∉ q, ∀ ω : Ω[Γ(X, U)⁄k], ∃ b : Γ(X, U), s • ω = b • ω₀ := by
+  obtain ⟨s, hs, hst⟩ := HasRingHomProperty.appLE (@SmoothOfRelativeDimension 1)
+    (X ↘ Spec (.of k)) inferInstance ⟨⊤, isAffineOpen_top _⟩ ⟨U, hU⟩ le_top
+  obtain ⟨t, hts, htq⟩ : ∃ t ∈ s, t ∉ q := by
+    by_contra! H
+    exact ‹q.IsPrime›.ne_top (eq_top_iff.mpr (hs ▸ Ideal.span_le.mpr H))
+  have : Algebra.IsStandardSmoothOfRelativeDimension 1 k (Localization.Away t) := by
+    rw [← RingHom.isStandardSmoothOfRelativeDimension_algebraMap,
+      IsScalarTower.algebraMap_eq k Γ(X, U), h, Scheme.Hom.specStructureMap,
+      CommRingCat.hom_comp, ← RingHom.comp_assoc]
+    exact (hst t hts).comp (RingHom.IsStandardSmoothOfRelativeDimension.equiv
+      (Scheme.ΓSpecIso (.of k)).symm.commRingCatIsoToRingEquiv)
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth (n := 1) _
+  have := smooth_sections hU h
+  obtain ⟨e⟩ := Algebra.IsStandardSmoothOfRelativeDimension.nonempty_linearEquiv_kaehlerDifferential
+    1 (R := k) (S := Localization.Away t)
+  let φ := KaehlerDifferential.map k k Γ(X, U) (Localization.Away t)
+  obtain ⟨a, ω₁, ha⟩ := IsLocalizedModule.Away.surj (r := t) φ (e.symm 1)
+  have hloc (ω : Ω[Γ(X, U)⁄k]) : ∃ n : ℕ, t ^ n • ω ∈ Submodule.span Γ(X, U) {ω₁} := by
+    have hc : φ ω = (e (φ ω) 0) • e.symm 1 := by
+      apply e.injective
+      ext i
+      fin_cases i
+      simp
+    obtain ⟨m, b, hb⟩ := IsLocalization.Away.surj t (e (φ ω) 0)
+    have hφ : φ (t ^ (a + m) • ω) = φ (b • ω₁) := by
+      rw [LinearMap.map_smul, LinearMap.map_smul, ← ha, hc, pow_add, mul_smul,
+        ← algebraMap_smul (Localization.Away t) (t ^ m), smul_smul, mul_comm, map_pow, hb,
+        algebraMap_smul, smul_comm]
+    obtain ⟨l, hl⟩ := IsLocalizedModule.Away.exists_of_eq (f := φ) t hφ
+    refine ⟨l + (a + m), ?_⟩
+    rw [pow_add, mul_smul, hl]
+    exact Submodule.smul_mem _ _ (Submodule.smul_mem _ _ (Submodule.mem_span_singleton_self _))
+  obtain ⟨n, hn⟩ := Submodule.exists_pow_smul_mem_of_forall (Submodule.span Γ(X, U) {ω₁}) t hloc
+  refine ⟨ω₁, t ^ n, fun hq => htq (‹q.IsPrime›.mem_of_pow_mem n hq), fun ω => ?_⟩
+  obtain ⟨b, hb⟩ := Submodule.mem_span_singleton.mp (hn ω)
+  exact ⟨b, hb.symm⟩
 
 end AlgebraicGeometry.Scheme
