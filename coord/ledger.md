@@ -5799,3 +5799,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:33 L: merged deliver/R1/Sheaf.AlgebraicGeometry.TensorPullback (stage 3; reviewer PASS; first push; landing 20261012T013337-L-835556 (proof); modules 1; new nodes 0)
 - 01:34 L: returned deliver/E1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero (reviewer RETURN: (reviewer X-b6def, head b6def49db) H9 (brief point 5): In lean/Sheaf/AlgebraicGeometry/EtaleCohomologyPullbackDegreeZero)
 - 01:36 L: merged deliver/V1/Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage (stage 3; reviewer PASS; after a return; landing 20261012T013435-L-839109 (interface); modules 3; new nodes 2)
+- 01:37 L: merged deliver/F1/Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCore (stage 3; reviewer PASS; first push; landing 20261012T013739-L-851462 (proof); modules 1; new nodes 0)

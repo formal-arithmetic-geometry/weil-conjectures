@@ -5,6 +5,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
+import Mathlib.FieldTheory.AlgebraicClosure
+import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+
 @[expose] public section
 universe u
 open CategoryTheory
@@ -38,6 +42,39 @@ theorem exists_sepClosed_comparison_core
       (t : Spec (.of K) ⟶ Spec (.of k)),
       IsPullback p b f t ∧ IsPullback a b' b j ∧ IsUniversalHomeomorphism p ∧
         IsUniversalHomeomorphism p' ∧ p' ≫ ι' = a ≫ p := by
-  sorry
+  let φ : k →+* k' := (Spec.preimage ι).hom
+  let K' := AlgebraicClosure k'
+  let : Algebra k K' := ((algebraMap k' K').comp φ).toAlgebra
+  let K := algebraicClosure k K'
+  have : IsAlgClosed K := IsAlgClosure.isAlgClosed k
+  let t : Spec (.of K) ⟶ Spec (.of k) :=
+    Spec.map (CommRingCat.ofHom (algebraMap k K))
+  let t' : Spec (.of K') ⟶ Spec (.of k') :=
+    Spec.map (CommRingCat.ofHom (algebraMap k' K'))
+  let j : Spec (.of K') ⟶ Spec (.of K) :=
+    Spec.map (CommRingCat.ofHom (algebraicClosure k K').subtype)
+  have hj : j ≫ t = t' ≫ ι := by
+    rw [← Spec.map_preimage ι]
+    simp only [j, t, t', ← Spec.map_comp]
+    congr 1
+  let D := Limits.pullback f t
+  let D' := Limits.pullback f' t'
+  let p : D ⟶ C := Limits.pullback.fst f t
+  let b : D ⟶ Spec (.of K) := Limits.pullback.snd f t
+  let p' : D' ⟶ C' := Limits.pullback.fst f' t'
+  let b' : D' ⟶ Spec (.of K') := Limits.pullback.snd f' t'
+  have ht : IsPullback p b f t := .of_hasPullback f t
+  have ht' : IsPullback p' b' f' t' := .of_hasPullback f' t'
+  have hs : IsPullback (p' ≫ ι') b' f (j ≫ t) := by
+    rw [hj]
+    exact ht'.paste_horiz h
+  let a : D' ⟶ D := ht.lift (p' ≫ ι') (b' ≫ j)
+    (by rw [hs.w, Category.assoc])
+  have ha : IsPullback a b' b j := hs.of_right' ht
+  refine ⟨K, inferInstance, inferInstance, K', inferInstance, inferInstance,
+    D, D', b, b', j, a, p, p', t, ht, ha, ?_, ?_, ?_⟩
+  · infer_instance
+  · infer_instance
+  · exact (ht.lift_fst _ _ _).symm
 
 end AlgebraicGeometry.IsCurve
