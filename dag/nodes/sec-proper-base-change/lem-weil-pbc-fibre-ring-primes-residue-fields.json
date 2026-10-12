@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Part (1). This is [lem-weil-pbc-fibre-ring-primes-bijection] for $\\varphi$, $\\mathfrak p$, $C$, $j$ and the maps $\\psi_{\\mathfrak q}$ defined as in the statement: $\\mathfrak Q\\mapsto j^{-1}(\\mathfrak Q)$ is a bijection from the primes of $C$ onto the primes $\\mathfrak q$ of $B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$, with inverse $\\mathfrak q\\mapsto\\ker\\psi_{\\mathfrak q}$, and $\\mathfrak Q\\subseteq\\mathfrak Q'$ iff $j^{-1}(\\mathfrak Q)\\subseteq j^{-1}(\\mathfrak Q')$.",
+   "text": "Part (1). Take e to be the inverse of Mathlib PrimeSpectrum.preimageOrderIsoFiber A B p, the correspondence of [lem-weil-pbc-fibre-ring-primes-bijection]. Both descriptions, contraction along includeRight and the inverse kernel of the specified tensor evaluation map, hold definitionally in Lean.",
    "uses": [
     "lem-weil-pbc-fibre-ring-primes-bijection"
    ],
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Part (2), the isomorphism. Fix a prime $\\mathfrak q\\subset B$ with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ and put $\\mathfrak Q=\\ker\\psi_{\\mathfrak q}$, a prime of $C$ with $j^{-1}(\\mathfrak Q)=\\mathfrak q$ by Step 1 (the two maps of (1) are inverse to each other). By [lem-weil-pbc-fibre-ring-residue-field-iso] applied to $\\mathfrak Q$, the field homomorphism $\\iota:\\kappa(\\mathfrak q)\\to\\kappa(\\mathfrak Q)$ induced by the local homomorphism $B_{\\mathfrak q}\\to C_{\\mathfrak Q}$, $b/s\\mapsto j(b)/j(s)$, is an isomorphism; let $\\theta=\\iota^{-1}:\\kappa(\\mathfrak Q)\\to\\kappa(\\mathfrak q)$. Write $\\pi_{\\mathfrak Q}:C\\to C_{\\mathfrak Q}\\to\\kappa(\\mathfrak Q)$ and $\\pi_{\\mathfrak q}:B\\to B_{\\mathfrak q}\\to\\kappa(\\mathfrak q)$, $b\\mapsto\\bar b$, for the canonical maps [def-weil-pbc-localization-at-prime]. Since the local homomorphism sends $b/1$ to $j(b)/1$, $\\pi_{\\mathfrak Q}\\circ j=\\iota\\circ\\pi_{\\mathfrak q}$. It remains to show $\\theta\\circ\\pi_{\\mathfrak Q}=\\psi_{\\mathfrak q}$ (Steps 3-5); then $\\psi_{\\mathfrak q}$ is the composite of $C\\to\\kappa(\\mathfrak Q)$ with the isomorphism $\\theta$, which is (2).",
+   "text": "For q in the fibre, put Q = e.symm q. The equality q = contraction of Q follows from e.apply_symm_apply. Let iota = Ideal.ResidueField.map q Q includeRight with this equality. By [lem-weil-pbc-fibre-ring-residue-field-iso], implemented by p.surjectiveOnStalks_residueField.baseChange′.residueFieldMap_bijective, iota is bijective. Take theta to be the inverse of RingEquiv.ofBijective iota.",
    "uses": [
     "lem-weil-pbc-fibre-ring-primes-bijection",
     "lem-weil-pbc-fibre-ring-residue-field-iso",
@@ -52,7 +52,7 @@
    }
   },
   {
-   "text": "Agreement on $j(B)$. For $b\\in B$, $\\theta(\\pi_{\\mathfrak Q}(b\\otimes1))=\\theta(\\iota(\\bar b))=\\bar b=\\psi_{\\mathfrak q}(b\\otimes1)$, by $\\pi_{\\mathfrak Q}\\circ j=\\iota\\circ\\pi_{\\mathfrak q}$ (Step 2) and the definition of $\\psi_{\\mathfrak q}$ with $\\lambda=1$.",
+   "text": "For b in B, the canonical residue-field map satisfies iota(pi_q(b)) = pi_Q(j(b)) by Ideal.ResidueField.map_algebraMap [def-weil-pbc-localization-at-prime]. Applying injectivity of the equivalence associated to iota and its inverse identities proves theta(pi_Q(j(b))) = pi_q(b). The tensor evaluation map has this same value on j(b).",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "Agreement on $1\\otimes\\kappa(\\mathfrak p)$. Let $\\alpha,\\beta:\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ be the ring homomorphisms $\\alpha(\\lambda)=\\theta\\pi_{\\mathfrak Q}(1\\otimes\\lambda)$ and $\\beta(\\lambda)=\\bar\\lambda$. For $a\\in A$ with image $\\bar a\\in\\kappa(\\mathfrak p)$, $1\\otimes\\bar a=\\varphi(a)\\otimes1$ in $C$ (the tensor product is over $A$), so $\\alpha(\\bar a)=\\overline{\\varphi(a)}$ by Step 3, and $\\beta(\\bar a)=\\overline{\\varphi(a)}$ because the map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ is induced by $a/s\\mapsto\\varphi(a)/\\varphi(s)$. Every element of $\\kappa(\\mathfrak p)$ is $\\bar a\\,\\bar s^{-1}$ with $a\\in A$, $s\\in A\\setminus\\mathfrak p$ [def-weil-pbc-localization-at-prime], and ring homomorphisms between fields preserve inverses, so $\\alpha=\\beta$.",
+   "text": "To compare the two homomorphisms on the kappa(p) factor, use Ideal.ResidueField.ringHom_ext [def-weil-pbc-localization-at-prime]: it suffices to compare after composition with A -> kappa(p). Tensor balancing identifies this image in the fibre with j(algebraMap A B a). Step 3, the scalar-tower algebra-map identities, and the tensor lift computation give equality on this image. The extensionality lemma encapsulates the fraction argument because kappa(p) is the fraction field of A/p.",
    "uses": [
     "def-weil-pbc-localization-at-prime"
    ],
@@ -74,7 +74,7 @@
    }
   },
   {
-   "text": "Conclusion. Both $\\theta\\circ\\pi_{\\mathfrak Q}$ and $\\psi_{\\mathfrak q}$ are ring homomorphisms $C\\to\\kappa(\\mathfrak q)$, and $b\\otimes\\lambda=(b\\otimes1)(1\\otimes\\lambda)$; by Steps 3 and 4 they agree on every pure tensor, and pure tensors generate $C$ additively, so $\\theta\\circ\\pi_{\\mathfrak Q}=\\psi_{\\mathfrak q}$. This proves (2).",
+   "text": "Apply Algebra.TensorProduct.ringHom_ext to the two homomorphisms from kappa(p) tensor_A B. Its left-factor equality is Step 4; its right-factor equality is Step 3 and the computation of the tensor lift on 1 tensor b. This proves theta.toRingHom composed with the canonical residue map equals psi_q.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -91,7 +91,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Remark Tag 00E6 (remark-fundamental-diagram, line 3422) for (1) and Remark Tag 0H9M (remark-local-ring-fibre, line 3520) for (2); the compatibility of $\\psi_{\\mathfrak q}$ with the isomorphism (Steps 3-5), which the remarks leave implicit, is written out by the worker"
+  "place": "Remark Tag 00E6 (remark-fundamental-diagram, line 3422) for (1) and Remark Tag 0H9M (remark-local-ring-fibre, line 3520) for (2); the compatibility of $\\psi_{\\mathfrak q}$ with the isomorphism (Steps 3-5), which the remarks leave implicit, is written out by the worker; formalized by E2 using the Mathlib order isomorphism, bijectivity of the base-changed residue-field map, and residue-field/tensor-product ring-hom extensionality"
  },
  "mathlib_searches": [
   {
@@ -168,5 +168,15 @@
   "group": "K1",
   "result": "fix",
   "note": "A,B CommRing + Algebra A B = phi; p : PrimeSpectrum A; C = p.asIdeal.Fiber B, j = includeRight; F = primes over p; psi_q = lift(mapₐ, toAlgHom) (rfl vs preimageEquivFiber kernel); (1) e : Spec C ≃o F with e Q = comap j Q, e.symm q = ker psi_q; (2) ∃ θ : κ(Q) ≃+* κ(q), θ ∘ algebraMap = psi_q; empty fibre vacuous"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10908",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
