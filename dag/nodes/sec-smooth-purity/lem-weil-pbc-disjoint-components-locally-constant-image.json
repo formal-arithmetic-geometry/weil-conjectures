@@ -15,31 +15,46 @@
  ],
  "proof": [
   {
-   "text": "Base change the disjoint component cover along each etale test object over Y. The sheaf axiom identifies sections with the product of the component sections, since the intersections are empty and an abelian sheaf has a unique section on the empty object. Naturality of restriction makes these identifications an isomorphism of set sheaves from the direct image to the product of the component direct images.",
+   "text": "For every etale X-scheme V, form its pullbacks along the open inclusions W_i -> X and their projections to V. The ranges are the preimages of W_i, so the cover equation and pairwise disjointness give a disjoint etale cover of V by monomorphisms. Restriction defines a natural map E -> product_i (j_i)_* restriction_i(E). The existing proved theorem AlgebraicGeometry.Scheme.Etale.isIso_piLift_of_disjoint makes its section maps isomorphisms, after the standard evaluation/product comparison. Sheaves are a full subcategory of presheaves, so the map is an isomorphism. This includes the empty family.",
    "uses": [
     "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image"
+    "lem-weil-pbc-disjoint-etale-sections-product"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a trivializing etale cover for each component direct image and form their finite fibre-product refinement. Each factor is constant on every member. Constant set sheaves commute with finite products: the constant presheaf functor preserves products and etale sheafification is left exact. Thus the finite product is constant on each member. Transport through the preceding isomorphism. For an empty family X is empty by the cover assumption, and the direct image is the constant singleton set sheaf.",
+   "text": "Apply f_* to the source product isomorphism. The direct-image functor is right adjoint and preserves products. Use Etale.lowerStarComp and Etale.upperStarIsoLocalizationRestriction to identify its factors with (j_i followed by f)_*(j_i^*E). Postcomposition with the forgetful functor from abelian groups preserves products: this follows on presheaves from preservation by forget, and descends to sheaves because sheafToPresheaf reflects limits. Thus the underlying set sheaf of f_*E is isomorphic to the product of the underlying component images.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finite products of constant set sheaves are constant. Choose the values and constant-sheaf isomorphisms witnessing constancy; Pi.mapIso and PreservesProduct.iso identify the product with the constant sheaf of the product of the values. The instance preservesFiniteLimits_constantSheaf follows from the finite-limit preservation of the constant-presheaf functor and left exact sheafification. Constancy of F.over V persists on F.over U for a map U -> V in the small etale site: Over.map is continuous and cocontinuous, so pushforwardContinuousSheafificationCompatibility identifies restriction of a constant sheaf with the constant sheaf of the same value; Sheaf.pushforwardOverMapIso supplies the restriction comparison.",
    "uses": [
     "def-weil-pbc-etale-sheaves"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Induct on the length of a finite family of locally constant sheaves. For the empty family use the identity etale cover. For a successor, take a trivializing cover for the first factor and a simultaneous cover for the remaining factors given by induction, then bind the first cover with the pullback of the second. Both projections give morphisms of the small etale site to the original cover members; the previous localization argument shows all factors are constant there. Restriction over a site object preserves products, so the finite product is constant on this common cover. Apply this construction to the component images and transport each constant restriction along the product isomorphism from step 2, using Sheaf.isConstant_congr. No new hypothesis is needed when n = 0.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-disjoint-etale-sections-product",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
-  "place": "## Proof, finite-algebra calculation and final paragraph; component assembly part of the existing disjoint universal-homeomorphism argument"
+  "place": "Final paragraph: disjoint component product and finite fibre-product refinement; implemented by T3 using the proved source disjoint-cover sections theorem and categorical product comparisons."
  },
  "mathlib_searches": [
   {
@@ -108,10 +123,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "T3",
   "result": "pass",
-  "landing": "20261012T144200-L-2112665",
-  "kind": "interface",
+  "landing": "20261012T163621-L-2787936",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
