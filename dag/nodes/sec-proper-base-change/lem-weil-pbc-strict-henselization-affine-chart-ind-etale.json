@@ -14,28 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Restrict affine pointed etale neighbourhoods to those factoring through the affine chart. The restriction is cofinal and its coordinate rings identify with the etale residue-triples diagram.",
+   "text": "Factor the geometric point through i using its singleton spectrum. Apply etale_local_ring_triples to obtain the initial chart subcategory, its equivalence E with residue triples, and compatible coordinate-ring colimit comparisons. Compare the small model defining strictHenselizationRing with the affine neighbourhood colimit using strictHenselizationAffineInclusion_isEquivalence.",
    "uses": [
     "lem-weil-pbc-etale-local-ring-triples"
    ],
    "elementary": false
   },
   {
-   "text": "The strict henselization triples theorem gives a filtered diagram of etale R-algebras and a ring colimit. Transport the colimit across the affine scheme equivalence and the chosen isomorphism e; the structural-map equality ha identifies the resulting R-algebra structure with a.",
+   "text": "Use etaleResidueTriples_filtered_colimit to obtain filteredness and a universal ring cocone c with a compatible structural map rho. Only these clauses are needed; no locality, residue-field calculation, root lifting or henselianity is used.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
+    "lem-weil-pbc-etale-triples-filtered-colimit"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose the canonical colimit comparison isomorphisms to identify strictHenselizationRing with c.pt. For the chart neighbourhood, the coprojection identities and the R-map clause of the diagram comparison show that Spec(rho followed by the inverse comparison), followed by i, is strictHenselizationStructuralMap. The structural-map characterization supplies the last equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The affine chart subcategory is essentially small since the affine neighbourhood category is equivalent to its small representative model and full subcategories inherit essential smallness. Take its opposite small model and compose with E. Transfer filteredness from triples and whisker c along this equivalence. Full faithfulness of Spec turns e into a ring isomorphism to A. Extend the cocone along the composite ring isomorphism. Cancellation of the mono i and faithfulness of Spec, applied to ha, identify the transported map with a. Structural maps of triples form a natural transformation from the constant R diagram; each is etale by HasRingHomProperty.Spec_iff, and each composite with a cocone leg is a. Apply RingHom.IndEtale.iff_exists to this small filtered etale presentation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-local-ring-triples",
-  "lem-weil-pbc-strict-henselization-triples"
+  "lem-weil-pbc-etale-triples-filtered-colimit"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 04HX proof and Tag 04GW"
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 04HX proof; Tag 04GW filtered triple-colimit presentation; categorical transport written by G2, reusing the coprojection comparison in StrictHenselizationChartMaximalIdeal"
  },
  "mathlib_searches": [
   {
@@ -107,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c865b",
-  "group": "K2",
+  "reviewer": "COMPILER",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T173839-L-3299386",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean modules, DAG nodes, change record, report, and direct importer against the stage-3 brief; all compile cleanly."
+  "landing": "20261012T184259-L-4003061",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
