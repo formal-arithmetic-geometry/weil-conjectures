@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
+import Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionNaturality
+import Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionIsomorphism
 
 /-! # The module-valued strict-local continuity comparison
 
@@ -126,6 +127,32 @@ theorem exists_qcqsStrictLocalModuleComparison
         (ModuleCat.{u + 1} Λ)).obj
         ((upperStar (ModuleCat.{u + 1} Λ)
           (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F),
-      IsQcqsStrictLocalModuleComparison Λ f s F e.hom := by sorry
+      IsQcqsStrictLocalModuleComparison Λ f s F e.hom := by
+  classical
+  let N := (equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
+    Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+      (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
+  let : N.Initial := (Scheme.strictHenselization_properties s).1
+  let P := ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj
+  let stalkCocone := ((Scheme.pointSmallEtale s).presheafFiberCocone P).whisker N.op
+  have hc : IsColimit stalkCocone :=
+    (Functor.Final.isColimitWhiskerEquiv N.op _).symm
+      ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone P)
+  let r := qcqsStrictLocalSectionRestriction Λ f s F
+  let c : Cocone (N.op ⋙ (CategoryOfElements.π (Scheme.pointSmallEtale s).fiber).op ⋙ P) :=
+    { pt := _
+      ι := { app := fun j ↦ r j.unop
+             naturality := fun j k a ↦ by
+               change F.obj.map
+                 ((Scheme.strictHenselizationEtaleDiagram s ⋙ f.Etale).map a.unop).op ≫
+                   r k.unop = r j.unop ≫ 𝟙 _
+               rw [Category.comp_id]
+               exact qcqsStrictLocalRestriction_naturality Λ f s F r (fun _ ↦ rfl) a.unop } }
+  let a := hc.desc c
+  have ha : IsQcqsStrictLocalModuleComparison Λ f s F a := by
+    intro j
+    exact hc.fac c (op j)
+  have : IsIso a := isIso_qcqsStrictLocalRestriction_of_formula Λ f s F a ha
+  exact ⟨asIso a, ha⟩
 
 end AlgebraicGeometry.Etale

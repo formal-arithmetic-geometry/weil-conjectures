@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-strict-local-module-restriction-naturality",
+ "kind": "statement",
+ "title": "Refinement compatibility of strict-local module restrictions",
+ "statement": "Let $\\Lambda$ be a commutative ring, $f:X\\to Y$ a morphism of schemes [def-weil-pbc-scheme-conventions], $s:\\operatorname{Spec}\\Omega\\to Y$ a geometric point with algebraically closed $\\Omega$ [def-weil-geometric-point], and $F$ a sheaf of $\\Lambda$-modules on $X_{et}$ [def-weil-pbc-etale-sheaves]. Put $Z=X\\times_Y\\operatorname{Spec}(\\mathcal O^{sh}_{Y,s})$ and $p:Z\\to X$ [def-weil-pbc-strict-henselization-limit; def-weil-pbc-strict-henselization-structural-map]. Let $J$ be the small model of ring-written affine pointed neighbourhoods of $s$, and $B:J\\to X_{et}$ their base-change diagram. For $j\\in J$, let $\\delta_j:Z\\to p^{-1}B_j$ be the graph of the strict-henselization limit leg after the pullback symmetry. Define $r_j:F(B_j)\\to\\Gamma(Z,p^{-1}F)$ as the adjunction unit at $B_j$, restriction along $\\delta_j$, and the inverse terminal-section/global-section isomorphism. Then for every refinement $a:j\\to k$, $F(B(a))\\,;r_j=r_k$. This holds without a quasi-compactness or quasi-separatedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, proof, degree-zero comparison and the canonical maps from neighbourhood sections"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Use the base-change cone with its two projection formulas. Pullback extensionality identifies its legs with strictHenselizationBaseChangeMap.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-base-change-cone"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of those cone legs gives baseChangeMap_j followed by B(a) equal to baseChangeMap_k. Compose with pullback symmetry. Two applications of pullback extensionality prove δ_j followed by p.Etale.map B(a) equals δ_k.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the module adjunction unit moves F(B(a)) past the unit. Contravariant functoriality and the preceding graph identity identify the two restrictions. Postcompose with the common inverse terminal-section identification.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-base-change-cone"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, proof, degree-zero comparison and the canonical maps from neighbourhood sections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of an etale pushforward of a sheaf of modules is the global sections of its pullback to the strict henselization with the canonical germ restriction formula",
+   "results": "AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp; AlgebraicGeometry.StructureSheaf.toPushforwardStalk; AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply; ModuleCat.Tilde.stalkToFiberLinearMap_germ; ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toStalk; smoothSheafCommRing.ι_forgetStalk_hom; smoothSheafCommRing.ι_forgetStalk_hom_apply",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "qcqsStrictLocal|strictHenselization.*[Cc]omparison",
+   "results": "No matches in Mathlib/source-library search.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical restriction of module sheaf sections to strict henselization compatible with refinement and bijective stalk comparison",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Underived exchange proof: qcqs stalk/strict-local sections comparison; Refinement compatibility of strict-local module restrictions",
+   "via": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison",
+    "lem-weil-pbc-qcqs-geometric-exchange-factorization",
+    "lem-weil-pbc-proper-geometric-point-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsStrictLocalRestrictionNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.qcqsStrictLocalRestriction_naturality",
+  "statement": "theorem qcqsStrictLocalRestriction_naturality (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (r : ∀ j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s), F.obj.obj (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ⟶ (Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F)) (hr : ∀ j, r j = ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).unit.app F).hom.app (op (f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1))) ≫ ((upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj F).obj.map (MorphismProperty.Over.homMk (pullback.lift ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.strictHenselizationBaseChangeMap f s j) (𝟙 _) (by change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫ Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _ simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd, pullbackSymmetry_hom_comp_snd, Category.id_comp])) (pullback.lift_snd _ _ _)).op ≫ (Sheaf.ΓNatIsoSheafSections _ _ (IsTerminal.isTerminalOfObj (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤ (pullback f (Scheme.strictHenselizationStructuralMap s))) (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) : ∀ {j k : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)} (a : j ⟶ k), F.obj.map ((Scheme.strictHenselizationEtaleDiagram s ⋙ f.Etale).map a).op ≫ r j = r k",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T160831-L-2612868",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T160831-L-2612868",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
