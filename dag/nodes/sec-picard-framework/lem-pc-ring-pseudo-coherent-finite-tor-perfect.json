@@ -24,68 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Taking $M=R$ in the amplitude hypothesis gives $H^i(C)=0$ for $i>b$. Apply [lem-pc-pseudo-coherent-bounded-finite-free-model] to obtain a quasi-isomorphism $P^\\bullet\\to C$ from a complex of finitely generated free $R$-modules with $P^i=0$ for $i>b$. Derived tensor products are invariant under quasi-isomorphism, so $H^i(P^\\bullet\\otimes^{\\mathbf L}_R M)=0$ for every $R$-module $M$ and every $i\\notin[a,b]$; in particular ($M=R$) $H^i(P^\\bullet)=0$ for $i<a$. Since $P^\\bullet$ is a bounded-above complex of flat modules, it is K-flat by [lem-pc-bounded-above-flat-kflat] (applied to the one-point ringed space with ring $R$), so $P^\\bullet\\otimes^{\\mathbf L}_R M$ is computed by the ordinary total tensor complex $P^\\bullet\\otimes_R M$.",
+   "text": "Unfold [def-pc-ring-pseudo-coherent-complex] in hPC to obtain a finite-free complex P with P.IsStrictlyLE c and Q.obj P isomorphic to C. Convert each free term to a flat module with ModuleCat.flat_iff_flat. Apply the closed upstream CochainComplex.kFlat_of_isStrictlyLE_of_flat directly over R. No replacement with prescribed upper Tor bound is needed, since the conclusion only asks for some finite bounds.",
    "uses": [
-    "lem-pc-pseudo-coherent-bounded-finite-free-model",
-    "lem-pc-bounded-above-flat-kflat"
+    "def-pc-ring-pseudo-coherent-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), definition of pseudo-coherence and first reduction"
-   }
+   "elementary": false
   },
   {
-   "text": "Set $E^\\bullet=\\tau_{\\ge a}P^\\bullet$: the complex with $E^i=P^i$ for $i>a$, $E^a=\\operatorname{coker}(d^{a-1}\\colon P^{a-1}\\to P^a)$ and $E^i=0$ for $i<a$, with the canonical surjective map of complexes $P^\\bullet\\to E^\\bullet$. Because $P^i=0$ for $i>b$, $E^\\bullet$ is bounded, and all its terms except $E^a$ are finitely generated free; $E^a$ is finitely presented, being the cokernel of a map $P^{a-1}\\to P^a$ between finite free modules.",
+   "text": "The closed upstream DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn gives C.IsGE a by testing the monoidal unit. Transfer it to P using the model isomorphism and isGE_Q_obj_iff. For each test module F, use QObjTensorSingleFunctorObjIso for this K-flat P and whiskerRightIso of its model isomorphism to transfer (hTor F).1 to (P tensor F).IsGE a. Thus P tensor F is exact at a-1. ObjectProperty.flat_opcycles_of_exactAt makes P.opcycles a flat. These are applications of proved upstream generic tools, with no new gap.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), truncation argument in the proof"
-   }
+   "elementary": false
   },
   {
-   "text": "By Step 1, $H^i(P^\\bullet)=0$ for $i<a$, so $\\cdots\\to P^{a-2}\\to P^{a-1}\\to P^a\\to E^a\\to0$ is a resolution of $E^a$ by free modules. Hence for every $R$-module $M$, $\\operatorname{Tor}_1^R(E^a,M)$ is the homology at $P^{a-1}\\otimes_R M$ of $P^{a-2}\\otimes_R M\\to P^{a-1}\\otimes_R M\\to P^a\\otimes_R M$, which is $H^{a-1}(P^\\bullet\\otimes_R M)=H^{a-1}(P^\\bullet\\otimes^{\\mathbf L}_R M)=0$ by Step 1, since $a-1\\notin[a,b]$. Thus $\\operatorname{Tor}_1^R(E^a,M)=0$ for every $M$, i.e. $E^a$ is flat (More on Algebra, Lemma 15.68.2, used in Tag 0658). Since $E^a$ is also finitely presented (Step 2), [lem-weil-pbc-finitely-presented-flat-module-projective] makes it a finite projective $R$-module.",
+   "text": "The cokernel map P.X a to P.opcycles a is surjective. Its kernel equals the range of the preceding differential by opcyclesIsCokernel and ShortComplex.moduleCat_exact_iff_range_eq_ker; this range is finitely generated since P.X (a-1) is finite (Submodule.fg_range). Module.finitePresentation_of_projective makes the finite-free source finitely presented, and Module.finitePresentation_of_surjective gives finite presentation of P.opcycles a. Apply [lem-weil-pbc-finitely-presented-flat-module-projective] to this flat finitely presented bottom term.",
    "uses": [
     "lem-weil-pbc-finitely-presented-flat-module-projective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), truncation and Tor-dimension-zero argument"
-   }
+   "elementary": false
   },
   {
-   "text": "The canonical map $P^\\bullet\\to E^\\bullet=\\tau_{\\ge a}P^\\bullet$ induces isomorphisms on $H^i$ for $i\\ge a$ by construction, and both sides have $H^i=0$ for $i<a$ (for $P^\\bullet$ by Step 1); hence it is a quasi-isomorphism. With Step 3, every term of $E^\\bullet$ is a finitely generated projective $R$-module, so $C\\cong P^\\bullet\\cong E^\\bullet$ in $D(R)$ with $E^\\bullet$ a bounded complex of finitely generated projective $R$-modules.",
+   "text": "Take the actual good truncation E = P.truncGE a. Below a its terms are zero; at a they are isomorphic to the bottom cokernel; above a they are isomorphic to the finite-free terms of P. Transfer Module.Finite and Module.Projective along these explicit linear equivalences. E is zero above c: at a use the epimorphism from the zero source P.X a if c<a, and above a use the original upper bound. The canonical map P.πTruncGE a is a quasi-isomorphism because P.IsGE a. Its Q-image is therefore an isomorphism; inverse it and compose with Q.obj P isomorphic to C. This gives exactly the unchanged existential conclusion, including the case c<a.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.76.2 (Tag 0658), conclusion of the truncation argument"
-   }
-  },
-  {
-   "text": "A bounded complex of finitely generated projective $R$-modules is perfect in the affine sense, by the strictly-perfect clause of [def-pc-perfect-complex] on $\\operatorname{Spec}(R)$.",
-   "uses": [
-    "def-pc-perfect-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Definition 15.76.1 (Tag 0657)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-pseudo-coherent-bounded-finite-free-model",
-  "lem-pc-bounded-above-flat-kflat",
-  "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "def-pc-perfect-complex"
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.76.2 (Tag 0658)"
+  "place": "Tag 0658, proof by good truncation; direct bounded-above representative from IsPseudoCoherent and proved upstream FlatModel tools"
  },
  "mathlib_searches": [
   {
@@ -176,5 +146,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5798f",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T194147-L-467038",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, DAG, change record, report, compilation, and direct-importer checks match the stage-3 requirements."
  }
 }
