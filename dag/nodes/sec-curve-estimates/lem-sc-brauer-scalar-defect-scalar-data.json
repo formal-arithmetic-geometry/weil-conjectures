@@ -13,12 +13,25 @@
  ],
  "proof": [
   {
-   "text": "put X_a = e(1 ⊗ a). Apply g to the descent equation for h and substitute\nthat for g. Then P = b_g g(b_h) and b_(gh) induce the same conjugation on X_a,\nso D = P b_(gh)⁻¹ commutes with X_a. The tensors 1 ⊗ a span after scalar\nextension, and e is surjective, so D commutes with every matrix. Commutation\nwith the diagonal matrix units kills off-diagonal entries; commutation with\nthe remaining units makes all diagonal entries equal. Since n > 0 and D is\ninvertible, its common diagonal entry is a unique unit c(g,h).\nNear (g,h), local constancy of b and continuity of multiplication fix b_g,\nb_h and b_(gh). Each entry of the fixed b_h is algebraic over K, and its\nstabilizer is Krull-open. Intersecting these finitely many stabilizers fixes\ng(b_h), hence D and its diagonal unit. Thus c is jointly locally constant.\nExpand b_g g(b_h) gh(b_k) in both associative orders, substitute the scalar\nrelations, and cancel b_(ghk). Injectivity of scalar matrices for n > 0 gives\nthe displayed cocycle identity. No normalization at the identity is required.",
+   "text": "Form D(g,h) = b(g) map(g,b(h)) b(gh)⁻¹. Applying g to the descent equation for h and then using that for g gives equal conjugations by b(g) map(g,b(h)) and b(gh). Multiplication by the inverse units proves that D commutes with e(1 ⊗ a). TensorProduct.induction_on and scalar linearity extend this to all tensors; surjectivity of e makes D central in GL_n(S). Mathlib Matrix.GeneralLinearGroup.center_eq_range_scalar supplies its scalar unit. Evaluation at the (0,0) entry proves scalar injectivity because n ≠ 0, so the unit is unique.",
    "uses": [
-    "def-sc-brauer-scalar-defect",
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Give S the discrete topology locally in the proof. Mathlib stabilizer_isOpen_of_isIntegral and continuousSMul_iff_stabilizer_isOpen imply that g ↦ g(x) is locally constant. Two finite LocallyConstant.unflip operations establish this entrywise for a fixed matrix, and Units.val_injective transports it to GL_n(S). On a neighborhood of (g,h), first fix b(h) using hb; then fix the action of g on this fixed matrix. Products, inversion and continuous group multiplication prove local constancy of D. IsLocallyConstant.desc and scalar injectivity transfer it to the chosen c.",
+   "uses": [
     "def-sc-galois-units-cohomology"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Expand b(g) map(g,b(h)) map(gh,b(k)) using the scalar relation in both associative orders. Use map_mul, map_scalar, and scalar_commute; cancel b(ghk), then use scalar injectivity. Applying Units.val yields exactly the stated scalar cocycle identity.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -28,7 +41,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Tag 03R6, lemma-central-simple-algebra-pgln; equation-two-cocycle immediately before Tag 03R7, theorem-brauer-delta; Section 0DVG"
+  "place": "Tag 03R6, lemma-central-simple-algebra-pgln; equation-two-cocycle immediately before Tag 03R7, theorem-brauer-delta; Section 0DVG",
+  "note": "S1 stage-3 proof and second reading: direct matrix/tensor argument, Mathlib center_eq_range_scalar and open-stabilizer local constancy; no new proof obligations."
  },
  "mathlib_searches": [
   {
@@ -137,10 +151,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T144102-L-2091747",
-  "kind": "interface",
+  "landing": "20261012T184341-L-4019297",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
