@@ -1,0 +1,96 @@
+{
+ "id": "new-lem-popescu-reduction-factor",
+ "kind": "statement",
+ "title": "Reduced map factors through a standard smooth algebra",
+ "statement": "theorem exists_popescu_reduction_factor\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I : Ideal R)\n    (hΛ : ObjectProperty.ind.{max u v}\n      (fun C : CommAlgCat.{max u v} (R ⧸ I) ↦ IsStandardSmooth (R ⧸ I) C)\n      (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ))))\n    (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A]\n    (φ : A →ₐ[R] Λ) :\n    ∃ (C : Type (max u v w)) (_ : CommRing C) (_ : Algebra (R ⧸ I) C),\n      IsStandardSmooth (R ⧸ I) C ∧\n        ∃ (β : A ⧸ I.map (algebraMap R A) →ₐ[R ⧸ I] C)\n          (δ : C →ₐ[R ⧸ I] Λ ⧸ I.map (algebraMap R Λ)),\n          δ.comp β = reducedAlgHom R Λ I A φ ",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CK, finite-presentation factorization and lifting"
+ },
+ "proof": [
+  {
+   "text": "Apply finite-presentation factorization to the reduced map into the filtered colimit; retain the standard smooth stage and its two factor maps.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07CK"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite presentation factorization through standard smooth algebra",
+   "results": "no exact match; ingredient theorem only",
+   "date": "2026-10-13",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "loogle",
+   "query": "FinitePresentation standard smooth factorization",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_smooth_factorization_of_ind_smooth",
+   "results": "existing ingredient located in Sheaf.RingTheory.IndSmoothFinitePresentationFactorization",
+   "date": "2026-10-13",
+   "verdict": "ingredient used"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuReductionPresentation",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-lift-once",
+   "place": "Tag 07CK",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PopescuReductionPresentationCore",
+  "file": "lean/Sheaf/RingTheory/PopescuReductionPresentationCore.lean",
+  "declaration": "Algebra.exists_popescu_reduction_factor",
+  "statement": "theorem exists_popescu_reduction_factor\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I : Ideal R)\n    (hΛ : ObjectProperty.ind.{max u v}\n      (fun C : CommAlgCat.{max u v} (R ⧸ I) ↦ IsStandardSmooth (R ⧸ I) C)\n      (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ))))\n    (A : Type w) [CommRing A] [Algebra R A] [FinitePresentation R A]\n    (φ : A →ₐ[R] Λ) :\n    ∃ (C : Type (max u v w)) (_ : CommRing C) (_ : Algebra (R ⧸ I) C),\n      IsStandardSmooth (R ⧸ I) C ∧\n        ∃ (β : A ⧸ I.map (algebraMap R A) →ₐ[R ⧸ I] C)\n          (δ : C →ₐ[R ⧸ I] Λ ⧸ I.map (algebraMap R Λ)),\n          δ.comp β = reducedAlgHom R Λ I A φ ",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T225303-L-1802693",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T225303-L-1802693",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
