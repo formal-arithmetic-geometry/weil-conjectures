@@ -15,6 +15,10 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 The existence of the displayed additive equivalences is the termwise sheafification,
 free-abelian, and Yoneda calculation from Stacks Project, Section 01FT.
+
+STATEMENT-DISPUTED: the theorem quantifies over arbitrary additive equivalences e₁ and e₂;
+composing either with negation generally changes one side only, so the claimed equality is false
+without coherence hypotheses.
 (blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-compatibility) -/
 theorem zariski_etale_resolution_cocycle_compatibility
     {X : Scheme.{u + 1}}

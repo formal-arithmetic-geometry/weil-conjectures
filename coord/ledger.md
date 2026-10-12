@@ -9252,3 +9252,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/Q3/Sheaf.RingTheory.GlobalDimensionFiniteModules (stage 3; reviewer PASS; first push; landing 20261012T194134-L-462645 (interface); batch 20261012T194054; modules 2; new nodes 1; change records: coord/changes/finite-basic-import.md)
 - 19:41 L: merged deliver/Q3/Sheaf.RingTheory.IndStandardSmooth (stage 3; reviewer PASS; first push; landing 20261012T194134-L-462746 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/R1/Sheaf.Paper.BoundaryDerivationSquareZero (stage 3; reviewer PASS; first push; landing 20261012T194134-L-462844 (interface); batch 20261012T194054; modules 2; new nodes 1)
+- 19:41 L: merged deliver/R1/Sheaf.Paper.ZariskiEtaleResolutionCocycleCompatibility (stage 3; reviewer PASS; first push; landing 20261012T194135-L-462945 (proof); batch 20261012T194054; modules 1; new nodes 0)
