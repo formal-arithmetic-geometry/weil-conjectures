@@ -6,13 +6,10 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.CompleteLocalGRing
 import Sheaf.RingTheory.FlatCompletion
-import Sheaf.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.RegularComposition
 import Sheaf.RingTheory.RegularPermanence
-import Sheaf.RingTheory.RegularThroughLocalization
+import Sheaf.RingTheory.GRingMaximalIdealComparison
+import Mathlib.RingTheory.AdicCompletion.LocalRing
 
 /-!
 # Checking the G-ring condition at maximal ideals
@@ -67,4 +64,35 @@ theorem isGRing_iff_maximalIdeal
           (algebraMap (Localization.AtPrime m)
             (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime m))
               (Localization.AtPrime m))) := by
-  sorry
+  constructor
+  · intro hR m
+    exact hR.2 m
+  · intro h
+    refine ⟨inferInstance, ?_⟩
+    intro p hp
+    obtain ⟨B, hB, hBlocal, hBnoeth, φ, hflat, hlocal, hregular⟩ :=
+      exists_flat_local_regular_completion_comparison R h p
+    let A := Localization.AtPrime p
+    let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
+    let Bhat := AdicCompletion (IsLocalRing.maximalIdeal B) B
+    obtain ⟨φhat, _, hcomm, hflatHat⟩ :=
+      flat_adicCompletion_of_flat_local A B φ hflat hlocal
+    have hlocalHat : IsLocalHom φhat := by
+      apply ((IsLocalRing.local_hom_TFAE φhat).out 0 2).mpr
+      rw [AdicCompletion.maximalIdeal_eq_map, Ideal.map_map, hcomm]
+      apply Ideal.map_le_iff_le_comap.mpr
+      intro x hx
+      exact map_nonunit (algebraMap B Bhat) (φ x) (hlocal x hx)
+    let : Algebra Ahat Bhat := φhat.toAlgebra
+    let : Algebra A Bhat := (φhat.comp (algebraMap A Ahat)).toAlgebra
+    let : IsScalarTower A Ahat Bhat := IsScalarTower.of_algebraMap_eq' rfl
+    have : IsLocalHom (algebraMap Ahat Bhat) := hlocalHat
+    have : Module.Flat Ahat Bhat := hflatHat
+    have : Module.FaithfullyFlat Ahat Bhat :=
+      Module.FaithfullyFlat.of_flat_of_isLocalHom
+    apply RingHom.isRegular_of_isRegular_comp (C := Bhat)
+    · change (φhat.comp (algebraMap A Ahat)).IsRegular
+      rw [hcomm]
+      exact hregular
+    · exact hflatHat
+    · exact PrimeSpectrum.comap_surjective_of_faithfullyFlat
