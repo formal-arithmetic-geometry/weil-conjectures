@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-koszul-normal-determinant-qcoherent",
+ "kind": "statement",
+ "title": "Quasi-coherence of the Koszul normal determinant",
+ "statement": "Let i:Z→Y be a Koszul-regular closed immersion into a Noetherian scheme, with r a locally constant natural-valued function equal to the conormal stalk finrank. The derived object of the explicit locallyRankedExteriorComplex of the dual conormal and r has quasi-coherent cohomology in every degree. The scheme, closed immersion, Koszul-regular sequence, ideal sheaf, pullback, derived category, direct image, internal sheaf Hom, rank-stratified complex and stalk are those of [def-pc-scheme], [def-weil-closed-immersion], [def-weil-pbc-koszul-regular-sequence], [def-sbc-closed-immersion-ideal-sheaf], [def-pc-module-pullback], [def-pc-derived-category], [def-pc-derived-direct-image], [def-pur-sheaf-hom], [def-sc-locally-ranked-exterior-complex], [def-pc-module-stalk-functor].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ and Tag 0BR0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pur-sheaf-hom",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "On each affine neighbourhood along Z, put B=A/I. Koszul-regularity gives vanishing of first Koszul homology. If a linear combination of the generators lies in I squared, subtract products of generators to obtain a Koszul cycle. It is a boundary, whose coefficients are in I; therefore the generator classes form a B-basis of I/I squared. Thus the conormal and its dual are finite locally free, and the stalk-rank hypothesis identifies the local rank with r. On the clopen rank-n stratum its top exterior power is locally free of rank one. Extension by zero along a clopen inclusion is locally that sheaf or zero and remains quasi-coherent. The rank-stratified exterior complex has zero differentials, so each cohomology sheaf is the corresponding quasi-coherent term; localization Q preserves these cohomology sheaves. This also handles negative degrees, rank zero and the empty scheme.",
+   "uses": [
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sc-locally-ranked-exterior-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ, Tag 0BR0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "determinant normal sheaf Koszul regular immersion quasi coherent cohomology",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no search verdict recorded",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "determinant normal sheaf Koszul regular immersion quasi coherent cohomology",
+   "results": "No exact candidate among eight returned hits; differential and cotangent-space results only. Loogle separately found generic quasi-coherence instances and rightAdjointUniq, but neither states this result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyRankedExteriorComplex|koszulRegularImmersion_algebraDual; rg on lean/WeilConjectures and lean/Sheaf",
+   "results": "Mathlib grep returned zero hits; library has scalar Koszul derived-Hom and the original dualizing theorem, but no determinant QCoh theorem or ambient algebra-valued comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "diagonal Koszul calculation: quasi-coherence of its normal determinant",
+   "via": [
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulRegularImmersionDualizingProperty.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_dualizing_property",
+  "statement": "theorem koszulRegularImmersion_dualizing_property {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [IsNoetherian Y] [IsClosedImmersion i]\n    [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f)\n    (r : LocallyConstant Z ℕ)\n    (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z)\n      ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))) :\n    schemeDerivedQCohProperty Z ((DerivedCategory.Q (C :=\n      SheafOfModules.{u} (moduleRings Z.toRingedSpace))).obj\n        (Scheme.Modules.locallyRankedExteriorComplex\n          (SheafOfModules.homObj (R := Z.sheaf)\n            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)\n            (SheafOfModules.unit Z.ringCatSheaf)) r))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095904-L-316996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095904-L-316996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,71 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group G2
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.TensorPullback
+public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+public import Sheaf.RingTheory.KoszulRegularSequence
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+
+/-! # Quasi-coherence of the Koszul normal determinant
+
+Source: Stacks Project, Tag 0BQZ and Tag 0BR0
+(blueprint: lem-sc-koszul-normal-determinant-qcoherent).
+-/
+
+@[expose] public section
+
+universe u wZ
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry
+
+/-- The explicit rank-stratified normal determinant has quasi-coherent cohomology.
+
+Source: Stacks Project, Duality for Schemes, Tag 0BQZ and Tag 0BR0
+(blueprint: lem-sc-koszul-normal-determinant-qcoherent).
+
+Proof: Work on affine neighbourhoods of points of Z supplied by hregular. The
+conormal sheaf is the sheaf associated to I/I² over B = A/I. Koszul-regularity
+implies H₁-regularity. The classes of the generators are a basis of I/I²:
+a relation modulo I² lifts to a first Koszul cycle after subtracting products of
+generators, and H₁ = 0 expresses that cycle as a Koszul boundary; its coefficients
+therefore lie in I. Surjectivity follows from generation of I. Thus the conormal
+and its dual are finite locally free. The prescribed stalk finrank identifies r
+with their local rank. On the clopen rank-n stratum the top exterior power is
+finite locally free of rank one. Its direct image along the clopen inclusion is
+locally that sheaf or zero, hence quasi-coherent. Negative terms are zero. Every
+differential of locallyRankedExteriorComplex is zero, so its degree-n cohomology
+is its degree-n term. Localization Q preserves this cohomology, proving the
+assertion in every degree. The empty scheme and rank zero cause no exception:
+the zero-rank determinant is the structure sheaf in degree zero. -/
+theorem koszulRegularImmersion_dualizing_property {Z Y : Scheme.{u}} (i : Z ⟶ Y)
+    [IsNoetherian Y] [IsClosedImmersion i]
+    [HasDerivedCategory.{wZ} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧
+      ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)),
+        Ideal.span (Set.range f) = i.ker.ideal U ∧
+          RingTheory.Sequence.IsKoszulRegular f)
+    (r : LocallyConstant Z ℕ)
+    (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z)
+      ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj
+        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules))) :
+    schemeDerivedQCohProperty Z ((DerivedCategory.Q (C :=
+      SheafOfModules.{u} (moduleRings Z.toRingedSpace))).obj
+        (Scheme.Modules.locallyRankedExteriorComplex
+          (SheafOfModules.homObj (R := Z.sheaf)
+            ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
+            (SheafOfModules.unit Z.ringCatSheaf)) r)) := by
+  sorry
+
+end AlgebraicGeometry

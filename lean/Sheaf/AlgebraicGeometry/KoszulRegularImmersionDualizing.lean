@@ -15,9 +15,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionAlgebraDual
 import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
 import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
-import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDerivedHom
+import Sheaf.AlgebraicGeometry.AffineDerivedHomEvaluationCounit
 
 /-! # Dualizing object of a Koszul-regular closed immersion
 
@@ -86,6 +88,30 @@ theorem koszulRegularImmersion_dualizing {Z Y : Scheme.{u}} (i : Z ⟶ Y)
             ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
             (SheafOfModules.unit Z.ringCatSheaf)) r), hdet⟩ :
         schemeDerivedQCohCategory Z) ≅ a.obj OY) := by
-  sorry
+  let hdet := koszulRegularImmersion_dualizing_property i hregular r hr
+  let D : schemeDerivedQCohCategory Z := ⟨_, hdet⟩
+  let R := (schemeDerivedQCohProperty Y).lift
+    ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i)
+    (fun E => hpres E.obj E.property)
+  let comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅
+      (schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage i := Iso.refl _
+  let : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian i
+  let : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace i
+  let : IsNoetherian Z := ⟨⟩
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace i)))
+  obtain ⟨H, adjH, _, _⟩ := exists_affine_derivedHom_evaluation_counit i
+  have hOYge : ∃ n : ℤ, OY.obj.IsGE n := by
+    refine ⟨0, ?_⟩
+    rw [hOY]
+    infer_instance
+  obtain ⟨_, _, φ, _, _, _⟩ :=
+    finite_duality_derived_hom i R comparison a adj H adjH OY hOYge
+  obtain ⟨κ⟩ := koszulRegularImmersion_algebraDual i hregular r hr H adjH
+  obtain ⟨E, ⟨eE⟩, _⟩ := finite_affine_derived_equivalence i
+  let κ' := κ ≪≫ H.mapIso (eqToIso hOY).symm ≪≫ φ.symm
+  let e := eE.app D ≪≫ κ' ≪≫ (eE.app (a.obj OY)).symm
+  exact ⟨hdet, ⟨E.fullyFaithfulFunctor.preimageIso
+    ((directImageAlgebraDerivedQCohProperty i).fullyFaithfulι.preimageIso e)⟩⟩
 
 end AlgebraicGeometry

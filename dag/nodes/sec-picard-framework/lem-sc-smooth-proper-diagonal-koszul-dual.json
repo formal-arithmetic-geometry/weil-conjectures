@@ -32,50 +32,42 @@
  ],
  "proof": [
   {
-   "text": "A closed immersion is finite by [lem-weil-pbc-closed-immersion-finite]. Z is Noetherian, being a closed subscheme of the Noetherian scheme Y, so i is a finite morphism of Noetherian schemes and \\mathcal O_Y lies in D^+_{\\mathrm{QCoh}}(\\mathcal O_Y). Apply finite Grothendieck duality [lem-sc-finite-duality-derived-hom] to i and K=\\mathcal O_Y. Since a is the right adjoint of Ri_* on quasi-coherent complexes, this gives a canonical isomorphism Ri_*a(\\mathcal O_Y)\\simeq R\\mathcal Hom_{\\mathcal O_Y}(i_*\\mathcal O_Z,\\mathcal O_Y).",
+   "text": "Use the determinant quasi-coherence theorem to regard the explicit rank-stratified normal determinant D as an object of D_QCoh(Z). A closed immersion is finite. Mathlib finite-type and quasi-compact facts make Z Noetherian; OY is bounded below in degree zero. Supply a standard chosen derived category over the direct-image algebra.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-sc-finite-duality-derived-hom"
+    "lem-sc-koszul-normal-determinant-qcoherent",
+    "lem-weil-pbc-closed-immersion-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tags 035C and 0AX2"
-   }
+   "elementary": false
   },
   {
-   "text": "The Koszul-regular Ext calculation [lem-sc-koszul-regular-immersion-derived-hom], applied with the locally constant rank r of C_i, identifies the right-hand side with Ri_*\\bigl(\\bigwedge^r N_i[-r]\\bigr). The hypotheses match by the Koszul-regular immersion and rank assumptions.",
+   "text": "Choose the ambient scalar right adjoint H from the affine derived Hom theorem. Apply finite_duality_derived_hom to the given geometric adjunction, its definitional direct-image comparison, and H. Its algebra-valued component identifies Rg_*a(OY) with H(OY). The algebra-linear Koszul theorem identifies Rg_*D with H of the degree-zero structure sheaf. Transport through hOY and compose to obtain Rg_*D≅Rg_*a(OY), before any scalar restriction.",
    "uses": [
-    "lem-sc-koszul-regular-immersion-derived-hom"
+    "lem-sc-affine-derived-hom-evaluation-counit",
+    "lem-sc-finite-duality-derived-hom",
+    "lem-sc-koszul-regular-immersion-algebra-dual"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BQZ, lemma-regular-immersion-ext"
-   }
+   "elementary": false
   },
   {
-   "text": "Because i is affine, the equivalence [lem-sc-finite-affine-derived-equivalence] identifies D_{\\mathrm{QCoh}}(\\mathcal O_Z) with D_{\\mathrm{QCoh}}(i_*\\mathcal O_Z), and its restriction functor is Ri_*. The module-compatible isomorphism between Ri_*a(\\mathcal O_Y) and Ri_*\\bigl(\\bigwedge^rN_i[-r]\\bigr) therefore descends uniquely under this equivalence to \\bigwedge^rN_i[-r]\\cong a(\\mathcal O_Y) in D_{\\mathrm{QCoh}}(\\mathcal O_Z).",
+   "text": "Take the affine derived equivalence E and its natural comparison with Rg_*. Compose its component at D, the previous algebra-derived isomorphism and the inverse component at a(OY). Lift first through the fully faithful full-subcategory inclusion D_QCoh(A)→D(A), then through E.fullyFaithfulFunctor. This gives D≅a(OY), together with its quasi-coherence witness.",
    "uses": [
     "lem-sc-finite-affine-derived-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2 area, using the affine derived equivalence for i"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-koszul-normal-determinant-qcoherent",
   "lem-weil-pbc-closed-immersion-finite",
+  "lem-sc-affine-derived-hom-evaluation-counit",
   "lem-sc-finite-duality-derived-hom",
-  "lem-sc-koszul-regular-immersion-derived-hom",
+  "lem-sc-koszul-regular-immersion-algebra-dual",
   "lem-sc-finite-affine-derived-equivalence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BR0 (lemma-regular-immersion), with Lemma 0BQZ"
+  "place": "Tag 0BR0 with algebra-linear Tag 0BQZ calculation and Tag 0AVW descent; Lean composition by G2"
  },
  "mathlib_searches": [
   {
@@ -157,5 +149,15 @@
   "group": "R1",
   "result": "pass",
   "note": "Statement matches 0BR0 clause by clause: Noetherian Y, closed immersion, local Koszul-regular generation of i.ker.ideal on affine opens near Z, conormal tensorPullback i (ker), normal via landed homObj, r tied by hr to stalk finrank, a tied by adj to the QCoh restriction of schemeDerivedDirectImage (landed hpres pattern), OY tied by hOY; hdet is a Prop witness. New node def-sc-locally-ranked-exterior-complex genuinely new (no DAG/lean/Mathlib match), fully constructed. stmt_deps gains justified."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T095904-L-316996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
