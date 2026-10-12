@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 public import Mathlib.Algebra.Field.IsField
+import Mathlib.RingTheory.Artinian.Module
 import Sheaf.FieldTheory.FiniteGaloisReceivingSeparableExtensions
 
 /-!
@@ -66,6 +67,67 @@ theorem exists_separable_split_purelyInseparable_prime_quotients
             IsField ((L ⊗[k] K i) ⧸ p) ∧
               Module.Finite L ((L ⊗[k] K i) ⧸ p) ∧
               IsPurelyInseparable L ((L ⊗[k] K i) ⧸ p) := by
-  sorry
+  obtain ⟨L, hField, hAlg, hFin, hSep, hSplit, hEmb⟩ :=
+    finite_galois_receiving_separable_extensions k n
+      (fun i ↦ separableClosure k (K i)) (fun i ↦ inferInstance) (fun i ↦ inferInstance)
+  let : Field L := hField
+  let : Algebra k L := hAlg
+  have : Module.Finite k L := hFin
+  have : Algebra.IsSeparable k L := hSep
+  have : Normal k L := { splits' := hSplit }
+  have hGal : IsGalois k L := ⟨⟩
+  refine ⟨L, hField, hAlg, hFin, hSep, hGal, hEmb, ?_⟩
+  intro i
+  have : Module.Finite L (L ⊗[k] K i) := inferInstance
+  have : IsArtinianRing (L ⊗[k] K i) :=
+    isArtinian_of_tower L (inferInstance : IsArtinian L (L ⊗[k] K i))
+  refine ⟨inferInstance, ?_⟩
+  intro p hp
+  have : p.IsPrime := hp
+  have : p.IsMaximal := inferInstance
+  refine ⟨(Ideal.Quotient.maximal_ideal_iff_isField_quotient p).mp inferInstance, inferInstance, ?_⟩
+  let : Field ((L ⊗[k] K i) ⧸ p) := Ideal.Quotient.field p
+  let E := (L ⊗[k] K i) ⧸ p
+  let f : K i →ₐ[k] E :=
+    (Ideal.Quotient.mkₐ k p).comp Algebra.TensorProduct.includeRight
+  obtain ⟨e⟩ := hEmb i
+  have hs (b : separableClosure k (K i)) : f b.val ∈ (algebraMap L E).range := by
+    have hsplit := Normal.splits (inferInstance : Normal k L) (e b)
+    rw [minpoly.algHom_eq e e.injective] at hsplit
+    apply hsplit.mem_range_of_isRoot
+    · exact Polynomial.map_ne_zero (minpoly.ne_zero (Algebra.IsIntegral.isIntegral b))
+    · change Polynomial.eval (f b.val)
+        (((minpoly k b).map (algebraMap k L)).map (algebraMap L E)) = 0
+      rw [Polynomial.map_map, ← IsScalarTower.algebraMap_eq k L E]
+      rw [Polynomial.eval_map_algebraMap]
+      exact minpoly.aeval_algHom k (f.comp (separableClosure k (K i)).val) b
+  let q := ringExpChar k
+  have : ExpChar E q := expChar_of_injective_ringHom (algebraMap k E).injective q
+  have : ExpChar L q := expChar_of_injective_ringHom (algebraMap k L).injective q
+  apply (isPurelyInseparable_iff_pow_mem L q).mpr
+  intro x
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  have hmem : Ideal.Quotient.mk p a ∈ Subalgebra.perfectClosure L E q := by
+    induction a with
+    | zero => exact (Subalgebra.perfectClosure L E q).zero_mem
+    | add a b ha hb =>
+      rw [map_add]
+      exact (Subalgebra.perfectClosure L E q).add_mem ha hb
+    | tmul l a =>
+      have hka : f a ∈ Subalgebra.perfectClosure L E q := by
+        obtain ⟨m, b, hb⟩ := IsPurelyInseparable.pow_mem (separableClosure k (K i)) q a
+        obtain ⟨c, hc⟩ := hs b
+        refine ⟨m, c, ?_⟩
+        rw [← map_pow, ← hb]
+        exact hc
+      have hl := (Subalgebra.perfectClosure L E q).algebraMap_mem l
+      have heq : Ideal.Quotient.mk p (l ⊗ₜ[k] a) = algebraMap L E l * f a := by
+        change Ideal.Quotient.mk p (l ⊗ₜ[k] a) =
+          Ideal.Quotient.mk p (l ⊗ₜ[k] (1 : K i)) *
+            Ideal.Quotient.mk p ((1 : L) ⊗ₜ[k] a)
+        rw [← map_mul, Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
+      rw [heq]
+      exact (Subalgebra.perfectClosure L E q).mul_mem hl hka
+  exact hmem
 
 end Algebra

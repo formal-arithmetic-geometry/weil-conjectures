@@ -56,9 +56,8 @@
    }
   },
   {
-   "text": "Finitely many primes, residue fields finite over $L$. If $e_1,\\dots,e_d$ is a $k$-basis of $K_i$, then every $l\\otimes a$ with $a=\\sum_jc_je_j$ ($c_j\\in k$) equals $\\sum_j(c_jl)(1\\otimes e_j)$, so $1\\otimes e_1,\\dots,1\\otimes e_d$ generate $A$ as an $L$-module: $A$ is a finite $L$-algebra. The field $L$ is a local ring whose only prime ideal is its maximal ideal $(0)$. By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] (with $R=L$, $B=A$), $A$ has only finitely many prime ideals, and each of them is maximal. This is (a). For a prime $\\mathfrak p$ of $A$, the quotient $E=A/\\mathfrak p$ by the maximal ideal $\\mathfrak p$ is a field, and it is spanned over $L$ by the images of $1\\otimes e_1,\\dots,1\\otimes e_d$, so $\\dim_LE\\le d<\\infty$: $E$ is a finite field extension of $L$ through $\\iota_L:L\\to E$, $l\\mapsto(l\\otimes1)\\bmod\\mathfrak p$ [def-pc-field-extension].",
+   "text": "Finite tensor algebra and residue fields. Mathlib Module.Finite.base_change gives Module.Finite L (L tensor_k K_i). A finite module over the field L is Artinian; isArtinian_of_tower gives that A = L tensor_k K_i is an Artinian ring. Mathlib IsArtinianRing instances give Finite (PrimeSpectrum A) and maximality of each prime p. Ideal.Quotient.maximal_ideal_iff_isField_quotient supplies IsField (A / p), and the quotient-module finiteness instance supplies Module.Finite L (A / p). This proves (a) and the field and finiteness clauses of (b) [def-pc-field-extension].",
    "uses": [
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
     "def-pc-field-extension"
    ],
    "elementary": false,
@@ -68,7 +67,7 @@
    }
   },
   {
-   "text": "The image of $L_i$ lies in the image of $L$. Let $\\iota_K:K_i\\to E$, $a\\mapsto(1\\otimes a)\\bmod\\mathfrak p$; $\\iota_L$ and $\\iota_K$ are ring homomorphisms and agree on $k$ (since $c\\otimes1=1\\otimes c$ for $c\\in k$), so both are $k$-algebra homomorphisms. Let $b\\in L_i$ and let $g\\in k[T]$ be its minimal polynomial over $k$ [def-weil-pbc-separable-algebraic-extension]. As $\\tau_i$ is an injective $k$-algebra homomorphism, $g(\\tau_i(b))=\\tau_i(g(b))=0$ and $g$ is monic irreducible, so $g$ is the minimal polynomial of $\\tau_i(b)\\in L$; by normality of $L$ (step 2), $g=\\prod_{j=1}^r(T-c_j)$ with $c_j\\in L$. Applying $\\iota_L$ to the coefficients (it fixes those of $g$, which lie in $k$), $g=\\prod_j(T-\\iota_L(c_j))$ in $E[T]$. Since $g(\\iota_K(b))=\\iota_K(g(b))=0$ and $E$ is a field, $\\iota_K(b)=\\iota_L(c_j)$ for some $j$. Hence $\\iota_K(L_i)\\subseteq\\iota_L(L)$.",
+   "text": "For a prime p, equip E = (L tensor_k K_i)/p with Ideal.Quotient.field. Let f : K_i -> E be includeRight followed by the quotient map. For b in separableClosure k K_i and e : separableClosure k K_i -> L supplied by [lem-weil-pbc-finite-galois-receiving-separable-extensions], Normal.splits says minpoly k (e b) splits in L. minpoly.algHom_eq identifies this with minpoly k b. The element f(b) is a root after mapping to E, by minpoly.aeval_algHom and scalar-tower compatibility. Polynomial.Splits.mem_range_of_isRoot therefore gives f(b) in the range of L -> E [def-weil-pbc-separable-algebraic-extension].",
    "uses": [
     "lem-weil-pbc-finite-galois-receiving-separable-extensions",
     "def-weil-pbc-separable-algebraic-extension"
@@ -80,8 +79,9 @@
    }
   },
   {
-   "text": "$E/L$ is purely inseparable. Every element of $A$ is a finite sum $\\sum_rl_r\\otimes a_r=\\sum_r(l_r\\otimes1)(1\\otimes a_r)$, so every element of $E$ has the form $x=\\sum_r\\iota_L(l_r)\\iota_K(a_r)$ ($l_r\\in L$, $a_r\\in K_i$). If $\\operatorname{char}k=0$, then $K_i=L_i$ (step 1), so $\\iota_K(a_r)\\in\\iota_L(L)$ by step 4 and $x\\in\\iota_L(L)$: $\\iota_L$ is onto, $E=L$, which is the meaning of purely inseparable in characteristic $0$ [def-weil-pbc-finite-purely-inseparable-extension]. If $\\operatorname{char}k=p>0$, then $E$ has characteristic $p$ (it is a $k$-algebra); choose by step 1 integers $m_r$ with $a_r^{p^{m_r}}\\in L_i$ and put $m=\\max_rm_r$, so $a_r^{p^m}=(a_r^{p^{m_r}})^{p^{m-m_r}}\\in L_i$ for all $r$. Since $y\\mapsto y^{p^m}$ is a ring endomorphism of $E$, $x^{p^m}=\\sum_r\\iota_L(l_r^{p^m})\\,\\iota_K(a_r^{p^m})$, which lies in $\\iota_L(L)$ by step 4. So every element of $E$ has a $p$-power in $L$, and with step 3, $E$ is a finite purely inseparable extension of $L$ [def-weil-pbc-finite-purely-inseparable-extension]. This is (b).",
+   "text": "Put q = ringExpChar k; injectivity of the field algebra maps supplies ExpChar L q and ExpChar E q. Consider Subalgebra.perfectClosure L E q, whose elements have a q-power in L. By [lem-weil-pbc-separable-first-purely-inseparable], IsPurelyInseparable.pow_mem puts a q-power of every a in K_i into separableClosure k K_i. Step 4 then puts the same power of f(a) in L. Induct on a tensor representative of an element of E. Zero belongs to the perfect-closure subalgebra, addition preserves membership, and the image of l tensor a is algebraMap L E l times f(a), which belongs by closure under multiplication. Quotient-map surjectivity covers every element of E. Finally isPurelyInseparable_iff_pow_mem gives IsPurelyInseparable L E [def-weil-pbc-finite-purely-inseparable-extension]. The exponential-characteristic argument also covers characteristic zero (q = 1); n = 0 is covered by the empty-family case of the receiving theorem.",
    "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
     "def-weil-pbc-finite-purely-inseparable-extension"
    ],
    "elementary": true,
@@ -97,13 +97,12 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-pbc-finite-purely-inseparable-extension",
   "lem-weil-pbc-finite-galois-receiving-separable-extensions",
-  "def-pc-field-extension",
-  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+  "def-pc-field-extension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Proof of More on Morphisms, Lemma 02LM (lines 12060-12079), with Fields, Lemmas 030K, 09DT, 0EXM; the 'elementary field theory' of line 12077 (steps 3-5) is written out by the agent"
+  "place": "Proof of More on Morphisms, Lemma 02LM, lines 12060-12079, implemented by U2 using Mathlib Artinian-ring instances, split-polynomial root containment and Subalgebra.perfectClosure tensor induction; the finite Galois receiving step remains the existing stated dependency."
  },
  "mathlib_searches": [
   {
@@ -187,5 +186,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T085348-L-43106",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
