@@ -10053,3 +10053,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:16 L: merged deliver/N1/Sheaf.Paper.PolynomialIdealCoefficientsMonomial (stage 3; reviewer PASS; first push; landing 20261012T231637-L-1962900 (interface); batch 20261012T231631; modules 3; new nodes 2)
 - 23:16 L: merged deliver/N4/Sheaf.AlgebraicGeometry.ClosedImmersionRankStrataScalarFormality (stage 3; reviewer PASS; first push; landing 20261012T231638-L-1963001 (interface); batch 20261012T231631; modules 2; new nodes 1)
 - 23:16 L: merged deliver/P4/Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSumStep (stage 3; reviewer PASS; first push; landing 20261012T231638-L-1963099 (interface); batch 20261012T231631; modules 3; new nodes 2)
+- 23:16 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier (stage 3; reviewer PASS; first push; landing 20261012T231638-L-1963199 (proof); batch 20261012T231631; modules 1; new nodes 2)
