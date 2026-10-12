@@ -13,20 +13,38 @@
  ],
  "proof": [
   {
-   "text": "On the overlap of the two chart opens, both local evaluations equal the section value. The homogeneous element f times the two chart numerators defines a basic open on which the values agree. Apply homogeneous-prime localization detection and identify the iterated localization with localization at the product.",
+   "text": "Use IsLocalizedModule.surj to choose x,y in A_f and denominators d in powers(g_i), e in powers(g_j) with d*t_i=x/1 and e*t_j=y/1. At any homogeneous prime where g_i*g_j is invertible, both factors are invertible. Apply the two additive evaluations to these equations; scalar compatibility and their common section value give F(e*x-d*y)=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove the private helper principal_localization_zero: for z in A_f whose evaluation vanishes wherever a degree-zero fraction g is invertible, write z=a/d with d a power of f. Every prime of D_+(f*g.num) avoids f and g.num, and g.den is a power of f; hence g is invertible there and a evaluates to zero. Apply basicOpen_localization_detection to a/1 in A_(f*g.num), whose homogeneous denominator has positive degree b+g.deg. Localization equality supplies N with (f*g.num)^N*a=0. Map to A_f and cancel powers of f, d, and g.den to get g^N*z=0, proving z/1=0 in the module localization at g. This also treats g=0, nilpotent f, and zero rings without a nonemptiness assumption.",
    "uses": [
     "lem-sc-proj-basic-open-localization-detection"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the helper to g_i*g_j and the cross numerator e*x-d*y. The universal lift formula IsLocalizedModule.lift_apply and linearity identify its localized equality with d*e times equality of the two lifted representatives. localizationAway_map_units_of_dvd makes d and e unit endomorphisms on the product localization. Use Module.End.isUnit_iff to cancel them.",
+   "uses": [
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each pair of indices instantiate twist_localOverlap_pointwise, already proved in this same module, with the supplied local evaluation data. The local Module.compHom instance agrees definitionally with the one in that theorem.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-proj-basic-open-localization-detection"
+  "lem-sc-proj-basic-open-localization-detection",
+  "lem-weil-pbc-cover-module-exact"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/01M7",
-  "place": "Finite basic-open refinement and local fractions from the construction preceding Definition 27.8.3; overlap equality via homogeneous-prime localization detection"
+  "place": "Basic-overlap fraction comparison, made explicit by J3 using cross numerators, homogeneous numerator detection and cancellation of localization denominators."
  },
  "mathlib_searches": [
   {
@@ -103,16 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T184314-L-4008282",
+  "landing": "20261012T202241-L-704927",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Proj.twist_localOverlap_compatibility"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Proj.twist_localOverlap_pointwise"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
