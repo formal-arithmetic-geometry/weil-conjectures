@@ -57,100 +57,59 @@
  "import_flags": [],
  "proof": [
   {
-   "text": "*Step 1 (clause (1); symmetry of the hypotheses).* Let $\\{g_a:Y_a\\to Y\\}_{a\\in I}$ be a family of morphisms of $\\mathcal C$ with common target. By the hypothesis on $p$, applied to the family $\\{p'(g_a):p'(Y_a)\\to p'(Y)\\}_{a\\in I}$ of $\\mathcal A$, this family is a covering of $\\mathcal A$ if and only if $\\{pp'(g_a):pp'(Y_a)\\to pp'(Y)\\}_{a\\in I}$ is a covering of $\\mathcal C$. By naturality of $\\varepsilon$, $g_a\\circ\\varepsilon_{Y_a}=\\varepsilon_Y\\circ pp'(g_a)$ for every $a$, with $\\varepsilon_{Y_a},\\varepsilon_Y$ isomorphisms. If $\\{g_a\\}$ is a covering, [lem-weil-pbc-site-covering-isomorphic-family] with $U_a=Y_a$, $U=Y$, $f_a=pp'(g_a)$, $\\sigma_a=\\varepsilon_{Y_a}$, $\\varphi=\\varepsilon_Y$ shows that $\\{pp'(g_a)\\}$ is a covering. Conversely, if $\\{pp'(g_a)\\}$ is a covering, the same lemma with the roles exchanged ($U_a=pp'(Y_a)$, $U=pp'(Y)$, $f_a=g_a$, $\\sigma_a=\\varepsilon_{Y_a}^{-1}$, $\\varphi=\\varepsilon_Y^{-1}$; indeed $pp'(g_a)\\circ\\varepsilon_{Y_a}^{-1}=\\varepsilon_Y^{-1}\\circ g_a$) shows that $\\{g_a\\}$ is a covering. This proves (1). Consequently the data $(p',p,\\varepsilon^{-1},\\eta^{-1})$, with $\\mathcal A$ and $\\mathcal C$ exchanged, satisfy all hypotheses of the lemma: $p'$ is an equivalence preserving and reflecting coverings, with quasi-inverse $p$ and natural isomorphisms $\\varepsilon^{-1}:\\mathrm{id}_{\\mathcal C}\\cong p\\circ p'$, $\\eta^{-1}:p'\\circ p\\cong\\mathrm{id}_{\\mathcal A}$.",
+   "text": "Write a presieve as ofArrows. Transport coverings in both directions along epsilon using site_covering_isomorphic_family; naturality gives each commuting square. Apply hcover to R.map p' to obtain covering symmetry.",
    "uses": [
     "lem-weil-pbc-site-covering-isomorphic-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition Tag 00VH (definition-site, line 679); written by an agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 ($p$ preserves fibre products).* By [lem-weil-pbc-quasi-inverse-adjoint] (with $F=p'$, $G=p$, $\\alpha=\\varepsilon^{-1}$, $\\beta=\\eta^{-1}$), $p$ is a right adjoint of $p'$. Let $T\\to V\\leftarrow V_a$ be morphisms of $\\mathcal A$ whose fibre product $P=T\\times_VV_a$ (with projections $\\mathrm{pr}_1,\\mathrm{pr}_2$) exists; it is the limit of the diagram $T\\to V\\leftarrow V_a$ indexed by the category $\\{1\\to0\\leftarrow2\\}$. By [lem-weil-pbc-right-adjoint-preserves-limits], $(p(P),p(\\mathrm{pr}_1),p(\\mathrm{pr}_2))$ is a limit of $p(T)\\to p(V)\\leftarrow p(V_a)$, i.e. a fibre product $p(T)\\times_{p(V)}p(V_a)$ in $\\mathcal C$. Hence this fibre product exists, and the canonical morphism $p(T\\times_VV_a)\\to p(T)\\times_{p(V)}p(V_a)$ (to any chosen fibre product, the morphism with components $p(\\mathrm{pr}_1),p(\\mathrm{pr}_2)$) is the comparison between two limits of the same diagram compatible with the projections, hence an isomorphism.",
+   "text": "Equivalence.mk p p' eta epsilon makes p' an equivalence. Equivalences preserve limits, hence both functors preserve every cospan limit, including the required covering pullbacks.",
    "uses": [
     "lem-weil-pbc-quasi-inverse-adjoint",
     "lem-weil-pbc-right-adjoint-preserves-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Definition Tag 001J (line 351), Definition Tag 0037 (line 3344), Lemma Tag 0038 (lemma-adjoint-exact, line 3472) (2); written by an agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 ($p$ is continuous).* Let $\\{V_a\\to V\\}_{a\\in I}$ be a covering of $\\mathcal A$. (a) $\\{p(V_a)\\to p(V)\\}_{a\\in I}$ is a covering of $\\mathcal C$ by the hypothesis on $p$. (b) For a morphism $T\\to V$ of $\\mathcal A$ the fibre products $T\\times_VV_a$ exist (axiom (iii) of 00VH) and the canonical morphisms $p(T\\times_VV_a)\\to p(T)\\times_{p(V)}p(V_a)$ are isomorphisms by Step 2. So $p$ is continuous (Sites, Definition 00WV, [def-weil-pbc-sites-and-cohomology](3)).",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition Tag 00WV (definition-continuous, line 2524)"
-   }
-  },
-  {
-   "text": "*Step 4 ($p^s$ and $p'^s$ are quasi-inverse equivalences).* By Step 3, and by Step 3 applied to the data $(p',p,\\varepsilon^{-1},\\eta^{-1})$ of Step 1, $p$ and $p'$ are continuous; by [lem-weil-pbc-site-continuous-pushforward-sheaf] (Sites, Lemma 00WW), $p^s\\mathcal G=\\mathcal G\\circ p$ is a sheaf of sets (resp. abelian sheaf) on $\\mathcal A$ for every sheaf of sets (resp. abelian sheaf) $\\mathcal G$ on $\\mathcal C$, and $p'^s\\mathcal F=\\mathcal F\\circ p'$ is one on $\\mathcal C$ for every $\\mathcal F$ on $\\mathcal A$; on morphisms $p^s\\psi=(\\psi_{p(X)})_X$, $p'^s\\phi=(\\phi_{p'(Y)})_Y$, so both are functors. For a sheaf $\\mathcal G$ on $\\mathcal C$ we have $p'^sp^s\\mathcal G=\\mathcal G\\circ p\\circ p'$, and the maps $\\mathcal G(\\varepsilon_Y):\\mathcal G(Y)\\to\\mathcal G(pp'(Y))$ are bijections (group isomorphisms), with inverses $\\mathcal G(\\varepsilon_Y^{-1})$; they are natural in $Y$ by naturality of $\\varepsilon$ and functoriality of $\\mathcal G$, and natural in $\\mathcal G$ because morphisms of sheaves are natural transformations. So they form a natural isomorphism $\\mathrm{id}\\cong p'^s\\circ p^s$ of functors on sheaves on $\\mathcal C$. Likewise the maps $\\mathcal F(\\eta_X):\\mathcal F(p'p(X))\\to\\mathcal F(X)$ form a natural isomorphism $p^s\\circ p'^s\\cong\\mathrm{id}$ on sheaves on $\\mathcal A$. Hence $p^s$ and $p'^s$ are quasi-inverse equivalences of categories (Categories, Definition 001J), on sheaves of sets and on abelian sheaves. This proves (2) (with Step 3) and (3).",
+   "text": "Apply siteContinuous_pushforward_isSheaf separately to p and p', with the forward and reverse covering implications and the preceding pullback preservation. Convert the Type-valued sheaf predicate to construct both IsContinuous witnesses.",
    "uses": [
     "lem-weil-pbc-site-continuous-pushforward-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00WW (lemma-pushforward-sheaf, line 2548); categories.tex Definition Tag 001J; written by an agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 5 ($p_s$ is a quasi-inverse of $p^s$).* By Step 4 the hypothesis of [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (Sites, Lemma 00WX) holds for $u=p$, so $p_s$ is a left adjoint of $p^s$ on sheaves of sets, resp. on abelian sheaves. By [lem-weil-pbc-quasi-inverse-adjoint] applied to the quasi-inverse pair $(p^s,p'^s)$ of Step 4, $p'^s$ is both a left adjoint and a right adjoint of $p^s$. By [lem-weil-pbc-conjugate-iso-unit-equation] with $R_1=R_2=p^s$, $\\delta=\\mathrm{id}$, $L_1=p_s$, $L_2=p'^s$ (uniqueness of left adjoints) there is a natural isomorphism $c:p_s\\xrightarrow{\\sim}p'^s$. Then $p^s\\circ p_s\\cong p^s\\circ p'^s\\cong\\mathrm{id}$ and $p_s\\circ p^s\\cong p'^s\\circ p^s\\cong\\mathrm{id}$ (whiskering $c$ and composing with the isomorphisms of Step 4), so $p_s$ is a quasi-inverse of $p^s$, on sheaves of sets and on abelian sheaves.",
+   "text": "Mathlib sheafPushforwardContinuousComp followed by sheafPushforwardContinuousId' for epsilon and eta.symm constructs the two inverse-composition isomorphisms, uniformly for Type u and AddCommGrpCat. These give equivalence instances for both set-valued pushforwards.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-quasi-inverse-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Functor.sheafAdjunctionContinuous for each functor. An adjunction with equivalence right adjoint has equivalence left adjoint (Adjunction.isEquivalence_left_of_isEquivalence_right). Its unit and counit are isomorphisms, giving the four pullback/pushforward inverse-composition isomorphisms. Its toEquivalence.symm.toAdjunction makes the pullback a right adjoint, giving preservation of limits and then finite limits; as a left adjoint it preserves colimits and finite colimits. Assemble all clauses as a conjunction and two existential witnesses.",
    "uses": [
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "lem-weil-pbc-quasi-inverse-adjoint",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 00WX (lemma-adjoint-sheaves, line 2579); written by an agent"
-   }
-  },
-  {
-   "text": "*Step 6 ($p_s$ is exact; $p$ defines a morphism of sites $\\mathcal C\\to\\mathcal A$).* On sheaves of sets, $p_s$ is a left adjoint of $p^s$ (Step 5), so by [lem-weil-pbc-left-adjoint-preserves-colimits] it commutes with all colimits that exist, in particular finite ones. $p'^s$ is a right adjoint of $p^s$ (Step 5), so by [lem-weil-pbc-right-adjoint-preserves-limits] it commutes with all limits that exist. For a finite diagram in $\\Sh(\\mathcal A)$ with limit cone $\\lambda$, the cone $p_s(\\lambda)$ is isomorphic through the components of $c:p_s\\cong p'^s$ (Step 5) to the limit cone $p'^s(\\lambda)$, and a cone isomorphic to a limit cone is a limit cone; so $p_s$ commutes with finite limits. Hence $p_s$ is exact (Categories, Definition 0034), and the continuous functor $p$ (Step 3) defines a morphism of sites $\\mathcal C\\to\\mathcal A$ (Sites, Definition 00X1, [def-weil-pbc-sites-and-cohomology](3)).",
-   "uses": [
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
     "lem-weil-pbc-right-adjoint-preserves-limits",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition Tag 00X1 (definition-morphism-sites, line 2687); categories.tex Lemma Tag 0038 (lemma-adjoint-exact, line 3472), Definition Tag 0034; written by an agent"
-   }
-  },
-  {
-   "text": "*Step 7 (the same for $p'$).* By Step 1 the data $(p',p,\\varepsilon^{-1},\\eta^{-1})$ satisfy the hypotheses of the lemma with $\\mathcal A$ and $\\mathcal C$ exchanged. Steps 2, 3, 5 and 6 applied to them give: $p'$ is continuous, $p'_s$ is a quasi-inverse of $p'^s$ (on sheaves of sets and on abelian sheaves), $p'_s$ on sheaves of sets is exact, and $p'$ defines a morphism of sites $\\mathcal A\\to\\mathcal C$. Together with Steps 1-6 this proves (1)-(4).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "written by an agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-site-covering-isomorphic-family",
   "lem-weil-pbc-quasi-inverse-adjoint",
   "lem-weil-pbc-right-adjoint-preserves-limits",
-  "def-weil-pbc-sites-and-cohomology",
   "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "def-weil-pbc-sites-and-cohomology",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "no Stacks lemma states it; Definitions Tag 00VH, 00WV, 00X1 and Lemmas Tag 00WW, 00WX of sites.tex, with Categories Definitions 001J, 0037 and Lemma 0038; Lemma 03A0 (lemma-equivalence) is the topos-level analogue for cocontinuous functors and is not used"
+  "place": "Definitions 00VH, 00WV, 00X1 and Lemmas 00WW, 00WX; categories.tex Definitions 001J and Lemma 0038. V3 stage-3 Lean proof uses Mathlib composition isomorphisms and adjunction equivalence transfer in place of explicit uniqueness-of-left-adjoint transport."
  },
  "mathlib_match": null,
  "status": "split",
@@ -204,5 +163,15 @@
   "group": "G1",
   "result": "fix",
   "note": "sites=Precoverage+4 axiom classes, SmallCategory; p equivalence, p', eta, epsilon, covering iff for p; (1) iff for p'; (2) 00WV fibre-product clauses (PreservesLimit cospan) for p and p' added + IsContinuous; (3) four pushforward quasi-inverse isos (Type, Ab); (4) exactness of sheafPullback p, p' and p_s/p^s, p'_s/p'^s quasi-inverse isos (replacing p_s/p'_s isos)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085355-L-46086",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
