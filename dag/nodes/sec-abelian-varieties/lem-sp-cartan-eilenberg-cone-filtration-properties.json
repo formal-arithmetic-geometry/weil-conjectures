@@ -17,44 +17,39 @@
  ],
  "proof": [
   {
-   "text": "All nonzero I summands on diagonal n have b<=s<=n, and the additional K summand has s=n+1 and is zero if n+1<b. Thus step b contains all nonzero summands and is the whole cone object, whereas step n+2 contains none and is zero. Use the coproduct and cone biproduct universal properties; this includes empty diagonals.",
+   "text": "Write J for the identity-mapped extended flipped bicomplex. Its object at (r,s) is zero for s<b, by functorial preservation of zero objects, or for r<0, by extension by zero. To show F.complexStep b n is top, show its monic subobject arrow is epic by cancellation against zero. Cone ext_from reduces this to the K^(n+1) generator and the total-complex generators. The K generator has image below the step if b<=n+1, otherwise its source is zero. For a total generator with r+s=n, either b<=s<=n so its image is one of the finite supremum terms, or s<b or r<0 and its source is zero. Factor-through-image and Subobject.ofLE then show each generator kills any map annihilated by the step arrow. Mono plus epi makes that arrow an isomorphism, so the step is top.",
    "uses": [
+    "def-sp-cartan-eilenberg-presentation",
     "def-sp-double-complex-total",
-    "def-sp-filtration",
     "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": true,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0133",
-    "place": "Homology, Tag 0133, lemma-double-complex-gives-resolution, canonical augmentation and finite-diagonal filtration; augmented-cone form of the argument, with Tag 012W"
-   }
+   "elementary": false
   },
   {
-   "text": "Pass to the quotient of step p by step p+1. Projection onto complex-degree-p summands kills all higher summands, and inclusion of the degree-p summands is its inverse on the quotient. Terms of the differential raising complex degree disappear. The surviving resolution differential has coefficient one because J is flipped. On the K^p summand in degree p-1, haug identifies the surviving off-diagonal differential with the extended a^p. These give an isomorphism of the three-term short complex in degree n with the column mapping-cone short complex in degree n-p, also when terms vanish. Apply homology to obtain the asserted isomorphism.",
+   "text": "At p=n+2 the K summand is omitted, since n+2>n+1, and the interval Icc(max b (n+2),n) is empty. Rewrite hF and simplify the empty supremum to obtain bottom.",
    "uses": [
-    "def-sp-double-complex-total",
-    "def-sp-cartan-eilenberg-presentation",
-    "def-sp-filtration",
-    "lem-pur-quasi-iso-cone-acyclic"
+    "def-sp-filtered-complex-subquotients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/0133",
-    "place": "Homology, Tag 0133, lemma-double-complex-gives-resolution, canonical augmentation and finite-diagonal filtration; augmented-cone form of the argument, with Tag 012W"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For p,n apply the short-complex comparison to obtain an isomorphism (F.gradedPiece p).sc n with the column cone sc at n-p. Apply Mathlib CategoryTheory.ShortComplex.homologyMapIso. HomologicalComplex.homology is definitionally the homology of sc, so this has exactly the required type. Pair it with the two proved degreewise bounds.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-cone-graded-short-complex-iso"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-cartan-eilenberg-presentation",
   "def-sp-double-complex-total",
   "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration",
-  "lem-pur-quasi-iso-cone-acyclic"
+  "lem-sp-cartan-eilenberg-cone-graded-short-complex-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0133",
-  "place": "Homology, Tag 0133, lemma-double-complex-gives-resolution, canonical augmentation and finite-diagonal filtration; augmented-cone form of the argument, with Tag 012W"
+  "place": "C3 Lean proof: direct cancellation proof of both finite bounds; parent step 2 split as a short-complex comparison; Mathlib homologyMapIso completes the assembly."
  },
  "mathlib_searches": [
   {
@@ -135,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-08d32",
-  "group": "Q2",
+  "reviewer": "COMPILER",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T202249-L-707746",
+  "landing": "20261012T225301-L-1801793",
   "kind": "interface",
-  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, compile results, and direct importer all match the stage-3 brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

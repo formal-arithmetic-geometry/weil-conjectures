@@ -1,0 +1,153 @@
+{
+ "id": "lem-sp-cartan-eilenberg-cone-graded-short-complex-iso",
+ "kind": "statement",
+ "title": "Short-complex comparison for the graded augmented cone",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], $K$ an integer-indexed cochain complex, $I$ a bicomplex with complex index $s\\in\\mathbf Z$ and resolution index $r\\in\\mathbf N$ [def-sp-double-complex-total], and $a:K[0]\\to I$ a bicomplex map, where $K[0]$ concentrates each $K^s$ in resolution degree zero. Let $b\\in\\mathbf Z$ and suppose $I^{s,\\bullet}=0$ and $K^s=0$ for $s<b$. Let $J$ be the identity-mapped, extended-by-zero and flipped bicomplex [def-sp-cartan-eilenberg-presentation], and let $\\epsilon:K\\to\\operatorname{Tot}(J)$ be a chain map whose component in degree $n$ is $a^{n,0}$ followed by the extension identification and the $(0,n)$ diagonal inclusion. Set $C=\\operatorname{Cone}(\\epsilon)$, using the mapping cone of [lem-pur-quasi-iso-cone-acyclic], with canonical inclusions $u_n:K^{n+1}\\to C^n$ and $v_n:\\operatorname{Tot}(J)^n\\to C^n$. Let $F$ be any decreasing subcomplex filtration of $C$ [def-sp-filtration] whose degreewise steps satisfy [def-sp-filtered-complex-subquotients] $F^pC^n=(\\operatorname{im}(u_n)\\text{ if }p\\le n+1\\text{, else }0)+\\sum_{s=\\max(b,p)}^n\\operatorname{im}(J^{n-s,s}\\to\\operatorname{Tot}(J)^n\\xrightarrow{v_n}C^n)$. The sum is the finite supremum of image subobjects, with empty sum zero. For any integers $p,n$, there is an isomorphism of short complexes $\\operatorname{sc}_n(\\operatorname{gr}^p_F C)\\cong\\operatorname{sc}_{n-p}(\\operatorname{Cone}(\\operatorname{extend}(a^p)))$. Here $\\operatorname{gr}^p_F C$ is the cokernel of the inclusion of subcomplexes $F^{p+1}C\\to F^pC$ [def-sp-filtration], $\\operatorname{sc}_m(L)$ is $L^{m-1}\\xrightarrow{d} L^m\\xrightarrow{d}L^{m+1}$, and extend is extension by zero from resolution indices in $\\mathbf N$ to $\\mathbf Z$. No bounds on the filtration, homology isomorphism, or quasi-isomorphism is asserted in this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Homology, lemma-double-complex-gives-resolution, canonical augmentation; Tag 012X, second filtration and its graded differential; augmented-cone refinement of parent proof step 2"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof": [
+  {
+   "text": "For each m in {n-1,n,n+1}, decompose the cone as K^(m+1) plus the diagonal coproduct of J. The hF formula picks out the finite image sum with complex indices at least p. Projection onto index p kills step p+1, so its restriction to step p descends through the cokernel of their inclusion. Evaluation preserves cokernels. The inclusion of the index-p summands into step p, followed by the cokernel projection, is its inverse: one composite is the identity on the retained summands; for the other cancel the epic cokernel projection and check each generating map of step p. Index p gives identity, larger indices factor through step p+1 and vanish. The image-supremum universal property makes those generators jointly detecting.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the retained object with the degree m-p object of the cone of extend(a.f p). The extended single complex retains K^p exactly at resolution degree zero, hence in the cone at m=p-1. The retained I summand has resolution index m-p and uses extendXIso. If p<b both objects vanish by the two below-bound hypotheses. If m<p-1 extension by zero gives zero on both sides. This covers all integer and empty-interval cases.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the two differential squares for m=n-1,n. The -d_K block raises complex degree and is killed in the quotient; the horizontal bicomplex block raises complex degree and is likewise killed. The resolution block preserves complex degree and has coefficient one because J is flipped, so it is the first total differential. The only remaining off-diagonal component is from K^p at total degree p-1; haug identifies it with extend(a.f p) in resolution degree zero. The other source resolution terms are zero. The three isomorphisms and the two commuting squares give a ShortComplex.isoMk, with no homology calculation required.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "C3 explicit augmented-cone refinement of the graded-complex calculation, following parent proof step 2 and canonical augmentation of Tag 0133"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "graded piece column filtration augmentation mapping cone short complex isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Short complex isomorphism between the graded piece of a column filtered augmentation mapping cone and the column mapping cone",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingConeHomOfDegreewiseSplitXIso; CochainComplex.mappingConeHomOfDegreewiseSplitIso. These commute additive functors with cones or split a short exact sequence; none treats the column filtration quotient.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.homologyMapIso",
+   "results": "0 hits: unknown identifier 'ShortComplex.homologyMapIso'. Local source confirms the namespaced CategoryTheory.ShortComplex.homologyMapIso exists, but it only passes an already constructed short-complex iso to homology.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*shortComplex|shortComplex.*graded|graded.*mappingCone",
+   "results": "0 Mathlib hits. Repository search finds the first-quadrant natural-indexed ConeHorizontalGradedIso, whose cone and cutoff formula differ; no matching integer-indexed augmented-cone short-complex result.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergConeFiltrationProperties",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 2: canonical quasi-isomorphism from the augmented Cartan--Eilenberg resolution to its total; graded column-cone calculation in the finite-diagonal filtration.",
+   "via": [
+    "lem-sp-cartan-eilenberg-cone-filtration-properties",
+    "lem-sp-cartan-eilenberg-cone-filtration",
+    "lem-sp-cartan-eilenberg-augmentation-quasi-iso",
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergConeGradedShortComplex",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergConeGradedShortComplex.lean",
+  "declaration": "CategoryTheory.Functor.cartanEilenberg_cone_graded_shortComplex_iso",
+  "statement": "theorem cartanEilenberg_cone_graded_shortComplex_iso {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] (K : CochainComplex A ℤ) (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ)) (a : ((CochainComplex.single₀ A).mapHomologicalComplex (ComplexShape.up ℤ)).obj K ⟶ I) (b : ℤ) (hIbelow : ∀ s : ℤ, s < b → IsZero (I.X s)) (hKbelow : ∀ s : ℤ, s < b → IsZero (K.X s)) (aug : K ⟶ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).total (ComplexShape.up ℤ)) (haug : ∀ n : ℤ, aug.f n = (a.f n).f 0 ≫ (HomologicalComplex.extendXIso (((𝟭 A).mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X n)) ComplexShape.embeddingUpNat (i := 0) (i' := 0) rfl).inv ≫ (((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotal (ComplexShape.up ℤ) 0 n n (zero_add n)) (F : DecreasingFiltration (CochainComplex.mappingCone aug)) (hF : ∀ p n : ℤ, F.complexStep p n = (if p ≤ n + 1 then imageSubobject ((CochainComplex.mappingCone.inl aug).v (n + 1) n (by omega)) else ⊥) ⊔ (Finset.Icc (max b p) n).sup (fun s ↦ imageSubobject ((((CartanEilenbergPresentation.mappedFunctor (𝟭 A)).obj I).flip).ιTotalOrZero (ComplexShape.up ℤ) (n - s) s n ≫ (CochainComplex.mappingCone.inr aug).f n))) (p n : ℤ) : Nonempty ((F.gradedPiece p).sc n ≅ (CochainComplex.mappingCone (HomologicalComplex.extendMap (a.f p) ComplexShape.embeddingUpNat)).sc (n - p))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T225301-L-1801793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T225301-L-1801793",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
