@@ -35,6 +35,10 @@ Cech-acyclicity argument, with the necessary `ULift` comparisons.
 Proof: choose the universe-lifted injective resolution and form the Cech double complex.
 Transport the equal-universe comparisons along canonical ULift equivalences.
 (blueprint: stage3-cech-general-double-complex) -/
+-- STATEMENT-DISPUTED: the cited injective-resolution argument does not establish this
+-- large-site statement from HasExt alone. The planned declarations require an explicit
+-- InjectiveResolution F and equal coefficient/index universes. No counterexample is claimed;
+-- the unresolved obligation is resolution existence in the original sheaf category.
 theorem Sheaf.exists_cechDoubleComplex_general
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]
     (F : Sheaf J AddCommGrpCat.{v}) (X : C)
