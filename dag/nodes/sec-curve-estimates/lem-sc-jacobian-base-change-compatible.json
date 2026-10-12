@@ -15,24 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Proof: on each test scheme T over K, the iterated-pullback isomorphism identifies\nC_K ×_K T with C ×_k T. Pullback of invertible modules along this isomorphism preserves\nfibrewise degree, because the two fibres and their Euler characteristics agree. Thus it\ninduces an isomorphism of degree-zero Picard presheaves. Restriction along Over.map b\ncommutes with fppf sheafification, since covers of T in the two slice sites are the same;\ncompose this comparison with the sheafification of the presheaf isomorphism to get E.\nThe units of sheafification commute with E, so E sends the class of L to the class of its\nspecified pullback. The adjunction Over.map b ⊣ Over.pullback b transports e to a\nrepresentation r of the restricted sheaf by J_K. Transport r along E, and compare it with\neK using uniqueness of representing objects (Yoneda). This gives i : JK ≅ J_K with\nr.homEquiv (a ≫ i.hom) = eK.homEquiv a. Apply this to the classifying map of the\npullback of L, use the unit compatibility, and invert e.homEquiv. The inverse adjunction\nsends a map to J_K to its composite with pullback.fst J.hom b, giving exactly the square.\nThis construction applies to arbitrary representing identifications, hence also to those\nrespecting the group laws. Identity extensions and genus-zero curves are included.\n",
+   "text": "Construct the explicit Picard presheaf pullback isomorphism and prove it preserves the degree-zero subfunctor using fibrewise degree base-change.",
    "uses": [
-    "cor-pd-pic0-base-change",
-    "def-sc-jacobian",
-    "def-pc-base-change"
+    "def-pc-base-change",
+    "lem-pd-degree-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify the subfunctor isomorphism, transport the representing identification through the Over.map/pullback adjunction, and compare it with the chosen base-changed representation by uniqueUpToIso.",
+   "uses": [
+    "lem-pd-picard-base-change",
+    "lem-sc-jacobian-unique",
+    "def-sc-jacobian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use sheafification naturality and representing homEquiv compatibility to derive the required equality for every test scheme and line-bundle class.",
+   "uses": [
+    "lem-sc-jacobian-unique"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-pd-pic0-base-change",
+  "def-pc-base-change",
   "def-sc-jacobian",
-  "def-pc-base-change"
+  "lem-pd-picard-base-change",
+  "lem-pd-degree-locally-constant",
+  "lem-sc-jacobian-unique"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/lem-sc-genus-invariant.md",
-  "place": "## Proof"
+  "by": "worker",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Picard/Defs.lean, Degree.lean, Jacobian.lean; lean/WeilConjectures/Mathlib/CategoryTheory/Yoneda.lean",
+  "place": "picardPresheafIsoOfIsPullback, picardPresheafDegree_pic_map_of_isPullback, overMapOpCompSheafifyIso, and homEquiv_comp_uniqueUpToIso_hom"
  },
  "mathlib_searches": [
   {
@@ -107,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T060757-L-2917111",
-  "kind": "interface",
+  "landing": "20261012T070540-L-3472674",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
