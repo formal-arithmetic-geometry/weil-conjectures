@@ -8296,3 +8296,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: returned deliver/A2/Sheaf.RingTheory.MinimalGradedPresentationExists (reviewer RETURN: (the landing tools, head c1043495b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 15:19 L: returned deliver/F3/Sheaf.Topology.CompactCechDirectedColimit (reviewer RETURN: (the landing tools, head a2880eeae) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Top)
 - 15:19 L: returned deliver/N2/Sheaf.AlgebraicGeometry.EtaleLimitInjectiveColimitAcyclic (reviewer RETURN: (the landing tools, head 88a3bdb87) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 15:19 L: merged deliver/A3/Sheaf.RingTheory.IntegralOverHenselianPair (stage 3; reviewer PASS; after a return; landing 20261012T151905-L-2286832 (proof); batch 20261012T151904; modules 1; new nodes 0)
