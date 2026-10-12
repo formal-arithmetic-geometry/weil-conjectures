@@ -8,8 +8,7 @@ module
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Sheafification preserves flatness of module presheaves
@@ -56,6 +55,35 @@ theorem isFlat_sheafification_obj
     (letI := SheafOfModules.monoidalCategory R
      PreservesFiniteLimits (tensorRight ((sheafification α).obj F))) ∧
       SheafOfModules.IsFlat ((sheafification α).obj F) := by
-  sorry
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let : PreservesFiniteLimits (tensorRight F) := hF
+  let : HasSheafify J AddCommGrpCat.{u} := inferInstance
+  let A := sheafification α
+  let I := SheafOfModules.forget _ ⋙ restrictScalars α
+  let : PreservesFiniteLimits I :=
+    (sheafificationAdjunction α).rightAdjoint_preservesLimits.{u, u}.preservesFiniteLimits
+  let : PreservesFiniteLimits A :=
+    inferInstanceAs (PreservesFiniteLimits (sheafification α))
+  let : PreservesFiniteLimits (tensorRight F ⋙ A) :=
+    comp_preservesFiniteLimits (tensorRight F) A
+  let : PreservesFiniteLimits (I ⋙ tensorRight F ⋙ A) :=
+    comp_preservesFiniteLimits I (tensorRight F ⋙ A)
+  obtain ⟨e⟩ := nonempty_sheafTensorSheafificationIso α
+  let eF : tensorRight (A.obj F) ≅ I ⋙ tensorRight F ⋙ A :=
+    NatIso.ofComponents (fun G ↦ e.app (G, F)) (by
+      intro G H f
+      have h := e.hom.naturality (X := (G, F)) (Y := (H, F)) (f, 𝟙 F)
+      simpa [A, I, tensorHom_def] using h)
+  let : PreservesFiniteLimits (tensorRight (A.obj F)) :=
+    preservesFiniteLimits_of_natIso eF.symm
+  obtain ⟨_, ⟨closed⟩, _⟩ := SheafOfModules.tensorClosed R
+  let : MonoidalClosed (SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) := closed
+  refine ⟨inferInstance, ?_⟩
+  change PreservesFiniteLimits (tensorRight (A.obj F)) ∧
+    PreservesFiniteColimits (tensorRight (A.obj F))
+  refine ⟨inferInstance, ?_⟩
+  exact preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight _)
 
 end PresheafOfModules

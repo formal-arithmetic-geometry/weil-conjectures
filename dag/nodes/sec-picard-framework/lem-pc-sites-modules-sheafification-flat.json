@@ -25,56 +25,40 @@
  ],
  "proof": [
   {
-   "text": "Let $\\iota$ be restriction of scalars from sheaves of $\\mathcal O^\\#$-modules to presheaves of $\\mathcal O$-modules, and let $a=(-)^\\#$ be the module sheafification $\\mathrm{PMod}(\\mathcal O)\\to\\Mod(\\mathcal O^\\#)$, left adjoint to $\\iota$, whose underlying abelian sheaf is the abelian sheafification [lem-pc-sites-module-sheafification-interface]. Finite limits in $\\mathrm{PMod}(\\mathcal O)$ are computed sectionwise, and in $\\Mod(\\mathcal O^\\#)$ they are computed sectionwise and the forgetful functor to abelian sheaves commutes with them [lem-weil-pbc-module-sheaves-colimits-forgetful]; so both forgetful functors to (pre)sheaves of abelian groups preserve and reflect finite limits (a cone of modules is a limit cone iff its underlying cone of abelian (pre)sheaves is). On underlying abelian (pre)sheaves, $\\iota$ is the inclusion of sheaves into presheaves and $a$ is abelian sheafification, both of which preserve finite limits [lem-weil-pbc-sheafification-exact]. Therefore $a$ and $\\iota$ preserve finite limits. Since $T_{\\mathcal F}=-\\otimes_{p,\\mathcal O}\\mathcal F$ preserves finite limits in $\\mathrm{PMod}(\\mathcal O)$ by hypothesis, the composite $a\\circ T_{\\mathcal F}\\circ\\iota$ preserves finite limits.",
+   "text": "The module sheafification adjunction [lem-pc-sites-module-sheafification-interface] makes restriction a right adjoint, hence it preserves finite limits. Import Mathlib concrete abelian-group filtered colimits; together with the transitively available left-exact sheafification construction this yields HasSheafify for this small site; Mathlib then gives finite-limit preservation of module sheafification via underlying abelian sheaves [lem-weil-pbc-sheafification-exact]. Together with the hypothesis on tensorRight F, composition preserves finite limits.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-weil-pbc-sheafification-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.28.3 (Tag 03ET), using the exactness of sheafification"
-   }
+   "elementary": false
   },
   {
-   "text": "For every sheaf $\\mathcal G$ of $\\mathcal O^\\#$-modules, the site-level tensor/sheafification comparison gives a natural isomorphism $\\mathcal G\\otimes_{\\mathcal O^\\#}\\mathcal F^\\#\\cong(\\iota\\mathcal G\\otimes_{p,\\mathcal O}\\mathcal F)^\\#$ [lem-pc-sites-module-sheafification-tensor]. By the definition of the sheaf tensor product, this is exactly $\\mathcal G\\mapsto a(T_{\\mathcal F}(\\iota\\mathcal G))$.",
+   "text": "Specialize the natural bifunctor comparison [lem-pc-sites-module-sheafification-tensor] at the presheaf F. Its components are e.app (G,F); naturality is the comparison naturality at (f,id F), simplified using tensorHom_def. This gives tensorRight (a F) isomorphic to restriction followed by tensorRight F followed by a. Transfer finite-limit preservation across its inverse.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
     "lem-pc-sites-module-sheafification-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.28.3 (Tag 03ET), hint and the definition in Section 03EK"
-   }
+   "elementary": false
   },
   {
-   "text": "By Steps 1 and 2, $\\mathcal G\\mapsto\\mathcal G\\otimes_{\\mathcal O^\\#}\\mathcal F^\\#$ preserves finite limits on $\\Mod(\\mathcal O^\\#)$. It is additive and, being left adjoint to $\\mathcal Hom_{\\mathcal O^\\#}(\\mathcal F^\\#,-)$, preserves cokernels [lem-pc-sheaf-modules-tensor-closed], so it is right exact; an additive functor between abelian categories preserving kernels and cokernels is exact. Hence $\\mathcal F^\\#$ is flat [def-pc-flat-sheaf-modules] (and, conversely, exactness of this right exact functor gives preservation of finite limits, which is the stated equivalence).",
+   "text": "Choose the monoidal closed structure supplied by [lem-pc-sheaf-modules-tensor-closed]. TensorLeft (a F), as a left adjoint, preserves finite colimits. Symmetry gives tensorLeft (a F) isomorphic to tensorRight (a F), transferring finite-colimit preservation. Combine with finite-limit preservation to obtain exactFunctor, precisely IsFlat [def-pc-flat-sheaf-modules].",
    "uses": [
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 18.28.3 (Tag 03ET), conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-sites-module-sheafification-interface",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-sheafification-exact",
-  "def-pur-sheaf-tensor-product",
   "lem-pc-sites-module-sheafification-tensor",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-sheaf-modules-tensor-closed"
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "W3 stage 3",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 18.28.3 (Tag 03ET), with its stated hint that sheafification is exact"
+  "place": "Tag 03ET, lemma-flatness-sheafification; Lean proof uses Mathlib preservation instances, bifunctor comparison specialized at F, and monoidal closure plus symmetry."
  },
  "mathlib_searches": [
   {
@@ -153,5 +137,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T085358-L-47156",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
