@@ -6,8 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
 
 /-! # Tensor-pullback sections restricted to opens
 
@@ -50,6 +49,8 @@ theorem nonempty_etaleTensor_openSections_iso
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules) :
     Nonempty (i.op ⋙ etaleTensorSectionsPresheaf F ≅
-      F.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u}) := by sorry
+      F.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u}) := by
+  exact ⟨NatIso.ofComponents (etaleTensorOpenSectionIso X i hi F)
+    (fun f ↦ etaleTensorOpenSectionIso_naturality X i hi F f)⟩
 
 end AlgebraicGeometry.Scheme.Modules

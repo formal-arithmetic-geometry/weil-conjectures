@@ -1,0 +1,132 @@
+{
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Equation (35.8.0.1), with pullback adjunction from Tags 0095 and 0096; agent-written explicit comparison using Mathlib leftAdjointUniq."
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/03DR",
+  "place": "Adjunction uniqueness and the ordinary restriction unit, Tags 0095 and 0096."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"unit_leftAdjointUniq_hom_app\"",
+   "date": "2026-10-12",
+   "digest": "c63cfd4128fd351b",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app; CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app_assoc",
+   "verdict": "Unit/restriction ingredients found, but no theorem for these tensor-section comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison of two left adjoints commutes with the adjunction units and restriction of module sections to an open subset",
+   "date": "2026-10-12",
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Unavailable; no conclusion drawn."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq|restrictAdjunction_unit_app_app|restrictAppIso",
+   "date": "2026-10-12",
+   "digest": "10b3cd56018dedfe",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean; Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "verdict": "Unit/restriction ingredients found, but no theorem for these tensor-section comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For inclusions of open subschemes the uniqueness comparison from an arbitrary left adjoint of module pushforward to restriction intertwines the unit-normalized composition maps on global sections",
+   "date": "2026-10-12",
+   "digest": "d92d48c5525d37cd",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "verdict": "Unit/restriction ingredients found, but no theorem for these tensor-section comparisons."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleTensorOpenSections",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "id": "new-etale-tensor-open-section-naturality",
+ "kind": "statement",
+ "title": "Restriction compatibility of the constructed open-section comparisons",
+ "statement": "For $X,F,i$ as in [new-etale-tensor-open-section-iso], let $e_U$ denote the constructed comparison there. For every open inclusion $V\\subseteq U$, the tensor-section restriction $\\rho$ [lem-sc-etale-qcoherent-presheaf-functorial] satisfies $\\rho\\circ e_V=e_U\\circ F(U\\to V)$ in diagrammatic composition order. Equivalently, the square with tensor sections above, ordinary additive sections [def-sc-module-cech-comparison] below, and vertical maps $e_U,e_V$ commutes. No component isomorphism is asserted here: these are the fixed, already constructed maps.",
+ "stmt_deps": [
+  "new-etale-tensor-open-section-iso",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-sc-module-cech-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use hi on objects and arrows to replace i by the underlying open-subscheme inclusions. The morphisms over X become the canonical inclusions because restrictionFunctor maps an inclusion to Scheme.homOfLE.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For inclusions a:V to U and b:U to X, the unit equation of the mate defining tensorSectionsComp identifies the successive tensor units with the unit for a followed by b. Apply the unit equation of leftAdjointUniq for the explicitly constructed comparisons e. Injectivity of the adjunction Hom equivalence identifies the resulting composite with the restriction-unit composite.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "new-etale-tensor-open-section-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate this equality at top sections. restrictAdjunction_unit_app_app is ordinary restriction; restrictAppIso and image-top transports identify the source and target sections with F(U) and F(V). Functoriality of F.presheaf identifies the equality transports and proves the naturality square.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "new-etale-tensor-open-section-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "new-etale-tensor-open-section-iso"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-cd",
+   "place": "Step 5, Artin-Schreier bound via quasi-coherent etale descent; component and naturality steps of lem-sc-etale-tensor-open-sections."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorOpenSectionsNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorOpenSectionIso_naturality",
+  "statement": "theorem etaleTensorOpenSectionIso_naturality (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) (hi : i ⋙ Scheme.Etale.forget X = X.restrictFunctor) (F : X.Modules) {U V : X.Opensᵒᵖ} (f : U ⟶ V) : (i.op ⋙ etaleTensorSectionsPresheaf F).map f ≫ (etaleTensorOpenSectionIso X i hi F V).hom = (etaleTensorOpenSectionIso X i hi F U).hom ≫ (F.presheafModuleCat ⋙ forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u}).map f",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135256-L-1679188",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T135256-L-1679188",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
