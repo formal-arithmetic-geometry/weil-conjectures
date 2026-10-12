@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "Put $F=k(x_1,\\dots,x_r)\\subseteq K$. By [def-weil-pbc-transcendence-basis], the $x_i$ are algebraically independent over $k$, so evaluation gives an injection $P=k[X_1,\\dots,X_r]\\hookrightarrow K$. Its fraction field maps isomorphically onto $F$: the image consists of the fractions $g(x)/h(x)$ with $g,h\\in P$, $h\\ne0$, and is precisely the smallest subfield of $K$ containing $k$ and all $x_i$.",
+   "text": "Put P = k[X_i], A = Algebra.adjoin k (range x), and F = IntermediateField.adjoin k (range x). The algebraic independence part of the transcendence-basis hypothesis gives the evaluation isomorphism P ≃ₐ[k] A (AlgebraicIndependent.aevalEquiv). IntermediateField.mem_adjoin_iff_div expresses every element of F as a quotient of elements of A. The inclusion A → F is faithful (Subalgebra.inclusion.faithfulSMul), so IsFractionRing.of_field gives IsFractionRing A F. Transfer it along the evaluation isomorphism using IsFractionRing.of_ringEquiv_left to obtain IsFractionRing P F. Define P → K by evaluation and P → F by the evaluation isomorphism followed by inclusion. Their scalar towers commute by aevalEquiv.commutes and algebraMap_aevalEquiv.",
    "uses": [
     "def-weil-pbc-transcendence-basis"
    ],
@@ -45,35 +45,32 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-polynomial-ring-kahler-basis] (Algebra, Tag 00RX), $\\Omega_{P/k}$ is free over $P$ on $\\mathrm dX_1,\\dots,\\mathrm dX_r$. Let $S=P\\setminus\\{0\\}$. The localization is $S^{-1}P=F$ by step 1, and [lem-weil-pbc-kahler-differentials-localization] (Algebra, Tag 00RT) gives $\\Omega_{F/k}\\cong S^{-1}\\Omega_{P/k}$. Localizing the displayed free basis gives the $F$-basis $\\mathrm dx_1,\\dots,\\mathrm dx_r$ of $\\Omega_{F/k}$, since the localization map sends $\\mathrm dX_i$ to $\\mathrm dx_i$.",
+   "text": "Localization makes P → F formally étale: apply Mathlib Algebra.FormallyEtale.of_isLocalization to nonZeroDivisors P (Mathlib/RingTheory/Etale/Basic.lean:179, Stacks Tag 04EG). The hypothesis hxs supplies Algebra.IsSeparable F K; Mathlib Algebra.FormallyEtale.of_isSeparable F K (Mathlib/RingTheory/Etale/Field.lean:98) makes F → K formally étale, even without finiteness. Compose these using Algebra.FormallyEtale.comp P F K (Etale/Basic.lean:114). No use of hfg or hsep is needed.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04EG (lemma-localization-formally-etale); Tag 090W (lemma-characterize-separable-algebraic-field-extensions), with the general separable algebraic formal-etaleness supplied by the proved Mathlib theorem Algebra.FormallyEtale.of_isSeparable"
+   }
+  },
+  {
+   "text": "Take the polynomial differential basis b = KaehlerDifferential.mvPolynomialBasis k (Fin r), supplied by [lem-weil-pbc-polynomial-ring-kahler-basis]. Scalar-extend it directly from P to K using Module.Basis.baseChange K. Since P → K is formally étale, the canonical isomorphism tensorKaehlerEquivOfFormallyEtale k P K underlying [lem-weil-pbc-separable-algebraic-differentials-base-change] maps this basis to a K-basis of Ω[K/k]. Here the canonical theorem is applied to the composite formally étale map rather than transporting the basis in two stages.",
    "uses": [
     "lem-weil-pbc-polynomial-ring-kahler-basis",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "def-weil-pbc-kahler-differentials"
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-separable-algebraic-differentials-base-change"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44194-44199 (the direct-sum formula for Omega of k(x_1,...,x_r)); Lemma Tag 00RX (lemma-differentials-polynomial-ring), lines 34310-34345; Lemma Tag 00RT (lemma-differentials-localize), lines 34078-34100"
    }
   },
   {
-   "text": "The hypothesis says that $K/F$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. It is finite: if $K=k(a_1,\\dots,a_n)$ as in the statement, then $K=F(a_1,\\dots,a_n)$, and adjoining each algebraic $a_i$ has finite degree over the preceding field; multiplying these finitely many degrees gives $[K:F]<\\infty$. Thus [lem-weil-pbc-separable-algebraic-differentials-base-change] applies and makes the canonical $K$-linear map $K\\otimes_F\\Omega_{F/k}\\xrightarrow{\\sim}\\Omega_{K/k}$, $a\\otimes\\mathrm df\\mapsto a\\,\\mathrm df$, an isomorphism.",
-   "uses": [
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-separable-algebraic-differentials-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44189-44202: K is finite separable over k(x_1,...,x_r), and the differential computation is omitted; Lemma Tag 090W (lemma-characterize-separable-algebraic-field-extensions), lines 44137-44160"
-   }
-  },
-  {
-   "text": "Extend the F-basis to K and transport it through the canonical differential base-change isomorphism of step 3. Each transported vector is D(x_i), so this gives the asserted basis, also when r = 0.",
-   "uses": [
-    "lem-weil-pbc-separable-algebraic-differentials-base-change"
-   ],
+   "text": "For each i, Module.Basis.map_apply and baseChange_apply identify the new basis vector with the image of 1 ⊗ dX_i. The formulas tensorKaehlerEquivOfFormallyEtale_apply, mapBaseChange_tmul, map_D and mvPolynomialBasis_apply identify this image with D k K (aeval x (X i)); MvPolynomial.aeval_X makes it D k K (x i). These formulas apply unchanged for r = 0, with no inhabited-index assumption.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
@@ -83,16 +80,15 @@
  ],
  "proof_deps": [
   "def-weil-pbc-transcendence-basis",
-  "lem-weil-pbc-polynomial-ring-kahler-basis",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "def-weil-pbc-kahler-differentials",
   "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "def-weil-pbc-kahler-differentials",
   "lem-weil-pbc-separable-algebraic-differentials-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 031W, lines 44189-44202"
+  "place": "Proof of Tag 031W, polynomial differential computation Tag 00RX and localization Tag 04EG; formal-etale composition and differential base change use the proved Mathlib declarations described in the steps."
  },
  "mathlib_searches": [
   {
@@ -158,10 +154,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T194116-L-456727",
-  "kind": "interface",
+  "landing": "20261012T225324-L-1811123",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
