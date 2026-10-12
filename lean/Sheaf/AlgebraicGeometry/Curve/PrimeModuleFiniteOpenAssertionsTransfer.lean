@@ -8,7 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
-import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
+import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions
+import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 
 /-! # Finite-open transfer for prime module coefficients
@@ -23,6 +24,88 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry.IsCurve
+
+private theorem invertibleOrder_of_iso {Λ : Type (u + 1)} [CommRing Λ]
+    {S X : Scheme.{u}} {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (e : F ≅ G) [Scheme.IsTorsionSheafOfInvertibleOrder S F] :
+    Scheme.IsTorsionSheafOfInvertibleOrder S G where
+  exists_isUnit_nsmul_eq_zero Ω _ _ s x := by
+    let es := (Scheme.pointSmallEtale s).sheafFiber.mapIso e
+    obtain ⟨n, hn, hu, hx⟩ :=
+      Scheme.IsTorsionSheafOfInvertibleOrder.exists_isUnit_nsmul_eq_zero
+        (S := S) (F := F) Ω s (es.inv.hom x)
+    refine ⟨n, hn, hu, ?_⟩
+    have he : es.hom.hom (es.inv.hom x) = x := by
+      rw [← ModuleCat.comp_apply, es.inv_hom_id, ModuleCat.id_apply]
+    rw [← he, ← map_nsmul, hx, map_zero]
+
+/-- Assertions descend along a split monomorphism when the conditional hypotheses
+pass to the larger sheaf. This applies to genuine retracts, without an isomorphism.
+Source: Stacks Project, 03SD, first proof paragraph (retract devissage). -/
+private theorem assertions_of_retraction {Λ : Type (u + 1)} [CommRing Λ]
+    {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
+    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (a : F ⟶ G) (b : G ⟶ F) (hab : a ≫ b = 𝟙 F)
+    (hc : Scheme.IsConstructibleSheaf F → Scheme.IsConstructibleSheaf G)
+    (hp : ∀ p, Scheme.IsPrimaryTorsionSheaf Λ F p →
+      Scheme.IsPrimaryTorsionSheaf Λ G p)
+    (ho : Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F →
+      Scheme.IsTorsionSheafOfInvertibleOrder (Spec (.of k)) G)
+    (h : Assertions Λ f G) : Assertions Λ f F := by
+  let T := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  let a' := T.map a
+  let b' := T.map b
+  have hab' : a' ≫ b' = 𝟙 (T.obj F) := by
+    dsimp [a', b']
+    rw [← T.map_comp, hab, T.map_id]
+  have hinj (q : ℕ) : Function.Injective (Sheaf.H.map a' q) := by
+    apply Function.LeftInverse.injective (g := Sheaf.H.map b' q)
+    intro x
+    rw [← Sheaf.H.map_comp_apply, hab', Sheaf.H.map_id_apply]
+  have hsurj {Y : Scheme.{u}} (g : Y ⟶ X) (q : ℕ)
+      (hg : Function.Surjective (Etale.cohomologyMap g (T.obj G) q)) :
+      Function.Surjective (Etale.cohomologyMap g (T.obj F) q) := by
+    intro y
+    obtain ⟨x, hx⟩ := hg (Sheaf.H.map ((Etale.upperStar _ g).map a') q y)
+    refine ⟨Sheaf.H.map b' q x, ?_⟩
+    rw [Etale.cohomologyMap_map, hx, ← Sheaf.H.map_comp_apply,
+      ← CategoryTheory.Functor.map_comp, hab', CategoryTheory.Functor.map_id, Sheaf.H.map_id_apply]
+  have hbij {Y : Scheme.{u}} (g : Y ⟶ X) (q : ℕ)
+      (hg : Function.Bijective (Etale.cohomologyMap g (T.obj G) q)) :
+      Function.Bijective (Etale.cohomologyMap g (T.obj F) q) := by
+    refine ⟨?_, hsurj g q hg.2⟩
+    intro x y hxy
+    apply hinj q
+    apply hg.1
+    simpa only [Etale.cohomologyMap_map] using
+      congrArg (Sheaf.H.map ((Etale.upperStar _ g).map a') q) hxy
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro q hq
+    have := h.subsingleton_of_two_lt q hq
+    exact (hinj q).subsingleton
+  · intro _ q hq
+    have := h.subsingleton_of_one_lt_of_isAffine q hq
+    exact (hinj q).subsingleton
+  · intro p _ _ hF q hq
+    have := h.subsingleton_of_one_lt_of_isPrimaryTorsionSheaf p (hp p hF) q hq
+    exact (hinj q).subsingleton
+  · intro hF hFo q
+    have := hc hF
+    have := ho hFo
+    have := h.finite_of_isTorsionSheafOfInvertibleOrder q
+    exact Finite.of_injective _ (hinj q)
+  · intro _ hF q
+    have := hc hF
+    have := h.finite_of_isProper q
+    exact Finite.of_injective _ (hinj q)
+  · intro hF k' _ _ X' ι f' ι' hs q
+    have := ho hF
+    exact hbij ι' q (h.bijective_cohomologyMap_of_isTorsionSheafOfInvertibleOrder k' hs q)
+  · intro _ k' _ _ X' ι f' ι' hs q
+    exact hbij ι' q (h.bijective_cohomologyMap_of_isProper k' hs q)
+  · intro W g _
+    exact hsurj g 2 (h.surjective_cohomologyMap_of_isOpenImmersion g)
 
 /-- Transfer assertions across a finite-open square, allowing a supplied
 isomorphism of the sheaf on the upper open. No filtration or constant-case
@@ -58,6 +141,33 @@ theorem prime_module_finite_open_assertions_transfer
         F)) :
     Assertions (ULift.{u + 1} (ZMod r)) f
       ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj
-        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj H)) := by sorry
+        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj H)) := by
+  have transport {Z : Scheme.{u}} (g : Z ⟶ Spec (.of k))
+      {P Q : Sheaf Z.smallEtaleTopology
+        (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))} (i : P ≅ Q)
+      (h : Assertions (ULift.{u + 1} (ZMod r)) g P) :
+      Assertions (ULift.{u + 1} (ZMod r)) g Q := by
+    apply assertions_of_retraction g i.inv i.hom i.inv_hom_id ?_ ?_ ?_ h
+    · intro hQ
+      let := hQ
+      exact Scheme.IsConstructibleSheaf.of_iso i.symm
+    · intro t hQ Ω _ _ s x
+      let es := (Scheme.pointSmallEtale s).sheafFiber.mapIso i
+      obtain ⟨n, hn⟩ := hQ Ω s (es.hom.hom x)
+      refine ⟨n, ?_⟩
+      apply (ModuleCat.mono_iff_injective es.hom).mp inferInstance
+      simpa using hn
+    · intro hQ
+      let := hQ
+      exact invertibleOrder_of_iso i.symm
+  let R := ULift.{u + 1} (ZMod r)
+  let A := ModuleCat.{u + 1} R
+  let K := (Etale.openImmersionLowerShriek A a).obj H
+  have hK : Assertions R (p ≫ f) K :=
+    transport (p ≫ f) ((Etale.openImmersionLowerShriek A a).mapIso e) hF
+  have hprime := Assertions.of_finite_pushforward_module R p f K hK
+  have := Etale.isIso_finiteOpenComparison_app A sq H
+  exact transport f (asIso ((Etale.finiteOpenComparison A sq).app H)).symm
+    hprime
 
 end AlgebraicGeometry.IsCurve

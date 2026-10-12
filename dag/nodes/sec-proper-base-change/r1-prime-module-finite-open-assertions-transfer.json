@@ -19,14 +19,19 @@
  ],
  "proof": [
   {
-   "text": "Apply a_! to e and transfer assertions along the resulting sheaf isomorphism. All sheaves are r-torsion. Apply the finite-pushforward curve assertions to the underlying abelian sheaf, comparing its integral coefficient realization with the prime module realization. Cohomology and primary/invertible torsion depend only on the underlying abelian sheaf. For C4/C5 use constructibility descent from finite pushforward when the conditional hypotheses hold; equivalence of the integral and prime module notions over a finite coefficient ring supplies the coefficient bridge.",
+   "text": "Map e through a_! and transport assertions from a_! F to a_! H using the fully proved private assertions_of_retraction, specialized to the inverse and forward maps of the isomorphism. The helper works for any split monomorphism of module sheaves provided primary torsion, invertible-order torsion, and constructibility pass to the larger sheaf. Forgetting modules preserves the splitting. Sheaf.H.map sends it to a left inverse in every degree, giving injectivity for vanishing and finiteness. Naturality of Etale.cohomologyMap descends comparison surjectivity by lifting after the section and applying the retraction; comparison injectivity follows by the section. For an isomorphism the three conditional hypotheses pass by stalk isomorphisms and constructibility invariance. This applies to zero sheaves and empty schemes and does not impose constructibility unconditionally.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply Assertions.of_finite_pushforward_module with coefficient ring ULift(ZMod r), finite morphism p, structure map f, and sheaf a_! H. This gives Assertions for p_* a_! H directly, without an integral coefficient realization or a coefficient bridge.",
    "uses": [
-    "lem-weil-pbc-curve-assertions-finite-pushforward"
+    "b3-finite-pushforward-module-assertions"
    ],
    "elementary": false
   },
   {
-   "text": "Finite-open exchange gives j_! v_* H isomorphic to p_* a_! H. Naturality transports the cohomology and comparison maps, hence all eight assertions, across this isomorphism.",
+   "text": "The finite-open comparison at H is an isomorphism j_! v_* H ≅ p_* a_! H. Specialize the same retraction helper to this isomorphism to obtain the eight assertions on j_! v_* H.",
    "uses": [
     "lemma-weil-pbc-finite-pushforward-extension-zero",
     "def-weil-pbc-finite-open-comparison"
@@ -35,11 +40,16 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-curve-assertions-finite-pushforward",
+  "b3-finite-pushforward-module-assertions",
   "lemma-weil-pbc-finite-pushforward-extension-zero",
   "def-weil-pbc-finite-open-comparison"
  ],
- "proof_origin": "Stacks proof, expanded into an interface by R1; see declaration docstring.",
+ "proof_origin": {
+  "by": "agent",
+  "group": "F2",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0A5D and 0GJ1; module-valued finite pushforward and retraction transfer (03SD, first proof paragraph), generalized in place during F2 repair"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -138,10 +148,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T153650-L-2395509",
-  "kind": "interface",
+  "landing": "20261012T184256-L-4002013",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
