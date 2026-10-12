@@ -25,10 +25,9 @@
  ],
  "proof": [
   {
-   "text": "Write B_U(M) as the comparison p_U*U*M to q_U*f*M, followed by q_U* of the inverse tensor/abstract pullback comparison. Naturality of c(j,q_W;q_V) with respect to this last inverse moves that factor to q_V*. The remaining comparison identity is the associativity coherence of the module pullback pseudofunctor: both composites identify j*p_W*W*M with q_V*f*M through the same morphism to X. Use j followed by p_W equals p_V followed by i, i followed by W equals V, and j followed by q_W equals q_V. Apply the three-fold composition coherence on each path and cancel the common comparison for the total morphism. This gives K(M).inv followed by j*B_W(M) and the q comparison equal to p_V* of c(i,W;V).hom followed by B_V(M). The argument is natural for every module M, including the zero module, and does not use any section or invertibility.",
+   "text": "Prove a private threefold pullbackCompOfEq associativity lemma by equality induction from Mathlib Scheme.Modules.pseudofunctor_associativity, cancelling the inverse comparison factors. Prove comparison naturality from the naturality of pullbackComp after equality induction. For a commuting diagram with j p_W = p_V i, i W = V, p_W W = q_W f, p_V V = q_V f, and j q_W = q_V, apply the associativity lemma to (j,q_W,f), (j,p_W,W), and (p_V,i,W). Postcompose by the comparison for q_V f, rewrite these three equations, and cancel inverse isomorphisms to obtain the pure square identity. Naturality moves any morphism f*L to N through the comparison for j q_W. Specialize this identity to the inverse canonical tensor/abstract pullback comparison, and expand the source square and target isomorphisms using only their projection formulas. This is exactly the required equality, for arbitrary L.",
    "uses": [
     "def-pc-module-pullback",
-    "lem-sc-etale-generators-pullback-section",
     "lem-sc-etale-generators-pullback-source-comparison"
    ],
    "elementary": false
@@ -36,7 +35,6 @@
  ],
  "proof_deps": [
   "def-pc-module-pullback",
-  "lem-sc-etale-generators-pullback-section",
   "lem-sc-etale-generators-pullback-source-comparison"
  ],
  "proof_origin": {
@@ -55,7 +53,7 @@
     }
    ]
   },
-  "why": "Explicit factor of the original naturality argument, using canonical pullback composition coherence."
+  "why": "Formalized the original coherence argument using Mathlib pseudofunctor_associativity and naturality of pullbackComp. No generator-section theorem or invertibility is needed."
  },
  "mathlib_searches": [
   {
@@ -126,10 +124,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T160832-L-2613071",
-  "kind": "interface",
+  "landing": "20261012T184348-L-4021609",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
