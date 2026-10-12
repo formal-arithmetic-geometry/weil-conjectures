@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-adic-completion-ring-equiv",
+ "kind": "statement",
+ "title": "Adic completions respect ring equivalences",
+ "statement": "Let R and S be commutative rings, I and J ideals, and e : R \\simeq S a ring equivalence with J = e(I). Their adic completions [def-weil-pbc-adic-completion] admit a ring equivalence E commuting with the canonical maps: E composed with R to its completion equals e followed by S to its completion.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Definition 07GH and Proposition 07PV, quotient presentation; inverse-limit construction from algebra.tex Section 00M9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Ideal.quotientEquiv for each power gives the bijectivity of the quotient maps induced by e.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply RingTheory.pair_henselization_completion_data to e. Its inverse compatibility implies the required forward compatibility by injectivity of the inverse completion equivalence.",
+   "uses": [
+    "lem-weil-pbc-henselization-completion-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselization-completion-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Definition 07GH and Proposition 07PV, quotient presentation; inverse-limit construction from algebra.tex Section 00M9",
+  "note": "E2 second reading shortened the proof to the existing proved quotient-power completion comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "adic completion is invariant under ring isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring equivalence mapping an ideal to another induces compatible ring equivalence of adic completions",
+   "results": "AdicCompletion.congr is for linear equivalences with fixed scalar ring; ofAlgEquiv requires completeness. Neither is the stated compatible ring equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; ingredients used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"RingEquiv\"",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; ingredients used"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*[Ee]quiv in Mathlib and both library roots",
+   "results": "No exact transport theorem. quotientEquiv, liftRingHom, eval and ext_eval are used.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GRingEquiv",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-g-ring-ring-equiv",
+   "place": "ring-isomorphism transport argument",
+   "via": [
+    "lem-weil-pbc-g-ring-ring-equiv"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.AdicCompletionRingEquiv",
+  "file": "lean/Sheaf/RingTheory/AdicCompletionRingEquiv.lean",
+  "declaration": "AdicCompletion.exists_ringEquiv",
+  "statement": "theorem AdicCompletion.exists_ringEquiv\n    {R : Type u} {S : Type v} [CommRing R] [CommRing S]\n    (I : Ideal R) (J : Ideal S) (e : R ≃+* S) (h : J = I.map e) :\n    ∃ E : AdicCompletion I R ≃+* AdicCompletion J S,\n      E.toRingHom.comp (algebraMap R (AdicCompletion I R)) =\n        (algebraMap S (AdicCompletion J S)).comp e.toRingHom",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11010",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

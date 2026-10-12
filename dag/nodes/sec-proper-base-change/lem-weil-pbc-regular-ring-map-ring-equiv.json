@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-regular-ring-map-ring-equiv",
+ "kind": "statement",
+ "title": "Regular ring maps respect ring equivalences",
+ "statement": "For commutative rings R1, R2, S1, S2 in possibly different universes, maps f : R1 to S1 and g : R2 to S2, and ring equivalences a : R1 \\simeq R2 and b : S1 \\simeq S2 satisfying b composed with f = g composed with a, regularity [def-weil-pbc-g-ring] of f implies regularity of g.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Definition 07BZ; algebra.tex Lemma 0381, finite purely inseparable criterion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write g = b composed with f composed with a inverse. Flatness of equivalences and composition transports the flat clause.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back a prime of R2 to R1. Mathlib residueFieldRingEquiv identifies residue fields compatibly with the base maps. Semilinear tensor congruence gives a ring equivalence of fibres and their residue-field actions.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport Noetherianity. Pull back each finite purely inseparable field extension through the residue-field equivalence, using Module.Finite.trans and IsPurelyInseparable.trans. Module.Finite.small and Shrink provide a model in the original criterion universe. Tensor congruence transports regularity of the base-changed fibre. Apply the defining regular-map criterion.",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Definition 07BZ; algebra.tex Lemma 0381, finite purely inseparable criterion",
+  "note": "E2 wrote the transport argument from the definitions and Mathlib universal properties."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "regular ring homomorphism invariant under isomorphism",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity of a ring homomorphism is invariant under isomorphisms of its source and target rings",
+   "results": "RingHom.RespectsIso and tools for other properties, no regular-map result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; ingredients used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\"",
+   "results": "Only regular elements and Lean reducibility hints, not regular ring maps.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; ingredients used"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegular.*[Ee]quiv|IsGeometricallyRegular.*equiv in Mathlib and both library roots",
+   "results": "No existing regular-map or geometric-regularity transport; Flat.comp and IsRegularRing.of_ringEquiv are used.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; ingredients used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GRingEquiv",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-g-ring-ring-equiv",
+   "place": "ring-isomorphism transport argument",
+   "via": [
+    "lem-weil-pbc-g-ring-ring-equiv"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.RegularRingEquiv",
+  "file": "lean/Sheaf/RingTheory/RegularRingEquiv.lean",
+  "declaration": "RingHom.IsRegular.of_ringEquiv",
+  "statement": "theorem RingHom.IsRegular.of_ringEquiv\n    {R₁ : Type u₁} {R₂ : Type u₂} {S₁ : Type v₁} {S₂ : Type v₂}\n    [CommRing R₁] [CommRing R₂] [CommRing S₁] [CommRing S₂]\n    (f : R₁ →+* S₁) (g : R₂ →+* S₂) (a : R₁ ≃+* R₂) (b : S₁ ≃+* S₂)\n    (h : b.toRingHom.comp f = g.comp a.toRingHom) (hf : f.IsRegular) :\n    g.IsRegular",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11010",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085231-L-11010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
