@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-proper-flat-structure-sheaf-stalk",
+ "kind": "statement",
+ "title": "One residue-field fibre controls the structure-sheaf unit at its base stalk",
+ "statement": "Let $f:X\\to S$ be a proper [def-weil-proper-morphism], flat [def-weil-flat-morphism], locally finitely presented [def-sbc-locally-finite-presentation] morphism of schemes [def-weil-scheme-over-base]. Fix one point $s\\in S$. Assume that the canonical map $\\kappa(s)\\to H^0(X_s,\\mathcal O_{X_s})$ is an isomorphism. Let $\\eta:\\mathcal O_S\\to f_*f^*\\mathcal O_S$ be the unit of the tensor-formula pullback/direct-image adjunction [lem-pc-module-pullback-adjunction], with $f^*$ as in [def-pc-module-pullback]. Then the induced map $\\eta_s$ on the stalk [def-pc-module-stalk-functor] at $s$ is bijective. There is no hypothesis about functions on the other fibres.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0E62, perfect-lemma-proper-flat-h0, proof localized at the fixed point s; local finite free model from Tag 0BCD, lift-perfect-from-residue-field"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-rf-perfect-base-change] to $\\mathcal O_X$, which is finitely presented and relatively flat since $f$ is flat. This gives a perfect derived image $E=Rf_*\\mathcal O_X$ and identifies its derived fibre at $s$ with $R\\Gamma(X_s,\\mathcal O_{X_s})$. The derived structure map $u:\\mathcal O_S[0]\\to E$ induces the assumed canonical map on degree-zero fibre cohomology. The negative cohomology of the derived fibre is zero because it is derived sections of a sheaf.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the affine bounded finite free residue model from [lem-sc-perfect-finite-free-residue-model] at $s$. Its negative terms have rank zero, and its term in degree zero has rank one. Over the affine neighbourhood, maps from the free module $\\mathcal O[0]$ into this bounded projective model can be represented by chain maps: projectivity of the source makes Hom exact, so it computes derived Hom. Represent $u$ by such a chain map. Its component $u^0$ reduces to an isomorphism at the residue field by the hypothesis. Localizing at $s$, a map between rank-one free modules with invertible residue is multiplication by a unit, hence invertible. The chain-map identity $d^0u^0=0$ forces $d^0=0$ in the local ring. Since there are no negative terms, $H^0(E)_s$ is its degree-zero term and $H^0(u)_s$ is bijective.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The zeroth right-derived direct image of a sheaf is its ordinary direct image: computing by an injective resolution in nonnegative degrees and using left exactness identifies $H^0(Rf_*\\mathcal O_X)$ with $f_*\\mathcal O_X$ and identifies the induced degree-zero structure map with the ordinary structure map. The canonical tensor identification $f^*\\mathcal O_S\\cong\\mathcal O_X$ sends $1\\otimes a$ to the image of $a$. The sectionwise unit formula of [lem-pc-module-pullback-adjunction] thus identifies the chosen unit followed by the pushforward of this identification with the ordinary structure map. The pushforward of an isomorphism is an isomorphism, so bijectivity on the stalk is unchanged and the stated chosen unit is bijective.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X3",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0E62 proof; its local argument at s written out using the Tag 0BCD rank-minimal model"
+ },
+ "proof_deps": [
+  "lem-pc-rf-perfect-base-change",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper flat morphism canonical structure sheaf map on stalk isomorphism from one fiber global sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper flat finite presentation canonical structure sheaf unit bijective on stalk at point whose fiber has only residue field global functions",
+   "results": "Flat.iff_flat_stalkMap, Flat.of_stalkMap, Flat, flat_iff and stalkwise scheme-morphism isomorphism results; none states the proper pushforward unit criterion",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat",
+   "results": "12 declarations: Flat, its composition and base-change instances, SpecMap_iff and other basic flatness properties; no structure-sheaf pushforward stalk criterion",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*flat.*stalk|stalk.*proper.*flat",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatGlobalSectionsCriterion",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: structure-sheaf pushforward for the product morphism; the Tag 0E62 criterion at one residue-field fibre",
+   "via": [
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFlatStructureSheafStalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFlatStructureSheafStalk.lean",
+  "declaration": "AlgebraicGeometry.bijective_structureSheafMap_stalk_of_proper_flat_fiber",
+  "statement": "theorem bijective_structureSheafMap_stalk_of_proper_flat_fiber\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f]\n    [LocallyOfFinitePresentation f] (s : S)\n    (hs : IsIso (f.fiberToSpecResidueField s).appTop) :\n    Function.Bijective\n      (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).unit.app\n        (SheafOfModules.unit S.ringCatSheaf)).stalkLinearMap s)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T173917-L-3310137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T173917-L-3310137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
