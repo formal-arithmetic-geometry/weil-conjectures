@@ -7,12 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
-import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
-import Sheaf.RingTheory.IntegralOverHenselianPair
-import Sheaf.Paper.StrictHenselizationLocalStructure
-import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
+import Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux
 
 /-! # Local sections of an integral geometric fibre
 
@@ -59,6 +55,35 @@ theorem integralFibreSection_localLift
       (op (Scheme.Etale.mk (𝟙 X')))) :
     ∃ (V : Y.Etale) (v : (pointSmallEtale s).fiber.obj V)
       (z : F.obj.obj (op (f.Etale.obj V))),
-      (geometricFibreSectionRestriction Λ sq.toCommSq F V v).hom z = t := by sorry
+      (geometricFibreSectionRestriction Λ sq.toCommSq F V v).hom z = t := by
+  classical
+  obtain ⟨e, he⟩ := exists_qcqsStrictLocalModuleComparison Λ f s F
+  obtain ⟨b, hb⟩ := exists_integralStrictLocalFibreComparison Λ sq F
+  let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+    strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+      (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
+  let : N.Initial := (strictHenselization_properties s).1
+  let := (strictHenselization_properties s).2.1
+  have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (forget (ModuleCat.{u + 1} Λ)) :=
+    CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  let P := ((lowerStar (ModuleCat.{u + 1} Λ) f).obj F).obj
+  let c := ((pointSmallEtale s).presheafFiberCocone P).whisker N.op
+  have hc : CategoryTheory.Limits.IsColimit c :=
+    (Functor.Final.isColimitWhiskerEquiv N.op _).symm
+      ((pointSmallEtale s).isColimitPresheafFiberCocone P)
+  obtain ⟨j, z, hz⟩ := CategoryTheory.Limits.Types.jointly_surjective_of_isColimit
+    (CategoryTheory.Limits.isColimitOfPreserves (forget (ModuleCat.{u + 1} Λ)) hc) (e.inv (b.inv t))
+  refine ⟨((AffineEtale.Spec Y).obj
+    ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j.unop).1),
+    ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j.unop).2,
+    z, ?_⟩
+  have h := congrArg (fun a ↦ b.hom (e.hom a)) hz
+  have hformula := congrArg (fun a ↦ a z)
+    ((congrArg (fun a ↦ a ≫ b.hom) (he j.unop)).trans (hb j.unop))
+  have hh := hformula.symm.trans h
+  simp only [Iso.inv_hom_id_apply] at hh
+  convert hh using 1
+  rfl
 
 end AlgebraicGeometry.Etale

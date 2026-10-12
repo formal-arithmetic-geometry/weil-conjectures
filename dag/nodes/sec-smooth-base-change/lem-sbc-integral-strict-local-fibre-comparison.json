@@ -1,0 +1,140 @@
+{
+ "id": "lem-sbc-integral-strict-local-fibre-comparison",
+ "kind": "statement",
+ "title": "Integral strict-local sections agree with geometric-fibre sections",
+ "statement": "Let Λ be a commutative ring, f:X→Y integral [def-weil-finite-integral-morphism], s:Spec Omega→Y a geometric point [def-weil-geometric-point], and (g',f',f,s) Cartesian [def-weil-pbc-cartesian-square]. Let F be a sheaf of Λ-modules on X_et [def-weil-pbc-etale-sheaves]. Let A be the strict henselization at s, ρ:Spec A→Y its structural map [def-weil-pbc-strict-henselization-limit; def-weil-pbc-strict-henselization-structural-map], Z=X×_Y Spec A with projection p:Z→X. There exists a module isomorphism e:Γ(Z,p^*F)≅Γ(X',g'^*F), evaluated on the identity etale object on X'. For every small-model affine pointed neighbourhood j=(V_j,v_j), r_j followed by e.hom is R_(V_j,v_j). Here r_j is the actual unit and limit-leg restriction qcqsStrictLocalSectionRestriction [lem-weil-pbc-qcqs-strict-local-module-comparison]; R is the unit for g' restricted along the lift with projections (f' followed by v_j,g') and the identity of X'. This theorem compares only sections on the two schemes and asserts no neighbourhood representative existence.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-qcqs-strict-local-module-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYP, via Tags 03Q9, 09XK, 09ZH and 0A3I"
+ },
+ "proof": [
+  {
+   "text": "The geometric-point maps to the affine pointed neighbourhoods give a cone. The limit constructs their unique map t into the strict henselization, and the structural-map equation identifies its composite with s. Pullback constructs q:X'→Z=X×_Y Spec A. Integrality makes Z=Spec B with B integral over A. Local structure makes A strictly henselian and the selected residue embeddings factor A→Omega through its separably closed residue field k.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-strict-henselization-local-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the maximal ideal m of A, the integral henselian-pair theorem makes (B,mB) henselian. Apply the henselian degree-zero theorem to the proper identity of Spec B to compare sections with Spec(B/mB). Field-extension invariance from k to Omega compares this closed fibre with X'. The module/set inverse-image comparison transports the set bijection to module coefficients. Compose with the composition and terminal-section isomorphisms to get e.",
+   "uses": [
+    "lem-weil-pbc-integral-over-henselian-pair",
+    "lemma-weil-pbc-etale-degree-zero",
+    "lem-weil-pbc-sections-base-field-extension",
+    "lem-sc-etale-module-set-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each small-model neighbourhood j the defining limit-leg equation for t identifies its point with the selected point v_j. The two pullback projections identify the induced iterated lift with geometricFibreSectionLift. Composition of inverse-image units and naturality give r_j followed by e.hom equal to the geometric-fibre restriction. This uses only the definition of r_j, not continuity or representative existence.",
+   "uses": [
+    "lem-weil-pbc-qcqs-strict-local-module-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-integral-over-henselian-pair",
+  "lemma-weil-pbc-etale-degree-zero",
+  "lem-weil-pbc-sections-base-field-extension",
+  "lem-sc-etale-module-set-pullback-comparison",
+  "lem-weil-pbc-qcqs-strict-local-module-comparison"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XK, 09ZH and 0A3I, with the inverse-image unit compatibility in the parent argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"sheaf\", \"IsIntegralHom\"",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|henselian.*section|section.*henselian",
+   "results": "0 hits: ",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an integral algebra over a strictly henselian ring, etale sheaf sections on its spectrum equal sections on its geometric closed fibre, compatibly with restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable; no conclusion drawn"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale global sections of an integral scheme over a strictly henselian local ring are preserved by restriction to its closed geometric fibre",
+   "results": "8 hits: Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.IsEtaleAt.comp, Algebra.exists_etale_of_isEtaleAt, Algebra.IsEtaleAt, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.basicOpen_subset_etaleLocus_iff_etale",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLift",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-integral-fibre-section-local-lift",
+   "place": "Strict-local fibre comparison before the separate continuity step"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralFibreSectionLocalLiftAux.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_integralStrictLocalFibreComparison",
+  "statement": "theorem exists_integralStrictLocalFibreComparison\n    (Λ : Type (u + 1)) [CommRing Λ]\n    {X' X Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    {g' : X' ⟶ X} {f' : X' ⟶ Spec (.of Ω)} {f : X ⟶ Y}\n    {s : Spec (.of Ω) ⟶ Y} (sq : IsPullback g' f' f s) [IsIntegralHom f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    ∃ e : (Sheaf.Γ (pullback f (strictHenselizationStructuralMap s)).smallEtaleTopology\n        (ModuleCat.{u + 1} Λ)).obj\n        ((upperStar (ModuleCat.{u + 1} Λ)\n          (pullback.fst f (strictHenselizationStructuralMap s))).obj F) ≅\n      ((g')^*[ModuleCat.{u + 1} Λ].obj F).obj.obj\n        (op (Scheme.Etale.mk (𝟙 X'))),\n      ∀ j : SmallModel.{u} (strictHenselizationNeighbourhoods s),\n        qcqsStrictLocalSectionRestriction Λ f s F j ≫ e.hom =\n          geometricFibreSectionRestriction Λ sq.toCommSq F\n            ((AffineEtale.Spec Y).obj\n              ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).1)\n            ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj j).2",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T173849-L-3301806",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T173849-L-3301806",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
