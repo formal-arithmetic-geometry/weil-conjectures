@@ -12,8 +12,11 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.FiniteBoundary
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.WeilSheaf.CohomologicalRange
+public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
@@ -48,6 +51,8 @@ This leaves degree one, which is the only place where the Fourier argument of
 -/
 
 @[expose] public section
+
+attribute [local instance] AlgebraicGeometry.Compactification.over
 
 universe u
 
@@ -162,6 +167,43 @@ lemma exists_isClosedImmersion_range_eq_compl
     IsFinite.of_locallyQuasiFinite _, hI⟩
 
 end Complement
+
+section Boundary
+
+omit [Finite k₀] [IsAffine C] [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] in
+/-- A nonempty smooth affine curve `C` over a field is not closed in a proper scheme `Z`
+containing it as an open: otherwise `C` would be proper and affine, hence of dimension zero. -/
+lemma not_isClosed_range_of_isProper {K : Type u} [Field K] {C Z : Scheme.{u}} (i : C ⟶ Z)
+    [IsOpenImmersion i] (g : Z ⟶ Spec (.of K)) [IsProper g]
+    [SmoothOfRelativeDimension 1 (i ≫ g)] [IsAffine C] [Nonempty C] :
+    ¬ IsClosed (Set.range i) := by
+  intro h
+  have : IsClosedImmersion i := .of_isPreimmersion i h
+  have h1 := (isFinite_of_isProper_of_isAffine (i ≫ g)).2
+  rw [topologicalKrullDim_eq_of_smoothOfRelativeDimension (i ≫ g) 1] at h1
+  norm_num at h1
+
+omit [Finite k₀] [IsAffine C] [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))] in
+/-- Let `U ⊆ C ⊆ Z` be opens with `U` nonempty, `C` irreducible and not closed in `Z`. Then
+every point of `U` generizes to a point (the generic point of `C`) specializing in `Z` to a
+point outside `C`. -/
+lemma exists_specializes_notMem_range {U C Z : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j]
+    [Nonempty U] [IrreducibleSpace C] (i : C ⟶ Z) (hi : ¬ IsClosed (Set.range i)) (y : U) :
+    ∃ y' : U, y' ⤳ y ∧ ∃ x : Z, x ∉ Set.range i ∧ i (j y') ⤳ x := by
+  have hη := genericPoint_spec C
+  obtain ⟨y', hy'⟩ : genericPoint C ∈ Set.range j :=
+    (hη.mem_open_set_iff j.isOpenEmbedding.isOpen_range).2
+      ⟨j (Classical.arbitrary U), trivial, Set.mem_range_self _⟩
+  refine ⟨y', j.isOpenEmbedding.isInducing.specializes_iff.1 (hy' ▸ hη.specializes trivial), ?_⟩
+  have hsub : closure (Set.range i) ⊆ closure {i (j y')} := by
+    refine closure_minimal ?_ isClosed_closure
+    rintro _ ⟨c, rfl⟩
+    rw [← specializes_iff_mem_closure, hy']
+    exact (hη.specializes trivial).map i.continuous
+  obtain ⟨x, hx, hxi⟩ := Set.not_subset.1 fun h ↦ hi (closure_subset_iff_isClosed.1 h)
+  exact ⟨x, hxi, specializes_iff_mem_closure.2 (hsub hx)⟩
+
+end Boundary
 
 
 section Localization
@@ -279,7 +321,41 @@ global section of a lisse sheaf on a connected open has full support on a nonpro
 theorem subsingleton_compactlySupportedCohomology_directImage_zero (hF : F.IsLisse) :
     Subsingleton
       (((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 0).carrier := by
-  sorry
+  have := nonempty_of_isDominant (k₀ := k₀) j
+  have : Nonempty (U ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    Scheme.Hom.nonempty_geometricFiber k₀ U
+  let jb := Scheme.Hom.geometricFiberMap j (comp_over j (Spec (CommRingCat.of k₀)))
+  have : Nonempty (C ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    ⟨jb (Classical.arbitrary _)⟩
+  -- the geometric fiber `C̄` is a smooth affine curve over `k̄`, irreducible being connected
+  let q := (C ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+  have : SmoothOfRelativeDimension 1 q :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (Limits.pullback.snd _ _))
+  have : Smooth q := SmoothOfRelativeDimension.smooth 1 q
+  have := LocallyOfFiniteType.isLocallyNoetherian q
+  have : IsRegular (C ↘ Spec (CommRingCat.of k₀)).geometricFiber := IsRegular.of_smooth q
+  have : ConnectedSpace (C ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    pullback_of_geometrically
+      (GeometricallyConnected.geometrically_connectedSpace (f := C ↘ Spec (CommRingCat.of k₀)))
+      _ _
+  have : IrreducibleSpace (C ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    IsRegular.irreducibleSpace _
+  have : IsAffine (C ↘ Spec (CommRingCat.of k₀)).geometricFiber :=
+    have : IsAffineHom q := MorphismProperty.pullback_snd _ _ inferInstance
+    isAffine_of_isAffineHom q
+  refine WeilSheaf.subsingleton_compactlySupportedCohomology_zero_of_forall_eq_zero _
+    fun c β ↦ ?_
+  let i := Scheme.Hom.geometricFiberMap c.i (comp_over c.i (Spec (CommRingCat.of k₀)))
+  have : IsProper (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure :=
+    MorphismProperty.pullback_snd _ _
+      (inferInstanceAs (IsProper (c.g ≫ Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))))
+  have : SmoothOfRelativeDimension 1
+      (i ≫ (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure) := by
+    rw [Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure]
+    infer_instance
+  exact ProEtale.eq_zero_of_forall_specializes_notMem_range i jb hF β
+    (exists_specializes_notMem_range jb i (not_isClosed_range_of_isProper i
+      (c.Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure))
 
 /--
 In degree two, the boundary localization sequence identifies `H_c^2(C, j_*F)` with
