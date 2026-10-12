@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.LFunction
+public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 
@@ -108,6 +108,7 @@ theorem nonempty_equiv_stalk_directImage {U X : Scheme.{u}} [U.Over (Spec (CommR
     (Scheme.Hom.geometricFiberPointOfFinitePoint_comp_geometricGaloisFrobenius_pow
       (X ↘ Spec (CommRingCat.of k₀)) x) ht''
   obtain ⟨e₄⟩ := ((lowerStar j).obj F).nonempty_equiv_stalkAt_of_eq _ hdeg.symm ht'' ht'
-  exact ⟨((e₃.trans e₄).trans e₂).trans (stalkEquivOfIso e y)⟩
+  obtain ⟨e₅⟩ := nonempty_equiv_stalk_of_iso e y
+  exact ⟨((e₃.trans e₄).trans e₂).trans e₅⟩
 
 end AlgebraicGeometry.WeilSheaf

@@ -616,7 +616,7 @@ Euler-product form for middle extensions (`lem-wf-euler-product-middle-extension
 hypothesis `hD`: it does not follow from the fields of a `BoundaryDatum` (see
 `AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`). The unconditional, sheaf-level
 form of this assertion is
-`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage_of_isSeparated`. -/
+`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`. -/
 theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {w : ℝ}

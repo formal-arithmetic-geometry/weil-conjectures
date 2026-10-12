@@ -11,9 +11,17 @@ public import WeilConjectures.Evaluation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
+public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.LisseFiltration
+public import WeilConjectures.WeilSheaf.LisseLocus
+public import WeilConjectures.WeilSheaf.MiddleExtension
+public import WeilConjectures.WeilSheaf.OpenImmersion
 public import WeilConjectures.WeilSheaf.Stalk
+public import WeilConjectures.WeilSheaf.StalkIso
+public import WeilConjectures.WeilSheaf.UpperStarPointwise
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 
 /-!
 # Purity of real lisse Weil sheaves on curves
@@ -44,6 +52,11 @@ the Frobenius elements, so the eigenvalues and determinants agree.
   blueprint `thm-rp-real-lisse-purity-affine` (`sk-p-real-purity`).
 - `AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`: the weaker form
   asserting only the existence of a weight.
+- `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`: blueprint
+  `lem-wf-boundary-semicontinuity` (`sk-p-real-semi`).
+- `AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`: blueprint
+  `cor-wf-unramified-boundary-purity`, consequence clause (`sk-p-real-semi`), deduced from
+  boundary semicontinuity applied to the sheaf and to its dual.
 -/
 
 @[expose] public section
@@ -358,5 +371,106 @@ theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel {𝒢 : WeilSheaf k₀ l
     ∃ w : ℝ, (cokernel i).IsPunctuallyPureOfWeight ι w :=
   (hreal.exists_isPunctuallyPureOfWeight_cokernel_detWeight h𝒢 i j h₁ h₂ hirr).imp
     fun _ h ↦ h.1
+
+
+/-- *Boundary semicontinuity of weights* on a curve: let `j : U₀ ⟶ C₀` be a dense open immersion
+into a smooth geometrically connected curve over `k₀`. If the lisse sheaf `F` on `U₀` has punctual
+weights at most `β`, then so has its direct image `j_*F` at every closed point of `C₀`, including
+the finitely many points outside `U₀`, where it may be singular.
+(blueprint: `lem-wf-boundary-semicontinuity`) -/
+theorem IsLisse.hasWeightsAtMost_directImage {U C : Scheme.{u}}
+    [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
+    (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    (hj : Dense (Set.range j.base)) {F : WeilSheaf k₀ l U} (hF : F.IsLisse)
+    {ι : PadicAlgCl l →+* ℂ} {β : ℝ} (hβ : F.HasWeightsAtMost ι β) :
+    ((directImage j).obj F).HasWeightsAtMost ι β := by
+  -- Step 0: an affine open neighbourhood `V` of `s`, a smooth geometrically connected affine
+  -- curve, on which `j_* ℱ` is the direct image of `ℱ|_{j⁻¹ V}`; the affine case applies there.
+  have : IsDominant j := ⟨hj⟩
+  intro s α hα
+  obtain ⟨V, hV, hsV, -⟩ := exists_isAffineOpen_mem_and_subset (TopologicalSpace.Opens.mem_top s.1)
+  have : IsLocallyNoetherian C :=
+    LocallyOfFiniteType.isLocallyNoetherian (C ↘ Spec (CommRingCat.of k₀))
+  have : IsAffine V := hV
+  have : Nonempty V := ⟨⟨s.1, hsV⟩⟩
+  let : (V : Scheme.{u}).Over (Spec (CommRingCat.of k₀)) := ⟨V.ι ≫ C ↘ Spec (CommRingCat.of k₀)⟩
+  have : V.ι.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  let : (j ⁻¹ᵁ V : Scheme.{u}).Over (Spec (CommRingCat.of k₀)) :=
+    ⟨(j ⁻¹ᵁ V).ι ≫ U ↘ Spec (CommRingCat.of k₀)⟩
+  have : (j ⁻¹ᵁ V).ι.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have hpb : IsPullback (j ∣_ V) (j ⁻¹ᵁ V).ι V.ι j := isPullback_morphismRestrict j V
+  have : (j ∣_ V).IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    change (j ∣_ V) ≫ V.ι ≫ C ↘ Spec (CommRingCat.of k₀) =
+      (j ⁻¹ᵁ V).ι ≫ U ↘ Spec (CommRingCat.of k₀)
+    rw [← Category.assoc, hpb.w, Category.assoc, comp_over j]⟩
+  have : QuasiCompact (j ∣_ V) := MorphismProperty.of_isPullback hpb.flip ‹_›
+  have : QuasiCompact (j ⁻¹ᵁ V).ι := MorphismProperty.of_isPullback hpb inferInstance
+  have : IsDominant (j ∣_ V) := IsZariskiLocalAtTarget.restrict ‹IsDominant j› V
+  -- `V` is a smooth geometrically connected affine curve
+  have : SmoothOfRelativeDimension 1 ((V : Scheme.{u}) ↘ Spec (CommRingCat.of k₀)) :=
+    (zero_add 1) ▸ (inferInstance :
+      SmoothOfRelativeDimension (0 + 1) (V.ι ≫ C ↘ Spec (CommRingCat.of k₀)))
+  have : GeometricallyConnected ((V : Scheme.{u}) ↘ Spec (CommRingCat.of k₀)) := by
+    have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
+    have := GeometricallyIrreducible.of_smooth_of_geometricallyConnected
+      (C ↘ Spec (CommRingCat.of k₀))
+    have := GeometricallyIrreducible.comp_of_isOpenImmersion V.ι (C ↘ Spec (CommRingCat.of k₀))
+    exact inferInstanceAs (GeometricallyConnected (V.ι ≫ C ↘ Spec (CommRingCat.of k₀)))
+  -- the point `s` of `V`
+  have hy : (⟨s.1, hsV⟩ : V) ∈ (V : Scheme.{u}).finitePoints :=
+    (Scheme.Hom.mem_finitePoints_iff_of_isIso V.ι _).1 s.2
+  exact norm_le_of_hasEigenvalue_stalk_directImage_of_isPullback j ι hpb hF hβ ⟨_, hy⟩ s rfl hα
+
+
+/-- *Upper weight bounds extend over the missing points.* Let `G` be a lisse Weil sheaf on a
+smooth geometrically connected curve `C` over `k₀` and `j : U ↪ C` a dense open immersion. If
+`j^*G` has weights at most `w`, then so has `G ≅ j_* j^* G`, by boundary semicontinuity
+(`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`). -/
+theorem IsLisse.hasWeightsAtMost_of_upperStar {ι : PadicAlgCl l →+* ℂ}
+    {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
+    [QuasiCompact j] [IsDominant j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    {G : WeilSheaf k₀ l C} (hG : G.IsLisse) {w : ℝ}
+    (hw : ((WeilSheaf.upperStar j).obj G).HasWeightsAtMost ι w) : G.HasWeightsAtMost ι w := by
+  obtain ⟨e⟩ := hG.nonempty_iso_directImage_upperStar j j.denseRange
+  have h := IsLisse.hasWeightsAtMost_directImage j j.denseRange
+    (hG.upperStar j) hw
+  intro x
+  obtain ⟨E⟩ := nonempty_equiv_stalk_of_iso e x
+  exact (h x).of_equiv E
+
+/-- **Purity extends over the missing points.** Let `G` be a lisse Weil sheaf on a smooth
+geometrically connected curve `C` over `k₀` and `j : U ↪ C` a dense open immersion such that
+`j^*G` is punctually `ι`-pure of weight `w`. Then `G` is punctually `ι`-pure of weight `w` on all
+of `C`. By boundary semicontinuity applied to `G ≅ j_* j^* G`
+(`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_of_upperStar`), `G` has weights at most
+`w`, and likewise its dual `G^∨`, whose restriction `j^*G^∨` is pure of weight `-w`, has weights
+at most `-w`; so the eigenvalues of the local Frobenius of `G` are pure of weight `w`.
+(blueprint: `cor-wf-unramified-boundary-purity`, consequence clause, subsection `sk-p-real-semi`)
+-/
+theorem IsLisse.isPunctuallyPureOfWeight_of_upperStar {ι : PadicAlgCl l →+* ℂ}
+    {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
+    [GeometricallyConnected (C ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j]
+    [QuasiCompact j] [IsDominant j] [j.IsOver (Spec (CommRingCat.of k₀))]
+    {G : WeilSheaf k₀ l C} (hG : G.IsLisse) {w : ℝ}
+    (hw : ((WeilSheaf.upperStar j).obj G).IsPunctuallyPureOfWeight ι w) :
+    G.IsPunctuallyPureOfWeight ι w := by
+  have hle := hG.hasWeightsAtMost_of_upperStar j hw.hasWeightsAtMost
+  have hdw : ((WeilSheaf.upperStar j).obj (G.dual hG)).IsPunctuallyPureOfWeight ι (-w) := fun z ↦ by
+    obtain ⟨E⟩ := nonempty_equiv_stalk_dual hG
+      ⟨j.base z.1, Scheme.Hom.map_mem_finitePoints j z.2⟩
+    exact (isPureOfWeight_stalk_upperStar_iff j _ z).2
+      ((((isPureOfWeight_stalk_upperStar_iff j G z).1 (hw z)).dual).of_equiv E)
+  have hle' := hG.dual.hasWeightsAtMost_of_upperStar j hdw.hasWeightsAtMost
+  intro x
+  obtain ⟨E⟩ := nonempty_equiv_stalk_dual hG x
+  exact FrobeniusModule.IsPureOfWeight.of_hasWeightsAtMost_of_equiv_dual E (hle x) (hle' x)
 
 end AlgebraicGeometry.WeilSheaf

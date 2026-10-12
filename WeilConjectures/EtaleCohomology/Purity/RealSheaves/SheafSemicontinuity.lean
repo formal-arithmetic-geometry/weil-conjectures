@@ -58,9 +58,9 @@ powers `ℱ^{⊗ k}`, whose boundary eigenvalues include the `k`-th powers of th
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`: boundary semicontinuity of
   weights on a smooth geometrically connected affine curve.
 
-The case of a separated, not necessarily affine, curve (Step 0 of the blueprint proof) is
-`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage_of_isSeparated`
-(`WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafBoundaryPurity`).
+The case of a general, not necessarily affine, curve (Step 0 of the blueprint proof) is
+`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`
+(`WeilConjectures.WeilSheaf.RealPurity`).
 -/
 
 @[expose] public section
@@ -154,7 +154,8 @@ variable {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
   (ι : PadicAlgCl l →+* ℂ)
 
 /-- A smooth curve `C₀` is locally of finite type over `k₀`. -/
-local instance : LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
+local instance locallyOfFiniteType_semicontinuity :
+    LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀)) :=
   haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
 

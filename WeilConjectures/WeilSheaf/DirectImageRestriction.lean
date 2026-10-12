@@ -256,8 +256,9 @@ theorem nonempty_equiv_stalk_directImage_of_isPullback (h : IsPullback j' ι' ι
   obtain ⟨i₄⟩ := nonempty_iso_lowerStar_lowerStar h.w ((upperStar ι').obj F)
   obtain ⟨e₅⟩ := nonempty_equiv_stalk_directImage ι ((lowerStar j').obj ((upperStar ι').obj F))
     y x hyx
-  exact ⟨(((e₁.symm.trans (stalkEquivOfIso i₂ y)).trans e₃).trans (stalkEquivOfIso i₄ x)).trans
-    e₅⟩
+  obtain ⟨e₂⟩ := nonempty_equiv_stalk_of_iso i₂ y
+  obtain ⟨e₄⟩ := nonempty_equiv_stalk_of_iso i₄ x
+  exact ⟨(((e₁.symm.trans e₂).trans e₃).trans e₄).trans e₅⟩
 
 end Restriction
 

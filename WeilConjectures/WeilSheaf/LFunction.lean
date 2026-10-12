@@ -9,6 +9,7 @@ public import WeilConjectures.EulerProductAux
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.LocalFrobenius
 public import WeilConjectures.WeilSheaf.StalkFunctor
+public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.ZetaFunction.TraceFormula
 public import WeilConjectures.ZetaLinearAlgebra.CharpolyRevExpand
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
@@ -156,66 +157,13 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 namespace WeilSheaf
 
-/-- The linear isomorphism induced by an isomorphism of Weil sheaves on the stalks at a geometric
-point. -/
-noncomputable def stalkAtLinEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).carrier ≃ₗ[PadicAlgCl l] (G.stalkAt s m hs).carrier :=
-  LinearEquiv.ofLinearMap (stalkAtMap s m hs e.hom) (stalkAtMap s m hs e.inv)
-    (LinearMap.ext fun y ↦ (stalkAtMap_comp s m hs e.inv e.hom y).symm.trans <| by
-      rw [e.inv_hom_id]
-      exact stalkAtMap_id s m hs G y)
-    (LinearMap.ext fun y ↦ (stalkAtMap_comp s m hs e.hom e.inv y).symm.trans <| by
-      rw [e.hom_inv_id]
-      exact stalkAtMap_id s m hs F y)
-
-theorem stalkAtLinEquivOfIso_apply {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (v) :
-    stalkAtLinEquivOfIso e s m hs v = stalkAtMap s m hs e.hom v :=
-  rfl
-
-/-- The linear isomorphism `AlgebraicGeometry.WeilSheaf.stalkAtLinEquivOfIso` commutes with the
-Frobenius. -/
-theorem stalkAtLinEquivOfIso_frobenius {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) (v : (F.stalkAt s m hs).carrier) :
-    stalkAtLinEquivOfIso e s m hs ((F.stalkAt s m hs).frobenius v) =
-      (G.stalkAt s m hs).frobenius (stalkAtLinEquivOfIso e s m hs v) := by
-  rw [stalkAtLinEquivOfIso_apply, stalkAtLinEquivOfIso_apply]
-  exact stalkAtMap_frobenius s m hs e.hom v
-
-/-- An isomorphism of Weil sheaves induces an isomorphism of the stalks at a geometric point,
-compatible with the Frobenius. -/
-noncomputable def stalkAtEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
-    (s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
-    (m : ℕ) (hs : s ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).hom =
-      (specGeometricFrobenius k₀ ^ m).hom ≫ s) :
-    (F.stalkAt s m hs).Equiv (G.stalkAt s m hs) :=
-  ⟨stalkAtLinEquivOfIso e s m hs, stalkAtLinEquivOfIso_frobenius e s m hs⟩
-
-/-- An isomorphism of Weil sheaves induces an isomorphism of the geometric stalks at a closed
-point, compatible with the local Frobenius. -/
-noncomputable def stalkEquivOfIso {F G : WeilSheaf k₀ l X} (e : F ≅ G) (x : X.finitePoints) :
-    (F.stalk x).Equiv (G.stalk x) :=
-  stalkAtEquivOfIso e _ _ _
-
 /-- Isomorphic Weil sheaves have the same characteristic polynomial of the local Frobenius at a
 closed point. -/
 theorem charpoly_frobeniusEnd_stalk_of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
     (x : X.finitePoints) :
     (F.stalk x).frobeniusEnd.charpoly = (G.stalk x).frobeniusEnd.charpoly :=
-  ((stalkEquivOfIso e x).charpoly_frobeniusEnd).symm
-
-/-- The stalks of a zero Weil sheaf are zero. -/
-theorem subsingleton_stalk_of_isZero {F : WeilSheaf k₀ l X} (hF : IsZero F)
-    (x : X.finitePoints) : Subsingleton (F.stalk x).carrier :=
-  ModuleCat.subsingleton_of_isZero ((WeilCoefficients.toModuleCat l).map_isZero
-    ((stalkFunctor k₀ l (Scheme.Hom.geometricFiberPointOfFinitePoint _ x)).map_isZero hF))
+  let ⟨E⟩ := nonempty_equiv_stalk_of_iso e x
+  E.charpoly_frobeniusEnd.symm
 
 end WeilSheaf
 

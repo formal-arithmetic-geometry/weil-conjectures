@@ -27,7 +27,7 @@ under tensor products.
 - `Module.End.hasEigenvalue_map_mul`: `a b` is an eigenvalue of `f ⊗ g`.
 - `Module.End.exists_hasEigenvalue_mul_of_hasEigenvalue_map`: every eigenvalue of `f ⊗ g`, `f`
   invertible, is such a product.
-- `FrobeniusModule.tensor`, `FrobeniusModule.hom`: the tensor product and the internal hom.
+- `FrobeniusModule.tensor`, `FrobeniusModule.linearHom`: the tensor product and the internal hom.
 - `FrobeniusModule.homDualEquiv`: `Hom(M^∨, N) ≅ M ⊗ N`.
 - `FrobeniusModule.Equiv.ofBilinear`: a perfect Frobenius-invariant pairing `P × A → C`
   identifies `P` with `Hom(A, C)`; `FrobeniusModule.Equiv.tensorOfHomDual`: `P ≅ Hom(A, N)` and
@@ -139,14 +139,15 @@ lemma frobeniusEnd_tensor (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t
 
 /-- The internal hom `Hom(M, N)` of two Frobenius modules, with the Frobenius
 `X ↦ F_N ∘ X ∘ F_M⁻¹`. -/
-noncomputable def hom (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t, v} K) :
+noncomputable def linearHom (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t, v} K) :
     FrobeniusModule.{max u t, v} K where
   carrier := M.carrier →ₗ[K] N.carrier
   frobenius := M.frobenius.arrowCongr N.frobenius
 
-lemma hom_frobenius_apply (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t, v} K)
+/-- The Frobenius of `Hom_K(M, N)` sends `X` to `F_N ∘ X ∘ F_M⁻¹`. -/
+lemma linearHom_frobenius_apply (M : FrobeniusModule.{u, v} K) (N : FrobeniusModule.{t, v} K)
     (X : M.carrier →ₗ[K] N.carrier) :
-    ((M.hom N).frobenius X : M.carrier →ₗ[K] N.carrier) =
+    ((M.linearHom N).frobenius X : M.carrier →ₗ[K] N.carrier) =
       N.frobenius.toLinearMap ∘ₗ X ∘ₗ M.frobenius.symm.toLinearMap :=
   rfl
 
@@ -165,11 +166,11 @@ lemma Equiv.symm_map_frobenius_symm {M N : FrobeniusModule.{u, v} K} (e : M.Equi
 
 /-- Isomorphisms of Frobenius modules induce an isomorphism of internal homs. -/
 def Equiv.homCongr {M M' : FrobeniusModule.{u, v} K} {N N' : FrobeniusModule.{t, v} K}
-    (e₁ : M.Equiv M') (e₂ : N.Equiv N') : (M.hom N).Equiv (M'.hom N') where
+    (e₁ : M.Equiv M') (e₂ : N.Equiv N') : (M.linearHom N).Equiv (M'.linearHom N') where
   toLinearEquiv := e₁.toLinearEquiv.arrowCongr e₂.toLinearEquiv
   map_frobenius X := by
     refine LinearMap.ext fun x ↦ ?_
-    simp only [hom, LinearEquiv.arrowCongr_apply]
+    simp only [linearHom, LinearEquiv.arrowCongr_apply]
     rw [e₂.map_frobenius, e₁.symm_map_frobenius_symm]
 
 /-- A perfect pairing `p : P × A → C` invariant under the Frobenius,
@@ -177,11 +178,11 @@ def Equiv.homCongr {M M' : FrobeniusModule.{u, v} K} {N N' : FrobeniusModule.{t,
 noncomputable def Equiv.ofBilinear {P A C : FrobeniusModule.{u, v} K}
     (p : P.carrier →ₗ[K] A.carrier →ₗ[K] C.carrier) (hp : Function.Bijective p)
     (h : ∀ x y, p (P.frobenius x) (A.frobenius y) = C.frobenius (p x y)) :
-    P.Equiv (A.hom C) where
+    P.Equiv (A.linearHom C) where
   toLinearEquiv := LinearEquiv.ofBijective p hp
   map_frobenius x := LinearMap.ext fun y ↦ by
     obtain ⟨z, rfl⟩ := A.frobenius.surjective y
-    rw [hom_frobenius_apply, LinearMap.comp_apply, LinearMap.comp_apply, LinearEquiv.coe_coe,
+    rw [linearHom_frobenius_apply, LinearMap.comp_apply, LinearMap.comp_apply, LinearEquiv.coe_coe,
       LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
     exact h x z
 
@@ -201,17 +202,17 @@ lemma homDualLinearEquiv_symm_tmul (M : FrobeniusModule.{u, v} K)
 /-- The Frobenius-equivariant isomorphism `Hom(M^∨, N) ≅ M ⊗ N`: `x ⊗ y` corresponds to the map
 `φ ↦ φ(x) y`. -/
 noncomputable def homDualEquiv (M N : FrobeniusModule.{max u v, v} K) :
-    (M.dual.hom N).Equiv (M.tensor N) where
+    (M.dual.linearHom N).Equiv (M.tensor N) where
   toLinearEquiv := homDualLinearEquiv M N
   map_frobenius X := by
     have key (T : M.carrier ⊗[K] N.carrier) :
         (homDualLinearEquiv M N).symm ((M.tensor N).frobenius T) =
-          (M.dual.hom N).frobenius ((homDualLinearEquiv M N).symm T) := by
+          (M.dual.linearHom N).frobenius ((homDualLinearEquiv M N).symm T) := by
       induction T using TensorProduct.induction_on with
       | zero => simp
       | tmul x y =>
         refine LinearMap.ext fun φ ↦ ?_
-        rw [tensor_frobenius_tmul, homDualLinearEquiv_symm_tmul, hom_frobenius_apply]
+        rw [tensor_frobenius_tmul, homDualLinearEquiv_symm_tmul, linearHom_frobenius_apply]
         simp [dual, homDualLinearEquiv_symm_tmul]
       | add T T' hT hT' => simp only [map_add, hT, hT']
     obtain ⟨T, rfl⟩ := (homDualLinearEquiv M N).symm.surjective X
@@ -230,7 +231,7 @@ lemma homDualEquiv_symm_tmul (M N : FrobeniusModule.{max u v, v} K) (x : M.carri
 /-- An isomorphism `P ≅ Hom(A, N)` together with `A ≅ M^∨` gives `P ≅ M ⊗ N`, through
 `Hom(M^∨, N) ≅ M ⊗ N` (`FrobeniusModule.homDualEquiv`). -/
 noncomputable def Equiv.tensorOfHomDual {P A M N : FrobeniusModule.{max u v, v} K}
-    (e : P.Equiv (A.hom N)) (f : A.Equiv M.dual) : P.Equiv (M.tensor N) where
+    (e : P.Equiv (A.linearHom N)) (f : A.Equiv M.dual) : P.Equiv (M.tensor N) where
   toLinearEquiv := e.toLinearEquiv ≪≫ₗ
     (Equiv.homCongr f ⟨LinearEquiv.refl K N.carrier, fun x ↦ by
       rw [LinearEquiv.refl_apply, LinearEquiv.refl_apply]⟩).toLinearEquiv ≪≫ₗ
