@@ -349,6 +349,33 @@ lemma isDerivedBaseChange_towerModelComp (ht : ∀ n, Sheaf.IsDerivedBaseChange 
     rw [key]
     exact this
 
+/-- The transition maps `T_{n+k+1} ⟶ T_n` of the strict model are the restrictions of scalars
+of the composite chain maps. -/
+lemma towerFunctor_map_homOfLE (n k : ℕ) :
+    (towerFunctor φ ψ hψ L t).map (homOfLE (Nat.le_add_right n (k + 1))).op =
+      ((Sheaf.restrictScalars J (ψ (n + k + 1))).mapHomologicalComplex (.up ℤ)).map
+          (towerModelComp φ L t hφ n k) ≫
+        (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J (ψ (n + k + 1))
+          (φ (Nat.le_add_right n (k + 1))) (ψ n) (hψ _).symm) (.up ℤ)).hom.app _ := by
+  induction k with
+  | zero => exact Functor.ofOpSequence_map_homOfLE_succ _ n
+  | succ k ih =>
+    have h : (homOfLE (Nat.le_add_right n (k + 2))).op =
+        (homOfLE (n + k + 1).le_succ).op ≫ (homOfLE (Nat.le_add_right n (k + 1))).op := rfl
+    rw [h, Functor.map_comp, ih]
+    erw [Functor.ofOpSequence_map_homOfLE_succ]
+    have hnat := (Functor.mapHomologicalComplexCompIso (Sheaf.restrictScalarsCompIso J
+      (ψ (n + (k + 1) + 1)) (φ (n + k + 1).le_succ) (ψ (n + k + 1)) (hψ _).symm) (.up ℤ)).hom.naturality
+        (towerModelComp φ L t hφ n k)
+    have hcoh := restrictScalarsCompIso_assoc_complex (J := J) (ψ (n + (k + 1) + 1))
+      (φ (n + k + 1).le_succ) (φ (Nat.le_add_right n (k + 1))) (ψ (n + k + 1))
+      (φ (Nat.le_add_right n (k + 2))) (ψ n) (hψ _).symm (hφ _ _).symm (hψ _).symm (hψ _).symm
+      (towerModel (φ := fun n ↦ φ n.le_succ) L t n).P
+    simp only [Functor.comp_obj, Functor.comp_map] at hnat
+    simp only [towerComplexMap, towerModelComp, Functor.map_comp, Category.assoc]
+    rw [hcoh, reassoc_of% hnat]
+    rfl
+
 end RTower
 
 end DerivedCategory
