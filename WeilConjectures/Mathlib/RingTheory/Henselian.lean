@@ -5,7 +5,9 @@ Authors: Christian Merten
 -/
 module
 
+public import Mathlib.Dynamics.Newton
 public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.KrullDimension.Zero
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import Mathlib.RingTheory.SimpleRing.Principal
@@ -174,3 +176,23 @@ theorem IsStrictlyHenselianLocalRing.of_ringEquiv {R S : Type*} [CommRing R] [Co
     [IsStrictlyHenselianLocalRing R] (e : R ≃+* S) : IsStrictlyHenselianLocalRing S :=
   have : HenselianLocalRing S := .of_ringEquiv e
   ⟨IsSepClosed.of_ringEquiv (IsLocalRing.ResidueField.mapEquiv e)⟩
+
+/-- A local ring whose maximal ideal consists of nilpotent elements is henselian: Newton's
+iteration starting at an approximate simple root terminates after finitely many steps, since
+the error is nilpotent and squares at each step
+(`Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero`).
+(blueprint: `lem-weil-pbc-henselian-of-nil-maximal-ideal`) -/
+theorem HenselianLocalRing.of_maximalIdeal_le_nilradical {R : Type*} [CommRing R]
+    [IsLocalRing R] (h : maximalIdeal R ≤ nilradical R) : HenselianLocalRing R where
+  is_henselian f _ a₀ h₁ h₂ := by
+    obtain ⟨a, ⟨ha, ha'⟩, -⟩ := Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero
+      (P := f) (x := a₀) (by simpa [mem_nilradical] using h h₁) (by simpa using h₂)
+    refine ⟨a, by simpa [Polynomial.IsRoot] using ha', ?_⟩
+    rw [← neg_sub, neg_mem_iff]
+    exact nilradical_le_prime _ (mem_nilradical.mpr ha)
+
+/-- A local ring of Krull dimension zero (e.g. an artinian local ring) is henselian: its maximal
+ideal is its nilradical. (blueprint: `lem-weil-pbc-local-dimension-zero-henselian`) -/
+instance (priority := 100) HenselianLocalRing.of_krullDimLE_zero {R : Type*} [CommRing R]
+    [IsLocalRing R] [Ring.KrullDimLE 0 R] : HenselianLocalRing R :=
+  .of_maximalIdeal_le_nilradical (Ring.KrullDimLE.nilradical_eq_maximalIdeal (R := R)).ge
