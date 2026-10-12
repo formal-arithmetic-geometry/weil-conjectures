@@ -8,8 +8,9 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.ConstantSheafLocallyConstantComparison
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.ConstantSubsheafPositivePresentation
+import Sheaf.Topology.ConstantSubsheafGcdComponent
+import Mathlib.Data.Fintype.EquivFin
 
 /-! # Positive generators with attained divisors
 
@@ -25,6 +26,30 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
 
 namespace TopCat.Sheaf
+
+private theorem compact_finset_inf (X : TopCat.{u})
+    (hqc : ∀ U V : Opens X, IsCompact (U : Set X) → IsCompact (V : Set X) →
+      IsCompact ((U ⊓ V : Opens X) : Set X))
+    {n : ℕ} (A : Fin n → Opens X) (hA : ∀ i, IsCompact (A i : Set X))
+    (S : Finset (Fin n)) (hS : S.Nonempty) : IsCompact ((S.inf A : Opens X) : Set X) := by
+  classical
+  induction S using Finset.induction_on with
+  | empty => exact False.elim (Finset.not_nonempty_empty hS)
+  | @insert i S hi ih =>
+    by_cases hne : S.Nonempty
+    · rw [Finset.inf_insert]
+      exact hqc (A i) (S.inf A) (hA i) (ih hne)
+    · have hempty : S = ∅ := Finset.not_nonempty_iff_eq_empty.mp hne
+      subst S
+      simpa using hA i
+
+private theorem mem_finset_inf {X : TopCat.{u}} {n : ℕ} (A : Fin n → Opens X)
+    (S : Finset (Fin n)) (x : X) :
+    x ∈ S.inf A ↔ ∀ i ∈ S, x ∈ A i := by
+  classical
+  induction S using Finset.induction_on with
+  | empty => simp
+  | @insert i S hi ih => simp [Finset.inf_insert, ih]
 
 /-- A finite positive constant presentation with an attained divisor at every active point.
 Source: Stacks Project, Cohomology, Lemma 0A38, first two proof paragraphs.
@@ -85,6 +110,115 @@ theorem constantSubsheaf_unbounded_normalization
           (op (A i)) (ULift.up (c i : ℤ))) ∧
           (∀ x : X, x ∈ iSup A →
             ∃ i, x ∈ A i ∧ ∀ j, x ∈ A j → c i ∣ c j)  := by
-  sorry
+  classical
+  obtain ⟨n, A, hA, c, hc, f, hf, hv⟩ :=
+    constantSubsheaf_positive_presentation X K C ι isoC hgen
+  let E : Opens X → Sheaf AddCommGrpCat X := fun U ↦ (abelianOpenExtensionByZero (U)).obj
+      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U)))
+        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))
+  let unit : ∀ U : Opens X, (E U).obj.obj (op U) := fun U ↦
+    (abelianOpenExtensionSection (U)
+      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U)))
+        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (U) le_rfl
+      ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U)))
+        ((Functor.const (Opens ((Opens.toTopCat X).obj (U)))ᵒᵖ).obj
+          (AddCommGrpCat.of (ULift.{u} ℤ)))).app
+        (op ((Opens.map (U).inclusion').obj (U))) (ULift.up 1)))
+  let P := {S : Finset (Fin n) // S.Nonempty}
+  have hq (S : P) : ∃ q : E (S.1.inf A) ⟶ K,
+      (ι ≫ isoC.hom).hom.app (op (S.1.inf A))
+        (q.hom.app (op (S.1.inf A)) (unit (S.1.inf A))) =
+      (toSheafify (Opens.grothendieckTopology X)
+      ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app
+      (op (S.1.inf A)) (ULift.up ((S.1.gcd c : ℕ) : ℤ)) := by
+    exact constantSubsheaf_gcd_component X K C ι isoC n A c f hv S.1
+  choose q hqvalue using hq
+  let I := Fin n ⊕ P
+  let B : I → Opens X := Sum.elim A (fun S ↦ S.1.inf A)
+  let d : I → ℕ := Sum.elim c (fun S ↦ S.1.gcd c)
+  let t : ∀ i : I, E (B i) ⟶ K := fun i ↦
+    match i with
+    | .inl j => f j
+    | .inr S => q S
+  have hB (i : I) : IsCompact (B i : Set X) := by
+    cases i with
+    | inl j => exact hA j
+    | inr S => exact compact_finset_inf X hqc A hA S.1 S.2
+  have hd (i : I) : 0 < d i := by
+    cases i with
+    | inl j => exact hc j
+    | inr S =>
+      obtain ⟨j, hj⟩ := S.2
+      exact Nat.pos_of_ne_zero (Finset.gcd_ne_zero_iff.mpr ⟨j, hj, (hc j).ne'⟩)
+  have ht (i : I) :
+      (ι ≫ isoC.hom).hom.app (op (B i))
+        ((t i).hom.app (op (B i)) (unit (B i))) =
+      (toSheafify (Opens.grothendieckTopology X)
+      ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app
+      (op (B i)) (ULift.up (d i : ℤ)) := by
+    cases i with
+    | inl j => exact hv j
+    | inr S => exact hqvalue S
+  have hdiv (x : X) (hx : x ∈ iSup B) :
+      ∃ i, x ∈ B i ∧ ∀ j, x ∈ B j → d i ∣ d j := by
+    let S : Finset (Fin n) := Finset.univ.filter (fun j ↦ x ∈ A j)
+    have hS : S.Nonempty := by
+      obtain ⟨i, hi⟩ := Opens.mem_iSup.mp hx
+      cases i with
+      | inl j => exact ⟨j, Finset.mem_filter.mpr ⟨Finset.mem_univ j, hi⟩⟩
+      | inr T =>
+        obtain ⟨j, hj⟩ := T.2
+        exact ⟨j, Finset.mem_filter.mpr ⟨Finset.mem_univ j,
+          (mem_finset_inf A T.1 x).mp hi j hj⟩⟩
+    refine ⟨Sum.inr ⟨S, hS⟩, ?_, ?_⟩
+    · exact (mem_finset_inf A S x).mpr (fun j hj ↦ (Finset.mem_filter.mp hj).2)
+    · intro j hj
+      cases j with
+      | inl j =>
+        exact Finset.gcd_dvd (Finset.mem_filter.mpr ⟨Finset.mem_univ j, hj⟩)
+      | inr T =>
+        apply Finset.dvd_gcd
+        intro j hjT
+        exact Finset.gcd_dvd (Finset.mem_filter.mpr ⟨Finset.mem_univ j,
+          (mem_finset_inf A T.1 x).mp hj j hjT⟩)
+  let m := Fintype.card I
+  let e : I ≃ Fin m := Fintype.equivFin I
+  let A' : Fin m → Opens X := fun i ↦ B (e.symm i)
+  let c' : Fin m → ℕ := fun i ↦ d (e.symm i)
+  let f' : ∀ i : Fin m, E (A' i) ⟶ K := fun i ↦ t (e.symm i)
+  let g : (∐ fun i ↦ E (A' i)) ⟶ K := Sigma.desc f'
+  have ht_transport (i : I) (j : Fin m) (h : e.symm j = i) :
+      eqToHom (congrArg (fun k ↦ E (B k)) h.symm) ≫ f' j = t i := by
+    subst i
+    simp only [eqToHom_refl, Category.id_comp]
+    rfl
+  let b : (∐ fun i ↦ E (A i)) ⟶ (∐ fun i ↦ E (A' i)) :=
+    Sigma.desc (fun i ↦
+      eqToHom (by simp [A', B]) ≫ Sigma.ι (fun j ↦ E (A' j)) (e (.inl i)))
+  have hfac : b ≫ g = Sigma.desc f := by
+    apply Sigma.hom_ext
+    intro i
+    simp only [b, g, Sigma.ι_desc_assoc, Category.assoc, Sigma.ι_desc]
+    exact ht_transport (.inl i) (e (.inl i)) (e.symm_apply_apply (.inl i))
+  have hg : Epi g := by
+    let _ := hf
+    exact epi_of_epi_fac hfac
+  refine ⟨m, A', (fun i ↦ hB (e.symm i)), c', (fun i ↦ hd (e.symm i)),
+    g, hg, (fun i ↦ (f' i).hom.app (op (A' i)) (unit (A' i))), ?_, ?_, ?_⟩
+  · intro i
+    exact ConcreteCategory.congr_hom
+      (NatTrans.congr_app (congrArg (fun α ↦ α.hom) (Sigma.ι_desc f' i)) (op (A' i)))
+      (unit (A' i))
+  · intro i
+    exact ht (e.symm i)
+  · intro x hx
+    have hxB : x ∈ iSup B := by
+      obtain ⟨i, hi⟩ := Opens.mem_iSup.mp hx
+      exact Opens.mem_iSup.mpr ⟨e.symm i, hi⟩
+    obtain ⟨i, hi, hdi⟩ := hdiv x hxB
+    refine ⟨e i, ?_, ?_⟩
+    · simpa [A'] using hi
+    · intro j hj
+      simpa [c'] using hdi (e.symm j) hj
 
 end TopCat.Sheaf

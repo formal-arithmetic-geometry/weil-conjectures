@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-constant-subsheaf-gcd-component",
+ "kind": "statement",
+ "title": "Bezout component on a finite intersection",
+ "statement": "Let $X$ be a topological space, $K,C$ abelian sheaves, $\\iota:K\\to C$ a morphism, and $C\\simeq\\underline{\\mathbb Z}$ an isomorphism to the constant integer sheaf [def-weil-pbc-constant-sheaf]. Fix finitely many opens $A_i$, natural labels $c_i$, and maps $f_i:j_{A_i!}\\underline{\\mathbb Z}\\to K$ [def-sc-abelian-open-extension-by-zero], each sending its canonical unit to a section whose image in the constant sheaf is $c_i$. For every finite subset $S$ of the indices put $W=\\bigcap_{i\\in S}A_i$ and $d=\\gcd(c_i:i\\in S)$, with $W=X$ and $d=0$ for $S=\\varnothing$. There is a map $q:j_{W!}\\underline{\\mathbb Z}\\to K$ whose canonical unit has image the constant section $d$. No monicity, positivity, compactness or epimorphism is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38, first two proof paragraphs; https://stacks.math.columbia.edu/tag/0A38"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate f_i on its unit and restrict to W for i in S. Naturality of iota followed by isoC and of the sheafification unit shows that each restricted section maps to the constant c_i.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct over finite subsets T of S, keeping the ambient open W fixed. The empty subset uses the zero section. On inserting i, combine the section with constant gcd(T) and the restricted section with constant c_i using Nat.gcdA and Nat.gcdB. Mathlib Nat.gcd_eq_gcd_ab, together with additivity and integer scalar compatibility, proves that the new section has constant image gcd(c_i,gcd(T)), which is the finset gcd after insertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved private integerExtension_of_section from Sheaf.Topology.ConstantSubsheafQuotientGluing through a proof-only import all. This realizes any given section on W by an integer extension component. Its equation for V=W, followed by the identity restriction map, proves the required unit-value equation. Only this generic helper is used; the quotient-gluing conclusion is not invoked.",
+   "uses": [
+    "lem-sc-constant-subsheaf-quotient-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "lem-sc-constant-subsheaf-quotient-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A38",
+  "place": "First two proof paragraphs, with the categorical constructions expanded in the Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite positive compact open generators of a subsheaf of the constant integer sheaf with pointwise gcd attained",
+   "date": "2026-10-13",
+   "results": "8 hits: SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.coversTop, SheafOfModules.GeneratingSections.IsFiniteType.finite, AlgebraicGeometry.exists_of_res_zero_of_qcqs, SheafOfModules.LocalGeneratorsData.IsFiniteType",
+   "verdict": "No exact match for either new sheaf statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Finset.gcd",
+   "date": "2026-10-13",
+   "results": "12 hits: Finset.gcd, Finset.Int.finsetGcd_nonneg, Finset.gcd_def, Finset.gcd_eq_gcd_image, Finset.gcd_empty, Finset.gcd_singleton, Finset.normalize_gcd, Finset.gcd_image",
+   "verdict": "No exact match for either new sheaf statement."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*subsheaf|gcd.*section",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match for either new sheaf statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A section of the constant integer sheaf on a compact open splits into finitely many constant clopen fibers, and finite integer sections admit a Bezout gcd combination",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every section of an abelian sheaf defines a map from extension by zero of the constant integer sheaf sending one to that section; finite positive constant compact open sheaf generators",
+   "date": "2026-10-13",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstant.presheaf_ext, ModuleCat.Tilde.exists_const, CondensedMod.ofSheafCompHaus, SheafOfModules.GeneratingSections",
+   "verdict": "No exact match for either new sheaf statement."
+  },
+  {
+   "tool": "grep",
+   "query": "integer.*section|section.*integer|gcd.*section|positive.*generator",
+   "date": "2026-10-13",
+   "results": "0 hits: ",
+   "verdict": "No exact match for either new sheaf statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafUnboundedNormalization",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the finite filtration of a finitely generated subsheaf of the constant sheaf in the proof of Lemma 02UX: Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph and filtration/final paragraphs; normalization; Lemma 0A38, first two proof paragraphs: clopen refinement, positive generators and adjoining gcds; Bezout component on a finite intersection",
+   "via": [
+    "lem-sc-constant-subsheaf-unbounded-normalization",
+    "lem-sc-constant-subsheaf-normalized-completion",
+    "lem-sc-constant-subsheaf-lower-layer-generator",
+    "lem-sc-constant-subsheaf-peel-layer",
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-constant-subsheaf-finite-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSubsheafGcdComponent",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafGcdComponent.lean",
+  "declaration": "TopCat.Sheaf.constantSubsheaf_gcd_component",
+  "statement": "theorem constantSubsheaf_gcd_component\n    (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C)\n    (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n      (AddCommGrpCat.of (ULift.{u} ℤ)))\n    (n : ℕ) (A : Fin n → Opens X) (c : Fin n → ℕ)\n    (f : ∀ i, (abelianOpenExtensionByZero (A i)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ K)\n    (hvalue : ∀ i,\n      (ι ≫ isoC.hom).hom.app (op (A i))\n      ((f i).hom.app (op (A i)) (abelianOpenExtensionSection (A i)\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (A i) le_rfl\n      ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (A i)))\n        ((Functor.const (Opens ((Opens.toTopCat X).obj (A i)))ᵒᵖ).obj\n          (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n        (op ((Opens.map (A i).inclusion').obj (A i))) (ULift.up 1)))) =\n      (toSheafify (Opens.grothendieckTopology X)\n      ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n      (op (A i)) (ULift.up (c i : ℤ)))\n    (S : Finset (Fin n)) :\n    ∃ q : (abelianOpenExtensionByZero (S.inf A)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (S.inf A)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) ⟶ K,\n      (ι ≫ isoC.hom).hom.app (op (S.inf A))\n      ((q).hom.app (op (S.inf A)) (abelianOpenExtensionSection (S.inf A)\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (S.inf A)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) (S.inf A) le_rfl\n      ((toSheafify (Opens.grothendieckTopology ((Opens.toTopCat X).obj (S.inf A)))\n        ((Functor.const (Opens ((Opens.toTopCat X).obj (S.inf A)))ᵒᵖ).obj\n          (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n        (op ((Opens.map (S.inf A).inclusion').obj (S.inf A))) (ULift.up 1)))) =\n      (toSheafify (Opens.grothendieckTopology X)\n      ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app\n      (op (S.inf A)) (ULift.up ((S.gcd c : ℕ) : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131255",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T212722-L-1131255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
