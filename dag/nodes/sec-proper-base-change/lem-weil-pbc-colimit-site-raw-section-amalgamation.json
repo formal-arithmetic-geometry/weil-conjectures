@@ -28,48 +28,25 @@
  "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone with vertex $C$ [def-weil-pbc-category-colimit]. Let $P_j$ and $Q$ be precoverages on $F(j)$ and $C$. Every transition functor $F(a)$ and cocone functor $V_j$ is continuous for the generated topologies [def-weil-pbc-sites-and-cohomology]. Fix $i\\in J$ and a set-valued sheaf $G$ on $P_i$. Write $I=\\mathrm{Under}(i)$, $A_t=F(t.hom)_sG$. For $b:t\\to t'$ give a sheaf map $\\theta_b:A_t\\to F(b.right)^s A_{t'}$ whose composite with the unit $G\\to F(t.hom)^s A_t$ equals the unit at $t'$ componentwise as objects of the arrow category of sets. For $t\\in I$ let $B_t$ be a presheaf on $C$, with $\\beta_t:A_t\\to V_t^p B_t$ exhibiting $B_t$ as the left Kan extension of the underlying presheaf of $A_t$ along $V_t^{op}$. Here $V_t=V_{t.right}$, $V_t^p$ is presheaf restriction, and a left Kan extension means that composition with $\\beta_t$ bijects maps $B_t\\to T$ with maps $A_t\\to V_t^p T$ for every presheaf $T$. Let $B:I\\to\\mathrm{PSh}(C)$ have these objects and satisfy, for all $b:t\\to t'$ and $X\\in F(t.right)$, $\\beta_t(X)B(b)(V_tX)=\\theta_b(X)\\beta_{t'}(F(b.right)X)$ as objects of $\\mathrm{Arrow}(\\mathrm{Set})$.Assume also that the object and arrow cocones of $V$ are set colimits [def-weil-pbc-arrows-functor]. Every $P_j$ has singleton isomorphism covers, covering pullbacks, stability under finite composition and finite base change [def-weil-pbc-finite-precoverage]. Every covering presieve of $P_j$ has finitely many distinct arrows. Transitions preserve covering presieves and pullbacks along their covering arrows, and their inverse-image functors preserve finite limits. Each $V_j$ preserves covering pullbacks. For every $j\\in J$, $X\\in F(j)$ and covering presieve $R\\in P_j(X)$, every compatible family $x$ of elements of the raw presheaf $H_0=\\mathrm{colim}\\,B$ on $R.map(V_j)$ has an amalgamation: there exists $s\\in H_0(V_jX)$ whose restriction along each arrow of the image presieve is the corresponding component of $x$. Compatibility means equal restrictions on every pair of arrows from a common test object with equal composite to $V_jX$. This asserts existence only, and no uniqueness or sheaf condition for $Q$.",
  "proof": [
   {
-   "text": "First compute raw sections by the pointwise Kan formula. A generator is\nrepresented by a stage section and an arrow from the object in the limit site\nto the image of its stage object. Move that arrow, its endpoints, and the stage\nsection to a common stage receiving i and the stage of the object, using the\nobject and arrow set-colimit hypotheses, and restrict the section along the\nlifted arrow. This represents the generator at the lifted object. For any\nfinite chain of Kan relations, lift its arrows and equations to a later common\nstage. Naturality of beta and hβmap identify each lifted relation with section\nrestriction or transport by theta. Conversely these operations are Kan\nrelations. Thus two representatives agree precisely when they agree after\nfurther stage refinement. The unit condition hθ identifies theta with the\nadjunction transpose of the unit at the target stage; uniqueness of transposes\nmakes these transports compatible with composition and with the stage sheaves.",
+   "text": "Apply colimit_site_raw_section_matching_lift to the given compatible family, obtaining a covering presieve T and compatible family y in one stage inverse-image sheaf A_t.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-arrows-functor",
-    "lem-weil-pbc-filtered-colimit-categories",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-initial-functor-cofiltered-criterion"
+    "lem-weil-pbc-colimit-site-raw-section-matching-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "For a compatible family on the image of a stage cover R, pull the family back\nto the finite indexing set R.uncurry. Choose stage representatives for its\nfinitely many sections, and transport all representatives and covering arrows\nto a common stage receiving i and the cover's stage. Stage covering pullbacks\nexist. For each pair of covering arrows, compatibility gives equality on its\npullback in the limit category; hVpullback and hpullback identify that object\nwith the image of the corresponding stage pullback. The raw equality\ncriterion puts the finitely many overlap equalities at one further stage.\nThere the transported local sections form a matching family: the pairwise\npullback equalities imply compatibility on every common test object by its\nuniversal property. hcover keeps the family covering. The stage sheaf glues\nit to a section. Apply beta and the presheaf colimit coprojection; naturality\nand hβmap show that this section restricts to the given family. If different\nstage arrows have the same image, the pulled-back family uses the same given\nsection on both, so repetitions cause no ambiguity. For the empty cover the\nstage sheaf supplies its unique section without any local representatives.",
-   "uses": [
-    "def-weil-pbc-finite-precoverage",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraph"
-   }
+   "text": "Use the stage sheaf property and Presieve.IsSheaf.isSheafFor_of_mem_precoverage to glue y. Compose beta_t with the raw colimit coprojection, transport its glued section along the target equality, and check restriction on each arrow of T.uncurry using naturality and the lift image equation. The equality of image presieves proves this for every original covering arrow.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-precoverage",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-filtered-colimit-categories",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "lem-weil-pbc-initial-functor-cofiltered-criterion"
+  "lem-weil-pbc-colimit-site-raw-section-matching-lift"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35 finite-cover calculation; explicit amalgamation half using raw Kan representatives"
+  "place": "Tag 0A35 finite-cover equalizer argument: compatible stage lifting, then stage sheaf gluing and explicit naturality; second reader H3"
  },
  "mathlib_searches": [
   {
@@ -138,9 +115,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T215155-L-1304148",
+  "landing": "20261012T225315-L-1807780",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

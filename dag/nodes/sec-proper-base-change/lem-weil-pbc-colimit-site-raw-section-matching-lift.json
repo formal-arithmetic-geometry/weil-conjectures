@@ -1,0 +1,126 @@
+{
+ "kind": "lemma",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 finite-cover equalizer calculation, before stage gluing"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-finite-precoverage"
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-colimit-site-raw-section-matching-lift",
+ "title": "Finite compatible stage lifts of raw matching families",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories, and $V$ a cocone with vertex $C$ [def-weil-pbc-category-colimit]. Let $P_j$ and $Q$ be precoverages on $F(j)$ and $C$. Every transition functor $F(a)$ and cocone functor $V_j$ is continuous for the generated topologies [def-weil-pbc-sites-and-cohomology]. Fix $i\\in J$ and a set-valued sheaf $G$ on $P_i$. Write $I=\\mathrm{Under}(i)$, $A_t=F(t.hom)_sG$. For $b:t\\to t'$ give a sheaf map $\\theta_b:A_t\\to F(b.right)^s A_{t'}$ whose composite with the unit $G\\to F(t.hom)^s A_t$ equals the unit at $t'$ componentwise as objects of the arrow category of sets. For $t\\in I$ let $B_t$ be a presheaf on $C$, with $\\beta_t:A_t\\to V_t^p B_t$ exhibiting $B_t$ as the left Kan extension of the underlying presheaf of $A_t$ along $V_t^{op}$. Here $V_t=V_{t.right}$, $V_t^p$ is presheaf restriction, and a left Kan extension means that composition with $\\beta_t$ bijects maps $B_t\\to T$ with maps $A_t\\to V_t^p T$ for every presheaf $T$. Let $B:I\\to\\mathrm{PSh}(C)$ have these objects and satisfy, for all $b:t\\to t'$ and $X\\in F(t.right)$, $\\beta_t(X)B(b)(V_tX)=\\theta_b(X)\\beta_{t'}(F(b.right)X)$ as objects of $\\mathrm{Arrow}(\\mathrm{Set})$.Assume also that the object and arrow cocones of $V$ are set colimits [def-weil-pbc-arrows-functor]. Every $P_j$ has singleton isomorphism covers, covering pullbacks, stability under finite composition and finite base change [def-weil-pbc-finite-precoverage]. Every covering presieve of $P_j$ has finitely many distinct arrows. Transitions preserve covering presieves and pullbacks along their covering arrows, and their inverse-image functors preserve finite limits. Each $V_j$ preserves covering pullbacks. Fix j in J, X in F(j), a covering presieve R in P_j(X), and a compatible family x of raw sections on R.map(V_j). There exist t in Under(i), W in F(t.right), a covering presieve T in P_t(W), an equality e: V_t(W)=V_j(X), and a compatible family y of A_t sections on T. The arrows V_t(g) followed by the equality transport e, indexed by the set T.uncurry of covering arrows, generate exactly R.map(V_j). For each such g: Z -> W the image of y_g under beta_t(Z) and the colimit coprojection equals x at V_t(g) followed by e. This asserts only a compatible stage lift, not an amalgamation or its uniqueness.",
+ "proof": [
+  {
+   "text": "Compute each left Kan extension pointwise. Its generators are sections of a\nstage inverse image together with an arrow from the evaluation object to a stage image.\nThe object and arrow set-colimits let us lift that arrow and its endpoints to a common\nstage; restrict the section along the lifted arrow. A finite chain of Kan relations\ncan likewise be lifted to a later stage. Naturality of beta and h-beta-map turn its\nrelations into restriction and theta transport. The equation h-theta identifies theta\nwith the unique adjunction transpose of the unit, so these transports compose.\nConsequently every raw section has a stage representative and every equality of raw\nrepresentatives holds after further refinement.\n\nIndex the original cover by R.uncurry. Its finiteness allows us to lift all its local\nsections simultaneously to a stage receiving i and j. Transport the original cover\nthere; hcover makes it covering. For each pair of covering arrows, hx gives equality\non their pullback in the limit category. Covering pullbacks exist at the stage, and\nhpullback and hVpullback identify their images with these limit pullbacks. Apply the\nraw equality criterion to the finitely many resulting equations and refine once more\nso all hold. The pullback universal property then gives compatibility on every common\ntest object. The resulting family y has the prescribed beta/colimit images by\nnaturality and h-beta-map. The cocone equation identifies the transported target W\nwith the original image target; its equality is e. The transported covering arrows,\nindexed by T.uncurry, give exactly the original image presieve, including duplicates,\nwhich is hT. If R is empty, use its transported empty cover and the empty family:\nthere are no sections or equations to lift. No amalgamation or uniqueness is asserted\nand no arbitrary existential witness is used to define data.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-categories",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-arrows-functor",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-finite-precoverage",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0A35 finite-cover equalizer calculation, stage representatives and overlap equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-categories",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 finite-cover equalizer argument expanded into raw Kan representative lifting, second reader H3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible finite family of raw left Kan extension colimit sections lifts to a compatible family in one stage of a filtered diagram of sites",
+   "results": "service unavailable: Internal Server Error; no search verdict inferred",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite compatible family in a filtered colimit of sites lifts to a compatible family of sections in one stage sheaf",
+   "results": "Presieve.Arrows.Compatible.exists_familyOfElements, Presieve.isSheafFor_arrows_iff, Presieve.IsSheafFor.isAmalgamation and amalgamate; no varying-site raw Kan matching lift.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Presieve.FamilyOfElements, Presieve.map",
+   "results": "Service returned no hits and unknown identifier Presieve.FamilyOfElements.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "matching_lift|matching.*family.*lift|IsAmalgamation|isSheafFor_of_mem_precoverage",
+   "results": "Mathlib IsSheafFor supplies gluing and naturality but no stage lift. Local ColimitSiteAbelianStageMatchingLift concerns additive generated sections with stronger Q hypotheses; RawSectionPresentation supplies one evaluation, not finite overlap-compatible matching lifts.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteRawSectionAmalgamation",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-raw-section-amalgamation",
+   "place": "Finite lifting and overlap compatibility, the strictly lower step before gluing",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteRawSectionMatchingLift",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteRawSectionMatchingLift.lean",
+  "declaration": "CategoryTheory.colimit_site_raw_section_matching_lift",
+  "statement": "theorem colimit_site_raw_section_matching_lift\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition]\n    [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →\n            ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n              PreservesLimit (cospan f g) (V.ι.app j).toFunctor))\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck (Type u))\n    (θ : ∀ (t t' : Under i) (b : t ⟶ t'),\n                        (sheafPullback (F.map t.hom).toFunctor (Type u)\n                          (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                        ((F.map b.right).toFunctor.sheafPushforwardContinuous (Type u)\n                          (P t.right).toGrothendieck (P t'.right).toGrothendieck).obj\n                          ((sheafPullback (F.map t'.hom).toFunctor (Type u)\n                            (P i).toGrothendieck (P t'.right).toGrothendieck).obj G))\n    (hθ : ∀ (t t' : Under i) (b : t ⟶ t'),\n      (∀ X : F.obj i,\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t.right).toGrothendieck).unit.app\n                                G).hom.app (op X) ≫\n                              (θ t t' b).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                          Arrow.mk\n                            (((sheafAdjunctionContinuous (F.map t'.hom).toFunctor (Type u)\n                              (P i).toGrothendieck (P t'.right).toGrothendieck).unit.app\n                                G).hom.app (op X))))\n    (B : Under i ⥤ (V.ptᵒᵖ ⥤ Type u))\n    (β : ∀ t : Under i,\n      ((sheafPullback (F.map t.hom).toFunctor (Type u)\n        (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⟶\n        (V.ι.app t.right).toFunctor.op ⋙ B.obj t)\n    (hβ : ∀ t : Under i, (B.obj t).IsLeftKanExtension (β t))\n    (hβmap : ∀ (t t' : Under i) (b : t ⟶ t') (X : F.obj t.right),\n      Arrow.mk ((β t).app (op X) ≫\n        (B.map b).app (op ((V.ι.app t.right).toFunctor.obj X))) =\n      Arrow.mk ((θ t t' b).hom.app (op X) ≫\n        (β t').app (op ((F.map b.right).toFunctor.obj X))))\n    (j : J) (X : F.obj j) (R : Presieve X) (hR : R ∈ P j X)\n    (x : (R.map (V.ι.app j).toFunctor).FamilyOfElements (colimit B))\n    (hx : x.Compatible) :\n    ∃ (t : Under i) (W : F.obj t.right) (T : Presieve W) (hcoverT : T ∈ P t.right W)\n      (e : (V.ι.app t.right).toFunctor.obj W = (V.ι.app j).toFunctor.obj X)\n      (hT : Presieve.ofArrows\n        (fun p : T.uncurry ↦ (V.ι.app t.right).toFunctor.obj p.val.1)\n        (fun p ↦ (V.ι.app t.right).toFunctor.map p.val.2 ≫ eqToHom e) =\n          R.map (V.ι.app j).toFunctor)\n      (y : T.FamilyOfElements\n        ((sheafPullback (F.map t.hom).toFunctor (Type u)\n          (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj),\n      y.Compatible ∧ ∀ p : T.uncurry,\n        (colimit.ι B t).app (op ((V.ι.app t.right).toFunctor.obj p.val.1))\n          ((β t).app (op p.val.1) (y p.val.2 p.property)) =\n        x ((V.ι.app t.right).toFunctor.map p.val.2 ≫ eqToHom e)\n          (hT ▸ Presieve.ofArrows.mk p)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T225315-L-1807780",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T225315-L-1807780",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

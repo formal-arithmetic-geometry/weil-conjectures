@@ -12,7 +12,8 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
-import Sheaf.CategoryTheory.FilteredColimitCategories
+
+import Sheaf.CategoryTheory.ColimitSiteRawSectionMatchingLift
 
 /-! # Raw sections: amalgamation on stage-image covers
 
@@ -123,6 +124,33 @@ theorem colimit_site_raw_section_exists_amalgamation
     (j : J) (X : F.obj j) (R : Presieve X) (hR : R ∈ P j X)
     (x : (R.map (V.ι.app j).toFunctor).FamilyOfElements (colimit B))
     (hx : x.Compatible) :
-    ∃ s, x.IsAmalgamation s := by sorry
+    ∃ s, x.IsAmalgamation s := by
+  obtain ⟨t, W, T, hcoverT, e, hT, y, hy, himage⟩ :=
+    colimit_site_raw_section_matching_lift J F P hfinite hcover hpullback
+      V hobjects harrows Q hVpullback i G θ hθ B β hβ hβmap j X R hR x hx
+  let A := (sheafPullback (F.map t.hom).toFunctor (Type u)
+    (P i).toGrothendieck (P t.right).toGrothendieck).obj G
+  have hA : Presieve.IsSheaf (P t.right).toGrothendieck A.obj :=
+    (isSheaf_iff_isSheaf_of_type _ A.obj).mp A.property
+  obtain ⟨s, hs, _⟩ := hA.isSheafFor_of_mem_precoverage hcoverT y hy
+  let m : A.obj ⟶ (V.ι.app t.right).toFunctor.op ⋙ colimit B :=
+    β t ≫ Functor.whiskerLeft (V.ι.app t.right).toFunctor.op (colimit.ι B t)
+  refine ⟨(colimit B).map (eqToHom e.symm).op (m.app (op W) s), ?_⟩
+  intro Y f hf
+  rw [← hT] at hf
+  cases hf with
+  | mk p =>
+    have hn := NatTrans.naturality_apply m p.val.2.op s
+    change m.app (op p.val.1) (A.obj.map p.val.2.op s) =
+      (colimit B).map ((V.ι.app t.right).toFunctor.map p.val.2).op
+        (m.app (op W) s) at hn
+    rw [hs p.val.2 p.property] at hn
+    calc
+      _ = (colimit B).map ((V.ι.app t.right).toFunctor.map p.val.2).op
+          (m.app (op W) s) := by
+        simp only [← Functor.map_comp_apply, ← op_comp, Category.assoc,
+          eqToHom_trans, eqToHom_refl, Category.comp_id]
+      _ = m.app (op p.val.1) (y p.val.2 p.property) := hn.symm
+      _ = _ := himage p
 
 end CategoryTheory
