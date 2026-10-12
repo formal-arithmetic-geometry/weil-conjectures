@@ -34,42 +34,24 @@
  ],
  "proof": [
   {
-   "text": "Choose c in A_(0,n+1) representing an element y of the row-cokernel module A^rt_(n+1) whose image under delta^rt_(n+1) is pi_n(a_(0,n)). Since delta^rt_(n+1) pi_(n+1) equals pi_n delta_(0,n+1), the difference a_(0,n) minus delta_(0,n+1)(c) lies in the image of d_(1,n); choose e in A_(1,n) with d_(1,n)(e) plus delta_(0,n+1)(c) equal to a_(0,n). Let b in T_(n+1)(A) have only b_(1,n)=e and b_(0,n+1)=c nonzero. Then D_(n+1)(b)_(0,n)=a_(0,n), so replacing a by a-D_(n+1)(b) gives a zig-zag representing the same class and having zeroth component 0. This replacement is legitimate because B_n(A) is contained in Z_n(A) by [lem-weil-pbc-double-complex-zigzag-module-functorial].",
+   "text": "Apply zigzag_boundary_reduction to obtain b whose subtraction leaves a cycle with vanishing zeroth component. Apply zigzag_zero_component_boundary to this residual, obtaining c with D(c)=a-D(b). Then D(b+c)=D(b)+D(c)=a by linearity, so a lies in the boundary submodule.",
    "uses": [
-    "def-weil-pbc-module-chain-complex-homology",
-    "def-weil-pbc-double-complex-zigzag-module",
-    "lem-weil-pbc-double-complex-zigzag-module-functorial"
+    "new-zigzag-boundary-reduction",
+    "new-zigzag-zero-component-boundary",
+    "def-weil-pbc-double-complex-zigzag-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18488-18496 (boundary lift and modification to arrange a_{0,i}=0)"
-   }
-  },
-  {
-   "text": "After the first step, suppose inductively that, after subtracting elements of B_n(A), the zig-zag a' has a'_(p,q)=0 for all p<k, where 1 <= k <= n and q=n-p. The zig-zag equation at (k,n-k), together with the already-zero component at (k-1,n-k+1), gives d_(k,n-k)(a'_(k,n-k))=0. Row exactness at A_(k,n-k) therefore supplies f in A_(k+1,n-k) with d_(k+1,n-k)(f)=a'_(k,n-k). Subtract the trivial zig-zag D_(n+1)(b) where b has only b_(k+1,n-k)=f nonzero; its (k,n-k) component is a'_(k,n-k), so the k-th component is killed while only the next component may change. Repeating for k=1,...,n produces a representative with every component zero. Thus the original zig-zag belongs to B_n(A).",
-   "uses": [
-    "def-weil-pbc-double-complex-zigzag-module",
-    "def-weil-pbc-exact-sequence",
-    "lem-weil-pbc-double-complex-zigzag-module-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18496-18504 (successive use of row exactness and subtraction of trivial zig-zags)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-double-complex-zigzag-module",
-  "def-weil-pbc-exact-sequence",
-  "lem-weil-pbc-double-complex-zigzag-module-functorial",
-  "def-weil-pbc-module-chain-complex-homology"
+  "new-zigzag-boundary-reduction",
+  "new-zigzag-zero-component-boundary",
+  "def-weil-pbc-double-complex-zigzag-module"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence), proof, lines 18488-18504"
+  "place": "Tag 00M1 (lemma-no-spectral-sequence), injectivity argument, lines 18488-18504; stage-3 reduction through the two split-off steps"
  },
  "mathlib_searches": [
   {
@@ -155,5 +137,15 @@
   "group": "H1",
   "result": "fix",
   "note": "R CommRing; A HomologicalComplex₂ ModuleCat down ℕ down ℕ; A^rt := A.opcycles 0 with pOpcycles (replaced arbitrary C/π cokernel coforks, E1/G1 form); rows exact p≥1 via ShortComplex.Exact in E1's spelling; a ∈ zigzagCycles A n; π_n(a_{0,n}) ∈ im (opcycles 0).d (n+1) n; conclusion a ∈ zigzagBoundaries A n; n=0 checked"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135329-L-1698087",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

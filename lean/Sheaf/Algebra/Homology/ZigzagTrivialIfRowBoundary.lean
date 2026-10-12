@@ -10,7 +10,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Sheaf.Algebra.Homology.ZigzagModuleFunctorial
+import Sheaf.Algebra.Homology.ZigzagZeroComponentBoundary
+import Sheaf.Algebra.Homology.ZigzagBoundaryReduction
 
 /-! # Exact-row zig-zags are trivial
 
@@ -70,6 +71,12 @@ theorem zigzag_trivial_if_row_boundary
         (DirectSum.component R (ZigzagIndex n)
           (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2) ⟨(0, n), by simp⟩ a)) :
     a ∈ zigzagBoundaries A n := by
-  sorry
+  obtain ⟨b, hbz, hb0⟩ := zigzag_boundary_reduction A hrow n a ha hboundary
+  have hbb := zigzag_zero_component_boundary A hrow n (a - zigzagBoundary A n b) hbz hb0
+  obtain ⟨c, hc⟩ := hbb
+  refine ⟨b + c, ?_⟩
+  simp only [map_add]
+  rw [hc]
+  abel
 
 end HomologicalComplex₂

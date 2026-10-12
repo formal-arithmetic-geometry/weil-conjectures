@@ -1,0 +1,143 @@
+{
+ "id": "new-zigzag-zero-component-boundary",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-normal-constant-generic",
+   "place": "step 4 of its split (normality of the strict henselization in Stacks 09Z5); Tor symmetry is used by the flat-module injectivity input along this branch; within the proof of Tor symmetry (Stacks 00M3, lemma-tor-left-right): 'Hence the double complex satisfies the conditions of Lemma lemma-no-spectral-sequence' and the third equality $H_i(U(A)_\\bullet)=H_i(R(A)_\\bullet)$, with the functoriality paragraph; within the proof of Stacks 00M1 (the node lem-weil-pbc-double-complex-cokernel-homology-iso): 'To prove injectivity we argue in exactly the same way ... we may modify our zig-zag by a trivial one and assume that $a_{0,i}=0$ ... Continuing like this we obtain the desired injectivity.'; finite exact-row induction after the zeroth component vanishes",
+   "via": [
+    "lem-weil-pbc-double-complex-cokernel-homology-iso",
+    "lem-weil-pbc-tor-symmetry",
+    "lem-weil-pbc-flat-tor-ideal-criterion",
+    "lem-weil-pbc-flat-mod-injective",
+    "lem-weil-pbc-flat-local-depth-formula",
+    "lem-weil-pbc-serre-sk-goes-up",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-weil-pbc-double-complex-zigzag-trivial-if-row-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Zero-component zig-zags are boundaries",
+ "statement": "Let $R$ be a commutative ring and $A$ a first-quadrant homological double complex of $R$-modules with commuting horizontal and vertical differentials $d$ and $\\delta$. Write $T_n(A)$, $Z_n(A)$ and $B_n(A)=\\operatorname{im}(D_{n+1})$ for the total module, zig-zag cycle submodule and boundary submodule [def-weil-pbc-double-complex-zigzag-module]. Assume for every $q\\ge0$ and $p\\ge1$ that $A_{p+1,q}\\xrightarrow{d}A_{p,q}\\xrightarrow{d}A_{p-1,q}$ is exact [def-weil-pbc-exact-sequence]. For $n\\ge0$ and $a\\in Z_n(A)$ with $a_{0,n}=0$, one has $a\\in B_n(A)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1, lines 18488-18504"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-double-complex-zigzag-module",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "For n=0 the sole component is zero, hence a=0 is a boundary. For n>0 start with k=1, a residual equal to a and accumulated boundary tuple zero. Inductively assume the residual is a cycle with all horizontal indices below k zero and that a equals the residual plus the boundary of the accumulated tuple.",
+   "uses": [
+    "def-weil-pbc-double-complex-zigzag-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1, lines 18488-18504"
+   }
+  },
+  {
+   "text": "For 1 <= k <= n the cycle equation at (k-1,n-k) gives d(a_(k,n-k))=delta(a_(k-1,n-k+1))=0. Exactness at the positive index k supplies f in A_(k+1,n-k) with d(f)=a_(k,n-k). Subtract the boundary supported at (k+1,n-k), and add this tuple to the accumulated tuple. It kills the kth component and affects only the next component. Boundaries are cycles by the first functoriality clause, so the induction is preserved. At k=n all residual components vanish; direct-sum extensionality and linearity give the required boundary expression.",
+   "uses": [
+    "def-weil-pbc-double-complex-zigzag-module",
+    "lem-weil-pbc-double-complex-zigzag-module-functorial",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 00M1, lines 18488-18504"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-double-complex-zigzag-module",
+  "lem-weil-pbc-double-complex-zigzag-module-functorial",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 00M1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "opcycles.*(surjective|exact)|zigzag|total.*exact",
+   "results": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/SpectralObject/Page.lean; Mathlib/Algebra/Homology/SpectralObject/Page.lean",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cycle of a first quadrant bicomplex with exact rows and zero first column component is a boundary of the total differential",
+   "results": "HomologicalComplex.d_toCycles; HomologicalComplex.iCycles_d; HomologicalComplex.iCycles_d_assoc; HomologicalComplex.d_toCycles_assoc; HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary; HomologicalComplex.fromOpcycles_d; HomologicalComplex.homologyι_descOpcycles_eq_zero_of_boundary; HomologicalComplex.d_pOpcycles",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂",
+   "results": "HomologicalComplex₂; HomologicalComplex₂.toGradedObject; HomologicalComplex₂.flip; HomologicalComplex₂.flip_flip; HomologicalComplex₂.toGradedObjectFunctor; HomologicalComplex₂.instFaithfulGradedObjectProdToGradedObjectFunctor; HomologicalComplex₂.flipEquivalence; HomologicalComplex₂.flipFunctor",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a boundary of the cokernel of the horizontal differential of a bicomplex to a total boundary matching the zeroth component",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ZigzagTrivialIfRowBoundary",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint_ref": null,
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ZigzagZeroComponentBoundary",
+  "declaration": "HomologicalComplex₂.zigzag_zero_component_boundary",
+  "file": "lean/Sheaf/Algebra/Homology/ZigzagZeroComponentBoundary.lean",
+  "statement": "theorem zigzag_zero_component_boundary\n    (A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ)\n      (ComplexShape.down ℕ))\n    (hrow : ∀ (p q : ℕ), 0 < p →\n      (ShortComplex.mk ((A.d (p + 1) p).f q) ((A.d p (p - 1)).f q)\n        (by rw [← HomologicalComplex.comp_f, A.d_comp_d,\n          HomologicalComplex.zero_f])).Exact)\n    (n : ℕ) (a : zigzagTotal A n) (ha : a ∈ zigzagCycles A n)\n    (hzero : DirectSum.component R (ZigzagIndex n)\n      (fun i : ZigzagIndex n => (A.X i.1.1).X i.1.2)\n      ⟨(0, n), by simp⟩ a = 0) :\n    a ∈ zigzagBoundaries A n",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135329-L-1698087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T135329-L-1698087",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
