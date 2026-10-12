@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-picard-base-change-stalk-ranks",
+ "kind": "statement",
+ "title": "Equal finite stalk ranks in Picard base change",
+ "statement": "Let $f:X\\to S$ be flat [def-weil-flat-morphism], proper [def-weil-proper-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $E$ be finite locally free [def-sc-finite-locally-free-sheaf], $g:T\\to S$, and assume $R(f,E,g)$ [def-sc-picard-universal-rank-match]. Let $h:T'\\to T$, $t\\in T'$, and $F=E$ or $F=E^\\vee$. Set $p=\\operatorname{pr}_2:X\\times_S T\\to T$, $q=\\operatorname{pr}_1:X\\times_S T\\to X$, and $p',v$ the two projections of $(X\\times_S T)\\times_T T'$. Put $P=h^*p_*q^*F$ and $Q=p'_*v^*q^*F$. Use the module stalks [def-weil-pbc-module-stalk] and the canonical ordinary map $\\beta:P\\to Q$ [lem-weil-pbc-module-base-change-map-open-restriction]. The $\\mathcal O_{T',t}$-module $Q_t$ is finitely generated, and there exists an $\\mathcal O_{T',t}$-linear equivalence $P_t\\cong Q_t$. No assertion about $\\beta_t$ is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "common-rank reduction; Tag 01C6 (finite local frames), Tag 0098 (pullback stalks)"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-picard-universal-rank-match",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Apply R to the identity of T at h(t) and to h at t. Take neighbourhoods with common ranks r and s. The local frames in finite local freeness give finite free stalks; dual frames have the same rank.",
+   "uses": [
+    "def-sc-picard-universal-rank-match",
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The tensor-pullback stalk formula transports the source frame across h. Composition of tensor pullbacks and the canonical associativity isomorphism of categorical pullbacks identify the target with the ordinary direct image on the composite base change.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-module-pullback-identity-composition",
+    "def-pc-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If the fibre over h(t) is nonempty, choose a common residue field extension and a point in the base-changed fibre. At that point the rank of the pullback of E is both r and s. The finite locally free stalk finrank formula and invariance of finite free rank under scalar extension imply r=s.",
+   "uses": [
+    "lem-sc-finite-locally-free-stalk-finrank",
+    "lem-weil-pbc-module-stalk-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If the fibre is empty, the closed image of the proper morphism omits h(t); on the complementary open both direct images vanish. Thus both stalks are zero. Otherwise compose the two rank-r stalk frames to obtain an equivalence; the target is finite generated.",
+   "uses": [
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-picard-universal-rank-match",
+  "def-sc-finite-locally-free-sheaf",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-pc-module-pullback-identity-composition",
+  "def-pc-base-change",
+  "lem-sc-finite-locally-free-stalk-finrank",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "common-rank reduction; Tag 01C6 (finite local frames), Tag 0098 (pullback stalks)",
+  "note": "Q1 expanded the omitted detail, separating stalk ranks from canonical surjectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bijective_of_surjective_of_injective|rankAtStalk_baseChange",
+   "results": "8 hits: Mathlib/LinearAlgebra/Dimension/Free.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/Flat/Rank.lean, Mathlib/RingTheory/Grassmannian.lean, Mathlib/RingTheory/OrzechProperty.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric rank or canonical-stalk-surjectivity statement; generic algebra only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity on stalks of the canonical degree zero cohomology base change map under universal locally free rank matching",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "OrzechProperty.bijective_of_surjective_of_injective",
+   "results": "1 hits: OrzechProperty.bijective_of_surjective_of_injective",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric rank or canonical-stalk-surjectivity statement; generic algebra only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardRankMatchBaseChange",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general cube theorem; Tag 0BDP third paragraph, common-rank reduction; Tag 01C6 (finite local frames), Tag 0098 (pullback stalks)",
+   "via": [
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkRanks",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardBaseChangeStalkRanks.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_baseChange_stalk_ranks",
+  "statement": "theorem picardRankMatch_baseChange_stalk_ranks {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g) {T' : Scheme.{u}} (h : T' ⟶ T)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) (t : T') :\n    let P := (Modules.tensorPullback h).obj\n      ((Modules.pushforward (pullback.snd f g)).obj\n        ((Modules.tensorPullback (pullback.fst f g)).obj F))\n    let Q := (Modules.pushforward (pullback.snd (pullback.snd f g) h)).obj\n      ((Modules.tensorPullback (pullback.fst (pullback.snd f g) h)).obj\n        ((Modules.tensorPullback (pullback.fst f g)).obj F))\n    Module.Finite (T'.presheaf.stalk t) (Q.presheaf.stalk t) ∧\n      Nonempty (P.presheaf.stalk t ≃ₗ[T'.presheaf.stalk t] Q.presheaf.stalk t)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T223413-L-1639409",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T223413-L-1639409",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

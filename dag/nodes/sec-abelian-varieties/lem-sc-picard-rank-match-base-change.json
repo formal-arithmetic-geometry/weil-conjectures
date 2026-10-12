@@ -17,37 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Work on common-rank neighbourhoods of T. Perfect derived direct images with arbitrary base change have local finite-free models starting in degree zero. Universal rank matching implies the rank-r lowest-cohomology condition on these neighbourhoods and on every further test scheme.",
+   "text": "Fix h:T′→T. For F equal to E or its dual, and for each t, obtain finite generation of the target stalk and a linear equivalence from the source stalk by the equal-rank lemma.",
    "uses": [
-    "lem-pc-rf-perfect-base-change"
+    "lem-sc-picard-base-change-stalk-ranks"
    ],
    "elementary": false
   },
   {
-   "text": "Factor each neighbourhood through the lowest-cohomology rank-r locus. The residue-field tests give lowest fibre dimension r at the image points. Choose the residue models used in Tag 0BDL, cancelling contractible summands so that the first term has rank r and there are no negative terms. On the locus the outgoing degree-zero matrix in this chosen model is zero, so H^0 is the first free term. Every further scalar extension leaves that matrix zero. The canonical degree-zero cohomology base-change morphism is the identity on this scalar extension, hence an isomorphism for E and for its dual. Identify this morphism with the ordinary adjoint-defined moduleBaseChangeMap by naturality of degree-zero direct-image comparison and the adjunction triangle identities; an arbitrary object isomorphism does not suffice.",
+   "text": "Obtain surjectivity of the stalk of the canonical map. Regard the linear equivalence as an injective map into the target. Mathlib OrzechProperty.bijective_of_surjective_of_injective gives bijectivity of the canonical stalk map; commutative rings satisfy OrzechProperty, without a Noetherian assumption.",
    "uses": [
-    "lem-sc-perfect-h0-locally-closed"
+    "lem-sc-picard-base-change-stalk-surjective"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Open restriction compares these canonical maps with those in the restricted squares. Isomorphisms of sheaves can be checked on the common-rank open cover, so the local invertibility proves both global claims. Rank zero is zero-to-zero; empty schemes impose no point conditions.",
+   "text": "The proved source-library Modules.isIso_of_bijective_stalkLinearMap gives the sheaf isomorphism from these stalkwise bijections. Apply this uniformly to E and its dual and pair the results. The empty-base case is covered by the same stalk criterion.",
    "uses": [
-    "lem-weil-pbc-module-base-change-map-open-restriction"
+    "lem-weil-pbc-module-iso-on-stalks"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-rf-perfect-base-change",
-  "lem-sc-perfect-h0-locally-closed",
-  "lem-weil-pbc-module-base-change-map-open-restriction"
+  "lem-sc-picard-base-change-stalk-ranks",
+  "lem-sc-picard-base-change-stalk-surjective",
+  "lem-weil-pbc-module-iso-on-stalks"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/0BDP",
-  "place": "third proof paragraph: the omitted canonical base-change detail, expanded using Tags 0B91 and 0BDL",
-  "note": "Stage-3 decomposition of the rank-locus proof; the unit route is retained."
+  "place": "third paragraph, omitted canonical base-change detail, expanded by Tags 0BDL, 0B91 and the commutative-ring Orzech theorem",
+  "note": "Q1 Lean proof separates equal-rank stalk objects and canonical surjectivity; Mathlib supplies injectivity and the proved source library supplies stalk detection. No unit step bypassed."
  },
  "mathlib_searches": [
   {
@@ -121,7 +121,7 @@
   "reviewer": "COMPILER",
   "group": "Q1",
   "result": "pass",
-  "landing": "20261012T194131-L-461842",
+  "landing": "20261012T223413-L-1639409",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

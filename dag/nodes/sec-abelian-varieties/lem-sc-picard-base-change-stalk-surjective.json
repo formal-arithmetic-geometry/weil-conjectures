@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-picard-base-change-stalk-surjective",
+ "kind": "statement",
+ "title": "Stalk surjectivity of canonical Picard base change",
+ "statement": "Let $f:X\\to S$ be flat [def-weil-flat-morphism], proper [def-weil-proper-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $E$ be finite locally free [def-sc-finite-locally-free-sheaf], $g:T\\to S$, and assume $R(f,E,g)$ [def-sc-picard-universal-rank-match]. Let $h:T'\\to T$, $t\\in T'$, and $F=E$ or $F=E^\\vee$. Set $p=\\operatorname{pr}_2:X\\times_S T\\to T$, $q=\\operatorname{pr}_1:X\\times_S T\\to X$, and $p',v$ the two projections of $(X\\times_S T)\\times_T T'$. Put $P=h^*p_*q^*F$ and $Q=p'_*v^*q^*F$. Use the module stalks [def-weil-pbc-module-stalk] and the canonical ordinary map $\\beta:P\\to Q$ [lem-weil-pbc-module-base-change-map-open-restriction]. The induced linear map $\\beta_t:P_t\\to Q_t$ is surjective. Neither injectivity nor invertibility is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "omitted base-change detail; Tags 0B91(2), 0BDL (matrix-zero residue model), 08HY (canonical comparison)"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-picard-universal-rank-match",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Over a common-rank neighbourhood the proper flat finite-presentation morphism has perfect derived direct images for E and its dual, with arbitrary canonical derived base change. Their Tor amplitude starts at zero because every base-changed direct image has no negative cohomology.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change",
+    "def-sc-picard-universal-rank-match"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use residue-field tests of the universal rank condition and the residue-model construction of the lowest-cohomology locus. The first term has rank r and all negative terms vanish. The universal condition makes the outgoing degree-zero matrix zero. Scalar extension of H^0 and H^0 after scalar extension are then the same first free term; the natural comparison is the identity, hence surjective.",
+   "uses": [
+    "lem-sc-perfect-h0-locally-closed",
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify this specific comparison with the adjoint-defined ordinary base-change map: transpose under tensor pullback adjoint to pushforward and use naturality and triangle identities. The result is exactly the unit, pushforward composition and square-commutation composite in moduleBaseChangeMap, with pullback associativity comparisons.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Open restriction of the canonical map agrees with the restricted square map. Taking the stalk at t turns the local identity calculation into surjectivity of beta_t for either F. Rank zero and empty bases introduce no exception.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-perfect-base-change",
+  "def-sc-picard-universal-rank-match",
+  "lem-sc-perfect-h0-locally-closed",
+  "lem-sc-perfect-finite-free-residue-model",
+  "lem-weil-pbc-module-base-change-map-open-restriction",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "omitted base-change detail; Tags 0B91(2), 0BDL (matrix-zero residue model), 08HY (canonical comparison)",
+  "note": "Q1 expanded the omitted detail, separating stalk ranks from canonical surjectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bijective_of_surjective_of_injective|rankAtStalk_baseChange",
+   "results": "8 hits: Mathlib/LinearAlgebra/Dimension/Free.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/TotallySplit.lean, Mathlib/RingTheory/Flat/Rank.lean, Mathlib/RingTheory/Grassmannian.lean, Mathlib/RingTheory/OrzechProperty.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric rank or canonical-stalk-surjectivity statement; generic algebra only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity on stalks of the canonical degree zero cohomology base change map under universal locally free rank matching",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "OrzechProperty.bijective_of_surjective_of_injective",
+   "results": "1 hits: OrzechProperty.bijective_of_surjective_of_injective",
+   "date": "2026-10-12",
+   "verdict": "No exact geometric rank or canonical-stalk-surjectivity statement; generic algebra only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardRankMatchBaseChange",
+  "date": "2026-10-13",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: application of the general cube theorem; Tag 0BDP third paragraph, omitted base-change detail; Tags 0B91(2), 0BDL (matrix-zero residue model), 08HY (canonical comparison)",
+   "via": [
+    "lem-sc-picard-rank-match-base-change",
+    "lem-sc-picard-direct-image-rank-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardBaseChangeStalkSurjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardBaseChangeStalkSurjective.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picardRankMatch_baseChange_stalk_surjective",
+  "statement": "theorem picardRankMatch_baseChange_stalk_surjective {X S T : Scheme.{u}} (f : X ⟶ S)\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S)\n    (hR : PicardUniversalRankMatch f E g) {T' : Scheme.{u}} (h : T' ⟶ T)\n    (F : X.Modules) (hF : F = E ∨ F = Modules.dual E) (t : T') :\n    Function.Surjective\n      ((Modules.moduleBaseChangeMap (pullback.snd f g)\n        (pullback.snd (pullback.snd f g) h) h (pullback.fst (pullback.snd f g) h)\n        pullback.condition ((Modules.tensorPullback (pullback.fst f g)).obj F)).stalkLinearMap t)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T223413-L-1639409",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T223413-L-1639409",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
