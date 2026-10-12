@@ -2,12 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Sheaf.AlgebraicGeometry.AbelianExchangeCubeComparisons
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsosSource
 
 @[expose] public section
 universe u
@@ -16,9 +11,16 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 open Scheme Etale
 
+set_option linter.unusedVariables false in
 /-- Component theorem: the source strict-local cube stalk comparison is invertible.
 Source: Stacks Project, Tags 03Q9 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-source-stalk-iso). -/
+(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-source-stalk-iso).
+
+Proof: apply the existing source component theorem
+`isIso_strictHenselization_exchangeCube_stalkComparisons_source`, whose hypotheses and
+canonical comparison map are identical. Its proof reduces to the strict-local
+base-change mate on the closed stalk and transports invertibility through exact
+inverse image, homology, and the inverse-image stalk isomorphism. -/
 theorem Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison
     {S T X X' : Scheme.{u}} {g : T ⟶ S} {f : X ⟶ S}
     [QuasiCompact f] [QuasiSeparated f] {f' : X' ⟶ T} {g' : X' ⟶ X}
@@ -72,7 +74,9 @@ theorem Etale.isIso_strictHenselization_exchangeCube_source_stalkComparison
     let N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙
       R+((f₁)_*[AddCommGrpCat.{u + 1}])).obj K₀
     IsIso (derivedStalkComparison jB t τ ht M₁ N₁
-      (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ)) := by sorry
+      (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ)) := by
+  exact Etale.isIso_strictHenselization_exchangeCube_stalkComparisons_source
+    sq σ τ ι hι ν eA eB φ ρA ρB hφ hρA hρB hρ p₀ f₀ sq₀ p₁ f₁ sq₁ b sqB hb G q
 
 
 end AlgebraicGeometry

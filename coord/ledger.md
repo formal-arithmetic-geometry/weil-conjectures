@@ -8317,3 +8317,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/N1/Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication (stage 3; reviewer PASS; first push; landing 20261012T151910-L-2289338 (interface); batch 20261012T151904; modules 4; new nodes 3)
 - 15:19 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalizationSectionFormula (stage 3; reviewer PASS; first push; landing 20261012T151911-L-2289499 (proof); batch 20261012T151904; modules 1; new nodes 0)
 - 15:19 L: merged deliver/P2/Sheaf.CategoryTheory.BrownRepresentabilityConstruction (stage 3; reviewer PASS; after a return; landing 20261012T151911-L-2289617 (interface); batch 20261012T151904; modules 3; new nodes 2)
+- 15:19 L: merged deliver/P3/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeSourceStalkIso (stage 3; reviewer PASS; first push; landing 20261012T151911-L-2289768 (proof); batch 20261012T151904; modules 1; new nodes 0)
