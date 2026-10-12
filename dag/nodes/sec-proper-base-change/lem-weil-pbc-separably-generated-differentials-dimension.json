@@ -35,67 +35,26 @@
  ],
  "proof": [
   {
-   "text": "Put $F=k(x_1,\\dots,x_r)\\subseteq K$. By [def-weil-pbc-transcendence-basis], the $x_i$ are algebraically independent over $k$, so evaluation gives an injection $P=k[X_1,\\dots,X_r]\\hookrightarrow K$. Its fraction field maps isomorphically onto $F$: the image consists of the fractions $g(x)/h(x)$ with $g,h\\in P$, $h\\ne0$, and is precisely the smallest subfield of $K$ containing $k$ and all $x_i$.",
+   "text": "Apply new-separably-generated-differentials-basis to obtain the Fin r-indexed basis with vectors D(x_i).",
    "uses": [
-    "def-weil-pbc-transcendence-basis"
+    "new-separably-generated-differentials-basis"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44189-44197, where the purely transcendental field k(x_1,...,x_r) is introduced; the fraction-field identification is expanded from Definition Tag 030E (definition-transcendence) in literature/stacks-project/fields.tex"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-polynomial-ring-kahler-basis] (Algebra, Tag 00RX), $\\Omega_{P/k}$ is free over $P$ on $\\mathrm dX_1,\\dots,\\mathrm dX_r$. Let $S=P\\setminus\\{0\\}$. The localization is $S^{-1}P=F$ by step 1, and [lem-weil-pbc-kahler-differentials-localization] (Algebra, Tag 00RT) gives $\\Omega_{F/k}\\cong S^{-1}\\Omega_{P/k}$. Localizing the displayed free basis gives the $F$-basis $\\mathrm dx_1,\\dots,\\mathrm dx_r$ of $\\Omega_{F/k}$, since the localization map sends $\\mathrm dX_i$ to $\\mathrm dx_i$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-kahler-basis",
-    "lem-weil-pbc-kahler-differentials-localization",
-    "def-weil-pbc-kahler-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44194-44199 (the direct-sum formula for Omega of k(x_1,...,x_r)); Lemma Tag 00RX (lemma-differentials-polynomial-ring), lines 34310-34345; Lemma Tag 00RT (lemma-differentials-localize), lines 34078-34100"
-   }
-  },
-  {
-   "text": "The hypothesis says that $K/F$ is separable algebraic [def-weil-pbc-separable-algebraic-extension]. It is finite: if $K=k(a_1,\\dots,a_n)$ as in the statement, then $K=F(a_1,\\dots,a_n)$, and adjoining each algebraic $a_i$ has finite degree over the preceding field; multiplying these finitely many degrees gives $[K:F]<\\infty$. Thus [lem-weil-pbc-separable-algebraic-differentials-base-change] applies and makes the canonical $K$-linear map $K\\otimes_F\\Omega_{F/k}\\xrightarrow{\\sim}\\Omega_{K/k}$, $a\\otimes\\mathrm df\\mapsto a\\,\\mathrm df$, an isomorphism.",
-   "uses": [
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-separable-algebraic-differentials-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44189-44202: K is finite separable over k(x_1,...,x_r), and the differential computation is omitted; Lemma Tag 090W (lemma-characterize-separable-algebraic-field-extensions), lines 44137-44160"
-   }
-  },
-  {
-   "text": "Tensoring the free $F$-module from step 2 with $K$ gives a free $K$-module with basis $1\\otimes\\mathrm dx_1,\\dots,1\\otimes\\mathrm dx_r$. The isomorphism of step 3 sends these vectors to $\\mathrm dx_1,\\dots,\\mathrm dx_r$ in $\\Omega_{K/k}$, so they form a $K$-basis. It has $r$ elements; by [def-kun-transcendence-degree], a transcendence basis of $K/k$ has cardinality $r=\\operatorname{trdeg}_k K$. Consequently $\\dim_K\\Omega_{K/k}=r=\\operatorname{trdeg}_k K$, including $r=0$.",
-   "uses": [
-    "lem-weil-pbc-separable-algebraic-differentials-base-change",
-    "def-kun-transcendence-degree"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44194-44202 (the two direct-sum descriptions of the differentials); the dimension equality is stated in the proof of Lemma Tag 00TV (lemma-separable-smooth), line 38765"
-   }
+   "text": "Module.Finite.of_basis gives finite dimensionality, and Module.finrank_eq_card_basis identifies finrank with the cardinality of Fin r. IsTranscendenceBasis.lift_cardinalMk_eq_trdeg identifies that cardinality with trdeg; simplifying the finite cardinal and universe lifts proves the equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-transcendence-basis",
-  "lem-weil-pbc-polynomial-ring-kahler-basis",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-separable-algebraic-differentials-base-change",
-  "def-kun-transcendence-degree"
+  "new-separably-generated-differentials-basis"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, proof of Lemma Tag 031W (lemma-derivative-zero-pth-power), lines 44189-44202, with its omitted finite-separable computation supplied by the Mathlib leaf lem-weil-pbc-separable-algebraic-differentials-base-change; Tags 00RX, 00RT and 090W"
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-13",
+  "description": "Basis-existence decomposition following the original Stacks route; remaining finite-dimensionality and cardinal bookkeeping proved by Mathlib basis and transcendence-basis lemmas."
  },
  "mathlib_searches": [
   {
@@ -179,5 +138,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T194116-L-456727",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

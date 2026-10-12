@@ -9,6 +9,8 @@ public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+import Sheaf.FieldTheory.SeparablyGeneratedDifferentialsBasis
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 
 /-!
 # Differentials of a separably generated field extension
@@ -56,6 +58,11 @@ theorem exists_basis_differentials_of_separating_transcendenceBasis
       ∀ i : Fin r, b i = D k K (x i)) ∧
     FiniteDimensional K (KaehlerDifferential k K) ∧
     (Module.finrank K (KaehlerDifferential k K) : Cardinal.{v}) = Algebra.trdeg k K := by
-  sorry
+  obtain ⟨b, hb⟩ := exists_basis_differentials_of_separating_transcendenceBasis_basis
+    hfg hsep x hx hxs
+  refine ⟨⟨b, hb⟩, Module.Finite.of_basis b, ?_⟩
+  rw [Module.finrank_eq_card_basis b]
+  have hcard := hx.lift_cardinalMk_eq_trdeg
+  simpa using hcard
 
 end KaehlerDifferential
