@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+import Sheaf.RingTheory.ProjectiveResolutionExtDegree
+import Sheaf.RingTheory.ProjectiveResolutionExtAllDegrees
 
 /-!
 # Bounded projective resolutions and Ext vanishing
@@ -61,6 +63,6 @@ theorem hasProjectiveResolutionLE_iff_ext_vanishing
     (HasProjectiveResolutionLE X n ↔
       ∀ (Y : ModuleCat.{max u v} R) (i : ℕ), n + 1 ≤ i →
         Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard (ModuleCat.{max u v} R)) X Y i)) := by
-  sorry
+  exact ⟨projective_resolution_ext_degree X n, projective_resolution_ext_all_degrees X n⟩
 
 end ModuleCat

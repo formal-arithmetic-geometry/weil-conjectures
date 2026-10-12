@@ -9817,3 +9817,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/S3/Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural (stage 3; reviewer PASS; first push; landing 20261012T223417-L-1640913 (interface); batch 20261012T223357; modules 3; new nodes 2)
 - 22:34 L: merged deliver/S3/Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLift (stage 3; reviewer PASS; first push; landing 20261012T223417-L-1641057 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/S3/Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesAtStage (stage 3; reviewer PASS; first push; landing 20261012T223417-L-1641224 (interface); batch 20261012T223357; modules 2; new nodes 1)
+- 22:34 L: merged deliver/T1/Sheaf.RingTheory.ProjectiveResolutionExtCharacterization (stage 3; reviewer PASS; first push; landing 20261012T223418-L-1641338 (interface); batch 20261012T223357; modules 3; new nodes 2)
