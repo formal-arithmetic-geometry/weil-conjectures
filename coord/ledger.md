@@ -5806,3 +5806,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:43 L: merged deliver/T1/Sheaf.AlgebraicGeometry.FiniteAffineCoverRestrictionBound (stage 3; reviewer PASS; after a return; landing 20261012T014245-L-874691 (interface); modules 3; new nodes 2)
 - 01:44 L: returned deliver/F1/Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit (reviewer RETURN: (reviewer X-323a0, head 323a0f91d) B5: In dag/nodes/sec-proper-base-change/lem-weil-pbc-module-sheaf-colimit-constructib)
 - 01:46 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T014425-L-880897 (interface); modules 4; new nodes 3)
+- 01:47 L: merged deliver/G1/Sheaf.AlgebraicGeometry.ConstructibleRestrictionClassCore (stage 3; reviewer PASS; after a return; landing 20261012T014629-L-887723 (interface); modules 2; new nodes 1)
