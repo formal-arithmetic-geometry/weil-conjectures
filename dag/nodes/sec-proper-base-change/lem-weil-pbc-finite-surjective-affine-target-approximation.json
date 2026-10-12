@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "(Reduction to $f$ of finite presentation.) $f$ is integral (step 1) and $S$ is quasi-compact and quasi-separated, so by [lem-weil-pbc-integral-morphism-limit-of-finite] (Limits 09YZ) there are a directed set $A$, $S$-schemes $\\nu_a:X_a\\to S$ that are finite and of finite presentation [def-weil-finite-integral-morphism], affine transition morphisms over $S$ and morphisms $p_a:X\\to X_a$ over $S$ (so $f=\\nu_a\\circ p_a$) with $X=\\varprojlim_aX_a$. Each $\\nu_a$ is affine, hence quasi-compact and quasi-separated [lem-weil-pbc-affine-morphism-permanence] (3), so every $X_a$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2); as the limit $X$ is affine, some $X_{a_0}$ is affine [lem-weil-pbc-limit-affine-stage] (Limits 01Z6). $\\nu_{a_0}$ is surjective because $f=\\nu_{a_0}\\circ p_{a_0}$ is [def-weil-surjective-morphism]. Replacing $(X,f)$ by $(X_{a_0},\\nu_{a_0})$ we may and do assume from now on that $f$ is finite, of finite presentation and surjective and $X$ is affine (step 1 still applies).",
+   "text": "(Reduction to $f$ of finite presentation.) $f$ is integral (step 1) and $S$ is quasi-compact and quasi-separated, so by [lem-weil-pbc-integral-morphism-limit-of-finite] (Limits 09YZ) there are a directed set $A$, $S$-schemes $\\nu_a:X_a\\to S$ that are finite and of finite presentation [def-weil-finite-integral-morphism], affine transition morphisms over $S$ and morphisms $p_a:X\\to X_a$ over $S$ (so $f=\\nu_a\\circ p_a$) with $X=\\varprojlim_aX_a$. Each $\\nu_a$ is affine, hence quasi-compact and quasi-separated [lem-weil-pbc-affine-morphism-permanence] (3), so every $X_a$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2); as the limit $X$ is affine, some $X_{a_0}$ is affine [lem-weil-pbc-limit-affine-stage] (Limits 01Z6). $\\nu_{a_0}$ is surjective because $f=\\nu_{a_0}\\circ p_{a_0}$ is [def-weil-surjective-morphism]. Replacing $(X,f)$ by $(X_{a_0},\\nu_{a_0})$ we may and do assume from now on that $f$ is finite, of finite presentation and surjective and $X$ is affine (step 1 still applies). In Lean the finite approximation is already indexed by a cofiltered category, which suffices for Mathlib Scheme.exists_isAffine_of_isLimit; no directed reindexing is needed in this step.",
    "uses": [
     "lem-weil-pbc-integral-morphism-limit-of-finite",
     "def-weil-finite-integral-morphism",
@@ -66,7 +66,7 @@
    }
   },
   {
-   "text": "(Descending $f$ to a finitely presented model.) $f$ is of finite presentation and the $S_i$ are quasi-compact and quasi-separated with affine transitions, so by [thm-pd-spreading-out] (1) (Limits 01ZM) there are $0\\in I$, a morphism of finite presentation $g_0:X_0\\to S_0$ [def-sbc-locally-finite-presentation] and an isomorphism $X\\cong X_0\\times_{S_0}S$ over $S$ (fibre product along $\\sigma_0$ [def-pc-fibre-product]). The subset $I_{\\ge0}$ is cofinal, so $S=\\varprojlim_{i\\ge0}S_i$ [lem-weil-pbc-colimit-initial-full-subcategory]; we index by $I_{\\ge0}$ from now on. Put $X_i=X_0\\times_{S_0}S_i$ and $g_i:X_i\\to S_i$ the projection. By [lem-weil-pbc-scheme-over-limit] (Limits 01YZ) $(X_i)_{i\\ge0}$ is an inverse system with affine transition morphisms whose limit is $X_0\\times_{S_0}S\\cong X$. Each $g_i$ is of finite presentation as a base change of $g_0$ [lem-weil-pbc-qcqs-morphism-permanence] (3), so $X_i$ is quasi-compact and quasi-separated over the quasi-compact quasi-separated $S_i$ [lem-weil-pbc-qcqs-morphism-permanence] (2). In the notation of the descent lemmas (Situation 081D) with $Y_0=S_0$ and $f_0=g_0$: $Y_i=S_0\\times_{S_0}S_i=S_i$, $f_i=g_i$, and the base change of $f_0$ to $S$ is $X_0\\times_{S_0}S\\to S$, which is $f$ up to the isomorphism over $S$.",
+   "text": "(Descending $f$ to a finitely presented model.) $f$ is of finite presentation and the $S_i$ are quasi-compact and quasi-separated with affine transitions, so by [thm-pd-spreading-out] (1) (Limits 01ZM) there are $0\\in I$, a morphism of finite presentation $g_0:X_0\\to S_0$ [def-sbc-locally-finite-presentation] and an isomorphism $X\\cong X_0\\times_{S_0}S$ over $S$ (fibre product along $\\sigma_0$ [def-pc-fibre-product]). The subset $I_{\\ge0}$ is cofinal, so $S=\\varprojlim_{i\\ge0}S_i$ [lem-weil-pbc-colimit-initial-full-subcategory]; we index by $I_{\\ge0}$ from now on. Put $X_i=X_0\\times_{S_0}S_i$ and $g_i:X_i\\to S_i$ the projection. By [lem-weil-pbc-scheme-over-limit] (Limits 01YZ) $(X_i)_{i\\ge0}$ is an inverse system with affine transition morphisms whose limit is $X_0\\times_{S_0}S\\cong X$. Each $g_i$ is of finite presentation as a base change of $g_0$ [lem-weil-pbc-qcqs-morphism-permanence] (3), so $X_i$ is quasi-compact and quasi-separated over the quasi-compact quasi-separated $S_i$ [lem-weil-pbc-qcqs-morphism-permanence] (2). In the notation of the descent lemmas (Situation 081D) with $Y_0=S_0$ and $f_0=g_0$: $Y_i=S_0\\times_{S_0}S_i=S_i$, $f_i=g_i$, and the base change of $f_0$ to $S$ is $X_0\\times_{S_0}S\\to S$, which is $f$ up to the isomorphism over $S$. The Lean proof uses Scheme.exists_isPullback_of_finitePresentation, the object-descent clause underlying thm-pd-spreading-out. The cofinal tail is represented by Over i₀; baseChangeDiagram and isLimitBaseChangeCone supply its diagram and limit. For the Over-based descent lemmas, regard p : A → Y₀ as a morphism Over.mk p → Over.mk (id Y₀); its base change differs from the usual second pullback projection only by an isomorphism of the target.",
    "uses": [
     "thm-pd-spreading-out",
     "def-sbc-locally-finite-presentation",
@@ -121,9 +121,13 @@
    }
   },
   {
-   "text": "Choose a common upper bound of the three eventual stages. Set Z = Y_i, W = X_i and g = g_i; Z is Noetherian, W is affine, and g is finite and surjective. The limit projection q : Y → Z is affine since the transition maps are affine. Package these data without using the Noetherian affineness theorem.",
+   "text": "Choose a common upper bound k of the finiteness and surjectivity indices and the underlying index of the affine stage in Over i₀. The resulting object l of Over i₀ maps to each chosen stage. isPullback_baseChangeDiagram_map and stability under base change give finite and surjective second projections at l; the affine transition from l to the affine source stage gives affineness at l. Put Z = D(l.left), W = baseChangeDiagram(D,p)(l), g = the second pullback projection, and q = the limit projection. Z is Noetherian by the Noetherian approximation stage instance. Mathlib isAffineHom_π_app proves q affine directly from the already supplied limit cone [lem-weil-pbc-limit-cone-affine-projections-opens]. Package these data as NoetherianAffineFactor; no theorem asserting existence of general affine-transition limits is needed.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition"
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-scheme-over-limit",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-affine-morphism-permanence"
    ],
    "elementary": false
   }
@@ -159,12 +163,12 @@
   "lem-weil-pbc-descend-surjective",
   "lem-weil-pbc-surjective-base-change",
   "def-pc-scheme",
-  "lem-weil-pbc-limit-affine-transition"
+  "lem-weil-pbc-limit-cone-affine-projections-opens"
  ],
  "proof_origin": {
-  "by": "worker stage 3",
+  "by": "X3 stage 3 worker",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Limits, proof of Lemma 01ZT, approximation and descent paragraphs"
+  "place": "Stacks Limits, proof of Lemma 01ZT, approximation and descent paragraphs; Lean uses cofiltered Over tails and the existing Mathlib affine-projection leaf instead of constructing general limits"
  },
  "mathlib_searches": [
   {
@@ -243,10 +247,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T173859-L-3304627",
-  "kind": "interface",
+  "landing": "20261012T184358-L-4025081",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
