@@ -21,6 +21,8 @@ subobjects of `𝒪_X` in the abelian category of `𝒪_X`-modules.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Modules.dualUnitIso`: the identification `𝒪_X^∨ ≅ 𝒪_X`, `λ ↦ λ(1)`.
+- `AlgebraicGeometry.Scheme.Modules.Hom.adjointSection`: the global section
+  `s : 𝒪_X ⟶ M ⊗ N^∨` corresponding to a morphism `φ : N ⟶ M` with `N` invertible.
 
 ## Main statements
 
@@ -30,6 +32,11 @@ subobjects of `𝒪_X` in the abelian category of `𝒪_X`-modules.
 - `AlgebraicGeometry.Scheme.Modules.Hom.imageSubobject_dualMap_comp_dualUnitIso`: the ideal sheaf
   of `Z(s)` is the image of `s^∨ : ℳ^∨ ⟶ 𝒪_X` (blueprint `def-pc-zero-scheme`,
   `lem-pc-zero-scheme-properties`).
+- `AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection`: the section `s` of
+  `M ⊗ N^{-1}` corresponding to a morphism `φ : N ⟶ M` of invertible modules has `Z(s) = Z(φ)`
+  (blueprint `lem-pc-zero-scheme-recd`).
+- `AlgebraicGeometry.Scheme.Modules.nonempty_dual_pullback_iso_pullback_dual`:
+  `(g^* N)^∨ ≅ g^* (N^∨)` for invertible `N`.
 -/
 
 @[expose] public section
@@ -162,6 +169,51 @@ theorem imageSubobject_dualMap_comp_dualUnitIso {M : X.Modules}
   have := IsInvertible.sheafOfModules_isInvertible Mᵛ
   rw [imageSubobject_eq_mk_toModulesι, zeroLocus_dualMap_comp_dualUnitIso]
 
+/-- **The section corresponding to a morphism of invertible modules.** For an invertible
+`𝒪_X`-module `N` and a morphism `φ : N ⟶ M`, the global section `s : 𝒪_X ⟶ M ⊗ N^∨` of
+`M ⊗ N^{-1}` corresponding to `φ` under `Hom(N, M) ≅ H⁰(X, M ⊗ N^∨)`: the coevaluation
+`𝒪_X ≅ N ⊗ N^∨` (the inverse of the evaluation, an isomorphism since `N` is invertible)
+followed by `φ ⊗ N^∨`. -/
+noncomputable def adjointSection {N M : X.Modules} [N.IsInvertible] (φ : N ⟶ M) :
+    𝟙_ X.Modules ⟶ M ⊗ Nᵛ :=
+  inv (dualEvaluation N) ≫ φ ▷ Nᵛ
+
+/-- **The zero scheme of the corresponding section.** For a morphism `φ : N ⟶ M` of invertible
+modules and any identification `e : N^∨ ≅ P` of `N^{-1}`, the section
+`s : 𝒪_X ⟶ M ⊗ N^∨ ≅ M ⊗ P` corresponding to `φ` has the same zero scheme as `φ`:
+`Z(s) = Z(φ)`. Up to isomorphism of arrows `s` is `φ ⊗ N^∨`, and twisting by an invertible
+module does not change the zero scheme (`Hom.zeroLocus_whiskerRight`).
+
+(blueprint: `lem-pc-zero-scheme-recd`, `sk-lem-picard-zero-dictionary`) -/
+theorem zeroLocus_adjointSection_comp_whiskerLeft {N M P : X.Modules} [N.IsInvertible]
+    [M.IsInvertible] (φ : N ⟶ M) (e : Nᵛ ≅ P) :
+    (adjointSection φ ≫ M ◁ e.hom).zeroLocus = φ.zeroLocus := by
+  have := IsInvertible.sheafOfModules_isInvertible N
+  have := IsInvertible.sheafOfModules_isInvertible M
+  have := IsInvertible.sheafOfModules_isInvertible Nᵛ
+  rw [← φ.zeroLocus_whiskerRight Nᵛ]
+  exact zeroLocus_eq_of_arrowIso _ _
+    (Arrow.isoMk (asIso (dualEvaluation N)).symm (whiskerLeftIso M e).symm
+      (by simp [adjointSection]))
+
+/-- **The zero scheme of the corresponding section.** For a morphism `φ : N ⟶ M` of invertible
+modules, the section `s : 𝒪_X ⟶ M ⊗ N^∨` corresponding to `φ` satisfies `Z(s) = Z(φ)`.
+
+(blueprint: `lem-pc-zero-scheme-recd`, `sk-lem-picard-zero-dictionary`) -/
+theorem zeroLocus_adjointSection {N M : X.Modules} [N.IsInvertible] [M.IsInvertible]
+    (φ : N ⟶ M) : (adjointSection φ).zeroLocus = φ.zeroLocus := by
+  simpa using zeroLocus_adjointSection_comp_whiskerLeft φ (Iso.refl _)
+
 end Hom
+
+/-- **Pullback commutes with duals of invertible modules.** For an invertible `𝒪_X`-module `N`
+and `g : Y ⟶ X`, `(g^* N)^∨ ≅ g^* (N^∨)`: both are tensor inverses of `g^* N`. -/
+theorem nonempty_dual_pullback_iso_pullback_dual {Y : Scheme.{u}} (g : Y ⟶ X) (N : X.Modules)
+    [N.IsInvertible] : Nonempty (((pullback g).obj N)ᵛ ≅ (pullback g).obj Nᵛ) := by
+  obtain ⟨t⟩ := nonempty_pullback_tensorObj_iso g N Nᵛ
+  let e : (pullback g).obj N ⊗ (pullback g).obj Nᵛ ≅ 𝟙_ Y.Modules :=
+    t.symm ≪≫ (pullback g).mapIso (asIso (dualEvaluation N)) ≪≫ pullbackObjUnitIso g
+  exact ⟨(λ_ _).symm ≪≫ whiskerRightIso ((β_ _ _) ≪≫ e).symm _ ≪≫ α_ _ _ _ ≪≫
+    whiskerLeftIso _ (asIso (dualEvaluation _)) ≪≫ ρ_ _⟩
 
 end AlgebraicGeometry.Scheme.Modules

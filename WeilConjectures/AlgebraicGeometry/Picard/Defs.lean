@@ -434,6 +434,39 @@ theorem nonempty_picardFunctorNormalized_obj_equiv_pic {k : Type u} [Field k]
   · change Pic.map e.inv (Pic.map e.hom L) = L
     rw [← Pic.map_comp, e.inv_hom_id, Pic.map_id]
 
+/-- **The `k`-points of `Pic_{X/k,σ}`**, as a canonical bijection
+`Pic_{X/k,σ}(k) ≃ Pic (X)`: every class of `Pic (X_k)` is `σ`-normalized since `Pic (Spec k)` is
+trivial, and pulling back along the canonical isomorphism `X_k = X ×_k k ≅ X` identifies
+`Pic (X_k)` with `Pic (X)`.
+
+(blueprint: `lem-pc-sigma-k-points`) -/
+noncomputable def picardFunctorNormalizedObjEquivPic {k : Type u} [Field k]
+    (f : X ⟶ Spec (.of k)) (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 _) :
+    (picardFunctorNormalized f σ hσ).obj (Opposite.op (Over.mk (𝟙 _))) ≃ X.Pic :=
+  (Equiv.subtypeUnivEquiv
+    fun (L : (picardPresheaf f).obj (Opposite.op (Over.mk (𝟙 (Spec (.of k)))))) ↦
+      Subsingleton.elim (α := (Spec (.of k)).Pic) _ _).trans
+    { toFun := Pic.map (inv (Limits.pullback.fst f (𝟙 _)))
+      invFun := Pic.map (Limits.pullback.fst f (𝟙 _))
+      left_inv L := (Pic.map_comp _ _ L).symm.trans (by rw [IsIso.hom_inv_id, Pic.map_id])
+      right_inv L := (Pic.map_comp _ _ L).symm.trans (by rw [IsIso.inv_hom_id, Pic.map_id]) }
+
+@[simp]
+lemma picardFunctorNormalizedObjEquivPic_apply {k : Type u} [Field k]
+    (f : X ⟶ Spec (.of k)) (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 _)
+    (L : (picardFunctorNormalized f σ hσ).obj (Opposite.op (Over.mk (𝟙 _)))) :
+    picardFunctorNormalizedObjEquivPic f σ hσ L =
+      Pic.map (inv (Limits.pullback.fst f (𝟙 _))) (L.1 : (Limits.pullback f (𝟙 _)).Pic) :=
+  rfl
+
+@[simp]
+lemma coe_picardFunctorNormalizedObjEquivPic_symm_apply {k : Type u} [Field k]
+    (f : X ⟶ Spec (.of k)) (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 _) (L : X.Pic) :
+    ((picardFunctorNormalizedObjEquivPic f σ hσ).symm L :
+        (picardPresheaf f).obj (Opposite.op (Over.mk (𝟙 (Spec (.of k)))))) =
+      Pic.map (Limits.pullback.fst f (𝟙 _)) L :=
+  rfl
+
 section Exactness
 
 /-- Twisting by a class pulled back from the base does not change the image in the relative
@@ -886,6 +919,70 @@ theorem bijective_toPicardFunctor_picardFunctorNormalized (f : X ⟶ S) (σ : S 
   have : IsIso φ.hom := inferInstanceAs (IsIso ((sheafToPresheaf _ _).map φ))
   have : IsIso (φ.hom.app (.op T)) := inferInstance
   exact (isIso_iff_bijective _).1 this
+
+/-- **`Pic_{X/S,σ} ⟶ Pic_{X/S}` is an isomorphism.** If `f` has a section `σ` and
+`𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for every `T` over `S`, then the inclusion of the
+`σ`-normalized Picard functor followed by the sheafification map is an isomorphism of presheaves:
+it is bijective on sections by
+`AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized`.
+
+(blueprint: `thm-pc-pic-split`, `cor-pc-sigma-pic-iso`) -/
+theorem isIso_picardFunctorNormalized_ι_comp_toPicardFunctor (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S)
+    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :
+    IsIso ((picardFunctorNormalized f σ hσ).ι ≫ toPicardFunctor f) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro T
+  rw [isIso_iff_bijective]
+  exact bijective_toPicardFunctor_picardFunctorNormalized f σ hσ hf T.unop
+
+/-- **`Pic_{X/S,σ}` is representable if and only if `Pic_{X/S}` is**, under the hypotheses of
+`AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor`.
+
+(blueprint: `cor-pc-sigma-pic-iso`) -/
+theorem isRepresentable_picardFunctorNormalized_iff (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S)
+    (hf : ∀ T : Over S, IsIso (pushforwardUnitMap (Limits.pullback.snd f T.hom))) :
+    (picardFunctorNormalized f σ hσ).toFunctor.IsRepresentable ↔
+      (picardFunctor f).obj.IsRepresentable := by
+  have := isIso_picardFunctorNormalized_ι_comp_toPicardFunctor f σ hσ hf
+  let e := asIso ((picardFunctorNormalized f σ hσ).ι ≫ toPicardFunctor f)
+  exact ⟨fun _ ↦ isRepresentable_of_natIso _ e, fun _ ↦ isRepresentable_of_natIso _ e.symm⟩
+
+/-- **`Pic_{X/S}` is the fppf sheafification of `Pic_{X/S,σ}`.** The inclusion
+`Pic_{X/S,σ} ⊆ T ↦ Pic (X_T)` is locally bijective for the fppf topology (it is injective, and
+locally surjective by `AlgebraicGeometry.isLocallySurjective_picardFunctorNormalized_ι`), so it
+becomes an isomorphism after sheafification. No hypothesis on `f` is needed.
+
+(blueprint: `thm-pc-pic-split`, `sk-prop-picard-pic-split`) -/
+instance isIso_presheafToSheaf_map_picardFunctorNormalized_ι (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S) :
+    IsIso ((presheafToSheaf (fppfTopology.over S) (Type (u + 1))).map
+      (picardFunctorNormalized f σ hσ).ι) := by
+  have : Presheaf.IsLocallyInjective (fppfTopology.over S) (picardFunctorNormalized f σ hσ).ι :=
+    Presheaf.isLocallyInjective_of_injective _ _ fun _ ↦ Subtype.val_injective
+  exact ((fppfTopology.over S).W_iff _).1 ((fppfTopology.over S).W_of_isLocallyBijective _)
+
+/-- The isomorphism between the fppf sheafification of `Pic_{X/S,σ}` and `Pic_{X/S}`, induced by
+the inclusion `Pic_{X/S,σ} ⊆ T ↦ Pic (X_T)`.
+
+(blueprint: `thm-pc-pic-split`) -/
+noncomputable def sheafifyPicardFunctorNormalizedIso (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S) :
+    (presheafToSheaf (fppfTopology.over S) (Type (u + 1))).obj
+      (picardFunctorNormalized f σ hσ).toFunctor ≅ picardFunctor f :=
+  asIso ((presheafToSheaf (fppfTopology.over S) (Type (u + 1))).map
+    (picardFunctorNormalized f σ hσ).ι)
+
+/-- The sheafification map of `Pic_{X/S,σ}`, followed by
+`AlgebraicGeometry.sheafifyPicardFunctorNormalizedIso`, is the inclusion
+`Pic_{X/S,σ} ⊆ T ↦ Pic (X_T)` followed by the sheafification map of the Picard presheaf. -/
+lemma toSheafify_comp_sheafifyPicardFunctorNormalizedIso_hom (f : X ⟶ S) (σ : S ⟶ X)
+    (hσ : σ ≫ f = 𝟙 S) :
+    toSheafify (fppfTopology.over S) (picardFunctorNormalized f σ hσ).toFunctor ≫
+        (sheafifyPicardFunctorNormalizedIso f σ hσ).hom.hom =
+      (picardFunctorNormalized f σ hσ).ι ≫ toPicardFunctor f :=
+  (toSheafify_naturality _ _).symm
 
 /-- **The splitting of the sequence**: `ℒ ↦ (σ_T^* ℒ, [ℒ])` is a bijection
 `Pic (X_T) ≃ Pic T × Pic_{X/S}(T)`, i.e. `Pic (X_T) = Pic T ⊕ Pic_{X/S,σ}(T)`.

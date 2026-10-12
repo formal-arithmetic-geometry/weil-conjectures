@@ -23,9 +23,11 @@ cut out by `b` on `U`. Its ideal sheaf is `AlgebraicGeometry.Scheme.Modules.Hom.
 
 The zero scheme `Z(s)` of a global section `s` of an invertible module `ℳ` in the sense of the
 blueprint is the case `φ = s : 𝒪_X ⟶ ℳ`; more generally, for invertible `ℳ` and `𝒩`, the
-section `s` of `𝒩 ⊗ ℳ^{-1}` corresponding to `φ : ℳ ⟶ 𝒩` has `Z(s) = Z(φ)`, since both are cut
-out by the coefficient `b` above. Working with the morphism `φ` avoids the tensor-hom
-identification `Hom(ℳ, 𝒩) ≅ H⁰(X, 𝒩 ⊗ ℳ^{-1})`, which is not available.
+section `s : 𝒪_X ≅ ℳ ⊗ ℳ^∨ ⟶ 𝒩 ⊗ ℳ^∨` corresponding to `φ : ℳ ⟶ 𝒩`
+(`AlgebraicGeometry.Scheme.Modules.Hom.adjointSection`) has `Z(s) = Z(φ)`
+(`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection`, in
+`WeilConjectures/AlgebraicGeometry/Modules/ZeroLocusDual.lean`), since both are cut out by the
+coefficient `b` above.
 
 ## Implementation notes
 

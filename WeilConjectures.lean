@@ -1039,6 +1039,7 @@ public import WeilConjectures.Mathlib.Algebra.DualNumber
 public import WeilConjectures.Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Mathlib.Algebra.FiveLemma
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
+public import WeilConjectures.Mathlib.Algebra.Group.Subgroup.Ker
 public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns

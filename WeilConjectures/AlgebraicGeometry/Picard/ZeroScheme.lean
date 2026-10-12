@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocusDual
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Representability
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
@@ -38,9 +39,10 @@ adjunction morphism `φ : f_T^* f_{T,*} ℒ ⟶ ℒ`
 (`AlgebraicGeometry.Scheme.Pic.directImageCounit`). For `ℒ ∈ F(T)` the module
 `𝒩 = f_{T,*} ℒ ≅ R⁰f_{T,*} ℒ` is invertible, and `Z(φ)` is the zero scheme `Z(s)` of the section
 `s ∈ H⁰(X_T, ℒ ⊗ f_T^* 𝒩^{-1})` adjoint to `Rf_{T,*} ℒ ≅ 𝒩[0]` in the blueprint: both are cut
-out locally by the coefficient of `φ` in local trivializations. The morphism is used instead of
-the section because the tensor-hom identification `Hom(f_T^* 𝒩, ℒ) ≅ H⁰(ℒ ⊗ f_T^* 𝒩^{-1})` is
-not available.
+out locally by the coefficient of `φ` in local trivializations
+(`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft`); the
+dictionary stated with `Z(s)` is
+`AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection`.
 
 There is no definition of a *relative* effective Cartier divisor; the two conditions it
 consists of, invertibility of the ideal and flatness over `T`, are used directly (see
@@ -80,7 +82,9 @@ the category of `𝒪`-modules on a scheme is Grothendieck abelian
   morphism is a relative effective Cartier divisor, finite locally free of degree `g` (blueprint
   `lem-pc-zero-scheme-recd`).
 - `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf`: the zero-scheme
-  dictionary (blueprint `sk-lem-picard-zero-dictionary`).
+  dictionary (blueprint `sk-lem-picard-zero-dictionary`);
+  `AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection`
+  states it with the zero scheme `Z(s)` of the adjoint section.
 - `AlgebraicGeometry.comap_zeroLocus_directImageCounit`: the dictionary is natural in `T`.
 - `AlgebraicGeometry.eq_of_zeroLocus_directImageCounit_eq`: the dictionary is injective.
 - `AlgebraicGeometry.injective_invertibleDirectImageToHilbert_app`: `F` is a subfunctor of the
@@ -584,6 +588,44 @@ theorem exists_isEffectiveCartierCenter_hilbertPresheaf
         IsEffectiveCartierCenter D.1.subschemeι :=
   have h := isInvertible_zeroLocus_directImageCounit σ hσ T ℒ
   ⟨⟨_, h.2⟩, rfl, h.1.isEffectiveCartierCenter⟩
+
+/-- **The zero-scheme dictionary, with the adjoint section.** Let `ℒ ∈ F(T)`, let `𝒩` be an
+invertible `𝒪_T`-module with an isomorphism `i : 𝒩 ≅ f_{T,*} ℒ` (i.e. `Rf_{T,*} ℒ ≅ 𝒩[0]`),
+and let `s ∈ H⁰(X_T, ℒ ⊗ f_T^* 𝒩^{-1})` be the section adjoint to the adjunction map
+`f_T^* 𝒩 ⟶ ℒ` (`AlgebraicGeometry.Scheme.Modules.Hom.adjointSection`, transported along any
+identification `e : (f_T^* 𝒩)^∨ ≅ f_T^* (𝒩^∨)`, which exists by
+`AlgebraicGeometry.Scheme.Modules.nonempty_dual_pullback_iso_pullback_dual`). Then `D = Z(s)` is
+the closed subscheme of a point of `Hilb^g_{X/k}(T)`, i.e. a relative effective Cartier divisor
+on `X_T/T`, finite locally free of degree `g` over `T`, and an effective Cartier centre in
+`X_T`. Indeed `Z(s)` is the zero scheme of the adjunction map
+(`AlgebraicGeometry.Scheme.Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft`), to which
+`AlgebraicGeometry.exists_isEffectiveCartierCenter_hilbertPresheaf` applies.
+
+(blueprint: `sk-lem-picard-zero-dictionary`, `lem-pc-zero-scheme-recd`) -/
+theorem exists_isEffectiveCartierCenter_hilbertPresheaf_zeroLocus_adjointSection
+    (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k)))
+    [∀ T : Over (Spec (.of k)),
+      HasInjectiveResolutions (Limits.pullback (X ↘ Spec (.of k)) T.hom).Modules]
+    (T : Over (Spec (.of k)))
+    (ℒ : (picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor.obj (op T))
+    (𝒩 : T.left.Modules) [𝒩.IsInvertible]
+    (i : 𝒩 ≅ (Modules.pushforward (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom)).obj
+      ((fromSkeleton _).obj ℒ.1.1.val))
+    (e : ((Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom)).obj 𝒩)ᵛ ≅
+      (Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom)).obj 𝒩ᵛ) :
+    ∃ D : (hilbertPresheaf (X ↘ Spec (.of k)) (arithmeticGenus k X)).obj (op T),
+      D.1 = (Modules.Hom.adjointSection
+          ((Modules.pullback (Limits.pullback.snd (X ↘ Spec (.of k)) T.hom)).map i.hom ≫
+            Pic.directImageCounit (X ↘ Spec (.of k)) T ℒ.1.1) ≫
+          (fromSkeleton _).obj ℒ.1.1.val ◁ e.hom).zeroLocus ∧
+        IsEffectiveCartierCenter D.1.subschemeι := by
+  obtain ⟨D, hD, h⟩ := exists_isEffectiveCartierCenter_hilbertPresheaf σ hσ T ℒ
+  refine ⟨D, ?_, h⟩
+  have := ℒ.1.1.isInvertible
+  have := Modules.IsInvertible.of_sheafOfModules ((fromSkeleton _).obj ℒ.1.1.val)
+  rw [Modules.Hom.zeroLocus_adjointSection_comp_whiskerLeft, hD]
+  exact Modules.Hom.zeroLocus_eq_of_arrowIso _ _
+    (Arrow.isoMk ((Modules.pullback _).mapIso i).symm (Iso.refl _) (by simp))
 
 /-- **The zero-scheme dictionary is injective.** Two classes `ℒ, ℒ' ∈ F(T)` whose adjunction
 morphisms have the same zero scheme `D` are equal.

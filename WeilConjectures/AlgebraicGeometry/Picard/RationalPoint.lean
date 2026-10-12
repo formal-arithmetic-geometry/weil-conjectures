@@ -32,6 +32,10 @@ hold as soon as `X` has a `k`-rational point `σ`.  Consequently the `σ`-normal
   `lem-pc-rational-hyp`).
 - `AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor`: for a smooth projective
   curve with a rational point `σ`, `Pic_{X/k,σ} ≅ Pic_{X/k}` (blueprint `cor-pc-sigma-pic-iso`).
+- `AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor_of_geometricallyIntegral`
+  and `AlgebraicGeometry.isRepresentable_picardFunctorNormalized_iff_of_geometricallyIntegral`:
+  the comparison map `Pic_{X/k,σ} ⟶ Pic_{X/k}` is an isomorphism, and one functor is
+  representable if and only if the other is.
 - `AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_section`: an integral proper `k`-scheme
   with a `k`-rational point has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_section` and
@@ -227,6 +231,33 @@ theorem nonempty_picardFunctorNormalized_iso_picardFunctor
   exact ⟨asIso ((picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).ι ≫
     toPicardFunctor (X ↘ Spec (.of k)))⟩
 
+/-- **`Pic_{X/k,σ} ⟶ Pic_{X/k}` is an isomorphism.** For a smooth projective curve `X` over `k`
+with a `k`-rational point `σ`, the inclusion of the `σ`-normalized Picard functor followed by
+the sheafification map is an isomorphism of functors on `(Sch/k)_fppf`
+(`AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor`).
+
+(blueprint: `cor-pc-sigma-pic-iso`) -/
+theorem isIso_picardFunctorNormalized_ι_comp_toPicardFunctor_of_geometricallyIntegral
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
+    (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) :
+    IsIso ((picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).ι ≫
+      toPicardFunctor (X ↘ Spec (.of k))) :=
+  isIso_picardFunctorNormalized_ι_comp_toPicardFunctor _ σ hσ
+    isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral
+
+/-- **`Pic_{X/k,σ}` is representable if and only if `Pic_{X/k}` is**, for a smooth projective
+curve `X` over `k` with a `k`-rational point `σ`.
+
+(blueprint: `cor-pc-sigma-pic-iso`) -/
+theorem isRepresentable_picardFunctorNormalized_iff_of_geometricallyIntegral
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
+    (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) :
+    (picardFunctorNormalized (X ↘ Spec (.of k)) σ hσ).toFunctor.IsRepresentable ↔
+      (picardFunctor (X ↘ Spec (.of k))).obj.IsRepresentable :=
+  isRepresentable_picardFunctorNormalized_iff _ σ hσ
+    isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral
 
 /-- **Curves with a rational point satisfy the hypotheses of the split exact sequence.** Let `X`
 be an integral proper scheme over a field `k` (e.g. a smooth projective curve) with a `k`-rational
