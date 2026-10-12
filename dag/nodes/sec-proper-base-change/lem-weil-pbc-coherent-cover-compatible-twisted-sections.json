@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-coherent-cover-compatible-twisted-sections",
+ "kind": "statement",
+ "title": "A coherent module mapping compatibly to an invertibly twisted inverse system",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], $F:\\mathbb N^{\\mathrm{op}}\\to\\operatorname{Mod}(\\mathcal O_X)$ any inverse system, and $P$ an invertible module [def-sc-invertible-module]. Specify a finite generating family $\\sigma$ of compatible global sections of $F_0\\otimes P$, indexed by a finite set $I$ [def-weil-pbc-generating-sections, def-pur-sheaf-tensor-product]. Suppose sections $s_{n,i}$ of $F_n\\otimes P$ are given for every $n\\in\\mathbb N$, $i\\in I$, with $s_{0,i}=\\sigma_i$ and each adjacent transition carrying $s_{n+1,i}$ to $s_{n,i}$. Then there is a coherent module $G$ [pqf-def-coherent] and maps $g_n:G\\to F_n$ commuting with adjacent transitions such that $g_0$ is epi. No annihilation or formal quotient hypothesis is imposed on $F$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 0885 (lemma-existence-projective), first essential-surjectivity paragraph; read at https://stacks.math.columbia.edu/tag/0885"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-pur-sheaf-tensor-product",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Take A to be the free module on the finite index set I. The cokernel presentation of the identity on A with zero relation module supplies a finite presentation. Let Q be the dual of P; nonempty_tensorObj_dual_iso_unit constructs the tensorRight(P) equivalence with inverse tensorRight(Q). Set G=A tensor Q. Twisting a finitely presented module by an invertible module is finitely presented (Scheme.Modules.isFinitePresentation_tensorObj); thus G is quasi-coherent and finite type. The locally Noetherian coherence criterion makes G coherent.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "pqf-lem-coherent-ft-locnoeth",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define f_n:A to F_n tensor P using freeHomEquiv.symm on the given sections. The identity freeHomEquiv_symm_comp and adjacent compatibility of s give f_(n+1) followed by the twisted transition equals f_n.",
+   "uses": [
+    "def-weil-pbc-generating-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse tensor equivalence to f_n and compose with the inverse unit isomorphism at F_n. These are maps g_n:G to F_n. Functoriality and naturality of the inverse unit prove adjacent compatibility. At n=0 the free map is sigma.pi, an epimorphism; the inverse equivalence and the unit isomorphism preserve this epimorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-tensor-dual-invertible",
+  "pqf-lem-coherent-ft-locnoeth",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 0885 (lemma-existence-projective), formalized by N2 using exact tensor equivalences and module-section maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible sections of an inverse system tensored with an invertible sheaf give compatible maps from a finite sum of its dual, with an epimorphism at the first level if the sections generate",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.freeHomEquiv_symm_comp",
+   "results": "SheafOfModules.freeHomEquiv_symm_comp",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsMap|freeHomEquiv_symm_comp|tensorRightEquivalence",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalModuleCoverFromLiftedSections",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-module-cover-from-lifted-sections",
+   "place": "Proof steps 1--3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentCoverFromCompatibleTwistedSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentCoverFromCompatibleTwistedSections.lean",
+  "declaration": "AlgebraicGeometry.coherent_cover_from_compatible_twisted_sections",
+  "statement": "theorem coherent_cover_from_compatible_twisted_sections\n    {X : Scheme.{u}} [IsNoetherian X] (F : ℕᵒᵖ ⥤ X.Modules)\n    (P : X.Modules) [P.IsInvertible]\n    (σ : (Scheme.Modules.tensorObj (F.obj (op 0)) P).GeneratingSections)\n    (hσ : σ.IsFiniteType)\n    (s : ∀ n : ℕ, σ.I → (Scheme.Modules.tensorObj (F.obj (op n)) P).sections)\n    (hzero : s 0 = σ.s)\n    (hsucc : ∀ (n : ℕ) (i : σ.I), SheafOfModules.sectionsMap\n      ((tensorRight P).map (F.map (homOfLE (Nat.le_succ n)).op)) (s (n + 1) i) = s n i) :\n    ∃ G : CoherentModules X, ∃ g : ∀ n : ℕ, G.obj ⟶ F.obj (op n),\n      (∀ n : ℕ, g (n + 1) ≫ F.map (homOfLE (Nat.le_succ n)).op = g n) ∧\n        Epi (g 0)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-17fc1",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-17fc1",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042689",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem and both proved helpers with their DAG statements and the argument in Stacks Tag 0885; all delivered modules and the sole direct importer compile cleanly, with only the three permitted axioms."
+ }
+}

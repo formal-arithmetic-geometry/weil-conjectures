@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-formal-twisted-transition-sections",
+ "kind": "statement",
+ "title": "Global sections of a twisted formal transition are surjective",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme], $K$ a quasi-coherent ideal sheaf, and $F$ a coherent formal module [def-weil-pbc-coherent-formal-module], indexed so that $F_n$ is level $n+1$. Let $L$ be an invertible module [def-sc-invertible-module] and $d,k\\in\\mathbb N$. If $H^1(X,\\ker(F_{k+1}\\to F_k)\\otimes L^{\\otimes d})=0$ [def-sc-ringed-space-module-cohomology, def-pur-sheaf-tensor-product], then the map of compatible global sections of $F_{k+1}\\otimes L^{\\otimes d}$ to those of $F_k\\otimes L^{\\otimes d}$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 0885 (lemma-existence-projective), first essential-surjectivity paragraph; read at https://stacks.math.columbia.edu/tag/0885"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-coherent-formal-module",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The defining quotient isomorphism writes the transition as a cokernel projection followed by an isomorphism; it is therefore epi. Form its kernel short exact sequence.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor-dual isomorphism for L^d gives the exact autoequivalence tensorRight(L^d), using the proved nonempty_tensorObj_dual_iso_unit from the Dual module and BraidedCategory.tensorRightEquivalence. Map the short exact sequence by this equivalence; the first term is precisely the twisted kernel in the hypothesis.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_rightDerived_full_long_exact to globalSectionsFunctor and the mapped sequence. At degree zero, exactness and vanishing of the degree-one first term make the degree-zero transition epi. The natural isomorphism rightDerivedZeroIsoSelf transports epimorphy to globalSectionsFunctor. ModuleCat.epi_iff_surjective gives surjectivity on the top open.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a compatible section of the target, lift its value on the top open. Restrict that lift to each open. Presheaf composition proves compatibility, naturality of the module map identifies its images with the restrictions of the given top value, and the compatibility of the target section identifies these with its values on each open.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-pc-tensor-dual-invertible",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proof of Lemma 0885 (lemma-existence-projective), formalized by N2 using exact tensor equivalences and module-section maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If an epimorphism of sheaves of modules has kernel with zero first cohomology, the induced map on global sections is surjective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.sections",
+   "results": "SheafOfModules.sections; SheafOfModules.sectionsFunctor_obj; SheafOfModules.unitHomEquiv; SheafOfModules.sectionsMap_id; SheafOfModules.sectionsMap; SheafOfModules.sectionsFunctor_map; SheafOfModules.sectionsMap_comp; SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsMap|freeHomEquiv_symm_comp|tensorRightEquivalence",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalModuleCoverFromLiftedSections",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-formal-module-cover-from-lifted-sections",
+   "place": "Proof steps 1--3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalTwistedTransitionSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalTwistedTransitionSections.lean",
+  "declaration": "AlgebraicGeometry.formal_twisted_transition_sections_surjective",
+  "statement": "theorem formal_twisted_transition_sections_surjective\n    {X : Scheme.{u}} [IsNoetherian X] (K : X.IdealSheafData)\n    (F : CoherentFormalModule X K) (L : X.Modules) [L.IsInvertible]\n    (d k : ℕ)\n    (hvan : IsZero ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj\n      (Scheme.Modules.tensorObj (kernel (F.obj.map (homOfLE (Nat.le_succ k)).op))\n        (L.tensorPow d)))) :\n    Function.Surjective (SheafOfModules.sectionsMap\n      ((tensorRight (L.tensorPow d)).map (F.obj.map (homOfLE (Nat.le_succ k)).op)))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-17fc1",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-17fc1",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T232902-L-2042689",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem and both proved helpers with their DAG statements and the argument in Stacks Tag 0885; all delivered modules and the sole direct importer compile cleanly, with only the three permitted axioms."
+ }
+}
