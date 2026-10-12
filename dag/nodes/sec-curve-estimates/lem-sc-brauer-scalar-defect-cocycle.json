@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-cocycle",
+ "kind": "statement",
+ "title": "Continuous homogeneous cocycle of matrix scalar defects",
+ "statement": "Let $K$ be a field, $S=K^{sep}$ its separable closure and $G=\\operatorname{Aut}_K(S)$. Let $A$ be a finite-dimensional central simple $K$-algebra, $n>0$ and $e:S\\otimes_K A\\simeq M_n(S)$ an $S$-algebra equivalence. Suppose $b:G\\to GL_n(S)$ is locally constant for the Krull topology and satisfies $g(e(1\\otimes a))=b_g^{-1}e(1\\otimes a)b_g$ for every $g$ and $a$. Then there exists a homogeneous continuous degree-two units cycle $z$ [def-sc-galois-units-cohomology] such that $b_g g(b_h)=c_z(g,h)b_{gh}$ for all $g,h$, where $c_z$ is evaluation at $(1,g,gh)$ [def-sc-brauer-scalar-defect].",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R6, lemma-central-simple-algebra-pgln; equation-two-cocycle immediately before Tag 03R7, theorem-brauer-delta; Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "write X_a = e(1 ⊗ a). Applying g to the identity for h and then the identity\nfor g shows that b_g g(b_h) and b_(gh) induce the same conjugation on every X_a.\nThe X_a span the matrix algebra over the separable closure, since every tensor is a\nsum of scalar multiples of 1 ⊗ a and e is surjective. Thus their quotient\nD(g,h) = b_g g(b_h) b_(gh)⁻¹ commutes with every matrix. A matrix commuting with all\nmatrix units is scalar: commutation with the diagonal units kills its off-diagonal\nentries, and commutation with the other units makes its diagonal entries equal.\nSince n is positive and D is invertible, that scalar is a unique unit c(g,h).\nExpand b_g g(b_h) gh(b_k) in the two associative orders and cancel b_(ghk).\nThis gives c(g,h)c(gh,k) = g(c(h,k))c(g,hk).\nThe function c is jointly locally constant. Near any (g,h), b_g, b_h and b_(gh) are\nconstant by local constancy of b and continuity of group multiplication; the action\nof g on the finitely many entries of the fixed b_h is locally constant by openness\nof their Galois stabilizers. Extracting a diagonal entry of D preserves local\nconstancy. The action on any fixed unit is similarly locally constant.\nSet f(g₀,g₁,g₂) = g₀(c(g₀⁻¹g₁,g₁⁻¹g₂)), and use Additive.ofMul on its values.\nThis is jointly continuous into the discrete coefficient module and equivariant for\nsimultaneous left translation. The displayed multiplicative cocycle identity says\nthat its alternating homogeneous differential vanishes. The absolute Galois group\nis compact Hausdorff; the compact-open exponential law curries this jointly\ncontinuous map into Mathlib's iterated continuous cochains. Equivariance puts it\nin the invariant cochains, and vanishing differential gives an element z of the\ncycles object. Evaluation at (1,g,gh) recovers c(g,h). Its defining scalar matrix\nidentity is exactly the conclusion. Neither normalization of b nor of c is needed.",
+   "uses": [
+    "def-sc-brauer-scalar-defect",
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R6, lemma-central-simple-algebra-pgln; equation-two-cocycle immediately before Tag 03R7, theorem-brauer-delta; Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Skolem|inner|scalar|cocycle",
+   "results": "25 hits; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/Util/AddRelatedDecl.lean, Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "central simple algebra splitting locally constant Galois matrix lifts scalar defect continuous two cocycle",
+   "results": "8 hits; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.Hilbert90.aux, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, IsBrauerEquivalent, BrauerGroup, groupCohomology.Hilbert90.aux_ne_zero, groupCohomology.exists_div_of_norm_eq_one",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.GeneralLinearGroup",
+   "results": "12 hits; Matrix.GeneralLinearGroup, Matrix.GeneralLinearGroup.instCoeFun, Matrix.GeneralLinearGroup.instSMul, Matrix.SpecialLinearGroup.hasCoeToGeneralLinearGroup, Matrix.GeneralLinearGroup.mk'', Matrix.GeneralLinearGroup.mk', Matrix.GeneralLinearGroup.mkOfDetNeZero, Matrix.GeneralLinearGroup.scalar",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally constant lifts of Galois descent matrix splitting and continuous scalar defect cocycle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectExists",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: field Brauer comparison, Continuous homogeneous cocycle of matrix scalar defects",
+   "via": [
+    "lem-sc-brauer-scalar-defect-exists",
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.BrauerScalarDefectCocycle",
+  "file": "lean/Sheaf/FieldTheory/BrauerScalarDefectCocycle.lean",
+  "declaration": "Field.exists_brauerScalarDefect_cocycle",
+  "statement": "theorem exists_brauerScalarDefect_cocycle (K : Type u) [Field K] (A : CSA.{u, u} K)\n    (n : ℕ) (hn : n ≠ 0)\n    (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]\n      Matrix (Fin n) (Fin n) (SeparableClosure K))\n    (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →\n      Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))\n    (hb : IsLocallyConstant b)\n    (hdesc : ∀ (g : SeparableClosure K ≃ₐ[K] SeparableClosure K) (a : A),\n      (e (1 ⊗ₜ[K] a)).map g =\n        ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val) :\n    ∃ z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2,\n      ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) =\n        Matrix.GeneralLinearGroup.scalar (Fin n) (galoisUnitsCocycleValue K z g h) *\n          b (g * h)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T112849-L-771349",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T112849-L-771349",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

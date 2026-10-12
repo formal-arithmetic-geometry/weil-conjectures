@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-lifts",
+ "kind": "statement",
+ "title": "Locally constant conjugating matrix lifts",
+ "statement": "Let $K$ be a field, $S=K^{sep}$ its separable closure and $G=\\operatorname{Aut}_K(S)$. Let $A$ be a finite-dimensional central simple $K$-algebra, $n>0$ and $e:S\\otimes_K A\\simeq M_n(S)$ an $S$-algebra equivalence, as in [def-sc-brauer-scalar-defect]. There exists a locally constant function $b:G\\to GL_n(S)$ for the Krull topology such that $g(e(1\\otimes a))=b_g^{-1}e(1\\otimes a)b_g$ for every $g\\in G$ and $a\\in A$.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R6, lemma-central-simple-algebra-pgln; equation-two-cocycle immediately before Tag 03R7, theorem-brauer-delta; Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "fix a finite K-basis of A and collect the matrix entries of the images of its\nbasis vectors under e. For each entry x, its Galois stabilizer is open in the Krull\ntopology because x is integral over K. Equip the separable closure with the discrete\ntopology temporarily; the open-stabilizer criterion makes its Galois action continuous,\nso evaluation at x is locally constant. The finite tuple q of all the transformed\nentries is therefore locally constant. Equality of two such tuples implies equality\nof the K-linear maps a ↦ g(e(1 ⊗ a)), by equality on the chosen basis.\nFor each tuple in the range of q choose a representative automorphism. The proved\nSkolem--Noether lemma `Algebra.IsCentral.exists_unit_map_eq_conj` supplies a conjugating\nunit for this representative; invert it to obtain the orientation required here.\nChoose a unit for each tuple using that proved existence statement. Composing this\nchoice with q gives a locally constant function b. The equality of K-linear maps just\nproved transports the conjugation identity from the representative to every g in its\nfiber. This proves the identity for all a. No finite Galois extension or choice from\nan unproved theorem is needed.",
+   "uses": [
+    "def-sc-brauer-scalar-defect",
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect",
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R6, lemma-central-simple-algebra-pgln; equation-two-cocycle immediately before Tag 03R7, theorem-brauer-delta; Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Skolem|inner|scalar|cocycle",
+   "results": "25 hits; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean, Mathlib/Util/AddRelatedDecl.lean, Mathlib/NumberTheory/NumberField/Completion/LiesOverInstances.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/NumberTheory/Cyclotomic/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "central simple algebra splitting locally constant Galois matrix lifts scalar defect continuous two cocycle",
+   "results": "8 hits; groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.Hilbert90.aux, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, IsBrauerEquivalent, BrauerGroup, groupCohomology.Hilbert90.aux_ne_zero, groupCohomology.exists_div_of_norm_eq_one",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.GeneralLinearGroup",
+   "results": "12 hits; Matrix.GeneralLinearGroup, Matrix.GeneralLinearGroup.instCoeFun, Matrix.GeneralLinearGroup.instSMul, Matrix.SpecialLinearGroup.hasCoeToGeneralLinearGroup, Matrix.GeneralLinearGroup.mk'', Matrix.GeneralLinearGroup.mk', Matrix.GeneralLinearGroup.mkOfDetNeZero, Matrix.GeneralLinearGroup.scalar",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "locally constant lifts of Galois descent matrix splitting and continuous scalar defect cocycle",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectExists",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: field Brauer comparison, Locally constant conjugating matrix lifts",
+   "via": [
+    "lem-sc-brauer-scalar-defect-exists",
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.BrauerScalarDefectLifts",
+  "file": "lean/Sheaf/FieldTheory/BrauerScalarDefectLifts.lean",
+  "declaration": "Field.exists_locallyConstant_brauer_lift",
+  "statement": "theorem exists_locallyConstant_brauer_lift (K : Type u) [Field K] (A : CSA.{u, u} K)\n    (n : ℕ) (_hn : n ≠ 0)\n    (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]\n      Matrix (Fin n) (Fin n) (SeparableClosure K)) :\n    ∃ b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →\n        Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K),\n      IsLocallyConstant b ∧\n      (∀ (g : SeparableClosure K ≃ₐ[K] SeparableClosure K) (a : A),\n        (e (1 ⊗ₜ[K] a)).map g =\n          ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T112849-L-771349",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T112849-L-771349",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
