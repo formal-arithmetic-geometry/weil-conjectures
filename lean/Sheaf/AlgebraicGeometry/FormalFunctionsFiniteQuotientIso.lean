@@ -7,14 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIsoB
+import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIsoR
 @[expose] public section
 universe u
 set_option autoImplicit false
@@ -69,5 +63,8 @@ theorem formalFunctions_finite_quotient_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
         r n z = (b.hom.app (op n)) ((C.map (formalModuleQuotientπ J (n + 1) F')) z)) ∧
       ∀ (n : ℕ) (z : formalFunctionsLocalCohomology f y F p),
         r n z = formalFunctionsFinitePullback f y F p n z := by
-  sorry
+  dsimp
+  obtain ⟨b, hb⟩ := formalFunctions_finite_quotient_iso_b f F hF y p
+  obtain ⟨r, hr, hp⟩ := formalFunctions_finite_quotient_iso_r f F hF y p b hb
+  exact ⟨b, r, hr, hp⟩
 end AlgebraicGeometry
