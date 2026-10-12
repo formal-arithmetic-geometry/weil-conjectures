@@ -9283,3 +9283,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTransport (stage 3; reviewer PASS; first push; landing 20261012T194144-L-466176 (interface); batch 20261012T194054; modules 5; new nodes 4)
 - 19:41 L: merged deliver/U1/Sheaf.AlgebraicGeometry.DeterminantDualPairingFunctional (stage 3; reviewer PASS; first push; landing 20261012T194145-L-466282 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/U1/Sheaf.RingTheory.PopescuLocalizedIndSmooth (stage 3; reviewer PASS; first push; landing 20261012T194145-L-466383 (interface); batch 20261012T194054; modules 3; new nodes 2)
+- 19:41 L: merged deliver/U2/Sheaf.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison (stage 3; reviewer PASS; after a return; landing 20261012T194146-L-466494 (proof); batch 20261012T194054; modules 1; new nodes 0)

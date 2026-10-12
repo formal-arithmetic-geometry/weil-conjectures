@@ -16,24 +16,29 @@
  ],
  "proof": [
   {
-   "text": "Use etaleInverseImageAlgebraicStructures, which supplies finite-limit preservation and a natural coefficient isomorphism C_f whose direct-image comparison is identity on sections and whose unit equation intertwines the forgotten abelian unit with the set unit. Its hom-set equation fixes C_f canonically. No inverse-limit or continuity theorem is used.",
+   "text": "Construct the set-to-abelian coefficient comparison as the set adjunction mate of the forgotten abelian unit. Use the coefficient hom-set equation and the sectionwise identity direct-image comparison from etaleInverseImageAlgebraicStructures to identify this fixed morphism with the inverse coefficient isomorphism. Consequently it is invertible; no arbitrary witness is used to define its data.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-algebraic-structures"
    ],
    "elementary": false
   },
   {
-   "text": "For T_f the base change of the terminal object and t_f : T_f ≅ terminal the terminal-preservation isomorphism, define e_f as Gamma-to-terminal evaluation, restriction along t_f.hom, then evaluation of C_f at T_f. Each factor is invertible.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Direct images are precomposition and forgetting commutes with them on the nose. The abelian inverse-image composition isomorphism and the chosen set composition isomorphism are determined by the same unit equation. Expand their unit equations, cancel the coefficient isomorphisms, and use naturality along the iterated-pullback pasting isomorphism. Evaluating at the terminal object gives exactly the displayed compatibility with globalSectionsUpperStarMap, Gamma.map of the inverse composition isomorphism, and etaleSetSectionComparison.",
+   "text": "The abelian composition unit equation follows from upperStarComp_hom_app_unit_app. Use the existing public etaleSetInverseImageCompositionUnits theorem directly for the chosen set composition unit equation; extensionality converts this sectionwise equality to a morphism equality without a duplicate set_comp_unit declaration. Apply injectivity of the set adjunction hom-set bijection to show that the two forgotten transition morphisms agree, using their unit equations and naturality of the direct-image composition isomorphism.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate the inverse coefficient isomorphism at the pullback of any etale object to obtain the section equivalence. Evaluate the transition identity, and use naturality along the fibre-product pasting isomorphism to obtain the section comparison equation. Transport a commuting triangle by its equality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each f, compose GammaNatIsoSheafSections with restriction along PreservesTerminal.iso(f.Etale).hom and the proved section equivalence at the terminal object. For compatibility, expand globalSectionsUpperStarMap, apply GammaNatIsoSheafSections naturality, cancel its inverse, then use naturality of the abelian unit and inverse composition morphism. The two maps from the composite base-changed terminal object to the terminal object agree by terminal uniqueness. This gives the required equality without additional hypotheses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -44,7 +49,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/00YV",
-  "place": "Clause (2) and composition of inverse images, evaluated at the terminal object; V3 coefficient-comparison reduction."
+  "place": "Clause (2) and composition via Tags 03CB and 03CC. U2 second reading: specialize the proved mate calculations of ModulePullbackSectionComparison to abelian groups and prove terminal/global-section transport by naturality. Repair of landing return 7893cff1c: remove the duplicated private set_comp_unit helper and directly use the public etaleSetInverseImageCompositionUnits theorem."
  },
  "mathlib_searches": [
   {
@@ -124,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T163623-L-2788500",
-  "kind": "interface",
+  "landing": "20261012T194146-L-466494",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
