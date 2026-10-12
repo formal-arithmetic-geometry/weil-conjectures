@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.RingTheory.ColimitFlatRingMap
+import Sheaf.AlgebraicGeometry.FlatDescentAffineCharts
 
 /-!
 # Descent of flatness to a finite stage
@@ -69,6 +70,28 @@ theorem exists_flat_stage_of_limit
     (hflat : Flat (((Over.pullback (c.π.app (op i₀))).map f₀).left)) :
     ∃ (i : I) (hi : i₀ ≤ i),
       Flat (((Over.pullback (D.map (homOfLE hi).op)).map f₀).left) := by
-  sorry
+  classical
+  let J := {i : I // i₀ ≤ i}
+  let j₀ : J := ⟨i₀, le_rfl⟩
+  let : IsDirected J (· ≤ ·) := ⟨fun j k ↦ by
+    obtain ⟨l, hjl, hkl⟩ := exists_ge_ge j.val k.val
+    exact ⟨⟨l, j.property.trans hjl⟩, hjl, hkl⟩⟩
+  let : Nonempty J := ⟨j₀⟩
+  obtain ⟨n, charts, hlimit, hstage⟩ :=
+    exists_flat_descent_affine_charts D c hc i₀ X₀ Y₀ f₀
+  have hevent (b : Fin n) : ∃ j : J, ∀ k : J, ∀ h : j ≤ k,
+      (charts b).stageFlat k k.property := by
+    let a := charts b
+    let := a.sourceAlgebra
+    let := a.targetAlgebra
+    obtain ⟨j, hj, h⟩ := RingHom.exists_eventually_flat_of_colimit_flat
+      a.rings j₀ a.source a.target a.map a.finitePresentation (hlimit hflat b)
+    exact ⟨j, fun k hk ↦ h k hk⟩
+  choose j hj using hevent
+  obtain ⟨k, hk⟩ := (Finset.univ.image j).exists_le
+  have hbound : ∀ b : Fin n, j b ≤ k := by
+    intro b
+    exact hk (j b) (Finset.mem_image.mpr ⟨b, Finset.mem_univ b, rfl⟩)
+  exact ⟨k.val, k.property, hstage k (fun b ↦ hj b k (hbound b))⟩
 
 end AlgebraicGeometry
