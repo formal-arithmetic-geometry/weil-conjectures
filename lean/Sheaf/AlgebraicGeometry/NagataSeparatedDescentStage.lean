@@ -58,7 +58,16 @@ theorem nagataFinitePresentationDescent_isPullback :
           (c.π.app (op (nagataRelativeGluingValidStage D c hc i₀ f R P A))))
       f (nagataFinitePresentationDescentMap D c hc i₀ f R P A G B)
       (c.π.app (op (nagataRelativeGluingValidStage D c hc i₀ f R P A))) := by
-  sorry
+  have h := IsPullback.of_hasPullback
+    (nagataFinitePresentationDescentMap D c hc i₀ f R P A G B)
+    (c.π.app (op (nagataRelativeGluingValidStage D c hc i₀ f R P A)))
+  refine h.of_iso (asIso (nagataFinitePresentationDescentComparison D c hc i₀ f R P A G B E))
+    (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_
+  · simp
+  · simp only [asIso_hom, Iso.refl_hom, Category.comp_id]
+    exact E.comparison_base.symm
+  · simp
+  · simp
 
 variable [IsSeparated f]
     [CompactSpace (D.obj (op (nagataRelativeGluingValidStage D c hc i₀ f R P A)))]
