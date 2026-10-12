@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-cech-comparison-inverse-image-unit",
+ "kind": "statement",
+ "title": "Normalized Čech comparison commutes with the inverse-image unit",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $U=(U_i)_{i\\in I}$ and $V=(V_i)_{i\\in I}$ open covers, and assume $V_y\\subseteq g^{-1}U_y$ for every nonempty tuple $y$. Let $c,c'$ be normalized additive comparison systems [def-pc-cech-comparison-system] for these covers. For an abelian sheaf $F$ on $X$, put $L=g^{-1}F$, using the exact abelian inverse image [def-pc-flat-cohomology-comparison], and let $\\eta_F:F\\to g_*L$ be its adjunction unit. Let $B=A_{\\eta_F}$ be the explicit ordered Čech chain map [def-pc-cech-inverse-image-cochain-map]. Then for every degree $q$ and class $x\\in\\check H^q(U,F)$, $c'^q_L(H^q(B)(x))=H^q(g^{-1},\\operatorname{constIso}(g)^{-1})(c^q_F(x))$, with the Ext action and the constant-integer-sheaf isomorphism of [def-pc-flat-cohomology-comparison]. Only the inverse-image unit occurs: this statement does not include an arbitrary target coefficient sheaf, its coefficient morphism, scalar restriction, or a comparison of specified cycles.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cech-comparison-system",
+  "def-pc-cech-inverse-image-cochain-map",
+  "def-pc-flat-cohomology-comparison"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, ordered Čech chain map and augmented pentagon; Tag 01EQ for normalized comparison"
+ },
+ "proof": [
+  {
+   "text": "Identify the supplied systems with the augmented-resolution comparisons. Embed F into the product of direct images of its restrictions to covering members. The embedding splits on each nonempty tuple intersection by projection to one of its members. The quotient sequence is therefore surjective on tuple sections. In each direct-image factor, insertion of its covering member contracts positive Čech cohomology; exactness of products gives vanishing for the product. Connecting maps are consequently surjective onto positive Čech cohomology. Induction on degree, naturality and the connecting law show that comparisons having the prescribed degree-zero law agree.",
+   "uses": [
+    "def-pc-cech-comparison-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve F and g^{-1}F, resolve the pushed-forward target resolution, and lift the adjunction unit. Apply the same restriction formula as the explicit chain map to form the augmented pentagon of Tag 01FD. The lift equation makes the coefficient face commute, and restriction composition makes the section faces commute. Injective augmented Čech rows are exact and total diagonals are finite, so section augmentations are quasi-isomorphisms. Homology and inversion of those augmentations give the unit naturality square. Identify its section-cohomology action with exact inverse image on Ext via degree-zero normalization and injective effacement. Substitute the supplied systems by the uniqueness argument of the preceding step.",
+   "uses": [
+    "def-pc-cech-inverse-image-cochain-map",
+    "lem-sc-injective-cech-augmentation-quasi-iso",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cech-comparison-system",
+  "def-pc-cech-inverse-image-cochain-map",
+  "def-pc-flat-cohomology-comparison",
+  "lem-sc-injective-cech-augmentation-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, factored through the inverse-image adjunction unit; relative-effacement uniqueness expanded from the assigned node plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech comparison commutes with the unit of exact inverse image of abelian sheaves",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of normalized Cech to sheaf cohomology comparison and naturality under inverse image",
+   "date": "2026-10-13",
+   "results": {
+    "hits": 8,
+    "top": [
+     "TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.isoOfIso",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.ext",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda",
+     "CategoryTheory.GrothendieckTopology.CoversTop.ext",
+     "CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext",
+     "CategoryTheory.Presheaf.isSheaf_iff_isSheaf'",
+     "TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivCounitIso",
+     "TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquiv_counitIso"
+    ]
+   },
+   "verdict": "No matching Čech chain-map or normalized inverse-image comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(comparison|inverseImage|effac)",
+   "date": "2026-10-13",
+   "results": {
+    "hits": 0,
+    "top": []
+   },
+   "verdict": "No matching Čech chain-map or normalized inverse-image comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, separated-case Čech paragraph: functoriality of the Čech-to-cohomology comparison; Normalized Čech comparison commutes with the inverse-image unit",
+   "via": [
+    "lem-pc-cech-comparison-inverse-image-compatibility",
+    "lem-pc-cech-comparison-inverse-image",
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonInverseImageUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechComparison_inverseImage_unit",
+  "statement": "theorem cechComparison_inverseImage_unit\n    {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)\n    (U : ι → X.Opens) (V : ι → Y.Opens) (hcover : iSup U = ⊤)\n    (hcover' : iSup V = ⊤)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (c : CechComparisonSystem U hcover) (c' : CechComparisonSystem V hcover')\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (q : ℕ)\n    (x : (TopCat.Sheaf.cechCohomologyFunctor U q).obj F) :\n    (c'.comparison q).app ((invImage g).obj F)\n        (HomologicalComplex.homologyMap\n          (cechInverseImageCochainMap g U V hinter F ((invImage g).obj F)\n            ((TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} g.base).unit.app\n              F).hom) q x) =\n      Sheaf.H.mapFunctor (invImage g) (constIso g).symm F q\n        ((c.comparison q).app F x)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T194159-L-471254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T194159-L-471254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

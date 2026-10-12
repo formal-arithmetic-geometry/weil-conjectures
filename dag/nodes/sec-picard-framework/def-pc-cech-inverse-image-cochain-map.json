@@ -1,0 +1,118 @@
+{
+ "id": "def-pc-cech-inverse-image-cochain-map",
+ "kind": "definition",
+ "title": "Ordered Čech chain map induced by an inverse-image coefficient map",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], let $I$ be an index set, and let $U_i\\subseteq X$, $V_i\\subseteq Y$ be open families, not necessarily covers. Assume $V_y=\\bigcap_l V_{y(l)}\\subseteq g^{-1}U_y$, where $U_y=\\bigcap_l U_{y(l)}$, for every $y:\\{0,\\ldots,k\\}\\to I$ and every $k\\geq0$. Let $F,G$ be abelian sheaves on the open-set sites of $X,Y$ [def-sc-topological-abelian-cohomology], and let $\\alpha:F\\to g_*G$ be a natural map of their underlying presheaves. The ordered Čech complex has cochains $\\check C^k(U,F)=\\prod_y F(U_y)$ and differential the alternating sum of restrictions along deletion of one index. Define the real additive chain map $A_\\alpha:\\check C^\\bullet(U,F)\\to\\check C^\\bullet(V,G)$ by $(A_\\alpha x)_y=\\operatorname{res}_{V_y}^{g^{-1}U_y}(\\alpha_{U_y}(x_y))$. Naturality and restriction composition prove that these components commute with every alternating differential; no comparison or existence theorem chooses any data.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Lemma 20.15.1, ordered Čech chain map and augmented pentagon; Tag 01EQ for normalized comparison"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ordered Cech cochain map induced by continuous inverse image and a coefficient map to direct image",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An explicit chain map on ordered Cech cochains along a continuous map using a presheaf coefficient morphism and restrictions",
+   "date": "2026-10-13",
+   "results": {
+    "hits": 8,
+    "top": [
+     "TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCoverMap",
+     "TopCat.Presheaf.SheafCondition.pairwiseToOpensLeCover_map",
+     "TopCat.presheafToType_map",
+     "TopCat.presheafToTypes_map",
+     "TopCat.Presheaf.SheafConditionEqualizerProducts.res",
+     "groupCohomology.cochainsMap",
+     "TopCat.Presheaf.SheafConditionEqualizerProducts.rightRes",
+     "TopCat.Presheaf.SheafConditionEqualizerProducts.res_π_apply"
+    ]
+   },
+   "verdict": "No matching Čech chain-map or normalized inverse-image comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(pullback|inverseImage|unit|cochain.*map)",
+   "date": "2026-10-13",
+   "results": {
+    "hits": 17,
+    "top": [
+     "Mathlib/Topology/Category/CompHaus/Basic.lean",
+     "Mathlib/Topology/Category/CompHaus/Basic.lean",
+     "Mathlib/Topology/Category/CompHaus/Basic.lean",
+     "Mathlib/Topology/Category/CompHaus/Basic.lean",
+     "Mathlib/Topology/Compactification/StoneCech.lean",
+     "Mathlib/Topology/Compactification/StoneCech.lean",
+     "Mathlib/Topology/Compactification/StoneCech.lean",
+     "Mathlib/Topology/Compactification/StoneCech.lean"
+    ]
+   },
+   "verdict": "No matching Čech chain-map or normalized inverse-image comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility",
+  "date": "2026-10-13",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, separated-case Čech paragraph: functoriality of the Čech-to-cohomology comparison; Ordered Čech chain map induced by an inverse-image coefficient map",
+   "via": [
+    "lem-pc-cech-comparison-inverse-image-compatibility",
+    "lem-pc-cech-comparison-inverse-image",
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechInverseImageCochainMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechInverseImageCochainMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechInverseImageCochainMap",
+  "statement": "def cechInverseImageCochainMap\n    {X Y : Scheme.{u}} {ι : Type u} (g : Y ⟶ X)\n    (U : ι → X.Opens) (V : ι → Y.Opens)\n    (hinter : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      (⨅ l, V (y l)) ≤ g ⁻¹ᵁ (⨅ l, U (y l)))\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    (G : Sheaf (Opens.grothendieckTopology Y) AddCommGrpCat.{u})\n    (α : F.obj ⟶ (Opens.map g.base).op ⋙ G.obj) :\n    (TopCat.Sheaf.cechComplexFunctor U).obj F ⟶\n      (TopCat.Sheaf.cechComplexFunctor V).obj G",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T194159-L-471254",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T194159-L-471254",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
