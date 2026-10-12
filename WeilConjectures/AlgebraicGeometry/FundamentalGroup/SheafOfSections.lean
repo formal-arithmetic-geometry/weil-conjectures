@@ -14,11 +14,11 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyCo
 Let `Y` be a scheme. Sending a finite étale `Y`-scheme `P` to its sheaf of sections
 `U ↦ Hom_Y(U, P)` on the small étale site is an equivalence between the category `FÉt(Y)` of
 finite étale `Y`-schemes and the category `FLC(Y)` of finite locally constant sheaves of sets
-(`AlgebraicGeometry.Scheme.FiniteEtale.equivalenceFiniteLocallyConstant`). It is fully faithful
+(`AlgebraicGeometry.Scheme.FiniteEtale.sectionsEquivalence`). It is fully faithful
 by the Yoneda lemma, and essentially surjective by the representability of finite locally
 constant sheaves (`AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso`).
 The stalk of the sheaf of sections of `P` at a geometric point `s` is the geometric fibre `P_s`
-(`AlgebraicGeometry.Scheme.FiniteEtale.sheafFiberToSheafEquiv`).
+(`AlgebraicGeometry.Scheme.FiniteEtale.sheafFiberSectionsSheafEquiv`).
 
 For a connected scheme `Y` and a fundamental group `G` of the fibre functor at `s`, composing
 with `AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction` makes `G` act on the stalks of
@@ -28,9 +28,9 @@ and the lemmas following it).
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.FiniteEtale.toFiniteLocallyConstant`: the sheaf of sections functor
+- `AlgebraicGeometry.Scheme.FiniteEtale.sectionsFunctor`: the sheaf of sections functor
   `FÉt(Y) ⥤ FLC(Y)`.
-- `AlgebraicGeometry.Scheme.FiniteEtale.equivalenceFiniteLocallyConstant`: the equivalence
+- `AlgebraicGeometry.Scheme.FiniteEtale.sectionsEquivalence`: the equivalence
   `FÉt(Y) ≌ FLC(Y)`.
 - `AlgebraicGeometry.Scheme.FiniteLocallyConstant.smul`: the action of `π₁(Y, s)` on the stalks
   of finite locally constant sheaves of sets.
@@ -56,45 +56,45 @@ lemma isSheaf_uliftYoneda (P : Y.FiniteEtale) :
   ((isFiniteLocallyConstant_yoneda_and_exists_iso Y).1 P.obj.left P.obj.hom).fst
 
 /-- The sheaf of sections `U ↦ Hom_Y(U, P)` of a finite étale `Y`-scheme `P`. -/
-noncomputable abbrev toSheaf (P : Y.FiniteEtale) : Sheaf Y.smallEtaleTopology (Type (u + 1)) :=
+noncomputable abbrev sectionsSheaf (P : Y.FiniteEtale) : Sheaf Y.smallEtaleTopology (Type (u + 1)) :=
   ⟨uliftYoneda.{u + 1}.obj P.obj, isSheaf_uliftYoneda P⟩
 
 /-- Blueprint `thm-galois-lc-etale`: the sheaf of sections of a finite étale `Y`-scheme is
 finite locally constant. -/
-lemma isFiniteLocallyConstantSheafOfTypes_toSheaf (P : Y.FiniteEtale) :
-    IsFiniteLocallyConstantSheafOfTypes (toSheaf P) :=
+lemma isFiniteLocallyConstantSheafOfTypes_sectionsSheaf (P : Y.FiniteEtale) :
+    IsFiniteLocallyConstantSheafOfTypes (sectionsSheaf P) :=
   have : IsFinite P.obj.hom := P.property
   ((isFiniteLocallyConstant_yoneda_and_exists_iso Y).1 P.obj.left P.obj.hom).snd
 
 variable (Y) in
 /-- Blueprint `thm-galois-lc-etale`: the functor `FÉt(Y) ⥤ FLC(Y)` sending a finite étale
 `Y`-scheme `P` to its sheaf of sections `U ↦ Hom_Y(U, P)`. -/
-noncomputable def toFiniteLocallyConstant : Y.FiniteEtale ⥤ Y.FiniteLocallyConstant :=
+noncomputable def sectionsFunctor : Y.FiniteEtale ⥤ Y.FiniteLocallyConstant :=
   ObjectProperty.lift _
     (ObjectProperty.lift _ (ObjectProperty.ι _ ⋙ uliftYoneda.{u + 1}) isSheaf_uliftYoneda)
-    isFiniteLocallyConstantSheafOfTypes_toSheaf
+    isFiniteLocallyConstantSheafOfTypes_sectionsSheaf
 
 @[simp]
-lemma toFiniteLocallyConstant_obj_obj_obj (P : Y.FiniteEtale) :
-    ((toFiniteLocallyConstant Y).obj P).obj.obj = uliftYoneda.{u + 1}.obj P.obj := rfl
+lemma sectionsFunctor_obj_obj_obj (P : Y.FiniteEtale) :
+    ((sectionsFunctor Y).obj P).obj.obj = uliftYoneda.{u + 1}.obj P.obj := rfl
 
 @[simp]
-lemma toFiniteLocallyConstant_map_hom_hom {P Q : Y.FiniteEtale} (f : P ⟶ Q) :
-    ((toFiniteLocallyConstant Y).map f).hom.hom = uliftYoneda.{u + 1}.map f.hom := rfl
+lemma sectionsFunctor_map_hom_hom {P Q : Y.FiniteEtale} (f : P ⟶ Q) :
+    ((sectionsFunctor Y).map f).hom.hom = uliftYoneda.{u + 1}.map f.hom := rfl
 
 variable (Y) in
 /-- The sheaf of sections functor is fully faithful, by the Yoneda lemma. -/
-noncomputable def fullyFaithfulToFiniteLocallyConstant :
-    (toFiniteLocallyConstant Y).FullyFaithful :=
-  have h : (toFiniteLocallyConstant Y ⋙ ObjectProperty.ι _ ⋙ ObjectProperty.ι _).FullyFaithful :=
+noncomputable def fullyFaithfulSectionsFunctor :
+    (sectionsFunctor Y).FullyFaithful :=
+  have h : (sectionsFunctor Y ⋙ ObjectProperty.ι _ ⋙ ObjectProperty.ι _).FullyFaithful :=
     (ObjectProperty.fullyFaithfulι _).comp (ULiftYoneda.fullyFaithful _)
   (h.ofCompFaithful (G := ObjectProperty.ι _ ⋙ ObjectProperty.ι _))
 
-instance : (toFiniteLocallyConstant Y).Full := (fullyFaithfulToFiniteLocallyConstant Y).full
+instance : (sectionsFunctor Y).Full := (fullyFaithfulSectionsFunctor Y).full
 
-instance : (toFiniteLocallyConstant Y).Faithful := (fullyFaithfulToFiniteLocallyConstant Y).faithful
+instance : (sectionsFunctor Y).Faithful := (fullyFaithfulSectionsFunctor Y).faithful
 
-instance : (toFiniteLocallyConstant Y).EssSurj where
+instance : (sectionsFunctor Y).EssSurj where
   mem_essImage F := by
     obtain ⟨P, π, _, _, ⟨e⟩⟩ :=
       (isFiniteLocallyConstant_yoneda_and_exists_iso Y).2 F.obj F.property
@@ -107,9 +107,9 @@ variable (Y) in
 
 The sheaf of sections functor `P ↦ Hom_Y(-, P)` is an equivalence between finite étale
 `Y`-schemes and finite locally constant sheaves of sets on the small étale site of `Y`. -/
-noncomputable def equivalenceFiniteLocallyConstant : Y.FiniteEtale ≌ Y.FiniteLocallyConstant :=
-  have : (toFiniteLocallyConstant Y).IsEquivalence := { }
-  (toFiniteLocallyConstant Y).asEquivalence
+noncomputable def sectionsEquivalence : Y.FiniteEtale ≌ Y.FiniteLocallyConstant :=
+  have : (sectionsFunctor Y).IsEquivalence := { }
+  (sectionsFunctor Y).asEquivalence
 
 section Fiber
 
@@ -199,16 +199,16 @@ lemma presheafFiberUliftYonedaEquiv_naturality {X X' : Y.Etale} (g : X ⟶ X')
 
 /-- The stalk of the sheaf of sections of a finite étale `Y`-scheme `P` at a geometric point `s`
 is the geometric fibre `P_s`. -/
-noncomputable def sheafFiberToSheafEquiv (P : Y.FiniteEtale) :
-    (pointSmallEtale s).sheafFiber.obj ((toFiniteLocallyConstant Y).obj P).obj ≃
+noncomputable def sheafFiberSectionsSheafEquiv (P : Y.FiniteEtale) :
+    (pointSmallEtale s).sheafFiber.obj ((sectionsFunctor Y).obj P).obj ≃
       ULift.{u + 1} ((fiber s).obj P) :=
   presheafFiberUliftYonedaEquiv s P.obj
 
-lemma sheafFiberToSheafEquiv_naturality {P Q : Y.FiniteEtale} (f : P ⟶ Q)
-    (p : (pointSmallEtale s).sheafFiber.obj ((toFiniteLocallyConstant Y).obj P).obj) :
-    sheafFiberToSheafEquiv s Q
-      ((pointSmallEtale s).sheafFiber.map ((toFiniteLocallyConstant Y).map f).hom p) =
-      ULift.up ((fiber s).map f (sheafFiberToSheafEquiv s P p).down) :=
+lemma sheafFiberSectionsSheafEquiv_naturality {P Q : Y.FiniteEtale} (f : P ⟶ Q)
+    (p : (pointSmallEtale s).sheafFiber.obj ((sectionsFunctor Y).obj P).obj) :
+    sheafFiberSectionsSheafEquiv s Q
+      ((pointSmallEtale s).sheafFiber.map ((sectionsFunctor Y).map f).hom p) =
+      ULift.up ((fiber s).map f (sheafFiberSectionsSheafEquiv s P p).down) :=
   presheafFiberUliftYonedaEquiv_naturality s f.hom p
 
 end Fiber
@@ -241,43 +241,43 @@ lemma stalkMap_id (F : Y.FiniteLocallyConstant) (x : stalk s F) : stalkMap s (�
 of sections of a finite étale `Y`-scheme `P` identifies the stalk `F_s` with the geometric fibre
 `P_s`. -/
 noncomputable def isoStalkEquiv {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
-    (i : F ≅ (toFiniteLocallyConstant Y).obj P) : stalk s F ≃ ULift.{u + 1} ((FiniteEtale.fiber s).obj P) :=
+    (i : F ≅ (sectionsFunctor Y).obj P) : stalk s F ≃ ULift.{u + 1} ((FiniteEtale.fiber s).obj P) :=
   ((pointSmallEtale s).sheafFiber.mapIso ((ObjectProperty.ι _).mapIso i)).toEquiv.trans
-    (sheafFiberToSheafEquiv s P)
+    (sheafFiberSectionsSheafEquiv s P)
 
 lemma isoStalkEquiv_stalkMap {F F' : Y.FiniteLocallyConstant} {P P' : Y.FiniteEtale}
-    (i : F ≅ (toFiniteLocallyConstant Y).obj P) (i' : F' ≅ (toFiniteLocallyConstant Y).obj P')
-    (f : F ⟶ F') (φ : P ⟶ P') (h : f ≫ i'.hom = i.hom ≫ (toFiniteLocallyConstant Y).map φ)
+    (i : F ≅ (sectionsFunctor Y).obj P) (i' : F' ≅ (sectionsFunctor Y).obj P')
+    (f : F ⟶ F') (φ : P ⟶ P') (h : f ≫ i'.hom = i.hom ≫ (sectionsFunctor Y).map φ)
     (x : stalk s F) :
     isoStalkEquiv s i' (stalkMap s f x) =
       ULift.up ((FiniteEtale.fiber s).map φ (isoStalkEquiv s i x).down) := by
   have h' := congrArg (fun k ↦ stalkMap s k x) h
   simp only [stalkMap_comp] at h'
-  change sheafFiberToSheafEquiv s P' (stalkMap s i'.hom (stalkMap s f x)) = _
+  change sheafFiberSectionsSheafEquiv s P' (stalkMap s i'.hom (stalkMap s f x)) = _
   rw [h']
-  exact sheafFiberToSheafEquiv_naturality s φ _
+  exact sheafFiberSectionsSheafEquiv_naturality s φ _
 
 variable (Y) in
 /-- The finite étale `Y`-scheme representing a finite locally constant sheaf of sets. -/
 noncomputable abbrev rep (F : Y.FiniteLocallyConstant) : Y.FiniteEtale :=
-  (equivalenceFiniteLocallyConstant Y).inverse.obj F
+  (sectionsEquivalence Y).inverse.obj F
 
 /-- The chosen identification of a finite locally constant sheaf of sets with the sheaf of
 sections of its representing finite étale `Y`-scheme. -/
 noncomputable abbrev repIso (F : Y.FiniteLocallyConstant) :
-    F ≅ (toFiniteLocallyConstant Y).obj (rep Y F) :=
-  ((equivalenceFiniteLocallyConstant Y).counitIso.app F).symm
+    F ≅ (sectionsFunctor Y).obj (rep Y F) :=
+  ((sectionsEquivalence Y).counitIso.app F).symm
 
 /-- The stalk `F_s` of a finite locally constant sheaf of sets is the geometric fibre of its
 representing finite étale `Y`-scheme. -/
-noncomputable abbrev stalkEquiv (F : Y.FiniteLocallyConstant) :
+noncomputable abbrev repStalkEquiv (F : Y.FiniteLocallyConstant) :
     stalk s F ≃ ULift.{u + 1} ((FiniteEtale.fiber s).obj (rep Y F)) :=
   isoStalkEquiv s (repIso F)
 
-lemma exists_toFiniteLocallyConstant_map_eq {P P' : Y.FiniteEtale}
-    (f : (toFiniteLocallyConstant Y).obj P ⟶ (toFiniteLocallyConstant Y).obj P') :
-    ∃ φ : P ⟶ P', (toFiniteLocallyConstant Y).map φ = f :=
-  (toFiniteLocallyConstant Y).map_surjective f
+lemma exists_sectionsFunctor_map_eq {P P' : Y.FiniteEtale}
+    (f : (sectionsFunctor Y).obj P ⟶ (sectionsFunctor Y).obj P') :
+    ∃ φ : P ⟶ P', (sectionsFunctor Y).map φ = f :=
+  (sectionsFunctor Y).map_surjective f
 
 variable [ConnectedSpace Y] (G : Type u) [Group G] [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)]
   [IsNaturalSMul (FiniteEtale.fiber s) G]
@@ -286,16 +286,16 @@ variable [ConnectedSpace Y] (G : Type u) [Group G] [∀ P, MulAction G ((FiniteE
 stalk `F_s` of a finite locally constant sheaf of sets `F`, transported from its action on the
 geometric fibre of the finite étale `Y`-scheme representing `F`. -/
 noncomputable def smul {F : Y.FiniteLocallyConstant} (g : G) (x : stalk s F) : stalk s F :=
-  (stalkEquiv s F).symm (ULift.up (g • (stalkEquiv s F x).down))
+  (repStalkEquiv s F).symm (ULift.up (g • (repStalkEquiv s F x).down))
 
 lemma isoStalkEquiv_smul {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
-    (i : F ≅ (toFiniteLocallyConstant Y).obj P) (g : G) (x : stalk s F) :
+    (i : F ≅ (sectionsFunctor Y).obj P) (g : G) (x : stalk s F) :
     isoStalkEquiv s i (smul s G g x) = ULift.up (g • (isoStalkEquiv s i x).down) := by
-  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ i.hom)
-  have h : 𝟙 F ≫ i.hom = (repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ := by
+  obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ i.hom)
+  have h : 𝟙 F ≫ i.hom = (repIso F).hom ≫ (sectionsFunctor Y).map φ := by
     rw [hφ, Iso.hom_inv_id_assoc, Category.id_comp]
   have key (y : stalk s F) :
-      isoStalkEquiv s i y = ULift.up ((FiniteEtale.fiber s).map φ (stalkEquiv s F y).down) := by
+      isoStalkEquiv s i y = ULift.up ((FiniteEtale.fiber s).map φ (repStalkEquiv s F y).down) := by
     simpa [stalkMap_id] using isoStalkEquiv_stalkMap s (repIso F) i (𝟙 F) φ h y
   rw [key, key]
   unfold smul
@@ -303,39 +303,39 @@ lemma isoStalkEquiv_smul {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
 
 lemma stalkMap_smul {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') (g : G) (x : stalk s F) :
     stalkMap s f (smul s G g x) = smul s G g (stalkMap s f x) := by
-  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
-  have h : f ≫ (repIso F').hom = (repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ := by
+  obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
+  have h : f ≫ (repIso F').hom = (repIso F).hom ≫ (sectionsFunctor Y).map φ := by
     rw [hφ, Iso.hom_inv_id_assoc]
-  apply (stalkEquiv s F').injective
+  apply (repStalkEquiv s F').injective
   rw [isoStalkEquiv_smul, isoStalkEquiv_stalkMap s _ _ f φ h,
     isoStalkEquiv_stalkMap s _ _ f φ h, isoStalkEquiv_smul, IsNaturalSMul.naturality]
 
 lemma one_smul {F : Y.FiniteLocallyConstant} (x : stalk s F) : smul s G 1 x = x := by
   unfold smul
   rw [_root_.one_smul]
-  exact (stalkEquiv s F).symm_apply_apply x
+  exact (repStalkEquiv s F).symm_apply_apply x
 
 lemma mul_smul {F : Y.FiniteLocallyConstant} (g h : G) (x : stalk s F) :
     smul s G (g * h) x = smul s G g (smul s G h x) := by
   unfold smul
   rw [Equiv.apply_symm_apply, SemigroupAction.mul_smul]
 
-lemma smul_toFiniteLocallyConstant (P : Y.FiniteEtale) (g : G)
-    (x : stalk s ((toFiniteLocallyConstant Y).obj P)) :
-    sheafFiberToSheafEquiv s P (smul s G g x) =
-      ULift.up (g • (sheafFiberToSheafEquiv s P x).down) := by
+lemma smul_sectionsFunctor (P : Y.FiniteEtale) (g : G)
+    (x : stalk s ((sectionsFunctor Y).obj P)) :
+    sheafFiberSectionsSheafEquiv s P (smul s G g x) =
+      ULift.up (g • (sheafFiberSectionsSheafEquiv s P x).down) := by
   have := isoStalkEquiv_smul s G (Iso.refl _) g x
   simpa [isoStalkEquiv] using this
 
 /-- The stalk functor is faithful on finite locally constant sheaves of sets. -/
 lemma stalkMap_injective {F F' : Y.FiniteLocallyConstant} {f f' : F ⟶ F'}
     (h : ∀ x, stalkMap s f x = stalkMap s f' x) : f = f' := by
-  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
+  obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
   obtain ⟨φ', hφ'⟩ :=
-    exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ f' ≫ (repIso F').hom)
+    exists_sectionsFunctor_map_eq ((repIso F).inv ≫ f' ≫ (repIso F').hom)
   have e : φ = φ' := by
     refine (FiniteEtale.fiber s).map_injective (FintypeCat.hom_ext _ _ fun y ↦ ?_)
-    obtain ⟨x, hx⟩ := (stalkEquiv s F).surjective (ULift.up y)
+    obtain ⟨x, hx⟩ := (repStalkEquiv s F).surjective (ULift.up y)
     have h₁ := isoStalkEquiv_stalkMap s _ _ f φ (by rw [hφ, Iso.hom_inv_id_assoc]) x
     have h₂ := isoStalkEquiv_stalkMap s _ _ f' φ' (by rw [hφ', Iso.hom_inv_id_assoc]) x
     rw [h x, h₂, hx] at h₁
@@ -354,17 +354,17 @@ locally constant sheaf of sets is continuous, i.e. every stabilizer is open. -/
 lemma isOpen_setOf_smul_eq {F : Y.FiniteLocallyConstant} (x : stalk s F) :
     IsOpen {g : G | smul s G g x = x} := by
   have : {g : G | smul s G g x = x} =
-      (MulAction.stabilizer G (stalkEquiv s F x).down : Set G) := by
+      (MulAction.stabilizer G (repStalkEquiv s F x).down : Set G) := by
     ext g
     simp only [Set.mem_setOf_eq, SetLike.mem_coe, MulAction.mem_stabilizer_iff]
     constructor
     · intro h
-      have := congrArg (fun y ↦ (stalkEquiv s F y).down) h
+      have := congrArg (fun y ↦ (repStalkEquiv s F y).down) h
       simpa only [smul, Equiv.apply_symm_apply] using this
     · intro h
       unfold smul
       rw [h]
-      exact (stalkEquiv s F).symm_apply_apply x
+      exact (repStalkEquiv s F).symm_apply_apply x
   rw [this]
   exact stabilizer_isOpen G _
 
@@ -374,9 +374,9 @@ lemma exists_stalkMap_eq {F F' : Y.FiniteLocallyConstant} (t : stalk s F → sta
     (ht : ∀ g x, t (smul s G g x) = smul s G g (t x)) :
     ∃ f : F ⟶ F', ∀ x, stalkMap s f x = t x := by
   let t' : (FiniteEtale.fiber s).obj (rep Y F) → (FiniteEtale.fiber s).obj (rep Y F') :=
-    fun y ↦ (stalkEquiv s F' (t ((stalkEquiv s F).symm (ULift.up y)))).down
+    fun y ↦ (repStalkEquiv s F' (t ((repStalkEquiv s F).symm (ULift.up y)))).down
   have ht' (g : G) (y) : t' (g • y) = g • t' y := by
-    have := ht g ((stalkEquiv s F).symm (ULift.up y))
+    have := ht g ((repStalkEquiv s F).symm (ULift.up y))
     simp only [t']
     unfold smul at this
     rw [Equiv.apply_symm_apply] at this
@@ -392,11 +392,11 @@ lemma exists_stalkMap_eq {F F' : Y.FiniteLocallyConstant} (t : stalk s F → sta
     change (E.functor.map φ).hom.hom y = _
     rw [E.functor.map_preimage a]
     rfl
-  refine ⟨(repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ ≫ (repIso F').inv, fun x ↦ ?_⟩
-  apply (stalkEquiv s F').injective
+  refine ⟨(repIso F).hom ≫ (sectionsFunctor Y).map φ ≫ (repIso F').inv, fun x ↦ ?_⟩
+  apply (repStalkEquiv s F').injective
   rw [isoStalkEquiv_stalkMap s (repIso F) (repIso F') _ φ
     (by rw [Category.assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]), hφ]
-  change stalkEquiv s F' (t ((stalkEquiv s F).symm (stalkEquiv s F x))) = _
+  change repStalkEquiv s F' (t ((repStalkEquiv s F).symm (repStalkEquiv s F x))) = _
   rw [Equiv.symm_apply_apply]
 
 end Fundamental

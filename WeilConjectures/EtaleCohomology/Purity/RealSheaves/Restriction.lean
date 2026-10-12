@@ -29,8 +29,8 @@ Weil group of any nonempty geometrically connected open
 
 ## Main statements
 
-- `Representation.isIrreducible_comp_iff`, `Representation.IsConstituent.comp`: pulling back
-  along a surjective homomorphism preserves irreducibility and constituents.
+- `Representation.isIrreducible_comp_iff`: pulling back
+  along a surjective homomorphism preserves and reflects irreducibility.
 - `AlgebraicGeometry.WeilGroup.Restriction.exists_weilGroup`
 - `AlgebraicGeometry.WeilGroup.Restriction.localEigenvalues_comp`
 - `AlgebraicGeometry.WeilGroup.Restriction.isReal_comp`
@@ -84,20 +84,6 @@ irreducibility, since it does not change the invariant subspaces. -/
 theorem isIrreducible_comp_iff (f : G' →* G) (hf : Function.Surjective f) :
     IsIrreducible (ρ.comp f) ↔ ρ.IsIrreducible :=
   (Subrepresentation.compOrderIso f hf).isSimpleOrder_iff
-
-/-- Pulling back along a surjective homomorphism `f` preserves constituents: if `σ` is
-isomorphic to an irreducible subquotient `M ⧸ N` of `ρ`, then `σ ∘ f` is isomorphic to the same
-subquotient of `ρ ∘ f`, which is still irreducible. -/
-theorem IsConstituent.comp (hσ : σ.IsConstituent ρ) (f : G' →* G)
-    (hf : Function.Surjective f) : IsConstituent (σ.comp f) (ρ.comp f) := by
-  obtain ⟨N, M, hNM, ⟨e⟩⟩ := hσ.exists_covBy
-  let N' := (Subrepresentation.compOrderIso f hf).symm N
-  let M' := (Subrepresentation.compOrderIso f hf).symm M
-  let E : Equiv (σ.comp f) (M'.subquotient N') :=
-    Equiv.mk e.toLinearEquiv fun g' ↦ e.isIntertwining' (f g')
-  exact ⟨(isIrreducible_comp_iff f hf).2 hσ.1, N', M',
-    (Subrepresentation.compOrderIso f hf).symm.monotone hNM.le,
-    ⟨E.asModuleLinearEquiv.trans (M'.subquotientAsModuleLinearEquiv N')⟩⟩
 
 end Representation
 
@@ -254,7 +240,7 @@ groups is surjective, so `j^*` does not change the invariant subspaces. -/
 theorem isConstituent_comp {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
     {σ : Representation (PadicAlgCl l) WC.carrier V'} (hσ : σ.IsConstituent ρ) :
     Representation.IsConstituent (σ.comp R.restrict) (ρ.comp R.restrict) :=
-  hσ.comp R.restrict R.surjective_restrict
+  hσ.comp R.surjective_restrict
 
 end Restriction
 

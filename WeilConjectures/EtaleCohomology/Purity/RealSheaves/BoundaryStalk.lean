@@ -59,11 +59,11 @@ section Germs
 variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
 
 lemma FiniteLocallyConstant.isoStalkEquiv_toPresheafFiber {F : Y.FiniteLocallyConstant}
-    {P : Y.FiniteEtale} (i : F ≅ (FiniteEtale.toFiniteLocallyConstant Y).obj P) (V : Y.Etale)
+    {P : Y.FiniteEtale} (i : F ≅ (FiniteEtale.sectionsFunctor Y).obj P) (V : Y.Etale)
     (v : (pointSmallEtale s).fiber.obj V) (z : ToType (F.obj.obj.obj (op V))) :
     FiniteLocallyConstant.isoStalkEquiv s i ((pointSmallEtale s).toPresheafFiber V v F.obj.obj z) =
       ULift.up ((pointSmallEtale s).fiber.map (i.hom.hom.hom.app (op V) z).down v) := by
-  change FiniteEtale.sheafFiberToSheafEquiv s P
+  change FiniteEtale.sheafFiberSectionsSheafEquiv s P
     ((pointSmallEtale s).presheafFiber.map i.hom.hom.hom
       ((pointSmallEtale s).toPresheafFiber V v F.obj.obj z)) = _
   rw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
@@ -309,8 +309,8 @@ theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Fini
   -- the specialized point maps to `t`
   have hz : (i.hom.hom.hom.app _ z).down = gU := by
     change (i.hom.hom.hom.app _ (i.inv.hom.hom.app _ (ULift.up gU))).down = gU
-    exact congrArg (fun φ : (FiniteEtale.toFiniteLocallyConstant U).obj P ⟶
-        (FiniteEtale.toFiniteLocallyConstant U).obj P ↦
+    exact congrArg (fun φ : (FiniteEtale.sectionsFunctor U).obj P ⟶
+        (FiniteEtale.sectionsFunctor U).obj P ↦
       (φ.hom.hom.app (op ((MorphismProperty.Over.pullback
       @Etale ⊤ j).obj V)) (ULift.up gU)).down) i.inv_hom_id
   rw [hz]
@@ -425,7 +425,7 @@ theorem transport_galoisStalkMap (F : U.FiniteLocallyConstantModule Λ)
     exact ConcreteCategory.congr_hom (toPresheafFiber_pointSmallEtaleHom_sheafFiber_app η
       (σ : Ω →+* Ω) (specMap_comp_genericGeometricPoint j σ) F.obj V v) z
   apply (FiniteLocallyConstantModule.forgetStalkEquiv s F).symm.injective
-  apply (FiniteLocallyConstant.stalkEquiv s F').injective
+  apply (FiniteLocallyConstant.repStalkEquiv s F').injective
   simp only [FiniteLocallyConstantModule.transport, FiniteLocallyConstantModule.smul,
     Equiv.symm_apply_apply]
   rw [FiniteLocallyConstant.isoStalkEquiv_smul, FiniteLocallyConstant.isoStalkEquiv_transport,

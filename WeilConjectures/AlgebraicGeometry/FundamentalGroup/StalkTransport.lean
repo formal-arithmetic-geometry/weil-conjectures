@@ -50,20 +50,20 @@ open FiniteEtale
 /-- The transport of the stalks of a finite locally constant sheaf of sets along an isomorphism
 of fibre functors, through the geometric fibres of the representing finite étale scheme. -/
 noncomputable def transport (F : Y.FiniteLocallyConstant) : stalk s F ≃ stalk s' F :=
-  ((stalkEquiv s F).trans (Equiv.ulift.trans ((fiberEquivOfIso s s' τ (rep Y F)).trans
-    Equiv.ulift.symm))).trans (stalkEquiv s' F).symm
+  ((repStalkEquiv s F).trans (Equiv.ulift.trans ((fiberEquivOfIso s s' τ (rep Y F)).trans
+    Equiv.ulift.symm))).trans (repStalkEquiv s' F).symm
 
 lemma isoStalkEquiv_transport {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
-    (i : F ≅ (toFiniteLocallyConstant Y).obj P) (x : stalk s F) :
+    (i : F ≅ (sectionsFunctor Y).obj P) (x : stalk s F) :
     isoStalkEquiv s' i (transport s s' τ F x) =
       ULift.up (τ.hom.app P (isoStalkEquiv s i x).down) := by
-  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ i.hom)
-  have h : 𝟙 F ≫ i.hom = (repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ := by
+  obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ i.hom)
+  have h : 𝟙 F ≫ i.hom = (repIso F).hom ≫ (sectionsFunctor Y).map φ := by
     rw [hφ, Iso.hom_inv_id_assoc, Category.id_comp]
   have key {Ω'' : Type u} [Field Ω''] [IsSepClosed Ω''] (s'' : Spec (.of Ω'') ⟶ Y)
       (y : stalk s'' F) :
       isoStalkEquiv s'' i y =
-        ULift.up ((FiniteEtale.fiber s'').map φ (stalkEquiv s'' F y).down) := by
+        ULift.up ((FiniteEtale.fiber s'').map φ (repStalkEquiv s'' F y).down) := by
     simpa [stalkMap_id] using isoStalkEquiv_stalkMap s'' (repIso F) i (𝟙 F) φ h y
   rw [key, key]
   unfold transport
@@ -72,10 +72,10 @@ lemma isoStalkEquiv_transport {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
 
 lemma stalkMap_transport {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') (x : stalk s F) :
     stalkMap s' f (transport s s' τ F x) = transport s s' τ F' (stalkMap s f x) := by
-  obtain ⟨φ, hφ⟩ := exists_toFiniteLocallyConstant_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
-  have h : f ≫ (repIso F').hom = (repIso F).hom ≫ (toFiniteLocallyConstant Y).map φ := by
+  obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
+  have h : f ≫ (repIso F').hom = (repIso F).hom ≫ (sectionsFunctor Y).map φ := by
     rw [hφ, Iso.hom_inv_id_assoc]
-  apply (stalkEquiv s' F').injective
+  apply (repStalkEquiv s' F').injective
   rw [isoStalkEquiv_stalkMap s' _ _ f φ h, isoStalkEquiv_transport, isoStalkEquiv_transport,
     isoStalkEquiv_stalkMap s _ _ f φ h]
   exact congrArg ULift.up (ConcreteCategory.congr_hom (τ.hom.naturality φ) _).symm
@@ -103,7 +103,7 @@ lemma transport_symm_transport (F : Y.FiniteLocallyConstantModule Λ) (x : stalk
   simp only [transport, Equiv.symm_apply_apply]
   apply (forgetStalkEquiv s F).symm.injective
   rw [Equiv.symm_apply_apply]
-  apply (FiniteLocallyConstant.stalkEquiv s _).injective
+  apply (FiniteLocallyConstant.repStalkEquiv s _).injective
   rw [FiniteLocallyConstant.isoStalkEquiv_transport, FiniteLocallyConstant.isoStalkEquiv_transport]
   exact congrArg ULift.up (ConcreteCategory.congr_hom (τ.hom_inv_id_app _) _)
 

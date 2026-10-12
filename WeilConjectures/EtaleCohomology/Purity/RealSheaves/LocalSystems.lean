@@ -14,7 +14,6 @@ public import Mathlib.FieldTheory.IntermediateField.Basic
 public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RepresentationEquivalence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.ConstructibleSheaf.Defs
