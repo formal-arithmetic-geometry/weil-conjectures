@@ -15,11 +15,11 @@
  "statement": "For a commutative ring A, a nonpositive bicomplex K, short complexes S_j with middle objects identified with column -j, and a degreewise splitting of every S_j, every degree k component of every explicit successive inclusion F_n → F_(n+1) of [lem-pc-derived-total-filtration-stable] has a left inverse. Exactness and freeness are not required.",
  "proof_origin": {
   "by": "worker",
-  "group": "A2",
-  "date": "2026-10-12",
+  "group": "C2",
+  "date": "2026-10-13",
   "document": "Stacks Project, Differential Graded Algebra",
   "place": "Tag 09KP, proof, alternating two-step column filtration (https://stacks.math.columbia.edu/tag/09KP)",
-  "note": "Split off the explicit degreewise retractions of the explicit filtration argument."
+  "note": "Second reader replaced the circular parity decomposition by an explicit totalDesc projection and a generator equality-locus argument. No new statements or holes."
  },
  "proof_deps": [
   "lem-pc-derived-total-filtration-stable"
@@ -42,7 +42,21 @@
  "mathlib_match": null,
  "proof": [
   {
-   "text": "Decompose the total module in degree k as the coproduct of its column\nterms. At stage 2j the submodule is the sum of full columns -i for i<j;\nat stage 2j+1 it also includes the image of the first arrow of S j.\nProjection onto the preceding full columns retracts the even inclusion.\nFor the odd inclusion, project onto the preceding columns and apply the\nretraction of the first arrow supplied by the splitting of S j in degree k+j,\ntransported through e j. Directness of the column summands proves that these\nmaps restrict to the indicated submodules and compose with the inclusions to\nidentity. Every n is even or odd. For j=0 the preceding sum is zero, so the\nsame constructions apply. No exactness or freeness hypothesis is needed.",
+   "text": "Use the explicit stage submodule M = term n k and its full-column and lower-piece generators. The le_iSup and mem_sup inclusions place each generator whose entry threshold is at most n in M.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the splitting supplied by h_split in degree k+j. On column -j use the full-column inclusion into M when 2*j+2 <= n, otherwise use e.inv followed by the splitting retraction and the lower-piece inclusion when 2*j+1 <= n, otherwise zero. Reindex any nonpositive total summand using j=(-p).toNat and q=k+j, and send positive summands to zero. Mathlib HomologicalComplex₂.totalDesc assembles these genuine component maps into a map r from the total-degree module to M. Its ι_totalDesc equation computes its composite with every full-column inclusion.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map r fixes retained full-column generators by construction. It fixes retained lower-piece generators either because the whole column is retained, or because e.hom followed by e.inv is identity and the first arrow followed by the chosen splitting retraction is identity. The equality locus of r followed by the subtype inclusion and the ambient identity is a submodule; iSup_le and sup_le therefore extend the generator equations to all of M. Restrict r to term (n+1) k. For arbitrary nested submodules P <= Q, a map from the ambient module to P fixing P is a left inverse to P -> Q after restriction to Q; apply this elementary fact to conclude the desired component equation.",
    "uses": [
     "lem-pc-derived-total-filtration-stable"
    ],
@@ -102,10 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T135213-L-1653960",
-  "kind": "interface",
+  "landing": "20261012T165507-L-2931483",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
