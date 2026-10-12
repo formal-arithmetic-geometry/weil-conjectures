@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleComplexClassDescent
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineComplexPresentation
 
 /-! # Raw affine cohomology classes descend to a stage
 
@@ -90,6 +89,31 @@ theorem exists_higherDirectImage_raw_affine_class_rep {S : Scheme.{v}}
         (t : (abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).obj (op U)),
         abelianHigherDirectImageRawPullback (c.π.app (op i)).left
           (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i)
-          (colimit H) ((eH i).inv ≫ colimit.ι H i) U t = z := by sorry
+          (colimit H) ((eH i).inv ≫ colimit.ι H i) U t = z := by
+  classical
+  intro U _ z
+  obtain ⟨D', c', hc', compact, quasiSeparated, affine, F', φ', hid, hcomp, a,
+      hbelow, G, eG, hG, P, hP, K, eK, hK, L, hL, B, eB, hB, stageIso, limitIso,
+      compatibility⟩ := exists_raw_affine_complex_presentation
+    D c hc F φ hφid hφcomp H eH hH p U
+  have : ∀ i, CompactSpace (D'.obj i) := compact
+  have : ∀ i, QuasiSeparatedSpace (D'.obj i) := quasiSeparated
+  have : ∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D'.map f) := affine
+  obtain ⟨i, y, hy⟩ := exists_etale_complex_class_rep
+    D' c' hc' F' φ' hid hcomp a hbelow
+    G eG hG (p : ℤ) P hP K eK hK L hL B eB hB (limitIso.hom z)
+  let t := (stageIso (op i)).inv y
+  refine ⟨i.unop, t, ?_⟩
+  have ht : (stageIso (op i)).hom t = y := by
+    exact ConcreteCategory.congr_hom (stageIso (op i)).inv_hom_id y
+  have hz := compatibility (op i) t
+  rw [ht] at hz
+  have he : limitIso.hom
+      (abelianHigherDirectImageRawPullback (c.π.app (op i.unop)).left
+        (D.obj (op i.unop)).hom c.pt.hom (Over.w (c.π.app (op i.unop))) p
+        (F i.unop) (colimit H)
+        ((eH i.unop).inv ≫ colimit.ι H i.unop) U t) = limitIso.hom z :=
+    hz.symm.trans hy
+  exact (ConcreteCategory.bijective_of_isIso limitIso.hom).1 he
 
 end AlgebraicGeometry.Etale

@@ -8522,3 +8522,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:15 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroStalkIso (stage 3; reviewer PASS; first push; landing 20261012T161502-L-2648282 (proof); batch 20261012T161459; modules 1; new nodes 0)
 - 16:15 L: merged deliver/M2/Sheaf.AlgebraicGeometry.ProperFibreIdempotentDescent (stage 3; reviewer PASS; first push; landing 20261012T161502-L-2648385 (proof); batch 20261012T161459; modules 1; new nodes 0)
 - 16:15 L: merged deliver/N1/Sheaf.AlgebraicGeometry.AmpleProjOpen (stage 3; reviewer PASS; first push; landing 20261012T161503-L-2648491 (proof); batch 20261012T161459; modules 1; new nodes 0)
+- 16:15 L: merged deliver/N2/Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineClassRep (stage 3; reviewer PASS; first push; landing 20261012T161503-L-2648602 (interface); batch 20261012T161459; modules 2; new nodes 1)

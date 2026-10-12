@@ -19,38 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Base change D and c along affine U. Each stage map to U is qcqs by base change, hence each stage scheme is qcqs; transitions remain affine. The pullback universal property proves that the new cone is limiting. Restrict the coefficient system and transport its identity, composition and H-transition equations by pullback-composition comparisons. Inverse image preserves colimits, identifying the limit coefficient with restriction of colimit H.",
+   "text": "Apply exists_raw_affine_complex_presentation to base change the system along U and obtain complexes, their canonical cohomology cocone, stage and limit raw/cohomology isomorphisms and leg compatibility. This is only a presentation and supplies no representatives or cohomology colimit property. Install its qcqs and affine hypotheses as local instances.",
    "uses": [
-    "def-weil-pbc-inverse-image"
+    "lem-sbc-higher-direct-image-raw-affine-complex-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Use degree-zero single complexes, zero below zero. Apply nonempty_isColimit_etale_complex_cohomology to the base-changed system. The prescribed canonical cohomology cocone is a filtered colimit. Its image under forget to types is a colimit, so every element at the limit is the image of a class at a stage.",
+   "text": "Apply the class-descent half of complex continuity, exists_etale_complex_class_rep, to limitIso(z). Obtain a stage i and y with B.ι_i(y)=limitIso(z). Only surjectivity is needed; do not invoke the full cohomology-colimit theorem or its vanishing half.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+    "lem-weil-pbc-etale-complex-class-descent"
    ],
    "elementary": false
   },
   {
-   "text": "Identify restricted cohomology with derived Hom from the pulled-back free abelian representable. The free-sheaf sections adjunction corepresents sections on the etale base-changed scheme, and etale restriction preserves injectives by its exact left adjoint. The fully faithful bounded-below inclusion identifies these Hom groups with the unbounded cohomology of the single complexes. Naturality identifies the cocone leg with the explicit raw pullback and shifted coefficient map. Transport the stage representative to t, obtaining rawPullback(t)=z without sheafification.",
-   "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
-    "lem-sbc-abelian-higher-direct-image-natural-comparison"
-   ],
-   "elementary": false
+   "text": "Let t=stageIso_i.inv(y). The inverse/hom identity gives stageIso_i.hom(t)=y. Compatibility then gives limitIso.hom(rawPullback_i(t))=B.ι_i(y)=limitIso.hom(z). The isomorphism limitIso is injective, so rawPullback_i(t)=z. Remove the opposite wrapper on the stage index.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-sbc-abelian-higher-direct-image-natural-comparison"
+  "lem-sbc-higher-direct-image-raw-affine-complex-presentation",
+  "lem-weil-pbc-etale-complex-class-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/09Z1",
-  "place": "Lemma 59.51.7 proof displayed restricted-cohomology colimit; Tag 0EZM common lower bound zero; Tag 03Q8 restricted-cohomology presentation; explicit derived-Hom and coherence elaboration by J2"
+  "place": "Tag 09Z1 restricted-cohomology argument; use only class descent of 0EZM; explicit isomorphism transport formalized by N2"
  },
  "mathlib_searches": [
   {
@@ -156,9 +151,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J2",
+  "group": "N2",
   "result": "pass",
-  "landing": "20261012T095909-L-319072",
+  "landing": "20261012T161503-L-2648602",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
