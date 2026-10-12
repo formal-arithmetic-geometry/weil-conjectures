@@ -24,16 +24,17 @@
   {
    "text": "Choose the ring-sheaf/internal-ring inverse functors on both sites and the lifted ring-object adjunction. Compose the left lifted functor with these inverse functors; the strict underlying identities compose to e.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
+    "lem-weil-pbc-lifted-comm-ring-branch"
    ],
    "elementary": false
   },
   {
-   "text": "For the right lifted functor, the product comparison at each base-changed object has the original coordinate projections. Its inverse therefore pairs those coordinates, and the terminal comparison is the unique map of singleton sections. Substitute these descriptions into the five right operation equations of the lifted ring adjunction. The sheaf/internal-object section formulas identify the resulting maps with addition, zero, negation, multiplication and one in the original ring sheaf at that base-changed object. Thus the underlying right comparison and its inverse are sectionwise ring homomorphisms. Naturality of the comparisons gives an isomorphism from the transported right functor to Rr. Transport the lifted unit through it and through the inverse-functor identities. The lifted-unit equation, with the right comparison cancelled, is precisely the stated formula.",
+   "text": "Apply etaleRingDirectImageComparison to the right ring-object lift and the two sectionwise identifications. Define eta as the inverse FV GV identity, followed by FV of the lifted unit mapped through GV, followed by the right comparison d. After forgetting, use naturality of the GU/GV forgetful comparisons. Compose equality-induced isomorphisms to cancel the inverse identifications. Cancel R of the lifted left comparison in the generic unit equation, apply set-unit naturality to the FV comparison, and compose equality-induced left comparisons to obtain exactly the displayed equation. All transport, naturality and cancellation steps are proved in Lean.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-etale-ring-direct-image-comparison",
+    "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
+    "lem-weil-pbc-lifted-comm-ring-branch"
    ],
    "elementary": false
   }
@@ -41,13 +42,14 @@
  "proof_deps": [
   "lem-weil-pbc-etale-base-change-continuous",
   "def-weil-pbc-etale-sheaves",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+  "lem-weil-pbc-sheaf-algebraic-structures-ring-core",
+  "lem-weil-pbc-lifted-comm-ring-branch",
+  "lem-weil-pbc-etale-ring-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Details of the ring paragraph of Proposition 00YV, supplied by V1; source read at https://stacks.math.columbia.edu/tag/00YV and https://stacks.math.columbia.edu/tag/00YR"
+  "place": "Proposition 00YV ring paragraph and Section 00YR; F3 implements the lifted-unit transport and isolates its sectionwise right-comparison step."
  },
  "mathlib_searches": [
   {
@@ -146,11 +148,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V1",
+  "reviewer": "X-4117f",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T085351-L-44543",
+  "landing": "20261012T112838-L-767132",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with their DAG nodes, dependency declarations, Stacks sources, report, and successful module/importer compilation."
  }
 }
