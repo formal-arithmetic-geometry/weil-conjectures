@@ -43,6 +43,19 @@ lem-weil-pbc-immersion-closed-image-closed-immersion. This gives H-projectivity,
 already supplies quasi-compactness, hence projectivity (def-pc-projective-morphism). -/
 theorem isProjective_of_isProper_of_dim_le_one {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsProper f] (hdim : X.dim ≤ 1) : IsProjective f := by
-  sorry
+  obtain ⟨N, U, g, i, j, hi, hj, hig, hjg⟩ :=
+    exists_closed_open_immersion_projectiveSpace_of_dim_le_one f hdim
+  let : IsClosedImmersion i := hi
+  let : IsOpenImmersion j := hj
+  have hcomp : (i ≫ j) ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘
+      Spec (.of k) = f := by
+    rw [Category.assoc, hjg, hig]
+  have : IsProper ((i ≫ j) ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘
+      Spec (.of k)) := hcomp ▸ inferInstance
+  have : IsProper (i ≫ j) :=
+    IsProper.of_comp (i ≫ j) (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))
+  have hclosed : IsClosedImmersion (i ≫ j) :=
+    IsClosedImmersion.of_isPreimmersion (i ≫ j) (i ≫ j).isClosedMap.isClosed_range
+  exact { exists_closedImmersion := ⟨N, i ≫ j, hclosed, hcomp⟩ }
 
 end AlgebraicGeometry
