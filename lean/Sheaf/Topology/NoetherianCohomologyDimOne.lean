@@ -45,6 +45,7 @@ theorem isZero_secondCohomology_of_noetherian_dim_le_one
     (hdim : topologicalKrullDim X ≤ 1)
     (F : CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :
     IsZero (CategoryTheory.Sheaf.H' F 2 (⊤ : Opens X)) := by
-  sorry
+  exact TopCat.isZero_noetherian_topological_cohomology_of_dimension_bound
+    X 1 hdim F 2 (by decide)
 
 end TopCat.Sheaf
