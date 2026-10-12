@@ -19,16 +19,35 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This is the corresponding geometric stalk argument: sections vanish outside U, while neighbourhoods in U are cofinal and sheafification preserves stalks inside U. The unit map is then linear and natural.",
+   "text": "Specialize the chosen extension/restriction adjunction and its invertible unit to the ringed space underlying X. Mathlib Adjunction.fullyFaithfulLOfIsIsoUnit makes its left adjoint fully faithful. Consequently the unit of every adjunction with these same functors is invertible. Apply the over-site equivalence, the underlying-presheaf functor and the stalk functor; compose with the restriction-stalk natural isomorphism to obtain IsIso of the map in the unchanged statement.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-sc-module-extension-by-zero-unit-isiso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use RingedSpace.stalkMap_linear on the unit followed by the overFunctorEquiv comparison. For the restriction-stalk comparison, represent a scalar and a vector on a common neighborhood V intersect W in U. Apply Mathlib germ_smul, germ_restrictStalkNatIso_hom_app and Opens.germ_stalkIso_hom. Sectionwise scalar compatibility is smul_restrictAppIso_hom_apply, and Opens.ι_appIso identifies the section-ring comparison with the identity. Compose the resulting semilinearity with stalkMap_linear and use Opens.stalkIso_inv and the inverse/hom identity to recover the original scalar r.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the adjunction unit through the over-site equivalence and the underlying-presheaf/stalk functors. Compose it with the whiskered overFunctorEquiv and restrictStalkNatIso. Naturality of this composite natural transformation is precisely the required square, after functoriality of composition and associativity. Combine the isomorphism, semilinearity and naturality conclusions.",
    "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-module-extension-by-zero-unit-isiso"
+ ],
  "proof_origin": {
-  "by": "P3 stage 3",
+  "by": "H2 stage 3 second reading",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 00A7 (3)"
+  "place": "Sheaves, Lemma 00A7 (3)-(4); reduction via the existing invertible-unit lemma, with Mathlib restriction-stalk and germ identities"
  },
  "mathlib_searches": [
   {
@@ -87,10 +106,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P3",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T173850-L-3302045",
-  "kind": "interface",
+  "landing": "20261012T194116-L-456928",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
