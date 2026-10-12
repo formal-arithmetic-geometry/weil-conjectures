@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-sheaf-abelian-objects-bijective-injective",
+ "kind": "statement",
+ "title": "Sectionwise reconstruction is injective on objects",
+ "statement": "Under the hypotheses of lem-weil-pbc-sheaf-abelian-objects-bijective, if F.obj A = F.obj B then A = B.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR (section-sheaves-algebraic-structures), quadruple (D1)-(D4), (A1)-(A3) before Proposition 00YV (proposition-functoriality-algebraic-structures-topoi)"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the internal operations on sections, reconstruct the abelian sheaf, and use the operation formulas and extensionality to obtain the asserted object equality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "R1",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Section 00YR (section-sheaves-algebraic-structures), quadruple (D1)-(D4), (A1)-(A3) before Proposition 00YV (proposition-functoriality-algebraic-structures-topoi)",
+  "note": "Strict decomposition of the sectionwise reconstruction argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "commGrp|CommGrp|commGroup",
+   "results": "20 hits: Mathlib/CategoryTheory/Monoidal/Internal/Module.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Internal/Types/CommGrp_.lean, Mathlib/CategoryTheory/Monoidal/Mon.lean, Mathlib/CategoryTheory/Monoidal/CommGrp_.lean; ",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match; Mathlib contains type-level commutative-group equivalences and general abelian sheaf facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommGrp",
+   "results": "0 hits: ; loogle: unknown identifier 'CommGrp'",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match; Mathlib contains type-level commutative-group equivalences and general abelian sheaf facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian group objects in the category of sheaves are equivalent to sheaves of abelian groups",
+   "results": "8 hits: CategoryTheory.sheafIsAbelian, SheafOfModules.instAbelian, CategoryTheory.Sheaf.instIsGrothendieckAbelian, instAbelianLightCondMod, SheafOfModules.instAdditiveSheafAddCommGrpCatToSheaf, CategoryTheory.instPreadditiveSheaf, CategoryTheory.Sheaf.Hom.addCommGroup, CondensedAb; ",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level match; Mathlib contains type-level commutative-group equivalences and general abelian sheaf facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "sectionwise abelian group object sheaf reconstruct abelian sheaf bijective on objects",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SheafAbelianObjectsBijective",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sheaf-abelian-objects-bijective",
+   "place": "decomposition of the object bijectivity proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheafAbelianObjectsInjective",
+  "file": "lean/Sheaf/CategoryTheory/SheafAbelianObjectsInjective.lean",
+  "declaration": "CategoryTheory.sheafAbelianObjects_injective",
+  "statement": "theorem sheafAbelianObjects_injective\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w))))\n    (hF : F ⋙ CommGrp.forget _ = sheafCompose J (forget AddCommGrpCat.{max u v w}))\n    (hsections : (∀ (A : Sheaf J AddCommGrpCat.{max u v w}) (U : Cᵒᵖ),\n        (∀ a b : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.mul (X := (F.obj A).X)).hom.app U (a, b)) =\n            (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a) +\n              (show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U b)) ∧\n        (∀ t : (𝟙_ (Sheaf J (Type (max u v w)))).obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((MonObj.one (X := (F.obj A).X)).hom.app U t) =\n            (0 : A.obj.obj U)) ∧\n        (∀ a : (F.obj A).X.obj.obj U,\n          ((eqToIso hF).hom.app A).hom.app U ((GrpObj.inv (X := (F.obj A).X)).hom.app U a) =\n            -(show A.obj.obj U from ((eqToIso hF).hom.app A).hom.app U a)))) :\n    ∀ A B, F.obj A = F.obj B → A = B",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "stmt_deps": [],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T121143-L-994717",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T121143-L-994717",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
