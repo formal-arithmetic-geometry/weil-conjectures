@@ -767,5 +767,64 @@ theorem isPerfPair_twistSerrePairing {p : ℕ} (hn : Fintype.card n = p + 1 + 1)
   rwa [LinearMap.flip_flip] at h
 
 end Pairing
+section Canonical
+
+variable (A) in
+/-- **`H⁰(ℙ(n; Spec A), 𝒪(D)) ≅ A[xᵢ]_D`**, as `A`-modules, stated on the cohomology `.H 0`: a
+class of `H⁰` is a global section of `𝒪(D)` (`H.zeroLinearEquiv`), which is the section of a
+unique homogeneous polynomial of degree `D` (`homogeneousSubmoduleLinearEquivTwist`).
+
+(blueprint: `lem-pc-projective-space-twist-cohomology` (i), `sk-thm-picard-pn`) -/
+def twistHZeroLinearEquiv [Nonempty n] (D : ℕ) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) D) 0
+    (twist n (Spec (.of A)) D).H 0 ≃ₗ[A] MvPolynomial.homogeneousSubmodule n A D :=
+  letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) D) 0
+  ({ (H.zeroLinearEquiv (twist n (Spec (.of A)) D)).toAddEquiv with
+      map_smul' c x := by
+        refine ((H.zeroLinearEquiv _).map_smul (structureRingHom A c) x).trans ?_
+        change _ = (ℙ(n; Spec (.of A))).presheaf.map
+            (homOfLE le_top : (⊤ : (ℙ(n; Spec (.of A))).Opens) ⟶ ⊤).op (structureRingHom A c) •
+          H.zeroLinearEquiv (twist n (Spec (.of A)) D) x
+        rw [Scheme.presheaf_map_id_apply] } :
+    (twist n (Spec (.of A)) D).H 0 ≃ₗ[A]
+      (ModuleCat.restrictScalars (structureRingHom (n := n) A)).obj
+        ((twist n (Spec (.of A)) D).presheafModuleCat.obj (op ⊤))) ≪≫ₗ
+    (homogeneousSubmoduleLinearEquivTwist A D).symm
+
+/-- The inverse of `twistHZeroLinearEquiv` sends a homogeneous polynomial `f` of degree `D` to
+the class in `H⁰` of the global section of `𝒪(D)` defined by `f`. -/
+lemma twistHZeroLinearEquiv_symm_apply [Nonempty n] (D : ℕ)
+    (f : MvPolynomial.homogeneousSubmodule n A D) :
+    (twistHZeroLinearEquiv A D).symm f =
+      (H.zeroLinearEquiv (twist n (Spec (.of A)) D)).symm (homogeneousSubmoduleToTwist A D f) :=
+  rfl
+
+variable (A) in
+/-- **The monomial basis of the top cohomology of `𝒪(m)`**: with `d + 1` homogeneous
+coordinates ordered by `E : Fin (d + 1) ≃ n`, `Hᵈ(ℙ(n; Spec A), 𝒪(m))` is free on the strictly
+negative exponent vectors `e` of sum `m`, the basis vector of `e` being the class of the Čech
+cocycle `xᵉ` on `U_{E 0} ∩ ⋯ ∩ U_{E d}` (for `d = 0` this requires `m < 0`). It is the
+monomial basis of the monomial Čech complex transported along the canonical Leray isomorphism
+`twistHLinearEquivMonomialCechHomology`; the ordering `E` only fixes the signs.
+
+(blueprint: `lem-pc-projective-space-twist-cohomology` (ii)) -/
+def twistHTopBasis {d : ℕ} (hn : Fintype.card n = d + 1) (E : Fin (d + 1) ≃ n) {m : ℤ}
+    (hm : d ≠ 0 ∨ m < 0) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
+    Module.Basis (negativeExponents n m) A ((twist n (Spec (.of A)) m).H d) :=
+  letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
+  .ofRepr (twistHLinearEquivMonomialCechHomology A m d ≪≫ₗ
+    monomialCechComplexHomologyTopLinearEquiv n A m hn E hm)
+
+/-- The coordinates of a class in the monomial basis `twistHTopBasis` are those of its image in
+the top homology of the monomial Čech complex. -/
+lemma twistHTopBasis_repr {d : ℕ} (hn : Fintype.card n = d + 1) (E : Fin (d + 1) ≃ n) {m : ℤ}
+    (hm : d ≠ 0 ∨ m < 0) (x : (twist n (Spec (.of A)) m).H d) :
+    letI := moduleHOfSpec (ℙ(n; Spec (.of A)) ↘ Spec (.of A)) (twist n (Spec (.of A)) m) d
+    (twistHTopBasis A hn E hm).repr x = monomialCechComplexHomologyTopLinearEquiv n A m hn E hm
+      (twistHLinearEquivMonomialCechHomology A m d x) :=
+  rfl
+
+end Canonical
 
 end AlgebraicGeometry.ProjectiveSpace
