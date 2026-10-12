@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-popescu-desingularization-inverted-quotient",
+ "kind": "statement",
+ "title": "Polynomial identification of the inverted desingularization quotient",
+ "statement": "Let R be a commutative ring, A an R-algebra with finite presentation P=R[x_1,...,x_n]/(f_1,...,f_m) [def-weil-pbc-finitely-presented-algebra], pi∈R and c≤m. Let s_ik∈R and g_j∈Q=R[v_1,...,v_c,w_1,...,w_n] [def-weil-pbc-mv-polynomial-ring]. Put xi_i=pi^2 sum_k s_ik v_k+pi^3 w_i, F_j=f_j(xi), G=(g), S=Q/G and K the image of (F) in S. If F_j=pi^3 g_j for j<c, then (S/K)_pi is R-algebra isomorphic to A_pi[v_1,...,v_c]. All polynomial variable index sets may be universe lifted.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write Q=R[v,w], xi_i=pi^2 sum s_ik v_k+pi^3 w_i, G=(g), and I=(f(xi)). The iterated quotient S/K equals Q/(G+I) by the quotient universal property.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization commutes with these quotients. Since pi^3 g_j=f_j(xi), after inverting pi the ideal G is contained in I, so the localized ring is Q_pi/I.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Adjoin x_i with relations x_i-xi_i. Eliminating x gives Q_pi/I. Imposing f(x)=0 first identifies it with A_pi[v,w]/(x_i-pi^2 sum s_ik v_k-pi^3 w_i). Here pi^3 is a unit, so each relation solves uniquely for w_i. Evaluation at the solutions and inclusion of v define inverse R-algebra maps to A_pi[v]. Verify the composites on all generators. The proof also applies when variables or relations are empty, or the localized rings are zero.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-localization-quotient-commute"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "After inverting pi the quotient by substituted relations f(pi squared s v plus pi cubed w) and g with pi cubed g equal to f is isomorphic to a polynomial ring over A localized at pi",
+   "date": "2026-10-13",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After inverting pi the quotient by substituted relations f(pi squared s v plus pi cubed w) and g with pi cubed g equal to f is isomorphic to a polynomial ring over A localized at pi",
+   "date": "2026-10-13",
+   "results": "IsLocalization.Away.mvPolynomialQuotientEquiv_apply, IsLocalization.Away.mvPolynomialQuotientEquiv, Algebra.Generators.compLocalizationAwayAlgHom_X_inl, Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero, Algebra.Generators.toAlgHom_ofComp_localizationAway, Algebra.Presentation.relation_comp_localizationAway_inl, Localization.awayEquivAdjoin, Algebra.PreSubmersivePresentation.localizationAway",
+   "verdict": "Ingredients only; no theorem with the stated hypotheses and conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*(equiv|Equiv)|ker.*eval",
+   "date": "2026-10-13",
+   "results": "Mathlib/RingTheory/MvPolynomial/Localization.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean, Mathlib/RingTheory/MvPolynomial/Localization.lean",
+   "verdict": "Ingredients only; no theorem with the stated hypotheses and conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Localization.Away, AlgEquiv",
+   "date": "2026-10-13",
+   "results": "0 hits",
+   "verdict": "Second reading: no direct replacement; quotient equivalences and localization universal properties are ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuDesingularizationQuotientData",
+  "date": "2026-10-13",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Polynomial construction and inverted-quotient steps of the desingularization argument used in step 7 of finite-etale lifting",
+   "via": [
+    "lem-weil-pbc-popescu-desingularization-quotient-data",
+    "lem-weil-pbc-popescu-desingularize",
+    "lem-weil-pbc-popescu-desingularize-strictly-standard",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuDesingularizationInvertedQuotient",
+  "declaration": "Algebra.desingularization_inverted_quotient_equiv",
+  "file": "lean/Sheaf/RingTheory/PopescuDesingularizationInvertedQuotient.lean",
+  "statement": "theorem desingularization_inverted_quotient_equiv (R : Type u) (A : Type w) [CommRing R] [CommRing A] [Algebra R A] (π : R) (n m c : ℕ) (P : Presentation R A (Fin n) (Fin m)) (hc : c ≤ m) (s : Fin n → Fin c → R) (g : Fin c → MvPolynomial (ULift.{w} (Fin c ⊕ Fin n)) R) (hg : ∀ j : Fin c, aeval (R := R) (fun i : Fin n ↦ C π ^ 2 * ∑ k, C (s i k) * X (σ := ULift.{w} (Fin c ⊕ Fin n)) (ULift.up (Sum.inl k)) + C π ^ 3 * X (σ := ULift.{w} (Fin c ⊕ Fin n)) (ULift.up (Sum.inr i))) (P.relation (Fin.castLE hc j)) = C π ^ 3 * g j) : let Q := MvPolynomial (ULift.{w} (Fin c ⊕ Fin n)) R let ξ : Fin n → Q := fun i ↦ C π ^ 2 * ∑ k, C (s i k) * X (ULift.up (Sum.inl k)) + C π ^ 3 * X (ULift.up (Sum.inr i)) let S := Q ⧸ Ideal.span (Set.range g) let K := Ideal.map (Ideal.Quotient.mk (Ideal.span (Set.range g))) (Ideal.span (Set.range (fun j : Fin m ↦ aeval (R := R) ξ (P.relation j)))) Nonempty (Localization.Away (algebraMap R (S ⧸ K) π) ≃ₐ[R] MvPolynomial (Fin c) (Localization.Away (algebraMap R A π)))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-33db4",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T220527-L-1395874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-33db4",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T220527-L-1395874",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compiled successfully, and the direct importer compiled against them; signatures, nodes, reports, proofs, and remaining sorry statements satisfy the review brief."
+ }
+}

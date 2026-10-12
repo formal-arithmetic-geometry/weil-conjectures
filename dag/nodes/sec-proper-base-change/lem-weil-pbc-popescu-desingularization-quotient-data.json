@@ -34,154 +34,65 @@
  ],
  "proof": [
   {
-   "text": "Presentation. By (1) and the definition of strictly standard [def-weil-pbc-strictly-standard-element] there are a presentation [def-weil-pbc-finitely-presented-algebra], i.e. an isomorphism of $R$-algebras $\\theta:R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)\\xrightarrow{\\sim}A$ ($f_j\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring]), and an integer $0\\le c\\le\\min(n,m)$ such that (i) $\\pi=\\sum_{I\\subset\\{1,\\dots,n\\},|I|=c}a_I\\,\\theta\\big(\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}\\big)$ in $A$ for some $a_I\\in A$ ($\\partial/\\partial x_i$ the formal partial derivatives [def-weil-pbc-polynomial-partial-derivative]; $\\theta(P)$ means $\\theta$ of the class of $P$), and (ii) $\\pi f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ in $R[x_1,\\dots,x_n]$ for $j=1,\\dots,m-c$. Write $\\rho$ for the map of (2) and $\\alpha:A\\to\\Lambda$ for the given map; for $y\\in A$ write $\\bar y$ for its class in $A/\\pi^4A$.",
+   "text": "Apply the polynomial substitution construction to obtain a presentation P, the polynomials xi,F,g,e, and the evaluation coefficients. This is steps 1-5 and the ideal-square observation of the original plan.",
    "uses": [
-    "def-weil-pbc-strictly-standard-element",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-polynomial-partial-derivative"
+    "lem-weil-pbc-popescu-desingularization-substitution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1682-1691 (choice of the presentation and of c with (equation-strictly-standard-one) and (equation-star))"
-   }
+   "elementary": false
   },
   {
-   "text": "Translation of the variables (Stacks: 'we can replace $x_i$ by $x_i-r_i$'). Choose $r_i\\in R$ with $\\rho(\\overline{\\theta(x_i)})=r_i\\bmod\\pi^4$ ($R/\\pi^4R$ is a quotient of $R$). Let $\\sigma$ be the $R$-algebra endomorphism of $R[x_1,\\dots,x_n]$ with $\\sigma(x_i)=x_i+r_i$ [def-weil-pbc-mv-polynomial-ring]; it is an automorphism with inverse $x_i\\mapsto x_i-r_i$ (the composites fix every $x_i$, so are the identity by the uniqueness in the universal property). Put $f'_j=\\sigma(f_j)$. Then $\\sigma$ maps the ideal $(f_1,\\dots,f_m)$ onto $(f'_1,\\dots,f'_m)$ and induces an isomorphism $\\bar\\sigma:R[x]/(f)\\to R[x]/(f')$, so $\\theta'=\\theta\\circ\\bar\\sigma^{-1}:R[x]/(f')\\to A$ is again a presentation, with $\\theta'(P)=\\theta(\\sigma^{-1}P)$, hence $\\theta'(\\sigma Q)=\\theta(Q)$ for all $Q$, and $\\theta'(x_i)=\\theta(x_i)-r_i$, so $\\rho(\\overline{\\theta'(x_i)})=0$. Derivatives: $\\partial(\\sigma Q)/\\partial x_i=\\sigma(\\partial Q/\\partial x_i)$ for all $Q$. Indeed $D_1=\\partial_i\\circ\\sigma$ and $D_2=\\sigma\\circ\\partial_i$ are $R$-linear and both satisfy $D(PQ)=\\sigma(P)D(Q)+\\sigma(Q)D(P)$ (Leibniz rule of [def-weil-pbc-polynomial-partial-derivative] and multiplicativity of $\\sigma$); $D_1(1)=D_2(1)=0$ and $D_1(x_k)=\\partial(x_k+r_k)/\\partial x_i=\\delta_{ik}=\\sigma(\\delta_{ik})=D_2(x_k)$; by induction on the degree they agree on all monomials, hence everywhere by $R$-linearity. Therefore $\\theta'\\big(\\det(\\partial f'_j/\\partial x_i)_{j\\le c,i\\in I}\\big)=\\theta'\\big(\\sigma\\det(\\partial f_j/\\partial x_i)_{j\\le c,i\\in I}\\big)=\\theta\\big(\\det(\\partial f_j/\\partial x_i)_{j\\le c,i\\in I}\\big)$ ($\\sigma$ is a ring map and the determinant a polynomial in the entries), so (i) holds for $(f',\\theta')$ with the same $a_I$; applying $\\sigma$ to a relation $\\pi f_{c+j}=\\sum_{k\\le c}a_kf_k+\\sum_{l\\le l'}b_{ll'}f_lf_{l'}$ gives (ii) for $f'$. From now on we write $f_j,\\theta$ for $f'_j,\\theta'$ and $x_i$ also for $\\theta(x_i)\\in A$; thus $\\rho(\\bar x_i)=0$ for all $i$. Consequences: (a) $\\rho\\circ(A\\to A/\\pi^4A)$ is an $R$-algebra map $A\\to R/\\pi^4R$ killing every $x_i$, so it sends $\\theta(P)$ to $P(0)\\bmod\\pi^4$ for every $P\\in R[x]$ (both are $R$-algebra maps $R[x]\\to R/\\pi^4R$ agreeing on the $x_i$); applied to $\\theta(f_j)=0$ this gives $f_j(0)\\in\\pi^4R$. (b) By the compatibility in (2), the class of $\\alpha(x_i)$ in $\\Lambda/\\pi^4\\Lambda$ is the image of $\\rho(\\bar x_i)=0$, so $\\alpha(x_i)=\\pi^4\\lambda_i$ for some $\\lambda_i\\in\\Lambda$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-polynomial-partial-derivative",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-strictly-standard-element"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1692-1697 ('Say rho maps x_i to the class of r_i ... A -> Lambda maps x_i to pi^4 lambda_i')"
-   }
-  },
-  {
-   "text": "Linear terms and the unit $u$. Let $r_{ji}\\in R$ be the coefficient of $x_i$ in $f_j$; write $f_j=f_j(0)+\\sum_{i=1}^nr_{ji}x_i+Q_j$ with $Q_j$ a sum of monomials of degree $\\ge2$, i.e. $Q_j\\in(x_1,\\dots,x_n)^2$. By the explicit formula of [def-weil-pbc-polynomial-partial-derivative] the constant term of $\\partial f_j/\\partial x_i$ is $r_{ji}$ (a monomial $rx^e$ contributes a constant only if $e$ is the $i$-th unit vector). Apply $\\rho$ to (i): by Step 2(a), $\\rho(\\bar\\pi)=\\pi\\bmod\\pi^4$ and $\\rho$ sends the image of $\\det(\\partial f_j/\\partial x_i)_{j\\le c,i\\in I}$ to $\\det(r_{ji})_{j\\le c,i\\in I}\\bmod\\pi^4$; choosing $r_I\\in R$ with $\\rho(\\bar a_I)=r_I\\bmod\\pi^4$ we get $\\pi=\\sum_{|I|=c}r_I\\det(r_{ji})_{j=1,\\dots,c,\\ i\\in I}+\\pi^4t$ for some $t\\in R$. Put $u=1-\\pi^3t\\in1+\\pi^3R$; then $u\\pi=\\sum_{|I|=c}r_I\\det(r_{ji})_{j\\le c,\\,i\\in I}$.",
-   "uses": [
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1697-1714 ('Write f_j = f_j(0) + sum r_ji x_i + h.o.t. ... for some u in 1 + pi^3 R')"
-   }
-  },
-  {
-   "text": "The matrix $(s_{ik})$. Let $M$ be the $n\\times c$ matrix over $R$ with entries $M_{ij}=r_{ji}$ ($1\\le i\\le n$, $1\\le j\\le c$); $n\\ge c$. For $I\\subset\\{1,\\dots,n\\}$, $|I|=c$, the submatrix $M_I$ of the rows with index in $I$ is the transpose of $(r_{ji})_{j\\le c,i\\in I}$, so $\\det M_I=\\det(r_{ji})_{j\\le c,i\\in I}$ (a determinant equals that of its transpose). By Step 3, $u\\pi$ lies in the ideal generated by the $c\\times c$ minors of $M$, so by [lem-weil-pbc-matrix-left-inverse-minors](1) there is a $c\\times n$ matrix $S'$ with $S'M=u\\pi\\cdot1_{c\\times c}$. With $s_{ik}=S'_{ki}$ this reads $\\sum_{i=1}^nr_{ji}s_{ik}=u\\pi\\,\\delta_{jk}$ for all $j,k=1,\\dots,c$.",
-   "uses": [
-    "lem-weil-pbc-matrix-left-inverse-minors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1715-1722 (Algebra, Lemma 07DQ, lemma-matrix-left-inverse)"
-   }
-  },
-  {
-   "text": "The elements $h_i$, $g_j$, $\\varphi_j$. Let $P=R[x_1,\\dots,x_n,v_1,\\dots,v_c,w_1,\\dots,w_n]$ and $\\xi_i=\\pi^2\\sum_{k=1}^cs_{ik}v_k+\\pi^3w_i\\in R[v,w]$, $h_i=x_i-\\xi_i\\in P$. (a) Elimination: the $R$-algebra map $\\epsilon:P\\to R[v,w]$, $x_i\\mapsto\\xi_i$, $v\\mapsto v$, $w\\mapsto w$ [def-weil-pbc-mv-polynomial-ring], is surjective with kernel $(h_1,\\dots,h_n)$: it kills the $h_i$, and $F-\\epsilon(F)\\in(h_1,\\dots,h_n)$ for every $F\\in P$ (true for $x_i$, $v_k$, $w_i$, and the set of such $F$ is closed under sums and products since $FG-\\epsilon(F)\\epsilon(G)=F(G-\\epsilon G)+\\epsilon(G)(F-\\epsilon F)$); hence $P/(h)\\cong R[v,w]$, and for every $F\\in R[x]$, $F-F(\\xi)\\in(h)$. (b) Computation of $f_j(\\xi)=\\epsilon(f_j)$: since $\\xi_i\\in\\pi^2R[v,w]$, $Q_j(\\xi)\\in(\\xi_1,\\dots,\\xi_n)^2\\subset\\pi^4R[v,w]$, and $f_j(0)\\in\\pi^4R$ (Step 2(a)); hence $f_j(\\xi)\\equiv\\sum_ir_{ji}\\xi_i=\\pi^2\\sum_{k=1}^c\\big(\\sum_ir_{ji}s_{ik}\\big)v_k+\\pi^3\\sum_ir_{ji}w_i\\pmod{\\pi^4R[v,w]}$. For $j\\le c$, Step 4 gives $\\pi^2\\sum_k(\\sum_ir_{ji}s_{ik})v_k=u\\pi^3v_j=\\pi^3v_j+(u-1)\\pi^3v_j$ with $(u-1)\\pi^3\\in\\pi^6R$; so $f_j(\\xi)=\\pi^3\\big(v_j+\\sum_ir_{ji}w_i\\big)+\\pi^4e_j$ for some $e_j\\in R[v,w]$. Put $g_j=v_j+\\sum_{i=1}^nr_{ji}w_i+\\pi e_j\\in R[v,w]\\subset P$ ($j=1,\\dots,c$). Then $f_j(\\xi)=\\pi^3g_j$ in $R[v,w]$, $g_j\\equiv v_j+\\sum_ir_{ji}w_i\\pmod\\pi$, and by (a) $f_j-\\pi^3g_j\\in(h_1,\\dots,h_n)$ in $P$. (c) For every $j$ (in particular $j>c$) each term of $f_j(0)+\\sum_ir_{ji}\\xi_i+Q_j(\\xi)$ lies in $\\pi^2R[v,w]$, so $f_j(\\xi)=\\pi^2\\varphi_j$ for some $\\varphi_j\\in R[v,w]$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1723-1754 (the h_i, 'without further mention', the computation of f_j mod pi^4 and the choice of g_j)"
-   }
-  },
-  {
-   "text": "The algebra $B$ and the factorization. Put $B=P/(f_1,\\dots,f_m,h_1,\\dots,h_n,g_1,\\dots,g_c)$: $2n+c$ variables and $m+n+c$ relations, so $B$ is of finite presentation over $R$ [def-weil-pbc-finitely-presented-algebra]. The $R$-algebra map $R[x]\\to B$, $x_i\\mapsto x_i$, kills the $f_j$ and so gives $A\\cong R[x]/(f)\\to B$. Define the $R$-algebra map $P\\to\\Lambda$ [def-weil-pbc-mv-polynomial-ring] by $x_i\\mapsto\\pi^4\\lambda_i=\\alpha(x_i)$ (Step 2(b)), $v_k\\mapsto0$, $w_i\\mapsto\\pi\\lambda_i$. It kills $f_j$ (the image is $f_j(\\alpha(x_1),\\dots,\\alpha(x_n))=\\alpha(\\theta(f_j))=0$) and $h_i$ (image $\\pi^4\\lambda_i-0-\\pi^3\\pi\\lambda_i=0$). Let $t_j$ be the image of $g_j$. As $f_j-\\pi^3g_j\\in(h)$ (Step 5(b)), $\\pi^3t_j=0$; as $g_j=v_j+\\sum_ir_{ji}w_i+\\pi e_j$, $t_j=\\pi\\sum_ir_{ji}\\lambda_i+\\pi e_j(0,\\pi\\lambda)=\\pi\\mu_j$ with $\\mu_j\\in\\Lambda$, so $\\pi^4\\mu_j=0$. From $\\mathrm{Ann}_\\Lambda(\\pi)=\\mathrm{Ann}_\\Lambda(\\pi^2)$ one gets $\\mathrm{Ann}_\\Lambda(\\pi^k)=\\mathrm{Ann}_\\Lambda(\\pi)$ for all $k\\ge1$ by induction (if $\\pi^{k+1}y=0$ then $\\pi^{k-1}y\\in\\mathrm{Ann}(\\pi^2)=\\mathrm{Ann}(\\pi)$, so $\\pi^ky=0$); so $\\pi\\mu_j=0$, i.e. $t_j=0$. Hence $P\\to\\Lambda$ factors through $\\beta:B\\to\\Lambda$. The composite $A\\to B\\to\\Lambda$ sends $x_i$ to $\\pi^4\\lambda_i=\\alpha(x_i)$; since $A$ is generated by the $x_i$ as an $R$-algebra, it equals $\\alpha$.",
+   "text": "Construct S=Q/(g) and K as the image of (F). Finite polynomial variable and relation families give finite presentation of S and S/K. Apply Ideal.map to (F)⊆(pi^2) and (pi)(F)⊆(g)+(F)^2 to prove K⊆(pi^2) and (pi)K⊆K^2. The map from the presentation polynomial ring to S/K kills all relations, hence descends along its surjection to a map aB:A→S/K.",
    "uses": [
     "def-weil-pbc-finitely-presented-algebra",
     "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1755-1772 ('We set B = ... Thus we are done if we can prove the statement about smoothness')"
-   }
+   "elementary": false
   },
   {
-   "text": "$B_\\pi$ is smooth over $R$. In $P/(f,h)$ we have $\\pi^3g_j=f_j-(f_j-\\pi^3g_j)=0$ for $j\\le c$ (Step 5(b)), so $g_j/1=0$ in $(P/(f,h))_\\pi$ and, by [lem-weil-pbc-localization-quotient-commute] (with the ideal generated by the $g_j$), $B_\\pi\\cong(P/(f,h))_\\pi$. Next $P/(f)\\cong A[v,w]$, the polynomial ring over $A\\cong R[x]/(f)$ (both have the universal property of $R$-algebra maps out of $R[x,v,w]$ killing the $f_j$), so $P/(f,h)\\cong A[v,w]/(\\bar h_1,\\dots,\\bar h_n)$ with $\\bar h_i=x_i-\\pi^2\\sum_ks_{ik}v_k-\\pi^3w_i$, and by [lem-weil-pbc-localization-quotient-commute] again, together with $A[v,w]_\\pi=A_\\pi[v,w]$ (same universal property), $(P/(f,h))_\\pi\\cong A_\\pi[v,w]/(\\bar h)$. In $A_\\pi[v,w]$, $\\bar h_i=-\\pi^3(w_i-\\zeta_i)$ with $\\zeta_i=\\pi^{-3}(x_i-\\pi^2\\sum_ks_{ik}v_k)\\in A_\\pi[v]$ and $\\pi^3$ a unit, so $(\\bar h)=(w_1-\\zeta_1,\\dots,w_n-\\zeta_n)$, and by the elimination argument of Step 5(a) $A_\\pi[v,w]/(w_i-\\zeta_i)\\cong A_\\pi[v_1,\\dots,v_c]$. Thus $B_\\pi\\cong A_\\pi[v_1,\\dots,v_c]$ as $R$-algebras. Since $\\pi$ is strictly standard in $A$ over $R$ (1), $A_\\pi$ is smooth over $R$ [lem-weil-pbc-strictly-standard-localization-smooth]; $A_\\pi\\to A_\\pi[v_1,\\dots,v_c]$ is smooth [lem-weil-pbc-polynomial-ring-smooth]; so $R\\to A_\\pi[v]$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition](2), and so is the isomorphic $R$-algebra $B_\\pi$ [def-weil-pbc-smooth-ring-map]. Consequently $R\\to B$ is smooth at every prime $\\mathfrak q\\subset B$ with $\\pi\\notin\\mathfrak q$ (take $g=\\pi$ in [def-weil-pbc-singular-ideal]).",
+   "text": "Evaluate v at zero and w_i at pi lambda_i. This sends xi_i to alpha(P.val_i), and therefore kills each F_j. For j<c, pi^3 times the evaluation of g_j is zero. The affine formula for g_j shows that its evaluation is pi times an explicit element t. Apply Ann(pi)=Ann(pi^2) successively to t pi^2, t pi, and t to reduce t pi^4=0 to t pi=0. Evaluation consequently kills both (g) and K, so descends to beta:S/K→Lambda. Check beta aB=alpha on the surjective presentation map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The inverted quotient is A_pi[v] by the inverted-quotient equivalence. Strictly standard localization is smooth; a finite polynomial ring is smooth; smoothness composes and transports along the inverse R-algebra equivalence. This proves (S/K)_pi is smooth.",
    "uses": [
-    "lem-weil-pbc-localization-quotient-commute",
+    "lem-weil-pbc-popescu-desingularization-inverted-quotient",
     "lem-weil-pbc-strictly-standard-localization-smooth",
     "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-singular-ideal"
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1774-1779 ('Note that B_pi = A_pi[v_1,...,v_c] ... see Lemma 07CA (lemma-elkik)')"
-   }
+   "elementary": false
   },
   {
-   "text": "The algebra $B'$ and $B$ as its quotient. Put $B'=R[v_1,\\dots,v_c,w_1,\\dots,w_n]/(g_1,\\dots,g_c)$, of finite presentation over $R$ [def-weil-pbc-finitely-presented-algebra]. By Step 5(a), $B=P/(f,h,g)\\cong R[v,w]/(f_1(\\xi),\\dots,f_m(\\xi),g_1,\\dots,g_c)$, and since $f_j(\\xi)=\\pi^3g_j$ for $j\\le c$ (Step 5(b)) this is $B'/K$ with $K=(\\tilde f_{c+1},\\dots,\\tilde f_m)$, $\\tilde f_l$ the class of $f_l(\\xi)$ in $B'$; the surjection $B'\\to B$ is $v\\mapsto v$, $w\\mapsto w$. Also $\\tilde f_l=\\pi^2\\tilde\\varphi_l$ (Step 5(c)). Applying the substitution $x\\mapsto\\xi$ (an $R$-algebra map) to (ii), written as $\\pi f_{c+j}=\\sum_{k\\le c}a_{jk}f_k+\\sum_{l\\le l'}b_{jll'}f_lf_{l'}$ ($a,b\\in R[x]$; $(f)^2$ is generated by the products $f_lf_{l'}$), and using $f_k(\\xi)=\\pi^3g_k=0$ in $B'$ for $k\\le c$, we get in $B'$: $\\pi\\tilde f_{c+j}=\\sum_{c<l\\le l'}b_{jll'}(\\xi)\\tilde f_l\\tilde f_{l'}$ for $j=1,\\dots,m-c$. Consequently K is contained in the principal ideal (π²), and (π)K is contained in K². Both S=B′ and S/K=B are finitely presented; an ULift preserves their algebra structures, presentations and localization properties and puts S in Type(max u w).",
+   "text": "At a prime q of S containing pi, use the naive pre-submersive presentation of S with selected v variables. After quotienting by q, its derivative matrix is the identity, since g_j=v_j+sum r_ji w_i+pi e_j. Its determinant d therefore avoids q. Compose this presentation with the standard presentation of localization at d. Its Jacobian is the product of the two unit images of d, so Mathlib gives standard smoothness, hence smoothness of S_d. This directly witnesses IsSmoothAtPrime R q, including c=0. Smooth algebras are flat. Regard S_q as the further localization of S_d, since powers of d lie in the prime complement; localization is flat, and transitivity proves Module.Flat R S_q. This replaces the fibre-dimension route below the unit level.",
    "uses": [
-    "def-weil-pbc-finitely-presented-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1781-1795 (B', 'B_q is the quotient of B'_{q'} by the ideal generated by f_{c+j}', the two observations)"
-   }
-  },
-  {
-   "text": "$R\\to B'$ is smooth, and flat, at every prime $\\mathfrak q'\\subset B'$ with $\\pi\\in\\mathfrak q'$. Let $\\mathfrak p\\subset R$ be the inverse image of $\\mathfrak q'$, so $\\pi\\in\\mathfrak p$, $\\kappa(\\mathfrak p)$ its residue field and $F=B'\\otimes_R\\kappa(\\mathfrak p)$ the fibre ring [def-weil-pbc-localization-at-prime], $\\mathfrak Q\\subset F$ the prime corresponding to $\\mathfrak q'$. By [lem-weil-pbc-presentation-base-change] (with $R'=\\kappa(\\mathfrak p)$), $F\\cong\\kappa(\\mathfrak p)[v,w]/(\\bar g_1,\\dots,\\bar g_c)$ with $\\bar g_j$ the image of $g_j$ under coefficient reduction; as $\\pi\\mapsto0$ in $\\kappa(\\mathfrak p)$, $\\bar g_j=v_j+\\sum_i\\bar r_{ji}w_i$. With the variables ordered $(v_1,\\dots,v_c,w_1,\\dots,w_n)$, $N=n+c\\ge c$, we have $\\det(\\partial\\bar g_j/\\partial v_k)_{j,k\\le c}=\\det(1_c)=1$, a unit; so this is a standard smooth presentation of $F$ over $\\kappa(\\mathfrak p)$ of relative dimension $n$ [def-weil-pbc-standard-smooth-algebra]. Hence (a) $\\dim_{\\mathfrak Q}\\operatorname{Spec}F=N-c=n$ [lem-weil-pbc-standard-smooth-over-field-dimension-at-points] (the dimension of the scheme $\\operatorname{Spec}F$ at $\\mathfrak Q$ of [def-kun-dimension] is by definition that of the topological space $\\operatorname{Spec}F$ at $\\mathfrak Q$ of [def-kun-topological-dimension-at-point]); (b) $F$ is smooth over $\\kappa(\\mathfrak p)$ [lem-weil-pbc-standard-smooth-is-smooth], so $\\kappa(\\mathfrak p)\\to F$ is smooth at $\\mathfrak Q$ ($g=1$ in [def-weil-pbc-singular-ideal]). As $B'=R[y_1,\\dots,y_N]/(g_1,\\dots,g_c)$ with $N-c=n$, (a) and [lem-weil-pbc-equation-count-fibre-dimension-flat] show that $R_{\\mathfrak p}\\to B'_{\\mathfrak q'}$ is flat and that $B'_{\\mathfrak q'}$ is a flat $R$-module [def-weil-pbc-flat-ring-map]. Then [lem-weil-pbc-flat-smooth-fibre-smooth-at-prime], with (1) $B'$ finitely presented ($g=1$), (2) this flatness, (3) = (b), shows that $R\\to B'$ is smooth at $\\mathfrak q'$: there is $g'\\in B'\\setminus\\mathfrak q'$ with $B'_{g'}$ smooth over $R$.",
-   "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-presentation-base-change",
     "def-weil-pbc-standard-smooth-algebra",
-    "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
-    "def-kun-dimension",
-    "def-kun-topological-dimension-at-point",
     "lem-weil-pbc-standard-smooth-is-smooth",
     "def-weil-pbc-singular-ideal",
-    "lem-weil-pbc-equation-count-fibre-dimension-flat",
     "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime"
+    "def-weil-pbc-localization-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1781-1788 ('B'/pi B' = R/pi R[w_1,...,w_n]. Hence R -> B' is smooth of relative dimension n at every point of V(pi) by Algebra, Lemmas 00ST and 00TF')"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strictly-standard-element",
+  "lem-weil-pbc-popescu-desingularization-substitution",
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-pbc-polynomial-partial-derivative",
-  "lem-weil-pbc-matrix-left-inverse-minors",
-  "lem-weil-pbc-localization-quotient-commute",
+  "lem-weil-pbc-popescu-desingularization-inverted-quotient",
   "lem-weil-pbc-strictly-standard-localization-smooth",
   "lem-weil-pbc-polynomial-ring-smooth",
   "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "def-weil-pbc-smooth-ring-map",
-  "def-weil-pbc-singular-ideal",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-presentation-base-change",
   "def-weil-pbc-standard-smooth-algebra",
-  "lem-weil-pbc-standard-smooth-over-field-dimension-at-points",
-  "def-kun-dimension",
-  "def-kun-topological-dimension-at-point",
   "lem-weil-pbc-standard-smooth-is-smooth",
-  "lem-weil-pbc-equation-count-fibre-dimension-flat",
+  "def-weil-pbc-singular-ideal",
   "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-flat-smooth-fibre-smooth-at-prime"
+  "def-weil-pbc-localization-at-prime"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize); local Jacobian realization via Mathlib pre-submersive presentations, written by V1"
  },
  "mathlib_searches": [
   {
@@ -251,11 +162,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-33db4",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T184240-L-3994880",
+  "landing": "20261012T220527-L-1395874",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files compiled successfully, and the direct importer compiled against them; signatures, nodes, reports, proofs, and remaining sorry statements satisfy the review brief."
  }
 }
