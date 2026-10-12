@@ -15,41 +15,55 @@
  ],
  "proof": [
   {
-   "text": "Project each finite stalk product onto the factor at a specified source point. Lift an element by zero in the remaining factors and retain its annihilating power or invertible integer. Extend separably closed points purely inseparably to algebraic closures without changing geometric stalks.",
+   "text": "Prove finite_lowerStar_torsion: embed every algebraically closed direct-image stalk into the finite product of source stalks using Etale.stalkIsoPi and stalkRestrict. Each coordinate has finite additive order by the torsion characterization. IsOfFinAddOrder.pi and injectivity give torsion of the direct-image stalk, and the characterization gives torsion of the direct-image abelian sheaf.",
    "uses": [
     "lemma-weil-pbc-finite-stalk-formula",
-    "def-weil-pbc-primary-torsion"
+    "lem-weil-pbc-torsion-sheaf-characterizations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
-   }
+   "elementary": false
   },
   {
-   "text": "The standard equivalence Ab with Mod(ULift Z) commutes with inverse image and retains finite local trivializations. Finitely generated torsion Z-modules are finite, so it identifies the module and abelian constructibility predicates on the same strata. Apply the existing abelian constructibility descent; torsion of the direct image follows from finite products and the stalk characterization.",
+   "text": "Prove finite_counit_epi for arbitrary module coefficients. At an algebraically closed source point the restriction map is the finite product projection under stalkIsoPi, hence epi; stalkRestrict_eq_counit gives an epi counit stalk. The conservative family of universe-lifted algebraic-closure points jointly reflects epimorphisms. Transport along uliftSheafFiberIso by naturality to show the counit is epi. At every separably closed point its stalk is then epi, hence surjective in ModuleCat: the sheaf fiber is left adjoint to the skyscraper sheaf functor, so preserves epimorphisms. This avoids any separate algebraic-closure comparison of separably closed stalks.",
    "uses": [
-    "lem-weil-pbc-finite-pushforward-constructible-descent",
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "lemma-weil-pbc-finite-stalk-formula"
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-counit-stalk-germ-restriction",
+    "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Etale Cohomology, Section 03SB, Lemma 0A5D (lemma-finite-pushforward-statements); its proof uses Proposition 03QP (vanishing of R^qf_* for finite f), the Leray spectral sequence (Cohomology on Sites, Lemma 0733 sites-cohomology-lemma-apply-Leray) and Lemma 0959 (finite pushforward commutes with base change)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Changing canonical integral coefficients commutes definitionally with lowerStar. Lift a source stalk element through the surjective counit stalk from the preceding step. Use upperStarCompSheafFiberIso to identify its preimage with a direct-image stalk element. Apply the primary-torsion hypothesis to obtain a power of p annihilating that element; injectivity of the stalk isomorphism and additivity of the counit stalk give the same annihilator on the original element. This treats p=0 and p=1 without primality assumptions. The identical argument transports a positive invertible integer, proving the invertible-order clause.",
+   "uses": [
+    "def-weil-pbc-primary-torsion",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use isConstructibleSheaf_integral_iff for the torsion direct-image abelian sheaf from step 1 to convert the module constructibility hypothesis. Apply CurveCoefficientPair.isConstructible_of_finite_pushforward, then the reverse integral comparison for P.F and P.isTorsion. Assemble the three clauses into the required conjunction.",
+   "uses": [
+    "q1-constructible-integral-coefficients",
+    "lem-weil-pbc-finite-pushforward-constructible-descent"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-weil-pbc-counit-stalk-germ-restriction",
+  "lemma-weil-pbc-geometric-stalk-conservative",
   "def-weil-pbc-primary-torsion",
-  "lem-weil-pbc-finite-pushforward-constructible-descent",
-  "lem-weil-pbc-torsion-sheaf-characterizations"
+  "lemma-openclosed-stalk-upperstar",
+  "q1-constructible-integral-coefficients",
+  "lem-weil-pbc-finite-pushforward-constructible-descent"
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "R1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0A5D; coefficient-category transport made explicit in Lean"
+  "place": "Lemma 0A5D; finite stalk formula and counit epimorphism, followed by the existing integral constructibility comparison and abelian descent."
  },
  "mathlib_searches": [
   {
@@ -131,10 +145,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T044743-L-2034810",
-  "kind": "interface",
+  "landing": "20261012T112848-L-771157",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
