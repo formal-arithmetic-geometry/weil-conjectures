@@ -7441,3 +7441,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDual (stage 3; reviewer PASS; first push; landing 20261012T110327-L-625402 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:07 L: returned deliver/C3/Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexIsIso (reviewer RETURN: (the landing tools, head 900b3ba97) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 11:07 L: returned deliver/K3/Sheaf.RingTheory.FiniteGabberSectionModel (reviewer RETURN: (the landing tools, head 4aeb7dc9f) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
+- 11:07 L: returned deliver/T1/Sheaf.Topology.DirectedInjectiveDerivedSectionsAcyclic (reviewer RETURN: (the landing tools, head af7476877) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Top)
