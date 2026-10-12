@@ -11,6 +11,9 @@ public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 public import Mathlib.Topology.LocallyConstant.Basic
 
+import Sheaf.FieldTheory.MatrixDescentScalarMapBijective
+import Sheaf.FieldTheory.MatrixFormCentralSimple
+
 /-!
 # Descent of a locally constant projective matrix action
 
@@ -75,6 +78,25 @@ theorem exists_CSA_of_matrix_descent_action (K : Type u) [Field K]
         Matrix (Fin n) (Fin n) (SeparableClosure K)),
       ∀ (g : SeparableClosure K ≃ₐ[K] SeparableClosure K) (a : A),
         (e (1 ⊗ₜ[K] a)).map g =
-          ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val := by sorry
+          ((b g)⁻¹).val * e (1 ⊗ₜ[K] a) * (b g).val := by
+  classical
+  let S := matrixDescentInvariants K n b
+  let e := AlgEquiv.ofBijective (matrixDescentScalarMap K n b)
+    (matrixDescentScalarMap_bijective K n b hb h1 hm)
+  obtain ⟨hcentral, hsimple, hfinite⟩ := centralSimple_of_matrix_form K
+    (SeparableClosure K) S n hn e
+  let A : CSA.{u, u} K :=
+    { toAlgCat := AlgCat.of K S
+      isCentral := hcentral
+      isSimple := hsimple
+      fin_dim := hfinite }
+  refine ⟨A, e, ?_⟩
+  intro g a
+  change ((matrixDescentScalarMap K n b) (1 ⊗ₜ[K] a)).map g =
+    ((b g)⁻¹).val * (matrixDescentScalarMap K n b) (1 ⊗ₜ[K] a) * (b g).val
+  rw [matrixDescentScalarMap_one_tmul]
+  have ha := a.property g
+  have h := congrArg (fun M ↦ ((b g)⁻¹).val * M * (b g).val) ha
+  simpa [mul_assoc] using h
 
 end Field

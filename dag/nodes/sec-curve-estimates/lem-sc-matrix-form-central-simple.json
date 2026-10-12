@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-matrix-form-central-simple",
+ "kind": "statement",
+ "title": "Central simplicity and finite dimensionality descend from a matrix form",
+ "statement": "Let K and L be fields with a K-algebra structure on L, and let A be a unital associative K-algebra. Let n be a nonzero natural number and suppose e:L tensor_K A ≃ Mat_n(L) is an L-algebra equivalence. Then A is central over K, its ring is simple, and A is finite dimensional over K. No Galois or algebraicity hypothesis on L/K is needed.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R2, implication (4) to (1), generalized to any field extension; parent step 3"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The nonzero size makes Mat_n(L) nontrivial and simple. Transfer simplicity and finite dimensionality over L along the equivalence e. The inclusion A → L tensor_K A shows A is nontrivial. Module.Finite.of_finite_tensorProduct_of_faithfullyFlat descends finite dimensionality to K.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For x central in A, Algebra.TensorProduct.includeRight_map_center_le shows 1 tensor x is central in L tensor_K A. Under e it is a scalar matrix, by Algebra.IsCentral.mem_center_iff and the matrix centrality instance. Therefore 1 tensor x = l tensor 1 for some l in L. Module.Projective.exists_dual_eq_one gives a K-linear functional f on L with f(1)=1. Applying f tensor id and the left-unit tensor equivalence gives x=f(l) times 1. Thus the center is contained in the scalar subalgebra, which is precisely Algebra.IsCentral K A.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use isSimpleRing_iff_isTwoSided_imp. For a two-sided ideal I, either I=top, or A/I is nontrivial by Ideal.Quotient.nontrivial_iff. In the latter case L tensor_K (A/I) is nontrivial by faithful flatness. The scalar extension of Ideal.Quotient.mkₐ K I has simple domain L tensor_K A, so RingHom.injective makes it injective. Module.FaithfullyFlat.lTensor_injective_iff_injective reflects injectivity to the quotient map. Its kernel is I; RingHom.injective_iff_ker_eq_bot and Ideal.Quotient.mkₐ_ker show I=bot.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R2, implication (4) to (1), generalized to any field extension; parent step 3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If scalar extension of an algebra to a field is a matrix algebra, then the original algebra is finite dimensional central simple",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If scalar extension of a K algebra to a field L is a nonempty matrix algebra, then A is central simple and finite dimensional",
+   "results": "CSA; CSA.fin_dim; CSA.toAlgCat; CSA.isCentral; CSA.isSimple; Algebra.IsCentral.instIsAzumaya; CSA.mk.inj; IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed",
+   "date": "2026-10-13",
+   "verdict": "No exact match; relevant construction tools read and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|descent|IsCentral|IsSimpleRing",
+   "results": "Mathlib/Algebra/Central/TensorProduct.lean; Mathlib/Algebra/Central/TensorProduct.lean; Mathlib/Algebra/Central/TensorProduct.lean; Mathlib/Algebra/Central/TensorProduct.lean; Mathlib/Algebra/Central/TensorProduct.lean; Mathlib/Algebra/Central/End.lean; Mathlib/Algebra/Central/End.lean; Mathlib/Algebra/Central/End.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; relevant construction tools read and used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsCentral, TensorProduct",
+   "results": "Second reading: Algebra.IsCentral.left_of_tensor; Algebra.IsCentral.right_of_tensor; Algebra.IsCentral.left_of_tensor_of_field; Algebra.IsCentral.right_of_tensor_of_field",
+   "date": "2026-10-13",
+   "verdict": "No exact match. Tensor centrality descent requires centrality over K, whereas the matrix form is central over L."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.ProjectiveMatrixDescent",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-scalar-defect-surjective-crossed-product-realization",
+   "place": "Tag 03R2, implication (4) to (1), generalized to any field extension; parent step 3",
+   "via": [
+    "lem-sc-projective-matrix-descent",
+    "new-crossed-product-for-cocycle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.MatrixFormCentralSimple",
+  "file": "lean/Sheaf/FieldTheory/MatrixFormCentralSimple.lean",
+  "declaration": "Field.centralSimple_of_matrix_form",
+  "statement": "theorem centralSimple_of_matrix_form (K : Type u) [Field K]\n    (L : Type v) [Field L] [Algebra K L]\n    (A : Type w) [Ring A] [Algebra K A]\n    (n : ℕ) (hn : n ≠ 0)\n    (e : (L ⊗[K] A) ≃ₐ[L] Matrix (Fin n) (Fin n) L) :\n    Algebra.IsCentral K A ∧ IsSimpleRing A ∧ FiniteDimensional K A",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T205633-L-933416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T205633-L-933416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

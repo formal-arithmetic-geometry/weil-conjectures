@@ -1,0 +1,144 @@
+{
+ "id": "lem-sc-matrix-descent-scalar-map-bijective",
+ "kind": "statement",
+ "title": "Bijectivity of scalar extension of twisted Galois matrix invariants",
+ "statement": "Let K be a field, S its separable closure, n any natural number and b:Gal(S/K) → GL_n(S) locally constant for the Krull topology. Put T_g(M)=b(g) g(M) b(g) inverse. Assume T_1(M)=M and T_g(T_h(M))=T_(gh)(M) for all g,h,M. Then the explicit multiplication map S tensor_K A_b → Mat_n(S) of [def-sc-matrix-descent-invariants] is bijective. There is no positivity assumption on n and no central simplicity assertion.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R6, Galois forms of matrix algebras; finite Galois descent expanded from parent steps 1 and 2"
+ },
+ "stmt_deps": [
+  "def-sc-matrix-descent-invariants"
+ ],
+ "proof": [
+  {
+   "text": "Compactness of Gal(S/K) and local constancy give a finite image for b and an open normal subgroup N on whose cosets b is constant. Intersect N with open normal subgroups fixing all entries in the finitely many values of b and their inverses. Put L=S^N. It is finite Galois over K, and all b-values have entries in L.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The identity law says b(1) commutes with every matrix. Thus for g in N, b(g)=b(1) and T_g(M)=g(M). An invariant matrix has entries in L. On Mat_n(L) the given action factors through Gamma=Gal(L/K), since T_g acts trivially for g in N. Its invariant K-subalgebra is exactly A_b of [def-sc-matrix-descent-invariants].",
+   "uses": [
+    "def-sc-matrix-descent-invariants"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For v in Mat_n(L) and a in L, sum g(a)T_g(v) over Gamma. Semilinearity and the action law imply that applying T_h reindexes by g ↦ hg, so this sum is invariant. If the L-span of invariant vectors were proper, a nonzero L-linear functional lambda would annihilate it. For each fixed v the sum of lambda(T_g(v)) g(a) vanishes for all a. Independence of distinct automorphisms implies all coefficients vanish, in particular lambda(v)=0 because T_1=id. This contradicts lambda being nonzero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Select an L-basis consisting of invariant vectors. If a linear combination is invariant, uniqueness of its coefficients forces each coefficient to be fixed by Gamma, hence in K. Therefore the same family is a K-basis of A_b. Multiplication L tensor_K A_b → Mat_n(L) sends the extended basis to that basis. Extending scalars to S proves bijectivity of the explicit map in [def-sc-matrix-descent-invariants]. For n=0 both source and target are zero, and the empty basis gives the same conclusion.",
+   "uses": [
+    "def-sc-matrix-descent-invariants"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-matrix-descent-invariants"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R6, Galois forms of matrix algebras; finite Galois descent expanded from parent steps 1 and 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The invariant subalgebra of a semilinear action of the absolute Galois group on matrices becomes the matrix algebra after scalar extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semilinear Galois action on a matrix algebra descends: scalar extension of invariant subalgebra is isomorphic to matrix algebra",
+   "results": "endVecAlgEquivMatrixEnd; IsMoritaEquivalent.matrix; IsSimpleRing.exists_algEquiv_matrix_of_isAlgClosed; Matrix.Represents.algebraMap; Matrix.isRepresentation; Algebra.isInvariant_of_isGalois'; algEquivMatrix'; Subalgebra.LinearDisjoint.leftMulMatrix_basisOfBasisRight_algebraMap",
+   "date": "2026-10-13",
+   "verdict": "No exact match; relevant construction tools read and used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*descent|descent.*semilinear|[Gg]alois.*[Ii]nvariant",
+   "results": "Mathlib/FieldTheory/Galois/IsGaloisGroup.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match; relevant construction tools read and used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Galois descent basis of fixed vectors for a semilinear group action, multiplication tensor product invariant subspace is bijective",
+   "results": "Second reading: mem_galBasis_iff; FixedPoints.toAlgHom_bijective; Module.Basis.groupSMul; IsGalois.normalBasis_apply; FixedPoints.toAlgAut_bijective; IsGalois.normalBasis; Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single; Rep.leftRegularTensorTrivialIsoFree_hom_hom",
+   "date": "2026-10-13",
+   "verdict": "No exact match; fixed-field and normal-basis results do not descend the semilinear matrix invariant algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocallyConstant, Function.Bijective",
+   "results": "Second reading: 0 hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; fixed-field and normal-basis results do not descend the semilinear matrix invariant algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.ProjectiveMatrixDescent",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-scalar-defect-surjective-crossed-product-realization",
+   "place": "Tag 03R6, Galois forms of matrix algebras; finite Galois descent expanded from parent steps 1 and 2",
+   "via": [
+    "lem-sc-projective-matrix-descent",
+    "new-crossed-product-for-cocycle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.MatrixDescentScalarMapBijective",
+  "file": "lean/Sheaf/FieldTheory/MatrixDescentScalarMapBijective.lean",
+  "declaration": "Field.matrixDescentScalarMap_bijective",
+  "statement": "theorem matrixDescentScalarMap_bijective (K : Type u) [Field K]\n    (n : ℕ)\n    (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →\n      Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))\n    (hb : IsLocallyConstant b)\n    (h1 : ∀ M : Matrix (Fin n) (Fin n) (SeparableClosure K),\n      (b 1).val * M * ((b 1)⁻¹).val = M)\n    (hm : ∀ g h (M : Matrix (Fin n) (Fin n) (SeparableClosure K)),\n      (b g).val * ((b h).val * M.map h * ((b h)⁻¹).val).map g * ((b g)⁻¹).val =\n        (b (g * h)).val * M.map (g * h) * ((b (g * h))⁻¹).val) :\n    Function.Bijective (matrixDescentScalarMap K n b)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T205633-L-933416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T205633-L-933416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

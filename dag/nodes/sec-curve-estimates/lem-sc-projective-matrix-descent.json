@@ -12,31 +12,43 @@
  ],
  "proof": [
   {
-   "text": "Construct T_g by the stated formula. It is a semilinear algebra automorphism. The hypotheses give an action. Construct A as its invariant K-subalgebra. Compactness and local constancy give finitely many b-values and an open normal subgroup N on whose cosets b is constant. Shrink N to fix all matrix entries of those values. Since T_1 is the identity, b(1) commutes with all matrices, hence is scalar; for g in N, b(g)=b(1), so T_g is entrywise g-action. Let L be the finite Galois fixed field of N. Then A is precisely the invariants of the resulting semilinear Gamma=Gal(L/K) action on Mat_n(L).",
-   "uses": [],
+   "text": "Construct the actual invariant K-subalgebra S and its scalar-extension multiplication map by [def-sc-matrix-descent-invariants]. Its closure proofs use entrywise algebra homomorphisms, distributivity, conjugation cancellation and central scalar matrices.",
+   "uses": [
+    "def-sc-matrix-descent-invariants"
+   ],
    "elementary": true
   },
   {
-   "text": "For v in Mat_n(L) and a in L, the sum over Gamma of g(a)T_g(v) is invariant, as multiplication by any h reindexes the sum by hg. If an L-linear functional kills every such invariant sum, linear independence of distinct automorphisms gives that it kills every T_g(v), in particular v. A proper invariant span would admit a nonzero annihilating functional, so invariants span. Select an invariant L-basis. The coefficients of an invariant linear combination are fixed by Gamma, hence lie in K. Thus this is also a K-basis of A and the multiplication map L tensor_K A to Mat_n(L) is an algebra equivalence.",
-   "uses": [],
+   "text": "Use [lem-sc-matrix-descent-scalar-map-bijective] with the local constancy and action hypotheses. AlgEquiv.ofBijective promotes the explicit map to an S-algebra equivalence e. The inverse is uniquely determined by that fixed bijective map.",
+   "uses": [
+    "lem-sc-matrix-descent-scalar-map-bijective"
+   ],
    "elementary": true
   },
   {
-   "text": "The preceding basis proves finite dimensionality of A. A nonzero two-sided ideal extends injectively to a nonzero ideal of Mat_n(L), hence the whole algebra. Preservation of dimension under field extension implies the original ideal is A. A central element commutes after extension with the spanning invariant matrices and so is a scalar. Invariance fixes its scalar, putting that scalar in K; thus A is central simple. Nonzero n guarantees nontriviality.",
-   "uses": [],
+   "text": "Apply [lem-sc-matrix-form-central-simple] to the invariant algebra, e, and n≠0. Package its three proved properties with the concrete invariant carrier using AlgCat.of and CSA; no unspecified algebra witness is selected.",
+   "uses": [
+    "lem-sc-matrix-form-central-simple"
+   ],
    "elementary": true
   },
   {
-   "text": "Extend the multiplication splitting along L to Ksep to obtain e. The image of 1 tensor a is the original invariant matrix a. Rewrite T_g(a)=a by multiplying on the left and right by b(g) inverse and b(g), respectively, to get the required orientation of the descent equation.",
-   "uses": [],
+   "text": "The scalar map sends 1 tensor a to the original invariant matrix a. The subtype property gives b(g) g(a) b(g) inverse = a. Apply the function M ↦ b(g) inverse M b(g) to this equality and cancel unit products by associativity. This yields g(a)=b(g) inverse a b(g), the required descent equation.",
+   "uses": [
+    "def-sc-matrix-descent-invariants"
+   ],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sc-matrix-descent-invariants",
+  "lem-sc-matrix-descent-scalar-map-bijective",
+  "lem-sc-matrix-form-central-simple"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Lemma 03R6 (Galois forms of matrix algebras), preceding Theorem 03R7; explicit finite Galois descent expanded from the parent construction"
+  "place": "Tag 03R6 and Tag 03R2; concrete invariant construction, scalar extension, faithful-flatness/contraction descent, and unit cancellation"
  },
  "mathlib_searches": [
   {
@@ -120,9 +132,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T184352-L-4022983",
+  "landing": "20261012T205633-L-933416",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
