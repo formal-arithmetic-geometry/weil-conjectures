@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-semilocal-fibre-generators",
+ "kind": "statement",
+ "title": "Finite module generators bounded by fibre dimensions",
+ "statement": "Let $R$ be a commutative ring with finitely many maximal ideals, $A$ a commutative $R$-algebra which is finitely generated as an $R$-module, and $n\\in\\mathbb N$. For a maximal ideal $\\mathfrak m$, let $\\kappa(\\mathfrak m)$ be the fraction field of $R/\\mathfrak m$ and let $A(\\mathfrak m)=\\kappa(\\mathfrak m)\\otimes_R A$. If $\\dim_{\\kappa(\\mathfrak m)} A(\\mathfrak m)\\le n$ for every maximal ideal, there is a surjective $R$-linear map $R^n\\to A$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 00DV (parts 6 and 8), used in Morphisms Tag 03J6"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "For each maximal ideal p choose a basis of kappa(p) tensor_R A, and extend the list by zeros to length n. This is legitimate because A is finite over R, so the fibre is finite-dimensional. The canonical R-algebra map R/p to kappa(p) is an isomorphism because p is maximal (Ideal.bijective_algebraMap_quotient_residueField).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Distinct maximal ideals are coprime. The Chinese remainder map R to the product of R/p is surjective with kernel J=intersection p. Tensor this exact sequence with A. Right exactness and the finite product tensor identity give surjectivity of A to the product of fibre modules and identify its kernel with J A; these are implemented by Ideal.pi_tensorProductMk_quotient_surjective and Ideal.ker_tensorProductMk_quotient. Thus each of the n columns of the spanning families lifts simultaneously to an element v_i of A.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any element x of the product of the fibre modules, write each component as a linear combination of its n padded basis vectors. The ring Chinese remainder map lifts the coefficients for each i simultaneously to r_i in R. Then the image of sum_i r_i v_i is x. Hence the span N of the v_i satisfies A=N+J A.",
+   "uses": [
+    "lem-pc-crt-ideal-quotient-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "J is contained in the Jacobson radical by its definition as the intersection of the maximal ideals. The finite module A/N satisfies J(A/N)=A/N, so Nakayama makes A/N zero. Equivalently N=A; the implementation uses Submodule.le_of_le_smul_of_le_jacobson_bot, the submodule form of the same lemma. The linear combination map R^n to A is therefore surjective. For n=0 this says A=0. For R the zero ring, the maximal spectrum is empty and all R-modules are zero; the same proof applies.",
+   "uses": [
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "J2",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00DV (lemma-NAK), parts 4 and 8, combined with Chinese remainder lifting as the semilocal version of the generator argument in Tag 03J6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite semilocal module number generators bounded by residue fiber dimension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite module over semilocal ring has at most n generators when dimensions of all residue field fibers are at most n",
+   "results": "8 hits, including IsLocalRing.finrank_quotient_map and local residue-field finiteness results; no direct semilocal generator theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MaximalSpectrum\", \"Surjective\"",
+   "results": "4 hits concerning the product of localizations; no exact generator theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilocal|span_eq_top_of_tmul_eq_basis|pi_tensorProductMk_quotient_surjective",
+   "results": "16 hits; local basis lifting in Mathlib/RingTheory/LocalRing/Module.lean:102 and module CRT in Mathlib/RingTheory/Ideal/Quotient/ChineseRemainder.lean:40.",
+   "date": "2026-10-12",
+   "verdict": "ingredients"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFieldTowerDegreeBound",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Algebraic dimension estimate in Tag 03J6: lift residue-field bases and apply Nakayama (step 4 of the tower degree node), in the constructible-generation machinery for the H1 representation argument.",
+   "via": [
+    "lem-weil-pbc-finite-field-tower-degree-bound",
+    "lem-weil-pbc-composition-fibre-degree-bound",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-etale-separated-stratified-finite",
+    "lem-weil-pbc-etale-stratified-finite",
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "lem-weil-pbc-constructible-generation",
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SemilocalFiberGenerators",
+  "file": "lean/Sheaf/RingTheory/SemilocalFiberGenerators.lean",
+  "declaration": "RingTheory.exists_surjective_fin_of_fiberDegree_le",
+  "statement": "theorem exists_surjective_fin_of_fiberDegree_le (R : Type u) [CommRing R] [Finite (MaximalSpectrum R)] (A : Type v) [CommRing A] [Algebra R A] [Module.Finite R A] (n : ℕ) (h : ∀ p : MaximalSpectrum R, p.asIdeal.fiberDegree A ≤ n) : ∃ q : (Fin n → R) →ₗ[R] A, Function.Surjective q",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T110306-L-616851",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T110306-L-616851",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

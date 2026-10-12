@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "The finite structure morphisms make X and Y affine. Write B=Gamma(Y,O) and A=Gamma(X,O), with K -> B -> A induced by g and f. B is a finite-dimensional K-algebra.",
+   "text": "Finite morphisms over Spec K make X and Y affine. Set B=Gamma(Y,O) with the algebra from g and A=Gamma(X,O) with compatible algebras from f and f composed with g. The global section map of f is finite, and B is finite over K. Use isAffine_of_isAffineHom, Scheme.Hom.finite_appTop and finite_sections_top_of_isFinite.",
    "uses": [
     "lem-weil-pbc-finite-over-field-affine-finite-dim",
     "lem-weil-pbc-morphism-into-affine-scheme"
@@ -22,30 +22,22 @@
    "elementary": false
   },
   {
-   "text": "B is Artinian and is the finite product of its localizations B_i at maximal ideals. Each B_i is finite-dimensional and Artinian local with nilpotent maximal ideal m_i. Tensor this product decomposition with A to get A = product A_i, where A_i=A tensor_B B_i. All decompositions preserve the K action.",
+   "text": "B is Artinian because it is finite-dimensional over K. In particular its maximal spectrum is finite. For each maximal ideal p, the isoSpec isomorphisms and fiberDegree_of_isPullback identify p.fiberDegree A with the fibre degree of f at the corresponding point of Y; fiberDegree_SpecMap gives the ring-to-scheme comparison. Apply hf.",
    "uses": [
     "lem-weil-pbc-finite-dim-algebra-artinian",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "lem-weil-pbc-artinian-local-noetherian-nilpotent"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The affine fibre product formula identifies the fibre over the corresponding point of Spec B with Spec(A_i/m_i A_i). Its dimension over the residue field is d_i <= n by hf, using the canonical global sections isomorphisms over that field.",
-   "uses": [
     "lem-weil-pbc-fibre-product-affine-spectra"
    ],
    "elementary": false
   },
   {
-   "text": "Lift a residue-field basis of size d_i to A_i. The resulting B_i-linear map B_i^{d_i} -> A_i is surjective modulo m_i and hence surjective by nilpotent Nakayama. Restrict scalars to K to get dim_K A_i <= d_i dim_K B_i <= n dim_K B_i.",
+   "text": "Apply the semilocal fibre generator theorem to obtain a surjective B-linear map B^n to A. Restrict it to a K-linear map using the compatible scalar tower.",
    "uses": [
-    "lem-weil-pbc-nakayama-nilpotent"
+    "lem-weil-pbc-semilocal-fibre-generators"
    ],
    "elementary": false
   },
   {
-   "text": "Dimensions add across the finite products. Sum the local estimates to get dim_K A <= n dim_K B, which is exactly the finrankΓ inequality. If Y is empty both section rings are zero and the sum is empty. When n=0 every local quotient is zero and Nakayama gives A_i=0.",
+   "text": "LinearMap.finrank_le_finrank_of_surjective bounds dim_K A by dim_K B^n. Module.finrank_pi_fintype computes the latter as n dim_K B. The definitions of finrankGamma give the claimed inequality, including n=0 and empty schemes.",
    "uses": [],
    "elementary": true
   }
@@ -54,15 +46,14 @@
   "lem-weil-pbc-finite-over-field-affine-finite-dim",
   "lem-weil-pbc-morphism-into-affine-scheme",
   "lem-weil-pbc-finite-dim-algebra-artinian",
-  "lem-weil-pbc-product-of-localizations-at-maximal",
-  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
   "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-nakayama-nilpotent"
+  "lem-weil-pbc-semilocal-fibre-generators"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "J2",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Proof of Tag 03J6, algebraic estimate (original composition node steps 4-6)."
+  "place": "Tag 03J6 algebraic estimate, replacing summation over local factors by simultaneous Chinese remainder lifting and Nakayama."
  },
  "mathlib_searches": [
   {
@@ -149,9 +140,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T085258-L-22887",
+  "landing": "20261012T110306-L-616851",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
