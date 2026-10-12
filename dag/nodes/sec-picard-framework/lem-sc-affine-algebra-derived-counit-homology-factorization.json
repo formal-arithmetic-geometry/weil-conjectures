@@ -17,11 +17,20 @@
  ],
  "proof": [
   {
-   "text": "For the tensor-derived adjunction, flatness of the stalk localizations of g\nmakes pullback exact, giving H^n(Lg-star E) = g^*H^n(E) naturally in E.\nFor K with quasi-coherent cohomology, compare Rg-star with Rf-star by exact scalar\nrestriction to O_Y using the same K-injective resolution. The affine unbounded\ncohomology calculation gives H^n(Rg-star K) = g_*H^n(K); the equality is algebra\nlinear, since the comparison uses the same pushed complex with its natural\nf_*O_X action. Applying exact pullback gives the displayed source comparison.\nOn the chosen resolutions the derived counit is induced by the ordinary\ncounit. The natural kernel and image comparisons used to compute cohomology\nidentify this map with the evaluation g^*g_*H^n(K) to H^n(K). On affine opens\nthis sends the pure tensor of a ring section and a module section to their\nproduct, so it is the ordinary tensor adjunction counit; naturality in open\nrestriction identifies the sheaf maps. Finally uniqueness of the underived\nand derived left adjoints supplies adjunction-compatible isomorphisms to P and L.\nAbsorb their cohomology components in the source isomorphism e; the target\nH^n(K) is unchanged, yielding precisely the equation for a and adj.\nThe unbounded cohomology formula is required: arbitrary direct image is not\nclaimed exact. Zero cohomology, empty schemes and the identity morphism satisfy\nthe same formula, with no extra hypotheses.",
+   "text": "Scalar restriction T from f_*O_X to O_Y is exact and reflects isomorphisms, because its composite with the underlying-sheaf functor is the same underlying-sheaf functor. The right-derived/exact-functor comparison and the composition comparison identify Rg_* followed by RT with Rf_*; underived g_* followed by T equals f_*. Choose the standard derived category on the auxiliary category of O_Y-modules; the original universe parameters are unchanged.",
    "uses": [
-    "lem-pc-ringed-spaces-derived-adjoint-general",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "Apply the affine unbounded cohomology formula to Rf_*E, and the exact-functor homology comparison to T. Quasi-coherence over f_*O_X is equivalent to quasi-coherence after restriction to O_Y, by the affine module correspondence. Consequently Rg_*E has quasi-coherent algebra cohomology whenever E has quasi-coherent cohomology.",
+   "uses": [
     "lem-sc-affine-derived-cohomology",
-    "def-pc-ringed-spaces-derived-direct-image",
     "lem-weil-pbc-affine-module-correspondence"
    ],
    "elementary": false,
@@ -29,18 +38,59 @@
     "document": "literature/stacks-project/perfect.tex",
     "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
    }
+  },
+  {
+   "text": "Positive higher direct images of quasi-coherent modules vanish for affine f. Apply the natural unbounded cohomology comparison for acyclic quasi-coherent pushforward. If Rg_*u is invertible for a map u between quasi-coherent complexes, then RT(Rg_*u), hence Rf_*u, is invertible. Naturality of the comparison makes f_*H^i(u) invertible. Exact conservative scalar restriction reflects this to g_*H^i(u). Apply P and naturality of its underived counit, whose components on H^i(E) and H^i(F) are invertible, to obtain invertibility of H^i(u). The derived-category homology criterion gives invertibility of u.",
+   "uses": [
+    "lem-pc-affine-morphism-hi",
+    "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+    "lem-sc-affine-algebra-module-adjunction-isos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "At M=Rg_*K, the existing derived unit homology factorization and the underived unit isomorphisms make every cohomology map of the derived unit invertible. Thus that unit is invertible. The right triangle identity implies that Rg_* of the derived counit at K is invertible. Both its endpoints have quasi-coherent cohomology, using preservation by derived pullback and Step 2, so Step 3 reflects this to invertibility of the derived counit.",
+   "uses": [
+    "lem-sc-affine-algebra-derived-unit-homology-factorization",
+    "lem-sc-affine-algebra-module-adjunction-isos",
+    "lem-sc-affine-algebra-derived-adjunction-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
+  },
+  {
+   "text": "The ordinary counit at H^n(K) is invertible. Define e as the isomorphism of H^n of the derived counit, followed by the inverse of the ordinary counit isomorphism. Associativity and inverse cancellation give exactly the required factorization. No specified canonical comparison is part of the existential conclusion. This does not invoke the derived counit factorization or the derived adjunction isomorphisms as a dependency.",
+   "uses": [
+    "lem-sc-affine-algebra-module-adjunction-isos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof"
+   }
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-spaces-derived-adjoint-general",
-  "lem-sc-affine-derived-cohomology",
   "def-pc-ringed-spaces-derived-direct-image",
-  "lem-weil-pbc-affine-module-correspondence"
+  "lem-sc-affine-derived-cohomology",
+  "lem-weil-pbc-affine-module-correspondence",
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-qcoh-acyclic-derived-pushforward-cohomology",
+  "lem-sc-affine-algebra-module-adjunction-isos",
+  "lem-sc-affine-algebra-derived-unit-homology-factorization",
+  "lem-sc-affine-algebra-derived-adjunction-qcoh"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0AVW proof; detailed cohomology comparison and adjunction-uniqueness argument"
+  "place": "Tag 0AVW proof; scalar restriction and affine cohomology as in the source, followed by the adjunction triangle identity and inverse cancellation (M2, 2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -118,11 +168,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-7d611",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T110253-L-611484",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135253-L-1677181",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and node proof match the reviewed branch; signatures and target statement are unchanged, both delivery modules and the required direct importer compile cleanly, and the axiom probe shows only permitted axioms plus sorryAx from existing dependencies."
  }
 }
