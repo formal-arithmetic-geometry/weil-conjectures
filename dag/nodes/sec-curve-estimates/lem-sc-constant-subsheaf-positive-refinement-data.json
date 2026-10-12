@@ -1,0 +1,133 @@
+{
+ "id": "lem-sc-constant-subsheaf-positive-refinement-data",
+ "kind": "statement",
+ "title": "Positive refinement component data",
+ "statement": "Let X be a topological space, K and C abelian sheaves, ι : K → C monic, and isoC identify C with the constant integer sheaf [def-weil-pbc-constant-sheaf]. Let U_i be finitely many compact opens, and g a map from the coproduct of j_(U_i)! Z into K [def-sc-abelian-open-extension-by-zero]. There exists a finite signed partition record: compact opens A_j with parent indices p(j), opens Z_i, and U_i = Z_i union the pairwise disjoint A_j with p(j)=i; Z_i is disjoint from those A_j and every piece lies in its parent U_i. Let s_i be the unit image of the i-th component of g. Its restriction to Z_i is zero. There are positive integer labels c_j, integers sign_j, and maps f_j : j_(A_j)! Z → K whose unit images under ι and isoC are constant c_j. The restriction of s_(p(j)) to A_j equals sign_j times the unit image of f_j. These data do not include a factorization map between the coproducts.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38, first proof paragraphs; https://stacks.math.columbia.edu/tag/0A38"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the i-th component of g on the canonical unit, defining s_i. Identify its image under ι and isoC with a locally constant integer function by the constant-sheaf comparison. Compactness gives finite range, and its fibres are compact opens in X, clopen in U_i. Index the nonzero fibres by Fin n with parent indices and take the zero fibre Z_i; their disjointness and union give the partition fields, including empty cases. Use the canonical description from local representatives of the sheafification unit, with values unique on nonempty overlaps by evaluation in an integer skyscraper; gluing on fibres makes this description compatible with the unit as well as restriction.",
+   "uses": [
+    "lem-sc-constant-sheaf-locally-constant-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each nonzero fibre of value a, normalize the restricted section by the sign of a. The resulting section has positive image |a|. Integer multiplication by its restrictions defines a map from the constant presheaf to the restriction of K; sheafify it, apply extension by zero, and compose with the restriction counit to define f_j. The unit and counit formulas give the positive-value and signed restriction equations. On zero fibres, monicity of ι forces the section to vanish.",
+   "uses": [
+    "def-sc-abelian-open-extension-by-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "lem-sc-constant-sheaf-locally-constant-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A38",
+  "place": "First proof paragraph; explicit finite signed partition and unit-section construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, IsCompact",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from extension by zero of the constant integer sheaf is determined by the image of one; finite disjoint open partition splits it as a coproduct",
+   "date": "2026-10-12",
+   "results": "8 hits: CompHausLike.LocallyConstant.presheaf_ext, TopCat.Presheaf.section_ext, TopCat.Sheaf.extend_hom_app, CategoryTheory.typesGlue, TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, CompHausLike.LocallyConstant.counit_app_val",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_range|isClopen_fiber|isCompact.*range|range.*Finite",
+   "date": "2026-10-12",
+   "results": "5 hits: Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Hh]om|[Hh]om.*constantSheaf|extensionByZero.*[Hh]om|[Hh]om.*extensionByZero",
+   "date": "2026-10-12",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integer-valued section on a compact open has a finite disjoint partition into zero and signed positive constant sections, whose extension by zero maps recover its restrictions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Service unavailable; no mathematical conclusion drawn."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant integer function on a compact open has finitely many clopen fibres with constant signed positive values",
+   "date": "2026-10-12",
+   "results": "8 hits: IsLocallyConstant.isClopen_fiber, LocallyConstant.ofIsClopen_fiber_zero, IsLocallyConstant.range_finite, TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant, LocallyConstant.range_finite, LocallyConstant.ofIsClopen, LocallyConstant.ofIsClopen_fiber_one, ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafPositiveRefinement",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-constant-subsheaf-positive-refinement",
+   "place": "decomposition of proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSubsheafPositiveRefinementData",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafPositiveRefinementData.lean",
+  "declaration": "TopCat.Sheaf.positive_refinement_data",
+  "statement": "theorem positive_refinement_data\n    (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]\n    (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n      (AddCommGrpCat.of (ULift.{u} ℤ))) (m : ℕ) (U : Fin m → Opens X)\n    (hU : ∀ i, IsCompact (U i : Set X))\n    (g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K) :\n    ∃ d : PositiveRefinementData X K C ι isoC m U g, True",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T230751-L-1906756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T230751-L-1906756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

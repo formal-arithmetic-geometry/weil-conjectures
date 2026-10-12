@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZero
-import Sheaf.Topology.ConstantSheafLocallyConstantComparison
+import Sheaf.Topology.ConstantSubsheafPositiveRefinementFactor
 
 /-! # Refinement of compact-open integer components -/
 
@@ -81,6 +81,8 @@ theorem constantSubsheaf_positive_refinement
       (toSheafify (Opens.grothendieckTopology X)
       ((Functor.const (Opens X)ᵒᵖ).obj (AddCommGrpCat.of (ULift.{u} ℤ)))).app
       (op (A i)) (ULift.up (c i : ℤ)) := by
-  sorry
+  obtain ⟨d, _⟩ := positive_refinement_data X K C ι isoC m U hU g
+  obtain ⟨l, hl⟩ := positive_refinement_factor X K C ι isoC m U g d
+  exact ⟨d.n, d.A, d.hA, d.c, d.hc, d.f, ⟨l, hl⟩, d.hv⟩
 
 end TopCat.Sheaf

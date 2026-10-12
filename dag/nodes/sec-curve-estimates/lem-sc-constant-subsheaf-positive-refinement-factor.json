@@ -1,0 +1,125 @@
+{
+ "id": "lem-sc-constant-subsheaf-positive-refinement-factor",
+ "kind": "statement",
+ "title": "Factorization through refined components",
+ "statement": "With X, K, C, ι, isoC, U_i and g as in the signed-partition construction [lem-sc-constant-subsheaf-positive-refinement-data], any PositiveRefinementData record d (including the disjoint partition, coverage, zero restriction, and signed component equations) admits a map l from the original coproduct of j_(U_i)! Z to the coproduct of j_(d.A_j)! Z such that l followed by Sigma.desc d.f equals g. The positive unit-value fields alone would not imply this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38, first proof paragraphs; https://stacks.math.columbia.edu/tag/0A38"
+ },
+ "stmt_deps": [
+  "lem-sc-constant-subsheaf-positive-refinement-data",
+  "def-sc-abelian-open-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "On each U_i glue in the new coproduct the zero section on Z_i and sign_j times the unit of the j-th summand on A_j with parent j = i. Coverage and disjointness make this a compatible covering family. Send the old integer unit to that glued section using sheafification, the slice extension and the restriction counit, and take the coproduct of the resulting maps. Under Sigma.desc f the unit image restricts to s_i on every partition piece by the signed and zero equations, hence equals s_i by sheaf separation. A map from j_U! Z is determined by its unit section: integer multiplication and naturality determine the constant presheaf map, local integer representatives determine the sheafified map, and the slice direct-sum injections determine the extension map. Thus the old components agree with the composite, and coproduct extensionality proves the factorization.",
+   "uses": [
+    "def-sc-abelian-open-extension-by-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A38",
+  "place": "First proof paragraph; explicit factorization by gluing and the universal property of extension by zero."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "LocallyConstant, IsCompact",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from extension by zero of the constant integer sheaf is determined by the image of one; finite disjoint open partition splits it as a coproduct",
+   "date": "2026-10-12",
+   "results": "8 hits: CompHausLike.LocallyConstant.presheaf_ext, TopCat.Presheaf.section_ext, TopCat.Sheaf.extend_hom_app, CategoryTheory.typesGlue, TopCat.Sheaf.existsUnique_gluing', TopCat.Sheaf.existsUnique_gluing, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, CompHausLike.LocallyConstant.counit_app_val",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_range|isClopen_fiber|isCompact.*range|range.*Finite",
+   "date": "2026-10-12",
+   "results": "5 hits: Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean, Mathlib/Topology/LocallyConstant/Basic.lean",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*[Hh]om|[Hh]om.*constantSheaf|extensionByZero.*[Hh]om|[Hh]om.*extensionByZero",
+   "date": "2026-10-12",
+   "results": "6 hits: Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integer-valued section on a compact open has a finite disjoint partition into zero and signed positive constant sections, whose extension by zero maps recover its restrictions",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "Service unavailable; no mathematical conclusion drawn."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant integer function on a compact open has finitely many clopen fibres with constant signed positive values",
+   "date": "2026-10-12",
+   "results": "8 hits: IsLocallyConstant.isClopen_fiber, LocallyConstant.ofIsClopen_fiber_zero, IsLocallyConstant.range_finite, TopologicalSpace.Fiber.instFiniteFiberCoeLocallyConstant, LocallyConstant.range_finite, LocallyConstant.ofIsClopen, LocallyConstant.ofIsClopen_fiber_one, ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+   "verdict": "No exact match; finite-range, clopen-fibre, gluing and global-sections APIs cover only individual steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafPositiveRefinement",
+  "date": "2026-10-13",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-constant-subsheaf-positive-refinement",
+   "place": "decomposition of proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSubsheafPositiveRefinementFactor",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafPositiveRefinementFactor.lean",
+  "declaration": "TopCat.Sheaf.positive_refinement_factor",
+  "statement": "theorem positive_refinement_factor\n    (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι]\n    (isoC : C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj\n      (AddCommGrpCat.of (ULift.{u} ℤ))) (m : ℕ) (U : Fin m → Opens X)\n    (g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj\n      ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))\n        AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K)\n    (d : PositiveRefinementData X K C ι isoC m U g) :\n    ∃ l : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i)))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶\n          (∐ fun i => (abelianOpenExtensionByZero (d.A i)).obj\n          ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (d.A i)))\n            AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))),\n      l ≫ Sigma.desc d.f = g",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T230751-L-1906756",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T230751-L-1906756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
