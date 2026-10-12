@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "*Existence.* Put $\\psi=\\varphi\\circ r^{-1}:\\kappa(z)\\to K$ and $s'=j_z\\circ\\operatorname{Spec}(\\psi):\\operatorname{Spec}K\\to Z$. By [lem-weil-pbc-residue-field-point-naturality] applied to $g=i$ and the point $z$, $i\\circ j_z=j_{x}\\circ\\operatorname{Spec}(r)$. Since $\\operatorname{Spec}$ is a contravariant functor [def-weil-affine-spectrum], $i\\circ s'=j_x\\circ\\operatorname{Spec}(r)\\circ\\operatorname{Spec}(\\psi)=j_x\\circ\\operatorname{Spec}(\\psi\\circ r)=j_x\\circ\\operatorname{Spec}(\\varphi)=s$. Moreover $s'(\\xi)=j_z(\\operatorname{Spec}(\\psi)(\\xi))=z$, because $j_z$ maps the unique point of $\\operatorname{Spec}\\kappa(z)$ to $z$ [lem-weil-pbc-morphism-from-spec-field].",
+   "text": "*Existence.* Put $\\psi=\\varphi\\circ r^{-1}:\\kappa(z)\\to K$ and $s'=j_z\\circ\\operatorname{Spec}(\\psi):\\operatorname{Spec}K\\to Z$. By [lem-weil-pbc-residue-field-point-naturality] applied to $g=i$ and the point $z$, $i\\circ j_z=j_{x}\\circ\\operatorname{Spec}(r)$. Since $\\operatorname{Spec}$ is a contravariant functor [def-weil-affine-spectrum], $i\\circ s'=j_x\\circ\\operatorname{Spec}(r)\\circ\\operatorname{Spec}(\\psi)=j_x\\circ\\operatorname{Spec}(\\psi\\circ r)=j_x\\circ\\operatorname{Spec}(\\varphi)=s$.",
    "uses": [
     "lem-weil-pbc-residue-field-point-naturality",
     "def-weil-affine-spectrum",
@@ -64,17 +64,14 @@
    }
   },
   {
-   "text": "*Uniqueness.* With $u$ as in the previous step, [lem-weil-pbc-morphism-from-spec-field] gives $u=j_z\\circ\\operatorname{Spec}(\\psi_u)$ with $\\psi_u=\\varphi_u:\\kappa(z)\\to K$, since $u(\\xi)=z$. By [lem-weil-pbc-residue-field-point-naturality] as in the existence step, $s=i\\circ u=j_x\\circ\\operatorname{Spec}(r)\\circ\\operatorname{Spec}(\\psi_u)=j_x\\circ\\operatorname{Spec}(\\psi_u\\circ r)$. So $s$ is the image of both pairs $(x,\\varphi)$ and $(x,\\psi_u\\circ r)$ under the inverse of the bijection of [lem-weil-pbc-morphism-from-spec-field], which is injective; hence $\\psi_u\\circ r=\\varphi$, and as $r$ is an isomorphism [lem-weil-pbc-closed-immersion-residue-field-iso], $\\psi_u=\\varphi\\circ r^{-1}=\\psi$. Therefore $u=j_z\\circ\\operatorname{Spec}(\\psi)=s'$.",
+   "text": "*Uniqueness.* A closed immersion [def-weil-closed-immersion] is a monomorphism (Stacks Tag 01L7). Mathlib supplies this directly: the IsClosedImmersion instance gives IsPreimmersion, whose instance gives Mono i (Morphisms/ClosedImmersion.lean and Morphisms/Preimmersion.lean). For two lifts u and s' with u ≫ i = s = s' ≫ i, cancel_mono i gives u = s'. No second application of the point-and-field-map correspondence is needed.",
    "uses": [
-    "lem-weil-pbc-morphism-from-spec-field",
-    "lem-weil-pbc-residue-field-point-naturality",
-    "lem-weil-pbc-closed-immersion-residue-field-iso",
-    "def-weil-affine-spectrum"
+    "def-weil-closed-immersion"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, the discussion before Lemma Tag 01J9 (a morphism $\\operatorname{Spec}K\\to X$ is the same as a point $x$ and a field map $\\kappa(x)\\to K$)"
+    "place": "Schemes, Lemma Tag 01L7 (lemma-immersions-monomorphisms); Mathlib.AlgebraicGeometry.Morphisms.Preimmersion, Mono instance for IsPreimmersion, followed by categorical cancellation"
    }
   }
  ],
@@ -89,7 +86,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Direct argument from the description of morphisms from spectra of fields (discussion before and after Lemma Tag 01J9) and the residue-field isomorphism of a closed immersion; the node's source route (Lemma Tag 0356 applied to the reduced scheme Spec K, with Lemma Tag 01L7 for uniqueness) is replaced by this argument, which uses only nodes already in the DAG"
+  "place": "The point-and-field-map description before and after Lemma Tag 01J9 gives existence using the residue-field isomorphism of a closed immersion and residue-field point naturality. Uniqueness now uses Lemma Tag 01L7 via Mathlib's Mono instance for preimmersions, instead of repeating the field-map correspondence. The point of every lift follows from injectivity on points. Formalized by P2; the unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -208,5 +205,15 @@
   "group": "G1",
   "result": "fix",
   "note": "closed immersion i:Z->X [IsClosedImmersion i], field K, s : Spec (.of K) -> X with s(default)=i(z); conclusion split literally: exactly one s' with s' ≫ i = s, and every such s' sends the point to z"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T053947-L-2642596",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
