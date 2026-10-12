@@ -7,7 +7,7 @@
  },
  "kind": "definition",
  "title": "Finite-presentation descent construction",
- "statement": "Define\n\n$$\nX^{\\mathrm{desc}}_{\\lambda_{\\mathrm{rel}}}\n$$\n\nby gluing the valid relative datum\n$\\mathsf R_{X,\\lambda_{\\mathrm{rel}}}$. Define\n\n$$\n\\epsilon_X\\colon\nX^{\\mathrm{desc}}_{\\lambda_{\\mathrm{rel}}}\n\\times_{S_{\\lambda_{\\mathrm{rel}}}}S\n\\longrightarrow X\n$$\n\nby gluing the chartwise base-change identifications.\nThe relative gluing axioms instantiate the scheme-gluing construction. Base\nchange preserves the affine charts and overlap maps, so the base-changed\nobject is canonically the gluing of the base-changed datum; chartwise\ncomparisons glue to $\\epsilon_X$.",
+ "statement": "Fix the raw relative datum and its canonical inclusions and equality-stage choices as in [def-nagata-relative-gluing-valid-stage]. Write $s=\\lambda_{\\mathrm{rel}}$, $T=\\mathsf R_{X,s}$ and $J$ for its chart index set. Retain a scheme-gluing realization $G$ of $T$: a Mathlib scheme gluing datum, a bijection of its indices with $J$, chart isomorphisms with the charts of $T$, and overlap isomorphisms with the unions of the left overlap opens of $T$. These isomorphisms identify each overlap inclusion with the open inclusion. Retain the maps of each left overlap piece into the whole overlap, characterized by their composites with the chart inclusion. On each such piece the transition followed by the target-chart inclusion equals the specified forward overlap map followed by its right inclusion. The gluing datum includes the inverse and cocycle axioms. Retain its glued base map $p:G^{\\mathrm{glued}}\\to S_s$, characterized by $\\iota_a p$ equal to the specified chart structure map under the chart isomorphism. Define $X^{\\mathrm{desc}}_s=G^{\\mathrm{glued}}$ and its structure map to be $p$.\nFor each base-changed valid chart retain the canonical reassociation map to the base change of its original descended chart, characterized by its projections: the first is the composite of the three successive chart projections, and the second is the projection to $S$. Retain the map of each base-changed chart into $G^{\\mathrm{glued}}\\times_{S_s}S$, characterized by its projections to the glued scheme and to $S$. Retain the glued comparison $e:G^{\\mathrm{glued}}\\times_{S_s}S\\to X$, whose restriction to every chart is the reassociation map followed by the raw datum's original chart comparison and inclusion into $X$, and for which $e f$ is the projection to $S$. Define $\\epsilon_X=e$. These are records of the gluing construction with all chartwise equations, not choices from postponed existence proofs. Finite presentation of $p$ and isomorphy of $\\epsilon_X$ are asserted in the subsequent property lemma.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-finite-presentation-descent.md",
   "place": "node def-nagata-finite-presentation-descent, order 362"
@@ -120,5 +120,59 @@
   "group": "H1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfp2402 (reviewer sub-agent of L); spot-checked: Definition clauses match Stacks 01ZM (descended scheme X^desc over S_lambda_rel and the base-change comparison epsilon_X; its isomorphy is lemma-nagata-finite-presentation-descends); stmt_deps def-nagata-relative-gluing-valid-stage is the datum cited; no proof steps; dates 2026-10-10; no other node defines X^desc (grep), so no class (b). FIX more, RETURN less: (1) B3 statement reworded ('Given ... [cite]', 'applying the scheme-gluing construction to') and trailing blueprint prose dropped; restored the blueprint text word for word as in merged sibling def-nagata-separated-descent-stage; (2) blueprint.same_as [] restored to null. The second reading by H1 missed both.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataFinitePresentationDescent",
+  "declaration": "AlgebraicGeometry.nagataFinitePresentationDescent",
+  "declarations": [
+   "AlgebraicGeometry.NagataFinitePresentationGluingData",
+   "AlgebraicGeometry.NagataFinitePresentationBaseMap",
+   "AlgebraicGeometry.NagataFinitePresentationChartComparison",
+   "AlgebraicGeometry.nagataFinitePresentationDescent",
+   "AlgebraicGeometry.nagataFinitePresentationDescentMap",
+   "AlgebraicGeometry.NagataFinitePresentationComparisonData",
+   "AlgebraicGeometry.nagataFinitePresentationDescentComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataFinitePresentationDescent.lean",
+  "statement": "def nagataFinitePresentationDescent : Scheme.{u}",
+  "branch": "sheaf-dag",
+  "by": "Z2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "Z2-fpd",
+  "group": "Z2",
+  "result": "pass",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "Z2 stage 2",
+  "old_statement": "Define\n\n$$\nX^{\\mathrm{desc}}_{\\lambda_{\\mathrm{rel}}}\n$$\n\nby gluing the valid relative datum\n$\\mathsf R_{X,\\lambda_{\\mathrm{rel}}}$. Define\n\n$$\n\\epsilon_X\\colon\nX^{\\mathrm{desc}}_{\\lambda_{\\mathrm{rel}}}\n\\times_{S_{\\lambda_{\\mathrm{rel}}}}S\n\\longrightarrow X\n$$\n\nby gluing the chartwise base-change identifications.\nThe relative gluing axioms instantiate the scheme-gluing construction. Base\nchange preserves the affine charts and overlap maps, so the base-changed\nobject is canonically the gluing of the base-changed datum; chartwise\ncomparisons glue to $\\epsilon_X$.",
+  "what": "The valid-stage dependency gives a transported piece diagram, not a Scheme.GlueData or a glued base map. The original statement left the whole-overlap gluing realization and the chartwise base-change morphisms unspecified. Retain these construction data with inclusion, transition, projection and restriction equations; this spells out the same gluing without selecting data from sorry-proved existence.",
+  "source": {
+   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-finite-presentation-descent.md",
+   "place": "node def-nagata-finite-presentation-descent, order 362"
+  },
+  "citers": [
+   {
+    "id": "def-nagata-separated-descent-stage",
+    "holds": true,
+    "note": "Uses the same glued finite-stage model, its structure morphism and canonical comparison; retained construction equations specify the previously implicit choices."
+   },
+   {
+    "id": "lemma-nagata-finite-presentation-descends",
+    "holds": true,
+    "note": "Uses the same glued finite-stage model, its structure morphism and canonical comparison; retained construction equations specify the previously implicit choices."
+   },
+   {
+    "id": "lemma-nagata-separated-descent-stage-exists",
+    "holds": true,
+    "note": "Uses the same glued finite-stage model, its structure morphism and canonical comparison; retained construction equations specify the previously implicit choices."
+   }
+  ]
  }
 }
