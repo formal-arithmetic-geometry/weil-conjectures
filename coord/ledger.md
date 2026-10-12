@@ -9044,3 +9044,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.EtaleFixedAffineDegreeZeroKernel (stage 3; reviewer PASS; first push; landing 20261012T184335-L-4016678 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/Q3/Sheaf.RingTheory.JacobsonDenominatorFunctionField (stage 3; reviewer PASS; first push; landing 20261012T184335-L-4016813 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/Q3/Sheaf.RingTheory.KoszulRegularSequenceDualComplex (stage 3; reviewer PASS; first push; landing 20261012T184335-L-4016930 (proof); batch 20261012T184234; modules 1; new nodes 2)
+- 18:43 L: merged deliver/R1/Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMorphism (stage 3; reviewer PASS; first push; landing 20261012T184336-L-4017058 (interface); batch 20261012T184234; modules 2; new nodes 1)

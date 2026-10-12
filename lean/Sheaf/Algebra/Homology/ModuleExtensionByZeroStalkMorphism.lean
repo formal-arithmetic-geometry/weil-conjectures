@@ -3,6 +3,7 @@ module
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
+import Sheaf.Algebra.Homology.ModuleRestrictionStalkLinear
 
 /-! # The unit-induced linear stalk morphism
 
@@ -51,6 +52,31 @@ theorem exists_moduleExtensionByZero_stalk_morphism (X : RingedSpace.{u}) :
               (((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app
                 G).val.app
                 (op (Over.mk (homOfLE (Set.image_subset_iff.2 (fun y _ => y.2))))) s))
- := by sorry
+ := by
+  classical
+  intro W x hx
+  obtain ⟨c, hc⟩ := exists_moduleRestrictionStalk_morphism X W x hx
+  let q := W.sheafOfModulesEquivOver (moduleRings X)
+  let Y := X.restrict W.isOpenEmbedding
+  let L := SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙
+    PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)
+  let adj := Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2
+  let T := q.functor ⋙ RingedSpace.moduleStalkFunctor Y ⟨x, hx⟩ ⋙
+    ModuleCat.restrictScalars
+      (X.toPresheafedSpace.restrictStalkIso W.isOpenEmbedding ⟨x, hx⟩).inv.hom
+  let e : T ⟶ L ⋙ RingedSpace.moduleStalkFunctor X x :=
+    Functor.whiskerRight adj.unit T ≫ (Functor.associator L _ T).hom ≫ Functor.whiskerLeft L c
+  refine ⟨e, ?_⟩
+  intro G V hV s
+  change c.app (L.obj G)
+    ((ModuleCat.restrictScalars
+      (X.toPresheafedSpace.restrictStalkIso W.isOpenEmbedding ⟨x, hx⟩).inv.hom).map
+      ((RingedSpace.moduleStalkFunctor Y ⟨x, hx⟩).map
+        (q.functor.map (adj.unit.app G))) _) = _
+  change c.app (L.obj G)
+    ((TopCat.Presheaf.stalkFunctor (X := Y.carrier) Ab.{u} ⟨x, hx⟩).map
+      ((PresheafOfModules.toPresheaf _).map (q.functor.map (adj.unit.app G)).val) _) = _
+  erw [TopCat.Presheaf.stalkFunctor_map_germ_apply]
+  exact hc (L.obj G) V hV _
 
 end AlgebraicGeometry
