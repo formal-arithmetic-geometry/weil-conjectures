@@ -13,7 +13,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the product by the elementary Chinese remainder identity for an idempotent: R prime is the product of its quotients by (1-c) and (c). The map is r to its two residue classes and its inverse sends (x,y) to cx+(1-c)y, independent of representatives. This sends c to (1,0). Since f(c)=e^{-1}(1,0), f kills (1-c) in the first projection and (c) in the second, so it induces both factor maps. This is also Mathlib AlgEquiv.prodQuotientOfIsIdempotentElem, Tag 00EM.",
+   "text": "Construct the product of the quotients by (1-c) and (c) using Mathlib RingHom.prod_bijective_of_isIdempotentElem and RingEquiv.ofBijective. The map is the pair of quotient maps and sends c to (1,0). The projections of e composed with f kill (1-c) and (c), respectively, since f(c)=e.symm(1,0). Ideal.Quotient.lift therefore gives both factor homomorphisms.",
    "uses": [],
    "elementary": true
   },
@@ -37,7 +37,7 @@
    "elementary": false
   },
   {
-   "text": "The two first-factor kernels are K prime=J prime+(1-g) and K=J+(1-i(g)); the second follows from f(c)=e^{-1}(1,0). Since J=map i J prime, K=map i K prime. The localization isomorphism carries their extended ideals to each other, hence induces an isomorphism of the localization quotients. As g and i(g) become 1, these localization quotients are the original first-factor quotients S prime/K prime and S/K. The resulting isomorphism is precisely the induced first-factor map. Combine it with the second-factor homomorphism.",
+   "text": "The first-factor kernels in S prime and S are K prime=J prime+(1-g) and K=J+(1-i(g)). Prove these identities by computing the kernel of the first projection on each quotient and using Ideal.comap_map_of_surjective; in the target product, an element with zero first coordinate equals (1-f(c)) times itself. Mapping ideals gives K=map i K prime from J=map i J prime. To descend the localization isomorphism, extend each surjective first-factor map to its localization using IsLocalization.Away.lift, since its denominator has image 1. Compose the source extension with the inverse localization equivalence and the target localization map to obtain b:S -> C prime 1. This satisfies b(i(r))=qR(r), hence kills map i K prime=K. Descend b along the target first-factor surjection with RingHom.liftOfSurjective. Its left-inverse identity follows on source representatives; its right-inverse identity follows from uniqueness of localization lifts, checked on images of S prime. Thus the first factor homomorphism is bijective. RingEquiv.ofBijective turns it into the required equivalence. The second factor map and the final product compatibility hold by the definitions.",
    "uses": [
     "def-weil-ring-localization-away"
    ],
@@ -150,10 +150,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T085342-L-40639",
-  "kind": "interface",
+  "landing": "20261012T150953-L-2230811",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
