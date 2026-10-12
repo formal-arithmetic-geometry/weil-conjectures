@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-idempotent-charpoly-local-charpoly",
+ "kind": "statement",
+ "title": "A summand determinant is locally a matrix characteristic polynomial",
+ "statement": "Let A be a commutative ring, n a finite index set, and T,P matrices with P*P=P and T*P=P*T. For D(T,P) defined in [def-weil-pbc-idempotent-charpoly], there exist a finite family f_i generating the unit ideal and, for each i, a natural number d_i and a d_i by d_i matrix U_i over A localized away from f_i, such that the coefficientwise localization of D(T,P) is the characteristic polynomial of U_i. No condition on the global leading coefficient is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), splitting and characteristic-polynomial paragraphs; local matrix realization made explicit by R2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-idempotent-charpoly"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the ambient module by Fin (card n). Apply [lem-weil-pbc-idempotent-endomorphism-image-base-change] to P and 1-P to obtain complementary finite projective images and their base-change identifications.",
+   "uses": [
+    "lem-weil-pbc-idempotent-endomorphism-image-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-projective-standard-free-cover] to both images. Refine the two finite standard covers by all pairwise products. The products span the unit ideal because the product of two expressions for 1 in the original spans is an expression for 1 in the product span. Localizing further preserves freeness and the split decomposition.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each refined localization, concatenate finite bases of the two images. The commuting equation makes T preserve both images, so P is diag(1,0) and T is diag(U,V). The polynomial matrix from [def-weil-pbc-idempotent-charpoly] is then diag(X-U,1). Determinants commute with ring maps and basis change, and the determinant of this block matrix is U.charpoly. Enumerate the cover by Fin r; the size of U can vary by cover member. Over the zero ring or an empty ambient matrix the equality is immediate with d=0.",
+   "uses": [
+    "def-weil-pbc-idempotent-charpoly"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "def-weil-pbc-idempotent-charpoly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "R2 second reader",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, local determinant calculation of the two complementary finite projective images"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "idempotent.*charpoly|charpoly.*idempotent|isIdempotentElem_of_localized|Monic.*leadingCoeff",
+   "date": "2026-10-12",
+   "results": "25 hits: Mathlib/Algebra/CubicDiscriminant.lean, Mathlib/Algebra/CubicDiscriminant.lean, Mathlib/Algebra/CubicDiscriminant.lean, Mathlib/Algebra/CubicDiscriminant.lean, Mathlib/FieldTheory/IsAlgClosed/Basic.lean, Mathlib/LinearAlgebra/AnnihilatingPolynomial.lean, Mathlib/LinearAlgebra/Matrix/Adjugate.lean, Mathlib/FieldTheory/Minpoly/Field.lean",
+   "verdict": "No exact local summand determinant realization; candidate types checked. Matrix.det_one_sub_mul_comm is a useful determinant tool, not this localization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant of one minus an idempotent plus X minus a commuting matrix times the idempotent is locally the characteristic polynomial of the image summand",
+   "date": "2026-10-12",
+   "results": "8 hits: Matrix.det_one_add_X_smul, Matrix.det_one_add_smul, Matrix.charpoly_mul_comm_of_le, Algebra.Norm.Transitivity.eval_zero_comp_det, Algebra.Norm.Transitivity.eval_zero_det_det, Matrix.charpoly_mul_comm', Algebra.Norm.Transitivity.comp_det_mul_pow, Matrix.det_one_sub_mul_comm",
+   "verdict": "No exact local summand determinant realization; candidate types checked. Matrix.det_one_sub_mul_comm is a useful determinant tool, not this localization statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Matrix.charpoly, Localization.Away",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact local summand determinant realization; candidate types checked. Matrix.det_one_sub_mul_comm is a useful determinant tool, not this localization statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A commuting idempotent matrix splits a finite free module, and on a finite principal-open cover the determinant of 1-P+(X-T)P is the characteristic polynomial on its image",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.LinearAlgebra.IdempotentCharpolyLeadingCoeff",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-idempotent-charpoly-leading-coeff",
+   "place": "steps 1 and 2: finite standard cover and local characteristic-polynomial identification",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.IdempotentCharpolyLocalCharpoly",
+  "file": "lean/Sheaf/LinearAlgebra/IdempotentCharpolyLocalCharpoly.lean",
+  "declaration": "Matrix.exists_standardCover_idempotentCharpoly_eq_charpoly",
+  "statement": "theorem exists_standardCover_idempotentCharpoly_eq_charpoly\n    {A : Type u} [CommRing A] {n : Type v} [Fintype n] [DecidableEq n]\n    (T P : Matrix n n A) (hP : P * P = P) (hTP : T * P = P * T) :\n    ∃ (r : ℕ) (f : Fin r → A), Ideal.span (Set.range f) = ⊤ ∧\n      ∀ i : Fin r, ∃ (d : ℕ) (U : Matrix (Fin d) (Fin d) (Localization.Away (f i))),\n        (idempotentCharpoly T P).map (algebraMap A (Localization.Away (f i))) =\n          U.charpoly",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T112849-L-771463",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T112849-L-771463",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
