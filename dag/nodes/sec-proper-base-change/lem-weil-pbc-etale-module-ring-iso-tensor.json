@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Define a section map a tensor m to t.inv(G)(c.inv(a) times m). Linearity of t.inv and the inverse-ring identities make it balanced and RU(W)-linear, hence the tensor universal property extends it. Its inverse n maps to 1 tensor t.hom(G)(n). The inverse-comparison identity proves one composite is identity; balancing and c.hom(c.inv(a))=a prove the other on pure tensors, hence everywhere.",
+   "text": "At each object W apply Mathlib ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars to e.hom(W), where e is t(G) inverse. Its value on a tensor a tensor m is a times e.hom(W)(m). The ring isomorphism c(W) makes restriction of scalars an equivalence (ModuleCat.restrictScalars_isEquivalence_of_ringEquiv). The transpose is extendScalars(e.hom(W)) followed by the adjunction counit; both factors are isomorphisms, so this section map is invertible. Equality with the transpose is checked on 1 tensor m using extendRestrictScalarsAdj_homEquiv_apply.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-sheaf-of-modules-category"
@@ -23,14 +23,15 @@
    "elementary": false
   },
   {
-   "text": "Naturality of c and t shows these inverse linear maps commute with restrictions, so they identify the tensor presheaf with the underlying presheaf of LM(G). Sheafification and its unit on a sheaf give d(G); the defining factorization gives the pure-tensor equation.",
+   "text": "The section maps commute with restrictions: apply ExtendScalars.hom_ext, use exists_changeOfRingsMap on 1 tensor m and naturality_apply for e.hom. PresheafOfModules.isoMk bundles them. Sheafify this presheaf isomorphism and compose with the invertible sheafification counit. The hom-equivalence naturality and counit identity show that its composite with toSheafify is the original section map. Linearity of t.inv and c.hom(c.inv(a))=a convert a times t.inv(m) into the required t.inv(c.inv(a) times m).",
    "uses": [
+    "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false
   },
   {
-   "text": "For G to H, naturality of t and linearity of L0.map show the two composites agree on pure tensors. The tensor and sheafification universal properties give the displayed naturality equation.",
+   "text": "For a module map h define the sectionwise tensor map psi using extendScalars.map. The equation psi followed by the comparison for H equals the comparison for G followed by LM(h) is checked with ExtendScalars.hom_ext on 1 tensor m, ExtendScalars.map_tmul and t.inv.naturality. Apply the sheafification functor and its counit naturality to obtain the required naturality equation.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
@@ -47,7 +48,7 @@
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Definition 03D6 and Lemmas 03CZ, 03D7; parent proof step 3",
-  "note": "Explicit specialization and compatibility argument written by F1 from the cited Stacks construction."
+  "note": "E1: complete Lean proof using the sectionwise scalar adjunction, restriction equivalence along c, and sheafification; no new holes."
  },
  "mathlib_searches": [
   {
@@ -117,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
+  "reviewer": "X-69fed",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T085234-L-12629",
+  "landing": "20261012T112834-L-765900",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node proof metadata, change record, and report matched against the packet and review brief; delivered module and direct importer compiled successfully, theorem axioms are only propext/Classical.choice/Quot.sound, and the unchanged theorem signature was verified byte-for-byte."
  }
 }
