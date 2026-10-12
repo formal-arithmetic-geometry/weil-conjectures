@@ -7462,3 +7462,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:25 L: returned deliver/M2/Sheaf.FieldTheory.SeparablyGeneratedSeparable (reviewer RETURN: (reviewer X-81f91, head 81f91f125) H9 / brief point 5 (pruning): In lean/Sheaf/FieldTheory/SeparablyGeneratedSeparable.l)
 - 11:25 L: returned deliver/J2/Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentGermLifts (reviewer RETURN: (reviewer X-583d0, head 583d0b88a) H1: add lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveSetDescentCoordinatesConstant.le)
 - 11:25 L: returned deliver/H2/Sheaf.AlgebraicGeometry.GluedComponentAffineSection (reviewer RETURN: (reviewer X-5435e, head 5435e3e1a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Gl)
+- 11:28 L: returned deliver/A3/Sheaf.RingTheory.EtaleResidueTripleUnitRefinement (reviewer RETURN: (the landing tools, head 90c788557) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
