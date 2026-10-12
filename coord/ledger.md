@@ -7712,3 +7712,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:28 L: returned deliver/P2/Sheaf.AlgebraicGeometry.NormalizedGenericDataLifts (reviewer RETURN: (reviewer X-54ab0, head 54ab01c55) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.No)
 
 - 21:18 L: replace red-batch halves with interface attribution, transactional suspect/dependent take-out and four-round closure fallback; reuse and complete one import graph per batch. Python tests and read-only incident/closed-batch replays passed.
+- 13:37 L: returned deliver/G3/Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore (reviewer RETURN: (reviewer X-dfe97, head dfe97f489) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
