@@ -5,21 +5,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import Sheaf.AlgebraicGeometry.GrothendieckExistence
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
-import Sheaf.Topology.PresheafModuleStalkFunctor
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Sheaf.Paper.AlgebraizeFiniteStructureAlgebra
+import Sheaf.AlgebraicGeometry.CoherentAlgebraAffineFiniteProper
+import Sheaf.AlgebraicGeometry.AffineAlgebraReductionsCartesian
+import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
 
 /-!
 # Algebraization of finite schemes over thickenings of a proper scheme
@@ -93,6 +82,56 @@ theorem algebraize_finite_over_proper
               (by rw [Category.comp_id, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
                     Ideal.Quotient.factor_comp_mk]) ∧
           e n ≫ gn n = q ≫ e (n + 1)) := by
-  sorry
+  classical
+  let j (n : ℕ) := pullback.fst f
+    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
+  let i (n : ℕ) := pullback.map f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
+        f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1 + 1))))) (𝟙 X)
+        (Spec.map (CommRingCat.ofHom
+          (Ideal.Quotient.factor (Ideal.pow_le_pow_right (Nat.le_succ (n + 1))))))
+        (𝟙 _) (by simp)
+        (by rw [Category.comp_id, ← Spec.map_comp, ← CommRingCat.ofHom_comp,
+              Ideal.Quotient.factor_comp_mk])
+  have hi (n : ℕ) : i n ≫ j (n + 1) = j n := by
+    simp [i, j]
+  have hw (n : ℕ) : gn n ≫ (fnY (n + 1) ≫ j (n + 1)) = fnY n ≫ j n := by
+    rw [← Category.assoc, ← (hcart n).w, Category.assoc]
+    exact congrArg (fun k ↦ fnY n ≫ k) (hi n)
+  obtain ⟨B, hqc, hcoh, hproper, b, hb, hcompat⟩ :=
+    algebraize_finite_structure_algebra A I X f Yn fnY gn hcart hw
+  obtain ⟨Y, g, hg, ⟨α⟩⟩ := exists_affine_structure_algebra X B hqc
+  let : IsAffineHom g := hg
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : ∀ n, IsClosedImmersion (j n) := fun n ↦ by
+    have : IsClosedImmersion (Spec.map (CommRingCat.ofHom
+        (Ideal.Quotient.mk (I ^ (n + 1))))) :=
+      IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+    exact MorphismProperty.pullback_fst f _ this
+  have : ∀ n, IsAffineHom (fnY n) := fun n ↦ inferInstance
+  obtain ⟨hfinite, hYproper⟩ := coherent_algebra_affine_finite_proper f g B α hcoh hproper
+  obtain ⟨v, hv, hvg⟩ := affine_algebra_reductions_cartesian
+    (fun n ↦ pullback f
+      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))))
+    Yn j fnY gn hw g B α b hb hcompat
+  let e (n : ℕ) := (hv n).isoPullback.inv
+  refine ⟨Y, g, hfinite, hYproper, e, ?_, ?_⟩
+  · intro n
+    exact ⟨inferInstanceAs (IsIso ((hv n).isoPullback.inv)),
+      (hv n).isoPullback_inv_snd⟩
+  · intro n
+    let q : pullback g (j n) ⟶ pullback g (j (n + 1)) :=
+      pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ i n) (by
+        rw [Category.assoc, hi n, pullback.condition])
+    refine ⟨q, pullback.lift_fst _ _ _, pullback.lift_snd _ _ _, ?_⟩
+    apply (hv (n + 1)).hom_ext
+    · dsimp only [e]
+      rw [Category.assoc, hvg n, (hv n).isoPullback_inv_fst,
+        Category.assoc, (hv (n + 1)).isoPullback_inv_fst]
+      exact (pullback.lift_fst _ _ _).symm
+    · dsimp only [e]
+      rw [Category.assoc, ← (hcart n).w, ← Category.assoc,
+        (hv n).isoPullback_inv_snd, Category.assoc,
+        (hv (n + 1)).isoPullback_inv_snd]
+      exact (pullback.lift_snd _ _ _).symm
 
 end AlgebraicGeometry

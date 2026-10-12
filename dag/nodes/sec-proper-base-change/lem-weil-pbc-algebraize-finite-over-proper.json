@@ -29,204 +29,59 @@
  ],
  "proof": [
   {
-   "text": "(Setting.) Indices are shifted against Stacks: our $S_n,X_n,Y_n$ ($n\\ge0$) are Stacks' $S_{n+1},X_{n+1},Y_{n+1}$. Let $j_n:X_n\\to X$ and $i_n:X_n\\to X_{n+1}$ be the closed immersions (base changes of $S_n\\to S$, $S_n\\to S_{n+1}$), so $j_{n+1}\\circ i_n=j_n$, and write $\\mathcal G|_{X_n}=j_n^*\\mathcal G$ for an $\\mathcal O_X$-module $\\mathcal G$, with the canonical isomorphisms $c_n:i_n^*(\\mathcal G|_{X_{n+1}})\\cong\\mathcal G|_{X_n}$. Let $g_n:Y_n\\to Y_{n+1}$ be the given maps, so $f_{n+1}\\circ g_n=i_n\\circ f_n$ and $(f_n,g_n):Y_n\\to X_n\\times_{X_{n+1}}Y_{n+1}$ is an isomorphism. $X_n\\to S_n$ is separated and of finite type [lem-pod-separated-finite-type-base-change], and $S_n$ is Noetherian ($A/I^{n+1}$ is a quotient of a Noetherian ring); hence $X$ and every $X_n$ are locally Noetherian [pqf-lem-locnoeth-lft].",
+   "text": "Let j_n be the first pullback projection Xn -> X and i_n the specified transition pullback map. Its first projection equation gives i_n followed by j_(n+1) = j_n. Composing the commutativity of the given cartesian square with j_(n+1) proves g_n followed by (f_(n+1) followed by j_(n+1)) = f_n followed by j_n.",
    "uses": [
-    "lem-pod-separated-finite-type-base-change",
-    "pqf-lem-locnoeth-lft",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof; the shift of index as in the statement of the Lemma"
-   }
-  },
-  {
-   "text": "(The algebras $\\mathcal A_n$.) Each $f_n$ is finite, in particular affine [def-weil-finite-integral-morphism]. Put $\\mathcal A_n=f_{n,*}\\mathcal O_{Y_n}$: it is a quasi-coherent $\\mathcal O_{X_n}$-algebra [lem-weil-pbc-affine-morphism-relative-spec](1), coherent as an $\\mathcal O_{X_n}$-module because $f_n$ is finite and $X_n$ is locally Noetherian (step 1) [lem-weil-pbc-finite-pushforward-coherent], and $Y_n$ is, as an $X_n$-scheme, the relative spectrum of $\\mathcal A_n$: $Y_n\\cong\\underline{\\operatorname{Spec}}_{X_n}(\\mathcal A_n)$ [lem-weil-pbc-affine-morphism-relative-spec](3).",
-   "uses": [
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-finite-pushforward-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof, first two sentences ('Set F_n = f_{n,*}O_{Y_n}. This is a coherent O_{X_n}-module as f_n is finite (Lemma 01Y6)')"
-   }
-  },
-  {
-   "text": "(The transition isomorphisms.) Since the square formed by $f_n,f_{n+1},i_n,g_n$ is cartesian and $f_{n+1}$ is affine, the base change map $\\varphi_n:i_n^*\\mathcal A_{n+1}=i_n^*f_{n+1,*}\\mathcal O_{Y_{n+1}}\\to f_{n,*}g_n^*\\mathcal O_{Y_{n+1}}=f_{n,*}\\mathcal O_{Y_n}=\\mathcal A_n$ is an isomorphism of $\\mathcal O_{X_n}$-algebras [lem-weil-pbc-affine-pushforward-base-change](1),(2). So $(\\mathcal A_n,\\varphi_n)_{n\\ge0}$ is a system of coherent modules with isomorphisms $i_n^*\\mathcal A_{n+1}\\cong\\mathcal A_n$ as in [prop-weil-pbc-grothendieck-existence](b), and each $\\varphi_n$ respects the algebra structures.",
-   "uses": [
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "prop-weil-pbc-grothendieck-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof, third sentence ('Using that the squares are cartesian we see that the pullback of F_{n+1} to X_n is F_n'), with Lemma 02KG (lemma-affine-base-change)"
-   }
-  },
-  {
-   "text": "(The support of $\\mathcal A_0$ is proper over $S_0$.) $f_0$ is proper ([lem-weil-pbc-finite-morphism-permanence](c) applied with $h=\\mathrm{id}_{X_0}$, which is proper), so $f_0(Y_0)$ is closed in $X_0$. If $x\\notin f_0(Y_0)$, the open $V=X_0\\setminus f_0(Y_0)$ has $f_0^{-1}(V)=\\emptyset$, so $\\mathcal A_0(V')=\\mathcal O_{Y_0}(\\emptyset)=0$ for every open $V'\\subseteq V$ and the stalk $(\\mathcal A_0)_x$ [def-weil-pbc-module-stalk] is $0$; thus $\\operatorname{Supp}(\\mathcal A_0)\\subseteq f_0(Y_0)$. Now $Y_0\\to S_0$ is proper by hypothesis, so the closed subset $Y_0$ of $Y_0$ is proper over $S_0$ [lem-weil-pbc-closed-subset-proper-over-base-properties](1) (with its own scheme structure); $X_0\\to S_0$ is separated and locally of finite type (step 1), so $f_0(Y_0)$ is a closed subset of $X_0$ proper over $S_0$ [lem-weil-pbc-closed-subset-proper-over-base-properties](3). $\\operatorname{Supp}(\\mathcal A_0)$ is closed, $\\mathcal A_0$ being quasi-coherent of finite type [lem-weil-pbc-module-support-proper-over-base](1), and contained in $f_0(Y_0)$, hence proper over $S_0$ [lem-weil-pbc-closed-subset-proper-over-base-properties](2), [def-weil-pbc-closed-subset-proper-over-base].",
-   "uses": [
-    "lem-weil-pbc-finite-morphism-permanence",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties",
-    "lem-weil-pbc-module-support-proper-over-base",
-    "def-weil-pbc-closed-subset-proper-over-base"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof (the support condition of Remark 088F, left implicit there; written out with Lemmas 0CYL, 0CYN, 0CYQ(1) and Morphisms 056J)"
-   }
-  },
-  {
-   "text": "(Algebraizing the module.) By [prop-weil-pbc-grothendieck-existence](b) applied to $(\\mathcal A_n,\\varphi_n)$ (steps 2-4) there are a coherent $\\mathcal O_X$-module $\\mathcal F$ with support proper over $S$ and isomorphisms $\\psi_n:\\mathcal F|_{X_n}\\to\\mathcal A_n$ with $\\varphi_n\\circ i_n^*\\psi_{n+1}=\\psi_n\\circ c_n$ for all $n$.",
-   "uses": [
-    "prop-weil-pbc-grothendieck-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof, fourth and fifth sentences (Grothendieck's existence theorem as reformulated in Remark 088F; the support of F is proper over S)"
-   }
-  },
-  {
-   "text": "(A closed subscheme carrying $\\mathcal F$; supports of the auxiliary modules.) By [lem-weil-pbc-module-support-proper-over-base](2) there is a closed subscheme $Z\\subseteq X$ with quasi-coherent ideal sheaf $\\mathcal I_Z$ [def-sbc-closed-immersion-ideal-sheaf] such that $Z\\to S$ is proper and $\\mathcal I_Z\\mathcal F=0$. The modules $\\mathcal F\\otimes\\mathcal F=\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal F$ and $(\\mathcal F\\otimes\\mathcal F)\\otimes\\mathcal F$ are quasi-coherent, with sections $\\mathcal F(U)\\otimes_R\\mathcal F(U)$ (resp. the triple tensor product) over affine opens $U=\\operatorname{Spec}R$ [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections]; these are finite $R$-modules since $\\mathcal F(U)$ is [lem-weil-pbc-quasi-coherent-finite-type-affine](a), so the modules are of finite type [lem-weil-pbc-quasi-coherent-finite-type-affine](c), hence coherent on the locally Noetherian $X$ [pqf-lem-coherent-ft-locnoeth]. $\\mathcal O_X/\\mathcal I_Z$ is a quasi-coherent quotient of $\\mathcal O_X$ [lem-weil-pbc-quasi-coherent-module-cokernel-image], of finite type, hence coherent. All three are annihilated by $\\mathcal I_Z$ (for local sections $a$ of $\\mathcal I_Z$: $a(s\\otimes t)=(as)\\otimes t=0$ in the presheaf tensor product, hence in its sheafification; and $a\\cdot\\bar b=\\overline{ab}=0$ in $\\mathcal O_X/\\mathcal I_Z$), so each has support proper over $S$ [lem-weil-pbc-module-support-proper-over-base](2) (the 'if' direction, with $Z$).",
-   "uses": [
-    "lem-weil-pbc-module-support-proper-over-base",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof ('As the completion functor is fully faithful (Theorem 088E)'): that the modules to which full faithfulness is applied have support proper over A is not written by Stacks; written out by the agent with Lemma 0CYS (2)<=>(3) and Lemma 0CYU (lemma-cat-module-support-proper-over-base)"
-   }
-  },
-  {
-   "text": "(Restricting tensor products.) For quasi-coherent $\\mathcal O_X$-modules $\\mathcal G,\\mathcal H$ the canonical map $\\kappa:(\\mathcal G\\otimes\\mathcal H)|_{X_n}\\to\\mathcal G|_{X_n}\\otimes\\mathcal H|_{X_n}$ (adjoint to $\\mathcal G\\otimes\\mathcal H\\to j_{n,*}(\\mathcal G|_{X_n}\\otimes\\mathcal H|_{X_n})$, $s\\otimes t\\mapsto\\eta(s)\\otimes\\eta(t)$, $\\eta$ the unit of $j_n^*\\dashv j_{n,*}$ [def-pc-module-pullback]) is an isomorphism: this is local, and over an affine open $U=\\operatorname{Spec}R$ of $X$ with $X_n\\cap U=\\operatorname{Spec}R/J$ ($J=I^{n+1}R$), $M=\\mathcal G(U)$, $N=\\mathcal H(U)$, the modules are $\\widetilde M,\\widetilde N$ [lem-weil-pbc-affine-tilde-gamma-adjunction], $\\mathcal G\\otimes\\mathcal H|_U=(M\\otimes_RN)^\\sim$ [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections], the pullbacks are $(R/J\\otimes_RM)^\\sim$ etc. [lem-weil-pbc-tilde-pullback-base-change], and $\\kappa$ is the tilde of the canonical isomorphism $R/J\\otimes_R(M\\otimes_RN)\\cong(R/J\\otimes_RM)\\otimes_{R/J}(R/J\\otimes_RN)$ (both send $\\bar r\\otimes m\\otimes n$ to $\\bar r\\otimes m\\otimes n$, by the formulas on $\\tau$ in those nodes). The $\\kappa$ are natural in $\\mathcal G,\\mathcal H$ and compatible with the $c_n$ and with the associativity, symmetry and unit isomorphisms of $\\otimes$ [lem-weil-pbc-module-tensor-symmetric-monoidal], since all of these are checked on the elements $\\bar r\\otimes m\\otimes n$ over affine opens.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-tilde-pullback-base-change",
-    "lem-weil-pbc-module-tensor-symmetric-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof ('the multiplication maps F_n (x) F_n -> F_n fit together'), which uses that the restriction of F (x) F to X_n is F_n (x) F_n; written out by the agent with Schemes Lemma 01I9 (lemma-widetilde-pullback, literature/stacks-project/schemes.tex)"
-   }
-  },
-  {
-   "text": "(The multiplication.) Let $m_n:\\mathcal A_n\\otimes\\mathcal A_n\\to\\mathcal A_n$ be the multiplication and $\\mu_n=\\psi_n^{-1}\\circ m_n\\circ(\\psi_n\\otimes\\psi_n)\\circ\\kappa:(\\mathcal F\\otimes\\mathcal F)|_{X_n}\\to\\mathcal F|_{X_n}$ (step 7). Because $\\varphi_n$ is an algebra map ($\\varphi_n\\circ i_n^*m_{n+1}=m_n\\circ(\\varphi_n\\otimes\\varphi_n)$ up to the isomorphism $i_n^*(\\mathcal A_{n+1}\\otimes\\mathcal A_{n+1})\\cong i_n^*\\mathcal A_{n+1}\\otimes i_n^*\\mathcal A_{n+1}$, step 3), the $\\psi_n$ are compatible with the $\\varphi_n$ and $c_n$ (step 5), and $\\kappa$ is compatible with the $c_n$ (step 7), we get $\\mu_n\\circ c_n=c_n\\circ i_n^*\\mu_{n+1}$. Both $\\mathcal F\\otimes\\mathcal F$ and $\\mathcal F$ are coherent with support proper over $S$ (steps 5, 6), so by [prop-weil-pbc-grothendieck-existence](a) there is a unique $\\mathcal O_X$-linear $\\mu:\\mathcal F\\otimes\\mathcal F\\to\\mathcal F$ with $\\mu|_{X_n}=\\mu_n$ for all $n$.",
-   "uses": [
-    "prop-weil-pbc-grothendieck-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof, sixth sentence ('As the completion functor is fully faithful (Theorem 088E) we see that the multiplication maps F_n (x) F_n -> F_n fit together to give an algebra structure on F')"
-   }
-  },
-  {
-   "text": "(The unit.) $\\mathcal O_X$ need not have support proper over $S$, so the unit is algebraized through $\\mathcal O_X/\\mathcal I_Z$ (step 6). Let $e_n:\\mathcal O_{X_n}\\to\\mathcal F|_{X_n}$ be $\\psi_n^{-1}$ composed with the unit $\\mathcal O_{X_n}\\to\\mathcal A_n$. Multiplication by a local section $a$ of $\\mathcal I_Z$ is zero on $\\mathcal F$, so its pullback, multiplication by $j_n^\\sharp(a)$, is zero on $\\mathcal F|_{X_n}$; as $e_n(b)=b\\,e_n(1)$, $e_n$ kills the image of $j_n^*\\mathcal I_Z\\to\\mathcal O_{X_n}$ and, $j_n^*$ being right exact (a left adjoint [def-pc-module-pullback]), factors through $(\\mathcal O_X/\\mathcal I_Z)|_{X_n}=\\mathcal O_{X_n}/\\operatorname{im}(j_n^*\\mathcal I_Z)$ as $\\bar e_n$. The $\\bar e_n$ are compatible with the $c_n$ since the $\\varphi_n$ preserve units. As $\\mathcal O_X/\\mathcal I_Z$ and $\\mathcal F$ are coherent with support proper over $S$ (step 6), [prop-weil-pbc-grothendieck-existence](a) gives a unique $\\bar e:\\mathcal O_X/\\mathcal I_Z\\to\\mathcal F$ with $\\bar e|_{X_n}=\\bar e_n$; put $e:\\mathcal O_X\\to\\mathcal O_X/\\mathcal I_Z\\xrightarrow{\\bar e}\\mathcal F$, so $e|_{X_n}=e_n$.",
-   "uses": [
-    "def-pc-module-pullback",
-    "prop-weil-pbc-grothendieck-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof ('fit together to give an algebra structure on F'); the unit is not treated by Stacks and is written by the agent, using Lemma 0CYS (3)"
-   }
-  },
-  {
-   "text": "(The algebra axioms.) The two maps $\\mu\\circ(\\mu\\otimes1)$ and $\\mu\\circ(1\\otimes\\mu)\\circ a$ from $(\\mathcal F\\otimes\\mathcal F)\\otimes\\mathcal F$ to $\\mathcal F$ ($a$ the associativity isomorphism [lem-weil-pbc-module-tensor-symmetric-monoidal]), the two maps $\\mu$ and $\\mu\\circ c$ ($c$ the symmetry) from $\\mathcal F\\otimes\\mathcal F$, and the two maps $\\mu\\circ(e\\otimes1)\\circ l^{-1}$ and $\\mathrm{id}$ from $\\mathcal F$ to $\\mathcal F$ ($l:\\mathcal O_X\\otimes\\mathcal F\\cong\\mathcal F$ the unit isomorphism), are maps between coherent modules with support proper over $S$ (steps 5, 6). Their restrictions to each $X_n$ agree, since by steps 7-9 they are carried by $\\psi_n$ and $\\kappa$ to the corresponding maps for the commutative $\\mathcal O_{X_n}$-algebra $\\mathcal A_n$, which agree. By the injectivity in [prop-weil-pbc-grothendieck-existence](a) they agree. So $(\\mathcal F,\\mu,e)$ is a quasi-coherent commutative $\\mathcal O_X$-algebra, and each $\\psi_n:\\mathcal F|_{X_n}\\to\\mathcal A_n$ is an isomorphism of $\\mathcal O_{X_n}$-algebras (for the algebra structure on $\\mathcal F|_{X_n}$ restricted through $\\kappa$, given by $\\mu_n$ and $e_n$).",
-   "uses": [
-    "lem-weil-pbc-module-tensor-symmetric-monoidal",
-    "prop-weil-pbc-grothendieck-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof ('fit together to give an algebra structure on F'): the axioms, not written by Stacks, follow from the faithfulness part of Theorem 088E"
-   }
-  },
-  {
-   "text": "(The finite morphism $Y\\to X$.) Let $\\pi:Y=\\underline{\\operatorname{Spec}}_X(\\mathcal F)\\to X$ be the relative spectrum, an affine morphism with $\\mathcal F\\cong\\pi_*\\mathcal O_Y$ as $\\mathcal O_X$-algebras and $\\pi^{-1}(U)\\cong\\operatorname{Spec}\\mathcal F(U)$ for affine opens $U=\\operatorname{Spec}R$ [lem-weil-pbc-affine-morphism-relative-spec](2). $\\mathcal F(U)$ is a finite $R$-module [lem-weil-pbc-quasi-coherent-finite-type-affine](a), so $R\\to\\mathcal F(U)$ is finite and $\\pi$ is finite [def-weil-finite-integral-morphism].",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "def-weil-finite-integral-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof, last sentence ('Setting Y = Spec_X(F) finishes the proof')"
-   }
-  },
-  {
-   "text": "(Recovering the $Y_n$.) The base change $\\pi_n:Y\\times_XX_n\\to X_n$ is finite, in particular affine [lem-weil-pbc-finite-morphism-permanence](a), and the base change map is an isomorphism of $\\mathcal O_{X_n}$-algebras $\\beta_n:j_n^*\\pi_*\\mathcal O_Y\\to\\pi_{n,*}\\mathcal O_{Y\\times_XX_n}$ [lem-weil-pbc-affine-pushforward-base-change](1),(2). Composing, $\\pi_{n,*}\\mathcal O_{Y\\times_XX_n}\\cong\\mathcal F|_{X_n}\\xrightarrow{\\psi_n}\\mathcal A_n=f_{n,*}\\mathcal O_{Y_n}$ is an isomorphism of $\\mathcal O_{X_n}$-algebras (step 10), so by the anti-equivalence [lem-weil-pbc-affine-morphism-relative-spec](3) there is a unique isomorphism of $X_n$-schemes $\\theta_n:Y\\times_XX_n\\to Y_n$ inducing it. Compatibility: $Y\\times_XX_n=(Y\\times_XX_{n+1})\\times_{X_{n+1}}X_n$, and since $(f_n,g_n):Y_n\\to X_n\\times_{X_{n+1}}Y_{n+1}$ is an isomorphism, the equality $g_n\\circ\\theta_n=\\theta_{n+1}\\circ(\\text{projection } Y\\times_XX_n\\to Y\\times_XX_{n+1})$ is an equality of two $X_n$-morphisms $Y\\times_XX_n\\to X_n\\times_{X_{n+1}}Y_{n+1}$ between schemes affine over $X_n$; by [lem-weil-pbc-affine-morphism-relative-spec](3) it suffices that they induce the same algebra map on pushforwards, which is the relation $\\varphi_n\\circ i_n^*\\psi_{n+1}=\\psi_n\\circ c_n$ of step 5 together with the compatibility of base change maps with composition $j_n=j_{n+1}\\circ i_n$ [lem-weil-pbc-affine-pushforward-base-change](3). So $Y\\times_XX_n\\cong Y_n$ over $X_n$ (equivalently $Y\\times_SS_n\\cong Y_n$, as $X_n=X\\times_SS_n$), compatibly with the maps $g_n$.",
-   "uses": [
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "lem-weil-pbc-affine-morphism-relative-spec"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof, last sentence ('Setting Y = Spec_X(F) finishes the proof'): the identification Y x_S S_n = Y_n is left to the reader by Stacks and written out here by the agent"
-   }
-  },
-  {
-   "text": "($Y$ is proper over $S$.) Let $Z$ be as in step 6 ($Z\\to S$ proper, $\\mathcal I_Z\\mathcal F=0$). The base change $Y\\times_XZ\\to Z$ is finite [lem-weil-pbc-finite-morphism-permanence](a), hence $Y\\times_XZ\\to Z\\to S$ is proper [lem-weil-pbc-finite-morphism-permanence](c). The projection $Y\\times_XZ\\to Y$ is an isomorphism: over an affine open $U=\\operatorname{Spec}R$ of $X$ with $J=\\mathcal I_Z(U)$, $Z\\cap U=\\operatorname{Spec}R/J$ [def-sbc-closed-immersion-ideal-sheaf] and $\\pi^{-1}(U)=\\operatorname{Spec}\\mathcal F(U)$ (step 11, [lem-weil-pbc-affine-morphism-relative-spec](2),(4)), so the projection over $U$ is $\\operatorname{Spec}$ of $\\mathcal F(U)\\to\\mathcal F(U)\\otimes_RR/J=\\mathcal F(U)/J\\mathcal F(U)$ [def-pc-fibre-product], and $J\\mathcal F(U)=0$ because $\\mathcal I_Z\\mathcal F=0$; these isomorphisms over the affine opens of $X$ glue. Hence $Y\\to S$ is proper. (Equivalently: $\\pi(Y)\\subseteq\\operatorname{Supp}(\\mathcal F)$, which is proper over $S$.)",
-   "uses": [
-    "lem-weil-pbc-finite-morphism-permanence",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-affine-morphism-relative-spec",
     "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper), proof ('Moreover, Y is proper over S' in the statement; the proof only records that the support of F is proper over S): written out by the agent with Lemma 0CYS (3)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Algebraize the structure algebras using algebraize_finite_structure_algebra, obtaining the quasi-coherent coherent algebra B with proper support and its compatible quotient maps b_n. Realize B by exists_affine_structure_algebra, obtaining an affine g : Y -> X and an algebra isomorphism B = g_*O_Y.",
+   "uses": [
+    "lem-weil-pbc-algebraize-finite-structure-algebra",
+    "lem-weil-pbc-relative-spectrum-affine-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "X is locally Noetherian by LocallyOfFiniteType.isLocallyNoetherian. Apply coherent_algebra_affine_finite_proper to g and B to obtain IsFinite g and IsProper(g followed by f). The j_n are closed immersions by the quotient Spec closed immersion instance and stability under base change; each f_n is affine because it is finite.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-coherent-algebra-affine-finite-proper",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine_algebra_reductions_cartesian to the b_n and their quotient and compatibility properties. This produces v_n : Yn -> Y with cartesian squares (v_n,f_n,g,j_n), and g_n followed by v_(n+1) = v_n.",
+   "uses": [
+    "lem-weil-pbc-affine-algebra-reductions-cartesian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set e_n to the inverse of the canonical isomorphism of each cartesian square with pullback g j_n. Its two projection equations give e_n followed by v_n = fst and e_n followed by f_n = snd. Define q_n by pullback.lift(fst, snd followed by i_n), using i_n followed by j_(n+1) = j_n and the pullback condition. Its projection identities are the required equations. For e_n followed by g_n = q_n followed by e_(n+1), use hom_ext for the cartesian square at n+1: equality after v_(n+1) follows from the compatibility of v and the fst equations; equality after f_(n+1) follows from the given square commutativity and the snd equations.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pod-separated-finite-type-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-algebraize-finite-structure-algebra",
+  "lem-weil-pbc-relative-spectrum-affine-realization",
   "pqf-lem-locnoeth-lft",
-  "def-pc-module-pullback",
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-finite-pushforward-coherent",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "prop-weil-pbc-grothendieck-existence",
-  "lem-weil-pbc-finite-morphism-permanence",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties",
-  "lem-weil-pbc-module-support-proper-over-base",
-  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-weil-pbc-coherent-algebra-affine-finite-proper",
   "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-tilde-pullback-base-change",
-  "lem-weil-pbc-module-tensor-symmetric-monoidal",
-  "def-pc-fibre-product"
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-affine-algebra-reductions-cartesian"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 09ZT (lemma-algebraize-formal-scheme-finite-over-proper) and its proof; the supports of the auxiliary modules (step 6), the restriction of tensor products (step 7), the unit of the algebra (step 9), the algebra axioms (step 10), the identification Y x_X X_n = Y_n (step 12) and the properness of Y (step 13), which Stacks leaves implicit, are written out by the agent"
+  "place": "Lemma 09ZT, unchanged route: algebraize algebra, take relative Spec, recover reductions, prove properness. X3 implemented the categorical assembly and grouped the remaining algebra/chart arguments into three strictly smaller intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -310,5 +165,15 @@
   "group": "C1",
   "result": "fix",
   "note": "Noetherian+IsAdicComplete I A; S=Spec A literally; S_n=Spec(A/I^(n+1)) via Quotient.mk, X_n=pullback f (S_n->S), X_n->X_{n+1} = pullback.map of Quotient.factor; separated+LFT+QC f; finite fnY; IsPullback squares; IsProper Y0->S0; conclusion finite g, proper g≫f, isos Y×_X X_n≅Y_n over X_n compatible with gn via induced q"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T085403-L-49234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-affine-algebra-reductions-cartesian",
+ "kind": "statement",
+ "title": "Compatible affine algebra quotient reductions yield cartesian scheme maps",
+ "statement": "Let X,Y,X_n,Y_n be schemes [def-pc-scheme]. Let j_n : X_n -> X be closed immersions [def-sbc-closed-immersion-ideal-sheaf], f_n : Y_n -> X_n affine [pqf-def-affine-morphism], and g_n : Y_n -> Y_(n+1) such that g_n followed by (f_(n+1) followed by j_(n+1)) equals f_n followed by j_n. Let g : Y -> X be affine and B a commutative O_X-algebra sheaf [def-weil-pbc-comm-algebra-sheaf] with an algebra isomorphism B -> g_*O_Y. Suppose O_X-algebra morphisms b_n : B -> (f_n followed by j_n)_*O_Yn are given. On every affine open U require b_n(U) to be surjective with kernel the extension to B(U) of ker(j_n sharp on U). On every open U require b_(n+1)(U) followed by g_n sharp to equal b_n(U), with the preimage domains identified by the fixed composition equality. Then there exist u_n : Y_n -> Y such that the square (u_n,f_n,g,j_n) is cartesian [def-pc-fibre-product], and g_n followed by u_(n+1) equals u_n.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 09ZT, last sentence, recovery of Y_n; Morphisms 01S8/01SA, affine correspondence"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For affine U in X, both Y over U and Yn over j_n inverse U are affine. The component b_n(U), using the isomorphism B(U) = O_Y(g inverse U), defines a morphism from Yn over U to Y over U. Because b_n is a morphism of O_X-algebras it is over U, and naturality of b_n on restrictions makes these local morphisms compatible. The affine structure-algebra correspondence therefore glues them to u_n over X.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write j_n inverse U = Spec(R/J_n). The hypotheses give O_Yn(r_n inverse U) = B(U)/J_n B(U) by the first isomorphism theorem for rings. This is B(U) tensor_R (R/J_n), the coordinate ring of the base change of Y to Xn. Thus the square is cartesian on every affine chart, and hence globally.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equality b_(n+1)(U) followed by gn sharp = b_n(U), on every affine chart, identifies the algebra maps induced by gn followed by u_(n+1) and u_n. Faithfulness of the affine correspondence gives equality on each chart. Morphisms agree globally since these charts cover the source.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 09ZT, last sentence, recovery of Y_n; Morphisms 01S8/01SA, affine correspondence",
+  "note": "Grouped steps of the existing 09ZT proof plan; ring-sheaf quotient characterization and chart compatibility written out by X3 from Stacks 09ZT, 088F, 0CYS and 01S8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible quotient ring sheaves determine cartesian squares of affine schemes",
+   "results": "Service unavailable: Internal Server Error. Attempt recorded without an absence verdict.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible quotient ring sheaf maps define compatible cartesian squares of affine schemes",
+   "results": "Scheme.isPullback_toSpecΓ_toSpecΓ, AffineSpace.isPullback_map, and affine pullback existence: none constructs maps from ring-sheaf quotient reductions.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CommAlgebraSheaf|HasSupportProperOver|coherent_algebra|algebra.*reduction; algebraize|09ZT in source and Sheaf; blueprint_refs search algebra structure, coherent algebra, quotient algebra, relative spectrum",
+   "results": "Mathlib has no CommAlgebraSheaf or proper module support; only unrelated elliptic curve reduction import. Existing Sheaf CommAlgebraSheaf, GrothendieckExistence, AffineMorphismRelativeSpec, RelativeSpectrumAffineRealization reused. No duplicate of the new statement in the library or whole blueprint.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AlgebraizeFiniteOverProper",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); algebraize-finite-over-proper proof steps 12",
+   "via": [
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraReductionsCartesian",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraReductionsCartesian.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_reductions_cartesian",
+  "statement": "theorem affine_algebra_reductions_cartesian {X Y : Scheme.{u}} (Xn Yn : ℕ → Scheme.{u}) (j : ∀ n, Xn n ⟶ X) [∀ n, IsClosedImmersion (j n)] (fnY : ∀ n, Yn n ⟶ Xn n) [∀ n, IsAffineHom (fnY n)] (gn : ∀ n, Yn n ⟶ Yn (n + 1)) (hw : ∀ n, gn n ≫ (fnY (n + 1) ≫ j (n + 1)) = fnY n ≫ j n) (g : Y ⟶ X) [IsAffineHom g] (B : X.CommAlgebraSheaf) (α : B ≅ 𝒪⁎g) (b : ∀ n, B ⟶ 𝒪⁎(fnY n ≫ j n)) (hb : ∀ (n : ℕ) (U : X.Opens), IsAffineOpen U → Function.Surjective ((b n).right.hom.app (op U)).hom ∧ RingHom.ker ((b n).right.hom.app (op U)).hom = (RingHom.ker ((j n).app U).hom).map (B.hom.hom.app (op U)).hom) (hcompat : ∀ (n : ℕ) (U : X.Opens), (b (n + 1)).right.hom.app (op U) ≫ (gn n).appLE ((fnY (n + 1) ≫ j (n + 1)) ⁻¹ᵁ U) ((fnY n ≫ j n) ⁻¹ᵁ U) (by rw [← Scheme.Hom.comp_preimage, hw n]) = (b n).right.hom.app (op U)) : ∃ u : ∀ n, Yn n ⟶ Y, (∀ n, IsPullback (u n) (fnY n) g (j n)) ∧ (∀ n, gn n ≫ u (n + 1) = u n)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T085403-L-49234",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T085403-L-49234",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
