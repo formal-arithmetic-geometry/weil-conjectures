@@ -8235,3 +8235,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/V3/Sheaf.Topology.ConstantSubsheafQuotientStalkIso (stage 3; reviewer PASS; after a return; landing 20261012T144156-L-2111031 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/W2/Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge (stage 3; reviewer PASS; first push; landing 20261012T144156-L-2111154 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/W2/Sheaf.AlgebraicGeometry.IntegralPointedClopenRefinement (stage 3; reviewer PASS; first push; landing 20261012T144156-L-2111267 (interface); batch 20261012T144049; modules 2; new nodes 3)
+- 14:41 L: merged deliver/W2/Sheaf.CategoryTheory.CohomologicalGeneratorDetection (stage 3; reviewer PASS; first push; landing 20261012T144157-L-2111395 (proof); batch 20261012T144049; modules 1; new nodes 0)

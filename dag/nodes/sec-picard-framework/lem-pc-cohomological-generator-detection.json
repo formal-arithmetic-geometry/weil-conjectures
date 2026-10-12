@@ -16,7 +16,7 @@
  ],
  "proof": [
   {
-   "text": "For the given α define P(Y) to mean invertibility of α on Y[n] for every integer n. Shift composition and naturality give closure under shifts and isomorphisms. Apply the cohomological long exact sequences for representable Hom and H to a distinguished triangle and its shifts. The naturality squares commute, so the five lemma gives P for the third object when it holds for the other two.",
+   "text": "For the given α define P(Y) to mean that α at op(Y[n]) is an isomorphism for every integer n. Naturality transports this property along isomorphisms, and shiftFunctorAdd gives closure under shifts. For a distinguished triangle T, form the five-term contravariant sequence on X[1], Z, Y, X, Z[-1]. Its three exactness conditions are Functor.map_distinguished_op_exact applied to T.rotate, T, and T.invRotate; the represented functor is homological by Mathlib Triangulated.Yoneda. The local cohomological_five_exact lemma assembles these into ComposableArrows.mk₄.Exact. Naturality defines the morphism of the two five-term rows; Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono proves invertibility at the middle object (local cohomological_iso_middle). Apply this to all shifts to obtain closure of P under distinguished triangles with first and third objects in P; rotation gives the other orientation needed below.",
    "uses": [
     "def-weil-triangulated-category",
     "def-sp-homological-functor",
@@ -30,7 +30,7 @@
    }
   },
   {
-   "text": "Both H and the represented Hom functor take coproducts to products. Shift equivalences preserve coproducts; under the product comparison α on a coproduct is the product of its components. Products of isomorphisms are isomorphisms, so P is closed under coproducts. Applied to a telescope triangle, coproduct closure and triangle closure give P for its homotopy colimit whenever all stages satisfy P.",
+   "text": "For a family F indexed by Type v, construct the limiting fan with vertex op(∐F) and projections op(Sigma.ι F j); its universal property is the coproduct universal property read in the opposite category. Both preadditiveYoneda.obj G and H preserve this limit. The componentwise isomorphisms of α give a natural isomorphism of the discrete diagrams. IsLimit.conePointsIsoOfNatIso gives an isomorphism of their limiting vertices. Its hom is α at the coproduct by naturality and limit extensionality (local cohomological_iso_coproduct). Shift functors preserve coproducts, so PreservesCoproduct.iso transports this result to every shift and proves P is closed under coproducts. Rotating the telescope triangle then propagates P to its third vertex.",
    "uses": [
     "def-weil-triangulated-category",
     "def-sp-homological-functor"
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "The generator hypothesis on α says P(E i). The compactGenerators_buildObjects theorem expresses an arbitrary Y as a telescope with initial object a coproduct of shifts of E and transition cones also such coproducts. Thus the initial object has P; induction using its transition distinguished triangles shows every stage has P. Telescope closure gives P(Y). Taking shift zero and transporting along the canonical shift-zero isomorphism gives invertibility at op Y, hence at every object of C opposite.",
+   "text": "Use compactGenerators_buildObjects for Y to obtain X, t, the initial coproduct presentation, the coproduct presentations of Z n, the transition distinguished triangles Z n → X n → X(n+1) → Z n[1], and the telescope distinguished triangle with third vertex Y. The hypothesis hα and shift closure put every summand in P. Coproduct closure and isomorphism transport give P(X 0) and P(Z n). Induction on n, applying triangle closure to the rotated transition triangle, gives P(X n) for every n. Apply coproduct closure to the ULift.{v} ℕ-indexed family X n, then apply triangle closure to the rotated telescope triangle to get P(Y). Take n=0 and use NatTrans.isIso_app_iff_of_iso with shiftFunctorZero to obtain invertibility at op Y, hence at the requested arbitrary object of C opposite.",
    "uses": [
     "lem-pc-compact-generators-build-objects"
    ],
@@ -146,10 +146,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T085343-L-41048",
-  "kind": "interface",
+  "landing": "20261012T144157-L-2111395",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
