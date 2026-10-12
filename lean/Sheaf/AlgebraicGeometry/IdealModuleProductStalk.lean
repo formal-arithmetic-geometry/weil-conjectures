@@ -4,9 +4,11 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.Images
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.AlgebraicGeometry.IdealModuleMultiplicationStalkRange
 import Sheaf.Algebra.Homology.ModuleStalkExact
-import Sheaf.Topology.PresheafModuleStalkFunctor
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.LinearAlgebra.Isomorphisms
+import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Stalks of ideal-module products, quotients, and powers
@@ -57,6 +59,91 @@ def idealSheafPower {X : Scheme.{u}} {J : X.Modules}
   | n + 2 => ⟨idealModuleProduct ι (idealSheafPower ι (n + 1)).1,
       idealModuleProductι ι (idealSheafPower ι (n + 1)).1 ≫ (idealSheafPower ι (n + 1)).2⟩
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem unit_stalk_iso (X : Scheme.{u}) (x : X) :
+    let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+    ∃ e : S.obj (SheafOfModules.unit X.ringCatSheaf) ≅
+        ModuleCat.of (X.presheaf.stalk x) (X.presheaf.stalk x),
+      ∀ (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)),
+        e.hom (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf
+          U x hx r) = X.presheaf.germ U x hx r := by
+  let D := (OpenNhds.inclusion x).op ⋙ X.presheaf
+  let A := forget₂ CommRingCat.{u} RingCat.{u} ⋙
+    forget₂ RingCat.{u} AddCommGrpCat.{u}
+  let e : ↑(TopCat.Presheaf.stalk (C := Ab.{u})
+      (SheafOfModules.unit X.ringCatSheaf).val.presheaf x) ≃+ X.presheaf.stalk x :=
+    (preservesColimitIso A D).symm.addCommGroupIsoToAddEquiv
+  have hg (U : X.Opens) (hx : x ∈ U) (r : Γ(X, U)) :
+      e (TopCat.Presheaf.germ (SheafOfModules.unit X.ringCatSheaf).val.presheaf
+        U x hx r) = X.presheaf.germ U x hx r := by
+    change (colimit.ι (D ⋙ A) (Opposite.op (⟨U, hx⟩ : OpenNhds x)) ≫
+      (preservesColimitIso A D).inv) r = _
+    rw [ι_preservesColimitIso_inv]
+    rfl
+  let f : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj
+      (SheafOfModules.unit X.ringCatSheaf) →ₗ[X.presheaf.stalk x] X.presheaf.stalk x :=
+    { e.toAddMonoidHom with
+      map_smul' := by
+        intro r m
+        obtain ⟨U, hxU, r, rfl⟩ := X.presheaf.exists_germ_eq r
+        obtain ⟨V, hxV, m, rfl⟩ :=
+          TopCat.Presheaf.exists_germ_eq
+            (SheafOfModules.unit X.ringCatSheaf).val.presheaf m
+        have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
+        rw [← X.presheaf.germ_res_apply (homOfLE inf_le_left) x hx r,
+          ← TopCat.Presheaf.germ_res_apply
+            (SheafOfModules.unit X.ringCatSheaf).val.presheaf
+            (homOfLE inf_le_right) x hx m,
+          ← PresheafOfModules.germ_smul (R := X.presheaf)]
+        let r' := X.presheaf.map (homOfLE inf_le_left : U ⊓ V ⟶ U).op r
+        let m' : Γ(X, U ⊓ V) :=
+          (SheafOfModules.unit X.ringCatSheaf).val.presheaf.map
+            (homOfLE inf_le_right : U ⊓ V ⟶ V).op m
+        change e (TopCat.Presheaf.germ
+          (SheafOfModules.unit X.ringCatSheaf).val.presheaf (U ⊓ V) x hx (r' * m')) =
+          X.presheaf.germ (U ⊓ V) x hx r' * (e (TopCat.Presheaf.germ
+            (SheafOfModules.unit X.ringCatSheaf).val.presheaf (U ⊓ V) x hx m') :
+              X.presheaf.stalk x)
+        rw [hg, hg]
+        exact map_mul (X.presheaf.germ (U ⊓ V) x hx).hom _ _ }
+  refine ⟨(LinearEquiv.ofBijective f e.bijective).toModuleIso, ?_⟩
+  exact hg
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem stalk_mono {X : Scheme.{u}} {M N : X.Modules}
+    (f : M ⟶ N) [Mono f] (x : X) :
+    Function.Injective ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map f).hom := by
+  have h := (RingedSpace.module_stalk_exact X.toRingedSpace f).1
+  have hm : Mono ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map f) := by
+    apply h
+    intro U
+    have : Mono f.val := (SheafOfModules.forget _).map_mono f
+    exact (ModuleCat.mono_iff_injective (f.val.app (Opposite.op U))).mp inferInstance
+  exact (ModuleCat.mono_iff_injective _).mp hm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem stalk_quotient {X : Scheme.{u}} {M N : X.Modules}
+    (f : M ⟶ N) (x : X) (P : Submodule (X.presheaf.stalk x)
+      ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj N))
+    (hP : LinearMap.range ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).map f).hom
+      = P) :
+    let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+    ∃ φ : (S.obj N ⧸ P) ≃ₗ[X.presheaf.stalk x] S.obj (cokernel f),
+      ∀ m : S.obj N, φ (Submodule.Quotient.mk m) = (S.map (cokernel.π f)).hom m := by
+  let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+  obtain ⟨hepi, hexact⟩ := (RingedSpace.module_stalk_exact X.toRingedSpace f).2.2.1 x
+  have hker : LinearMap.ker (S.map (cokernel.π f)).hom = P :=
+    hexact.moduleCat_range_eq_ker.symm.trans hP
+  have hsurj := (ModuleCat.epi_iff_surjective (S.map (cokernel.π f))).mp hepi
+  let q : S.obj N →ₗ[X.presheaf.stalk x] S.obj (cokernel f) :=
+    (S.map (cokernel.π f)).hom
+  let e := (Submodule.quotEquivOfEq P (LinearMap.ker q) hker.symm).trans
+    (q.quotKerEquivOfSurjective hsurj)
+  refine ⟨e, fun m ↦ ?_⟩
+  exact q.quotKerEquivOfSurjective_apply_mk hsurj m
+
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Stalks of ideal sheaves, of products `𝒥𝓕`, of quotients `𝓕/𝒥𝓕` and of powers.
 Let `ι : 𝒥 ⟶ 𝒪_X` be a sheaf of ideals, `𝓕` an `𝒪_X`-module and `x ∈ X`; `e` is the
 identification of the stalk of `𝒪_X` with `𝒪_{X,x}` (germs to germs) and `I` the image of
@@ -97,7 +184,44 @@ theorem ideal_module_product_stalk {X : Scheme.{u}} {J : X.Modules}
             X.presheaf.stalk x] S.obj (cokernel (idealModuleProductι Jn.2 F)),
           ∀ m : S.obj F, φ (Submodule.Quotient.mk m) =
             (S.map (cokernel.π (idealModuleProductι Jn.2 F))).hom m := by
-  sorry
+  let S := RingedSpace.moduleStalkFunctor X.toRingedSpace x
+  obtain ⟨e, he⟩ := unit_stalk_iso X x
+  let I : Ideal (X.presheaf.stalk x) := LinearMap.range (S.map ι ≫ e.hom).hom
+  have hrange {K : X.Modules} (j : K ⟶ SheafOfModules.unit X.ringCatSheaf)
+      (M : X.Modules) : LinearMap.range (S.map (idealModuleProductι j M)).hom =
+        (LinearMap.range (S.map j ≫ e.hom).hom : Ideal (X.presheaf.stalk x)) • ⊤ := by
+    exact ideal_multiplication_stalk_range j M x e he
+  let : MonoidalCategory X.Modules := SheafOfModules.monoidalCategory X.sheaf
+  have hprod (M : X.Modules) : Mono (idealModuleProductι ι M) := by
+    dsimp [idealModuleProductι]
+    infer_instance
+  have hpowers : ∀ n : ℕ, 1 ≤ n →
+      LinearMap.range (S.map (idealSheafPower ι n).2 ≫ e.hom).hom = I ^ n := by
+    intro n hn
+    obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hn
+    clear hn
+    induction k with
+    | zero => simp [idealSheafPower, I]
+    | succ k ih =>
+      rw [show 1 + (k + 1) = k + 2 by omega]
+      change LinearMap.range
+        (S.map (idealModuleProductι ι (idealSheafPower ι (k + 1)).1 ≫
+          (idealSheafPower ι (k + 1)).2) ≫ e.hom).hom = _
+      rw [S.map_comp, Category.assoc, ModuleCat.hom_comp, LinearMap.range_comp]
+      have ih' : LinearMap.range (S.map (idealSheafPower ι (k + 1)).2 ≫ e.hom).hom =
+          I ^ (k + 1) := by
+        rw [Nat.add_comm 1 k] at ih
+        exact ih
+      rw [hrange, Submodule.map_smul'', Submodule.map_top, ih', Ideal.smul_eq_mul]
+      change I * I ^ (k + 1) = I ^ (k + 2)
+      rw [mul_comm, ← pow_succ]
+  refine ⟨e, he, stalk_mono ι x, stalk_mono (idealModuleProductι ι F) x,
+    hrange ι F, stalk_quotient (idealModuleProductι ι F) x _ (hrange ι F), ?_⟩
+  intro n hn
+  have hp := hpowers n hn
+  have hr := hrange (idealSheafPower ι n).2 F
+  rw [hp] at hr
+  exact ⟨hp, hr, stalk_quotient (idealModuleProductι (idealSheafPower ι n).2 F) x _ hr⟩
 
 end
 
