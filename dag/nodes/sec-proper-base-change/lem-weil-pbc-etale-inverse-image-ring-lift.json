@@ -14,48 +14,44 @@
  ],
  "proof": [
   {
-   "text": "The base-change functor is continuous. The recorded set inverse image is left adjoint to its sectionwise set direct image by Mathlib.sheafAdjunctionContinuous. The assumed finite-limit preservation implies finite-product preservation.",
+   "text": "Obtain Lr, ar, er and the forgetful hom-set identity from the ring-sheaf adjunction construction. No operation transport equations are taken from that statement.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-etale-inverse-image-ring-adjunction"
    ],
    "elementary": false
   },
   {
-   "text": "Use the ring clause of the sheaf/internal-object identification on the source and target sites; its section formulas identify the structure maps with the actual sectionwise operations. Apply the corresponding clause of the product-preserving lifted adjunction to the set adjunction.",
+   "text": "For a ring sheaf on either site, define addition and multiplication using the chosen product projections; define zero and one as constant natural transformations from the chosen terminal sheaf and negation sectionwise. Naturality of the projections and preservation of the five operations by restriction ring homomorphisms prove naturality of all these maps. Their section formulas hold by definition.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-category-product"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Transport the lifted adjunction through the inverse sheaf/internal-object functors. Its right lift evaluates at base-changed objects and hence has exactly the sectionwise operations and restriction maps of the recorded direct image. The resulting right forgetful comparison is the identity; restrict the hom-set equations of the generic lift accordingly.",
+   "text": "Evaluate the forgetful hom-set identity at the identity of Lr(G). The image of ar.unit(G) is the set unit followed by the set direct image of er(G) inverse. To prove each transport formula, compose both sides with er(G) inverse and apply injectivity of the set adjunction bijection. Its formula using the unit, unit naturality, and the preceding identity reduce the unary and constant equations to the sectionwise preservation of negation, zero and one by ar.unit(G).",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "lem-weil-pbc-etale-inverse-image-ring-adjunction"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Take the sectionwise operations supplied by the sheaf/internal-object identification. Naturality of the product comparison gives the binary-operation equations after composing with its inverse and cancelling the isomorphism. For constants use uniqueness of the map to the terminal sheaf, and for negation use the inverse comparison component. The section formulas are the source and target identification formulas.",
+   "text": "For the binary formulas let q be the left product comparison followed by the product of the two inverse components of er, and let t be its adjunct. The product comparison projection equations and unit naturality show that t followed by the direct image of either target projection equals the corresponding source projection followed by the underlying ar.unit(G). Evaluate these two equalities on sections, substitute into the target binary operation, and use preservation of addition or multiplication by the ring homomorphism ar.unit(G). Injectivity of the adjunction bijection and cancellation of er(G) inverse give exactly the two required transport equations.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+    "def-weil-category-product"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-etale-inverse-image-ring-adjunction",
   "def-weil-pbc-etale-sheaves",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+  "def-weil-category-product"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Proposition 00YV, proof of (2) and its paragraph on rings; discussion of quadruples and sextuples in Section 00YR"
+  "place": "Proposition 00YV, ring paragraph; operation formulas deduced by adjunct injectivity and the ring-valued unit."
  },
  "mathlib_searches": [
   {
@@ -133,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T044749-L-2037472",
+  "landing": "20261012T063520-L-3159779",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

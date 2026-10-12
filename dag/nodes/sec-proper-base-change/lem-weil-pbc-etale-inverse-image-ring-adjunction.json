@@ -1,0 +1,165 @@
+{
+ "id": "lem-weil-pbc-etale-inverse-image-ring-adjunction",
+ "kind": "statement",
+ "title": "Étale ring inverse-image adjunction and forgetful hom-set comparison",
+ "statement": "Let $U,V$ be schemes [def-pc-scheme] and $f:U\\to V$ a morphism. On their small étale sites [def-weil-pbc-etale-site], put $L=\\mathrm{Scheme.etaleSetPullback}(f)$ [def-weil-pbc-etale-sheaves], and assume $L$ preserves finite limits. Let $b:V_{\\mathrm{Et}}\\to U_{\\mathrm{Et}}$ be base change, $R_r$ the functor on commutative-ring-valued sheaves given by precomposition with $b^{op}$, and $F_U,F_V$ the functors taking the underlying sheaves of sets. Write $a$ for the adjunction between $L$ and the analogous set-valued direct image. There exist a functor $L_r:\\mathrm{Sh}(V_{\\mathrm{Et}},\\mathrm{CommRing})\\to\\mathrm{Sh}(U_{\\mathrm{Et}},\\mathrm{CommRing})$, an adjunction $a_r:L_r\\dashv R_r$, and an isomorphism $e:L_r F_U\\cong F_V L$. For every ring sheaf $G$ on $V$, ring sheaf $H$ on $U$, and morphism $h:L_rG\\to H$, one has $F_V(a_r(h))=a(e_G^{-1}\\mathbin{\\gg}F_U(h))$. No left operation maps or their transport equations are part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, proof of (2) and its paragraph on rings; discussion of quadruples and sextuples in Section 00YR"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The base-change functor is continuous. The recorded set inverse image is left adjoint to its sectionwise set direct image by Mathlib.sheafAdjunctionContinuous. The assumed finite-limit preservation implies finite-product preservation.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the ring clause of the sheaf/internal-object identification on the source and target sites; its section formulas identify the structure maps with the actual sectionwise operations. Apply the corresponding clause of the product-preserving lifted adjunction to the set adjunction.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the lifted ring-object adjunction through the two inverse sheaf/internal-object functors. Its right functor has the underlying sectionwise direct image. Its structure maps, evaluated at a base-changed object, are those of the given ring sheaf, so the underlying comparison and its inverse preserve all operations. These maps are natural in both the site object and the ring sheaf, giving a right-functor isomorphism to the recorded direct image. Transport the adjunction along that isomorphism, and compose the left forgetful comparisons. The generic lift hom-set equation gives the claimed identity after cancelling the right comparison.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, proof of (2) and its paragraph on rings; discussion of quadruples and sextuples in Section 00YR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor on sheaves of commutative rings is left adjoint to direct image and forgetting commutes with inverse image",
+   "results": "Service unavailable: Internal Server Error. No absence conclusion is drawn.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product preserving left adjoint between categories of sheaves of sets lifts to sheaves of commutative rings",
+   "results": "LightCondensed.freeForgetAdjunction; SheafOfModules.PullbackConstruction.adjunction; module pushforward right-adjoint instances; no ring-sheaf forgetful comparison in these results.",
+   "date": "2026-10-12",
+   "verdict": "No exact match among the returned declarations; the module-sheaf adjunction has different coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingObjCat",
+   "results": "Unknown identifier CommRingObjCat in search service.",
+   "date": "2026-10-12",
+   "verdict": "unavailable for this identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCommRing|sheafPullback.*forget|forget.*sheafPullback",
+   "results": "Mathlib/Topology/Sheaves/Functors.lean:155: sheafPullback definition expanded with Sheaf.forget. This is the topological presheaf-forgetful comparison, not forgetting ring coefficients. Local rg additionally found the generic liftsGroupRingObjects and sheaves_algebraicStructures_objects dependencies and the current item; no independent ring-sheaf adjunction transport theorem.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image sheaves commutative rings underlying sets adjunction unit",
+   "results": "Returned Gamma-Spec adjunction components and structurePresheafCompForget.",
+   "date": "2026-10-12",
+   "verdict": "These concern locally ringed spaces or the structure sheaf of an affine scheme, not ring-valued sheaves on the small etale site."
+  },
+  {
+   "tool": "loogle",
+   "query": "CommRingCat, CategoryTheory.Adjunction",
+   "results": "Returned ten adjunctions including CommRingCat.adj, coyonedaAdj, and PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction.",
+   "date": "2026-10-12",
+   "verdict": "Free rings, affine schemes, and modules over a fixed ring presheaf do not supply the required coefficient-forgetful sheaf inverse-image comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(sheafPullback.*sheafCompose|sheafCompose.*sheafPullback|etaleInverseImageRingAdjunction)",
+   "results": "No Mathlib hits. Separate rg of lean/Sheaf and lean/WeilConjectures found only the existing generic internal-object dependencies and analogous abelian reductions.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate theorem found; the remaining transport construction is not a short application of an existing ring-sheaf theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageRingLift",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Ring-sheaf adjunction construction in the algebraic inverse-image compatibility used to define derived exchange; steps 1–3 of lem-weil-pbc-etale-inverse-image-ring-lift.",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-ring-lift",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageRingAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageRingAdjunction.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageRingAdjunction",
+  "statement": "theorem etaleInverseImageRingAdjunction (U V : Scheme.{u}) (f : U ⟶ V) (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) : let b := MorphismProperty.Over.pullback @Etale ⊤ f let L := Scheme.etaleSetPullback f let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b (Type (u + 1)) (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) ∃ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (ar : Lr ⊣ Rr) (er : Lr ⋙ FrU ≅ FrV ⋙ L), ∀ (G : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) (F : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (h : Lr.obj G ⟶ F), FrV.map (ar.homEquiv G F h) = a.homEquiv (FrV.obj G) (FrU.obj F) (er.inv.app G ≫ FrU.map h)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T063520-L-3159779",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T063520-L-3159779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
