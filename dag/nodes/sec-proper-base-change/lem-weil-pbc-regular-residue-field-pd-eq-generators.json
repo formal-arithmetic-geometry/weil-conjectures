@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-regular-residue-field-pd-eq-generators",
+ "kind": "statement",
+ "title": "Residue-field projective dimension in a regular local ring",
+ "statement": "Let R be a commutative regular local ring [def-weil-regular-scheme], with maximal ideal m. The projective dimension [def-weil-pbc-finite-global-dimension] of R/m, equivalently of any universe-shrunk copy of this module, equals spanFinrank(m), the minimal number of generators of m.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+  "place": "Theorem projectiveDimension_quotient_maximalIdeal, lines 110-120, with exists_isRegular_ofList_eq_maximalIdeal, lines 101-108, and Mathlib ModuleCat.projectiveDimension_quotient_eq_length."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The fully proved source theorem exists_isRegular_ofList_eq_maximalIdeal supplies a regular sequence rs generating m with length spanFinrank(m). Its proof inducts on the generator number: choose x in m outside m^2, pass to the regular quotient R/(x), lift its generating regular sequence, and prepend x; the empty sequence handles m = 0.",
+   "uses": [
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib ModuleCat.projectiveDimension_quotient_eq_length to rs. This identifies the projective dimension of the universe-shrunk R/Ideal.ofList(rs) with the length of rs.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite Ideal.ofList(rs) = m and length(rs) = spanFinrank(m). The resulting equality is exactly the source theorem. It holds in embedding dimension zero as well, when R is a field and its nonzero residue field is projective.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+  "place": "Theorem projectiveDimension_quotient_maximalIdeal, lines 110-120, with exists_isRegular_ofList_eq_maximalIdeal, lines 101-108, and Mathlib ModuleCat.projectiveDimension_quotient_eq_length."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projective dimension quotient maximal ideal regular local ring",
+   "results": "Service unavailable (Internal Server Error). No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective dimension quotient maximal ideal regular local ring",
+   "results": "Cotangent-space, discrete-valuation-ring and Krull-dimension results only; no theorem of this form returned.",
+   "date": "2026-10-13",
+   "verdict": "no match in returned hits"
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsRegularLocalRing|ResidueField|maximalIdeal Mathlib/RingTheory/Regular/ProjectiveDimension.lean; rg IsRegularLocalRing.projectiveDimension_quotient_maximalIdeal dag/nodes lean/WeilConjectures",
+   "results": "Mathlib has projective dimension formulas for quotients by regular sequences, but no regular-local residue-field specialization or Serre theorem. The displayed declaration is fully proved in the source module. No DAG declaration record contains its name. blueprint_refs searches for residue field finite projective dimension and projective dimension maximal ideal returned no blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ResidueFieldProjectiveDimensionLowerBound",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Lower-bound node: shorter stage-3 route through proved source-library regularity and projective-dimension formulas.",
+   "via": [
+    "lem-weil-pbc-residue-field-pd-ge-embedding-dimension",
+    "lem-weil-pbc-finite-gl-dim-regular-local",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-weil-pbc-complete-local-g-ring",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension",
+  "declaration": "IsRegularLocalRing.projectiveDimension_quotient_maximalIdeal",
+  "statement": "theorem IsRegularLocalRing.projectiveDimension_quotient_maximalIdeal {R : Type u} [CommRing R]\n    [IsRegularLocalRing R] [Small.{v} R] :\n    projectiveDimension (ModuleCat.of R (Shrink.{v} (R ⧸ maximalIdeal R))) =\n      (maximalIdeal R).spanFinrank",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    "IsRegularLocalRing.projectiveDimension_quotient_maximalIdeal"
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T194129-L-461125",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T194129-L-461125",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
