@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-leray-complex-cocycle-comparison",
+ "kind": "statement",
+ "title": "Natural cycle-to-homology comparison for section complexes before deriving",
+ "statement": "Let f:X\\to Y be a morphism of schemes [def-pc-scheme] and q\\in\\mathbf N. On the category of nonnegative cochain complexes C of O_X-modules [def-pc-cochain-complex-modules; def-weil-sheaf-of-modules-category], there is a natural homomorphism tau_C:H^q(Gamma(X,C))\\to Gamma(Y,H^q(f_*C)), using direct image [def-pc-ringed-spaces-derived-direct-image] and sections [def-sc-ringed-space-module-cohomology]. For every cycle s of Gamma(X,C), there is a section z of Z^q(f_*C) whose image in Gamma(Y,f_*C^q) is the section s transported along f^{-1}(Y)=X, and tau_C applied to the homology class of s is Gamma(Y,pi)(z), where pi:Z^q(f_*C)\\to H^q(f_*C) is the canonical homology quotient. The two equations are those in the Lean signature. Here H^q of a complex is its kernel modulo the image of the incoming differential [def-sp-abelian], and no resolution or injectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01F4, lemma-apply-Leray, proof: direct-proof exercise, the comparison on complexes before choosing resolutions; universal-property details expanded by K1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cochain-complex-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For a nonnegative cochain complex C of O_X-modules, direct image on the whole target evaluates C on f^{-1}(Y)=X. The restriction along Opens.map_top is a natural isomorphism of the underlying abelian-group section complexes. Global sections is evaluation and preserves kernels: the universal kernel property, evaluated on Y, identifies cycles of the section complex with sections of the cycle sheaf of f_* C. Thus every cycle s has a unique section z whose cycle inclusion is the transported section s.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image",
+    "def-sc-ringed-space-module-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose this identification with sections of the quotient Z^q(f_* C) to H^q(f_* C). An incoming differential lands in B^q(f_* C) and hence has zero image in this quotient. The resulting additive map on global cycles therefore annihilates the global boundaries. By the cokernel universal property defining homology it factors uniquely to a homomorphism H^q(Gamma(X,C)) to Gamma(Y,H^q(f_* C)). In degree zero the incoming differential is zero, so the same argument applies. This factorization gives the stated homology equation.",
+   "uses": [
+    "def-sp-abelian",
+    "def-pc-cochain-complex-modules",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a cochain map C to Cprime, the two candidate composites on homology agree after precomposition with the cycles-to-homology quotient: the kernel lift, cycle inclusion, and homology quotient all commute with cochain maps. That quotient is epic in modules, so the two maps agree. Thus the homomorphisms of the preceding step form the natural transformation tau. The two equations of the statement are precisely the kernel-lift and cokernel-factorization equations. No injectivity, acyclicity, or resolution choice is used.",
+   "uses": [
+    "def-sp-abelian",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker K1; agent expansion of the direct-proof exercise",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01F4, lemma-apply-Leray, proof: direct-proof exercise, the comparison on complexes before choosing resolutions; universal-property details expanded by K1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural morphism from derived composite functor to functor of derived functor using cycles",
+   "results": "8 hits: CategoryTheory.NatTrans.leftDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.NatTrans.rightDerived, CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.fromLeftDerivedZero",
+   "date": "2026-10-12",
+   "verdict": "Related derived transformation or homology comparison APIs; no specialized section-complex comparison with these equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyComparison\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.leftRightHomologyComparison, CategoryTheory.ShortComplex.leftRightHomologyComparison', CategoryTheory.ShortComplex.hasHomology_of_isIsoLeftRightHomologyComparison, CategoryTheory.ShortComplex.hasHomology_of_isIso_leftRightHomologyComparison', CategoryTheory.ShortComplex.isIso_leftRightHomologyComparison', CategoryTheory.ShortComplex.HomologyData.ofIsIsoLeftRightHomologyComparison', CategoryTheory.ShortComplex.isIso_leftRightHomologyComparison, CategoryTheory.ShortComplex.isIso_leftRightHomologyComparison'_of_homologyData",
+   "date": "2026-10-12",
+   "verdict": "Related derived transformation or homology comparison APIs; no specialized section-complex comparison with these equations."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyComparison|cyclesComparison",
+   "results": "15 hits: Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-12",
+   "verdict": "Related derived transformation or homology comparison APIs; no specialized section-complex comparison with these equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural map from cohomology of global sections of a complex to global sections of its cohomology sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LerayEdgeCocycleData",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "proof, first sentence, the passage from higher direct images over an affine base to global cohomology; cycle construction in the direct proof of degenerate Leray",
+   "via": [
+    "lem-pc-leray-edge-cocycle-data",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LerayComplexCocycleComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LerayComplexCocycleComparison.lean",
+  "declaration": "AlgebraicGeometry.leray_complex_cocycle_comparison",
+  "statement": "theorem leray_complex_cocycle_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ) :\n    ∃ τ :\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ) ⋙ HomologicalComplex.homologyFunctor _ _ q ⋙\n          forget₂ _ AddCommGrpCat) ⟶\n      ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n        (ComplexShape.up ℕ) ⋙ HomologicalComplex.homologyFunctor _ _ q ⋙\n          RingedSpace.globalSectionsFunctor Y.toRingedSpace ⋙ forget₂ _ AddCommGrpCat),\n      ∀ (C : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℕ)\n        (s : (((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj C).cycles q),\n        ∃ z : (RingedSpace.globalSectionsFunctor Y.toRingedSpace).obj\n          ((((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n            (ComplexShape.up ℕ)).obj C).cycles q),\n          (C.X q).val.presheaf.map\n            (eqToHom (congrArg op (Opens.map_top f.base).symm))\n            ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n              (ComplexShape.up ℕ)).obj C).iCycles q s) =\n            (RingedSpace.globalSectionsFunctor Y.toRingedSpace).map\n              ((((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj C).iCycles q) z ∧\n          (τ.app C)\n            ((((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n              (ComplexShape.up ℕ)).obj C).homologyπ q s) =\n            (RingedSpace.globalSectionsFunctor Y.toRingedSpace).map\n              ((((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n                (ComplexShape.up ℕ)).obj C).homologyπ q) z",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T070541-L-3472846",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T070541-L-3472846",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
