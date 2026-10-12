@@ -27,42 +27,33 @@
  ],
  "proof": [
   {
-   "text": "Regard the affine open U as the induced open subscheme U of X. Its structure sheaf is the restriction of the structure sheaf of X, and the restriction of the quasi-coherent module F to U is quasi-coherent. The hypothesis that U is affine gives an affine scheme in the sense of the affine-scheme vanishing theorem.",
+   "text": "Write p=q+1 using p>0. Regard U as its induced scheme, with IsAffine U supplied by hU. Restrict F along U.ι; Mathlib’s isQuasicoherent_restrictFunctor gives quasi-coherence of this restricted module.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
-    "place": "node pqf-lem-affine-vanishing, reduction from an affine open to its induced affine scheme"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the affine-scheme vanishing theorem to the induced affine scheme U and the restricted quasi-coherent module F|_U. It gives Subsingleton ((F|_U).H (q + 1)) for every natural q, equivalently H^p(U,F|_U)=0 for every p>0.",
+   "text": "Apply [lem-pc-affine-vanishing] to the restricted module on the affine scheme U. This gives Subsingleton of its underlying abelian-sheaf cohomology in degree q+1.",
    "uses": [
     "lem-pc-affine-vanishing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
-    "place": "Stacks Project, Cohomology of Schemes, Lemma 30.2.2, Tag 01XB"
-   }
+   "elementary": false
   },
   {
-   "text": "Cohomology of the induced open subscheme U with the restricted module is, by the definition of restriction to an open subscheme and of the cohomology notation in the statement, the displayed group H^p(U,F). Therefore the vanishing obtained in Step 2 is exactly the conclusion for every p>0.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
-    "place": "node pqf-lem-affine-vanishing, conclusion"
-   }
+   "text": "Use [lem-pqf-open-module-cohomology-comparison] to obtain an additive equivalence from the displayed module-derived open cohomology to the group in Step 2. Its injectivity transports equality of any two elements, proving the displayed Subsingleton.",
+   "uses": [
+    "lem-pqf-open-module-cohomology-comparison"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-vanishing"
+  "lem-pc-affine-vanishing",
+  "lem-pqf-open-module-cohomology-comparison"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-affine-vanishing.md",
-  "place": "node pqf-lem-affine-vanishing; external input Stacks Project Tag 01XB"
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 01XB, 01E1 (2), 03FD; existing affine-scheme vanishing plus open-module comparison, formalized by B3 on 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -175,5 +166,15 @@
   "group": "J1",
   "result": "pass",
   "note": "X : Scheme.{u}; F : X.Modules [F.IsQuasicoherent] (STATE QC); U : X.Opens, IsAffineOpen U; p>0; H^p(U,F)=0 as Subsingleton of RingedSpace.openModuleCohomology X p U (STATE COHOMOLOGY ON OPENS); stmt_deps gain landed def-sc-open-module-cohomology justified, check_dag adds no cycle/error; no duplicate node or landed affine-open vanishing; single clause, no conjuncts"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T060731-L-2904087",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,137 @@
+{
+ "id": "lem-pqf-open-module-cohomology-comparison",
+ "kind": "statement",
+ "title": "Open module cohomology agrees with cohomology of the restricted abelian sheaf",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\mathcal F$ a sheaf of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], $U\\subseteq X$ any open, and $p\\in\\mathbb N$. Let $j:U\\to X$ be the induced open subscheme inclusion. There is an additive equivalence between $R^p\\Gamma(U,-)(\\mathcal F)$ computed in $\\mathcal O_X$-modules [def-sc-open-module-cohomology] and $H^p(U,(j^*\\mathcal F)_{ab})$ computed in abelian sheaves [def-sc-topological-abelian-cohomology]. No quasi-coherence or affineness hypothesis is imposed, and degree zero is included.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Cohomology, Tag 01E1 (2) (lemma-restrict-injective); Cohomology on Sites, Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-open-module-cohomology",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective module resolution of F. Restrict it to U using [lem-sc-ringed-space-restrict-injective-resolution]. The equivalence Scheme.Modules.overEquiv U and its overFunctorEquiv identify this resolution with an injective resolution of the restriction along the open immersion U → X. Equivalences preserve injectivity and exactness.",
+   "uses": [
+    "lem-sc-ringed-space-restrict-injective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sections on U of each original term equal global sections on the induced open subscheme of the restricted term. Naturality makes this an isomorphism of section complexes. By [def-sc-open-module-cohomology] and the resolution computation in [def-sc-ringed-space-module-cohomology], taking degree-p homology identifies open module cohomology with the underlying additive group of module cohomology of the restricted module. This includes p=0. Use Mathlib InjectiveResolution.isoRightDerivedObj for the additive section functor. The exact forgetful functor from modules over the global ring to additive groups preserves kernels, cokernels and hence homology.",
+   "uses": [
+    "def-sc-open-module-cohomology",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sc-module-abelian-zariski-cohomology] on the induced scheme U to the restricted module. This identifies module-derived cohomology with the underlying abelian-sheaf cohomology in every degree. The free abelian representable at the terminal open and the constant integer sheaf represent the same functor F ↦ F(U), by the free-forgetful and constant-sheaf adjunctions, so are canonically isomorphic. Precomposition with this isomorphism identifies their Ext groups, hence Sheaf.H′ at top with Sheaf.H, which is Scheme.Modules.H by definition. Compose with Step 2.",
+   "uses": [
+    "lem-sc-module-abelian-zariski-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-open-module-cohomology",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-sc-ringed-space-restrict-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Cohomology, Tag 01E1 (2) (lemma-restrict-injective); Cohomology on Sites, Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology derived in sheaves of modules over an open subset agrees with cohomology of the underlying abelian sheaf restricted to the open subscheme",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, AlgebraicGeometry.Scheme.Modules.isSheaf, AlgebraicGeometry.Scheme.Modules.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensCarrierAbPresheaf, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj",
+   "date": "2026-10-12",
+   "verdict": "no exact comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived cohomology of a module sheaf on an open subset agrees with abelian sheaf cohomology on the open subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor sections sheaf of modules restriction open subset cohomology comparison",
+   "results": "8 hits; ; CategoryTheory.Sheaf.ΓRes_map_assoc, CategoryTheory.Sheaf.ΓRes_map, CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, CategoryTheory.Sheaf.ΓRes_naturality, TopCat.Sheaf.extend_hom_app, CategoryTheory.Sheaf.natTransΓRes_app, SheafOfModules.unitHomEquiv_symm_comp",
+   "date": "2026-10-12",
+   "verdict": "no exact comparison theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerived",
+   "results": "0 hits; loogle: unknown identifier 'Functor.rightDerived'; ",
+   "date": "2026-10-12",
+   "verdict": "no exact comparison theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "isoRightDerivedObj|rightDerivedComp|rightDerived.*Iso",
+   "results": "25 hits; ; Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/Derives.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact comparison; resolution-computation API is available"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-affine-vanishing",
+   "place": "affine-open reduction: identify module-derived sections on U with the abelian cohomology of the restricted module used by affine-scheme vanishing",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.nonempty_openModuleCohomology_addEquiv_restrict_H",
+  "statement": "theorem nonempty_openModuleCohomology_addEquiv_restrict_H (X : Scheme.{u})\n    (F : X.Modules) (U : X.Opens) (p : ℕ) :\n    Nonempty (((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj F) ≃+\n      ((Scheme.Modules.restrictFunctor U.ι).obj F).H p)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T060731-L-2904087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T060731-L-2904087",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,7 @@ public import Sheaf.Paper.PQFCohomology
 public import Sheaf.Topology.OpenModuleCohomology
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.AlgebraicGeometry.OpenModuleCohomologyComparison
 
 /-! # Vanishing of higher module cohomology on affine opens
 
@@ -36,7 +37,7 @@ The hypothesis IsAffineOpen U says precisely that this induced scheme is affine.
 2. Apply affine-scheme vanishing (lem-pc-affine-vanishing) to U and the restricted
 module, obtaining zero cohomology in every positive degree. The comparison between
 abelian-sheaf cohomology in that input and module cohomology uses the acyclicity of
-injective O_U-modules (Stacks Tag 01E3).
+injective O_U-modules (Stacks Tag 03FD).
 3. Cohomology on U of the restricted module is the displayed openModuleCohomology:
 restriction of injective module resolutions to an open remains injective (Tag 01E1).
 Thus the vanishing is exactly H^p(U,F) = 0 for each p > 0. -/
@@ -44,6 +45,12 @@ theorem subsingleton_openModuleCohomology_of_isAffineOpen (X : Scheme.{u})
     (F : X.Modules) [F.IsQuasicoherent] (U : X.Opens) (hU : IsAffineOpen U)
     (p : ℕ) (hp : 0 < p) :
     Subsingleton ((RingedSpace.openModuleCohomology X.toRingedSpace p U).obj F) := by
-  sorry
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hp)
+  let : IsAffine U.toScheme := hU
+  let G := (Scheme.Modules.restrictFunctor U.ι).obj F
+  have : Subsingleton (G.H (q + 1)) :=
+    Scheme.Modules.subsingleton_H_succ_of_isAffine G q
+  obtain ⟨e⟩ := nonempty_openModuleCohomology_addEquiv_restrict_H X F U (q + 1)
+  exact ⟨fun x y ↦ e.injective (Subsingleton.elim (e x) (e y))⟩
 
 end AlgebraicGeometry
