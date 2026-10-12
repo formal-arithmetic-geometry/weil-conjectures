@@ -8118,3 +8118,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/H3/Sheaf.FieldTheory.BrauerScalarDefectFaithfulForward (stage 3; reviewer PASS; first push; landing 20261012T144118-L-2098528 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/H3/Sheaf.RingTheory.AssociatedPrimePowerQuotient (stage 3; reviewer PASS; first push; landing 20261012T144118-L-2098628 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/J1/Sheaf.AlgebraicGeometry.SerreCriterionAffineness (stage 3; reviewer PASS; first push; landing 20261012T144119-L-2098725 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:41 L: merged deliver/J1/Sheaf.Paper.TorLongExactFirstVariable (stage 3; reviewer PASS; first push; landing 20261012T144119-L-2098823 (proof); batch 20261012T144049; modules 1; new nodes 0)
