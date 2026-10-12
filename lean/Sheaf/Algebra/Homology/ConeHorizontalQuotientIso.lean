@@ -3,6 +3,7 @@ module
 public import Sheaf.Algebra.Homology.ConeHorizontalProjection
 public import Sheaf.Algebra.Homology.ConeHorizontalStepStable
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.Algebra.Homology.ConeHorizontalQuotientIsoExists
 
 @[expose] public section
 
@@ -46,6 +47,15 @@ theorem coneHorizontal_quotient_iso
       IsIso a ∧
         (F.complexQuotientπ (p : ℤ) ((p : ℤ) + 1) (by omega)).f n ≫ a =
           (F.step (p : ℤ)).arrow.f n ≫ coneHorizontalProjection f p n := by
-  sorry
+  classical
+  obtain ⟨a, ha, hcomp⟩ := coneHorizontal_quotient_iso_exists f F hF p n
+  refine ⟨a, ⟨ha, hcomp⟩, ?_⟩
+  intro b hb
+  let π := F.complexQuotientπ (p : ℤ) ((p : ℤ) + 1) (by omega)
+  have hπ : Epi (π.f n) := by
+    dsimp only [π, DecreasingFiltration.complexQuotientπ]
+    infer_instance
+  apply (cancel_epi (π.f n)).1
+  rw [hcomp, hb.2]
 
 end HomologicalComplex₂
