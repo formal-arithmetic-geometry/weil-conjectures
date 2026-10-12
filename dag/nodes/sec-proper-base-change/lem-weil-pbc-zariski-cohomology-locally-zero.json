@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "*A cocycle representing $\\xi$.* By [def-sc-zariski-cohomology] and [def-weil-pbc-sites-and-cohomology] (2), applied to the site $X_{\\rm Zar}$ and its object $X$, $H^q(X_{\\rm Zar},\\mathcal G)=H^q(\\Gamma(X,\\mathcal I^\\bullet))=\\operatorname{Ker}(d^q_X:\\mathcal I^q(X)\\to\\mathcal I^{q+1}(X))/\\operatorname{Im}(d^{q-1}_X:\\mathcal I^{q-1}(X)\\to\\mathcal I^q(X))$, where $d^p_W$ is the component at $W$ of the differential $d^p:\\mathcal I^p\\to\\mathcal I^{p+1}$ (here $q-1\\ge0$, so $\\mathcal I^{q-1}$ is a term of the resolution). Choose $s\\in\\mathcal I^q(X)$ with $d^q_X(s)=0$ whose class is $\\xi$.",
+   "text": "A cocycle representative for ξ. Let A_U be the sheafified free abelian representable of an open U, as in def-weil-pbc-sites-and-cohomology (2). The sheafification, free-forgetful and Yoneda adjunctions give Hom(A_U,F) ≃ F(U), naturally in U and F (private sectionEquiv and its proved naturality lemmas). Apply this to the terms and differentials of I. Mathlib InjectiveResolution.extMk defines the class of a section cocycle; extMk_surjective supplies a representative s for ξ with d(s)=0. The private zariski_resolution_cocycle_classes proves this comparison together with restriction compatibility and vanishing on boundaries, directly from Mathlib. No unproved bridge is assumed.",
    "uses": [
     "def-sc-zariski-cohomology",
     "def-weil-pbc-sites-and-cohomology"
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "*The complex of sheaves is exact in degree $q$.* Since $\\mathcal G\\to\\mathcal I^\\bullet$ is an injective resolution, the cohomology of $\\mathcal I^\\bullet$ is concentrated in degree $0$ [def-sp-injective-resolutions]; as $q>0$, the complex $\\mathcal I^{q-1}\\xrightarrow{d^{q-1}}\\mathcal I^q\\xrightarrow{d^q}\\mathcal I^{q+1}$ of the abelian category $\\textit{Ab}(X_{\\rm Zar})$ is exact at $\\mathcal I^q$ [def-weil-pbc-exact-sequence]. Let $\\mathcal K$ be the kernel of $d^q$ in $\\textit{Ab}(X_{\\rm Zar})$; by [lem-weil-pbc-sheafification-exact] (1) it is the sectionwise kernel, $\\mathcal K(W)=\\operatorname{Ker}(d^q_W)\\subseteq\\mathcal I^q(W)$ with the restriction maps of $\\mathcal I^q$, and the kernel morphism $k:\\mathcal K\\to\\mathcal I^q$ is the inclusion. Since $d^q\\circ d^{q-1}=0$, $d^{q-1}$ factors as $k\\circ d'$ with $d':\\mathcal I^{q-1}\\to\\mathcal K$, $d'_W(t)=d^{q-1}_W(t)$. By [lem-weil-pbc-abelian-exact-iff-epi-kernel-lift], exactness at $\\mathcal I^q$ means that $d'$ is an epimorphism of $\\textit{Ab}(X_{\\rm Zar})$.",
+   "text": "Exactness and the kernel section. Write q=n+1. InjectiveResolution.exact_succ n gives exactness of I^n → I^{n+1} → I^{n+2}. In the private exact_sheaf_section_locally_boundary, map the kernel sequence of the second differential through sheafToPresheaf followed by evaluation at the top open. Preservation of kernels and ShortComplex.ab_exact_iff lift the cycle s to a section k of the kernel sheaf (lem-weil-pbc-sheafification-exact). ShortComplex.exact_iff_epi_kernel_lift makes the differential factored through this kernel an epimorphism (lem-weil-pbc-abelian-exact-iff-epi-kernel-lift).",
    "uses": [
     "def-sp-injective-resolutions",
     "def-weil-pbc-exact-sequence",
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "*$s$ is locally a coboundary.* By step 1, $s\\in\\mathcal K(X)$. The small Zariski site $X_{\\rm Zar}$ is a site [def-sc-zariski-site], [def-weil-pbc-sites-and-cohomology] (1), so [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective] applies to the epimorphism $d'$ of step 2 and the section $s\\in\\mathcal K(X)$: there are a covering $\\{V_j\\subseteq X\\}_{j\\in J}$ of $X$ in $X_{\\rm Zar}$ and sections $t_j\\in\\mathcal I^{q-1}(V_j)$ with $d^{q-1}_{V_j}(t_j)=d'_{V_j}(t_j)=s|_{V_j}$ (restriction in $\\mathcal K$ is restriction in $\\mathcal I^q$). A covering of $X$ in $X_{\\rm Zar}$ is a family of opens whose union is $X$ [def-sc-zariski-site], so $x\\in V_j$ for some $j$. Put $U=V_j$ and $t=t_j$: $U$ is an open neighbourhood of $x$ and $d^{q-1}_U(t)=s|_U$.",
+   "text": "Lift locally. Apply Sheaf.isLocallySurjective_iff_epi' to the kernel lift, using lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective. Its image sieve on k is covering. Opens.mem_grothendieckTopology, the covering definition in def-sc-zariski-site, chooses an open U containing x and a section t of I^n(U). The factorization identity kernel.lift_ι and naturality of kernel.ι give d(t)=s|_U. This argument is fully proved in the private helper, with no new sorry.",
    "uses": [
     "def-sc-zariski-site",
     "def-weil-pbc-sites-and-cohomology",
@@ -69,10 +69,11 @@
    }
   },
   {
-   "text": "*The restriction of $\\xi$ to $U$ vanishes.* By [lem-weil-pbc-zariski-open-restriction-injectives] (3), $\\mathcal G|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution in $\\textit{Ab}(U_{\\rm Zar})$ and $\\Gamma(U,\\mathcal I^\\bullet|_U)=\\mathcal I^\\bullet(U)$, so $H^q(U_{\\rm Zar},\\mathcal G|_U)=H^q(\\mathcal I^\\bullet(U))$ [def-sc-zariski-cohomology]. The restriction maps $\\mathcal I^p(X)\\to\\mathcal I^p(U)$ commute with the differentials ($d^p$ is a morphism of sheaves), so they form a morphism of complexes, and by the definition of the restriction in the statement $\\xi|_U$ is the class of the cocycle $s|_U\\in\\mathcal I^q(U)$. By step 3, $s|_U=d^{q-1}_U(t)$ lies in $\\operatorname{Im}(d^{q-1}_U)$, so its class in $H^q(\\mathcal I^\\bullet(U))$ is $0$, i.e. $\\xi|_U=0$. Since the resolution was arbitrary, this holds for every choice of injective resolution used to define the restriction.",
+   "text": "The restricted class is zero. Naturality of the differential shows s|_U remains a cocycle. The proved section/Hom comparison and InjectiveResolution.mk₀_comp_extMk identify the cohomologyPresheaf restriction of ξ with the class of s|_U. Since s|_U=d(t), InjectiveResolution.extMk_eq_zero_iff makes this class zero. This computes object cohomology over U in the original Zariski site and needs no restriction of I to the site of U, so lem-weil-pbc-zariski-open-restriction-injectives is not a proof dependency.",
    "uses": [
-    "lem-weil-pbc-zariski-open-restriction-injectives",
-    "def-sc-zariski-cohomology"
+    "def-sc-zariski-cohomology",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-sp-injective-resolutions"
    ],
    "elementary": true,
    "source": {
@@ -89,13 +90,12 @@
   "lem-weil-pbc-sheafification-exact",
   "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
   "def-sc-zariski-site",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-  "lem-weil-pbc-zariski-open-restriction-injectives"
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Cohomology on Sites, Lemma 01FW (label lemma-kill-cohomology-class-on-covering) and its proof, for the site X_Zar and the object X (abelian sheaves as modules over the constant ring sheaf Z), with Lemma 03F3 (label lemma-cohomology-of-open) for the passage to U_Zar; the same proof for a topological space is Cohomology of Sheaves, Lemma 01E3 (cohomology.tex line 558). The covering form of 01FW is specialized to a neighbourhood of x by picking a member containing x."
+  "place": "Lemma 01FW (lemma-kill-cohomology-class-on-covering), proof; implemented by K1 using the sheafified-free-representable adjunction and Mathlib InjectiveResolution.extMk API to compute object cohomology and restriction in the original site. All four cocycle/exactness/local-lift/boundary steps are retained. No open-restriction comparison is needed."
  },
  "mathlib_searches": [
   {
@@ -206,5 +206,15 @@
   "group": "N1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-86658",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T070541-L-3472962",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged theorem signature against the node; delivered proof against its recorded steps; imports, callers, compilation, axioms, metadata and report verified."
  }
 }
