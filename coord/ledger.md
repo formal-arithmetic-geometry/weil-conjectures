@@ -9417,3 +9417,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/V3/Sheaf.CategoryTheory.FilteredColimitPullbackHomExt (stage 3; reviewer PASS; first push; landing 20261012T202257-L-710221 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/V3/Sheaf.CategoryTheory.FilteredColimitPullbackLift (stage 3; reviewer PASS; first push; landing 20261012T202257-L-710318 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/W3/Sheaf.AlgebraicGeometry.FormalModuleSupportSucc (stage 3; reviewer PASS; first push; landing 20261012T202257-L-710417 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/X2/Sheaf.AlgebraicGeometry.AffineFlatModuleStalkFlat (stage 3; reviewer PASS; first push; landing 20261012T202258-L-710588 (proof); batch 20261012T202227; modules 1; new nodes 0)

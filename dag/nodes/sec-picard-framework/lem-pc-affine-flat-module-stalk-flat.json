@@ -13,10 +13,26 @@
  },
  "proof": [
   {
-   "text": "Choose an affine neighbourhood V of x. Affine neighbourhoods U contained in V form a filtered basis, and the stalk is their filtered colimit as an O(V)-module. The hypothesis makes each G(U) flat over O(V), so the filtered colimit is flat. The stalk ring is the localization of O(V) at x, and localization flatness equivalence transfers flatness to O_{Y,x}.",
+   "text": "Choose an affine open V containing x using Mathlib exists_isAffineOpen_mem_and_subset. Let A = O(V), S = O_x and M = G_x. Give M its A-action by restricting the canonical S-action along the germ homomorphism. Mathlib IsAffineOpen.isLocalization_stalk identifies S as a localization of A. Module.flat_iff_of_isLocalization reduces the conclusion to A-flatness of M.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-flat-modules",
     "lem-weil-pbc-flat-over-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let N be the subtype of OpenNhds x consisting of affine opens contained in V, ordered by inclusion. It is nonempty (V itself). Every pair admits a smaller affine neighbourhood inside its intersection, so N is cofiltered. The inclusion J from its opposite into (OpenNhds x)^op is final: refine any neighbourhood intersected with V by an affine neighbourhood; parallel arrows are equal since the categories are thin. This is implemented with Functor.final_of_exists_of_isFiltered.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the functor F : N^op -> ModuleCat A whose values are G(U), restricted along O(V) -> O(U), and whose maps are section restrictions. Linearity follows from PresheafOfModules.map_smul and composition of ring restrictions. Construct a cocone with point M using germ maps. PresheafOfModules.germ_smul and germ_res_apply verify linearity and naturality. After forgetting to abelian groups this is the stalk colimit cocone whiskered by final J; Final.isColimitWhiskerEquiv makes it a colimit, and isColimitOfReflects lifts this to ModuleCat A.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The IsFlatOver hypothesis applied to V and every U in N gives flatness of F(U). The identity scheme appLE equals the ring restriction, by Scheme.Hom.appLE and Scheme.Hom.id_app. Apply ModuleCat.filteredColimit_flat to F and transfer flatness from colimit F to the stalk cocone point using its unique colimit isomorphism and Module.Flat.of_linearEquiv. Together with step 1 this proves the original stalk flatness statement.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-flat-modules"
    ],
    "elementary": false
   }
@@ -27,8 +43,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/modules.tex",
-  "place": "lemma-flat-stalks-flat"
+  "group": "X2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "lemma-colimit-flat and lemma-flat-localization (2); affine neighbourhood and germ construction in the Lean proof by X2"
  },
  "status": "split",
  "merged_into": null,
@@ -93,10 +111,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T184253-L-4001209",
-  "kind": "interface",
+  "landing": "20261012T202258-L-710588",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
