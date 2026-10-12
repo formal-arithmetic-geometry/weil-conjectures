@@ -518,4 +518,88 @@ lemma etale_basicOpen_ι_comp_SpecMap {R S : CommRingCat.{u}} (f : R ⟶ S) (s :
     (φ := f ≫ CommRingCat.ofHom (algebraMap S (Localization.Away s)))).mpr h
   infer_instance
 
+/-- **Smooth morphisms and étale morphisms.** A morphism of schemes is smooth (Mathlib's
+`AlgebraicGeometry.Smooth`: locally given by smooth ring maps, equivalently by standard smooth
+presentations, `AlgebraicGeometry.Smooth.iff_forall_exists_isStandardSmooth`) of relative
+dimension `n` if it is `SmoothOfRelativeDimension n`; the étale morphisms are exactly the smooth
+morphisms of relative dimension zero.
+
+(blueprint: `def-sbc-smooth-morphisms`) -/
+theorem etale_iff_smoothOfRelativeDimension_zero {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    Etale f ↔ SmoothOfRelativeDimension 0 f := by
+  rw [Etale.eq_smoothOfRelativeDimension_zero]
+
+/-- **Residue field extensions of an étale algebra are finite separable.** If
+`Spec B ⟶ Spec A` is étale and `q` is a prime of `B` lying over the prime `p` of `A`, then
+`κ(q)` is a finite separable extension of `κ(p)`.
+
+(blueprint: `lem-weil-pbc-etale-algebra-residue-field-separable`) -/
+theorem Etale.isSeparable_residueField_of_spec {A B : Type u} [CommRing A] [CommRing B]
+    [Algebra A B] (h : Etale (Spec.map (CommRingCat.ofHom (algebraMap A B))))
+    (p : Ideal A) [p.IsPrime] (q : Ideal B) [q.IsPrime] [q.LiesOver p]
+    [Algebra (Localization.AtPrime p) (Localization.AtPrime q)]
+    [Localization.AtPrime.IsLiesOverAlgebra p q] :
+    Algebra.IsSeparable p.ResidueField q.ResidueField ∧
+      Module.Finite p.ResidueField q.ResidueField := by
+  rw [HasRingHomProperty.Spec_iff (P := @Etale)] at h
+  have : Algebra.Etale A B := RingHom.etale_algebraMap.mp h
+  exact ⟨inferInstance, inferInstance⟩
+
+/-- **Base change of an étale ring map is étale.** If `Spec A ⟶ Spec R` is étale, then so is
+`Spec (S ⊗[R] A) ⟶ Spec S` for every `R`-algebra `S`.
+
+(blueprint: `lem-weil-pbc-etale-ring-base-change`) -/
+theorem Etale.spec_map_algebraMap_tensorProduct {R S A : Type u} [CommRing R] [CommRing S]
+    [CommRing A] [Algebra R A] [Algebra R S]
+    (h : Etale (Spec.map (CommRingCat.ofHom (algebraMap R A)))) :
+    Etale (Spec.map (CommRingCat.ofHom (algebraMap S (S ⊗[R] A)))) := by
+  rw [HasRingHomProperty.Spec_iff (P := @Etale)] at h ⊢
+  have : Algebra.Etale R A := RingHom.etale_algebraMap.mp h
+  exact RingHom.etale_algebraMap.mpr inferInstance
+
+/-- **Shrinking a pointed étale neighbourhood to an affine open around the point.** Let
+`f : V ⟶ S` be étale, `v : Spec Ω ⟶ V` a morphism from the spectrum of a field and `W` an open
+of `V` containing the image of `v`. Then there is an open immersion `j : Spec R ⟶ V` whose image
+contains the image of `v` and is contained in `W`; `j ≫ f` is étale and `v` factors uniquely
+through `j`.
+
+(blueprint: `lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`) -/
+theorem Scheme.exists_isOpenImmersion_spec_lift_of_etale {S V : Scheme.{u}} (f : V ⟶ S)
+    [Etale f] {Ω : Type u} [Field Ω] (v : Spec (.of Ω) ⟶ V) (W : V.Opens)
+    (hW : Set.range v.base ⊆ W) :
+    ∃ (R : CommRingCat.{u}) (j : Spec R ⟶ V), IsOpenImmersion j ∧
+      Set.range v.base ⊆ Set.range j.base ∧ Set.range j.base ⊆ W ∧ Etale (j ≫ f) ∧
+      ∃! v₀ : Spec (.of Ω) ⟶ Spec R, v₀ ≫ j = v := by
+  obtain ⟨R, j, _, hv, hj⟩ := exists_affine_mem_range_and_range_subset
+    (x := v.base default) (U := W) (hW ⟨default, rfl⟩)
+  have hr : Set.range v.base ⊆ Set.range j.base := by
+    rintro _ ⟨a, rfl⟩
+    rwa [Subsingleton.elim a default]
+  refine ⟨R, j, inferInstance, hr, hj, inferInstance,
+    ⟨IsOpenImmersion.lift j v hr, IsOpenImmersion.lift_fac j v hr, fun w hw ↦ ?_⟩⟩
+  rw [← cancel_mono j, hw, IsOpenImmersion.lift_fac]
+
+open Polynomial in
+/-- **The standard étale algebra of a monic polynomial localized at its derivative.** For a
+monic `Q ∈ S[X]`, the algebra `S' = S[X][Y]/(Q, Y Q' - 1)` (the standard étale algebra of the
+pair `(Q, Q')`) is étale over `S`, and for every `S`-algebra `L` and every `b ∈ L` with
+`Q(b) = 0` and `Q'(b)` a unit there is exactly one `S`-algebra map `S' → L` sending the class of
+`X` to `b`.
+
+(blueprint: `lem-weil-pbc-standard-etale-monic-derivative`) -/
+theorem StandardEtalePair.etale_ofMonic_and_existsUnique {S : Type u} [CommRing S] {Q : S[X]}
+    (hQ : Q.Monic) :
+    Etale (Spec.map (CommRingCat.ofHom (algebraMap S (StandardEtalePair.ofMonic hQ 1).Ring))) ∧
+      ∀ (L : Type*) [CommRing L] [Algebra S L] (b : L), aeval b Q = 0 →
+        IsUnit (aeval b (derivative Q)) →
+        ∃! φ : (StandardEtalePair.ofMonic hQ 1).Ring →ₐ[S] L,
+          φ (StandardEtalePair.ofMonic hQ 1).X = b := by
+  refine ⟨?_, fun L _ _ b hb hb' ↦ ?_⟩
+  · rw [HasRingHomProperty.Spec_iff (P := @Etale)]
+    exact RingHom.etale_algebraMap.mpr inferInstance
+  · have h : (StandardEtalePair.ofMonic hQ 1).HasMap b := ⟨hb, by simpa using hb'⟩
+    refine ⟨(StandardEtalePair.ofMonic hQ 1).lift b h, StandardEtalePair.lift_X _ _ _,
+      fun φ hφ ↦ ?_⟩
+    exact StandardEtalePair.hom_ext (by rw [hφ, StandardEtalePair.lift_X])
+
 end AlgebraicGeometry

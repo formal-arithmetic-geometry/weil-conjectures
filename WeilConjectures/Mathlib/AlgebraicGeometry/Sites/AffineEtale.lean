@@ -71,6 +71,17 @@ lemma generate_singleton_mem_topology {X Y : S.AffineEtale} (f : X ⟶ Y)
   rw [mem_topology_iff, ← Sieve.generate_map_eq_functorPushforward]
   exact this
 
+/-- **A set of affine étale schemes covers the small étale site.** The category
+`S.AffineEtale` of affine schemes `Spec A` étale over `S` is essentially small, and `Spec` from it
+to the small étale site of `S` is cover-dense: every object of the small étale site is covered by
+affine étale schemes.
+
+(blueprint: `lem-weil-pbc-affine-etale-essentially-small-cover`) -/
+theorem essentiallySmall_and_isCoverDense (S : Scheme.{u}) :
+    EssentiallySmall.{u} S.AffineEtale ∧
+      (AffineEtale.Spec S).IsCoverDense S.smallEtaleTopology :=
+  ⟨inferInstance, inferInstance⟩
+
 end AffineEtale
 
 end AlgebraicGeometry.Scheme
