@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-etale-restricted-augmentation-inclusion",
+ "kind": "statement",
+ "title": "Augmentation commutes with restricted total inclusion",
+ "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions], K a bounded-below cochain complex of abelian sheaves on its small étale site [def-weil-pbc-etale-sheaves], T an étale termwise hypercohomology presentation of K [def-weil-pbc-termwise-hypercohomology-presentation], and q any integer. Let Rq and aq be the explicit restricted total and augmentation [def-weil-pbc-etale-restricted-total-construction] and [def-weil-pbc-etale-restricted-augmentation]. Define jq : Rq \\to Tot(T.I) by applying the identity mapped-bicomplex functor, flipping, and totalizing the column inclusion \\sigma_{\\ge q} T.I \\to T.I. Then aq \\mathbin{;} jq = (\\sigma_{\\ge q} K \\to K) \\mathbin{;} T.aug.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-etale-restricted-total-construction",
+  "def-weil-pbc-etale-restricted-augmentation"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Lemma 13.21.3, proof remark (3), finite-diagonal total comparison; Tag 0133, explicit augmented total map"
+ },
+ "proof": [
+  {
+   "text": "Evaluate in total degree n and use the formula for a totalized map on\nits degree-zero resolution summand. Naturality of extension by zero transports\nthat summand to the degree-zero summand of the full total. If n ≥ q, the\nstupid-truncation projection followed by its inclusion is the identity on\nT.I.X n. Cancel this pair in etaleRestrictedAugmentationComponent and apply\nT.aug_formula. If n < q, the source term of the truncated K is zero, so the\ntwo maps are equal. Chain-map extensionality now proves the equation. The\ncalculation has no positivity condition on q, and also covers the zero complex\nand empty diagonals.",
+   "uses": [
+    "def-weil-pbc-termwise-hypercohomology-presentation",
+    "def-weil-pbc-etale-restricted-total-construction",
+    "def-weil-pbc-etale-restricted-augmentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-etale-restricted-total-construction",
+  "def-weil-pbc-etale-restricted-augmentation"
+ ],
+ "proof_origin": {
+  "by": "worker C2",
+  "document": "Stacks Project, Tags 015J and 0133",
+  "place": "Explicit calculation of the maps in the restricted augmented-total comparison; details supplied by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Totalization of a restricted bicomplex augmentation commutes with column inclusion",
+   "results": "HomologicalComplex₂.ιTotal_map and ιTotalOrZero_map: generic total-map formulas only",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex₂.total.map",
+   "results": "total.map, map_comp, ιTotal_map; no restricted augmentation or sections equation",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "ιTotal.*mapTotalIso|mapTotalIso.*ιTotal; restricted.*augmentation.*inclusion",
+   "results": "No exact statement in Mathlib or either library root. Existing total-map formulas provide ingredients.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of totalization and global sections for a restricted Cartan Eilenberg resolution",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Compatibility proof: augmentation and finite-diagonal sections comparison",
+   "via": [
+    "lem-weil-pbc-etale-filtered-step-cohomology-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRestrictedAugmentationInclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRestrictedAugmentationInclusion.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleRestrictedAugmentation_inclusion",
+  "statement": "theorem etaleRestrictedAugmentation_inclusion\n    (X : Scheme.{u})\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :\n    etaleRestrictedAugmentation X K T q ≫ etaleRestrictedTotalInclusion X K T q =\n      K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q) ≫ T.aug",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleRestrictedTotalInclusion",
+   "AlgebraicGeometry.Etale.etaleRestrictedAugmentation_inclusion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T225300-L-1801437",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T225300-L-1801437",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

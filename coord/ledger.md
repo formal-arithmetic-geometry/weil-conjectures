@@ -9870,3 +9870,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:52 L: merged deliver/B4/Sheaf.RingTheory.PopescuEtaleQuotientMap (stage 3; reviewer PASS; first push; landing 20261012T225259-L-1801047 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:52 L: merged deliver/C1/Sheaf.Paper.H1FiniteBasicCoverUnitIdeal (stage 3; reviewer PASS; first push; landing 20261012T225259-L-1801145 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:52 L: merged deliver/C1/Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal (stage 3; reviewer PASS; first push; landing 20261012T225259-L-1801335 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/C2/Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology (stage 3; reviewer PASS; first push; landing 20261012T225300-L-1801437 (interface); batch 20261012T225253; modules 3; new nodes 2)
