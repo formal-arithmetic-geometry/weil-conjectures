@@ -10,9 +10,11 @@ public import Mathlib.RingTheory.Etale.Locus
 public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 public import Mathlib.RingTheory.Kaehler.JacobiZariski
 public import Mathlib.RingTheory.Kaehler.Polynomial
+public import Mathlib.LinearAlgebra.Dimension.OrzechProperty
 public import Mathlib.RingTheory.KrullDimension.Regular
 public import Mathlib.RingTheory.LocalRing.Module
 public import Mathlib.RingTheory.Regular.Flat
+public import Mathlib.RingTheory.RingHom.Etale
 public import Mathlib.RingTheory.Smooth.Kaehler
 
 /-!
@@ -146,3 +148,223 @@ theorem linearIndependent_tmul_toCotangent_of_isRegular {c : ℕ} (f : Fin c →
   omega
 
 end IsLocalRing
+
+namespace Algebra
+
+variable {R P S : Type*} [CommRing R] [CommRing P] [CommRing S] [Algebra R P] [Algebra R S]
+  [Algebra P S] [IsScalarTower R P S]
+
+/-- If `P ⟶ S` is a surjection of formally smooth `R`-algebras, the conormal map
+`I/I² ⟶ S ⊗ Ω[P⁄R]` stays injective after any base change: it is split injective. -/
+theorem FormallySmooth.injective_baseChange_kerCotangentToTensor [FormallySmooth R P]
+    [FormallySmooth R S] (hsurj : Function.Surjective (algebraMap P S)) (K : Type*) [CommRing K]
+    [Algebra P K] : Function.Injective ((kerCotangentToTensor R P S).baseChange K) := by
+  obtain ⟨l, hl⟩ := (FormallySmooth.iff_split_injection hsurj).mp ‹_›
+  refine Function.LeftInverse.injective (g := l.baseChange K) fun x ↦ ?_
+  rw [← LinearMap.comp_apply, ← LinearMap.baseChange_comp, hl, LinearMap.baseChange_id,
+    LinearMap.id_apply]
+
+end Algebra
+
+namespace IsLocalRing
+
+/-- **The differentials of a regular sequence cutting out a smooth quotient are linearly
+independent at the closed point.** Let `P` be a noetherian local `R`-algebra, formally smooth
+over `R`, and `P ⟶ S` a surjection onto a formally smooth `R`-algebra whose kernel is generated
+by a regular sequence `f₁, …, f_c`. Then `df₁, …, df_c` are linearly independent in
+`κ ⊗ Ω[P⁄R]`: the conormal map `κ ⊗ I/I² ⟶ κ ⊗ (S ⊗ Ω[P⁄R])` is injective and the `fₐ` are
+linearly independent in `κ ⊗ I/I²`. -/
+theorem linearIndependent_tmul_D_of_isRegular {R P S : Type*} [CommRing R] [CommRing P]
+    [IsLocalRing P] [IsNoetherianRing P] [CommRing S] [Algebra R P] [Algebra R S] [Algebra P S]
+    [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Algebra.FormallySmooth R S]
+    (hsurj : Function.Surjective (algebraMap P S)) {c : ℕ} (f : Fin c → P)
+    (hker : RingHom.ker (algebraMap P S) = Ideal.span (Set.range f))
+    (hreg : RingTheory.Sequence.IsRegular P (List.ofFn f)) :
+    LinearIndependent (ResidueField P) (fun a ↦ (1 : ResidueField P) ⊗ₜ[P] D R P (f a)) := by
+  have h1 := linearIndependent_tmul_toCotangent_of_isRegular f _ hker hreg
+  have h2 := h1.map' _ (LinearMap.ker_eq_bot.mpr
+    (Algebra.FormallySmooth.injective_baseChange_kerCotangentToTensor (R := R) hsurj
+      (ResidueField P)))
+  refine LinearIndependent.of_comp
+    ((TensorProduct.mk P S Ω[P⁄R] 1).baseChange (ResidueField P)) ?_
+  have heq : (⇑((TensorProduct.mk P S Ω[P⁄R] 1).baseChange (ResidueField P)) ∘
+      fun a ↦ (1 : ResidueField P) ⊗ₜ[P] D R P (f a)) =
+      ⇑((kerCotangentToTensor R P S).baseChange (ResidueField P)) ∘
+      fun a ↦ (1 : ResidueField P) ⊗ₜ[P]
+        (RingHom.ker (algebraMap P S)).toCotangent ⟨f a, hker ▸ Ideal.subset_span ⟨a, rfl⟩⟩ := by
+    funext a
+    simp
+  rw [heq]
+  exact h2
+
+/-- Let `M` be a finite flat module over a local ring `P` with residue field `κ`, `v₁, …, v_c`
+elements of `M` linearly independent in `κ ⊗ M`, and `t` a family spanning `M`. Then the `vₐ`
+can be completed by members of `t` to a basis of `M`. -/
+theorem exists_bijective_linearCombination_sumElim {P M ι : Type*} [CommRing P] [IsLocalRing P]
+    [AddCommGroup M] [Module P M] [Module.Finite P M] [Module.Flat P M] {c : ℕ} (v : Fin c → M)
+    (hv : LinearIndependent (ResidueField P) (fun a ↦ (1 : ResidueField P) ⊗ₜ[P] v a))
+    (t : ι → M) (ht : Submodule.span P (Set.range t) = ⊤) :
+    ∃ (m : ℕ) (g : Fin m → ι),
+      Function.Bijective (Finsupp.linearCombination P (Sum.elim v (t ∘ g))) := by
+  classical
+  have hsurj : Function.Surjective (algebraMap P (ResidueField P)) :=
+    IsLocalRing.residue_surjective
+  set K := ResidueField P
+  have htK : Submodule.span K (Set.range fun i ↦ (1 : K) ⊗ₜ[P] t i) = ⊤ := by
+    rw [← Submodule.restrictScalars_eq_top_iff P, Submodule.restrictScalars_span P K hsurj]
+    have := (IsLocalRing.map_tensorProduct_mk_eq_top (N := Submodule.span P (Set.range t))).mpr ht
+    rw [Submodule.map_span, ← Set.range_comp] at this
+    exact this
+  set W := Submodule.span K (Set.range fun a ↦ (1 : K) ⊗ₜ[P] v a)
+  obtain ⟨b, hbt, hbspan, hbli⟩ :=
+    exists_linearIndependent K (W.mkQ '' Set.range fun i ↦ (1 : K) ⊗ₜ[P] t i)
+  have : Finite b := hbli.finite_of_isNoetherian
+  let := Fintype.ofFinite b
+  set m := Fintype.card b
+  let e : Fin m ≃ b := (Fintype.equivFin b).symm
+  have hg : ∀ j, ∃ i, W.mkQ ((1 : K) ⊗ₜ[P] t i) = e j := fun j ↦ by
+    obtain ⟨_, ⟨i, rfl⟩, hi⟩ := hbt (e j).2
+    exact ⟨i, hi⟩
+  choose g hg using hg
+  refine ⟨m, g, ?_⟩
+  set u := Sum.elim v (t ∘ g)
+  have hb : Submodule.span K b = ⊤ := by
+    rw [hbspan, ← Submodule.map_span, htK, Submodule.map_top, Submodule.range_mkQ]
+  have hspan : Submodule.span K (Set.range fun x ↦ (1 : K) ⊗ₜ[P] u x) = ⊤ := by
+    have hWle : W ≤ Submodule.span K (Set.range fun x ↦ (1 : K) ⊗ₜ[P] u x) :=
+      Submodule.span_mono (by rintro _ ⟨a, rfl⟩; exact ⟨Sum.inl a, rfl⟩)
+    have hmap : (Submodule.span K (Set.range fun x ↦ (1 : K) ⊗ₜ[P] u x)).map W.mkQ = ⊤ := by
+      rw [eq_top_iff, ← hb, Submodule.span_le]
+      intro y hy
+      obtain ⟨j, hj⟩ := e.surjective ⟨y, hy⟩
+      refine ⟨_, Submodule.subset_span ⟨Sum.inr j, rfl⟩, ?_⟩
+      simpa [u, hj] using hg j
+    rw [Submodule.map_mkQ_eq_top, sup_eq_right.mpr hWle] at hmap
+    exact hmap
+  have hfin : Module.finrank K (K ⊗[P] M) = c + m := by
+    rw [← Submodule.finrank_quotient_add_finrank W, finrank_span_eq_card hv, Fintype.card_fin,
+      add_comm]
+    congr 1
+    rw [Module.finrank_eq_card_basis (Module.Basis.mk hbli (by simp [hb]))]
+  have hli : LinearIndependent K fun x ↦ (1 : K) ⊗ₜ[P] u x :=
+    linearIndependent_of_top_le_span_of_card_eq_finrank hspan.ge (by simp [hfin])
+  refine Module.IsLocalRing.linearCombination_bijective_of_flat u ⟨hli, ?_⟩
+  rw [← LinearMap.range_eq_top, Finsupp.range_linearCombination]
+  exact hspan
+
+end IsLocalRing
+
+namespace Algebra
+
+open KaehlerDifferential in
+/-- **Jacobi–Zariski.** For `R ⟶ Q ⟶ T` with `H₁(L_{T/R}) = 0` (e.g. `T` formally smooth over
+`R`), if `T ⊗_Q Ω[Q⁄R] ⟶ Ω[T⁄R]` is bijective then `T` is formally étale over `Q`. -/
+theorem FormallyEtale.of_bijective_mapBaseChange {R Q T : Type*} [CommRing R] [CommRing Q]
+    [CommRing T] [Algebra R Q] [Algebra R T] [Algebra Q T] [IsScalarTower R Q T]
+    [Subsingleton (H1Cotangent R T)] (h : Function.Bijective (mapBaseChange R Q T)) :
+    FormallyEtale Q T := by
+  refine ⟨⟨fun x y ↦ ?_⟩, ⟨fun x y ↦ ?_⟩⟩
+  · have H : ∀ z : Ω[T⁄Q], z = 0 := fun z ↦ by
+      obtain ⟨z, rfl⟩ := map_surjective R Q T z
+      obtain ⟨z, rfl⟩ := h.2 z
+      exact (exact_mapBaseChange_map R Q T _).mpr ⟨z, rfl⟩
+    rw [H x, H y]
+  · have H : ∀ z : H1Cotangent Q T, z = 0 := fun z ↦ by
+      have h1 : H1Cotangent.δ R Q T z = 0 :=
+        h.1 ((H1Cotangent.exact_δ_mapBaseChange R Q T _).mpr ⟨z, rfl⟩ |>.trans (map_zero _).symm)
+      obtain ⟨y, rfl⟩ := (H1Cotangent.exact_map_δ R Q T z).mp h1
+      rw [Subsingleton.elim y 0, map_zero]
+    rw [H x, H y]
+
+end Algebra
+
+namespace Algebra
+
+open KaehlerDifferential MvPolynomial
+
+/-- **Étale coordinates extending a regular sequence.** Let `A` be a noetherian smooth
+`R`-algebra and `A ⟶ B` a surjection onto a formally smooth `R`-algebra whose kernel is
+generated by a weakly regular sequence `f₁, …, f_c`. Then at every prime `p` containing the
+kernel there are `g₁, …, g_m ∈ A` and `h ∉ p` such that `R[x₁, …, x_c, y₁, …, y_m] ⟶ A_h`,
+`xₐ ↦ fₐ`, `y_j ↦ g_j`, is étale.
+
+At `p`, the `dfₐ` are linearly independent in `κ(p) ⊗ Ω[A⁄R]`
+(`IsLocalRing.linearIndependent_tmul_D_of_isRegular`); complete them by differentials `dg_j`
+to a basis of `κ(p) ⊗ Ω[A⁄R]`. By Nakayama the `dfₐ, dg_j` are then a basis of `Ω[A_p⁄R]`, so
+`A_p ⊗ Ω[R[x, y]⁄R] ⟶ Ω[A_p⁄R]` is bijective and `A_p` is formally étale over `R[x, y]` by the
+Jacobi–Zariski sequence. The étale locus is open. -/
+theorem exists_etale_mvPolynomial_of_isWeaklyRegular {R A B : Type*} [CommRing R] [CommRing A]
+    [CommRing B] [Algebra R A] [Algebra R B] [Algebra A B] [IsScalarTower R A B]
+    [Algebra.Smooth R A] [Algebra.FormallySmooth R B] [IsNoetherianRing A]
+    (hsurj : Function.Surjective (algebraMap A B)) {c : ℕ} (f : Fin c → A)
+    (hker : RingHom.ker (algebraMap A B) = Ideal.span (Set.range f))
+    (hreg : RingTheory.Sequence.IsWeaklyRegular A (List.ofFn f))
+    (p : Ideal A) [p.IsPrime] (hp : RingHom.ker (algebraMap A B) ≤ p) :
+    ∃ (m : ℕ) (g : Fin m → A) (h : A), h ∉ p ∧
+      ((algebraMap A (Localization.Away h)).comp
+        (MvPolynomial.aeval (R := R) (Sum.elim f g)).toRingHom).Etale := by
+  classical
+  set Ap := Localization.AtPrime p
+  -- the regular sequence in the local ring `A_p`
+  have hregp : RingTheory.Sequence.IsRegular Ap (List.ofFn (algebraMap A Ap ∘ f)) := by
+    have := hreg.of_flat (S := Ap)
+    rw [List.map_ofFn] at this
+    refine (IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal ?_).mpr this
+    intro r hr
+    obtain ⟨a, rfl⟩ := List.mem_ofFn.mp hr
+    exact (IsLocalization.AtPrime.to_map_mem_maximal_iff Ap p _).mpr
+      (hp (hker ▸ Ideal.subset_span ⟨a, rfl⟩))
+  -- the localization of `B`, a quotient of `A_p`
+  set Bp := Localization (Algebra.algebraMapSubmonoid B p.primeCompl)
+  have : IsLocalization (p.primeCompl.map (algebraMap A B)) Bp :=
+    inferInstanceAs (IsLocalization (Algebra.algebraMapSubmonoid B p.primeCompl) Bp)
+  have hsurjp : Function.Surjective (algebraMap Ap Bp) :=
+    IsLocalization.map_surjective_of_surjective p.primeCompl Ap Bp hsurj
+  have hkerp : RingHom.ker (algebraMap Ap Bp) = Ideal.span (Set.range (algebraMap A Ap ∘ f)) := by
+    rw [localizationAlgebraMap_def, IsLocalization.ker_map Bp (algebraMap A B) rfl, hker,
+      Ideal.map_span, Set.range_comp]
+  have : IsScalarTower R Ap Bp := IsScalarTower.of_algebraMap_eq fun r ↦ by
+    rw [IsScalarTower.algebraMap_apply R A Ap, localizationAlgebraMap_def, IsLocalization.map_eq,
+      ← IsScalarTower.algebraMap_apply R A B, ← IsScalarTower.algebraMap_apply R B Bp]
+  have hli := IsLocalRing.linearIndependent_tmul_D_of_isRegular (R := R) hsurjp _ hkerp hregp
+  -- complete the `dfₐ` to a basis of `Ω[A_p⁄R]`
+  have hspan : Submodule.span Ap (Set.range fun a : A ↦ D R Ap (algebraMap A Ap a)) = ⊤ := by
+    rw [show (fun a : A ↦ D R Ap (algebraMap A Ap a)) = map R R A Ap ∘ D R A from
+      funext fun a ↦ (map_D R R A Ap a).symm]
+    exact span_range_map_derivation_of_isLocalization R A Ap p.primeCompl
+  obtain ⟨m, g, hbij⟩ :=
+    IsLocalRing.exists_bijective_linearCombination_sumElim _ hli _ hspan
+  refine ⟨m, g, ?_⟩
+  -- the polynomial ring
+  set Q := MvPolynomial (Fin c ⊕ Fin m) R
+  let φ : Q →ₐ[R] A := MvPolynomial.aeval (Sum.elim f g)
+  let : Algebra Q A := φ.toAlgebra
+  have : IsScalarTower R Q A := IsScalarTower.of_algebraMap_eq fun r ↦ (φ.commutes r).symm
+  have : IsScalarTower R Q Ap := IsScalarTower.of_algebraMap_eq fun r ↦ by
+    rw [IsScalarTower.algebraMap_apply R A Ap, IsScalarTower.algebraMap_apply R Q A,
+      ← IsScalarTower.algebraMap_apply]
+  have hmb : Function.Bijective (mapBaseChange R Q Ap) := by
+    let b := Algebra.TensorProduct.basis Ap (mvPolynomialBasis R (Fin c ⊕ Fin m))
+    have heq : mapBaseChange R Q Ap =
+        Finsupp.linearCombination Ap (Sum.elim (fun a ↦ D R Ap (algebraMap A Ap (f a)))
+          ((fun a : A ↦ D R Ap (algebraMap A Ap a)) ∘ g)) ∘ₗ b.repr.toLinearMap := by
+      refine b.ext fun i ↦ ?_
+      rw [LinearMap.comp_apply, LinearEquiv.coe_coe, b.repr_self,
+        Finsupp.linearCombination_single, one_smul]
+      simp only [b, Algebra.TensorProduct.basis_apply, mvPolynomialBasis_apply]
+      erw [mapBaseChange_tmul, one_smul, map_D, IsScalarTower.algebraMap_apply Q A Ap]
+      rcases i with a | j
+      · exact congrArg _ (congrArg _ (MvPolynomial.aeval_X _ _))
+      · exact congrArg _ (congrArg _ (MvPolynomial.aeval_X _ _))
+    rw [heq, LinearMap.coe_comp]
+    exact hbij.comp b.repr.bijective
+  have : FormallyEtale Q Ap := FormallyEtale.of_bijective_mapBaseChange (R := R) hmb
+  have : FinitePresentation Q A := .of_restrict_scalars_finitePresentation R Q A
+  obtain ⟨h, hh, het⟩ := Algebra.exists_etale_of_isEtaleAt (R := Q) p
+  refine ⟨h, hh, ?_⟩
+  rw [show (algebraMap A (Localization.Away h)).comp φ.toRingHom =
+    algebraMap Q (Localization.Away h) from (IsScalarTower.algebraMap_eq Q A _).symm,
+    RingHom.etale_algebraMap]
+  exact het
+
+end Algebra
