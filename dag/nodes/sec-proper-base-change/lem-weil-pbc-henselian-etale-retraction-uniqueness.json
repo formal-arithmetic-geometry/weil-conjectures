@@ -20,23 +20,38 @@
  ],
  "proof": [
   {
-   "text": "Use the same standard-etale localization. The two maps have equal reductions and hence give congruent simple roots; henselian simple-root uniqueness identifies those roots, after which the standard-etale universal property and localization imply equality of the maps.",
+   "text": "Use HenselianLocalRing.TFAE to obtain monic simple-root lifting. Let x be the prime q' in Spec B and y its image in Spec S. The affine residue-field isomorphisms identify beta:B→kappa(x) and alpha:S→kappa(y). Naturality gives beta composed with phi equal to the scheme residue-field map composed with alpha. The given ideal residue-field bijection, composed with S→kappa(m), makes S→kappa(q') surjective; transport across the affine residue-field isomorphism makes beta composed with phi surjective. Thus the scheme residue-field map is surjective, and it is injective because it is a homomorphism of fields.",
    "uses": [
-    "lem-weil-pbc-simple-root-uniqueness",
-    "lem-weil-pbc-standard-etale-pair-maps"
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Lemma Tag 04GG, implication (1)⇒(8)"
+   }
+  },
+  {
+   "text": "Apply the already proved root-lifting retraction theorem with phi.toAlgebra, this root-lifting property, and the converted residue-field bijection. Both given algebra maps have maximal-ideal preimage q', so uniqueness identifies each with the unique retraction, and transitivity identifies them with each other. The standard-etale presentation and simple-root uniqueness argument remain in the imported theorem, so the unit route is preserved.",
+   "uses": [
+    "lem-weil-pbc-root-lifting-etale-retraction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 04GG, implication (1) => (8), uniqueness step"
+    "place": "Lemma Tag 04GG, implication (1)⇒(8)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-simple-root-uniqueness",
-  "lem-weil-pbc-standard-etale-pair-maps"
+  "def-weil-residue-field",
+  "lem-weil-pbc-root-lifting-etale-retraction"
  ],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "group": "M3",
+  "date": "2026-10-12",
+  "note": "Reuse the already proved root-lifting retraction theorem and its standard-etale uniqueness argument; prove affine residue-field compatibility directly."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -88,7 +103,8 @@
   "by": "K2",
   "date": "2026-10-12",
   "existing": false,
-  "statement": "theorem algHom_eq_of_henselianLocalRing_etale {S B : Type u} [CommRing S] [CommRing B] [HenselianLocalRing S] (φ : S →+* B) [AlgebraicGeometry.Etale (Scheme.Spec.map (CommRingCat.ofHom φ).op)] (q' : Ideal B) [q'.IsPrime] (hq : q'.comap φ = IsLocalRing.maximalIdeal S) (hres : Function.Bijective (Ideal.ResidueField.map (IsLocalRing.maximalIdeal S) q' φ hq.symm)) [Algebra S B] (σ τ : B →ₐ[S] S) (hσ : (IsLocalRing.maximalIdeal S).comap σ.toRingHom = q') (hτ : (IsLocalRing.maximalIdeal S).comap τ.toRingHom = q') : σ = τ"
+  "statement": "theorem algHom_eq_of_henselianLocalRing_etale {S B : Type u} [CommRing S] [CommRing B] [HenselianLocalRing S] (φ : S →+* B) [AlgebraicGeometry.Etale (Scheme.Spec.map (CommRingCat.ofHom φ).op)] (q' : Ideal B) [q'.IsPrime] (hq : q'.comap φ = IsLocalRing.maximalIdeal S) (hres : Function.Bijective (Ideal.ResidueField.map (IsLocalRing.maximalIdeal S) q' φ hq.symm)) : letI : Algebra S B := φ.toAlgebra ∀ (σ τ : B →ₐ[S] S), (IsLocalRing.maximalIdeal S).comap σ.toRingHom = q' → (IsLocalRing.maximalIdeal S).comap τ.toRingHom = q' → σ = τ",
+  "note": "Corrected the independent algebra instance to the algebra induced by phi; this is the retraction meant by the unchanged natural-language statement."
  },
  "created": {
   "by": "worker",
@@ -109,11 +125,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K2",
+  "reviewer": "X-464a0",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T044747-L-2036892",
+  "landing": "20261012T113948-L-821662",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node metadata, change record, report, proof axioms, and direct importer compile match the stage-3 review requirements."
  }
 }
