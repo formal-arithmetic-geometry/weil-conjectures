@@ -14,34 +14,54 @@
  },
  "proof": [
   {
-   "text": "Use a polynomial presentation of S and the height-difference theorem for saturated chains between the kernel prime and maximal ideals; all such chains have the same length, which equals ringKrullDim S.",
+   "text": "Choose n and a surjective polynomial presentation f using Algebra.FiniteType.iff_quotient_mvPolynomial''. Mathlib Ideal.primeSpectrumOrderIsoZeroLocusOfSurj identifies Spec S with the primes containing ker f, by comap. Map any strict chain into the polynomial spectrum. Its length is at most the height of its last prime (Order.length_le_height_last), hence at most n by the polynomial height bound. Thus ringKrullDim S is finite; it is not bottom since S is a domain.",
    "uses": [
     "def-weil-pbc-finite-type-algebra",
     "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-krull-dimension-ring",
-    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
+    "def-weil-pbc-krull-dimension-ring"
    ],
    "elementary": false
+  },
+  {
+   "text": "In any finite-dimensional partial order a longest LTSeries is maximal. Otherwise its head is not minimal, its last is not maximal, or a consecutive pair is not a cover: cons, snoc, or insertNth increases its length. A saturated finite chain with minimal head and maximal last is a maximal chain: for a point comparable with every term, choose the first term above it; minimality or the preceding cover forces equality. These are the proved private helpers longest_isMaxChain and saturated_isMaxChain.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A maximal prime chain b starts at the zero prime, ends at a maximal ideal, and has only cover steps. Indeed inserting any point below the head, above the last, or between consecutive terms would give a larger chain; comparability with each term gives the needed insertion. Transport b by comap. Its head is ker f and its last is maximal (Ideal.comap_isMaximal_of_surjective). A prime strictly between two transported terms contains ker f, so the inverse prime correspondence would contradict their cover relation. The polynomial height-difference theorem applies. The height of the last ideal is n by MvPolynomial.ringKrullDim_localizationAtMaximal and IsLocalization.AtPrime.ringKrullDim_eq_height. Therefore b.length = n - height(ker f) in ENat.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the same length formula to any maximal chain and to the longest chain, which is maximal by the second step. Injectivity of the natural-number cast gives equality of their lengths. Order.krullDim_eq_length_of_finiteDimensionalOrder identifies the length of the longest chain with ringKrullDim S. Take this length as the required natural number d.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal",
-  "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference",
   "def-weil-pbc-krull-dimension-ring",
   "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
-  "lem-weil-pbc-polynomial-ring-maximal-chain-height-difference"
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "def-weil-pbc-localization-at-prime"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00OS"
+  "place": "Algebra, Lemma Tag 00OS; polynomial presentation and common chain length argument, with elementary finite-order glue formalized by G1 (2026-10-13). Source read at https://stacks.math.columbia.edu/tag/00OS because the local literature file is absent."
  },
  "mathlib_searches": [
   {
@@ -107,10 +127,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T184349-L-4021911",
-  "kind": "interface",
+  "landing": "20261012T220520-L-1393081",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

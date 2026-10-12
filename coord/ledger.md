@@ -9717,3 +9717,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: merged deliver/E1/Sheaf.Topology.ConstantSubsheafPositivePresentation (stage 3; reviewer PASS; first push; landing 20261012T220519-L-1392754 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/E3/Sheaf.AlgebraicGeometry.AffinePseudoCoherentLocalizationCover (stage 3; reviewer PASS; first push; landing 20261012T220519-L-1392870 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/F2/Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsAdditiveImageComparison (stage 3; reviewer PASS; first push; landing 20261012T220519-L-1392973 (interface); batch 20261012T220515; modules 4; new nodes 3)
+- 22:05 L: merged deliver/G1/Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRingChains (stage 3; reviewer PASS; after a return; landing 20261012T220520-L-1393081 (proof); batch 20261012T220515; modules 1; new nodes 0)
