@@ -7,9 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleComplexFiltrationPageData
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.AlgebraicGeometry.ComplexTermCohomologyColimit
 
 /-! # Termwise continuity on the first hypercohomology page
 
@@ -24,6 +22,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
+
+-- Resolve reflexive page bounds before inspecting the large dependent context.
+local macro_rules
+  | `(tactic| lia) => `(tactic| first | exact le_refl _ | omega)
 
 set_option maxHeartbeats 1000000 in
 -- The dependent first-page and graded-class witnesses are elaborated together.
@@ -142,6 +144,41 @@ theorem etale_complex_first_page_continuity
         (fun t ↦ ComplexShape.up' (⟨1 - t, t⟩ : ℤ × ℤ)) 1 1 ⋙
         HomologicalComplex.eval _ _ ⟨r, s⟩) ⟶ (E'.page 1).X ⟨r, s⟩),
       (∀ i : Iᵒᵖ, colimit.ι _ i ≫ ψ = ((v i).hom 1).f ⟨r, s⟩) →
-        IsIso ψ := by sorry
+        IsIso ψ := by
+  intro r s ψ hψ
+  let T := E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u + 1}
+    (fun t ↦ ComplexShape.up' (⟨1 - t, t⟩ : ℤ × ℤ)) 1 1 (le_refl 1) ⋙
+    HomologicalComplex.eval _ _ ⟨r, s⟩
+  let B : Cocone T :=
+    { pt := (E'.page 1 (le_refl 1)).X ⟨r, s⟩
+      ι :=
+        { app := fun i ↦ ((v i).hom 1 (le_refl 1)).f ⟨r, s⟩
+          naturality := fun i j f ↦ by
+            have h := congrArg (fun z ↦ (z.hom 1 (le_refl 1)).f ⟨r, s⟩) (compatible f)
+            change ((E.map f).hom 1 (le_refl 1)).f ⟨r, s⟩ ≫ ((v j).hom 1 (le_refl 1)).f ⟨r, s⟩ =
+              ((v i).hom 1 (le_refl 1)).f ⟨r, s⟩ ≫ 𝟙 _
+            simpa only [Category.comp_id, SpectralSequence.comp_hom,
+              HomologicalComplex.comp_f] using h } }
+  have hB : Nonempty (IsColimit B) := by
+    by_cases hr : r < 0
+    · refine ⟨{ desc := ?_, fac := ?_, uniq := ?_ }⟩
+      · intro S
+        exact 0
+      · intro S i
+        exact (negative i r s hr).eq_of_src _ _
+      · intro S m hm
+        exact (negativeLimit r s hr).eq_of_src _ _
+    · rcases Int.eq_ofNat_of_zero_le (le_of_not_gt hr) with ⟨n, hn⟩
+      subst r
+      exact nonempty_isColimit_complex_term_cohomology D c hc F φ hidentity
+        hcomposition G eG hG L hL _ s T (fun i ↦ firstIso i _ s)
+        (fun i j f ↦ first_transition i j f _ s) B (firstIsoLimit _ s)
+        (fun i ↦ first_comparison i _ s)
+  have heq : ψ = (colimit.isColimit T).desc B := by
+    apply colimit.hom_ext
+    intro i
+    exact (hψ i).trans ((colimit.isColimit T).fac B i).symm
+  rw [heq]
+  exact ((colimit.isColimit T).nonempty_isColimit_iff_isIso_desc).mp hB
 
 end AlgebraicGeometry.Etale

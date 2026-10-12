@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-complex-term-cohomology-colimit",
+ "kind": "statement",
+ "title": "Termwise etale cohomology colimit",
+ "statement": "For a small cofiltered category I and a limiting cone c over a diagram D of qcqs schemes with affine transitions, let F_i be complexes of abelian etale sheaves with inverse-image maps satisfying the identity and composition laws. Let G identify compatibly with their pullbacks to c.pt and let L be a colimit cocone of G. For any s in Z and r in N, let H identify with H^r(F_i^s), with arrows the complexTermCohomologyMap of [lem-weil-pbc-etale-complex-filtration-page-data]. A cocone B with point identified with H^r(L.pt^s) and legs those same canonical comparison maps is a colimit cocone. This is the degreewise application of [lem-weil-pbc-etale-cohomology-limit-of-schemes], with no lower-bound hypothesis or spectral-sequence data.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09YQ",
+  "place": "Theorem 59.51.3"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-etale-complex-filtration-page-data"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib IsFiltered.exists_directed (Stacks 0032) to choose a small nonempty directed partial order A and a final functor R : A to I.op. Its left opposite is initial, so c.whisker R.leftOp is limiting; compactness, quasi-separatedness and affine transitions are inherited from D. Finality preserves the colimit cocone L.whisker R.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate R composed with G and its colimit cocone at s. Mathlib HomologicalComplex evaluation preserves colimits. Set the stage sheaf at a to (F ((R.obj a).unop)).X s and its transition to (phi ((R.map f).unop)).f s. Evaluating hidentity, hcomposition and hG gives precisely the coherence assumptions of ordinary continuity. The evaluated eG gives the pullback identifications.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply nonempty_isColimit_etale_cohomology_of_isLimit to these evaluated sheaves in degree r, using the reindexed H and B. Expand complexTermCohomologyMap as the composite of cohomologyMap and Sheaf.H.map. Cancel eH.hom on the right of hH to obtain the required arrow equality; hB already gives the required cocone-leg equality. The result makes B.whisker R a colimit.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the resulting colimit structure along Functor.Final.isColimitWhiskerEquiv R B to conclude Nonempty (IsColimit B).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+ ],
+ "proof_origin": {
+  "by": "Q1",
+  "document": "Stacks Project Tag 09YQ",
+  "place": "termwise application"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology commutes with filtered colimits of sheaves",
+   "results": "UNAVAILABLE: Internal Server Error; used other services and source searches.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at a degree preserves colimits of cochain complexes",
+   "results": "Found HomologicalComplex evaluation colimit preservation and isColimitOfEval APIs; these supply the degreewise step, not the cohomology continuity conclusion.",
+   "verdict": "ingredient only",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Final, IsColimit",
+   "results": "No hits: unknown identifier 'Functor.Final'; source search confirms the namespaced finality transport API.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "eval.*[Pp]reserves.*[Cc]olimit|preservesColimits.*[Ee]val|exists_directed",
+   "results": "Found IsFiltered.exists_directed and HomologicalComplex evaluation preservation. Library and upstream searches found ordinary continuity and fixed-base continuity, but no theorem for varying complex terms with the supplied cocone.",
+   "verdict": "ingredients only",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexFirstPageContinuity",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-complex-first-page-continuity",
+   "place": "termwise continuity step",
+   "via": [
+    "lem-weil-pbc-etale-complex-first-page-continuity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ComplexTermCohomologyColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ComplexTermCohomologyColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_isColimit_complex_term_cohomology",
+  "statement": "theorem nonempty_isColimit_complex_term_cohomology\n    {I : Type u} [SmallCategory I] [IsCofiltered I]\n    (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : I, CompactSpace (D.obj i)] [∀ i : I, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : I) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, CochainComplex (Sheaf (D.obj i).smallEtaleTopology\n      AddCommGrpCat.{u + 1}) ℤ)\n    (φ : ∀ {i j : I} (f : j ⟶ i),\n      ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (NatIso.mapHomologicalComplex\n        (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i)))\n        (ComplexShape.up ℤ)).hom.app (F i) ≫\n      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))\n        (ComplexShape.up ℤ)).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),\n      φ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ φ g)\n    (G : Iᵒᵖ ⥤ CochainComplex (Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    (eG : ∀ i : I, G.obj (op i) ≅\n      ((upperStar AddCommGrpCat.{u + 1} (c.π.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj (F i))\n    (hG : ∀ (i j : I) (f : j ⟶ i), G.map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L) (r : ℕ) (s : ℤ)\n    (H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj (op i) ≅ AddCommGrpCat.of (Sheaf.H ((F i).X s) r))\n    (hH : ∀ (i j : I) (f : j ⟶ i), H.map f.op ≫ (eH j).hom =\n      (eH i).hom ≫ complexTermCohomologyMap (D.map f) (F i) (F j) (φ f) r s)\n    (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H (L.pt.X s) r))\n    (hB : ∀ i : I, B.ι.app (op i) ≫ eB.hom =\n      (eH i).hom ≫ complexTermCohomologyMap (c.π.app i) (F i) L.pt\n        ((eG i).inv ≫ L.ι.app (op i)) r s) :\n    Nonempty (IsColimit B)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f69aa",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144137-L-2104543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-f69aa",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T144137-L-2104543",
+  "kind": "interface",
+  "note": "independent Codex review: Existing signature is byte-identical; both Lean signatures match their nodes, and the proof and termwise reduction match the recorded dependencies and sources. Both delivered modules and unchanged direct importer EtaleComplexFiltrationDeepening compile cleanly; axiom probes show only standard axioms and the documented sorryAx."
+ }
+}

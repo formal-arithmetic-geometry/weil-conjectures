@@ -8173,3 +8173,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/P3/Sheaf.RingTheory.DepthExt (stage 3; reviewer PASS; first push; landing 20261012T144136-L-2104240 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/P3/Sheaf.RingTheory.HenselianPairPrimeConnected (stage 3; reviewer PASS; first push; landing 20261012T144136-L-2104337 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.DerivedPullbackPerfect (stage 3; reviewer PASS; first push; landing 20261012T144136-L-2104439 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:41 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.EtaleComplexFirstPageContinuity (stage 3; reviewer PASS; after a return; landing 20261012T144137-L-2104543 (interface); batch 20261012T144049; modules 2; new nodes 1; change records: coord/changes/first-page-local-bound-tactic.md)
