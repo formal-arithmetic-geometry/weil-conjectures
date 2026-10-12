@@ -4,6 +4,8 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.CategoryTheory.ArrowProductTransitionsExistence
+import Sheaf.CategoryTheory.ArrowProductTransitionsCocycleLaw
 
 @[expose] public section
 universe u
@@ -45,5 +47,8 @@ theorem exists_arrow_product_transitions_cocycle
           (Functor.sheafPushforwardContinuousComp'
             (eqToIso (congrArg Cat.Hom.toFunctor (F.map_comp a b).symm))
             AddCommGrpCat.{u} (T j) (T k) (T l)).hom.app (B l)) := by
-  sorry
+  dsimp
+  obtain ⟨q, hq⟩ := exists_arrow_product_transitions F T A
+  refine ⟨q, hq, ?_⟩
+  exact arrow_product_transitions_cocycle_of_projections F T A q hq
 end CategoryTheory
