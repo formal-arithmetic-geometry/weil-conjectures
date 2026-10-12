@@ -22,14 +22,43 @@
  ],
  "proof": [
   {
-   "text": "Induct on the resolution bound, using the contravariant long exact Ext sequence and the projective Ext criterion; the reverse implication uses a free surjection and splicing.",
+   "text": "Forward implication: unpack a projective resolution P supported in degrees at most n. Mathlib ProjectiveResolution.extMk_surjective represents every class in Ext^(n+1)(X,Y) by a cocycle from P_(n+1). That term is zero, so the cocycle is zero and extMk_zero makes the class zero. Any two classes therefore agree.",
    "uses": [
     "def-weil-pbc-finite-global-dimension",
-    "def-pc-ext",
-    "lem-weil-pbc-projective-ext-criterion",
-    "lem-weil-pbc-ext-long-exact-first-variable"
+    "def-pc-ext"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Reverse implication: induct on n, generalizing X. For n=0 the projective Ext-one criterion makes X projective. ProjectiveResolution.self X is a resolution concentrated in degree zero, hence has the required bound.",
+   "uses": [
+    "lem-weil-pbc-projective-ext-criterion",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the successor case use the standard projective epimorphism Projective.π X and its kernel short exact sequence S. For a class a in Ext^(n+1)(S.X₁,Y), the connecting class in Ext^(n+2)(X,Y) is zero by the hypothesis. The contravariant long exact sequence writes a as the precomposition of a class from the projective S.X₂. That class is zero by positive-degree projective Ext vanishing. Thus the induction hypothesis supplies an actual bounded projective resolution Q of S.X₁.",
+   "uses": [
+    "lem-weil-pbc-ext-long-exact-first-variable",
+    "lem-weil-pbc-projective-ext-criterion",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Splice explicitly using ChainComplex.augment: put S.X₂ in degree zero and Q_i in degree i+1, with first differential Q.π.f 0 followed by S.f and augmentation S.g. ShortComplex.exact_iff_of_epi_of_isIso_of_mono transports exactness from S to degree zero (Q.π.f 0 is epic), and from the cokernel presentation of Q to degree one (S.f is monic). Higher exactness is inherited from Q.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Build the projective resolution structure. In degree zero ChainComplex.quasiIsoAt₀_iff and ShortComplex.quasiIso_iff_of_zeros' identify the augmentation quasi-isomorphism condition with exactness and epimorphy. In every positive degree quasiIsoAt_iff_exactAt' reduces it to the exactness just established. Projectivity follows term by term from S.X₂ and Q; the bound above n+1 follows by shifting the bound on Q. This completes the induction without postponed construction data.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -41,7 +70,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 065R"
+  "place": "Algebra, Lemma Tag 065R; direct cocycle proof of the forward direction and the explicit kernel-induction and splicing proof of the reverse direction (J4)."
  },
  "mathlib_searches": [
   {
@@ -101,10 +130,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261012T223418-L-1641338",
-  "kind": "interface",
+  "landing": "20261012T234220-L-2125360",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
