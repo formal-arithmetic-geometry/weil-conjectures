@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Picard.DegreeDecomposition
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 /-!
@@ -20,6 +21,8 @@ functor are the invertible modules of degree `d` on `X`. For `d = 0` this is
 - `AlgebraicGeometry.exists_picardDegree_equiv_picardFunctorDegree`: the bijection between the
   classes of degree `d` in `Pic X` and `Pic^d_{X/k}(k)` (blueprint
   `thm-sc-theorem-of-the-base`).
+- `AlgebraicGeometry.theorem_of_the_base`: all clauses of the theorem of the base bundled in one
+  statement (blueprint `thm-sc-theorem-of-the-base`).
 -/
 
 @[expose] public section
@@ -110,5 +113,57 @@ theorem exists_picardDegree_equiv_picardFunctorDegree [IsSepClosed k]
     dsimp only
     rw [hinv' M]
     exact hM₂
+
+/-- **The theorem of the base.** Let `X` be a smooth projective geometrically integral curve of
+genus `g = dim_k H¹(X, 𝒪_X)` over a separably closed field `k`. Then the Picard functor
+`Pic_{X/k}` is represented by a commutative group scheme `P` (with group law the tensor product)
+which is the disjoint union of open and closed subschemes `P^d`, `d ∈ ℤ`, such that:
+* `P^d` represents `Pic^d_{X/k}`, and is proper, smooth of relative dimension `g` and
+  geometrically integral over `k` (a `g`-dimensional smooth proper `k`-variety);
+* the `k`-points of `P^d` are the invertible modules of degree `d` on `X`, via the class of their
+  pullback to `X ×_k k`;
+* `P^0` is a commutative group scheme representing `Pic^0_{X/k}` compatibly with the group laws,
+  and the open and closed immersion `P^0 ⟶ P` is a morphism of group schemes.
+
+This bundles `AlgebraicGeometry.isRepresentable_picardFunctor`,
+`AlgebraicGeometry.exists_decomposition_picardFunctor_isMonHom`,
+`AlgebraicGeometry.isProper_of_representableBy_picardFunctorDegree`,
+`AlgebraicGeometry.smoothOfRelativeDimension_of_representableBy_picardFunctorDegree`,
+`AlgebraicGeometry.geometricallyIntegral_of_representableBy_picardFunctorDegree` and
+`AlgebraicGeometry.exists_picardDegree_equiv_picardFunctorDegree`.
+
+(blueprint: `thm-sc-theorem-of-the-base`) -/
+theorem theorem_of_the_base [IsSepClosed k]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
+    [GeometricallyIntegral (X ↘ Spec (.of k))] :
+    ∃ (P : Over (Spec (.of k))) (hP : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy P)
+      (_ : CommGrpObj P) (Pd : ℤ → Over (Spec (.of k))) (j : ∀ d, Pd d ⟶ P)
+      (e : ∀ d, (picardFunctorDegree (X ↘ Spec (.of k)) d).obj.RepresentableBy (Pd d))
+      (_ : CommGrpObj (Pd 0)),
+      IsPicardMul (X ↘ Spec (.of k)) hP ∧ IsPicardZeroMul (X ↘ Spec (.of k)) (e 0) ∧
+      IsMonHom (j 0) ∧
+      (∀ d, IsOpenImmersion (j d).left) ∧
+      (∀ d, IsClopen (Set.range (j d).left.base)) ∧
+      (∀ d d', d ≠ d' → Disjoint (Set.range (j d).left.base) (Set.range (j d').left.base)) ∧
+      (⋃ d, Set.range (j d).left.base) = Set.univ ∧
+      (∀ d, IsProper (Pd d).hom ∧ SmoothOfRelativeDimension (arithmeticGenus k X) (Pd d).hom ∧
+        GeometricallyIntegral (Pd d).hom) ∧
+      ∀ d, ∃ Φ : {L : X.Pic // picDegreeHom k X L = .ofAdd d} ≃
+        (𝟙_ (Over (Spec (.of k))) ⟶ Pd d),
+        ∀ L, ∃ h, (e d).homEquiv (Φ L) = (toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (X ↘ Spec (.of k)) d).toFunctor).app _
+            ⟨Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1,
+              h⟩ := by
+  obtain ⟨P, -, hP, -⟩ := isRepresentable_picardFunctor (X ↘ Spec (.of k))
+  obtain ⟨_, Pd, j, e, _, hPm, he, hj₀, h₁, h₂, h₃, h₄⟩ :=
+    exists_decomposition_picardFunctor_isMonHom P hP
+  refine ⟨P, hP, inferInstance, Pd, j, e, inferInstance, hPm, he, hj₀, h₁, h₂, h₃, h₄,
+    fun d ↦ ⟨isProper_of_representableBy_picardFunctorDegree d _ (e d),
+      smoothOfRelativeDimension_of_representableBy_picardFunctorDegree d _ (e d),
+      geometricallyIntegral_of_representableBy_picardFunctorDegree d _ (e d)⟩, fun d ↦ ?_⟩
+  obtain ⟨Φ, hΦ⟩ := exists_picardDegree_equiv_picardFunctorDegree (k := k) (X := X) d
+  refine ⟨Φ.trans (e d).homEquiv.symm, fun L ↦ ?_⟩
+  obtain ⟨h, hL⟩ := hΦ L
+  exact ⟨h, by rw [Equiv.trans_apply, Equiv.apply_symm_apply, hL]⟩
 
 end AlgebraicGeometry
