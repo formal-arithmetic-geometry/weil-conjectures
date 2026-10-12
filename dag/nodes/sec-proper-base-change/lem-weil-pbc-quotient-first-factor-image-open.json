@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-quotient-first-factor-image-open",
+ "kind": "statement",
+ "title": "Relative openness of a quotient factor over an isomorphism locus",
+ "statement": "Let $i:S\\prime\\to S$ be a homomorphism of commutative rings, $J\\prime\\subseteq S\\prime$, and $J=i(J\\prime)S$. Suppose $e:S/J\\cong D_1\\times D_2$ is a ring isomorphism. Put $\\phi=\\operatorname{Spec}(i)$ and let $T$ be the image of $\\operatorname{Spec}(D_1)$ under the first projection and quotient maps [def-weil-affine-spectrum]. Let $U\\subseteq\\operatorname{Spec}(S\\prime)$ be open and suppose the scheme morphism $\\phi^{-1}(U)\\to U$ is an isomorphism [def-weil-locally-ringed-space-morphism] and $T\\subseteq\\phi^{-1}(U)$. Then the inverse image of $\\phi(T)$ in $\\operatorname{Spec}(S\\prime/J\\prime)$ is open.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Stacks Tag 09XH, original node lines 2529-2541; verified at https://stacks.math.columbia.edu/tag/09XH (image openness and final product/localization paragraphs)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The spectrum image of the first projection from a product is D((1,0)). The kernel consists of elements (0,b), so a prime contains that kernel iff it omits (1,0): one direction uses (0,1)+(1,0)=1, the other uses (a,b)(1,0)=0. Transport through e. The quotient spectrum embedding then gives T=V(J) intersect D(t) for any lift t of e^{-1}(1,0).",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restricted scheme isomorphism gives an open immersion into Spec(S prime) after composing with the inclusion of U. Apply its open-map property to the inverse image of D(t) to see W=phi(D(t) intersect phi^{-1}(U)) is open.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A prime q contains map i J prime iff its inverse image contains J prime. Thus phi^{-1}(V(J prime))=V(J). Using T subset phi^{-1}(U), obtain phi(T)=W intersect V(J prime). Pullback by the quotient map has inverse image of V(J prime) equal to the whole spectrum and is continuous, so the desired inverse image is open.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Stacks Tag 09XH, original node lines 2529-2541; verified at https://stacks.math.columbia.edu/tag/09XH (image openness and final product/localization paragraphs)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spectrum quotient factor image open under isomorphism restricted to an open subset; ring quotient first factor isomorphism localization",
+   "results": "Service unavailable (Internal Server Error), on both attempts; no verdict possible. LeanFinder, Loogle, and local source searches used instead.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Spec(S) to Spec(R) is an isomorphism over an open containing V(I), the quotient ring map R/I to S/IS is bijective; clopen image finite component closed fibre",
+   "results": "isIso_SpecMap_iff, idempotent/basic-open correspondence, closed integral comap; no direct result for either general quotient-factor statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, _ ≃+* _ × _",
+   "results": "No hits; source grep found the CRT ingredient AlgEquiv.prodQuotientOfIsIdempotentElem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*restrict|restrict.*quotient|prodQuotientOfIsIdempotentElem; quotient.*factor.*iso; blueprint_refs.py search clopen image quotient factor and first factor isomorphism",
+   "results": "Mathlib Restrict supplies morphismRestrict and the isomorphism homeomorphism; Idempotents supplies the ring product decomposition. No whole quotient-factor lemma in Mathlib, WeilConjectures, Sheaf or blueprint (both blueprint searches returned zero). Existing IntegralClosureFiniteFibreChooseG only supplies a lift and localization bijectivity, under algebra compatibility data not present here.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 3 and 8-10 of lem-weil-pbc-integral-closure-finite-fibre-image-clopen in the proof of Tag 09XH",
+   "via": [
+    "lem-weil-pbc-integral-closure-finite-fibre-image-clopen",
+    "lem-weil-pbc-integral-closure-finite-fibre-part-localization",
+    "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuotientFirstFactorImageOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientFirstFactorImageOpen.lean",
+  "declaration": "AlgebraicGeometry.quotient_firstFactor_image_isOpen",
+  "statement": "theorem quotient_firstFactor_image_isOpen {S' S : Type u} [CommRing S'] [CommRing S] (i : S' →+* S) (J' : Ideal S') (J : Ideal S) (hJ : Ideal.map i J' = J) {D₁ : Type w} {D₂ : Type z} [CommRing D₁] [CommRing D₂] (e : (S ⧸ J) ≃+* D₁ × D₂) (U : (Spec (.of S')).Opens) (hiso : IsIso (Spec.map (CommRingCat.ofHom i) ∣_ U)) (hT : Set.range (PrimeSpectrum.comap ((RingHom.fst D₁ D₂).comp (e.toRingHom.comp (Ideal.Quotient.mk J)))) ⊆ (PrimeSpectrum.comap i) ⁻¹' U.1) : IsOpen ((PrimeSpectrum.comap (Ideal.Quotient.mk J')) ⁻¹' ((PrimeSpectrum.comap i) '' Set.range (PrimeSpectrum.comap ((RingHom.fst D₁ D₂).comp (e.toRingHom.comp (Ideal.Quotient.mk J))))))",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085342-L-40639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085342-L-40639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

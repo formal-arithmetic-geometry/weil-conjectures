@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-quotient-first-factor-iso",
+ "kind": "statement",
+ "title": "First quotient factor isomorphism over an isomorphism locus",
+ "statement": "Let $i:S\\prime\\to S$ be a homomorphism of commutative rings, $J\\prime\\subseteq S\\prime$, and $J=i(J\\prime)S$. Let $f:S\\prime/J\\prime\\to S/J$ satisfy $f(\\overline b)=\\overline{i(b)}$ and let $e:S/J\\cong D_1\\times D_2$ be a ring isomorphism. Suppose $c\\in S\\prime/J\\prime$ is idempotent and $f(c)=e^{-1}(1,0)$. Let $U\\subseteq\\operatorname{Spec}(S\\prime)$ be open [def-weil-affine-spectrum], suppose the scheme map over $U$ is an isomorphism [def-weil-locally-ringed-space-morphism], and suppose the image of $D(c)\\subseteq\\operatorname{Spec}(S\\prime/J\\prime)$ is contained in $U$. Then there are rings $D\\prime_1,D\\prime_2$, a ring isomorphism $e\\prime:S\\prime/J\\prime\\cong D\\prime_1\\times D\\prime_2$, a ring isomorphism $g:D\\prime_1\\cong D_1$, and a ring homomorphism $h:D\\prime_2\\to D_2$, with $e\\prime(c)=(1,0)$ and $e(f(r))=(g(e\\prime(r)_1),h(e\\prime(r)_2))$ for every $r$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Stacks Tag 09XH, original node lines 2529-2541; verified at https://stacks.math.columbia.edu/tag/09XH (image openness and final product/localization paragraphs)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Construct the product by the elementary Chinese remainder identity for an idempotent: R prime is the product of its quotients by (1-c) and (c). The map is r to its two residue classes and its inverse sends (x,y) to cx+(1-c)y, independent of representatives. This sends c to (1,0). Since f(c)=e^{-1}(1,0), f kills (1-c) in the first projection and (c) in the second, so it induces both factor maps. This is also Mathlib AlgEquiv.prodQuotientOfIsIdempotentElem, Tag 00EM.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose t lifting c. The first-factor quotient S prime -> D prime 1 has kernel K prime = J prime+(1-t), with V(K prime) equal to the quotient spectrum image of D(c), hence contained in U. Write Spec(S prime) minus U = V(L). Disjointness implies L+K prime=S prime. Choose 1=l+k, l in L, k in K prime, and set g=t*l. Because t(1-t) belongs to J prime, g-t=-tk belongs to J prime. As g belongs to L, D(g) is contained in U.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of the scheme isomorphism to D(g) identifies the section rings, which are S prime localized at g and S localized at i(g). The induced section map agrees with i on global sections, so it is the canonical localization map.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two first-factor kernels are K prime=J prime+(1-g) and K=J+(1-i(g)); the second follows from f(c)=e^{-1}(1,0). Since J=map i J prime, K=map i K prime. The localization isomorphism carries their extended ideals to each other, hence induces an isomorphism of the localization quotients. As g and i(g) become 1, these localization quotients are the original first-factor quotients S prime/K prime and S/K. The resulting isomorphism is precisely the induced first-factor map. Combine it with the second-factor homomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Stacks Tag 09XH, original node lines 2529-2541; verified at https://stacks.math.columbia.edu/tag/09XH (image openness and final product/localization paragraphs)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spectrum quotient factor image open under isomorphism restricted to an open subset; ring quotient first factor isomorphism localization",
+   "results": "Service unavailable (Internal Server Error), on both attempts; no verdict possible. LeanFinder, Loogle, and local source searches used instead.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Spec(S) to Spec(R) is an isomorphism over an open containing V(I), the quotient ring map R/I to S/IS is bijective; clopen image finite component closed fibre",
+   "results": "isIso_SpecMap_iff, idempotent/basic-open correspondence, closed integral comap; no direct result for either general quotient-factor statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, _ ≃+* _ × _",
+   "results": "No hits; source grep found the CRT ingredient AlgEquiv.prodQuotientOfIsIdempotentElem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*restrict|restrict.*quotient|prodQuotientOfIsIdempotentElem; quotient.*factor.*iso; blueprint_refs.py search clopen image quotient factor and first factor isomorphism",
+   "results": "Mathlib Restrict supplies morphismRestrict and the isomorphism homeomorphism; Idempotents supplies the ring product decomposition. No whole quotient-factor lemma in Mathlib, WeilConjectures, Sheaf or blueprint (both blueprint searches returned zero). Existing IntegralClosureFiniteFibreChooseG only supplies a lift and localization bijectivity, under algebra compatibility data not present here.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 3 and 8-10 of lem-weil-pbc-integral-closure-finite-fibre-image-clopen in the proof of Tag 09XH",
+   "via": [
+    "lem-weil-pbc-integral-closure-finite-fibre-image-clopen",
+    "lem-weil-pbc-integral-closure-finite-fibre-part-localization",
+    "lem-weil-pbc-gabber-root-criterion-etale-section-lifting",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuotientFirstFactorIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuotientFirstFactorIso.lean",
+  "declaration": "AlgebraicGeometry.quotient_firstFactor_equiv_of_restrict_iso",
+  "statement": "theorem quotient_firstFactor_equiv_of_restrict_iso {S' S : Type u} [CommRing S'] [CommRing S] (i : S' →+* S) (J' : Ideal S') (J : Ideal S) (hJ : Ideal.map i J' = J) (f : (S' ⧸ J') →+* (S ⧸ J)) (hf : ∀ b, f (Ideal.Quotient.mk J' b) = Ideal.Quotient.mk J (i b)) {D₁ : Type w} {D₂ : Type z} [CommRing D₁] [CommRing D₂] (e : (S ⧸ J) ≃+* D₁ × D₂) (c : S' ⧸ J') (hc : IsIdempotentElem c) (hfc : f c = e.symm (1, 0)) (U : (Spec (.of S')).Opens) (hiso : IsIso (Spec.map (CommRingCat.ofHom i) ∣_ U)) (hU : PrimeSpectrum.comap (Ideal.Quotient.mk J') '' (PrimeSpectrum.basicOpen c : Set _) ⊆ U.1) : ∃ (D'₁ D'₂ : Type u) (_ : CommRing D'₁) (_ : CommRing D'₂) (e' : (S' ⧸ J') ≃+* D'₁ × D'₂) (g : D'₁ ≃+* D₁) (h : D'₂ →+* D₂), e' c = (1, 0) ∧ ∀ r : S' ⧸ J', e (f r) = (g (e' r).1, h (e' r).2)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085342-L-40639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T085342-L-40639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
