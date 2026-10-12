@@ -28,62 +28,43 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat resolution $\\rho:\\mathcal R^\\bullet\\to\\mathcal O'$ ($\\mathcal O'$ in degree $0$) from [lem-pc-kflat-resolution]. A morphism of complexes is a quasi-isomorphism if and only if its mapping cone is acyclic (long exact cohomology sequence of the cone triangle of [def-weil-abstract-derived-category]); so $C^\\bullet=\\operatorname{Cone}(\\alpha)$ and $\\operatorname{Cone}(\\rho)$ are acyclic. Use the symmetry isomorphism $\\operatorname{Tot}(\\mathcal A^\\bullet\\otimes\\mathcal B^\\bullet)\\cong\\operatorname{Tot}(\\mathcal B^\\bullet\\otimes\\mathcal A^\\bullet)$, $a\\otimes b\\mapsto(-1)^{pq}b\\otimes a$ on $\\mathcal A^p\\otimes\\mathcal B^q$, of the total tensor complexes [def-pc-tensor-complex-sheaves], natural in both arguments. Consider the commutative square with top row $\\operatorname{Tot}(\\mathcal R^\\bullet\\otimes\\mathcal P^\\bullet)\\to\\operatorname{Tot}(\\mathcal R^\\bullet\\otimes\\mathcal Q^\\bullet)$ (induced by $\\alpha$), bottom row $\\operatorname{Tot}(\\mathcal O'\\otimes\\mathcal P^\\bullet)\\to\\operatorname{Tot}(\\mathcal O'\\otimes\\mathcal Q^\\bullet)$ and vertical maps induced by $\\rho$. Top row: by [lem-pc-tensor-mapping-cone-iso] with $\\mathcal A^\\bullet=\\mathcal R^\\bullet$ and the morphism $\\alpha$, its cone is $\\operatorname{Tot}(\\mathcal R^\\bullet\\otimes C^\\bullet)\\cong\\operatorname{Tot}(C^\\bullet\\otimes\\mathcal R^\\bullet)$, acyclic because $C^\\bullet$ is acyclic and $\\mathcal R^\\bullet$ is K-flat [def-pc-kflat-complex]; so the top row is a quasi-isomorphism. Left column: after the symmetry it is $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes\\mathcal R^\\bullet)\\to\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes\\mathcal O')$, whose cone is $\\operatorname{Tot}(\\mathcal P^\\bullet\\otimes\\operatorname{Cone}(\\rho))\\cong\\operatorname{Tot}(\\operatorname{Cone}(\\rho)\\otimes\\mathcal P^\\bullet)$ by [lem-pc-tensor-mapping-cone-iso], acyclic because $\\operatorname{Cone}(\\rho)$ is acyclic and $\\mathcal P^\\bullet$ is K-flat [def-pc-kflat-complex]; likewise the right column with $\\mathcal Q^\\bullet$. Taking $H^n$ of the commutative square, three of the four maps are isomorphisms, hence so is the bottom row. Since $\\mathcal O'$ sits in degree $0$, $\\operatorname{Tot}(\\mathcal O'\\otimes_{\\mathcal O}\\mathcal P^\\bullet)$ is the complex $\\mathcal O'\\otimes_{\\mathcal O}\\mathcal P^n$ with differential $1\\otimes d$, identified with $\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ by the symmetry of the tensor product of modules [def-pur-sheaf-tensor-product], and the bottom row becomes $\\alpha\\otimes1$. This proves (1).",
+   "text": "Build the sectionwise extension-of-scalars functor from the landed changeOfRingsPresheaf and changeOfRingsHom_naturality [def-pur-sheaf-tensor-product]. Identity, composition and additivity hold sectionwise. Compose with sheafification. Extension of scalars and sheafification are additive by their adjunctions to additive restriction/forgetful functors (Mathlib Adjunction.left_adjoint_additive). This gives E with the exact objects and maps required.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-tensor-mapping-cone-iso",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT (proof, with F = O' in degree 0)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $F:K(\\mathcal O)\\to D(\\mathcal O')$ be $\\mathcal G^\\bullet\\mapsto\\mathcal G^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ followed by the localization functor of $D(\\mathcal O')$ [def-weil-abstract-derived-category]. It is an exact functor of triangulated categories: the termwise functor $-\\otimes_{\\mathcal O}\\mathcal O'$ is additive [def-pur-sheaf-tensor-product], so it preserves homotopies, commutes with the shift, and carries the cone $C(f)$ (termwise a direct sum with the matrix differential) to the cone $C(f\\otimes1)$, and the localization functor is exact. Let $\\mathcal P$ be the class of K-flat complexes [def-pc-kflat-complex]. Every complex has a quasi-isomorphism from an element of $\\mathcal P$ [lem-pc-kflat-resolution], and by Step 1 $F$ sends every quasi-isomorphism between elements of $\\mathcal P$ to an isomorphism. Hence [lem-pur-left-derived-from-kflat-class] applies: the left derived functor $L\\varphi^*:=LF:D(\\mathcal O)\\to D(\\mathcal O')$ is everywhere defined, is an exact functor of triangulated categories, and comes with its canonical transformation $LF\\circ Q\\to F$ whose component at every K-flat complex is an isomorphism.",
+   "text": "Apply [lem-pur-change-of-rings-kflat-quasi-iso] to E, using its reflexive object identification and the proved morphism identification, to obtain clause (1).",
    "uses": [
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-pc-kflat-resolution",
-    "def-pc-kflat-complex",
+    "lem-pur-change-of-rings-kflat-quasi-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Let F be E.mapHomotopyCategory followed by the derived localization [def-weil-abstract-derived-category]. Mathlib supplies its shift compatibility and triangulatedness. Define S to consist of homotopy-category objects represented by K-flat complexes [def-pc-kflat-complex]. Each homotopy object is the quotient of a complex G; [lem-pc-kflat-resolution] gives P → G, and quotient_map_mem_quasiIso_iff shows that its homotopy image is a resolution from S. For a quasi-isomorphism between objects in S choose their K-flat representatives and lift the morphism through the full quotient functor. quotient_map_mem_quasiIso_iff gives a chain quasi-isomorphism; clause (1) makes its termwise E image a quasi-isomorphism. Localization.inverts then makes its F image an isomorphism. Apply [lem-pur-left-derived-from-kflat-class] to F and S. Its pointwise existence, universal derived pair and triangulatedness supply clause (2). Its counit-isomorphism clause applied to the representation (P,hP,rfl) supplies the final clause for every K-flat P.",
+   "uses": [
     "def-weil-abstract-derived-category",
-    "def-pur-sheaf-tensor-product"
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-pur-left-derived-from-kflat-class"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 06XN and 05SE, as used in sites-cohomology Tag 06YY"
-   }
-  },
-  {
-   "text": "For a K-flat resolution $s:\\mathcal P^\\bullet\\to\\mathcal G^\\bullet$, $Q(s)$ is an isomorphism in $D(\\mathcal O)$, so $LF(Q s)$ is an isomorphism, and the component $LF(Q\\mathcal P^\\bullet)\\to F(\\mathcal P^\\bullet)=\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ of the canonical transformation is an isomorphism by Step 2. The canonical map $L\\varphi^*\\mathcal G^\\bullet\\to\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ is this component composed with $LF(Qs)^{-1}$, an isomorphism. For two resolutions the isomorphism $\\mathcal P^\\bullet\\otimes_{\\mathcal O}\\mathcal O'\\cong\\mathcal P'^\\bullet\\otimes_{\\mathcal O}\\mathcal O'$ is the canonical map for $\\mathcal P'^\\bullet$ composed with the inverse of the one for $\\mathcal P^\\bullet$; it depends only on the two resolutions, and for a third resolution $\\mathcal P''^\\bullet$ the composite of the comparisons $\\mathcal P\\to\\mathcal P'$ and $\\mathcal P'\\to\\mathcal P''$ is the comparison $\\mathcal P\\to\\mathcal P''$ since the middle factors cancel.",
-   "uses": [
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, last paragraph of the proof"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pc-tensor-mapping-cone-iso",
   "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
   "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
   "lem-pur-left-derived-from-kflat-class"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YT, 06YY; derived.tex Tag 06XN"
+  "place": "Tags 06YT and 06YY; derived.tex Tags 06XN and 05SE; sectionwise additive functor assembly in Lean"
  },
  "mathlib_searches": [
   {
@@ -175,5 +156,15 @@
   "group": "J1",
   "result": "fix",
   "note": "site (C,J) with Category.{u}, φ : O ⟶ O' of sheaves of comm rings; D(O),D(O') = DerivedCategory with HasDerivedCategory binders; - ⊗_O O' = E with E.obj = changeOfRings φ, E.map = changeOfRingsHom φ (F1), additive; (1) QuasiIso α, P,Q IsKFlat -> QuasiIso (E.mapHomologicalComplex.map α); (2) pointwise left derived of E.mapHomotopyCategory ⋙ Qh, LF triangulated, IsLeftDerivedFunctor ε, ε iso at every K-flat P (= canonical iso for every K-flat resolution; comparison isos are composites). Delivery had F, P arbitrary, φ unused and clause (1) as hypothesis hinv (C1/C2): rewritten."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T085316-L-30639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

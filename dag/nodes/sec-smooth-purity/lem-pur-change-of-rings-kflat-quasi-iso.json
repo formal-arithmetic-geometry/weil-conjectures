@@ -1,0 +1,174 @@
+{
+ "id": "lem-pur-change-of-rings-kflat-quasi-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "change of rings needed for integral derived reduction: tensor-invariance clause, parent proof step 1",
+   "via": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-derived-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Termwise change of rings preserves quasi-isomorphisms between K-flat complexes",
+ "statement": "Let (C,J) be a site, O and O' sheaves of commutative rings, and phi: O → O' a ring morphism. Let E be an additive functor between their module-sheaf categories [def-weil-sheaf-of-modules-category], whose objects and maps agree, with equality transports, with extension of scalars along phi [def-pur-sheaf-tensor-product]. For any quasi-isomorphism alpha: P → Q [def-pc-quasi-iso-modules] between K-flat cochain complexes of O-modules [def-pc-kflat-complex], the termwise image E(alpha) is a quasi-isomorphism of O'-module complexes. No derived-category existence or counit is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-quasi-iso-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Regard the new ring as a module over the original ring, concentrated in degree zero. Choose a K-flat resolution rho: R → O' by [lem-pc-kflat-resolution]. The cones of rho and of the given quasi-isomorphism alpha are acyclic by [lem-pur-quasi-iso-cone-acyclic].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
+   }
+  },
+  {
+   "text": "Form the natural commuting square with top row Tot(R ⊗ P) → Tot(R ⊗ Q), bottom row Tot(O' ⊗ P) → Tot(O' ⊗ Q), and vertical maps induced by rho [def-pc-tensor-complex-sheaves]. The cone of the top arrow is Tot(R ⊗ Cone(alpha)) by [lem-pc-tensor-mapping-cone-iso]. Signed symmetry of total tensors sends this complex to Tot(Cone(alpha) ⊗ R); it is acyclic by [def-pc-kflat-complex]. The vertical cones identify with Tot(Cone(rho) ⊗ P) and Tot(Cone(rho) ⊗ Q), acyclic by K-flatness of P and Q. Signed symmetry acts on degrees p,q by (-1)^(pq), commutes with the total differential, and is natural; applying it twice is the identity. The cone criterion therefore makes the top and vertical arrows quasi-isomorphisms.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-kflat-complex",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
+   }
+  },
+  {
+   "text": "In every cohomological degree the square commutes and the top and vertical maps are isomorphisms. The bottom map equals right vertical composed with the top map and the inverse of left vertical; hence it is an isomorphism. Thus the bottom arrow is a quasi-isomorphism [def-pc-quasi-iso-modules].",
+   "uses": [
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
+   }
+  },
+  {
+   "text": "Since O' is concentrated in degree zero, its total tensor with P is termwise extension of scalars [def-pur-sheaf-tensor-product], after restriction of the new scalar action. Restriction of scalars leaves the underlying sheaf of abelian groups unchanged, so kernels, images and cokernels, and therefore vanishing of cohomology, are detected on this same underlying sheaf. The quasi-isomorphism holds over O' as well. The given object equalities h and morphism equalities hm identify the termwise map of E with this extension-of-scalars map; the inserted eqToHom maps merely transport these identifications.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YT, proof, specialized to the target ring in degree zero; Tag 06YY, change-of-rings case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor on sheaves of modules given by extension of scalars preserves quasi-isomorphisms between K-flat complexes",
+   "results": "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, HomologicalComplex.quasiIsoAt_map_of_preservesHomology, HomologicalComplex.quasiIso_map_iff_of_preservesHomology",
+   "date": "2026-10-12",
+   "verdict": "no match: no K-flat change-of-rings theorem for sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings.*[Aa]dditive|changeOfRingsFunctor",
+   "results": "none",
+   "date": "2026-10-12",
+   "verdict": "no match: no K-flat change-of-rings theorem for sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of sheaves of modules preserves quasi-isomorphisms between K-flat complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|IsKFlat|K-flat",
+   "results": "No hits under Mathlib/Algebra/Homology",
+   "date": "2026-10-12",
+   "verdict": "no match: no K-flat complex theory in Mathlib homology"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedChangeOfRings",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso",
+  "declaration": "SheafOfModules.changeOfRings_kFlat_quasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/ChangeOfRingsKFlatQuasiIso.lean",
+  "statement": "theorem changeOfRings_kFlat_quasiIso {C : Type u} [Category.{u} C] {J : GrothendieckTopology C} [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] {O O' : Sheaf J CommRingCat.{u}} (φ : O ⟶ O') (E : SheafOfModules.{u} (𝓡 O) ⥤ SheafOfModules.{u} (𝓡 O')) (h : ∀ M : SheafOfModules.{u} (𝓡 O), E.obj M = changeOfRings.{u, u, u} φ M) (hm : ∀ {M N : SheafOfModules.{u} (𝓡 O)} (a : M ⟶ N), E.map a = eqToHom (h M) ≫ changeOfRingsHom.{u, u, u} φ M a ≫ eqToHom (h N).symm) [E.Additive] : ∀ {P Q : CochainComplex (SheafOfModules.{u} (𝓡 O)) ℤ} (α : P ⟶ Q), P.IsKFlat → Q.IsKFlat → QuasiIso α → QuasiIso ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map α)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T085316-L-30639",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T085316-L-30639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
