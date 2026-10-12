@@ -177,7 +177,11 @@ theorem extensionByZeroPresheafSection_isEmpty
     (G : SheafOfModules.{v} (R.over U)) (V : Cᵒᵖ)
     [IsEmpty (V.unop ⟶ U)] :
     Subsingleton (extensionByZeroPresheafSection R U G V) := by
-  sorry
+  constructor
+  intro x y
+  apply DirectSum.ext
+  intro i
+  exact isEmptyElim i
 
 /-- When `V ⟶ U` is unique, the canonical isomorphism sends the injection
 of a section into the sole summand to that section, lifted in universe.
