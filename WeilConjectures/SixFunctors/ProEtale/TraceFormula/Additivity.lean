@@ -207,6 +207,7 @@ section Restriction
 variable {Y : Scheme.{u}} {aX : X ⟶ s} (W : WeilComplex (A := A) aX) (f : Y ⟶ X) {aY : Y ⟶ s}
   (hf : f ≫ aX = aY) (g : Y ⟶ Y) (sq : CommSq g f f (W.frobeniusIterate 1))
 
+omit [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A] in
 /-- The iterates of the Frobenius of a restricted Weil complex are the restrictions of the
 iterates: `Φ_{Y,m} ≫ f = f ≫ Φ_{X,m}`. -/
 lemma commSq_frobeniusIterate_upperStarPull (m : ℕ) :
@@ -219,6 +220,7 @@ lemma commSq_frobeniusIterate_upperStarPull (m : ℕ) :
       ← Category.assoc, ← W.frobeniusIterate_one, ← sq.w]
     rfl
 
+omit [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A] in
 /-- The iterates of the coefficient morphism of a restricted Weil complex are the restrictions
 of the iterates: `(f^* φ)_m = f^* φ_m`, read through the square `Φ_{Y,m} ≫ f = f ≫ Φ_{X,m}`. -/
 lemma coeffIterate_upperStarPull (m : ℕ) :
@@ -232,6 +234,7 @@ lemma coeffIterate_upperStarPull (m : ℕ) :
       W.frobeniusIterate_one (W.frobeniusIterate_succ n) _ sq _ _ _ _ _ W.coeffIterate_one
       (W.coeffIterate_succ n)
 
+omit [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A] in
 /-- If a point `y` of `Y` is fixed by `Φ_{Y,m}`, then `f ∘ y` is fixed by `Φ_{X,m}`. -/
 lemma comp_frobeniusIterate_of_upperStarPull (m : ℕ) {T : Scheme.{u}} (y : T ⟶ Y)
     (hy : y ≫ (W.upperStarPull f hf g sq).frobeniusIterate m = y) :
@@ -239,6 +242,7 @@ lemma comp_frobeniusIterate_of_upperStarPull (m : ℕ) {T : Scheme.{u}} (y : T �
   rw [Category.assoc, ← (W.commSq_frobeniusIterate_upperStarPull f hf g sq m).w,
     ← Category.assoc, hy]
 
+omit [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A] in
 /-- A point `y` of `Y` is fixed by `Φ_{Y,m}` if and only if `f ∘ y` is fixed by `Φ_{X,m}`,
 when `f` is a monomorphism. -/
 lemma comp_frobeniusIterate_upperStarPull_iff [Mono f] (m : ℕ) {T : Scheme.{u}} (y : T ⟶ Y) :
@@ -248,6 +252,7 @@ lemma comp_frobeniusIterate_upperStarPull_iff [Mono f] (m : ℕ) {T : Scheme.{u}
   rw [← cancel_mono f, Category.assoc, (W.commSq_frobeniusIterate_upperStarPull f hf g sq m).w,
     ← Category.assoc, h]
 
+omit [Etale.HasBoundedBelowUpperShrieks A] in
 /-- The stalk Frobenius of the restricted Weil complex `Lf^* K` at a point `y` is the stalk
 Frobenius of `K` at `f ∘ y`: they are conjugate along `Ly^* Lf^* K ≃ L(y ≫ f)^* K`, so they
 have the same trace. -/
@@ -273,6 +278,7 @@ def compFixedPoint (m : ℕ)
   ⟨y.1 ≫ f, by rw [Category.assoc, hf, y.2.1],
     W.comp_frobeniusIterate_of_upperStarPull f hf g sq m y.1 y.2.2⟩
 
+omit [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A] in
 /-- Composition with a monomorphism `f` is injective on fixed sections. -/
 lemma compFixedPoint_injective [Mono f] (m : ℕ) :
     Function.Injective (W.compFixedPoint f hf g sq m) :=
@@ -318,6 +324,7 @@ lemma _root_.AlgebraicGeometry.IsClosedImmersion.exists_lift_of_range_subset
   exact ⟨inv (pullback.snd i x) ≫ pullback.fst i x,
     by rw [Category.assoc, pullback.condition, IsIso.inv_hom_id_assoc]⟩
 
+omit [Etale.HasBoundedBelowUpperShrieks A] [DerivedBraiding A] in
 /-- For a closed immersion `i : Z ⟶ X` with open complement `j : U ⟶ X`, every fixed section of
 `Φ_{X,m}` comes from a unique fixed section of `U` or of `Z`. -/
 lemma bijective_sumElim_compFixedPoint {Ω : Type u} [Field Ω] {U Z : Scheme.{u}}

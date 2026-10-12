@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.AlgebraicGeometry.OpenClosedInduction
 public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Additivity
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.AffineReduction
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ModelRestriction
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Perfectness
 
@@ -81,7 +81,7 @@ theorem traceFormula_of_isAffine {aX : X ⟶ Spec (.of Ω)} [IsGeometric aX]
     {σ : Spec (.of Ω) ⟶ Spec (.of k)} {p : X ⟶ X₀} (hΦ : W.IsModelFrobenius f₀ σ p)
     (hctf : G.ctf X W.obj) (m : ℕ) (hm : 1 ≤ m) [IsProper (W.graph G hctf m).snd] :
     W.TraceFormula G hctf m :=
-  sorry
+  traceFormulaHolds_of_isAffine f₀ G hΦ hctf m hm
 
 /-- The trace formula for a Weil complex whose Frobenius is the base change of the `q`-power
 Frobenius of a separated finite type model `X₀` over `k`, for every `m ≥ 1`. The affine case is
