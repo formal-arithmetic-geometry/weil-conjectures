@@ -52,19 +52,17 @@ fibre.
 
 Let `X` be separated of finite type over `k`, let `p : X ⟶ 𝔸¹_k` be a `k`-morphism and let
 `g : X_η̄ ⟶ X` be the pullback to the geometric generic fibre of `p`, with structure morphism
-`a_η̄ : X_η̄ ⟶ η̄`. On every affine open `U` of `X`, `g^* ω_U ≅ ω_{U_η̄}(1)[2]`. -/
-theorem nonempty_iso_leftDerivedUpperStar_dualizingComplex_geometricGenericPoint
+`a_η̄ : X_η̄ ⟶ η̄`. Then, Zariski locally on `X`, `g^* ω_X ≅ ω_{X_η̄}(1)[2]`: this holds as soon
+as `X` is affine (apply it to the affine opens of a general `X`). -/
+theorem nonempty_iso_leftDerivedUpperStar_dualizingComplex_geometricGenericPoint [IsAffine X]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
-    (hp : p ≫ Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k))) = a)
-    (U : X.affineOpens) [IsSeparated (U.1.ι ≫ a)] [LocallyOfFiniteType (U.1.ι ≫ a)]
-    [QuasiCompact (U.1.ι ≫ a)] [IsSeparated (U.1.ι ≫ p)] [LocallyOfFiniteType (U.1.ι ≫ p)]
-    [QuasiCompact (U.1.ι ≫ p)] [HasCompactification (U.1.ι ≫ a)]
-    [HasCompactification (pullback.snd (U.1.ι ≫ p) (affineLineGeometricGenericPoint k))] :
-    Nonempty ((L((pullback.fst (U.1.ι ≫ p)
+    [HasCompactification (pullback.snd p (affineLineGeometricGenericPoint k))]
+    (hp : p ≫ Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k))) = a) :
+    Nonempty ((L((pullback.fst p
         (affineLineGeometricGenericPoint k))^*[ModuleCat.{u + 1} Λ])).obj
-          (dualizingComplex (ModuleCat.{u + 1} Λ) (U.1.ι ≫ a)) ≅
+          (dualizingComplex (ModuleCat.{u + 1} Λ) a) ≅
       (twistShift Λ _ 1).obj (dualizingComplex (ModuleCat.{u + 1} Λ)
-        (pullback.snd (U.1.ι ≫ p) (affineLineGeometricGenericPoint k)))) :=
+        (pullback.snd p (affineLineGeometricGenericPoint k)))) :=
   sorry
 
 set_option maxHeartbeats 1000000 in
@@ -78,6 +76,7 @@ Let `X` be separated of finite type over `k`, let `p : X ⟶ 𝔸¹_k` be a `k`-
 identifies `g^* δ_K` with `δ_{g^* K}`, the invertible twist and shift cancelling in the double
 dual: in particular `g^* δ_K` is an isomorphism if and only if `δ_{g^* K}` is. -/
 theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_geometricGenericPoint
+    [IsAffine X]
     [HasCompactification (pullback.snd p (affineLineGeometricGenericPoint k))]
     (hp : p ≫ Spec.map (CommRingCat.ofHom (algebraMap k (Polynomial k))) = a)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
