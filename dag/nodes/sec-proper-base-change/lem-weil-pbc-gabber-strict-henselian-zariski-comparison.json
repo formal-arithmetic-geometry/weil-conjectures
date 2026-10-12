@@ -186,11 +186,12 @@
   "module": "Sheaf.Paper.StrictHenselianZariskiEtaleComparison",
   "declaration": "strictHenselian_zariski_etale_comparison",
   "file": "lean/Sheaf/Paper/StrictHenselianZariskiEtaleComparison.lean",
-  "statement": "theorem strictHenselian_zariski_etale_comparison {X : Scheme.{u + 1}} (hX : ∀ x : X, IsStrictlyHenselianLocalRing (X.presheaf.stalk x)) (i : X.Opens ⥤ X.Etale) (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology) [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}] [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}] [HasExt (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1})] [HasExt (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})] (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (c : ∀ q : ℕ, Sheaf.H' ((i.sheafPushforwardContinuous (AddCommGrpCat.{u + 1}) (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F) q ⊤ ⟶ Sheaf.H' F q (i.obj ⊤)) : ∀ q : ℕ, IsIso (c q)",
+  "statement": "theorem strictHenselian_zariski_etale_comparison\n    {X : Scheme.{u + 1}}\n    (hX : ∀ x : X, IsStrictlyHenselianLocalRing (X.presheaf.stalk x))\n    (i : X.Opens ⥤ X.Etale)\n    (hi_inclusion : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier)\n      X.smallEtaleTopology)\n    [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}]\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [HasExt\n      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1})]\n    [HasExt (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    [(sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive]\n    (fstar : ∀ (p : ℕ) (V : X.Opens)\n      (A : Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}),\n      Sheaf.H' A p V ⟶\n        Sheaf.H' ((sheafPullback i AddCommGrpCat.{u + 1}\n          (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj A)\n          p (i.obj V))\n    (hfstar : (∀ (p : ℕ) (V : X.Opens) (A A' : Sheaf (Opens.grothendieckTopology X.carrier)\n      AddCommGrpCat.{u + 1}) (φ : A ⟶ A'),\n        ((Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X.carrier) p).map φ).app\n          (op V) ≫\n            fstar p V A' =\n          fstar p V A ≫\n            ((Sheaf.cohomologyPresheafFunctor X.smallEtaleTopology p).map\n              ((sheafPullback i AddCommGrpCat.{u + 1}\n                (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).map φ)).app\n                  (op (i.obj V))) ∧\n      (∀ (S : ShortComplex (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}))\n        (hS : S.ShortExact)\n        (hS' : (S.map (sheafPullback i AddCommGrpCat.{u + 1}\n          (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology)).ShortExact)\n        (p : ℕ) (V : X.Opens) (x : Sheaf.H' S.X₃ p V),\n        (fstar (p + 1) V S.X₁).hom (Abelian.Ext.comp x hS.extClass rfl) =\n          Abelian.Ext.comp ((fstar p V S.X₃).hom x) hS'.extClass rfl) ∧\n      (∀ (V : X.Opens) (A : Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1})\n        (x : Sheaf.H' A 0 V),\n        ((Abelian.Ext.addEquiv₀ ((fstar 0 V A).hom x)).hom.app (op (i.obj V))).hom\n            (((toSheafify X.smallEtaleTopology\n              (yoneda.obj (i.obj V) ⋙ AddCommGrpCat.free)).app (op (i.obj V))).hom\n                (FreeAbelianGroup.of (𝟙 (i.obj V)))) =\n          (((sheafAdjunctionContinuous i AddCommGrpCat.{u + 1}\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).unit.app A).hom.app\n              (op V)).hom\n            (((Abelian.Ext.addEquiv₀ x).hom.app (op V)).hom\n              (((toSheafify (Opens.grothendieckTopology X.carrier)\n                (yoneda.obj V ⋙ AddCommGrpCat.free)).app (op V)).hom\n                  (FreeAbelianGroup.of (𝟙 V))))))\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (c : ∀ q : ℕ,\n      Sheaf.H'\n          ((i.sheafPushforwardContinuous (AddCommGrpCat.{u + 1})\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F)\n          q ⊤ ⟶\n        Sheaf.H' F q (i.obj ⊤))\n    (hc : ∀ q : ℕ, c q =\n      fstar q ⊤\n          ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).obj F) ≫\n        ((Sheaf.cohomologyPresheafFunctor X.smallEtaleTopology q).map\n          ((sheafAdjunctionContinuous i AddCommGrpCat.{u + 1}\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).counit.app F)).app\n              (op (i.obj ⊤))) :\n    ∀ q : ℕ, IsIso (c q)",
   "branch": "sheaf-dag",
-  "by": "Q1",
+  "by": "V1",
   "date": "2026-10-12",
-  "existing": false
+  "existing": false,
+  "note": "Repair of review point 4: hi_inclusion fixes the open-subscheme inclusion; hfstar characterizes canonical cohomology pullback (naturality, connecting maps, degree-zero unit); hc identifies c with pullback followed by the counit. The mathematical node statement and proof plan are unchanged; the original theorem remains sorry."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -199,5 +200,15 @@
   "group": "Q1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5306b",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T063524-L-3161736",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the repaired inclusion and canonical comparison signature with the unchanged node, pullback characterization, change record, downstream users, and earlier return; delivered module compiles cleanly."
  }
 }
