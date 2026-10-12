@@ -1,0 +1,132 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2 (lemma-pullback-module), proof; original construction node step 1(a)"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, transport of the scalar action and its functoriality; expanded calculations by A2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite product preserving pullback of sheaves transports module scalar multiplication",
+   "results": "UNAVAILABLE: Internal Server Error, 2026-10-12; no absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite product preserving functor between sheaf categories transports module objects over a ring object",
+   "results": "CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite, SheafOfModules finite-limit preservation: these do not construct the specified transported module structure. Loogle PresheafOfModules.homMk provides the map constructor once scalar linearity is proved.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg map.*Mod|Mod.*map in CategoryTheory/Monoidal/Mod.lean; rg inverseImage|pullback|scalar in Sheaf and WeilConjectures; read ModuleCat/Sheaf/PullbackContinuous.lean",
+   "results": "Mathlib module pullback is a chosen adjoint, without the specified comparison with the fixed abelian inverse image and without the action equation. No existing objectwise transported module action theorem found. BinaryFan.IsLimit.lift and prodComparison_natural support the proved linearity calculation.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageModuleConstruction",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-inverse-image-module-object",
+ "title": "Objectwise transported etale inverse image module",
+ "statement": "Let U,V be schemes [def-pc-scheme], f:U → V, and O a commutative-ring sheaf on V's small etale site [def-weil-pbc-etale-site]. Use the set inverse image L and the fixed abelian inverse image La, and their adjunctions [lem-weil-pbc-etale-inverse-image-algebraic-structures]. Let Lr be any ring inverse image left adjoint to the sectionwise ring direct image, with natural comparison er to L; let ea compare La with L. Suppose both adjunction hom equivalences commute with forgetting through er and ea. For each O-module sheaf G [def-weil-sheaf-of-modules-category], there exists an Lr(O)-module sheaf HG and an abelian-sheaf isomorphism eG: FU(HG) ≅ La(FV(G)). Put iG = FaU(eG) followed by ea at FV(G). There exist source and target scalar-action sheaf morphisms muV and muU with the actual sectionwise scalar multiplication values, and L(muV) = prodComparison(L) followed by (er(O)^(-1) times iG^(-1)), muU, and iG. This asserts only objectwise existence, not any maps between objects or functoriality.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "proof": [
+  {
+   "text": "Use the hom-equivalence equations and uniqueness of left adjoints to identify the chosen ring and abelian lifts with the canonical lifts; their underlying comparisons are the specified er and ea.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify algebraic sheaves with their sectionwise operations. Transport the action of G by L and its invertible finite-product comparison. Applying L to the two distributive laws, multiplication associativity, and the unit law, and substituting the transported ring and abelian operations, gives the module axioms. Naturality of the action gives semilinear restriction maps, hence HG with its underlying abelian isomorphism eG. The action definition gives the section formulas and the displayed comparison equation.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Original module construction step 1(a): Objectwise transported etale inverse image module",
+   "via": [
+    "lem-weil-pbc-inverse-image-module-construction",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageModuleObject",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageModuleObject.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageModuleObject",
+  "statement": "theorem etaleInverseImageModuleObject (U V : Scheme.{u}) (f : U ⟶ V) (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) : let L := Scheme.etaleSetPullback f let La := Etale.upperStar AddCommGrpCat.{u + 1} f let a := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology let FaV := sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology let b := MorphismProperty.Over.pullback @Etale ⊤ f let aS := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b (Type (u + 1)) (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) ∀ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (ar : Lr ⊣ Rr) (er : Lr ⋙ FrU ≅ FrV ⋙ L), let OR := (sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj O) let OV := (sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O let FV := SheafOfModules.toSheaf.{u + 1} OV let FU := SheafOfModules.toSheaf.{u + 1} OR ∀ (ea : La ⋙ FaU ≅ FaV ⋙ L), (∀ (G : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) (F : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (h : Lr.obj G ⟶ F), FrV.map (ar.homEquiv G F h) = aS.homEquiv (FrV.obj G) (FrU.obj F) (er.inv.app G ≫ FrU.map h)) ∧ (∀ (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : La.obj G ⟶ F), FaV.map (a.homEquiv G F h) = aS.homEquiv (FaV.obj G) (FaU.obj F) (ea.inv.app G ≫ FaU.map h)) → ∀ G : SheafOfModules.{u + 1} OV, ∃ (HG : SheafOfModules.{u + 1} OR) (eG : FU.obj HG ≅ La.obj (FV.obj G)), let iG := (FaU.mapIso eG) ≪≫ ea.app (FV.obj G) ∃ (muV : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FaV.obj (FV.obj G)) (muU : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj HG)) ⟶ FaU.obj (FU.obj HG)), (∀ (W : V.Etaleᵒᵖ) (x : ((FrV.obj O) ⨯ (FaV.obj (FV.obj G))).obj.obj W), muV.hom.app W x = @SMul.smul (OV.obj.obj W) (G.val.obj W) (G.val.obj W).isModule.toSMul ((prod.fst : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FrV.obj O).hom.app W x : OV.obj.obj W) ((prod.snd : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FaV.obj (FV.obj G)).hom.app W x : G.val.obj W)) ∧ (∀ (W : U.Etaleᵒᵖ) (x : ((FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj HG))).obj.obj W), muU.hom.app W x = @SMul.smul (OR.obj.obj W) (HG.val.obj W) (HG.val.obj W).isModule.toSMul ((prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj HG)) ⟶ FrU.obj (Lr.obj O)).hom.app W x : OR.obj.obj W) ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj HG)) ⟶ FaU.obj (FU.obj HG)).hom.app W x : HG.val.obj W)) ∧ L.map muV = prodComparison L (FrV.obj O) (FaV.obj (FV.obj G)) ≫ prod.map (er.inv.app O) iG.inv ≫ muU ≫ iG.hom",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T070524-L-3464509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T070524-L-3464509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2 (lemma-pullback-module), proof; original construction node step 1(a)"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, transport of the scalar action and its functoriality; expanded calculations by A2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite product preserving pullback of sheaves transports module scalar multiplication",
+   "results": "UNAVAILABLE: Internal Server Error, 2026-10-12; no absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a finite product preserving functor between sheaf categories transports module objects over a ring object",
+   "results": "CondensedMod.ofSheafCompHaus, LightCondMod.ofSheafLightProfinite, SheafOfModules finite-limit preservation: these do not construct the specified transported module structure. Loogle PresheafOfModules.homMk provides the map constructor once scalar linearity is proved.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg map.*Mod|Mod.*map in CategoryTheory/Monoidal/Mod.lean; rg inverseImage|pullback|scalar in Sheaf and WeilConjectures; read ModuleCat/Sheaf/PullbackContinuous.lean",
+   "results": "Mathlib module pullback is a chosen adjoint, without the specified comparison with the fixed abelian inverse image and without the action equation. No existing objectwise transported module action theorem found. BinaryFan.IsLimit.lift and prodComparison_natural support the proved linearity calculation.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageModuleConstruction",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "id": "lem-weil-pbc-inverse-image-module-map-linearity",
+ "title": "Linearity of maps between transported etale module objects",
+ "statement": "Let U,V,f,O,L,La,Lr,er,ea be as in [lem-weil-pbc-inverse-image-module-object], except that no ring adjunction or compatibility of adjunction hom equivalences is required. Suppose H assigns an Lr(O)-module sheaf to each O-module sheaf G [def-weil-sheaf-of-modules-category], with abelian isomorphisms dG: FU(HG) ≅ La(FV(G)). Assume actual source and target scalar-action morphisms satisfying the product-comparison transport identity for every G. Then for each O-linear sheaf map phi:G → G', the abelian map g = dG followed by La(FV(phi)) followed by dG'^(-1) is sectionwise Lr(O)-linear: g_W(r • m) = r • g_W(m). This asserts only linearity of a given abelian map; it assumes the objects and their transported actions rather than constructing them.",
+ "stmt_deps": [
+  "lem-weil-pbc-inverse-image-module-object",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Check the source action square on sections using the actual scalar-action formulas and the linearity of phi; it is an equality of sheaf morphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Obtain finite-product preservation of L from the algebraic-structures theorem. Apply L to the source square, substitute the two transport identities, and use naturality of ea and prodComparison. The private transport_action_square calculation cancels the invertible product and object comparisons to obtain the target action square.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluation functor preserves binary products. BinaryFan.IsLimit.lift supplies a product section with projections (r,m). Evaluate the target action square there, substitute the action formulas, and obtain the required scalar linearity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "Original module construction step 1(a): Linearity of maps between transported etale module objects",
+   "via": [
+    "lem-weil-pbc-inverse-image-module-construction",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageModuleMapLinearity",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageModuleMapLinearity.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageModuleMapLinearity",
+  "statement": "theorem etaleInverseImageModuleMapLinearity (U V : Scheme.{u}) (f : U ⟶ V) (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) : let L := Scheme.etaleSetPullback f let La := Etale.upperStar AddCommGrpCat.{u + 1} f let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology let FaV := sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology ∀ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (er : Lr ⋙ FrU ≅ FrV ⋙ L), let OR := (sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj O) let OV := (sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O let FV := SheafOfModules.toSheaf.{u + 1} OV let FU := SheafOfModules.toSheaf.{u + 1} OR ∀ (ea : La ⋙ FaU ≅ FaV ⋙ L), ∀ (H : SheafOfModules.{u + 1} OV → SheafOfModules.{u + 1} OR) (d : ∀ G, FU.obj (H G) ≅ La.obj (FV.obj G)), (∀ G : SheafOfModules.{u + 1} OV, let iG := (FaU.mapIso (d G)) ≪≫ ea.app (FV.obj G) ∃ (muV : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FaV.obj (FV.obj G)) (muU : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (H G))) ⟶ FaU.obj (FU.obj (H G))), (∀ (W : V.Etaleᵒᵖ) (x : ((FrV.obj O) ⨯ (FaV.obj (FV.obj G))).obj.obj W), muV.hom.app W x = @SMul.smul (OV.obj.obj W) (G.val.obj W) (G.val.obj W).isModule.toSMul ((prod.fst : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FrV.obj O).hom.app W x : OV.obj.obj W) ((prod.snd : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FaV.obj (FV.obj G)).hom.app W x : G.val.obj W)) ∧ (∀ (W : U.Etaleᵒᵖ) (x : ((FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (H G)))).obj.obj W), muU.hom.app W x = @SMul.smul (OR.obj.obj W) ((H G).val.obj W) ((H G).val.obj W).isModule.toSMul ((prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (H G))) ⟶ FrU.obj (Lr.obj O)).hom.app W x : OR.obj.obj W) ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (H G))) ⟶ FaU.obj (FU.obj (H G))).hom.app W x : (H G).val.obj W)) ∧ L.map muV = prodComparison L (FrV.obj O) (FaV.obj (FV.obj G)) ≫ prod.map (er.inv.app O) iG.inv ≫ muU ≫ iG.hom) → ∀ (G G' : SheafOfModules.{u + 1} OV) (φ : G ⟶ G') (W : U.Etaleᵒᵖ) (r : OR.obj.obj W) (m : (H G).val.obj W), let g := (d G).hom ≫ La.map (FV.map φ) ≫ (d G').inv g.hom.app W (@SMul.smul (OR.obj.obj W) ((H G).val.obj W) ((H G).val.obj W).isModule.toSMul r m) = @SMul.smul (OR.obj.obj W) ((H G').val.obj W) ((H G').val.obj W).isModule.toSMul r (g.hom.app W m)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T070524-L-3464509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T070524-L-3464509",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

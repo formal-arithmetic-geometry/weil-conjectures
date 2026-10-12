@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleObject
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleMapLinearity
 /-! # Transporting modules through the etale inverse image
 
 Source: Stacks Project, Tags 03D1 and 03D2
@@ -104,6 +104,52 @@ theorem etaleInverseImageModuleConstruction (U V : Scheme.{u}) (f : U ⟶ V)
               ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (LM.obj G))) ⟶
                 FaU.obj (FU.obj (LM.obj G))).hom.app W x : (LM.obj G).val.obj W)) ∧
           L.map muV = prodComparison L (FrV.obj O) (FaV.obj (FV.obj G)) ≫
-            prod.map (er.inv.app O) iG.inv ≫ muU ≫ iG.hom) := by sorry
+            prod.map (er.inv.app O) iG.inv ≫ muU ≫ iG.hom) := by
+  classical
+  dsimp only
+  intro Lr ar er ea h
+  have ho := etaleInverseImageModuleObject U V f O Lr ar er ea h
+  choose H d hd using ho
+  let OR := (sheafCompose U.smallEtaleTopology
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj O)
+  let OV := (sheafCompose V.smallEtaleTopology
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O
+  let FU := SheafOfModules.toSheaf.{u + 1} OR
+  let FV := SheafOfModules.toSheaf.{u + 1} OV
+  let La := Etale.upperStar AddCommGrpCat.{u + 1} f
+  have hl := etaleInverseImageModuleMapLinearity U V f O Lr er ea H d hd
+  let g {G G' : SheafOfModules.{u + 1} OV} (φ : G ⟶ G') :
+      FU.obj (H G) ⟶ FU.obj (H G') :=
+    (d G).hom ≫ La.map (FV.map φ) ≫ (d G').inv
+  let lift {G G' : SheafOfModules.{u + 1} OV} (φ : G ⟶ G') : H G ⟶ H G' :=
+    ⟨PresheafOfModules.homMk (g φ).hom (hl G G' φ)⟩
+  have hmap {G G' : SheafOfModules.{u + 1} OV} (φ : G ⟶ G') :
+      FU.map (lift φ) = g φ := by
+    ext W m
+    rfl
+  let LM : SheafOfModules.{u + 1} OV ⥤ SheafOfModules.{u + 1} OR :=
+    { obj := H
+      map := lift
+      map_id := by
+        intro G
+        apply FU.map_injective
+        rw [hmap, FU.map_id]
+        dsimp only [g]
+        rw [FV.map_id, La.map_id]
+        exact (d G).hom_inv_id
+      map_comp := by
+        intro G G' G'' φ ψ
+        apply FU.map_injective
+        rw [hmap, FU.map_comp, hmap, hmap]
+        simp [g] }
+  let e : LM ⋙ FU ≅ FV ⋙ La := NatIso.ofComponents d (by
+    intro G G' φ
+    change FU.map (lift φ) ≫ (d G').hom = (d G).hom ≫ La.map (FV.map φ)
+    rw [hmap]
+    simp [g])
+  refine ⟨LM, e, ?_⟩
+  intro G
+  exact hd G
+
 
 end AlgebraicGeometry
