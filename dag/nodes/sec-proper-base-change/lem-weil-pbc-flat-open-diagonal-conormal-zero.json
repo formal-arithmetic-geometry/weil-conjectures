@@ -27,7 +27,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 04FF (lemma-unramified-flat-formally-etale), conormal vanishing calculation, using 04F9 and 04FA"
+  "place": "Tag 04FF, conormal calculation using 04F9 and 04FA; projections interchanged to match the Lean base-change signature"
  },
  "stmt_deps": [
   "def-pc-scheme",
@@ -41,17 +41,12 @@
  "proof_deps": [
   "def-pc-fibre-product",
   "def-weil-open-immersion",
-  "lem-weil-pbc-formally-unramified-base-change",
-  "lem-weil-pbc-flat-morphism-base-change",
   "def-weil-pbc-formally-unramified-morphism",
   "lem-weil-pbc-universal-thickening-flat-base-change",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
   "def-weil-pbc-conormal-sheaf-formally-unramified",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-universal-thickening-open-restriction",
-  "def-weil-pbc-universal-first-order-thickening",
-  "lem-weil-pbc-universal-first-order-thickening-exists",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+  "lem-weil-pbc-open-iso-conormal-zero",
+  "def-pc-module-pullback"
  ],
  "mathlib_searches": [
   {
@@ -95,59 +90,31 @@
  "statement": "Let f:X → S be a flat morphism of schemes [def-pc-scheme, def-weil-flat-morphism] whose diagonal is an open immersion [def-weil-open-immersion]. For any universal first order thickening i:X → X′, s:X′ → S of f [def-weil-pbc-universal-first-order-thickening], its conormal sheaf i*(ker i) [def-weil-pbc-conormal-sheaf-formally-unramified, def-pc-module-pullback] is zero. Finite type is not needed: the open diagonal already implies formal unramifiedness [def-weil-pbc-formally-unramified-morphism].",
  "proof": [
   {
-   "text": "The open diagonal implies FormallyUnramified f by the Mathlib open-diagonal instance (FormallyUnramified.lean:79); no finite type is used. *The diagonal and the two projections.* Let $p,q:X\\times_SX\\to X$ be the first and the second projection of the fibre product of $f$ with itself [def-pc-fibre-product], and $\\Delta=(\\mathrm{id}_X,\\mathrm{id}_X):X\\to X\\times_SX$ the diagonal, so $p\\circ\\Delta=q\\circ\\Delta=\\mathrm{id}_X$. By hypothesis, $\\Delta$ is an open immersion  (Stacks quotes Morphisms, Lemma 02GE here, which with the definition of the DAG is part of the definition) [def-weil-open-immersion]; let $D=\\Delta(X)\\subset X\\times_SX$ be the open subscheme it defines and $\\delta:X\\xrightarrow{\\sim}D$ the induced isomorphism, so $\\Delta=j\\circ\\delta$ with $j:D\\to X\\times_SX$ the inclusion. The morphism $q$ is the base change of $f$ along $f$ (the projection of $X\\times_SX$ to the second factor), so $q$ is formally unramified by [lem-weil-pbc-formally-unramified-base-change] applied to the formally unramified $f$ of step 1. The morphism $p$ is the base change of the flat morphism $f$ along $f$ (projection to the first factor), so $p$ is flat by [lem-weil-pbc-flat-morphism-base-change].",
+   "text": "Construct iZ : X ×_S X -> X ×_S X′ by pairing the first projection with the second projection followed by i. Apply universalFirstOrderThickening_flat_base_change to f along itself, obtaining a universal thickening HZ for q = pullback.fst f f and an invertible canonical conormal map c : p* C_f -> C_q, where p = pullback.snd f f. Formal unramifiedness of f is inferred from its open diagonal.",
    "uses": [
     "def-pc-fibre-product",
     "def-weil-open-immersion",
-    "lem-weil-pbc-formally-unramified-base-change",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "def-weil-pbc-formally-unramified-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
-  },
-  {
-   "text": "*$p^*\\mathcal C_{X/S}\\cong\\mathcal C_q$.* Apply [lem-weil-pbc-universal-thickening-flat-base-change] to the fibre product square with $Y=S$, $W=X$ (the first factor) with the formally unramified morphism $h'=f:W\\to S$, and the flat morphism $g=f:X\\to S$ (the second factor): then $Z=X\\times_SX$, the projection $Z\\to X$ to the second factor is $h=q$, and the projection to $W$ is $p$. The lemma gives that $q$ is formally unramified (also seen in step 2) and that the canonical map $p^*\\mathcal C_{X/S}\\to\\mathcal C_q$ is an isomorphism of $\\mathcal O_{X\\times_SX}$-modules, where $\\mathcal C_q=\\mathcal C_{X\\times_SX/X}$ is the conormal sheaf of the formally unramified morphism $q$ [def-weil-pbc-conormal-sheaf-formally-unramified], [def-pc-module-pullback]. (Stacks cites Lemma 04F9 together with the flatness of $p$, which is the flatness of $g$ in the lemma.)",
-   "uses": [
+    "def-weil-pbc-formally-unramified-morphism",
     "lem-weil-pbc-universal-thickening-flat-base-change",
-    "def-weil-pbc-conormal-sheaf-formally-unramified",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
-  },
-  {
-   "text": "*$\\mathcal C_q|_D=0$.* The open subscheme $D=\\Delta(X)$ maps isomorphically to $X$ under $q$: $q|_D\\circ\\delta=q\\circ\\Delta=\\mathrm{id}_X$ and $\\delta$ is an isomorphism, so $e:=q|_D:D\\to X$ is an isomorphism with inverse $\\delta$. By [lem-weil-pbc-universal-thickening-open-restriction] applied to $q$ with $V=D$ and $U=X$, $e$ is formally unramified and $\\mathcal C_q|_D\\cong\\mathcal C_{D/X}$. Now $D\\subset D$ (identity closed immersion, ideal sheaf $0$) with structure morphism $e$ is a universal first order thickening of $D$ over $X$ [def-weil-pbc-universal-first-order-thickening]: given a first order thickening $T\\subset T'$ over $X$ with $i_T:T\\to T'$, $b:T'\\to X$, and $a:T\\to D$ with $e\\circ a=b\\circ i_T$, the morphism $a'=e^{-1}\\circ b$ satisfies $e\\circ a'=b$ and $a'\\circ i_T=e^{-1}\\circ e\\circ a=a$, and it is the only one since $e\\circ a'=b$ forces $a'=e^{-1}\\circ b$. By the uniqueness in [lem-weil-pbc-universal-first-order-thickening-exists] every universal first order thickening of $D$ over $X$ is isomorphic to this one compatibly with $D$, so the ideal sheaf [def-sbc-closed-immersion-ideal-sheaf] of $D$ in it is $0$ and $\\mathcal C_{D/X}=0$ [def-weil-pbc-conormal-sheaf-formally-unramified]. Hence $\\mathcal C_q|_D=0$ ('$\\mathcal C_q|_{\\Delta(X)}=\\mathcal C_{X/X}=0$' in Stacks, by Lemma 04FA).",
-   "uses": [
-    "lem-weil-pbc-universal-thickening-open-restriction",
-    "def-weil-pbc-universal-first-order-thickening",
-    "lem-weil-pbc-universal-first-order-thickening-exists",
-    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
     "def-weil-pbc-conormal-sheaf-formally-unramified"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$\\mathcal C_{X/S}=0$.* Pullback of modules satisfies $\\mathrm{id}^*\\cong\\mathrm{id}$ and $(v\\circ u)^*\\cong u^*v^*$ [def-pc-module-pullback]. Since $p\\circ\\Delta=\\mathrm{id}_X$ and $\\Delta=j\\circ\\delta$, steps 3 and 4 give $\\mathcal C_{X/S}\\cong\\Delta^*p^*\\mathcal C_{X/S}\\cong\\Delta^*\\mathcal C_q\\cong\\delta^*j^*\\mathcal C_q\\cong\\delta^*(\\mathcal C_q|_D)=\\delta^*0=0$, where $j^*\\mathcal C_q\\cong\\mathcal C_q|_D$ because $j$ is an open immersion [lem-weil-pbc-open-immersion-module-pullback-restriction]. ('In other words, the pullback of $\\mathcal C_{X/S}$ to $X$ via the identity morphism is zero, i.e., $\\mathcal C_{X/S}=0$.')",
+   "text": "The diagonal is an open immersion and its composite with q is the identity. Apply open_iso_conormal_isZero to HZ along the diagonal. Pull c back along the diagonal to deduce that Δ* p* C_f is zero.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+    "lem-weil-pbc-open-iso-conormal-zero",
+    "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The composition comparison identifies Δ* p* C_f with (Δ ≫ p)* C_f. The diagonal projection equation makes this identity pullback, and the identity comparison identifies it with C_f. Transport IsZero through these isomorphisms.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
   }
  ],
  "lean": {
@@ -179,9 +146,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T194106-L-453292",
+  "landing": "20261012T213040-L-1151275",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

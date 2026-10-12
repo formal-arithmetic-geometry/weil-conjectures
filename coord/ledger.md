@@ -9596,3 +9596,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:29 L: returned deliver/C3/Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport (reviewer RETURN: (reviewer X-1a79a, head 1a79ac360) H4 (duplicate definition; stage 3 §3): In lean/Sheaf/AlgebraicGeometry/SchemeIsoPerfe)
 - 21:29 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.FormalSystemsPushPullCore (reviewer RETURN: (reviewer X-c6c4a, head c6c4a6f11) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fo)
 - 21:30 L: merged deliver/C2/Sheaf.FieldTheory.GaloisMatrixCocycleSplit (stage 3; reviewer PASS; first push; landing 20261012T213039-L-1151156 (interface); batch 20261012T213038; modules 2; new nodes 1)
+- 21:30 L: merged deliver/C3/Sheaf.AlgebraicGeometry.FlatOpenDiagonalConormalZero (stage 3; reviewer PASS; first push; landing 20261012T213040-L-1151275 (interface); batch 20261012T213038; modules 2; new nodes 1)

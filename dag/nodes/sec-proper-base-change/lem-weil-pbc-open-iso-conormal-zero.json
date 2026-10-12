@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-open-iso-conormal-zero",
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "title": "Universal conormal vanishes on an open isomorphism locus",
+ "statement": "Let h:Z -> S be formally unramified [def-weil-pbc-formally-unramified-morphism] and let i:Z -> Z′, s:Z′ -> S be a universal first order thickening [def-weil-pbc-universal-first-order-thickening]. For an open immersion j:T -> Z [def-weil-open-immersion] such that j followed by h is an isomorphism, the tensor pullback j* C_h [def-pc-module-pullback, def-weil-pbc-conormal-sheaf-formally-unramified] is a zero object. All objects are schemes [def-pc-scheme].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-formally-unramified-morphism",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-pbc-conormal-sheaf-formally-unramified",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04FA and Tag 04FF, calculation of the conormal on the open image of the diagonal"
+ },
+ "proof": [
+  {
+   "text": "Take V = j(T), U = S, and identify T with V by isoOpensRange. Universal thickening open restriction supplies a universal thickening of hV : V -> S and an isomorphism from the restricted C_h to its conormal. The equation identifying hV with j followed by h proves hV is an isomorphism.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-universal-thickening-open-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a universal thickening iV of an isomorphism hV, construct r = sV followed by the inverse of hV. The compatibility equation gives iV followed by r = id. Apply the universal lifting uniqueness to the thickening itself to show r followed by iV = id. Thus iV is an isomorphism and its kernel ideal is bottom. Its ideal module is zero: its sectionwise injective inclusion has image killed by the isomorphism to the closed subscheme. Tensor pullback preserves zero objects by its adjunction.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-pbc-conormal-sheaf-formally-unramified",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of left adjoints identifies tensor pullback along V.ι with restriction along V.ι. Pull the zero restricted conormal back along T ≅ V; the composition comparison and isoOpensRange_hom_ι identify the result with j* C_h.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "lem-weil-pbc-universal-thickening-open-restriction",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-conormal-sheaf-formally-unramified",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04FA and Tag 04FF, calculation of the conormal on the open image of the diagonal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a formally unramified morphism of schemes, the universal conormal sheaf restricts to zero on an open subscheme mapping isomorphically to the base.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "conormal module universal first order thickening restriction to open immersion isomorphism zero",
+   "results": "AlgebraicGeometry.liftCoborder_app; AlgebraicGeometry.Scheme.Hom.isIso_app; AlgebraicGeometry.Scheme.Hom.appIso; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict; AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatAppObjOpensOpensFunctor; AlgebraicGeometry.Scheme.Hom.app_invApp'; AlgebraicGeometry.IsOpenImmersion.isoRestrict",
+   "date": "2026-10-12",
+   "verdict": "related results used in the proof; no duplicate of this scheme conormal statement"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|isZero.*toModules",
+   "results": "Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "related results used in the proof; no duplicate of this scheme conormal statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isZero",
+   "results": "CategoryTheory.Functor.map_isZero",
+   "date": "2026-10-12",
+   "verdict": "related results used in the proof; no duplicate of this scheme conormal statement"
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-open-diagonal-conormal-zero",
+   "place": "open-image conormal vanishing, third step of the original Tag 04FF calculation"
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatOpenDiagonalConormalZero",
+  "date": "2026-10-13",
+  "group": "C3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.OpenIsoConormalZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenIsoConormalZero.lean",
+  "declaration": "AlgebraicGeometry.open_iso_conormal_isZero",
+  "statement": "theorem open_iso_conormal_isZero {Z S Z' T : Scheme.{u}} (h : Z ⟶ S)\n    [FormallyUnramified h] (i : Z ⟶ Z') (s : Z' ⟶ S)\n    (H : IsUniversalFirstOrderThickening h i s)\n    (j : T ⟶ Z) [IsOpenImmersion j] [IsIso (j ≫ h)] :\n    IsZero ((Scheme.Modules.tensorPullback j).obj\n      (formallyUnramifiedConormal h i s H))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T213040-L-1151275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T213040-L-1151275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
