@@ -26,120 +26,123 @@
  ],
  "proof": [
   {
-   "text": "*Notation; the single etale case first.* Write $k=S/\\mathfrak m_S$, $\\pi:S\\to k$ the quotient map, and for a prime $\\mathfrak q$ of a ring $A$ write $\\pi_{\\mathfrak q}:A\\to A/\\mathfrak q\\to\\kappa(\\mathfrak q)$ [def-weil-residue-field]. The residue condition on $f$ is $\\pi\\circ f=\\tau\\circ\\pi_{\\mathfrak q}$. Steps 2-6 prove the statement when $A$ is a single $R$-algebra with $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ etale; steps 7-9 pass to filtered colimits. Put $B=A\\otimes_RS$, with the $R$-algebra maps $\\iota_A:A\\to B$, $a\\mapsto a\\otimes1$, and $\\iota_S:S\\to B$, $s\\mapsto1\\otimes s$, which make $B$ an $S$-algebra via $\\iota_S$. By [lem-weil-pbc-etale-ring-base-change], $\\operatorname{Spec}B\\to\\operatorname{Spec}S$ is etale.",
+   "text": "For a single etale R-algebra A, first allow any field K with an S-algebra structure whose algebra map is surjective and has kernel m_S. Put B=S tensor_R A and let phi:B -> K be the S-algebra map given by AlgHom.liftEquiv from chi:A -> K. Base change makes B etale over S. This is the private helper etale_lift_field.",
    "uses": [
-    "def-weil-residue-field",
-    "lem-weil-pbc-etale-ring-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HQ (lemma-map-into-henselian), proof, first sentence ('This is an etale algebra over S, see Lemma 00U2')"
-   }
-  },
-  {
-   "text": "*The prime $\\mathfrak q'$.* The maps $\\tau\\circ\\pi_{\\mathfrak q}:A\\to k$ and $\\pi:S\\to k$ are $R$-algebra maps: $\\pi_{\\mathfrak q}$ restricted to $R$ is $R\\to\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ (as $\\mathfrak q$ lies over $\\mathfrak p$), $\\tau$ is a $\\kappa(\\mathfrak p)$-algebra map, and $R\\to\\kappa(\\mathfrak p)\\to k$ is $R\\to S\\xrightarrow{\\pi}k$ (the map $\\kappa(\\mathfrak p)\\to k$ being induced by $R\\to S$, as $\\mathfrak p$ is the preimage of $\\mathfrak m_S$). By the universal property of the tensor product of commutative $R$-algebras (it is their coproduct: an $R$-algebra map out of $A\\otimes_RS$ is the same as a pair of $R$-algebra maps out of $A$ and $S$) there is a unique ring map $\\varphi:B\\to k$ with $\\varphi\\circ\\iota_A=\\tau\\circ\\pi_{\\mathfrak q}$ and $\\varphi\\circ\\iota_S=\\pi$; this is Stacks' map $A\\otimes_RS\\to\\kappa(\\mathfrak q)\\otimes_{\\kappa(\\mathfrak p)}k\\xrightarrow{\\tau\\otimes1}k$. Since $\\varphi\\circ\\iota_S=\\pi$ is surjective, $\\varphi$ is surjective, so $\\mathfrak q'=\\ker\\varphi$ is a maximal, in particular prime, ideal of $B$ with $B/\\mathfrak q'\\cong k$ via $\\varphi$; hence $\\kappa(\\mathfrak q')=B/\\mathfrak q'$. It lies over $\\mathfrak m_S$: $\\iota_S^{-1}(\\mathfrak q')=\\ker(\\varphi\\circ\\iota_S)=\\ker\\pi=\\mathfrak m_S$. The residue map $k=S/\\mathfrak m_S\\to\\kappa(\\mathfrak q')=B/\\mathfrak q'$ is an isomorphism, since composed with the isomorphism $B/\\mathfrak q'\\to k$ induced by $\\varphi$ it is $\\pi$ modulo $\\mathfrak m_S$, the identity of $k$.",
-   "uses": [
-    "def-weil-residue-field"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HQ (lemma-map-into-henselian), proof, definition of $\\mathfrak q'$ and the claim that it is a prime over $\\mathfrak m_S$ with residue field that of $S$ (stated without proof there)"
-   }
-  },
-  {
-   "text": "*The retraction.* $S$ is henselian local, $\\operatorname{Spec}B\\to\\operatorname{Spec}S$ is etale (step 1), and $\\mathfrak q'$ lies over $\\mathfrak m_S$ with trivial residue field extension (step 2). By [lem-weil-pbc-henselian-etale-retraction] there is exactly one $S$-algebra map $\\sigma:B\\to S$ (so $\\sigma\\circ\\iota_S=\\mathrm{id}_S$) with $\\sigma^{-1}(\\mathfrak m_S)=\\mathfrak q'$. Put $f=\\sigma\\circ\\iota_A:A\\to S$. It is an $R$-algebra map: on $R$, $\\sigma\\circ\\iota_A$ restricts to $\\sigma\\circ\\iota_S\\circ(R\\to S)=R\\to S$, since $\\iota_A$ and $\\iota_S$ agree on $R$.",
-   "uses": [
-    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-etale-ring-base-change",
     "def-weil-pbc-henselian-terminology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HQ (lemma-map-into-henselian), proof ('Hence by Lemma 04GG there exists a unique retraction... Set f equal to the composition')"
+    "place": "Tag 08HQ, tensor-product proof and its omitted verification"
    }
   },
   {
-   "text": "*Existence: $f$ has the required properties (Stacks: 'we omit the verification').* First, $\\pi\\circ\\sigma=\\varphi$. Both are ring maps $B\\to k$; on $\\iota_S$ both give $\\pi$ ($\\pi\\circ\\sigma\\circ\\iota_S=\\pi$). Their kernels agree: $\\ker(\\pi\\circ\\sigma)=\\sigma^{-1}(\\mathfrak m_S)=\\mathfrak q'=\\ker\\varphi$. So both factor through $B/\\mathfrak q'$, giving two ring maps $B/\\mathfrak q'\\to k$ which agree on the image of $S$; that image is all of $B/\\mathfrak q'$ (step 2: $S\\to B/\\mathfrak q'$ is surjective), so they are equal, and $\\pi\\circ\\sigma=\\varphi$. Hence $\\pi\\circ f=\\pi\\circ\\sigma\\circ\\iota_A=\\varphi\\circ\\iota_A=\\tau\\circ\\pi_{\\mathfrak q}$: $f$ induces $\\tau$. And $f^{-1}(\\mathfrak m_S)=\\ker(\\pi\\circ f)=\\ker(\\tau\\circ\\pi_{\\mathfrak q})=\\ker\\pi_{\\mathfrak q}=\\mathfrak q$, because $\\tau$ is a homomorphism of fields, hence injective, and $\\ker(A\\to\\kappa(\\mathfrak q))=\\mathfrak q$.",
+   "text": "Put q_prime=ker(phi). It is prime since K is a field, and its pullback to S is m_S since phi commutes with S. The residue-field lifts eta:kappa(m_S) -> K and psi:kappa(q_prime) -> K satisfy psi composed with theta=eta, where theta is the canonical residue-field map. The map eta is surjective because S -> K is, and psi is injective because its domain is a field. Given y in kappa(q_prime), choose x with eta(x)=psi(y); injectivity of psi gives theta(x)=y. Thus theta is bijective.",
    "uses": [
     "def-weil-residue-field"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HQ (lemma-map-into-henselian), proof ('We omit the verification of the properties of f')"
+    "place": "Tag 08HQ, tensor-product proof and its omitted verification"
    }
   },
   {
-   "text": "*Uniqueness in the etale case (Stacks: 'details omitted').* Let $f':A\\to S$ be an $R$-algebra map with $f'^{-1}(\\mathfrak m_S)=\\mathfrak q$ and $\\pi\\circ f'=\\tau\\circ\\pi_{\\mathfrak q}$. By the universal property of the tensor product (step 2) there is a ring map $\\sigma':B\\to S$ with $\\sigma'\\circ\\iota_A=f'$ and $\\sigma'\\circ\\iota_S=\\mathrm{id}_S$; so $\\sigma'$ is an $S$-algebra map. Then $\\pi\\circ\\sigma'$ and $\\varphi$ agree on $\\iota_A$ ($\\pi\\circ f'=\\tau\\circ\\pi_{\\mathfrak q}$) and on $\\iota_S$ (both $\\pi$), so by the uniqueness clause of the universal property $\\pi\\circ\\sigma'=\\varphi$, and $\\sigma'^{-1}(\\mathfrak m_S)=\\ker(\\pi\\circ\\sigma')=\\ker\\varphi=\\mathfrak q'$. By the uniqueness in [lem-weil-pbc-henselian-etale-retraction], $\\sigma'=\\sigma$, hence $f'=\\sigma'\\circ\\iota_A=\\sigma\\circ\\iota_A=f$. (The hypothesis $f'^{-1}(\\mathfrak m_S)=\\mathfrak q$ follows from the residue condition, as in step 4.)",
+   "text": "Translate Algebra.Etale S B to scheme etaleness with HasRingHomProperty.Spec_iff and RingHom.etale_algebraMap. Apply the existing henselian etale retraction theorem to obtain the unique sigma:B -> S with sigma inverse image of m_S equal to q_prime. Identify the algebra structure (algebraMap S B).toAlgebra with the tensor-product left algebra structure.",
    "uses": [
     "lem-weil-pbc-henselian-etale-retraction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HQ (lemma-map-into-henselian), proof ('the uniqueness of f comes from the uniqueness of sigma (details omitted)')"
+    "place": "Tag 08HQ, tensor-product proof and its omitted verification"
    }
   },
   {
-   "text": "*The etale case is a special case of the colimit case and conversely the colimit case uses it stagewise.* A single etale $A$ is the colimit of the one-object diagram [def-weil-pbc-category-colimit]; for the general case write $A=\\varinjlim_{i\\in I}A_i$, a filtered colimit in commutative $R$-algebras, with coprojections $\\iota_i:A_i\\to A$ and transition maps $A(u):A_i\\to A_j$ for $u:i\\to j$. Put $\\mathfrak q_i=\\iota_i^{-1}(\\mathfrak q)$, a prime of $A_i$; it lies over $\\mathfrak p$, because $R\\to A_i\\to A$ is the structure map of $A$ and $\\mathfrak q$ lies over $\\mathfrak p$. Let $\\kappa(\\iota_i):\\kappa(\\mathfrak q_i)\\to\\kappa(\\mathfrak q)$ be the induced map of residue fields, so $\\kappa(\\iota_i)\\circ\\pi_{\\mathfrak q_i}=\\pi_{\\mathfrak q}\\circ\\iota_i$, and $\\tau_i=\\tau\\circ\\kappa(\\iota_i)$, a $\\kappa(\\mathfrak p)$-algebra map. Steps 1-5 give a unique $R$-algebra map $f_i:A_i\\to S$ with $f_i^{-1}(\\mathfrak m_S)=\\mathfrak q_i$ and $\\pi\\circ f_i=\\tau_i\\circ\\pi_{\\mathfrak q_i}=\\tau\\circ\\pi_{\\mathfrak q}\\circ\\iota_i$.",
+   "text": "The reduction of sigma is phi. For b in B choose s in S with residue(s)=phi(b). Then b-algebraMap(s) lies in q_prime, so sigma(b)-s lies in m_S, proving equality of their residues. Restrict sigma to A to lift chi. Conversely, lift any f:A -> S through AlgHom.liftEquiv. Its reduction agrees with phi on the A tensor factor and on S; tensor-product extensionality gives equality on B and hence the same maximal-ideal preimage. Retraction uniqueness and the inverse lift equivalence give uniqueness of f.",
    "uses": [
-    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-henselian-etale-retraction",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HQ, tensor-product proof and its omitted verification"
+   }
+  },
+  {
+   "text": "Apply the preceding helper after replacing S and A by ULift S and ULift A in their common universe. Transport henselianity by HenselianLocalRing.of_ringEquiv and etaleness by Algebra.Etale.of_equiv. Use K=kappa(m_S); its algebra map from ULift S is residue composed with the down equivalence, is surjective, and has kernel the maximal ideal because the down equivalence preserves units. Transport the unique lift back to A -> S. This proves the private helper existsUnique_etale_residue_lift for all three original universes.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
     "def-weil-residue-field"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HR (lemma-map-into-henselian-colimit), proof ('Set q_i = A_i cap q. We obtain f_i : A_i -> S by applying Lemma 08HQ')"
+    "place": "Tag 08HQ, tensor-product proof and its omitted verification"
    }
   },
   {
-   "text": "*The $f_i$ form a cocone (Stacks: implicit in 'Set $f=\\colim f_i$').* For $u:i\\to j$, the $R$-algebra map $g=f_j\\circ A(u):A_i\\to S$ satisfies the two conditions characterizing $f_i$: $\\pi\\circ g=\\tau\\circ\\pi_{\\mathfrak q}\\circ\\iota_j\\circ A(u)=\\tau\\circ\\pi_{\\mathfrak q}\\circ\\iota_i$ (as $\\iota_j\\circ A(u)=\\iota_i$), and $g^{-1}(\\mathfrak m_S)=A(u)^{-1}(\\mathfrak q_j)=A(u)^{-1}\\iota_j^{-1}(\\mathfrak q)=\\iota_i^{-1}(\\mathfrak q)=\\mathfrak q_i$. By the uniqueness of step 5 for $A_i$, $f_j\\circ A(u)=f_i$. So $(S,(f_i))$ is a cocone in commutative $R$-algebras, and by the universal property of the colimit [def-weil-pbc-category-colimit] there is exactly one $R$-algebra map $f:A\\to S$ with $f\\circ\\iota_i=f_i$ for all $i$.",
+   "text": "Using h_tau on the images of R in kappa(p), form chi:A -> kappa(m_S) as tau composed with the canonical residue map; compatibility makes it an R-algebra map. For any f:A -> S the original prime-preimage and residue-field conditions are equivalent to residue composed with f equal to chi: field-map injectivity identifies kernels, and Ideal.ResidueField.ringHom_ext identifies the induced residue maps.",
+   "uses": [
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 08HR, stagewise lifting and filtered-colimit gluing; omitted verifications"
+   }
+  },
+  {
+   "text": "Transport the colimit cocone across the chosen isomorphism to A. At every stage the single etale helper uniquely lifts chi composed with the coprojection. Along a transition t:i -> j, f_j composed with F(t) has the same reduction as f_i by cocone naturality, so single-etale uniqueness gives compatibility.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HR (lemma-map-into-henselian-colimit), proof ('Set f = colim f_i')"
+    "place": "Tag 08HR, stagewise lifting and filtered-colimit gluing; omitted verifications"
    }
   },
   {
-   "text": "*$f$ has the required properties.* By [lem-weil-pbc-filtered-colimit-algebras-elementwise] every $x\\in A$ is $\\iota_i(x_i)$ for some $i$ and $x_i\\in A_i$. Then $f(x)=f_i(x_i)\\in\\mathfrak m_S$ iff $x_i\\in\\mathfrak q_i=\\iota_i^{-1}(\\mathfrak q)$ iff $x\\in\\mathfrak q$, so $f^{-1}(\\mathfrak m_S)=\\mathfrak q$; and $\\pi(f(x))=\\pi(f_i(x_i))=\\tau(\\pi_{\\mathfrak q}(\\iota_i(x_i)))=\\tau(\\pi_{\\mathfrak q}(x))$, so $\\pi\\circ f=\\tau\\circ\\pi_{\\mathfrak q}$.",
+   "text": "Prove that forgetting this filtered algebra colimit gives a type colimit without requiring R to lie in the universe of the stage algebras: equip Mathlibs commutative-ring filtered colimit with the R-algebra structure induced from one stage, prove independence of the stage by filteredness, and exhibit its algebra colimit universal property. Transport its type-colimit property to A. Use the heterogeneous-universe CoconeTypes descent for the compatible f_i to define A -> S; represent two elements at a common stage to check addition and multiplication, and check constants and R-linearity at one stage.",
    "uses": [
+    "def-weil-pbc-category-colimit",
     "lem-weil-pbc-filtered-colimit-algebras-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HR (lemma-map-into-henselian-colimit), proof (the verification is left implicit there)"
+    "place": "Tag 08HR, stagewise lifting and filtered-colimit gluing; omitted verifications"
    }
   },
   {
-   "text": "*Uniqueness in the colimit case.* Let $f':A\\to S$ be an $R$-algebra map with $f'^{-1}(\\mathfrak m_S)=\\mathfrak q$ and $\\pi\\circ f'=\\tau\\circ\\pi_{\\mathfrak q}$. For each $i$, $f'\\circ\\iota_i$ is an $R$-algebra map with $(f'\\circ\\iota_i)^{-1}(\\mathfrak m_S)=\\iota_i^{-1}(\\mathfrak q)=\\mathfrak q_i$ and $\\pi\\circ f'\\circ\\iota_i=\\tau\\circ\\pi_{\\mathfrak q}\\circ\\iota_i=\\tau_i\\circ\\pi_{\\mathfrak q_i}$; by step 5 for $A_i$, $f'\\circ\\iota_i=f_i$. By the uniqueness in the universal property of the colimit [def-weil-pbc-category-colimit], $f'=f$.",
+   "text": "Every element of A comes from a stage, so the descended map has reduction chi. The equivalence in step 6 yields exactly the original prime-preimage and residue-map conditions. Any other map satisfying them has reduction chi, and restricts to f_i by single-etale uniqueness. Representing each element at a stage then proves equality with the descended map.",
    "uses": [
-    "def-weil-pbc-category-colimit"
+    "def-weil-residue-field",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Lemma Tag 08HR (lemma-map-into-henselian-colimit), proof (uniqueness, left implicit there)"
+    "place": "Tag 08HR, stagewise lifting and filtered-colimit gluing; omitted verifications"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-residue-field",
   "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-henselian-etale-retraction",
   "def-weil-pbc-henselian-terminology",
+  "def-weil-residue-field",
+  "lem-weil-pbc-henselian-etale-retraction",
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-filtered-colimit-algebras-elementwise"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Lemma Tag 08HQ (lemma-map-into-henselian) and Lemma Tag 08HR (lemma-map-into-henselian-colimit), with their proofs; the verifications Stacks omits ('We omit the verification', 'details omitted') are written out in steps 2, 4, 5, 7-9"
+  "place": "Tags 08HQ and 08HR; Lean proof follows tensor-product retraction and stagewise unique lifting. Residue verification uses subtraction from an element of S; universe transport and heterogeneous filtered-colimit descent are fully proved private helpers."
  },
  "mathlib_searches": [
   {
@@ -236,5 +239,15 @@
   "group": "J1",
   "result": "fix",
   "note": "R->S algebra, HenselianLocalRing S, A R-algebra = colimit of filtered I:Type w diagram in CommAlgCat.{w} R with Algebra.Etale stages, q prime over p = comap m_S, tau compatible over kappa(p) via ResidueField.map, ExistsUnique R-alg f with comap m = q and residue map = tau; index universe fixed x->w"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T044800-L-2043585",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
