@@ -5,6 +5,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
+import Sheaf.AlgebraicGeometry.EtaleSectionColimitLocalZero
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+
 @[expose] public section
 
 universe u v w
@@ -64,6 +67,37 @@ theorem etale_section_colimit_finite_zero_cover
           (((G.obj i).obj.map (q k).op).hom s) = 0) ∧
       (∀ (j : I) (t : (G.obj j).obj.obj (Opposite.op U)),
         (∀ k, ((G.obj j).obj.map (q k).op).hom t = 0) → t = 0) := by
-  sorry
+  classical
+  obtain ⟨S, hS, hzero⟩ :=
+    etale_section_colimit_local_zero_sieve X Λ U I G c hc i s hs
+  obtain ⟨n, V, q, hq, _, hcover⟩ :=
+    Scheme.exists_finite_affine_of_mem_smallEtaleTopology hS
+  let K := ULift.{w} (Fin n)
+  let V' (k : K) := V k.down
+  let q' (k : K) : V' k ⟶ U := q k.down
+  have hcover' : Sieve.ofArrows V' q' ∈ X.smallEtaleTopology U := by
+    apply (Scheme.ofArrows_mem_smallEtaleTopology_iff q').2
+    apply Set.eq_univ_of_forall
+    intro x
+    obtain ⟨k, y, rfl⟩ := Set.mem_iUnion.mp (hcover.symm ▸ Set.mem_univ x)
+    exact Set.mem_iUnion.mpr ⟨⟨k⟩, y, rfl⟩
+  refine ⟨K, inferInstance, V', q', fun k ↦ hzero _ _ (hq k.down), ?_⟩
+  intro j t ht
+  let L := ModuleCat.of Λ (ULift.{w} Λ)
+  let e : L ⟶ (G.obj j).obj.obj (Opposite.op U) := ModuleCat.ofHom
+    { toFun := fun a ↦ a.down • t
+      map_add' := by intro a b; exact add_smul _ _ _
+      map_smul' := by intro a b; exact mul_smul _ _ _ }
+  have he : e = 0 := by
+    apply (G.obj j).property.hom_ext_ofArrows q' hcover'
+    intro k
+    ext a
+    simp only [ModuleCat.comp_apply]
+    change ((G.obj j).obj.map (q' k).op).hom (a.down • t) =
+      ((G.obj j).obj.map (q' k).op).hom 0
+    rw [map_smul, ht k, smul_zero, map_zero]
+  have h := congrArg (fun f : L ⟶ (G.obj j).obj.obj (Opposite.op U) ↦
+    f.hom ⟨1⟩) he
+  simpa [e] using h
 
 end AlgebraicGeometry

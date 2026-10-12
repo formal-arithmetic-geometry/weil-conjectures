@@ -19,16 +19,32 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use sheafification local equality, openness of etale maps, and quasi-compactness to obtain a finite covering; record the induced local vanishing and separatedness properties.",
-   "uses": [],
+   "text": "Apply AlgebraicGeometry.etale_section_colimit_local_zero_sieve to the zero colimit image. It supplies a covering sieve S such that the restriction along every arrow of S is killed by a transition out of i.",
+   "uses": [
+    "lem-weil-pbc-etale-section-colimit-local-zero-sieve"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply the already proved source-library AlgebraicGeometry.Scheme.exists_finite_affine_of_mem_smallEtaleTopology (WeilConjectures/AlgebraicGeometry/Sites/CohomologyColimit.lean:71) to S. It gives a family indexed by Fin n, with every arrow in S and with jointly surjective underlying maps. Lift this index to ULift (Fin n) in the diagram universe. Scheme.ofArrows_mem_smallEtaleTopology_iff shows that the lifted family is covering. Its local vanishing data is the preceding conclusion applied to each selected arrow.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any diagram stage j and section t whose restrictions along the selected family are zero, form the linear map from the lifted rank-one module ULift Lambda sending a to a.down times t. Its compositions with all covering restrictions are zero by linearity. Presheaf.IsSheaf.hom_ext_ofArrows applied to the stage sheaf makes this map zero; evaluating at the lifted unit gives t = 0. Combine the finite family, its local killing data, and this separatedness implication.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-section-colimit-local-zero-sieve"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "agent": "U1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 0738, proof of part (2)"
+  "place": "Tag 0738(2), local equality and finite-cover selection; existing proved finite affine refinement and rank-one sheaf separatedness."
  },
  "mathlib_searches": [
   {
@@ -86,18 +102,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "Y2",
+  "reviewer": "COMPILER",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T063527-L-3163368",
+  "landing": "20261012T110320-L-622303",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.etale_section_colimit_eventual_zero_of_finite_cover",
-   "AlgebraicGeometry.etale_section_colimit_finite_zero_cover"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.etale_section_colimit_finite_zero_cover"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
