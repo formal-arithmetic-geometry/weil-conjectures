@@ -7604,3 +7604,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:58 L: returned deliver/N3/Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalization (reviewer RETURN: (reviewer X-3cb22, head 3cb2247bf) 6: Add dag/nodes/sec-proper-base-change/lem-weil-pbc-finite-etale-trace-localization.)
 
 - 19:58 L: (the batch landing, head 02772da77) the global build refused the delivery; it was taken out of the library again (landing 20261012T115053-L-879077 reverted) and the item is yours t
+- 12:00 L: returned deliver/H2/Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero (reviewer RETURN: (reviewer X-34936, head 349367e6f) 6: Update dag/nodes/sec-proper-base-change/lem-weil-pbc-etale-limit-affine-eventual-z)
