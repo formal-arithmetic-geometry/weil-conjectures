@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SeparatedOpenInduction
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty
 
 /-!
 # Induction principle for quasi-compact opens
@@ -49,6 +50,12 @@ theorem quasiCompactOpen_induction (X : Scheme.{u}) [CompactSpace X]
     (h_union : ∀ (U V : X.Opens), IsCompact (U : Set X) → IsAffineOpen V →
       P U → P V → P (U ⊓ V) → P (U ⊔ V)) :
     ∀ U : X.Opens, IsCompact (U : Set X) → P U := by
-  sorry
+  intro U hU
+  refine compact_open_induction_on U hU ?_ ?_
+  · exact h_affine _ (isAffineOpen_bot X)
+  · exact fun S hS V hPS ↦ h_union S (V : X.Opens) hS V.property hPS
+      (h_affine _ V.property)
+      (property_intersection_of_quasiCompact_affine X P h_affine h_union S
+        (V : X.Opens) hS V.property)
 
 end AlgebraicGeometry

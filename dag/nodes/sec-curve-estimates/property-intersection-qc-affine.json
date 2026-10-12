@@ -1,0 +1,105 @@
+{
+ "id": "property-intersection-qc-affine",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-invert-s-cohomology-induction",
+   "place": "second paragraph, overlap step"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "title": "Property on the overlap of a quasi-compact and affine open",
+ "statement": "Let X be quasi-compact and quasi-separated, P a property of opens, and assume P on affine opens and the gluing implication. Then P holds on the intersection of every quasi-compact open U with every affine open V.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Cohomology of Schemes, Lemma 08DR proof, second paragraph"
+ },
+ "stmt_deps": [
+  "lem-sc-invert-s-cohomology-induction"
+ ],
+ "proof": [
+  {
+   "text": "The intersection is quasi-compact by quasi-separatedness and finite affine cover criteria, and separated as an open subscheme of the affine scheme V. Apply separated_quasiCompact_open_induction.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-separated-induction",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-sc-separated-over-affine-scheme-separated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-invert-s-cohomology-separated-induction",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-sc-separated-over-affine-scheme-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 08DR proof, second paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasi-compact affine intersection separated induction",
+   "results": "no direct declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "property on intersection quasi-compact affine open",
+   "results": "no declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact (U ⊓ V) IsAffineOpen",
+   "results": "no relevant declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersectionProperty",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiCompactOpenIntersectionProperty.lean",
+  "declaration": "AlgebraicGeometry.property_intersection_of_quasiCompact_affine",
+  "statement": "theorem property_intersection_of_quasiCompact_affine (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (P : X.Opens → Prop) (h_affine : ∀ U : X.Opens, IsAffineOpen U → P U) (h_union : ∀ (U V : X.Opens), IsCompact (U : Set X) → IsAffineOpen V → P U → P V → P (U ⊓ V) → P (U ⊔ V)) (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) : P (U ⊓ V)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110309-L-618002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110309-L-618002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -27,57 +27,25 @@
  ],
  "proof": [
   {
-   "text": "First prove the assertion for separated quasi-compact opens W. Choose a finite affine open cover W = U_1 union ... union U_n using the finite-affine-cover lemma. Induct on n. The case n = 1 is the affine hypothesis. For n > 1 put U = U_1 union ... union U_{n-1} and V = U_n. The open U is quasi-compact, and U intersect V is the union of the n-1 affine opens U_i intersect V: each intersection is affine because W is separated, by the affine-intersection lemma. The opens U and U intersect V of W are separated: the inclusion of an open subscheme is an open immersion, hence separated by [lem-weil-pbc-separated-cancellation](a), and its composite with the separated structure morphism W -> Spec Z is separated by [lem-weil-pbc-proper-fp-permanence](e). The induction hypothesis applies to U and to U intersect V, while the affine hypothesis applies to V; the assumed gluing implication therefore gives P(W).",
+   "text": "Apply Mathlib compact_open_induction_on to the compact open U. The empty open is affine, so h_affine proves P on it. For an induction step adjoining an affine open V to S, use h_union with the induction hypothesis on S, h_affine on V, and the overlap theorem property_intersection_of_quasiCompact_affine.",
    "uses": [
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-weil-pbc-separated-affine-open-intersection",
-    "lem-weil-pbc-separated-cancellation",
-    "lem-weil-pbc-proper-fp-permanence"
+    "property-intersection-qc-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 08DR proof, first paragraph (separated quasi-compact opens); Tags 01IT and 01KP"
-   }
+   "elementary": false
   },
   {
-   "text": "Now prove the assertion for an arbitrary quasi-compact open W by induction on the number n of affine opens in a finite affine cover W = U_1 union ... union U_n. The case n = 1 is the affine hypothesis. For n > 1 put U = U_1 union ... union U_{n-1} and V = U_n. The open U is quasi-compact. The overlap U intersect V is a quasi-compact open because X is quasi-separated and U is a finite union of affine opens; it is separated because it is an open subscheme of the affine scheme V: the inclusion U intersect V -> V is an open immersion, hence separated by [lem-weil-pbc-separated-cancellation](a), and V is affine, so U intersect V is separated by [lem-sc-separated-over-affine-scheme-separated]. By the separated-open result, P(U intersect V) holds. The induction hypothesis gives P(U), and P(V) is the affine case, so the assumed gluing implication gives P(W).",
-   "uses": [
-    "lem-sc-invert-s-cohomology-separated-induction",
-    "lem-weil-pbc-qcqs-finite-affine-open-cover",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "lem-weil-pbc-separated-cancellation",
-    "lem-sc-separated-over-affine-scheme-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 08DR proof, second paragraph (arbitrary quasi-compact opens); Tags 01IT and 01KO"
-   }
-  },
-  {
-   "text": "Applying the preceding conclusion to the quasi-compact open W = X yields P(X), as required.",
+   "text": "The resulting conclusion is P for every compact open U, as required.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 08DR conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-invert-s-cohomology-separated-induction",
-  "lem-weil-pbc-qcqs-finite-affine-open-cover",
-  "lem-weil-pbc-separated-affine-open-intersection",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "lem-weil-pbc-separated-cancellation",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-sc-separated-over-affine-scheme-separated"
+  "property-intersection-qc-affine"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof"
+  "place": "Cohomology of Schemes, Lemma 08DR proof, second paragraph, with finite-cover induction supplied by Mathlib compact_open_induction_on"
  },
  "mathlib_searches": [
   {
@@ -154,5 +122,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110309-L-618002",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
