@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-closed-chow-stage",
+ "kind": "statement",
+ "title": "A fixed Chow immersion closes at a later stage",
+ "statement": "Let I be a directed preorder, D an inverse system of schemes with affine transitions [pqf-def-affine-morphism], and S its limit [lem-weil-pbc-limit-affine-transition]. Fix i₀ and qcqs Sᵢ₀, X₀, Y₀ [def-weil-pbc-scheme-conventions], with a morphism f₀ of Sᵢ₀-schemes locally of finite type [def-weil-finite-type-morphism]. Write Xᵢ, Yᵢ, fᵢ for its base changes [def-pc-fibre-product]. Assume the pullback f at S is proper [def-weil-proper-morphism]. Fix i₁ ≥ i₀ with fᵢ₁ separated, n ≥ 0, and a given diagram T₁ → Xᵢ₁ and T₁ → ℙⁿ(Yᵢ₁) [def-nagata-projective-space-base-change], with π₁ proper and surjective [def-weil-surjective-morphism], j₁ an immersion [def-weil-closed-immersion], and j₁ followed by the projective projection equal to π₁ followed by fᵢ₁. Then some i ≥ i₁ admits maps π: T₁ × over Sᵢ₁ Sᵢ → Xᵢ and j: T₁ × over Sᵢ₁ Sᵢ → ℙⁿ(Yᵢ) such that π is surjective, j is a closed immersion, the analogous triangle commutes, and fᵢ is separated. The source is the base change of the given T₁ and the number of projective coordinates stays fixed.",
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-limit-affine-transition",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 081F (lemma-eventually-proper), the proof after choosing the Chow diagram; Tag 01ZP for closed-immersion descent"
+ },
+ "proof": [
+  {
+   "text": "Restrict to the cofinal directed tail above i₁, which has the same limit. Affine transitions and their base changes give qcqs stage source, target and base. Pasting pullback squares identifies the iterated pullback of f₁ with the original f at the limit and fᵢ at later stages.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base change the given Chow diagram to the limit. The map π stays proper and surjective and j stays an immersion. The composite π followed by f is proper, whereas projective space is separated over the target. Thus j is proper over a separated target and, being an immersion, is closed.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At i₁ the source T₁ and projective space are qcqs, since each is proper over a qcqs scheme. The immersion j₁ is locally of finite type. Apply closed-immersion descent to j₁ over Sᵢ₁ and the tail diagram. It gives i ≥ i₁ with the base-changed j a closed immersion.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use pullback pasting and the projective-space base-change isomorphism to identify the source with T₁ × over Sᵢ₁ Sᵢ and the target with projective space over the original Yᵢ. Transfer the two maps and the triangle through these isomorphisms. Base change preserves surjectivity of π₁ and separatedness of f₁. Functoriality identifies Sᵢ → Sᵢ₀ with the transition composite.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-descend-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "lem-pod-separated-finite-type-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 081F, proof: base change Chow diagram to the limit and descend its closed immersion; rebasing and pullback identifications made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Chow proper surjection projective immersion becomes a closed immersion after base change to an inverse limit of schemes",
+   "results": "8 hits: AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.spec_of_surjective, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.IsProper.toUniversallyClosed, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine",
+   "date": "2026-10-12",
+   "verdict": "no matching finite-stage descent theorem; listed hits only supply component properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Limits.IsLimit",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no matching finite-stage descent theorem; listed hits only supply component properties"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*map|of_comp_surjective",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean, Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching finite-stage descent theorem; listed hits only supply component properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A given Chow immersion over a separated finite stage becomes a closed immersion at a later stage when the original morphism is proper at an inverse limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "service unavailable; no verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EventuallyProper",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-eventually-proper",
+   "place": "steps 3--5 and the rebasing comparison of step 1",
+   "via": []
+  }
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedChowStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedChowStage.lean",
+  "declaration": "AlgebraicGeometry.exists_closed_chow_stage",
+  "statement": "theorem exists_closed_chow_stage\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (t : i ⟶ j), IsAffineHom (D.map t)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    [CompactSpace (D.obj (op i₀))] [QuasiSeparatedSpace (D.obj (op i₀))]\n    (X₀ Y₀ : Over (D.obj (op i₀)))\n    [CompactSpace X₀.left] [QuasiSeparatedSpace X₀.left]\n    [CompactSpace Y₀.left] [QuasiSeparatedSpace Y₀.left]\n    (f₀ : X₀ ⟶ Y₀) [LocallyOfFiniteType f₀.left]\n    (hf : IsProper (((Over.pullback (c.π.app (op i₀))).map f₀).left))\n    (i₁ : I) (h₁ : i₀ ≤ i₁)\n    (hsep : IsSeparated (((Over.pullback (D.map (homOfLE h₁).op)).map f₀).left))\n    (n : ℕ) (T₁ : Scheme.{u})\n    (π₁ : T₁ ⟶ ((Over.pullback (D.map (homOfLE h₁).op)).obj X₀).left)\n    (j₁ : T₁ ⟶ ProjectiveSpace (ULift.{u} (Fin (n + 1)))\n      ((Over.pullback (D.map (homOfLE h₁).op)).obj Y₀).left)\n    (hπ₁ : IsProper π₁) (hsurj₁ : Surjective π₁) (hj₁ : IsImmersion j₁)\n    (hw₁ : j₁ ≫ ProjectiveSpace (ULift.{u} (Fin (n + 1)))\n      ((Over.pullback (D.map (homOfLE h₁).op)).obj Y₀).left ↘\n        ((Over.pullback (D.map (homOfLE h₁).op)).obj Y₀).left =\n      π₁ ≫ ((Over.pullback (D.map (homOfLE h₁).op)).map f₀).left) :\n    ∃ (i : I) (h₁i : i₁ ≤ i)\n      (π : pullback (π₁ ≫ ((Over.pullback (D.map (homOfLE h₁).op)).obj X₀).hom)\n          (D.map (homOfLE h₁i).op) ⟶\n        ((Over.pullback (D.map (homOfLE (h₁.trans h₁i)).op)).obj X₀).left)\n      (j : pullback (π₁ ≫ ((Over.pullback (D.map (homOfLE h₁).op)).obj X₀).hom)\n          (D.map (homOfLE h₁i).op) ⟶\n        ProjectiveSpace (ULift.{u} (Fin (n + 1)))\n          ((Over.pullback (D.map (homOfLE (h₁.trans h₁i)).op)).obj Y₀).left),\n      Surjective π ∧ IsClosedImmersion j ∧\n        j ≫ ProjectiveSpace (ULift.{u} (Fin (n + 1)))\n          ((Over.pullback (D.map (homOfLE (h₁.trans h₁i)).op)).obj Y₀).left ↘\n            ((Over.pullback (D.map (homOfLE (h₁.trans h₁i)).op)).obj Y₀).left =\n          π ≫ ((Over.pullback (D.map (homOfLE (h₁.trans h₁i)).op)).map f₀).left ∧\n        IsSeparated (((Over.pullback (D.map (homOfLE (h₁.trans h₁i)).op)).map f₀).left)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T053945-L-2641387",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T053945-L-2641387",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
