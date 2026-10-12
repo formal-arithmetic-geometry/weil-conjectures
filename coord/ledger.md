@@ -8830,3 +8830,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/W2/Sheaf.AlgebraicGeometry.FpqcAffineModelTransitions (stage 3; reviewer PASS; first push; landing 20261012T173916-L-3309816 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:39 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Morphisms.StalkFiniteEtaleModel (stage 3; reviewer PASS; first push; landing 20261012T173917-L-3309950 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:39 L: merged deliver/X3/Sheaf.AlgebraicGeometry.ProperFlatGlobalSectionsCriterion (stage 3; reviewer PASS; first push; landing 20261012T173917-L-3310137 (interface); batch 20261012T173801; modules 2; new nodes 1)
+- 17:39 L: merged deliver/X3/Sheaf.Paper.StrictHenselianStalkSectionsComparisonCore (stage 3; reviewer PASS; first push; landing 20261012T173918-L-3310325 (proof); batch 20261012T173801; modules 1; new nodes 0)

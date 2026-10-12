@@ -14,16 +14,30 @@
  ],
  "proof": [
   {
-   "text": "For each scheme choose the site of affine etale schemes of finite presentation, encoded by finite presentations over the coordinate rings of an affine open cover. The presentations and their morphisms form sets in the scheme universe. These affine objects form a dense subsite: affine opens cover each etale object, and an affine object has a finite affine refinement of each covering. The comparison lemma identifies sheaves on the full etale site with sheaves on this small site, with the same coefficient groups. Base change along g is continuous and preserves finite limits, hence defines a morphism of topoi. On the small presentations its inverse image is the left Kan extension followed by sheafification; both use colimits indexed by sets in the coefficient universe. Inverse image of sets preserves finite products, so it transports the zero, addition and negation of each abelian sheaf and their equations to an abelian sheaf. The set-sheaf adjunction restricts to homomorphisms, since its unit and counit respect these operations. Transport this adjunction back through the dense-subsite equivalences. Its right adjoint evaluates at the base-changed object, exactly the displayed direct image. This constructs a left adjoint H with the required adjunction. Only adjunction existence is asserted; no arbitrary witness from this theorem is used as the data of a definition.",
-   "uses": [],
+   "text": "Use the essentially small affine etale category and its cover-dense Spec functor. Replace this category by its small model in the scheme universe; equip that model with the topology induced from the affine etale topology. Restriction along the small-model equivalence and along AffineEtale.Spec are equivalences on abelian sheaves (Mathlib Sites.Equivalence and AffineEtale).",
+   "uses": [
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Compose the small-model inclusion with g.Etale. Functor.isContinuous_comp gives continuity. The source is a small category in the coefficient universe and the target site has HasSheafify by Mathlib AlgebraicGeometry.Sites.AffineEtale. AddCommGrpCat has the required colimits, hence the pointwise left Kan extensions exist (Functor.KanExtension.Pointwise). The instance in Functor.sheafPullbackConstruction constructs a left adjoint by left Kan extension followed by sheafification.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Functor.sheafPushforwardContinuousComp identifies this right adjoint with the original direct image followed by restriction to the small affine model. Restriction is an equivalence, so Functor.isRightAdjoint_comp_iff_left cancels it. Extract IsRightAdjoint.exists_leftAdjoint to obtain exactly the required functor and nonempty adjunction.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-essentially-small-cover"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "https://stacks.math.columbia.edu/tag/03D3",
-  "place": "Abelian-sheaf adjunction in the proof; Sites and Sheaves, Proposition 7.44.3, after passage to small affine presentation sites."
+  "by": "worker",
+  "document": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Adjunction/Basic.lean",
+  "place": "AffineEtale small-model restriction and sheaf equivalence; sheafPullbackConstruction right-adjoint instance; isRightAdjoint_comp_iff_left"
  },
  "mathlib_searches": [
   {
@@ -118,10 +132,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T163624-L-2789001",
-  "kind": "interface",
+  "landing": "20261012T173918-L-3310325",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
