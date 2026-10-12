@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Trace after restriction for a finite étale morphism of fixed degree

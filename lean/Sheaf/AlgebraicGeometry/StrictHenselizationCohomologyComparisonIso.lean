@@ -6,6 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology
 
 /-! # Invertibility of the strict-local cohomology comparison
 

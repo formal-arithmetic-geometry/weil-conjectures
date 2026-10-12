@@ -5,6 +5,9 @@ Authors: SHEAF group Q2
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
+import Sheaf.AlgebraicGeometry.GaloisCategories
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 /-!
 # Image of the finite étale fundamental-group map
 

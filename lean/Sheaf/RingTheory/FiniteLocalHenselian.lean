@@ -2,6 +2,9 @@ module
 
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
+import Sheaf.RingTheory.HenselianEtaleRetraction
+import Sheaf.RingTheory.HenselianLocalRootLifting
 
 /-! Henselianity of a module-finite local algebra. -/
 

@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.DivisorModule
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 import Sheaf.AlgebraicGeometry.DivisorLineBundleAgreesSC
 import Sheaf.AlgebraicGeometry.DivisorModuleLocal
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import WeilConjectures.AlgebraicGeometry.Picard.Group
+import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
 /-!
 # Comparison of the two divisor-module constructions

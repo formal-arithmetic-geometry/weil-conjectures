@@ -13,6 +13,7 @@ import Sheaf.CategoryTheory.TruncationHypercohomology
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 
 /-! # Bounded-below direct image and quasi-coherence
 

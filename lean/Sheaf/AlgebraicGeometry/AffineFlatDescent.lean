@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 
 /-!
 # The affine case of effective descent

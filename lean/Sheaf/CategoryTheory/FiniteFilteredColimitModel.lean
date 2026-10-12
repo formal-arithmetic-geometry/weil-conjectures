@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # The filtration and graded pieces of a finite filtered colimit

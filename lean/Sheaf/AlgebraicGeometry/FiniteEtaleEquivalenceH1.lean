@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Finite étale equivalence and first cohomology

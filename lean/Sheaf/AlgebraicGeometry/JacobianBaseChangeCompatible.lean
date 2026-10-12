@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 /-!
 # Compatibility of Jacobian identifications with base change

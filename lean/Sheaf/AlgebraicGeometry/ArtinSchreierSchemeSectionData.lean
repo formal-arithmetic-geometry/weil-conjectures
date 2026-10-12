@@ -2,6 +2,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 @[expose] public section
 

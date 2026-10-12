@@ -13,6 +13,8 @@ public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.NormalScheme
 
 /-!
 # Associated module sheaves on a connected finite torsor

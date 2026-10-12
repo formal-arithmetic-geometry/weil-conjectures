@@ -1,6 +1,9 @@
 module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 @[expose] public section
 universe u

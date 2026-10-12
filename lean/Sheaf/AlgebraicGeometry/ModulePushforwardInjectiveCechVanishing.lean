@@ -3,6 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.CategoryTheory.SiteCechComplex
 import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 @[expose] public section
 

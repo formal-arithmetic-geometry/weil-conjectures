@@ -8,6 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # Cokernels of monomorphisms in the normalization comparison

@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import Sheaf.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Presenting the strict-local mate as projection restriction
 

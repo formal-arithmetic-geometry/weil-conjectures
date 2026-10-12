@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
 public import Mathlib.Algebra.Category.ModuleCat.Descent
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
 /-! # Compatibility of the Cech model with the canonical flat cohomology comparison
 

@@ -5,6 +5,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 @[expose] public section
 

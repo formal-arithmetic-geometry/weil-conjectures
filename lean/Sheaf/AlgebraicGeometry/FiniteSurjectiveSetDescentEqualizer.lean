@@ -6,6 +6,10 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
+import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 /-! # Lifting compatible sections along a finite surjective morphism
 
 Source: Stacks Project, Étale Cohomology, Remark 09Z3 and Lemma 09Z2.

@@ -6,6 +6,8 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Ampleness is invariant under module isomorphisms
 

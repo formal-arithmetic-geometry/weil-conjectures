@@ -8,6 +8,7 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 @[expose] public section
 

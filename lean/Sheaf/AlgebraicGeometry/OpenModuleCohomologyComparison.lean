@@ -9,6 +9,7 @@ public import Sheaf.Topology.OpenModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import Sheaf.Topology.RestrictInjectiveResolution
 import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
+import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Open module cohomology and cohomology of the restricted abelian sheaf
 

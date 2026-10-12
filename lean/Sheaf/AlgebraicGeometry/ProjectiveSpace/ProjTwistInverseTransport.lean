@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Transport of a polynomial Proj twist to the projective line

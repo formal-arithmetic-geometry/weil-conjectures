@@ -4,6 +4,8 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import Mathlib.Algebra.Category.Grp.Ulift
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
 
 @[expose] public section
 universe u

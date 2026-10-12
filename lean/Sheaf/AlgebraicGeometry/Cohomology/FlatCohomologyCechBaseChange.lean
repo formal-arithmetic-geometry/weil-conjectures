@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.Sheaves.CechComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # The termwise scalar extension of a finite affine Cech complex
 

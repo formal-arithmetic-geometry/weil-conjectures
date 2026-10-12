@@ -5,6 +5,9 @@ Authors: SHEAF group J1
 -/
 module
 
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+
 public import
   WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 

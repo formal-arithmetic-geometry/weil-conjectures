@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import Mathlib.GroupTheory.Index
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Subgroup quotients of connected finite etale torsors

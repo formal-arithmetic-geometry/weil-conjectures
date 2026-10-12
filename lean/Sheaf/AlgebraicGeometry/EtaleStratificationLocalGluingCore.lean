@@ -3,6 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Constructible
+import Sheaf.Topology.ConstructibleInConstructible
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 @[expose] public section
 

@@ -10,6 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import Sheaf.Paper.GaloisLisseRepresentations
 
 /-!
 # A connected finite monodromy torsor trivializing a module sheaf

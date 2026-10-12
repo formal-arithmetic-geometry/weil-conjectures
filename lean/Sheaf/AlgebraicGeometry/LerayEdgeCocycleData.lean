@@ -3,6 +3,11 @@ module
 public import Sheaf.Paper.PQFCohomology
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.CategoryTheory.GrothendieckComposablePair
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 
 @[expose] public section
 universe u

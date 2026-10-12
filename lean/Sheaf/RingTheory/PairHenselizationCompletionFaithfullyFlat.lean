@@ -7,6 +7,7 @@ public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat
 import Sheaf.RingTheory.FlatColimitRings
 import Sheaf.RingTheory.HenselianFactorizationCriterion
+import Sheaf.RingTheory.PairHenselizationCompletionData
 
 /-!
 # Faithful flatness of the completion comparison for a pair henselization

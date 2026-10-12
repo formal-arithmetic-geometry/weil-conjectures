@@ -3,6 +3,10 @@ module
 public import Sheaf.AlgebraicGeometry.LerayEdgeCocycleData
 import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 
 @[expose] public section
 universe u

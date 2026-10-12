@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Mathlib.LinearAlgebra.ExteriorPower.Pairing
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # The shifted determinant of the dual evaluates against the determinant
 

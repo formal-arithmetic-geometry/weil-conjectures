@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.FiniteAfterCompletion
 
 @[expose] public section
 

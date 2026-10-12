@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Local lifting of units along reduction
 

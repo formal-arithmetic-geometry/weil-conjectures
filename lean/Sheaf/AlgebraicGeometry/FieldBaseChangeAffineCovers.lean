@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Matching affine covers under field extension

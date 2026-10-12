@@ -13,6 +13,8 @@ public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import Sheaf.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Local truncation comparison for unbounded direct image
 

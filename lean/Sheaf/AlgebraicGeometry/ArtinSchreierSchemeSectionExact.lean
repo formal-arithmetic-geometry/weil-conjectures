@@ -6,6 +6,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 
 @[expose] public section
 

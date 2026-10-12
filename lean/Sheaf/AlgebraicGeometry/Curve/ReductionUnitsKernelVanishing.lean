@@ -8,6 +8,15 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Degree-two vanishing for the infinitesimal units kernel on a curve
 

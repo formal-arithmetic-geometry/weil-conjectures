@@ -2,6 +2,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.Refinement
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 @[expose] public section
 
