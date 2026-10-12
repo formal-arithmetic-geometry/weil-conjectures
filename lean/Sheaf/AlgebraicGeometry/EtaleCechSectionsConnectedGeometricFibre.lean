@@ -7,7 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Fiber
-import Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections
+import Sheaf.AlgebraicGeometry.EtaleGlobalSectionSquare
+import Sheaf.AlgebraicGeometry.EtaleGeometricSectionTwoPullbacks
 
 /-! # Cech compatibility over one connected geometric fibre
 
@@ -48,23 +49,19 @@ Source: Stacks Project, Tag 0A3H, final paragraph.
 (blueprint: lem-weil-pbc-etale-cech-sections-connected-geometric-fibre).
 
 Proof:
-1. Put U = T ×_S Spec Ω, with projections p and h. Apply the inverse-image unit
-   along p to a and restrict to the identity object of U. Composition comparisons
-   and p ≫ f = h ≫ q transport this to a section of (h ≫ q)⁻¹F.
-   By etaleGeometricFibreConstantSections on connected U, it is the constant
-   section associated to a unique e in F_q.
-2. Put D = T ×_S T and E = D ×_S Spec Ω, with maps d : E → D and v : E → Spec Ω.
-   The two maps E → U are the pullback lifts (d ≫ pr_i, v). Their composites with
-   h are both v. Pullback uniqueness proves that E is canonically U ×_(Spec Ω) U.
-   Naturality of the units and associativity of the chosen composition comparisons
-   identify the restrictions of the two displayed Cech sections with the pullbacks
-   of the section in step 1 along these maps E → U. Terminal-object maps agree
-   because their composites with the two pullback projections agree.
-3. The naturality clause of etaleGeometricFibreConstantSections makes both sections
-   constant with value e on E. Its comparison with the constant sheaf is an
-   isomorphism, so their equality transports back to the displayed equation.
-   No connectedness or nonemptiness of E is used. If U were empty the connectedness
-   hypothesis would be impossible, as ConnectedSpace includes nonemptiness. -/
+1. Put U = T ×_S Spec Ω, with projections p and h. Define the two maps
+   v_i : E → U as the pullback lifts of (d ≫ pr_i, w), where w : E → Spec Ω
+   is the second projection. The pullback equations give v_i ≫ p = d ≫ pr_i
+   and v_i ≫ h = w.
+2. Apply etaleSet_globalSection_square to each of these commutative squares.
+   It identifies each restricted Cech section, after applying the composition
+   isomorphism for g and d, with the pullback along v_i of the common section
+   obtained by restricting a along p and comparing p ≫ f with h ≫ q.
+3. Apply etaleSet_geometricSection_two_pullbacks on connected U to identify
+   these two pullbacks. It uses etaleGeometricFibreConstantSections and its
+   naturality, without any connectedness or nonemptiness assumption on E.
+4. The composition comparison for g and d is an isomorphism, so its component
+   on global sections is injective. Cancel it to obtain the displayed equality. -/
 theorem etaleSet_cech_sections_agree_on_connected_geometric_fibre
     {S T : Scheme.{u}} (f : T ⟶ S)
     (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (q : Spec (.of Ω) ⟶ S)
@@ -117,6 +114,48 @@ theorem etaleSet_cech_sections_agree_on_connected_geometric_fibre
               (T.smallGrothendieckTopology @Etale)
               ((pullback f f).smallGrothendieckTopology @Etale)).unit.app
                 ((Scheme.etaleSetPullback f).obj F)).hom.app
-              (op (Scheme.Etale.mk (𝟙 T))) a)))) := by sorry
+              (op (Scheme.Etale.mk (𝟙 T))) a)))) := by
+  classical
+  let U := pullback f q
+  let p : U ⟶ T := pullback.fst f q
+  let h : U ⟶ Spec (.of Ω) := pullback.snd f q
+  let D := pullback f f
+  let k₁ : D ⟶ T := pullback.fst f f
+  let k₂ : D ⟶ T := pullback.snd f f
+  let g := k₁ ≫ f
+  let E := pullback g q
+  let d : E ⟶ D := pullback.fst g q
+  let w : E ⟶ Spec (.of Ω) := pullback.snd g q
+  have hp : p ≫ f = h ≫ q := pullback.condition
+  have hk : k₂ ≫ f = g := (pullback.condition (f := f) (g := f)).symm
+  have ht : w ≫ q = d ≫ g := (pullback.condition (f := g) (g := q)).symm
+  let v₁ : E ⟶ U := pullback.lift (d ≫ k₁) w (by
+    rw [Category.assoc]
+    exact ht.symm)
+  let v₂ : E ⟶ U := pullback.lift (d ≫ k₂) w (by
+    rw [Category.assoc, hk]
+    exact ht.symm)
+  have hw₁ : v₁ ≫ h = w := by simp [v₁, h]
+  have hw₂ : v₂ ≫ h = w := by simp [v₂, h]
+  have hs₁ : d ≫ k₁ = v₁ ≫ p := by simp [v₁, p]
+  have hs₂ : d ≫ k₂ = v₂ ≫ p := by simp [v₂, p]
+  have H₁ := etaleSet_globalSection_square f k₁ d p v₁ g (h ≫ q) (d ≫ g)
+    rfl hp rfl (by rw [← Category.assoc, hw₁, ht]) hs₁ F a
+  have H₂ := etaleSet_globalSection_square f k₂ d p v₂ g (h ≫ q) (d ≫ g)
+    hk hp rfl (by rw [← Category.assoc, hw₂, ht]) hs₂ F a
+  have Hc := etaleSet_geometricSection_two_pullbacks Ω q h w v₁ v₂ hw₁ hw₂
+    (d ≫ g) ht F
+    (Eq.mp (congrArg (fun j : U ⟶ S =>
+      ((L j).obj F).obj.obj (op I[U])) hp)
+      (((Classical.choose etaleSetInverseImageCompositionUnits.2.2
+        S T U f p).hom.app F).hom.app (op I[U])
+          (R[T,U,p,(L f).obj F] a)))
+  have H := H₁.trans (Hc.trans H₂.symm)
+  have hi : Function.Injective
+      (((Classical.choose etaleSetInverseImageCompositionUnits.2.2
+        _ _ _ g d).hom.app F).hom.app (op I[E])) :=
+    ((CategoryTheory.isIso_iff_bijective _).1 inferInstance).1
+  apply hi
+  exact H
 
 end AlgebraicGeometry

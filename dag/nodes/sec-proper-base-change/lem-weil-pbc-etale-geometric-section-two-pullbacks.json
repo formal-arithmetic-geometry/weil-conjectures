@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-etale-geometric-section-two-pullbacks",
+ "kind": "statement",
+ "title": "Two maps over a geometric point have equal pullbacks of connected sections",
+ "statement": "Let S,U,E be schemes [def-pc-scheme], let Omega be an algebraically closed field and q:Spec(Omega)\\to S a geometric point [def-weil-geometric-point]. Let h:U\\to Spec(Omega), assume U is nonempty and connected [def-weil-connected-scheme], and let w:E\\to Spec(Omega), v_1,v_2:E\\to U satisfy v_i;h=w. Let t:E\\to S with w;q=t. For a sheaf of sets F on the small etale site of S [def-weil-pbc-etale-sheaf-of-sets, def-weil-pbc-etale-site] and a global section b of (h;q)^{-1}F, apply the adjunction unit along v_i, restrict to the identity etale object by the canonical pullback lift [def-pc-fibre-product], apply the chosen unit-compatible comparison c_{h;q,v_i} [lem-weil-pbc-sets-etale-inverse-image-composition-units], and transport v_i;(h;q)=t. The two resulting global sections of t^{-1}F agree. No connectedness or nonemptiness of E is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-weil-geometric-point",
+  "def-weil-connected-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, final paragraph, both pullbacks have the same stalk value; Tag 03P5, description of sections of constant sheaves"
+ },
+ "proof": [
+  {
+   "text": "Use the surjective constant-section map on connected U to express b as the inverse comparison applied to the sheafified constant section of a stalk element e. Only existence is needed from the bijection.",
+   "uses": [
+    "lem-weil-pbc-etale-geometric-fibre-constant-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a map v:E to U apply the naturality equation of the geometric constant-section theorem to e. Restrict that equation along the terminal lift I[E] to the base change of I[U]. Naturality of the composition comparison and of the inverse constant comparison move the restriction to their components at I[E]. Naturality of toSheafify identifies the restricted constant section with the same constant value e at I[E].",
+   "uses": [
+    "lem-weil-pbc-etale-geometric-fibre-constant-sections",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The component of eqToHom acts on sections by Eq.mp, using the existing private section_eqToHom lemma imported from EtaleGlobalSectionSquare (proved there by equality induction). Transport the section using v;h=w and w;q=t. Composing equality transports identifies it with the inverse comparison at (E,w) of the constant value e. Both v_1 and v_2 therefore yield this same section. This argument includes empty and disconnected E.",
+   "uses": [
+    "lem-weil-pbc-etale-global-section-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-etale-geometric-fibre-constant-sections",
+  "lem-weil-pbc-etale-global-section-square",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, final paragraph, both pullbacks have the same stalk value; Tag 03P5, description of sections of constant sheaves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two morphisms over an algebraically closed field to a connected scheme pull back every section of a constant etale sheaf to the same section",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a constant etale sheaf on a connected scheme have equal pullbacks along two morphisms over an algebraically closed field",
+   "results": "Eight hits about SpecToEquivOfField, structure-sheaf maps, and residue fields; no etale constant-section two-map comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*section|section.*constant|restriction.*comp|unit.*naturality; targeted reads of Mathlib/CategoryTheory/Sites/Pullback.lean, ConstantSheaf.lean and Limits/MorphismProperty.lean; rg of lean/WeilConjectures and lean/Sheaf; blueprint_refs.py searches constant sections, constant sheaf, composition units and commutative square",
+   "results": "Mathlib constantSheaf and toSheafify provide the constructions and naturality but no connected-geometric two-map statement. Existing etaleGeometricFibreConstantSections supplies the bijection and the input naturality equation; this theorem proves the identity-object comparison from them. Blueprint searches found no exact statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCechSectionsConnectedGeometricFibre",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Proof paragraph beginning 'The base Y_(ybar) is strictly henselian local': geometric-fibre section comparison, specifically Tag 0A3H's compatibility of the two projections before applying descent. Two maps over a geometric point have equal pullbacks of connected sections.",
+   "via": [
+    "lem-weil-pbc-etale-cech-sections-connected-geometric-fibre",
+    "lem-weil-pbc-etale-connected-fibres-section-compatible",
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "lem-weil-pbc-sections-base-field-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeometricSectionTwoPullbacks",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeometricSectionTwoPullbacks.lean",
+  "declaration": "AlgebraicGeometry.etaleSet_geometricSection_two_pullbacks",
+  "statement": "theorem etaleSet_geometricSection_two_pullbacks\n    {S U E : Scheme.{u}} (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n    (q : Spec (.of Ω) ⟶ S) (h : U ⟶ Spec (.of Ω)) [ConnectedSpace U]\n    (w : E ⟶ Spec (.of Ω)) (v₁ v₂ : E ⟶ U)\n    (hw₁ : v₁ ≫ h = w) (hw₂ : v₂ ≫ h = w)\n    (t : E ⟶ S) (ht : w ≫ q = t)\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (b : ((L (h ≫ q)).obj F).obj.obj (op I[U])) :\n    P[h ≫ q,v₁,t,(by rw [← Category.assoc, hw₁, ht]),F] b =\n      P[h ≫ q,v₂,t,(by rw [← Category.assoc, hw₂, ht]),F] b",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T184352-L-4023115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T184352-L-4023115",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

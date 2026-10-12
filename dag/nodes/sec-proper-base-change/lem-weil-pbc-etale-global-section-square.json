@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-etale-global-section-square",
+ "kind": "statement",
+ "title": "Global inverse-image sections respect a commutative square",
+ "statement": "Let S,T,D,U,E be schemes [def-pc-scheme], with morphisms f:T\\to S, k:D\\to T, d:E\\to D, p:U\\to T and v:E\\to U. Let g:D\\to S, r:U\\to S and t:E\\to S satisfy k;f=g, p;f=r, d;g=t, v;r=t and d;k=v;p, where semicolon denotes composition in traversal order. Let F be a sheaf of sets [def-weil-pbc-etale-sheaf-of-sets] on the small etale site of S [def-weil-pbc-etale-site], and let a be a global section of f^{-1}F. For composable maps f,k and an equality k;f=g, define P_{f,k}^g(a) by the adjunction unit along k, restriction to the identity etale object using its canonical pullback lift [def-pc-fibre-product], the chosen unit-compatible composition comparison c_{f,k} [lem-weil-pbc-sets-etale-inverse-image-composition-units], and transport along k;f=g. Then P_{g,d}^t(P_{f,k}^g(a))=P_{r,v}^t(P_{f,p}^r(a)). The square need only commute; it need not be cartesian. No connectedness or nonemptiness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, final paragraph, identification of the two restrictions through the geometric fibre; formal composition argument from Sites Tags 03CB and 03CC"
+ },
+ "proof": [
+  {
+   "text": "Global unit-restriction is natural in the sheaf: apply the sheaf-naturality clause of the inverse-image units, then naturality of the pulled-back sheaf morphism along the terminal-object lift.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that restricting successively along f and k, then applying c_{f,k}, equals direct restriction along k;f. Apply the composition unit equation at the identity object, restrict it along the composite terminal lift, and use object-naturality of the unit. The two terminal lifts into the pullback of the identity etale object coincide because that target is terminal: base change preserves finite limits, and the identity object is terminal. This is Mathlib Over.mkIdTerminal and IsTerminal.isTerminalObj.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply associativity of the composition comparisons at the identity object of E, on the twice restricted section a. Sheaf-naturality of restriction and the preceding unit-restriction composition formula turn each iterated P into direct P along the composite map to T, followed by the associativity equality transport.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Eliminate the equalities defining g,r,t. The two remaining composites E to T are d;k and v;p. Their equality identifies the direct restriction and comparison expressions by equality induction. Composition of Eq.mp transports and proof irrelevance identify the remaining equality proofs. Thus the two iterated P expressions are equal.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3H, final paragraph, identification of the two restrictions through the geometric fibre; formal composition argument from Sites Tags 03CB and 03CC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image restriction of global sections of a sheaf is functorial under composition and independent of a commutative square factorization",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit restriction of global sections of inverse image sheaves respects composition comparisons and commutative squares of scheme morphisms",
+   "results": "Eight hits, Scheme.Hom.appLE_map, map_appLE and their associativity variants, about the structure sheaf. None concerns the small-etale inverse-image section comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*section|section.*constant|restriction.*comp|unit.*naturality; targeted reads of Mathlib/CategoryTheory/Sites/Pullback.lean, ConstantSheaf.lean and Limits/MorphismProperty.lean; rg of lean/WeilConjectures and lean/Sheaf; blueprint_refs.py searches constant sections, constant sheaf, composition units and commutative square",
+   "results": "Over.mkIdTerminal and the finite-limit preservation instance are the needed Mathlib tools, but not the whole section identity. The existing library composition-unit theorem provides the input equations. No duplicate square section theorem or blueprint statement was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCechSectionsConnectedGeometricFibre",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-underived-exchange",
+   "place": "Proof paragraph beginning 'The base Y_(ybar) is strictly henselian local': geometric-fibre section comparison, specifically Tag 0A3H's compatibility of the two projections before applying descent. Global inverse-image sections respect a commutative square.",
+   "via": [
+    "lem-weil-pbc-etale-cech-sections-connected-geometric-fibre",
+    "lem-weil-pbc-etale-connected-fibres-section-compatible",
+    "lem-weil-pbc-etale-sections-flat-qc-connected-fibres",
+    "lem-weil-pbc-sections-base-field-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGlobalSectionSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGlobalSectionSquare.lean",
+  "declaration": "AlgebraicGeometry.etaleSet_globalSection_square",
+  "statement": "theorem etaleSet_globalSection_square\n    {S T D U E : Scheme.{u}} (f : T ⟶ S) (k : D ⟶ T) (d : E ⟶ D)\n    (p : U ⟶ T) (v : E ⟶ U) (g : D ⟶ S) (r : U ⟶ S) (t : E ⟶ S)\n    (hk : k ≫ f = g) (hp : p ≫ f = r)\n    (hd : d ≫ g = t) (hv : v ≫ r = t) (hsq : d ≫ k = v ≫ p)\n    (F : Sheaf S.smallEtaleTopology (Type (u + 1)))\n    (a : ((L f).obj F).obj.obj (op I[T])) :\n    P[g,d,t,hd,F] (P[f,k,g,hk,F] a) =\n      P[r,v,t,hv,F] (P[f,p,r,hp,F] a)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T184352-L-4023115",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T184352-L-4023115",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

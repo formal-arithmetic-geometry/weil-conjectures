@@ -19,33 +19,38 @@
  },
  "proof": [
   {
-   "text": "Put p:U -> T and h:U -> Spec Omega. Pull a back by the inverse-image unit along p. The unit-compatible composition comparisons and p followed by f = h followed by q identify its terminal section with a section of (h followed by q)^-1 F. Since U is connected, the bijective constant-section map gives a unique e in F_q representing this section.",
+   "text": "Set U=pullback(f,q), D=pullback(f,f), g=pr_1;f and E=pullback(g,q). Write p,h and d,w for the respective projections. Define v_i:E to U by the pullback lifts of (d;pr_i,w). Pullback.condition, lift_fst and lift_snd give p;f=h;q, v_i;p=d;pr_i, v_i;h=w and w;q=d;g. No identification of E with another fibre product is needed.",
    "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "lem-weil-pbc-etale-geometric-fibre-constant-sections"
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the global-section commutative-square theorem to k=pr_1 and k=pr_2, with the common section a. It identifies the composition comparison c_{g,d} applied to each displayed restricted Cech section with the pullback along v_i of the same section P_{f,p}^{h;q}(a). The second application uses pr_2;f=g via pullback.condition.",
+   "uses": [
+    "lem-weil-pbc-etale-global-section-square"
    ],
    "elementary": false
   },
   {
-   "text": "The two maps E -> U are the pullback lifts pairing d followed by pr_i with the common projection v:E -> Spec Omega. Their composites with h are v. Pullback uniqueness identifies E with U times_(Spec Omega) U. Naturality of inverse-image units moves the terminal lifts through the two restrictions. Associativity of the chosen inverse-image composition comparisons identifies each restricted Cech section with the corresponding pullback of the section in the preceding step; the maps of terminal pullbacks agree because both their projections agree.",
+   "text": "Apply the connected-geometric two-pullback theorem to U,h,w,v_1,v_2 and the common section P_{f,p}^{h;q}(a). Only U is connected. This identifies the right sides of the preceding two square identities.",
    "uses": [
-    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-geometric-section-two-pullbacks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Chain the two square identities and the geometric equality. The component at the identity etale object of c_{g,d} is an isomorphism of sets, hence injective by Mathlib isIso_iff_bijective. Cancel it to obtain exactly the original displayed equation.",
+   "uses": [
     "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
-   "elementary": false
-  },
-  {
-   "text": "The naturality clause of the geometric-fibre constant-section theorem identifies both pullbacks with the constant section of e on E. Its comparison is an isomorphism, so transport back gives the claimed equality. No connectedness or nonemptiness of E is needed; nonempty connected U is the sole connectedness assumption.",
-   "uses": [
-    "lem-weil-pbc-etale-geometric-fibre-constant-sections"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A3H (lemma-sections-upstairs), final paragraph, compatibility before fpqc descent; https://stacks.math.columbia.edu/tag/0A3H"
+  "place": "Tag 0A3H, final paragraph; Lean proof factors through the fully proved general section-square and connected-geometric two-pullback lemmas, retaining the same comparison choices and transports"
  },
  "mathlib_searches": [
   {
@@ -120,7 +125,8 @@
  },
  "proof_deps": [
   "def-pc-fibre-product",
-  "lem-weil-pbc-etale-geometric-fibre-constant-sections",
+  "lem-weil-pbc-etale-geometric-section-two-pullbacks",
+  "lem-weil-pbc-etale-global-section-square",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units"
  ],
  "reviewed": {
@@ -137,9 +143,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T153011-L-2351044",
+  "landing": "20261012T184352-L-4023115",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
