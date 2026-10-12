@@ -1,0 +1,146 @@
+{
+ "id": "sbc-lem-higher-image-raw-affine-class-vanishing",
+ "kind": "statement",
+ "title": "Raw affine cohomology classes eventually vanish",
+ "statement": "Let Λ be a commutative ring, k:W→S a scheme morphism, G a Λ-module sheaf on W_et, q∈ℤ, I a small cofiltered category, and D:I→Over W an inverse system with affine transition morphisms [def-weil-pbc-scheme-conventions], [def-weil-pbc-etale-site], [def-weil-pbc-etale-sheaves]. Assume every composite D(i)→S is quasi-compact and quasi-separated. Let c be a cone whose underlying scheme cone is limiting, and assume c.pt→S is quasi-compact and quasi-separated. For an affine etale U→S, write P_i(U)=Hom((D(i)→S)^*Λ[U][0],D(i)^*G[q]) and P_c(U)=Hom((c.pt→S)^*Λ[U][0],c.pt^*G[q]) in D⁺ of module sheaves [def-weil-pbc-derived-categories], [def-weil-pbc-direct-image]. For i∈I and z∈P_i(U), if its explicitly constructed raw pullback r_{c_i}(z) [sbc-lem-higher-image-raw-over-naturality] is zero in P_c(U), then there exist j∈I and f:j→i with r_{D(f)}(z)=0 in P_j(U). This is raw cohomology vanishing; it makes no assertion about arbitrary higher-image sheaf sections.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 09Z1 (lemma-relative-colimit), 0EZM (lemma-colimit-variant-complexes), 03FD (lemma-cohomology-modules-abelian)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-sbc-module-higher-image-transitions",
+  "sbc-lem-higher-image-raw-over-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Present I opposite by a small directed final category, preserving the underlying scheme limit by opposite initiality. Pull back the diagram and cone along U→S. The stages are qcqs because their structure maps to affine U are qcqs, transitions remain affine, and the cone remains limiting. Free-module-sheaf sections and etale restriction identify the displayed raw derived Hom with cohomology of these pullback schemes.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Composition of inverse images identifies the coefficient diagram on the limit with the constant diagram of c.pt^*G restricted to U. The filtered index is nonempty and connected, so this sheaf is its colimit. Place the stage sheaves in degree-zero complexes, with common lower bound zero. Compute their underlying abelian cohomology by injective module resolutions using all-object abelian section acyclicity. Apply complex cohomology continuity. Derived adjunction identifies the maps with the explicit raw pullbacks.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the filtered group-colimit equality criterion to z and zero. The image of zero along every arrow is zero, so an arrow from the original stage kills z. Transport a witness in the directed presentation back to I and compose arrows. For q<0, degree-zero sheaf cohomology is zero and the identity stage suffices.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-exists-directed-final"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-category-exists-directed-final",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-injective-module-abelian-acyclic",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 09Z1 (lemma-relative-colimit), 0EZM (lemma-colimit-variant-complexes), 03FD (lemma-cohomology-modules-abelian); explicit derived-Hom formulation by M3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology raw classes on an inverse limit of schemes vanish at a later stage under affine transitions",
+   "results": "Eight hits about structure sheaf sections, etale loci and cotangent homology; none is raw etale cohomology continuity.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImagePresheaf\"",
+   "results": "No Mathlib hits.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*raw|higherDirectImagePresheaf.*transition",
+   "results": "No Mathlib hits.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology raw class vanishes at a later stage when its inverse limit pullback is zero",
+   "results": "Service unavailable: Internal Server Error. No absence conclusion drawn.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of etale cohomology continuity under inverse limits with affine transition morphisms",
+   "results": "Eight Mathlib hits: etale forgetful faithfulness, standard etale presentation injectivity, gluing and stalk-map injectivity. None supplies cohomology continuity. Repository raw-affine-class-rep and raw-affine-image-rep assert surjectivity, not eventual zero; affine-computation-vanishing concerns abelian sheaf sections and a directed preorder, not raw module derived Hom.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageLocalClassVanishing",
+  "date": "2026-10-12",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Proof: the cohomology colimit on qcqs etale objects and its natural sheafification comparison"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineClassVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawAffineClassVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_higher_image_raw_affine_class_eq_zero",
+  "statement": "theorem exists_higher_image_raw_affine_class_eq_zero\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over W)\n    [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)]\n    [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]\n    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))\n    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)]\n    (U : S.Etale) [IsAffine U.left] (i : I)\n    (z : (higherDirectImageRawOverPresheaf Λ k G q (D.obj i)).obj (op U))\n    (hz : higherDirectImageRawOverPullback Λ k G q (c.π.app i) U z = 0) :\n    ∃ (j : I) (f : j ⟶ i),\n      higherDirectImageRawOverPullback Λ k G q (D.map f) U z = 0",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T144129-L-2102054",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T144129-L-2102054",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

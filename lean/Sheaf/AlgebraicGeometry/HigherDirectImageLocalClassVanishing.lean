@@ -6,11 +6,8 @@ Authors: SHEAF group J2
 module
 
 public import Sheaf.AlgebraicGeometry.HigherDirectImageTransitions
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
-import Sheaf.AlgebraicGeometry.HigherDirectImageOverCoherence
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineClassVanishing
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Local eventual vanishing of higher-image sections
 
@@ -76,6 +73,109 @@ theorem exists_higher_image_local_class_eq_zero
         ∃ (j : I) (f : j ⟶ i),
           ((higherDirectImageOverMap Λ k G q (D.map f)).hom.app (op U))
             ((higherDirectImage Λ ((D.obj i).hom ≫ k) q
-              ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G)).obj.map a.op y) = 0 := by sorry
+              ((((D.obj i).hom)^*[ModuleCat.{u + 1} Λ]).obj G)).obj.map a.op y) = 0 := by
+  classical
+  let H (B : Over W) :=
+    (higherDirectImage Λ (B.hom ≫ k) q
+      (((B.hom)^*[ModuleCat.{u + 1} Λ]).obj G)).obj ⋙
+        forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}
+  let K (j : I) := H (D.obj j)
+  let P (B : Over W) := higherDirectImageRawOverPresheaf Λ k G q B
+  let e (B : Over W) : P B ⟶ H B := higherDirectImageRawOverComparison Λ k G q B
+  let t {A B : Over W} (f : A ⟶ B) : H B ⟶ H A :=
+    Functor.whiskerRight (higherDirectImageOverMap Λ k G q f).hom
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  let y' : (K i).obj (op V) := y
+  let R : Sieve V :=
+    { arrows := fun U a ↦ ∃ (j : I) (f : j ⟶ i),
+        ((t (D.map f)).app (op U))
+          ((K i).map a.op y') = 0
+      downward_closed := by
+        rintro U T a ⟨j, f, hf⟩ b
+        refine ⟨j, f, ?_⟩
+        rw [op_comp, (K i).map_comp]
+        change ((t (D.map f)).app (op T))
+          ((K i).map b.op ((K i).map a.op y')) = 0
+        rw [NatTrans.naturality_apply, hf, map_zero] }
+  have hy' : (t (c.π.app i)).app (op V) y' = 0 := hy
+  refine ⟨R, ?_, fun U a ha ↦ ha⟩
+  have hs : Presheaf.IsLocallySurjective S.smallEtaleTopology (e (D.obj i)) :=
+    (isLocallyBijective_higherDirectImagePresheafToSheaf
+      Λ ((D.obj i).hom ≫ k) q _).2
+  have ht : Presheaf.IsLocallyInjective S.smallEtaleTopology (e c.pt) :=
+    (isLocallyBijective_higherDirectImagePresheafToSheaf
+      Λ (c.pt.hom ≫ k) q _).1
+  apply S.smallEtaleTopology.transitive (Presheaf.imageSieve_mem
+    S.smallEtaleTopology (e (D.obj i)) y') R
+  intro U a ha
+  obtain ⟨z, hz⟩ := ha
+  change (e (D.obj i)).app (op U) z = (K i).map a.op y' at hz
+  let w : (P c.pt).obj (op U) := higherDirectImageRawOverPullback Λ k G q
+    (A := c.pt) (B := D.obj i) (c.π.app i) U z
+  have hw : (e c.pt).app (op U) w = 0 := by
+    have hn : (e c.pt).app (op U) w =
+        ((t (c.π.app i)).app (op U))
+          ((e (D.obj i)).app (op U) z) :=
+      (higherDirectImageRawOverPullback_toSheaf Λ k G q
+        (A := c.pt) (B := D.obj i) (c.π.app i) U z).1
+    rw [hn, hz, NatTrans.naturality_apply, hy', map_zero]
+  have hcover := Presheaf.equalizerSieve_mem S.smallEtaleTopology
+    (e c.pt) w 0 (by simpa only [map_zero] using hw)
+  apply S.smallEtaleTopology.transitive hcover (R.pullback a)
+  intro T b hb
+  have hwT : (P c.pt).map b.op w = 0 := by
+    simpa only [Presheaf.equalizerSieve_apply, map_zero] using hb
+  let 𝒰 := T.left.affineCover
+  let A (d : 𝒰.I₀) : S.Etale := Scheme.Etale.mk (𝒰.f d ≫ T.hom)
+  let r (d : 𝒰.I₀) : A d ⟶ T := MorphismProperty.Over.homMk (𝒰.f d)
+  have hA : Sieve.ofArrows A r ∈ S.smallEtaleTopology T := by
+    rw [Scheme.ofArrows_mem_smallEtaleTopology_iff]
+    exact 𝒰.iUnion_range
+  apply S.smallEtaleTopology.superset_covering _ hA
+  intro Q t ht
+  obtain ⟨d, l, rfl⟩ := (Sieve.mem_ofArrows_iff A r t).mp ht
+  have : IsAffine (A d).left := by
+    change IsAffine (Spec _)
+    infer_instance
+  let zT := (P (D.obj i)).map b.op z
+  let zA := (P (D.obj i)).map (r d).op zT
+  have hraw : higherDirectImageRawOverPullback Λ k G q
+      (A := c.pt) (B := D.obj i) (c.π.app i) (A d) zA = 0 := by
+    rw [(higherDirectImageRawOverPullback_toSheaf Λ k G q
+      (A := c.pt) (B := D.obj i) (c.π.app i) T zT).2]
+    dsimp only [zT]
+    rw [(higherDirectImageRawOverPullback_toSheaf Λ k G q
+      (A := c.pt) (B := D.obj i) (c.π.app i) U z).2]
+    change (P c.pt).map (r d).op ((P c.pt).map b.op w) = 0
+    rw [hwT, map_zero]
+  obtain ⟨j, f, hf⟩ := exists_higher_image_raw_affine_class_eq_zero
+    Λ k G q D c hc (A d) i zA hraw
+  have hstage : ((t (D.map f)).app (op (A d)))
+      ((K i).map (r d).op ((K i).map b.op ((K i).map a.op y'))) = 0 := by
+    have hn := (higherDirectImageRawOverPullback_toSheaf Λ k G q (D.map f) (A d) zA).1
+    rw [hf, map_zero] at hn
+    have he : (e (D.obj i)).app (op (A d)) zA =
+        (K i).map (r d).op ((K i).map b.op ((K i).map a.op y')) := by
+      calc
+        (e (D.obj i)).app (op (A d)) zA =
+            (K i).map (r d).op ((e (D.obj i)).app (op T) zT) :=
+          NatTrans.naturality_apply (e (D.obj i)) (r d).op zT
+        _ = (K i).map (r d).op
+            ((K i).map b.op ((e (D.obj i)).app (op U) z)) :=
+          congrArg (fun x ↦ (K i).map (r d).op x)
+            (NatTrans.naturality_apply (e (D.obj i)) b.op z)
+        _ = _ := congrArg (fun x ↦ (K i).map (r d).op ((K i).map b.op x)) hz
+    have hn' : ((t (D.map f)).app (op (A d)))
+        ((e (D.obj i)).app (op (A d)) zA) = 0 := hn.symm
+    rw [he] at hn'
+    exact hn'
+  change R ((l ≫ r d) ≫ b ≫ a)
+  refine ⟨j, f, ?_⟩
+  rw [op_comp, (K i).map_comp, op_comp, (K i).map_comp,
+    op_comp, (K i).map_comp]
+  change ((t (D.map f)).app (op Q))
+    ((K i).map l.op
+      ((K i).map (r d).op ((K i).map b.op ((K i).map a.op y')))) = 0
+  rw [NatTrans.naturality_apply, hstage, map_zero]
 
 end AlgebraicGeometry.Etale
