@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-closed-supported-formal-algebraization",
+ "kind": "statement",
+ "title": "Algebraization of a supported formal module from completion on the closed subscheme",
+ "statement": "Let X be a Noetherian scheme, j:Z → X a closed immersion [def-weil-closed-immersion], and K a quasi-coherent ideal sheaf on X. Suppose completion Coh(Z) → Coh(Z,K O_Z) [def-weil-pbc-coherent-formal-module] is an equivalence. For any coherent formal module M on (X,K) annihilated by j.ker, there exists a coherent module G on Z [pqf-def-coherent] whose pushforward j_*G is coherent and whose completion is isomorphic to M. No properness or adic completeness is needed beyond the assumed completion equivalence.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, first paragraph, using Lemma 087T and completion comparison in 088A"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The closed-immersion formal equivalence lifts (M,hM) to its inverse image N on Z.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Essential surjectivity of the assumed equivalence supplies G and an isomorphism completion(G) ≅ N. This is an existential proof, not a definition by an unproved arbitrary witness.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Closed pushforward is finite and preserves coherence, giving hG.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the completion comparison θ, termwise pushforward of the chosen algebraization isomorphism, the inverse evaluation comparison β, and the counit of the closed-immersion equivalence. Lift the resulting inverse-system isomorphism to the full subcategory of coherent formal modules.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-finite-pushforward-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, first paragraph, using Lemma 087T and completion comparison in 088A; categorical transport and dictionary specialization expanded by H3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of coherent formal modules supported on a proper closed subscheme",
+   "results": "8 hits; existence of vanishing powers on qcqs schemes, IdealSheafData constructions, and ideal section formulas. No formal algebraization or supported dictionary match.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "completion IsEquivalence",
+   "results": "0 hits; service reported unknown identifier completion.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedOn|coherentFormal_equivalence",
+   "results": "msearch Mathlib grep: 0 hits. Local library rg and full-file reads found the formal closed-immersion equivalence and thickeningSystems_dictionary, used below.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal modules annihilated by the ideal of a closed subscheme can be algebraized from completion on that closed subscheme, and completion isomorphisms give compatible restrictions to infinitesimal thickenings",
+   "results": "Service unavailable: Internal Server Error. No verdict on absence from this search; LeanFinder, Loogle and source grep were also run.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedSystem",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-grothendieck-existence-supported-system",
+   "place": "Steps 1--4, splitting dictionary transport from closed-supported algebraization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportedFormalAlgebraization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportedFormalAlgebraization.lean",
+  "declaration": "AlgebraicGeometry.closedSupported_formal_algebraization",
+  "statement": "theorem closedSupported_formal_algebraization\n    {X Z : Scheme.{u}} [IsNoetherian X] (j : Z ⟶ X) [IsClosedImmersion j]\n    (K : X.IdealSheafData)\n    (he : (@completion Z (isNoetherian_of_locallyOfFiniteType j) (K.comap j)).IsEquivalence)\n    (M : CoherentFormalModule X K) (hM : SupportedOn K M j) :\n    ∃ (G : CoherentModules Z)\n      (hG : RingedSpace.IsCoherent X.toRingedSpace ((Scheme.Modules.pushforward j).obj G.obj)),\n      Nonempty ((completion X K).obj ⟨(Scheme.Modules.pushforward j).obj G.obj, hG⟩ ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135241-L-1668518",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T135241-L-1668518",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

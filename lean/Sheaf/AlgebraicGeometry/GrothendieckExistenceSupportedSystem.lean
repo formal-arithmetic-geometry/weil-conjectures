@@ -11,12 +11,11 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.SupportedThickeningDictionary
+import Sheaf.AlgebraicGeometry.ClosedSupportedFormalAlgebraization
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceProper
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Algebraization of a system on a fixed proper closed subscheme
 
@@ -92,6 +91,36 @@ theorem grothendieckExistence_supported_system
     ∃ ψ : ∀ n : ℕ, (Scheme.Modules.tensorPullback (pullback.fst f (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (I ^ (n + 1))))))).obj G ≅ F n,
     ∀ n : ℕ, (Scheme.Modules.tensorPullback (i n)).map (ψ (n + 1)).hom ≫ (φ n).hom = (c
-      n).hom.app G ≫ (ψ n).hom := by sorry
+      n).hom.app G ≫ (ψ n).hom := by
+  classical
+  obtain ⟨hX, M, hM, hψ⟩ :=
+    supportedThickening_dictionary A I f i hi hp c hc F φ hF Z j hkill
+  let := hX
+  let : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType j
+  let K : X.IdealSheafData :=
+    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f
+  have he : (@completion Z (isNoetherian_of_locallyOfFiniteType j)
+      (K.comap j)).IsEquivalence := by
+    change (completion Z
+      (((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f).comap j)).IsEquivalence
+    rw [← Scheme.IdealSheafData.comap_comp]
+    exact grothendieck_existence_proper A I Z (j ≫ f)
+  obtain ⟨GZ, hG, e⟩ := closedSupported_formal_algebraization j K he M hM
+  let G : CoherentModules X := ⟨(Scheme.Modules.pushforward j).obj GZ.obj, hG⟩
+  have hqZ := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    Z GZ.obj).mp GZ.property
+  let := hqZ.1
+  let := hqZ.2
+  have hqG := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
+    X G.obj).mp G.property
+  let := hqG.1
+  let := hqG.2
+  have hproper : Scheme.Modules.HasSupportProperOver f G.obj := by
+    apply (Scheme.Modules.module_support_proper_over_base f G.obj).2.1.mpr
+    refine ⟨Z, j, inferInstance, inferInstance, ?_, GZ.obj,
+      inferInstance, inferInstance, ⟨Iso.refl _⟩⟩
+    exact (Scheme.Modules.closedImmersion_pushforward_annihilated j).1 GZ.obj |>.2
+  obtain ⟨ψ, hcompat⟩ := hψ G e
+  exact ⟨G.obj, G.property, hproper, ψ, hcompat⟩
 
 end AlgebraicGeometry

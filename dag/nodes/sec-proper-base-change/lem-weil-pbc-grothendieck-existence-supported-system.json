@@ -20,51 +20,49 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-thickening-systems-dictionary], the pushed terms form a coherent formal module for $I\\mathcal O_X$; its terms are killed by the ideal of $j$. By [lem-weil-pbc-closed-immersion-coherent-equivalence] (2), lift it to a formal module on $Z$ for the extended ideal, together with the completion comparison.",
+   "text": "Apply supportedThickening_dictionary to obtain Noetherian X, M supported on Z, and the operation transporting any completion isomorphism back to compatible ψ_n.",
    "uses": [
-    "lem-weil-pbc-thickening-systems-dictionary",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "def-weil-pbc-coherent-formal-module"
+    "lem-weil-pbc-supported-thickening-dictionary"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [prop-weil-pbc-grothendieck-existence-proper] on $Z$ to obtain a coherent algebraization. Closed-immersion coherent equivalence and its natural completion comparison give a coherent pushforward $G$ on $X$ whose completion is isomorphic to the original formal module.",
+   "text": "Proper Grothendieck existence for j ≫ f makes completion on Z an equivalence. The Mathlib identity comap_comp identifies its ideal with K.comap j. Apply closedSupported_formal_algebraization to obtain G_Z, a coherent pushforward G, and completion(G) ≅ M.",
    "uses": [
     "prop-weil-pbc-grothendieck-existence-proper",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence"
+    "lem-weil-pbc-closed-supported-formal-algebraization"
    ],
    "elementary": false
   },
   {
-   "text": "The support formula for coherent closed pushforward identifies $\\operatorname{Supp}G$ with the image of the support of the coherent module on $Z$. That support is closed by [lem-weil-pbc-module-support-proper-over-base] (1). It is a closed subset of the proper $Z$, hence its image is proper over $S$ by [lem-weil-pbc-closed-subset-proper-over-base-properties].",
+   "text": "The coherence criterion supplies quasi-coherence and finite type for G and G_Z. Closed pushforward is annihilated sectionwise by j.ker. Apply the proper-support characterization with the existing proper closed immersion j, witness G_Z, and reflexive pushforward isomorphism.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-weil-pbc-module-support-proper-over-base",
-    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-module-support-proper-over-base"
    ],
    "elementary": false
   },
   {
-   "text": "The isomorphism correspondence in [lem-weil-pbc-thickening-systems-dictionary] gives the $\\psi_n$ from the completion isomorphism. Its natural comparison and transition equations give exactly compatibility with $\\varphi_n$ and $c_n$.",
+   "text": "Apply the dictionary transport to the coherent G and completion isomorphism and assemble G, its coherence, proper support, ψ_n, and their compatibility.",
    "uses": [
-    "lem-weil-pbc-thickening-systems-dictionary"
+    "lem-weil-pbc-supported-thickening-dictionary"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-closed-supported-formal-algebraization",
   "lem-weil-pbc-module-support-proper-over-base",
-  "lem-weil-pbc-thickening-systems-dictionary",
+  "lem-weil-pbc-supported-thickening-dictionary",
+  "pqf-lem-coherent-ft-locnoeth",
   "prop-weil-pbc-grothendieck-existence-proper"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Theorem 088E and Remark 088F; the dictionary and natural comparison details are expanded as in the parent proof."
+  "place": "Theorem 088E first paragraph and Remark 088F; H3 Lean reduction isolates supported dictionary transport and proves closed-supported algebraization by categorical transport."
  },
  "mathlib_searches": [
   {
@@ -137,9 +135,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G1",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T085240-L-15135",
+  "landing": "20261012T135241-L-1668518",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
