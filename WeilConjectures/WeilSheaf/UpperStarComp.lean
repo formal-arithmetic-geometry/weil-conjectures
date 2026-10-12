@@ -66,14 +66,19 @@ lemma upperStarCompIso_paste (j₁ : T₁ ⟶ T₂) (j₂ : T₂ ⟶ T₃) (a₁
   have h := upperStarCompIso_hom_app_paste A c₂.symm c₁.symm c₁₂.symm M
   rw [upperStarCompIso_symm c₂, upperStarCompIso_symm c₁, upperStarCompIso_symm c₁₂] at h
   simp only [Iso.symm_hom] at h
-  rw [← cancel_epi ((a₁)^*[A].map ((upperStarComp A j₁ j₂).hom.app M)), ← Functor.map_comp_assoc,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
-    ← cancel_mono ((upperStarComp A j₁ j₂).hom.app ((a₃)^*[A].obj M) ≫
-      (j₁)^*[A].map ((upperStarCompIso A c₂).inv.app M) ≫
-      (upperStarCompIso A c₁).inv.app ((j₂)^*[A].obj M)), h]
-  simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.inv_hom_id_app_assoc,
-    ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-    Category.id_comp]
+  have h' := congrArg Iso.inv (Iso.ext (α := (upperStarComp A j₁ j₂).app ((a₃)^*[A].obj M) ≪≫
+    (j₁)^*[A].mapIso ((upperStarCompIso A c₂).app M).symm ≪≫
+      ((upperStarCompIso A c₁).app ((j₂)^*[A].obj M)).symm)
+    (β := ((upperStarCompIso A c₁₂).app M).symm ≪≫ (a₁)^*[A].mapIso ((upperStarComp A j₁ j₂).app M))
+    (by simpa using h))
+  simpa using h'.symm
+
+/-- The components of the congruence isomorphism of pullbacks are identities. -/
+lemma upperStarCongr_hom_app_eq_eqToHom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
+    (M : Sheaf (Scheme.ProEt.topology Y) A) :
+    (upperStarCongr A h).hom.app M = eqToHom (by rw [h]) := by
+  subst h
+  rfl
 
 end Paste
 
@@ -81,16 +86,18 @@ section Exchange
 
 variable {l : ℕ} [Fact l.Prime] {T₁ T₂ T₃ : Scheme.{u}}
 
+-- Rewriting `upperStarCongr` at the `ℓ`-adic sheaf itself, rather than unfolding it at a
+-- composite, keeps the kernel from comparing pullbacks along different morphisms.
 lemma adicUpperStarCompIso_hom_app_hom {Y Z₁ Z₂ T : Scheme.{u}} {a : Y ⟶ Z₁} {b : Z₁ ⟶ T}
     {c : Y ⟶ Z₂} {d : Z₂ ⟶ T} (h : a ≫ b = c ≫ d) (M : AdicSheaf l T) :
     ((adicUpperStarCompIso l h).hom.app M).hom =
-      (upperStarCompIso (WeilCoefficients.{u} l) h).hom.app M.X := by
-  simp only [adicUpperStarCompIso, upperStarCompIso, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, Mod.comp_hom', adicUpperStarComp_inv_app_hom,
-    adicUpperStarComp_hom_app_hom, adicUpperStarCongr_hom_app_hom]
+      (upperStarComp (WeilCoefficients.{u} l) a b).inv.app M.X ≫ eqToHom (by rw [h]) ≫
+        (upperStarComp (WeilCoefficients.{u} l) c d).hom.app M.X := by
+  change ((adicUpperStarComp l a b).inv.app M ≫ (adicUpperStarCongr l h).hom.app M ≫
+    (adicUpperStarComp l c d).hom.app M).hom = _
+  rw [Mod.comp_hom', Mod.comp_hom', adicUpperStarComp_inv_app_hom, adicUpperStarComp_hom_app_hom,
+    adicUpperStarCongr_hom_app_hom, upperStarCongr_hom_app_eq_eqToHom]
 
-set_option maxHeartbeats 1000000 in
--- The kernel unfolds the `ℓ`-adic pullbacks to compare with the underlying sheaves.
 /-- The pasting law for the composition isomorphisms of commutative squares of pullbacks of
 `ℓ`-adic sheaves (`AlgebraicGeometry.ProEtale.upperStarCompIso_paste`). -/
 lemma adicUpperStarCompIso_paste (j₁ : T₁ ⟶ T₂) (j₂ : T₂ ⟶ T₃) (a₁ : T₁ ⟶ T₁) (a₂ : T₂ ⟶ T₂)
@@ -102,9 +109,15 @@ lemma adicUpperStarCompIso_paste (j₁ : T₁ ⟶ T₂) (j₂ : T₂ ⟶ T₃) (
         (j₁)^*ᵃ[l].map ((adicUpperStarCompIso l c₂).hom.app M) ≫
           (adicUpperStarComp l j₁ j₂).inv.app ((a₃)^*ᵃ[l].obj M) := by
   apply Mod.hom_ext
-  simp only [Mod.comp_hom', adicUpperStar_map_hom, adicUpperStarCompIso_hom_app_hom,
+  rw [Mod.comp_hom', Mod.comp_hom', Mod.comp_hom', adicUpperStar_map_hom, adicUpperStar_map_hom,
+    adicUpperStarCompIso_hom_app_hom, adicUpperStarCompIso_hom_app_hom,
+    adicUpperStarCompIso_hom_app_hom, adicUpperStarComp_inv_app_hom,
     adicUpperStarComp_inv_app_hom]
-  exact upperStarCompIso_paste j₁ j₂ a₁ a₂ a₃ c₁ c₂ c₁₂ M.X
+  have p := upperStarCompIso_paste j₁ j₂ a₁ a₂ a₃ c₁ c₂ c₁₂ M.X
+  rw [upperStarCompIso, upperStarCompIso, upperStarCompIso] at p
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    upperStarCongr_hom_app_eq_eqToHom] at p
+  exact p
 
 variable (l) in
 /-- The exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of `ℓ`-adic sheaves attached to a
@@ -168,7 +181,8 @@ set_option hygiene false in
 local notation "Fr[" T "]" => Scheme.Hom.geometricGaloisFrobenius (T ↘ Spec (CommRingCat.of k₀))
 
 set_option hygiene false in
-local notation "bc[" f "]" => Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))
+local notation "bc[" f "]" =>
+  Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))
 
 lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq_exchange (φ : X ⟶ Y)
     [φ.IsOver 𝐒] :
@@ -180,12 +194,20 @@ lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq_exchange (φ : X ⟶ Y)
 variable (l) in
 /-- The composition isomorphism `ψ̄^* ⋙ φ̄^* ≅ (φ ≫ ψ)̄^*` of the pullbacks along the base
 changes. -/
-noncomputable abbrev adicUpperStarGeometricFiberMapCompIso (φ : X ⟶ Y) (ψ : Y ⟶ Z)
+noncomputable def adicUpperStarGeometricFiberMapCompIso (φ : X ⟶ Y) (ψ : Y ⟶ Z)
     [φ.IsOver 𝐒] [ψ.IsOver 𝐒] :
     (bc[ψ])^*ᵃ[l] ⋙ (bc[φ])^*ᵃ[l] ≅ (bc[φ ≫ ψ])^*ᵃ[l] :=
   (adicUpperStarComp l (bc[φ]) (bc[ψ])).symm ≪≫
-    adicUpperStarCongr l (Scheme.Hom.geometricFiberMap_comp φ ψ (comp_over φ 𝐒)
+    adicUpperStarCongr l (g' := bc[φ ≫ ψ]) (Scheme.Hom.geometricFiberMap_comp φ ψ (comp_over φ 𝐒)
       (comp_over ψ 𝐒)).symm
+
+omit [Finite k₀] in
+lemma adicUpperStarGeometricFiberMapCompIso_eq (φ : X ⟶ Y) (ψ : Y ⟶ Z) [φ.IsOver 𝐒]
+    [ψ.IsOver 𝐒] :
+    adicUpperStarGeometricFiberMapCompIso l φ ψ = (adicUpperStarComp l (bc[φ]) (bc[ψ])).symm ≪≫
+      adicUpperStarCongr l (g' := bc[φ ≫ ψ]) (Scheme.Hom.geometricFiberMap_comp φ ψ (comp_over φ 𝐒)
+        (comp_over ψ 𝐒)).symm := by
+  rw [adicUpperStarGeometricFiberMapCompIso]
 
 /-- The composition isomorphism of pullbacks along the base changes is compatible with the
 exchange isomorphisms defining the Weil structures of pullbacks. -/
@@ -195,13 +217,15 @@ lemma ProEtaleWeilSheaf.upperStarComp_exchange (φ : X ⟶ Y) (ψ : Y ⟶ Z)
       (adicUpperStarGeometricFiberMapCompFrobeniusIso l (φ ≫ ψ) (comp_over (φ ≫ ψ) 𝐒)).hom =
     (IsoAlgebra.compCommIso (adicUpperStarGeometricFiberMapCompFrobeniusIso l ψ (comp_over ψ 𝐒))
         (adicUpperStarGeometricFiberMapCompFrobeniusIso l φ (comp_over φ 𝐒))).hom ≫
-      Functor.whiskerLeft ((Fr[Z]).inv)_*ᵃ[l] (adicUpperStarGeometricFiberMapCompIso l φ ψ).hom := by
+      Functor.whiskerLeft ((Fr[Z]).inv)_*ᵃ[l]
+        (adicUpperStarGeometricFiberMapCompIso l φ ψ).hom := by
   refine NatTrans.ext (funext fun K ↦ ?_)
   rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     IsoAlgebra.compCommIso_hom_app, adicUpperStarGeometricFiberMapCompFrobeniusIso_eq_exchange,
     adicUpperStarGeometricFiberMapCompFrobeniusIso_eq_exchange,
-    adicUpperStarGeometricFiberMapCompFrobeniusIso_eq_exchange, Iso.trans_hom, Iso.symm_hom,
-    NatTrans.comp_app, NatTrans.comp_app]
+    adicUpperStarGeometricFiberMapCompFrobeniusIso_eq_exchange]
+  simp only [adicUpperStarGeometricFiberMapCompIso_eq, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc]
   exact adicUpperStarExchange_paste (l := l) (bc[φ]) (bc[ψ]) (bc[φ ≫ ψ])
     (Scheme.Hom.geometricFiberMap_comp φ ψ (comp_over φ 𝐒) (comp_over ψ 𝐒)).symm
     (Fr[X]) (Fr[Y]) (Fr[Z])
