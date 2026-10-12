@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-directed-etale-limit-sections",
+ "kind": "statement",
+ "title": "Directed continuity for the canonical etale section cocone",
+ "statement": "Let I be a nonempty directed preorder and R a scheme [def-weil-pbc-scheme-conventions]. Let B : I opposite -> R.Etale be a diagram of etale schemes [def-weil-pbc-etale-site], with qcqs stages and affine transitions. Let c be a limit cone of its underlying scheme diagram, and let p : c.pt -> R satisfy c_i followed by the structure map of B_i = p. For a sheaf H of sets [def-weil-pbc-etale-sheaf-of-sets], let nu be a natural transformation from B opposite followed by H to the constant diagram with value (p inverse image H)(c.pt). Suppose each nu_i is the inverse-image adjunction unit [lem-weil-pbc-sets-etale-inverse-image-composition-units] followed by restriction along the pullback map with components c_i and the identity [def-pc-fibre-product]. Then the cocone determined by nu is a colimit. This is only the directed continuity and identification step, not the reindexing from a general cofiltered category.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ (degree-zero continuity route for sets via 0EYL, 04HR and 09YN) and 03S2; as used in Tag 03Q9"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose a stage i0 and restrict to its upper tail. Directedness gives nonemptiness and connectedness of each comma category of the tail inclusion, so it is cofinal and its opposite is initial. These preserve the section colimit and the scheme limit.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Pull back H to stage i0 and apply set-valued etale section continuity to its terminal etale object. The identity structure morphism is qcqs and the stage assumptions supply all other hypotheses. The bijective colimit comparison gives a colimit cocone.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-section-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use composition of inverse images and the cone equations to identify stage and limit inverse images with those of H along their maps to R. Etale restriction at each terminal object identifies stage sections with H(B_i). The unit equations identify both transitions and limit components; the latter are the unit for p restricted along the pullback map with projections c_i and the identity. The stipulated component equations identify this cocone with Cocone.mk nu.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the colimit along these natural identifications and back from the cofinal upper tail.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-etale-section-continuity",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09YQ and 03S2, degree-zero route for sets as in the imported continuity lemma"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical cocone of sections of an etale sheaf of sets on a directed limit of qcqs schemes with affine transitions is a colimit",
+   "results": "Service unavailable: Internal Server Error, via msearch.py.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale sheaf sections directed inverse limit affine transition canonical cocone",
+   "results": "AffineTransitionLimit structure-sheaf lemmas and affine Zariski site cocones only; no set-valued etale sheaf continuity.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiltered.exists_directed",
+   "results": "Service reports unknown identifier; local Mathlib source confirms IsFiltered.exists_directed is proved and usable for the parent reduction, not a match for directed etale continuity.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(continuity|[Ss]ection)|([Ss]ection|continuity).*etale",
+   "results": "msearch.py: Topology/Sheaves/EtaleSpace and RingTheory/Smooth/IntegralClosure only. Local rg on lean/: EtaleSetSectionContinuity is the appropriate lower-level input; WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity has abelian coefficients and additional assumptions on the base, so is not this theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CofilteredEtaleLimitSections",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-cofiltered-etale-limit-sections",
+   "place": "Directed continuity and canonical-component identification, steps 2 and 3 after the now-proved reindexing step"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectedEtaleLimitSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectedEtaleLimitSections.lean",
+  "declaration": "AlgebraicGeometry.directedEtaleLimitSections",
+  "statement": "theorem directedEtaleLimitSections {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] {R : Scheme.{u}} (B : Iᵒᵖ ⥤ R.Etale) (c : Cone (B ⋙ Scheme.Etale.forget R ⋙ Over.forget R)) (p : c.pt ⟶ R) (h : ∀ i, c.π.app i ≫ (B.obj i).hom = p) (H : Sheaf R.smallEtaleTopology (Type (u + 1))) [∀ i : Iᵒᵖ, CompactSpace (B.obj i).left] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (B.obj i).left] [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (B.map a).left] (_hc : IsLimit c) (ν : B.op ⋙ H.obj ⟶ (Functor.const Iᵒᵖᵒᵖ).obj (((Scheme.etaleSetPullback p).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))))) (_hν : ∀ i, ν.app i = (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ p) (Type (u + 1)) (R.smallGrothendieckTopology @Etale) (c.pt.smallGrothendieckTopology @Etale)).unit.app H).hom.app (op (B.obj i.unop))) ≫ ((Scheme.etaleSetPullback p).obj H).obj.map (MorphismProperty.Over.homMk (B := (MorphismProperty.Over.pullback @Etale ⊤ p).obj (B.obj i.unop)) (pullback.lift (c.π.app i.unop) (𝟙 _) (by simpa using h i.unop)) (pullback.lift_snd _ _ _)).op) : Nonempty (IsColimit (Cocone.mk _ ν))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T053921-L-2630712",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T053921-L-2630712",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -5,9 +5,9 @@ Authors: SHEAF group V2
 -/
 module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity
-import Sheaf.CategoryTheory.ExistsDirectedReindexing
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import Sheaf.AlgebraicGeometry.DirectedEtaleLimitSections
+import Mathlib.CategoryTheory.Presentable.Directed
+import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Sections over a cofiltered limit of etale schemes
 
@@ -122,6 +122,28 @@ theorem cofilteredLimitSections
     [∀ j : J, CompactSpace (B.obj j).left]
     [∀ j : J, QuasiSeparatedSpace (B.obj j).left]
     [∀ {j k : J} (a : j ⟶ k), IsAffineHom (B.map a).left]
-    (_hc : IsLimit c) : Nonempty (IsColimit (limitSectionCocone B c p h H)) := by sorry
+    (_hc : IsLimit c) : Nonempty (IsColimit (limitSectionCocone B c p h H)) := by
+  obtain ⟨I, horder, hdirected, hnonempty, F, hfinal⟩ :=
+    IsFiltered.exists_directed Jᵒᵖ
+  let := horder
+  let := hdirected
+  let := hnonempty
+  let := hfinal
+  let B' := F.leftOp ⋙ B
+  let c' := c.whisker F.leftOp
+  have : ∀ i : Iᵒᵖ, CompactSpace (B'.obj i).left :=
+    fun i ↦ inferInstanceAs (CompactSpace (B.obj (F.leftOp.obj i)).left)
+  have : ∀ i : Iᵒᵖ, QuasiSeparatedSpace (B'.obj i).left :=
+    fun i ↦ inferInstanceAs (QuasiSeparatedSpace (B.obj (F.leftOp.obj i)).left)
+  have : ∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (B'.map a).left :=
+    fun a ↦ inferInstanceAs (IsAffineHom (B.map (F.leftOp.map a)).left)
+  have hc' : IsLimit c' :=
+    (Functor.Initial.isLimitWhiskerEquiv F.leftOp c).symm _hc
+  have h' : ∀ i, c'.π.app i ≫ (B'.obj i).hom = p :=
+    fun i ↦ h (F.leftOp.obj i)
+  let κ := (limitSectionCocone B c p h H).whisker F.leftOp.op
+  obtain ⟨hcκ⟩ := directedEtaleLimitSections B' c' p h' H hc' κ.ι (fun _ ↦ rfl)
+  exact ⟨Functor.Final.isColimitWhiskerEquiv F.leftOp.op
+    (limitSectionCocone B c p h H) hcκ⟩
 
 end AlgebraicGeometry
