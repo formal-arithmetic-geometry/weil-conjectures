@@ -5,11 +5,13 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Sites.Whiskering
 
 /-!
 # Adjunctions between categories of sheaves induced by adjunctions of coefficients
 
+- `CategoryTheory.sheafCompose_additive`: composing sheaves with an additive functor is additive.
 - `CategoryTheory.sheafComposeAdjunction`: an adjunction `F ⊣ G` between coefficient
   categories, both of which preserve sheaves, induces an adjunction
   `sheafCompose J F ⊣ sheafCompose J G`, whose unit and counit are obtained by whiskering.
@@ -40,14 +42,14 @@ noncomputable def sheafComposeAdjunction : sheafCompose J F ⊣ sheafCompose J G
         ext P : 2; ext1; ext U
         simp only [Functor.comp_obj, Functor.id_obj, NatTrans.comp_app, Functor.whiskerRight_app,
           Functor.associator_hom_app, Functor.whiskerLeft_app, Category.id_comp,
-          ObjectProperty.FullSubcategory.comp_hom, sheafCompose_map_hom, ObjectProperty.homMk_hom,
+          ObjectProperty.FullSubcategory.comp_hom, sheafCompose_map_hom,
           NatTrans.id_app', ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app]
         exact adj.left_triangle_components _
       right_triangle := by
         ext P : 2; ext1; ext U
         simp only [Functor.comp_obj, Functor.id_obj, NatTrans.comp_app, Functor.whiskerLeft_app,
           Functor.associator_inv_app, Functor.whiskerRight_app, Category.id_comp,
-          ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom, sheafCompose_map_hom,
+          ObjectProperty.FullSubcategory.comp_hom, sheafCompose_map_hom,
           NatTrans.id_app', ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app]
         exact adj.right_triangle_components _ }
 
@@ -60,5 +62,19 @@ lemma sheafComposeAdjunction_unit_app_hom (P : Sheaf J A) :
 lemma sheafComposeAdjunction_counit_app_hom (P : Sheaf J B) :
     ((sheafComposeAdjunction J adj).counit.app P).hom = Functor.whiskerLeft P.obj adj.counit :=
   rfl
+
+section Additive
+
+variable {C : Type u₁} [Category.{v₁} C] (J : GrothendieckTopology C) {A : Type u₂}
+  [Category.{v₂} A] [Preadditive A] {B : Type u₃} [Category.{v₃} B] [Preadditive B]
+  (F : A ⥤ B) [F.Additive] [J.HasSheafCompose F]
+
+/-- Composing sheaves with an additive functor is additive. -/
+instance sheafCompose_additive : (sheafCompose J F).Additive where
+  map_add {_ _ _ _} := by
+    ext : 3
+    exact F.map_add
+
+end Additive
 
 end CategoryTheory

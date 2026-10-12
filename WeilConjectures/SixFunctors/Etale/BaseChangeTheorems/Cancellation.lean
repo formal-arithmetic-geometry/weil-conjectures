@@ -214,7 +214,7 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
   let K : CochainComplex.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
     ⟨(CochainComplex.singleFunctor _ 0).obj J, ⟨0, inferInstance⟩⟩
   let P := (HomotopyCategory.Plus.quotient _).obj K
-  have : IsTorsionSheaf J := .of_isTorsion hΛ J
+  have : IsTorsionModuleSheaf J := .of_isTorsion hΛ J
   have hJ := (hf.hasInjectiveAcyclicity Λ f).rightAcyclic Λ sq J
   have h₁ : IsIso ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) :=
     (f)_*[ModuleCat.{u + 1} Λ].isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic K
@@ -240,7 +240,7 @@ theorem Etale.isIso_baseChangeMap_app_of_hasTorsionBaseChange (hΛ : IsAddTorsio
               (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 J n hn))
   have h₃ : IsIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app
       (DerivedCategory.Plus.Qh.obj P)) :=
-    hf sq _ (Etale.DerivedCategory.Plus.torsionHomology_of_isTorsion Λ X hΛ _)
+    hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion Λ X hΛ _)
   have hfac := Etale.derivedBaseChangeMapPlus_fac_app (ModuleCat.{u + 1} Λ) sq.toCommSq P
   have h₄ : IsIso (((g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus.map
       ((f)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusUnit.app P) ≫
@@ -361,7 +361,7 @@ theorem Etale.HasInjectiveAcyclicity.of_comp (hΛ : IsAddTorsion Λ) {X Y Z : Sc
   have := Etale.mono_homEquiv_of_surjective Λ f ι
   have hsr : s ≫ Injective.factorThru (𝟙 I) s = 𝟙 I := Injective.comp_factorThru _ _
   have sq₁ : IsPullback (pullback.fst f b) (pullback.snd f b) f b := IsPullback.of_hasPullback f b
-  have : IsTorsionSheaf J := .of_isTorsion hΛ J
+  have : IsTorsionModuleSheaf J := .of_isTorsion hΛ J
   have hJ := (hf.hasInjectiveAcyclicity Λ f).rightAcyclic Λ sq₁ J
   refine Etale.isZero_homology_rightDerivedFunctorPlus_of_retract Λ h'
     ((b)^*[ModuleCat.{u + 1} Λ].map s)
@@ -419,8 +419,8 @@ theorem Etale.hasTorsionBaseChange_of_affineOpens {X Y : Scheme.{u}} (f : X ⟶ 
     exact ⟨⟨U, hU⟩, ⟨x, hx⟩, rfl⟩
   · rw [Etale.baseChange_eq_derivedBaseChangeMapPlus]
     refine h U (IsPullback.of_hasPullback _ _) _ fun n ↦ ?_
-    exact @Scheme.IsTorsionSheaf.of_epi _ _ _ _ _
+    exact @Scheme.IsTorsionModuleSheaf.of_epi _ _ _ _ _
       ((((f ⁻¹ᵁ (U : Y.Opens)).ι)^*[ModuleCat.{u + 1} Λ].mapDerivedCategoryPlusHomologyFunctorIso
-        n).hom.app K) inferInstance (@isTorsionSheaf_upperStar _ _ _ _ _ _ (hK n))
+        n).hom.app K) inferInstance (@isTorsionModuleSheaf_upperStar _ _ _ _ _ _ (hK n))
 
 end AlgebraicGeometry
