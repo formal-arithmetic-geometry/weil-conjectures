@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-smooth-stable-conormal-basis",
+ "kind": "statement",
+ "title": "A stabilized presentation with an initial localized conormal basis",
+ "statement": "Let $R$ and $A$ be commutative rings with $A$ a finitely presented $R$-algebra [def-weil-pbc-finitely-presented-algebra]. Let $P_0:R[x_1,\\ldots,x_{n_0}]\\twoheadrightarrow A$ be a finite polynomial presentation with $m_0$ relations [def-weil-pbc-mv-polynomial-ring], kernel $I_0$, and conormal module $I_0/I_0^2$ with its quotient $A$-action. Let $a\\in A$, $B=A_a$ [def-weil-pbc-module-localization-away], and assume that $B$ is smooth over $R$ [def-weil-pbc-smooth-ring-map]. Suppose $r,q\\geq0$ and $(B\\otimes_A I_0/I_0^2)\\oplus B^r\\cong B^q$ as $B$-modules. Then there are $n,m,c\\geq0$, a finite presentation $P:R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ with relations $f_0,\\ldots,f_{m-1}$ and kernel $I$, and $c\\leq\\min(n,m)$, such that the elements $1\\otimes(f_j\\bmod I^2)$, $0\\leq j<c$, are a basis of $B\\otimes_A I/I^2$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07EZ (lemma-compare-standard), proof of (e), stabilization by zero variables and selection of the initial relations; rank bound made explicit"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Adjoin r variables z_i sent to zero to P_0, obtaining P_1 with kernel J=(I_0,z_i). Constant term and linear coefficients in the z_i define J/J^2 -> (I_0/I_0^2) plus A^r. Conversely lift coefficients and send (g,(b_i)) to g+sum lift(b_i)z_i mod J^2. Changes of coefficient lifts contribute elements of J^2. The constant and linear coefficients of a product of two kernel elements vanish in their respective quotients. These maps therefore descend, are A-linear, and are inverse.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the equivalence. The given stable trivialization now makes (J/J^2)_a free of finite rank q. Lift its basis to elements g_j/a^(u_j) with g_j in J. Multiplying each basis vector by the unit a^(u_j) preserves a basis. Use those numerator elements as the initial relations, then append a finite generating family of J, which exists from the original presentation and the added variables. This gives P and c<=m.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For nonzero B, the localized conormal differential is split injective by the smooth-localization conormal-split theorem, transported from the polynomial quotient to A. Reduce its left inverse modulo a maximal ideal of B. The resulting injection k^c -> k^n gives c<=n by dimension. For B=0 choose c=0 and the empty basis of its zero module. Thus c<=min(n,m).",
+   "uses": [
+    "lem-weil-pbc-smooth-localization-conormal-split"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-smooth-localization-conormal-split"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07EZ (lemma-compare-standard), proof of (e), stabilization by zero variables and selection of the initial relations; rank bound made explicit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stably free differentials smooth localization polynomial presentation localized conormal basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite polynomial presentation with initial relations basis localized conormal module smooth stably free differentials",
+   "results": "Algebra.IsStandardSmooth, Algebra.SubmersivePresentation.isStandardSmooth, Algebra.IsStandardSmooth.out, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, Algebra.IsStandardSmooth.finitePresentation, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.Smooth.finitePresentation",
+   "date": "2026-10-12",
+   "verdict": "Related components only; no exact match. Read the returned sources and project modules."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|Cotangent.*(basis|Basis)|cotangentComplex.*injective",
+   "results": "Mathlib/RingTheory/Extension/Cotangent/LocalizationAway.lean, Mathlib/RingTheory/Extension/Cotangent/Basis.lean, Mathlib/RingTheory/Extension/Cotangent/Basis.lean, Mathlib/RingTheory/Extension/Cotangent/Basis.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean",
+   "date": "2026-10-12",
+   "verdict": "Related components only; no exact match. Read the returned sources and project modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity approximation step 7, via lem-weil-pbc-smooth-free-differentials-strictly-standard-power: Tag 07EZ (lemma-compare-standard), proof of (e), stabilization by zero variables and selection of the initial relations; rank bound made explicit",
+   "via": [
+    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SmoothStableConormalBasis",
+  "file": "lean/Sheaf/RingTheory/SmoothStableConormalBasis.lean",
+  "declaration": "Algebra.exists_presentation_localized_conormal_basis",
+  "statement": "theorem exists_presentation_localized_conormal_basis\n    (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]\n    [FinitePresentation R A] (a : A) [Smooth R (Localization.Away a)]\n    {n₀ m₀ : ℕ} (P₀ : Presentation R A (Fin n₀) (Fin m₀)) (r q : ℕ)\n    (hstable : Nonempty\n      (((Localization.Away a ⊗[A] P₀.toExtension.Cotangent) ×\n        (Fin r → Localization.Away a)) ≃ₗ[Localization.Away a]\n        (Fin q → Localization.Away a))) :\n    ∃ (n m c : ℕ) (P : Presentation R A (Fin n) (Fin m)) (hc : c ≤ min n m)\n      (b : Module.Basis (Fin c) (Localization.Away a)\n        (Localization.Away a ⊗[A] P.toExtension.Cotangent)),\n      ∀ j : Fin c, b j = 1 ⊗ₜ[A]\n        (Extension.Cotangent.mk (P := P.toExtension)\n          ⟨P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j),\n            P.relation_mem_ker _⟩)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-026d3",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184401-L-4025999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-026d3",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184401-L-4025999",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proof, two remaining lemmas, node records and change record; compilation and axiom checks passed, including both direct importers."
+ }
+}

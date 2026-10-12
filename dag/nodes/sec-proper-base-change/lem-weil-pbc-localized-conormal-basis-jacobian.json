@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-localized-conormal-basis-jacobian",
+ "kind": "statement",
+ "title": "Localized relation membership and Jacobian left inverse from a conormal basis",
+ "statement": "Let $R,A$ be commutative rings and let $P:R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ be a finite $R$-algebra presentation [def-weil-pbc-finitely-presented-algebra, def-weil-pbc-mv-polynomial-ring] with relations $f_0,\\ldots,f_{m-1}$ and kernel $I=(f_j)$. Let $a\\in A$, let $h=P.\\sigma(a)$ be the chosen polynomial lift of $a$, and put $B=A_a$ [def-weil-pbc-module-localization-away]. Assume $B$ smooth over $R$ [def-weil-pbc-smooth-ring-map], $c\\leq\\min(n,m)$, and a $B$-basis $b_0,\\ldots,b_{c-1}$ of $B\\otimes_A I/I^2$ with $b_j=1\\otimes(f_j\\bmod I^2)$. Put $K=(f_0,\\ldots,f_{c-1})+I^2$ in the polynomial ring and $D_{ij}=\\overline{\\partial f_j/\\partial x_i}$ in $A$ [def-weil-pbc-polynomial-partial-derivative]. Then every $f_j$ for $j\\geq c$ maps into the extension of $K$ in $R[x_1,\\ldots,x_n]_h$, and there is a $c\\times n$ matrix $L$ over $B$ with $L D_B=1_c$, where $D_B$ is the image of $D$ under $A\\to B$.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07EZ (lemma-compare-standard), proof of (e), relation spanning and split conormal differential before denominator clearing of the left inverse"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof": [
+  {
+   "text": "The basis expresses each remaining relation class in the localized conormal module as sum of coefficients times the initial classes. Write the finitely many coefficients as fractions of A elements with powers of a as denominators; lift their numerators to the polynomial ring. Clear a common denominator. Equality in the localization gives another power annihilating the difference in I/I^2. Multiplication by h on I/I^2 is multiplication by a. Hence h^N f_j is in the initial-relation ideal plus I^2. Since h is invertible in the polynomial localization, f_j belongs to the extension of that ideal.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the smooth localized conormal differential and its left inverse from the polynomial quotient to A using P.quotientEquiv. Identify the middle term with B^n on the coordinate differentials and the source with B^c through b. The image of b_j has ith coordinate the image in B of the evaluated partial derivative of f_j. Compose the left inverse with b.equivFun and write it in coordinate bases. This gives L with L D_B=1_c. If c=0 all matrices have zero columns/rows and the identity is the empty one; the zero localization is also allowed.",
+   "uses": [
+    "lem-weil-pbc-smooth-localization-conormal-split",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-smooth-localization-conormal-split",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Tag 07EZ (lemma-compare-standard), proof of (e), relation spanning and split conormal differential before denominator clearing of the left inverse"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "basis localized conormal module Jacobian left inverse relations belong to localized ideal plus square",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "smooth polynomial presentation conormal basis split injection Jacobian matrix left inverse",
+   "results": "Algebra.SubmersivePresentation.invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs, Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs, Algebra.PreSubmersivePresentation.jacobiMatrix_naive, Algebra.Generators.exists_presentation_of_basis_cotangent, Algebra.SubmersivePresentation.jacobianRelations, Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective, Algebra.SubmersivePresentation.isStandardSmooth",
+   "date": "2026-10-12",
+   "verdict": "Related components only; no exact match. Read the returned sources and project modules."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplex|cotangentRestrict_mk|span_eq_top_of_span_eq_ker",
+   "results": "Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Extension/Cotangent/Basis.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean, Mathlib/RingTheory/Extension/Cotangent/Free.lean",
+   "date": "2026-10-12",
+   "verdict": "Related components only; no exact match. Read the returned sources and project modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Essential-surjectivity approximation step 7, via lem-weil-pbc-smooth-free-differentials-strictly-standard-power: Tag 07EZ (lemma-compare-standard), proof of (e), relation spanning and split conormal differential before denominator clearing of the left inverse",
+   "via": [
+    "lem-weil-pbc-smooth-free-differentials-strictly-standard-power",
+    "lem-weil-pbc-popescu-resolve-char-p",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedConormalBasisJacobian",
+  "file": "lean/Sheaf/RingTheory/LocalizedConormalBasisJacobian.lean",
+  "declaration": "Algebra.Presentation.localized_conormal_basis_jacobian",
+  "statement": "theorem localized_conormal_basis_jacobian\n    {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]\n    {n m c : ℕ} (P : Presentation R A (Fin n) (Fin m))\n    (hc : c ≤ min n m) (a : A) [Smooth R (Localization.Away a)]\n    (b : Module.Basis (Fin c) (Localization.Away a)\n      (Localization.Away a ⊗[A] P.toExtension.Cotangent))\n    (hb : ∀ j : Fin c, b j = 1 ⊗ₜ[A]\n      (Extension.Cotangent.mk (P := P.toExtension)\n        ⟨P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j),\n          P.relation_mem_ker _⟩)) :\n    (∀ j : Fin m, c ≤ j.val →\n      algebraMap (MvPolynomial (Fin n) R) (Localization.Away (P.σ a)) (P.relation j) ∈\n        Ideal.map (algebraMap (MvPolynomial (Fin n) R) (Localization.Away (P.σ a)))\n          (Ideal.span {f | ∃ k : Fin m, k.val < c ∧ f = P.relation k} +\n            (Ideal.span (Set.range P.relation)) ^ 2)) ∧\n    let D : Matrix (Fin n) (Fin c) (Localization.Away a) :=\n      fun i j ↦ algebraMap A (Localization.Away a)\n        (MvPolynomial.aeval P.val (MvPolynomial.pderiv i\n          (P.relation (Fin.castLE (le_trans hc (min_le_right n m)) j))))\n    ∃ L : Matrix (Fin c) (Fin n) (Localization.Away a), L * D = 1",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-026d3",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184401-L-4025999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-026d3",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184401-L-4025999",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proof, two remaining lemmas, node records and change record; compilation and axiom checks passed, including both direct importers."
+ }
+}
