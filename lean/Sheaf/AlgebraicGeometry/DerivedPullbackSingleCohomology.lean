@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 
 /-! # Pullback cohomology on a locus with one locally free cohomology sheaf
 

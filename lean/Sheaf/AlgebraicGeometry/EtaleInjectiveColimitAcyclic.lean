@@ -6,6 +6,10 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
 
 /-!
 # Acyclicity of filtered colimits of injective etale sheaves

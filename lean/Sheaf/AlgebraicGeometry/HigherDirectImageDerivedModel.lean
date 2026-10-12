@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # A global derived model for relatively flat higher direct images
 
