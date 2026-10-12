@@ -8051,3 +8051,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/C2/Sheaf.RingTheory.PopescuAuxiliaryAlgebraLocalizations (stage 3; reviewer PASS; first push; landing 20261012T144057-L-2090249 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:40 L: merged deliver/C3/Sheaf.AlgebraicGeometry.EtaleSectionsFpqcSeparated (stage 3; reviewer PASS; first push; landing 20261012T144057-L-2090348 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/C3/Sheaf.AlgebraicGeometry.HigherDirectImageTransitionNaturality (stage 3; reviewer PASS; first push; landing 20261012T144058-L-2090446 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:40 L: merged deliver/C3/Sheaf.AlgebraicGeometry.ProjectiveSpaceReindexIsIso (stage 3; reviewer PASS; after a return; landing 20261012T144058-L-2090543 (proof); batch 20261012T144049; modules 1; new nodes 0)
