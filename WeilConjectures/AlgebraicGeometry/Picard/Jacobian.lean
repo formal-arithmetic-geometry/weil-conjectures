@@ -2637,6 +2637,59 @@ lemma exists_isAffineOpen_superset_of_isPullback {ks : Type u} [Field ks] [Algeb
   have := IsClosedImmersion.of_comp_of_isSeparated i (ℙ(β; Spec (.of K)) ↘ Spec (.of K))
   exact fun s hs ↦ exists_isAffineOpen_superset_of_isClosedImmersion i s hs
 
+/-- A descent `J_K` of the Jacobian `J_s` of `C_{k_s}` to a finite separable level `K` is of
+finite presentation and projective over `K`: `J_K ⟶ Spec K` is locally of finite presentation
+and quasi-compact, and there is a closed immersion `J_K ⟶ ℙ^N_K` over `Spec K`. Indeed `J_s` is a
+proper group scheme, hence quasi-projective, the immersion into projective space descends to
+`J_K`, and it is closed since `J_K` is proper (and smooth, by fpqc descent).
+
+(blueprint: `cor-pd-finite-level`, the clauses "of finite presentation" and "projective") -/
+lemma exists_isClosedImmersion_projectiveSpace_of_isPullback {ks : Type u} [Field ks]
+    [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js)
+    (K : IntermediateField k ks) (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+    (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks)))) :
+    LocallyOfFinitePresentation JK.hom ∧ QuasiCompact JK.hom ∧
+      ∃ (β : Type u) (_ : Finite β) (i : JK.left ⟶ ℙ(β; Spec (.of K))),
+        IsClosedImmersion i ∧ i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K) = JK.hom := by
+  have : IsSepClosed ks := IsSepClosure.sep_closed k
+  have : SmoothOfRelativeDimension 1 (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (SmoothOfRelativeDimension 1 (pullback.snd _ _))
+  have : IsProper (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (IsProper (pullback.snd _ _))
+  have : GeometricallyIntegral (pullback (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k ks))) ↘ Spec (.of ks)) :=
+    inferInstanceAs (GeometricallyIntegral (pullback.snd _ _))
+  obtain ⟨e⟩ := nonempty_picardFunctorDegree_iso_of_isPullback (K := ks) (C := C)
+    (C' := pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))
+    (pullback.fst _ _) (IsPullback.of_hasPullback _ _) 0
+  have hP : IsProper Js.hom := isProper_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  obtain ⟨hG, -⟩ := exists_commGrpObj_isPicardZeroMul _ (rs.ofIso e)
+  obtain ⟨α, _, j, hj, hjf⟩ := GrpObj.exists_isImmersion_projectiveSpace Js
+  have : IsImmersion j := hj
+  obtain ⟨β, _, i, hi, hif⟩ := exists_isImmersion_projectiveSpace_of_pullback (k := K) (K := ks)
+    JK.hom (hq.isoPullback.inv ≫ j) (by rw [Category.assoc, hjf, hq.isoPullback_inv_snd])
+  have : IsImmersion i := hi
+  -- `J_K` is proper and smooth, so the immersion is closed
+  have := smoothOfRelativeDimension_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  have := geometricallyIntegral_of_representableBy_picardFunctorDegree 0 Js (rs.ofIso e)
+  obtain ⟨hJK, hJS, -⟩ := isProper_smoothOfRelativeDimension_geometricallyIntegral_of_isPullback
+    JK.hom Js.hom q hq
+    (arithmeticGenus ks
+      (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks)))))
+  have : UniversallyClosed (i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K)) := by
+    rw [hif]
+    infer_instance
+  have := IsClosedImmersion.of_comp_of_isSeparated i (ℙ(β; Spec (.of K)) ↘ Spec (.of K))
+  have := SmoothOfRelativeDimension.smooth (arithmeticGenus ks
+    (pullback (C ↘ Spec (.of k)) (Spec.map (CommRingCat.ofHom (algebraMap k ks))))) JK.hom
+  exact ⟨inferInstance, inferInstance, β, inferInstance, i, inferInstance, hif⟩
+
 /-- **The descent datum is defined at a finite separable level.** Let `C` be a smooth projective
 geometrically integral curve over `k`, let `k_s` be a separable closure of `k` and let `J_s`
 represent the restriction of `Pic^0_{C/k}` to schemes over `k_s`, so that `J_s` carries the
@@ -2692,6 +2745,32 @@ theorem exists_intermediateField_descentDatum {ks : Type u} [Field ks] [Algebra 
       exact FunctorToTypes.map_map_eq_map_map_of_comp_eq _ _ _ _ _ (by ext; simp) _
     exact congrArg (·.left) key
   · exact exists_isAffineOpen_superset_of_isPullback C Js rs K JK q hq
+
+/-- **The descent datum is defined at a finite separable level**, with `J_K` of finite
+presentation and projective. This is `AlgebraicGeometry.exists_intermediateField_descentDatum`
+together with the facts that `J_K ⟶ Spec K` is locally of finite presentation and quasi-compact
+(so of finite presentation) and admits a closed immersion `J_K ⟶ ℙ^N_K` over `Spec K`
+(`AlgebraicGeometry.exists_isClosedImmersion_projectiveSpace_of_isPullback`).
+
+(blueprint: `cor-pd-finite-level`) -/
+theorem exists_intermediateField_descentDatum_isClosedImmersion {ks : Type u} [Field ks]
+    [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (Js : Over (Spec (.of ks)))
+    (rs : ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k ks)))).op ⋙
+      (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj).RepresentableBy Js) :
+    ∃ (K : IntermediateField k ks), FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧
+      ∃ (JK : Over (Spec (.of K))) (q : Js.left ⟶ JK.left)
+        (hq : IsPullback q Js.hom JK.hom (Spec.map (CommRingCat.ofHom (algebraMap K ks))))
+        (D : Over.DescentDatum (Spec.map (CommRingCat.ofHom (algebraMap k K))) JK),
+        D.IsBaseChange (specMap_algebraMap_comp_specMap_algebraMap k K ks) hq.w
+            rs.overDescentDatum ∧
+          LocallyOfFinitePresentation JK.hom ∧ QuasiCompact JK.hom ∧
+          ∃ (β : Type u) (_ : Finite β) (i : JK.left ⟶ ℙ(β; Spec (.of K))),
+            IsClosedImmersion i ∧ i ≫ ℙ(β; Spec (.of K)) ↘ Spec (.of K) = JK.hom := by
+  obtain ⟨K, hfin, hsep, JK, q, hq, D, hD, -⟩ := exists_intermediateField_descentDatum C Js rs
+  exact ⟨K, hfin, hsep, JK, q, hq, D, hD,
+    exists_isClosedImmersion_projectiveSpace_of_isPullback C Js rs K JK q hq⟩
 
 
 /-- **The geometric points of `Pic^0_{C₀/k₀}`.** Let `C₀` be a smooth projective geometrically
@@ -2936,7 +3015,7 @@ representing object of `Pic^0_{C/k}` has this property
 (`AlgebraicGeometry.nonempty_representableBy_picardFunctorDegree_baseChange`).
 
 The naturality in `K` of the identification asserted by the blueprint is not part of this
-statement.
+statement; see `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree_pullback`.
 
 (blueprint: `thm-pd-jacobian-general-field`, the clause `J_K ≅ Pic^0_{C_K/K}`) -/
 theorem exists_commGrpObj_representableBy_picardFunctorDegree_baseChange (ks : Type u)
@@ -3039,6 +3118,74 @@ theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Fi
   · obtain ⟨γ, hγp, hγ, act, hact, hΦσ⟩ := hΦσ σ
     refine ⟨γ, hγp, hγ, act, hact, fun L ↦ r.homEquiv.injective ?_⟩
     simp only [hψ, Equiv.apply_symm_apply, r.homEquiv_comp, hΦσ]
+
+
+/-- **Base change of a representing object of `Pic^d`.** Let `C` be a proper curve of finite
+presentation over `k`, let `J` represent `Pic^d_{C/k}` by `r`, let `K/k` be a field extension and
+let `C' = C ×_k K` be presented by a cartesian square. Then `J_K = J ×_k K` represents
+`Pic^d_{C'/K}` by the representation `rK` obtained from `r` by base change: for `T` over `K`, the
+`T`-point of `J_K` attached by `rK` to a section `y` of `Pic^d_{C/k}` over `T`, viewed as a
+section of `Pic^d_{C'/K}` through `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, is the
+point adjoint (`Over.mapPullbackAdj`) to the point of `J` attached to `y` by `r`. This
+compatibility determines `rK` and expresses the naturality of `J_K ≅ Pic^d_{C_K/K}` in `K`.
+
+(blueprint: `thm-pd-jacobian-general-field`, the clause `J_K ≅ Pic^0_{C_K/K}` naturally in `K`) -/
+theorem exists_representableBy_picardFunctorDegree_pullback_homEquiv {K : Type u} [Field K]
+    [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))] [C'.Over (Spec (.of K))]
+    [IsProper (C ↘ Spec (.of k))] [LocallyOfFinitePresentation (C ↘ Spec (.of k))]
+    (q : C' ⟶ C) (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (d : ℤ) {J : Over (Spec (.of k))}
+    (r : (picardFunctorDegree (C ↘ Spec (.of k)) d).obj.RepresentableBy J) :
+    ∃ rK : (picardFunctorDegree (C' ↘ Spec (.of K)) d).obj.RepresentableBy
+        (Over.mk (Limits.pullback.snd J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))),
+      ∀ (T : Over (Spec (.of K)))
+        (y : (picardFunctorDegree (C ↘ Spec (.of k)) d).obj.obj
+          (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T))),
+        rK.homEquiv.symm ((picardFunctorDegreeIsoOfIsPullback q h d).hom.app (.op T) y) =
+          (Over.mapPullbackAdj _).homEquiv T J (r.homEquiv.symm y) := by
+  refine ⟨(r.ofAdjunction (Over.mapPullbackAdj _)).ofIso (picardFunctorDegreeIsoOfIsPullback q h d),
+    fun T y ↦ ?_⟩
+  rw [Equiv.symm_apply_eq]
+  simp only [Functor.RepresentableBy.ofIso, Equiv.trans_apply, Iso.toEquiv_fun, Iso.app_hom,
+    Functor.RepresentableBy.ofAdjunction_homEquiv]
+  erw [Equiv.symm_apply_apply, Equiv.apply_symm_apply]
+
+/-- **The Jacobian over an arbitrary ground field commutes with base change, naturally.** Let `C`
+be a smooth projective geometrically integral curve of genus `g` over a field `k`. Then there is
+an abelian variety `J` of dimension `g` over `k` (a proper, smooth, geometrically integral
+commutative group scheme) representing `Pic^0_{C/k}` by `r`, compatibly with the group laws, such
+that for every field extension `K/k` and every base change `C' = C ×_k K`, `J_K = J ×_k K`
+represents `Pic^0_{C'/K}` by the base change `rK` of `r`: through the canonical identification
+`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, the `T`-point of `J_K` attached to a
+section `y` is the point adjoint to the `T`-point of `J` attached to `y` by `r`. This
+strengthens `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree_baseChange`
+with the specific identification, which is natural in `K`.
+
+(blueprint: `thm-pd-jacobian-general-field`, the clause `J_K ≅ Pic^0_{C_K/K}` naturally in `K`) -/
+theorem exists_commGrpObj_representableBy_picardFunctorDegree_pullback (ks : Type u)
+    [Field ks] [Algebra k ks] [IsSepClosure k ks] (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyIntegral (C ↘ Spec (.of k))] (g : ℕ) (hg : arithmeticGenus k C = g) :
+    ∃ (J : Over (Spec (.of k))) (_ : CommGrpObj J)
+      (r : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J),
+      IsProper J.hom ∧ SmoothOfRelativeDimension g J.hom ∧ GeometricallyIntegral J.hom ∧
+        IsPicardZeroMul _ r ∧
+        ∀ (K : Type u) [Field K] [Algebra k K] (C' : Scheme.{u}) [C'.Over (Spec (.of K))]
+          (q : C' ⟶ C) (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+            (Spec.map (CommRingCat.ofHom (algebraMap k K)))),
+          ∃ rK : (picardFunctorDegree (C' ↘ Spec (.of K)) 0).obj.RepresentableBy
+              (Over.mk (Limits.pullback.snd J.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap k K))))),
+            ∀ (T : Over (Spec (.of K)))
+              (y : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj
+                (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T))),
+              rK.homEquiv.symm ((picardFunctorDegreeIsoOfIsPullback q h 0).hom.app (.op T) y) =
+                (Over.mapPullbackAdj _).homEquiv T J (r.homEquiv.symm y) := by
+  have : Smooth (C ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  obtain ⟨J, _, r, hP, hS, hG, hr⟩ :=
+    exists_commGrpObj_representableBy_picardFunctorDegree ks C g hg
+  exact ⟨J, inferInstance, r, hP, hS, hG, hr, fun _ _ _ _ _ q h ↦
+    exists_representableBy_picardFunctorDegree_pullback_homEquiv q h 0 r⟩
 
 end Descent
 
