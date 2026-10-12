@@ -18,47 +18,37 @@
  },
  "proof": [
   {
-   "text": "The stalk B is a local domain with fraction field K by lem-sc-integral-scheme-stalks-in-function-field. The canonical morphism Spec B → X identifies points with generalizations of x and induces stalk isomorphisms by lem-weil-pbc-spec-local-ring-canonical-morphism. Its inverse image of U omits the closed point and contains the generic point. A one-dimensional local domain has no other primes: a nonzero prime properly below its maximal ideal would make a prime chain of length two.",
+   "text": "The stalk B is a local domain and K is its fraction field by lem-sc-integral-scheme-stalks-in-function-field. By Mathlib ringKrullDim_eq_one_iff_of_isLocalRing_isDomain, B is not a field; choose a nonzero t in its maximal ideal. The same characterization says t is in the radical of (a) for every nonzero a. Thus a divides a power of t, and IsLocalization.iff_of_le_of_exists_dvd gives IsLocalization.Away t K. By lem-weil-pbc-principal-localization-open-immersion (Mathlib IsOpenImmersion.of_isLocalization), Spec K → Spec B is an open immersion.",
    "uses": [
     "lem-sc-integral-scheme-stalks-in-function-field",
-    "lem-weil-pbc-spec-local-ring-canonical-morphism"
+    "lem-weil-pbc-principal-localization-open-immersion"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a nonzero element t in the maximal ideal of B; it exists because a field has dimension zero. The inverse image of U is D(t), with coordinate ring B[1/t] by lem-weil-pbc-principal-localization-open-immersion and lem-weil-pbc-open-immersion-base-change. Its canonical map to K is an isomorphism by lem-sc-local-domain-dim-one-principal-localization-fraction-field. Consequently the two canonical maps Spec K → Spec A and Spec K → Spec B exhibit Spec K as Spec A ×_X Spec B. Their composite to X is the map from its generic stalk.",
-   "uses": [
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-sc-local-domain-dim-one-principal-localization-fraction-field"
-   ],
-   "elementary": false
+   "text": "Compute the inverse image of U pointwise. Mathlib Ring.krullDimLE_one_iff_of_noZeroDivisors and locality make every nonzero prime of B its maximal ideal. That point is excluded because Scheme.fromSpecStalk_closedPoint sends it to x. The zero prime is in the range of Spec K → Spec B by injectivity of B → K. Conversely the unique point of Spec K maps to the generic point of X, by Scheme.SpecMap_stalkSpecializes_fromSpecStalk and Scheme.fromSpecStalk_closedPoint. This point belongs to U. The germ map to the affine chart commutes by IsAffineOpen.fromSpecStalk_eq_fromSpecStalk. IsOpenImmersion.isPullback now gives the pullback square Spec K → Spec A over Spec B → X. All equalities and the pullback criterion are written directly in Lean.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Identify the product Spec A × Spec B with Spec (A ⊗_ℤ B) by the affine-spectrum tensor-product description (lem-weil-pbc-fibre-product-affine-spectra), applied to the terminal integer spectrum (with a universe lift if needed). The two projections are spectra of the tensor inclusions. Composing the spectrum of the tensor lift with these projections gives respectively the germ map A → K and the canonical stalk map B → K, by the defining equations of the lift.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra"
-   ],
-   "elementary": false
+   "text": "Use CommRingCat.coproductCoconeIsColimit for A and B over the integers, take BinaryCofan.IsColimit.op, and apply isLimitOfPreserves Scheme.Spec. The resulting binary fan has point Spec (A tensor_Z B) and projections the spectra of the tensor inclusions. The two composites of Spec phi with these projections are the germ map and the stalk map, by Spec.map_comp and Algebra.TensorProduct.lift_tmul.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For any arrows Y → X and Z → X, the fibre product Y ×_X Z is the pullback of X → X × X along Y × Z → X × X: a cone to this square is exactly a pair of maps to Y and Z whose composites to X agree, with that common composite as the map to X. Apply this universal property to the preceding identifications; it gives the displayed IsPullback square and uses no separatedness.",
+   "text": "Construct the limiting cone to the diagonal square explicitly with PullbackCone.IsLimit.mk. For any cone s, its diagonal commutativity implies that the composites of s.snd with the two tensor projections and their maps to X both equal s.fst. Lift those two maps through the geometric pullback from step 2. The two required factorization equations follow from the geometric lift equations and product hom-extensionality. Uniqueness follows from geometric pullback hom-extensionality and the assumed factorization through Spec phi. This proves exactly the original IsPullback statement.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sc-integral-scheme-stalks-in-function-field",
-  "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "lem-weil-pbc-spec-local-ring-canonical-morphism"
+  "lem-weil-pbc-principal-localization-open-immersion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma Tag 09NB, first paragraph; the diagonal-square formulation is the universal property of the indicated fibre product"
+  "place": "Varieties Lemma Tag 09NB, opening paragraph; formalized directly using Mathlib localization and open-immersion criteria, ring coproducts, and an explicit diagonal pullback cone (W2, 2026-10-13)."
  },
  "mathlib_searches": [
   {
@@ -131,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T194142-L-465588",
-  "kind": "interface",
+  "landing": "20261012T223425-L-1643655",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
