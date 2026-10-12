@@ -15,6 +15,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingTerm
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Quasi-coherence of the Koszul normal determinant
 
@@ -66,6 +68,35 @@ theorem koszulRegularImmersion_dualizing_property {Z Y : Scheme.{u}} (i : Z ⟶ 
           (SheafOfModules.homObj (R := Z.sheaf)
             ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
             (SheafOfModules.unit Z.ringCatSheaf)) r)) := by
-  sorry
+  intro n
+  let M := SheafOfModules.homObj (R := Z.sheaf)
+    ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)
+    (SheafOfModules.unit Z.ringCatSheaf)
+  let K : CochainComplex
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) ℤ :=
+    Scheme.Modules.locallyRankedExteriorComplex M r
+  have hterm : (Scheme.Modules.locallyRankedExteriorTerm M r n).IsQuasicoherent := by
+    by_cases hn : 0 ≤ n
+    · simpa only [Int.toNat_of_nonneg hn] using
+        koszulRegularImmersion_dualizing_term i hregular r hr n.toNat
+    · simp only [Scheme.Modules.locallyRankedExteriorTerm, if_neg hn]
+      have hzero : IsZero
+          (SheafOfModules.free (R := Z.ringCatSheaf) PEmpty.{u + 1}) := by
+        apply (IsZero.iff_id_eq_zero _).mpr
+        apply (SheafOfModules.freeHomEquiv _).injective
+        funext j
+        exact PEmpty.elim j
+      exact (SheafOfModules.isQuasicoherent Z.ringCatSheaf).prop_of_iso hzero.isoZero
+        (SheafOfModules.isQuasicoherent_free PEmpty.{u + 1})
+  let e : (DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) n).obj
+      (DerivedCategory.Q.obj K) ≅ Scheme.Modules.locallyRankedExteriorTerm M r n :=
+    (DerivedCategory.homologyFunctorFactors _ n).app K ≪≫
+      (ShortComplex.HomologyData.ofZeros (K.sc n)
+        (by simp [K, Scheme.Modules.locallyRankedExteriorComplex,
+        HomologicalComplex.sc, CochainComplex.of.d])
+        (by simp [K, Scheme.Modules.locallyRankedExteriorComplex,
+        HomologicalComplex.sc, CochainComplex.of.d])).left.homologyIso
+  exact (SheafOfModules.isQuasicoherent Z.ringCatSheaf).prop_of_iso e.symm hterm
 
 end AlgebraicGeometry

@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-koszul-normal-determinant-term-qcoherent",
+ "kind": "statement",
+ "title": "Quasi-coherence of each Koszul normal determinant term",
+ "statement": "Let i:Z→Y be a Koszul-regular closed immersion into a Noetherian scheme, with r a locally constant natural-valued function equal to the conormal stalk finrank. For every n∈ℕ, the explicit locallyRankedExteriorTerm of the dual conormal in degree n is quasi-coherent. The scheme, immersion, regular sequence, ideal sheaf, pullback, internal Hom, rank-stratified term and stalk are those of [def-pc-scheme], [def-weil-closed-immersion], [def-weil-pbc-koszul-regular-sequence], [def-sbc-closed-immersion-ideal-sheaf], [def-pc-module-pullback], [def-pur-sheaf-hom], [def-sc-locally-ranked-exterior-complex], [def-pc-module-stalk-functor].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ and Tag 0BR0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-hom",
+  "def-sc-locally-ranked-exterior-complex",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Around a point of Z choose the affine neighbourhood in hregular and write A for its ring, I for the ideal and B for A/I. The pulled-back ideal sheaf is associated to I/I². Koszul regularity implies vanishing of first Koszul homology. Given a relation on the generator classes modulo I², subtract products of generators to lift it to a Koszul cycle. Expressing that cycle as a boundary shows that every coefficient lies in I. Together with generation of I this proves that the generator classes form a B-basis of I/I². The conormal and its internal dual are therefore finite locally free on Z. On the clopen rank-n stratum hr identifies their rank with n. The sectionwise exterior-power construction, followed by sheafification, gives the associated exterior power on these affine trivializations, hence a line bundle on that stratum. Direct image from a clopen subscheme is locally this line bundle or the zero sheaf, so it is quasi-coherent. Since n is nonnegative, this is the prescribed term. The empty stratum contributes zero; for n = 0 the empty wedge is the structure sheaf. Thus rank zero and the empty scheme are included.",
+   "uses": [
+    "def-weil-pbc-koszul-regular-sequence",
+    "def-sc-locally-ranked-exterior-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "def-sc-locally-ranked-exterior-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BQZ and Tag 0BR0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherence exterior power sheaf of modules and pushforward along clopen immersion",
+   "results": "UNAVAILABLE: service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi coherence exterior power sheaf of modules and pushforward along clopen immersion",
+   "results": "No exact candidate; only pullback free-module declarations",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exterior.*[Qq]uasicoherent|[Qq]uasicoherent.*exterior",
+   "results": "No exact match in Mathlib or library",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf exterior power of a finite locally free module is quasi coherent, and extension by zero from an open and closed subscheme preserves quasi coherence",
+   "results": "Second reading: generic quasi-coherence data and finite-presentation instance only; no exact match. Loogle on SheafOfModules.IsQuasicoherent also finds generic locally-free and site-pushforward results, which do not establish finite local freeness of the conormal here. Library rg finds exteriorSheaf_top_isInvertible under an existing finite-local-freeness hypothesis, not this theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "normal determinant: quasi-coherence of its nonnegative terms",
+   "via": [
+    "lem-sc-koszul-normal-determinant-qcoherent",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingTerm",
+  "file": "lean/Sheaf/AlgebraicGeometry/KoszulRegularImmersionDualizingTerm.lean",
+  "declaration": "AlgebraicGeometry.koszulRegularImmersion_dualizing_term",
+  "statement": "theorem koszulRegularImmersion_dualizing_term {Z Y : Scheme.{u}} (i : Z ⟶ Y)\n    [IsNoetherian Y] [IsClosedImmersion i]\n    (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧\n      ∃ (n : ℕ) (f : Fin n → Γ(Y, U.1)),\n        Ideal.span (Set.range f) = i.ker.ideal U ∧\n          RingTheory.Sequence.IsKoszulRegular f)\n    (r : LocallyConstant Z ℕ)\n    (hr : ∀ z : Z, r z = Module.finrank (Z.presheaf.stalk z)\n      ((RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)))\n    (n : ℕ) :\n    (Scheme.Modules.locallyRankedExteriorTerm\n      (SheafOfModules.homObj (R := Z.sheaf)\n        ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)\n        (SheafOfModules.unit Z.ringCatSheaf)) r (n : ℤ)).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T144154-L-2110317",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T144154-L-2110317",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

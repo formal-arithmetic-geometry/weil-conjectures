@@ -8227,3 +8227,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/V1/Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T144153-L-2109928 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/V1/Sheaf.RingTheory.FactorsThroughLocalization (stage 3; reviewer PASS; first push; landing 20261012T144153-L-2110029 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/V2/Sheaf.AlgebraicGeometry.KoszulRegularImmersionAlgebraDual (stage 3; reviewer PASS; first push; landing 20261012T144154-L-2110126 (interface); batch 20261012T144049; modules 3; new nodes 2)
+- 14:41 L: merged deliver/V2/Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizingProperty (stage 3; reviewer PASS; after a return; landing 20261012T144154-L-2110317 (interface); batch 20261012T144049; modules 2; new nodes 1)
