@@ -1,0 +1,126 @@
+{
+ "id": "lem-sc-galois-matrix-hilbert90",
+ "kind": "statement",
+ "title": "Matrix Hilbert 90: an invariant basis for a locally constant Galois cocycle",
+ "statement": "Let $K$ be a field, $S$ its separable closure, $G=\\mathrm{Gal}(S/K)$ with the Krull topology, and $n\\in\\mathbb N$. Let $b:G\\to\\mathrm{GL}_n(S)$ be locally constant, and assume $b(g)g(b(h))=b(gh)$ for every $g,h\\in G$, where $g$ acts entrywise on matrices. Then there exists $t\\in\\mathrm{GL}_n(S)$ such that $b(g)g(t)=t$ for every $g\\in G$. This includes $n=0$.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7, injectivity argument, expanded general-linear invariant-basis descent"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "A locally constant map from the compact absolute Galois group to a discrete set has finite image and factors through a finite quotient by an open normal subgroup N. The cocycle law implies b(1)=1. Intersect N with the open normal subgroups fixing the entries of all matrices in this finite image. The resulting fixed field L is finite Galois over K; b is trivial on N and gives a cocycle on Gamma=Gal(L/K) with entries in L.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For v in L^n define T(v)=sum over g in Gamma of b(g)g(v). The cocycle equation gives b(h)h(T(v))=sum_g b(hg)hg(v)=T(v), by reindexing the finite sum. No division by the order of Gamma is used.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The invariant vectors T(v) span L^n. Otherwise choose a nonzero linear functional lambda annihilating their span. Evaluate on v=r e_j: for all r, sum_g (lambda*b(g))_j g(r)=0. Independence of the distinct field automorphisms over L, as in Mathlib linearIndependent_algHom_toLinearMap composed with AlgEquiv.coe_toAlgHom_injective, makes every coefficient zero. At g=1 the coefficient equals lambda_j because b(1)=1; hence lambda=0, a contradiction.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Extract an L-basis of n vectors from this spanning set and use it as the columns of t. The matrix is invertible and all its columns are invariant, so b(g)g(t)=t. Embed L into S. The factorization through Gamma extends this equality to every automorphism of S/K. For n=0 the empty matrix is the unique unit and satisfies the equality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R7 injectivity, invariant-basis expansion in the proof of lem-sc-galois-matrix-cocycle-split"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Matrix Hilbert 90 every locally constant general linear cocycle of an absolute Galois group admits an invariant basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant general linear group cocycle of the absolute Galois group is a coboundary, matrix Hilbert theorem 90",
+   "results": "Actual hits: groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, groupCohomology.H1ofAutOnUnitsUnique, groupCohomology.Hilbert90.aux, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, groupCohomology.Hilbert90.aux_ne_zero, groupCohomology.exists_div_of_norm_eq_one, groupCohomology.IsMulCoboundary₁, groupCohomology.norm_ofAlgebraAutOnUnits_eq. Scalar Hilbert 90 is available, but no general-linear invariant-basis theorem was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert90|hilbert90|semilinear.*descent|descent.*semilinear",
+   "results": "Actual hits: Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90.lean. Scalar Hilbert 90 is available, but no general-linear invariant-basis theorem was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.GaloisMatrixCocycleDescent",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: scalar-defect injectivity in the field Brauer comparison, genuine general-linear cocycle trivialization",
+   "via": [
+    "lem-sc-brauer-scalar-defect-tensor-split",
+    "lem-sc-brauer-scalar-defect-faithful-backward",
+    "lem-sc-brauer-scalar-defect-faithful",
+    "lem-sc-brauer-galois-units-comparison",
+    "lem-sc-galois-matrix-cocycle-split",
+    "lem-sc-galois-matrix-cocycle-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.GaloisMatrixHilbert90",
+  "file": "lean/Sheaf/FieldTheory/GaloisMatrixHilbert90.lean",
+  "declaration": "Field.exists_galois_matrix_invariant_basis",
+  "statement": "theorem exists_galois_matrix_invariant_basis (K : Type u) [Field K] (n : ℕ)\n    (b : Gal(SeparableClosure K/K) →\n      Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))\n    (hb : IsLocallyConstant b)\n    (hcoc : ∀ g h, b g * Matrix.GeneralLinearGroup.map g.toRingHom (b h) = b (g * h)) :\n    ∃ t : Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K),\n      ∀ g, b g * Matrix.GeneralLinearGroup.map g.toRingHom t = t",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T225322-L-1810361",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T225322-L-1810361",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
