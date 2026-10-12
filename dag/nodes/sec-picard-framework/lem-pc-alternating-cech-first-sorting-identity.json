@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-alternating-cech-first-sorting-identity",
+ "kind": "statement",
+ "title": "First sorting contraction identity",
+ "statement": "Let X be a scheme, I a linearly ordered type, U : I -> Opens(X) any family, F an abelian-group presheaf, and S a SiteCechComplex for U over the terminal open [def-pc-scheme, def-sc-zariski-site, def-weil-pbc-site-cech-complex]. Let H and kappa be the concrete finite-sum operators [def-pc-alternating-cech-sorting-operators]. For every p >= 0, the p-th component of Homotopy.nullHomotopicMap' H equals identity minus kappa_p. This is precisely dH+Hd=id-kappa, with the incoming differential zero in degree zero.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "The filter selects the unique permutation sorting the pairs (t(k), k)\nlexicographically. For each a, its partial-sort filter selects the unique permutation\nwith the specified prefix and increasing unused original positions. Thus the finite\nsum is exactly the junction formula of 20.23.6.1, with no multiplicities.\nExpand the two differentials at an arbitrary tuple t. Label every occurrence by its\noriginal position, even when values coincide. Deleting a label j from a sorted tuple\nremoves that label from its stable sorting permutation and renumbers labels above j.\nDo the same in each partial permutation. For a permutation π, deletion of its r-th\nposition changes its sign by (-1)^(r+π(r)). This follows by moving that position and\nits value to the last positions and then restricting the permutation.\nPair a deletion of a nonjunction label in the junction sum with the term in the\njunction sum for the corresponding face of t. If the deleted label is in the sorted\nprefix the junction number drops by one; if it is in the remaining tail it stays the\nsame. The deletion-sign formula gives opposite coefficients in the two expansions.\nBoth transports have the same composites with every projection, hence are equal by\nS.universal. The two deletions of the junction label compare consecutive partial\npermutations; their terms telescope as a ranges from zero to p. The initial partial\npermutation is identity, giving the original cochain with coefficient 1; the final\none is the stable sorting permutation, giving minus its signed pullback. This proves\nthe identity coordinatewise. In degree zero the incoming differential is zero and\nstable sorting is identity. If I is empty every cochain group is a zero object.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM; finite-sum implementation of its operators"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*sort|sort.*cech|semi.?ordered|semi.?alternating|first.?repeat",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed stable sorting of Cech tuples chain homotopy and duplicate first repeated entry contraction",
+   "results": "No matching ordered Cech operator or identity. Candidates: SimplexCategoryGenRel.lt_and_eval_eq_eval_add_one_of_mem_isAdmissible, SimplexCategoryGenRel.simplicialInsert, SimplexCategoryGenRel.mem_isAdmissible_iff, SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible, SimplexCategoryGenRel.IsAdmissible.simplicialEvalσ_succ_getElem, SimplexCategoryGenRel.exists_normal_form_P_σ, SimplexCategoryGenRel.mem_isAdmissible_of_lt_and_eval_eq_eval_add_one, SimplexCategoryGenRel.simplicialEvalσ",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech stable sorting prism homotopy identity minus sorting and contraction of repeated nondecreasing tuples",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechKernelNullHomotopic",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "proof: ordered restriction is a homotopy equivalence; the sorting and repeated-tuple contractions of 01FM",
+   "via": [
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechFirstSortingIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechFirstSortingIdentity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingIdentity",
+  "statement": "theorem cechFirstSortingIdentity (X : Scheme.{u}) {I : Type v} [LinearOrder I] (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w}) (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ) : (Homotopy.nullHomotopicMap' (cechFirstSortingFamily X U F S)).f p = 𝟙 (S.cochains F p) - cechStableSortingMap X U F S p",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1685962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1685962",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

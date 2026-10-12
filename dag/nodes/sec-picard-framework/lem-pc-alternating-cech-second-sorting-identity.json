@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-alternating-cech-second-sorting-identity",
+ "kind": "statement",
+ "title": "Repeated-tuple contraction identity",
+ "statement": "Let X be a scheme, I a linearly ordered type, U : I -> Opens(X) any family, F an abelian-group presheaf, and S a SiteCechComplex for U over the terminal open [def-pc-scheme, def-sc-zariski-site, def-weil-pbc-site-cech-complex]. Let K, kappa and P be the concrete finite-sum operators [def-pc-alternating-cech-sorting-operators]. For every p >= 0, the p-th component of Homotopy.nullHomotopicMap' K equals kappa_p minus P_p. This is precisely dK+Kd=kappa-P, after pulling the repeated-tuple homotopy back by signed stable sorting.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equation 20.23.6.2, pulled back by signed stable sorting"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex",
+  "def-pc-alternating-cech-sorting-operators"
+ ],
+ "proof": [
+  {
+   "text": "Restrict signed stable sorting κ to nondecreasing tuples: it is identity there,\nand its values on arbitrary tuples are recovered by signed stable-sorting pullback.\nThe first identity implies κ commutes with d, since d squared is zero. On the complex\nof nondecreasing tuples define K by duplicating the first repeated value at position a,\nwith sign (-1)^a; set K to zero on increasing tuples. The first-repeat filter in the\nformula selects precisely that a, and no a when the tuple is increasing.\nExpand dK+Kd on a nondecreasing tuple. For a strictly increasing tuple every face is\nstrictly increasing, so all terms vanish. Otherwise let a be the first equality.\nTerms deleting an entry before a pair with the corresponding face term, whose first\nequality is in position a-1, with opposite signs. Terms deleting an entry after the\nrepeated pair similarly match a face term with first equality a. The two face terms\ndeleting the equal occurrences coincide and have opposite signs, so cancel even if\nthat face has no remaining equality. The duplicated tuple has three equal consecutive\nentries at a, a+1, a+2. Deleting these gives the original tuple with total coefficient\n(-1)^a*((-1)^a+(-1)^(a+1)+(-1)^(a+2))=1. These are all terms, proving id minus the\noperator killing repeated tuples. Transports of paired terms agree because all their\nprojections agree. Pull this identity back by signed stable sorting and precompose\nwith κ. The concrete pulled-back operator is cechSecondSortingHom: a duplicated\nnondecreasing tuple is already stably sorted. The resulting right side is κ-P,\nwhere P is the unique strictly increasing sorted permutation on injective tuples\nand zero otherwise, exactly cechAlternatingProjectionMap. Degree zero has no repeated\ntuple and both sides vanish. Empty I gives zero groups.",
+   "uses": [
+    "def-pc-alternating-cech-sorting-operators",
+    "def-weil-pbc-site-cech-complex",
+    "lem-pc-alternating-cech-first-sorting-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-alternating-cech-sorting-operators",
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-alternating-cech-first-sorting-identity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM; finite-sum implementation of its operators"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*sort|sort.*cech|semi.?ordered|semi.?alternating|first.?repeat",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed stable sorting of Cech tuples chain homotopy and duplicate first repeated entry contraction",
+   "results": "No matching ordered Cech operator or identity. Candidates: SimplexCategoryGenRel.lt_and_eval_eq_eval_add_one_of_mem_isAdmissible, SimplexCategoryGenRel.simplicialInsert, SimplexCategoryGenRel.mem_isAdmissible_iff, SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible, SimplexCategoryGenRel.IsAdmissible.simplicialEvalσ_succ_getElem, SimplexCategoryGenRel.exists_normal_form_P_σ, SimplexCategoryGenRel.mem_isAdmissible_of_lt_and_eval_eq_eval_add_one, SimplexCategoryGenRel.simplicialEvalσ",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech stable sorting prism homotopy identity minus sorting and contraction of repeated nondecreasing tuples",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechKernelNullHomotopic",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "proof: ordered restriction is a homotopy equivalence; the sorting and repeated-tuple contractions of 01FM",
+   "via": [
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSecondSortingIdentity",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSecondSortingIdentity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechSecondSortingIdentity",
+  "statement": "theorem cechSecondSortingIdentity (X : Scheme.{u}) {I : Type v} [LinearOrder I] (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w}) (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤))) (p : ℕ) : (Homotopy.nullHomotopicMap' (cechSecondSortingFamily X U F S)).f p = cechStableSortingMap X U F S p - cechAlternatingProjectionMap X U F S p",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1685962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1685962",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

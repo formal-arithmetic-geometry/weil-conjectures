@@ -1,0 +1,123 @@
+{
+ "id": "def-pc-alternating-cech-sorting-operators",
+ "kind": "definition",
+ "title": "Explicit finite-sum Cech sorting and contraction operators",
+ "statement": "Let X be a scheme, I a linearly ordered type, U : I -> Opens(X) any family, F an abelian-group presheaf, and S a SiteCechComplex for U over the terminal open [def-pc-scheme, def-sc-zariski-site, def-weil-pbc-site-cech-complex]. For a tuple t, stable permutations sigma order the pairs (t(k),k) lexicographically. Partial permutations tau_a agree with sigma before a and list the unused original positions increasingly after that. Define kappa_p by summing sign(sigma) times pullback of the t composed sigma coordinate over stable permutations. Define P_p by the same sum over permutations for which t composed sigma is strictly increasing. Define H_p on a (p+1)-cochain by summing (-1)^a sign(tau_a) times the coordinate on the junction tuple (t(sigma(0)),...,t(sigma(a)),t(tau_a(a)),...,t(tau_a(p))), transported by S.indexMap, over sigma,a,tau_a satisfying these finite filters. Define K_p by summing sign(sigma)(-1)^a times the coordinate on the sorted tuple with its first repeated entry at position a duplicated, again transported by S.indexMap. All sums range over finite permutations and positions; no unproved existence theorem supplies data. Extend H_p and K_p by equality transport to adjacent pairs i=j+1, as the families cechFirstSortingFamily and cechSecondSortingFamily.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equations 20.23.6.1 and 20.23.6.2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM; finite-sum implementation of its operators"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*sort|sort.*cech|semi.?ordered|semi.?alternating|first.?repeat",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed stable sorting of Cech tuples chain homotopy and duplicate first repeated entry contraction",
+   "results": "No matching ordered Cech operator or identity. Candidates: SimplexCategoryGenRel.lt_and_eval_eq_eval_add_one_of_mem_isAdmissible, SimplexCategoryGenRel.simplicialInsert, SimplexCategoryGenRel.mem_isAdmissible_iff, SimplexCategoryGenRel.simplicialEvalσ_of_isAdmissible, SimplexCategoryGenRel.IsAdmissible.simplicialEvalσ_succ_getElem, SimplexCategoryGenRel.exists_normal_form_P_σ, SimplexCategoryGenRel.mem_isAdmissible_of_lt_and_eval_eq_eval_add_one, SimplexCategoryGenRel.simplicialEvalσ",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech stable sorting prism homotopy identity minus sorting and contraction of repeated nondecreasing tuples",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechKernelNullHomotopic",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projective-space-cohomology-bound",
+   "place": "proof: ordered restriction is a homotopy equivalence; the sorting and repeated-tuple contractions of 01FM",
+   "via": [
+    "lem-pc-alternating-cech-kernel-null-homotopic",
+    "lem-pc-alternating-cech-restriction-homotopy",
+    "lem-pc-alternating-cech-computes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechSortingOperators",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechSortingOperators.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechFirstSortingHom",
+  "statement": "def cechFirstSortingHom (p : ℕ) : S.cochains F (p + 1) ⟶ S.cochains F p",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cechStableSort",
+   "AlgebraicGeometry.Scheme.cechPartialSort",
+   "AlgebraicGeometry.Scheme.cechJunction",
+   "AlgebraicGeometry.Scheme.cechFirstRepeat",
+   "AlgebraicGeometry.Scheme.cechStableSortingMap",
+   "AlgebraicGeometry.Scheme.cechAlternatingProjectionMap",
+   "AlgebraicGeometry.Scheme.cechFirstSortingHom",
+   "AlgebraicGeometry.Scheme.cechSecondSortingHom",
+   "AlgebraicGeometry.Scheme.cechFirstSortingFamily",
+   "AlgebraicGeometry.Scheme.cechSecondSortingFamily"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1685962",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T135303-L-1685962",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
