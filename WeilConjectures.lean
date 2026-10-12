@@ -261,6 +261,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.VanishingOnOpen
 public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 public import WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
@@ -272,6 +273,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.G
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Limit
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Normalization
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Purity
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Trait
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.Chart
@@ -292,6 +294,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresent
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.GeometricFiber
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.PointedCover
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+public import WeilConjectures.AlgebraicGeometry.Morphisms.PuritySmooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing

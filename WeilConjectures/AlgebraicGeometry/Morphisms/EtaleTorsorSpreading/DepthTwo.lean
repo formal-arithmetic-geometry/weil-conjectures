@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Datum
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Purity
 
 /-!
 # The case of depth at least two of the spreading theorem
@@ -60,15 +60,16 @@ extension over the fibre; proof of the claim in [Stacks 0EYJ]): over a Noetheria
 point `s` of codimension at least two, if the normalization `N ⟶ C` is étale over all strict
 generizations of `s` and over `σ(s)`, it is étale over all of `C_s`.
 
-Proof sketch. The étale locus `E` of `N ⟶ C` is open, contains `C_U` (`U` the punctured
-spectrum of `𝒪_{S,s}`) and the points over `σ(s)`, hence the generic point of the irreducible
-fibre `C_s`, so `E ∩ C_s` is dense in `C_s`. By [Stacks 0EYB] (applied over `Spec 𝒪_{S,s}`,
-whose points of depth at most one lie in `U`), `FÉt_C ⟶ FÉt_E` is an equivalence, so `N|_E`
-extends to a finite étale `C`-scheme, which is normal and hence equal to the normalization
-`N`. -/
+Proof. This is `AlgebraicGeometry.Scheme.SpreadingDatum.etaleOver_of_etaleOverSection`: the
+étale locus `E` of `N ⟶ C` contains `C_U` (`U` the punctured spectrum of `𝒪_{S,s}`) and the
+points over `σ(s)`, hence the generic point of the irreducible fibre `C_s`, so `E ∩ C_s` is dense
+in `C_s`. By [Stacks 0EYB] (applied over `Spec 𝒪_{S,s}`, whose points of depth at most one lie
+in `U`; through `AlgebraicGeometry.Scheme.Hom.mem_etaleLocus_fromNormalization_of_smooth`),
+`N|_E` extends to a finite étale `C`-scheme, which is normal and hence equal to `N`. -/
 theorem etaleOver_of_two_le_coheight [IsNoetherian D.S] (s : D.S)
     (hs : 2 ≤ Order.coheight s) (H : ∀ s' : D.S, s' ⤳ s → s' ≠ s → D.EtaleOver s')
     (hsec : D.EtaleOverSection s) : D.EtaleOver s :=
-  sorry
+  D.etaleOver_of_etaleOverSection
+    (D.ne_genericPoint_of_coheight_ne_zero fun h ↦ by simp [h] at hs) H hsec
 
 end AlgebraicGeometry.Scheme.SpreadingDatum

@@ -5,7 +5,7 @@ Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Datum
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading.Purity
 
 /-!
 # The trait case of the spreading theorem
@@ -57,17 +57,28 @@ first paragraph of the proof of [Stacks 0EYJ]): over a Noetherian base, at a poi
 codimension one, if the normalization `N ⟶ C` is étale over the generic point and over `σ(s)`,
 it is étale over all of `C_s`.
 
-Proof sketch. The étale locus of `N ⟶ C` is open; it contains the points over `σ(s)`, hence
-(going up for the integral `N ⟶ C`) the points over the generic point of the fibre `C_s`, which
-is irreducible (smooth with geometrically connected fibres) and specializes to `σ(s)`. So `N` is
-unramified over `C` in codimension one. `C` is regular at the points of `C_s` (smooth over the
-discrete valuation ring `𝒪_{S,s}`), and `N` is normal and finite over `C` (normalization of a
-normal Noetherian scheme in a finite separable extension), so the purity of the branch locus
-[Stacks 0BMB] (equivalently purity across the regular divisor `C_s`, [Stacks 0EYE]) shows that
-`N` is étale at every point over `s`. -/
+Proof. The only strict generization of `s` is the generic point of `S`, so this is
+`AlgebraicGeometry.Scheme.SpreadingDatum.etaleOver_of_etaleOverSection`: the generic point of the
+irreducible fibre `C_s` specializes to `σ(s)`, so `N` is unramified over `C` in codimension one;
+`C` is regular along `C_s` (smooth over the discrete valuation ring `𝒪_{S,s}`), and purity
+across the regular divisor `C_s` ([Stacks 0EYE], through
+`AlgebraicGeometry.Scheme.Hom.mem_etaleLocus_fromNormalization_of_smooth`) shows that `N` is
+étale at every point over `s`. -/
 theorem etaleOver_of_coheight_eq_one [IsNoetherian D.S] (s : D.S)
     (hs : Order.coheight s = 1) (hη : D.EtaleOver (genericPoint D.S))
-    (hsec : D.EtaleOverSection s) : D.EtaleOver s :=
-  sorry
+    (hsec : D.EtaleOverSection s) : D.EtaleOver s := by
+  refine D.etaleOver_of_etaleOverSection (D.ne_genericPoint_of_coheight_ne_zero (by simp [hs]))
+    (fun s' hs' hne ↦ ?_) hsec
+  have hlt : s < s' := lt_of_le_not_ge (Scheme.le_iff_specializes.2 hs')
+    fun h ↦ hne (Inseparable.eq ((Scheme.le_iff_specializes.1 h).antisymm hs')).symm
+  have h1 := Order.coheight_add_one_le hlt
+  rw [hs] at h1
+  have h0 : Order.coheight s' = 0 := by
+    induction h : Order.coheight s' using ENat.recTopCoe with
+    | top => simp [h] at h1
+    | coe n => rw [h] at h1; norm_cast at h1 ⊢; omega
+  by_cases h : s' = genericPoint D.S
+  · exact h ▸ hη
+  · exact absurd h0 (coheight_ne_zero_of_ne_genericPoint s' h)
 
 end AlgebraicGeometry.Scheme.SpreadingDatum
