@@ -15,21 +15,38 @@
  ],
  "proof": [
   {
-   "text": "Over an etale object W, trivialize the pulled-back torsor on an etale\ncover of W. An invariant function has the same value on all translates of a\nlocal torsor section, so evaluation gives a locally constant function on each\nmember of this cover. A different section differs locally by a group element;\ninvariance makes the evaluations identical. They therefore glue uniquely on\nW. Conversely pull back a locally constant function on W to the torsor; it is\ninvariant. Surjectivity of the torsor and its local trivializations show that\nthese operations are inverse. They commute with restriction and pointwise\nmodule operations, including restriction of scalars. Locally constant functions\non W identify with sections of the constant coefficient sheaf: the constant\npresheaf maps to them by constant functions; any locally constant function is\nlocally in its image on its open fibers, and equality of two such sections is\nlocal. This gives the identification after sheafification of the constant\npresheaf. On the empty object both section modules are zero. -/",
+   "text": "Construct the natural linear map from the constant coefficient presheaf to invariant sections by constant functions. It is locally injective: equality can be evaluated at a lift of any point along the surjective pullback of the torsor. If distinct coefficients have equal images, the base object is empty and the empty covering witnesses local equality.",
    "uses": [
     "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an invariant section s over W, cover W times_V c.P by the open fibers U_a of s, regarded as etale objects over c.P and hence over V. Their maps to W jointly cover W because the torsor projection is surjective. On U_a, evaluate both the restricted invariant section and the constant coefficient a on the graph U_a to c.P. The graph followed by section restriction is the inclusion U_a to W times_V c.P, so both evaluations equal a. The injective half of diagonalEvaluation_bijective proves equality of the sections. This proves local surjectivity without a global function-descent theorem.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module",
+    "lem-weil-pbc-torsor-diagonal-evaluation-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The restricted equivariant presheaf is a sheaf by equivariantModulePresheaf_isSheaf. Lift the constant-to-invariant map along sheafification. Mathlib toSheafify_sheafifyLift and Presheaf.comp_isLocallyInjective_iff / comp_isLocallySurjective_iff transfer local bijectivity to this lift. Apply Mathlib Sheaf.isLocallyBijective_iff_isIso, then pass to underlying presheaves and reverse the isomorphism.",
+   "uses": [
+    "lem-weil-pbc-torsor-equivariant-presheaf-sheaf"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-torsor-associated-module"
+  "def-weil-pbc-torsor-associated-module",
+  "lem-weil-pbc-torsor-diagonal-evaluation-bijective",
+  "lem-weil-pbc-torsor-equivariant-presheaf-sheaf"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "V2 second reader, stage 3",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3)",
-  "note": "Concrete local torsor trivialization argument; the source finite-type comparison is implemented here at the presheaf level for arbitrary modules."
+  "note": "Formal proof from proved diagonal graph evaluation, open-fiber etale coverings, the proved equivariant sheaf condition, and Mathlib local bijectivity. No new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -102,10 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a2263",
-  "group": "R1",
+  "reviewer": "COMPILER",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T131109-L-1340790",
-  "kind": "interface"
+  "landing": "20261012T163622-L-2788394",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
