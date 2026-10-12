@@ -18,43 +18,29 @@
  },
  "proof": [
   {
-   "text": "Identify the supplied additive F with the recorded tensor pullback. K-flat preservation identifies the images of K-flat complexes with K-flat complexes. Compare the supplied derived counit with the recorded K-flat computation by uniqueness of left-derived functors; it is invertible on K-flat objects.",
+   "text": "Construct the natural tensor comparison on K-flat cochain representatives, with its component equation. This is only the model-class argument, before localization.",
    "uses": [
-    "def-pc-derived-pullback",
-    "lem-pc-kflat-pullback-preservation"
+    "lem-pc-derived-pullback-kflat-tensor-model"
    ],
    "elementary": false
   },
   {
-   "text": "The tensor of two K-flat complexes is K-flat. The recorded localization tensorators are invertible on K-flat pairs and on their images under F. On such a pair write A=L(mu_Q), B=epsilon followed by Q(phi), C=(epsilon tensor epsilon) followed by mu_Q. The hypothesis gives invertibility of B; the other maps are invertible by the preceding computation. Define the comparison C;B inverse;A inverse. Cancellation proves mu;A;B=C.",
+   "text": "Extend the family by kFlat_bifunctor_iso_descent, whose proof uses functorial flat resolutions and Mathlib lift₂NatIso. Postcompose its component equality by the three recorded comparison maps using congrArg, and compose this equality with the representative equation using Eq.trans.",
    "uses": [
-    "lem-pc-kflat-tensor-product",
-    "def-pc-scheme-derived-tensor-structure"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Resolve each argument by a K-flat complex. Naturality of epsilon, phi and the localization tensorator makes the formula compatible with maps and comparison quasi-isomorphisms of K-flat complexes. Localize the resolving class in both variables to extend the comparison to a natural transformation of derived bifunctors. Descend the inverse formula in the same way; the inverse identities hold on the resolving class and hence throughout. Its restriction retains the prescribed equation.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-kflat-bifunctor-iso-descent"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-tensor-product"
+  "lem-pc-derived-pullback-kflat-tensor-model",
+  "lem-pc-kflat-bifunctor-iso-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
   "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, steps 1 and 2",
-  "note": "Refinement of the parent proof. Stacks establishes the K-flat bifunctor comparison; the detailed coherence checks with the supplied counit and summand formula are written by this worker."
+  "note": "Representative comparison split off; actual localization descent proved in Lean with Mathlib lift₂NatIso."
  },
  "mathlib_searches": [
   {
@@ -132,11 +118,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9c512",
-  "group": "Y2",
+  "reviewer": "COMPILER",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T184400-L-4025866",
+  "landing": "20261012T223413-L-1639741",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and repository declarations; all modules and the direct importer compiled cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

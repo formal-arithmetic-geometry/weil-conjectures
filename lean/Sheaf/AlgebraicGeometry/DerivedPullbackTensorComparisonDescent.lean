@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
-import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Algebra.Homology.KFlatTensorProduct
+import Sheaf.AlgebraicGeometry.DerivedPullbackKFlatTensorModel
+import Sheaf.AlgebraicGeometry.KFlatBifunctorIsoDescent
 
 /-! # Natural tensor comparison of derived pullback
 
@@ -145,6 +144,18 @@ theorem derivedPullback_tensor_comparison_exists {T X : Scheme.{uModel}} (g : T 
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
               Functor.LaxMonoidal.μ DerivedCategory.Q
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
-                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) := by sorry
+                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N)  := by
+  obtain ⟨e, he, henat⟩ := derivedPullback_kFlat_tensor_model g F hF hmap ε hε
+    φ hnatural hiso
+  obtain ⟨μ, hμ⟩ := kFlat_bifunctor_iso_descent X
+    (curriedTensorPre (derivedPullback g)) (curriedTensorPost (derivedPullback g)) e henat
+  refine ⟨μ, ?_⟩
+  intro P N hP hN
+  refine Eq.trans ?_ (he P N hP hN)
+  exact congrArg (fun a ↦ a ≫
+    (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫
+    ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
+      (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫
+    DerivedCategory.Q.map (φ P N).hom) (hμ P N hP hN)
 
 end AlgebraicGeometry
