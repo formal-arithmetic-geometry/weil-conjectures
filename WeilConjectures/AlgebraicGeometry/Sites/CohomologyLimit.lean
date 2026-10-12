@@ -102,6 +102,104 @@ theorem cohomologyRestrictOver_cohomologyClass {Y Z : Scheme.{u}} (pY : Y ⟶ S)
   rw [Etale.cohomologyRestrict_cohomologyClass]
   rfl
 
+
+section SchemeDiagram
+
+variable {I : Type u} [SmallCategory I] [IsCofiltered I] {D : I ⥤ Scheme.{u}}
+  [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
+  [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] {c : Cone D} (hc : IsLimit c)
+  (π : D ⟶ (Functor.const I).obj S) (P : c.pt ⟶ S) (hP : ∀ i, P = c.π.app i ≫ π.app i)
+  (F : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+
+open SemiSimplicialObject
+
+include hc in
+/-- **Continuity of étale cohomology, surjectivity**, for a cofiltered diagram of schemes `Dᵢ`
+over `S` with limit `X`: every cohomology class of the pullback of `F` to `X` comes from some
+`Dᵢ`. -/
+theorem exists_cohomologyRestrictOver_eq_of_isLimit_of_scheme (q : ℕ)
+    (x : Ext (constSheaf c.pt.smallEtaleTopology Λ)
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) P).obj F) q) :
+    ∃ (i : I) (y : Ext (constSheaf (D.obj i).smallEtaleTopology Λ)
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) (π.app i)).obj F) q),
+      cohomologyRestrictOver Λ P (π.app i) (c.π.app i) (hP i).symm F q y = x := by
+  have : CompactSpace c.pt := Scheme.compactSpace_of_isLimit D c hc
+  have : QuasiSeparatedSpace c.pt := quasiSeparatedSpace_pt hc
+  obtain ⟨U, hU, z, hz, rfl⟩ := Scheme.exists_cohomologyClass_eq_of_isQcqsHypercover Λ _ q x
+  obtain ⟨k, ⟨d⟩⟩ := exists_truncatedDescent hc U
+    (fun n ↦ ⟨hU.compactSpace n, hU.quasiSeparatedSpace n⟩) (q + 1)
+  obtain ⟨k₀, f₀, hhyp⟩ := d.exists_isHypercover hc hU.isHypercover
+  -- the cocycle descends to a section at a stage
+  obtain ⟨_, _⟩ := (d.baseChange (𝟙 k)).qcqs_cosk q (by omega)
+  obtain ⟨K, h, hK⟩ := ModuleSheaf.exists_restrictAlong_eq_of_isLimit hc π P hP F
+    ((d.baseChange (𝟙 k)).T.cosk.obj q) ((d.baseChange (𝟙 k)).toCoskLeft q (by omega))
+    ((d.baseChange (𝟙 k)).isPullback_toCoskLeft q (by omega)) z
+  obtain ⟨k₁, a₁, b₁, hab⟩ := IsCofiltered.cospan h f₀
+  obtain ⟨s₁, hs₁⟩ := hK a₁ ((d.baseChange (a₁ ≫ h)).T.cosk.obj q)
+    (d.coskTransition (𝟙 k) (a₁ ≫ h) (a₁ ≫ h) (Category.comp_id _) q (by omega))
+    (by rw [d.coskTransition_hom])
+    ((d.baseChange (a₁ ≫ h)).toCoskLeft q (by omega))
+    ((d.baseChange (a₁ ≫ h)).toCoskLeft_hom q (by omega))
+    (d.toCoskLeft_coskTransition _ _ _ _ q (by omega))
+  -- the cocycle condition holds at a later stage
+  have hσ : ModuleSheaf.restrictAlong (π.app k₁) F (c.π.app k₁) P (hP k₁)
+      ((d.baseChange (a₁ ≫ h)).toCoskLeft (q + 1) le_rfl)
+      ((d.baseChange (a₁ ≫ h)).toCoskLeft_hom (q + 1) le_rfl)
+      (((d.baseChange (a₁ ≫ h)).T.cosk.cochainDifferential
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) (π.app k₁)).obj F).obj q).hom s₁) = 0 := by
+    rw [← ModuleSheaf.cochainDifferential_restrictAlong (π.app k₁) F (c.π.app k₁) P (hP k₁)
+      (A := U) (B := (d.baseChange (a₁ ≫ h)).T.cosk) q
+      ((d.baseChange (a₁ ≫ h)).toCoskLeft q (by omega))
+      ((d.baseChange (a₁ ≫ h)).toCoskLeft_hom q (by omega))
+      ((d.baseChange (a₁ ≫ h)).toCoskLeft (q + 1) le_rfl)
+      ((d.baseChange (a₁ ≫ h)).toCoskLeft_hom (q + 1) le_rfl)
+      (fun i ↦ (d.baseChange (a₁ ≫ h)).toCoskLeft_δ q (Nat.lt_succ_self q) i), hs₁]
+    exact hz
+  obtain ⟨_, _⟩ := (d.baseChange (a₁ ≫ h)).qcqs_cosk (q + 1) le_rfl
+  obtain ⟨K₂, g₂, hK₂⟩ := ModuleSheaf.exists_restrictAlong_eq_zero_of_isLimit hc π P hP F
+    ((d.baseChange (a₁ ≫ h)).T.cosk.obj (q + 1))
+    ((d.baseChange (a₁ ≫ h)).toCoskLeft (q + 1) le_rfl)
+    ((d.baseChange (a₁ ≫ h)).isPullback_toCoskLeft (q + 1) le_rfl) _ hσ
+  -- the hypercover and the cocycle at the stage `K₂`
+  have hH : (d.baseChange (g₂ ≫ a₁ ≫ h)).T.cosk.IsHypercover (D.obj K₂).smallEtaleTopology := by
+    have H := hhyp K₂ (g₂ ≫ b₁)
+    rwa [Category.assoc, ← hab] at H
+  let tr := d.coskTransition (a₁ ≫ h) g₂ (g₂ ≫ a₁ ≫ h) rfl
+  let s₂ := ModuleSheaf.restrictAlong (π.app k₁) F (D.map g₂) (π.app K₂)
+    (Etale.app_eq_map_comp_app π g₂)
+    (tr q (by omega)) (d.coskTransition_hom _ _ _ _ q (by omega)) s₁
+  have hs₂ : (d.baseChange (g₂ ≫ a₁ ≫ h)).T.cosk.IsCocycle _ q s₂ := by
+    rw [IsCocycle, ModuleSheaf.cochainDifferential_restrictAlong (π.app k₁) F (D.map g₂)
+      (π.app K₂) (Etale.app_eq_map_comp_app π g₂) (A := (d.baseChange (g₂ ≫ a₁ ≫ h)).T.cosk)
+      (B := (d.baseChange (a₁ ≫ h)).T.cosk) q (tr q (by omega))
+      (d.coskTransition_hom _ _ _ _ q (by omega)) (tr (q + 1) le_rfl)
+      (d.coskTransition_hom _ _ _ _ (q + 1) le_rfl)
+      (fun i ↦ d.coskTransition_δ _ _ _ _ q (by omega) i)]
+    exact hK₂ (𝟙 _) g₂ (Category.id_comp _) _ _ _
+  have hres : ModuleSheaf.restrictAlong (π.app K₂) F (c.π.app K₂) P (hP K₂)
+      ((d.baseChange (g₂ ≫ a₁ ≫ h)).toCoskLeft q (by omega))
+      ((d.baseChange (g₂ ≫ a₁ ≫ h)).toCoskLeft_hom q (by omega)) s₂ = z := by
+    rw [ModuleSheaf.restrictAlong_restrictAlong,
+      ModuleSheaf.restrictAlong_congr_hom F _ _ _ (c.w g₂),
+      ModuleSheaf.restrictAlong_congr _ _ _ _ _ _
+        (d.toCoskLeft_coskTransition _ _ _ _ q (by omega))]
+    exact hs₁
+  refine ⟨K₂, hH.cohomologyClass _ q s₂ hs₂, ?_⟩
+  rw [cohomologyRestrictOver_cohomologyClass Λ P (π.app K₂) (c.π.app K₂) (hP K₂).symm F q hH s₂
+    hs₂ hU.isHypercover (fun n _ ↦ (d.baseChange (g₂ ≫ a₁ ≫ h)).toCoskLeft n (by omega))
+    (fun n _ ↦ (d.baseChange (g₂ ≫ a₁ ≫ h)).toCoskLeft_hom n (by omega))
+    (fun n hn i ↦ (d.baseChange (g₂ ≫ a₁ ≫ h)).toCoskLeft_δ n (by omega) i) (hres ▸ hz)]
+  exact hU.isHypercover.cohomologyClass_congr _ q hres _ _
+
+end SchemeDiagram
+/-- The structure morphisms `Dᵢ ⟶ S` of a diagram of schemes over `S`, as a natural
+transformation from the underlying diagram of schemes to the constant diagram. -/
+@[simps]
+def _root_.CategoryTheory.Over.forgetπ {I : Type*} [Category* I] (D : I ⥤ Over S) :
+    D ⋙ Over.forget S ⟶ (Functor.const I).obj S where
+  app i := (D.obj i).hom
+  naturality _ _ f := by simp
+
 variable {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over S)
   [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left]
   [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]
@@ -119,8 +217,15 @@ theorem exists_cohomologyRestrictOver_eq_of_isLimit (q : ℕ)
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) c.pt.hom).obj F) q) :
     ∃ (i : I) (y : Ext (SemiSimplicialObject.constSheaf (D.obj i).left.smallEtaleTopology Λ)
         ((Etale.upperStar (ModuleCat.{u + 1} Λ) (D.obj i).hom).obj F) q),
-      cohomologyRestrictOver Λ c.pt.hom (D.obj i).hom (c.π.app i).left (Over.w _) F q y = x :=
-  sorry
+      cohomologyRestrictOver Λ c.pt.hom (D.obj i).hom (c.π.app i).left (Over.w _) F q y = x := by
+  have (i : I) : CompactSpace ((D ⋙ Over.forget S).obj i) :=
+    inferInstanceAs (CompactSpace (D.obj i).left)
+  have (i : I) : QuasiSeparatedSpace ((D ⋙ Over.forget S).obj i) :=
+    inferInstanceAs (QuasiSeparatedSpace (D.obj i).left)
+  have {i j : I} (f : i ⟶ j) : IsAffineHom ((D ⋙ Over.forget S).map f) :=
+    inferInstanceAs (IsAffineHom (D.map f).left)
+  exact exists_cohomologyRestrictOver_eq_of_isLimit_of_scheme Λ hc (Over.forgetπ D) c.pt.hom
+    (fun i ↦ (Over.w (c.π.app i)).symm) F q x
 
 /-- **Continuity of étale cohomology, injectivity** (blueprint
 `lemma-weil-pbc-etale-cohomology-continuity`): a cohomology class of the pullback of `F` to some
