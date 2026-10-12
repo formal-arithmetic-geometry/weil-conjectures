@@ -359,12 +359,16 @@ noncomputable def descentCompIso (Φ : CompatibleFamily F G) (Ψ : CompatibleFam
 
 lemma descent_id_map {X Y : PairCategory F} (f : X ⟶ Y) :
     (CompatibleFamily.id F).descent.map f = f := by
-  simpa using descentIdIso.hom.naturality f
+  have := descentIdIso.hom.naturality f
+  erw [comp_id, id_comp] at this
+  exact this
 
 lemma descent_comp_map (Φ : CompatibleFamily F G) (Ψ : CompatibleFamily G H)
     {X Y : PairCategory F} (f : X ⟶ Y) :
     (Φ.comp Ψ).descent.map f = Ψ.descent.map (Φ.descent.map f) := by
-  simpa using (descentCompIso Φ Ψ).hom.naturality f
+  have := (descentCompIso Φ Ψ).hom.naturality f
+  erw [comp_id, id_comp] at this
+  exact this
 
 instance Hom.isIso_descent {Φ Ψ : CompatibleFamily F G} (τ : Hom Φ Ψ) [∀ i, IsIso (τ.app i)] :
     IsIso τ.descent := by

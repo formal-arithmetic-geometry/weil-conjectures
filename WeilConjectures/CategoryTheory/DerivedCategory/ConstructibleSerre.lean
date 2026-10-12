@@ -37,24 +37,25 @@ variable (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u})
 instance [IsNoetherianRing Λ] :
     (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderKernels where
   kernels_le := by
-    rintro K _ ⟨_, k, hk, ⟨f, hF, hG⟩⟩
+    rintro _ ⟨f, k, hk, hF, hG⟩
     have : IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
         (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) _ := hF
     have : IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
         (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) _ := hG
     have := IsConstructibleSheaf.kernel f
-    exact IsConstructibleSheaf.of_iso (IsLimit.conePointUniqueUpToIso (kernelIsKernel f) hk)
+    exact IsConstructibleSheaf.of_iso (F := kernel f)
+      (IsLimit.conePointUniqueUpToIso (limit.isLimit _) hk)
 
 instance : (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderCokernels where
   cokernels_le := by
-    rintro K _ ⟨_, k, hk, ⟨f, hF, hG⟩⟩
+    rintro _ ⟨f, k, hk, hF, hG⟩
     have : IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
         (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) _ := hF
     have : IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
         (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) _ := hG
     have := IsConstructibleSheaf.cokernel f
-    exact IsConstructibleSheaf.of_iso
-      (IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk)
+    exact IsConstructibleSheaf.of_iso (F := cokernel f)
+      (IsColimit.coconePointUniqueUpToIso (colimit.isColimit _) hk)
 
 instance [Finite Λ] :
     (Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) X).IsClosedUnderExtensions where

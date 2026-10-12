@@ -341,3 +341,65 @@ theorem exactAt_cechComplex_of_injective (P : Cᵒᵖ ⥤ A) [Injective P] (q : 
 end Exact
 
 end CategoryTheory.Arrow
+
+namespace CategoryTheory.Arrow
+
+variable {C : Type u} [Category.{v} C] (f : Arrow C)
+  [∀ n : ℕ, HasWidePullback.{0} f.right (fun _ : Fin (n + 1) => f.left) fun _ => f.hom]
+  {A : Type w} [Category A] [Abelian A] [HasCoproducts.{v} A]
+
+/-- **Čech complexes of injectives along an exact left adjoint are exact.** Let
+`L : (Cᵒᵖ ⥤ A) ⥤ D` be a homology preserving functor to an abelian category with right adjoint
+`R`, and `I` an injective object of `D`. Then the Čech complex `Č(f, R I)` is exact in positive
+degrees. For `L` the sheafification, this says that Čech complexes of injective sheaves are exact
+in positive degrees. -/
+theorem exactAt_cechComplex_of_adjunction {D : Type*} [Category* D] [Abelian D]
+    {L : (Cᵒᵖ ⥤ A) ⥤ D} {R : D ⥤ (Cᵒᵖ ⥤ A)} (adj : L ⊣ R) [L.PreservesZeroMorphisms]
+    [L.PreservesHomology]
+    (I : D) [Injective I] (q : ℕ) :
+    (f.cechComplex (R.obj I)).ExactAt (q + 1) := by
+  rw [HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 2) (by simp) (by simp),
+    ShortComplex.exact_iff_exact_up_to_refinements]
+  intro T c hc
+  change T ⟶ (f.cechComplex (R.obj I)).X (q + 1) at c
+  change c ≫ (f.cechComplex (R.obj I)).d (q + 1) (q + 1 + 1) = 0 at hc
+  let K := (AlgebraicTopology.alternatingFaceMapComplex _).obj (f.copowerCechNerve T)
+  have hK := (f.exactAt_alternatingFaceMapComplex_copowerCechNerve T q)
+  rw [HomologicalComplex.exactAt_iff' _ (q + 2) (q + 1) q (by simp) (by simp)] at hK
+  have hK' := hK.map L
+  have hd (n : ℕ) : K.d (n + 1) n =
+      ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • (copowerYoneda T).map (f.cechNerve.δ i) :=
+    AlgebraicTopology.AlternatingFaceMapComplex.obj_d_eq _ n
+  have key (n : ℕ) (ψ : K.X n ⟶ R.obj I) : copowerYonedaHom (K.d (n + 1) n ≫ ψ) =
+      ∑ i : Fin (n + 2),
+        (-1 : ℤ) ^ (i : ℕ) • (copowerYonedaHom ψ ≫ (R.obj I).map (f.cechNerve.δ i).op) := by
+    rw [hd, Preadditive.sum_comp, map_sum]
+    refine Finset.sum_congr rfl fun i _ ↦ ?_
+    rw [Preadditive.zsmul_comp, map_zsmul, copowerYonedaHom_map_comp]
+  have key' (n : ℕ) (x : T ⟶ (f.cechComplex (R.obj I)).X n) :
+      x ≫ (f.cechComplex (R.obj I)).d n (n + 1) =
+      ∑ i : Fin (n + 2), (-1 : ℤ) ^ (i : ℕ) • (x ≫ (R.obj I).map (f.cechNerve.δ i).op) :=
+    (congrArg (x ≫ ·) (f.cechComplex_d (R.obj I) n)).trans ((Preadditive.comp_sum _ _ _).trans
+      (Finset.sum_congr rfl fun i _ ↦ Preadditive.comp_zsmul _ _ _))
+  let φ : K.X (q + 1) ⟶ R.obj I := copowerYonedaDesc c
+  have hφc : copowerYonedaHom φ = c := copowerYonedaHom_desc c
+  have hφ : K.d (q + 1 + 1) (q + 1) ≫ φ = 0 := by
+    refine copowerYonedaHom_injective ?_
+    rw [key, map_zero, hφc]
+    exact (key' (q + 1) c).symm.trans hc
+  have hφ' : L.map (K.d (q + 1 + 1) (q + 1)) ≫ (adj.homEquiv _ _).symm φ = 0 := by
+    rw [← adj.homEquiv_naturality_left_symm, hφ]
+    simp
+  let ψ' := hK'.descToInjective ((adj.homEquiv _ _).symm φ) hφ'
+  have hψ' : L.map (K.d (q + 1) q) ≫ ψ' = (adj.homEquiv _ _).symm φ :=
+    hK'.comp_descToInjective _ hφ'
+  let ψ : K.X q ⟶ R.obj I := adj.homEquiv _ _ ψ'
+  have hψ : K.d (q + 1) q ≫ ψ = φ := by
+    rw [← adj.homEquiv_naturality_left, hψ', Equiv.apply_symm_apply]
+  refine ⟨T, 𝟙 T, inferInstance, copowerYonedaHom ψ, ?_⟩
+  refine (Category.id_comp c).trans ?_
+  have h₁ := key q ψ
+  rw [hψ, hφc] at h₁
+  exact h₁.trans (key' q (copowerYonedaHom ψ)).symm
+
+end CategoryTheory.Arrow

@@ -75,7 +75,8 @@ is flat.
 each variable tensoring is a left adjoint — so `tensorLeft (∐ f)` is the colimit of the
 `tensorLeft (f i)`, that is, the composite of `A ⥤ Discrete I ⥤ A` with
 `colim : (Discrete I ⥤ A) ⥤ A`. The first factor is left exact because each
-`tensorLeft (f i)` is, and `colim` is left exact by `AB4`. -/
+`tensorLeft (f i)` is, and `colim` is left exact by `AB4`.
+This is blueprint `lem-weil-pbc-flat-coproduct`. -/
 lemma flat_coproduct {I : Type u} (f : I → A) (hf : ∀ i, flat (f i)) :
     flat (∐ f) := by
   have (i : I) : PreservesFiniteLimits (tensorLeft (f i)) :=

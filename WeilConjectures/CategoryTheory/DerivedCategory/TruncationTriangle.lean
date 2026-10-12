@@ -202,6 +202,15 @@ lemma truncLEι_app_Q (n : ℤ) (K : CochainComplex C ℤ) :
   erw [comp_id, comp_id]
   rfl
 
+variable (C) in
+@[reassoc (attr := simp)]
+lemma truncLEMapOfLE_comp_truncLEι (a b : ℤ) (h : a ≤ b) :
+    truncLEMapOfLE C a b h ≫ truncLEι C b = truncLEι C a := by
+  refine Localization.natTrans_ext Q (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+    (fun K ↦ ?_)
+  rw [NatTrans.comp_app, truncLEMapOfLE_app_Q, truncLEι_app_Q, truncLEι_app_Q, assoc, assoc,
+    Iso.inv_hom_id_assoc, ← Q.map_comp, K.truncLEMapOfLE_ιTruncLE a b h]
+
 /-- This is blueprint `lem-weil-pbc-truncation-descends` (b): on the image of a complex `K`, the
 projection `τ_{≤ q} ⟶ H^q(-)[-q]` is `Q` of the projection of complexes. -/
 @[reassoc]

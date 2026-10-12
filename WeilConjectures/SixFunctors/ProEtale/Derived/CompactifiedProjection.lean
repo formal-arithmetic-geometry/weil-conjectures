@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.PerfectProjection
 
 Let `f : X ⟶ Y` be a morphism of schemes with a compactification
 `c = (X ⟶[j] X̄ ⟶[p] Y)` (blueprint `def-weil-pbc-projection-compactification`, the functor
-`Rf_!^{(j,p)} = Rp_* ∘ j_!` being `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification`).
+`Rf_!^{(j,p)} = Rp_* ∘ j_!` being
+`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification`).
 The compactified projection map
 ```
 PF_c : (Rp_*j_!E) ⊗ᴸ Q ⟶ Rp_*(j_!E ⊗ᴸ Lp^*Q) ≅ Rp_*j_!(E ⊗ᴸ Lf^*Q)
@@ -73,6 +74,42 @@ lemma isIso_rightDerivedLowerStarProjectionMap_properPiece
       (DerivedCategory.Q.obj F)) :=
   isIso_rightDerivedLowerStarProjectionMap_of_strictPerfectPackage A c.g _ P
 
+omit [ProEtale.UpperStarPreservesFlat A] in
+private lemma comp_hom_comp_inv_comp_eq_id {C : Type*} [Category* C] {a b c : C} (π : a ⟶ b)
+    (e : b ≅ c) (ρ : b ⟶ a) (h : π ≫ ρ = 𝟙 a) : (π ≫ e.hom) ≫ (e.inv ≫ ρ) = 𝟙 a := by
+  simp [h]
+
+omit [ProEtale.UpperStarPreservesFlat A] in
+private lemma inv_comp_comp_hom_eq_id {C : Type*} [Category* C] {a b c : C} (π : a ⟶ b)
+    (e : b ≅ c) (ρ : b ⟶ a) (h : ρ ≫ π = 𝟙 b) : (e.inv ≫ ρ) ≫ (π ≫ e.hom) = 𝟙 c := by
+  simp [reassoc_of% h]
+
+/-- The isomorphism `Rp_*(j_!E ⊗ᴸ Lp^*M) ≅ Rp_*j_!(E ⊗ᴸ Lf^*M)` by which the compactified
+projection map differs from the projection map of the proper piece: `Rp_*` of the open-piece
+isomorphism `θ_j` (`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso`,
+blueprint `lemma-weil-pbc-projection-formula-open-piece`) followed by
+`Lj^*Lp^* ≅ Lf^*`. -/
+noncomputable def compactificationOpenPieceIso
+    (E : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar A c.g).obj
+        (D((c.i)_!open[A]).obj E)).obj M ≅
+      ((rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar A c).obj E).obj M :=
+  R((c.g)_*[A]).mapIso (((derivedOpenImmersionLowerShriekProjectionIso A c.i).app E).app
+      (L((c.g)^*[A]).obj M)).symm ≪≫
+    R((c.g)_*[A]).mapIso (D((c.i)_!open[A]).mapIso (((-⊗ᴸ-(X)[A]).obj E).mapIso
+      ((leftDerivedUpperStarCompactificationIso A c).app M)))
+
+/-- The compactified projection map `PF_c` is the projection map `π_{p,j_!E,M}` of the proper
+piece followed by `AlgebraicGeometry.ProEtale.compactificationOpenPieceIso`. -/
+lemma projectionMapOfCompactification_app_app_eq
+    (E : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ((projectionMapOfCompactification A c).app E).app M =
+      ((rightDerivedLowerStarProjectionMap A c.g).app (D((c.i)_!open[A]).obj E)).app M ≫
+        (compactificationOpenPieceIso A c E M).hom :=
+  rfl
+
 /-- The compactified projection map `PF_c` at `(E, Q)` is an isomorphism as soon as the
 projection map `π_{p,j_!E,Q}` of the proper piece is one: the remaining factors are
 isomorphisms. -/
@@ -82,8 +119,8 @@ lemma isIso_projectionMapOfCompactification_app_app_of_isIso
     (h : IsIso (((rightDerivedLowerStarProjectionMap A c.g).app (D((c.i)_!open[A]).obj E)).app
       Q)) :
     IsIso (((projectionMapOfCompactification A c).app E).app Q) := by
-  rw [projectionMapOfCompactification_app_app]
-  infer_instance
+  rw [projectionMapOfCompactification_app_app_eq]
+  exact @IsIso.comp_isIso _ _ _ _ _ _ _ h (Iso.isIso_hom _)
 
 /-- The inverse `ρ_{p,j_!E,F} ∘ Rp_*(θ_j⁻¹)` of the compactified projection map of blueprint
 `lemma-weil-pbc-projection-formula-compactified`, for a complex `F` with a strict-perfect
@@ -99,10 +136,7 @@ noncomputable def projectionMapOfCompactificationInv
     ((rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar A c).obj E).obj
         (DerivedCategory.Q.obj F) ⟶
       ((derivedTensorRightDerivedLowerShriek A c).obj E).obj (DerivedCategory.Q.obj F) :=
-  R((c.g)_*[A]).map (D((c.i)_!open[A]).map (((-⊗ᴸ-(X)[A]).obj E).map
-      ((leftDerivedUpperStarCompactificationIso A c).inv.app (DerivedCategory.Q.obj F)))) ≫
-    R((c.g)_*[A]).map (((derivedOpenImmersionLowerShriekProjectionIso A c.i).hom.app E).app
-      (L((c.g)^*[A]).obj (DerivedCategory.Q.obj F))) ≫
+  (compactificationOpenPieceIso A c E (DerivedCategory.Q.obj F)).inv ≫
     rightDerivedLowerStarProjectionInv A c.g (D((c.i)_!open[A]).obj E) P
 
 @[reassoc (attr := simp)]
@@ -112,13 +146,8 @@ lemma projectionMapOfCompactification_comp_inv
     (P : F.StrictPerfectPackage (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) :
     ((projectionMapOfCompactification A c).app E).app (DerivedCategory.Q.obj F) ≫
       projectionMapOfCompactificationInv A c E P = 𝟙 _ := by
-  rw [projectionMapOfCompactification_app_app, projectionMapOfCompactificationInv]
-  simp only [Category.assoc, ← Functor.map_comp_assoc, ← NatTrans.comp_app, Iso.hom_inv_id_app,
-    NatTrans.id_app]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app,
-    NatTrans.id_app, Functor.comp_obj]
-  erw [Category.id_comp]
-  exact rightDerivedLowerStarProjectionMap_comp_inv A c.g _ P
+  rw [projectionMapOfCompactification_app_app_eq, projectionMapOfCompactificationInv]
+  exact comp_hom_comp_inv_comp_eq_id _ _ _ (rightDerivedLowerStarProjectionMap_comp_inv A c.g _ P)
 
 @[reassoc (attr := simp)]
 lemma projectionMapOfCompactificationInv_comp
@@ -127,9 +156,8 @@ lemma projectionMapOfCompactificationInv_comp
     (P : F.StrictPerfectPackage (𝟙_ (Sheaf (Scheme.ProEt.topology Y) A))) :
     projectionMapOfCompactificationInv A c E P ≫
       ((projectionMapOfCompactification A c).app E).app (DerivedCategory.Q.obj F) = 𝟙 _ := by
-  rw [projectionMapOfCompactification_app_app, projectionMapOfCompactificationInv]
-  simp only [Category.assoc, rightDerivedLowerStarProjectionInv_comp_assoc]
-  sorry
+  rw [projectionMapOfCompactification_app_app_eq, projectionMapOfCompactificationInv]
+  exact inv_comp_comp_hom_eq_id _ _ _ (rightDerivedLowerStarProjectionInv_comp A c.g _ P)
 
 /-- **Compactified finite-level projection formula** (blueprint
 `lemma-weil-pbc-projection-formula-compactified`). For a compactification
