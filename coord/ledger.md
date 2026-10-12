@@ -8847,3 +8847,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:04 L: returned deliver/W3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality (reviewer RETURN: (reviewer X-0b6b9, head 0b6b9159e) F: coord/reports/W3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality.)
 - 18:17 L: returned deliver/T2/Sheaf.RingTheory.CompletionAtQuasiFinitePrime (reviewer RETURN: (reviewer X-905d1, head 905d1df18) B9: In dag/nodes/sec-proper-base-change/lem-weil-pbc-completion-local-map-at-prime.js)
 - 18:18 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-f5760, head f5760b1c4) E2, G1: The previous return remains unresolved. In lean/Sheaf/AlgebraicGeometry/Glued)
+- 18:22 L: returned deliver/J3/Sheaf.AlgebraicGeometry.EtaleTensorSections (reviewer RETURN: (reviewer X-c3e5e, head c3e5e9cc3) F4/report: delete the entire `## Earlier second reading (a previous round; superseded)
