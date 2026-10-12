@@ -1,6 +1,6 @@
 # Work queue
 
-1830 items; claim with `tools/claim.py next <group> [--stage N]`.
+1831 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (14)
 
@@ -29,7 +29,7 @@
 
 Not open yet: 47 nodes that wait for stage 1.
 
-## Stage 3: modules to prove (1815)
+## Stage 3: modules to prove (1816)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -742,7 +742,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup` | 8 | 1 | proof |
 | `WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech` | 8 | 2 | proof |
-| `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum` | 8 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition` | 8 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat` | 9 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor` | 9 | 1 | proof |
@@ -871,6 +870,8 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.SerreSectionModuleComparison` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SerreSectionModuleFinite` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula` | 9 | 1 | proof |
