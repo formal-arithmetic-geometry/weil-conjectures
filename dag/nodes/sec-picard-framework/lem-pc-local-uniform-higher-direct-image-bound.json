@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-local-uniform-higher-direct-image-bound",
+ "kind": "statement",
+ "title": "LocalUniformHigherDirectImageBound",
+ "statement": "Let $f:X\\to S$ be a quasi-compact quasi-separated morphism of schemes [def-pc-scheme, def-pc-morphism-conventions], and let $s\\in S$. There are an open neighbourhood $U$ of $s$ and $n\\in\\mathbf N$ such that, for every quasi-coherent module $M$ on $X$ [pqf-def-coherent] and every $p\\ge n$, the restriction of $R^p f_*M$ to $U$ is zero. Here $R^p f_*$ is the ordinary right derived module direct image [def-pc-ringed-spaces-derived-direct-image, def-sc-open-module-cohomology]. No quasi-compactness assumption is made on $S$, and $U,n$ are chosen before $M$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XJ, proof of (3), affine-base finite-cover argument; induction form via Tag 08DR and Tag 01EB"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "pqf-def-coherent",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-open-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open neighbourhood U of s. Its inverse image Y is quasi-compact by quasi-compactness of f and quasi-separated since f is quasi-separated and U is affine. Apply quasi-compact-open induction on Y to the property P(W): there is n_W such that, for every affine T -> U and every quasi-coherent G on T times_U W, all H^p vanish for p >= n_W. The empty open is included.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For W affine take n_W=1: a fibre product of affine schemes over affine U is affine, so affine vanishing applies after every affine base change.",
+   "uses": [
+    "lem-pc-affine-vanishing",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For W1 union W2 use bounds a,b,c for W1, W2, W1 intersection W2. Base change preserves their union and intersection. Restrict G to the three opens; these restrictions remain quasi-coherent. Mayer-Vietoris puts H^p of the union between H^(p-1) of the intersection and H^p of the two opens, all zero for p >= max(a,b,c)+1. Induction gives one bound on Y, independent of G and T.",
+   "uses": [
+    "lem-sc-mayer-vietoris-open-cover",
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply this bound to every affine open T inside U, which is an affine base change of Y -> U. Restrict M and its injective resolution. The resulting open cohomology groups vanish uniformly. Higher direct image is the sheafification of this cohomology presheaf; vanishing on the affine neighbourhood basis makes each stalk zero and hence the restriction of R^p f_*M to U zero. Open restriction of module resolutions identifies the computed group with the ordinary right derived moduleDirectImage in the statement.",
+   "uses": [
+    "lem-weil-pbc-higher-direct-image-presheaf",
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "def-sc-open-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sc-open-module-cohomology",
+  "lem-pc-affine-vanishing",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sc-mayer-vietoris-open-cover",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "lem-weil-pbc-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01XJ, proof of (3), affine-base finite-cover argument; induction form via Tag 08DR and Tag 01EB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image uniform local vanishing quasi coherent module",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quasi compact quasi separated morphism uniform higher direct image vanishing locally on target independent of quasi coherent sheaf",
+   "results": "Eight hits about localization and qcqs scheme sections; no higher direct image bound or affine-open derived section comparison. Loogle rightDerived isomorphism search found only rightDerivedZeroIsoSelf and InjectiveResolution.isoRightDerivedObj.",
+   "date": "2026-10-13",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|openModuleSections|cohomology.*bound in Mathlib/AlgebraicGeometry and Mathlib/Algebra/Category/ModuleCat/Sheaf; local library uniform.*local and higherDirectImage.*iso",
+   "results": "No Mathlib statement. Source DirectImage.Sections has a local bound for one fixed module with IsSeparated, not a bound uniform in all modules under QuasiSeparated. Its section comparison also assumes IsSeparated. Projective has the entire arbitrary-base-change uniform bound but its import reaches this item. Neither new statement duplicates those signatures. Blueprint searches uniform local and 01XK found no matching node.",
+   "date": "2026-10-13",
+   "verdict": "no exact usable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniformInverseAffineSectionsBound",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: compare dualizing sheaves; uniform upper bound in Tag 08D5, ordinary affine section bound; Tag 01XJ, proof of (3), affine-base finite-cover argument; induction form via Tag 08DR and Tag 01EB",
+   "via": [
+    "lem-pc-uniform-inverse-affine-sections-bound",
+    "lem-pc-uniform-direct-image-bound-core",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalUniformHigherDirectImageBound.lean",
+  "declaration": "AlgebraicGeometry.exists_local_uniform_higherDirectImage_bound",
+  "statement": "theorem exists_local_uniform_higherDirectImage_bound\n    {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] (s : S) :\n    ∃ (U : S.Opens) (n : ℕ), s ∈ U ∧\n      ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)), M.IsQuasicoherent →\n        ∀ p : ℕ, n ≤ p → IsZero\n          (Scheme.Modules.restrict\n            (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M)\n            U.ι)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T184358-L-4024947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T184358-L-4024947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

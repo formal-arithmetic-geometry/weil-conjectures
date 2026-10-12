@@ -10,9 +10,9 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.Topology.RestrictInjectiveResolution
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+import Sheaf.AlgebraicGeometry.AffineOpenHigherDirectImageSectionsIso
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Uniform cohomological dimension of inverse images of affine opens
 
@@ -34,18 +34,17 @@ Source: Stacks Project, Tags 01XJ and 01XK; Tag 08D5, proof of (2).
 (blueprint: lem-pc-uniform-inverse-affine-sections-bound).
 
 Proof:
-1. Choose the base-change-stable bound n from Tag 01XJ for f and replace it by
-max(1,n). For an affine open U, its inverse image V maps to U by the base change
-of f. Restriction of a quasi-coherent module M on X to V is quasi-coherent.
-2. Tag 01XJ gives quasi-coherence of every higher direct image of this restriction
-and its vanishing in degrees p >= max(1,n). Affine vanishing makes all positive
-cohomology of those higher direct images zero. The Leray edge therefore identifies
-H^p(V,M|V) with sections of the p-th higher direct image on U (Tag 01XK).
-3. Those sections are zero in the specified range. Restriction of an injective
-module resolution to V remains injective; its sections on V are exactly the
-openModuleSections functor applied to the resolution on X. Thus the same vanishing
-holds for the right derived functors in the conclusion. The bound is independent
-of U and M. Empty opens and zero modules give zero groups without exceptions. -/
+1. Each point s of S has an open neighbourhood V(s) and a bound n(s) for higher
+   direct images, uniform in the quasi-coherent module, by the affine-base part of
+   Tag 01XJ. Compactness gives finitely many such neighbourhoods covering S.
+2. Let N be the maximum of 1 and their finitely many bounds. For p >= N, the p-th
+   higher direct image of any quasi-coherent M is zero on each covering open, hence
+   zero globally: vanishing of module sheaves is local.
+3. For each affine U, the affine-open Leray comparison of Tag 01XK identifies the
+   right derived functor of sections on f^{-1}U with sections on U of this higher
+   direct image. An additive section functor sends a zero object to a zero object.
+   Transport along the comparison gives the conclusion. Empty schemes and opens
+   are included: the finite supremum is zero for an empty cover, and N is still 1. -/
 theorem exists_uniform_inverse_affine_sections_bound
     {X S : Scheme.{u}} (f : X ⟶ S)
     [QuasiCompact f] [QuasiSeparated f] [CompactSpace S] :
@@ -53,6 +52,24 @@ theorem exists_uniform_inverse_affine_sections_bound
       ∀ (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)), M.IsQuasicoherent →
         ∀ p : ℕ, N ≤ p → IsZero
           (((RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ U)).rightDerived p).obj M) :=
-  by sorry
+  by
+  classical
+  choose V n hs hn using exists_local_uniform_higherDirectImage_bound f
+  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover (fun s ↦ (V s : Set S))
+    (fun s ↦ (V s).isOpen) (fun s _ ↦ Set.mem_iUnion.mpr ⟨s, hs s⟩)
+  refine ⟨max 1 (t.sup n), lt_of_lt_of_le Nat.zero_lt_one (le_max_left _ _), ?_⟩
+  intro U hU M hM p hp
+  have hcover : (⨆ s : t, V s) = ⊤ := by
+    apply eq_top_iff.mpr
+    intro s _
+    obtain ⟨i, hi, hsi⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ s))
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨i, hi⟩, hsi⟩
+  have hz : IsZero
+      (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj M) := by
+    apply Scheme.Modules.isZero_of_iSup_eq_top _ (fun s : t ↦ V s) hcover
+    intro s
+    exact hn s M hM p ((Finset.le_sup s.property).trans ((le_max_right _ _).trans hp))
+  obtain ⟨e⟩ := nonempty_affineOpen_higherDirectImage_sections_iso f U hU M hM p
+  exact ((RingedSpace.openModuleSections S.toRingedSpace U).map_isZero hz).of_iso e
 
 end AlgebraicGeometry
