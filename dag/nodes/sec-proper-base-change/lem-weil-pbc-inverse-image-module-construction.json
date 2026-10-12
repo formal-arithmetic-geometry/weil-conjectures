@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-inverse-image-module-construction",
+ "kind": "statement",
+ "title": "Functorial transported module structure on the etale inverse image",
+ "statement": "Let $U,V$ be schemes [def-pc-scheme], $f:U\\to V$ a morphism, and $\\mathcal O$ a sheaf of commutative rings on $V_{\\mathrm{Et}}$ [def-weil-pbc-etale-site]. Let $L$ be the inverse image on sheaves of sets, $a_S:L\\dashv R$ its adjunction, $L_a$ the abelian inverse image and $a:L_a\\dashv R_a$ its fixed adjunction, and $R_r$ the sectionwise direct image on ring sheaves [lem-weil-pbc-etale-inverse-image-algebraic-structures]. Write $F_{r,T}$ and $F_{a,T}$ for the forgetful functors to set sheaves on $T=U,V$. Fix a ring inverse-image functor $L_r$, an adjunction $a_r:L_r\\dashv R_r$, and natural isomorphisms $e_r:L_rF_{r,U}\\cong F_{r,V}L$ and $e_a:L_aF_{a,U}\\cong F_{a,V}L$. Assume the two hom-equivalence equations: for every ring map $h:L_rG\\to F$, $F_{r,V}(a_r(h))=a_S(e_{r,G}^{-1}\\circ F_{r,U}(h))$, and for every abelian map $h:L_aG\\to F$, $F_{a,V}(a(h))=a_S(e_{a,G}^{-1}\\circ F_{a,U}(h))$. Sheaves of modules and their forgetful functors to abelian sheaves are as in [def-weil-sheaf-of-modules-category]. Then there exist a functor $L_M:\\mathrm{Mod}(\\mathcal O)\\to\\mathrm{Mod}(L_r\\mathcal O)$ and a natural isomorphism $e:L_MF_U\\cong F_VL_a$ such that the actual scalar action on every $L_MG$ is the transported action. Explicitly, put $i_G=F_{a,U}(e_G)\\circ e_{a,F_VG}$. There are set-sheaf morphisms $\\mu_V:F_{r,V}\\mathcal O\\times F_{a,V}F_VG\\to F_{a,V}F_VG$ and $\\mu_U:F_{r,U}L_r\\mathcal O\\times F_{a,U}F_UL_MG\\to F_{a,U}F_UL_MG$ whose section maps are the actual scalar multiplications, and $L(\\mu_V)=i_G\\circ\\mu_U\\circ(e_{r,\\mathcal O}^{-1}\\times i_G^{-1})\\circ\\lambda$, where $\\lambda:L(X\\times Y)\\to LX\\times LY$ is the canonical product comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D1 (lemma-pushforward-module), 03D2 (lemma-pullback-module); parent step 1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "proof": [
+  {
+   "text": "Compare the chosen ring and abelian lifts with those of [lem-weil-pbc-etale-inverse-image-algebraic-structures]. The hom-equivalence hypotheses identify the maps on underlying Hom sets. Uniqueness of adjoints [lem-weil-pbc-conjugate-iso-unit-equation] gives the unique ring and abelian isomorphisms intertwining the units. Injectivity of the set hom equivalence identifies their underlying maps with the specified er and ea. Ring and group operations are therefore transported through these maps. Notation for all steps. Write $L=u^{-1}$ and $R=u_*$ for the inverse and direct image on sheaves of sets, with unit $\\eta$ and counit $\\varepsilon$ of $L\\dashv R$ [lem-weil-pbc-etale-inverse-image-algebraic-structures] (1). Since $L$ commutes with finite products (ibid. (1)), $\\lambda_{X,Y}=(L\\mathrm{pr}_1,L\\mathrm{pr}_2):L(X\\times Y)\\to LX\\times LY$ is an isomorphism, natural in $X,Y$ ($\\lambda\\circ L(f\\times g)=(Lf\\times Lg)\\circ\\lambda$, checked on the two projections); $R$ is sectionwise, $(RX)(W)=X(U\\times_VW)$, so $R(X\\times Y)=RX\\times RY$ with $R\\mathrm{pr}_i=\\mathrm{pr}_i$. By ibid. (2), (3), the abelian inverse image of an abelian sheaf $G$ has as underlying sheaf of sets $LG$ (through the canonical isomorphism of (3), suppressed below), its group structure is $L$ of that of $G$, and the adjunction bijection of the abelian adjunction, its unit and its counit are on underlying maps those of $L\\dashv R$; the counit, being the adjoint of the identity, is then determined by the bijection. So for an abelian map $\\alpha:LG\\to F$ its abelian adjoint is $\\beta=R(\\alpha)\\circ\\eta_G$, and $\\alpha=\\varepsilon_F\\circ L(\\beta)$. Write $\\mu_{LG}=L(\\mu_G)\\circ\\lambda^{-1}$ and $\\mu_{RF}=R(\\mu_F)\\circ(\\eta_{\\mathcal O}\\times\\mathrm{id}_{RF}):\\mathcal O\\times RF\\to RL\\mathcal O\\times RF=R(L\\mathcal O\\times F)\\to RF$ for the two actions of the statement. *Step 1 (the module structures are well defined; Stacks 03D1, 03D2).* By [lem-weil-pbc-sheaf-algebraic-structures-objects] finite products of sheaves of sets are sectionwise and sheaves of abelian groups (commutative rings) are the abelian group (commutative ring) objects of $\\Sh$; hence, by [def-weil-sheaf-of-modules-category], a sheaf of $\\mathcal O$-modules is the same as an abelian group object $G$ of $\\Sh(V_{\\Et})$ with a morphism $\\mu_G:\\mathcal O\\times G\\to G$ (a family of maps $\\mathcal O(X)\\times G(X)\\to G(X)$ compatible with restrictions, i.e. scalar multiplications for which restrictions are semilinear) satisfying the module axioms $\\mu\\circ(\\mathrm{id}\\times+)=+\\circ(\\mu\\circ(\\mathrm{pr}_1,\\mathrm{pr}_2),\\mu\\circ(\\mathrm{pr}_1,\\mathrm{pr}_3))$, $\\mu\\circ(+\\times\\mathrm{id})=+\\circ(\\mu\\circ(\\mathrm{pr}_1,\\mathrm{pr}_3),\\mu\\circ(\\mathrm{pr}_2,\\mathrm{pr}_3))$, $\\mu\\circ(\\cdot\\times\\mathrm{id})=\\mu\\circ(\\mathrm{id}\\times\\mu)$, $\\mu\\circ(1\\times\\mathrm{id})=\\mathrm{id}$ as equalities of morphisms of sheaves (they hold as morphisms iff they hold on sections over every $X$), and an $\\mathcal O$-linear map is a morphism of group objects $\\varphi$ with $\\varphi\\circ\\mu_G=\\mu_{G'}\\circ(\\mathrm{id}\\times\\varphi)$. (a) Inverse image (Stacks 03D2). Applying $L$ to the module axioms of $\\mu_G$ and rewriting $L$ of a morphism out of a finite product through the comparison isomorphisms $\\lambda$ (natural, and compatible with the projections), using that the ring structure of $L\\mathcal O$ and the group structure of $LG$ are $L$ of those of $\\mathcal O$ and $G$ composed with $\\lambda^{-1}$ [lem-weil-pbc-etale-inverse-image-algebraic-structures] (2), gives the module axioms for $\\mu_{LG}=L(\\mu_G)\\circ\\lambda^{-1}$; so $LG$ is a sheaf of $L\\mathcal O$-modules. If $\\varphi:G\\to G'$ is $\\mathcal O$-linear, $L\\varphi$ is additive (ibid. (2)) and $L\\varphi\\circ\\mu_{LG}=L(\\varphi\\circ\\mu_G)\\circ\\lambda^{-1}=L(\\mu_{G'}\\circ(\\mathrm{id}\\times\\varphi))\\circ\\lambda^{-1}=L(\\mu_{G'})\\circ\\lambda^{-1}\\circ(\\mathrm{id}\\times L\\varphi)=\\mu_{LG'}\\circ(\\mathrm{id}\\times L\\varphi)$ by naturality of $\\lambda$: $u^{-1}$ is a functor $\\Mod(\\mathcal O)\\to\\Mod(u^{-1}\\mathcal O)$. (b) Direct image (Stacks 03D1). By ibid. (2) the unit $\\eta_{\\mathcal O}:\\mathcal O\\to RL\\mathcal O$ is a morphism of sheaves of rings (it is the unit of the adjunction on sheaves of rings). For a sheaf of $L\\mathcal O$-modules $F$ on $U_{\\Et}$, $(RF)(W)=F(U\\times_VW)$ is a module over $(L\\mathcal O)(U\\times_VW)=(RL\\mathcal O)(W)$, with semilinear restrictions; restricting scalars along the ring maps $\\eta_{\\mathcal O,W}:\\mathcal O(W)\\to(RL\\mathcal O)(W)$, which commute with restrictions, makes $RF$ a sheaf of $\\mathcal O$-modules whose action map is exactly $\\mu_{RF}=R(\\mu_F)\\circ(\\eta_{\\mathcal O}\\times\\mathrm{id})$ (products and $R$ being sectionwise); its abelian sheaf is the direct image of [def-weil-pbc-direct-image]. If $\\psi:F\\to F'$ is $L\\mathcal O$-linear, each $\\psi_{U\\times_VW}$ is $(L\\mathcal O)(U\\times_VW)$-linear, hence $\\mathcal O(W)$-linear through $\\eta_{\\mathcal O,W}$: $R\\psi$ is $\\mathcal O$-linear and $u_*$ is a functor $\\Mod(u^{-1}\\mathcal O)\\to\\Mod(\\mathcal O)$.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemmas 03D1 (lemma-pushforward-module) and 03D2 (lemma-pullback-module), with their proofs; Stacks takes O -> f_*f^{-1}O for the structure in Lemma 03D3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D1 (lemma-pushforward-module), 03D2 (lemma-pullback-module); parent step 1; the counit converse is the explicit agent-written calculation of the parent node"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite product preserving inverse image transports module scalar action to a sheaf of modules",
+   "results": "UNAVAILABLE: service returned Internal Server Error on 2026-10-12. No absence verdict is inferred from this search.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "an abelian sheaf morphism from inverse image is linear if and only if its adjoint under sheaf pullback pushforward is linear over a sheaf of rings",
+   "results": "SheafOfModules.PullbackConstruction.adjunction, pullbackPushforwardAdjunction, pullbackIso; PresheafOfModules.pullbackPushforwardAdjunction. Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:49-114.",
+   "date": "2026-10-12",
+   "verdict": "No exact match: the abstract chosen left adjoint and its presentation do not assert the specified scalar action on the abelian inverse image or the linearity of the abelian adjunct."
+  },
+  {
+   "tool": "grep",
+   "query": "rg adjunction|linear|toSheaf|IsIso Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; rg Mod.*Adjunction|Adjunction.*Mod|comap Mathlib/CategoryTheory/Monoidal/Mod.lean; rg inverse.image.*module dag/nodes lean/Sheaf lean/WeilConjectures",
+   "results": "PullbackContinuous: chosen pullback and explicit presheaf/sheafification adjunction. Mod.lean:403 comap only, no lifted module adjunction. Existing topological InverseImageModule and TopologicalPullback are over opens, not small etale sites. Blueprint searches inverse image modules and 03D2 had zero hits.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate of this strictly partial etale construction or criterion found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "its statement (a notion the statement uses); module inverse image adjunction, Tags 03D1 (lemma-pushforward-module), 03D2 (lemma-pullback-module); parent step 1",
+   "via": [
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageModuleConstruction",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageModuleConstruction.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageModuleConstruction",
+  "statement": "theorem etaleInverseImageModuleConstruction (U V : Scheme.{u}) (f : U ⟶ V) (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) : let L := Scheme.etaleSetPullback f let La := Etale.upperStar AddCommGrpCat.{u + 1} f let a := Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology let FaV := sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology let FrU := sheafForget (D := CommRingCat.{u + 1}) U.smallEtaleTopology let FrV := sheafForget (D := CommRingCat.{u + 1}) V.smallEtaleTopology let b := MorphismProperty.Over.pullback @Etale ⊤ f let aS := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b (Type (u + 1)) (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) let Rr := b.sheafPushforwardContinuous CommRingCat.{u + 1} (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) ∀ (Lr : Sheaf V.smallEtaleTopology CommRingCat.{u + 1} ⥤ Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (ar : Lr ⊣ Rr) (er : Lr ⋙ FrU ≅ FrV ⋙ L), let OR := (sheafCompose U.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Lr.obj O) let OV := (sheafCompose V.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O let FV := SheafOfModules.toSheaf.{u + 1} OV let FU := SheafOfModules.toSheaf.{u + 1} OR ∀ (ea : La ⋙ FaU ≅ FaV ⋙ L), (∀ (G : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) (F : Sheaf U.smallEtaleTopology CommRingCat.{u + 1}) (h : Lr.obj G ⟶ F), FrV.map (ar.homEquiv G F h) = aS.homEquiv (FrV.obj G) (FrU.obj F) (er.inv.app G ≫ FrU.map h)) ∧ (∀ (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}) (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : La.obj G ⟶ F), FaV.map (a.homEquiv G F h) = aS.homEquiv (FaV.obj G) (FaU.obj F) (ea.inv.app G ≫ FaU.map h)) → ∃ (LM : SheafOfModules.{u + 1} OV ⥤ SheafOfModules.{u + 1} OR) (e : LM ⋙ FU ≅ FV ⋙ La), (∀ G : SheafOfModules.{u + 1} OV, let iG := (FaU.mapIso (e.app G)) ≪≫ ea.app (FV.obj G) ∃ (muV : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FaV.obj (FV.obj G)) (muU : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (LM.obj G))) ⟶ FaU.obj (FU.obj (LM.obj G))), (∀ (W : V.Etaleᵒᵖ) (x : ((FrV.obj O) ⨯ (FaV.obj (FV.obj G))).obj.obj W), muV.hom.app W x = @SMul.smul (OV.obj.obj W) (G.val.obj W) (G.val.obj W).isModule.toSMul ((prod.fst : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FrV.obj O).hom.app W x : OV.obj.obj W) ((prod.snd : (FrV.obj O) ⨯ (FaV.obj (FV.obj G)) ⟶ FaV.obj (FV.obj G)).hom.app W x : G.val.obj W)) ∧ (∀ (W : U.Etaleᵒᵖ) (x : ((FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (LM.obj G)))).obj.obj W), muU.hom.app W x = @SMul.smul (OR.obj.obj W) ((LM.obj G).val.obj W) ((LM.obj G).val.obj W).isModule.toSMul ((prod.fst : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (LM.obj G))) ⟶ FrU.obj (Lr.obj O)).hom.app W x : OR.obj.obj W) ((prod.snd : (FrU.obj (Lr.obj O)) ⨯ (FaU.obj (FU.obj (LM.obj G))) ⟶ FaU.obj (FU.obj (LM.obj G))).hom.app W x : (LM.obj G).val.obj W)) ∧ L.map muV = prodComparison L (FrV.obj O) (FaV.obj (FV.obj G)) ≫ prod.map (er.inv.app O) iG.inv ≫ muU ≫ iG.hom)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T053942-L-2639579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T053942-L-2639579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
