@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-sets-sections-geometric-germ-ext",
+ "kind": "lemma",
+ "title": "Étale set-sheaf sections are determined by geometric germs",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $G$ a sheaf of sets on its small étale site [def-weil-pbc-etale-sheaf-of-sets], $U\\to X$ an object of that site [def-weil-pbc-etale-site], and $a,b\\in G(U)$. Suppose for every algebraically closed field $\\Omega$ (in the universe of the schemes), every geometric point $x:\\operatorname{Spec}\\Omega\\to X$ [def-weil-geometric-point], and every lift $z:\\operatorname{Spec}\\Omega\\to U$ over $x$, the germs of $a$ and $b$ at $(U,z)$ in $G_x$ [def-weil-pbc-geometric-stalks] agree. Then $a=b$. The statement applies to sheaves of sets in the next universe as in the Lean signature.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03PU (theorem-exactness-stalks), injectivity criterion and its local-neighbourhood argument"
+ },
+ "proof": [
+  {
+   "text": "For each point v of U choose an algebraic closure of its residue field and the resulting geometric point t of U over v, hence a pointed neighbourhood of x = t followed by U → X.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The hypothesis gives equality of the two germs at this neighbourhood. Use Point.toPresheafFiber_eq_iff\\prime, the filtered-colimit equality criterion for the cofiltered pointed-neighbourhood category, to obtain m:V→U and a geometric lift w with equal restrictions of a and b. Evaluating the pointed-neighbourhood equation at the point of Spec Ω shows that the image of w lies over v.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The family of these arrows m, indexed by the points of U, is jointly surjective, hence generates an étale covering sieve (Scheme.ofArrows_mem_smallEtaleTopology_iff). Apply the sheaf hom_ext_ofArrows theorem to the two constant PUnit-valued morphisms given by a and b, using the equal restrictions; evaluate the resulting equality at PUnit.unit. Empty U gives the empty-cover instance of the same argument.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-geometric-point",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03PU, injectivity argument (omitted there), written out using Mathlib Point.toPresheafFiber_eq_iff\\prime and Presheaf.IsSheaf.hom_ext_ofArrows"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber|jointlyFaithful|isConservative_pointSmallEtale",
+   "results": "Actual results: Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean, Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean. No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a sheaf on the small etale site are equal if their germs agree at all geometric points",
+   "results": "Actual results: TopCat.Presheaf.stalk_hom_ext_iff, TopCat.Presheaf.stalk_hom_ext, TopCat.Presheaf.germ_ext, AlgebraicGeometry.spread_out_unique_of_isGermInjective, TopCat.Presheaf.germ_eq, AlgebraicGeometry.spread_out_unique_of_isGermInjective', TopCat.Presheaf.section_ext, TopCat.Presheaf.IsSheaf.section_ext. No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toPresheafFiber\", \"Injective\"",
+   "results": "Actual results: CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_injective. No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two sections of a set-valued sheaf on the small etale site are equal if they have equal germs at every geometric point",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, invocation of 09ZF; within its use of 09Z3, injectivity of finite surjective section pullback, checked on germs",
+   "via": [
+    "lem-weil-pbc-sets-finite-surjective-descent",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetSectionsGeometricGermExt.lean",
+  "declaration": "AlgebraicGeometry.etaleSetSection_ext_of_geometric_germs",
+  "statement": "theorem etaleSetSection_ext_of_geometric_germs\n    (X : Scheme.{u}) (G : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (U : X.Etale) (a b : G.obj.obj (op U))\n    (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n      (x : Spec (.of Ω) ⟶ X) (z : (Scheme.pointSmallEtale x).fiber.obj U),\n      (Scheme.pointSmallEtale x).toPresheafFiber U z G.obj a =\n        (Scheme.pointSmallEtale x).toPresheafFiber U z G.obj b) : a = b",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": "Proved in Lean from local equality in pointed étale neighbourhoods and sheaf separatedness; this is not a restatement of finite surjective descent.",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9a48f",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T060739-L-2908421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9a48f",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T060739-L-2908421",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and nodes against the original library and Stacks 09Z3/09Z2/03PU; all four delivered modules and three downstream users compile cleanly; axiom checks pass with expected named sorry dependencies; unit route preserved."
+ }
+}

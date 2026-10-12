@@ -1,0 +1,173 @@
+{
+ "id": "lem-weil-pbc-sets-finite-surjective-descent-injective",
+ "kind": "lemma",
+ "title": "Injectivity of finite surjective pullback on set-sheaf sections",
+ "statement": "Let $f:X\\prime\\to X$ be finite [def-weil-finite-integral-morphism] and surjective [def-weil-surjective-morphism], and let $G$ be a sheaf of sets on the small étale site of $X$ [def-weil-pbc-etale-sheaf-of-sets]. With section pullback $f^*$ given by the adjunction unit [lem-weil-pbc-sets-etale-inverse-image-composition-units], the map $G(X)\\to(f^{-1}G)(X\\prime)$ is injective.",
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark 09Z3 (remark-cohomological-descent-finite), using Lemma 09Z2 (lemma-cohomological-descent-finite)"
+ },
+ "proof": [
+  {
+   "text": "For two sections with equal unit pullbacks, use the geometric-germ extensionality lemma: it suffices to show that their germs agree at every geometric point and pointed identity neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-sets-sections-geometric-germ-ext"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed geometric point y, use surjectivity to choose an underlying point x\\prime over its image. Finite geometric-point lifting supplies t with t f = y, over the same algebraically closed field. Substitute this equality.",
+   "uses": [
+    "def-weil-surjective-morphism",
+    "lem-weil-pbc-finite-geometric-point-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the inverse-image stalk comparison c to germs of the two equal unit-pulled-back sections at the pointed pullback neighbourhood. Congruence gives equality of these images; the two germ equations identify the images with the original germs. Transitivity proves the desired germ equality.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-finite-geometric-point-lift",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-sections-geometric-germ-ext"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Remark 09Z3, injectivity of the diagonal, reduced directly to germs using 03Q1 (3) and 03PU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite surjective morphism of schemes pullback of etale sheaf sections is injective and every section agreeing on the two projections descends",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*surjective.*descent|descent.*finite.*surjective|[Ii]njective.*[Ss]heaf|[Ee]qualizer.*[Ss]heaf",
+   "results": "Actual results: Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/FunctionField.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean. No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Surjective, CategoryTheory.Sheaf",
+   "results": "Actual results: . No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite surjective scheme morphism f and sheaf of sets G on the etale site, global sections of G are the equalizer of the two pullbacks to the fibre product",
+   "results": "Actual results: AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map. No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite surjective morphism of schemes sections of an etale sheaf of sets descend as an equalizer",
+   "results": "Actual results: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit. No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Surjective, CategoryTheory.Sheaf",
+   "results": "Actual results: . No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*surjective.*[Dd]escent|[Dd]escent.*finite.*surjective",
+   "results": "Actual results: . No exact statement; useful point and colimit lemmas were read and used where applicable.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, invocation of 09ZF; last sentence of 09ZF: a compatible section comes from a section over X by Remark 09Z3; proof steps 4 and 6: geometric lifts and the unit diagonal",
+   "via": [
+    "lem-weil-pbc-sets-finite-surjective-descent",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSurjectiveSetDescentInjective.lean",
+  "declaration": "AlgebraicGeometry.finiteSurjectiveSetDescent_injective",
+  "statement": "theorem finiteSurjectiveSetDescent_injective\n    {X X' : Scheme.{u}} (f : X' ⟶ X) [IsFinite f] [Surjective f]\n    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) :\n    Function.Injective (etaleSetDescentUnit f G (Scheme.Etale.mk (𝟙 X)))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.finiteSurjectiveSetDescent_injective",
+   "AlgebraicGeometry.etaleSetDescentUnit",
+   "AlgebraicGeometry.etaleSetDescentComparison"
+  ],
+  "note": "The two named section constructions moved here verbatim from the parent module; their original names, signatures, bodies and docstrings are unchanged. The parent publicly imports this module."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": "The duplicate auxiliary was removed. This theorem now has a genuine Lean proof using finite geometric-point lifting, the inverse-image germ formula, and a separately proved geometric-germ extensionality theorem. It still depends on the existing upstream inverse-image germ gap.",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9a48f",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T060739-L-2908421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9a48f",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T060739-L-2908421",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, definitions, proofs and nodes against the original library and Stacks 09Z3/09Z2/03PU; all four delivered modules and three downstream users compile cleanly; axiom checks pass with expected named sorry dependencies; unit route preserved."
+ }
+}

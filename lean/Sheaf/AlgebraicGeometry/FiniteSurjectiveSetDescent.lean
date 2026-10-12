@@ -5,12 +5,10 @@ Authors: SHEAF group G1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentEqualizer
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
-import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 /-! # Finite surjective descent of global sections for étale sheaves of sets
 
@@ -23,31 +21,8 @@ Source: literature/stacks-project/etale-cohomology.tex, Remark 09Z3
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
-
-/-- Section pullback along the adjunction unit. Source: Stacks, Remark 09Z3
-(blueprint: lem-weil-pbc-sets-finite-surjective-descent). -/
-noncomputable def etaleSetDescentUnit {S T : Scheme.{u}} (e : T ⟶ S)
-    (G : Sheaf S.smallEtaleTopology (Type (u + 1))) (U : S.Etale) :=
-  ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-    (MorphismProperty.Over.pullback @Etale ⊤ e) (Type (u + 1))
-    (S.smallGrothendieckTopology @Etale)
-    (T.smallGrothendieckTopology @Etale)).unit.app G).hom.app (op U)
-
-/-- Pull back a section and apply the unit-compatible composition comparison, then
-identify the iterated fibre product with the composite fibre product.
-Source: Stacks, Remark 09Z3 (blueprint: lem-weil-pbc-sets-finite-surjective-descent). -/
-noncomputable def etaleSetDescentComparison {X Y W : Scheme.{u}}
-    (f : Y ⟶ X) (g : W ⟶ Y)
-    (G : Sheaf X.smallEtaleTopology (Type (u + 1))) (U : X.Etale)
-    (s : ((Scheme.etaleSetPullback f).obj G).obj.obj
-      (op ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U))) :=
-  ((Scheme.etaleSetPullback (g ≫ f)).obj G).obj.map
-    ((MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤) g f).hom.app U).op
-    ((((Classical.choose etaleSetInverseImageCompositionUnits.2.2) X Y W f g).hom.app G).hom.app
-       (op ((MorphismProperty.Over.pullback @Etale ⊤ g).obj
-        ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U)))
-      (etaleSetDescentUnit g ((Scheme.etaleSetPullback f).obj G)
-        ((MorphismProperty.Over.pullback @Etale ⊤ f).obj U) s))
+set_option backward.isDefEq.respectTransparency false
+set_option backward.defeqAttrib.useBackward true
 
 /-- Source: Stacks Project, Étale Cohomology, Remark 09Z3, following Lemma 09Z2.
 (blueprint: lem-weil-pbc-sets-finite-surjective-descent)
@@ -93,6 +68,37 @@ theorem finiteSurjectiveSetDescent
               (Scheme.Etale.mk (𝟙 X)) s') ↔
           ∃ s : G.obj.obj (op (Scheme.Etale.mk (𝟙 X))),
             etaleSetDescentUnit f G (Scheme.Etale.mk (𝟙 X)) s = s' := by
-  sorry
+  constructor
+  · exact finiteSurjectiveSetDescent_injective f G
+  · intro s'
+    constructor
+    · exact finiteSurjectiveSetDescent_compatible_lift f G s'
+    · rintro ⟨s, rfl⟩
+      have hunit (W : Scheme.{u}) (g : W ⟶ X') :
+          etaleSetDescentComparison f g G (Scheme.Etale.mk (𝟙 X))
+              (etaleSetDescentUnit f G (Scheme.Etale.mk (𝟙 X)) s) =
+            etaleSetDescentUnit (g ≫ f) G (Scheme.Etale.mk (𝟙 X)) s := by
+        have h := (Classical.choose_spec etaleSetInverseImageCompositionUnits.2.2).1
+          X X' W f g G (Scheme.Etale.mk (𝟙 X)) s
+        unfold etaleSetDescentComparison
+        erw [h]
+        simp [etaleSetDescentUnit, ← Functor.map_comp_apply, ← op_comp]
+      have unit_transport {a b : pullback f f ⟶ X} (e : a = b) :
+          eqToHom (congrArg
+            (fun k : pullback f f ⟶ X ↦ ((Scheme.etaleSetPullback k).obj G).obj.obj
+              (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj
+                (Scheme.Etale.mk (𝟙 X))))) e)
+            (etaleSetDescentUnit a G (Scheme.Etale.mk (𝟙 X)) s) =
+            etaleSetDescentUnit b G (Scheme.Etale.mk (𝟙 X)) s := by
+        subst b
+        rfl
+      exact (hunit _ (pullback.fst f f)).trans
+        ((unit_transport ((pullback.condition (f := f) (g := f)).symm)).symm.trans
+          (congrArg (fun z ↦ eqToHom (congrArg
+            (fun k : pullback f f ⟶ X ↦ ((Scheme.etaleSetPullback k).obj G).obj.obj
+              (op ((MorphismProperty.Over.pullback @Etale ⊤ k).obj
+                (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := f) (g := f)).symm) z)
+            (hunit _ (pullback.snd f f)).symm))
+
 
 end AlgebraicGeometry
