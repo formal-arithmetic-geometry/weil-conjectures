@@ -11,11 +11,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.DiagonalBaseChangeUpperShriek
+import Sheaf.AlgebraicGeometry.DiagonalBaseChangeLocalDerivedCategories
 import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # Diagonal counit identity for a flat proper morphism
@@ -36,6 +36,8 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- Comparing the lifted derived functors unfolds localization and full-subcategory data.
 /-- For a flat proper morphism, the diagonal right-adjoint counit identifies the
 structure sheaf with the pullback of the right adjoint of the original morphism.
 Source: Stacks Project, Tag 0E2Q (blueprint: lem-sc-smooth-proper-diagonal-pushforward-structure).
@@ -56,13 +58,13 @@ Proof:
    adjoint to `R(pr₂)_*` on the quasi-coherent derived categories.
 2. Properness makes `f` separated, so its diagonal is a closed immersion and
    proper (Stacks Tags 01KH, 01W6). Since `Δ ≫ pr₂ = 𝟙 X`, composition of proper
-   derived direct images (`lem-pc-proper-derived-direct-image-composition`)
+   derived direct images (`lem-pc-ringed-spaces-derived-direct-image-composition`)
    identifies `RΔ_* ⋙ R(pr₂)_*` with the identity. Pasting the adjunctions and
    uniqueness of right adjoints (`lem-cat-right-adjoint-composition`) identify
    `b ⋙ c` with the identity. Evaluate at `𝒪_X` to get `𝒪_X ≅ c(b(𝒪_X))`.
 3. Properness implies finite type. Over Noetherian `S` this implies finite
    presentation (Stacks Tag 01TX). The proper flat right-adjoint base-change
-   formula (`lem-sc-smooth-proper-diagonal-basechange-upper-shriek`) identifies
+   formula (`lem-sc-diagonal-basechange-local-derived-categories`) identifies
    `b(𝒪_X)` with `L pr₁^* a(𝒪_S)`. Apply `c` and compose with step 2.
 The degree-zero objects and functors are those of `def-pc-derived-category`,
 `def-pc-derived-direct-image`, and the shared `def-pc-derived-pullback`. -/
@@ -107,6 +109,40 @@ theorem diagonal_counit_identity
             ⟨(DerivedCategory.singleFunctor
               (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj
               (SheafOfModules.unit (moduleRings S.toRingedSpace)), hOS⟩))) := by
-  sorry
+  classical
+  let : CompactSpace (Limits.pullback f f : Scheme.{u}) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.snd f f)
+  let : IsNoetherian (Limits.pullback f f) := ⟨⟩
+  obtain ⟨hRpr₂, hadjB⟩ :=
+    noetherian_schemeDerivedDirectImage_has_rightAdjoint (pullback.snd f f)
+  let Rpr₂ := (schemeDerivedQCohProperty X).lift
+    ((schemeDerivedQCohProperty (Limits.pullback f f)).ι ⋙
+      schemeDerivedDirectImage (pullback.snd f f)) hRpr₂
+  let : Rpr₂.IsLeftAdjoint := hadjB
+  let b := Rpr₂.rightAdjoint
+  have adjB : Rpr₂ ⊣ b := Adjunction.ofIsLeftAdjoint Rpr₂
+  let RΔ := (schemeDerivedQCohProperty (Limits.pullback f f)).lift
+    ((schemeDerivedQCohProperty X).ι ⋙
+      schemeDerivedDirectImage (pullback.diagonal f)) hRΔ
+  have underivedId : RingedSpace.moduleDirectImage (𝟙 X : X ⟶ X).toLRSHom.toShHom ≅
+      𝟭 (SheafOfModules.{u} (moduleRings X.toRingedSpace)) := Iso.refl _
+  have derivedId : schemeDerivedDirectImage (𝟙 X) ≅ 𝟭 (schemeDerivedCategory X) :=
+    Functor.rightDerivedFunctorNatIso underivedId ≪≫
+      (𝟭 (SheafOfModules.{u}
+        (moduleRings X.toRingedSpace))).rightDerivedFunctorIsoMapDerivedCategory ≪≫
+      Functor.mapDerivedCategoryIdIso _
+  obtain ⟨ecomp, _⟩ := RingedSpace.exists_derivedModuleDirectImageComposition
+    (pullback.diagonal f).toLRSHom.toShHom (pullback.snd f f).toLRSHom.toShHom
+  have ecomp' : schemeDerivedDirectImage (pullback.diagonal f) ⋙
+      schemeDerivedDirectImage (pullback.snd f f) ≅ schemeDerivedDirectImage (𝟙 X) := by
+    simpa only [← Scheme.Hom.comp_toLRSHom, ← LocallyRingedSpace.comp_toShHom,
+      pullback.diagonal_snd] using ecomp
+  have eleft : RΔ ⋙ Rpr₂ ≅ 𝟭 (schemeDerivedQCohCategory X) :=
+    Functor.fullyFaithfulCancelRight (schemeDerivedQCohProperty X).ι
+      (Functor.isoWhiskerLeft (schemeDerivedQCohProperty X).ι (ecomp' ≪≫ derivedId))
+  have eright : b ⋙ c ≅ 𝟭 (schemeDerivedQCohCategory X) :=
+    ((adjC.comp adjB).ofNatIsoLeft eleft).rightAdjointUniq Adjunction.id
+  obtain ⟨ebase⟩ := diagonal_baseChange_upperShriek_local f hRf hRpr₂ hLpr₁ hOX hOS a b adjA adjB
+  exact ⟨(eright.app _).symm ≪≫ c.mapIso ebase⟩
 
 end AlgebraicGeometry

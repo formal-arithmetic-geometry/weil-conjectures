@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Form the cartesian square P=X\\times_S X with the projection pr_2:P\\to X chosen as the base change of f and pr_1:P\\to X the other projection, so pr_2\\circ\\Delta=\\operatorname{id}_X. Since f is proper, pr_2 is proper by [lem-weil-pbc-proper-base-change], hence of finite type; since X is Noetherian, [lem-weil-pbc-finite-type-over-noetherian] shows that P is Noetherian. The right-adjoint existence statement for Noetherian schemes [lem-pc-noetherian-derived-direct-image-right-adjoint] therefore supplies a right adjoint b to R(pr_2)_*. Since f is proper it is separated, so \\Delta is a closed immersion and hence proper (Stacks Tags 01KH, 01W6), and pr_2 is proper; as pr_2\\circ\\Delta=\\operatorname{id}_X, the composition isomorphism for derived direct images of proper morphisms of Noetherian schemes [lem-pc-proper-derived-direct-image-composition] gives R(pr_2)_*\\circ R\\Delta_*\\cong R(\\operatorname{id}_X)_*=\\operatorname{id}. Hence the pasted adjunction and uniqueness of right adjoints [lem-cat-right-adjoint-composition] give a canonical isomorphism c\\circ b\\cong\\operatorname{id} on the quasi-coherent derived category. Evaluating at \\mathcal O_X gives \\mathcal O_X\\cong c(b(\\mathcal O_X)).",
+   "text": "Form P=X times_S X. Properness of pr_2 is inherited from f, so its source is compact; finite type over Noetherian X makes P locally Noetherian. Apply [lem-pc-noetherian-derived-direct-image-right-adjoint] to obtain hRpr_2 and its chosen right adjoint b. Apply [lem-pc-ringed-spaces-derived-direct-image-composition] to Delta and pr_2. Their composite is id_X. The module pushforward for id_X is definitionally the identity; functoriality of total right derivation, its comparison with the induced functor for an exact functor, and mapDerivedCategoryIdIso give R(id_X)_*=id. Restrict this isomorphism through the fully faithful inclusion of D_QCoh to obtain RDelta_* followed by Rpr_2_* isomorphic to id. Compose adjC and adjB, transport the left adjoint across that comparison, and apply [lem-cat-right-adjoint-composition] to get b followed by c isomorphic to id. Evaluate at O_X and invert.",
    "uses": [
     "def-pc-base-change",
     "def-pc-derived-category",
@@ -36,8 +36,8 @@
     "lem-weil-pbc-proper-base-change",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-pc-noetherian-derived-direct-image-right-adjoint",
-    "lem-pc-proper-derived-direct-image-composition",
-    "lem-cat-right-adjoint-composition"
+    "lem-cat-right-adjoint-composition",
+    "lem-pc-ringed-spaces-derived-direct-image-composition"
    ],
    "elementary": false,
    "source": {
@@ -46,9 +46,9 @@
    }
   },
   {
-   "text": "Since f is proper it is of finite type, and a morphism of finite type to the Noetherian scheme S is of finite presentation (Stacks Tag 01TX); so f is flat, proper and of finite presentation, as the following statement requires. The base-change formula for the right adjoint in this cartesian square [lem-sc-smooth-proper-diagonal-basechange-upper-shriek] identifies b(\\mathcal O_X) canonically with L\\operatorname{pr}_1^*a(\\mathcal O_S). Applying c to that isomorphism and composing with Step 1 yields the required canonical isomorphism \\mathcal O_X\\cong c(L\\operatorname{pr}_1^*a(\\mathcal O_S)).",
+   "text": "Since f is proper it is of finite type, and a morphism of finite type to the Noetherian scheme S is of finite presentation (Stacks Tag 01TX); so f is flat, proper and of finite presentation, as the following statement requires. The base-change formula for the right adjoint in this cartesian square [lem-sc-diagonal-basechange-local-derived-categories] identifies b(\\mathcal O_X) canonically with L\\operatorname{pr}_1^*a(\\mathcal O_S). Applying c to that isomorphism and composing with Step 1 yields the required canonical isomorphism \\mathcal O_X\\cong c(L\\operatorname{pr}_1^*a(\\mathcal O_S)).",
    "uses": [
-    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek"
+    "lem-sc-diagonal-basechange-local-derived-categories"
    ],
    "elementary": false,
    "source": {
@@ -64,14 +64,14 @@
   "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-pc-noetherian-derived-direct-image-right-adjoint",
-  "lem-pc-proper-derived-direct-image-composition",
   "lem-cat-right-adjoint-composition",
-  "lem-sc-smooth-proper-diagonal-basechange-upper-shriek"
+  "lem-pc-ringed-spaces-derived-direct-image-composition",
+  "lem-sc-diagonal-basechange-local-derived-categories"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0E2P, Lemma 48.12.8"
+  "place": "G3: Tag 0E2P argument, using the local ringed-space composition comparison and exact identity functor; split off the second (base-change) step with local derived-category instances"
  },
  "mathlib_searches": [
   {
@@ -150,5 +150,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T095904-L-317093",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

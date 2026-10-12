@@ -7206,3 +7206,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 09:59 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FiniteConstantAbelianRefinement (stage 3; reviewer PASS; first push; landing 20261012T095903-L-316800 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:59 L: merged deliver/G2/Sheaf.AlgebraicGeometry.FiniteEtaleDegreeSplitAt (stage 3; reviewer PASS; first push; landing 20261012T095903-L-316898 (interface); batch 20261012T095846; modules 2; new nodes 1)
 - 09:59 L: merged deliver/G2/Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing (stage 3; reviewer PASS; first push; landing 20261012T095904-L-316996 (interface); batch 20261012T095846; modules 3; new nodes 2)
+- 09:59 L: merged deliver/G3/Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure (stage 3; reviewer PASS; first push; landing 20261012T095904-L-317093 (interface); batch 20261012T095846; modules 2; new nodes 1)
