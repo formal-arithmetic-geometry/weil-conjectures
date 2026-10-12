@@ -66,7 +66,8 @@ variable {Λ} {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
 `φ : Λ →+* Λ'` is: both have the same underlying sheaf of abelian groups. -/
 lemma Scheme.isTorsionModuleSheaf_restrictScalars_obj_iff {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
-    IsTorsionModuleSheaf ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ↔ IsTorsionModuleSheaf F := by
+    IsTorsionModuleSheaf ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ↔
+      IsTorsionModuleSheaf F := by
   rw [isTorsionModuleSheaf_iff_isTorsion, isTorsionModuleSheaf_iff_isTorsion]
   rfl
 
