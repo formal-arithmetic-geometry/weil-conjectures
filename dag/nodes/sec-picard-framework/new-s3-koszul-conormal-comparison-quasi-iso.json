@@ -28,45 +28,48 @@
  ],
  "proof": [
   {
-   "text": "Complementary basis wedges identify Hom_A(wedge^n E,A) with wedge^(r-n) E for n <= r; the terms vanish for n > r. Evaluate contraction on basis wedges to identify the signed dual differential with the reversed Koszul differential up to degree signs; recursively rescale by units +1 or -1. Koszul-regularity then gives vanishing cohomology outside r.",
+   "text": "Obtain the conormal basis from exists_koszul_conormal_basis. Reduce QuasiIso to invertibility of the homology map in each degree using quasiIso_iff and quasiIsoAt_iff_isIso_homologyMap. At degree r apply the top comparison calculation with this basis and its specified generating vectors.",
    "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-sc-koszul-dual-complex",
-    "def-weil-pbc-koszul-regular-sequence",
-    "lem-sc-exterior-power-dual-pairing"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The top dual term is rank one on evaluation at e_top. The incoming image is exactly I times this generator, since the complementary coordinate functionals extract the coefficients +f_i or -f_i of d_r(e_top). Thus the top cokernel is A/I. For r=0 the incoming image is zero and I=0.",
-   "uses": [
-    "def-weil-pbc-koszul-complex",
-    "def-sc-koszul-dual-complex"
+    "lem-sc-koszul-conormal-basis",
+    "lem-sc-koszul-conormal-top-homology"
    ],
    "elementary": true
   },
   {
-   "text": "The conormal basis makes the normal determinant rank one on the ordered dual wedge. Test the given normalization on the standard basis of E: its top component is quotient evaluation times the unit (-1)^(r*(r-1)/2). It induces an isomorphism on top cohomology, while every other homology map is between zero objects. Hence the given map is a quasi-isomorphism.",
+   "text": "For n<r apply the below-top dual Koszul vanishing theorem. For r<n, the exterior-power basis is indexed by n-element subsets of Fin r, an empty type. Its representation is injective into the zero Finsupp module, making the exterior power zero. The dual term is then zero since every linear functional on a zero module is zero. ExactAt.of_isZero and ExactAt.isZero_homology give vanishing of its homology; this part is proved directly in the private Lean helper and requires no regularity.",
    "uses": [
-    "lem-sc-koszul-conormal-basis",
-    "lem-sc-exterior-power-dual-pairing",
-    "def-sc-koszul-conormal-comparison"
+    "lem-sc-koszul-dual-below-top-homology",
+    "def-weil-pbc-koszul-complex",
+    "def-sc-koszul-dual-complex",
+    "lem-weil-pbc-exterior-power-free-basis"
    ],
    "elementary": false
+  },
+  {
+   "text": "For n≠r the target single complex has zero homology by isZero_single_obj_homology. A map between zero objects is invertible by IsZero.isIso. These cases supply all homology-map isomorphisms, proving QuasiIso.",
+   "uses": [
+    "def-sc-koszul-conormal-comparison"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-sc-koszul-conormal-basis",
+  "lem-sc-koszul-conormal-top-homology",
+  "lem-sc-koszul-dual-below-top-homology",
   "def-weil-pbc-koszul-complex",
   "def-sc-koszul-dual-complex",
-  "def-weil-pbc-koszul-regular-sequence",
-  "lem-sc-exterior-power-dual-pairing",
-  "lem-sc-koszul-conormal-basis",
+  "lem-weil-pbc-exterior-power-free-basis",
   "def-sc-koszul-conormal-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BQZ, local Koszul-complex computation"
+  "by": "agent",
+  "agent": "D3",
+  "based_on": {
+   "document": "literature/stacks-project/duality.tex",
+   "place": "Tag 0BQZ, lemma-regular-immersion-ext, local signed dual Koszul computation; read at https://stacks.math.columbia.edu/tag/0BQZ"
+  },
+  "note": "Lean proof combines conormal basis and the two strict subcalculations. Above-top vanishing and the maps between zero objects are proved directly."
  },
  "mathlib_searches": [
   {
@@ -147,9 +150,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T184344-L-4020328",
+  "landing": "20261012T230754-L-1907628",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
