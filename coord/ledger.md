@@ -9171,3 +9171,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/C2/Sheaf.RingTheory.ExistsNegativeValuationOfTensorSurjective (stage 3; reviewer PASS; first push; landing 20261012T194105-L-452839 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/C3/Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology (stage 3; reviewer PASS; first push; landing 20261012T194105-L-452994 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/C3/Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackPresentation (stage 3; reviewer PASS; first push; landing 20261012T194105-L-453142 (proof); batch 20261012T194054; modules 1; new nodes 0)
+- 19:41 L: merged deliver/D2/Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale (stage 3; reviewer PASS; first push; landing 20261012T194106-L-453292 (interface); batch 20261012T194054; modules 3; new nodes 2)

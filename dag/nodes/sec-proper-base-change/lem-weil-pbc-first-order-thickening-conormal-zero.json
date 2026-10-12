@@ -1,0 +1,141 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); flat-unramified reduction, step 6 (zero ideal)",
+   "via": [
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04FE (lemma-characterize-formally-etale), zero conormal iff identity thickening in its proof; Morphisms Tag 01R3 (lemma-affine-conormal), (2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-first-order-thickening",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-conormal-sections",
+  "def-sbc-first-order-thickening",
+  "def-weil-closed-immersion"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a flat morphism with open immersion diagonal the universal thickening conormal sheaf vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat scheme morphism with open diagonal has vanishing conormal module of its universal first order thickening",
+   "results": "AlgebraicGeometry.FormallyUnramified; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified; AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme; AlgebraicGeometry.Flat; AlgebraicGeometry.Flat.instOfIsOpenImmersion; AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+   "date": "2026-10-13",
+   "verdict": "related results; no scheme-level conormal vanishing theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|cotangent_subsingleton_iff|isIso_iff_ker_eq_bot",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/RingTheory/Ideal/Cotangent.lean; Mathlib/RingTheory/Ideal/Cotangent.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "used cotangent_subsingleton_iff and isIso_iff_ker_eq_bot; no tensor-conormal scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.cotangent_subsingleton_iff",
+   "results": "Ideal.cotangent_subsingleton_iff",
+   "date": "2026-10-13",
+   "verdict": "used cotangent_subsingleton_iff and isIso_iff_ker_eq_bot; no tensor-conormal scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square-zero immersion of schemes whose ideal pulled back to the source is zero is an isomorphism",
+   "results": "AlgebraicGeometry.IsClosedImmersion.isIso_lift; AlgebraicGeometry.IsClosedImmersion.isIso_of_ker_eq; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot; AlgebraicGeometry.IsOpenImmersion.of_isIso; AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine; AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι; AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec",
+   "date": "2026-10-13",
+   "verdict": "used cotangent_subsingleton_iff and isIso_iff_ker_eq_bot; no tensor-conormal scheme theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "title": "Zero conormal makes a square-zero closed immersion an isomorphism",
+ "statement": "Let i:X → X′ be a first order thickening of schemes [def-pc-scheme, def-sbc-first-order-thickening], with square-zero kernel ideal sheaf I [def-sbc-closed-immersion-ideal-sheaf]. If the tensor pullback i*I [def-pc-module-pullback] is the zero module, then i is an isomorphism. No affine, finite type or universal-property assumption is required.",
+ "proof": [
+  {
+   "text": "For each affine open U in X′, use affine_conormal_sections with R=Γ(X′,U), the identity coordinate equivalence and I=ker(i.app U). This gives I/I² ≃ Γ(i*I,i⁻¹U).",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The identity of the zero conormal module is the zero morphism; evaluating on sections forces every section to be zero. The equivalence therefore makes I/I² subsingleton. Ideal.cotangent_subsingleton_iff gives I²=I. Evaluating the first order hypothesis on U gives I²=0, hence I=0. These are the definitions of the quotient module and square-zero ideal.",
+   "uses": [
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "IdealSheafData.ext on all affine opens now gives i.ker=bottom. IsClosedImmersion.isIso_iff_ker_eq_bot (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:198) proves that i is an isomorphism. This is the closed-immersion zero-kernel criterion.",
+   "uses": [
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FirstOrderThickeningConormalZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/FirstOrderThickeningConormalZero.lean",
+  "declaration": "AlgebraicGeometry.firstOrderThickening_isIso_of_conormal_isZero",
+  "statement": "theorem firstOrderThickening_isIso_of_conormal_isZero {X X' : Scheme.{u}}\n    (i : X ⟶ X') (hi : IsFirstOrderThickening i)\n    (hC : IsZero ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)) :\n    IsIso i",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "id": "lem-weil-pbc-first-order-thickening-conormal-zero",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 04FE (lemma-characterize-formally-etale), zero conormal iff identity thickening in its proof; Morphisms Tag 01R3 (lemma-affine-conormal), (2)"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T194106-L-453292",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T194106-L-453292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

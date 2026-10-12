@@ -31,127 +31,46 @@
  ],
  "proof": [
   {
-   "text": "*Uniqueness; $f$ is formally unramified.* Since $f$ is unramified, [lem-weil-pbc-unramified-formally-unramified] shows that $f$ is formally unramified [def-weil-pbc-formally-unramified-morphism]: for a first order thickening $T\\subset T'$ of affine schemes over $S$ and $a:T\\to X$ over $S$ there is at most one $a':T'\\to X$ over $S$ with $a'\\circ i=a$. It remains to prove that such an $a'$ exists. Since $f$ is formally unramified it has a universal first order thickening $X\\subset X'$ over $S$ [def-weil-pbc-universal-first-order-thickening], [lem-weil-pbc-universal-first-order-thickening-exists], with closed immersion $\\iota:X\\to X'$, ideal sheaf $\\mathcal I$ ($\\mathcal I^2=0$) and structure morphism $h':X'\\to S$, $h'\\circ\\iota=f$, and a conormal sheaf $\\mathcal C_{X/S}=\\iota^*\\mathcal I$ [def-weil-pbc-conormal-sheaf-formally-unramified]. The plan (Stacks: 'we have to show that $\\mathcal C_{X/S}$ is zero') is to prove $\\mathcal C_{X/S}=0$ (steps 2 to 5) and deduce existence from it (step 6, which is Lemma 04FE, (3) implies (1)).",
+   "text": "The open-diagonal instance makes f formally unramified. Obtain X′, j, s and its universal first order thickening property H by FormallyUnramified.exists_universalFirstOrderThickening. This is elimination of existence into a proposition; no new data definition chooses an arbitrary witness.",
    "uses": [
     "lem-weil-pbc-unramified-formally-unramified",
+    "lem-weil-pbc-universal-first-order-thickening-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply flat_openDiagonal_conormal_isZero to f,j,s,H, then firstOrderThickening_isIso_of_conormal_isZero to j,H.1 and the zero conormal. Thus j is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-open-diagonal-conormal-zero",
+    "lem-weil-pbc-first-order-thickening-conormal-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any first order test thickening i:T → T′ and square a≫f=i≫b, the universal property H yields c:T′ → X′ with c≫s=b and i≫c=a≫j. Set a′=c≫inv j. Associativity and the two inverse identities give i≫a′=a and a′≫f=b. For any other d with those equations, FormallyUnramified.hom_ext with nilpotence witness ⟨2,hi.2⟩ proves d=a′. Restrict this unique-lifting statement to affine test schemes; its existence half is FormallySmooth f.",
+   "uses": [
+    "def-weil-pbc-universal-first-order-thickening",
     "def-weil-pbc-formally-unramified-morphism",
-    "def-weil-pbc-universal-first-order-thickening",
-    "lem-weil-pbc-universal-first-order-thickening-exists",
-    "def-weil-pbc-conormal-sheaf-formally-unramified"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
-  },
-  {
-   "text": "*The diagonal and the two projections.* Let $p,q:X\\times_SX\\to X$ be the first and the second projection of the fibre product of $f$ with itself [def-pc-fibre-product], and $\\Delta=(\\mathrm{id}_X,\\mathrm{id}_X):X\\to X\\times_SX$ the diagonal, so $p\\circ\\Delta=q\\circ\\Delta=\\mathrm{id}_X$. Since $f$ is unramified, $\\Delta$ is an open immersion by the definition [def-weil-unramified-morphism] (Stacks quotes Morphisms, Lemma 02GE here, which with the definition of the DAG is part of the definition) [def-weil-open-immersion]; let $D=\\Delta(X)\\subset X\\times_SX$ be the open subscheme it defines and $\\delta:X\\xrightarrow{\\sim}D$ the induced isomorphism, so $\\Delta=j\\circ\\delta$ with $j:D\\to X\\times_SX$ the inclusion. The morphism $q$ is the base change of $f$ along $f$ (the projection of $X\\times_SX$ to the second factor), so $q$ is formally unramified by [lem-weil-pbc-formally-unramified-base-change] applied to the formally unramified $f$ of step 1. The morphism $p$ is the base change of the flat morphism $f$ along $f$ (projection to the first factor), so $p$ is flat by [lem-weil-pbc-flat-morphism-base-change].",
-   "uses": [
-    "def-pc-fibre-product",
-    "def-weil-unramified-morphism",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-formally-unramified-base-change",
-    "lem-weil-pbc-flat-morphism-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
-  },
-  {
-   "text": "*$p^*\\mathcal C_{X/S}\\cong\\mathcal C_q$.* Apply [lem-weil-pbc-universal-thickening-flat-base-change] to the fibre product square with $Y=S$, $W=X$ (the first factor) with the formally unramified morphism $h'=f:W\\to S$, and the flat morphism $g=f:X\\to S$ (the second factor): then $Z=X\\times_SX$, the projection $Z\\to X$ to the second factor is $h=q$, and the projection to $W$ is $p$. The lemma gives that $q$ is formally unramified (also seen in step 2) and that the canonical map $p^*\\mathcal C_{X/S}\\to\\mathcal C_q$ is an isomorphism of $\\mathcal O_{X\\times_SX}$-modules, where $\\mathcal C_q=\\mathcal C_{X\\times_SX/X}$ is the conormal sheaf of the formally unramified morphism $q$ [def-weil-pbc-conormal-sheaf-formally-unramified], [def-pc-module-pullback]. (Stacks cites Lemma 04F9 together with the flatness of $p$, which is the flatness of $g$ in the lemma.)",
-   "uses": [
-    "lem-weil-pbc-universal-thickening-flat-base-change",
-    "def-weil-pbc-conormal-sheaf-formally-unramified",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
-  },
-  {
-   "text": "*$\\mathcal C_q|_D=0$.* The open subscheme $D=\\Delta(X)$ maps isomorphically to $X$ under $q$: $q|_D\\circ\\delta=q\\circ\\Delta=\\mathrm{id}_X$ and $\\delta$ is an isomorphism, so $e:=q|_D:D\\to X$ is an isomorphism with inverse $\\delta$. By [lem-weil-pbc-universal-thickening-open-restriction] applied to $q$ with $V=D$ and $U=X$, $e$ is formally unramified and $\\mathcal C_q|_D\\cong\\mathcal C_{D/X}$. Now $D\\subset D$ (identity closed immersion, ideal sheaf $0$) with structure morphism $e$ is a universal first order thickening of $D$ over $X$ [def-weil-pbc-universal-first-order-thickening]: given a first order thickening $T\\subset T'$ over $X$ with $i_T:T\\to T'$, $b:T'\\to X$, and $a:T\\to D$ with $e\\circ a=b\\circ i_T$, the morphism $a'=e^{-1}\\circ b$ satisfies $e\\circ a'=b$ and $a'\\circ i_T=e^{-1}\\circ e\\circ a=a$, and it is the only one since $e\\circ a'=b$ forces $a'=e^{-1}\\circ b$. By the uniqueness in [lem-weil-pbc-universal-first-order-thickening-exists] every universal first order thickening of $D$ over $X$ is isomorphic to this one compatibly with $D$, so the ideal sheaf [def-sbc-closed-immersion-ideal-sheaf] of $D$ in it is $0$ and $\\mathcal C_{D/X}=0$ [def-weil-pbc-conormal-sheaf-formally-unramified]. Hence $\\mathcal C_q|_D=0$ ('$\\mathcal C_q|_{\\Delta(X)}=\\mathcal C_{X/X}=0$' in Stacks, by Lemma 04FA).",
-   "uses": [
-    "lem-weil-pbc-universal-thickening-open-restriction",
-    "def-weil-pbc-universal-first-order-thickening",
-    "lem-weil-pbc-universal-first-order-thickening-exists",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-weil-pbc-conormal-sheaf-formally-unramified"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
-  },
-  {
-   "text": "*$\\mathcal C_{X/S}=0$.* Pullback of modules satisfies $\\mathrm{id}^*\\cong\\mathrm{id}$ and $(v\\circ u)^*\\cong u^*v^*$ [def-pc-module-pullback]. Since $p\\circ\\Delta=\\mathrm{id}_X$ and $\\Delta=j\\circ\\delta$, steps 3 and 4 give $\\mathcal C_{X/S}\\cong\\Delta^*p^*\\mathcal C_{X/S}\\cong\\Delta^*\\mathcal C_q\\cong\\delta^*j^*\\mathcal C_q\\cong\\delta^*(\\mathcal C_q|_D)=\\delta^*0=0$, where $j^*\\mathcal C_q\\cong\\mathcal C_q|_D$ because $j$ is an open immersion [lem-weil-pbc-open-immersion-module-pullback-restriction]. ('In other words, the pullback of $\\mathcal C_{X/S}$ to $X$ via the identity morphism is zero, i.e., $\\mathcal C_{X/S}=0$.')",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FF (lemma-unramified-flat-formally-etale)"
-   }
-  },
-  {
-   "text": "*Existence of the lift (Lemma 04FE, (3) implies (1)).* Let $X\\subset X'$, $\\iota$, $\\mathcal I$, $h'$ be as in step 1. As $X'$ is a first order thickening of $X$ [def-sbc-first-order-thickening], $\\iota$ is a homeomorphism of underlying spaces and $\\iota^\\sharp:\\mathcal O_{X'}\\to\\iota_*\\mathcal O_X$ is surjective with kernel $\\mathcal I$ [def-weil-closed-immersion], [def-sbc-closed-immersion-ideal-sheaf]; hence $\\mathcal O_X=\\iota^{-1}\\mathcal O_{X'}/\\iota^{-1}\\mathcal I$ and $\\iota^*\\mathcal I=\\mathcal O_X\\otimes_{\\iota^{-1}\\mathcal O_{X'}}\\iota^{-1}\\mathcal I=\\iota^{-1}\\mathcal I/(\\iota^{-1}\\mathcal I)^2=\\iota^{-1}\\mathcal I$ as $\\mathcal I^2=0$ [def-pc-module-pullback]. By step 5, $\\iota^{-1}\\mathcal I=\\mathcal C_{X/S}=0$ [def-weil-pbc-conormal-sheaf-formally-unramified], so $\\mathcal I=0$ ($\\iota$ is a homeomorphism), $\\iota^\\sharp$ is an isomorphism of sheaves of rings, and $\\iota$ is an isomorphism of schemes ('the universal first order thickening of $X$ over $S$ is equal to $X$'). Now let $T\\subset T'$ be a first order thickening of affine schemes over $S$, with $i:T\\to T'$, $b:T'\\to S$, and $a:T\\to X$ with $f\\circ a=b\\circ i$. By the universal property of $X'$ [def-weil-pbc-universal-first-order-thickening] there is $a'':T'\\to X'$ with $h'\\circ a''=b$ and $a''\\circ i=\\iota\\circ a$. Put $a'=\\iota^{-1}\\circ a''$; then $f\\circ a'=h'\\circ\\iota\\circ\\iota^{-1}\\circ a''=b$ and $a'\\circ i=\\iota^{-1}\\circ\\iota\\circ a=a$. With step 1, $a'$ is the only morphism $T'\\to X$ over $S$ with $a'\\circ i=a$.",
-   "uses": [
     "def-sbc-first-order-thickening",
-    "def-weil-closed-immersion",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "def-pc-module-pullback",
-    "def-weil-pbc-conormal-sheaf-formally-unramified",
-    "def-weil-pbc-universal-first-order-thickening"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, proof of Lemma 04FE (lemma-characterize-formally-etale), (3) implies (1) via (2), as used in the proof of Lemma 04FF"
-   }
-  },
-  {
-   "text": "*Consequences.* By steps 1 and 6, for every first order thickening $T\\subset T'$ of affine schemes over $S$ and every $a:T\\to X$ over $S$ there is exactly one $a':T'\\to X$ over $S$ with $a'\\circ i=a$; this is the definition of formally etale (Stacks Definition 02HG). The existence half is the definition of formally smooth [def-sbc-formally-smooth], so $f$ is formally smooth.",
-   "uses": [
     "def-sbc-formally-smooth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "More on Morphisms, Definition 02HG (definition-formally-etale) and Definition 02H0 (definition-formally-smooth)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-unramified-formally-unramified",
-  "def-weil-pbc-formally-unramified-morphism",
-  "def-weil-pbc-universal-first-order-thickening",
   "lem-weil-pbc-universal-first-order-thickening-exists",
-  "def-weil-pbc-conormal-sheaf-formally-unramified",
-  "def-pc-fibre-product",
-  "def-weil-unramified-morphism",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-formally-unramified-base-change",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-universal-thickening-flat-base-change",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-universal-thickening-open-restriction",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-flat-open-diagonal-conormal-zero",
+  "lem-weil-pbc-first-order-thickening-conormal-zero",
+  "def-weil-pbc-universal-first-order-thickening",
+  "def-weil-pbc-formally-unramified-morphism",
   "def-sbc-first-order-thickening",
-  "def-weil-closed-immersion",
   "def-sbc-formally-smooth"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 04FF (lemma-unramified-flat-formally-etale) and its proof, with Lemma 04FE (lemma-characterize-formally-etale), (3) implies (1)"
+  "place": "Tag 04FF, via conormal calculation (new strict substep), then 04FE (3) implies (2) and universal lifting; uniqueness by Mathlib FormallyUnramified.hom_ext"
  },
  "mathlib_searches": [
   {
@@ -241,5 +160,15 @@
   "group": "G1",
   "result": "pass",
   "note": "f:X⟶S, [Flat f]=def-weil-flat-morphism, unramified = recorded LFT ∧ IsOpenImmersion(diagonal) match, affine T,T' with [T'.Over S], IsFirstOrderThickening i (recorded), a over S via i≫(T'↘S), ∃! a' with i≫a'=a ∧ a'≫f=T'↘S (02HG inline; no scheme-level FormallyEtale in pinned Mathlib), ∧ recorded FormallySmooth f; single universe u"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T194106-L-453292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
