@@ -26,90 +26,20 @@
  ],
  "proof": [
   {
-   "text": "*Lifting $\\bar y$ to a member of the covering.* Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point. The morphisms $u_i:U_i\\to Y$ are etale and jointly surjective, so by [lem-weil-pbc-etale-cover-geometric-point-lift] there are an index $i$ and a geometric point $\\bar u:\\operatorname{Spec}\\Omega\\to U_i$ (same field $\\Omega$) with $u_i\\circ\\bar u=\\bar y$. Fix them and write $U=U_i$, $u=u_i$, $S=S_i$, and $\\varphi:\\mathcal F|_U\\xrightarrow{\\sim}\\underline S$ for the given isomorphism of sheaves on $U_{\\Et}$.",
+   "text": "Apply isFiniteSheaf_of_finite_locally_constant_sets to obtain IsFiniteSheaf F. Unpack the definition at Ω and s, then use the concrete-category equivalence between finitely generated types and finite types.",
    "uses": [
-    "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "def-weil-geometric-point"
+    "lem-galois-flc-set-is-finite-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03PR (lemma-geometric-lift-to-cover), applied to the covering of Definition Tag 03RU (definition-finite-locally-constant) (3)"
-   }
-  },
-  {
-   "text": "*The stalk of the restriction maps onto $\\mathcal F_{\\bar y}$.* Let $\\mathcal N_{\\bar u}$ and $\\mathcal N_{\\bar y}$ be the categories of pointed etale neighbourhoods of $\\bar u$ in $U$ and of $\\bar y$ in $Y$ [def-weil-pbc-pointed-etale-neighbourhoods]; the stalks are $(\\mathcal F|_U)_{\\bar u}=\\varinjlim_{\\mathcal N_{\\bar u}^{\\mathrm{op}}}\\mathcal F|_U(V)$ and $\\mathcal F_{\\bar y}=\\varinjlim_{\\mathcal N_{\\bar y}^{\\mathrm{op}}}\\mathcal F(W)$ [def-weil-pbc-geometric-stalks], with germs $[s]^U_{(V,\\bar v)}$ and $[s]_{(W,\\bar w)}$. (a) *The map.* For $(V\\xrightarrow{p}U,\\bar v)\\in\\mathcal N_{\\bar u}$ the composite $u\\circ p$ is etale [lem-weil-pbc-etale-composition-cancellation] (2) and $(u\\circ p)\\circ\\bar v=u\\circ\\bar u=\\bar y$, so $(V\\xrightarrow{u\\circ p}Y,\\bar v)\\in\\mathcal N_{\\bar y}$; a morphism $h:(V',\\bar v')\\to(V,\\bar v)$ of $\\mathcal N_{\\bar u}$ is a $U$-morphism, hence a $Y$-morphism, with $h\\circ\\bar v'=\\bar v$, i.e. a morphism of $\\mathcal N_{\\bar y}$. Since $\\mathcal F|_U(V)=\\mathcal F(V\\xrightarrow{u\\circ p}Y)$ with the restriction maps of $\\mathcal F$, the maps $\\mathcal F|_U(V)\\to\\mathcal F_{\\bar y}$, $s\\mapsto[s]_{(V,\\bar v)}$, are compatible with the transition maps of $\\mathcal N_{\\bar u}^{\\mathrm{op}}$, and the universal property of the colimit [def-weil-pbc-category-colimit] gives a map $r:(\\mathcal F|_U)_{\\bar u}\\to\\mathcal F_{\\bar y}$ with $r([s]^U_{(V,\\bar v)})=[s]_{(V,\\bar v)}$. (b) *Surjectivity* (the reindexing in the proof of 03Q1 (3)). $\\mathcal N_{\\bar y}$ is cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], so $\\mathcal N_{\\bar y}^{\\mathrm{op}}$ is filtered and by [lem-weil-pbc-filtered-colimit-sets-elementwise] (1) every element of $\\mathcal F_{\\bar y}$ is a germ $[s]_{(W,\\bar w)}$ with $(W\\xrightarrow{q}Y,\\bar w)\\in\\mathcal N_{\\bar y}$ and $s\\in\\mathcal F(W)$. Let $V=W\\times_YU$ [def-pc-fibre-product] with projections $p_1:V\\to W$, $p_2:V\\to U$; $p_2$ is etale as a base change of the etale $q$ [lem-weil-pbc-etale-scheme-base-change]. Since $q\\circ\\bar w=\\bar y=u\\circ\\bar u$, there is $\\bar v=(\\bar w,\\bar u):\\operatorname{Spec}\\Omega\\to V$ with $p_1\\circ\\bar v=\\bar w$, $p_2\\circ\\bar v=\\bar u$, so $(V\\xrightarrow{p_2}U,\\bar v)\\in\\mathcal N_{\\bar u}$. Its image in $\\mathcal N_{\\bar y}$ is $(V\\xrightarrow{u\\circ p_2=q\\circ p_1}Y,\\bar v)$, and $p_1$ is a $Y$-morphism with $p_1\\circ\\bar v=\\bar w$, i.e. a morphism $(V,\\bar v)\\to(W,\\bar w)$ of $\\mathcal N_{\\bar y}$. By the cocone property of germs, $[s]_{(W,\\bar w)}=[\\mathcal F(p_1)(s)]_{(V,\\bar v)}=r\\bigl([\\mathcal F(p_1)(s)]^U_{(V,\\bar v)}\\bigr)$. So $r$ is surjective.",
-   "uses": [
-    "def-weil-pbc-pointed-etale-neighbourhoods",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-scheme-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback) (3), proof, third equality: 'the pair $(U,\\overline{u})$ and the map $a:U\\to X\\times_YV$ corresponds to the pair $(V,a\\circ\\overline{u})$', for the etale $u:U\\to Y$, whose inverse image is the restriction (Section Tag 03S2, paragraph after Definition Tag 03S3: '$j^{-1}\\mathcal G(U')=\\mathcal G(U')$ for $U'$ etale over $U$')"
-   }
-  },
-  {
-   "text": "*The isomorphism $\\varphi$ on stalks.* The morphism $\\varphi:\\mathcal F|_U\\to\\underline S$ and its inverse induce maps $\\varphi_{\\bar u}:(\\mathcal F|_U)_{\\bar u}\\to\\underline S_{\\bar u}$, $[s]^U_{(V,\\bar v)}\\mapsto[\\varphi_V(s)]_{(V,\\bar v)}$, and $(\\varphi^{-1})_{\\bar u}$ in the other direction (universal property of the colimit [def-weil-pbc-category-colimit], the maps $\\varphi_V$ being natural in $V$); their composites agree with the identity on all germs, hence are the identities by the uniqueness in the universal property. So $\\varphi_{\\bar u}$ is a bijection $(\\mathcal F|_U)_{\\bar u}\\cong\\underline S_{\\bar u}$ [def-weil-pbc-geometric-stalks].",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition Tag 040R (definition-stalk): the stalk is a colimit, hence a functor of the sheaf"
-   }
-  },
-  {
-   "text": "*The stalk of $\\underline S$ at $\\bar u$ has at most $|S|$ elements.* Let $P$ be the constant presheaf $V\\mapsto S$ on $U_{\\Et}$ (all restriction maps $\\mathrm{id}_S$) and $\\theta:P\\to\\underline S$ its sheafification, so that $\\underline S$ is the constant sheaf with value $S$ [def-weil-pbc-constant-sheaf]. By [lem-weil-pbc-sets-sheafification-geometric-stalk] (with $T=U$, $\\bar t=\\bar u$) the induced map $\\theta_{\\bar u}:P_{\\bar u}\\to\\underline S_{\\bar u}$ on stalks (colimits over $\\mathcal N_{\\bar u}^{\\mathrm{op}}$) is bijective. The pair $(U\\xrightarrow{\\mathrm{id}}U,\\bar u)$ is an object of $\\mathcal N_{\\bar u}$ [def-weil-pbc-pointed-etale-neighbourhoods]; let $\\sigma:S\\to P_{\\bar u}$, $a\\mapsto[a]_{(U,\\bar u)}$. $\\sigma$ is surjective: $\\mathcal N_{\\bar u}$ is cofiltered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], so by [lem-weil-pbc-filtered-colimit-sets-elementwise] (1) every element of $P_{\\bar u}$ is $[a]_{(V,\\bar v)}$ with $(V\\xrightarrow{p}U,\\bar v)\\in\\mathcal N_{\\bar u}$ and $a\\in P(V)=S$; the structure morphism $p$ is a morphism $(V,\\bar v)\\to(U,\\bar u)$ of $\\mathcal N_{\\bar u}$ (a $U$-morphism with $p\\circ\\bar v=\\bar u$), and $P(p)=\\mathrm{id}_S$, so $[a]_{(V,\\bar v)}=[P(p)(a)]_{(V,\\bar v)}=[a]_{(U,\\bar u)}=\\sigma(a)$. Hence $\\theta_{\\bar u}\\circ\\sigma:S\\to\\underline S_{\\bar u}$ is surjective and $|\\underline S_{\\bar u}|\\le|S|$ (for $S=\\varnothing$ the stalk is empty).",
-   "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-sets-sheafification-geometric-stalk",
-    "def-weil-pbc-pointed-etale-neighbourhoods",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03PT (lemma-stalk-exact) (2), stalks commute with sheafification; Definition Tag 03RU (definition-finite-locally-constant) (1) for sets; the stalk of the constant presheaf computed from Definition Tag 040R (definition-stalk) and Lemma Tag 03PQ (lemma-cofinal-etale)"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 2 and 3, $r\\circ\\varphi_{\\bar u}^{-1}\\circ\\theta_{\\bar u}\\circ\\sigma:S_i\\to\\mathcal F_{\\bar y}$ is surjective, the composite of the surjection of step 4, the bijection of step 3 and the surjection $r$ of step 2. Since $S_i$ is finite, $\\mathcal F_{\\bar y}$ is finite, with $|\\mathcal F_{\\bar y}|\\le|S_i|$. As $\\bar y$ was arbitrary, every geometric stalk of $\\mathcal F$ is finite.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Definition Tag 03RU (definition-finite-locally-constant) (4): the constant values are finite sets"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-cover-geometric-point-lift",
-  "def-weil-geometric-point",
-  "def-weil-pbc-pointed-etale-neighbourhoods",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-sets-sheafification-geometric-stalk"
+  "lem-galois-flc-set-is-finite-sheaf"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 03Q1 (lemma-stalk-pullback) (3) and its proof (reindexing of pointed etale neighbourhoods), Lemma Tag 03PT (lemma-stalk-exact) (2), Lemma Tag 03PR (lemma-geometric-lift-to-cover), Definition Tag 03RU (definition-finite-locally-constant) for sets; the finiteness consequence itself is not stated in Stacks and its assembly is agent-written"
+  "by": "worker",
+  "document": "agent formulation from the intermediate theorem",
+  "place": "the Lean proof in Sheaf.AlgebraicGeometry.FiniteLocallyConstantStalk"
  },
  "mathlib_searches": [
   {
@@ -208,5 +138,15 @@
   "group": "C1",
   "result": "pass",
   "note": "Y : Scheme.{u}; F sheaf of Type (u+1) on smallEtaleTopology; hF: etale Cover.{u} with each member's F.over iso to constantSheaf of a Finite S (empty S allowed), as source LocallyConstantDatum/IsFiniteLocallyConstantSheafOfTypes; all Omega alg. closed, s : Spec Omega -> Y; conclusion Finite (pointSmallEtale s).sheafFiber.obj F; source IsFiniteSheaf assumes finite stalks so existing false"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T053917-L-2628302",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

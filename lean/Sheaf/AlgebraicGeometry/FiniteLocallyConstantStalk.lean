@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantToFiniteSheaf
 
 /-!
 # Finite geometric stalks of finite locally constant sheaves of sets
@@ -43,6 +44,9 @@ theorem finite_stalk_of_finite_locally_constant_sets {Y : Scheme.{u}}
             (Type (u + 1))).obj S)) :
     ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
       Finite ((pointSmallEtale s).sheafFiber.obj F) := by
-  sorry
+  intro Ω _ _ s
+  have hfin : IsFiniteSheaf F := isFiniteSheaf_of_finite_locally_constant_sets F hF
+  have hgen := hfin.isFinitelyGenerated_sheafFiber Ω s
+  exact (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp hgen
 
 end AlgebraicGeometry.Scheme
