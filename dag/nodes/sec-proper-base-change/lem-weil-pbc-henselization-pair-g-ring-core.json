@@ -22,12 +22,37 @@
  ],
  "proof": [
   {
-   "text": "Apply Tag 0AGV to obtain Noetherianity and the completion comparison, then use Tag 0AGX, Tag 0AH1 and Tag 07QH to identify each completed fibre as a geometrically regular direct factor; this gives regularity at every maximal ideal.",
+   "text": "Install base Noetherianity from the G-ring hypothesis. Apply pair_henselization_noetherian_completion to the given colimit, obtaining Noetherianity of B and flatness of its structure map f.",
    "uses": [
-    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-henselization-noetherian-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a maximal ideal m of B, the henselian-pair hypothesis places J=IB in m. Quotient surjectivity supplies, for every b in B, an a in A with b-f(a) in J. With p=f inverse(m), subtraction and ideal-map monotonicity prove pB=m. Localize f to phi:A_p to B_m. It is flat by the localization theorem for flat maps. The equality pB=m identifies extended maximal ideals. Represent an element of the residue field of B_m by b in B, then by the above a, proving residue-field surjectivity; injectivity is the local-map quotient injectivity theorem. Apply flat_local_completion_iso to obtain the commuting completion equivalence e.",
+   "uses": [
     "lem-weil-pbc-flat-local-completion-iso",
-    "lem-weil-pbc-henselization-finite-separable-fibres",
-    "lem-weil-pbc-geometric-regularity-separable-extension"
+    "lem-weil-pbc-flat-local-ring-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completion map A_p to its completion is regular by the G-ring hypothesis. Compose with the regular localization A to A_p; the completion is Noetherian and all composite fibres are Noetherian. Transport this regular map along e using regular-ring-map equivalence transport. The commuting completion square identifies the result with g composed with f, where g is B to B_m to completion(B_m).",
+   "uses": [
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-regular-ring-map-ring-equiv",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-fibre-ring-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply pair_henselization_regular_fibers to g and the regular composite. Compose flatness of B to B_m and of the Noetherian local completion map to obtain flatness of g. These two assertions give regularity of g by the definition. Cancel B to B_m using regular-through-localization, obtaining regularity of the required maximal local completion map. Combine with Noetherianity from step 1.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization-regular-fibers",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-regular-through-localization"
    ],
    "elementary": false
   }
@@ -35,13 +60,21 @@
  "proof_deps": [
   "lem-weil-pbc-henselization-noetherian-completion",
   "lem-weil-pbc-flat-local-completion-iso",
-  "lem-weil-pbc-henselization-finite-separable-fibres",
-  "lem-weil-pbc-geometric-regularity-separable-extension"
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-localization-regular",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-ring-map-ring-equiv",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-pair-henselization-regular-fibers",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-regular-through-localization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "K3",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0AH3 proof, paragraphs 1--4"
+  "place": "Tag 0AH3: quotient representatives establish the omitted local completion comparison; the final tensor calculation is isolated in the regular-fibres node. Lean combines comparison, regular composition, equivalence transport and localization cancellation."
  },
  "mathlib_searches": [
   {
@@ -99,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-0f0b4",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T053933-L-2635834",
+  "landing": "20261012T144127-L-2101350",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched delivered Lean signatures, proof and remaining fibre lemma with their DAG records, cited sources, report, axiom checks and clean delivered-module/direct-importer compilations."
  }
 }

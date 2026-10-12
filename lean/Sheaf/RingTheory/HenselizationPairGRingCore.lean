@@ -1,10 +1,28 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group K3
+-/
 module
 
 public import Sheaf.RingTheory.GRingMaximalIdealCriterion
 public import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
-import Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit
+import Sheaf.RingTheory.PairHenselizationRegularFibers
 import Sheaf.RingTheory.FlatLocalCompletionIso
-import Sheaf.RingTheory.GeometricRegularitySeparableExtension
+import Sheaf.RingTheory.RegularThroughLocalization
+import Sheaf.RingTheory.RegularComposition
+import Sheaf.RingTheory.LocalizationRegular
+import Sheaf.RingTheory.RegularRingEquiv
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.FibreRingNoetherian
+import Mathlib.RingTheory.AdicCompletion.LocalRing
+
+/-!
+# Maximal local completion maps of a henselization of a G-ring
+
+Source: Stacks Project, More on Algebra, Tag 0AH3.
+(blueprint: lem-weil-pbc-henselization-pair-g-ring-core).
+-/
 
 @[expose] public section
 
@@ -14,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingTheory
 
+set_option maxHeartbeats 1000000 in
+-- Comparing the algebra structures on localizations and their completions needs extra fuel.
 /-- The Noetherian and maximal-local regularity part of the G-ring theorem for a
 henselization of a pair.  It packages the completion comparison, finite separable
 fibres, and geometric-regularity argument of Stacks Project Tag 0AH3; the final
@@ -39,6 +59,89 @@ theorem henselization_pair_noetherian_and_maximal_regular
           (algebraMap (Localization.AtPrime m)
             (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime m))
               (Localization.AtPrime m))) := by
-  sorry
+  classical
+  have : IsNoetherianRing A := hA.1
+  obtain ⟨hB, hflat, _⟩ := pair_henselization_noetherian_completion A I c hc.1.some
+  have : IsNoetherianRing c.pt.right := hB
+  refine ⟨hB, ?_⟩
+  intro m hm
+  let B : Type u := c.pt.right
+  let f : A →+* B := c.pt.hom.hom
+  let J := I.map f
+  have : HenselianRing B J := hc.2.1
+  -- Henselianness and quotient surjectivity give representatives modulo every maximal ideal.
+  have hJm : J ≤ m := HenselianRing.jac.trans (sInf_le ⟨bot_le, hm⟩)
+  have happrox : ∀ b : B, ∃ a : A, b - f a ∈ J := by
+    intro b
+    obtain ⟨x, hx⟩ := hc.2.2.2 (Ideal.Quotient.mk J b)
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+    refine ⟨a, ?_⟩
+    rw [Ideal.quotientMap_mk] at hx
+    exact (Ideal.Quotient.mk_eq_mk_iff_sub_mem _ _).mp hx.symm
+  let p := m.comap f
+  have hmap : Ideal.map f p = m := by
+    apply le_antisymm Ideal.map_comap_le
+    intro b hb
+    obtain ⟨a, ha⟩ := happrox b
+    have hap : a ∈ p := by
+      change f a ∈ m
+      simpa only [sub_sub_cancel] using m.sub_mem hb (hJm ha)
+    have hIp : I ≤ p := Ideal.map_le_iff_le_comap.mp hJm
+    simpa only [sub_add_cancel] using
+      (Ideal.map f p).add_mem (Ideal.map_mono hIp ha) (Ideal.mem_map_of_mem f hap)
+  -- Localize the flat map; its maximal ideal and residue field comparisons are explicit.
+  let R := Localization.AtPrime p
+  let S := Localization.AtPrime m
+  let φ : R →+* S := Localization.localRingHom p m f rfl
+  have hφflat : φ.Flat := RingHom.Flat.localRingHom hflat m p rfl
+  have hmax : Ideal.map φ (IsLocalRing.maximalIdeal R) =
+      IsLocalRing.maximalIdeal S := by
+    rw [← Localization.AtPrime.map_eq_maximalIdeal, Ideal.map_map,
+      show φ.comp (algebraMap A R) = (algebraMap B S).comp f by
+        apply RingHom.ext
+        intro x
+        exact Localization.localRingHom_to_map p m f rfl x,
+      ← Ideal.map_map, hmap, Localization.AtPrime.map_eq_maximalIdeal]
+  have hres : Function.Bijective (Ideal.quotientMap (IsLocalRing.maximalIdeal S) φ
+      (IsLocalRing.maximalIdeal_comap φ).ge) := by
+    refine ⟨Ideal.quotientMap_injective' (IsLocalRing.maximalIdeal_comap φ).le, ?_⟩
+    intro y
+    obtain ⟨b, hb⟩ := m.algebraMap_residueField_surjective y
+    obtain ⟨a, ha⟩ := happrox b
+    refine ⟨Ideal.Quotient.mk (IsLocalRing.maximalIdeal R) (algebraMap A R a), ?_⟩
+    rw [Ideal.quotientMap_mk, Localization.localRingHom_to_map, ← hb]
+    apply (Ideal.Quotient.mk_eq_mk_iff_sub_mem _ _).mpr
+    change algebraMap B S (f a) - algebraMap B S b ∈ _
+    rw [← map_sub, ← Localization.AtPrime.map_eq_maximalIdeal]
+    apply Ideal.mem_map_of_mem
+    simpa only [neg_sub] using m.neg_mem (hJm ha)
+  let Rhat := AdicCompletion (IsLocalRing.maximalIdeal R) R
+  let Shat := AdicCompletion (IsLocalRing.maximalIdeal S) S
+  obtain ⟨φhat, _, hbij, hcomm⟩ := RingHom.flat_local_completion_iso φ hφflat hmax hres
+  let e : Rhat ≃+* Shat := RingEquiv.ofBijective φhat hbij
+  let g : B →+* Shat := (algebraMap S Shat).comp (algebraMap B S)
+  have htriangle : e.toRingHom.comp ((algebraMap R Rhat).comp (algebraMap A R)) =
+      g.comp f := by
+    apply RingHom.ext
+    intro x
+    change φhat (algebraMap R Rhat (algebraMap A R x)) =
+      algebraMap S Shat (algebraMap B S (f x))
+    have hx := DFunLike.congr_fun hcomm (algebraMap A R x)
+    change φhat (algebraMap R Rhat (algebraMap A R x)) =
+      algebraMap S Shat (φ (algebraMap A R x)) at hx
+    rw [hx, Localization.localRingHom_to_map]
+  have : IsNoetherianRing Rhat := AdicCompletion.isNoetherianRing _
+  -- Transport the regular base completion map, then cancel the ind-etale extension.
+  have hbase : ((algebraMap R Rhat).comp (algebraMap A R)).IsRegular := by
+    exact (IsLocalization.isRegular_and_fiber p.primeCompl).1.comp_of_fiber_noetherian
+      (hA.2 p) (fun q _ ↦ Ideal.isNoetherianRing_fiber q)
+  have hcomposite : (g.comp f).IsRegular :=
+    RingHom.IsRegular.of_ringEquiv _ _ (RingEquiv.refl A) e
+      (by simpa using htriangle) hbase
+  have hfib := pair_henselization_regular_fibers A I c hc.1.some Shat g hcomposite
+  have hgreg : g.IsRegular := ⟨RingHom.Flat.comp
+    (RingHom.flat_algebraMap_iff.mpr (inferInstance : Module.Flat B S))
+    (RingHom.flat_algebraMap_iff.mpr (inferInstance : Module.Flat S Shat)), hfib⟩
+  exact RingHom.isRegular_of_comp_algebraMap_localization m.primeCompl hgreg
 
 end RingTheory

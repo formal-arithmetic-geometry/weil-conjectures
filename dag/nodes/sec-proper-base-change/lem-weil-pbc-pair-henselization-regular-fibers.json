@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-pair-henselization-regular-fibers",
+ "kind": "statement",
+ "title": "Geometrically regular fibres after a Noetherian ind-etale pair colimit",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, and $c$ a colimit cocone in the under category of $A$ on the full subcategory of etale maps $A\\to D$ for which $A/I\\to D/ID$ is bijective [lem-weil-pbc-pair-henselization]. Write $B=c.\\mathrm{pt}.\\mathrm{right}$ and $f:A\\to B$ for its structure map. Assume $B$ is Noetherian [def-weil-pbc-noetherian-ring]. Let $C$ be a commutative ring and $g:B\\to C$ any homomorphism. If $g\\circ f$ is regular [def-weil-pbc-g-ring], then for every prime $q$ of $B$, $\\kappa(q)\\otimes_B C$ with the algebra structure induced by $g$ is geometrically regular over $\\kappa(q)$ [def-weil-pbc-g-ring]. No flatness of $g$, henselian-pair hypothesis on $B$, G-ring hypothesis, or completion is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AH3, displayed product of completed fibres and following paragraph; the calculation applies to any B-algebra C. Uses Tag 0AH1 and Algebra Tag 07QH; checked on the Stacks tag pages."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "The pair-henselization indexing category is filtered. Transport the under-category colimit along the equivalence with commutative A-algebras. Apply the finite-separable-fibres theorem to B = c.pt.right: for p the contraction of q, the canonical A-algebra fibre is the finite product of the residue fields of all primes q_i over p, and each kappa(q_i)/kappa(p) is separable algebraic.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization-filtered",
+    "lem-weil-pbc-henselization-finite-separable-fibres"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the finite product over B with C, with the B-structure supplied by g. Tensor cancellation identifies this tensor product with kappa(p) tensor_A C. Distribution over finite products identifies it with the product of kappa(q_i) tensor_B C. The q factor is the required fibre, and the isomorphism respects the kappa(p)-algebra structures. Binary tensor-product distribution iterated over the finite index set gives the product identity.",
+   "uses": [
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The regular composite makes kappa(p) tensor_A C geometrically regular. Its projection to the q component is localization at the idempotent with 1 in that component and 0 elsewhere: every element of the component lifts to the product, and the kernel is killed by that idempotent. This projection also makes the component Noetherian as a quotient. The same idempotent description survives every finite purely inseparable scalar extension. Apply regularity of localizations to each extended product to show the component is geometrically regular over kappa(p).",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-localization-of-regular-ring",
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the compatible residue-field map kappa(p) to kappa(q) from the canonical decomposition. It is separable algebraic by step 1. The q component is Noetherian by step 3. Apply geometric regularity over a separable algebraic extension to conclude geometric regularity over kappa(q). Empty products present no prime q to check; zero factors remain regular by the vacuous prime-local criterion.",
+   "uses": [
+    "lem-weil-pbc-geometric-regularity-separable-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization-filtered",
+  "lem-weil-pbc-henselization-finite-separable-fibres",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "lem-weil-pbc-algebra-tensor-product-distributes-product",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-geometric-regularity-separable-extension"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "K3",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AH3 fibre calculation, generalized by replacing the completion with an arbitrary C; Tags 0AH1 and 07QH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometrically regular fibres of a composite imply geometrically regular fibres after an ind etale extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B is a Noetherian filtered colimit of etale A algebras and A to C is regular, then fibres of B to C are geometrically regular",
+   "results": "Algebra.Etale.exists_subalgebra_fg; Algebra.IsEtaleAt.comp; RingHom.Etale.toAlgebra; Algebra.Etale.comp; Algebra.Smooth.exists_finiteType; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.Etale.finitePresentation; Algebra.IsEtaleAt",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?regular|henselization.*regular",
+   "results": "No matches in Mathlib. Project search found no cancellation theorem; finite-separable-fibre and scalar-extension results supply only parts.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.HenselizationPairGRingCore",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "proof step 7 (essential surjectivity): henselization of the approximating G-ring remains a G-ring; specifically the 0AH3 product-of-fibres calculation",
+   "via": [
+    "lem-weil-pbc-henselization-pair-g-ring-core",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PairHenselizationRegularFibers",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationRegularFibers.lean",
+  "declaration": "RingTheory.pair_henselization_regular_fibers",
+  "statement": "theorem pair_henselization_regular_fibers\n    (A : Type u) [CommRing A] (I : Ideal A)\n    (c : Cocone (ObjectProperty.ι\n      (fun D : Under (CommRingCat.of A) ↦\n        AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map D.hom) ∧\n          Function.Bijective (Ideal.quotientMap (I.map D.hom.hom) D.hom.hom\n            (Ideal.le_comap_map)))))\n    (hc : IsColimit c) [IsNoetherianRing c.pt.right]\n    (C : Type u) [CommRing C] (g : c.pt.right →+* C)\n    (hregular : (g.comp c.pt.hom.hom).IsRegular) :\n    letI := g.toAlgebra\n    ∀ (q : Ideal c.pt.right) [q.IsPrime],\n      Algebra.IsGeometricallyRegular q.ResidueField (q.Fiber C)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0f0b4",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144127-L-2101350",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-0f0b4",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T144127-L-2101350",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, proof and remaining fibre lemma with their DAG records, cited sources, report, axiom checks and clean delivered-module/direct-importer compilations."
+ }
+}
