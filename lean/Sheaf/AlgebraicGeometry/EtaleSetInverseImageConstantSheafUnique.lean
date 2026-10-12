@@ -1,9 +1,7 @@
 /- helper uniqueness -/
 module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheafExists
-import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -16,5 +14,16 @@ theorem etaleSetInverseImageConstantSheaf_unique
     (hγ : etaleSetInverseImageConstantSheafCondition U V v E γ) :
     ∀ γ' : etaleSetInverseImageConstantSheafHom U V v E,
       etaleSetInverseImageConstantSheafCondition U V v E γ' → γ' = γ := by
-  sorry
+  intro γ' hγ'
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback (P := @Etale) (Q := ⊤) v) (Type (u + 1))
+    (U.smallGrothendieckTopology @Etale) (V.smallGrothendieckTopology @Etale)
+  apply (adj.homEquiv _ _).injective
+  apply ((constantSheafAdj U.smallEtaleTopology (Type (u + 1))
+    (MorphismProperty.Over.mkIdTerminal @Etale U)).homEquiv _ _).injective
+  rw [constantSheafAdj_homEquiv_apply, constantSheafAdj_homEquiv_apply]
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  ext e
+  obtain ⟨e⟩ := e
+  exact (hγ' e).trans (hγ e).symm
 end AlgebraicGeometry

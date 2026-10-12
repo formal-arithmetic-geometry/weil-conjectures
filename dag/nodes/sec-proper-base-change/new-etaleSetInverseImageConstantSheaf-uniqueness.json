@@ -10,24 +10,21 @@
  },
  "proof": [
   {
-   "text": "Apply the representation of constant sheaves by indexed coproducts, inverse-image representability, and the base-change coproduct isomorphism; verify the canonical-section equations and the isomorphism property.",
-   "uses": [
-    "lem-galois-constant-sheaf-sets-representable",
-    "lem-galois-inverse-image-representable",
-    "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
-   ],
-   "elementary": false
+   "text": "Apply injectivity of the hom equivalence for the inverse-image/direct-image adjunction to reduce equality of gamma and gamma prime to equality of their adjuncts, which are morphisms from the constant sheaf on U into the direct image of the constant sheaf on V (Mathlib Adjunction.homEquiv_unit).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The identity U -> U is terminal in the small etale site (Mathlib MorphismProperty.Over.mkIdTerminal). Apply injectivity of the constant-sheaf/evaluation adjunction. The proved source-library lemma CategoryTheory.constantSheafAdj_homEquiv_apply identifies the resulting function with the canonical constant-section map at U followed by the adjunct evaluated at U. Expanding the inverse-image adjunct with Adjunction.homEquiv_unit gives precisely gamma applied to the pulled-back canonical section for each e in E. The two section conditions identify these values with the same canonical section on V; pointwise equality, including the empty E case, proves equality of the functions and hence of the original morphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-galois-constant-sheaf-sets-representable",
-  "lem-galois-inverse-image-representable",
-  "lem-weil-pbc-sets-etale-inverse-image-constant-base-change"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemma 093R"
+  "place": "Sites Example 0H7J, universal property of the constant sheaf, and the inverse-image/direct-image adjunction as cited in the node source. Implemented by Mathlib constantSheafAdj and Adjunction.homEquiv_unit, with the proved source-library constantSheafAdj_homEquiv_apply (WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver)."
  },
  "mathlib_searches": [
   {
@@ -131,10 +128,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T053932-L-2635628",
-  "kind": "interface",
+  "landing": "20261012T063520-L-3159920",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
