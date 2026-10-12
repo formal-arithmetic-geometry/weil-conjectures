@@ -35,26 +35,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 open Etale
 
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The components of the composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*` are the
-restriction maps along the pullback pasting isomorphisms. -/
-lemma Etale.lowerStarComp_hom_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
-    (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂) (G : Sheaf T.smallEtaleTopology A) (V : R.Etaleᵒᵖ) :
-    ((Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).hom.app G).hom.app V =
-      G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂ h₁₂ hh₁₂).hom.app V.unop).op := by
-  simp only [Etale.lowerStarComp, Functor.sheafPushforwardContinuousComp']
-  exact Category.id_comp _
-
-omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
-/-- The components of the inverse of the composition isomorphism
-`(h₁)_* ⋙ (h₂)_* ≅ (h₁ ≫ h₂)_*`. -/
-lemma Etale.lowerStarComp_inv_app_hom_app {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
-    (h₁₂ : T ⟶ R) (hh₁₂ : h₁₂ = h₁ ≫ h₂) (G : Sheaf T.smallEtaleTopology A) (V : R.Etaleᵒᵖ) :
-    ((Etale.lowerStarComp A h₁ h₂ h₁₂ hh₁₂).inv.app G).hom.app V =
-      G.obj.map ((MorphismProperty.Over.pullbackComp h₁ h₂ h₁₂ hh₁₂).inv.app V.unop).op := by
-  simp only [Etale.lowerStarComp, Functor.sheafPushforwardContinuousComp']
-  exact Category.comp_id _
-
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
 /-- **The base change map on sections.** Let `W → Y` be étale, `V → Y'` étale and
