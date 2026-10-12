@@ -31,49 +31,38 @@
  ],
  "proof": [
   {
-   "text": "(Each $\\alpha_n$ is an isomorphism of $\\mathcal O_X$-modules.) Fix $n$ and write $U_{jk}=U_j\\cap U_k$. Restriction is compatible with composition and identities and with iterated restriction: $(\\psi\\varphi)|_V=\\psi|_V\\varphi|_V$, $\\mathrm{id}|_V=\\mathrm{id}$ and $(\\varphi|_U)|_V=\\varphi|_V$ for opens $V\\subseteq U$, since all three hold on each component $W\\subseteq V$ by the definition $(\\varphi|_V)_W=\\varphi_W$ [lem-weil-pbc-glue-sheaves-of-modules, notation of the statement]. For each $j$ let $\\beta_j:\\mathcal G_n|_{U_j}\\to\\mathcal F_n|_{U_j}$ be the $\\mathcal O_X|_{U_j}$-linear inverse of $\\alpha_n|_{U_j}$ (hypothesis). Restricting the identities $\\beta_j\\,\\alpha_n|_{U_j}=\\mathrm{id}$, $\\alpha_n|_{U_j}\\,\\beta_j=\\mathrm{id}$ to $U_{jk}$ shows that $\\beta_j|_{U_{jk}}$ is a two-sided inverse of $\\alpha_n|_{U_{jk}}$; so is $\\beta_k|_{U_{jk}}$, and a two-sided inverse is unique ($b=b(ab')=(ba)b'=b'$), hence $\\beta_j|_{U_{jk}}=\\beta_k|_{U_{jk}}$ for all $j,k$. By glueing of morphisms [lem-weil-pbc-glue-sheaves-of-modules, (1)] there is a unique $\\mathcal O_X$-linear $\\beta_n:\\mathcal G_n\\to\\mathcal F_n$ with $\\beta_n|_{U_j}=\\beta_j$ for all $j$. Then $(\\alpha_n\\beta_n)|_{U_j}=\\alpha_n|_{U_j}\\beta_j=\\mathrm{id}=\\mathrm{id}|_{U_j}$ and likewise $(\\beta_n\\alpha_n)|_{U_j}=\\mathrm{id}|_{U_j}$ for every $j$, so by the uniqueness clause of [lem-weil-pbc-glue-sheaves-of-modules, (1)] $\\alpha_n\\beta_n=\\mathrm{id}_{\\mathcal G_n}$ and $\\beta_n\\alpha_n=\\mathrm{id}_{\\mathcal F_n}$: $\\alpha_n$ is an isomorphism of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category] with inverse $\\beta_n=\\alpha_n^{-1}$.",
+   "text": "Fix a level n and a point x. Since the supremum of the opens U_j is X, choose j with x in U_j. Apply the existing source theorem Scheme.Modules.bijective_stalk_of_isIso_restrict [lem-weil-pbc-module-restriction-iso-stalk-bijective] to the assumed isomorphism alpha_n restricted to U_j. Thus alpha_n is bijective on every stalk.",
    "uses": [
-    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-weil-pbc-module-restriction-iso-stalk-bijective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the stalk criterion [lem-weil-pbc-module-iso-on-stalks] at each level. In Lean, TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective gives bijectivity on each open; ConcreteCategory.isIso_iff_bijective gives isomorphisms of abelian groups, NatTrans.isIso_iff_isIso_app gives an isomorphism of underlying presheaves, and Scheme.Modules.toPresheaf reflects isomorphisms. Hence every alpha_n is an isomorphism of modules [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "lem-weil-pbc-module-iso-on-stalks",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'; glueing of maps: literature/stacks-project/sheaves.tex Lemma 04TN (lemma-glue-maps)"
-   }
+   "elementary": true
   },
   {
-   "text": "(The inverses commute with the transition maps.) Let $t^{\\mathcal F}_n:\\mathcal F_{n+1}\\to\\mathcal F_n$ and $t^{\\mathcal G}_n:\\mathcal G_{n+1}\\to\\mathcal G_n$ be the transition maps. As $\\alpha$ is a morphism of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module, (1)], $t^{\\mathcal G}_n\\alpha_{n+1}=\\alpha_nt^{\\mathcal F}_n$. Composing with $\\beta_n$ on the left and $\\beta_{n+1}$ on the right (step 1) gives $\\beta_nt^{\\mathcal G}_n\\alpha_{n+1}\\beta_{n+1}=\\beta_n\\alpha_nt^{\\mathcal F}_n\\beta_{n+1}$, i.e. $\\beta_nt^{\\mathcal G}_n=t^{\\mathcal F}_n\\beta_{n+1}$ for every $n\\ge1$.",
+   "text": "By the definition of Coh(X,I) as a full subcategory of inverse systems [def-weil-pbc-coherent-formal-module], apply NatTrans.isIso_iff_isIso_app to alpha.hom, then ObjectProperty.isIso_hom_iff to alpha. Take beta = inv alpha. Its two inverse identities are IsIso.hom_inv_id and IsIso.inv_hom_id. For each n take e = asIso(alpha_n); ObjectProperty.hom_inv and NatTrans.inv_app identify e.inv with beta_n. These operations construct only the unique categorical inverses of proved isomorphisms.",
    "uses": [
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'"
-   }
-  },
-  {
-   "text": "(Conclusion.) By step 2, $\\beta=(\\beta_n)_{n\\ge1}$ is a family of $\\mathcal O_X$-linear maps $\\mathcal G_n\\to\\mathcal F_n$ commuting with the transition maps, i.e. a morphism $(\\mathcal G_n)\\to(\\mathcal F_n)$ of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module, (1)]. Composition and identities in $\\mathit{Coh}(X,\\mathcal I)$ are componentwise [def-weil-pbc-coherent-formal-module, proof step 4], so step 1 gives $\\beta\\circ\\alpha=(\\beta_n\\alpha_n)=\\mathrm{id}$ and $\\alpha\\circ\\beta=(\\alpha_n\\beta_n)=\\mathrm{id}$. Hence $\\alpha$ is an isomorphism in $\\mathit{Coh}(X,\\mathcal I)$ with inverse $\\beta$.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-module-restriction-iso-stalk-bijective",
+  "lem-weil-pbc-module-iso-on-stalks",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087X (label lemma-inverse-systems-abelian, coherent.tex line 6313; tag verified in literature/stacks-project/tags/tags: 087X,coherent-lemma-inverse-systems-abelian), part (3) and the last sentence of its proof (line 6416): 'Parts (2) and (3) of the lemma are immediate from our construction'; Stacks gives no argument for this remark (it is part of 'immediate from our construction'), so the proof is written by the agent"
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/Topology/Sheaves/Stalks.lean",
+  "place": "Source lemma bijective_stalk_of_isIso_restrict, lines 464-485; Mathlib app_bijective_of_stalkFunctor_map_bijective, lines 645-649. X2 implements the stalk route below the fixed unit, followed by the standard functor-category and full-subcategory isomorphism criteria."
  },
  "mathlib_searches": [
   {
@@ -179,5 +168,15 @@
   "group": "K1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T220529-L-1396799",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

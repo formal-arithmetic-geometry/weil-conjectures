@@ -6,7 +6,6 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.Topology.GlueSheavesOfModules
 
 /-!
 # Isomorphisms of coherent formal modules are local
@@ -29,15 +28,15 @@ is positive level `n + 1`; restriction is the usual restriction of module sheave
 Source: Stacks Project, Lemma 30.23.2 (Tag 087X), locality in part (3).
 (blueprint: lem-weil-pbc-coherent-formal-modules-isomorphism-local)
 
-Proof (the node's three steps): Fix a level. The inverses on the cover restrict to
-inverses on overlaps, hence agree there by uniqueness of a two-sided inverse.
-Glue these maps using lem-weil-pbc-glue-sheaves-of-modules (1). The same uniqueness
-clause, applied to the two composites, makes the glued map an inverse globally.
-Next, conjugate the compatibility equation for alpha with these inverses to show
-that the inverses commute with every transition map. Finally, they define a morphism
-of Coh(X,I), by def-weil-pbc-coherent-formal-module; composition and identities are
-componentwise, so the two global inverse identities follow. At each level the inverse
-is precisely the inverse already constructed, giving the final component identities. -/
+Proof: At a fixed level, every point lies in a member of the cover. The existing
+`Scheme.Modules.bijective_stalk_of_isIso_restrict` makes the component bijective on
+that stalk. Mathlib's stalk criterion for sheaves makes its map on every open
+bijective, hence an isomorphism of abelian groups. The forgetful functor to abelian
+presheaves reflects isomorphisms, so the module component is an isomorphism.
+`NatTrans.isIso_iff_isIso_app` then gives an isomorphism of inverse systems, and
+`ObjectProperty.isIso_hom_iff` reflects it to the full subcategory Coh(X,I). Take
+its categorical inverse. The inverse identities and the compatibility of taking
+inverses with components give the final component identities. -/
 theorem coherentFormalModule_isIso_of_isIso_restrict
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     {J : Type v} (U : J → X.Opens) (hU : iSup U = ⊤)
@@ -48,6 +47,28 @@ theorem coherentFormalModule_isIso_of_isIso_restrict
       α ≫ β = 𝟙 F ∧ β ≫ α = 𝟙 G ∧
       ∀ n : ℕ, ∃ e : F.obj.obj (op n) ≅ G.obj.obj (op n),
         e.hom = α.hom.app (op n) ∧ e.inv = β.hom.app (op n) := by
-  sorry
+  classical
+  have hlevel (n : ℕ) : IsIso (α.hom.app (op n)) := by
+    suffices IsIso ((Scheme.Modules.toPresheaf X).map (α.hom.app (op n))) by
+      exact isIso_of_reflects_iso _ (Scheme.Modules.toPresheaf X)
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro W
+    let φ := (SheafOfModules.toSheaf X.ringCatSheaf).map (α.hom.app (op n))
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    apply TopCat.Presheaf.app_bijective_of_stalkFunctor_map_bijective φ W.unop
+    intro x hx
+    have hxcover : x ∈ iSup U := by rw [hU]; trivial
+    obtain ⟨j, hj⟩ := TopologicalSpace.Opens.mem_iSup.mp hxcover
+    have := hα j n
+    exact Scheme.Modules.bijective_stalk_of_isIso_restrict (α.hom.app (op n)) x hj
+  have : IsIso α.hom := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro n
+    exact hlevel n.unop
+  have : IsIso α := (ObjectProperty.isIso_hom_iff α).mp inferInstance
+  refine ⟨inferInstance, inv α, IsIso.hom_inv_id α, IsIso.inv_hom_id α, ?_⟩
+  intro n
+  refine ⟨asIso (α.hom.app (op n)), rfl, ?_⟩
+  simp
 
 end AlgebraicGeometry

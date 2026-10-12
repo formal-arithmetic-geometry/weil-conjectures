@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-module-restriction-iso-stalk-bijective",
+ "kind": "statement",
+ "title": "A locally invertible module map is bijective on stalks of that open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M,N$ sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], $\\varphi:M\\to N$ a module morphism, and $U\\subseteq X$ an open subset. If $\\varphi|_U$ is an isomorphism, then for every $x\\in U$ the induced map of stalks $\\varphi_x:M_x\\to N_x$ [def-weil-pbc-module-stalk] is bijective.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+  "place": "Lemma AlgebraicGeometry.Scheme.Modules.bijective_stalk_of_isIso_restrict, lines 464-485; its proof by the Mathlib natural isomorphism restrictStalkNatIso."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Set y=(x,hx), a point of U. Mathlib Scheme.Modules.restrictStalkNatIso U.ι y naturally identifies the stalk functor after restriction with the original stalk functor at x. Naturality expresses the original stalk map as the inverse of the comparison at M, followed by the restricted stalk map, followed by the comparison at N.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The restricted map is an isomorphism by hypothesis, so its image under the underlying-presheaf and stalk functors is an isomorphism. The two comparison maps are isomorphisms as components of a natural isomorphism. Their composite is therefore an isomorphism of abelian groups, hence bijective by ConcreteCategory.bijective_of_isIso. This is precisely the existing source lemma, whose sorry map entry has s=false and ts=false.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+  "place": "Words follow the existing compiled proof of bijective_stalk_of_isIso_restrict, lines 469-485; no new Lean declaration is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "isomorphism of sheaves of modules after restriction to an open subset induces bijection on stalks",
+   "results": "Service unavailable: Internal Server Error. This is not evidence of absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism after restriction of a sheaf of modules induces a bijective stalk map at points of the open subset",
+   "results": "app_bijective_of_stalkFunctor_map_bijective; app_isIso_of_stalkFunctor_map_iso; isIso_iff_stalkFunctor_map_iso; PresheafedSpace.ofRestrict_stalkMap_isIso. Exact desired theorem already exists in the source library.",
+   "verdict": "use existing source declaration",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "rg restrictStalkNatIso|bijective_stalk_of_isIso_restrict Mathlib/AlgebraicGeometry/Modules/Sheaf.lean lean/WeilConjectures/Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; tools/blueprint_refs.py search restriction stalk; tools/blueprint_refs.py search stalk open",
+   "results": "Mathlib restrictStalkNatIso at line 510. Exact source theorem bijective_stalk_of_isIso_restrict at line 464; no existing DAG node has this declaration in its lean record, and blueprint searches gave zero matches. The pinned sorry map records no direct or transitive sorry for this declaration.",
+   "verdict": "use existing source declaration",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-isomorphism-local",
+    "lem-weil-pbc-coherent-formal-modules-local-exactness",
+    "lem-weil-pbc-formal-completion-exact",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.bijective_stalk_of_isIso_restrict",
+  "statement": "lemma bijective_stalk_of_isIso_restrict {M N : X.Modules} (φ : M ⟶ N) {U : X.Opens}\n    [IsIso ((restrictFunctor U.ι).map φ)] (x : X) (hx : x ∈ U) :\n    Function.Bijective\n      ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ((toPresheaf X).map φ))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T220529-L-1396799",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T220529-L-1396799",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
