@@ -14,25 +14,25 @@
  ],
  "proof": [
   {
-   "text": "Let A be the subfield of Omega algebraic over K. A polynomial over A has coefficients algebraic over K, so every root in Omega is again algebraic over K; thus A is algebraically closed. The residue field at each point of an etale K-scheme is finite separable by [lem-weil-pbc-etale-fibre-discrete-separable-points]. Consequently every lift from Spec Omega factors uniquely through Spec A, naturally in the etale object. These lift bijections identify the categories of pointed neighbourhoods, hence their stalk colimits and germ maps [def-weil-pbc-geometric-stalks]. Extend each K-automorphism of Ks first to A, then to Omega by fixing a transcendence basis and extending the resulting automorphism of the rational-function field through its algebraic closure Omega. The canonical germ formula determines rho on every stalk element, since every element has a representative; it therefore agrees with the action of [lem-exc-field-sections-stalk-invariants] under this identification.",
+   "text": "The structure morphism of X is etale, hence locally quasi-finite. Mathlib Scheme.Hom.isDiscrete_preimage_singleton makes its fibre as a subset discrete. Spec K is a singleton, so this subset is all of X. Its singleton open subschemes Y_i form a covering family a_i:Y_i -> X, including the empty covering for empty X. Each Y_i is nonempty and subsingleton. Compose the change-of-lift equation with a_i to check covariance of the pulled-back germ family. Apply lem-exc-field-equivariant-germs-one-point to obtain z_i on Y_i with the prescribed germs.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-exc-field-equivariant-germs-one-point",
+    "def-weil-pbc-etale-sheaf-of-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove germ extensionality for an arbitrary base scheme S and geometric point s, assuming the lifts of the etale object cover its underlying points. Equal germs give pointed refinements where restrictions agree, by Mathlib Point.toPresheafFiber_eq_iff'. These refinements make the equalizer sieve covering, and sheaf separatedness gives equality. In the field case, exists_fac_of_etale_of_isSepClosed supplies the lift-covering hypothesis. On any common refinement b:W -> Y_i, c:W -> Y_j with b a_i = c a_j, germ naturality says the restrictions of z_i and z_j both have germs f at the same lift. Apply the generalized germ-extensionality helper with the field lift-covering argument to make these restrictions equal.",
+   "uses": [
     "def-weil-pbc-geometric-stalks",
-    "lem-exc-field-sections-stalk-invariants"
+    "def-weil-pbc-etale-sheaf-of-sets"
    ],
    "elementary": false
   },
   {
-   "text": "Each open singleton component of X is the spectrum of a finite separable field, by [lem-weil-pbc-etale-fibre-discrete-separable-points] applied over the unique base point and the identification of this fibre with X. Choose one geometric lift on a component, identifying its field with a finite intermediate field L of Ks. For g fixing L, every compatible extension tau fixes that lift. Covariance therefore makes the value of f invariant under the subgroup fixing L. The invariant-section bijection [lem-exc-field-sections-stalk-invariants], transported in step 1, gives a section on this component with that germ. Every embedding of its field into Ks extends to a K-automorphism of Ks; extend it to Omega as in step 1. Thus every other lift is obtained by precomposition, and covariance of f and the canonical germ formula imply that all germs of this section have the prescribed values.",
+   "text": "Apply Mathlib Presheaf.IsSheaf.existsUnique_amalgamation_ofArrows to glue the compatible sections z_i, represented as maps from PUnit. For any geometric lift x, Point.jointly_surjective lifts x through the covering sieve, hence through a refinement of some a_i. The amalgamation equation and Point.toPresheafFiber_w_apply identify the glued germ with f(x). When X is empty the same argument uses the empty covering and yields a section without applying the one-point lemma.",
    "uses": [
-    "lem-weil-pbc-etale-fibre-discrete-separable-points",
-    "lem-exc-field-sections-stalk-invariants"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The open singleton components form an etale covering of X with pairwise empty intersections. The sheaf axiom [def-weil-pbc-etale-sheaf-of-sets] identifies sections over X with the product of sections on these components: there is exactly one section over an empty intersection, so compatibility is automatic. Glue the sections from step 2. Every lift lies in one component, so the glued section has germ f(x) at every lift x. For empty X the empty covering gives its unique section, realizing the unique empty family.",
-   "uses": [
+    "def-weil-pbc-geometric-stalks",
     "def-weil-pbc-etale-sheaf-of-sets"
    ],
    "elementary": false
@@ -41,13 +41,12 @@
  "proof_deps": [
   "def-weil-pbc-etale-sheaf-of-sets",
   "def-weil-pbc-geometric-stalks",
-  "lem-exc-field-sections-stalk-invariants",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+  "lem-exc-field-equivariant-germs-one-point"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04JM, direct proof of lemma-global-sections-point; Tag 03QW, section-galois-action-stalks, including nonalgebraic geometric points"
+  "place": "Tags 04JM and 03QW; E2 formalization of singleton-cover gluing after the one-point invariant-section argument; repair X-27111 generalizes the private germ-extensionality helper to arbitrary base schemes with lift coverage"
  },
  "mathlib_searches": [
   {
@@ -124,11 +123,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-887fd",
-  "group": "F2",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T112837-L-766871",
+  "landing": "20261012T144103-L-2092068",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only permitted sorryAx from the documented helper."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
