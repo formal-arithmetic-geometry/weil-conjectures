@@ -14,50 +14,54 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-compactification], choose a smooth proper connected compactification. By [thm-sc-jacobian-representability], choose its Jacobian. By [lem-sc-pic-affine-quotient], the boundary is nonempty; choose a boundary point, which is rational because k is algebraically closed. Apply the affine Picard base-change compatibility theorem to obtain presentations Pic(C)=G/Lambda and Pic(P)=Gprime/Lambdaprime, compatible with pullback and identifying the two boundary subgroups. Identify the degree-zero Picard groups G and Gprime with points of the Jacobians.",
+   "text": "Choose a smooth proper connected compactification c. Smoothness, regularity, and connectedness make its ambient scheme integral, hence irreducible, so dimension one gives smooth relative dimension one; this property is stable under base change by the existing Mathlib instance (no appeal to curve_baseChange_smoothOfRelativeDimension_one). The boundary is nonempty: an empty boundary makes the open immersion c.i an isomorphism, making f proper and affine, contrary to dimension one by lem-sc-proper-affine-finite. Choose a point of the boundary and use the compactification closedness assertion to regard it as a closed point.",
    "uses": [
-    "lem-sc-pic-affine-base-change-compatibility",
-    "thm-sc-jacobian-representability",
     "lem-sc-compactification",
-    "lem-sc-pic-affine-quotient"
+    "lem-sc-proper-affine-finite",
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-connected-integral"
    ],
    "elementary": false
   },
   {
-   "text": "Use the algebraically closed abelian-variety estimate, clauses (c) and (d): n multiplication on G is surjective and the map on G[n] is bijective. Injectivity on points is elementary: a k-point is determined by its image point and its residue-field map to k; equality after extension recovers both, since k to kprime is injective. These properties are transported through the Jacobian identification.",
+   "text": "Apply pic_affine_base_change_compatibility to obtain G, Gprime, Lambda, Lambdaprime, and quotient equivalences e and eprime. Define r and s as the quotient projections followed by these equivalences; both are surjective. Restrict its Picard pullback j to a homomorphism j0:G -> Gprime. The compatibility formula says s(j0(x))=b(r(x)), where b is the canonical affine Picard pullback. The supplied boundary equivalence lifts every y in ker(s) to x in ker(r) with j0(x)=y; membership in these kernels follows from QuotientGroup.eq_one_iff.",
    "uses": [
-    "thm-av-final"
+    "lem-sc-pic-affine-base-change-compatibility"
    ],
    "elementary": false
   },
   {
-   "text": "Injectivity: a representative mapping into Lambdaprime is the image of some lambda in Lambda; injectivity on points makes the representatives equal. Surjectivity: for y with ny in Lambdaprime, lift ny to lambda in Lambda and divide lambda by n in G to obtain x. Then y-j(x) is n-torsion. Lift this difference through G[n] to t; the class of x+t is n-torsion and maps to the class of y. This is the representative form of the divisible-quotient-torsion exact sequence. Compatibility of the presentations identifies the resulting bijection with the stated subtype map.",
+   "text": "Use picZero_torsion_base_change on c.g and the supplied subgroup models to get injectivity of j0 and lifting of n-torsion. Degree-zero divisibility of c.g supplies an nth root in G of any L in G, by its equality with c.g.picZero.",
    "uses": [
-    "lem-sc-divisible-quotient-torsion"
+    "lem-sc-piczero-torsion-base-change",
+    "lem-sc-pic-proper-ntorsion-div"
    ],
    "elementary": false
   },
   {
-   "text": "Transport from the categorical pullback to the specified pullback square using its canonical isomorphism. Picard pullback along an isomorphism is a group isomorphism and preserves torsion. The formula for the subtype map holds by construction. For n=1 its source and target are singleton types; n=0 is excluded.",
-   "uses": [
-    "def-sc-field-extension"
-   ],
+   "text": "Prove the representative quotient comparison directly. For equality of image classes lift them to a,a-prime in G. The image of a/a-prime has s-value one, hence equals j0(l) for l in ker(r). Injectivity of j0 gives a/a-prime=l, and applying r gives equality of the classes. For a torsion class in B lift it to y in Gprime. Then s(y^n)=1, so lift y^n to l in ker(r). Choose z in G with z^n=l. Then (y/j0(z))^n=1, and torsion lifting gives t^n=1 and j0(t)=y/j0(z). Thus j0(z*t)=y and r(z*t)^n=r(l)=1, proving surjectivity on torsion. The private Lean lemma quotient_torsion_comparison proves both conclusions using only these homomorphism identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Let E=hpi.isoPullback. The torsion map induced by Pic.map E.hom has inverse induced by Pic.map E.inv; Pic.map_comp and the two isomorphism identities prove both inverse equations. Compose this bijection with the canonical affine torsion comparison. Pic.map_comp and hpi.isoPullback_hom_fst prove that the composite is exactly the subtype map of the statement.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-pic-affine-base-change-compatibility",
-  "thm-sc-jacobian-representability",
-  "thm-av-final",
-  "lem-sc-divisible-quotient-torsion",
-  "def-sc-field-extension",
   "lem-sc-compactification",
-  "lem-sc-pic-affine-quotient"
+  "lem-sc-proper-affine-finite",
+  "lem-sc-smooth-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-sc-pic-affine-base-change-compatibility",
+  "lem-sc-piczero-torsion-base-change",
+  "lem-sc-pic-proper-ntorsion-div"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/_section.md",
-  "place": "Proof, first paragraph and affine case"
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Affine Picard-torsion paragraph; formal representative quotient argument and pullback-isomorphism transport by S1."
  },
  "mathlib_searches": [
   {
@@ -126,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-20abc",
-  "group": "P1",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T070545-L-3474868",
+  "landing": "20261012T085332-L-36793",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with both DAG nodes, cited dependencies, unit route, import-change record, and repaired return; both modules and all three direct importers compile cleanly, and axiom probes show only standard axioms plus sorryAx for the reported open dependencies."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

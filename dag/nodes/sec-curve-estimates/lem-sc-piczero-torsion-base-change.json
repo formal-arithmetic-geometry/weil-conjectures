@@ -1,0 +1,158 @@
+{
+ "id": "lem-sc-piczero-torsion-base-change",
+ "kind": "statement",
+ "title": "Degree-zero Picard point injectivity and torsion lifting under field extension",
+ "statement": "Let $k\\subseteq k'$ be algebraically closed fields [def-sc-field-extension], and let $f:X\\to\\operatorname{Spec}k$ be a proper smooth connected curve [def-sc-curves]. Write $X'=X\\times_k k'$ and $f':X'\\to\\operatorname{Spec}k'$ [def-pc-base-change]. Let $G\\subseteq\\operatorname{Pic}(X)$ and $G'\\subseteq\\operatorname{Pic}(X')$ be subgroups whose underlying sets are the degree-zero Picard classes [def-sc-pic0]. Let $j:G\\to G'$ be a homomorphism whose underlying Picard classes are the canonical pullbacks. For a natural number $n$ nonzero in $k$, $j$ is injective and every $y\\in G'$ with $y^n=1$ is $j(x)$ for some $x\\in G$ with $x^n=1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Proper-case Kummer naturality sentence and affine-case Picard-torsion paragraph"
+ },
+ "stmt_deps": [
+  "def-sc-field-extension",
+  "def-sc-curves",
+  "def-pc-base-change",
+  "def-sc-pic0"
+ ],
+ "proof": [
+  {
+   "text": "Smooth connected curves over an algebraically closed field are geometrically integral and smooth of relative dimension one: regularity and geometric connectedness give geometric irreducibility, and smoothness gives geometric reducedness. Use Jacobian representability to identify the degree-zero subgroup with rational points of its abelian variety, respecting multiplication. Apply the same identification after extension; base change of curves supplies its connectedness and dimension.",
+   "uses": [
+    "thm-sc-jacobian-representability",
+    "lem-sc-base-change-curve",
+    "lem-sc-smooth-regular",
+    "lem-weil-separably-closed-geometrically-connected",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-sc-curve-base-change-relative-dimension-one"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Jacobian base-change compatibility square, evaluated on Spec kprime, identifies the stipulated Picard pullback j with extension of rational points of the original Jacobian. The equalities specifying G and Gprime transport between subgroup models of Pic-zero. This identification respects multiplication by the representing group-law compatibility.",
+   "uses": [
+    "lem-sc-jacobian-base-change-compatible",
+    "def-sc-pic0"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extension is injective on rational points. A Spec k point is determined by its image x and its map from the residue field at x to k. Equality after Spec kprime gives the same image x and equal residue maps after composition with k -> kprime. Since the latter field embedding is injective, the original residue maps agree. Thus the original scheme points agree (the existing Scheme.SpecMap_comp_injective formalizes this argument). Restriction to the representing degree-zero groups yields injectivity of j.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Nonzero n in k implies n > 0 and the characteristic does not divide n. Clause (c) of the abelian-variety estimate says rational points of the finite etale torsion subgroup scheme J[n] are unchanged by extension. A point y of Gprime with y^n=1 corresponds to a kprime-point of J[n], since the kernel of the multiplication morphism represents precisely these points. Lift that point to a k-point of J[n] and map it to J(k); it has nth power one and extends to the point representing y. Transport back along the group equivalence to obtain x in G, x^n=1 and j(x)=y.",
+   "uses": [
+    "thm-av-final",
+    "def-sc-mult-n",
+    "thm-sc-jacobian-representability"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sc-jacobian-representability",
+  "lem-sc-base-change-curve",
+  "lem-sc-smooth-regular",
+  "lem-weil-separably-closed-geometrically-connected",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-sc-jacobian-base-change-compatible",
+  "def-sc-pic0",
+  "thm-av-final",
+  "def-sc-mult-n"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
+  "place": "Proper degree-one Jacobian comparison and affine correction; canonical point-map identification and residue-field injectivity expanded by S1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Picard torsion base change algebraically closed field extension smooth affine curve",
+   "results": "8 hits: WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Affine.Point.map, WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.Affine.baseChange_slope, WeierstrassCurve.IsIntegral.integral, WeierstrassCurve.baseChange_integralModel_eq, WeierstrassCurve.Affine.baseChange_nonsingular",
+   "date": "2026-10-12",
+   "verdict": "no matching general proper-curve Picard comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "picZero|picard.*torsion|torsion.*quotient",
+   "results": "17 hits: Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/NumberField/Units/Regulator.lean, Mathlib/NumberTheory/NumberField/Units/DirichletTheorem.lean, Mathlib/NumberTheory/NumberField/Ideal/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching general proper-curve Picard comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.*baseChange|picard.*injective|picZero",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no matching general proper-curve Picard comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a smooth proper connected curve over an algebraically closed field, extension of algebraically closed fields is injective on degree zero Picard groups and bijective on prime to characteristic torsion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of algebraically closed fields induces injective maps on Picard degree zero and bijective maps on torsion for smooth proper curves",
+   "results": "8 hits: WeierstrassCurve.Affine.Point.map_injective, WeierstrassCurve.Affine.CoordinateRing.map_injective, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Projective.comp_equiv_comp, WeierstrassCurve.Jacobian.comp_equiv_comp, WeierstrassCurve.Projective.map_nonsingular, WeierstrassCurve.Affine.Point.map, WeierstrassCurve.map_injective",
+   "date": "2026-10-12",
+   "verdict": "no matching general proper-curve Picard comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AffinePicardTorsionBaseChange",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Affine case: Jacobian point-map injectivity and lifting torsion via clause (c); proper case degree-one comparison",
+   "via": [
+    "lem-sc-affine-picard-torsion-base-change",
+    "lem-sc-kummer-base-change-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicZeroTorsionBaseChange.lean",
+  "declaration": "AlgebraicGeometry.picZero_torsion_base_change",
+  "statement": "theorem picZero_torsion_base_change\n    {k k' : Type u} [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of k))\n    [IsConnectedCurve f] [Smooth f] [IsProper f]\n    (G : Subgroup X.Pic) (hG : (G : Set X.Pic) = f.picZero)\n    (G' : Subgroup (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Pic)\n    (hG' : (G' : Set (pullback f\n      (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Pic) =\n      (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k k')))).picZero)\n    (j : G →* G')\n    (hj : ∀ L : G, (j L).val = Scheme.Pic.mapHom\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) L.val)\n    (n : ℕ) (hn : (n : k) ≠ 0) :\n    Function.Injective j ∧ ∀ y : G', y ^ n = 1 → ∃ x : G, x ^ n = 1 ∧ j x = y",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085332-L-36793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T085332-L-36793",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
