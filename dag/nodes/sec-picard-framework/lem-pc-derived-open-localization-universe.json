@@ -13,25 +13,28 @@
  },
  "proof": [
   {
-   "text": "First choose the standard derived localizations with their unrestricted Hom universe. Exact extension by zero and restriction induce a derived adjunction. The unit is an isomorphism because restriction of extension by zero is the identity, checked on stalks. Thus derived extension by zero is fully faithful.",
+   "text": "Use HasDerivedCategory.standard for modules on U. Obtain exactness and the extension-by-zero/restriction adjunction from lem-sc-derived-open-restriction-adjunction-exact; its two adjoints are additive. The natural isomorphism E followed by R to identity from lem-pc-open-extension-restriction-iso induces D(E) followed by D(R) isomorphic to identity, using the proved source-library mapDerivedCategoryCompIso, mapDerivedCategoryNatIso and mapDerivedCategoryIdIso. Faithful.of_comp_iso therefore makes D(E) faithful. Full faithfulness and a derived adjunction are unnecessary for the size assertion.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact"
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "lem-pc-open-extension-restriction-iso"
    ],
    "elementary": false
   },
   {
-   "text": "Compare the ambient standard localization to the given ambient localization by the localization universal property. Full faithfulness identifies each Hom on U with a Hom in the given ambient category, hence makes it w-small. Replace each Hom by a w-small model and transport composition and identities along these bijections. Compose the standard localization functor with the resulting equivalence; it remains a localization. Choose these localizations simultaneously over all opens.",
+   "text": "The chosen ambient derived category has Hom universe w. Apply locallySmall_of_faithful to D(E), giving LocallySmall in universe w for the standard derived category on U. Apply MorphismProperty.hasLocalizationOfLocallySmall to DerivedCategory.Q and the quasi-isomorphism class. This constructs HasDerivedCategory in universe w for U. Establish pointwise Nonempty first, then apply Classical.choice for each U to obtain the dependent family.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-open-restriction-adjunction-exact"
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-pc-open-extension-restriction-iso"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BT, exact extension-by-zero/restriction derived adjunction; Mathlib HasDerivedCategory.standard and localization universal property"
+  "by": "agent",
+  "agent": "X2",
+  "date": "2026-10-12",
+  "based_on": "Stacks Tags 00A7(4), 08BT; Mathlib Localization.LocallySmall and source-library exact derived functor functoriality"
  },
  "mathlib_searches": [
   {
@@ -102,9 +105,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T1",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T060754-L-2915684",
+  "landing": "20261012T085401-L-48391",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
