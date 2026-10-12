@@ -7,11 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.DegreeZeroCohomology
-import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
-import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare
 
 /-! # Degree-zero compatibility of derived base change with the counit mate
 
@@ -79,6 +75,34 @@ theorem counitBaseChange_degreeZero_comparison
       (pullbackPushforwardAdjunction f').homEquiv _ _
           (c.inv ≫ (pullback g').map ((pullbackPushforwardAdjunction f).counit.app M)) =
         a.hom ≫ H.map (schemeDerivedBaseChangeMap f f' g g' sq.w E) ≫ b.hom := by
-  sorry
+  classical
+  dsimp only
+  let E := (DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M
+  let H := DerivedCategory.homologyFunctor
+    (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0
+  let N := (pushforward f).obj M
+  let k := (DerivedCategory.singleFunctorCompHomologyFunctorIso
+    (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0).app ((pullback g).obj N)
+  let := h0
+  have : SheafOfModules.IsInvertible.{u, u, u} N :=
+    SheafOfModules.IsInvertible.of_iso.{u, u, u} ((pushforward f).rightDerivedZeroIsoSelf.app M)
+  have := isIso_canonicalSinglePullbackMap g N
+  have := isIso_canonicalSinglePullbackMap g' M
+  have := isIso_canonicalSingleDirectImageMap f M hq
+  let a := k.symm ≪≫ H.mapIso ((asIso (canonicalSinglePullbackMap g N)).symm ≪≫
+    (derivedPullback g).mapIso (asIso (canonicalSingleDirectImageMap f M)))
+  let b := H.mapIso ((schemeDerivedDirectImage f').mapIso
+    (asIso (canonicalSinglePullbackMap g' M))) ≪≫
+      canonicalDirectImageH0Iso f' ((pullback g').obj M)
+  refine ⟨a, b, ?_⟩
+  have h := canonicalDegreeZeroMateSquare f g g' f' sq.w M
+  dsimp only at h
+  apply (cancel_epi (H.map (canonicalSinglePullbackMap g N) ≫ k.hom)).mp
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  simpa only [a, b, H, N, k, E, Functor.id_obj, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    Functor.mapIso_inv, Functor.map_inv, asIso_hom, asIso_inv, Functor.map_comp, Category.assoc,
+    Iso.hom_inv_id_assoc, IsIso.hom_inv_id_assoc] using h
 
 end AlgebraicGeometry.Scheme.Modules

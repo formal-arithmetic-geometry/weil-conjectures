@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-canonical-single-direct-image-comparison",
+ "kind": "statement",
+ "title": "Invertibility of the single-module direct-image unit for an acyclic module",
+ "statement": "Choose shared derived categories [def-pc-derived-category]. Let f:X→S be a scheme morphism [def-pc-scheme], with injective resolutions in X.Modules [def-sp-injective-resolutions], and let M be an O_X-module. If every positive ordinary right-derived direct image R^qf_*M is zero [def-pc-derived-direct-image], then the explicit single-complex comparison followed by the unbounded right-derived unit is an isomorphism (f_*M)[0]→Rf_*(M[0]). No flatness or invertibility hypothesis is required. The map canonicalSingleDirectImageMap is constructed from that unit.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 079V: unbounded direct image via K-injectives; acyclic-resolution computation (Tag 015E)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "The vanishing hypothesis makes M right-acyclic. Every term of M[0] is then right-acyclic: the degree-zero term is isomorphic to M, and the others are zero. Every term of the nonnegative injective resolution is also right-acyclic. Apply quasiIso_map_of_rightAcyclic to its augmentation to see that termwise pushforward preserves that quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "def-sp-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The nonnegative injective resolution is K-injective, so the unbounded right-derived unit there is invertible. In the unit naturality square for the augmentation, its left side is invertible by the previous step and its right side is invertible because localization inverts the augmentation. Cancel that right side to prove the unit on M[0] is invertible. Compose with the localized single-complex isomorphism.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-sp-acyclic",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 079V: unbounded direct image via K-injectives; acyclic-resolution computation (Tag 015E)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived functor unit is an isomorphism on an acyclic object in degree zero and compatibility with base change counit",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change compatibility with ordinary counit via derived counit and right derived unit",
+   "results": "Adjunction.derivedε_fac_app, derivedη_fac_app, derived_counit and derived_unit give generic derived adjunction identities. None is the scheme degree-zero square.",
+   "date": "2026-10-12",
+   "verdict": "generic tools"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_app|leftAdjointUniq_hom_app_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean:71 and Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:111 give uniqueness and derived-unit compatibility formulas. Local library search additionally found quasiIso_map_of_rightAcyclic and homologyRightDerivedFunctorObjSingleFunctorIso.",
+   "date": "2026-10-12",
+   "verdict": "generic tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeDegreeZeroComparison",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 079V: unbounded direct image via K-injectives; acyclic-resolution computation (Tag 015E)",
+   "via": [
+    "lem-pc-counit-base-change-degree-zero-comparison",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalSingleDirectImageComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_canonicalSingleDirectImageMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.canonicalSingleDirectImageMap",
+   "AlgebraicGeometry.Scheme.Modules.isIso_canonicalSingleDirectImageMap"
+  ],
+  "statement": "theorem isIso_canonicalSingleDirectImageMap {X S : Scheme.{u}} (f : X ⟶ S)\n    [HasInjectiveResolutions X.Modules] (M : X.Modules)\n    (hq : ∀ q : ℕ, 0 < q → IsZero (((pushforward f).rightDerived q).obj M)) :\n    IsIso (canonicalSingleDirectImageMap f M)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

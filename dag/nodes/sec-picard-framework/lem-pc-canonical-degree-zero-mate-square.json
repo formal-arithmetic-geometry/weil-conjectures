@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-canonical-degree-zero-mate-square",
+ "kind": "statement",
+ "title": "Degree-zero naturality square for canonical base change without flatness",
+ "statement": "Choose shared derived categories [def-pc-derived-category]. Let f:X→S, g:S′→S, g′:X′→X and f′:X′→S′ be scheme morphisms [def-pc-scheme] with g′≫f=f′≫g. Assume injective resolutions in X′.Modules [def-sp-injective-resolutions]. For any O_X-module M, let E=M[0], H=H^0 on S′, c:g′*f*≅f′*g* be the ordinary composition comparison [def-pc-module-pullback], and m the ordinary mate of c.inv followed by g′* of the counit [lem-pc-module-pullback-adjunction]. Let p_a(N):La*(N[0])→(a*N)[0] be canonicalSinglePullbackMap [lem-pc-canonical-single-pullback-comparison], u_f(M):(f_*M)[0]→Rf_*(M[0]) be canonicalSingleDirectImageMap [lem-pc-canonical-single-direct-image-comparison], k:H((g*f_*M)[0])≅g*f_*M the single-complex homology identification, and z:H(Rf′_*((g′*M)[0]))≅f′_*g′*M the unbounded-to-classical right-derived degree-zero comparison followed by rightDerivedZeroIsoSelf. Then H(p_g(f_*M))≫k.hom≫m = H(Lg*(u_f(M)))≫H(beta_E)≫H(Rf′_*(p_g′(M)))≫z.hom, where beta is the canonical derived base-change map [def-pc-derived-base-change-map]. There is no flatness, invertibility, higher-vanishing or cartesian hypothesis.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 08HY (canonical base-change mate), Section 079V Lemma 20.28.6 (counit compatibility), and degree-zero injective-resolution computation"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-sp-injective-resolutions",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-canonical-single-direct-image-comparison",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the embedded ordinary counit through the pinned derived adjunction. Its factorization through the specified left-derived counit and right-derived unit identifies it with the derived counit composed with derived pullback of u_f(M). This is the compatibility diagram of Stacks Cohomology Lemma 20.28.6 in Section 079V.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The derived composition comparisons are the lifts of underived tensor composition through these same counits. Their defining lift identities and naturality show that inserting p_g and p_g′ gives the same transpose. The unique isomorphism of tensor pullback and ordinary pullback preserving their common right adjoint transports counits and composition mates to c and the ordinary mate m.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-module-pullback-adjunction",
+    "lem-pc-canonical-single-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take H^0. The single-complex homology comparison is natural. The unbounded-to-bounded-below right-derived comparison respects the right-derived unit by its universal property. Computing the latter on the nonnegative injective resolution identifies its H^0 with the usual augmentation to R^0f′_*; composing with rightDerivedZeroIsoSelf makes it the identity. These identifications give exactly the displayed square, including on zero modules and empty schemes.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "lem-pc-canonical-single-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-direct-image",
+  "lem-pc-canonical-single-direct-image-comparison",
+  "lem-pc-canonical-single-pullback-comparison",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 08HY (canonical base-change mate), Section 079V Lemma 20.28.6 (counit compatibility), and degree-zero injective-resolution computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived functor unit is an isomorphism on an acyclic object in degree zero and compatibility with base change counit",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change compatibility with ordinary counit via derived counit and right derived unit",
+   "results": "Adjunction.derivedε_fac_app, derivedη_fac_app, derived_counit and derived_unit give generic derived adjunction identities. None is the scheme degree-zero square.",
+   "date": "2026-10-12",
+   "verdict": "generic tools"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_app|leftAdjointUniq_hom_app_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean:71 and Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:111 give uniqueness and derived-unit compatibility formulas. Local library search additionally found quasiIso_map_of_rightAcyclic and homologyRightDerivedFunctorObjSingleFunctorIso.",
+   "date": "2026-10-12",
+   "verdict": "generic tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeDegreeZeroComparison",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 08HY (canonical base-change mate), Section 079V Lemma 20.28.6 (counit compatibility), and degree-zero injective-resolution computation",
+   "via": [
+    "lem-pc-counit-base-change-degree-zero-comparison",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalDegreeZeroMateSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalDegreeZeroMateSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalDegreeZeroMateSquare",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.canonicalDirectImageH0Iso",
+   "AlgebraicGeometry.Scheme.Modules.canonicalDegreeZeroMateSquare"
+  ],
+  "statement": "theorem canonicalDegreeZeroMateSquare\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S)\n    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')\n    (h : g' ≫ f = f' ≫ g)\n    [HasInjectiveResolutions X'.Modules] (M : X.Modules) :\n    let E := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0\n    let c := (pullbackComp g' f).app ((pushforward f).obj M) ≪≫\n      (pullbackCongr h).app ((pushforward f).obj M) ≪≫\n      ((pullbackComp f' g).app ((pushforward f).obj M)).symm\n    let k := (DerivedCategory.singleFunctorCompHomologyFunctorIso\n      (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0).app\n        ((pullback g).obj ((pushforward f).obj M))\n    H.map (canonicalSinglePullbackMap g ((pushforward f).obj M)) ≫ k.hom ≫\n        (pullbackPushforwardAdjunction f').homEquiv _ _\n          (c.inv ≫ (pullback g').map ((pullbackPushforwardAdjunction f).counit.app M)) =\n      H.map ((derivedPullback g).map (canonicalSingleDirectImageMap f M)) ≫\n        H.map (schemeDerivedBaseChangeMap f f' g g' h E) ≫\n        H.map ((schemeDerivedDirectImage f').map (canonicalSinglePullbackMap g' M)) ≫\n        (canonicalDirectImageH0Iso f' ((pullback g').obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

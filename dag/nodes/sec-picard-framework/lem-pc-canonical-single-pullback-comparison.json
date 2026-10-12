@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-canonical-single-pullback-comparison",
+ "kind": "statement",
+ "title": "Invertibility of the pinned single-module pullback comparison",
+ "statement": "Choose shared derived categories [def-pc-derived-category]. For any morphism f:X→Y of schemes [def-pc-scheme] and invertible O_Y-module M [def-sc-invertible-module], the specified left-derived counit used in the canonical pullback composition [lem-pc-ringed-spaces-derived-pullback-composition], at M[0], followed by the termwise tensor-pullback single-complex identification and the unique adjunction-preserving tensor-to-ordinary pullback isomorphism [lem-pc-module-pullback-adjunction], is an isomorphism Lf*(M[0])→(f*M)[0]. The canonicalSinglePullbackMap construction is the explicit composite, not an arbitrary chosen isomorphism.",
+ "source": {
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 06YD, 06YJ and 08HY; single-module specialization of bounded-above flat computation"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The chosen composition data supply an additive tensor pullback and a left-derived counit. Its single-module comparison satisfies IsDerivedModulePullbackComparison by construction. Apply the existing flat-module comparison theorem using the intrinsic flatness and quasi-coherence of an invertible module. Compose with the single embedding of the leftAdjointUniq isomorphism to ordinary pullback.",
+   "uses": [
+    "lem-pc-flat-module-canonical-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-module-canonical-derived-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Cohomology",
+  "place": "Tags 06YD, 06YJ and 08HY; single-module specialization of bounded-above flat computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived functor unit is an isomorphism on an acyclic object in degree zero and compatibility with base change counit",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived base change compatibility with ordinary counit via derived counit and right derived unit",
+   "results": "Adjunction.derivedε_fac_app, derivedη_fac_app, derived_counit and derived_unit give generic derived adjunction identities. None is the scheme degree-zero square.",
+   "date": "2026-10-12",
+   "verdict": "generic tools"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans_app|leftAdjointUniq_hom_app_counit",
+   "results": "Mathlib/CategoryTheory/Adjunction/Unique.lean:71 and Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:111 give uniqueness and derived-unit compatibility formulas. Local library search additionally found quasiIso_map_of_rightAcyclic and homologyRightDerivedFunctorObjSingleFunctorIso.",
+   "date": "2026-10-12",
+   "verdict": "generic tools"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeDegreeZeroComparison",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tags 06YD, 06YJ and 08HY; single-module specialization of bounded-above flat computation",
+   "via": [
+    "lem-pc-counit-base-change-degree-zero-comparison",
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.CanonicalSinglePullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CanonicalSinglePullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_canonicalSinglePullbackMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.canonicalTensorPullbackAdditive",
+   "AlgebraicGeometry.Scheme.Modules.canonicalSinglePullbackMap",
+   "AlgebraicGeometry.Scheme.Modules.isIso_canonicalSinglePullbackMap"
+  ],
+  "statement": "theorem isIso_canonicalSinglePullbackMap {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M : Y.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] :\n    IsIso (canonicalSinglePullbackMap f M)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,43 +19,38 @@
  ],
  "proof": [
   {
-   "text": "Compute Rf_*(M[0]) by a nonnegative injective resolution. Its negative cohomology is zero, and its degree-q cohomology is R^qf_*M by the right-derived-functor construction. The positive vanishing hypothesis and standard truncation identify it with (R^0f_*M)[0]. The natural rightDerivedZeroIsoSelf identifies this module with f_*M. Flatness of the invertible zeroth image and the bounded-flat-complex pullback comparison produce a.",
+   "text": "Construct the pinned single-module pullback comparisons and apply their invertibility theorem to M and N=f_*M. The given invertibility of R^0f_*M transports to N through rightDerivedZeroIsoSelf.",
    "uses": [
-    "def-pc-derived-direct-image",
-    "lem-pc-flat-complex-derived-pullback"
+    "lem-pc-canonical-single-pullback-comparison"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Flatness of the invertible module M gives Lg\\prime^*(M[0])=(g\\prime^*M)[0]. The injective-resolution calculation and rightDerivedZeroIsoSelf for f\\prime give b, with no vanishing assumption on f\\prime. The single-degree cohomology calculation fixes these degree-zero identifications.",
+   "text": "Positive vanishing makes the constructed single-module direct-image unit u_f(M) invertible. Let a be the single-complex H^0 comparison inverted, followed by H^0 of p_g(N) inverted and then H^0 of Lg*(u_f(M)). Let b be H^0 of Rf′_*(p_g′(M)) followed by the canonical H^0 direct-image isomorphism.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback",
-    "lem-pc-degree-zero-properties"
+    "lem-pc-canonical-single-direct-image-comparison",
+    "lem-pc-canonical-single-pullback-comparison",
+    "lem-pc-canonical-degree-zero-mate-square"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The Hom equivalence defining the derived base-change map is pinned to the ordinary tensor-pullback adjunction and the same left-derived counits and right-derived units. Take H^0 of its defining transpose through the natural comparisons a and b. Compatibility of the derived composition comparisons with these counits turns the derived transpose into c^{-1} followed by g\\prime^* of the ordinary counit. Transpose back under the ordinary adjunction to obtain exactly the displayed equality. The unique comparison of the explicit tensor left adjoint with Mathlib pullback, respecting their adjunctions to the same pushforward, transports the counit and composition mates to the displayed ordinary counit, pullbackComp and pullbackCongr.",
+   "text": "Apply canonicalDegreeZeroMateSquare to sq.w. Precompose the desired equality with H^0(p_g(N)) followed by the single-complex homology identification. This composite is invertible. Cancel it, and simplify functoriality and inverse identities to obtain the stated equality.",
    "uses": [
-    "def-pc-derived-base-change-map",
-    "lem-pc-ringed-spaces-derived-pullback-composition",
-    "lem-pc-module-pullback-adjunction"
+    "lem-pc-canonical-degree-zero-mate-square"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-direct-image",
-  "lem-pc-flat-complex-derived-pullback",
-  "lem-pc-degree-zero-properties",
-  "def-pc-derived-base-change-map",
-  "lem-pc-ringed-spaces-derived-pullback-composition",
-  "lem-pc-module-pullback-adjunction"
+  "lem-pc-canonical-degree-zero-mate-square",
+  "lem-pc-canonical-single-direct-image-comparison",
+  "lem-pc-canonical-single-pullback-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
-  "place": "Steps 2 and 3: degree-zero identifications and equality with the ordinary mate"
+  "document": "Stacks Project, Cohomology",
+  "place": "Tag 08HY; stage-3 Lean reduction by Q2 using the explicit pinned comparison maps and cancellation, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -126,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T085402-L-48701",
+  "landing": "20261012T135306-L-1687425",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
