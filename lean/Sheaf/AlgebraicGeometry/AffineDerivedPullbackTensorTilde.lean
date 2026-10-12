@@ -11,11 +11,7 @@ public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.KFlatPullback
-import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
@@ -117,76 +113,17 @@ theorem derivedTensor_openRestriction_iso (X : Scheme.{u}) (U : X.Opens)
             (Scheme.Modules.overEquiv U)).mapDerivedCategory) := by
   sorry
 
-/-- Affine derived pullback of termwise tilde is termwise tilde of derived base change,
-computed on any K-flat resolution of the input complex.
-Source: Stacks, Tag 08DW(2), via Tag 08DV
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
-Proof (node step 2): resolve M by P (lem-pc-kflat-resolution). Termwise tilde
-preserves quasi-isomorphisms (lem-pc-affine-qcoh-derived-equivalence), and tilde P
-is K-flat (lem-pc-affine-tilde-kflat). Derived pullback is therefore represented
-by termwise tensor pullback of tilde P (def-pc-derived-pullback).
-The natural tilde/base-change comparison in each degree
-(lem-weil-pbc-tilde-pullback-base-change) identifies this with tilde of B tensor P.
-This complex computes M tensor-derived B since P is K-flat. -/
-theorem derivedPullback_tilde_iso (A B : Type u) [CommRing A] [CommRing B]
-    (φ : A →+* B)
-    [HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
-    [HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace))]
-    (M P : CochainComplex (ModuleCat.{u} A) ℤ) (s : P ⟶ M) (hs : QuasiIso s)
-    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P) :
-    Nonempty
-      ((derivedPullback (Spec.map (CommRingCat.ofHom φ))).obj
-        (DerivedCategory.Q.obj
-          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-            (@id (ModuleCat.{u} A ⥤
-              SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
-              (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)) ≅
-        DerivedCategory.Q.obj
-          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-            (@id (ModuleCat.{u} B ⥤
-              SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace))
-              (tilde.functor (.of B))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
-                (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P))) := by
-  sorry
-
-/-- On an affine scheme, derived tensor of termwise tilde complexes is termwise tilde
-of module derived tensor, computed with any K-flat resolution of the first factor.
-Source: Stacks, Tag 08DX(2), via Tag 08DV
-(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
-Proof (node step 3): resolve M by P (lem-pc-kflat-resolution). Exactness of termwise
-tilde (lem-pc-affine-qcoh-derived-equivalence) and K-flatness of tilde P
-(lem-pc-affine-tilde-kflat) allow the sheaf derived tensor to be computed by
-Tot(tilde P tensor tilde N) (def-pc-kflat-complex, def-pc-tensor-complex-sheaves).
-In each bidegree apply lem-weil-pbc-affine-tilde-tensor; its naturality respects
-both differentials. Tilde preserves the direct sums used in totalization, yielding
-tilde Tot(P tensor N). This computes M tensor-derived N since P is K-flat.
-The sum over p+q=n can be infinite for unbounded complexes; all coproducts, not just
-finite ones, are preserved by tilde, which is a left adjoint. -/
-theorem derivedTensor_tilde_iso (A : Type u) [CommRing A]
-    [HasDerivedCategory.{w}
-      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
-    (M N P : CochainComplex (ModuleCat.{u} A) ℤ) (s : P ⟶ M) (hs : QuasiIso s)
-    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P) :
-    Nonempty
-      (DerivedCategory.Q.obj
-        ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-          (@id (ModuleCat.{u} A ⥤
-            SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
-            (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ⊗
-        DerivedCategory.Q.obj
-          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-            (@id (ModuleCat.{u} A ⥤
-              SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
-              (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj N) ≅
-        DerivedCategory.Q.obj
-          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
-            (@id (ModuleCat.{u} A ⥤
-              SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
-              (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
-                (CochainComplex.mapBifunctor P N (curriedTensor (ModuleCat.{u} A))))) := by
-  sorry
+private theorem moduleKFlat_acyclic (A : Type u) [CommRing A]
+    (P : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P)
+    (F : CochainComplex (ModuleCat.{u} A) ℤ) (hF : F.Acyclic) :
+    (CochainComplex.mapBifunctor F P (curriedTensor (ModuleCat.{u} A))).Acyclic := by
+  have h := (HomotopyCategory.kFlat_iff_preserves_acyclic
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj P)).mp
+      ((HomotopyCategory.kFlat_quotient_obj_iff P).mpr hP)
+  have hF' := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic F).mpr hF
+  exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).mp
+    (h _ hF').2
 
 /-- Naturality of the affine pullback comparison on K-flat module models.
 Source: Stacks, Tag 08DW(2), via Tag 08DV
@@ -217,7 +154,58 @@ theorem derivedPullback_tilde_kFlat_natIso (A B : Type u) [CommRing A] [CommRing
           (@id (ModuleCat.{u} B ⥤
             SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace))
             (tilde.functor (.of B))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ DerivedCategory.Q) := by
-  sorry
+  let f := Spec.map (CommRingCat.ofHom φ)
+  let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} A ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+      (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+  let F := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ T
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres, E, hE, hEmap, hEadd,
+    ε, hε, htri, hflat⟩ := Classical.choose_spec (exists_derivedPullback f)
+  let η : E ≅ Scheme.Modules.tensorPullback f :=
+    NatIso.ofComponents (fun M ↦ eqToIso (hE M)) (by
+      intro M N a
+      dsimp
+      rw [hEmap]
+      simp
+      rfl)
+  have : (Scheme.Modules.tensorPullback f).Additive := Functor.additive_of_iso η
+  have hεiso (P : CochainComplex.KFlat (ModuleCat.{u} A)) :
+      IsIso ((Functor.whiskerLeft
+        (F ⋙ HomotopyCategory.quotient _ (.up ℤ)) ε).app P) := by
+    apply hflat
+    exact isKFlat_tilde A P.obj (moduleKFlat_acyclic A P.obj P.property)
+  have : IsIso (Functor.whiskerLeft (F ⋙ HomotopyCategory.quotient _ (.up ℤ)) ε) :=
+    NatIso.isIso_of_isIso_app _
+  let β := Functor.isoWhiskerRight
+    (Functor.isoWhiskerLeft F (DerivedCategory.quotientCompQhIso _).symm) (derivedPullback f) ≪≫
+    asIso (Functor.whiskerLeft (F ⋙ HomotopyCategory.quotient _ (.up ℤ)) ε) ≪≫
+    Functor.isoWhiskerRight (Functor.isoWhiskerLeft F (E.mapHomotopyCategoryFactors (.up ℤ)))
+      DerivedCategory.Qh ≪≫
+    Functor.isoWhiskerLeft (F ⋙ E.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso _)
+  obtain ⟨θ, _⟩ := Scheme.Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ)
+  let γ := Functor.isoWhiskerRight (NatIso.mapHomologicalComplex η (.up ℤ)) DerivedCategory.Q
+  let TB := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} B ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace))
+      (tilde.functor (.of B))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+  let δ₀ : T ⋙ (Scheme.Modules.tensorPullback f).mapHomologicalComplex (.up ℤ) ≅
+      (ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ TB :=
+    NatIso.ofComponents (fun P ↦ HomologicalComplex.Hom.isoOfComponents
+      (fun i ↦ θ.app (P.X i)) (by
+        intro i j hij
+        exact (θ.hom.naturality (P.d i j)).symm)) (by
+      intro P M a
+      apply HomologicalComplex.hom_ext
+      intro i
+      exact θ.hom.naturality (a.f i))
+  let QB : CochainComplex
+      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) ℤ ⥤
+      schemeDerivedCategory (Spec (.of B)) := DerivedCategory.Q
+  let δ := Functor.isoWhiskerRight δ₀ QB
+  exact ⟨β ≪≫ Functor.isoWhiskerLeft F γ ≪≫
+    Functor.isoWhiskerLeft (CochainComplex.ιKFlat (ModuleCat.{u} A)) δ⟩
 
 /-- Naturality of the affine tensor comparison in a K-flat first model and an arbitrary
 second complex. Source: Stacks, Tag 08DX(2), via Tag 08DV
@@ -257,5 +245,109 @@ theorem derivedTensor_tilde_kFlat_natIso (A : Type u) [CommRing A]
             SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
             (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ DerivedCategory.Q)) := by
   sorry
+
+private theorem affineTilde_Q_map_isIso (A : Type u) [CommRing A]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
+    {P M : CochainComplex (ModuleCat.{u} A) ℤ} (s : P ⟶ M) (hs : QuasiIso s) :
+    IsIso (DerivedCategory.Q.map
+      (((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+        (@id (ModuleCat.{u} A ⥤
+          SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+          (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ))).map s)) := by
+  let := HasDerivedCategory.standard (ModuleCat.{u} A)
+  obtain ⟨e, ⟨α⟩, _⟩ := exists_affineQCohDerivedEquivalence A
+  have : QuasiIso s := hs
+  exact (NatIso.isIso_map_iff α s).mp (by
+    change IsIso (((e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).map
+      (DerivedCategory.Q.map s)))
+    infer_instance)
+
+/-- Affine derived pullback of termwise tilde is termwise tilde of derived base change,
+computed on any K-flat resolution of the input complex.
+Source: Stacks, Tag 08DW(2), via Tag 08DV
+(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+Proof (node step 2): resolve M by P (lem-pc-kflat-resolution). Termwise tilde
+preserves quasi-isomorphisms (lem-pc-affine-qcoh-derived-equivalence), and tilde P
+is K-flat (lem-pc-affine-tilde-kflat). Derived pullback is therefore represented
+by termwise tensor pullback of tilde P (def-pc-derived-pullback).
+The natural tilde/base-change comparison in each degree
+(lem-weil-pbc-tilde-pullback-base-change) identifies this with tilde of B tensor P.
+This complex computes M tensor-derived B since P is K-flat. -/
+theorem derivedPullback_tilde_iso (A B : Type u) [CommRing A] [CommRing B]
+    (φ : A →+* B)
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace))]
+    (M P : CochainComplex (ModuleCat.{u} A) ℤ) (s : P ⟶ M) (hs : QuasiIso s)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P) :
+    Nonempty
+      ((derivedPullback (Spec.map (CommRingCat.ofHom φ))).obj
+        (DerivedCategory.Q.obj
+          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+            (@id (ModuleCat.{u} A ⥤
+              SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+              (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M)) ≅
+        DerivedCategory.Q.obj
+          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+            (@id (ModuleCat.{u} B ⥤
+              SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace))
+              (tilde.functor (.of B))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
+                (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P))) := by
+  let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} A ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+      (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+  have : IsIso (DerivedCategory.Q.map (T.map s)) := affineTilde_Q_map_isIso A s hs
+  obtain ⟨α⟩ := derivedPullback_tilde_kFlat_natIso A B φ
+  exact ⟨(derivedPullback (Spec.map (CommRingCat.ofHom φ))).mapIso
+    (asIso (DerivedCategory.Q.map (T.map s))).symm ≪≫ α.app ⟨P, hP⟩⟩
+
+/-- On an affine scheme, derived tensor of termwise tilde complexes is termwise tilde
+of module derived tensor, computed with any K-flat resolution of the first factor.
+Source: Stacks, Tag 08DX(2), via Tag 08DV
+(blueprint: lem-pc-affine-derived-pullback-tensor-tilde).
+Proof (node step 3): resolve M by P (lem-pc-kflat-resolution). Exactness of termwise
+tilde (lem-pc-affine-qcoh-derived-equivalence) and K-flatness of tilde P
+(lem-pc-affine-tilde-kflat) allow the sheaf derived tensor to be computed by
+Tot(tilde P tensor tilde N) (def-pc-kflat-complex, def-pc-tensor-complex-sheaves).
+In each bidegree apply lem-weil-pbc-affine-tilde-tensor; its naturality respects
+both differentials. Tilde preserves the direct sums used in totalization, yielding
+tilde Tot(P tensor N). This computes M tensor-derived N since P is K-flat.
+The sum over p+q=n can be infinite for unbounded complexes; all coproducts, not just
+finite ones, are preserved by tilde, which is a left adjoint. -/
+theorem derivedTensor_tilde_iso (A : Type u) [CommRing A]
+    [HasDerivedCategory.{w}
+      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]
+    (M N P : CochainComplex (ModuleCat.{u} A) ℤ) (s : P ⟶ M) (hs : QuasiIso s)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P) :
+    Nonempty
+      (DerivedCategory.Q.obj
+        ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+          (@id (ModuleCat.{u} A ⥤
+            SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+            (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj M) ⊗
+        DerivedCategory.Q.obj
+          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+            (@id (ModuleCat.{u} A ⥤
+              SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+              (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj N) ≅
+        DerivedCategory.Q.obj
+          ((@Functor.mapHomologicalComplex _ _ _ _ _ _ _
+            (@id (ModuleCat.{u} A ⥤
+              SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+              (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)).obj
+                (CochainComplex.mapBifunctor P N (curriedTensor (ModuleCat.{u} A))))) := by
+  let T := @Functor.mapHomologicalComplex _ _ _ _ _ _ _
+    (@id (ModuleCat.{u} A ⥤
+      SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))
+      (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)
+  have : IsIso (DerivedCategory.Q.map (T.map s)) := affineTilde_Q_map_isIso A s hs
+  obtain ⟨α⟩ := derivedTensor_tilde_kFlat_natIso A
+  exact ⟨((curriedTensor (schemeDerivedCategory (Spec (.of A)))).flip.obj
+    (DerivedCategory.Q.obj (T.obj N))).mapIso
+      (asIso (DerivedCategory.Q.map (T.map s))).symm ≪≫ (α.app ⟨P, hP⟩).app N⟩
+
 
 end AlgebraicGeometry
