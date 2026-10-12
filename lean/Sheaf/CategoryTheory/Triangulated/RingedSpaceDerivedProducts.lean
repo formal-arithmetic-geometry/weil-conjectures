@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-!
 # Products in the derived category of a ringed space
@@ -45,6 +47,12 @@ Proof:
 theorem derivedProducts (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))] :
     HasProducts.{u} (DerivedCategory (SheafOfModules.{u} (moduleRings X))) := by
-  sorry
+  have : IsGrothendieckAbelian.{u} (SheafOfModules.{u} (moduleRings X)) :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutions
+      (Opens.grothendieckTopology X) X.sheaf).1
+  have : Abelian.HasKInjectiveResolutions (SheafOfModules.{u} (moduleRings X)) :=
+    CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian
+  intro J
+  infer_instance
 
 end AlgebraicGeometry.RingedSpace

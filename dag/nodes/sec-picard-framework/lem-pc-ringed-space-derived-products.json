@@ -26,51 +26,20 @@
  ],
  "proof": [
   {
-   "text": "The category of open subsets of X, with inclusions, is a small site and O_X is a sheaf of commutative rings on it. By [prop-pur-kinjective-resolutions-exist], Mod(O_X) is Grothendieck abelian, and every complex has a K-injective resolution [def-pur-kinjective-complex]. Represent each K_i by a complex and choose a K-injective resolution K_i -> I_i.",
+   "text": "Apply the Grothendieck-abelian conclusion of [prop-pur-kinjective-resolutions-exist] to the small site of opens of X and its structure sheaf. The source-library instance CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian supplies K-injective resolutions. Module sheaves have all limits, so the proved source-library instance DerivedCategory.hasLimitsOfShape_discrete supplies products for every indexing type in universe u, including the empty type. This is exactly HasProducts.{u}.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-kinjective-complex"
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 07D9, label lemma-derived-products, proof: 'choose a K-injective resolution'; Remark Tag 079Q, label remark-existence-D"
-   }
-  },
-  {
-   "text": "Mod(O_X) has products indexed by sets: the sectionwise product U -> prod_i F_i(U) of sheaves of O_X-modules is a sheaf of O_X-modules and is their product. Let I be the termwise product complex prod_i I_i, with projections pr_i. For any complex L, morphisms of complexes L -> I and homotopies between them are exactly families of morphisms L -> I_i and of homotopies, so Hom_{K(O_X)}(L,I) = prod_i Hom_{K(O_X)}(L,I_i) via the pr_i. If L is acyclic, every factor is 0 because each I_i is K-injective, so Hom_{K(O_X)}(L,I)=0 and I is K-injective [def-pur-kinjective-complex].",
-   "uses": [
-    "def-pur-kinjective-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 070L (lemma-product-K-injective), via the Hom characterization of K-injectivity"
-   }
-  },
-  {
-   "text": "Let L be any complex. By [lem-weil-pbc-kinjective-hom-derived], applied to the K-injective complexes I and I_i, and by step 2, Hom_{D(O_X)}(L,I) = Hom_{K(O_X)}(L,I) = prod_i Hom_{K(O_X)}(L,I_i) = prod_i Hom_{D(O_X)}(L,I_i) = prod_i Hom_{D(O_X)}(L,K_i), the composite bijection being composition with the images of the pr_i (and the isomorphisms I_i = K_i in D(O_X)). Hence I with these projections is a product of the family (K_i) in D(O_X) [def-weil-category-product]. Taking I countable gives the final assertion.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-category-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 07D9, label lemma-derived-products, proof, last paragraph (products of K-injective complexes)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "def-pur-kinjective-complex",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-category-product"
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-pc-ringed-space-derived-products.md",
-  "place": "proof, first step, truncation tower"
+  "document": "lean/WeilConjectures/Algebra/Homology/HomotopyCategory/Products.lean",
+  "place": "DerivedCategory.hasLimitsOfShape_discrete, specialized using the small-site Grothendieck theorem and CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian; second reading C2"
  },
  "mathlib_searches": [
   {
@@ -182,5 +151,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T135222-L-1657669",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
