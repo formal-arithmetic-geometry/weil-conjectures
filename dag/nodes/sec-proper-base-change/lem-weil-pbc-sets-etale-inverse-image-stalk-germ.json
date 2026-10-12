@@ -30,116 +30,51 @@
  ],
  "proof": [
   {
-   "text": "*Notation; the model of $e^{-1}$ and its unit.* Let $b:S_{\\Et}\\to T_{\\Et}$, $U\\mapsto U\\times_ST$, $g\\mapsto g\\times\\mathrm{id}_T$, be the base-change functor, with projections $p_U:U\\times_ST\\to U$, $q_U:U\\times_ST\\to T$; $U\\times_ST\\to T$ is etale [lem-weil-pbc-etale-base-change-finite-limits] (1). For an object $V$ of $T_{\\Et}$ let $\\mathcal I_V$ be the category of pairs $(U,\\varphi)$, $U\\in S_{\\Et}$, $\\varphi:V\\to U\\times_ST$ a morphism of $T_{\\Et}$, a morphism $(U,\\varphi)\\to(U',\\varphi')$ being $g:U\\to U'$ in $S_{\\Et}$ with $(g\\times\\mathrm{id})\\circ\\varphi=\\varphi'$. As in [lem-weil-pbc-sets-etale-inverse-image-composition-units], $e_pG(V)=\\varinjlim_{(U,\\varphi)\\in\\mathcal I_V^{\\mathrm{op}}}G(U)$ (colimit of sets [def-weil-pbc-category-colimit]) with coprojections $\\iota_{(U,\\varphi)}:G(U)\\to e_pG(V)$; the transition relations are $\\iota_{(U,\\varphi)}(G(g)a')=\\iota_{(U',\\varphi')}(a')$ for $g:(U,\\varphi)\\to(U',\\varphi')$, and the restriction along $h:V'\\to V$ satisfies $e_pG(h)\\circ\\iota_{(U,\\varphi)}=\\iota_{(U,\\varphi\\circ h)}$. By [lem-weil-pbc-presheaf-pullback-sets-left-exact] (1) (with $\\mathcal C=S_{\\Et}$, $\\mathcal D=T_{\\Et}$, $b$ as above) $e_p\\dashv e^p$, $e^p\\mathcal H=\\mathcal H\\circ b$, with unit $G(U)\\to e_pG(U\\times_ST)$ the coprojection $\\iota_{(U,\\mathrm{id})}$. Further $e^{-1}G=(e_pG)^\\#$ with canonical map $\\theta:e_pG\\to e^{-1}G$ [def-weil-pbc-sheafification], and by [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction] (2) (values in sets, $u=b$) the adjunction $e^{-1}\\dashv e_*$, $e_*=e^p$ on sheaves, is the composite of $e_p\\dashv e^p$ and $\\#\\dashv$ (inclusion). The unit of a composite of adjunctions is the composite of the units, so the unit $G\\to e_*e^{-1}G$ at $U$ is $\\theta_{U\\times_ST}\\circ\\iota_{(U,\\mathrm{id})}$, i.e. $e^*a=\\theta_{U\\times_ST}(\\iota_{(U,\\mathrm{id})}(a))$ for $a\\in G(U)$.",
+   "text": "Use the general-site route cited in Stacks 03Q1 (3), via Sites 05V1. For Type (u+1), compose the inverse of Functor.sheafPullbackConstruction.sheafPullbackIso, the inverse of Point.sheafFiberComapIso, and Point.sheafFiberIso (Scheme.pointSmallEtaleComapIso e t). All three are proved library isomorphisms. The construction is exactly Scheme.etaleSetPullback, and its component at G is a bijection of the stalks. The geometric point comparison is the universal property of base change.",
    "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-    "def-weil-pbc-sheafification",
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-geometric-stalks",
     "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "equation (equation-pullback) before Lemma Tag 03Q1; sites.tex Tags 00VD, 00VE (the unit is $c(\\mathrm{id}_{u(U)})$) and 00WX"
-   }
+   "elementary": false
   },
   {
-   "text": "*Elements of a colimit of sets come from the coprojections.* Let $(L,(\\iota_i)_{i\\in I})$ be a colimit of a diagram $D$ of sets [def-weil-pbc-category-colimit] and $L'=\\bigcup_i\\iota_i(D(i))\\subseteq L$. The maps $\\chi,\\mathbf 1:L\\to\\{0,1\\}$, $\\chi$ the indicator of $L'$ and $\\mathbf 1$ constant, both satisfy $\\chi\\circ\\iota_i=\\mathbf 1\\circ\\iota_i$ (constant $1$) for all $i$, so by the uniqueness in the universal property $\\chi=\\mathbf 1$, i.e. $L'=L$. Consequently two maps of sets out of $L$ that agree on every $\\iota_i(x)$ are equal. This is used for the stalks $G_{\\bar s}$, $(e_pG)_{\\bar t}$ and for the sets $e_pG(V)$.",
+   "text": "Compose the germ equality with the inverse comparison and expand its factors. Point.toPresheafFiber_sheafFiberIso_inv_app transports the pointed neighbourhood; Point.toPresheafFiber_sheafFiberComapIso_hom_app then gives the abstract sheaf-pullback unit followed by the germ. Point.toPresheafFiber_naturality moves the constructed/abstract comparison past the germ, and Adjunction.unit_leftAdjointUniq_hom_app evaluated at U gives the constructed adjunction unit. These are existing proved rewrite lemmas; associativity finishes the morphism equality.",
    "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback) (3), direct proof"
-   }
-  },
-  {
-   "text": "*Reduction to the presheaf pullback.* Write $(e_pG)_{\\bar t}=\\varinjlim_{(V,\\bar v)\\in\\mathcal N_{\\bar t}^{\\mathrm{op}}}e_pG(V)$ for the stalk of the presheaf of sets $e_pG$, $\\mathcal N_{\\bar t}$ the pointed etale neighbourhoods of $\\bar t$ [def-weil-pbc-pointed-etale-neighbourhoods], and $[x]_{(V,\\bar v)}$ for the class of $x\\in e_pG(V)$. By [lem-weil-pbc-sets-sheafification-geometric-stalk] (for $\\mathcal F=e_pG$ on $T_{\\Et}$) the map $\\theta_{\\bar t}:(e_pG)_{\\bar t}\\to(e^{-1}G)_{\\bar t}$, $[x]_{(V,\\bar v)}\\mapsto$ germ of $\\theta_V(x)$ at $(V,\\bar v)$, is bijective, $(e^{-1}G)_{\\bar t}$ being the stalk of [def-weil-pbc-geometric-stalks]. So it suffices to build a bijection $\\beta:(e_pG)_{\\bar t}\\to G_{\\bar s}$ and put $c=\\beta\\circ\\theta_{\\bar t}^{-1}$.",
-   "uses": [
-    "lem-weil-pbc-sets-sheafification-geometric-stalk",
-    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 03Q1 (3): 'by Lemma 03PT taking stalks commutes with sheafification'"
-   }
+   "elementary": true
   },
   {
-   "text": "*The map $\\alpha:G_{\\bar s}\\to(e_pG)_{\\bar t}$.* For a pointed etale neighbourhood $(U,\\bar u)$ of $\\bar s$ ($(U\\to S)\\circ\\bar u=\\bar s=e\\circ\\bar t$) the morphism $(\\bar u,\\bar t):\\operatorname{Spec}\\Omega\\to U\\times_ST$ is defined [def-pc-fibre-product] and $q_U\\circ(\\bar u,\\bar t)=\\bar t$, so $(U\\times_ST,(\\bar u,\\bar t))\\in\\mathcal N_{\\bar t}$ (step 0: $U\\times_ST\\to T$ is etale); this is the claim in the statement. Let $\\alpha_{(U,\\bar u)}:G(U)\\to(e_pG)_{\\bar t}$, $a\\mapsto[\\iota_{(U,\\mathrm{id})}(a)]_{(U\\times_ST,(\\bar u,\\bar t))}$. Compatibility: for a morphism $h:(U',\\bar u')\\to(U,\\bar u)$ of $\\mathcal N_{\\bar s}$ ($h\\bar u'=\\bar u$) and $a\\in G(U)$, $h\\times\\mathrm{id}:(U'\\times_ST,(\\bar u',\\bar t))\\to(U\\times_ST,(\\bar u,\\bar t))$ is a morphism of $\\mathcal N_{\\bar t}$ since $(h\\times\\mathrm{id})\\circ(\\bar u',\\bar t)=(h\\bar u',\\bar t)=(\\bar u,\\bar t)$; hence $[\\iota_{(U,\\mathrm{id})}(a)]_{(U\\times_ST,(\\bar u,\\bar t))}=[e_pG(h\\times\\mathrm{id})\\iota_{(U,\\mathrm{id})}(a)]_{(U'\\times_ST,(\\bar u',\\bar t))}=[\\iota_{(U,h\\times\\mathrm{id})}(a)]_{(U'\\times_ST,(\\bar u',\\bar t))}$, and $h:(U',\\mathrm{id})\\to(U,h\\times\\mathrm{id})$ is a morphism of $\\mathcal I_{U'\\times_ST}$, so $\\iota_{(U,h\\times\\mathrm{id})}(a)=\\iota_{(U',\\mathrm{id})}(G(h)a)$. Thus $\\alpha_{(U',\\bar u')}\\circ G(h)=\\alpha_{(U,\\bar u)}$, and by the universal property of $G_{\\bar s}=\\varinjlim_{\\mathcal N_{\\bar s}^{\\mathrm{op}}}G(U)$ [def-weil-pbc-geometric-stalks], [def-weil-pbc-category-colimit] there is a unique map $\\alpha$ with $\\alpha([a]_{(U,\\bar u)})=[\\iota_{(U,\\mathrm{id})}(a)]_{(U\\times_ST,(\\bar u,\\bar t))}$.",
+   "text": "The transported pointed lift is the explicit Over.homMk (pullback.lift x.left t (Over.w x)) in the statement: apply Over.OverMorphism.ext and pullback.hom_ext, and use Scheme.pointSmallEtaleFiberEtaleIso_inv_app_left_fst and _snd with pullback.lift_fst and _snd. Evaluate the preceding morphism equality on a to obtain the germ formula.",
    "uses": [
     "def-pc-fibre-product",
-    "def-weil-pbc-pointed-etale-neighbourhoods",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary inverse-image stalk element z, use Point.toPresheafFiber_jointly_surjective to represent its image under the comparison as the germ of a section a at a pointed neighbourhood (U,x) of t >> e. The germ formula says the corresponding pulled-back germ has the same image as z, so injectivity of the comparison identifies them. Any map d satisfying the germ formula therefore agrees with the comparison at z. Function extensionality proves uniqueness; ConcreteCategory.bijective_of_isIso proves bijectivity.",
+   "uses": [
     "def-weil-pbc-geometric-stalks",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 03Q1 (3), the chain of equalities of colimits"
-   }
-  },
-  {
-   "text": "*The map $\\beta:(e_pG)_{\\bar t}\\to G_{\\bar s}$.* Fix $(V,\\bar v)\\in\\mathcal N_{\\bar t}$. For $(U,\\varphi)\\in\\mathcal I_V$ put $\\bar u_\\varphi=p_U\\circ\\varphi\\circ\\bar v$; then $(U\\to S)\\circ\\bar u_\\varphi=e\\circ q_U\\circ\\varphi\\circ\\bar v=e\\circ(V\\to T)\\circ\\bar v=e\\circ\\bar t=\\bar s$ ($\\varphi$ is a $T$-morphism), so $(U,\\bar u_\\varphi)\\in\\mathcal N_{\\bar s}$. The maps $G(U)\\to G_{\\bar s}$, $a\\mapsto[a]_{(U,\\bar u_\\varphi)}$, are compatible over $\\mathcal I_V^{\\mathrm{op}}$: for $g:(U,\\varphi)\\to(U',\\varphi')$, $g\\bar u_\\varphi=g\\,p_U\\varphi\\bar v=p_{U'}(g\\times\\mathrm{id})\\varphi\\bar v=p_{U'}\\varphi'\\bar v=\\bar u_{\\varphi'}$, so $g$ is a morphism $(U,\\bar u_\\varphi)\\to(U',\\bar u_{\\varphi'})$ of $\\mathcal N_{\\bar s}$ and $[G(g)a']_{(U,\\bar u_\\varphi)}=[a']_{(U',\\bar u_{\\varphi'})}$. By the universal property of $e_pG(V)$ [def-weil-pbc-category-colimit] they induce $\\beta_{(V,\\bar v)}:e_pG(V)\\to G_{\\bar s}$ with $\\beta_{(V,\\bar v)}(\\iota_{(U,\\varphi)}(a))=[a]_{(U,p_U\\varphi\\bar v)}$. These are compatible over $\\mathcal N_{\\bar t}^{\\mathrm{op}}$: for $h:(V',\\bar v')\\to(V,\\bar v)$ ($h\\bar v'=\\bar v$), $\\beta_{(V',\\bar v')}(e_pG(h)\\iota_{(U,\\varphi)}(a))=\\beta_{(V',\\bar v')}(\\iota_{(U,\\varphi h)}(a))=[a]_{(U,p_U\\varphi h\\bar v')}=[a]_{(U,p_U\\varphi\\bar v)}=\\beta_{(V,\\bar v)}(\\iota_{(U,\\varphi)}(a))$, and two maps out of $e_pG(V)$ agreeing on all $\\iota_{(U,\\varphi)}(a)$ are equal (step 1). So there is a unique map $\\beta$ with $\\beta([\\iota_{(U,\\varphi)}(a)]_{(V,\\bar v)})=[a]_{(U,p_U\\circ\\varphi\\circ\\bar v)}$: the correspondence of the source, the pair $(V,\\bar v)$, $\\varphi$ going to the pointed neighbourhood $(U,p_U\\varphi\\bar v)$ of $\\bar s$.",
-   "uses": [
-    "def-pc-fibre-product",
-    "def-weil-pbc-pointed-etale-neighbourhoods",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma Tag 03Q1 (3): 'the pair $(U,\\overline u)$ and the map $a:U\\to X\\times_YV$ corresponds to the pair $(V,a\\circ\\overline u)$'"
-   }
-  },
-  {
-   "text": "*$\\alpha$ and $\\beta$ are mutually inverse* (explicit inverse maps in place of the cofinality argument of the source; no filteredness is used). By step 1 every element of $G_{\\bar s}$ is some $[a]_{(U,\\bar u)}$ and every element of $(e_pG)_{\\bar t}$ is some $[\\iota_{(U,\\varphi)}(a)]_{(V,\\bar v)}$ (step 1 applied to the stalk and then to $e_pG(V)$), so it suffices to check on these. (i) $\\beta\\alpha([a]_{(U,\\bar u)})=\\beta([\\iota_{(U,\\mathrm{id})}(a)]_{(U\\times_ST,(\\bar u,\\bar t))})=[a]_{(U,p_U\\circ(\\bar u,\\bar t))}=[a]_{(U,\\bar u)}$. (ii) Put $\\bar u=p_U\\varphi\\bar v$; then $\\alpha\\beta([\\iota_{(U,\\varphi)}(a)]_{(V,\\bar v)})=[\\iota_{(U,\\mathrm{id})}(a)]_{(U\\times_ST,(\\bar u,\\bar t))}$. The $T$-morphism $\\varphi$ satisfies $p_U\\varphi\\bar v=\\bar u$ and $q_U\\varphi\\bar v=(V\\to T)\\bar v=\\bar t$, so $\\varphi\\circ\\bar v=(\\bar u,\\bar t)$ [def-pc-fibre-product] and $\\varphi:(V,\\bar v)\\to(U\\times_ST,(\\bar u,\\bar t))$ is a morphism of $\\mathcal N_{\\bar t}$. Hence $[\\iota_{(U,\\mathrm{id})}(a)]_{(U\\times_ST,(\\bar u,\\bar t))}=[e_pG(\\varphi)\\iota_{(U,\\mathrm{id})}(a)]_{(V,\\bar v)}=[\\iota_{(U,\\varphi)}(a)]_{(V,\\bar v)}$. So $\\beta$ is bijective with inverse $\\alpha$.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-pc-fibre-product",
-    "def-weil-pbc-pointed-etale-neighbourhoods"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback) (3), direct proof"
-   }
-  },
-  {
-   "text": "*Existence, germ formula, bijectivity and uniqueness of $c$.* Put $c_{e,\\bar t,G}=\\beta\\circ\\theta_{\\bar t}^{-1}:(e^{-1}G)_{\\bar t}\\to G_{\\bar s}$, bijective by steps 2 and 5. For $(U,\\bar u)\\in\\mathcal N_{\\bar s}$ and $a\\in G(U)$, by step 0 the germ of $e^*a=\\theta_{U\\times_ST}(\\iota_{(U,\\mathrm{id})}(a))$ at $(U\\times_ST,(\\bar u,\\bar t))$ is $\\theta_{\\bar t}([\\iota_{(U,\\mathrm{id})}(a)]_{(U\\times_ST,(\\bar u,\\bar t))})=\\theta_{\\bar t}(\\alpha([a]_{(U,\\bar u)}))$, so $c$ sends it to $\\beta\\alpha([a]_{(U,\\bar u)})=[a]_{(U,\\bar u)}$, the germ of $a$ at $(U,\\bar u)$: the germ formula holds. Uniqueness: $\\theta_{\\bar t}\\circ\\alpha$ is bijective (steps 2, 5) and every element of $G_{\\bar s}$ is a germ $[a]_{(U,\\bar u)}$ (step 1), so every element of $(e^{-1}G)_{\\bar t}$ is the germ of some $e^*a$ at some $(U\\times_ST,(\\bar u,\\bar t))$; a map satisfying the germ formula is prescribed on all of these, hence equals $c_{e,\\bar t,G}$.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 03Q1 (lemma-stalk-pullback) (3), direct proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "def-weil-pbc-sheafification",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
   "def-pc-fibre-product",
-  "lem-weil-pbc-sets-sheafification-geometric-stalk",
-  "def-weil-pbc-pointed-etale-neighbourhoods",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 03Q1 (lemma-stalk-pullback) (3), its direct proof (stalks commute with sheafification by Tag 03PT (2); the colimit computation of equation (equation-pullback)); sites.tex Tags 00VD, 00VE for the unit of $u_p\\dashv u^p$; the explicit inverse maps and the uniqueness clause are written out by an agent after lem-weil-pbc-inverse-image-stalk-germ"
+  "place": "Tag 03Q1 (3), general-site argument via Sites Tag 05V1. Implemented using proved general point comparison and germ formulas in WeilConjectures.Mathlib, with the uniqueness argument written by B2 from the Mathlib colimit-germ surjectivity lemma."
  },
  "mathlib_searches": [
   {
@@ -232,5 +167,15 @@
   "group": "E1",
   "result": "pass",
   "note": "arbitrary e:T->S; G Sheaf smallEtaleTopology Type(u+1); e^{-1}=etaleSetPullback with unit of sheafAdjunctionContinuous (same as composition-units eta and sibling 486137f32); geometric point Omega alg closed, s=t>>e; stalks pointSmallEtale.sheafFiber; all (U,x) nbhds, fibre-product nbhd via pullback.lift; germ formula direction; Bijective c; uniqueness over all maps with germ formula only"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4a976",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T053919-L-2629415",
+  "kind": "interface",
+  "note": "independent Codex review: Delivery compiles; theorem signature and node statement match base byte-for-byte; proof has only permitted axioms; imports, metadata, change record, and report satisfy the review brief."
  }
 }
