@@ -198,6 +198,9 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TorsorPullback
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroupDense
+public import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
+public import WeilConjectures.AlgebraicGeometry.GenericFiber.ProjectiveCoordinate
+public import WeilConjectures.AlgebraicGeometry.GenericFiber.RadicialSmoothing
 public import WeilConjectures.AlgebraicGeometry.GenericFiniteness
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
@@ -1693,7 +1696,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
@@ -1773,6 +1779,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PullbackIntTensorFamily
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.SingleDelta
@@ -1976,6 +1983,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Derived.DualPerfect
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.Derived.ExternalProduct
+public import WeilConjectures.SixFunctors.ProEtale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.ProEtale.Derived.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Derived.HomComparison
