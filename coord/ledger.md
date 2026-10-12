@@ -8848,3 +8848,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:17 L: returned deliver/T2/Sheaf.RingTheory.CompletionAtQuasiFinitePrime (reviewer RETURN: (reviewer X-905d1, head 905d1df18) B9: In dag/nodes/sec-proper-base-change/lem-weil-pbc-completion-local-map-at-prime.js)
 - 18:18 L: returned deliver/E3/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-f5760, head f5760b1c4) E2, G1: The previous return remains unresolved. In lean/Sheaf/AlgebraicGeometry/Glued)
 - 18:22 L: returned deliver/J3/Sheaf.AlgebraicGeometry.EtaleTensorSections (reviewer RETURN: (reviewer X-c3e5e, head c3e5e9cc3) F4/report: delete the entire `## Earlier second reading (a previous round; superseded)
+- 18:25 L: returned deliver/U2/Sheaf.CategoryTheory.Sites.SheafCohomology.CechGeneralTotal (reviewer RETURN: (reviewer X-8b2c4, head 8b2c4d122) F / review points 2 and 7: reconcile the interface-change record and compiler account)
