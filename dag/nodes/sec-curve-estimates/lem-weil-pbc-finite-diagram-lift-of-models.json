@@ -1,0 +1,135 @@
+{
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleFiniteDataDescent",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-finite-data-descent",
+   "place": "Proof step 4: lift arrows and relations with object models fixed",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM (2),(3), closing categorical assertion; step 4 of lem-weil-pbc-etale-finite-data-descent; checked at https://stacks.math.columbia.edu/tag/01ZM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite diagram morphisms relations descend from inverse limit of schemes of finite presentation",
+   "results": "UNAVAILABLE: service returned Internal Server Error on 2026-10-13",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of etale schemes of finite presentation descend along directed inverse limits",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType and locally directed colimit existence; no full lifting statement. Local search also found filteredColimit_category_finite_functor_lift, which requires a finite category and strict colimit data; Paths A can have infinitely many paths.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagram|joint.*surjectivity in Mathlib and finite diagram descent in lean/Sheaf and dag/nodes",
+   "results": "AffineEtaleFiniteDiagramDescent is restricted to affine etale objects and finite incoming arrows without path relations. FilteredColimitCategoryFiniteFunctorLift assumes a finite category, unlike a free path category. No statement for the present fixed models or arbitrary finite family was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-weil-pbc-finite-diagram-lift-of-models",
+ "kind": "statement",
+ "title": "Finite diagram arrows and relations lift after object models are chosen",
+ "statement": "Let $I$ be a nonempty directed preorder and $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a system of qcqs schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition maps [pqf-def-affine-morphism], with limit cone $(X,\\pi)$. Let $A$ be a finite quiver with finitely many generating arrows, $\\mathrm{Paths}(A)$ its free category, $R$ a finite set, and $p_r,q_r:s_r\\to t_r$ paths. Let $F:\\mathrm{Paths}(A)\\to\\mathrm{Sch}/X$ satisfy $F(p_r)=F(q_r)$. Fix $i\\in I^{\\mathrm{op}}$, finite-presentation models $V_a\\to D_i$ (locally of finite presentation, quasi-compact and quasi-separated), and isomorphisms $\\alpha_a:(V_a)_X\\simeq F(a)$, where subscript denotes pullback [def-pc-fibre-product]. Then there are $j$, $h:j\\to i$, a functor $G:\\mathrm{Paths}(A)\\to\\mathrm{Sch}/D_j$ and a natural isomorphism $G_X\\simeq F$, with $G(a)=(V_a)_j$ for every $a$ and $G(p_r)=G(q_r)$ for every $r$. No etaleness or object-descent assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZM (2),(3), closing categorical assertion; step 4 of lem-weil-pbc-etale-finite-data-descent; checked at https://stacks.math.columbia.edu/tag/01ZM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the finitely many generating arrows of F by the supplied alpha_a. Apply 01ZM (2) to each resulting map between pullbacks of V_a. Choose a common refinement of these stages and i, using directedness; base-change the maps there.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the generating arrows through the canonical iterated-pullback identifications, so their objects are exactly the pullbacks of the prescribed V_a. Extend the quiver map using Paths.lift. The supplied comparisons are natural on generators, hence on every path by induction (identity paths use identity maps, and concatenation uses functoriality).",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each r, naturality and F(p_r)=F(q_r) imply equality of the two composites after limit pullback. Apply 01ZM (3) to those maps and choose a common refinement of the finitely many relation stages.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Base-change the functor to the common relation stage; functoriality preserves every relation. Transport this functor along objectwise canonical pullback-composition isomorphisms to obtain objects literally equal to the direct pullbacks of V_a, and transport its natural comparison at the same time. Empty vertex, arrow and relation sets impose no stage choices; use i or the current stage.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-pd-spreading-out",
+  "def-pc-fibre-product"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteDiagramLiftOfModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDiagramLiftOfModels.lean",
+  "declaration": "AlgebraicGeometry.finite_diagram_lift_of_models",
+  "statement": "theorem finite_diagram_lift_of_models {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (A : Type v) [Finite A] [Quiver.{v} A] [Finite (Σ a b : A, Quiver.Hom a b)] (R : Type v) [Finite R] (s t : R → Paths A) (p q : ∀ r, s r ⟶ t r) (F : Paths A ⥤ Over c.pt) (i : Iᵒᵖ) (V : A → Over (D.obj i)) (hV : ∀ a, LocallyOfFinitePresentation (V a).hom ∧ QuasiCompact (V a).hom ∧ QuasiSeparated (V a).hom) (α : ∀ a, (Over.pullback (c.π.app i)).obj (V a) ≅ F.obj a) (hR : ∀ r, F.map (p r) = F.map (q r)) : ∃ (j : Iᵒᵖ) (h : j ⟶ i) (G : Paths A ⥤ Over (D.obj j)) (β : G ⋙ Over.pullback (c.π.app j) ≅ F), (∀ a, G.obj a = (Over.pullback (D.map h)).obj (V a)) ∧ (∀ r, G.map (p r) = G.map (q r))",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T212210-L-1097990",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T212210-L-1097990",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

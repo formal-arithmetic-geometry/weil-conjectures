@@ -29,109 +29,63 @@
  ],
  "proof": [
   {
-   "text": "*Base change bookkeeping.* Let $i\\le i'\\le i''$ and let $V$ be an $X_i$-scheme. Since $f_{i'i}\\circ f_{i''i'}=f_{i''i}$ and $f_{i'i}\\circ f_{i'}=f_i$ [lem-weil-pbc-limit-affine-transition], transitivity of fibre products [def-pc-fibre-product] gives canonical isomorphisms $(V_{i'})_{i''}\\cong V_{i''}$ over $X_{i''}$ and $(V_{i'})_X\\cong V_X$ over $X$, compatible with each other and with base change of $X_i$-morphisms; base change is a functor: $(\\psi\\circ\\chi)_{i'}=\\psi_{i'}\\circ\\chi_{i'}$, $(\\psi\\circ\\chi)_X=\\psi_X\\circ\\chi_X$, $(\\mathrm{id})_{i'}=\\mathrm{id}$. Likewise, for an $X_i$-morphism $g:V\\to W$ and $i'\\ge i$, $V_{i'}\\cong W_{i'}\\times_WV$ with $g_{i'}$ the projection. If $V\\to X_i$ is etale of finite presentation, then so are $V_{i'}\\to X_{i'}$ and $V_X\\to X$ (etale by [lem-weil-pbc-etale-scheme-base-change], locally of finite presentation, quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence] (3)), and the scheme $V$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence] (2) because $X_i$ is. Finally, any $X_i$-morphism between two $X_i$-schemes etale over $X_i$ is etale [lem-weil-pbc-etale-composition-cancellation] (3).",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Situation 081D (situation-descent-property, line 1739) and the notation $X_{i,S_{i'}}$ of Lemma 01ZM; the qcqs remark in the proof of 01ZM ('since $Y_i$ and $X_i$ are of finite presentation over $S_i$ ... also quasi-compact and quasi-separated')"
-   }
-  },
-  {
-   "text": "*Objects (assertion 1).* Let $U\\to X$ be etale of finite presentation. By [thm-pd-spreading-out] (1) (Stacks 01ZM (1): $U\\cong U'_{i,X}$ as schemes over $X$) there are $i\\in I$, a morphism of finite presentation $U'_i\\to X_i$ and an $X$-isomorphism $\\beta:(U'_i)_X\\to U$. The structure morphism $(U'_i)_X\\to X$ is the composite of $\\beta$, an isomorphism and hence an open immersion, which is etale by [lem-weil-pbc-etale-composition-cancellation] (1), with the etale $U\\to X$; so it is etale by [lem-weil-pbc-etale-composition-cancellation] (2). Apply [lem-weil-pbc-descend-etale] to the system $(X_j)$, the index $0:=i$, $S_0=Y_0:=X_i$, $X_0:=U'_i$ and $f_0$ the structure morphism of $U'_i$: $S_0$ and $Y_0$ are quasi-compact and quasi-separated by hypothesis, $X_0$ by step 1, $f_0$ is locally of finite presentation, and its base change to $X$ is $(U'_i)_X\\to X_i\\times_{X_i}X=X$, etale. Hence there is $i'\\ge i$ with $(U'_i)_{i'}\\to X_{i'}$ etale. Put $U_{i'}=(U'_i)_{i'}$: it is etale of finite presentation over $X_{i'}$ (finite presentation by [lem-weil-pbc-qcqs-morphism-permanence] (3)), and $(U_{i'})_X\\cong(U'_i)_X\\cong U$ over $X$ by step 1 and $\\beta$.",
-   "uses": [
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-descend-etale",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 01ZM (lemma-descend-finite-presentation) (1) and Lemma 07RP (lemma-descend-etale, line 1949)"
-   }
-  },
-  {
-   "text": "*Morphisms and equalities (assertions 2 and 3).* $U_i$ and $V_i$ are of finite presentation over $X_i$. For 2, [thm-pd-spreading-out] (2) gives $i'\\ge i$ and a morphism $\\psi_{i'}:(U_i)_{i'}\\to(V_i)_{i'}$ whose base change to $X$ is $\\psi$; as in Stacks 01ZM (2), and in the Lean declaration AlgebraicGeometry.Scheme.exists_pullback_hom_of_isLimit of that node, $\\psi$ is a morphism over $X$ and $\\psi_{i'}$ one over $X_{i'}$ (the base change to $X$ is only defined for these). For 3, [thm-pd-spreading-out] (3) gives $i'\\ge i$ with $\\psi_{i'}=\\chi_{i'}$.",
-   "uses": [
-    "thm-pd-spreading-out"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 01ZM (lemma-descend-finite-presentation) (2), (3)"
-   }
-  },
-  {
-   "text": "*Finite diagrams (assertion 4).* For each $a\\in A$ step 2 gives a stage $i_a$, an $X_{i_a}$-scheme etale of finite presentation and an $X$-isomorphism to $U^a$. As $A$ is finite and $I$ directed, choose $i\\ge i_a$ for all $a$ ($i$ arbitrary if $A=\\emptyset$) and base change everything to $X_i$; by step 1 this gives $X_i$-schemes $U^a_i$ etale of finite presentation and $X$-isomorphisms $\\alpha_a:(U^a_i)_X\\to U^a$. For $e\\in E$ the $X$-morphism $\\varphi_e=\\alpha_{t(e)}^{-1}\\circ\\psi_e\\circ\\alpha_{s(e)}:(U^{s(e)}_i)_X\\to(U^{t(e)}_i)_X$ descends by step 3 (assertion 2) to an $X_{i_e}$-morphism at some stage $i_e\\ge i$; choose $i'\\ge i_e$ for all $e\\in E$ and replace $i$ by $i'$, the $U^a_i$ by their base changes, the $\\alpha_a$ by their composites with the isomorphisms of step 1, and the descended morphisms by their base changes $\\psi_{e,i}$; then $(\\psi_{e,i})_X=\\varphi_e$, i.e. $\\alpha_{t(e)}\\circ(\\psi_{e,i})_X=\\psi_e\\circ\\alpha_{s(e)}$. For a relation $c=c'$ of $R$ with chains $e_1,\\dots,e_m$ and $e'_1,\\dots,e'_{m'}$ from $a$ to $a'$, let $\\gamma=\\psi_{e_m,i}\\circ\\cdots\\circ\\psi_{e_1,i}$ and $\\gamma'$ likewise (identity for an empty chain). By functoriality of base change (step 1) and telescoping of the $\\alpha$'s, $\\gamma_X=\\alpha_{a'}^{-1}\\circ c\\circ\\alpha_a=\\alpha_{a'}^{-1}\\circ c'\\circ\\alpha_a=\\gamma'_X$, so by step 3 (assertion 3) $\\gamma_{i_r}=\\gamma'_{i_r}$ at some $i_r\\ge i$. Taking a common $i''\\ge i_r$ for the finitely many $r\\in R$ and base changing once more (base change preserves the relations, the etale and finite-presentation properties and the compatibility with the $\\alpha$'s, by step 1) gives a descended diagram at stage $i''$. The same reasons show that the base change of a descended diagram at stage $i$ to any $i'\\ge i$ is one at stage $i'$.",
+   "text": "Use the given limit cone identities c.w, Over.pullbackComp and its adjunction-mate counit identity to identify iterated pullbacks. Pullback.hom_ext and Over.w give the comparison equations. No existence theorem for a limit cone is needed.",
    "uses": [
     "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 01ZM, closing sentence ('the category of schemes of finite presentation over $S$ is the colimit over $I$ of the categories of schemes of finite presentation over $S_i$'), applied to finitely many objects, morphisms and relations"
-   }
+   "elementary": true
   },
   {
-   "text": "*Coverings (assertion 5), descent of surjectivity.* Each $\\psi_{e,i}$ ($e\\in B$) is an $X_i$-morphism between $X_i$-schemes etale over $X_i$, hence etale (step 1), in particular locally of finite presentation [def-weil-etale-morphism]. Let $V=\\coprod_{e\\in B}U^{s(e)}_i$ with coprojections $\\iota_e$ [lem-weil-pbc-scheme-coproduct-family] and $g:V\\to U^b_i$ the morphism with $g\\circ\\iota_e=\\psi_{e,i}$. By [lem-weil-pbc-finite-coproduct-lfp-qcqs] (2) $g$ is locally of finite presentation, and by its part (1) $V$ is quasi-compact and quasi-separated, each $U^{s(e)}_i$ being so by step 1; so is $U^b_i$. The base change $g_X:V_X\\to(U^b_i)_X$ is surjective [def-weil-surjective-morphism]: for $y\\in(U^b_i)_X$ the point $\\alpha_b(y)$ lies in the image of some $\\psi_e$ ($e\\in B$), because the family is jointly surjective [def-weil-pbc-etale-site]: $\\alpha_b(y)=\\psi_e(u)$; then $z=\\alpha_{s(e)}^{-1}(u)$ satisfies $(\\psi_{e,i})_X(z)=\\alpha_b^{-1}\\psi_e\\alpha_{s(e)}(z)=y$, and $(\\psi_{e,i})_X=g_X\\circ(\\iota_e)_X$ by functoriality (step 1), so $y\\in g_X(V_X)$. Apply [lem-weil-pbc-descend-surjective] to the system $(X_j)$, $0:=i$, $S_0:=X_i$, $X_0:=V$, $Y_0:=U^b_i$ and $f_0:=g$ (a morphism over $X_i$ between quasi-compact quasi-separated schemes, locally of finite presentation, with surjective base change to $X$): there is $i_1\\ge i$ with $g_{i_1}$ surjective. For $i'\\ge i_1$, $g_{i'}$ is by step 1 the base change of $g_{i_1}$ along $(U^b_i)_{i'}\\to(U^b_i)_{i_1}$, hence surjective by [lem-weil-pbc-surjective-base-change].",
+   "text": "For an object U, Scheme.exists_isPullback_of_finitePresentation (01ZM (1)) constructs a finite-presentation model V and its pullback comparison. Map V to the identity object T over the stage. The map after pullback to the limit is etale by Etale.of_comp and the comparison with U. Use Etale.exists_stage_of_inverseLimit (07RP) to descend this map, then compose with the etale structure map of the pulled-back identity object. Finite-presentation properties persist under pullback.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-finite-coproduct-lfp-qcqs",
-    "def-weil-surjective-morphism",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-descend-surjective",
-    "lem-weil-pbc-surjective-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 07RR (lemma-descend-surjective, line 2069), applied to the morphism from the finite coproduct"
-   }
-  },
-  {
-   "text": "*Coverings (assertion 5), conclusion.* Let $i'\\ge i_1$. The coprojections $\\iota_e:U^{s(e)}_i\\to V$ are open immersions covering $V$ [lem-weil-pbc-scheme-coproduct-family], hence a jointly surjective family of etale morphisms [lem-weil-pbc-etale-composition-cancellation] (1). By [lem-weil-pbc-etale-covering-base-change] applied to the projection $V_{i'}\\to V$, the projections $V_{i'}\\times_VU^{s(e)}_i\\to V_{i'}$ are jointly surjective; by step 1 $V_{i'}\\times_VU^{s(e)}_i\\cong(U^{s(e)}_i)_{i'}$ with these projections becoming $(\\iota_e)_{i'}$. Since $g_{i'}$ is surjective (step 5) and $(\\psi_{e,i})_{i'}=g_{i'}\\circ(\\iota_e)_{i'}$ (step 1), every point of $(U^b_i)_{i'}$ lies in the image of some $(\\psi_{e,i})_{i'}$, $e\\in B$. Each $(\\psi_{e,i})_{i'}$ is an $X_{i'}$-morphism between objects of $(X_{i'})_{\\Et}$ (step 1), etale by step 1. So $\\{(\\psi_{e,i})_{i'}\\}_{e\\in B}$ is a jointly surjective family of etale morphisms, a covering in $(X_{i'})_{\\Et}$ [def-weil-pbc-etale-site].",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-etale",
     "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-covering-base-change",
-    "def-weil-pbc-etale-site"
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma 07RR (lemma-descend-surjective, line 2069), with the definition of coverings of the small etale site"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For a morphism between limit pullbacks, compose its underlying map with the target first projection. Scheme.exists_pullback_hom_of_isLimit (01ZM (2)) descends this map; form its Over morphism by pullback.lift. Check the required canonical-comparison equation on the two projections, using the private comparison_fst lemma. For equalities, compose the pullback equality with the target first projection and apply Scheme.exists_pullback_fst_comp_eq_of_isLimit (01ZM (3)); pullback.hom_ext gives equality in Over.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the already-proved object clause to all finitely many vertices and use Finite.exists_le to move their models to a common stage. Apply finite_diagram_lift_of_models to descend only the generators and relations while keeping these models. Its object equalities give etale finite presentation of the resulting objects. At later stages use base-change instances for these properties, congrArg of the pullback map for relations, and naturality of the whiskered comparison isomorphism for every path.",
+   "uses": [
+    "lem-weil-pbc-finite-diagram-lift-of-models",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Index the selected family by the subtype of the finite set B. Naturality of the inverse diagram comparison transports the limit covering to the canonical pullbacks of the stage family. Its arrows are locally of finite presentation by Etale.of_comp. Apply the proved finite_family_joint_surjectivity_stage. At each later stage the selected arrows are etale by cancellation against the etale structure maps of their source and target, and the helper supplies joint surjectivity.",
+   "uses": [
+    "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
   "def-pc-fibre-product",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-etale-composition-cancellation",
   "thm-pd-spreading-out",
   "lem-weil-pbc-descend-etale",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
-  "def-weil-surjective-morphism",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-descend-surjective",
-  "lem-weil-pbc-surjective-base-change",
-  "lem-weil-pbc-etale-covering-base-change"
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-finite-diagram-lift-of-models",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "assembled by the worker from Limits, Lemma 01ZM (lemma-descend-finite-presentation), Lemma 07RP (lemma-descend-etale, line 1949) and Lemma 07RR (lemma-descend-surjective, line 2069), Section 081C; the blueprint proof (literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-weil-pbc-etale-finite-data-descent.md, ## Proof) is replaced by these citations"
+  "place": "M3 stage-3 reduction of 2026-10-13: Tags 01ZM, 07RP and 07RR; finite object models assembled in Lean, only lifting generators and relations split off"
  },
  "mathlib_searches": [
   {
@@ -216,5 +170,15 @@
   "group": "G1",
   "result": "fix",
   "note": "directed nonempty I:Type u, D:Iᵒᵖ⥤Scheme.{u} affine transitions, qcqs stages, given limit cone; fp = Etale∧LFP∧QC∧QS of Over.hom; (1) Over-iso to pullback; (2) ψj with canonical pullbackComp/c.w comparison; (3) eventual equality; (4) Paths quiver functor, relations, α natural iso, later stages; (5) joint surjectivity antecedent, eventual étale + jointly surjective; FIX: inlined 5 let binders (fp,P,Q,e,αj)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T212210-L-1097990",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

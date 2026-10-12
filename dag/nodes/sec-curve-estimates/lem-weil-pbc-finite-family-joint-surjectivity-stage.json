@@ -1,0 +1,144 @@
+{
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleFiniteDataDescent",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-finite-data-descent",
+   "place": "Proof steps 5--6: finite coproduct reduction for coverings",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RR in Situation 081D, applied to a finite coproduct; steps 5--6 of lem-weil-pbc-etale-finite-data-descent; checked at https://stacks.math.columbia.edu/tag/07RR"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite diagram morphisms relations descend from inverse limit of schemes of finite presentation",
+   "results": "UNAVAILABLE: service returned Internal Server Error on 2026-10-13",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of etale schemes of finite presentation descend along directed inverse limits",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType and locally directed colimit existence; no full lifting statement. Local search also found filteredColimit_category_finite_functor_lift, which requires a finite category and strict colimit data; Paths A can have infinitely many paths.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagram|joint.*surjectivity in Mathlib and finite diagram descent in lean/Sheaf and dag/nodes",
+   "results": "AffineEtaleFiniteDiagramDescent is restricted to affine etale objects and finite incoming arrows without path relations. FilteredColimitCategoryFiniteFunctorLift assumes a finite category, unlike a free path category. No statement for the present fixed models or arbitrary finite family was found.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "id": "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+ "kind": "statement",
+ "title": "Joint surjectivity of a finite family descends to a stage",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ a system of qcqs schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition maps [pqf-def-affine-morphism], and $(X,\\pi)$ a limit cone. Fix $i$, a finite set $B$, finite-presentation $D_i$-schemes $U_b,V$, and $D_i$-morphisms $f_b:U_b\\to V$ that are locally of finite presentation. Assume their pullbacks to $X$ are jointly surjective on points. Then there are $i_1$, $h_1:i_1\\to i$ such that for every $h:j\\to i_1$ and every point $x\\in V_j$, some $b\\in B$ and $y\\in(U_b)_j$ satisfy $(f_b)_j(y)=x$. Here subscript denotes direct pullback [def-pc-fibre-product] along $D(h\\circ h_1)$. No diagram or etaleness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 07RR in Situation 081D, applied to a finite coproduct; steps 5--6 of lem-weil-pbc-etale-finite-data-descent; checked at https://stacks.math.columbia.edu/tag/07RR"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct W as the Over object whose source is the finite coproduct of the U_b, with the induced structure map. Construct g:W to V and l_b:U_b to W by Sigma.desc and Sigma.iota; l_b composed with g equals f_b. The finite-presentation structure maps give qcqs sources and target; finite_coproduct_lfp_qcqs gives qcqs W and locally finite presentation of g.",
+   "uses": [
+    "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Functoriality of Over.pullback transports l_b composed with g=f_b. Each point lift supplied by the assumed joint surjectivity can thus be mapped through the pulled-back l_b, proving the pulled-back g surjective. Apply exists_surjective_of_isLimit (07RR).",
+   "uses": [
+    "lem-weil-pbc-descend-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every base change, Scheme.Pullback.range_map identifies the image of the pulled-back g with the inverse image of its original image under the target first projection. A target point at j maps to a target point at i_1 by the canonical pullback.map; their first projections agree. Surjectivity at i_1 therefore implies image membership, hence a lift under g_j.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Project that source lift to W and use sigmaOpenCover to find a coproduct summand containing it. Apply the same pullback image formula to l_b to lift the actual source point to the pulled-back summand (without identifying pullback points with pairs). Functoriality of the equation l_b composed with g=f_b then gives the required family lift. For an empty B all point-existence assumptions force the relevant targets to be empty; the identical proof applies.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-descend-surjective",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFamilyJointSurjectivityStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFamilyJointSurjectivityStage.lean",
+  "declaration": "AlgebraicGeometry.finite_family_joint_surjectivity_stage",
+  "statement": "theorem finite_family_joint_surjectivity_stage {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (B : Type v) [Finite B] (i : Iᵒᵖ) (U : B → Over (D.obj i)) (V : Over (D.obj i)) (f : ∀ b, U b ⟶ V) (hU : ∀ b, LocallyOfFinitePresentation (U b).hom ∧ QuasiCompact (U b).hom ∧ QuasiSeparated (U b).hom) (hV : LocallyOfFinitePresentation V.hom ∧ QuasiCompact V.hom ∧ QuasiSeparated V.hom) (hf : ∀ b, LocallyOfFinitePresentation (f b).left) (hcov : ∀ x : ((Over.pullback (c.π.app i)).obj V).left, ∃ b, ∃ y : ((Over.pullback (c.π.app i)).obj (U b)).left, ((Over.pullback (c.π.app i)).map (f b)).left y = x) : ∃ (i₁ : Iᵒᵖ) (h₁ : i₁ ⟶ i), ∀ (j : Iᵒᵖ) (h : j ⟶ i₁), ∀ x : ((Over.pullback (D.map (h ≫ h₁))).obj V).left, ∃ b, ∃ y : ((Over.pullback (D.map (h ≫ h₁))).obj (U b)).left, ((Over.pullback (D.map (h ≫ h₁))).map (f b)).left y = x",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T212210-L-1097990",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T212210-L-1097990",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
