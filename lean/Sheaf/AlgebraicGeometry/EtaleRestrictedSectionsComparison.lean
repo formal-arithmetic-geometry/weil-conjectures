@@ -6,6 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsFactors
+import Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentIso
 
 /-! # Properties of the restricted augmented CE total
 
@@ -74,6 +75,8 @@ theorem etaleRestrictedSectionsLift_isIso
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
     (T : EtaleTermwiseHypercohomology X K) (q : ℤ) :
     IsIso (etaleRestrictedSectionsLift X K T q) := by
-  sorry
+  have h (n : ℤ) : IsIso ((etaleRestrictedSectionsLift X K T q).f n) :=
+    etaleRestrictedSectionsLift_component_isIso X K T q n
+  exact HomologicalComplex.Hom.isIso_of_components _
 
 end AlgebraicGeometry.Etale

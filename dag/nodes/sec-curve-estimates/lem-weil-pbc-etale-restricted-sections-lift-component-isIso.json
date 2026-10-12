@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-etale-restricted-sections-lift-component-isIso",
+ "kind": "statement",
+ "title": "Componentwise isomorphism of the restricted sections lift",
+ "statement": "Let X be a scheme [def-weil-pbc-scheme-conventions], K a bounded-below complex of abelian sheaves on its small étale site [def-weil-pbc-etale-sheaves], and T an étale termwise hypercohomology presentation [def-weil-pbc-termwise-hypercohomology-presentation]. For any integers q,n, the degree-n component of the canonical factorization of the restricted sections inclusion [def-weil-pbc-etale-restricted-total-construction] through T.L.step q, supplied by [lem-weil-pbc-etale-restricted-sections-factors], is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof remark (3) and finite-diagonal comparison; Tag 0133, augmented-total quasi-isomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-etale-restricted-total-construction",
+  "lem-weil-pbc-etale-restricted-sections-factors"
+ ],
+ "proof": [
+  {
+   "text": "In degree n the restricted total has exactly the finite diagonal summands q ≤ s ≤ n. Its inclusion is injective with image their sum. The explicit finite-diagonal sections comparison preserves this description. T.filtration_formula identifies that image with the degree-n filtered step. The universal factorization is the resulting isomorphism by monic cancellation, also for empty diagonals.",
+   "uses": [
+    "def-weil-pbc-etale-restricted-total-construction",
+    "def-weil-pbc-termwise-hypercohomology-presentation",
+    "lem-weil-pbc-etale-restricted-sections-factors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-restricted-total-construction",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-weil-pbc-etale-restricted-sections-factors"
+ ],
+ "proof_origin": {
+  "by": "worker V2, repaired in second reading",
+  "document": "Stacks Project",
+  "place": "Tag 015J, proof remark (3), finite diagonal column filtration"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of cochain complexes is an isomorphism if every degree component is an isomorphism",
+   "results": "service unavailable: Internal Server Error; no search verdict",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Subobject.factorThru",
+   "results": "CategoryTheory.Subobject.factorThru; CategoryTheory.Subobject.factorThru_arrow; CategoryTheory.Subobject.factorThru_mk_self; CategoryTheory.Subobject.factorThru_arrow_assoc; CategoryTheory.Subobject.factorThru_right; CategoryTheory.Subobject.factorThru_comp_arrow; CategoryTheory.Subobject.factorThru_self; CategoryTheory.Subobject.factorThru_ofLE",
+   "verdict": "generic ingredients; no restricted étale total comparison",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "stupidTrunc|mapTotalIso|factorThru_arrow",
+   "results": "Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/Limits.lean; Mathlib/CategoryTheory/Subobject/FactorThru.lean; Mathlib/CategoryTheory/Subobject/FactorThru.lean; Mathlib/CategoryTheory/Generator/StrongGenerator.lean",
+   "verdict": "generic ingredients; no restricted étale total comparison",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inclusion of a subset of direct summands in a total complex is injective in each degree",
+   "results": "DirectSum.of_injective, DirectSum.lmap_injective, DirectSum.map_injective, HomologicalComplex₂.ιTotalOrZero_eq; generic ingredients, no matching restricted sections factorization theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.isIso_of_components",
+   "results": "HomologicalComplex.Hom.isIso_of_components: converts degreewise IsIso instances into IsIso of a chain map; does not prove the degreewise comparison.",
+   "verdict": "used for the upper theorem only",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration|isIso_of_components; lean/Sheaf restricted comparison searches",
+   "results": "DoubleComplexTotal.secondFiltration defines the finite image sum; BoundedBelowSecondFiltration constructs its subcomplexes; CartanEilenbergFilteredTruncationComparison compares spectral sequences, not this fixed chain-map lift. No duplicate found.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComparison",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-restricted-sections-lift-isIso",
+   "place": "degreewise component calculation",
+   "via": "stage-3 decomposition"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleRestrictedSectionsComponentIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRestrictedSectionsComponentIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleRestrictedSectionsLift_component_isIso",
+  "statement": "theorem etaleRestrictedSectionsLift_component_isIso\n    (X : Scheme.{u})\n    (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (T : EtaleTermwiseHypercohomology X K) (q n : ℤ) :\n    IsIso (((T.L.step q).factorThru (etaleRestrictedSectionsInclusion X K T q)\n      (etaleRestrictedSections_factors X K T q)).f n)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T213854-L-1210344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T213854-L-1210344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
