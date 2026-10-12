@@ -17,7 +17,7 @@ In force from the line `STAGE 3 READY` (written by S3-C, 2026-10-12; adjusted to
 
 Prove every `sorry` of the module by the shortest route (stage 3 §2): a special case, a Mathlib lemma, a simpler argument, below the unit level. A route that would bypass a unit that the chapter's route passes through is not taken: a node that realizes a unit's statement or a step (`dag/units/<unit>.json` `realized`) is still used where the unit's proof uses it, and its module stays imported.
 
-Claim with `tools/claim.py next <G> --stage 3` (repairs first, then statements marked `STATEMENT-DISPUTED`, then nearest to a target). Claim also every module you must change besides it (§4).
+Claim with `tools/claim.py next <G> --stage 3` (repairs first, then statements marked `STATEMENT-DISPUTED`, then nearest to a target). For adaptations of modules you do not hold, use the forced-adaptation exception (§4).
 
 ## 2. The proof
 
@@ -40,10 +40,20 @@ A lemma the proof needs that the DAG lacks, and every theorem you leave with `so
 
 When a definition or an intermediate statement turns out wrong or hard to use you may change it:
 
-1. Claim the module and every module that must be adapted. A module another group has claimed stays with that group: change in it only what the adaptation requires, and name it and its group in the record.
+1. Hold the module whose interface you change; adapted modules follow the exception below.
 2. List the modules that depend on it (`tools/downstream.py <module> --uses <name>`), and check for each that what it states does not become weaker, stronger or different.
 3. Write `coord/changes/<name>.md` (§6).
 4. Deliver the change with all adapted modules in the same delivery: they land together, as one set.
+
+A delivery may adapt a module it does not hold only when its own statement, definition or interface
+change forces it: the original module fails to compile against the changed dependencies, and the
+adapted module compiles. Every existing signature and visibility must stay identical; proofs,
+imports and private local helpers may change. Name each adapted module and its current holder
+(or unclaimed) in the change record. In `## Forced adaptations` of report.md give the original
+compiler error and changed lines, explaining why each is necessary. In a module held by another
+group, change only forced lines. No extra adaptation claim is required. Such a delivery is CODEX,
+never AUTO: the independent reader compiles originals against the changed dependencies and the
+adapted modules, checks the signatures and necessity of each edit, and returns any violation.
 
 A target statement never changes (`AGENTS.md` §4). A target whose statement uses the changed definition is reviewed again (`stages/2-statements.md` §4): say so in the record. Of two definitions of one notion keep the better one and make the other an `abbrev` of it. A node whose statement changes gets `statement_change` as in stage 2 (`coord/brief-stage2.md` §5, citers included).
 

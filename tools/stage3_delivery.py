@@ -158,7 +158,13 @@ def scan_imports() -> dict:
     """leanindex.scan()'s import table, read once per process (it reads the whole library: about 13 s)."""
     global _SCAN
     if _SCAN is None:
-        _SCAN = li.scan()[1]
+        _SCAN = {}
+        # Only imports are needed here; avoid parsing all library declarations.
+        for p in li.library_files():
+            try:
+                _SCAN[li.module_of(p)] = li.imports_of(p.read_text(errors="ignore"))
+            except FileNotFoundError:
+                continue
     return _SCAN
 
 
@@ -203,6 +209,21 @@ def unit_route_modules(nodes: dict[str, dict]) -> dict[str, str]:
             if isinstance(l, dict) and str(l.get("module") or "").startswith("Sheaf."):
                 out[l["module"]] = i
     return out
+
+
+_ROUTES = {}
+
+
+def unit_routes_at(git, base):
+    tree = git.run("rev-parse", f"{base}:dag/nodes").strip()
+    # Unit records come from the working tree, as unit_route_modules always did.
+    units = tuple((str(p), p.stat().st_mtime_ns) for p in sorted((ROOT / "dag/units").glob("*.json")))
+    key = (str(git.root.resolve()), tree, units)
+    if key not in _ROUTES:
+        if len(_ROUTES) >= 4:
+            _ROUTES.pop(next(iter(_ROUTES)))
+        _ROUTES[key] = unit_route_modules(s2.nodes_at(git, base))
+    return _ROUTES[key]
 
 
 def target_names() -> set[str]:
@@ -277,7 +298,12 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
         m["diff"] = diff_module(m["old"], m["text"])
         D["roles"].append(f"{m['role']} module {m['file']}")
     D["report"] = show(D["report_path"])
-    nodes_base = s2.nodes_at(git, base)
+    # Ordinary proof deliveries need only their delivered records. Read the
+    # entire DAG only for new nodes/sorries or statement corrections (citers).
+    needs_nodes = any(x["role"] == "new" or any(
+        (x["base_node"] or {}).get(k) != x["node"].get(k) for k in STAGE3_STATEMENT)
+        for x in D["nodes"].values()) or any(m["diff"]["new_sorry"] for m in D["modules"])
+    nodes_base = s2.nodes_at(git, base) if needs_nodes else {}
     dmap = s2.declaration_map({**nodes_base, **{k: v["node"] for k, v in D["nodes"].items()}})
     check_lean(D, f, dmap)
     check_nodes(D, f, git, base, group, item, nodes_base)
@@ -415,13 +441,32 @@ def check_changes(D, f, group, nodes_base):
         if f"`{u}`" not in alltext and f"| {u} " not in alltext:
             f("d", f"user {u} (mentions {', '.join(names[:3])}) is not in a change record's `## Users`")
     for m in D["modules"]:
-        if m["role"] == "adapted":
-            who = claim_holder(m["module"])
-            if who not in (group, None) and who not in alltext:
-                f("d", f"{m['module']} is claimed by {who}: change only what the adaptation needs and name it and its"
-                       " group in the record (stage 3 §3.1)")
-            elif who is None:
-                f("d", f"{m['module']} is adapted but nobody claims it: claim it first (lead.md §2.1)")
+        if m["role"] != "adapted":
+            continue
+        who = claim_holder(m["module"])
+        if who == group:
+            continue
+        d = m["diff"]
+        # This exception is an adaptation, never a second interface change.
+        changed = [k for k, old in d["old"].items()
+                   if k not in d["new"] or any(old[x] != d["new"][k][x]
+                                              for x in ("statement", "kw", "private"))]
+        added_public = d["public_added"]
+        if changed or added_public:
+            f("d", f"{m['module']}: unheld adaptation must keep every existing signature and visibility "
+                   f"identical and add only private helpers ({changed + added_public})")
+        primary = next((x for x in D["modules"] if x["role"] == "item"), None)
+        if not primary or not primary["diff"]["interface"]:
+            f("d", f"{m['module']}: unheld adaptation requires the item's own interface change")
+        evidence = report_section(D.get("report"), "Forced adaptations")
+        if m["module"] not in evidence:
+            f("d", f"{m['module']}: report needs `## Forced adaptations`: original compiler error against "
+                   "the changed item, changed lines and why each is forced; reader verifies it")
+        if m["module"] not in alltext or (who and who not in alltext):
+            f("d", f"{m['module']}: name the adapted module and holder {who or 'unclaimed'} in the change record")
+        D["notes"].append(f"{m['module']}: forced adaptation without a claim; CODEX must compile the original "
+                          "against the changed dependencies (must fail), then the adaptation (must pass), "
+                          "and check every changed line in another group's module is forced")
 
 
 def check_report(D, f, group):
@@ -579,6 +624,10 @@ def classify(D: dict, group: str, item: str) -> list[str]:
         why.append(f"modules besides the item ({len(others)})")
     routes = None
     for m in D["modules"]:
+        if m["role"] == "adapted":
+            why.append("reader required: forced adaptation in " + m["module"] +
+                       "; compile original against changed dependencies and adapted module; verify minimal edits")
+
         d = m["diff"]
         why.extend("reader required: " + r + " in " + m["module"] for r in reader_risks(m.get("old"), m["text"] or ""))
         if d["interface"]:
@@ -598,7 +647,7 @@ def classify(D: dict, group: str, item: str) -> list[str]:
                            "written `import X`, without `public`)")
         if d["removed_imports"]:
             if routes is None:
-                routes = unit_route_modules(s2.nodes_at(s2.Git(ROOT), D["base"]))
+                routes = unit_routes_at(s2.Git(ROOT), D["base"])
             hit = [i for i in d["removed_imports"] if i in routes]
             if hit:
                 why.append(f"removes the import of unit-route module(s) {', '.join(hit)} (stage 3 §2: no unit bypassed)")

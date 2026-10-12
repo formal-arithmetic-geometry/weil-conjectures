@@ -87,7 +87,8 @@ WeilConjectures.<...>):
      instance or attribute, a removed import or declaration, variable/open/notation) or a node's statement has a
      change record coord/changes/<name>.md with `## Reason`, `## Old`, `## New`, `## Users`, `## Status` (`open`), whose
      Users name every downstream module that mentions a changed name (tools/downstream.py --uses); every adapted
-     module is claimed by the group or named with the group that holds it (stage 3 §3.1);
+     module is held by the group or is a forced, signature-preserving adaptation under CODEX review
+     (original fails against changed dependencies, adapted compiles; only forced lines in another holder's module);
   e. the report: `## What changed`, `## Proved and sorry left` (every sorry left in the item's module by name, and
      every sorry the delivery leaves elsewhere), `## No longer needed`, `## Where the brief, the DAG or earlier work
      was wrong` (roles/worker.md §3), `## Second reading by <group>`, `## New nodes` naming each new node, and the

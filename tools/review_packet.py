@@ -296,6 +296,11 @@ def main_stage3(g, item) -> int:
             w("")
     for m in D["modules"]:
         d = m["diff"]
+        if m["role"] == "adapted":
+            w("Forced adaptation: compile the original from the delivery base against FILESDIR/.lbuild "
+              "with the changed item/dependencies; it must fail with the reported error. Compile the adapted "
+              "module; it must pass. Check identical existing signatures and every edit's necessity, "
+              "especially when another group holds the module. RETURN unnecessary adaptations.")
         risks = s3.reader_risks(m.get('old'), m['text'] or '')
         if risks:
             direct = sorted(x for x, deps in s3.scan_imports().items() if m['module'] in deps)

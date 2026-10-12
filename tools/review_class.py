@@ -35,6 +35,7 @@ import os, hashlib, json, pathlib, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 if not (ROOT / "dag").exists(): ROOT = pathlib.Path.home() / "weil-conjectures-sheaf"
 SAMPLE = 10
+CACHE_POLICY = "forced-adaptations-v1"
 def git(*a):
     return subprocess.run(["git", "-C", str(ROOT), *a], capture_output=True, text=True).stdout
 def show(ref, path):
@@ -102,6 +103,27 @@ def branches():
         p = l.split("/")
         if len(p) == 3: out.append((p[1], p[2]))
     return out
+def classify_job(job):
+    g, item, head = job
+    c, why, actual = classify(g, item)
+    return g, item, actual, c, why
+
+
+def uncached_classes(jobs):
+    if not jobs:
+        return
+    # tools/queue.py shadows the stdlib queue; import the process pool with
+    # just the standard package paths, then restore the tool search path.
+    paths = sys.path[:]
+    try:
+        sys.path = [p for p in paths if p and pathlib.Path(p).resolve() != ROOT / "tools"]
+        import multiprocessing, multiprocessing.pool, multiprocessing.queues
+    finally:
+        sys.path = paths
+    with multiprocessing.get_context("fork").Pool(min(4, len(jobs))) as pool:
+        yield from pool.imap(classify_job, jobs)
+
+
 if __name__ == "__main__":
     a = sys.argv[1:]
     if a == ["list"]:
@@ -112,17 +134,32 @@ if __name__ == "__main__":
         try: cache = _j.loads(cf.read_text())
         except (OSError, ValueError): cache = {}
         now = _t.time(); new = {}
-        for g, i in branches():
-            hd = git("rev-parse", f"deliver/{g}/{i}").strip(); k = f"{g}/{i}"
-            e = cache.get(k)
-            if e and e[0] == hd and now - e[3] < 1200: c, why, h = e[1], e[2], hd
+        def save(entries):
+            try:
+                tmp = cf.with_suffix(".tmp%d" % os.getpid())
+                tmp.write_text(_j.dumps(entries)); tmp.replace(cf)
+            except OSError:
+                pass
+        jobs = []
+        # One ref-table read, not one subprocess for every head.
+        refs = git("for-each-ref", "--format=%(refname:short) %(objectname)", "refs/heads/deliver")
+        def emit(g, i, hd, c, why, stamp):
+            new[f"{g}/{i}"] = [hd, c, why, stamp, CACHE_POLICY]
+            print(f"{c}\t{g}\t{i}\t{hd[:9]}\t{why}", flush=True)
+            if len(new) % 10 == 0:
+                save({**cache, **new})
+        for line in refs.splitlines():
+            branch, hd = line.split(); parts = branch.split("/")
+            if len(parts) != 3:
+                continue
+            _, g, i = parts; e = cache.get(f"{g}/{i}")
+            if e and len(e) >= 5 and e[4] == CACHE_POLICY and e[0] == hd and now - e[3] < 1200:
+                emit(g, i, hd, e[1], e[2], e[3])
             else:
-                c, why, h = classify(g, i); e = [h, c, why, now]
-            new[k] = [hd, c, why, e[3]]
-            print(f"{c}\t{g}\t{i}\t{h[:9]}\t{why}", flush=True)
-        try:
-            tmp = cf.with_suffix(".tmp%d" % os.getpid()); tmp.write_text(_j.dumps(new)); tmp.replace(cf)
-        except OSError: pass
+                jobs.append((g, i, hd))
+        for g, i, hd, c, why in uncached_classes(jobs):
+            emit(g, i, hd, c, why, _t.time())
+        save(new)
     elif len(a) == 2:
         c, why, h = classify(*a); print(c if c == "AUTO" else f"{c}: {why}")
     else: print(__doc__); sys.exit(2)
