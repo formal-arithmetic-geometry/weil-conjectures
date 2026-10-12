@@ -4,11 +4,43 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 
+import Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesLift
+
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
+
+private theorem arrow_comp_eq_of_mk_eq {C : Type u} [Category.{u} C]
+    {S X Y S' X' Y' : C} {a : X ⟶ S} {b : Y ⟶ X}
+    {a' : X' ⟶ S'} {b' : Y' ⟶ X'}
+    (ha : Arrow.mk a = Arrow.mk a') (hb : Arrow.mk b = Arrow.mk b') :
+    Arrow.mk (b ≫ a) = Arrow.mk (b' ≫ a') := by
+  obtain ⟨hX, hS, ha⟩ := (Arrow.mk_eq_mk_iff _ _).mp ha
+  obtain ⟨hY, hX', hb⟩ := (Arrow.mk_eq_mk_iff _ _).mp hb
+  apply (Arrow.mk_eq_mk_iff _ _).mpr
+  refine ⟨hY, hS, ?_⟩
+  rw [ha, hb]
+  simp [Category.assoc]
+
+private theorem ofArrows_transport_eq {C : Type u} [Category.{u} C]
+    {ι : Type u} {S S' : C} {X X' : ι → C}
+    (a : ∀ i, X i ⟶ S) (a' : ∀ i, X' i ⟶ S') (hS : S = S')
+    (ha : ∀ i, Arrow.mk (a i) = Arrow.mk (a' i)) :
+    hS ▸ Presieve.ofArrows X a = Presieve.ofArrows X' a' := by
+  subst S'
+  apply le_antisymm
+  · rw [Presieve.ofArrows_le_iff]
+    intro i
+    obtain ⟨hX, _, h⟩ := (Arrow.mk_eq_mk_iff _ _).mp (ha i)
+    exact Presieve.ofArrows.mk' i hX (by simpa using h)
+  · rw [Presieve.ofArrows_le_iff]
+    intro i
+    obtain ⟨hX, _, h⟩ := (Arrow.mk_eq_mk_iff _ _).mp (ha i).symm
+    exact Presieve.ofArrows.mk' i hX (by simpa using h)
+
+set_option linter.unusedVariables false in
 /-- Then $Q$ is stable under composition of finite indexed covering families, with finite inner
 index at each outer index.
 Source: Stacks Project, Sites, Tag 09YL.
@@ -51,6 +83,19 @@ theorem colimit_site_covering_axioms_FiniteComposition
     (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔
           ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),
             S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)) :
-        Q.IsStableUnderFiniteComposition := by sorry
+        Q.IsStableUnderFiniteComposition where
+  comp_mem_coverings := by
+    intro ι _ S X f hf σ _ Y g hg
+    obtain ⟨j, T, A, B, a, b, hT, ha, hb, hfa, hgb⟩ :=
+      colimit_site_covering_families_lift J F P hfinite hcover V hobjects harrows Q hQ f hf g hg
+    have hc := Precoverage.IsStableUnderFiniteComposition.comp_mem_coverings a ha b hb
+    apply (hQ S _).mpr
+    refine ⟨j, T, Presieve.ofArrows (fun p : Σ i, σ i ↦ B p.1 p.2)
+      (fun p ↦ b p.1 p.2 ≫ a p.1), hT, hc, ?_⟩
+    rw [Presieve.map_ofArrows]
+    apply ofArrows_transport_eq _ _ hT
+    intro p
+    rw [Functor.map_comp]
+    exact arrow_comp_eq_of_mk_eq (hfa p.1) (hgb p.1 p.2)
 
 end CategoryTheory

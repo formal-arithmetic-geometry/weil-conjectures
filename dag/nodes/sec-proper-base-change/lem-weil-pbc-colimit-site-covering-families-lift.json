@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-colimit-site-covering-families-lift",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-site-covering-axioms-finitecomposition",
+   "place": "Tag 09YL, verification of axiom (2)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Simultaneous finite covering-family lifting",
+ "statement": "Let J be a small filtered category and F : J → Cat a strict diagram [def-weil-pbc-category-colimit]. Let P_j be precoverages such that every covering presieve has finite uncurried arrow set, and every transition functor sends covering presieves to covering presieves. Let V be a cocone whose object and arrow cocones [def-weil-pbc-arrows-functor] are colimits of sets. Let Q be a precoverage on its vertex, with membership equivalent to equality-transport of the image of a stage covering presieve. Given a finite indexed Q-covering f_i : X_i → S and finite indexed Q-coverings g_ik : Y_ik → X_i for each i, there exist one stage j, objects T, A_i, B_ik, arrows a_i : A_i → T and b_ik : B_ik → A_i, such that V_j(T)=S, the presieves of a and each b_i are P_j-covering, and the image arrows V_j(a_i) and V_j(b_ik) equal f_i and g_ik respectively as objects of the arrow category. This lifts the two families separately; it asserts no covering property of their composites.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, finite-diagram observation and verification of axiom (2)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "Choose stage coverings from hQ, choose a representative member for every indexed arrow and an indexed representative for every member of each finite stage covering. Filteredness moves all stages to a common successor. Eventual equality in the object colimit aligns all endpoints, and eventual equality in the arrow colimit enforces the two finite directions of the presieve comparisons. The indexed stage presieves therefore equal transported stage covers and are covering by hcover; cocone naturality gives the image-arrow equalities. For empty families transport the empty stage presieve and its target; repetitions only add finitely many equalities. No composition axiom is used.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL, verification of axiom (2); D3 second reader expanded presieve comparisons, endpoint equalities, repetitions and empty indices."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*cover.*lift|cover.*finite.*lift|map_ofArrows",
+   "results": "Mathlib/CategoryTheory/MorphismProperty/CommaSites.lean, Mathlib/CategoryTheory/Sites/JointlySurjective.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/Precoverage.lean, Mathlib/CategoryTheory/Sites/CoverPreserving.lean, Mathlib/CategoryTheory/Sites/Sieves.lean, Mathlib/CategoryTheory/Sites/Sieves.lean, Mathlib/CategoryTheory/Sites/Sieves.lean",
+   "date": "2026-10-12",
+   "verdict": "No simultaneous covering-family lifting theorem. The hits provide filtered-stage tools and presieve mapping, not preservation of the chosen covering families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite collections of covering families lift simultaneously to a stage of a filtered colimit of categories",
+   "results": "CategoryTheory.IsFiltered.sup_objs_exists, CategoryTheory.IsFiltered.sup, CategoryTheory.IsFiltered.sup_exists, CategoryTheory.IsFiltered.toSup, CategoryTheory.Limits.FintypeCat.jointly_surjective, CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit, CategoryTheory.Limits.Types.FilteredColimit.jointly_surjective_of_isColimit₂, CategoryTheory.IsFiltered.cocone_nonempty",
+   "date": "2026-10-12",
+   "verdict": "No simultaneous covering-family lifting theorem. The hits provide filtered-stage tools and presieve mapping, not preservation of the chosen covering families."
+  },
+  {
+   "tool": "loogle",
+   "query": "Presieve.map, Presieve.ofArrows",
+   "results": "",
+   "date": "2026-10-12",
+   "verdict": "No simultaneous covering-family lifting theorem. The hits provide filtered-stage tools and presieve mapping, not preservation of the chosen covering families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of finite covering presieves in a filtered colimit category lifts to covering presieves at one common stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteCoveringAxiomsFiniteComposition",
+  "date": "2026-10-13",
+  "group": "D3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteCoveringFamiliesLift",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteCoveringFamiliesLift.lean",
+  "declaration": "CategoryTheory.colimit_site_covering_families_lift",
+  "statement": "theorem colimit_site_covering_families_lift\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X → Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V)) (Q : Precoverage V.pt)\n    (hQ : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n      ∃ (j : J) (X : F.obj j) (S : Presieve X)\n        (h : (V.ι.app j).toFunctor.obj X = Y),\n        S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R)\n    {ι : Type u} [Finite ι] {S : V.pt} {X : ι → V.pt}\n    (f : ∀ i, X i ⟶ S) (hf : Presieve.ofArrows X f ∈ Q S)\n    {σ : ι → Type u} [∀ i, Finite (σ i)] {Y : ∀ i, σ i → V.pt}\n    (g : ∀ i j, Y i j ⟶ X i)\n    (hg : ∀ i, Presieve.ofArrows (Y i) (g i) ∈ Q (X i)) :\n    ∃ (j : J) (T : F.obj j) (A : ι → F.obj j)\n      (B : ∀ i, σ i → F.obj j) (a : ∀ i, A i ⟶ T) (b : ∀ i k, B i k ⟶ A i),\n      (V.ι.app j).toFunctor.obj T = S ∧\n      Presieve.ofArrows A a ∈ P j T ∧\n      (∀ i, Presieve.ofArrows (B i) (b i) ∈ P j (A i)) ∧\n      (∀ i, Arrow.mk ((V.ι.app j).toFunctor.map (a i)) = Arrow.mk (f i)) ∧\n      (∀ i k, Arrow.mk ((V.ι.app j).toFunctor.map (b i k)) = Arrow.mk (g i k))",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T202234-L-702645",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T202234-L-702645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
