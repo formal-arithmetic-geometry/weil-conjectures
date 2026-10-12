@@ -32,68 +32,55 @@
  ],
  "proof": [
   {
-   "text": "The map $c$ is the canonical conormal map constructed in [lem-weil-pbc-closed-immersion-conormal-functorial], since the commutative square of closed immersions is part of the hypotheses.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-conormal-functorial"
-   ],
+   "text": "The compatible affine charts U⊂g⁻¹(U') form a basis of X: at any x in any open W choose U' affine around g(x), then choose U affine inside W∩g⁻¹(U') around x. Pull this basis back along the closed embedding i to obtain a basis and affine cover of Z.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01R4 (morphisms-lemma-conormal-functorial), closed-immersion case"
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
    }
   },
   {
-   "text": "Fix $z\\in Z$. Choose affine opens $U'=\\operatorname{Spec}R'\\subseteq X'$ containing $g(i(z))$ and $U=\\operatorname{Spec}R\\subseteq g^{-1}(U')$ containing $i(z)$. By [lem-weil-pbc-closed-immersion-affine-cover-criterion] write $i'^{-1}(U')=\\operatorname{Spec}(R'/I')$. The cartesian square restricted to $U$ remains cartesian [lem-weil-pbc-open-preimage-fibre-product], [lem-weil-pbc-cartesian-square-pasting]. Apply [lem-weil-pbc-quotient-base-change-closed-immersion-ideal] to $U\\to U'$ and $I'$, obtaining $i^{-1}(U)=\\operatorname{Spec}(R/I)$ and the ideal $I=I'R$. On these charts [lem-weil-pbc-module-pullback-affine-sections] identifies the source of $c$ with $(I'/I'^2)\\otimes_{R'}R$, and the affine characterization in [lem-weil-pbc-closed-immersion-conormal-functorial] identifies $c$ with the map induced by $R'\\to R$ into $I/I^2$.",
+   "text": "On each basis open, use [lem-weil-pbc-closed-immersion-conormal-affine-base-change-comparison] to conjugate c.app to Ideal.tensorCotangentHom A B J. The latter is surjective by [lem-weil-pbc-ideal-cotangent-flat-base-change-ring]. Transport through eS and eT to get a preimage of every section. For a section on any open W and a point z in W choose a basis neighbourhood V inside W, restrict the section to V, and use this sectionwise surjectivity to lift it. This proves local surjectivity, written as TopCat.Presheaf.isLocallySurjective_iff from [lem-weil-pbc-locally-surjective-iff-stalks]. The underlying additive sheaf map is an epimorphism by Sheaf.epi_of_isLocallySurjective from the generic Mathlib match of [lem-weil-pbc-sets-sheaf-epi-iff-stalks]. SheafOfModules.toSheaf is faithful and reflects epimorphisms, hence Epi c. Quasi-coherence and cokernels are not needed for this basis argument.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-closed-immersion-conormal-functorial"
+    "lem-weil-pbc-closed-immersion-conormal-affine-base-change-comparison",
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "lem-weil-pbc-locally-surjective-iff-stalks",
+    "lem-weil-pbc-sets-sheaf-epi-iff-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), affine reduction; Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
    }
   },
   {
-   "text": "For each chart of the preceding step, [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] makes the module map $(I'/I'^2)\\otimes_{R'}R\\to I/I^2$ surjective. If $g$ is flat, [lem-weil-pbc-flat-morphism-affine-criterion] makes $R'\\to R$ flat, so the same ring result makes the map bijective. These charts cover $Z$. The source and target of $c$ are quasi-coherent, and their affine sections have the displayed descriptions [lem-weil-pbc-module-pullback-quasi-coherent], [lem-weil-pbc-closed-immersion-conormal-functorial]. For surjectivity, the cokernel has zero sections on every such chart by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (3), hence is the zero sheaf because the charts cover $Z$; thus $c$ is an epimorphism. In the flat case the restrictions of $c$ on these charts are isomorphisms: each is a map of quasi-coherent modules induced by a bijection on affine sections [lem-weil-pbc-affine-tilde-gamma-adjunction] (3). Hence $c$ is globally an isomorphism by [lem-weil-pbc-sheaf-morphism-on-basis] (b).",
+   "text": "If g is flat, [lem-weil-pbc-flat-morphism-affine-criterion] makes each chart ring B flat over A. Ideal.tensorCotangentHom_injective_of_flat in [lem-weil-pbc-ideal-cotangent-flat-base-change-ring] gives injectivity. The comparison equivalences transfer this to injectivity of c.app on every basis open, hence bijectivity. Apply TopCat.Sheaf.isIso_iff_isIso_basis from [lem-weil-pbc-sheaf-morphism-on-basis] to the underlying additive sheaves. The toPresheaf functor reflects isomorphisms, so c itself is an isomorphism.",
    "uses": [
-    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
     "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-closed-immersion-conormal-functorial",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+    "lem-weil-pbc-closed-immersion-conormal-affine-base-change-comparison",
     "lem-weil-pbc-sheaf-morphism-on-basis"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), affine calculation and conclusion; locality of quasi-coherent modules from Schemes, Lemmas 01IA and 01IB"
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-closed-immersion-conormal-functorial",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
-  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-closed-immersion-conormal-affine-base-change-comparison",
   "lem-weil-pbc-ideal-cotangent-flat-base-change-ring",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "lem-weil-pbc-sets-sheaf-epi-iff-stalks",
   "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "lem-weil-pbc-sheaf-morphism-on-basis"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 0473 with affine fibre-product lemmas 01I4 and 01JQ"
+  "place": "Morphisms, Lemma 0473: affine reduction, cotangent base-change calculation, and sheaf locality. Affine comparison split off explicitly; use local surjectivity on a basis instead of quasi-coherent cokernels."
  },
  "mathlib_searches": [
   {
@@ -164,7 +151,7 @@
   "module": "Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange",
   "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_conormal_flat_base_change",
   "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionConormalFlatBaseChange.lean",
-  "statement": "theorem closedImmersion_conormal_flat_base_change {X Z X' Z' : Scheme.{uc}} (i : Z ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i] [IsClosedImmersion i'] (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i') (hc : IsLimit (PullbackCone.mk i f h)) (c : (tensorPullback f).obj ((tensorPullback i').obj i'.ker.toModules) ⟶ (tensorPullback i).obj i.ker.toModules) (hcanonical : c = Classical.choose ((Classical.choose_spec (closedImmersion_conormal_functorial i i' g f h).2).2)) : Epi c ∧ (Flat g → IsIso c)",
+  "statement": "theorem closedImmersion_conormal_flat_base_change\n    {X Z X' Z' : Scheme.{uc}} (i : Z ⟶ X) (i' : Z' ⟶ X')\n    [IsClosedImmersion i] [IsClosedImmersion i']\n    (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')\n    (hc : IsLimit (PullbackCone.mk i f h))\n    (c : (tensorPullback f).obj ((tensorPullback i').obj i'.ker.toModules) ⟶\n      (tensorPullback i).obj i.ker.toModules)\n    (hcanonical : c = Classical.choose ((Classical.choose_spec\n      (closedImmersion_conormal_functorial i i' g f h).2).2))\n    : Epi c ∧ (Flat g → IsIso c)",
   "branch": "sheaf-dag",
   "by": "G1",
   "date": "2026-10-11",
@@ -177,5 +164,15 @@
   "group": "G1",
   "result": "pass",
   "note": "schemes X Z X' Z', closed immersions i i', g f with i≫g=f≫i', cartesian as IsLimit (PullbackCone.mk i f h), c tied by hcanonical to the unique c of closedImmersion_conormal_functorial (conormal = tensorPullback i of i.ker.toModules as in that dep), conclusion Epi c ∧ (Flat g → IsIso c)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T205632-L-933271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

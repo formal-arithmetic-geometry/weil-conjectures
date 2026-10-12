@@ -9514,3 +9514,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:56 L: merged deliver/S3/Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors (stage 3; reviewer PASS; first push; landing 20261012T205631-L-932843 (interface); batch 20261012T205626; modules 2; new nodes 1)
 - 20:56 L: merged deliver/S3/Sheaf.RingTheory.RelativeGlobalCompleteIntersectionConormalFree (stage 3; reviewer PASS; first push; landing 20261012T205632-L-932948 (proof); batch 20261012T205626; modules 1; new nodes 1)
 - 20:56 L: merged deliver/U2/Sheaf.RepresentationTheory.DiscreteResolutionContinuousCohomology (stage 3; reviewer PASS; first push; landing 20261012T205632-L-933092 (interface); batch 20261012T205626; modules 3; new nodes 2)
+- 20:56 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange (stage 3; reviewer PASS; first push; landing 20261012T205632-L-933271 (interface); batch 20261012T205626; modules 2; new nodes 1)

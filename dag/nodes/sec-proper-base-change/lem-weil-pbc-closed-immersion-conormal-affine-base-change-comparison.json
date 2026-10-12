@@ -1,0 +1,169 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-conormal-affine-base-change-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The conormal affine comparison and locality in the universal-thickening flat base-change argument (step 7 of the finite-etale lifting split, Stacks 0GS2 essential surjectivity).",
+   "via": [
+    "lem-weil-pbc-closed-immersion-conormal-flat-base-change",
+    "lem-weil-pbc-universal-thickening-flat-base-change",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine conjugation of the conormal base-change map to the ideal cotangent map",
+ "statement": "Let i:Z→X and i':Z'→X' be closed immersions in a commutative cartesian square with g:X→X' and f:Z→Z' [lem-weil-pbc-closed-immersion-conormal-functorial], [def-pc-fibre-product]. Let c be its canonical conormal morphism. Fix affine opens U of X and U' of X' with U contained in g inverse image of U'. Put A=Γ(X',U'), B=Γ(X,U), with A-algebra structure on B induced by g, and J=i'.ker.ideal U'. There exist equivalences eS from the sections of f* C_(Z'/X') over i inverse image of U to B tensor_A J.Cotangent, and eT from the sections of C_(Z/X) there to (J.map(includeRight:A→B tensor_A A)).Cotangent, such that for every source section s, eT(c(s))=Ideal.tensorCotangentHom A B J (eS(s)). Cotangent means J/J². Only this affine section comparison is asserted; there is no flatness assumption and no assertion of surjectivity, injectivity or global invertibility.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the cartesian square to compatible affine opens U=Spec B and U'=Spec A. The closed-immersion affine criterion identifies i' inverse image of U' with Spec(A/J), J=i'.ker.ideal U'. Open-preimage pullbacks and pasting preserve the cartesian square. Quotient base change then identifies i inverse image of U with Spec(B/JB) and its immersion ideal with JB.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-open-preimage-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
+   }
+  },
+  {
+   "text": "Use affine conormal sections to identify the conormal of i' with J/J² on its chart. Use affine pullback sections for f to obtain the source as (B/JB) tensor over A/J with J/J². Since J annihilates J/J², the quotient tensor equivalence identifies this with B tensor over A with J/J². These give eS, as an equivalence of underlying sets. The conormal target is JB/(JB)². Multiplication B tensor_A A -> B identifies the extended ideal J.map(includeRight) with JB and induces an equivalence of its cotangent quotient with JB/(JB)². Compose its inverse with the target conormal section equivalence to obtain eT.",
+   "uses": [
+    "lem-weil-pbc-affine-conormal-sections",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
+   }
+  },
+  {
+   "text": "The affine canonical-map equation of conormal functoriality sends the pullback of the class of a in J to the class of its image in JB. Multiplication by b in B gives the class of b times that image. This equals tensorCotangentHom_tmul. The pure tensor classes b tensor class(a) generate the source by the affine pullback description, so additivity and tensor induction prove eT(c(s)) = tensorCotangentHom(eS(s)) for every section s.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-open-preimage-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+  "lem-weil-pbc-affine-conormal-sections",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-closed-immersion-conormal-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat), case of closed immersions, with its proof; the ideal of the base-changed closed immersion is Schemes, Lemma 01JU (schemes-lemma-fibre-product-immersion) (1); verified online at https://stacks.math.columbia.edu/tag/0473 and https://stacks.math.columbia.edu/tag/01JU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map between conormal sheaves under base change is identified on affine opens with the tensor product map on ideal cotangent modules",
+   "results": "UNAVAILABLE: service returned Internal Server Error; two requests attempted. No absence verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a cartesian square of closed immersions the map on conormal sheaf sections over affine opens is conjugate to the tensor cotangent map for extended ideals",
+   "results": "Algebra.Extension.tensorCotangent, tensorCotangentInvFun, tensorCotangentSpace, CotangentSpace.map_tmul: ring-level extension comparisons only. Read Mathlib/RingTheory/Etale/Kaehler.lean:140-231.",
+   "date": "2026-10-13",
+   "verdict": "no match for sections of conormal sheaves of schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.tensorCotangentHom",
+   "results": "Ideal.tensorCotangentHom, tensorCotangentHom_surjective, tensorCotangentHom_injective_of_flat, tensorCotangentHom_tmul in Mathlib/RingTheory/Ideal/CotangentBaseChange.lean; source read.",
+   "date": "2026-10-13",
+   "verdict": "ring model found, not the scheme section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|Cotangent in Mathlib/AlgebraicGeometry; tensorCotangentHom in Mathlib/RingTheory; comparison in lean/Sheaf and lean/WeilConjectures and DAG",
+   "results": "No scheme conormal base-change section comparison. DiagonalConormalAffineComparison addresses the diagonal/differentials, not this square. Existing AffineConormalSections and ModulePullbackAffineSections provide the separate equivalences.",
+   "date": "2026-10-13",
+   "verdict": "no match; reuse separate affine section equivalences"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange",
+  "date": "2026-10-13",
+  "group": "V2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionConormalAffineBaseChangeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionConormalAffineBaseChangeComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.closedImmersion_conormal_affine_base_change_comparison",
+  "statement": "theorem closedImmersion_conormal_affine_base_change_comparison\n    {X Z X' Z' : Scheme.{u}} (i : Z ⟶ X) (i' : Z' ⟶ X')\n    [IsClosedImmersion i] [IsClosedImmersion i']\n    (g : X ⟶ X') (f : Z ⟶ Z') (h : i ≫ g = f ≫ i')\n    (hc : IsLimit (PullbackCone.mk i f h))\n    (c : (tensorPullback f).obj ((tensorPullback i').obj i'.ker.toModules) ⟶\n      (tensorPullback i).obj i.ker.toModules)\n    (hcanonical : c = Classical.choose ((Classical.choose_spec\n      (closedImmersion_conormal_functorial i i' g f h).2).2))\n    (U : X.affineOpens) (U' : X'.affineOpens) (H : U.1 ≤ g ⁻¹ᵁ U'.1) :\n    letI : Algebra Γ(X', U'.1) Γ(X, U.1) := (g.appLE U'.1 U.1 H).hom.toAlgebra\n    ∃ (eS : Γ((tensorPullback f).obj ((tensorPullback i').obj i'.ker.toModules),\n          i ⁻¹ᵁ U.1) ≃\n        Γ(X, U.1) ⊗[Γ(X', U'.1)] (i'.ker.ideal U').Cotangent)\n      (eT : Γ((tensorPullback i).obj i.ker.toModules, i ⁻¹ᵁ U.1) ≃\n        ((i'.ker.ideal U').map (Algebra.TensorProduct.includeRight.toRingHom :\n          Γ(X', U'.1) →+* Γ(X, U.1) ⊗[Γ(X', U'.1)] Γ(X', U'.1))).Cotangent),\n      ∀ s, eT (c.app (i ⁻¹ᵁ U.1) s) =\n        (i'.ker.ideal U').tensorCotangentHom Γ(X', U'.1) Γ(X, U.1) (eS s)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T205632-L-933271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T205632-L-933271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
