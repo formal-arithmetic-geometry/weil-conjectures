@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-henselian-approximation-alg-hom",
+ "kind": "lemma",
+ "title": "Approximation of finitely presented algebra maps modulo the ideal",
+ "statement": "Let $(A,I)$ be a henselian pair [def-weil-pbc-henselian-terminology] with $A$ a G-ring [def-weil-pbc-g-ring]. Let $R$ be a finitely presented commutative $A$-algebra (a quotient of $A[x_1,\\ldots,x_n]$ by a finitely generated ideal), and let $c:R\\to\\widehat A$ be an $A$-algebra map to the $I$-adic completion [def-weil-pbc-adic-completion]. Then there exists an $A$-algebra map $\\sigma:R\\to A$ such that $\\pi\\circ\\sigma=p\\circ c$, where $\\pi:A\\to A/I$ is the quotient map and $p:\\widehat A\\to A/I$ is the completion projection.",
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2, lemma-finite-etale-on-proper-over-henselian-pair, proof, Noetherian G-ring essential-surjectivity paragraph; lines 1830–1837, using Smoothing Ring Maps Tag 0AH5 case (2)"
+ },
+ "proof": [
+  {
+   "text": "Choose a polynomial algebra surjecting onto R with finitely generated kernel by Algebra.FinitePresentation.out, Mathlib/RingTheory/FinitePresentation.lean:44–45. Enumerate a finite generating set of its kernel with a Fin type. The images of the variables under c solve these relations because the surjection kills them.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply henselian_pair_approximation with N=1 to the relations and the completed images. Evaluation at the resulting elements of A kills each relation, hence the whole kernel. Descend evaluation through the surjection by AlgHom.liftOfSurjective, Mathlib/RingTheory/Ideal/Quotient/Operations.lean:562–565. This gives sigma:R to A.",
+   "uses": [
+    "lem-weil-pbc-henselian-pair-approximation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel of the completion projection is the extended ideal; its composite with A to the completion is the quotient map. Apply these equalities to the congruences on the variables. Both A-algebra maps into A/I therefore agree on all variables and constants, hence on the polynomial algebra. Surjectivity of the presentation gives equality on R.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselian-pair-approximation",
+  "lem-weil-pbc-adic-completion-mod-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0GS2, proof; lines 1830–1837, using Smoothing Ring Maps Tag 0AH5 case (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite etale cover of proper scheme over henselian ring lifts from closed fibre through adic completion",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+   "date": "2026-10-12",
+   "verdict": "candidate"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, AlgHom",
+   "results": "AdicCompletion.evalOneₐ, AdicCompletion.mkₐ, AdicCompletion.evalOneₐ_surjective, AdicCompletion.evalₐ, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ, AdicCompletion.surjective_evalₐ, AdicCompletion.kerProj, AdicCompletion.evalOneₐ_of",
+   "date": "2026-10-12",
+   "verdict": "candidate"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtale.*lift|henselian.*approximation|FinitePresentation.*AdicCompletion",
+   "results": "No matching declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "approximate an algebra homomorphism from a finitely presented algebra to adic completion of a henselian G ring modulo an ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation.out",
+   "results": "Algebra.FinitePresentation.out",
+   "date": "2026-10-12",
+   "verdict": "candidate"
+  },
+  {
+   "tool": "grep",
+   "query": "liftOfSurjective|ker_evalOneₐ_eq_map|exists_pullback_hom_of_isLimit",
+   "results": "Mathlib/NumberTheory/DirichletCharacter/Basic.lean, Mathlib/Algebra/Group/Subgroup/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/FieldTheory/Differential/Basic.lean, Mathlib/Algebra/Category/Ring/Topology.lean, Mathlib/Algebra/Category/Ring/FinitePresentation.lean, Mathlib/RingTheory/Ideal/Maps.lean",
+   "date": "2026-10-12",
+   "verdict": "candidate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "essential surjectivity over a Noetherian G-ring: lines 1830–1837, using Smoothing Ring Maps Tag 0AH5 case (2)",
+   "via": [
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity",
+    "lem-weil-pbc-finite-etale-lifting-approximation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HenselianApproximationAlgHom",
+  "file": "lean/Sheaf/RingTheory/HenselianApproximationAlgHom.lean",
+  "declaration": "exists_algHom_approximation_mod_ideal",
+  "statement": "theorem exists_algHom_approximation_mod_ideal {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] (hA : IsGRing A) {R : Type u} [CommRing R] [Algebra A R] [Algebra.FinitePresentation A R] (c : R →ₐ[A] AdicCompletion I A) : ∃ σ : R →ₐ[A] A, (Ideal.Quotient.mk I).comp σ.toRingHom = (AdicCompletion.evalOneₐ I).toRingHom.comp c.toRingHom",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T044739-L-2032646",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

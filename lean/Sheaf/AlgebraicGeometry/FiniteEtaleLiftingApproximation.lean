@@ -12,12 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.HenselianPairApproximation
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.FiniteEtaleCompletionStage
+import Sheaf.RingTheory.HenselianApproximationAlgHom
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
 # Finite étale lifting by henselian G-ring approximation
@@ -39,36 +36,20 @@ lifts to a finite étale cover of the scheme, with an isomorphism over the close
 Source: Stacks Project, proof of Lemma 0GS2, Noetherian G-ring essential-surjectivity paragraph
 (blueprint: lem-weil-pbc-finite-etale-lifting-approximation).
 
-Proof (the eight steps of the DAG node):
-1. Complete A at I. The completion is Noetherian, complete and henselian, and its quotient
-   by the extended ideal is A/I. Base change Y to the completion; its closed fibre is Y₀.
-   Use def-weil-pbc-adic-completion, lem-weil-pbc-adic-completion-mod-ideal,
-   lem-weil-pbc-adic-completion-noetherian, lem-weil-pbc-complete-pair-henselian,
-   lem-weil-pbc-proper-base-change and def-pc-fibre-product.
-2. Lift V to the completed base using lem-weil-pbc-finite-etale-lifting-complete.
-3. Express the completion as the directed union of its finitely generated A-subalgebras.
-   They are finitely presented since A is Noetherian. Their spectra and the corresponding
-   base changes of Y form inverse systems with the completed schemes as limits. Use
-   def-weil-pbc-category-colimit, lem-weil-pbc-spec-colimit-limit,
-   lem-weil-pbc-scheme-over-limit, lem-weil-pbc-proper-base-change,
-   def-weil-proper-morphism and def-weil-pbc-scheme-conventions.
-4. Descend the completed cover to a finitely presented morphism at a finite stage using
-   thm-pd-spreading-out. Increase the stage until it is finite and étale using
-   lem-weil-pbc-descend-finite and lem-weil-pbc-descend-etale; finiteness implies affine and
-   quasi-compact, while étaleness implies locally finite presentation, as in
-   def-weil-finite-integral-morphism, def-weil-etale-morphism and
-   def-sbc-locally-finite-presentation. Base change preserves both properties by
-   def-weil-pbc-finite-etale-category.
-5. Present that algebra by finitely many generators and relations. Apply
-   lem-weil-pbc-henselian-pair-approximation with N = 1 to its solution in the completion.
-   This gives an A-algebra map from the stage to A agreeing modulo I with the completion
-   map, using lem-weil-pbc-adic-completion-mod-ideal.
-6. Pull the descended finite étale cover back along this map to obtain U over Y. Use
-   def-pc-fibre-product and def-weil-pbc-finite-etale-category.
-7. Paste the fibre squares. The agreement modulo I identifies the closed fibre of U with
-   that of the completed cover, hence with V over Y₀. Use def-pc-fibre-product and
-   lem-weil-pbc-adic-completion-mod-ideal.
-8. Thus U is finite étale and its closed fibre is isomorphic to V, as required. -/
+Proof:
+1. Apply `exists_finiteEtale_completion_stage`: complete at I, lift V by the complete-case
+   theorem, and descend its finite presentation to a finite étale cover W over Y_R for a
+   finitely presented A-algebra R mapping to the completion. It supplies a map k from Y₀
+   to Y_R, both projection identities, and the isomorphism W ×_{Y_R} Y₀ ≅ V.
+2. Apply `exists_algHom_approximation_mod_ideal` to the map from R to the completion.
+   Its proof presents R by finite generators and relations and applies polynomial
+   approximation with N = 1, then descends evaluation through the presentation.
+3. The resulting A-algebra map σ : R → A induces s : Y → Y_R by the pullback universal
+   property. Equality modulo I and the projection identities of k show that the composite
+   Y₀ → Y → Y_R is k, by pullback extensionality.
+4. Set U = W ×_{Y_R} Y along s. Base-change stability makes U finite étale. Pullback
+   pasting and the equality of the closed-fibre maps give an isomorphism U ×_Y Y₀ ≅
+   W ×_{Y_R} Y₀ over Y₀; compose it with the stage-cover isomorphism to V. -/
 theorem exists_finiteEtale_lift_of_henselianPair_of_isGRing
     {A : Type u} [CommRing A] (hA : IsGRing A) (I : Ideal A) [HenselianRing A I]
     {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [IsProper f]
@@ -79,6 +60,45 @@ theorem exists_finiteEtale_lift_of_henselianPair_of_isGRing
         (Over.mk (pullback.snd U.hom
           (pullback.fst f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))) ≅
           Over.mk V.hom) := by
-  sorry
+  let : IsNoetherianRing A := hA.1
+  obtain ⟨R, hR, hAR, hfp, c, W, k, hkfst, hksnd, ⟨e⟩⟩ :=
+    exists_finiteEtale_completion_stage I f V
+  let : CommRing R := hR
+  let : Algebra A R := hAR
+  let : Algebra.FinitePresentation A R := hfp
+  obtain ⟨σ, hσ⟩ := exists_algHom_approximation_mod_ideal I hA c
+  let q := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
+  let b := Spec.map (CommRingCat.ofHom (algebraMap A R))
+  let s : Y ⟶ pullback f b := pullback.lift (𝟙 Y)
+    (f ≫ Spec.map (CommRingCat.ofHom σ.toRingHom)) (by
+      dsimp [b]
+      rw [Category.id_comp, Category.assoc, ← Spec.map_comp]
+      have hc : σ.toRingHom.comp (algebraMap A R) = RingHom.id A := by
+        ext a
+        exact σ.commutes a
+      change f = f ≫ Spec.map (CommRingCat.ofHom (σ.toRingHom.comp (algebraMap A R)))
+      rw [hc]
+      simp)
+  have hs : pullback.fst f q ≫ s = k := by
+    apply pullback.hom_ext
+    · simpa only [Category.assoc, s, pullback.lift_fst, Category.comp_id] using hkfst.symm
+    · simp only [Category.assoc, s, pullback.lift_snd]
+      rw [← Category.assoc, pullback.condition, Category.assoc]
+      dsimp [q]
+      rw [← Spec.map_comp, hksnd]
+      change _ ≫ Spec.map (CommRingCat.ofHom ((Ideal.Quotient.mk I).comp σ.toRingHom)) = _
+      rw [hσ]
+  have : IsFinite W.hom := W.prop.1
+  have : Etale W.hom := W.prop.2
+  let U : (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y :=
+    MorphismProperty.Over.mk ⊤ (pullback.snd W.hom s) ⟨inferInstance, inferInstance⟩
+  refine ⟨U, ⟨?_⟩⟩
+  let a := pullbackLeftPullbackSndIso W.hom s (pullback.fst f q)
+  let d : pullback W.hom (pullback.fst f q ≫ s) ≅ pullback W.hom k :=
+    pullback.congrHom rfl hs
+  refine Over.isoMk (a ≪≫ d) ?_ ≪≫ e
+  dsimp [a, d]
+  simp [U, q]
+  rfl
 
 end AlgebraicGeometry.Scheme
