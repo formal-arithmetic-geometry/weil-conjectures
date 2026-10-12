@@ -22,123 +22,24 @@
  ],
  "proof": [
   {
-   "text": "*Notation; morphisms of $\\mathcal C$; the canonical maps $\\pi_C$.* Write $\\bar B=B/J$. For an object $C$ of $\\mathcal C$ the structure map induces a surjection $B\\to\\bar B\\xrightarrow{\\sim}C/JC$; let $\\pi_C:C\\to C/JC\\xrightarrow{\\sim}\\bar B$ be the quotient map followed by the inverse isomorphism, a $B$-algebra map. Claim: for an object $C$ there is at most one $B$-algebra map $C\\to\\bar B$, namely $\\pi_C$. Indeed a $B$-algebra map $\\chi:C\\to\\bar B$ kills $JC$ (it is $B$-linear and $J\\bar B=0$), so it factors through $C/JC$, and a $B$-algebra map out of $C/JC$ is determined on the image of $B$, which is everything. Consequently every morphism $\\beta:C\\to C'$ of $\\mathcal C$ satisfies $\\pi_{C'}\\circ\\beta=\\pi_C$. Also every morphism of $\\mathcal C$ is etale: $\\operatorname{Spec}\\beta$ is a morphism between schemes etale over $\\operatorname{Spec}B$ commuting with the structure maps [lem-weil-pbc-etale-composition-cancellation] (3).",
+   "text": "Combine essential smallness, filteredness, and the henselian colimit cocone by the conjunction constructor. Each component is a strict part of the original conclusion.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation"
+    "lem-weil-pbc-pair-henselization-essentially-small",
+    "lem-weil-pbc-pair-henselization-filtered",
+    "lem-weil-pbc-pair-henselization-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): implicit ('Since $B/IB=A/I$ for all objects $B$ of $\\mathcal C$')"
-   }
-  },
-  {
-   "text": "*(1) $\\mathcal C$ is essentially small; the colimit exists.* An etale $B$-algebra $C$ is of finite presentation [def-weil-etale-morphism] (locally of finite presentation with affine source and target), so it is isomorphic to a quotient $B[x_1,\\dots,x_n]/\\mathfrak a$ by an ideal; equivalently, by [lem-weil-pbc-affine-etale-essentially-small-cover] applied to $T=\\operatorname{Spec}B$, the affine etale $B$-schemes form an essentially small category. The objects of $\\mathcal C$ whose ring is such a quotient form a set, and their full subcategory $\\mathcal C_0$ is equivalent to $\\mathcal C$ (the conditions 'etale' and '$\\bar B\\cong C/JC$' are invariant under $B$-algebra isomorphisms); colimits over $\\mathcal C$ are computed over $\\mathcal C_0$ [lem-weil-pbc-colimit-initial-full-subcategory] (2). Filtered colimits of commutative $B$-algebras over a small filtered category exist (the filtered colimit of the underlying sets, operations computed at a common stage) [def-weil-pbc-category-colimit], [lem-weil-pbc-filtered-colimit-algebras-elementwise]. Once $\\mathcal C$ is shown filtered (steps 3-4), $B^h=\\varinjlim_{\\mathcal C}C$ exists, with coprojections $\\iota_C:C\\to B^h$ (morphisms of $B$-algebras), and by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (1) it is also the colimit of the underlying diagram of rings. (Stacks leaves the set-theoretic point implicit; the same argument is step 2 of [lem-weil-pbc-strict-henselization-triples].)",
-   "uses": [
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): '$A^h=\\colim_{B\\in\\mathcal C}B$'; set-theoretic point not in Stacks, written by the agent as in literature/stacks-project/algebra.tex proof of Lemma Tag 04GW"
-   }
-  },
-  {
-   "text": "*(1) Nonempty; two objects map to a common one.* $B$ itself (identity) is an object: $\\operatorname{Spec}B\\to\\operatorname{Spec}B$ is the identity, an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1), and $\\bar B\\to B/J$ is the identity. Let $C,C'$ be objects and $C''=C\\otimes_BC'$. $\\operatorname{Spec}C''\\to\\operatorname{Spec}C$ is etale as a base change of $B\\to C'$ along $B\\to C$ [lem-weil-pbc-etale-ring-base-change], hence $\\operatorname{Spec}C''\\to\\operatorname{Spec}B$ is etale (composition, [lem-weil-pbc-etale-composition-cancellation] (2)). Reduction modulo $J$: by associativity and commutativity of tensor products, $C''/JC''=C''\\otimes_B\\bar B\\cong(C\\otimes_B\\bar B)\\otimes_{\\bar B}(C'\\otimes_B\\bar B)=(C/JC)\\otimes_{\\bar B}(C'/JC')$, and under this identification the map $\\bar B\\to C''/JC''$ is the tensor product of the isomorphisms $\\bar B\\to C/JC$, $\\bar B\\to C'/JC'$ over $\\bar B$, so it is the isomorphism $\\bar B\\cong\\bar B\\otimes_{\\bar B}\\bar B\\to(C/JC)\\otimes_{\\bar B}(C'/JC')$. So $C''$ is an object, and the coprojections $C\\to C''$, $C'\\to C''$ are $B$-algebra maps, i.e. morphisms of $\\mathcal C$.",
-   "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-ring-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'It is nonempty because $\\mathrm{id}:A\\to A$ is an object. If $B$ and $B'$ are two objects of $\\mathcal C$, then $B''=B\\otimes_AB'$ is an object of $\\mathcal C$ (use Algebra, Lemma 00U2)'; the reduction mod $J$ is written out by the agent"
-   }
-  },
-  {
-   "text": "*(1) Parallel morphisms are coequalized; $\\mathcal C$ is filtered.* Let $f,g:C\\to C'$ be morphisms of $\\mathcal C$. Put $E=C'\\otimes_{f,C,g}C'$ and $D=E\\otimes_{C'\\otimes_BC'}C'$, formed with the natural surjection $C'\\otimes_BC'\\to E$ and the multiplication $\\mu:C'\\otimes_BC'\\to C'$. Etaleness over $B$: $f$ is etale (step 1), so the right factor map $C'\\to E$, the base change of $f$ along $g$, is etale [lem-weil-pbc-etale-ring-base-change] and $E$ is etale over $B$ (composition); $C'\\otimes_BC'$ is etale over $B$ (step 3), so $\\mu$ is etale (a map between $B$-algebras etale over $B$, [lem-weil-pbc-etale-composition-cancellation] (3)), so $E\\to D$, its base change, is etale [lem-weil-pbc-etale-ring-base-change] and $D$ is etale over $B$ [lem-weil-pbc-etale-composition-cancellation] (2). Reduction modulo $J$ (written out by the agent; Stacks only states etaleness): base change $-\\otimes_B\\bar B$ commutes with the tensor products, so $D/JD\\cong(\\bar C'\\otimes_{\\bar f,\\bar C,\\bar g}\\bar C')\\otimes_{\\bar C'\\otimes_{\\bar B}\\bar C'}\\bar C'$ with $\\bar C=C/JC$, $\\bar C'=C'/JC'$; the structure maps $\\bar B\\to\\bar C$, $\\bar B\\to\\bar C'$ are isomorphisms through which $\\bar f,\\bar g$ become $\\mathrm{id}_{\\bar B}$ ($B$-algebra maps $\\bar B\\to\\bar B$, step 1), so $D/JD\\cong(\\bar B\\otimes_{\\bar B}\\bar B)\\otimes_{\\bar B\\otimes_{\\bar B}\\bar B}\\bar B\\cong\\bar B$ and the structure map $\\bar B\\to D/JD$ is this isomorphism. So $D$ is an object. Let $c:C'\\to D$ be the right-most factor map $a\\mapsto1\\otimes a$, a $B$-algebra map, hence a morphism. In $D$, $c(a)$ equals the image of $a\\otimes1$ and of $1\\otimes a\\in C'\\otimes_BC'$ (both map to $a$ under $\\mu$); since $f(x)\\otimes1=1\\otimes g(x)$ in $E$ for $x\\in C$, $c(f(x))=c(g(x))$, i.e. $c\\circ f=c\\circ g$. With step 3, $\\mathcal C$ is filtered (Stacks 'directed', Categories Definition Tag 002V).",
-   "uses": [
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Suppose that $f,g:B\\to B'$ are two maps between objects of $\\mathcal C$. Then a coequalizer is $(B'\\otimes_{f,B,g}B')\\otimes_{(B'\\otimes_AB')}B'$ which is etale over $A$ by Algebra, Lemmas 00U2 and 00U7'"
-   }
-  },
-  {
-   "text": "*(3) $B/J\\to B^h/J^h$ is an isomorphism.* By step 1 the maps $\\pi_C:C\\to\\bar B$ form a cocone of $B$-algebra maps, so they induce a $B$-algebra map $\\pi:B^h\\to\\bar B$ with $\\pi\\circ\\iota_C=\\pi_C$ [def-weil-pbc-category-colimit]. $\\pi$ kills $J^h=JB^h$ ($B$-linear, $J\\bar B=0$), so it induces $\\bar\\pi:B^h/J^h\\to\\bar B$; with $\\theta:\\bar B\\to B^h/J^h$ the map induced by $B\\to B^h$, $\\bar\\pi\\circ\\theta=\\mathrm{id}_{\\bar B}$ (a $B$-algebra map out of $\\bar B$ is determined), so $\\theta$ is injective. Surjectivity: every $x\\in B^h$ is $\\iota_C(c)$ for some object $C$ and $c\\in C$ [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2); as $B\\to C/JC$ is surjective, $c=b+y$ with $b\\in B$, $y\\in JC$, so $x=b\\cdot1+\\iota_C(y)$ with $\\iota_C(y)\\in JB^h$; thus $x\\equiv b$ modulo $J^h$. Hence $\\theta$ is an isomorphism of $B$-algebras with inverse $\\bar\\pi$. (Stacks: '$A^h/IA^h=\\colim B/IB=\\colim A/I=A/I$', i.e. reduction modulo $I$ commutes with colimits and the colimit of the constant diagram over the connected category $\\mathcal C$ is $A/I$; the elementwise argument here proves the same.)",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Since $B/IB=A/I$ for all objects $B$ of $\\mathcal C$ we see that $A^h/I^h=A^h/IA^h=\\colim B/IB=\\colim A/I=A/I$'"
-   }
-  },
-  {
-   "text": "*(2) Sections of etale $B^h$-algebras lift: the set-up.* We verify the hypothesis of [lem-weil-pbc-etale-section-lifting-henselian-pair] for $(B^h,J^h)$ (Stacks: condition (2) of Lemma 09XI). Let $B^h\\to A'$ be a ring map with $\\operatorname{Spec}A'\\to\\operatorname{Spec}B^h$ etale and $\\sigma:A'\\to B^h/J^h$ a $B^h$-algebra map. By [lem-weil-pbc-etale-algebra-filtered-colimit-descent] (applied to the filtered colimit of rings $B^h=\\varinjlim_{\\mathcal C}C$, step 2) there are an object $C$, a ring map $C\\to C'$ with $\\operatorname{Spec}C'\\to\\operatorname{Spec}C$ etale and an isomorphism of $B^h$-algebras $A'\\cong C'\\otimes_CB^h$ (via $\\iota_C$); identify $A'$ with $C'\\otimes_CB^h$. Let $s:C'\\to\\bar B$ be the composite $C'\\to A'\\xrightarrow{\\sigma}B^h/J^h\\xrightarrow{\\bar\\pi}\\bar B$ (step 5). It is a $C$-algebra map for the $C$-algebra structure $\\pi_C$ on $\\bar B$ (because $\\sigma$ is $B^h$-linear and $\\bar\\pi\\circ(B^h\\to B^h/J^h)\\circ\\iota_C=\\pi\\circ\\iota_C=\\pi_C$), in particular a $B$-algebra map.",
-   "uses": [
-    "lem-weil-pbc-etale-section-lifting-henselian-pair",
-    "lem-weil-pbc-etale-algebra-filtered-colimit-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'suppose given an etale ring map $A^h\\to A'$ and $A^h$-algebra map $\\sigma:A'\\to A^h/I^h$. Then there exists a $B\\in\\mathcal C$ and an etale ring map $B\\to B'$ such that $A'=B'\\otimes_BA^h$. See Algebra, Lemma 00U2. Since $A^h/I^h=A/I$, the map $\\sigma$ induces an $A$-algebra map $s:B'\\to A/I$'"
-   }
-  },
-  {
-   "text": "*(2) The object $C'_g$.* $C'/JC'=C'\\otimes_C(C/JC)$ is etale over $C/JC$ [lem-weil-pbc-etale-ring-base-change], and $C/JC\\cong\\bar B$; $s$ kills $JC'$ and induces a $\\bar B$-algebra map $\\bar s:C'/JC'\\to\\bar B$. By [lem-weil-pbc-etale-section-idempotent-splitting] (with $R=\\bar B$, $S=C'/JC'$) there is an idempotent $\\bar e\\in C'/JC'$ with $\\bar s(\\bar e)=1$ such that $\\bar s$ induces an isomorphism $(C'/JC')_{\\bar e}\\xrightarrow{\\sim}\\bar B$ (Stacks: '$B'/IB'=A/I\\times C$ ... let $g\\in B'$ map to $(1,0)$'). Choose $g\\in C'$ lifting $\\bar e$. Then $\\operatorname{Spec}C'_g\\to\\operatorname{Spec}C'$ is an open immersion, so $C'_g$ is etale over $C'$, over $C$ and over $B$ [lem-weil-pbc-etale-composition-cancellation] (1),(2); and $C'_g/JC'_g=(C'/JC')_{\\bar e}$ (localization commutes with quotients), so the composite $\\bar B\\to C'_g/JC'_g\\xrightarrow{\\sim}\\bar B$ (the second map induced by $\\bar s$) is a $B$-algebra map $\\bar B\\to\\bar B$, i.e. the identity, and $\\bar B\\to C'_g/JC'_g$ is an isomorphism. So $C'_g$ is an object of $\\mathcal C$, and the structure map $C\\to C'\\to C'_g$ is a $B$-algebra map, i.e. a morphism $C\\to C'_g$ of $\\mathcal C$; hence $\\iota_{C'_g}\\circ(C\\to C'_g)=\\iota_C$ (cocone).",
-   "uses": [
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-etale-section-idempotent-splitting",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Then $B'/IB'=A/I\\times C$ as $A/I$-algebra, where $C$ is the kernel of the map $B'/IB'\\to A/I$ induced by $s$. Let $g\\in B'$ map to $(1,0)\\in A/I\\times C$. Then $B\\to B'_g$ is etale and $A/I\\to B'_g/IB'_g$ is an isomorphism, i.e., $B'_g$ is an object of $\\mathcal C$'"
-   }
-  },
-  {
-   "text": "*(2) The lift; conclusion that $(B^h,J^h)$ is henselian.* Let $\\lambda:C'\\to C'_g$ be the localization map. The ring maps $\\iota_{C'_g}\\circ\\lambda:C'\\to B^h$ and $\\mathrm{id}:B^h\\to B^h$ agree on $C$ (step 7: both restrict to $\\iota_C$), so by the universal property of $C'\\otimes_CB^h$ (the coproduct of commutative $C$-algebras) they induce a $B^h$-algebra map $\\tau:A'=C'\\otimes_CB^h\\to B^h$, $c'\\otimes x\\mapsto\\iota_{C'_g}(\\lambda(c'))x$. It lifts $\\sigma$: the two $B^h$-algebra maps $q\\circ\\tau$ and $\\sigma$ from $A'$ to $B^h/J^h$ ($q$ the quotient map) agree iff they agree on $C'$; composing with the isomorphism $\\bar\\pi$ (step 5), on $C'$ the first is $\\pi\\circ\\iota_{C'_g}\\circ\\lambda=\\pi_{C'_g}\\circ\\lambda$ and the second is $s$. Now $s(g)=\\bar s(\\bar e)=1$, so $s$ extends to a $B$-algebra map $s_g:C'_g\\to\\bar B$ with $s_g\\circ\\lambda=s$; by step 1 (applied to the object $C'_g$) $s_g=\\pi_{C'_g}$. Hence $\\pi_{C'_g}\\circ\\lambda=s$ and $q\\circ\\tau=\\sigma$ (Stacks: the two commutative diagrams). So $(B^h,J^h)$ satisfies the hypothesis of [lem-weil-pbc-etale-section-lifting-henselian-pair], hence $J^h$ lies in the Jacobson radical of $B^h$ and $(B^h,J^h)$ is henselian [def-weil-pbc-henselian-terminology]: clause (2).",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-etale-section-lifting-henselian-pair",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Thus we obtain a canonical map $B'_g\\to A^h$ such that [the two diagrams] commute. This induces a map $A'=B'\\otimes_BA^h\\to A^h$ compatible with $\\sigma$ as desired'; and 'we will verify condition (2) of Lemma 09XI'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-etale-section-lifting-henselian-pair",
-  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
-  "lem-weil-pbc-etale-section-idempotent-splitting",
-  "def-weil-pbc-henselian-terminology"
+  "lem-weil-pbc-pair-henselization-essentially-small",
+  "lem-weil-pbc-pair-henselization-filtered",
+  "lem-weil-pbc-pair-henselization-colimit"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0A02 (lemma-henselization), proof; the set-theoretic step 2 and the reductions modulo $J$ in steps 3-4 are written out by the agent (Stacks states only etaleness), following algebra.tex proof of Lemma Tag 04GW for step 2"
+  "place": "Tag 0A02; component reduction reviewed by K2, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -235,5 +136,15 @@
   "group": "N1",
   "result": "pass",
   "note": "B CommRing, J ideal; objects = Under (of B) with Etale (Spec.map C.hom) and bijective canonical B/J -> C/JC (all B-algebra maps as morphisms); (1) EssentiallySmall.{u} + IsFiltered; (2) tied colimit cocone with HenselianRing on (B^h, J B^h); (3) bijective B/J -> B^h/J^h; every conjunct is a node clause, none derivable; no let/inline instances/notation; adjunction clause absent as the node requires"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

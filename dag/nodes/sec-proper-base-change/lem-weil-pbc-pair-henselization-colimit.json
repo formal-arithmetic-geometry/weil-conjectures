@@ -1,0 +1,174 @@
+{
+ "id": "lem-weil-pbc-pair-henselization-colimit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pair-henselization",
+   "place": "split of proof",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Henselian colimit for the pair henselization category",
+ "statement": "For a commutative ring B and ideal J, let C be the full category of ring maps B to D with Spec(D) to Spec(B) etale [def-weil-etale-morphism] and the canonical map B/J to D/JD bijective, with all B-algebra maps as morphisms. There is a colimit cocone in rings under B, with vertex B to H, such that (H,JH) is henselian [def-weil-pbc-henselian-terminology] and the canonical map B/J to H/JH is bijective.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0A02 proof"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Use the essential-smallness and filteredness components to form a small equivalent diagram, then its colimit of B-algebras; transfer its cocone back to the full category.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization-essentially-small",
+    "lem-weil-pbc-pair-henselization-filtered",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*(3) $B/J\\to B^h/J^h$ is an isomorphism.* By step 1 the maps $\\pi_C:C\\to\\bar B$ form a cocone of $B$-algebra maps, so they induce a $B$-algebra map $\\pi:B^h\\to\\bar B$ with $\\pi\\circ\\iota_C=\\pi_C$ [def-weil-pbc-category-colimit]. $\\pi$ kills $J^h=JB^h$ ($B$-linear, $J\\bar B=0$), so it induces $\\bar\\pi:B^h/J^h\\to\\bar B$; with $\\theta:\\bar B\\to B^h/J^h$ the map induced by $B\\to B^h$, $\\bar\\pi\\circ\\theta=\\mathrm{id}_{\\bar B}$ (a $B$-algebra map out of $\\bar B$ is determined), so $\\theta$ is injective. Surjectivity: every $x\\in B^h$ is $\\iota_C(c)$ for some object $C$ and $c\\in C$ [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2); as $B\\to C/JC$ is surjective, $c=b+y$ with $b\\in B$, $y\\in JC$, so $x=b\\cdot1+\\iota_C(y)$ with $\\iota_C(y)\\in JB^h$; thus $x\\equiv b$ modulo $J^h$. Hence $\\theta$ is an isomorphism of $B$-algebras with inverse $\\bar\\pi$. (Stacks: '$A^h/IA^h=\\colim B/IB=\\colim A/I=A/I$', i.e. reduction modulo $I$ commutes with colimits and the colimit of the constant diagram over the connected category $\\mathcal C$ is $A/I$; the elementwise argument here proves the same.)",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Since $B/IB=A/I$ for all objects $B$ of $\\mathcal C$ we see that $A^h/I^h=A^h/IA^h=\\colim B/IB=\\colim A/I=A/I$'"
+   }
+  },
+  {
+   "text": "*(2) Sections of etale $B^h$-algebras lift: the set-up.* We verify the hypothesis of [lem-weil-pbc-etale-section-lifting-henselian-pair] for $(B^h,J^h)$ (Stacks: condition (2) of Lemma 09XI). Let $B^h\\to A'$ be a ring map with $\\operatorname{Spec}A'\\to\\operatorname{Spec}B^h$ etale and $\\sigma:A'\\to B^h/J^h$ a $B^h$-algebra map. By [lem-weil-pbc-etale-algebra-filtered-colimit-descent] (applied to the filtered colimit of rings $B^h=\\varinjlim_{\\mathcal C}C$, step 2) there are an object $C$, a ring map $C\\to C'$ with $\\operatorname{Spec}C'\\to\\operatorname{Spec}C$ etale and an isomorphism of $B^h$-algebras $A'\\cong C'\\otimes_CB^h$ (via $\\iota_C$); identify $A'$ with $C'\\otimes_CB^h$. Let $s:C'\\to\\bar B$ be the composite $C'\\to A'\\xrightarrow{\\sigma}B^h/J^h\\xrightarrow{\\bar\\pi}\\bar B$ (step 5). It is a $C$-algebra map for the $C$-algebra structure $\\pi_C$ on $\\bar B$ (because $\\sigma$ is $B^h$-linear and $\\bar\\pi\\circ(B^h\\to B^h/J^h)\\circ\\iota_C=\\pi\\circ\\iota_C=\\pi_C$), in particular a $B$-algebra map.",
+   "uses": [
+    "lem-weil-pbc-etale-section-lifting-henselian-pair",
+    "lem-weil-pbc-etale-algebra-filtered-colimit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'suppose given an etale ring map $A^h\\to A'$ and $A^h$-algebra map $\\sigma:A'\\to A^h/I^h$. Then there exists a $B\\in\\mathcal C$ and an etale ring map $B\\to B'$ such that $A'=B'\\otimes_BA^h$. See Algebra, Lemma 00U2. Since $A^h/I^h=A/I$, the map $\\sigma$ induces an $A$-algebra map $s:B'\\to A/I$'"
+   }
+  },
+  {
+   "text": "*(2) The object $C'_g$.* $C'/JC'=C'\\otimes_C(C/JC)$ is etale over $C/JC$ [lem-weil-pbc-etale-ring-base-change], and $C/JC\\cong\\bar B$; $s$ kills $JC'$ and induces a $\\bar B$-algebra map $\\bar s:C'/JC'\\to\\bar B$. By [lem-weil-pbc-etale-section-idempotent-splitting] (with $R=\\bar B$, $S=C'/JC'$) there is an idempotent $\\bar e\\in C'/JC'$ with $\\bar s(\\bar e)=1$ such that $\\bar s$ induces an isomorphism $(C'/JC')_{\\bar e}\\xrightarrow{\\sim}\\bar B$ (Stacks: '$B'/IB'=A/I\\times C$ ... let $g\\in B'$ map to $(1,0)$'). Choose $g\\in C'$ lifting $\\bar e$. Then $\\operatorname{Spec}C'_g\\to\\operatorname{Spec}C'$ is an open immersion, so $C'_g$ is etale over $C'$, over $C$ and over $B$ [lem-weil-pbc-etale-composition-cancellation] (1),(2); and $C'_g/JC'_g=(C'/JC')_{\\bar e}$ (localization commutes with quotients), so the composite $\\bar B\\to C'_g/JC'_g\\xrightarrow{\\sim}\\bar B$ (the second map induced by $\\bar s$) is a $B$-algebra map $\\bar B\\to\\bar B$, i.e. the identity, and $\\bar B\\to C'_g/JC'_g$ is an isomorphism. So $C'_g$ is an object of $\\mathcal C$, and the structure map $C\\to C'\\to C'_g$ is a $B$-algebra map, i.e. a morphism $C\\to C'_g$ of $\\mathcal C$; hence $\\iota_{C'_g}\\circ(C\\to C'_g)=\\iota_C$ (cocone).",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-section-idempotent-splitting",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Then $B'/IB'=A/I\\times C$ as $A/I$-algebra, where $C$ is the kernel of the map $B'/IB'\\to A/I$ induced by $s$. Let $g\\in B'$ map to $(1,0)\\in A/I\\times C$. Then $B\\to B'_g$ is etale and $A/I\\to B'_g/IB'_g$ is an isomorphism, i.e., $B'_g$ is an object of $\\mathcal C$'"
+   }
+  },
+  {
+   "text": "*(2) The lift; conclusion that $(B^h,J^h)$ is henselian.* Let $\\lambda:C'\\to C'_g$ be the localization map. The ring maps $\\iota_{C'_g}\\circ\\lambda:C'\\to B^h$ and $\\mathrm{id}:B^h\\to B^h$ agree on $C$ (step 7: both restrict to $\\iota_C$), so by the universal property of $C'\\otimes_CB^h$ (the coproduct of commutative $C$-algebras) they induce a $B^h$-algebra map $\\tau:A'=C'\\otimes_CB^h\\to B^h$, $c'\\otimes x\\mapsto\\iota_{C'_g}(\\lambda(c'))x$. It lifts $\\sigma$: the two $B^h$-algebra maps $q\\circ\\tau$ and $\\sigma$ from $A'$ to $B^h/J^h$ ($q$ the quotient map) agree iff they agree on $C'$; composing with the isomorphism $\\bar\\pi$ (step 5), on $C'$ the first is $\\pi\\circ\\iota_{C'_g}\\circ\\lambda=\\pi_{C'_g}\\circ\\lambda$ and the second is $s$. Now $s(g)=\\bar s(\\bar e)=1$, so $s$ extends to a $B$-algebra map $s_g:C'_g\\to\\bar B$ with $s_g\\circ\\lambda=s$; by step 1 (applied to the object $C'_g$) $s_g=\\pi_{C'_g}$. Hence $\\pi_{C'_g}\\circ\\lambda=s$ and $q\\circ\\tau=\\sigma$ (Stacks: the two commutative diagrams). So $(B^h,J^h)$ satisfies the hypothesis of [lem-weil-pbc-etale-section-lifting-henselian-pair], hence $J^h$ lies in the Jacobson radical of $B^h$ and $(B^h,J^h)$ is henselian [def-weil-pbc-henselian-terminology]: clause (2).",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-etale-section-lifting-henselian-pair",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Thus we obtain a canonical map $B'_g\\to A^h$ such that [the two diagrams] commute. This induces a map $A'=B'\\otimes_BA^h\\to A^h$ compatible with $\\sigma$ as desired'; and 'we will verify condition (2) of Lemma 09XI'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization-essentially-small",
+  "lem-weil-pbc-pair-henselization-filtered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-etale-section-lifting-henselian-pair",
+  "lem-weil-pbc-etale-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-section-idempotent-splitting",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A02; second reading K2, 2026-10-12; essential smallness uses Mathlib FGAlgCat"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselization|essentiallySmall.*(Algebra|Etale)|isFiltered.*Etale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full category of finitely presented commutative algebras over a fixed ring is essentially small",
+   "results": "instEssentiallySmallFGAlgCat, instEssentiallySmallFGModuleCat, essentiallySmall_of_le, FGAlgCat, FGAlgCatSkeleton, CommRingCat.isFinitelyPresentable_hom, Algebra.FiniteType.small, isFinitelyPresentable",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmall\"",
+   "results": "CategoryTheory.EssentiallySmall, CategoryTheory.essentiallySmallSelf, CategoryTheory.Discrete.essentiallySmallOfSmall, CategoryTheory.locallySmall_of_essentiallySmall, CategoryTheory.small_skeleton_of_essentiallySmall, CategoryTheory.essentiallySmall_of_small_of_locallySmall, CategoryTheory.instEssentiallySmallOpposite, CategoryTheory.EssentiallySmall.mk'",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of etale ring algebras inducing the same quotient by an ideal is a henselian pair",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselization",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PairHenselizationColimit",
+  "declaration": "RingTheory.pair_henselization_colimit",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationColimit.lean",
+  "statement": "theorem pair_henselization_colimit (B : Type u) [CommRing B] (J : Ideal B) : ∃ c : Cocone (ObjectProperty.ι (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map)))), Nonempty (IsColimit c) ∧ HenselianRing c.pt.right (J.map c.pt.hom.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map c.pt.hom.hom) c.pt.hom.hom (Ideal.le_comap_map))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-pair-henselization-filtered",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pair-henselization",
+   "place": "split of proof",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Filteredness of the pair henselization category",
+ "statement": "For a commutative ring B and ideal J, let C be the full category of ring maps B to D with Spec(D) to Spec(B) etale [def-weil-etale-morphism] and the canonical map B/J to D/JD bijective, with all B-algebra maps as morphisms. Then C is filtered: it is nonempty, any two objects admit a common successor, and every pair of parallel maps is coequalized.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0A02 proof"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "*(1) Nonempty; two objects map to a common one.* $B$ itself (identity) is an object: $\\operatorname{Spec}B\\to\\operatorname{Spec}B$ is the identity, an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1), and $\\bar B\\to B/J$ is the identity. Let $C,C'$ be objects and $C''=C\\otimes_BC'$. $\\operatorname{Spec}C''\\to\\operatorname{Spec}C$ is etale as a base change of $B\\to C'$ along $B\\to C$ [lem-weil-pbc-etale-ring-base-change], hence $\\operatorname{Spec}C''\\to\\operatorname{Spec}B$ is etale (composition, [lem-weil-pbc-etale-composition-cancellation] (2)). Reduction modulo $J$: by associativity and commutativity of tensor products, $C''/JC''=C''\\otimes_B\\bar B\\cong(C\\otimes_B\\bar B)\\otimes_{\\bar B}(C'\\otimes_B\\bar B)=(C/JC)\\otimes_{\\bar B}(C'/JC')$, and under this identification the map $\\bar B\\to C''/JC''$ is the tensor product of the isomorphisms $\\bar B\\to C/JC$, $\\bar B\\to C'/JC'$ over $\\bar B$, so it is the isomorphism $\\bar B\\cong\\bar B\\otimes_{\\bar B}\\bar B\\to(C/JC)\\otimes_{\\bar B}(C'/JC')$. So $C''$ is an object, and the coprojections $C\\to C''$, $C'\\to C''$ are $B$-algebra maps, i.e. morphisms of $\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'It is nonempty because $\\mathrm{id}:A\\to A$ is an object. If $B$ and $B'$ are two objects of $\\mathcal C$, then $B''=B\\otimes_AB'$ is an object of $\\mathcal C$ (use Algebra, Lemma 00U2)'; the reduction mod $J$ is written out by the agent"
+   }
+  },
+  {
+   "text": "*(1) Parallel morphisms are coequalized; $\\mathcal C$ is filtered.* Let $f,g:C\\to C'$ be morphisms of $\\mathcal C$. Put $E=C'\\otimes_{f,C,g}C'$ and $D=E\\otimes_{C'\\otimes_BC'}C'$, formed with the natural surjection $C'\\otimes_BC'\\to E$ and the multiplication $\\mu:C'\\otimes_BC'\\to C'$. Etaleness over $B$: $f$ is etale (step 1), so the right factor map $C'\\to E$, the base change of $f$ along $g$, is etale [lem-weil-pbc-etale-ring-base-change] and $E$ is etale over $B$ (composition); $C'\\otimes_BC'$ is etale over $B$ (step 3), so $\\mu$ is etale (a map between $B$-algebras etale over $B$, [lem-weil-pbc-etale-composition-cancellation] (3)), so $E\\to D$, its base change, is etale [lem-weil-pbc-etale-ring-base-change] and $D$ is etale over $B$ [lem-weil-pbc-etale-composition-cancellation] (2). Reduction modulo $J$ (written out by the agent; Stacks only states etaleness): base change $-\\otimes_B\\bar B$ commutes with the tensor products, so $D/JD\\cong(\\bar C'\\otimes_{\\bar f,\\bar C,\\bar g}\\bar C')\\otimes_{\\bar C'\\otimes_{\\bar B}\\bar C'}\\bar C'$ with $\\bar C=C/JC$, $\\bar C'=C'/JC'$; the structure maps $\\bar B\\to\\bar C$, $\\bar B\\to\\bar C'$ are isomorphisms through which $\\bar f,\\bar g$ become $\\mathrm{id}_{\\bar B}$ ($B$-algebra maps $\\bar B\\to\\bar B$, step 1), so $D/JD\\cong(\\bar B\\otimes_{\\bar B}\\bar B)\\otimes_{\\bar B\\otimes_{\\bar B}\\bar B}\\bar B\\cong\\bar B$ and the structure map $\\bar B\\to D/JD$ is this isomorphism. So $D$ is an object. Let $c:C'\\to D$ be the right-most factor map $a\\mapsto1\\otimes a$, a $B$-algebra map, hence a morphism. In $D$, $c(a)$ equals the image of $a\\otimes1$ and of $1\\otimes a\\in C'\\otimes_BC'$ (both map to $a$ under $\\mu$); since $f(x)\\otimes1=1\\otimes g(x)$ in $E$ for $x\\in C$, $c(f(x))=c(g(x))$, i.e. $c\\circ f=c\\circ g$. With step 3, $\\mathcal C$ is filtered (Stacks 'directed', Categories Definition Tag 002V).",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Suppose that $f,g:B\\to B'$ are two maps between objects of $\\mathcal C$. Then a coequalizer is $(B'\\otimes_{f,B,g}B')\\otimes_{(B'\\otimes_AB')}B'$ which is etale over $A$ by Algebra, Lemmas 00U2 and 00U7'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-ring-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A02; second reading K2, 2026-10-12; essential smallness uses Mathlib FGAlgCat"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselization|essentiallySmall.*(Algebra|Etale)|isFiltered.*Etale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full category of finitely presented commutative algebras over a fixed ring is essentially small",
+   "results": "instEssentiallySmallFGAlgCat, instEssentiallySmallFGModuleCat, essentiallySmall_of_le, FGAlgCat, FGAlgCatSkeleton, CommRingCat.isFinitelyPresentable_hom, Algebra.FiniteType.small, isFinitelyPresentable",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmall\"",
+   "results": "CategoryTheory.EssentiallySmall, CategoryTheory.essentiallySmallSelf, CategoryTheory.Discrete.essentiallySmallOfSmall, CategoryTheory.locallySmall_of_essentiallySmall, CategoryTheory.small_skeleton_of_essentiallySmall, CategoryTheory.essentiallySmall_of_small_of_locallySmall, CategoryTheory.instEssentiallySmallOpposite, CategoryTheory.EssentiallySmall.mk'",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of etale ring algebras inducing the same quotient by an ideal is a henselian pair",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselization",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PairHenselizationFiltered",
+  "declaration": "RingTheory.pair_henselization_filtered",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationFiltered.lean",
+  "statement": "theorem pair_henselization_filtered (B : Type u) [CommRing B] (J : Ideal B) : IsFiltered (ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

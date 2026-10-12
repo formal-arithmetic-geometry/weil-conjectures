@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-pair-henselization-essentially-small",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-pair-henselization",
+   "place": "split of proof",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Essential smallness of the pair henselization category",
+ "statement": "For a commutative ring B and ideal J, let C be the full category of ring maps B to D with Spec(D) to Spec(B) etale [def-weil-etale-morphism] and the canonical map B/J to D/JD bijective, with all B-algebra maps as morphisms. Then C is essentially small in the universe of B.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0A02 proof"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "An etale ring map is finitely presented, hence of finite type. The equivalence\nbetween rings under `B` and commutative `B`-algebras restricts to a fully faithful functor\nfrom this full subcategory to `FGAlgCat B`. Mathlib proves that the latter is essentially\nsmall using quotients of polynomial rings on finitely many variables. Essential smallness\npulls back along the fully faithful functor; the quotient condition needs no extra argument.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A02; second reading K2, 2026-10-12; essential smallness uses Mathlib FGAlgCat"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselization|essentiallySmall.*(Algebra|Etale)|isFiltered.*Etale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full category of finitely presented commutative algebras over a fixed ring is essentially small",
+   "results": "instEssentiallySmallFGAlgCat, instEssentiallySmallFGModuleCat, essentiallySmall_of_le, FGAlgCat, FGAlgCatSkeleton, CommRingCat.isFinitelyPresentable_hom, Algebra.FiniteType.small, isFinitelyPresentable",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EssentiallySmall\"",
+   "results": "CategoryTheory.EssentiallySmall, CategoryTheory.essentiallySmallSelf, CategoryTheory.Discrete.essentiallySmallOfSmall, CategoryTheory.locallySmall_of_essentiallySmall, CategoryTheory.small_skeleton_of_essentiallySmall, CategoryTheory.essentiallySmall_of_small_of_locallySmall, CategoryTheory.instEssentiallySmallOpposite, CategoryTheory.EssentiallySmall.mk'",
+   "date": "2026-10-12",
+   "verdict": "No direct proof of filteredness or henselian colimit. For smallness use FGAlgCat and fully faithful transfer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of etale ring algebras inducing the same quotient by an ideal is a henselian pair",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PairHenselization",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PairHenselizationEssentiallySmall",
+  "declaration": "RingTheory.pair_henselization_essentiallySmall",
+  "file": "lean/Sheaf/RingTheory/PairHenselizationEssentiallySmall.lean",
+  "statement": "theorem pair_henselization_essentiallySmall (B : Type u) [CommRing B] (J : Ideal B) : EssentiallySmall.{u} (ObjectProperty.FullSubcategory (fun C : Under (CommRingCat.of B) ↦ AlgebraicGeometry.Etale (AlgebraicGeometry.Spec.map C.hom) ∧ Function.Bijective (Ideal.quotientMap (J.map C.hom.hom) C.hom.hom (Ideal.le_comap_map))))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T053939-L-2638311",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

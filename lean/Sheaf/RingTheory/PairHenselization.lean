@@ -10,9 +10,9 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent
-import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
-import Sheaf.RingTheory.HenselianOfEtaleSectionLifting
+import Sheaf.RingTheory.PairHenselizationEssentiallySmall
+import Sheaf.RingTheory.PairHenselizationFiltered
+import Sheaf.RingTheory.PairHenselizationColimit
 
 /-!
 # Henselization of a pair
@@ -84,6 +84,7 @@ theorem pair_henselization (B : Type u) [CommRing B] (J : Ideal B) :
         HenselianRing c.pt.right (J.map c.pt.hom.hom) ∧
         Function.Bijective (Ideal.quotientMap (J.map c.pt.hom.hom) c.pt.hom.hom
           (Ideal.le_comap_map)) := by
-  sorry
+  exact ⟨pair_henselization_essentiallySmall B J,
+    pair_henselization_filtered B J, pair_henselization_colimit B J⟩
 
 end RingTheory
