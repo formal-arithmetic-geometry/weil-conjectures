@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-affine-algebra-local-maps",
+ "kind": "statement",
+ "title": "Compatible local scheme maps from an affine structure-algebra morphism",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme], $f:X\\to S$ a morphism, and $g:Y\\to S$ an affine morphism [pqf-def-affine-morphism]. Let $\\alpha:g_*\\mathcal O_Y\\to f_*\\mathcal O_X$ be a morphism of $\\mathcal O_S$-algebra sheaves [def-weil-pbc-comm-algebra-sheaf]. For every affine open $U\\subseteq S$ there exist maps $k_U:X_U=f^{-1}U\\to Y$ such that $g\\circ k_U=f\\circ\\iota_U$. For every pair of affine opens $U,V$, the maps agree on $X_U\\times_X X_V$. On sections over $g^{-1}U$, the map induced by $k_U$ equals $\\alpha_U$ followed by the canonical identification $\\Gamma(X,f^{-1}U)\\cong\\Gamma(X_U,\\mathcal O_{X_U})$. No affineness assumption is made on $X$ or on $U\\cap V$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01SA; Constructions, Lemma 01LT; local construction and overlap comparison in parts (i) and (iii) of the fully faithful argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-comm-algebra-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "For an affine open U of S, g inverse image U is affine by [pqf-def-affine-morphism]. Apply [lem-weil-pbc-morphism-into-affine-scheme] to the component of the algebra morphism alpha on U, conjugated by the top-section isomorphisms, to get a morphism from f inverse image U into g inverse image U. Compatibility with the structure-algebra maps implies that its composite to U is the restricted f, by injectivity of the same correspondence for affine U. Compose with the open immersion to Y to get k_U. The adjunction gives the displayed section formula.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For affine V contained in affine U, the restriction of k_U and k_V followed by the inclusion to Y_U are maps into the affine Y_U. Naturality of alpha makes their global section maps equal, so they are equal by [lem-weil-pbc-morphism-into-affine-scheme]. For arbitrary affine U,V, cover U intersection V by smaller affine W. On every inverse image of W the two maps on the overlap agree with k_W. Uniqueness in [lem-weil-pbc-scheme-morphism-gluing] gives equality on the overlap, which is the pullback of the open immersions. This works for empty opens and does not require the intersection or X to be affine.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01SA; Constructions, Lemma 01LT; local construction and overlap comparison in parts (i) and (iii) of the fully faithful argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An algebra sheaf morphism between pushforward structure sheaves gives compatible scheme morphisms over inverse images of affine opens",
+   "results": "Service unavailable: Internal Server Error; no absence inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of schemes affine over S correspond contravariantly to morphisms of their pushforward structure sheaves of algebras",
+   "results": "Found ext_of_isAffine, AffineScheme.ofHom and absolute affine Gamma-Spec results, but no compatible relative local family theorem.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "affine_algebra_local_maps|glueMorphisms|ext_of_isAffine",
+   "results": "Scheme.Cover.glueMorphisms and ι_glueMorphisms construct global maps from a compatible family; ext_of_isAffine supplies uniqueness. No theorem constructs the compatible relative local family from an algebra morphism.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineStructureAlgebraFullyFaithful",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Original relative-spectrum step 6, parts (i) and (iii): construct the local maps from section maps and compare them on overlaps, before global gluing.",
+   "via": [
+    "lem-weil-pbc-affine-structure-algebra-fully-faithful",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraLocalMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraLocalMaps.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_local_maps",
+  "statement": "theorem affine_algebra_local_maps {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [IsAffineHom g] (α : (𝒪⁎g : S.CommAlgebraSheaf) ⟶ 𝒪⁎f) : ∃ k : ∀ U : S.affineOpens, (f ⁻¹ᵁ U.1).toScheme ⟶ Y, (∀ U, k U ≫ g = (f ⁻¹ᵁ U.1).ι ≫ f) ∧ (∀ U V, Limits.pullback.fst (f ⁻¹ᵁ U.1).ι (f ⁻¹ᵁ V.1).ι ≫ k U = Limits.pullback.snd (f ⁻¹ᵁ U.1).ι (f ⁻¹ᵁ V.1).ι ≫ k V) ∧ (∀ (U : S.affineOpens) (e : ⊤ ≤ k U ⁻¹ᵁ (g ⁻¹ᵁ U.1)), (k U).appLE (g ⁻¹ᵁ U.1) ⊤ e = α.right.hom.app (op U.1) ≫ (f ⁻¹ᵁ U.1).topIso.inv)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070530-L-3467433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T070530-L-3467433",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

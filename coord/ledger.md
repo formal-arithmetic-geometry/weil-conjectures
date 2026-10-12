@@ -6578,3 +6578,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/B3/Sheaf.RingTheory.HenselianFactorizationCriterion (stage 3; reviewer PASS; first push; landing 20261012T070529-L-3466994 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/B3/Sheaf.RingTheory.HenselianOfEtaleSectionLifting (stage 3; reviewer PASS; first push; landing 20261012T070529-L-3467110 (proof); batch 20261012T070523; modules 1; new nodes 0)
 - 07:05 L: merged deliver/B3/Sheaf.RingTheory.HenselizationStageMap (stage 3; reviewer PASS; first push; landing 20261012T070529-L-3467289 (proof); batch 20261012T070523; modules 1; new nodes 0)
+- 07:05 L: merged deliver/C1/Sheaf.AlgebraicGeometry.AffineStructureAlgebraFullyFaithful (stage 3; reviewer PASS; first push; landing 20261012T070530-L-3467433 (interface); batch 20261012T070523; modules 2; new nodes 1)
