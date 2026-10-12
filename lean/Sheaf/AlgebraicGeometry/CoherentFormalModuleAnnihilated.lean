@@ -5,13 +5,13 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Data.List.TFAE
 public import Mathlib.RingTheory.Ideal.Operations
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
@@ -147,6 +147,6 @@ theorem ker_coker_reduction_annihilated_double
       ((N ⧸ (J • ⊤ : Submodule A N)) ⧸
         range ((J • ⊤ : Submodule A M).mapQ (J • ⊤ : Submodule A N) u
           (Submodule.smul_top_le_comap_smul_top J u))) := by
-  sorry
+  exact (ker_coker_annihilated_mod_ideal.{u, v, w, v, w, v, w} K t ht u hker hcoker).2.1 J
 
 end LinearMap
