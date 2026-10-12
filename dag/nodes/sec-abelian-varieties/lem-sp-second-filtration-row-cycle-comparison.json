@@ -1,0 +1,165 @@
+{
+ "id": "lem-sp-second-filtration-row-cycle-comparison",
+ "kind": "statement",
+ "title": "Normalized row-cycle comparison with the concrete first-page quotient",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be Grothendieck abelian categories [def-sp-grothendieck-abelian, def-sp-abelian], $F:\\mathcal A\\to\\mathcal B$ an additive left-exact functor [def-sp-left-exact-additive], and $I$ a commuting bicomplex [def-sp-double-complex-total] with complex index $s\\in\\mathbf Z$ and resolution index $r\\in\\mathbf N$. Assume $I^s=0$ for $s<b$ for some integer $b$. Put $R_s=F(I^s)$ and $J=\\operatorname{flip}(\\operatorname{mappedFunctor}(F)(I))$, extending the resolution index by zero [def-sp-cartan-eilenberg-presentation], and $K=\\operatorname{Tot}(J)$. Let $L$ be a decreasing subcomplex filtration [def-sp-filtration] with $L.\\mathrm{complexStep}(p,n)=(J.\\mathrm{secondFiltration}(n)).\\mathrm{step}(p)$ for all integers $p,n$. Let $a_{r,s}:R_s^r\\to K^{s+r}$ be the inverse of the extension isomorphism followed by the diagonal coprojection for $(r,s)$. Write $Z_{r,s}=L.\\mathrm{complexCycles}(s,s+r,1)$ [def-sp-filtered-complex-subquotients] and $Q_{r,s}=\\operatorname{coker}(L.\\mathrm{complexBoundaries}(s,s+r,1)\\hookrightarrow Z_{r,s})$ with quotient projection $\\pi_{r,s}$ [lem-sp-filtered-complex-page-differential]. There are families $e_{r,s}:Q_{r,s}\\cong H^r(R_s)$, $t_{r,s}:\\mathrm{cycles}^r(R_s)\\to (L^sK)^{s+r}$ and $x_{r,s}:\\mathrm{cycles}^r(R_s)\\to Z_{r,s}$, for every natural $r$ and integer $s$, such that $t_{r,s}$ followed by the filtration inclusion equals $i_{\\mathrm{cycles}}a_{r,s}$, $x_{r,s}$ followed by the cycle-subobject inclusion equals $t_{r,s}$ followed by the graded quotient projection, and $x_{r,s}\\pi_{r,s}e_{r,s}=\\mathrm{homology}\\pi_{R_s,r}$. Here row cycles mean the kernel of $R_s^r\\to R_s^{r+1}$ with its kernel inclusion; row homology is the cokernel of the incoming boundary map into those cycles, and $\\mathrm{homology}\\pi$ is that cokernel projection. No page differential is part of this assertion.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clauses 2 and 4; Tag 012K, first-page cycle and boundary formulas; https://stacks.math.columbia.edu/tag/0130 and https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sp-abelian",
+  "def-sp-left-exact-additive",
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-filtration",
+  "def-sp-double-complex-total",
+  "lem-sp-filtered-complex-page-differential",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Write R_s = F(I.X s), J = flip(mappedFunctor F(I)), and n=s+r. The map a_{r,s}: R_s^r -> Tot(J)^n is the inverse extension isomorphism followed by the (r,s) diagonal coprojection. Since r is nonnegative, s belongs to [s,n]. Its image is contained in the second-filtration supremum, hence hL gives a unique lift through the mono (L.step s).arrow.f n. The projection of the diagonal coproduct onto J^(r,s) kills all summands in L^(s+1). Restrict it to L^s, descend to the cokernel, and check the inverse identities on each diagonal summand. This identifies gr^s L in degree s+r with R_s^r. This argument uses [s,n], and does not assume s>=0.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The total differential on a diagonal inclusion is the resolution differential plus the signed complex-index differential. The latter lands in L^(s+1), so only the resolution differential survives on gr^s L. The normalized graded comparison therefore identifies its kernel with row cycles and its image with row boundaries. Apply filteredComplex_firstPage_cycles_boundaries to identify these with L.complexCycles and L.complexBoundaries. Restrict the lifted inclusion to row cycles to obtain t, and factor its graded projection through the cycle mono to obtain x. The inclusion and graded-projection equations are exactly the two claimed normalizations.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-first-page-cycles-boundaries"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The row and filtered cycle comparisons carry the boundary inclusions into each other, so their cokernel universal properties give mutually inverse quotient maps. Compose with the natural extension-by-zero homology comparison at degree r to obtain e. The induced cokernel map sends the cycle class of a row cycle to its row homology class, giving x followed by page projection followed by e.hom = homologyπ. At r=0 the incoming negative-resolution term is zero, so both incoming boundary images vanish. At zero rows all maps are unique zero-object maps. The equations determine t and x by monicity, and e by the epic projection from row cycles; no arbitrary homology isomorphism is chosen.",
+   "uses": [
+    "def-sp-cartan-eilenberg-presentation",
+    "def-sp-double-complex-total",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-first-page-cycles-boundaries"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-first-page-cycles-boundaries",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0130, lemma-ss-double-complex, clauses 2 and 4; Tag 012K, first-page cycle and boundary formulas; https://stacks.math.columbia.edu/tag/0130 and https://stacks.math.columbia.edu/tag/012K",
+  "note": "Normalized quotient-comparison portion of the original plan; the source omits the double-complex proof. Details and boundary cases are written out by M3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "first page quotient of second filtration of a double complex is row cohomology with signed differential",
+   "results": "8 hits: groupCohomology.isoShortComplexH2, groupCohomology.isoShortComplexH1, CochainComplex.HomComplex.leftHomologyData', CochainComplex.HomComplex.leftHomologyData'_π, HomologicalComplex₂.totalAux.ιMapObj_D₁, HomologicalComplex₂.totalAux.ιMapObj_D₂, HomologicalComplex.mapBifunctor.d₁_eq', HomologicalComplex₂.totalAux.d₁_eq",
+   "date": "2026-10-12",
+   "verdict": "General total and homology tools only; no normalized diagonal-to-row first-page comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyπ",
+   "results": "12 hits: HomologicalComplex.homologyπ, HomologicalComplex.instEpiHomologyπ, HomologicalComplex.natTransHomologyπ_app, HomologicalComplex.homology_π_ι, CochainComplex.isIso_homologyπ₀, HomologicalComplex.isIso_homologyπ, HomologicalComplex.toCycles_comp_homologyπ, HomologicalComplex.homology_π_ι_assoc",
+   "date": "2026-10-12",
+   "verdict": "General total and homology tools only; no normalized diagonal-to-row first-page comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "secondFiltration.*(homology|graded)|signed_firstPage",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "General total and homology tools only; no normalized diagonal-to-row first-page comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesMap, HomologicalComplex.homologyπ",
+   "results": "4 hits: HomologicalComplex.homologyπ_naturality, HomologicalComplex.homologyπ_naturality_assoc, CategoryTheory.ShortComplex.ShortExact.δ_eq', CategoryTheory.ShortComplex.ShortExact.δ_apply'",
+   "date": "2026-10-12",
+   "verdict": "General total and homology tools only; no normalized diagonal-to-row first-page comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical inclusion of a row of a double complex identifies its homology with the first page quotient of the second filtration",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredComplexPageObject|secondFiltration|homologyIsoCokernelLift",
+   "results": "3 hits: Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+   "date": "2026-10-12",
+   "verdict": "General total and homology tools only; no normalized diagonal-to-row first-page comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SecondFiltrationSignedFirstPage",
+  "date": "2026-10-13",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-if-e1",
+   "place": "Proof paragraph 1: second-filtration first-page row identification; diagonal representatives and the quotient normalization, before the signed differential calculation",
+   "via": [
+    "lem-sp-second-filtration-signed-first-page"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SecondFiltrationRowCycleComparison",
+  "file": "lean/Sheaf/CategoryTheory/SecondFiltrationRowCycleComparison.lean",
+  "declaration": "CategoryTheory.Functor.secondFiltration_row_cycle_comparison",
+  "declarations": [
+   "CategoryTheory.Functor.secondFiltrationRowι",
+   "CategoryTheory.Functor.secondFiltration_row_cycle_comparison"
+  ],
+  "statement": "theorem secondFiltration_row_cycle_comparison\n    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]\n    {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]\n    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]\n    (I : HomologicalComplex₂ A (ComplexShape.up ℤ) (ComplexShape.up ℕ))\n    (hbelow : ∃ b : ℤ, ∀ s : ℤ, s < b → IsZero (I.X s))\n    (L : DecreasingFiltration\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n        (ComplexShape.up ℤ)))\n    (hL : ∀ p n : ℤ, L.complexStep p n =\n      ((((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).secondFiltration n).step\n        p) :\n    let K := (((CartanEilenbergPresentation.mappedFunctor F).obj I).flip).total\n      (ComplexShape.up ℤ)\n    let R := fun s : ℤ ↦ (F.mapHomologicalComplex (ComplexShape.up ℕ)).obj (I.X s)\n    ∃ (e : ∀ (r : ℕ) (s : ℤ), filteredComplexPageObject K L 1 (s, (r : ℤ)) ≅\n        (R s).homology r)\n      (t : ∀ (r : ℕ) (s : ℤ), (R s).cycles r ⟶\n        (L.step s : CochainComplex B ℤ).X (s + (r : ℤ)))\n      (x : ∀ (r : ℕ) (s : ℤ), (R s).cycles r ⟶\n        (L.complexCycles s (s + (r : ℤ)) 1 : B)),\n      (∀ r s, t r s ≫ (L.step s).arrow.f (s + (r : ℤ)) =\n        (R s).iCycles r ≫ secondFiltrationRowι F I r s) ∧\n      (∀ r s, x r s ≫ (L.complexCycles s (s + (r : ℤ)) 1).arrow =\n        t r s ≫ (L.complexQuotientπ s (s + 1) (by omega)).f (s + (r : ℤ))) ∧\n      (∀ r s, x r s ≫ filteredComplexPageπ K L 1 (s, (r : ℤ)) ≫ (e r s).hom =\n        (R s).homologyπ r)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T230800-L-1909625",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T230800-L-1909625",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -19,31 +19,26 @@
  ],
  "proof": [
   {
-   "text": "Put J = flip(mappedFunctor F(I)) and n = s+r. Lift the diagonal coprojection J^(r,s) -> Tot(J)^n through the monomorphism L^s K^n -> K^n. This is possible since the image of that coprojection is one of the summands of the second-filtration step. The projection of this lift to gr^s L is an isomorphism: the projection from the total coproduct to J^(r,s) restricts to L^s and kills L^(s+1), and gives its inverse. Check the two identities on each diagonal coprojection. The finite interval [s,n] is exactly the surviving diagonal range, since the resolution coordinate n-j is nonnegative. The lower bound on the complex coordinate permits finite diagonal coproducts, including negative s.",
+   "text": "Apply secondFiltration_row_cycle_comparison to obtain e, the normalized filtration lifts t and cycle classes x, and the quotient identity x >> pageπ >> e.hom = row homologyπ. This step contains no assertion about the page differential.",
    "uses": [
-    "def-sp-double-complex-total",
-    "def-sp-cartan-eilenberg-presentation",
-    "def-sp-filtration"
+    "lem-sp-second-filtration-row-cycle-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The total differential on the chosen diagonal inclusion is its resolution differential plus (-1)^r times its complex-coordinate differential. The latter lands in the next filtration step and is killed in gr^s L. Thus the isomorphisms of the previous step intertwine the graded differential and the row resolution differential. Apply the first-page cycles-boundaries identities to identify the filtered Z_1 and B_1 with that row differential kernel and image. Taking the cokernel of B_1 -> Z_1 gives the canonical row-homology isomorphism from the concrete page object. Extension by zero along Nat -> Int preserves homology at every natural degree; at r=0 the incoming term is zero.",
+   "text": "For each r,s, expand secondFiltrationRowι and the Mathlib total_d formula. Rewrite the two coprojection components using ι_D₁, ι_D₂ and d₁_eq, d₂_eq. Rewrite the extension differential and extended chain map with extend_d_eq and extendMap_f. The resolution component vanishes by iCycles_d; in the remaining component cyclesMap_i gives the signed row chain map. This is the proved private row_cycle_total_d lemma in the delivered module, valid also at r=0 and negative s.",
    "uses": [
+    "lem-sp-second-filtration-row-cycle-comparison",
     "def-sp-double-complex-total",
-    "def-sp-cartan-eilenberg-presentation",
-    "def-sp-filtered-complex-subquotients",
-    "lem-sp-filtered-complex-first-page-cycles-boundaries"
+    "def-sp-cartan-eilenberg-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "Restrict the diagonal lift to the row-cycle object at r. Its resolution differential is zero, so its total differential is (-1)^r times the diagonal lift of the complex-coordinate map into the row at s+1. That image is a row cycle because the two bicomplex differentials commute. Substitute these lifts and their graded cycle classes into D.on_representatives. Compose with the canonical quotient comparisons and cancel the epimorphism from row cycles onto row homology. The resulting equation is exactly d_1 followed by the target comparison equals (-1)^r times the source comparison followed by homologyMap of F(I.d s (s+1)). The map of row cycles sends row boundaries to row boundaries since I.d is a chain map. Preadditivity moves the unit scalar through the quotient maps. No higher-page construction or arbitrary page-object isomorphism is used.",
+   "text": "Use D.on_representatives with the source row-cycle object, source lift t(r,s), target lift (-1)^r cyclesMap(F(I.d)) >> t(r,s+1), and corresponding graded cycle classes. The lift normalizations and row_cycle_total_d prove its differential hypothesis; x normalizations prove its two graded hypotheses. Postcompose its conclusion with e(r,s+1).hom. Move scalars through composition and use the quotient normalization and homologyπ_naturality. The map x >> pageπ is epic because its composite with e.hom is the epic row homology projection and e is an iso. Cancel it to obtain exactly the unchanged signed first-page equation.",
    "uses": [
-    "lem-sp-filtered-complex-page-differential",
-    "def-sp-double-complex-total",
-    "def-sp-cartan-eilenberg-presentation",
-    "def-sp-filtered-complex-subquotients"
+    "lem-sp-second-filtration-row-cycle-comparison",
+    "lem-sp-filtered-complex-page-differential"
    ],
    "elementary": false
   }
@@ -51,16 +46,14 @@
  "proof_deps": [
   "def-sp-cartan-eilenberg-presentation",
   "def-sp-double-complex-total",
-  "def-sp-filtered-complex-subquotients",
-  "def-sp-filtration",
-  "lem-sp-filtered-complex-first-page-cycles-boundaries",
-  "lem-sp-filtered-complex-page-differential"
+  "lem-sp-filtered-complex-page-differential",
+  "lem-sp-second-filtration-row-cycle-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 0130, lemma-ss-double-complex, clauses 2 and 4; Tag 012K, representative differential formula",
-  "note": "The source states the signed double-complex calculation with proof omitted. The diagonal-summand, quotient, and representative argument is written out here."
+  "place": "Tag 0130, lemma-ss-double-complex, clauses 2 and 4; Tag 012K, first-page cycle and boundary formulas; https://stacks.math.columbia.edu/tag/0130 and https://stacks.math.columbia.edu/tag/012K",
+  "note": "M3 Lean reduction: normalized object/quotient comparison remains a separate node; the signed total-cycle calculation, representative equation, scalar manipulation, and epi cancellation are fully proved."
  },
  "mathlib_searches": [
   {
@@ -137,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-ec08e",
-  "group": "E1",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T202235-L-702851",
+  "landing": "20261012T230800-L-1909625",
   "kind": "interface",
-  "note": "independent Codex review: Unchanged theorem signature and delivered proofs matched their DAG records and source formulas; both modules and direct importer CartanEilenbergRowPages compile cleanly against the delivery; axioms and pruning match the report."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
