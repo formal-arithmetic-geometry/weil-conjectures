@@ -11,11 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
-import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology
-import Sheaf.Paper.BoundaryDerivationSquareZero
+import Sheaf.AlgebraicGeometry.SquareZeroSectionPowerObstruction
 
 /-! # Lifting a tensor power of a section across a square-zero immersion
 
@@ -84,6 +81,15 @@ theorem exists_section_power_lift_of_square_zero
                 (L.tensorPow (n * k))).val.app (Opposite.op ⊤) t) ≫ e.hom =
             tensorPowSection (homOfGlobalSection
               (((tensorPullback j).obj L).tensorPow n) s) k := by
-  sorry
+  classical
+  have : ((tensorPullback j).obj L).IsInvertible :=
+    ((invertible_pullback_tensor j).1 L).2
+  let F := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
+  obtain ⟨hF, xi, hlift⟩ := exists_square_zero_section_power_obstruction j L hI n s
+  have : F.IsQuasicoherent := hF
+  obtain ⟨e, he⟩ := exists_tensorPowSection_cohomology_eq_zero Z
+    (((tensorPullback j).obj L).tensorPow n) s U hU hAffine F 1 (by decide) xi
+  obtain ⟨t, a, ha⟩ := hlift e he
+  exact ⟨e + 1, Nat.zero_lt_succ e, t, a, ha⟩
 
 end AlgebraicGeometry.Scheme.Modules

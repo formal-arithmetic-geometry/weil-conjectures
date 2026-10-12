@@ -8161,3 +8161,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/N3/Sheaf.AlgebraicGeometry.FiniteDualityDegreeZeroCounitAction (stage 3; reviewer PASS; after a return; landing 20261012T144132-L-2103043 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/N3/Sheaf.RingTheory.GRingPairsForward (stage 3; reviewer PASS; first push; landing 20261012T144132-L-2103149 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:41 L: merged deliver/P1/Sheaf.AlgebraicGeometry.EtaleComplexPullbackCoherence (stage 3; reviewer PASS; first push; landing 20261012T144133-L-2103246 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/P1/Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLift (stage 3; reviewer PASS; first push; landing 20261012T144133-L-2103343 (interface); batch 20261012T144049; modules 2; new nodes 1)
