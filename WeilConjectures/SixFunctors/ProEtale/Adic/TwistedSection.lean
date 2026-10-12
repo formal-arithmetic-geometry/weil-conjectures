@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
 public import WeilConjectures.WeilSheaf.StalkCharpoly
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 
 /-!
 # A sheaf trivialised with a twisted deck action does not embed into a constant sheaf
@@ -114,99 +116,73 @@ lemma globalSectionOfModHom_zero {Z : Scheme.{u}} {M : AdicSheaf l Z} :
   erw [Mod.zero_hom, Functor.map_zero]
   rfl
 
-/-- **A sheaf trivialised with a twisted deck action does not embed into a constant sheaf.**
-Let `N` be an `ℓ`-adic sheaf on `Y`, `w : Y' ⟶ Y`, `g : Y' ⟶ Y'` with `g ≫ w = w`, and
-`θ : ℚ̄_ℓ ≅ w^* N` a trivialisation whose section is multiplied by `χ ≠ 1` under the germ along
-`g`. Let `z : S ⟶ Y`, `π : Spec L ⟶ S` for a field `L`, `z' : Spec L ⟶ Y'` with
-`z' ≫ w = π ≫ z`, and `σ : Spec L ⟶ Spec L` with `σ ≫ π = π` and `σ ≫ z' = z' ≫ g`. Then there
-is no monomorphism `z^* N ⟶ ℚ̄_ℓⁿ`. -/
-theorem not_mono_upperStar_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
+/-- The germ along an automorphism `σ` of `Spec L` over `S` fixes every section of the pullback
+of `ℚ̄_ℓ` from `S`: these sections are multiples of the restriction of the section `1`. -/
+lemma germ_adicConstantSheaf_apply {S : Scheme.{u}} {L : Type u} [Field L]
+    {π : Spec (.of L) ⟶ S} {σ : Spec (.of L) ⟶ Spec (.of L)} (hσ : σ ≫ π = π)
+    (v : (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of L))) (WeilCoefficients.{u} l)).obj
+      ((π)^*[WeilCoefficients.{u} l].obj (adicConstantSheaf l S))) :
+    (germ (WeilCoefficients.{u} l) hσ (adicConstantSheaf l S)).hom v = v := by
+  obtain ⟨c, rfl⟩ := exists_eq_smul_globalSectionsToUpperStar_oneGlobalSection π v
+  rw [map_smul]
+  congr 1
+  exact congrArg (fun φ ↦ φ.hom (oneGlobalSection (l := l) S))
+    (globalSectionsToUpperStar_app_comp_germ (WeilCoefficients.{u} l) hσ (adicConstantSheaf l S))
+
+/-- The germ along `σ` of a section transported along `z' ≫ w = π ≫ z` is the transport of its
+germ along `g`, when `σ ≫ z' = z' ≫ g`. -/
+lemma globalSectionsTransport_comp_germ {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
     {π : Spec (.of L) ⟶ S} {σ : Spec (.of L) ⟶ Spec (.of L)} (hσ : σ ≫ π = π)
     {w : Y' ⟶ Y} {g : Y' ⟶ Y'} (hg : g ≫ w = w)
     {z : S ⟶ Y} {z' : Spec (.of L) ⟶ Y'} (hz : z' ≫ w = π ≫ z) (hσz : σ ≫ z' = z' ≫ g)
-    {N : AdicSheaf l Y} (θ : AdicSheaf.unit l Y' ≅ (w)^*ᵃ[l].obj N) {χ : PadicAlgCl l}
-    (hχ : χ ≠ 1)
-    (hθ : (germ (WeilCoefficients.{u} l) hg N.X).hom (globalSectionOfModHom θ.hom) =
-      ULift.up χ • globalSectionOfModHom θ.hom)
-    {n : ℕ} (m : (z)^*ᵃ[l].obj N ⟶ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l S) [Mono m] : False := by
+    (N : Sheaf (Scheme.ProEt.topology Y) (WeilCoefficients.{u} l)) :
+    globalSectionsTransport _ hz (𝟙 ((z)^*[WeilCoefficients.{u} l].obj N)) ≫
+        germ (WeilCoefficients.{u} l) hσ ((z)^*[WeilCoefficients.{u} l].obj N) =
+      germ (WeilCoefficients.{u} l) hg N ≫ globalSectionsTransport _ hz (𝟙 _) := by
   let A := WeilCoefficients.{u} l
   have hσ' : σ ≫ π = π ≫ 𝟙 S := by rw [hσ, Category.comp_id]
   have hg' : g ≫ w = w ≫ 𝟙 Y := by rw [hg, Category.comp_id]
-  -- the transport `Γ(Y', w^* N) ⟶ Γ(Spec L, π^* z^* N)` along `z' ≫ w = π ≫ z`
-  let Te := globalSectionsTransport A hz (𝟙 ((z)^*[A].obj N.X))
-  obtain ⟨e', he'def⟩ : ∃ e', e' = Te.hom (globalSectionOfModHom θ.hom) := ⟨_, rfl⟩
-  -- the germ along `σ` of the transported section is the transport of the germ along `g`
-  have hcomp : Te ≫ germ A hσ ((z)^*[A].obj N.X) = germ A hg N.X ≫ Te := by
-    rw [germ_eq_globalSectionsTransport A hσ hσ', germ_eq_globalSectionsTransport A hg hg']
-    have h₁ : (σ ≫ z') ≫ w = π ≫ (𝟙 S ≫ z) := by
-      rw [Category.assoc, hz, ← Category.assoc, hσ, Category.id_comp]
-    have h₂ : (z' ≫ g) ≫ w = π ≫ (z ≫ 𝟙 Y) := by
-      rw [Category.assoc, hg, hz, Category.comp_id]
-    rw [globalSectionsTransport_comp A hz hσ' h₁, globalSectionsTransport_comp A hg' hz h₂,
-      globalSectionsTransport_congr A h₁ (Category.id_comp z) _ (𝟙 _) ?_,
-      globalSectionsTransport_congr A h₂ (Category.comp_id z) _ (𝟙 _) ?_,
-      globalSectionsTransport_congr_left A _ hσz]
-    · rw [upperStarComp_id_right]
-      simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.isoWhiskerRight_hom,
-        Functor.whiskerRight_app, Functor.leftUnitor_inv_app, Category.assoc, Category.id_comp,
-        Category.comp_id]
-      rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
-      simp
-    · rw [upperStarComp_id_left]
-      simp
-  have he' : (germ A hσ ((z)^*[A].obj N.X)).hom e' = ULift.up χ • e' := by
-    rw [he'def, ← ModuleCat.comp_apply, hcomp, ModuleCat.comp_apply, hθ, map_smul]
-  -- `e'` corresponds to a morphism `v' : ℚ̄_ℓ ⟶ π^* z^* N`
-  obtain ⟨v', hv'⟩ :=
-    (bijective_globalSectionOfModHom ((π)^*ᵃ[l].obj ((z)^*ᵃ[l].obj N))).2 e'
-  -- the germ along `σ` fixes the sections of `π^* ℚ̄_ℓ`, so it has no eigenvector for `χ`
-  have hfix (v : (Sheaf.Γ _ A).obj ((π)^*[A].obj (adicConstantSheaf l S)))
-      (hv : (germ A hσ (adicConstantSheaf l S)).hom v = ULift.up χ • v) : v = 0 := by
-    obtain ⟨c, rfl⟩ := exists_eq_smul_globalSectionsToUpperStar_oneGlobalSection π v
-    have hr : (germ A hσ (adicConstantSheaf l S)).hom
-        (((globalSectionsToUpperStar A π).app (adicConstantSheaf l S)).hom
-          (oneGlobalSection (l := l) S)) =
-        ((globalSectionsToUpperStar A π).app (adicConstantSheaf l S)).hom
-          (oneGlobalSection (l := l) S) := by
-      rw [← ModuleCat.comp_apply, globalSectionsToUpperStar_app_comp_germ]
-    rw [map_smul, hr] at hv
-    have h1 : (ULift.up χ - 1) • c • ((globalSectionsToUpperStar A π).app
-        (adicConstantSheaf l S)).hom (oneGlobalSection S) = 0 := by
-      rw [sub_smul, one_smul, ← hv, sub_self]
-    refine (smul_eq_zero.1 h1).resolve_left fun h ↦ hχ ?_
-    exact congrArg ULift.down (sub_eq_zero.1 h)
-  -- every morphism `z^* N ⟶ ℚ̄_ℓ` kills `v'` after pullback
-  have hA (f : (z)^*ᵃ[l].obj N ⟶ AdicSheaf.unit l S) : v' ≫ (π)^*ᵃ[l].map f = 0 := by
-    apply (bijective_globalSectionOfModHom _).1
-    rw [globalSectionOfModHom_comp, hv', globalSectionOfModHom_zero]
-    refine hfix _ ?_
-    have n := congrArg (fun φ ↦ φ.hom e') (germ_naturality A hσ f.hom)
-    dsimp only at n
-    refine n.trans ?_
-    rw [ModuleCat.comp_apply, he']
-    exact map_smul _ _ _
-  -- hence `v' ≫ π^* m = 0`, and `v' = 0` since `π^* m` is a monomorphism
-  have hB : v' ≫ (π)^*ᵃ[l].map m = 0 := by
-    rw [← Category.comp_id m, ← biproduct.total, Preadditive.comp_sum, Functor.map_sum,
-      Preadditive.comp_sum]
-    refine Finset.sum_eq_zero fun i _ ↦ ?_
-    rw [← Category.assoc, Functor.map_comp, ← Category.assoc, hA, zero_comp]
-  have hv'0 : v' = 0 := (cancel_mono ((π)^*ᵃ[l].map m)).1 (by rw [hB, zero_comp])
-  -- but `e'` is the transport of the section of an isomorphism, hence nonzero
-  have he'0 : e' = 0 := by rw [← hv', hv'0, globalSectionOfModHom_zero]
+  rw [germ_eq_globalSectionsTransport A hσ hσ', germ_eq_globalSectionsTransport A hg hg']
+  have h₁ : (σ ≫ z') ≫ w = π ≫ (𝟙 S ≫ z) := by
+    rw [Category.assoc, hz, ← Category.assoc, hσ, Category.id_comp]
+  have h₂ : (z' ≫ g) ≫ w = π ≫ (z ≫ 𝟙 Y) := by
+    rw [Category.assoc, hg, hz, Category.comp_id]
+  rw [globalSectionsTransport_comp A hz hσ' h₁, globalSectionsTransport_comp A hg' hz h₂,
+    globalSectionsTransport_congr A h₁ (Category.id_comp z) _ (𝟙 _) ?_,
+    globalSectionsTransport_congr A h₂ (Category.comp_id z) _ (𝟙 _) ?_,
+    globalSectionsTransport_congr_left A _ hσz]
+  · rw [upperStarComp_id_right]
+    simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Functor.leftUnitor_inv_app, Category.assoc, Category.id_comp,
+      Category.comp_id]
+    rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+    simp
+  · rw [upperStarComp_id_left]
+    simp
+
+/-- The transport along `z' ≫ w = π ≫ z` of the section of an isomorphism `θ : ℚ̄_ℓ ≅ w^* N`
+to the spectrum of a field is nonzero. -/
+lemma globalSectionsTransport_globalSectionOfModHom_ne_zero {S Y Y' : Scheme.{u}} {L : Type u}
+    [Field L] {π : Spec (.of L) ⟶ S} {w : Y' ⟶ Y} {z : S ⟶ Y} {z' : Spec (.of L) ⟶ Y'}
+    (hz : z' ≫ w = π ≫ z) {N : AdicSheaf l Y} (θ : AdicSheaf.unit l Y' ≅ (w)^*ᵃ[l].obj N) :
+    (globalSectionsTransport _ hz (𝟙 ((z)^*[WeilCoefficients.{u} l].obj N.X))).hom
+      (globalSectionOfModHom θ.hom) ≠ 0 := by
+  intro he0
+  let A := WeilCoefficients.{u} l
   let E := (adicUpperStarUnitIso l z').symm ≪≫ (z')^*ᵃ[l].mapIso θ
   have hres : ((globalSectionsToUpperStar A z').app ((w)^*[A].obj N.X)).hom
       (globalSectionOfModHom θ.hom) = globalSectionOfModHom E.hom :=
     globalSectionsToUpperStar_globalSectionOfModHom z' θ.hom
-  have hinj : Function.Injective ((Sheaf.Γ _ A).map
-      ((upperStarCompIso A hz).hom.app N.X ≫
-        (π)^*[A].map (𝟙 ((z)^*[A].obj N.X)))).hom :=
-    (ConcreteCategory.bijective_of_isIso _).1
+  let T := (Sheaf.Γ _ A).map ((upperStarCompIso A hz).hom.app N.X ≫
+    (π)^*[A].map (𝟙 ((z)^*[A].obj N.X)))
+  have hT : globalSectionsTransport A hz (𝟙 ((z)^*[A].obj N.X)) =
+      (globalSectionsToUpperStar A z').app ((w)^*[A].obj N.X) ≫ T := rfl
+  have hinj : Function.Injective T.hom := (ConcreteCategory.bijective_of_isIso T).1
   have h0 : globalSectionOfModHom E.hom = globalSectionOfModHom 0 := by
     rw [globalSectionOfModHom_zero, ← hres]
     refine hinj ?_
-    rw [map_zero, ← he'0, he'def]
-    rfl
+    rw [map_zero, ← ModuleCat.comp_apply, ← hT]
+    exact he0
   have hφ : E.hom = 0 := (bijective_globalSectionOfModHom _).1 h0
   have hone : 𝟙 (AdicSheaf.unit l (Spec (.of L))) = 0 := by
     rw [← E.hom_inv_id, hφ, zero_comp]
@@ -214,3 +190,82 @@ theorem not_mono_upperStar_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Ty
   have h := globalSectionOfModHom_eq (𝟙 (AdicSheaf.unit l (Spec (.of L))))
   rw [Mod.id_hom', CategoryTheory.Functor.map_id, hone, globalSectionOfModHom_zero] at h
   exact h.symm
+
+/-- **The twisted section.** Let `N` be an `ℓ`-adic sheaf on `Y`, `w : Y' ⟶ Y`, `g : Y' ⟶ Y'`
+with `g ≫ w = w`, and `θ : ℚ̄_ℓ ≅ w^* N` a trivialisation whose section is multiplied by `χ`
+under the germ along `g`. Let `z : S ⟶ Y`, `π : Spec L ⟶ S`, `z' : Spec L ⟶ Y'` with
+`z' ≫ w = π ≫ z`, and `σ : Spec L ⟶ Spec L` with `σ ≫ π = π` and `σ ≫ z' = z' ≫ g`. Then the
+transport of the section of `θ` is a nonzero section of `π^* z^* N` which the germ along `σ`
+multiplies by `χ`. -/
+lemma exists_ne_zero_germ_eq_smul_of_twist {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
+    {π : Spec (.of L) ⟶ S} {σ : Spec (.of L) ⟶ Spec (.of L)} (hσ : σ ≫ π = π)
+    {w : Y' ⟶ Y} {g : Y' ⟶ Y'} (hg : g ≫ w = w)
+    {z : S ⟶ Y} {z' : Spec (.of L) ⟶ Y'} (hz : z' ≫ w = π ≫ z) (hσz : σ ≫ z' = z' ≫ g)
+    {N : AdicSheaf l Y} (θ : AdicSheaf.unit l Y' ≅ (w)^*ᵃ[l].obj N) (χ : PadicAlgCl l)
+    (hθ : (germ (WeilCoefficients.{u} l) hg N.X).hom (globalSectionOfModHom θ.hom) =
+      ULift.up χ • globalSectionOfModHom θ.hom) :
+    ∃ e : (Sheaf.Γ (Scheme.ProEt.topology (Spec (.of L))) (WeilCoefficients.{u} l)).obj
+        ((π)^*[WeilCoefficients.{u} l].obj ((z)^*[WeilCoefficients.{u} l].obj N.X)),
+      e ≠ 0 ∧ (germ (WeilCoefficients.{u} l) hσ _).hom e = ULift.up χ • e := by
+  refine ⟨_, globalSectionsTransport_globalSectionOfModHom_ne_zero hz θ, ?_⟩
+  rw [← ModuleCat.comp_apply, globalSectionsTransport_comp_germ hσ hg hz hσz, ModuleCat.comp_apply,
+    hθ, map_smul]
+
+/-- **A sheaf trivialised with a twisted deck action is not a subquotient of a constant sheaf.**
+Let `N` be an `ℓ`-adic sheaf on `Y`, `w : Y' ⟶ Y`, `g : Y' ⟶ Y'` with `g ≫ w = w`, and
+`θ : ℚ̄_ℓ ≅ w^* N` a trivialisation whose section is multiplied by `χ ≠ 1` under the germ along
+`g`. Let `z : S ⟶ Y`, `π : Spec L ⟶ S` for an algebraically closed field `L`,
+`z' : Spec L ⟶ Y'` with `z' ≫ w = π ≫ z`, and `σ : Spec L ⟶ Spec L` with `σ ≫ π = π` and
+`σ ≫ z' = z' ≫ g`. Then no subsheaf `B` of a constant sheaf `ℚ̄_ℓⁿ` on `S` surjects onto
+`z^* N`.
+
+The germ along `σ` fixes the sections of `π^* ℚ̄_ℓⁿ`, hence those of `π^* B`; they surject onto
+those of `π^* z^* N` (`L` is algebraically closed), so the germ fixes the sections of
+`π^* z^* N`, but it multiplies the transported section of `θ` by `χ`. -/
+theorem not_epi_of_mono_biproduct_unit_of_twist {S Y Y' : Scheme.{u}} {L : Type u} [Field L]
+    [IsAlgClosed L] {π : Spec (.of L) ⟶ S} {σ : Spec (.of L) ⟶ Spec (.of L)} (hσ : σ ≫ π = π)
+    {w : Y' ⟶ Y} {g : Y' ⟶ Y'} (hg : g ≫ w = w)
+    {z : S ⟶ Y} {z' : Spec (.of L) ⟶ Y'} (hz : z' ≫ w = π ≫ z) (hσz : σ ≫ z' = z' ≫ g)
+    {N : AdicSheaf l Y} (θ : AdicSheaf.unit l Y' ≅ (w)^*ᵃ[l].obj N) {χ : PadicAlgCl l}
+    (hχ : χ ≠ 1)
+    (hθ : (germ (WeilCoefficients.{u} l) hg N.X).hom (globalSectionOfModHom θ.hom) =
+      ULift.up χ • globalSectionOfModHom θ.hom)
+    {n : ℕ} {B : AdicSheaf l S} (m : B ⟶ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l S) [Mono m]
+    (p : B ⟶ (z)^*ᵃ[l].obj N) [Epi p] : False := by
+  let A := WeilCoefficients.{u} l
+  obtain ⟨e, he0, he⟩ := exists_ne_zero_germ_eq_smul_of_twist hσ hg hz hσz θ χ hθ
+  -- lift `e` to a section `b` of `π^* B`
+  have hsurj : Function.Surjective ((geometricStalkFunctor l π).map p).hom :=
+    (ModuleCat.epi_iff_surjective _).1 inferInstance
+  obtain ⟨b, hb⟩ : ∃ b : (Sheaf.Γ _ A).obj ((π)^*[A].obj B.X),
+      ((Sheaf.Γ _ A).map ((π)^*[A].map p.hom)).hom b = e := hsurj e
+  -- the germ along `σ` fixes `b`, since it fixes the sections of `π^* ℚ̄_ℓⁿ`
+  have hfixB : (germ A hσ B.X).hom b = b := by
+    obtain ⟨v, hv⟩ :=
+      (bijective_globalSectionOfModHom ((π)^*ᵃ[l].obj B)).2 ((germ A hσ B.X).hom b - b)
+    have hvi (i : Fin n) : v ≫ (π)^*ᵃ[l].map (m ≫ biproduct.π _ i) = 0 := by
+      apply (bijective_globalSectionOfModHom _).1
+      rw [globalSectionOfModHom_comp, hv, globalSectionOfModHom_zero, map_sub]
+      have hn := congrArg (fun φ ↦ φ.hom b) (germ_naturality A hσ (m ≫ biproduct.π _ i).hom)
+      rw [ModuleCat.comp_apply, ModuleCat.comp_apply] at hn
+      rw [sub_eq_zero]
+      exact hn.symm.trans (germ_adicConstantSheaf_apply hσ _)
+    have hvm : v ≫ (π)^*ᵃ[l].map m = 0 := by
+      rw [← Category.comp_id m, ← biproduct.total, Preadditive.comp_sum, Functor.map_sum,
+        Preadditive.comp_sum]
+      refine Finset.sum_eq_zero fun i _ ↦ ?_
+      rw [Functor.map_comp, ← Category.assoc, hvi, zero_comp]
+    have hv0 : v = 0 := (cancel_mono ((π)^*ᵃ[l].map m)).1 (by rw [hvm, zero_comp])
+    rw [← sub_eq_zero, ← hv, hv0, globalSectionOfModHom_zero]
+  -- hence it fixes `e`
+  have hfix : (germ A hσ ((z)^*[A].obj N.X)).hom e = e := by
+    have hn := congrArg (fun φ ↦ φ.hom b) (germ_naturality A hσ p.hom)
+    rw [ModuleCat.comp_apply, ModuleCat.comp_apply, hfixB] at hn
+    rw [← hb]
+    exact hn
+  rw [he] at hfix
+  have h1 : (ULift.up χ - 1) • e = 0 := by rw [sub_smul, one_smul, hfix, sub_self]
+  refine he0 ((smul_eq_zero.1 h1).resolve_left fun h ↦ hχ ?_)
+  exact congrArg ULift.down (sub_eq_zero.1 h)
+
+end AlgebraicGeometry.ProEtale

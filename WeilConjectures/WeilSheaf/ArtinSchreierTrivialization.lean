@@ -127,7 +127,7 @@ theorem affineLine.germ_artinSchreierTrivialization (ψ : AddChar k₀ (PadicAlg
   -- `ĀS^*(ℒ_ψ ⊆ ĀS_* ℚ̄_ℓ)` has the retraction `average ≫ θ`
   have hret : (ĀS)^*ᵃ[l].map ι ≫ affineLine.artinSchreierAverageModHom l ψ ≫ θ.hom = 𝟙 _ := by
     rw [← cancel_epi θ.hom, reassoc_of% hsplit,
-      affineLine.artinSchreierSplitModHom_averageModHom_assoc, Category.comp_id]
+      reassoc_of% (affineLine.artinSchreierSplitModHom_averageModHom (l := l) ψ), Category.comp_id]
   have hinj : Function.Injective
       ((Sheaf.Γ (Scheme.ProEt.topology Ā) (WeilCoefficients.{u} l)).map
         ((ĀS)^*ᵃ[l].map ι).hom).hom := by
