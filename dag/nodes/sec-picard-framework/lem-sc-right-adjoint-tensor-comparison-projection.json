@@ -1,0 +1,111 @@
+{
+ "id": "lem-sc-right-adjoint-tensor-comparison-projection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-right-adjoint-tensor-comparison-natural",
+   "place": "Pinned projection formula isomorphism family",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "projection",
+ "title": "Pinned projection formula isomorphism family",
+ "statement": "For the data of lem-sc-right-adjoint-tensor-comparison-natural (with its hRf hypothesis), there exists a family of projection formula isomorphisms whose inverses are the specified pullback-adjunction mates.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U"
+ },
+ "stmt_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply the unbounded quasi-coherent projection formula for a proper morphism to each K and c(O_Y); identify its canonical map with the displayed mate and invert it.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection formula natural transformation adjunction tensor",
+   "results": "No exact match; component lemmas only.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.homEquiv natural tensorRight",
+   "results": "No exact match for the geometric statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection formula adjunction tensorRight natural",
+   "results": "No exact declaration in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/RightAdjointTensorComparisonProjection.lean",
+  "declaration": "AlgebraicGeometry.exists_rightAdjointTensorComparison_projection",
+  "statement": "theorem exists_rightAdjointTensorComparison_projection\n    {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{w}\n        (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (hRf : ∀ E : schemeDerivedQCohCategory Z,\n      schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj))\n    (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y)))\n    [Functor.Monoidal (derivedPullback f)]\n    (a : derivedPullback f ⊣ schemeDerivedDirectImage f)\n    (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory Z) :\n    ∃ pf : ∀ K : schemeDerivedQCohCategory Y,\n      (schemeDerivedDirectImage f).obj\n          (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅\n        K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj,\n      ∀ K, (pf K).inv = (a.homEquiv _ _)\n          ((Functor.Monoidal.μIso (derivedPullback f) K.obj\n            ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫\n            (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T223417-L-1640913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T223417-L-1640913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonProjection
+import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonComponents
 
 /-! # The pinned projection isomorphisms yield a natural right-adjoint tensor comparison.
 
@@ -71,6 +73,13 @@ theorem rightAdjointTensorComparison_natural
           ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,
             hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
           (ObjectProperty.homMk (pf.hom ≫
-            K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by sorry
+            K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by
+  dsimp
+  obtain ⟨pf, hpf⟩ := exists_rightAdjointTensorComparison_projection f hRf hO a c
+  obtain ⟨τ, hτ⟩ := rightAdjointTensorComparison_components f hRf hO hTensor a c adj pf hpf
+  refine ⟨τ, ?_⟩
+  intro K
+  refine ⟨pf K, hpf K, ?_⟩
+  exact hτ K
 
 end AlgebraicGeometry
