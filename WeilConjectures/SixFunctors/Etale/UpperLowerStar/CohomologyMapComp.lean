@@ -49,7 +49,8 @@ noncomputable def cohomologyMapCompIso (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
 
 /-- **Composition of pullback maps on étale cohomology.** Pulling a class back along
 `g : Y ⟶ Z` and then along `f : X ⟶ Y` is pulling it back along `k = f ≫ g`, up to the
-composition isomorphism `k^* F ≅ f^* g^* F` and an automorphism of the constant sheaf `ℤ`. -/
+composition isomorphism `k^* F ≅ f^* g^* F` and an automorphism of the constant sheaf `ℤ`.
+(blueprint: `lem-weil-pbc-cohomology-pullback-functorial`, composition) -/
 theorem cohomologyMap_cohomologyMap (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z) (hk : f ≫ g = k)
     (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) {n : ℕ} (x : Sheaf.H F n) :
     cohomologyMap f _ n (cohomologyMap g F n x) =
