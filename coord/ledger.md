@@ -7842,3 +7842,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Curve.GenericPointedEtaleExtension (stage 3; reviewer PASS; first push; landing 20261012T135245-L-1673004 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/J3/Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerQuotient (stage 3; reviewer PASS; first push; landing 20261012T135246-L-1673490 (interface); batch 20261012T135212; modules 4; new nodes 3)
 - 13:52 L: merged deliver/J3/Sheaf.AlgebraicGeometry.EtaleSetTerminalCone (stage 3; reviewer PASS; after a return; landing 20261012T135246-L-1673970 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/J3/Sheaf.RingTheory.TensorFiniteTypeLimit (stage 3; reviewer PASS; first push; landing 20261012T135246-L-1674460 (proof); batch 20261012T135212; modules 1; new nodes 0)
