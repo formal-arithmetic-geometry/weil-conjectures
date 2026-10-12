@@ -7649,3 +7649,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:38 L: returned deliver/Z2/Sheaf.AlgebraicGeometry.ConstantGroupScheme (reviewer RETURN: (reviewer X-420c0, head 420c06c7a) H10 (review points 2 and 8): Deliver the forced adaptation of lean/Sheaf/AlgebraicGeo)
 
 - 20:39 L: batch 20261012T120425 bisection test completed
+- 12:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback (stage 3; reviewer PASS; after a return; landing 20261012T124043-L-1149106 (proof); batch 20261012T120425; modules 1; new nodes 0)
