@@ -15,27 +15,41 @@
  ],
  "proof": [
   {
-   "text": "The constant trivialization and connectedness of Y identify the restricted\nsheaf with the locally constant function sheaf valued in F(Y), with restriction of\na global section a corresponding to the constant function a. Put U=W times_V Y,\nwith projections p to W and q to Y, and restrict s to t=p*s. Around any point x of\nU choose an etale neighbourhood T on which t=q*a for some a in F(Y). On the graph\nof q:T to Y, naturality of beta along q and diagonal normalization give value a;\nnaturality along p then gives beta_W(s)(x)=a. Etale covers are surjective on points,\nso such neighbourhoods determine all the values of beta. At the translated point\ng*x, use the same T with its Y-map changed from q to g*q. The same section t is now\nthe restriction of b=F(g inverse)(a), since (g*q)*b=q*a. Naturality and diagonal\nnormalization therefore give beta_W(s)(g*x)=b. This is exactly the action in\nsectionRepresentation, whose scalar restriction does not change underlying values.\nThis argument uses only local constant presentations of sections, not uniqueness of\na chosen trivialization or any equivariance assumption on beta. Empty objects give\na vacuous assertion; zero coefficients and the identity torsor obey the same formula.",
+   "text": "Put U=W times_V Y, t=p_U*s, and let f be beta_U(t) evaluated on the graph of q_U:U to Y. The open fibre O of f through x contains x and has constant value a=f(x). Regard O as an etale V-object T, with maps p:T to W and q:T to Y. Naturality identifies the graph evaluation of p*s with the constant function a. Naturality and diagonal normalization give the same graph evaluation for q*a. Injectivity in ordinaryGraphEvaluation_bijective [lem-weil-pbc-torsor-normalized-graph-evaluation] gives p*s=q*a. This produces the required local presentation using existing graph coordinates, without any new local-presentation theorem.",
    "uses": [
-    "def-weil-pbc-torsor-section-representation",
-    "def-weil-connected-scheme",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-constant-sheaf"
+    "lem-weil-pbc-torsor-normalized-graph-evaluation",
+    "def-weil-pbc-torsor-associated-module",
+    "def-weil-pbc-torsor-section-representation"
    ],
    "elementary": false
+  },
+  {
+   "text": "The proved private helper evaluation_of_local_presentation applies naturality along p and q at the graph of q, and then diagonal normalization at q(y). Pullback.hom_ext and the two projection identities identify the relevant points. Thus beta_W(s)(x)=a. This calculation uses no constant-trivialization hypothesis.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module",
+    "def-weil-pbc-torsor-section-representation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Replace q by q composed with sectionDeck(g), and a by b=F(sectionDeck(g inverse))(a). The deck identity sectionDeck(g) composed with sectionDeck(g inverse)=identity follows from mul_smul and one_smul. Contravariant functoriality therefore gives p*s=q_prime*b. The pullback projection identities show that the new lifted point is sectionAction(g)(x). Apply the proved local-evaluation helper again to obtain beta_W(s)(g*x)=b. By definition of sectionRepresentation, b is rho(g)(a), proving the assertion. Empty W has no x; the open fibre through an existing x is nonempty, and zero coefficients or the trivial group satisfy the same identities.",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module",
+    "def-weil-pbc-torsor-section-representation"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-torsor-associated-module",
   "def-weil-pbc-torsor-section-representation",
-  "def-weil-connected-scheme",
-  "def-weil-pbc-inverse-image",
-  "def-weil-pbc-constant-sheaf"
+  "lem-weil-pbc-torsor-normalized-graph-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 0DV5 (3), 0DV6 and 0A3R, proof identifying the restricted representation; sites.tex Tags 04TR and 04TS (gluing sheaves and mapping property), with module operations as in 0DV5 (3); explicit section-evaluation implementation of the fixed-torsor argument; sites.tex Example constant-sheaf (sheafification); local-section argument, extending from finite coefficients to arbitrary modules already trivialized on this fixed cover",
-  "note": "A strictly lower part of the existing evaluation construction. Complete proof in words is in the Lean docstring; formal proof remains open."
+  "note": "N1 formal proof: local presentation recovered from the injectivity part of the existing normalized graph evaluation theorem; both naturality calculations and inverse deck calculation are proved in Lean. No new node or sorry is introduced. The unit route is retained."
  },
  "mathlib_searches": [
   {
@@ -122,10 +136,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T144108-L-2093819",
-  "kind": "interface",
+  "landing": "20261012T165525-L-2937380",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

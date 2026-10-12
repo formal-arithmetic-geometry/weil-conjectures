@@ -8648,3 +8648,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:55 L: merged deliver/N1/Sheaf.AlgebraicGeometry.AmpleProjPreimage (stage 3; reviewer PASS; first push; landing 20261012T165523-L-2936827 (interface); batch 20261012T165503; modules 3; new nodes 2)
 - 16:55 L: merged deliver/N1/Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension (stage 3; reviewer PASS; first push; landing 20261012T165524-L-2936970 (proof); batch 20261012T165503; modules 1; new nodes 0)
 - 16:55 L: merged deliver/N1/Sheaf.AlgebraicGeometry.ProperCoproduct (stage 3; reviewer PASS; first push; landing 20261012T165524-L-2937225 (proof); batch 20261012T165503; modules 1; new nodes 0)
+- 16:55 L: merged deliver/N1/Sheaf.ConstructibleSheaf.TorsorOrdinaryEvaluationEquivariant (stage 3; reviewer PASS; first push; landing 20261012T165525-L-2937380 (proof); batch 20261012T165503; modules 1; new nodes 0)
