@@ -1,0 +1,157 @@
+{
+ "id": "lem-pur-triangle-retraction-hom-colimit",
+ "kind": "statement",
+ "title": "Third Hom-colimit bijection from a triangle retraction",
+ "statement": "In Situation 05S8 [def-pur-saturated-triangulated-localization], let F:C -> D be exact and T a distinguished triangle [def-weil-triangulated-category]. Supply left-derived values LX and LY for its first two vertices, with cones uX and uY and their retraction/common-stage certificates [def-pc-essentially-constant-pro-diagram]. Fix a distinguished triangle (LX,LY,K,lf,b,c). Let U be distinguished and sigma:U -> T a triangle morphism whose three components belong to S. Let rho:F(U) -> (LX,LY,K,lf,b,c) be a triangle morphism such that the uX cone leg at sigma1 followed by rho1 is the identity of LX, and the uY cone leg at sigma2 followed by rho2 is the identity of LY. Then for every W in D, the map Hom(K,W) -> colim over (S/T.obj3)^op of Hom(F(Zprime),W), sending phi to the class of rho3 followed by phi at the denominator sigma3, is bijective. This statement makes no assertion about a third derived value or a distinguished triangle on a supplied third value.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SC, LF clause, dual of the RF proof"
+ },
+ "stmt_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "def-weil-triangulated-category",
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-pur-triangle-morphism-category-05r9] for the distinguished source triangle U. Its category I of incoming distinguished denominator triangles is cofiltered and its three denominator projections are initial. Compose denominators with the components of sigma to obtain initial projections to the denominator categories of T. Initiality of denominator postcomposition follows from MS2 square completion and MS3 equalization in [def-pur-saturated-triangulated-localization]. Restrict the supplied first two cones along these initial functors by [lem-pur-essential-constant-cofinal-0a1s].",
+   "uses": [
+    "lem-pur-triangle-morphism-category-05r9",
+    "def-pur-saturated-triangulated-localization",
+    "lem-pur-essential-constant-cofinal-0a1s"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
+  },
+  {
+   "text": "For each W, apply Hom(-,W) to the F-images of triangles in I. Their five-term sequences are exact by [def-weil-triangulated-category], and their filtered colimit is exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. The supplied rho gives a morphism from the five-term sequence of the fixed cone (LX,LY,K) to this colimit, by representatives at the identity denominator triangle over U. Triangle-morphism squares give commutativity.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
+  },
+  {
+   "text": "The first and second value comparisons are inverse to the cone Hom-colimit bijections of [lem-pc-essentially-constant-pro-hom-colimit]: the retraction equations make their composites identities. For the shifted positions apply the same comparison to W[-1] and the shift equivalence. No derived shift theorem is required. The outer four comparisons are bijective, so [lem-weil-pbc-five-lemma] makes the middle comparison bijective.",
+   "uses": [
+    "lem-pc-essentially-constant-pro-hom-colimit",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
+  },
+  {
+   "text": "The third vertex projection and postcomposition with sigma3 are initial. Their opposites are final. Mathlib Functor.bijective_colimitTypePrecomp and colimitTypePrecomp_ιColimitType transport the middle bijection to the full third denominator Hom-colimit of T. The identity triangle over U maps to sigma3 and the representative is rho.hom3 followed by phi, exactly the displayed function.",
+   "uses": [
+    "lem-pur-triangle-morphism-category-05r9",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-triangle-morphism-category-05r9",
+  "def-pur-saturated-triangulated-localization",
+  "lem-pur-essential-constant-cofinal-0a1s",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-pc-essentially-constant-pro-hom-colimit",
+  "lem-weil-pbc-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SC, LF clause, dual of the RF proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A fixed distinguished cone of the derived first map represents the Hom colimit of the third denominator pro diagram via a triangle retraction",
+   "results": "Service unavailable: Internal Server Error. Used LeanFinder and direct source searches instead.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Five lemma on filtered colimits of Hom sequences of triangles gives bijection between morphisms from a fixed cone and denominator Hom colimit",
+   "results": "Pretriangulated.Triangle.yoneda_exact1/2/3 and coyoneda_exact1/2/3 in Mathlib.CategoryTheory.Triangulated.Pretriangulated, and Triangulated.Localization.distinguished_cocone_triangle in Mathlib.CategoryTheory.Localization.Triangulated. None identifies the third denominator Hom-colimit from first-vertex and second-vertex retractions.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.colimit|Hom-colimit|Hom colimit|five.lemma in lean/WeilConjectures/CategoryTheory and Mathlib/CategoryTheory/Triangulated; repository search for value_triangle and ThirdValueConstruction",
+   "results": "Mathlib Pretriangulated.lean has the categorical five-lemma for two already distinguished triangles, not this pro-diagram comparison. ThirdValueConstruction.thirdValue_core forgets the fixed cone and second-square equation. DerivedFunctorValueTriangle and its ancestors import the assigned item, so cannot be used. No existing statement retains the supplied triangle retraction.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompletion",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-complete-integral-detailed",
+   "place": "Lemma 05SC LF clause: fixed-cone triangle comparison before transport to the supplied third value",
+   "via": [
+    "lem-pur-derived-functor-triangles-05sc-value-triangle-completion",
+    "lem-pur-derived-functor-triangles-05sc-value-triangle",
+    "lem-pur-derived-functor-triangles-05sc",
+    "lem-pur-left-derived-exact-when-defined"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedFunctorTriangleRetractionHomColimit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedFunctorTriangleRetractionHomColimit.lean",
+  "declaration": "CategoryTheory.Functor.leftDerived_triangle_retraction_homColimit",
+  "statement": "theorem leftDerived_triangle_retraction_homColimit\n    {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]\n    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    [CategoryTheory.IsTriangulated C]\n    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]\n    [CategoryTheory.IsTriangulated D]\n    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]\n    (S : MorphismProperty C)\n    (hS : S.IsSaturatedTriangulatedMultiplicativeSystem)\n    (T : Triangle C) (hT : T ∈ distTriang C)\n    (LX LY : D)\n    (hX : F.IsTriangulatedLeftDerivedValue S hS T.obj₁ LX)\n    (hY : F.IsTriangulatedLeftDerivedValue S hS T.obj₂ LY)\n    (uX : (Functor.const (S.Over ⊤ T.obj₁)).obj LX ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₁ ⋙ Over.forget T.obj₁ ⋙ F)\n    (uY : (Functor.const (S.Over ⊤ T.obj₂)).obj LY ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₂ ⋙ Over.forget T.obj₂ ⋙ F)\n    (huX : ∃ s₀ : S.Over ⊤ T.obj₁, ∃ r : F.obj s₀.left ⟶ LX,\n      uX.app s₀ ≫ r = 𝟙 LX ∧\n        ∀ s : S.Over ⊤ T.obj₁, ∃ t : S.Over ⊤ T.obj₁,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uX.app s)\n    (huY : ∃ s₀ : S.Over ⊤ T.obj₂, ∃ r : F.obj s₀.left ⟶ LY,\n      uY.app s₀ ≫ r = 𝟙 LY ∧\n        ∀ s : S.Over ⊤ T.obj₂, ∃ t : S.Over ⊤ T.obj₂,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uY.app s)\n    (lf : LX ⟶ LY) (K : D) (b : LY ⟶ K)\n    (c : K ⟶ (shiftFunctor D (1 : ℤ)).obj LX)\n    (hK : Triangle.mk lf b c ∈ distTriang D)\n    (U : Triangle C) (hU : U ∈ distTriang C) (sigma : U ⟶ T)\n    (hsigma₁ : S sigma.hom₁) (hsigma₂ : S sigma.hom₂) (hsigma₃ : S sigma.hom₃)\n    (rho : F.mapTriangle.obj U ⟶ Triangle.mk lf b c)\n    (hretract₁ : uX.app (MorphismProperty.Over.mk ⊤ sigma.hom₁ hsigma₁) ≫\n      rho.hom₁ = 𝟙 LX)\n    (hretract₂ : uY.app (MorphismProperty.Over.mk ⊤ sigma.hom₂ hsigma₂) ≫\n      rho.hom₂ = 𝟙 LY) :\n    ∀ W : D, Function.Bijective (fun phi : K ⟶ W ↦\n      ((MorphismProperty.Over.forget S ⊤ T.obj₃ ⋙ Over.forget T.obj₃ ⋙ F).op ⋙\n        yoneda.obj W).ιColimitType\n          (Opposite.op (MorphismProperty.Over.mk ⊤ sigma.hom₃ hsigma₃))\n          (rho.hom₃ ≫ phi))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T225317-L-1808388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T225317-L-1808388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

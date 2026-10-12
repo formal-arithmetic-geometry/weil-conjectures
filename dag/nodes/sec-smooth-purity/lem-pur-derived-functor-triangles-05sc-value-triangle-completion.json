@@ -16,28 +16,61 @@
  ],
  "proof": [
   {
-   "text": "This intermediate statement isolates one strictly smaller part of the construction in Stacks Project, Derived Categories, Lemma 05SC; its proof is the corresponding construction using the listed denominator, triangulated, shift, and essential-constancy results.",
+   "text": "Complete the supplied lf to a distinguished triangle (LX,LY,K,lf,b,c) by TR1. Keep the target retraction stage sY0 supplied by huY. MS2 lifts T.mor1 against sY0. Apply the common-stage clause of huX to the resulting source denominator s to obtain t mapping to both s and the original retraction stage. Define alpha=F(a) followed by rX and fprime=d followed by the lifted map. Cone naturality proves the retraction identity for alpha. The common-stage factorization, hf, and the target retraction identity prove F(fprime) followed by rY equals alpha followed by lf.",
    "uses": [
     "def-pur-saturated-triangulated-localization",
-    "def-weil-triangulated-category",
-    "def-pc-essentially-constant-pro-diagram",
-    "lem-pur-derived-functor-morphisms-05sa",
-    "lem-pur-derived-functor-shift-05su"
+    "def-weil-triangulated-category"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
+  },
+  {
+   "text": "Use [lem-pur-derived-fixed-cone-hom-colimit] for the fixed cone, the refined source denominator t and the fixed target stage sY0. This gives a third denominator sZ, gprime and r with a second-square equation and Hom(K,W) to the third denominator Hom-colimit bijective for every W.",
+   "uses": [
+    "lem-pur-derived-fixed-cone-hom-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-essentially-constant-pro-hom-colimit] to the supplied third cone uZ. Compose its canonical Hom-colimit bijections with those of the fixed cone. The representative equation identifies the composite with precomposition by p=uZ(sZ) followed by r. Surjectivity for W=LZ supplies q with p followed by q the identity. Injectivity for W=K gives q followed by p the identity, so construct e:LZ isomorphic to K with hom p.",
+   "uses": [
+    "lem-pc-essentially-constant-pro-hom-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
+  },
+  {
+   "text": "The second denominator square and hg give lg followed by uZ(sZ)=uY(sY0) followed by F(gprime). Postcompose with r and use the second-square retraction equation and hrY to conclude lg followed by e.hom=b. Set lh=e.hom followed by c. The identities at LX and LY together with e form a triangle isomorphism to the fixed distinguished cone. Transport distinguishedness along it by TR1.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Lemma 05SC, LF clause, dual of the RF proof"
+   }
   }
  ],
  "proof_deps": [
   "def-pur-saturated-triangulated-localization",
   "def-weil-triangulated-category",
-  "def-pc-essentially-constant-pro-diagram",
-  "lem-pur-derived-functor-morphisms-05sa",
-  "lem-pur-derived-functor-shift-05su"
+  "lem-pur-derived-fixed-cone-hom-colimit",
+  "lem-pc-essentially-constant-pro-hom-colimit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05SC"
+  "place": "Lemma 05SC, LF clause, dual of the RF proof"
  },
  "mathlib_searches": [
   {
@@ -113,9 +146,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T194059-L-451258",
+  "landing": "20261012T225317-L-1808388",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
