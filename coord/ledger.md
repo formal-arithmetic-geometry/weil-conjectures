@@ -6360,3 +6360,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/G1/Sheaf.AlgebraicGeometry.DerivedExchangeUnboundedTransport (stage 3; reviewer PASS; first push; landing 20261012T060737-L-2907103 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/G2/Sheaf.AlgebraicGeometry.EtaleOfInfinitesimalRestrictionsProper (stage 3; reviewer PASS; first push; landing 20261012T060737-L-2907256 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:07 L: merged deliver/H1/Sheaf.AlgebraicGeometry.AffineEtaleRestrictionComposition (stage 3; reviewer PASS; first push; landing 20261012T060737-L-2907383 (interface); batch 20261012T060728; modules 3; new nodes 2)
+- 06:07 L: merged deliver/H1/Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality (stage 3; reviewer PASS; first push; landing 20261012T060738-L-2907576 (proof); batch 20261012T060728; modules 1; new nodes 0)
