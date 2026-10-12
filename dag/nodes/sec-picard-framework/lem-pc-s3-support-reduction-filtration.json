@@ -1,0 +1,228 @@
+{
+ "id": "lem-pc-s3-support-reduction-filtration",
+ "kind": "statement",
+ "title": "Coarse filtration by integral ideals and smaller-support factors",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-scheme-conventions] and $F$ a finitely presented $\\mathcal O_X$-module [def-weil-pbc-module-finite-type-presentation, def-weil-sheaf-of-modules-category]. Its support is $\\{x\\mid F_x\\ne0\\}$ [def-weil-pbc-module-stalk]. There is a finite increasing subobject chain $0=c_0\\leq\\cdots\\leq c_m=F$ such that each consecutive quotient $Q_j=\\operatorname{Coker}(c_j\\to c_{j+1})$ satisfies one of two alternatives: (a) there are an integral scheme $Z$ [def-pc-integral-scheme], a closed immersion $i:Z\\to X$ [def-weil-closed-immersion], and a quasi-coherent ideal $I\\subseteq\\mathcal O_Z$ represented by IdealSheafData, with $Q_j\\cong i_*I$ [def-pc-module-pullback]; or (b) $Q_j$ is finitely presented and $\\overline{\\operatorname{Supp}(Q_j)}\\subsetneq\\overline{\\operatorname{Supp}(F)}$. A subobject is an isomorphism class of monomorphisms, and consecutive quotients use the induced inclusions of representatives. The chain need not be strict and length zero is allowed. No filtration is asserted for the factors in alternative (b).",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01YF, coherent.tex, label lemma-coherent-filter, proof before support minimality is applied; Tag 01YE, label lemma-prepare-filter-irreducible"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Finite presentation on a Noetherian scheme gives coherence, quasi-coherence and finite type. Use coherent-kernel-cokernel stability and the closedness of support. Stalk exactness implies support containment for subobjects and quotients; stalk detection makes a module with empty support zero, with the length-zero chain.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If the nonempty closed support S is reducible, express it as the union of two proper closed subsets. Apply the support-union exact sequence. Its coherent submodule and quotient have proper support in S. The two-step subobject chain of F is the desired coarse chain: both quotients are unresolved finitely presented smaller-support factors. No inductive filtration is chosen.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-weil-pbc-coherent-support-union-exact-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For irreducible S, form its reduced induced integral closed subscheme i:Z to X. Its defining ideal J has zero locus S. At the generic point of S, J is the ambient maximal ideal: one inclusion follows from evaluation, and the reverse follows because the closed zero locus of a section containing the generic point contains S. Use the sober scheme and reduced-induced-structure lemmas and the basic-open and ideal-stalk formulas.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-basic-open-function"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A power of J kills F by the support-power-killing lemma. Use the ascending J-adic subobject chain, from J^n F=0 to F. Its quotients Q are coherent, supported in S, and killed by J, by the affine and stalk ideal-product formulas. Retain any Q with proper support as an unresolved factor. For a Q with support equal to S, its generic stalk is killed by the ambient maximal ideal; proceed to the next step. No replacement by a nongood factor and no support-minimality assumption are used.",
+   "uses": [
+    "lem-weil-pbc-coherent-support-power-ideal-kills",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each J-adic quotient Q with full support S, apply the generic-point ideal-inclusion lemma to i:Z to X. It gives a mono from the pushforward of a finite sum of a coherent ideal into Q, isomorphic near the generic point. Closed pushforward and finite-sum stability give a coherent image; the cokernel is coherent. The image is filtered by the first k summands, with each consecutive quotient the pushforward of the ideal. Stalk exactness and the generic-point isomorphism give zero generic stalk for the cokernel, so its support is proper in S. Keep this cokernel unresolved, rather than filtering it by induction.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+    "lem-weil-pbc-immersion-base-change-lft",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-closed-immersion-coherent-equivalence",
+    "lem-weil-pbc-closed-pushforward-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each full-support Q use its image chain followed by its smaller-support cokernel; for a proper-support Q use its one-step chain. Apply the categorical refinement lemma to the J-adic filtration, with predicate: an ideal-pushforward factor or a finitely presented factor with support closure properly contained in S. This predicate is invariant under isomorphism. The resulting chain has precisely the required alternatives. Coherence gives finite presentation for unresolved factors and closed support, so strict support containment agrees with strict containment of closures.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-pc-s3-finite-filtration-refinement",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-type-module-support-closed"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "lem-pc-s3-finite-filtration-refinement",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-closed-immersion-coherent-equivalence",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-coherent-support-union-exact-sequence",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-immersion-base-change-lft",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-sober",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01YF, coherent.tex, label lemma-coherent-filter, proof before support minimality is applied; Tag 01YE, label lemma-prepare-filter-irreducible; S3 formal decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf finite filtration factors integral ideals or smaller closed support",
+   "results": {
+    "t": "2026-10-12T17:23:12Z",
+    "tool": "leansearch",
+    "query": "coherent sheaf finite filtration factors integral ideals or smaller closed support",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent sheaf filtration by integral ideals and coherent quotients with strictly smaller support",
+   "results": {
+    "t": "2026-10-12T17:20:19Z",
+    "tool": "leanfinder",
+    "query": "coherent sheaf filtration by integral ideals and coherent quotients with strictly smaller support",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.Filtration.Stable.exists_pow_smul_eq",
+     "Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge",
+     "Ideal.Filtration.Stable",
+     "Ideal.Filtration",
+     "Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge",
+     "Ideal.Filtration.N",
+     "Ideal.Filtration.Stable.exists_forall_le",
+     "Ideal.Filtration.Stable.bounded_difference"
+    ],
+    "digest": "160361c6c68820d8"
+   },
+   "date": "2026-10-12",
+   "verdict": "No exact match in Mathlib; project source searches found filtrationClosure machinery, used in the categorical proof."
+  },
+  {
+   "tool": "grep",
+   "query": "support.*filtration|filtration.*support",
+   "results": {
+    "t": "2026-10-12T17:23:11Z",
+    "tool": "grep",
+    "query": "support.*filtration|filtration.*support",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-12",
+   "verdict": "No exact match in Mathlib; project source searches found filtrationClosure machinery, used in the categorical proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 01YF, coherent.tex, label lemma-coherent-filter, proof before support minimality is applied; Tag 01YE, label lemma-prepare-filter-irreducible",
+   "via": [
+    "lem-pc-e2-finite-presentation-integral-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationSupportReductionFiltration",
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationSupportReductionFiltration.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finitePresentation_support_reduction_filtration",
+  "statement": "theorem exists_finitePresentation_support_reduction_filtration\n    (X : Scheme.{u}) [IsNoetherian X] (F : X.Modules) [F.IsFinitePresentation] :\n    ∃ (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c),\n      c 0 = ⊥ ∧ c (Fin.last m) = ⊤ ∧\n      ∀ j : Fin m,\n        let Q := cokernel (Subobject.ofLE (c j.castSucc) (c j.succ)\n          (hc j.castSucc_le_succ))\n        (∃ (Z : Scheme.{u}) (i : Z ⟶ X),\n          IsClosedImmersion i ∧ IsIntegral Z ∧\n          ∃ I : Z.IdealSheafData, Nonempty (Q ≅ (pushforward i).obj I.toModules)) ∨\n        (Q.IsFinitePresentation ∧\n          closure {x : X | ¬ Subsingleton (Q.presheaf.stalk x)} ⊂\n            closure {x : X | ¬ Subsingleton (F.presheaf.stalk x)})",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

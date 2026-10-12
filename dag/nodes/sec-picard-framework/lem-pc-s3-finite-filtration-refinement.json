@@ -1,0 +1,157 @@
+{
+ "id": "lem-pc-s3-finite-filtration-refinement",
+ "kind": "statement",
+ "title": "Refinement of finite subobject filtrations",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian] and $P$ a predicate on its objects invariant under isomorphisms. For an object $F$, let $0=c_0\\leq\\cdots\\leq c_m=F$ be a finite chain of subobjects. Here a subobject is an isomorphism class of monomorphisms into $F$, and $c_{j+1}/c_j$ denotes the cokernel of the induced monomorphism between chosen representatives. Suppose each $c_{j+1}/c_j$ either satisfies $P$ or admits a finite subobject chain from zero to itself with all consecutive cokernels satisfying $P$. Then $F$ admits a finite subobject chain from zero to itself with all consecutive cokernels satisfying $P$. Chains need not be strict, and both outer and inner lengths may be zero.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01YF, coherent.tex, label lemma-coherent-filter, proof: induced filtrations and refinement"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Regard the isomorphism-invariant predicate P as an ObjectProperty. Use the proved declarations filtrationClosure, le_filtrationClosure, and the isomorphism and extension closure instances in WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Extensions. The module contains no sorry.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a subobject chain whose quotient objects belong to P.filtrationClosure, induct on the natural chain index. At index zero the underlying bottom object is zero via Subobject.botCoeIsoZero. At the successor index, apply prop_X₂_of_shortExact to the canonical short exact sequence for Subobject.ofLE and its cokernel. At the final index transport through Subobject.underlyingIso of the identity. Apply this first to each inner chain and then to the outer chain.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the constructors of filtrationClosure to construct a Fin-indexed subobject chain. For a zero object use the constant bottom chain of length zero. For of_mono i, map the previous chain by Subobject.map i and append top. Map preserves bottom and order. The underlyingIso of each composite inclusion gives a commuting square of isomorphisms; cokernel.mapIso identifies each old quotient with its mapped quotient. The final quotient is the cokernel of i using the underlyingIso of i and of the identity. Transport P along these isomorphisms. The code proves the needed equality transport and mapped-quotient isomorphisms as private lemmas.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01YF, coherent.tex, label lemma-coherent-filter, proof: induced filtrations and refinement; S3 formal decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite filtration refinement in an abelian category by filtrations of successive quotients",
+   "results": {
+    "t": "2026-10-12T17:20:21Z",
+    "tool": "leansearch",
+    "query": "finite filtration refinement in an abelian category by filtrations of successive quotients",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite filtration in abelian category property closed under extensions",
+   "results": {
+    "t": "2026-10-12T17:10:32Z",
+    "tool": "leanfinder",
+    "query": "finite filtration in abelian category property closed under extensions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions",
+     "CategoryTheory.ObjectProperty.IsSerreClass",
+     "CategoryTheory.ObjectProperty.instIsSerreClassTop",
+     "CategoryTheory.ObjectProperty.instIsMultiplicativeMonoModSerre",
+     "CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsTop",
+     "CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects",
+     "CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsoModSerre",
+     "CategoryTheory.ObjectProperty.isoModSerre"
+    ],
+    "digest": "120d93f032573eaf"
+   },
+   "date": "2026-10-12",
+   "verdict": "No exact match in Mathlib; project source searches found filtrationClosure machinery, used in the categorical proof."
+  },
+  {
+   "tool": "grep",
+   "query": "filtration|devissage",
+   "results": {
+    "t": "2026-10-12T17:20:18Z",
+    "tool": "grep",
+    "query": "filtration|devissage",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-12",
+   "verdict": "No exact match in Mathlib; project source searches found filtrationClosure machinery, used in the categorical proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePresentationIntegralFiltration",
+  "date": "2026-10-13",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-coherent-hi",
+   "place": "Tag 01YF, coherent.tex, label lemma-coherent-filter, proof: induced filtrations and refinement",
+   "via": [
+    "lem-pc-e2-finite-presentation-integral-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteFiltrationRefinement",
+  "file": "lean/Sheaf/CategoryTheory/FiniteFiltrationRefinement.lean",
+  "declaration": "CategoryTheory.finite_filtration_refinement",
+  "statement": "theorem finite_filtration_refinement\n    {C : Type u} [Category.{v} C] [Abelian C] (P : C → Prop)\n    (hP : ∀ (A B : C), Nonempty (A ≅ B) → P A → P B)\n    (F : C) (m : ℕ) (c : Fin (m + 1) → Subobject F) (hc : Monotone c)\n    (hbot : c 0 = ⊥) (htop : c (Fin.last m) = ⊤)\n    (hquot : ∀ j : Fin m,\n      P (cokernel (Subobject.ofLE (c j.castSucc) (c j.succ) (hc j.castSucc_le_succ))) ∨\n      ∃ (n : ℕ)\n        (d : Fin (n + 1) → Subobject\n          (cokernel (Subobject.ofLE (c j.castSucc) (c j.succ)\n            (hc j.castSucc_le_succ)))) (hd : Monotone d),\n        d 0 = ⊥ ∧ d (Fin.last n) = ⊤ ∧\n        ∀ k : Fin n, P (cokernel (Subobject.ofLE (d k.castSucc) (d k.succ)\n          (hd k.castSucc_le_succ)))) :\n    ∃ (n : ℕ) (d : Fin (n + 1) → Subobject F) (hd : Monotone d),\n      d 0 = ⊥ ∧ d (Fin.last n) = ⊤ ∧\n      ∀ k : Fin n, P (cokernel (Subobject.ofLE (d k.castSucc) (d k.succ)\n        (hd k.castSucc_le_succ)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

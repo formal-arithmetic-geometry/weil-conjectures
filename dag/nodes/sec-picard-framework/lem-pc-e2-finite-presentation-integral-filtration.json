@@ -19,113 +19,35 @@
  ],
  "proof": [
   {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. (Preliminaries.) (a) $X$ is locally Noetherian, so an $\\mathcal O_X$-module is coherent iff it is quasi-coherent of finite type [pqf-lem-coherent-ft-locnoeth]; kernels, cokernels and finite direct sums of maps of coherent modules, and quasi-coherent submodules and quotients of a coherent module, are coherent [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](1),(2); in particular the image $\\operatorname{Im}\\varphi=\\operatorname{Ker}(\\mathcal G\\to\\operatorname{Coker}\\varphi)$ of a map $\\varphi:\\mathcal F\\to\\mathcal G$ of coherent modules is a coherent submodule of $\\mathcal G$. The support $\\operatorname{Supp}(\\mathcal F)=\\{x:\\mathcal F_x\\ne0\\}$ of a coherent module is closed [lem-weil-pbc-finite-type-module-support-closed]. (b) For a submodule $\\mathcal F'\\subseteq\\mathcal F$ the stalk map $\\mathcal F'_x\\to\\mathcal F_x$ is injective and $(\\mathcal F/\\mathcal F')_x=\\mathcal F_x/\\mathcal F'_x$ [lem-weil-pbc-module-stalk-exact](1),(3); hence $\\operatorname{Supp}\\mathcal F'$ and $\\operatorname{Supp}(\\mathcal F/\\mathcal F')$ lie in $\\operatorname{Supp}\\mathcal F$. A map of $\\mathcal O_X$-modules bijective on all stalks is an isomorphism [lem-weil-pbc-module-iso-on-stalks]; in particular a module with empty support is $0$, and an injective map $\\varphi$ (injective on every open) induces an isomorphism of its source onto $\\operatorname{Im}\\varphi$, since on stalks it is injective [lem-weil-pbc-module-stalk-exact](1) with image $(\\operatorname{Im}\\varphi)_x$ [lem-weil-pbc-module-stalk-exact](4).",
+   "text": "Let P be the predicate that an O_X-module is isomorphic to the pushforward of a quasi-coherent ideal on an integral closed subscheme. P is invariant under isomorphism by composing witnesses. Let S(G) be the closure of its nonzero-stalk support, regarded as a Closeds X.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use well-founded induction on Closeds X, available for the Noetherian underlying space. The induction assertion for T is: every finitely presented G with S(G) contained in T has a finite P-filtration. Apply the support-reduction filtration lemma to G. Each quotient either satisfies P or is finitely presented with S(Q) strictly below S(G). In the latter case S(Q) is strictly below T by transitivity, so apply the induction hypothesis at S(Q).",
    "uses": [
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-module-iso-on-stalks"
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-pc-s3-support-reduction-filtration"
    ],
    "elementary": false
   },
   {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. (Good modules and extensions.) Call a coherent $\\mathcal O_X$-module $\\mathcal F$ *good* if it has a filtration as in the statement. (a) $0$ is good ($m=0$), and a module $\\mathcal F'$ isomorphic to a good $\\mathcal F$ by $\\psi:\\mathcal F'\\to\\mathcal F$ is good (take the chain $\\psi^{-1}(\\mathcal F_j)$; $\\psi$ induces isomorphisms of the successive quotients). (b) Let $\\mathcal G'\\subseteq\\mathcal F$ be a coherent submodule of a coherent $\\mathcal F$, $\\pi:\\mathcal F\\to\\mathcal G=\\mathcal F/\\mathcal G'$ the quotient map, and suppose $\\mathcal G'$ and $\\mathcal G$ are good, with chains $0=\\mathcal G'_0\\subseteq\\dots\\subseteq\\mathcal G'_a=\\mathcal G'$ and $0=\\mathcal H_0\\subseteq\\dots\\subseteq\\mathcal H_b=\\mathcal G$. Put $\\mathcal F_j=\\mathcal G'_j$ for $j\\le a$ and $\\mathcal F_{a+k}=\\pi^{-1}(\\mathcal H_k)=\\operatorname{Ker}(\\mathcal F\\to\\mathcal G\\to\\mathcal G/\\mathcal H_k)$ for $0\\le k\\le b$; these are coherent (step 1(a)), $\\mathcal F_a=\\operatorname{Ker}\\pi=\\mathcal G'$, $\\mathcal F_{a+b}=\\mathcal F$, and the chain is increasing. The quotients $\\mathcal F_j/\\mathcal F_{j-1}$ for $j\\le a$ are those of $\\mathcal G'$. For $1\\le k\\le b$ the composite $\\rho:\\mathcal F_{a+k}\\xrightarrow{\\pi}\\mathcal H_k\\to\\mathcal H_k/\\mathcal H_{k-1}$ has kernel $\\mathcal F_{a+k-1}$ (sectionwise, by definition of the preimages), so it induces a map $\\bar\\rho:\\mathcal F_{a+k}/\\mathcal F_{a+k-1}\\to\\mathcal H_k/\\mathcal H_{k-1}$, injective on stalks [lem-weil-pbc-module-stalk-exact](2),(3); on stalks $\\pi_x$ is surjective with kernel $\\mathcal G'_x$ [lem-weil-pbc-module-stalk-exact](3) and $(\\mathcal F_{a+k})_x=\\pi_x^{-1}((\\mathcal H_k)_x)$ [lem-weil-pbc-module-stalk-exact](2),(3), so $\\rho_x$ is surjective. Thus $\\bar\\rho$ is bijective on stalks, an isomorphism [lem-weil-pbc-module-iso-on-stalks], and $\\mathcal F_{a+k}/\\mathcal F_{a+k-1}\\cong\\mathcal H_k/\\mathcal H_{k-1}\\cong(i)_*\\mathcal I$ for the corresponding integral closed subscheme and nonzero coherent ideal. Hence $\\mathcal F$ is good.",
+   "text": "Apply finite_filtration_refinement with P and its isomorphism invariance to the coarse chain, using the recursively supplied filtrations for smaller-support factors. This gives the required P-filtration of G. Evaluate the induction assertion at S(F), using reflexive containment, to obtain the unchanged theorem statement.",
    "uses": [
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-module-iso-on-stalks"
+    "lem-pc-s3-finite-filtration-refinement"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. (Noetherian induction.) Let $\\mathcal T$ be the set of closed subsets $Z\\subseteq X$ such that some coherent $\\mathcal F$ with $\\operatorname{Supp}\\mathcal F=Z$ is not good. Suppose $\\mathcal T\\ne\\emptyset$. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] it has a minimal element $Z$; fix a coherent $\\mathcal F$ with $\\operatorname{Supp}\\mathcal F=Z$ that is not good. Every coherent $\\mathcal F'$ with $\\operatorname{Supp}\\mathcal F'\\subsetneq Z$ is good: its support is closed (step 1(a)) and, being strictly smaller than $Z$, not in $\\mathcal T$. $Z\\ne\\emptyset$, since a module with empty support is $0$ (step 1(b)), which is good (step 2(a)).",
-   "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. ($Z$ is irreducible.) If not, then as $Z\\ne\\emptyset$ there are closed $Z_1,Z_2\\subsetneq Z$ with $Z=Z_1\\cup Z_2$ [def-weil-irreducible-components] (closed in $Z$, hence in $X$). By [lem-weil-pbc-coherent-support-union-exact-sequence] (with $Z_2$, $Z_1$ in the roles of $Z$, $Z'$) there is a coherent submodule $\\mathcal G'\\subseteq\\mathcal F$ with $\\operatorname{Supp}\\mathcal G'\\subseteq Z_1$ and $\\operatorname{Supp}(\\mathcal F/\\mathcal G')\\subseteq Z_2$; $\\mathcal F/\\mathcal G'$ is coherent (step 1(a)). Both supports are strictly smaller than $Z$, so $\\mathcal G'$ and $\\mathcal F/\\mathcal G'$ are good (step 3), and $\\mathcal F$ is good by step 2(b): a contradiction. So $Z$ is irreducible.",
-   "uses": [
-    "def-weil-irreducible-components",
-    "lem-weil-pbc-coherent-support-union-exact-sequence"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. (The reduced induced structure on $Z$.) By [lem-weil-pbc-scheme-sober] $Z$ has a generic point $\\xi$, $\\overline{\\{\\xi\\}}=Z$. Let $\\mathcal J=\\mathcal I_Z\\subseteq\\mathcal O_X$, $\\mathcal J(U)=\\{f\\in\\mathcal O_X(U):f(t)=0\\text{ in }\\kappa(t)\\ \\forall t\\in Z\\cap U\\}$, and $i:Z_{\\mathrm{red}}\\to X$ the closed subscheme it cuts out [lem-weil-pbc-reduced-induced-closed-subscheme]: $\\mathcal J$ is a quasi-coherent ideal, $Z_{\\mathrm{red}}$ is reduced and $i(Z_{\\mathrm{red}})=Z$. As $i$ is a homeomorphism onto $Z$ [def-weil-closed-immersion], $Z_{\\mathrm{red}}$ is nonempty and irreducible, hence an integral scheme [def-pc-integral-scheme], and $\\eta=i^{-1}(\\xi)$ is its generic point, with $i(\\eta)=\\xi$. Identify stalks of ideals with ideals of the local rings [lem-weil-pbc-ideal-module-product-stalk](1). For $g\\in\\mathcal O_X(U)$ and $x\\in U$, $g(x)=0$ iff $g_x\\in\\mathfrak m_x$, and $D(g)=\\{x\\in U:g(x)\\ne0\\}$ is open [lem-weil-pbc-basic-open-function](a),(b). (a) $V(\\mathcal J):=\\{x:\\mathcal J_x\\ne\\mathcal O_{X,x}\\}=Z$: for $x\\notin Z$, on $U=X\\setminus Z$ the defining condition is empty, so $1\\in\\mathcal J(U)$ and $\\mathcal J_x=\\mathcal O_{X,x}$; for $x\\in Z$ every $f\\in\\mathcal J(U)$, $x\\in U$, has $f(x)=0$, so $\\mathcal J_x\\subseteq\\mathfrak m_x\\ne\\mathcal O_{X,x}$. (b) $\\mathcal J_\\xi=\\mathfrak m_\\xi$: $\\subseteq$ by (a) with $x=\\xi$; conversely an element of $\\mathfrak m_\\xi$ is a germ $f_\\xi$ with $f\\in\\mathcal O_X(U)$, $\\xi\\in U$, $f(\\xi)=0$; then $U\\setminus D(f)$ is closed in $U$ and contains $\\xi$, hence contains the closure of $\\{\\xi\\}$ in $U$, which is $Z\\cap U$; so $f(t)=0$ for all $t\\in Z\\cap U$, i.e. $f\\in\\mathcal J(U)$ and $f_\\xi\\in\\mathcal J_\\xi$.",
-   "uses": [
-    "lem-weil-pbc-scheme-sober",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-closed-immersion",
-    "def-pc-integral-scheme",
-    "lem-weil-pbc-ideal-module-product-stalk",
-    "lem-weil-pbc-basic-open-function"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. (Reduction to $\\mathcal J\\mathcal F=0$.) For $t\\ge1$ let $\\mathcal J^t\\mathcal F\\subseteq\\mathcal F$ be as in [def-weil-pbc-coherent-formal-module](0), $\\mathcal J^0\\mathcal F=\\mathcal F$. Since $\\operatorname{Supp}\\mathcal F=Z=V(\\mathcal J)$ (step 5(a)), [lem-weil-pbc-coherent-support-power-ideal-kills] gives $n\\ge0$ with $\\mathcal J^n\\mathcal F=0$. Each $\\mathcal J^t$ is a quasi-coherent ideal and $\\mathcal J^t\\mathcal F$ a quasi-coherent submodule of $\\mathcal F$, with $(\\mathcal J^t\\mathcal F)(U)=\\mathcal J(U)^t\\mathcal F(U)$ on affine opens $U$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections](1),(2); so $\\mathcal J^t\\mathcal F$ is coherent (step 1(a)) and $\\mathcal J^{t+1}\\mathcal F\\subseteq\\mathcal J^t\\mathcal F$ (the inclusion holds on affine opens, which form a basis, and both are subsheaves of $\\mathcal F$). Let $\\mathcal Q_t=\\mathcal J^t\\mathcal F/\\mathcal J^{t+1}\\mathcal F$, coherent (step 1(a)), with $\\operatorname{Supp}\\mathcal Q_t\\subseteq Z$ (step 1(b)). On stalks $(\\mathcal J\\mathcal Q_t)_x=\\mathcal J_x(\\mathcal Q_t)_x$ and $(\\mathcal Q_t)_x=\\mathcal J_x^t\\mathcal F_x/\\mathcal J_x^{t+1}\\mathcal F_x$ [lem-weil-pbc-ideal-module-product-stalk](2),(4), [lem-weil-pbc-module-stalk-exact](3), so $(\\mathcal J\\mathcal Q_t)_x=0$ for all $x$ and $\\mathcal J\\mathcal Q_t=0$ (step 1(b)). If every $\\mathcal Q_t$ ($0\\le t<n$) were good, then by descending induction on $t$, starting from $\\mathcal J^n\\mathcal F=0$ (good) and using step 2(b) for $\\mathcal J^{t+1}\\mathcal F\\subseteq\\mathcal J^t\\mathcal F$ with quotient $\\mathcal Q_t$, every $\\mathcal J^t\\mathcal F$ would be good, in particular $\\mathcal F$. So some $\\mathcal Q=\\mathcal Q_t$ is not good; $\\operatorname{Supp}\\mathcal Q\\subseteq Z$, and by step 3 not strictly, so $\\operatorname{Supp}\\mathcal Q=Z$. Replacing $\\mathcal F$ by $\\mathcal Q$ we may assume $\\mathcal J\\mathcal F=0$, keeping $\\operatorname{Supp}\\mathcal F=Z$ and $\\mathcal F$ not good.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-coherent-support-power-ideal-kills",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-ideal-module-product-stalk",
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. (Applying Lemma 01YE.) Now $\\mathfrak m_\\xi\\mathcal F_\\xi=\\mathcal J_\\xi\\mathcal F_\\xi=(\\mathcal J\\mathcal F)_\\xi=0$ (step 5(b), [lem-weil-pbc-ideal-module-product-stalk](2)). By [lem-weil-pbc-coherent-generic-point-ideal-inclusion] applied to the closed immersion $i:Z_{\\mathrm{red}}\\to X$ with $Z_{\\mathrm{red}}$ integral, its generic point $\\eta$, $\\xi=i(\\eta)$ and $\\mathcal F$, there are $r\\ge0$, a coherent ideal $\\mathcal I\\subseteq\\mathcal O_{Z_{\\mathrm{red}}}$, an injective $\\mathcal O_X$-linear $\\alpha:i_*(\\mathcal I^{\\oplus r})\\to\\mathcal F$ and an open $W\\ni\\xi$ with $\\alpha|_W$ an isomorphism; so $\\alpha_\\xi$ is bijective. $Z_{\\mathrm{red}}$ is locally Noetherian, since $i$ is an immersion, hence locally of finite type [lem-weil-pbc-immersion-base-change-lft](2), over the locally Noetherian $X$ [pqf-lem-locnoeth-lft]; so $i_*\\mathcal I$ is a coherent $\\mathcal O_X$-module [lem-weil-pbc-closed-immersion-coherent-equivalence](1). $i_*$ is computed sectionwise, $(i_*\\mathcal G)(V)=\\mathcal G(i^{-1}V)$ [def-pc-module-pullback], so $i_*(\\mathcal I^{\\oplus k})=(i_*\\mathcal I)^{\\oplus k}$ for all $k$, coherent (step 1(a)). As $\\xi\\in Z=\\operatorname{Supp}\\mathcal F$, $0\\ne\\mathcal F_\\xi\\cong(i_*(\\mathcal I^{\\oplus r}))_\\xi\\cong(\\mathcal I_\\eta)^{\\oplus r}$ ([lem-weil-pbc-closed-pushforward-stalks](2); the stalk of a finite direct sum is the direct sum of the stalks, filtered colimits commuting with finite direct sums). Hence $r\\ge1$ and $\\mathcal I_\\eta\\ne0$, so $\\mathcal I\\ne0$.",
-   "uses": [
-    "lem-weil-pbc-ideal-module-product-stalk",
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "def-pc-module-pullback",
-    "lem-weil-pbc-closed-pushforward-stalks"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Translate finite presentation to coherence on the Noetherian X, then carry out the support-minimality, J-adic filtration, generic ideal inclusion, and filtration concatenation argument of Tag 01YF. The delivered statement forgets coherence and nonzero clauses on the resulting subobjects and ideals. The existing module cannot be imported here because it reaches FiniteFreeComplex. (Filtering the image of $\\alpha$; contradiction.) For $0\\le k\\le r$ let $\\beta_k:i_*(\\mathcal I^{\\oplus k})\\to\\mathcal F$ be $\\alpha$ restricted to the first $k$ summands of $(i_*\\mathcal I)^{\\oplus r}$ (step 7), injective on every open, and $\\mathcal E_k=\\operatorname{Im}\\beta_k$, a coherent submodule of $\\mathcal F$ (step 1(a)), with $\\mathcal E_0=0$, $\\mathcal E_{k-1}\\subseteq\\mathcal E_k$, and $\\beta_k:i_*(\\mathcal I^{\\oplus k})\\to\\mathcal E_k$ an isomorphism (step 1(b)) carrying $i_*(\\mathcal I^{\\oplus(k-1)})$ onto $\\mathcal E_{k-1}$. The projection $p:(i_*\\mathcal I)^{\\oplus k}\\to i_*\\mathcal I$ onto the last summand is surjective on every open with kernel $(i_*\\mathcal I)^{\\oplus(k-1)}$; so $p\\circ\\beta_k^{-1}:\\mathcal E_k\\to i_*\\mathcal I$ is an epimorphism with kernel $\\mathcal E_{k-1}$, and the induced map $\\mathcal E_k/\\mathcal E_{k-1}\\to i_*\\mathcal I$ is bijective on stalks [lem-weil-pbc-module-stalk-exact](2),(3), hence an isomorphism (step 1(b)). So $0=\\mathcal E_0\\subseteq\\dots\\subseteq\\mathcal E_r$ is a chain as in the statement (all $Z_j=Z_{\\mathrm{red}}$, $\\mathcal I_j=\\mathcal I\\ne0$, step 7) and $\\mathcal E_r=\\operatorname{Im}\\alpha$ is good. The quotient $\\mathcal Q=\\mathcal F/\\mathcal E_r$ is coherent (step 1(a)), $\\operatorname{Supp}\\mathcal Q\\subseteq Z$ (step 1(b)), and $\\mathcal Q_\\xi=\\mathcal F_\\xi/\\alpha_\\xi((i_*\\mathcal I^{\\oplus r})_\\xi)=0$ since $\\alpha_\\xi$ is bijective [lem-weil-pbc-module-stalk-exact](3),(4); so $\\xi\\notin\\operatorname{Supp}\\mathcal Q$, $\\operatorname{Supp}\\mathcal Q\\subsetneq Z$ and $\\mathcal Q$ is good (step 3). By step 2(b) $\\mathcal F$ is good: a contradiction. Hence $\\mathcal T=\\emptyset$; every coherent $\\mathcal F$ has closed support (step 1(a)) not in $\\mathcal T$, so $\\mathcal F$ is good, which is the statement.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-finite-type-module-support-closed",
-  "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-module-iso-on-stalks",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "def-weil-irreducible-components",
-  "lem-weil-pbc-coherent-support-union-exact-sequence",
-  "lem-weil-pbc-scheme-sober",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "def-weil-closed-immersion",
-  "def-pc-integral-scheme",
-  "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-basic-open-function",
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-coherent-support-power-ideal-kills",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "pqf-lem-locnoeth-lft",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-closed-pushforward-stalks"
+  "lem-pc-s3-finite-filtration-refinement",
+  "lem-pc-s3-support-reduction-filtration",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tag 01YF"
+  "place": "Tag 01YF; S3 implements support induction and finite refinement, leaving the geometric coarse-filtration step open"
  },
  "mathlib_searches": [
   {
@@ -235,9 +157,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T163614-L-2785106",
+  "landing": "20261012T184343-L-4019999",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
