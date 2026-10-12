@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-p1-minimal-graded-presentation-exists",
+ "kind": "statement",
+ "title": "Existence of minimal finite graded free presentations",
+ "statement": "Let $k$ be a field and $S=k[x_0,x_1]$ with standard total-degree grading [def-sc-p1-standard], and set $I=(x_0,x_1)$. Let $N$ be an $S$-module internally graded by $\\mathbf Z$ with $S_nN_j\\subseteq N_{n+j}$, and suppose a finite set of homogeneous elements spans $N$. Then there are a finite graded free $S$-module $F$ with homogeneous basis $e_i$ indexed by $\\operatorname{Fin}(r)$, degrees $d_i\\in\\mathbf Z$, and a degree-zero surjective $S$-linear map $q:F\\to N$ such that $q^{-1}(IN)\\subseteq IF$. These are the data of a minimal graded presentation [def-sc-p1-minimal-graded-presentation], with its target fixed to $N$ and its given grading. No Tor hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "Graded Hilbert syzygy argument, expanded by the standard minimal-presentation construction in step 1 of DAG node lem-sc-p1-graded-nakayama-free; not a quoted blueprint proof."
+ },
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "def-sc-p1-minimal-graded-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Restrict scalars from S=k[x_0,x_1] to k via constant polynomials. In Q=N/IN, every polynomial acts by its constant coefficient. Thus the finite homogeneous generating set gives a finite k-spanning set of Q. Extract a k-basis from these images and retain the homogeneous lifts n_i with their integer degrees d_i. This uses finite-dimensional linear algebra, and also covers the empty basis when Q=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take F=Fin r → S. Its degree-j subgroup consists of tuples whose ith coefficient is homogeneous of degree j-d_i, or zero when j-d_i<0. Coordinatewise homogeneous polynomial decomposition, with degrees translated by d_i, gives an internal direct sum: all translated supports have finite union, and uniqueness follows coordinatewise. Homogeneous multiplication adds degrees. The standard basis e_i lies in degree d_i. Define q(a)=sum_i a_i n_i; the given scalar compatibility proves that q preserves degrees.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sc-p1-graded-nakayama-generation] to the lifted homogeneous basis to see that q is surjective. If q(a) is in IN, independence of the basis modulo I forces every constant coefficient of a_i to be zero. The kernel of constant coefficient is the ideal I=(x_0,x_1), so every a_i lies in I. Expanding a in the finite standard basis gives a in IF, which is minimality. The empty-basis case gives N=0 by the same graded Nakayama theorem.",
+   "uses": [
+    "lem-sc-p1-graded-nakayama-generation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-graded-nakayama-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+  "place": "Graded Hilbert syzygy argument, expanded by the standard minimal-presentation construction in step 1 of DAG node lem-sc-p1-graded-nakayama-free; not a quoted blueprint proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite graded module admits a minimal finite graded free presentation by homogeneous lifts of a basis modulo the irrelevant ideal",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite graded module homogeneous lifts of residue field basis minimal graded free presentation exists",
+   "date": "2026-10-12",
+   "results": "8 hits: GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, Module.Presentation.finsupp_G, instFinitePresentationFinsupp, Module.Presentation.finsupp, Module.Finite.reprₛ, HomogeneousLocalization.Away.span_mk_prod_pow_eq_top, Algebra.Generators.exists_presentation_of_basis_cotangent; no exact minimal graded presentation theorem.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*graded.*presentation|graded.*basis|basis.*graded",
+   "date": "2026-10-12",
+   "results": "0 hits: ; no exact minimal graded presentation theorem.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GradedNakayamaFree",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "step 1 of lem-sc-p1-graded-nakayama-free, minimal graded presentation construction",
+   "via": [
+    "lem-sc-p1-graded-nakayama-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MinimalGradedPresentationExists",
+  "file": "lean/Sheaf/RingTheory/MinimalGradedPresentationExists.lean",
+  "declaration": "MvPolynomial.exists_minimal_graded_presentation",
+  "statement": "theorem exists_minimal_graded_presentation (k : Type u) [Field k] (N : Type u) [AddCommGroup N] [Module (MvPolynomial (Fin 2) k) N] (ℳ : ℤ → AddSubgroup N) (hℳ : DirectSum.IsInternal ℳ) (hsmul : ∀ (n : ℕ) (j : ℤ) (f : MvPolynomial (Fin 2) k) (x : N), f ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℳ j → f • x ∈ ℳ ((n : ℤ) + j)) (hN : ∃ s : Set N, s.Finite ∧ (∀ x ∈ s, SetLike.IsHomogeneousElem ℳ x) ∧ Submodule.span (MvPolynomial (Fin 2) k) s = ⊤) : ∃ (F : ModuleCat.{u} (MvPolynomial (Fin 2) k)) (ℱ : ℤ → AddSubgroup F), DirectSum.IsInternal ℱ ∧ (∀ (n : ℕ) (j : ℤ) (f : MvPolynomial (Fin 2) k) (x : F), f ∈ homogeneousSubmodule (Fin 2) k n → x ∈ ℱ j → f • x ∈ ℱ ((n : ℤ) + j)) ∧ ∃ (r : ℕ) (b : Module.Basis (Fin r) (MvPolynomial (Fin 2) k) F) (d : Fin r → ℤ), (∀ i : Fin r, b i ∈ ℱ (d i)) ∧ ∃ q : F →ₗ[MvPolynomial (Fin 2) k] N, Function.Surjective q ∧ (∀ (j : ℤ) (x : F), x ∈ ℱ j → q x ∈ ℳ j) ∧ (∀ x : F, q x ∈ Ideal.span (Set.range (X : Fin 2 → MvPolynomial (Fin 2) k)) • (⊤ : Submodule (MvPolynomial (Fin 2) k) N) → x ∈ Ideal.span (Set.range (X : Fin 2 → MvPolynomial (Fin 2) k)) • (⊤ : Submodule (MvPolynomial (Fin 2) k) F))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-92dcd",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T130620-L-1309762",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-92dcd",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T130620-L-1309762",
+  "kind": "interface"
+ }
+}
