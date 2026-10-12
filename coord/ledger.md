@@ -9707,3 +9707,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: returned deliver/M1/Sheaf.Algebra.Homology.UpperTruncationStepQuotient (reviewer RETURN: (the landing tools, head fb59ee470) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 22:05 L: returned deliver/W3/Sheaf.AlgebraicGeometry.EtaleHypercohomologyUniformBound (reviewer RETURN: (the landing tools, head c948404da) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 22:05 L: merged deliver/A2/Sheaf.RingTheory.PurelyInseparablePolynomialCover (stage 3; reviewer PASS; first push; landing 20261012T220516-L-1391872 (interface); batch 20261012T220515; modules 2; new nodes 1)
+- 22:05 L: merged deliver/A3/Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingleAux (stage 3; reviewer PASS; first push; landing 20261012T220516-L-1391979 (interface); batch 20261012T220515; modules 4; new nodes 3)

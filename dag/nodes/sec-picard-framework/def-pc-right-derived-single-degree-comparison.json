@@ -1,0 +1,121 @@
+{
+ "id": "def-pc-right-derived-single-degree-comparison",
+ "kind": "definition",
+ "title": "Shifted degree-zero right-derived comparison",
+ "statement": "Let B be a Grothendieck abelian category and C an abelian category, both with derived categories, and let G : B → C be additive and left exact [def-sp-left-exact-additive]. For n ∈ ℕ define a natural isomorphism H^n(RG(A[n])) ≅ G(A) by the single-functor shift isomorphism, RG shift compatibility, the homology shift isomorphism, the existing degree-zero derived identification [lem-sp-derived-functor-single-identification], and R^0G ≅ G. This is an explicit composite of the existing isomorphisms, with no chosen existence witness.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof, remark (1), and single-complex specialization; canonical comparison elaborated by A3."
+ },
+ "stmt_deps": [
+  "def-sp-left-exact-additive",
+  "lem-sp-derived-functor-single-identification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Proof, remark (1), and single-complex specialization; canonical comparison elaborated by A3.",
+  "note": "A3 expansion of the canonical single-complex calculation, using the concrete library isomorphisms. The truncation factorization is proved in Lean; the derived-unit normalization remains to be proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived unit single degree comparison",
+   "results": "Service unavailable (HTTP 500 Internal Server Error); no verdict of absence.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left edge of hypercohomology spectral sequence on a complex concentrated in one degree",
+   "results": "Eight hits on single complexes, single-degree support, and single-complex maps; no matching derived-unit or truncation-edge comparison. Loogle HomologicalComplex.liftCycles returned twelve homological-complex lemmas.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftEdge.*single|single.*leftEdge; rightDerivedFunctorPlusUnit; rightDerivedZeroIsoSelf",
+   "results": "Read PlusSingle.lean, RightDerivedFunctorPlus.lean, RightDerived.lean and SpectralSequence.lean. The degree-zero unit compatibility is already proved by rightDerivedPlusSingleUnitHomology_comp_comparison in Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison and is reused as a proof dependency of the remaining unit lemma. No shifted supported-complex unit normalization or truncation-edge factorization found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor unit compatibility homology shift pure complex",
+   "results": "Second reader: eight hits on homology factors, single-functor homology comparison, exact functor single comparison and the homology shift sequence. None proves the remaining derived-unit normalization.",
+   "date": "2026-10-13",
+   "verdict": "no matching full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans.CommShift\"",
+   "results": "Second reader: twelve hits on CommShift structure and compatibility rules. These support the shift transport in the docstring but do not replace the remaining unit lemma.",
+   "date": "2026-10-13",
+   "verdict": "no matching full statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingleAux",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-euler-characteristic-well-defined",
+   "place": "Single-complex normalization in the fixed-degree hypercohomology comparison",
+   "via": [
+    "lem-pc-hypercohomology-left-edge-single-aux",
+    "lem-pc-hypercohomology-left-edge-single",
+    "lem-pc-hypercohomology-edge-cocycle-canonical",
+    "lem-pc-grothendieck-cocycle-comparison",
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-cohomology-sections-affine-base"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedSingleDegreeComparison",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedSingleDegreeComparison.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedSingleDegreeComparison",
+  "statement": "def rightDerivedSingleDegreeComparison (n : ℕ) :\n    DerivedCategory.Plus.singleFunctor B n ⋙ G.rightDerivedFunctorPlus ⋙\n      DerivedCategory.Plus.homologyFunctor C n ≅ G",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T220516-L-1391979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T220516-L-1391979",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
