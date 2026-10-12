@@ -72,7 +72,6 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback` | 6 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteCechMathlibComparison` | 6 | 1 | proof |
@@ -81,7 +80,6 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients` | 6 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero` | 6 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ConstantRingModuleSheafEquivalence` | 7 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion` | 7 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison` | 7 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation` | 7 | 1 | proof |
 | `Sheaf.Topology.ClosedUnionCohomologyVanishing` | 7 | 1 | proof |
@@ -89,6 +87,8 @@ Not open yet: 42 nodes that wait for stage 1, 2 nodes that wait for a statement 
 | `Sheaf.Topology.ConstantSubsheafFiniteFiltration` | 7 | 1 | proof |
 | `Sheaf.Topology.NoetherianOpenClosedCohomologySequence` | 7 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival` | 7 | 3 | proof |
+| `Sheaf.AlgebraicGeometry.EtaleCechSectionwiseShortExact` | 8 | 1 | proof |
+| `Sheaf.CategoryTheory.InjectiveSheafCechAcyclic` | 8 | 1 | proof |
 | `Sheaf.Topology.FlasqueZariskiAcyclic` | 8 | 1 | proof |
 | `Sheaf.Topology.IrreducibleConstantSections` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology` | 8 | 1 | proof |
