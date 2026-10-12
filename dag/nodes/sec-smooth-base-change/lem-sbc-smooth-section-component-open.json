@@ -1,0 +1,106 @@
+{
+ "id": "lem-sbc-smooth-section-component-open",
+ "kind": "statement",
+ "title": "The component locus of a smooth section is open",
+ "statement": "Let $g:P\\to T$ be a smooth [def-sbc-smooth-morphisms], quasi-compact and quasi-separated morphism of schemes, and let $\\sigma:T\\to P$ satisfy $g\\circ\\sigma=\\mathrm{id}_T$. For $p\\in P$, let $C_p$ be the connected component of $\\sigma(g(p))$ in the subspace $g^{-1}(\\{g(p)\\})$. Then $\\{p\\in P\\mid p\\in C_p\\}$ is open in $P$.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 055R (openness), 055Q (neighbourhood proof), and 055L (component locus)"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [
+  {
+   "text": "Smoothness implies flatness and geometrically reduced fibres. Quasi-compactness and quasi-separatedness, together with local finite presentation, imply finite presentation. Apply the neighbourhood argument of Stacks 055Q locally on the base: descend the morphism, its section and flatness to a noetherian model. The component containing the rational section point is geometrically connected, so its locus commutes with base change.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "On the noetherian model, test the neighbourhood criterion along an irreducible closed subset through a point of the component locus. A trait joining that point to the generic point reduces the criterion to a flat family over a discrete valuation ring with geometrically reduced special fibre. Delete the special-fibre components not meeting the section and retain the connected component of the total space containing it. The resulting connected special fibre implies a connected generic fibre by the connectedness lemma used in Stacks 055Q. Hence the generic point is in the locus. This proves the neighbourhood criterion at each point of the locus, and the union of those neighbourhoods is the locus itself.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "Stacks Project",
+  "place": "Tags 055R (openness), 055Q (neighbourhood proof), and 055L (component locus)",
+  "note": "Source argument translated to Lean by B3; openness remains to be formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism with a section the union of the fibre connected components meeting the section is open",
+   "results": "Algebra.isOpen_etaleLocus; Algebra.isOpen_unramifiedLocus; Algebra.isOpen_smoothLocus; AlgebraicGeometry.Scheme.Cover.fromGlued_open_map; AlgebraicGeometry.Scheme.Cover.isOpenMap_fromGlued; AlgebraicGeometry.Polynomial.isOpen_imageOfDf; AlgebraicGeometry.isOpenMap_of_generalizingMap; AlgebraicGeometry.Scheme.GlueData.isOpen_iff",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "7eb440223394251c"
+  },
+  {
+   "tool": "grep",
+   "query": "connectedComponentIn|of_connectedSpace_of_section",
+   "results": "Mathlib/Analysis/Normed/Algebra/Spectrum.lean; Mathlib/Analysis/Normed/Algebra/Spectrum.lean; Mathlib/Analysis/Normed/Algebra/Spectrum.lean; Mathlib/Analysis/Normed/Algebra/Spectrum.lean; Mathlib/Analysis/Normed/Algebra/Spectrum.lean; Mathlib/Analysis/Normed/Module/Connected.lean; Mathlib/Analysis/Normed/Module/Connected.lean; Mathlib/Analysis/Normed/Module/Connected.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "3af0d68000c78059"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The connected component locus of a section of a smooth finitely presented morphism is open",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Morphisms.Slicing",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-slicing",
+   "place": "Slicing and relative connectedness: the open relative connected component of the section in the base change.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothSectionComponentOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothSectionComponentOpen.lean",
+  "declaration": "AlgebraicGeometry.Smooth.isOpen_section_component",
+  "statement": "theorem Smooth.isOpen_section_component {P T : Scheme.{u}} (g : P ⟶ T) [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) : IsOpen {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))}",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T035647-L-1600045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T035647-L-1600045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

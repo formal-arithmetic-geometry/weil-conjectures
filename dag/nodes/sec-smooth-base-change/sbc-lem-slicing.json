@@ -22,9 +22,23 @@
   "def-sbc-normal-dominant-galois",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the existing Lean pointwise slicing argument: dense separable fibre points give an etale slice; its pullback has a section. Apply lem-sbc-smooth-section-component-geometrically-irreducible to its relative component. Take an affine open around a preimage of the desired point, pass to its open image, and slice a second time to obtain affine source and base with a section and geometrically connected fibres. Shrink to affine neighbourhoods first to meet the quasi-compact and quasi-separated hypotheses. Assemble the pointwise factorizations by choice into the covering indexed by the points of X. These arguments are already proved in this module; the new relative-component proof supplies its last missing ingredient.",
+   "uses": [
+    "lem-sbc-smooth-section-component-geometrically-irreducible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-section-component-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "document": "Stacks Project",
+  "place": "Tag 0EY4; the existing Lean proof in WeilConjectures.AlgebraicGeometry.Morphisms.Slicing",
+  "note": "B3 retained the existing slicing route and reduced the relative-component step to openness."
+ },
  "mathlib_searches": [],
  "mathlib_match": null,
  "status": "unsplit",
@@ -64,5 +78,24 @@
   }
  },
  "chapter": "sec-smooth-base-change",
- "unit": "sk-prop-normal-form"
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.Slicing",
+  "declaration": "AlgebraicGeometry.Smooth.exists_etaleCover_factorization",
+  "statement": "theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] : ∃ (ι : Type u) (U : ι → Scheme.{u}) (p : ∀ i, U i ⟶ X) (V : ι → Scheme.{u}) (q : ∀ i, U i ⟶ V i) (r : ∀ i, V i ⟶ S), (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧ (∀ i, Etale (r i)) ∧ (∀ i, Smooth (q i)) ∧ (∀ i, IsAffine (U i)) ∧ (∀ i, IsAffine (V i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧ (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T035647-L-1600045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

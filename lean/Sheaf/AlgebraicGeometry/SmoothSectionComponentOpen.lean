@@ -1,0 +1,44 @@
+/-
+Copyright (c) 2026. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+
+/-!
+# Openness of the fibre components meeting a smooth section
+
+Source: Stacks Project, Tags 055R and 055Q.
+(blueprint: lem-sbc-smooth-section-component-open)
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+/-- For a smooth, quasi-compact, quasi-separated morphism with a section, the union of
+fibre connected components meeting the section is open (Stacks 055R, using 055Q).
+
+Proof: smoothness gives flatness and geometrically reduced fibres; quasi-compactness and
+quasi-separatedness give finite presentation. Work locally on the base. Descend the finitely
+presented morphism and its section to a noetherian base, retaining flatness. The component
+locus commutes with base change since its component contains a rational point. On the
+noetherian model, test neighbourhoods along irreducible closed subsets through a point of
+the locus. A discrete valuation ring joining the special point to the generic point reduces
+this test to a flat family over a trait with geometrically reduced special fibre. Remove
+the other special-fibre components and retain the total-space component containing the
+section. Connectedness of the special fibre then implies connectedness of the generic fibre
+(Stacks 055Q). Thus the generic point belongs to the locus, proving the neighbourhood
+criterion. Every point of the locus has such a neighbourhood, so the locus is open.
+
+(blueprint: lem-sbc-smooth-section-component-open) -/
+theorem Smooth.isOpen_section_component {P T : Scheme.{u}} (g : P ⟶ T)
+    [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
+    IsOpen {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))} := by sorry
+
+end AlgebraicGeometry

@@ -17,6 +17,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
+import Sheaf.AlgebraicGeometry.SmoothSectionComponentOpen
+
 /-!
 # Slicing a smooth morphism
 
@@ -219,8 +221,72 @@ being smooth, geometrically irreducible. -/
 theorem Smooth.exists_geometricallyIrreducible_of_section {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
     ∃ U : P.Opens, Set.range σ ⊆ U ∧ GeometricallyIrreducible (U.ι ≫ g) ∧
-      ∀ p : P, p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p)) → p ∈ U :=
-  sorry
+      ∀ p : P, p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p)) → p ∈ U := by
+  let U : P.Opens := ⟨{p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))},
+    Smooth.isOpen_section_component g σ hσ⟩
+  have hsec (t : T) : g (σ t) = t := by
+    change (σ ≫ g) t = t
+    rw [hσ]
+    rfl
+  have hσU : Set.range σ ⊆ U := by
+    rintro _ ⟨t, rfl⟩
+    change σ t ∈ connectedComponentIn (g ⁻¹' {g (σ t)}) (σ (g (σ t)))
+    rw [hsec]
+    exact mem_connectedComponentIn (hsec t)
+  let h := U.ι ≫ g
+  let τ : T ⟶ U.toScheme := IsOpenImmersion.lift U.ι σ (by simpa using hσU)
+  have hτ : τ ≫ h = 𝟙 T := by
+    dsimp [h, τ]
+    rw [← Category.assoc, IsOpenImmersion.lift_fac, hσ]
+  have hconnected (t : T) : ConnectedSpace (h.fiber t) := by
+    let j := h.fiberι t ≫ U.ι
+    have hj : Set.range j = connectedComponentIn (g ⁻¹' {t}) (σ t) := by
+      ext p
+      constructor
+      · rintro ⟨y, rfl⟩
+        have ht : h (h.fiberι t y) = t := by
+          rw [← Scheme.Hom.comp_apply, Scheme.Hom.fiber_fac,
+            Scheme.Hom.comp_apply, Scheme.fromSpecResidueField_apply]
+        have hy := (h.fiberι t y).2
+        change U.ι (h.fiberι t y) ∈
+          connectedComponentIn (g ⁻¹' {g (U.ι (h.fiberι t y))})
+            (σ (g (U.ι (h.fiberι t y)))) at hy
+        change g (U.ι (h.fiberι t y)) = t at ht
+        simpa only [ht, j, Scheme.Hom.comp_apply] using hy
+      · intro hp
+        have hpt : g p = t := connectedComponentIn_subset (g ⁻¹' {t}) (σ t) hp
+        have hpU : p ∈ U := by
+          change p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))
+          rwa [hpt]
+        have hz : (⟨p, hpU⟩ : U.toScheme) ∈ Set.range (h.fiberι t) := by
+          rw [h.range_fiberι]
+          exact hpt
+        obtain ⟨y, hy⟩ := hz
+        exact ⟨y, by simp [j, hy]⟩
+    have : ConnectedSpace (connectedComponentIn (g ⁻¹' {t}) (σ t)) :=
+      Subtype.connectedSpace (isConnected_connectedComponentIn_iff.mpr
+        (show σ t ∈ g ⁻¹' {t} from hsec t))
+    exact (j.isEmbedding.toHomeomorph.trans (Homeomorph.setCongr hj)).connectedSpace_iff.mpr
+      inferInstance
+  have hgeo : GeometricallyConnected h := by
+    rw [GeometricallyConnected.iff_geometricallyConnected_fiber]
+    intro t
+    have := hconnected t
+    let s : Spec (T.residueField t) ⟶ h.fiber t :=
+      pullback.lift (T.fromSpecResidueField t ≫ τ) (𝟙 _)
+        (by simp [Category.assoc, hτ])
+    exact GeometricallyConnected.of_connectedSpace_of_section
+      (h.fiberToSpecResidueField t) s (pullback.lift_snd _ _ _)
+  have hirr : GeometricallyIrreducible h := by
+    refine ⟨geometrically_iff_of_isClosedUnderIsomorphisms.mpr fun K _ y ↦ ?_⟩
+    have : GeometricallyConnected h := hgeo
+    have : ConnectedSpace (pullback h y : Scheme.{u}) := inferInstance
+    have : IsLocallyNoetherian (pullback h y : Scheme.{u}) :=
+      LocallyOfFiniteType.isLocallyNoetherian (pullback.snd h y)
+    exact irreducibleSpace_of_isDomain_stalk _ fun z ↦ by
+      have := Smooth.isRegularLocalRing_stalk (pullback.snd h y) z
+      infer_instance
+  exact ⟨U, hσU, hirr, fun p hp ↦ hp⟩
 
 /-- The slicing of a smooth morphism `f` near a point, for `f` quasi-compact and
 quasi-separated; see `AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`. -/
