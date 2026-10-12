@@ -1,20 +1,10 @@
 module
 
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.CategoryTheory.Sites.Sheafification
-public import Mathlib.CategoryTheory.Sites.Abelian
-public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
-public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-public import Mathlib.Algebra.Homology.Additive
-public import Mathlib.CategoryTheory.Sites.LeftExact
-public import Mathlib.Algebra.Category.Grp.Colimits
-public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Grp.AB
-public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-!
 # Higher direct images along a morphism of sites are sheafified cohomology presheaves
@@ -87,6 +77,17 @@ theorem siteHigherDirectImageSheafifiedPresheaf
         (I.isoRightDerivedObj
           (u.sheafPushforwardContinuous AddCommGrpCat.{u} K.toGrothendieck J.toGrothendieck)
             q).inv) := by
-  sorry
+  -- Continuity is already supplied as an instance; retain the covering witnesses.
+  have _ := hcover
+  have _ := hpullback
+  -- The sheafification counit is a natural isomorphism, also on complexes.
+  have : IsIso (NatTrans.mapHomologicalComplex
+      (sheafificationAdjunction K.toGrothendieck AddCommGrpCat.{u}).counit
+      (ComplexShape.up ℕ)) :=
+    (NatIso.mapHomologicalComplex
+      (asIso (sheafificationAdjunction K.toGrothendieck AddCommGrpCat.{u}).counit)
+      (ComplexShape.up ℕ)).isIso_hom
+  -- Homology preserves isomorphisms; the other two factors are inverse isomorphisms.
+  infer_instance
 
 end CategoryTheory

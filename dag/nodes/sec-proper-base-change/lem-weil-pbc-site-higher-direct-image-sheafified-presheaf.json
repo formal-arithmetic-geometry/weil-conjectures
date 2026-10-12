@@ -30,84 +30,51 @@
  ],
  "proof": [
   {
-   "text": "*The functor $f_*$, an injective resolution, and $R^qf_*\\mathcal F$.* By [def-weil-pbc-sites-and-cohomology] (1), (3), $\\textit{Ab}(\\mathcal C)$ and $\\textit{Ab}(\\mathcal D)$ are abelian categories, $\\textit{Ab}(\\mathcal C)$ has enough injectives [lem-weil-pbc-site-sheaves-enough-injectives], and $f_*=u^s$, $(f_*\\mathcal G)(V)=\\mathcal G(u(V))$, $(f_*\\varphi)_V=\\varphi_{u(V)}$, is a functor $\\textit{Ab}(\\mathcal C)\\to\\textit{Ab}(\\mathcal D)$. It is additive ($(f_*(\\varphi+\\psi))_V=\\varphi_{u(V)}+\\psi_{u(V)}$, and finite products of abelian sheaves are computed sectionwise) and preserves kernels: the kernel of $\\varphi:\\mathcal G\\to\\mathcal G'$ in $\\textit{Ab}(\\mathcal C)$ is the sectionwise kernel, and so is the kernel of $f_*\\varphi$ in $\\textit{Ab}(\\mathcal D)$ [lem-weil-pbc-sheafification-exact] (1), and both have sections $\\ker(\\varphi_{u(V)})$ over $V$. So $f_*$ is left exact additive [def-sp-left-exact-additive]. Choose an injective resolution $s:\\mathcal F\\to\\mathcal I^\\bullet$ with $\\mathcal I^q=0$ for $q<0$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1) [def-sp-injective-resolutions]. By definition [def-sp-left-exact-additive], $R^qf_*\\mathcal F=\\mathcal H^q(\\mathcal K^\\bullet)$, the $q$-th cohomology object in $\\textit{Ab}(\\mathcal D)$ of the complex $\\mathcal K^\\bullet=f_*\\mathcal I^\\bullet$; for this resolution $\\mathcal P^q_{\\mathcal F}(V)=H^q(\\mathcal I^\\bullet(u(V)))$ by [def-weil-pbc-sites-and-cohomology] (2).",
+   "text": "Use the given injective resolution I. Mathlib InjectiveResolution.isoRightDerivedObj identifies the homology of the pushed-forward cocomplex with the right derived object. The abelian sheaf categories and enough-injectives instances are supplied by Mathlib; no separate construction of a resolution or degree-zero calculation is required.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-sheafification-exact",
     "def-sp-left-exact-additive",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-sp-injective-resolutions"
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof, first sentence: 'R^if_*F is by definition the ith cohomology sheaf of the complex f_*I^0 -> f_*I^1 -> ...'"
-   }
+   "elementary": false
   },
   {
-   "text": "*The presheaf cohomology of $\\mathcal K^\\bullet$ is $\\mathcal P^q_{\\mathcal F}$.* Let $\\iota:\\textit{Ab}(\\mathcal D)\\to\\textit{PAb}(\\mathcal D)$ be the inclusion into abelian presheaves. $\\textit{PAb}(\\mathcal D)$ is abelian and every evaluation $\\mathrm{ev}_V$ is exact [lem-weil-pbc-abelian-presheaves-evaluation-exact], so by [lem-weil-pbc-exact-functor-complex-cohomology] applied to $\\mathrm{ev}_V$ the $q$-th cohomology presheaf $\\mathcal Q^q=H^q(\\iota\\mathcal K^\\bullet)$ of $\\iota\\mathcal K^\\bullet$ has $\\mathcal Q^q(V)=H^q(\\mathcal K^\\bullet(V))=\\ker(\\mathcal I^q(u(V))\\to\\mathcal I^{q+1}(u(V)))/\\operatorname{im}(\\mathcal I^{q-1}(u(V))\\to\\mathcal I^q(u(V)))$, compatibly with the projections from cycles; for $V'\\to V$ the restriction of $\\mathcal Q^q$ is induced by the restriction of $\\mathcal K^\\bullet$, i.e. by $\\mathcal I^\\bullet(u(V))\\to\\mathcal I^\\bullet(u(V'))$ (naturality of these identifications in $V$). This is exactly the presheaf $\\mathcal P^q_{\\mathcal F}$ of the statement, with the same restriction maps: $\\mathcal Q^q=\\mathcal P^q_{\\mathcal F}$.",
-   "uses": [
-    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof: 'this is obviously equal to Ker(I^i(u(V)) -> I^{i+1}(u(V)))/Im(...) which is equal to H^i(u(V), F)'"
-   }
-  },
-  {
-   "text": "*The canonical map $\\theta$.* Write $Z^q(-)=\\ker d^q$ and $\\pi:Z^q(\\mathcal K^\\bullet)\\to\\mathcal H^q(\\mathcal K^\\bullet)$ for the projection in $\\textit{Ab}(\\mathcal D)$, and $p:Z^q(\\iota\\mathcal K^\\bullet)\\to\\mathcal Q^q$ for the projection in $\\textit{PAb}(\\mathcal D)$. Since $\\iota$ preserves kernels [lem-weil-pbc-sheafification-exact] (1), $Z^q(\\iota\\mathcal K^\\bullet)=\\iota Z^q(\\mathcal K^\\bullet)$. The map $\\iota\\pi$ vanishes on the image of $\\iota\\mathcal K^{q-1}\\to Z^q(\\iota\\mathcal K^\\bullet)$ (it is $\\iota$ of a zero map), so it factors uniquely as $\\iota\\pi=\\theta\\circ p$ with $\\theta:\\mathcal Q^q\\to\\iota\\mathcal H^q(\\mathcal K^\\bullet)=\\iota R^qf_*\\mathcal F$. Sectionwise (step 2) $\\theta_V$ sends the class of a cocycle $s\\in\\mathcal I^q(u(V))=(f_*\\mathcal I^q)(V)$ to $\\pi_V(s)$, the section of the cohomology sheaf it defines: $\\theta$ is the canonical map $\\mathcal P^q_{\\mathcal F}\\to R^qf_*\\mathcal F$ of the statement.",
-   "uses": [
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof (the map from the presheaf of the proof to the cohomology sheaf, left implicit there)"
-   }
-  },
-  {
-   "text": "*Sheafifying: $\\theta$ induces an isomorphism $(\\mathcal P^q_{\\mathcal F})^\\#\\cong R^qf_*\\mathcal F$.* Let $\\#$ be sheafification, left adjoint to $\\iota$ [def-weil-pbc-sheafification], with counit $\\varepsilon:\\#\\iota\\to\\mathrm{id}$, an isomorphism [lem-weil-pbc-presheaf-finite-limits-objectwise] (3). Let $\\theta^\\flat=\\varepsilon_{\\mathcal H^q(\\mathcal K^\\bullet)}\\circ\\#\\theta:(\\mathcal Q^q)^\\#\\to\\mathcal H^q(\\mathcal K^\\bullet)$ be the adjunct of $\\theta$, i.e. the unique morphism with $\\iota\\theta^\\flat\\circ\\eta=\\theta$ for the unit $\\eta:\\mathcal Q^q\\to\\iota(\\mathcal Q^q)^\\#$. Since $\\#$ is exact [lem-weil-pbc-sheafification-exact] (2), [lem-weil-pbc-exact-functor-complex-cohomology] applied to $\\#$ gives an isomorphism $c:\\mathcal H^q(\\#\\iota\\mathcal K^\\bullet)\\to\\#\\mathcal Q^q$ with $c\\circ\\pi_{\\#\\iota\\mathcal K}=\\#p$ under $Z^q(\\#\\iota\\mathcal K^\\bullet)=\\#Z^q(\\iota\\mathcal K^\\bullet)$, and $\\varepsilon_{\\mathcal K^\\bullet}:\\#\\iota\\mathcal K^\\bullet\\to\\mathcal K^\\bullet$ is an isomorphism of complexes (naturality of $\\varepsilon$), so $\\mathcal H^q(\\varepsilon_{\\mathcal K})\\circ c^{-1}:\\#\\mathcal Q^q\\to\\mathcal H^q(\\mathcal K^\\bullet)$ is an isomorphism. It equals $\\theta^\\flat$: both are determined by their composite with $\\#p$, which is an epimorphism ($p$ is one and $\\#$ is exact). Now $\\theta^\\flat\\circ\\#p=\\varepsilon_{\\mathcal H^q}\\circ\\#(\\iota\\pi)=\\pi\\circ\\varepsilon_{Z^q(\\mathcal K)}$ by step 3 and naturality of $\\varepsilon$; and $\\mathcal H^q(\\varepsilon_{\\mathcal K})\\circ c^{-1}\\circ\\#p=\\mathcal H^q(\\varepsilon_{\\mathcal K})\\circ\\pi_{\\#\\iota\\mathcal K}=\\pi\\circ Z^q(\\varepsilon_{\\mathcal K})=\\pi\\circ\\varepsilon_{Z^q(\\mathcal K)}$, the last equality because the inclusion $Z^q(\\mathcal K)\\to\\mathcal K^q$ is a monomorphism and $\\varepsilon$ is natural with respect to it. Hence $\\theta^\\flat$ is an isomorphism: $\\theta=\\iota\\theta^\\flat\\circ\\eta$ identifies $R^qf_*\\mathcal F$ with $(\\mathcal P^q_{\\mathcal F})^\\#$ (step 2: $\\mathcal Q^q=\\mathcal P^q_{\\mathcal F}$).",
+   "text": "The statement already writes the presheaf as the homology of the underlying pushed-forward complex, and its sheafification comparison as the inverse of ShortComplex.mapHomologyIso for presheafToSheaf. Exactness of sheafification supplies this isomorphism. Thus no additional objectwise evaluation or construction of a cocycle comparison is needed for this Lean statement.",
    "uses": [
     "def-weil-pbc-sheafification",
-    "lem-weil-pbc-presheaf-finite-limits-objectwise",
     "lem-weil-pbc-sheafification-exact",
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof: 'By definition of the abelian category structure on O_D-modules this cohomology sheaf is the sheaf associated to the presheaf V -> Ker(f_*I^i(V) -> f_*I^{i+1}(V))/Im(f_*I^{i-1}(V) -> f_*I^i(V))'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Vanishing.* Since $\\theta^\\flat:(\\mathcal P^q_{\\mathcal F})^\\#\\to R^qf_*\\mathcal F$ is an isomorphism (step 4), one of the two objects is zero if and only if the other is.",
+   "text": "Mathlib sheafification_reflective makes the sheafification adjunction counit a natural isomorphism. Apply NatIso.mapHomologicalComplex to its asIso to obtain a natural isomorphism on cochain complexes. Its hom is definitionally NatTrans.mapHomologicalComplex of the counit. Register its IsIso instance locally. Every component is therefore an isomorphism, and the homology functor maps the relevant component to an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The displayed morphism is a composite of the inverse homology-comparison isomorphism, the homology image of the counit isomorphism, and the inverse resolution isomorphism. The composite-isomorphism instance proves the conclusion. This holds in every degree, including zero, and for zero objects.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747), proof, last sentence ('and we win')"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lem-weil-pbc-sheafification-exact",
   "def-sp-left-exact-additive",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
   "def-sp-injective-resolutions",
-  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
   "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-presheaf-finite-limits-objectwise"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 072W (lemma-higher-direct-images, line 747) and its proof, for O_C = Z, O_D = Z (modules = abelian sheaves); steps 3-4 write out the sentence 'by definition of the abelian category structure ... this cohomology sheaf is the sheaf associated to the presheaf'"
+  "place": "Lemma Tag 072W and its proof; Mathlib realization by ShortComplex.mapHomologyIso, sheafification_reflective, NatIso.mapHomologicalComplex, and InjectiveResolution.isoRightDerivedObj (Q2, 2026-10-12)."
  },
  "mathlib_searches": [
   {
@@ -221,5 +188,15 @@
   "group": "N1",
   "result": "fix",
   "note": "Precoverage sites C,D small; continuity hcover/hpullback+IsContinuous; morphism of sites via exact sheafPullback; f_*=sheafPushforwardContinuous; I injective resolution of F; P^q = homology of sheafToPresheaf(f_*I), V↦H^q(I(uV)); conclusion IsIso of canonical (P^q)^#→H^q(f_*I)≅R^qf_*F; vanishing iff derivable. STATEMENT-DISPUTED rejected (R,P were free, statement false)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2805f",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085322-L-33209",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Lean signature and composite-isomorphism proof with the node’s revised route; verified import pruning, unchanged unit route, clean compilation, and only propext, Classical.choice, Quot.sound."
  }
 }
