@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import Sheaf.AlgebraicGeometry.OverPullbackDiagonalClosedImmersion
 
 /-!
 # Separatedness descends to a finite stage
@@ -58,6 +59,26 @@ theorem Scheme.exists_isSeparated_overPullbackMap
     (hsep : IsSeparated (((Over.pullback (c.π.app (op i₀))).map f₀).left)) :
     ∃ (i : I) (hi : i₀ ≤ i),
       IsSeparated (((Over.pullback (D.map (homOfLE hi).op)).map f₀).left) := by
-  sorry
+  have : QuasiCompact f₀.left := quasiCompact_of_compactSpace _
+  have : QuasiSeparated f₀.left := inferInstance
+  have : QuasiSeparated (pullback.snd f₀.left f₀.left) := inferInstance
+  have : CompactSpace ↥(pullback f₀.left f₀.left) := inferInstance
+  have : QuasiSeparatedSpace ↥(pullback f₀.left f₀.left) :=
+    quasiSeparatedSpace_of_quasiSeparated (pullback.snd f₀.left f₀.left)
+  let γ : X₀ ⟶ Over.mk (pullback.snd f₀.left f₀.left ≫ X₀.hom) :=
+    Over.homMk (pullback.diagonal f₀.left) (by simp)
+  have : LocallyOfFiniteType γ.left :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.diagonal f₀.left))
+  have : CompactSpace (Over.mk (pullback.snd f₀.left f₀.left ≫ X₀.hom)).left :=
+    inferInstanceAs (CompactSpace ↥(pullback f₀.left f₀.left))
+  have : QuasiSeparatedSpace (Over.mk (pullback.snd f₀.left f₀.left ≫ X₀.hom)).left :=
+    inferInstanceAs (QuasiSeparatedSpace ↥(pullback f₀.left f₀.left))
+  have hγ : IsClosedImmersion (((Over.pullback (c.π.app (op i₀))).map γ).left) :=
+    (isClosedImmersion_overPullback_diagonal_iff (c.π.app (op i₀)) X₀ Y₀ f₀).mpr hsep
+  obtain ⟨i, hi, hstage⟩ := exists_isClosedImmersion_stage_of_locallyOfFiniteType
+    D c hc i₀ X₀ (Over.mk (pullback.snd f₀.left f₀.left ≫ X₀.hom)) γ hγ
+  exact ⟨i, hi,
+    (isClosedImmersion_overPullback_diagonal_iff (D.map (homOfLE hi).op)
+      X₀ Y₀ f₀).mp hstage⟩
 
 end AlgebraicGeometry

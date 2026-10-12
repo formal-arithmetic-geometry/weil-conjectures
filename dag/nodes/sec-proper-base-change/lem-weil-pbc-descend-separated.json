@@ -46,11 +46,12 @@
    }
   },
   {
-   "text": "Apply the closed-immersion descent lemma (Stacks Tag 01ZP) to $\\Delta_{f_0}$ and the inverse system $(S_i)$. By the canonical base-change identification $(X_0\\times_{Y_0}X_0)\\times_{S_0}S_i\\cong X_i\\times_{Y_i}X_i$, compatible with the two projections and hence with the diagonals, and likewise $(X_0\\times_{Y_0}X_0)\\times_{S_0}S\\cong X\\times_Y X$, its base change is the closed immersion $\\Delta_f$. Therefore at some index $i\\ge0$ the base-changed diagonal $\\Delta_{f_i}:X_i\\to X_i\\times_{Y_i}X_i$ is a closed immersion. By the definition of separatedness, $f_i$ is separated.",
+   "text": "Use [lem-weil-pbc-over-pullback-diagonal-closed-immersion] at the limit to identify the base-changed stage diagonal as a closed immersion. Apply [lem-weil-pbc-descend-closed-immersion] to this diagonal, whose qcqs and locally-finite-type hypotheses are supplied by step 1. Apply [lem-weil-pbc-over-pullback-diagonal-closed-immersion] again at the resulting stage to obtain separatedness. This is the diagonal route of Tag 01ZQ, with the base-change identification proved explicitly in the new module.",
    "uses": [
     "lem-weil-pbc-descend-closed-immersion",
     "def-weil-proper-morphism",
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "lem-weil-pbc-over-pullback-diagonal-closed-immersion"
    ],
    "elementary": false,
    "source": {
@@ -66,12 +67,13 @@
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-descend-closed-immersion",
   "def-pc-fibre-product",
-  "lem-weil-pbc-diagonal-immersion"
+  "lem-weil-pbc-diagonal-immersion",
+  "lem-weil-pbc-over-pullback-diagonal-closed-immersion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma Tag 01ZQ (lemma-descend-separated-finite-presentation), line 1851; the diagonal and qcqs checks are written out"
+  "place": "Tag 01ZQ, original diagonal route implemented in Lean; generic base-change identification explicitly constructed in OverPullbackDiagonalClosedImmersion.lean"
  },
  "mathlib_searches": [
   {
@@ -149,5 +151,15 @@
   "group": "K1",
   "result": "fix",
   "note": "FIX: index universe I : Type w -> Type u (INDEX UNIVERSES, as M1 658c5d95f DescendSurjective); matched directed I (Preorder+IsDirected), D : Iᵒᵖ ⥤ Scheme.{u} with IsAffineHom transitions, Cone+IsLimit limit, i₀ with S₀/X₀/Y₀ qcqs (CompactSpace+QuasiSeparatedSpace), f₀ : X₀ ⟶ Y₀ in Over S₀, f = Over.pullback(c.π) map, IsSeparated hyp, ∃ i ≥ i₀ IsSeparated of Over.pullback(D.map) map; no finiteness hypothesis, as the node says"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T060739-L-2908065",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
