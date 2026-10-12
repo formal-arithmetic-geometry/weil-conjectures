@@ -25,58 +25,48 @@
  ],
  "proof": [
   {
-   "text": "(Degree-zero step, for any short exact sequence.) Let $0\\to A'\\xrightarrow{f'}B'\\xrightarrow{g'}C'\\to0$ be short exact and $u:A'\\to J_A$, $v:C'\\to J_C$ monomorphisms into injective objects. Since $J_A$ is injective and $f'$ is a monomorphism [def-sp-injective-resolutions], there is $\\lambda:B'\\to J_A$ with $\\lambda f'=u$. Put $J_B=J_A\\oplus J_C$, which is injective (a morphism into a biproduct is a pair of morphisms, so extensions can be taken componentwise), $w=(\\lambda,vg'):B'\\to J_B$, and let $\\iota:J_A\\to J_B$, $\\pi:J_B\\to J_C$ be the inclusion and the projection. Then $\\iota u=(\\lambda f',vg'f')=wf'$ because $g'f'=0$, and $\\pi w=vg'$; the row $0\\to J_A\\xrightarrow{\\iota}J_B\\xrightarrow{\\pi}J_C\\to0$ is split exact.",
+   "text": "Extend the degree-zero augmentation of IA along the monomorphism S.f by Injective.factorThru. Form w=(lift,S.g≫IC.ι.f 0). The augmentation squares hold by biproduct extensionality. Apply ShortComplex.mono_τ₂_of_exact_of_mono to this diagram, whose outer vertical maps are the mono augmentations of the two injective resolutions. Thus w is a monomorphism.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 013T, proof Step 2: I_2^n = I_1^n + I_3^n with the maps B^n -> I_2^n built from the outer ones"
-   }
+   "elementary": true
   },
   {
-   "text": "(Kernels and cokernels.) In the situation of Step 1, apply the snake lemma [lem-weil-pbc-snake-lemma-abelian] to the commutative diagram with rows $0\\to A'\\to B'\\to C'\\to0$ and $0\\to J_A\\to J_B\\to J_C\\to0$ and vertical maps $u,w,v$. As $\\operatorname{Ker}u=\\operatorname{Ker}v=0$, exactness at $\\operatorname{Ker}w$ gives $\\operatorname{Ker}w=0$, so $w$ is a monomorphism; the connecting map from $\\operatorname{Ker}v=0$ vanishes, so $\\operatorname{Coker}u\\to\\operatorname{Coker}w$ is a monomorphism, and $\\pi$ epi makes $\\operatorname{Coker}w\\to\\operatorname{Coker}v$ an epimorphism. Hence $0\\to\\operatorname{Coker}u\\to\\operatorname{Coker}w\\to\\operatorname{Coker}v\\to0$ is short exact, and the quotient maps $J_X\\to\\operatorname{Coker}$ commute with $\\iota,\\pi$ and the induced maps.",
+   "text": "Apply the fixed-initial-embedding construction to obtain K, ι, α, β, short exact rows, degree-zero exactness, and e_0 carrying ι^0 to w. The isomorphism e_0 and monomorphy of w imply monomorphy of ι^0.",
    "uses": [
-    "lem-weil-pbc-snake-lemma-abelian"
+    "lem-sp-horseshoe-prescribed-row-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 013T, proof (exactness of the constructed rows)"
-   }
+   "elementary": true
   },
   {
-   "text": "(Induction with the prescribed outer terms.) Put $K_X^{-1}=X$ and $e_X^{-1}=s_X$ for $X=A,C$, and recursively $K_X^n=\\operatorname{Coker}(e_X^{n-1})$ with quotient $p_X^n:I_X^n\\to K_X^n$. Exactness of the prescribed augmented resolutions $0\\to X\\to I_X^0\\to I_X^1\\to\\cdots$ [def-sp-injective-resolutions] says exactly that $d_X^n=e_X^np_X^n$ for a monomorphism $e_X^n:K_X^n\\to I_X^{n+1}$, and all $I_X^n$ are injective. Start with the given sequence $0\\to A\\to B\\to C\\to0$ and $u=s_A$, $v=s_C$: Step 1 gives $I_B^0=I_A^0\\oplus I_C^0$, $s_B=w$, $\\alpha^0=\\iota$, $\\beta^0=\\pi$, and Step 2 a short exact sequence $0\\to K_A^0\\to K_B^0\\to K_C^0\\to0$ with $K_B^0=\\operatorname{Coker}s_B$. Having $0\\to K_A^n\\to K_B^n\\to K_C^n\\to0$, apply Steps 1 and 2 to it with the prescribed monomorphisms $u=e_A^n$, $v=e_C^n$ into the prescribed injectives $I_A^{n+1}$, $I_C^{n+1}$: this gives $I_B^{n+1}=I_A^{n+1}\\oplus I_C^{n+1}$, a monomorphism $e_B^n=w:K_B^n\\to I_B^{n+1}$, $\\alpha^{n+1}=\\iota$, $\\beta^{n+1}=\\pi$, and the next short exact sequence of cokernels $K_X^{n+1}=\\operatorname{Coker}e_X^n$. Set $d_B^n=e_B^np_B^n$. The outer complexes are never changed.",
+   "text": "Each row splits by injectivity of IA^n, using ShortExact.splittingOfInjective. Its isoBinaryBiproduct identifies K^n with IA^n⊕IC^n. Biproducts of injective objects are injective, and injectivity is invariant under isomorphism, so K is degreewise injective. The splitting identities and biproduct extensionality give α^n e_n=inl and β^n=e_n snd.",
    "uses": [
-    "def-sp-injective-resolutions"
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-ses-injective-kernel-splits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 013T, proof Step 2, carried out degree by degree with I_1 and I_3 the given resolutions"
-   }
+   "elementary": true
   },
   {
-   "text": "(Verification.) The squares of Steps 1 and 2 give $\\alpha^{n+1}e_A^n=e_B^n k^n$ and $\\beta^{n+1}e_B^n=e_C^n l^n$, where $k^n,l^n$ are the maps of cokernels, and $k^np_A^n=p_B^n\\alpha^n$, $l^np_B^n=p_C^n\\beta^n$; hence $\\alpha^{n+1}d_A^n=d_B^n\\alpha^n$ and $\\beta^{n+1}d_B^n=d_C^n\\beta^n$, so $\\alpha,\\beta$ are morphisms of complexes, and the degree-zero case is $\\alpha^0s_A=s_Bf$, $\\beta^0s_B=s_Cg$. Since $e_B^n$ is a monomorphism and $p_B^n$ an epimorphism, $\\ker d_B^n=\\ker p_B^n=\\operatorname{im}e_B^{n-1}=\\operatorname{im}d_B^{n-1}$ for $n\\ge1$, $\\ker d_B^0=\\operatorname{im}s_B$ and $s_B$ is a monomorphism; so $0\\to B\\to I_B^0\\to I_B^1\\to\\cdots$ is exact, the $I_B^n$ are injective and zero for $n<0$, and $s_B$ is an injective resolution [def-sp-injective-resolutions]. Each row $0\\to I_A^n\\to I_B^n\\to I_C^n\\to0$ is the split sequence of inclusion and projection.",
+   "text": "Degreewise short exactness gives a short exact sequence of complexes. For n≥1 its homology sequence and vanishing of both outer homologies give H^n(K)=0; in Lean this is ShortExact.exactAt_X₂. Degree-zero exactness together with the mono augmentation gives that ι is a quasi-isomorphism in degree zero, by quasiIsoAt₀_iff and quasiIso_iff_of_zeros. Bundle K and ι as an InjectiveResolution. Retain the augmentation equalities and row witnesses, and supply the degreewise splitting isomorphisms.",
    "uses": [
-    "def-sp-injective-resolutions"
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 013T, proof Step 2 conclusion ('Everything is clear') and parts (2)-(3)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-injective-resolutions",
-  "lem-weil-pbc-snake-lemma-abelian"
+  "lem-sp-horseshoe-prescribed-row-construction",
+  "lem-weil-pbc-ses-injective-kernel-splits",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 013T, proof Step 2 (I_2^n = I_1^n + I_3^n), carried out degree by degree for objects with both outer resolutions held fixed (the dual of the horseshoe lemma)"
+  "by": "agent",
+  "document": "lean/Sheaf/CategoryTheory/Abelian/HorseshoePrescribedResolutions.lean",
+  "place": "Injective.factorThru initial embedding, fixed initial row construction, splittingOfInjective, exactAt_X₂, and degree-zero quasi-isomorphism criterion."
  },
  "mathlib_searches": [
   {
@@ -173,5 +163,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T060801-L-2919222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -6,6 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import Mathlib.Algebra.Homology.HomologySequenceLemmas
+import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Sheaf.CategoryTheory.Abelian.HorseshoePrescribedRows
 
 /-!
 # Horseshoe lemma with prescribed end resolutions
@@ -62,6 +65,62 @@ theorem exists_horseshoe_prescribed_resolutions
           (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact ∧
         ∃ e : IB.cocomplex.X n ≅ IA.cocomplex.X n ⊞ IC.cocomplex.X n,
           α.f n ≫ e.hom = biprod.inl ∧ β.f n = e.hom ≫ biprod.snd := by
-  sorry
+  have := hS.mono_f
+  let lift : S.X₂ ⟶ IA.cocomplex.X 0 := Injective.factorThru (IA.ι.f 0) S.f
+  have hlift : S.f ≫ lift = IA.ι.f 0 := Injective.comp_factorThru _ _
+  let w : S.X₂ ⟶ IA.cocomplex.X 0 ⊞ IC.cocomplex.X 0 :=
+    biprod.lift lift (S.g ≫ IC.ι.f 0)
+  have hwf : S.f ≫ w = IA.ι.f 0 ≫ biprod.inl := by
+    apply biprod.hom_ext <;> simp [w, Category.assoc, hlift, S.zero_assoc]
+  have hwg : w ≫ biprod.snd = S.g ≫ IC.ι.f 0 := by simp [w]
+  let F : S ⟶ ShortComplex.mk
+      (biprod.inl : IA.cocomplex.X 0 ⟶ IA.cocomplex.X 0 ⊞ IC.cocomplex.X 0)
+      biprod.snd (by simp) :=
+    { τ₁ := IA.ι.f 0
+      τ₂ := w
+      τ₃ := IC.ι.f 0
+      comm₁₂ := hwf.symm
+      comm₂₃ := hwg }
+  have hw : Mono w := ShortComplex.mono_τ₂_of_exact_of_mono F hS.exact
+  obtain ⟨K, ι, α, β, hα, hβ, ⟨e₀, he₀⟩, hexact₀, hαβ, hrows⟩ :=
+    exists_horseshoe_prescribed_rows S hS IA IC lift hlift
+  have hmono : Mono (ι.f 0) := by
+    have hm : Mono (ι.f 0 ≫ e₀.hom) := by rw [he₀]; exact hw
+    exact mono_of_mono (ι.f 0) e₀.hom
+  have hses := HomologicalComplex.shortExact_of_degreewise_shortExact
+    (ShortComplex.mk α β hαβ) hrows
+  have hsplit (n : ℕ) :
+      (ShortComplex.mk (α.f n) (β.f n)
+        (by simpa using congrArg (fun f ↦ f.f n) hαβ)).Splitting := by
+    have hr : (ShortComplex.mk (α.f n) (β.f n)
+      (by simpa using congrArg (fun f ↦ f.f n) hαβ)).ShortExact := hrows n
+    exact hr.splittingOfInjective
+  have hinj (n : ℕ) : Injective (K.X n) := by
+    let e := (hsplit n).isoBinaryBiproduct
+    exact Injective.of_iso e.symm inferInstance
+  let IB : InjectiveResolution S.X₂ :=
+    { cocomplex := K
+      injective := hinj
+      ι := ι
+      quasiIso := ⟨fun n ↦ by
+        cases n with
+        | zero =>
+          rw [CochainComplex.quasiIsoAt₀_iff, ShortComplex.quasiIso_iff_of_zeros]
+          · exact (ShortComplex.exact_and_mono_f_iff_of_iso
+              (ShortComplex.isoMk (Iso.refl _) (Iso.refl _) (Iso.refl _)
+                (by simp) (by simp))).2 ⟨hexact₀, hmono⟩
+          all_goals simp
+        | succ n =>
+          rw [quasiIsoAt_iff_exactAt]
+          · exact hses.exactAt_X₂ (n + 1) (IA.cocomplex_exactAt_succ n)
+              (IC.cocomplex_exactAt_succ n)
+          · exact CochainComplex.exactAt_succ_single_obj _ _⟩ }
+  refine ⟨IB, α, β, hα, hβ, hαβ, fun n ↦ ⟨hrows n, ?_⟩⟩
+  refine ⟨(hsplit n).isoBinaryBiproduct, ?_, ?_⟩
+  · apply biprod.hom_ext <;>
+      simp [ShortComplex.Splitting.isoBinaryBiproduct, Category.assoc,
+        (hsplit n).f_r, show α.f n ≫ β.f n = 0 from
+          by simpa using congrArg (fun f ↦ f.f n) hαβ]
+  · simp [ShortComplex.Splitting.isoBinaryBiproduct]
 
 end CategoryTheory.InjectiveResolution
