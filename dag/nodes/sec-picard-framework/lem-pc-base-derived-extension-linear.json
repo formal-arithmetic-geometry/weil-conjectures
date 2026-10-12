@@ -1,0 +1,140 @@
+{
+ "id": "lem-pc-base-derived-extension-linear",
+ "kind": "statement",
+ "title": "Additive derived scalar extension with base scalar compatibility",
+ "statement": "Let R and B be commutative rings, with B an R-algebra [def-weil-module-base-change]. Choose derived categories D(R) and D(B) [def-weil-abstract-derived-category] with common morphism universe and module carriers in a universe containing both rings. Assume the ordinary extension functor is additive. There exist an additive functor L:D(R)\\to D(B) and a counit L\\circ Qh_R\\to Qh_B\\circ (-\\otimes_R B) exhibiting L as the total left derived functor. For every R-complex E, integer i and r\\in R, H^i(L(Qh_R(r\\,id_E))) equals multiplication by the image of r in B on H^i(L(Qh_R(E))).",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Additive derived scalar extension with base scalar compatibility"
+ },
+ "proof": [
+  {
+   "text": "Resolve the restricted R-complexes by K-flat complexes using [lem-pc-kflat-resolution], specialized to ordinary modules on the one-point site. Extension to B sends quasi-isomorphisms of these resolutions to quasi-isomorphisms: this is the fixed-second-factor construction [lem-pc-derived-tensor-second-factor-functor] with second factor B in degree zero. Apply [lem-pur-left-derived-from-kflat-class] to extension on the homotopy category followed by the derived localization. It supplies the functor L, the counit, its left-derived universal property, and computation on K-flat resolutions. These arguments allow unequal ring universes by lifting the coefficient rings to the common module universe and transporting along the canonical equivalences.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On K-flat models ordinary extension preserves sums and transports multiplication by r to multiplication by its image in B. Transport these equalities along the functorial resolution comparison isomorphisms. Additivity and the scalar equation then hold on all derived objects; applying the additive homology functor gives the asserted cohomological scalar equation.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "def-weil-abstract-derived-category",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Additive derived scalar extension with base scalar compatibility"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Total left derived extension of scalars between module derived categories is additive and preserves base ring scalar multiplication",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive derived extension of scalars functor is linear and its cohomology inherits commuting algebra actions",
+   "results": "8 hits: groupCohomologyIsoExt, CategoryTheory.Abelian.Ext.instModule, Rep.standardResolution.extIso, Rep.barResolution.extIso, Algebra.Extension.instModuleH1CotangentOfIsScalarTowerCotangent, Algebra.Extension.instIsScalarTowerH1CotangentOfCotangent, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass_apply, CategoryTheory.ProjectiveResolution.extAddEquivCohomologyClass",
+   "date": "2026-10-12",
+   "verdict": "Related infrastructure; no exact match for this full assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*[Dd]erived.*[Ss]calar|[Dd]erived.*[Tt]ensor",
+   "results": "7 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean, Mathlib/CategoryTheory/Monoidal/Tor.lean",
+   "date": "2026-10-12",
+   "verdict": "Related infrastructure; no exact match for this full assertion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyAction",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08IB local affine reduction in finite duality: Derived tensor cohomology action and ordinary counit comparison; Additive derived scalar extension with base scalar compatibility",
+   "via": [
+    "lem-pc-base-derived-tensor-cohomology-action",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedExtensionLinear",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedExtensionLinear.lean",
+  "declaration": "ModuleCat.exists_baseDerivedExtension_linear",
+  "statement": "theorem exists_baseDerivedExtension_linear [(extendScalars.{_, _, max uR uB v} (algebraMap R B)).Additive] : ∃ (derived : DerivedCategory (ModuleCat.{max uR uB v} R) ⥤ DerivedCategory (ModuleCat.{max uR uB v} B)) (counit : DerivedCategory.Qh ⋙ derived ⟶ (extendScalars.{_, _, max uR uB v} (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), derived.IsLeftDerivedFunctor counit (HomotopyCategory.quasiIso (ModuleCat.{max uR uB v} R) (.up ℤ)) ∧ derived.Additive ∧ ∀ (i : ℤ) (E : CochainComplex (ModuleCat.{max uR uB v} R) ℤ) (r : R), (DerivedCategory.homologyFunctor (ModuleCat.{max uR uB v} B) i).map (derived.map (DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map (r • 𝟙 E)))) = algebraMap R B r • 𝟙 ((DerivedCategory.homologyFunctor (ModuleCat.{max uR uB v} B) i).obj (derived.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj E))))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T144146-L-2107726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T144146-L-2107726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

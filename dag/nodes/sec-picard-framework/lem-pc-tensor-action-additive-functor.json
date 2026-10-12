@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-tensor-action-additive-functor",
+ "kind": "statement",
+ "title": "Tensor algebra action transported by an additive functor",
+ "statement": "Let R be a commutative ring, A and B commutative R-algebras, and E=A\\otimes_R B [def-weil-pbc-module-tensor-product]. Let C be an A-linear preadditive category, K:C\\to Mod(B) an additive functor, and Q an object of C. Assume K((r\\text{ mapped to }A)\\,id_Q)=(r\\text{ mapped to }B)\\,id_{KQ} for every r\\in R. There are an E-module T with carrier in the same universe as KQ and a B-linear isomorphism e:Res_{B\\to E}T\\cong KQ such that e\\circ Res((a\\otimes1)\\,id_T)=K(a\\,id_Q)\\circ e for every a\\in A. Category and ring universes may differ.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-module-base-change",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tensor algebra action transported by an additive functor"
+ },
+ "proof": [
+  {
+   "text": "The additive functor gives a ring map on endomorphisms. Compose with A-scalar multiplication; the hypothesis identifies its restriction to R with B-scalars. All these endomorphisms are B-linear and commute with B-scalars. The algebra tensor universal property gives a ring map E to B-linear endomorphisms. Restrict the evaluation module along this map. Its B-action agrees with the original B-action, so identity maps give e. Its A-action is the original ring map, giving the equation. This is implemented in Lean using Algebra.TensorProduct.lift, Module.compHom and an explicit identity-carrier isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Tensor algebra action transported by an additive functor"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor sends compatible scalar actions to a tensor product algebra module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor sends compatible scalar actions to a tensor product algebra module",
+   "results": "8 hits: TensorProduct.Algebra.module, ModuleCat.MonoidalCategory.tensorObj_isModule, CategoryTheory.tensorLeft_linear, ModuleCat.instMonoidalPreadditive, CategoryTheory.tensoringLeft_linear, ModuleCat.ExtendScalars.map_tmul, TensorProduct.CompatibleSMul, ModuleCat.instMonoidalLinear",
+   "date": "2026-10-12",
+   "verdict": "TensorProduct.Algebra.module provides the underlying construction; not the additive-functor induced action and bundled scalar equation. Proved using the equivalent tensor algebra lift construction."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorProduct.Algebra.module|moduleAux|mapEnd",
+   "results": "17 hits: Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean, Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean, Mathlib/AlgebraicTopology/FundamentalGroupoid/FundamentalGroup.lean, Mathlib/Algebra/Azumaya/Defs.lean, Mathlib/Algebra/Azumaya/Defs.lean, Mathlib/Algebra/Azumaya/Defs.lean, Mathlib/Algebra/Azumaya/Defs.lean, Mathlib/Algebra/Azumaya/Defs.lean",
+   "date": "2026-10-12",
+   "verdict": "Related infrastructure; no exact match for this full assertion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyAction",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 08IB local affine reduction in finite duality: Derived tensor cohomology action and ordinary counit comparison; Tensor algebra action transported by an additive functor",
+   "via": [
+    "lem-pc-base-derived-tensor-cohomology-action",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TensorActionOfAdditiveFunctor",
+  "file": "lean/Sheaf/Algebra/Homology/TensorActionOfAdditiveFunctor.lean",
+  "declaration": "ModuleCat.tensorAction_of_additiveFunctor",
+  "statement": "theorem tensorAction_of_additiveFunctor (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B] {C : Type*} [Category C] [Preadditive C] [CategoryTheory.Linear A C] (K : C ⥤ ModuleCat.{v} B) [K.Additive] (Q : C) (hR : ∀ r : R, K.map (algebraMap R A r • 𝟙 Q) = algebraMap R B r • 𝟙 (K.obj Q)) : ∃ (T : ModuleCat.{v} (A ⊗[R] B)) (e : (restrictScalars (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).obj T ≅ K.obj Q), ∀ a : A, (restrictScalars (Algebra.TensorProduct.includeRight : B →ₐ[R] A ⊗[R] B).toRingHom).map ((Algebra.TensorProduct.includeLeft (S := R) a : A ⊗[R] B) • 𝟙 T) ≫ e.hom = e.hom ≫ K.map (a • 𝟙 Q)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T144146-L-2107726",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T144146-L-2107726",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

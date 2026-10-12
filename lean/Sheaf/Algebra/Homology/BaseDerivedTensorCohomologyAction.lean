@@ -9,9 +9,10 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.RingTheory.TensorProduct.Basic
-import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.Algebra.Homology.BaseDerivedExtensionLinear
+import Sheaf.Algebra.Homology.TensorActionOfAdditiveFunctor
+import Sheaf.Algebra.Homology.BaseDerivedTensorCounitLinear
+import Mathlib.Algebra.Homology.Linear
 
 /-!
 # Derived base tensor cohomology with its coefficient action
@@ -129,6 +130,29 @@ theorem exists_baseDerivedTensorCohomologyAction
       i).hom.app _
       ≫
       HomologicalComplex.homologyMap ordinaryIso.hom i := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  classical
+  obtain ⟨derived, counit, hderived, hadd, hscalar⟩ :=
+    exists_baseDerivedExtension_linear.{uR, uB, max uA v, w} R B
+  let : derived.Additive := hadd
+  let F := (restrictScalars.{max uR uA uB v} (algebraMap R A)).mapHomologicalComplex (.up ℤ)
+  let K (i : ℤ) := F ⋙ HomotopyCategory.quotient _ _ ⋙ DerivedCategory.Qh ⋙ derived ⋙
+    DerivedCategory.homologyFunctor (ModuleCat.{max uR uA uB v} B) i
+  have hR (i : ℤ) (r : R) : (K i).map (algebraMap R A r • 𝟙 Q) =
+      algebraMap R B r • 𝟙 ((K i).obj Q) := by
+    have heq : F.map (algebraMap R A r • 𝟙 Q) = r • 𝟙 (F.obj Q) := by
+      ext j x
+      rfl
+    change (DerivedCategory.homologyFunctor (ModuleCat.{max uR uA uB v} B) i).map
+      (derived.map (DerivedCategory.Qh.map
+        ((HomotopyCategory.quotient _ _).map (F.map (algebraMap R A r • 𝟙 Q))))) = _
+    rw [heq]
+    exact hscalar i (F.obj Q) r
+  have haction := fun i ↦ tensorAction_of_additiveFunctor R A B (K i) Q (hR i)
+  choose cohomology cohomologyIso hsmul using haction
+  obtain ⟨comparison, hcomparison⟩ := exists_baseDerivedTensorCounit_linear R A B Q
+    ordinaryIso ordinaryIso_tmul derived counit cohomology cohomologyIso hsmul
+  exact ⟨derived, counit, hderived, cohomology, cohomologyIso, hsmul,
+    comparison, hcomparison⟩
 
 end ModuleCat
