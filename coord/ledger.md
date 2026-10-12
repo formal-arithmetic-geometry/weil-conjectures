@@ -9132,3 +9132,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:00 L: returned deliver/Q2/Sheaf.CategoryTheory.CartanEilenbergConeFiltration (reviewer RETURN: (reviewer X-7c220, head 7c2209ccf) B2: In both new node JSON files, replace statement = "A strict substatement of lem-sp)
 
 - 03:02 L: (the batch landing, head b923dc739) taken out of the library again by the maintainer: your delivery imports Sheaf.RingTheory.LocalizationResolutionStep and Sheaf.RingTheory.Localiz
+- 19:08 L: returned deliver/E3/Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseData (reviewer RETURN: (reviewer X-939f5, head 939f5d743) D3/C5 (brief points 4–5): SmoothProperQCohData.lean leaves an unnecessary hole: exist)
