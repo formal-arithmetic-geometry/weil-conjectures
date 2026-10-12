@@ -12,6 +12,9 @@ public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Spec
 
+import Sheaf.AlgebraicGeometry.SpreadGenericProductEmbedding
+import Sheaf.RingTheory.FiniteProductFieldImageFactors
+
 /-!
 # Spreading the generic product idempotents
 
@@ -90,4 +93,27 @@ theorem exists_spread_generic_product_domains
           (∀ j, Module.Finite A' (D j) ∧ IsDomain (D j) ∧ IsFractionRing (D j) (L j)) ∧
           letI := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A')
           Nonempty (((B ⊗[A] A') ⧸ nilradical (B ⊗[A] A')) ≃ₐ[A'] (∀ j, D j)) := by
-  sorry
+  obtain ⟨c, A', instRing, instLocAlg, instAlg, instTower, instDomain, instFieldAlg,
+    hc, hfinite, hetale, hfrac, hsurj', instFactors, instFactorTowers, f, hf, hid, hden⟩ :=
+    exists_spread_generic_product_embedding A B K K' r L hsplit c0 hc0 S0 A0 hsurj
+  let := instRing
+  let := instLocAlg
+  let := instAlg
+  let := instTower
+  let := instDomain
+  let := instFieldAlg
+  let := hfrac
+  let := instFactors
+  let := instFactorTowers
+  let := Algebra.TensorProduct.rightAlgebra (R := A) (A := B) (B := A')
+  have : Module.Finite A' (B ⊗[A] A') :=
+    Module.Finite.equiv (Algebra.TensorProduct.commRight A A' B).toLinearEquiv
+  have hbase (j : Fin r) : Function.Injective (algebraMap A' (L j)) := by
+    rw [IsScalarTower.algebraMap_eq A' K' (L j)]
+    exact (RingHom.injective (algebraMap K' (L j))).comp (IsFractionRing.injective A' K')
+  obtain ⟨D, instDRing, instDAlg, instDLAlg, instDLTower, hD, hequiv⟩ :=
+    exists_finite_domain_factors_of_product_embedding A'
+      ((B ⊗[A] A') ⧸ nilradical (B ⊗[A] A')) r L hbase f hf hid hden
+  exact ⟨c, A', instRing, instLocAlg, instAlg, instTower, instDomain, instFieldAlg,
+    hc, hfinite, hetale, hfrac, hsurj', D, instDRing, instDAlg, instDLAlg,
+    instFactors, instDLTower, instFactorTowers, hD, hequiv⟩
