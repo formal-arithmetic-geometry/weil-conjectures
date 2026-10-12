@@ -28,82 +28,52 @@
  ],
  "proof": [
   {
-   "text": "Put $C=\\operatorname{Sym}_A(M)$, an $A$-algebra via the structure map $\\alpha:A\\to C$. By [lem-weil-pbc-finite-projective-standard-free-cover] there are $f_1,\\dots,f_r\\in A$ generating the unit ideal such that for every $i$ the localization $M_{f_i}$ is a finite free $A_{f_i}$-module, say $M_{f_i}\\cong A_{f_i}^{\\oplus n_i}$ with $n_i\\ge0$. Write $1=\\sum_i a_if_i$ with $a_i\\in A$ and put $g_i=\\alpha(f_i)\\in C$; applying the ring homomorphism $\\alpha$ gives $1=\\sum_i\\alpha(a_i)g_i$, so $g_1,\\dots,g_r$ generate the unit ideal of $C$.",
+   "text": "A finite projective A-module M is finitely presented: a splitting of a finite free surjection identifies its kernel with a finitely generated direct summand. This is Mathlib Module.finitePresentation_of_projective. Apply the finite-presentation clause of [lem-weil-pbc-symmetric-algebra-finite-presentation] to obtain that Sym_A(M) is a finitely presented A-algebra.",
    "uses": [
-    "lem-weil-pbc-finite-projective-standard-free-cover"
+    "def-weil-pbc-projective-module",
+    "lem-weil-pbc-symmetric-algebra-finite-presentation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), (3)$\\Rightarrow$(7) (finite projective $\\Rightarrow$ finite locally free, Definition Tag 00NV)"
+    "place": "Algebra, Lemma Tag 00NX (lemma-finite-projective), finite projective modules are finitely presented; Lemma Tag 00DO (lemma-presentation-sym-exterior) for the symmetric-algebra presentation"
    }
   },
   {
-   "text": "Fix $i$ and write $f=f_i$, $g=g_i$, $n=n_i$. The localization $C_g$ of $C$ at the powers of $g=\\alpha(f)$ is, as an $A_f$-algebra, $A_f\\otimes_AC$ [lem-weil-pbc-localization-tensor] (first assertion, with $R=A$ and the $A$-algebra $C$), and by [lem-weil-pbc-symmetric-algebra-base-change] (with $R\\to S$ the map $A\\to A_f$) the $A_f$-algebra $A_f\\otimes_AC$ is isomorphic to $\\operatorname{Sym}_{A_f}(A_f\\otimes_AM)$; finally $A_f\\otimes_AM\\cong M_f$ as $A_f$-modules [lem-weil-pbc-localization-tensor] (second assertion). So $C_g\\cong\\operatorname{Sym}_{A_f}(M_f)$ as $A_f$-algebras, the $A$-algebra structure of $C_g$ being $A\\to C\\to C_g$, which is also $A\\to A_f\\to C_g$ since all the isomorphisms are $A_f$-linear and send $1$ to $1$.",
+   "text": "For any commutative A-algebra B, ideal I with I squared zero, and A-algebra map f:Sym_A(M) -> B/I, restrict f to M using iota. The quotient map B -> B/I is surjective as an A-linear map. Projectivity [def-weil-pbc-projective-module] supplies an A-linear lift g:M -> B of f composed with iota. Extend g to an A-algebra map Sym_A(M) -> B using [lem-weil-pbc-symmetric-algebra-universal-property]. Its composite with the quotient map agrees with f on every iota(m), by the linear lifting equation and SymmetricAlgebra.lift_ι_apply, so the uniqueness clause SymmetricAlgebra.algHom_ext makes the composite equal to f. Mathlib Algebra.FormallySmooth.of_comp_surjective therefore proves formal smoothness.",
    "uses": [
-    "lem-weil-pbc-localization-tensor",
-    "lem-weil-pbc-symmetric-algebra-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0C6F (lemma-tensor-algebra-localization: $\\operatorname{Sym}_A(M)_f=\\operatorname{Sym}_{A_f}(M_f)$) and Lemma Tag 00DK (lemma-tensor-localization)"
-   }
-  },
-  {
-   "text": "An $A_f$-linear isomorphism $u:M_f\\to A_f^{\\oplus n}$ induces an isomorphism of $A_f$-algebras $\\operatorname{Sym}_{A_f}(M_f)\\cong\\operatorname{Sym}_{A_f}(A_f^{\\oplus n})$: by the universal property [lem-weil-pbc-symmetric-algebra-universal-property] $\\iota\\circ u$ and $\\iota\\circ u^{-1}$ extend to $A_f$-algebra maps $U$, $U'$ in the two directions, and $U'\\circ U$ and $U\\circ U'$ agree with the identity on the image of $\\iota$, hence are the identity by the uniqueness clause. By [lem-weil-pbc-symmetric-algebra-free-module-polynomial] $\\operatorname{Sym}_{A_f}(A_f^{\\oplus n})\\cong A_f[x_1,\\dots,x_n]$ as $A_f$-algebras. With the previous step, $C_g\\cong A_f[x_1,\\dots,x_n]$ as $A_f$-algebras, hence as $A$-algebras (both via $A\\to A_f$).",
-   "uses": [
+    "def-weil-pbc-projective-module",
     "lem-weil-pbc-symmetric-algebra-universal-property",
-    "lem-weil-pbc-symmetric-algebra-free-module-polynomial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section Tag 00DM (section-tensor-algebra): $\\operatorname{Sym}$ of a finite free module is a polynomial algebra"
-   }
-  },
-  {
-   "text": "$A\\to C_g$ is smooth. The map $A\\to A$ (the identity) is smooth, being the polynomial ring in $0$ variables [lem-weil-pbc-polynomial-ring-smooth]; hence $A\\to A_f$ is smooth [lem-weil-pbc-smooth-ring-map-principal-localization] (with $R=S=A$ and $g=f$). The map $A_f\\to A_f[x_1,\\dots,x_n]$ is smooth [lem-weil-pbc-polynomial-ring-smooth], so the composite $A\\to A_f\\to A_f[x_1,\\dots,x_n]$ is smooth [lem-weil-pbc-smooth-ring-map-base-change-composition] (2). By the previous step $C_g$ is isomorphic to this $A$-algebra, and smoothness [def-weil-pbc-smooth-ring-map] is invariant under isomorphisms of $A$-algebras (finite presentation, $H_1(L_{-/A})$ and $\\Omega_{-/A}$ are carried along by an isomorphism of $A$-algebras), so $A\\to C_g$ is smooth.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-smooth",
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
     "def-weil-pbc-smooth-ring-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Definition Tag 00T6 and Lemma Tag 00T7 (polynomial algebras are standard smooth, hence smooth), Lemma Tag 00T3 (lemma-localize-smooth), Lemma Tag 00TD (lemma-compose-smooth)"
+    "place": "Algebra, Definition Tag 05CE and Lemma Tag 05CF (lemma-characterize-projective), lifting characterization; Section Tag 00DM, universal property of symmetric algebras; Section Tag 00TI, infinitesimal lifting criterion for formal smoothness"
    }
   },
   {
-   "text": "So $A\\to C_{g_i}$ is smooth for every $i$, and $g_1,\\dots,g_r$ generate the unit ideal of $C$ (first step). By [lem-weil-pbc-smooth-ring-map-local-on-cover] (with $R=A$, $S=C$), $A\\to C=\\operatorname{Sym}_A(M)$ is smooth.",
+   "text": "Combine the finite presentation from step 1 with formal smoothness from step 2 using Algebra.Smooth.mk, the characterization of smoothness [def-weil-pbc-smooth-ring-map]. This proves the original statement with the same independent universes and hypotheses.",
    "uses": [
-    "lem-weil-pbc-smooth-ring-map-local-on-cover"
+    "def-weil-pbc-smooth-ring-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00TC (lemma-locally-smooth)"
+    "place": "Algebra, Definition Tag 00T2 and Lemma Tag 00TN, smoothness characterized by finite presentation and formal smoothness"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "lem-weil-pbc-localization-tensor",
-  "lem-weil-pbc-symmetric-algebra-base-change",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-symmetric-algebra-finite-presentation",
   "lem-weil-pbc-symmetric-algebra-universal-property",
-  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-  "lem-weil-pbc-polynomial-ring-smooth",
-  "lem-weil-pbc-smooth-ring-map-principal-localization",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "def-weil-pbc-smooth-ring-map",
-  "lem-weil-pbc-smooth-ring-map-local-on-cover"
+  "def-weil-pbc-smooth-ring-map"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Route chosen by the worker instead of the recorded source (More on Algebra, Lemma Tag 07M6, whose proof computes NL_{C/A} via Lemma Tag 07EV): smoothness is local on a standard cover of Spec(Sym_A(M)) (Algebra, Lemma Tag 00TC); a finite projective module is free on a standard cover of Spec(A) (Algebra, Lemma Tag 00NX); Sym commutes with localization (Algebra, Lemma Tag 0C6F); Sym of a finite free module is a polynomial algebra (Algebra, Section Tag 00DM), which is smooth (Algebra, Lemma Tag 00T7). Assembled by the agent; each step cites its Stacks place."
+  "place": "P3 stage 3: replace the standard-cover route by the infinitesimal lifting argument. Projectivity lifts the restriction of an algebra map to M through any quotient; the symmetric-algebra universal property extends the linear lift. Algebra.FormallySmooth.of_comp_surjective implements the lifting criterion. Finite presentation comes from Module.finitePresentation_of_projective and the existing symmetric-algebra-finite-presentation node. No blueprint unit statement or realized step is bypassed."
  },
  "mathlib_searches": [
   {
@@ -185,5 +155,15 @@
   "reviewer": "R-sfp",
   "group": "U1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T085319-L-31992",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

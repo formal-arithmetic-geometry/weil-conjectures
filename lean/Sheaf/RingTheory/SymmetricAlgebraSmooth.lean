@@ -7,8 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Smooth.Basic
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
 
 /-!
 # Smoothness of the symmetric algebra of a finite projective module
@@ -47,6 +46,19 @@ Step 5: smoothness is local on the resulting standard cover of the symmetric alg
 theorem smooth_of_finite_projective (A : Type u) [CommRing A]
     (M : Type v) [AddCommGroup M] [Module A M] [Module.Finite A M]
     [Module.Projective A M] : Algebra.Smooth A (SymmetricAlgebra A M) := by
-  sorry
+  -- Use infinitesimal lifting instead of the standard-cover plan above.
+  have hfp : Module.FinitePresentation A M := Module.finitePresentation_of_projective A M
+  have hfin : Algebra.FinitePresentation A (SymmetricAlgebra A M) :=
+    ((generators_and_finitePresentation A M).2 hfp).1
+  refine ⟨?_, hfin⟩
+  apply Algebra.FormallySmooth.of_comp_surjective
+  intro B _ _ I _ f
+  obtain ⟨g, hg⟩ := Module.projective_lifting_property
+    (Ideal.Quotient.mkₐ A I).toLinearMap (f.toLinearMap.comp (ι A M))
+    Ideal.Quotient.mk_surjective
+  refine ⟨lift g, ?_⟩
+  apply algHom_ext
+  ext m
+  simpa using LinearMap.congr_fun hg m
 
 end SymmetricAlgebra
