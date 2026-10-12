@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-open-hom-triangle-realization",
+ "kind": "statement",
+ "title": "Additive Hom identifications and maps for the open-cover triangle",
+ "statement": "Let R be the underlying sheaf of rings of (X,O_X), with an explicit equality identifying R with O_X after forgetting commutativity. Let (X,O_X) be a ringed space [def-weil-locally-ringed-space-morphism], U,V open with U∪V=X, and E,F in D(O_X) [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let RU,RV,RW denote the exact additive derived restriction functors, W=U∩V. There are objects A,B, morphisms a:A→B, b:B→E, δ:E→A[1], and a distinguished triangle A→B→E→A[1]. There are additive isomorphisms eB:Hom_X(B,F)≃Hom_U(E|U,F|U)×Hom_V(E|V,F|V), eA:Hom_X(A,F)≃Hom_W(E|W,F|W), and eN:Hom_X(A[1],F)≃Hom_W(E|W,(F|W)[-1]). They satisfy eB(b∘f)=(RU(f),RV(f)), and eA(a∘g)=res_{W,U}((eB(g))_1)−res_{W,V}((eB(g))_2), where the restrictions are conjugation by the canonical derived comparison isomorphisms for nested opens. This statement asserts geometric triangle data and Hom identifications only; it does not assert exactness of any Hom sequence.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 08BU, 08BT and 08BW; canonical triangle and adjunction identifications before applying Hom exactness"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the distinguished extension-by-zero Mayer–Vietoris triangle [lem-sc-derived-mayer-vietoris-triangle] to a complex representing E and transport it to E. Put A = j_{U∩V,!}(E|_{U∩V}) and B = j_{U,!}(E|_U) ⊕ j_{V,!}(E|_V). The map b is the pair of counits, and a is the difference of the canonical extension maps. Use the canonical maps of [lem-sc-derived-open-mayer-vietoris-ses], not merely their composites with counits, when identifying a.",
+   "uses": [
+    "lem-sc-derived-mayer-vietoris-triangle",
+    "lem-sc-derived-open-mayer-vietoris-ses"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the additive derived adjunction [lem-sc-derived-open-shriek-derived-adjunction] on U, V and U∩V and the biproduct universal property to obtain eB and eA. For eN use Hom(A[1],F) ≃ Hom(A,F[-1]), apply the overlap adjunction, and commute exact restriction with the shift. Additivity follows from the additive adjunction formulas and additive shift functors.",
+   "uses": [
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit formula for the adjunction gives eB(b ≫ f) = (RU.map f,RV.map f). For each W⊆U, the mate of the canonical extension map j_W! E|W → j_U! E|U under the W adjunction is the restriction of the U adjunction map. The nested restriction comparison is overFunctorMap together with mapDerivedCategoryCompIso; its conjugation is exactly openHomRestriction. Apply this calculation to both components of a and use additivity to get the difference identity. The same formula is valid on empty opens and for coincident opens. No exactness of Hom is used in these identifications. More explicitly, the transpose of κ ≫ g_U is η_W ≫ R_W(κ) ≫ R_W(g_U). The sectionwise canonical extension map satisfies η_W ≫ R_W(κ) = c_E.inv ≫ R_{W,U}(η_U) ≫ c_{L_U E_U}.hom. By naturality of c this becomes c_E.inv ≫ R_{W,U}(η_U ≫ R_U(g_U)) ≫ c_F.hom, which is the asserted conjugation formula. This equality holds termwise and descends through localization.",
+   "uses": [
+    "lem-sc-derived-open-shriek-derived-adjunction",
+    "lem-sc-derived-open-mayer-vietoris-ses"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-mayer-vietoris-triangle",
+  "lem-sc-derived-open-mayer-vietoris-ses",
+  "lem-sc-derived-open-shriek-derived-adjunction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-12",
+  "note": "Expanded the geometric and identification part of the proof of Stacks Tag 08BW; Hom exactness is proved separately in the parent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris exact sequence for Hom in derived category of sheaves on ringed space",
+   "results": "Eight hits for GrothendieckTopology.MayerVietorisSquare.shortComplex and its sheaf exactness; no derived Hom triangle identification.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂",
+   "results": "Found the generic Hom exactness theorem, used in the parent. It does not construct the open-cover triangle or identify its Hom maps.",
+   "date": "2026-10-12",
+   "verdict": "no match for geometric identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom identifications of the extension by zero Mayer Vietoris distinguished triangle",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda_exact|Mayer.Vietoris.*Hom; derivedOpenHomRestriction|openHomRestriction",
+   "results": "Generic Mathlib yoneda_exact₂/₃, the item, and its two planned geometric dependencies. No existing theorem packages the additive comparisons and nested restriction identities. The planned modules already import the item, so they cannot be imported by it.",
+   "date": "2026-10-12",
+   "verdict": "no match for the needed interface"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedHomMayerVietoris",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Hom Mayer–Vietoris proof: geometric triangle and map identifications",
+   "via": [
+    "lem-sc-derived-hom-mayer-vietoris",
+    "lem-sc-derived-open-gluing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenHomTriangleRealization",
+  "file": "lean/Sheaf/Algebra/Homology/OpenHomTriangleRealization.lean",
+  "declaration": "SheafOfModules.open_hom_triangle_realization",
+  "declarations": [
+   "SheafOfModules.open_hom_triangle_realization",
+   "SheafOfModules.openHomRestriction"
+  ],
+  "statement": "theorem open_hom_triangle_realization (X : AlgebraicGeometry.RingedSpace.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u}) (hR : R = (sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) (U V : Opens X) (hcover : U ⊔ V = ⊤) [(overFunctor.{u} R U).Additive] [PreservesFiniteLimits (overFunctor.{u} R U)] [PreservesFiniteColimits (overFunctor.{u} R U)] [(overFunctor.{u} R V).Additive] [PreservesFiniteLimits (overFunctor.{u} R V)] [PreservesFiniteColimits (overFunctor.{u} R V)] [(overFunctor.{u} R (U ⊓ V)).Additive] [PreservesFiniteLimits (overFunctor.{u} R (U ⊓ V))] [PreservesFiniteColimits (overFunctor.{u} R (U ⊓ V))] [(overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U)).Additive] [PreservesFiniteLimits (overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U))] [PreservesFiniteColimits (overMap.{u} R (homOfLE inf_le_left : U ⊓ V ⟶ U))] [(overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V)).Additive] [PreservesFiniteLimits (overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V))] [PreservesFiniteColimits (overMap.{u} R (homOfLE inf_le_right : U ⊓ V ⟶ V))] [HasDerivedCategory.{w} (SheafOfModules.{u} R)] [HasDerivedCategory.{w} (SheafOfModules.{u} (R.over U))] [HasDerivedCategory.{w} (SheafOfModules.{u} (R.over V))] [HasDerivedCategory.{w} (SheafOfModules.{u} (R.over (U ⊓ V)))] (E F : DerivedCategory (SheafOfModules.{u} R)) : let RU := (overFunctor.{u} R U).mapDerivedCategory let RV := (overFunctor.{u} R V).mapDerivedCategory let RW := (overFunctor.{u} R (U ⊓ V)).mapDerivedCategory ∃ (A B : DerivedCategory (SheafOfModules.{u} R)) (a : A ⟶ B) (b : B ⟶ E) (δ : E ⟶ A⟦(1 : ℤ)⟧), Triangle.mk a b δ ∈ distTriang _ ∧ ∃ (eB : (B ⟶ F) ≃+ ((RU.obj E ⟶ RU.obj F) × (RV.obj E ⟶ RV.obj F))) (eA : (A ⟶ F) ≃+ (RW.obj E ⟶ RW.obj F)) (eN : (A⟦(1 : ℤ)⟧ ⟶ F) ≃+ (RW.obj E ⟶ (RW.obj F)⟦(-1 : ℤ)⟧)), (∀ f : E ⟶ F, eB (b ≫ f) = (RU.map f, RV.map f)) ∧ (∀ g : B ⟶ F, eA (a ≫ g) = openHomRestriction R (homOfLE inf_le_left) (eB g).1 - openHomRestriction R (homOfLE inf_le_right) (eB g).2)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085354-L-45502",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T085354-L-45502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

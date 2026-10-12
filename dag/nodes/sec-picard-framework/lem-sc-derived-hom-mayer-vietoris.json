@@ -28,39 +28,36 @@
  "unit": "sk-thm-picard-duality",
  "proof": [
   {
-   "text": "Apply the distinguished Mayer–Vietoris triangle [lem-sc-derived-mayer-vietoris-triangle] to E. Applying the contravariant representable Hom(-,F) gives a long exact sequence by [lem-weil-pbc-hom-out-of-triangle-exact], with the terms Hom_X(E,F), Hom_X(j_{U,!}E|_U) direct-sum Hom_X(j_{V,!}E|_V), and Hom_X(j_{UV,!}E|_{U intersection V},F). The connecting term immediately preceding Hom_X(E,F) is the negative Ext group on U intersection V.",
+   "text": "Use [lem-sc-open-hom-triangle-realization] to obtain a distinguished triangle A→B→E→A[1], additive identifications eB,eA,eN with the three local Hom groups and negative overlap Ext, and the restriction-pair and difference map identities. The exactness and additive restriction instances in the item supply every technical functor hypothesis.",
    "uses": [
-    "lem-sc-derived-mayer-vietoris-triangle",
-    "lem-weil-pbc-hom-out-of-triangle-exact"
+    "lem-sc-open-hom-triangle-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BW (cohomology-lemma-mayer-vietoris-hom), proof using Tag 08BU and Derived Categories Lemma 0149"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the derived extension-by-zero/restriction adjunction [lem-sc-derived-open-shriek-derived-adjunction] on each of the three open inclusions. It identifies the middle terms with Hom_U(E|_U,F|_U) direct-sum Hom_V(E|_V,F|_V), identifies the last term with Hom_{U intersection V}(E|_{U intersection V},F|_{U intersection V}), and identifies the first term with Hom_X(E,F). Under these identifications the map from the direct sum is the difference of the two restriction maps, because the first arrow of the triangle is the difference of the two extension-by-zero maps. This is exactly the asserted beginning of the Mayer–Vietoris long exact sequence.",
+   "text": "Define negExt(x)=δ ≫ eN.symm(x). Additivity follows from additivity of eN.symm and categorical composition. For global Hom, eB injectivity identifies a pair of zero restrictions with b ≫ f=0; clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact] factors f through δ, giving the required preimage eN(g). Conversely b ≫ δ=0 makes every negExt image restrict to zero.",
    "uses": [
-    "lem-sc-derived-open-shriek-derived-adjunction",
-    "lem-sc-derived-mayer-vietoris-triangle"
+    "lem-weil-pbc-hom-out-of-triangle-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08BW (cohomology-lemma-mayer-vietoris-hom), proof; Tag 08BT adjunction"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For a compatible local pair p put g=eB.symm(p). The difference identity and eA injectivity give a ≫ g=0. Clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] produces f with g=b ≫ f, and eB then gives the desired local pair. Conversely a ≫ b=0 and the same map identities make the difference of the restrictions of every global map zero. The two square-zero composites are the standard distinguished-triangle identities. The existing and generic nested restrictions agree by reflexivity.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sc-derived-mayer-vietoris-triangle",
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "lem-sc-derived-open-shriek-derived-adjunction"
+  "lem-sc-open-hom-triangle-realization",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08BW (Cohomology, Lemma 20.33.3, lemma-mayer-vietoris-hom)"
+  "by": "agent",
+  "group": "V2",
+  "date": "2026-10-12",
+  "note": "Lean proof of both exactness segments using Mathlib yoneda_exact₂/₃. The geometric realization and additive restriction identities are isolated in a new structural node because the planned modules import this item."
  },
  "mathlib_searches": [
   {
@@ -184,21 +181,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J1",
+  "reviewer": "COMPILER",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T063511-L-3155778",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.derived_hom_mayer_vietoris",
-   "AlgebraicGeometry.moduleOverFunctor_colimits_proof",
-   "AlgebraicGeometry.moduleOverFunctor_limits_proof",
-   "AlgebraicGeometry.moduleOverMap_colimits_proof",
-   "AlgebraicGeometry.moduleOverMap_limits_proof"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.derived_hom_mayer_vietoris"
-  ]
+  "landing": "20261012T085354-L-45502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

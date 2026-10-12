@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Geometry.RingedSpace.Basic
+import Sheaf.Algebra.Homology.OpenHomTriangleRealization
 
 /-! # Mayer--Vietoris sequence for derived Hom
 
@@ -160,6 +161,74 @@ def derivedOpenHomRestriction (X : RingedSpace.{u}) {W U : Opens X} (i : W ⟶ U
   e.inv.app E ≫ (SheafOfModules.overMap.{u} (moduleRings X) i).mapDerivedCategory.map f ≫
     e.hom.app F
 
+private theorem derivedOpenHomRestriction_eq (X : RingedSpace.{u})
+    {W U : Opens X} (i : W ⟶ U)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over U))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings X).over W))]
+    {E F : DerivedCategory (SheafOfModules.{u} (moduleRings X))}
+    (f : (SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.obj E ⟶
+      (SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.obj F) :
+    derivedOpenHomRestriction X i f =
+      SheafOfModules.openHomRestriction (moduleRings X) i f := rfl
+
+private theorem hom_exact_of_open_triangle
+    {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {E F A B : C} (a : A ⟶ B) (b : B ⟶ E) (δ : E ⟶ A⟦(1 : ℤ)⟧)
+    (hT : Pretriangulated.Triangle.mk a b δ ∈ distTriang C)
+    {P Q N : Type*} [AddCommGroup P] [AddCommGroup Q] [AddCommGroup N]
+    (eB : (B ⟶ F) ≃+ P) (eA : (A ⟶ F) ≃+ Q) (eN : (A⟦(1 : ℤ)⟧ ⟶ F) ≃+ N)
+    (r : (E ⟶ F) → P) (d : P → Q)
+    (hb : ∀ f, eB (b ≫ f) = r f) (ha : ∀ g, eA (a ≫ g) = d (eB g)) :
+    ∃ negExt : N →+ (E ⟶ F), Function.Exact negExt r ∧ Function.Exact r d := by
+  have hab : a ≫ b = 0 :=
+    Pretriangulated.comp_distTriang_mor_zero₁₂ (Pretriangulated.Triangle.mk a b δ) hT
+  have hbδ : b ≫ δ = 0 :=
+    Pretriangulated.comp_distTriang_mor_zero₂₃ (Pretriangulated.Triangle.mk a b δ) hT
+  let negExt : N →+ (E ⟶ F) :=
+    { toFun := fun x ↦ δ ≫ eN.symm x
+      map_zero' := by simp
+      map_add' := by intro x y; simp [Preadditive.comp_add] }
+  refine ⟨negExt, ?_, ?_⟩
+  · intro f
+    constructor
+    · intro hf
+      have hbf : b ≫ f = 0 := by
+        apply eB.injective
+        simpa only [hb, map_zero] using hf
+      obtain ⟨g, hg⟩ := (Pretriangulated.Triangle.mk a b δ).yoneda_exact₃ hT f hbf
+      refine ⟨eN g, ?_⟩
+      change δ ≫ eN.symm (eN g) = f
+      rw [eN.symm_apply_apply]
+      exact hg.symm
+    · rintro ⟨x, rfl⟩
+      have hzero : b ≫ negExt x = 0 := by
+        dsimp [negExt]
+        rw [← Category.assoc, hbδ, zero_comp]
+      simp only [← hb, hzero, map_zero]
+  · intro p
+    constructor
+    · intro hp
+      let g := eB.symm p
+      have hag : a ≫ g = 0 := by
+        apply eA.injective
+        simpa only [ha, g, AddEquiv.apply_symm_apply, map_zero] using hp
+      obtain ⟨f, hf⟩ := (Pretriangulated.Triangle.mk a b δ).yoneda_exact₂ hT g hag
+      let f' : E ⟶ F := f
+      change g = b ≫ f' at hf
+      refine ⟨f', ?_⟩
+      rw [← hb, ← hf]
+      exact eB.apply_symm_apply p
+    · rintro ⟨f, rfl⟩
+      have hzero : a ≫ b ≫ f = 0 := by
+        rw [← Category.assoc, hab, zero_comp]
+      calc
+        d (r f) = eA (a ≫ b ≫ f) := by rw [← hb, ← ha]
+        _ = 0 := by rw [hzero, map_zero]
+
+set_option maxHeartbeats 800000 in
+-- Specializing the triangle identifications compares three large derived restriction functors.
 /-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups.
 Source: Stacks, Tag 08BW (blueprint: lem-sc-derived-hom-mayer-vietoris).
 
@@ -188,7 +257,16 @@ theorem derived_hom_mayer_vietoris
         (fun f : E ⟶ F => (R_U.map f, R_V.map f))
         (fun p : (R_U.obj E ⟶ R_U.obj F) × (R_V.obj E ⟶ R_V.obj F) =>
           derivedOpenHomRestriction X (homOfLE inf_le_left) p.1 -
-            derivedOpenHomRestriction X (homOfLE inf_le_right) p.2) :=
-  sorry
+            derivedOpenHomRestriction X (homOfLE inf_le_right) p.2) := by
+  classical
+  obtain ⟨A, B, a, b, δ, hT, eB, eA, eN, hb, ha⟩ :=
+    SheafOfModules.open_hom_triangle_realization X (moduleRings X) rfl U V hcover E F
+  refine hom_exact_of_open_triangle a b δ hT eB eA eN
+    (fun f ↦ ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.map f,
+      (SheafOfModules.overFunctor.{u} (moduleRings X) V).mapDerivedCategory.map f))
+    (fun p ↦ derivedOpenHomRestriction X (homOfLE inf_le_left) p.1 -
+      derivedOpenHomRestriction X (homOfLE inf_le_right) p.2) hb ?_
+  intro g
+  simpa only [derivedOpenHomRestriction_eq] using ha g
 
 end AlgebraicGeometry
