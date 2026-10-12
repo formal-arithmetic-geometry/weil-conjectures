@@ -11,6 +11,8 @@ import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
 import Sheaf.Paper.KoszulComplex
+import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCore
+import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyColimit
 
 /-! # Koszul perfect objects represent cohomology classes on a principal open
 
@@ -140,6 +142,9 @@ theorem affine_perfect_open_represent_cohomology
                         (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
                       (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory.map φ) ∧
         Nonempty (IsColimit (Cocone.mk _ ι)) := by
-  sorry
+  obtain ⟨htri, hperf, hmap⟩ :=
+    affine_perfect_open_represent_cohomology_core A r f E
+  have hcol := affine_perfect_open_represent_cohomology_colimit A r f E
+  exact ⟨htri, hperf, hmap, hcol⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-affine-perfect-open-represent-cohomology-core",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-perfect-open-represent-cohomology",
+   "place": "stage-3 decomposition of the proof into independently stated structural and representability parts",
+   "via": [
+    "lem-sc-affine-perfect-open-represent-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite Koszul structural facts for principal opens",
+ "statement": "Intermediate structural conjunction: the triangle, perfectness, and augmentation compatibility clauses of lem-sc-affine-perfect-open-represent-cohomology.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section section-koszul, equation-comparison and Proposition proposition-represent-cohomology-class-on-open"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-sc-koszul-open-system"
+ ],
+ "proof": [
+  {
+   "text": "The stated intermediate conjunction follows from the finite Koszul and derived Čech arguments in the source proposition.",
+   "uses": [
+    "lem-sc-affine-perfect-koszul-principal-unit",
+    "lem-sc-affine-koszul-cech-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-perfect-koszul-principal-unit",
+  "lem-sc-affine-koszul-cech-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08CX, 08DC, and 08DD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Koszul perfect object principal open cohomology representability",
+   "results": "No exact match found in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.IsPerfect koszulOpenObject",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "represent cohomology principal open Koszul",
+   "results": "No matching theorem in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-sc-affine-perfect-open-represent-cohomology",
+  "worker": "stage1",
+  "summary": "No sorry-free Lean declaration states the item. I split the argument into the finite-free Koszul/perfectness and principal-open restriction lemma, and the Koszul-Cech Hom-colimit-to-sections lemma, then assembled the inverse-system, compatibility, and degree-zero identification steps. The cited perfect.tex packet is absent locally, so the proof is recorded as an agent reconstruction from the proposition and its named equation-comparison argument.",
+  "blueprint": "Realizes the ancestor lem-sc-finite-duality proof place ‘proper-flat support proof: modify the affine supported perfect complex so its map to E lifts over the affine open’ through the Koszul representability proposition used by lem-sc-affine-perfect-map-lift.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T232906-L-2044016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePerfectOpenRepresentCohomologyCore.lean",
+  "declaration": "AlgebraicGeometry.affine_perfect_open_represent_cohomology_core",
+  "statement": "theorem affine_perfect_open_represent_cohomology_core (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A) [HasDerivedCategory.{wMain} (SheafOfModules.{uMain} (moduleRings (Spec (.of A)).toRingedSpace))] [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wMain} (SheafOfModules.{uMain} ((moduleRings (Spec (.of A)).toRingedSpace).over V))] [HasDerivedCategory.{wMain} (SheafOfModules.{uMain} (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))] (E : schemeDerivedQCohCategory (Spec (.of A))) : (∀ e : ℕ, ∃ δ : koszulOpenKoszulObject A r f e ⟶ (koszulOpenObject A r f e)⟦(1 : ℤ)⟧, Triangle.mk (koszulOpenUnit A r f e) (koszulOpenKoszulUnit A r f e) δ ∈ distTriang (schemeDerivedCategory (Spec (.of A)))) ∧ (∀ e : ℕ, Scheme.IsPerfect (Spec (.of A)) (koszulOpenObject A r f e)) ∧ (∀ (a b : ℕ) (h : a ≤ b), koszulOpenMap A r f a b h ≫ koszulOpenUnit A r f a = koszulOpenUnit A r f b)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-aor",
+  "group": "M1",
+  "result": "fix",
+  "note": "A,r,f,U=koszulOpen; E in D_QCoh; I_e=tail K^{i-1} neg diff, aug K1->K0, transitions f^(b-a) wedge (checked commute with d and aug); triangle I->O->K; IsPerfect; u_e|_U iso via two-sided v; colimit Hom(I_e,E)->Hom(O_U,E|_U) with fixed legs; FIX: restriction now overFunctor ⋙ (Scheme.Modules.overEquiv U).functor as sibling map-lift"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T232906-L-2044016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
