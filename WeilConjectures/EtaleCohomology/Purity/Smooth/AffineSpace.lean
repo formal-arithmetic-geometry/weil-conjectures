@@ -74,7 +74,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 section Twists
 
-variable {X Y : Scheme.{u}}
+variable {X Y : Scheme.{u}} [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 /-- `Λ_X(m)[2m] = (Λ_X ⊗^L Λ_X(m))[2m] ≅ Λ_X(m)[2m]`, through the left unitor. -/
 noncomputable def twistShiftConstantComplexIso (X : Scheme.{u}) (m : ℤ) :
@@ -82,7 +82,8 @@ noncomputable def twistShiftConstantComplexIso (X : Scheme.{u}) (m : ℤ) :
   (shiftFunctor _ (2 * m)).mapIso (derivedTensorLeftUnitor _ X _)
 
 /-- The zero twist is trivial: `K(0)[0] ≅ K`. -/
-noncomputable def twistShiftZeroIso (X : Scheme.{u}) {m : ℤ} (hm : m = 0)
+noncomputable def twistShiftZeroIso (X : Scheme.{u}) [HasInvertibleExponent Λ X]
+    {m : ℤ} (hm : m = 0)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (twistShift Λ X m).obj K ≅ K :=
   (shiftFunctorZero' _ (2 * m) (by simp [hm])).app _ ≪≫
@@ -103,7 +104,8 @@ noncomputable def leftDerivedUpperStarTwistShiftIso (f : X ⟶ Y) (m : ℤ)
 
 /-- Twist-and-shifts compose additively, `(K(m)[2m])(m')[2m'] ≅ K(m + m')[2(m + m')]`. All
 shifts are even, so no sign is involved. -/
-noncomputable def twistShiftTwistShiftIso (X : Scheme.{u}) (m m' : ℤ)
+noncomputable def twistShiftTwistShiftIso (X : Scheme.{u}) [HasInvertibleExponent Λ X]
+    (m m' : ℤ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (twistShift Λ X m').obj ((twistShift Λ X m).obj K) ≅ (twistShift Λ X (m + m')).obj K :=
   (shiftFunctor _ (2 * m')).mapIso
@@ -115,6 +117,7 @@ noncomputable def twistShiftTwistShiftIso (X : Scheme.{u}) (m m' : ℤ)
         ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).mapIso
           (HasTateTwist.twistObjectAddIso X m m'))
 
+omit [HasInvertibleExponent Λ Y] in
 /-- `Lf^* K (m)[2m]` lies in `D^b_{ctf}` when `K` does. -/
 theorem boundedConstructibleFiniteTor_twistShift_leftDerivedUpperStar (f : X ⟶ Y) (m : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -136,12 +139,13 @@ formula for the closed immersion `s` and `Rs^! Λ(1)[2] ≅ Λ_Y` (`sk-prop-a1`)
 `Rs^! Λ_{𝔸¹_Y}(1 + m)[2(1 + m)] ≅ Rs^! Λ(1)[2] ⊗ Ls^* Λ(m)[2m] ≅ Λ_Y(m)[2m]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject
     [HasTateTwist.IsNormalized Λ]
-    (Y : Scheme.{u}) [HasInvertibleExponent Λ Y] (m : ℤ) :
+    (Y : Scheme.{u}) {k : Type u} [Field k] (aY : Y ⟶ Spec (.of k)) [IsSeparated aY]
+    [LocallyOfFiniteType aY] [HasInvertibleExponent Λ Y] (m : ℤ) :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) (1 + m))⟦2 * (1 + m)⟧) ≅
       (tateObject Λ Y m)⟦2 * m⟧) := by
-  obtain ⟨a1⟩ := nonempty_iso_rightDerivedUpperShriek_affineLineZero Λ (Y := Y)
+  obtain ⟨a1⟩ := nonempty_iso_rightDerivedUpperShriek_affineLineZero Λ aY
   obtain ⟨cop⟩ := nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible Λ
     (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y)
     ((tateObject Λ 𝔸(ULift.{u} (Fin 1); Y) 1)⟦2 * (1 : ℤ)⟧)
@@ -183,7 +187,8 @@ lemma affineSpaceSuccIso_hom_over_over (c : ℕ) (B : Scheme.{u}) :
 /-- Blueprint `sk-prop-an`, Step 1: the zero section of `𝔸^{c+1}_B` is that of `𝔸¹_{B'}`
 after that of `B' = 𝔸^c_B`, so by the composition law
 `Rz_{c+1}^! Λ(c+1)[2(c+1)] ≅ Rz_c^! Rs'^! Λ(1 + c)[2(1 + c)]`. -/
-theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B : Scheme.{u}) :
+theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B : Scheme.{u})
+    [HasInvertibleExponent Λ B] :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin (c + 1))) B)).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin (c + 1)); B) ((c + 1 : ℕ) : ℤ))⟦2 * ((c + 1 : ℕ) : ℤ)⟧) ≅
@@ -213,8 +218,9 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
 /-- The `Rz^!`-form of the model purity with the twisting object in place of the twisted
 constant complex: `Rz^! Λ(c)[2c] ≅ Λ_B`, by induction on `c` (`sk-prop-an`, Step 1). -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
-    [HasTateTwist.IsNormalized Λ] (c : ℕ)
-    (B : Scheme.{u}) [HasInvertibleExponent Λ B] :
+    [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k] (c : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B] :
     Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin c)) B)).obj
         ((tateObject Λ 𝔸(ULift.{u} (Fin c); B) c)⟦2 * (c : ℤ)⟧) ≅ constantComplex Λ B) := by
@@ -231,12 +237,10 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
       eqToIso (by simp [tateObject]) ≪≫ HasTateTwist.twistObjectZeroIso B⟩
   | succ c ih =>
     obtain ⟨ih⟩ := ih
-    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin c); B) :=
-      .of_hom (𝔸(ULift.{u} (Fin c); B) ↘ B)
     obtain ⟨t⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ Λ c B
     obtain ⟨w⟩ :=
       nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject Λ
-        𝔸(ULift.{u} (Fin c); B) c
+        𝔸(ULift.{u} (Fin c); B) (𝔸(ULift.{u} (Fin c); B) ↘ B ≫ aB) c
     exact ⟨t ≪≫
       (R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![ModuleCat.{u + 1} Λ]).mapIso w ≪≫ ih⟩
 
@@ -263,7 +267,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero [HasTateTwist.IsNor
         ((twistShift Λ 𝔸(ULift.{u} (Fin c); B) c).obj
           (constantComplex Λ 𝔸(ULift.{u} (Fin c); B))) ≅
       constantComplex Λ B) := by
-  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject Λ c B
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject Λ c B aB
   exact ⟨(R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![ModuleCat.{u + 1} Λ]).mapIso
     (twistShiftConstantComplexIso Λ _ c) ≪≫ e⟩
 
@@ -324,7 +328,7 @@ omit [Finite Λ] in
 
 `Le^* ((Lp'^* (Lp_d^* K (d)[2d]))(1)[2]) ≅ Lp_{d+1}^* K (d + 1)[2(d + 1)]`. -/
 theorem nonempty_iso_leftDerivedUpperStar_affineSpaceSuccIso_twistShift (d : ℕ)
-    (Y : Scheme.{u})
+    (Y : Scheme.{u}) [HasInvertibleExponent Λ Y]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((L(((affineSpaceSuccIso d Y).hom)^*[ModuleCat.{u + 1} Λ])).obj
         ((twistShift Λ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); Y)) 1).obj
@@ -388,8 +392,6 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpace [HasTateTwist.IsNormali
       (twistShiftZeroIso Λ _ (by simp) _).symm⟩
   | succ d ih =>
     obtain ⟨ih⟩ := ih
-    have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin d); Y) :=
-      .of_hom (𝔸(ULift.{u} (Fin d); Y) ↘ Y)
     obtain ⟨t⟩ := nonempty_iso_rightDerivedUpperShriek_affineSpace_succ Λ d Y K
     obtain ⟨l⟩ := nonempty_iso_rightDerivedUpperShriek_affineLine Λ 𝔸(ULift.{u} (Fin d); Y)
       (𝔸(ULift.{u} (Fin d); Y) ↘ Y ≫ aY) _

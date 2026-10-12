@@ -27,6 +27,8 @@ functor of `F` together with derived tensor products on flat resolutions, withou
 ## Main definitions and results
 
 - `CategoryTheory.Functor.PreservesFlat`: `F` sends flat objects to flat objects.
+- `CategoryTheory.Functor.preservesFlat_of_isEquivalence`: a monoidal equivalence preserves
+  flat objects.
 - `CategoryTheory.Functor.kFlat_mapHomologicalComplex_obj_of_colimitsOfShape`: `F` sends
   `ℤ`-indexed colimits of bounded above complexes of flat objects to K-flat complexes.
 - `CategoryTheory.Functor.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj`: `F`
@@ -46,6 +48,30 @@ variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalC
 is flat (`CategoryTheory.ObjectProperty.flat`) for every flat `X`. -/
 class PreservesFlat (F : C ⥤ D) : Prop where
   flat_obj {X : C} (hX : ObjectProperty.flat X) : ObjectProperty.flat (F.obj X)
+
+section
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+/-- A monoidal functor which is an equivalence of categories preserves flat objects: tensoring
+with `F(X)` is, up to isomorphism, the composite of `F⁻¹`, tensoring with `X` and `F`. -/
+lemma preservesFlat_of_isEquivalence (F : C ⥤ D) [F.Monoidal] [F.IsEquivalence] :
+    F.PreservesFlat where
+  flat_obj {X} hX := by
+    have := hX.tensorLeft.preservesFiniteLimits
+    have := hX.tensorLeft.preservesFiniteColimits
+    have := hX.tensorRight.preservesFiniteLimits
+    have := hX.tensorRight.preservesFiniteColimits
+    refine ⟨(exactFunctor _ _).prop_of_iso
+      ((Functor.leftUnitor _).symm ≪≫ isoWhiskerRight F.asEquivalence.counitIso.symm _ ≪≫
+        Functor.associator _ _ _ ≪≫ isoWhiskerLeft F.inv (Monoidal.commTensorLeft F X)).symm
+      ((exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩),
+      (exactFunctor _ _).prop_of_iso
+      ((Functor.leftUnitor _).symm ≪≫ isoWhiskerRight F.asEquivalence.counitIso.symm _ ≪≫
+        Functor.associator _ _ _ ≪≫ isoWhiskerLeft F.inv (Monoidal.commTensorRight F X)).symm
+      ((exactFunctor_iff _).2 ⟨inferInstance, inferInstance⟩)⟩
+
+end
 
 variable [Abelian C] [Abelian D] (F : C ⥤ D) [F.PreservesZeroMorphisms] [F.PreservesFlat]
 

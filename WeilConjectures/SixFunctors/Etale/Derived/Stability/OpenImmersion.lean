@@ -75,7 +75,8 @@ Finite Tor amplitude of one factor is needed for boundedness: over `ℤ/ℓ²` o
 `ℤ/ℓ ⊗ᴸ ℤ/ℓ` has a nonzero `Tor_i` for every `i ≥ 0`. The coefficients cannot be an arbitrary
 coefficient category: over `R = k[x, y₁, y₂, …]` on a point, `R/(x yᵢ)ᵢ ⊗ᴸ R/(x)` has the
 non-finitely generated `Tor₁ = (yᵢ)ᵢ/(x yᵢ)ᵢ` in degree `-1`, although `R/(x)` has Tor
-amplitude in `[-1, 0]`. -/
+amplitude in `[-1, 0]`. This is blueprint `lem-sf-tensor-ctf` (i).
+-/
 theorem boundedConstructible_tensor (X : Scheme.{u})
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
@@ -96,7 +97,8 @@ subcategories.
 
 Clause (ii): `- ⊗ᴸ - : Dctf(X, Λ) × Dctf(X, Λ) ⥤ Dctf(X, Λ)` is defined, for a finite ring
 `Λ`. The internal-Hom half of the clause is `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`
-below. -/
+below. This is blueprint `lem-sf-tensor-ctf` (ii).
+-/
 theorem constructibleFiniteTor_tensor (X : Scheme.{u})
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
