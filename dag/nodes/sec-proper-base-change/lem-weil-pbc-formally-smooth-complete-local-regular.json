@@ -44,146 +44,35 @@
    }
   },
   {
-   "text": "*Reduction to $A$ a domain and $\\mathfrak p=(0)$.* Put $A_1=A/\\mathfrak p$, $B_1=B/\\mathfrak pB=B\\otimes_AA_1$ [def-weil-module-base-change]. As $\\varphi$ is local, $\\mathfrak pB\\subseteq\\mathfrak m_B\\ne B$, so $A_1$ and $B_1$ are Noetherian local rings, complete for their maximal ideals $\\mathfrak m_{A_1}=\\mathfrak m_A/\\mathfrak p$, $\\mathfrak m_{B_1}=\\mathfrak m_B/\\mathfrak pB$ [lem-weil-pbc-complete-local-quotient], $A_1$ is a domain with fraction field $K_1=\\kappa(\\mathfrak p)$ (the residue field $A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ is the fraction field of $A/\\mathfrak p$ [def-weil-pbc-localization-at-prime]), and the induced map $\\varphi_1:A_1\\to B_1$ is local. By base change along $A\\to A_1$ [lem-weil-pbc-fs-adic-base-change], $B_1$ is formally smooth over $A_1$ for the $\\mathfrak m_BB_1=\\mathfrak m_{B_1}$-adic topology; hence by [lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre] $\\varphi_1$ is flat and its closed fibre $B_1/\\mathfrak m_{A_1}B_1=B/\\mathfrak m_AB$ is geometrically regular over $k=A_1/\\mathfrak m_{A_1}$. Moreover $B\\otimes_A\\kappa(\\mathfrak p)\\cong(B\\otimes_AA_1)\\otimes_{A_1}K_1=B_1\\otimes_{A_1}K_1$ as $K_1$-algebras (associativity of the tensor product), and for every field extension $L/K_1$, $L\\otimes_{K_1}(B_1\\otimes_{A_1}K_1)\\cong B_1\\otimes_{A_1}L$. So it suffices to show: (*) $B_1\\otimes_{A_1}L$ is a regular ring [def-weil-regular-scheme] for every finite purely inseparable extension $L/K_1$ [def-weil-pbc-finite-purely-inseparable-extension] (with $L=K_1$ this also gives that the fibre ring is Noetherian, a regular ring being Noetherian).",
+   "text": "For a prime $p$, locality implies $pB\\subseteq\\mathfrak m_B$, so $B/pB$ is nonzero. By [lem-weil-pbc-complete-local-quotient], $A/p$ and $B/pB$ are complete Noetherian local rings; $A/p$ is a domain. Formal smoothness descends directly: restrict a lifting problem to $A\\to B$, lift by formal smoothness, and note that the lift kills $pB$ since the target is an $A/p$-algebra. The induced quotient map is local because maximal ideals are images of the original maximal ideals. The field $\\kappa(p)$ is a fraction field of $A/p$. Apply [lem-weil-pbc-formally-smooth-complete-local-generic-fiber] to obtain geometric regularity of $\\kappa(p)\\otimes_{A/p}(B/pB)$. The quotient-tensor isomorphism and cancellation of base change identify this with $\\kappa(p)\\otimes_A B$ as a $\\kappa(p)$-algebra. Noetherianity transports along this isomorphism, and regularity after every finite purely inseparable extension transports along its tensor base change. Together with the flatness established above, this proves regularity of the original map.",
    "uses": [
-    "def-weil-module-base-change",
     "lem-weil-pbc-complete-local-quotient",
+    "lem-weil-pbc-formally-smooth-complete-local-generic-fiber",
     "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-fs-adic-base-change",
-    "lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre",
-    "def-weil-regular-scheme",
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), second paragraph ('By Lemma 07EG (base-change-fs) we may replace A by A/p and B by B/pB')"
-   }
-  },
-  {
-   "text": "*The coefficient ring $A_0$ and the algebra $C$.* By [lem-weil-pbc-complete-local-domain-finite-over-regular] applied to the complete Noetherian local domain $A_1$ there is a subring $A_0\\subseteq A_1$ which is a regular local ring with maximal ideal $\\mathfrak m_0=\\mathfrak m_{A_1}\\cap A_0$, $\\mathfrak m_0$-adically complete, over which $A_1$ is a finitely generated module, with $A_0/\\mathfrak m_0\\xrightarrow{\\sim}A_1/\\mathfrak m_{A_1}=k$, and $A_0\\cong k_0[[X_1,\\dots,X_d]]$ for a field $k_0$ or $A_0\\cong\\Lambda[[X_1,\\dots,X_d]]$ for a Cohen ring $\\Lambda$. The inclusion $\\alpha:A_0\\to A_1$ is local (as $\\mathfrak m_0=\\mathfrak m_{A_1}\\cap A_0$). The closed fibre $\\overline B=B_1/\\mathfrak m_{A_1}B_1=B_1\\otimes_{A_1}k$ is formally smooth over $k$ for the $\\mathfrak m_{\\overline B}$-adic topology by base change of $\\varphi_1$ along $A_1\\to k$ [lem-weil-pbc-fs-adic-base-change] (the image of $\\mathfrak m_{B_1}$ in $\\overline B$ is its maximal ideal $\\mathfrak m_{\\overline B}$), and $\\varphi_1$ is flat (Step 2). Hence [lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map] gives a Noetherian local ring $(C,\\mathfrak m_C)$, $\\mathfrak m_C$-adically complete, a local homomorphism $\\gamma:A_0\\to C$ with $C$ formally smooth over $A_0$ for the $\\mathfrak m_C$-adic topology, and a local $\\psi:C\\to B_1$ with $\\psi\\gamma=\\varphi_1\\alpha$, such that $C\\otimes_{A_0}A_1\\to B_1$, $c\\otimes a\\mapsto\\psi(c)\\varphi_1(a)$, is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-complete-local-domain-finite-over-regular",
-    "lem-weil-pbc-fs-adic-base-change",
-    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), third paragraph (Algebra Lemma 032D; Remark 07NS remark-what-does-it-mean; 'completion in the tensor product is not needed as A_0 -> A is finite', Algebra Lemma 00MA)"
-   }
-  },
-  {
-   "text": "*Reduction to $C\\otimes_{A_0}K_0$.* Let $K_0$ be the fraction field of the domain $A_0$, the localization at $W_0=A_0\\setminus\\{0\\}$. $A_1\\otimes_{A_0}K_0$ is the localization of $A_1$ at $W_0$ [lem-weil-pbc-localization-base-change], a subring of $K_1$ containing $A_1$ and $K_0$ which is a finite-dimensional $K_0$-vector space (spanned by generators of the $A_0$-module $A_1$) and a domain, hence a field; so it equals $K_1$ and $[K_1:K_0]<\\infty$. Let $L/K_1$ be finite purely inseparable; then $L$ is a finite extension of $K_0$, and by Step 3 and associativity $B_1\\otimes_{A_1}L\\cong(C\\otimes_{A_0}A_1)\\otimes_{A_1}L\\cong C\\otimes_{A_0}L\\cong L\\otimes_{K_0}(C\\otimes_{A_0}K_0)$ [def-weil-module-base-change]. If $C\\otimes_{A_0}K_0$ is Noetherian and geometrically regular over $K_0$ [def-weil-pbc-g-ring], the right-hand side is a regular ring because $L/K_0$ is a finitely generated (indeed finite) field extension [lem-weil-pbc-geometrically-regular-finitely-generated-extensions]; this is (*). So it suffices to show: (**) $C\\otimes_{A_0}K_0$ is Noetherian and $C\\otimes_{A_0}L'$ is regular for every finite purely inseparable extension $L'/K_0$.",
-   "uses": [
-    "lem-weil-pbc-localization-base-change",
     "def-weil-module-base-change",
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), third paragraph, last sentence ('Hence it suffices to show that C (x)_{A_0} K_0 is a geometrically regular algebra over the fraction field K_0 of A_0')"
-   }
-  },
-  {
-   "text": "*$C$ and $C\\otimes_{A_0}K_0$ are regular.* Apply [lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre] to the local homomorphism $\\gamma:A_0\\to C$ of Noetherian local rings, formally smooth for the $\\mathfrak m_C$-adic topology: $\\gamma$ is flat and $C/\\mathfrak m_0C$ is geometrically regular over $A_0/\\mathfrak m_0$, in particular regular (take $k'=A_0/\\mathfrak m_0$ in [def-weil-pbc-g-ring]). As $A_0$ is a regular local ring (Step 3), $C$ is regular by [lem-weil-pbc-flat-over-regular-with-regular-fibre]. $C\\otimes_{A_0}K_0$ is the localization of $C$ at $\\gamma(W_0)$ [lem-weil-pbc-localization-base-change], hence a regular, in particular Noetherian, ring [lem-weil-pbc-localization-of-regular-ring].",
-   "uses": [
-    "lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre",
-    "def-weil-pbc-g-ring",
-    "lem-weil-pbc-flat-over-regular-with-regular-fibre",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-of-regular-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), fourth paragraph ('In this case B is a regular ring, see Algebra, Lemma 031E (flat-over-regular-with-regular-fibre). Hence B (x)_A K is a regular ring too')"
-   }
-  },
-  {
-   "text": "*Characteristic zero.* If $K_0$ has characteristic $0$, the only finite purely inseparable extension of $K_0$ is $K_0$ itself [def-weil-pbc-finite-purely-inseparable-extension], and $C\\otimes_{A_0}K_0$ is regular by Step 5; so (**) holds. This covers the case $A_0\\cong\\Lambda[[X_1,\\dots,X_d]]$ with $\\Lambda$ a Cohen ring, for then $K_0\\supseteq\\Lambda$ has characteristic $0$: $\\Lambda$ is a domain with maximal ideal $p\\Lambda\\ne0$; if $\\ell\\cdot1=0$ in $\\Lambda$ for a prime $\\ell$, then $\\ell\\ne p$ (else $p\\Lambda=0$), so $1=a\\ell+bp$ with $a,b\\in\\mathbf Z$ gives $1=bp\\in p\\Lambda$, a contradiction. Hence from now on $K_0$ has characteristic $p>0$ (and $A_0\\cong k_0[[X_1,\\dots,X_d]]$ with $\\operatorname{char}k_0=p$).",
-   "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), fourth paragraph ('we win if the characteristic of K is zero') and fifth paragraph, first sentence"
-   }
-  },
-  {
-   "text": "*Characteristic $p$: the induction and the ring $A'$.* We show $C\\otimes_{A_0}L$ regular for every finite purely inseparable $L/K_0$ by induction on $[L:K_0]$; $[L:K_0]=1$ is Step 5. If $L\\ne K_0$, [lem-weil-pbc-purely-inseparable-pth-root-tower] gives an intermediate field $K_0\\subseteq M\\subsetneq L$, finite purely inseparable over $K_0$ with $[M:K_0]<[L:K_0]$, and $\\beta\\in L$ with $L=M(\\beta)$, $g=\\beta^p\\in M$ not a $p$-th power in $M$, $L\\cong M[z]/(z^p-g)$. By induction $C\\otimes_{A_0}M$ is regular. Choose a $K_0$-basis $m_1,\\dots,m_r$ of $M$; each $m_i^{q_i}\\in K_0$ for some power $q_i$ of $p$, say $m_i^{q_i}=a_i/s_i$ with $a_i,s_i\\in A_0$, $s_i\\ne0$; then $(s_im_i)^{q_i}=s_i^{q_i-1}a_i\\in A_0$, so $s_im_i$ is integral over $A_0$, and $A'=A_0[s_1m_1,\\dots,s_rm_r]\\subseteq M$ is a domain, a finitely generated $A_0$-module (finitely many integral generators), with fraction field $M$ (it contains $K_0$-multiples generating $M$ and $K_0=\\mathrm{Frac}(A_0)$). Write $g=c/e$ with $c,e\\in A'$, $e\\ne0$, and put $f=e^pg=e^{p-1}c\\in A'$, $\\beta'=e\\beta$: then $\\beta'^p=f$, $L=M(\\beta')$, $f$ is not a $p$-th power in $M$ (else $g$ would be), and $L\\cong M[z]/(z^p-f)$ ($z^p-f$ has the root $\\beta'$ and degree $p=[L:M]$). This is 'clearing denominators, we may assume $f\\in A'$'.",
-   "uses": [
-    "lem-weil-pbc-purely-inseparable-pth-root-tower",
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), fifth paragraph ('We will show by induction on [L : K] ... Let A' be a finite A-subalgebra of M with fraction field M. Clearing denominators, we may and do assume f in A'')"
-   }
-  },
-  {
-   "text": "*A derivation with $D(f)$ a unit.* $A'$ is a domain with $p\\cdot1=0$, $f\\in A'$ is not a $p$-th power in its fraction field $M$, and $A'$ is a finitely generated $A_0$-module, hence a finite type algebra over the complete Noetherian local ring $A_0$; so [lem-weil-pbc-derivation-nonzero-on-non-pth-power] gives a derivation $D:A'\\to A'$ with $D(f)\\ne0$. Let $C'=C\\otimes_{A_0}A'$ [def-weil-module-base-change]. By base change of $\\gamma$ along $A_0\\to A'$ [lem-weil-pbc-fs-adic-base-change], $C'$ is formally smooth over $A'$ for the $\\mathfrak m_CC'$-adic topology. $C'$ is a finitely generated $C$-module (generated by $1\\otimes e_j$ for generators $e_j$ of the $A_0$-module $A'$), and $C$ is Noetherian and $\\mathfrak m_C$-adically complete, so $C'\\to\\varprojlim_nC'/\\mathfrak m_C^nC'$ is bijective [lem-weil-pbc-finite-module-complete-over-complete-noetherian]; as $(\\mathfrak m_CC')^n=\\mathfrak m_C^nC'$, $C'$ is $\\mathfrak m_CC'$-adically complete [def-weil-pbc-adically-complete-ring]. By [lem-weil-pbc-fs-adic-lift-derivation] there is a derivation $D':C'\\to C'$ with $D'(1\\otimes a)=1\\otimes D(a)$ for $a\\in A'$. Let $W=A'\\setminus\\{0\\}$; $M=W^{-1}A'$, and $R_M:=C\\otimes_{A_0}M\\cong C'\\otimes_{A'}M$ is the localization of $C'$ at the image $W'$ of $W$ [lem-weil-pbc-localization-base-change]. By [lem-weil-pbc-derivation-extends](2), $D'$ extends to a derivation $D''$ of $W'^{-1}C'\\cong R_M$ with $D''(x/1)=D'(x)/1$. Then $D''(f)$ is the image of $D(f)\\in W$, a unit of $R_M$. (The source cites Lemma 07EH descent-fs here; the needed statement is the base change Lemma 07EG.)",
-   "uses": [
-    "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
-    "def-weil-module-base-change",
-    "lem-weil-pbc-fs-adic-base-change",
-    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
-    "def-weil-pbc-adically-complete-ring",
-    "lem-weil-pbc-fs-adic-lift-derivation",
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-derivation-extends"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), fifth paragraph ('By Lemma 07PH (find-D) ... As A' -> B (x)_A A' is formally smooth ... by Lemma 07EH (descent-fs) [read: 07EG base-change-fs] we can use Lemma 07PL (lift-derivation-through-fs) to extend D to D' ... D'(f) = D(f) is a unit in B (x)_A M')"
-   }
-  },
-  {
-   "text": "*Conclusion of the induction and of the proof.* $R_M=C\\otimes_{A_0}M$ is regular (induction hypothesis), $f\\in R_M$ and $D''(f)$ is a unit (Step 8), so $R_M[z]/(z^p-f)$ is regular [lem-weil-pbc-degree-p-extension-regular]. Since $L\\cong M[z]/(z^p-f)$ (Step 7), $C\\otimes_{A_0}L\\cong R_M\\otimes_ML\\cong R_M[z]/(z^p-f)$ [def-weil-module-base-change] (tensoring the presentation over $M$ with $R_M$). This completes the induction, so (**) holds also in characteristic $p$. By Steps 4 and 2, $B\\otimes_A\\kappa(\\mathfrak p)$ is Noetherian and geometrically regular over $\\kappa(\\mathfrak p)$ for every prime $\\mathfrak p$; with the flatness of Step 1, $\\varphi$ is a regular ring map [def-weil-pbc-g-ring].",
-   "uses": [
-    "lem-weil-pbc-degree-p-extension-regular",
-    "def-weil-module-base-change",
+    "def-weil-pbc-formally-smooth-adic",
     "def-weil-pbc-g-ring"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Proposition Tag 07PM (proposition-fs-regular, line 12028), fifth paragraph, last sentences ('B (x)_A L = B (x)_A M[z]/(z^p - f) ... Hence B (x)_A L is regular by Lemma 07PG (degree-p-extension-regular)')"
+    "place": "More on Algebra, Proposition Tag 07PM (proposition-fs-regular, line 12028), implication (4) => (1), and its proof (Proposition 07NQ fs-flat-fibre-fs; Algebra Lemma 032D complete-local-Noetherian-domain-finite-over-regular; Lemmas find-D, descent-fs, lift-derivation-through-fs, degree-p-extension-regular)"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-fs-adic-flat-geometrically-regular-closed-fibre",
   "def-weil-pbc-g-ring",
-  "def-weil-module-base-change",
   "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-formally-smooth-complete-local-generic-fiber",
   "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-fs-adic-base-change",
-  "def-weil-regular-scheme",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "lem-weil-pbc-complete-local-domain-finite-over-regular",
-  "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
-  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
-  "lem-weil-pbc-localization-of-regular-ring",
-  "lem-weil-pbc-purely-inseparable-pth-root-tower",
-  "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
-  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
-  "def-weil-pbc-adically-complete-ring",
-  "lem-weil-pbc-fs-adic-lift-derivation",
-  "lem-weil-pbc-derivation-extends",
-  "lem-weil-pbc-degree-p-extension-regular"
+  "def-weil-module-base-change",
+  "def-weil-pbc-formally-smooth-adic"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Proposition Tag 07PM (proposition-fs-regular, line 12028), proof of (4) => (1); Fields Lemma 09HI for the tower"
+  "place": "Proposition 07PM (4) => (1), quotient-to-domain reduction formalized directly; remaining coefficient and derivation argument isolated as generic-fibre lemma"
  },
  "mathlib_searches": [
   {
@@ -260,5 +149,15 @@
   "group": "E1",
   "result": "pass",
   "note": "A,B Noetherian local, IsAdicComplete at maximal ideals; IsLocalHom phi = phi(m_A) in m_B; hfs FormallySmoothAdic A B m_B under phi.toAlgebra (recorded H1 def, D : Type (max u v)); conclusion recorded RingHom.IsRegular = Flat + all primes p.Fiber B Noetherian & geometrically regular over p.ResidueField; #check resolves; no hollow hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T144115-L-2097177",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
