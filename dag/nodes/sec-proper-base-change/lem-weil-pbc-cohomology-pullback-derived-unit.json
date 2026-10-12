@@ -32,139 +32,55 @@
  ],
  "proof": [
   {
-   "text": "*Conventions: $\\Gamma$, $u_*$ and their derived functors.* For a scheme $T$, $\\Gamma(T,-):\\Ab(T_{\\Et})\\to\\Ab$ is evaluation at the final object $T$ of $T_{\\Et}$; it is additive (sums of sheaf maps are computed sectionwise) and left exact (kernels of abelian sheaves are computed sectionwise), and $\\Ab(T_{\\Et})$ is a Grothendieck abelian category with enough injectives [def-weil-pbc-abelian-etale-sheaves]. So [lem-weil-pbc-derived-direct-image-triangulated] applies to $v=\\Gamma(T,-)$ and to $v=u_*$ [def-weil-pbc-direct-image]: for $K\\in\\Dplus$ with chosen K-injective resolution $\\rho_K:K\\xrightarrow{\\sim}QI(K)$ ($I(K)=\\operatorname{Kinj}(K)$ of [def-weil-pbc-etale-cohomology], $Q$ the localization [def-weil-abstract-derived-category]), $RvK=Q(v\\,I(K))$, so $\\RGamma(T_{\\Et},K)=Q\\Gamma(T,I(K))$ and $Ru_*K=Q(u_*I(K))$; and for $a:K\\to K'$, $Rv(a)=Q(v(\\tilde a))$ where $\\tilde a:I(K)\\to I(K')$ is the unique homotopy class with $Q(\\tilde a)\\rho_K=\\rho_{K'}a$, which exists and is unique by [lem-weil-pbc-kinjective-hom-derived], $I(K')$ being K-injective. Since $v$ is additive, it carries homotopic maps to homotopic maps, so $v(\\tilde a)$ is well defined up to homotopy.",
+   "text": "For lowerStar_isKInjective_boundedBelow apply Adjunction.preservesKInjectiveComplexes to the exact inverse-image/direct-image adjunction. The bounded below mapping functor has the same underlying mapped complex, so the preservation theorem applies directly. Exactness is supplied by the already proved library instances, without using the separate statement upperStar_abelian_exact.",
    "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma Tag 01F8 (lemma-functoriality), proof: $Rf_*$ represented by $f_*$ of an injective resolution; derived.tex Lemma Tag 070K (K-injective resolutions compute right derived functors)"
-   }
-  },
-  {
-   "text": "*Computation on arbitrary K-injective representatives.* Let $v$ be $\\Gamma(T,-)$ or $u_*$ (step 1). For $K\\in\\Dplus$ call a pair $(I,\\sigma)$ with $I$ a K-injective complex and $\\sigma:K\\xrightarrow{\\sim}QI$ an isomorphism a *representative* of $K$. By [lem-weil-pbc-kinjective-hom-derived] there is a unique homotopy class $h_\\sigma:I\\to I(K)$ with $Q(h_\\sigma)=\\rho_K\\sigma^{-1}$; it is a quasi-isomorphism between K-injective complexes, hence a homotopy equivalence (last sentence of that node), so $v(h_\\sigma)$ is a homotopy equivalence ($v$ additive) and $\\tau_\\sigma:=Q(v(h_\\sigma)):Q(vI)\\xrightarrow{\\sim}RvK$ is an isomorphism; for $(I,\\sigma)=(I(K),\\rho_K)$, $h=\\mathrm{id}$ and $\\tau=\\mathrm{id}$. Claim: if $(I,\\sigma)$, $(I',\\sigma')$ represent $K$, $K'$, $a:K\\to K'$, and $f:I\\to I'$ is a morphism of complexes with $Q(f)\\sigma=\\sigma'a$, then $Rv(a)\\circ\\tau_\\sigma=\\tau_{\\sigma'}\\circ Q(v(f))$. Proof: $\\tilde a h_\\sigma$ and $h_{\\sigma'}f$ are maps $I\\to I(K')$ with $Q(\\tilde a h_\\sigma)=\\rho_{K'}a\\sigma^{-1}$ and $Q(h_{\\sigma'}f)=\\rho_{K'}\\sigma'^{-1}Q(f)=\\rho_{K'}\\sigma'^{-1}\\sigma'a\\sigma^{-1}=\\rho_{K'}a\\sigma^{-1}$; by the injectivity in [lem-weil-pbc-kinjective-hom-derived] ($I(K')$ K-injective) $\\tilde a h_\\sigma\\simeq h_{\\sigma'}f$; applying the additive $v$ and then $Q$ gives $Q(v\\tilde a)\\,Q(vh_\\sigma)=Q(vh_{\\sigma'})\\,Q(vf)$, the claim (step 1: $Rv(a)=Q(v\\tilde a)$). Special case $a=\\mathrm{id}_K$: for two representatives of one $K$ and $f$ with $Q(f)\\sigma=\\sigma'$, $\\tau_\\sigma=\\tau_{\\sigma'}\\circ Q(v(f))$; these $\\tau$ are the canonical identifications between complexes computed from different resolutions (the maps $\\Gamma(T,\\tilde\\varphi)$ for $\\varphi=\\mathrm{id}$ of [lem-weil-pbc-cohomology-pullback-functorial], step 1(a) and clause 1).",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 070K and its proof (independence of the K-injective resolution); Lemma Tag 05TG-type uniqueness of maps into K-injective complexes (lemma-K-injective, Tag 08BJ section); written out by the agent"
-   }
-  },
-  {
-   "text": "*Clause 1, K-injectivity of $u_*J$.* The inverse image $u^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is exact [prop-weil-pbc-inverse-image-exact] and left adjoint to $u_*$ [def-weil-pbc-inverse-image]; $u_*$ is additive (on sections, $(u_*\\varphi)_W=\\varphi_{W\\times_XY}$ [def-weil-pbc-direct-image]). By [lem-weil-pbc-right-adjoint-preserves-kinjective] (with $u=u_*$, $v=u^{-1}$; its notion of K-injective is that of [def-weil-pbc-kinjective-resolutions], as recorded there) the termwise complex $u_*J$ is K-injective for every K-injective complex $J$ on $Y_{\\Et}$ (Stacks' proof: for acyclic $M$, $u^{-1}M$ is acyclic, and $\\operatorname{Hom}_{K}(M,u_*J)=\\operatorname{Hom}_K(u^{-1}M,J)=0$); if $J$ is bounded below so is $u_*J$, as $u_*0=0$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-exact",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-direct-image",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-weil-pbc-kinjective-resolutions"
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma Tag 08BJ (lemma-adjoint-preserve-K-injectives); sites-cohomology.tex Remark Tag 08J6 (remark-before-Leray) and Lemma Tag 072Z (lemma-direct-image-injective-sheaf), which gives the same for injective sheaves"
-   }
+   "elementary": false
   },
   {
-   "text": "*Clause 1, the isomorphism $\\lambda_L$.* Let $L\\in\\Dplus(Y_{\\Et})$ and let $(J,\\sigma)$ be a representative of $L$ (step 2), e.g. $(I(L),\\rho_L)$. The equality of complexes $e_J:\\Gamma(X,u_*J)=\\Gamma(Y,J)$ holds termwise, $(u_*J^r)(X)=J^r(X\\times_XY)=J^r(Y)$, and on differentials, $(u_*d^r)_X=d^r_Y$ [def-weil-pbc-direct-image] (the identification $X\\times_XY=Y$ being the canonical one). Let $c:J\\to I(L)$ be the homotopy class with $Q(c)\\sigma=\\rho_L$ (it is $h_\\sigma$ of step 2, a homotopy equivalence). Then $u_*J$ is K-injective (step 3) and $\\sigma_*:=Q(u_*c)^{-1}:Ru_*L=Q(u_*I(L))\\xrightarrow{\\sim}Q(u_*J)$ makes $(u_*J,\\sigma_*)$ a representative of $Ru_*L$ ($Q(u_*c)$ is invertible, $u_*c$ being a homotopy equivalence). Define $\\lambda_L=\\tau^{Y}_{\\sigma}\\circ Q(e_J)\\circ(\\tau^{X}_{\\sigma_*})^{-1}:\\RGamma(X_{\\Et},Ru_*L)\\to\\RGamma(Y_{\\Et},L)$, with $\\tau^X$, $\\tau^Y$ the isomorphisms of step 2 for $v=\\Gamma(X,-)$ on $Ru_*L$ and $v=\\Gamma(Y,-)$ on $L$; it is a composite of isomorphisms of $\\Dplus(\\Ab)$. Independence of $(J,\\sigma)$: comparing with $(I(L),\\rho_L)$, step 2 (case $a=\\mathrm{id}$, $f=c$, resp. $f=u_*c$ from $(u_*J,\\sigma_*)$ to $(u_*I(L),\\mathrm{id})$, since $Q(u_*c)\\sigma_*=\\mathrm{id}$) gives $\\tau^Y_\\sigma=\\tau^Y_{\\rho_L}Q(\\Gamma(Y,c))$ and $\\tau^X_{\\sigma_*}=\\tau^X_{\\mathrm{id}}Q(\\Gamma(X,u_*c))$, and $e_{I(L)}\\circ\\Gamma(X,u_*c)=\\Gamma(Y,c)\\circ e_J$ because $(u_*c)_X=c_Y$; so both choices give the same $\\lambda_L$. In particular, for the chosen resolution, $\\lambda_L=\\tau^X_{\\mathrm{id}}$-conjugate of the literal equality $\\Gamma(X,u_*I(L))=\\Gamma(Y,I(L))$, which is the statement of clause 1.",
+   "text": "For lerayPlus_on_kInjective first prove a private general lemma: choose a bounded below complex of injective objects representing Qh K using the proved equivalence K+(Inj) ≌ D+. Since both it and K are K-injective, bijectivity of Qh on maps into each lifts the two arrows of the derived isomorphism; injectivity of Qh proves the inverse identities. Naturality transports invertibility of the derived unit from the complex of injective objects to K. Direct image of J is K-injective by the preceding argument. Apply the general lemma to direct image, global sections on its image, and global sections on J.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Remark Tag 08J6 (remark-before-Leray): $R\\Gamma(\\mathcal D,Rf_*\\mathcal F)=R\\Gamma(\\mathcal C,\\mathcal F)$; cohomology.tex Lemma Tag 01EZ (lemma-before-Leray) and its proof via $\\Gamma(Y,-)\\circ f_*=\\Gamma(X,-)$"
-   }
-  },
-  {
-   "text": "*Clause 1, naturality of $\\lambda$.* Let $b:L\\to L'$ in $\\Dplus(Y_{\\Et})$, $J=I(L)$, $J'=I(L')$, and $\\tilde b:J\\to J'$ the lift of step 1, so $Ru_*(b)=Q(u_*\\tilde b)$. Step 2 for $v=\\Gamma(X,-)$, $a=Ru_*(b)$, representatives $(u_*J,\\mathrm{id})$, $(u_*J',\\mathrm{id})$ and $f=u_*\\tilde b$ (indeed $Q(u_*\\tilde b)\\circ\\mathrm{id}=\\mathrm{id}\\circ Ru_*(b)$) gives $\\RGamma(X,Ru_*b)\\circ\\tau^X=\\tau'^X\\circ Q(\\Gamma(X,u_*\\tilde b))$; step 2 for $v=\\Gamma(Y,-)$, $a=b$, $f=\\tilde b$ gives $\\RGamma(Y,b)\\circ\\tau^Y=\\tau'^Y\\circ Q(\\Gamma(Y,\\tilde b))$ (here all $\\tau=\\mathrm{id}$ for the chosen resolutions, but the computation is the same for any representatives); and $e_{J'}\\circ\\Gamma(X,u_*\\tilde b)=\\Gamma(Y,\\tilde b)\\circ e_J$ since $(u_*\\tilde b)_X=\\tilde b_Y$ [def-weil-pbc-direct-image]. Combining, $\\lambda_{L'}\\circ\\RGamma(X_{\\Et},Ru_*b)=\\RGamma(Y_{\\Et},b)\\circ\\lambda_L$.",
-   "uses": [
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma Tag 01EZ (lemma-before-Leray): the commutative diagram of functors $R\\Gamma(X,-)\\circ Rf_*=R\\Gamma(Y,-)$; naturality written out by the agent"
-   }
-  },
-  {
-   "text": "*Clause 2, a representative of the derived unit.* Let $K\\in\\Dplus(X_{\\Et})$ be represented as in [def-weil-pbc-cohomology-pullback]: a bounded below complex $K^\\bullet$ with $\\kappa:K\\xrightarrow{\\sim}QK^\\bullet$, a K-injective resolution $s:K^\\bullet\\to I^\\bullet$ and a K-injective resolution $r:u^{-1}I^\\bullet\\to J^\\bullet$ on $Y_{\\Et}$. Since $u^{-1}$ is exact, $u^{-1}(s)$ is a quasi-isomorphism and $r\\circ u^{-1}(s):u^{-1}K^\\bullet\\to J^\\bullet$ is a K-injective resolution of the bounded below complex $u^{-1}K^\\bullet$, which represents $u^{-1}(QK^\\bullet)$ through $\\varphi_{K^\\bullet}$ [def-weil-pbc-derived-inverse-image]. Property (2) of [prop-weil-pbc-derived-inverse-image-adjunction] with $M=K^\\bullet$ and this resolution says: $\\eta^D_{u,QK^\\bullet}$ is the class of $K^\\bullet\\xrightarrow{\\eta_{u,K^\\bullet}}u_*u^{-1}K^\\bullet\\xrightarrow{u_*(r\\,u^{-1}s)}u_*J^\\bullet$, under the identification $Q(u_*J^\\bullet)\\cong Ru_*u^{-1}QK^\\bullet$ of that node, i.e. with $\\sigma_*:Ru_*u^{-1}K\\xrightarrow{\\sim}Q(u_*J^\\bullet)$ the isomorphism making $(u_*J^\\bullet,\\sigma_*)$ a representative as in step 4 (transported along $\\kappa$ by naturality of $\\eta^D$). Naturality of the unit $\\eta_u$ of $u^{-1}\\dashv u_*$ [def-weil-pbc-inverse-image] applied to $s$ gives $u_*u^{-1}(s)\\circ\\eta_{u,K^\\bullet}=\\eta_{u,I^\\bullet}\\circ s$, so this morphism equals $f\\circ s$ with $f:=u_*(r)\\circ\\eta_{u,I^\\bullet}:I^\\bullet\\to u_*J^\\bullet$. Hence, with $\\sigma:=Q(s)\\kappa:K\\xrightarrow{\\sim}QI^\\bullet$ (a representative of $K$, $I^\\bullet$ K-injective), $\\sigma_*\\circ\\eta^D_{u,K}=Q(f)\\circ\\sigma$, and $u_*J^\\bullet$ is K-injective (step 3).",
-   "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "prop-weil-pbc-inverse-image-exact",
-    "def-weil-pbc-derived-inverse-image",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma Tag 01F8 (lemma-functoriality) and its proof, applied to $\\mathcal G^\\bullet=K^\\bullet$, $\\mathcal F^\\bullet=u^{-1}K^\\bullet$, $\\varphi=\\eta_{u,K^\\bullet}$: the map $\\mathcal G^\\bullet\\to f_*\\mathcal F^\\bullet\\to f_*\\mathcal I^\\bullet$"
-   }
-  },
-  {
-   "text": "*Clause 2, the comparison.* Apply step 2 with $v=\\Gamma(X,-)$, $a=\\eta^D_{u,K}:K\\to Ru_*u^{-1}K$, representatives $(I^\\bullet,\\sigma)$ and $(u_*J^\\bullet,\\sigma_*)$ and the morphism $f$ of step 6: $\\RGamma(X,\\eta^D_{u,K})\\circ\\tau^X_\\sigma=\\tau^X_{\\sigma_*}\\circ Q(\\Gamma(X,f))$. By step 4 (with $L=u^{-1}K$ and the representative $(J^\\bullet,\\sigma')$, $\\sigma'$ the isomorphism $u^{-1}K\\cong QJ^\\bullet$ given by $Q(r\\,u^{-1}s)\\varphi_{K^\\bullet}u^{-1}(\\kappa)$, whose $\\sigma_*$ is the one of step 6), $\\lambda_{u^{-1}K}\\circ\\tau^X_{\\sigma_*}=\\tau^Y_{\\sigma'}\\circ Q(e_{J^\\bullet})$. Hence $\\lambda_{u^{-1}K}\\circ\\RGamma(X,\\eta^D_{u,K})\\circ\\tau^X_\\sigma=\\tau^Y_{\\sigma'}\\circ Q(e_{J^\\bullet}\\circ\\Gamma(X,f))$. On a section $a\\in I^r(X)$: $\\Gamma(X,f)(a)=(u_*r)_X(\\eta_{u,I^r}(a))=r_Y(\\eta_{u,I^r}(a))$, an element of $\\Gamma(X,u_*J^r)=J^r(Y)$; so $e_{J^\\bullet}\\circ\\Gamma(X,f)$ is literally the morphism of complexes $\\Gamma(X,I^\\bullet)\\to\\Gamma(Y,J^\\bullet)$, $a\\mapsto r(\\eta_u(a))$, whose class is $u^*$ in [def-weil-pbc-cohomology-pullback]. The isomorphisms $\\tau^X_\\sigma:Q\\Gamma(X,I^\\bullet)\\cong\\RGamma(X_{\\Et},K)$ and $\\tau^Y_{\\sigma'}:Q\\Gamma(Y,J^\\bullet)\\cong\\RGamma(Y_{\\Et},u^{-1}K)$ are the canonical identifications under which that definition reads $u^*$ as a morphism $\\RGamma(X_{\\Et},K)\\to\\RGamma(Y_{\\Et},u^{-1}K)$ (step 2, last sentence; [lem-weil-pbc-cohomology-pullback-functorial] clause 1 for independence of $I^\\bullet,J^\\bullet$). So $u^*=\\lambda_{u^{-1}K}\\circ\\RGamma(X_{\\Et},\\eta^D_{u,K})$, which is clause 2 for complexes.",
-   "uses": [
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-derived-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "equations Tag 01F9 (equation-functorial-derived) and Tag 01FA (equation-functorial): the arrow $R\\Gamma(Y,\\mathcal G)\\to R\\Gamma(Y,Rf_*\\mathcal F)=R\\Gamma(X,\\mathcal F)$; Remark Tag 01FB (remark-explain-arrow)"
-   }
-  },
-  {
-   "text": "*Clause 2 on cohomology groups.* Let $G$ be an abelian sheaf on $X_{\\Et}$ and $K=QG[0]$, so $K^\\bullet=G[0]$, $u^{-1}K^\\bullet=(u^{-1}G)[0]$ and $u^{-1}K=Q((u^{-1}G)[0])$ [def-weil-pbc-derived-inverse-image]. The cohomology functors $\\mathcal H^q$ on $\\Dplus(\\Ab)$ satisfy $\\mathcal H^q(Q(g))=\\mathcal H^q(g)$ for a morphism of complexes $g$ [def-weil-abstract-derived-category]. By step 7, $\\mathcal H^q(\\lambda_{u^{-1}K}\\circ\\RGamma(X,\\eta^D_{u,K}))=\\mathcal H^q(\\tau^Y_{\\sigma'})\\circ\\mathcal H^q(a\\mapsto r(\\eta_u(a)))\\circ\\mathcal H^q(\\tau^X_\\sigma)^{-1}$; the middle map is $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ of [def-weil-pbc-cohomology-pullback] (groups $\\mathcal H^q\\Gamma(X,I^\\bullet)$, $\\mathcal H^q\\Gamma(Y,J^\\bullet)$ as in [def-weil-pbc-etale-cohomology]), and $\\mathcal H^q(\\tau)=\\mathcal H^q(\\Gamma(T,h))$ are the identifications $H^q(\\mathrm{id})$ of the groups computed from different resolutions [prop-weil-pbc-cohomology-resolution-independent], [lem-weil-pbc-cohomology-pullback-functorial]. Hence $u^*$ on $H^q$ is $\\mathcal H^q$ of the composite, for every $q\\ge0$.",
-   "uses": [
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-pbc-derived-categories",
     "def-weil-pbc-etale-cohomology",
-    "prop-weil-pbc-cohomology-resolution-independent",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "equation Tag 01FA (equation-functorial): the maps on cohomology $H^i$ induced by the arrow on $R\\Gamma$"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For derivedCohomologyPullback_eq_derivedUnit form the natural transformation Γ of the derived adjunction unit followed by the canonical Leray composition isomorphism. By rightDerived_ext its equality with rightDerivedDesc reduces to compatibility after precomposing with the Γ derived unit on every bounded below homotopy object M. Expand the derived adjunction unit using derivedPlus_unit_app_fac, move the inverse inverse-image factorization through the Leray map by naturality, and move the localized underived unit through the Γ derived unit. The composite remaining on the right is rightDerivedFunctorPlusCompUnit followed by the Leray map; rightDerivedFunctorPlusCompIso'_fac identifies it with the mapped sectionwise isomorphism followed by the Γ derived unit on L(M). Cancel the common tails by congruence and compare through the faithful inclusion of the bounded below homotopy category. Present M as the quotient of a complex; mapHomotopyCategory_unit_app_quotient and mapHomotopyCategory_map reduce to the definitionally equal maps of complexes. Thus the two natural transformations agree, and their components at K agree.",
+   "uses": [
+    "prop-weil-pbc-derived-inverse-image-adjunction",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-abelian-etale-sheaves",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "prop-weil-pbc-inverse-image-exact",
   "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "def-weil-pbc-kinjective-resolutions",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-cohomology",
   "prop-weil-pbc-derived-inverse-image-adjunction",
-  "prop-weil-pbc-cohomology-resolution-independent"
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-cohomology-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "C1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Section Tag 01F7 (section-functoriality): Lemma Tag 01F8, equations Tag 01F9/01FA, Lemma Tag 01EZ (lemma-before-Leray); sites-cohomology.tex Remark Tag 08J6; derived.tex Lemma Tag 08BJ; the bookkeeping of identifications between K-injective representatives (steps 2, 4, 5, 7) written out by the agent"
+  "place": "Tags 01EZ, 01F8, 01F9, 01FA; derived.tex Tag 08BJ. Formal categorical implementation using the proved source library equivalence K+(Inj) ≌ D+, derived adjunction unit formula, right-derived universal property and Leray unit compatibility."
  },
  "mathlib_searches": [
   {
@@ -285,5 +201,15 @@
   "group": "J1",
   "result": "fix",
   "note": "re-point of def-weil-pbc-cohomology-pullback (cohomologyMap, 12 citers) reverted; derived u^* on D+ spelled inline (rightDerivedDesc of the unit section map, as in the reverted module); tautological conjunct (rightDerivedFunctorPlusCompIso'_fac) and derivable H^q theorem dropped; reverted the delivery's change of existing node(s) def-weil-pbc-cohomology-pullback (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T044738-L-2032236",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
