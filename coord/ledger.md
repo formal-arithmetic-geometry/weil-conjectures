@@ -9655,3 +9655,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:47 L: merged deliver/E3/Sheaf.AlgebraicGeometry.GrothendieckDevissageRecoverLevels (stage 3; reviewer PASS; first push; landing 20261012T214706-L-1269692 (interface); batch 20261012T214703; modules 4; new nodes 3)
 - 21:47 L: merged deliver/E3/Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle (stage 3; reviewer PASS; first push; landing 20261012T214706-L-1269816 (interface); batch 20261012T214703; modules 3; new nodes 2)
 - 21:47 L: merged deliver/F1/Sheaf.RingTheory.StandardSmoothDimensionAtPoints (stage 3; reviewer PASS; first push; landing 20261012T214706-L-1269943 (proof); batch 20261012T214703; modules 1; new nodes 0)
+- 21:47 L: merged deliver/G1/Sheaf.AlgebraicGeometry.FiniteFreeStalkMapEquality (stage 3; reviewer PASS; first push; landing 20261012T214707-L-1270062 (proof); batch 20261012T214703; modules 1; new nodes 0)

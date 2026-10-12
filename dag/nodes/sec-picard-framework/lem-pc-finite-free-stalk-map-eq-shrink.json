@@ -15,31 +15,47 @@
  ],
  "proof": [
   {
-   "text": "The source isomorphism supplies r generating sections on V, carried to generators by restriction. Apply the natural pullback stalk comparison at the closed point of Spec O_{Y,y}; the local ring map there is an isomorphism. Hence equality of pullback maps implies equality of the germs in N of the two images of each generator. The comparison applies to the Mathlib pullback by the canonical isomorphism between left adjoints of the same pushforward.",
+   "text": "Put x=(y,hyV) in V and let a=V.fromSpecStalkOfMem y hyV. Factor a as the spectrum of the inverse open-immersion stalk isomorphism followed by V.fromSpecStalk x. The canonical-morphism local-properties theorem makes the latter stalk map an isomorphism at every point; thus a.stalkMap at the closed point is an isomorphism. The closed point maps to x by fromSpecStalkOfMem_ι and fromSpecStalk_closedPoint.",
    "uses": [
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-module-stalk-pullback"
+    "lem-weil-pbc-spec-local-ring-canonical-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the germ equality criterion to the two images of each of the finitely many generators and intersect the resulting opens with U. Both maps agree on the restricted generators and hence everywhere. For r=0 take W=U.",
+   "text": "Use the canonical tensor-pullback adjunction and Mathlib pullbackPushforwardAdjunction to identify their left adjoints. Naturality carries equality of Mathlib pullback maps to equality of tensorPullback maps. The natural tensor-pullback stalk comparison then gives equality after extension of scalars of the original module stalk maps. Restriction of scalars along the isomorphic ring stalk map is an equivalence, so the extend/restrict adjunction unit is an isomorphism. Naturality of that unit and cancellation yield equality of the original stalk maps. This is the proved private helper stalk_map_eq_of_pullback_eq.",
    "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-weil-pbc-free-module"
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-pc-module-stalk-functor"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose the assumed source isomorphism with the proved source-library restrictFreeIso to replace M by the finite free sheaf on V. Precompose the equality of stalk maps with each coproduct inclusion and evaluate on the germ of 1. Mathlib stalkFunctor_map_germ_apply gives equality of the germs of the two images of each global generator.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each generator apply Mathlib TopCat.Presheaf.germ_eq to its two global images. Take the intersection of their finitely many open neighbourhoods with the inverse image of U in V. Mathlib Opens.coe_iInf ensures this intersection contains x, including an empty index type. Restrict each section equality to the common intersection. Restriction preserves the free coproduct, so its colimit hom_ext reduces equality of restricted maps to equality on each summand. Identify each restricted unit with the unit, and use unitHomEquiv and compatibility of sections to see that a map from the unit is determined by its value at global 1. These identities are proved in the private helpers unit_hom_ext_top and exists_restrict_eq_of_free_germs_eq.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the restricted inverse of the source isomorphism. Send the common neighbourhood Wprime inside V to W=V.ι image Wprime inside Y, proving W≤U and y∈W. Mathlib isoImage identifies Wprime.toScheme with W.toScheme; cancel V.ι to identify its composite with Y.homOfLE with Wprime.ι. Transport map equality along restrictFunctorCongr and restrictFunctorComp. Restriction along this scheme isomorphism detects equality, as shown by evaluating on inverse-image opens in the proved private helper restrict_map_injective_of_isIso. This yields exactly the direct restriction equality in the theorem.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-free-module",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-module-stalk-pullback"
+  "def-pc-module-stalk-functor",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Finite-generator equality portion of the finite germ argument; complex and homotopy reduction proved in the parent module."
+  "place": "Finite germ calculation, fully formalized by G1 using the existing tensor-pullback stalk comparison and canonical local-morphism stalk isomorphisms; finite-intersection and direct-restriction glue proved locally."
  },
  "mathlib_searches": [
   {
@@ -114,11 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2fe15",
-  "group": "B3",
+  "reviewer": "COMPILER",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T205158-L-906519",
-  "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures and proofs with both DAG nodes; both delivered modules and the sole direct importer FiniteFreeStalkHomotopyPairShrink compile cleanly; axioms are the permitted three plus sorryAx from the documented lower lemma."
+  "landing": "20261012T214707-L-1270062",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
