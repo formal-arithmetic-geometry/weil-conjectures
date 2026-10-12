@@ -14,11 +14,9 @@
  ],
  "proof": [
   {
-   "text": "The transition is the mate of the pullback composition comparison. Pasting the two comparisons with identity functors on X identifies the composite of the two transition maps with the mate of their pasted comparison. Equivalently, apply the inverse h₁-adjunction hom-set equivalence: naturality moves the first transition inside a₁^*, and the h₂ counit cancels its adjunct by a triangle identity.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false
+   "text": "Eliminate the two triangle witnesses by substitution. Express the first transition as the adjunct of its pullback comparison followed by pullback of the counit. Apply the inverse h₁-adjunction hom-set equivalence to both sides. Use left and right naturality of this equivalence, then naturality of the a₁-comparison, to move the first transition into a₁-pullback. Its inverse adjunct is the original counit composite, by Equiv.symm_apply_apply (the adjunction triangle identities).",
+   "uses": [],
+   "elementary": true
   },
   {
    "text": "Use the already proved source-library upperStarCompDerivedPlus_assoc (WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc) on (a₁,a₂,h). It writes the pasted comparison as the comparison for (a₁≫a₂,h) followed by the comparison for (a₁,a₂). Naturality moves the h counit through the latter comparison; composing with its inverse cancels it. The remaining adjunct is the composite transition. Injectivity of the hom-set equivalence proves equality. Equality transports along the two triangle witnesses are eqToIso; proof irrelevance identifies the witnesses.",
@@ -26,13 +24,11 @@
    "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-mate-pasting"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/09Z1; Mathlib/CategoryTheory/Adjunction/Mates.lean",
-  "place": "canonical restriction maps; mateEquiv_vcomp, specialized to identity functors on the common base"
+  "document": "Mathlib/CategoryTheory/Adjunction/Basic.lean; WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc",
+  "place": "homEquiv_naturality_left_symm, homEquiv_naturality_right_symm, upperStarCompDerivedPlus_assoc; second reading: direct hom-set calculation, not an application of mateEquiv_vcomp"
  },
  "mathlib_searches": [
   {
@@ -127,8 +123,8 @@
   "reviewer": "COMPILER",
   "group": "G1",
   "result": "pass",
-  "landing": "20261012T085239-L-14480",
-  "kind": "interface",
+  "landing": "20261012T110301-L-614790",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
