@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Projective.Finiteness
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveSpaceOverField
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.Curve
@@ -269,8 +270,8 @@ theorem finiteDimensional_H (ℱ : (ProjectiveLine (Spec (.of k))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     [SheafOfModules.IsFinitePresentation (R := (ProjectiveLine (Spec (.of k))).ringCatSheaf) ℱ]
     {q : ℕ} (hq : q ≤ 1) : FiniteDimensional k (ℱ.H q) :=
-  -- the bound `q ≤ 1` is not needed: `ℙ¹_k` is proper over `k`
-  (fun _ ↦ Scheme.Modules.finiteDimensional_H_of_isProper ℱ q) hq
+  -- the bound `q ≤ 1` is not needed: this is the case `n = 1` of Serre's finiteness on `ℙⁿ_k`
+  (fun _ ↦ ProjectiveSpace.finiteDimensional_H k ℱ q) hq
 
 end ProjectiveLine
 
@@ -280,10 +281,10 @@ dimension one, smooth over `k`, with a closed immersion `i` into some `ℙⁿ_k`
 a coherent `𝒪_X`-module. Then `H⁰(X, ℱ)` and `H¹(X, ℱ)` are finite-dimensional over `k`, and
 `H^q(X, ℱ) = 0` for `q ≥ 2`.
 
-The finiteness holds since `X` is proper over `k`
-(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper`). For the vanishing, choose
-a finite morphism `u : X ⟶ ℙ¹_k` (`AlgebraicGeometry.exists_isFinite_toProjectiveLine`). Since
-`u` is affine, the preimages of the two standard affine opens `U₀`, `U₁` of `ℙ¹_k` are affine
+The finiteness holds since `X` is a closed subscheme of `ℙⁿ_k`
+(`AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isClosedImmersion`). For the vanishing,
+choose a finite morphism `u : X ⟶ ℙ¹_k` (`AlgebraicGeometry.exists_isFinite_toProjectiveLine`).
+Since `u` is affine, the preimages of the two standard affine opens `U₀`, `U₁` of `ℙ¹_k` are affine
 opens covering `X`, and `X` is separated, so the quasi-coherent cohomology of `X` vanishes in
 degrees `≥ 2` (`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le`), as on `ℙ¹_k`
 (`AlgebraicGeometry.ProjectiveLine.subsingleton_H_of_two_le`).
@@ -299,10 +300,9 @@ theorem finiteDimensional_H_of_isCurve {k : Type u} [Field k] [IsAlgClosed k] {X
     FiniteDimensional k (ℱ.H 0) ∧ FiniteDimensional k (ℱ.H 1) ∧
       ∀ q, 2 ≤ q → Subsingleton (ℱ.H q) := by
   classical
-  have : IsProper (X ↘ Spec (.of k)) := hi ▸ inferInstance
   have : i.IsOver (Spec (.of k)) := ⟨hi⟩
-  refine ⟨Scheme.Modules.finiteDimensional_H_of_isProper ℱ 0,
-    Scheme.Modules.finiteDimensional_H_of_isProper ℱ 1, fun q hq ↦ ?_⟩
+  refine ⟨Scheme.Modules.finiteDimensional_H_of_isClosedImmersion k i ℱ 0,
+    Scheme.Modules.finiteDimensional_H_of_isClosedImmersion k i ℱ 1, fun q hq ↦ ?_⟩
   obtain ⟨π, hπ, -⟩ := exists_isFinite_toProjectiveLine X i hX
   have : IsSeparated (Limits.terminal.from X) := by
     rw [← Limits.terminal.comp_from (X ↘ Spec (.of k))]
