@@ -25,49 +25,48 @@
  ],
  "proof": [
   {
-   "text": "For the affine morphism $f:Y\\to X$ with $A=f_*\\mathcal O_Y$, the underived sheaf-Hom functor $\\mathcal Hom_{\\mathcal O_X}(A,-)$ from $\\mathcal O_X$-modules to $A$-modules is right adjoint to restriction of scalars, and on an affine open $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$ its sections are $\\operatorname{Hom}_R(S,F(U))$ with counit evaluation at $1\\in S$; this is the affine sheaf-Hom calculation of Tag 0AX2.",
+   "text": "Obtain the underived H, iH, adjunction and evaluation counit from sheafHom_affine_rightAdjoint. H is additive by right_adjoint_additive. Apply exists_changeOfRingsAdjunction to the same structure-ring map: scalar restriction is both a left and a right adjoint, so preserves finite colimits and limits.",
    "uses": [
+    "lem-sc-finite-sheafhom-affine",
+    "lem-pc-module-change-of-rings-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let L be scalar restriction mapDerivedCategory with its factorization t. Let R be the total right derived functor, at the cochain-complex localization Q, of H applied degreewise followed by Q_A. A quasi-isomorphism of K-injective complexes is a homotopy equivalence; additive H preserves that equivalence, so the K-injective localizer derives this functor. Its derived comparison beta is an isomorphism on K-injectives. The derivability-structure absoluteness lemma makes R followed by L a right derived functor. Since t is invertible, L and L followed by R are left derived functors. Apply Adjunction.derived to the degreewise underived adjunction.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-derived-adjunction-from-underived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the scalar-restriction factorization t by degreewise H and compose it with the degreewise version of iH. This identifies the source of the comparison for R followed by L with termwise internal Hom(M,-) followed by Q, for M the restricted algebra unit. Transport the right Kan extension through this source isomorphism with isLeftKanExtension_iff_of_iso2. Apply the unary internal-Hom comparison to identify R followed by L with RHom(M[0],-).",
+   "uses": [
+    "lem-sc-derived-internal-hom-single-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit of the degreewise adjunction equals NatTrans.mapHomologicalComplex of the underived counit, by componentwise extensionality. Adjunction.derived_epsilon_fac_app then gives exactly the stated counit compatibility. Together with the underived evaluation clause this specifies evaluation at one.",
+   "uses": [
+    "lem-sc-derived-adjunction-from-underived",
     "lem-sc-finite-sheafhom-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-compute-sheafhom-affine"
-   }
-  },
-  {
-   "text": "Apply the derived-adjunction theorem to the underived restriction/sheaf-Hom adjunction. Restriction of scalars is exact, so it preserves quasi-isomorphisms and induces a functor $D(A)\\to D(\\mathcal O_X)$ which is an absolute left derived functor of itself; $R\\mathcal Hom_{\\mathcal O_X}(A,-)$ is the right derived extension of $\\mathcal Hom_{\\mathcal O_X}(A,-)$, computed on K-injective resolutions, hence an absolute right derived functor. The theorem therefore gives an adjunction between restriction $D(A)\\to D(\\mathcal O_X)$ and $R\\mathcal Hom_{\\mathcal O_X}(A,-):D(\\mathcal O_X)\\to D(A)$.",
-   "uses": [
-    "lem-sc-finite-sheafhom-affine",
-    "lem-sc-derived-adjunction-from-underived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-sheafhom-affine-adjoint, citing Derived Categories, lemma-derived-adjoint-functors"
-   }
-  },
-  {
-   "text": "The underived counit is evaluation at the unit: on an affine $U=\\operatorname{Spec}(R)$ with $f^{-1}(U)=\\operatorname{Spec}(S)$, the adjunction is restriction of scalars $S\\text{-Mod}\\to R\\text{-Mod}$ and $R$-linear maps $S\\to F(U)$, whose counit sends $\\varphi$ to $\\varphi(1)$. By the counit clause of [lem-sc-derived-adjunction-from-underived], the derived counit at a complex $K$ is compatible with the underived counit applied to $K$ (computed on a K-injective representative). Hence the component $R\\mathcal Hom_{\\mathcal O_X}(A,K)\\to K$ is induced by evaluation at $1\\in A$.",
-   "uses": [
-    "lem-sc-finite-sheafhom-affine",
-    "lem-sc-derived-adjunction-from-underived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, lemma-sheafhom-affine-adjoint; Tag 0AX3, remark-trace-map-finite"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-finite-sheafhom-affine",
-  "lem-sc-derived-adjunction-from-underived"
+  "lem-pc-module-change-of-rings-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-sc-derived-internal-hom-single-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tags 0AX2 and 0AX3"
+  "place": "Tags 0BUZ, 0BV0, 0BV1 and 0AX3; the derived adjunction and counit are instantiated from Mathlib at the complex localization"
  },
  "mathlib_searches": [
   {
@@ -148,5 +147,15 @@
   "group": "U1",
   "result": "fix",
   "note": "f:Y->X affine = IsAffineHom; A = f_*O_Y as landed moduleRings (directImageAlgebraSpace f) with landed map whiskerRight f.c (was bare RingCat sheaf tied by =/HEq + existential HasDerivedCategory); restriction = SheafOfModules.restrictScalars, L tied by t; RHom = derivedInternalHom (Opens X, X.sheaf) of single A, via Nonempty iso R⋙L; counit tied as derivedε_fac_app form through underived adj₀ (counit = evaluation at 1 via iH to homObj), R right derived of H with β, R⋙L absolute; removed untied free iso b (counit was only determined up to it) and redundant T/M/B/ε binders; diffed node JSON (only lean record added) and module (new, absent on sheaf-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T095933-L-328453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
