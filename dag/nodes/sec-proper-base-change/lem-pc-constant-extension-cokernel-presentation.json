@@ -14,40 +14,28 @@
  },
  "proof": [
   {
-   "text": "Discard empty members of covers. On a nonempty member choose constant values M and N for the outer terms. Identify these with a geometric stalk to obtain finitely generated M and N. Choose a surjection P = Λ^m → N. Its kernel K is a finite set since Λ and m are finite, so K is finitely generated.",
+   "text": "Apply exists_constantExtension_presentation_lift to obtain an etale cover and a lifted short exact module presentation whose kernel is finitely generated. This is the finite free generator/local lifting step of Tag 093U.",
    "uses": [
-    "def-constructible-finite",
-    "def-constructible-constant"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The epimorphism E → N_X is locally surjective on sections. Lift the finitely many generators simultaneously by intersecting their covering sieves. The lifts give r:P_U → E_U lifting P_U → N_U. This uses the local-lifting argument of the cited node for Ring Λ and fixed-coefficient ModuleCat sheaves; its current CommRing SheafOfModules specialization must be bridged or generalized, as the original parent plan already notes.",
-   "uses": [
-    "lem-constructible-shortexact-local-lift"
+    "lem-pc-constant-extension-presentation-lift"
    ],
    "elementary": false
   },
   {
-   "text": "The constant presentation 0 → K_U → P_U → N_U → 0 is short exact by constant exactness. The restriction of r to K_U factors uniquely through M_U as g. The map M_U ⊞ P_U → E_U sends (a,v) to a+r(v). It is epi because its image contains M_U and maps onto N_U. Its kernel is the image of (-g,inclusion):K_U → M_U ⊞ P_U: if a+r(v)=0 then v lies in K_U and a=-g(v). Thus E_U is this cokernel. The biproduct M_U ⊞ P_U identifies with the constant sheaf of M ⊞ P. Empty schemes admit the empty cover.",
+   "text": "On each cover member apply finite_cokernelPresentation_of_local_presentation to the short exact extension, its constant first term, and the lifted presentation. Its fully proved categorical cokernel computation gives the required finite-source presentation.",
    "uses": [
-    "lem-constructible-constant-exact",
-    "lemma-constructible-flc-biproduct"
+    "lem-pc-constant-extension-cokernel-aux-finite"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-constructible-finite",
-  "def-constructible-constant",
-  "lem-constructible-shortexact-local-lift",
-  "lem-constructible-constant-exact",
-  "lemma-constructible-flc-biproduct"
+  "lem-pc-constant-extension-presentation-lift",
+  "lem-pc-constant-extension-cokernel-aux-finite"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093U, Lemma 18.43.5 extension argument"
+  "place": "Tag 093U: finite free local lifts followed by the proved categorical pushout/cokernel step"
  },
  "mathlib_searches": [
   {
@@ -124,15 +112,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
+  "reviewer": "X-c9cab",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T053940-L-2638623",
+  "landing": "20261012T150952-L-2230408",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.exists_constantExtension_cokernelPresentation"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Delivery packet, delivered Lean files, DAG nodes, change record, report, and lcompile validation all match the stage-3 review requirements; adapted caller compiles and the only remaining sorry is documented."
  }
 }
