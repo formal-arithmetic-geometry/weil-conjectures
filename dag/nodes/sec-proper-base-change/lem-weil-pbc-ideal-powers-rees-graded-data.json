@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-ideal-powers-rees-graded-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The formal-functions argument in step 7: Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400",
+   "via": [
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ideal powers times a coherent module give finite type Rees graded sheaf data",
+ "statement": "Let $A$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, $f:X\\to\\operatorname{Spec}A$ a proper morphism [def-weil-proper-morphism], $J=I\\mathcal O_X$ the extended ideal [def-nagata-extended-ideal], and $F$ a coherent module [pqf-def-coherent]. Let $G_m=J^mF$ be the image module with its inclusion $j_m:G_m\\to F$, including the zeroth power [def-weil-pbc-coherent-formal-module]. Write $B=\\mathcal R_A(I)$ [def-nagata-rees-algebra], $B_k=I^kt^k$ [def-nagata-rees-piece]. There exist maps $\\mu_{m,k}:B_k\\to\\operatorname{Hom}_{\\mathcal O_X}(G_m,G_{m+k})$ such that on every open $U$, $j_{m+k}(\\mu_{m,k}(b)(s))=f^\\sharp(\\operatorname{coeff}_k b)|_U\\,j_m(s)$. Every $G_m$ is quasi-coherent, $\\mu_{m,k}$ is additive, $\\mu_{m+l,k}(b)\\circ\\mu_{m,l}(b')=\\mu_{m,k+l}(bb')$ after the canonical degree identification, and $\\mu_{m,0}(a)$ is multiplication by $f^\\sharp(a)$. For each $x\\in X$ there are an open $U\\ni x$, finitely many degrees $d_i$ and sections $s_i\\in G_{d_i}(U)$ such that for every $V\\subseteq U$, $t\\in G_m(V)$ and $y\\in V$, some open $y\\in W\\subseteq V$ has $t|_W$ in the $\\mathcal O_X(W)$-span of the sections $\\mu_{d_i,m-d_i}(b)(s_i|_W)$ for $d_i\\le m$ and $b\\in B_{m-d_i}$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-weil-pbc-coherent-formal-module",
+  "def-nagata-rees-algebra",
+  "def-nagata-rees-piece"
+ ],
+ "proof": [
+  {
+   "text": "A proper scheme over Spec A is Noetherian. Coherence of F gives quasi-coherence and finite type. Apply the affine extended-ideal and ideal-product formulas to identify the images of G_m(U) in F(U) with the span of f^sharp(a)s, a in I^m, including m=0. All G_m are quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-pullback-ideal-quotient",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a homogeneous b=a t^k, multiply sections by f^sharp(a). On an affine cover products a a_j lie in I^(m+k), so this maps G_m into G_(m+k). The local lifts are unique under the monomorphic image inclusion and glue on arbitrary opens. Additivity, composition and the degree-zero scalar formula follow by composing with the inclusions into F and using the identities in F.",
+   "uses": [
+    "prop-nagata-rees-graded",
+    "lemma-nagata-rees-degree-zero",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite local generators of F on U and transport them through G_0 isomorphic to F; set all d_i=0. A section of G_m near y is a finite sum f^sharp(a_j)u_j, a_j in I^m. Shrink once for the finitely many u_j to express them in the chosen generators. The resulting sum c_ij mu_(0,m)(a_j t^m)(s_i) is the required local span. This works for the empty scheme, zero module, I=0, I=A and m=0.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "def-pc-scheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-ideal-quotient",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "def-weil-pbc-coherent-formal-module",
+  "prop-nagata-rees-graded",
+  "lemma-nagata-rees-degree-zero",
+  "def-pc-scheme",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O8, lemma-cohomology-powers-ideal-times-F, proof and preceding paragraph: multiplication maps and finite type of the graded sheaf, lines 5330-5400"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Powers of an ideal times a coherent sheaf form a finite type graded module sheaf over the Rees algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Powers of an ideal times a coherent sheaf form a finite type graded module sheaf over the Rees algebra",
+   "results": "Ideal.Filtration.submodule, reesAlgebra.fg, Ideal.Filtration.Stable.exists_pow_smul_eq, Ideal.Filtration.submodule_fg_iff_stable, Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge, Ideal.stableFiltration_N, Ideal.Filtration.submodule_eq_span_le_iff_stable_ge, Ideal.Filtration",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "reesAlgebra|gradedFinitenessCohomology",
+   "results": "Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealPowersReesGradedData",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealPowersReesGradedData.lean",
+  "declaration": "AlgebraicGeometry.idealPowersReesGradedData",
+  "statement": "theorem idealPowersReesGradedData {A : Type v} [CommRing A] [IsNoetherianRing A] {X : Scheme.{v}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (I : Ideal A) (J : X.IdealSheafData) (hJ : J = (Scheme.IdealSheafData.ofIdealTop (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f) (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F) : let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F let graded := reesGrading I ∃ mu : ∀ (m k : ℕ), graded k → (G m ⟶ G (m + k)), (∀ (m k : ℕ) (b : graded k) (U : X.Opens) (s : (G m).val.obj (op U)), ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι (m + k)).2 F).app U).hom ((mu m k b).app U s) = (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appLE ⊤ U le_top).hom (b.val.val.coeff k)) • ((Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι m).2 F).app U).hom s) ∧ (∀ m : ℕ, (G m).IsQuasicoherent) ∧ (∀ (m k : ℕ) (b b' : graded k), mu m k (b + b') = mu m k b + mu m k b') ∧ (∀ (m k l : ℕ) (b : graded k) (b' : graded l), HEq (mu m l b' ≫ mu (m + l) k b) (mu m (k + l) ⟨b.val * b'.val, SetLike.mul_mem_graded b.property b'.property⟩)) ∧ (∀ (m : ℕ) (a : A) (U : X.Opens) (t : (G m).val.obj (op U)), HEq ((mu m 0 ⟨algebraMap A (reesAlgebra I) a, algebraMap_mem_reesGrading_zero I a⟩).val.app (op U) t) ((X.presheaf.map (homOfLE (le_top (a := U))).op).hom (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t)) ∧ (∀ x : X, ∃ (U : X.Opens), x ∈ U ∧ ∃ (r : ℕ) (d : Fin r → ℕ) (s : ∀ i : Fin r, (G (d i)).val.obj (op U)), ∀ (m : ℕ) (V : X.Opens) (hVU : V ≤ U) (t : (G m).val.obj (op V)) (y : X), y ∈ V → ∃ (W : X.Opens) (hWV : W ≤ V), y ∈ W ∧ (G m).val.map (homOfLE hWV).op t ∈ Submodule.span ((moduleRings X.toRingedSpace).obj.obj (op W)) {z | ∃ (i : Fin r), d i ≤ m ∧ ∃ b : graded (m - d i), HEq z ((mu (d i) (m - d i) b).val.app (op W) ((G (d i)).val.map (homOfLE (hWV.trans hVU)).op (s i)))})",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T153648-L-2394931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T153648-L-2394931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

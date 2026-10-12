@@ -11,13 +11,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.ReesAlgebra
 public import Mathlib.Algebra.DirectSum.Basic
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.IdealPowersReesGradedData
+import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import Sheaf.Paper.GradedFinitenessCohomology
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.Blowup.Affine.Proper
 import WeilConjectures.Blowup.Affine.ReesGrading
 
 /-! # Finiteness of cohomology of ideal powers over the Rees algebra
@@ -115,6 +111,54 @@ theorem cohomology_powers_ideal_rees_finite {A : Type v} [CommRing A]
                 (m + k)
                 (((RingedSpace.moduleCohomology X.toRingedSpace q).map
                   (lam k m (b.val.coeff k) (b.property k))).hom (x m)) := by
-  sorry
+  classical
+  let G := fun m ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι m).2 F
+  obtain ⟨mu, hsection, hG, hadd, hmul, hscalar, hgen⟩ :=
+    idealPowersReesGradedData f I J hJ F hF
+  let lam := fun (k m : ℕ) (a : A) (ha : a ∈ I ^ k) ↦
+    mu m k ⟨reesMonomial I a ha, reesMonomial_mem I a ha⟩
+  refine ⟨lam, ?_, ?_, ?_⟩
+  · intro k m a ha U s
+    simpa [lam, reesMonomial] using
+      hsection m k ⟨reesMonomial I a ha, reesMonomial_mem I a ha⟩ U s
+  · intro m a ha x
+    have hb : (⟨reesMonomial I a ha, reesMonomial_mem I a ha⟩ : reesGrading I 0) =
+        ⟨algebraMap A (reesAlgebra I) a, algebraMap_mem_reesGrading_zero I a⟩ := by
+      apply Subtype.ext
+      apply Subtype.ext
+      simp [reesMonomial]
+    have hs : ∀ (U : X.Opens) (t : (G m).val.obj (op U)),
+        (lam 0 m a ha).val.app (op U) t =
+          (X.presheaf.map (homOfLE (le_top (a := U))).op).hom
+            (((Scheme.ΓSpecIso (.of A)).inv ≫ f.appTop).hom a) • t := by
+      intro U t
+      dsimp [lam]
+      rw [hb]
+      exact eq_of_heq (hscalar m a U t)
+    exact moduleCohomology_scalar_endomorphism (G m) (lam 0 m a ha) _ hs q x
+  · obtain ⟨mod, hfin, hact⟩ := gradedFinitenessCohomology (reesGrading I)
+      (reesGrading_isInternal I) (SetLike.one_mem_graded (reesGrading I))
+      (fun _ _ _ _ hx hy ↦ SetLike.mul_mem_graded hx hy)
+      (algebraMap_mem_reesGrading_zero I) f G hG mu hadd hmul hscalar hgen q
+    refine ⟨mod, hfin, ?_⟩
+    intro b x
+    let M := fun n ↦ ((RingedSpace.moduleCohomology X.toRingedSpace q).obj (G n) : Type v)
+    let : Module (reesAlgebra I) (⨁ n : ℕ, M n) := mod
+    have hb : b = ∑ k ∈ b.val.support,
+        reesMonomial I (b.val.coeff k) (b.property k) := by
+      apply Subtype.ext
+      simp only [AddSubmonoidClass.coe_finsetSum, coe_reesMonomial]
+      exact b.val.as_sum_support
+    let x' : ⨁ n : ℕ, M n := x
+    change b • x' = _
+    conv_lhs => rw [hb, ← DirectSum.sum_support_of x']
+    rw [Finset.sum_smul]
+    apply Finset.sum_congr rfl
+    intro k hk
+    rw [Finset.smul_sum]
+    apply Finset.sum_congr rfl
+    intro m hm
+    exact hact k m
+      ⟨reesMonomial I (b.val.coeff k) (b.property k), reesMonomial_mem I _ _⟩ (x m)
 
 end AlgebraicGeometry

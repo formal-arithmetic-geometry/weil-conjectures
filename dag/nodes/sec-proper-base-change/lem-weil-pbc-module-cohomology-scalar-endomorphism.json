@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-scalar-endomorphism",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "The formal-functions argument in step 7: Tag 01DZ, section-cohomology-sheaves, equation-cohomology-modules: module cohomology computed by injective resolutions",
+   "via": [
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Module cohomology preserves multiplication by a global section",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $G$ an $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], $r\\in\\Gamma(X,\\mathcal O_X)$, and $\\tau:G\\to G$ an endomorphism such that $\\tau_U(t)=r|_U\\,t$ for every open $U$ and section $t\\in G(U)$. For every $q\\ge0$ and $x\\in H^q(X,G)$, with module cohomology defined by [def-sc-ringed-space-module-cohomology], $H^q(X,\\tau)(x)=r x$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, section-cohomology-sheaves, equation-cohomology-modules: module cohomology computed by injective resolutions"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Define the scalar endomorphism on each sheaf by restriction of r to every open. Naturality of restrictions and linearity of sheaf morphisms imply that it commutes with every module-sheaf morphism. The section formula identifies tau with this endomorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use enough injectives to choose an injective resolution I of G. The scalar endomorphisms in each degree define a chain map phi since they commute with the differentials, and extend tau. Mathlib InjectiveResolution.isoRightDerivedObj_hom_naturality computes the derived map via phi.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation at the top open takes each component of phi to r times the identity. On the short complex computing degree q, phi is r times the identity. Mathlib ShortComplex.homologyMap_smul and homologyMap_id therefore compute its homology map as r times the identity. The resolution comparison is a module isomorphism, so cancel its injective hom map and use linearity to conclude.",
+   "uses": [
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01DZ, section-cohomology-sheaves, equation-cohomology-modules: module cohomology computed by injective resolutions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf module cohomology maps multiplication by a global section to scalar multiplication on cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a global section of the structure sheaf induces scalar multiplication on derived module cohomology",
+   "results": "ModuleCat.Tilde.smul_section_apply, AlgebraicGeometry.Scheme.Modules.Hom.app_smul, AlgebraicGeometry.Scheme.Modules.map_smul, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.smul, PresheafOfModules.Sheafify.SMulCandidate",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*smul|homologyMap_smul|reesAlgebra",
+   "results": "Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/Filtration.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/RingTheory/ReesAlgebra.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyScalarEndomorphism.lean",
+  "declaration": "AlgebraicGeometry.moduleCohomology_scalar_endomorphism",
+  "statement": "theorem moduleCohomology_scalar_endomorphism {X : Scheme.{v}} (G : X.Modules) (tau : G ⟶ G) (r : (moduleRings X.toRingedSpace).obj.obj (op ⊤)) (htau : ∀ (U : X.Opens) (t : G.val.obj (op U)), tau.val.app (op U) t = (X.presheaf.map (homOfLE (le_top (a := U))).op).hom r • t) (q : ℕ) (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj G) : ((RingedSpace.moduleCohomology X.toRingedSpace q).map tau).hom x = r • x",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T153648-L-2394931",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T153648-L-2394931",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
