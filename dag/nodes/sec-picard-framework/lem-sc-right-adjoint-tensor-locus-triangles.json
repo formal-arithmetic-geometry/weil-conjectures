@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-right-adjoint-tensor-locus-triangles",
+ "kind": "statement",
+ "title": "Shifts and triangle closure of the pinned right-adjoint tensor locus",
+ "statement": "Let $f:Z\\to Y$, its derived categories, hRf, hO, hTensor, monoidal pullback structure, pullback adjunction a, and right adjunction adj to c satisfy the hypotheses of [lem-sc-right-adjoint-tensor-comparison-natural]. For quasi-coherent K, define P(K) to mean that there is a projection isomorphism pf with the pinned inverse equation of that node and that the adj-mate of pf followed by tensoring the counit and the right unitor is invertible. Then (1) for every integer n, P(A) and $B.obj\\cong A.obj[n]$ imply P(B); (2) if an ambient distinguished triangle T has vertices isomorphic to A.obj, B.obj, C.obj respectively, then P(A) and P(B) imply P(C). No assumption on preservation of coproducts by c is needed, and neither coproduct nor retract closure is asserted.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U, first two sentences of proof; Section 48.8, equation (48.8.0.1)"
+ },
+ "stmt_deps": [
+  "lem-sc-right-adjoint-tensor-comparison-natural",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical natural comparison. K-flat pullback and tensor are exact with canonical shift comparisons. The right adjoint to the exact restricted derived pushforward is exact: transport shifts by the adjunction and test triangles with all representable Hom functors. The comparison respects shifts by the counit identities and monoidal coherence.",
+   "uses": [
+    "lem-sc-right-adjoint-tensor-comparison-natural",
+    "def-pc-derived-pullback",
+    "def-pc-derived-direct-image",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugation by the shift comparisons and the specified ambient isomorphism transfers invertibility to B. For a distinguished ambient triangle with quasi-coherent vertices, lift it to the full subcategory. Apply the two exact functors and the comparison; use the morphism-of-triangles two-out-of-three lemma and the specified vertex isomorphisms. The pinned projection isomorphism is unique, so component invertibility gives the stated P memberships. Zero triangles and all integer shifts are included.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-sc-right-adjoint-tensor-comparison-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U, first two sentences of proof, expanded as a stage-3 obligation by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical right adjoint tensor comparison is natural and compatible with distinguished triangles",
+   "results": "service unavailable: ",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of exact functors commuting with shifts has an isomorphism locus closed under distinguished triangles and shifts",
+   "results": "8 hits: CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.mem_homologicalKernel_trW_iff, CategoryTheory.Functor.map_distinguished_iff, CategoryTheory.Functor.mem_mapTriangle_essImage_of_distinguished, CategoryTheory.Functor.mem_homologicalKernel_W_iff, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.map_distinguished",
+   "date": "2026-10-12",
+   "verdict": "Component results only; no theorem with the stated geometric hypotheses and conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₃_of_isIso₁₂|isIso.*[Cc]oproduct|isIso.*[Ss]igma",
+   "results": "25 hits: Mathlib/CategoryTheory/Generator/StrongGenerator.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Products.lean, Mathlib/CategoryTheory/Extensive.lean, Mathlib/CategoryTheory/Extensive.lean",
+   "date": "2026-10-12",
+   "verdict": "Component results only; no theorem with the stated geometric hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointTensorLocusLocalizing",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Shifts and triangle closure of the pinned right-adjoint tensor locus",
+   "via": [
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RightAdjointTensorLocusTriangles",
+  "file": "lean/Sheaf/AlgebraicGeometry/RightAdjointTensorLocusTriangles.lean",
+  "declaration": "AlgebraicGeometry.rightAdjointTensorLocus_triangles",
+  "statement": "theorem rightAdjointTensorLocus_triangles {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] (hRf : ∀ E : schemeDerivedQCohCategory Z, schemeDerivedQCohProperty Y ((schemeDerivedDirectImage f).obj E.obj)) (hO : schemeDerivedQCohProperty Y (𝟙_ (schemeDerivedCategory Y))) (hTensor : ∀ (K : schemeDerivedQCohCategory Y) (E : schemeDerivedQCohCategory Z), schemeDerivedQCohProperty Z (((derivedPullback f).obj K.obj) ⊗ E.obj)) [Functor.Monoidal (derivedPullback f)] (a : derivedPullback f ⊣ schemeDerivedDirectImage f) (c : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory Z) (adj : (schemeDerivedQCohProperty Y).lift ((schemeDerivedQCohProperty Z).ι ⋙ schemeDerivedDirectImage f) hRf ⊣ c) : let P : ObjectProperty (schemeDerivedQCohCategory Y) := fun K ↦ ∃ pf : (schemeDerivedDirectImage f).obj (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅ K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj, pf.inv = (a.homEquiv _ _) ((Functor.Monoidal.μIso (derivedPullback f) K.obj ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫ (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧ IsIso ((adj.homEquiv ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj, hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K) (ObjectProperty.homMk (pf.hom ≫ K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) (∀ (A : schemeDerivedQCohCategory Y) (n : ℤ), P A → ∀ (B : schemeDerivedQCohCategory Y), Nonempty (B.obj ≅ A.obj⟦n⟧) → P B) ∧ (∀ (A B : schemeDerivedQCohCategory Y), P A → P B → ∀ (T : Pretriangulated.Triangle (schemeDerivedCategory Y)), T ∈ Pretriangulated.distinguishedTriangles → Nonempty (T.obj₁ ≅ A.obj) → Nonempty (T.obj₂ ≅ B.obj) → ∀ (C : schemeDerivedQCohCategory Y), Nonempty (T.obj₃ ≅ C.obj) → P C)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T184244-L-3997017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T184244-L-3997017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

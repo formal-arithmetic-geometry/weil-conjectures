@@ -17,39 +17,50 @@
  ],
  "proof": [
   {
-   "text": "The qcqs derived projection formula supplies pf for each K; its inverse is uniquely pinned by the pullback adjunction. Naturality of the tensor comparison and both counits makes the displayed mates a natural comparison Lf*(-) tensor c(O_Y) to c(-). K-flat pullback and tensor are exact; the right adjoint of exact pushforward is exact by adjunction. The comparison respects shifts by counit and monoidal coherence.",
+   "text": "Obtain the canonical natural comparison tau from the pinned projection formula. For each K, use Iso.ext_inv to identify every pinned pf with the supplied one, giving the equivalence P(K) iff IsIso(tau.app K).",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-derived-direct-image",
-    "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-projection-formula"
+    "lem-sc-right-adjoint-tensor-comparison-natural"
    ],
    "elementary": false
   },
   {
-   "text": "Naturality transports invertibility across object isomorphisms; shift compatibility transports it across shifts. The comparison gives a morphism between distinguished triangles; two invertible components force the third to be invertible. A retract diagram gives a retract of comparison arrows, and the explicit retraction transports an inverse, giving retract closure.",
+   "text": "Lift an ambient retract to the full quasi-coherent subcategory with homMk and hom_ext. NatTrans.retractArrowApp induces a retract of comparison arrows; Mathlib MorphismProperty.of_retract for isomorphisms proves retract closure. Apply this to the inverse of the ambient image of an object isomorphism to prove isomorphism closure.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the separate shift and triangle closure theorem to supply exactly the second and third clauses.",
+   "uses": [
+    "lem-sc-right-adjoint-tensor-locus-triangles"
+   ],
    "elementary": false
   },
   {
-   "text": "Pullback, as a left adjoint, and K-flat tensor preserve coproducts, while c preserves them by hypothesis. The comparison on a coproduct is conjugate to the coproduct of its components and is therefore invertible when all components are. Quasi-coherent cohomology is closed under ambient termwise coproducts; the inclusion of the full subcategory creates these coproducts. This identifies every ambient cofan in the statement with the quasi-coherent coproduct and transports the result to the given object.",
+   "text": "Construct the full-subcategory coproduct cofan on B by composing each given coprojection with the inverse of B.obj ≅ S. Its desc is induced by the ambient cofan; prove fac and uniq using the ambient universal property. Derived tensorRight preserves coproducts and pullback preserves them by its adjunction. The quasi-coherent inclusion creates coproducts by ambient coproduct existence and quasi-coherent closure. Its fully faithful target inclusion reflects colimits, so the actual lifted source comparison functor preserves them.",
    "uses": [
-    "lem-pc-derived-qcoh-direct-sums"
+    "lem-sc-derived-tensor-right-coproducts",
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts"
    ],
    "elementary": false
+  },
+  {
+   "text": "The components of tau on the discrete summand diagram are invertible by P membership. Its source and target preserve the coproduct, the latter by hsums. Apply Mathlib isIso_app_coconePt_of_preservesColimit to the constructed cofan, then the P/component criterion. This covers empty coproducts without nonemptiness assumptions. Assemble all five clauses.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-direct-image",
-  "def-pc-derived-pullback",
-  "def-pc-scheme-derived-tensor-structure",
-  "lem-pc-derived-qcoh-direct-sums",
-  "lem-pc-projection-formula"
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts",
+  "lem-sc-derived-tensor-right-coproducts",
+  "lem-sc-right-adjoint-tensor-comparison-natural",
+  "lem-sc-right-adjoint-tensor-locus-triangles"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9U, lemma-compare-with-pullback-flat-proper-noetherian, first two sentences of proof"
+  "place": "Tag 0A9U, first two sentences of proof; C1 Lean reduction using uniqueness, retracts, and colimit preservation, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -126,9 +137,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N3",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T085314-L-29615",
+  "landing": "20261012T184244-L-3997017",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

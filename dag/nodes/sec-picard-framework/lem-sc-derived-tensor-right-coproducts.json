@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-derived-tensor-right-coproducts",
+ "kind": "statement",
+ "title": "Preservation of arbitrary scheme-universe coproducts by shared derived tensorRight",
+ "statement": "Let X be a scheme [def-pc-scheme], with any chosen derived category $D(\\mathcal O_X)$ in localization universe w [def-pc-derived-category] and its shared K-flat derived tensor [def-pc-scheme-derived-tensor-structure]. For every derived object E and every index type J in the scheme universe u, the functor $(-)\\otimes^{\\mathbb L}E$ preserves colimits of shape Discrete J. The universes u and w are independent, no quasi-coherence of E is required, and the empty index type is allowed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U, first two sentences of proof; Cohomology Tags 06YH and 0FPB; Injectives Tag 07D9"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat representative P of E. The shared K-flat comparison identifies derived tensor with total tensor on representatives, naturally in their maps. Symmetry allows placing the fixed K-flat representative on the right.",
+   "uses": [
+    "lem-pc-kflat-derived-tensor-comparison",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module-sheaf tensor is a left adjoint in both variables, so it preserves coproducts. Coproducts of cochain complexes are degreewise. In total degree n interchange the coproduct of the input complexes with the coproduct over degree pairs adding to n. These canonical interchange maps commute with the signed tensor differential and hence give an isomorphism of complexes respecting coprojections.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Termwise sums compute derived coproducts. The natural K-flat comparison therefore identifies the tensor image of a coproduct cofan with a colimit cofan. All representatives and comparisons live in the given localization universe w; no Grothendieck instance in w is needed. The universal property includes empty coproducts.",
+   "uses": [
+    "lem-pc-derived-ambient-direct-sums"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-derived-ambient-direct-sums",
+  "lem-pc-kflat-derived-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0A9U, first two sentences of proof, expanded as a stage-3 obligation by C1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product with any complex of module sheaves preserves arbitrary coproducts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left derived tensor functor preserves coproducts in the derived category",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.instPreservesFiniteBiproductsTensorLeft",
+   "date": "2026-10-12",
+   "verdict": "Component results only; no theorem with the stated geometric hypotheses and conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesColimits.*tensor|tensor.*PreservesColimits|preservesColimit.*[Dd]erived",
+   "results": "24 hits: Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Distributive/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean, Mathlib/CategoryTheory/Monoidal/Bimod.lean",
+   "date": "2026-10-12",
+   "verdict": "Component results only; no theorem with the stated geometric hypotheses and conclusion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RightAdjointTensorLocusLocalizing",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Preservation of arbitrary scheme-universe coproducts by shared derived tensorRight",
+   "via": [
+    "lem-sc-right-adjoint-tensor-locus-localizing",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorRightCoproducts.lean",
+  "declaration": "AlgebraicGeometry.derivedTensorRight_preservesCoproducts",
+  "statement": "theorem derivedTensorRight_preservesCoproducts (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (E : schemeDerivedCategory X) (J : Type u) : PreservesColimitsOfShape (Discrete J) (tensorRight E)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T184244-L-3997017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T184244-L-3997017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -12,8 +12,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.ObjectProperty.Retract
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural
+import Sheaf.AlgebraicGeometry.RightAdjointTensorLocusTriangles
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! # Localizing operations on the right-adjoint tensor-comparison locus
 
@@ -100,6 +104,94 @@ theorem rightAdjointTensorLocus_localizing
       ∀ (S : schemeDerivedCategory Y) (ι : ∀ j, (E j).obj ⟶ S),
         IsColimit (Cofan.mk S ι) →
         ∀ (B : schemeDerivedQCohCategory Y), Nonempty (B.obj ≅ S) →
-          (∀ j, P (E j)) → P B) := by sorry
+          (∀ j, P (E j)) → P B) := by
+  dsimp only
+  obtain ⟨τ, hτ⟩ := rightAdjointTensorComparison_natural f hRf hO hTensor a c adj
+  have hcriterion (K : schemeDerivedQCohCategory Y) :
+      (∃ pf : (schemeDerivedDirectImage f).obj
+            (((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj) ≅
+          K.obj ⊗ (schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj,
+          pf.inv = (a.homEquiv _ _)
+            ((Functor.Monoidal.μIso (derivedPullback f) K.obj
+              ((schemeDerivedDirectImage f).obj (c.obj ⟨𝟙_ _, hO⟩).obj)).inv ≫
+              (derivedPullback f).obj K.obj ◁ a.counit.app (c.obj ⟨𝟙_ _, hO⟩).obj) ∧
+          IsIso ((adj.homEquiv
+            ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,
+              hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
+            (ObjectProperty.homMk (pf.hom ≫
+              K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))) ↔
+        IsIso (τ.app K) := by
+    obtain ⟨pf, hpin, heq⟩ := hτ K
+    constructor
+    · rintro ⟨pf', hpin', h⟩
+      have hpf : pf' = pf := Iso.ext_inv (hpin'.trans hpin.symm)
+      subst pf'
+      rwa [heq]
+    · intro h
+      exact ⟨pf, hpin, heq ▸ h⟩
+  have hretract (A B : schemeDerivedQCohCategory Y)
+      (hB : IsIso (τ.app B)) (r : Retract A.obj B.obj) : IsIso (τ.app A) := by
+    let r' : Retract A B :=
+      { i := ObjectProperty.homMk r.i
+        r := ObjectProperty.homMk r.r
+        retract := ObjectProperty.hom_ext _ r.retract }
+    exact MorphismProperty.of_retract (P := MorphismProperty.isomorphisms _)
+      (τ.retractArrowApp r') hB
+  obtain ⟨hshift, hcone⟩ := rightAdjointTensorLocus_triangles f hRf hO hTensor a c adj
+  refine ⟨?_, hshift, hcone, ?_, ?_⟩
+  · intro A B hA ⟨e⟩
+    apply (hcriterion B).mpr
+    exact hretract B A ((hcriterion A).mp hA)
+      (((schemeDerivedQCohProperty Y).ι.mapIso e).symm.retract)
+  · intro A B hB ⟨r⟩
+    exact (hcriterion A).mpr (hretract A B ((hcriterion B).mp hB) r)
+  · intro J E S ι hc B ⟨e⟩ hE
+    let q : Cofan E := Cofan.mk B (fun j ↦ ObjectProperty.homMk (ι j ≫ e.inv))
+    have hq : IsColimit q := by
+      refine Cofan.IsColimit.mk q
+        (fun s ↦ ObjectProperty.homMk (e.hom ≫
+          hc.desc (Cofan.mk s.pt.obj (fun j ↦ (s.inj j).hom)))) ?_ ?_
+      · intro s j
+        apply ObjectProperty.hom_ext _
+        simpa [q, Category.assoc] using hc.fac
+          (Cofan.mk s.pt.obj (fun j ↦ (s.inj j).hom)) ⟨j⟩
+      · intro s m hm
+        apply ObjectProperty.hom_ext _
+        apply (cancel_epi e.inv).mp
+        change e.inv ≫ m.hom = e.inv ≫ e.hom ≫ _
+        rw [Iso.inv_hom_id_assoc]
+        apply hc.hom_ext
+        intro ⟨j⟩
+        simpa [q, Category.assoc] using (congrArg (fun φ ↦ φ.hom) (hm j)).trans
+          (hc.fac (Cofan.mk s.pt.obj (fun j ↦ (s.inj j).hom)) ⟨j⟩).symm
+    let F := (schemeDerivedQCohProperty Z).lift
+      ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙
+        tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj)
+      (fun K ↦ hTensor K (c.obj ⟨𝟙_ _, hO⟩))
+    let : PreservesColimitsOfShape (Discrete J)
+        (tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj) :=
+      derivedTensorRight_preservesCoproducts Z (c.obj ⟨𝟙_ _, hO⟩).obj J
+    let : PreservesColimitsOfShape (Discrete J) (derivedPullback f) :=
+      a.leftAdjoint_preservesColimits.preservesColimitsOfShape
+    let : HasCoproducts.{u} (schemeDerivedCategory Y) := derivedAmbientHasCoproducts Y
+    let : (schemeDerivedQCohProperty Y).IsClosedUnderColimitsOfShape (Discrete J) :=
+      schemeDerivedQCohClosedUnderCoproducts Y J
+    have : PreservesColimitsOfShape (Discrete J)
+        (F ⋙ (schemeDerivedQCohProperty Z).ι) := by
+      change PreservesColimitsOfShape (Discrete J)
+        ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f ⋙
+          tensorRight (c.obj ⟨𝟙_ _, hO⟩).obj)
+      infer_instance
+    let : PreservesColimitsOfShape (Discrete J) F :=
+      preservesColimitsOfShape_of_reflects_of_preserves F (schemeDerivedQCohProperty Z).ι
+    let : PreservesColimitsOfShape (Discrete J) c := hsums J
+    have : ∀ j : J, IsIso (τ.app (E j)) := fun j ↦ (hcriterion (E j)).mp (hE j)
+    have : ∀ j : Discrete J, IsIso ((Functor.whiskerLeft (Discrete.functor E) τ).app j) :=
+      fun j ↦ (hcriterion (E j.as)).mp (hE j.as)
+    have : IsIso (Functor.whiskerLeft (Discrete.functor E) τ) :=
+      NatIso.isIso_of_isIso_app _
+    exact (hcriterion B).mpr
+      (isIso_app_coconePt_of_preservesColimit (Discrete.functor E) τ q hq)
+
 
 end AlgebraicGeometry
