@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives",
+ "kind": "statement",
+ "title": "Finite partial sum representatives for cohomology of a coproduct on a qcqs scheme",
+ "statement": "Let X be a quasi-compact quasi-separated scheme [def-weil-pbc-scheme-conventions], I an arbitrary index type, F_i sheaves of O_X-modules [def-weil-sheaf-of-modules-category], and S a coproduct of the F_i with inclusions iota_i [def-weil-pbc-category-colimit]. For every nonnegative p and x in H^p(X,S) [pqf-def-cohomology], there exist a finite subset J of I and y in H^p(X,B_J), where B_J is the finite biproduct of the F_j in the abelian category [def-sp-abelian], such that H^p(X,kappa_J)(y)=x. Here kappa_J is the unique map whose composite with each biproduct inclusion is iota_j. The empty finite subset is permitted.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Tag 01FF, label lemma-quasi-separated-cohomology-colimit, lines 3194-3211; direct-sum application in Tag 09J7, label lemma-perfect-is-compact, lines 13762-13768. Only the finite-stage existence assertion is used."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "pqf-def-cohomology",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "The compact opens form a basis stable under intersections on a qcqs scheme, by [lem-weil-pbc-qcqs-scheme-spectral] and [def-weil-spectral-space]. The whole space is compact by hypothesis.",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite J choose the finite biproduct B_J of the F_j; these exist in the abelian module-sheaf category [def-weil-sheaf-of-modules-category], [def-sp-abelian]. Its underlying cofan is a coproduct. Inclusion of finite subsets gives transition maps characterized on the summands. The finite subsets are directed under union, with the empty set as an initial object. The finite-subsum colimit theorem [lem-weil-pbc-scheme-modules-coproduct-finite-subsums] identifies the resulting colimit with S via its given coproduct cofan.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sp-abelian",
+    "lem-weil-pbc-scheme-modules-coproduct-finite-subsums"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existence-of-stage clause of [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] at the whole space to this diagram. Cohomology is that of [pqf-def-cohomology]. Forgetting the global scalar action compares module-valued global-sections cohomology with the abelian-group-valued open cohomology at the top open: both apply sections to the same injective module resolution and take homology, and forgetting scalars preserves kernels and cokernels. Thus a class x has a representative y in H^p(X,B_J) for some finite J. For larger index universes, discard zero summands and shrink the remaining index set: choose a nonzero section of each nonzero F_i and send it by iota_i into the disjoint union of section sets of S over opens. Coproduct projections show these pairs are distinct for distinct indices, so the nonzero indices form a u-small set. Reindex by a small equivalent type, apply the recorded directed-colimit lemma there, and transport the finite subset back to I. Zero summands do not affect the coproduct or any finite biproduct.",
+   "uses": [
+    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The structural map B_J to S restricts to iota_j on every summand, hence is biproduct.desc by the coproduct universal property. This gives the stated equality. Empty J is allowed, and degree zero requires no alteration.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "def-weil-spectral-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-abelian",
+  "lem-weil-pbc-scheme-modules-coproduct-finite-subsums",
+  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology, Tag 01FF, label lemma-quasi-separated-cohomology-colimit, lines 3194-3211; direct-sum application in Tag 09J7, label lemma-perfect-is-compact, lines 13762-13768. Only the finite-stage existence assertion is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology classes of a coproduct of module sheaves on a compact quasi separated scheme have finite partial sum representatives",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every cohomology class of a coproduct of sheaves on a quasi compact quasi separated scheme comes from a finite partial coproduct",
+   "results": "Eight hits including Scheme.zero_of_zero_cover and nonempty_isColimit_Γ_mapCocone; none concerns higher cohomology of module-sheaf coproducts.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\"",
+   "results": "Twelve hits about HomComplex.CohomologyClass, none about finite-stage representatives.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSubsum|finite.*cohomology.*coproduct",
+   "results": "No matches. Also searched the repository DAG and Lean library: the existing 01FF lemma is for a directed diagram, not for coproduct finite-stage representatives.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split, through the graded cohomology used in the essential-surjectivity argument of Lemma 0GS2; specifically the identification of the graded H^p in Stacks 0897(1); here only existence of a representative in a finite partial sum, steps 1, 2 and 5 of the direct-sum argument.",
+   "via": [
+    "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "lem-weil-pbc-graded-finiteness-cohomology",
+    "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+    "lem-weil-pbc-cohomology-powers-ideal-application",
+    "lem-weil-pbc-ml-cohomology-powers-ideal",
+    "lem-weil-pbc-theorem-formal-functions",
+    "lem-weil-pbc-formal-systems-push-pull",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcqsCohomologyFiniteSubsumRepresentatives",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsCohomologyFiniteSubsumRepresentatives.lean",
+  "declaration": "AlgebraicGeometry.Scheme.moduleCohomology_finiteSubsum_representative",
+  "statement": "theorem moduleCohomology_finiteSubsum_representative (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X] (I : Type v)\n    (F : I → SheafOfModules.{u} (moduleRings X.toRingedSpace))\n    (S : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ι : ∀ i : I, F i ⟶ S)\n    (_hS : IsColimit (Cofan.mk S ι)) (p : ℕ)\n    (x : (RingedSpace.moduleCohomology X.toRingedSpace p).obj S) :\n    ∃ (J : Finset I)\n      (y : (RingedSpace.moduleCohomology X.toRingedSpace p).obj (⨁ (fun j : J ↦ F j))),\n      ((RingedSpace.moduleCohomology X.toRingedSpace p).map\n        (biproduct.desc (fun j : J ↦ ι j))).hom y = x",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -36,110 +36,52 @@
  ],
  "proof": [
   {
-   "text": "(Hypotheses of 01FF.) Since $X$ is quasi-compact and quasi-separated, its underlying topological space is spectral [lem-weil-pbc-qcqs-scheme-spectral]. By the definition of a spectral space [def-weil-spectral-space] the quasi-compact open subsets of $X$ form a basis of the topology and the intersection of any two quasi-compact open subsets is quasi-compact; moreover $U=X$ is itself a quasi-compact open subset. So [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] applies to $X$ with $U=X$, and then $H^q(U,\\mathcal G)=H^p(X,\\mathcal G)$ is the cohomology of the statement.",
-   "uses": [
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "def-weil-spectral-space",
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Coherent, proof of Lemma 07TB (label lemma-colimit-cohomology, lines 1157-1164): 'the basis of affine opens ... satisfies the assumptions of that lemma'; Cohomology, Lemma 01FF hypotheses (1), (2) (lines 3196-3201)"
-   }
-  },
-  {
-   "text": "(The finite partial sums.) Write $\\mathcal F=\\bigoplus_{i\\in I}\\mathcal F_i$. The category $\\Mod(\\mathcal O_X)$ is abelian [def-weil-sheaf-of-modules-category], so it has finite biproducts [def-sp-abelian]: for every finite subset $J\\subseteq I$ choose an $\\mathcal O_X$-module $\\mathcal F_J$ with morphisms $\\iota^J_j:\\mathcal F_j\\to\\mathcal F_J$, $p^J_j:\\mathcal F_J\\to\\mathcal F_j$ ($j\\in J$) such that $p^J_k\\iota^J_j=\\mathrm{id}$ if $k=j$ and $=0$ if $k\\neq j$, and $\\sum_{j\\in J}\\iota^J_jp^J_j=\\mathrm{id}_{\\mathcal F_J}$ ($\\mathcal F_\\emptyset=0$). Then $(\\mathcal F_J,(\\iota^J_j)_{j\\in J})$ is a coproduct of $(\\mathcal F_j)_{j\\in J}$: given morphisms $g_j:\\mathcal F_j\\to\\mathcal M$, the morphism $u=\\sum_jg_jp^J_j$ satisfies $u\\iota^J_k=g_k$, and any $u$ with $u\\iota^J_k=g_k$ for all $k$ equals $u\\sum_j\\iota^J_jp^J_j=\\sum_jg_jp^J_j$. For $J\\subseteq J'$ finite let $\\kappa_{J'J}:\\mathcal F_J\\to\\mathcal F_{J'}$ be the morphism with $\\kappa_{J'J}\\iota^J_j=\\iota^{J'}_j$, and $\\kappa_J:\\mathcal F_J\\to\\mathcal F$ the morphism with $\\kappa_J\\iota^J_j=\\iota_j$ ($j\\in J$). By [lem-weil-pbc-scheme-modules-coproduct-finite-subsums] (2), applied to the family $(\\mathcal F_i)_{i\\in I}$ with these coproducts for finite subsets and $(\\mathcal F,(\\iota_i))$ for $A'=I$, the finite subsets $J\\subseteq I$ form a directed set, $(\\mathcal F_J,\\kappa_{J'J})$ is a system over it, and $(\\mathcal F,(\\kappa_J)_J)$ is its colimit in $\\Mod(\\mathcal O_X)$. (Clause (1) of that node guarantees that the coproduct $\\bigoplus_{i\\in I}\\mathcal F_i$ of the statement exists.)",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-sp-abelian",
-    "lem-weil-pbc-scheme-modules-coproduct-finite-subsums"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 09J7 (label lemma-perfect-is-compact, lines 13758-13768): $H^p(X,\\bigoplus_i\\mathcal I_i)=\\bigoplus_iH^p(X,\\mathcal I_i)$ 'by Lemma 01FF', the direct sum being the directed colimit of its finite partial sums (written out by the agent)"
-   }
-  },
-  {
-   "text": "(Finite sums: additivity.) $H^p(X,-)$ is the $p$-th right derived functor of the left exact additive functor $\\Gamma(X,-)$ on $\\Mod(\\mathcal O_X)$ [pqf-def-cohomology], which has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives]; by [lem-weil-pbc-right-derived-universal-delta-functor] the right derived functors form a $\\delta$-functor, whose components are additive functors by the definition of a $\\delta$-functor [def-weil-pbc-delta-functor], [def-weil-pbc-additive-functor]. Hence for every finite $J\\subseteq I$ the map $\\Psi_J:\\bigoplus_{j\\in J}H^p(X,\\mathcal F_j)\\to H^p(X,\\mathcal F_J)$, $(y_j)_j\\mapsto\\sum_{j\\in J}H^p(X,\\iota^J_j)(y_j)$, is bijective: additivity gives $H^p(X,p^J_k)H^p(X,\\iota^J_j)=H^p(X,p^J_k\\iota^J_j)$, which is $\\mathrm{id}$ for $k=j$ and $H^p(X,0)=0$ for $k\\neq j$, and $\\sum_jH^p(X,\\iota^J_j)H^p(X,p^J_j)=H^p(X,\\sum_j\\iota^J_jp^J_j)=\\mathrm{id}$. So every $w\\in H^p(X,\\mathcal F_J)$ equals $\\Psi_J\\big((H^p(X,p^J_j)(w))_j\\big)$ (surjectivity), and if $\\Psi_J((y_j))=0$ then applying $H^p(X,p^J_k)$ gives $y_k=0$ for each $k$ (injectivity).",
+   "text": "Obtain additivity of H^p(X,-) by unfolding the right-derived definition in [pqf-def-cohomology] and applying the upstream instance in WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived. This uses the additive global sections functor and additivity of injectiveResolutions, with no cohomological delta-functor theorem.",
    "uses": [
     "pqf-def-cohomology",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "def-weil-pbc-delta-functor",
     "def-weil-pbc-additive-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Section 01EO (cohomology as right derived functors, the functors $H^p(X,-)$ being additive), used implicitly in the proof of Lemma 09J7 (lines 13762-13768) (written out by the agent)"
-   }
+   "elementary": false
   },
   {
-   "text": "(The canonical map and its finite pieces.) By the description of the direct sum of modules [def-weil-pbc-direct-sum-modules], an element $z=(z_i)_{i\\in I}$ of $\\bigoplus_iH^p(X,\\mathcal F_i)$ has finite support, and the canonical map of the statement is $\\Phi(z)=\\sum_iH^p(X,\\iota_i)(z_i)$, a finite sum; it is $\\mathcal O_X(X)$-linear since each $H^p(X,\\iota_i)$ is, so it is an isomorphism as soon as it is bijective. For a finite $J\\subseteq I$ containing the support of $z$, write $z|_J=(z_j)_{j\\in J}$. Since $\\kappa_J\\iota^J_j=\\iota_j$ and $H^p(X,-)$ is a functor [pqf-def-cohomology], $\\Phi(z)=H^p(X,\\kappa_J)\\big(\\Psi_J(z|_J)\\big)$; likewise, for finite $J\\subseteq J'$, $\\kappa_{J'J}\\iota^J_j=\\iota^{J'}_j$ gives $H^p(X,\\kappa_{J'J})\\big(\\Psi_J(z|_J)\\big)=\\Psi_{J'}(z|_{J'})$, where $z|_{J'}$ is $z|_J$ extended by zero.",
+   "text": "For each i define pi_i:S to F_i by coproduct descent, taking the identity on summand i and zero on every other summand. Functoriality and preservation of zero identify H^p(pi_i) composed with the canonical direct-sum map with DirectSum.component at i. Extensionality of finite-support functions gives injectivity. This argument does not use compactness or a zero-at-a-later-stage criterion.",
    "uses": [
+    "def-weil-pbc-category-colimit",
     "def-weil-pbc-direct-sum-modules",
-    "pqf-def-cohomology"
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, proof of Lemma 09J7 (lines 13762-13768) (written out by the agent)"
-   }
+   "elementary": true
   },
   {
-   "text": "(Surjectivity.) Let $x\\in H^p(X,\\mathcal F)$. By step 1, [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] (a) applied with $U=X$, $q=p$ to the directed system $(\\mathcal F_J,\\kappa_{J'J})$ with colimit $(\\mathcal F,(\\kappa_J))$ of step 2 gives a finite $J\\subseteq I$ and $w\\in H^p(X,\\mathcal F_J)$ with $x=H^p(X,\\kappa_J)(w)$. By step 3, $w=\\Psi_J((y_j)_{j\\in J})$ for some $y_j\\in H^p(X,\\mathcal F_j)$; let $z\\in\\bigoplus_iH^p(X,\\mathcal F_i)$ be $(y_j)$ extended by zero. By step 4, $\\Phi(z)=H^p(X,\\kappa_J)(\\Psi_J(z|_J))=x$.",
+   "text": "For a target class x, [lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives] gives a finite J and y in H^p(X,B_J) mapping to x. For each j project y by H^p(biproduct.pi_j), and take the finite sum of DirectSum.lof_j of these projected classes.",
    "uses": [
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
-    "lem-weil-pbc-qcqs-scheme-spectral"
+    "lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives",
+    "def-weil-pbc-direct-sum-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01FF (lines 3203-3209), applied as in the proof of Lemma 09J7 (lines 13762-13768)"
-   }
+   "elementary": false
   },
   {
-   "text": "(Injectivity.) Let $z\\in\\bigoplus_iH^p(X,\\mathcal F_i)$ with $\\Phi(z)=0$, and let $J$ be a finite subset containing its support. By step 4, $w=\\Psi_J(z|_J)\\in H^p(X,\\mathcal F_J)$ satisfies $H^p(X,\\kappa_J)(w)=\\Phi(z)=0$. By step 1, [lem-weil-pbc-qs-scheme-cohomology-directed-colimit] (b) applied with $U=X$, $q=p$ to the system of step 2 gives a finite $J'\\supseteq J$ with $H^p(X,\\kappa_{J'J})(w)=0$. By step 4 this element is $\\Psi_{J'}(z|_{J'})$, and $\\Psi_{J'}$ is injective by step 3, so $z|_{J'}=0$; since the support of $z$ lies in $J\\subseteq J'$, $z=0$. With step 5, $\\Phi$ is a bijective $\\mathcal O_X(X)$-linear map, hence an isomorphism.",
+   "text": "Additivity and the finite biproduct identity sum_j pi_j followed by inclusion_j = identity imply sum_j H^p(pi_j) followed by H^p(iota_j) = H^p(kappa_J). Applying this to y shows the finite-support element maps to x. This proves surjectivity. Combine with injectivity to prove bijectivity. The empty finite stage is covered by the same total identity.",
    "uses": [
-    "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
-    "lem-weil-pbc-qcqs-scheme-spectral"
+    "def-sp-abelian",
+    "def-weil-pbc-additive-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01FF (lines 3203-3209), applied as in the proof of Lemma 09J7 (lines 13762-13768)"
-   }
-  },
-  {
-   "text": "(The graded case.) For a quasi-coherent graded module $\\mathcal G=\\bigoplus_{m\\ge0}\\mathcal G_m$ the statement is the case $I=\\mathbf Z_{\\ge0}$, $\\mathcal F_m=\\mathcal G_m$ of what was proved: nothing beyond the general case is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma 01FF, as used in Coherent, proof of Lemma 0897 (1)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "def-weil-spectral-space",
-  "lem-weil-pbc-qs-scheme-cohomology-directed-colimit",
-  "def-weil-sheaf-of-modules-category",
-  "def-sp-abelian",
-  "lem-weil-pbc-scheme-modules-coproduct-finite-subsums",
   "pqf-def-cohomology",
-  "lem-weil-pbc-scheme-modules-enough-injectives",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
-  "def-weil-pbc-delta-functor",
   "def-weil-pbc-additive-functor",
-  "def-weil-pbc-direct-sum-modules"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives",
+  "def-sp-abelian"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 01FF (lemma-quasi-separated-cohomology-colimit, lines 3194-3209) as applied to direct sums in the proof of Lemma 09J7 (lemma-perfect-is-compact, lines 13758-13768); the hypotheses for a qcqs scheme as in Coherent, proof of Lemma 07TB (lines 1157-1164); the reduction of a direct sum to its finite partial sums and the additivity on finite sums, which Stacks leaves implicit, written out by the agent"
+  "place": "Tags 01FF and 09J7, with existence of finite-stage representatives split off. Injectivity is proved directly by coproduct projections; surjectivity is constructed using the finite biproduct total identity. Lean reduction written by K1. Second reading: additivity uses the upstream rightDerived additive instance directly."
  },
  "mathlib_searches": [
   {
@@ -218,5 +160,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T063513-L-3156456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

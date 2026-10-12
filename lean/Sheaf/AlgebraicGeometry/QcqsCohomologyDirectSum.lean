@@ -9,10 +9,9 @@ public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.CategoryTheory.DeltaFunctor
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.AlgebraicGeometry.QcqsCohomologyFiniteSubsumRepresentatives
+import Mathlib.CategoryTheory.Preadditive.Biproducts
+import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 
 /-! # Cohomology commutes with direct sums on qcqs schemes
 
@@ -27,6 +26,50 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme
+
+
+open Classical in
+/-- Coproduct projections detect every direct-sum component after an additive functor. -/
+private theorem moduleCohomology_directSum_injective (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] (I : Type v)
+    (F : I → SheafOfModules.{u} (moduleRings X.toRingedSpace))
+    (S : SheafOfModules.{u} (moduleRings X.toRingedSpace)) (ι : ∀ i : I, F i ⟶ S)
+    (_hS : IsColimit (Cofan.mk S ι)) (p : ℕ) :
+    Function.Injective
+      (DirectSum.toModule ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) I
+        ((RingedSpace.moduleCohomology X.toRingedSpace p).obj S)
+        (fun i ↦ ((RingedSpace.moduleCohomology X.toRingedSpace p).map (ι i)).hom)) := by
+  classical
+  let H := RingedSpace.moduleCohomology X.toRingedSpace p
+  have : H.Additive := by
+    dsimp [H, RingedSpace.moduleCohomology]
+    infer_instance
+  let R := (moduleRings X.toRingedSpace).obj.obj (op ⊤)
+  let M := fun i ↦ ↥(H.obj (F i))
+  let φ := DirectSum.toModule R I (H.obj S) (fun i ↦ (H.map (ι i)).hom)
+  let π (i : I) : S ⟶ F i := Cofan.IsColimit.desc _hS
+    (fun j ↦ if h : j = i then eqToHom (congrArg F h) else 0)
+  have hπ (i j : I) : ι j ≫ π i =
+      (if h : j = i then eqToHom (congrArg F h) else 0) := by
+    exact Cofan.IsColimit.fac _hS _ j
+  have hcomp (i : I) : (H.map (π i)).hom.comp φ = DirectSum.component R I M i := by
+    apply DirectSum.linearMap_ext
+    intro j
+    apply LinearMap.ext
+    intro x
+    simp only [LinearMap.comp_apply, φ, DirectSum.toModule_lof]
+    change (H.map (ι j) ≫ H.map (π i)).hom x = _
+    rw [← H.map_comp, hπ]
+    by_cases h : j = i
+    · subst j
+      simp [M]
+    · simp [h, M, DirectSum.component.of]
+  intro x y hxy
+  apply DirectSum.ext_component R
+  intro i
+  rw [← hcomp i]
+  exact congrArg (H.map (π i)).hom hxy
+
 
 open Classical in
 /-- On a quasi-compact quasi-separated scheme, the canonical linear map from the direct sum
@@ -67,6 +110,34 @@ theorem moduleCohomology_directSum_bijective (X : Scheme.{u})
       (DirectSum.toModule ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) I
         ((RingedSpace.moduleCohomology X.toRingedSpace p).obj S)
         (fun i ↦ ((RingedSpace.moduleCohomology X.toRingedSpace p).map (ι i)).hom)) := by
-  sorry
+  classical
+  refine ⟨moduleCohomology_directSum_injective X I F S ι _hS p, ?_⟩
+  have : HasFiniteBiproducts (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
+    Abelian.hasFiniteBiproducts
+  let H := RingedSpace.moduleCohomology X.toRingedSpace p
+  have : H.Additive := by
+    dsimp [H, RingedSpace.moduleCohomology]
+    infer_instance
+  intro x
+  obtain ⟨J, y, hy⟩ := moduleCohomology_finiteSubsum_representative X I F S ι _hS p x
+  let A := fun j : J ↦ F j
+  let R := (moduleRings X.toRingedSpace).obj.obj (op ⊤)
+  let M := fun i ↦ ↥(H.obj (F i))
+  let κ : (⨁ A) ⟶ S := biproduct.desc (fun j : J ↦ ι j)
+  refine ⟨∑ j : J, DirectSum.lof R I M j ((H.map (biproduct.π A j)).hom y), ?_⟩
+  rw [map_sum]
+  have hκ : ∑ j : J, H.map (biproduct.π A j) ≫ H.map (ι j) = H.map κ := by
+    simp only [← H.map_comp, ← H.map_sum]
+    congr 1
+    calc
+      ∑ j : J, biproduct.π A j ≫ ι j =
+          ∑ j : J, (biproduct.π A j ≫ biproduct.ι A j) ≫ κ := by
+            simp [κ]
+      _ = (∑ j : J, biproduct.π A j ≫ biproduct.ι A j) ≫ κ := by
+        rw [Preadditive.sum_comp]
+      _ = κ := by rw [IsBilimit.total (biproduct.isBilimit A), Category.id_comp]
+  have he := congrArg (fun f ↦ f.hom y) hκ
+  simpa [R, M, H] using he.trans hy
+
 
 end AlgebraicGeometry.Scheme
