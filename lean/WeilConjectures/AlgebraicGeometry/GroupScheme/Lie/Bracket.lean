@@ -78,13 +78,38 @@ noncomputable def toδ (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
 for `ε = 0` and for `δ = 0`. -/
 theorem commutator_mem_mixedPoints (v w : infPoints G) :
     toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ ∈ mixedPoints G := by
-  sorry
+  have hε : Scheme.dualNumbersιεOver S ≫ Scheme.dualNumbersProjδOver S =
+      CartesianMonoidalCategory.toUnit (Scheme.dualNumbersOver S) ≫
+        Scheme.dualNumbersιOver S := by
+    ext1
+    simp [Scheme.dualNumbersιεOver, Scheme.dualNumbersProjδOver,
+      Scheme.dualNumbersιOver, Over.toUnit_left]
+  have hδ : Scheme.dualNumbersιδOver S ≫ Scheme.dualNumbersProjεOver S =
+      CartesianMonoidalCategory.toUnit (Scheme.dualNumbersOver S) ≫
+        Scheme.dualNumbersιOver S := by
+    ext1
+    simp [Scheme.dualNumbersιδOver, Scheme.dualNumbersProjεOver,
+      Scheme.dualNumbersιOver, Over.toUnit_left]
+  have hw : Scheme.dualNumbersιεOver S ≫ toδ G w = 1 := by
+    rw [toδ, ← Category.assoc, hε, Category.assoc, (mem_infPoints G).1 w.2,
+      MonObj.comp_one]
+  have hv : Scheme.dualNumbersιδOver S ≫ toε G v = 1 := by
+    rw [toε, ← Category.assoc, hδ, Category.assoc, (mem_infPoints G).1 v.2,
+      MonObj.comp_one]
+  rw [mem_mixedPoints]
+  simp only [MonObj.comp_mul, GrpObj.comp_inv, hw, hv, one_mul, mul_one,
+    inv_one, mul_inv_cancel, and_self]
 
 /-- The bracket of two infinitesimal points: the mixed term `εδ` of their group commutator
 `v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `S[ε][δ]`. It is the restriction to the identity of the commutator
 `[ṽ, w̃]` of the left-invariant vector fields extending `v` and `w`. (blueprint: `sk-d-tangent`) -/
 noncomputable def infBracket (v w : infPoints G) : infPoints G :=
   (mixedEquiv G).symm ⟨_, commutator_mem_mixedPoints G v w⟩
+
+private theorem mixedEquiv_infBracket (v w : infPoints G) :
+    (mixedEquiv G) (infBracket G v w) =
+      ⟨_, commutator_mem_mixedPoints G v w⟩ :=
+  (mixedEquiv G).apply_symm_apply _
 
 /-- The Lie bracket on `Lie(G)`, transported from the infinitesimal points. -/
 noncomputable instance : Bracket (Lie G) (Lie G) where
@@ -173,7 +198,16 @@ theorem coe_infPointsMap_apply (f : G ⟶ H) [IsMonHom f] (v : infPoints G) :
 group commutators and commutes with `η ↦ εδ`. -/
 theorem infPointsMap_infBracket (f : G ⟶ H) [IsMonHom f] (v w : infPoints G) :
     infPointsMap f (infBracket G v w) = infBracket H (infPointsMap f v) (infPointsMap f w) := by
-  sorry
+  apply (mixedEquiv H).injective
+  rw [mixedEquiv_infBracket]
+  apply Subtype.ext
+  change Scheme.dualNumbersMulOver S ≫ ((infBracket G v w).1 ≫ f) = _
+  rw [← Category.assoc]
+  have h := congrArg Subtype.val (mixedEquiv_infBracket G v w)
+  change Scheme.dualNumbersMulOver S ≫ (infBracket G v w).1 = _ at h
+  rw [h]
+  simp only [toε, toδ, coe_infPointsMap_apply, Category.assoc,
+    MonObj.mul_comp, GrpObj.inv_comp]
 
 /-- Let `f : G ⟶ H` be a monomorphism of group schemes, a subgroup scheme of `H`. If the
 commutators of the points of `H` over `S[ε][δ]` factor through `G`, then the bracket of two
@@ -184,7 +218,26 @@ its preimage under `η ↦ εδ` is an infinitesimal point of `G` mapping to `[v
 theorem infBracket_mem_range_infPointsMap (f : G ⟶ H) [IsMonHom f] [Mono f]
     (hf : ∀ a b : Scheme.dualNumbers₂Over S ⟶ H, a * b * a⁻¹ * b⁻¹ ∈ (IsMonHom.monoidHom f _).range)
     (v w : infPoints H) : infBracket H v w ∈ (infPointsMap f).range := by
-  sorry
+  obtain ⟨c, hc⟩ := MonoidHom.mem_range.1 (hf (toε H v) (toδ H w))
+  change c ≫ f = _ at hc
+  have hm : c ∈ mixedPoints G := by
+    have h := (mem_mixedPoints H).1 (commutator_mem_mixedPoints H v w)
+    rw [mem_mixedPoints]
+    constructor
+    · apply (cancel_mono f).1
+      rw [Category.assoc, hc, h.1, MonObj.one_comp]
+    · apply (cancel_mono f).1
+      rw [Category.assoc, hc, h.2, MonObj.one_comp]
+  let z : mixedPoints G := ⟨c, hm⟩
+  refine MonoidHom.mem_range.2 ⟨(mixedEquiv G).symm z, ?_⟩
+  apply (mixedEquiv H).injective
+  rw [mixedEquiv_infBracket]
+  apply Subtype.ext
+  change Scheme.dualNumbersMulOver S ≫ (((mixedEquiv G).symm z).1 ≫ f) = _
+  rw [← Category.assoc]
+  have hz := congrArg Subtype.val ((mixedEquiv G).apply_symm_apply z)
+  change Scheme.dualNumbersMulOver S ≫ ((mixedEquiv G).symm z).1 = c at hz
+  rw [hz, hc]
 
 end GrpObj
 
