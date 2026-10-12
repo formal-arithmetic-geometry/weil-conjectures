@@ -182,7 +182,11 @@ and `Y` separated of finite type over `k`, the boundary duality input
 `AlgebraicGeometry.Etale.HasBoundaryDuality` holds: its first clause is the preservation
 `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`, its second the boundary exchange
 `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual`, on the pieces `T`,
-which are again separated of finite type over `k`. -/
+which are again separated of finite type over `k`.
+
+Blueprint `rem-ptr-weil-exceptional-adjoint-admissibility-9`: this geometric proof of boundary
+duality is separate from the exceptional preservation clause of the admissibility datum, and it
+is complete at finite coefficients. -/
 theorem hasBoundaryDuality [IsAlgClosed k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] :
     HasBoundaryDuality Λ aY := by
@@ -201,7 +205,15 @@ finite coefficient ring `Λ` whose exponent is invertible on `k`, the Verdier du
 `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism on it, so that `𝔻_X` is an anti-equivalence of
 `Dctf(X, Λ)`
 (`AlgebraicGeometry.Etale.verdierDualEquivalence`); an input Tor interval `[a, b]` gives the
-interval `[-b - 2d, -a]` for the dual. -/
+interval `[-b - 2d, -a]` for the dual.
+
+Blueprint `rem-ptr-sf-datum-1b`: this is the biduality clause of the six-functor datum at the
+finite stages, the boundary hypothesis being discharged by
+`AlgebraicGeometry.Etale.hasBoundaryDuality`. Blueprint `rem-weil-biduality-boundary-status`:
+preservation (`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`) is proved
+independently of biduality, whose dimension induction
+(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`) uses the geometric generic
+restriction comparisons of `lem-weil-geometric-generic-exchange`. -/
 theorem verdierDual_finiteStage [IsAlgClosed k] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX] (d : ℕ)
     (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) :
