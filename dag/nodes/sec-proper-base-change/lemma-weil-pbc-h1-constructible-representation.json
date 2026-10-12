@@ -1,233 +1,196 @@
 {
-  "id": "lemma-weil-pbc-h1-constructible-representation",
-  "blueprint": {
-    "is": "lemma-weil-pbc-h1-constructible-representation",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Constructible representation of an $H^1$ class",
-  "statement": "In the setup of [def-weil-pbc-strict-henselian-setup]: let $(A,\\mathfrak m)$ be a strictly henselian local ring with residue field $\\kappa=A/\\mathfrak m$, $S=\\operatorname{Spec}A$, $s=\\operatorname{Spec}\\kappa$, $X=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change], $X_0=\\mathbf P^1_s=X\\times_Ss$ its closed fibre and $i:X_0\\to X$ the closed immersion (the base change of $s\\to S$). Let $r$ be a prime and $I$ an injective object [def-sp-injective-resolutions] of the abelian category $\\Mod(X_{\\Et},\\mathbf F_r)$ of sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$ [def-weil-sheaf-of-modules-category], [def-weil-pbc-etale-sheaves]; write $i^{-1}$ for the inverse image of sheaves of $\\mathbf F_r$-modules [def-weil-pbc-inverse-image]. For a morphism $\\varphi$ of sheaves of $\\mathbf F_r$-modules on $X_0$ write $H^1(\\varphi)$ for the induced map on the etale cohomology [def-weil-pbc-etale-cohomology] of the underlying abelian sheaves [lem-weil-pbc-cohomology-pullback-functorial]. Then for every class $\\xi\\in H^1(X_{0,\\Et},i^{-1}I)$ there are an integer $n\\ge0$ and, for $j=1,\\dots,n$:\n- a finite morphism $h_j:V_j\\to X$ [def-weil-finite-integral-morphism] which is locally of finite presentation [def-sbc-locally-finite-presentation];\n- a finite $\\mathbf F_r$-module $M_j$, with constant sheaf of $\\mathbf F_r$-modules $\\underline{M_j}$ on $V_{j,\\Et}$ [def-weil-pbc-constant-sheaf] and direct image $(h_j)_*\\underline{M_j}\\in\\Mod(X_{\\Et},\\mathbf F_r)$ [def-weil-pbc-direct-image];\n- a morphism $\\psi_j:(h_j)_*\\underline{M_j}\\to I$ of sheaves of $\\mathbf F_r$-modules;\n- a class $x_j\\in H^1(X_{0,\\Et},i^{-1}(h_j)_*\\underline{M_j})$,\nsuch that\n$$\\xi=\\sum_{j=1}^nH^1(i^{-1}\\psi_j)(x_j).$$\n(This is the form of the Lean statement AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine; equivalently $\\xi$ is the image of a class of $H^1(X_0,i^{-1}\\bigoplus_j(h_j)_*\\underline{M_j})$ under $i^{-1}$ of a map $\\bigoplus_j(h_j)_*\\underline{M_j}\\to I$. Remark: the proof uses only that $X$ and $X_0$ are quasi-compact and quasi-separated, not that $A$ is henselian; the hypothesis is kept as in the setup and the Lean declaration.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-h1-constructible-representation.md",
-    "place": "node lemma-weil-pbc-h1-constructible-representation, order 1136"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-strict-henselian-setup",
-    "def-nagata-projective-space-base-change",
-    "def-sp-injective-resolutions",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-finite-integral-morphism",
-    "def-sbc-locally-finite-presentation",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-direct-image"
-  ],
-  "proof": [
-    {
-      "text": "*The setting.* $X=\\mathbf P(\\{0,1\\};S)$ is covered by the two affine opens $D_+(T_0)_S,D_+(T_1)_S$ [lem-weil-pbc-projective-space-standard-charts] (a),(c), so it is quasi-compact; it is proper over the affine $S$ [lemma-nagata-projective-space-base-change-proper], hence separated, hence quasi-separated [def-weil-pbc-scheme-conventions]. The same two lemmas with $s=\\operatorname{Spec}\\kappa$ in place of $S$ show that $X_0=\\mathbf P(\\{0,1\\};s)$ is quasi-compact and quasi-separated. By [prop-weil-pbc-inverse-image-modules-exact] (2),(3) the inverse image $i^{-1}:\\Mod(X_{\\Et},\\mathbf F_r)\\to\\Mod(X_{0,\\Et},\\mathbf F_r)$ is an additive functor whose composite with the forgetful functor to abelian sheaves is the abelian inverse image of the underlying abelian sheaf (naturally in the sheaf); all groups $H^1$ below are those of underlying abelian sheaves.",
-      "uses": [
-        "lem-weil-pbc-projective-space-standard-charts",
-        "lemma-nagata-projective-space-base-change-proper",
-        "def-weil-pbc-scheme-conventions",
-        "prop-weil-pbc-inverse-image-modules-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, first sentence 'Observe that X is a separated scheme which can be covered by 2 affine opens'; quasi-compactness of X and X_0 is what Lemmas 03SA and 03Q5 need"
-      }
-    },
-    {
-      "text": "*$I$ as a colimit of constructible sheaves (Stacks 03SA).* By [lem-weil-pbc-module-sheaf-colimit-constructible] for the qcqs scheme $X$ (Step 1) and $\\Lambda=\\mathbf F_r$, there are a small filtered category $\\mathcal A$, a diagram $\\alpha\\mapsto F_\\alpha$ of constructible sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$ and morphisms $a_\\alpha:F_\\alpha\\to I$ in $\\Mod(X_{\\Et},\\mathbf F_r)$ making $(I,(a_\\alpha))$ a colimit of the diagram.",
-      "uses": [
-        "lem-weil-pbc-module-sheaf-colimit-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'By Lemmas 03SA (lemma-torsion-colimit-constructible) and 03Q5 (lemma-colimit) we can find a map F -> I with F a constructible sheaf of Z/lZ-modules'"
-      }
-    },
-    {
-      "text": "*$\\xi$ comes from some $F_\\alpha$ (Stacks 03Q5).* The forgetful functor $\\Mod(X_{\\Et},\\mathbf F_r)\\to\\Ab(X_{\\Et})$ preserves colimits [lem-weil-pbc-module-sheaves-colimits-forgetful] (2), so the underlying abelian sheaves form a colimit cocone $(I,(a_\\alpha))$ in $\\Ab(X_{\\Et})$; the abelian inverse image $i^{-1}$ preserves all small colimits [lem-weil-pbc-inverse-image-preserves-colimits], so $(i^{-1}I,(i^{-1}a_\\alpha))$ is a colimit cocone of the filtered diagram $\\alpha\\mapsto i^{-1}F_\\alpha$ in $\\Ab(X_{0,\\Et})$, and by Step 1 these are the underlying abelian sheaves and maps of the module inverse images. Since $X_0$ is quasi-compact and quasi-separated (Step 1), [lem-weil-pbc-cohomology-filtered-colimit] (with $q=1$) says that the canonical map $\\varinjlim_\\alpha H^1(X_0,i^{-1}F_\\alpha)\\to H^1(X_0,i^{-1}I)$, induced by the maps $H^1(i^{-1}a_\\alpha)$, is bijective. Every element of a filtered colimit of abelian groups is the image of an element at some stage [def-weil-directed-colimit-abelian-groups]; hence there are $\\alpha\\in\\mathcal A$ and $\\zeta\\in H^1(X_0,i^{-1}F_\\alpha)$ with $H^1(i^{-1}a_\\alpha)(\\zeta)=\\xi$. Put $F=F_\\alpha$, $a=a_\\alpha:F\\to I$.",
-      "uses": [
-        "lem-weil-pbc-module-sheaves-colimits-forgetful",
-        "lem-weil-pbc-inverse-image-preserves-colimits",
-        "lem-weil-pbc-cohomology-filtered-colimit",
-        "def-weil-directed-colimit-abelian-groups",
-        "lem-weil-pbc-cohomology-pullback-functorial"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, '... and xi coming from an element zeta of H^1(X_0, F|_{X_0})' (Lemma 03Q5 on the qcqs X_0, with restriction to X_0 commuting with colimits)"
-      }
-    },
-    {
-      "text": "*Embedding into finite pushforwards (Stacks 09Z7).* $F$ is a constructible sheaf of $\\mathbf F_r$-modules on the qcqs scheme $X$, so by [lem-weil-pbc-constructible-module-finite-pushforward-embedding] with $\\Lambda=\\mathbf F_r$ there are $n\\ge0$, finite morphisms $h_j:V_j\\to X$ locally of finite presentation and finite $\\mathbf F_r$-modules $M_j$ ($j=1,\\dots,n$), and a monomorphism $\\iota:F\\hookrightarrow E=\\bigoplus_{j=1}^nE_j$, $E_j=(h_j)_*\\underline{M_j}$, in $\\Mod(X_{\\Et},\\mathbf F_r)$. Let $\\epsilon_j:E_j\\to E$ and $\\pi_j:E\\to E_j$ be the injections and projections of the biproduct, so that $\\sum_j\\epsilon_j\\pi_j=\\mathrm{id}_E$ [def-weil-additive-category].",
-      "uses": [
-        "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
-        "def-weil-additive-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, third paragraph, 'By Lemma 09Z7 (lemma-constructible-maps-into-constant-general) and the remarks above we may assume F is of the form f_*M where M is a finite Z/lZ-module and f: Y -> X is a finite morphism of finite presentation'"
-      }
-    },
-    {
-      "text": "*Extending across $\\iota$ by injectivity.* $I$ is injective in $\\Mod(X_{\\Et},\\mathbf F_r)$ and $\\iota$ is a monomorphism, so $\\operatorname{Hom}(E,I)\\to\\operatorname{Hom}(F,I)$, $\\psi\\mapsto\\psi\\circ\\iota$, is surjective [def-sp-injective-resolutions]: there is $\\psi:E\\to I$ with $\\psi\\circ\\iota=a$. Put $\\psi_j=\\psi\\circ\\epsilon_j:(h_j)_*\\underline{M_j}\\to I$, a morphism of sheaves of $\\mathbf F_r$-modules; then $\\psi=\\psi\\circ\\sum_j\\epsilon_j\\pi_j=\\sum_j\\psi_j\\circ\\pi_j$.",
-      "uses": [
-        "def-sp-injective-resolutions",
-        "def-weil-additive-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'Since I is injective we can extend the given map F -> I to a map F' -> I ... if F = F_1 + F_2 is a direct sum, then we may replace F by F_i'"
-      }
-    },
-    {
-      "text": "*The classes $x_j$.* Put $\\zeta'=H^1(i^{-1}\\iota)(\\zeta)\\in H^1(X_0,i^{-1}E)$ and $x_j=H^1(i^{-1}\\pi_j)(\\zeta')\\in H^1(X_0,i^{-1}(h_j)_*\\underline{M_j})$. The map $\\varphi\\mapsto H^1(\\varphi)$ of [lem-weil-pbc-cohomology-pullback-functorial] is additive and functorial: if $\\tilde\\varphi,\\tilde\\varphi'$ are lifts of $\\varphi,\\varphi'$ to K-injective resolutions, then $\\tilde\\varphi+\\tilde\\varphi'$ lifts $\\varphi+\\varphi'$ and $\\tilde\\varphi'\\circ\\tilde\\varphi$ lifts $\\varphi'\\circ\\varphi$, and $\\mathcal H^1(\\Gamma(X_0,-))$ is additive and functorial on morphisms of complexes; by independence of the lift, $H^1(\\varphi+\\varphi')=H^1(\\varphi)+H^1(\\varphi')$ and $H^1(\\varphi'\\circ\\varphi)=H^1(\\varphi')\\circ H^1(\\varphi)$. The functor $i^{-1}$ on sheaves of $\\mathbf F_r$-modules is additive (Step 1). Hence, using Step 5,\n$$\\sum_jH^1(i^{-1}\\psi_j)(x_j)=\\sum_jH^1(i^{-1}(\\psi_j\\pi_j))(\\zeta')=H^1\\Bigl(i^{-1}\\sum_j\\psi_j\\pi_j\\Bigr)(\\zeta')=H^1(i^{-1}\\psi)(\\zeta')=H^1(i^{-1}(\\psi\\iota))(\\zeta)=H^1(i^{-1}a)(\\zeta)=\\xi$$\nby Step 3. This gives $n$, $h_j$, $M_j$, $\\psi_j$ and $x_j$ as in the statement.",
-      "uses": [
-        "lem-weil-pbc-cohomology-pullback-functorial",
-        "prop-weil-pbc-inverse-image-modules-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), etale-cohomology.tex line 16164, proof, second paragraph, 'we may replace F by F' and zeta by the image of zeta in H^1(X_0, F'|_{X_0}) ... replace F by F_i and zeta by the image of zeta in H^1(X_0, F_i|_{X_0})'"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-projective-space-standard-charts",
+ "id": "lemma-weil-pbc-h1-constructible-representation",
+ "blueprint": {
+  "is": "lemma-weil-pbc-h1-constructible-representation",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Constructible representation of an $H^1$ class",
+ "statement": "In the setup of [def-weil-pbc-strict-henselian-setup]: let $(A,\\mathfrak m)$ be a strictly henselian local ring with residue field $\\kappa=A/\\mathfrak m$, $S=\\operatorname{Spec}A$, $s=\\operatorname{Spec}\\kappa$, $X=\\mathbf P^1_S=\\mathbf P(\\{0,1\\};S)$ [def-nagata-projective-space-base-change], $X_0=\\mathbf P^1_s=X\\times_Ss$ its closed fibre and $i:X_0\\to X$ the closed immersion (the base change of $s\\to S$). Let $r$ be a prime and $I$ an injective object [def-sp-injective-resolutions] of the abelian category $\\Mod(X_{\\Et},\\mathbf F_r)$ of sheaves of $\\mathbf F_r$-modules on $X_{\\Et}$ [def-weil-sheaf-of-modules-category], [def-weil-pbc-etale-sheaves]; write $i^{-1}$ for the inverse image of sheaves of $\\mathbf F_r$-modules [def-weil-pbc-inverse-image]. For a morphism $\\varphi$ of sheaves of $\\mathbf F_r$-modules on $X_0$ write $H^1(\\varphi)$ for the induced map on the etale cohomology [def-weil-pbc-etale-cohomology] of the underlying abelian sheaves [lem-weil-pbc-cohomology-pullback-functorial]. Then for every class $\\xi\\in H^1(X_{0,\\Et},i^{-1}I)$ there are an integer $n\\ge0$ and, for $j=1,\\dots,n$:\n- a finite morphism $h_j:V_j\\to X$ [def-weil-finite-integral-morphism] which is locally of finite presentation [def-sbc-locally-finite-presentation];\n- a finite $\\mathbf F_r$-module $M_j$, with constant sheaf of $\\mathbf F_r$-modules $\\underline{M_j}$ on $V_{j,\\Et}$ [def-weil-pbc-constant-sheaf] and direct image $(h_j)_*\\underline{M_j}\\in\\Mod(X_{\\Et},\\mathbf F_r)$ [def-weil-pbc-direct-image];\n- a morphism $\\psi_j:(h_j)_*\\underline{M_j}\\to I$ of sheaves of $\\mathbf F_r$-modules;\n- a class $x_j\\in H^1(X_{0,\\Et},i^{-1}(h_j)_*\\underline{M_j})$,\nsuch that\n$$\\xi=\\sum_{j=1}^nH^1(i^{-1}\\psi_j)(x_j).$$\n(This is the form of the Lean statement AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine; equivalently $\\xi$ is the image of a class of $H^1(X_0,i^{-1}\\bigoplus_j(h_j)_*\\underline{M_j})$ under $i^{-1}$ of a map $\\bigoplus_j(h_j)_*\\underline{M_j}\\to I$. Remark: the proof uses only that $X$ and $X_0$ are quasi-compact and quasi-separated, not that $A$ is henselian; the hypothesis is kept as in the setup and the Lean declaration.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-h1-constructible-representation.md",
+  "place": "node lemma-weil-pbc-h1-constructible-representation, order 1136"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselian-setup",
+  "def-nagata-projective-space-base-change",
+  "def-sp-injective-resolutions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-weil-finite-integral-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Proper projective space over an affine base is quasi-compact and quasi-separated, as is its residue fibre. Choose a constructible representative G, a:G→I and z with H¹(i⁻¹a)(z)=c.",
+   "uses": [
     "lemma-nagata-projective-space-base-change-proper",
-    "def-weil-pbc-scheme-conventions",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-module-sheaf-colimit-constructible",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "def-weil-directed-colimit-abelian-groups",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
-    "def-weil-additive-category",
-    "def-sp-injective-resolutions"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "lem-weil-pbc-constructible-restriction-class"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover), proof, second and third paragraphs (the reduction of xi to classes of f_*M), with Lemmas 03SA, 03Q5, 09Z7"
+    "place": "original proof Steps 1-3"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "cohomology class of restriction of injective sheaf to closed fibre is sum of images from finite pushforwards",
-      "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, instAdditivePushforward, restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf): Zariski module sheaves only",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "first etale cohomology of restriction of an injective sheaf to the closed fibre of the projective line over a henselian local ring",
-      "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Extension.cotangentComplex_injective_iff, Algebra.etaleLocus_eq_compl_support (Mathlib.RingTheory.*): cotangent H^1, unrelated",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rlni constructible Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -rn 'IsFiltered\\|colimit' Mathlib/CategoryTheory/Sites/SheafCohomology/",
-      "results": "no constructible etale sheaves (only constructible sets in Morphisms/FinitePresentation.lean); Sheaf cohomology files have no filtered-colimit statement",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1136,
-  "blueprint_uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-constructible-approximation",
-    "lemma-weil-pbc-constructible-finite-pushforward"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "For an injective sheaf $I$ of $\\mathbf F_\\ell$-modules on $\\mathbf P^1_A$,\nevery class\n$c\\in H^1(X_0,I_0)$ admits finite $\\mathbf F_\\ell$-modules $M_i$, finite finitely presented\nmorphisms $h_i:V_i\\to X$, and a map\n$\\bigoplus_i(h_i)_*\\underline{M_i}\\to I$ such that $c$ is the image of a\ntuple of classes in\n$\\bigoplus_iH^1(X_0,(h_i)_*\\underline{M_i}|_{X_0})$.",
-      "proof": "View $c$ as the isomorphism class of an $I_0$-torsor. It is trivial on an\netale cover; quasi-compactness of $X_0$ selects finitely many members\n$U_a\\to X_0$. Choosing local origins gives a Cech cocycle\n$z=(z_{ab})$ with\n\n$$\nz_{ab}\\in I_0(U_a\\times_{X_0}U_b),\\qquad\nz_{bc}-z_{ac}+z_{ab}=0\n$$\n\non every triple overlap. There are finitely many sections and equations.\nConstructible approximation therefore supplies a constructible sheaf $F$, a\nmap $\\alpha:F\\to I$, and lifts $\\widetilde z_{ab}\\in F_0(U_{ab})$\nsatisfying the same equations and mapping to $z_{ab}$.\n\nThe finite-pushforward lemma gives a monomorphism\n$\\iota:F\\hookrightarrow F'=\\bigoplus_{i=1}^r(h_i)_*\\underline{M_i}$.\nInjectivity of $I$ extends $\\alpha$ across $\\iota$ to a map\n$\\psi:F'\\to I$. The sheaf square and the three relevant terms of the Cech\ncomplex form the commuting three-row diagram\n\n$$\n\\begin{CD}\nF @>{\\iota}>> F' @>>> \\operatorname{coker}(\\iota)\\\\\n@V{\\alpha}VV @V{\\psi}VV @VVV\\\\\nI @= I @>>> 0\\\\[2pt]\n@VVV @VVV @VVV\\\\\n\\prod_a I_0(U_a) @>{d^0}>>\n\\prod_{a,b} I_0(U_{ab}) @>{d^1}>>\n\\prod_{a,b,c} I_0(U_{abc}).\n\\end{CD}\n$$\n\nHere the bottom vertical maps mean restriction followed by the indicated\nCech cochain inclusion; commutativity in degrees $0,1,2$ follows from\nfunctoriality of restriction. The cocycle $\\iota(\\widetilde z)$ defines\n$c'\\in H^1(X_0,F'_0)$ and $\\psi_0(c')=c$.\n\nFinite direct sums commute with $H^1$, while exact finite direct image and\nLeray give\n\n$$\nH^1(X_0,F'_0)=\n\\bigoplus_{i=1}^rH^1(X_0,(h_i)_*\\underline{M_i}|_{X_0})\n=\\bigoplus_{i=1}^rH^1((V_i)_0,\\underline{M_i}).\n$$\n\nThus $c'$ is the required finite tuple, and the displayed map $F'\\to I$\nsends that tuple to the original class.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine",
-          "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
-          "lines": [
-            97,
-            126
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "The existing constructible module embedding theorem gives a monomorphism ι:G→⊕ Eⱼ into the required finite constant pushforwards. Injectivity extends a to ψ:⊕ Eⱼ→I with ι≫ψ=a.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "original proof Steps 4-5"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
-    "declaration": "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine",
-    "branch": "slopmaster2",
-    "line": 97,
-    "declarations": [
-      "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine"
-    ],
-    "sorry_free": false,
-    "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lemma-weil-pbc-h1-constructible-representation",
-    "worker": "stage1",
-    "summary": "Statement made precise in the form of the Lean declaration AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine (finite and locally finitely presented h_j, finite F_r-modules M_j, F_r-module maps psi_j, xi = sum H^1(i^{-1}psi_j)(x_j), cohomology of underlying abelian sheaves); stmt_deps replaced (the setup, P^1, injective object, module sheaves, inverse/direct image, constant sheaf, finite and finitely presented morphisms, H^1 and its functoriality). The imported torsor/Cech-cocycle proof was replaced by the route of Stacks 0A5H, proof paragraphs 2-3: 03SA (new node lem-weil-pbc-module-sheaf-colimit-constructible, qcqs X, finite Lambda), 03Q5 on the qcqs X_0 with forgetful and inverse image commuting with colimits, 09Z7(3) (new node lem-weil-pbc-constructible-module-finite-pushforward-embedding, Lambda-modules; the old lemma-weil-pbc-constructible-finite-pushforward states the abelian-group form 09Z7(2), which does not give F_r-module maps), injectivity of I, and additivity of H^1 and i^{-1} to split the biproduct. lemma-weil-pbc-constructible-approximation and lemma-weil-pbc-constructible-finite-pushforward are no longer used. Mathlib searched three ways: absent."
-  },
-  "tool_uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-inverse-image-preserves-colimits"
-  ],
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass",
-    "note": "Six steps along the proof of Stacks 0A5H (second and third paragraphs), with 03SA (new node lem-weil-pbc-module-sheaf-colimit-constructible), 03Q5 (lem-weil-pbc-cohomology-filtered-colimit) and 09Z7(3) (new node lem-weil-pbc-constructible-module-finite-pushforward-embedding, Lean exists_mono_biproduct_lowerStar attached, rests on sorry). Statement in the form of the attached Lean exists_sum_eq_of_injective_projectiveLine (StrictHenselian.lean:105, own sorry), checked against the source. Tool uses: standard charts, colimits-forgetful, inverse-image-preserves-colimits (generic black boxes). Henselian hypothesis unused, recorded in the statement."
+  {
+   "text": "Let T be module inverse image followed by forgetting modules. Set z′=H¹(Tι)(z), ψⱼ=inⱼ≫ψ and xⱼ=H¹(Tπⱼ)(z′). The additive functor T⋙functorH takes sum πⱼ≫inⱼ=id to the cohomological identity. Evaluate at z′, use ι≫ψ=a, and obtain sum H¹(Tψⱼ)(xⱼ)=H¹(Ta)(z)=c.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "original proof Step 6"
+   }
   }
+ ],
+ "proof_deps": [
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-constructible-restriction-class",
+  "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
+  "def-sp-injective-resolutions",
+  "def-weil-additive-category",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Existing node plan made into Lean by R1, with two explicit intermediate steps; Stacks 0A5H (lemma-efface-cohomology-on-fibre-by-finite-cover) and 03SA/03Q5/09Z7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology class of restriction of injective sheaf to closed fibre is sum of images from finite pushforwards",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, instAdditivePushforward, restrictFunctorAdjCounitIso (Mathlib.AlgebraicGeometry.Modules.Sheaf): Zariski module sheaves only",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first etale cohomology of restriction of an injective sheaf to the closed fibre of the projective line over a henselian local ring",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Extension.cotangentComplex_injective_iff, Algebra.etaleLocus_eq_compl_support (Mathlib.RingTheory.*): cotangent H^1, unrelated",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlni constructible Mathlib/AlgebraicGeometry Mathlib/CategoryTheory/Sites; grep -rn 'IsFiltered\\|colimit' Mathlib/CategoryTheory/Sites/SheafCohomology/",
+   "results": "no constructible etale sheaves (only constructible sets in Morphisms/FinitePresentation.lean); Sheaf cohomology files have no filtered-colimit statement",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1136,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-constructible-approximation",
+  "lemma-weil-pbc-constructible-finite-pushforward"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "For an injective sheaf $I$ of $\\mathbf F_\\ell$-modules on $\\mathbf P^1_A$,\nevery class\n$c\\in H^1(X_0,I_0)$ admits finite $\\mathbf F_\\ell$-modules $M_i$, finite finitely presented\nmorphisms $h_i:V_i\\to X$, and a map\n$\\bigoplus_i(h_i)_*\\underline{M_i}\\to I$ such that $c$ is the image of a\ntuple of classes in\n$\\bigoplus_iH^1(X_0,(h_i)_*\\underline{M_i}|_{X_0})$.",
+   "proof": "View $c$ as the isomorphism class of an $I_0$-torsor. It is trivial on an\netale cover; quasi-compactness of $X_0$ selects finitely many members\n$U_a\\to X_0$. Choosing local origins gives a Cech cocycle\n$z=(z_{ab})$ with\n\n$$\nz_{ab}\\in I_0(U_a\\times_{X_0}U_b),\\qquad\nz_{bc}-z_{ac}+z_{ab}=0\n$$\n\non every triple overlap. There are finitely many sections and equations.\nConstructible approximation therefore supplies a constructible sheaf $F$, a\nmap $\\alpha:F\\to I$, and lifts $\\widetilde z_{ab}\\in F_0(U_{ab})$\nsatisfying the same equations and mapping to $z_{ab}$.\n\nThe finite-pushforward lemma gives a monomorphism\n$\\iota:F\\hookrightarrow F'=\\bigoplus_{i=1}^r(h_i)_*\\underline{M_i}$.\nInjectivity of $I$ extends $\\alpha$ across $\\iota$ to a map\n$\\psi:F'\\to I$. The sheaf square and the three relevant terms of the Cech\ncomplex form the commuting three-row diagram\n\n$$\n\\begin{CD}\nF @>{\\iota}>> F' @>>> \\operatorname{coker}(\\iota)\\\\\n@V{\\alpha}VV @V{\\psi}VV @VVV\\\\\nI @= I @>>> 0\\\\[2pt]\n@VVV @VVV @VVV\\\\\n\\prod_a I_0(U_a) @>{d^0}>>\n\\prod_{a,b} I_0(U_{ab}) @>{d^1}>>\n\\prod_{a,b,c} I_0(U_{abc}).\n\\end{CD}\n$$\n\nHere the bottom vertical maps mean restriction followed by the indicated\nCech cochain inclusion; commutativity in degrees $0,1,2$ follows from\nfunctoriality of restriction. The cocycle $\\iota(\\widetilde z)$ defines\n$c'\\in H^1(X_0,F'_0)$ and $\\psi_0(c')=c$.\n\nFinite direct sums commute with $H^1$, while exact finite direct image and\nLeray give\n\n$$\nH^1(X_0,F'_0)=\n\\bigoplus_{i=1}^rH^1(X_0,(h_i)_*\\underline{M_i}|_{X_0})\n=\\bigoplus_{i=1}^rH^1((V_i)_0,\\underline{M_i}).\n$$\n\nThus $c'$ is the required finite tuple, and the displayed map $F'\\to I$\nsends that tuple to the original class.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+     "lines": [
+      97,
+      126
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+  "declaration": "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine",
+  "branch": "slopmaster2",
+  "line": 97,
+  "declarations": [
+   "AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine"
+  ],
+  "sorry_free": false,
+  "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lemma-weil-pbc-h1-constructible-representation",
+  "worker": "stage1",
+  "summary": "Statement made precise in the form of the Lean declaration AlgebraicGeometry.Etale.exists_sum_eq_of_injective_projectiveLine (finite and locally finitely presented h_j, finite F_r-modules M_j, F_r-module maps psi_j, xi = sum H^1(i^{-1}psi_j)(x_j), cohomology of underlying abelian sheaves); stmt_deps replaced (the setup, P^1, injective object, module sheaves, inverse/direct image, constant sheaf, finite and finitely presented morphisms, H^1 and its functoriality). The imported torsor/Cech-cocycle proof was replaced by the route of Stacks 0A5H, proof paragraphs 2-3: 03SA (new node lem-weil-pbc-module-sheaf-colimit-constructible, qcqs X, finite Lambda), 03Q5 on the qcqs X_0 with forgetful and inverse image commuting with colimits, 09Z7(3) (new node lem-weil-pbc-constructible-module-finite-pushforward-embedding, Lambda-modules; the old lemma-weil-pbc-constructible-finite-pushforward states the abelian-group form 09Z7(2), which does not give F_r-module maps), injectivity of I, and additivity of H^1 and i^{-1} to split the biproduct. lemma-weil-pbc-constructible-approximation and lemma-weil-pbc-constructible-finite-pushforward are no longer used. Mathlib searched three ways: absent."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-inverse-image-preserves-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass",
+  "note": "Six steps along the proof of Stacks 0A5H (second and third paragraphs), with 03SA (new node lem-weil-pbc-module-sheaf-colimit-constructible), 03Q5 (lem-weil-pbc-cohomology-filtered-colimit) and 09Z7(3) (new node lem-weil-pbc-constructible-module-finite-pushforward-embedding, Lean exists_mono_biproduct_lowerStar attached, rests on sorry). Statement in the form of the attached Lean exists_sum_eq_of_injective_projectiveLine (StrictHenselian.lean:105, own sorry), checked against the source. Tool uses: standard charts, colimits-forgetful, inverse-image-preserves-colimits (generic black boxes). Henselian hypothesis unused, recorded in the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7aadf",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T000248-L-482311",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes and cited Stacks arguments; existing signatures unchanged, all three modules compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded open dependencies."
+ }
 }

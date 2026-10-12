@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-constructible-restriction-class",
+ "kind": "statement",
+ "title": "Constructible representatives of restricted cohomology classes",
+ "statement": "Let X and X₀ be quasi-compact quasi-separated schemes [def-weil-pbc-scheme-conventions], i:X₀→X any morphism, Λ a finite commutative ring, F a sheaf of Λ-modules on X [def-weil-pbc-etale-sheaves], and q≥0. Every c∈H^q(X₀,i⁻¹F) equals H^q(i⁻¹a)(z), for some constructible module sheaf G [def-weil-pbc-etale-constructible-sheaf], morphism a:G→F and class z∈H^q(X₀,i⁻¹G). All cohomology is underlying abelian sheaf cohomology [def-weil-pbc-etale-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof Steps 2-3; Stacks 03SA(3) and 03Q5"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Express F as a small filtered colimit of constructible module sheaves Gₐ by\n03SA(3), with cocone maps aₐ : Gₐ → F. Forgetting modules preserves colimits; inverse\nimage also preserves colimits, and naturally commutes with forgetting modules.\nThus the underlying abelian restriction of F is the filtered colimit of the underlying\nabelian restrictions of Gₐ. On the quasi-compact quasi-separated scheme X₀, 03Q5\nidentifies the cohomology of this colimit with the filtered colimit of their cohomology\ngroups. Every element of a filtered colimit of abelian groups comes from one stage.\nChoose that stage Gₐ and its class z, and take a = aₐ. The canonical cohomology map\nfrom that stage is precisely H^q of the underlying restricted a, giving the equality.\nThis includes q = 0, zero classes, empty schemes, and the zero coefficient ring.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof Steps 2-3; Stacks 03SA(3) and 03Q5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof Steps 2-3; Stacks 03SA(3) and 03Q5; regrouping of the existing DAG argument by R1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constructible representatives of restricted cohomology classes",
+   "results": "UNAVAILABLE: Internal Server Error. No absence verdict.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible representatives of restricted cohomology classes",
+   "results": "Sheaf.H, cohomologyPresheaf and structure-sheaf limit maps; none provides the stated etale comparison or constructible factorization.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg Henselian|constructible|filtered|constant Mathlib/CategoryTheory/Sites/SheafCohomology; blueprint_refs.py search",
+   "results": "H.map_comp_apply, H.map_add_apply and functorH supply cohomology algebra. No identical statement in Mathlib or the whole blueprint.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian",
+  "group": "R1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "proof Steps 2-3; Stacks 03SA(3) and 03Q5",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleRestrictionClass.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_constructible_restriction_class",
+  "statement": "theorem exists_constructible_restriction_class {X X₀ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace X₀] [QuasiSeparatedSpace X₀] (i : X₀ ⟶ X) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (c : Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj F)) q) : ∃ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)), Scheme.IsConstructibleEtaleModuleSheaf G ∧ ∃ (a : G ⟶ F) (z : Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((i)^*[ModuleCat.{u + 1} Λ].obj G)) q), Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map ((i)^*[ModuleCat.{u + 1} Λ].map a)) q z = c",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7aadf",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T000248-L-482311",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-7aadf",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T000248-L-482311",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered proofs and helper signatures with their DAG nodes and cited Stacks arguments; existing signatures unchanged, all three modules compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded open dependencies."
+ }
+}

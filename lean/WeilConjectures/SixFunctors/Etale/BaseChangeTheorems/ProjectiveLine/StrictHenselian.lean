@@ -11,6 +11,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+import Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image
+import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
 
 /-!
 # The projective line over a strictly henselian local ring
@@ -94,6 +98,7 @@ section StrictlyHenselian
 variable (A : Type u) [CommRing A] [HenselianLocalRing A]
   [IsSepClosed (IsLocalRing.ResidueField A)]
 
+set_option linter.unusedSectionVars false in
 /-- **Representation of an `H¹`-class of a restricted injective.** Let `A` be strictly
 henselian, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre, `r` a prime and `I` an injective
 sheaf of `𝔽_r`-modules on `X`. Every class `c ∈ H¹(X₀, I₀)` is a finite sum
@@ -122,8 +127,58 @@ theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
       ∑ j, Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
         AddCommGrpCat.{u + 1})).map ((ProjectiveSpace.map _
           (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1}
-            (ULift.{u + 1} (ZMod r))].map (ψ j))) 1 (x j) = c :=
-  sorry
+            (ULift.{u + 1} (ZMod r))].map (ψ j))) 1 (x j) = c := by
+  classical
+  have : CompactSpace (ProjectiveLine (Spec (.of A))) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of A))) :=
+    quasiSeparatedSpace_of_quasiSeparated (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+  have : CompactSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+        Spec (.of (IsLocalRing.ResidueField A)))
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    quasiSeparatedSpace_of_quasiSeparated
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+        Spec (.of (IsLocalRing.ResidueField A)))
+  let Λ := ULift.{u + 1} (ZMod r)
+  let i := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  have : (sheafCompose
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))).smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).Additive :=
+    ⟨by intros; rfl⟩
+  let T := (i)^*[ModuleCat.{u + 1} Λ] ⋙
+    sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  obtain ⟨G, hG, a, z, hz⟩ := Etale.exists_constructible_restriction_class i Λ I 1 c
+  obtain ⟨n, V, h, hh, hfp, M, hM, ι, hι⟩ :=
+    Etale.finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf Λ G hG
+  let E (j : Fin n) := (h j)_*[ModuleCat.{u + 1} Λ].obj
+    ((constantSheaf (V j).smallEtaleTopology _).obj (M j))
+  let := hι
+  let ψ := Injective.factorThru a ι
+  let z' := Sheaf.H.map (T.map ι) 1 z
+  refine ⟨n, V, h, hh, hfp, M, hM,
+    (fun j ↦ biproduct.ι E j ≫ ψ),
+    (fun j ↦ Sheaf.H.map (T.map (biproduct.π E j)) 1 z'), ?_⟩
+  change ∑ j, Sheaf.H.map (T.map (biproduct.ι E j ≫ ψ)) 1
+    (Sheaf.H.map (T.map (biproduct.π E j)) 1 z') = c
+  simp_rw [← Sheaf.H.map_comp_apply, ← T.map_comp, ← Category.assoc]
+  let H := T ⋙ Sheaf.functorH _ 1
+  have he : ∑ j, H.map (biproduct.π E j ≫ biproduct.ι E j ≫ ψ) = H.map ψ := by
+    rw [← H.map_sum]
+    simp only [← Category.assoc]
+    rw [← Preadditive.sum_comp, IsBilimit.total (biproduct.isBilimit E), Category.id_comp]
+  dsimp [H] at he
+  have he' := congrArg (fun f ↦ AddCommGrpCat.homAddEquiv f z') he
+  rw [map_sum, AddMonoidHom.finsetSum_apply] at he'
+  change ∑ j, Sheaf.H.map (T.map (biproduct.π E j ≫ biproduct.ι E j ≫ ψ)) 1 z' =
+    Sheaf.H.map (T.map ψ) 1 z' at he'
+  simp only [Category.assoc]
+  rw [he']
+  dsimp [z']
+  rw [← Sheaf.H.map_comp_apply, ← T.map_comp, Injective.comp_factorThru]
+  exact hz
 
 /-- **Acyclicity on the closed projective line.** Let `A` be strictly henselian, `X = ℙ¹_A`,
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre and `r` a prime. For every injective sheaf `I` of
@@ -135,8 +190,43 @@ theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [
     Subsingleton (Sheaf.H ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
       AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _
         (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1}
-          (ULift.{u + 1} (ZMod r))].obj I)) q) :=
-  sorry
+          (ULift.{u + 1} (ZMod r))].obj I)) q) := by
+  classical
+  let k := IsLocalRing.ResidueField A
+  let i := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  have sq := ProjectiveSpace.isPullback_map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  by_cases hq1 : q = 1
+  · subst q
+    refine subsingleton_of_forall_eq 0 fun c ↦ ?_
+    obtain ⟨n, V, h, hh, hfp, M, hM, ψ, x, hx⟩ :=
+      Etale.exists_sum_eq_of_injective_projectiveLine A r I c
+    have hz (j : Fin n) :
+        Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
+          AddCommGrpCat.{u + 1})).map ((i)^*[ModuleCat.{u + 1}
+            (ULift.{u + 1} (ZMod r))].map (ψ j))) 1 (x j) = 0 := by
+      let := hh j
+      let := hfp j
+      let := hM j
+      exact Etale.finite_pushforward_H_one_image_eq_zero_of_henselianLocalRing
+        (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)) i
+        (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) sq
+        (ULift.{u + 1} (ZMod r)) I (h j) (M j) (ψ j) (x j)
+    rw [← hx]
+    exact Finset.sum_eq_zero fun j _ ↦ hz j
+  · have hq2 : 1 < q := by omega
+    let U : Fin (1 + 1) → (ProjectiveLine (Spec (.of A))).Opens :=
+      fun j ↦ ProjectiveSpace.standardOpen (ULift.{u} (Fin 2)) (Spec (.of A)) ⟨j⟩
+    have hU (j : Fin (1 + 1)) : IsAffineOpen (U j) :=
+      ProjectiveSpace.isAffineOpen_standardOpen _ _ _
+    have hcov : ⨆ j, U j = ⊤ := by
+      simpa [U, ← Equiv.ulift.symm.iSup_comp] using
+        ProjectiveSpace.iSup_standardOpen (ULift.{u} (Fin 2)) (Spec (.of A))
+    exact Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
+      (ULift.{u + 1} (ZMod r)) (IsLocalRing.maximalIdeal A)
+      (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)) i
+      (ProjectiveLine (Spec (.of k)) ↘ Spec (.of k)) sq 1 U hU hcov I q hq2
 
 /-- **Acyclicity of injectives on `ℙ¹_κ`.** Let `A` be strictly henselian, `X = ℙ¹_A` and
 `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre. For a prime `ℓ` and an injective sheaf `I` of
