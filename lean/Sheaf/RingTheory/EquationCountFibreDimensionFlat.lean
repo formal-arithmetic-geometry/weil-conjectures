@@ -9,10 +9,8 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
-import Sheaf.RingTheory.FibreDimensionNeighborhood
-import Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound
 import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionFlat
+import Sheaf.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection
 
 /-!
 # Flatness from the number of equations and fibre dimension
@@ -57,6 +55,53 @@ theorem exists_flat_away_of_fibre_dimension_eq
         (∃ g : S, g ∉ q.asIdeal ∧ Module.Flat R (Localization.Away g)) ∧
         Module.Flat R (Localization.AtPrime q.asIdeal) ∧
         (Localization.localRingHom p.asIdeal q.asIdeal (algebraMap R S) rfl).Flat := by
-  sorry
+  let S := MvPolynomial (Fin N) R ⧸ Ideal.span (Set.range equations)
+  dsimp only
+  intro q hdim
+  -- The existing localization lemma packages the fibre-dimension argument.
+  obtain ⟨h, hg, hci, _, e, _⟩ :=
+    Algebra.exists_localization_relativeGlobalCompleteIntersection R N c equations q ⟨hc, hdim⟩
+  let g : S := Ideal.Quotient.mk _ h
+  -- Use a finite presentation supplied by the intrinsic complete-intersection predicate.
+  rw [Algebra.IsRelativeGlobalCompleteIntersection, toAlgebra_algebraMap] at hci
+  obtain ⟨n, t, f, e', hf⟩ := hci
+  have hpres : Algebra.IsRelativeGlobalCompleteIntersectionPresentation f := by
+    intro p hp
+    exact hf p hp
+  have hflat := Algebra.flat_of_isRelativeGlobalCompleteIntersection_quotient R n t f hpres
+  have : Module.Flat R (MvPolynomial (Fin n) R ⧸ Ideal.span (Set.range f)) :=
+    RingHom.flat_algebraMap_iff.mp hflat
+  have haway : Module.Flat R (Localization.Away g) :=
+    Module.Flat.of_linearEquiv (e'.trans e).symm.toLinearEquiv
+  refine ⟨⟨g, hg, haway⟩, ?_⟩
+  -- Since g is outside q, S_q is a further localization of S_g.
+  have hle : Submonoid.powers g ≤ q.asIdeal.primeCompl := by
+    apply Submonoid.powers_le.mpr
+    exact hg
+  let A := Localization.Away g
+  let B := Localization.AtPrime q.asIdeal
+  let : Algebra A B := IsLocalization.localizationAlgebraOfSubmonoidLe A B
+    (Submonoid.powers g) q.asIdeal.primeCompl hle
+  have : IsScalarTower S A B := IsLocalization.localization_isScalarTower_of_submonoid_le
+    A B (Submonoid.powers g) q.asIdeal.primeCompl hle
+  have : IsLocalization (q.asIdeal.primeCompl.map (algebraMap S A)) B :=
+    IsLocalization.isLocalization_of_submonoid_le A B
+      (Submonoid.powers g) q.asIdeal.primeCompl hle
+  have : Module.Flat A B :=
+    IsLocalization.flat B (q.asIdeal.primeCompl.map (algebraMap S A))
+  have : IsScalarTower R A B := IsScalarTower.to₁₃₄ R S A B
+  have hprime : Module.Flat R B := Module.Flat.trans R A B
+  refine ⟨hprime, ?_⟩
+  -- Restrict the flat S_q module along R → R_p using the canonical local map.
+  let p := PrimeSpectrum.comap (algebraMap R S) q
+  let φ := Localization.localRingHom p.asIdeal q.asIdeal (algebraMap R S) rfl
+  let : Algebra (Localization.AtPrime p.asIdeal) B := φ.toAlgebra
+  have : IsScalarTower R (Localization.AtPrime p.asIdeal) B :=
+    IsScalarTower.of_algebraMap_eq fun r ↦ by
+      rw [IsScalarTower.algebraMap_apply R S B]
+      exact (Localization.localRingHom_to_map p.asIdeal q.asIdeal
+        (algebraMap R S) rfl r).symm
+  exact (Module.flat_iff_of_isLocalization (Localization.AtPrime p.asIdeal)
+    p.asIdeal.primeCompl B).mpr hprime
 
 end MvPolynomial

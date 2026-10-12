@@ -8962,3 +8962,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/H3/Sheaf.AlgebraicGeometry.PicardProductOpenData (stage 3; reviewer PASS; first push; landing 20261012T184306-L-4005694 (interface); batch 20261012T184234; modules 4; new nodes 3)
 - 18:43 L: merged deliver/H3/Sheaf.CategoryTheory.CanonicalResolutionHomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T184307-L-4005844 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/H3/Sheaf.CategoryTheory.Sites.SiteCechFreeComplexExactAux (stage 3; reviewer PASS; first push; landing 20261012T184307-L-4005941 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/H3/Sheaf.RingTheory.EquationCountFibreDimensionFlat (stage 3; reviewer PASS; first push; landing 20261012T184307-L-4006038 (proof); batch 20261012T184234; modules 1; new nodes 0)
