@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-amplification",
+ "kind": "statement",
+ "title": "Matrix amplification preserves scalar-defect realizations",
+ "statement": "Let $K$ be a field, $A,C$ finite-dimensional central simple $K$-algebras, $x\\in H^2_{\\mathrm{cont}}(\\operatorname{Gal}(K^s/K),(K^s)^\\times)$, $n>0$, and $f:C\\simeq_K\\operatorname{Mat}_n(A)$. If $A$ realizes $x$ in the matrix scalar-defect relation [def-sc-brauer-scalar-defect], then $C$ realizes the same $x$.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Section 03R1, scalar-defect construction following Lemma 03R6 and preceding Theorem 03R7; Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the scalar-defect realization into a size d>0, splitting e, locally constant lift b, and cocycle z. Construct the entrywise scalar-extension equivalence using TensorProduct.piRight twice. Its preservation of multiplication follows by tensor induction and the matrix multiplication sum. Extend f to the separable closure, apply this equivalence, apply e entrywise, flatten by Matrix.compAlgEquiv and reindex with finProdFinEquiv. This is the explicit splitting of C of size n*d>0.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the diagonal ring homomorphism Matrix.scalar (Fin n) on Mat_d(Ks) with the flattening equivalence, and apply Units.map. This is a monoid homomorphism on invertible matrices, equal to the reindexed I_n Kronecker b. Entrywise calculation proves it commutes with Galois action and sends scalar units to the same scalar unit in size n*d.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the original locally constant b with this fixed monoid homomorphism. Apply diagonal_mul and mul_diagonal to each outer matrix entry of the descent identity and then apply flattening. Apply the same monoid homomorphism to the original multiplication-defect equation, using its Galois-action and scalar compatibilities. The original z and its homology-image equation complete the realization of C. Every step is implemented and proved in the Lean module.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Section 03R1, scalar-defect construction following Lemma 03R6 and preceding Theorem 03R7; Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "BrauerScalarDefect|scalarDefect|IsBrauerEquivalent",
+   "results": "Hits: Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean; no scalar-defect comparison or amplification theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brauer equivalent central simple algebras have equal scalar defect second Galois cohomology classes",
+   "results": "Hits: IsBrauerEquivalent, Brauer.CSA_Setoid, IsBrauerEquivalent.is_eqv, BrauerGroup, IsBrauerEquivalent.refl, IsBrauerEquivalent.trans, IsBrauerEquivalent.symm, CSA.mk.inj; no scalar-defect comparison or amplification theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Galois scalar defect cohomology class of a central simple algebra is independent of matrix splitting and invariant under matrix amplification",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectFaithfulForward",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: field Brauer comparison; well-definedness of the scalar-defect class on Brauer-equivalent algebras",
+   "via": [
+    "lem-sc-brauer-scalar-defect-faithful-forward",
+    "lem-sc-brauer-scalar-defect-faithful",
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.BrauerScalarDefectAmplification",
+  "file": "lean/Sheaf/FieldTheory/BrauerScalarDefectAmplification.lean",
+  "declaration": "Field.hasBrauerScalarDefect_of_matrix_algEquiv",
+  "statement": "theorem hasBrauerScalarDefect_of_matrix_algEquiv (K : Type u) [Field K] (A C : CSA.{u, u} K) (x : GaloisUnitsH2 K) (n : ℕ) (hn : n ≠ 0) (f : C ≃ₐ[K] Matrix (Fin n) (Fin n) A) (hx : HasBrauerScalarDefect K A x) : HasBrauerScalarDefect K C x",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

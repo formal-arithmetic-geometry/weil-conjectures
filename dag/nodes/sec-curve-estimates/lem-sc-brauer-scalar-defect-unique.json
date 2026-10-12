@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-brauer-scalar-defect-unique",
+ "kind": "statement",
+ "title": "Uniqueness of the scalar-defect class for one algebra",
+ "statement": "Let $K$ be a field, $A$ a finite-dimensional central simple $K$-algebra, and $x,y\\in H^2_{\\mathrm{cont}}(\\operatorname{Gal}(K^s/K),(K^s)^\\times)$. If $A$ realizes both $x$ and $y$ in the matrix scalar-defect relation [def-sc-brauer-scalar-defect], then $x=y$.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Section 03R1, scalar-defect construction following Lemma 03R6 and preceding Theorem 03R7; Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof": [
+  {
+   "text": "Unpack the two realizations into e,e', positive sizes d,d', locally constant lifts b,b', and homogeneous cocycles z,z'. The two split algebras have the same vector-space dimension, so d^2=(d')^2 and positivity gives d=d'. Reindex and apply Skolem-Noether to the change of splitting, obtaining a fixed invertible matrix P with e'(a)=P^{-1}e(a)P.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put d(g)=P^{-1}b(g)g(P). Compute that it implements the same descent datum for e' as b'(g). The elements e'(1 tensor a) span the full matrix algebra over Ks, so the quotient b'(g)d(g)^{-1} commutes with every matrix. It is a unique scalar unit c(g). The entries of P lie in a finite separable extension, hence g(P) is locally constant. Therefore d is locally constant, and extracting c from a fixed diagonal entry of the quotient proves c is locally constant; the size is positive, so such an entry exists.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute b'(g)=c(g)d(g) in the two multiplication-defect equations and cancel P, g(P), and gh(P). The inhomogeneous values satisfy z'(g,h)=c(g)g(c(h))c(gh)^{-1}z(g,h). Define the homogeneous one-cochain q(g0,g1)=g0(c(g0^{-1}g1)), written additively. It is equivariant and continuous because c is locally constant and the coefficient action is continuous. Its alternating differential has inhomogeneous values z'-z. Equivariance recovers the full homogeneous cochain from these values, so z'-z is this differential. The homology projection kills it. The two recorded image equations then give x=y.",
+   "uses": [
+    "def-sc-brauer-scalar-defect"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-brauer-scalar-defect"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Section 03R1, scalar-defect construction following Lemma 03R6 and preceding Theorem 03R7; Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "BrauerScalarDefect|scalarDefect|IsBrauerEquivalent",
+   "results": "Hits: Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean, Mathlib/Algebra/BrauerGroup/Defs.lean; no scalar-defect comparison or amplification theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brauer equivalent central simple algebras have equal scalar defect second Galois cohomology classes",
+   "results": "Hits: IsBrauerEquivalent, Brauer.CSA_Setoid, IsBrauerEquivalent.is_eqv, BrauerGroup, IsBrauerEquivalent.refl, IsBrauerEquivalent.trans, IsBrauerEquivalent.symm, CSA.mk.inj; no scalar-defect comparison or amplification theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Galois scalar defect cohomology class of a central simple algebra is independent of matrix splitting and invariant under matrix amplification",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.BrauerScalarDefectFaithfulForward",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: field Brauer comparison; well-definedness of the scalar-defect class on Brauer-equivalent algebras",
+   "via": [
+    "lem-sc-brauer-scalar-defect-faithful-forward",
+    "lem-sc-brauer-scalar-defect-faithful",
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.BrauerScalarDefectUnique",
+  "file": "lean/Sheaf/FieldTheory/BrauerScalarDefectUnique.lean",
+  "declaration": "Field.brauerScalarDefect_unique",
+  "statement": "theorem brauerScalarDefect_unique (K : Type u) [Field K] (A : CSA.{u, u} K) (x y : GaloisUnitsH2 K) (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K A y) : x = y",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T144118-L-2098528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

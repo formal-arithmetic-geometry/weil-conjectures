@@ -12,20 +12,36 @@
  },
  "proof": [
   {
-   "text": "The scalar-defect comparison argument in Theorem 03R7, using tensor products, coboundaries, and finite Galois descent.",
+   "text": "Unpack Brauer equivalence into positive n,m and an algebra isomorphism Mat_n(A) ≃ Mat_m(B). Construct these two matrix algebras as CSA records from their actual matrix carriers, using the Mathlib matrix centrality, simplicity, and finite-dimensionality instances. Apply the fully proved matrix-amplification lemma to obtain realizations of x and y on these concrete algebras.",
+   "uses": [
+    "lem-sc-brauer-scalar-defect-amplification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the realization of x through the given isomorphism. Explicitly compose its matrix splitting with the inverse isomorphism extended by Algebra.TensorProduct.congr; reuse its size, lifts, cocycle, local constancy, defect equation, and homology image. The descent equation is the original equation evaluated on the inverse image of each algebra element. This is the proved private scalarDefect_transport helper.",
    "uses": [
     "def-sc-brauer-scalar-defect"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The concrete algebra Mat_m(B) now realizes both x and y. Apply uniqueness for this one algebra to conclude x=y. This route separates the proved matrix construction and isomorphism transport from the remaining change-of-splitting and continuous-coboundary calculation.",
+   "uses": [
+    "lem-sc-brauer-scalar-defect-unique"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-brauer-scalar-defect"
+  "def-sc-brauer-scalar-defect",
+  "lem-sc-brauer-scalar-defect-amplification",
+  "lem-sc-brauer-scalar-defect-unique"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "The scalar-defect construction following Lemma 03R6, Theorem 03R7, and Section 0DVG"
+  "place": "Section 03R1, scalar-defect construction before Theorem 03R7; positive matrix amplification followed by fixed-algebra uniqueness"
  },
  "mathlib_searches": [
   {
@@ -92,9 +108,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U3",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T112851-L-772400",
+  "landing": "20261012T144118-L-2098528",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
