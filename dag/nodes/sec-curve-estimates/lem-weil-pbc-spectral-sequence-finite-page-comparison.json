@@ -13,46 +13,34 @@
  ],
  "proof": [
   {
-   "text": "For nonempty I, take the directed colimit of the r-th-page complexes. Complex colimits are computed degreewise. The cocone v gives a chain map to the target page, and the initial hypothesis or induction hypothesis makes its components isomorphisms. Thus this chain map and its induced homology maps are isomorphisms.",
+   "text": "Induct on r ≥ 1 using Int.leInduction. The base case is hpage. At the successor step form the cocone s of page-r complexes with legs (v i).hom r; the equations hv give its naturality. Each evaluated cocone is colimiting: its canonical colimit.desc is an isomorphism by the induction hypothesis, so colimit.isColimit.ofPointIso applies. HomologicalComplex.isColimitOfEval then makes s colimiting.",
    "uses": [
     "def-sp-spectral-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
-   }
+   "elementary": true
   },
   {
-   "text": "Directed-colimit exactness identifies the homology of the colimit complex with the colimit of the r-th-page homologies. The page-to-page isomorphisms of E and E' and their naturality in all morphisms identify this isomorphism with the canonical comparison at r+1. Induct on the natural integer r-1.",
+   "text": "Apply directed_colimit_homology to the page-r complex shape and bidegree. It preserves the colimit cocone s under homology, including when I is empty. Extend its point by the target page-to-page isomorphism. The spectral-sequence pageHomologyNatIso transports the diagram to page r+1; the comm equation for every v i identifies this transported cocone with the page-(r+1) comparison cocone u. Consequently u is colimiting.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "def-sp-spectral-sequence"
+    "def-sp-spectral-sequence",
+    "lem-weil-pbc-directed-colimit-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
-   }
+   "elementary": false
   },
   {
-   "text": "Any map with the required cocone equations equals the canonical map by colimit.hom_ext. When I is empty, colimits are zero and the initial comparison hypothesis forces E'_1 to be zero degreewise. Homology then forces all subsequent pages to be zero, proving the empty case.",
+   "text": "The isomorphism between the chosen colimit cocone and u has the required comparison cocone equations. colimit.hom_ext and the equations for the given φ identify φ with this isomorphism, so φ is an isomorphism. This closes the induction without convergence or abutment assumptions.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-spectral-sequence",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+  "lem-weil-pbc-directed-colimit-homology"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "the complex-continuity input of the ancestor strict-henselization stalk formula, finite-page induction (parent comparison Step 1); expanded omitted comparison details from Tag 0EZM using Tags 00DB and 0127"
+  "place": "Tag 0EZM finite-page comparison, expanded via Tag 00DB; V3 writes the colimit-cocone induction and its naturality in Lean."
  },
  "mathlib_searches": [
   {
@@ -135,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T060754-L-2915568",
+  "landing": "20261012T085356-L-46385",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

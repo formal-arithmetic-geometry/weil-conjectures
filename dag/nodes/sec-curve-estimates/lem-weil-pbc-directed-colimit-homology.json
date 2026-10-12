@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-directed-colimit-homology",
+ "kind": "statement",
+ "title": "Homology of abelian-group complexes preserves directed colimits",
+ "statement": "Let I be a small directed preorder, possibly empty [def-weil-pbc-category-colimit]. Let c be any complex shape on ℤ × ℤ and let pq be a bidegree. In the abelian category of abelian groups [def-sp-abelian], let H_pq denote the homology functor from complexes of shape c to abelian groups: the kernel of the outgoing differential modulo the image of the incoming differential. Then H_pq preserves colimits of diagrams indexed by I, with the comparison induced by the homology maps of the colimit cocone legs. No looplessness or convergence assumption on c is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00DB (lemma-directed-colimit-exact), homology comparison; specialization to abelian groups and adjacent terms of homological complexes"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "If I is nonempty it is filtered. For a diagram F of short complexes, form the short complex S of I-diagrams via ShortComplex.functorEquivalence.inverse. Evaluation preserves homology. The inverse evaluation homology isomorphisms assemble into H(S) ≅ F ⋙ H: homologyMap_mapNatTrans for the evaluation natural transformations proves their naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The colimit functor on abelian-group diagrams preserves homology by directed-colimit exactness. Compose its inverse homology isomorphism with the colimit of the diagram isomorphism from the preceding step. This gives colim(F ⋙ H) ≅ H(colim F). Applying homologyMap_mapNatTrans to the natural transformation evaluation_i → colim identifies the legs of this isomorphism with the homology maps of the standard short-complex colimit cocone. Transporting the colimit universal property along this cocone isomorphism proves preservation.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The shortComplexFunctor of a homological complex preserves I-colimits: each of its three projections is an evaluation, and evaluations preserve colimits. ShortComplex.isColimitOfIsColimitπ supplies the universal property. Compose with the preceding preservation theorem and transport along HomologicalComplex.homologyFunctorIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If I is empty, homology preserves zero morphisms, hence zero and initial objects. It therefore preserves colimits of the empty diagram. The equivalence between I and Discrete PEmpty transports this preservation to the original indexing category.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00DB; categorical implementation using Mathlib homology preservation and functor-category equivalence, written by V3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology of complexes of abelian groups preserves directed colimits including the empty colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology functor preserves filtered colimits of complexes of abelian groups",
+   "results": "instPreservesHomologyFunctorAddCommGrpCatColim in Mathlib.Algebra.Category.Grp.AB; HomologicalComplex.instPreservesColimitEval in HomologicalComplexLimits",
+   "date": "2026-10-12",
+   "verdict": "Building blocks found; neither states preservation of I-colimits by the complex homology functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyFunctor",
+   "results": "homologyFunctor, homologyFunctorIso, homologyFunctorIso', preservesZeroMorphisms and additive instances; no colimit-preservation theorem",
+   "date": "2026-10-12",
+   "verdict": "No direct match; use the natural isomorphism to short-complex homology."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyFunctor.*[Cc]olimit|[Cc]olimit.*homologyFunctor",
+   "results": "Mathlib has the homology/colimit building blocks. Project source has related private shortComplexHomologyColimit and complexHomologyColimit helpers in FiniteEtaleCechFilteredColimit, EtaleInjectiveColimitAcyclic and DerivedAmbientDirectSumsHomology; no reusable public declaration with this statement.",
+   "date": "2026-10-12",
+   "verdict": "Related private implementation found during second reading; unavailable as a public lemma. New theorem handles arbitrary bidegree shapes and empty directed preorders."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison",
+  "date": "2026-10-12",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the complex-continuity input of the ancestor strict-henselization stalk formula, finite-page induction (parent comparison Step 1)",
+   "via": [
+    "lem-weil-pbc-spectral-sequence-finite-page-comparison",
+    "lem-weil-pbc-complex-spectral-sequence-comparison",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DirectedColimitHomology",
+  "file": "lean/Sheaf/CategoryTheory/DirectedColimitHomology.lean",
+  "declaration": "CategoryTheory.directed_colimit_homology",
+  "statement": "theorem directed_colimit_homology\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (c : ComplexShape (ℤ × ℤ)) (pq : ℤ × ℤ) :\n    PreservesColimitsOfShape I (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} c pq)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085356-L-46385",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T085356-L-46385",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
