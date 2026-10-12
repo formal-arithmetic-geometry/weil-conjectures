@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-coherent-formal-modules-affine-quotient-cone",
+ "kind": "statement",
+ "title": "Finite completed modules are limits of their canonical affine quotient cones",
+ "statement": "Let A be Noetherian, I an ideal, B=AdicCompletion I A, and J the ideal sheaf associated with I under ΓSpecIso. For each finite B-module N the explicit cone of def-weil-pbc-coherent-formal-modules-affine-quotient-cone is limiting in A-modules. Moreover its projection at op n sends r*x to a times the projection of x whenever evalₐ I (n+1) r is the residue of a in A/I^(n+1). No inverse functor or candidate comparison is part of this statement.",
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-modules-affine-quotient-cone",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 087W implicit converse; Algebra 0316, 05GG, 00MA (3)"
+ },
+ "proof": [
+  {
+   "text": "Put K=I B. Completion modulo powers identifies B/K^m with A/I^m and makes B K-adically complete. The completion is Noetherian, and the completion-tensor formula makes every finite B-module N K-adically complete. Extended-ideal powers acting on N agree with I-powers after restriction to A.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine unit and ideal-product/cokernel comparison identify the explicit projections with N -> N/I^(n+1)N and transitions with reductions. Completeness gives their limit property. If r and a have equal residues, r-a belongs to K^(n+1), so (r-a)x is killed by this projection, proving the scalar formula.",
+   "uses": [
+    "def-weil-pbc-coherent-formal-modules-affine-quotient-cone",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-module-complete-over-complete-noetherian",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-coherent-formal-modules-affine-quotient-cone",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 087W implicit converse; 0316, 05GG and 00MA (3); second reader constructed the cone and categorical comparison explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso",
+   "results": "12 hits: CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_hom_assoc, CategoryTheory.Limits.IsLimit.lift_comp_conePointUniqueUpToIso_inv_assoc, CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_hom_comp, CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_inv_comp, CategoryTheory.Limits.IsLimit.conePointUniqueUpToIso_hom_comp_assoc",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the canonical sheaf quotient cone; completion and categorical comparison APIs are ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over an adic completion is the limit of the global sections of its affine sheaf quotients",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AdicCompletion, IsAdicComplete, Hausdorffification, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂, AdicCompletion.of_apply, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the canonical sheaf quotient cone; completion and categorical comparison APIs are ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdicComplete|isLimit_ext|toTildeΓNatIso",
+   "results": "25 hits: Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Completeness.lean, Mathlib/RingTheory/AdicCompletion/Noetherian.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match for the canonical sheaf quotient cone; completion and categorical comparison APIs are ingredients.",
+   "sub": "RingTheory/AdicCompletion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite module complete noetherian ring inverse limit quotient modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineComplete",
+  "group": "N4",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-formal-modules-affine-complete",
+   "place": "Tag 087W implicit converse",
+   "via": [
+    "lem-weil-pbc-coherent-formal-modules-affine-complete"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotientCone",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModulesAffineQuotientCone.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModules_affine_quotientCone_complete",
+  "statement": "theorem coherentFormalModules_affine_quotientCone_complete\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)\n    (hJ : J = Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom))\n    (N : ObjectProperty.FullSubcategory\n      (fun N : ModuleCat.{u} (AdicCompletion I A) ↦ Module.Finite (AdicCompletion I A) N)) :\n    Nonempty (IsLimit (coherentFormalModules_affine_quotientCone A I J N.obj)) ∧\n    (∀ (n : ℕ) (r : AdicCompletion I A) (a : A) (x : N.obj),\n      AdicCompletion.evalₐ I (n + 1) r = Ideal.Quotient.mk (I ^ (n + 1)) a →\n      (coherentFormalModules_affine_quotientCone A I J N.obj).π.app (op n) (r • x) =\n        a • (coherentFormalModules_affine_quotientCone A I J N.obj).π.app (op n) x)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261012T235555-L-2201710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261012T235555-L-2201710",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
