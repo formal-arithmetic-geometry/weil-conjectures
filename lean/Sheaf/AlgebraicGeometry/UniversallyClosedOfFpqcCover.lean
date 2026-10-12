@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
 
 /-!
@@ -45,6 +46,12 @@ theorem universallyClosed_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Ty
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, UniversallyClosed (pullback.snd f (g i))) : UniversallyClosed f := by
-  sorry
+  refine fpqc_local_on_base_criterion (P := @UniversallyClosed) ?_ ?_ f g hg h
+  · intro X S T f g _ hf
+    exact MorphismProperty.pullback_snd f g hf
+  · intro S T X _ _ f g hflat hsurj hclosed
+    exact MorphismProperty.of_pullback_snd_of_descendsAlong
+      (P := @UniversallyClosed) (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact)
+      ⟨⟨hsurj, hflat⟩, inferInstance⟩ hclosed
 
 end AlgebraicGeometry
