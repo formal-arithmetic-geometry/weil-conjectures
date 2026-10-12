@@ -50,6 +50,28 @@ theorem injective_pi_localization_associatedPrimes
           M →ₗ[R] LocalizedModule.AtPrime p.1 M))) ∧
     (∀ m : M, (∀ p : associatedPrimes R M,
       ∃ s : R, s ∉ p.1 ∧ s • m = 0) → m = 0) := by
-  sorry
+  have hzero : ∀ m : M,
+      (∀ p : associatedPrimes R M,
+        ∃ s : R, s ∉ p.1 ∧ s • m = 0) → m = 0 := by
+    intro m hm
+    by_contra hmn
+    obtain ⟨p, hp, hle⟩ := exists_le_isAssociatedPrime_of_isNoetherianRing R m hmn
+    obtain ⟨s, hsp, hsm⟩ := hm ⟨p, hp⟩
+    have hsann : s ∈ (⊥ : Submodule R M).colon {m} := by
+      rw [Submodule.mem_colon_singleton, Submodule.mem_bot]
+      exact hsm
+    exact hsp (hle hsann)
+  refine ⟨?_, hzero⟩
+  intro x y hxy
+  apply sub_eq_zero.mp
+  apply hzero (x - y)
+  intro p
+  have hmap : (LocalizedModule.mkLinearMap p.1.primeCompl M :
+      M →ₗ[R] LocalizedModule.AtPrime p.1 M) (x - y) = 0 := by
+    have h := congr_fun hxy p
+    rw [map_sub]
+    exact sub_eq_zero.mpr h
+  obtain ⟨s, hs, hsm⟩ := (LocalizedModule.mem_ker_mkLinearMap_iff.mp hmap)
+  exact ⟨s, hs, hsm⟩
 
 end Module
