@@ -11,6 +11,9 @@ public import Sheaf.CategoryTheory.CommAlgebraSheafModule
 public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts
 import Sheaf.AlgebraicGeometry.CechH1MapNatural
+import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
+import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import Sheaf.Paper.BoundaryDerivationAlgebraicData
 
 /-!
 # Boundary maps for square-zero extensions
@@ -36,6 +39,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- The large existential target needs extra elaboration heartbeats.
 /-- The boundary of a square-zero extension is a derivation for the induced action.
 `σ` is the local quotient action on the kernel, commuting with restriction.
 `μ` is its action by global sections on the kernel sheaf. `ρ` is the induced
@@ -104,6 +109,24 @@ theorem boundary_derivation_square_zero (X : Scheme.{u})
           (IA.isoRightDerivedObj (RingedSpace.globalSectionsFunctor X.toRingedSpace) 1).inv).hom
             f)) ∧
       ∀ f g : C.right.obj.obj (op ⊤), δ (f * g) = ρ f (δ g) + ρ g (δ f) := by
-  sorry
+  obtain ⟨IA, IB, IC, α, β, hιA, hιB, hrows⟩ :=
+    CategoryTheory.InjectiveResolution.exists_horseshoe_resolutions
+      (ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw) _hS
+  obtain ⟨hαβ, hrows⟩ := hrows
+  let hH : ∀ k : ℕ, ((ShortComplex.mk α β hαβ).map
+      (HomologicalComplex.eval _ (ComplexShape.up ℕ) k)).ShortExact :=
+    fun k => (hrows k).1
+  let : PreservesFiniteLimits (RingedSpace.globalSectionsFunctor X.toRingedSpace) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.evaluation (moduleRings X.toRingedSpace) (op ⊤)))
+  obtain ⟨_, _, hglobal⟩ :=
+    CategoryTheory.exists_horseshoe_rightDerived_deltaFunctor
+      (RingedSpace.globalSectionsFunctor X.toRingedSpace)
+  obtain ⟨hΓ, _⟩ := hglobal
+      (ShortComplex.mk i ((commAlgebraSheafModuleFunctor X.sheaf).map p) hw) _hS
+      IA IB IC α β hαβ hιA hιB hH
+  refine ⟨IA, IB, IC, α, β, hαβ, hιA, hιB, hH, hΓ, ?_⟩
+  exact boundary_derivation_algebraic_data X B C p I i hw _hS _hsq IA IB IC α β hαβ
+    hιA hιB hH hΓ
 
 end AlgebraicGeometry
