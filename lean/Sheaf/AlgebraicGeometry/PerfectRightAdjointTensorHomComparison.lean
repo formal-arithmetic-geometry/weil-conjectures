@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+import Sheaf.CategoryTheory.MonoidalProjectionConjugate
 
 /-! # The counit calculation for tensor-Hom duality and a right adjoint
 
@@ -24,6 +25,72 @@ universe u w
 open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
+
+private theorem conjugate_homEquiv
+    {C D : Type*} [Category C] [Category D]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (α : L₂ ⟶ L₁)
+    (A : C) (B : D) (t : L₁.obj A ⟶ B) :
+    a₁.homEquiv A B t ≫ (conjugateEquiv a₁ a₂ α).app B =
+      a₂.homEquiv A B (α.app A ≫ t) := by
+  simp only [Adjunction.homEquiv_unit]
+  rw [Category.assoc, (conjugateEquiv a₁ a₂ α).naturality,
+    ← Category.assoc, unit_conjugateEquiv, Category.assoc, ← Functor.map_comp]
+
+private theorem projection_duality
+    {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) (R : D ⥤ C) [F.Monoidal] (a : F ⊣ R)
+    (K L : C) [ExactPairing K L] (E B : D)
+    (pfK : R.obj (F.obj K ⊗ B) ≅ K ⊗ R.obj B)
+    (hpK : pfK.inv = a.homEquiv _ _
+      ((Functor.Monoidal.μIso F K (R.obj B)).inv ≫ F.obj K ◁ a.counit.app B))
+    (pfL : R.obj (F.obj L ⊗ E) ≅ L ⊗ R.obj E)
+    (hpL : pfL.inv = a.homEquiv _ _
+      ((Functor.Monoidal.μIso F L (R.obj E)).inv ≫ F.obj L ◁ a.counit.app E))
+    (q : E ⟶ F.obj K ⊗ B) :
+    let p := ExactPairing.map F K L
+    tensorLeftHomEquiv (R.obj E) K L (R.obj B)
+      (pfL.inv ≫ R.map ((@tensorLeftHomEquiv _ _ _ E (F.obj K) (F.obj L) B p).symm q)) =
+        R.map q ≫ pfK.hom := by
+  let := ExactPairing.map F K L
+  let t := (tensorLeftHomEquiv E (F.obj K) (F.obj L) B).symm q
+  let b₁ := (tensorLeftAdjunction K L).comp a
+  let b₂ := a.comp (tensorLeftAdjunction (F.obj K) (F.obj L))
+  -- Transport a Hom equivalence along the tensorator and its canonical mate.
+  have h := conjugate_homEquiv b₁ b₂ (Functor.Monoidal.commTensorLeft F L).hom
+    (R.obj E) B
+    ((Functor.Monoidal.μIso F L (R.obj E)).inv ≫ F.obj L ◁ a.counit.app E ≫ t)
+  rw [monoidal_projection_conjugate F R a K L B, ← hpK] at h
+  simp only [b₁, b₂, Adjunction.comp_homEquiv,
+    tensorLeftAdjunction, Adjunction.mkOfHomEquiv_homEquiv,
+    Functor.Monoidal.commTensorLeft_hom_app] at h
+  change tensorLeftHomEquiv (R.obj E) K L (R.obj B)
+      (a.homEquiv _ _ ((Functor.Monoidal.μIso F L (R.obj E)).inv ≫
+        F.obj L ◁ a.counit.app E ≫ t)) ≫ pfK.inv =
+    a.homEquiv _ _
+      (tensorLeftHomEquiv (F.obj (R.obj E)) (F.obj K) (F.obj L) B
+        (Functor.LaxMonoidal.μ F L (R.obj E) ≫
+          (Functor.Monoidal.μIso F L (R.obj E)).inv ≫
+          F.obj L ◁ a.counit.app E ≫ t)) at h
+  rw [← Category.assoc, a.homEquiv_naturality_right, ← hpL] at h
+  simp only [Category.assoc, ← Functor.Monoidal.μIso_hom, Iso.hom_inv_id_assoc] at h
+  have hn := tensorLeftHomEquiv_symm_naturality (Y' := F.obj L) (a.counit.app E) q
+  change (tensorLeftHomEquiv (F.obj (R.obj E)) (F.obj K) (F.obj L) B).symm
+      (a.counit.app E ≫ q) = F.obj L ◁ a.counit.app E ≫ t at hn
+  have hn' : tensorLeftHomEquiv (F.obj (R.obj E)) (F.obj K) (F.obj L) B
+      (F.obj L ◁ a.counit.app E ≫ t) = a.counit.app E ≫ q := by
+    rw [← hn]
+    exact Equiv.apply_symm_apply _ _
+  rw [hn'] at h
+  have hc : a.homEquiv (R.obj E) (F.obj K ⊗ B) (a.counit.app E ≫ q) =
+      R.map q := by
+    rw [a.homEquiv_naturality_right, Adjunction.homEquiv_unit]
+    simp
+  rw [hc] at h
+  -- The calculation gives the comparison after composing with the inverse projection.
+  apply (cancel_mono pfK.inv).1
+  simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using h
 
 /-- The tensor-Hom chain of Tag 0A9T is postcomposition with the canonical mate.
 Source: Stacks Project, Duality for Schemes, Tag 0A9T.
@@ -89,6 +156,36 @@ theorem perfect_rightAdjoint_tensor_hom_comparison
         ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,
           hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
         (ObjectProperty.homMk (pfK.hom ≫
-          K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)) := by sorry
+          K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)) := by
+  let := ExactPairing.map (derivedPullback f) K.obj D.obj
+  let O : schemeDerivedQCohCategory Y := ⟨𝟙_ _, hO⟩
+  let T : schemeDerivedQCohCategory X :=
+    ⟨((derivedPullback f).obj D.obj) ⊗ E.obj, hTensor D E⟩
+  let t : T ⟶ c.obj O := ObjectProperty.homMk
+    ((tensorLeftHomEquiv E.obj ((derivedPullback f).obj K.obj)
+      ((derivedPullback f).obj D.obj) (c.obj O).obj).symm q.hom)
+  let r := (adj.homEquiv T O).symm t
+  have hr : r.hom = (schemeDerivedDirectImage f).map t.hom ≫
+      (adj.counit.app O).hom := by
+    dsimp only [r]
+    rw [Adjunction.homEquiv_counit]
+    rfl
+  have ht := projection_duality (derivedPullback f) (schemeDerivedDirectImage f)
+    a K.obj D.obj E.obj (c.obj O).obj pfK hpK pfD hpD q.hom
+  change tensorLeftHomEquiv ((schemeDerivedDirectImage f).obj E.obj) K.obj D.obj
+      ((schemeDerivedDirectImage f).obj (c.obj O).obj)
+      (pfD.inv ≫ (schemeDerivedDirectImage f).map t.hom) =
+    (schemeDerivedDirectImage f).map q.hom ≫ pfK.hom at ht
+  apply (adj.homEquiv E K).symm.injective
+  rw [Equiv.symm_apply_apply, adj.homEquiv_naturality_left_symm,
+    Equiv.symm_apply_apply]
+  apply ObjectProperty.hom_ext
+  change tensorLeftHomEquiv ((schemeDerivedDirectImage f).obj E.obj) K.obj D.obj
+      (𝟙_ (schemeDerivedCategory Y)) (pfD.inv ≫ r.hom) ≫ (ρ_ K.obj).hom =
+    (schemeDerivedDirectImage f).map q.hom ≫ pfK.hom ≫
+      K.obj ◁ (adj.counit.app O).hom ≫ (ρ_ K.obj).hom
+  rw [hr, ← Category.assoc pfD.inv,
+    tensorLeftHomEquiv_naturality, ht]
+  simp only [Category.assoc]
 
 end AlgebraicGeometry

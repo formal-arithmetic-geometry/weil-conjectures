@@ -15,16 +15,30 @@
  },
  "proof": [
   {
-   "text": "transpose both sides under `adj`. Naturality of its Hom equivalence turns\npostcomposition with the mate into application of the restricted direct image to q,\nfollowed by the counit defining that mate. Expand the two tensor-Hom equivalences:\nthe first inserts evaluation of the pulled-back dual and the second inserts\ncoevaluation of the original dual. Replace the inverses of pfK and pfD by their\nspecified pullback-adjoint formulas. Naturality of the pullback and right-adjoint\ncounits moves q and evaluation through those formulas. The tensorator's naturality\nidentifies evaluation of the mapped pairing with pullback of evaluation. Its\nassociativity and unit laws rearrange the resulting evaluation-coevaluation pair;\nthe triangle identity cancels it. The remaining composite is the restricted direct\nimage of q followed by pfK, the tensor of the right-adjoint counit at the unit, and\nthe right unitor. This is precisely the transpose of the right-hand side.\nFull-subcategory morphisms have the same composition as the ambient morphisms,\nso the same calculation applies to the displayed `homMk` morphisms.",
+   "text": "For two adjunctions and a transformation between their left adjoints, prove that postcomposing the first Hom transpose with the conjugate transformation equals the second Hom transpose of precomposition with the original transformation. Expand homEquiv through the unit, use naturality of the conjugate transformation and Mathlib unit_conjugateEquiv. This is the proved private helper conjugate_homEquiv.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this identity to the composite tensor duality and pullback adjunctions, and the tensorator at D. Identify its conjugate at c(O) with pfK.inv using [lem-sc-monoidal-projection-conjugate] and hpK. Expand the composite Hom equivalences, use hpD and naturality of a.homEquiv, and cancel the tensorator against its inverse. Naturality of pulled tensor duality transforms the counit followed by q; the adjunction triangle identity leaves R(q). Cancel pfK.inv to obtain tensorLeftHomEquiv(pfD.inv followed by R of the inverse duality image of q) = R(q) followed by pfK.hom. This is the proved private helper projection_duality.",
+   "uses": [
+    "lem-sc-monoidal-projection-conjugate"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Express the inverse right-adjoint transpose of the pulled-back tensor-duality image as R of that image followed by the right-adjoint counit at O. Apply injectivity of the inverse right-adjoint Hom equivalence to the desired identity. Naturality transposes postcomposition with the canonical mate into R(q) followed by its defining morphism. Reduce equality of full-subcategory morphisms to equality of their ambient morphisms. Tensor-duality naturality moves the counit outside the Hom equivalence, then projection_duality identifies the remaining factor. Associativity finishes after appending the right unitor.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-monoidal-projection-conjugate"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0A9T"
+  "place": "Tag 0A9T; S4 categorical proof using the existing projection-mate normalization and Mathlib adjunction naturality"
  },
  "mathlib_searches": [
   {
@@ -99,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "S4",
   "result": "pass",
-  "landing": "20261012T210409-L-969754",
-  "kind": "interface",
+  "landing": "20261012T235114-L-2172672",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
