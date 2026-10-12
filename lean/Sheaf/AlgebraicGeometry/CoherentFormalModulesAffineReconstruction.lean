@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineQuotient
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineReconstructionAssembly
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffineReconstructionObjectwise
 
 /-! # CoherentFormalModulesAffineReconstruction
 
@@ -63,6 +65,7 @@ theorem coherentFormalModules_affine_reconstruction (A : Type u) [CommRing A] [I
           ((ModuleCat.restrictScalars (algebraMap A (AdicCompletion I A))).obj
             (L.obj F).obj)))) :
     Nonempty (L ⋙ (coherentFormalModules_affine_quotientFunctor A I J hJ) ≅ 𝟭 _) := by
-  sorry
+  apply coherentFormalModules_affine_reconstruction_assembly A I J hJ L p hnatural hquotient
+  exact coherentFormalModules_affine_reconstruction_objectwise A I J hJ L p hquotient
 
 end AlgebraicGeometry
