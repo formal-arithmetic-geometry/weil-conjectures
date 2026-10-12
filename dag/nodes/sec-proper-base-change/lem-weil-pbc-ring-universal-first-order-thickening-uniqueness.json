@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-ring-universal-first-order-thickening-uniqueness",
+ "kind": "statement",
+ "title": "Uniqueness of universal first order thickenings",
+ "statement": "Let $R,S,U,V$ be commutative rings, with $S,U,V$ commutative $R$-algebras. Let $p:U\\to S$ and $q:V\\to S$ be surjective $R$-algebra homomorphisms with $(\\ker p)^2=(\\ker q)^2=0$. Assume that for $W=U$ with $r=p$ and for $W=V$ with $r=q$, every commutative $R$-algebra $A$, ideal $I\\subseteq A$ with $I^2=0$, and $R$-algebra homomorphism $a:S\\to A/I$ admit exactly one $R$-algebra homomorphism $b:W\\to A$ satisfying $\\operatorname{quot}_I\\circ b=a\\circ r$. Then there is exactly one $R$-algebra isomorphism $e:U\\cong V$ with $q\\circ e=p$. No formally unramified hypothesis on $S$ is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 04EA (section-conormal), uniqueness remark after Lemma 04EB; the universal-property argument works without formal unramifiedness."
+ },
+ "proof": [
+  {
+   "text": "*Uniqueness up to unique isomorphism.* Let $(S'_1,\\pi_1)$, $(S'_2,\\pi_2)$ both have the properties of the statement, with kernels $K_1,K_2$. Apply the universal property of $(S'_1,\\pi_1)$ to $A=S'_2$, $I=K_2$ and $a=\\bar\\pi_2^{-1}:S\\to S'_2/K_2$, the inverse of the isomorphism $\\bar\\pi_2:S'_2/K_2\\to S$ induced by $\\pi_2$: the condition $q\\circ\\phi=a\\circ\\pi_1$ on an $R$-algebra map $\\phi:S'_1\\to S'_2$ is $\\pi_2\\circ\\phi=\\pi_1$, so there is exactly one such $\\phi$. Likewise exactly one $\\psi:S'_2\\to S'_1$ with $\\pi_1\\circ\\psi=\\pi_2$. Then $\\psi\\circ\\phi$ and $\\mathrm{id}_{S'_1}$ both satisfy $\\pi_1\\circ(-)=\\pi_1$, so by the uniqueness for $(S'_1,\\pi_1)$ applied to $A=S'_1$, $I=K_1$, $a=\\bar\\pi_1^{-1}$, $\\psi\\circ\\phi=\\mathrm{id}$; symmetrically $\\phi\\circ\\psi=\\mathrm{id}$. So $\\phi$ is the unique isomorphism of $R$-algebras compatible with the maps to $S$. In Lean, convert the lifting equation by Ideal.quotientKerAlgEquivOfSurjective, then construct the inverse pair with AlgEquiv.ofAlgHom.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Section 04EA (section-conormal), the remark after Lemma 04EB: 'In the situation of Lemma 04EB the R-algebra map S' -> S is unique up to unique isomorphism' (no proof in the source; written out here)"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Section 04EA (section-conormal), uniqueness remark after Lemma 04EB; the universal-property argument works without formal unramifiedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two square zero surjections of algebras having the same unique lifting property are uniquely isomorphic",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotientKerAlgEquivOfSurjective\"",
+   "results": "Candidates: Ideal.quotientKerAlgEquivOfSurjective, Ideal.quotientKerAlgEquivOfSurjective_apply, Ideal.quotientKerAlgEquivOfSurjective_mk, Ideal.quotientKerAlgEquivOfSurjective_symm_apply; none states this component.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unique.*[Ii]somorph|ofAlgHom|initial.*unique",
+   "results": "Candidates: Mathlib/Algebra/Algebra/Equiv.lean, Mathlib/Algebra/Algebra/Equiv.lean, Mathlib/Algebra/Algebra/Equiv.lean, Mathlib/Algebra/Algebra/Equiv.lean, Mathlib/Algebra/Algebra/Equiv.lean, Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean, Mathlib/Algebra/Algebra/Pi.lean; none states this component.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.UniversalFirstOrderThickening",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); algebraic auxiliary argument: step 7 of lem-weil-pbc-ring-universal-first-order-thickening (uniqueness of the auxiliary algebraic thickening)",
+   "via": [
+    "lem-weil-pbc-ring-universal-first-order-thickening",
+    "lem-weil-pbc-universal-first-order-thickening-exists",
+    "lem-weil-pbc-flat-unramified-formally-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.UniversalFirstOrderThickeningUniqueness",
+  "declaration": "Algebra.universalFirstOrderThickening_unique",
+  "file": "lean/Sheaf/RingTheory/UniversalFirstOrderThickeningUniqueness.lean",
+  "branch": "sheaf-dag",
+  "existing": false,
+  "by": "F1",
+  "date": "2026-10-13",
+  "statement": "theorem universalFirstOrderThickening_unique\n    (R S S' : Type u) [CommRing R] [CommRing S] [CommRing S'] [Algebra R S]\n    [Algebra R S']\n    (π : S' →ₐ[R] S) (hπ : Function.Surjective π)\n    (hker : RingHom.ker π.toRingHom ^ 2 = ⊥)\n    (hprop : ∀ (A : Type u) [CommRing A] [Algebra R A] (I : Ideal A), I ^ 2 = ⊥ →\n      ∀ a : S →ₐ[R] A ⧸ I,\n        ∃! a' : S' →ₐ[R] A, (Ideal.Quotient.mkₐ R I).comp a' = a.comp π)\n    (T : Type u) [CommRing T] [Algebra R T] (πT : T →ₐ[R] S)\n    (hπT : Function.Surjective πT) (hkerT : RingHom.ker πT.toRingHom ^ 2 = ⊥)\n    (hT : ∀ (A : Type u) [CommRing A] [Algebra R A] (I : Ideal A), I ^ 2 = ⊥ →\n      ∀ a : S →ₐ[R] A ⧸ I,\n        ∃! a' : T →ₐ[R] A, (Ideal.Quotient.mkₐ R I).comp a' = a.comp πT) :\n    ∃! e : S' ≃ₐ[R] T, πT.comp e.toAlgHom = π"
+ },
+ "stmt_deps": [],
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T230755-L-1908080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T230755-L-1908080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

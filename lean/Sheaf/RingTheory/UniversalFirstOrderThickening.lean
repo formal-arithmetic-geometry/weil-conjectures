@@ -6,6 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Mathlib.RingTheory.Unramified.Basic
+import Sheaf.RingTheory.UniversalFirstOrderThickeningCore
+import Sheaf.RingTheory.UniversalFirstOrderThickeningUniqueness
 
 /-!
 # Universal first order thickenings of formally unramified algebras
@@ -65,6 +67,12 @@ theorem exists_universalFirstOrderThickening
           ∀ a : S →ₐ[R] A ⧸ I,
             ∃! a' : T →ₐ[R] A, (Ideal.Quotient.mkₐ R I).comp a' = a.comp πT) →
         ∃! e : S' ≃ₐ[R] T, πT.comp e.toAlgHom = π) := by
-  sorry
+  obtain ⟨S', instCR, instAlg, π, hsurj, hker, hprop⟩ :=
+    exists_universalFirstOrderThickening_core R S
+  let : CommRing S' := instCR
+  let : Algebra R S' := instAlg
+  refine ⟨S', inferInstance, inferInstance, π, hsurj, hker, hprop, ?_⟩
+  intro T _ _ πT hπT hkerT hT
+  exact universalFirstOrderThickening_unique R S S' π hsurj hker hprop T πT hπT hkerT hT
 
 end Algebra

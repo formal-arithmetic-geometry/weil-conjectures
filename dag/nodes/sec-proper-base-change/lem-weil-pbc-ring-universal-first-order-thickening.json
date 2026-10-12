@@ -26,93 +26,28 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*Presentation.* Choose a family $(z_t)_{t\\in T}$ of generators of $S$ as an $R$-algebra (for instance $T=S$, $z_s=s$). Let $P=R[x_t:t\\in T]$ be the polynomial ring [def-weil-pbc-mv-polynomial-ring] and $p:P\\to S$ the $R$-algebra map with $p(x_t)=z_t$ (its universal property). The image of $p$ is an $R$-subalgebra of $S$ containing all $z_t$, so $p$ is surjective. Put $J=\\ker p$; $p$ induces an isomorphism of $R$-algebras $P/J\\cong S$, through which we identify $S=P/J$. The $P$-modules $J/J^2$ and $S\\otimes_P M$ ($M$ a $P$-module) are killed by $J$, hence are $S$-modules, and $P$-linear maps between such modules are $S$-linear.",
+   "text": "Apply [lem-weil-pbc-ring-universal-first-order-thickening-core] to obtain S', its ring and algebra structures, the surjection, the square-zero kernel, and the unique lifting property. This is precisely construction steps 1-6 of the original plan.",
    "uses": [
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-ring-universal-first-order-thickening-core"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 04EB (label lemma-universal-thickening, line 40920), first three sentences ('Choose a set of generators z_i ... Let J = Ker(P -> S)')"
-   }
+   "elementary": false
   },
   {
-   "text": "*The map $\\mathrm d:J/J^2\\to S\\otimes_P\\Omega_{P/R}$ is surjective.* Apply [lem-weil-pbc-jacobi-zariski-differential-maps] with $(A,B,\\mathfrak a,C)=(R,P,J,S)$: there are maps $J/J^2\\xrightarrow{\\delta}S\\otimes_P\\Omega_{P/R}\\xrightarrow{w}\\Omega_{S/R}$, $\\delta(g\\bmod J^2)=1\\otimes\\mathrm dg$, $w(s\\otimes\\mathrm dg)=s\\,\\mathrm d(p(g))$, $\\delta$ $P$-linear (hence $S$-linear, step 1), with $\\operatorname{im}\\delta=\\ker w$. Since $R\\to S$ is formally unramified, $\\Omega_{S/R}=0$ by (1)$\\Rightarrow$(2) of [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero] (its condition (1) is the hypothesis of the statement verbatim). Hence $\\ker w=S\\otimes_P\\Omega_{P/R}$ and $\\delta$ is surjective.",
+   "text": "Apply [lem-weil-pbc-ring-universal-first-order-thickening-uniqueness] to this thickening and an arbitrary other thickening satisfying the same lifting property. Its compatible unique algebra equivalence supplies the last conjunction. The second reading proves this universal-property argument (original step 7) without sorry.",
    "uses": [
-    "lem-weil-pbc-jacobi-zariski-differential-maps",
-    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero"
+    "lem-weil-pbc-ring-universal-first-order-thickening-uniqueness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 04EB (label lemma-universal-thickening, line 40920), fourth sentence and display ('Consider the map d : J/J^2 -> Omega_{P/R} (x)_P S, see Lemma 00RU (lemma-differential-seq). This is surjective since Omega_{S/R} = 0 by assumption, see Lemma 00UO (lemma-characterize-formally-unramified)'); tags verified: 00RU,algebra-lemma-differential-seq; 00UO,algebra-lemma-characterize-formally-unramified"
-   }
-  },
-  {
-   "text": "*Splitting and the ideal $J'$.* By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $S\\otimes_P\\Omega_{P/R}$ is a free $S$-module with basis $e_t=1\\otimes\\mathrm dx_t$, $t\\in T$. By step 2 choose $g_t\\in J$ with $\\delta(g_t\\bmod J^2)=e_t$, and let $\\sigma:S\\otimes_P\\Omega_{P/R}\\to J/J^2$ be the $S$-linear map with $\\sigma(e_t)=g_t\\bmod J^2$ (a free module). Then $\\delta\\circ\\sigma=\\mathrm{id}$ (it holds on the basis), so $J/J^2=\\ker\\delta\\oplus\\operatorname{im}\\sigma$ as $S$-modules, $\\sigma$ is injective, and the restriction $\\delta':=\\delta|_{\\operatorname{im}\\sigma}:\\operatorname{im}\\sigma\\to S\\otimes_P\\Omega_{P/R}$ is an isomorphism with inverse $\\sigma$. Let $J'=\\{g\\in J: g\\bmod J^2\\in\\operatorname{im}\\sigma\\}$, the preimage of the $P$-submodule $\\operatorname{im}\\sigma$ under the $P$-linear map $J\\to J/J^2$; it is a $P$-submodule of $P$, i.e. an ideal, with $J^2\\subseteq J'\\subseteq J$ and $J'/J^2=\\operatorname{im}\\sigma$. So $\\delta':J'/J^2\\to S\\otimes_P\\Omega_{P/R}$, $g\\bmod J^2\\mapsto 1\\otimes\\mathrm dg$, is an isomorphism of $S$-modules.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 04EB (label lemma-universal-thickening, line 40920), fifth to seventh sentences ('Note that Omega_{P/R} is free on dx_i ... we may choose a splitting ... Let J^2 ⊂ J' ⊂ J be the ideal of P such that J'/J^2 is the second summand'); Lemma 00RX (lemma-differentials-polynomial-ring) for the basis, tag verified: 00RX,algebra-lemma-differentials-polynomial-ring"
-   }
-  },
-  {
-   "text": "*The thickening $S'\\to S$.* Put $S'=P/J'$, an $R$-algebra, and let $\\pi:S'\\to S=P/J$ be the $R$-algebra map induced by $p$ (well defined as $J'\\subseteq J$); it is surjective since $p$ is, and $\\pi\\circ\\rho=p$ for the quotient map $\\rho:P\\to S'$. Its kernel is $K=J/J'$, and $K^2=(J^2+J')/J'=0$ since $J^2\\subseteq J'$. (Moreover $K\\cong (J/J^2)/(J'/J^2)\\cong\\ker\\delta$, not needed below.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 04EB (label lemma-universal-thickening, line 40920), 'Set S' = P/J'. We obtain a short exact sequence 0 -> J/J' -> S' -> S -> 0 and we see that J/J' ≅ K is a square zero ideal in S''"
-   }
-  },
-  {
-   "text": "*Lifts of $a\\circ p$ to $A$ form a torsor under derivations.* Let $A$ be an $R$-algebra with structure map $b:R\\to A$, $I\\subseteq A$ an ideal with $I^2=0$, $q:A\\to A/I$ the quotient map and $a:S\\to A/I$ an $R$-algebra map. Since $I^2=0$, $I$ is an $A/I$-module, hence an $S$-module via $a$ and a $P$-module via $a\\circ p$; for $h\\in A$, $i\\in I$ one has $h\\,i=q(h)\\cdot i$. (a) There is an $R$-algebra map $\\beta:P\\to A$ with $q\\circ\\beta=a\\circ p$: choose $\\beta(x_t)\\in A$ with $q(\\beta(x_t))=a(z_t)$ ($q$ is surjective) and let $\\beta$ be the $R$-algebra map with these values [def-weil-pbc-mv-polynomial-ring]; $q\\circ\\beta$ and $a\\circ p$ are $R$-algebra maps $P\\to A/I$ agreeing on every $x_t$, hence equal by the uniqueness in [def-weil-pbc-mv-polynomial-ring]. Then $\\beta(J)\\subseteq I$, $\\beta(J^2)\\subseteq I^2=0$, and $\\beta(h)\\,i=p(h)\\cdot i$ for $h\\in P$, $i\\in I$. (b) If $D:P\\to I$ is an $R$-derivation of $P$ into the $P$-module $I$ [def-weil-pbc-kahler-differentials], then $\\beta+D:P\\to A$ is an $R$-algebra map with $q\\circ(\\beta+D)=a\\circ p$: it is additive, $(\\beta+D)(fg)=\\beta(f)\\beta(g)+\\beta(f)D(g)+\\beta(g)D(f)=(\\beta(f)+D(f))(\\beta(g)+D(g))-D(f)D(g)$ with $D(f)D(g)\\in I^2=0$, and $D$ vanishes on the image of $R$ (so $(\\beta+D)(r\\cdot1)=b(r)$, and $D(1)=0$); $q\\circ D=0$. Conversely, if $\\beta':P\\to A$ is an $R$-algebra map with $q\\circ\\beta'=a\\circ p$, then $D=\\beta'-\\beta$ takes values in $I$, vanishes on the image of $R$, and $D(fg)=\\beta'(f)\\beta'(g)-\\beta(f)\\beta(g)=D(f)\\beta(g)+\\beta(f)D(g)+D(f)D(g)$ with $D(f)D(g)=0$, i.e. $D$ is an $R$-derivation $P\\to I$. (c) By the universal property in [def-weil-pbc-kahler-differentials], $R$-derivations $D:P\\to I$ are exactly the maps $\\psi\\circ\\mathrm d$ with $\\psi:\\Omega_{P/R}\\to I$ $P$-linear, $\\psi$ unique; since $P$ acts on $I$ through $p$, $P$-linear $\\psi$ correspond bijectively to $S$-linear $\\varphi:S\\otimes_P\\Omega_{P/R}\\to I$ by $\\varphi(s\\otimes\\omega)=s\\,\\psi(\\omega)$ (extension of scalars). Hence the $R$-algebra maps $\\beta':P\\to A$ with $q\\circ\\beta'=a\\circ p$ are exactly the maps $\\beta_\\varphi(g)=\\beta(g)+\\varphi(1\\otimes\\mathrm dg)$, for a unique $S$-linear $\\varphi:S\\otimes_P\\Omega_{P/R}\\to I$. (In the basis of [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], with $\\delta_t=\\varphi(e_t)$ and $\\mathrm dg=\\sum_t\\frac{\\partial g}{\\partial x_t}\\mathrm dx_t$, this reads $\\beta_\\varphi(x_t)=\\beta(x_t)+\\delta_t$ and $\\beta_\\varphi(g)=\\beta(g)+\\sum_t\\delta_t\\,\\beta(\\frac{\\partial g}{\\partial x_t})$, the source's formula.)",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-kahler-differentials",
-    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 04EB (label lemma-universal-thickening, line 40920), from 'Namely, let (I ⊂ A, a, b) be an arbitrary diagram. We may choose an R-algebra map beta : P -> A' to the display 'beta'(g) = beta(g) + sum_i delta_i beta(dg/dx_i)'; the source parametrizes the lifts by the delta_i, here by derivations, which is the same parametrization through the basis dx_t"
-   }
-  },
-  {
-   "text": "*Existence and uniqueness of $a'$.* Keep the data of step 5. Since $\\rho:P\\to S'$ is surjective with kernel $J'$ and $\\pi\\circ\\rho=p$ (step 4), $a'\\mapsto a'\\circ\\rho$ is a bijection from the $R$-algebra maps $a':S'\\to A$ with $q\\circ a'=a\\circ\\pi$ onto the $R$-algebra maps $\\beta':P\\to A$ with $q\\circ\\beta'=a\\circ p$ and $\\beta'(J')=0$. By step 5 (c) the latter are the $\\beta_\\varphi$ with $\\beta_\\varphi(J')=0$. Let $\\bar\\beta:J'/J^2\\to I$, $g\\bmod J^2\\mapsto\\beta(g)$: well defined as $\\beta(J^2)=0$, and $S$-linear as $\\beta(hg)=\\beta(h)\\beta(g)=p(h)\\cdot\\beta(g)$ (step 5 (a)). For $g\\in J'$, $\\varphi(1\\otimes\\mathrm dg)=\\varphi(\\delta'(g\\bmod J^2))$ with $\\delta'$ the isomorphism of step 3 (the map $\\delta$ of [lem-weil-pbc-jacobi-zariski-differential-maps] restricted to $J'/J^2$). So $\\beta_\\varphi(J')=0$ iff $\\bar\\beta+\\varphi\\circ\\delta'=0$ on $J'/J^2$, iff $\\varphi=-\\bar\\beta\\circ\\delta'^{-1}$, as $\\delta'$ is an isomorphism. Thus exactly one $\\varphi$, hence exactly one $\\beta'$ and exactly one $a'$, satisfies the conditions: $(S',\\pi)$ has the universal property of the statement.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-differential-maps"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma 04EB (label lemma-universal-thickening, line 40920), last sentences ('Since the map d|_{J'/J^2} : J'/J^2 -> Omega_{P/R} (x)_P S ... is an isomorphism by construction, we see that there is a unique choice of delta_i in I such that beta'(g) = 0 for all g in J' ... The uniqueness of the solution implies the uniqueness required in the lemma')"
-   }
-  },
-  {
-   "text": "*Uniqueness up to unique isomorphism.* Let $(S'_1,\\pi_1)$, $(S'_2,\\pi_2)$ both have the properties of the statement, with kernels $K_1,K_2$. Apply the universal property of $(S'_1,\\pi_1)$ to $A=S'_2$, $I=K_2$ and $a=\\bar\\pi_2^{-1}:S\\to S'_2/K_2$, the inverse of the isomorphism $\\bar\\pi_2:S'_2/K_2\\to S$ induced by $\\pi_2$: the condition $q\\circ\\phi=a\\circ\\pi_1$ on an $R$-algebra map $\\phi:S'_1\\to S'_2$ is $\\pi_2\\circ\\phi=\\pi_1$, so there is exactly one such $\\phi$. Likewise exactly one $\\psi:S'_2\\to S'_1$ with $\\pi_1\\circ\\psi=\\pi_2$. Then $\\psi\\circ\\phi$ and $\\mathrm{id}_{S'_1}$ both satisfy $\\pi_1\\circ(-)=\\pi_1$, so by the uniqueness for $(S'_1,\\pi_1)$ applied to $A=S'_1$, $I=K_1$, $a=\\bar\\pi_1^{-1}$, $\\psi\\circ\\phi=\\mathrm{id}$; symmetrically $\\phi\\circ\\psi=\\mathrm{id}$. So $\\phi$ is the unique isomorphism of $R$-algebras compatible with the maps to $S$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section 04EA (section-conormal), the remark after Lemma 04EB: 'In the situation of Lemma 04EB the R-algebra map S' -> S is unique up to unique isomorphism' (no proof in the source; written out here)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-kahler-differentials",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+  "lem-weil-pbc-ring-universal-first-order-thickening-core",
+  "lem-weil-pbc-ring-universal-first-order-thickening-uniqueness"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma 04EB (label lemma-universal-thickening) and its proof, Section 04EA (section-conormal), with the uniqueness remark after it"
+  "place": "Algebra Lemma 04EB, construction/lifting component, followed by the proved universal-property uniqueness argument of the remark in Section 04EA."
  },
  "mathlib_searches": [
   {
@@ -229,5 +164,15 @@
   "reviewer": "R-uft",
   "group": "J1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T230755-L-1908080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
