@@ -7,9 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Coherence of the derived unit and Leray comparison -/
 
@@ -18,6 +15,239 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
+set_option backward.isDefEq.respectTransparency.types false in
+private lemma identity_fac (X : Scheme.{u})
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤
+      Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (e : F ≅ 𝟭 _) (K : HomotopyCategory
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (.up ℤ)) :
+    (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _).hom.app
+        (DerivedCategory.Qh.obj K) =
+      F.mapDerivedCategoryFactorsh.hom.app K ≫ DerivedCategory.Qh.map
+        ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app K) := by
+  have h := NatTrans.congr_app
+    (congrArg Iso.hom (Functor.mapDerivedCategoryIdIso_factorsh
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))) K
+  simp only [Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Iso.trans_hom, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_hom_app,
+    Functor.mapHomotopyCategoryIdIso_hom_app_eq_id] at h
+  dsimp at h
+  simp only [Category.comp_id] at h
+  erw [DerivedCategory.Qh.map_id] at h
+  simp only [Category.comp_id] at h
+  dsimp only [Iso.trans_hom, NatTrans.comp_app]
+  erw [h, Functor.mapDerivedCategoryNatIso_fach]
+
+private noncomputable def lowerIdentity (X : Scheme.{u}) :
+    (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctor ≅
+      𝟭 (DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) :=
+  (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctorIsoMapDerivedCategory ≪≫
+    Functor.mapDerivedCategoryNatIso (lowerStarId AddCommGrpCat.{u + 1} X) ≪≫
+      Functor.mapDerivedCategoryIdIso _
+
+private lemma lowerIdentity_fac (X : Scheme.{u}) (K : HomotopyCategory
+    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (.up ℤ)) :
+    (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctorUnit.app K ≫
+        (lowerIdentity X).hom.app (DerivedCategory.Qh.obj K) =
+      DerivedCategory.Qh.map
+        ((NatTrans.mapHomotopyCategory (lowerStarId AddCommGrpCat.{u + 1} X).hom
+          (.up ℤ)).app K) := by
+  dsimp only [lowerIdentity, Iso.trans_hom, NatTrans.comp_app]
+  rw [← Category.assoc]
+  have h := NatTrans.congr_app
+    (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctorIsoMapDerivedCategory_hom_fac K
+  dsimp only [Functor.whiskerLeft_app, NatTrans.comp_app] at h
+  rw [h]
+  rw [← NatTrans.comp_app, ← Iso.trans_hom, identity_fac, Iso.inv_hom_id_app_assoc]
+
+private lemma homotopy_unit (X : Scheme.{u}) (H : HomotopyCategory
+    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (.up ℤ)) :
+    ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)).mapHomotopyCategory
+        (.up ℤ)).unit.app H ≫
+      ((lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).mapHomotopyCategory (.up ℤ)).map
+        ((NatTrans.mapHomotopyCategory (upperStarId AddCommGrpCat.{u + 1} X).hom
+          (.up ℤ)).app H) =
+      (NatTrans.mapHomotopyCategory (lowerStarId AddCommGrpCat.{u + 1} X).inv
+        (.up ℤ)).app H := by
+  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective H
+  rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+  have hc : ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)
+        ).mapHomologicalComplex (.up ℤ)).unit.app K ≫
+      ((lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} X).hom
+          (.up ℤ)).app K) =
+      (NatTrans.mapHomologicalComplex (lowerStarId AddCommGrpCat.{u + 1} X).inv
+        (.up ℤ)).app K := by
+    ext n : 1
+    exact upperStarId_hom_app_unit_app AddCommGrpCat.{u + 1} X (K.X n)
+  have h := (HomotopyCategory.quotient _ (.up ℤ)).congr_map hc
+  simp only [Functor.map_comp] at h
+  exact h
+
+private lemma derived_unit_identity (X : Scheme.{u}) :
+    (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)).unit ≫
+        Functor.whiskerRight
+          (Functor.mapDerivedCategoryNatIso (upperStarId AddCommGrpCat.{u + 1} X) ≪≫
+            Functor.mapDerivedCategoryIdIso _).hom
+          (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctor =
+      (lowerIdentity X).inv := by
+  rw [← cancel_epi (lowerIdentity X).hom, Iso.hom_inv_id]
+  refine Functor.rightDerived_ext
+    (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctor
+    (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ _ ?_
+  ext H : 2
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NatTrans.id_app]
+  have hunit := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)
+    ).mapHomotopyCategory (.up ℤ) |>.derivedη_fac_app
+      (HomotopyCategory.quasiIso _ (.up ℤ))
+      (upperStar AddCommGrpCat.{u + 1} (𝟙 X)).mapDerivedCategoryFactorsh.hom
+      (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctorUnit H
+  have hnat := (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctorUnit.naturality
+    ((NatTrans.mapHomotopyCategory (upperStarId AddCommGrpCat.{u + 1} X).hom
+      (.up ℤ)).app H)
+  dsimp only [Functor.comp_map] at hnat
+  have hcomb : (NatTrans.mapHomotopyCategory (lowerStarId AddCommGrpCat.{u + 1} X).hom
+        (.up ℤ)).app H ≫
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (𝟙 X)).mapHomotopyCategory
+        (.up ℤ)).unit.app H ≫
+      ((lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).mapHomotopyCategory (.up ℤ)).map
+        ((NatTrans.mapHomotopyCategory (upperStarId AddCommGrpCat.{u + 1} X).hom
+          (.up ℤ)).app H) = 𝟙 _ := by
+    rw [homotopy_unit, ← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp,
+      Iso.hom_inv_id, NatTrans.mapHomotopyCategory_id, NatTrans.id_app]
+  have hQ := congrArg DerivedCategory.Qh.map hcomb
+  simp only [Functor.map_comp] at hQ
+  erw [DerivedCategory.Qh.map_id] at hQ
+  rw [← Category.assoc, lowerIdentity_fac, identity_fac, Functor.map_comp]
+  erw [reassoc_of% hunit]
+  erw [← hnat, reassoc_of% hQ]
+  exact (Category.comp_id _).symm
+
+private lemma lowerIdentity_inv_fac (X : Scheme.{u}) (H : HomotopyCategory
+    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (.up ℤ)) :
+    (lowerIdentity X).inv.app (DerivedCategory.Qh.obj H) =
+      DerivedCategory.Qh.map
+          ((NatTrans.mapHomotopyCategory (lowerStarId AddCommGrpCat.{u + 1} X).inv
+            (.up ℤ)).app H) ≫
+        (lowerStar AddCommGrpCat.{u + 1} (𝟙 X)).rightDerivedFunctorUnit.app H := by
+  rw [← cancel_mono ((lowerIdentity X).hom.app (DerivedCategory.Qh.obj H)),
+    Iso.inv_hom_id_app, Category.assoc, lowerIdentity_fac, ← DerivedCategory.Qh.map_comp,
+    ← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
+    NatTrans.mapHomotopyCategory_id, NatTrans.id_app]
+  exact ((DerivedCategory.Qh (C :=
+    Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})).map_id _).symm
+
+private lemma underived_leray_identity (X : Scheme.{u}) :
+    Functor.whiskerRight (lowerStarId AddCommGrpCat.{u + 1} X).inv
+        (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) ≫
+      (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} (𝟙 X)).hom =
+    𝟙 (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) := by
+  ext F : 2
+  dsimp only [lowerStarCompGlobalSectionsIso, Functor.isoWhiskerLeft_hom,
+    Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, NatTrans.id_app]
+  rw [reassoc_of% (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology
+    AddCommGrpCat.{u + 1} terminalIsTerminal).hom.naturality
+      ((lowerStarId AddCommGrpCat.{u + 1} X).inv.app F)]
+  have ht : ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (Opposite.op (⊤_ X.Etale))).map
+          ((lowerStarId AddCommGrpCat.{u + 1} X).inv.app F) ≫
+      (lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} (𝟙 X)).hom.app F =
+        𝟙 _ := by
+    dsimp [lowerStarId, GrothendieckTopology.lowerStarId,
+      Functor.sheafPushforwardContinuousId', Functor.sheafPushforwardContinuousIso,
+      Functor.sheafPushforwardContinuousNatTrans, Functor.sheafPushforwardContinuousId,
+      lowerStarCompSheafSectionsTerminalIso]
+    have hh : (PreservesTerminal.iso (Scheme.Hom.Etale (𝟙 X))).inv ≫
+        (MorphismProperty.Over.pullbackId @Etale ⊤ X).hom.app (⊤_ X.Etale) = 𝟙 _ :=
+      terminalIsTerminal.hom_ext _ _
+    erw [Category.id_comp, ← F.obj.map_comp, ← op_comp, hh]
+    exact F.obj.map_id _
+  rw [reassoc_of% ht, Iso.hom_inv_id_app]
+
+private lemma leray_fac (X : Scheme.{u}) :
+    Functor.rightDerivedFunctorCompUnit
+        (lowerStar AddCommGrpCat.{u + 1} (𝟙 X))
+        (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}) ≫
+      Functor.whiskerLeft DerivedCategory.Qh
+        (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+          AddCommGrpCat.{u + 1} (𝟙 X)).hom =
+    Functor.whiskerRight
+        (NatTrans.mapHomotopyCategory
+          (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} (𝟙 X)).hom (.up ℤ))
+        DerivedCategory.Qh ≫
+      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctorUnit := by
+  let F := lowerStar AddCommGrpCat.{u + 1} (𝟙 X)
+  let G := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  have hcomp : (F ⋙ G).rightDerivedFunctorUnit ≫
+      Functor.whiskerLeft DerivedCategory.Qh
+        (Functor.rightDerivedFunctorCompIso F G).hom =
+      Functor.rightDerivedFunctorCompUnit F G := by
+    simp [Functor.rightDerivedFunctorCompIso]
+  rw [← hcomp, Category.assoc, ← Functor.whiskerLeft_comp]
+  simp only [rightDerivedLowerStarCompRightDerivedGlobalSectionsIso,
+    Functor.rightDerivedFunctorCompIso', Iso.trans_hom, Iso.symm_hom]
+  dsimp only [F, G]
+  rw [Iso.hom_inv_id_assoc]
+  exact Functor.rightDerivedNatTrans_fac _ _ _ _
+    (HomotopyCategory.quasiIso
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (.up ℤ)) _
+
+private lemma derived_leray_identity (X : Scheme.{u}) :
+    Functor.whiskerRight (lowerIdentity X).inv
+        (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X) ≫
+      (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+        AddCommGrpCat.{u + 1} (𝟙 X)).hom =
+    𝟙 (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X) := by
+  let F := lowerStar AddCommGrpCat.{u + 1} (𝟙 X)
+  let G := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  refine Functor.rightDerived_ext G.rightDerivedFunctor G.rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ _ ?_
+  ext H : 2
+  have hnat := G.rightDerivedFunctorUnit.naturality
+    ((NatTrans.mapHomotopyCategory (lowerStarId AddCommGrpCat.{u + 1} X).inv
+      (.up ℤ)).app H)
+  have hfac := NatTrans.congr_app (leray_fac X) H
+  have hinv : (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app H =
+      𝟙 _ := by
+    have h := Iso.inv_hom_id_app
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)) H
+    erw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at h
+    exact h
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NatTrans.id_app, Functor.comp_map] at hnat hfac ⊢
+  dsimp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app] at hfac
+  dsimp only [F, G] at hinv
+  erw [hinv, DerivedCategory.Qh.map_id] at hfac
+  dsimp at hfac
+  simp only [Category.id_comp, Category.comp_id, Category.assoc] at hfac
+  have hcomp : (G.mapHomotopyCategory (.up ℤ)).map
+        ((NatTrans.mapHomotopyCategory (lowerStarId AddCommGrpCat.{u + 1} X).inv
+          (.up ℤ)).app H) ≫
+      (NatTrans.mapHomotopyCategory
+        (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} (𝟙 X)).hom (.up ℤ)).app H =
+      𝟙 ((G.mapHomotopyCategory (.up ℤ)).obj H) := by
+    change (NatTrans.mapHomotopyCategory
+      (Functor.whiskerRight (lowerStarId AddCommGrpCat.{u + 1} X).inv G) (.up ℤ)).app H ≫
+        (NatTrans.mapHomotopyCategory
+          (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} (𝟙 X)).hom (.up ℤ)).app H = _
+    rw [← NatTrans.comp_app, ← NatTrans.mapHomotopyCategory_comp,
+      underived_leray_identity]
+    erw [NatTrans.mapHomotopyCategory_id, NatTrans.id_app]
+    rfl
+  have hQ := congrArg DerivedCategory.Qh.map hcomp
+  simp only [Functor.map_comp] at hQ
+  erw [DerivedCategory.Qh.map_id] at hQ
+  rw [lowerIdentity_inv_fac, Functor.map_comp, Category.assoc]
+  erw [← reassoc_of% hnat, hfac, reassoc_of% hQ]
+  exact (Category.comp_id _).symm
+
 /-- The derived unit followed by Leray and the derived inverse-image identity is
 identity. Source: Stacks Project, Tags 015M and 03CB.
 (blueprint: lem-weil-pbc-derived-unit-leray-id).
@@ -51,6 +281,16 @@ theorem derivedUnitLeray_id (X : Scheme.{u})
       ((Functor.mapDerivedCategoryNatIso (upperStarId AddCommGrpCat.{u + 1} X) ≪≫
         Functor.mapDerivedCategoryIdIso
           (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})).hom.app K) = 𝟙 _ := by
-  sorry
+  let E := Functor.mapDerivedCategoryNatIso (upperStarId AddCommGrpCat.{u + 1} X) ≪≫
+    Functor.mapDerivedCategoryIdIso
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+  have hn := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+    AddCommGrpCat.{u + 1} (𝟙 X)).hom.naturality (E.hom.app K)
+  have hu := NatTrans.congr_app (derived_unit_identity X) K
+  have hl := NatTrans.congr_app (derived_leray_identity X) K
+  dsimp only [E, Functor.comp_map, Functor.id_map] at hn
+  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, NatTrans.id_app] at hu hl
+  rw [← hn, ← Functor.map_comp_assoc, hu]
+  exact hl
 
 end AlgebraicGeometry.Etale

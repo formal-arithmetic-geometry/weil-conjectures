@@ -17,10 +17,8 @@
  },
  "proof": [
   {
-   "text": "Write U for D((id_X)^*), R for R((id_X)_*), G for RGamma_X, and E:U≅id for mapDerivedCategoryNatIso(upperStarId) followed by mapDerivedCategoryIdIso. The conjugate identity isomorphism of R is obtained by right deriving lowerStarId. The unit equation is eta_id,K followed by R(E_K) equal to the inverse direct-image identity comparison at K. This follows by the underived unit equation, the derived adjunction unit characterization, and uniqueness of transformations of right derived functors extending it.",
+   "text": "Let E be mapDerivedCategoryNatIso(upperStarId) followed by mapDerivedCategoryIdIso. Define I:R(id_X)_*≅id by the exact-functor comparison rightDerivedFunctorIsoMapDerivedCategory, mapDerivedCategoryNatIso(lowerStarId), and mapDerivedCategoryIdIso. The factorization laws identify E and I on Qh objects with their underived identity maps. Lift upperStarId_hom_app_unit_app termwise to complexes and then to the homotopy category. Use derivedη_fac_app and naturality of rightDerivedFunctorUnit to show eta followed by R(E) equals I.inv. Cancel I.hom and use rightDerived_ext to check this equality after the right-derived unit; the underived unit equation cancels the identity comparisons.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-etale-cohomology",
     "lem-weil-pbc-inverse-image-composition",
@@ -33,10 +31,8 @@
    }
   },
   {
-   "text": "The underived identification (id_X)_* followed by Gamma_X ≅ Gamma_X evaluates sheaves at the terminal object and hence equals Gamma_X applied to lowerStarId. Consequently the Leray comparison for id_X is G applied to the derived direct-image identity comparison: both comparisons satisfy the same equation with the derived global-sections unit. Uniqueness of right derived comparisons identifies them.",
+   "text": "First prove that lowerStarId.inv followed by lowerStarCompGlobalSectionsIso is the identity after applying global sections: conjugate by ΓNatIsoSheafSections and evaluate at the terminal object. The two maps of terminal objects compose to the identity by terminal uniqueness. Derive this cancellation using rightDerived_ext for Γ. The factorization law for rightDerivedFunctorCompIso and rightDerivedNatTrans_fac gives the Leray comparison law after the composite derived unit. Expand that unit, use naturality of the Γ derived unit, and lift the underived cancellation termwise to the homotopy category. This proves RΓ(I.inv) followed by the Leray comparison is the identity.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-etale-cohomology",
     "lem-weil-pbc-inverse-image-composition",
@@ -49,16 +45,9 @@
    }
   },
   {
-   "text": "Naturality of the Leray comparison at E_K rewrites G(eta_id,K); lambda_id,U(K); G(E_K) as G(eta_id,K); G(R(E_K)); lambda_id,K. Substitute the unit equation from step 1 and the identification from step 2. The inverse and forward direct-image identity comparisons cancel, and G preserves identity. The equation holds for every derived object, since all transformations in this argument are on the unbounded derived category computed using K-injectives; no boundedness of K is used.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
+   "text": "Evaluate the two preceding natural-transformation identities at K. Naturality of the Leray comparison at E_K moves RΓ(E_K) to RΓ(R(E_K)) before Leray. Functoriality combines this with RΓ(eta_K). Substitute eta_K followed by R(E_K)=I.inv_K, and then the cancellation RΓ(I.inv_K) followed by Leray_K=id. All constructions and factorization laws are on the unbounded derived category; no boundedness assumption is used.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Lemma Tag 05T2 (lemma-compose-derived-functors-general) and Lemma Tag 015M (lemma-compose-derived-functors); sites.tex Lemma Tag 03CB (lemma-composition-morphisms-sites). Categorical elaboration of the corresponding step of the parent node."
@@ -66,8 +55,6 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-scheme-conventions",
-  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-etale-cohomology",
   "lem-weil-pbc-inverse-image-composition",
@@ -76,7 +63,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Categorical elaboration of the canonical comparison of Lemma Tag 015M (lemma-compose-derived-functors), using the inverse-image adjunction coherence of sites.tex Tag 03CB (lemma-composition-morphisms-sites); the original item proof steps 1 and 2."
+  "place": "D3 stage 3: canonical derived comparison of Tags 05T2 and 015M and identity-site coherence of sites.tex Tag 03CB, realized using rightDerived_ext, derivedη_fac_app, the exact-functor localization factorization laws, and terminal-object uniqueness."
  },
  "mathlib_searches": [
   {
@@ -148,10 +135,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T095852-L-312340",
-  "kind": "interface",
+  "landing": "20261012T151906-L-2287325",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
