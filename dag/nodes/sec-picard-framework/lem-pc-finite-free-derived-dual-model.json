@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-finite-free-derived-dual-model",
+ "kind": "statement",
+ "title": "Bounded finite free model of the derived dual on an affine open",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U\\subseteq X$ an affine open. Let $F$ be a bounded complex of finite free $\\mathcal O_U$-modules [def-pc-derived-category]. There is a bounded finite free complex $D$ on $U$ and an isomorphism $Q(D)\\cong R\\mathcal Hom(Q(F),(\\mathcal O_X[0])|_U)$ [def-pur-derived-internal-hom], where $\\mathcal O_X[0]$ is the actual unit of the shared derived tensor structure [def-pc-scheme-derived-tensor-structure].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex; Tag 08DM, lemma-RHom-strictly-perfect"
+ },
+ "proof": [
+  {
+   "text": "Construct D as homComplex(F,O_U[0]). Its specified degree-n product projections have zero factors at p other than -n, since O_U[0] vanishes in degree p+n and internal Hom is additive in its second variable. Lift the identity at the sole remaining factor and zero at the others to construct the inverse projection. Product hom-ext proves its two inverse identities. Thus D^n is Hom(F^(-n),O_U), as proved in the private helper homComplex_dual_term_iso.",
+   "uses": [
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If F is bounded in [a,b], then D is bounded in [-b,-a], since Hom from zero is zero. Transport the finite free isomorphism for F^(-n) contravariantly under Hom(-,O_U) and apply the proved source-library homObjFreeUnitIso. This proves finite freeness in degree n. Both assertions are proved in homComplex_dual_bounded_finiteFree.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The shared derived unit is Qh of the homotopy class of O_X[0]. quotientCompQhIso identifies it with Q(O_X[0]). Restrict this isomorphism, use mapDerivedCategoryFactors, then singleMapHomologicalComplex. Restriction of the underived unit is definitionally the localized unit. This gives the proved restricted_derived_unit_iso without a monoidal restriction assumption.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Make F strictly perfect using each free isomorphism and its inverse as retraction maps. Apply the strictly perfect ordinary-to-derived Hom comparison to F and O_U[0]. Apply RHom in its second variable to the inverse of the restricted-unit isomorphism and compose to obtain the displayed comparison.",
+   "uses": [
+    "lem-pc-rhom-strict-perfect-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-hom-complex-projections",
+  "def-pc-scheme-derived-tensor-structure",
+  "lem-pc-rhom-strict-perfect-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DQ, proof of lemma-dual-perfect-complex; Tag 08DM, lemma-RHom-strictly-perfect"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite free sheaves has a bounded finite free dual complex",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The internal dual of a perfect complex of sheaves on a scheme is perfect and has quasi-coherent cohomology",
+   "results": "Eight generic derived T-structure and K-projective results; none computes the sheaf dual.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObj.*free|free.*homObj|dual.*free|free.*dual in Mathlib and source sheaf module directories; RHom.*perfect in repository",
+   "results": "Source homObjFreeUnitIso computes the dual of one free sheaf. HomComplexProjections gives projections and StrictlyPerfectDerivedInternalHom computes RHom, but neither gives bounded finite free terms and comparison with the restricted actual derived unit.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectRHomTensorComparisonDual",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof of lem-sc-finite-duality, perfect tensor-Hom comparison: Bounded finite free model of the derived dual on an affine open",
+   "via": [
+    "lem-pc-perfect-rhom-tensor-comparison-dual",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeDerivedDualModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeDerivedDualModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_bounded_finiteFree_derived_dual_model",
+  "statement": "theorem exists_bounded_finiteFree_derived_dual_model\n    (X : Scheme.{u}) (U : X.Opens) [IsAffine U.toScheme]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [hU : HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U))]\n    (F : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (F.X n))\n    (hfree : ∀ n : ℤ, ∃ r : ℕ, Nonempty (F.X n ≅ SheafOfModules.free\n      (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r)))) :\n    ∃ D : CochainComplex\n        (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ,\n      (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (D.X n)) ∧\n      (∀ n : ℤ, ∃ r : ℕ, Nonempty (D.X n ≅ SheafOfModules.free\n        (R := (moduleRings X.toRingedSpace).over U) (ULift.{u} (Fin r)))) ∧\n      Nonempty (DerivedCategory.Q.obj D ≅\n        (@derivedInternalHom.{u, w} (Over U) _\n          ((Opens.grothendieckTopology X.toRingedSpace).over U)\n          (X.toRingedSpace.sheaf.over U) hU).obj\n          (op ((DerivedCategory.Q (C := SheafOfModules.{u}\n              ((moduleRings X.toRingedSpace).over U))).obj F),\n            (SheafOfModules.overFunctor.{u}\n              (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj\n                (𝟙_ (schemeDerivedCategory X))))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T184359-L-4025278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T184359-L-4025278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

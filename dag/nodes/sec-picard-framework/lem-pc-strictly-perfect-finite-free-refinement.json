@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-strictly-perfect-finite-free-refinement",
+ "kind": "statement",
+ "title": "Finite free refinement of a strictly perfect local representative",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], $U\\subseteq X$ open, and $P$ a strictly perfect complex on $U$ [def-pc-perfect-complex] with $E|_U\\cong Q(P)$. For every $x\\in U$ there is an affine open $V$ with $x\\in V\\subseteq U$ and a bounded complex $F$ of finite free $\\mathcal O_V$-modules with $E|_V\\cong Q(F)$. The finite rank can depend on the degree.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Definitions 08C4 and 08CM; algebra.tex Tag 00NX (3) implies (7); schemes.tex Tags 01IA and 01IB"
+ },
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood W of x inside U and restrict P and its termwise finite free splittings to W. The restricted term is the image of an idempotent on a finite free sheaf. On W, tilde-Gamma identifies the idempotent with its matrix of global sections. Splitting this matrix in modules and applying tilde identifies the term with the sheaf of a finite projective module. Restriction preserves the bounds and zero terms.",
+   "uses": [
+    "def-pc-perfect-complex",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite projective standard free cover to each of the finitely many terms inside the bounds. Choose a principal open containing x for each term. Their finite intersection is an affine neighbourhood V of x inside U. Restrict P and its differential termwise to V to obtain F. Every term inside the bounds is free of finite rank by the chosen trivializations; every other term is zero, hence free of rank zero. This also covers an empty degree interval.",
+   "uses": [
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the given derived isomorphism to V. Exact-functor localization (mapDerivedCategoryFactors) identifies restriction of Q(P) with Q(F). The nested-open comparison overFunctorMap, transported by mapDerivedCategoryCompIso and mapDerivedCategoryNatIso, identifies the other endpoint with E restricted directly to V. Composing gives E|V isomorphic to Q(F).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-complex",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-finite-projective-standard-free-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Definitions 08C4 and 08CM; algebra.tex Tag 00NX (3) implies (7); schemes.tex Tags 01IA and 01IB"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strictly perfect complex of sheaves on a scheme is locally a bounded complex of finite free sheaves",
+   "results": "UNAVAILABLE: Internal Server Error; no verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strictly perfect complex of sheaves is locally represented by a bounded complex of finite free sheaves",
+   "results": "Eight hits: sheaf finite type and finite presentation definitions, K-projective and T-structure lemmas; no refinement theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|strictly perfect|finite free|retract in Mathlib sheaf modules and repository perfect/local-free modules",
+   "results": "PerfectFiniteFreeResidueModel needs additional residue-field derived-category instances and prescribed ranks. PerfectPseudoCoherentLocallyFiniteTor needs all open-scheme derived-category instances and does not return a bounded finite free model. The standard-free-cover module provides the algebraic ingredient. No exact local interface exists.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectRHomTensorComparisonDual",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Proof of lem-sc-finite-duality, perfect tensor-Hom comparison: Finite free refinement of a strictly perfect local representative",
+   "via": [
+    "lem-pc-perfect-rhom-tensor-comparison-dual",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictlyPerfectFiniteFreeRefinement.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finiteFree_refinement_of_isStrictlyPerfect",
+  "statement": "theorem exists_finiteFree_refinement_of_isStrictlyPerfect\n    (X : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [∀ V : X.Opens, HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))]\n    (E : schemeDerivedCategory X) (U : X.Opens)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P)\n    (hEP : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) U).mapDerivedCategory.obj E ≅ DerivedCategory.Q.obj P))\n    (x : X) (hx : x ∈ U) :\n    ∃ V : X.Opens, x ∈ V ∧ V ≤ U ∧ IsAffine V.toScheme ∧\n      ∃ F : CochainComplex\n          (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V)) ℤ,\n        (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (F.X n)) ∧\n        (∀ n : ℤ, ∃ r : ℕ, Nonempty (F.X n ≅ SheafOfModules.free\n          (R := (moduleRings X.toRingedSpace).over V) (ULift.{u} (Fin r)))) ∧\n        Nonempty ((SheafOfModules.overFunctor.{u}\n          (moduleRings X.toRingedSpace) V).mapDerivedCategory.obj E ≅\n            DerivedCategory.Q.obj F)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T184359-L-4025278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T184359-L-4025278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

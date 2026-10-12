@@ -9112,3 +9112,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/X2/Sheaf.AlgebraicGeometry.UniformInverseAffineSectionsBound (stage 3; reviewer PASS; first push; landing 20261012T184358-L-4024947 (interface); batch 20261012T184234; modules 3; new nodes 2)
 - 18:43 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetApproximation (stage 3; reviewer PASS; first push; landing 20261012T184358-L-4025081 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/X3/Sheaf.AlgebraicGeometry.IntrinsicFlatModuleTensorFlat (stage 3; reviewer PASS; first push; landing 20261012T184359-L-4025179 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:43 L: merged deliver/X3/Sheaf.AlgebraicGeometry.PerfectRHomTensorComparisonDual (stage 3; reviewer PASS; first push; landing 20261012T184359-L-4025278 (interface); batch 20261012T184234; modules 3; new nodes 2)
