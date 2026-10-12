@@ -12,13 +12,11 @@ public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
-import Sheaf.CategoryTheory.Triangulated.RingedSpaceDerivedProducts
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 
 /-!
 # Cohomology over an open and derived inverse limits
@@ -35,6 +33,76 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.RingedSpace
 
+/-- The product argument of Stacks Tag 08U1 applies to modules on a ringed space.
+The unit on K-injective representatives identifies the sectionwise product with its
+image in the derived category of abelian groups, whose products are exact. -/
+private theorem openModuleDerivedSections_preservesCountableProducts
+    (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
+    [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))]
+    [HasDerivedCategory.{w} AddCommGrpCat.{u}] :
+    PreservesLimitsOfShape (Discrete ℕ) (openModuleDerivedSections X U) := by
+  let F := openModuleSections X U
+  have : PreservesLimitsOfShape (Discrete ℕ) F := by
+    dsimp [F, openModuleSections]
+    infer_instance
+  classical
+  let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let q := HomotopyCategory.quotient (SheafOfModules.{u} (moduleRings X)) (ComplexShape.up ℤ)
+  let a : G ⋙ DerivedCategory.Q ≅
+      q ⋙ (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) :=
+    Functor.isoWhiskerLeft G (DerivedCategory.quotientCompQhIso AddCommGrpCat).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors _).symm DerivedCategory.Qh ≪≫
+      Functor.associator _ _ _
+  let β : G ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ F.rightDerivedFunctor :=
+    a.hom ≫ Functor.whiskerLeft q F.rightDerivedFunctorUnit ≫
+      (Functor.associator _ _ _).inv ≫
+      (Functor.isoWhiskerRight
+        (DerivedCategory.quotientCompQhIso (SheafOfModules.{u} (moduleRings X)))
+        F.rightDerivedFunctor).hom
+  have hβ (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) [I.IsKInjective] :
+      IsIso (β.app I) := by
+    dsimp [β, a]
+    infer_instance
+  obtain ⟨hP, hQ, _⟩ := derivedCategory_countableProducts_and_towerLimit AddCommGrpCat.{u}
+  have : ∀ (I : ℕ → CochainComplex AddCommGrpCat.{u} ℤ),
+      PreservesLimit (Discrete.functor I) DerivedCategory.Q := fun I ↦
+    preservesLimit_of_preserves_limit_cone (limit.isLimit _) (hQ ℕ I).some
+  have : PreservesLimitsOfShape (Discrete ℕ) (DerivedCategory.Q (C := AddCommGrpCat.{u})) :=
+    preservesLimitsOfShape_of_discrete _
+  have hfamily (K : ℕ → DerivedCategory (SheafOfModules.{u} (moduleRings X))) :
+      PreservesLimit (Discrete.functor K) F.rightDerivedFunctor := by
+    have hex (n : ℕ) := DerivedCategory.exists_iso_Q_obj_of_isKInjective (K n)
+    choose I hI he using hex
+    let e (n : ℕ) := (Classical.choice (he n)).symm
+    have : ∀ n, (I n).IsKInjective := hI
+    let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
+    obtain ⟨hPI, ⟨hPL⟩⟩ := CochainComplex.termwise_product_isKInjective_and_isLimit I
+    have : CochainComplex.IsKInjective P.pt := hPI
+    have hFPL := isLimitOfPreserves DerivedCategory.Q
+      (isLimitOfPreserves G (HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I)))
+    let α : Discrete.functor I ⋙ DerivedCategory.Q ≅ Discrete.functor K :=
+      Discrete.natIso (fun (n : Discrete ℕ) ↦ e n.as)
+    let c := (Cone.postcompose α.hom).obj (DerivedCategory.Q.mapCone P)
+    have hc : IsLimit c := (IsLimit.postcomposeHomEquiv α _).symm hPL
+    apply preservesLimit_of_preserves_limit_cone hc
+    let αβ : (Discrete.functor I ⋙ G) ⋙ DerivedCategory.Q ≅
+        (Discrete.functor I ⋙ DerivedCategory.Q) ⋙ F.rightDerivedFunctor :=
+      Discrete.natIso (fun (n : Discrete ℕ) ↦ asIso (β.app (I n.as)))
+    have hmap : IsLimit (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P)) :=
+      (IsLimit.equivOfNatIsoOfIso αβ
+        (DerivedCategory.Q.mapCone (G.mapCone P))
+        (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P))
+        (Cone.ext (asIso (β.app P.pt)) (fun n ↦ by
+          simpa [αβ] using β.naturality (P.π.app n)))).1 hFPL
+    exact (IsLimit.equivOfNatIsoOfIso (Functor.isoWhiskerRight α F.rightDerivedFunctor)
+      (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P))
+      (F.rightDerivedFunctor.mapCone c) (Cone.ext (Iso.refl _) (fun n ↦ by simp [c]))).1 hmap
+  exact preservesLimitsOfShape_of_discrete _
+
+
+set_option maxHeartbeats 800000 in
+-- The product/triangle comparisons elaborate across two independent localization universes.
 /-- Derived sections over an open preserve Roos triangles and satisfy the Milnor
 short exact sequence.  The functor `RΓ(U,-)` is represented by K-injective
 resolutions of complexes of modules, via `openModuleDerivedSections`.
@@ -46,7 +114,7 @@ Proof, following Tag 0D60:
    `prop-pur-kinjective-resolutions-exist`, and sections preserve limits by
    `lem-weil-pbc-module-sheaves-limits-sectionwise`. The right derived functor
    is triangulated (`lem-pc-right-derived-functor-triangulated`). Products exist
-   by `lem-pc-ringed-space-derived-products` and
+   by the generic K-injective product construction and
    `lem-weil-derived-limit-existence`, using exact products in abelian groups
    (`lem-pc-abelian-groups-exact-products`).
 2. Resolve each tower term by a K-injective complex. Its termwise product is
@@ -56,15 +124,13 @@ Proof, following Tag 0D60:
    this with the target derived product (`lem-weil-derived-limit-existence`).
    The projection equations characterize the comparison. The triangulated
    functor sends the Roos triangle to the target Roos triangle
-   (`lem-pc-homotopy-limit-map`, `def-weil-derived-limit`).
-3. Apply the long exact cohomology sequence
-   (`lem-sf-derived-homology-long-exact`). Exact products identify the cohomology
-   of the product with the product of the cohomologies, with transition map
-   `1 - s`. Its kernel is inverse limit and its cokernel is the first right
-   derived inverse limit (`lem-pc-derived-limit-roos-abelian-groups`). The middle
-   three terms give the short exact sequence (`lem-pc-derived-limit-milnor-sequence`).
-   The right map is cohomology of `p` followed by each product projection, as
-   specified by its equations with every limit projection.
+   by a triangle isomorphism. Its middle square follows after every product projection
+   by functoriality and additivity (`def-weil-derived-limit`).
+3. Apply `milnor_shortExact` (`lem-pc-derived-limit-milnor-sequence`) to the
+   image tower and its specified Roos triangle. Its right-map projection equations
+   become the claimed equations using the comparison projection equations and
+   functoriality. The association of the three composed functors is normalized
+   explicitly when checking these equations.
 -/
 theorem rgamma_derivedLimit (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
     [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))]
@@ -105,6 +171,57 @@ theorem rgamma_derivedLimit (X : RingedSpace.{u}) (U : TopologicalSpace.Opens X)
             (Opposite.op n) =
           (DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).map
             ((openModuleDerivedSections X U).map (p ≫ Pi.π _ n))) := by
-  sorry
+  let A := fun n : ℕ => K.obj (Opposite.op n)
+  let f := fun n : ℕ => K.map (homOfLE (Nat.le_succ n)).op
+  have hfirst : (∃ e : (openModuleDerivedSections X U).obj
+      (∏ᶜ (fun n : ℕ => K.obj (Opposite.op n))) ≅
+        ∏ᶜ (fun n : ℕ => (openModuleDerivedSections X U).obj (K.obj (Opposite.op n))),
+      (∀ n, e.hom ≫ Pi.π _ n = (openModuleDerivedSections X U).map (Pi.π _ n)) ∧
+      IsDerivedLimitTriangle
+        (fun n => (openModuleDerivedSections X U).map (K.map (homOfLE (Nat.le_succ n)).op))
+        ((openModuleDerivedSections X U).obj L) ((openModuleDerivedSections X U).map p ≫ e.hom)
+        (e.inv ≫ (openModuleDerivedSections X U).map δ ≫
+          ((openModuleDerivedSections X U).commShiftIso (1 : ℤ)).hom.app L)) := by
+    let Φ := openModuleDerivedSections X U
+    have := openModuleDerivedSections_preservesCountableProducts X U
+    let e := PreservesProduct.iso Φ A
+    have he (n : ℕ) : e.hom ≫ Pi.π _ n = Φ.map (Pi.π A n) := by
+      simp [e]
+    refine ⟨e, he, ?_⟩
+    have ht : Φ.map (towerTransitionEndomorphism f) ≫ e.hom =
+        e.hom ≫ towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) := by
+      apply Pi.hom_ext
+      intro n
+      simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
+        Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
+        Pi.lift_π, Functor.map_sub]
+      rw [← Category.assoc, he, ← Functor.map_comp]
+      rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    exact Pretriangulated.isomorphic_distinguished _ (Φ.map_distinguished _ hK) _
+      (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm
+        (by change (Φ.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ Φ.map p; simp)
+        (by
+          change towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) ≫ e.inv =
+            e.inv ≫ Φ.map (towerTransitionEndomorphism f)
+          apply (cancel_mono e.hom).1
+          simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+            Iso.inv_hom_id_assoc] using congrArg (fun t ↦ e.inv ≫ t) ht.symm)
+        (by
+          change (e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L) ≫
+            (shiftFunctor _ (1 : ℤ)).map (𝟙 _) =
+              e.inv ≫ (Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L)
+          simp))
+  obtain ⟨e, he, hT⟩ := hfirst
+  refine ⟨⟨e, he, hT⟩, ?_⟩
+  intro m
+  obtain ⟨a, b, hab, _⟩ := CategoryTheory.milnor_shortExact.{u, w} m
+  obtain ⟨⟨hz, hseq⟩, hb⟩ := hab (K ⋙ openModuleDerivedSections X U)
+    ((openModuleDerivedSections X U).obj L)
+    ((openModuleDerivedSections X U).map p ≫ e.hom)
+    (e.inv ≫ (openModuleDerivedSections X U).map δ ≫
+      ((openModuleDerivedSections X U).commShiftIso (1 : ℤ)).hom.app L) hT
+  refine ⟨_, _, hz, hseq, ?_⟩
+  intro n
+  simpa only [Functor.comp, Category.assoc, he n, ← Functor.map_comp] using hb n
 
 end AlgebraicGeometry.RingedSpace

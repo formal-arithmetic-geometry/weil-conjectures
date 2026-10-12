@@ -33,52 +33,43 @@
  ],
  "proof": [
   {
-   "text": "The site of open subsets of $X$ is small and $\\mathcal O_X$ is a sheaf of commutative rings, so $\\operatorname{Mod}(\\mathcal O_X)$ is abelian and every complex of $\\mathcal O_X$-modules has a K-injective resolution [prop-pur-kinjective-resolutions-exist, def-pur-kinjective-complex]; the same holds for $\\operatorname{Ab}$, the modules over the constant ring $\\mathbf Z$ on the one-point space. The functor $\\Gamma(U,-)$ is additive, and it carries every small limit in $\\operatorname{Mod}(\\mathcal O_X)$, in particular every product, to the corresponding limit of abelian groups, because limits of module sheaves are computed sectionwise [lem-weil-pbc-module-sheaves-limits-sectionwise]. By [lem-pc-right-derived-functor-triangulated], $R\\Gamma(U,-):D(\\mathcal O_X)\\to D(\\operatorname{Ab})$ commutes with shifts and carries distinguished triangles to distinguished triangles. Both $D(\\mathcal O_X)$ and $D(\\operatorname{Ab})$ have countable products, by [lem-pc-ringed-space-derived-products] and by part (2) of [lem-weil-derived-limit-existence] together with the exactness of products in $\\operatorname{Ab}$ [lem-pc-abelian-groups-exact-products]; in particular a derived limit $K$ as in the statement exists by part (1) of [lem-weil-derived-limit-existence].",
+   "text": "Sections on U preserve countable products by the sectionwise-limit instances of Mathlib. Represent every derived object by a K-injective complex, using the Grothendieck structure already used by openModuleDerivedSections. The termwise product is K-injective and its localization is a product by termwise_product_isKInjective_and_isLimit. Exact products of abelian groups give preservation of these products by target localization through derivedCategory_countableProducts_and_towerLimit. Naturality and invertibility of the right-derived unit on the representatives and their product transport this limiting cone to the image cone. This proves countable-product preservation of openModuleDerivedSections, by the argument of Stacks Tag 08U1.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "def-pur-kinjective-complex",
     "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-pc-ringed-space-derived-products",
+    "lem-pc-ringed-space-product-kinjective",
     "lem-weil-derived-limit-existence",
     "lem-pc-abelian-groups-exact-products"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D60, setup for lemma-RGamma-commutes-with-Rlim (Stacks Tags 079P, 08U1)"
+    "place": "Tag 0D60, label lemma-RGamma-commutes-with-Rlim"
    }
   },
   {
-   "text": "$R\\Gamma(U,-)$ preserves the product of every tower. Choose K-injective resolutions $K_n\\to\\mathcal I_n^\\bullet$ [prop-pur-kinjective-resolutions-exist]. The termwise product $\\prod_n\\mathcal I_n^\\bullet$ is K-injective and, with its termwise projections, represents $\\prod_nK_n$ in $D(\\mathcal O_X)$ [lem-pc-ringed-space-product-kinjective]. Hence $R\\Gamma(U,\\prod_nK_n)$ is represented by $\\Gamma(U,\\prod_n\\mathcal I_n^\\bullet)$, which by Step 1 is the termwise product $\\prod_n\\Gamma(U,\\mathcal I_n^\\bullet)$ with the projections $\\Gamma(U,\\mathrm{pr}_n)$; by part (2) of [lem-weil-derived-limit-existence] (products in $\\operatorname{Ab}$ being exact [lem-pc-abelian-groups-exact-products]) this termwise product represents $\\prod_nR\\Gamma(U,K_n)$ in $D(\\operatorname{Ab})$. So the maps $R\\Gamma(U,\\mathrm{pr}_n)$ exhibit $R\\Gamma(U,\\prod_nK_n)$ as the product of the $R\\Gamma(U,K_n)$. By Step 1 the functor $R\\Gamma(U,-)$ satisfies the hypotheses of [lem-pc-homotopy-limit-map], which therefore sends the Roos triangle of $K$ to a homotopy-limit (Roos) cone of the tower $(R\\Gamma(U,K_n))$: under the identification just made, $R\\Gamma(U,1-s)$ is the transition endomorphism $1-s$ of the image tower (Stacks Tag 08U1; the same argument as the node lem-pc-derived-functor-commutes-derived-limit, which is not cited because its statement assumes $X$ a scheme). Thus $(R\\Gamma(U,K),R\\Gamma(U,p),R\\Gamma(U,\\delta))$, after the identification, is a derived limit of $(R\\Gamma(U,K_n))$ [def-weil-derived-limit], which is part (1).",
+   "text": "Use PreservesProduct.iso to identify the image product with the product of the images; its hom respects every projection. Apply the triangulated right-derived functor to the prescribed Roos triangle. Functoriality and additivity give compatibility with 1-s after each product projection. Product extensionality proves the middle square. A triangle isomorphism with components identity, the inverse product comparison, and the inverse product comparison gives precisely the claimed image Roos triangle, including its prescribed shift-commutation map.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-ringed-space-product-kinjective",
-    "lem-weil-derived-limit-existence",
-    "lem-pc-abelian-groups-exact-products",
-    "lem-pc-homotopy-limit-map",
+    "lem-pc-right-derived-functor-triangulated",
     "def-weil-derived-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D60, proof of lemma-RGamma-commutes-with-Rlim (via Injectives, Tag 08U1)"
+    "place": "Tag 0D60, label lemma-RGamma-commutes-with-Rlim"
    }
   },
   {
-   "text": "Apply the long exact cohomology sequence [lem-sf-derived-homology-long-exact] to the Roos triangle of $(R\\Gamma(U,K_n))$ from Step 2. By part (2) of [lem-weil-derived-limit-existence] and the exactness of products in $\\operatorname{Ab}$ [lem-pc-abelian-groups-exact-products], $H^q(\\prod_nR\\Gamma(U,K_n))=\\prod_nH^q(U,K_n)$ through the maps $H^q(\\mathrm{pr}_n)$ (cohomology of a termwise product of complexes of abelian groups is the product of the cohomologies, via the projections), and under this identification $H^q(1-s)$ is the map $1-s$ of the inverse system $(H^q(U,K_n),H^q(U,f_n))$, since $\\mathrm{pr}_n\\circ(1-s)=\\mathrm{pr}_n-f_n\\circ\\mathrm{pr}_{n+1}$ [def-weil-derived-limit]. The long exact sequence thus contains the exact segment $\\prod_nH^{m-1}(U,K_n)\\xrightarrow{1-s}\\prod_nH^{m-1}(U,K_n)\\to H^m(U,K)\\to\\prod_nH^m(U,K_n)\\xrightarrow{1-s}\\prod_nH^m(U,K_n)$, whose middle-right map is $\\gamma\\mapsto(H^m(U,\\mathrm{pr}_n\\circ p)(\\gamma))_n$. By [lem-pc-derived-limit-roos-abelian-groups], $\\ker(1-s)=\\varprojlim_nH^m(U,K_n)$ and $\\operatorname{coker}(1-s)\\cong R^1\\varprojlim_nH^{m-1}(U,K_n)$, which gives the short exact sequence of part (2) with the stated right map. (This is the sequence of [lem-pc-derived-limit-milnor-sequence] for the tower $(R\\Gamma(U,K_n))$, with its maps named.)",
+   "text": "Apply milnor_shortExact to the tower K composed with openModuleDerivedSections and to the image Roos triangle just proved, in each integer degree m. Take its two maps and its zero-composition witness. The short exactness assertion is the desired one; its projection equations simplify to the specified cohomology of sections of p followed by each original product projection, using the product-comparison equations and functoriality. Unfold composition of functors to normalize association in the limit projections. The Roos structural declarations supply the exact rightDerived instance appearing in the statement.",
    "uses": [
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-derived-limit-existence",
-    "lem-pc-abelian-groups-exact-products",
-    "def-weil-derived-limit",
-    "lem-pc-derived-limit-roos-abelian-groups",
-    "lem-pc-derived-limit-milnor-sequence"
+    "lem-pc-derived-limit-milnor-sequence",
+    "lem-pc-derived-limit-roos-abelian-groups"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0D60, conclusion of lemma-RGamma-commutes-with-Rlim (More on Algebra, remark-compare-derived-limit)"
+    "place": "Tag 0D60, label lemma-RGamma-commutes-with-Rlim"
    }
   }
  ],
@@ -86,21 +77,20 @@
   "prop-pur-kinjective-resolutions-exist",
   "def-pur-kinjective-complex",
   "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pc-ringed-space-derived-products",
+  "lem-pc-ringed-space-product-kinjective",
   "lem-weil-derived-limit-existence",
   "lem-pc-abelian-groups-exact-products",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-pc-homotopy-limit-map",
+  "lem-pc-right-derived-functor-triangulated",
   "def-weil-derived-limit",
-  "lem-sf-derived-homology-long-exact",
-  "lem-pc-derived-limit-roos-abelian-groups",
-  "lem-pc-derived-limit-milnor-sequence"
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-limit-roos-abelian-groups"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "H1",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D60, lemma-RGamma-commutes-with-Rlim"
+  "place": "Tag 0D60, label lemma-RGamma-commutes-with-Rlim; product argument: Injectives Tag 08U1; existing Lean arguments adapted from RightDerivedFunctorCountableProducts and DerivedFunctorDerivedLimit"
  },
  "mathlib_searches": [
   {
@@ -220,5 +210,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T202240-L-704458",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
