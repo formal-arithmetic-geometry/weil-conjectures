@@ -1,6 +1,7 @@
 module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+import Sheaf.Paper.AffineOpenSectionsCanonicalColimit
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
@@ -56,4 +57,11 @@ theorem affineOpenSections_cocone_isColimit
           exact hp j))
         (by exact pullback.lift_snd _ _ _)).op) :
     Nonempty (IsColimit (Cocone.mk _ ν)) := by
-  sorry
+  obtain ⟨ν₀, hν₀, hcol⟩ := affineOpenSections_exists_canonical_colimit
+    D c p hp hc H hH F
+  have h_eq : ν = ν₀ := by
+    apply NatTrans.ext
+    funext j
+    exact (hν (unop j)).trans (hν₀ (unop j)).symm
+  rw [h_eq]
+  exact hcol
