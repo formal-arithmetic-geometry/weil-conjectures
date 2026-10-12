@@ -3069,7 +3069,7 @@ equivariant isomorphism `J₀[ℓⁿ](k̄₀) ≅ Pic^0(C)[ℓⁿ]` of the bluep
 No rational point of `C₀` is assumed. The instances `[SmoothOfRelativeDimension 1 (C ↘ Spec K)]`
 and `[IsProper (C ↘ Spec K)]`, which follow from `hC`, are assumed so that `Pic^0(C)` is defined.
 
-(blueprint: `sk-prop-jacobian-descent`) -/
+(blueprint: `sk-prop-jacobian-descent`, `thm-pd-jacobian-general-field`) -/
 theorem exists_jacobian_descent (k₀ ks K : Type u) [Field k₀] [Field ks] [Field K]
     [Algebra k₀ ks] [Algebra k₀ K] [Algebra ks K] [IsScalarTower k₀ ks K]
     [IsSepClosure k₀ ks] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))]
@@ -3139,7 +3139,7 @@ over an arbitrary field `k₀`, `C = C₀ ×_{k₀} k̄₀`), the Galois-equivar
 `ℓⁿ`-torsion subgroups `Pic^0(C)[ℓⁿ] ≃* J₀[ℓⁿ](k̄₀)`, which is the restriction of `e` and hence
 `Gal(k̄₀/k₀)`-equivariant. No finiteness of `k₀` and no rational point of `C₀` is assumed.
 
-(blueprint: `sk-prop-jacobian-descent`, the `ℓⁿ`-torsion clause) -/
+(blueprint: `sk-prop-jacobian-descent`, `thm-pd-jacobian-general-field`, the `ℓⁿ`-torsion clause) -/
 theorem exists_jacobian_descent_torsion (k₀ ks K : Type u) [Field k₀] [Field ks] [Field K]
     [Algebra k₀ ks] [Algebra k₀ K] [Algebra ks K] [IsScalarTower k₀ ks K]
     [IsSepClosure k₀ ks] [IsAlgClosure k₀ K] (C₀ : Scheme.{u}) [C₀.Over (Spec (.of k₀))]
@@ -3337,6 +3337,109 @@ theorem exists_commGrpObj_representableBy_picardFunctorDegree_pullback (ks : Typ
     exists_commGrpObj_representableBy_picardFunctorDegree ks C g hg
   exact ⟨J, inferInstance, r, hP, hS, hG, hr, fun _ _ _ _ _ q h ↦
     exists_representableBy_picardFunctorDegree_pullback_homEquiv q h 0 r⟩
+
+/-- **The Jacobian commutes with base extension, as a group scheme.** Let `X` be a smooth
+projective geometrically integral curve of genus `g` over a separably closed field `k`, and let
+`J` be its Jacobian (`AlgebraicGeometry.exists_jacobian`), representing `Pic^0_{X/k}` by `e`. Then
+for every field extension `k ⊆ k'` and every base change `X' = X ×_k k'`, the base change
+`J ×_k k'` is the Jacobian of `X'`: it represents `Pic^0_{X'/k'}` by the base change `e'` of `e`
+(through the canonical identification `AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, the
+`T`-point attached by `e'` to a section `y` is adjoint to the point attached to `y` by `e`), and
+the base change of the group law of `J` (on `T`-points, the bijection
+`(T ⟶ J ×_k k') ≃ (T ⟶ J)` is a group isomorphism) makes `e'` respect the group laws. This
+strengthens `AlgebraicGeometry.exists_jacobian_baseChange`, which only gives some group structure
+and some representation on the base change.
+
+(blueprint: `thm-sc-jacobian-representability`, `sk-prop-jacobian`, the clause
+`J_{C_{k'}} ≅ (J_C)_{k'}`) -/
+theorem exists_jacobian_baseChange_isPicardZeroMul [IsSepClosed k] (X : Scheme.{u})
+    [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+    [IsProper (X ↘ Spec (.of k))] [GeometricallyIntegral (X ↘ Spec (.of k))] :
+    ∃ (J : Over (Spec (.of k))) (_ : CommGrpObj J)
+      (e : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.RepresentableBy J),
+      IsProper J.hom ∧ SmoothOfRelativeDimension (arithmeticGenus k X) J.hom ∧
+        GeometricallyIntegral J.hom ∧ IsPicardZeroMul (X ↘ Spec (.of k)) e ∧
+        (∃ ψ : picardZero k X ≃* (𝟙_ (Over (Spec (.of k))) ⟶ J), ∀ L, ∃ h,
+          ψ L = e.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+            (picardSubfunctorDegree (X ↘ Spec (.of k)) 0).toFunctor).app _
+              ⟨Pic.map (pullback.fst (X ↘ Spec (.of k)) (𝟙_ (Over (Spec (.of k)))).hom) L.1,
+                h⟩)) ∧
+        ∀ (k' : Type u) [Field k'] [Algebra k k'] (X' : Scheme.{u}) [X'.Over (Spec (.of k'))]
+          (q : X' ⟶ X) (h : IsPullback q (X' ↘ Spec (.of k')) (X ↘ Spec (.of k))
+            (Spec.map (CommRingCat.ofHom (algebraMap k k')))),
+          ∃ (e' : (picardFunctorDegree (X' ↘ Spec (.of k')) 0).obj.RepresentableBy
+              (Over.mk (Limits.pullback.snd J.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap k k'))))))
+            (_ : CommGrpObj (Over.mk (Limits.pullback.snd J.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap k k')))))),
+            (∀ (T : Over (Spec (.of k')))
+              (y : (picardFunctorDegree (X ↘ Spec (.of k)) 0).obj.obj
+                (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k k')))).obj T))),
+              e'.homEquiv.symm ((picardFunctorDegreeIsoOfIsPullback q h 0).hom.app (.op T) y) =
+                (Over.mapPullbackAdj _).homEquiv T J (e.homEquiv.symm y)) ∧
+            IsPicardZeroMul _ e' ∧
+            ∀ {T : Over (Spec (.of k'))} (a b : T ⟶ Over.mk (Limits.pullback.snd J.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap k k'))))),
+              ((Over.mapPullbackAdj _).homEquiv T J).symm (a * b) =
+                ((Over.mapPullbackAdj _).homEquiv T J).symm a *
+                  ((Over.mapPullbackAdj _).homEquiv T J).symm b := by
+  have : Smooth (X ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  obtain ⟨J, _, e, hP, hS, hG, he, hZ⟩ := exists_jacobian (k := k) (X := X)
+  exact ⟨J, inferInstance, e, hP, hS, hG, he, hZ, fun _ _ _ _ _ q h ↦
+    exists_commGrpObj_representableBy_picardFunctorDegree_pullback_isPicardZeroMul q h e he⟩
+
+/-- **The Jacobian of a geometrically connected curve over an arbitrary field.** Let `C` be a
+`k`-scheme which is proper and smooth of relative dimension `1` over an arbitrary field `k` and
+geometrically connected, of genus `g`. Then there is an abelian variety `J` of dimension `g` over
+`k` (a proper, smooth, geometrically integral commutative group scheme) representing
+`Pic^0_{C/k}` by `r`, compatibly with the group laws, and for every field extension `K/k` and
+every base change `C' = C ×_k K` the base change `J_K = J ×_k K` is the Jacobian of `C'`: it
+represents `Pic^0_{C'/K}` by the base change `rK` of `r`, naturally in `K` (through
+`AlgebraicGeometry.picardFunctorDegreeIsoOfIsPullback`, the point attached by `rK` to a section
+`y` is adjoint to the point attached to `y` by `r`), and compatibly with the group laws, the group
+law of `J_K` being the base change of that of `J`. No rational point of `C` is assumed.
+
+This is `AlgebraicGeometry.exists_commGrpObj_representableBy_picardFunctorDegree` with the
+blueprint hypothesis "geometrically connected" in place of "geometrically integral": a smooth
+geometrically connected morphism is geometrically integral
+(`AlgebraicGeometry.GeometricallyIntegral.of_smooth_of_geometricallyConnected`). The separable
+closure used in the descent is the one inside an algebraic closure of `k`.
+
+(blueprint: `thm-pd-jacobian-general-field`, representability and the clause
+`J_K ≅ Pic^0_{C_K/K}` naturally in `K`) -/
+theorem exists_jacobian_of_geometricallyConnected (C : Scheme.{u}) [C.Over (Spec (.of k))]
+    [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k))] [IsProper (C ↘ Spec (.of k))]
+    [GeometricallyConnected (C ↘ Spec (.of k))] (g : ℕ) (hg : arithmeticGenus k C = g) :
+    ∃ (J : Over (Spec (.of k))) (_ : CommGrpObj J)
+      (r : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J),
+      IsProper J.hom ∧ SmoothOfRelativeDimension g J.hom ∧ GeometricallyIntegral J.hom ∧
+        IsPicardZeroMul _ r ∧
+        ∀ (K : Type u) [Field K] [Algebra k K] (C' : Scheme.{u}) [C'.Over (Spec (.of K))]
+          (q : C' ⟶ C) (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+            (Spec.map (CommRingCat.ofHom (algebraMap k K)))),
+          ∃ (rK : (picardFunctorDegree (C' ↘ Spec (.of K)) 0).obj.RepresentableBy
+              (Over.mk (Limits.pullback.snd J.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap k K))))))
+            (_ : CommGrpObj (Over.mk (Limits.pullback.snd J.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap k K)))))),
+            (∀ (T : Over (Spec (.of K)))
+              (y : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj
+                (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T))),
+              rK.homEquiv.symm ((picardFunctorDegreeIsoOfIsPullback q h 0).hom.app (.op T) y) =
+                (Over.mapPullbackAdj _).homEquiv T J (r.homEquiv.symm y)) ∧
+            IsPicardZeroMul _ rK ∧
+            ∀ {T : Over (Spec (.of K))} (a b : T ⟶ Over.mk (Limits.pullback.snd J.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap k K))))),
+              ((Over.mapPullbackAdj _).homEquiv T J).symm (a * b) =
+                ((Over.mapPullbackAdj _).homEquiv T J).symm a *
+                  ((Over.mapPullbackAdj _).homEquiv T J).symm b := by
+  have : Smooth (C ↘ Spec (.of k)) := SmoothOfRelativeDimension.smooth 1 _
+  have : GeometricallyIntegral (C ↘ Spec (.of k)) :=
+    .of_smooth_of_geometricallyConnected _
+  obtain ⟨J, _, r, hP, hS, hG, hr⟩ := exists_commGrpObj_representableBy_picardFunctorDegree
+    (separableClosure k (AlgebraicClosure k)) C g hg
+  exact ⟨J, inferInstance, r, hP, hS, hG, hr, fun _ _ _ _ _ q h ↦
+    exists_commGrpObj_representableBy_picardFunctorDegree_pullback_isPicardZeroMul q h r hr⟩
 
 end Descent
 
