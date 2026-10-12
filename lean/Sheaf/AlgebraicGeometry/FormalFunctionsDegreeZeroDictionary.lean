@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
 import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroStalkIso
+import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroSystemIso
+import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroCompatibility
 
 /-! # Degree-zero identifications for the formal fibre system
 
@@ -68,6 +71,8 @@ theorem formalFunctions_degreeZero_dictionary {X Y : Scheme.{u}} (f : X ⟶ Y) (
               ((Scheme.Modules.pushforward f).obj
                 (SheafOfModules.unit X.ringCatSheaf)).val.presheaf V y hy t))) =
               (formalFibreι f y n).appLE (f ⁻¹ᵁ V) ⊤ hV t := by
-  sorry
+  obtain ⟨a, _⟩ := formalFunctions_degreeZero_stalkIso f y
+  obtain ⟨b, _⟩ := formalFunctions_degreeZero_systemIso f y
+  exact ⟨a, b, formalFunctions_degreeZero_compatibility f y a b⟩
 
 end AlgebraicGeometry
