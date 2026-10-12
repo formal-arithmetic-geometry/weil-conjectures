@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-representable-pullback-constant-evaluation",
+ "kind": "statement",
+ "title": "Representable pullback is constant from exhaustive evaluation",
+ "statement": "Let U be a nonempty connected scheme [def-weil-connected-scheme], A and P finite etale U-schemes [def-galois-categories], with A connected, and let s:Spec Ω -> U be an algebraically closed geometric point [def-galois-fibre-functor]. Fix a in A_s. If evaluation Hom_U(A,P) -> P_s at a is bijective, the set inverse image to A of the sheaf represented by P [def-weil-pbc-etale-sheaves] is constant [def-weil-pbc-constant-sheaf]. The fibre P_s may be empty.",
+ "stmt_deps": [
+  "def-weil-connected-scheme",
+  "def-galois-categories",
+  "def-galois-fibre-functor",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/pione.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SF (Galois covers of connected schemes); Tags 03P5 (constant sheaves), 0DV6 (pullback compatibility); read online at https://stacks.math.columbia.edu/tag/03SF, https://stacks.math.columbia.edu/tag/03P5, https://stacks.math.columbia.edu/tag/0DV6"
+ },
+ "proof": [
+  {
+   "text": "The finite-etale connectedness result makes Hom_U(A,P) finite. Let D be the disjoint union of copies of A indexed by this set; for each map i:A -> P the graph (i,id) gives a section into R=A times_U P. The coproduct of these sections is a morphism D -> R. On the fibre at a, decompose each point of D into its unique summand. Injectivity and surjectivity are precisely the evaluation bijection. The fibre functor for the connected scheme A reflects isomorphisms, so D -> R is an isomorphism.",
+   "uses": [
+    "lem-fet-galois-category",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the presheaf map from the constant presheaf ULift Hom_U(A,P) to the representable sheaf of D: the element i gives W.hom followed by the i-th coprojection. It is locally injective: unequal indices agreeing as sections force W empty by disjointness of summands, so the empty family covers W. It is locally surjective: pull back the summand inclusions along any section W -> D; these etale open immersions cover W and the section is constant on each. Factor through sheafification and apply Sheaf.isLocallyBijective_iff_isIso. Thus the sheaf of D is constant, and its isomorphism to R transports constancy.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-galois-set-sheaf-local-bijection-isomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply nonempty_inverseImage_representable_iso to identify the inverse image of the sheaf represented by P with the representable sheaf of R. Transport the constancy just proved along that isomorphism. All constructions allow an empty index set.",
+   "uses": [
+    "lem-galois-inverse-image-representable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fet-galois-category",
+  "lem-galois-inverse-image-representable",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SF (Galois covers of connected schemes); Tags 03P5 (constant sheaves), 0DV6 (pullback compatibility); read online at https://stacks.math.columbia.edu/tag/03SF, https://stacks.math.columbia.edu/tag/03P5, https://stacks.math.columbia.edu/tag/0DV6",
+  "note": "Explicit coproduct-of-graphs and locally bijective constant-presheaf proof; all steps closed in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The sheaf represented by a split finite etale cover is constant",
+   "results": "Unavailable: Internal Server Error. No verdict from this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale scheme becomes a constant sheaf after a cover whose sections enumerate every element of its fibre",
+   "results": "Eight results; generic constant-sheaf lemmas and etale site definitions, no matching representable evaluation comparison.",
+   "date": "2026-10-12",
+   "verdict": "No direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "isConstant.*evaluation|evaluation.*isConstant|constant.*uliftYoneda|uliftYoneda.*constant",
+   "results": "One generic constant-sheaf adjunction hit; no matching scheme evaluation comparison. Also searched source library: existing inverse-image representable comparison used, generic constant coproduct statement exists but explicit locally bijective argument closes without importing its module.",
+   "date": "2026-10-12",
+   "verdict": "No direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant",
+   "results": "Second reader: 12 hits, including isConstant_of_iso and isConstant_congr, used in the proof. No scheme evaluation criterion.",
+   "date": "2026-10-12",
+   "verdict": "No direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.FiniteSetMonodromyTorsor",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-set-monodromy-torsor",
+   "place": "representable pullback comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.RepresentablePullbackConstantOfEvaluation",
+  "file": "lean/Sheaf/ConstructibleSheaf/RepresentablePullbackConstantOfEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.representable_pullback_isConstant_of_evaluation_bijective",
+  "statement": "theorem representable_pullback_isConstant_of_evaluation_bijective {U : Scheme.{u}} [ConnectedSpace U] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ U) (A P : U.FiniteEtale) [ConnectedSpace A.obj.left] (a : (fiber s).obj A) (h : Function.Bijective (fun f : A ⟶ P ↦ (fiber s).map f a)) : ((etaleSetPullback A.obj.hom).obj (U.smallEtaleTopology.uliftYoneda.{u + 1}.obj P.obj)).IsConstant A.obj.left.smallEtaleTopology",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085235-L-12936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085235-L-12936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
