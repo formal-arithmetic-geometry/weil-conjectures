@@ -1,0 +1,24 @@
+## What changed
+Proved `AlgebraicGeometry.fpqc_local_on_base_criterion` directly in `Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion`, using finite affine refinement, the finite scheme coproduct, affine faithfully-flat descent, flat open base change, and Zariski locality. The existing signature, docstring, and public imports are unchanged. Updated the item's DAG proof, proof dependencies, and proof origin to this route.
+
+## Proved and sorry left
+`AlgebraicGeometry.fpqc_local_on_base_criterion`: proved, 1 of 1 original theorems. No sorry remains, and no theorem is split off. A scratch-copy `#print axioms` returns exactly `propext`, `Classical.choice`, and `Quot.sound`. The module compiles locally without warnings.
+
+## No longer needed
+Pruned old proof dependencies `lem-weil-pbc-open-preimage-fibre-product` and `lem-weil-pbc-open-immersion-iso-onto-image`: canonical pullback squares and direct open-cover locality avoid those explicit constructions. All other original dependencies remain represented by Mathlib declarations in the proof. No original import was removed.
+
+Removed the first worker's new proof imports `Sheaf.AlgebraicGeometry.AffineDescentCriterion` and `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc`. Removed the undelivered new module `AffineDescentCriterion.lean` and its malformed new node file `lem-weil-pbc-affine-faithfully-flat-descends-along-qc.json` (whose internal id erroneously named `lem-weil-pbc-flat-base-change-from-hflat`). Neither of its two sorry theorems is needed.
+
+## Where the brief, the DAG or earlier work was wrong
+The first worker's `stableUnderBaseChange_of_flat` is false: stability under flat base change does not imply arbitrary base-change stability. For example, the property that the target is flat over Spec Z is preserved by flat base change, but the identity of Spec Z loses it upon base change to Spec F_p. The proposed covering-family API requires arbitrary base-change stability, so this gap cannot be supplied as a legitimate split. The report also omitted this second sorry, and the new node's id, statement, and Lean declaration disagreed. Both proposed splits lacked the required complete docstring proofs.
+
+The direct finite affine refinement proof needs neither split. The original seven-step geometry is sound; Mathlib's cover and pullback APIs make its implementation short. In particular, refinement arrows and the arrows arising from restriction to an affine base are open immersions; we never infer arbitrary base-change stability from hflat.
+
+## Second reading by P2
+1. Compared the final delivered module against the repository with `diff -u`: only the original theorem's proof body changed. Every existing signature, definition, docstring, and public import is byte-for-byte unchanged. No statement-change record is necessary.
+2. Compiled the final module with lcompile.py, without errors or warnings. Inspected all delivered Lean for sorry, axiom, unsafe, opaque, implemented_by, and extern: none. A scratch copy's `#print axioms AlgebraicGeometry.fpqc_local_on_base_criterion` shows only propext, Classical.choice, and Quot.sound.
+3. Rejected and removed the false arbitrary-base-change lemma and the remaining affine-descent split, rather than accepting their sorries. No new statement survives, so no split statement requires a new node or search. Checked the direct argument on empty bases/covers: the finite coproduct and its affine instance include the empty family, and surjectivity is derived from the cover, not asserted. Index universe w is arbitrary; finiteness supplies Small in universe u for the coproduct.
+4. Read the upstream covering-sieve and covering-family descent proofs, and Mathlib's Fpqc, Cover.QuasiCompact, Sites.QuasiCompact, Morphisms.Basic, and pullback APIs. The shortest usable route is a direct finite affine refinement with QuasiCompactCover.exists_hom: the upstream covering-family API assumes the stronger arbitrary-base-change stability. Imports are exactly the original two. The No longer needed section names both pruned original dependencies. Inspected dag/units/sk-thm-p1.json realized: this criterion realizes no unit statement or step, and none of the unit's mandated nodes is bypassed.
+5. Replaced the incorrect first-worker DAG edits with a proof matching the final Lean: affine-cover reduction, finite affine coproduct, component pullback transport, and hdesc. proof_deps is precisely the union of the steps' uses. The two explicit open-subscheme/image lemmas are pruned. All statement and ownership fields are preserved. No new node remains.
+
+Changes in this reading: replaced the first worker's proof with a complete proof; removed both split theorems, their module and malformed node; corrected pruning, DAG metadata, and this report. No statement or definition changed.

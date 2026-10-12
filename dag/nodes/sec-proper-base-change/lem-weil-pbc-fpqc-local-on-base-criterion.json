@@ -35,117 +35,55 @@
  ],
  "proof": [
   {
-   "text": "*Setting and reduction to an affine open of the base.* Let $f:X\\to S$ and the fpqc covering $\\{g_i:S_i\\to S\\}_{i\\in I}$ [def-weil-pbc-fpqc-covering] be as in the statement, with $f_i:X\\times_SS_i\\to S_i$ the second projections of the fibre products [def-pc-fibre-product], all having $\\mathcal P$. The affine opens $U\\subseteq S$ cover $S$ [def-pc-scheme]. For such $U$ write $X_U=f^{-1}(U)$ (an open subscheme of $X$) and $f_U:X_U\\to U$ for the restriction of $f$. By condition (2), applied to the covering of $S$ by all its affine opens, it suffices to prove: *for every affine open $U\\subseteq S$, $f_U$ has $\\mathcal P$.* Steps 2-6 prove this for a fixed affine open $U$; step 7 concludes.",
+   "text": "Reduce f to the pullbacks over the affine open cover of S using IsZariskiLocalAtTarget.of_openCover. Pull back the original fpqc cover to each affine open. Cartesian pasting and cancellation identify each component with an open base change of the original component; IsZariskiLocalAtTarget.of_isPullback preserves P under that open restriction.",
    "uses": [
-    "def-weil-pbc-fpqc-covering",
-    "def-pc-fibre-product",
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407), proof ('follows almost immediately from the definition of a tau-covering, see Topologies, Definition 022B and Lemma 022E ... Details omitted'), the details written out"
-   }
-  },
-  {
-   "text": "*Finitely many affine opens of the members covering $U$ (Topologies 022E).* By the definition of an fpqc covering [def-weil-pbc-fpqc-covering], applied to the affine open $U$, there are $n\\ge0$, indices $i_1,\\dots,i_n\\in I$ and affine opens $V_j\\subseteq S_{i_j}$ ($j=1,\\dots,n$) with $\\bigcup_{j=1}^ng_{i_j}(V_j)=U$; in particular $g_{i_j}(V_j)\\subseteq U$. Let $e_j:V_j\\hookrightarrow S_{i_j}$ be the inclusion of the open subscheme and $h_j:V_j\\to U$ the morphism with $(U\\hookrightarrow S)\\circ h_j=g_{i_j}\\circ e_j$ (it exists because $g_{i_j}e_j$ has image in the open $U$, and an open subscheme $U\\subseteq S$ is the open subscheme $(U,\\mathcal O_S|_U)$, through which a morphism with image in $U$ factors uniquely [def-pc-scheme]). This is the refinement of Topologies, Lemma 022E, which the source proves 'directly from the definition', as here.",
-   "uses": [
-    "def-weil-pbc-fpqc-covering",
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies, Definition Tag 022B (topologies-definition-fpqc-covering, line 2888) and Lemma Tag 022E (topologies-lemma-fpqc-affine, line 3151, 'follows directly from the definition')"
-   }
-  },
-  {
-   "text": "*One faithfully flat morphism of affine schemes $h:U'\\to U$.* Let $U'=\\coprod_{j=1}^nV_j$ be the coproduct of schemes, with coprojections $\\iota_j:V_j\\to U'$, which are open immersions with pairwise disjoint images covering $U'$ [lem-weil-pbc-scheme-coproduct-family]; $U'$ is affine as a finite disjoint union of affine schemes (clause (4) of [lem-weil-pbc-affine-morphism-permanence]; for $n=0$, $U'=\\emptyset=\\operatorname{Spec}0$ and $U=\\emptyset$). Let $h:U'\\to U$ be the morphism with $h\\circ\\iota_j=h_j$ (universal property of the coproduct). (a) $h$ is surjective [def-weil-surjective-morphism]: the image of $h$ is $\\bigcup_jh_j(V_j)=\\bigcup_jg_{i_j}(V_j)=U$ by step 2. (b) $h$ is flat [def-weil-flat-morphism]: let $u\\in U'$, so $u=\\iota_j(v)$ for some $j$ and $v\\in V_j$. Since $\\iota_j$, $e_j$ and $U\\hookrightarrow S$ are open immersions [def-weil-open-immersion], they induce isomorphisms of local rings $\\mathcal O_{U',u}\\cong\\mathcal O_{V_j,v}$, $\\mathcal O_{V_j,v}\\cong\\mathcal O_{S_{i_j},e_j(v)}$ and $\\mathcal O_{U,h(u)}\\cong\\mathcal O_{S,h(u)}$, under which the local homomorphism $\\mathcal O_{U,h(u)}\\to\\mathcal O_{U',u}$ of $h$ becomes the local homomorphism $\\mathcal O_{S,g_{i_j}(e_j(v))}\\to\\mathcal O_{S_{i_j},e_j(v)}$ of $g_{i_j}$ (the local homomorphisms compose along $h\\iota_j=h_j$ and $(U\\hookrightarrow S)h_j=g_{i_j}e_j$). The latter is flat because $g_{i_j}$ is flat (every member of an fpqc covering is flat [def-weil-pbc-fpqc-covering]); so $h$ is flat at $u$. Thus $h:U'\\to U$ is a flat surjective morphism of affine schemes.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "def-weil-surjective-morphism",
-    "def-weil-flat-morphism",
-    "def-weil-open-immersion",
-    "def-weil-pbc-fpqc-covering"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Topologies, Definition Tag 022B (topologies-definition-fpqc-covering, line 2888) and Lemma Tag 022E (topologies-lemma-fpqc-affine, line 3151, 'follows directly from the definition')"
-   }
-  },
-  {
-   "text": "*The base change of $f_U$ to each $V_j$ has $\\mathcal P$.* Fix $j$ and write $i=i_j$. (a) The open immersion $e_j:V_j\\hookrightarrow S_i$ is flat [def-weil-flat-morphism]: its local homomorphisms $\\mathcal O_{S_i,e_j(v)}\\to\\mathcal O_{V_j,v}$ are isomorphisms, since an open subscheme has the local rings of the ambient scheme [def-pc-scheme], [def-weil-open-immersion]. (b) By condition (1) applied to $f_i$ (which has $\\mathcal P$) and the flat $e_j$, the second projection of the fibre product $(X\\times_SS_i)\\times_{S_i}V_j\\to V_j$ has $\\mathcal P$. (c) By [lem-weil-pbc-open-preimage-fibre-product] applied to $f_i$ and the open $V_j\\subseteq S_i$, the open subscheme $Y_j:=f_i^{-1}(V_j)\\subseteq X\\times_SS_i$ with the restriction $f_i|:Y_j\\to V_j$ is also a fibre product of $f_i$ and $e_j$; by uniqueness of fibre products up to unique isomorphism compatible with the projections [def-pc-fibre-product] and condition (0) (with $b=\\mathrm{id}_{V_j}$), $f_i|:Y_j\\to V_j$ has $\\mathcal P$. (d) The square of $f_i|$, $e_j$ sits on top of the cartesian square of $f$ and $g_i$ (projections $X\\times_SS_i\\to X$ and $f_i$); by [lem-weil-pbc-cartesian-square-pasting] the outer rectangle is cartesian: $Y_j$, with $Y_j\\to X$ and $f_i|$, is a fibre product of $f$ and $g_ie_j:V_j\\to S$.",
-   "uses": [
-    "def-weil-flat-morphism",
     "def-pc-scheme",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-open-preimage-fibre-product",
     "def-pc-fibre-product",
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-open-immersion",
     "lem-weil-pbc-cartesian-square-pasting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407), proof ('follows almost immediately from the definition of a tau-covering, see Topologies, Definition 022B and Lemma 022E ... Details omitted'), the details written out"
-   }
+   "elementary": false
   },
   {
-   "text": "*The base change of $f_U$ along $h$ has $\\mathcal P$.* Let $X'=X_U\\times_UU'$ be the fibre product of $f_U$ and $h$ [def-pc-fibre-product], with second projection $p:X'\\to U'$. Fix $j$ and let $W_j=\\iota_j(V_j)\\subseteq U'$, an open subset; by [lem-weil-pbc-open-immersion-iso-onto-image] there is an isomorphism $\\varphi_j:V_j\\to W_j$ with $(W_j\\hookrightarrow U')\\circ\\varphi_j=\\iota_j$. (a) By [lem-weil-pbc-open-preimage-fibre-product] (for $p$ and $W_j$), $p^{-1}(W_j)$ with the restriction $p|:p^{-1}(W_j)\\to W_j$ is a fibre product of $p$ and $W_j\\hookrightarrow U'$; pasted on the cartesian square of $f_U$ and $h$ it gives, by [lem-weil-pbc-cartesian-square-pasting], that $p^{-1}(W_j)$ with $p^{-1}(W_j)\\to X_U$ and $p|$ is a fibre product of $f_U$ and $h|_{W_j}:W_j\\to U$. (b) By [lem-weil-pbc-open-preimage-fibre-product] (for $f$ and $U$), $X_U$ with $X_U\\hookrightarrow X$ and $f_U$ is a fibre product of $f$ and $U\\hookrightarrow S$; pasting the square of (a) on top of it [lem-weil-pbc-cartesian-square-pasting], $p^{-1}(W_j)$ with $p^{-1}(W_j)\\to X$ and $p|$ is a fibre product of $f$ and $(U\\hookrightarrow S)\\circ h|_{W_j}:W_j\\to S$. (c) Precomposing the second projection with $\\varphi_j$ is an isomorphism of the data: $p^{-1}(W_j)$ with $p^{-1}(W_j)\\to X$ and $\\varphi_j^{-1}\\circ p|$ is a fibre product of $f$ and $(U\\hookrightarrow S)\\circ h\\circ\\iota_j=(U\\hookrightarrow S)\\circ h_j=g_ie_j$ (immediate from the universal property [def-pc-fibre-product], since $\\varphi_j$ is an isomorphism and $h|_{W_j}\\varphi_j=h\\iota_j=h_j$). (d) By step 4(d), $Y_j$ with $Y_j\\to X$ and $f_i|$ is another fibre product of $f$ and $g_ie_j$; by uniqueness of fibre products [def-pc-fibre-product] there is an isomorphism $a:Y_j\\to p^{-1}(W_j)$ with $\\varphi_j^{-1}\\circ p|\\circ a=f_i|$, i.e. $p|\\circ a=\\varphi_j\\circ f_i|$. By condition (0) (with $b=\\varphi_j$) and step 4(c), $p|:p^{-1}(W_j)\\to W_j$ has $\\mathcal P$. (e) The $W_j$, $j=1,\\dots,n$, cover $U'$ [lem-weil-pbc-scheme-coproduct-family], so by condition (2), $p:X'\\to U'$ has $\\mathcal P$.",
+   "text": "For an affine base T, QuasiCompactCover.exists_hom refines the pulled-back cover by a finite affine cover with open immersion refinement maps. Form p = Sigma.desc of this finite family. Its source is affine by the finite coproduct instance; p is flat by the component flatness instance and surjective by Surjective.sigmaDesc_of_union_range_eq_univ. Smallness follows from finiteness, so the coproduct exists in the scheme universe.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-weil-surjective-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply affine faithfully-flat descent hdesc to p. Check P on its base change using the coproduct open cover sigmaOpenCover. The refinement open immersions are flat, so hflat gives P for the pullback of each original component along its refinement map. Cartesian pasting (paste_horiz, of_right') identifies the component pullback with that iterated pullback; cancel_left_of_respectsIso and isoPullback_hom_snd transport P across the canonical isomorphism.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-weil-pbc-open-immersion-iso-onto-image",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-weil-pbc-scheme-coproduct-family"
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-flat-morphism",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-cartesian-square-pasting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407), proof ('follows almost immediately from the definition of a tau-covering, see Topologies, Definition 022B and Lemma 022E ... Details omitted'), the details written out"
-   }
-  },
-  {
-   "text": "*Descent along $h$.* $U$ and $U'$ are affine, $h:U'\\to U$ is flat and surjective (step 3), and the second projection $p:X_U\\times_UU'\\to U'$ of the fibre product of $f_U$ and $h$ has $\\mathcal P$ (step 5). By condition (3) (with $S=U$, $S'=U'$, $g=h$ and the morphism $f_U:X_U\\to U$), $f_U$ has $\\mathcal P$. (If the fibre product used in condition (3) is the chosen one and $X'$ another, condition (0) transports $\\mathcal P$ through the unique isomorphism over $U'$ [def-pc-fibre-product].)",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407), proof ('follows almost immediately from the definition of a tau-covering, see Topologies, Definition 022B and Lemma 022E ... Details omitted'), the details written out"
-   }
-  },
-  {
-   "text": "*Conclusion.* By steps 2-6, $f_U:f^{-1}(U)\\to U$ has $\\mathcal P$ for every affine open $U\\subseteq S$; the affine opens cover $S$ [def-pc-scheme], so by condition (2), as reduced to in step 1, $f$ has $\\mathcal P$.",
-   "uses": [
-    "def-pc-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Descent, Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407), proof ('follows almost immediately from the definition of a tau-covering, see Topologies, Definition 022B and Lemma 022E ... Details omitted'), the details written out"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-fpqc-covering",
-  "def-pc-fibre-product",
   "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-scheme-coproduct-family",
   "lem-weil-pbc-affine-morphism-permanence",
-  "def-weil-surjective-morphism",
   "def-weil-flat-morphism",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-open-immersion-iso-onto-image"
+  "def-weil-surjective-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Lemma Tag 02KP (lemma-descending-properties-morphisms, line 5407), tau = fpqc, with Topologies Definition 022B and Lemma 022E (topologies.tex lines 2888, 3151); the source omits the details ('Details omitted'), which steps 1-7 write out"
+  "place": "Descent Lemma Tag 02KP, with Topologies Tag 022E; finite affine refinement implemented by Mathlib QuasiCompactCover.exists_hom. Second reading by P2 closes the whole reduction directly."
  },
  "mathlib_searches": [
   {
@@ -251,5 +189,15 @@
   "group": "K1",
   "result": "fix",
   "note": "P:MorphismProperty Scheme.{u}; (0)+(2)=[IsZariskiLocalAtTarget P] (RespectsIso + Zariski descent; restriction clause implied by (0)+(1), open immersions flat); (1)=hflat Flat g, arbitrary T; (3)=hdesc IsAffine S,T, X arbitrary, Flat+Surjective g, P(pullback.snd f g)->P f; fpqc family Presieve.ofArrows S' g ∈ fpqcPrecoverage S, ι:Type w; H: ∀i P(pullback.snd f (g i)); concl P f; P=⊤ satisfies hyps (inferInstance IsZariskiLocalAtTarget ⊤); no statement change; report's stale first paragraph replaced"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T060748-L-2912790",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

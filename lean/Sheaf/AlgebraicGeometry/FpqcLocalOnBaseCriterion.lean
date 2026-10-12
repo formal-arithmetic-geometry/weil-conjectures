@@ -68,6 +68,42 @@ theorem fpqc_local_on_base_criterion
     {ι : Type w} {S' : ι → Scheme.{u}} (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (H : ∀ i, P (pullback.snd f (g i))) : P f := by
-  sorry
+  have affine_case {T X : Scheme.{u}} [IsAffine T]
+      (𝒰 : Scheme.Cover.{w} Scheme.fpqcPrecoverage T) (f : X ⟶ T)
+      (H : ∀ i, P (pullback.snd f (𝒰.f i))) : P f := by
+    obtain ⟨𝒱, φ, hfin, hopen⟩ := QuasiCompactCover.exists_hom 𝒰.forgetQc
+    have : Finite 𝒱.cover.I₀ := hfin
+    have : Small.{u} 𝒱.cover.I₀ := Countable.toSmall (α := 𝒱.cover.I₀)
+    let p : ∐ 𝒱.cover.X ⟶ T := Sigma.desc 𝒱.cover.f
+    have : ∀ j, Flat (𝒱.cover.f j) := 𝒱.map_prop
+    have : Flat p := inferInstance
+    have : Surjective p :=
+      Surjective.sigmaDesc_of_union_range_eq_univ 𝒱.cover.iUnion_range
+    have : IsAffine (∐ 𝒱.cover.X) := inferInstance
+    apply hdesc f p inferInstance inferInstance
+    rw [IsZariskiLocalAtTarget.iff_of_openCover (P := P) (sigmaOpenCover _)]
+    intro j
+    have hsq := (IsPullback.of_hasPullback (pullback.snd f p)
+      (Sigma.ι 𝒱.cover.X j)).paste_horiz (IsPullback.of_hasPullback f p)
+    have hj : Sigma.ι 𝒱.cover.X j ≫ p = 𝒱.cover.f j := Sigma.ι_desc _ _
+    rw [hj, ← φ.w₀ j] at hsq
+    have : IsOpenImmersion (φ.h₀ j) := hopen j
+    have hb := hflat (pullback.snd f (𝒰.f (φ.s₀ j))) (φ.h₀ j)
+      inferInstance (H (φ.s₀ j))
+    have hr := IsPullback.of_right' hsq (IsPullback.of_hasPullback f (𝒰.f (φ.s₀ j)))
+    rwa [← P.cancel_left_of_respectsIso hr.isoPullback.hom,
+      hr.isoPullback_hom_snd] at hb
+  let 𝒰 : Scheme.Cover.{w} Scheme.fpqcPrecoverage S :=
+    { I₀ := ι, X := S', f := g, mem₀ := hg }
+  refine IsZariskiLocalAtTarget.of_openCover S.affineCover fun i ↦ ?_
+  apply affine_case (𝒰.pullback₁ (S.affineCover.f i))
+  intro j
+  have hsq := (IsPullback.of_hasPullback
+    (pullback.snd f (S.affineCover.f i))
+    (pullback.fst (S.affineCover.f i) (g j))).paste_horiz
+    (IsPullback.of_hasPullback f (S.affineCover.f i))
+  rw [pullback.condition] at hsq
+  exact IsZariskiLocalAtTarget.of_isPullback
+    (IsPullback.of_right' hsq (IsPullback.of_hasPullback f (g j))) (H j)
 
 end AlgebraicGeometry
