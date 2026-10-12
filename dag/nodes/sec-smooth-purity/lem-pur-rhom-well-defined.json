@@ -26,47 +26,22 @@
  ],
  "proof": [
   {
-   "text": "Fix an object $U$ of $\\mathcal C$ and $n\\in\\mathbf Z$. For any complexes $\\mathcal L^\\bullet,\\mathcal M^\\bullet$ let $\\mathcal L^\\bullet[-n]$ be the shift, $(\\mathcal L[-n])^p=\\mathcal L^{p-n}$, $d_{\\mathcal L[-n]}=(-1)^n d_{\\mathcal L}$. By the formula of [def-pur-hom-complex], $\\mathcal Hom^k(\\mathcal L^\\bullet[-n],\\mathcal M^\\bullet)=\\mathcal Hom^{k+n}(\\mathcal L^\\bullet,\\mathcal M^\\bullet)$ with literally the same differentials in degrees $k=-1,0$ (in degree $k$ both are $f\\mapsto d_{\\mathcal M}f-(-1)^{k+n}f\\,d_{\\mathcal L}$), so $H^n(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,\\mathcal M^\\bullet)))=H^0(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet[-n],\\mathcal M^\\bullet)))$, compatibly with pre- and postcomposition by morphisms of complexes. Restriction to $\\mathcal C/U$ is exact [lem-weil-pbc-site-restriction-exact], so it commutes with cohomology sheaves and $s|_U$, $t[-n]|_U$ are quasi-isomorphisms [def-pc-quasi-iso-modules]; hence $Q_U(s|_U)$ and $Q_U(t[-n]|_U)$ are isomorphisms in $D(\\mathcal O_U)$ [def-weil-abstract-derived-category]. By [lem-pur-rhom-into-kinjective-local], applied to $(\\mathcal L^\\bullet[-n],(\\mathcal I')^\\bullet)$ and to $((\\mathcal L')^\\bullet[-n],\\mathcal I^\\bullet)$ (both targets K-injective), the map $f\\mapsto s\\circ f\\circ t$ on $H^n(\\Gamma(U,-))$ becomes, since $Q_U$ is a functor and the bijection is $[f]\\mapsto Q_U(f)$, the map $\\varphi\\mapsto Q_U(s|_U)\\circ\\varphi\\circ Q_U(t[-n]|_U)$ between Hom sets of $D(\\mathcal O_U)$, which is bijective. So the displayed morphism induces isomorphisms $H^n(\\Gamma(U,\\mathcal Hom^\\bullet(\\mathcal L^\\bullet,(\\mathcal I')^\\bullet)))\\to H^n(\\Gamma(U,\\mathcal Hom^\\bullet((\\mathcal L')^\\bullet,\\mathcal I^\\bullet)))$ for all $U$ and $n$, compatible with restriction.",
+   "text": "Apply lem-pur-hom-complex-sections-quasi-iso to s and t over every site object. The resulting sectionwise quasi-isomorphism satisfies the hypothesis of the fully proved general criterion lem-pur-quasi-iso-of-sections, which gives the asserted sheaf quasi-isomorphism.",
    "uses": [
-    "lem-pur-rhom-into-kinjective-local",
-    "lem-weil-pbc-site-restriction-exact",
-    "def-pc-quasi-iso-modules",
-    "def-pur-hom-complex",
-    "def-weil-abstract-derived-category"
+    "lem-pur-hom-complex-sections-quasi-iso",
+    "lem-pur-quasi-iso-of-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A95, using Lemma 0A94"
-   }
-  },
-  {
-   "text": "For a complex $\\mathcal K^\\bullet$ of $\\mathcal O$-modules [def-pc-acyclic-complex-modules], the cohomology sheaf $H^n(\\mathcal K^\\bullet)$ is the sheafification of the presheaf $U\\mapsto H^n(\\Gamma(U,\\mathcal K^\\bullet))$: the presheaf kernel, image and quotient are formed sectionwise, and module sheafification is exact and the identity on sheaves [lem-weil-pbc-ringed-site-module-sheafification-exact], so it carries the presheaf cohomology to $\\operatorname{Ker}d^n/\\operatorname{Im}d^{n-1}$ computed in $\\Mod(\\mathcal O)$, naturally in $\\mathcal K^\\bullet$. By Step 1 the displayed morphism induces an isomorphism of these presheaves for both Hom complexes, hence an isomorphism of their sheafifications $H^n$ for every $n$; i.e. it is a quasi-isomorphism [def-pc-quasi-iso-modules].",
-   "uses": [
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "def-pc-acyclic-complex-modules",
-    "def-pc-quasi-iso-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0A95, using Lemma 0A94"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-rhom-into-kinjective-local",
-  "lem-weil-pbc-site-restriction-exact",
-  "def-pc-quasi-iso-modules",
-  "def-pur-hom-complex",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
-  "def-pc-acyclic-complex-modules"
+  "lem-pur-hom-complex-sections-quasi-iso",
+  "lem-pur-quasi-iso-of-sections"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemmas 0A94 and 0A95"
+  "place": "Lemma 0A95: sectionwise Hom comparison (split off) followed by exact sheafification (proved in Lean)"
  },
  "mathlib_searches": [
   {
@@ -136,5 +111,15 @@
   "group": "J1",
   "result": "fix",
   "note": "site C/J, comm ring sheaf R, four Z-graded module-sheaf complexes, s:I'->I with both K-injective (Mathlib IsKInjective) and QuasiIso, t:L'->L QuasiIso, map = homComplexFunctor (t.op).app I' >> (obj L').map s = f |-> s o f o t per homComplex_exists, conclusion QuasiIso; FIX: small-universe site -> large-site Category.{v}, CommRingCat/SheafOfModules.{max u v}"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T110258-L-613365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

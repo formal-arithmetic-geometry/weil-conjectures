@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
-import Sheaf.Paper.SiteRestrictionExact
+import Sheaf.Algebra.Homology.HomComplexSectionsQuasiIso
+import Sheaf.Algebra.Homology.QuasiIsoOfSections
 
 /-!
 # Quasi-isomorphisms of sheaf Hom complexes into K-injectives
@@ -62,6 +62,8 @@ theorem quasiIso_homComplex_map
     [QuasiIso s] [QuasiIso t] :
     QuasiIso (((homComplexFunctor (R := R)).map t.op).app I' ≫
       ((homComplexFunctor (R := R)).obj (op L')).map s) := by
-  sorry
+  apply quasiIso_of_sections
+  intro U
+  exact homComplex_sections_quasiIso s t U
 
 end CategoryTheory

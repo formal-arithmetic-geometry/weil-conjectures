@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-quasi-iso-of-sections",
+ "kind": "lemma",
+ "title": "Sectionwise quasi-isomorphisms are quasi-isomorphisms of sheaves",
+ "statement": "Let $\\mathcal C$ be a site, $R$ a sheaf of rings on it, and $f:K^\\bullet\\to L^\\bullet$ a map of cochain complexes of $R$-module sheaves [def-pc-cochain-complex-modules]. If $\\Gamma(U,f)$ is a quasi-isomorphism [def-pc-quasi-iso-modules] of complexes of abelian groups for every object $U$ of $\\mathcal C$, then $f$ is a quasi-isomorphism of module-sheaf complexes.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0A95 (sites-cohomology-lemma-RHom-well-defined), using Lemma 0A94"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Forget the module structures and view the complexes as complexes of presheaves of abelian groups. Mathlib HomologicalComplex.quasiIso_iff_evaluation makes the sectionwise hypothesis a quasi-isomorphism of those presheaf complexes. The mapHomologicalComplexCompIso identifies evaluation of a mapped complex with mapping by the section functor.",
+   "uses": [
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Exact abelian sheafification preserves this quasi-isomorphism. Its natural counit is an isomorphism on sheaves, so NatIso.mapHomologicalComplex and Arrow.isoOfNatIso identify the sheafified presheaf map with the original map of abelian-sheaf complexes.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exact module-to-abelian-sheaf forgetful functor reflects isomorphisms. Apply Mathlib HomologicalComplex.quasiIso_map_iff_of_preservesHomology to conclude that the original module-sheaf map is a quasi-isomorphism. The complete Lean proof uses the source library exactness instances for SheafOfModules.toSheaf.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-quasi-iso-modules",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 0A95, with the degreewise and exact-sheafification argument spelled out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism of complexes of sheaves of modules is a quasi-isomorphism if on sections over every object it is a quasi-isomorphism",
+   "results": "HTTP Internal Server Error; unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuasiIso, PresheafOfModules.evaluation",
+   "results": "Zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_iff_evaluation|quasiIso.*sections|sections.*quasiIso",
+   "results": "HomologicalComplex.quasiIso_iff_evaluation and ShortComplex.quasiIso_iff_evaluation in Mathlib/Algebra/Homology/Functor.lean; these are used in the complete proof.",
+   "date": "2026-10-12",
+   "verdict": "ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.QuasiIsoHomComplexMap",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "the internal Hom quasi-isomorphism clause, realized by lem-pur-quasi-iso-of-sections",
+   "via": [
+    "lem-pur-rhom-well-defined",
+    "def-pur-derived-internal-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.QuasiIsoOfSections",
+  "declaration": "CategoryTheory.quasiIso_of_sections",
+  "file": "lean/Sheaf/Algebra/Homology/QuasiIsoOfSections.lean",
+  "statement": "theorem quasiIso_of_sections {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{max u v}} {K L : CochainComplex (SheafOfModules.{max u v} R) ℤ} (f : K ⟶ L) (h : ∀ U : C, QuasiIso (((SheafOfModules.forget R ⋙ PresheafOfModules.evaluation R.obj (op U) ⋙ forget₂ (ModuleCat.{max u v} (R.obj.obj (op U))) AddCommGrpCat).mapHomologicalComplex (ComplexShape.up ℤ)).map f)) : QuasiIso f",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T110258-L-613365",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T110258-L-613365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
