@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-etale-cech-sectionwise-short-exact",
+ "kind": "statement",
+ "title": "Sectionwise short exactness gives a short exact sequence of etale Cech complexes",
+ "statement": "Let X be a scheme with small etale site [def-weil-pbc-etale-site], and let S be a short exact sequence of abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. Let U be an object, T any indexing type, and f_t : V_t -> U any family, not necessarily a covering. Suppose S.g is surjective on sections over every nonempty iterated fibre product V_(a_0) x_U ... x_U V_(a_p), for all p >= 0 and all tuples a : Fin(p+1) -> T. Then applying the Cech complex functor [def-weil-pbc-cech-complex] to S gives a short exact sequence of cochain complexes of abelian groups. No injectivity or Cech-acyclicity assumption is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9 (lemma-cech-vanish-collection), proof: short exact sequence of Cech complexes after sectionwise exactness"
+ },
+ "proof": [
+  {
+   "text": "The sheaf-to-presheaf functor and object evaluation preserve finite limits, so a short exact sheaf sequence evaluates to an exact sequence on the left at each intersection. Surjectivity is assumed, so each section sequence is short exact.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree p the Cech maps are products of section maps over all tuples. Products of short exact sequences of abelian groups are short exact, by choosing preimages componentwise; injectivity and exactness at the middle are likewise componentwise. Empty index products are zero and give a short exact zero sequence. Identify the categorical product via its universal property.",
+   "uses": [
+    "def-weil-pbc-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A sequence of cochain complexes is short exact if and only if it is degreewise short exact. Apply this criterion.",
+   "uses": [
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-cech-complex",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9, proof, step 5 of lem-weil-pbc-cech-vanishing-criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of sheaves surjective on sections at all intersections induces a short exact sequence of Cech complexes",
+   "results": "MayerVietorisSquare.shortComplex_shortExact concerns a different sheaf sequence; no match for this statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.map",
+   "results": "ShortExact.map requires preservation of left and right homology; the Cech functor is not exact on arbitrary sheaf sequences. The sectionwise hypothesis needs separate glue.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact_of_degreewise_shortExact|HasExactLimitsOfShape",
+   "results": "HomologicalComplex.shortExact_of_degreewise_shortExact and AddCommGrpCat.HasExactLimitsOfShape (Discrete J) supply ingredients, but no direct Cech result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of abelian sheaves that is surjective on all covering intersections induces a short exact sequence of Cech complexes",
+   "results": "UNAVAILABLE: LeanSearch returned Internal Server Error; Loogle, LeanFinder and grep searches were performed successfully.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-projective-line",
+   "place": "Step 5 of its split, via the Cech vanishing criterion (Stacks 03F9), Step 5: short exactness of Cech complexes",
+   "via": [
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-weil-pbc-injective-module-direct-image-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCechSectionwiseShortExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCechSectionwiseShortExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_cech_shortExact_of_sections",
+  "statement": "theorem etale_cech_shortExact_of_sections\n    (X : Scheme.{u})\n    (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (hS : S.ShortExact) (U : X.Etale) (T : Type (u + 1))\n    (V : T → X.Etale) (f : ∀ t, V t ⟶ U)\n    (hsurj : ∀ (p : ℕ) (a : Fin (p + 1) → T),\n      Function.Surjective (S.g.hom.app\n        (op (piObj (fun j : Fin (p + 1) ↦ Over.mk (f (a j)))).left))) :\n    (S.map (sheafToPresheaf _ _ ⋙\n      (Functor.whiskeringLeft _ _ _).obj (Over.forget U).op ⋙\n      cechComplexFunctor (fun t ↦ Over.mk (f t)))).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T033109-L-1443148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T033109-L-1443148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

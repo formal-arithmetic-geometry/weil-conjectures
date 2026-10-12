@@ -11,6 +11,12 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 
+import Mathlib.Algebra.Homology.HomologySequence
+import Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1
+import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import Sheaf.AlgebraicGeometry.EtaleCechSectionwiseShortExact
+
 /-!
 # The étale Čech vanishing criterion
 
@@ -90,6 +96,71 @@ theorem isZero_rightDerived_etale_of_cech_vanishing
       IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
         (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
           (op U)).rightDerived p).obj F) := by
-  sorry
+  let P (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
+    ∀ (U : X.Etale) (I : Type (u + 1)) (V : I → X.Etale)
+      (f : ∀ i, V i ⟶ U), Cov U I V f → ∀ p : ℕ, 0 < p →
+        IsZero (((cechComplexFunctor fun i ↦ Over.mk (f i)).obj
+          ((Over.forget U).op ⋙ G.obj)).homology p)
+  have hsurj (S : ShortComplex
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (hS : S.ShortExact) (hG : P S.X₁) (U : X.Etale) (hU : U ∈ B) :
+      Function.Surjective (S.g.hom.app (op U)) :=
+    surjective_sections_of_cech_h1_vanishing X S hS U (Cov U)
+      (hcover U) (hcofinal U hU) (fun I V f h ↦ hG U I V f h 1 (by decide))
+  have hquot (S : ShortComplex
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
+      (hS : S.ShortExact) (h₁ : P S.X₁) (h₂ : P S.X₂) : P S.X₃ := by
+    intro U I V f hf p hp
+    let C := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+      (Functor.whiskeringLeft _ _ _).obj (Over.forget U).op ⋙
+      cechComplexFunctor (fun i ↦ Over.mk (f i))
+    have hC : (S.map C).ShortExact :=
+      etale_cech_shortExact_of_sections X S hS U I V f
+        (fun n a ↦ hsurj S hS h₁ _ ((hB U I V f hf).2.2 n a))
+    have h := hC.homology_exact₃ p (p + 1) (by simp)
+    exact h.isZero_X₂_iff.2
+      ⟨(h₂ U I V f hf p hp).eq_of_src _ _,
+        (h₁ U I V f hf (p + 1) (Nat.zero_lt_succ p)).eq_of_tgt _ _⟩
+  have hvan : ∀ q : ℕ, ∀ G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1},
+      P G → ∀ U : X.Etale, U ∈ B →
+        IsZero (((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+          (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj
+            (op U)).rightDerived (q + 1)).obj G) := by
+    intro q
+    induction q with
+    | zero =>
+      intro G hG U hU
+      let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+        (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op U)
+      let S := ShortComplex.mk (Injective.ι G) (cokernel.π (Injective.ι G))
+        (cokernel.condition _)
+      have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _)
+        inferInstance inferInstance
+      obtain ⟨δ, w₁, w₂, h₁, h₂⟩ := hS.exists_rightDerived_δ_exact E 0
+      have hepi : Epi (E.map S.g) :=
+        (AddCommGrpCat.epi_iff_surjective _).2 (hsurj S hS hG U hU)
+      have : Epi ((E.rightDerived 0).map S.g) := by
+        rw [← NatIso.naturality_2 E.rightDerivedZeroIsoSelf S.g]
+        infer_instance
+      exact h₂.isZero_X₂_iff.2 ⟨h₁.epi_f_iff.1 this,
+        (E.isZero_rightDerived_obj_injective_succ 0 S.X₂).eq_of_tgt _ _⟩
+    | succ q ih =>
+      intro G hG U hU
+      let E := sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+        (CategoryTheory.evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (op U)
+      let S := ShortComplex.mk (Injective.ι G) (cokernel.π (Injective.ι G))
+        (cokernel.condition _)
+      have hS : S.ShortExact := .mk' (ShortComplex.exact_cokernel _)
+        inferInstance inferInstance
+      have hI : P S.X₂ := by
+        intro W I V f hf p hp
+        exact injective_sheaf_cech_acyclic X S.X₂ W I V f (hcover W I V f hf) p hp
+      obtain ⟨δ, w₁, w₂, _, h₂⟩ := hS.exists_rightDerived_δ_exact E (q + 1)
+      exact h₂.isZero_X₂_iff.2
+        ⟨(ih S.X₃ (hquot S hS hG hI) U hU).eq_of_src _ _,
+          (E.isZero_rightDerived_obj_injective_succ (q + 1) S.X₂).eq_of_tgt _ _⟩
+  intro U hU p hp
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hp)
+  exact hvan q F hcech U hU
 
 end AlgebraicGeometry.Scheme
