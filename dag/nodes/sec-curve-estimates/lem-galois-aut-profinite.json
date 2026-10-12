@@ -24,7 +24,7 @@
    }
   },
   {
-   "text": "Suppose $\\xi=(\\gamma_X)_X$ is outside the image. By step 1 there are $f:X\\to X'$ and $x\\in F(X)$ such that $F(f)(\\gamma_X(x))\\ne\\gamma_{X'}(F(f)(x))$. Let $U$ require a permutation of $F(X)$ to send $x$ to $\\gamma_X(x)$, and let $U'$ require a permutation of $F(X')$ to send $F(f)(x)$ to $\\gamma_{X'}(F(f)(x))$. Both are open in the pointwise convergence topology. The intersection of their inverse images under the two product projections is an open neighbourhood of $\\xi$ containing no natural automorphism, by the displayed inequality. This intersection works also when $X=X'$. Thus the image is closed.",
+   "text": "Express the evaluation image, using step 1, as the intersection over every arrow f : X → Y and every x ∈ F(X) of the equalizer of the two maps a ↦ F(f)(a_X(x)) and a ↦ a_Y(F(f)(x)). Both maps are continuous into the discrete Hausdorff space F(Y): component projection, permutation evaluation at a fixed point, and any map between discrete spaces are continuous. Each equalizer is closed by isClosed_eq, and their intersection is closed by isClosed_iInter. Together with the induced topology and the injectivity from step 1 this gives an IsClosedEmbedding. This equalizer formulation also covers X = Y without separating the two projections.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -33,7 +33,7 @@
    }
   },
   {
-   "text": "If every $F(X)$ is finite, its pointwise convergence topology on $\\operatorname{Aut}(F(X))$ is discrete: requiring agreement on all elements specifies one permutation. Apply [lem-galois-closed-subgroup-product-finite-groups] to the closed subgroup established in step 2, with $G_X=\\operatorname{Aut}(F(X))$. Its subspace topology is the stipulated topology on $\\operatorname{Aut}(F)$, so this group is profinite.",
+   "text": "For finite fibres, the function space F(X) → F(X) is finite and discrete. The injective hom-component map from Aut(F(X)) into this function space induces the stipulated pointwise topology, hence its source is finite and discrete as well. The product of these groups is compact, Hausdorff, totally disconnected and a topological group, as in lem-galois-closed-subgroup-product-finite-groups. Transfer compactness via IsClosedEmbedding.compactSpace, Hausdorffness via T2Space.of_injective_continuous, and total disconnectedness via IsEmbedding.isTotallyDisconnected_range. Transfer continuous multiplication and inversion via IsInducing.continuousMul and IsInducing.continuousInv applied to the evaluation monoid homomorphism. This yields all four asserted structures on Aut(F).",
    "uses": [
     "lem-galois-closed-subgroup-product-finite-groups"
    ],
@@ -50,7 +50,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0BMR, label lemma-aut-inverse-limit, proof"
+  "place": "Tag 0BMR, lemma-aut-inverse-limit; equalizer formulation adapted from Mathlib.CategoryTheory.Galois.Topology.autEmbedding_range_isClosed by N2"
  },
  "mathlib_searches": [
   {
@@ -134,5 +134,15 @@
   "group": "G1",
   "result": "fix",
   "note": "FIX: dropped import Mathlib.CategoryTheory.Galois.Topology (unused: file compiles without it, no Galois declaration used; H9). Matched: category with sets of objects/homs = {C : Type u} [Category.{v} C]; F : C ⥤ Type w arbitrary fibres; discrete F(X), pointwise (= compact-open on discrete) topology on Aut(F(X)) = fiberTopology induced along σ.hom into A → A; Aut(F) topology induced by evaluation into the Pi product; closed subgroup = IsClosedEmbedding of the MonoidHom evaluation; finite fibres -> compact, T2, totally disconnected, topological group (profinite). Edge cases: empty C, empty/infinite fibres, universes free. Mathlib's autEmbedding/profinite instances are for C ⥤ FintypeCat only; the node is Stacks 0BMR for arbitrary set-valued F, so no H4. Docstring carries the 3 proof steps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T060747-L-2911899",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
