@@ -10131,3 +10131,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/F3/Sheaf.RingTheory.MinimalComponentDimensionMaximumCore (stage 3; reviewer PASS; after a return; landing 20261012T234218-L-2124808 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/G3/Sheaf.Algebra.Homology.HomComplexSectionsCochains (stage 3; reviewer PASS; first push; landing 20261012T234218-L-2124954 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/H1/Sheaf.CategoryTheory.FilteredColimitFiniteIsoLift (stage 3; reviewer PASS; first push; landing 20261012T234219-L-2125059 (proof); batch 20261012T234214; modules 1; new nodes 0)
+- 23:42 L: merged deliver/H4/Sheaf.RingTheory.IsRegularOfDimensionDrop (stage 3; reviewer PASS; first push; landing 20261012T234219-L-2125163 (proof); batch 20261012T234214; modules 1; new nodes 0)
