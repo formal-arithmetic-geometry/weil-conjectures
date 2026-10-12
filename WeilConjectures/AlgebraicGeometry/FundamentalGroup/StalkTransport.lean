@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representation
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 
 /-!
 # Transport of stalks of finite locally constant sheaves along paths
@@ -13,11 +13,18 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representation
 Let `s, s'` be geometric points of a scheme `Y` and `τ : F_s ≅ F_{s'}` an isomorphism of the fibre
 functors on finite étale `Y`-schemes (a path from `s` to `s'`). Identifying the stalk of a finite
 locally constant sheaf of sets with the geometric fibre of the finite étale `Y`-scheme representing
-it, `τ` transports stalks at `s` to stalks at `s'`
-(`AlgebraicGeometry.Scheme.FiniteLocallyConstant.transport`), naturally in the sheaf. For finite
-locally constant sheaves of modules over a finite ring the transport is linear
-(`AlgebraicGeometry.Scheme.FiniteLocallyConstantModule.transportLinearEquiv`), since it is natural
-with respect to the addition `F ⊞ F ⟶ F` and the scalar multiplications.
+it (`AlgebraicGeometry.Scheme.FiniteLocallyConstant.stalkEquiv`), `τ` transports stalks at `s` to
+stalks at `s'` (`AlgebraicGeometry.Scheme.FiniteLocallyConstant.transport`), naturally in the
+sheaf. For finite locally constant sheaves of modules over a finite ring the transport, defined
+through the underlying sheaf of sets
+(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.stalkEquiv`), is linear
+(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.transportLinearEquiv`), since it is
+natural with respect to the addition `F ⊞ F ⟶ F` and the scalar multiplications.
+
+We also compute these identifications on germs: the stalk of the sheaf `Hom_Y(-, P)` represented
+by a finite étale `Y`-scheme `P` is identified with the geometric fibre `P_s`
+(`AlgebraicGeometry.Scheme.FiniteEtale.toFiniteLocallyConstantCompSheafFiberIso`) by sending the
+germ at `v` of a section `f : V ⟶ P` to `f(v)`.
 -/
 
 @[expose] public section
@@ -28,192 +35,229 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+section Germs
+
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+open GrothendieckTopology.Point in
+/-- The identification of the stalk of the sheaf `Hom_Y(-, P)` represented by a finite étale
+`Y`-scheme `P` with the geometric fibre `P_s` sends the germ at `v` of a section `f : V ⟶ P` to
+`f(v)`. -/
+lemma FiniteEtale.toSheafCompSheafFiberIso_hom_app_toPresheafFiber (P : Y.FiniteEtale)
+    (V : Y.Etale) (v : (pointSmallEtale s).fiber.obj V) (f : V ⟶ P.obj) :
+    (toSheafCompSheafFiberIso s).hom.app P
+        ((pointSmallEtale s).toPresheafFiber V v ((toSheaf Y).obj P).obj f) =
+      (pointSmallEtale s).fiber.map f v := by
+  have h := presheafFiber_map_shrinkYoneda_map_shrinkYonedaCompPresheafFiberIso_inv_app
+    (pointSmallEtale s) f v
+  have h' := ConcreteCategory.congr_hom
+    ((pointSmallEtale s).shrinkYonedaCompPresheafFiberIso.hom.naturality f)
+    ((pointSmallEtale s).shrinkYonedaCompPresheafFiberIso.inv.app V v)
+  simp only [toSheafCompSheafFiberIso, Iso.trans_hom, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, ConcreteCategory.comp_apply, ObjectProperty.ι_obj]
+  erw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply,
+    GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
+  simp only [Functor.comp_map, ConcreteCategory.comp_apply, Iso.inv_hom_id_app_apply] at h'
+  exact (congrArg (ConcreteCategory.hom
+    ((pointSmallEtale s).shrinkYonedaCompPresheafFiberIso.hom.app P.obj)) h.symm).trans h'
+
+/-- The identification of the stalk of the sheaf `Hom_Y(-, P)` (with values in `Type (u + 1)`)
+represented by a finite étale `Y`-scheme `P` with the geometric fibre `P_s` sends the germ at `v`
+of a section `f : V ⟶ P` to `f(v)`. -/
+lemma FiniteEtale.toFiniteLocallyConstantCompSheafFiberIso_hom_app_toPresheafFiber
+    (P : Y.FiniteEtale) (V : Y.Etale) (v : (pointSmallEtale s).fiber.obj V) (f : V ⟶ P.obj) :
+    (toFiniteLocallyConstantCompSheafFiberIso s).hom.app P
+        ((pointSmallEtale s).toPresheafFiber V v
+          ((toFiniteLocallyConstant Y).obj P).obj.obj (ULift.up f)) =
+      ULift.up ((pointSmallEtale s).fiber.map f v) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} uliftFunctor.{u + 1, u} := inferInstance
+  have h := ConcreteCategory.congr_hom
+    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app uliftFunctor.{u + 1} V v
+      ((toSheaf Y).obj P).obj) (ULift.up f : ULift.{u + 1} (V ⟶ P.obj))
+  rw [ConcreteCategory.comp_apply] at h
+  simp only [toFiniteLocallyConstantCompSheafFiberIso, Iso.trans_hom, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, ConcreteCategory.comp_apply]
+  change uliftFunctor.map _
+    ((((pointSmallEtale s).presheafFiberCompIso uliftFunctor.{u + 1}).hom.app
+      ((toSheaf Y).obj P).obj) _) = _
+  erw [h]
+  exact congrArg ULift.up (toSheafCompSheafFiberIso_hom_app_toPresheafFiber s P V v f)
+
+/-- The identification of the stalk of a finite locally constant sheaf of sets `S` with the
+geometric fibre of its representing finite étale `Y`-scheme, on germs. -/
+lemma FiniteLocallyConstant.stalkEquiv_toPresheafFiber (S : Y.FiniteLocallyConstant) (V : Y.Etale)
+    (v : (pointSmallEtale s).fiber.obj V) (z : S.obj.obj.obj (op V)) :
+    stalkEquiv s S ((pointSmallEtale s).toPresheafFiber V v S.obj.obj z) =
+      ULift.up ((pointSmallEtale s).fiber.map
+        (((FiniteEtale.equivalenceFiniteLocallyConstant Y).counitIso.inv.app S).hom.hom.app
+          (op V) z).down v) := by
+  change (FiniteEtale.toFiniteLocallyConstantCompSheafFiberIso s).hom.app _
+    ((pointSmallEtale s).presheafFiber.map
+      ((FiniteEtale.equivalenceFiniteLocallyConstant Y).counitIso.inv.app S).hom.hom
+      ((pointSmallEtale s).toPresheafFiber V v S.obj.obj z)) = _
+  erw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
+  exact FiniteEtale.toFiniteLocallyConstantCompSheafFiberIso_hom_app_toPresheafFiber s _ V v _
+
+/-- The identification of the stalk of a finite locally constant sheaf of `Λ`-modules with that of
+its underlying sheaf of sets, on germs. -/
+lemma IsFiniteLocallyConstantSheaf.stalkEquiv_toPresheafFiber {Λ : Type (u + 1)} [CommRing Λ]
+    [Finite Λ] {F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (hF : IsFiniteLocallyConstantSheaf F) (V : Y.Etale) (v : (pointSmallEtale s).fiber.obj V)
+    (z : F.obj.obj (op V)) :
+    hF.stalkEquiv s ((pointSmallEtale s).toPresheafFiber V v F.obj z) =
+      (pointSmallEtale s).toPresheafFiber V v hF.toFLC.obj.obj z := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have h := ConcreteCategory.congr_hom
+    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app V v F.obj
+      (F := CategoryTheory.forget (ModuleCat.{u + 1} Λ))) z
+  have h2 := ((((pointSmallEtale s).presheafFiberCompIso
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).app F.obj).toEquiv).symm_apply_apply
+    ((pointSmallEtale s).toPresheafFiber V v
+      (F.obj ⋙ CategoryTheory.forget (ModuleCat.{u + 1} Λ)) z)
+  simp only [Iso.toEquiv_fun, Iso.toEquiv_symm_fun, Iso.app_hom, Iso.app_inv] at h2
+  rw [ConcreteCategory.comp_apply] at h
+  erw [h] at h2
+  exact h2
+
+end Germs
+
+
+section Transport
+
 variable {Y : Scheme.{u}} {Ω Ω' : Type u} [Field Ω] [IsSepClosed Ω] [Field Ω'] [IsSepClosed Ω']
   (s : Spec (.of Ω) ⟶ Y) (s' : Spec (.of Ω') ⟶ Y)
   (τ : FiniteEtale.fiber s ≅ FiniteEtale.fiber s')
 
-namespace FiniteEtale
-
 /-- The bijection of geometric fibres given by an isomorphism of fibre functors. -/
-noncomputable def fiberEquivOfIso (P : Y.FiniteEtale) : (fiber s).obj P ≃ (fiber s').obj P where
+noncomputable def FiniteEtale.fiberEquivOfIso (P : Y.FiniteEtale) :
+    (fiber s).obj P ≃ (fiber s').obj P where
   toFun := τ.hom.app P
   invFun := τ.inv.app P
   left_inv x := ConcreteCategory.congr_hom (τ.hom_inv_id_app P) x
   right_inv x := ConcreteCategory.congr_hom (τ.inv_hom_id_app P) x
 
-end FiniteEtale
-
 namespace FiniteLocallyConstant
 
-open FiniteEtale
-
 /-- The transport of the stalks of a finite locally constant sheaf of sets along an isomorphism
-of fibre functors, through the geometric fibres of the representing finite étale scheme. -/
-noncomputable def transport (F : Y.FiniteLocallyConstant) : stalk s F ≃ stalk s' F :=
-  ((repStalkEquiv s F).trans (Equiv.ulift.trans ((fiberEquivOfIso s s' τ (rep Y F)).trans
-    Equiv.ulift.symm))).trans (repStalkEquiv s' F).symm
+of fibre functors, through the geometric fibres of the representing finite étale scheme
+(`AlgebraicGeometry.Scheme.FiniteLocallyConstant.stalkEquiv`). -/
+noncomputable def transport (S : Y.FiniteLocallyConstant) :
+    (pointSmallEtale s).sheafFiber.obj S.obj ≃ (pointSmallEtale s').sheafFiber.obj S.obj :=
+  ((stalkEquiv s S).trans (Equiv.ulift.trans
+    ((FiniteEtale.fiberEquivOfIso s s' τ _).trans Equiv.ulift.symm))).trans
+    (stalkEquiv s' S).symm
 
-lemma isoStalkEquiv_transport {F : Y.FiniteLocallyConstant} {P : Y.FiniteEtale}
-    (i : F ≅ (sectionsFunctor Y).obj P) (x : stalk s F) :
-    isoStalkEquiv s' i (transport s s' τ F x) =
-      ULift.up (τ.hom.app P (isoStalkEquiv s i x).down) := by
-  obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ i.hom)
-  have h : 𝟙 F ≫ i.hom = (repIso F).hom ≫ (sectionsFunctor Y).map φ := by
-    rw [hφ, Iso.hom_inv_id_assoc, Category.id_comp]
-  have key {Ω'' : Type u} [Field Ω''] [IsSepClosed Ω''] (s'' : Spec (.of Ω'') ⟶ Y)
-      (y : stalk s'' F) :
-      isoStalkEquiv s'' i y =
-        ULift.up ((FiniteEtale.fiber s'').map φ (repStalkEquiv s'' F y).down) := by
-    simpa [stalkMap_id] using isoStalkEquiv_stalkMap s'' (repIso F) i (𝟙 F) φ h y
-  rw [key, key]
-  unfold transport
-  simp only [Equiv.trans_apply, Equiv.apply_symm_apply]
-  exact congrArg ULift.up (ConcreteCategory.congr_hom (τ.hom.naturality φ) _).symm
+lemma stalkEquiv_transport (S : Y.FiniteLocallyConstant)
+    (x : (pointSmallEtale s).sheafFiber.obj S.obj) :
+    stalkEquiv s' S (transport s s' τ S x) =
+      ULift.up (τ.hom.app _ (stalkEquiv s S x).down) :=
+  Equiv.apply_symm_apply _ _
 
-lemma stalkMap_transport {F F' : Y.FiniteLocallyConstant} (f : F ⟶ F') (x : stalk s F) :
-    stalkMap s' f (transport s s' τ F x) = transport s s' τ F' (stalkMap s f x) := by
-  obtain ⟨φ, hφ⟩ := exists_sectionsFunctor_map_eq ((repIso F).inv ≫ f ≫ (repIso F').hom)
-  have h : f ≫ (repIso F').hom = (repIso F).hom ≫ (sectionsFunctor Y).map φ := by
-    rw [hφ, Iso.hom_inv_id_assoc]
-  apply (repStalkEquiv s' F').injective
-  rw [isoStalkEquiv_stalkMap s' _ _ f φ h, isoStalkEquiv_transport, isoStalkEquiv_transport,
-    isoStalkEquiv_stalkMap s _ _ f φ h]
-  exact congrArg ULift.up (ConcreteCategory.congr_hom (τ.hom.naturality φ) _).symm
+lemma sheafFiber_map_transport {S S' : Y.FiniteLocallyConstant} (f : S ⟶ S')
+    (x : (pointSmallEtale s).sheafFiber.obj S.obj) :
+    (pointSmallEtale s').sheafFiber.map f.hom (transport s s' τ S x) =
+      transport s s' τ S' ((pointSmallEtale s).sheafFiber.map f.hom x) := by
+  apply (stalkEquiv s' S').injective
+  rw [stalkEquiv_naturality, stalkEquiv_transport, stalkEquiv_transport, stalkEquiv_naturality]
+  exact congrArg ULift.up (ConcreteCategory.congr_hom (τ.hom.naturality _) _).symm
+
+lemma transport_symm_apply_transport (S : Y.FiniteLocallyConstant)
+    (x : (pointSmallEtale s).sheafFiber.obj S.obj) :
+    transport s' s τ.symm S (transport s s' τ S x) = x := by
+  apply (stalkEquiv s S).injective
+  rw [stalkEquiv_transport, stalkEquiv_transport]
+  exact congrArg ULift.up (ConcreteCategory.congr_hom (τ.hom_inv_id_app _) _)
 
 end FiniteLocallyConstant
 
-namespace FiniteLocallyConstantModule
+namespace IsFiniteLocallyConstantSheaf
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+  {F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstantSheaf F)
 
 /-- The transport of the stalks of a finite locally constant sheaf of `Λ`-modules along an
-isomorphism of fibre functors. -/
-noncomputable def transport (F : Y.FiniteLocallyConstantModule Λ) (x : stalk s F) : stalk s' F :=
-  forgetStalkEquiv s' F
-    (FiniteLocallyConstant.transport s s' τ _ ((forgetStalkEquiv s F).symm x))
+isomorphism of fibre functors, through the underlying finite locally constant sheaf of sets
+(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.toFLC`). -/
+noncomputable def transport
+    (x : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    ((pointSmallEtale s').sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F :=
+  (hF.stalkEquiv s').symm (FiniteLocallyConstant.transport s s' τ hF.toFLC (hF.stalkEquiv s x))
 
-lemma stalkMap_transport {F F' : Y.FiniteLocallyConstantModule Λ} (f : F ⟶ F') (x : stalk s F) :
-    stalkMap s' f (transport s s' τ F x) = transport s s' τ F' (stalkMap s f x) := by
-  simp only [transport]
-  rw [← forgetStalkEquiv_naturality, FiniteLocallyConstant.stalkMap_transport,
-    forgetStalkEquiv_symm_naturality]
+lemma stalkEquiv_transport
+    (x : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    hF.stalkEquiv s' (hF.transport s s' τ x) =
+      FiniteLocallyConstant.transport s s' τ hF.toFLC (hF.stalkEquiv s x) :=
+  Equiv.apply_symm_apply _ _
 
-lemma transport_symm_transport (F : Y.FiniteLocallyConstantModule Λ) (x : stalk s F) :
-    transport s' s τ.symm F (transport s s' τ F x) = x := by
-  simp only [transport, Equiv.symm_apply_apply]
-  apply (forgetStalkEquiv s F).symm.injective
-  rw [Equiv.symm_apply_apply]
-  apply (FiniteLocallyConstant.repStalkEquiv s _).injective
-  rw [FiniteLocallyConstant.isoStalkEquiv_transport, FiniteLocallyConstant.isoStalkEquiv_transport]
-  exact congrArg ULift.up (ConcreteCategory.congr_hom (τ.hom_inv_id_app _) _)
+lemma sheafFiber_map_transport {F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (hF' : IsFiniteLocallyConstantSheaf F') (f : F ⟶ F')
+    (x : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    (pointSmallEtale s').sheafFiber.map f (hF.transport s s' τ x) =
+      hF'.transport s s' τ ((pointSmallEtale s).sheafFiber.map f x) := by
+  let f' : hF.toFLC ⟶ hF'.toFLC :=
+    ObjectProperty.homMk ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).map f)
+  apply (hF'.stalkEquiv s').injective
+  rw [← sheafFiber_map_stalkEquiv, stalkEquiv_transport, stalkEquiv_transport,
+    ← sheafFiber_map_stalkEquiv]
+  exact FiniteLocallyConstant.sheafFiber_map_transport s s' τ f' _
 
-lemma transport_add (F : Y.FiniteLocallyConstantModule Λ) (x y : stalk s F) :
-    transport s s' τ F (x + y) = transport s s' τ F x + transport s s' τ F y := by
-  have h₁ := (pointSmallEtale s).sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
-  have h₂ := (pointSmallEtale s').sheafFiber_additive (A := ModuleCat.{u + 1} Λ)
-  let fst : double F ⟶ F := ObjectProperty.homMk biprod.fst
-  let snd : double F ⟶ F := ObjectProperty.homMk biprod.snd
-  let inl : F ⟶ double F := ObjectProperty.homMk biprod.inl
-  let inr : F ⟶ double F := ObjectProperty.homMk biprod.inr
-  let add : double F ⟶ F := ObjectProperty.homMk (biprod.desc (𝟙 _) (𝟙 _))
-  have hdesc : (biprod.desc (𝟙 F.obj) (𝟙 F.obj)) = biprod.fst + biprod.snd := by
-    simp [biprod.desc_eq]
-  have hadd (w : stalk s (double F)) :
-      stalkMap s add w = stalkMap s fst w + stalkMap s snd w := by
-    change (pointSmallEtale s).sheafFiber.map (biprod.desc (𝟙 F.obj) (𝟙 F.obj)) w = _
-    rw [hdesc, Functor.map_add]
-    rfl
-  have hadd' (w : stalk s' (double F)) :
-      stalkMap s' add w = stalkMap s' fst w + stalkMap s' snd w := by
-    change (pointSmallEtale s').sheafFiber.map (biprod.desc (𝟙 F.obj) (𝟙 F.obj)) w = _
-    rw [hdesc, Functor.map_add]
-    rfl
-  have hcomp {A B C : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (a : A ⟶ B) (b : B ⟶ C)
-      (w) : (pointSmallEtale s).sheafFiber.map (a ≫ b) w =
-        (pointSmallEtale s).sheafFiber.map b ((pointSmallEtale s).sheafFiber.map a w) := by
-    rw [Functor.map_comp, ConcreteCategory.comp_apply]
-  have hid {A : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (w) :
-      (pointSmallEtale s).sheafFiber.map (𝟙 A) w = w := by
-    rw [CategoryTheory.Functor.map_id]
-    rfl
-  have hzero {A B : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (w) :
-      (pointSmallEtale s).sheafFiber.map (0 : A ⟶ B) w = 0 := by
-    rw [Functor.map_zero]
-    rfl
-  let z := stalkMap s inl x + stalkMap s inr y
-  have e₁ : stalkMap s fst (stalkMap s inl x) = x := by
-    change (pointSmallEtale s).sheafFiber.map (biprod.fst : F.obj ⊞ F.obj ⟶ F.obj)
-      ((pointSmallEtale s).sheafFiber.map (biprod.inl : F.obj ⟶ F.obj ⊞ F.obj) x) = x
-    rw [← hcomp, biprod.inl_fst, hid]
-  have e₂ : stalkMap s fst (stalkMap s inr y) = 0 := by
-    change (pointSmallEtale s).sheafFiber.map (biprod.fst : F.obj ⊞ F.obj ⟶ F.obj)
-      ((pointSmallEtale s).sheafFiber.map (biprod.inr : F.obj ⟶ F.obj ⊞ F.obj) y) = 0
-    rw [← hcomp, biprod.inr_fst, hzero]
-  have e₃ : stalkMap s snd (stalkMap s inl x) = 0 := by
-    change (pointSmallEtale s).sheafFiber.map (biprod.snd : F.obj ⊞ F.obj ⟶ F.obj)
-      ((pointSmallEtale s).sheafFiber.map (biprod.inl : F.obj ⟶ F.obj ⊞ F.obj) x) = 0
-    rw [← hcomp, biprod.inl_snd, hzero]
-  have e₄ : stalkMap s snd (stalkMap s inr y) = y := by
-    change (pointSmallEtale s).sheafFiber.map (biprod.snd : F.obj ⊞ F.obj ⟶ F.obj)
-      ((pointSmallEtale s).sheafFiber.map (biprod.inr : F.obj ⟶ F.obj ⊞ F.obj) y) = y
-    rw [← hcomp, biprod.inr_snd, hid]
-  have hfst : stalkMap s fst z = x := by
-    simp only [z, map_add, e₁, e₂, add_zero]
-  have hsnd : stalkMap s snd z = y := by
-    simp only [z, map_add, e₃, e₄, zero_add]
-  rw [← hfst, ← hsnd, ← hadd, ← stalkMap_transport, hadd', stalkMap_transport,
-    stalkMap_transport]
+lemma transport_symm_apply_transport
+    (x : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    hF.transport s' s τ.symm (hF.transport s s' τ x) = x := by
+  apply (hF.stalkEquiv s).injective
+  rw [stalkEquiv_transport, stalkEquiv_transport,
+    FiniteLocallyConstant.transport_symm_apply_transport]
 
-lemma transport_smul (F : Y.FiniteLocallyConstantModule Λ) (c : Λ) (x : stalk s F) :
-    transport s s' τ F (c • x) = c • transport s s' τ F x := by
-  let m : F ⟶ F := ObjectProperty.homMk (c • 𝟙 F.obj)
-  have hm {Ω'' : Type u} [Field Ω''] [IsSepClosed Ω''] (s'' : Spec (.of Ω'') ⟶ Y)
-      (w : stalk s'' F) : stalkMap s'' m w = c • w := by
-    change (pointSmallEtale s'').sheafFiber.map (c • 𝟙 F.obj) w = _
-    rw [GrothendieckTopology.Point.sheafFiber_map_smul, CategoryTheory.Functor.map_id]
-    rfl
-  rw [← hm s x, ← stalkMap_transport, hm]
+lemma transport_add (x y : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    hF.transport s s' τ (x + y) = hF.transport s s' τ x + hF.transport s s' τ y := by
+  have := hF
+  have hB : IsFiniteLocallyConstantSheaf (F ⊞ F) := IsFiniteLocallyConstantSheaf.biprod F F
+  let St := (pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  let St' := (pointSmallEtale s').sheafFiber (A := ModuleCat.{u + 1} Λ)
+  let z := St.map biprod.inl x + St.map biprod.inr y
+  have hfst : St.map biprod.fst z = x := St.map_biprod_fst_inl_add_inr x y
+  have hsnd : St.map biprod.snd z = y := St.map_biprod_snd_inl_add_inr x y
+  have h₁ : St.map (biprod.desc (𝟙 F) (𝟙 F)) z = x + y := by
+    rw [St.map_biprod_desc_id_id, hfst, hsnd]
+  have n₁ := sheafFiber_map_transport s s' τ hB hF (biprod.desc (𝟙 F) (𝟙 F)) z
+  have n₂ := sheafFiber_map_transport s s' τ hB hF biprod.fst z
+  have n₃ := sheafFiber_map_transport s s' τ hB hF biprod.snd z
+  rw [h₁] at n₁
+  rw [hfst] at n₂
+  rw [hsnd] at n₃
+  rw [← n₁, ← n₂, ← n₃]
+  exact St'.map_biprod_desc_id_id _
+
+lemma transport_smul (c : Λ)
+    (x : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    hF.transport s s' τ (c • x) = c • hF.transport s s' τ x := by
+  have n := sheafFiber_map_transport s s' τ hF hF (c • 𝟙 F) x
+  rw [sheafFiber_map_smul_id, sheafFiber_map_smul_id] at n
+  exact n.symm
 
 /-- The `Λ`-linear transport of the stalks of a finite locally constant sheaf of `Λ`-modules
 along an isomorphism of fibre functors. -/
-noncomputable def transportLinearEquiv (F : Y.FiniteLocallyConstantModule Λ) :
-    stalk s F ≃ₗ[Λ] stalk s' F where
-  toFun := transport s s' τ F
-  invFun := transport s' s τ.symm F
-  map_add' := transport_add s s' τ F
-  map_smul' := transport_smul s s' τ F
-  left_inv := transport_symm_transport s s' τ F
+noncomputable def transportLinearEquiv :
+    ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F ≃ₗ[Λ]
+      ((pointSmallEtale s').sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F where
+  toFun := hF.transport s s' τ
+  invFun := hF.transport s' s τ.symm
+  map_add' := hF.transport_add s s' τ
+  map_smul' := hF.transport_smul s s' τ
+  left_inv := hF.transport_symm_apply_transport s s' τ
   right_inv x := by
-    have := transport_symm_transport s' s τ.symm F x
-    rwa [Iso.symm_symm_eq] at this
+    simpa only [Iso.symm_symm_eq] using hF.transport_symm_apply_transport s' s τ.symm x
 
-lemma transportLinearEquiv_apply (F : Y.FiniteLocallyConstantModule Λ) (x : stalk s F) :
-    transportLinearEquiv s s' τ F x = transport s s' τ F x :=
+lemma transportLinearEquiv_apply
+    (x : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) :
+    hF.transportLinearEquiv s s' τ x = hF.transport s s' τ x :=
   rfl
 
-section Invariants
+end IsFiniteLocallyConstantSheaf
 
-variable (G : Type u) [Group G]
-  [∀ P, MulAction G ((FiniteEtale.fiber s).obj P)]
-  [PreGaloisCategory.IsNaturalSMul (FiniteEtale.fiber s) G]
-
-/-- The action on stalks fixes zero. -/
-lemma smul_stalk_zero (F : Y.FiniteLocallyConstantModule Λ) (g : G) :
-    smul s G g (0 : stalk s F) = 0 := by
-  have := smul_smul s G g (0 : Λ) (0 : stalk s F)
-  rwa [zero_smul, zero_smul] at this
-
-/-- The invariants of a subgroup `H` of the fundamental group `G = π₁(Y, s)` in the stalk `F_s`
-of a finite locally constant sheaf of `Λ`-modules. -/
-def invariants (F : Y.FiniteLocallyConstantModule Λ) (H : Subgroup G) :
-    Submodule Λ (stalk s F) where
-  carrier := {x | ∀ g ∈ H, smul s G g x = x}
-  add_mem' {a b} ha hb g hg := by rw [smul_add, ha g hg, hb g hg]
-  zero_mem' g _ := smul_stalk_zero s G F g
-  smul_mem' c x hx g hg := by rw [smul_smul, hx g hg]
-
-end Invariants
-
-end FiniteLocallyConstantModule
+end Transport
 
 end AlgebraicGeometry.Scheme

@@ -179,10 +179,8 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyTrivial
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairing
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingMonodromy
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PicTorsionPairingTransport
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representation
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.RestrictionWeilGroup
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.SheafOfSections
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Specialization
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.StalkTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.TameInertia
@@ -2051,7 +2049,6 @@ public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DirectImageRestriction
 public import WeilConjectures.WeilSheaf.DirectImageStalk
 public import WeilConjectures.WeilSheaf.Dual
-public import WeilConjectures.WeilSheaf.EulerSeries
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.Fourier
 public import WeilConjectures.WeilSheaf.FourierTateTwist
