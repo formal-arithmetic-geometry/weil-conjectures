@@ -9468,3 +9468,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/V3/Sheaf.Algebra.Homology.RoosComparisonMaps (stage 3; reviewer PASS; first push; landing 20261012T203950-L-833027 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/X3/Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes (stage 3; reviewer PASS; first push; landing 20261012T203951-L-833142 (interface); batch 20261012T203936; modules 3; new nodes 2)
 - 20:43 L: returned deliver/F2/Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemConnecting (reviewer RETURN: (reviewer X-279ca, head 279ca93e2) E2 / review point 4: `cechComparisonSystem_comparison_connecting` remains a false `so)
+- 20:45 L: returned deliver/M2/Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel (reviewer RETURN: (the landing tools, head 951851b9b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
