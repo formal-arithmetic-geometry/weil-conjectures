@@ -73,6 +73,24 @@ class RulesTests(unittest.TestCase):
         (self.root / 'unexpected.txt').write_text('An unintended artifact.')
         self.assertIn('changed outside blueprint/: unexpected.txt', self.check()[1])
 
+    def test_metadata_cleanup_preserves_existing_reference_defects(self):
+        rel = 'blueprint/sec-a/sk-a/lem-a.md'
+        before = bp.fields({'id': 'lem-a', 'kind': 'lemma', 'tags': ['sheaf-dag'], 'uses': ['lem-absent']}) + 'Original statement.\n'
+        self.baseline[rel] = before
+        bp.write(self.root / '.blueprint-cut.json', json.dumps({'baseline': self.baseline, 'outside': {}}))
+        bp.write(self.root / rel, bp.clean_provenance(before))
+        self.assertEqual(self.check()[0], 0)
+        bp.write(self.root / rel, bp.clean_provenance(before).replace('Original statement.', 'Changed statement.'))
+        self.assertIn('missing dependency lem-absent', self.check()[1])
+
+    def test_metadata_cleanup_never_exempts_protected_layers(self):
+        rel = 'blueprint/sec-a/sk-a/_section.md'
+        before = bp.fields({'id': 'sk-a', 'kind': 'lemma', 'tags': ['sheaf-dag']}) + 'Original statement.\n'
+        self.baseline[rel] = before
+        bp.write(self.root / '.blueprint-cut.json', json.dumps({'baseline': self.baseline, 'outside': {}}))
+        bp.write(self.root / rel, bp.clean_provenance(before))
+        self.assertIn('protected layer changed', self.check()[1])
+
     def test_missing_dependency_fails(self):
         bp.write(self.root / 'blueprint/sec-a/sk-a/lem-b.md', bp.fields({'id': 'lem-b', 'kind': 'lemma', 'uses': ['lem-absent']}) + 'Statement.')
         self.assertIn('missing dependency lem-absent', self.check()[1])
@@ -130,6 +148,25 @@ class ForbiddenTests(unittest.TestCase):
     def test_process_and_network_text_still_fails(self):
         for text in ['delivery report', 'stage3', 'landing', 'host 192.168.0.1']:
             self.assertIsNotNone(bp.forbidden(text))
+
+
+class ProvenanceTests(unittest.TestCase):
+    def test_provenance_tag_removed_without_changing_statement(self):
+        text = bp.fields({'id': 'lem-a', 'kind': 'lemma', 'tags': ['sheaf-dag', 'stacks-0001']}) + '$k[X,T]$ is a ring.\n'
+        out = bp.clean_provenance(text)
+        self.assertNotIn('sheaf-dag', out)
+        self.assertIn('stacks-0001', out)
+        self.assertEqual(text.split('+++', 2)[2], out.split('+++', 2)[2])
+
+    def test_only_provenance_tag_line_is_removed(self):
+        text = bp.fields({'id': 'lem-a', 'kind': 'lemma', 'tags': ['sheaf-dag']}) + 'Statement.\n'
+        self.assertNotIn('tags =', bp.clean_provenance(text))
+        self.assertTrue(bp.clean_provenance(text).endswith('Statement.\n'))
+
+    def test_clean_metadata_is_idempotent(self):
+        text = bp.fields({'id': 'lem-a', 'kind': 'lemma', 'tags': ['stacks-0001']}) + 'Statement.\n'
+        self.assertEqual(bp.clean_provenance(text), text)
+        self.assertIsNotNone(bp.forbidden('tags = ["sheaf-dag"]'))
 
 
 if __name__ == '__main__':

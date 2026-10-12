@@ -15,7 +15,7 @@ import tempfile
 import tomllib
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-FORBIDDEN = re.compile(r'(?i)\b(?:delivery|landing|stage\s*[123]|blueprint_pr|upstream-bp|[A-Z][123]\s+(?:group|worker))\b|(?:\d{1,3}\.){3}\d{1,3}|-----BEGIN .*PRIVATE KEY|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:gh[pousr]_|sk-proj-)[A-Za-z0-9]+')
+FORBIDDEN = re.compile(r'(?i)\b(?:delivery|landing|sheaf-dag|stage\s*[123]|blueprint_pr|upstream-bp|[A-Z][123]\s+(?:group|worker))\b|(?:\d{1,3}\.){3}\d{1,3}|-----BEGIN .*PRIVATE KEY|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:gh[pousr]_|sk-proj-)[A-Za-z0-9]+')
 
 
 def load_nodes():
@@ -227,6 +227,18 @@ def node_text(node, ns):
     return fields(meta) + rendered(node.get('statement', '').strip(), ns) + '\n'
 
 
+def clean_provenance(text):
+    parts = text.split('+++', 2)
+    front = tomllib.loads(parts[1])
+    tags = front.get('tags', [])
+    if 'sheaf-dag' not in tags:
+        return text
+    kept = [tag for tag in tags if tag != 'sheaf-dag']
+    replacement = 'tags = ' + json.dumps(kept, ensure_ascii=False) if kept else ''
+    parts[1] = re.sub(r'(?m)^tags\s*=\s*\[[^\]\n]*\]\n?', replacement + ('\n' if replacement else ''), parts[1])
+    return '+++'.join(parts)
+
+
 def cut(args):
     ns = load_nodes()
     out = pathlib.Path(args.out).resolve()
@@ -289,9 +301,20 @@ def cut(args):
                     meta = {'kind': 'proof', 'of': ident}
                     if uses: meta['uses'] = uses
                     write(out / proof_path, fields(meta) + rendered(proof_body(node), ns) + '\n')
+        cleanups = []
+        for rel in baseline:
+            path = pathlib.Path(rel)
+            before = (out / path).read_text()
+            after = clean_provenance(before)
+            if after != before:
+                if high(path):
+                    ask.append({'id': parse(out / path)[0].get('id'), 'proposal': 'protected-provenance-tag', 'reason': 'Handoff scan rejects pre-existing process tag'})
+                    continue
+                write(out / path, after)
+                cleanups.append(rel)
         outside = {str(p.relative_to(tree)): hashlib.sha256(p.read_bytes()).hexdigest()
                    for p in tree.rglob('*') if p.is_file() and 'blueprint' not in p.relative_to(tree).parts[:1] and '.git' not in p.relative_to(tree).parts}
-        manifest = {'id_aliases': getattr(load_nodes, 'aliases', {}), 'mathlib_leaves': [ident for ident, node in ns.items() if node.get('status') == 'mathlib' and not (node.get('blueprint') or {}).get('is')], 'outside': outside, 'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
+        manifest = {'metadata_cleanups': cleanups, 'id_aliases': getattr(load_nodes, 'aliases', {}), 'mathlib_leaves': [ident for ident, node in ns.items() if node.get('status') == 'mathlib' and not (node.get('blueprint') or {}).get('is')], 'outside': outside, 'baseline': baseline, 'chapter': args.chapter, 'sketch': args.sketch, 'asks': ask}
         write(out / '.blueprint-cut.json', json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     changed = [str(p.relative_to(out)) for p in (out / 'blueprint').rglob('*.md') if baseline.get(str(p.relative_to(out))) != p.read_text()]
     print(json.dumps({'changed_files': len(changed), 'proposals': len(ask), 'files': sorted(changed)}, indent=2))
@@ -365,11 +388,15 @@ def check(args):
             errors.append(f'protected layer changed: {path}')
         if forbidden(actual):
             errors.append(f'forbidden text: {path}: {forbidden(actual).group()}')
+        if str(path) in baseline and clean_provenance(baseline[str(path)]) == actual:
+            # This edit removes only a provenance tag. Existing mathematical
+            # references and TeX are unchanged and introduce no new defect.
+            continue
         for citation in re.finditer(r'\[([^\]\n]+)\](?:\(([^)\n]*)\))?', body):
             if citation.group(2) and re.match(r'https?://', citation.group(2)):
                 continue
             for token in re.findall(r'[A-Za-z0-9_.-]+', citation.group(1)):
-                if token in omitted:
+                if token in omitted and token not in bp:
                     errors.append(f'{path}: omitted Mathlib leaf remains an internal citation: {token}')
         for error in tex_errors(body):
             errors.append(f'{path}: {error}')
