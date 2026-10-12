@@ -10,13 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
-import Sheaf.AlgebraicGeometry.DiagonalConormalDifferentials
-import Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure
-import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing
-import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
-import Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular
-import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
-
+import Sheaf.AlgebraicGeometry.SmoothProperDualizingTensorEvaluation
+import Sheaf.AlgebraicGeometry.ShiftedDeterminantDualEvaluation
 /-! # The dualizing complex of a smooth proper morphism
 
 Source: Stacks Project, Tag 0BRT, Lemma 48.15.7
@@ -81,6 +76,21 @@ theorem smoothProper_dualizing
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
           (Scheme.Modules.exteriorSheaf f.relativeDifferentials d))⟦(d : ℤ)⟧) := by
-  sorry
+  let A := (a.obj O).obj
+  let N := ((DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
+      (Scheme.Modules.exteriorSheaf
+        (SheafOfModules.homObj (R := X.sheaf) f.relativeDifferentials
+          (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧
+  let D := ((DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
+      (Scheme.Modules.exteriorSheaf f.relativeDifferentials d))⟦(d : ℤ)⟧
+  obtain ⟨e⟩ := smoothProper_dualizing_tensor_evaluation X S f d R comparison a adj O hO
+  have hfree := f.isFiniteLocallyFreeOfRank_relativeDifferentials d
+  obtain ⟨v⟩ := shiftedDeterminant_dual_evaluation X f.relativeDifferentials d hfree
+  exact ⟨(MonoidalCategory.rightUnitor A).symm ≪≫
+    MonoidalCategory.tensorIso (Iso.refl A) v.symm ≪≫
+    (MonoidalCategory.associator A N D).symm ≪≫
+    MonoidalCategory.tensorIso e (Iso.refl D) ≪≫ (MonoidalCategory.leftUnitor D)⟩
 
 end AlgebraicGeometry

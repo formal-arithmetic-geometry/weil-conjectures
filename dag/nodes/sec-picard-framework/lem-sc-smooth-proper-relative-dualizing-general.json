@@ -33,105 +33,35 @@
  ],
  "proof": [
   {
-   "text": "Since f is proper it is of finite type [def-weil-proper-morphism], so X is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; the projection \\operatorname{pr}_2:X\\times_S X\\to X is the base change of f, hence proper [lem-weil-pbc-proper-base-change] and of finite type, so X\\times_S X is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] again. Apply the Noetherian derived-direct-image right-adjoint statement [lem-pc-noetherian-derived-direct-image-right-adjoint] to f:X\\to S and to the diagonal \\Delta:X\\to X\\times_S X. It gives right adjoints a to Rf_* and c to R\\Delta_* on quasi-coherent derived categories.",
+   "text": "Apply [lem-sc-smooth-proper-dualizing-tensor-evaluation] to the specified R, comparison, a, adj, O and hO. With A=a(O) and N=(wedge^d Hom(Ω¹_{X/S},O_X))[-d], obtain e:A tensor N ≅ 1.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-proper-base-change",
-    "lem-pc-noetherian-derived-direct-image-right-adjoint"
+    "lem-sc-smooth-proper-dualizing-tensor-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tags 0A9E and 08DW"
-   }
+   "elementary": true
   },
   {
-   "text": "Because f is smooth of relative dimension d and has closed diagonal, the diagonal \\Delta is a Koszul-regular immersion of codimension d; in particular \\Delta is perfect, and it is proper because X,S are Noetherian.",
+   "text": "Relative differentials are finite locally free of rank d by [lem-sc-smooth-omega-finite-locally-free]. Apply [lem-sc-shifted-determinant-dual-evaluation] to M=Ω¹_{X/S}. With D=(wedge^d Ω¹_{X/S})[d], obtain v:N tensor D ≅ 1.",
    "uses": [
-    "lem-sc-smooth-proper-diagonal-koszul-regular"
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-sc-shifted-determinant-dual-evaluation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "Tags 067U and 068C"
-   }
+   "elementary": true
   },
   {
-   "text": "The morphism f is flat, being smooth [lem-pc-smooth-flat]. The counit/evaluation identity for the diagonal gives \\mathcal O_X = c(L\\operatorname{pr}_1^*a(\\mathcal O_S)) for the flat proper morphism f, by the canonical identity of Tag 0E2Q.",
-   "uses": [
-    "lem-pc-smooth-flat",
-    "lem-sc-smooth-proper-diagonal-pushforward-structure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0E2Q"
-   }
-  },
-  {
-   "text": "For the perfect proper immersion \\Delta, the projection formula identifies c(L\\operatorname{pr}_1^*K) with L\\Delta^*L\\operatorname{pr}_1^*K \\mathbin{\\otimes^L} c(\\mathcal O_{X\\times_S X}) for every quasi-coherent complex K, by Tag 0A9U.",
-   "uses": [
-    "lem-sc-smooth-proper-diagonal-tensor-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0A9U"
-   }
-  },
-  {
-   "text": "For a Koszul-regular immersion of codimension d, the diagonal dualizing object is c(\\mathcal O_{X\\times_S X}) = \\bigwedge^d N_\\Delta[-d], by Tag 0BR0.",
-   "uses": [
-    "lem-sc-smooth-proper-diagonal-koszul-dual"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BR0"
-   }
-  },
-  {
-   "text": "The conormal sheaf C_\\Delta of the diagonal is canonically C_\\Delta\\cong\\Omega^1_{X/S}, by Tag 08S2.",
-   "uses": [
-    "lem-sc-smooth-proper-diagonal-conormal-differentials"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 08S2"
-   }
-  },
-  {
-   "text": "Set K=\\mathcal O_S in the tensor formula. Using \\operatorname{pr}_1\\circ\\Delta=\\operatorname{id}_X and the Koszul-dual formula gives \\mathcal O_X=c(L\\operatorname{pr}_1^*a(\\mathcal O_S))\\cong a(\\mathcal O_S)\\mathbin{\\otimes^L}\\bigwedge^dN_\\Delta[-d]. By Step 6 and [lem-sc-smooth-omega-finite-locally-free], C_\\Delta\\cong\\Omega^1_{X/S} is locally free of constant rank d, hence so is its dual N_\\Delta, and \\bigwedge^dN_\\Delta is invertible; therefore cancellation yields a(\\mathcal O_S)\\cong(\\bigwedge^dN_\\Delta)^{-1}[d]. The normal sheaf is the dual of the conormal sheaf, so (\\bigwedge^dN_\\Delta)^{-1}\\cong\\bigwedge^dC_\\Delta; by Step 6 this is \\bigwedge^d\\Omega^1_{X/S}=\\Omega^d_{X/S}. Thus f^!\\mathcal O_S=a(\\mathcal O_S)\\cong\\Omega^d_{X/S}[d].",
-   "uses": [
-    "lem-sc-smooth-proper-diagonal-tensor-formula",
-    "lem-sc-smooth-proper-diagonal-koszul-dual",
-    "lem-sc-smooth-proper-diagonal-conormal-differentials",
-    "lem-sc-smooth-omega-finite-locally-free"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0BRT, conclusion of the proof"
-   }
+   "text": "Compose the inverse right unitor A ≅ A tensor 1, the tensor of id_A with v inverse, the inverse associator A tensor (N tensor D) ≅ (A tensor N) tensor D, the tensor of e with id_D, and the left unitor 1 tensor D ≅ D. The resulting isomorphism is A ≅ D, exactly the claimed conclusion.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-proper-base-change",
-  "lem-pc-noetherian-derived-direct-image-right-adjoint",
-  "lem-sc-smooth-proper-diagonal-koszul-regular",
-  "lem-pc-smooth-flat",
-  "lem-sc-smooth-proper-diagonal-pushforward-structure",
-  "lem-sc-smooth-proper-diagonal-tensor-formula",
-  "lem-sc-smooth-proper-diagonal-koszul-dual",
-  "lem-sc-smooth-proper-diagonal-conormal-differentials",
-  "lem-sc-smooth-omega-finite-locally-free"
+  "lem-sc-smooth-proper-dualizing-tensor-evaluation",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-sc-shifted-determinant-dual-evaluation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0BRT, Lemma 48.15.7"
+  "place": "Tag 0BRT (lemma-smooth-proper); diagonal evaluation and determinant inversion split off, cancellation implemented by monoidal associator and unitors"
  },
  "mathlib_searches": [
   {
@@ -220,5 +150,15 @@
   "reviewer": "R-srd",
   "group": "V1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T060758-L-2917863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

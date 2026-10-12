@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-shifted-determinant-dual-evaluation",
+ "kind": "statement",
+ "title": "Shifted determinant evaluation for a finite locally free sheaf",
+ "statement": "Let X be a scheme [def-pc-scheme], let M be a sheaf of O_X-modules, and let d≥0 be an integer. Assume M is finite locally free of constant rank d [def-amb-finite-locally-free-module]. Let M^dual=Hom_{O_X}(M,O_X) be its internal sheaf dual. In the derived category [def-pc-derived-category] with its recorded K-flat tensor [def-pc-scheme-derived-tensor-structure], the objects (\\bigwedge^d M^dual)[-d] and (\\bigwedge^d M)[d] have tensor product isomorphic to the derived unit O_X[0]. Here a sheaf inside the derived category means its single complex in degree zero and the exterior powers are sheafified sectionwise exterior powers [def-sc-sheaf-exterior-power].",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BRT (lemma-smooth-proper), final paragraph: determinant of the normal sheaf is invertible with inverse the conormal determinant"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-pc-derived-category",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-sc-sheaf-exterior-power"
+ ],
+ "proof": [
+  {
+   "text": "Trivialize M as O_X^d on a Zariski cover, using [def-amb-finite-locally-free-module]. The determinant pairing [lem-sc-exterior-power-dual-pairing] sends the top wedge of the dual basis paired with the top wedge of the basis to 1. Both top exterior powers are rank-one free on each open, so this pairing is an isomorphism there. The determinant formula makes it independent of a change of basis: the two factors scale by inverse determinants. The evaluation maps commute with restriction, hence induce a global isomorphism on the exterior-power sheaves [def-sc-sheaf-exterior-power]. In rank zero both generators are empty wedges and the map is multiplication O_X tensor O_X→O_X.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-sc-exterior-power-dual-pairing",
+    "def-sc-sheaf-exterior-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The determinant lines are locally free of rank one, hence flat: in each local trivialization tensoring with them is tensoring with the ring itself, so preserves exact sequences, and exactness is stalkwise. In the recorded K-flat construction [def-pc-scheme-derived-tensor-structure], single complexes of these flat modules are K-flat and their ordinary tensor computes the derived tensor. Thus the sheaf evaluation from Step 1 induces a derived isomorphism with the unit. Tensor compatibility with shifts follows by reindexing the total tensor complex; the two shifts -d and d sum to zero. Compose with the zero-shift isomorphism to obtain the assertion. Empty schemes and d=0 require no exception.",
+   "uses": [
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-sc-exterior-power-dual-pairing",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-scheme-derived-tensor-structure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BRT (lemma-smooth-proper), final paragraph: determinant of the normal sheaf is invertible with inverse the conormal determinant"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived tensor product of dual determinant and determinant of finite locally free sheaf is unit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of smooth proper derived pushforward tensor determinant normal sheaf is unit",
+   "results": "Sheaf pushforward adjunctions, including Scheme.Modules.instIsRightAdjointPushforward; none addresses the derived diagonal determinant evaluation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "top exterior power of dual of finite locally free sheaf tensor top exterior power is structure sheaf, derived shifts cancel",
+   "results": "ModuleCat.exteriorPower.iso₀ and iso₁ and sheaf free-object identities; no derived sheaf determinant evaluation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "exteriorPower, Module.Dual",
+   "results": "unknown identifier 'exteriorPower'",
+   "date": "2026-10-12",
+   "verdict": "no usable result"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|exteriorSheaf.*[Ii]so|tensor.*[Ii]nvertible",
+   "results": "Mathlib results are unrelated uses of dualizing; direct source search finds exteriorPower.pairingDual in Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean. It is a ring-module pairing, not a shifted derived sheaf isomorphism.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothProperRelativeDualizing",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: identify the canonical sheaf with relative differentials on each smooth curve; Tag 0BRT (lemma-smooth-proper), final paragraph: determinant of the normal sheaf is invertible with inverse the conormal determinant",
+   "via": [
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ShiftedDeterminantDualEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ShiftedDeterminantDualEvaluation.lean",
+  "declaration": "AlgebraicGeometry.shiftedDeterminant_dual_evaluation",
+  "statement": "theorem shiftedDeterminant_dual_evaluation (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (M : X.Modules) (d : ℕ) (hfree : M.IsFiniteLocallyFreeOfRank d) : Nonempty ((((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorSheaf (SheafOfModules.homObj (R := X.sheaf) M (SheafOfModules.unit X.ringCatSheaf)) d))⟦-(d : ℤ)⟧ ⊗ ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj (Scheme.Modules.exteriorSheaf M d))⟦(d : ℤ)⟧) ≅ 𝟙_ (schemeDerivedCategory X))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T060758-L-2917863",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T060758-L-2917863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

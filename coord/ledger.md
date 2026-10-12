@@ -6433,3 +6433,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/U2/Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem (stage 3; reviewer PASS; first push; landing 20261012T060757-L-2917323 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:07 L: merged deliver/U2/Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic (stage 3; reviewer PASS; first push; landing 20261012T060757-L-2917450 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:07 L: merged deliver/U2/Sheaf.AlgebraicGeometry.ZariskiClosedImmersionConnectedRestriction (stage 3; reviewer PASS; first push; landing 20261012T060758-L-2917728 (interface); batch 20261012T060728; modules 2; new nodes 1)
+- 06:07 L: merged deliver/V1/Sheaf.AlgebraicGeometry.SmoothProperRelativeDualizing (stage 3; reviewer PASS; first push; landing 20261012T060758-L-2917863 (interface); batch 20261012T060728; modules 3; new nodes 2)
