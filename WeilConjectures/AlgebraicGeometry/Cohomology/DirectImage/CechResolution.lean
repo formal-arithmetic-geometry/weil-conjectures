@@ -33,7 +33,7 @@ degree `k` the module `∏_{y : Fin (k + 1) → ι} j_{U_y,*} (ℱ|_{U_y})`, whe
 
 universe u
 
-open CategoryTheory Limits Opposite
+open CategoryTheory Limits Opposite ZeroObject
 
 namespace AlgebraicGeometry.Scheme.Modules
 
@@ -268,6 +268,138 @@ lemma exactAt_sectionsAb_cechResolution {W : X.Opens} {j : ι} (hW : W ≤ U j) 
   rw [e]
   exact ConcreteCategory.bijective_of_isIso _
 
+/-- Restricting twice is restricting once. -/
+lemma presheaf_map_map_apply_eq (M : X.Modules) {A B C : X.Opensᵒᵖ} (i : A ⟶ B) (j : B ⟶ C)
+    (k : A ⟶ C) (x : M.presheaf.obj A) :
+    M.presheaf.map j (M.presheaf.map i x) = M.presheaf.map k x := by
+  rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  rfl
+
+lemma ι_image_preimage_le_self (V W : X.Opens) : V.ι ''ᵁ V.ι ⁻¹ᵁ W ≤ W := by
+  rw [ι_image_preimage]
+  exact inf_le_right
+
+/-- The augmentation of the Čech complex on sections, in explicit cochains: the restrictions. -/
+lemma sectionsCechResolutionIso_augmentation (W : X.Opens) (s : Γ(ℱ, W)) (y : Fin 1 → ι) :
+    (sectionsCechResolutionIso U ℱ W).hom.f 0 ((cechResolutionAugmentation U ℱ).app W s) y =
+      (ℱ.presheaf.map (homOfLE (ι_image_preimage_le_self (⨅ l, U (y l)) W)).op :
+        Γ(ℱ, W) ⟶ Γ(ℱ, (⨅ l, U (y l)).ι ''ᵁ (⨅ l, U (y l)).ι ⁻¹ᵁ W)) s := by
+  let G := sectionsModuleFunctor (X := X) W
+  let P := cechPresheaf ℱ
+  have h1 : (G.map (cechResolutionAugmentation U ℱ) ≫
+      (cechComplexFunctorMapIso U G P).hom.f 0) =
+      G.map ((restrictAdjunction (⊤ : X.Opens).ι).unit.app ℱ) ≫
+        cechAugmentation U isTerminalTop (P ⋙ G) := by
+    rw [cechResolutionAugmentation, G.map_comp, Category.assoc, map_cechAugmentation_comp]
+  have h2 := congrArg (fun φ ↦ TopCat.Presheaf.cechComplexFunctorXAddEquiv U (P ⋙ G) 0
+    (φ s) y) h1
+  dsimp only at h2
+  refine Eq.trans ?_ (h2.trans ?_)
+  · rfl
+  have h3 := ConcreteCategory.congr_hom (cechAugmentation_π U isTerminalTop (P ⋙ G) y)
+    (G.map ((restrictAdjunction (⊤ : X.Opens).ι).unit.app ℱ) s)
+  rw [TopCat.Presheaf.cechComplexFunctorXAddEquiv_apply, ConcreteCategory.comp_apply,
+    TopCat.Presheaf.cechComplexFunctorπ]
+  erw [h3]
+  have key : ∀ {A B : X.Opensᵒᵖ} (i₁ : op ⊤ ⟶ A) (i₂ : A ⟶ B)
+      (h : B.unop.ι ''ᵁ B.unop.ι ⁻¹ᵁ W ≤ W),
+      ((cechPresheaf ℱ).map i₂).app W (((cechPresheaf ℱ).map i₁).app W
+        (((restrictAdjunction (⊤ : X.Opens).ι).unit.app ℱ).app W s)) =
+      (ℱ.presheaf.map (homOfLE h).op : Γ(ℱ, W) ⟶ Γ(ℱ, B.unop.ι ''ᵁ B.unop.ι ⁻¹ᵁ W)) s := by
+    intro A B i₁ i₂ h
+    rw [cechPresheaf_map_app, cechPresheaf_map_app, restrictAdjunction_unit_app_app]
+    exact (congrArg _ (presheaf_map_map_apply_eq ℱ _ _
+      (homOfLE (ι_image_preimage_le_self A.unop W)).op s)).trans
+      (presheaf_map_map_apply_eq ℱ _ _ (homOfLE h).op s)
+  exact key (A := op (∏ᶜ fun l ↦ U (y l))) (isTerminalTop.from _).op
+    (homOfLE (TopCat.Presheaf.iInf_le_piObj U y)).op (ι_image_preimage_le_self _ W)
+
+lemma bijective_sectionsCechResolutionIso_hom_f (W : X.Opens) (k : ℕ) :
+    Function.Bijective ((sectionsCechResolutionIso U ℱ W).hom.f k) :=
+  ConcreteCategory.bijective_of_isIso
+    ((HomologicalComplex.eval _ _ k).mapIso (sectionsCechResolutionIso U ℱ W)).hom
+
+lemma sectionsCechResolutionIso_d (W : X.Opens) (k : ℕ) (x : Γ((cechResolution U ℱ).X k, W)) :
+    (sectionsCechResolutionIso U ℱ W).hom.f (k + 1) (((cechResolution U ℱ).d k (k + 1)).app W x) =
+      ((TopCat.Presheaf.cechComplex U).obj
+        (cechPresheaf ℱ ⋙ sectionsModuleFunctor W ⋙ forget₂ _ AddCommGrpCat.{u})).d k (k + 1)
+        ((sectionsCechResolutionIso U ℱ W).hom.f k x) :=
+  (ConcreteCategory.congr_hom ((sectionsCechResolutionIso U ℱ W).hom.comm k (k + 1)) x).symm
+
+/-- Over an open `W` contained in a member `U j` of the family, the augmented Čech complex is
+exact on sections in degree `0`, and the augmentation is injective on sections. -/
+lemma injective_and_exact_sectionsAb_cechResolution_zero {W : X.Opens} {j : ι} (hW : W ≤ U j) :
+    Function.Injective ((cechResolutionAugmentation U ℱ).app W) ∧
+      ((ShortComplex.mk _ _ (cechResolutionAugmentation_d U ℱ)).map (sectionsAb W)).Exact := by
+  set E := sectionsCechResolutionIso U ℱ W
+  let Q := cechPresheaf ℱ ⋙ sectionsModuleFunctor W ⋙ forget₂ _ AddCommGrpCat.{u}
+  have hQ {A B : X.Opens} (h : A ≤ B) (x : Q.obj (op B)) :
+      Q.map (homOfLE h).op x = (ℱ.presheaf.map (homOfLE (ι_image_preimage_mono h W)).op :
+        Γ(ℱ, B.ι ''ᵁ B.ι ⁻¹ᵁ W) ⟶ Γ(ℱ, A.ι ''ᵁ A.ι ⁻¹ᵁ W)) x :=
+    ConcreteCategory.congr_hom (cechPresheaf_map_app ℱ (homOfLE h).op W) x
+  -- the open `(⨅ l, U (y l)) ⊓ W` for the constant tuple `j`
+  have hj : (⨅ l, U ((fun _ : Fin 1 ↦ j) l)).ι ''ᵁ
+      (⨅ l, U ((fun _ : Fin 1 ↦ j) l)).ι ⁻¹ᵁ W = W := by
+    rw [ι_image_preimage, iInf_const, inf_eq_right.mpr hW]
+  have hinj : Function.Injective (ℱ.presheaf.map (homOfLE (ι_image_preimage_le_self
+      (⨅ l, U ((fun _ : Fin 1 ↦ j) l)) W)).op) := by
+    have := isIso_presheaf_map_of_le ℱ (homOfLE (ι_image_preimage_le_self
+      (⨅ l, U ((fun _ : Fin 1 ↦ j) l)) W)) hj.ge
+    exact (ConcreteCategory.bijective_of_isIso _).1
+  refine ⟨fun s t hst ↦ hinj ?_, ?_⟩
+  · have h := congrArg (fun x ↦ E.hom.f 0 x (fun _ ↦ j)) hst
+    simp only [E, sectionsCechResolutionIso_augmentation] at h
+    exact h
+  rw [ShortComplex.ab_exact_iff]
+  intro x hx
+  change ((cechResolution U ℱ).d 0 1).app W x = 0 at hx
+  have hc : ((TopCat.Presheaf.cechComplex U).obj Q).d 0 1 (E.hom.f 0 x) = 0 := by
+    have := sectionsCechResolutionIso_d (U := U) (ℱ := ℱ) W 0 x
+    rw [hx, map_zero] at this
+    exact this.symm
+  set c := E.hom.f 0 x with hc_def
+  let s : Γ(ℱ, W) := (ℱ.presheaf.map (homOfLE hj.ge).op :
+    Γ(ℱ, (⨅ l, U ((fun _ : Fin 1 ↦ j) l)).ι ''ᵁ (⨅ l, U ((fun _ : Fin 1 ↦ j) l)).ι ⁻¹ᵁ W) ⟶
+      Γ(ℱ, W)) (c (fun _ ↦ j))
+  refine ⟨s, (bijective_sectionsCechResolutionIso_hom_f (U := U) (ℱ := ℱ) W 0).1 ?_⟩
+  change E.hom.f 0 ((cechResolutionAugmentation U ℱ).app W s) = c
+  funext y
+  rw [sectionsCechResolutionIso_augmentation]
+  -- the cocycle condition at the tuple `(y 0, j)`
+  let z : Fin 2 → ι := Fin.cons (y 0) (fun _ ↦ j)
+  have hz0 : z ∘ (0 : Fin 2).succAbove = fun _ ↦ j := by
+    funext l
+    fin_cases l
+    rfl
+  have hz1 : z ∘ (1 : Fin 2).succAbove = y := by
+    funext l
+    fin_cases l
+    rfl
+  have h0 := congrFun hc z
+  rw [TopCat.Presheaf.cechComplex_d_apply, Fin.sum_univ_two] at h0
+  have hzj : ⨅ l, U (z l) ≤ ⨅ l, U ((fun _ : Fin 1 ↦ j) l) := le_iInf fun _ ↦ iInf_le _ 1
+  have hzy : ⨅ l, U (z l) ≤ ⨅ l, U (y l) := le_iInf fun l ↦ by
+    rw [show l = 0 from Fin.ext (Nat.lt_one_iff.mp l.isLt)]
+    exact iInf_le _ 0
+  rw [TopCat.Presheaf.map_homOfLE_apply_congr U Q c hz0 _ hzj,
+    TopCat.Presheaf.map_homOfLE_apply_congr U Q c hz1 _ hzy] at h0
+  simp only [Fin.val_zero, Fin.val_one, pow_zero, pow_one, one_smul, neg_smul] at h0
+  have h0' := sub_eq_zero.mp ((sub_eq_add_neg _ _).trans h0)
+  have hge : (⨅ l, U (y l)).ι ''ᵁ (⨅ l, U (y l)).ι ⁻¹ᵁ W ≤
+      (⨅ l, U (z l)).ι ''ᵁ (⨅ l, U (z l)).ι ⁻¹ᵁ W := by
+    rw [ι_image_preimage, ι_image_preimage]
+    refine le_inf (le_iInf fun l ↦ ?_) inf_le_right
+    refine Fin.cases ?_ (fun l ↦ ?_) l
+    · exact inf_le_left.trans (iInf_le _ 0)
+    · exact inf_le_right.trans hW
+  have := isIso_presheaf_map_of_le ℱ (homOfLE (ι_image_preimage_mono hzy W)) hge
+  apply (ConcreteCategory.bijective_of_isIso
+    (ℱ.presheaf.map (homOfLE (ι_image_preimage_mono hzy W)).op)).1
+  refine Eq.trans ?_ ((hQ hzj _).symm.trans (h0'.trans (hQ hzy (c y))))
+  exact (congrArg _ (presheaf_map_map_apply_eq ℱ _ _
+    (homOfLE ((ι_image_preimage_le_self _ W).trans hj.ge)).op _)).trans
+    (presheaf_map_map_apply_eq ℱ _ _ _ _)
+
 /-- The Čech complex of a cover is exact in positive degrees. -/
 theorem exactAt_cechResolution (hU : ⨆ i, U i = ⊤) (n : ℕ) :
     (cechResolution U ℱ).ExactAt (n + 1) := by
@@ -275,6 +407,38 @@ theorem exactAt_cechResolution (hU : ⨆ i, U i = ⊤) (n : ℕ) :
   obtain ⟨j, hj⟩ := TopologicalSpace.Opens.mem_iSup.mp (by rw [hU]; trivial : x ∈ ⨆ i, U i)
   exact ⟨V ⊓ U j, ⟨hxV, hj⟩, inf_le_left,
     exactAt_sectionsAb_cechResolution U ℱ inf_le_right n⟩
+
+
+lemma exists_le_of_iSup_eq_top (hU : ⨆ i, U i = ⊤) (x : X) (V : X.Opens) (hxV : x ∈ V) :
+    ∃ W : X.Opens, x ∈ W ∧ W ≤ V ∧ ∃ j, W ≤ U j := by
+  obtain ⟨j, hj⟩ := TopologicalSpace.Opens.mem_iSup.mp (by rw [hU]; trivial : x ∈ ⨆ i, U i)
+  exact ⟨V ⊓ U j, ⟨hxV, hj⟩, inf_le_left, j, inf_le_right⟩
+
+/-- **The Čech resolution.** For an open cover `U` of `X` and an `𝒪_X`-module `ℱ`, the augmented
+sheafified Čech complex `0 ⟶ ℱ ⟶ Č⁰(U, ℱ) ⟶ Č¹(U, ℱ) ⟶ ⋯` is exact: the augmentation
+`ℱ ⟶ Č(U, ℱ)` is a quasi-isomorphism from `ℱ` placed in degree `0`.
+
+Exactness is checked on the sections over the opens `W` contained in some member `U j` of the
+cover; there, inserting the index `j` contracts the Čech complex of sections.
+
+(blueprint: `lem-pc-cech-resolution`) -/
+theorem quasiIso_cechResolutionι (hU : ⨆ i, U i = ⊤) : QuasiIso (cechResolutionι U ℱ) := by
+  have hmono : Mono (cechResolutionAugmentation U ℱ) := by
+    refine (exact_of_exact_sectionsAb
+      (ShortComplex.mk (0 : 0 ⟶ ℱ) (cechResolutionAugmentation U ℱ) zero_comp)
+      fun x V hxV ↦ ?_).mono_g rfl
+    obtain ⟨W, hxW, hWV, j, hWj⟩ := exists_le_of_iSup_eq_top U hU x V hxV
+    refine ⟨W, hxW, hWV, ?_⟩
+    rw [ShortComplex.ab_exact_iff]
+    intro s hs
+    refine ⟨0, ?_⟩
+    refine (injective_and_exact_sectionsAb_cechResolution_zero U ℱ hWj).1 ?_
+    exact (map_zero _).trans hs.symm
+  exact quasiIso_fromSingle₀Equiv_symm _ _
+    (exact_of_exact_sectionsAb _ fun x V hxV ↦ by
+      obtain ⟨W, hxW, hWV, j, hWj⟩ := exists_le_of_iSup_eq_top U hU x V hxV
+      exact ⟨W, hxW, hWV, (injective_and_exact_sectionsAb_cechResolution_zero U ℱ hWj).2⟩)
+    (exactAt_cechResolution U ℱ hU)
 
 end Exactness
 
