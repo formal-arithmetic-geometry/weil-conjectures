@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocus
+import Sheaf.AlgebraicGeometry.HigherDirectImageDerivedModel
+import Sheaf.AlgebraicGeometry.DerivedPullbackSingleCohomology
 
 /-!
 # Local freeness of the higher direct images on the perfect locus
@@ -48,8 +50,25 @@ theorem nonempty_higherDirectImage_iso_pullback_of_isPullback (hℱ : ℱ.IsFlat
     [HasInjectiveResolutions X'.Modules] (sq : IsPullback g' f' f g)
     (hg : Set.range g.base ⊆ ℱ.perfectLocus f i) :
     Nonempty ((higherDirectImage f' i).obj ((Modules.pullback g').obj ℱ) ≅
-      (Modules.pullback g).obj ((higherDirectImage f i).obj ℱ)) :=
-  sorry
+      (Modules.pullback g).obj ((higherDirectImage f i).obj ℱ)) := by
+  let (Y : Scheme.{u}) :
+      HasDerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    HasDerivedCategory.standard _
+  obtain ⟨E, hneg, hcoh, hbc⟩ := exists_derived_model_higherDirectImage f ℱ hℱ
+  obtain ⟨e⟩ := nonempty_homology_derivedPullback_iso_of_locally_single g E i hneg (by
+    intro t ht
+    obtain ⟨U, htU, hU⟩ := exists_mem_isFiniteLocallyFreeInDegree_restrict f ℱ hℱ
+      (𝟙 T) (𝟙 X) f (IsPullback.of_horiz_isIso ⟨by simp⟩) t
+      (r := ℱ.hFiber f i t) ⟨hg ht, rfl⟩
+    refine ⟨U, htU, ℱ.hFiber f i t, ?_⟩
+    have ec q := (restrictFunctor U.ι).mapIso (hcoh q).some
+    have eid := (Modules.pullbackId X).app ℱ
+    have eh q := (restrictFunctor U.ι).mapIso ((higherDirectImage f q).mapIso eid)
+    refine ⟨fun q hq ↦ (hU.isZero q hq).of_iso (ec q ≪≫ (eh q).symm), ?_⟩
+    have := hU.isFiniteLocallyFreeOfRank
+    exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso ((eh i) ≪≫ (ec i).symm))
+  exact ⟨(hbc g g' f' sq i).some.symm ≪≫ e ≪≫
+    (Modules.pullback g).mapIso (hcoh i).some⟩
 
 /-- **Local freeness in degree `i` after base change to the perfect locus.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.isZero_higherDirectImage_of_isPullback`, if the image of `g`

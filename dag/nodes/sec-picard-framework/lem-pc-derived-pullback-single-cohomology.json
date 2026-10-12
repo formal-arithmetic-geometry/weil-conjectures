@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-derived-pullback-single-cohomology",
+ "kind": "statement",
+ "title": "Derived pullback cohomology where a connective object is locally free in one degree",
+ "statement": "Let g:T'→T be a morphism of schemes, E∈D(O_T) as in [def-pc-derived-category], and i a natural number. Suppose H^n(E)=0 for every integer n<0. Suppose every point t in the image of g has an open neighbourhood U and a natural r (allowed to depend on t) such that H^q(E)|U is zero for natural q≠i and H^i(E)|U is finite locally free of rank r, in the sense of [def-pc-invertible-in-degree-zero]. Then H^i(Lg^*E) is isomorphic to g^*H^i(E), for the ordinary pullback of [def-pc-module-pullback] and derived pullback of [def-pc-derived-pullback]. This is a statement about arbitrary connective derived objects and does not assume a proper morphism, a sheaf F, or a perfect-locus condition.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, cohomology-sheaf gluing paragraph and termwise pullback paragraph; also Stacks Tag 0B9S and its perfect-locus input"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-invertible-in-degree-zero"
+ ],
+ "proof": [
+  {
+   "text": "Take W to be the union of the open neighbourhoods in the hypothesis. Exactness of open restriction preserves the negative vanishing; the given natural-degree vanishing covers the other degrees. Standard truncations identify E|U with H^i(E)|U placed in degree i. Truncation maps are canonical, so these descriptions agree on overlaps through the cohomology sheaf and identify E|W with H^i(E)|W placed in degree i. This is the cohomology-sheaf gluing step in the perfect-locus proof, and does not require E perfect once the local cohomology hypothesis is given.",
+   "uses": [
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite local freeness makes H^i(E)|W flat. The shifted single complex therefore computes its derived pullback by ordinary termwise pullback. Since range(g) lies in W, factor g through W, use derived pullback composition and the ordinary pullback composition isomorphism, and take degree-i cohomology. The result is the global isomorphism H^i(Lg^*E)≅g^*H^i(E). The empty open, rank zero, and varying local ranks need no exclusions.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-category",
+  "lem-pc-flat-complex-derived-pullback",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, cohomology-sheaf gluing paragraph and termwise pullback paragraph; also Stacks Tag 0B9S and its perfect-locus input"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback commutes with cohomology for a complex concentrated in one degree with locally free cohomology",
+   "results": "Service unavailable: Internal Server Error. No verdict of absence inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a connective derived object whose cohomology on neighbourhoods of the image of g is locally free in degree i and zero in other degrees, H^i of derived pullback is isomorphic to ordinary pullback of H^i",
+   "results": "pullbackObjFreeIso, freeFunctorCompPullbackIso, pullback free-generator identities, and TopCat.Sheaf.pullbackIso; no derived-pullback cohomology criterion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "homologyFunctor, homologyFunctorFactors, isIso_iff, and the homology sequence; no derived scheme pullback cohomology statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*homology|homology.*derivedPullback|higherDirectImage.*derived",
+   "results": "No match in pinned Mathlib AlgebraicGeometry and Algebra/Homology. Source library PlusCompatibility has homologyRightDerivedFunctorObjSingleFunctorIso and connectivity for abstract right derived functors; a comparison with the scheme ringed-space construction and base change is still needed.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a derived inverse image of a shifted flat sheaf equals its tensor pullback",
+   "results": "Ordinary pullback composition/free-object lemmas only; no derived single-cohomology result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor.*homology|homology.*singleFunctor",
+   "results": "singleFunctorCompHomologyFunctorIso computes a single object; it supplies neither the local concentration identification nor the derived pullback comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "proof third paragraph: descriptions agree through H^i(E); fourth paragraph: pullback term by term",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackSingleCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackSingleCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_homology_derivedPullback_iso_of_locally_single",
+  "statement": "theorem nonempty_homology_derivedPullback_iso_of_locally_single [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {T T' : Scheme.{u}} (g : T' ⟶ T) (E : schemeDerivedCategory T) (i : ℕ) (hneg : ∀ n : ℤ, n < 0 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E)) (hloc : ∀ t ∈ Set.range g.base, ∃ U : T.Opens, t ∈ U ∧ ∃ r : ℕ, IsFiniteLocallyFreeInDegree (fun q : ℕ ↦ (Modules.restrictFunctor U.ι).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj E)) i r) : Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) i).obj ((derivedPullback g).obj E) ≅ (Modules.pullback g).obj ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) i).obj E))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T040020-L-1617116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T040020-L-1617116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

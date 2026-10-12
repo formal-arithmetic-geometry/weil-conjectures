@@ -5926,3 +5926,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:57 L: merged deliver/B3/WeilConjectures.AlgebraicGeometry.Morphisms.Slicing (stage 3; reviewer PASS; first push; landing 20261012T035647-L-1600045 (interface); modules 2; new nodes 2)
 - 03:58 L: merged deliver/C1/Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit (stage 3; reviewer PASS; first push; landing 20261012T035753-L-1605198 (interface); modules 2; new nodes 1)
 - 04:00 L: returned deliver/C1/WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (reviewer RETURN: (the landing tools, head 2722cdb69) the delivery did not land: NOT MERGED WeilConjectures.AlgebraicGeometry.Cohomology.E)
+- 04:01 L: merged deliver/C2/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank (stage 3; reviewer PASS; first push; landing 20261012T040020-L-1617116 (interface); modules 3; new nodes 2)

@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-higher-direct-image-derived-model",
+ "kind": "statement",
+ "title": "A global connective derived model computing higher direct images and their base changes",
+ "statement": "Let f:X→T be a proper, locally finitely presented, quasi-compact morphism of schemes and F a finitely presented O_X-module flat over T. Use the ordinary module pullback of [def-pc-module-pullback], the derived pullback of [def-pc-derived-pullback], and derived categories of [def-pc-derived-category]. Assume injective resolutions in X.Modules, and choose shared derived-category localization models for all schemes. There exists E∈D(O_T) with H^n(E)=0 for n<0, with H^q(E) isomorphic to R^q f_*F for every natural q, and with H^q(Lg^*E) isomorphic to R^q f'_*(g'^*F) for every cartesian square (g',f',f,g), every natural q, and injective resolutions on X'. No concentration or perfect-locus hypothesis is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0B91",
+  "place": "Lemma 36.30.4(2); injective-resolution comparison as in Tag 079V; blueprint lem-pc-flat-rf-open proof, first and final paragraphs"
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-derived-pullback",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Take E=Rf_*(F[0]) using the ringed-space derived direct image. Embed an injective resolution of F in nonnegative integer degrees. Bounded-below complexes of injectives are K-injective, so the derived pushforward is computed by applying f_* to it. The degree-q comparison is the right-derived-functor comparison (the existing abstract source-library homologyRightDerivedFunctorObjSingleFunctorIso is a reusable ingredient), and negative cohomology is zero. Transport between the equivalent Scheme.Modules and shared sheaf category constructions.",
+   "uses": [
+    "def-pc-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived arbitrary-base-change assertion for relatively flat finitely presented modules. Transport the standard categorical pullback along sq.isoPullback and the ordinary pullback composition comparisons. Taking degree-q cohomology and using the same injective-resolution comparison on X' gives the asserted isomorphism for the chosen square. These are global derived objects and maps, so no gluing of unrelated local trivializations is used.",
+   "uses": [
+    "lem-pc-rf-perfect-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-direct-image",
+  "lem-pc-rf-perfect-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0B91",
+  "place": "Lemma 36.30.4(2); injective-resolution comparison as in Tag 079V; blueprint lem-pc-flat-rf-open proof, first and final paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A global connective derived model of higher direct images of a finitely presented relatively flat module under a proper morphism computes arbitrary cartesian base changes",
+   "results": "Service unavailable: Internal Server Error. No verdict of absence inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of unbounded derived direct image of a module equals classical higher direct image and commutes with derived base change",
+   "results": "InjectiveResolution.isoRightDerivedObj and mapDerivedCategoryFactors provide parts of the comparison, not the scheme-level global model or the locally single-degree pullback criterion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor",
+   "results": "homologyFunctor, homologyFunctorFactors, isIso_iff, and the homology sequence; no derived scheme pullback cohomology statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback.*homology|homology.*derivedPullback|higherDirectImage.*derived",
+   "results": "No match in pinned Mathlib AlgebraicGeometry and Algebra/Homology. Source library PlusCompatibility has homologyRightDerivedFunctorObjSingleFunctorIso and connectivity for abstract right derived functors; a comparison with the scheme ringed-space construction and base change is still needed.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify higher direct image sheaves with homology of the total right derived pushforward of a sheaf in degree zero",
+   "results": "InjectiveResolution.isoRightDerivedObj and homologyFunctorFactors are ingredients, not the global scheme/base-change bridge.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.PerfectLocusOfRank",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-rf-open",
+   "place": "proof first paragraph: E=Rf_*F with arbitrary derived base change",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageDerivedModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageDerivedModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_derived_model_higherDirectImage",
+  "statement": "theorem exists_derived_model_higherDirectImage [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X T : Scheme.{u}} (f : X ⟶ T) (F : X.Modules) [IsProper f] [LocallyOfFinitePresentation f] [QuasiCompact f] [HasInjectiveResolutions X.Modules] [F.IsFinitePresentation] (hF : F.IsFlatOver f) : ∃ E : schemeDerivedCategory T, (∀ n : ℤ, n < 0 → IsZero ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).obj E)) ∧ (∀ q : ℕ, Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T.toRingedSpace)) q).obj E ≅ (higherDirectImage f q).obj F)) ∧ ∀ {T' X' : Scheme.{u}} (g : T' ⟶ T) (g' : X' ⟶ X) (f' : X' ⟶ T') [HasInjectiveResolutions X'.Modules], IsPullback g' f' f g → ∀ q : ℕ, Nonempty ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) q).obj ((derivedPullback g).obj E) ≅ (higherDirectImage f' q).obj ((Modules.pullback g').obj F))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T040020-L-1617116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T040020-L-1617116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
