@@ -1,0 +1,132 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, alternating column filtration"
+ },
+ "stmt_deps": [
+  "lem-pc-derived-total-filtration-stable",
+  "lem-pc-derived-total-filtration-even-quotient-map"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "id": "lem-pc-derived-total-filtration-even-quotient-bijective",
+ "title": "Even quotient component is degreewise bijective",
+ "statement": "For a commutative ring A, a bicomplex K of A-modules with zero positive columns, short complexes S_a and isomorphisms e_a from their middle complexes to column -a, assume every S_a is short exact. For every natural j and integer k, the explicit map evenQuotientComponent of [lem-pc-derived-total-filtration-even-quotient-map] from (S_j).X₁ in degree k+j to degree k of the cokernel of F_(2j) → F_(2j+1) is bijective.",
+ "proof_origin": {
+  "by": "worker",
+  "group": "X2",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 09KP"
+ },
+ "proof_deps": [
+  "lem-pc-derived-total-filtration-stable",
+  "lem-pc-derived-total-filtration-even-quotient-map"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelEven",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-filtration-cokernel-even",
+   "place": "proof, degreewise quotient identification"
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "even filtration quotient chain map",
+   "results": "service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "cokernel map chain complex",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "evenQuotientComponent",
+   "results": "no prior declaration",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient of direct sum by the sum of all other summands is isomorphic to one summand",
+   "results": "DirectSum.IsInternal projection formulas and ModuleCat.coprodIsoDirectSum; no theorem for these filtration submodules. Submodule.quotientEquivDirectSum requires finite rank and a principal ideal domain, absent here.",
+   "date": "2026-10-13",
+   "verdict": "tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.cokernel.π",
+   "results": "General cokernel maps and universal properties, not this explicit filtration quotient.",
+   "date": "2026-10-13",
+   "verdict": "tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*bijective|bijective.*cokernel",
+   "results": "No msearch hits. Local search of homology modules found filtration quotient users and the odd quotient, but no prior even component identification.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientBijective",
+  "file": "lean/Sheaf/Algebra/Homology/TotalFreeFiltrationEvenQuotientBijective.lean",
+  "declaration": "CochainComplex.TotalFreeFiltration.evenQuotientComponent_bijective",
+  "statement": "theorem evenQuotientComponent_bijective\n    (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :\n    Function.Bijective (evenQuotientComponent K S e h_positive j k)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "proof": [
+  {
+   "text": "Evaluate the cokernel and compare it with the quotient of the odd filtration submodule by the even one. Earlier lower pieces are contained in their full columns, so the odd term is the even term plus the range of lower j k; this gives surjectivity. Projection from the total-degree coproduct to column -j kills all earlier columns and retracts full j k. Short exactness makes the first arrow degreewise injective, so the lower range intersects the even term trivially and the induced quotient map is injective. Transport through the canonical cokernel comparison. This includes j=0 and zero modules.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable",
+    "lem-pc-derived-total-filtration-even-quotient-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "split_report": {
+  "summary": "Split the degreewise quotient identification into a chain-map statement and a bijectivity statement.",
+  "blueprint": [
+   "proof, degreewise identification and compatibility"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T165539-L-2942215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T165539-L-2942215",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

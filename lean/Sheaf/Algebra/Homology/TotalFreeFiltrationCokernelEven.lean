@@ -6,6 +6,8 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Algebra.Homology.TotalFreeFiltrationTerms
+import Sheaf.Algebra.Homology.TotalFreeFiltrationEvenQuotientBijective
+import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-!
 # Splittings and free quotients of the alternating column filtration
@@ -51,6 +53,21 @@ theorem cokernel_even
         (ComplexShape.up ℤ) (degree i)).obj (ModuleCat.of A A)))) :
     Nonempty (cokernel (step K S e h_positive (2 * j)) ≅
       ∐ (fun i : I ↦ (HomologicalComplex.single (ModuleCat.{u} A)
-        (ComplexShape.up ℤ) (degree i - (j : ℤ))).obj (ModuleCat.of A A))) := by sorry
+        (ComplexShape.up ℤ) (degree i - (j : ℤ))).obj (ModuleCat.of A A))) := by
+  classical
+  let q : (CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ)).obj
+      (S j).X₁ ⟶ cokernel (step K S e h_positive (2 * j)) :=
+    { f := evenQuotientComponent K S e h_positive j
+      comm' := evenQuotientComponent_comm K S e h_positive j }
+  have (k : ℤ) : IsIso (q.f k) :=
+    (ConcreteCategory.isIso_iff_bijective (q.f k)).mpr
+      (evenQuotientComponent_bijective K S e h_positive h_exact j k)
+  have : IsIso q := HomologicalComplex.Hom.isIso_of_components q
+  obtain ⟨b⟩ := h_endpoint
+  let F := CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ)
+  exact ⟨(asIso q).symm ≪≫ F.mapIso b ≪≫
+    PreservesCoproduct.iso F _ ≪≫ Sigma.mapIso (fun i ↦
+      ((CochainComplex.singleFunctors (ModuleCat.{u} A)).shiftIso
+        (j : ℤ) (degree i - (j : ℤ)) (degree i) (by omega)).app (ModuleCat.of A A))⟩
 
 end CochainComplex.TotalFreeFiltration
