@@ -8,8 +8,7 @@ module
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic
-import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModelAux
 
 /-!
 # Derived internal Hom from a bounded-above finite free model
@@ -54,6 +53,14 @@ theorem derivedInternalHom_of_boundedAbove_finiteFree
     Nonempty (DerivedCategory.Q.obj (CategoryTheory.homComplex (R := U.sheaf) E G) ≅
       (CategoryTheory.derivedInternalHom (Opens.grothendieckTopology U) U.sheaf).obj
         (op (DerivedCategory.Q.obj K), DerivedCategory.Q.obj G)) := by
-  sorry
+  obtain ⟨e⟩ := derivedInternalHom_of_boundedAbove_finiteFree_aux U E G
+    hEbounded hEfree hGbounded
+  let qf := DerivedCategory.Q.map f
+  have hqf : IsIso qf :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ f).mpr inferInstance
+  let eEK : DerivedCategory.Q.obj E ≅ DerivedCategory.Q.obj K := asIso qf
+  exact ⟨e ≪≫
+    (CategoryTheory.derivedInternalHom (Opens.grothendieckTopology U) U.sheaf).mapIso
+      (eEK.symm.op.prod (Iso.refl _))⟩
 
 end AlgebraicGeometry
