@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.LocalizedCohomologyMayerVietoris
+import Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluingAux
 
 /-! # Mayer--Vietoris gluing for localization of twisted cohomology
 
@@ -93,6 +94,28 @@ theorem cohomologyFractionPresentation_gluing
           (RingedSpace.openModuleCohomologyRestriction X.toRingedSpace p
             (homOfLE (inf_le_left : (U ⊔ V) ⊓ S ≤ U ⊔ V))).app
               (F ⊗ L.tensorPow n : X.Modules) ξ := by
-  sorry
+  classical
+  obtain ⟨S₀, hS₀, hIS, hUS, δ, hδ0, hδexact, hδnat, c, hc, a, b, d,
+      ha, hbU, hbV, hd, hinj, hexact, hca, hcb, hcd⟩ :=
+    AlgebraicGeometry.localizedCohomology_mayerVietoris X L F s U V hU hV
+  have hEq : S = S₀ := by
+    apply SetLike.ext
+    intro x
+    change x ∈ (S : Set X) ↔ x ∈ (S₀ : Set X)
+    rw [hS, hS₀]
+  subst S₀
+  have hbij : ∀ p : ℕ, Function.Bijective (c (U ⊔ V) p) := by
+    apply localized_middle_comparison_bijective X L s F S hS₀ U V hU hV c
+      h_locU h_locV
+    intro p
+    obtain ⟨e, he⟩ := h_locUV p
+    exact ⟨e, fun _ _ => trivial⟩
+  intro p
+  let e : CohomologyFractionPresentation L F s p (U ⊔ V) ≃+
+      (RingedSpace.openModuleCohomology X.toRingedSpace p ((U ⊔ V) ⊓ S)).obj F :=
+    AddEquiv.ofBijective (c (U ⊔ V) p) (hbij p)
+  refine ⟨e, ?_⟩
+  intro n ξ
+  simpa [e] using hc (U ⊔ V) p n ξ
 
 end AlgebraicGeometry.Scheme.Modules
