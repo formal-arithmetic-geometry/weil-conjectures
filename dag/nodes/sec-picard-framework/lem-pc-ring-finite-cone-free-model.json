@@ -12,32 +12,38 @@
  },
  "proof": [
   {
-   "text": "At n=b+1 choose F=0 and its zero map to C; it is zero above b and below n, induces cohomology isomorphisms for i>n and a surjection at n. Suppose such a stage F to C is constructed. In the cone long exact sequence, surjectivity at n and the isomorphisms above n show H^i(Cone(f))=0 for i>=n. The hypothesis therefore makes H^(n-1)(Cone(f)) finite.",
-   "uses": [
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Choose a finite list of generating cohomology classes of Cone(f) in degree n-1, and representatives (a_j,c_j) that are cone cycles. Their equations are d_F(a_j)=0 and f(a_j)+d_C(c_j)=0, with the mapping-cone signs. In degree n-1 adjoin a finite free module on this list, taking its differential to F^n to be the a_j and its map to C^(n-1) to be -c_j (or the equivalent signs in the chosen cone convention). The cycle equations prove d squared is zero and the chain-map equation. These terms fit in v because R is small. In the long exact sequence, the image of these classes covers the kernel of H^n(F) to H^n(C). Adjoining them makes H^n an isomorphism. To see surjectivity at n-1, represent a class in H^(n-1)(C) by a cycle c and express the cone class (0,c) as a linear combination of the chosen classes modulo a boundary. Since the original F is zero below n, the F component of that boundary is zero. Thus the same coefficients on the new basis yield a cycle in the new F^(n-1) whose image is c modulo a C-boundary. This proves surjectivity and completes the extension without changing the degrees at least n.",
-   "uses": [
-    "lem-sf-derived-homology-long-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use dependent choice on k in the natural numbers to choose these compatible extensions at n=b+1-k. Define the final degree-i module from the stage when degree i is first added, and its map and differential from the stage when all their components have stabilized; transport along the compatibility identifications. The differential identities hold because they hold at a common finite stage. Terms above b remain zero and every other term is finite free. For each i the three terms in degrees i-1,i,i+1 and the map to C have stabilized once the stage passes below i. That stage induces an isomorphism on H^i, so the final map does too. It is a quasi-isomorphism.",
+   "text": "Take the actual zero complex and zero map to C at cutoff b+1. Prove its cone inclusion from C is an isomorphism by the biproduct decomposition of each cone term. Transport hvan across that isomorphism. The zero terms are finite free, and the zero complex has both required strict support bounds.",
    "uses": [],
    "elementary": true
+  },
+  {
+   "text": "For a stage at cutoff n=b+1-k, its cone vanishes in all degrees at least n. Apply the given hcone to this bounded finite free stage at degree n-1. Apply [lem-pc-ring-finite-cone-free-extension] to get the next stage, with lower support n-1, the same upper support b, exact cone at and above n-1, and a compatible inclusion invertible at and above n.",
+   "uses": [
+    "lem-pc-ring-finite-cone-free-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the next stage and its inclusion for every natural k and every stage at cutoff b+1-k. Nat.rec starting at the zero stage gives a dependent sequence of stages; the selected inclusions give a coherent sequential diagram over C. The equality b+1-(k+1)=(b+1-k)-1 aligns the cutoffs. All choices are inside a proof of existence, not public object definitions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-pc-ring-stabilizing-cone-tower] to this coherent diagram. It supplies a constructed complex F, a quasi-isomorphism F to C, and in every degree an isomorphism from F to a stage term. Transfer the upper support b and finite freeness using those termwise isomorphisms.",
+   "uses": [
+    "lem-pc-ring-stabilizing-cone-tower"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sf-derived-homology-long-exact"
+  "lem-pc-ring-finite-cone-free-extension",
+  "lem-pc-ring-stabilizing-cone-tower"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 064U, descending construction; cone-cycle formulation of the step"
+  "place": "Tag 064U, proof of (2) implies (1), descending construction; K3 Lean realization uses a degreewise colimit to assemble the stabilizing sequence"
  },
  "mathlib_searches": [
   {
@@ -115,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T213850-L-1208722",
+  "landing": "20261012T225319-L-1809408",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
