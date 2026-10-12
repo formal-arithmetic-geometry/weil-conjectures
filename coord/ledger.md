@@ -6214,3 +6214,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/J2/Sheaf.Algebra.CharpolyLocallyFree (stage 3; reviewer PASS; first push; landing 20261012T053936-L-2637232 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/J2/Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions (stage 3; reviewer PASS; first push; landing 20261012T053936-L-2637336 (interface); batch 20261012T053916; modules 5; new nodes 4)
 - 05:39 L: merged deliver/J2/Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant (stage 3; reviewer PASS; first push; landing 20261012T053937-L-2637444 (interface); batch 20261012T053916; modules 3; new nodes 2)
+- 05:39 L: merged deliver/K1/Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence (stage 3; reviewer PASS; first push; landing 20261012T053937-L-2637556 (interface); batch 20261012T053916; modules 3; new nodes 2)

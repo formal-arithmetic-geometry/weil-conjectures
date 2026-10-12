@@ -1,0 +1,103 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-affine-qcoh-derived-equivalence",
+   "place": "proof steps (1)--(4)",
+   "via": []
+  }
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Section 36.3, Lemma 36.3.5 (Tag 06Z0), proof"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the derived tilde/global-sections equivalence by exactness, affine acyclicity, and the unit and counit quasi-isomorphisms described in Tag 06Z0.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-pc-affine-vanishing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-pc-affine-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 06Z0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine derived category equivalence quasi coherent schemes",
+   "results": "No matching theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory Equivalence schemeDerivedQCohCategory",
+   "results": "No matching theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg derived equivalence quasi coherent affine Mathlib",
+   "results": "No matching theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "id": "new-affine-qcoh-derived-equivalence-shift",
+ "title": "Affine equivalence preserves shifts of the unit",
+ "statement": "For an equivalence e equipped with the termwise tilde comparison and compatible triangulated structure, every integer shift of the free rank-one A-module is sent to the corresponding shift of the structure sheaf.",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceShift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineQCohDerivedEquivalenceShift.lean",
+  "declaration": "AlgebraicGeometry.affineQCohDerivedEquivalence_shift",
+  "statement": "theorem affineQCohDerivedEquivalence_shift (A : Type u) [CommRing A]\n    [HasDerivedCategory.{wA} (ModuleCat.{u} A)]\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    (e : DerivedCategory (ModuleCat.{u} A) ≌ schemeDerivedQCohCategory (Spec (.of A)))\n    (hcomp : Nonempty (DerivedCategory.Q ⋙ e.functor ⋙\n        (schemeDerivedQCohProperty (Spec (.of A))).ι ≅\n        @Functor.mapHomologicalComplex _ _ _ _ _ _ _\n          (@id (ModuleCat.{u} A ⥤\n            SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n            (tilde.functor (.of A))) ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ) ⋙\n          DerivedCategory.Q))\n    (htri : ∃ (_h : (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).CommShift ℤ),\n        (e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).IsTriangulated) :\n      ∀ k : ℤ, Nonempty\n        ((e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of A))).ι).obj\n          (((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj\n            (ModuleCat.of A A))⟦k⟧) ≅\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) 0).obj\n            (SheafOfModules.unit (moduleRings (Spec (.of A)).toRingedSpace)))⟦k⟧)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T053937-L-2637556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T053937-L-2637556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -11,6 +11,8 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
 import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceShift
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
@@ -85,6 +87,9 @@ theorem exists_affineQCohDerivedEquivalence (A : Type u) [CommRing A]
           ((DerivedCategory.singleFunctor
             (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) 0).obj
             (SheafOfModules.unit (moduleRings (Spec (.of A)).toRingedSpace)))⟦k⟧) := by
-  sorry
+  have hcore := exists_affineQCohDerivedEquivalence_core A
+  obtain ⟨e, h1, h2, h3⟩ := hcore
+  have h4 := affineQCohDerivedEquivalence_shift A e h1 h3
+  exact ⟨e, h1, h2, h3, h4⟩
 
 end AlgebraicGeometry
