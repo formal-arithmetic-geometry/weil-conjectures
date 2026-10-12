@@ -13,22 +13,16 @@
  ],
  "proof": [
   {
-   "text": "Set a=2-r and c=r-1. Rewrite the standard spectral-object homology isomorphism using spectralSequence_iso. Its homology data have kernel object E^p(a-1,0,1,c), included by changing a-1 to a and projected by changing c to c+1. The canonical cycles isomorphisms therefore reduce the desired square to equality of two maps out of this kernel object. This is exactly spectralSequenceHomologyData_left_i and spectralSequenceHomologyData_left_π, together with cyclesIso_hom_comp_i and homologyπ_comp_homologyIso_hom.",
+   "text": "Apply bottomPage_interval_compatibility: the page homology comparison commutes with the canonical finite-interval maps m_r to H^p(0,r-1). These m_r are exactly the first three factors in bottomPageMap.",
    "uses": [
-    "def-sp-spectral-sequence",
-    "def-sc-spectral-object-bottom-page-map"
+    "lem-sc-spectral-object-bottom-page-interval-compatibility",
+    "def-sc-spectral-object-bottom-page-map",
+    "def-sp-spectral-sequence"
    ],
    "elementary": true
   },
   {
-   "text": "Expand the bottom-page maps. Cancel the page comparison and its inverse. Apply map_ιE: on the left the opcycles map is the identity; on the right it is the map changing c to c+1. Then opcyclesMap_fromOpcycles replaces the latter followed by fromOpcycles at c+1 with fromOpcycles at c followed by H^p(0,c)->H^p(0,c+1).",
-   "uses": [
-    "def-sc-spectral-object-bottom-page-map"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Functoriality of H gives the commuting square between H^p(bottom,c), H^p(0,c), H^p(bottom,c+1), H^p(0,c+1). Both vertical maps are invertible by first-quadrant vanishing in (bottom,0), in degrees p and p+1. Move these inverses across the square. The two maps from H^p(bottom,c) to H^p(bottom,top) agree by functoriality; thus the claimed square commutes. This argument applies unchanged at p=0 and r=2.",
+   "text": "First-quadrant vanishing makes the maps f:H^p(bottom,r-1)->H^p(0,r-1) and fprime:H^p(bottom,r)->H^p(0,r) invertible. Functor.map_comp gives f followed by g = gprime followed by fprime, and gprime followed by the map to (bottom,top) equals the direct map to (bottom,top). Cancel f to deduce g followed by inverse fprime and the map to the top equals inverse f and the direct map to the top. Postcompose the finite-interval equality with inverse fprime and the map to the top; unfold bottomPageMap and reassociate.",
    "uses": [
     "def-sc-spectral-object-bottom-page-map"
    ],
@@ -36,13 +30,14 @@
   }
  ],
  "proof_deps": [
+  "lem-sc-spectral-object-bottom-page-interval-compatibility",
   "def-sc-spectral-object-bottom-page-map",
   "def-sp-spectral-sequence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Homology and Derived Categories; Mathlib.Algebra.Homology.SpectralObject",
-  "place": "Tags 012K and 015N, expanded via Page.lean (ιE and map_ιE), Cycles.lean (fromOpcycles and opcyclesMap_fromOpcycles), SpectralSequence.lean (spectralSequence_iso and spectralSequenceHomologyData)"
+  "document": "Mathlib.Algebra.Homology.SpectralObject and Mathlib.CategoryTheory.Functor.Basic",
+  "place": "Finite-interval homology calculation, then Functor.map_comp and cancellation of first-quadrant isomorphisms"
  },
  "mathlib_searches": [
   {
@@ -115,9 +110,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T202235-L-703005",
+  "landing": "20261012T223401-L-1635314",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

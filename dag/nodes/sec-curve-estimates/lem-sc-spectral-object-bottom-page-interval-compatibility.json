@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-spectral-object-bottom-page-interval-compatibility",
+ "kind": "statement",
+ "title": "Finite-interval page homology compatibility",
+ "statement": "Let C be abelian and Y an EInt-indexed first-quadrant spectral object, with its standard E2 spectral sequence [def-sp-spectral-sequence]. For natural p and integer s>=2, let m_s be the composite from the (p,0) page-s term to H_Y^p(0,s-1): the canonical spectralSequencePageXIso to E^p(2-s,0,1,s-1), then iota-E to the opcycles of (0,1,s-1), then fromOpcycles to H_Y^p(0,s-1). For every r>=2, iCycles_(p,0) followed by m_r and the H-map extending (0,r-1) to (0,r) equals homologyPi_(p,0) followed by the standard page-r homology comparison and m_(r+1). This is a finite-interval equality, before the inverse comparison with H_Y^p(bottom,r-1) and before passage to H_Y^p(bottom,top).",
+ "source": {
+  "document": "Mathlib.Algebra.Homology.SpectralObject",
+  "place": "SpectralSequence.lean: spectralSequence_iso, spectralSequenceHomologyData_left_i and spectralSequenceHomologyData_left_π; Page.lean: map_ιE; Cycles.lean: opcyclesMap_fromOpcycles"
+ },
+ "stmt_deps": [
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Instantiate the page homology data with i0prime=2-(r+1), i0=2-r, i1=0, i2=1, i3=r-1 and i3prime=r+1-1, using the actual previous and next positions in the natural-number spectral-sequence shape. Rewrite spectralSequence_iso, cancel the page isomorphisms, and rewrite the cycles inclusion and homology projection by the left homology data. Their inclusion and quotient are the maps changing respectively the first and last interval endpoint.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply map_ιE to both maps. The opcycles map induced by changing the first endpoint is the identity; the other is threeδ₃Toδ₂prime from (0,1,r-1) to (0,1,r). Apply opcyclesMap_fromOpcycles with the H-map twoδ₂Toδ₁prime from (0,r-1) to (0,r). The resulting composites are identical. Mathlib homology data cover absent differentials at the boundary as well as interior positions.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib.Algebra.Homology.SpectralObject",
+  "place": "Explicit calculation from spectralSequence_iso and the naturality identities in Page.lean and Cycles.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spectral object spectral sequence page homology compatibility with maps to H on finite intervals",
+   "results": "Service unavailable: Internal Server Error; no absence verdict.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence cycles homology comparison morphism naturality interval cohomology",
+   "results": "HomologicalComplex.opcyclesToCycles_naturality, homologyπ_naturality, homologyι_naturality and zero-degree comparison naturality; these concern chain maps, not the spectral-object page-to-finite-interval calculation.",
+   "date": "2026-10-13",
+   "verdict": "Related APIs, no exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp is the functoriality identity used in the main theorem; not this page homology comparison.",
+   "date": "2026-10-13",
+   "verdict": "Tool identity only."
+  },
+  {
+   "tool": "grep",
+   "query": "bottomPageMap|homologyπ.*homologyIso|cyclesIso_hom_comp_i|opcyclesMap_fromOpcycles in lean/Sheaf/CategoryTheory, lean/WeilConjectures/Mathlib/Algebra/Homology and Mathlib/Algebra/Homology/{SpectralObject,ShortComplex}",
+   "results": "The existing bottomPageMap compatibility is the larger original item. Mathlib supplies spectralSequence_iso, spectralSequenceHomologyData_left_i/left_π, cyclesIso_hom_comp_i and opcyclesMap_fromOpcycles, combined in the proof here. No finite-interval comparison theorem found.",
+   "date": "2026-10-13",
+   "verdict": "New proved intermediate calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SpectralObjectBottomPageCompatibility",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-spectral-object-bottom-page-compatibility",
+   "place": "First two steps of the original plan: page homology data and finite-interval naturality",
+   "via": [
+    "lem-sc-spectral-object-bottom-page-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralObjectBottomPageIntervalCompatibility",
+  "file": "lean/Sheaf/CategoryTheory/SpectralObjectBottomPageIntervalCompatibility.lean",
+  "declaration": "CategoryTheory.Abelian.SpectralObject.bottomPage_interval_compatibility",
+  "statement": "theorem bottomPage_interval_compatibility\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (Y : SpectralObject C EInt) [Y.IsFirstQuadrant]\n    (p : ℕ) (r : ℤ) (hr : 2 ≤ r) :\n    let m (s : ℤ) (hs : 2 ≤ s) :\n        (Y.E₂SpectralSequenceNat.page s hs).X (p, 0) ⟶\n          (Y.H p).obj (mk₁ (homOfLE\n            (show ((0 : ℤ) : EInt) ≤ (s - 1 : ℤ) by simp; omega))) :=\n    (Y.spectralSequencePageXIso coreE₂CohomologicalNat s hs (p, 0)\n      (2 - s : ℤ) (0 : ℤ) (1 : ℤ) (s - 1 : ℤ)\n      (by simp; congr 1; omega) rfl (by simp) (by simp)\n      (p - 1) p (p + 1) (by simp)).hom ≫\n    Y.ιE (homOfLE (show ((2 - s : ℤ) : EInt) ≤ (0 : ℤ) by simp; omega))\n      (homOfLE (show ((0 : ℤ) : EInt) ≤ (1 : ℤ) by simp))\n      (homOfLE (show ((1 : ℤ) : EInt) ≤ (s - 1 : ℤ) by simp; omega))\n      (p - 1) p (p + 1) ≫\n    Y.fromOpcycles (homOfLE (show ((0 : ℤ) : EInt) ≤ (1 : ℤ) by simp))\n      (homOfLE (show ((1 : ℤ) : EInt) ≤ (s - 1 : ℤ) by simp; omega))\n      (homOfLE (show ((0 : ℤ) : EInt) ≤ (s - 1 : ℤ) by simp; omega))\n      (Subsingleton.elim _ _) p\n    (Y.E₂SpectralSequenceNat.page r hr).iCycles (p, 0) ≫ m r hr ≫\n        (Y.H p).map (twoδ₂Toδ₁' ((0 : ℤ) : EInt) (r - 1 : ℤ) (r + 1 - 1 : ℤ)\n          (WithBotTop.coe_le_coe.2 (by omega))\n          (WithBotTop.coe_le_coe.2 (by omega))) =\n      (Y.E₂SpectralSequenceNat.page r hr).homologyπ (p, 0) ≫\n        (Y.E₂SpectralSequenceNat.iso r (r + 1) (p, 0) rfl hr).hom ≫\n          m (r + 1) (by omega)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T223401-L-1635314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T223401-L-1635314",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
