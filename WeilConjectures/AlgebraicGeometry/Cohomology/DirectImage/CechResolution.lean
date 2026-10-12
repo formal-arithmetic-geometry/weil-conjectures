@@ -11,6 +11,8 @@ public import WeilConjectures.Topology.Sheaves.CechComparison
 public import WeilConjectures.Topology.Sheaves.Cech
 public import WeilConjectures.AlgebraicGeometry.Modules.StalkExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
 # The Čech resolution of a sheaf of modules
@@ -441,5 +443,95 @@ theorem quasiIso_cechResolutionι (hU : ⨆ i, U i = ⊤) : QuasiIso (cechResolu
     (exactAt_cechResolution U ℱ hU)
 
 end Exactness
+
+section Acyclic
+
+instance preservesFiniteLimits_pushforward {Y Z : Scheme.{u}} (h : Y ⟶ Z) :
+    PreservesFiniteLimits (pushforward h) :=
+  have := (pullbackPushforwardAdjunction h).rightAdjoint_preservesLimits.{0, 0}
+  inferInstance
+
+/-- **Direct images along a composite.** If `R^q h_* G = 0` and `R^q (h ≫ f)_* G = 0` for all
+`q > 0`, then `h_* G` is `f_*`-acyclic: an injective resolution `G ⟶ J` pushes forward to a
+resolution `h_* G ⟶ h_* J` by flasque modules, and `f_* h_* J = (h ≫ f)_* J`. -/
+theorem rightAcyclic_pushforward_obj_of_isZero {Y Z S : Scheme.{u}} (h : Y ⟶ Z) (f : Z ⟶ S)
+    [HasInjectiveResolutions Y.Modules] [HasInjectiveResolutions Z.Modules] (G : Y.Modules)
+    (hh : ∀ q, IsZero ((higherDirectImage h (q + 1)).obj G))
+    (hhf : ∀ q, IsZero ((higherDirectImage (h ≫ f) (q + 1)).obj G)) :
+    (pushforward f).rightAcyclic ((pushforward h).obj G) := by
+  let J := injectiveResolution G
+  let K := ((pushforward h).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex
+  have hε : (pushforward h).map (J.ι.f 0) ≫ K.d 0 1 = 0 := by
+    change (pushforward h).map (J.ι.f 0) ≫ (pushforward h).map (J.cocomplex.d 0 1) = 0
+    rw [← Functor.map_comp, J.ι_f_zero_comp_complex_d, Functor.map_zero]
+  have : Mono ((pushforward h).map (J.ι.f 0)) := inferInstance
+  have h0 : (ShortComplex.mk _ _ hε).Exact :=
+    J.exact₀.map_of_mono_of_preservesKernel (pushforward h) inferInstance inferInstance
+  have hK (n : ℕ) : K.ExactAt (n + 1) := by
+    rw [HomologicalComplex.exactAt_iff_isZero_homology]
+    exact (hh n).of_iso (J.isoRightDerivedObj (pushforward h) (n + 1)).symm
+  have := quasiIso_fromSingle₀Equiv_symm _ hε h0 hK
+  have hI (n : ℕ) : (pushforward f).rightAcyclic (K.X n) :=
+    rightAcyclic_pushforward_of_isFlasque f _
+      (isFlasque_pushforward h _ (isFlasque_of_injective _))
+  intro q
+  refine IsZero.of_iso ?_ ((pushforward f).rightDerivedObjIsoOfResolution
+    ((CochainComplex.fromSingle₀Equiv K _).symm ⟨_, hε⟩) hI (q + 1))
+  exact (hhf q).of_iso (HomologicalComplex.homologyMapIso
+    ((NatIso.mapHomologicalComplex (pushforwardComp h f) _).app J.cocomplex) (q + 1) ≪≫
+      (J.isoRightDerivedObj (pushforward (h ≫ f)) (q + 1)).symm)
+
+variable {S : Scheme.{u}} (f : X ⟶ S)
+
+/-- For an affine open `V` of a scheme `X` separated over an affine scheme `S` and a
+quasi-coherent `ℱ`, the module `j_* (ℱ|_V)` is `f_*`-acyclic: the inclusion `j : V ⟶ X` and the
+composite `V ⟶ S` are affine morphisms. -/
+theorem rightAcyclic_extendRestrict [IsAffine S] [IsSeparated f]
+    [HasInjectiveResolutions X.Modules] (ℱ : X.Modules) [ℱ.IsQuasicoherent] {V : X.Opens}
+    (hV : IsAffineOpen V) : (pushforward f).rightAcyclic ((extendRestrictFunctor V).obj ℱ) := by
+  have : IsAffine V := hV
+  have := isGrothendieckAbelian V
+  have : IsAffineHom V.ι := IsAffineHom.of_comp V.ι f
+  exact rightAcyclic_pushforward_obj_of_isZero V.ι f _
+    (fun q ↦ isZero_higherDirectImage_of_isAffineHom _ _ q.succ_pos)
+    (fun q ↦ isZero_higherDirectImage_of_isAffineHom _ _ q.succ_pos)
+
+variable {ι : Type u} (U : ι → X.Opens)
+
+lemma piObj_eq_iInf {k : ℕ} (y : Fin (k + 1) → ι) : ∏ᶜ (fun l ↦ U (y l)) = ⨅ l, U (y l) :=
+  le_antisymm (TopCat.Presheaf.piObj_le_iInf U y) (TopCat.Presheaf.iInf_le_piObj U y)
+
+/-- **The terms of the Čech complex are `f_*`-acyclic**, for a finite cover by affine opens of a
+scheme separated over an affine scheme and a quasi-coherent module.
+
+(blueprint: `lem-pc-cech-resolution`) -/
+theorem rightAcyclic_cechResolution_X [IsAffine S] [IsSeparated f] [Finite ι]
+    [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i)) (ℱ : X.Modules)
+    [ℱ.IsQuasicoherent] (k : ℕ) : (pushforward f).rightAcyclic ((cechResolution U ℱ).X k) := by
+  have : (pushforward f).rightAcyclic.IsClosedUnderFiniteProducts := .mk'
+  change (pushforward f).rightAcyclic
+    (∏ᶜ fun y : Fin (k + 1) → ι ↦ (cechPresheaf ℱ).obj (op (∏ᶜ fun l ↦ U (y l))))
+  refine ObjectProperty.prop_product _ fun y ↦ ?_
+  exact rightAcyclic_extendRestrict f ℱ
+    ((piObj_eq_iInf U y).symm ▸ isAffineOpen_iInf_of_isSeparated f U hU k y)
+
+/-- **The Čech resolution computes the higher direct images.** Let `f : X ⟶ S` be separated with
+`S` affine, `U` a finite cover of `X` by affine opens and `ℱ` a quasi-coherent `𝒪_X`-module.
+Then `R^q f_* ℱ` is the `q`-th cohomology sheaf of the complex `f_* Č(U, ℱ)` of
+`𝒪_S`-modules: the augmented Čech complex is a resolution of `ℱ`
+(`AlgebraicGeometry.Scheme.Modules.quasiIso_cechResolutionι`) by `f_*`-acyclic modules
+(`AlgebraicGeometry.Scheme.Modules.rightAcyclic_cechResolution_X`).
+
+(blueprint: `lem-pc-cech-resolution`) -/
+noncomputable def higherDirectImageIsoCechResolution [IsAffine S] [IsSeparated f] [Finite ι]
+    [HasInjectiveResolutions X.Modules] (hU : ∀ i, IsAffineOpen (U i)) (hU' : ⨆ i, U i = ⊤)
+    (ℱ : X.Modules) [ℱ.IsQuasicoherent] (q : ℕ) :
+    (higherDirectImage f q).obj ℱ ≅
+      (((pushforward f).mapHomologicalComplex _).obj (cechResolution U ℱ)).homology q :=
+  have := quasiIso_cechResolutionι U ℱ hU'
+  (pushforward f).rightDerivedObjIsoOfResolution (cechResolutionι U ℱ)
+    (rightAcyclic_cechResolution_X f U hU ℱ) q
+
+end Acyclic
 
 end AlgebraicGeometry.Scheme.Modules
