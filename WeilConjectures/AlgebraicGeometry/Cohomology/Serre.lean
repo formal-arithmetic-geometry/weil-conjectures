@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.LinearAlgebra.Dual.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
@@ -115,16 +116,26 @@ theorem ProjectiveSpace.nonempty_cechComplex_twist_iso_monomialCechComplex (k : 
 
 /-- **Cohomology vanishes above the number of projective coordinates.** For a commutative
 ring `A`, `n` with `Nat.card n = d + 1` and a quasi-coherent module `ℱ` on `ℙᵈ_A = ℙ(n; Spec A)`,
-`H^q(ℙᵈ_A, ℱ) = 0` for `q > d`: the alternating Čech complex of the `d + 1` standard opens,
-which computes the cohomology of `ℱ` since their intersections are affine, has no terms above
-degree `d`.
+`H^q(ℙᵈ_A, ℱ) = 0` for `q > d`: `ℙᵈ_A` is separated and covered by the `d + 1` affine standard
+opens, so this is `AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le` (a
+Mayer-Vietoris induction on the number of affine opens).
 
 (blueprint: `lem-pc-projective-space-cohomology-bound`) -/
 theorem ProjectiveSpace.subsingleton_H_of_lt (A : Type u) [CommRing A] [Finite n] {d : ℕ}
     (hn : Nat.card n = d + 1) (ℱ : (ℙ(n; Spec (.of A))).Modules)
     [SheafOfModules.IsQuasicoherent (R := (ℙ(n; Spec (.of A))).ringCatSheaf) ℱ] {q : ℕ}
-    (hq : d < q) : Subsingleton (ℱ.H q) :=
-  sorry
+    (hq : d < q) : Subsingleton (ℱ.H q) := by
+  classical
+  have := Fintype.ofFinite n
+  have : IsSeparated (terminal.from ℙ(n; Spec (.of A))) := by
+    rw [← terminal.comp_from (ℙ(n; Spec (.of A)) ↘ Spec (.of A))]
+    infer_instance
+  have hcard : (Finset.univ : Finset n).card = d + 1 := by
+    rw [Finset.card_univ, ← Nat.card_eq_fintype_card, hn]
+  exact subsingleton_H_of_card_le Finset.univ (Finset.card_pos.1 (by omega))
+    (ProjectiveSpace.standardOpen n _) (fun i _ ↦ ProjectiveSpace.isAffineOpen_standardOpen n _ i)
+    (by rw [Finset.sup_univ_eq_iSup, ProjectiveSpace.iSup_standardOpen]) _
+    (cechAcyclicOnAffines_of_isQuasicoherent ℱ) (by omega)
 
 /-- **The cohomology of `𝒪(m)` on `ℙ(n; Spec k)` is that of the monomial Čech complex**,
 as `k`-vector spaces: Leray's theorem for the standard affine covering of the separated scheme
