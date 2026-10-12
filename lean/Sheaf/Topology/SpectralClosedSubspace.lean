@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.Topology.Spectral.Basic
+import WeilConjectures.Mathlib.Topology.Spectral.Basic
 
 /-!
 # Closed subspaces of spectral spaces
@@ -40,6 +41,13 @@ theorem spectral_closed_subspace {X : Type u} [TopologicalSpace X] [SpectralSpac
     SpectralSpace E ∧
       ∀ V : Set E, (IsOpen V ∧ IsCompact V) ↔
         ∃ U : Set X, IsOpen U ∧ IsCompact U ∧ V = Subtype.val ⁻¹' U := by
-  sorry
+  have hf := hE.isClosedEmbedding_subtypeVal
+  refine ⟨hf.spectralSpace, fun V ↦ ⟨?_, ?_⟩⟩
+  · rintro ⟨hVo, hVc⟩
+    obtain ⟨U, hUo, hUc, hUV⟩ := hf.isOpen_and_isCompact_and_preimage_eq hVo hVc
+    exact ⟨U, hUo, hUc, hUV.symm⟩
+  · rintro ⟨U, hUo, hUc, rfl⟩
+    exact ⟨hUo.preimage hf.continuous,
+      hUc.preimage_of_isOpen hf.isProperMap.isSpectralMap hUo⟩
 
 end Topology

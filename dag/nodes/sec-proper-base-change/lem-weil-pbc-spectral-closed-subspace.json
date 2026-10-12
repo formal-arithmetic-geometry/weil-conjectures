@@ -24,94 +24,35 @@
  ],
  "proof": [
   {
-   "text": "$E$ is sober. The space $X$ is sober [def-weil-spectral-space] and $E$ is closed in $X$, so $E$ with the induced topology is sober by [lem-weil-pbc-closed-subspace-sober]. (Stacks argues for $E$ closed in the constructible topology: for $Z\\subseteq E$ irreducible closed with generic point $\\eta$ of its closure $\\overline Z$ in $X$ one shows $\\eta\\in E$. When $E$ is closed in $X$, $Z$ is closed in $X$, so $\\overline Z=Z$ and $\\eta\\in Z\\subseteq E$ directly; this is the closed case of Tag 0B31.)",
-   "uses": [
-    "def-weil-spectral-space",
-    "lem-weil-pbc-closed-subspace-sober"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, first paragraph (sobriety), specialized to $E$ closed"
-   }
-  },
-  {
-   "text": "$E$ is quasi-compact. $X$ is quasi-compact [def-weil-spectral-space] and $E$ is closed, so $E$ is quasi-compact by [lem-weil-pbc-closed-in-quasi-compact]. (Stacks uses that $E$ is closed in the constructible topology, Tags 005C and 0901; for $E$ closed in $X$ Tag 005C applied to $X$ itself suffices.)",
-   "uses": [
-    "def-weil-spectral-space",
-    "lem-weil-pbc-closed-in-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, second paragraph, first two sentences, specialized to $E$ closed"
-   }
-  },
-  {
-   "text": "For every quasi-compact open $U\\subseteq X$, the set $E\\cap U$ is a quasi-compact open subset of $E$. It is open in $E$ by definition of the induced topology. The space $U$ (induced topology) is quasi-compact and $E\\cap U$ is closed in $U$, being the trace of the closed set $E$; so $E\\cap U$ is quasi-compact in the topology induced from $U$ by [lem-weil-pbc-closed-in-quasi-compact]. That topology equals the one induced from $E$, both being induced from $X$, so $E\\cap U$ is a quasi-compact open of $E$.",
-   "uses": [
-    "lem-weil-pbc-closed-in-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, second paragraph, sentence 'If $U\\subset X$ is a quasi-compact open, then $E\\cap U$ is ... quasi-compact', specialized to $E$ closed"
-   }
-  },
-  {
-   "text": "Every quasi-compact open $V\\subseteq E$ is of the form $E\\cap U$ with $U\\subseteq X$ quasi-compact open. Write $V=E\\cap W$ with $W\\subseteq X$ open. Since the quasi-compact opens of $X$ form a basis [def-weil-spectral-space], $W=\\bigcup_{i\\in I}U_i$ with $U_i$ quasi-compact open, so $V=\\bigcup_i(E\\cap U_i)$ is a covering of $V$ by opens of $E$. As $V$ is quasi-compact, $V=(E\\cap U_{i_1})\\cup\\dots\\cup(E\\cap U_{i_n})=E\\cap U$ with $U=U_{i_1}\\cup\\dots\\cup U_{i_n}$, which is open and quasi-compact as a finite union of quasi-compact subsets (a covering of $U$ by opens restricts to a covering of each $U_{i_k}$; take the union of the finite subcoverings). Together with the previous step, the quasi-compact opens of $E$ are exactly the sets $E\\cap U$ with $U\\subseteq X$ quasi-compact open. (Stacks states this as 'It follows that'; the inclusion written out here is left implicit there.)",
+   "text": "Let hf be the closed embedding of the subtype E into X induced by hE. The proved theorem Topology.IsClosedEmbedding.spectralSpace, applied to hf and the spectral structure on X, supplies SpectralSpace E.",
    "uses": [
     "def-weil-spectral-space"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, second paragraph, sentence 'It follows that the quasi-compact open subsets of $E$ are the intersections $E\\cap U$'"
+    "document": "lean/WeilConjectures/Mathlib/Topology/Spectral/Basic.lean",
+    "place": "Topology.IsClosedEmbedding.spectralSpace"
    }
   },
   {
-   "text": "The quasi-compact opens of $E$ form a basis of its topology. Let $V\\subseteq E$ be open and $x\\in V$; write $V=E\\cap W$ with $W\\subseteq X$ open. By the basis property of $X$ [def-weil-spectral-space] there is a quasi-compact open $U$ with $x\\in U\\subseteq W$; then $x\\in E\\cap U\\subseteq V$, and $E\\cap U$ is quasi-compact open in $E$ by the third step.",
+   "text": "For a compact open V of E, Topology.IsClosedEmbedding.isOpen_and_isCompact_and_preimage_eq gives an ambient open compact U with V = Subtype.val ⁻¹' U (reversing the returned equality). Conversely, for ambient open compact U, openness of the preimage follows from continuity of hf and compactness from IsCompact.preimage_of_isOpen applied to the proper spectral map hf, with hUo. This proves the stated equivalence.",
    "uses": [
     "def-weil-spectral-space"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, second paragraph, 'These form a basis for the topology'"
-   }
-  },
-  {
-   "text": "$E$ is quasi-separated. Let $V,V'\\subseteq E$ be quasi-compact open. By the fourth step $V=E\\cap U$, $V'=E\\cap U'$ with $U,U'\\subseteq X$ quasi-compact open, so $V\\cap V'=E\\cap(U\\cap U')$; $U\\cap U'$ is quasi-compact open as $X$ is quasi-separated [def-weil-spectral-space], hence $V\\cap V'$ is quasi-compact by the third step.",
-   "uses": [
-    "def-weil-spectral-space"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, last sentences ('given two $U,U'\\subset X$ quasi-compact opens, the intersection $(E\\cap U)\\cap(E\\cap U')=E\\cap(U\\cap U')$ ...')"
-   }
-  },
-  {
-   "text": "Conclusion. By the first, second, fifth and sixth steps $E$ is sober, quasi-compact, quasi-separated and its quasi-compact opens form a basis, i.e. $E$ is spectral [def-weil-spectral-space]; the description of its quasi-compact opens is the third and fourth steps.",
-   "uses": [
-    "def-weil-spectral-space"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, 'This finishes the proof'"
+    "document": "lean/WeilConjectures/Mathlib/Topology/Spectral/Prespectral.lean",
+    "place": "Topology.IsClosedEmbedding.isOpen_and_isCompact_and_preimage_eq"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-spectral-space",
-  "lem-weil-pbc-closed-in-quasi-compact",
-  "lem-weil-pbc-closed-subspace-sober"
+  "def-weil-spectral-space"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/topology.tex",
-  "place": "Topology, Lemma (Tag 0902, label lemma-spectral-sub, line 4428), proof, specialized to $E$ closed in $X$; the inclusion 'every quasi-compact open of $E$ is a trace' (fourth step) is written out by the agent where Stacks says 'It follows that'"
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/Topology/Spectral/Basic.lean and Prespectral.lean",
+  "place": "assembly using Topology.IsClosedEmbedding.spectralSpace and isOpen_and_isCompact_and_preimage_eq"
  },
  "mathlib_searches": [
   {
@@ -194,5 +135,15 @@
   "group": "M1",
   "result": "pass",
   "note": "X: TopologicalSpace + Mathlib SpectralSpace (recorded match of def-weil-spectral-space); E closed via IsClosed, subtype topology; SpectralSpace E; compact opens of E iff Subtype.val preimage of an ambient compact open (both directions); no Mathlib lemma for closed-subspace spectrality (only IsOpenEmbedding.spectralSpace, PrespectralSpace.of_isClosedEmbedding)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T044757-L-2042035",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
