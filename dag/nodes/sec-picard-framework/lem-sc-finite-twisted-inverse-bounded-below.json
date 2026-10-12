@@ -26,46 +26,59 @@
  ],
  "proof": [
   {
-   "text": "A finite morphism of Noetherian schemes is quasi-compact and quasi-separated, and its target is quasi-compact. Apply the existing uniform truncation-bound statement [lem-pc-derived-direct-image-uniform-truncation-bound] to a shift of any L\\in D_{\\mathrm{QCoh}}(X): shifting reduces the case H^i(L)=0 for i>r to the stated case H^i(E)=0 for i>0, and shifting back gives an integer N, independent of r, with Rf_*D^{\\le r}_{\\mathrm{QCoh}}(X)\\subseteq D^{\\le r+N}_{\\mathrm{QCoh}}(Y).",
+   "text": "For every quasi-coherent derived object E and integer r, its standard truncation tau_le_r(E) has quasi-coherent cohomology. Above r its cohomology is zero; a zero module sheaf is quasi-coherent by the global presentation free(PUnit) --id--> free(PUnit) --> 0. In degrees i <= r, the truncation triangle has third term in D^{>=r+1}; its cohomology in degrees i-1 and i vanishes, so the long exact homology sequence makes H^i(tau_le_r(E)) -> H^i(E) both mono and epi, hence an isomorphism. Quasi-coherence transfers along this isomorphism. These arguments are proved as the private helpers qcOfZero and qcTruncLE.",
    "uses": [
-    "lem-pc-derived-direct-image-uniform-truncation-bound"
+    "def-pc-derived-category",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose n with K in D^{>=n}. Since f is finite it is affine. Put A = tau_le_(n-1)(a(K)), regarded as an object of D_QCoh(X) using Step 1. The upper-bound preservation clause of lem-sc-affine-derived-pushforward-t-exact shows that Rf_*A is in D^{<=n-1}; the comparison isomorphism transports this bound to R(A). This replaces the general shifted uniform truncation bound by cohomological amplitude zero.",
+   "uses": [
+    "lem-sc-affine-derived-pushforward-t-exact"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, first paragraph"
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0AVW, displayed identity H^i(Rf_*K)=f_*H^i(K)"
    }
   },
   {
-   "text": "Choose an integer c with H^i(K)=0 for i\\le c, and put A=\\tau_{\\le c-N}f^!K. By the standard truncation triangle, A lies in D^{\\le c-N}_{\\mathrm{QCoh}}(X), so Step 1 gives Rf_*A\\in D^{\\le c}_{\\mathrm{QCoh}}(Y), while K lies in D^{\\ge c+1}_{\\mathrm{QCoh}}(Y). The defining right-adjunction bijection for f^! identifies Hom_X(A,f^!K) with Hom_Y(Rf_*A,K), and this group is zero by [lem-pc-derived-tstructure-orthogonality].",
+   "text": "Derived direct image is additive (the source-library instance Functor.additive_rightDerivedFunctor). Transport additivity through comparison and the faithful inclusion D_QCoh(Y) -> D(O_Y) to R. The adjunction hom equivalence therefore preserves zero, by Adjunction.homAddEquiv_symm_zero. Let g:A -> a(K) be the canonical truncation map in the full subcategory. Its adjoint R(A) -> K is zero by lem-pc-derived-tstructure-orthogonality, because n-1<n. Faithfulness of the inclusion and injectivity of the adjunction equivalence imply g=0, hence the underlying truncation map is zero.",
    "uses": [
-    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "def-pc-derived-direct-image",
     "lem-pc-derived-tstructure-orthogonality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, displayed Hom computation"
+    "place": "Tag 0A9I, displayed adjunction-and-orthogonality computation, specialized to amplitude zero"
    }
   },
   {
-   "text": "The canonical truncation map \\tau_{\\le c-N}f^!K\\to f^!K induces the identity on cohomology in degrees \\le c-N. Since the map is zero by Step 2, all cohomology sheaves H^i(f^!K) vanish for i\\le c-N. Thus f^!K is bounded below and remains quasi-coherent, so it belongs to D^+_{\\mathrm{QCoh}}(X).",
-   "uses": [],
+   "text": "For objects in D^{<=n-1}, composition with the canonical truncation map tau_le_(n-1)(a(K)) -> a(K) is injective (TStructure.to_truncLE_obj_ext). Since that map is zero, the identity and zero endomorphisms of A are equal. Thus A is a zero object. Apply TStructure.isGE_iff_isZero_truncLE_obj with (n-1)+1=n to conclude a(K) lies in D^{>=n}, and return n as the required existential witness.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/duality.tex",
-    "place": "Tag 0AX2, proof of lemma-twisted-inverse-image-bounded-below, final sentence"
+    "place": "Tag 0A9I, final truncation-vanishing argument"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-direct-image-uniform-truncation-bound",
+  "def-pc-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-affine-derived-pushforward-t-exact",
+  "def-pc-derived-direct-image",
   "lem-pc-derived-tstructure-orthogonality"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/duality.tex",
-  "place": "Tag 0AX2, lemma-twisted-inverse-image-bounded-below"
+  "place": "Tag 0A9I, adjunction/truncation proof specialized to the affine amplitude-zero bound from Tag 0AVW; formalized by A2 on 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -145,5 +158,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085208-L-700",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

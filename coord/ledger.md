@@ -6722,3 +6722,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: returned deliver/W3/Sheaf.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibreStage (reviewer RETURN: (the landing tools, head 3d7af21eb) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 08:52 L: returned deliver/X2/Sheaf.AlgebraicGeometry.FiniteEtaleTorsorReflection (reviewer RETURN: (the landing tools, head 3e06e6a42) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 08:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.AffineDerivedPushforwardConservative (stage 3; reviewer PASS; first push; landing 20261012T085208-L-558 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FiniteTwistedInverseBoundedBelow (stage 3; reviewer PASS; first push; landing 20261012T085208-L-700 (proof); batch 20261012T085205; modules 1; new nodes 0)
