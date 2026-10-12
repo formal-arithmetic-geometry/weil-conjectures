@@ -44,11 +44,10 @@
  ],
  "proof": [
   {
-   "text": "For (1), the definition [def-weil-derived-limit] forms the endomorphism $1-s$ of $\\prod_nK_n$ and asks for a distinguished triangle $K\\xrightarrow{p}\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\xrightarrow{\\delta}K[1]$; by TR1 of [def-weil-triangulated-category] the morphism $1-s$ lies in a distinguished triangle $\\prod_nK_n\\xrightarrow{1-s}\\prod_nK_n\\to C\\to\\prod_nK_n[1]$, and rotating it back by TR2 (applied to $K:=C[-1]$, with the sign absorbed by the isomorphism of triangles $(\\mathrm{id},\\mathrm{id},-\\mathrm{id})$ and TR1) gives such a triangle, so a derived limit exists. Given two derived limits $(K,p,\\delta)$ and $(K',p',\\delta')$, rotate both Roos triangles by TR2 so that the two product terms come first; TR3 of [def-weil-triangulated-category] (equivalently [lem-weil-pbc-triangle-morphism-extension]) extends the pair $(\\mathrm{id},\\mathrm{id})$ on the product terms to a morphism of the rotated triangles, whose third component is $\\varphi[1]$ for some $\\varphi:K\\to K'$. Two of its components are identities, so [lem-sf-triangle-morphism-iso] (Tag 014A) makes $\\varphi[1]$, hence $\\varphi$, an isomorphism. The extension supplied by TR3 is not unique, so the isomorphism is not canonical.",
+   "text": "For (1), apply Mathlib CategoryTheory.Pretriangulated.distinguished_cocone_triangle₁ to the transition endomorphism of [def-weil-derived-limit]. This is TR1 followed by inverse rotation in [def-weil-triangulated-category] and directly supplies the object and both maps of a derived limit triangle. For uniqueness, rotate each supplied triangle so its first arrow is the same transition endomorphism. Apply Mathlib CategoryTheory.Pretriangulated.exists_iso_of_arrow_iso to the identity isomorphism of that arrow. Its proof extends the identity square by TR3 and uses [lem-sf-triangle-morphism-iso] to make the third component an isomorphism. Project the resulting triangle isomorphism to its third objects, obtaining L[1] ≅ L′[1], and take its preimage under the fully faithful shiftFunctor D 1 to obtain L ≅ L′. This is a propositional existence proof; no canonical choice is asserted. Clauses (2) and (3) remain unproved in this delivery, with their original planned steps below.",
    "uses": [
     "def-weil-derived-limit",
     "def-weil-triangulated-category",
-    "lem-weil-pbc-triangle-morphism-extension",
     "lem-sf-triangle-morphism-iso"
    ],
    "elementary": false,
@@ -102,7 +101,6 @@
  "proof_deps": [
   "def-weil-derived-limit",
   "def-weil-triangulated-category",
-  "lem-weil-pbc-triangle-morphism-extension",
   "lem-sf-triangle-morphism-iso",
   "lem-pc-quasi-isomorphisms-multiplicative-system",
   "lem-pc-left-localization-hom-colimit",
@@ -114,8 +112,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-derived-limit-existence.md",
-  "place": "## Proof"
+  "document": "lean/Sheaf/CategoryTheory/Triangulated/DerivedLimitExistence.lean",
+  "place": "Clause (1): R1 stage-3 proof using Mathlib triangle completion and arrow isomorphisms; clauses (2) and (3): original blueprint plan, not changed."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -181,5 +179,15 @@
   "group": "K1",
   "result": "pass",
   "note": "clause1: Pretriangulated+IsTriangulated D, K:ℕ→D, [HasProduct K] only, ∃ IsDerivedLimit (landed J1 pred) ∧ any two Nonempty iso; clause2: Abelian A, HasCountableProducts+CountableAB4Star (countable exact products), ∃ HasCountableProducts D(A), Q.mapCone of termwise product limit for any countable J and any representatives, homologyFunctor p preserves Discrete J limits ∀p; clause3: EnoughInjectives, I K-injective in CochainComplex (ℕᵒᵖ⥤A) ℤ, representative iso I.asFunctor⋙Q ≅ ofOpSequence f, ∃ limit cone c with IsDerivedLimit f (Q.obj c.pt); #check-verified names"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34811",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
