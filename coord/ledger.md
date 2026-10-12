@@ -6962,3 +6962,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/N3/Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula (stage 3; reviewer PASS; first push; landing 20261012T085314-L-29615 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/N3/Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085314-L-29760 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/N3/Sheaf.Topology.NoetherianCohomologyDimOne (stage 3; reviewer PASS; first push; landing 20261012T085315-L-29907 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/P1/Sheaf.AlgebraicGeometry.AmpleFinitePowerCover (stage 3; reviewer PASS; first push; landing 20261012T085315-L-30003 (interface); batch 20261012T085205; modules 2; new nodes 1)

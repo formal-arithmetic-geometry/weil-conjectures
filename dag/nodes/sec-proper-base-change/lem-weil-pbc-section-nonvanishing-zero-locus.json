@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-section-nonvanishing-zero-locus",
+ "kind": "statement",
+ "title": "Stalk nonvanishing equals the complement of the zero-locus support",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $M$ an invertible module [def-sc-invertible-module], and $s$ a global section. The set $\\{x:s_x\\notin\\mathfrak m_x M_x\\}$ [def-weil-pbc-ample-invertible-module] is the complement of the support of the zero scheme [def-pc-zero-scheme] of the morphism $\\mathcal O_X\\to M$, $a\\mapsto as$. No quasi-compactness or nonemptiness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex; literature/stacks-project/modules.tex",
+  "place": "Properties Section 01PR and Lemma 01PW (lemma-invert-s-sections), first local calculation; Modules Lemma 01CY (lemma-s-open). Online tags read because the local literature files are absent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-zero-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Choose a trivializing affine neighbourhood V and free generator e. The map r ↦ r e_x on the stalk is bijective: every stalk element has a section representative after shrinking inside V (TopCat.Presheaf.exists_le_germ_eq), and IsFreeGenerator.exists_smul_eq gives surjectivity. For injectivity, represent both scalars locally; equality of their images is equality of germs, so shrink by TopCat.Presheaf.germ_eq and use IsFreeGenerator.smul_left_injective. The compatibility is PresheafOfModules.germ_smul and germ_res_apply. This is the proved private helper bijective_smul_germ.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write s|V=f e using IsFreeGenerator.coeff_smul. The preceding bijection says span(e_x)=top. Submodule.mem_smul_span_singleton and injectivity show s_x∈maximalIdeal times the stalk iff f_x∈maximalIdeal. IsLocalRing.mem_maximalIdeal and mem_nonunits_iff identify its negation with f_x being a unit. Scheme.mem_basicOpen identifies this with x∈D(f).",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "homOfGlobalSection_app_one identifies the morphism coefficient with f. basicOpen_coeff_eq (ClearDenominators, proved in the source library using Hom.ideal_zeroLocus) identifies D(f)=V intersect the complement of the zero-locus support. Since x∈V, this proves the set equality pointwise.",
+   "uses": [
+    "lem-pc-zero-scheme-ideal-local"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-pbc-module-stalk",
+  "lem-pc-zero-scheme-ideal-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex; literature/stacks-project/modules.tex",
+  "place": "Properties Section 01PR and Lemma 01PW (lemma-invert-s-sections), first local calculation; Modules Lemma 01CY (lemma-s-open). Online tags read because the local literature files are absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The nonvanishing locus of a section of an invertible sheaf is the complement of the support of its zero locus",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nonvanishing locus of a section of an invertible module equals the complement of the support of its zero locus ideal sheaf",
+   "results": "Hits: AlgebraicGeometry.RingedSpace.zeroLocus_singleton, AlgebraicGeometry.Scheme.zeroLocus_singleton, AlgebraicGeometry.RingedSpace.mem_zeroLocus_iff, AlgebraicGeometry.Scheme.mem_zeroLocus_iff, AlgebraicGeometry.RingedSpace.zeroLocus, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem, AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff_of_mem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"germ_smul\"",
+   "results": "Hits: PresheafOfModules.germ_smul",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonvanishingLocus_eq|basicOpen_coeff_eq|bijective_smul_germ",
+   "results": "No hits from the search service; direct rg additionally found basicOpen_coeff_eq in source ClearDenominators and no identification of the stalk predicate.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleFinitePowerCover",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); finite-common-power cover proof step 3, comparison of section loci",
+   "via": [
+    "lem-weil-pbc-ample-finite-common-power-cover",
+    "lem-weil-pbc-ample-very-ample-immersion-affine-base",
+    "lem-weil-pbc-coherent-serre-vanishing",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/SectionNonvanishingZeroLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonvanishingLocus_eq_compl_support_zeroLocus",
+  "statement": "theorem nonvanishingLocus_eq_compl_support_zeroLocus (X : Scheme.{u}) (M : X.Modules) [M.IsInvertible] (s : Γ(M, ⊤)) : nonvanishingLocus M s = ((Hom.zeroLocus (homOfGlobalSection M s)).support.compl : Set X)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T085315-L-30003",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T085315-L-30003",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,27 +15,26 @@
  ],
  "proof": [
   {
-   "text": "Use ampleness to choose an affine nonvanishing positive-degree section locus around each point; quasi-compactness selects finitely many.",
+   "text": "Unpack IsAmple and choose an affine section locus through each point. Use the proved section-nonvanishing-zero-locus comparison to express it as the complement of Hom.zeroLocus support. IsCompact.elim_finite_subcover gives a finite set t of points whose chosen loci cover X.",
    "uses": [
     "def-weil-pbc-ample-invertible-module",
-    "def-weil-pbc-quasi-compact-scheme"
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Take the product of the positive degrees and raise each section to the quotient power, using tensor exponent isomorphisms. In a local rank-one basis the new coefficient is a positive power of the old one, so the unit locus is unchanged.",
+   "text": "Use the finite nonempty index type Option t, adding the zero section in degree one at none. Hom.zeroLocus_eq_bot_iff and IdealSheafData.support_bot show its open is bottom, hence affine. The some entries retain the chosen affine opens and cover. Take m=product of their degrees d(i); all d(i)>0, so m>0 and d(i) divides m. Quotients m/d(i) are positive. tensorPowSection and tensorPowMulIso followed by the equality d(i)*(m/d(i))=m produce common-degree sections. Hom.zeroLocus_eq_of_arrowIso and the source lemma compl_support_zeroLocus_tensorPowSection identify their open loci with the original ones.",
    "uses": [
     "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product"
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-zero-scheme-zero-iff"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Evaluation at one identifies section morphisms with global sections. In a rank-one stalk the germ is outside maximalIdeal times the module exactly when its coefficient is a unit, equivalently outside the support of the locally principal zero ideal. Enumerate the nonempty finite family; on an empty scheme use m=1 and one zero section with locus the empty affine open.",
-   "uses": [
-    "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product"
-   ],
+   "text": "The finite type Option t is nonempty even when X is empty. Enumerate it using Fintype.equivFinOfCardEq and Equiv.ulift as ULift(Fin(r+1)). Reindex the affine-locus assertions; surjectivity of this equivalence preserves the supremum of the opens, so it remains top.",
+   "uses": [],
    "elementary": true
   }
  ],
@@ -43,12 +42,14 @@
   "def-pur-sheaf-tensor-product",
   "def-sc-invertible-module",
   "def-weil-pbc-ample-invertible-module",
-  "def-weil-pbc-quasi-compact-scheme"
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-pc-zero-scheme-zero-iff",
+  "lem-weil-pbc-section-nonvanishing-zero-locus"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms Lemma 01VS, first paragraph (finite affine section cover, degrees made common); Properties Definition 01PS, with the local rank-one description of nonvanishing."
+  "place": "Morphisms Lemma 01VS, first paragraph (finite affine section cover, degrees made common); Properties Definition 01PS, with the local rank-one description of nonvanishing.; Lean proof uses the source-library tensor-power and zero-scheme lemmas, with Option of the finite subcover to handle empty schemes."
  },
  "mathlib_searches": [
   {
@@ -131,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2f65b",
-  "group": "C1",
+  "reviewer": "COMPILER",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261012T070530-L-3467643",
+  "landing": "20261012T085315-L-30003",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature, two new statements and node records, proof reduction, pruning and report; all three scratch files compile cleanly, and axiom checks agree with the reported sorries."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
