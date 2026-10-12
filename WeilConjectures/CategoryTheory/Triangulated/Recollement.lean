@@ -189,16 +189,16 @@ theorem existsUnique_distTriang_counit_unit (hi : i.FullyFaithful) [IsIso adj.co
   have : Subsingleton ((triangle adj adj' K w').obj₁⟦(1 : ℤ)⟧ ⟶ (triangle adj adj' K w).obj₃) :=
     subsingleton_hom_shift i jUp adj h₀ _ _ 1
   obtain ⟨τ, hτ⟩ := exists_triangleHom_of_comp_eq_zero hw' hw (𝟙 K) (by
-    show adj'.counit.app K ≫ 𝟙 K ≫ adj.unit.app K = 0
+    change adj'.counit.app K ≫ 𝟙 K ≫ adj.unit.app K = 0
     erw [Category.id_comp]
     exact comp_distTriang_mor_zero₁₂ _ hw')
   have h₁ : τ.hom₁ = 𝟙 _ := Triangle.cancel_mor₁_of_subsingleton hw (by
     rw [← τ.comm₁, hτ]
-    show adj'.counit.app K ≫ 𝟙 K = 𝟙 _ ≫ adj'.counit.app K
+    change adj'.counit.app K ≫ 𝟙 K = 𝟙 _ ≫ adj'.counit.app K
     simp)
   have h₃ : τ.hom₃ = 𝟙 _ := Triangle.cancel_mor₂_of_subsingleton hw' (by
     rw [τ.comm₂, hτ]
-    show 𝟙 K ≫ adj.unit.app K = adj.unit.app K ≫ 𝟙 _
+    change 𝟙 K ≫ adj.unit.app K = adj.unit.app K ≫ 𝟙 _
     simp)
   have h := τ.comm₃
   rw [h₁, h₃] at h
