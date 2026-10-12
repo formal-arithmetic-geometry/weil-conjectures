@@ -24,50 +24,32 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-scheme-coproduct-family], the coprojections identify each $V_a$ with an open and closed subscheme $W_a$ of $V$; the $W_a$ are pairwise disjoint and cover $V$. If every $V_a$ is quasi-compact, each $W_a$ is a quasi-compact subset of $V$, since its inclusion is a homeomorphism onto its image. Their finite union is quasi-compact: an open cover of $V$ restricts to one of each $W_a$, so choose finitely many opens for each $a$ and take the union of these finite choices. For $A=\\varnothing$ the union is empty and is quasi-compact.",
+   "text": "Use sigmaOpenCover V, with its finite index type A and compact component schemes, and Scheme.OpenCover.compactSpace to prove compactness.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, coproduct gluing Lemmas 01JB and 01JC (open summands); finite-union compactness is the open-cover definition"
-   }
+   "elementary": true
   },
   {
-   "text": "Suppose now each $V_a$ is quasi-separated. For every $a$, choose all affine opens $U_{a,t}$ of $V_a$; their images under the open immersion $\\iota_a$ are affine opens of $V$ and together cover $W_a$, hence all of $V$ [lem-weil-pbc-scheme-coproduct-family]. For two images from different summands the intersection is empty, thus quasi-compact. For two images from the same summand $a$, their intersection is homeomorphic to $U_{a,t}\\cap U_{a,t'}$, which is quasi-compact by part (1) of [lem-weil-pbc-quasi-separated-affine-cover-criterion] applied to $V_a$. Therefore the displayed affine open cover of $V$ has quasi-compact pairwise intersections; part (2) of that criterion makes $V$ quasi-separated. The argument also covers $A=\\varnothing$, when the empty affine family covers the empty scheme and its pairwise condition is vacuous.",
+   "text": "Reindex along equivShrink A to put the index in the universe of the schemes; Sigma.reindex gives a scheme isomorphism. Transport along its underlying homeomorphism and sigmaMk to the disjoint-union topology. For two compact open subsets, their inverse images in each summand are compact because Sigma.mk is a closed embedding, and open because it is continuous. Quasi-separatedness of the summand makes their intersection compact. Its image under Sigma.mk is compact; the finitely many such images union to the original intersection. This proves quasi-separatedness, including the empty family.",
    "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma Tag 01KO (lemma-characterize-quasi-separated, lines 4125-4155), (1) implies (2) on each summand and (3) implies (1) on their coproduct"
-   }
+   "elementary": true
   },
   {
-   "text": "Suppose every $g_a$ is locally of finite presentation. Given $x\\in V$, choose its unique summand $W_a$ and its preimage $x_a\\in V_a$ [lem-weil-pbc-scheme-coproduct-family]. By the pointwise definition [def-sbc-locally-finite-presentation], there are affine open neighbourhoods $U_a\\subset V_a$ of $x_a$ and $T\\subset S$ of $g_a(x_a)$, with $g_a(U_a)\\subset T$, for which $\\mathcal O_S(T)\\to\\mathcal O_{V_a}(U_a)$ is a finitely presented ring map. The open immersion $\\iota_a$ identifies $U_a$ with an affine open neighbourhood $\\iota_a(U_a)$ of $x$ in $V$, and $g\\circ\\iota_a=g_a$ by the coproduct mapping property. Thus the induced ring map $\\mathcal O_S(T)\\to\\mathcal O_V(\\iota_a(U_a))$ is isomorphic to the finitely presented map just chosen. As this holds for every $x$, the same pointwise definition says $g$ is locally of finite presentation. If $A=\\varnothing$, there are no points to check.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma Tag 01TQ (lemma-locally-finite-presentation-characterize, lines 4096-4133), locality on the source; written pointwise using Definition Tag 01TP"
-   }
+   "text": "Apply IsZariskiLocalAtSource.sigmaDesc to the component locally-finite-presentation hypotheses, using the Mathlib source-locality instance for LocallyOfFinitePresentation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "def-sbc-locally-finite-presentation"
+  "lem-weil-pbc-scheme-coproduct-family"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/schemes.tex and literature/stacks-project/morphisms.tex",
-  "place": "Schemes, Lemma Tag 01KO (affine-cover criterion), and Morphisms, Lemma Tag 01TQ (local finite presentation); finite coproduct topology from Schemes, Lemmas 01JB and 01JC"
+  "by": "worker",
+  "document": "Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Cover/Open.lean, Mathlib/Topology/QuasiSeparated.lean, Mathlib/Topology/Compactness/Compact.lean, Mathlib/AlgebraicGeometry/Morphisms/Basic.lean",
+  "place": "sigmaOpenCover, sigmaMk, OpenCover.compactSpace, closed-embedding compact preimages, compact-open intersections, finite compact unions, and IsZariskiLocalAtSource.sigmaDesc; direct proof by S1 second reader"
  },
  "mathlib_searches": [
   {
@@ -157,5 +139,15 @@
   "group": "H1",
   "result": "pass",
   "note": "finite A (possibly empty) = {A : Type v} [Finite A]; V_a, S, g_a binders; V = ∐ V with ι_a = Sigma.ι, g = Sigma.desc g (Sigma.ι_desc checked); (1) qc = CompactSpace, qs = QuasiSeparatedSpace (= QuasiSeparated (terminal.from)), each a separate implication; (2) LocallyOfFinitePresentation (g a) -> LocallyOfFinitePresentation (Sigma.desc g); #check with pp.fullNames resolves AlgebraicGeometry.LocallyOfFinitePresentation"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T184341-L-4019091",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
