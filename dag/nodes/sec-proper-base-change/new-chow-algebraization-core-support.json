@@ -1,0 +1,113 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-chow-algebraization-core",
+   "place": "strict decomposition of the projective algebraization argument",
+   "via": [
+    "new-chow-algebraization-core"
+   ]
+  }
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, projective compactification argument; Tag 088E"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowAlgebraizationCore",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Theorem 088E, projective compactification argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "algebraization formal completion proper support",
+   "results": "No existing declaration matching the strict intermediate statement.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "formalCompletionSystem CoherentFormalModule",
+   "results": "No matching theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projective coherent formal module algebraization",
+   "results": "Returned related completion and projective existence lemmas, but no matching theorem.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exists coherent formal completion algebraization proper support",
+   "results": "Service unavailable; grep, Loogle, and LeanFinder found no matching theorem.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "id": "new-chow-algebraization-core-support",
+ "title": "Proper support of the algebraization candidate",
+ "statement": "Under the hypotheses above, let F be a coherent module on Y and suppose its formal completion is isomorphic to the tensor pullback of G. Then F has support proper over Spec A.",
+ "proof": [
+  {
+   "text": "Identify the support of F with the transported support of the pulled formal system using the completion isomorphism and Nakayama. Pullback preserves the proper support of G and proper q preserves properness; the resulting closed subset is proper over Spec A.",
+   "uses": [
+    "lem-weil-pbc-support-pullback-finite-type",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-support-pullback-finite-type",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowAlgebraizationCoreSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowAlgebraizationCoreSupport.lean",
+  "declaration": "AlgebraicGeometry.chow_algebraization_candidate_support",
+  "statement": "theorem chow_algebraization_candidate_support\n    (A : Type u) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) [IsAdicComplete I A]\n    {Z : Scheme.{u}} [IsNoetherian Z] (f : Z ⟶ Spec (.of A))\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (Q : Z.IdealSheafData)\n    (hQ : Q = (Scheme.IdealSheafData.ofIdealTop\n      (I.map (Scheme.ΓSpecIso (CommRingCat.of A)).inv.hom)).comap f)\n    (G : CoherentFormalModule Z Q)\n    (hR : Scheme.Modules.HasSupportProperOver f (G.obj.obj (op 0)))\n    (Y : Scheme.{u}) (q : Y ⟶ Z) [IsProper q]\n    (F : CoherentModules Y)\n    (hF : Nonempty (G.obj ⋙ Scheme.Modules.tensorPullback q ≅\n      formalCompletionSystem (Q.comap q) F.obj)) :\n    Scheme.Modules.HasSupportProperOver (q ≫ f) F.obj",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T230758-L-1908910",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T230758-L-1908910",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

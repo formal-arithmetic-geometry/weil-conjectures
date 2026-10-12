@@ -10013,3 +10013,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:07 L: merged deliver/H2/Sheaf.CategoryTheory.ColimitSiteRawSectionSeparated (stage 3; reviewer PASS; first push; landing 20261012T230757-L-1908539 (interface); batch 20261012T230749; modules 2; new nodes 1)
 - 23:07 L: merged deliver/H3/Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel (stage 3; reviewer PASS; first push; landing 20261012T230757-L-1908638 (proof); batch 20261012T230749; modules 1; new nodes 0)
 - 23:07 L: merged deliver/H3/Sheaf.AlgebraicGeometry.AffineAlternatingCechPinnedMate (stage 3; reviewer PASS; first push; landing 20261012T230757-L-1908806 (interface); batch 20261012T230749; modules 3; new nodes 2)
+- 23:07 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ChowAlgebraizationCore (stage 3; reviewer PASS; first push; landing 20261012T230758-L-1908910 (interface); batch 20261012T230749; modules 3; new nodes 2)
