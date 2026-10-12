@@ -5,12 +5,9 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.FieldTheory.SeparableExtension
 public import Sheaf.RingTheory.SingularIdeal
-import Sheaf.FieldTheory.SeparablyGeneratedDifferentialsDimension
-import Sheaf.Paper.SeparableResidueCotangentInjective
-import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
 import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
 import Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound
-import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.RegularLocalFibreFinrank
 
 /-!
 # Regularity with separable residue field characterizes smoothness over a field
@@ -55,6 +52,12 @@ theorem regularLocal_iff_smoothAtPrime
     (hsep : Algebra.IsSeparableExtension k q.ResidueField) :
     Algebra.IsSmoothAtPrime k ⟨q, inferInstance⟩ ↔
       IsRegularLocalRing (Localization.AtPrime q) := by
-  sorry
+  let q' : PrimeSpectrum S := ⟨q, inferInstance⟩
+  rw [regularLocal_iff_fibre_finrank_eq_dimension k S q hsep]
+  constructor
+  · intro hsm
+    exact (finiteDimensional_and_finrank_kaehlerDifferential_eq_of_isSmoothAtPrime q' hsm).2
+  · intro heq
+    exact isSmoothAtPrime_of_finrank_kaehlerDifferential_le q' heq.le
 
 end Algebra

@@ -34,120 +34,30 @@
  ],
  "proof": [
   {
-   "text": "(Setup.) Write $R=S_{\\mathfrak q}$, $\\mathfrak m=\\mathfrak qS_{\\mathfrak q}$ its maximal ideal and $\\kappa=\\kappa(\\mathfrak q)=R/\\mathfrak m$ [def-weil-pbc-localization-at-prime]. A field is Noetherian [def-weil-pbc-noetherian-ring], so $S$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and $R$, a localization of $S$, is a Noetherian local ring by [lem-weil-pbc-localization-noetherian]; it is a $k$-algebra via $k\\to S\\to R$. The field $\\kappa$ is generated over $k$ by the images $\\bar x_1,\\dots,\\bar x_n$ of the generators of $S$: every element of $\\kappa$ is the class of $s/t$ with $s\\in S$, $t\\in S\\setminus\\mathfrak q$, i.e. $\\bar s\\,\\bar t^{-1}$ with $\\bar s,\\bar t$ polynomials over $k$ in the $\\bar x_i$. So $\\kappa/k$ is a finitely generated field extension, separable by hypothesis [def-weil-pbc-separable-field-extension].",
+   "text": "Rewrite regularity using the fibre-finrank dimension comparison for the given separable residue extension.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "def-weil-pbc-separable-field-extension"
+    "lem-weil-pbc-regular-local-fibre-finrank"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TV (lemma-separable-smooth, lines 38754-38778)"
-   }
+   "elementary": false
   },
   {
-   "text": "(The short exact sequence.) Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $A=k$, $B=R$, $\\mathfrak a=\\mathfrak m$, $C=R/\\mathfrak m=\\kappa$: the sequence $$\\mathfrak m/\\mathfrak m^2\\xrightarrow{\\delta}\\kappa\\otimes_R\\Omega_{R/k}\\xrightarrow{w}\\Omega_{\\kappa/k}\\to0,\\qquad\\delta(a\\bmod\\mathfrak m^2)=1\\otimes\\mathrm da,$$ is exact. By step 1, $R$ is a Noetherian local $k$-algebra whose residue field $\\kappa$ is finitely generated and separable over $k$, so by [lem-weil-pbc-separable-residue-cotangent-injective] the map $\\delta$ (which is the map $a\\bmod\\mathfrak m^2\\mapsto\\mathrm da\\otimes1$ of that lemma) is injective. Hence $0\\to\\mathfrak m/\\mathfrak m^2\\to\\Omega_{R/k}\\otimes_R\\kappa\\to\\Omega_{\\kappa/k}\\to0$ is a short exact sequence of $\\kappa$-vector spaces.",
-   "uses": [
-    "lem-weil-pbc-jacobi-zariski-differential-maps",
-    "lem-weil-pbc-separable-residue-cotangent-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TV, lines 38754-38763 (citing Lemma 00TU lemma-computation-differential and Lemma 00RU lemma-differential-seq)"
-   }
-  },
-  {
-   "text": "(Dimensions.) By [lem-weil-pbc-regular-local-cotangent-dimension] for the Noetherian local ring $R$, $e:=\\dim_\\kappa\\mathfrak m/\\mathfrak m^2$ is finite and $\\dim R\\le e$, with equality if and only if $R$ is a regular local ring [def-weil-regular-scheme]. By [lem-weil-pbc-separably-generated-differentials-dimension] for the finitely generated separable extension $\\kappa/k$ (step 1), $\\Omega_{\\kappa/k}$ is finite dimensional of dimension $t:=\\operatorname{trdeg}_k(\\kappa)$ [def-kun-transcendence-degree]. A short exact sequence of vector spaces with finite-dimensional outer terms has finite-dimensional middle term of dimension the sum, so by step 2 $$\\dim_\\kappa\\Omega_{R/k}\\otimes_R\\kappa=e+t.$$",
-   "uses": [
-    "lem-weil-pbc-regular-local-cotangent-dimension",
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-separably-generated-differentials-dimension",
-    "def-kun-transcendence-degree"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TV, lines 38764-38772"
-   }
-  },
-  {
-   "text": "(Passing from $R$ to $S$.) By [lem-weil-pbc-kahler-differentials-localization] for $k\\to S$ and the multiplicative set $S\\setminus\\mathfrak q$, the map $(\\Omega_{S/k})_{\\mathfrak q}\\to\\Omega_{R/k}$, $\\mathrm ds/u\\mapsto(1/u)\\mathrm d(s/1)$, is an isomorphism of $R$-modules ($(\\cdot)_{\\mathfrak q}$ the localization of modules [def-weil-pbc-module-localization]). Tensoring with $\\kappa$ over $R$: $\\Omega_{R/k}\\otimes_R\\kappa\\cong(\\Omega_{S/k})_{\\mathfrak q}\\otimes_R\\kappa\\cong(\\Omega_{S/k}\\otimes_SR)\\otimes_R\\kappa\\cong\\Omega_{S/k}\\otimes_S\\kappa$, using $M_{\\mathfrak q}=M\\otimes_SS_{\\mathfrak q}$ and associativity of the tensor product. Hence by step 3 $$\\dim_{\\kappa(\\mathfrak q)}\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q)=e+t.$$",
-   "uses": [
-    "lem-weil-pbc-kahler-differentials-localization",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TV, lines 38763-38764 (citing Lemma 00RT lemma-differentials-localize)"
-   }
-  },
-  {
-   "text": "(The comparison.) By [lem-weil-pbc-dimension-at-point-local-ring-trdeg] for the finite type $k$-algebra $S$ and the prime $\\mathfrak q$, $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$ [def-kun-topological-dimension-at-point] is finite and equals $\\dim R+t$. With step 4, $$\\dim_{\\kappa(\\mathfrak q)}\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q)-\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=e-\\dim R\\ge0,$$ and by step 3 this difference is $0$ if and only if $R=S_{\\mathfrak q}$ is a regular local ring.",
-   "uses": [
-    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-    "def-kun-topological-dimension-at-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TV, lines 38766-38777 (citing Lemma 00P1 lemma-dimension-at-a-point-finite-type-field)"
-   }
-  },
-  {
-   "text": "(Regular implies smooth.) Assume $S_{\\mathfrak q}$ is a regular local ring. By step 5, $\\dim_{\\kappa(\\mathfrak q)}\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q)=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$, in particular $\\le$, so by [lem-weil-pbc-differentials-dimension-bound-smooth-at-prime] $k\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal].",
-   "uses": [
-    "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime",
-    "def-weil-pbc-singular-ideal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TV, line 38778 ('we win by applying Lemma 00TT'), implication (2) => (1) of 00TT"
-   }
-  },
-  {
-   "text": "(Smooth implies regular.) Assume $k\\to S$ is smooth at $\\mathfrak q$ [def-weil-pbc-singular-ideal]. By [lem-weil-pbc-smooth-over-field-dimension-differentials], $\\dim_{\\kappa(\\mathfrak q)}\\Omega_{S/k}\\otimes_S\\kappa(\\mathfrak q)=\\dim_{\\mathfrak q}(\\operatorname{Spec}S)$. By step 5 the difference $e-\\dim R$ is $0$, so $S_{\\mathfrak q}$ is a regular local ring [def-weil-regular-scheme].",
+   "text": "Smoothness implies the required equality by the smooth-at-prime differential dimension theorem. Conversely equality implies its weak inequality, and the dimension-bound smoothness criterion applies.",
    "uses": [
     "lem-weil-pbc-smooth-over-field-dimension-differentials",
-    "def-weil-pbc-singular-ideal",
-    "def-weil-regular-scheme"
+    "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TV, line 38778, implication (1) => (3) of 00TT"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-noetherian",
-  "def-weil-pbc-separable-field-extension",
-  "lem-weil-pbc-jacobi-zariski-differential-maps",
-  "lem-weil-pbc-separable-residue-cotangent-injective",
-  "lem-weil-pbc-regular-local-cotangent-dimension",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-separably-generated-differentials-dimension",
-  "def-kun-transcendence-degree",
-  "lem-weil-pbc-kahler-differentials-localization",
-  "def-weil-pbc-module-localization",
-  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
-  "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime",
-  "def-weil-pbc-singular-ideal",
-  "lem-weil-pbc-smooth-over-field-dimension-differentials"
+  "lem-weil-pbc-regular-local-fibre-finrank",
+  "lem-weil-pbc-smooth-over-field-dimension-differentials",
+  "lem-weil-pbc-differentials-dimension-bound-smooth-at-prime"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00TV (lemma-separable-smooth, line 38740) and its proof, lines 38754-38779"
+  "place": "Tag 00TV: final application of Tag 00TT after the cotangent dimension comparison"
  },
  "mathlib_searches": [
   {
@@ -246,5 +156,15 @@
   "group": "G1",
   "result": "pass",
   "note": "field k; S finite-type k-algebra (Algebra.FiniteType); prime q; S_q = Localization.AtPrime q; kappa(q) = q.ResidueField (rfl to IsLocalRing.ResidueField, k-algebra via IsScalarTower k S); separable = recorded Algebra.IsSeparableExtension (not separable-algebraic); smooth at q = recorded Algebra.IsSmoothAtPrime; regular = IsRegularLocalRing; iff; no H7"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T160833-L-2613277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
