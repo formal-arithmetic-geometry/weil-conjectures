@@ -125,20 +125,6 @@ end QuasiFiniteCohomology
 
 section Helpers
 
-/-- Equivalent Frobenius modules have the same traces of powers of the Frobenius. -/
-theorem _root_.FrobeniusModule.Equiv.trace_frobeniusEnd_pow {K : Type} [Field K]
-    {M N : FrobeniusModule.{u + 1, 0} K} (e : M.Equiv N) (m : ℕ) :
-    LinearMap.trace K N.carrier (N.frobeniusEnd ^ m) =
-      LinearMap.trace K M.carrier (M.frobeniusEnd ^ m) := by
-  have hpow : ∀ n : ℕ, (e.toLinearEquiv.conj M.frobeniusEnd) ^ n =
-      e.toLinearEquiv.conj (M.frobeniusEnd ^ n) := by
-    intro n
-    induction n with
-    | zero => simp only [pow_zero, Module.End.one_eq_id, LinearEquiv.conj_id]
-    | succ n ih => rw [pow_succ, pow_succ, ih, Module.End.mul_eq_comp, Module.End.mul_eq_comp,
-        LinearEquiv.conj_comp]
-  rw [e.frobeniusEnd_eq_conj, hpow, LinearMap.trace_conj']
-
 /-- Over an algebraically closed field, endomorphisms with the same characteristic polynomial
 have the same traces of powers. -/
 theorem _root_.LinearMap.trace_pow_eq_of_charpoly_eq {K V W : Type*} [Field K] [IsAlgClosed K]

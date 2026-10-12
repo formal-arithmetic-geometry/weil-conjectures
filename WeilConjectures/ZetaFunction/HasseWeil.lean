@@ -9,6 +9,8 @@ public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
 public import WeilConjectures.Statement
+public import WeilConjectures.ZetaFunction.BettiSymmetry
+public import WeilConjectures.ZetaFunction.CurveZeta
 public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
 /-!
@@ -35,6 +37,10 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
 
 ## Main statements
 
+- `AlgebraicGeometry.Scheme.abs_pointCount_sub_le_sum_finrank`: the Hasse–Weil bound with the
+  Betti numbers `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` (`cor-zl-hasse-weil-general-bound`), using the endpoint
+  cohomology of `prop-endpoints`
+  (`AlgebraicGeometry.Scheme.endpoints_of_isIntegralFrobeniusFactor`).
 - `AlgebraicGeometry.Scheme.Hom.pointCount_eq_sum_roots`: `N n = ∑ (-1) ^ i ∑ αⁿ`.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le`: the Hasse–Weil bound over the degree `n`
   extension, `|N n - (q ^ (d n) + 1)| ≤ ∑_{0 < i < 2d} deg (P i) · q ^ (i n / 2)`.
@@ -42,8 +48,8 @@ roots `α` of the `P i`, the shadow of the Lefschetz trace formula.
   `n = 1`.
 - `AlgebraicGeometry.Scheme.Hom.abs_pointCount_sub_le_two_mul_genus`: the Hasse–Weil bound
   `|N n - (qⁿ + 1)| ≤ 2 g q^{n/2}` for a smooth proper geometrically integral curve of genus `g`.
-  It depends on `AlgebraicGeometry.Scheme.Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization`,
-  the identity `deg P 1 = 2 g`, which is not proved here.
+  It uses `AlgebraicGeometry.Scheme.Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization`,
+  the identity `deg P 1 = 2 g`, proved by counting effective divisors with Riemann–Roch.
 
 ## References
 
@@ -228,16 +234,32 @@ theorem Hom.abs_pointCount_one_sub_le (f : X.Hom (Spec (.of k))) {q d : ℕ}
 geometrically integral curve over a finite field, the factor `P 1` in the factorization
 `Z = P 1 / ((1 - T) (1 - q T))` of its zeta function has degree `2 g`.
 
-This is the zeta-function form of Step 4 of the blueprint proof of `cor-zl-hasse-bound`:
-`dim H¹(C, ℚ̄_ℓ) = 2 g`, which follows from the Kummer computation `H¹(C, ℤ/n) ≅ (ℤ/n)^{2g}`
-(`AlgebraicGeometry.IsCurve.nonempty_addEquiv_sheafH_constantZMod_one`) once `ℓ`-adic cohomology
-and its trace formula are available. -/
+This is the zeta-function form of Step 4 of the blueprint proof of `cor-zl-hasse-bound`,
+`dim H¹(C ⊗ k̄, ℚ̄_ℓ) = 2 g`. It is proved here without `ℓ`-adic cohomology, by F. K. Schmidt's
+argument: Riemann–Roch counts the effective divisors of large degree, which are the coefficients
+of the zeta function, and together with the Riemann hypothesis for `P 1` this forces
+`deg P 1 = 2 g`
+(`AlgebraicGeometry.Scheme.natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization`). The
+genus `dim_k Γ(C, Ω¹)` is the arithmetic genus by
+`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
 theorem Hom.natDegree_eq_two_mul_genus_of_isWeilFactorization
     (f : X ⟶ Spec (.of k)) [SmoothOfRelativeDimension 1 f] [IsProper f]
     [GeometricallyIntegral f] {P : Fin (2 * 1 + 1) → Polynomial ℤ}
     (hfact : IsWeilFactorization (Nat.card k) 1 f.zetaSeries P) :
-    (P 1).natDegree = 2 * f.genus :=
-  sorry
+    (P 1).natDegree = 2 * f.genus := by
+  let : X.Over (Spec (.of k)) := ⟨f⟩
+  have : SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k)) :=
+    ‹SmoothOfRelativeDimension 1 f›
+  have : IsProper (X ↘ Spec (CommRingCat.of k)) := ‹IsProper f›
+  have : GeometricallyIntegral (X ↘ Spec (CommRingCat.of k)) := ‹GeometricallyIntegral f›
+  have : GeometricallyConnected (X ↘ Spec (CommRingCat.of k)) :=
+    GeometricallyIntegral.geometricallyConnected f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨P', hfact', -, hrh'⟩ := Scheme.weil_conjectures f 1
+  obtain rfl : P = P' := hfact.eq_of_one hfact'
+  rw [natDegree_eq_two_mul_arithmeticGenus_of_isWeilFactorization (C := X) hfact' hrh',
+    ← genus_eq_arithmeticGenus]
+  rfl
 
 /-- **The Hasse–Weil bound for curves.** Let `C` be a smooth proper geometrically integral curve
 of genus `g` over a finite field `k` with `q` elements. Then for every `n ≥ 1`,
@@ -257,5 +279,42 @@ theorem Hom.abs_pointCount_sub_le_two_mul_genus (f : X ⟶ Spec (.of k))
   simpa using h
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry
+
+namespace Scheme
+
+section Endpoints
+
+open _root_.Polynomial
+
+variable (k₀ : Type u) [Field k₀] [Finite k₀] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
+
+variable (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.of k₀))]
+  [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
+  [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- Blueprint `cor-zl-hasse-weil-general-bound` (Hasse–Weil bound in every dimension), in its
+cohomological form: for `X₀` smooth, proper and geometrically connected of pure dimension
+`d ≥ 1` over `k₀ = 𝔽_q` and every prime `ℓ ≠ p`, the number `N n = #X₀(𝔽_{qⁿ})` satisfies
+`|N n - (q^{dn} + 1)| ≤ ∑_{0 < i < 2d} bᵢ q^{in/2}` with the Betti numbers
+`bᵢ = dim_{ℚ̄_ℓ} Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`. -/
+theorem abs_pointCount_sub_le_sum_finrank (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+    (hd : 1 ≤ d) {n : ℕ} (hn : n ≠ 0) :
+    |((X ↘ Spec (CommRingCat.of k₀)).pointCount n : ℝ) - ((Nat.card k₀ : ℝ) ^ (d * n) + 1)| ≤
+      ∑ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ 0 < i.1 ∧ i.1 < 2 * d),
+        (Module.finrank (PadicAlgCl l)
+          ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℝ) *
+          (Nat.card k₀ : ℝ) ^ ((i.1 : ℝ) * n / 2) := by
+  obtain ⟨P, hfact, -, hrh, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
+  refine ((X ↘ Spec (CommRingCat.of k₀)).abs_pointCount_sub_le rfl hd hfact hrh hn).trans
+    (le_of_eq (Finset.sum_congr rfl fun i _ ↦ ?_))
+  rw [natDegree_eq_finrank_of_isIntegralFrobeniusFactor k₀ X (hP i) l]
+
+end Endpoints
+
+end Scheme
+
+end AlgebraicGeometry
 
 end

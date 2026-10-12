@@ -93,12 +93,194 @@ theorem toLie_bijective : Function.Bijective (toLie G) := by
 noncomputable def lieEquiv : infPoints G ≃ Lie G :=
   Equiv.ofBijective _ (toLie_bijective G)
 
+/-! ### The group law is the addition -/
+
+omit [GrpObj G] in
+/-- The derivation `𝒪_G → g_*𝒪_S` attached to a morphism `g^*Ω¹_{G/S} ⟶ 𝒪_S`: the inverse of
+`homOfDerivation`. -/
+noncomputable def derivationOfHom (g : S ⟶ G.left)
+    (φ : (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S) :
+    ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom :=
+  (PresheafOfModules.DifferentialsConstruction.derivation' _).postcomp
+    (PresheafOfModules.sheafificationHomEquiv (𝟙 _)
+      ((Scheme.Modules.pullbackPushforwardAdjunction g).homEquiv G.hom.cotangentSheaf
+        (Scheme.Modules.unitModule S) φ))
+
+omit [GrpObj G] in
+theorem derivationOfHom_homOfDerivation (g : S ⟶ G.left)
+    (D : ((Scheme.Modules.pushforward g).obj (Scheme.Modules.unitModule S)).val.Derivation'
+      G.hom.pullbackPresheafHom) :
+    derivationOfHom G g (homOfDerivation G g D) = D := by
+  rw [derivationOfHom, homOfDerivation, Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+  exact PresheafOfModules.Derivation.Universal.fac _ _
+
+omit [GrpObj G] in
+theorem homOfDerivation_derivationOfHom (g : S ⟶ G.left)
+    (φ : (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S) :
+    homOfDerivation G g (derivationOfHom G g φ) = φ := by
+  obtain ⟨D, rfl⟩ := (homOfDerivation_bijective G g).2 φ
+  rw [derivationOfHom_homOfDerivation]
+
+omit [GrpObj G] in
+theorem derivationOfHom_add_d (g : S ⟶ G.left)
+    (φ ψ : (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S)
+    {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)) :
+    (derivationOfHom G g (φ + ψ)).d a =
+      (derivationOfHom G g φ).d a + (derivationOfHom G g ψ).d a := by
+  rfl
+
+omit [GrpObj G] in
+theorem derivationOfHom_injective (g : S ⟶ G.left) :
+    Function.Injective (derivationOfHom G g) := fun φ ψ h ↦ by
+  rw [← homOfDerivation_derivationOfHom G g φ, h, homOfDerivation_derivationOfHom]
+
+/-- Transporting a morphism `g^*Ω¹_{G/S} ⟶ 𝒪_S` along `g = e` restricts its derivation along
+`e⁻¹V = g⁻¹V`. -/
+theorem derivationOfHom_pullbackCongr_comp {g : S ⟶ G.left} (h : g = unitSection G)
+    (φ : (Scheme.Modules.pullback g).obj G.hom.cotangentSheaf ⟶ Scheme.Modules.unitModule S)
+    {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)) :
+    (derivationOfHom G (unitSection G)
+        ((Scheme.Modules.pullbackCongr h).inv.app G.hom.cotangentSheaf ≫ φ)).d a =
+      S.presheaf.map (eqToHom (by rw [h])).op ((derivationOfHom G g φ).d a) := by
+  subst h
+  simp [Scheme.Modules.pullbackCongr]
+
+/-- The values of the derivation of the tangent vector `toLie v` are the `ε`-parts of `v^♯`,
+restricted along `e⁻¹V = v⁻¹V`. -/
+theorem derivationOfHom_toLie_d (v : infPoints G) {V : (TopologicalSpace.Opens G.left)ᵒᵖ}
+    (a : Γ(G.left, V.unop)) :
+    (derivationOfHom G (unitSection G) (toLie G v)).d a =
+      S.presheaf.map (eqToHom (by rw [← ι_comp_left_eq G v.2]; rfl)).op
+        (v.1.left.app V.unop a).snd := by
+  rw [toLie, derivationOfHom_pullbackCongr_comp, omegaHom_eq_homOfDerivation,
+    derivationOfHom_homOfDerivation]
+  rfl
+
+theorem dualNumbersιεOver_comp_mul (v w : infPoints G) :
+    Scheme.dualNumbersιεOver S ≫
+      ((Scheme.dualNumbersProjεOver S ≫ v.1) * (Scheme.dualNumbersProjδOver S ≫ w.1)) = v.1 := by
+  rw [MonObj.comp_mul, Scheme.dualNumbersιεOver_comp_projεOver_assoc,
+    Scheme.dualNumbersιεOver_comp_projδOver_assoc, (mem_infPoints G).1 w.2, MonObj.comp_one,
+    mul_one]
+
+theorem dualNumbersιδOver_comp_mul (v w : infPoints G) :
+    Scheme.dualNumbersιδOver S ≫
+      ((Scheme.dualNumbersProjεOver S ≫ v.1) * (Scheme.dualNumbersProjδOver S ≫ w.1)) = w.1 := by
+  rw [MonObj.comp_mul, Scheme.dualNumbersιδOver_comp_projδOver_assoc,
+    Scheme.dualNumbersιδOver_comp_projεOver_assoc, (mem_infPoints G).1 v.2, MonObj.comp_one,
+    one_mul]
+
+theorem dualNumbersFoldOver_comp_mul (v w : infPoints G) :
+    Scheme.dualNumbersFoldOver S ≫
+      ((Scheme.dualNumbersProjεOver S ≫ v.1) * (Scheme.dualNumbersProjδOver S ≫ w.1)) =
+        (v * w).1 := by
+  rw [MonObj.comp_mul, Scheme.dualNumbersFoldOver_comp_projεOver_assoc,
+    Scheme.dualNumbersFoldOver_comp_projδOver_assoc]
+  rfl
+
+/-- The `ε`-part of `f^♯(a)` for a morphism `f : S[ε] ⟶ G` restricting to the identity section,
+as a section over `e⁻¹V`. -/
+noncomputable def epsPart (f : S.dualNumbers ⟶ G.left) (hf : S.dualNumbersι ≫ f = unitSection G)
+    (V : G.left.Opens) (a : Γ(G.left, V)) : Γ(S, unitSection G ⁻¹ᵁ V) :=
+  S.presheaf.map (eqToHom (by rw [hf]) :
+    unitSection G ⁻¹ᵁ V ⟶ (S.dualNumbersι ≫ f) ⁻¹ᵁ V).op
+    (TrivSqZeroExt.snd (R := Γ(S, (S.dualNumbersι ≫ f) ⁻¹ᵁ V))
+      (M := Γ(S, (S.dualNumbersι ≫ f) ⁻¹ᵁ V)) (f.app V a))
+
+/-- The `ε`-part of `g^♯(a)` for a morphism `g : S[ε][δ] ⟶ G` restricting to the identity
+section, as a section over `e⁻¹V`. -/
+noncomputable def epsPart₁₀ (g : S.dualNumbers.dualNumbers ⟶ G.left)
+    (hg : S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g = unitSection G)
+    (V : G.left.Opens) (a : Γ(G.left, V)) : Γ(S, unitSection G ⁻¹ᵁ V) :=
+  S.presheaf.map (eqToHom (by rw [hg]) :
+    unitSection G ⁻¹ᵁ V ⟶ (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g) ⁻¹ᵁ V).op
+    (TrivSqZeroExt.snd (R := Γ(S, (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g) ⁻¹ᵁ V))
+      (M := Γ(S, (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g) ⁻¹ᵁ V)) (g.app V a).fst)
+
+/-- The `δ`-part of `g^♯(a)` for a morphism `g : S[ε][δ] ⟶ G` restricting to the identity
+section, as a section over `e⁻¹V`. -/
+noncomputable def epsPart₀₁ (g : S.dualNumbers.dualNumbers ⟶ G.left)
+    (hg : S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g = unitSection G)
+    (V : G.left.Opens) (a : Γ(G.left, V)) : Γ(S, unitSection G ⁻¹ᵁ V) :=
+  S.presheaf.map (eqToHom (by rw [hg]) :
+    unitSection G ⁻¹ᵁ V ⟶ (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g) ⁻¹ᵁ V).op
+    (TrivSqZeroExt.fst (R := Γ(S, (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g) ⁻¹ᵁ V))
+      (M := Γ(S, (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g) ⁻¹ᵁ V)) (g.app V a).snd)
+
+theorem epsPart_congr {f f' : S.dualNumbers ⟶ G.left} (h : f = f')
+    (hf : S.dualNumbersι ≫ f = unitSection G) (hf' : S.dualNumbersι ≫ f' = unitSection G)
+    (V : G.left.Opens) (a : Γ(G.left, V)) : epsPart G f hf V a = epsPart G f' hf' V a := by
+  subst h
+  rfl
+
+theorem epsPart_fold_comp (g : S.dualNumbers.dualNumbers ⟶ G.left)
+    (h : S.dualNumbersι ≫ S.dualNumbersFold ≫ g = unitSection G)
+    (hg : S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g = unitSection G)
+    (V : G.left.Opens) (a : Γ(G.left, V)) :
+    epsPart G (S.dualNumbersFold ≫ g) h V a = epsPart₁₀ G g hg V a + epsPart₀₁ G g hg V a := by
+  rw [epsPart, epsPart₁₀, epsPart₀₁, ← map_add]
+  rfl
+
+theorem epsPart_ιε_comp (g : S.dualNumbers.dualNumbers ⟶ G.left)
+    (h : S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g = unitSection G)
+    (V : G.left.Opens) (a : Γ(G.left, V)) :
+    epsPart G (S.dualNumbers.dualNumbersι ≫ g) h V a = epsPart₁₀ G g h V a :=
+  rfl
+
+theorem epsPart_ιδ_comp (g : S.dualNumbers.dualNumbers ⟶ G.left)
+    (h : S.dualNumbersι ≫ S.dualNumbersι.dualNumbers ≫ g = unitSection G)
+    (hg : S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ g = unitSection G)
+    (V : G.left.Opens) (a : Γ(G.left, V)) :
+    epsPart G (S.dualNumbersι.dualNumbers ≫ g) h V a = epsPart₀₁ G g hg V a := by
+  simp only [epsPart, epsPart₀₁, Scheme.Hom.comp_app, CommRingCat.comp_apply]
+  erw [CommRingCat.snd_dualNumber_map]
+  rfl
+
+/-- The `ε`-part of the product of two infinitesimal points is the sum of their `ε`-parts: write
+`v w` as `v_ε w_δ` with `δ` set equal to `ε`. -/
+theorem epsPart_mul (v w : infPoints G) (V : G.left.Opens) (a : Γ(G.left, V)) :
+    epsPart G (v * w).1.left (ι_comp_left_eq G (v * w).2) V a =
+      epsPart G v.1.left (ι_comp_left_eq G v.2) V a +
+        epsPart G w.1.left (ι_comp_left_eq G w.2) V a := by
+  set z := (Scheme.dualNumbersProjεOver S ≫ v.1) * (Scheme.dualNumbersProjδOver S ≫ w.1)
+  have hvw := congrArg Over.Hom.left (dualNumbersFoldOver_comp_mul G v w)
+  have hv := congrArg Over.Hom.left (dualNumbersιεOver_comp_mul G v w)
+  have hw := congrArg Over.Hom.left (dualNumbersιδOver_comp_mul G v w)
+  have hz : S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ z.left = unitSection G := by
+    have := ι_comp_left_eq G v.2
+    rwa [← hv] at this
+  have h₁ : S.dualNumbersι ≫ S.dualNumbersFold ≫ z.left = unitSection G := by
+    have := ι_comp_left_eq G (v * w).2
+    rwa [← hvw] at this
+  have h₂ : S.dualNumbersι ≫ S.dualNumbersι.dualNumbers ≫ z.left = unitSection G := by
+    have := ι_comp_left_eq G w.2
+    rwa [← hw] at this
+  rw [epsPart_congr G hvw.symm _ h₁, epsPart_congr G hv.symm _ hz, epsPart_congr G hw.symm _ h₂]
+  have e₁ := epsPart_fold_comp G z.left h₁ hz V a
+  rw [← epsPart_ιε_comp G z.left hz V a, ← epsPart_ιδ_comp G z.left h₂ hz V a] at e₁
+  exact e₁
+
 /-- The bridge turns the group law of the infinitesimal points into the addition of `Lie(G)`. -/
 theorem lieEquiv_mul (v w : infPoints G) : lieEquiv G (v * w) = lieEquiv G v + lieEquiv G w := by
-  sorry
+  apply derivationOfHom_injective G (unitSection G)
+  ext V a : 3
+  rw [derivationOfHom_add_d]
+  change (derivationOfHom G (unitSection G) (toLie G (v * w))).d a =
+    (derivationOfHom G (unitSection G) (toLie G v)).d a +
+      (derivationOfHom G (unitSection G) (toLie G w)).d a
+  rw [derivationOfHom_toLie_d, derivationOfHom_toLie_d, derivationOfHom_toLie_d]
+  exact epsPart_mul G v w V.unop a
 
 theorem lieEquiv_one : lieEquiv G 1 = 0 := by
-  sorry
+  have h := lieEquiv_mul G 1 1
+  rw [mul_one] at h
+  exact (add_eq_left.mp h.symm)
+
+/-- The infinitesimal points form a commutative group: their group law is the addition of tangent
+vectors. -/
+theorem isMulCommutative_infPoints : IsMulCommutative (infPoints G) :=
+  ⟨⟨fun v w ↦ (lieEquiv G).injective (by rw [lieEquiv_mul, lieEquiv_mul, add_comm])⟩⟩
 
 theorem lieEquiv_symm_add (x y : Lie G) :
     (lieEquiv G).symm (x + y) = (lieEquiv G).symm x * (lieEquiv G).symm y :=
