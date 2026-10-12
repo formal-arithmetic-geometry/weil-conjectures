@@ -3,10 +3,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+
+import Sheaf.AlgebraicGeometry.ArtinSchreierPolynomialCover
+import Sheaf.AlgebraicGeometry.ArtinSchreierSectionKernel
 
 @[expose] public section
 
@@ -55,6 +54,33 @@ theorem artinSchreier_section_data_shortExact (X : Scheme.{u}) (p : ℕ) [Fact p
             (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =
         (c.val : Γ(U.unop.left, ⊤))) :
     (ShortComplex.mk iota wp hzero).ShortExact := by
-  sorry
+  have hlocal : Sheaf.IsLocallySurjective wp := by
+    constructor
+    intro U s
+    have hpU : (p : Γ(U.left, ⊤)) = 0 := by
+      have h := congrArg U.hom.appTop hp
+      simpa only [map_natCast, map_zero] using h
+    obtain ⟨V, f, hf, hsurj, ω, hω⟩ :=
+      exists_etale_surjective_artinSchreier_eq_appTop p (Fact.out : p.Prime) hpU
+        (a (Opposite.op U) s)
+    have : Etale (f ≫ U.hom) := by have := U.prop; infer_instance
+    let W : X.Etale := Etale.mk (f ≫ U.hom)
+    let g : W ⟶ U := MorphismProperty.Over.homMk f rfl
+    refine GrothendieckTopology.superset_covering _ ?_
+      ((ofArrows_mem_smallEtaleTopology_iff (fun _ : Unit ↦ g)).2 ?_)
+    · rw [Sieve.ofArrows, Sieve.generate_le_iff]
+      rintro _ _ ⟨⟩
+      refine ⟨(a (Opposite.op W)).symm ω, ?_⟩
+      apply (a (Opposite.op W)).injective
+      rw [hwp, AddEquiv.apply_symm_apply, hrestr]
+      exact hω
+    · simp only [Set.iUnion_const]
+      exact Set.range_eq_univ.mpr hsurj.surj
+  have : Epi wp := by infer_instance
+  obtain ⟨hk⟩ :=
+    artinSchreier_section_data_isKernel X p hp G a wp iota hzero hrestr hwp hiota
+  have : Mono iota := Limits.mono_of_isLimit_fork hk
+  exact ShortComplex.ShortExact.mk
+    ((ShortComplex.mk iota wp hzero).exact_of_f_is_kernel hk)
 
 end AlgebraicGeometry.Scheme
