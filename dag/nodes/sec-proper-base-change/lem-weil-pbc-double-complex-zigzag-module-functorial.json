@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "(a) $B_n(A)\\subseteq Z_n(A)$. By [def-weil-pbc-double-complex-zigzag-module], $Z_n(A)$ is the set of $a\\in T_n(A)$ with $d_{r,s}(a_{r,s})=\\delta_{r-1,s+1}(a_{r-1,s+1})$ for all $r\\ge1$, $s\\ge0$, $r+s=n$, and $B_n(A)=D_{n+1}(T_{n+1}(A))$. Let $b\\in T_{n+1}(A)$ and $a=D_{n+1}(b)$, so $a_{r,s}=d_{r+1,s}(b_{r+1,s})+\\delta_{r,s+1}(b_{r,s+1})$ and $a_{r-1,s+1}=d_{r,s+1}(b_{r,s+1})+\\delta_{r-1,s+2}(b_{r-1,s+2})$. With the conventions of [def-weil-pbc-module-double-complex] ($dd=0$, $\\delta\\delta=0$, $\\delta_{p-1,q}d_{p,q}=d_{p,q-1}\\delta_{p,q}$ for all $p,q$, zero modules and maps outside the first quadrant), $d_{r,s}(a_{r,s})=d_{r,s}d_{r+1,s}(b_{r+1,s})+d_{r,s}\\delta_{r,s+1}(b_{r,s+1})=d_{r,s}\\delta_{r,s+1}(b_{r,s+1})$ and $\\delta_{r-1,s+1}(a_{r-1,s+1})=\\delta_{r-1,s+1}d_{r,s+1}(b_{r,s+1})+\\delta_{r-1,s+1}\\delta_{r-1,s+2}(b_{r-1,s+2})=\\delta_{r-1,s+1}d_{r,s+1}(b_{r,s+1})$, and these agree by the commuting square at $(r,s+1)$. So $a\\in Z_n(A)$. (On a generator — $b$ concentrated at one place $(p,q)$, i.e. the tuple with $\\delta b$ at $(p,q-1)$ and $db$ at $(p-1,q)$ — this is the check of the three adjacent conditions $d(\\delta b)=\\delta(db)$, $d(0)=0=\\delta(\\delta b)$, $d(db)=0=\\delta(0)$.) Hence $Z_n(A)\\cap B_n(A)=B_n(A)$ and $\\mathbf H_n(A)=Z_n(A)/B_n(A)$.",
+   "text": "(a) $B_n(A)\\subseteq Z_n(A)$. By [def-weil-pbc-double-complex-zigzag-module], $Z_n(A)$ is the set of $a\\in T_n(A)$ with $d_{r,s}(a_{r,s})=\\delta_{r-1,s+1}(a_{r-1,s+1})$ for all $r\\ge1$, $s\\ge0$, $r+s=n$, and $B_n(A)=D_{n+1}(T_{n+1}(A))$. Let $b\\in T_{n+1}(A)$ and $a=D_{n+1}(b)$, so $a_{r,s}=d_{r+1,s}(b_{r+1,s})+\\delta_{r,s+1}(b_{r,s+1})$ and $a_{r-1,s+1}=d_{r,s+1}(b_{r,s+1})+\\delta_{r-1,s+2}(b_{r-1,s+2})$. With the conventions of [def-weil-pbc-module-double-complex] ($dd=0$, $\\delta\\delta=0$, $\\delta_{p-1,q}d_{p,q}=d_{p,q-1}\\delta_{p,q}$ for all $p,q$, zero modules and maps outside the first quadrant), $d_{r,s}(a_{r,s})=d_{r,s}d_{r+1,s}(b_{r+1,s})+d_{r,s}\\delta_{r,s+1}(b_{r,s+1})=d_{r,s}\\delta_{r,s+1}(b_{r,s+1})$ and $\\delta_{r-1,s+1}(a_{r-1,s+1})=\\delta_{r-1,s+1}d_{r,s+1}(b_{r,s+1})+\\delta_{r-1,s+1}\\delta_{r-1,s+2}(b_{r-1,s+2})=\\delta_{r-1,s+1}d_{r,s+1}(b_{r,s+1})$, and these agree by the commuting square at $(r,s+1)$. So $a\\in Z_n(A)$. (On a generator — $b$ concentrated at one place $(p,q)$, i.e. the tuple with $\\delta b$ at $(p,q-1)$ and $db$ at $(p-1,q)$ — this is the check of the three adjacent conditions $d(\\delta b)=\\delta(db)$, $d(0)=0=\\delta(\\delta b)$, $d(db)=0=\\delta(0)$.) Hence $Z_n(A)\\cap B_n(A)=B_n(A)$ and $\\mathbf H_n(A)=Z_n(A)/B_n(A)$. Lean implementation: private boundary_cycles checks the composite of each zigzagRelation with zigzagBoundary is zero using DirectSum.linearMap_ext. A source generator at (k,l) can contribute only for k=p, p+1, or p+2; total degree determines l=q+2, q+1, or q respectively. The first and third cases vanish by vertical and horizontal differential squares, and the middle case is d_comm. All other generators have zero projections. The argument handles p=0 or q=0 by the positive-coordinate cases in zigzagBoundaryComponent, and n=0 has no relation indices. Then inf_eq_right gives the intersection clause.",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-module-double-complex"
@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "(b) Let $a\\in Z_n(A)$ and $r\\ge1$, $s\\ge0$, $r+s=n$. Since $\\Phi$ commutes with $d$ and $\\delta$ [def-weil-pbc-module-double-complex], $d_{r,s}(\\Phi_{r,s}a_{r,s})=\\Phi_{r-1,s}(d_{r,s}a_{r,s})=\\Phi_{r-1,s}(\\delta_{r-1,s+1}a_{r-1,s+1})=\\delta_{r-1,s+1}(\\Phi_{r-1,s+1}a_{r-1,s+1})$, so $\\Phi(a)\\in Z_n(B)$ [def-weil-pbc-double-complex-zigzag-module]. For $b\\in T_{n+1}(A)$ and $p+q=n$: $\\Phi(D_{n+1}b)_{p,q}=\\Phi_{p,q}(d_{p+1,q}b_{p+1,q}+\\delta_{p,q+1}b_{p,q+1})=d_{p+1,q}\\Phi_{p+1,q}(b_{p+1,q})+\\delta_{p,q+1}\\Phi_{p,q+1}(b_{p,q+1})=D_{n+1}(\\Phi b)_{p,q}$ by linearity of $\\Phi_{p,q}$ and the two commutation rules (at the boundary both sides are $0$ by the zero convention). Hence $\\Phi(B_n(A))=\\Phi D_{n+1}(T_{n+1}(A))=D_{n+1}(\\Phi(T_{n+1}(A)))\\subseteq D_{n+1}(T_{n+1}(B))=B_n(B)$. The componentwise map $\\Phi:T_n(A)\\to T_n(B)$ is $R$-linear, since each $\\Phi_{p,q}$ is. Lean implementation of the preservation part: HomologicalComplex₂.zigzagTotalMap_preserves in Sheaf.Algebra.Homology.ZigzagModule proves the projection formula by DirectSum.linearMap_ext and component.of, extracts horizontal and vertical commutation with HomologicalComplex.congr_hom and ConcreteCategory.congr_hom, and applies these equations to the cycle relations. It proves the boundary-map equality on DirectSum.lof generators using toModule_lof and all four cases of the two positive-coordinate tests, then maps each range witness b to zigzagTotalMap Φ (n + 1) b. This closes the preservation obligation without new statements; the other clauses of zigzagModule_functorial are outside this delivery.",
+   "text": "(b) Let $a\\in Z_n(A)$ and $r\\ge1$, $s\\ge0$, $r+s=n$. Since $\\Phi$ commutes with $d$ and $\\delta$ [def-weil-pbc-module-double-complex], $d_{r,s}(\\Phi_{r,s}a_{r,s})=\\Phi_{r-1,s}(d_{r,s}a_{r,s})=\\Phi_{r-1,s}(\\delta_{r-1,s+1}a_{r-1,s+1})=\\delta_{r-1,s+1}(\\Phi_{r-1,s+1}a_{r-1,s+1})$, so $\\Phi(a)\\in Z_n(B)$ [def-weil-pbc-double-complex-zigzag-module]. For $b\\in T_{n+1}(A)$ and $p+q=n$: $\\Phi(D_{n+1}b)_{p,q}=\\Phi_{p,q}(d_{p+1,q}b_{p+1,q}+\\delta_{p,q+1}b_{p,q+1})=d_{p+1,q}\\Phi_{p+1,q}(b_{p+1,q})+\\delta_{p,q+1}\\Phi_{p,q+1}(b_{p,q+1})=D_{n+1}(\\Phi b)_{p,q}$ by linearity of $\\Phi_{p,q}$ and the two commutation rules (at the boundary both sides are $0$ by the zero convention). Hence $\\Phi(B_n(A))=\\Phi D_{n+1}(T_{n+1}(A))=D_{n+1}(\\Phi(T_{n+1}(A)))\\subseteq D_{n+1}(T_{n+1}(B))=B_n(B)$. The componentwise map $\\Phi:T_n(A)\\to T_n(B)$ is $R$-linear, since each $\\Phi_{p,q}$ is. Lean implementation of the preservation part: HomologicalComplex₂.zigzagTotalMap_preserves in Sheaf.Algebra.Homology.ZigzagModule proves the projection formula by DirectSum.linearMap_ext and component.of, extracts horizontal and vertical commutation with HomologicalComplex.congr_hom and ConcreteCategory.congr_hom, and applies these equations to the cycle relations. It proves the boundary-map equality on DirectSum.lof generators using toModule_lof and all four cases of the two positive-coordinate tests, then maps each range witness b to zigzagTotalMap Φ (n + 1) b. This supplies the two preservation clauses without new statements; the remaining clauses are proved in ZigzagModuleFunctorial as described in the other steps. In ZigzagModuleFunctorial the private boundary_natural exposes the same boundary-map equality on generators; zigzagTotalMap_preserves supplies both preservation clauses.",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-module-double-complex"
@@ -58,7 +58,7 @@
    }
   },
   {
-   "text": "(c) By (b) the componentwise map restricts to an $R$-linear map $\\Phi_Z:Z_n(A)\\to Z_n(B)$, and by (a) (for $A$ and $B$) $B_n(A)$ and $B_n(B)$ are submodules of $Z_n(A)$ and $Z_n(B)$ with $\\Phi_Z(B_n(A))\\subseteq B_n(B)$ by (b). By (a), $\\mathbf H_n(A)=Z_n(A)/B_n(A)$ and $\\mathbf H_n(B)=Z_n(B)/B_n(B)$ [def-weil-pbc-double-complex-zigzag-module], with quotient maps $a\\mapsto[a]$ [def-weil-pbc-quotient-module]. Clause (1) of [lem-weil-pbc-quotient-module-induced-map] applied to $f=\\Phi_Z$, $N=B_n(A)$, $N'=B_n(B)$ gives a unique $R$-linear $\\mathbf H_n(\\Phi)=\\overline{\\Phi_Z}$ with $\\mathbf H_n(\\Phi)([a])=[\\Phi(a)]$ for all $a\\in Z_n(A)$.",
+   "text": "Unfold the already constructed zigzagMap [def-weil-pbc-double-complex-zigzag-module]. Submodule.mapQ_apply from [lem-weil-pbc-quotient-module-induced-map] identifies its value on the quotient class of a cycle a with the class of the restricted image. If b.val equals the total image of a.val, Subtype.ext identifies b with that restricted image. For uniqueness, every quotient element has a cycle representative by Submodule.mkQ_surjective [def-weil-pbc-quotient-module]. Construct its image cycle explicitly using zigzagTotalMap_preserves, and apply the two representative formulas to show equality of the candidate map and zigzagMap on that element. LinearMap.ext finishes.",
    "uses": [
     "def-weil-pbc-double-complex-zigzag-module",
     "def-weil-pbc-quotient-module",
@@ -71,11 +71,11 @@
    }
   },
   {
-   "text": "(d) Morphisms compose componentwise and the identity is $(\\mathrm{id}_{A_{p,q}})$ [def-weil-pbc-module-double-complex], so on $T_n$, and hence on $Z_n$, $(\\Psi\\circ\\Phi)_Z=\\Psi_Z\\circ\\Phi_Z$ and $(\\mathrm{id}_A)_Z=\\mathrm{id}_{Z_n(A)}$. By (c), $\\mathbf H_n(\\Psi\\circ\\Phi)=\\overline{\\Psi_Z\\circ\\Phi_Z}$ and $\\mathbf H_n(\\mathrm{id}_A)=\\overline{\\mathrm{id}_{Z_n(A)}}$ (quotients by $B_n(A)$, $B_n(B)$, $B_n(C)$); clause (2) of [lem-weil-pbc-quotient-module-induced-map] gives $\\overline{\\Psi_Z\\circ\\Phi_Z}=\\overline{\\Psi_Z}\\circ\\overline{\\Phi_Z}=\\mathbf H_n(\\Psi)\\circ\\mathbf H_n(\\Phi)$ and $\\overline{\\mathrm{id}}=\\mathrm{id}_{\\mathbf H_n(A)}$.",
+   "text": "Prove the total-map composition and identity by DirectSum.linearMap_ext and simplification on lof generators, using componentwise categorical composition and identity [def-weil-pbc-module-double-complex, def-weil-pbc-double-complex-zigzag-module]. For any quotient element choose its cycle representative a using mkQ_surjective [def-weil-pbc-quotient-module]. Explicitly form b=Phi(a) and c=Psi(b), with membership supplied by zigzagTotalMap_preserves. Apply the representative formula of step (c) for Phi, Psi, and their composite; the total-map composition identifies c.val with the composite image. For identity, take the image cycle to be a itself and use the total-map identity. LinearMap.ext proves both quotient-map laws.",
    "uses": [
     "def-weil-pbc-module-double-complex",
     "def-weil-pbc-double-complex-zigzag-module",
-    "lem-weil-pbc-quotient-module-induced-map"
+    "def-weil-pbc-quotient-module"
    ],
    "elementary": false,
    "source": {
@@ -93,7 +93,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence): the paragraph before it, lines 18391-18395 ('it is clear that this induces morphisms'), and its proof, lines 18416-18449 (zig-zags modulo trivial zig-zags); the source calls (a)-(d) clear or leaves them implicit, the steps write them out"
+  "place": "Algebra, Lemma Tag 00M1 (lemma-no-spectral-sequence): the paragraph before it, lines 18391-18395 ('it is clear that this induces morphisms'), and its proof, lines 18416-18449 (zig-zags modulo trivial zig-zags); the source calls (a)-(d) clear or leaves them implicit, the steps write them out; formalized by B3 on 2026-10-13 with generator checks and quotient representative extensionality (no new statements or holes)"
  },
  "mathlib_searches": [
   {
@@ -177,9 +177,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T161503-L-2648702",
+  "landing": "20261012T194100-L-451468",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
