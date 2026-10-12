@@ -8790,3 +8790,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/P3/Sheaf.RingTheory.NakayamaNilpotent (stage 3; reviewer PASS; first push; landing 20261012T173851-L-3302476 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift (stage 3; reviewer PASS; first push; landing 20261012T173852-L-3302657 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:38 L: merged deliver/Q1/Sheaf.CategoryTheory.TruncationTriangle (stage 3; reviewer PASS; first push; landing 20261012T173853-L-3302824 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:38 L: merged deliver/Q1/Sheaf.RingTheory.EtaleAlgebraLiftEtaleFP (stage 3; reviewer PASS; first push; landing 20261012T173853-L-3302925 (proof); batch 20261012T173801; modules 1; new nodes 0)
