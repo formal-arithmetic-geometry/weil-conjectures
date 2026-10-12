@@ -1,0 +1,154 @@
+{
+ "id": "lem-pc-dualizable-evaluation-second-triangle",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the formal passage from the natural tensor-Hom evaluation isomorphism to the two zig-zag identities",
+   "via": [
+    "lem-pc-perfect-rhom-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "title": "Second triangle identity for dualizable evaluation",
+ "statement": "The second triangle identity in the conclusion of dualizable_evaluation_criterion holds.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FPC, formal tensor-Hom duality criterion"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-scheme",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-derived-internal-hom",
+  "lem-sc-derived-internal-hom-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the naturality and bifunctoriality calculation of Tag 0FPC to the evaluation pairing; the remaining formal categorical calculation is exactly the second zig-zag identity.",
+   "uses": [
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FPC, formal tensor-Hom duality criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-internal-hom-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FPC, cohomology-example-dual-derived"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "dualizable iff evaluation tensor dual to internal Hom isomorphism",
+   "results": "CategoryTheory.tensorLeftHomEquiv and tensorRightHomEquiv in Mathlib/CategoryTheory/Monoidal/Rigid/Basic; no exact iff statement",
+   "date": "2026-10-11",
+   "verdict": "generalization: tensor-Hom equivalences for an existing exact pairing"
+  },
+  {
+   "tool": "loogle",
+   "query": "dualizable evaluation coevaluation zigzag",
+   "results": "0 hits; Unknown identifier dualizable",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizable.*evaluation in Mathlib/",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "closed symmetric monoidal dualizability criterion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactPairing|tensorLeftHomEquiv in ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (a criterion producing an exact pairing from an evaluation isomorphism)",
+   "results": "only Monoidal/Rigid/{Basic,Braided,OfEquivalence} and FGModuleCat; they use a given ExactPairing, none constructs one from an invertible evaluation map",
+   "date": "2026-10-10",
+   "verdict": "no match",
+   "by": "R-prt2934"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.DualizableEvaluationCriterion",
+  "by": "worker",
+  "date": "2026-10-13",
+  "group": "H3"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-dualizable-evaluation-criterion",
+  "worker": "stage1",
+  "summary": "Split the closed symmetric-monoidal criterion into the adjunction calculation proving the K-triangle and the naturality calculation proving the D-triangle; no new nodes were needed.",
+  "blueprint": "The two steps realize the formal passage from the tensor-Hom evaluation isomorphism to the two zig-zag identities in the ancestor proof."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T173832-L-3297337",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DualizableEvaluationCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/DualizableEvaluationCriterion.lean",
+  "declaration": "AlgebraicGeometry.dualizable_evaluation_second_triangle",
+  "statement": "theorem dualizable_evaluation_second_triangle (X : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] (K D : schemeDerivedCategory X) (adj : ∀ A B C : schemeDerivedCategory X, (A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)) ≃ (A ⊗ B ⟶ C)) (hadj : ∀ (A A' B B' C C' : schemeDerivedCategory X) (a : A' ⟶ A) (b : B' ⟶ B) (c : C ⟶ C') (f : A ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op B, C)), adj A' B' C' (a ≫ f ≫ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).map (b.op, c)) = (a ⊗ₘ b) ≫ adj A B C f ≫ c) (e : D ⊗ K ⟶ 𝟙_ (schemeDerivedCategory X)) (φ : ∀ M : schemeDerivedCategory X, M ⊗ D ⟶ (derivedInternalHom (Opens.grothendieckTopology X.toRingedSpace) X.toRingedSpace.sheaf).obj (op K, M)) (hφ : ∀ M : schemeDerivedCategory X, IsIso (φ M)) (hφ_def : ∀ M : schemeDerivedCategory X, φ M = (adj (M ⊗ D) K M).symm ((α_ M D K).hom ≫ (𝟙 M ⊗ₘ e) ≫ (ρ_ M).hom)) (η : 𝟙_ (schemeDerivedCategory X) ⟶ K ⊗ D) (hη : η ≫ φ K = (adj (𝟙_ (schemeDerivedCategory X)) K K).symm ((λ_ K).hom)) : 𝟙 D = (ρ_ D).inv ≫ (𝟙 D ⊗ₘ η) ≫ (α_ D K D).inv ≫ (e ⊗ₘ 𝟙 D) ≫ (λ_ D).hom",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-13"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dec",
+  "group": "C1",
+  "result": "fix",
+  "note": "X, K, D, e, phi_M (hphi_def adjunct of alpha;1⊗e;rho), hphi iso, eta via adjunct of lambda_K, both triangle identities; FIX: adj was a free bijection (statement false), tied by the landed naturality equation hadj; proof docstring added"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T173832-L-3297337",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
