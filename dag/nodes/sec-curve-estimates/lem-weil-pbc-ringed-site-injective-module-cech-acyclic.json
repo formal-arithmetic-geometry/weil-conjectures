@@ -26,89 +26,37 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathrm{PMod}(\\mathcal O)$ for presheaves of $\\mathcal O$-modules. The sheafification functor is an exact left adjoint to the inclusion of sheaves, so an injective sheaf $I$ is injective in $\\mathrm{PMod}(\\mathcal O)$ by [lem-weil-pbc-ringed-site-injective-module-injective-presheaf].",
+   "text": "Use [lem-weil-pbc-ringed-site-injective-module-injective-presheaf] to install injectivity of the underlying module presheaf I.val. This is the exact-sheafification adjunction step, unchanged from the source.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-presheaf-modules-sheafification",
-    "def-sp-injective-resolutions",
     "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FB and the first sentence of Lemma Tag 03FC"
-   }
+   "elementary": false
   },
   {
-   "text": "For the covering $\\mathcal U$, form the free presheaf complex $K_\\bullet$ whose degree-$p$ term is the direct sum of the representable free module presheaves on $U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$ and whose differential is the alternating sum of the face maps. By [lem-weil-pbc-ringed-site-free-cech-complex-exact], $K_\\bullet$ is exact in positive degrees. The proof is the decomposition at each object $W$ and each map $W\\to U$ into the free-module complex on the set of lifts of that map, contracted by adjoining one chosen lift; the empty lift set contributes the zero complex.",
+   "text": "Since p is positive write p=q+1. Apply [lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift] to every cocycle in the chosen Cech complex [def-weil-pbc-site-cech-complex]. Its conclusion supplies a preceding cochain whose differential is that cocycle.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-ringed-site-free-cech-complex-exact",
-    "lem-weil-pbc-power-set-complex-contractible"
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+    "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemmas Tags 03F5 and 03AT"
-   }
+   "elementary": false
   },
   {
-   "text": "For every presheaf of $\\mathcal O$-modules $G$, the Yoneda identification $\\operatorname{Hom}(\\mathcal O_V,G)\\cong G(V)$, $\\beta\\mapsto\\beta_V(e_{\\mathrm{id}_V})$, of [lem-weil-pbc-free-yoneda-presheaf-module] (whose inverse sends $s$ to $e_\\varphi\\mapsto s|_\\varphi$) and the direct-sum/product adjunction identify the cochain complex $\\operatorname{Hom}_{\\mathrm{PMod}(\\mathcal O)}(K_\\bullet,G)$ with the Čech complex $\\check{\\mathcal C}^\\bullet(\\mathcal U,G)$: precomposition by a face map is restriction along the corresponding projection, so the differential is the alternating restriction differential.",
+   "text": "Mathlib HomologicalComplex.exactAt_iff' and ShortComplex.ab_exact_iff turn this elementwise lifting into exactness at q+1. Unfolding SiteCechComplex.complex and using CochainComplex.of_d identifies its two differentials with differentialValue. ExactAt.isZero_homology gives the requested zero object, since cohomologyFunctor is the complex functor composed with homologyFunctor. The covering proof is not required after the presheaf injectivity transfer.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-free-yoneda-presheaf-module"
+    "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AS (lemma-cech-map-into) and the proof of Tag 03FC"
-   }
-  },
-  {
-   "text": "Since $I$ is injective in the presheaf category by Step 1, the contravariant functor $\\operatorname{Hom}(-,I)$ is exact. Applying it to the positive-degree exact complex $K_\\bullet$ from Step 2 gives $H^p(\\operatorname{Hom}(K_\\bullet,I))=0$ for every $p>0$; Step 3 identifies this with $\\check H^p(\\mathcal U,I)$.",
-   "uses": [
-    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-    "lem-weil-pbc-ringed-site-free-cech-complex-exact",
-    "def-weil-pbc-site-cech-complex",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after Tags 03FB and 03F5"
-   }
-  },
-  {
-   "text": "The underlying abelian presheaf $I_{\\mathrm{ab}}$ has the same sections and restriction maps as $I$, so its Čech complex is the same complex of abelian groups. Therefore $\\check H^p(\\mathcal U,I_{\\mathrm{ab}})=0$ for every $p>0$.",
-   "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FD, second paragraph, invoking Tag 03FC"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "def-sp-injective-resolutions",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-site-cech-complex",
   "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-  "lem-weil-pbc-ringed-site-free-cech-complex-exact",
-  "lem-weil-pbc-power-set-complex-contractible",
-  "lem-weil-pbc-free-yoneda-presheaf-module"
+  "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+  "def-weil-pbc-site-cech-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), via Tags 03FB, 03F5 and 03AT"
+  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after the use of Tag 03FB, via Tags 03AS, 03F5 and 03AT"
  },
  "mathlib_searches": [
   {
@@ -195,5 +143,15 @@
   "reviewer": "R-rca",
   "group": "G1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T033900-L-1493291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

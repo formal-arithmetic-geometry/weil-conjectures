@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+ "kind": "statement",
+ "title": "Cocycle lifting for injective module presheaves without a covering condition",
+ "statement": "Let $\\mathcal C$ be a category, let $R$ be a presheaf of rings, and let $M$ be an injective object [def-sp-injective-resolutions] in its category of module presheaves [def-weil-presheaf-modules-sheafification]. Let $f_t:U_t\\to U$ be a family indexed by a set $T$, with chosen iterated fibre products and index maps $S$ as in [def-weil-pbc-site-cech-complex]. For every $q\\geq0$ and cochain $c\\in\\check C^{q+1}(S,M)$ whose alternating restriction differential is zero, there is a cochain $b\\in\\check C^q(S,M)$ whose alternating restriction differential is $c$. No topology, covering condition, or sheaf condition is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after the use of Tag 03FB, via Tags 03AS, 03F5 and 03AT"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Form the chain complex $K_n=\\bigoplus_{t\\in T^{n+1}}R[h_{W_{n,t}}]$ of free representable module presheaves, with the alternating deletion boundary. At every object $V$, group basis elements by their composite $V\\to U$. The fibre-product universal property identifies each group with tuples in the corresponding set of lifts. This construction uses the chosen products and index maps of [def-weil-pbc-site-cech-complex] and the module-presheaf category [def-weil-presheaf-modules-sheafification].",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "An empty lift set contributes a zero complex. For a nonempty lift set, insert a chosen lift as the first coordinate. The contracting homotopy of [lem-weil-pbc-power-set-complex-contractible], with coefficient ring $R(V)$, proves exactness in positive degrees. Direct sums preserve this exactness and module-presheaf exactness is objectwise, so $K$ is exact in positive degrees. This is the argument of Tag 03F5; it does not use a topology or covering condition.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-contractible",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply free Yoneda [lem-weil-pbc-free-yoneda-presheaf-module] and the coproduct universal property to identify $\\operatorname{Hom}(K_n,M)$ with the degree-$n$ cochains of [def-weil-pbc-site-cech-complex]. Precomposition with each deletion projection is restriction along that projection, so the alternating boundary induces exactly the displayed differential. Thus a cocycle $c$ gives a morphism $K_{q+1}\\to M$ killing the image of $K_{q+2}\\to K_{q+1}$.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness at $K_{q+1}$ factors this morphism through the image of $K_{q+1}\\to K_q$. Injectivity [def-sp-injective-resolutions] extends it along the monomorphism from that image into $K_q$. Equivalently use Mathlib ShortComplex.Exact.descToInjective and comp_descToInjective. Free Yoneda turns the resulting map $K_q\\to M$ into $b$ with $d^q b=c$. The degree $q=0$ uses exactness at $1$, never exactness at $0$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-power-set-complex-contractible",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after the use of Tag 03FB, via Tags 03AS, 03F5 and 03AT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exactness of the Cech complex of an injective presheaf of modules over a presheaf of rings",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; Profinite.NobelingProof.succ_exact; CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ; CategoryTheory.InjectiveResolution.exact₀; CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ; CategoryTheory.InjectiveResolution.exact_succ; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex",
+   "date": "2026-10-12",
+   "verdict": "no combined module-presheaf cocycle-lifting theorem found"
+  },
+  {
+   "tool": "grep",
+   "query": "cech|descToInjective",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "date": "2026-10-12",
+   "verdict": "no combined module-presheaf cocycle-lifting theorem found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Positive Cech cocycles in injective presheaves of modules are coboundaries",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: the presheaf part of the injective-module Cech acyclicity argument",
+   "via": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact",
+  "declaration": "CategoryTheory.injective_presheaf_module_cech_cocycle_lift",
+  "file": "lean/Sheaf/CategoryTheory/Sites/InjectivePresheafModuleCechExact.lean",
+  "statement": "theorem injective_presheaf_module_cech_cocycle_lift {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{r}) (M : PresheafOfModules.{s} R) [Injective M] {T : Type w} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (S : SiteCechComplex f hom) (q : ℕ) (c : S.cochains M.presheaf (q + 1)) (hc : S.differentialValue M.presheaf (q + 1) c = 0) : ∃ b : S.cochains M.presheaf q, S.differentialValue M.presheaf q b = c",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T033900-L-1493291",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T033900-L-1493291",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

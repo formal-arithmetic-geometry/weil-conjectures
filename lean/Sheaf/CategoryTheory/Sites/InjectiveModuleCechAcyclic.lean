@@ -10,6 +10,10 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Sheaf.CategoryTheory.SiteCechComplex
 
+import Mathlib.Algebra.Homology.ShortComplex.Ab
+import Sheaf.CategoryTheory.InjectiveModulePresheaf
+import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact
+
 /-!
 # Čech acyclicity of injective module sheaves on a ringed site
 
@@ -26,6 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
+set_option linter.unusedVariables false in
 /-- Positive Čech cohomology of the underlying abelian sheaf of an injective module
 sheaf vanishes for every covering and every choice of the covering's fibre products.
 Source: Stacks Project, Cohomology on Sites, Tag 03FC, via Tags 03FB and 03AT;
@@ -60,6 +65,16 @@ theorem injective_module_cech_cohomology_isZero
     (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom)
     (p : ℕ) (hp : 0 < p) :
     IsZero ((S.cohomologyFunctor p).obj I.val.presheaf) := by
-  sorry
+  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hp)
+  have : Injective I.val := injective_module_sheaf_injective_presheaf R I
+  have hExact : (S.complex I.val.presheaf).ExactAt (q + 1) := by
+    rw [HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 2) (by simp) (by simp),
+      ShortComplex.ab_exact_iff]
+    intro c hc
+    change (S.complex I.val.presheaf).d (q + 1) ((q + 1) + 1) c = 0 at hc
+    change ∃ b, (S.complex I.val.presheaf).d q (q + 1) b = c
+    simp only [SiteCechComplex.complex, CochainComplex.of_d] at hc ⊢
+    exact injective_presheaf_module_cech_cocycle_lift R.obj I.val f hom S q c hc
+  exact hExact.isZero_homology
 
 end CategoryTheory
