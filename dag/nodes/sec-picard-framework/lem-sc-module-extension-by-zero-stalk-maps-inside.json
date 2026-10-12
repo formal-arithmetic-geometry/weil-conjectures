@@ -24,26 +24,38 @@
  ],
  "proof": [
   {
-   "text": "Proof: Construct the canonical extension/restriction adjunction by direct-sum injections on opens contained in W and the module sheafification universal property. On neighborhoods contained in W, which are cofinal at x, the presheaf has exactly one summand and its restrictions are those of G. The resulting colimit comparison, followed by the sheafification stalk isomorphism, is an additive isomorphism. Represent a scalar and a section on a common neighborhood to show linearity over O_X,x, using the inverse restriction-stalk ring isomorphism for the source action. Naturality follows from naturality of injections and sheafification. To use the particular chosen adjunction, compare the canonical adjunction with it by the unique natural automorphism of their common left adjoint compatible with units. Compose the canonical stalk comparison with the stalk of that automorphism. It remains an isomorphism, and sends a germ to the germ of the chosen unit by the unit comparison formula. This proves the displayed germ identity on every V. Source: Stacks Project, Sheaves Lemma 00A7 (2)-(3), Lemma 00A5, and Lemma 007Z.",
+   "text": "Take the natural linear morphism t and its germ formula from the unit-induced stalk-morphism lemma.",
    "uses": [
-    "lem-sc-derived-open-restriction-adjunction-exact",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-sc-topological-extension-by-zero-stalks",
-    "def-pc-module-stalk-functor"
+    "lem-sc-module-extension-by-zero-stalk-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each G, forget t to abelian groups. By stalk_hom_ext and restrictStalkIso_hom_eq_germ this additive map equals the stalk map of the unit after the slice equivalence, followed by the restriction-stalk isomorphism. The germ formula for t supplies the equality on each section.",
+   "uses": [
+    "def-pc-module-stalk-functor",
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unit is an isomorphism by the open-extension unit lemma. The slice equivalence, sheaf forgetful functor and additive stalk functor preserve isomorphisms, so the additive map underlying each component of t is an isomorphism. The module forgetful functor reflects isomorphisms. Package t as a natural isomorphism by NatIso.isIso_of_isIso_app and asIso; its germ formula is unchanged.",
+   "uses": [
+    "lem-sc-module-extension-by-zero-unit-isiso"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sc-module-extension-by-zero-stalk-morphism",
+  "def-pc-module-stalk-functor",
   "lem-sc-derived-open-restriction-adjunction-exact",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-sc-topological-extension-by-zero-stalks",
-  "def-pc-module-stalk-functor"
+  "lem-sc-module-extension-by-zero-unit-isiso"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves Tag 00A7"
+  "place": "Sheaves Tag 00A7 (lemma-j-shriek-modules), clauses (2)-(4); J3 reduction through the unit-induced linear map and invertibility of the chosen unit"
  },
  "mathlib_searches": [
   {
@@ -105,9 +117,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T131559-L-1374052",
-  "kind": "interface"
+  "landing": "20261012T163615-L-2785743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

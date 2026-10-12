@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-module-extension-by-zero-stalk-morphism",
+ "kind": "statement",
+ "title": "Natural linear stalk morphism induced by the open adjunction unit",
+ "statement": "Let $(X,\\mathcal O_X)$ be a ringed space [def-weil-locally-ringed-space-morphism], $W$ an open subset of $X$, $x\\in W$, and $j_!$ the sheafified extension-by-zero functor [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification]. Fix the adjunction unit chosen by [lem-sc-derived-open-restriction-adjunction-exact]. There is a natural $\\mathcal O_{X,x}$-linear morphism from the stalk functor on module sheaves on $W$ [def-weil-sheaf-of-modules-category, def-pc-module-stalk-functor], with scalars transported by the inverse restriction-stalk ring isomorphism, to the stalk at $x$ of $j_!$. On the germ of each section $s$ on every open $V\\subset W$ containing $x$, this morphism is the germ on the image of $V$ in $X$ of the section obtained by applying the chosen unit to $s$. No invertibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Tag 00A7 (lemma-j-shriek-modules), (2)-(3), the unit on stalks; Tag 007Z (lemma-stalk-sheafification)"
+ },
+ "stmt_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-module-stalk-functor",
+  "lem-sc-derived-open-restriction-adjunction-exact"
+ ],
+ "proof": [
+  {
+   "text": "Apply the equivalence from the slice site to W to the chosen unit, and take the additive stalk map. Compose with the additive restriction-stalk isomorphism for the extension sheaf.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent both a scalar and a vector on a common neighborhood in W. The unit is linear there, and the germ scalar multiplication formula shows that the composite is linear after scalar transport by the inverse restriction-stalk ring isomorphism. The inverse and forward ring comparisons cancel.",
+   "uses": [
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality follows by checking germs, using naturality of the unit and of the additive restriction-stalk comparison. On a germ the comparison sends the restricted germ to the original germ on its open image, which gives the required formula.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Sheaves Tag 00A7 (lemma-j-shriek-modules), (2)-(3), the unit on stalks; Tag 007Z (lemma-stalk-sheafification)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the restriction of a sheaf of modules to an open subset is naturally linearly isomorphic to its original stalk",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, ModuleCat.Tilde.stalkIso_hom, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.morphismRestrictStalkMap, AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, ModuleCat.Tilde.stalkIso",
+   "verdict": "no full match; restriction-stalk comparison available only for abelian groups or schemes",
+   "digest": "3492cfbcba26764f"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.PresheafedSpace.restrictStalkIso",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_ofRestrict, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_assoc, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_assoc, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_inv_eq_germ_apply, AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_apply",
+   "verdict": "no full match; restriction-stalk comparison available only for abelian groups or schemes",
+   "digest": "975ac75ca187b7cf"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictStalkNatIso|extensionByZero.*unit|unit.*extensionByZero",
+   "date": "2026-10-12",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "verdict": "no full match; restriction-stalk comparison available only for abelian groups or schemes",
+   "digest": "ada769008021fbd2"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For extension by zero of module sheaves on an open subset, the adjunction unit is an isomorphism and induces a linear map on stalks",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkInside",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proper-flat support proof: Mayer–Vietoris triangle; construction and linearity of the unit-induced stalk map",
+   "via": [
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "lem-sc-module-extension-by-zero-stalk-maps-inside"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMorphism",
+  "file": "lean/Sheaf/Algebra/Homology/ModuleExtensionByZeroStalkMorphism.lean",
+  "declaration": "AlgebraicGeometry.exists_moduleExtensionByZero_stalk_morphism",
+  "statement": "theorem exists_moduleExtensionByZero_stalk_morphism (X : RingedSpace.{u}) :\n    (∀ (W : Opens X) (x : X) (hx : x ∈ W),\n      ∃ e : (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙\n          RingedSpace.moduleStalkFunctor (X.restrict (Opens.isOpenEmbedding W)) ⟨x, hx⟩ ⋙\n          ModuleCat.restrictScalars\n            (X.toPresheafedSpace.restrictStalkIso (Opens.isOpenEmbedding W) ⟨x, hx⟩).inv.hom ⟶\n        (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙\n          PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)) ⋙\n          RingedSpace.moduleStalkFunctor X x,\n        ∀ (G : SheafOfModules.{u} ((moduleRings X).over W)) (V : Opens W)\n          (hV : (⟨x, hx⟩ : W) ∈ V)\n          (s : ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.obj (op V)),\n          (e.app G) (TopCat.Presheaf.germ (C := Ab.{u})\n              (X := (X.restrict (Opens.isOpenEmbedding W)).carrier)\n              ((W.sheafOfModulesEquivOver (moduleRings X)).functor.obj G).val.presheaf\n              V ⟨x, hx⟩ hV s) =\n            TopCat.Presheaf.germ (C := Ab.{u}) (X := X.carrier)\n              ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙\n                PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj\n                  G).val.presheaf\n              ((Opens.isOpenEmbedding W).isOpenMap.functor.obj V) x ⟨⟨x, hx⟩, hV, rfl⟩\n              (((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app\n                G).val.app\n                (op (Over.mk (homOfLE (Set.image_subset_iff.2 (fun y _ => y.2))))) s))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T163615-L-2785743",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T163615-L-2785743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

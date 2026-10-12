@@ -3,7 +3,9 @@ module
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
-import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMorphism
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
+import Mathlib.Geometry.RingedSpace.Stalks
 
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
@@ -54,6 +56,39 @@ theorem ModuleExtensionByZeroStalkInside (X : RingedSpace.{u}) :
                 G).val.app
                 (op (Over.mk (homOfLE (Set.image_subset_iff.2 (fun y _ => y.2))))) s))
  := by
-  sorry
+  classical
+  intro W x hx
+  obtain ⟨t, ht⟩ := exists_moduleExtensionByZero_stalk_morphism X W x hx
+  let adj := Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2
+  let q := W.sheafOfModulesEquivOver (moduleRings X)
+  let Y := X.restrict W.isOpenEmbedding
+  have hi (G : SheafOfModules.{u} ((moduleRings X).over W)) : IsIso (t.app G) := by
+    let F := (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙
+      PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).obj G
+    let f := (SheafOfModules.toSheaf (moduleRings Y)).map (q.functor.map (adj.unit.app G))
+    let S : PresheafedSpace AddCommGrpCat.{u} := ⟨X.carrier, F.val.presheaf⟩
+    let c := S.restrictStalkIso W.isOpenEmbedding ⟨x, hx⟩
+    have hc : (TopCat.Presheaf.stalkFunctor (X := Y.carrier) AddCommGrpCat.{u} ⟨x, hx⟩).map f.hom ≫
+        c.hom =
+        (forget₂ (ModuleCat.{u} (X.presheaf.stalk x)) AddCommGrpCat.{u}).map
+          (t.app G) := by
+      apply TopCat.Presheaf.stalk_hom_ext (X := Y.carrier)
+        ((q.functor.obj G).val.presheaf)
+      intro V hV
+      rw [← Category.assoc, TopCat.Presheaf.stalkFunctor_map_germ, Category.assoc]
+      erw [S.restrictStalkIso_hom_eq_germ W.isOpenEmbedding V ⟨x, hx⟩ hV]
+      ext s
+      exact (ht G V hV s).symm
+    have : IsIso (adj.unit.app G) := moduleExtensionByZero_unit_isIso X W G
+    have : IsIso
+        ((forget₂ (ModuleCat.{u} (X.presheaf.stalk x)) AddCommGrpCat.{u}).map
+          (t.app G)) := by
+      rw [← hc]
+      infer_instance
+    exact isIso_of_reflects_iso _
+      (forget₂ (ModuleCat.{u} (X.presheaf.stalk x)) AddCommGrpCat.{u})
+  let : ∀ G, IsIso (t.app G) := hi
+  have : IsIso t := NatIso.isIso_of_isIso_app t
+  exact ⟨asIso t, ht⟩
 
 end AlgebraicGeometry
