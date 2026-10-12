@@ -6124,3 +6124,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:48 L: merged deliver/X2/Sheaf.RingTheory.MapIntoHenselianColimit (stage 3; reviewer PASS; first push; landing 20261012T044800-L-2043585 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:48 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit (stage 3; reviewer PASS; first push; landing 20261012T044800-L-2043760 (proof); batch 20261012T044734; modules 1; new nodes 0)
 - 04:48 L: merged deliver/Y2/Sheaf.Paper.StrictHenselizationFunctoriality (stage 3; reviewer PASS; first push; landing 20261012T044800-L-2043896 (interface); batch 20261012T044734; modules 5; new nodes 4)
+- 04:48 L: merged deliver/Y2/Sheaf.RingTheory.RootLiftingEtaleRetraction (stage 3; reviewer PASS; first push; landing 20261012T044800-L-2044110 (interface); batch 20261012T044734; modules 1; new nodes 0; change records: coord/changes/root-lifting-etale-retraction-proof-imports.md)
