@@ -5886,3 +5886,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:09 L: merged deliver/U1/Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit (stage 3; reviewer PASS; first push; landing 20261012T030757-L-1309776 (interface); modules 3; new nodes 2)
 - 03:10 L: merged deliver/P1/Sheaf.CategoryTheory.SiteCechComplex (stage 3; reviewer PASS; first push; landing 20261012T030943-L-1317572 (interface); modules 1; new nodes 0; change records: coord/changes/site-cech-complex-imports.md)
 - 03:10 L: merged deliver/Z2/lem-sc-boundary-cech-compatibility (stage 2; reviewer PASS; first push; Sheaf.Paper.BoundaryCechCompatibility AlgebraicGeometry.Scheme.Modules.boundary_cech_compatibility)
+- 03:12 L: merged deliver/V1/WeilConjectures.ConstructibleSheaf.LocallyConstantReduction (stage 3; reviewer PASS; after a return; landing 20261012T031106-L-1325090 (interface); modules 3; new nodes 2)

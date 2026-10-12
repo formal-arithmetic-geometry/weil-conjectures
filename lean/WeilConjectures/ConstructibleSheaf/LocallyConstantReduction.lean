@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
 
+import Sheaf.ConstructibleSheaf.LocallyConstantCoverFiltration
+import Sheaf.ConstructibleSheaf.LocallyConstantRetraction
+
 /-!
 # Reduction of finite locally constant `𝔽_ℓ`-sheaves to constant ones
 
@@ -68,6 +71,10 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_reduction {U : S
           ((v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ⟶ G,
         (Etale.upperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G := by
-  sorry
+  obtain ⟨V, v, hf, he, hc, d, hd, hdeg, hfil⟩ :=
+    Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration ℓ G
+  obtain ⟨r, hr⟩ := Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
+    ℓ G v d hd hdeg
+  exact ⟨V, v, hf, he, hc, d, hd, hdeg, hfil, r, hr⟩
 
 end AlgebraicGeometry

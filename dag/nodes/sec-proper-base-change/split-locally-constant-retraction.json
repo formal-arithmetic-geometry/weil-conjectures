@@ -1,0 +1,156 @@
+{
+ "id": "split-locally-constant-retraction",
+ "blueprint": {
+  "is": null,
+  "from": "lemma-weil-pbc-curve-locally-constant-reduction",
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Retraction after finite étale reduction",
+ "statement": "Let ℓ be a prime number and let F_ℓ = ℤ/ℓℤ, the field with ℓ elements. In Lean the coefficient field is its universe lift ULift (ZMod ℓ), which has the same field operations. Let U be irreducible, let G be a finite locally constant sheaf of F_ℓ-vector spaces on U, and let v : V ⟶ U be finite étale with V connected. If every geometric fibre of v has cardinality d and ℓ does not divide d, then the unit G ⟶ v_*v^*G of the étale pullback/direct-image adjunction has a retraction. Conventions: irreducibility [def-weil-irreducible-components], connectedness [def-weil-connected-scheme], small étale site [def-weil-pbc-etale-site], coefficient-module sheaves [def-weil-pbc-etale-sheaves], finite étale morphisms [def-weil-pbc-scheme-conventions], pullback [def-weil-pbc-inverse-image], and geometric points [def-weil-geometric-point]. Direct image is as in [def-weil-pbc-direct-image]. Geometric-fibre cardinality counts lifts [def-weil-pbc-geometric-fibre]; for finite étale morphisms over a separably closed field these correspond to the points of the fibre scheme.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), characterization of trace and the restriction/trace composite immediately after Definition 03SE (definition-trace-map)"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image",
+  "def-weil-geometric-point",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre"
+ ],
+ "proof": [
+  {
+   "text": "For finite étale v, the trace morphism v_*v^*G ⟶ G composed with the adjunction unit is multiplication by the constant geometric-fibre degree d. Since d is invertible in F_ℓ, multiply the trace by d⁻¹; the resulting morphism is a retraction of the unit.",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-finite-etale-trace",
+    "lem-weil-pbc-finite-etale-trace-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section 03SH (section-trace-method), characterization of trace and the restriction/trace composite immediately after Definition 03SE (definition-trace-map)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-etale-trace",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-finite-etale-trace-degree"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), characterization of trace and the restriction/trace composite immediately after Definition 03SE (definition-trace-map)"
+ },
+ "status": "split",
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1145,
+ "blueprint_sketch": [
+  {
+   "statement": "For irreducible $U$ and finite locally constant $G$ of\n$\\mathbf F_\\ell$-vector spaces, there is a finite etale\n$v:V\\to U$ of degree prime to $\\ell$ such that $v^{-1}G$ has a filtration by\nconstant $\\mathbf F_\\ell$-sheaves, and $G$ is a direct summand of\n$v_*v^{-1}G$.",
+   "proof": "Choose a geometric point $\\bar u$ of $U$. The locally constant sheaf gives\na representation\n\n$$\n\\rho:\\pi_1(U,\\bar u)\\longrightarrow\n\\operatorname{GL}_{\\mathbf F_\\ell}(G_{\\bar u})\n$$\n\nwith finite image $Q$. If $H\\subseteq Q$ is an $\\ell$-Sylow subgroup, the\ninverse image $\\rho^{-1}(H)$ defines a connected finite etale cover\n$v:V\\to U$ of degree $d=[Q:H]$, which is prime to $\\ell$. On $V$, the\nmonodromy factors through $H$.\n\nThe representation filtration gives\n$0=V_0\\subset V_1\\subset\\cdots\\subset V_m=G_{\\bar u}$ with\n$V_a/V_{a-1}\\cong\\mathbf F_\\ell$ and trivial $H$-action. Passing from\n$H$-modules to locally constant sheaves gives, for every $a$, the explicit\nshort exact sequence\n\n$$\n0\\longrightarrow G_{a-1}\\longrightarrow G_a\\longrightarrow\n\\underline{\\mathbf F_\\ell}_V\\longrightarrow0,\n\\qquad G_m=v^{-1}G.\n$$\n\nAll inclusions, quotient maps, and connecting maps commute with extension of\nthe algebraically closed ground field.\n\nThe adjunction unit and the fibrewise sum are\n\n$$\n\\eta:G\\longrightarrow v_*v^{-1}G,\\qquad\n\\operatorname{tr}:v_*v^{-1}G\\longrightarrow G.\n$$\n\nAt a geometric stalk, $\\eta(s)=(s,\\ldots,s)$ in the direct sum indexed by\nthe $d$ points of the fibre, while\n$\\operatorname{tr}(s_1,\\ldots,s_d)=\\sum_as_a$. Consequently\n$\\operatorname{tr}\\circ\\eta=d\\,\\operatorname{id}_G$. Multiplication by\n$d^{-1}\\in\\mathbf F_\\ell$ defines\n$r=d^{-1}\\operatorname{tr}$ with $r\\eta=\\operatorname{id}_G$.\nThe stalk formulas are preserved by base change, so the direct-summand\ndecomposition and every filtration exact sequence are compatible with the\ncohomology comparison maps.",
+   "cites": []
+  }
+ ],
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.LocallyConstantRetraction",
+  "file": "lean/Sheaf/ConstructibleSheaf/LocallyConstantRetraction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction",
+  "statement": "theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction\n    {U V : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime]\n    (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))\n    [IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v]\n    [ConnectedSpace V] (d : ℕ) (hd : ¬ ℓ ∣ d)\n    (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U),\n      Nat.card (v.GeometricFiber s) = d) :\n    ∃ r : (v)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj\n          ((v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ⟶ G,\n        (Etale.upperStarLowerStarAdjunction\n          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.ConstructibleSheaf.LocallyConstantReduction",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trace.*(unit|split)|retract.*[Ee]tale|[Ee]tale.*filtration",
+   "results": "25 hits: Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean, Mathlib/Tactic/Translate/Core.lean, Mathlib/Tactic/CategoryTheory/Coherence/Normalize.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Eigs.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related algebraic or abstract sheaf tools do not provide the stated finite étale cover/filtration or module-sheaf unit retraction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"Sheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related algebraic or abstract sheaf tools do not provide the stated finite étale cover/filtration or module-sheaf unit retraction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale locally trivial finite vector space sheaf has a composition series of constant rank one sheaves after a Sylow cover",
+   "results": "8 hits: Module.isLocallyConstant_rankAtStalk, Module.isLocallyConstant_rankAtStalk_freeLocus, SheafOfModules.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-12",
+   "verdict": "no exact match; related algebraic or abstract sheaf tools do not provide the stated finite étale cover/filtration or module-sheaf unit retraction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction unit of finite etale inverse image has a retraction for sheaves of modules over a field of characteristic coprime to the covering degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isPGroup|invariants_ne_bot|traceMap|trace_map",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "second reading: no complete cover-and-filtration or module-sheaf unit retraction theorem; Sylow results address only the group-theoretic part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splitting restriction to a finite covering by averaging the sum over sheets for locally constant coefficient modules",
+   "results": "8 hits: Profinite.NobelingProof.Linear_CC'₁, Profinite.NobelingProof.Linear_CC'₀, Profinite.NobelingProof.πJ, Profinite.NobelingProof.Linear_CC', Profinite.NobelingProof.πs, Profinite.NobelingProof.spanFinBasis, Profinite.NobelingProof.CC_exact, Profinite.NobelingProof.πs'",
+   "date": "2026-10-12",
+   "verdict": "second reading: no complete cover-and-filtration or module-sheaf unit retraction theorem; Sylow results address only the group-theoretic part"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsSplitMono\"",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "second reading: no complete cover-and-filtration or module-sheaf unit retraction theorem; Sylow results address only the group-theoretic part"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite characteristic p representations have a flag of trivial one dimensional quotients after restriction to a p Sylow subgroup",
+   "results": "8 hits: Sylow.exists_subgroup_card_pow_succ, Sylow.exists_subgroup_le_card_le, Sylow.exists_subgroup_card_pow_prime_le, IsPGroup.exists_le_sylow, IsPGroup.toSylow, Sylow.card_normalizer_modEq_card, Sylow.card_quotient_normalizer_modEq_card_quotient, IsPGroup.to_quotient",
+   "date": "2026-10-12",
+   "verdict": "second reading: no complete cover-and-filtration or module-sheaf unit retraction theorem; Sylow results address only the group-theoretic part"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T031106-L-1325090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T031106-L-1325090",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
