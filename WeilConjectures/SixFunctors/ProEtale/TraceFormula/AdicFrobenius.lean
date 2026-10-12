@@ -121,29 +121,78 @@ namespace FrobeniusSystem
 variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {X : Scheme.{u}} {S : AdicSystem I X}
   {s : Scheme.{u}} {aX : X ⟶ s} {Φ : X ⟶ X} {hΦ : Φ ≫ aX = aX} (F : S.FrobeniusSystem Φ hΦ)
 
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3): the iterates `ψ_{n,m}` of a
-compatible system of Frobenius coefficient morphisms are again compatible: `ψ_{n+1,m}` followed
-by `ν_n` is `LΦ_m^* ν_n` followed by the identification `LΦ_m^* Res ≅ Res LΦ_m^*` and
-`Res ψ_{n,m}`. -/
-theorem coeffIterate_comp_map (n m : ℕ) :
-    (F.weilComplex (n + 1)).coeffIterate m ≫ S.map n =
-      ((upperStar (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))
-          ((F.weilComplex (n + 1)).frobeniusIterate m)).leftDerivedFunctor).map (S.map n) ≫
-        (leftDerivedUpperStarRestrictScalarsIso
-          (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) n.le_succ))
-          ((F.weilComplex (n + 1)).frobeniusIterate m)).hom.app (S.obj n) ≫
-        (levelTransitionRestrictScalars X I n.le_succ).map
-          ((F.weilComplex n).coeffIterate m) := by
-  induction m with
-  | zero =>
-    simp only [WeilComplex.coeffIterate_zero]
-    erw [leftDerivedUpperStarRestrictScalarsIso_id_hom_app]
-    exact ((leftDerivedUpperStarId _ X).hom.naturality (S.map n)).symm
-  | succ m ih =>
-    sorry
-
 end FrobeniusSystem
 
 end AdicSystem
+
+section Generic
+
+variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ') {X s : Scheme.{u}}
+  {aX : X ⟶ s} (Φ : X ⟶ X) (hΦ : Φ ≫ aX = aX)
+  {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+  {K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ'))}
+  (ψ : ((upperStar (ModuleCat.{u + 1} Λ) Φ).leftDerivedFunctor).obj K ⟶ K)
+  (ψ' : ((upperStar (ModuleCat.{u + 1} Λ') Φ).leftDerivedFunctor).obj K' ⟶ K')
+  (t : K ⟶ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ).obj K')
+
+/-- The iterate `Φ^m` of an endomorphism `Φ` of `X`, as a morphism. -/
+abbrev endPow (Φ : X ⟶ X) (m : ℕ) : X ⟶ X := (show End X from Φ) ^ m
+
+lemma endPow_succ (Φ : X ⟶ X) (m : ℕ) : endPow Φ (m + 1) = Φ ≫ endPow Φ m :=
+  (pow_succ (M := End X) Φ m).trans (End.mul_def _ _)
+
+variable {Λ₀ : Type (u + 1)} [CommRing Λ₀] in
+/-- The iterates `ψ_m : L(Φ^m)^* K ⟶ K` of a Frobenius coefficient morphism `ψ`, by the same
+recursion as `AlgebraicGeometry.ProEtale.WeilComplex.coeffIterate`. -/
+noncomputable def iterCoeff (Φ : X ⟶ X)
+    {K₀ : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ₀))}
+    (ψ₀ : ((upperStar (ModuleCat.{u + 1} Λ₀) Φ).leftDerivedFunctor).obj K₀ ⟶ K₀) :
+    (m : ℕ) → ((upperStar (ModuleCat.{u + 1} Λ₀) (endPow Φ m)).leftDerivedFunctor).obj K₀ ⟶ K₀
+  | 0 => (leftDerivedUpperStarId _ X).hom.app K₀
+  | m + 1 =>
+    (leftDerivedUpperStarCongr _ (endPow_succ Φ m)).hom.app K₀ ≫
+      (leftDerivedUpperStarComp _ Φ (endPow Φ m)).hom.app K₀ ≫
+      ((upperStar _ Φ).leftDerivedFunctor).map (iterCoeff Φ ψ₀ m) ≫ ψ₀
+
+variable {Λ₀ : Type (u + 1)} [CommRing Λ₀] in
+lemma coeffIterate_mk_eq_iterCoeff
+    {K₀ : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ₀))}
+    (ψ₀ : ((upperStar (ModuleCat.{u + 1} Λ₀) Φ).leftDerivedFunctor).obj K₀ ⟶ K₀) (m : ℕ) :
+    (WeilComplex.mk (aX := aX) Φ hΦ K₀ ψ₀).coeffIterate m = iterCoeff Φ ψ₀ m := by
+  induction m with
+  | zero => rfl
+  | succ m ih =>
+    rw [WeilComplex.coeffIterate_succ, iterCoeff, ← ih]
+    rfl
+
+include ρ in
+/-- If two Frobenius coefficient morphisms `ψ` over `Λ` and `ψ'` over `Λ'` are compatible along
+`t : K ⟶ Res K'`, so are their iterates. -/
+theorem iterCoeff_comp_eq
+    (h : ψ ≫ t = ((upperStar (ModuleCat.{u + 1} Λ) Φ).leftDerivedFunctor).map t ≫
+      (leftDerivedUpperStarRestrictScalarsIso ρ Φ).hom.app K' ≫
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ).map ψ') (m : ℕ) :
+    iterCoeff Φ ψ m ≫ t =
+      ((upperStar (ModuleCat.{u + 1} Λ) (endPow Φ m)).leftDerivedFunctor).map t ≫
+        (leftDerivedUpperStarRestrictScalarsIso ρ (endPow Φ m)).hom.app K' ≫
+        (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ).map (iterCoeff Φ ψ' m) := by
+  induction m with
+  | zero =>
+    simp only [iterCoeff]
+    erw [leftDerivedUpperStarRestrictScalarsIso_id_hom_app]
+    exact ((leftDerivedUpperStarId _ X).hom.naturality t).symm
+  | succ m ih =>
+    simp only [iterCoeff, Category.assoc, Functor.map_comp]
+    rw [h, ← Functor.map_comp_assoc, ih]
+    simp only [Functor.map_comp, Category.assoc]
+    have h1 := (leftDerivedUpperStarRestrictScalarsIso ρ Φ).hom.naturality (iterCoeff Φ ψ' m)
+    have h2 := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) Φ (endPow Φ m)).hom.naturality t
+    have h3 := leftDerivedUpperStarRestrictScalarsIso_comp_hom_app ρ Φ (endPow Φ m) K'
+    have h4 := (leftDerivedUpperStarCongr (ModuleCat.{u + 1} Λ) (endPow_succ Φ m)).hom.naturality t
+    have h5 := leftDerivedUpperStarRestrictScalarsIso_congr_hom_app ρ (endPow_succ Φ m) K'
+    simp only [Functor.comp_map] at h1 h2 h4
+    rw [reassoc_of% h1, ← reassoc_of% h2, ← reassoc_of% h3, ← reassoc_of% h4, ← reassoc_of% h5]
+
+end Generic
 
 end AlgebraicGeometry.ProEtale
