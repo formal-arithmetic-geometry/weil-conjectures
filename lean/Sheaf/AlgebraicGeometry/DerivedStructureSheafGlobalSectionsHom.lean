@@ -8,7 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.StructureSheafHomotopyGlobalSections
+import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # Derived global sections and maps from the structure sheaf
 Source: Stacks Project, Tag 09M1, proof, first paragraph.
@@ -21,6 +24,54 @@ universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+private theorem descendHomEquiv
+    {C D B : Type*} [Category C] [Category D] [Category B]
+    [Preadditive C] [Preadditive D] [Preadditive B]
+    (L : C ⥤ D) [L.Additive] (R : D ⥤ B) (P : C) (A : B)
+    (S : D) (s : S ≅ L.obj P) (T : C → Prop)
+    (rep : ∀ E : D, ∃ J : C, T J ∧ Nonempty (E ≅ L.obj J))
+    (full : ∀ (J J' : C), T J' → Function.Bijective
+      (L.map : (J ⟶ J') → (L.obj J ⟶ L.obj J')))
+    (b : ∀ (J : C), T J → (P ⟶ J) ≃+ (A ⟶ R.obj (L.obj J)))
+    (nat : ∀ (J J' : C) (hJ : T J) (hJ' : T J') (f : J ⟶ J') (g : P ⟶ J),
+      b J' hJ' (g ≫ f) = b J hJ g ≫ R.map (L.map f)) :
+    ∃ e : ∀ E : D, (S ⟶ E) ≃+ (A ⟶ R.obj E),
+      ∀ (E E' : D) (f : E ⟶ E') (g : S ⟶ E),
+        e E' (g ≫ f) = e E g ≫ R.map f := by
+  classical
+  choose J hJ i using rep
+  let i (E : D) : E ≅ L.obj (J E) := Classical.choice (i E)
+  let l (E : D) := AddEquiv.ofBijective
+    (L.mapAddHom (X := P) (Y := J E)) (full P (J E) (hJ E))
+  let c (E : D) : (S ⟶ E) ≃+ (L.obj P ⟶ L.obj (J E)) :=
+    { toEquiv := Iso.homCongr s (i E)
+      map_add' := by intro f g; simp [Iso.homCongr] }
+  let d (E : D) : (A ⟶ R.obj (L.obj (J E))) ≃+ (A ⟶ R.obj E) :=
+    { toEquiv := Iso.homCongr (Iso.refl A) (R.mapIso (i E)).symm
+      map_add' := by intro f g; simp [Iso.homCongr] }
+  let e (E : D) := (c E).trans ((l E).symm.trans ((b (J E) (hJ E)).trans (d E)))
+  refine ⟨e, ?_⟩
+  intro E E' f g
+  obtain ⟨h, hh⟩ := (full (J E) (J E') (hJ E')).2
+    ((i E).inv ≫ f ≫ (i E').hom)
+  let k := (l E).symm (c E g)
+  have hk : L.map k = s.inv ≫ g ≫ (i E).hom := by
+    exact (l E).apply_symm_apply (c E g)
+  have hk' : (l E').symm (c E' (g ≫ f)) = k ≫ h := by
+    apply (l E').injective
+    rw [AddEquiv.apply_symm_apply]
+    change s.inv ≫ (g ≫ f) ≫ (i E').hom = L.map (k ≫ h)
+    rw [L.map_comp, hk, hh]
+    simp
+  dsimp only [e, AddEquiv.trans_apply, d, Iso.homCongr, Equiv.coe_fn_mk,
+    Functor.mapIso_symm, Iso.symm_hom, Functor.mapIso_hom, Iso.refl_inv]
+  simp only [Category.id_comp]
+  change b (J E') (hJ E') ((l E').symm (c E' (g ≫ f))) ≫ R.map (i E').inv =
+    (b (J E) (hJ E) k ≫ R.map (i E).inv) ≫ R.map f
+  rw [hk', nat (J E) (J E') (hJ E) (hJ E') h k, hh]
+  simp only [Functor.map_comp, Category.assoc]
+  simp
 
 /-- The structure-sheaf case of the derived global-sections adjunction.
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
@@ -57,6 +108,72 @@ theorem derivedStructureSheaf_globalSections_hom (X : Scheme.{u})
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
             (SheafOfModules.unit (moduleRings X.toRingedSpace)) ⟶ E),
-        e E' (g ≫ f) = e E g ≫ RΓ.map f := by sorry
+        e E' (g ≫ f) = e E g ≫ RΓ.map f := by
+  classical
+  let C := SheafOfModules.{u} (moduleRings X.toRingedSpace)
+  let A := (moduleRings X.toRingedSpace).obj.obj (op ⊤)
+  let D := ModuleCat.{u} A
+  let := HasDerivedCategory.standard D
+  let F := RingedSpace.globalSectionsFunctor X.toRingedSpace
+  let G := F.mapHomotopyCategory (ComplexShape.up ℤ)
+  let L := DerivedCategory.Qh (C := C)
+  let M := DerivedCategory.Qh (C := D)
+  let R := F.rightDerivedFunctor
+  let U := (CochainComplex.singleFunctor C 0).obj
+    (SheafOfModules.unit (moduleRings X.toRingedSpace))
+  let V := (CochainComplex.singleFunctor D 0).obj (ModuleCat.of A A)
+  let P := (HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj U
+  let B := (HomotopyCategory.quotient D (ComplexShape.up ℤ)).obj V
+  have hV (n : ℤ) : Projective (V.X n) := by
+    by_cases hn : n = 0
+    · subst n
+      change Projective (ModuleCat.of A A)
+      infer_instance
+    · exact (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ)
+        0 (ModuleCat.of A A) n hn).projective
+  let _ := hV
+  have : V.IsKProjective := CochainComplex.isKProjective_of_projective V 0
+  obtain ⟨a, ha⟩ := structureSheaf_homotopy_globalSections X.toRingedSpace
+  let S := (DerivedCategory.singleFunctor C 0).obj
+    (SheafOfModules.unit (moduleRings X.toRingedSpace))
+  let A₀ := (DerivedCategory.singleFunctor D 0).obj (ModuleCat.of A A)
+  let s : S ≅ L.obj P := (DerivedCategory.quotientCompQhIso C).symm.app U
+  let t : A₀ ≅ M.obj B := (DerivedCategory.quotientCompQhIso D).symm.app V
+  let T (J : HomotopyCategory C (ComplexShape.up ℤ)) : Prop :=
+    ∃ I : CochainComplex C ℤ, I.IsKInjective ∧
+      J = (HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj I
+  have rep (E : DerivedCategory C) : ∃ J, T J ∧ Nonempty (E ≅ L.obj J) := by
+    obtain ⟨I, hI, ⟨i⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective E
+    exact ⟨_, ⟨I, hI, rfl⟩, ⟨i ≪≫ (DerivedCategory.quotientCompQhIso C).symm.app I⟩⟩
+  have full (J J' : HomotopyCategory C (ComplexShape.up ℤ)) (hJ' : T J') :
+      Function.Bijective (L.map : (J ⟶ J') → (L.obj J ⟶ L.obj J')) := by
+    obtain ⟨I, hI, rfl⟩ := hJ'
+    let _ := hI
+    exact CochainComplex.IsKInjective.Qh_map_bijective J I
+  have unitIso (J : HomotopyCategory C (ComplexShape.up ℤ)) (hJ : T J) :
+      IsIso (F.rightDerivedFunctorUnit.app J) := by
+    obtain ⟨I, hI, rfl⟩ := hJ
+    let _ := hI
+    infer_instance
+  let q (J : HomotopyCategory C (ComplexShape.up ℤ)) := AddEquiv.ofBijective
+    (M.mapAddHom (X := B) (Y := G.obj J))
+    (CochainComplex.IsKProjective.Qh_map_bijective V (G.obj J))
+  let c (J : HomotopyCategory C (ComplexShape.up ℤ)) (hJ : T J) :
+      (M.obj B ⟶ M.obj (G.obj J)) ≃+ (A₀ ⟶ R.obj (L.obj J)) :=
+    let _ := unitIso J hJ
+    { toEquiv := Iso.homCongr t (asIso (F.rightDerivedFunctorUnit.app J))
+      map_add' := by intro f g; simp [Iso.homCongr] }
+  let b (J : HomotopyCategory C (ComplexShape.up ℤ)) (hJ : T J) :=
+    (a J).trans ((q J).trans (c J hJ))
+  have nat (J J' : HomotopyCategory C (ComplexShape.up ℤ)) (hJ : T J) (hJ' : T J')
+      (f : J ⟶ J') (g : P ⟶ J) :
+      b J' hJ' (g ≫ f) = b J hJ g ≫ R.map (L.map f) := by
+    change t.inv ≫ M.map (a J' (g ≫ f)) ≫ F.rightDerivedFunctorUnit.app J' =
+      (t.inv ≫ M.map (a J g) ≫ F.rightDerivedFunctorUnit.app J) ≫ R.map (L.map f)
+    rw [ha, M.map_comp]
+    simp only [Category.assoc]
+    exact congrArg (fun z ↦ t.inv ≫ M.map (a J g) ≫ z)
+      (F.rightDerivedFunctorUnit.naturality f)
+  exact descendHomEquiv L R P A₀ S s T rep full b nat
 
 end AlgebraicGeometry

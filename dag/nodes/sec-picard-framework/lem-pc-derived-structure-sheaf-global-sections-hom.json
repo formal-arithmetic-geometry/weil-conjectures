@@ -15,25 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Use functorial K-injective replacements of module-sheaf complexes. The category is Grothendieck abelian and these replacements exist by [prop-pur-kinjective-resolutions-exist]. The localization bijection [lem-weil-pbc-kinjective-hom-derived] computes maps from O_X[0] into the replacement J.",
+   "text": "Use lem-pc-structure-sheaf-homotopy-global-sections for the additive, natural evaluation-at-one equivalences in the homotopy category. The single complex A[0] is strictly at most zero; its only nonzero term is the free rank-one projective A-module, and its other terms are zero and therefore projective. Mathlib CochainComplex.isKProjective_of_projective gives K-projectivity, and CochainComplex.IsKProjective.Qh_map_bijective upgrades its homotopy maps to derived maps. Use quotientCompQhIso to identify the localized single complexes with the stated singleFunctor objects.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-pc-structure-sheaf-homotopy-global-sections",
+    "def-sc-ringed-space-module-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "Evaluate an O_X-linear map at 1. In degree n this identifies Hom(O_X,J^n) with Γ(X,J^n). In degree zero the chain map equation says the section is closed; a homotopy is a degree minus one section whose differential is the difference. This gives the same cycles and boundaries as maps of complexes A[0] to Γ(X,J). A[0] is K-projective, so these homotopy classes equal derived maps from A[0] to QΓ(X,J). The right-derived-functor comparison on a K-injective complex identifies QΓ(X,J) with RΓ(QJ).",
+   "text": "Every derived object admits a K-injective representative, by prop-pur-kinjective-resolutions-exist and DerivedCategory.exists_iso_Q_obj_of_isKInjective. The localization map on homotopy maps into such a representative is bijective by lem-weil-pbc-kinjective-hom-derived. The right-derived-functor unit is an isomorphism on K-injectives, by def-pc-ringed-spaces-derived-direct-image and the source right-derived-functor API. Compose the inverse localization equivalence, evaluation at one, the module localization equivalence, and this unit isomorphism.",
    "uses": [
-    "def-sc-ringed-space-module-cohomology",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-hom-derived",
     "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "Lift a derived morphism between the K-injective representatives to a homotopy class using [lem-weil-pbc-kinjective-hom-derived]. Evaluation at 1 commutes with postcomposition and with global sections of a chain map. Homotopic lifts give the same maps. Comparison homotopy equivalences of resolutions intertwine this calculation, so the additive equivalences descend and satisfy the stated naturality for every derived morphism.",
+   "text": "Choose K-injective representatives J_E and isomorphisms i_E:E to Qh(J_E). Transport the preceding additive equivalence along i_E and its image under RΓ. For f:E to Eprime, lift i_E inverse composed with f composed with i_Eprime to a homotopy morphism h, using bijectivity into the K-injective target. If k represents g, functoriality and injectivity of localization show that k composed with h represents g composed with f. Evaluation-at-one naturality and naturality of the right-derived-functor unit give the desired equation. Cancel the representative isomorphisms using their inverse identities and functoriality. This is the proved private categorical lemma descendHomEquiv; no naturality is postponed.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-pc-structure-sheaf-homotopy-global-sections",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-pc-ringed-spaces-derived-direct-image"
    ],
    "elementary": false
   }
@@ -41,17 +44,18 @@
  "proof_deps": [
   "def-pc-ringed-spaces-derived-direct-image",
   "def-sc-ringed-space-module-cohomology",
+  "lem-pc-structure-sheaf-homotopy-global-sections",
   "lem-weil-pbc-kinjective-hom-derived",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "H1",
+  "agent": "M3",
   "based_on": {
    "document": "literature/stacks-project/perfect.tex",
    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
   },
-  "note": "Structure-sheaf specialization of Tag 09M1; expanded by H1. The module calculation is proved using projectivity and the canonical truncation triangle."
+  "note": "The original K-injective/K-projective route is made into Lean. Only the homotopy evaluation step remains a named theorem; localization, isomorphism transport and all derived naturality glue are proved."
  },
  "mathlib_searches": [
   {
@@ -141,11 +145,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-045a5",
-  "group": "H1",
+  "reviewer": "COMPILER",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T144116-L-2097730",
+  "landing": "20261012T165522-L-2936514",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures and proofs with the nodes and cited sources; verified unchanged existing interface, clean compilation of all three delivered modules and direct importer DerivedTensorUnitCompact, and permitted axioms with expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
