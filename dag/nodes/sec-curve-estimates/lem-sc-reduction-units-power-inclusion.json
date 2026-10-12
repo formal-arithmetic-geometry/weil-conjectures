@@ -1,0 +1,127 @@
+{
+ "id": "lem-sc-reduction-units-power-inclusion",
+ "kind": "statement",
+ "title": "Canonical monomorphism between consecutive nilpotent-units kernels",
+ "statement": "Let X be any scheme [def-pc-scheme], N its nilradical, and E_j the kernels of [def-sc-reduction-units-power-kernel]. The inclusion N^(j+2) ⊆ N^(j+1) induces V(N^(j+1)) → V(N^(j+2)). Restriction of units along its base changes annihilates E_(j+1) on V(N^(j+1)). Define e_j:E_(j+1)→E_j by the kernel universal property so that its composite with E_j→Gm is E_(j+1)→Gm. This constructed morphism is monic.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and the following Claim; proof text retained in the parent DAG node"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-reduction-units-power-kernel"
+ ],
+ "proof": [
+  {
+   "text": "On each affine open N^(j+2)=N^(j+1)N is contained in N^(j+1), by Ideal.mul_le_left. IdealSheafData.inclusion gives the corresponding inclusion of closed subschemes.",
+   "uses": [
+    "def-sc-reduction-units-power-kernel"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Over an etale object U→X form the map between the two pullbacks using identity on U and the subscheme inclusion. Its composite with the first projection is the first projection, by pullback.lift_fst. Apply the contravariant global sections functor and the units additive-group functor to this equality. Composing the next kernel inclusion gives zero by kernel.condition, hence restriction to the preceding subscheme also gives zero. Equality of sheaf morphisms is checked componentwise.",
+   "uses": [
+    "def-sc-reduction-units-power-kernel"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use kernel.lift to define e_j from this zero equation. The equation e_j≫(E_j→Gm)=(E_(j+1)→Gm) is kernel.lift_ι. Since the right-hand side is monic, mono_of_mono_fac proves e_j monic.",
+   "uses": [
+    "def-sc-reduction-units-power-kernel"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-reduction-units-power-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; explicit Lean construction and reduction, J3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical inclusion between kernels of sheaves of units restricted to nested closed subschemes is monic",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical inclusion between sheaf kernels of units modulo consecutive powers of the nilradical is a monomorphism",
+   "results": "Sheaf.mono_of_injective and Sheaf.mono_of_isLocallyInjective; no construction of this morphism.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.lift|kernel.condition; reductionUnitsPowerInclusion in both library roots and the DAG",
+   "results": "Mathlib kernel.lift, kernel.lift_ι, kernel.condition, mono_of_mono_fac supply the categorical steps; no existing nilradical-units inclusion.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerQuotient",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: consecutive nilradical powers",
+   "via": [
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusion",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ReductionUnitsPowerInclusion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.mono_reductionUnitsPowerInclusion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.mono_reductionUnitsPowerInclusion",
+   "AlgebraicGeometry.Scheme.reduction_nilradical_power_le",
+   "AlgebraicGeometry.Scheme.reductionUnitsPowerKernel_ι_comp",
+   "AlgebraicGeometry.Scheme.reductionUnitsPowerInclusion",
+   "AlgebraicGeometry.Scheme.reductionUnitsPowerInclusion_ι"
+  ],
+  "statement": "instance mono_reductionUnitsPowerInclusion (X : Scheme.{u}) (j : ℕ) :\n    Mono (X.reductionUnitsPowerInclusion j)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T135246-L-1673490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T135246-L-1673490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

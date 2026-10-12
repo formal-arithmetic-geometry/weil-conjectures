@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-reduction-units-power-cokernel",
+ "kind": "statement",
+ "title": "Affine linearization identifies the specified units and ideal-module cokernels",
+ "statement": "For any scheme X [def-pc-scheme] and j≥0, let e_j:E_(j+1)→E_j be the constructed inclusion of [lem-sc-reduction-units-power-inclusion], and let F_j be the constructed quasi-coherent module cokernel of [lem-sc-reduction-ideal-power-quotient]. There is an isomorphism coker(e_j) ≅ ULift((F_j)_et) of abelian sheaves on the small etale site of X [def-sc-etale-qcoherent-module]. All cokernels and F_j are specified constructions.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and the following Claim; proof text retained in the parent DAG node"
+ },
+ "stmt_deps": [
+  "lem-sc-reduction-units-power-inclusion",
+  "lem-sc-reduction-ideal-power-quotient",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Over an affine etale object V→U=Spec A, write B=Γ(V,O_V), I=N(U)^(j+1), J=N(U)^(j+2). The affine base-change description of the two closed subschemes identifies the kernels E_j(V), E_(j+1)(V) with the units 1+IB, 1+JB. The constructed inclusion is the ordinary inclusion because it commutes with their inclusions into Gm. Flatness and the affine ideal-module and module-cokernel descriptions identify Γ(V,V^*F_j) with IB/JB, compatibly with restriction.",
+   "uses": [
+    "lem-sc-reduction-units-power-inclusion",
+    "lem-sc-reduction-ideal-power-quotient",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define on these affine objects 1+a↦a mod JB. Multiplication gives a+b+ab, and ab∈JB because 2j+2≥j+2. The kernel is 1+JB. Every class lifts to a∈IB, and a is nilpotent: it is a finite sum of multiples of nilpotent elements from N(U). Thus 1+a is a unit (inverse given by the finite geometric sum), proving surjectivity.",
+   "uses": [
+    "lem-sc-reduction-units-power-inclusion",
+    "lem-sc-reduction-ideal-power-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback of functions carries a to its ring image, so the maps commute with restriction. Affine etale refinements cover the small etale site, hence the maps glue to a sheaf morphism whose kernel is the specified inclusion and which is locally surjective. It has the cokernel universal property; uniqueness of cokernels gives the isomorphism. Lifting the additive groups sectionwise preserves this comparison. For N=0 or empty X both sides vanish; for j=0 the cross-term inequality is equality.",
+   "uses": [
+    "lem-sc-reduction-units-power-inclusion",
+    "lem-sc-reduction-ideal-power-quotient",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-reduction-units-power-inclusion",
+  "lem-sc-reduction-ideal-power-quotient",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; explicit Lean construction and reduction, J3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "successive quotients of sheaves of nilpotent units are additive quasi coherent sheaves",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cokernel of inclusion one plus ideal power units sheaves is isomorphic to etale sheaf of ideal quotient module",
+   "results": "FormallyEtale.comp_bijective, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, KaehlerDifferential.quotientCotangentIdealRingEquiv; no matching sheaf comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "powQuotPowSucc|units.*quotient|reductionUnitsPowerCokernelIso; Mathlib Ideal/Quotient and Nilpotent, both library roots and DAG",
+   "results": "Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow describes an additive ideal quotient, not the multiplicative sheaf comparison. No existing declaration.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerQuotient",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: consecutive nilradical powers",
+   "via": [
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerCokernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ReductionUnitsPowerCokernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_reductionUnitsPowerCokernelIso",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.nonempty_reductionUnitsPowerCokernelIso"
+  ],
+  "statement": "theorem nonempty_reductionUnitsPowerCokernelIso (X : Scheme.{u}) (j : ℕ) :\n    Nonempty (cokernel (X.reductionUnitsPowerInclusion j) ≅\n      ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n        (Modules.etaleTensorSectionsSheaf (X.reductionIdealPowerQuotient j))))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T135246-L-1673490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T135246-L-1673490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

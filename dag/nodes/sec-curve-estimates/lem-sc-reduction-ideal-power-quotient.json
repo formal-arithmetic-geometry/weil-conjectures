@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-reduction-ideal-power-quotient",
+ "kind": "statement",
+ "title": "Constructed quotient module of consecutive nilradical powers is quasi-coherent",
+ "statement": "Let X be any scheme [def-pc-scheme] and N its nilradical. Let M(I)=I.toModules denote the actual kernel of O_X→(V(I)→X)_*O_V(I) in X.Modules [def-weil-sheaf-of-modules-category]. The inclusion N^(j+2)⊆N^(j+1) from [lem-sc-reduction-units-power-inclusion] induces the standard module inclusion toModulesOfLE. Define F_j=coker(M(N^(j+2))→M(N^(j+1))) in X.Modules. For every j≥0 this specific F_j is quasi-coherent [pqf-def-coherent], without Noetherian or nilpotence bounds.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and the following Claim; proof text retained in the parent DAG node"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "lem-sc-reduction-units-power-inclusion"
+ ],
+ "proof": [
+  {
+   "text": "The module M(I) is the categorical kernel of O_X→i_*O_V(I). Both structure modules are quasi-coherent. A closed immersion is quasi-compact and quasi-separated, so pqf-lem-pushforward-qcoh makes its pushforward quasi-coherent. The quasi-coherent kernel theorem makes M(I) quasi-coherent.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the real toModulesOfLE morphism for the ideal-power inclusion and define F_j as its cokernel. Apply quasi-coherent cokernel closure to the two ideal modules.",
+   "uses": [
+    "lem-sc-reduction-units-power-inclusion",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-sc-reduction-units-power-inclusion",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 1 and its Claim; explicit Lean construction and reduction, J3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the quotient of consecutive powers of the nilradical ideal sheaf is a quasi coherent module",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the cokernel of the inclusion of consecutive nilradical ideal modules on a scheme is quasi coherent",
+   "results": "Scheme.nilradical, IdealSheafData.glueDataObj, Scheme.Modules.instAbelian; no matching quotient construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toModulesOfLE|isQuasicoherent_toModules|isQuasicoherent_cokernel; Mathlib AlgebraicGeometry/Modules and source library",
+   "results": "The source library DivisorIdealSheaf.toModulesOfLE and QuasicoherentCokernel.isQuasicoherent_cokernel are reused. No preexisting reductionIdealPowerQuotient in library or DAG.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.ReductionUnitsPowerQuotient",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 1 and its Claim: consecutive nilradical powers",
+   "via": [
+    "lem-sc-reduction-units-power-quotient"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.ReductionIdealPowerQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ReductionIdealPowerQuotient.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isQuasicoherent_reductionIdealPowerQuotient",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.isQuasicoherent_reductionIdealPowerQuotient",
+   "AlgebraicGeometry.Scheme.reductionIdealPowerQuotient"
+  ],
+  "statement": "instance isQuasicoherent_reductionIdealPowerQuotient (X : Scheme.{u}) (j : ℕ) :\n    (X.reductionIdealPowerQuotient j).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T135246-L-1673490",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T135246-L-1673490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
