@@ -11,7 +11,8 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 # Additive functors and direct summands of finite sums
 
 An additive functor preserves the property that an object is a direct summand of a finite direct
-sum of copies of another object.
+sum of copies of another object. The quasi-inverse of an additive equivalence is additive
+(`CategoryTheory.Functor.additive_inv`).
 -/
 
 @[expose] public section
@@ -54,5 +55,10 @@ instance (priority := 100) preservesBiproductsOfShape_of_additive {J : Type w} [
         ⟨isBilimitOfTotal _ (by
           simp_rw [F.mapBicone_π, F.mapBicone_ι, ← F.map_comp]
           erw [← F.map_sum, ← F.map_id, IsBilimit.total hb])⟩ } }
+
+/-- The quasi-inverse of an additive equivalence of preadditive categories is additive. -/
+instance additive_inv [F.IsEquivalence] [F.Additive] : F.inv.Additive :=
+  have : F.asEquivalence.functor.Additive := ‹F.Additive›
+  F.asEquivalence.inverse_additive
 
 end CategoryTheory.Functor

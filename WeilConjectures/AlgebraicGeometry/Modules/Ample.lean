@@ -123,7 +123,9 @@ invertible, this equals `g!` times its coefficient of `m^g`. Here `g` is the top
 dimension of `X`, read as `0` if `X` is empty or infinite-dimensional.
 
 The value is meaningful only for `f` proper and `M` coherent: otherwise the Euler
-characteristics involved may be junk values. -/
+characteristics involved may be junk values.
+
+This is also blueprint `def-sc-hilbert-degree`. -/
 noncomputable def Scheme.Hom.degree (f : X ⟶ Spec (.of K)) (M : X.Modules) : ℤ :=
   Δ_[1]^[((topologicalKrullDim X).unbotD 0).toNat] (f.hilbertFunction M) 0
 
@@ -314,24 +316,24 @@ theorem degree_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
   exact (eulerChar_eq_sum_of_pairwise_disjoint K hn U hU hcover (𝟙_ X.Modules)).trans
     (Finset.sum_congr rfl fun i _ ↦ eulerChar_congr K (pullbackObjUnitIso _))
 
-/-- **The degree is additive over a finite disjoint union**, for modules `M` and `𝒪_X` whose
-cohomology is finite-dimensional and vanishes in degrees `q > D`. Unlike
-`AlgebraicGeometry.Scheme.Modules.degree_eq_sum_of_pairwise_disjoint`, this does not use
+/-- **The degree is additive over a finite disjoint union**, for a quasi-coherent module on a
+quasi-compact separated scheme. This is
+`AlgebraicGeometry.Scheme.Modules.degree_eq_sum_of_pairwise_disjoint` without the appeal to
 Grothendieck vanishing. -/
-theorem degree_eq_sum_of_pairwise_disjoint_of_subsingleton {D : ℕ} {ι : Type*}
-    [Fintype ι] (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤)
-    (M : X.Modules) [∀ q, FiniteDimensional K (M.H q)]
-    [∀ q, FiniteDimensional K ((𝟙_ X.Modules).H q)] (hM : ∀ q, D < q → Subsingleton (M.H q))
-    (hO : ∀ q, D < q → Subsingleton ((𝟙_ X.Modules).H q)) :
+theorem degree_eq_sum_of_pairwise_disjoint_of_isQuasicoherent [CompactSpace X]
+    [IsSeparated (terminal.from X)] {ι : Type*} [Fintype ι] (U : ι → X.Opens)
+    (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M] [∀ q, FiniteDimensional K (M.H q)]
+    [∀ q, FiniteDimensional K ((𝟙_ X.Modules).H q)] :
     M.degree K = ∑ i,
       letI : (U i).toScheme.Over (Spec (.of K)) := ⟨(U i).ι ≫ X ↘ Spec (.of K)⟩
       ((Scheme.Modules.pullback (U i).ι).obj M).degree K := by
   let (i : ι) : (U i).toScheme.Over (Spec (.of K)) := ⟨(U i).ι ≫ X ↘ Spec (.of K)⟩
   simp only [degree, Finset.sum_sub_distrib]
-  rw [eulerChar_eq_sum_of_pairwise_disjoint_of_subsingleton K U hU hcover M hM]
+  rw [eulerChar_eq_sum_of_pairwise_disjoint_of_isQuasicoherent K U hU hcover M]
   congr 1
-  exact (eulerChar_eq_sum_of_pairwise_disjoint_of_subsingleton K U hU hcover (𝟙_ X.Modules)
-    hO).trans (Finset.sum_congr rfl fun i _ ↦ eulerChar_congr K (pullbackObjUnitIso _))
+  exact (eulerChar_eq_sum_of_pairwise_disjoint_of_isQuasicoherent K U hU hcover
+    (𝟙_ X.Modules)).trans (Finset.sum_congr rfl fun i _ ↦ eulerChar_congr K (pullbackObjUnitIso _))
 
 /-- On a connected locally noetherian `K`-scheme of dimension `0`, every invertible module has
 degree `0`: the scheme is artinian, hence discrete, hence a single point, on which every
@@ -574,6 +576,9 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
   have := QuasiCompact.compactSpace_of_compactSpace f
   have : IsNoetherian X := {}
   have : Fintype (ConnectedComponents X) := Fintype.ofFinite _
+  have : IsSeparated (terminal.from X) := by
+    rw [← terminal.comp_from f]
+    infer_instance
   -- The connected components `U c` of `X`, open and closed in `X`.
   let U (c : ConnectedComponents X) : X.Opens :=
     ⟨ConnectedComponents.mk ⁻¹' {c}, (isOpen_discrete {c}).preimage
@@ -608,18 +613,8 @@ theorem Scheme.Hom.degree_pos_of_isAmple [IsAlgClosed K] (f : X ⟶ Spec (.of K)
     rcases hdimU c with h | h
     · exact (hpos h).le
     · exact (Scheme.Modules.degree_eq_zero_of_topologicalKrullDim_le_zero K h _).ge
-  -- the cohomology of `L` and `𝒪_X` vanishes in large degrees
-  have : SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) L := by
-    have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible L
-    have := SheafOfModules.IsInvertible.isFiniteLocallyFree L
-    have := SheafOfModules.IsFiniteLocallyFree.isFinitePresentation L
-    infer_instance
-  obtain ⟨D₁, hD₁⟩ := Scheme.Modules.exists_forall_subsingleton_H_of_isProper (k := K) L
-  obtain ⟨D₂, hD₂⟩ :=
-    Scheme.Modules.exists_forall_subsingleton_H_of_isProper (k := K) (𝟙_ X.Modules)
   rw [degree_eq_degree_of_topologicalKrullDim_eq_one f hdim,
-    Scheme.Modules.degree_eq_sum_of_pairwise_disjoint_of_subsingleton K (D := max D₁ D₂) U hU
-      hcover L (fun q hq ↦ hD₁ q (by omega)) (fun q hq ↦ hD₂ q (by omega))]
+    Scheme.Modules.degree_eq_sum_of_pairwise_disjoint_of_isQuasicoherent K U hU hcover L]
   refine Finset.sum_pos' (fun c _ ↦ (hdeg c).1) ?_
   -- Some component has dimension `1`: otherwise every component is discrete, hence so is `X`.
   by_contra! h

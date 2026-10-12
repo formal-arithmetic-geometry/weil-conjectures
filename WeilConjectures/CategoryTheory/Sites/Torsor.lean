@@ -76,7 +76,9 @@ that `T` has sections locally, i.e. every object is covered by objects over whic
 section. Equivalently, `T` is locally isomorphic to `G` with its translation action.
 (blueprint: `def-sc-gm-torsor`, for a general abelian sheaf `G` on a general site; the étale
 `𝔾ₘ`-torsors and the Zariski `𝒪ˣ`-torsors of the blueprint are the cases
-`G = AlgebraicGeometry.Scheme.gmSheaf X` and `G = AlgebraicGeometry.Scheme.unitsSheaf X`) -/
+`G = AlgebraicGeometry.Scheme.gmSheaf X` and `G = AlgebraicGeometry.Scheme.unitsSheaf X`).
+For `G` the constant sheaf of a finite abelian group on a small étale site these are the finite
+torsors of blueprint `def-weil-pbc-finite-torsors`. -/
 structure Torsor (G : Sheaf J AddCommGrpCat.{w}) where
   /-- The underlying sheaf of sets. -/
   sheaf : Sheaf J (Type w)

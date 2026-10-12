@@ -3845,7 +3845,7 @@ include hc in
 
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
 transition maps. If `lim Dᵢ` is separated, then `Dᵢ` is separated for every `i` past some stage.
-(Blueprint: `lemma:nagata-fixed-base-separated-stage-exists`.) -/
+(Blueprint: `lemma-nagata-separated-stage-exists-absolute`.) -/
 @[stacks 086Q]
 theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
     ∃ i₀ : I, ∀ {i : I} (_ : i ⟶ i₀), (D.obj i).IsSeparated := by
@@ -3916,7 +3916,8 @@ include hc in
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes over a base
 `S`, with affine transition maps and quasi-compact structure morphisms. If `lim Dᵢ ⟶ S` is
 separated, then `Dᵢ ⟶ S` is separated for every `i` past some stage.
-(Blueprint: `lemma:nagata-fixed-base-separated-eventually`.) -/
+(Blueprint: `lemma-nagata-fixed-base-separated-stage-exists`,
+`lemma-nagata-fixed-base-separated-eventually`.) -/
 @[stacks 01ZH]
 theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
     [IsSeparated (c.π.app i₀ ≫ t.app i₀)] :

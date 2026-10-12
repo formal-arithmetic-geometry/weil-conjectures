@@ -33,8 +33,9 @@ subgroup schemes, the `n`-torsion subgroup scheme and isogenies.
   `AlgebraicGeometry.IsClosedSubgroupScheme`: (normal, closed) subgroup schemes.
 - `AlgebraicGeometry.torsionSubgroupScheme`: the `n`-torsion subgroup scheme `G[n]`.
   Being a kernel, it is itself a group scheme (`CategoryTheory.GrpObj.instGrpObjKer`).
-- `AlgebraicGeometry.torsionByEquivHom`, `AlgebraicGeometry.torsionByEquiv`: the `T`-points
-  (and the `K`-points) of `G[n]` are the `n`-torsion of `G(T)` (and of `G(K)`).
+- `AlgebraicGeometry.torsionByEquiv`: the `K`-points of `G[n]` are the `n`-torsion of `G(K)`.
+- `AlgebraicGeometry.torsionByPointsEquiv`: the same for `T`-points, `T` any `K`-scheme.
+- `AlgebraicGeometry.torsionSubgroupSchemeMul`: multiplication by `k` from `G[k * n]` to `G[n]`.
 - `AlgebraicGeometry.IsIsogeny`: a surjective homomorphism of group schemes with finite kernel.
 - `AlgebraicGeometry.isogenyDegree`: the degree of an isogeny, the order of its kernel.
 
@@ -179,6 +180,8 @@ end Etale
 
 /-- Blueprint `sk-def-av-mult-n`: Multiplication by `n` and `n`-torsion.
 
+This is also blueprint `def-sc-mult-n`.
+
 The `n`-torsion subgroup scheme `G[n]` of a group scheme `G` over `K` is the kernel of the
 `n`-th power map `𝟙 G ^ n`, which on points is `a ↦ a + ⋯ + a`:
 
@@ -199,12 +202,37 @@ noncomputable instance (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n 
     GrpObj (torsionSubgroupScheme G n) :=
   inferInstanceAs (GrpObj (GrpObj.ker (𝟙 G ^ n)))
 
-/-- The `T`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
-are the `n`-torsion points of `G(T)`: the `n`-torsion of the group `T ⟶ G`, written additively,
-is in bijection with `T ⟶ G[n]`, a point `x` of `G[n]` corresponding to its image
-`x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(T)`. -/
-noncomputable def torsionByEquivHom (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ)
-    (T : Over (Spec (.of K))) :
+/-- The inclusion `G[n] ⟶ G` of the `n`-torsion subgroup scheme, that is,
+`CategoryTheory.GrpObj.kerι (𝟙 G ^ n)`. -/
+noncomputable def torsionSubgroupScheme.ι (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) :
+    torsionSubgroupScheme G n ⟶ G :=
+  GrpObj.kerι (𝟙 G ^ n)
+
+instance (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) : Mono (torsionSubgroupScheme.ι G n) :=
+  GrpObj.mono_kerι _
+
+/-- The inclusion `G[n] ⟶ G` is killed by `[n]`. -/
+theorem torsionSubgroupScheme.ι_pow (G : Over (Spec (.of K))) [GrpObj G] (n : ℕ) :
+    torsionSubgroupScheme.ι G n ^ n = 1 := by
+  have h := GrpObj.kerι_comp (𝟙 G ^ n)
+  simp only [comp_pow, Category.comp_id] at h
+  exact h
+
+/-- Blueprint `def-sc-mult-n`: the `n`-torsion subgroup scheme `G[n]` of a commutative group
+scheme is a closed subgroup scheme of `G`, being the kernel of the homomorphism `[n] = 𝟙 G ^ n`
+(`AlgebraicGeometry.isMonHom_npow_id`, `AlgebraicGeometry.isClosedSubgroupScheme_kerι`). -/
+instance isClosedSubgroupScheme_torsionSubgroupScheme_ι (G : Over (Spec (.of K))) [GrpObj G]
+    [IsCommMonObj G] (n : ℕ) : IsClosedSubgroupScheme (torsionSubgroupScheme.ι G n) :=
+  isClosedSubgroupScheme_kerι _
+
+/-- Blueprint `def-sc-mult-n`: the `T`-points of the `n`-torsion subgroup scheme.
+
+For a commutative group scheme `G` over `K` and a `K`-scheme `T`, the `T`-points of `G[n]` are
+the `n`-torsion of the group `G(T)`, written additively: the `n`-torsion point `x` corresponds to
+the unique point of `G[n]` whose image under `AlgebraicGeometry.torsionSubgroupScheme.ι` is `x`.
+For `T = Spec K` this is `AlgebraicGeometry.torsionByEquiv`. -/
+noncomputable def torsionByPointsEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G]
+    (n : ℕ) (T : Over (Spec (.of K))) :
     AddSubgroup.torsionBy (Additive (T ⟶ G)) (n : ℤ) ≃ (T ⟶ torsionSubgroupScheme G n) :=
   (Equiv.subtypeEquiv (p := fun x ↦ x ∈ AddSubgroup.torsionBy _ (n : ℤ))
     (q := fun x ↦ x ∈ MonoidHom.ker (IsMonHom.monoidHom (𝟙 G ^ n) T)) Additive.toMul
@@ -218,11 +246,38 @@ noncomputable def torsionByEquivHom (G : Over (Spec (.of K))) [GrpObj G] [IsComm
 /-- The `K`-points of the `n`-torsion subgroup scheme `G[n]` of a commutative group scheme `G`
 are the `n`-torsion points of `G`: the `n`-torsion of the group `G(K)`, written additively, is
 in bijection with `𝟙_ (Over (Spec (.of K))) ⟶ G[n]`, a point `x` of `G[n]` corresponding to
-its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. -/
+its image `x ≫ GrpObj.kerι (𝟙 G ^ n)` in `G(K)`. This is the case `T = Spec K` of
+`AlgebraicGeometry.torsionByPointsEquiv`. -/
 noncomputable def torsionByEquiv (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G] (n : ℕ) :
     AddSubgroup.torsionBy (Additive (𝟙_ (Over (Spec (.of K))) ⟶ G)) (n : ℤ) ≃
       (𝟙_ (Over (Spec (.of K))) ⟶ torsionSubgroupScheme G n) :=
-  torsionByEquivHom G n _
+  torsionByPointsEquiv G n (𝟙_ _)
+
+@[simp]
+theorem torsionByPointsEquiv_comp_ι (G : Over (Spec (.of K))) [GrpObj G] [IsCommMonObj G]
+    (n : ℕ) (T : Over (Spec (.of K))) (x : AddSubgroup.torsionBy (Additive (T ⟶ G)) (n : ℤ)) :
+    torsionByPointsEquiv G n T x ≫ torsionSubgroupScheme.ι G n =
+      (x : Additive (T ⟶ G)).toMul :=
+  GrpObj.kerLift_kerι _ _ _
+
+/-- Blueprint `def-sc-mult-n`: multiplication by `k` maps `G[m]` to `G[n]` when `m = k * n`.
+
+This is the morphism `G[m] ⟶ G[n]` through which `G[m] ⟶ G ⟶ G`, the inclusion followed by
+`[k] = 𝟙 G ^ k`, factors; for `G` an abelian variety, `m = ℓ ^ (n + 1)`, `n = ℓ ^ n` and `k = ℓ`
+these are the transition maps of the inverse system defining the Tate module (blueprint
+`def-wf-abelian-tate-module`). -/
+noncomputable def torsionSubgroupSchemeMul (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
+    (k : ℕ) (h : m = k * n) : torsionSubgroupScheme G m ⟶ torsionSubgroupScheme G n :=
+  GrpObj.kerLift (𝟙 G ^ n) (torsionSubgroupScheme.ι G m ^ k) <| by
+    rw [comp_pow, Category.comp_id, ← pow_mul, ← h, torsionSubgroupScheme.ι_pow]
+    rfl
+
+@[reassoc (attr := simp)]
+theorem torsionSubgroupSchemeMul_ι (G : Over (Spec (.of K))) [GrpObj G] {m n : ℕ}
+    (k : ℕ) (h : m = k * n) :
+    torsionSubgroupSchemeMul G k h ≫ torsionSubgroupScheme.ι G n =
+      torsionSubgroupScheme.ι G m ^ k :=
+  GrpObj.kerLift_kerι _ _ _
 
 /-- Blueprint `sk-def-av-isogeny`: Isogenies and their degree.
 
@@ -230,12 +285,7 @@ An *isogeny* `f : A ⟶ B` of group schemes over `K` is a surjective homomorphis
 kernel. The blueprint defines isogenies between abelian varieties; the definition makes sense
 for arbitrary group schemes, but it is only for abelian varieties that
 `AlgebraicGeometry.isogenyDegree` is the degree of `f` as a finite flat morphism (see
-`AlgebraicGeometry.IsIsogeny.finrank_eq`).
-
-This is also blueprint `def-sc-isogeny`. As blueprint `rem-ptr-sc-isogeny-2` records, that an
-isogeny of abelian varieties is finite and flat of degree the order of its kernel is not part of
-the definition: it is `AlgebraicGeometry.IsIsogeny.isFiniteLocallyFreeOfDegree`
-(blueprint `lem-sc-isogeny-degree`). -/
+`AlgebraicGeometry.IsIsogeny.finrank_eq`). -/
 class IsIsogeny {A B : Over (Spec (.of K))} [GrpObj A] [GrpObj B] (f : A ⟶ B) : Prop
     extends IsMonHom f, Surjective f.left where
   /-- The kernel of an isogeny is a finite group scheme. -/
