@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-etale-filtered-step-cohomology",
+ "kind": "statement",
+ "title": "Cohomology of a filtered CE step computes the fixed stupid truncation",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $K$ a bounded-below cochain complex of abelian étale sheaves [def-weil-pbc-etale-sheaves], and $T$ a termwise hypercohomology presentation [def-weil-pbc-termwise-hypercohomology-presentation]. For integers $p,q$, write $\\sigma_{\\ge q}K$ for the complex equal to $K$ in degrees at least $q$ and zero below $q$, with canonical inclusion $\\iota:\\sigma_{\\ge q}K\\to K$. There is an isomorphism $e:H^p((T.L).\\mathrm{step}(q))\\cong H^p(X,\\sigma_{\\ge q}K)$ [def-weil-pbc-etale-cohomology] such that $H^p(j_q)\\circ(T.c(p))=e\\circ H^p(R\\Gamma(\\iota))$, in diagrammatic composition order, where $j_q$ is the filtered-step inclusion into the mapped total. No element-membership predicate or image-filtration equality is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/015J",
+  "place": "Lemma 13.21.3, proof remark (3), applied after restricting complex degree; Tag 0133 (Lemma 12.25.4), finite-diagonal augmented-total computation"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-termwise-hypercohomology-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Let σ_{≥q}K be the stupid truncation that keeps K^s for s≥q and is zero otherwise. Restrict the augmented bicomplex I in the complex degree to s≥q and extend by zero. It is a rowwise injective resolution of σ_{≥q}K. Apply the augmented-total resolution theorem with lower bound q; the diagonal contains only r≥0, s≥q, r+s=n, so it is finite and the total is bounded below and K-injective. Its augmentation is prescribed on the (0,n) summands.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-total-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the additive mapped-total isomorphism to this restricted bicomplex and Γ. By the degreewise filtration formula, the mapped restricted total is isomorphic to (T.L).step q, compatibly with inclusion into the full mapped total: both are the subcomplex on diagonal summands with s≥q. The canonical subobject isomorphisms commute with the differential, since their composites with the monic inclusion agree. The K-injective computation gives an isomorphism e from its degree-p homology to H^p(RΓ(σ_{≥q}K)).",
+   "uses": [
+    "lem-sp-cartan-eilenberg-mapped-total",
+    "lem-sp-kinjective-computes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the inclusion of the restricted total into the full unmapped total with T.comparison. The restricted augmentation followed by this comparison is homotopic to ι_K followed by T.ρ.map: on the augmentation summands this follows from T.aug_formula and T.over_K. The K-injective comparison principle identifies its homotopy class with the derived morphism of ι_K. The mapped-total diagonal formula and T.w_formula identify the termwise mapped comparison with inclusion followed by T.w. Naturality of the right-derived-functor unit and of homologyFunctorFactors, followed by T.c_formula, proves homologyMap((T.L).step q).arrow followed by (T.c p).hom equals e.hom followed by H^p(RΓ(ι_K)). These arguments allow arbitrary integer p,q, zero terms and empty diagonals.",
+   "uses": [
+    "lem-sp-kinjective-comparison-principle",
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-cartan-eilenberg-total-resolution",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-sp-kinjective-computes"
+ ],
+ "proof_origin": {
+  "by": "worker Q1",
+  "document": "Stacks Project, Tags 015J and 0133",
+  "place": "Restricted augmented-total computation and canonical resolution comparison; expanded by an agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology of a filtered Cartan Eilenberg total complex is derived global sections of the stupid truncation compatibly with inclusion",
+   "results": "CochainComplex.cm5b.instQuasiIsoIntP; CochainComplex.cm5b; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p; CochainComplex.HomComplex.leftHomologyData'; CochainComplex.shortComplexTruncLE; CochainComplex.isKInjective_of_injective_aux; CochainComplex.instQuasiIsoIntπTruncGEOfIsGE; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "HomologicalComplex.homologyMap; HomologicalComplex.homologyMap_id; HomologicalComplex.instIsIsoHomologyMap; HomologicalComplex.epi_homologyMap_of_epi_of_not_rel; HomologicalComplex.mono_homologyMap_of_mono_of_not_rel; HomologicalComplex.homologyMapIso_hom; HomologicalComplex.homologyMapIso_inv; HomologicalComplex.homologyFunctor_map",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "stupidTrunc|filtered.*resolution",
+   "results": "Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean; Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean; Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean; Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean; Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean; Mathlib/Algebra/Homology/Embedding/Basic.lean; Mathlib/Algebra/Homology/Embedding/Basic.lean",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of one filtered Cartan Eilenberg total step computes derived global sections of the stupid truncation compatibly with inclusion",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of the subcomplex of a total complex consisting of columns above an integer bound computed by derived functor of brutal truncation",
+   "results": "HomologicalComplex.truncGE'.X; HomologicalComplex.instHasHomologyTruncLE; HomologicalComplex.truncGE'.truncGE'_hasHomology; HomologicalComplex.truncGE'.homologyData; HomologicalComplex.truncGE'.hasHomology_of_not_mem_boundary; HomologicalComplex.truncGE'.hasHomology_sc'_of_not_mem_boundary; HomologicalComplex.truncGE.instHasHomology; HomologicalComplex.truncLE'.truncLE'_hasHomology",
+   "verdict": "second reading: no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "imageSubobject, Iso",
+   "results": "loogle: unknown identifier 'imageSubobject'",
+   "verdict": "second reading: no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "brutal|sigma.*trunc|filtered.*total.*cohomology",
+   "results": "No hits.",
+   "verdict": "second reading: no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.imageSubobject, CategoryTheory.Iso",
+   "results": "CategoryTheory.Limits.imageSubobjectIso; CategoryTheory.Limits.imageSubobjectCompIso; imageToKernel_comp_hom_inv_comp",
+   "verdict": "second reading: image transport ingredients, no filtered-step comparison",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtalePresentationImageFiltration",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Original presentation-image-filtration proof: the filtered total step resolves the stupid truncation and c_formula identifies the inclusion map",
+   "via": [
+    "lem-weil-pbc-etale-presentation-image-filtration",
+    "lem-weil-pbc-etale-complex-filtration-page-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleFilteredStepCohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleFilteredStepCohomology.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_filtered_step_cohomology",
+  "statement": "theorem etale_filtered_step_cohomology (X : Scheme.{u}) (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (T : EtaleTermwiseHypercohomology X K) (p q : ℤ) : ∃ e : ((T.L.step q : CochainComplex AddCommGrpCat.{u + 1} ℤ).homology p) ≅ (cohomology AddCommGrpCat.{u + 1} X p).obj (DerivedCategory.Q.obj (K.obj.stupidTrunc (ComplexShape.embeddingUpIntGE q))), HomologicalComplex.homologyMap (T.L.step q).arrow p ≫ (T.c p).hom = e.hom ≫ (cohomology AddCommGrpCat.{u + 1} X p).map (DerivedCategory.Q.map (K.obj.ιStupidTrunc (ComplexShape.embeddingUpIntGE q)))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T154834-L-2473947",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T154834-L-2473947",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

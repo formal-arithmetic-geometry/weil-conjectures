@@ -18,20 +18,30 @@
  ],
  "proof": [
   {
-   "text": "The presentation's H_formula identifies its step q with the image on cohomology\nof the complex-degree q step of the filtered Cartan--Eilenberg total. The latter resolves\nthe stupid truncation of K in degrees at least q, with its canonical inclusion into K:\nrestrict the augmentation and use the exact augmented rows and the bounded support\nregion to see that it is a quasi-isomorphism. The canonical resolution comparison\nc_formula identifies its image with the image of the stupid-truncation inclusion under\nRΓ. Every map T -> K from a complex zero below q factors through this truncation,\ndegreewise, and the factorization commutes with the differential. Thus every class in\nthe predicate belongs to this image. Conversely, the truncation itself is zero below q\nand its inclusion supplies the witness T,f,y for every class in this image. These two\ninclusions prove the equivalence, including zero objects and all integer indices.",
+   "text": "Set e=embeddingUpIntGE(q). For any supported witness S, its stupid-truncation inclusion is invertible. The chain map inv(ι_S) followed by stupidTruncMap(f) factors f through ι_K by naturality. Applying derived cohomology gives a preimage in the fixed truncation. Conversely the fixed truncation is zero below q, so its inclusion is itself an admissible witness. This proves equivalence of the predicate with the range of H^p(RΓ(ι_K)). The Lean proof uses the existing upstream stupid-truncation API and Mathlib support and functoriality lemmas.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the filtered-step cohomology comparison to obtain an isomorphism from H^p((T.L).step q) to H^p(RΓ(σ_{≥q}K)) with the specified inclusion square. Expand T.H_formula. Image pushforward is the image of the composition; precomposition by the epimorphism onto the image removes its factorization, and precomposition by the comparison isomorphism leaves the image unchanged. Thus (T.H p).step q is the image subobject of H^p(RΓ(ι_K)).",
    "uses": [
-    "thm-sp-if-e1"
+    "lem-weil-pbc-etale-filtered-step-cohomology"
    ],
    "elementary": false
+  },
+  {
+   "text": "In AddCommGrpCat the epimorphism factorThruImageSubobject is surjective. Therefore an element has a preimage under the image-subobject arrow if and only if it has a preimage under the original map. Apply this to the image equality of the previous step and the range equivalence of the first step.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "thm-sp-if-e1"
+  "lem-weil-pbc-etale-filtered-step-cohomology"
  ],
  "proof_origin": {
-  "by": "worker E2",
-  "document": "Stacks Project, Tags 015J and 0EZM",
-  "place": "Details of the page/filtration argument separated from the representative algebra"
+  "by": "worker Q1",
+  "document": "Stacks Project, Tags 015J and 0133; upstream stupid-truncation naturality API",
+  "place": "Supported-witness factorization, filtered-step computation, and epi-mono image calculation; comparison split off as its own node"
  },
  "mathlib_searches": [
   {
@@ -149,11 +159,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8c782",
-  "group": "E2",
+  "reviewer": "COMPILER",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T150951-L-2230001",
+  "landing": "20261012T154834-L-2473947",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, node records, report, compilation, importer checks, and axiom checks match the stage-3 brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
