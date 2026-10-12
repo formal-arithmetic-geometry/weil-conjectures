@@ -5780,3 +5780,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 01:08 L: merged deliver/U1/Sheaf.AlgebraicGeometry.PrimeInjectiveCohomologyComparison (stage 3; reviewer PASS; first push; landing 20261012T010707-L-731415 (interface); modules 3; new nodes 2)
 - 01:08 L: returned deliver/E1/Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding (reviewer RETURN: (reviewer X-18809, head 18809a71a) E3: The proof invokes `exists_mono_biproduct_lowerStar_of_isNoetherian`, whose `IsCon)
 - 01:08 L: returned deliver/E1/Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero (reviewer RETURN: (reviewer X-4d95c, head 4d95c49f9) 1. C1: In dag/nodes/sec-proper-base-change/lem-weil-pbc-cohomology-pullback-degree-ze)
+- 01:08 L: returned deliver/F1/Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit (reviewer RETURN: (reviewer X-14dd7, head 14dd76e52) D2 (brief §4): All mathematical content moved into one new sorry. The core repeats th)
