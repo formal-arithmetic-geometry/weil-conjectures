@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-constructible-module-finite-selection",
+ "kind": "statement",
+ "title": "Finite selection of module-valued geometric stalk tests",
+ "statement": "For Noetherian X, finite commutative Lambda and constructible module sheaf F [def-weil-pbc-etale-constructible-sheaf], let G_l be any family of module sheaves indexed by a type L in any universe and phi_l : F -> G_l. If at every geometric point some phi_l is stalk-injective [def-weil-geometric-point, def-weil-pbc-geometric-stalks], there are n and l : Fin n -> L with monomorphic biproduct lift of phi_{l(i)} [def-weil-additive-category]. No finiteness or constructibility of G_l is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z6 proof of (1), first paragraph, partition alternative, transferred to (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-additive-category"
+ ],
+ "proof": [
+  {
+   "text": "Forget modules to abelian sheaves. Finite module trivializations on the same stratification give constructible underlying sheaves of sets. Forgetting commutes with restriction, inverse image, constants and geometric stalks (filtered colimits), so the hypothesis gives injective abelian stalk tests.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the abelian finite-selection lemma: select generic-stalk tests on finitely many irreducible lisse strata and propagate the resulting injections across each stratum. Exact and conservative geometric stalks give a mono abelian biproduct lift.",
+   "uses": [
+    "lem-weil-pbc-constructible-noetherian-finite-selection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting modules preserves finite biproducts and is faithful, hence reflects monomorphisms. Its biproduct comparison identifies the image of the module lift with the abelian lift. Enumerate the finite selected set by Fin n and reindex the biproduct; n=0 is allowed.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-constructible-noetherian-finite-selection",
+  "def-weil-additive-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z6 proof of (1), first paragraph, partition alternative, transferred to (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite subfamily of maps from constructible sheaf injective on geometric stalks gives monomorphism to finite biproduct",
+   "results": "Found Sheaf.mono_of_isLocallyInjective and topological stalk mono criteria, neither selects a finite subfamily.",
+   "date": "2026-10-12",
+   "verdict": "partial tools, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "0 hits; additional lowerStar query was unavailable in the public Loogle index.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_mono_biproduct|constructible.*stalk.*injective",
+   "results": "msearch.py grep on Mathlib: no hits. Separate rg searches of the project found the abelian ConstructibleFiniteSelection and the source FinitePushforward; neither directly has this interface. Mathlib/CategoryTheory/Presentable/Finite.lean has IsFinitelyPresentable.exists_hom_of_isColimit, used for the factorization.",
+   "date": "2026-10-12",
+   "verdict": "partial tools, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite subfamily of maps from constructible sheaf injective on geometric stalks gives monomorphism to finite biproduct",
+   "results": "Service unavailable: HTTP response Internal Server Error. LeanFinder, Loogle and source grep were also run.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+   "place": "Tag 09Z6 proof of (1), first paragraph, partition alternative, transferred to (3)"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleFiniteSelection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_mono_biproduct_of_constructible_module_stalk_injective",
+  "statement": "theorem exists_mono_biproduct_of_constructible_module_stalk_injective\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hF : IsConstructibleEtaleModuleSheaf F)\n    (L : Type w) (G : L → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (φ : ∀ l : L, F ⟶ G l)\n    (hφ : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X),\n      ∃ l : L, Function.Injective\n        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map (φ l))) :\n    ∃ (n : ℕ) (l : Fin n → L), Mono (biproduct.lift (fun i : Fin n ↦ φ (l i)))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f722",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T022144-L-1050150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f722",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T022144-L-1050150",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean declarations with their nodes and the Stacks 09Z6/09Z1 route; existing signature unchanged, node changes confined to proof fields, compilation clean, axioms limited to the standard three plus sorryAx from recorded open obligations."
+ }
+}

@@ -5838,3 +5838,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:21 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder (reviewer RETURN: (reviewer X-1b7b2, head 1b7b23d4e) C1/C2 (brief points 6–7): The first DAG step, lines 4–6, labels inverse-image exactne)
 - 02:21 L: returned deliver/Q1/Sheaf.Topology.IrreducibleIntegerExtensionVanishing (reviewer RETURN: (reviewer X-63aa4, head 63aa4271a) C5 (missed existing results; review brief §5): In lean/Sheaf/Topology/ConstantInteger)
 - 02:21 L: returned deliver/S1/Sheaf.AlgebraicGeometry.TensorPullback (reviewer RETURN: (reviewer X-bf8c5, head bf8c52a19) F (review accuracy), brief point 2: coord/changes/TensorPullback-scope.md line 16: re)
+- 02:23 L: merged deliver/U1/Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian (stage 3; reviewer PASS; first push; landing 20261012T022144-L-1050150 (interface); modules 5; new nodes 4)

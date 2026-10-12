@@ -1,0 +1,184 @@
+{
+ "id": "lem-weil-pbc-constructible-module-integral-stalk-embedding",
+ "kind": "statement",
+ "title": "Pointwise stalk injections into integral constant pushforwards",
+ "statement": "On a Noetherian scheme X, for a finite commutative ring Lambda, a constructible module sheaf F [def-weil-pbc-etale-constructible-sheaf] and x in X, there are integral nu : Y -> X, finite Lambda-module M and phi : F -> nu_* M_Y such that the geometric stalk map of phi is injective at every geometric point with underlying point x [def-weil-geometric-point, def-weil-pbc-geometric-stalks].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z6 proof of (1), generic trivialization, normalization and stalk square, transferred to (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "*Setup at a point; the generic trivialization.* Fix a point $x\\in X$ and let $\\varepsilon_x:\\operatorname{Spec}\\kappa(x)\\to X$ be the canonical morphism. The inverse image $\\varepsilon_x^{-1}F$ is a constructible sheaf of $\\Lambda$-modules on $\\operatorname{Spec}\\kappa(x)$ by [prop-constructible-pullback] (on the one-point space $\\operatorname{Spec}\\kappa(x)$ every stratum is trivially a constructible subset, so condition (a) of [def-weil-pbc-etale-constructible-sheaf] holds). By [lem-weil-pbc-constructible-field-finite-separable-constant] there are a finite separable extension $K/\\kappa(x)$, a finite $\\Lambda$-module $M$ and an isomorphism $\\pi^{-1}\\varepsilon_x^{-1}F\\cong\\underline M_{\\operatorname{Spec}K}$, $\\pi:\\operatorname{Spec}K\\to\\operatorname{Spec}\\kappa(x)$. Put $h=\\varepsilon_x\\circ\\pi:\\operatorname{Spec}K\\to X$; composing with the canonical isomorphism $h^{-1}\\cong\\pi^{-1}\\varepsilon_x^{-1}$ of [lem-weil-pbc-inverse-image-composition] gives an isomorphism of sheaves of $\\Lambda$-modules $\\alpha:h^{-1}F\\xrightarrow{\\sim}\\underline M_{\\operatorname{Spec}K}$. (Stacks: 'Since $\\mathcal F$ is constructible, there is a finite separable extension $K/\\kappa(x)$ such that $\\mathcal F|_{\\Spec(K)}$ is the constant sheaf with value $E$'.) For the corrected module predicate, first compare the finite-value trivializations with the source-library finite locally constant predicate using the finite-value equivalence; after pullback convert the stratum data back to finite-value trivializations. Constructible strata are retained.",
+   "uses": [
+    "prop-constructible-pullback",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constructible-field-finite-separable-constant",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12959-12971"
+   }
+  },
+  {
+   "text": "*The normal model.* $X$ is Noetherian, hence quasi-separated. By [lem-weil-pbc-normalization-in-residue-field-extension] applied to $x$ and $K/\\kappa(x)$ there are a normal integral scheme $Y$, an integral morphism $\\nu:Y\\to X$ and the inclusion $g:\\operatorname{Spec}K\\to Y$ of the generic point of $Y$ (with $K$ as function field) such that $h=\\nu\\circ g$. (Stacks takes the normalization of the reduced closure $Z=\\overline{\\{x\\}}$ in $\\operatorname{Spec}K$ and composes with $Z\\to X$; that is the same $X$-scheme, by the last clause of Stacks 035I, recorded in the new node; working over $X$ directly removes the closed immersion from the argument.)",
+   "uses": [
+    "lem-weil-pbc-normalization-in-residue-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12967-12978"
+   }
+  },
+  {
+   "text": "*The map $\\varphi:F\\to\\nu_*\\underline M$.* By [lem-weil-pbc-normal-constant-generic] applied to the normal integral $Y$ and $g$, the unit $u:\\underline M_Y\\to g_*g^{-1}\\underline M_Y$ is an isomorphism; the node is stated for a finite abelian group $E$, and $M$ is one; $u$ is the unit of the adjunction $g^{-1}\\dashv g_*$, which is $\\Lambda$-linear by [lem-weil-pbc-inverse-image-module-adjunction], so $u$ is an isomorphism of sheaves of $\\Lambda$-modules (the constant sheaf of $\\Lambda$-modules has the constant abelian sheaf as underlying sheaf, both being sheafifications of the same presheaf, [def-weil-pbc-constant-sheaf]); and $g^{-1}\\underline M_Y\\cong\\underline M_{\\operatorname{Spec}K}$ by [lemma-constructible-pullback-constant]. Let $\\alpha':g^{-1}\\nu^{-1}F\\cong h^{-1}F\\xrightarrow{\\alpha}\\underline M_{\\operatorname{Spec}K}=g^{-1}\\underline M_Y$ (the first isomorphism from [lem-weil-pbc-inverse-image-composition]). Define $\\psi=u^{-1}\\circ g_*(\\alpha')\\circ\\eta_g:\\nu^{-1}F\\to g_*g^{-1}\\nu^{-1}F\\to g_*g^{-1}\\underline M_Y\\to\\underline M_Y$, the map adjoint to $\\alpha'$ followed by $u^{-1}$, and let $\\varphi:F\\to\\nu_*\\underline M_Y$ be the map adjoint to $\\psi$ under $\\nu^{-1}\\dashv\\nu_*$, i.e. $\\varphi=\\nu_*(\\psi)\\circ\\eta_\\nu$ and $\\psi=\\varepsilon_\\nu\\circ\\nu^{-1}(\\varphi)$. All maps are $\\Lambda$-linear by [lem-weil-pbc-inverse-image-module-adjunction]. (Stacks: 'The map $\\mathcal F|_{\\Spec(K)}\\to\\underline E$ is adjoint to a map $\\mathcal F|_Y\\to g_*\\underline E=\\underline E$ ... This in turn is adjoint to a map $\\varphi:\\mathcal F\\to f_*\\underline E$'.)",
+   "uses": [
+    "lem-weil-pbc-normal-constant-generic",
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "def-weil-pbc-constant-sheaf",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12979-12984, using Lemma 09Z5 (lemma-push-constant-sheaf-from-open) (1)"
+   }
+  },
+  {
+   "text": "*$\\varphi$ is injective at every geometric point over $x$.* Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point lying over $x$ [def-weil-geometric-point], i.e. a field map $\\kappa(x)\\to\\Omega$ with $\\Omega$ algebraically closed. As $K/\\kappa(x)$ is algebraic it extends to $K\\to\\Omega$, giving a geometric point $\\bar\\omega$ of $\\operatorname{Spec}K$ with $h\\circ\\bar\\omega=\\bar x$; put $\\bar y=g\\circ\\bar\\omega$, so $\\nu\\circ\\bar y=\\bar x$. (i) $g^{-1}(\\psi)$ equals $\\alpha'$ up to the identification $g^{-1}\\underline M_Y=\\underline M_{\\operatorname{Spec}K}$: indeed $\\varepsilon_g\\circ g^{-1}(u)=\\mathrm{id}$ (triangle identity, $u$ being the unit at $\\underline M_Y$) and $g^{-1}(u)$ is an isomorphism, so $g^{-1}(u)^{-1}=\\varepsilon_g$, whence $g^{-1}\\psi=\\varepsilon_g\\circ g^{-1}g_*(\\alpha')\\circ g^{-1}(\\eta_g)=\\alpha'\\circ\\varepsilon_g\\circ g^{-1}(\\eta_g)=\\alpha'$ by naturality of $\\varepsilon_g$ and the other triangle identity. By the natural isomorphism $c_{g,\\bar\\omega}:(g^{-1}H)_{\\bar\\omega}\\cong H_{\\bar y}$ of [lem-weil-pbc-inverse-image-stalk-germ] (natural in $H$), $\\psi_{\\bar y}$ corresponds to $(g^{-1}\\psi)_{\\bar\\omega}=\\alpha'_{\\bar\\omega}$, an isomorphism. (ii) Let $r:(\\nu_*\\underline M_Y)_{\\bar x}\\to(\\underline M_Y)_{\\bar y}$ be the restriction map of [lem-weil-pbc-counit-stalk-germ-restriction] and $c=c_{\\nu,\\bar y,F}:(\\nu^{-1}F)_{\\bar y}\\cong F_{\\bar x}$. Since $\\psi=\\varepsilon_\\nu\\circ\\nu^{-1}(\\varphi)$, $(\\varepsilon_\\nu)_{\\bar y}=r\\circ c$ ([lem-weil-pbc-counit-stalk-germ-restriction]) and $c\\circ(\\nu^{-1}\\varphi)_{\\bar y}=\\varphi_{\\bar x}\\circ c$ (naturality of $c$), we get $\\psi_{\\bar y}=r\\circ\\varphi_{\\bar x}\\circ c$. By (i) the left side is bijective, so $\\varphi_{\\bar x}$ is injective. This is Stacks' commutative square $\\mathcal F_{\\bar x}=(\\mathcal F|_Y)_{\\bar y}\\to\\underline E_{\\bar y}$ through $(f_*\\underline E)_{\\bar x}$, written out.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-counit-stalk-germ-restriction",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Lemma 09Z6 (1), lines 12984-12994 (the commutative diagram)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-constructible-pullback",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constructible-field-finite-separable-constant",
+  "lem-weil-pbc-inverse-image-composition",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "def-weil-pbc-constant-sheaf",
+  "lemma-constructible-pullback-constant",
+  "def-weil-pbc-direct-image",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-counit-stalk-germ-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z6 proof of (1), generic trivialization, normalization and stalk square, transferred to (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constructible sheaf map into integral pushforward constant sheaf injective at one geometric stalk by normalization",
+   "results": "Found structure-sheaf germ injectivity and normalizationDiagram, not the required etale module map.",
+   "date": "2026-10-12",
+   "verdict": "partial tools, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "results": "0 hits; additional lowerStar query was unavailable in the public Loogle index.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_mono_biproduct|constructible.*stalk.*injective",
+   "results": "msearch.py grep on Mathlib: no hits. Separate rg searches of the project found the abelian ConstructibleFiniteSelection and the source FinitePushforward; neither directly has this interface. Mathlib/CategoryTheory/Presentable/Finite.lean has IsFinitelyPresentable.exists_hom_of_isColimit, used for the factorization.",
+   "date": "2026-10-12",
+   "verdict": "partial tools, no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible sheaf map into integral pushforward constant sheaf injective at one geometric stalk by normalization",
+   "results": "Service unavailable: HTTP response Internal Server Error. LeanFinder, Loogle and source grep were also run.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoetherian",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+   "place": "Tag 09Z6 proof of (1), generic trivialization, normalization and stalk square, transferred to (3)"
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleIntegralStalkEmbedding.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_integral_lowerStar_stalk_injective",
+  "statement": "theorem exists_integral_lowerStar_stalk_injective\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X : Scheme.{u}} [IsNoetherian X]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hF : Scheme.IsConstructibleEtaleModuleSheaf F) (x : X) :\n    ∃ (Y : Scheme.{u}) (ν : Y ⟶ X), IsIntegralHom ν ∧\n      ∃ (M : ModuleCat.{u + 1} Λ), Finite M ∧\n        ∃ (φ : F ⟶ (lowerStar (ModuleCat.{u + 1} Λ) ν).obj\n          ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)),\n          ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ X),\n            ((Scheme.SpecToEquivOfField Ω X) s).1 = x →\n              Function.Injective\n                (((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map φ)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f722",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T022144-L-1050150",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2f722",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T022144-L-1050150",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean declarations with their nodes and the Stacks 09Z6/09Z1 route; existing signature unchanged, node changes confined to proof fields, compilation clean, axioms limited to the standard three plus sorryAx from recorded open obligations."
+ }
+}
