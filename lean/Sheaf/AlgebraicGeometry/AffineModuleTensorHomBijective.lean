@@ -6,6 +6,8 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 /-! # Hom bijection for the two affine-module tensor operations
 
 Source: Stacks Project, Morphisms, Lemma 01SB.
@@ -53,6 +55,8 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
+set_option maxHeartbeats 1000000 in
+-- Comparing the composite scalar restrictions unfolds three module pushforwards.
 /-- The canonical tensor-unit map induces a Hom bijection for the two scalar extensions.
 Source: Stacks Project, Tags 01SB (elucidation), 008A and 008Y.
 (blueprint: lem-sc-affine-module-tensor-hom-bijective).
@@ -108,7 +112,102 @@ theorem affine_module_tensor_hom_bijective
     (hβ : ∀ G : SheafOfModules.{u} (𝓡 A),
       (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) :
     ∀ (G : SheafOfModules.{u} (𝓡 A)) (F : U.Modules),
-      Function.Bijective (fun a : H.obj G ⟶ F ↦ β.app G ≫ (R).map a) := by sorry
+      Function.Bijective (fun a : H.obj G ⟶ F ↦ β.app G ≫ (R).map a) := by
+  classical
+  let : (Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U.toTopCat) :=
+    inferInstanceAs ((Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U))
+  let η : (𝓡 A) ⟶ ((Opens.map f.base).sheafPushforwardContinuous RingCat.{u}
+      (𝓙 X) (𝓙 U)).obj (𝓡 IA) := (sheafCompose (𝓙 X) (forget₂ CommRingCat.{u} RingCat.{u})).map
+    ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A)
+  have hring : η ≫ ((Opens.map f.base).sheafPushforwardContinuous RingCat.{u}
+      (𝓙 X) (𝓙 U)).map (𝓻 (t ≫ ε)) = 𝟙 (𝓡 A) := by
+    have h := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf
+      |>.apply_symm_apply (𝟙 A)
+    rw [Adjunction.homEquiv_unit] at h
+    rw [ht]
+    ext V r
+    exact congrArg (fun q ↦ q.hom.app V r) h
+  let j := SheafOfModules.pushforwardCongr.{u} hring
+  obtain ⟨Eε, qε, adjε, evalε⟩ :=
+    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat B U.sheaf ε
+  obtain ⟨Et, qt, adjt, evalt⟩ :=
+    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
+  obtain ⟨φ, evalφ, _, _⟩ := SheafOfModules.moduleInverseImageAdjunction f.base A
+  intro G F
+  let eε : (H.obj G ⟶ F) ≃
+      (P.obj G ⟶ (SheafOfModules.restrictScalars (𝓻 ε)).obj F) :=
+    (Iso.homCongr ((eqToIso (hobj G)) ≪≫ (eqToIso (qε (P.obj G))).symm)
+      (Iso.refl F)).trans (adjε.homEquiv (P.obj G) F)
+  let et : (P.obj G ⟶ (SheafOfModules.restrictScalars (𝓻 ε)).obj F) ≃
+      (I G ⟶ (SheafOfModules.restrictScalars (𝓻 t)).obj
+        ((SheafOfModules.restrictScalars (𝓻 ε)).obj F)) :=
+    (Iso.homCongr ((eqToIso (pobj G)) ≪≫ (eqToIso (qt (I G))).symm)
+      (Iso.refl _)).trans (adjt.homEquiv (I G) _)
+  let e : (H.obj G ⟶ F) ≃ (G ⟶ (R).obj F) :=
+    ((eε.trans et).trans (φ G _)).trans
+      (Iso.homCongr (Iso.refl G) (j.app F))
+  have he (a : H.obj G ⟶ F) : e a = β.app G ≫ (R).map a := by
+    have hz (W : (Opens U)ᵒᵖ) (p : (P.obj G).val.obj W) :
+        (eε a).val.app W p =
+          a.val.app W ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) := by
+      have hz₀ := evalε (P.obj G) F (eqToHom (hobj G).symm ≫ a) W p
+      have heε : eε a = adjε.homEquiv (P.obj G) F
+          (eqToHom (qε (P.obj G)) ≫ eqToHom (hobj G).symm ≫ a) := by
+        simp only [eε, Equiv.trans_apply, Iso.homCongr_apply, Iso.trans_inv,
+          Iso.symm_inv, Iso.refl_hom, Category.comp_id,
+          Category.assoc]
+        rfl
+      rw [heε, hz₀]
+      erw [← hH G W p]
+      change ((eqToHom (hobj G) ≫ eqToHom (hobj G).symm ≫ a).val.app W)
+        ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = _
+      simp only [← Category.assoc, eqToHom_trans, eqToHom_refl, Category.id_comp]
+    ext V g
+    let W := (Opens.map f.base).op.obj V
+    let adjAb := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)
+    have het : et (eε a) = adjt.homEquiv (I G) _
+        (eqToHom (qt (I G)) ≫ eqToHom (pobj G).symm ≫ eε a) := by
+      simp only [et, Equiv.trans_apply, Iso.homCongr_apply, Iso.trans_inv,
+        Iso.symm_inv, Iso.refl_hom, Category.comp_id,
+        Category.assoc]
+      rfl
+    change (φ G _ (et (eε a))).val.app V g = _
+    rw [evalφ, het]
+    have hq₀ := evalt (I G) ((SheafOfModules.restrictScalars (𝓻 ε)).obj F)
+      (eqToHom (pobj G).symm ≫ eε a) W
+      ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)
+    change (adjt.homEquiv (I G) _
+      (eqToHom (qt (I G)) ≫ eqToHom (pobj G).symm ≫ eε a)).val.app W _ = _ at hq₀
+    erw [hq₀]
+    change (eε a).val.app W ((eqToHom (pobj G).symm).val.app W _) = _
+    erw [← hP G V g]
+    change (eε a).val.app W
+      ((eqToHom (pobj G) ≫ eqToHom (pobj G).symm).val.app W
+        ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g))) = _
+    simp only [eqToHom_trans, eqToHom_refl]
+    change (eε a).val.app W
+      ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g)) = _
+    rw [hz]
+    change a.val.app W ((γ.app G).val.app W
+      ((κ.inv.app G ≫ κ.hom.app G).val.app W
+        (((adj₀).unit.app ((S).obj G)).val.app V g))) = _
+    rw [κ.inv_hom_id_app]
+    have hb := congrArg (fun q ↦ q.val.app V g) (hβ G)
+    rw [Adjunction.homEquiv_unit] at hb
+    change (β.app G).val.app V g =
+      (γ.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g) at hb
+    change a.val.app W
+      ((γ.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g)) =
+      a.val.app W ((β.app G).val.app V g)
+    rw [hb]
+  have heq : (fun a : H.obj G ⟶ F ↦ β.app G ≫ (R).map a) = e := by
+    funext a
+    exact (he a).symm
+  rw [heq]
+  exact e.bijective
 
 end
 end AlgebraicGeometry.Scheme.Modules
