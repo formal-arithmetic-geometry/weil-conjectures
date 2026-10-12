@@ -6,9 +6,8 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
-import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonAffine
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImage
 
 /-! # Inverse image on affine Čech cocycles
 
@@ -24,6 +23,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Leray comparisons respect any inverse-image coefficient map on matching cocycles.
 This is a statement about sections and inverse image only, without tensor products.
 
@@ -71,6 +71,20 @@ theorem exists_affineCech_inverseImage
           (Sheaf.H.mapFunctor (invImage g) (constIso g).symm
             ((SheafOfModules.toSheaf X.ringCatSheaf).obj M) q
               (e.hom ((cechOver f U M).homologyπ q z))) := by
-  sorry
+  let := cohomologyHasSheafify X
+  let := cohomologyHasSheafify Y
+  let := cohomologyHasExt X
+  let := cohomologyHasExt Y
+  obtain ⟨c, c', hc⟩ := exists_cechComparison_inverseImage g f f' U V
+    hcover hcover' M N φ hinter
+  obtain ⟨hbij, hsmul⟩ := cechComparison_affine_bijective_linear f U hU hcover c M q
+  obtain ⟨hbij', hsmul'⟩ := cechComparison_affine_bijective_linear f' V hV hcover' c' N q
+  let l : (cechOver f U M).homology q →ₗ[R] HOver f M q :=
+    { c.overMap f M q with map_smul' := hsmul }
+  let l' : (cechOver f' V N).homology q →ₗ[S] HOver f' N q :=
+    { c'.overMap f' N q with map_smul' := hsmul' }
+  refine ⟨(LinearEquiv.ofBijective l hbij).toModuleIso,
+    (LinearEquiv.ofBijective l' hbij').toModuleIso, ?_⟩
+  exact hc q
 
 end AlgebraicGeometry.Scheme.Modules

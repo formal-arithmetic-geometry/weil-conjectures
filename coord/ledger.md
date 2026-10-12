@@ -8544,3 +8544,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/A2/Sheaf.Algebra.Homology.ZigzagBoundaryReduction (stage 3; reviewer PASS; after a return; landing 20261012T163610-L-2783757 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/A3/Sheaf.RingTheory.PowerSeriesQuotientVariables (stage 3; reviewer PASS; first push; landing 20261012T163610-L-2783854 (proof); batch 20261012T163610; modules 1; new nodes 0)
 - 16:36 L: merged deliver/B2/Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying (stage 3; reviewer PASS; first push; landing 20261012T163611-L-2783953 (interface); batch 20261012T163610; modules 2; new nodes 1)
+- 16:36 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage (stage 3; reviewer PASS; first push; landing 20261012T163611-L-2784052 (interface); batch 20261012T163610; modules 4; new nodes 3)

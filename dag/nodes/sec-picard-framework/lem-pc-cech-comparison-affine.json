@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-cech-comparison-affine",
+ "kind": "statement",
+ "title": "Affine degeneration and scalar linearity of a normalized Cech comparison",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $R$ a commutative ring, $f:X\\to\\operatorname{Spec}R$, and $U$ an open covering such that every nonempty tuple intersection is affine. For every normalized comparison system $c$ [def-pc-cech-comparison-system], every quasi-coherent module $M$ [pqf-def-coherent] and every $q\\geq0$, its induced additive map $c_f^q:H^q(C(U,M))\\to HOver(f,M,q)$ [def-pc-flat-cohomology-comparison, lem-pc-flat-cech-base-change] is bijective and satisfies $c_f^q(r x)=r c_f^q(x)$ for every $r\\in R$ and $x$. The conclusion is about the supplied normalized comparison, not an unspecified isomorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-cech-comparison-system",
+  "pqf-def-coherent",
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01XD",
+  "place": "Lemma 30.2.6, affine Cech degeneration, using Tags 01ET and 01EU; explicit dimension-shifting and multiplication argument"
+ },
+ "proof": [
+  {
+   "text": "Use the proved source CechAcyclicOnAffines class. Quasi-coherent sheaves belong to it by exactness of standard affine Cech complexes, and injectives belong by injective Cech acyclicity. The class is stable under the cokernel of an embedding into an injective. The source surjective_app_of_cechAcyclicOnAffines applies the cofinal standard-cover lifting criterion on every affine tuple intersection.",
+   "uses": [
+    "lem-pc-affine-cech-complex",
+    "lem-pc-topological-ses-cech-sections-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on q. For q=0 the normalization is a composite of the degree-zero gluing and Ext-section isomorphisms. For the injective short exact sequence 0 -> F -> I -> Q -> 0, the preceding lifting property gives exact Cech and sheaf cohomology sequences and surjective connecting maps. Naturality and the system connecting law give the two squares. The induction hypothesis makes the comparisons for I and Q bijective. Apply Mathlib AddMonoidHom.bijective_of_surjective_of_bijective_of_right_exact to obtain bijectivity for F in the next degree. Compose with the scalar-restriction additive equivalence.",
+   "uses": [
+    "def-pc-cech-comparison-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a global function a, the presheaf scalar endomorphism and M.smulHom a have identical underlying section maps. Functoriality of Cech and homology and cechComplexFunctorHomologyIso_hom_smul transport its effect on homology to the additive Cech map. Naturality of the comparison identifies this with the cohomology map of M.smulHom a. Restrict a along GammaSpecIso inverse followed by f.appTop to obtain R-linearity; the HOver scalar action is definitionally that map.",
+   "uses": [
+    "def-pc-cech-comparison-system",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cech-comparison-system",
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-affine-cech-complex",
+  "lem-pc-topological-ses-cech-sections-surjective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01XD",
+  "place": "Lemma 30.2.6, affine Cech degeneration, using Tags 01ET and 01EU; explicit dimension-shifting and multiplication argument; explicit Lean dimension shifting for the affine part"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized Cech to sheaf cohomology comparison commutes with connecting morphisms and inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology to sheaf cohomology comparison natural under inverse image of sheaves",
+   "results": [
+    "CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map",
+    "CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback",
+    "TopCat.Sheaf.pullbackIso"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No normalized comparison system or inverse-image naturality comparison. Local library search found coefficient naturality in Sheaf.Paper.CechComparisonMapNaturality, but it uses module-derived cohomology on one scheme, not abelian Ext comparisons between schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(comparison|inverseImage|naturality); CechComparisonSystem; exists_cechComparison_inverseImage",
+   "results": "No matching Mathlib statement or pre-existing system. The source CechCohomology and CechComparison provide connecting maps, degree-zero normalization and scalar-restriction homology transports. Local DAG/blueprint searches of inverse image Cech, normalized Cech comparison and 01FD found no duplicate.",
+   "date": "2026-10-12",
+   "verdict": "New interface needed; reuse all source transports and exact-sequence lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, separated-case Cech paragraph: functoriality of the Cech-to-cohomology comparison before tensor extension. Lemma 30.2.6, affine Cech degeneration, using Tags 01ET and 01EU; explicit dimension-shifting and multiplication argument",
+   "via": [
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonAffine.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.cechComparison_affine_bijective_linear",
+  "statement": "theorem cechComparison_affine_bijective_linear {R : Type u} [CommRing R] {X : Scheme.{u}} {ι : Type u} (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (hU : ∀ (k : ℕ) (y : Fin (k + 1) → ι), IsAffineOpen (⨅ l, U (y l))) (hcover : iSup U = ⊤) (c : CechComparisonSystem U hcover) (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) : Function.Bijective (c.overMap f M q) ∧ ∀ (r : R) (x : (cechOver f U M).homology q), c.overMap f M q (r • x) = r • c.overMap f M q x",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T163611-L-2784052",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T163611-L-2784052",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

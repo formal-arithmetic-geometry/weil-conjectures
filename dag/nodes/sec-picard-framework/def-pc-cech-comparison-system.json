@@ -1,0 +1,105 @@
+{
+ "id": "def-pc-cech-comparison-system",
+ "kind": "definition",
+ "title": "Normalized additive Cech comparison systems",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U=(U_i)_{i\\in I}$ a covering of $X$. A normalized Cech comparison system consists of natural additive maps $c^q:\\check H^q(U,-)\\to H^q(X,-)$ on all abelian sheaves [def-sc-topological-abelian-cohomology], for every $q\\geq0$. In degree zero the map is gluing followed by the inverse Ext-to-sections identification. For every short exact sequence of abelian sheaves which is surjective on sections over every tuple intersection, require $c^{q+1}\\circ\\check\\delta^q=\\delta^q\\circ c^q$. For any $f:X\\to\\operatorname{Spec}R$ and module $M$, define its additive scalar-restricted map by transporting the homology of the complex of [lem-pc-flat-cech-base-change] to the Cech cohomology of the underlying abelian sheaf and applying $c^q$. Transport uses the identity on underlying section groups, the proved categorical-to-explicit Cech homology isomorphism, and functoriality of homology. No system is chosen by this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-topological-abelian-cohomology",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01EQ",
+  "place": "Lemma 20.11.2, comparison by the augmented double complex; normalization and connecting-map interface"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized Cech to sheaf cohomology comparison commutes with connecting morphisms and inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology to sheaf cohomology comparison natural under inverse image of sheaves",
+   "results": [
+    "CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map",
+    "CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback",
+    "TopCat.Sheaf.pullbackIso"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No normalized comparison system or inverse-image naturality comparison. Local library search found coefficient naturality in Sheaf.Paper.CechComparisonMapNaturality, but it uses module-derived cohomology on one scheme, not abelian Ext comparisons between schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*(comparison|inverseImage|naturality); CechComparisonSystem; exists_cechComparison_inverseImage",
+   "results": "No matching Mathlib statement or pre-existing system. The source CechCohomology and CechComparison provide connecting maps, degree-zero normalization and scalar-restriction homology transports. Local DAG/blueprint searches of inverse image Cech, normalized Cech comparison and 01FD found no duplicate.",
+   "date": "2026-10-12",
+   "verdict": "New interface needed; reuse all source transports and exact-sequence lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, separated-case Cech paragraph: functoriality of the Cech-to-cohomology comparison before tensor extension. Lemma 20.11.2, comparison by the augmented double complex; normalization and connecting-map interface",
+   "via": [
+    "lem-pc-affine-cech-inverse-image",
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonSystem.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.CechComparisonSystem",
+  "statement": "structure CechComparisonSystem {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.CechComparisonSystem",
+   "AlgebraicGeometry.Scheme.Modules.presheafOverForgetIso",
+   "AlgebraicGeometry.Scheme.Modules.cechOverHomologyAddEquiv",
+   "AlgebraicGeometry.Scheme.Modules.CechComparisonSystem.overMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T163611-L-2784052",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T163611-L-2784052",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
