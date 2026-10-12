@@ -18,45 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Restrict to the cofinal upper tail of i, without changing the limit. Its schemes and limit are affine; the latter follows from Mathlib Scheme.isAffine_of_isLimit. Interpret H^0 as sections at the identity etale object, and cohomological pullback as the unit on sections.",
+   "text": "Identify x with its global section g using Sheaf.H.equiv₀ and the Gamma-to-terminal-evaluation isomorphism. The degree-zero pullback formula and injectivity of both identifications turn hx into vanishing of the global section pullback at the limit.",
    "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory",
     "lem-weil-pbc-cohomology-pullback-degree-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Use the affine etale site colimit presentation and the full-affine restriction equivalence. Compare inverse images through their sectionwise right adjoints and units. Inverse-image composition identifies the limit pullbacks of the fixed stage sheaf with a constant diagram; the identity cocone is a colimit because the tail is connected. The section comparison in Sites 09YN identifies its sections at the identity affine object with the filtered colimit of stage sections, compatibly with units.",
+   "text": "Choose the unit-compatible abelian-to-set section comparisons. The global-section composition identity, followed by cancellation of the composition isomorphism, identifies the comparison of the pullback of any section with its direct pullback. At the identity object of Over(op i), take the images of the identity pullback of g and zero. Their limit images agree by hx. The terminal etale object is isomorphic to the affine stage, so it is affine and its structure morphism is quasi-compact and quasi-separated.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
-    "lem-weil-pbc-colimit-of-sites-sections"
+    "lem-weil-pbc-abelian-pullback-global-sections-comparison",
+    "lemma-weil-pbc-finite-pullback-composition"
    ],
    "elementary": false
   },
   {
-   "text": "The zero image of x identifies its representative with zero in the filtered colimit. Detection of equality at a later stage gives the required arrow out of i. The degree-zero pullback/unit formula translates its zero section to the displayed cohomology equality.",
+   "text": "Apply affine eventual equality detection to these two underlying set sections at the identity object of Over(op i). It supplies k and two arrows into that same object. Their left components are equal since I is a preorder, so OverMorphism.ext identifies the arrows. Translate the transition equality back using the unit-compatible coefficient comparisons and cancel their bijection. The result is vanishing of the original section pulled back along D.map k.hom. The degree-zero formula gives vanishing of the cohomology class. Take j=k.left.unop and f=k.hom.unop.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-sets-section-affine-eventual-equality",
     "lem-weil-pbc-cohomology-pullback-degree-zero"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-initial-full-subcategory",
   "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-colimit-of-sites-sections",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-abelian-pullback-global-sections-comparison",
+  "lemma-weil-pbc-finite-pullback-composition",
+  "lem-weil-pbc-sets-section-affine-eventual-equality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/09YN",
-  "place": "Fixed-coefficient specialization of the section comparison on the affine upper tail; independent of varying coefficient systems and filtered sheaf colimits."
+  "group": "Q3",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/sites.tex",
+  "place": "Tag 09YQ degree zero via existing affine eventual equality detection and unit-compatible abelian-to-set comparison (00YV, 03CB, 03CC). No new statements; unit sk-thm-p1 route preserved."
  },
  "mathlib_searches": [
   {
@@ -130,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T163624-L-2788805",
-  "kind": "interface",
+  "landing": "20261012T184335-L-4016678",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
