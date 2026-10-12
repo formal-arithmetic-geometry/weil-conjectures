@@ -15,54 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Forgetting to abelian sheaves, inverse image, and cohomology are additive and preserve finite biproducts and coefficient isomorphisms. Naturality identifies each field-extension or open-restriction cohomology comparison with the finite sum of the component comparisons.",
+   "text": "Install the component constructibility instances. Use Scheme.IsConstructibleSheaf.biproduct and Scheme.IsConstructibleSheaf.of_iso to prove H constructible. By biproduct.hom_ext', each injection composed with r times the identity is (r times the identity of its component) composed with that injection, hence zero. Cancel e.hom to transport the resulting annihilation to H.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-additive-category"
+    "def-weil-additive-category",
+    "def-weil-pbc-etale-constructible-sheaf"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "A finite direct sum is zero or finite exactly when all components are zero or finite, and a finite sum of maps is bijective or surjective exactly when every component is. This gives C1,C2,C5,C7,C8, since affine and proper conditions are shared. Constructibility holds for the finite sum and is invariant under the given isomorphism.",
+   "text": "Apply the three componentwise equivalences to C1,C2,C5,C7,C8; C3; and C4,C6. Unpack Assertions with assertions_iff. In each direction, use the corresponding implications of the three equivalences, distribute the finite conjunction over the universal quantifier, and repack all eight fields with assertions_iff.",
    "uses": [
-    "def-weil-pbc-eight-curve-assertions",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-additive-category"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For C3, in positive characteristic p=r every r-killed sheaf has primary stalks. If p differs from r, a primary stalk killed by r is zero: an element killed by p^m and r is zero by Bezout. Therefore a summand satisfying the exceptional primary hypothesis is zero, and if the whole sum satisfies it the whole sum is zero. C3 then holds automatically in the exceptional cases.",
-   "uses": [
-    "def-weil-pbc-primary-torsion",
+    "lem-pbc-f1-prime-biproduct-unconditional",
+    "lem-pbc-f1-prime-biproduct-primary",
+    "lem-pbc-f1-prime-biproduct-invertible",
     "def-weil-pbc-eight-curve-assertions"
    ],
-   "elementary": false
-  },
-  {
-   "text": "For C4 and C6, if r is invertible in k every r-killed sheaf has invertible-order torsion; use the componentwise comparisons of the first two steps. If char k=r, such a sheaf satisfying invertible-order torsion is zero, since each stalk element is killed both by r and by an integer coprime to r. This handles exceptional conditions both for individual summands and for the whole sum. Transport all hypotheses and comparison maps along H ≅ ⨁ G. For the empty family H is zero and all assertions are automatic.",
-   "uses": [
-    "def-weil-pbc-primary-torsion",
-    "def-weil-pbc-eight-curve-assertions",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-additive-category",
   "def-weil-pbc-eight-curve-assertions",
-  "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-pbc-primary-torsion",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-pbc-f1-prime-biproduct-invertible",
+  "lem-pbc-f1-prime-biproduct-primary",
+  "lem-pbc-f1-prime-biproduct-unconditional"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. Primary text checked at https://stacks.math.columbia.edu/tag/03SC and https://stacks.math.columbia.edu/tag/0A5C. Finite-biproduct details and generalization written by T2 following these source arguments."
+  "place": "Stacks 03SC finite-sum comparison, expanded by F1 into unconditional, primary and invertible-order cases; assembly written in Lean."
  },
  "mathlib_searches": [
   {
@@ -139,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T042421-L-1821844",
+  "landing": "20261012T053927-L-2633522",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

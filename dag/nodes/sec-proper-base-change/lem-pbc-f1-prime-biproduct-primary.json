@@ -1,0 +1,120 @@
+{
+ "id": "lem-pbc-f1-prime-biproduct-primary",
+ "kind": "statement",
+ "title": "Finite biproduct equivalence for primary curve assertions",
+ "statement": "Let $\\Lambda$ be a commutative ring, $k$ a field, $X$ a scheme and $f:X\\to\\operatorname{Spec}k$.\nLet $I$ be a finite index type and $G_a$ module sheaves on the small etale site of $X$.\nLet $H$ be a module sheaf equipped with an isomorphism $e:H\\simeq\\bigoplus_a G_a$,\nusing finite biproducts [def-weil-additive-category]. The predicates $C_1,\\ldots,C_8$\nare those of [def-weil-pbc-eight-curve-assertions], with their stated conditional hypotheses.\nLet $r$ be prime and suppose $r\\operatorname{id}_{G_a}=0$ for every $a$ and\n$r\\operatorname{id}_H=0$. Then $C_3(H)$ holds if and only if $C_3(G_a)$ holds for every $a$.\nPrimary torsion has the geometric-stalk meaning of [def-weil-pbc-primary-torsion].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Theorem 03SC, proof, fourth paragraph; Lemma 0A5C. Primary text checked at https://stacks.math.columbia.edu/tag/03SC and https://stacks.math.columbia.edu/tag/0A5C."
+ },
+ "stmt_deps": [
+  "def-weil-additive-category",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-primary-torsion"
+ ],
+ "proof": [
+  {
+   "text": "At any geometric stalk, all components and H are killed by r. For a prime p which is the characteristic of k, if p = r every component and H is p-primary. The C3 conditions then say vanishing of the same cohomology degrees, which is componentwise by additivity. If p differs from r, any p-primary r-killed stalk is zero: for each element, Bezout for the coprime integers r and p^n expresses 1 as an integer combination of its two annihilators. Conservativity of geometric stalks makes any sheaf satisfying this exceptional hypothesis zero. Hence the C3 conclusion is automatic, both when that hypothesis holds for a component and when it holds for H. Transport cohomology and stalks along e. The empty sum is zero, and its C3 assertion and the empty universal quantifier are both true. Here cohomology means the Ext-based Sheaf.H occurring in the eight predicates: Sheaf.functorH is additive, and Ext.addEquivBiproduct gives the finite product of component groups. No identification with derived global sections is used.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-pbc-eight-curve-assertions",
+    "def-weil-pbc-primary-torsion",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-additive-category",
+  "def-weil-pbc-eight-curve-assertions",
+  "def-weil-pbc-primary-torsion",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Agent expansion of the finite-sum comparison in Stacks 03SC; elementary common-prime exceptions as in the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"biproduct\", \"IsIso\"",
+   "date": "2026-10-12",
+   "results": "Returned 0 hits: ",
+   "verdict": "No matching bundled finite-sum curve assertion equivalence; generic biproduct infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology finite biproduct vanishing finiteness and bijectivity comparison maps",
+   "date": "2026-10-12",
+   "results": "Returned 8 hits: AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, Algebra.FormallyEtale.instForallOfFinite, Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective, Algebra.FormallyEtale.comp_bijective, CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, Algebra.etaleLocus_eq_compl_support",
+   "verdict": "No matching bundled finite-sum curve assertion equivalence; generic biproduct infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "biproduct|assertions_iff",
+   "date": "2026-10-12",
+   "results": "Returned 25 hits: Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/RepresentationTheory/Rep/Basic.lean, Mathlib/Condensed/Light/AB.lean, Mathlib/Condensed/Light/Epi.lean, Mathlib/Condensed/AB.lean, Mathlib/LinearAlgebra/Matrix/SchurComplement.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "verdict": "No matching bundled finite-sum curve assertion equivalence; generic biproduct infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of finite direct sums of sheaves preserves vanishing finite groups and comparison bijectivity",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PrimeBiproductAssertions",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-curve-dense-open-localization",
+   "place": "proof, finite sum comparison",
+   "via": [
+    "lem-pbc-q1-disjoint-open-prime-assertions",
+    "lem-pbc-t2-prime-biproduct-assertions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimeBiproductPrimary",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimeBiproductPrimary.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.prime_biproduct_primary_iff",
+  "statement": "theorem prime_biproduct_primary_iff (Λ : Type (u + 1)) [CommRing Λ]\n    {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))\n    (r : ℕ) [Fact r.Prime] {ι : Type} [Finite ι]\n    (G : ι → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hGr : ∀ a, r • 𝟙 (G a) = 0)\n    {H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : H ≅ ⨁ G)\n    (hHr : r • 𝟙 H = 0) :\n    VanishingAboveOneOfIsPrimaryTorsionSheaf Λ H k ↔\n      ∀ a, VanishingAboveOneOfIsPrimaryTorsionSheaf Λ (G a) k",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053927-L-2633522",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T053927-L-2633522",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
