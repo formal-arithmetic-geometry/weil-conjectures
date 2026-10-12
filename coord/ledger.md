@@ -6754,3 +6754,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/B3/Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions (stage 3; reviewer PASS; first push; landing 20261012T085216-L-3938 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/B3/Sheaf.RingTheory.RegularLocalDimOneIffNormal (stage 3; reviewer PASS; first push; landing 20261012T085216-L-4080 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/C1/Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso (stage 3; reviewer PASS; first push; landing 20261012T085216-L-4195 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/C1/Sheaf.Algebra.Homology.HomComplex (stage 3; reviewer PASS; first push; landing 20261012T085217-L-4317 (proof); batch 20261012T085205; modules 1; new nodes 0)

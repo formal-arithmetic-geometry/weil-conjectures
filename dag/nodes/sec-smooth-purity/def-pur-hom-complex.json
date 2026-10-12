@@ -23,9 +23,38 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "In degree n take the categorical product over integers p of homObj(L.X p,M.X (p+n)), with its standard product projections. Mathlib Sheaf.Limits supplies the products and productIsProduct proves their universal property.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define the differential by Pi.lift of postcomposition with d_M minus n.negOnePow times precomposition with d_L, using p+m-n for the second index. The projection formula follows from Pi.lift_π. Off-shape differentials vanish because both original differentials vanish and internal Hom maps preserve zero separately.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Check the square on each product projection. Expand both differentials using preadditivity and composition of homObjMap. The pure terms vanish by d_comp_d, and the mixed terms cancel using Int.negOnePow_succ and abel. This constructs the cochain complex.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use Pi.lift to pre- and post-compose each product factor by components of chain maps. Projectionwise the chain-map identity follows from f.comm and g.comm. Identity and composition follow from homObjMap_id and homObjMap_comp_homObjMap. Assemble the curried bifunctor and verify the requested combined action by composing its two maps on projections.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X, construction of Hom complexes; explicit product-projection calculation formalized by C1 stage 3, 2026-10-12"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -143,5 +172,15 @@
   "group": "E1",
   "result": "fix",
   "note": "site C/J, R : Sheaf J CommRingCat, L M : CochainComplex (SheafOfModules) ℤ; degree-n term is a limit Fan over p∈ℤ of homObj (L.X p) (M.X (p+n)); d component = π≫homObjMap 𝟙 d_M − n.negOnePow•π_{p+1}≫homObjMap d_L 𝟙 (Stacks sign); bifunctor Lᵒᵖ×M with componentwise homObjMap; homObj is the dep's record; source CochainComplex.internalHomObj needs MonoidalClosed, one universe, sign (-1)^p: not the node; data via Classical.choose of named sorry theorem (AGENTS §5); dropped unused Sheaf.Limits import"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T085217-L-4317",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
