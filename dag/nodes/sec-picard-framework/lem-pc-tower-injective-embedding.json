@@ -28,50 +28,33 @@
  ],
  "proof": [
   {
-   "text": "For each n apply [lem-weil-pbc-ring-modules-enough-injectives] with R=\\mathbb Z to the abelian group A_n, obtaining an injective abelian group J_n and a monomorphism j_n:A_n\\to J_n.",
+   "text": "Use the Mathlib enough-injectives presentation at every level to define J n and j n.",
    "uses": [
     "lem-weil-pbc-ring-modules-enough-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
-   }
+   "elementary": false
   },
   {
-   "text": "Construct I_n and monomorphisms i_n:A_n\\to I_n recursively. Set I_1=J_1 and i_1=j_1. Having I_n and i_n, set I_{n+1}=I_n\\oplus J_{n+1}, put p_n:I_{n+1}\\to I_n equal to the first projection, and define i_{n+1}(a)=(i_n(f_n(a)),j_{n+1}(a)). A finite direct sum of injective abelian groups is injective because a map into it extends componentwise, so every I_n is injective; p_n is split by the first summand inclusion. The defining formula gives p_n i_{n+1}=i_n f_n, so the i_n form a morphism of towers.",
+   "text": "Recursively define I 0 = J 0 and I (n+1) = I n × J (n+1), with first projections as transitions and product lifts for the embedding components. Package these maps using Functor.ofOpSequence and NatTrans.ofOpSequence.",
    "uses": [
-    "lem-weil-pbc-ring-modules-enough-injectives",
     "def-weil-inverse-system"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
-   }
+   "elementary": true
   },
   {
-   "text": "Each i_n is injective by its two coordinates: if i_{n+1}(a)=0 then j_{n+1}(a)=0, hence a=0, and i_1=j_1 is injective. A morphism of towers whose level maps are all injective is a monomorphism of towers: if g,h:T\\to A are morphisms of towers with i\\circ g=i\\circ h, then i_n\\circ g_n=i_n\\circ h_n for every n because composition of morphisms of inverse systems is componentwise [def-weil-inverse-system], so g_n=h_n by injectivity of i_n, i.e. g=h. Thus A\\to I is a monomorphism in the abelian category of towers [lem-pc-tower-abelian], while every p_n is a split surjection, proving the claim.",
-   "uses": [
-    "def-weil-inverse-system",
-    "lem-pc-tower-abelian"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
-   }
+   "text": "Each component is mono because its second coordinate is the injective envelope inclusion; NatTrans.mono_of_mono_app gives Mono i. Inductively products of injective objects are injective, and each first projection is split epi by the standard product section.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-ring-modules-enough-injectives",
-  "def-weil-inverse-system",
-  "lem-pc-tower-abelian"
+  "def-weil-inverse-system"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 07KW, Lemma 15.88.1 proof footnote"
+  "place": "Tag 07KW proof footnote; realized with Mathlib injective presentations and recursive binary products"
  },
  "mathlib_searches": [
   {
@@ -166,5 +149,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T110318-L-621408",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

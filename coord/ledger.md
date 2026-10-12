@@ -7406,3 +7406,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/S1/Sheaf.AlgebraicGeometry.IntegralGeometricPointExchange (stage 3; reviewer PASS; first push; landing 20261012T110317-L-621116 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:03 L: merged deliver/S1/Sheaf.Topology.AbelianIntegerOpenInclusion (stage 3; reviewer PASS; first push; landing 20261012T110317-L-621215 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/S2/Sheaf.AlgebraicGeometry.Modules.LocallySplitShortComplexHomology (stage 3; reviewer PASS; first push; landing 20261012T110317-L-621312 (proof); batch 20261012T110249; modules 1; new nodes 0)
+- 11:03 L: merged deliver/S2/Sheaf.CategoryTheory.InjectiveTowerEmbedding (stage 3; reviewer PASS; first push; landing 20261012T110318-L-621408 (proof); batch 20261012T110249; modules 1; new nodes 0)
