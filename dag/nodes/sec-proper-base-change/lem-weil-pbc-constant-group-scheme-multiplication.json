@@ -30,7 +30,7 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the pieces $W_{e,e'}$; part (a)).* By [lem-weil-pbc-scheme-coproduct-family] applied to the family $(T)_{e\\in E}$, each $V_e=\\iota_e(T)$ is open and closed in $T_E$, $V_e\\cap V_d=\\varnothing$ for $e\\ne d$, and $T_E=\\bigcup_{e\\in E}V_e$. The projections $p,q:P\\to T_E$ of the fibre product [def-pc-fibre-product] are morphisms of schemes, hence continuous, so $p^{-1}(V_e)$ and $q^{-1}(V_{e'})$ are open and closed in $P$, and so is their intersection $W_{e,e'}$. Disjointness: $W_{e,e'}\\cap W_{d,d'}=p^{-1}(V_e\\cap V_d)\\cap q^{-1}(V_{e'}\\cap V_{d'})$, and if $(e,e')\\ne(d,d')$ then $e\\ne d$ or $e'\\ne d'$, so one of the two preimages is the preimage of $\\varnothing$, hence empty. Covering: for $x\\in P$ choose $e$ with $p(x)\\in V_e$ and $e'$ with $q(x)\\in V_{e'}$ (the $V$'s cover $T_E$); then $x\\in W_{e,e'}$. This proves (a). Moreover $\\pi\\circ p=\\pi\\circ q$ by the definition of the fibre product of $\\pi$ with itself, so $\\rho$ is well defined.",
+   "text": "Use Mathlib sigmaOpenCover to cover the coproduct. The point equality criterion sigmaι_eq_iff makes different component images disjoint. Each component is open by IsOpenImmersion.isOpen_range; its complement is the union of all other component images, so it is closed. Preimages along the continuous pullback projections give clopen pair components. Two different pairs differ in a coordinate, so disjointness of the corresponding coproduct components proves disjointness of the pair components. Choose an index for each projection of a point using sigmaOpenCover.exists_eq to prove that the pair components cover.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family",
     "def-pc-fibre-product"
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "*Step 2 (the local morphisms and their compatibility).* Regard each $W_{e,e'}$ as an open subscheme of $P$ with inclusion $j_{e,e'}:W_{e,e'}\\to P$, an open immersion [def-weil-open-immersion], and put $\\rho|_{W_{e,e'}}=\\rho\\circ j_{e,e'}$ and $m_{e,e'}=\\iota_{e+e'}\\circ\\rho|_{W_{e,e'}}:W_{e,e'}\\to T_E$. By (a) the $W_{e,e'}$ form an open cover of $P$. The compatibility condition of [lem-weil-pbc-scheme-morphism-gluing] holds: for $(e,e')=(d,d')$ both restrictions are the same morphism; for $(e,e')\\ne(d,d')$ the overlap $W_{e,e'}\\cap W_{d,d'}$ is empty by (a), so it is the empty scheme, which is an initial object of the category of schemes (a morphism from $\\varnothing$ is the empty map of spaces with the unique map of sheaves into the zero sheaf on $\\varnothing$), and any two morphisms $\\varnothing\\to T_E$, in particular $m_{e,e'}|_{\\varnothing}$ and $m_{d,d'}|_{\\varnothing}$, are equal.",
+   "text": "Let C be Scheme.Pullback.openCoverOfLeftRight of the two sigmaOpenCover covers. Mathlib Scheme.Pullback.range_map, with base map the identity of T, identifies Set.range (C.f ij) with the pair component W_ij. Define the local map f_ij as C.f ij followed by the square projection and the inclusion indexed by ij.1 + ij.2. For equal indices, pullback.condition proves compatibility. For different indices the ranges are disjoint, so Scheme.isEmpty_pullback makes the overlap empty and isInitialOfIsEmpty.hom_ext proves compatibility.",
    "uses": [
     "def-weil-open-immersion",
     "lem-weil-pbc-scheme-morphism-gluing"
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "*Step 3 (existence and uniqueness of $m$; part (b)).* By Step 2 and the gluing lemma [lem-weil-pbc-scheme-morphism-gluing] applied to the open cover $P=\\bigcup_{(e,e')\\in E\\times E}W_{e,e'}$ and the morphisms $m_{e,e'}$, there is a unique morphism of schemes $m:P\\to T_E$ with $m|_{W_{e,e'}}=m_{e,e'}=\\iota_{e+e'}\\circ\\rho|_{W_{e,e'}}$ for all $(e,e')\\in E\\times E$. This is (b).",
+   "text": "Construct m as C.glueMorphisms f hf. The restriction formula is C.ι_glueMorphisms. If m′ has the same restriction formula, C.hom_ext proves m′ = m.",
    "uses": [
     "lem-weil-pbc-scheme-morphism-gluing"
    ],
@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "*Step 4 ($\\pi\\circ m=\\rho$ and $m(W_{e,e'})\\subseteq V_{e+e'}$).* For every $(e,e')$, $(\\pi\\circ m)|_{W_{e,e'}}=\\pi\\circ m\\circ j_{e,e'}=\\pi\\circ\\iota_{e+e'}\\circ\\rho\\circ j_{e,e'}=\\rho\\circ j_{e,e'}=\\rho|_{W_{e,e'}}$, using $\\pi\\circ\\iota_{e+e'}=\\mathrm{id}_T$. So $\\pi\\circ m$ and $\\rho$ are two morphisms $P\\to T$ whose restrictions to every member of the open cover $(W_{e,e'})$ agree, hence $\\pi\\circ m=\\rho$ by the uniqueness clause of [lem-weil-pbc-scheme-morphism-gluing]. On points, $m(W_{e,e'})=(m\\circ j_{e,e'})(W_{e,e'})=\\iota_{e+e'}(\\rho(W_{e,e'}))\\subseteq\\iota_{e+e'}(T)=V_{e+e'}$.",
+   "text": "Use C.hom_ext and the restriction formula to prove m followed by the codiagonal equals the square projection; Sigma.ι_desc makes each inclusion followed by the codiagonal the identity. Given a point of W_ij, the range formula provides a preimage under C.f ij. Evaluate the restriction formula at that point to exhibit its image under m as lying in the component indexed by the sum.",
    "uses": [
     "lem-weil-pbc-scheme-morphism-gluing"
    ],
@@ -76,7 +76,7 @@
    }
   },
   {
-   "text": "*Step 5 ($m^{-1}(V_d)$; end of part (c)).* Let $d\\in E$. If $e+e'=d$ then $m(W_{e,e'})\\subseteq V_d$ by Step 4, so $\\bigcup_{e+e'=d}W_{e,e'}\\subseteq m^{-1}(V_d)$. Conversely, let $x\\in m^{-1}(V_d)$. By (a) there is $(e,e')$ with $x\\in W_{e,e'}$, and then $m(x)\\in V_{e+e'}\\cap V_d$ by Step 4; since $V_{e+e'}\\cap V_d=\\varnothing$ unless $e+e'=d$ (Step 1, from [lem-weil-pbc-scheme-coproduct-family]), we get $e+e'=d$ and $x\\in\\bigcup_{e+e'=d}W_{e,e'}$. Hence $m^{-1}(V_d)=\\bigcup_{e+e'=d}W_{e,e'}$, which with Step 4 proves (c).",
+   "text": "For the inverse image formula, a point of the preimage of V_d lies in some W_ij by the pair cover. Its image lies in V_(ij.1+ij.2) by the preceding step. Disjointness of the coproduct components forces ij.1+ij.2=d. This supplies the required subtype index of the union. Conversely evaluate the MapsTo property at any pair with sum d.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family"
    ],
@@ -94,9 +94,9 @@
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "U3 stage 3 worker",
   "document": "literature/stacks-project/groupoids.tex",
-  "place": "Groupoids, Example 39.5.6 (Tag 03YW, example-constant-group) states the componentwise multiplication without proof; the decomposition of the fibre product into the clopen pieces $W_{e,e'}$ and the gluing (Schemes, Section 26.14, Tag 01JA; Lemma 26.14.1, Tag 01JB) are written out by the worker"
+  "place": "Stacks Groupoids Example 39.5.6 (03YW) and Schemes Section 26.14 (01JA); the existing five-step route is implemented directly using Mathlib coproduct, pullback range and gluing lemmas. No intermediate sorry is used."
  },
  "mathlib_searches": [
   {
@@ -202,5 +202,15 @@
   "group": "H1",
   "result": "fix",
   "note": "T scheme, E AddCommGroup with K1 Small.{u}; T_E/iota/pi/V_e/P/rho/W from landed ConstantGroupScheme (pullback); (a) clopen, disjoint for ij≠ij', union=univ; (b) restriction via openCoverOfLeftRight cover map (image W_{e,e'}) and uniqueness now among all m with the restrictions (was ∃! over the conjunction with (c)); (c) m≫π=ρ, MapsTo W→V_{e+e'}, preimage over pairs summing to d"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T095926-L-325510",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
