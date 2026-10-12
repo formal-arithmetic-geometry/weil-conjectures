@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonFinite
+import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerComparisonTop
 
 /-!
 # Comparing cones of smart cutoff inclusions with smart vertical windows
@@ -81,6 +83,12 @@ theorem verticalTower_interval_homology_iso (a : ℤ) (j : EInt)
     Nonempty ((CochainComplex.mappingCone
       ((verticalTower K).map (homOfLE haj))).homology n ≅
       ((total (((verticalInterval a j).mapHomologicalComplex (ComplexShape.up ℕ)).obj K)
-        (ComplexShape.up ℕ)).extend ComplexShape.embeddingUpNat).homology n) := by sorry
+        (ComplexShape.up ℕ)).extend ComplexShape.embeddingUpNat).homology n) := by
+  induction j using WithBotTop.rec with
+  | bot => simp at haj
+  | coe b =>
+      simpa [verticalInterval] using verticalTower_interval_homology_iso_finite K a b haj n
+  | top =>
+      simpa [verticalInterval] using verticalTower_interval_homology_iso_top K a n
 
 end HomologicalComplex₂
