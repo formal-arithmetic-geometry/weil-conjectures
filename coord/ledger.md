@@ -7331,3 +7331,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:02 L: merged deliver/C1/Sheaf.AlgebraicGeometry.FpqcDescentMorphismCompatibility (stage 3; reviewer PASS; first push; landing 20261012T110255-L-612202 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:02 L: merged deliver/C1/Sheaf.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant (stage 3; reviewer PASS; first push; landing 20261012T110255-L-612343 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:02 L: merged deliver/C2/Sheaf.AlgebraicGeometry.ArtinSchreierSectionKernel (stage 3; reviewer PASS; first push; landing 20261012T110255-L-612442 (proof); batch 20261012T110249; modules 1; new nodes 0)
+- 11:02 L: merged deliver/C2/Sheaf.AlgebraicGeometry.ComponentSupportedAffineSection (stage 3; reviewer PASS; first push; landing 20261012T110256-L-612557 (interface); batch 20261012T110249; modules 3; new nodes 2)

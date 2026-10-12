@@ -20,42 +20,38 @@
  ],
  "proof": [
   {
-   "text": "Let a be the unique component containing x. The finite union of the other components is closed. Give it its reduced induced structure Z, let I be its vanishing ideal and I_a its image on C_a. The lift of x is outside V(I_a). Compactness of C_a follows from its closed immersion into compact X.",
+   "text": "Choose the unique component a containing x and a lift y. Construct the finite union T of all other component ranges as a closed subset, its vanishing ideal I, the concrete reduced subscheme Z=I.subscheme, and j=I.subschemeι. The range of j equals T. Uniqueness puts x outside T. support_comap and support_ker identify the support of j.ker.comap (i a) with the preimage of T, putting y outside it.",
    "uses": [
     "def-sbc-closed-immersion-ideal-sheaf"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the ample ideal section theorem to the ample restriction of L and I_a at the lift of x. Obtain t1 in a positive tensor power coming from the ideal, nonvanishing at x. The ample criterion also yields a positive power section t2 with affine locus through x. Multiply these sections: the degree is positive, the product still comes from I_a, and its locus is the intersection of the two loci. The affine-cap-section-open theorem makes this intersection affine inside the affine locus of t2.",
+   "text": "Apply exists_ample_pullback_ideal_affine_section to i a, L and j.ker.comap (i a), using the ample invertible pullback supplied by hL a. Obtain n>0, an ideal-supported section v and an affine nonvanishing open V containing y and disjoint from the pulled-back ideal support.",
    "uses": [
-    "lem-sc-ample-ideal-section",
-    "def-weil-pbc-ample-invertible-module",
-    "lem-sc-affine-cap-section-open"
+    "lem-sc-ample-pullback-ideal-affine-section"
    ],
    "elementary": false
   },
   {
-   "text": "Use the canonical tensor-power pullback isomorphisms and the conductor section theorem to extend the product to a global section of L^n, zero on Z. Its locus is the image of the affine component locus. On X minus Z, C_a → X is a surjective closed immersion of reduced schemes, hence an isomorphism: its ideal is zero, since all its local sections vanish at every point in this reduced open. Thus the image is an affine open of X containing x. If r=1, Z is empty and I=O_X. If r=0 the unique-component hypothesis is impossible.",
+   "text": "Apply conductor_sections to the concrete reduced cover and v. Its unique extension provides a section s of L^n zero on Z, and its locus equality identifies X_s with i a(V). The cover hypothesis gives range(i a) union T=X, and support_comap/support_ker transfer disjointness of V with the pulled-back support to disjointness of i a(V) with T. Apply exists_affineOpen_image_away_closed_cover to produce an affine open U=i a(V); the lift y and i a y=x prove x belongs to U. Combine the carrier equalities.",
    "uses": [
     "lem-sc-conductor-sections",
-    "def-pc-reduced-scheme"
+    "lem-sc-affine-image-away-closed-cover"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-sc-ample-ideal-section",
-  "def-weil-pbc-ample-invertible-module",
-  "lem-sc-affine-cap-section-open",
+  "lem-sc-ample-pullback-ideal-affine-section",
   "lem-sc-conductor-sections",
-  "def-pc-reduced-scheme"
+  "lem-sc-affine-image-away-closed-cover"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09NX, proof final paragraph (steps 5-7 of lem-sc-reduced-dim-le-one-ample), and Remark 09NW; Properties 01Q3 and 01PV"
+  "place": "Lemma 09NX final paragraph, Remark 09NW, and Properties 01Q3/01PV; explicit closed union and affine image argument by C2"
  },
  "mathlib_searches": [
   {
@@ -135,9 +131,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M1",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T085303-L-25047",
+  "landing": "20261012T110256-L-612557",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

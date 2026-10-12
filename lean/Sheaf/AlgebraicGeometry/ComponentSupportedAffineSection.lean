@@ -8,8 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.AmpleIdealSection
-import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import Sheaf.AlgebraicGeometry.AmplePullbackIdealAffineSection
+import Sheaf.AlgebraicGeometry.AffineImageAwayClosedCover
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.ConductorSections
 
 /-! # Affine power sections away from component intersections
@@ -64,6 +65,71 @@ theorem exists_component_supported_affine_section
       ∃ s : (L.tensorPow n).val.presheaf.obj (Opposite.op ⊤),
         ∃ U : X.Opens, x ∈ U ∧ IsAffineOpen U ∧
           (U : Set X) = nonvanishingLocus (L.tensorPow n) s := by
-  sorry
+  classical
+  obtain ⟨a, hxa, huniq⟩ := hx
+  obtain ⟨y, hy⟩ := hxa
+  let T : TopologicalSpace.Closeds X :=
+    Finset.univ.sup (fun b : {b : Fin r // b ≠ a} ↦
+      ⟨Set.range (i b.val), (i b.val).isClosedEmbedding.isClosed_range⟩)
+  have hT : (T : Set X) = ⋃ b : Fin r, ⋃ (_ : b ≠ a), Set.range (i b) := by
+    simp only [T, TopologicalSpace.Closeds.coe_finset_sup, Finset.sup_set_eq_biUnion,
+      Finset.mem_univ, Set.iUnion_true, Function.comp_apply]
+    ext z
+    simp only [Set.mem_iUnion]
+    constructor
+    · rintro ⟨⟨b, hba⟩, hz⟩
+      exact ⟨b, hba, hz⟩
+    · rintro ⟨b, hba, hz⟩
+      exact ⟨⟨b, hba⟩, hz⟩
+  let I := Scheme.IdealSheafData.vanishingIdeal T
+  let Z := I.subscheme
+  let j : Z ⟶ X := I.subschemeι
+  have hZ : Set.range j = ⋃ b : Fin r, ⋃ (_ : b ≠ a), Set.range (i b) := by
+    change Set.range I.subschemeι = _
+    simpa [I] using hT
+  have hxT : x ∉ (T : Set X) := by
+    rw [hT]
+    intro hx
+    obtain ⟨b, hb⟩ := Set.mem_iUnion.mp hx
+    obtain ⟨hba, hxb⟩ := Set.mem_iUnion.mp hb
+    exact hba (huniq b hxb)
+  have hyI : y ∉ ((j.ker.comap (i a)).support : Set (C a)) := by
+    rw [Scheme.IdealSheafData.support_comap]
+    change i a y ∉ (j.ker.support : Set X)
+    rw [Scheme.Hom.support_ker, j.isClosedEmbedding.isClosed_range.closure_eq]
+    rw [hZ, ← hT, hy]
+    exact hxT
+  obtain ⟨hLa, hample⟩ := hL a
+  let := hLa
+  obtain ⟨n, hn, v, V, hyV, hV, hVs, havoid⟩ :=
+    exists_ample_pullback_ideal_affine_section (i a) L hample (j.ker.comap (i a)) y hyI
+  obtain ⟨e, _, hext⟩ := conductor_sections C i hcomponents hdistinct hcover a j hZ L n
+  obtain ⟨⟨s, hs, _⟩, hloc⟩ := hext v
+  have hlocus := hloc s hs.1 hs.2
+  have himage : nonvanishingLocus (L.tensorPow n) s = i a '' (V : Set (C a)) := by
+    exact hlocus.trans (congrArg (fun S ↦ i a '' S) hVs.symm)
+  have hcoverT : Set.range (i a) ∪ (T : Set X) = Set.univ := by
+    apply Set.eq_univ_of_forall
+    intro z
+    have hz : z ∈ ⋃ b, Set.range (i b) := by rw [hcover]; trivial
+    obtain ⟨b, hb⟩ := Set.mem_iUnion.mp hz
+    by_cases hba : b = a
+    · exact Or.inl (hba ▸ hb)
+    · exact Or.inr (by rw [hT]; exact
+        Set.mem_iUnion.mpr ⟨b, Set.mem_iUnion.mpr ⟨hba, hb⟩⟩)
+  have havoidT : Disjoint (i a '' (V : Set (C a))) (T : Set X) := by
+    rw [Set.disjoint_left]
+    rintro z ⟨w, hw, rfl⟩ hz
+    have hwJ : w ∈ ((j.ker.comap (i a)).support : Set (C a)) := by
+      rw [Scheme.IdealSheafData.support_comap]
+      change i a w ∈ (j.ker.support : Set X)
+      rw [Scheme.Hom.support_ker, j.isClosedEmbedding.isClosed_range.closure_eq]
+      rwa [hZ, ← hT]
+    exact Set.disjoint_left.mp havoid hw hwJ
+  obtain ⟨U, hU, hUimage⟩ :=
+    Scheme.exists_affineOpen_image_away_closed_cover (i a) T hcoverT V hV havoidT
+  refine ⟨n, hn, s, U, ?_, hU, hUimage.trans himage.symm⟩
+  rw [← SetLike.mem_coe, hUimage]
+  exact ⟨y, hyV, hy⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,117 @@
+{
+ "id": "lem-sc-affine-image-away-closed-cover",
+ "kind": "statement",
+ "title": "Affine images away from the other closed member of a cover",
+ "statement": "Let X be a reduced scheme [def-pc-scheme] [def-pc-reduced-scheme], f:Y -> X a closed immersion [def-weil-closed-immersion], T a closed subset with range(f) union T = X, and V an affine open of Y whose image is disjoint from T. There is an affine open U of X whose carrier is exactly f(V). No reducedness of Y or finiteness hypotheses are needed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 09NX, final paragraph: passing from the component affine locus disjoint from the other components to its ambient affine locus; the reduced closed-immersion argument is written out by C2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put W=X minus T. Every point of W lifts along f by the cover equality. Thus the restriction f|W is surjective. It is a closed immersion into the reduced scheme W, hence an isomorphism by Mathlib isIso_of_isClosedImmersion_of_surjective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Disjointness gives V <= f^-1 W. Compose the open immersion V -> f^-1 W, the isomorphism f|W, and W -> X. Its source is affine, so its open image is affine by Mathlib IsAffineOpen.image_of_isOpenImmersion. The composite equals V.ι followed by f, and elementary image membership identifies its range with f(V).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 09NX, final paragraph: passing from the component affine locus disjoint from the other components to its ambient affine locus; the reduced closed-immersion argument is written out by C2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "surjective closed immersion into reduced scheme is isomorphism affine open image",
+   "results": "AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.Scheme.Hom.app_surjective, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective, AlgebraicGeometry.isIso_iff_isOpenImmersion_and_surjective",
+   "date": "2026-10-12",
+   "verdict": "Uses the existing reduced-surjective closed-immersion and affine-open image lemmas; no exact closed-cover image theorem found."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion",
+   "results": "AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion, AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion",
+   "date": "2026-10-12",
+   "verdict": "Uses the existing reduced-surjective closed-immersion and affine-open image lemmas; no exact closed-cover image theorem found."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_of_isClosedImmersion_of_surjective|image_of_isOpenImmersion",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Artinian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean",
+   "date": "2026-10-12",
+   "verdict": "Uses the existing reduced-surjective closed-immersion and affine-open image lemmas; no exact closed-cover image theorem found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine open in a closed subscheme of a reduced scheme has affine open image when its image avoids the other closed subset of a cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "Service unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentSupportedAffineSection",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof first sentence, via 09NZ and 09NX: Varieties Lemma 09NX, proof final paragraph (steps 5-7 of lem-sc-reduced-dim-le-one-ample), and Remark 09NW; Properties 01Q3 and 01PV",
+   "via": [
+    "lem-sc-component-supported-affine-section",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineImageAwayClosedCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineImageAwayClosedCover.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affineOpen_image_away_closed_cover",
+  "statement": "theorem exists_affineOpen_image_away_closed_cover {X Y : Scheme.{u}} [IsReduced X] (f : Y ⟶ X) [IsClosedImmersion f] (T : TopologicalSpace.Closeds X) (hcover : Set.range f ∪ (T : Set X) = Set.univ) (V : Y.Opens) (hV : IsAffineOpen V) (havoid : Disjoint (f '' (V : Set Y)) (T : Set X)) : ∃ U : X.Opens, IsAffineOpen U ∧ (U : Set X) = f '' (V : Set Y)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T110256-L-612557",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T110256-L-612557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

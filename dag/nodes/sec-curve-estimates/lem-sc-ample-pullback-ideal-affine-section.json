@@ -1,0 +1,145 @@
+{
+ "id": "lem-sc-ample-pullback-ideal-affine-section",
+ "kind": "statement",
+ "title": "Ideal-supported affine sections in powers of an ample pullback",
+ "statement": "Let f:Y -> X be a scheme morphism [def-pc-scheme], L an invertible module [def-sc-invertible-module], and M=f^*L its tensor pullback [def-pc-module-pullback]. Assume M invertible and ample [def-weil-pbc-ample-invertible-module]. Let J be a quasi-coherent ideal sheaf on Y [def-sbc-closed-immersion-ideal-sheaf] and y outside its support. There are n>0, a section v of J tensor f^*(L^n), and an affine open V containing y such that V is the nonvanishing locus of the image of v under J -> O_Y tensored with f^*(L^n), followed by the left unitor; V is disjoint from the support of J.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 09NX, final paragraph, construction t=t1*t2; Properties Proposition 01Q3 (1)/(6) and Lemma 01PV; monoidal pullback compatibility of Modules 01CD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The compactness conjunct of ampleness supplies CompactSpace Y. Apply exists_section_of_ample_ideal to M and J at y to obtain p>0 and a section v1 of J tensor M^p whose image u1 does not vanish at y. Ampleness itself supplies q>0 and a section u2 of M^q with affine nonvanishing open U2 containing y.",
+   "uses": [
+    "lem-sc-ample-ideal-section",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form tmulSection v1 u2 and transport through the associator and M.tensorPowAddIso to J tensor M^(p+q). Naturality of tensorHom and the left unitor identifies its image with the product of u1 and u2 transported to M^(p+q). On simultaneous local generators the two sections have coefficients a,b; the product has coefficient ab. In each residue field ab is nonzero iff a and b are nonzero. Thus its locus is the intersection U2 cap Y_u1 and contains y. affine_cap_section_open applied to M^p and u1 makes this intersection affine.",
+   "uses": [
+    "lem-sc-affine-cap-section-open",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At a point in the support of J, every local section of J lies in the maximal ideal. Locally trivializing M^(p+q) shows the image section lies in maximal-ideal times its stalk, so its nonvanishing locus avoids the support. The natural monoidal pullback comparison gives f^*(L^(p+q)) isomorphic to M^(p+q). Transport the ideal-tensor section along its inverse, tensored with J. The left unitor and tensorHom are natural, so its image is the transported section. The stalk map of an isomorphism is linear with linear inverse and therefore preserves maximal-ideal times stalk; this keeps the locus unchanged. Finally p+q>0.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ample-ideal-section",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-sc-affine-cap-section-open",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-invertible-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Lemma 09NX, final paragraph, construction t=t1*t2; Properties Proposition 01Q3 (1)/(6) and Lemma 01PV; monoidal pullback compatibility of Modules 01CD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An ample line bundle has a global positive power section in an ideal with affine nonvanishing locus avoiding the ideal zero set",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.IsAffineOpen.self_le_iSup_basicOpen_iff, AlgebraicGeometry.IsAffineOpen.self_le_basicOpen_union_iff",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; existing section and ideal APIs used for the reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.nilradical, AlgebraicGeometry.Scheme.IdealSheafData.instAdd, AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice, AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup, AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring, AlgebraicGeometry.Scheme.IdealSheafData.instMul, AlgebraicGeometry.Scheme.IdealSheafData.instOne",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; existing section and ideal APIs used for the reduction"
+  },
+  {
+   "tool": "grep",
+   "query": "component.*section|ideal.*affine",
+   "results": "Mathlib/Topology/Separation/Regular.lean, Mathlib/Data/Set/UnionLift.lean, Mathlib/Data/Set/UnionLift.lean, Mathlib/Topology/Connected/Clopen.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact statement; existing section and ideal APIs used for the reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample invertible sheaf has an ideal-supported section with affine nonvanishing locus",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "Service unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "section of ample invertible module whose zero locus contains a closed subset and whose nonzero locus is affine",
+   "results": "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.Scheme.affineBasicOpen_le, AlgebraicGeometry.Scheme.IdealSheafData.mem_supportSet_iff, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff, AlgebraicGeometry.Scheme.mem_zeroLocus_iff, AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen",
+   "date": "2026-10-12",
+   "verdict": "Independent second-reading search: no exact ideal-supported affine power-section result found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ComponentSupportedAffineSection",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Proof first sentence, via 09NZ and 09NX: Varieties Lemma 09NX, proof final paragraph (steps 5-7 of lem-sc-reduced-dim-le-one-ample), and Remark 09NW; Properties 01Q3 and 01PV",
+   "via": [
+    "lem-sc-component-supported-affine-section",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AmplePullbackIdealAffineSection",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmplePullbackIdealAffineSection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_ample_pullback_ideal_affine_section",
+  "statement": "theorem exists_ample_pullback_ideal_affine_section {X Y : Scheme.{u}} (f : Y ⟶ X) (L : X.Modules) [L.IsInvertible] [((tensorPullback f).obj L).IsInvertible] (hL : IsAmple Y ((tensorPullback f).obj L)) (J : Y.IdealSheafData) (y : Y) (hy : y ∉ (J.support : Set Y)) : ∃ n : ℕ, 0 < n ∧ ∃ v : Γ(J.toModules ⊗ (tensorPullback f).obj (L.tensorPow n), ⊤), ∃ V : Y.Opens, y ∈ V ∧ IsAffineOpen V ∧ (V : Set Y) = nonvanishingLocus ((tensorPullback f).obj (L.tensorPow n)) ((J.toModulesι ▷ (tensorPullback f).obj (L.tensorPow n) ≫ (λ_ ((tensorPullback f).obj (L.tensorPow n))).hom).app ⊤ v) ∧ Disjoint (V : Set Y) (J.support : Set Y)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T110256-L-612557",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T110256-L-612557",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
