@@ -15,62 +15,71 @@
  },
  "proof": [
   {
-   "text": "(The fibre of $T$.) Let $F_T=T\\otimes_Rk$ and $\\mathfrak Q_T\\subset F_T$ the kernel of $F_T\\to\\kappa(\\mathfrak q_T)$, $t\\otimes\\lambda\\mapsto\\bar t\\bar\\lambda$. (a) With $A=R[x_1,\\dots,x_n]$, $A\\otimes_Rk\\cong k[x_1,\\dots,x_n]$, $p\\otimes\\lambda\\mapsto\\lambda\\rho(p)$ with $\\rho:A\\to k[x_1,\\dots,x_n]$ the coefficient reduction [lem-weil-pbc-polynomial-scalar-extension]; so $F_T=(A/(f_1,\\dots,f_c))\\otimes_Rk\\cong(A/(f))\\otimes_A(A\\otimes_Rk)\\cong k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$, $\\bar f_j=\\rho(f_j)$, by associativity of $\\otimes$ and [lem-weil-pbc-tensor-quotient-base-change] (with $B=k[x_1,\\dots,x_n]$, $I=(f_1,\\dots,f_c)$); this isomorphism sends $(p\\bmod(f))\\otimes1$ to $\\rho(p)\\bmod(\\bar f)$. (b) By [lem-weil-pbc-localization-tensor-over-base] (with $A=M=S$, multiplicative set $\\{g^N\\}$, $N=k$), $S_g\\otimes_Rk\\cong(S\\otimes_Rk)_{\\bar g}=F_{\\bar g}$, $\\bar g=g\\otimes1$; composed with $\\theta\\otimes1$ this gives a $k$-algebra isomorphism $\\psi:F_{\\bar g}\\xrightarrow{\\sim}F_T$, compatible with the maps to $\\kappa(\\mathfrak q)\\cong\\kappa(\\mathfrak q_T)$ of step 2, so $\\psi(\\mathfrak QF_{\\bar g})=\\mathfrak Q_T$; note $\\bar g\\notin\\mathfrak Q$ because $g$ has nonzero image in $\\kappa(\\mathfrak q)$.",
+   "text": "Put p = q ∩ R, k = κ(p), T = R[x]/(f), and fbar_j = map(algebraMap R k)(f_j). Apply the existing relative-global-complete-intersection base-change theorem (00SS (1)) to obtain a k-algebra equivalence ebar : k[x]/(fbar) ≃ k ⊗_R T with ebar(x_j) = 1 ⊗ x_j, and the relative-global-complete-intersection presentation condition for fbar.",
    "uses": [
-    "lem-weil-pbc-polynomial-scalar-extension",
-    "lem-weil-pbc-tensor-quotient-base-change",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TF, lines 37692-37694 ('Replacing S by S_g we may assume S = R[x_1..x_n]/(f_1..f_c) is a relative global complete intersection')"
-   }
-  },
-  {
-   "text": "($k\\to F_T$ is a relative global complete intersection, smooth at $\\mathfrak Q_T$.) Smoothness: with $h$ from step 1, $F_{\\bar gh}$ is a localization of $F_h$ at the powers of $\\bar g/1$ and of $F_{\\bar g}$ at the powers of $h/1$ [lem-weil-pbc-localization-of-localization] (check of (a)-(c) as in step 1), so $(F_{\\bar g})_{h/1}\\cong(F_h)_{\\bar g/1}$, which is smooth over $k$ by [lem-weil-pbc-smooth-ring-map-principal-localization]; with $u=\\psi(h/1)\\notin\\mathfrak Q_T$ (as $h\\notin\\mathfrak Q$), $(F_T)_u\\cong(F_{\\bar g})_{h/1}$ is a smooth $k$-algebra (smoothness [def-weil-pbc-smooth-ring-map] is invariant under isomorphism of $k$-algebras), so $k\\to F_T$ is smooth at $\\mathfrak Q_T$ [def-weil-pbc-singular-ideal]. Complete intersection: by step 3(a) $F_T\\cong k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)=:\\bar T$. $\\operatorname{Spec}k$ has the single point $(0)$ with $\\kappa((0))=k$, and the fibre ring $\\bar T\\otimes_kk\\cong\\bar T\\cong F_T$ is nonzero (it has the prime $\\mathfrak Q_T$); since $F_T=T\\otimes_R\\kappa(\\mathfrak p)$ is a nonzero fibre ring of the relative global complete intersection $T$ (step 2), $\\dim\\operatorname{Spec}F_T=n-c$ [def-weil-pbc-relative-global-complete-intersection], and homeomorphic spectra have equal Krull dimension. So $\\bar T=k[x_1,\\dots,x_n]/(\\bar f_1,\\dots,\\bar f_c)$ is a relative global complete intersection over $k$ [def-weil-pbc-relative-global-complete-intersection].",
-   "uses": [
-    "lem-weil-pbc-localization-of-localization",
-    "lem-weil-pbc-smooth-ring-map-principal-localization",
-    "def-weil-pbc-smooth-ring-map",
-    "def-weil-pbc-singular-ideal",
+    "lem-weil-pbc-relative-global-complete-intersection-base-change",
     "def-weil-pbc-relative-global-complete-intersection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TF, lines 37695-37705 (image of g_I in kappa(p)[x_1..x_n]; 'applying Lemma 00TE both to R -> S and to kappa(p) -> S (x)_R kappa(p)')"
+    "place": "Lemma 00SS (lemma-base-change-relative-global-complete-intersection), part (1); used in the fibre presentation in the proof of 00TF"
    }
   },
   {
-   "text": "(A maximal minor outside $\\mathfrak Q_T$.) Let $\\bar{\\mathfrak Q}\\subset\\bar T$ be the image of $\\mathfrak Q_T$ under $F_T\\cong\\bar T$. By step 4 and [lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian] ('only if', applied to $k\\to\\bar T$, $\\bar f_1,\\dots,\\bar f_c$ and $\\bar{\\mathfrak Q}$) there is $I\\subseteq\\{1,\\dots,n\\}$, $|I|=c$, with $\\det(\\partial\\bar f_j/\\partial x_i)_{j,\\,i\\in I}\\bmod(\\bar f)\\notin\\bar{\\mathfrak Q}$. The coefficient reduction $\\rho$ is a ring homomorphism with $\\rho(\\partial p/\\partial x_i)=\\partial\\rho(p)/\\partial x_i$ (check on monomials $r x^e$, [def-weil-pbc-polynomial-partial-derivative]) and the determinant is a polynomial in the entries with integer coefficients, so $\\rho(g_I)=\\det(\\partial\\bar f_j/\\partial x_i)_{j,\\,i\\in I}$ with $g_I=\\det(\\partial f_j/\\partial x_i)_{j,\\,i\\in I}\\in R[x_1,\\dots,x_n]$. By step 3(a), $(g_I\\bmod(f))\\otimes1\\in F_T$ corresponds to $\\rho(g_I)\\bmod(\\bar f)$; hence $(\\bar g_I)\\otimes1\\notin\\mathfrak Q_T$, $\\bar g_I$ the image of $g_I$ in $T$.",
+   "text": "Let Q be the prime of p.Fiber S corresponding to q. Its contraction under includeRight is q by the inverse law for preimageEquivFiber. The image of g is a unit in S_g, hence g avoids q and 1 ⊗ g avoids Q. Lift Q to Qg in the principal localization at 1 ⊗ g. Tensor e with k and use IsLocalization.Away.tensorProductEquivTMulRight to form E : k[x]/(fbar) ≃ (p.Fiber S)_(1 ⊗ g).",
    "uses": [
-    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
-    "def-weil-pbc-polynomial-partial-derivative"
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-tensor-over-base"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TF, lines 37695-37705 (image of g_I in kappa(p)[x_1..x_n]; 'applying Lemma 00TE both to R -> S and to kappa(p) -> S (x)_R kappa(p)')"
+    "place": "Proof of Lemma Tag 00TF, localized presentation and fibre Jacobian comparison; Lemma Tag 00TE"
    }
   },
   {
-   "text": "The fibre prime is the kernel of the map to the residue field of q_T. Thus t tensor 1 lies in this prime exactly when t lies in q_T. Apply this to the Jacobian minor from the preceding step to obtain the asserted nonmembership; no smoothness conclusion over R is taken in this lemma.",
+   "text": "Choose h outside Q such that the fibre localized at h is smooth. Further localization at the image of 1 ⊗ g is smooth by Smooth.of_isLocalization_Away and Smooth.comp. The two orders of localization are both localizations at (1 ⊗ g)*h, so their algebra equivalence makes the fibre localized first at 1 ⊗ g smooth at Qg. Transport this principal smooth neighbourhood along E to the prime Qbar = comap E Qg. The two private helper proofs smoothAt_away and smoothAt_comap_equiv perform these constructions explicitly.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-localization-of-localization",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "def-weil-pbc-smooth-ring-map",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Lemma Tag 00TF, localized presentation and fibre Jacobian comparison; Lemma Tag 00TE"
+   }
+  },
+  {
+   "text": "Apply isSmoothAtPrime_iff_exists_jacobian_minor to fbar and Qbar, using the complete-intersection condition from step 1 and smoothness from step 3. Obtain a strictly increasing selection i of c columns and the corresponding reduced Jacobian minor outside Qbar.",
+   "uses": [
+    "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Proof of Lemma Tag 00TF, localized presentation and fibre Jacobian comparison; Lemma Tag 00TE"
+   }
+  },
+  {
+   "text": "Extend the variable formula for ebar to every original polynomial using MvPolynomial.algHom_ext on the two R-algebra homomorphisms. Contract Qg along the localization-tensor equivalence and includeRight to get a prime qc of S_g. Its contraction to S is q, by the tensor-localization formula and the contractions of Qg and Q. Injectivity of localization contraction identifies qc with qg. Consequently mk(map a) belongs to Qbar exactly when mk(a) belongs to comap e.symm qg. Finally MvPolynomial.pderiv_map and RingHom.map_det identify the reduced minor with map of the original minor; this membership equivalence pulls the nonmembership back. All these compatibility equalities are proved in the Lean body.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-polynomial-partial-derivative"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00TF, lines 37695-37705 (image of g_I in kappa(p)[x_1..x_n]; 'applying Lemma 00TE both to R -> S and to kappa(p) -> S (x)_R kappa(p)')"
+    "place": "Proof of Lemma Tag 00TF, localized presentation and fibre Jacobian comparison; Lemma Tag 00TE"
    }
   }
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Proof of Lemma Tag 00TF, steps 3--5 and the prime-kernel observation in step 6 of the parent node"
+  "place": "Proof of Lemma 00TF (lemma-flat-fibre-smooth), coefficient reduction and two applications of 00TE; presentation and complete-intersection base change supplied by 00SS (1). W3 formalizes the localization, prime contraction, and polynomial compatibility explicitly."
  },
  "mathlib_searches": [
   {
@@ -146,15 +155,14 @@
   "date": "2026-10-13"
  },
  "proof_deps": [
-  "lem-weil-pbc-polynomial-scalar-extension",
-  "lem-weil-pbc-tensor-quotient-base-change",
-  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-weil-pbc-relative-global-complete-intersection-base-change",
+  "def-weil-pbc-relative-global-complete-intersection",
   "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-tensor-over-base",
   "lem-weil-pbc-localization-of-localization",
   "lem-weil-pbc-smooth-ring-map-principal-localization",
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-singular-ideal",
-  "def-weil-pbc-relative-global-complete-intersection",
   "lem-weil-pbc-relative-global-complete-intersection-smooth-jacobian",
   "def-weil-pbc-polynomial-partial-derivative"
  ],
@@ -172,10 +180,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M3",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T165523-L-2936649",
-  "kind": "interface",
+  "landing": "20261012T194154-L-469745",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
