@@ -306,3 +306,51 @@ theorem iff_forall_existsUnique_isIdempotentElem [IsLocalRing R] :
   sorry
 
 end HenselianLocalRing
+
+namespace IsStrictlyHenselianLocalRing
+
+variable {R : Type u} [CommRing R] [IsStrictlyHenselianLocalRing R]
+
+/-- **Maps from étale algebras into a strictly henselian local ring.** Let `(R, 𝔪)` be a strictly
+henselian local ring, `K` a field over `R` with `ker(R → K) = 𝔪` and `S` an étale `R`-algebra.
+Every `R`-algebra map `χ : S → K` lifts uniquely to an `R`-algebra map `S → R`.
+
+This is the single-étale-algebra case of the blueprint lemma, with the residue condition
+`τ : κ(q) → κ` automatic since `κ` is separably closed.
+
+(blueprint: `lem-weil-pbc-map-into-henselian-colimit`) -/
+theorem existsUnique_algHom_comp_eq {K : Type*} [Field K] [Algebra R K]
+    (hK : RingHom.ker (algebraMap R K) = maximalIdeal R) {S : Type v} [CommRing S]
+    [Algebra R S] [Algebra.Etale R S] (χ : S →ₐ[R] K) :
+    ∃! τ : S →ₐ[R] R, (Algebra.ofId R K).comp τ = χ := by
+  have : (RingHom.ker χ).IsPrime := RingHom.ker_isPrime _
+  have hq : (RingHom.ker χ).comap (algebraMap R S) = maximalIdeal R := by
+    ext r
+    rw [Ideal.mem_comap, RingHom.mem_ker, AlgHom.commutes, ← RingHom.mem_ker, hK]
+  have : (RingHom.ker χ).LiesOver (maximalIdeal R) := ⟨hq.symm⟩
+  let := Localization.AtPrime.algebraOfLiesOver (maximalIdeal R) (RingHom.ker χ)
+  have : IsSepClosed (maximalIdeal R).ResidueField := by
+    let e : ResidueField R ≃+* (maximalIdeal R).ResidueField :=
+      RingEquiv.ofBijective (algebraMap (R ⧸ maximalIdeal R) (maximalIdeal R).ResidueField)
+        (maximalIdeal R).bijective_algebraMap_quotient_residueField
+    exact IsSepClosed.of_ringEquiv e
+  have hκ : Function.Bijective (Ideal.ResidueField.mapₐ (maximalIdeal R) (RingHom.ker χ)
+      (Algebra.ofId R S) hq.symm) :=
+    ⟨RingHom.injective _, IsSepClosed.algebraMap_surjective (maximalIdeal R).ResidueField
+      (RingHom.ker χ).ResidueField⟩
+  obtain ⟨τ, hτ, -⟩ :=
+    HenselianLocalRing.existsUnique_algHom_comap_maximalIdeal_eq (RingHom.ker χ) hq hκ
+  have key : (Algebra.ofId R K).comp τ = χ := by
+    ext d
+    have : d - algebraMap R S (τ d) ∈ RingHom.ker χ := by
+      rw [← hτ, Ideal.mem_comap, map_sub, AlgHom.commutes, Algebra.algebraMap_self,
+        RingHom.id_apply, sub_self]
+      exact zero_mem _
+    rw [RingHom.mem_ker, map_sub, AlgHom.commutes, sub_eq_zero] at this
+    simp [this]
+  refine ⟨τ, key, fun τ' hτ' ↦ IsLocalRing.algHom_ext_of_comap_maximalIdeal_eq ?_⟩
+  ext d
+  rw [Ideal.mem_comap, Ideal.mem_comap, ← hK, RingHom.mem_ker, RingHom.mem_ker,
+    ← Algebra.ofId_apply, ← Algebra.ofId_apply, ← AlgHom.comp_apply, ← AlgHom.comp_apply, hτ', key]
+
+end IsStrictlyHenselianLocalRing

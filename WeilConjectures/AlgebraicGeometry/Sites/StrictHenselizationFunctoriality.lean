@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
-public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.RingTheory.Henselian.EtaleRetraction
 
 /-!
 # Functoriality of the strict henselization
@@ -49,6 +49,85 @@ open CategoryTheory Limits Opposite IsLocalRing
 
 namespace AlgebraicGeometry
 
+/-- For a ring map `e : R ⟶ K` from a local ring to a field with kernel the maximal ideal,
+`Spec e` maps the point of `Spec K` to the closed point. -/
+lemma spec_map_apply_eq_closedPoint {R : CommRingCat.{u}} [IsLocalRing R] {K : Type u} [Field K]
+    (e : R ⟶ CommRingCat.of K) (he : RingHom.ker e.hom = maximalIdeal R)
+    (x : Spec (.of K)) : Spec.map e x = closedPoint R := by
+  rw [Spec.map_apply]
+  apply PrimeSpectrum.ext
+  have hx : x.asIdeal = ⊥ := Ideal.eq_bot_of_prime _
+  rw [PrimeSpectrum.comap_asIdeal, hx, ← RingHom.ker_eq_comap_bot, he]
+  rfl
+
+/-- **Sections of étale morphisms over a strictly henselian local ring.** Let `R` be a strictly
+henselian local ring, `e : R ⟶ K` a ring map to a field with kernel the maximal ideal,
+`p : X ⟶ Spec R` an étale morphism and `μ : Spec K ⟶ X` a lift of `Spec e` along `p`. Then `p`
+has exactly one section `σ` with `Spec e ≫ σ = μ`.
+
+This is the geometric form of `IsStrictlyHenselianLocalRing.existsUnique_algHom_comp_eq`
+(blueprint: `lem-weil-pbc-map-into-henselian-colimit`), applied on an affine open of `X`
+around the image of `μ`: every section through that point factors through the affine open. -/
+theorem existsUnique_section_of_etale {R : CommRingCat.{u}} [IsStrictlyHenselianLocalRing R]
+    {K : Type u} [Field K] (e : R ⟶ CommRingCat.of K)
+    (he : RingHom.ker e.hom = maximalIdeal R) {X : Scheme.{u}} (p : X ⟶ Spec R) [Etale p]
+    (μ : Spec (.of K) ⟶ X) (hμ : μ ≫ p = Spec.map e) :
+    ∃! σ : Spec R ⟶ X, σ ≫ p = 𝟙 _ ∧ Spec.map e ≫ σ = μ := by
+  obtain ⟨x⟩ : Nonempty (Spec (.of K)) := inferInstance
+  obtain ⟨D, j, _, hx, -⟩ := Scheme.exists_affine_mem_range_and_range_subset
+    (x := μ x) (U := ⊤) (by simp)
+  have hμj : Set.range μ ⊆ Set.range j := by
+    rintro _ ⟨a, rfl⟩
+    rwa [Subsingleton.elim a x]
+  let μ' := IsOpenImmersion.lift j μ hμj
+  have hμ' : μ' ≫ j = μ := IsOpenImmersion.lift_fac j μ hμj
+  let φ₀ : R ⟶ D := Spec.preimage (j ≫ p)
+  have hφ₀ : Spec.map φ₀ = j ≫ p := Spec.map_preimage _
+  let : Algebra R D := φ₀.hom.toAlgebra
+  have : Algebra.Etale R D := by
+    have : Etale (Spec.map φ₀) := by rw [hφ₀]; infer_instance
+    exact (HasRingHomProperty.Spec_iff (P := @Etale)).mp this
+  let χ₀ : D ⟶ CommRingCat.of K := Spec.preimage μ'
+  have hχ₀ : Spec.map χ₀ = μ' := Spec.map_preimage _
+  let : Algebra R K := e.hom.toAlgebra
+  have hφχ : φ₀ ≫ χ₀ = e := by
+    apply Spec.map_injective
+    rw [Spec.map_comp, hφ₀, hχ₀, ← Category.assoc, hμ', hμ]
+  let χ : D →ₐ[R] K := { χ₀.hom with commutes' r := congr(($hφχ).hom r) }
+  obtain ⟨τ, hτ, hτu⟩ := IsStrictlyHenselianLocalRing.existsUnique_algHom_comp_eq he χ
+  -- every section through `μ` is `Spec τ' ≫ j` for an `R`-algebra map `τ'` lifting `χ`
+  have key (σ : Spec R ⟶ X) (h₁ : σ ≫ p = 𝟙 _) (h₂ : Spec.map e ≫ σ = μ) :
+      σ = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ j := by
+    have hσj : Set.range σ ⊆ Set.range j := by
+      rintro _ ⟨y, rfl⟩
+      refine ((specializes_closedPoint y).map σ.continuous).mem_open
+        j.isOpenEmbedding.isOpen_range ?_
+      rw [← spec_map_apply_eq_closedPoint e he x, ← Scheme.Hom.comp_apply, h₂]
+      exact hx
+    let σ' := IsOpenImmersion.lift j σ hσj
+    have hσ' : σ' ≫ j = σ := IsOpenImmersion.lift_fac j σ hσj
+    let τ₀ : D ⟶ R := Spec.preimage σ'
+    have hτ₀ : Spec.map τ₀ = σ' := Spec.map_preimage _
+    have h₁' : φ₀ ≫ τ₀ = 𝟙 _ := by
+      apply Spec.map_injective
+      rw [Spec.map_comp, hφ₀, hτ₀, ← Category.assoc, hσ', h₁, Spec.map_id]
+    have h₂' : τ₀ ≫ e = χ₀ := by
+      apply Spec.map_injective
+      rw [Spec.map_comp, hτ₀, hχ₀, ← cancel_mono j, Category.assoc, hσ', h₂, hμ']
+    let τ' : D →ₐ[R] R := { τ₀.hom with commutes' r := congr(($h₁').hom r) }
+    have : τ' = τ := hτu τ' (AlgHom.ext fun d ↦ congr(($h₂').hom d))
+    rw [← hσ', ← hτ₀, ← this]
+    rfl
+  refine ⟨Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ j, ⟨?_, ?_⟩, fun σ ⟨h₁, h₂⟩ ↦ key σ h₁ h₂⟩
+  · rw [Category.assoc, ← hφ₀, ← Spec.map_comp, ← Spec.map_id]
+    congr 1
+    ext r
+    exact τ.commutes r
+  · rw [← Category.assoc, ← Spec.map_comp, ← hμ', ← hχ₀]
+    congr 2
+    ext d
+    exact congr($hτ d)
+
 /-- **Lifting along étale morphisms over a strictly henselian local ring.** Let `R` be a strictly
 henselian local ring, `e : R ⟶ K` a ring map to a field with kernel the maximal ideal, `f : V ⟶ S`
 an étale morphism, `ψ : Spec R ⟶ S` a morphism and `v : Spec K ⟶ V` a lift of
@@ -60,8 +139,15 @@ theorem existsUnique_lift_of_etale {R : CommRingCat.{u}} [IsStrictlyHenselianLoc
     {K : Type u} [Field K] (e : R ⟶ CommRingCat.of K)
     (he : RingHom.ker e.hom = maximalIdeal R) {S V : Scheme.{u}} (f : V ⟶ S) [Etale f]
     (ψ : Spec R ⟶ S) (v : Spec (.of K) ⟶ V) (hv : v ≫ f = Spec.map e ≫ ψ) :
-    ∃! φ : Spec R ⟶ V, φ ≫ f = ψ ∧ Spec.map e ≫ φ = v :=
-  sorry
+    ∃! φ : Spec R ⟶ V, φ ≫ f = ψ ∧ Spec.map e ≫ φ = v := by
+  obtain ⟨σ, ⟨hσ₁, hσ₂⟩, hσu⟩ := existsUnique_section_of_etale e he (pullback.snd f ψ)
+    (pullback.lift v (Spec.map e) hv) (pullback.lift_snd _ _ _)
+  refine ⟨σ ≫ pullback.fst f ψ, ⟨?_, ?_⟩, fun φ ⟨h₁, h₂⟩ ↦ ?_⟩
+  · rw [Category.assoc, pullback.condition, ← Category.assoc, hσ₁, Category.id_comp]
+  · rw [← Category.assoc, hσ₂, pullback.lift_fst]
+  · have := hσu (pullback.lift φ (𝟙 _) (by rw [h₁, Category.id_comp]))
+      ⟨pullback.lift_snd _ _ _, pullback.hom_ext (by simp [h₂]) (by simp)⟩
+    rw [← this, pullback.lift_fst]
 
 namespace Scheme
 
