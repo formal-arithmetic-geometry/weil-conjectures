@@ -6726,3 +6726,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.FlatFpLqfBoundedStratification (stage 3; reviewer PASS; first push; landing 20261012T085208-L-845 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.HigherDirectImageAffineSectionVanishing (stage 3; reviewer PASS; first push; landing 20261012T085208-L-993 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/A2/Sheaf.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDescent (stage 3; reviewer PASS; first push; landing 20261012T085209-L-1107 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:52 L: merged deliver/A2/Sheaf.CategoryTheory.FilteredColimitCategoryDescent (stage 3; reviewer PASS; first push; landing 20261012T085209-L-1227 (interface); batch 20261012T085205; modules 4; new nodes 3)

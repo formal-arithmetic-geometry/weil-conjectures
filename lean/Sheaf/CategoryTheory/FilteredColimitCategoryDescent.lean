@@ -1,13 +1,17 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group G2
+Authors: SHEAF group A2
 -/
 module
 
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Mathlib.CategoryTheory.Limits.Types.Filtered
 public import Mathlib.CategoryTheory.FinCategory.Basic
+
+import Sheaf.CategoryTheory.FilteredColimitCategoryFiniteLift
+import Sheaf.CategoryTheory.FilteredColimitCategoryListEquality
+import Sheaf.CategoryTheory.FilteredColimitCategoryFiniteFunctorLift
 
 /-! # Finite diagrams and Hom descent for filtered category colimits -/
 
@@ -93,6 +97,65 @@ theorem filteredColimit_category_descent
             f ≫ h = g ≫ i ∧
               Arrow.mk ((F.map h).toFunctor.map a) =
                 Arrow.mk ((F.map i).toFunctor.map b))) := by
-  sorry
+  classical
+  intro O s V h
+  have hLift := filteredColimit_category_finite_lift J F s V h
+  have hEqual := filteredColimit_category_list_equality J F s V h
+  have hFinite := filteredColimit_category_finite_functor_lift J F s V hLift
+  refine ⟨hLift, hEqual, hFinite, ?_⟩
+  intro j X Y
+  constructor
+  · intro b
+    obtain ⟨i, Xi, Ai, hx, ha, hs, ht, _⟩ :=
+      hLift 2 1 ![(V j).obj X, (V j).obj Y] ![Arrow.mk b]
+    obtain ⟨t, u, v, he, _⟩ := hEqual 2 0 i j Xi ![X, Y]
+      (Fin.elim0) (Fin.elim0) (fun q ↦ by
+        refine Fin.cases ?_ (fun q ↦ ?_) q
+        · exact hx 0
+        · have hq : q = 0 := Fin.eq_zero q
+          subst q
+          exact hx 1) (fun p ↦ Fin.elim0 p)
+    let c := (F.map u).toFunctor.mapArrow.obj (Ai 0)
+    have hcl : c.left = (F.map v).toFunctor.obj X := by
+      change (F.map u).toFunctor.obj (Ai 0).left = _
+      rw [hs 0 0 rfl]
+      exact he 0
+    have hcr : c.right = (F.map v).toFunctor.obj Y := by
+      change (F.map u).toFunctor.obj (Ai 0).right = _
+      rw [ht 0 1 rfl]
+      exact he 1
+    let a := eqToHom hcl.symm ≫ c.hom ≫ eqToHom hcr
+    have hac : Arrow.mk a = c := by
+      dsimp only [a]
+      rw [Arrow.arrow_mk_eqToHom_comp, Arrow.arrow_mk_comp_eqToHom]
+      exact Arrow.mk_eq c
+    refine ⟨t, v, a, ?_⟩
+    have hc := congrArg (fun c : Arrow (F.obj t) ↦ (V t).mapArrow.obj c) hac
+    have hi := congrArg (fun H : F.obj i ⥤ O ↦ H.mapArrow.obj (Ai 0)) (h.2.1 i t u)
+    exact hc.trans (hi.trans (ha 0))
+  · intro k l f g a b
+    constructor
+    · intro hab
+      obtain ⟨t, u, v, _, he⟩ := hEqual 0 1 k l (Fin.elim0) (Fin.elim0)
+        (fun _ ↦ Arrow.mk a) (fun _ ↦ Arrow.mk b) (fun q ↦ Fin.elim0 q) (fun _ ↦ hab)
+      let w := IsFiltered.coeqHom (f ≫ u) (g ≫ v)
+      refine ⟨IsFiltered.coeq (f ≫ u) (g ≫ v), u ≫ w, v ≫ w, ?_, ?_⟩
+      · simpa only [Category.assoc] using IsFiltered.coeq_condition (f ≫ u) (g ≫ v)
+      · have hh := congrArg
+          (fun c : Arrow (F.obj t) ↦ (F.map w).toFunctor.mapArrow.obj c) (he 0)
+        change Arrow.mk ((F.map w).toFunctor.map ((F.map u).toFunctor.map a)) =
+          Arrow.mk ((F.map w).toFunctor.map ((F.map v).toFunctor.map b)) at hh
+        have hu := congrArg (fun H : F.obj k ⥤ F.obj (IsFiltered.coeq (f ≫ u) (g ≫ v)) ↦
+          H.mapArrow.obj (Arrow.mk a)) (congrArg Cat.Hom.toFunctor (F.map_comp u w))
+        have hv := congrArg (fun H : F.obj l ⥤ F.obj (IsFiltered.coeq (f ≫ u) (g ≫ v)) ↦
+          H.mapArrow.obj (Arrow.mk b)) (congrArg Cat.Hom.toFunctor (F.map_comp v w))
+        exact hu.trans (hh.trans hv.symm)
+    · rintro ⟨t, u, v, huv, hab⟩
+      have hk := congrArg
+        (fun H : F.obj k ⥤ O ↦ H.mapArrow.obj (Arrow.mk a)) (h.2.1 k t u)
+      have hl := congrArg
+        (fun H : F.obj l ⥤ O ↦ H.mapArrow.obj (Arrow.mk b)) (h.2.1 l t v)
+      have he := congrArg (fun c : Arrow (F.obj t) ↦ (V t).mapArrow.obj c) hab
+      exact hk.symm.trans (he.trans hl)
 
 end CategoryTheory

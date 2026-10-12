@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-filtered-colimit-category-list-equality",
+ "kind": "statement",
+ "title": "Finite object and arrow lists agree at a common refinement",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit], and $O=\\operatorname{colim}(F\\circ\\mathrm{Ob})$ its chosen object-set colimit. Equip $O$ with a category structure and functors $V_j:F(j)\\to O$. Assume $V_j$ has the object colimit coprojection as object map and $F(f)\\circ V_k=V_j$ for every $f:j\\to k$. Assume an arrow-set colimit cocone $a$ and equivalence $e:a.\\mathrm{pt}\\simeq\\mathrm{Arrow}(O)$ identify its coprojections with the arrow maps of $V_j$ [def-weil-pbc-arrows-functor]. Given stages $j,k$ and lists of $n$ objects and $m$ arrows at each stage whose respective $V_j,V_k$ images coincide term by term, there exist a stage $t$ and maps $f:j\\to t$, $g:k\\to t$ such that the transitioned object lists and arrow lists coincide term by term.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "proof of Lemma Tag 09YL (lemma-colimit-sites), first paragraph: 'The formula C = colim C_i means that Ob(C) = colim Ob(C_i) and Arrows(C) = colim Arrows(C_i). Then source, target, and composition are inherited ... Remark that given any finite diagram in C there exists an i such that this diagram is the image of a diagram in C_i' (stated without proof); filtered colimits of sets: categories.tex Section Tag 04AX"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-arrows-functor"
+ ],
+ "proof": [
+  {
+   "text": "First place both lists at IsFiltered.max j k. Prove finite_stage_eq by induction on the list length, using Types.FilteredColimit.isColimit_eq_iff' for the last entry and mapping earlier equalities along each refinement. Apply it first to the object colimit, then to the arrow cocone after using e.injective and compatibility of V to transfer arrow-image equality. Map object equalities to the final stage; F.map_comp identifies the composites out of j and k. The empty induction case uses the identity map at the current stage.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "worker A2",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 09YL finite-diagram remark, expanded using Categories Tag 04AX; Lean proof written by A2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite diagram functor lifts along filtered colimit categories",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.Limits.ColimitPresentation.instIsFilteredTotalOfIsFinitelyPresentableObjDiag; CategoryTheory.IsFiltered.of_hasFiniteColimits; CategoryTheory.IsFiltered.of_cocone_nonempty; CategoryTheory.IsFinitelyPresentable.exists_eq_of_isColimit; CategoryTheory.MorphismProperty.exists_hom_of_isFinitelyPresentable; CategoryTheory.IsFinitelyPresentable.exists_hom_of_isColimit; CategoryTheory.IsFiltered.iff_cocone_nonempty; CategoryTheory.IsFiltered.cocone",
+   "verdict": "No exact category-descent match; filteredness and filtered-set-colimit lemmas used after signature inspection."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*colimit|colimit.*finite",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Localization.lean; Mathlib/AlgebraicGeometry/Limits.lean; Mathlib/Algebra/Category/FGModuleCat/Colimits.lean; Mathlib/Algebra/Category/FGModuleCat/Colimits.lean; Mathlib/Algebra/Category/FGModuleCat/Colimits.lean; Mathlib/Algebra/Category/FGModuleCat/Colimits.lean; Mathlib/Algebra/Category/FGModuleCat/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "verdict": "No exact category-descent match; filteredness and filtered-set-colimit lemmas used after signature inspection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite lists of objects and arrows lift to a common stage in a filtered colimit of categories",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredColimitCategoryDescent",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Finite-diagram and eventual-equality clauses of lem-weil-pbc-filtered-colimit-category-descent",
+   "via": [
+    "lem-weil-pbc-filtered-colimit-category-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredColimitCategoryListEquality",
+  "file": "lean/Sheaf/CategoryTheory/FilteredColimitCategoryListEquality.lean",
+  "declaration": "CategoryTheory.filteredColimit_category_list_equality",
+  "statement": "theorem filteredColimit_category_list_equality (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) : let O := colimit (F ⋙ Cat.objects) ∀ (_s : Category.{z} O) (V : ∀ j : J, F.obj j ⥤ O), ((∀ (j : J) (X : F.obj j), (V j).obj X = colimit.ι (F ⋙ Cat.objects) j X) ∧ (∀ (j k : J) (f : j ⟶ k), (F.map f).toFunctor ⋙ V k = V j) ∧ (∃ (a : Cocone (F ⋙ Cat.arrows)) (e : a.pt ≃ Arrow O), Nonempty (IsColimit a) ∧ ∀ (j : J) (f : Arrow (F.obj j)), e (a.ι.app j f) = (V j).mapArrow.obj f)) → (∀ (n m : ℕ) (j k : J) (Xj : Fin n → F.obj j) (Xk : Fin n → F.obj k) (Aj : Fin m → Arrow (F.obj j)) (Ak : Fin m → Arrow (F.obj k)), (∀ q, (V j).obj (Xj q) = (V k).obj (Xk q)) → (∀ p, (V j).mapArrow.obj (Aj p) = (V k).mapArrow.obj (Ak p)) → ∃ (t : J) (f : j ⟶ t) (g : k ⟶ t), (∀ q, (F.map f).toFunctor.obj (Xj q) = (F.map g).toFunctor.obj (Xk q)) ∧ (∀ p, (F.map f).toFunctor.mapArrow.obj (Aj p) = (F.map g).toFunctor.mapArrow.obj (Ak p)))",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085209-L-1227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085209-L-1227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
