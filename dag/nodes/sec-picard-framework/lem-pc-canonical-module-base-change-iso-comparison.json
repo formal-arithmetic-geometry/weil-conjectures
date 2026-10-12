@@ -1,0 +1,176 @@
+{
+ "id": "lem-pc-canonical-module-base-change-iso-comparison",
+ "kind": "statement",
+ "title": "Canonical module base-change iso comparison",
+ "statement": "Choose the shared derived categories and additive tensor pullbacks [def-pc-derived-category, def-pc-module-pullback]. Let $f:X\\to S$, $g:S'\\to S$, $g':X'\\to X$, and $f':X'\\to S'$ form a cartesian square of schemes [def-pc-scheme, def-pc-fibre-product]. Let $G$ be an $\\mathcal O_X$-module and $c:Lg'^*(G[0])\\to(g'^*G)[0]$ satisfy IsDerivedModulePullbackComparison [def-pc-derived-module-base-change-map]. For arbitrary scheme isomorphisms $e_S:S\\cong A$, $e_T:S'\\cong B$, set $f_A=f\\mathbin{\\gg}e_S$, $g_A=e_T^{-1}\\mathbin{\\gg}g\\mathbin{\\gg}e_S$, $P=X\\times_A B$, $p:P\\to X$, $q:P\\to B$, and $T=R(e_T^{-1})_*$. There exist $c_0:Lp^*(G[0])\\to(p^*G)[0]$ satisfying IsDerivedModulePullbackComparison, isomorphisms $a:Lg^*Rf_*(G[0])\\cong T(Lg_A^*Rf_{A,*}(G[0]))$ and $b:Rf'_*(g'^*G)[0]\\cong T(Rq_*((p^*G)[0]))$, such that $(\\beta\\mathbin{\\gg}Rf'_*(c))\\mathbin{\\gg}b=a\\mathbin{\\gg}T(\\beta_A\\mathbin{\\gg}Rq_*(c_0))$. Here $\\beta$ and $\\beta_A$ are the canonical derived mates [def-pc-derived-base-change-map]. No open restriction or affine hypothesis occurs.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, counit construction; Tag 0D5T, derived composition; Tag 08IB, first proof paragraph (coordinate transport part)"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-derived-open-restriction-maps",
+  "def-pc-derived-base-change-map",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The isomorphisms eS and eT identify the original cartesian square with the chosen pullback of f followed by eS.hom and eT.inv followed by g and eS.hom. The unique pullback isomorphism preserves the first projection and takes the second projection, followed by eT.inv, to f'.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pullback along a scheme isomorphism is an exact equivalence on modules. Its derived functor is the induced equivalence on derived categories. Direct image along the inverse is its inverse equivalence. Apply composition of derived pullbacks and direct images and the inverse-coordinate identities to obtain a. Use the pullback isomorphism and tensor-pullback composition to identify the ordinary pulled-back modules; derive this identification and then apply direct image composition to obtain b.",
+   "uses": [
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-derived-direct-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the witnessing counit in hc through the pullback isomorphism. Composition with exact equivalences preserves its left-derived universal property. Evaluating on G[0] and inserting the ordinary tensor-pullback identification gives c0 with the required comparison predicate.",
+   "uses": [
+    "def-pc-derived-module-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose both base-change mates under the adjunction for the second projection. The pullback composition comparisons identify their transposes: both are pullback of the same counit of f, with inverse coordinates cancelled. Injectivity of the adjunction Hom equivalence gives the equality of mates. Naturality then composes with the transported module counit from step 3, giving the displayed square. This also applies to empty schemes and zero modules.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "def-pc-derived-module-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-base-change-map",
+  "def-pc-derived-module-base-change-map",
+  "def-pc-fibre-product",
+  "lem-pc-derived-direct-image-composition",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/08HY",
+  "place": "Tag 08HY, counit construction; Tag 0D5T, derived composition; Tag 08IB, first proof paragraph (coordinate transport part)",
+  "note": "Expanded the restriction / coordinate-transport part of the assigned node; sources read online because this clone omits untracked literature."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived module base change arrow commutes with open restriction and affine spectrum charts",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_appLE, AlgebraicGeometry.IsAffineOpen.map_fromSpec, AlgebraicGeometry.IsAffineOpen.Spec_map_appLE_fromSpec, AlgebraicGeometry.IsAffineOpen.SpecMap_appLE_fromSpec, AlgebraicGeometry.Scheme.Opens.toSpecΓ_SpecMap_presheaf_map, AlgebraicGeometry.toOpen_toSpecΓ_app_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineOpen.isoSpec",
+   "results": "12 hits: AlgebraicGeometry.IsAffineOpen.isoSpec, AlgebraicGeometry.IsAffineOpen.isoSpec_hom, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_fromSpec, AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_ι, AlgebraicGeometry.IsAffineOpen.toSpecΓ_isoSpec_inv_assoc, AlgebraicGeometry.IsAffineOpen.isoSpec_hom_fromSpec_assoc, AlgebraicGeometry.IsAffineOpen.isoSpec_inv_ι_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalModuleBaseChange|IsDerivedModulePullbackComparison|schemeDerivedBaseChangeMap",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived base change commutes with open restriction and transport by isomorphisms of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Beck Chevalley transformation natural under exact restriction to open subsets and equivalences of ringed spaces",
+   "results": "Second reader: 8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; component restriction or mate lemmas only, no exact derived module arrow comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv",
+   "results": "Second reader: 5 hits: CategoryTheory.conjugateIsoEquiv, CategoryTheory.conjugateIsoEquiv_apply_hom, CategoryTheory.conjugateIsoEquiv_apply_inv, CategoryTheory.conjugateIsoEquiv_symm_apply_hom, CategoryTheory.conjugateIsoEquiv_symm_apply_inv; component restriction or mate lemmas only, no exact derived module arrow comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "base.?change|beck.?chevalley",
+   "results": "Second reader: 25 hits: Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean, Mathlib/CategoryTheory/MorphismProperty/Local.lean; component restriction or mate lemmas only, no exact derived module arrow comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineChartComparison",
+  "date": "2026-10-13",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-rf-base-change-flat-module",
+   "place": "Step 1 local affine reduction: transport the already restricted square through spectrum coordinates",
+   "via": [
+    "lem-pc-canonical-module-base-change-affine-chart-comparison",
+    "lem-pc-canonical-module-base-change-affine-locality",
+    "lem-pc-relatively-flat-canonical-module-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalModuleBaseChangeIsoComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_canonicalModuleBaseChange_iso_comparison",
+  "statement": "theorem exists_canonicalModuleBaseChange_iso_comparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (a : Y ⟶ Z), (Scheme.Modules.tensorPullback a).Additive]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S)\n    (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g)\n    (G : X.Modules)\n    (c : (derivedPullback g').obj ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G) ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback g').obj G))\n    (hc : IsDerivedModulePullbackComparison g' G c)\n    {A B : Scheme.{u}} (eS : S ≅ A) (eT : S' ≅ B) :\n    let fA := f ≫ eS.hom\n    let gA := eT.inv ≫ g ≫ eS.hom\n    let E := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj G\n    let T := schemeDerivedDirectImage eT.inv\n    ∃ c0 : (derivedPullback (pullback.fst fA gA)).obj E ⟶\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).obj\n            ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj G),\n      IsDerivedModulePullbackComparison (pullback.fst fA gA) G c0 ∧\n      ∃ a : (derivedPullback g).obj ((schemeDerivedDirectImage f).obj E) ≅\n          T.obj ((derivedPullback gA).obj ((schemeDerivedDirectImage fA).obj E)),\n      ∃ b : (schemeDerivedDirectImage f').obj\n            ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).obj\n                ((Scheme.Modules.tensorPullback g').obj G)) ≅\n          T.obj ((schemeDerivedDirectImage (pullback.snd fA gA)).obj\n            ((DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings (pullback fA gA).toRingedSpace)) 0).obj\n                ((Scheme.Modules.tensorPullback (pullback.fst fA gA)).obj G))),\n        (schemeDerivedBaseChangeMap f f' g g' sq.w E ≫\n            (schemeDerivedDirectImage f').map c) ≫ b.hom =\n          a.hom ≫ T.map\n            (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)\n              pullback.condition E ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T184325-L-4012384",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261012T184325-L-4012384",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

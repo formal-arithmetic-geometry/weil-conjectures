@@ -8,10 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
-import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
-import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
-import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeOpenComparison
+import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison
 
 /-! # The canonical module base-change arrow in affine charts
 
@@ -28,36 +26,33 @@ universe u w
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry
 
+/-- Composing two commuting squares composes their endpoint isomorphisms. -/
+private theorem comparison_comp
+    {C : Type*} [Category C] {A B A' B' A'' B'' : C}
+    (x : A ⟶ B) (y : A' ⟶ B') (z : A'' ⟶ B'')
+    (a : A ≅ A') (b : B ≅ B') (a' : A' ≅ A'') (b' : B' ≅ B'')
+    (h : x ≫ b.hom = a.hom ≫ y) (h' : y ≫ b'.hom = a'.hom ≫ z) :
+    x ≫ (b ≪≫ b').hom = (a ≪≫ a').hom ≫ z := by
+  simp only [Iso.trans_hom, Category.assoc]
+  rw [← Category.assoc, h, Category.assoc, h', ← Category.assoc]
+
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
 that it is invertible. Both the restricted scheme and its module are explicit.
 Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE.
 (blueprint: lem-pc-canonical-module-base-change-affine-chart-comparison).
 
-Proof: put U = f^{-1}(V), Y = U.toScheme, A = Gamma(S,V), B = Gamma(S',W).
-Compose f restricted to V with V.isoSpec.hom to obtain fA. Compose W.isoSpec.inv,
-g restricted from W to V, and V.isoSpec.hom to obtain gA. The universal property
-identifies the chosen pullback of fA and gA with the inverse image of W under f'.
-Its projection to Y is g' restricted to this inverse image, with the source chart
-W.isoSpec.inv inserted. This identification preserves both projections.
-
-Apply derived pullback composition and exact open restriction to the source.
-Apply derived direct-image restriction to the full inverse images U and f'^{-1}(W),
-and derived direct-image composition to the target. Transport along the chart
-isomorphisms. Since the charts are isomorphisms their module pullbacks are exact;
-the resulting object comparisons are the displayed isomorphisms a and b in D(W).
-
-Write hc as the witnessing left-derived counit epsilon and its single-complex
-identification. Restrict epsilon to f'^{-1}(W), then transport through the
-projection-preserving pullback isomorphism. Exact restriction commutes with
-termwise tensor pullback and with the single-complex construction. The left-derived
-universal property therefore gives a counit for the affine projection and hence c0
-with IsDerivedModulePullbackComparison. Use this transported counit, rather than
-selecting an independent comparison. The underived open-restriction identity for
-base-change mates, followed by the derived adjunction unit/counit equations, shows
-that these object comparisons also identify the arrows. Composing with the
-transported comparison c0 gives the displayed commuting square. This calculation
-requires neither relative flatness nor quasi-coherence nor an affine invertibility
-hypothesis. All constructions also apply to empty opens and the zero module. -/
+Proof: first apply exists_canonicalModuleBaseChange_open_comparison to V and W.
+This gives the comparison cV on the chosen pullback of f restricted to V and
+g.resLE V W, and endpoint isomorphisms aV and bV with a commuting square.
+Apply exists_canonicalModuleBaseChange_iso_comparison to that chosen cartesian
+square and the spectrum charts V.isoSpec and W.isoSpec. Its module is exactly
+H = G restricted to U. It gives c0, endpoint isomorphisms a0 and b0, and a second
+commuting square. The resulting chart maps are definitionally the displayed fA
+and gA. Take a = aV followed by a0 and b = bV followed by b0. Associativity
+composes the two square equations, giving the required equality. The transported
+comparison c0 satisfies the comparison predicate supplied by the coordinate step.
+Neither step assumes flatness, quasi-coherence or invertibility of base change.
+Both apply to empty opens and the zero module. -/
 theorem exists_canonicalModuleBaseChange_affineChart_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -102,6 +97,28 @@ theorem exists_canonicalModuleBaseChange_affineChart_comparison
           a.hom ≫ T.map
             (schemeDerivedBaseChangeMap fA (pullback.snd fA gA) gA (pullback.fst fA gA)
               pullback.condition E0 ≫ (schemeDerivedDirectImage (pullback.snd fA gA)).map c0)
-      := by sorry
+      := by
+  intro U fA gA H E E0 R T
+  have ho :=
+    @exists_canonicalModuleBaseChange_open_comparison.{u, w}
+      inferInstance inferInstance X S X' S' f g g' f' sq G c hc V.1 W.1 hWV
+  rcases ho with ⟨cV, h⟩
+  rcases h with ⟨hcV, h⟩
+  rcases h with ⟨aV, h⟩
+  rcases h with ⟨bV, hV⟩
+  have hi := exists_canonicalModuleBaseChange_iso_comparison.{u, w}
+    (f ∣_ V.1) (g.resLE V.1 W.1 hWV)
+    (pullback.fst (f ∣_ V.1) (g.resLE V.1 W.1 hWV))
+    (pullback.snd (f ∣_ V.1) (g.resLE V.1 W.1 hWV))
+    (IsPullback.of_hasPullback _ _) H cV hcV V.2.isoSpec W.2.isoSpec
+  rcases hi with ⟨c0, h⟩
+  rcases h with ⟨hc0, h⟩
+  rcases h with ⟨a0, h⟩
+  rcases h with ⟨b0, h0⟩
+  refine ⟨c0, ?_⟩
+  refine ⟨hc0, ?_⟩
+  refine ⟨aV ≪≫ a0, ?_⟩
+  refine ⟨bV ≪≫ b0, ?_⟩
+  exact comparison_comp _ _ _ aV bV a0 b0 hV h0
 
 end AlgebraicGeometry
