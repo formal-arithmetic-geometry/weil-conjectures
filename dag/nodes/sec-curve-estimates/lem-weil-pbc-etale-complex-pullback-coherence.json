@@ -1,0 +1,130 @@
+{
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873; Tag 0EZM (lemma-colimit-variant-complexes), canonical pullback maps in its proof. Source read from the obtained local Stacks TeX copy."
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-weil-pbc-etale-complex-pullback-coherence",
+ "kind": "statement",
+ "title": "Termwise inverse-image coherence over a cone",
+ "statement": "For a diagram D of schemes, a cone c, compatible maps t to T and p from c.pt to T, and a cochain complex C of abelian etale sheaves on T [def-weil-pbc-etale-sheaves], put A_i=t_i inverse image C and phi_f equal to the inverse termwise comparison A_j to D(f) inverse image A_i [lem-weil-pbc-inverse-image-composition]. Put eG_i equal to the termwise comparison p inverse image C to pi_i inverse image A_i. Then phi satisfies the identity and composition laws with the canonical inverse-image comparisons, and eG_i followed by the cone composition comparison, the inverse image of phi_f, and eG_j inverse equals the identity. No derived category object, cohomology diagram, cofilteredness, or limit property is assumed. The identity comparison is written as presentationIdentityMap, whose concrete body is the same equality transport followed by upperStarId.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "evaluate inverse-image unit and associativity at each degree of C. The\ninverse of the composition comparison defines phi. The left unit law, together\nwith D.map_id and the naturality of t at the identity, gives the first equality.\nFor composable f and g, apply the associativity law to D.map g, D.map f, and\n t.app i. Substitute D.map_comp and naturality of t; cancel the outer composition\ncomparison to get the second equality. For the final equality apply associativity\nto c.π.app j, D.map f, and t.app i. Substitute the cone equation c.w f, the\nnaturality of t, and hp. Cancel the composition comparison for c.π.app j and\n t.app j. The composite displayed then equals the identity on p inverse image C.\nEquality of complex maps follows from equality in every degree. These arguments\nalso apply to identity arrows and to a constant diagram; no cofilteredness or\nuniversal property of the cone is needed.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873; Tag 0EZM (lemma-colimit-variant-complexes), canonical pullback maps in its proof. Source read from the obtained local Stacks TeX copy.",
+  "note": "C2: strictly one part of the parent presentation argument; see theorem docstring for its expansion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived inverse image cohomology pullback commutes with localization of complexes",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryFactors\"",
+   "results": "11 hits, including exact-functor factorization; no assembled coherence or triangle transport statement.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image composition on complexes and derived cohomology canonical pullback naturality",
+   "results": "8 unrelated group cohomology hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso_fac|upperStarComp_assoc|complexPullbackPresentation",
+   "results": "Source has upperStarComp_assoc, unit laws, mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac. The only complete presentation statement is the parent sorry.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexPullbackPresentation",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "second Proof, sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; termwise pullback and canonical-map identifications of the derived continuity subargument",
+   "via": [
+    "lem-weil-pbc-etale-complex-pullback-presentation",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexPullbackCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexPullbackCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.presentation_pullback_coherence",
+  "statement": "theorem presentation_pullback_coherence\n    {I : Type u} [SmallCategory I] (T : Scheme.{u})\n    (D : I ⥤ Scheme.{u}) (c : Cone D) (t : D ⟶ (Functor.const I).obj T)\n    (p : c.pt ⟶ T) (hp : ∀ i, c.π.app i ≫ t.app i = p)\n    (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :\n    let F := fun i : I =>\n      ((upperStar AddCommGrpCat.{u + 1} (t.app i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj C\n    let φ := fun {i j : I} (f : j ⟶ i) =>\n      (NatIso.mapHomologicalComplex\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map f) (t.app i) (t.app j)\n          ((Category.comp_id (t.app j)).symm.trans (t.naturality f).symm))\n        (ComplexShape.up ℤ)).inv.app C\n    let eG := fun i : I =>\n      (NatIso.mapHomologicalComplex\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app i) (t.app i) p (hp i).symm)\n        (ComplexShape.up ℤ)).app C\n    (∀ i : I, φ (𝟙 i) = presentationIdentityMap D i (F i)) ∧\n    (∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),\n      φ (g ≫ f) =\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (D.map g) (D.map f)\n            (D.map (g ≫ f)) (D.map_comp g f))\n          (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (D.map g)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ φ g) ∧\n    (∀ (i j : I) (f : j ⟶ i), ((Functor.const Iᵒᵖ).obj\n      (((upperStar AddCommGrpCat.{u + 1} p).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj C)).map f.op =\n      (eG i).hom ≫\n        (NatIso.mapHomologicalComplex\n          (upperStarComp AddCommGrpCat.{u + 1} (c.π.app j) (D.map f)\n            (c.π.app i) (c.w f).symm) (ComplexShape.up ℤ)).hom.app (F i) ≫\n        ((upperStar AddCommGrpCat.{u + 1} (c.π.app j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map (φ f) ≫ (eG j).inv)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Etale.presentation_pullback_coherence"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6daf5",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T095854-L-313161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6daf5",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T095854-L-313161",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, construction and two remaining obligations with their DAG nodes, source arguments and change record; all three modules compile cleanly, and scratch axiom checks show only permitted axioms plus sorryAx for the recorded obligations."
+ }
+}

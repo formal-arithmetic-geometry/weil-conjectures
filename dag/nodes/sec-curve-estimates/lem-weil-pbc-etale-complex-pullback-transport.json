@@ -1,0 +1,142 @@
+{
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873; Tag 0EZM (lemma-colimit-variant-complexes), canonical pullback maps in its proof. Source read from the obtained local Stacks TeX copy."
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "id": "lem-weil-pbc-etale-complex-pullback-transport",
+ "kind": "statement",
+ "title": "Canonical cohomology pullback commutes with a complex representative",
+ "statement": "For schemes X,Y,T, maps f:X to Y, g:Y to T, h:X to T with h=f followed by g, a derived object K on T [def-weil-abstract-derived-category], a complex C and isomorphism q:K to QC, and integer n [def-weil-pbc-etale-cohomology], let r_g,r_h identify derived inverse-image cohomology with cohomology of the termwise pullbacks using q and exact-functor localization [lem-weil-pbc-exact-functor-derived-factorization]. Let d be the canonical derived cohomology pullback along f followed by inverse composition comparison [lem-weil-pbc-inverse-image-composition]. Let P be the canonical complex pullback given by derived adjunction unit, Leray and localization factorization. Then d followed by r_h equals r_g followed by P(f,g inverse image C) followed by cohomology of Q of the inverse termwise composition comparison. This concerns one triangle, not a diagram or presentation.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [
+  {
+   "text": "first use naturality of the derived adjunction unit and the Leray comparison\nwith the image of q under the inverse image along g. This moves q from the source\nof the canonical derived map to its target. For QC, insert the exact-functor\nlocalization comparisons for g, f, and h. Naturality of the unit and Leray comparison\nmoves the comparison for g to the source. The defining equation hP identifies the\nremaining unit, Leray, and comparison for f with P. The equations\nmapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac identify the derived\ncomposition comparison with Q of its termwise counterpart, conjugated by these\nlocalization comparisons. Cancel the invertible comparisons and apply functoriality\nof cohomology. The resulting equality is the displayed commuting square. No limit,\nfilteredness, boundedness, or continuity is used.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GIT (lemma-colimit-complexes), proof lines 7869-7873; Tag 0EZM (lemma-colimit-variant-complexes), canonical pullback maps in its proof. Source read from the obtained local Stacks TeX copy.",
+  "note": "C2: strictly one part of the parent presentation argument; see theorem docstring for its expansion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived inverse image cohomology pullback commutes with localization of complexes",
+   "results": "Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryFactors\"",
+   "results": "11 hits, including exact-functor factorization; no assembled coherence or triangle transport statement.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image composition on complexes and derived cohomology canonical pullback naturality",
+   "results": "8 unrelated group cohomology hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso_fac|upperStarComp_assoc|complexPullbackPresentation",
+   "results": "Source has upperStarComp_assoc, unit laws, mapDerivedCategoryNatIso_fac and mapDerivedCategoryCompIso_fac. The only complete presentation statement is the parent sorry.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleComplexPullbackPresentation",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "second Proof, sentence 'On a bounded-below K-injective representative the same argument gives the derived statement'; termwise pullback and canonical-map identifications of the derived continuity subargument",
+   "via": [
+    "lem-weil-pbc-etale-complex-pullback-presentation",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleComplexPullbackTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleComplexPullbackTransport.lean",
+  "declaration": "AlgebraicGeometry.Etale.presentation_pullback_transport",
+  "statement": "theorem presentation_pullback_transport {X Y T : Scheme.{u}}\n    (f : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = f ≫ g)\n    (K : DerivedCategory (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}))\n    (n : ℤ)\n    (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)\n    (q : K ≅ DerivedCategory.Q.obj C)\n    (P : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      (cohomology AddCommGrpCat.{u + 1} Y n).obj (DerivedCategory.Q.obj K) ⟶\n      (cohomology AddCommGrpCat.{u + 1} X n).obj\n        (DerivedCategory.Q.obj\n          (((upperStar AddCommGrpCat.{u + 1} f).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj K)))\n    (hP : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n      (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ),\n      P f K = (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map\n        ((rightDerivedGlobalSections AddCommGrpCat.{u + 1} Y).map\n          ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app\n            (DerivedCategory.Q.obj K)) ≫\n        (Functor.rightDerivedFunctorCompIso'\n          (lowerStar AddCommGrpCat.{u + 1} f)\n          (Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{u + 1})\n          (Functor.isoWhiskerLeft (lowerStar AddCommGrpCat.{u + 1} f)\n              (Sheaf.ΓNatIsoSheafSections Y.smallEtaleTopology AddCommGrpCat.{u + 1}\n                terminalIsTerminal) ≪≫\n            lowerStarCompSheafSectionsTerminalIso AddCommGrpCat.{u + 1} f ≪≫\n            (Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}\n              terminalIsTerminal).symm)).hom.app\n                ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj\n                  (DerivedCategory.Q.obj K)) ≫\n        (rightDerivedGlobalSections AddCommGrpCat.{u + 1} X).map\n          ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app K))) :\n    presentationDerivedMap f g h hh K n ≫ (presentationRepresentativeIso h q n).hom =\n      (presentationRepresentativeIso g q n).hom ≫ P f (presentationPullback g C) ≫\n        (cohomology AddCommGrpCat.{u + 1} X n).map\n          (DerivedCategory.Q.map (presentationCompIso f g h hh C).inv)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12",
+  "declarations": [
+   "AlgebraicGeometry.Etale.presentation_pullback_transport",
+   "AlgebraicGeometry.Etale.presentationPullback",
+   "AlgebraicGeometry.Etale.presentationCompIso",
+   "AlgebraicGeometry.Etale.presentationFamily",
+   "AlgebraicGeometry.Etale.presentationTransition",
+   "AlgebraicGeometry.Etale.presentationConeIso",
+   "AlgebraicGeometry.Etale.presentationRepresentativeIso",
+   "AlgebraicGeometry.Etale.presentationDerivedMap",
+   "AlgebraicGeometry.Etale.presentationIdentityMap"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6daf5",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T095854-L-313161",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6daf5",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T095854-L-313161",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures, construction and two remaining obligations with their DAG nodes, source arguments and change record; all three modules compile cleanly, and scratch axiom checks show only permitted axioms plus sorryAx for the recorded obligations."
+ }
+}

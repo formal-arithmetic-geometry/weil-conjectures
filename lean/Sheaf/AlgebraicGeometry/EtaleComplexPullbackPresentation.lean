@@ -7,9 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import Mathlib.CategoryTheory.Filtered.Basic
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Sheaf.AlgebraicGeometry.EtaleComplexPullbackTransport
+import Sheaf.AlgebraicGeometry.EtaleComplexPullbackCoherence
 
 /-! # Complex presentation of canonical derived pullback cocones
 
@@ -24,6 +23,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
+
+set_option backward.defeqAttrib.useBackward true
 
 /-- Algebraic data for applying complex continuity to the pullbacks of `C`.
 The data record coherence and canonical maps, without any colimit assertion.
@@ -51,12 +52,7 @@ structure ComplexPullbackPresentation
   φ : ∀ {i j : I} (f : j ⟶ i),
       ((upperStar AddCommGrpCat.{u + 1} (D.map f)).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj (F i) ⟶ F j
-  hidentity : ∀ i : I, φ (𝟙 i) =
-      (NatIso.mapHomologicalComplex
-        (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id i)))
-        (ComplexShape.up ℤ)).hom.app (F i) ≫
-      (NatIso.mapHomologicalComplex (upperStarId AddCommGrpCat.{u + 1} (D.obj i))
-        (ComplexShape.up ℤ)).hom.app (F i)
+  hidentity : ∀ i : I, φ (𝟙 i) = presentationIdentityMap D i (F i)
   hcomposition : ∀ (i j k : I) (f : j ⟶ i) (g : k ⟶ j),
       φ (g ≫ f) =
         (NatIso.mapHomologicalComplex
@@ -207,6 +203,59 @@ theorem nonempty_complexPullbackPresentation
           (ComplexShape.up ℤ)).obj C)) P
       (constCocone Iᵒᵖ
         (((upperStar AddCommGrpCat.{u + 1} p).mapHomologicalComplex
-          (ComplexShape.up ℤ)).obj C))) := by sorry
+          (ComplexShape.up ℤ)).obj C))) := by
+  let A := fun i : I =>
+      ((upperStar AddCommGrpCat.{u + 1} (t.app i)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj C
+  let φ := fun {i j : I} (f : j ⟶ i) =>
+      (NatIso.mapHomologicalComplex
+        (upperStarComp AddCommGrpCat.{u + 1} (D.map f) (t.app i) (t.app j)
+          ((Category.comp_id (t.app j)).symm.trans (t.naturality f).symm))
+        (ComplexShape.up ℤ)).inv.app C
+  let eG := fun i : I =>
+      (NatIso.mapHomologicalComplex
+        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app i) (t.app i) p (hp i).symm)
+        (ComplexShape.up ℤ)).app C
+  let eH := fun i : I => e i ≪≫ presentationRepresentativeIso (t.app i) q n
+  let eB := eY ≪≫ presentationRepresentativeIso p q n
+  refine ⟨⟨A, (fun _ => rfl), φ,
+    (presentation_pullback_coherence T D c t p hp C).1,
+    (presentation_pullback_coherence T D c t p hp C).2.1,
+    eG, (presentation_pullback_coherence T D c t p hp C).2.2,
+    eH, ?_, eB, ?_⟩⟩
+  · intro i j f
+    have key := presentation_pullback_transport (D.map f) (t.app i) (t.app j)
+      ((Category.comp_id (t.app j)).symm.trans (t.naturality f).symm) K n C q P hP
+    change F.map f.op =
+      (eH i).hom ≫ P (D.map f) (presentationPullback (t.app i) C) ≫
+        (cohomology AddCommGrpCat.{u + 1} (D.obj j) n).map
+          (DerivedCategory.Q.map (presentationTransition D t C f)) ≫ (eH j).inv
+    have hm' : F.map f.op = (e i).hom ≫
+        presentationDerivedMap (D.map f) (t.app i) (t.app j)
+          ((Category.comp_id (t.app j)).symm.trans (t.naturality f).symm) K n ≫
+        (e j).inv := hm f
+    rw [← cancel_mono (eH j).hom, hm']
+    simpa only [eH, Iso.trans_hom, Iso.trans_inv, Category.assoc,
+      Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id,
+      presentationTransition] using congrArg (fun a => (e i).hom ≫ a) key
+  · intro i
+    have key := presentation_pullback_transport (X := c.pt) (Y := D.obj i)
+      (T := T) (c.π.app i) (t.app i) p
+      (hp i).symm K n C q P hP
+    change s.ι.app (op i) ≫ eB.hom =
+      (eH i).hom ≫ P (c.π.app i) (presentationPullback (t.app i) C) ≫
+        (cohomology AddCommGrpCat.{u + 1} c.pt n).map
+          (DerivedCategory.Q.map
+            ((presentationConeIso D c t p hp C i).inv ≫ 𝟙 _))
+    have hs' : s.ι.app (op i) = (e i).hom ≫
+        presentationDerivedMap (c.π.app i) (t.app i) p (hp i).symm K n ≫ eY.inv :=
+      hs i
+    rw [hs']
+    simpa only [eB, eH, Iso.trans_hom, Category.assoc, Iso.inv_hom_id_assoc,
+      Category.comp_id, presentationConeIso] using
+      congrArg (fun a => (e i).hom ≫ a) key
+
+
+
 
 end AlgebraicGeometry.Etale
