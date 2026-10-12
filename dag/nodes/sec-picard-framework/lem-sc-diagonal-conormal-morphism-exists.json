@@ -1,0 +1,108 @@
+{
+ "id": "lem-sc-diagonal-conormal-morphism-exists",
+ "kind": "statement",
+ "title": "Existence of the normalized difference morphism",
+ "statement": "For every scheme morphism f, there is an O_X-module morphism from relative differentials to the diagonal conormal whose composite with the universal derivation satisfies the normalized difference formula on all compatible opens and kernel sections.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2"
+ },
+ "stmt_deps": [
+  "def-sc-diagonal-conormal",
+  "def-sc-relative-differential-sheaf",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the morphism from the universal relative differential sheaf by the difference of the two splittings of the square-zero diagonal extension; the local kernel calculation gives the displayed normalization.",
+   "uses": [
+    "def-sc-diagonal-conormal",
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 08S2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-diagonal-conormal",
+  "def-sc-relative-differential-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 08S2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaf morphism from relative differentials to diagonal conormal",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative differential derivation morphism conormal",
+   "results": "no scheme-level match",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalConormal morphism derivation",
+   "results": "no existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalDerivation",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-diagonal-conormal-derivation-exists",
+   "place": "construction of the derivation morphism"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DiagonalConormalMorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/DiagonalConormalMorphism.lean",
+  "declaration": "AlgebraicGeometry.exists_diagonalConormalMorphism",
+  "statement": "theorem exists_diagonalConormalMorphism (f : X ⟶ S) : ∃ φ : f.relativeDifferentials ⟶ diagonalConormal f, ∀ (U : X.Opens) (W : (pullback f f).Opens) (h₁ : W ≤ (pullback.fst f f) ⁻¹ᵁ U) (h₂ : W ≤ (pullback.snd f f) ⁻¹ᵁ U) (hδ : U ≤ (pullback.diagonal f) ⁻¹ᵁ W) (a : Γ(X, U)) (s : Γ(kernel (SheafOfModules.unitToPushforwardObjUnit (pullback.diagonal f).toRingCatSheafHom), W)), (kernel.ι (SheafOfModules.unitToPushforwardObjUnit (pullback.diagonal f).toRingCatSheafHom)).val.app (op W) s = (pullback.snd f f).appLE U W h₂ a - (pullback.fst f f).appLE U W h₁ a → (f.relativeDifferentialsDerivation.postcomp φ.val).d (X := op U) a = (diagonalConormal f).presheaf.map (homOfLE hδ).op (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.diagonal f))).unit.app (kernel (SheafOfModules.unitToPushforwardObjUnit (pullback.diagonal f).toRingCatSheafHom))).val.app (op W) s)",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T184327-L-4013218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T184327-L-4013218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

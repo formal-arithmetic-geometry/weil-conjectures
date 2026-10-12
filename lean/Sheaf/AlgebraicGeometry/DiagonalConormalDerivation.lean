@@ -8,8 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DiagonalConormal
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
-import Sheaf.AlgebraicGeometry.AffineConormalSections
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DiagonalConormalMorphism
 
 /-!
 # The difference derivation into the diagonal conormal
@@ -65,6 +64,11 @@ class map is the canonical tensor-pullback unit. This gives the displayed normal
 on every ambient open `W`; equality can be checked locally on the same charts. -/
 theorem exists_diagonalConormalDerivation (f : X ⟶ S) :
     ∃ D : (diagonalConormal f).val.Derivation' f.pullbackPresheafToPresheaf,
-      IsDiagonalConormalDerivation f D := by sorry
+      IsDiagonalConormalDerivation f D := by
+  obtain ⟨φ, hφ⟩ := exists_diagonalConormalMorphism f
+  refine ⟨f.relativeDifferentialsDerivation.postcomp φ.val, ?_⟩
+  dsimp [IsDiagonalConormalDerivation]
+  intro U W h₁ h₂ hδ a s hs
+  exact hφ U W h₁ h₂ hδ a s hs
 
 end AlgebraicGeometry
