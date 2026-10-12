@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.RankOne
-public import WeilConjectures.RepresentationTheory.CompositionSeries
+public import WeilConjectures.RepresentationTheory.CompositionFactors
 
 /-!
 # Determinant weights of lisse Weil sheaves
@@ -276,7 +276,7 @@ irreducible subquotients of `ρ` (Jordan–Hölder). -/
 theorem mem_detWeightMultiset_iff {a : ℝ} :
     a ∈ W.detWeightMultiset l ρ ι ↔ ∃ U S : Subrepresentation ρ,
       (S.subquotient U).IsIrreducible ∧ W.detWeight l (S.subquotient U) ι = a := by
-  obtain ⟨n, F, hF0, hFn, hF⟩ := Subrepresentation.exists_compositionSeries (ρ := ρ)
+  obtain ⟨F, hF0, hFn, hF⟩ := ρ.exists_compositionSeries.some.exists_chain
   rw [detWeightMultiset_eq ι hF0 hFn hF, Multiset.mem_map]
   constructor
   · rintro ⟨i, -, rfl⟩
@@ -316,7 +316,7 @@ theorem rankDetWeightMultiset_eq {n : ℕ} {F : ℕ → Subrepresentation ρ} (h
 /-- The rank-counted list of determinant weights has `rank ρ` entries. -/
 theorem card_rankDetWeightMultiset :
     Multiset.card (W.rankDetWeightMultiset l ρ ι) = Module.finrank (PadicAlgCl l) V := by
-  obtain ⟨n, F, hF0, hFn, hF⟩ := Subrepresentation.exists_compositionSeries (ρ := ρ)
+  obtain ⟨F, hF0, hFn, hF⟩ := ρ.exists_compositionSeries.some.exists_chain
   rw [rankDetWeightMultiset_eq ι hF0 hFn hF, Multiset.card_sum]
   simp only [Multiset.card_replicate]
   rw [Fin.sum_univ_eq_sum_range (fun i ↦ Module.finrank (PadicAlgCl l)
@@ -330,9 +330,8 @@ series of `ρ` is obtained by concatenating composition series of `A` and of `ρ
 theorem rankDetWeightMultiset_eq_add (A : Subrepresentation ρ) :
     W.rankDetWeightMultiset l ρ ι =
       W.rankDetWeightMultiset l A.toRepresentation ι + W.rankDetWeightMultiset l A.quotient ι := by
-  obtain ⟨m, F₁, h₁0, h₁m, h₁⟩ :=
-    Subrepresentation.exists_compositionSeries (ρ := A.toRepresentation)
-  obtain ⟨n, F₂, h₂0, h₂n, h₂⟩ := Subrepresentation.exists_compositionSeries (ρ := A.quotient)
+  obtain ⟨F₁, h₁0, h₁m, h₁⟩ := A.toRepresentation.exists_compositionSeries.some.exists_chain
+  obtain ⟨F₂, h₂0, h₂n, h₂⟩ := A.quotient.exists_compositionSeries.some.exists_chain
   obtain ⟨F, hF0, hFn, hF, he₁, he₂⟩ :=
     Subrepresentation.exists_compositionSeries_append A h₁0 h₁m h₁ h₂0 h₂n h₂
   rw [rankDetWeightMultiset_eq ι hF0 hFn hF, rankDetWeightMultiset_eq ι h₁0 h₁m h₁,

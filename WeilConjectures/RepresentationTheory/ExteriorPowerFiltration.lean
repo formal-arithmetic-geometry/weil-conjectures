@@ -5,441 +5,252 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Data.Nat.Choose.Vandermonde
-public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
-public import Mathlib.LinearAlgebra.ExteriorPower.Basis
-public import WeilConjectures.RepresentationTheory.CompositionSeries
-public import WeilConjectures.Mathlib.RepresentationTheory.Basic
+public import Mathlib.LinearAlgebra.PiTensorProduct.Basis
+public import WeilConjectures.RepresentationTheory.ExteriorPower
+public import WeilConjectures.RepresentationTheory.PiTensorProduct
 
 /-!
-# The exterior powers of an extension
+# The exterior powers of a filtered representation
 
-Let `A ⊆ M` be a submodule of a finite-dimensional vector space and `r ≥ 0`. The exterior power
-`⋀^r M` has the decreasing filtration `P_j` spanned by the wedges `v₁ ∧ ⋯ ∧ v_r` with at least
-`j` entries in `A`, and `P_j / P_{j + 1} ≅ ⋀^j A ⊗ ⋀^{r - j} (M / A)`. For a representation `ρ`
-and a subrepresentation `A`, the `P_j` are subrepresentations of `⋀^r ρ` and these isomorphisms
-are equivalences of representations. This is the two-step case of the blueprint lemma
-`lem-mg-filtered-exterior-power`, from which the general case follows by induction on a
-composition series.
+Let `0 = V₀ ≤ V₁ ≤ ⋯ ≤ V_t = V` be a finite filtration of a finite-dimensional representation, with
+graded pieces `A_i = V_i / V_{i-1}`. Then `⋀^r V` has a finite filtration whose graded pieces are
+the tensor products `⨂ᵢ ⋀^{nᵢ} A_i` over the tuples `(n₁, …, n_t)` with `∑ nᵢ = r`, each tuple
+occurring once. The piece of a tuple is nonzero exactly when `nᵢ ≤ dim A_i` for all `i`.
 
-The isomorphism is the map `a ⊗ b ↦ a ∧ σ(b)` for a linear section `σ` of `M → M / A`; it is
-surjective onto `P_j / P_{j + 1}`, and it is bijective by the count
-`∑_j C(dim A, j) C(dim M / A, r - j) = C(dim M, r)` (Vandermonde).
+The proof is by induction on `t`, from the two-step filtration of `⋀^r V` by a subrepresentation
+`P` (`Subrepresentation.exteriorPowerGradedEquiv`), with graded pieces `⋀^{r-j} P ⊗ ⋀^j (V ⧸ P)`.
 
-## Main definitions
+## Main results
 
-- `exteriorPower.wedge`: the product `⋀^i M × ⋀^j M → ⋀^(i + j) M`.
-- `exteriorPower.extFiltration`: the filtration `P_j` of `⋀^r M`.
-- `Representation.exteriorPowerFiltration`: the filtration as subrepresentations.
-
-## Main statements
-
-- `Representation.nonempty_equiv_exteriorPowerFiltration`:
-  `P_j / P_{j + 1} ≅ ⋀^j A ⊗ ⋀^{r - j} (M / A)` as representations.
+- `Subrepresentation.hasGradedPieces_exteriorPower`: the two-step filtration.
+- `Representation.hasGradedPieces_exteriorPower_of_monotone`: the filtration of `⋀^r V` induced
+  by a finite filtration of `V`.
+- `Representation.CompositionSeries.hasGradedPieces_exteriorPower`: the same for a composition
+  series.
 -/
 
 @[expose] public section
 
-open scoped TensorProduct
+open TensorProduct
 
-namespace exteriorPower
-
-variable {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
-
-/-- The exterior product `⋀^i M × ⋀^j M → ⋀^n M`, `n = i + j`, given by multiplication in the
-exterior algebra. -/
-noncomputable def wedge {i j n : ℕ} (h : i + j = n) :
-    ⋀[R]^i M →ₗ[R] ⋀[R]^j M →ₗ[R] ⋀[R]^n M :=
-  LinearMap.mk₂ R (fun x y ↦ ⟨x.1 * y.1, h ▸ SetLike.mul_mem_graded x.2 y.2⟩)
-    (fun _ _ _ ↦ Subtype.ext (add_mul _ _ _)) (fun _ _ _ ↦ Subtype.ext (smul_mul_assoc _ _ _))
-    (fun _ _ _ ↦ Subtype.ext (mul_add _ _ _)) (fun _ _ _ ↦ Subtype.ext (mul_smul_comm _ _ _))
-
-theorem wedge_ιMulti {i j n : ℕ} (h : i + j = n) (a : Fin i → M) (b : Fin j → M) :
-    wedge h (ιMulti R i a) (ιMulti R j b) = ιMulti R n (Fin.append a b ∘ Fin.cast h.symm) := by
-  subst h
-  apply Subtype.ext
-  change ExteriorAlgebra.ιMulti R i a * ExteriorAlgebra.ιMulti R j b =
-    ExteriorAlgebra.ιMulti R (i + j) (Fin.append a b ∘ Fin.cast rfl)
-  have : (fun k ↦ ExteriorAlgebra.ι R (Fin.append a b k)) =
-      Fin.append (fun k ↦ ExteriorAlgebra.ι R (a k)) (fun k ↦ ExteriorAlgebra.ι R (b k)) := by
-    funext k
-    refine Fin.addCases (fun k ↦ ?_) (fun k ↦ ?_) k <;> simp
-  simp only [ExteriorAlgebra.ιMulti_apply, Function.comp_apply, Fin.cast_eq_self, this,
-    List.ofFn_fin_append, List.prod_append]
-
-variable (A : Submodule R M) (r : ℕ)
-
-/-- The filtration of `⋀^r M` by the number of entries in a submodule `A`: `P_j` is spanned by
-the wedges `v₁ ∧ ⋯ ∧ v_r` with at least `j` entries in `A`. -/
-def extFiltration (j : ℕ) : Submodule R (⋀[R]^r M) :=
-  Submodule.span R {x | ∃ (v : Fin r → M) (s : Finset (Fin r)), j ≤ s.card ∧ (∀ i ∈ s, v i ∈ A) ∧
-    ιMulti R r v = x}
-
-variable {A r}
-
-theorem ιMulti_mem_extFiltration {j : ℕ} {v : Fin r → M} (s : Finset (Fin r)) (hs : j ≤ s.card)
-    (hv : ∀ i ∈ s, v i ∈ A) : ιMulti R r v ∈ extFiltration A r j :=
-  Submodule.subset_span ⟨v, s, hs, hv, rfl⟩
-
-theorem extFiltration_antitone : Antitone (extFiltration A r) := fun _ _ hjj' ↦
-  Submodule.span_mono fun _ ⟨v, s, hs, hv, hx⟩ ↦ ⟨v, s, hjj'.trans hs, hv, hx⟩
-
-theorem extFiltration_zero : extFiltration A r 0 = ⊤ := by
-  rw [eq_top_iff, ← ιMulti_span]
-  exact Submodule.span_le.2 fun _ ⟨v, hv⟩ ↦ hv ▸ ιMulti_mem_extFiltration ∅ le_rfl (by simp)
-
-theorem extFiltration_eq_bot {j : ℕ} (hj : r < j) : extFiltration A r j = ⊥ := by
-  rw [extFiltration, Submodule.span_eq_bot]
-  rintro _ ⟨v, s, hs, -, -⟩
-  have := s.card_le_univ
-  simp only [Fintype.card_fin] at this
-  omega
-
-/-- An endomorphism `f` of `M` with `f(A) ⊆ A` preserves the filtration. -/
-theorem map_extFiltration_le {f : M →ₗ[R] M} (hf : ∀ x ∈ A, f x ∈ A) (j : ℕ) :
-    (extFiltration A r j).map (map r f) ≤ extFiltration A r j := by
-  rw [extFiltration, Submodule.map_span_le]
-  rintro _ ⟨v, s, hs, hv, rfl⟩
-  rw [map_apply_ιMulti]
-  exact ιMulti_mem_extFiltration s hs fun i hi ↦ hf _ (hv i hi)
-
-/-- If `v` has at least `j` entries in `A`, on the positions `s`, and `w` agrees with `v` on `s`
-and differs from `v` by elements of `A` elsewhere, then `v₁ ∧ ⋯ ∧ v_r` and `w₁ ∧ ⋯ ∧ w_r` agree
-modulo `P_{j + 1}`. -/
-theorem ιMulti_sub_mem_extFiltration {j : ℕ} {v w : Fin r → M} (s : Finset (Fin r))
-    (hs : j ≤ s.card) (hv : ∀ i ∈ s, v i ∈ A) (hvw : ∀ i ∈ s, w i = v i)
-    (hA : ∀ i, v i - w i ∈ A) : ιMulti R r v - ιMulti R r w ∈ extFiltration A r (j + 1) := by
-  classical
-  -- replace the entries outside `s` one by one
-  let u : Finset (Fin r) → Fin r → M := fun D i ↦ if i ∈ D then w i else v i
-  suffices h : ∀ D : Finset (Fin r), Disjoint D s →
-      ιMulti R r v - ιMulti R r (u D) ∈ extFiltration A r (j + 1) by
-    have h' := h sᶜ disjoint_compl_left
-    convert h' using 3
-    funext i
-    by_cases hi : i ∈ s
-    · simp [u, hi, hvw i hi]
-    · simp [u, hi]
-  intro D hD
-  induction D using Finset.induction_on with
-  | empty => simp [u]
-  | insert a D ha ih =>
-    have haS : a ∉ s := Finset.disjoint_left.1 hD (Finset.mem_insert_self a D)
-    have hD' : Disjoint D s := Finset.disjoint_of_subset_left (Finset.subset_insert a D) hD
-    have hu : u (insert a D) = Function.update (u D) a (w a) := by
-      funext i
-      by_cases hi : i = a
-      · subst hi; simp [u]
-      · simp [u, hi]
-    have hu' : u D = Function.update (u D) a (v a) := by
-      funext i
-      by_cases hi : i = a
-      · subst hi; simp [u, ha]
-      · simp [Function.update_of_ne hi]
-    have key : ιMulti R r (u D) - ιMulti R r (u (insert a D)) ∈ extFiltration A r (j + 1) := by
-      have h₁ : ιMulti R r (u D) - ιMulti R r (u (insert a D)) =
-          ιMulti R r (Function.update (u D) a (v a - w a)) := by
-        rw [AlternatingMap.map_update_sub, ← hu', ← hu]
-      rw [h₁]
-      refine ιMulti_mem_extFiltration (insert a s) (by rw [Finset.card_insert_of_notMem haS]; omega)
-        fun i hi ↦ ?_
-      rcases Finset.mem_insert.1 hi with rfl | hi
-      · simpa using hA i
-      · have hia : i ≠ a := fun h ↦ haS (h ▸ hi)
-        rw [Function.update_of_ne hia]
-        have hiD : i ∉ D := fun h ↦ Finset.disjoint_left.1 hD' h hi
-        simpa [u, hiD] using hv i hi
-    have := Submodule.add_mem _ (ih hD') key
-    rwa [sub_add_sub_cancel] at this
-
-
-section Graded
-
-variable (A) {j m : ℕ} (h : j + m = r) (σ : (M ⧸ A) →ₗ[R] M)
-
-/-- The map `⋀^j A ⊗ ⋀^m (M ⧸ A) → ⋀^r M`, `a ⊗ b ↦ a ∧ σ(b)`, for a linear section `σ` of
-`M → M ⧸ A` and `r = j + m`. -/
-noncomputable def gradedLift : ⋀[R]^j A ⊗[R] ⋀[R]^m (M ⧸ A) →ₗ[R] ⋀[R]^r M :=
-  TensorProduct.lift ((wedge h).compl₂ (map m σ) ∘ₗ map j A.subtype)
-
-variable {A}
-
-theorem gradedLift_tmul (a : Fin j → A) (b : Fin m → M ⧸ A) :
-    gradedLift A h σ (ιMulti R j a ⊗ₜ ιMulti R m b) =
-      ιMulti R r (Fin.append (A.subtype ∘ a) (σ ∘ b) ∘ Fin.cast h.symm) := by
-  simp only [gradedLift, TensorProduct.lift.tmul, LinearMap.coe_comp, Function.comp_apply,
-    LinearMap.compl₂_apply, map_apply_ιMulti, wedge_ιMulti]
-
-/-- The positions of the first `j` entries of a tuple of length `r = j + m`. -/
-def firstBlock : Finset (Fin r) :=
-  Finset.univ.map ⟨fun i : Fin j ↦ Fin.cast h (Fin.castAdd m i), fun _ _ hi ↦ by simpa using hi⟩
-
-theorem card_firstBlock : (firstBlock h).card = j := by
-  simp [firstBlock]
-
-theorem mem_firstBlock {i : Fin r} :
-    i ∈ firstBlock h ↔ ∃ k : Fin j, Fin.cast h (Fin.castAdd m k) = i := by
-  simp [firstBlock]
-
-theorem append_cast_firstBlock {α : Type*} (x : Fin j → α) (y : Fin m → α) {i : Fin r}
-    (hi : i ∈ firstBlock h) : ∃ k, (Fin.append x y ∘ Fin.cast h.symm) i = x k := by
-  obtain ⟨k, rfl⟩ := (mem_firstBlock h).1 hi
-  exact ⟨k, by simp⟩
-
-theorem append_cast_not_firstBlock {α : Type*} (x : Fin j → α) (y : Fin m → α) {i : Fin r}
-    (hi : i ∉ firstBlock h) : ∃ k, (Fin.append x y ∘ Fin.cast h.symm) i = y k := by
-  obtain ⟨k, hk⟩ | ⟨k, hk⟩ : (∃ k : Fin j, Fin.cast h.symm i = Fin.castAdd m k) ∨
-      ∃ k : Fin m, Fin.cast h.symm i = Fin.natAdd j k := by
-    refine Fin.addCases (motive := fun t ↦ (∃ k : Fin j, t = Fin.castAdd m k) ∨
-      ∃ k : Fin m, t = Fin.natAdd j k) (fun k ↦ Or.inl ⟨k, rfl⟩) (fun k ↦ Or.inr ⟨k, rfl⟩) _
-  · exact absurd ((mem_firstBlock h).2 ⟨k, by rw [← hk]; simp⟩) hi
-  · exact ⟨k, by simp [hk]⟩
-
-/-- The image of `gradedLift` lies in `P_j`. -/
-theorem gradedLift_mem_extFiltration (t : ⋀[R]^j A ⊗[R] ⋀[R]^m (M ⧸ A)) :
-    gradedLift A h σ t ∈ extFiltration A r j := by
-  suffices (extFiltration A r j).mkQ ∘ₗ gradedLift A h σ = 0 by
-    simpa using (Submodule.Quotient.mk_eq_zero _).1 (LinearMap.congr_fun this t)
-  ext a b
-  change (extFiltration A r j).mkQ (gradedLift A h σ (ιMulti R j a ⊗ₜ ιMulti R m b)) = 0
-  rw [gradedLift_tmul, Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
-  refine ιMulti_mem_extFiltration (firstBlock h) (card_firstBlock h).ge fun i hi ↦ ?_
-  obtain ⟨k, hk⟩ := append_cast_firstBlock h (A.subtype ∘ a) (σ ∘ b) hi
-  rw [hk]
-  exact (a k).2
-
-
-/-- The induced map `⋀^j A ⊗ ⋀^m (M ⧸ A) → P_j / P_{j + 1}`. -/
-noncomputable def gradedMap : ⋀[R]^j A ⊗[R] ⋀[R]^m (M ⧸ A) →ₗ[R]
-    extFiltration A r j ⧸ (extFiltration A r (j + 1)).comap (extFiltration A r j).subtype :=
-  Submodule.mkQ _ ∘ₗ (gradedLift A h σ).codRestrict _ (gradedLift_mem_extFiltration h σ)
-
-theorem gradedMap_apply (t : ⋀[R]^j A ⊗[R] ⋀[R]^m (M ⧸ A)) :
-    gradedMap h σ t =
-      Submodule.Quotient.mk ⟨gradedLift A h σ t, gradedLift_mem_extFiltration h σ t⟩ :=
-  rfl
-
-/-- Two elements `x, y` of `P_j` have the same image in `P_j / P_{j + 1}` exactly when
-`x - y ∈ P_{j + 1}`. -/
-theorem mk_eq_mk_iff {j : ℕ} (x y : extFiltration A r j) :
-    (Submodule.Quotient.mk x : extFiltration A r j ⧸
-      (extFiltration A r (j + 1)).comap (extFiltration A r j).subtype) =
-        Submodule.Quotient.mk y ↔ (x : ⋀[R]^r M) - y ∈ extFiltration A r (j + 1) :=
-  Submodule.Quotient.eq _
-
-variable {σ} (hσ : A.mkQ ∘ₗ σ = LinearMap.id)
-include hσ
-
-theorem sub_section_mem (x : M) : x - σ (A.mkQ x) ∈ A := by
-  rw [← Submodule.Quotient.mk_eq_zero, ← Submodule.mkQ_apply, map_sub,
-    ← LinearMap.comp_apply A.mkQ σ, hσ, LinearMap.id_apply, sub_self]
-
-/-- Every element of `P_j` agrees modulo `P_{j + 1}` with an element of the image of
-`gradedLift`: a generating wedge with entries in `A` at the positions `s`, `#s ≥ j`, is up to
-sign the wedge of `j` entries of `A` and of `m` further entries, which may be replaced by their
-images under `σ ∘ (M → M ⧸ A)` modulo `P_{j + 1}`. -/
-theorem exists_gradedLift_sub_mem {x : ⋀[R]^r M} (hx : x ∈ extFiltration A r j) :
-    ∃ t, gradedLift A h σ t - x ∈ extFiltration A r (j + 1) := by
-  induction hx using Submodule.span_induction with
-  | zero => exact ⟨0, by simp⟩
-  | add x y _ _ hx hy =>
-    obtain ⟨t, ht⟩ := hx
-    obtain ⟨t', ht'⟩ := hy
-    refine ⟨t + t', ?_⟩
-    rw [map_add, add_sub_add_comm]
-    exact Submodule.add_mem _ ht ht'
-  | smul c x _ hx =>
-    obtain ⟨t, ht⟩ := hx
-    refine ⟨c • t, ?_⟩
-    rw [map_smul, ← smul_sub]
-    exact Submodule.smul_mem _ c ht
-  | mem x hx =>
-    obtain ⟨v, s, hs, hv, rfl⟩ := hx
-    obtain ⟨s', hs's, hs'⟩ := Finset.exists_subset_card_eq hs
-    have hc : s'ᶜ.card = m := by
-      rw [Finset.card_compl, Fintype.card_fin, hs']
-      omega
-    let f := s'.orderEmbOfFin hs'
-    let g := s'ᶜ.orderEmbOfFin hc
-    let φ : Fin (j + m) → Fin r := Fin.append f g
-    have hinj : Function.Injective φ := Fin.append_injective_iff.2 ⟨f.injective, g.injective,
-      fun a b hab ↦ (Finset.mem_compl.1 (s'ᶜ.orderEmbOfFin_mem hc b))
-        (hab ▸ s'.orderEmbOfFin_mem hs' a)⟩
-    have hbij : Function.Bijective φ :=
-      (Fintype.bijective_iff_injective_and_card φ).2 ⟨hinj, by simp [h]⟩
-    let π : Equiv.Perm (Fin r) := (finCongr h).symm.trans (Equiv.ofBijective φ hbij)
-    have hvπ : v ∘ π = Fin.append (v ∘ f) (v ∘ g) ∘ Fin.cast h.symm := by
-      funext i
-      simp only [Function.comp_apply, π, Equiv.trans_apply, Equiv.ofBijective_apply, φ,
-        finCongr_symm, finCongr_apply]
-      refine Fin.addCases (motive := fun k ↦ v (Fin.append f g k) =
-        Fin.append (v ∘ f) (v ∘ g) k) (fun k ↦ ?_) (fun k ↦ ?_) (Fin.cast h.symm i) <;> simp
-    let a : Fin j → A := fun i ↦ ⟨v (f i), hv _ (hs's (s'.orderEmbOfFin_mem hs' i))⟩
-    let b : Fin m → M ⧸ A := A.mkQ ∘ v ∘ g
-    let c : R := ((Equiv.Perm.sign π : ℤ) : R)
-    have hc : c * c = 1 := by
-      rw [← Int.cast_mul, ← Units.val_mul, Int.units_mul_self, Units.val_one, Int.cast_one]
-    refine ⟨c • (ιMulti R j a ⊗ₜ ιMulti R m b), ?_⟩
-    have hperm : ιMulti R r v = c • ιMulti R r (v ∘ π) := by
-      rw [AlternatingMap.map_perm, Units.smul_def, ← Int.cast_smul_eq_zsmul R, smul_smul, hc,
-        one_smul]
-    rw [map_smul, gradedLift_tmul, hperm, hvπ, ← smul_sub]
-    refine Submodule.smul_mem _ _ ?_
-    rw [← neg_mem_iff, neg_sub]
-    refine ιMulti_sub_mem_extFiltration (firstBlock h) (card_firstBlock h).ge
-      (fun i hi ↦ ?_) (fun i hi ↦ ?_) fun i ↦ ?_
-    · obtain ⟨k, hk⟩ := append_cast_firstBlock h (v ∘ f) (v ∘ g) hi
-      rw [hk]
-      exact (a k).2
-    · obtain ⟨k, rfl⟩ := (mem_firstBlock h).1 hi
-      simp [a]
-    · by_cases hi : i ∈ firstBlock h
-      · obtain ⟨k, rfl⟩ := (mem_firstBlock h).1 hi
-        simp [a]
-      · obtain ⟨k, rfl⟩ | ⟨k, hk⟩ : (∃ k : Fin j, Fin.cast h (Fin.castAdd m k) = i) ∨
-            ∃ k : Fin m, Fin.cast h.symm i = Fin.natAdd j k := by
-          refine Fin.addCases (motive := fun t ↦ (∃ k : Fin j, Fin.cast h (Fin.castAdd m k) =
-            Fin.cast h t) ∨ ∃ k : Fin m, t = Fin.natAdd j k) (fun k ↦ Or.inl ⟨k, rfl⟩)
-            (fun k ↦ Or.inr ⟨k, rfl⟩) (Fin.cast h.symm i) |>.imp (fun ⟨k, hk⟩ ↦ ⟨k, by simpa
-            using hk⟩) id
-        · exact absurd ((mem_firstBlock h).2 ⟨k, rfl⟩) hi
-        · simp only [Function.comp_apply, hk, Fin.append_right, b]
-          exact sub_section_mem hσ _
-
-/-- The map `⋀^j A ⊗ ⋀^m (M ⧸ A) → P_j / P_{j + 1}` is surjective. -/
-theorem gradedMap_surjective : Function.Surjective (gradedMap h σ) := by
-  intro q
-  induction q using Submodule.Quotient.induction_on with | _ x
-  obtain ⟨t, ht⟩ := exists_gradedLift_sub_mem h hσ x.2
-  exact ⟨t, (mk_eq_mk_iff _ _).2 ht⟩
-
-/-- `gradedLift` is compatible, modulo `P_{j + 1}`, with an endomorphism `f` of `M` preserving
-`A`, acting on `⋀^j A ⊗ ⋀^m (M ⧸ A)` through its restriction to `A` and the induced map on
-`M ⧸ A`. -/
-theorem map_gradedLift_sub_mem (f : M →ₗ[R] M) (hf : ∀ x ∈ A, f x ∈ A)
-    (t : ⋀[R]^j A ⊗[R] ⋀[R]^m (M ⧸ A)) :
-    map r f (gradedLift A h σ t) - gradedLift A h σ (TensorProduct.map (map j (f.restrict hf))
-      (map m (A.mapQ A f hf)) t) ∈ extFiltration A r (j + 1) := by
-  suffices (extFiltration A r (j + 1)).mkQ ∘ₗ (map r f ∘ₗ gradedLift A h σ -
-      gradedLift A h σ ∘ₗ TensorProduct.map (map j (f.restrict hf)) (map m (A.mapQ A f hf))) = 0 by
-    simpa using (Submodule.Quotient.mk_eq_zero _).1 (LinearMap.congr_fun this t)
-  ext a b
-  change (extFiltration A r (j + 1)).mkQ (map r f (gradedLift A h σ (ιMulti R j a ⊗ₜ ιMulti R m b))
-    - gradedLift A h σ (TensorProduct.map (map j (f.restrict hf)) (map m (A.mapQ A f hf))
-      (ιMulti R j a ⊗ₜ ιMulti R m b))) = 0
-  rw [TensorProduct.map_tmul, map_apply_ιMulti, map_apply_ιMulti, gradedLift_tmul,
-    gradedLift_tmul, map_apply_ιMulti, Submodule.mkQ_apply, Submodule.Quotient.mk_eq_zero]
-  refine ιMulti_sub_mem_extFiltration (firstBlock h) (card_firstBlock h).ge
-    (fun i hi ↦ ?_) (fun i hi ↦ ?_) fun i ↦ ?_
-  · obtain ⟨k, rfl⟩ := (mem_firstBlock h).1 hi
-    simpa using hf _ (a k).2
-  · obtain ⟨k, rfl⟩ := (mem_firstBlock h).1 hi
-    simp
-  · refine Fin.addCases (motive := fun t ↦ (f ∘ Fin.append (A.subtype ∘ a) (σ ∘ b)) t -
-      Fin.append (A.subtype ∘ (f.restrict hf ∘ a)) (σ ∘ (A.mapQ A f hf ∘ b)) t ∈ A)
-      (fun k ↦ ?_) (fun k ↦ ?_) (Fin.cast h.symm i)
-    · simp
-    · simp only [Function.comp_apply, Fin.append_right]
-      have h₁ := sub_section_mem hσ (f (σ (b k)))
-      have hb : A.mkQ (σ (b k)) = b k := LinearMap.congr_fun hσ (b k)
-      have h₂ : A.mkQ (f (σ (b k))) = A.mapQ A f hf (b k) :=
-        calc A.mkQ (f (σ (b k))) = A.mapQ A f hf (A.mkQ (σ (b k))) := rfl
-          _ = A.mapQ A f hf (b k) := by rw [hb]
-      rwa [h₂] at h₁
-end Graded
-
-
-section Dimension
-
-variable {K V X : Type*} [Field K] [AddCommGroup V] [Module K V] [AddCommGroup X] [Module K X]
-  [FiniteDimensional K X]
-
-/-- The dimensions of the steps `P j / P (j + 1)` of a decreasing chain of subspaces add up to
-`dim P 0 - dim P N`. -/
-theorem sum_finrank_quotient_add_finrank (P : ℕ → Submodule K X) (hP : Antitone P) (N : ℕ) :
-    ∑ j ∈ Finset.range N, Module.finrank K (P j ⧸ (P (j + 1)).comap (P j).subtype) +
-      Module.finrank K (P N) = Module.finrank K (P 0) := by
-  induction N with
-  | zero => simp
-  | succ N ih =>
-    rw [Finset.sum_range_succ, add_assoc, ← ih]
-    congr 1
-    have h := Submodule.finrank_quotient_add_finrank ((P (N + 1)).comap (P N).subtype)
-    rwa [(Submodule.comapSubtypeEquivOfLe (hP (Nat.le_succ N))).finrank_eq] at h
-
-variable [FiniteDimensional K V] {A : Submodule K V} {σ : (V ⧸ A) →ₗ[K] V}
-  (hσ : A.mkQ ∘ₗ σ = LinearMap.id) {r : ℕ}
-include hσ
-
-/-- The map `⋀^j A ⊗ ⋀^{r - j} (V ⧸ A) → P_j / P_{j + 1}` is bijective, for `j ≤ r`: it is
-surjective, and the dimensions agree since
-`∑_j C(dim A, j) C(dim V ⧸ A, r - j) = C(dim V, r)`. -/
-theorem gradedMap_bijective {j : ℕ} (hj : j ≤ r) :
-    Function.Bijective (gradedMap (A := A) (Nat.add_sub_cancel' hj) σ) := by
-  let src : ℕ → ℕ := fun j ↦ Module.finrank K (⋀[K]^j A ⊗[K] ⋀[K]^(r - j) (V ⧸ A))
-  let tgt : ℕ → ℕ := fun j ↦ Module.finrank K (extFiltration A r j ⧸
-    (extFiltration A r (j + 1)).comap (extFiltration A r j).subtype)
-  have hle : ∀ j ∈ Finset.range (r + 1), tgt j ≤ src j := fun j hj ↦ by
-    have hjr : j ≤ r := Nat.lt_succ_iff.1 (Finset.mem_range.1 hj)
-    have h := LinearMap.finrank_range_le (gradedMap (A := A) (Nat.add_sub_cancel' hjr) σ)
-    rwa [LinearMap.range_eq_top.2 (gradedMap_surjective _ hσ), finrank_top] at h
-  have hsrc : ∑ j ∈ Finset.range (r + 1), src j = (Module.finrank K V).choose r := by
-    simp only [src, Module.finrank_tensorProduct, exteriorPower.finrank_eq]
-    rw [← Submodule.finrank_quotient_add_finrank A, add_comm (Module.finrank K (V ⧸ A)),
-      Nat.add_choose_eq,
-      Finset.Nat.sum_antidiagonal_eq_sum_range_succ (fun i k ↦ (Module.finrank K A).choose i *
-        (Module.finrank K (V ⧸ A)).choose k)]
-  have htgt : ∑ j ∈ Finset.range (r + 1), tgt j = (Module.finrank K V).choose r := by
-    have h := sum_finrank_quotient_add_finrank (extFiltration A r) extFiltration_antitone (r + 1)
-    rw [extFiltration_eq_bot (Nat.lt_succ_self r), finrank_bot, add_zero, extFiltration_zero,
-      finrank_top, exteriorPower.finrank_eq] at h
-    exact h
-  have heq := (Finset.sum_eq_sum_iff_of_le hle).1 (htgt.trans hsrc.symm) j
-    (Finset.mem_range.2 (Nat.lt_succ_of_le hj))
-  exact ⟨(LinearMap.injective_iff_surjective_of_finrank_eq_finrank heq.symm).2
-    (gradedMap_surjective _ hσ), gradedMap_surjective _ hσ⟩
-
-end Dimension
-end exteriorPower
+universe u v w
 
 namespace Representation
 
-variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
-  {ρ : Representation k G V}
+variable {k : Type u} [Field k] {W : Type w} [Group W] {V : Type v} [AddCommGroup V]
+  [Module k V]
 
-/-- The filtration `P_j` of the exterior power `⋀^r ρ` along a subrepresentation `A`, by the
-number of entries in `A`, as subrepresentations. -/
-def exteriorPowerFiltration (A : Subrepresentation ρ) (r j : ℕ) :
-    Subrepresentation (ρ.exteriorPower r) where
-  toSubmodule := exteriorPower.extFiltration A.toSubmodule r j
-  apply_mem_toSubmodule g x hx :=
-    exteriorPower.map_extFiltration_le (fun _ hy ↦ A.apply_mem_toSubmodule g hy) j ⟨x, hx, rfl⟩
+/-- Equal exterior powers are equivalent. -/
+noncomputable def exteriorPowerCongr (ρ : Representation k W V) {a b : ℕ} (h : a = b) :
+    (ρ.exteriorPower a).Equiv (ρ.exteriorPower b) := by
+  subst h
+  exact .refl _
 
-theorem exteriorPowerFiltration_antitone (A : Subrepresentation ρ) (r : ℕ) :
-    Antitone (exteriorPowerFiltration A r) :=
-  fun _ _ h ↦ exteriorPower.extFiltration_antitone (A := A.toSubmodule) (r := r) h
+end Representation
 
-theorem exteriorPowerFiltration_zero (A : Subrepresentation ρ) (r : ℕ) :
-    exteriorPowerFiltration A r 0 = ⊤ :=
-  Subrepresentation.toSubmodule_injective exteriorPower.extFiltration_zero
+namespace Subrepresentation
 
-theorem exteriorPowerFiltration_eq_bot (A : Subrepresentation ρ) {r j : ℕ} (hj : r < j) :
-    exteriorPowerFiltration A r j = ⊥ :=
-  Subrepresentation.toSubmodule_injective (exteriorPower.extFiltration_eq_bot hj)
+variable {k : Type u} [Field k] {W : Type w} [Group W] {V : Type v} [AddCommGroup V]
+  [Module k V] {ρ : Representation k W V}
 
-/-- The steps of the filtration of `⋀^r ρ` along a subrepresentation `A`:
-`P_j / P_{j + 1} ≅ ⋀^j A ⊗ ⋀^{r - j} (ρ / A)` as representations, for `j ≤ r`. -/
-theorem nonempty_equiv_exteriorPowerFiltration [FiniteDimensional k V] (A : Subrepresentation ρ)
-    {r j : ℕ} (hj : j ≤ r) :
-    Nonempty (((A.toRepresentation.exteriorPower j).tprod (A.quotient.exteriorPower (r - j))).Equiv
-      ((exteriorPowerFiltration A r j).subquotient (exteriorPowerFiltration A r (j + 1)))) := by
-  obtain ⟨σ, hσ⟩ := A.toSubmodule.mkQ.exists_rightInverse_of_surjective (Submodule.range_mkQ _)
-  refine ⟨IntertwiningMap.ofBijective
-    ⟨exteriorPower.gradedMap (Nat.add_sub_cancel' hj) σ, fun g ↦ LinearMap.ext fun t ↦ ?_⟩
-    (exteriorPower.gradedMap_bijective hσ hj)⟩
-  rw [LinearMap.comp_apply, LinearMap.comp_apply]
-  refine (exteriorPower.mk_eq_mk_iff _ _).2 ?_
-  rw [← neg_mem_iff, neg_sub]
-  exact exteriorPower.map_gradedLift_sub_mem _ hσ (ρ g) (fun _ hy ↦ A.apply_mem_toSubmodule g hy) t
+theorem exteriorPowerFiltration_anti (P : Subrepresentation ρ) (n : ℕ) {i j : ℕ} (h : i ≤ j) :
+    P.exteriorPowerFiltration n j ≤ P.exteriorPowerFiltration n i :=
+  exteriorPower.countSpan_anti _ n h
+
+/-- **The exterior powers of an extension.** For a subrepresentation `P` of a finite-dimensional
+representation `ρ`, the exterior power `⋀^r V` has a finite filtration with graded pieces
+`⋀^{r-j} P ⊗ ⋀^j (V ⧸ P)`, `0 ≤ j ≤ r`. -/
+theorem hasGradedPieces_exteriorPower [FiniteDimensional k V] (P : Subrepresentation ρ)
+    (r : ℕ) : Representation.HasGradedPieces (ρ.exteriorPower r) fun j : Fin (r + 1) ↦
+      Representation.EquivTo ((P.toRepresentation.exteriorPower (r - j)).tprod
+        (P.quotient.exteriorPower j)) := by
+  refine ⟨r + 1, fun i ↦ P.exteriorPowerFiltration r (r + 1 - i), .refl _,
+    fun a b hab ↦ P.exteriorPowerFiltration_anti r (by have : (a : ℕ) ≤ b := hab; omega),
+    by simp [P.exteriorPowerFiltration_eq_bot r (Nat.lt_succ_self r)],
+    by simp [exteriorPowerFiltration_zero], fun i ↦ ⟨?_⟩⟩
+  have hi := i.2
+  have h1 : P.exteriorPowerFiltration r (r + 1 - (i.succ : ℕ)) =
+      P.exteriorPowerFiltration r (r - i) := by
+    congr 1
+    rw [Fin.val_succ]
+    omega
+  have h2 : P.exteriorPowerFiltration r (r + 1 - (i.castSucc : ℕ)) =
+      P.exteriorPowerFiltration r (r - i + 1) := by
+    congr 1
+    rw [Fin.val_castSucc]
+    omega
+  exact (subquotientCongr h1 h2).trans
+    (P.exteriorPowerGradedEquiv r (j := r - i) (l := i) (by omega)).symm
+
+end Subrepresentation
+
+namespace Representation
+
+variable {k : Type u} [Field k] {W : Type w} [Group W]
+
+/-- The tensor product `⨂ᵢ ⋀^{nᵢ} Xᵢ` of exterior powers of a family of representations. -/
+noncomputable def piTprodExteriorPower {ι : Type*} {X : ι → Type*} [∀ i, AddCommGroup (X i)]
+    [∀ i, Module k (X i)] (ρs : ∀ i, Representation k W (X i)) (n : ι → ℕ) :
+    Representation k W (⨂[k] i, ⋀[k]^(n i) (X i)) :=
+  piTprod fun i ↦ (ρs i).exteriorPower (n i)
+
+section PiTprodExteriorPower
+
+variable {ι : Type*} {X Y : ι → Type*} [∀ i, AddCommGroup (X i)] [∀ i, Module k (X i)]
+  [∀ i, AddCommGroup (Y i)] [∀ i, Module k (Y i)]
+
+/-- Tensor products of exterior powers of equivalent families, with equal exponents, are
+equivalent. -/
+noncomputable def Equiv.piTprodExteriorPowerCongr {ρs : ∀ i, Representation k W (X i)}
+    {σs : ∀ i, Representation k W (Y i)} (e : ∀ i, (ρs i).Equiv (σs i)) {n m : ι → ℕ}
+    (h : ∀ i, n i = m i) : (piTprodExteriorPower ρs n).Equiv (piTprodExteriorPower σs m) :=
+  Equiv.piTprodCongr fun i ↦ ((e i).exteriorPower (n i)).trans (exteriorPowerCongr _ (h i))
+
+/-- The tensor product of exterior powers over `Fin (t + 1)` splits off the last factor. -/
+noncomputable def piTprodExteriorPowerSuccEquiv {t : ℕ} {X : Fin (t + 1) → Type*}
+    [∀ i, AddCommGroup (X i)] [∀ i, Module k (X i)] (ρs : ∀ i, Representation k W (X i))
+    (n : Fin (t + 1) → ℕ) :
+    (piTprodExteriorPower ρs n).Equiv ((piTprodExteriorPower (fun i : Fin t ↦ ρs i.castSucc)
+      (fun i ↦ n i.castSucc)).tprod ((ρs (Fin.last t)).exteriorPower (n (Fin.last t)))) :=
+  piTprodSuccEquiv _
+
+end PiTprodExteriorPower
+
+/-- A tuple `(n₁, …, n_{t+1})` with sum `r` is a last entry `j ≤ r` and a tuple `(n₁, …, n_t)` with
+sum `r - j`. -/
+def sigmaSnocEquiv (t r : ℕ) :
+    (Σ j : Fin (r + 1), {n : Fin t → ℕ // ∑ i, n i = r - j}) ≃
+      {n : Fin (t + 1) → ℕ // ∑ i, n i = r} where
+  toFun x := ⟨Fin.snoc (α := fun _ ↦ ℕ) x.2.1 (x.1 : ℕ), by
+    rw [Fin.sum_univ_castSucc]
+    simp only [Fin.snoc_castSucc, Fin.snoc_last, x.2.2]
+    have := x.1.2
+    omega⟩
+  invFun n := ⟨⟨n.1 (Fin.last t), by
+      have := n.2
+      rw [Fin.sum_univ_castSucc] at this
+      omega⟩, ⟨Fin.init n.1, by
+      have := n.2
+      rw [Fin.sum_univ_castSucc] at this
+      simp only [Fin.init]
+      omega⟩⟩
+  left_inv x := by
+    refine Sigma.subtype_ext (Fin.ext ?_) ?_
+    · simp
+    · simp [Fin.init_snoc]
+  right_inv n := Subtype.ext (by simp [Fin.snoc_init_self])
+
+/-- **The exterior powers of a filtered representation.** Let `0 = F₀ ≤ F₁ ≤ ⋯ ≤ F_t = V` be a
+finite filtration of a finite-dimensional representation, with graded pieces
+`A_i = F_{i+1} / F_i`. Then `⋀^r V` has a finite filtration whose graded pieces are the tensor
+products `⨂ᵢ ⋀^{nᵢ} A_i`, one for each tuple `(n₁, …, n_t)` with `∑ nᵢ = r`.
+(blueprint: `lem-mg-filtered-exterior-power`) -/
+theorem hasGradedPieces_exteriorPower_of_monotone (t : ℕ) : ∀ {V : Type v} [AddCommGroup V]
+    [Module k V] [FiniteDimensional k V] (ρ : Representation k W V)
+    (F : Fin (t + 1) → Subrepresentation ρ) (_ : Monotone F) (_ : F 0 = ⊥)
+    (_ : F (Fin.last t) = ⊤) (r : ℕ),
+    HasGradedPieces (ρ.exteriorPower r) fun n : {n : Fin t → ℕ // ∑ i, n i = r} ↦
+      EquivTo (piTprodExteriorPower (fun i ↦ (F i.succ).subquotient (F i.castSucc)) n.1)
+:= by
+  induction t with
+  | zero =>
+    intro V _ _ _ ρ F _ h0 hl r
+    have hV : Subsingleton V := by
+      have htop : (⊤ : Subrepresentation ρ) = ⊥ := hl.symm.trans h0
+      refine ⟨fun x y ↦ ?_⟩
+      have hx : x ∈ (⊤ : Subrepresentation ρ) := Submodule.mem_top
+      have hy : y ∈ (⊤ : Subrepresentation ρ) := Submodule.mem_top
+      rw [htop] at hx hy
+      rw [(Submodule.mem_bot k).1 hx, (Submodule.mem_bot k).1 hy]
+    rcases r with _ | r
+    · let : Unique {n : Fin 0 → ℕ // ∑ i, n i = 0} :=
+        { default := ⟨Fin.elim0, rfl⟩, uniq := fun a ↦ Subtype.ext (funext fun i ↦ i.elim0) }
+      exact ((HasGradedPieces.single (isInvariant_equivTo _) ⟨exteriorPowerZeroEquiv ρ⟩).reindex
+        (Equiv.ofUnique Unit {n : Fin 0 → ℕ // ∑ i, n i = 0})).mono
+          fun n {_} {_} {_} τ ⟨f⟩ ↦ ⟨f.trans (piTprodIsEmptyEquiv
+            (fun i : Fin 0 ↦ ((F i.succ).subquotient (F i.castSucc)).exteriorPower (n.1 i))).symm⟩
+    · have : Subsingleton (⋀[k]^(r + 1) V) := by
+        rw [← Module.finrank_zero_iff (R := k), exteriorPower.finrank_eq,
+          Module.finrank_zero_of_subsingleton, Nat.choose_zero_succ]
+      have : IsEmpty {n : Fin 0 → ℕ // ∑ i, n i = r + 1} :=
+        ⟨fun n ↦ by simpa using n.2⟩
+      exact (HasGradedPieces.of_subsingleton (ρ := ρ.exteriorPower (r + 1))
+        (P := fun _ : PEmpty.{1} ↦ EquivTo (trivial k W k))).reindex
+          (Equiv.equivOfIsEmpty _ _) |>.mono
+          fun n ↦ isEmptyElim n
+  | succ t ih =>
+    intro V _ _ _ ρ F hF h0 hl r
+    -- the subrepresentation `A = F t` and the restriction of the filtration to it
+    let A := F (Fin.last t).castSucc
+    let F' : Fin (t + 1) → Subrepresentation A.toRepresentation :=
+      fun j ↦ Subrepresentation.comap A.subtype (F j.castSucc)
+    have hFA (j : Fin (t + 1)) : F j.castSucc ≤ A := hF (Fin.castSucc_le_castSucc_iff.2 j.le_last)
+    have hF' : Monotone F' := fun a b hab x hx ↦ hF (Fin.castSucc_le_castSucc_iff.2 hab) hx
+    have h0' : F' 0 = ⊥ := by
+      simp only [F', Fin.castSucc_zero, h0, Subrepresentation.comap_subtype_bot]
+    have hl' : F' (Fin.last t) = ⊤ := Subrepresentation.comap_subtype_self A
+    -- the graded pieces of `F'` and the last graded piece of `F`
+    let e' (i : Fin t) : ((F' i.succ).subquotient (F' i.castSucc)).Equiv
+        ((F i.castSucc.succ).subquotient (F i.castSucc.castSucc)) :=
+      Subrepresentation.subquotientComapSubtypeEquiv (hFA i.succ)
+    let eA : A.quotient.Equiv ((F (Fin.last (t + 1))).subquotient (F (Fin.last t).castSucc)) :=
+      (Subrepresentation.quotientEquivTopSubquotient A).trans
+        (Subrepresentation.subquotientCongr hl.symm rfl)
+    -- the piece of a tuple `snoc n' j`
+    let eP (j : ℕ) (n' : Fin t → ℕ) :
+        (piTprodExteriorPower (fun i ↦ (F i.succ).subquotient (F i.castSucc))
+          (Fin.snoc (α := fun _ ↦ ℕ) n' j)).Equiv
+        ((piTprodExteriorPower (fun i : Fin t ↦ (F' i.succ).subquotient (F' i.castSucc)) n').tprod
+          (A.quotient.exteriorPower j)) :=
+      (piTprodExteriorPowerSuccEquiv _ _).trans (Equiv.tprodCongr
+        (Equiv.piTprodExteriorPowerCongr (fun i ↦ (e' i).symm)
+          (fun i ↦ Fin.snoc_castSucc (α := fun _ ↦ ℕ) _ _ _))
+        ((eA.symm.exteriorPower _).trans
+          (exteriorPowerCongr _ (Fin.snoc_last (α := fun _ ↦ ℕ) _ _))))
+    have h1 := A.hasGradedPieces_exteriorPower r
+    have h2 := h1.trans
+      (R := fun (j : Fin (r + 1)) (n' : {n' : Fin t → ℕ // ∑ i, n' i = r - j}) ↦
+        EquivTo (piTprodExteriorPower
+          (fun i : Fin (t + 1) ↦ (F i.succ).subquotient (F i.castSucc))
+          (Fin.snoc (α := fun _ ↦ ℕ) n'.1 (j : ℕ))))
+      (fun _ _ ↦ isInvariant_equivTo _) fun j {_} {_} {_} τ hτ ↦
+        (((ih A.toRepresentation F' hF' h0' hl' (r - j)).tprod_right
+          (A.quotient.exteriorPower j)).of_equiv (fun _ ↦ isInvariant_equivTo _) hτ.equiv.symm).mono
+          fun n' {_} {_} {_} τ' hg ↦ hg.trans (eP j n'.1).symm
+    exact (h2.reindex (sigmaSnocEquiv t r)).mono fun n {_} {_} {_} τ hτ ↦ hτ.trans
+      (Equiv.piTprodExteriorPowerCongr (fun _ ↦ .refl _)
+        (congrFun (Fin.snoc_init_self (α := fun _ ↦ ℕ) n.1)))
+
+/-- The piece `⨂ᵢ ⋀^{nᵢ} Xᵢ` is nonzero exactly when `nᵢ ≤ dim Xᵢ` for every `i`. -/
+theorem nontrivial_piTensorProduct_exteriorPower_iff {ι : Type*} [Finite ι] {X : ι → Type*}
+    [∀ i, AddCommGroup (X i)] [∀ i, Module k (X i)] [∀ i, FiniteDimensional k (X i)]
+    (n : ι → ℕ) :
+    Nontrivial (⨂[k] i, ⋀[k]^(n i) (X i)) ↔ ∀ i, n i ≤ Module.finrank k (X i) := by
+  classical
+  have := Fintype.ofFinite ι
+  let B := Basis.piTensorProduct fun i ↦ Module.finBasis k (⋀[k]^(n i) (X i))
+  have : Module.Finite k (⨂[k] i, ⋀[k]^(n i) (X i)) := Module.Finite.of_basis B
+  rw [← Module.finrank_pos_iff (R := k), Module.finrank_eq_card_basis B, Fintype.card_pi]
+  simp only [Fintype.card_fin, exteriorPower.finrank_eq, Nat.pos_iff_ne_zero,
+    Finset.prod_ne_zero_iff, Finset.mem_univ, true_implies, ne_eq, Nat.choose_eq_zero_iff, not_lt]
+
+namespace CompositionSeries
+
+variable {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
+  {ρ : Representation k W V}
+
+/-- **The exterior power of a filtered representation.** Let `0 = V₀ ⋖ ⋯ ⋖ V_t = V` be a
+composition series, with factors `A_i`, and `r ≥ 0`. Then `⋀^r V` has a finite filtration whose
+graded pieces, in a suitable order, are the representations `⨂ᵢ ⋀^{nᵢ} A_i`, each tuple
+`(n₁, …, n_t)` with `∑ nᵢ = r` occurring exactly once; by
+`nontrivial_piTensorProduct_exteriorPower_iff` the nonzero ones are those with `nᵢ ≤ dim A_i`.
+(blueprint: `lem-mg-filtered-exterior-power`) -/
+theorem hasGradedPieces_exteriorPower (s : ρ.CompositionSeries) (r : ℕ) :
+    HasGradedPieces (ρ.exteriorPower r) fun n : {n : Fin s.length → ℕ // ∑ i, n i = r} ↦
+      EquivTo (piTprodExteriorPower (fun i ↦ s.factor i) n.1) :=
+  hasGradedPieces_exteriorPower_of_monotone s.length ρ s.series
+    (Fin.monotone_iff_le_succ.2 fun i ↦ (s.covBy i).le) s.head_eq s.last_eq r
+
+end CompositionSeries
 
 end Representation

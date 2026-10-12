@@ -21,7 +21,7 @@ the sums of `r` entries of `L` (blueprint `cor-mg-det-weight-exterior`).
 The proof is by induction on the rank. For irreducible `ρ` it is the semisimple case
 `Representation.exists_multiset_le_and_detWeight_eq_sum_of_exteriorPower`. Otherwise `ρ` has a
 proper nonzero subrepresentation `A`, and `⋀^r ρ` has a filtration with steps
-`⋀^j A ⊗ ⋀^{r - j} (ρ / A)` (`Representation.nonempty_equiv_exteriorPowerFiltration`); the
+`⋀^j A ⊗ ⋀^{r - j} (ρ / A)` (`Subrepresentation.exteriorPowerGradedEquiv`); the
 two-factor tensor rule (`Representation.exists_detWeight_eq_add_of_subquotient_tprod` and its
 converse) and the additivity `L(ρ) = L(A) + L(ρ / A)`
 (`AlgebraicGeometry.WeilGroup.rankDetWeightMultiset_eq_add`) reduce the claim to `A` and `ρ / A`.
@@ -121,7 +121,7 @@ theorem hasFiniteGeometricDet_subquotient_tprod (hρ : W.IsLisse l ρ) (A : Subr
     (U S : Subrepresentation ((A.toRepresentation.exteriorPower j).tprod
       (A.quotient.exteriorPower (r - j)))) :
     (S.subquotient U).HasFiniteGeometricDet W.deg := by
-  obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
+  let e := A.exteriorPowerGradedEquiv r (Nat.add_sub_cancel' hjr)
   exact W.finite_range_of_continuous _ (IsLisse.continuous_det_apply
     ((IsLisse.of_equiv e.symm ((hρ.exteriorPower r).subquotient _ _)).subquotient S U))
 
@@ -147,13 +147,14 @@ theorem exists_le_rankDetWeightMultiset_of_subrepresentation (hρ : W.IsLisse l 
       W.detWeight l (S.subquotient U) ι = T.sum := by
   obtain ⟨j, hj, U', S', ⟨e₁⟩⟩ :=
     Subrepresentation.exists_subquotient_equiv_of_antitone_chain
-      (Representation.exteriorPowerFiltration_eq_bot A (Nat.lt_succ_self r))
-      (fun j _ ↦ Representation.exteriorPowerFiltration_antitone A r (Nat.le_succ j))
-      ((Representation.exteriorPowerFiltration_zero A r).symm ▸ le_top) hirr
+      (A.exteriorPowerFiltration_eq_bot r (Nat.lt_succ_self r))
+      (fun j _ ↦ A.exteriorPowerFiltration_succ_le r j)
+      ((A.exteriorPowerFiltration_zero r).symm ▸ le_top) hirr
   have hjr : j ≤ r := Nat.lt_succ_iff.1 hj
-  obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
-  obtain ⟨U'', S'', ⟨e₂⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_equiv e U' S'
-  have f := e₂.trans e₁
+  obtain ⟨U'', S'', -, ⟨e₂⟩⟩ :=
+    Representation.ConstituentsLE.of_equiv (A.exteriorPowerGradedEquiv r
+      (Nat.add_sub_cancel' hjr)).symm U' S' (e₁.isIrreducible_iff.2 hirr)
+  have f := e₂.symm.trans e₁
   obtain ⟨UV, SV, UE, SE, -, -, hV, hE, -, -, heq⟩ :=
     Representation.exists_detWeight_eq_add_of_subquotient_tprod
       (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift _ _
@@ -209,15 +210,13 @@ theorem exists_detWeight_eq_sum_of_subrepresentation (hρ : W.IsLisse l ρ)
       (hasFiniteGeometricDet_and_detWeight_eq ι
         (((hρ.quotient A).exteriorPower _).subquotient SE UE)).1
       fun U S _ ↦ hasFiniteGeometricDet_subquotient_tprod hρ A hjr U S
-  obtain ⟨e⟩ := Representation.nonempty_equiv_exteriorPowerFiltration A hjr
-  obtain ⟨U', S', ⟨e₂⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_equiv e.symm U'' S''
-  obtain ⟨U, S, ⟨e₃⟩⟩ := Subrepresentation.exists_subquotient_equiv_of_subquotient U' S'
-  let f := e₃.trans e₂
-  refine ⟨U, S, f.isIrreducible_iff.2 hQ'', ?_⟩
+  obtain ⟨U, S, hirr, ⟨f⟩⟩ := Representation.ConstituentsLE.tprod_exteriorPower A
+    (Nat.add_sub_cancel' hjr) U'' S'' hQ''
+  refine ⟨U, S, hirr, ?_⟩
   have h := (detWeight_eq_detWeight_weightCharacter ι _).trans (heq.trans (congrArg₂ (· + ·)
     (detWeight_eq_detWeight_weightCharacter ι _).symm
     (detWeight_eq_detWeight_weightCharacter ι _).symm))
-  exact (detWeight_of_equiv ι f).symm.trans (h.trans ((congrArg₂ (· + ·) hs₁ hs₂).trans
+  exact (detWeight_of_equiv ι f.symm).symm.trans (h.trans ((congrArg₂ (· + ·) hs₁ hs₂).trans
     ((Multiset.sum_add _ _).symm.trans (congrArg Multiset.sum (add_tsub_cancel_of_le hT₁T)))))
 
 /-- The constituents of an exterior power of a nonzero lisse Weil sheaf, by induction on the rank:
