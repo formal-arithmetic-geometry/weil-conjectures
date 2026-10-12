@@ -7,9 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.MapIntoHenselianColimit
+import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 
 /-! # Lifting compatible residue embeddings through strict henselizations
 
@@ -20,10 +19,76 @@ Source: Stacks Project, Tags 04GU and 04HX.
 
 universe u
 set_option autoImplicit false
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 open Scheme Etale
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem lift_indEtale_residue
+    (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
+    [Algebra R A] [Algebra R B] [IsLocalRing A] [HenselianLocalRing B]
+    [Algebra.IndEtale R A]
+    (r : IsLocalRing.ResidueField A →+* IsLocalRing.ResidueField B)
+    (hr : (IsLocalRing.residue B).comp (algebraMap R B) =
+      r.comp ((IsLocalRing.residue A).comp (algebraMap R A))) :
+    ∃ f : A →ₐ[R] B,
+      (IsLocalRing.residue B).comp f.toRingHom = r.comp (IsLocalRing.residue A) := by
+  classical
+  let q := IsLocalRing.maximalIdeal A
+  let m := IsLocalRing.maximalIdeal B
+  let p := q.comap (algebraMap R A)
+  let eA : IsLocalRing.ResidueField A ≃+* q.ResidueField :=
+    RingEquiv.ofBijective (algebraMap (A ⧸ q) q.ResidueField)
+      q.bijective_algebraMap_quotient_residueField
+  let eB : IsLocalRing.ResidueField B ≃+* m.ResidueField :=
+    RingEquiv.ofBijective (algebraMap (B ⧸ m) m.ResidueField)
+      m.bijective_algebraMap_quotient_residueField
+  have heA (x : A) : eA (IsLocalRing.residue A x) = algebraMap A q.ResidueField x := rfl
+  have heB (x : B) : eB (IsLocalRing.residue B x) = algebraMap B m.ResidueField x := rfl
+  have hm : p = m.comap (algebraMap R B) := by
+    ext x
+    change algebraMap R A x ∈ q ↔ algebraMap R B x ∈ m
+    rw [← IsLocalRing.residue_eq_zero_iff (R := A),
+      ← IsLocalRing.residue_eq_zero_iff (R := B)]
+    have h := DFunLike.congr_fun hr x
+    change IsLocalRing.residue B (algebraMap R B x) =
+      r (IsLocalRing.residue A (algebraMap R A x)) at h
+    rw [h]
+    constructor
+    · intro hz
+      rw [hz, map_zero]
+    · intro hz
+      exact r.injective (hz.trans (map_zero r).symm)
+  let τ := eB.toRingHom.comp (r.comp eA.symm.toRingHom)
+  have hτ : τ.comp (Ideal.ResidueField.map p q (algebraMap R A) rfl) =
+      Ideal.ResidueField.map p m (algebraMap R B) hm := by
+    apply Ideal.ResidueField.ringHom_ext
+    ext x
+    simp only [RingHom.comp_apply, Ideal.ResidueField.map_algebraMap]
+    change eB (r (eA.symm (algebraMap A q.ResidueField (algebraMap R A x)))) =
+      algebraMap B m.ResidueField (algebraMap R B x)
+    rw [← heA, eA.symm_apply_apply, ← heB]
+    exact congrArg eB (DFunLike.congr_fun hr x).symm
+  obtain ⟨I, hI, hfiltered, P, hEtale⟩ :=
+    Algebra.IndEtale.exists_colimitPresentation (R := R) (S := A)
+  let : SmallCategory I := hI
+  let : IsFiltered I := hfiltered
+  have : HasColimit P.diag := ⟨⟨P.cocone, P.isColimit⟩⟩
+  obtain ⟨f, ⟨hf, hred⟩, -⟩ := Algebra.map_into_henselian_colimit R B A I P.diag
+    ⟨(colimit.isColimit P.diag).coconePointUniqueUpToIso P.isColimit⟩
+    hEtale q p rfl hm τ hτ
+  refine ⟨f, ?_⟩
+  ext x
+  change IsLocalRing.residue B (f x) = r (IsLocalRing.residue A x)
+  apply eB.injective
+  rw [heB]
+  have h := DFunLike.congr_fun hred (algebraMap A q.ResidueField x)
+  rw [Ideal.ResidueField.map_algebraMap] at h
+  change algebraMap B m.ResidueField (f x) =
+    eB (r (eA.symm (algebraMap A q.ResidueField x))) at h
+  simpa only [← heA, eA.symm_apply_apply] using h
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Lift compatible geometric residue embeddings to a ring map of strict henselizations.
 Source: Stacks Project, Tags 04GU and 04HX.
 (blueprint: lem-weil-pbc-compatible-strict-henselization-residue-lift).
@@ -68,6 +133,85 @@ theorem Etale.exists_compatibleStrictHenselizationResidueLift
       (IsLocalRing.residue B).comp φ = r.comp (IsLocalRing.residue A) ∧
       Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫
           strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =
-        eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g := by sorry
+        eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g := by
+  classical
+  let jA := eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)
+  let jB := eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g
+  obtain ⟨R, i, hi, hσ, -⟩ :=
+    exists_affine_mem_range_and_range_subset
+      (show σ (IsLocalRing.closedPoint k) ∈ (⊤ : S.Opens) from trivial)
+  have := hi
+  have hclosedA : jA (IsLocalRing.closedPoint A) = σ (IsLocalRing.closedPoint k) := by
+    have h := congrArg (fun f : Spec (.of k) ⟶ S ↦ f (IsLocalRing.closedPoint k)) hρA
+    change jA (PrimeSpectrum.comap (IsLocalRing.residue A)
+      (ρA (IsLocalRing.closedPoint k))) = σ (IsLocalRing.closedPoint k) at h
+    rwa [IsLocalRing.PrimeSpectrum.comap_residue] at h
+  have hclosedB : jB (IsLocalRing.closedPoint B) = σ (IsLocalRing.closedPoint k) := by
+    have h := congrArg (fun f : Spec (.of k') ⟶ S ↦ f (IsLocalRing.closedPoint k'))
+      ((congrArg (fun f ↦ f ≫ g) hρB).trans hι.symm)
+    change jB (PrimeSpectrum.comap (IsLocalRing.residue B)
+      (ρB (IsLocalRing.closedPoint k'))) = σ (ι (IsLocalRing.closedPoint k')) at h
+    rwa [IsLocalRing.PrimeSpectrum.comap_residue,
+      Subsingleton.elim (ι (IsLocalRing.closedPoint k')) (IsLocalRing.closedPoint k)] at h
+  have hA : Set.range jA ⊆ Set.range i := by
+    rintro _ ⟨x, rfl⟩
+    exact ((IsLocalRing.specializes_closedPoint x).map jA.continuous).mem_open
+      i.opensRange.isOpen (by simpa only [hclosedA] using hσ)
+  have hB : Set.range jB ⊆ Set.range i := by
+    rintro _ ⟨x, rfl⟩
+    exact ((IsLocalRing.specializes_closedPoint x).map jB.continuous).mem_open
+      i.opensRange.isOpen (by simpa only [hclosedB] using hσ)
+  let a : R →+* A := (Spec.preimage (IsOpenImmersion.lift i jA hA)).hom
+  let b : R →+* B := (Spec.preimage (IsOpenImmersion.lift i jB hB)).hom
+  have ha : Spec.map (CommRingCat.ofHom a) ≫ i = jA := by
+    rw [show CommRingCat.ofHom a = Spec.preimage (IsOpenImmersion.lift i jA hA) from rfl,
+      Spec.map_preimage]
+    exact IsOpenImmersion.lift_fac i jA hA
+  have hb : Spec.map (CommRingCat.ofHom b) ≫ i = jB := by
+    rw [show CommRingCat.ofHom b = Spec.preimage (IsOpenImmersion.lift i jB hB) from rfl,
+      Spec.map_preimage]
+    exact IsOpenImmersion.lift_fac i jB hB
+  let : Algebra R A := a.toAlgebra
+  let : Algebra R B := b.toAlgebra
+  have hs : (ν ≫ ι ≫ σ) (IsLocalRing.closedPoint Ω) ∈ Set.range i := by
+    simpa only [Scheme.Hom.comp_apply,
+      Subsingleton.elim (ι (ν (IsLocalRing.closedPoint Ω))) (IsLocalRing.closedPoint k)]
+      using hσ
+  have : Algebra.IndEtale R A :=
+    strictHenselization_indEtale_of_affine_chart (ν ≫ ι ≫ σ) R i hs eA a ha
+  have hspec :
+      ρB ≫ Spec.map (CommRingCat.ofHom ((IsLocalRing.residue B).comp b)) =
+      ρB ≫ Spec.map (CommRingCat.ofHom
+        (r.comp ((IsLocalRing.residue A).comp a))) := by
+    apply (cancel_mono i).mp
+    simp only [CommRingCat.ofHom_comp, Spec.map_comp, Category.assoc]
+    calc
+      ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫
+          Spec.map (CommRingCat.ofHom b) ≫ i = τ ≫ g := by
+        rw [hb]
+        simpa only [jB, Category.assoc] using congrArg (fun f ↦ f ≫ g) hρB
+      _ = ι ≫ σ := hι.symm
+      _ = ρB ≫ Spec.map (CommRingCat.ofHom r) ≫
+          Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫
+          Spec.map (CommRingCat.ofHom a) ≫ i := by
+        rw [ha, ← Category.assoc ρB, hres]
+        simpa only [jA, Category.assoc] using congrArg (fun f ↦ ι ≫ f) hρA.symm
+  have hbase : (IsLocalRing.residue B).comp b =
+      r.comp ((IsLocalRing.residue A).comp a) := by
+    let t := (Spec.preimage ρB).hom
+    have ht : Spec.map (CommRingCat.ofHom t) = ρB := Spec.map_preimage ρB
+    rw [← ht, ← Spec.map_comp, ← Spec.map_comp] at hspec
+    have h := congrArg CommRingCat.Hom.hom (Spec.map_injective hspec)
+    ext x
+    exact t.injective (DFunLike.congr_fun h x)
+  obtain ⟨f, hf⟩ := lift_indEtale_residue R A B r hbase
+  refine ⟨f.toRingHom, hf, ?_⟩
+  change Spec.map (CommRingCat.ofHom f.toRingHom) ≫ jA = jB
+  rw [← ha, ← Category.assoc, ← Spec.map_comp]
+  have hfbase : CommRingCat.ofHom a ≫ CommRingCat.ofHom f.toRingHom =
+      CommRingCat.ofHom b := by
+    ext x
+    exact f.commutes x
+  rw [hfbase, hb]
 
 end AlgebraicGeometry

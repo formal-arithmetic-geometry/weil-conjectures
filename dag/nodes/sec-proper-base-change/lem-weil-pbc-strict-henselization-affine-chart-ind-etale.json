@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+ "kind": "statement",
+ "title": "Strict henselization is ind-etale over an affine chart",
+ "statement": "Let S be a scheme, s:Spec Ω→S an algebraically closed geometric point, i:Spec R→S an affine open immersion containing the image of the closed point of s, A a commutative ring, e:Spec A≅S_(s), and a:R→A a ring map whose spectrum composed with i equals e followed by the strict henselization structural map. Equip A with the algebra structure induced by a. Then A is ind-etale over R.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04HX, proof, using Tags 04GW and 04GP"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Restrict affine pointed etale neighbourhoods to those factoring through the affine chart. The restriction is cofinal and its coordinate rings identify with the etale residue-triples diagram.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The strict henselization triples theorem gives a filtered diagram of etale R-algebras and a ring colimit. Transport the colimit across the affine scheme equivalence and the chosen isomorphism e; the structural-map equality ha identifies the resulting R-algebra structure with a.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04HX proof and Tag 04GW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ind-etale strict henselization affine chart",
+   "results": "service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable",
+   "digest": "none"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebra.IndEtale colimit presentation",
+   "results": "existing IndEtale API used",
+   "date": "2026-10-13",
+   "verdict": "used",
+   "digest": "none"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization indEtale colimit",
+   "results": "no exact theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match",
+   "digest": "none"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueLift",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-compatible-strict-henselization-residue-lift",
+   "place": "Step 1 and Step 2",
+   "via": [
+    "04HX",
+    "04GW"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationAffineChartIndEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_indEtale_of_affine_chart",
+  "statement": "theorem strictHenselization_indEtale_of_affine_chart\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]\n    (s : Spec (.of Ω) ⟶ S) (R : CommRingCat.{u})\n    (i : Spec R ⟶ S) [IsOpenImmersion i]\n    (hs : s (IsLocalRing.closedPoint Ω) ∈ Set.range i)\n    (e : Spec (.of A) ≅ strictHenselizationScheme s)\n    (a : R →+* A)\n    (ha : Spec.map (CommRingCat.ofHom a) ≫ i =\n      e.hom ≫ strictHenselizationStructuralMap s) :\n    letI : Algebra R A := a.toAlgebra\n    Algebra.IndEtale R A",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c865b",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T173839-L-3299386",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c865b",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T173839-L-3299386",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean modules, DAG nodes, change record, report, and direct importer against the stage-3 brief; all compile cleanly."
+ }
+}
