@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomialCore
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueSeparability
 import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-! # Separable polynomials for compatible strict-henselization residues
@@ -67,6 +69,12 @@ theorem Etale.compatibleStrictHenselization_residue_separable_polynomial
       ∃ p : Polynomial (IsLocalRing.ResidueField B),
         p ≠ 0 ∧ p.Separable ∧
           p.eval₂ (Spec.preimage ρB).hom ((Spec.preimage (ι ≫ ρA)).hom x) = 0 := by
-  sorry
+  let algebra : Algebra (IsLocalRing.ResidueField B) k' :=
+    (Spec.preimage ρB).hom.toAlgebra
+  have hs := Etale.compatibleStrictHenselization_residue_isSeparable
+    σ τ ι hι ν eA eB ρA ρB hρA hρB
+  intro x
+  exact @exists_separable_polynomial_of_isSeparable _ _ _ _ algebra
+    (Spec.preimage ρB).hom rfl _ (hs x)
 
 end AlgebraicGeometry

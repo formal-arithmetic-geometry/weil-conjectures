@@ -1,0 +1,106 @@
+{
+ "id": "lem-weil-pbc-compatible-strict-henselization-residue-separability",
+ "kind": "statement",
+ "title": "Separability of compatible strict-henselization residue elements",
+ "statement": "Under the hypotheses of lem-weil-pbc-compatible-strict-henselization-residue-polynomial and an algebra structure on the second residue field over k′, every image of a first residue-field element in k′ is separable over the second residue field.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX and 095T, residue-field comparison"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-compatible-strict-henselization-residue-polynomial"
+ ],
+ "proof": [
+  {
+   "text": "Transport the pointed-neighbourhood and residue-triple colimit descriptions through eA and eB; the resulting residue extension is separable, and compatibility hι, hρA and hρB identifies the displayed image with that extension element.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX and 095T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "separability residue field strict henselization",
+   "results": "No exact theorem; only lower-level residue and separability APIs",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSeparable residue field algebra",
+   "results": "No exact strict-henselization comparison theorem",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization residue separable",
+   "results": "No existing declaration in lean/Sheaf",
+   "date": "2026-10-13",
+   "verdict": "new geometric split"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization residue separability",
+   "results": "Service unavailable; geometric split remains open",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomial",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-compatible-strict-henselization-residue-polynomial"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueSeparability",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResidueSeparability.lean",
+  "declaration": "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_isSeparable",
+  "statement": "theorem Etale.compatibleStrictHenselization_residue_isSeparable\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]\n    [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    [Algebra (IsLocalRing.ResidueField B) k'] :\n    ∀ x : IsLocalRing.ResidueField A,\n      IsSeparable (IsLocalRing.ResidueField B)\n        ((Spec.preimage (ι ≫ ρA)).hom x)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T173837-L-3298830",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T173837-L-3298830",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

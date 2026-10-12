@@ -1,0 +1,98 @@
+{
+ "id": "lem-weil-pbc-compatible-strict-henselization-residue-polynomial-core",
+ "kind": "statement",
+ "title": "Minimal polynomial of a separable element",
+ "statement": "For fields K and L with an algebra structure, a ring homomorphism f:K→L equal to the algebra map, and a separable element y of L over K, the minimal polynomial of y is nonzero, separable, and evaluates to zero at y through f.",
+ "source": {
+  "document": "Mathlib.FieldTheory.Separable",
+  "place": "IsSeparable and minpoly.aeval"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use IsSeparable.isIntegral and minpoly.ne_zero; IsSeparable unfolds to separability of the minimal polynomial; minpoly.aeval gives the evaluation equation after rewriting the algebra map as f.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib.FieldTheory.Separable",
+  "place": "minimal polynomial API"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSeparable.isIntegral, minpoly.ne_zero, minpoly.aeval",
+   "results": "Used exact declarations in Mathlib.",
+   "date": "2026-10-13",
+   "verdict": "used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal polynomial separable element nonzero evaluation",
+   "results": "minpoly.ne_zero, minpoly.aeval, IsSeparable.isIntegral",
+   "date": "2026-10-13",
+   "verdict": "used"
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly.ne_zero IsSeparable",
+   "results": "Mathlib minimal polynomial API",
+   "date": "2026-10-13",
+   "verdict": "used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "separable minimal polynomial eval₂",
+   "results": "No exact combined theorem; assembled from minpoly API",
+   "date": "2026-10-13",
+   "verdict": "used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "closed",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomial",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-compatible-strict-henselization-residue-polynomial"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResiduePolynomialCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResiduePolynomialCore.lean",
+  "declaration": "exists_separable_polynomial_of_isSeparable",
+  "statement": "theorem exists_separable_polynomial_of_isSeparable\n    {K L : Type u} [Field K] [Field L] [Algebra K L]\n    (f : K →+* L) (hf : algebraMap K L = f) (y : L)\n    (hy : IsSeparable K y) :\n    ∃ p : Polynomial K, p ≠ 0 ∧ p.Separable ∧ p.eval₂ f y = 0",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T173837-L-3298830",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T173837-L-3298830",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
