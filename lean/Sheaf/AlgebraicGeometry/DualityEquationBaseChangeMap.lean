@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-!
+REPAIR: Construct dualityEquationBaseChangeMap with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+
 # Canonical base-change map for a right adjoint
 
 Source: literature/stacks-project/duality.tex, Tag 0AA8 (Lemma 48.6.2),

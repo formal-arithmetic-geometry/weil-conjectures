@@ -16,7 +16,9 @@ import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
 
-/-! # Descent of morphisms between perfect complexes
+/-!
+REPAIR: Construct perfectDescentComparison with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+ # Descent of morphisms between perfect complexes
 
 Source: Stacks Project, Derived Categories of Schemes, Lemma 36.29.2, Tag 09RE,
 used in Lemma 36.29.3, Tag 09RF (blueprint: lem-pc-perfect-descend-morphisms).

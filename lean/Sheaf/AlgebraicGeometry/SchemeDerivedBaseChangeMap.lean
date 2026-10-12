@@ -9,7 +9,9 @@ public import Sheaf.AlgebraicGeometry.DerivedAdjoint
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
-/-! # The derived base-change morphism of O-modules
+/-!
+REPAIR: Construct schemeDerivedBaseChangeMap with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+ # The derived base-change morphism of O-modules
 
 Source: Stacks Project, Cohomology, Remark 08HY; equivalently the unit construction
 of Lemma 02N7 (blueprint: def-pc-derived-base-change-map).

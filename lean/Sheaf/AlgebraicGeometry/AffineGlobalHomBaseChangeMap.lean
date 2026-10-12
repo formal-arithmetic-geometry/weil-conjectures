@@ -17,7 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
-/-! # The affine global derived Hom base-change comparison
+/-!
+REPAIR: Construct affineDerivedExtensionAdjunction, canonicalPullbackAdjunction with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+ # The affine global derived Hom base-change comparison
 Source: Stacks Project, perfect.tex, Tag 0AA7 (blueprint:
 def-pc-affine-global-hom-base-change-map).
 -/

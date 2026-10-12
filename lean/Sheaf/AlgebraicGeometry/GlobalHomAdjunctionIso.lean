@@ -15,7 +15,9 @@ import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
 import Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 
-/-! # Canonical global Hom adjunction
+/-!
+REPAIR: Construct schemeHomPullbackAdjunction, schemeHomTensorPullbackIso with fixed canonical data; follow coord/hollow-definitions.md (class 2), claim/adapt users and record the definition change.
+ # Canonical global Hom adjunction
 Source: Stacks Project, duality.tex, Tag 0B6I (lemma-iso-global-hom).
 (blueprint: lem-pc-global-hom-adjunction).
 -/
