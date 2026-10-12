@@ -11,14 +11,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.EtaleStandardCoverCech
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleAffineTensorCechVanishing
+import Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation
 
 /-!
 # Affine quasi-coherent acyclicity with lifted coefficients
@@ -57,6 +51,23 @@ theorem etale_affine_qcoherent_ulift (X : Scheme.{u}) [IsAffine X]
     Subsingleton (Sheaf.H
       ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
         (Scheme.Modules.etaleTensorSectionsSheaf F)) q) := by
-  sorry
+  classical
+  let G := (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
+    (Scheme.Modules.etaleTensorSectionsSheaf F)
+  obtain ⟨hB, hcofinal⟩ := Scheme.finiteAffineEtaleCechCover_basis X
+  have hvan := Scheme.isZero_rightDerived_etale_of_cech_vanishing X
+    {U | IsAffine U.left} (Scheme.finiteAffineEtaleCechCover X) G
+    (fun _ _ _ _ hf ↦ hf.2.2.2) hB hcofinal
+    (fun U I V f hf p hp ↦
+      Scheme.isZero_etaleTensorSectionsSheaf_ulift_cech X F U I V f hf p hp)
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hq)
+  let T : X.Etale := Scheme.Etale.mk (𝟙 X)
+  have hT : CategoryTheory.Limits.IsTerminal T := by
+    exact CategoryTheory.MorphismProperty.Over.mkIdTerminal _ _
+  have hz := hvan T (by change IsAffine X; infer_instance) (n + 1) (Nat.zero_lt_succ n)
+  obtain ⟨e⟩ := Sheaf.cohomology_nonempty_addEquiv_rightDerived_evaluation_succ
+    X.smallEtaleTopology T hT G n
+  let := AddCommGrpCat.isZero_iff_subsingleton.mp hz
+  exact Function.Injective.subsingleton e.injective
 
 end AlgebraicGeometry.Etale
