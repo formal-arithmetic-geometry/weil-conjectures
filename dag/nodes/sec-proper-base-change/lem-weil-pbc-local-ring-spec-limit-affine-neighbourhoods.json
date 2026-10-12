@@ -35,7 +35,7 @@
  ],
  "proof": [
   {
-   "text": "*Clause (1).* Let $U\\subseteq X$ be open with $x\\in U$. Since the affine opens of $X$ form a basis of the topology [lem-weil-pbc-affine-opens-basis], there is an open $W$ with $x\\in W\\subseteq U$ whose open subscheme is affine, i.e. $W\\in N_x$. With $U=X$ this gives $N_x\\ne\\emptyset$; with $U=W\\cap W'$ for $W,W'\\in N_x$ (open, containing $x$) it gives $W''\\in N_x$ with $W''\\subseteq W\\cap W'$, so $N_x$ is directed. For $W'\\subseteq W$ in $N_x$ the inclusion $j_{W'W}$ of the open subscheme $(W',\\mathcal O_X|_{W'})$ into $(W,\\mathcal O_X|_W)$ is the inclusion on spaces and the identity $\\mathcal O_X|_{W'}=(\\mathcal O_X|_W)|_{W'}$ on sheaves, an open immersion [def-weil-open-immersion]; hence $j_{WW}=\\mathrm{id}_W$ and $j_{W'W}\\circ j_{W''W'}=j_{W''W}$ for $W''\\subseteq W'\\subseteq W$ (both sides are the inclusion of the same open subscheme), so $(W,j_{W'W})_{W\\in N_x}$ is an inverse system of schemes over $N_x$.",
+   "text": "Use Mathlib exists_isAffineOpen_mem_and_subset to find an affine neighbourhood inside any open containing x. Apply it to the whole space and intersections for nonemptiness and directedness. Mathlib homOfLE_rfl and homOfLE_homOfLE prove the identity and composition laws.",
    "uses": [
     "lem-weil-pbc-affine-opens-basis",
     "def-weil-open-immersion"
@@ -43,61 +43,61 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'W runs over the affine open neighbourhoods of x in X'"
+    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W where W runs over the affine open neighbourhoods'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
    }
   },
   {
-   "text": "*Clause (2).* Every $W\\in N_x$ is an affine scheme, hence quasi-compact and quasi-separated [lem-weil-pbc-affine-scheme-qcqs]. For $W'\\subseteq W$ in $N_x$, $j_{W'W}:W'\\to W$ is a morphism between affine schemes, hence an affine morphism [lem-weil-pbc-morphism-affine-schemes-affine].",
+   "text": "Each affine neighbourhood carries IsAffine; the Mathlib instances give CompactSpace, QuasiSeparatedSpace, and IsAffineHom for its inclusion into another affine neighbourhood. Inclusions are open immersions.",
    "uses": [
     "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-morphism-affine-schemes-affine"
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-open-immersion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42) and its proof (line 52-56); the system of affine neighbourhoods of Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564"
+    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W where W runs over the affine open neighbourhoods'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
    }
   },
   {
-   "text": "*The morphisms $g_{x,U}$ (first part of clause (3)).* Let $U\\ni x$ be open. By [lem-weil-pbc-spec-local-ring-canonical-morphism] (1) the image of $g_x$ is the set of generalizations of $x$, which lies in every open containing $x$, so $g_x(\\operatorname{Spec}\\mathcal O_{X,x})\\subseteq U$. By [lem-weil-pbc-morphism-factors-through-open-subscheme] there is a unique morphism $g_{x,U}:\\operatorname{Spec}\\mathcal O_{X,x}\\to U$ with $j_U\\circ g_{x,U}=g_x$. For $W'\\subseteq W$ in $N_x$ we have $j_W\\circ(j_{W'W}\\circ g_{x,W'})=j_{W'}\\circ g_{x,W'}=g_x$ (step 1: $j_W\\circ j_{W'W}=j_{W'}$, both being the inclusion of $W'$ in $X$), so the uniqueness just used gives $j_{W'W}\\circ g_{x,W'}=g_{x,W}$: $(\\operatorname{Spec}\\mathcal O_{X,x},(g_{x,W})_{W\\in N_x})$ is a cone over the inverse system of clause (1).",
+   "text": "For every U containing x, use Mathlib Opens.fromSpecStalkOfMem and fromSpecStalkOfMem_ι. Cancel the monomorphism U.ι to prove uniqueness. Cancel W.ι and use homOfLE_ι to prove compatibility with inclusions. This uses no unfinished canonical-morphism theorem.",
    "uses": [
-    "lem-weil-pbc-spec-local-ring-canonical-morphism",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564 (the morphisms Spec(O_{X,x}) -> W implicit in 'Spec(O_{X,x}) = lim W')"
+    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W where W runs over the affine open neighbourhoods'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
    }
   },
   {
-   "text": "*$\\mathcal O_{X,x}$ is the colimit of the rings $\\mathcal O_X(W)$, $W\\in N_x$.* Put $R_W=\\mathcal O_X(W)$, let $\\rho_{W'W}:R_W\\to R_{W'}$ be the restriction for $W'\\subseteq W$ in $N_x$ and $\\gamma_W:R_W\\to\\mathcal O_{X,x}$, $r\\mapsto r_x$, the germ map [def-weil-pbc-module-stalk], a ring homomorphism with $\\gamma_{W'}\\circ\\rho_{W'W}=\\gamma_W$ (the germ of a restriction is the germ). So $(R_W,\\rho)$ is a directed system of commutative rings over the directed set $N_x$ (step 1) and $(\\mathcal O_{X,x},\\gamma_W)$ a cocone on it. It is a colimit in the category of commutative rings [def-weil-pbc-category-colimit]: let $(M,\\mu_W)$ be a cocone of ring homomorphisms. Apply [lem-weil-pbc-stalk-germs-on-basis] to the presheaf of rings $\\mathcal O_X$ and the basis $\\mathcal B$ of affine opens [lem-weil-pbc-affine-opens-basis]; its members containing $x$ are the elements of $N_x$. By (i) every element of $\\mathcal O_{X,x}$ is $\\gamma_W(s)$ for some $W\\in N_x$, $s\\in R_W$; define $u(\\gamma_W(s))=\\mu_W(s)$. This is well defined: if $\\gamma_W(s)=\\gamma_{W'}(t)$, (ii) gives $W''\\in N_x$, $W''\\subseteq W\\cap W'$, with $\\rho_{W''W}(s)=\\rho_{W''W'}(t)$, so $\\mu_W(s)=\\mu_{W''}(\\rho_{W''W}(s))=\\mu_{W''}(\\rho_{W''W'}(t))=\\mu_{W'}(t)$. It is a ring homomorphism: two elements $\\gamma_W(s),\\gamma_{W'}(t)$ are $\\gamma_{W''}(\\rho_{W''W}(s)),\\gamma_{W''}(\\rho_{W''W'}(t))$ for a $W''\\in N_x$ below $W$ and $W'$ (step 1), and $\\gamma_{W''}$, $\\mu_{W''}$ are ring homomorphisms; $u(1)=\\mu_W(1)=1$. By construction $u\\circ\\gamma_W=\\mu_W$, and $u$ is the only such map since the $\\gamma_W(s)$ exhaust $\\mathcal O_{X,x}$.",
+   "text": "Let N be the subtype of affine open neighbourhoods of x. Its inclusion i into OpenNhds x is monotone. N is nonempty and directed in the reverse order, and every open neighbourhood contains an element of N by the affine basis. Functor.final_of_exists_of_isFiltered proves i.op.Final (parallel arrows in the poset are equal). Whisker the standard stalk colimit cocone by i.op and apply Functor.Final.isColimitWhiskerEquiv. Thus the stalk is the colimit of the rings of sections over N without an elementwise germ construction.",
    "uses": [
-    "def-weil-pbc-module-stalk",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-stalk-germs-on-basis",
-    "lem-weil-pbc-affine-opens-basis"
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X'"
+    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W where W runs over the affine open neighbourhoods'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
    }
   },
   {
-   "text": "*Spec of the colimit.* By step 4 and [lem-weil-pbc-spec-colimit-limit] (applied to the directed system $(R_W,\\rho_{W'W})$ over $N_x$ with colimit $\\mathcal O_{X,x}$ and coprojections $\\gamma_W$), $\\operatorname{Spec}\\mathcal O_{X,x}$ with the morphisms $\\operatorname{Spec}\\gamma_W:\\operatorname{Spec}\\mathcal O_{X,x}\\to\\operatorname{Spec}R_W$ is a limit of the inverse system $(\\operatorname{Spec}R_W,\\operatorname{Spec}\\rho_{W'W})_{W\\in N_x}$ in the category of schemes [def-weil-affine-spectrum].",
+   "text": "Form the scheme diagram R.rightOp composed with Scheme.Spec. Convert the ring cocone to an opposite limit cone using isLimitConeRightOpOfCocone, then apply isLimitOfPreserves Scheme.Spec. This is the spectrum of the stalk and its projections are Spec.map of the germs.",
    "uses": [
     "lem-weil-pbc-spec-colimit-limit",
-    "def-weil-affine-spectrum"
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-category-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42) and its proof (line 52-56); Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'Hence Spec(O_{X,x}) = lim W'"
+    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W where W runs over the affine open neighbourhoods'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
    }
   },
   {
-   "text": "*From $\\operatorname{Spec}R_W$ to $W$.* For $W\\in N_x$ let $\\iota_W:\\operatorname{Spec}R_W\\to X$ be the canonical open immersion with image $W$ of [lem-weil-pbc-affine-open-spec-points], the inverse of the isomorphism $W\\cong\\operatorname{Spec}R_W$ followed by $j_W$; so $\\iota_W=j_W\\circ\\kappa_W$ with $\\kappa_W:\\operatorname{Spec}R_W\\to W$ an isomorphism of schemes. For $W'\\subseteq W$ in $N_x$, [lem-weil-pbc-affine-open-inclusion-spec-map] gives $\\iota_W\\circ\\operatorname{Spec}\\rho_{W'W}=\\iota_{W'}$, i.e. $j_W\\circ\\kappa_W\\circ\\operatorname{Spec}\\rho_{W'W}=j_{W'}\\circ\\kappa_{W'}=j_W\\circ j_{W'W}\\circ\\kappa_{W'}$, and since the open immersion $j_W$ is a monomorphism [lem-weil-pbc-open-immersion-monomorphism], $\\kappa_W\\circ\\operatorname{Spec}\\rho_{W'W}=j_{W'W}\\circ\\kappa_{W'}$. Thus the $\\kappa_W$ form an isomorphism of inverse systems $(\\operatorname{Spec}R_W,\\operatorname{Spec}\\rho)\\to(W,j)$ over $N_x$. Composing with it carries limit cones to limit cones: for a scheme $T$, families $(t_W:T\\to W)$ compatible with the $j$ correspond bijectively to families $(\\kappa_W^{-1}\\circ t_W)$ compatible with the $\\operatorname{Spec}\\rho$, by the displayed identity. Hence, by step 5, $\\operatorname{Spec}\\mathcal O_{X,x}$ with the morphisms $\\kappa_W\\circ\\operatorname{Spec}\\gamma_W$ is a limit of $(W,j_{W'W})_{W\\in N_x}$.",
+   "text": "For a compatible family tW, construct a cone on the spectrum diagram with components tW W followed by W.toSpecΓ. Mathlib Opens.toSpecΓ_SpecMap_presheaf_map and the given compatibility prove naturality. Mathlib Opens.fromSpecStalkOfMem_toSpecΓ identifies each spectrum projection with fromSpecStalkOfMem followed by toSpecΓ. For affine W, toSpecΓ is the hom of its canonical isoSpec. Apply IsLimit.lift and cancel this isomorphism to prove the requested factorization equations. Apply IsLimit.uniq, after composing the factorization equations with toSpecΓ, to prove uniqueness.",
    "uses": [
     "lem-weil-pbc-affine-open-spec-points",
     "lem-weil-pbc-affine-open-inclusion-spec-map",
@@ -106,20 +106,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'Spec(O_{X,x}) = lim W' (W identified with Spec O_W(W))"
-   }
-  },
-  {
-   "text": "*The projections are the $g_{x,W}$; conclusion.* Let $W\\in N_x$ and let $\\mathfrak p\\subset R_W$ be the prime corresponding to $x$. By the description of the canonical morphism in [lem-weil-pbc-spec-local-ring-canonical-morphism] for the affine open $V=W\\cong\\operatorname{Spec}R_W$ (the identification being $\\iota_W$), $g_x=\\iota_W\\circ\\operatorname{Spec}(\\varphi)$, where $\\varphi:R_W\\to(R_W)_{\\mathfrak p}\\cong\\mathcal O_{X,x}$ is the localization map followed by the natural isomorphism $r/s\\mapsto r_xs_x^{-1}$ [lem-weil-pbc-affine-open-stalk-localization] (c); so $\\varphi(r)=r_x=\\gamma_W(r)$, i.e. $\\varphi=\\gamma_W$. Hence $g_x=j_W\\circ(\\kappa_W\\circ\\operatorname{Spec}\\gamma_W)$, and the uniqueness of step 3 gives $g_{x,W}=\\kappa_W\\circ\\operatorname{Spec}\\gamma_W$. By step 6, $(\\operatorname{Spec}\\mathcal O_{X,x},(g_{x,W})_{W\\in N_x})$ is a limit of $(W,j_{W'W})$, which, by the definition of a limit (dual of [def-weil-pbc-category-colimit]), is the property stated in clause (3): for compatible $t_W:T\\to W$ there is exactly one $t:T\\to\\operatorname{Spec}\\mathcal O_{X,x}$ with $g_{x,W}\\circ t=t_W$ for all $W\\in N_x$.",
-   "uses": [
-    "lem-weil-pbc-spec-local-ring-canonical-morphism",
-    "lem-weil-pbc-affine-open-stalk-localization",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564"
+    "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W where W runs over the affine open neighbourhoods'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42)"
    }
   }
  ],
@@ -128,22 +115,20 @@
   "def-weil-open-immersion",
   "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-morphism-affine-schemes-affine",
-  "lem-weil-pbc-spec-local-ring-canonical-morphism",
   "lem-weil-pbc-morphism-factors-through-open-subscheme",
-  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-open-immersion-monomorphism",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-stalk-germs-on-basis",
   "lem-weil-pbc-spec-colimit-limit",
   "def-weil-affine-spectrum",
   "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-affine-open-inclusion-spec-map",
-  "lem-weil-pbc-open-immersion-monomorphism",
-  "lem-weil-pbc-affine-open-stalk-localization"
+  "lem-weil-pbc-affine-open-inclusion-spec-map"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "R3",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma Tag 0GWT (lemma-morphism-glueing-near-closed-point, line 1530), proof, line 1561-1564: 'We have O_{X,x} = colim O_W(W) where W runs over the affine open neighbourhoods of x in X. Hence Spec(O_{X,x}) = lim W'; the limit of affine schemes is Lemma Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit, line 42) and its proof (line 52-56) (Spec of the colimit, by Schemes Lemma Tag 01I1). The cofinality, directedness, qcqs/affine-transition clauses and the identification of the projections with the factorizations g_{x,W} of the canonical morphism are not written in the source and were written by the agent from the cited nodes."
+  "place": "Tags 0GWT (affine neighbourhood colimit in the proof) and 01YW; Lean cofinality construction adapted from the fully proved WeilConjectures.AlgebraicGeometry.FunctionFieldLimit to an arbitrary point. Mathlib Stalk.lean supplies the canonical projections and their identifications."
  },
  "mathlib_searches": [
   {
@@ -257,5 +242,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-eb2d7",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T095922-L-323915",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, node, change record, report, and packet declarations match; delivered files compile cleanly with no remaining sorry or forbidden axioms."
  }
 }
