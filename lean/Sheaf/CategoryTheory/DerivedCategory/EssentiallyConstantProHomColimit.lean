@@ -55,6 +55,51 @@ theorem essentiallyConstantPro_hom_colimit
         Function.Bijective φ ∧
           ∀ (j : J) (f : D.obj j ⟶ Y),
             φ ((D.op ⋙ yoneda.obj Y).ιColimitType (Opposite.op j) f) = u.app j ≫ f := by
-  sorry
+  intro u hu Y
+  have : IsCofiltered J := h.1
+  obtain ⟨j₀, r, hr, hfac⟩ := hu
+  let F := D.op ⋙ yoneda.obj Y
+  let c : F.CoconeTypes := {
+    pt := X ⟶ Y
+    ι := fun j f => u.app (Opposite.unop j) ≫ f
+    ι_naturality := by
+      intro j j' a
+      funext f
+      dsimp [F]
+      simpa [Category.assoc] using (congrArg (fun z => z ≫ f) (u.naturality a.unop)).symm
+    }
+  let φ : F.ColimitType → (X ⟶ Y) := F.descColimitType c
+  refine ⟨φ, ?_, ?_⟩
+  · constructor
+    · intro x y hxy
+      obtain ⟨j, f, rfl⟩ := F.ιColimitType_jointly_surjective x
+      obtain ⟨k, g, rfl⟩ := F.ιColimitType_jointly_surjective y
+      obtain ⟨l, a, b, _⟩ :=
+        IsCofilteredOrEmpty.cone_objs (Opposite.unop j) (Opposite.unop k)
+      obtain ⟨m, q, s, hs⟩ := hfac l
+      apply F.ιColimitType_eq_of_map_eq_map f g (Opposite.op (s ≫ a))
+        (Opposite.op (s ≫ b))
+      dsimp [F]
+      simp only [Functor.map_comp]
+      simp only [Category.assoc, hs]
+      change u.app (Opposite.unop j) ≫ f = u.app (Opposite.unop k) ≫ g at hxy
+      calc
+        D.map q ≫ r ≫ u.app l ≫ D.map a ≫ f =
+            D.map q ≫ r ≫ (u.app l ≫ D.map a) ≫ f := by simp [Category.assoc]
+        _ = D.map q ≫ r ≫ u.app (Opposite.unop j) ≫ f := by
+          rw [show u.app l ≫ D.map a = u.app (Opposite.unop j) by
+            simpa using (u.naturality a).symm]
+        _ = D.map q ≫ r ≫ u.app (Opposite.unop k) ≫ g := by rw [hxy]
+        _ = D.map q ≫ r ≫ (u.app l ≫ D.map b) ≫ g := by
+          rw [show u.app (Opposite.unop k) = u.app l ≫ D.map b by
+            simpa using (u.naturality b)]
+        _ = D.map q ≫ r ≫ u.app l ≫ D.map b ≫ g := by simp [Category.assoc]
+    · intro t
+      exact ⟨F.ιColimitType (Opposite.op j₀) (r ≫ t), by
+        dsimp [φ, c]
+        rw [← Category.assoc, hr, Category.id_comp]
+      ⟩
+  · intro j f
+    rfl
 
 end CategoryTheory
