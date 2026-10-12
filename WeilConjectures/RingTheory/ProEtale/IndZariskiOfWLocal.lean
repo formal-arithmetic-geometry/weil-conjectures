@@ -93,6 +93,7 @@ lemma mem_componentsOver_iff {Z : Set (PrimeSpectrum A)} {q : PrimeSpectrum B} :
     Set.mem_preimage]
   exact ⟨fun ⟨c, ⟨h1, h2⟩, h3⟩ ↦ ⟨c, h1, h3, h2⟩, fun ⟨c, h1, h3, h2⟩ ↦ ⟨c, ⟨h1, h2⟩, h3⟩⟩
 
+omit [IsWLocalRing B] in
 lemma componentsOver_mono {Z Z' : Set (PrimeSpectrum A)} (h : Z ⊆ Z') :
     componentsOver A B Z ⊆ componentsOver A B Z' := by
   intro q hq
@@ -123,6 +124,7 @@ lemma isClosed_componentsOver_locClosedSubset (f : A) (I : Ideal A) :
   rw [this]
   exact (IsWLocalRing.isClosed_closedPoints_inter_basicOpen _).inter (isClosed_zeroLocus _)
 
+omit [IsWLocalRing B] in
 variable (B) in
 lemma iUnion_componentsOver_stratum (E : Finset A) :
     ⋃ i : Stratification.Index E, componentsOver A B (stratum i.left i.right) = Set.univ := by

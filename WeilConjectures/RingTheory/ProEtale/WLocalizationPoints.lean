@@ -202,6 +202,7 @@ theorem connectedComponent_eq_range {c : PrimeSpectrum B} (hc : IsClosed {c}) :
   rw [mem_range_comap_atPrime_iff, le_iff_specializes]
   rfl
 
+omit [Algebra.BijectiveOnStalks A B] in
 /-- If `Spec B → Spec A` maps the closed points of `Spec B` bijectively onto `Spec A`, the
 closed points of `Spec B` are homeomorphic to `Spec A` with its patch topology. -/
 theorem isHomeomorph_closedPoints_constructible
@@ -216,7 +217,8 @@ theorem isHomeomorph_closedPoints_constructible
         (fun c : closedPoints (PrimeSpectrum B) ↦ comap (algebraMap A B) c.1) := by
       rw [continuous_generateFrom_iff]
       rintro s (⟨hso, -⟩ | ⟨hscl, hsc⟩)
-      · exact hso.preimage ((PrimeSpectrum.continuous_comap (algebraMap A B)).comp continuous_subtype_val)
+      · exact hso.preimage
+          ((PrimeSpectrum.continuous_comap (algebraMap A B)).comp continuous_subtype_val)
       · obtain ⟨t, ht⟩ := isCompact_isOpen_iff.mp ⟨hsc, hscl.isOpen_compl⟩
         have hs : s = zeroLocus (t : Set A) := by rw [← compl_compl s, ← ht, compl_compl]
         subst hs
@@ -279,7 +281,8 @@ theorem Ideal.WLocalization.retained_spec {A : Type*} [CommRing A] (I : Ideal A)
     (hI : PrimeSpectrum.zeroLocus (I : Set A) ⊆ closedPoints (PrimeSpectrum A)) :
     Algebra.IndZariski A I.WLocalization ∧
       Function.Injective (pointPair A (B := I.WLocalization)) ∧
-      Set.range (pointPair A (B := I.WLocalization)) = {z | z.1 ∈ PrimeSpectrum.zeroLocus (I : Set A) ∧ z.2 ≤ z.1} ∧
+      Set.range (pointPair A (B := I.WLocalization)) =
+        {z | z.1 ∈ PrimeSpectrum.zeroLocus (I : Set A) ∧ z.2 ≤ z.1} ∧
       (∀ P : PrimeSpectrum I.WLocalization, Function.Bijective
         (Localization.localRingHom (P.asIdeal.comap (algebraMap A I.WLocalization)) P.asIdeal
           (algebraMap A I.WLocalization) rfl)) ∧
