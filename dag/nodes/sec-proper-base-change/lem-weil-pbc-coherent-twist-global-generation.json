@@ -32,99 +32,53 @@
  ],
  "proof": [
   {
-   "text": "*Notation; $X$ is quasi-compact and separated.* For $n\\ge0$ and $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$ let $X_s=\\{x:\\ s_x\\notin\\mathfrak m_x(\\mathcal L^{\\otimes n})_x\\}$ as in [def-weil-pbc-ample-invertible-module]. By condition (1) of that definition $X$ is quasi-compact, and by [lem-weil-pbc-ample-scheme-separated] $X$ is separated, i.e. separated over the affine scheme $\\operatorname{Spec}\\mathbf Z$. Hence $X$ satisfies the hypothesis 'quasi-compact, separated over an affine scheme' of [lem-pc-section-clearing-denominators], for every invertible module on $X$ and every global section of it. (In EGA a 'schéma' is separated by convention, so EGA II 4.5.3 builds this into the definition; with the Stacks definition it is Lemma 09MP.)",
+   "text": "Use the compactness clause of absolute ampleness and lem-weil-pbc-ample-scheme-separated. Reuse the proved lem-weil-pbc-ample-finite-common-power-cover to obtain m>0 and a finite affine cover by zero-locus complements of sections of L^m.",
    "uses": [
     "def-weil-pbc-ample-invertible-module",
     "lem-weil-pbc-ample-scheme-separated",
-    "lem-pc-section-clearing-denominators"
+    "lem-weil-pbc-ample-finite-common-power-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Definition 01PS and Lemma 09MP (lemma-ample-separated); EGA II 4.5.3 (X 'schéma quasi-compact')"
-   }
+   "elementary": false
   },
   {
-   "text": "*A finite affine covering by loci of sections of one tensor power.* By condition (2) of [def-weil-pbc-ample-invertible-module] every $x\\in X$ lies in an affine open $X_s$ with $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$, $n\\ge1$; these opens cover $X$, and by quasi-compactness finitely many do: $X=U_1\\cup\\dots\\cup U_r$ with $U_i=X_{f_i}$ affine, $f_i\\in\\Gamma(X,\\mathcal L^{\\otimes n_i})$, $n_i\\ge1$. Put $m=n_1n_2\\cdots n_r\\ge1$ and $g_i=f_i^{\\otimes m/n_i}\\in\\Gamma(X,\\mathcal L^{\\otimes m})$ (tensor powers of sections, using the canonical isomorphisms $\\mathcal L^{\\otimes a}\\otimes\\mathcal L^{\\otimes b}\\cong\\mathcal L^{\\otimes a+b}$ [def-pur-sheaf-tensor-product]). Then $X_{g_i}=X_{f_i}=U_i$: at a point $x$ choose a generator $e$ of the free rank-one $\\mathcal O_{X,x}$-module $(\\mathcal L^{\\otimes n_i})_x$ [def-sc-invertible-module] and write $(f_i)_x=ae$; then $(g_i)_x=a^{m/n_i}e^{\\otimes m/n_i}$ with $e^{\\otimes m/n_i}$ a generator of $(\\mathcal L^{\\otimes m})_x$, and $a^{k}\\notin\\mathfrak m_x$ iff $a\\notin\\mathfrak m_x$ because $\\mathfrak m_x$ is a prime ideal. So, as EGA says, replacing the $f_i$ by suitable powers does not change the $X_{f_i}$ and makes all degrees equal to one integer $m$.",
-   "uses": [
-    "def-weil-pbc-ample-invertible-module",
-    "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-    "place": "EGA II, proof of Proposition 4.5.5 ('Considérons un recouvrement fini de X par des X_{f_i} ... tous les n_i égaux à un même entier m'); Stacks Properties 01PT (X_{s^n}=X_s)"
-   }
-  },
-  {
-   "text": "*Local generators.* Let $\\mathcal G$ be any quasi-coherent $\\mathcal O_X$-module of finite type [pqf-def-coherent]. Both properties are local on $X$, so $\\mathcal G|_{U_i}$ is a quasi-coherent $\\mathcal O_{U_i}$-module of finite type on the affine scheme $U_i$. By [lem-weil-pbc-affine-finite-type-generating-sections] there are finitely many sections $h_{i1},\\dots,h_{ik_i}\\in\\mathcal G(U_i)$ that generate $\\mathcal G|_{U_i}$, i.e. $\\mathcal O_{U_i}^{\\oplus k_i}\\to\\mathcal G|_{U_i}$, $(a_j)\\mapsto\\sum_ja_jh_{ij}$, is surjective as a map of sheaves.",
-   "uses": [
-    "pqf-def-coherent",
-    "lem-weil-pbc-affine-finite-type-generating-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-    "place": "EGA II, proof of Proposition 4.5.5 ('Le faisceau F|X_{f_i}, étant de type fini ..., est engendré par un nombre fini de ses sections h_{ij} au-dessus de X_{f_i} (I, 1.3.13)')"
-   }
-  },
-  {
-   "text": "*Extending the generators after a twist.* The module $\\mathcal L^{\\otimes m}$ is invertible (locally $\\mathcal L\\cong\\mathcal O$, hence $\\mathcal L^{\\otimes m}\\cong\\mathcal O^{\\otimes m}=\\mathcal O$ locally [def-sc-invertible-module], [def-pur-sheaf-tensor-product]), and $U_i=X_{g_i}$ is the complement of the zero locus of $g_i$ (the points where the value $g_i(x)\\in(\\mathcal L^{\\otimes m})_x\\otimes\\kappa(x)$ is nonzero). Apply [lem-pc-section-clearing-denominators] (hypotheses checked in Step 1) to the invertible module $\\mathcal L^{\\otimes m}$, its section $g_i$, the quasi-coherent module $\\mathcal G$ and $t=h_{ij}\\in\\mathcal G(X_{g_i})$: there are $k_{ij}\\ge0$ and $u_{ij}\\in\\Gamma(X,\\mathcal G\\otimes\\mathcal L^{\\otimes mk_{ij}})$ with $u_{ij}|_{U_i}=h_{ij}\\otimes g_i^{k_{ij}}|_{U_i}$ (identifying $(\\mathcal L^{\\otimes m})^{\\otimes k}=\\mathcal L^{\\otimes mk}$). Let $k_0(\\mathcal G)=\\max_{i,j}k_{ij}$ (a finite maximum). For every $k\\ge k_0(\\mathcal G)$ put $u^{(k)}_{ij}=u_{ij}\\otimes g_i^{k-k_{ij}}\\in\\Gamma(X,\\mathcal G\\otimes\\mathcal L^{\\otimes mk})$; then $u^{(k)}_{ij}|_{U_i}=h_{ij}\\otimes g_i^{k}|_{U_i}$. (EGA: 'a fortiori les $h_{ij}\\otimes f_i^{\\otimes k}$ se prolongent ... pour tout $k\\ge k_0$'.)",
-   "uses": [
-    "lem-pc-section-clearing-denominators",
-    "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-    "place": "EGA II, proof of Proposition 4.5.5 ('il existe donc un entier k_0 tel que la section h_{ij}⊗f_i^{⊗k_0} se prolonge en une section de F(k_0 m) au-dessus de X (I, 9.3.1)'); Stacks Properties, Lemma 01PW (lemma-invert-s-sections)"
-   }
-  },
-  {
-   "text": "*Global generation of $\\mathcal G\\otimes\\mathcal L^{\\otimes mk}$ for $k\\ge k_0(\\mathcal G)$.* Fix $k\\ge k_0(\\mathcal G)$. Since $X_{g_i^{k}}=X_{g_i}=U_i$ (Step 2), [lem-weil-pbc-nonvanishing-section-trivializes] applied to the invertible module $\\mathcal L^{\\otimes mk}$ and its section $g_i^k$ shows that $\\mathcal O_{U_i}\\to\\mathcal L^{\\otimes mk}|_{U_i}$, $a\\mapsto a\\,g_i^k$, is an isomorphism; tensoring with $\\mathcal G|_{U_i}$ gives an isomorphism $\\mathcal G|_{U_i}\\to(\\mathcal G\\otimes\\mathcal L^{\\otimes mk})|_{U_i}$, $t\\mapsto t\\otimes g_i^k$, which sends $h_{ij}$ to $u^{(k)}_{ij}|_{U_i}$. An isomorphism carries a surjection $\\mathcal O_{U_i}^{\\oplus k_i}\\to\\mathcal G|_{U_i}$ to a surjection, so the $u^{(k)}_{ij}|_{U_i}$ ($j=1,\\dots,k_i$) generate $(\\mathcal G\\otimes\\mathcal L^{\\otimes mk})|_{U_i}$. Now let $\\sigma:\\bigoplus_{(i,j)}\\mathcal O_X\\to\\mathcal G\\otimes\\mathcal L^{\\otimes mk}$ be the map of [def-weil-pbc-generating-sections] for the finite family of all $u^{(k)}_{ij}$. For a section $t$ over an open $V$, on each $V\\cap U_i$ the section $t$ is locally of the form $\\sum_ja_ju^{(k)}_{ij}$ (the summands indexed by $i$ already suffice), and the $V\\cap U_i$ cover $V$; so $\\sigma$ is surjective as a map of sheaves, i.e. $\\mathcal G\\otimes\\mathcal L^{\\otimes mk}$ is generated by finitely many global sections, for every $k\\ge k_0(\\mathcal G)$.",
-   "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "def-weil-pbc-generating-sections",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-    "place": "EGA II, proof of Proposition 4.5.5 ('pour ces valeurs de k, F(km) est donc engendré par ses sections au-dessus de X')"
-   }
-  },
-  {
-   "text": "*All large twists of $\\mathcal F$.* Here $m$ and the covering depend only on $\\mathcal L$, not on $\\mathcal G$. For $p=0,1,\\dots,m-1$ the module $\\mathcal G_p=\\mathcal F\\otimes\\mathcal L^{\\otimes p}$ is quasi-coherent of finite type: on an open $W$ where $\\mathcal L|_W\\cong\\mathcal O_W$ [def-sc-invertible-module] one has $\\mathcal G_p|_W\\cong\\mathcal F|_W\\otimes\\mathcal O_W^{\\otimes p}\\cong\\mathcal F|_W$, and both properties are local [pqf-def-coherent]. By Steps 3–5 applied to $\\mathcal G=\\mathcal G_p$ there is $k_p=k_0(\\mathcal G_p)$ such that $\\mathcal G_p\\otimes\\mathcal L^{\\otimes mk}\\cong\\mathcal F\\otimes\\mathcal L^{\\otimes p+mk}$ is generated by finitely many global sections for all $k\\ge k_p$ (an isomorphism transports generating sections). Put $K=\\max_pk_p$ and $d_0=mK$. Every $d\\ge d_0$ is $d=mk+p$ with $0\\le p<m$; then $mk>d-m\\ge mK-m$, so $k\\ge K\\ge k_p$, and $\\mathcal F\\otimes\\mathcal L^{\\otimes d}$ is generated by finitely many global sections.",
+   "text": "For each p in Fin m, set G_p=F tensor L^p. Its quasi-coherence is the proved source isQuasicoherent_tensorObj in ProjectionFormula. Finite type is proved explicitly in the private finiteType_tensor_invertible helper: refine a finite local-generating cover of F by trivializing opens of L^p, restrict its generators using overMap, and transport them across the tensor-with-a-trivial-module isomorphism. Finiteness of each family is preserved. Tensor powers of L are invertible by the proved source instances.",
    "uses": [
     "def-sc-invertible-module",
     "pqf-def-coherent",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-weil-pbc-affine-section-cover-twist-generation with M=L^m, G=G_p, and the same finite cover for every p. Obtain natural bounds K_p and finite generating families of G_p tensor (L^m)^k for all k>=K_p.",
+   "uses": [
+    "lem-weil-pbc-affine-section-cover-twist-generation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put B=max_{p in Fin m} K_p and d0=mB in Z. For d in N with d>=d0, let p=d mod m and k=d/m. Nat.le_div_iff_mul_le gives k>=B, while Nat.mod_add_div gives p+mk=d. The associator, tensorPowMulIso and tensorPowAddIso identify (F tensor L^p) tensor (L^m)^k with F tensor L^d. Push the generating family forward along this isomorphism with GeneratingSections.ofEpi; its index type is unchanged and therefore remains finite.",
+   "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-pbc-generating-sections"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-    "place": "EGA II, proof of Proposition 4.5.5 ('Pour tout p tel que 0<p<m, F(p) est aussi de type fini ... car un tel n s'écrit n=km+p avec k≥k_p et 0≤p<m')"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ample-invertible-module",
   "lem-weil-pbc-ample-scheme-separated",
-  "lem-pc-section-clearing-denominators",
+  "lem-weil-pbc-ample-finite-common-power-cover",
   "def-sc-invertible-module",
-  "def-pur-sheaf-tensor-product",
   "pqf-def-coherent",
-  "lem-weil-pbc-affine-finite-type-generating-sections",
-  "lem-weil-pbc-nonvanishing-section-trivializes",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-affine-section-cover-twist-generation",
   "def-weil-pbc-generating-sections"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
-  "place": "EGA II, Proposition 4.5.5, proof that an ample L satisfies d) (p. 85); same route as Stacks Properties 01Q3 via 01PW"
+  "place": "Proposition 4.5.5, p. 85, last paragraph: common positive tensor degree, local-generator extension, then finitely many residue classes. Common cover reused from its proved node; fixed-cover extension split into its own node; locality of finite type and the final residue argument are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -204,5 +158,15 @@
   "group": "J1",
   "result": "pass",
   "note": "X:Scheme.{u}; [L.IsInvertible]+IsAmple resolves to Scheme.Modules.IsAmple (#check, 01PS absolute); F [IsQuasicoherent][IsFiniteType] = pqf-def-coherent clauses 1-2 (non-hollow: inferInstance fails); twist tensorObj F (L.tensorPow d) as H1 358cf2ff9; d0:ℤ, d:ℕ nonneg powers incl. L^0; finitely many global sections = GeneratingSections + σ.IsFiniteType (Finite σ.I), as landed AffineFiniteTypeGeneratingSections/TensorGloballyGenerated"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T225306-L-1803729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

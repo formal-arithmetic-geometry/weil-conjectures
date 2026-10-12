@@ -1,0 +1,172 @@
+{
+ "id": "lem-weil-pbc-affine-section-cover-twist-generation",
+ "kind": "statement",
+ "title": "Eventual finite generation from a fixed finite affine section cover",
+ "statement": "Let X be a compact separated scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme]. Let M be an invertible O_X-module [def-sc-invertible-module], and G a finite type quasi-coherent O_X-module [pqf-def-coherent]. Let I be a finite index type and s_i : O_X -> M global sections. Suppose the opens U_i = X minus the support of Z(s_i) [def-pc-zero-scheme] are affine and cover X. Then there is K in N such that for every k>=K, G tensor M^k [def-pur-sheaf-tensor-product] has a finite family of global generating sections [def-weil-pbc-generating-sections], equivalently an epimorphic evaluation map from a finite free sheaf. This is only the fixed-degree local-generator extension argument; no ampleness or residue-class assertion is assumed.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Proposition 4.5.5, p. 85, last proof paragraph, from the finite affine X_fi cover through generation of F(km); specialize the already common tensor degree to one. Clearing denominators is Stacks Properties Lemma 01PW."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "def-pc-zero-scheme",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-generating-sections"
+ ],
+ "proof": [
+  {
+   "text": "Put U_i = X minus the support of Z(s_i). Restrict G to these affine opens. Quasi-coherence and finite type restrict to opens: restrict the local finite free surjections. Apply lem-weil-pbc-affine-finite-type-generating-sections to U_i.toScheme to choose a finite family t_ij generating G|U_i. This is a choice inside a proposition, not a definition of data from a holed existence theorem.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "lem-weil-pbc-affine-finite-type-generating-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the terminal morphism X -> Spec Z. The separatedness and compactness assumptions satisfy lem-pc-section-clearing-denominators. For each local generator t_ij obtain a_ij >= 0 and a global section v_ij of G tensor M^a_ij restricting to t_ij tensor s_i^a_ij. Let K be the maximum of this finite family of exponents (K=0 if the family is empty).",
+   "uses": [
+    "lem-pc-section-clearing-denominators",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each k >= K multiply v_ij by s_i^(k-a_ij), using the associator and the tensor-power addition isomorphism, to obtain u_ij(k) in Gamma(X,G tensor M^k). Naturality of tensor restriction and the identity a_ij+(k-a_ij)=k show that u_ij(k)|U_i = t_ij tensor s_i^k. On U_i the section s_i generates M: the proved isFreeGenerator_app_one_of_le in the clearing-denominators module establishes this directly from the zero-locus convention. Its k-th tensor power is a free generator, including k=0.",
+   "uses": [
+    "lem-pc-section-clearing-denominators",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-zero-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensoring with this free generator identifies G|U_i with (G tensor M^k)|U_i and carries each t_ij to u_ij(k)|U_i. Hence the latter family generates on U_i. Take the finite union over i,j and form its evaluation map from the free sheaf. Its restriction to U_i contains the surjection from the i-th generating family, so it is locally surjective on every U_i. As these opens cover X it is locally surjective everywhere and thus epi, by lem-weil-pbc-locally-surjective-iff-stalks. This gives finite GeneratingSections for each k>=K. If X is empty the empty evaluation map is epi; if G=0 an empty family suffices. No positive lower bound on k is needed.",
+   "uses": [
+    "def-weil-pbc-generating-sections",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-affine-finite-type-generating-sections",
+  "lem-pc-section-clearing-denominators",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-zero-scheme",
+  "def-weil-pbc-generating-sections",
+  "lem-weil-pbc-locally-surjective-iff-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Proposition 4.5.5, p. 85, last proof paragraph, from the finite affine X_fi cover through generation of F(km); specialize the already common tensor degree to one. Clearing denominators is Stacks Properties Lemma 01PW."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On a compact separated scheme a finite affine cover by nonvanishing loci of sections of an invertible sheaf implies finite global generation of sufficiently large twists of finite type quasi-coherent sheaves",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite affine cover by nonvanishing loci of sections of a line bundle implies eventual finite global generation of tensor powers with a coherent sheaf",
+   "date": "2026-10-12",
+   "results": "8 hits: SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.localGeneratorsDataOfIsFiniteType, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, SheafOfModules.LocalGeneratorsData.IsFiniteType. None states the affine-section-cover twisting result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bample\\b|clearing.denominators|globally.generated",
+   "date": "2026-10-12",
+   "results": "0 hits: . None states the affine-section-cover twisting result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite generating sections of a quasi-coherent module after twisting using affine principal section opens",
+   "date": "2026-10-13",
+   "results": "Second reader: 8 hits, all local or global GeneratingSections and finite-type primitives. No fixed-cover eventual twisting theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFiniteType",
+   "date": "2026-10-13",
+   "results": "Second reader: IsFiniteType, exists_localGeneratorsData, IsFiniteType.mk and finite-presentation-to-finite-type instance. No tensor finite-type preservation or eventual global-generation theorem.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeneratingSections|tensorPow",
+   "date": "2026-10-13",
+   "results": "Second reader: 25 Mathlib hits, generating-family and tensor algebra primitives only. Separate rg on lean/ finds Serre A and ample-twist results over a field with finite presentation; those have stronger hypotheses and do not apply to an arbitrary compact separated scheme and a finite type module.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleTwistGlobalGeneration",
+  "date": "2026-10-13",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of the split (essential-surjectivity paragraphs); the fixed-common-degree local-generator extension in EGA II 4.5.5 used to algebraize finite covers.",
+   "via": [
+    "lem-weil-pbc-coherent-twist-global-generation",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSectionCoverTwistGeneration",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSectionCoverTwistGeneration.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_finite_generatingSections_tensorPow_of_affine_section_cover",
+  "statement": "theorem exists_finite_generatingSections_tensorPow_of_affine_section_cover\n    (X : Scheme.{u}) [CompactSpace X] [X.IsSeparated]\n    (M G : X.Modules) [M.IsInvertible] [G.IsQuasicoherent] [G.IsFiniteType]\n    {I : Type u} [Finite I] (s : I → (𝟙_ X.Modules ⟶ M))\n    (haff : ∀ i, IsAffineOpen (Hom.zeroLocus (s i)).support.compl)\n    (hcover : (⨆ i, (Hom.zeroLocus (s i)).support.compl) = ⊤) :\n    ∃ K : ℕ, ∀ k : ℕ, K ≤ k →\n      ∃ σ : (tensorObj G (M.tensorPow k)).GeneratingSections, σ.IsFiniteType",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T225306-L-1803729",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261012T225306-L-1803729",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
