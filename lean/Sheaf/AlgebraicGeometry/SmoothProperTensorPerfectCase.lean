@@ -17,6 +17,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseData
+import Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore
 
 /-! # Projection comparison for perfect complexes
 
@@ -97,7 +99,10 @@ theorem smoothProper_tensor_perfect_case
             ⟨((derivedPullback f).obj K.obj) ⊗ (c.obj ⟨𝟙_ _, hO⟩).obj,
               hTensor K (c.obj ⟨𝟙_ _, hO⟩)⟩ K)
             (ObjectProperty.homMk (pf.hom ≫
-              K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom))) := by
-  sorry
+              K.obj ◁ (adj.counit.app ⟨𝟙_ _, hO⟩).hom ≫ (ρ_ K.obj).hom)))  := by
+  obtain ⟨hRf, hO, hTensor, ⟨hm⟩, ⟨ha⟩⟩ :=
+    smoothProper_tensor_perfect_case_data f hTor
+  refine ⟨hRf, hO, hTensor, ⟨hm⟩, ⟨ha⟩, ?_⟩
+  exact smoothProper_tensor_perfect_case_core f hRf hO hTensor hm ha
 
 end AlgebraicGeometry

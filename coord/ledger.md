@@ -8808,3 +8808,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:39 L: merged deliver/S1/Sheaf.RingTheory.PopescuStandardNonzerodivisorAux (stage 3; reviewer PASS; first push; landing 20261012T173902-L-3305548 (interface); batch 20261012T173801; modules 2; new nodes 1)
 - 17:39 L: merged deliver/S3/Sheaf.Algebra.Homology.CyclePullbackCore (stage 3; reviewer PASS; first push; landing 20261012T173903-L-3305716 (interface); batch 20261012T173801; modules 4; new nodes 3)
 - 17:39 L: merged deliver/S3/Sheaf.Algebra.Homology.OpenCoverAdjunctionTriangle (stage 3; reviewer PASS; first push; landing 20261012T173903-L-3305888 (interface); batch 20261012T173801; modules 3; new nodes 2)
+- 17:39 L: merged deliver/T1/Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase (stage 3; reviewer PASS; first push; landing 20261012T173904-L-3306047 (interface); batch 20261012T173801; modules 3; new nodes 2)
