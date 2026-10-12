@@ -31,12 +31,11 @@
  ],
  "proof": [
   {
-   "text": "For a morphism $u:\\mathcal G\\to\\mathcal G'$ of $\\mathcal O_Y$-modules, [lem-pc-module-pullback-adjunction] gives the induced $g^{-1}\\mathcal O_Y$-module structure on $g^{-1}\\mathcal G$ [def-weil-pbc-topological-inverse-image] and the functorial map $\\mathrm{id}_{\\mathcal O_X}\\otimes g^{-1}u$ on the sheaf tensor product [def-pur-sheaf-tensor-product]. Its identity and composite laws make the displayed formula a functor $g^*:\\mathrm{Mod}(\\mathcal O_Y)\\to\\mathrm{Mod}(\\mathcal O_X)$ [def-weil-sheaf-of-modules-category]. The same theorem gives the sectionwise pushforward with its $\\mathcal O_Y(V)$-action restricted along $g^\\sharp_V$, which is the pushforward in Stacks 0095.",
+   "text": "For a module morphism u, use the canonical linear inverse-image map of [def-pc-topological-inverse-image-module], then sectionwise extension of scalars and module sheafification of [def-pur-sheaf-tensor-product]. Naturality is exactly SheafOfModules.changeOfRingsHom_naturality applied to inverseImageModuleMap. To prove tensorPullbackMap_id and tensorPullbackMap_comp, compare the presheaf morphisms sectionwise by PresheafOfModules.hom_ext. Unfold inverseImageModuleMap and homMk: the identity and composition laws of the abelian inverse-image functor and SheafOfModules.toSheaf give the corresponding section-map equalities. Functor.map_id and Functor.map_comp for extension of scalars and sheafification finish the two laws. This defines the displayed tensor formula as a functor on the module categories [def-weil-sheaf-of-modules-category]. The pushforward is the sectionwise one in Stacks 0095, with its action restricted along the structure-sheaf map; its tensor-formula adjunction remains the open second step.",
    "uses": [
-    "def-weil-pbc-topological-inverse-image",
+    "def-pc-topological-inverse-image-module",
     "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category",
-    "lem-pc-module-pullback-adjunction"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
@@ -69,7 +68,7 @@
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-topological-inverse-image",
+  "def-pc-topological-inverse-image-module",
   "def-pur-sheaf-tensor-product",
   "def-weil-sheaf-of-modules-category",
   "def-pc-scheme",
@@ -182,5 +181,15 @@
   "group": "H1",
   "result": "pass",
   "note": "schemes g:X->Y (Scheme.{w}); ring map g^-1 O_Y -> O_X = homEquiv.symm of g.c in the explicit sheafPullbackConstruction CommRingCat adjunction; M : Y.Modules (Zariski); g^-1 M = explicit Lan+sheafify abelian inverse image with 008X module structure (new node def-pc-topological-inverse-image-module, instances chosen from a named existence theorem whose restriction+unit semilinearity pin them uniquely); object = landed SheafOfModules.changeOfRings (reuse); maps = sheafified extendScalars.map of g^-1 a; functor, left adjoint to Scheme.Modules.pushforward, id/comp isos as the node states; combined compile clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-be725",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T011848-L-774058",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module, DAG proof route, report, and packet compile match the stated stage-3 requirements; no target or existing declaration signatures changed."
  }
 }

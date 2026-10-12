@@ -61,7 +61,9 @@ theorem tensorPullbackPresheafMap_naturality {M N : Y.Modules} (a : M ⟶ N)
       ((TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf M a).val.app U)) ≫
       (SheafOfModules.changeOfRingsPresheaf.{w, w, w} (tensorPullbackRingMap g)
         (TopCat.Sheaf.inverseImageModule g.base Y.sheaf N)).map i := by
-  sorry
+  exact SheafOfModules.changeOfRingsHom_naturality (tensorPullbackRingMap g)
+    (TopCat.Sheaf.inverseImageModule g.base Y.sheaf M)
+    (TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf M a) i
 
 /-- The tensor formula on morphisms, followed by module sheafification.
 Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
@@ -79,7 +81,29 @@ Proof: the abelian inverse-image functor preserves identities; its module map is
 same map with linearity supplied. Extension of scalars and sheafification preserve identities. -/
 theorem tensorPullbackMap_id (M : Y.Modules) :
     tensorPullbackMap g (𝟙 M) = 𝟙 (tensorPullbackObj g M) := by
-  sorry
+  let p :
+      SheafOfModules.changeOfRingsPresheaf.{w, w, w} (tensorPullbackRingMap g)
+        (TopCat.Sheaf.inverseImageModule g.base Y.sheaf M) ⟶
+      SheafOfModules.changeOfRingsPresheaf.{w, w, w} (tensorPullbackRingMap g)
+        (TopCat.Sheaf.inverseImageModule g.base Y.sheaf M) :=
+    { app := fun U ↦
+        (ModuleCat.extendScalars ((tensorPullbackRingMap g).hom.app U).hom).map
+          ((TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf M (𝟙 M)).val.app U)
+      naturality := tensorPullbackPresheafMap_naturality g (𝟙 M) }
+  have hp : p = 𝟙 _ := by
+    apply PresheafOfModules.hom_ext
+    intro U
+    have hi :
+        (TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf M (𝟙 M)).val.app U =
+          𝟙 _ := by
+      ext m
+      simp [TopCat.Sheaf.inverseImageModuleMap, PresheafOfModules.homMk]
+      rfl
+    change (ModuleCat.extendScalars _).map _ = 𝟙 _
+    rw [hi, CategoryTheory.Functor.map_id]
+  change (PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).map p = _
+  rw [hp, CategoryTheory.Functor.map_id]
+  rfl
 
 /-- Tensor pullback preserves composition. Source: Stacks, Tag 0095
 (blueprint: def-pc-module-pullback).
@@ -87,7 +111,21 @@ Proof: the abelian inverse-image functor preserves composition; its module map i
 same map with linearity supplied. Extension of scalars and sheafification preserve composition. -/
 theorem tensorPullbackMap_comp {M N P : Y.Modules} (a : M ⟶ N) (b : N ⟶ P) :
     tensorPullbackMap g (a ≫ b) = tensorPullbackMap g a ≫ tensorPullbackMap g b := by
-  sorry
+  unfold tensorPullbackMap
+  rw [← CategoryTheory.Functor.map_comp]
+  congr 1
+  apply PresheafOfModules.hom_ext
+  intro U
+  have hi :
+      (TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf M (a ≫ b)).val.app U =
+        (TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf M a).val.app U ≫
+          (TopCat.Sheaf.inverseImageModuleMap g.base Y.sheaf N b).val.app U := by
+    ext m
+    simp [TopCat.Sheaf.inverseImageModuleMap, PresheafOfModules.homMk]
+    rfl
+  change (ModuleCat.extendScalars _).map _ =
+    (ModuleCat.extendScalars _).map _ ≫ (ModuleCat.extendScalars _).map _
+  rw [hi, CategoryTheory.Functor.map_comp]
 
 /-- Pullback of modules along a scheme morphism, defined by the tensor formula.
 Source: Stacks, Tag 0095 (blueprint: def-pc-module-pullback). -/
