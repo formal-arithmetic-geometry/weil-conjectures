@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
-import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
-import Sheaf.AlgebraicGeometry.LisseGenericKernel
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+
+import Sheaf.AlgebraicGeometry.ConstructibleFiniteStalkTests
 
 /-!
 # Finite selection of geometric stalk tests
@@ -56,7 +55,35 @@ theorem exists_mono_biproduct_of_constructible_stalk_detection
       (v : (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj F)), v ≠ 0 →
         ∃ l : L, (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).map (φ l)) v ≠ 0) :
     ∃ L₀ : Finset L, Mono (biproduct.lift (fun l : L₀ => φ l.val)) := by
-  sorry
+  classical
+  obtain ⟨P, hfinite, htests⟩ := exists_finite_stalk_tests_of_constructible X F hF
+  let V (x : P) :=
+    (((pointSmallEtale (X.algClosurePoint x.val)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj F)
+  let (x : P) : Finite (V x) := hfinite x
+  let I := Σ x : P, {v : V x // v ≠ 0}
+  have hdetect : ∀ i : I, ∃ l : L,
+      (((pointSmallEtale (X.algClosurePoint i.1.val)).sheafFiber
+        (A := AddCommGrpCat.{u + 1})).map (φ l)) i.2.val ≠ 0 := by
+    intro i
+    exact hφ _ (X.algClosurePoint i.1.val) i.2.val i.2.property
+  choose index hindex using hdetect
+  let : Fintype I := Fintype.ofFinite I
+  let L₀ : Finset L := Finset.univ.image index
+  refine ⟨L₀, htests _ _ ?_⟩
+  intro x
+  apply (injective_iff_map_eq_zero _).mpr
+  intro v hv
+  by_contra hne
+  let i : I := ⟨x, ⟨v, hne⟩⟩
+  have hmem : index i ∈ L₀ := Finset.mem_image.mpr ⟨i, Finset.mem_univ i, rfl⟩
+  let l : L₀ := ⟨index i, hmem⟩
+  apply hindex i
+  change (((pointSmallEtale (X.algClosurePoint x.val)).sheafFiber
+    (A := AddCommGrpCat.{u + 1})).map (φ l.val)) v = 0
+  rw [← biproduct.lift_π (fun l : L₀ => φ l.val) l, Functor.map_comp,
+    ConcreteCategory.comp_apply, hv]
+  simp
 
 /-- In particular, it suffices that at every geometric point one member of the family
 is injective on the whole stalk. Source: smooth purity blueprint, `sk-prop-sf-cbc`,
@@ -78,6 +105,13 @@ theorem exists_mono_biproduct_of_constructible_stalk_injective
       ∃ l : L, Function.Injective
         (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).map (φ l))) :
     ∃ L₀ : Finset L, Mono (biproduct.lift (fun l : L₀ => φ l.val)) := by
-  sorry
+  apply exists_mono_biproduct_of_constructible_stalk_detection X F hF L G φ
+  intro Ω _ _ s v hv
+  obtain ⟨l, hl⟩ := hφ Ω s
+  refine ⟨l, ?_⟩
+  intro hzero
+  apply hv
+  apply hl
+  simpa using hzero
 
 end AlgebraicGeometry.Scheme

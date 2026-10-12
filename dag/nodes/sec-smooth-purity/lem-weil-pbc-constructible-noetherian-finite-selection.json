@@ -18,59 +18,37 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-irreducible-lisse-strata] to obtain a finite partition $X=\\coprod_i S_i$ into nonempty irreducible locally closed subschemes on which $F|_{S_i}$ is locally constant with finite geometric stalks. Choose a geometric generic point $\\bar\\eta_i$ of each stratum.",
+   "text": "Apply [lem-weil-pbc-constructible-finite-stalk-tests] to obtain a finite set P of points with finite source stalks and the property that injectivity at P implies a monomorphism out of F.",
    "uses": [
-    "lem-weil-pbc-irreducible-lisse-strata"
+    "lem-weil-pbc-constructible-finite-stalk-tests"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-irreducible-lisse-strata.md",
-    "place": "node statement"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $i$, the finite group $F_{\\bar\\eta_i}$ has finitely many nonzero elements. For every such element $0\\ne v$, the hypothesis supplies an index $\\lambda$ with $(\\phi_\\lambda)_{\\bar\\eta_i}(v)\\ne0$; choose one such index for each $v$ and call the resulting finite set $L_i$. The map $F|_{S_i}\\to\\bigoplus_{\\lambda\\in L_i}G_\\lambda|_{S_i}$ is injective at $\\bar\\eta_i$.",
+   "text": "Form the finite dependent sum of pairs (x,v) with x in P and v a nonzero element of F at the canonical algebraic-closure geometric point of x. For every pair the original stalk-detection hypothesis supplies an index; choose one. Let L_0 be the image of this choice function, a finite subset of L. This construction also works when the dependent sum is empty.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z6 (lemma-constructible-maps-into-constant), proof of (1), parenthetical partition alternative; same argument for (2)"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-weil-pbc-lisse-generic-kernel], this finite-sum map is a monomorphism on every $S_i$. Let $L_0=\\bigcup_iL_i$; it is finite. At a geometric point lying on $S_i$, projection from the $L_0$-sum to the $L_i$-sum shows that the stalk map $F_{\\bar x}\\to(\\bigoplus_{\\lambda\\in L_0}G_\\lambda)_{\\bar x}$ is injective.",
+   "text": "Let f be the biproduct lift to the L_0 summands. If a stalk element v at x in P has zero image under f and is nonzero, the selected index of (x,v) belongs to L_0. The identity f followed by that biproduct projection equals its component phi_l. Functoriality of the stalk functor and preservation of zero by abelian group homomorphisms then give phi_l(v)=0, contradicting the selection. Thus each tested stalk map of f has trivial kernel and is injective. The testing property of [lem-weil-pbc-constructible-finite-stalk-tests] makes f mono.",
    "uses": [
-    "lem-weil-pbc-lisse-generic-kernel"
+    "lem-weil-pbc-constructible-finite-stalk-tests"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z6 (lemma-constructible-maps-into-constant), proof of (1), parenthetical partition alternative; same argument for (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $K$ be the kernel of the resulting map. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] identifies $K_{\\bar x}$ with the kernel of the stalk map, hence every $K_{\\bar x}$ is zero. Thus the map $K\\to0$ is an isomorphism at every geometric stalk, and [lemma-weil-pbc-geometric-stalk-conservative] makes it an isomorphism; therefore $K=0$ and the finite-sum map is a monomorphism. The construction uses no finiteness or constructibility assumption on the $G_\\lambda$.",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09Z6 (lemma-constructible-maps-into-constant), proof of (1), parenthetical partition alternative; same argument for (2)"
-   }
+   "text": "For the stalk-injective corollary, choose an index whose map at a given geometric point is injective. A nonzero element cannot have zero image, since this map sends zero to zero and is injective. Apply the proved stalk-detection theorem.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-irreducible-lisse-strata",
-  "lem-weil-pbc-lisse-generic-kernel",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-weil-pbc-constructible-finite-stalk-tests"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09Z6 (lemma-constructible-maps-into-constant), proof of (1), parenthetical partition alternative; adapted to the arbitrary family of stalk-detecting maps"
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-constructible-noetherian-finite-selection.md",
+  "place": "Same finite lisse partition route, with the geometric testing portion split off; the finite dependent-sum selection and biproduct projection argument are proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -176,5 +154,15 @@
   "group": "G1",
   "result": "pass",
   "note": "X Scheme.{u} [IsNoetherian X]; F abelian etale sheaf, constructible = dep's IsConstructibleEtaleSheafOfSets of underlying set sheaf (dep defines constructibility only for set sheaves; IsConstructibleEtaleModuleSheaf needs finite Λ, not applicable); L : Type w arbitrary, G arbitrary, φ; geometric points Ω : Type u alg closed as in dep; ∀ nonzero v in sheafFiber stalk ∃ l with (φ l)_s v ≠ 0 (l depends on s,v); ∃ L₀ : Finset L, Mono biproduct.lift; in-particular corollary ∀ s ∃ l Injective; edge cases empty L/L₀, zero F"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T042420-L-1821627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
