@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequenceLemmas.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "place": "ShortComplex.ShortExact.δ and homology_exact₁/₂/₃; HomologicalComplex.HomologySequence.δ_naturality; InjectiveResolution.isoRightDerivedObj and its naturality; NatTrans.rightDerived_app_eq. Abstracts the section-complex argument of Stacks Cohomology Lemma 01EB (https://stacks.math.columbia.edu/tag/01EB)."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequenceLemmas.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "place": "ShortComplex.ShortExact.δ and homology_exact₁/₂/₃; HomologicalComplex.HomologySequence.δ_naturality; InjectiveResolution.isoRightDerivedObj and its naturality; NatTrans.rightDerived_app_eq. Abstracts the section-complex argument of Stacks Cohomology Lemma 01EB (https://stacks.math.columbia.edu/tag/01EB)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a sequence of additive functors exact on injective objects gives a natural long exact sequence of derived functors",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of additive functors into abelian groups short exact on injective objects has a natural long exact sequence of right derived functors natural under morphisms of squares",
+   "results": "Eight hits, principally Ext.mapExactFunctor and localizer Guitart-exactness; none supplies a sequence in the functor variable exact only on injectives. Read the local RightDerived and HomologySequence sources: they give the computation and complex-level sequence separately.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.rightDerived, Function.Exact",
+   "results": "unknown identifier NatTrans.rightDerived; zero hits",
+   "date": "2026-10-12",
+   "verdict": "query unavailable in index; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "rg rightDerived.*(ShortExact|square)|square.*derived|exact.on.injectives in Mathlib/CategoryTheory/Abelian; rg injectively.exact|exact.on.injectives in lean/Sheaf and lean/WeilConjectures",
+   "results": "RightDerived defines additive derived functors and computation/naturality, but no sequence from an injectively exact square. Object-variable rightDerived sequences in the source do not apply to a sequence of functors. No duplicate generic theorem found. Blueprint search derived functor exact sequence gave zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no direct match; existing complex LES and naturality are used as lower dependencies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ModuleMayerVietoris",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09MR Mayer-Vietoris paragraph, algebraic passage from the short exact sequence of section complexes to the functorial cohomology sequence, via the cited Cohomology Lemma 01EB; Short exact section-square sequence on a chosen injective resolution",
+   "via": [
+    "lem-sc-mayer-vietoris-ringed-space",
+    "lem-sc-mayer-vietoris-open-cover",
+    "lem-sc-invert-s-cohomology-mayer-vietoris-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sc-injectively-exact-square-resolution-short-exact",
+ "title": "Short exact section-square sequence on a chosen injective resolution",
+ "statement": "Let C be an abelian category with enough injectives [def-sp-abelian, def-sp-injective-resolutions]. Let S be a commutative square of four additive functors A,B,C,D from C to abelian groups [def-sp-left-exact-additive], with edges a:A->B, b:A->C, c:B->D, d:C->D and ac=bd. Assume the diagonal (a,b) is injective on every injective object, the sequence with maps (a,b) and c-d is exact on every injective object, and c-d is surjective on every injective object. For each F choose its canonical injective resolution F -> I^bullet. Form the three-term sequence of complexes A(I^bullet) -> (B x C)(I^bullet) -> D(I^bullet), with the indicated diagonal and difference termwise. This resolutionSequence is short exact in every degree, hence short exact as complexes. Define its transported boundary b_S(F,n):R^n D(F)->R^{n+1} A(F) by composing the resolution comparison from R^n D(F) to H^n(D(I^bullet)), the canonical complex connecting map [lem-weil-pbc-complex-ses-homology-long-exact], and the inverse resolution comparison to R^{n+1} A(F). All this data, including the short-exactness proof and the transported boundary definition, is implemented without sorry.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "proof": [
+  {
+   "text": "Construct the pointwise product of the two middle additive group-valued functors using actual Cartesian products of their underlying groups. The diagonal natural transformation is (f12,f13), and the difference natural transformation is f24-f34. Naturality of these transformations follows coordinatewise from naturality of the four square edges. Their composite is zero by the square commutation relation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose the canonical injective resolution of F [def-sp-injective-resolutions]. Apply the diagonal and difference termwise using NatTrans.mapHomologicalComplex, giving resolutionSequence S F. Evaluate at each n. The first and last groups are A(I^n) and D(I^n), and the middle group is literally B(I^n) x C(I^n), with the diagonal and difference as maps. Since I^n is injective, the three assumptions of the bundled square supply Function.Injective, Function.Exact, Function.Surjective. Convert these by AddCommGrpCat.mono_iff_injective, ShortComplex.ab_exact_iff_function_exact, and AddCommGrpCat.epi_iff_surjective to a short exact sequence of groups. HomologicalComplex.shortExact_iff_degreewise_shortExact gives short exactness of resolutionSequence; this entire proof is implemented and compiling.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquare",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RightDerived/InjectivelyExactSquare.lean",
+  "declaration": "CategoryTheory.InjectivelyExactSquare.resolutionSequence_shortExact",
+  "statement": "theorem resolutionSequence_shortExact (F : C) : (S.resolutionSequence F).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T070557-L-3480007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T070557-L-3480007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

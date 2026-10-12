@@ -1,0 +1,118 @@
+{
+ "kind": "statement",
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "source": {
+  "document": "Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequenceLemmas.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "place": "ShortComplex.ShortExact.δ and homology_exact₁/₂/₃; HomologicalComplex.HomologySequence.δ_naturality; InjectiveResolution.isoRightDerivedObj and its naturality; NatTrans.rightDerived_app_eq. Abstracts the section-complex argument of Stacks Cohomology Lemma 01EB (https://stacks.math.columbia.edu/tag/01EB)."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Algebra/Homology/HomologySequence.lean; Mathlib/Algebra/Homology/HomologySequenceLemmas.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+  "place": "ShortComplex.ShortExact.δ and homology_exact₁/₂/₃; HomologicalComplex.HomologySequence.δ_naturality; InjectiveResolution.isoRightDerivedObj and its naturality; NatTrans.rightDerived_app_eq. Abstracts the section-complex argument of Stacks Cohomology Lemma 01EB (https://stacks.math.columbia.edu/tag/01EB)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a sequence of additive functors exact on injective objects gives a natural long exact sequence of derived functors",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square of additive functors into abelian groups short exact on injective objects has a natural long exact sequence of right derived functors natural under morphisms of squares",
+   "results": "Eight hits, principally Ext.mapExactFunctor and localizer Guitart-exactness; none supplies a sequence in the functor variable exact only on injectives. Read the local RightDerived and HomologySequence sources: they give the computation and complex-level sequence separately.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.rightDerived, Function.Exact",
+   "results": "unknown identifier NatTrans.rightDerived; zero hits",
+   "date": "2026-10-12",
+   "verdict": "query unavailable in index; no mathematical verdict"
+  },
+  {
+   "tool": "grep",
+   "query": "rg rightDerived.*(ShortExact|square)|square.*derived|exact.on.injectives in Mathlib/CategoryTheory/Abelian; rg injectively.exact|exact.on.injectives in lean/Sheaf and lean/WeilConjectures",
+   "results": "RightDerived defines additive derived functors and computation/naturality, but no sequence from an injectively exact square. Object-variable rightDerived sequences in the source do not apply to a sequence of functors. No duplicate generic theorem found. Blueprint search derived functor exact sequence gave zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no direct match; existing complex LES and naturality are used as lower dependencies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ModuleMayerVietoris",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "09MR Mayer-Vietoris paragraph, algebraic passage from the short exact sequence of section complexes to the functorial cohomology sequence, via the cited Cohomology Lemma 01EB; Exactness of the explicit transported boundary of an injectively exact square",
+   "via": [
+    "lem-sc-mayer-vietoris-ringed-space",
+    "lem-sc-mayer-vietoris-open-cover",
+    "lem-sc-invert-s-cohomology-mayer-vietoris-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sc-injectively-exact-square-boundary-exact",
+ "title": "Exactness of the explicit transported boundary of an injectively exact square",
+ "statement": "Let C and an injectively exact square S of additive group-valued functors be as in [lem-sc-injectively-exact-square-resolution-short-exact]. Use the explicit transported boundary b_S(F,n) defined there, not an existentially chosen connecting map. For every F, the degree-zero derived diagonal R^0 A(F) -> R^0 B(F) x R^0 C(F) is injective. For every F and n>=0, the resulting sequence with derived diagonal, derived difference, and this b_S(F,n) is exact at the product R^n B(F) x R^n C(F), at R^n D(F), and at R^{n+1} A(F). There is no naturality assertion in this statement; it concerns the homological exactness of the fixed explicit maps.",
+ "stmt_deps": [
+  "lem-sc-injectively-exact-square-resolution-short-exact",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "For the explicitly defined resolutionSequence and transported boundary of [lem-sc-injectively-exact-square-resolution-short-exact], Use [lem-weil-pbc-complex-ses-homology-long-exact] to form the connecting map H^n(D(I^bullet)) -> H^{n+1}(A(I^bullet)). Transport through the injective-resolution comparisons of [lem-weil-pbc-derived-functor-map-via-lift]. Homology of the termwise binary product is the binary product of homologies: both cycles and boundaries split coordinatewise, so the quotient comparison and its inverse are induced by the two projections and the two inclusions. Under this comparison the first map is the pair of the derived a and b, and the second is derived c minus derived d, by additivity of homology. The three homology exactness positions therefore give the three Function.Exact assertions. In degree zero no incoming boundaries exist, so homology is the kernel of the outgoing differential. A termwise injective diagonal restricts to an injective map between these kernels; this gives the initial Function.Injective assertion.",
+   "uses": [
+    "lem-sc-injectively-exact-square-resolution-short-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-injectively-exact-square-resolution-short-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.RightDerived.InjectivelyExactSquareBoundaryExact",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/RightDerived/InjectivelyExactSquareBoundaryExact.lean",
+  "declaration": "CategoryTheory.InjectivelyExactSquare.boundary_exact",
+  "statement": "theorem boundary_exact (S : InjectivelyExactSquare.{u, v, w} C) :\n    (∀ (F : C),\n        Function.Injective (fun x : (S.X₁.rightDerived 0).obj F ↦\n          ((NatTrans.rightDerived S.f₁₂ 0).app F x,\n            (NatTrans.rightDerived S.f₁₃ 0).app F x))) ∧\n    (∀ (F : C) (n : ℕ),\n        Function.Exact\n          (fun x : (S.X₁.rightDerived n).obj F ↦\n            ((NatTrans.rightDerived S.f₁₂ n).app F x,\n              (NatTrans.rightDerived S.f₁₃ n).app F x))\n          (fun x : (S.X₂.rightDerived n).obj F × (S.X₃.rightDerived n).obj F ↦\n            (NatTrans.rightDerived S.f₂₄ n).app F x.1 -\n              (NatTrans.rightDerived S.f₃₄ n).app F x.2) ∧\n        Function.Exact\n          (fun x : (S.X₂.rightDerived n).obj F × (S.X₃.rightDerived n).obj F ↦\n            (NatTrans.rightDerived S.f₂₄ n).app F x.1 -\n              (NatTrans.rightDerived S.f₃₄ n).app F x.2)\n          (S.boundary F n) ∧\n        Function.Exact (S.boundary F n)\n          (fun x : (S.X₁.rightDerived (n + 1)).obj F ↦\n            ((NatTrans.rightDerived S.f₁₂ (n + 1)).app F x,\n              (NatTrans.rightDerived S.f₁₃ (n + 1)).app F x)))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T070557-L-3480007",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T070557-L-3480007",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
