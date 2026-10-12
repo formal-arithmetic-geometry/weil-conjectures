@@ -19,37 +19,34 @@
  ],
  "proof": [
   {
-   "text": "Take the abelian inverse image and its unit-compatible underlying-set comparison. Transport the module structure by applying abelian inverse image to every scalar endomorphism λ_r. Additivity and functoriality preserve addition, multiplication, identity and zero relations among these maps. Naturality of the unit and counit makes them commute with every scalar. The hom-set adjunction is natural in both variables, so a map is Λ-linear if and only if its adjoint is Λ-linear. This gives an adjunction on the transported module sheaves to the recorded sectionwise module direct image.",
+   "text": "Use the proved isIso_upperStar_forget_comparison to define the module-to-set inverse-image isomorphism as the adjoint transpose of the forgotten module unit. Its unit equation follows by apply_symm_apply of the set adjunction. Evaluate its inverse on the base change of U to define sectionEquiv.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-sc-etale-module-set-pullback-comparison",
     "def-weil-pbc-inverse-image",
     "def-weil-pbc-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "Identify the transported module inverse image with the recorded upperStar of ModuleCat by uniqueness of left adjoints, preserving the unit. Combine this with the abelian-to-set comparison. Evaluation at the base change of U gives e_(f,U); choose these for all f and U.",
+   "text": "Use upperStarComp_hom_app_unit_app from UpperLowerStar.Coherence and cancel the direct-image composition isomorphism to derive module_pre_comp_unit. The chosen set composition isomorphism satisfies set_comp_unit by clause (2) of etaleSetInverseImageCompositionUnits. Apply injectivity of the set adjunction hom equivalence and the two unit equations; naturality of the direct-image composition isomorphism gives forget_transition.",
    "uses": [
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
    ],
    "elementary": false
   },
   {
-   "text": "For a commuting triangle, direct-image composition before and after forgetting is restriction along the same pullback-pasting isomorphism. The composition inverse-image isomorphisms are their mates, so the unit equation and uniqueness of mates identify them after forgetting. Evaluate at U and use naturality to move the coefficient comparisons across the unit and the restriction map. The three remaining factors are exactly etaleSetSectionComparison. Equality transport along hk is shared by both formulas.",
+   "text": "Evaluate forget_transition at the base change of U and the inverse comparison image of s. Cancel the comparison isomorphism. Naturality of the module composition isomorphism and the inverse coefficient comparison along the pullback-pasting morphism gives the desired equality including restriction. Substitute k using hk; unfold the section formula and identify the chosen set composition by proof irrelevance.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
     "def-weil-pbc-sets-section-comparison"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Proposition 00YV, clause (6); module adjunction transport and composition/unit identification are spelled out by M3."
+  "place": "Sites 03CB/03CC and module inverse images 03D3/03D7; K2 formal proof via the proved canonical module-to-set comparison and adjunction unit coherence."
  },
  "mathlib_searches": [
   {
@@ -118,10 +115,9 @@
   "date": "2026-10-12"
  },
  "proof_deps": [
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-sc-etale-module-set-pullback-comparison",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-sets-etale-inverse-image-composition-units",
   "def-weil-pbc-sets-section-comparison"
@@ -139,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M3",
+  "reviewer": "X-a0bf9",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T085306-L-26107",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T113948-L-821363",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and DAG node proof match; clean compilation and direct importer compilation verified"
  }
 }
