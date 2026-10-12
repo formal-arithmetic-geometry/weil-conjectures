@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
+import Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesFunctorConstruction
+import Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesFull
+import Sheaf.AlgebraicGeometry.EtaleChartResidueTriplesEssentiallySurjective
 
 /-!
 # Equivalence between affine chart neighbourhoods and residue-field triples
@@ -26,6 +29,19 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+private theorem affine_global_sections_faithful
+    {C : Type*} [Category C] (G : C ⥤ Scheme.{v}) [G.Faithful]
+    (h : ∀ c, IsAffine (G.obj c)) : (G.op ⋙ Scheme.Γ).Faithful where
+  map_injective {c d} f g hfg := by
+    apply Quiver.Hom.unop_inj
+    apply G.map_injective
+    have : IsAffine (G.obj c.unop) := h _
+    apply ext_of_isAffine
+    exact hfg
+
+
+-- The legacy statement has unused diagram lets; keep its signature unchanged.
+set_option linter.unusedVariables false in
 /-- Source: Stacks Project, proof of Tag 04HX, first paragraph, and Remark Tag 04HT.
 (blueprint: lem-weil-pbc-etale-chart-residue-triples-equivalence).
 
@@ -79,10 +95,25 @@ theorem etale_chart_residue_triples_equivalence_functor
     (∀ (c : NU) (z : c.obj.obj.1.left.residueField
           (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1),
         (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → Nonempty (NUᵒᵖ ≌ T)
- := by sorry
+ := by
+  intros x p F e K χ Nall P N Q NU D DU T _DT h
+  obtain ⟨H, δ, hδ⟩ := etale_chart_residue_triples_functor_construction
+    Y Ω A i xU h
+  have hfull := etale_chart_residue_triples_full Y Ω A i xU H δ hδ
+  let G := Q.ι ⋙ P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+    Etale.forget Y ⋙ Over.forget Y
+  have : G.Faithful := by dsimp [G]; infer_instance
+  have : DU.Faithful := affine_global_sections_faithful G (fun c ↦ c.obj.property)
+  have hfaithful : H.Faithful := Functor.Faithful.of_comp_iso δ.symm
+  have hess := etale_chart_residue_triples_essentially_surjective Y Ω A i xU H δ hδ
+  let : H.IsEquivalence := ⟨hfaithful, hfull, hess⟩
+  exact ⟨H.asEquivalence⟩
+
 
 /-- Under the chart equivalence, global sections identify with the triple ring and
 satisfy the two point and structure-map formulas. (blueprint: split-etale-chart-ring-iso) -/
+/- STATEMENT-DISPUTED: An arbitrary equivalence need not preserve the ring and point
+diagrams. The source proves these formulas for the constructed chart functor only. -/
 theorem etale_chart_residue_triples_equivalence_ring_iso
     (Y : Scheme.{v}) (Ω : Type v) [Field Ω] [IsAlgClosed Ω]
     (A : CommRingCat.{v}) (i : Spec A ⟶ Y) [IsOpenImmersion i]
@@ -150,13 +181,18 @@ theorem etale_chart_residue_triples_equivalence
           c.obj.obj.2.left ≫ c.obj.obj.1.left.toSpecΓ =
             Spec.map (CommRingCat.ofHom K.subtype) ≫
               Spec.map ((ΓSpecIso t.B).inv ≫ (Spec t.B).Γevaluation t.q ≫ t.φ) ≫
-              Spec.map (δ.hom.app (op c)))  := by
-  intros x p F e K χ Nall P N Q NU D DU T DT h
-  obtain ⟨E⟩ := etale_chart_residue_triples_equivalence_functor (Y := Y) (Ω := Ω)
-    (A := A) (i := i) (xU := xU) h
-  obtain ⟨δ, hδ⟩ := etale_chart_residue_triples_equivalence_ring_iso (Y := Y) (Ω := Ω)
-    (A := A) (i := i) (xU := xU) h E
-  exact ⟨E, δ, hδ⟩
-
+              Spec.map (δ.hom.app (op c))) := by
+  intros x p F e K χ Nall P N Q NU D DU T _DT h
+  obtain ⟨H, δ, hδ⟩ := etale_chart_residue_triples_functor_construction
+    Y Ω A i xU h
+  have hfull := etale_chart_residue_triples_full Y Ω A i xU H δ hδ
+  let G := Q.ι ⋙ P.ι ⋙ CategoryOfElements.π (pointSmallEtale x).fiber ⋙
+    Etale.forget Y ⋙ Over.forget Y
+  have : G.Faithful := by dsimp [G]; infer_instance
+  have : DU.Faithful := affine_global_sections_faithful G (fun c ↦ c.obj.property)
+  have hfaithful : H.Faithful := Functor.Faithful.of_comp_iso δ.symm
+  have hess := etale_chart_residue_triples_essentially_surjective Y Ω A i xU H δ hδ
+  let : H.IsEquivalence := ⟨hfaithful, hfull, hess⟩
+  exact ⟨H.asEquivalence, δ, hδ⟩
 
 end AlgebraicGeometry.Scheme
