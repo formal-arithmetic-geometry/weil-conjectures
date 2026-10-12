@@ -17,32 +17,30 @@
  ],
  "proof": [
   {
-   "text": "Local injectivity of the sheafification unit refines U so that the raw limit class itself vanishes. Refine by affine open covers. Naturality of inverse-image composition and its single-functor comparison shows raw pullback commutes with restriction; derived functoriality preserves zero.",
+   "text": "For the raw limit image t, local injectivity of the sheafification unit makes its equalizer sieve with zero covering (Mathlib Presheaf.equalizerSieve_mem). Define R to consist of arrows admitting a later stage that kills the class after every further restriction. Associativity of composition proves R is a sieve.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "On each affine member W, base change D and c along W.hom. The stage schemes are qcqs, transitions affine, and the cone limiting. Restrict F and φ; inverse image preserves the coefficient colimit. Put the sheaves in degree zero with lower bound zero and apply complex cohomology continuity. Derived adjunction and the exact left adjoint to etale restriction identify the raw groups with the displayed cohomology, naturally in coefficients and pullback. Injectivity of the colimit comparison and the filtered group equality criterion kill the class at a later stage.",
+   "text": "For each arrow q : W → U in the equalizer sieve, test R.pullback q on affine objects V → W. The limit raw image restricts to zero there by the presheaf composition law. Apply affine restriction vanishing to obtain a stage killing all further restrictions; this is precisely membership in R.pullback q. The affine open cover of W is a jointly surjective etale cover (Scheme.ofArrows_mem_smallEtaleTopology_iff), so R.pullback q is covering.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-    "sbc-lem-higher-direct-image-presheaf"
+    "lem-sbc-higher-direct-image-raw-affine-restriction-vanishing"
    ],
    "elementary": false
   },
   {
-   "text": "Generate the sieve of these affine covers. A further restriction keeps the raw stage class zero and commutes with raw pullback. Cover transitivity gives the asserted covering sieve. Degree zero uses section continuity; on empty objects the raw group is zero.",
+   "text": "Grothendieck-topology transitivity makes R covering. On each arrow in R, evaluate the universal further-restriction assertion at its identity to get the eventual-zero witness required by the unchanged statement.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
-  "sbc-lem-higher-direct-image-presheaf"
+  "lem-sbc-higher-direct-image-raw-affine-restriction-vanishing"
  ],
  "proof_origin": {
-  "by": "worker H3",
+  "by": "agent",
   "document": "Stacks Project, Etale Cohomology",
-  "place": "Tags 09Z1, 03Q8 and 0EZM; local injectivity followed by affine cohomology continuity, with explicit derived-Hom specialization by H3"
+  "place": "Tags 09Z1 and 03Q8: local sheafification and affine cover gluing, formalized by R1"
  },
  "mathlib_searches": [
   {
@@ -122,9 +120,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T135241-L-1668677",
+  "landing": "20261012T154834-L-2474210",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

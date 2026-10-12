@@ -7,8 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineRestrictionVanishing
 
 /-! # Raw affine cohomology classes eventually vanish
 
@@ -23,6 +22,23 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
+
+private lemma covering_of_affine_arrows {S : Scheme.{v}} (W : S.Etale)
+    (R : Sieve W) (hR : ∀ (V : S.Etale) (f : V ⟶ W), IsAffine V.left → R f) :
+    R ∈ S.smallEtaleTopology W := by
+  have : Etale W.hom := W.prop
+  let 𝒰 := W.left.affineCover
+  let V : 𝒰.I₀ → S.Etale := fun x ↦
+    ⟨Over.mk (𝒰.f x ≫ W.hom), by
+      change Etale (𝒰.f x ≫ W.hom)
+      infer_instance⟩
+  let f : ∀ x, V x ⟶ W := fun x ↦
+    ⟨Over.homMk (𝒰.f x) (by rfl), trivial, trivial⟩
+  have hcov : Sieve.ofArrows V f ∈ S.smallEtaleTopology W :=
+    Scheme.ofArrows_mem_smallEtaleTopology_iff f |>.2 𝒰.iUnion_range
+  apply S.smallEtaleTopology.superset_covering _ hcov
+  rintro Z g ⟨T, a, _, ⟨x⟩, rfl⟩
+  exact R.downward_closed (hR (V x) (f x) (by dsimp [V, 𝒰]; infer_instance)) a
 
 /-- A raw class whose limit sheafification is zero is locally killed at later stages.
 Source: Stacks Project, Tag 09Z1, proof of lemma-relative-colimit; Tags 03Q8 and 0EZM.
@@ -87,6 +103,40 @@ theorem exists_higherDirectImage_raw_local_class_eq_zero {S : Scheme.{v}}
           abelianHigherDirectImageRawPullback (D.map f.op).left (D.obj (op i)).hom
             (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) W
               ((abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).map
-                q.op z) = 0 := by sorry
+                q.op z) = 0 := by
+  let P := abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)
+  let Q := abelianHigherDirectImageRawPresheaf c.pt.hom p (colimit H)
+  let t : Q.obj (op U) :=
+    abelianHigherDirectImageRawPullback (c.π.app (op i)).left
+      (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i)
+      (colimit H) ((eH i).inv ≫ colimit.ι H i) U z
+  let R : Sieve U :=
+    { arrows := fun W q ↦ ∃ (j : I) (f : i ⟶ j),
+        ∀ (V : S.Etale) (a : V ⟶ W),
+          abelianHigherDirectImageRawPullback (D.map f.op).left (D.obj (op i)).hom
+            (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) V
+              (P.map (a ≫ q).op z) = 0
+      downward_closed := by
+        rintro W V q ⟨j, f, hf⟩ a
+        refine ⟨j, f, fun T b ↦ ?_⟩
+        simpa only [Category.assoc] using hf T (b ≫ a) }
+  have hE : Presheaf.equalizerSieve t (0 : Q.obj (op U)) ∈
+      S.smallEtaleTopology U :=
+    Presheaf.equalizerSieve_mem S.smallEtaleTopology
+      (toSheafify S.smallEtaleTopology Q) t 0 (hz.trans (map_zero _).symm)
+  refine ⟨R, S.smallEtaleTopology.transitive hE R ?_, ?_⟩
+  · intro W q hq
+    apply covering_of_affine_arrows W (R.pullback q)
+    intro V a ha
+    have : IsAffine V.left := ha
+    have hq' : Q.map q.op t = 0 := by
+      simpa only [Presheaf.equalizerSieve_apply, map_zero] using hq
+    have hv : Q.map (a ≫ q).op t = 0 := by
+      rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply, hq', map_zero]
+    exact exists_higherDirectImage_raw_affine_restriction_eq_zero
+      D c hc F φ hφid hφcomp H eH hH p U i z V (a ≫ q) hv
+  · intro W q hq
+    obtain ⟨j, f, hf⟩ := hq
+    exact ⟨j, f, by simpa only [Category.id_comp] using hf W (𝟙 W)⟩
 
 end AlgebraicGeometry.Etale

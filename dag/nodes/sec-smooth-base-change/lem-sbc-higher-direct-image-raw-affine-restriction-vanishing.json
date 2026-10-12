@@ -1,0 +1,143 @@
+{
+ "id": "lem-sbc-higher-direct-image-raw-affine-restriction-vanishing",
+ "kind": "statement",
+ "title": "Affine restrictions of raw limit-zero classes eventually vanish",
+ "statement": "Let $S$ be a scheme [def-weil-pbc-scheme-conventions], $I$ a nonempty directed preorder, and $D:I^{\\mathrm{op}}\\to\\operatorname{Over}(S)$ a system with affine transitions and qcqs structure maps. Let $c$ be a cone whose underlying scheme cone is limiting and whose structure map is qcqs. Let $F_i$ be abelian etale sheaves [def-weil-pbc-etale-sheaves] with unital coherent inverse-image maps $\\varphi$ [def-weil-pbc-inverse-image]. Let $H$, $e_H$ and $h_H$ present their pulled-back coefficient diagram on the limit, with colimit $F$. Fix $p\\geq0$, an etale object $U$ over $S$, $i\\in I$ and a raw derived-Hom class $z\\in P_i(U)$ [def-weil-pbc-derived-categories], where $P_i(U)=\\operatorname{Hom}((g_i^{-1}\\mathbb Z[U])[0],F_i[0][p])$. Let $q:W\\to U$ be an arrow of the small etale site with $W$ affine. Write $t\\in P_c(U)$ for the explicit raw pullback of $z$ to the limit with its coefficient coprojection [lem-sbc-abelian-higher-direct-image-natural-comparison]. Assume the restriction $t|_W$ is zero in the raw group $P_c(W)$, before sheafification. Then there exist $j\\in I$ and $f:i\\to j$ such that for every etale $V$ over $S$ and every $a:V\\to W$, the explicit raw stage pullback of $z|_V$ along $f$ is zero in $P_j(V)$, where this restriction of $z$ is along $a\\circ q$. One stage is asserted for restrictions of this fixed affine $W$, with no covering-sieve or sheafification conclusion.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tags 09Z1 (lemma-relative-colimit), 0EZM (lemma-colimit-variant-complexes), 03Q8; affine continuity and naturality of restriction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of inverse-image composition and the single-functor comparison makes raw pullback commute with the restriction along q. Thus the restricted stage class has zero raw limit image on the affine object W.",
+   "uses": [
+    "lem-sbc-abelian-higher-direct-image-natural-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base change D and c along W → S. The schemes at every stage are qcqs because W is affine and their maps to W are qcqs; affine transitions and the scheme limit are preserved. Restrict the coefficient sheaves and their coherent transition maps. Inverse image preserves the coefficient colimit. Put these sheaves in degree-zero complexes, uniformly bounded below by zero. Derived adjunction for etale restriction and its exact left adjoint identifies the raw derived Hom groups with the cohomology groups on these base changes, naturally in coefficients and pullback. Apply complex cohomology continuity to obtain an injective canonical colimit comparison.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equality criterion for a filtered colimit of abelian groups gives j and f : i → j killing the restricted class. The single and shift comparisons identify the colimit transition with the explicit raw pullback. Naturality with further restriction and preservation of zero imply that this same j and f kill all restrictions along V → W. In degree zero use section continuity; the empty affine object has zero group.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems",
+  "sbc-lem-higher-direct-image-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tags 09Z1 and 0EZM; derived-Hom specialization and naturality of restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology on an affine etale object commutes with inverse limits of schemes and filtered colimits of abelian coefficients, so a raw class with zero limit image eventually vanishes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A raw derived Hom class on an affine etale object mapping to zero at an inverse limit of qcqs schemes vanishes at some later stage",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE. No matching varying-coefficient affine raw continuity theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImagePresheaf\"",
+   "results": "0 hits: . No matching varying-coefficient affine raw continuity theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RawPullback|raw.*(vanish|zero)|cohomology.*colimit",
+   "results": "7 hits: Mathlib/Tactic/NormNum/Result.lean, Mathlib/Tactic/NormNum/Result.lean, Mathlib/Tactic/NormNum/LegendreSymbol.lean, Mathlib/Tactic/NormNum/LegendreSymbol.lean, Mathlib/Tactic/NormNum/LegendreSymbol.lean, Mathlib/Tactic/NormNum/LegendreSymbol.lean, Mathlib/Data/String/Basic.lean. No matching varying-coefficient affine raw continuity theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageRawLocalClassVanishing",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Affine cohomology continuity in the proof of the relative colimit assertion, followed by functorial restriction of a zero stage class",
+   "via": [
+    "lem-sbc-higher-direct-image-raw-local-class-vanishing",
+    "lem-sbc-higher-direct-image-affine-computation-vanishing",
+    "lem-sbc-higher-direct-image-local-section-vanishing",
+    "sbc-lem-higher-direct-image-affine-section-vanishing",
+    "sbc-lem-higher-direct-image-limit-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageRawAffineRestrictionVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageRawAffineRestrictionVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_higherDirectImage_raw_affine_restriction_eq_zero",
+  "statement": "theorem exists_higherDirectImage_raw_affine_restriction_eq_zero {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]\n    [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ) (U : S.Etale) (i : I)\n    (z : (abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).obj (op U))\n    (W : S.Etale) (q : W ⟶ U) [IsAffine W.left]\n    (hz : (abelianHigherDirectImageRawPresheaf c.pt.hom p (colimit H)).map q.op\n      (abelianHigherDirectImageRawPullback (c.π.app (op i)).left\n        (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i)\n        (colimit H) ((eH i).inv ≫ colimit.ι H i) U z) = 0) :\n    ∃ (j : I) (f : i ⟶ j), ∀ (V : S.Etale) (a : V ⟶ W),\n      abelianHigherDirectImageRawPullback (D.map f.op).left (D.obj (op i)).hom\n        (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) V\n          ((abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).map\n            (a ≫ q).op z) = 0",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T154834-L-2474210",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T154834-L-2474210",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
