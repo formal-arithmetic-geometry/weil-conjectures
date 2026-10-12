@@ -15,24 +15,28 @@
  ],
  "proof": [
   {
-   "text": "Form presheaf colimits sectionwise, use preservation of colimits by the module forgetful functor, and compare module and abelian sheafification after forgetting scalars.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": false
+   "text": "Let J be the small etale topology and U the ModuleCat-to-AddCommGrpCat forgetful functor. Apply Mathlib CategoryTheory.GrothendieckTopology.instPreservesSheafification J U; the required preservation of matching-family limits and filtered colimits is supplied by the module and abelian-group forgetful instances. This is the plus-construction sheafification comparison, without changing either sheaf encoding.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib CategoryTheory.sheafComposeNatIso J U, applied to the module and abelian sheafification adjunctions, identifies presheaf forgetting followed by abelian sheafification with module sheafification followed by sheafCompose J U. Presheaf forgetting preserves colimits by ModuleCat.forget₂PreservesColimitsOfSize and the functor-category instances; abelian sheafification preserves colimits as a left adjoint. Transfer preservation of colimits of shape A through this natural isomorphism using preservesColimitsOfShape_of_natIso.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib CategoryTheory.Adjunction.preservesColimitsOfShape_iff to the module sheafification adjunction, whose inclusion right adjoint is fully faithful. Preservation by the composite with sheafification from the preceding step gives PreservesColimitsOfShape A (sheafCompose J U), and its instance gives preservation of the specified diagram D.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
-  "lem-weil-pbc-sheafification-exact"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "03CO(4) and 03CY(2),(3)"
+  "by": "agent",
+  "group": "P2",
+  "date": "2026-10-12",
+  "document": "Mathlib/CategoryTheory/Sites/PreservesSheafification.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean",
+  "place": "instPreservesSheafification, sheafComposeNatIso; Adjunction.preservesColimitsOfShape_iff (formal implementation of the original Stacks 03CO/03CY route)"
  },
  "mathlib_searches": [
   {
@@ -100,10 +104,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T053925-L-2632605",
-  "kind": "interface",
+  "landing": "20261012T063517-L-3158508",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
