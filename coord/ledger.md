@@ -8032,3 +8032,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.GeometricallyConnectedFiberEtaleCriterion (stage 3; reviewer PASS; first push; landing 20261012T144051-L-2088138 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/A3/Sheaf.CategoryTheory.TruncationCouple (stage 3; reviewer PASS; first push; landing 20261012T144051-L-2088236 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/B2/Sheaf.AlgebraicGeometry.FormalFunctionsStalk (stage 3; reviewer PASS; first push; landing 20261012T144051-L-2088386 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:40 L: merged deliver/B2/Sheaf.AlgebraicGeometry.ProperBasic (stage 3; reviewer PASS; first push; landing 20261012T144052-L-2088487 (proof); batch 20261012T144049; modules 1; new nodes 0)

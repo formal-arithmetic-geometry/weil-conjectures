@@ -39,4 +39,8 @@ theorem AlgebraicGeometry.proper_basic
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] :
     IsSeparated f ∧ UniversallyClosed f ∧ LocallyOfFiniteType f ∧ QuasiCompact f ∧
       QuasiSeparated f ∧ (IsAffine S → X.IsSeparated ∧ CompactSpace X) := by
-  sorry
+  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+  intro hS
+  let : IsAffine S := hS
+  refine ⟨?_, QuasiCompact.compactSpace_of_compactSpace f⟩
+  exact HasAffineProperty.iff_of_isAffine.mp (inferInstance : IsSeparated f)

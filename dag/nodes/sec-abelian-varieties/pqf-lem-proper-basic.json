@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "By the definition of properness [def-weil-proper-morphism], the morphism is separated, universally closed, and of finite type. The finite-type condition includes quasi-compactness [def-weil-finite-type-morphism], so $f$ is quasi-compact. Since a separated morphism is quasi-separated [lem-pc-separated-quasi-separated], its diagonal is quasi-compact. If $S$ is affine, then $S$ is quasi-compact, so $X=f^{-1}(S)$ is quasi-compact by quasi-compactness of $f$, and separatedness of $f$ implies that $X$ is separated by [lem-sc-separated-over-affine-scheme-separated].",
+   "text": "Use Mathlib IsProper parent instances [def-weil-proper-morphism] to obtain IsSeparated, UniversallyClosed and LocallyOfFiniteType. The UniversallyClosed instance yields QuasiCompact, giving finite type [def-weil-finite-type-morphism]. Infer QuasiSeparated from IsSeparated [lem-pc-separated-quasi-separated]. For affine S, install IsAffine S as a local instance. HasAffineProperty.iff_of_isAffine for IsSeparated.hasAffineProperty yields X.IsSeparated [lem-sc-separated-over-affine-scheme-separated]. Affine S has CompactSpace S, so QuasiCompact.compactSpace_of_compactSpace f gives CompactSpace X. Assemble these conclusions as the stated conjunction.",
    "uses": [
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
@@ -35,8 +35,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Definition 29.41.1, tag 01W1, together with schemes.tex Section 01KH and Lemma 01K7"
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean; Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean",
+  "place": "IsProper parent instances; UniversallyClosed implies QuasiCompact; IsSeparated.instQuasiSeparated and IsSeparated.hasAffineProperty; QuasiCompact.compactSpace_of_compactSpace. This implements the existing Stacks-based plan without extra intermediate statements."
  },
  "mathlib_searches": [
   {
@@ -131,5 +131,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T144052-L-2088487",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
