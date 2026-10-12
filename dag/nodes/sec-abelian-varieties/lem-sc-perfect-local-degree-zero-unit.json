@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-perfect-local-degree-zero-unit",
+ "kind": "statement",
+ "title": "A local degree-zero structure-unit test for a perfect complex",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $K$ a perfect complex [def-pc-perfect-complex] in $D(\\mathcal O_S)$ [def-pc-derived-category], $a:\\mathcal O_S[0]\\to K$ a morphism and $s\\in S$. Derived pullback is as in [def-pc-derived-pullback]. Suppose $H^i(Li_s^*K)=0$ for every $i<0$, where $i_s:\\operatorname{Spec}\\kappa(s)\\to S$ is the residue-field morphism [def-pc-base-change], and $H^0(Li_s^*a)$ is an isomorphism. Then the map $H^0(a)_s$ on module stalks [def-pc-module-stalk-functor] is surjective. There is no condition on the fibres at other points.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-base-change",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sc-perfect-finite-free-residue-model] at $s$. The negative terms are zero and the degree-zero term has rank one. The fibre map identifies degree-zero fibre cohomology with the residue field. Over that field all differentials vanish: the cohomology dimensions equal the term dimensions, so both adjacent differential ranks vanish.",
+   "uses": [
+    "lem-sc-perfect-finite-free-residue-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict $a$ to the affine neighbourhood and use [lem-pc-perfect-affine-map-representative] with the single rank-one structure-sheaf complex as source and the bounded finite free representative as target. Take stalks at $s$. Its degree-zero component is multiplication by an element with nonzero residue, hence by a unit. The chain-map equation makes the outgoing differential zero. No incoming term remains. Degree-zero cohomology is therefore the rank-one term, and multiplication by the inverse unit supplies every preimage. Exactness of stalks transports this computation to $H^0(a)_s$.",
+   "uses": [
+    "lem-pc-perfect-affine-map-representative",
+    "def-pc-module-stalk-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "lem-pc-perfect-affine-map-representative",
+  "lem-sc-perfect-finite-free-residue-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map from the structure sheaf in degree zero to a perfect complex with vanishing negative derived fiber and invertible degree zero residue map is surjective on the zeroth cohomology stalk.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "perfect complex map from structure sheaf degree zero residue field isomorphism at one point implies surjective zeroth homology stalk",
+   "results": "8 hits: AlgebraicGeometry.Scheme.residue_surjective, Ideal.surjectiveOnStalks_residueField, RingHom.surjectiveOnStalks_of_surjective, RingHom.surjectiveOnStalks_iff_of_isLocalHom, AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks, RingHom.surjectiveOnStalks_iff_forall_maximal, TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks, AlgebraicGeometry.SurjectiveOnStalks.Spec_iff; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*stalk|stalk.*perfect",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatStructureSheafStalkSurjective",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: apply the general theorem of the cube; structure-sheaf pushforward input for its product morphism. Tag 0E62, perfect-lemma-proper-flat-h0, local argument; Tag 0BCD, lift-perfect-from-residue-field",
+   "via": [
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+    "lem-sc-proper-flat-structure-sheaf-stalk",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectLocalDegreeZeroUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectLocalDegreeZeroUnit.lean",
+  "declaration": "AlgebraicGeometry.surjective_stalk_homology_of_perfect_local_unit",
+  "statement": "theorem surjective_stalk_homology_of_perfect_local_unit (S : Scheme.{u})\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]\n    [∀ U : S.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings S.toRingedSpace).over U))]\n    [∀ x : S, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (S.residueField x)).toRingedSpace))]\n    (K : schemeDerivedCategory S) (hK : Scheme.IsPerfect S K)\n    (a : (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj\n        (SheafOfModules.unit S.ringCatSheaf) ⟶ K) (s : S)\n    (hnegative : ∀ i : ℤ, i < 0 → IsZero ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) i).obj\n        ((derivedPullback (S.fromSpecResidueField s)).obj K)))\n    (ha : IsIso ((DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0).map\n        ((derivedPullback (S.fromSpecResidueField s)).map a))) :\n    Function.Surjective (Scheme.Modules.Hom.stalkLinearMap\n      ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map a) s)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T225321-L-1810134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T225321-L-1810134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

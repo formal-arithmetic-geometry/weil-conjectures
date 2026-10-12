@@ -1,0 +1,124 @@
+{
+ "id": "lem-sc-flat-derived-structure-unit",
+ "kind": "statement",
+ "title": "Derived structure unit and its ordinary and fibre comparisons",
+ "statement": "Let $f:X\\to S$ be a quasi-compact separated flat morphism of schemes [def-pc-morphism-conventions], with flatness as in [def-weil-flat-morphism]. Put $J=\\mathcal O_S[0]$ and $E=Rf_*\\mathcal O_X[0]$ [def-pc-derived-direct-image] in the derived category [def-pc-derived-category]. There exist $a:J\\to E$ and isomorphisms $e_0:H^0(J)\\cong\\mathcal O_S$, $e_1:H^0(E)\\cong f_*\\mathcal O_X$, such that $H^0(a)e_1=e_0f^\\sharp$, where $f^\\sharp$ denotes the ordinary module structure map. At every $s\\in S$ the negative cohomology of $Li_s^*E$ [def-pc-derived-pullback] is zero. If the canonical map $\\kappa(s)\\to H^0(X_s,\\mathcal O_{X_s})$ [def-pc-base-change] is an isomorphism, then $H^0(Li_s^*a)$ is an isomorphism. No conclusion about surjectivity of $f^\\sharp_s$ is part of this statement.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0E62, perfect-lemma-proper-flat-h0, first paragraph; Tag 0A1D base change and Tag 0096 unit comparison"
+ },
+ "stmt_deps": [
+  "def-pc-morphism-conventions",
+  "def-weil-flat-morphism",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Compute [def-pc-ringed-spaces-derived-direct-image] on $\\mathcal O_X[0]$ by a nonnegative injective resolution. Compose the single-complex ordinary structure map with the resolution augmentation and localize to obtain $a$. The source single-complex cohomology is $\\mathcal O_S$. Direct image is left exact; hence the resolution augmentation identifies $H^0(E)$ with $f_*\\mathcal O_X$, and its naturality gives the equation for $a$ and $e_0,e_1$.",
+   "uses": [
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The structure sheaf is relatively flat because $f$ is flat. Apply [lem-pc-relatively-flat-canonical-module-base-change] to the residue-field fibre square. Use [lem-weil-pbc-module-pullback-structure-sheaf] to identify the pulled-back structure sheaf with that on the fibre. Naturality of the canonical base-change mate identifies the pulled-back $a$ with the fibre structure map. A derived direct image of a sheaf has no negative cohomology. On the affine spectrum of a field, global sections detect isomorphisms of quasi-coherent modules. Thus the assumed isomorphism on fibre global functions implies that $H^0(Li_s^*a)$ is invertible.",
+   "uses": [
+    "lem-pc-relatively-flat-canonical-module-base-change",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-pc-relatively-flat-canonical-module-base-change",
+  "lem-weil-pbc-module-pullback-structure-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "N1",
+  "date": "2026-10-13",
+  "document": "Stacks Project",
+  "place": "Tag 0E62, perfect-lemma-proper-flat-h0, first paragraph; Tag 0A1D base change and Tag 0096 unit comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a proper flat finitely presented morphism the derived structure sheaf unit has zeroth cohomology the ordinary structure map and derived fibers identified by base change.",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of structure sheaf canonical unit zeroth cohomology comparison ordinary direct image proper flat base change residue field",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc, AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCBasicOpens, AlgebraicGeometry.Scheme.Γevaluation_naturality_apply, AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*structure.*unit|structure.*derived.*unit",
+   "results": "0 hits: ; no exact match.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFlatStructureSheafStalkSurjective",
+  "date": "2026-10-13",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Proof: apply the general theorem of the cube; structure-sheaf pushforward input for its product morphism. Tag 0E62, perfect-lemma-proper-flat-h0, first paragraph; Tag 0A1D base change and Tag 0096 unit comparison",
+   "via": [
+    "lem-sc-proper-flat-structure-sheaf-stalk-surjective",
+    "lem-sc-proper-flat-structure-sheaf-stalk",
+    "lem-sc-proper-flat-global-sections-criterion",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatDerivedStructureUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatDerivedStructureUnit.lean",
+  "declaration": "AlgebraicGeometry.exists_flat_derived_structure_unit",
+  "statement": "theorem exists_flat_derived_structure_unit\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [IsSeparated f] [Flat f] :\n    let O := SheafOfModules.unit S.ringCatSheaf\n    let J := (DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).obj O\n    let E := (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj\n        (SheafOfModules.unit X.ringCatSheaf))\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0\n    ∃ (a : J ⟶ E) (e₀ : H.obj J ≅ O)\n      (e₁ : H.obj E ≅ (Scheme.Modules.pushforward f).obj\n        (SheafOfModules.unit X.ringCatSheaf)),\n      H.map a ≫ e₁.hom = e₀.hom ≫\n        SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom ∧\n      (∀ (s : S) (i : ℤ), i < 0 → IsZero ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) i).obj\n          ((derivedPullback (S.fromSpecResidueField s)).obj E))) ∧\n      (∀ s : S, IsIso (f.fiberToSpecResidueField s).appTop →\n        IsIso ((DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (S.residueField s)).toRingedSpace)) 0).map\n            ((derivedPullback (S.fromSpecResidueField s)).map a)))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T225321-L-1810134",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T225321-L-1810134",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
