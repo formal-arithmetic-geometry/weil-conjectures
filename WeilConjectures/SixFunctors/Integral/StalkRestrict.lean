@@ -20,6 +20,10 @@ neighbourhood of `y`, the base change `U ×_Y X` decomposes into pairwise disjoi
 which maps to this standard étale neighbourhood with `(u, t)` going to the marked point
 (`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_pointed_disjoint_cover`). The section extended by
 zero on the other opens is a section of `G` over `U ×_Y X` with the given germ.
+
+Consequently `f_*` detects the zero sheaf
+(`AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj`) and, being exact, is conservative
+(`AlgebraicGeometry.Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom`).
 -/
 
 @[expose] public section
@@ -27,6 +31,8 @@ zero on the other opens is a section of `G` over `U ×_Y X` with the given germ.
 universe u
 
 open CategoryTheory Limits Opposite Polynomial
+
+open scoped AlgebraicGeometry.Etale
 
 namespace StandardEtalePair
 
@@ -354,5 +360,73 @@ lemma Scheme.Hom.Nbhd.exists_section_toPresheafFiber_eq {Ω : Type u} [Field Ω]
     exact hp
   rw [← ha l p hp, ← hbl, GrothendieckTopology.Point.toPresheafFiber_w_apply, hpt']
   rfl
+
+end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+open Scheme Scheme.Hom
+
+variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f]
+
+/-- **The restriction of germs of a direct image along an integral morphism is surjective**: for
+a geometric point `t` of `X` over a geometric point `y` of `Y` with algebraically closed residue
+field, every germ of `G` at `t` is the restriction of a germ of `f_* G` at `y`. -/
+lemma Etale.surjective_stalkRestrict_of_isIntegralHom {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (y : Spec (.of Ω) ⟶ Y) (t : f.GeometricFiber y)
+    (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Function.Surjective (Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f y t G) := by
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  intro p
+  obtain ⟨V, v, z, rfl⟩ := (pointSmallEtale t.1).toPresheafFiber_jointly_surjective
+    (P := G.obj) p
+  obtain ⟨c, σ, hσ⟩ := Nbhd.exists_section_toPresheafFiber_eq t Λ G v z
+  refine ⟨(pointSmallEtale y).toPresheafFiber c.1 c.2 ((f)_*[ModuleCat.{u + 1} Λ].obj G).obj σ,
+    ?_⟩
+  rw [← hσ]
+  exact ConcreteCategory.congr_hom
+    (Etale.toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} Λ) f y t G c) σ
+
+/-- The direct image along an integral morphism detects the zero sheaf: if `f_* G = 0` then
+`G = 0`. This is the conservativity step of the proof of blueprint `sbc-lem-bc-integral-base`.
+For a geometric point `t` of `X` over the geometric point `y` of `Y`, the stalk `G_t` is a
+quotient of the stalk `(f_* G)_y`
+(`AlgebraicGeometry.Etale.surjective_stalkRestrict_of_isIntegralHom`). -/
+theorem Etale.isZero_of_isZero_lowerStar_obj
+    {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
+  rw [IsZero.iff_id_eq_zero]
+  refine Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint (A := ModuleCat.{u + 1} Λ)
+    fun s ↦ ?_
+  refine IsZero.eq_of_src ?_ _ _
+  let x := X.algClosurePoint s
+  have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+    ModuleCat.hasLimitsOfSize.{u, u, u + 1, u + 1}
+  have hy := Functor.map_isZero (pointSmallEtale (x ≫ f)).sheafFiber hG
+  have hsurj := Etale.surjective_stalkRestrict_of_isIntegralHom Λ f (x ≫ f) ⟨x, rfl⟩ G
+  refine @ModuleCat.isZero_of_subsingleton.{u + 1} _ _ _ ⟨fun a b ↦ ?_⟩
+  obtain ⟨a, rfl⟩ := hsurj a
+  obtain ⟨b, rfl⟩ := hsurj b
+  rw [hy.eq_of_src (Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f (x ≫ f) ⟨x, rfl⟩ G) 0]
+  rfl
+
+/-- The direct image along an integral morphism is conservative: being exact by
+`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`, it sends the
+kernel and the cokernel of a morphism to those of its image, and it detects their vanishing by
+`AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj`. -/
+theorem Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom :
+    (f)_*[ModuleCat.{u + 1} Λ].ReflectsIsomorphisms where
+  reflects {G G'} φ _ := by
+    have := Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom Λ f
+    have : Mono φ := Preadditive.mono_of_isZero_kernel φ <|
+      Etale.isZero_of_isZero_lowerStar_obj Λ f <|
+      (isZero_kernel_of_mono ((f)_*[ModuleCat.{u + 1} Λ].map φ)).of_iso
+        (PreservesKernel.iso _ φ)
+    have : Epi φ := Preadditive.epi_of_isZero_cokernel φ <|
+      Etale.isZero_of_isZero_lowerStar_obj Λ f <|
+      (isZero_cokernel_of_epi ((f)_*[ModuleCat.{u + 1} Λ].map φ)).of_iso
+        (PreservesCokernel.iso _ φ)
+    exact isIso_of_mono_of_epi φ
 
 end AlgebraicGeometry

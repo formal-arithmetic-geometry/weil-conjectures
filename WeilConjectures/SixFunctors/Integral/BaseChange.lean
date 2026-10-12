@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-public import WeilConjectures.SixFunctors.Integral.Exact
+public import WeilConjectures.SixFunctors.Integral.StalkRestrict
 
 /-!
 # Base change along an integral morphism
