@@ -6892,3 +6892,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/J3/Sheaf.AlgebraicGeometry.ProjectiveSpace.HomogeneousBasisProjCoproduct (stage 3; reviewer PASS; first push; landing 20261012T085254-L-21201 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:52 L: merged deliver/J3/Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives (stage 3; reviewer PASS; first push; landing 20261012T085255-L-21299 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/J3/Sheaf.RingTheory.FlatUnderRegular (stage 3; reviewer PASS; first push; landing 20261012T085255-L-21425 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/J3/Sheaf.RingTheory.GeometricallyRegularDescent (stage 3; reviewer PASS; first push; landing 20261012T085255-L-21522 (proof); batch 20261012T085205; modules 1; new nodes 0)

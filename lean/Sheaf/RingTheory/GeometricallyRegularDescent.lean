@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
+import Mathlib.Algebra.Algebra.Shrink
+import Mathlib.Algebra.Field.Shrink
 
 /-!
 # Geometric regularity descends along faithfully flat algebra maps
@@ -39,6 +41,32 @@ theorem isGeometricallyRegular_of_faithfullyFlat
     [Algebra k A] [Algebra k B] [Algebra A B] [IsScalarTower k A B]
     [Module.FaithfullyFlat A B] (hB : IsGeometricallyRegular k B) :
     IsGeometricallyRegular k A := by
-  sorry
+  classical
+  have : IsNoetherianRing B := hB.1
+  refine ⟨?_, ?_⟩
+  · exact Submodule.IsNoetherian.of_isNoetherian_tensorProduct_of_faithfullyFlat
+      (isNoetherian_of_linearEquiv (Algebra.TensorProduct.rid A B B).symm.toLinearEquiv)
+  · intro K _ _ _ _
+    have : Small.{max u w} K := Module.Finite.small k K
+    have : IsPurelyInseparable k (Shrink.{max u w} K) :=
+      (Shrink.algEquiv k K).symm.isPurelyInseparable
+    have : IsRegularRing (TensorProduct k (Shrink.{max u w} K) B) :=
+      hB.2 (Shrink.{max u w} K)
+    have : IsRegularRing (TensorProduct k K B) :=
+      IsRegularRing.of_ringEquiv
+        (Algebra.TensorProduct.congr (Shrink.algEquiv k K)
+          (AlgEquiv.refl : B ≃ₐ[k] B)).toRingEquiv
+    have : IsRegularRing (TensorProduct k B K) :=
+      IsRegularRing.of_ringEquiv (Algebra.TensorProduct.comm k K B).toRingEquiv
+    have : IsRegularRing (TensorProduct A B (TensorProduct k A K)) :=
+      IsRegularRing.of_ringEquiv
+        (Algebra.TensorProduct.cancelBaseChange k A A B K).symm.toRingEquiv
+    have : IsRegularRing (TensorProduct A (TensorProduct k A K) B) :=
+      IsRegularRing.of_ringEquiv
+        (Algebra.TensorProduct.comm A B (TensorProduct k A K)).toRingEquiv
+    have : IsRegularRing (TensorProduct k A K) :=
+      IsRegularRing.of_faithfullyFlat (TensorProduct k A K)
+        (TensorProduct A (TensorProduct k A K) B)
+    exact IsRegularRing.of_ringEquiv (Algebra.TensorProduct.comm k A K).toRingEquiv
 
 end Algebra

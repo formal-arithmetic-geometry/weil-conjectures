@@ -31,7 +31,19 @@
  ],
  "proof": [
   {
-   "text": "Fix a finite purely inseparable field extension k'/k [def-weil-pbc-finite-purely-inseparable-extension]. Since A -> B is faithfully flat, the public base-change lemma [lem-weil-pbc-faithfully-flat-base-change] applied to A -> B and k -> k' gives a faithfully flat map A tensor_k k' -> B tensor_k k'. Geometric regularity of B means that B tensor_k k' is a regular ring by [def-weil-pbc-g-ring] and [def-weil-regular-scheme]. Regularity descends along this faithfully flat map by [lem-weil-pbc-regular-ring-faithfully-flat-descent], so A tensor_k k' is regular. As k'/k was arbitrary, [def-weil-pbc-g-ring] gives that A is geometrically regular over k.",
+   "text": "Geometric regularity of B includes Noetherianity by def-weil-pbc-g-ring. Descend Noetherianity to A by lem-weil-pbc-faithfully-flat-descent-noetherian, specializing the Mathlib module descent theorem to M = A and identifying B tensor_A A with B by the tensor right-unit equivalence.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-faithfully-flat-descent-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 07NH and Noetherian descent Tag 033E"
+   }
+  },
+  {
+   "text": "Fix a finite purely inseparable field extension K/k. By Module.Finite.small, shrink K to universe max u w, preserving its algebra structure, finiteness and pure inseparability. Apply geometric regularity of B to this shrink and transport regularity back to K tensor_k B by Algebra.TensorProduct.congr. Commute factors to B tensor_k K. Tensor cancellation identifies this ring with B tensor_A (A tensor_k K), and tensor commutativity identifies it with (A tensor_k K) tensor_A B. The latter is faithfully flat over A tensor_k K by lem-weil-pbc-faithfully-flat-base-change. Apply lem-weil-pbc-regular-ring-faithfully-flat-descent, then commute factors to obtain regularity of K tensor_k A. Together with the first step, this proves geometric regularity of A by def-weil-pbc-g-ring. Shrinking and tensor equivalences only replace rings and fields by isomorphic copies.",
    "uses": [
     "def-weil-pbc-finite-purely-inseparable-extension",
     "lem-weil-pbc-faithfully-flat-base-change",
@@ -47,17 +59,17 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-faithfully-flat-descent-noetherian",
   "def-weil-pbc-finite-purely-inseparable-extension",
   "lem-weil-pbc-faithfully-flat-base-change",
-  "def-weil-pbc-g-ring",
   "def-weil-regular-scheme",
-  "lem-weil-pbc-regular-ring-faithfully-flat-descent",
-  "lem-weil-pbc-flat-module-base-change"
+  "lem-weil-pbc-regular-ring-faithfully-flat-descent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 07NH (lemma-geometrically-regular-descent), line 47166"
+  "place": "Algebra, Lemma Tag 07NH; Lean implementation by J3 uses Mathlib tensor equivalences, universe shrinking, and Tag 033E for the explicit Noetherian conjunct."
  },
  "mathlib_searches": [
   {
@@ -140,5 +152,15 @@
   "group": "F1",
   "result": "fix",
   "note": "field k; k-algebras A,B; k-algebra map A->B as algebraMap with IsScalarTower k A B; faithfully flat as [Module.FaithfullyFlat A B] (was bare phi + RingHom.FaithfullyFlat, against STATE FAITHFULLY FLAT RING MAPS); hB/conclusion Algebra.IsGeometricallyRegular (recorded def-weil-pbc-g-ring), Noetherian included; no extra hypotheses"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085255-L-21522",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
