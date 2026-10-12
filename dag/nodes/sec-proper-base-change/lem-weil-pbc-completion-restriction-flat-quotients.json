@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-completion-restriction-flat-quotients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "quotient comparison in steps 2-4 of lem-weil-pbc-flat-completion, in the completion argument used for finite-etale lifting",
+   "via": [
+    "lem-weil-pbc-flat-completion",
+    "lem-weil-pbc-g-ring-maximal-ideal-criterion",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Flat quotients of a completion algebra whose restriction to the original ring is flat",
+ "statement": "Let A and S be commutative rings, I a finitely generated ideal of A, C its I-adic completion [def-weil-pbc-adic-completion], and iota : A -> C the canonical map. Let f : C -> S be a ring homomorphism such that f composed with iota is flat [def-weil-pbc-flat-ring-map]. Put J = I C. Then for every natural number n, including zero, the C/J^n-module S/J^n S with action induced by f is flat. No Noetherianity or locality of A or S is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0C4G, second paragraph of the forward implication; Algebra Lemmas Tags 05GG and 00HI. Read at https://stacks.math.columbia.edu/tag/0C4G."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write C = completion_I(A), iota : A -> C, J = I C, g = f.comp iota. For every n, evaluation C -> A/I^n is surjective, has kernel I^n C = J^n by finite generation, and sends iota(a) to a mod I^n. The first isomorphism theorem gives e : C/J^n ~= A/I^n with this formula.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0C4G, second paragraph of the forward implication; Algebra Lemmas Tags 05GG and 00HI. Read at https://stacks.math.columbia.edu/tag/0C4G."
+   }
+  },
+  {
+   "text": "Put K = (I^n).map g. By map of products and composition, (J^n).map f = K, so f induces qf : C/J^n -> S/K. Flatness of g and flat base change give flatness of A/I^n -> S/K; in Lean use quotIdealMapEquivQuotTensor and Module.Flat.baseChange.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-module-quotient-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0C4G, second paragraph of the forward implication; Algebra Lemmas Tags 05GG and 00HI. Read at https://stacks.math.columbia.edu/tag/0C4G."
+   }
+  },
+  {
+   "text": "The representative formula for e shows qf.comp e.symm is the canonical A/I^n -> S/K map. Flatness is invariant under precomposition with a bijective ring map (Mathlib RingHom.Flat.comp_iff_of_bijective_right), so qf is flat.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0C4G, second paragraph of the forward implication; Algebra Lemmas Tags 05GG and 00HI. Read at https://stacks.math.columbia.edu/tag/0C4G."
+   }
+  },
+  {
+   "text": "The identity J^n S = K, as C-submodules of S, identifies the module quotient S/(J^n S) with the ring quotient S/K. The representative formula shows this additive equivalence is C/J^n-linear. Transport flatness along it. When n = 0 these are zero quotients, and the same construction applies.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma Tag 0C4G, second paragraph of the forward implication; Algebra Lemmas Tags 05GG and 00HI. Read at https://stacks.math.columbia.edu/tag/0C4G."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-weil-pbc-flat-module-quotient-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "H2 Lean implementation of the quotient comparison in Tag 0C4G, second paragraph; local source absent, official Stacks HTML consulted."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finitely generated ideal I and a map from the adic completion of A to S, flat restriction implies flat completion quotients",
+   "results": "UNAVAILABLE: Internal Server Error from LeanSearch; no verdict recorded.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Module.Flat",
+   "results": "AdicCompletion.flat_of_isNoetherian only: this is flatness over A of the completion, not flatness of S/J^n S over C/J^n.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg flat|quotient|ker_eval in Mathlib/RingTheory/AdicCompletion, Mathlib/RingTheory/Flat, Mathlib/RingTheory/TensorProduct/Quotient.lean; rg flat_quotients_of_flat_restriction in lean and dag/nodes",
+   "results": "pow_smul_top_eq_ker_eval, surjective_evalₐ, evalₐ_of, Module.Flat.baseChange, quotIdealMapEquivQuotTensor, RingHom.Flat.comp_iff_of_bijective_right; no direct theorem. No existing project declaration of this name.",
+   "date": "2026-10-12",
+   "verdict": "proved by combining the listed Mathlib lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FlatCompletion",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionRestrictionFlatQuotients",
+  "file": "lean/Sheaf/RingTheory/CompletionRestrictionFlatQuotients.lean",
+  "declaration": "AdicCompletion.flat_quotients_of_flat_restriction",
+  "statement": "theorem flat_quotients_of_flat_restriction {A : Type u} {S : Type v} [CommRing A] [CommRing S] (I : Ideal A) (hI : I.FG) (f : AdicCompletion I A →+* S) (hflat : (f.comp (algebraMap A (AdicCompletion I A))).Flat) : letI : Algebra (AdicCompletion I A) S := f.toAlgebra ∀ n : ℕ, Module.Flat (AdicCompletion I A ⧸ (I.map (algebraMap A (AdicCompletion I A))) ^ n) (S ⧸ ((I.map (algebraMap A (AdicCompletion I A))) ^ n) • (⊤ : Submodule (AdicCompletion I A) S))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085247-L-18288",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085247-L-18288",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
