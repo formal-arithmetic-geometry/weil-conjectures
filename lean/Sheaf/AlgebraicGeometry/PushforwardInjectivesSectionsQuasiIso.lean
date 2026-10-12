@@ -10,10 +10,9 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.Paper.PQFCohomology
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-! # Global sections of a resolution of the direct image of injectives
@@ -68,6 +67,27 @@ theorem quasiIso_globalSections_pushforward_injectives
       QuasiIso (((SheafOfModules.evaluation.{u} Y.ringCatSheaf (op (⊤ : Y.Opens)) ⋙
         forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op (⊤ : Y.Opens))))
           AddCommGrpCat.{u}).mapHomologicalComplex (ComplexShape.up ℤ)).map φ) := by
-  sorry
-
+  let : EnoughInjectives Y.Modules := enoughInjectives Y
+  let F := SheafOfModules.forget Y.ringCatSheaf ⋙
+    PresheafOfModules.evaluation Y.ringCatSheaf.obj (op (⊤ : Y.Opens))
+  have : I.IsStrictlyGE 0 := (CochainComplex.isStrictlyGE_iff I 0).2 hI0
+  have : J.IsStrictlyGE 0 := (CochainComplex.isStrictlyGE_iff J 0).2 hJ0
+  let : F.Additive := by dsimp [F]; infer_instance
+  have hI' : ∀ n, F.rightAcyclic (((pushforward h).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj I |>.X n) := by
+    intro n
+    exact (module_pushforward_injective_acyclic h (I.X n)).2 ⊤
+  have hJ' : ∀ n, F.rightAcyclic (J.X n) := by
+    intro n
+    exact Functor.rightAcyclic_of_injective (J.X n)
+  have hq : QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map φ) :=
+    F.quasiIso_map_of_rightAcyclic φ 0 hI' hJ'
+  let e := forget₂ (ModuleCat.{u} (Y.ringCatSheaf.obj.obj (op (⊤ : Y.Opens))))
+      AddCommGrpCat.{u}
+  have hq' : QuasiIso ((e.mapHomologicalComplex (ComplexShape.up ℤ)).map
+      ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map φ)) := by
+    rw [HomologicalComplex.quasiIso_map_iff_of_preservesHomology]
+    exact hq
+  exact ⟨hq, hq'⟩
 end AlgebraicGeometry.Scheme.Modules
+
