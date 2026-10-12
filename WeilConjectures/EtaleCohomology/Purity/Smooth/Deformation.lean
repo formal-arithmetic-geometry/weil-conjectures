@@ -89,6 +89,9 @@ In the list below, `DeformationToNormalConeData` abbreviates
 - `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`: DNC invariance.
 - `AlgebraicGeometry.Etale.existsUnique_iso_sectionInvariant_normalCone`: its normalization in
   coordinates and uniqueness.
+- `AlgebraicGeometry.Etale.exists_iso_sectionInvariant_normalCone`,
+  `AlgebraicGeometry.Etale.leftDerivedUpperStar_mapIso_iso_sectionInvariant_normalCone`: its
+  compatibility with étale localization and arbitrary base change in `B`.
 -/
 
 @[expose] public section
@@ -619,6 +622,89 @@ theorem nonempty_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] 
 
 /-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line
 
+*Existence, compatibly with every base change.* Fix identifications `θ₁ : i₁^* F ≅ 𝒞(g, s)` and
+`θ₀ : i₀^* F ≅ 𝒞(π_N, 0_N)` of the two fibres of the family object
+(`lem-pur-dnc-section-geometry` (1)). There is an isomorphism `Ψ : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)` such
+that for every base change `u : B' ⟶ B` and every `e : Lv₁^* F ≅ La'^* C₀` carrying the
+restricted family to one pulled back from `C₀` on `B'`, reading `e` at `t = 1` and at `t = 0` as
+`φ₁ : Lu^* 𝒞(g, s) ≅ C₀` and `φ₀ : Lu^* 𝒞(π_N, 0_N) ≅ C₀`, one has `Lu^* Ψ = φ₁ ≫ φ₀⁻¹`.
+
+`Ψ` is `i₀^*` of the comparison `κ` normalized against `θ₁`, whose restriction to `B'` is read
+off from `e` by the uniqueness of `prop-pur-dnc-family-constancy` (3), (4). -/
+theorem exists_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d : ℕ)
+    (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V)
+    (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
+    (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
+    (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B]
+    (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ g s)
+    (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ N.proj N.zeroSection) :
+    ∃ Ψ : sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection,
+      ∀ {B' : Scheme.{u}} (u : B' ⟶ B)
+        {C₀ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+        (e : (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).obj
+          (D.familyObject Λ) ≅
+            (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj C₀),
+        (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso Ψ =
+          sectionRestrictionIso _ u _ (AffineSpace.oneSection_comp_map u)
+              (AffineSpace.oneSection_comp_over _ B') θ₁ e ≪≫
+            (sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
+              (AffineSpace.zeroSection_comp_over _ B') θ₀ e).symm := by
+  have := D.hasInvertibleExponent_scheme Λ
+  -- the comparison `κ` normalized against `θ₁`
+  obtain ⟨κ, hκ, -⟩ := D.existsUnique_familyObject_iso Λ aB θ₁
+  have hθ₁ : θ₁ = (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
+      κ ≪≫ (leftDerivedUpperStarCompSectionIso _ _ _
+        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).app _ := Iso.ext hκ.symm
+  -- `Ψ` is the fibre of `κ` at `t = 0`
+  let θ₀' := (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
+      κ ≪≫ (leftDerivedUpperStarCompSectionIso _ _ _
+        (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) B)).app (sectionInvariant Λ g s)
+  refine ⟨θ₀'.symm ≪≫ θ₀, fun {B'} u C₀ e ↦ ?_⟩
+  have : HasInvertibleExponent Λ B' := .of_hom u
+  have hv : AffineSpace.map (ULift.{u} (Fin 1)) u ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B =
+      𝔸(ULift.{u} (Fin 1); B') ↘ B' ≫ u := AffineSpace.map_over u
+  let κr := (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).mapIso κ ≪≫
+    ((leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) u)
+      (𝔸(ULift.{u} (Fin 1); B) ↘ B)).app _).symm ≪≫
+    (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); B') ↘ B') u _ hv).app _
+  let φ₁ := sectionRestrictionIso _ u _ (AffineSpace.oneSection_comp_map u)
+    (AffineSpace.oneSection_comp_over _ B') θ₁ e
+  -- the restriction of `κ` is `e` read in the coordinates `φ₁`
+  have hκr : κr = e ≪≫
+      (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁.symm := by
+    refine eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _
+      (DerivedCategory.isInvertible.leftDerivedUpperStar _ (D.isInvertible_familyObject Λ))
+      _ _ (leftDerivedUpperStar_map_eq_of_sectionRestrictionIso_eq _ u _
+        (AffineSpace.oneSection_comp_map u) (AffineSpace.oneSection_comp_over _ B') θ₁ _ _ ?_)
+    rw [sectionRestrictionIso_trans_right, hθ₁, sectionRestrictionIso_restrict _ u _ _ _ hv
+      (AffineSpace.oneSection_comp_over _ B), ← hθ₁]
+    exact (Iso.self_symm_id φ₁).symm
+  have he : e = κr ≪≫
+      (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁ := by
+    rw [hκr]
+    ext
+    simp
+  have key : sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
+        (AffineSpace.zeroSection_comp_over _ B') θ₀ e =
+      (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso (θ₀'.symm ≪≫ θ₀).symm ≪≫ φ₁ := by
+    have h₀ : θ₀ = θ₀' ≪≫ (θ₀'.symm ≪≫ θ₀) := by simp
+    calc _ = sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
+          (AffineSpace.zeroSection_comp_over _ B') (θ₀' ≪≫ (θ₀'.symm ≪≫ θ₀))
+            (κr ≪≫ (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁) := by
+          rw [← he, ← h₀]
+      _ = _ := by
+        rw [sectionRestrictionIso_trans_left, sectionRestrictionIso_trans_right,
+          sectionRestrictionIso_restrict _ u _ _ _ hv (AffineSpace.zeroSection_comp_over _ B)]
+        simp
+  rw [key]
+  ext
+  simp
+
+/-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line
+
 *Normalization in coordinates and uniqueness.* Fix identifications `θ₁ : i₁^* F ≅ 𝒞(g, s)` and
 `θ₀ : i₀^* F ≅ 𝒞(π_N, 0_N)` of the two fibres of the family object
 (`lem-pur-dnc-section-geometry` (1)). Let `u : B' ⟶ B` be surjective and
@@ -628,14 +714,8 @@ from `C₀` on `B'` (for instance those of `lem-pur-dnc-section-geometry` (2), (
 `φ₀ : Lu^* 𝒞(π_N, 0_N) ≅ C₀`. Then there is a unique isomorphism `Ψ : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)`
 which in these coordinates is the identity of `C₀`, `Lu^* Ψ = φ₁ ≫ φ₀⁻¹`.
 
-Existence: `Ψ` is `i₀^*` of the comparison `κ` normalized against `θ₁`, whose restriction to
-`B'` is read off from `e` by the uniqueness of `prop-pur-dnc-family-constancy` (3).
-Uniqueness: `𝒞(g, s)` is invertible and `Lu^*` is faithful on its automorphisms
-(`lem-pur-lisse-rank-one-aut`). -/
--- TODO(unify): thm-pur-dnc-invariance — the blueprint also asks that `Ψ` be compatible with
--- étale localization and arbitrary base change in `B`. Only the family comparison `κ` has this
--- (`Scheme.Hom.DeformationToNormalConeData.leftDerivedUpperStar_familyObject_iso_baseChange`);
--- stating it for `Ψ` needs the base change of the deformation datum `D` along `B' ⟶ B`.
+Existence is `exists_iso_sectionInvariant_normalCone`. Uniqueness: `𝒞(g, s)` is invertible and
+`Lu^*` is faithful on its automorphisms (`lem-pur-lisse-rank-one-aut`). -/
 theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d : ℕ)
     (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V)
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
@@ -657,70 +737,68 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
           (sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
             (AffineSpace.zeroSection_comp_over _ B') θ₀ e).symm := by
   have := D.hasInvertibleExponent_scheme Λ
-  have : HasInvertibleExponent Λ B' := .of_hom u
-  have hv : AffineSpace.map (ULift.{u} (Fin 1)) u ≫ 𝔸(ULift.{u} (Fin 1); B) ↘ B =
-      𝔸(ULift.{u} (Fin 1); B') ↘ B' ≫ u := AffineSpace.map_over u
-  -- the comparison `κ` normalized against `θ₁`
-  obtain ⟨κ, hκ, -⟩ := D.existsUnique_familyObject_iso Λ aB θ₁
-  have hθ₁ : θ₁ = (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
-      κ ≪≫ (leftDerivedUpperStarCompSectionIso _ _ _
-        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).app _ := Iso.ext hκ.symm
-  let κr := (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).mapIso κ ≪≫
-    ((leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) u)
-      (𝔸(ULift.{u} (Fin 1); B) ↘ B)).app _).symm ≪≫
-    (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); B') ↘ B') u _ hv).app _
-  let φ₁ := sectionRestrictionIso _ u _ (AffineSpace.oneSection_comp_map u)
-    (AffineSpace.oneSection_comp_over _ B') θ₁ e
-  -- the restriction of `κ` is `e` read in the coordinates `φ₁`
-  have hκr : κr = e ≪≫
-      (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁.symm := by
-    refine eq_of_leftDerivedUpperStar_oneSection_eq Λ _ _
-      (DerivedCategory.isInvertible.leftDerivedUpperStar _ (D.isInvertible_familyObject Λ))
-      _ _ (leftDerivedUpperStar_map_eq_of_sectionRestrictionIso_eq _ u _
-        (AffineSpace.oneSection_comp_map u) (AffineSpace.oneSection_comp_over _ B') θ₁ _ _ ?_)
-    rw [sectionRestrictionIso_trans_right, hθ₁, sectionRestrictionIso_restrict _ u _ _ _ hv
-      (AffineSpace.oneSection_comp_over _ B), ← hθ₁]
-    exact (Iso.self_symm_id φ₁).symm
-  -- `Ψ` is the fibre of `κ` at `t = 0`
-  let θ₀' := (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
-      κ ≪≫ (leftDerivedUpperStarCompSectionIso _ _ _
-        (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) B)).app (sectionInvariant Λ g s)
-  have he : e = κr ≪≫
-      (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁ := by
-    rw [hκr]
-    ext
-    simp
+  obtain ⟨Ψ₀, hΨ₀⟩ := exists_iso_sectionInvariant_normalCone Λ d g s N D aB θ₁ θ₀
   have hinv : DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) :=
     DerivedCategory.isInvertible.of_iso θ₁
       (DerivedCategory.isInvertible.leftDerivedUpperStar _ (D.isInvertible_familyObject Λ))
-  have key : sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
-        (AffineSpace.zeroSection_comp_over _ B') θ₀ e =
-      (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso (θ₀'.symm ≪≫ θ₀).symm ≪≫ φ₁ := by
-    have h₀ : θ₀ = θ₀' ≪≫ (θ₀'.symm ≪≫ θ₀) := by simp
-    calc _ = sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
-          (AffineSpace.zeroSection_comp_over _ B') (θ₀' ≪≫ (θ₀'.symm ≪≫ θ₀))
-            (κr ≪≫ (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).mapIso φ₁) := by
-          rw [← he, ← h₀]
-      _ = _ := by
-        rw [sectionRestrictionIso_trans_left, sectionRestrictionIso_trans_right,
-          sectionRestrictionIso_restrict _ u _ _ _ hv (AffineSpace.zeroSection_comp_over _ B)]
-        simp
-  have hex : (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso (θ₀'.symm ≪≫ θ₀) =
-      φ₁ ≪≫ (sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
-        (AffineSpace.zeroSection_comp_over _ B') θ₀ e).symm := by
-    rw [key]
-    ext
-    simp
-  refine ⟨θ₀'.symm ≪≫ θ₀, hex, fun Ψ hΨ ↦ ?_⟩
+  refine ⟨Ψ₀, hΨ₀ u e, fun Ψ hΨ ↦ ?_⟩
   -- two such isomorphisms differ by an automorphism of `𝒞(g, s)` trivial after `Lu^*`
   have h₁ : (L((u)^*[ModuleCat.{u + 1} Λ])).map Ψ.hom =
-      (L((u)^*[ModuleCat.{u + 1} Λ])).map (θ₀'.symm ≪≫ θ₀).hom :=
-    congrArg Iso.hom (hΨ.trans hex.symm)
+      (L((u)^*[ModuleCat.{u + 1} Λ])).map Ψ₀.hom :=
+    congrArg Iso.hom (hΨ.trans (hΨ₀ u e).symm)
   have := eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible_of_surjective u hinv
-    (Ψ.hom ≫ (θ₀'.symm ≪≫ θ₀).inv) (by
+    (Ψ.hom ≫ Ψ₀.inv) (by
       rw [Functor.map_comp, h₁, ← Functor.map_comp, Iso.hom_inv_id,
-        CategoryTheory.Functor.map_id]; rfl)
+        CategoryTheory.Functor.map_id])
   exact Iso.ext ((Iso.comp_inv_eq_id _).mp this)
+
+/-- Blueprint `sk-thm-dnc`: DNC invariance of the section dualizing line
+
+*Compatibility with étale localization and arbitrary base change in `B`.* Let
+`Ψ : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)` be the DNC isomorphism, normalized as in
+`existsUnique_iso_sectionInvariant_normalCone` by coordinates `e` over a surjective `u : B' ⟶ B`.
+Then for every base change `u' : B'' ⟶ B` (for instance an étale localization) and every
+identification `e' : Lv₁'^* F ≅ La''^* C₀'` of the restricted family with one pulled back from
+`B''`, `Lu'^* Ψ` is the isomorphism `φ₁' ≫ φ₀'⁻¹` read off from `e'` at `t = 1` and `t = 0`.
+
+For `e'` the comparison `κ'` of the restricted family normalized against `Lu'^* θ₁`
+(`prop-pur-dnc-family-constancy` (4)), this says that `Lu'^* Ψ` is the DNC isomorphism of the
+family restricted to `B''`. -/
+theorem leftDerivedUpperStar_mapIso_iso_sectionInvariant_normalCone
+    [HasTateTwist.IsNormalized Λ] (d : ℕ)
+    (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V)
+    (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
+    (D : Scheme.Hom.DeformationToNormalConeData d g s N) {k : Type u} [Field k]
+    (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B]
+    (θ₁ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ g s)
+    (θ₀ : (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
+      (D.familyObject Λ) ≅ sectionInvariant Λ N.proj N.zeroSection)
+    {B' : Scheme.{u}} (u : B' ⟶ B) [Surjective u]
+    {C₀ : _root_.DerivedCategory (Sheaf B'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e : (L((AffineSpace.map (ULift.{u} (Fin 1)) u)^*[ModuleCat.{u + 1} Λ])).obj
+        (D.familyObject Λ) ≅ (L((𝔸(ULift.{u} (Fin 1); B') ↘ B')^*[ModuleCat.{u + 1} Λ])).obj C₀)
+    (Ψ : sectionInvariant Λ g s ≅ sectionInvariant Λ N.proj N.zeroSection)
+    (hΨ : (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso Ψ =
+      sectionRestrictionIso _ u _ (AffineSpace.oneSection_comp_map u)
+          (AffineSpace.oneSection_comp_over _ B') θ₁ e ≪≫
+        (sectionRestrictionIso _ u _ (AffineSpace.zeroSection_comp_map u)
+          (AffineSpace.zeroSection_comp_over _ B') θ₀ e).symm)
+    {B'' : Scheme.{u}} (u' : B'' ⟶ B)
+    {C₀' : _root_.DerivedCategory (Sheaf B''.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (e' : (L((AffineSpace.map (ULift.{u} (Fin 1)) u')^*[ModuleCat.{u + 1} Λ])).obj
+        (D.familyObject Λ) ≅
+          (L((𝔸(ULift.{u} (Fin 1); B'') ↘ B'')^*[ModuleCat.{u + 1} Λ])).obj C₀') :
+    (L((u')^*[ModuleCat.{u + 1} Λ])).mapIso Ψ =
+      sectionRestrictionIso _ u' _ (AffineSpace.oneSection_comp_map u')
+          (AffineSpace.oneSection_comp_over _ B'') θ₁ e' ≪≫
+        (sectionRestrictionIso _ u' _ (AffineSpace.zeroSection_comp_map u')
+          (AffineSpace.zeroSection_comp_over _ B'') θ₀ e').symm := by
+  obtain ⟨Ψ₀, hΨ₀⟩ := exists_iso_sectionInvariant_normalCone Λ d g s N D aB θ₁ θ₀
+  obtain rfl := (existsUnique_iso_sectionInvariant_normalCone Λ d g s N D aB θ₁ θ₀ u e).unique hΨ
+    (hΨ₀ u e)
+  exact hΨ₀ u' e'
 
 end Etale
 
