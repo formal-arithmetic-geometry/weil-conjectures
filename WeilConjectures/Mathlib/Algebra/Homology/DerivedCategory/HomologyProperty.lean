@@ -118,6 +118,10 @@ instance homologyProperty_isTriangulatedClosed₂ [P.IsClosedUnderIsomorphisms]
       ((homologyFunctor A 0).homologySequence_exact₃ T hT n (n + 1) rfl)
       (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
 
+/-- Blueprint `prop-constructible-derived-subcategory`, general form: in the derived category
+of an abelian category, the complexes whose homology objects lie in a class containing zero,
+closed under isomorphisms, kernels, cokernels and extensions form a triangulated
+subcategory. -/
 instance homologyProperty_isTriangulated [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] :
     (homologyProperty P).IsTriangulated where
