@@ -8791,3 +8791,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapPairLift (stage 3; reviewer PASS; first push; landing 20261012T173852-L-3302657 (interface); batch 20261012T173801; modules 3; new nodes 2)
 - 17:38 L: merged deliver/Q1/Sheaf.CategoryTheory.TruncationTriangle (stage 3; reviewer PASS; first push; landing 20261012T173853-L-3302824 (proof); batch 20261012T173801; modules 1; new nodes 0)
 - 17:38 L: merged deliver/Q1/Sheaf.RingTheory.EtaleAlgebraLiftEtaleFP (stage 3; reviewer PASS; first push; landing 20261012T173853-L-3302925 (proof); batch 20261012T173801; modules 1; new nodes 0)
+- 17:38 L: merged deliver/Q2/Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor (stage 3; reviewer PASS; after a return; landing 20261012T173854-L-3303066 (interface); batch 20261012T173801; modules 2; new nodes 1; change records: coord/changes/stalk-tensor-proof.md)
