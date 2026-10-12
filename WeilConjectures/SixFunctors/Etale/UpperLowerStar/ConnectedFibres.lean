@@ -220,5 +220,136 @@ lemma Etale.upperStarSectionsMap_injective
   trivial
 
 end Germs
+section Chart
+
+variable {X S : Scheme.{u}} {p : X ⟶ S} {V V' : S.Etale} {W : X.Etale}
+  (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V) (f : V' ⟶ V)
+
+/-- The base change `W ×_V V'` of `W` along an étale `f : V' ⟶ V`, as an étale `X`-scheme. -/
+noncomputable def Etale.chart : X.Etale :=
+  haveI := Etale.etale_left f
+  haveI : AlgebraicGeometry.Etale W.hom := W.prop
+  Scheme.Etale.mk (pullback.fst (Etale.chartProj p φ) f.left ≫ W.hom)
+
+/-- The projection `W ×_V V' ⟶ W`. -/
+noncomputable def Etale.chartι : Etale.chart φ f ⟶ W :=
+  MorphismProperty.Over.homMk (pullback.fst (Etale.chartProj p φ) f.left) rfl
+
+lemma Etale.chart_hom :
+    (Etale.chart φ f).hom = pullback.fst (Etale.chartProj p φ) f.left ≫ W.hom := rfl
+
+lemma Etale.chartι_left :
+    (Etale.chartι φ f).left = pullback.fst (Etale.chartProj p φ) f.left := rfl
+
+/-- The morphism `W ×_V V' ⟶ V' ×_S X` of étale `X`-schemes. -/
+noncomputable def Etale.chartφ :
+    Etale.chart φ f ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V' :=
+  MorphismProperty.Over.homMk
+    (pullback.lift (pullback.snd (Etale.chartProj p φ) f.left)
+      (pullback.fst (Etale.chartProj p φ) f.left ≫ W.hom) (by
+        have hf : f.left ≫ V.hom = V'.hom := MorphismProperty.Over.w f
+        rw [← hf, ← Category.assoc, ← pullback.condition, Category.assoc,
+          Etale.chartProj_comp_hom, Category.assoc]))
+    (pullback.lift_snd _ _ _)
+
+@[simp]
+lemma Etale.chartProj_chartφ :
+    Etale.chartProj p (Etale.chartφ φ f) = pullback.snd (Etale.chartProj p φ) f.left := by
+  simp [Etale.chartProj, Etale.chartφ]
+
+lemma Etale.chartφ_comp :
+    Etale.chartφ φ f ≫ (MorphismProperty.Over.pullback @Etale ⊤ p).map f =
+      Etale.chartι φ f ≫ φ := by
+  apply MorphismProperty.Over.Hom.ext
+  apply pullback.hom_ext
+  all_goals rw [MorphismProperty.Comma.comp_left_assoc, MorphismProperty.Comma.comp_left_assoc,
+    MorphismProperty.Over.pullback_map_left]
+  · simp only [Etale.chartφ, Etale.chartι, MorphismProperty.Over.homMk_hom, Over.homMk_left,
+      limit.lift_π, PullbackCone.mk_π_app, limit.lift_π_assoc, cospan_left]
+    exact pullback.condition.symm
+  · simp only [Etale.chartφ, Etale.chartι, MorphismProperty.Over.homMk_hom, Over.homMk_left,
+      limit.lift_π, PullbackCone.mk_π_app]
+    have hφ : φ.left ≫ pullback.snd V.hom p = W.hom := MorphismProperty.Over.w φ
+    rw [hφ]
+
+lemma Etale.isPullback_chart :
+    IsPullback (Etale.chartι φ f).left (Etale.chartProj p (Etale.chartφ φ f))
+      (Etale.chartProj p φ) f.left := by
+  rw [Etale.chartProj_chartφ, Etale.chartι_left]
+  exact IsPullback.of_hasPullback _ _
+
+end Chart
+
+section Local
+
+variable {Λ : Type (u + 1)} [CommRing Λ] {X S : Scheme.{u}} {p : X ⟶ S}
+
+/-- **Local sections of `p^* G` come from `G`.** Every section `σ` of `p^* G` over `W` agrees
+near any point `z` of `W`, after base change along some étale `f : V' ⟶ V`, with the image of
+a section of `G` over `V'`. -/
+lemma Etale.exists_mem_agreementLocus_chart
+    (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {V : S.Etale} {W : X.Etale}
+    (φ : W ⟶ (MorphismProperty.Over.pullback @Etale ⊤ p).obj V)
+    (σ : ((p)^*[_].obj G).obj.obj (op W)) (z : W.left) :
+    ∃ (V' : S.Etale) (f : V' ⟶ V) (c : G.obj.obj (op V')) (z' : (Etale.chart φ f).left),
+      (Etale.chartι φ f).left z' = z ∧
+      z' ∈ Etale.agreementLocus ((p)^*[_].obj G) (((p)^*[_].obj G).obj.map (Etale.chartι φ f).op σ)
+        (Etale.upperStarSectionsMap _ p G (Etale.chartφ φ f) c) := by
+  obtain ⟨Ω, _, _, x, rfl⟩ := Scheme.exists_geometricPoint W.left z
+  obtain ⟨s, hs⟩ : ∃ s, x ≫ W.hom = s := ⟨_, rfl⟩
+  have hv : (x ≫ Etale.chartProj p φ) ≫ V.hom = s ≫ p := by
+    rw [Category.assoc, Etale.chartProj_comp_hom, ← Category.assoc, hs]
+  let e := (Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) p s).app G
+  let germσ := (pointSmallEtale s).toPresheafFiber W (Over.homMk x hs)
+    ((p)^*[_].obj G).obj σ
+  obtain ⟨V₀, v₀, c₀, hc₀⟩ :=
+    (pointSmallEtale (s ≫ p)).toPresheafFiber_jointly_surjective (P := G.obj) (e.hom germσ)
+  -- a common refinement of the pointed étale neighbourhoods `(V₀, v₀)` and `(V, x ≫ q)`
+  haveI : IsCofiltered (pointSmallEtale (s ≫ p)).fiber.Elements :=
+    inferInstanceAs (IsCofiltered
+      (Scheme.Etale.forget S ⋙ coyoneda.obj (op (Over.mk (s ≫ p)))).Elements)
+  let a₀ : (pointSmallEtale (s ≫ p)).fiber.Elements := ⟨V₀, v₀⟩
+  let a₁ : (pointSmallEtale (s ≫ p)).fiber.Elements :=
+    ⟨V, Over.homMk (x ≫ Etale.chartProj p φ) hv⟩
+  let m := IsCofiltered.min a₀ a₁
+  let g : m.1 ⟶ V₀ := (IsCofiltered.minToLeft a₀ a₁).1
+  let f : m.1 ⟶ V := (IsCofiltered.minToRight a₀ a₁).1
+  have hg : (pointSmallEtale (s ≫ p)).fiber.map g m.2 = v₀ := (IsCofiltered.minToLeft a₀ a₁).2
+  have hf : m.2.left ≫ f.left = x ≫ Etale.chartProj p φ :=
+    congrArg CategoryTheory.CommaMorphism.left (IsCofiltered.minToRight a₀ a₁).2
+  let x' : Spec (.of Ω) ⟶ (Etale.chart φ f).left := pullback.lift x m.2.left hf.symm
+  have hx' : x' ≫ (Etale.chart φ f).hom = s := by
+    rw [Etale.chart_hom, pullback.lift_fst_assoc, hs]
+  refine ⟨m.1, f, G.obj.map g.op c₀, x' default, ?_, ?_⟩
+  · rw [Etale.chartι_left, ← Scheme.Hom.comp_apply, pullback.lift_fst]
+  rw [Etale.mem_agreementLocus_iff_toPresheafFiber_eq _ _ x' hx']
+  have hv' : (x' ≫ Etale.chartProj p (Etale.chartφ φ f)) ≫ m.1.hom = s ≫ p := by
+    rw [Etale.chartProj_chartφ, pullback.lift_snd]
+    exact CategoryTheory.Over.w m.2
+  have h₁ := congrArg (fun h ↦ h (G.obj.map g.op c₀))
+    (Etale.upperStarSectionsMap_toPresheafFiber G (Etale.chartφ φ f) x' hx' hv')
+  simp only [ConcreteCategory.comp_apply] at h₁
+  rw [h₁, ← ConcreteCategory.comp_apply, GrothendieckTopology.Point.toPresheafFiber_w]
+  have h₂ : (pointSmallEtale s).fiber.map (Etale.chartι φ f) (Over.homMk x' hx') =
+      Over.homMk x hs := by
+    apply CategoryTheory.Over.OverMorphism.ext
+    exact pullback.lift_fst _ _ _
+  have h₃ : (pointSmallEtale (s ≫ p)).fiber.map g
+      (Over.homMk (x' ≫ Etale.chartProj p (Etale.chartφ φ f)) hv') = v₀ := by
+    rw [← hg]
+    congr 1
+    apply CategoryTheory.Over.OverMorphism.ext
+    change x' ≫ Etale.chartProj p (Etale.chartφ φ f) = m.2.left
+    rw [Etale.chartProj_chartφ, pullback.lift_snd]
+  have h₄ : (pointSmallEtale (s ≫ p)).toPresheafFiber m.1
+      (Over.homMk (x' ≫ Etale.chartProj p (Etale.chartφ φ f)) hv') G.obj (G.obj.map g.op c₀) =
+        e.hom germσ := by
+    rw [← ConcreteCategory.comp_apply, GrothendieckTopology.Point.toPresheafFiber_w, h₃, hc₀]
+  rw [h₂, h₄]
+  change germσ = (e.hom ≫ e.inv) germσ
+  rw [e.hom_inv_id]
+  rfl
+
+end Local
 
 end AlgebraicGeometry
