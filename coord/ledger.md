@@ -8025,3 +8025,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: returned deliver/T2/Sheaf.LinearAlgebra.IdempotentCharpolyLocalCharpoly (reviewer RETURN: (the landing tools, head edab68e93) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Lin)
 - 14:40 L: returned deliver/V2/WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations (reviewer RETURN: (the landing tools, head abe55b7f8) the delivery did not land: refused by tools/import_prune_check.py for lean/WeilConje)
 - 14:40 L: returned deliver/Y3/Sheaf.ConstructibleSheaf.TorsorEquivariantModuleIsSheaf (reviewer RETURN: (the landing tools, head e73cf7550) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Con)
+- 14:40 L: merged deliver/A2/Sheaf.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends (stage 3; reviewer PASS; first push; landing 20261012T144050-L-2087519 (proof); batch 20261012T144049; modules 1; new nodes 0)
