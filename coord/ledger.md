@@ -9512,3 +9512,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:56 L: merged deliver/S1/Sheaf.RingTheory.AlgClosedDifferentialFiberAtClosedPoint (stage 3; reviewer PASS; first push; landing 20261012T205631-L-932586 (interface); batch 20261012T205626; modules 3; new nodes 2)
 - 20:56 L: merged deliver/S2/Sheaf.Paper.FreeComplexMapsToResolution (stage 3; reviewer PASS; first push; landing 20261012T205631-L-932742 (interface); batch 20261012T205626; modules 3; new nodes 2)
 - 20:56 L: merged deliver/S3/Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors (stage 3; reviewer PASS; first push; landing 20261012T205631-L-932843 (interface); batch 20261012T205626; modules 2; new nodes 1)
+- 20:56 L: merged deliver/S3/Sheaf.RingTheory.RelativeGlobalCompleteIntersectionConormalFree (stage 3; reviewer PASS; first push; landing 20261012T205632-L-932948 (proof); batch 20261012T205626; modules 1; new nodes 1)
