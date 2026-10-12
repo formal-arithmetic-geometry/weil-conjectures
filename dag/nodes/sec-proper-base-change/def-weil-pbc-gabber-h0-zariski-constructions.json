@@ -1,0 +1,119 @@
+{
+ "id": "def-weil-pbc-gabber-h0-zariski-constructions",
+ "kind": "definition",
+ "title": "Canonical Zariski restriction and section transport data",
+ "statement": "For a scheme $S$ [def-weil-pbc-scheme-conventions], use the functor sending an open to its open-subscheme etale object. Restriction of an etale sheaf $F$ [def-weil-pbc-etale-sheaf-of-sets] is precomposition by this functor, with the sheaf condition from continuity [lem-weil-pbc-zariski-etale-core]. For $i:Z\\to X$ and $h:X\\prime\\to X$, put $Z\\prime=Z\\times_X X\\prime$ and $i\\prime=\\mathrm{pr}_2$ [def-pc-fibre-product]. Define $G=(h^*F)|_{X\\prime_{Zar}}$ and $H=(i\\prime^*h^*F)|_{Z\\prime_{Zar}}$, and the canonical preimage-open/base-change isomorphism using pullbackRestrictIsoRestrict and pullback symmetry. Define the top section lift using the top-open/identity and identity-pullback isomorphisms. Define the section isomorphism $H(Z\\prime)\\cong ((\\mathrm{pr}_1\\circ i)^*F)(Z\\prime)$ by the same top-open identifications, the unit-compatible composition isomorphism [lem-weil-pbc-sets-etale-inverse-image-composition-units], pullbackComp, and transport along pullback.condition. The target section is the inverse of this isomorphism applied to the pullback of $t$. Define the topological pullback and its unit by [def-weil-pbc-topological-inverse-image]; a comparison is unit compatible when its value on that unit equals the etale unit transported through the canonical preimage-open isomorphism. On one open $W$ with $\\phi:W\\to U$ over $X$, the local representative is the etale unit of $s\\in F(U)$ restricted along pullback.lift $\\phi$ $W.\\iota$. All data are actual constructions, with no arbitrary existence choices.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph; the preceding paragraph states pullback functoriality"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-pc-fibre-product",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-zariski-etale-core"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph; the preceding paragraph states pullback functoriality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical restriction of etale sheaves to Zariski opens and top section pullback isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of an etale sheaf to the Zariski site and compatibility of inverse image units",
+   "results": [
+    "AlgebraicGeometry.Scheme.ofRestrict_app",
+    "AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app",
+    "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+    "AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app",
+    "AlgebraicGeometry.Scheme.restrictFunctorΓ",
+    "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+    "ModuleCat.Tilde.toOpen_res",
+    "AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_map"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Related generic declarations; none is the stated geometric comparison equation."
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*naturality|naturality.*unit",
+   "results": [
+    "Mathlib/Probability/Kernel/Category/SFinKer.lean",
+    "Mathlib/Probability/Kernel/Category/SFinKer.lean",
+    "Mathlib/Topology/Sheaves/Skyscraper.lean",
+    "Mathlib/Topology/Category/TopPair.lean",
+    "Mathlib/Tactic/CategoryTheory/Monoidal/PureCoherence.lean",
+    "Mathlib/Tactic/CategoryTheory/Monoidal/PureCoherence.lean",
+    "Mathlib/Tactic/CategoryTheory/Monoidal/PureCoherence.lean",
+    "Mathlib/Tactic/CategoryTheory/Monoidal/PureCoherence.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "Related generic declarations; none is the stated geometric comparison equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalData",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Tag 09ZF, lemma-gabber-h0, fourth proof paragraph; the preceding paragraph states pullback functoriality",
+   "via": [
+    "lem-weil-pbc-gabber-h0-zariski-local-data",
+    "lem-weil-pbc-gabber-h0-zariski-gluing",
+    "lem-weil-pbc-gabber-h0-finite-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberH0ZariskiConstructions",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberH0ZariskiConstructions.lean",
+  "declaration": "AlgebraicGeometry.gabberZariskiSectionIso",
+  "statement": "def gabberZariskiSectionIso {X Z X' : Scheme.{u}}\n    (i : Z ⟶ X) (h : X' ⟶ X)\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :\n    (gabberZariskiSheaf (pullback i h)\n      ((Scheme.etaleSetPullback (pullback.snd i h)).obj\n        ((Scheme.etaleSetPullback h).obj F))).obj.obj (op (⊤ : (pullback i h).Opens)) ≅\n    ((Scheme.etaleSetPullback (pullback.fst i h ≫ i)).obj F).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ (pullback.fst i h ≫ i)).obj\n        (Scheme.Etale.mk (𝟙 X))))",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T135339-L-1702857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T135339-L-1702857",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

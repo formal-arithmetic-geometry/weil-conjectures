@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import Sheaf.AlgebraicGeometry.GabberH0ZariskiRepresentativeEquation
+import Sheaf.AlgebraicGeometry.GabberH0ZariskiTopUnitEquation
 
 /-! # Local data for Zariski gluing
 
@@ -26,6 +26,10 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 
 namespace AlgebraicGeometry
+
+private theorem sectionIso_apply_inv {A B : Type (u + 1)} (e : A ≅ B) (x : B) :
+    e.hom (e.inv x) = x := by
+  exact ConcreteCategory.congr_hom e.inv_hom_id x
 
 /-- Restrict the pulled-back etale sheaves to opens and transport the representative
 and unit equations to these restrictions. This gives local lifts, before gluing.
@@ -150,6 +154,27 @@ theorem gabber_h0_zariski_local_data
                 (Scheme.Etale.mk (𝟙 X))))) (pullback.condition (f := i) (g := h)).symm)
             (etaleSetDescentComparison h (pullback.snd i h) F
               (Scheme.Etale.mk (𝟙 X)) (lift a))) := by
-  sorry
+  dsimp only
+  refine ⟨gabberZariskiG h F, gabberZariskiLift h F, gabberZariskiH i h F,
+    Iso.refl _, Iso.refl _, gabberPreimageEtaleIso (pullback.snd i h), ?_,
+    gabberZariskiCompare i h F, gabberZariskiTargetSection i h F t, ?_, ?_⟩
+  · exact gabberPreimageEtaleIso_fst (pullback.snd i h)
+  · exact sectionIso_apply_inv (gabberZariskiSectionIso i h F) _
+  · intro beta hbeta
+    have hb : GabberZariskiUnitCompatible i h F beta := hbeta
+    constructor
+    · refine ⟨fun a ↦ (pullback.snd i h) ⁻¹ᵁ W a,
+        fun a ↦ gabberZariskiUnit (pullback.snd i h) (gabberZariskiG h F) (W a)
+          (gabberLocalRepresentative q h F s (W a) (phi a) (hphi a)), ?_, ?_⟩
+      · apply Opens.ext
+        ext x
+        change (x ∈ ⨆ a, (pullback.snd i h) ⁻¹ᵁ W a) ↔ x ∈ (⊤ : (pullback i h).Opens)
+        simp only [Opens.mem_iSup, Scheme.Hom.mem_preimage, Opens.mem_top, iff_true]
+        have hx : (pullback.snd i h) x ∈ ⨆ a, W a := by rw [hW]; trivial
+        exact Opens.mem_iSup.mp hx
+      · intro a
+        exact gabber_h0_zariski_representative_equation i q h F t s hs
+          (W a) (phi a) (hphi a) beta hb
+    · exact gabber_h0_zariski_top_unit_equation i h F beta hb
 
 end AlgebraicGeometry
