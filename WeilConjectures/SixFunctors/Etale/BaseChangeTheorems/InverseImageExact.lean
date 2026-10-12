@@ -29,13 +29,14 @@ Right exactness of `g^*` holds because it is a left adjoint.
 
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_and_preservesFiniteColimits_upperStar`:
   `g^*` is exact.
+- `AlgebraicGeometry.Etale.preservesColimitsOfSize_upperStar`: `g^*` preserves all colimits.
 - `AlgebraicGeometry.Etale.shortExact_map_upperStar`: `g^*` sends short exact sequences to
   short exact sequences.
 -/
 
 @[expose] public section
 
-universe u u'
+universe v w u u'
 
 open CategoryTheory Limits
 
@@ -99,6 +100,16 @@ sequences (`AlgebraicGeometry.Etale.preservesFiniteLimits_and_preservesFiniteCol
 -/
 theorem Etale.shortExact_map_upperStar {S : ShortComplex (Sheaf Y.smallEtaleTopology A)}
     (hS : S.ShortExact) : (S.map (g)^*[A]).ShortExact :=
-  hS.map (g)^*[A]
+  hS.map_of_exact (g)^*[A]
+
+/-- **Inverse image commutes with colimits**: for an arbitrary morphism of schemes `g : Z ⟶ Y`,
+the inverse image `g^* : Sh(Y_ét, A) ⥤ Sh(Z_ét, A)` preserves all colimits, being left adjoint
+to the direct image `g_*` (`AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`). For `A` the
+category of abelian groups, this says that `colim_i g⁻¹ F_i ⟶ g⁻¹ (colim_i F_i)` is an
+isomorphism for every small diagram `F` of abelian sheaves on `Y_ét`.
+This is blueprint `lem-weil-pbc-inverse-image-preserves-colimits`. -/
+@[stacks 0038]
+theorem Etale.preservesColimitsOfSize_upperStar : PreservesColimitsOfSize.{v, w} (g)^*[A] :=
+  (Etale.upperStarLowerStarAdjunction A g).leftAdjoint_preservesColimits
 
 end AlgebraicGeometry

@@ -46,7 +46,7 @@ instance Presheaf.isGrothendieckAbelian [Abelian A] [IsGrothendieckAbelian.{w} A
   hasFilteredColimitsOfSize := ⟨fun _ _ _ ↦ inferInstance⟩
   ab5OfSize := ⟨fun _ _ _ ↦ inferInstance⟩
   hasSeparator := by
-    have : HasCoproducts.{0} A := hasColimitsOfSizeShrink.{0, 0, w, w} A
-    exact Presheaf.hasSeparator A
+    have : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink.{0, 0, w, w} A
+    exact Presheaf.hasSeparator C A
 
 end CategoryTheory

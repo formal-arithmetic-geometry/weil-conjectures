@@ -80,6 +80,7 @@ lemma rightAdjointProjectionMap_comp_invOfRetract :
         adj.rightAdjointProjectionMapInvOfRetract φ h M = 𝟙 _ := by
   rw [rightAdjointProjectionMapInvOfRetract, ← rightAdjointProjectionMap_naturality_assoc,
     IsIso.hom_inv_id_assoc, ← Functor.map_comp, h.retract, Functor.map_id]
+  rfl
 
 @[reassoc (attr := simp)]
 lemma rightAdjointProjectionMapInvOfRetract_comp :
@@ -89,9 +90,10 @@ lemma rightAdjointProjectionMapInvOfRetract_comp :
     rightAdjointProjectionMap_naturality, IsIso.inv_hom_id_assoc, ← G.map_comp,
     ← Functor.map_comp, ← F.map_comp, h.retract, F.map_id, Functor.map_id, G.map_id]
 
+include h in
 /-- The projection map is an isomorphism at a retract of an object at which it is one. This is
 the first half of blueprint `lemma-weil-pbc-projection-formula-projective-summand`. -/
-instance isIso_rightAdjointProjectionMap_app_app_of_retract :
+lemma isIso_rightAdjointProjectionMap_app_app_of_retract :
     IsIso (((adj.rightAdjointProjectionMap φ).app M).app X) :=
   ⟨⟨_, adj.rightAdjointProjectionMap_comp_invOfRetract φ h M,
     adj.rightAdjointProjectionMapInvOfRetract_comp φ h M⟩⟩
@@ -105,7 +107,7 @@ lemma rightAdjointProjectionMapInvOfRetract_eq :
     haveI := adj.isIso_rightAdjointProjectionMap_app_app_of_retract φ h M
     adj.rightAdjointProjectionMapInvOfRetract φ h M =
       inv (((adj.rightAdjointProjectionMap φ).app M).app X) := by
-  haveI := adj.isIso_rightAdjointProjectionMap_app_app_of_retract φ h M
+  have := adj.isIso_rightAdjointProjectionMap_app_app_of_retract φ h M
   rw [← cancel_epi (((adj.rightAdjointProjectionMap φ).app M).app X),
     rightAdjointProjectionMap_comp_invOfRetract, IsIso.hom_inv_id]
 
@@ -115,6 +117,7 @@ lemma rightAdjointProjectionMapInvOfRetract_eq_of_retract {Y' : D} (h' : Retract
     [IsIso (((adj.rightAdjointProjectionMap φ).app M).app Y')] :
     adj.rightAdjointProjectionMapInvOfRetract φ h M =
       adj.rightAdjointProjectionMapInvOfRetract φ h' M := by
+  have := adj.isIso_rightAdjointProjectionMap_app_app_of_retract φ h M
   rw [← cancel_epi (((adj.rightAdjointProjectionMap φ).app M).app X),
     rightAdjointProjectionMap_comp_invOfRetract, rightAdjointProjectionMap_comp_invOfRetract]
 
@@ -154,11 +157,6 @@ variable [F.OplaxMonoidal] [IsIso (Functor.OplaxMonoidal.η F)]
   (hφ : ∀ X Y, (φ.app X).app Y = Functor.OplaxMonoidal.δ F X Y)
 include hφ
 
-/-- The unit lies in the objects at which the projection map is an isomorphism. -/
-lemma isoLocus_projectionMap_tensorUnit (M : C) :
-    NatTrans.isoLocus (adj.rightAdjointProjectionMapApp φ M) (𝟙_ D) :=
-  adj.isIso_rightAdjointProjectionMap_app_app_tensorUnit φ hφ M
-
 /-- **Finite-free projection formula** (blueprint
 `lemma-weil-pbc-projection-formula-finite-free`). The projection map
 `G M ⊗ (⨁ 𝟙)⟦a⟧ ⟶ G (M ⊗ F ((⨁ 𝟙)⟦a⟧))` at a shifted finite sum of copies of the unit is an
@@ -170,7 +168,7 @@ lemma isIso_rightAdjointProjectionMap_app_app_shift_biproduct_unit [HasFiniteBip
   let P := NatTrans.isoLocus (adj.rightAdjointProjectionMapApp φ M)
   have h : P (⨁ fun _ : Fin N ↦ 𝟙_ D) :=
     P.prop_of_isLimit_fan (biproduct.isLimit _)
-      fun _ ↦ adj.isoLocus_projectionMap_tensorUnit φ hφ M
+      fun _ ↦ adj.isIso_rightAdjointProjectionMap_app_app_tensorUnit φ hφ M
   exact P.le_shift a _ h
 
 end Triangulated

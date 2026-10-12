@@ -120,7 +120,10 @@ theorem mor₃_unique_of_subsingleton [Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶
     (x : T.obj₃ ⟶ T.obj₁⟦(1 : ℤ)⟧) (hx : Triangle.mk T.mor₁ T.mor₂ x ∈ distTriang C) :
     x = T.mor₃ := by
   have : Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶ (Triangle.mk T.mor₁ T.mor₂ x).obj₃) := ‹_›
-  have := comm₃_of_subsingleton hT hx (𝟙 _) (𝟙 _) (𝟙 _) (by simp) (by simp)
-  simpa using this.symm
+  have := comm₃_of_subsingleton hT hx (𝟙 _) (𝟙 _) (𝟙 _)
+    ((comp_id _).trans (id_comp _).symm) ((comp_id _).trans (id_comp _).symm)
+  change T.mor₃ ≫ (shiftFunctor C (1 : ℤ)).map (𝟙 T.obj₁) = 𝟙 T.obj₃ ≫ x at this
+  rw [Functor.map_id, comp_id, id_comp] at this
+  exact this.symm
 
 end CategoryTheory.Pretriangulated

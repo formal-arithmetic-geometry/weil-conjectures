@@ -28,7 +28,8 @@ statements are proved by chasing elements up to refinements
 
 ## Main definitions
 
-- `CategoryTheory.ExactCouple.dSc`: the short complex `E^{p-s-2,q+s+1} ⟶ E^{p,q} ⟶ E^{p+s+2,q-s-1}`
+- `CategoryTheory.ExactCouple.dSc`: the short complex of differentials
+  `E^{p-s-2,q+s+1} ⟶ E^{p,q} ⟶ E^{p+s+2,q-s-1}`.
   of differentials.
 - `CategoryTheory.ExactCouple.derived`: the derived couple, an exact couple of type `s + 1`
   (`lem-sp-derived-couple-exact`).
@@ -70,45 +71,44 @@ end Reindexing
 
 /-- The short complex `E^{p-s-2,q+s+1} ⟶ E^{p,q} ⟶ E^{p+s+2,q-s-1}` of differentials, whose
 homology is the `E`-term of the derived couple. -/
-@[simps]
-def dSc (p q : ℤ) : ShortComplex C :=
+abbrev dSc (p q : ℤ) : ShortComplex C :=
   ShortComplex.mk (X.d (p - s - 2) (q + s + 1) p q) (X.d p q (p + s + 2) (q - s - 1))
-    (X.d_d _ _ _ _ _ _)
+    (X.d_d (p - s - 2) (q + s + 1) p q (p + s + 2) (q - s - 1))
 
 /-- The `D`-term `D'^{p,q} = ker (g : D^{p,q} ⟶ E^{p+s,q-s})` of the derived couple; by
 exactness it is the image of `α : D^{p+1,q-1} ⟶ D^{p,q}`. -/
-noncomputable def D' (p q : ℤ) : C := kernel (X.g p q (p + s) (q - s))
+noncomputable abbrev D' (p q : ℤ) : C := kernel (X.g p q (p + s) (q - s))
 
 /-- The inclusion `D'^{p,q} ⟶ D^{p,q}`. -/
-noncomputable def ι' (p q : ℤ) : X.D' p q ⟶ X.D p q := kernel.ι _
-
-instance (p q : ℤ) : Mono (X.ι' p q) := by dsimp [ι']; infer_instance
+noncomputable abbrev ι' (p q : ℤ) : X.D' p q ⟶ X.D p q := kernel.ι _
 
 /-- The `E`-term `E'^{p,q} = ker d / im d` of the derived couple. -/
-noncomputable def E' (p q : ℤ) : C := (X.dSc p q).homology
+noncomputable abbrev E' (p q : ℤ) : C := (X.dSc p q).homology
 
 @[reassoc (attr := simp)]
 lemma ι'_g (p q p' q' : ℤ) (hp : p + s = p' := by lia) (hq : q' + s = q := by lia) :
     X.ι' p q ≫ X.g p q p' q' = 0 :=
-  (X.comp_g_eq_zero_iff (X.ι' p q) _ _ _ _ rfl (by lia) hp hq).1 (kernel.condition _)
+  (X.comp_g_eq_zero_iff (X.ι' p q) (p + s) (q - s) p' q' rfl (by lia) hp hq).1
+    (kernel.condition _)
 
 /-- The corestriction `ᾱ : D^{p,q} ⟶ D'^{p-1,q+1}` of `α`, an epimorphism. -/
 noncomputable def αbar (p q p' q' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := by lia) :
     X.D p q ⟶ X.D' p' q' :=
-  kernel.lift _ (X.α p q p' q') (X.α_g p q p' q' _ _)
+  kernel.lift _ (X.α p q p' q') (X.α_g p q p' q' (p' + s) (q' - s))
 
 @[reassoc (attr := simp)]
 lemma αbar_ι' (p q p' q' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := by lia) :
     X.αbar p q p' q' ≫ X.ι' p' q' = X.α p q p' q' :=
   kernel.lift_ι _ _ _
 
-instance (p q p' q' : ℤ) (hp : p' + 1 = p) (hq : q + 1 = q') : Epi (X.αbar p q p' q') :=
+instance (p q p' q' : ℤ) (hp : p' + 1 = p) (hq : q + 1 = q') : Epi (X.αbar p q p' q' hp hq) :=
   (X.exact_α_g p q p' q' (p' + s) (q' - s)).epi_kernelLift
 
 /-- The restriction `α' : D'^{p,q} ⟶ D'^{p-1,q+1}` of `α`. -/
 noncomputable def α' (p q p' q' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := by lia) :
     X.D' p q ⟶ X.D' p' q' :=
-  kernel.lift _ (X.ι' p q ≫ X.α p q p' q') (by rw [assoc, X.α_g p q p' q' _ _, comp_zero])
+  kernel.lift _ (X.ι' p q ≫ X.α p q p' q') (by
+    rw [assoc, X.α_g p q p' q' (p' + s) (q' - s), comp_zero])
 
 @[reassoc (attr := simp)]
 lemma α'_ι' (p q p' q' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := by lia) :
@@ -119,14 +119,16 @@ lemma α'_ι' (p q p' q' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := 
 lemma αbar_α' (p q p' q' p'' q'' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := by lia)
     (hp' : p'' + 1 = p' := by lia) (hq' : q' + 1 = q'' := by lia) :
     X.αbar p q p' q' ≫ X.α' p' q' p'' q'' = X.α p q p' q' ≫ X.αbar p' q' p'' q'' := by
-  rw [← cancel_mono (X.ι' p'' q''), assoc, α'_ι', αbar_ι'_assoc, assoc, αbar_ι']
+  rw [← cancel_mono (X.ι' p'' q''), assoc, X.α'_ι' p' q' p'' q'', X.αbar_ι'_assoc p q p' q',
+    assoc, X.αbar_ι' p' q' p'' q'']
 
 /-- `f` restricted to the cycles of `d` lands in `D' = ker g`. -/
 noncomputable def fCycles (p q p' q' : ℤ) (hp : p + 2 = p' := by lia)
     (hq : q' + 1 = q := by lia) : (X.dSc p q).cycles ⟶ X.D' p' q' :=
   kernel.lift _ ((X.dSc p q).iCycles ≫ X.f p q p' q') (by
-    rw [assoc, X.comp_g_eq_zero_iff _ _ _ (p + s + 2) (q - s - 1) rfl (by lia) (by lia) (by lia),
-      ← X.d_eq p q (p + s + 2) (q - s - 1) p' q']
+    refine (X.comp_g_eq_zero_iff _ (p' + s) (q' - s) (p + s + 2) (q - s - 1) rfl (by lia)
+      (by lia) (by lia)).2 ?_
+    rw [assoc, ← X.d_eq p q (p + s + 2) (q - s - 1) p' q']
     exact (X.dSc p q).iCycles_g)
 
 @[reassoc (attr := simp)]
@@ -138,24 +140,36 @@ lemma fCycles_ι' (p q p' q' : ℤ) (hp : p + 2 = p' := by lia) (hq : q' + 1 = q
 noncomputable def f' (p q p' q' : ℤ) (hp : p + 2 = p' := by lia) (hq : q' + 1 = q := by lia) :
     X.E' p q ⟶ X.D' p' q' :=
   (X.dSc p q).descHomology (X.fCycles p q p' q') (by
-    rw [← cancel_mono (X.ι' p' q'), assoc, fCycles_ι', ShortComplex.toCycles_i_assoc, zero_comp,
-      dSc_f, d, assoc, X.g_f (p - s - 2 + 2) (q + s + 1 - 1) p q p' q', comp_zero])
+    rw [← cancel_mono (X.ι' p' q'), assoc, X.fCycles_ι' p q p' q', zero_comp, ← assoc,
+      (X.dSc p q).toCycles_i]
+    change X.d (p - s - 2) (q + s + 1) p q ≫ X.f p q p' q' = 0
+    dsimp only [d]
+    rw [assoc, X.g_f (p - s - 2 + 2) (q + s + 1 - 1) p q p' q', comp_zero])
 
 @[reassoc (attr := simp)]
 lemma π_f' (p q p' q' : ℤ) (hp : p + 2 = p' := by lia) (hq : q' + 1 = q := by lia) :
     (X.dSc p q).homologyπ ≫ X.f' p q p' q' = X.fCycles p q p' q' :=
-  ShortComplex.π_descHomology _ _ _
+  (X.dSc p q).π_descHomology _ _
 
 /-- `g` corestricted to the cycles of `d`. -/
 noncomputable def gCycles (p q p' q' : ℤ) (hp : p + s = p' := by lia)
     (hq : q' + s = q := by lia) : X.D p q ⟶ (X.dSc p' q').cycles :=
   (X.dSc p' q').liftCycles (X.g p q p' q') (by
-    rw [dSc_g, d, X.g_f_assoc p q p' q' (p' + 2) (q' - 1), zero_comp])
+    change X.g p q p' q' ≫ X.d p' q' (p' + s + 2) (q' - s - 1) = 0
+    dsimp only [d]
+    rw [X.g_f_assoc p q p' q' (p' + 2) (q' - 1), zero_comp])
 
 @[reassoc (attr := simp)]
 lemma gCycles_i (p q p' q' : ℤ) (hp : p + s = p' := by lia) (hq : q' + s = q := by lia) :
     X.gCycles p q p' q' ≫ (X.dSc p' q').iCycles = X.g p q p' q' :=
-  ShortComplex.liftCycles_i _ _ _
+  (X.dSc p' q').liftCycles_i _ _
+
+lemma comp_gCycles {A : C} (p q p' q' : ℤ) (y : A ⟶ X.D p q) (hp : p + s = p' := by lia)
+    (hq : q' + s = q := by lia) :
+    y ≫ X.gCycles p q p' q' = (X.dSc p' q').liftCycles (y ≫ X.g p q p' q') (by
+      rw [assoc, ← X.gCycles_i p q p' q', assoc, ShortComplex.iCycles_g, comp_zero,
+        comp_zero]) := by
+  rw [gCycles, ShortComplex.comp_liftCycles]
 
 /-- If `y = x ∘ d` is a boundary, then its class in `E'` vanishes. The source of the
 differential may be indexed by any pair of integers equal to `(p - s - 2, q + s + 1)`. -/
@@ -163,20 +177,22 @@ lemma liftCycles_homologyπ_eq_zero {A : C} (p q : ℤ) (y : A ⟶ X.E p q)
     (hy : y ≫ (X.dSc p q).g = 0) (a b : ℤ) (x : A ⟶ X.E a b) (hab : a + s + 2 = p)
     (hab' : q + s + 1 = b) (h : y = x ≫ X.d a b p q) :
     (X.dSc p q).liftCycles y hy ≫ (X.dSc p q).homologyπ = 0 := by
-  obtain ⟨x', hx'⟩ := X.exists_comp_d_eq x (p - s - 2) (q + s + 1) p q (by lia) (by lia) hab hab'
+  obtain ⟨x', hx'⟩ :=
+    X.exists_comp_d_eq x (p - s - 2) (q + s + 1) p q (by lia) (by lia) hab hab'
   exact (X.dSc p q).liftCycles_homologyπ_eq_zero_of_boundary y x' (h.trans hx')
 
 lemma kernel_ι_αbar_gCycles_homologyπ (p q p' q' : ℤ) (hp : p + (s + 1 : ℕ) = p')
     (hq : q' + (s + 1 : ℕ) = q) :
-    kernel.ι (X.αbar (p + 1) (q - 1) p q) ≫ X.gCycles (p + 1) (q - 1) p' q' ≫
+    kernel.ι (X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1)) ≫
+      X.gCycles (p + 1) (q - 1) p' q' ≫
       (X.dSc p' q').homologyπ = 0 := by
-  set k := kernel.ι (X.αbar (p + 1) (q - 1) p q)
+  set k := kernel.ι (X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1))
   have hk : k ≫ X.α (p + 1) (q - 1) p q = 0 := by
-    rw [← X.αbar_ι', kernel.condition_assoc, zero_comp]
+    rw [← X.αbar_ι' (p + 1) (q - 1) p q, kernel.condition_assoc, zero_comp]
   obtain ⟨A', π, hπ, x, hx⟩ :=
     (X.exact_f_α (p - 1) q (p + 1) (q - 1) p q).exact_up_to_refinements k hk
   dsimp at hx
-  rw [← cancel_epi π, comp_zero, ← assoc, ← assoc, gCycles, ShortComplex.comp_liftCycles]
+  rw [← cancel_epi π, comp_zero, ← assoc, ← assoc, X.comp_gCycles (p + 1) (q - 1) p' q']
   exact X.liftCycles_homologyπ_eq_zero p' q' _ _ (p - 1) q x (by push_cast at hp; lia)
     (by push_cast at hq; lia) (by rw [hx, assoc, ← X.d_eq (p - 1) q p' q' (p + 1) (q - 1)])
 
@@ -184,7 +200,7 @@ lemma kernel_ι_αbar_gCycles_homologyπ (p q p' q' : ℤ) (hp : p + (s + 1 : �
 (`CategoryTheory.ExactCouple.αbar_g'`). -/
 noncomputable def g' (p q p' q' : ℤ) (hp : p + (s + 1 : ℕ) = p' := by lia)
     (hq : q' + (s + 1 : ℕ) = q := by lia) : X.D' p q ⟶ X.E' p' q' :=
-  Abelian.epiDesc (X.αbar (p + 1) (q - 1) p q)
+  Abelian.epiDesc (X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1))
     (X.gCycles (p + 1) (q - 1) p' q' (by push_cast at hp; lia) (by push_cast at hq; lia) ≫
       (X.dSc p' q').homologyπ) (X.kernel_ι_αbar_gCycles_homologyπ p q p' q' hp hq)
 
@@ -196,7 +212,7 @@ lemma αbar_g' (a b p q p' q' : ℤ) (ha : p + 1 = a := by lia) (hb : b + 1 = q 
         (X.dSc p' q').homologyπ := by
   obtain rfl : a = p + 1 := by lia
   obtain rfl : b = q - 1 := by lia
-  exact Abelian.comp_epiDesc _ _ _
+  exact Abelian.comp_epiDesc (X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1)) _ _
 
 /-! ### The derived couple is exact -/
 
@@ -205,24 +221,31 @@ lemma f'_α' (a b p q p' q' : ℤ) (hp : a + 2 = p := by lia) (hq : q + 1 = b :=
     (hp' : p' + 1 = p := by lia) (hq' : q + 1 = q' := by lia) :
     X.f' a b p q ≫ X.α' p q p' q' = 0 := by
   rw [← cancel_epi (X.dSc a b).homologyπ, ← cancel_mono (X.ι' p' q')]
-  simp
+  simp only [assoc, comp_zero, zero_comp]
+  rw [X.α'_ι' p q p' q', X.π_f'_assoc a b p q, X.fCycles_ι'_assoc a b p q,
+    X.f_α a b p q p' q', comp_zero]
 
 @[reassoc (attr := simp)]
 lemma g'_f' (p₀ q₀ p q p' q' : ℤ) (hp : p₀ + (s + 1 : ℕ) = p := by lia)
     (hq : q + (s + 1 : ℕ) = q₀ := by lia) (hp' : p + 2 = p' := by lia)
     (hq' : q' + 1 = q := by lia) :
     X.g' p₀ q₀ p q ≫ X.f' p q p' q' = 0 := by
-  rw [← cancel_epi (X.αbar (p₀ + 1) (q₀ - 1) p₀ q₀), ← cancel_mono (X.ι' p' q')]
-  simp
+  rw [← cancel_epi (X.αbar (p₀ + 1) (q₀ - 1) p₀ q₀ rfl (sub_add_cancel q₀ 1)),
+    ← cancel_mono (X.ι' p' q')]
+  simp only [assoc, comp_zero, zero_comp]
+  rw [X.αbar_g'_assoc (p₀ + 1) (q₀ - 1) p₀ q₀ p q, X.π_f'_assoc p q p' q',
+    X.fCycles_ι' p q p' q', X.gCycles_i_assoc (p₀ + 1) (q₀ - 1) p q,
+    X.g_f (p₀ + 1) (q₀ - 1) p q p' q']
 
 @[reassoc (attr := simp)]
 lemma α'_g' (p q p' q' p'' q'' : ℤ) (hp : p' + 1 = p := by lia) (hq : q + 1 = q' := by lia)
     (hp' : p' + (s + 1 : ℕ) = p'' := by lia) (hq' : q'' + (s + 1 : ℕ) = q' := by lia) :
     X.α' p q p' q' ≫ X.g' p' q' p'' q'' = 0 := by
-  rw [← cancel_epi (X.αbar (p + 1) (q - 1) p q), comp_zero, X.αbar_α'_assoc, X.αbar_g' p q,
-    ← assoc, gCycles, ShortComplex.comp_liftCycles]
-  exact X.liftCycles_homologyπ_eq_zero _ _ _ _ (p'' - s - 2) (q'' + s + 1) 0 (by lia) (by lia)
-    (by rw [X.α_g, zero_comp])
+  rw [← cancel_epi (X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1)), comp_zero,
+    X.αbar_α'_assoc (p + 1) (q - 1) p q p' q', X.αbar_g' p q p' q' p'' q'', ← assoc,
+    X.comp_gCycles p q p'' q'']
+  exact X.liftCycles_homologyπ_eq_zero p'' q'' _ _ (p'' - s - 2) (q'' + s + 1) 0 (by lia)
+    (by lia) (by rw [X.α_g (p + 1) (q - 1) p q p'' q'', zero_comp])
 
 lemma exact_f'_α' (a b p q p' q' : ℤ) (hp : a + 2 = p := by lia) (hq : q + 1 = b := by lia)
     (hp' : p' + 1 = p := by lia) (hq' : q + 1 = q' := by lia) :
@@ -231,17 +254,19 @@ lemma exact_f'_α' (a b p q p' q' : ℤ) (hp : a + 2 = p := by lia) (hq : q + 1 
   intro A y hy
   dsimp at y hy ⊢
   have hy' : (y ≫ X.ι' p q) ≫ X.α p q p' q' = 0 := by
-    rw [assoc, ← X.α'_ι', reassoc_of% hy, zero_comp]
+    rw [assoc, ← X.α'_ι' p q p' q', ← assoc, hy, zero_comp]
   obtain ⟨A₁, π₁, hπ₁, x, hx⟩ :=
     (X.exact_f_α a b p q p' q').exact_up_to_refinements (y ≫ X.ι' p q) hy'
   dsimp at hx
   have hxd : x ≫ (X.dSc a b).g = 0 := by
-    rw [dSc_g, X.d_eq a b (a + s + 2) (b - s - 1) p q, ← assoc, ← hx, assoc, assoc]
-    rw [X.comp_g_eq_zero_iff _ _ _ (p + s) (q - s) (by lia) (by lia) (by lia) (by lia)]
-    simp
+    change x ≫ X.d a b (a + s + 2) (b - s - 1) = 0
+    rw [X.d_eq a b (a + s + 2) (b - s - 1) p q, ← assoc, ← hx,
+      X.comp_g_eq_zero_iff _ (a + s + 2) (b - s - 1) (p + s) (q - s) (by lia) (by lia) rfl
+        (by lia), assoc, assoc, X.ι'_g p q (p + s) (q - s), comp_zero, comp_zero]
   refine ⟨A₁, π₁, hπ₁, (X.dSc a b).liftCycles x hxd ≫ (X.dSc a b).homologyπ, ?_⟩
-  rw [← cancel_mono (X.ι' p q), assoc, hx, assoc, assoc, π_f'_assoc, fCycles_ι',
-    ShortComplex.liftCycles_i_assoc]
+  rw [← cancel_mono (X.ι' p q)]
+  simp only [assoc]
+  rw [hx, X.π_f'_assoc a b p q, X.fCycles_ι' a b p q, (X.dSc a b).liftCycles_i_assoc]
 
 lemma exact_g'_f' (p₀ q₀ p q p' q' : ℤ) (hp : p₀ + (s + 1 : ℕ) = p := by lia)
     (hq : q + (s + 1 : ℕ) = q₀ := by lia) (hp' : p + 2 = p' := by lia)
@@ -250,17 +275,21 @@ lemma exact_g'_f' (p₀ q₀ p q p' q' : ℤ) (hp : p₀ + (s + 1 : ℕ) = p := 
   rw [ShortComplex.exact_iff_exact_up_to_refinements]
   intro A e he
   dsimp at e he ⊢
-  obtain ⟨A₁, π₁, hπ₁, z, hz⟩ := surjective_up_to_refinements_of_epi (X.dSc p q).homologyπ e
+  obtain ⟨A₁, π₁, hπ₁, z, hz⟩ :=
+    surjective_up_to_refinements_of_epi (X.dSc p q).homologyπ e
   have hz' : (z ≫ (X.dSc p q).iCycles) ≫ X.f p q p' q' = 0 := by
-    rw [assoc, ← fCycles_ι', ← π_f'_assoc, ← reassoc_of% hz, reassoc_of% he, zero_comp,
-      comp_zero]
+    rw [assoc, ← X.fCycles_ι' p q p' q', ← X.π_f'_assoc p q p' q', ← assoc z, ← hz, assoc,
+      reassoc_of% he, zero_comp, comp_zero]
   obtain ⟨A₂, π₂, hπ₂, w, hw⟩ :=
     (X.exact_g_f (p₀ + 1) (q₀ - 1) p q p' q').exact_up_to_refinements _ hz'
   dsimp at hw
-  refine ⟨A₂, π₂ ≫ π₁, epi_comp _ _, w ≫ X.αbar (p₀ + 1) (q₀ - 1) p₀ q₀, ?_⟩
+  refine ⟨A₂, π₂ ≫ π₁, epi_comp _ _,
+    w ≫ X.αbar (p₀ + 1) (q₀ - 1) p₀ q₀ rfl (sub_add_cancel q₀ 1), ?_⟩
   have : π₂ ≫ z = w ≫ X.gCycles (p₀ + 1) (q₀ - 1) p q := by
-    rw [← cancel_mono (X.dSc p q).iCycles, assoc, hw, assoc, gCycles_i]
-  rw [assoc, hz, assoc, X.αbar_g', ← assoc π₂, this, assoc]
+    rw [← cancel_mono (X.dSc p q).iCycles, assoc, hw, assoc,
+      X.gCycles_i (p₀ + 1) (q₀ - 1) p q]
+  simp only [assoc]
+  rw [hz, X.αbar_g' (p₀ + 1) (q₀ - 1) p₀ q₀ p q, ← assoc π₂ z, this, assoc]
 
 lemma exact_α'_g' (p q p' q' p'' q'' : ℤ) (hp : p' + 1 = p := by lia)
     (hq : q + 1 = q' := by lia) (hp' : p' + (s + 1 : ℕ) = p'' := by lia)
@@ -269,32 +298,33 @@ lemma exact_α'_g' (p q p' q' p'' q'' : ℤ) (hp : p' + 1 = p := by lia)
   rw [ShortComplex.exact_iff_exact_up_to_refinements]
   intro A y hy
   dsimp at y hy ⊢
-  obtain ⟨A₁, π₁, hπ₁, y', hy'⟩ := surjective_up_to_refinements_of_epi (X.αbar p q p' q') y
-  have h₀ : (X.dSc p'' q'').liftCycles (y' ≫ X.g p q p'' q'')
-      (by rw [assoc, ← gCycles_i, ShortComplex.iCycles_g, comp_zero]) ≫
-        (X.dSc p'' q'').homologyπ = 0 := by
-    rw [← ShortComplex.comp_liftCycles, ← gCycles, assoc, ← X.αbar_g' p q p' q' p'' q'',
-      ← assoc, ← hy', assoc, hy, comp_zero]
+  obtain ⟨A₁, π₁, hπ₁, y', hy'⟩ :=
+    surjective_up_to_refinements_of_epi (X.αbar p q p' q' hp hq) y
+  have h₀ : y' ≫ X.gCycles p q p'' q'' ≫ (X.dSc p'' q'').homologyπ = 0 := by
+    rw [← X.αbar_g' p q p' q' p'' q'', ← assoc, ← hy', assoc, hy, comp_zero]
+  rw [← assoc, X.comp_gCycles p q p'' q''] at h₀
   obtain ⟨A₂, π₂, hπ₂, x, hx⟩ :=
     ((X.dSc p'' q'').liftCycles_comp_homologyπ_eq_zero_iff_up_to_refinements _ _).1 h₀
   obtain ⟨x', hx'⟩ := X.exists_comp_d_eq x (p - 2) (q + 1) p'' q'' (by lia) (by lia) (by lia)
     (by lia)
-  dsimp at hx
-  rw [hx', X.d_eq (p - 2) (q + 1) p'' q'' p q] at hx
   have h₁ : (π₂ ≫ y' - x' ≫ X.f (p - 2) (q + 1) p q) ≫ X.g p q p'' q'' = 0 := by
-    rw [sub_comp, assoc, assoc, hx, sub_self]
+    rw [sub_comp, assoc, assoc, ← X.d_eq (p - 2) (q + 1) p'' q'' p q, ← hx', sub_eq_zero]
+    exact hx
   obtain ⟨A₃, π₃, hπ₃, z, hz⟩ :=
     (X.exact_α_g (p + 1) (q - 1) p q p'' q'').exact_up_to_refinements _ h₁
   dsimp at hz
-  refine ⟨A₃, π₃ ≫ π₂ ≫ π₁, inferInstance, z ≫ X.αbar (p + 1) (q - 1) p q, ?_⟩
-  have e₁ : π₁ ≫ y ≫ X.ι' p' q' = y' ≫ X.α p q p' q' := by rw [reassoc_of% hy', αbar_ι']
+  refine ⟨A₃, π₃ ≫ π₂ ≫ π₁, inferInstance,
+    z ≫ X.αbar (p + 1) (q - 1) p q rfl (sub_add_cancel q 1), ?_⟩
+  have e₁ : π₁ ≫ y ≫ X.ι' p' q' = y' ≫ X.α p q p' q' := by
+    rw [← assoc, hy', assoc, X.αbar_ι' p q p' q']
   rw [← cancel_mono (X.ι' p' q')]
-  simp only [assoc, e₁, α'_ι', αbar_ι'_assoc]
-  rw [← reassoc_of% hz, sub_comp, assoc, assoc, X.f_α (p - 2) (q + 1) p q p' q', comp_zero,
-    comp_sub, sub_zero]
+  simp only [assoc]
+  rw [e₁, X.α'_ι' p q p' q', X.αbar_ι'_assoc (p + 1) (q - 1) p q, ← reassoc_of% hz,
+    sub_comp, assoc, assoc, X.f_α (p - 2) (q + 1) p q p' q', comp_zero, sub_zero]
 
 /-- The derived couple of an exact couple of type `s`: an exact couple of type `s + 1` with
-`D'^{p,q} = ker g = im α ⊆ D^{p,q}` and `E'^{p,q} = ker d / im d`.
+`D'^{p,q} = ker g = im α ⊆ D^{p,q}` and `E'^{p,q} = ker d / im d`, `α'` the restriction of `α`,
+`f'` induced by `f` and `g'` given by `g' ∘ ᾱ = [g]`.
 
 This is blueprint `lem-sp-derived-couple-exact` (claims 2 and 3). -/
 @[simps]

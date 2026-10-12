@@ -59,6 +59,6 @@ noncomputable def isLimitFanQOfIsKInjective {K : J → CochainComplex A ℤ}
   refine IsLimit.ofIsoLimit ((IsLimit.postcomposeHomEquiv
     (Discrete.natIso fun j ↦ (quotientCompQhIso A).app (K j.as)) _).symm hF')
     (Fan.ext ((quotientCompQhIso A).app P.pt) fun j ↦ ?_)
-  simpa using ((quotientCompQhIso A).hom.naturality (P.proj j)).symm
+  exact (quotientCompQhIso A).hom.naturality (P.proj j)
 
 end DerivedCategory

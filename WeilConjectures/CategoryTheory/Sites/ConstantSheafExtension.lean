@@ -116,8 +116,185 @@ theorem isConstant_over_of_lifts (hS : (ShortComplex.mk ι π w).ShortExact) {V 
   have hiB (x : M) : (iB x : E.obj.obj (op V)) = ιV (uM x) := by
     change L (x, 0) = _
     rw [hL, map_zero, add_zero]
-  sorry
+  have hpBiB (x : M) : pB (iB x) = 0 := by
+    apply huN
+    rw [hpB, map_zero, hiB, hπι]
+  -- the short exact sequence `0 ⟶ M ⟶ B ⟶ N ⟶ 0` of modules
+  let f₁ : M ⟶ ModuleCat.of Λ B := ModuleCat.ofHom iB
+  let g₁ : ModuleCat.of Λ B ⟶ N := ModuleCat.ofHom pB
+  let SM : ShortComplex (ModuleCat.{v'} Λ) := ShortComplex.mk f₁ g₁ (by ext x; exact hpBiB x)
+  have hSM : SM.ShortExact :=
+    { exact := by
+        rw [ShortComplex.moduleCat_exact_iff]
+        rintro ⟨_, x, rfl⟩ hb
+        have hc : Finsupp.linearCombination Λ n x.2 = 0 := huN (by
+          rw [map_zero, ← hπL x]
+          exact (hpB ⟨L x, x, rfl⟩).symm.trans (congrArg uN hb) |>.trans (map_zero _) |>.symm
+            |>.symm)
+        have hc' : x.2 ∈ LinearMap.range (Finsupp.linearCombination Λ q) := by
+          rw [Finsupp.range_linearCombination, hq]
+          exact hc
+        obtain ⟨a, ha⟩ := hc'
+        refine ⟨x.1 + Finsupp.linearCombination Λ m a, Subtype.ext ?_⟩
+        change (iB _ : E.obj.obj (op V)) = L x
+        rw [hiB, hL, ← ha, map_add, map_add]
+        congr 1
+        change (ιV.hom ∘ₗ uM.hom) (Finsupp.linearCombination Λ m a) =
+          Finsupp.linearCombination Λ e (Finsupp.linearCombination Λ q a)
+        rw [Finsupp.apply_linearCombination, Finsupp.apply_linearCombination]
+        congr 2
+        funext j
+        exact hm j
+      mono_f := by
+        rw [ModuleCat.mono_iff_injective]
+        intro x y hxy
+        apply huM
+        apply hιV
+        rw [← hiB, ← hiB]
+        exact congrArg Subtype.val hxy
+      epi_g := by
+        rw [ModuleCat.epi_iff_surjective]
+        intro y
+        have hy : y ∈ LinearMap.range (Finsupp.linearCombination Λ n) := by
+          rw [Finsupp.range_linearCombination, hn]
+          trivial
+        obtain ⟨c, rfl⟩ := hy
+        refine ⟨⟨L (0, c), (0, c), rfl⟩, huN ?_⟩
+        change uN (pB _) = _
+        rw [hpB]
+        exact hπL (0, c) }
+  -- the morphism of short exact sequences `0 ⟶ M_V ⟶ B_V ⟶ N_V ⟶ 0` to the restriction
+  let F₀ := constantSheaf (J.over V) (ModuleCat.{v'} Λ)
+  let adj := constantSheafAdj (J.over V) (ModuleCat.{v'} Λ) Over.mkIdTerminal
+  let β : F₀.obj (ModuleCat.of Λ B) ⟶ E.over V :=
+    (adj.homEquiv _ _).symm (ModuleCat.ofHom B.subtype)
+  have hβ : adj.homEquiv _ _ β = ModuleCat.ofHom B.subtype := Equiv.apply_symm_apply _ _
+  have c₁ : F₀.map f₁ ≫ β =
+      constantSheafOverHom J _ V M ≫ (J.overPullback (ModuleCat.{v'} Λ) V).map ι := by
+    apply (adj.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right, hβ,
+      constantSheafAdj_homEquiv_constantSheafOverHom]
+    ext x
+    exact hiB x
+  have c₂ : β ≫ (J.overPullback (ModuleCat.{v'} Λ) V).map π =
+      F₀.map g₁ ≫ constantSheafOverHom J _ V N := by
+    apply (adj.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right, hβ,
+      constantSheafAdj_homEquiv_constantSheafOverHom]
+    ext b
+    exact (hpB b).symm
+  let φ : SM.map F₀ ⟶ (ShortComplex.mk ι π w).map (J.overPullback (ModuleCat.{v'} Λ) V) :=
+    { τ₁ := constantSheafOverHom J _ V M
+      τ₂ := β
+      τ₃ := constantSheafOverHom J _ V N
+      comm₁₂ := c₁.symm
+      comm₂₃ := c₂ }
+  have : IsIso β := ShortComplex.isIso₂_of_shortExact_of_isIso₁₃' φ (hSM.map_of_exact F₀)
+    (hS.map_of_exact (J.overPullback (ModuleCat.{v'} Λ) V))
+    (inferInstanceAs (IsIso (constantSheafOverHom J _ V M)))
+    (inferInstanceAs (IsIso (constantSheafOverHom J _ V N)))
+  exact Sheaf.isConstant_of_iso _ (asIso β).symm
 
 end Core
+
+section Global
+
+omit [J.WEqualsLocallyBijective (ModuleCat.{v'} Λ)] in
+/-- The unit `N ⟶ N_C(U)` is compatible with the restriction maps of the constant sheaf. -/
+lemma toSheafify_const_app_map (N : ModuleCat.{v'} Λ) {U V : C} (h : V ⟶ U) (x : N) :
+    ((constantSheaf J (ModuleCat.{v'} Λ)).obj N).obj.map h.op
+      ((CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj N)).app (op U) x) =
+      (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj N)).app (op V) x := by
+  erw [← NatTrans.naturality_apply (CategoryTheory.toSheafify J _)]
+  rfl
+
+variable [J.HasSheafCompose (CategoryTheory.forget (ModuleCat.{v'} Λ))]
+  [∀ V : C, HasSheafify (J.over V) (ModuleCat.{v'} Λ)]
+  [∀ V : C, PreservesFiniteLimits (J.overPullback (ModuleCat.{v'} Λ) V)]
+  [∀ V : C, PreservesFiniteColimits (J.overPullback (ModuleCat.{v'} Λ) V)]
+  [∀ (V : C) (M : ModuleCat.{v'} Λ), IsIso (constantSheafOverHom J (ModuleCat.{v'} Λ) V M)]
+
+/-- **An extension of constant sheaves of modules is locally constant.** Let
+`0 ⟶ M_C ⟶ E ⟶ N_C ⟶ 0` be a short exact sequence of sheaves of `Λ`-modules whose outer terms
+are constant, with `N` finitely presented. Then every object `T` has a covering sieve over
+whose members `V` not covered by the empty sieve the restriction `E|_V` is constant. This is
+the extension clause of `lemma-constructible-flc-serre`, in the form needed on every site. -/
+theorem exists_mem_forall_isConstant_over {S : ShortComplex (Sheaf J (ModuleCat.{v'} Λ))}
+    (hS : S.ShortExact) (M N : ModuleCat.{v'} Λ) [Module.FinitePresentation Λ N]
+    (e₁ : S.X₁ ≅ (constantSheaf J (ModuleCat.{v'} Λ)).obj M)
+    (e₃ : S.X₃ ≅ (constantSheaf J (ModuleCat.{v'} Λ)).obj N) (T : C) :
+    ∃ R ∈ J T, ∀ ⦃V : C⦄ (g : V ⟶ T), R g → (⊥ : Sieve V) ∉ J V →
+      (S.X₂.over V).IsConstant (J.over V) := by
+  classical
+  let ι := e₁.inv ≫ S.f
+  let π := S.g ≫ e₃.hom
+  have w : ι ≫ π = 0 := by simp [ι, π]
+  have hS' : (ShortComplex.mk ι π w).ShortExact :=
+    ShortComplex.shortExact_of_iso (ShortComplex.isoMk e₁ (Iso.refl _) e₃ (by simp [ι])
+      (by simp [π])) hS
+  -- generators of `N` and of the relations between them
+  obtain ⟨r, n, hn⟩ := Module.Finite.exists_fin (R := Λ) (M := N)
+  have hsurj : Function.Surjective (Finsupp.linearCombination Λ n) := by
+    rw [← LinearMap.range_eq_top, Finsupp.range_linearCombination, hn]
+  obtain ⟨s, q, hq⟩ := Submodule.fg_iff_exists_fin_generating_family.1
+    (Module.FinitePresentation.fg_ker _ hsurj)
+  let uN (U : C) : N ⟶ ((constantSheaf J (ModuleCat.{v'} Λ)).obj N).obj.obj (op U) :=
+    (CategoryTheory.toSheafify J ((Functor.const Cᵒᵖ).obj N)).app (op U)
+  have : Epi π := hS'.epi_g
+  have : Presheaf.IsLocallySurjective J π.hom := (isLocallySurjective_iff_epi' (φ := π)).2 this
+  -- the image of a linear combination of lifts
+  have hπlc {U : C} (e : Fin r → S.X₂.obj.obj (op U))
+      (he : ∀ k, π.hom.app (op U) (e k) = uN U (n k)) (c : Fin r →₀ Λ) :
+      π.hom.app (op U) (Finsupp.linearCombination Λ e c) =
+        uN U (Finsupp.linearCombination Λ n c) := by
+    induction c using Finsupp.induction_linear with
+    | zero => simp only [map_zero]
+    | add c d hc hd => simp only [map_add, hc, hd]
+    | single k a =>
+      rw [Finsupp.linearCombination_single, Finsupp.linearCombination_single, map_smul, map_smul,
+        he]
+  -- exactness on sections
+  have hexact (U : C) : ((ShortComplex.mk ι π w).map
+      (sheafToPresheaf J _ ⋙ (evaluation Cᵒᵖ (ModuleCat.{v'} Λ)).obj (op U))).Exact :=
+    hS'.exact.map_of_mono_of_preservesKernel _ hS'.mono_f inferInstance
+  -- the covering sieve on which the generators lift
+  let R₁ : Sieve T := ⨅ k, Presheaf.imageSieve π.hom (uN T (n k))
+  have hR₁ : R₁ ∈ J T := J.iInf_mem _ fun k ↦ Presheaf.imageSieve_mem J π.hom _
+  have key : ∀ ⦃U : C⦄ (g : U ⟶ T), R₁ g → ∃ R₂ ∈ J U, ∀ ⦃V : C⦄ (h : V ⟶ U), R₂ h →
+      (⊥ : Sieve V) ∉ J V → (S.X₂.over V).IsConstant (J.over V) := by
+    intro U g hg
+    have hg' (k : Fin r) : ∃ t, π.hom.app (op U) t = uN U (n k) := by
+      obtain ⟨t, ht⟩ := (iInf_le (fun k ↦ Presheaf.imageSieve π.hom (uN T (n k))) k :
+        R₁ ≤ _) _ hg
+      exact ⟨t, ht.trans (toSheafify_const_app_map J N g (n k))⟩
+    choose e he using hg'
+    have hz (j : Fin s) : ∃ z, ι.hom.app (op U) z = Finsupp.linearCombination Λ e (q j) := by
+      refine (ShortComplex.moduleCat_exact_iff _).1 (hexact U) _ ?_
+      change π.hom.app (op U) _ = 0
+      rw [hπlc e he]
+      have : q j ∈ LinearMap.ker (Finsupp.linearCombination Λ n) :=
+        hq ▸ Submodule.subset_span ⟨j, rfl⟩
+      rw [LinearMap.mem_ker.1 this, map_zero]
+    choose z hz using hz
+    obtain ⟨R₂, hR₂, hm⟩ := J.exists_mem_forall_exists_toSheafify_const_app_eq M (U := U) z
+    refine ⟨R₂, hR₂, fun V h hh hV ↦ ?_⟩
+    choose m hm using hm h hh
+    refine isConstant_over_of_lifts J hS' hV n hn q hq (fun k ↦ S.X₂.obj.map h.op (e k)) m
+      (fun k ↦ ?_) (fun j ↦ ?_)
+    · refine (NatTrans.naturality_apply π.hom h.op (e k)).trans ?_
+      rw [he]
+      exact toSheafify_const_app_map J N h (n k)
+    · rw [hm j]
+      refine (NatTrans.naturality_apply ι.hom h.op (z j)).trans ?_
+      rw [hz j]
+      change (S.X₂.obj.map h.op).hom _ = _
+      rw [Finsupp.apply_linearCombination]
+      rfl
+  choose R₂ hR₂ hR₂' using key
+  refine ⟨Sieve.bind R₁.arrows R₂, J.bind_covering hR₁ hR₂, ?_⟩
+  rintro V _ ⟨U, h, g, hg, hh, rfl⟩ hV
+  exact hR₂' g hg h hh hV
+
+end Global
 
 end CategoryTheory.Sheaf

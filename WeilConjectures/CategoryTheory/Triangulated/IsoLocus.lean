@@ -79,9 +79,7 @@ def mapTriangle : F₁.mapTriangle ⟶ F₂.mapTriangle where
       rw [assoc]
       rw [NatTrans.shift_app_comm τ (1 : ℤ) T.obj₁, τ.naturality_assoc])
   naturality _ _ f := by
-    apply Triangle.hom_ext <;> simp only [Triangle.homMk, Triangle.comp_hom₁, Triangle.comp_hom₂, Triangle.comp_hom₃,
-      Functor.mapTriangle_map_hom₁, Functor.mapTriangle_map_hom₂, Functor.mapTriangle_map_hom₃] <;>
-      exact τ.naturality _
+    apply Triangle.hom_ext <;> simp [Triangle.homMk] <;> exact τ.naturality _
 
 instance [Pretriangulated C] [Pretriangulated D] [F₁.IsTriangulated] [F₂.IsTriangulated] :
     (isoLocus τ).IsTriangulated where

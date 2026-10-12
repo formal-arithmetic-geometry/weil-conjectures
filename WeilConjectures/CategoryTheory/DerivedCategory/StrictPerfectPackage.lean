@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
@@ -29,11 +30,13 @@ lies in every triangulated subcategory which is stable under retracts and contai
 terms, which are retracts of finite sums of copies of `Λ`.
 -/
 
-@[expose] public section
+@[expose] public noncomputable section
 
 namespace CochainComplex
 
 open CategoryTheory Limits
+
+section Package
 
 variable {C : Type*} [Category* C] [Preadditive C] [HasFiniteBiproducts C]
 
@@ -79,10 +82,20 @@ lemma idem_r (r : ℤ) : P.idem r ≫ (P.retract r).r = (P.retract r).r := by
 lemma i_idem (r : ℤ) : (P.retract r).i ≫ P.idem r = (P.retract r).i := by
   simp [idem]
 
+end StrictPerfectPackage
+
+end Package
+
 section Derived
+
+attribute [local instance] Abelian.hasFiniteBiproducts
 
 variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] {Λ : C}
   {F : CochainComplex C ℤ} (P : StrictPerfectPackage Λ F)
+
+namespace StrictPerfectPackage
+
+include P in
 
 /-- Let `S` be a triangulated subcategory of `D(C)`, closed under isomorphisms and stable under
 retracts, which contains `Λ` placed in degree `0`. Then it contains every complex admitting a
@@ -99,8 +112,8 @@ lemma prop_Q_obj (S : ObjectProperty (DerivedCategory C)) [S.IsTriangulated]
         (S.prop_of_isLimit_fan (biproduct.isLimit _) fun _ ↦ hΛ)
   exact S.prop_of_iso ((DerivedCategory.quotientCompQhIso C).app F) hS
 
-end Derived
-
 end StrictPerfectPackage
+
+end Derived
 
 end CochainComplex
