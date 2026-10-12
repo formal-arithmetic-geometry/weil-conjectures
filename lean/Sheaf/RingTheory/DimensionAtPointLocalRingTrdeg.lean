@@ -12,9 +12,9 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.RingTheory.DimensionAtPointComponents
-import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
-import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.MinimalComponentDimensionMaximum
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+import Mathlib.FieldTheory.FinTrdeg
 
 /-!
 # Dimension at a point of a finite type algebra over a field
@@ -62,6 +62,31 @@ theorem topologicalKrullDimAt_eq_ringKrullDim_add_trdeg
       Algebra.trdeg k p.ResidueField = (r : Cardinal.{v}) ∧
       topologicalKrullDimAt (⟨p, inferInstance⟩ : Spec (CommRingCat.of S)) =
         ((d + r : ℕ) : WithBot ℕ∞) := by
-  sorry
+  have : IsNoetherianRing S := Algebra.FiniteType.isNoetherianRing k S
+  obtain ⟨a, ha⟩ := WithBot.ne_bot_iff_exists.mp
+    (ringKrullDim_ne_bot (R := Localization.AtPrime p))
+  have hat : a ≠ ⊤ := by
+    intro h
+    apply ringKrullDim_ne_top (R := Localization.AtPrime p)
+    rw [← ha, h]
+    rfl
+  obtain ⟨d, hd⟩ := ENat.ne_top_iff_exists.mp hat
+  have hdim : ringKrullDim (Localization.AtPrime p) = (d : WithBot ℕ∞) :=
+    ha.symm.trans (congrArg (fun a : ℕ∞ ↦ (a : WithBot ℕ∞)) hd.symm)
+  have : Algebra.EssFiniteType k p.ResidueField := .comp k S p.ResidueField
+  obtain ⟨r, htrdeg⟩ := Cardinal.lt_aleph0.mp (trdeg_lt_aleph0 k p.ResidueField)
+  obtain ⟨hbound, q, hq, hqp, hminimal, hqeq⟩ :=
+    minimal_component_dimension_maximum (k := k) p d r hdim htrdeg
+  obtain ⟨qs, hqs, _, n, hn, _, _, hquot, hquot', _⟩ :=
+    dimension_at_point_components (k := k) p
+  obtain ⟨q', hq', hq'eq⟩ := hquot'
+  have hle : (n : WithBot ℕ∞) ≤ ((d + r : ℕ) : WithBot ℕ∞) := by
+    obtain ⟨hprime, hbelow, hmin⟩ := (hqs q').mp hq'
+    rw [← hq'eq]
+    exact hbound q' hprime hbelow hmin
+  have hge : ((d + r : ℕ) : WithBot ℕ∞) ≤ (n : WithBot ℕ∞) := by
+    rw [← hqeq]
+    exact hquot q ((hqs q).mpr ⟨hq, hqp, hminimal⟩)
+  exact ⟨d, r, hdim, htrdeg, hn.trans (le_antisymm hle hge)⟩
 
 end AlgebraicGeometry

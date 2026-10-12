@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-minimal-component-dimension-maximum",
+ "kind": "statement",
+ "title": "Ring-theoretic maximum dimension of minimal components below a prime",
+ "statement": "Let k be a field, S a finite type k-algebra [def-weil-pbc-finite-type-algebra], and p a prime of S with localization S_p and residue field kappa(p) [def-weil-pbc-localization-at-prime], a field extension of k [def-pc-field-extension]. Let d,r be natural numbers with dim S_p=d [def-weil-pbc-krull-dimension-ring] and trdeg_k kappa(p)=r [def-kun-transcendence-degree]. For every minimal prime q of S contained in p, dim(S/q) <= d+r. There exists such a minimal prime q with dim(S/q)=d+r. Here minimal means q is prime and every prime t contained in q equals q.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00P1, lines 28238-28267: the prime-chain calculation, excluding the appeal to Tag 00OT for topological dimension."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-field-extension",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-domain-dimension-trdeg] to S/p, identifying its fraction field with kappa(p) by Mathlib Ideal.ResidueField.IsFractionRing. Its dimension is r. By [lem-weil-pbc-finite-type-domain-dimension-local-ring], choose a maximal chain above p of length r.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-type-algebra-noetherian], [lem-weil-pbc-noetherian-finitely-many-minimal-primes] and [lem-weil-pbc-prime-contains-minimal-prime], the minimal primes below p form a finite nonempty set. The prime correspondence of [lem-weil-pbc-localization-prime-residue-field-iso] identifies these with the minimal primes of S_p.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each minimal q below p, choose a greatest-length chain from q to p, of length s(q). By [lem-weil-pbc-localization-dimension-chains-below-prime] its length is bounded by d. Conversely every chain below p extends downward to a minimal prime and upward to p. The supremum defining dim S_p=d is attained because lengths are natural numbers bounded by d. Thus max s(q)=d.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Concatenate the greatest-length chain from q to p with the fixed maximal chain above p. It is saturated, starts at the zero prime of S/q, and ends at a maximal prime, so it is a maximal chain of S/q. By [lem-weil-pbc-finite-type-domain-dimension-local-ring], dim S/q=s(q)+r. Hence every such dimension is at most d+r, with equality at a component attaining s(q)=d.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-localization-dimension-chains-below-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Tag 00P1 (prime-chain subargument)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a finite type algebra over a field, the maximum dimension of quotients by minimal primes below p equals the dimension of the localization at p plus the transcendence degree of its residue field",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The maximum of the dimensions of S/q for minimal primes q contained in p equals dim S_p plus trdeg k kappa(p) for a finite type k-algebra S",
+   "date": "2026-10-12",
+   "results": "Ring.KrullDimLE.of_isLocalization; IsLocalization.AtPrime.ringKrullDim_eq_height; Ideal.map_height_le_one_of_mem_minimalPrimes; Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors; ringKrullDim_quotient; Ideal.height_le_spanRank_toENat_of_mem_minimal_primes; height_le_ringKrullDim_quotient_add_spanFinrank; Ring.krullDimLE_of_isLocalization_maximal",
+   "verdict": "no match: localization height and general height/coheight bounds do not give the minimal-component maximum plus residue transcendence degree formula"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|coheight_add|height_add_coheight",
+   "date": "2026-10-12",
+   "results": "34; 306; 342; 821",
+   "verdict": "no match: localization height and general height/coheight bounds do not give the minimal-component maximum plus residue transcendence degree formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg",
+  "group": "N1",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "lem-weil-pbc-geometric-regularity-separable-extension",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MinimalComponentDimensionMaximum",
+  "file": "lean/Sheaf/RingTheory/MinimalComponentDimensionMaximum.lean",
+  "declaration": "AlgebraicGeometry.minimal_component_dimension_maximum",
+  "statement": "theorem minimal_component_dimension_maximum\n    {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]\n    [Algebra.FiniteType k S] (p : Ideal S) [p.IsPrime]\n    (d r : ℕ)\n    (hd : ringKrullDim (Localization.AtPrime p) = (d : WithBot ℕ∞))\n    (hr : Algebra.trdeg k p.ResidueField = (r : Cardinal.{v})) :\n    (∀ q : Ideal S, q.IsPrime → q ≤ p →\n      (∀ t : Ideal S, t.IsPrime → t ≤ q → t = q) →\n      ringKrullDim (S ⧸ q) ≤ ((d + r : ℕ) : WithBot ℕ∞)) ∧\n    (∃ q : Ideal S, q.IsPrime ∧ q ≤ p ∧\n      (∀ t : Ideal S, t.IsPrime → t ≤ q → t = q) ∧\n      ringKrullDim (S ⧸ q) = ((d + r : ℕ) : WithBot ℕ∞))",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T144130-L-2102447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T144130-L-2102447",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
