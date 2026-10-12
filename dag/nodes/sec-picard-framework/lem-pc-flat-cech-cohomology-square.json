@@ -1,0 +1,148 @@
+{
+ "id": "lem-pc-flat-cech-cohomology-square",
+ "kind": "statement",
+ "title": "Canonical cohomology comparison and the Cech homology square",
+ "statement": "Let R -> S be a flat algebra map, f:X -> Spec R separated, U a finite affine open cover, M quasi-coherent, and q a natural number; the notions and specific comparison beta are those of [def-pc-scheme], [def-weil-proper-morphism], [def-weil-pbc-flat-ring-map], [pqf-def-coherent], [pqf-def-cohomology], [def-pc-base-change], [def-pc-flat-cohomology-comparison], [def-pc-cochain-complex-modules]. Using the Cech complexes and canonical-coordinate predicate from [lem-pc-flat-cech-base-change], let c be ANY chain map satisfying IsCechBaseChange; no invertibility of c is assumed. There exist R-linear and S-linear Leray isomorphisms e:Hq(COver(f,U,M)) -> HOver(f,M,q), eprime:Hq(COver(f_S,U_S,M_S)) -> HOver(f_S,M_S,q). After identifying the ordinary tensor with categorical extension of scalars by the proved extendScalarsTensorIso, beta equals extension of e inverse, followed by the canonical exact-tensor homology isomorphism of [lem-pc-flat-tensor-complex-cohom], followed by Hq(c), followed by eprime. In particular this is a commuting square, not an assertion that beta or c is invertible.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-cochain-complex-modules",
+  "lem-pc-flat-cech-base-change",
+  "lem-pc-flat-tensor-complex-cohom"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Proof of Lemma 30.5.2, separated-case paragraph: compatibility of Leray with the canonical map when taking cohomology; Lemma 30.2.6 (01XD) and Tag 02KE"
+ },
+ "proof": [
+  {
+   "text": "The original finite affine cover has affine intersections. Its inverse-image family covers X_S and again has affine intersections. Pullback preserves quasi-coherence. Leray gives isomorphisms from ordered Cech homology to the Ext-based sheaf cohomology. Their scalar linearity follows from naturality for multiplication; restrict scalars along the maps from R and S.",
+   "uses": [
+    "lem-pc-cech-computes",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/02KH",
+    "place": "Lemma 30.5.2, proof, separated-case paragraph"
+   }
+  },
+  {
+   "text": "Construct the two Cech-to-sheaf edge maps by augmented Cech double complexes of injective resolutions. The inverse-image coefficient map of the module adjunction unit gives a comparison of these resolutions. Its tuple components agree with c because IsCechBaseChange is precisely the unit pure-tensor formula. Thus the edge square commutes on cocycles modulo boundaries. The chosen edge maps give e and eprime. Naturality for multiplication gives their R and S linearity.",
+   "uses": [
+    "lem-sc-cech-spectral",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/02KH",
+    "place": "Lemma 30.5.2, proof, separated-case paragraph"
+   }
+  },
+  {
+   "text": "Identify the categorical extension of scalars with the ordinary tensor via the identity linear equivalence on S, using algebraMap(r)*s=r smul s. Flat tensor preserves homology, giving the canonical isomorphism from extended original homology to homology of the extended complex. The previous square says that the displayed composite takes b tensor x to b times the inverse-image cohomology map of the adjunction unit. This is the definition of beta. Equality on pure tensors extends by tensor induction.",
+   "uses": [
+    "lem-pc-flat-tensor-complex-cohom",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/02KH",
+    "place": "Lemma 30.5.2, proof, separated-case paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-cech-computes",
+  "lem-pc-flat-tensor-complex-cohom",
+  "lem-sc-cech-spectral",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-separated-affine-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Proof of Lemma 30.5.2, separated-case paragraph: compatibility of Leray with the canonical map when taking cohomology; Lemma 30.2.6 (01XD) and Tag 02KE; explicit module/scalar/Ext interfaces written by A3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the Leray Cech to sheaf cohomology comparison for inverse image and flat scalar extension",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech sheaf cohomology Leray comparison isomorphism natural under scheme base change and inverse image",
+   "results": "TopCat.Sheaf.pullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-12",
+   "verdict": "No complete match for the geometric Cech assertion; existing algebraic and sheaf tools do not state it."
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplex.*(tensor|baseChange|pullback)|tensor.*cechComplex|cech.*[Nn]aturality",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "No complete match for the geometric Cech assertion; existing algebraic and sheaf tools do not state it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologySeparated",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof of Lemma 30.5.2, separated-case paragraph: compatibility of Leray with the canonical map when taking cohomology; Lemma 30.2.6 (01XD) and Tag 02KE",
+   "via": [
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyCechNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechBaseChange_cohomology_square",
+  "statement": "theorem exists_cechBaseChange_cohomology_square [Module.Flat R S]\n    (f : X ⟶ Spec (.of R)) [IsSeparated f] [Finite ι]\n    (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)\n    (M : X.Modules) [M.IsQuasicoherent] (q : ℕ)\n    (c : tensorCech (S := S) f U M ⟶\n      cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)\n        (baseChangedModule (S := S) f M)) (hc : IsCechBaseChange f U M c) :\n    ∃ e : (cechOver f U M).homology q ≅ ModuleCat.of R (HOver f M q),\n    ∃ e' : (cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)\n        (baseChangedModule (S := S) f M)).homology q ≅\n          ModuleCat.of S (HOver (baseChangeSnd (S := S) f)\n            (baseChangedModule (S := S) f M) q),\n      (extendScalarsTensorIso (S := S) (HOver f M q)).inv ≫\n        (ModuleCat.extendScalars (algebraMap R S)).map e.inv ≫\n        (flatCechHomologyIso (S := S) f U M q).hom ≫\n        HomologicalComplex.homologyMap c q ≫ e'.hom =\n          ModuleCat.ofHom (H.baseChange (S := S) f M q)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T060730-L-2903692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T060730-L-2903692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

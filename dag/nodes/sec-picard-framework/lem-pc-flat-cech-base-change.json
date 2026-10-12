@@ -1,0 +1,132 @@
+{
+ "id": "lem-pc-flat-cech-base-change",
+ "kind": "statement",
+ "title": "Canonical scalar-extension isomorphism of finite affine Cech complexes",
+ "statement": "Let R and S be commutative rings with an R-algebra structure on S, f:X -> Spec R separated, U a finite family of affine opens (not necessarily covering X), and M a quasi-coherent module. Use the scheme, module, pullback, and coefficient constructions of [def-pc-scheme], [def-weil-proper-morphism], [pqf-def-coherent], [pqf-def-cohomology], [def-pc-base-change], [def-pc-flat-cohomology-comparison], [def-pc-cochain-complex-modules]. Define POver(f,M) by restricting the global-functions presheaf of M along R -> Gamma(X,top), and COver(f,U,M) as the ordered Cech complex in ModuleCat R. Let U_S be the inverse-image family on X_S and M_S the module pullback. There exists a chain map c:(extendScalars R S)(COver(f,U,M)) -> COver(f_S,U_S,M_S) which is an isomorphism and has the canonical coordinate formula: at each tuple intersection c(b tensor x) equals the restriction of the adjunction-unit pullback of the coordinate of x, multiplied by the image of b under S -> Gamma(X_S,top) -> Gamma(X_S,tuple intersection). Flatness is not assumed. The predicate IsCechBaseChange specifies this coordinate formula alone, without requiring invertibility.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Proof of Lemma 30.5.2, separated-case paragraph: the equality of the Cech complexes before taking cohomology; affine formula from Lemma 30.5.1 (02KG)"
+ },
+ "proof": [
+  {
+   "text": "Every nonempty tuple intersection of U is affine since f is separated over an affine base. Its inverse image is the cartesian base change of this affine and therefore affine. Apply the affine pullback section formula; use the unit-compatible uniqueness of left adjoints to transfer the tensorPullback formula to the library pullback. Tensor associativity identifies the source with S tensor_R the original section module.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/02KH",
+    "place": "Lemma 30.5.2, proof, separated-case paragraph"
+   }
+  },
+  {
+   "text": "For each degree, the tuple index is finite, so the product of these section isomorphisms is the scalar extension of the original Cech term. The unit commutes with restrictions, so these maps commute with alternating differentials. They therefore assemble to a chain map with invertible components and hence a chain isomorphism. Projecting to each tuple and restricting from the categorical product open to the infimum open gives the stated coordinate formula. For an empty indexing family all terms are zero modules.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/02KH",
+    "place": "Lemma 30.5.2, proof, separated-case paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-cohomology-comparison",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-separated-affine-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/02KH",
+  "place": "Proof of Lemma 30.5.2, separated-case paragraph: the equality of the Cech complexes before taking cohomology; affine formula from Lemma 30.5.1 (02KG); explicit module/scalar/Ext interfaces written by A3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Cech complex of a quasicoherent module on a finite affine cover of a separated scheme commutes with extension of scalars",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex scalar extension chain isomorphism for quasi coherent modules on affine covers of separated schemes",
+   "results": "SheafOfModules.ιFree_mapFree_inv; SheafOfModules.ιFree_mapFree_inv_assoc; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.Presentation.map_π_eq; SheafOfModules.freeHomEquiv_symm_comp; Rep.standardComplex.compForgetAugmentedIso; SheafOfModules.map_ιFree_mapFree_hom_assoc; Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+   "date": "2026-10-12",
+   "verdict": "No complete match for the geometric Cech assertion; existing algebraic and sheaf tools do not state it."
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplex.*(tensor|baseChange|pullback)|tensor.*cechComplex|cech.*[Nn]aturality",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "No complete match for the geometric Cech assertion; existing algebraic and sheaf tools do not state it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologySeparated",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof of Lemma 30.5.2, separated-case paragraph: the equality of the Cech complexes before taking cohomology; affine formula from Lemma 30.5.1 (02KG)",
+   "via": [
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyCechBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechBaseChange_iso",
+  "statement": "theorem exists_cechBaseChange_iso (f : X ⟶ Spec (.of R)) [IsSeparated f]\n    [Finite ι] (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))\n    (M : X.Modules) [M.IsQuasicoherent] :\n    ∃ c : tensorCech (S := S) f U M ⟶\n      cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)\n        (baseChangedModule (S := S) f M), IsCechBaseChange f U M c ∧ IsIso c",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T060730-L-2903692",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T060730-L-2903692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
