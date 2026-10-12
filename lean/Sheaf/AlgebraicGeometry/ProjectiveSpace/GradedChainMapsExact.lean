@@ -11,12 +11,10 @@ public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 
-import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
-
-import Sheaf.AlgebraicGeometry.ProjSheafificationExact
-import Sheaf.AlgebraicGeometry.ProjTildeFunctorial
+import Sheaf.AlgebraicGeometry.ProjectiveSpace.FixedChartMap
+import Sheaf.Algebra.Module.ProjAwayDegreeZeroExactPair
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
-import Sheaf.Topology.SheafOfModulesFromBasis
 
 /-!
 # Exact maps on fixed associated graded-module sheaves
@@ -36,6 +34,86 @@ namespace AlgebraicGeometry.Proj
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
+private theorem basis_chain_exact
+    (X : Scheme.{u}) (B : Set X.Opens) (hB : Opens.IsBasis B)
+    (F₂ F₁ F₀ F : X.Modules) (g₂ : F₂ ⟶ F₁) (g₁ : F₁ ⟶ F₀) (g₀ : F₀ ⟶ F)
+    (hsections : ∀ U ∈ B,
+      Function.Injective (g₂.val.app (op U)) ∧
+      Function.Exact (g₂.val.app (op U)) (g₁.val.app (op U)) ∧
+      Function.Exact (g₁.val.app (op U)) (g₀.val.app (op U)) ∧
+      Function.Surjective (g₀.val.app (op U))) :
+    Mono g₂ ∧ Epi g₀ ∧ (ComposableArrows.mk₃ g₂ g₁ g₀).Exact := by
+  classical
+  have hcover (W : X.Opens) :
+      (⨆ U : {U : X.Opens // U ∈ B ∧ U ≤ W}, U.val) = W := by
+    apply le_antisymm
+    · exact iSup_le fun U ↦ U.property.2
+    · intro x hx
+      obtain ⟨U, hUB, hxU, hUW⟩ := Opens.isBasis_iff_nbhd.mp hB hx
+      exact Opens.mem_iSup.mpr ⟨⟨U, hUB, hUW⟩, hxU⟩
+  have hnat {K L : X.Modules} (φ : K ⟶ L) (V W : X.Opens) (hVW : V ≤ W)
+      (s : K.val.obj (op W)) :
+      φ.val.app (op V) (K.val.map (homOfLE hVW).op s) =
+        L.val.map (homOfLE hVW).op (φ.val.app (op W) s) := by
+    exact ConcreteCategory.congr_hom (φ.mapPresheaf.naturality (homOfLE hVW).op) s
+  have hsep (K : X.Modules) (W : X.Opens) (s t : K.val.obj (op W))
+      (heq : ∀ (U : X.Opens) (hUB : U ∈ B) (hUW : U ≤ W),
+        K.val.map (homOfLE hUW).op s = K.val.map (homOfLE hUW).op t) : s = t := by
+    exact TopCat.Sheaf.eq_of_locally_eq' ⟨K.presheaf, K.isSheaf⟩
+      (fun U : {U : X.Opens // U ∈ B ∧ U ≤ W} ↦ U.val) W
+      (fun U ↦ homOfLE U.property.2) (le_of_eq (hcover W).symm) s t
+      (fun U ↦ heq U.val U.property.1 U.property.2)
+  have hpair {K L N : X.Modules} (i : K ⟶ L) (q : L ⟶ N)
+      (hex : ∀ U ∈ B, Function.Exact (i.val.app (op U)) (q.val.app (op U))) :
+      ∃ h : i ≫ q = 0, (ShortComplex.mk i q h).Exact := by
+    have h : i ≫ q = 0 := by
+      ext W s
+      change q.val.app (op W) (i.val.app (op W) s) = 0
+      apply hsep N W
+      intro U hUB hUW
+      rw [← hnat, ← hnat]
+      simpa using (hex U hUB).apply_apply_eq_zero (K.val.map (homOfLE hUW).op s)
+    refine ⟨h, ?_⟩
+    apply ((RingedSpace.module_exactness_local_lifting X.toRingedSpace).2.2 K L N i q h).mpr
+    intro W s hs
+    let I := {U : X.Opens // U ∈ B ∧ U ≤ W}
+    have hlift : ∀ U : I, ∃ f : K.val.obj (op U.val),
+        i.val.app (op U.val) f = L.val.map (homOfLE U.property.2).op s := by
+      intro U
+      apply ((hex U.val U.property.1) _).mp
+      rw [hnat, hs]
+      exact map_zero _
+    choose f hf using hlift
+    exact ⟨I, fun U ↦ U.val, fun U ↦ U.property.2, f, hcover W, hf⟩
+  have hmono : Mono g₂ := by
+    constructor
+    intro K a b hab
+    ext W s
+    apply hsep F₂ W
+    intro U hUB hUW
+    apply (hsections U hUB).1
+    rw [hnat, hnat]
+    exact congrArg (fun φ : K ⟶ F₁ ↦ φ.val.app (op W) s) hab |> congrArg
+      ((F₁.val.map (homOfLE hUW).op))
+  have hepi : Epi g₀ := by
+    apply ((RingedSpace.module_exactness_local_lifting X.toRingedSpace).2.1 F₀ F g₀).2.mp
+    intro W t
+    let I := {U : X.Opens // U ∈ B ∧ U ≤ W}
+    have hlift : ∀ U : I, ∃ g : F₀.val.obj (op U.val),
+        g₀.val.app (op U.val) g = F.val.map (homOfLE U.property.2).op t := by
+      intro U
+      exact (hsections U.val U.property.1).2.2.2 _
+    choose g hg using hlift
+    exact ⟨I, fun U ↦ U.val, fun U ↦ U.property.2, g, hcover W, hg⟩
+  obtain ⟨hc₂, he₂⟩ := hpair g₂ g₁ (fun U hU ↦ (hsections U hU).2.1)
+  obtain ⟨hc₁, he₁⟩ := hpair g₁ g₀ (fun U hU ↦ (hsections U hU).2.2.1)
+  refine ⟨hmono, hepi, ?_⟩
+  apply ComposableArrows.exact_of_δ₀
+  · exact ComposableArrows.exact₂_mk _ hc₂ he₂
+  · exact ComposableArrows.exact₂_mk _ hc₁ he₁
+
+set_option maxHeartbeats 600000 in
+-- The four dependent module/chart families require extra elaboration heartbeats.
 /-- Fixed associated sheaves of an exact graded chain admit an exact chain of maps.
 Source: Stacks Project, Constructions, Tag 01M7, final paragraph.
 (blueprint: lem-sc-p1-graded-chain-maps-exact).
@@ -142,6 +220,93 @@ theorem graded_chain_maps_exact (k : Type u) [Field k]
                 mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g)))) :
     ∃ (g₂ : E 2 ⟶ E 1) (g₁ : E 1 ⟶ E 0) (g₀ : E 0 ⟶ F),
       Mono g₂ ∧ Epi g₀ ∧ (ComposableArrows.mk₃ g₂ g₁ g₀).Exact := by
-  sorry
+  classical
+  choose alphaE hcharts hscalars hrestrictions using hE
+  obtain ⟨g₂, hg₂⟩ := fixed_chart_map k
+    (A 2) (𝒢 2) (E 2) (alphaE 2) (hcharts 2)
+    (hscalars 2) (hrestrictions 2)
+    (A 1) (𝒢 1) (E 1) (alphaE 1) (hcharts 1)
+    (hscalars 1) (hrestrictions 1) f₂ hf₂
+  obtain ⟨g₁, hg₁⟩ := fixed_chart_map k
+    (A 1) (𝒢 1) (E 1) (alphaE 1) (hcharts 1)
+    (hscalars 1) (hrestrictions 1)
+    (A 0) (𝒢 0) (E 0) (alphaE 0) (hcharts 0)
+    (hscalars 0) (hrestrictions 0) f₁ hf₁
+  obtain ⟨g₀, hg₀⟩ := fixed_chart_map k
+    (A 0) (𝒢 0) (E 0) (alphaE 0) (hcharts 0)
+    (hscalars 0) (hrestrictions 0)
+    M 𝓜 F alpha halpha hscalar hres f₀ hf₀
+  refine ⟨g₂, g₁, g₀, ?_⟩
+  let B : Set (Proj (homogeneousSubmodule (Fin 2) k)).Opens :=
+    {U | ∃ (f : MvPolynomial (Fin 2) k) (d : ℕ),
+      0 < d ∧ f ∈ homogeneousSubmodule (Fin 2) k d ∧
+        U = basicOpen (homogeneousSubmodule (Fin 2) k) f}
+  apply basis_chain_exact _ B
+    (standardOpenProperties.{u, u, u} (homogeneousSubmodule (Fin 2) k)).1
+  rintro U ⟨f, d, hd, hf, rfl⟩
+  have hex₂ : Function.Exact f₂ f₁ := by
+    intro y
+    rw [← LinearMap.mem_ker, ← hex₁]
+    rfl
+  have hex₁' : Function.Exact f₁ f₀ := by
+    intro y
+    rw [← LinearMap.mem_ker, ← hex₀]
+    rfl
+  let N : Fin 3 → ModuleCat.{u} (MvPolynomial (Fin 2) k) := ![A 2, A 1, A 0]
+  let H : ∀ j, ℤ → AddSubgroup (N j) :=
+    Fin.cases (𝒢 2) (Fin.cases (𝒢 1) (Fin.cases (𝒢 0) (fun i ↦ Fin.elim0 i)))
+  let T : Fin 3 → (Proj (homogeneousSubmodule (Fin 2) k)).Modules := ![E 2, E 1, E 0]
+  let a : ∀ j, (T j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+
+      LocalizedModule.Away f (N j) :=
+    Fin.cases (alphaE 2 f d hd hf)
+      (Fin.cases (alphaE 1 f d hd hf) (Fin.cases (alphaE 0 f d hd hf) (fun i ↦ Fin.elim0 i)))
+  have hN : ∀ j, DirectSum.IsInternal (H j) := by
+    intro j; fin_cases j <;> dsimp [H, N] <;> apply h𝒢
+  have hNs : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N j),
+      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ H j z → a • y ∈ H j (n + z) := by
+    intro j; fin_cases j <;> dsimp [H, N] <;> apply hA_smul
+  have ha : ∀ j, Function.Injective (a j) ∧ Set.range (a j) = degreeZeroFractions
+      (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
+      (fun n : ℕ ↦ (H j n : Set (N j))) (Submonoid.powers f) := by
+    intro j; fin_cases j <;> apply hcharts
+  obtain ⟨hexL, hinjL, _⟩ := proj_away_degreeZero_exact_pair k (fun j ↦ N j) H hN hNs f d hd hf
+    (fun j ↦ (T j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) a ha
+    f₂ f₁ hf₂ hf₁ hex₂
+    (g₂.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))).hom.toAddMonoidHom
+    (g₁.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))).hom.toAddMonoidHom
+    (hg₂ f d hd hf) (hg₁ f d hd hf)
+  let N' : Fin 3 → ModuleCat.{u} (MvPolynomial (Fin 2) k) := ![A 1, A 0, M]
+  let H' : ∀ j, ℤ → AddSubgroup (N' j) :=
+    Fin.cases (𝒢 1) (Fin.cases (𝒢 0) (Fin.cases 𝓜 (fun i ↦ Fin.elim0 i)))
+  let T' : Fin 3 → (Proj (homogeneousSubmodule (Fin 2) k)).Modules := ![E 1, E 0, F]
+  let a' : ∀ j, (T' j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+
+      LocalizedModule.Away f (N' j) :=
+    Fin.cases (alphaE 1 f d hd hf)
+      (Fin.cases (alphaE 0 f d hd hf) (Fin.cases (alpha f d hd hf) (fun i ↦ Fin.elim0 i)))
+  have hN' : ∀ j, DirectSum.IsInternal (H' j) := by
+    intro j; fin_cases j <;> dsimp [H', N']
+    · exact h𝒢 1
+    · exact h𝒢 0
+    · exact h𝓜
+  have hNs' : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : N' j),
+      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ H' j z → a • y ∈ H' j (n + z) := by
+    intro j; fin_cases j <;> dsimp [H', N']
+    · exact hA_smul 1
+    · exact hA_smul 0
+    · exact hsmul
+  have ha' : ∀ j, Function.Injective (a' j) ∧ Set.range (a' j) = degreeZeroFractions
+      (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))
+      (fun n : ℕ ↦ (H' j n : Set (N' j))) (Submonoid.powers f) := by
+    intro j; fin_cases j
+    · exact hcharts 1 f d hd hf
+    · exact hcharts 0 f d hd hf
+    · exact halpha f d hd hf
+  obtain ⟨hexR, _, hsurjR⟩ := proj_away_degreeZero_exact_pair k (fun j ↦ N' j) H' hN' hNs' f d hd hf
+    (fun j ↦ (T' j).val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) a' ha'
+    f₁ f₀ hf₁ hf₀ hex₁'
+    (g₁.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))).hom.toAddMonoidHom
+    (g₀.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))).hom.toAddMonoidHom
+    (hg₁ f d hd hf) (hg₀ f d hd hf)
+  exact ⟨hinjL hinj, hexL, hexR, hsurjR hsurj⟩
 
 end AlgebraicGeometry.Proj

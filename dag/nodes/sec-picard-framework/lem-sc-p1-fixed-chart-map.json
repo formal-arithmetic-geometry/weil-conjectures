@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-p1-fixed-chart-map",
+ "kind": "statement",
+ "title": "A map of fixed associated sheaves from chart data",
+ "statement": "Let $k$ be a field, $S=k[T_0,T_1]$ with its standard total-degree grading, and $P=\\operatorname{Proj}(S)$ [def-nagata-affine-proj]. Let $M,N$ be $S$-modules and $\\mathcal M_j\\subset M$, $\\mathcal N_j\\subset N$ additive subgroups indexed by $j\\in\\mathbf Z$. Let $F,G$ be $\\mathcal O_P$-module sheaves [def-weil-sheaf-of-modules-category]. For each positive-degree homogeneous $f\\in S_d$, assume additive injective maps $\\alpha_f:F(D_+(f))\\to M_f$ and $\\beta_f:G(D_+(f))\\to N_f$ whose ranges are exactly the equal-degree fractions [def-sc-degree-zero-module-fractions] for the respective subgroups. Assume both maps respect the action of $S_{(f)}$ via the canonical standard-open ring map. Assume their restrictions for $D_+(g)\\subset D_+(f)$ satisfy $y/f^m\\mapsto a^my/g^{em}$ whenever $g^e=af$, $e>0$, and $a$ is homogeneous. If $\\phi:M\\to N$ is $S$-linear and $\\phi(\\mathcal M_j)\\subset\\mathcal N_j$ for every $j$, there exists a sheaf map $\\gamma:F\\to G$ satisfying $\\beta_f(\\gamma_f(s))=\\phi(y)/f^m$ whenever $\\alpha_f(s)=y/f^m$. No internality or scalar-compatibility condition on the indexed subgroups is required beyond the explicit chart hypotheses.",
+ "source": {
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Tag 01M7 (lemma-proj-sheaves), functoriality of chart identifications; Tag 009U (lemma-extend-from-basis-modules-equivalence)",
+  "url": "https://stacks.math.columbia.edu/tag/01M7"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "Localize phi with IsLocalizedModule.map. Its map_LocalizedModules fraction formula shows preservation of equal-degree fractions, because phi preserves the indexed numerator subgroups. The range equality for beta then chooses the chart map on sections; injectivity of beta proves additivity. ExtendScalarsOfIsLocalization (equivalently the compatible-scalar instance from Mathlib.RingTheory.Localization.Module) shows localization linearity. The two scalar equations and Proj.basicOpenIsoAway give linearity over all ring sections. These are direct transport calculations, carried out in Lean.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a standard-open inclusion use standardOpenProperties to choose g^e=af. Represent every localized source element as y/f^m by LocalizedModule.induction_on and membership of the powers submonoid. The two supplied restriction formulas and phi.map_smul show compatibility of the chart maps.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the Mathlib basis morphism equivalence restrictHomEquivHom and extend_hom_app to the underlying abelian presheaves. For global linearity, restrict a section to basis opens contained in its domain. Naturality and local linearity give the scalar equality on those opens; their union is the domain and sheaf separation proves it globally. Package the resulting abelian map with PresheafOfModules.homMk. Its basis components give the required fraction formula.",
+   "uses": [
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01M7 (lemma-proj-sheaves), functoriality of chart identifications; Tag 009U (lemma-extend-from-basis-modules-equivalence)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A degree preserving map of graded modules induces a morphism of their associated sheaves on Proj from chart fraction identifications",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact chain of graded modules gives an exact chain of sheaves on Proj",
+   "results": "; Profinite.NobelingProof.succ_exact, CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ, CategoryTheory.ProjectiveResolution.complex_exactAt_succ, CategoryTheory.ProjectiveResolution.exact_succ, ModuleCat.localizedModule_functor_map_exact, HomologicalComplex.exact_of_degreewise_exact, CategoryTheory.exact_d_f, HomologicalComplex.exact_iff_degreewise_exact",
+   "date": "2026-10-12",
+   "verdict": "no direct matching statement; related declarations inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "degreeZero.*exact|exact.*degreeZero|restrictHomEquivHom",
+   "results": "; Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/Topology/Sheaves/SheafCondition/Sites.lean, Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-12",
+   "verdict": "no direct matching statement; related declarations inspected"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChainMapsExact",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "Sheafifying the graded resolution: construction of its three sheaf maps on standard opens",
+   "via": [
+    "lem-sc-p1-graded-chain-maps-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveSpace.FixedChartMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveSpace/FixedChartMap.lean",
+  "declaration": "AlgebraicGeometry.Proj.fixed_chart_map",
+  "statement": "theorem fixed_chart_map (k : Type u) [Field k]\n    (M : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓜 : ℤ → AddSubgroup M)\n    (F : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (alpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f M)\n    (halpha : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (alpha f d hd hf) ∧\n        Set.range (alpha f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝓜 n : Set M)) (Submonoid.powers f))\n    (hscalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • alpha f d hd hf s)\n    (hres : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : M)\n          (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          alpha g b hb hg (F.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))\n    (N : ModuleCat.{u} (MvPolynomial (Fin 2) k))\n    (𝓝 : ℤ → AddSubgroup N)\n    (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules)\n    (beta : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ),\n      0 < d → f ∈ homogeneousSubmodule (Fin 2) k d →\n      G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+\n        LocalizedModule.Away f N)\n    (hbeta : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d),\n        Function.Injective (beta f d hd hf) ∧\n        Set.range (beta f d hd hf) = degreeZeroFractions\n          (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n          (fun n : ℕ ↦ (𝓝 n : Set N)) (Submonoid.powers f))\n    (hbetascalar : ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (r : HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n        (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        beta f d hd hf (awayToSection (homogeneousSubmodule (Fin 2) k) f r • s) =\n          algebraMap (HomogeneousLocalization.Away (homogeneousSubmodule (Fin 2) k) f)\n            (Localization.Away f) r • beta f d hd hf s)\n    (hbetares : ∀ (f g : MvPolynomial (Fin 2) k) (d b : ℕ) (hd : 0 < d) (hb : 0 < b)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n        (hg : g ∈ homogeneousSubmodule (Fin 2) k b)\n        (inc : basicOpen (homogeneousSubmodule (Fin 2) k) g ≤\n          basicOpen (homogeneousSubmodule (Fin 2) k) f)\n        (e c : ℕ) (a : MvPolynomial (Fin 2) k),\n        0 < e → a ∈ homogeneousSubmodule (Fin 2) k c → g ^ e = a * f →\n        ∀ (m : ℕ) (y : N)\n          (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n          beta f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n          beta g b hb hg (G.val.map (homOfLE inc).op s) =\n            mk (a ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))\n    (phi : M →ₗ[MvPolynomial (Fin 2) k] N)\n    (hphi : ∀ (z : ℤ) (y : M), y ∈ 𝓜 z → phi y ∈ 𝓝 z) :\n    ∃ g : F ⟶ G,\n      ∀ (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n        (hf : f ∈ homogeneousSubmodule (Fin 2) k d) (m : ℕ) (y : M)\n        (s : F.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))),\n        alpha f d hd hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n        beta f d hd hf (g.val.app (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) s) =\n          mk (phi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

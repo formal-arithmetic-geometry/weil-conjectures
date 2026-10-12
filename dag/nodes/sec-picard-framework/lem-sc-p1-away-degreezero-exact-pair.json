@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-p1-away-degreezero-exact-pair",
+ "kind": "statement",
+ "title": "Exact pairs on equal-degree away fractions",
+ "statement": "Let $k$ be a field, $S=k[T_0,T_1]$ with its standard grading. Let $M_0,M_1,M_2$ be $S$-modules with internal integer gradings by additive subgroups $\\mathcal M_{j,z}$, and $S_n\\mathcal M_{j,z}\\subset\\mathcal M_{j,n+z}$. Let $\\phi:M_0\\to M_1$, $\\psi:M_1\\to M_2$ be degree-preserving linear maps with $\\operatorname{im}\\phi=\\ker\\psi$. Let $f\\in S_d$ with $d>0$. Let $C_0,C_1,C_2$ be abelian groups with additive injective maps $\\alpha_j:C_j\\to (M_j)_f$ whose images are exactly the equal-degree fractions [def-sc-degree-zero-module-fractions] with numerators in $\\mathcal M_{j,n}$ and denominators in $S_n\\cap\\{f^m:m\\ge0\\}$. Let $i:C_0\\to C_1$, $q:C_1\\to C_2$ be additive maps satisfying $\\alpha_1(i(s))=\\phi(y)/f^m$ whenever $\\alpha_0(s)=y/f^m$, and $\\alpha_2(q(s))=\\psi(y)/f^m$ whenever $\\alpha_1(s)=y/f^m$. Then $\\operatorname{im}i=\\ker q$. Furthermore, injectivity of $\\phi$ implies injectivity of $i$, and surjectivity of $\\psi$ implies surjectivity of $q$. Neither endpoint property is needed for the exactness assertion.",
+ "source": {
+  "document": "Stacks Project, Constructions of Schemes",
+  "place": "Tag 01M7 (lemma-proj-sheaves), final paragraph; Algebra Tag 00JM (section-proj) and exactness of homogeneous localization",
+  "url": "https://stacks.math.columbia.edu/tag/01M7"
+ },
+ "stmt_deps": [
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "If f=0, localizations at its powers are zero; injectivity of alpha makes every chart group zero. Otherwise localize the exact pair. IsLocalizedModule.map_exact, map_injective and map_surjective give ordinary exactness and the conditional endpoint properties.",
+   "uses": [
+    "lem-sc-p1-localization-short-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each localized module define its degree-e subgroup as fractions y/f^m with y of degree e+m*d. Common denominators prove additive closure. Homogeneous decomposition of a numerator proves spanning. Clear denominators in a finite relation among distinct degrees, then multiply by an additional power of f killing the relation. The remaining numerators have distinct degrees e+(m+L)*d. Internality in the original module makes each zero, and hence each original fraction zero. This proves that the localized grading is internal. The localized maps preserve degrees by their fraction formulas.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For a degree-zero element in the kernel, ordinary localized exactness gives a preimage. Decompose it into homogeneous components; the degree-zero component maps to the given element, by uniqueness of the middle-module decomposition. The same component argument gives a degree-zero preimage of every target when psi is surjective; injectivity is inherited from ordinary localization. A nonzero f^m is homogeneous of degree m*d, and uniqueness of homogeneous degree identifies degree-zero elements with precisely degreeZeroFractions. The injective alpha maps with their stated ranges and the fraction formulas transport these assertions to i and q.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-localization-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 01M7 (lemma-proj-sheaves), final paragraph; Algebra Tag 00JM (section-proj) and exactness of homogeneous localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Taking degree zero after homogeneous localization preserves exact pairs of integer graded modules",
+   "results": "service unavailable: Internal Server Error; ",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule.map_exact",
+   "results": "; IsLocalizedModule.map_exact",
+   "date": "2026-10-12",
+   "verdict": "no direct matching statement; related declarations inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "map_exact|map_injective|map_surjective",
+   "results": "; Mathlib/Algebra/Module/LocalizedModule/Exact.lean, Mathlib/Algebra/Module/LocalizedModule/Exact.lean, Mathlib/Algebra/Module/LocalizedModule/Exact.lean, Mathlib/Algebra/Module/LocalizedModule/Exact.lean, Mathlib/Algebra/Module/LocalizedModule/Exact.lean, Mathlib/Algebra/Module/LocalizedModule/Submodule.lean, Mathlib/Algebra/Module/LocalizedModule/Basic.lean, Mathlib/Algebra/Module/LocalizedModule/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no direct matching statement; related declarations inspected"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedChainMapsExact",
+  "date": "2026-10-12",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "Sheafifying the graded resolution preserves exactness: localized degree-zero exactness at each middle term",
+   "via": [
+    "lem-sc-p1-graded-chain-maps-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Module.ProjAwayDegreeZeroExactPair",
+  "file": "lean/Sheaf/Algebra/Module/ProjAwayDegreeZeroExactPair.lean",
+  "declaration": "LocalizedModule.proj_away_degreeZero_exact_pair",
+  "statement": "theorem proj_away_degreeZero_exact_pair\n    (k : Type u) [Field k]\n    (M : Fin 3 → Type u) [∀ j, AddCommGroup (M j)]\n    [∀ j, Module (MvPolynomial (Fin 2) k) (M j)]\n    (𝓜 : ∀ j, ℤ → AddSubgroup (M j))\n    (h𝓜 : ∀ j, DirectSum.IsInternal (𝓜 j))\n    (hsmul : ∀ (j : Fin 3) (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M j),\n      a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 j z → a • y ∈ 𝓜 j (n + z))\n    (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d)\n    (hf : f ∈ homogeneousSubmodule (Fin 2) k d)\n    (A : Fin 3 → Type u) [∀ j, AddCommGroup (A j)]\n    (alpha : ∀ j, A j →+ LocalizedModule.Away f (M j))\n    (halpha : ∀ j, Function.Injective (alpha j) ∧\n      Set.range (alpha j) = degreeZeroFractions\n        (fun n : ℕ ↦ (homogeneousSubmodule (Fin 2) k n : Set (MvPolynomial (Fin 2) k)))\n        (fun n : ℕ ↦ (𝓜 j n : Set (M j))) (Submonoid.powers f))\n    (phi : M 0 →ₗ[MvPolynomial (Fin 2) k] M 1)\n    (psi : M 1 →ₗ[MvPolynomial (Fin 2) k] M 2)\n    (hphi : ∀ (z : ℤ) (y : M 0), y ∈ 𝓜 0 z → phi y ∈ 𝓜 1 z)\n    (hpsi : ∀ (z : ℤ) (y : M 1), y ∈ 𝓜 1 z → psi y ∈ 𝓜 2 z)\n    (hexact : Function.Exact phi psi)\n    (i : A 0 →+ A 1) (q : A 1 →+ A 2)\n    (hi : ∀ (m : ℕ) (y : M 0) (s : A 0),\n      alpha 0 s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n      alpha 1 (i s) = mk (phi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f))\n    (hq : ∀ (m : ℕ) (y : M 1) (s : A 1),\n      alpha 1 s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n      alpha 2 (q s) = mk (psi y) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f)) :\n    Function.Exact i q ∧\n      (Function.Injective phi → Function.Injective i) ∧\n      (Function.Surjective psi → Function.Surjective q)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21097",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T085254-L-21097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

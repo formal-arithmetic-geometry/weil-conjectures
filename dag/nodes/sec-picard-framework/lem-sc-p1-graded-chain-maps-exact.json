@@ -14,44 +14,43 @@
  ],
  "proof": [
   {
-   "text": "Put K=range(f_1), with degree-j part K intersect G_0(j). Decompose each preimage into finitely many homogeneous parts; degree preservation and internality show the degree-j projection of an image is itself an image. Thus these parts give an internal grading on K, compatible with scalar multiplication. The injectivity, two range/kernel identities and surjectivity give the short exact sequences A_2 -> A_1 -> K and K -> A_0 -> M.",
-   "uses": [],
-   "elementary": true
+   "text": "Choose the three families of charts from hE. Apply fixed_chart_map to f2, f1 and f0, obtaining g2, g1 and g0 with their fraction formulas.",
+   "uses": [
+    "lem-sc-p1-fixed-chart-map"
+   ],
+   "elementary": false
   },
   {
-   "text": "Use the underlying additive-subgroup polynomial grading for gradedModuleSheaf_exists and tilde_functorial, and the canonical scheme isomorphism with the homogeneous-submodule Proj obtained by identifying homogeneous ideals and fraction charts. Its chart ring maps and restrictions agree. Construct the associated sheaf of K and canonical sheaves/stalk charts for the other modules. The given chart data identify each fixed sheaf with the canonical one: invert the injective map onto its stated range and compose with the canonical chart equivalence. The scalar equations make this linear over the chart ring. For any basic-open inclusion standardOpenProperties gives g^e=af; both chart restrictions agree on all fractions by the supplied restriction formulas. Apply exists_sheafOfModules_from_basis to these compatible chart isomorphisms. Transport the canonical stalk maps across the resulting sheaf isomorphisms.",
+   "text": "Rewrite the two range/kernel equalities as Function.Exact. On each positive homogeneous standard open apply proj_away_degreeZero_exact_pair to the triples (A2,A1,A0) and (A1,A0,M), using the specified sheaf sections as chart groups. The first application gives injectivity of g2 and exactness at E1; the second gives exactness at E0 and surjectivity of g0.",
    "uses": [
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
+    "lem-sc-p1-away-degreezero-exact-pair"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The standard opens form a basis. Restrict arbitrary sections to basis opens contained in their domain; these cover that domain. Sheaf separation applied to the two sectionwise exact pairs gives g2 >> g1 = 0 and g1 >> g0 = 0. Separation plus chart injectivity proves Mono g2. Chart surjectivity gives local lifts of sections, hence Epi g0 by module_exactness_local_lifting. For either middle term, restriction of a section killed by the outgoing map lies in the basiswise kernel; sectionwise exactness gives lifts on every member of the basis cover. Apply the same local lifting theorem to obtain ShortComplex.Exact for each pair.",
+   "uses": [
     "lem-weil-pbc-proj-standard-open-inclusion",
-    "lem-weil-pbc-sheaf-of-modules-from-basis"
+    "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
    ],
    "elementary": false
   },
   {
-   "text": "Use tilde_functorial on the two triples to construct the induced maps with their fraction formulas. Use proj_sheafification_shortExact for the two short sequences and these formulas.",
-   "uses": [
-    "lem-sc-p1-proj-tilde-functorial",
-    "lem-sc-p1-proj-sheafification-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Compose E_1 -> K~ with K~ -> E_0. The first short exact sequence supplies a mono E_2 -> E_1, and the second an epi E_0 -> F. Composing with a mono leaves the first kernel unchanged, and composing with an epi leaves the second image unchanged. The two short exactness identities therefore establish exactness at E_1 and E_0.",
+   "text": "Combine the two exact short complexes using ComposableArrows.exact2_mk and exact_of_delta0 (Lean names exact₂_mk and exact_of_δ₀) to obtain exactness of mk3 g2 g1 g0. Return these maps with the proved mono and epi.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
+  "lem-sc-p1-fixed-chart-map",
+  "lem-sc-p1-away-degreezero-exact-pair",
   "lem-weil-pbc-proj-standard-open-inclusion",
-  "lem-weil-pbc-sheaf-of-modules-from-basis",
-  "lem-sc-p1-proj-tilde-functorial",
-  "lem-sc-p1-proj-sheafification-exact"
+  "lem-weil-pbc-ringed-space-module-exactness-local-lifting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Constructions of Schemes",
-  "place": "Tag 01M7; interface extraction from the proof of lem-sc-p1-sheafify-graded-chain"
+  "place": "Tag 01M7, functorial chart construction and exactness on degree-zero fractions; basis-section local lifting proof in Lean instead of canonical stalk transport"
  },
  "mathlib_searches": [
   {
@@ -120,9 +119,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T063527-L-3163148",
+  "landing": "20261012T085254-L-21097",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
