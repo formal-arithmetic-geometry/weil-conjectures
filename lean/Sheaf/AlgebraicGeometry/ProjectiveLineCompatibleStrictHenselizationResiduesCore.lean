@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueImage
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueLift
 
 /-! # Compatible strict henselizations and geometric residue maps
 
@@ -94,29 +96,74 @@ theorem Etale.projectiveLine_compatibleStrictHenselizationResidues_core
   exact ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB,
     hUA, hUB, hbase, hρA, hρB, True.intro⟩
 
-end AlgebraicGeometry
-
-namespace AlgebraicGeometry
-open CategoryTheory Limits
-open Scheme Etale
-set_option autoImplicit false
-/-- The residue maps in a compatible strict henselization datum commute.
-Source: Stacks Project, Tags 04GU and 04DY; the equality follows by functoriality
-of residue fields and cancellation after embedding into the common algebraic closure.
+/-- A compatible local map can be chosen to induce the specified geometric residue square.
+Source: Stacks Project, Tags 04GU and 04HX.
 (blueprint: compatible-strict-henselization-residue-square).
-Proof: compare both composites after embedding residue fields into the common
-algebraically closed field. Functoriality of residue maps gives equality. -/
+
+Proof: first use residue-image containment to construct the unique embedding r whose
+composite with the injective map κB → k' equals κA → k → k'. Prove its ring laws
+by injectivity and prove hres by full faithfulness of Spec. Then lift r through the
+strict henselization universal
+property. The commuting ring residue diagram makes the lift local, since field embeddings
+and residue projections are local. Surjectivity of the residue projection identifies the
+chosen residue map with the induced residue map of the lift. This asserts existence of a
+compatible map, rather than compatibility of every independently chosen map. -/
 theorem Etale.compatibleStrictHenselization_residue_square
-    {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω A B : Type u}
-    [Field k] [Field k'] [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]
-    [IsLocalRing A] [IsLocalRing B]
-    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}
-    (ι : Spec (.of k') ⟶ Spec (.of k))
-    (φ : A →+* B) (hφ : IsLocalHom φ)
-    (eA : Spec (.of A) ≅ strictHenselizationScheme s)
-    (eB : Spec (.of B) ≅ strictHenselizationScheme t)
+    {S T : Scheme.{u}} {g : T ⟶ S}
+    {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
+    [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]
+    [HenselianLocalRing A] [HenselianLocalRing B]
+    [IsSepClosed (IsLocalRing.ResidueField A)]
+    [IsSepClosed (IsLocalRing.ResidueField B)]
+    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)
+    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)
+    (ν : Spec (.of Ω) ⟶ Spec (.of k'))
+    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))
+    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))
     (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))
-    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) :
-    ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) =
-      ι ≫ ρA := by sorry
+    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))
+    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫
+      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)
+    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫
+      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ) :
+    ∃ (φ : A →+* B) (hφ : IsLocalHom φ),
+      letI := hφ
+      Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫
+          strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =
+        eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g ∧
+      ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) =
+        ι ≫ ρA := by
+  classical
+  let a := (Spec.preimage (ι ≫ ρA)).hom
+  let b := (Spec.preimage ρB).hom
+  obtain ⟨f, hf⟩ := Classical.axiomOfChoice
+    (Etale.compatibleStrictHenselization_residue_image σ τ ι hι ν eA eB ρA ρB hρA hρB)
+  let r : IsLocalRing.ResidueField A →+* IsLocalRing.ResidueField B :=
+    { toFun := f
+      map_one' := b.injective (by rw [hf, a.map_one, b.map_one])
+      map_mul' := fun x y ↦ b.injective (by rw [hf, b.map_mul, hf, hf, a.map_mul])
+      map_zero' := b.injective (by rw [hf, a.map_zero, b.map_zero])
+      map_add' := fun x y ↦ b.injective (by rw [hf, b.map_add, hf, hf, a.map_add]) }
+  have hbr : b.comp r = a := by
+    ext x
+    exact hf x
+  have hres : ρB ≫ Spec.map (CommRingCat.ofHom r) = ι ≫ ρA := by
+    rw [← Spec.map_preimage ρB, ← Spec.map_comp]
+    change Spec.map (CommRingCat.ofHom (b.comp r)) = _
+    rw [hbr]
+    exact Spec.map_preimage (ι ≫ ρA)
+  obtain ⟨φ, hcomm, hbase⟩ :=
+    Etale.exists_compatibleStrictHenselizationResidueLift
+      σ τ ι hι ν eA eB ρA ρB hρA hρB r hres
+  haveI : IsLocalHom ((IsLocalRing.residue B).comp φ) := by
+    rw [hcomm]
+    infer_instance
+  haveI : IsLocalHom φ := isLocalHom_of_comp φ (IsLocalRing.residue B)
+  have hr : IsLocalRing.ResidueField.map φ = r := by
+    ext x
+    obtain ⟨a, rfl⟩ := IsLocalRing.residue_surjective (R := A) x
+    exact DFunLike.congr_fun hcomm a
+  refine ⟨φ, inferInstance, hbase, ?_⟩
+  simpa only [hr] using hres
+
 end AlgebraicGeometry

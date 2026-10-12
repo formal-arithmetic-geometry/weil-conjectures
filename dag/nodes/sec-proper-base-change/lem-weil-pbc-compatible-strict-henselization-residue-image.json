@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-compatible-strict-henselization-residue-image",
+ "kind": "statement",
+ "title": "Containment of compatible strict-henselization residue images",
+ "statement": "Let g:T→S be a scheme morphism and k,k′ separably closed fields, Ω an algebraically closed field, σ:Spec k→S, τ:Spec k′→T, ι:Spec k′→Spec k with ι≫σ=τ≫g, and ν:Spec Ω→Spec k′. Let A,B be strictly henselian local rings with separably closed residue fields, eA:Spec A≅S_(ν≫ι≫σ), eB:Spec B≅T_(ν≫τ), and residue embeddings ρA,ρB whose composites through the closed-point and structural maps equal σ and τ. Let a:κA→k′ be the ring homomorphism corresponding to ι≫ρA and b:κB→k′ the one corresponding to ρB. For every x∈κA there exists y∈κB with b(y)=a(x). This is containment of field images only, with no map between A and B. The scheme, geometric point, residue field, strictly henselian ring and strict-henselization constructions are those of [def-pc-scheme] [def-pc-separably-closed] [def-weil-geometric-point] [def-weil-residue-field] [def-weil-pbc-henselian-terminology] [def-weil-pbc-strict-henselization-limit] [def-weil-pbc-strict-henselization-structural-map].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, identification of pointed-neighbourhood colimits with strict henselizations; Tag 095T, inclusion κ(s)^sep ⊂ κ(t)^sep in the proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-separably-closed",
+  "def-weil-geometric-point",
+  "def-weil-residue-field",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine neighbourhoods of the images of σ and τ. Identify their affine pointed-neighbourhood diagrams with the etale residue-triples diagrams, compatibly with their base maps.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The triples-colimit theorem identifies each model residue field with a separable closure of the point residue field. Transport through eA and eB. The factorization equations imply that a and b extend the indicated point residue embeddings. The images are unaffected by base automorphisms of these identifications.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An element of a(κA) satisfies a separable polynomial over the S point residue field. Extending its coefficients along the residue map of g leaves it separable over the T point residue field. The polynomial splits in κB because κB is separably closed. Apply b to that linear factorization: every root in k′ is the image of one of its roots in κB. Therefore the element is in b(κB).",
+   "uses": [
+    "def-pc-separably-closed"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-pc-separably-closed"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, identification of pointed-neighbourhood colimits with strict henselizations; Tag 095T, inclusion κ(s)^sep ⊂ κ(t)^sep in the proof; G3 image containment independent of lifting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization residue fields embedding image inclusion separable closure",
+   "results": "Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap, instIsSeparableResidueFieldOfQuotientIdeal, Algebra.isSeparable_residueField_iff, IsLocalRing.ResidueField.algebraMap_residue, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Ideal.ResidueField.lift_algebraMap, Ideal.ResidueField.algHom_ext_iff, Ideal.ResidueField.liftₐ",
+   "date": "2026-10-12",
+   "verdict": "Lower-level field and residue APIs only; no exact model residue-image theorem.",
+   "digest": "0273bfdc7a16ca64"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.injective",
+   "results": "RingHom.injective, WeierstrassCurve.Affine.Point.map_some",
+   "date": "2026-10-12",
+   "verdict": "Lower-level field and residue APIs only; no exact model residue-image theorem.",
+   "digest": "dc337520b175277e"
+  },
+  {
+   "tool": "grep",
+   "query": "separableClosure|map_into_henselian_colimit",
+   "results": "Mathlib/NumberTheory/Cyclotomic/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/Tower.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean, Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean",
+   "date": "2026-10-12",
+   "verdict": "Lower-level field and residue APIs only; no exact model residue-image theorem.",
+   "digest": "df18dcc8bf846710"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict henselization compatible residue embedding image containment",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Arbitrary-base step: residue-field inclusion κ(s)^sep ⊂ κ(t)^sep before choosing the strict-henselization map",
+   "via": [
+    "compatible-strict-henselization-residue-square"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResidueImage.lean",
+  "declaration": "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_image",
+  "statement": "theorem Etale.compatibleStrictHenselization_residue_image {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (ν : Spec (.of Ω) ⟶ Spec (.of k')) (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ)) (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ)) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ) (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫ eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ) : ∀ x : IsLocalRing.ResidueField A, ∃ y : IsLocalRing.ResidueField B, (Spec.preimage ρB).hom y = (Spec.preimage (ι ≫ ρA)).hom x",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2636a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T154243-L-2434686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2636a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T154243-L-2434686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG statements, dependencies, change record, report, sources, and forced-adaptation compiler checks."
+ }
+}

@@ -2,7 +2,7 @@
  "id": "compatible-strict-henselization-residue-square",
  "kind": "statement",
  "title": "Residue maps commute for compatible strict henselizations",
- "statement": "In the compatible strict henselization construction, the induced residue-field morphisms satisfy ρB ≫ Spec.map(ResidueField.map φ) = ι ≫ ρA.",
+ "statement": "Let g:T→S be a scheme morphism and k,k′ separably closed fields, Ω an algebraically closed field, σ:Spec k→S, τ:Spec k′→T, ι:Spec k′→Spec k with ι≫σ=τ≫g, and ν:Spec Ω→Spec k′. Let A,B be strictly henselian local rings with separably closed residue fields, eA:Spec A≅S_(ν≫ι≫σ), eB:Spec B≅T_(ν≫τ), and residue embeddings ρA,ρB whose composites through the closed-point and structural maps equal σ and τ. There exists a local ring map φ:A→B satisfying the structural square and ρB≫Spec(ResidueField.map φ)=ι≫ρA. The map φ is chosen compatibly with the specified embeddings; this is not a claim about arbitrary independently chosen maps.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 04GU and 04DY"
@@ -10,16 +10,33 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Compare both composites after embedding residue fields into the common algebraically closed field Ω; functoriality of residue maps makes the resulting maps equal.",
-   "uses": [],
+   "text": "Apply residue-image containment to get, for each x∈κA, a preimage f(x) in κB under the injective field map b to k′. Injectivity makes this preimage unique and proves the zero, one, addition and multiplication laws, giving a ring map r. The equality b∘r=a and full faithfulness of Spec give hres independently of the lifting theorem.",
+   "uses": [
+    "lem-weil-pbc-compatible-strict-henselization-residue-image"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Apply the narrowed residue-lift theorem with the independently constructed r and hres, obtaining φ with the commuting ring residue diagram and structural square.",
+   "uses": [
+    "lem-weil-pbc-compatible-strict-henselization-residue-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The composite residueB∘φ equals r∘residueA and is local, because field embeddings and residue projections are local. Hence φ is local. Surjectivity of residueA identifies r with ResidueField.map φ. Substitute this equality into the spectral residue square.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-compatible-strict-henselization-residue-image",
+  "lem-weil-pbc-compatible-strict-henselization-residue-lift"
+ ],
  "proof_origin": {
   "by": "worker",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04GU and 04DY"
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04HX, 095T and 04GU; X-1f91b repair constructing r before applying the lifting theorem"
  },
  "mathlib_searches": [
   {
@@ -68,9 +85,9 @@
   "module": "Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore",
   "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineCompatibleStrictHenselizationResiduesCore.lean",
   "declaration": "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_square",
-  "statement": "theorem Etale.compatibleStrictHenselization_residue_square\n    {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω A B : Type u}\n    [Field k] [Field k'] [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]\n    [IsLocalRing A] [IsLocalRing B]\n    {s : Spec (.of Ω) ⟶ S} {t : Spec (.of Ω) ⟶ T}\n    (ι : Spec (.of k') ⟶ Spec (.of k))\n    (φ : A →+* B) (hφ : IsLocalHom φ)\n    (eA : Spec (.of A) ≅ strictHenselizationScheme s)\n    (eB : Spec (.of B) ≅ strictHenselizationScheme t)\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) :\n    ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) =\n      ι ≫ ρA",
+  "statement": "theorem Etale.compatibleStrictHenselization_residue_square {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (ν : Spec (.of Ω) ⟶ Spec (.of k')) (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ)) (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ)) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ) (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫ eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ) : ∃ (φ : A →+* B) (hφ : IsLocalHom φ), letI := hφ Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g ∧ ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA",
   "branch": "sheaf-dag",
-  "by": "G1",
+  "by": "G3",
   "date": "2026-10-12"
  },
  "reviewed": {
@@ -86,18 +103,30 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-2636a",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T112854-L-773511",
+  "landing": "20261012T154243-L-2434686",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_square",
-   "AlgebraicGeometry.Etale.projectiveLine_compatibleStrictHenselizationResidues_core"
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG statements, dependencies, change record, report, sources, and forced-adaptation compiler checks."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "G3 stage 2",
+  "old_statement": "In the compatible strict henselization construction, the induced residue-field morphisms satisfy ρB ≫ Spec.map(ResidueField.map φ) = ι ≫ ρA.",
+  "what": "Correct the false arbitrary-map statement. A compatible local map exists for the fixed strict henselization models and geometric residue factorizations. Unlike the returned delivery, do not restate the entire model-existence theorem or strengthen CoreData.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tag 04GU; identification in Tag 04HX"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Compare both composites after embedding residue fields into the common algebraically closed field Ω; functoriality of residue maps makes the resulting maps equal.",
+    "uses": [],
+    "elementary": false
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.compatibleStrictHenselization_residue_square"
-  ]
+  "old_proof_deps": []
  }
 }

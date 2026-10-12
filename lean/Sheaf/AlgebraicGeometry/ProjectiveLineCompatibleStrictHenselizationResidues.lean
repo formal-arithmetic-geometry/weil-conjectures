@@ -92,8 +92,16 @@ theorem Etale.projectiveLine_compatibleStrictHenselizationResidues
   obtain ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB,
       hUA, hUB, hbase, hρA, hρB, _⟩ :=
     Etale.projectiveLine_compatibleStrictHenselizationResidues_core σ τ ι hι hσ hτ ν
-  refine ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB, ?_⟩
-  exact ⟨hUA, hUB, hbase, hρA, hρB,
-    Etale.compatibleStrictHenselization_residue_square (g := g) ι φ hφ eA eB ρA ρB⟩
+  letI := cA
+  letI := cB
+  letI := hA
+  letI := hB
+  letI := sA
+  letI := sB
+  obtain ⟨ψ, hψ, hbase', hres⟩ :=
+    Etale.compatibleStrictHenselization_residue_square
+      σ τ ι hι ν eA eB ρA ρB hρA hρB
+  exact ⟨A, B, cA, cB, hA, hB, sA, sB, ψ, hψ, eA, eB, ρA, ρB,
+    hUA, hUB, hbase', hρA, hρB, hres⟩
 
 end AlgebraicGeometry

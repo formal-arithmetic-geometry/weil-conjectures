@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-compatible-strict-henselization-residue-lift",
+ "kind": "statement",
+ "title": "Lift specified residue embeddings between fixed strict henselization models",
+ "statement": "Let g:T→S be a scheme morphism and k,k′ separably closed fields, Ω an algebraically closed field, σ:Spec k→S, τ:Spec k′→T, ι:Spec k′→Spec k with ι≫σ=τ≫g, and ν:Spec Ω→Spec k′. Let A,B be strictly henselian local rings with separably closed residue fields, eA:Spec A≅S_(ν≫ι≫σ), eB:Spec B≅T_(ν≫τ), and residue embeddings ρA,ρB whose composites through the closed-point and structural maps equal σ and τ. Given a ring homomorphism r:κA→κB satisfying ρB≫Spec r=ι≫ρA, there exists a ring homomorphism φ:A→B such that residueB∘φ=r∘residueA and Spec φ≫eA≫j_s=eB≫j_t≫g. The residue embedding r and its spectral square are hypotheses, not constructed by this lifting statement. The scheme, geometric point, residue field, strictly henselian ring and strict-henselization constructions are those of [def-pc-scheme] [def-pc-separably-closed] [def-weil-geometric-point] [def-weil-residue-field] [def-weil-pbc-henselian-terminology] [def-weil-pbc-strict-henselization-limit] [def-weil-pbc-strict-henselization-structural-map].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GU, Lemma 10.155.10; Tag 04HX, Lemma 59.33.1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-separably-closed",
+  "def-weil-geometric-point",
+  "def-weil-residue-field",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open U=Spec R containing the image of σ. By hρB and hι the closed point of Spec B maps into U; all points generalize it, so the structural map factors through U, giving R→B. Identify the affine pointed-neighbourhood coordinate diagram with the etale residue-triples diagram over R, compatibly with its structural maps.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The triples-colimit theorem gives a filtered colimit of etale R-algebras with local colimit and the specified separable-closure residue field, and identifies contraction of its maximal ideal to R. Transport the colimit and structural maps through eA by full faithfulness of Spec. The two factorizations and hres give base-residue compatibility of the supplied r; injectivity of κB→k′ reflects equality.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ind-etale lifting property with source A, henselian target B, its maximal ideal and the supplied compatible r, identifying prime and local residue fields. Its prescribed residue map gives residueB∘φ=r∘residueA. R-algebra compatibility gives equality of the maps into U, then composing with U→S gives the structural square. This is precisely the lifting property used to deduce 04GU from 08HR. No residue embedding is constructed here.",
+   "uses": [
+    "lem-weil-pbc-map-into-henselian-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-map-into-henselian-colimit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04HX and 04GU (deduced from 08HR); G3 repair of X-1f91b with supplied r and explicit identification and lifting dependencies"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization map lifting a specified residue field embedding",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict henselization local ring map inducing a specified residue field embedding",
+   "results": "IsLocalRing.ResidueField.lift, Ideal.ResidueField.lift, IsLocalRing.ResidueField.lift_residue_apply, Ideal.ResidueField.liftₐ, IsLocalRing.ResidueField.map, Ideal.ResidueField.lift_algebraMap, HenselianLocalRing.TFAE, IsLocalRing.ResidueField.lift_comp_residue",
+   "date": "2026-10-12",
+   "verdict": "No exact lift theorem; lower-level residue-field APIs only.",
+   "digest": "609e20a39ecb2581"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|map_comp_residue|residue_surjective",
+   "results": "Mathlib/RingTheory/RamificationInertia/Basic.lean, Mathlib/RingTheory/RingHom/EssFiniteType.lean, Mathlib/RingTheory/RingHom/EssFiniteType.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/Unramified/LocalRing.lean, Mathlib/RingTheory/LocalRing/Length.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact lift theorem; lower-level residue-field APIs only.",
+   "digest": "65cbf9756dabaffb"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Arbitrary-base step: compatible strict henselizations and residue embeddings",
+   "via": [
+    "compatible-strict-henselization-residue-square",
+    "lem-weil-pbc-p1-compatible-strict-henselization-residues"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResidueLift.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationResidueLift",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationResidueLift {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (ν : Spec (.of Ω) ⟶ Spec (.of k')) (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ)) (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ)) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ) (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫ eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ) (r : IsLocalRing.ResidueField A →+* IsLocalRing.ResidueField B) (hres : ρB ≫ Spec.map (CommRingCat.ofHom r) = ι ≫ ρA) : ∃ (φ : A →+* B), (IsLocalRing.residue B).comp φ = r.comp (IsLocalRing.residue A) ∧ Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2636a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T154243-L-2434686",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-2636a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T154243-L-2434686",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG statements, dependencies, change record, report, sources, and forced-adaptation compiler checks."
+ }
+}

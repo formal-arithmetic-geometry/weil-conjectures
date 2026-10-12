@@ -18,38 +18,28 @@
  ],
  "proof": [
   {
-   "text": "Apply strictHenselizationResidue at s and t: the canonical colimits are strictly henselian and their residue fields are the relative separable closures of the image residue fields inside Ω. Take their spectra for eA and eB.",
+   "text": "Obtain compatible strict henselization rings, their affine models, geometric residue maps and factorization equations from the existing core theorem.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "def-weil-pbc-relative-separable-closure"
+    "compatible-strict-henselization-residues-core"
    ],
    "elementary": false
   },
   {
-   "text": "A separable polynomial over an image residue field splits in k or k′ because those fields are separably closed. Hence its roots in Ω already lie in the corresponding embedded field. Factor the relative separable-closure embeddings through k and k′ to obtain ρA and ρB. The integral geometric-point factorizations make these fields algebraic over their base residue fields; an algebraic extension of a separably closed field is purely inseparable. The spectra of the resulting purely inseparable extensions are integral, surjective and universally injective, hence universal homeomorphisms.",
+   "text": "For these fixed models, choose a local map inducing the specified residue square using the corrected residue-square completion theorem. Repack the original rings and residue maps with this new local map and its structural equality.",
    "uses": [
-    "def-weil-pbc-relative-separable-closure",
-    "def-pc-separably-closed"
+    "compatible-strict-henselization-residue-square"
    ],
    "elementary": true
-  },
-  {
-   "text": "The residue factorizations of strictHenselizationResidue give the equalities with σ and τ. Apply strictHenselizationFunctoriality to s=t≫g using hι. It gives φ and the structural square. The induced residue embeddings commute after their injective embeddings into Ω, so cancel those embeddings to get ρB≫i0=ι≫ρA.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-separably-closed",
-  "def-weil-pbc-relative-separable-closure",
-  "lem-weil-pbc-strict-henselization-functoriality"
+  "compatible-strict-henselization-residues-core",
+  "compatible-strict-henselization-residue-square"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04HX, 03PS and 04GU; proof of Tag 095T, last two paragraphs; Tag 04DY; specialized and formalized by Q1 without strict-local closed-fibre base change"
+  "by": "worker",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GU; G3 forced proof adaptation after correcting the arbitrary-map residue claim"
  },
  "mathlib_searches": [
   {
@@ -162,15 +152,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G1",
+  "reviewer": "X-2636a",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T053931-L-2635086",
+  "landing": "20261012T154243-L-2434686",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.projectiveLine_compatibleStrictHenselizationResidues"
-  ],
-  "sorry_after": []
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with DAG statements, dependencies, change record, report, sources, and forced-adaptation compiler checks."
  }
 }
