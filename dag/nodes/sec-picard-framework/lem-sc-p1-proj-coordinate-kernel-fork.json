@@ -13,7 +13,26 @@
  ],
  "proof": [
   {
-   "text": "Proof: Write μ_i(d) for G whiskered with multiplication by x_i from O(d)\nto O(d+1). Define f by its two components -μ_1(z-1) and μ_0(z-1),\ntransporting (z-1)+1 to z. Commutativity of coordinate multiplication implies\nf followed by (μ_0(z), μ_1(z)) is zero. On D+(x_0), multiplication by x_0\nis invertible for every twist, and remains invertible after tensoring with G.\nFor a morphism (a,b) killed by the quotient map, set t=μ_0(z-1)^{-1} b.\nThe equation μ_0(z)a+μ_1(z)b=0 and commutativity give a=-μ_1(z-1)t;\nt is unique because its second component is b. On D+(x_1), instead set\nt=-μ_1(z-1)^{-1} a; the same equation gives b=μ_0(z-1)t, uniquely.\nThese local factorizations agree on overlaps by uniqueness. The sheaf gluing\nproperty therefore gives a unique global factorization for every kernel fork,\nwhich is exactly the universal property IsLimit. No arbitrary witness is\nused to define f: it is the displayed binary biproduct lift. Tensoring needs\nno flatness because the local inverses still exist. The calculation covers\nthe zero module, modules with torsion, characteristic two, and every integer z.\n",
+   "text": "Construct the map f as the binary biproduct lift of minus coordinate 1 and coordinate 0 at degree z-1, with the equality transport (z-1)+1=z. Proj.twistMul_comp_twistMul, whiskering, and biprod.lift_desc prove its composite with the quotient is zero.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Prove the elementary categorical local kernel criterion: when the quotient is p;c+q;d, the maps p and q are jointly monic, f;g=0, and f;q and c are invertible, a killed arrow b factors as b;q;inv(f;q). Equality of q components and vanishing under g imply equality of p components by cancellation of c. Invertibility of f;q also gives uniqueness. Apply this criterion to either ordering of the biproduct projections.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On the chart D+(x_i), Proj.isIso_restrict_twistMul and the monoidal pullback comparison make both adjacent coordinate multiplication maps invertible after tensoring with G. The local criterion therefore proves the mapped explicit fork is a limit on each chart. Restriction preserves limits by Scheme.Modules.preservesLimitsOfSize_restrictFunctor.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose an existing abstract limit cone for the quotient and lift the explicit fork into it. Each restricted lift is an isomorphism by comparison of two limit cones. The coordinate basic opens cover Proj by the irrelevant-ideal computation. Scheme.Modules.bijective_stalk_of_isIso_restrict and the sheaf stalk criterion make the global comparison an isomorphism. The IsLimit.nonempty_isLimit_iff_isIso_lift criterion gives the required global limiting fork. The selected cone is determined up to unique isomorphism by its proved universal property; f itself is an explicit construction.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf"
    ],
@@ -25,8 +44,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "dag/nodes/sec-picard-framework/lem-sc-p1-proj-coordinate-short-exact.json",
-  "place": "Two-chart calculation, proof steps 1 and 2 (not an application of the parent theorem)"
+  "document": "dag/nodes/sec-picard-framework/lem-sc-p1-proj-coordinate-kernel-fork.json",
+  "place": "Original two-chart locally split calculation, implemented in Lean by T2; categorical universal-property and stalkwise gluing arguments"
  },
  "mathlib_match": null,
  "status": "split",
@@ -91,10 +110,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T153648-L-2394789",
-  "kind": "interface",
+  "landing": "20261012T194142-L-465484",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
