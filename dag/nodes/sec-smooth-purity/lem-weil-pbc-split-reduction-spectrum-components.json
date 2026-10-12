@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-split-reduction-spectrum-components",
+ "kind": "statement",
+ "title": "Open components of an algebra spectrum with specified split reduction",
+ "statement": "Let A and R be commutative rings, R an A-algebra, and D_j A-algebras indexed by Fin(r). Suppose Spec(D_j) to Spec(A) are universal homeomorphisms [def-weil-universal-homeomorphism], and R modulo its nilradical is isomorphic as an A-algebra to the product of D_j. Then Spec(R) [def-weil-affine-spectrum] is covered by r pairwise disjoint opens W_j whose maps to Spec(A) are universal homeomorphisms. The index set may be empty.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "Proof, finite-algebra calculation: after the reduced tensor algebra is split, take factor spectra and lift their open-and-closed components through reduction."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply Spec to the supplied A-prime-algebra isomorphism R_red = product_j D_j. The finite affine coproduct-spectrum isomorphism makes the factor spectra pairwise disjoint open-and-closed subschemes covering Spec R_red, and identifies their maps to T with the supplied universal homeomorphisms. Pull the opens across the reduction homeomorphism to get W_j in Spec R. The zero-factor case is the empty spectrum of the zero ring, so the same covering statement holds.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-reduction-universal-homeomorphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict the reduction closed immersion to each W_j. It is a surjective closed immersion, whose reduced domain is the specified factor spectrum. The morphism from W_j to T is integral because integrality is unchanged by a source thickening (take the identity thickening of T). Surjectivity follows from the surjectivity of its composite with reduction. After every base change the reduction immersion is surjective and its composite with W_j -> T is injective; lifting two points through the reduction shows that W_j -> T is universally injective. Thus it is a universal homeomorphism. Transport the opens and their maps through P = Spec R.",
+   "uses": [
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-universal-homeomorphism",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-weil-pbc-thickening-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-generic-constructible.md",
+  "place": "Proof, finite-algebra calculation: after the reduced tensor algebra is split, take factor spectra and lift their open-and-closed components through reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spectrum of ring with reduction a finite product has open components",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.sigmaSpec",
+   "results": "sigmaSpec, ι_sigmaSpec, finite-index IsIso instance; no nilradical component lifting result",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "nilradical|sigmaSpec",
+   "results": "PrimeSpectrum.comap_quotientMk_bijective_of_le_nilradical, sigmaToPiHomeo, sigmaSpec; no combined statement",
+   "date": "2026-10-12",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SplitTensorAlgebraSchemeComponents",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-generic-constructible",
+   "place": "Proof, finite-algebra calculation: after the reduced tensor algebra is split, take factor spectra and lift their open-and-closed components through reduction.",
+   "via": [
+    "lem-weil-pbc-split-tensor-algebra-scheme-components"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SplitReductionSpectrumComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitReductionSpectrumComponents.lean",
+  "declaration": "AlgebraicGeometry.Scheme.spectrum_components_of_split_reduction",
+  "statement": "theorem spectrum_components_of_split_reduction\n    (A R : Type u) [CommRing A] [CommRing R] [Algebra A R]\n    (r : ℕ) (D : Fin r → Type u) [∀ j, CommRing (D j)] [∀ j, Algebra A (D j)]\n    (hD : ∀ j, IsUniversalHomeomorphism\n      (Spec.map (CommRingCat.ofHom (algebraMap A (D j)))))\n    (he : Nonempty ((R ⧸ _root_.nilradical R) ≃ₐ[A] (∀ j, D j))) :\n    ∃ (W : Fin r → (Spec (.of R)).Opens),\n      (⨆ i, W i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (W i) (W j)) ∧\n      ∀ i, IsUniversalHomeomorphism\n        ((W i).ι ≫ Spec.map (CommRingCat.ofHom (algebraMap A R)))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T110308-L-617614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T110308-L-617614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
