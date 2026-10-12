@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.DoubleComplexVerticalWindow
 public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
+import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+import Sheaf.Algebra.Homology.VerticalWindowSingleIso
+import Sheaf.Algebra.Homology.DoubleComplexSingleRowTotalIso
 
 /-!
 # Total cohomology of a single smart vertical layer
@@ -52,6 +55,14 @@ theorem verticalWindow_total_homology_iso
         (ComplexShape.up ℕ)).obj K) (ComplexShape.up ℕ)).homology (p + q) ≅
       (((HomologicalComplex.homologyFunctor C (ComplexShape.up ℕ) q).mapHomologicalComplex
         (ComplexShape.up ℕ)).obj K).homology p) := by
-  sorry
+  obtain ⟨e⟩ := verticalWindow_single_iso (C := C) q
+  let L := ((HomologicalComplex.homologyFunctor C (ComplexShape.up ℕ) q).mapHomologicalComplex
+    (ComplexShape.up ℕ)).obj K
+  have eK := (NatIso.mapHomologicalComplex e (ComplexShape.up ℕ)).app K
+  obtain ⟨eT⟩ := singleRow_total_iso L q
+  exact ⟨HomologicalComplex.homologyMapIso
+    (HomologicalComplex₂.total.mapIso eK (ComplexShape.up ℕ)) (p + q) ≪≫
+      HomologicalComplex.homologyMapIso eT (p + q) ≪≫
+      L.extendHomologyIso (ComplexShape.embeddingUp'Add (1 : ℕ) q) rfl⟩
 
 end HomologicalComplex₂
