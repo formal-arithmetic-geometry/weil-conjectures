@@ -9328,3 +9328,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:01 L: returned deliver/B3/Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyQShrink (reviewer RETURN: (reviewer X-087a5, head 087a51f1e) A (report completeness; review points 5 and 7): In coord/reports/B3/Sheaf.AlgebraicGe)
 
 - L: refuse missing source imports before batch landing; cache red attribution and discard stale results; honor SIGTERM at read-only checkpoints. Python tests and incident replay passed.
+- 20:14 L: returned deliver/C3/Sheaf.AlgebraicGeometry.SchemeIsoPerfectLocalTransport (reviewer RETURN: (reviewer X-8bb8a, head 8bb8a9a9a) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Sc)
