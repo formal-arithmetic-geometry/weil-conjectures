@@ -14,12 +14,14 @@
  ],
  "proof": [
   {
-   "text": "Evaluate rightDerivedFunctorPlusBaseChange_fac on the homotopy single complex Y[0]. Expand the auxiliary transformation and transport by the canonical single-complex isomorphisms; associators disappear and the levelwise transformation is the single complex of e(Y). Naturality transports the target along beta.mapDerivedCategoryPlusSingleFunctor.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply degree-zero homology to the derived unit equation on single complexes from lem-sbc-right-derived-base-change-single-unit. Expand rightDerivedPlusSingleUnitHomology and use naturality of gamma.mapDerivedCategoryPlusHomologyFunctorIso to move the mapped source unit through the comparison.",
+   "uses": [
+    "lem-sbc-right-derived-base-change-single-unit"
+   ],
+   "elementary": false
   },
   {
-   "text": "Apply H⁰ and the exact gamma homology comparison. Its naturality moves the source unit through that comparison. The single-complex H⁰ identification identifies the levelwise map with e(Y); this gives the claimed equation of homology augmentations. The single-complex compatibility used here is mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor, already proved in ExactFunctor.lean.",
+   "text": "Use mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor to identify the prefix involving the inverse single homology comparison with the inverse single homology comparison for gamma(G(Y)); cancel its hom to establish this identity. Naturality of singleFunctorCompHomologyFunctorIso.inv on e(Y) identifies the remaining prefix with e(Y) followed by the target inverse single homology comparison. The resulting suffix is rightDerivedPlusSingleUnitHomology for G′.",
    "uses": [
     "lem-sp-exact-functor-preserves-homology"
    ],
@@ -27,12 +29,13 @@
   }
  ],
  "proof_deps": [
+  "lem-sbc-right-derived-base-change-single-unit",
   "lem-sp-exact-functor-preserves-homology"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusBaseChange.lean",
-  "place": "rightDerivedFunctorPlusBaseChange_fac; apply degree-zero homology and mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor in lean/WeilConjectures/Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean."
+  "by": "worker",
+  "document": "lean/Sheaf/CategoryTheory/RightDerivedBaseChangeSingleUnitHomology.lean",
+  "place": "rightDerivedBaseChange_single_unit_homology, H2 reduction to derived-unit compatibility and proved homology comparisons"
  },
  "mathlib_searches": [
   {
@@ -121,9 +124,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T060748-L-2912497",
+  "landing": "20261012T085246-L-17838",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

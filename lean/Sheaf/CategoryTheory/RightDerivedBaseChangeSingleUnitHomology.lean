@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 public import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.CategoryTheory.RightDerivedBaseChangeSingleUnit
 
 /-!
 # The homology unit equation for derived base change
@@ -60,6 +61,39 @@ theorem rightDerivedBaseChange_single_unit_homology (e : G ⋙ γ ⟶ β ⋙ G')
       (DerivedCategory.Plus.homologyFunctor C' (0 : ℕ)).map
         (G'.rightDerivedFunctorPlus.map
           ((β.mapDerivedCategoryPlusSingleFunctor 0).hom.app Y)) =
-    e.app Y ≫ G'.rightDerivedPlusSingleUnitHomology (β.obj Y) := by sorry
+    e.app Y ≫ G'.rightDerivedPlusSingleUnitHomology (β.obj Y) := by
+  let H := DerivedCategory.Plus.homologyFunctor C' (0 : ℕ)
+  have hu := congrArg H.map (rightDerivedBaseChange_single_unit e Y)
+  simp only [Functor.map_comp] at hu
+  have hn := (γ.mapDerivedCategoryPlusHomologyFunctorIso (0 : ℕ)).hom.naturality
+    (G.rightDerivedPlusSingleUnit Y)
+  simp only [Functor.comp_map] at hn
+  have hs := γ.mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor
+    (0 : ℤ) (G.obj Y)
+  dsimp only [rightDerivedPlusSingleUnitHomology]
+  simp only [Functor.map_comp, Category.assoc] at *
+  erw [reassoc_of% hn]
+  erw [hu]
+  have hs' :
+      γ.map ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app
+        (G.obj Y)) ≫
+        (γ.mapDerivedCategoryPlusHomologyFunctorIso (0 : ℕ)).hom.app
+          ((DerivedCategory.Plus.singleFunctor C 0).obj (G.obj Y)) ≫
+        H.map ((γ.mapDerivedCategoryPlusSingleFunctor 0).hom.app (G.obj Y)) =
+      (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).inv.app
+        (γ.obj (G.obj Y)) := by
+    apply (cancel_mono
+      ((DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).hom.app
+        (γ.obj (G.obj Y)))).1
+    simp only [Category.assoc]
+    erw [hs]
+    rw [← γ.map_comp, Iso.inv_hom_id_app, γ.map_id, Iso.inv_hom_id_app]
+    rfl
+  erw [reassoc_of% hs']
+  have he := (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso
+    (C := C') 0).inv.naturality (e.app Y)
+  simp only [Functor.comp_map, Functor.id_map] at he
+  erw [← reassoc_of% he]
+  rfl
 
 end CategoryTheory.Functor

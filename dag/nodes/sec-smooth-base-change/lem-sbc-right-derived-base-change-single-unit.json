@@ -1,0 +1,116 @@
+{
+ "id": "lem-sbc-right-derived-base-change-single-unit",
+ "kind": "statement",
+ "title": "RightDerivedBaseChangeSingleUnit",
+ "statement": "Let B, B′, C, C′ be abelian categories with derived categories [def-weil-pbc-derived-categories], and enough injectives in B and B′. Let G : B → C and G′ : B′ → C′ be additive, and beta : B → B′ and gamma : C → C′ additive exact functors [lem-sp-exact-functor-preserves-homology]. For e : G ⋙ gamma → beta ⋙ G′ and Y in B, let u_G(Y) be rightDerivedPlusSingleUnit from [lem-sbc-right-derived-single-unit-homology-comparison]. Then gamma⁺(u_G(Y)) followed by derived base change on Y[0] and R⁺G′ of the beta single-complex comparison equals the gamma single-complex comparison followed by the single complex of e(Y) and u_G′(beta(Y)). No left exactness of G or G′ is assumed.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusBaseChange.lean",
+  "place": "rightDerivedFunctorPlusBaseChange_fac"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-sbc-right-derived-single-unit-homology-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put K = Y[0] in the homotopy category. Evaluate rightDerivedFunctorPlusBaseChange_fac at K, and expand rightDerivedFunctorPlusBaseChangeAux. The composition-comparison isomorphisms for identity transformations and the associators disappear. The equation now reads gamma⁺(unit_G(K)) followed by base change at Qh(K) equals the gamma localization comparison, Qh of the levelwise map e, unit_G′ at beta(K), and R⁺G′ of the inverse beta localization comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Expand u_G(Y). Naturality of derived base change along the canonical isomorphism Qh(K) → Y[0] transports the preceding equation to Y[0]. The beta localization comparison, that canonical transport, and the beta single-complex comparison compose to Qh of the isomorphism beta(K) → (beta(Y))[0], followed by the canonical transport for beta(Y). This coherence is checked under the faithful inclusion D⁺ → D using the definitions of the single-complex and localization comparisons.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of unit_G′ along beta(K) → (beta(Y))[0] to move this isomorphism before the unit. The remaining prefix equals the gamma single-complex comparison followed by the single-complex map of e(Y) and the inverse G′ single-complex comparison. Check this under the faithful inclusion D⁺ → D: expand the comparison maps, apply naturality of the localization comparison for gamma, and apply naturality of e to the cochain single-complex comparison. The suffix is precisely u_G′(beta(Y)).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusBaseChange.lean",
+  "place": "rightDerivedFunctorPlusBaseChange_fac"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived base change compatible with unit on complexes concentrated in degree zero",
+   "results": "8 hits including DerivedCategory.singleFunctorIsoCompQ and HomologicalComplex.singleMapHomologicalComplex; no base-change unit equation on derived single complexes.",
+   "verdict": "Use existing comparison maps; isolate their transport compatibility.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedFunctorPlusBaseChange",
+   "results": "No hits; identifier absent from Mathlib search service.",
+   "verdict": "The base-change construction belongs to the source library.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedPlusSingleUnit|rightDerivedFunctorPlusBaseChange_fac",
+   "results": "msearch Mathlib grep returned no hits. Local rg found PlusBaseChange.lean defining equation and RightDerivedSingleUnitHomologyComparison.lean unit definitions; no pre-homology single-unit equation.",
+   "verdict": "No duplicate intermediate equation found.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived functor base change is compatible with its unit on a single complex",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RightDerivedBaseChangeSingleUnitHomology",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-right-derived-base-change-single-unit-homology",
+   "place": "intermediate derived equation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-deg0",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedBaseChangeSingleUnit",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedBaseChangeSingleUnit.lean",
+  "declaration": "CategoryTheory.Functor.rightDerivedBaseChange_single_unit",
+  "statement": "theorem rightDerivedBaseChange_single_unit (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :\n    γ.mapDerivedCategoryPlus.map (G.rightDerivedPlusSingleUnit Y) ≫\n      (rightDerivedFunctorPlusBaseChange e).app\n        ((DerivedCategory.Plus.singleFunctor B 0).obj Y) ≫\n      G'.rightDerivedFunctorPlus.map\n        ((β.mapDerivedCategoryPlusSingleFunctor 0).hom.app Y) =\n    (γ.mapDerivedCategoryPlusSingleFunctor 0).hom.app (G.obj Y) ≫\n      (DerivedCategory.Plus.singleFunctor C' 0).map (e.app Y) ≫\n      G'.rightDerivedPlusSingleUnit (β.obj Y)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085246-L-17838",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085246-L-17838",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
