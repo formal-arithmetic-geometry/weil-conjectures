@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-derived-functor-triangles-05sc-value-triangle-completion",
+ "kind": "statement",
+ "title": "Existence of a morphism completing the supplied first two maps to a distinguished triangle.",
+ "statement": "Existence of a morphism completing the supplied first two maps to a distinguished triangle.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SC, LF clause"
+ },
+ "stmt_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "def-weil-triangulated-category",
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-pur-derived-functor-morphisms-05sa",
+  "lem-pur-derived-functor-shift-05su"
+ ],
+ "proof": [
+  {
+   "text": "This intermediate statement isolates one strictly smaller part of the construction in Stacks Project, Derived Categories, Lemma 05SC; its proof is the corresponding construction using the listed denominator, triangulated, shift, and essential-constancy results.",
+   "uses": [
+    "def-pur-saturated-triangulated-localization",
+    "def-weil-triangulated-category",
+    "def-pc-essentially-constant-pro-diagram",
+    "lem-pur-derived-functor-morphisms-05sa",
+    "lem-pur-derived-functor-shift-05su"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-saturated-triangulated-localization",
+  "def-weil-triangulated-category",
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-pur-derived-functor-morphisms-05sa",
+  "lem-pur-derived-functor-shift-05su"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05SC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "essentially constant pro diagrams preserve triangles",
+   "results": "Service unavailable: Internal Server Error. Repeated using LeanFinder and grep.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pointwise derived functor defined at two objects distinguished triangle extends to third compatible cones",
+   "results": "ExactFunctor.mapDerivedCategory, its IsTriangulated instance, Localization.distinguished_cocone_triangle and pointwise derivability-structure APIs. These require different data and do not establish essential constancy at a third vertex or compatibility for supplied value cones.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_distinguished",
+   "results": "Unknown identifier in the search service; read CategoryTheory.Functor.map_distinguished in Mathlib/CategoryTheory/Triangulated/Functor.lean directly. It applies to F itself, not the pointwise values of LF.",
+   "verdict": "not a match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulatedLeftDerivedDefinedAt|IsTriangulatedLeftDerivedValue|map_distinguished",
+   "results": "Repository: Shift, Inverts, ValueMorphism, LeftDerivedExactWhenDefined and the item. The exactness result requires values everywhere and imports this item, so cannot be used here. Upstream has no declaration for these pro-diagram predicates. Mathlib map_distinguished needs an already constructed triangulated functor. No duplicate of either new intermediate.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedFunctorValueTriangle",
+  "date": "2026-10-13",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-derived-functor-triangles-05sc-value-triangle",
+   "place": "stage-3 decomposition",
+   "via": [
+    "lem-pur-derived-functor-triangles-05sc-value-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompletion",
+  "file": "lean/Sheaf/CategoryTheory/DerivedFunctorValueTriangleCompletion.lean",
+  "declaration": "CategoryTheory.Functor.leftDerived_value_triangle_extension_core",
+  "statement": "theorem leftDerived_value_triangle_extension_core\n    {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]\n    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]\n    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]\n    [CategoryTheory.IsTriangulated C]\n    [HasZeroObject D] [HasShift D ℤ] [Preadditive D]\n    [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]\n    [CategoryTheory.IsTriangulated D]\n    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]\n    (S : MorphismProperty C)\n    (hS : S.IsSaturatedTriangulatedMultiplicativeSystem)\n    (T : Triangle C) (hT : T ∈ distTriang C)\n    (LX LY LZ : D)\n    (hX : F.IsTriangulatedLeftDerivedValue S hS T.obj₁ LX)\n    (hY : F.IsTriangulatedLeftDerivedValue S hS T.obj₂ LY)\n    (hZ : F.IsTriangulatedLeftDerivedValue S hS T.obj₃ LZ)\n    (uX : (Functor.const (S.Over ⊤ T.obj₁)).obj LX ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₁ ⋙ Over.forget T.obj₁ ⋙ F)\n    (uY : (Functor.const (S.Over ⊤ T.obj₂)).obj LY ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₂ ⋙ Over.forget T.obj₂ ⋙ F)\n    (uZ : (Functor.const (S.Over ⊤ T.obj₃)).obj LZ ⟶\n      MorphismProperty.Over.forget S ⊤ T.obj₃ ⋙ Over.forget T.obj₃ ⋙ F)\n    (huX : ∃ s₀ : S.Over ⊤ T.obj₁, ∃ r : F.obj s₀.left ⟶ LX,\n      uX.app s₀ ≫ r = 𝟙 LX ∧\n        ∀ s : S.Over ⊤ T.obj₁, ∃ t : S.Over ⊤ T.obj₁,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uX.app s)\n    (huY : ∃ s₀ : S.Over ⊤ T.obj₂, ∃ r : F.obj s₀.left ⟶ LY,\n      uY.app s₀ ≫ r = 𝟙 LY ∧\n        ∀ s : S.Over ⊤ T.obj₂, ∃ t : S.Over ⊤ T.obj₂,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uY.app s)\n    (huZ : ∃ s₀ : S.Over ⊤ T.obj₃, ∃ r : F.obj s₀.left ⟶ LZ,\n      uZ.app s₀ ≫ r = 𝟙 LZ ∧\n        ∀ s : S.Over ⊤ T.obj₃, ∃ t : S.Over ⊤ T.obj₃,\n          ∃ a : t ⟶ s₀, ∃ b : t ⟶ s,\n            F.map b.left = F.map a.left ≫ r ≫ uZ.app s)\n    (lf : LX ⟶ LY) (lg : LY ⟶ LZ)\n    (hf : ∀ (s : S.Over ⊤ T.obj₁) (s' : S.Over ⊤ T.obj₂)\n        (f' : s.left ⟶ s'.left),\n        s.hom ≫ T.mor₁ = f' ≫ s'.hom →\n          uX.app s ≫ F.map f' = lf ≫ uY.app s')\n    (hg : ∀ (s : S.Over ⊤ T.obj₂) (s' : S.Over ⊤ T.obj₃)\n        (g' : s.left ⟶ s'.left),\n        s.hom ≫ T.mor₂ = g' ≫ s'.hom →\n          uY.app s ≫ F.map g' = lg ≫ uZ.app s')\n    : ∃ lh : LZ ⟶ (shiftFunctor D (1 : ℤ)).obj LX,\n      Triangle.mk lf lg lh ∈ distTriang D",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T194059-L-451258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T194059-L-451258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

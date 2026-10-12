@@ -6,13 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantCofinal
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProCriterion
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 import Sheaf.CategoryTheory.LeftDerivedValueMorphism
-import Sheaf.CategoryTheory.TriangleMorphismCategory
 import Sheaf.CategoryTheory.DerivedFunctorShift
-import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompletion
+import Sheaf.CategoryTheory.DerivedFunctorValueTriangleCompatibility
 
 @[expose] public section
 
@@ -99,7 +96,11 @@ theorem leftDerived_value_triangle_extension
           uZ.app s ≫ F.map h' =
             lh ≫ (shiftFunctor D (1 : ℤ)).map (uX.app s') ≫
               (F.commShiftIso (1 : ℤ)).inv.app s'.left) ∧
-      Triangle.mk lf lg lh ∈ distTriang D := by
-  sorry
+      Triangle.mk lf lg lh ∈ distTriang D  := by
+  obtain ⟨lh, hdist⟩ := leftDerived_value_triangle_extension_core F S hS T hT LX LY LZ hX hY hZ
+    uX uY uZ huX huY huZ lf lg hf hg
+  refine ⟨lh, ?_, hdist⟩
+  exact leftDerived_value_triangle_extension_compat F S hS T hT LX LY LZ hX hY hZ
+    uX uY uZ huX huY huZ lf lg hf hg lh hdist
 
 end CategoryTheory.Functor

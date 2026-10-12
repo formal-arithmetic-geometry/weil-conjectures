@@ -9155,3 +9155,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:40 L: merged deliver/A3/Sheaf.AlgebraicGeometry.TruncatedHigherImageQuasiCoherent (stage 3; reviewer PASS; after a return; landing 20261012T194057-L-450908 (interface); batch 20261012T194054; modules 2; new nodes 1)
 - 19:40 L: merged deliver/A3/Sheaf.RingTheory.N2CharPPurelyInseparableCriterion (stage 3; reviewer PASS; first push; landing 20261012T194058-L-451043 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:40 L: merged deliver/B2/Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLifting (stage 3; reviewer PASS; first push; landing 20261012T194058-L-451141 (interface); batch 20261012T194054; modules 3; new nodes 2)
+- 19:40 L: merged deliver/B2/Sheaf.CategoryTheory.DerivedFunctorValueTriangle (stage 3; reviewer PASS; first push; landing 20261012T194059-L-451258 (interface); batch 20261012T194054; modules 3; new nodes 2)
