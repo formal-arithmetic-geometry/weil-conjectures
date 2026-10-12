@@ -6,8 +6,6 @@ Authors: SHEAF group C2
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Transport of canonical pullback maps to complex representatives
 
@@ -111,6 +109,79 @@ noncomputable def presentationDerivedMap {X Y T : Scheme.{u}}
         (upperStar AddCommGrpCat.{u + 1} g)
         (upperStar AddCommGrpCat.{u + 1} f)).inv.app K)
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem composition_factors {X Y T : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ T) (h : X ⟶ T) (hh : h = f ≫ g)
+    (C : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :
+    (Functor.mapDerivedCategoryNatIso
+      (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
+      Functor.mapDerivedCategoryCompIso
+        (upperStar AddCommGrpCat.{u + 1} g)
+        (upperStar AddCommGrpCat.{u + 1} f)).inv.app (DerivedCategory.Q.obj C) ≫
+        (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryFactors.hom.app C =
+    (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.map
+        ((upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryFactors.hom.app C) ≫
+      (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app
+        (presentationPullback g C) ≫
+      DerivedCategory.Q.map (presentationCompIso f g h hh C).inv := by
+  apply (cancel_epi ((Functor.mapDerivedCategoryNatIso
+      (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
+      Functor.mapDerivedCategoryCompIso
+        (upperStar AddCommGrpCat.{u + 1} g)
+        (upperStar AddCommGrpCat.{u + 1} f)).hom.app (DerivedCategory.Q.obj C))).mp
+  rw [Iso.hom_inv_id_app_assoc]
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+  have hc := Functor.mapDerivedCategoryCompIso_fac
+    (upperStar AddCommGrpCat.{u + 1} g) (upperStar AddCommGrpCat.{u + 1} f) C
+  have hn := Functor.mapDerivedCategoryNatIso_fac
+    (upperStarComp AddCommGrpCat.{u + 1} f g h hh) C
+  have hi : DerivedCategory.Q.map
+      ((Functor.mapHomologicalComplexCompIso
+        (Iso.refl (upperStar AddCommGrpCat.{u + 1} g ⋙
+          upperStar AddCommGrpCat.{u + 1} f)) (ComplexShape.up ℤ)).hom.app C) = 𝟙 _ := by
+    rw [← DerivedCategory.Q.map_id]
+    congr 1
+  simp only [hi] at hc
+  dsimp only [Functor.comp_obj] at hc
+  simp only [Category.comp_id] at hc
+  erw [reassoc_of% hc, reassoc_of% hn]
+  simp only [presentationCompIso, ← Functor.map_comp]
+  change _ = _ ≫ DerivedCategory.Q.map
+    ((NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} f g h hh)
+      (ComplexShape.up ℤ)).hom.app C ≫
+     (NatIso.mapHomologicalComplex (upperStarComp AddCommGrpCat.{u + 1} f g h hh)
+      (ComplexShape.up ℤ)).inv.app C)
+  simp
+
+private theorem pullback_naturality {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℤ)
+    {A B : DerivedCategory (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})}
+    (m : A ⟶ B) :
+    (cohomology AddCommGrpCat.{u + 1} Y n).map
+      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app A) ≫
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map
+      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+        AddCommGrpCat.{u + 1} f).hom.app
+        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj A)) ≫
+    (cohomology AddCommGrpCat.{u + 1} X n).map
+      ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.map m) =
+    (cohomology AddCommGrpCat.{u + 1} Y n).map m ≫
+    (cohomology AddCommGrpCat.{u + 1} Y n).map
+      ((mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.app B) ≫
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} n).map
+      ((rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+        AddCommGrpCat.{u + 1} f).hom.app
+        ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.obj B)) := by
+  have hu := (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).unit.naturality m
+  have hl := (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
+    AddCommGrpCat.{u + 1} f).hom.naturality
+      ((upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.map m)
+  dsimp only [cohomology, Functor.comp_map]
+  simp only [← Functor.map_comp, ← Category.assoc]
+  congr 1
+  rw [Category.assoc, ← hl]
+  dsimp only [Functor.comp_map, Functor.id_map] at hu ⊢
+  rw [← Category.assoc, ← Functor.map_comp, ← hu]
+
 /-- Canonical pullback along one triangle commutes with replacement by a complex.
 Source: Stacks Project, Tag 0GIT, proof (the pullbacks of a representative represent
 its derived pullbacks); Tag 0EZM, proof (canonical transition maps).
@@ -162,6 +233,36 @@ theorem presentation_pullback_transport {X Y T : Scheme.{u}}
     presentationDerivedMap f g h hh K n ≫ (presentationRepresentativeIso h q n).hom =
       (presentationRepresentativeIso g q n).hom ≫ P f (presentationPullback g C) ≫
         (cohomology AddCommGrpCat.{u + 1} X n).map
-          (DerivedCategory.Q.map (presentationCompIso f g h hh C).inv) := by sorry
+          (DerivedCategory.Q.map (presentationCompIso f g h hh C).inv) := by
+  let e := (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategory.mapIso q ≪≫
+    (upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryFactors.app C
+  let d := Functor.mapDerivedCategoryNatIso
+    (upperStarComp AddCommGrpCat.{u + 1} f g h hh) ≪≫
+      Functor.mapDerivedCategoryCompIso
+        (upperStar AddCommGrpCat.{u + 1} g) (upperStar AddCommGrpCat.{u + 1} f)
+  have hd : d.inv.app K ≫
+      (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategory.map q.hom ≫
+      (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryFactors.hom.app C =
+      (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategory.map e.hom ≫
+      (upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryFactors.hom.app
+        (presentationPullback g C) ≫
+      DerivedCategory.Q.map (presentationCompIso f g h hh C).inv := by
+    rw [← d.inv.naturality_assoc q.hom]
+    dsimp only [Functor.comp_map]
+    rw [composition_factors f g h hh C]
+    simp only [e, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+      Functor.map_comp, Category.assoc]
+  rw [hP]
+  simp only [presentationDerivedMap, presentationRepresentativeIso, Functor.mapIso_hom,
+    Iso.trans_hom, Iso.app_hom, Functor.map_comp, Category.assoc]
+  simp only [← Functor.map_comp]
+  rw [hd]
+  simp only [Functor.map_comp]
+  have hn := pullback_naturality f n e.hom
+  dsimp only [cohomology, Functor.comp_map] at hn ⊢
+  rw [reassoc_of% hn]
+  simp only [e, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Functor.map_comp,
+    Category.assoc]
+  rfl
 
 end AlgebraicGeometry.Etale
