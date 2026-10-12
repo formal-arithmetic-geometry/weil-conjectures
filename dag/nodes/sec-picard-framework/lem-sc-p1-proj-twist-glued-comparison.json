@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-p1-proj-twist-glued-comparison",
+ "kind": "statement",
+ "title": "Comparison of a Proj twist with any prescribed glued twist",
+ "statement": "Let k be a field, S=k[x₀,x₁] with its standard grading, d an integer, and C a chart-compatible isomorphism Proj S ≅ P¹_k [def-sc-p1-proj-chart-isomorphism]. Let L be an O-module on P¹_k with specified TwistData of degree d [def-sc-p1-standard]. Then Proj.twist S d [def-weil-pbc-proj-twisting-sheaf] is isomorphic to tensorPullback(C.iso.hom)(L) [def-pc-module-pullback]. No choice or existence of C or L is asserted.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01MN",
+  "place": "Definition 27.10.1 (1), Lemma 01M7 (2),(3); parent node chart and overlap proof steps"
+ },
+ "stmt_deps": [
+  "def-sc-p1-proj-chart-isomorphism",
+  "def-sc-p1-standard",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "On D₊(xᵢ), sections of the Proj twist are degree-d homogeneous fractions. Multiplication by xᵢ^(-d) gives the degree-zero ring and therefore xᵢ^d is a free generator on every subopen. For negative d, this power is interpreted in the localization where xᵢ is a unit.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "01M7"
+   }
+  },
+  {
+   "text": "By C.chart_eq, C identifies these affine charts and their ratio coordinates with the standard projective-line charts. The tensor-formula pullback transports each generator of L to a generator on D₊(xᵢ): inverse image along an isomorphism transports the local structure ring isomorphically and extension of scalars transports a free rank-one module to a free rank-one module. Define the local module isomorphism by sending xᵢ^d to this transported generator.",
+   "uses": [
+    "def-sc-p1-proj-chart-isomorphism",
+    "def-sc-p1-standard",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "01M7"
+   }
+  },
+  {
+   "text": "On the intersection, x₀^d=(x₀/x₁)^d x₁^d=t^(-d)x₁^d. The two transported generators obey the identical relation by TwistData.map_g₀. Restricting to any subopen of the intersection gives the same relation, so the local generator-preserving maps agree. Glue them to a global map by the sheaf property. Their local inverses agree too; glue the inverses. Both composites restrict to the identity on the two-member cover and so are identities by separation. This gives the required module isomorphism.",
+   "uses": [
+    "def-sc-p1-standard",
+    "lem-weil-pbc-glue-sheaves-of-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "01M7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-p1-proj-chart-isomorphism",
+  "def-sc-p1-standard",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-glue-sheaves-of-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01MN",
+  "place": "Definition 27.10.1 (1), Lemma 01M7 (2),(3); parent node chart and overlap proof steps; adaptation to the recorded Lean interfaces by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Proj twist of a polynomial ring is isomorphic to any line bundle glued from the standard generators with transition t to the negative degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Proj twist of a polynomial ring is isomorphic to any line bundle glued from the standard generators with transition t to the negative degree",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.basicOpenIsoAway_hom, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.basicOpenIsoSpec_hom",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "twist|graded.*sheaf|sheaf.*graded",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause S(d)~ = O(d), chart trivializations and agreement of the two generator-preserving maps on the overlap",
+   "via": [
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistGluedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistGluedComparison.lean",
+  "declaration": "AlgebraicGeometry.Proj.nonempty_twist_iso_tensorPullback_of_twistData",
+  "statement": "theorem nonempty_twist_iso_tensorPullback_of_twistData (k : Type v) [Field k]\n    (d : ℤ) (C : ProjectiveLine.ProjChartIsomorphism k)\n    (L : (ProjectiveLine (Spec (.of k))).Modules)\n    (T : ProjectiveLine.TwistData (Spec (.of k)) d L) :\n    Nonempty (twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) d ≅\n      (Scheme.Modules.tensorPullback C.iso.hom).obj L)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3163020",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3163020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

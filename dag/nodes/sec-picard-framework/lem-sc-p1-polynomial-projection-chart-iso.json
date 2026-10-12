@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-p1-polynomial-projection-chart-iso",
+ "kind": "statement",
+ "title": "Polynomial projective-line projection is an isomorphism on each standard chart",
+ "statement": "Let k be a field and S=k[x₀,x₁] with its total-degree grading. Let hcov assert that the basic opens D₊(xᵢ), indexed by ULift(Fin 2), cover Proj S. The canonical linear projection [def-pc-linear-pair-morphism] defined by xᵢ restricts to an isomorphism over each standard open of the base-change projective line [def-sc-p1-standard].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01NG",
+  "place": "Lemma 27.13.3 and its base change to Spec k; explicit chart computation in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection.isFinite_linearProjection_restrict"
+ },
+ "stmt_deps": [
+  "def-pc-linear-pair-morphism",
+  "def-sc-p1-standard"
+ ],
+ "proof": [
+  {
+   "text": "The preimage of the i-th standard open under linearProjection is D₊(xᵢ), by linearProjection_preimage_standardOpen. The affine chart Spec S_(xᵢ) maps isomorphically to this preimage through the canonical awayι open immersion. Introduce the corresponding isoOfRangeEq e. The identity linearChartSection_self says that the auxiliary basic open for xᵢ/xᵢ is all of this affine chart.",
+   "uses": [
+    "def-pc-linear-pair-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01NG",
+    "place": "01NG"
+   }
+  },
+  {
+   "text": "Compose the restricted projection with e on the source and standardOpenIso on the target. The formulas awayι_linearProjection and homOfSections_resLE_standardOpenIso_hom identify this composite with AffineSpace.homOfVector over the coefficient algebra map, with coordinates xⱼ/xᵢ. This is the same coordinate calculation used in the already proved isFinite_linearProjection_restrict, specialized to the polynomial grading.",
+   "uses": [
+    "def-pc-linear-pair-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01NG",
+    "place": "01NG"
+   }
+  },
+  {
+   "text": "The algebra equivalence homogeneousLocalizationAwayXEquiv [lem-weil-pbc-dehomogenization-polynomial-ring] identifies S_(xᵢ) with the polynomial ring in variables j ≠ i. Reindex the complementary variables by the bijection induced by ULift.down. Its inverse sends Xⱼ to xⱼ/xᵢ. The affine hom_ext lemma, SpecIso_inv_over, SpecIso_inv_appTop_coord and naturality of ΓSpecIso therefore identify the coordinate morphism with Spec of this ring equivalence followed by the inverse affine SpecIso. Both are isomorphisms; cancel the source and target chart isomorphisms to obtain IsIso of the restricted projection.",
+   "uses": [
+    "lem-weil-pbc-dehomogenization-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01NG",
+    "place": "01NG"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-linear-pair-morphism",
+  "lem-weil-pbc-dehomogenization-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01NG",
+  "place": "Lemma 27.13.3 and its base change to Spec k; explicit chart computation in WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection.isFinite_linearProjection_restrict; adaptation to the recorded Lean interfaces by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from Proj of a polynomial ring to projective space over Spec of its coefficient ring is an isomorphism on each standard affine chart",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from Proj of a polynomial ring to projective space over Spec of its coefficient ring is an isomorphism on each standard affine chart",
+   "results": "AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Proj.basicOpenIsoSpec_hom, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.Proj.toSpecZero",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "linearProjection|ProjChartIsomorphism|projectiveSpaceOverAffine|homogeneousLocalizationAwayXEquiv",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause, identifying the standard charts of polynomial Proj with the projective line before sheafifying S(d)",
+   "via": [
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLinePolynomialProjectionChartIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLinePolynomialProjectionChartIso.lean",
+  "declaration": "AlgebraicGeometry.Proj.isIso_polynomial_linearProjection_restrict",
+  "statement": "theorem isIso_polynomial_linearProjection_restrict (k : Type v) [Field k]\n    (hcov : (⨆ i : ULift.{v} (Fin 2),\n      basicOpen (homogeneousSubmodule (Fin 2) k) (X i.down)) = ⊤)\n    (i : ULift.{v} (Fin 2)) :\n    IsIso (linearProjection (homogeneousSubmodule (Fin 2) k)\n      (fun j : ULift.{v} (Fin 2) ↦ X j.down)\n      (fun j ↦ X_mem_homogeneousSubmodule_one k j.down) hcov ∣_\n        ProjectiveSpace.standardOpen (ULift.{v} (Fin 2)) (Spec (.of k)) i)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3163020",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3163020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

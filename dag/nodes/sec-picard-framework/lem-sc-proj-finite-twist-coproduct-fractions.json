@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-proj-finite-twist-coproduct-fractions",
+ "kind": "statement",
+ "title": "Fraction charts of finite coproducts of twists over a graded ring",
+ "statement": "Let A be any commutative ring with an N-grading 𝒜, r a natural number, and a:Fin r→Z. Let F be the finite coproduct of Proj.twist 𝒜 (a i) [def-weil-pbc-proj-twisting-sheaf]. Over every homogeneous basic open D₊(f) of positive degree, there is an additive injection α from F sections into Away f (Fin r→A). Its range is degreeZeroFractions [def-sc-degree-zero-module-fractions] for the shifted grading: a vector y has degree n when yᵢ lies in 𝒜_(aᵢ+n) if aᵢ+n≥0 and is zero otherwise. The maps α intertwine awayToSection scalars with the canonical homogeneous-localization algebra map. For a canonical restriction with g^e=h*f, e>0 and h homogeneous, a section represented by y/f^m maps to (h^m•y)/g^(e*m). This includes r=0, arbitrary integer shifts, and nilpotent f.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4 (2),(3), with Definitions 01M6 (3) and 01MN (1); finite-direct-sum consequence of the parent node"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof": [
+  {
+   "text": "By Definition 01MN (1) and Lemma 01M7 (2), sections of twist 𝒜 (a i) on D₊(f) identify additively and scalar-linearly with the equal-degree fractions of the shift A(a i). Equivalently a numerator of degree a i + m*b is paired with denominator f^m. If that integer degree is negative, its component is zero. All these identifications are compatible with restrictions by 01M7 (3).",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "01M7"
+   }
+  },
+  {
+   "text": "Finite coproducts of sheaves of modules are also their finite products, and products are computed sectionwise. Localization commutes with the finite product of the underlying modules: send a fraction vector to its coordinate fractions; to invert this map, express each coordinate with a power f^(mᵢ), choose m=max mᵢ and multiply its numerator by f^(m-mᵢ). Equality of fractions is preserved; finitely many witnesses for localization equality can likewise be multiplied to obtain one common witness. Consequently the inverse induces an additive injection α of the coproduct sections into Away f (Fin r→A).",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "01M7"
+   }
+  },
+  {
+   "text": "Multiplying the i-th numerator by f^(m-mᵢ) makes its degree a i+m*b, so each image lies in the prescribed shifted degree-zero fractions. Conversely any homogeneous numerator vector over a homogeneous power of f yields, coordinatewise, a section of each twist, proving range equality. The zero polynomial, zero numerator and empty family are included: for r=0 take numerator zero and denominator 1.",
+   "uses": [
+    "def-sc-degree-zero-module-fractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "01M7"
+   }
+  },
+  {
+   "text": "The scalar formula follows from coordinatewise multiplication in the localization and the S_(f)-linearity of the individual chart maps. For g^e=h*f, (g^e)^m=h^m*f^m, so each coordinate yᵢ/f^m maps to h^m*yᵢ/g^(e*m). Lemma 01M7 (3) identifies this with the sheaf restriction; equality of all coordinates gives the displayed vector formula.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01M7",
+    "place": "01M7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "Lemma 27.8.4 (2),(3), with Definitions 01M6 (3) and 01MN (1); finite-direct-sum consequence of the parent node; adaptation to the recorded Lean interfaces by X2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The finite coproduct of twisting sheaves on Proj has basic open sections equal to the degree zero localization of the direct sum of graded shifts",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The finite coproduct of twisting sheaves on Proj has basic open sections equal to the degree zero localization of the direct sum of graded shifts",
+   "results": "AlgebraicGeometry.Proj.basicOpen_eq_iSup_proj, AlgebraicGeometry.sectionInBasicOpen, ProjectiveSpectrum.basicOpen_eq_union_of_projection, AlgebraicGeometry.Proj.opensRange_awayι, AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec.image_basicOpen_eq_basicOpen, AlgebraicGeometry.Proj.awayι_preimage_basicOpen",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "twist|graded.*sheaf|sheaf.*graded",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact Mathlib match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof final clause: associated sheaf of the finite direct sum of shifts is the finite direct sum of the corresponding twists",
+   "via": [
+    "lem-sc-p1-proj-shifted-free-twist"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjFiniteTwistCoproductFractions.lean",
+  "declaration": "AlgebraicGeometry.Proj.finite_twist_coproduct_fractions",
+  "statement": "theorem finite_twist_coproduct_fractions\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (r : ℕ) (a : Fin r → ℤ) :\n  ∃ alpha : ∀ (f : A) (b : ℕ),\n    0 < b → f ∈ 𝒜 b →\n    (∐ (fun i : Fin r ↦ twist 𝒜 (a i))).val.obj (op (basicOpen 𝒜 f))\n      →+ LocalizedModule.Away f (Fin r → A),\n  (∀ (f : A) (b : ℕ) (hb : 0 < b)\n    (hf : f ∈ 𝒜 b),\n    Function.Injective (alpha f b hb hf) ∧\n    Set.range (alpha f b hb hf) = degreeZeroFractions\n      (fun n : ℕ ↦ (𝒜 n : Set _))\n      (fun n : ℕ ↦ {y : Fin r → A | ∀ i,\n        if 0 ≤ a i + n then\n          y i ∈ 𝒜 (a i + n).toNat\n        else y i = 0}) (Submonoid.powers f)) ∧\n  (∀ (f : A) (b : ℕ) (hb : 0 < b)\n    (hf : f ∈ 𝒜 b)\n    (q : HomogeneousLocalization.Away 𝒜 f)\n    (s : (∐ (fun i : Fin r ↦ twist 𝒜 (a i))).val.obj (op (basicOpen 𝒜 f))),\n    alpha f b hb hf (awayToSection 𝒜 f q\n      • s) = algebraMap\n        (HomogeneousLocalization.Away 𝒜 f)\n        (Localization.Away f) q • alpha f b hb hf s) ∧\n  (∀ (f g : A) (b c : ℕ) (hb : 0 < b) (hc : 0 < c)\n    (hf : f ∈ 𝒜 b)\n    (hg : g ∈ 𝒜 c)\n    (inc : basicOpen 𝒜 g ≤\n      basicOpen 𝒜 f)\n    (e t : ℕ) (h : A),\n    0 < e → h ∈ 𝒜 t → g ^ e = h * f →\n    ∀ (m : ℕ) (y : Fin r → A)\n      (s : (∐ (fun i : Fin r ↦ twist 𝒜 (a i))).val.obj\n          (op (basicOpen 𝒜 f))),\n      alpha f b hb hf s = mk y (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) →\n      alpha g c hc hg ((∐ (fun i : Fin r ↦\n        twist 𝒜 (a i))).val.map\n          (homOfLE inc).op s) =\n        mk (h ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3163020",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3163020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

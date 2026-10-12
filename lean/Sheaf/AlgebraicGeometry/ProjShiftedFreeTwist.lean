@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
+import Sheaf.AlgebraicGeometry.ProjectiveLinePolynomialProjectionChartIso
+import Sheaf.AlgebraicGeometry.ProjTwistGluedComparison
+import Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions
+import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 
 /-!
 # Shifted free graded modules and the glued twists on the projective line
@@ -102,6 +106,32 @@ theorem proj_shifted_free_is_twist (k : Type v) [Field k] (d : ℤ) :
               twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) (a i))).val.map
                 (homOfLE inc).op s) =
               mk (h ^ m • y) (⟨g ^ (e * m), ⟨e * m, rfl⟩⟩ : Submonoid.powers g))) := by
-  sorry
+  classical
+  have hcov : (⨆ i : ULift.{v} (Fin 2),
+      basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) k) (MvPolynomial.X i.down)) =
+        ⊤ := by
+    have h := iSup_basicOpen_eq_top' (MvPolynomial.homogeneousSubmodule (Fin 2) k)
+      MvPolynomial.X (fun i ↦ ⟨1, MvPolynomial.isHomogeneous_X k i⟩)
+      (MvPolynomial.adjoin_range_X_eq_top (Fin 2) k)
+    refine top_le_iff.mp fun x hx ↦ ?_
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (h.ge hx)
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨⟨i⟩, hi⟩
+  let p := linearProjection (MvPolynomial.homogeneousSubmodule (Fin 2) k)
+    (fun j : ULift.{v} (Fin 2) ↦ MvPolynomial.X j.down)
+    (fun j ↦ MvPolynomial.X_mem_homogeneousSubmodule_one k j.down) hcov
+  have hp : IsIso p := by
+    apply (IsZariskiLocalAtTarget.iff_of_iSup_eq_top
+      (P := MorphismProperty.isomorphisms Scheme) (f := p) _
+      (ProjectiveSpace.iSup_standardOpen (ULift.{v} (Fin 2)) (Spec (.of k)))).mpr
+    intro i
+    exact isIso_polynomial_linearProjection_restrict k hcov i
+  let C : ProjectiveLine.ProjChartIsomorphism k :=
+    { iso := asIso p
+      chart_eq := fun i ↦ awayι_linearProjection _ _ _ hcov i }
+  obtain ⟨L, T, _, _⟩ := ProjectiveLine.exists_twistData_unique_iso k d
+  refine ⟨C, ⟨L, ⟨T⟩, ?_⟩, ?_⟩
+  · exact nonempty_twist_iso_tensorPullback_of_twistData k d C L T
+  · intro r a
+    exact finite_twist_coproduct_fractions (MvPolynomial.homogeneousSubmodule (Fin 2) k) r a
 
 end AlgebraicGeometry.Proj
