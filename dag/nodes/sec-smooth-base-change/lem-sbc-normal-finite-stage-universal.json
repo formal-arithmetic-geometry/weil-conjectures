@@ -1,0 +1,114 @@
+{
+ "id": "lem-sbc-normal-finite-stage-universal",
+ "kind": "statement",
+ "title": "Universal finite normal replacement of a single approximation stage",
+ "statement": "Let S be a quasi-compact quasi-separated integral scheme with integrally closed stalks and N a Noetherian approximation [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois, def-nagata-noetherian-inverse-system]. For each i there are an integral scheme X with integrally closed stalks, a dominant alpha:S -> X and finite p:X -> N_i with alpha followed by p the projection. For any integral normal Y, dominant beta:S -> Y and g:Y -> N_i whose composite with beta is that projection, there is a unique f:Y -> X with beta followed by f equal to alpha and f followed by p equal to g. No diagram or transition maps are asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-nagata-noetherian-inverse-system"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ normal approximation paragraph; Tags 035E, 035N, 035L, 035Q (normalization universal property), 0335"
+ },
+ "proof": [
+  {
+   "text": "Form the scheme-theoretic image Z of the projection S -> N_i. It is integral\nbecause S is integral, and is a closed subscheme of a finite type integer scheme.\nConstruct X as the normalization of Z in its own function field, by gluing the spectra\nof the integral closures of affine chart rings in their fraction fields. These closures\nare finite by finiteTypeZDomain_integralClosure_finite. Integral closure commutes with\nlocalization, so the gluing gives an integral scheme with integrally closed stalks and\na finite map p to N_i. The dominant map S -> Z factors through X: the embedding of\nfunction fields sends integral elements into the integrally closed local rings of S.\nThis yields a dominant alpha and alpha followed by p is the projection.\nFor any Y, beta and g in the conclusion, the image of g lies in Z: beta is dominant,\nand Y is reduced, so the pullback of the ideal defining Z vanishes on Y. The induced\nmap Y -> Z is dominant since its composite with beta is S -> Z. Normality of Y\ntherefore gives a unique lift to X by the same integral-closure argument. Uniqueness\nalso shows beta followed by this lift is alpha. This proves the asserted universal\nproperty. In particular it determines (X, alpha, p) up to unique compatible isomorphism;\nno arbitrary witness of mere existence is used as the data of a definition.",
+   "uses": [
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tags 035E, 035Q, 0EZJ and 0335",
+  "note": "K2 spells out the single-stage scheme-theoretic-image and absolute-normalization argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalization universal factorization dominant morphism normal scheme scheme theoretic image",
+   "results": "Hom.toNormalization, Hom.normalizationDesc, and dominance of relative normalization; no finite absolute normalization of an image with this universal property. A second query for a single approximation stage found only unrelated ring-theoretic finiteness results.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsDominant",
+   "results": "IsDominant.of_comp and composition instances, no normal stage replacement.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Ff]inite|[Ff]inite.*normalization; exists.*normal.*stage|normal.*stage.*universal",
+   "results": "Mathlib relative normalization and ZariskisMainTheorem APIs; the repository has the parent diagram theorem and callers, but no single-stage universal replacement.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral normal scheme mapping to a finite type integer scheme factors dominantly through a finite normal scheme with the universal property of normalization of the scheme theoretic image",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalFiniteStageDiagram",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "single-stage image normalization in the normal approximation paragraph of Tag 0EZJ",
+   "via": [
+    "lem-sbc-normal-noetherian-refinement",
+    "lem-sbc-normal-finite-stage-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalFiniteStageUniversal",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalFiniteStageUniversal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_normal_finite_stage_universal",
+  "statement": "theorem exists_normal_finite_stage_universal {S : Scheme.{u}} [CompactSpace S]\n    [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (N : S.NoetherianApproximation) (i : N.I) :\n    ∃ (X : Scheme.{u}) (α : S ⟶ X) (p : X ⟶ N.D.obj i),\n      α ≫ p = N.π.app i ∧ IsFinite p ∧ IsDominant α ∧ IsIntegral X ∧\n      (∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x)) ∧\n      (∀ (Y : Scheme.{u}) (_ : IsIntegral Y)\n        (_ : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))\n        (β : S ⟶ Y) (_ : IsDominant β) (g : Y ⟶ N.D.obj i),\n        β ≫ g = N.π.app i → ∃! f : Y ⟶ X, β ≫ f = α ∧ f ≫ p = g)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c6c53",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T194121-L-458493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c6c53",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T194121-L-458493",
+  "kind": "interface",
+  "note": "independent Codex review: Matched both Lean signatures with their DAG statements, diagram assembly with its recorded proof dependencies, and the remaining lemma with image normalization; scratch compilation and axiom checks passed."
+ }
+}
