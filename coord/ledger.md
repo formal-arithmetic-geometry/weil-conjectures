@@ -5835,3 +5835,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:16 L: merged deliver/P1/Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit (stage 3; reviewer PASS; first push; landing 20261012T021534-L-1019339 (proof); modules 1; new nodes 0)
 - 02:18 L: merged deliver/P1/Sheaf.Topology.FiniteClosedCoverCohomologyVanishing (stage 3; reviewer PASS; first push; landing 20261012T021658-L-1026569 (interface); modules 4; new nodes 3)
 - 02:20 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift (stage 3; reviewer PASS; first push; landing 20261012T021914-L-1037797 (interface); modules 2; new nodes 1)
+- 02:21 L: returned deliver/Q1/Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder (reviewer RETURN: (reviewer X-1b7b2, head 1b7b23d4e) C1/C2 (brief points 6–7): The first DAG step, lines 4–6, labels inverse-image exactne)
