@@ -8110,3 +8110,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/G3/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv (stage 3; reviewer PASS; first push; landing 20261012T144116-L-2097346 (interface); batch 20261012T144049; modules 3; new nodes 3)
 - 14:41 L: merged deliver/H1/Sheaf.AlgebraicGeometry.DerivedGlobalSectionsCohomologyCoproduct (stage 3; reviewer PASS; after a return; landing 20261012T144116-L-2097585 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/H1/Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology (stage 3; reviewer PASS; first push; landing 20261012T144116-L-2097730 (interface); batch 20261012T144049; modules 3; new nodes 2)
+- 14:41 L: merged deliver/H1/Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra (stage 3; reviewer PASS; first push; landing 20261012T144117-L-2097896 (proof); batch 20261012T144049; modules 1; new nodes 0)
