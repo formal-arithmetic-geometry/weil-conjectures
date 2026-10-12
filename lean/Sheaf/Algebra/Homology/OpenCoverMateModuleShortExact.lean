@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Algebra.Homology.OpenCoverMateModuleShortExactCore
 
 /-! # The module-level open-cover sequence with its canonical mate maps
 
@@ -80,6 +81,12 @@ theorem open_cover_mate_module_shortExact (X : AlgebraicGeometry.RingedSpace.{u}
     ∀ hz : biprod.lift iU (-iV) ≫
         biprod.desc (aU.counit.app F) (aV.counit.app F) = 0,
       (ShortComplex.mk (biprod.lift iU (-iV))
-        (biprod.desc (aU.counit.app F) (aV.counit.app F)) hz).ShortExact := by sorry
+        (biprod.desc (aU.counit.app F) (aV.counit.app F)) hz).ShortExact := by
+  dsimp
+  intro hz
+  obtain ⟨hU, hV⟩ := open_cover_mate_module_counit_compatibility X R hR U V hcover
+    SU SV SW aU aV aW F
+  exact open_cover_mate_module_shortExact_core X R hR U V hcover SU SV SW aU aV aW F
+    _ _ hU hV hz
 
 end SheafOfModules

@@ -10112,3 +10112,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:29 L: merged deliver/T4/Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent (stage 3; reviewer PASS; first push; landing 20261012T232906-L-2043917 (proof); batch 20261012T232855; modules 1; new nodes 0)
 - 23:29 L: merged deliver/U3/Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology (stage 3; reviewer PASS; first push; landing 20261012T232906-L-2044016 (interface); batch 20261012T232855; modules 3; new nodes 2)
 - 23:29 L: merged deliver/V1/Sheaf.AlgebraicGeometry.AffineModuleTensorCounitSmul (stage 3; reviewer PASS; first push; landing 20261012T232907-L-2044148 (proof); batch 20261012T232855; modules 1; new nodes 0)
+- 23:29 L: merged deliver/W4/Sheaf.Algebra.Homology.OpenCoverMateModuleShortExact (stage 3; reviewer PASS; first push; landing 20261012T232907-L-2044246 (interface); batch 20261012T232855; modules 2; new nodes 2)

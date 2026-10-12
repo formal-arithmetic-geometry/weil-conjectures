@@ -1,0 +1,102 @@
+{
+ "id": "lem-sc-open-cover-mate-module-short-exact-core",
+ "kind": "statement",
+ "status": "split",
+ "title": "Exactness from counit-compatible open-cover mates",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "statement": "For the open-cover module mate maps, assuming each mate composed with its adjunction counit is the intersection counit, the resulting short complex is short exact.",
+ "stmt_deps": [
+  "lem-sc-open-cover-mate-module-short-exact"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BU"
+ },
+ "proof": [
+  {
+   "text": "Apply the extension-by-zero stalk calculation and reflect exactness, monicity and epimorphicity through module stalks.",
+   "uses": [
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "W4",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-open-cover-mate-module-short-exact",
+   "place": "proof step 2",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenCoverMateModuleShortExactCore",
+  "file": "lean/Sheaf/Algebra/Homology/OpenCoverMateModuleShortExactCore.lean",
+  "declaration": "SheafOfModules.open_cover_mate_module_shortExact_core",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-13",
+  "statement": "theorem open_cover_mate_module_shortExact_core (X : AlgebraicGeometry.RingedSpace.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u}) (_hR : R = (sheafCompose (Opens.grothendieckTopology X) (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf) (U V : Opens X) (_hcover : U ⊔ V = ⊤) [(overFunctor.{u} R U).Additive] [(overFunctor.{u} R V).Additive] [(overFunctor.{u} R (U ⊓ V)).Additive] (SU : SheafOfModules.{u} (R.over U) ⥤ SheafOfModules.{u} R) (SV : SheafOfModules.{u} (R.over V) ⥤ SheafOfModules.{u} R) (SW : SheafOfModules.{u} (R.over (U ⊓ V)) ⥤ SheafOfModules.{u} R) [SU.Additive] [SV.Additive] [SW.Additive] (aU : SU ⊣ overFunctor.{u} R U) (aV : SV ⊣ overFunctor.{u} R V) (aW : SW ⊣ overFunctor.{u} R (U ⊓ V)) (F : SheafOfModules.{u} R) (iU iV : (SW.obj ((overFunctor.{u} R (U ⊓ V)).obj F)) ⟶ _) (hU : iU ≫ aU.counit.app F = aW.counit.app F) (hV : iV ≫ aV.counit.app F = aW.counit.app F) (hz : biprod.lift iU (-iV) ≫ biprod.desc (aU.counit.app F) (aV.counit.app F) = 0) : (ShortComplex.mk (biprod.lift iU (-iV)) (biprod.desc (aU.counit.app F) (aV.counit.app F)) hz).ShortExact"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open cover module sheaf mate counit compatibility",
+   "results": "No exact existing theorem; direct adjunction proof used.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "adjunction homEquiv naturality counit triangle identity",
+   "results": "Generic adjunction naturality and triangle lemmas found; no specialized open-cover declaration.",
+   "date": "2026-10-13",
+   "verdict": "generic lemmas only"
+  },
+  {
+   "tool": "grep",
+   "query": "open_cover_mate_module_counit_compatibility nestedTranspose_counit",
+   "results": "No prior declaration in lean/; complex-level private proof supplies the direct pattern.",
+   "date": "2026-10-13",
+   "verdict": "no existing declaration"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenCoverMateModuleShortExact",
+  "date": "2026-10-13",
+  "group": "W4"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261012T232907-L-2044246",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261012T232907-L-2044246",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
