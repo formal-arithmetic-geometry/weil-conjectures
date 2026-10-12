@@ -155,7 +155,8 @@ and `AlgebraicGeometry.subsingleton_compactlySupportedCohomology_directImage_zer
 theorem subsingleton_compactlySupportedCohomology_adicConstant_of_curve {r : ℤ} (hr : r ≠ 1)
     (hr' : r ≠ 2) :
     Subsingleton ((adicConstant k₀ l C).compactlySupportedCohomology r).carrier := by
-  have e := (compactlySupportedCohomologyEquivOfIso (lowerStarIdIso (adicConstant k₀ l C)) r)
+  have e := compactlySupportedCohomologyEquivOfIso
+    ((lowerStarIdIso k₀ l C).app (adicConstant k₀ l C)) r
   have hF := isLisse_adicConstant k₀ l C
   rcases lt_trichotomy r 0 with h | rfl | h
   · have := subsingleton_compactlySupportedCohomology_directImage (𝟙 C) _ hF (r := r) (Or.inl h)
@@ -173,7 +174,8 @@ sheaf being lisse and punctually pure of weight `0`. -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_two_adicConstant
     (ι : PadicAlgCl l →+* ℂ) :
     ((adicConstant k₀ l C).compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι 2 := by
-  have e := (compactlySupportedCohomologyEquivOfIso (lowerStarIdIso (adicConstant k₀ l C)) 2)
+  have e := compactlySupportedCohomologyEquivOfIso
+    ((lowerStarIdIso k₀ l C).app (adicConstant k₀ l C)) 2
   have h := isPureOfWeightOver_compactlySupportedCohomology_directImage_two (j := 𝟙 C)
     (F := adicConstant k₀ l C) ι (isLisse_adicConstant k₀ l C)
     (isPunctuallyPureOfWeight_adicConstant k₀ l C ι)

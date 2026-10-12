@@ -38,6 +38,7 @@ The sheaf `Ω¹_{C/K}` is `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`, 
   topological Krull dimension at most one.
 - `AlgebraicGeometry.IsConnectedCurve`: a curve whose source is connected, hence nonempty, and
   of topological Krull dimension exactly one.
+- `AlgebraicGeometry.SmoothConnectedCurve`: the category of smooth connected curves.
 - `AlgebraicGeometry.Scheme.Hom.relativeDifferentials`: the sheaf `Ω¹_{X/S}` of relative
   differentials (see `WeilConjectures.AlgebraicGeometry.Modules.Differentials`).
 - `AlgebraicGeometry.Scheme.Hom.genus`: the genus `dim_K Γ(C, Ω¹_{C/K})` of a curve.
@@ -71,7 +72,11 @@ Let `K` be a field (in the blueprint, algebraically closed). A *curve* over `K` 
 scheme of finite type over `K` of dimension at most one. Smoothness and properness of a curve
 are the corresponding properties `Smooth` and `IsProper` of its structure morphism, so they are
 not part of this class; the dimension condition is phrased with `topologicalKrullDim`, which is
-valued in `WithBot ℕ∞` and is `⊥` exactly on the empty scheme. -/
+valued in `WithBot ℕ∞` and is `⊥` exactly on the empty scheme.
+
+This is also blueprint `def-sc-curves`. As blueprint `rem-pc-relation-sc` records, a smooth
+projective curve in the sense of the curve-calculation chapter is a smooth connected curve here
+(blueprint `lem-pc-curves-are-sc`). -/
 class IsCurve (f : C ⟶ Spec (.of K)) : Prop
     extends IsSeparated f, LocallyOfFiniteType f, QuasiCompact f where
   /-- The underlying space of a curve has dimension at most one. -/
@@ -82,7 +87,8 @@ class IsCurve (f : C ⟶ Spec (.of K)) : Prop
 A *connected curve* over `K` is a curve over `K` that is connected (hence nonempty) and of
 dimension exactly one. The last condition excludes points such as `Spec K`, for which the curve
 estimate `sk-thm-curveestimate` fails in degree two. It also implies nonemptiness on its own,
-since `topologicalKrullDim` is `⊥` exactly on the empty space.
+since `topologicalKrullDim` is `⊥` exactly on the empty space. This is also part of blueprint
+`def-sc-curves`.
 
 The field `IsConnectedCurve.connectedSpace` is not an instance, since `f` cannot be inferred
 from `ConnectedSpace C`; use `have := IsConnectedCurve.connectedSpace' f`. -/
@@ -103,6 +109,17 @@ lemma IsConnectedCurve.nonempty (f : C ⟶ Spec (.of K)) [IsConnectedCurve f] : 
   have := IsConnectedCurve.connectedSpace' f
   inferInstance
 
+variable (K) in
+/-- Blueprint `def-sc-curves`: the category `𝒞` of smooth separated connected curves over `K`,
+the full subcategory of `K`-schemes `C` whose structure morphism is smooth and a connected curve
+(`AlgebraicGeometry.IsConnectedCurve`, which includes separatedness). -/
+def SmoothConnectedCurve : Type (u + 1) :=
+  ObjectProperty.FullSubcategory fun C : Over (Spec (.of K)) ↦
+    Smooth C.hom ∧ IsConnectedCurve C.hom
+
+noncomputable instance : Category (SmoothConnectedCurve K) :=
+  inferInstanceAs (Category (ObjectProperty.FullSubcategory _))
+
 /-- Blueprint `sk-def-curve`: Curves and genus
 
 The *genus* of a smooth proper connected curve `C` over `K` is
@@ -116,7 +133,10 @@ in the intended sense when `f` is a smooth proper connected curve.
 
 For a smooth proper curve, Serre duality identifies this with the arithmetic genus
 `AlgebraicGeometry.Scheme.arithmeticGenus K C = dim_K H¹(C, 𝒪_C)`; see
-`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. -/
+`AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus`. It is finite
+(`AlgebraicGeometry.Scheme.finiteDimensional_H_relativeDifferentials`).
+
+This is also blueprint `def-sc-genus`. -/
 noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
   letI := f.ΓAlgebra
   letI : Module K Γ(f.relativeDifferentials, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
@@ -126,16 +146,12 @@ noncomputable def Scheme.Hom.genus (f : C ⟶ Spec (.of K)) : ℕ :=
 modules are its cohomology in degree `0`, compatibly with the `K`-module structures. -/
 theorem Scheme.Hom.genus_eq_finrankH_zero [C.Over (Spec (.of K))] :
     (C ↘ Spec (.of K)).genus = Modules.finrankH K (C ↘ Spec (.of K)).relativeDifferentials 0 := by
-  set Ω := (C ↘ Spec (.of K)).relativeDifferentials
+  let e := Modules.H.zeroLinearEquiv (C ↘ Spec (.of K)).relativeDifferentials
   let := (C ↘ Spec (.of K)).ΓAlgebra
-  let : Module K Γ(Ω, ⊤) := Module.compHom _ (algebraMap K Γ(C, ⊤))
-  let e : Ω.H 0 ≃ₗ[K] Γ(Ω, ⊤) :=
-    { (Modules.H.zeroLinearEquiv Ω).toAddEquiv with
-      map_smul' c x := by
-        change Modules.H.zeroLinearEquiv Ω (globalSectionsRingHom K (X := C) c • x) = _
-        rw [LinearEquiv.map_smul]
-        rfl }
-  exact e.finrank_eq.symm
+  let : Module K Γ((C ↘ Spec (.of K)).relativeDifferentials, ⊤) :=
+    Module.compHom _ (algebraMap K Γ(C, ⊤))
+  exact (LinearEquiv.finrank_eq (R := K)
+    { e with map_smul' := fun c x ↦ e.map_smul (globalSectionsRingHom K c) x }).symm
 
 /-- Blueprint `sk-def-av-pic`: Pic, degree, Pic⁰
 
