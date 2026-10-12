@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-site-cech-free-complex-exact",
+ "kind": "statement",
+ "title": "Exactness of the constructed free module complex on chosen Cech products",
+ "statement": "Let $\\mathcal C$ be a category with hom-sets in universe $v$, $R:\\mathcal C^{op}\\to\\mathrm{Ring}$ a presheaf of rings valued in $v$, $T$ a set in $v$, and $f_t:U_t\\to U$ a family. Let $S$ specify the chosen products and index maps [def-weil-pbc-site-cech-complex]. Form $P_n(X)=\\coprod_{t\\in T^{n+1}}\\operatorname{Hom}(X,S.W(n,t))$, with restriction by precomposition and index maps $(t,a)\\mapsto(t\\circ\\alpha,a\\circ S.indexMap(t,\\alpha))$. Let $K=S.freeComplex(R)$ be the alternating chain complex of objectwise free $R$-module presheaves [def-weil-presheaf-modules-sheafification] on this simplicial presheaf. Then $K$ is exact at $n+1$ for every $n\\ge0$. No covering or injectivity hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof via Tag 03AT (lemma-homology-complex)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate at X. Partition the basis (t,a) by the composite φ:X→U. The product universal property identifies its fibre with (n+1)-tuples in the disjoint union Lφ of lifts X→f(i) with composite φ. The inverse is the unique product lift. indexMap_pr verifies compatibility with coordinate deletion.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend the basis identification linearly. The evaluated complex is the direct sum over φ of the tuple complexes on Lφ with ring R(X). The empty case is zero. In the nonempty case, insert a chosen lift; [lem-weil-pbc-power-set-complex-contractible] gives exactness at n+1, including n=0. Direct sums preserve exactness for modules.",
+   "uses": [
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module-presheaf kernels and cokernels are objectwise, so evaluation jointly reflects exactness. Thus the objectwise result proves K.ExactAt(n+1). Shared universe v ensures the constructed modules belong to PresheafOfModules.{v} R.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-power-set-complex-contractible",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof via Tag 03AT (lemma-homology-complex)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Free module presheaf complex on chosen fiber products is exact in positive degrees",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free module presheaf complex on chosen fiber products is exact in positive degrees",
+   "results": "NobelingProof.succ_exact; MayerVietorisSquare.shortComplex_exact; ProjectiveResolution.ofComplex_exactAt_succ; HomologicalComplex.exact_iff_degreewise_exact. None gives chosen-product free presheaf exactness.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ChainComplex.ExactAt",
+   "results": "Unknown identifier ChainComplex.ExactAt, zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PresheafOfModules.*[Ee]xact|cech.*[Ee]xact",
+   "results": "Zero Mathlib hits. Local searches found PresheafFreeNerveExact (different categorical nerve construction) and FreeCechComplexExactK1 (requires a ring sheaf, covering, wide pullback cones and coproduct realization), neither directly applicable to this no-covering chosen-product construction.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: exactness of the free presheaf Cech complex before Hom into an injective",
+   "via": [
+    "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.SiteCechFreeComplexExact",
+  "file": "lean/Sheaf/CategoryTheory/Sites/SiteCechFreeComplexExact.lean",
+  "declaration": "CategoryTheory.SiteCechComplex.freeComplex_exactAt",
+  "statement": "theorem freeComplex_exactAt (R : Cᵒᵖ ⥤ RingCat.{v}) (n : ℕ) :\n    (S.freeComplex R).ExactAt (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9630a",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T153008-L-2349915",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9630a",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T153008-L-2349915",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched the corrected node statements, recorded universe change, Stacks contraction argument, permitted node edits, forced adaptation errors, clean compilation and documented axioms."
+ }
+}

@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift",
  "kind": "statement",
  "title": "Cocycle lifting for injective module presheaves without a covering condition",
- "statement": "Let $\\mathcal C$ be a category, let $R$ be a presheaf of rings, and let $M$ be an injective object [def-sp-injective-resolutions] in its category of module presheaves [def-weil-presheaf-modules-sheafification]. Let $f_t:U_t\\to U$ be a family indexed by a set $T$, with chosen iterated fibre products and index maps $S$ as in [def-weil-pbc-site-cech-complex]. For every $q\\geq0$ and cochain $c\\in\\check C^{q+1}(S,M)$ whose alternating restriction differential is zero, there is a cochain $b\\in\\check C^q(S,M)$ whose alternating restriction differential is $c$. No topology, covering condition, or sheaf condition is assumed.",
+ "statement": "Let $\\mathcal C$ be a category, let $R$ be a presheaf of rings, and let $M$ be an injective object [def-sp-injective-resolutions] in its category of module presheaves [def-weil-presheaf-modules-sheafification]. Let $f_t:U_t\\to U$ be a family indexed by a set $T$, with chosen iterated fibre products and index maps $S$ as in [def-weil-pbc-site-cech-complex]. For every $q\\geq0$ and cochain $c\\in\\check C^{q+1}(S,M)$ whose alternating restriction differential is zero, there is a cochain $b\\in\\check C^q(S,M)$ whose alternating restriction differential is $c$. No topology, covering condition, or sheaf condition is assumed. Hom-sets of $\\mathcal C$, the values of $R$ and $M$, and $T$ lie in one universe $v$, so all free module presheaves used in the argument belong to the category in which $M$ is injective.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after the use of Tag 03FB, via Tags 03AS, 03F5 and 03AT"
@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Form the chain complex $K_n=\\bigoplus_{t\\in T^{n+1}}R[h_{W_{n,t}}]$ of free representable module presheaves, with the alternating deletion boundary. At every object $V$, group basis elements by their composite $V\\to U$. The fibre-product universal property identifies each group with tuples in the corresponding set of lifts. This construction uses the chosen products and index maps of [def-weil-pbc-site-cech-complex] and the module-presheaf category [def-weil-presheaf-modules-sheafification].",
+   "text": "Construct tuplePresheaf(X) as the disjoint union of Hom(X,W(n,t)) over index tuples. The specified indexMap gives a simplicial object: product uniqueness verifies the functor laws. Apply the free module functor and alternatingFaceMapComplex to construct K=S.freeComplex R. All its values lie in universe v.",
    "uses": [
     "def-weil-pbc-site-cech-complex",
     "def-weil-presheaf-modules-sheafification"
@@ -22,41 +22,39 @@
    "elementary": true
   },
   {
-   "text": "An empty lift set contributes a zero complex. For a nonempty lift set, insert a chosen lift as the first coordinate. The contracting homotopy of [lem-weil-pbc-power-set-complex-contractible], with coefficient ring $R(V)$, proves exactness in positive degrees. Direct sums preserve this exactness and module-presheaf exactness is objectwise, so $K$ is exact in positive degrees. This is the argument of Tag 03F5; it does not use a topology or covering condition.",
+   "text": "Apply [lem-weil-pbc-site-cech-free-complex-exact] to get exactness at q+1. Convert ExactAt into exactness of K(q+2)→K(q+1)→K(q).",
    "uses": [
-    "lem-weil-pbc-power-set-complex-contractible",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-weil-pbc-site-cech-free-complex-exact"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Apply free Yoneda [lem-weil-pbc-free-yoneda-presheaf-module] and the coproduct universal property to identify $\\operatorname{Hom}(K_n,M)$ with the degree-$n$ cochains of [def-weil-pbc-site-cech-complex]. Precomposition with each deletion projection is restriction along that projection, so the alternating boundary induces exactly the displayed differential. Thus a cocycle $c$ gives a morphism $K_{q+1}\\to M$ killing the image of $K_{q+2}\\to K_{q+1}$.",
+   "text": "Construct freeCochainEquiv by evaluating morphisms on the basis (t,id). Its inverse extends the natural map (t,g)↦M(g)(b(t)) by the free module adjunction. Naturality proves both inverse laws and additivity. Each face corresponds to restriction by indexMap; distributing the sum and integer multiples gives boundary compatibility, as in [lem-weil-pbc-free-yoneda-presheaf-module].",
    "uses": [
     "lem-weil-pbc-free-yoneda-presheaf-module",
     "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Exactness at $K_{q+1}$ factors this morphism through the image of $K_{q+1}\\to K_q$. Injectivity [def-sp-injective-resolutions] extends it along the monomorphism from that image into $K_q$. Equivalently use Mathlib ShortComplex.Exact.descToInjective and comp_descToInjective. Free Yoneda turns the resulting map $K_q\\to M$ into $b$ with $d^q b=c$. The degree $q=0$ uses exactness at $1$, never exactness at $0$.",
+   "text": "The inverse equivalence sends c to a:K(q+1)→M. Boundary compatibility shows the incoming boundary followed by a is zero. Apply Mathlib ShortComplex.Exact.descToInjective using [def-sp-injective-resolutions]. comp_descToInjective and the comparison prove d(b)=c.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-free-yoneda-presheaf-module"
+    "def-sp-injective-resolutions"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "def-sp-injective-resolutions",
   "def-weil-pbc-site-cech-complex",
   "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-power-set-complex-contractible",
   "lem-weil-pbc-free-yoneda-presheaf-module",
-  "def-sp-injective-resolutions"
+  "lem-weil-pbc-site-cech-free-complex-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after the use of Tag 03FB, via Tags 03AS, 03F5 and 03AT"
+  "place": "B2 Lean implementation of Tags 03FC, 03AS and 03F5 with explicit universe repair"
  },
  "mathlib_searches": [
   {
@@ -107,7 +105,7 @@
   "module": "Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact",
   "declaration": "CategoryTheory.injective_presheaf_module_cech_cocycle_lift",
   "file": "lean/Sheaf/CategoryTheory/Sites/InjectivePresheafModuleCechExact.lean",
-  "statement": "theorem injective_presheaf_module_cech_cocycle_lift {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{r}) (M : PresheafOfModules.{s} R) [Injective M] {T : Type w} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (S : SiteCechComplex f hom) (q : ℕ) (c : S.cochains M.presheaf (q + 1)) (hc : S.differentialValue M.presheaf (q + 1) c = 0) : ∃ b : S.cochains M.presheaf q, S.differentialValue M.presheaf q b = c",
+  "statement": "theorem injective_presheaf_module_cech_cocycle_lift\n    {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})\n    (M : PresheafOfModules.{v} R) [Injective M]\n    {T : Type v} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U)\n    (S : SiteCechComplex f hom) (q : ℕ)\n    (c : S.cochains M.presheaf (q + 1))\n    (hc : S.differentialValue M.presheaf (q + 1) c = 0) :\n    ∃ b : S.cochains M.presheaf q, S.differentialValue M.presheaf q b = c",
   "branch": "sheaf-dag",
   "by": "N1",
   "date": "2026-10-12",
@@ -126,17 +124,69 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-71775",
-  "group": "C1",
+  "reviewer": "X-9630a",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T044738-L-2032340",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module and report matched the node, unchanged theorem signature, clean compilation, and valid documented universe counterexample",
-  "sorry_before": [
-   "CategoryTheory.injective_presheaf_module_cech_cocycle_lift"
+  "landing": "20261012T153008-L-2349915",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean matched the corrected node statements, recorded universe change, Stacks contraction argument, permitted node edits, forced adaptation errors, clean compilation and documented axioms."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "B2 stage 2",
+  "old_statement": "Let $\\mathcal C$ be a category, let $R$ be a presheaf of rings, and let $M$ be an injective object [def-sp-injective-resolutions] in its category of module presheaves [def-weil-presheaf-modules-sheafification]. Let $f_t:U_t\\to U$ be a family indexed by a set $T$, with chosen iterated fibre products and index maps $S$ as in [def-weil-pbc-site-cech-complex]. For every $q\\geq0$ and cochain $c\\in\\check C^{q+1}(S,M)$ whose alternating restriction differential is zero, there is a cochain $b\\in\\check C^q(S,M)$ whose alternating restriction differential is $c$. No topology, covering condition, or sheaf condition is assumed.",
+  "what": "Independent universes permit small-valued injective presheaves on Type 1 with nonzero Cech H1: see the landed C1 triangle counterexample. Free representables and their coproducts need not be objects where injectivity is assumed. Align hom, ring, module and indexing universes as required by the free presheaf functor. This intermediate statement is not a target.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), proof after the use of Tag 03FB, via Tags 03AS, 03F5 and 03AT"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "holds": false,
+    "note": "The unrestricted ringed-site theorem cannot apply the corrected universe-compatible presheaf theorem. Its Lean signature stays unchanged and its proof is reopened in the forced adaptation."
+   }
   ],
-  "sorry_after": [
-   "CategoryTheory.injective_presheaf_module_cech_cocycle_lift"
+  "old_proof": [
+   {
+    "text": "Form the chain complex $K_n=\\bigoplus_{t\\in T^{n+1}}R[h_{W_{n,t}}]$ of free representable module presheaves, with the alternating deletion boundary. At every object $V$, group basis elements by their composite $V\\to U$. The fibre-product universal property identifies each group with tuples in the corresponding set of lifts. This construction uses the chosen products and index maps of [def-weil-pbc-site-cech-complex] and the module-presheaf category [def-weil-presheaf-modules-sheafification].",
+    "uses": [
+     "def-weil-pbc-site-cech-complex",
+     "def-weil-presheaf-modules-sheafification"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "An empty lift set contributes a zero complex. For a nonempty lift set, insert a chosen lift as the first coordinate. The contracting homotopy of [lem-weil-pbc-power-set-complex-contractible], with coefficient ring $R(V)$, proves exactness in positive degrees. Direct sums preserve this exactness and module-presheaf exactness is objectwise, so $K$ is exact in positive degrees. This is the argument of Tag 03F5; it does not use a topology or covering condition.",
+    "uses": [
+     "lem-weil-pbc-power-set-complex-contractible",
+     "def-weil-presheaf-modules-sheafification"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Apply free Yoneda [lem-weil-pbc-free-yoneda-presheaf-module] and the coproduct universal property to identify $\\operatorname{Hom}(K_n,M)$ with the degree-$n$ cochains of [def-weil-pbc-site-cech-complex]. Precomposition with each deletion projection is restriction along that projection, so the alternating boundary induces exactly the displayed differential. Thus a cocycle $c$ gives a morphism $K_{q+1}\\to M$ killing the image of $K_{q+2}\\to K_{q+1}$.",
+    "uses": [
+     "lem-weil-pbc-free-yoneda-presheaf-module",
+     "def-weil-pbc-site-cech-complex"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Exactness at $K_{q+1}$ factors this morphism through the image of $K_{q+1}\\to K_q$. Injectivity [def-sp-injective-resolutions] extends it along the monomorphism from that image into $K_q$. Equivalently use Mathlib ShortComplex.Exact.descToInjective and comp_descToInjective. Free Yoneda turns the resulting map $K_q\\to M$ into $b$ with $d^q b=c$. The degree $q=0$ uses exactness at $1$, never exactness at $0$.",
+    "uses": [
+     "def-sp-injective-resolutions",
+     "lem-weil-pbc-free-yoneda-presheaf-module"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-site-cech-complex",
+   "def-weil-presheaf-modules-sheafification",
+   "lem-weil-pbc-power-set-complex-contractible",
+   "lem-weil-pbc-free-yoneda-presheaf-module",
+   "def-sp-injective-resolutions"
   ]
  }
 }

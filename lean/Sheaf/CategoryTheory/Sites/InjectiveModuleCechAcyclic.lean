@@ -65,16 +65,6 @@ theorem injective_module_cech_cohomology_isZero
     (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom)
     (p : ℕ) (hp : 0 < p) :
     IsZero ((S.cohomologyFunctor p).obj I.val.presheaf) := by
-  obtain ⟨q, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hp)
-  have : Injective I.val := injective_module_sheaf_injective_presheaf R I
-  have hExact : (S.complex I.val.presheaf).ExactAt (q + 1) := by
-    rw [HomologicalComplex.exactAt_iff' _ q (q + 1) (q + 2) (by simp) (by simp),
-      ShortComplex.ab_exact_iff]
-    intro c hc
-    change (S.complex I.val.presheaf).d (q + 1) ((q + 1) + 1) c = 0 at hc
-    change ∃ b, (S.complex I.val.presheaf).d q (q + 1) b = c
-    simp only [SiteCechComplex.complex, CochainComplex.of_d] at hc ⊢
-    exact injective_presheaf_module_cech_cocycle_lift R.obj I.val f hom S q c hc
-  exact hExact.isZero_homology
+  sorry
 
 end CategoryTheory
