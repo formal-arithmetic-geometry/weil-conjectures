@@ -9676,3 +9676,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:47 L: merged deliver/V1/Sheaf.AlgebraicGeometry.ChowAlgebraizationData (stage 3; reviewer PASS; first push; landing 20261012T214714-L-1272622 (interface); batch 20261012T214703; modules 3; new nodes 2)
 - 21:47 L: merged deliver/V1/Sheaf.RingTheory.SmoothQuotientFibreDifferentialRank (stage 3; reviewer PASS; first push; landing 20261012T214714-L-1272768 (interface); batch 20261012T214703; modules 2; new nodes 1)
 - 21:47 L: merged deliver/X3/Sheaf.AlgebraicGeometry.FiniteFreeChainMapStalkEquality (stage 3; reviewer PASS; first push; landing 20261012T214714-L-1272916 (proof); batch 20261012T214703; modules 1; new nodes 0)
+- 21:47 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.GrothendieckExistenceEasyTorsionTriple (stage 3; reviewer PASS; first push; landing 20261012T214715-L-1273107 (interface); batch 20261012T214703; modules 3; new nodes 2)
