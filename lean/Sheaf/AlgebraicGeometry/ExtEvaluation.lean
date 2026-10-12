@@ -6,10 +6,6 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Evaluation for finite locally free module sheaves
@@ -59,6 +55,8 @@ theorem dual_tensor_hom_iso (X : Scheme.{u}) (F : X.Modules)
       ∀ {G H : X.Modules} (g : G ⟶ H),
         (e G).hom ≫ SheafOfModules.homObjMap (R := X.sheaf) (𝟙 F) g =
           (dual F ◁ g) ≫ (e H).hom := by
-  sorry
+  refine ⟨fun G ↦ asIso (dualTensorHom F G), fun G ↦ rfl, ?_⟩
+  intro G H g
+  exact (dualTensorHom_naturality_right F g).symm
 
 end AlgebraicGeometry.Scheme.Modules
