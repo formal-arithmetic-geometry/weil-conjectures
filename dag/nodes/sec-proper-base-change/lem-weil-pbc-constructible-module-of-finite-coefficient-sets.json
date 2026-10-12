@@ -13,26 +13,55 @@
  ],
  "proof": [
   {
-   "text": "The sectionwise annihilation defines a canonical Lambda/I action on each section module by quotient induction. The sheaf restrictions are linear for this action. Pullback to each constructible stratum retains the action, because inverse image is formed from colimits and sheafification.",
+   "text": "Unpack the finite underlying-set stratification. For a stratum immersion, apply pullback_forget_modules_iso and the underlying comparison from etaleInverseImageAbelianLift_hom. The latter only needs finite-limit preservation of set inverse image, obtained by unfolding the left Kan extension/sheafification construction and its existing instances. Transport both local set constancy and stalk finiteness along the resulting set-sheaf isomorphism. This uses no ring lift or operation-transport clauses of etaleInverseImageAlgebraicStructures.",
    "uses": [
     "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-inverse-image"
+    "def-constructible-constructible",
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "lem-weil-pbc-etale-inverse-image-abelian-lift-hom"
    ],
    "elementary": false
   },
   {
-   "text": "Choose finite-set trivializing charts on each stratum and discard empty chart members. At a geometric point transport the stalk module operations to the finite labels. Equality of germs is witnessed on pointed etale neighbourhoods. For zero, addition, negation and multiplication by each scalar of the finite quotient ring there are finitely many input tuples; cofilteredness yields one neighbourhood where all comparisons hold. Do this near every underlying point, giving an etale refinement of the charts. The original module laws hold on this refinement.",
+   "text": "For each scalar in I define scalarMap on the module sheaf by sectionwise multiplication. This is zero by the original annihilation hypothesis. On inverse image, compute the adjunct of scalar multiplication using the linear adjunction unit: it equals scalarMap on the source followed by the unit, hence zero. Injectivity of the adjunction homEquiv proves scalar multiplication on the pullback is zero. Evaluating on sections proves pullback_annihilated.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a module sheaf with finite locally constant underlying sets, discard empty members of its set-trivializing cover. On each remaining member use a point with algebraically closed residue field, the localization equivalence, pullback-stalk comparison, and constant-stalk comparison to identify the labels with the original set stalk. They are therefore finite. This is finite_constant_module_value.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
+    "lemma-openclosed-stalk-upperstar",
     "def-constructible-locally-constant"
    ],
    "elementary": false
   },
   {
-   "text": "The refined set charts are module charts with finite constant values. Finite modules are finitely generated over Lambda; the source stratification therefore meets IsFiniteLocallyConstantSheaf on each stratum, and witnesses IsConstructibleSheaf. Empty strata and the zero quotient ring are allowed.",
+   "text": "On the localized site, choose one representative of every element of the finite ring quotient. Apply GrothendieckTopology.exists_mem_forall_exists_toSheafify_const_app_eq to the finite family of sections consisting of zero, sums of label pairs, negatives, and products of quotient representatives with labels. Naturality and the chart inverse give a covering sieve on whose members the label sections are closed under these operations. toSheafify_const_app_injective makes the label map injective on any member not covered by the empty sieve. If r and its representative have equal quotient classes, their difference lies in I and kills every section; thus the label range is closed under all scalars. Convert the sieve to an etale cover and choose a member through each underlying point, transporting the chart via the localization/sheafification compatibility. These are the private finite_module_label_sections_cover and finite_constant_label_submodule_neighborhood proofs.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The range of the injective label map is an actual submodule of the terminal section module. Use its bijection with the label type to transport the additive group and Lambda-module structures; form ModuleCat.of Lambda S. Naturality of labels extends the terminal linear map to a natural transformation from this constant module presheaf. Its forgotten map is the constant-presheaf sheafification unit followed by the set-chart isomorphism, hence locally bijective. Sheafify and compose with the sheafification counit to obtain a module-chart isomorphism, with finite value because the label type is finite. Covers indexed by points bind with the original cover, giving exists_finite_coefficient_module_charts. Empty cover members are discarded before any point is chosen; the empty scheme and zero ring are allowed.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-constructible-locally-constant",
+    "lem-weil-pbc-constant-module-sheaf-sections-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply these finite module charts to each stratum. They give LocallyConstantDatum. Lift any separably closed geometric point through the jointly surjective chart cover by exists_fac_of_etale_of_isSepClosed. Localization and pullback-stalk comparison identify its module stalk with the chart value, using sheafFiberConstantSheafIso. A finite module is finitely generated by Module.Finite.of_finite and ModuleCat.isFinitelyGenerated_iff. Assemble IsFiniteLocallyConstantSheaf and use the unchanged original stratification to construct IsConstructibleSheaf.",
    "uses": [
     "def-constructible-finite-locally-constant",
-    "def-constructible-constructible"
+    "def-constructible-constructible",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
    ],
    "elementary": false
   }
@@ -43,12 +72,18 @@
   "def-constructible-locally-constant",
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-constant-module-sheaf-sections-locally-constant",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-etale-pullback-forget-modules"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
-  "place": "S2: formal decomposition of steps 1 and 3 of lem-weil-pbc-finite-pushforward-finite-stalk-module"
+  "place": "Q2: compiled finite-label submodule implementation of the existing finite-operation argument, preserving the original stratification. Local closure helper proofs extend the existing F1/G2/K1/V3 finite-abelian-label proofs to scalar representatives of the finite quotient."
  },
  "mathlib_searches": [
   {
@@ -120,10 +155,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T154835-L-2474320",
-  "kind": "interface",
+  "landing": "20261012T184334-L-4016211",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
