@@ -7582,3 +7582,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:39 L: merged deliver/Q2/Sheaf.CategoryTheory.HypercohomologyEdgeCocycle (stage 3; reviewer PASS; first push; landing 20261012T113949-L-821983 (interface); batch 20261012T113943; modules 2; new nodes 1)
 - 11:39 L: merged deliver/S2/Sheaf.RingTheory.FiniteSubringGenericFormalFiber (stage 3; reviewer PASS; first push; landing 20261012T113950-L-822087 (interface); batch 20261012T113943; modules 3; new nodes 2)
 - 11:39 L: merged deliver/Y2/Sheaf.RingTheory.GRingPairsOfPrimes (stage 3; reviewer PASS; first push; landing 20261012T113950-L-822283 (interface); batch 20261012T113943; modules 3; new nodes 2)
+- 11:39 L: merged deliver/Y2/Sheaf.Topology.SkyscraperComplex (stage 3; reviewer PASS; first push; landing 20261012T113950-L-822418 (interface); batch 20261012T113943; modules 3; new nodes 2)

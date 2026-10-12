@@ -27,37 +27,22 @@
  ],
  "proof": [
   {
-   "text": "For every degree $i$ and open $U\\subseteq X$, the term $(i_{x,*}M^i)(U)$ is $M^i$ when $x\\in U$ and the zero module otherwise, and the differential is $d^i_M$ or the zero map accordingly. If $x\\in U$, the sequence of sections in degrees $i-1,i,i+1$ is $M^{i-1}\\to M^i\\to M^{i+1}$, exact by acyclicity of $M^\\bullet$; if $x\\notin U$, it is the zero sequence, which is exact. Thus $i_{x,*}M^{i-1}\\to i_{x,*}M^i\\to i_{x,*}M^{i+1}$ is sectionwise exact, hence exact as a sequence of sheaves, for every $i$. By the definition of acyclicity, $i_{x,*}M^\\bullet$ is acyclic.",
+   "text": "Apply stalk recovery and acyclicity preservation.",
    "uses": [
-    "def-pc-cochain-complex-modules",
-    "def-pc-acyclic-complex-modules"
+    "lem-pc-skyscraper-complex-stalk-recovery",
+    "lem-pc-skyscraper-complex-acyclic"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Definition Tag 009A (label definition-skyscraper-sheaf), case (4), and Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), applied degreewise; exactness is sectionwise"
-   }
-  },
-  {
-   "text": "The stalk at $x$ of each term $i_{x,*}M^i$ is the filtered colimit over open neighbourhoods $U$ of $x$ of $(i_{x,*}M^i)(U)$. Every such value is $M^i$ and every transition map is the identity, so this colimit is canonically $M^i$. These identifications commute with the differentials, since all restriction maps and differentials are defined termwise from those of $M^\\bullet$. They therefore assemble to an isomorphism of cochain complexes $(i_{x,*}M^\\bullet)_x\\cong M^\\bullet$, and since $\\mathcal O_X(U)$ acts through the germ at $x$, the $\\mathcal O_{X,x}$-module structures agree.",
-   "uses": [
-    "def-pc-cochain-complex-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Definition Tag 009A (label definition-skyscraper-sheaf), case (4), and Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), applied degreewise; stalk computed from neighborhoods of x"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-pc-acyclic-complex-modules"
+  "lem-pc-skyscraper-complex-stalk-recovery",
+  "lem-pc-skyscraper-complex-acyclic"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "Y2",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Definition Tag 009A (label definition-skyscraper-sheaf), case (4), and Lemma Tag 009C (label lemma-stalk-skyscraper-adjoint), applied degreewise; source text unavailable in this checkout"
+  "place": "decomposition into the two stated components"
  },
  "mathlib_searches": [
   {
@@ -145,5 +130,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T113950-L-822418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

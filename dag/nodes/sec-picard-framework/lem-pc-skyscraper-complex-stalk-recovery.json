@@ -1,0 +1,126 @@
+{
+ "id": "lem-pc-skyscraper-complex-stalk-recovery",
+ "kind": "statement",
+ "title": "Skyscraper complex stalk recovery",
+ "statement": "For a ringed space X, point x and stalk-module cochain complex M, the stalk of the termwise ringed-module skyscraper complex at x is nonempty-isomorphic to M.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "the filtered-colimit stalk computation in the proof of lem-pc-skyscraper-complex"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-module-stalk-functor",
+  "def-pc-ringed-module-skyscraper"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical degreewise stalk isomorphisms from the filtered-colimit description and verify compatibility with differentials and module actions.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "Y2",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Definition Tag 009A (case (4)) and Lemma Tag 009C, applied degreewise; filtered-colimit computation of the stalk at x"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "skyscraper sheaf complex is acyclic if and only if its stalk complex is acyclic",
+   "results": "HomologicalComplex acyclicity declarations, but no theorem for skyscraper sheaves of modules; only general C-valued skyscraper constructions.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "skyscraper sheaf acyclic stalk complex",
+   "results": "No hits; unknown identifier skyscraper.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper.*stalk|stalk.*skyscraper",
+   "results": "Mathlib/Topology/Sheaves/Skyscraper.lean has C-valued skyscraper stalk declarations but no O_X-module complex theorem.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "skyscraper sheaf of modules sends acyclic complexes to acyclic complexes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SkyscraperComplex",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-skyscraper-complex",
+   "place": "the filtered-colimit stalk computation in the proof of lem-pc-skyscraper-complex",
+   "via": [
+    "lem-pc-skyscraper-complex"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.Topology.SkyscraperComplexStalk",
+  "declaration": "SheafOfModules.skyscraper_complex_stalk_recovery",
+  "file": "lean/Sheaf/Topology/SkyscraperComplexStalk.lean",
+  "statement": "theorem skyscraper_complex_stalk_recovery (X : RingedSpace.{u_complex}) (x : X)\n    (M : CochainComplex (ModuleCat.{u_complex} (X.presheaf.stalk x)) ℤ) :\n    Nonempty (((RingedSpace.moduleStalkFunctor X x).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj\n        (((ringedModuleSkyscraperFunctor X x).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj M) ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T113950-L-822418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T113950-L-822418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

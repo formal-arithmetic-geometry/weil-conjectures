@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Topology.RingedModuleSkyscraper
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Sheaf.Topology.SkyscraperComplexStalk
+import Sheaf.Topology.SkyscraperComplexAcyclic
 
 /-!
 # Skyscraper complexes and stalks
@@ -45,6 +47,7 @@ theorem skyscraper_complex (X : RingedSpace.{u_complex}) (x : X)
           (ComplexShape.up ℤ)).obj M) ≅ M) ∧
       (M.Acyclic → (((ringedModuleSkyscraperFunctor X x).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj M).Acyclic) := by
-  sorry
+  exact ⟨skyscraper_complex_stalk_recovery X x M,
+    skyscraper_complex_acyclic X x M⟩
 
 end SheafOfModules
