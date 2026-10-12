@@ -19,22 +19,33 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Construct the preliminary map by degreewise splittings, factor the differential defect, and remove it by the acyclic-to-injective null-homotopy lemma.",
+   "text": "Construct a degreewise family t with the two row squares.",
    "uses": [
-    "lem-weil-pbc-ses-injective-kernel-splits",
-    "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+    "lem-weil-pbc-horseshoe-degreewise-map"
    ],
    "elementary": false
+  },
+  {
+   "text": "Correct the differential and augmentation defects using a family k.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-homotopy-correction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the corrected chain map via CochainComplex.ofHom. Prove both outer squares by distributing subtraction and using the zero composites. Its augmentation equation follows from degree zero by single-complex extensionality. Choose this map as chi and zero as q.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ses-injective-kernel-splits",
-  "lem-weil-pbc-acyclic-map-to-injective-nullhomotopy"
+  "lem-weil-pbc-horseshoe-degreewise-map",
+  "lem-weil-pbc-horseshoe-homotopy-correction"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Weibel Theorem 2.4.6"
+  "place": "Horseshoe naturality: degreewise splitting, defect factorization, and the injective extension induction of Tag 013R, formalized over nonnegative degrees."
  },
  "mathlib_searches": [
   {
@@ -91,10 +102,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E1",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261012T053925-L-2632709",
-  "kind": "proof",
+  "landing": "20261012T110310-L-618153",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

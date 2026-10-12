@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-horseshoe-defect-factorization",
+ "kind": "statement",
+ "title": "Factorization and cocycle identities of horseshoe defects",
+ "statement": "Let C be an abelian category [def-sp-abelian], S and T short exact sequences in C,\nand F a morphism from S to T. Let IA, IB, IC and JA, JB, JC be injective resolutions\n[def-sp-injective-resolutions] of the three terms of S and T respectively. Let\nalpha, beta and alpha', beta' be chain maps between the corresponding resolutions,\nwith zero composites, with short exact rows in every nonnegative degree, and with\nall four augmentation squares commuting. Let phiA and phiC be prescribed chain maps\nbetween the first and third resolutions respectively, lifting the first and third\ncomponents of F. Let t be a family of maps from IB in degree n to JB in degree n,\ncommuting with both outer row squares in every degree. Then there exist maps E from IC in degree n to JA in degree n+1, and e from S.X3\nto JA in degree zero, satisfying these four identities (all composition below is diagrammatic):\n(1) beta E alpha' is t followed by the target differential minus the source differential\nfollowed by t in the next degree; (2) S.g e alpha' in degree zero is the difference\nbetween the augmentation followed by t and the prescribed middle augmentation;\n(3) the IC augmentation followed by E in degree zero equals e followed by the JA differential;\n(4) the IC differential followed by E in the next degree is minus E followed by\nthe JA differential in the next degree.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Classical horseshoe naturality Step 2, as in Weibel Theorem 2.4.6; abelian kernel/cokernel factorizations used in Tag 013T"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "The differential defect D annihilates alpha and is annihilated by beta', by the two outer squares and the chain-map identities. Descend along the source epic beta and lift through the target monic alpha', using exactness; this gives E.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the differential of D using square-zero differentials. Precompose by beta and postcompose by alpha'; cancel the epic and monic maps. This gives the signed cocycle identity for E.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The augmentation defect w annihilates S.f and is annihilated by beta' in degree zero, using the augmentation squares and the two squares of F. Descend along S.g and lift through alpha' to obtain e.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the augmentation followed by D in degree zero both using the E factorization and using w. The differentials kill the augmentation maps. Cancel S.g and alpha' in degree one to prove the augmentation identity for E and e.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Classical horseshoe naturality Step 2, as in Weibel Theorem 2.4.6; abelian kernel/cokernel factorizations used in Tag 013T"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degreewise split exact sequences middle morphism lifting outer chain maps",
+   "results": "Service unavailable: Internal Server Error. No result inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "differential defect and signed primitive in a horseshoe comparison",
+   "results": "Splitting.s, Splitting.r, Splitting.g_s and InjectiveResolution.descHomotopyZero helpers. No complete horseshoe comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "Used the exact splitting and injective-extension APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.lift, CategoryTheory.ShortComplex.Exact.desc",
+   "results": "splittingOfInjective; Exact.lift and lift_f; Exact.desc and g_desc; source signatures inspected.",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; the complete statement needs composition and diagram chase."
+  },
+  {
+   "tool": "grep",
+   "query": "descToInjective|splittingOfInjective|comp_descToInjective; horseshoe|signed_primitive|horseshoe_defect_factorization",
+   "results": "ShortExact.lean:205; Exact.lean:939,946; Injective/Resolution.lean:74,81,89,91. No horseshoe comparison, no duplicate declaration in source library or Sheaf.",
+   "date": "2026-10-12",
+   "verdict": "Relevant primitives used in the compiled proof; no duplicate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof step 5, horseshoe naturality: Classical horseshoe naturality Step 2, as in Weibel Theorem 2.4.6; abelian kernel/cokernel factorizations used in Tag 013T",
+   "via": [
+    "lem-weil-pbc-horseshoe-preliminary-data",
+    "lem-weil-pbc-horseshoe-morphism-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeDefectFactorization",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeDefectFactorization.lean",
+  "declaration": "CategoryTheory.InjectiveResolution.horseshoe_defect_factorization",
+  "statement": "theorem horseshoe_defect_factorization\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (S T : ShortComplex C) (hS : S.ShortExact) (_hT : T.ShortExact) (F : S ⟶ T)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃) (JA : InjectiveResolution T.X₁)\n    (JB : InjectiveResolution T.X₂) (JC : InjectiveResolution T.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (α' : JA.cocomplex ⟶ JB.cocomplex) (β' : JB.cocomplex ⟶ JC.cocomplex)\n    (hαβ : α ≫ β = 0) (hαβ' : α' ≫ β' = 0)\n    (hα : IA.ι ≫ α = (CochainComplex.single₀ C).map S.f ≫ IB.ι)\n    (hβ : IB.ι ≫ β = (CochainComplex.single₀ C).map S.g ≫ IC.ι)\n    (hα' : JA.ι ≫ α' = (CochainComplex.single₀ C).map T.f ≫ JB.ι)\n    (hβ' : JB.ι ≫ β' = (CochainComplex.single₀ C).map T.g ≫ JC.ι)\n    (hexact : ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)\n    (hexact' : ∀ n : ℕ, ((ShortComplex.mk α' β' hαβ').map\n      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)\n    (φA : IA.cocomplex ⟶ JA.cocomplex) (φC : IC.cocomplex ⟶ JC.cocomplex)\n    (hφA : IA.ι ≫ φA = (CochainComplex.single₀ C).map F.τ₁ ≫ JA.ι)\n    (hφC : IC.ι ≫ φC = (CochainComplex.single₀ C).map F.τ₃ ≫ JC.ι)\n    (t : ∀ n, IB.cocomplex.X n ⟶ JB.cocomplex.X n)\n    (htα : ∀ n, α.f n ≫ t n = φA.f n ≫ α'.f n)\n    (htβ : ∀ n, t n ≫ β'.f n = β.f n ≫ φC.f n) :\n    ∃ (E : ∀ n, IC.cocomplex.X n ⟶ JA.cocomplex.X (n + 1))\n      (e : S.X₃ ⟶ JA.cocomplex.X 0),\n      (∀ n, β.f n ≫ E n ≫ α'.f (n + 1) =\n        t n ≫ JB.cocomplex.d n (n + 1) - IB.cocomplex.d n (n + 1) ≫ t (n + 1)) ∧\n      S.g ≫ e ≫ α'.f 0 =\n        IB.ι.f 0 ≫ t 0 - ((CochainComplex.single₀ C).map F.τ₂ ≫ JB.ι).f 0 ∧\n      IC.ι.f 0 ≫ E 0 = e ≫ JA.cocomplex.d 0 1 ∧\n      ∀ n, IC.cocomplex.d n (n + 1) ≫ E (n + 1) =\n        -(E n ≫ JA.cocomplex.d (n + 1) (n + 2))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110310-L-618153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110310-L-618153",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

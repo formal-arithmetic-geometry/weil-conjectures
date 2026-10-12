@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-horseshoe-homotopy-correction",
+ "kind": "statement",
+ "title": "An injective extension recurrence corrects horseshoe defects",
+ "statement": "Let C be an abelian category [def-sp-abelian], S and T short exact sequences in C,\nand F a morphism from S to T. Let IA, IB, IC and JA, JB, JC be injective resolutions\n[def-sp-injective-resolutions] of the three terms of S and T respectively. Let\nalpha, beta and alpha', beta' be chain maps between the corresponding resolutions,\nwith zero composites, with short exact rows in every nonnegative degree, and with\nall four augmentation squares commuting. Let phiA and phiC be prescribed chain maps\nbetween the first and third resolutions respectively, lifting the first and third\ncomponents of F. Let t be a family of maps from IB in degree n to JB in degree n,\ncommuting with both outer row squares in every degree. Then there is a family k from IC in degree n to JA in degree n such that\nsubtracting beta followed by k followed by alpha' from t commutes with the two\ncomplex differentials in every degree and, in degree zero, lifts the middle component\nof F on the augmentation. No outer square for the corrected family is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 013R, induction by extension into injectives, specialized to the augmented IC resolution; classical horseshoe naturality Steps 2--3"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Obtain E and e, their two defect factorizations, their augmentation compatibility, and their signed cocycle identity.",
+   "uses": [
+    "lem-weil-pbc-horseshoe-defect-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend e across the monic augmentation of IC into the injective degree-zero term of JA, giving k0. Exactness at the augmentation and injectivity of JA in degree one descend k0 dA minus E0 along dC, giving k1.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given consecutive k values, the cocycle identity and square-zero differentials show that k-next dA minus E-next vanishes on the preceding dC. Use exact_succ.descToInjective to descend it along the next differential. Dependent Nat recursion supplies all k, with the required primitive identities.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Distribute composition over subtraction, use the two chain-map identities for alpha' and beta, and substitute the primitive equations. The E factorization cancels the differential defect and the e factorization cancels the augmentation defect.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-horseshoe-defect-factorization",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 013R, induction by extension into injectives, specialized to the augmented IC resolution; classical horseshoe naturality Steps 2--3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degreewise split exact sequences middle morphism lifting outer chain maps",
+   "results": "Service unavailable: Internal Server Error. No result inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "differential defect and signed primitive in a horseshoe comparison",
+   "results": "Splitting.s, Splitting.r, Splitting.g_s and InjectiveResolution.descHomotopyZero helpers. No complete horseshoe comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "Used the exact splitting and injective-extension APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.lift, CategoryTheory.ShortComplex.Exact.desc",
+   "results": "splittingOfInjective; Exact.lift and lift_f; Exact.desc and g_desc; source signatures inspected.",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; the complete statement needs composition and diagram chase."
+  },
+  {
+   "tool": "grep",
+   "query": "descToInjective|splittingOfInjective|comp_descToInjective; horseshoe|signed_primitive|horseshoe_defect_factorization",
+   "results": "ShortExact.lean:205; Exact.lean:939,946; Injective/Resolution.lean:74,81,89,91. No horseshoe comparison, no duplicate declaration in source library or Sheaf.",
+   "date": "2026-10-12",
+   "verdict": "Relevant primitives used in the compiled proof; no duplicate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof step 5, horseshoe naturality: Tag 013R, induction by extension into injectives, specialized to the augmented IC resolution; classical horseshoe naturality Steps 2--3",
+   "via": [
+    "lem-weil-pbc-horseshoe-preliminary-data",
+    "lem-weil-pbc-horseshoe-morphism-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeHomotopyCorrection",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeHomotopyCorrection.lean",
+  "declaration": "CategoryTheory.InjectiveResolution.horseshoe_homotopy_correction",
+  "statement": "theorem horseshoe_homotopy_correction\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (S T : ShortComplex C) (hS : S.ShortExact) (hT : T.ShortExact) (F : S ⟶ T)\n    (IA : InjectiveResolution S.X₁) (IB : InjectiveResolution S.X₂)\n    (IC : InjectiveResolution S.X₃) (JA : InjectiveResolution T.X₁)\n    (JB : InjectiveResolution T.X₂) (JC : InjectiveResolution T.X₃)\n    (α : IA.cocomplex ⟶ IB.cocomplex) (β : IB.cocomplex ⟶ IC.cocomplex)\n    (α' : JA.cocomplex ⟶ JB.cocomplex) (β' : JB.cocomplex ⟶ JC.cocomplex)\n    (hαβ : α ≫ β = 0) (hαβ' : α' ≫ β' = 0)\n    (hα : IA.ι ≫ α = (CochainComplex.single₀ C).map S.f ≫ IB.ι)\n    (hβ : IB.ι ≫ β = (CochainComplex.single₀ C).map S.g ≫ IC.ι)\n    (hα' : JA.ι ≫ α' = (CochainComplex.single₀ C).map T.f ≫ JB.ι)\n    (hβ' : JB.ι ≫ β' = (CochainComplex.single₀ C).map T.g ≫ JC.ι)\n    (hexact : ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)\n    (hexact' : ∀ n : ℕ, ((ShortComplex.mk α' β' hαβ').map\n      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)\n    (φA : IA.cocomplex ⟶ JA.cocomplex) (φC : IC.cocomplex ⟶ JC.cocomplex)\n    (hφA : IA.ι ≫ φA = (CochainComplex.single₀ C).map F.τ₁ ≫ JA.ι)\n    (hφC : IC.ι ≫ φC = (CochainComplex.single₀ C).map F.τ₃ ≫ JC.ι)\n    (t : ∀ n, IB.cocomplex.X n ⟶ JB.cocomplex.X n)\n    (htα : ∀ n, α.f n ≫ t n = φA.f n ≫ α'.f n)\n    (htβ : ∀ n, t n ≫ β'.f n = β.f n ≫ φC.f n) :\n    ∃ k : ∀ n, IC.cocomplex.X n ⟶ JA.cocomplex.X n,\n      (∀ n,\n        (t n - β.f n ≫ k n ≫ α'.f n) ≫ JB.cocomplex.d n (n + 1) =\n          IB.cocomplex.d n (n + 1) ≫\n            (t (n + 1) - β.f (n + 1) ≫ k (n + 1) ≫ α'.f (n + 1))) ∧\n      IB.ι.f 0 ≫ (t 0 - β.f 0 ≫ k 0 ≫ α'.f 0) =\n        ((CochainComplex.single₀ C).map F.τ₂ ≫ JB.ι).f 0",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110310-L-618153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110310-L-618153",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

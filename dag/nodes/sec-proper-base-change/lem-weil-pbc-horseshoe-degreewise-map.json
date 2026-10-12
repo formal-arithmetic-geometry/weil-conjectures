@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-horseshoe-degreewise-map",
+ "kind": "statement",
+ "title": "Degreewise middle maps between split horseshoe rows",
+ "statement": "Let C be an abelian category [def-sp-abelian]. Let X, Y, Z and X', Y', Z' be\nnonnegative cochain complexes. Let alpha: X to Y, beta: Y to Z, alpha': X' to Y',\nand beta': Y' to Z' be chain maps, with both composites zero and both rows short\nexact in every degree. Suppose every term of X and X' is injective\n[def-sp-injective-resolutions]. Given chain maps phiA: X to X' and phiC: Z to Z',\nthere is a family t of degreewise maps Y to Y' such that alpha followed by t equals\nphiA followed by alpha', and t followed by beta' equals beta followed by phiC,\nin every degree. No differential compatibility is asserted for t.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0136, implication that a short exact sequence beginning with an injective splits; horseshoe naturality Step 1"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Choose source retractions r and target sections s by ShortExact.splittingOfInjective in each degree.",
+   "uses": [
+    "lem-weil-pbc-ses-injective-kernel-splits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set t to r followed by phiA followed by alpha' plus beta followed by phiC followed by s. Distribute composition over addition and use the splitting identities and the two zero composites to prove both outer squares.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ses-injective-kernel-splits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0136, implication that a short exact sequence beginning with an injective splits; horseshoe naturality Step 1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "degreewise split exact sequences middle morphism lifting outer chain maps",
+   "results": "Service unavailable: Internal Server Error. No result inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degreewise split exact sequences middle maps for prescribed outer maps",
+   "results": "Splitting.s, Splitting.r, Splitting.g_s and InjectiveResolution.descHomotopyZero helpers. No complete horseshoe comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "Used the exact splitting and injective-extension APIs; no complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact.splittingOfInjective",
+   "results": "splittingOfInjective; Exact.lift and lift_f; Exact.desc and g_desc; source signatures inspected.",
+   "date": "2026-10-12",
+   "verdict": "Ingredients only; the complete statement needs composition and diagram chase."
+  },
+  {
+   "tool": "grep",
+   "query": "descToInjective|splittingOfInjective|comp_descToInjective; horseshoe|signed_primitive|horseshoe_defect_factorization",
+   "results": "ShortExact.lean:205; Exact.lean:939,946; Injective/Resolution.lean:74,81,89,91. No horseshoe comparison, no duplicate declaration in source library or Sheaf.",
+   "date": "2026-10-12",
+   "verdict": "Relevant primitives used in the compiled proof; no duplicate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof step 5, horseshoe naturality: Tag 0136, implication that a short exact sequence beginning with an injective splits; horseshoe naturality Step 1",
+   "via": [
+    "lem-weil-pbc-horseshoe-preliminary-data",
+    "lem-weil-pbc-horseshoe-morphism-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Abelian.HorseshoeDegreewiseMap",
+  "file": "lean/Sheaf/CategoryTheory/Abelian/HorseshoeDegreewiseMap.lean",
+  "declaration": "CategoryTheory.InjectiveResolution.horseshoe_degreewise_map",
+  "statement": "theorem horseshoe_degreewise_map\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {X Y Z X' Y' Z' : CochainComplex C ℕ}\n    (α : X ⟶ Y) (β : Y ⟶ Z) (α' : X' ⟶ Y') (β' : Y' ⟶ Z')\n    (hαβ : α ≫ β = 0) (hαβ' : α' ≫ β' = 0)\n    (hexact : ∀ n : ℕ, ((ShortComplex.mk α β hαβ).map\n      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)\n    (hexact' : ∀ n : ℕ, ((ShortComplex.mk α' β' hαβ').map\n      (HomologicalComplex.eval C (ComplexShape.up ℕ) n)).ShortExact)\n    (hinj : ∀ n, Injective (X.X n)) (hinj' : ∀ n, Injective (X'.X n))\n    (φA : X ⟶ X') (φC : Z ⟶ Z') :\n    ∃ t : ∀ n, Y.X n ⟶ Y'.X n,\n      (∀ n, α.f n ≫ t n = φA.f n ≫ α'.f n) ∧\n      (∀ n, t n ≫ β'.f n = β.f n ≫ φC.f n)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110310-L-618153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T110310-L-618153",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

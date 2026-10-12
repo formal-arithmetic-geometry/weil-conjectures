@@ -7378,3 +7378,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/K2/Sheaf.AlgebraicGeometry.StrictHenselization (stage 3; reviewer PASS; first push; landing 20261012T110309-L-617717 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/K3/Sheaf.AlgebraicGeometry.AffineDerivedUnitIsomorphism (stage 3; reviewer PASS; first push; landing 20261012T110309-L-617849 (interface); batch 20261012T110249; modules 2; new nodes 1)
 - 11:03 L: merged deliver/K3/Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction (stage 3; reviewer PASS; first push; landing 20261012T110309-L-618002 (interface); batch 20261012T110249; modules 2; new nodes 1)
+- 11:03 L: merged deliver/K3/Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift (stage 3; reviewer PASS; first push; landing 20261012T110310-L-618153 (interface); batch 20261012T110249; modules 4; new nodes 3)
