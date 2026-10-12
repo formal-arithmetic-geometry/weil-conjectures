@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+ "kind": "statement",
+ "title": "Comparison of the two global constructible module sheaf predicates",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a finite commutative ring and $F$ a sheaf of $\\Lambda$-modules on $X_{Et}$ [def-weil-pbc-etale-sheaves]. Then $\\mathrm{IsConstructibleEtaleModuleSheaf}(F)$ [def-weil-pbc-etale-constructible-sheaf], the global finite-stratification definition with finite constant module values, is equivalent to the source library's $\\mathrm{IsConstructibleSheaf}(F)$ for the concrete coefficient category $\\mathrm{ModuleCat}(\\Lambda)$: a finite constructible locally closed stratification [def-constructible-stratification] whose stratum pullbacks are locally constant with finitely generated geometric stalks [def-constructible-finite-locally-constant].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definitions 095E (3), 03RU and 09XZ; the comparison is the stratumwise equivalence of lem-weil-pbc-finite-locally-constant-module-values, packaged over the identical global stratification records."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-constructible-stratification",
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Copy the partition, domains, immersions, immersion proofs and range equalities between LocallyClosedStratification and Scheme.Stratification. Their topological stratification fields coincide. The explicit constructibility condition is already a field of the topological record.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the first equivalence of finite_locally_constant_module_values_iff to the pullback on each stratum, in each direction. Package the converted witnesses into the appropriate constructibility predicate.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-finite-locally-constant-module-values"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Definitions 095E (3), 03RU and 09XZ; the comparison is the stratumwise equivalence of lem-weil-pbc-finite-locally-constant-module-values, packaged over the identical global stratification records."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite constant values and finite stalks give equivalent definitions of constructible etale module sheaves over a finite ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant values and finite stalks give equivalent definitions of constructible etale module sheaves over a finite ring",
+   "results": "Algebra.isOpen_etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.mem_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.finitePresentation, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem",
+   "digest": "738a1f75fc9b4cc2"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(stalk|finite)|(stalk|finite).*constructible",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem",
+   "digest": "d1009d62d601b256"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "H1 constructible representation, proof step 4: constructibility of the descended presentation cokernel; bridge required by parent split step 7.",
+   "via": [
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-constructible-module-noetherian-descent",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleEtaleModuleSheafComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleEtaleModuleSheaf_iff",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_iff\n    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    IsConstructibleEtaleModuleSheaf F ↔\n      IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ => M →ₗ[Λ] N)\n        (CA := fun M : ModuleCat.{u + 1} Λ => M) F",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-42374",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T022914-L-1083815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-42374",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T022914-L-1083815",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched all three node records, cited dependencies, sources, unit route, report, compilation and axiom checks."
+ }
+}

@@ -6,6 +6,11 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Descent of constructible module sheaves along inverse limits
@@ -56,7 +61,14 @@ Proof (the module argument expands the source's instruction to use Tag 095N):
    constructibility (`prop-constructible-pullback`), and constructible module sheaves
    are closed under finite sums and cokernels (`thm-constructible-serre`).
 8. Inverse image preserves cokernels (`prop-weil-pbc-inverse-image-modules-exact`), so
-   the commuting presentation square identifies its cokernel with F. -/
+   the commuting presentation square identifies its cokernel with F.
+
+The Lean proof uses Mathlib directly for qcqs of the given limit cone. Steps 3-6
+and the constructibility of the two descended sums in step 7 are grouped into
+`exists_affine_free_etaleModule_arrow_descent`. The comparison
+`isConstructibleEtaleModuleSheaf_iff` lets step 7 use the source library's proved
+cokernel theorem. Mathlib cokernel preservation, the commuting square and uniqueness
+of colimits complete step 8. -/
 theorem exists_constructible_etaleModuleSheaf_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -70,6 +82,23 @@ theorem exists_constructible_etaleModuleSheaf_descent
     ∃ (i : I) (Fᵢ : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ)),
       IsConstructibleEtaleModuleSheaf Fᵢ ∧
         Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj Fᵢ ≅ F) := by
-  sorry
+  have : CompactSpace c.pt := Scheme.compactSpace_of_isLimit D c hc
+  let i₀ : I := Classical.choice inferInstance
+  have : IsAffineHom (c.π.app (op i₀)) := isAffineHom_π_app D c hc (op i₀)
+  have : QuasiSeparatedSpace c.pt :=
+    quasiSeparatedSpace_of_quasiSeparated (c.π.app (op i₀))
+  obtain ⟨n, m, U, V, hU, hV, f, g, w, ⟨hg⟩⟩ :=
+    exists_affine_free_etale_presentation c.pt Λ F hF
+  obtain ⟨i, A, B, a, hA, hB, eA, eB, ha⟩ :=
+    exists_affine_free_etaleModule_arrow_descent D c hc Λ n m U V hU hV f
+  have := (isConstructibleEtaleModuleSheaf_iff A).mp hA
+  have := (isConstructibleEtaleModuleSheaf_iff B).mp hB
+  have hC : IsConstructibleEtaleModuleSheaf (cokernel a) :=
+    (isConstructibleEtaleModuleSheaf_iff (cokernel a)).mpr
+      (IsConstructibleSheaf.cokernel a)
+  refine ⟨i, cokernel a, hC, ?_⟩
+  let L := Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))
+  exact ⟨PreservesCokernel.iso L a ≪≫ cokernel.mapIso (L.map a) f eA eB ha ≪≫
+    (colimit.isColimit (parallelPair f 0)).coconePointUniqueUpToIso hg⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,180 @@
+{
+ "id": "lem-weil-pbc-affine-free-etale-module-arrow-descent",
+ "kind": "statement",
+ "title": "Arrows between finite sums of affine etale free module sheaves descend",
+ "statement": "Let $I$ be a nonempty directed preorder, $D:I^{op}\\to\\mathrm{Scheme}$ an inverse system of qcqs schemes with affine transitions, and $(X,\\pi)$ a limit cone [def-pc-scheme], [def-weil-pbc-scheme-conventions], [pqf-def-affine-morphism]. Let $\\Lambda$ be a finite commutative ring. For an etale object $W$ of $X$, let $P(W)$ be the sheafification of $V\\mapsto\\Lambda[\\mathrm{Hom}(V,W)]$ [lem-weil-pbc-free-yoneda-presheaf-module], [def-weil-presheaf-modules-sheafification]. Given finite families of affine etale objects $U_1,\\ldots,U_n$ and $V_1,\\ldots,V_m$ and an arbitrary arrow $f:\\bigoplus_jP(V_j)\\to\\bigoplus_kP(U_k)$, there exist $i\\in I$, constructible module sheaves $A,B$ on $D_i$ [def-weil-pbc-etale-constructible-sheaf], an arrow $a:A\\to B$, and isomorphisms $e_A:\\pi_i^{-1}A\\cong\\bigoplus_jP(V_j)$ and $e_B:\\pi_i^{-1}B\\cong\\bigoplus_kP(U_k)$ [def-weil-pbc-inverse-image], such that $e_B\\circ\\pi_i^{-1}a=f\\circ e_A$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU (3), fully faithful and essentially surjective arguments using 095N; parent split steps 3-6 and the constructibility of A,B in step 7. Verified at https://stacks.math.columbia.edu/tag/09YU and /tag/095N."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Descend the finite affine etale families U and V to a common stage, as in step 3 of the parent node. Choose a common upper bound; base change each object to it. The resulting free-sheaf isomorphisms transport the original arrow f.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09YU, proof of (1), paragraph 'Essentially surjective' (lines 12607-12619): 'U is the base change of a quasi-compact and quasi-separated scheme etale over X_i for some i ... Limits, Lemmas 01ZM and 07RP'"
+   }
+  },
+  {
+   "text": "Let Q be the sum of free sheaves on the descended U objects. Free-sheaf inverse image and preservation of coproducts give eB from the inverse image of Q to the original target. Represent the arrow out of each V free summand by its generating section, using the free-Yoneda and sheafification adjunctions. The ModuleCat-valued form of this compatibility can also be constructed directly from Etale.upperStarLowerStarAdjunction: the free sheaf represents sections, and lowerStar evaluates on the base-changed object. Co-Yoneda gives the free-sheaf comparison and naturality gives its section compatibility.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-inverse-image-free-etale-module",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03S6 (lemma-shriek-base-change), lines 11492-11514; the module case of 09YU, whose details Stacks omits (line 12625)"
+   }
+  },
+  {
+   "text": "Apply the section-colimit theorem to Q and each descended V object. Represent the finitely many generating sections at finitely many stages, choose a common upper bound, and transport sections there using the theorem's compatibility. Let A be the sum of the free V sheaves there and let B be the pullback of Q to this common stage.",
+   "uses": [
+    "lem-weil-pbc-limit-pullback-sections-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09YU, proof of (1), paragraphs 'Fully faithful' (lines 12589-12605) and 'Essentially surjective' (lines 12607-12619); Theorem 09YQ (theorem-colimit), lines 7400-7411"
+   }
+  },
+  {
+   "text": "The descended sections define a : A -> B by the free-Yoneda bijection and coproduct universal property. Base change of the free summands gives eA and composition gives eB. To show L.map a followed by eB.hom equals eA.hom followed by f, precompose with each free coprojection and evaluate on its identity generator. The unit-section compatibility and the defining section comparison give equality of these generating sections; free Yoneda and the coproduct universal property give the claimed square.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-free-etale-module",
+    "lem-weil-pbc-limit-pullback-sections-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 09YU, proof of (1), paragraph 'Fully faithful' (lines 12589-12605), adapted to sheaves of modules as Stacks instructs for (3) (lines 12621-12625; details omitted there)"
+   }
+  },
+  {
+   "text": "The free sheaf on an affine etale object is the etale lower shriek of the constant coefficient module: both represent sections by their adjunctions. It is constructible by the etale-free-sheaf theorem. Using the comparison of the two constructibility predicates, apply the source library's closure under finite sums and its pullback theorem. Thus A and B are constructible. The empty family gives the zero sheaf, also constructible.",
+   "uses": [
+    "lem-weil-pbc-etale-free-sheaf-constructible",
+    "thm-constructible-serre",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-inverse-image-free-etale-module",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-limit-pullback-sections-colimit",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-free-sheaf-constructible",
+  "thm-constructible-serre",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YU (3), fully faithful and essentially surjective arguments using 095N; parent split steps 3-6 and the constructibility of A,B in step 7. Verified at https://stacks.math.columbia.edu/tag/09YU and /tag/095N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An arrow between finite sums of free etale module sheaves descends along an inverse limit of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arrow between finite sums of free etale module sheaves descends along an inverse limit of schemes",
+   "results": "AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.FormallyEtale.instForallOfFinite",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem",
+   "digest": "a9070f542a12241b"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(arrow|descent)|(arrow|descent).*etale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean",
+   "date": "2026-10-12",
+   "verdict": "no matching theorem",
+   "digest": "c5ac1f5869151547"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "H1 constructible representation, proof step 4: descend the finite presentation to a stage; parent split steps 3-7, before taking a cokernel.",
+   "via": [
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-weil-pbc-constructible-module-noetherian-descent",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeEtaleModuleArrowDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeEtaleModuleArrowDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affine_free_etaleModule_arrow_descent",
+  "statement": "theorem exists_affine_free_etaleModule_arrow_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    (c : Cone D) (hc : IsLimit c)\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (n m : ℕ) (U : Fin n → c.pt.Etale) (V : Fin m → c.pt.Etale)\n    (hU : ∀ k : Fin n, IsAffine (U k).left)\n    (hV : ∀ k : Fin m, IsAffine (V k).left) :\n    let P : c.pt.Etale → Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=\n      fun W => (presheafToSheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n        (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ)\n    ∀ f : (∐ fun j : Fin m => P (V j)) ⟶ (∐ fun k : Fin n => P (U k)),\n      ∃ (i : I)\n        (A B : Sheaf (D.obj (op i)).smallEtaleTopology (ModuleCat.{u + 1} Λ))\n        (a : A ⟶ B),\n        IsConstructibleEtaleModuleSheaf A ∧ IsConstructibleEtaleModuleSheaf B ∧\n        ∃ (eA : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj A ≅\n            (∐ fun j : Fin m => P (V j)))\n          (eB : (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).obj B ≅\n            (∐ fun k : Fin n => P (U k))),\n          (Etale.upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i))).map a ≫ eB.hom =\n            eA.hom ≫ f",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-42374",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T022914-L-1083815",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-42374",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T022914-L-1083815",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean signatures and proofs matched all three node records, cited dependencies, sources, unit route, report, compilation and axiom checks."
+ }
+}
