@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-etale-open-comparison-restriction",
+ "kind": "statement",
+ "title": "Open comparison commutes with restriction",
+ "statement": "Let $X,U,V$ be schemes [def-pc-scheme], $j:U\\to X$ and $k:V\\to U$ open immersions [def-weil-open-immersion], $G$ an abelian etale sheaf on $X$ [def-weil-pbc-abelian-etale-sheaves], and $q\\ge0$. Let $A_j$ be the free representable abelian sheaf, $e_j^q$ the constructed comparison, and $r_k^q$ the independently constructed global-cohomology restriction map, all as in [def-weil-pbc-etale-open-comparison-data]. The inclusion $k$ induces $a_k:A_{k\\circ j}\\to A_j$ by the free representable functor. For every $x\\in\\operatorname{Ext}^q_X(A_j,G)$ [def-pc-ext], one has $e_{k\\circ j}^q(a_k^*x)=r_k^q(e_j^q(x))$. In particular the same canonical comparisons are compatible with restriction to every smaller open, not merely pointwise isomorphic.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03F3 (lemma-cohomology-of-open), part (2) and its proof by identical restricted section complexes; Sites 00XZ (section-localize)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-etale-open-comparison-data",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Proof: resolve G by injective sheaves on X. Exact restriction along j and k preserves\ninjectives because its left adjoint is exact extension by zero. The representing\nsections adjunction identifies Hom(A_j,I) with I(j) and Hom(A_{k≫j},I) with I(k≫j),\nand sends precomposition with the free sheaf map of k to I(k). The constant-sheaf\nadjunction identifies these same complexes with global sections of the restrictions\non U and V. Under these identifications, the inverse-image pullback on global sections\nis also I(k): the units and the composition isomorphism of inverse image give exactly\nrestriction of sections. Thus the square commutes degreewise, hence on cohomology.\nThe exact Ext adjunction used in etaleCohomologyOverOpenEquiv is this comparison:\nin degree zero it is the sections adjunction, and in higher degrees dimension shifting\nalong the same injective resolution gives the unique extension of that map. This proves\ncommutativity for the specified comparison, not for an arbitrarily chosen equivalence.\nIdentity inclusions, empty opens, zero coefficients, and degree zero need no exceptions.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-cohomology-pullback",
+    "lem-sc-ext-exact-adjunction",
+    "def-weil-pbc-etale-open-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-sc-ext-exact-adjunction",
+  "def-weil-pbc-etale-open-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 03F3 (lemma-cohomology-of-open), part (2) and its proof by identical restricted section complexes; Sites 00XZ (section-localize)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cohomology comparison for an open immersion is natural in the coefficient sheaf and restriction to smaller opens",
+   "date": "2026-10-12",
+   "results": "Service returned Internal Server Error; no search result.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Abelian.Ext",
+   "date": "2026-10-12",
+   "results": "H.addEquiv₀_map and its reassociation lemma, only degree zero. Local source search finds mapExtCounit_comp_mk₀ for the actual coefficient-naturality proof, but no smaller-open or quasi-coherent identification.",
+   "verdict": "partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensorSections.*restrict|restrict.*etaleTensorSections|mapExtCounit_comp_mk₀",
+   "date": "2026-10-12",
+   "results": "Search service: zero hits. Local rg finds mapExtCounit_comp_mk₀ in the source Ext.MapBijective module; no matching quasi-coherent identification or object-comparison restriction theorem. Existing etaleOpenFreeSheaf is reused, not duplicated.",
+   "verdict": "no existing missing-clause theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: the affine-local calculation identifying cohomology over an open object of the etale site with etale cohomology of that open; Stacks 03F3 (lemma-cohomology-of-open), part (2) and its proof by identical restricted section complexes; Sites 00XZ (section-localize).",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-over-open",
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenCohomologyRestrictionCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenCohomologyRestrictionCompatibility.lean",
+  "declaration": "AlgebraicGeometry.etaleCohomologyOverOpenEquiv_restriction",
+  "declarations": [
+   "AlgebraicGeometry.etaleCohomologyOverOpenEquiv_restriction"
+  ],
+  "statement": "theorem etaleCohomologyOverOpenEquiv_restriction {X U V : Scheme.{u}} (j : U ⟶ X) (k : V ⟶ U) [IsOpenImmersion j] [IsOpenImmersion k] [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})] [HasExt.{u + 1} (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})] [HasExt.{u + 1} (Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (x : Abelian.Ext ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk j) ⋙ AddCommGrpCat.free)) G q) : etaleCohomologyOverOpenEquiv (k ≫ j) G q ((Abelian.Ext.mk₀ ((EtaleOpenComparison.freeSheaf X).map (MorphismProperty.Over.homMk k rfl : Scheme.Etale.mk (k ≫ j) ⟶ Scheme.Etale.mk j))).comp x (zero_add q)) = etaleCohomologyOverOpenRestriction j k G q (etaleCohomologyOverOpenEquiv j G q x)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d806e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T151907-L-2287849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d806e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T151907-L-2287849",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean declarations and two named obligations with the unchanged node, dependency records, change record and sources; all four modules and direct importer Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison compile cleanly, and axiom checks pass."
+ }
+}

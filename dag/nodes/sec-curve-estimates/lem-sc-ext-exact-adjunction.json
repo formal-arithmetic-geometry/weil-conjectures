@@ -1,0 +1,104 @@
+{
+ "id": "lem-sc-ext-exact-adjunction",
+ "kind": "statement",
+ "title": "Ext adjunction for exact adjoints",
+ "statement": "Let C and D be abelian categories [def-sp-abelian], with Ext groups [def-pc-ext], and assume D has enough injectives [def-sp-enough-injectives]. Let L : C to D and R : D to C be additive exact functors with an adjunction L left adjoint to R. For every A in C, G in D, and n >= 0, pushing Ext classes forward by L and postcomposing with the counit induces an additive equivalence Ext_C^n(A,R(G)) to Ext_D^n(L(A),G).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XR, computation of Ext by injective resolutions; the exact adjunction argument used in Cohomology on Sites, Lemma 03F3. Agent specialization to arbitrary exact adjoints."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-pc-ext",
+  "def-sp-enough-injectives"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective resolution G to I. Since L preserves monomorphisms, its right adjoint R preserves injectives. Exactness of R makes R(G) to R(I) an injective resolution. In every degree the additive Hom adjunction identifies Hom_C(A,R(I)) with Hom_D(L(A),I) and commutes with differentials. Taking cohomology and applying the Ext/injective-resolution comparison gives the additive equivalence. The resulting map is pushforward by L followed by the counit. The existing source declaration proves its bijectivity also by dimension shifting; it needs no enough-injectives assumption on C.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ext-via-injective-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 06XR and the exact adjunction argument of Stacks 03F3; existing source proof by dimension shifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext adjunction between exact functors of abelian categories",
+   "date": "2026-10-12",
+   "results": "Service returned Internal Server Error.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext, CategoryTheory.Adjunction",
+   "date": "2026-10-12",
+   "results": "The service reports Adjunction.extEquiv in Mathlib.Algebra.Homology.DerivedCategory.Ext.MapAdjunction. This file does not exist in the pinned checkout.",
+   "verdict": "not present in the pinned version"
+  },
+  {
+   "tool": "grep",
+   "query": "extAddEquiv|mapExtCounit_bijective in Mathlib and lean/WeilConjectures",
+   "date": "2026-10-12",
+   "results": "No exact declaration in pinned Mathlib. Existing fully proved Adjunction.extAddEquiv in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective, backed by mapExtCounit_bijective.",
+   "verdict": "existing source declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-cohomology-over-open",
+   "place": "New proof step 3: apply the existing exact Ext adjunction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective",
+  "declaration": "CategoryTheory.Adjunction.extAddEquiv",
+  "statement": "noncomputable def extAddEquiv [R.Additive] [PreservesFiniteLimits R]\n    [PreservesFiniteColimits R] (A : C) (G : D) (n : ℕ) :\n    Ext A (R.obj G) n ≃+ Ext (L.obj A) G n",
+  "branch": "slopmaster2",
+  "by": "F2",
+  "date": "2026-10-12",
+  "note": "Existing source declaration, not a new Lean module or a new hole. The preceding variable context supplies abelian categories, HasExt, exact L, adj : L ⊣ R, and EnoughInjectives D."
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d806e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T151907-L-2287849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d806e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T151907-L-2287849",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean declarations and two named obligations with the unchanged node, dependency records, change record and sources; all four modules and direct importer Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison compile cleanly, and axiom checks pass."
+ }
+}

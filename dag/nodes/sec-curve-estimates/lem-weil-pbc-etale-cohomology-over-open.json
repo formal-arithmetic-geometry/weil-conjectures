@@ -30,62 +30,40 @@
  ],
  "proof": [
   {
-   "text": "Because an open immersion $j:U\\to X$ is etale, apply the localization equivalence to the object $j$ of $X_{\\mathrm{Et}}$. A $U$-etale object $v:V\\to U$ corresponds to $(j\\circ v:V\\to X, v:V\\to U)$, and the two covering topologies coincide. This equivalence sends $\\mathrm{id}_U$ to the final object of $U_{\\mathrm{Et}}$.",
+   "text": "Use the existing exact extension-by-zero/restriction adjunction on abelian etale sheaves, Etale.openImmersionLowerShriekAdjunction and preservesFiniteLimits_openImmersionLowerShriek. Restriction also has a right adjoint, localizationRestrictionLowerStarAdjunction, hence is exact. This is precisely the mechanism of Stacks 03F3, without constructing the intermediate slice-site comparison.",
    "uses": [
-    "lem-weil-pbc-etale-site-localization-open"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-etale-inverse-image-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Section 00XZ (section-localize), specialized to the etale site"
-   }
+   "elementary": false
   },
   {
-   "text": "For every $v:V\\to U$ in $U_{\\mathrm{Et}}$, the restriction $G|_U$ of $G$ to $X_{\\mathrm{Et}}/U$ has value $G(V\\to U\\to X)$. The etale inverse-image restriction theorem identifies $j^{-1}G(V)$ with this same group, using the original restriction maps of $G$. Thus the sheaf transported from the slice site by step 1 is $j^{-1}G$; the identification is natural in $G$ and remains compatible with a further open inclusion.",
+   "text": "Let A_j be the sheafification of the free abelian presheaf on uliftYoneda(j). The sheafification/free-abelian/ulift-Yoneda adjunction identifies Hom(A_j,G) additively with G(j). The extension-by-zero adjunction and the constant-sheaf adjunction at id_U identify Hom(j_! Z_U,G) with the same sections. The iso mk(id_U composed with j) to mk(j) handles the identity composition. The public EtaleOpenComparison.sectionsEquiv, restrictedSectionsEquiv, and representingHomEquiv prove these identifications and their naturality in G. Coyoneda.ext yields the actual isomorphism A_j to j_! Z_U; no arbitrary witness is chosen.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-etale-site-localization-open"
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-etale-open-comparison-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Section 00XZ (section-localize), and etale inverse-image restriction"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply Stacks 03F3(1) to the constant integer ring on $X_{\\mathrm{Et}}$: restriction of an injective abelian sheaf to $X_{\\mathrm{Et}}/U$ remains injective, since it is right adjoint to exact extension by zero. In an injective resolution $G\\to I^\\bullet$, restriction therefore gives an injective resolution on the slice site, and $I^n(U)=(I^n|_U)(\\mathrm{id}_U)$. Taking cohomology of these identical complexes gives $H^q(U,G)\\cong H^q(\\mathrm{id}_U,G|_U)$, naturally in $G$ and in restriction to smaller open objects.",
+   "text": "Apply the exact Ext adjunction to Z_U and G. Precomposition with representingIso gives Ext^q(A_j,G) isomorphic to Ext^q(j_!Z_U,G), then the inverse Ext adjunction identifies this with Ext^q(Z_U,j^*G), which is Sheaf.H of the restricted sheaf. The same constructed equivalence is exposed as etaleCohomologyOverOpenEquiv, and etaleCohomologyOverOpenEquiv_naturality proves coefficient naturality via the source mapExtCounit_comp_mk₀ and Ext associativity. The publicly imported named obligation etaleCohomologyOverOpenEquiv_restriction records commutativity with the free-sheaf object map and the independently constructed canonical global restriction map. Step 4 covers the remaining quasi-coherent clause using the publicly imported etaleTensorSectionsSheaf_openIdentification; no prose clause is omitted.",
    "uses": [
-    "lem-weil-pbc-cohomology-over-object-localization"
+    "lem-sc-ext-exact-adjunction",
+    "def-weil-pbc-etale-open-comparison-data",
+    "lem-weil-pbc-etale-open-comparison-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open), parts (1)-(2)"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the site equivalence of step 1 with $W=\\mathrm{id}_U$ in the cohomology transport theorem: it identifies $H^q(\\mathrm{id}_U,G|_U)$ with cohomology over the final object of $U_{\\mathrm{Et}}$ for the transported sheaf. By step 2 that sheaf is $j^{-1}G$; evaluation at the final object is the global-sections functor $\\Gamma(U_{\\mathrm{Et}},-)$ [def-weil-pbc-global-sections-functor], and an injective resolution $j^{-1}G\\to J^\\bullet$ (bounded below, injective terms) is a K-injective resolution [lem-weil-pbc-bounded-below-injectives-kinjective], so this cohomology is $H^q(U_{\\mathrm{Et}},j^{-1}G)$ as defined by K-injective resolutions [def-weil-pbc-etale-cohomology]. The naturality in $G$ and further inclusions follows from the naturality of the three comparisons.",
-   "uses": [
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-weil-pbc-global-sections-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Cohomology on Sites, Lemma 03F3, and Sites, Section 00XZ"
-   }
-  },
-  {
-   "text": "Set $G=\\mathcal F_{\\mathrm{et}}$. For each etale $v:V\\to U$, step 2 gives $(j^{-1}G)(V)=G(j\\circ v)=\\Gamma(V,(j\\circ v)^*\\mathcal F)$. Apply $c_{v,j}^{-1}$ to identify this with $\\Gamma(V,v^*j^*\\mathcal F)$ and then $v^*(\\kappa_{\\mathcal F}^{-1})$ to identify it with $\\Gamma(V,v^*(\\mathcal F|_U))=((\\mathcal F|_U)_{\\mathrm{et}})(V)$. Naturality of $c_{v,j}$ and $\\kappa_{\\mathcal F}$ makes these maps commute with each restriction $\\rho_g$, whose formula and composition law are given by the etale quasi-coherent presheaf nodes. Thus the sectionwise maps form the stated natural isomorphism of sheaves.",
+   "text": "Set $G=\\mathcal F_{\\mathrm{et}}$. For each etale $v:V\\to U$, the restriction functor of step 1, evaluated sectionwise as in step 2, gives $(j^{-1}G)(V)=G(j\\circ v)=\\Gamma(V,(j\\circ v)^*\\mathcal F)$. Apply $c_{v,j}^{-1}$ to identify this with $\\Gamma(V,v^*j^*\\mathcal F)$ and then $v^*(\\kappa_{\\mathcal F}^{-1})$ to identify it with $\\Gamma(V,v^*(\\mathcal F|_U))=((\\mathcal F|_U)_{\\mathrm{et}})(V)$. Naturality of $c_{v,j}$ and $\\kappa_{\\mathcal F}$ makes these maps commute with each restriction $\\rho_g$, whose formula and composition law are given by the etale quasi-coherent presheaf nodes. Thus the sectionwise maps form the stated natural isomorphism of sheaves. The Lean clause is the publicly imported named obligation etaleTensorSectionsSheaf_openIdentification. Its conclusion includes the component formula with the inverse normalized tensorSectionsComp and tensor pullback of the inverse canonical restriction/pullback comparison, so the identification is specified rather than an arbitrary sheaf isomorphism.",
    "uses": [
     "lem-weil-pbc-etale-inverse-image-restriction",
     "def-sc-etale-qcoherent-module",
     "lem-pc-module-pullback-identity-composition",
     "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-sc-etale-qcoherent-presheaf-functorial"
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-weil-pbc-etale-open-qcoherent-identification"
    ],
    "elementary": false,
    "source": {
@@ -95,21 +73,22 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-cohomology-over-object-localization",
-  "lem-weil-pbc-etale-cohomology-invariance-under-site-equivalence",
+  "def-weil-pbc-etale-open-comparison-data",
+  "lem-sc-ext-exact-adjunction",
+  "lem-weil-pbc-etale-open-comparison-restriction",
   "def-sc-etale-qcoherent-module",
   "lem-pc-module-pullback-identity-composition",
   "lem-weil-pbc-open-immersion-module-pullback-restriction",
   "lem-sc-etale-qcoherent-presheaf-functorial",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "def-weil-pbc-global-sections-functor"
+  "lem-weil-pbc-etale-open-qcoherent-identification"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Cohomology on Sites, Lemma 03F3 (lemma-cohomology-of-open) and Sites, Section 00XZ (section-localize)"
+  "place": "Lemma 03F3, exact extension-by-zero adjunction argument; free-representable identification and the existing exact Ext adjunction in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective. Repair: coefficient naturality proved for the concrete comparison, smaller-open compatibility and the original quasi-coherent identification recorded by separate public obligations, with unchanged prose statement. Landing repair X-e5dd8: reuse the three clause declarations in their defining modules through public imports; remove duplicate wrapper theorems."
  },
  "mathlib_searches": [
   {
@@ -196,14 +175,17 @@
   }
  },
  "lean": {
+  "existing": false,
   "module": "Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen",
-  "declaration": "AlgebraicGeometry.etaleCohomologyOverOpen",
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleCohomologyOverOpen.lean",
-  "statement": "theorem etaleCohomologyOverOpen {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [Etale j] [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})] [HasExt.{u + 1} (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : Nonempty (Sheaf.H G q ≃+ Sheaf.H ((Etale.openImmersionRestriction (A := AddCommGrpCat.{u + 1}) j).obj G) q)",
+  "declaration": "AlgebraicGeometry.etaleCohomologyOverOpen",
+  "declarations": [
+   "AlgebraicGeometry.etaleCohomologyOverOpen"
+  ],
+  "statement": "theorem etaleCohomologyOverOpen {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [Etale j] [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})] [HasExt.{u + 1} (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) : Nonempty (Abelian.Ext ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk j) ⋙ AddCommGrpCat.free)) G q ≃+ Sheaf.H ((Etale.openImmersionRestriction (A := AddCommGrpCat.{u + 1}) j).obj G) q)",
   "branch": "sheaf-dag",
-  "by": "V1",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "F2",
+  "date": "2026-10-12"
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -216,17 +198,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-cd069",
-  "group": "M1",
+  "reviewer": "X-d806e",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T113948-L-821555",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module/report matched the packet and unchanged public declaration; full lcompile.py check succeeded with no mechanical findings.",
-  "sorry_before": [
-   "AlgebraicGeometry.etaleCohomologyOverOpen"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.etaleCohomologyOverOpen"
-  ]
+  "landing": "20261012T151907-L-2287849",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean declarations and two named obligations with the unchanged node, dependency records, change record and sources; all four modules and direct importer Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison compile cleanly, and axiom checks pass."
  }
 }

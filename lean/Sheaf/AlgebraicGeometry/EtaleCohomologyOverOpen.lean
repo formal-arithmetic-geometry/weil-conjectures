@@ -1,13 +1,8 @@
 module
 
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
-import Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence
+public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyComparison
+public import Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentification
+public import Sheaf.AlgebraicGeometry.EtaleOpenCohomologyRestrictionCompatibility
 
 /-! # Étale cohomology over an open object
 
@@ -46,25 +41,17 @@ private theorem etaleCohomologyOverOpen_degreeZero_obstruction
   apply hX
   exact ⟨fun a b => eSections.injective (hU.elim _ _)⟩
 
-/-- Cohomology over an open étale object agrees with cohomology on the open scheme.
-
-The additive equivalences are natural in the coefficient sheaf; the final conjunct records
-compatibility with restriction to smaller open subschemes.  The quasi-coherent clause is the
-usual identification of the inverse-image étale sheaf with the étale sheaf attached to the
-restricted module.
-Source: Stacks Project, Cohomology on Sites, Lemma 03F3 and Sites, Section 00XZ
-(blueprint: lem-weil-pbc-etale-cohomology-over-open). -/
--- STATEMENT-DISPUTED: `Sheaf.H G q` is global cohomology on X, not cohomology
--- over the object j : U → X. For q = 0, U empty, X = Spec of an algebraically closed
--- field, and G the constant integer sheaf, the left side is Z and the right side is 0.
--- The DAG instead requires `Sheaf.H' G q` evaluated at the etale object j.
+/-- Existence of the canonical open-object cohomology equivalence.
+Source: Stacks 03F3 (blueprint: lem-weil-pbc-etale-cohomology-over-open). -/
 theorem etaleCohomologyOverOpen {X U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [Etale j]
     [HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]
     [HasExt.{u + 1} (Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1})]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
-    Nonempty (Sheaf.H G q ≃+
+    Nonempty (Abelian.Ext
+      ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk j) ⋙ AddCommGrpCat.free)) G q ≃+
       Sheaf.H ((Etale.openImmersionRestriction (A := AddCommGrpCat.{u + 1}) j).obj G) q) := by
-  sorry
+  exact ⟨etaleCohomologyOverOpenEquiv j G q⟩
 
 end AlgebraicGeometry

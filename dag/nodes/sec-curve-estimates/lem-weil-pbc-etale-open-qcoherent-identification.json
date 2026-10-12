@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-etale-open-qcoherent-identification",
+ "kind": "statement",
+ "title": "Canonical quasi-coherent sheaf identification on an open",
+ "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-pc-scheme, def-weil-open-immersion] and let $F$ be a quasi-coherent module on $X$ [pqf-def-coherent]. Write $F_{\\mathrm{et}}(v:V\\to X)=\\Gamma(V,v^*F)$ with the normalized pullback section restrictions [def-sc-etale-qcoherent-module, lem-sc-etale-qcoherent-presheaf-functorial]. Restrict this sheaf by precomposition with $U_{\\mathrm{Et}}\\to X_{\\mathrm{Et}}$, $v\\mapsto j\\circ v$ [lem-weil-pbc-etale-inverse-image-restriction]. There is an isomorphism from this restricted abelian sheaf to $(F|_U)_{\\mathrm{et}}$. Its component at every $v:V\\to U$ is $\\Gamma(V,c_{v,j}^{-1})$ followed by $\\Gamma(V,v^*\\kappa_F^{-1})$, where $c_{v,j}$ is normalized pullback composition [lem-pc-module-pullback-identity-composition, lem-sc-etale-qcoherent-presheaf-functorial] and $\\kappa_F:F|_U\\cong j^*F$ is the canonical open restriction comparison [lem-weil-pbc-open-immersion-module-pullback-restriction]. The formula determines the sheaf isomorphism and uses natural module-functor isomorphisms, hence is natural in $F$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Stacks Descent 03DR (section-quasi-coherent-topologies, equation-quasi-coherent-presheaf), 03DU (definition-quasi-coherent-topologies), item 4; Sites 00XZ; the sectionwise argument in the original item proof[4]."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "pqf-def-coherent",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-sc-etale-qcoherent-module",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof": [
+  {
+   "text": "Proof: for an etale v : V to U, restriction evaluates F_et at v composed with j, hence\nhas sections Gamma(V,(v composed with j)^*F). The inverse normalized composition\nisomorphism c_(v,j) identifies these with Gamma(V,v^*j^*F). The canonical adjunction\nuniqueness isomorphism identifies tensor pullback along j with restriction of F;\napplying v^* gives Gamma(V,v^*(F|_U)). These are exactly the prescribed components.\nEach component is invertible. For every morphism g of U-etale objects, the normalized\ncomposition law and unit naturality move these two maps across the section restriction\nrho_g; the two composites agree by associativity of normalized pullback composition\nand naturality of the restriction/pullback comparison. Consequently the components\nform a presheaf isomorphism, and therefore a sheaf isomorphism, since both presheaves\nare sheaves. The component formula also makes the isomorphism natural in F: all its\nmaps are components of natural isomorphisms of module functors, so a module morphism\ncommutes with them after evaluation. The empty open, identity open and zero module\nsatisfy the same formulas; no affine, finite-type or separation hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-sc-etale-qcoherent-module",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "lem-sc-etale-qcoherent-presheaf-functorial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-sc-etale-qcoherent-module",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Stacks Descent 03DR (section-quasi-coherent-topologies, equation-quasi-coherent-presheaf), 03DU (definition-quasi-coherent-topologies), item 4; Sites 00XZ; the sectionwise argument in the original item proof[4]."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The etale sheaf associated to a quasi coherent module is compatible with open restriction",
+   "date": "2026-10-12",
+   "results": "Service returned Internal Server Error; no search result.",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.Abelian.Ext",
+   "date": "2026-10-12",
+   "results": "H.addEquiv₀_map and its reassociation lemma, only degree zero. Local source search finds mapExtCounit_comp_mk₀ for the actual coefficient-naturality proof, but no smaller-open or quasi-coherent identification.",
+   "verdict": "partial tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "etaleTensorSections.*restrict|restrict.*etaleTensorSections|mapExtCounit_comp_mk₀",
+   "date": "2026-10-12",
+   "results": "Search service: zero hits. Local rg finds mapExtCounit_comp_mk₀ in the source Ext.MapBijective module; no matching quasi-coherent identification or object-comparison restriction theorem. Existing etaleOpenFreeSheaf is reused, not duplicated.",
+   "verdict": "no existing missing-clause theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale sheaf of sections of a quasi coherent module restricts along an open immersion to the etale sheaf of the restricted module",
+   "date": "2026-10-12",
+   "results": "Eight hits: module restrict/restrictFunctor, restriction unit/counit and stalk formulas, and Tilde.res_apply. None identifies etaleTensorSectionsSheaf on the two sites. The existing restriction/pullback comparison is used in the specified components.",
+   "verdict": "tools only, no full identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-dimension",
+   "place": "proof, proper case: the affine-local calculation identifying cohomology over an open object of the etale site with etale cohomology of that open; Stacks Descent 03DR (section-quasi-coherent-topologies, equation-quasi-coherent-presheaf), 03DU (definition-quasi-coherent-topologies), item 4; Sites 00XZ; the sectionwise argument in the original item proof[4].",
+   "via": [
+    "lem-weil-pbc-etale-cohomology-over-open",
+    "lem-sc-etale-zariski-qcoh-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenQuasiCoherentIdentification",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenQuasiCoherentIdentification.lean",
+  "declaration": "AlgebraicGeometry.etaleTensorSectionsSheaf_openIdentification",
+  "declarations": [
+   "AlgebraicGeometry.etaleOpenSmallRestriction",
+   "AlgebraicGeometry.etaleTensorSectionsSheaf_openIdentification"
+  ],
+  "statement": "theorem etaleTensorSectionsSheaf_openIdentification {X U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (F : X.Modules) [F.IsQuasicoherent] : ∃ e : (etaleOpenSmallRestriction j).obj (Scheme.Modules.etaleTensorSectionsSheaf F) ≅ Scheme.Modules.etaleTensorSectionsSheaf ((Scheme.Modules.restrictFunctor j).obj F), ∀ v : U.Etale, e.hom.hom.app (Opposite.op v) = ((Scheme.Modules.tensorSectionsComp v.hom j).inv.app F).app ⊤ ≫ ((Scheme.Modules.tensorPullback v.hom).map (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j)).leftAdjointUniq (Scheme.Modules.restrictAdjunction j)).hom.app F)).app ⊤",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d806e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T151907-L-2287849",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d806e",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T151907-L-2287849",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the delivered Lean declarations and two named obligations with the unchanged node, dependency records, change record and sources; all four modules and direct importer Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison compile cleanly, and axiom checks pass."
+ }
+}
