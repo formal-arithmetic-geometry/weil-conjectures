@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Exact
 
+import Sheaf.CategoryTheory.DerivedCoupleMapExactness
+
 /-!
 # Bigraded exact couples and their spectral sequences
 
@@ -154,7 +156,45 @@ observations construct the three maps. The exactness of the derived triangle
 then follows by the element chases of Stacks Lemma 12.21.2.
 Source: Stacks Project, Tags 011R and 0AMJ (blueprint: def-sp-exact-couple). -/
 theorem derivedMaps_exists (X : BigradedExactCouple C s) : Nonempty (DerivedMaps X) := by
-  sorry
+  have hβ : ∀ p q, X.dInto p q ≫ X.f p q ≫ X.g (p + 2) (q - 1) = 0 :=
+    X.dInto_comp_d
+  have hβeq : ∀ p q, X.dInto p q =
+      (X.f (p - s - 2) (q + s + 1) ≫
+        X.g ((p - s - 2) + 2) ((q + s + 1) - 1)) ≫
+          eqToHom (by congr 1 <;> omega) := fun _ _ ↦ rfl
+  let M := Classical.choice (derivedCoupleMapData_exists X.D X.E X.alpha X.f X.g
+    X.dInto hβ X.f_g_zero X.exact_alpha X.exact_g hβeq)
+  obtain ⟨hα, hf, hg⟩ := derivedCoupleMapData_exact X.D X.E X.alpha X.f X.g
+    X.dInto hβ X.f_g_zero X.alpha_f_zero X.g_alpha_zero
+    X.exact_alpha X.exact_f X.exact_g hβeq M
+  refine ⟨{ alpha := M.alpha
+            f := M.forward
+            g := M.backward
+            alpha_f_zero := ?_
+            f_g_zero := ?_
+            g_alpha_zero := ?_
+            exact_alpha := hα
+            exact_f := hf
+            exact_g := hg
+            alpha_comm := by
+              simpa only [derivedDInclusion, Category.assoc] using M.alpha_comm
+            f_comm := by
+              simpa only [derivedDInclusion, derivedEProjection, d, Category.assoc]
+                using M.f_comm
+            g_comm := M.g_comm }⟩
+  · intro p q
+    apply (kernelSubobject_factors_iff (M.alpha (p + 2) (q - 1)) (M.forward p q)).mp
+    rw [← hα p q]
+    simpa using imageSubobject_factors_comp_self (M.forward p q) (𝟙 _)
+  · intro p q
+    apply (kernelSubobject_factors_iff
+      (M.forward (p + (s + 1)) (q - (s + 1))) (M.backward p q)).mp
+    rw [← hf p q]
+    simpa using imageSubobject_factors_comp_self (M.backward p q) (𝟙 _)
+  · intro p q
+    apply (kernelSubobject_factors_iff (M.backward (p - 1) (q + 1)) (M.alpha p q)).mp
+    rw [← hg p q]
+    simpa using imageSubobject_factors_comp_self (M.alpha p q) (𝟙 _)
 
 /-- The derived couple. Its data comes from the maps whose existence and
 exactness are stated in `derivedMaps_exists`.

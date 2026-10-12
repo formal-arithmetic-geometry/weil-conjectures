@@ -1,0 +1,170 @@
+{
+ "id": "lem-sp-derived-map-construction",
+ "kind": "statement",
+ "title": "Construction of the three induced derived-couple maps",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], and let $s\\in\\mathbf N$.\nLet $D^{p,q},E^{p,q}$ be objects for $p,q\\in\\mathbf Z$, with maps\n$a:D^{p,q}\\to D^{p-1,q+1}$, $f:E^{p,q}\\to D^{p+2,q-1}$,\nand $g:D^{p,q}\\to E^{p+s,q-s}$. Put $d^{p,q}=g^{p+2,q-1}f^{p,q}$.\nLet $\\beta^{p,q}:E^{p-s-2,q+s+1}\\to E^{p,q}$ be the incoming $d$, with the\ncanonical transport of its target indices, and assume $d^{p,q}\\beta^{p,q}=0$\nand $f^{p+s,q-s}g^{p,q}=0$. Put\n$D'^{p,q}=\\operatorname{im}(a^{p+1,q-1})$ and\n$E'^{p,q}=\\operatorname{coker}(\\widehat\\beta^{p,q})$, where\n$\\widehat\\beta$ is the lift of $\\beta$ to $K^{p,q}=\\ker d^{p,q}$.\nWrite $I^{p,q}:D'^{p,q}\\to D^{p,q}$ for the transported image inclusion,\n$A^{p,q}:D^{p+1,q-1}\\to D'^{p,q}$ for the image epimorphism,\n$P^{p,q}:K^{p,q}\\to E'^{p,q}$ for the cokernel projection,\nand $\\widehat g^{r,t}:D^{r,t}\\to K^{r+s,t-s}$ for the kernel lift of $g$.\nAll transports are the unique equality morphisms from the displayed integer identities.\nAssume $\\operatorname{im}f^{p,q}=\\ker a^{p+2,q-1}$ and\n$\\operatorname{im}a^{p,q}=\\ker g^{p-1,q+1}$ at every bidegree.\nThen there exist maps $a':D'^{p,q}\\to D'^{p-1,q+1}$,\n$f':E'^{p,q}\\to D'^{p+2,q-1}$, $g':D'^{p,q}\\to E'^{p+s+1,q-s-1}$ satisfying the three defining equations\n$I^{p-1,q+1}a'^{p,q}=a^{p,q}I^{p,q}$,\n$I^{p+2,q-1}f'^{p,q}P^{p,q}=f^{p,q}\\iota_K^{p,q}$,\nand\n$g'^{p,q}A^{p,q}=P^{p+s+1,q-s-1}\\widehat g^{p+1,q-1}$,\nwith canonical target transport in the last equation.\nThese maps are unique. No exactness of the induced maps is asserted.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Lemma 12.21.2, Tag 011R, setup (4)-(6) and conclusion (3); Remark 12.21.5, Tag 0AMJ and its footnote; https://stacks.math.columbia.edu/tag/011R and https://stacks.math.columbia.edu/tag/0AMJ"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Define a′ explicitly as the incoming image inclusion followed by the equality transport to the next a source and factorThruImage of that a. The image.fac equation and transport of the family a prove its restriction equation. The map-data structure stores only f′ and g′; its alpha method is this explicit map.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain a followed by g equal to zero using kernelSubobject_factors_iff and imageSubobject_factors_comp_self after rewriting the image/kernel equality. Use the assumed image(a)=kernel(g) equality to get the image kernel universal property, via ShortComplex.exact_iff_image_eq_kernel and Exact.isLimitImage′. Lift the cycle restriction of f, transported to the exact codomain of a, into that image. Its composite with the lifted incoming boundary is zero, since after the mono image inclusion this composite is beta followed by f. The prescribed beta formula and transport of f reduce beta followed by f to f followed by g followed by f, zero by the g-then-f relation. Use cokernel.desc to obtain f′; cokernel.π_desc proves its equation.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Likewise obtain f followed by a equal to zero directly from the same Mathlib factorization lemmas. Lift each g into cycles, then compose with the cycle cokernel projection. Precomposing this map by the preceding f gives zero: after postcomposing by the mono kernel inclusion, f followed by the cycle lift of g agrees with the transported incoming beta lift; its cycle projection is zero by cokernel.condition. The assumed image(f)=kernel(a) equality gives Exact.isColimitImage, so descend through factorThruImage a to obtain g′. Transport to the successor bidegree and prove its equation. Choose these genuinely constructed families to assemble DerivedCoupleMapData. Mono image cancellation proves uniqueness for a′; epi cycle projection followed by mono image cancellation proves uniqueness for f′; epi image cancellation proves uniqueness for g′.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "M1 stage 3 worker",
+  "date": "2026-10-12",
+  "note": "Complete Lean construction written by M1, following Stacks 011R setup (4)-(6) and 0AMJ. Alpha is the explicit image-factorization composite; forward descends a lift into the alpha image through the cycle cokernel; backward descends through ShortComplex.Exact.isColimitImage. All index transports are proved. Repair: zero composites are obtained directly from Mathlib kernelSubobject_factors_iff and imageSubobject_factors_comp_self; no duplicate zero-composite helper is declared."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "induced maps of a derived exact couple in an abelian category",
+   "results": "Related SnakeInput.δ and homology-sequence connecting maps; no exact-couple construction. Read local signatures: these require additional short complexes, not the raw image and cycle quotient data.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "image.lift",
+   "results": "0 hits: unknown identifier 'image.lift'. Local source subsequently found the image universal-property API in Limits/Shapes/Images.lean.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "maps induced on the image and kernel quotient of an exact couple",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*couple|ExactCouple",
+   "results": "msearch: 0 Mathlib hits. Local rg found DerivedCoupleExact in Sheaf; it imports ExactCouple, so it cannot be used in ExactCouple without an import cycle. No source-library exact-couple construction.",
+   "date": "2026-10-12",
+   "verdict": "no usable existing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact triangle induces exact triangle on image and homology quotient",
+   "results": "Second reader: eight hits concerning distinguished triangles and derived-category homology sequences; none gives these raw derived-couple maps or their three exactness equalities.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact, image, cokernel",
+   "results": "Second reader: no hits, service reports unknown identifier ShortComplex.Exact. Local Abelian/Exact.lean confirms exact_iff_image_eq_kernel, Exact.isLimitImage′ and Exact.isColimitImage, which the construction already uses.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*couple|exact.couple|ExactCouple|isLimitImage|isColimitImage in Mathlib/CategoryTheory/Abelian, Mathlib/Algebra/Homology, lean/WeilConjectures; rg on lean/Sheaf",
+   "results": "Second reader: local targeted search finds only the universal-property API already used and a pseudoelement application; no exact-couple theorem in Mathlib or WeilConjectures. Sheaf.DerivedCoupleExact imports the item and cannot be imported here.",
+   "date": "2026-10-12",
+   "verdict": "no usable existing theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction of exact triangle to image and homology remains exact",
+   "results": "Current second reader: eight homological-functor and derived-category homology-sequence hits; their distinguished-triangle hypotheses do not provide a theorem about these raw image/cycle-quotient maps.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"imageSubobject\", \"kernelSubobject\"",
+   "results": "Current second reader: service returned zero hits. Local Abelian/Exact.lean provides the factorization and image universal-property API already used.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ExactCouple",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-sp-exact-couple",
+   "place": "derived-couple paragraph: well-definedness of alpha′, f′, g′",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCoupleMapConstruction",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCoupleMapConstruction.lean",
+  "declaration": "CategoryTheory.derivedCoupleMapData_exists",
+  "declarations": [
+   "CategoryTheory.derivedCoupleMapData_exists",
+   "CategoryTheory.DerivedCoupleMapData",
+   "CategoryTheory.derivedCoupleMapData_unique",
+   "CategoryTheory.derivedCoupleAlpha",
+   "CategoryTheory.derivedCoupleAlpha_comm",
+   "CategoryTheory.derivedCoupleForward_exists",
+   "CategoryTheory.derivedCoupleBackward_exists",
+   "CategoryTheory.DerivedCoupleMapData.alpha",
+   "CategoryTheory.DerivedCoupleMapData.alpha_comm"
+  ],
+  "statement": "theorem derivedCoupleMapData_exists (D E : ℤ → ℤ → C) (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1)) (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1)) (g : ∀ p q, D p q ⟶ E (p + s) (q - s)) (β : ∀ p q, E (p - s - 2) (q + s + 1) ⟶ E p q) (hβ : ∀ p q, β p q ≫ f p q ≫ g (p + 2) (q - 1) = 0) (hg : ∀ p q, g p q ≫ f (p + s) (q - s) = 0) (ha : ∀ p q, imageSubobject (f p q) = kernelSubobject (a (p + 2) (q - 1))) (hgg : ∀ p q, imageSubobject (a p q) = kernelSubobject (g (p - 1) (q + 1))) (hβeq : ∀ p q, β p q = (f (p - s - 2) (q + s + 1) ≫ g ((p - s - 2) + 2) ((q + s + 1) - 1)) ≫ eqToHom (by congr 1 <;> omega)) : Nonempty (DerivedCoupleMapData D E a f g β hβ hg)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T151909-L-2288758",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T151909-L-2288758",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -33,9 +33,40 @@
  "stmt_deps": [
   "def-sp-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Instantiate the proved raw induced-map construction with the objects and structure maps of X. Alpha is a real image-factorization composite; forward and backward are constructed by kernel and cokernel universal properties. The incoming boundary is dInto; its equality with the transported incoming differential is definitional, and dInto_comp_d supplies the boundary-in-cycles proof. Obtain maps with their defining commutative equations.",
+   "uses": [
+    "lem-sp-derived-map-construction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exactness of any maps with these equations to get all three image/kernel equalities. The remaining hypotheses are precisely the three original zero and exactness fields of X. Each zero composite follows directly from Mathlib kernelSubobject_factors_iff and imageSubobject_factors_comp_self after rewriting the exactness equality.",
+   "uses": [
+    "lem-sp-derived-map-exactness"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each derived image/kernel equality, rewrite kernelSubobject_factors_iff by that equality and apply imageSubobject_factors_comp_self with the identity. This proves each zero composite directly using Mathlib, with no private helper. Assemble DerivedMaps; its commutative equations match the constructed map equations by definitional reduction and associativity.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-derived-map-construction",
+  "lem-sp-derived-map-exactness",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "M1 stage 3 worker",
+  "date": "2026-10-12",
+  "note": "Lean reduction of derivedMaps_exists into induced-map construction and exactness, following Stacks 011R/0AMJ; the zero composites are proved from subobject equalities. Repair: zero composites are obtained directly from Mathlib kernelSubobject_factors_iff and imageSubobject_factors_comp_self; no duplicate zero-composite helper is declared."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -153,20 +184,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "S3",
+  "reviewer": "COMPILER",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T085338-L-38917",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.BigradedExactCouple.dInto_comp_d",
-   "CategoryTheory.BigradedExactCouple.d_comp_d",
-   "CategoryTheory.BigradedExactCouple.derivedMaps_exists",
-   "CategoryTheory.BigradedExactCouple.g_comp_d"
-  ],
-  "sorry_after": [
-   "CategoryTheory.BigradedExactCouple.derivedMaps_exists"
-  ]
+  "landing": "20261012T151909-L-2288758",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
