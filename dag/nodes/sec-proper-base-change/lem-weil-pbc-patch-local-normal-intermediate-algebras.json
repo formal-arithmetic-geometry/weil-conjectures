@@ -1,0 +1,211 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), lines 45482-45539, implication (1)+(2) => N-1"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), lines 45482-45539, proof of the implication (1)+(2) => N-1 (second half of the proof)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "N-1 local normalization finite intermediate subalgebra normal above maximal ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization at a maximal ideal has finite normalization implies a finite integral intermediate algebra normal at every prime over that maximal ideal",
+   "results": "IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization_maximal, Algebra.intNorm_eq_of_isLocalization, Ring.instFiniteNormalClosure_1, Ring.instFiniteNormalClosure, isIntegrallyClosed_ofLocalizationMaximal, Ring.instIsDedekindDomainNormalClosure, Ideal.spanIntNorm_localization",
+   "date": "2026-10-13",
+   "verdict": "no exact match; tools for individual steps only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.integralClosure",
+   "results": "IsLocalization.integralClosure",
+   "date": "2026-10-13",
+   "verdict": "no exact match; tools for individual steps only"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|normal_locus",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; tools for individual steps only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.IsN1OfLocalCharacterization",
+  "group": "H2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-n1-local-characterization",
+   "place": "second reading: separate local approximation and compactness patching from final normalization identification",
+   "via": [
+    "lem-weil-pbc-n1-local-characterization",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-patch-local-normal-intermediate-algebras",
+ "title": "Patch locally normal finite intermediate algebras",
+ "statement": "Let A be a Noetherian integral domain [def-weil-pbc-noetherian-ring] with fraction field K. Suppose there is a nonzero f in A such that every prime localization of A_f is a normal domain [def-weil-pbc-normal-ring, def-weil-ring-localization-away, def-weil-pbc-localization-at-prime]. Suppose also that for every maximal ideal m of A there is a finite A-subalgebra C of K [def-weil-finitely-generated-module], contained in integralClosure A K [def-weil-pbc-integral-closure], whose prime localizations at primes contracting to m are integrally closed. Then there is a finite A-subalgebra B of K contained in integralClosure A K for which every prime localization B_q is integrally closed.",
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof": [
+  {
+   "text": "For each finite intermediate algebra C contained in the integral closure, C is a Noetherian domain with fraction field K. The hypothesis on prime localizations of A_f makes A_f a normal domain by the local criterion.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "def-weil-ring-localization-away",
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, first paragraph ('Suppose that R ⊂ R' ⊂ K is a finite extension of R contained in K')"
+   }
+  },
+  {
+   "text": "C_f is integral over A_f in K and A_f is integrally closed, so C_f = A_f. In particular it is a normal principal localization of C.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-pbc-normal-ring",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, first paragraph: 'Note that R_f = R'_f since R_f is already normal'"
+   }
+  },
+  {
+   "text": "By openness of the normal locus, the non-normal locus E_C in Spec C is closed. Because C is integral over A, its image Z_C in Spec A is closed. A prime p avoids Z_C if all C_q over p are normal.",
+   "uses": [
+    "lem-weil-pbc-normal-locus-open",
+    "lem-weil-pbc-integral-spec-closed-map",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, first paragraph: 'Hence by Lemma 0332 the set of primes p' with R'_{p'} non-normal is closed in Spec(R'). Since Spec(R') -> Spec(R) is closed the image of this set is closed in Spec(R). For such a ring R' denote Z_{R'} this image.'"
+   }
+  },
+  {
+   "text": "For every maximal m the local-approximation hypothesis supplies a finite intermediate algebra C with m outside Z_C. A prime p is contained in some maximal m, and membership of p in a closed Z_C would imply membership of its specialization m. Thus these open complements cover Spec A. Quasi-compactness gives finitely many C_i whose complements still cover.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, third paragraph: 'As Spec(R) is quasi-compact, the above shows that we can find a finite collection R ⊂ R'_i ⊂ K such that ∩ Z_{R'_i} = ∅'"
+   }
+  },
+  {
+   "text": "Take B to be the subalgebra generated by these finitely many C_i. Their finite sets of module generators together give finitely many integral algebra generators of B. Thus B is finite over A and stays contained in the integral closure.",
+   "uses": [
+    "lem-weil-pbc-finite-of-integral-generators",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, third paragraph: 'Let R' be the subring of K generated by all of these. It is finite over R.'"
+   }
+  },
+  {
+   "text": "For a prime q of B let p be its contraction to A. Choose C_i with p outside Z_C_i, so its contracted prime q_i has normal localization. Since B is integral over C_i, localization at C_i\\q_i is integral over (C_i)_q_i inside the common fraction field K, hence equals (C_i)_q_i. A further localization gives B_q, which is normal. This proves local normality everywhere, without identifying B with the integral closure.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, third paragraph: 'Also Z_{R'} = ∅. Namely, every prime p' lies over a prime p'_i such that (R'_i)_{p'_i} is normal. This implies that R'_{p'} = (R'_i)_{p'_i} is normal too.'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "def-weil-ring-localization-away",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-normal-locus-open",
+  "lem-weil-pbc-integral-spec-closed-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-localization-normal-domain"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PatchLocalNormalIntermediateAlgebras",
+  "file": "lean/Sheaf/RingTheory/PatchLocalNormalIntermediateAlgebras.lean",
+  "declaration": "exists_finite_locally_normal_intermediate_algebra",
+  "statement": "theorem exists_finite_locally_normal_intermediate_algebra (A : Type u) (K : Type v) [CommRing A] [IsDomain A] [IsNoetherianRing A] [Field K] [Algebra A K] [IsFractionRing A K] (hAway : ∃ f : A, f ≠ 0 ∧ ∀ (p : Ideal (Localization.Away f)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (hLocal : ∀ (m : Ideal A) [m.IsMaximal], ∃ B : Subalgebra A K, B ≤ integralClosure A K ∧ Module.Finite A B ∧ ∀ (q : Ideal B) [q.IsPrime], Ideal.comap (algebraMap A B) q = m → IsIntegrallyClosed (Localization.AtPrime q)) : ∃ B : Subalgebra A K, B ≤ integralClosure A K ∧ Module.Finite A B ∧ ∀ (q : Ideal B) [q.IsPrime], IsIntegrallyClosed (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T212207-L-1097300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T212207-L-1097300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

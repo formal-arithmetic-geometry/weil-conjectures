@@ -32,139 +32,35 @@
  ],
  "proof": [
   {
-   "text": "Notation. Let $A'\\subseteq K$ be the integral closure of $A$ in $K$ [def-weil-pbc-integral-closure], a subring of $K$ containing $A$. Since $A_f$ is an integral domain (a subring of $K$, $f\\neq0$) and a normal ring, it is a normal domain by [lem-weil-pbc-normal-domain-of-local-normal] (its last sentence); its fraction field is $K$ (every $a/b\\in K$ is $(a/1)/(b/1)$ with $a/1,b/1\\in A_f$). Let $\\mathcal C$ be the set of subrings $B\\subseteq K$ with $A\\subseteq B\\subseteq A'$ which are finitely generated $A$-modules [def-weil-finitely-generated-module]. Every $B\\in\\mathcal C$ is an integral domain with fraction field $K$ (as $A\\subseteq B\\subseteq K$), is integral over $A$ (as $B\\subseteq A'$), and is a Noetherian ring by [lem-weil-pbc-finite-algebra-noetherian] since $A$ is Noetherian.",
+   "text": "For each maximal ideal use its N-1 hypothesis to construct a finite intermediate algebra normal at all primes above it.",
+   "uses": [
+    "lem-weil-pbc-local-normal-intermediate-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Patch these local approximations using the normal principal open to obtain a finite intermediate algebra B whose every prime localization is integrally closed.",
+   "uses": [
+    "lem-weil-pbc-patch-local-normal-intermediate-algebras"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib's maximal-localization criterion to obtain IsIntegrallyClosed B. If x is integral over A, its monic equation also has coefficients in B; the fraction field of B is K, so integrally closedness puts x in B. Together with B contained in the integral closure this proves equality. Transfer Module.Finite along that equality and unfold IsN1.",
    "uses": [
     "def-weil-pbc-integral-closure",
-    "lem-weil-pbc-normal-domain-of-local-normal",
-    "def-weil-ring-localization-away",
     "def-weil-finitely-generated-module",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "def-weil-pbc-noetherian-ring"
+    "def-weil-pbc-japanese-domain"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, first paragraph ('Suppose that R ⊂ R' ⊂ K is a finite extension of R contained in K')"
-   }
-  },
-  {
-   "text": "For $B\\in\\mathcal C$, $B_f=A_f$ inside $K$. Indeed, apply [lem-weil-pbc-integral-closure-commutes-localization] to the inclusion $A\\to B$ and $S=\\{1,f,f^2,\\dots\\}$: the integral closure of $A$ in $B$ is $B$ (all of $B$ is integral over $A$), so every element of $B_f=S^{-1}B$ is integral over $A_f$. Both are subrings of $K$ ($B_f=\\{b/f^n\\}$, the localization of a subring of the field $K$ at nonzero elements), $A_f\\subseteq B_f\\subseteq K$, and $A_f$ is a normal domain with fraction field $K$ (step 1), i.e. integrally closed in $K$ [def-weil-pbc-normal-ring]; hence $B_f\\subseteq A_f$, so $B_f=A_f$. In particular $B_f$ is a normal domain, and $f\\neq0$ in $B$.",
-   "uses": [
-    "lem-weil-pbc-integral-closure-commutes-localization",
-    "def-weil-pbc-normal-ring",
-    "def-weil-ring-localization-away"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, first paragraph: 'Note that R_f = R'_f since R_f is already normal'"
-   }
-  },
-  {
-   "text": "Definition of $Z_B$. For $B\\in\\mathcal C$, $B$ is a Noetherian domain with $B_f$ a normal domain (steps 1, 2), so by [lem-weil-pbc-normal-locus-open] the set $U_B=\\{\\mathfrak q\\in\\operatorname{Spec}B: B_{\\mathfrak q}\\text{ normal domain}\\}$ is open and its complement $E_B$ is closed in $\\operatorname{Spec}B$. As $B$ is integral over $A$, the map $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, $\\mathfrak q\\mapsto\\mathfrak q\\cap A$, is closed by [lem-weil-pbc-integral-spec-closed-map]; so $Z_B:=\\{\\mathfrak q\\cap A:\\mathfrak q\\in E_B\\}$ is closed in $\\operatorname{Spec}A$. By construction, a prime $\\mathfrak p\\subset A$ is not in $Z_B$ if and only if $B_{\\mathfrak q}$ is a normal domain for every prime $\\mathfrak q\\subset B$ with $\\mathfrak q\\cap A=\\mathfrak p$.",
-   "uses": [
-    "lem-weil-pbc-normal-locus-open",
-    "lem-weil-pbc-integral-spec-closed-map",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, first paragraph: 'Hence by Lemma 0332 the set of primes p' with R'_{p'} non-normal is closed in Spec(R'). Since Spec(R') -> Spec(R) is closed the image of this set is closed in Spec(R). For such a ring R' denote Z_{R'} this image.'"
-   }
-  },
-  {
-   "text": "For every maximal ideal $\\mathfrak m\\subset A$ there is $B\\in\\mathcal C$ with $\\mathfrak m\\notin Z_B$. Let $S=A\\setminus\\mathfrak m$. The fraction field of $A_{\\mathfrak m}$ is $K$, and by hypothesis $A_{\\mathfrak m}$ is N-1 [def-weil-pbc-japanese-domain]: the integral closure $(A_{\\mathfrak m})'$ of $A_{\\mathfrak m}$ in $K$ is generated as an $A_{\\mathfrak m}$-module by finitely many $y_1,\\dots,y_n$. Apply [lem-weil-pbc-integral-closure-commutes-localization] to $A\\to K$ and $S$: since $S^{-1}K=K$ (the elements of $S$ are nonzero, hence units in $K$), $(A_{\\mathfrak m})'=S^{-1}A'=\\{x/s:x\\in A',s\\in S\\}\\subseteq K$. Write $y_j=x_j/s_j$ with $x_j\\in A'$, $s_j\\in S$, and put $B=A[x_1,\\dots,x_n]\\subseteq A'$. By [lem-weil-pbc-finite-of-integral-generators], $B$ is a finitely generated $A$-module, so $B\\in\\mathcal C$. Its localization $S^{-1}B=A_{\\mathfrak m}[x_1,\\dots,x_n]\\subseteq K$ lies in $S^{-1}A'=(A_{\\mathfrak m})'$ and contains each $y_j=x_j\\cdot(1/s_j)$, hence contains the $A_{\\mathfrak m}$-module they generate: $S^{-1}B=(A_{\\mathfrak m})'$. By [lem-weil-pbc-integral-closure-algebraic-extension-normal] (with $P=A_{\\mathfrak m}$, $L=K$), $(A_{\\mathfrak m})'$ is a normal domain with fraction field $K$. Now let $\\mathfrak q\\subset B$ be a prime with $\\mathfrak q\\cap A=\\mathfrak m$. Then $\\mathfrak q\\cap S=\\emptyset$, so $S\\subseteq B\\setminus\\mathfrak q$ and $B_{\\mathfrak q}$ (as a subring of $K$, $\\{b/t:t\\in B\\setminus\\mathfrak q\\}$) is the localization of $S^{-1}B=(A_{\\mathfrak m})'$ at the multiplicative subset of the elements $t/s$, $t\\in B\\setminus\\mathfrak q$, $s\\in S$, which does not contain $0$. By [lem-weil-pbc-localization-normal-domain], $B_{\\mathfrak q}$ is a normal domain. Hence $\\mathfrak m\\notin Z_B$ (step 3).",
-   "uses": [
-    "def-weil-pbc-japanese-domain",
-    "lem-weil-pbc-integral-closure-commutes-localization",
-    "lem-weil-pbc-finite-of-integral-generators",
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-    "lem-weil-pbc-localization-normal-domain",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-module-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, second paragraph ('Pick a maximal ideal m ⊂ R ... With this choice it is clear that m ∉ Z_{R'}')"
-   }
-  },
-  {
-   "text": "Finitely many $B_i$ suffice. For each maximal $\\mathfrak m$ choose $B_{\\mathfrak m}$ as in step 4; $W_{\\mathfrak m}=\\operatorname{Spec}A\\setminus Z_{B_{\\mathfrak m}}$ is open (step 3) and contains $\\mathfrak m$. These opens cover $\\operatorname{Spec}A$: a prime $\\mathfrak p$ lies in some maximal ideal $\\mathfrak m$ by [lem-weil-pbc-proper-ideal-contained-in-maximal]; if $\\mathfrak p\\in Z_{B_{\\mathfrak m}}$, then, $Z_{B_{\\mathfrak m}}$ being closed and the closure of $\\{\\mathfrak p\\}$ in the Zariski topology [def-weil-affine-spectrum] being $V(\\mathfrak p)\\ni\\mathfrak m$, we would get $\\mathfrak m\\in Z_{B_{\\mathfrak m}}$, a contradiction; so $\\mathfrak p\\in W_{\\mathfrak m}$. Since $\\operatorname{Spec}A$ is quasi-compact [lem-weil-pbc-affine-scheme-qcqs], finitely many $W_{\\mathfrak m_1},\\dots,W_{\\mathfrak m_r}$ cover it; with $B_i=B_{\\mathfrak m_i}\\in\\mathcal C$ this means $Z_{B_1}\\cap\\dots\\cap Z_{B_r}=\\emptyset$.",
-   "uses": [
-    "lem-weil-pbc-proper-ideal-contained-in-maximal",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-affine-scheme-qcqs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, third paragraph: 'As Spec(R) is quasi-compact, the above shows that we can find a finite collection R ⊂ R'_i ⊂ K such that ∩ Z_{R'_i} = ∅'"
-   }
-  },
-  {
-   "text": "The compositum. Let $B\\subseteq K$ be the subring generated by $B_1,\\dots,B_r$. Each $B_i$ is generated as an $A$-module, a fortiori as an $A$-algebra, by finitely many elements of $A'$; together these finitely many elements generate $B$ as an $A$-algebra and are integral over $A$, so $B$ is a finitely generated $A$-module by [lem-weil-pbc-finite-of-integral-generators], and $B\\subseteq A'$ since $A'$ is a subring. Thus $B\\in\\mathcal C$ and $B_i\\subseteq B$ for all $i$.",
-   "uses": [
-    "lem-weil-pbc-finite-of-integral-generators",
-    "def-weil-pbc-integral-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, third paragraph: 'Let R' be the subring of K generated by all of these. It is finite over R.'"
-   }
-  },
-  {
-   "text": "$B_{\\mathfrak q}$ is a normal domain for every prime $\\mathfrak q\\subset B$. Let $\\mathfrak p=\\mathfrak q\\cap A$; by step 5 there is $i$ with $\\mathfrak p\\notin Z_{B_i}$. The prime $\\mathfrak q_i=\\mathfrak q\\cap B_i$ of $B_i$ satisfies $\\mathfrak q_i\\cap A=\\mathfrak p$, so $(B_i)_{\\mathfrak q_i}$ is a normal domain (step 3), with fraction field $K$. Let $T=B_i\\setminus\\mathfrak q_i$. Every element of $B$ is integral over $A$, hence over $B_i\\supseteq A$ (the same monic equation), so the integral closure of $B_i$ in $B$ is $B$ and by [lem-weil-pbc-integral-closure-commutes-localization] (for $B_i\\to B$ and $T$) every element of $T^{-1}B$ is integral over $T^{-1}B_i=(B_i)_{\\mathfrak q_i}$. As $(B_i)_{\\mathfrak q_i}\\subseteq T^{-1}B\\subseteq K$ and $(B_i)_{\\mathfrak q_i}$ is integrally closed in $K$ [def-weil-pbc-normal-ring], $T^{-1}B=(B_i)_{\\mathfrak q_i}$ is a normal domain. Since $T\\subseteq B\\setminus\\mathfrak q$, $B_{\\mathfrak q}$ is the localization of $T^{-1}B$ at the multiplicative subset $\\{b/t: b\\in B\\setminus\\mathfrak q,\\ t\\in T\\}$, which does not contain $0$, so $B_{\\mathfrak q}$ is a normal domain by [lem-weil-pbc-localization-normal-domain]. (The source writes this as $R'_{\\mathfrak p'}=(R'_i)_{\\mathfrak p'_i}$; only normality of $B_{\\mathfrak q}$ is used.)",
-   "uses": [
-    "lem-weil-pbc-integral-closure-commutes-localization",
-    "def-weil-pbc-normal-ring",
-    "lem-weil-pbc-localization-normal-domain",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, third paragraph: 'Also Z_{R'} = ∅. Namely, every prime p' lies over a prime p'_i such that (R'_i)_{p'_i} is normal. This implies that R'_{p'} = (R'_i)_{p'_i} is normal too.'"
-   }
-  },
-  {
-   "text": "Conclusion. By step 7, $B_{\\mathfrak n}$ is a normal domain for every maximal ideal $\\mathfrak n$ of the domain $B$, so $B$ is a normal domain [lem-weil-pbc-normal-domain-of-local-normal], i.e. integrally closed in its fraction field $K$. Every $x\\in A'$ is a root of a monic polynomial with coefficients in $A\\subseteq B$, hence $x\\in B$; so $A'\\subseteq B\\subseteq A'$ and $A'=B$ is a finitely generated $A$-module: $A$ is N-1 [def-weil-pbc-japanese-domain].",
-   "uses": [
-    "lem-weil-pbc-normal-domain-of-local-normal",
-    "def-weil-pbc-integral-closure",
-    "def-weil-pbc-japanese-domain",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), proof of (1)+(2) => N-1, algebra.tex lines 45507-45539, third paragraph: 'Hence R' is normal, in other words R' is the integral closure of R in K.'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-local-normal-intermediate-algebra",
+  "lem-weil-pbc-patch-local-normal-intermediate-algebras",
   "def-weil-pbc-integral-closure",
-  "lem-weil-pbc-normal-domain-of-local-normal",
-  "def-weil-ring-localization-away",
-  "def-weil-finitely-generated-module",
-  "lem-weil-pbc-finite-algebra-noetherian",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-integral-closure-commutes-localization",
-  "def-weil-pbc-normal-ring",
-  "lem-weil-pbc-normal-locus-open",
-  "lem-weil-pbc-integral-spec-closed-map",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-affine-spectrum",
   "def-weil-pbc-japanese-domain",
-  "lem-weil-pbc-finite-of-integral-generators",
-  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-  "lem-weil-pbc-localization-normal-domain",
-  "def-weil-pbc-module-localization",
-  "lem-weil-pbc-proper-ideal-contained-in-maximal",
-  "lem-weil-pbc-affine-scheme-qcqs"
+  "def-weil-finitely-generated-module"
  ],
  "proof_origin": {
   "by": "document",
@@ -241,5 +137,15 @@
   "group": "K1",
   "result": "pass",
   "note": "A Noetherian domain (IsDomain, IsNoetherianRing), K = IsFractionRing A K; ∃ f ≠ 0 with A_f = Localization.Away f normal ring in the recorded inline form; ∀ maximal m, IsN1 (A_m) (FractionRing A_m); conclusion IsN1 A K = Module.Finite A (integralClosure A K); root IsN1 from JapaneseDomain; no hollow hypotheses, no universe issue; record-only node diff"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T212207-L-1097300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,144 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), lines 45482-45539, implication (1)+(2) => N-1"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0333 (lemma-characterize-N-1), lines 45482-45539, proof of the implication (1)+(2) => N-1 (second half of the proof)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "N-1 local normalization finite intermediate subalgebra normal above maximal ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization at a maximal ideal has finite normalization implies a finite integral intermediate algebra normal at every prime over that maximal ideal",
+   "results": "IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization_maximal, Algebra.intNorm_eq_of_isLocalization, Ring.instFiniteNormalClosure_1, Ring.instFiniteNormalClosure, isIntegrallyClosed_ofLocalizationMaximal, Ring.instIsDedekindDomainNormalClosure, Ideal.spanIntNorm_localization",
+   "date": "2026-10-13",
+   "verdict": "no exact match; tools for individual steps only"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.integralClosure",
+   "results": "IsLocalization.integralClosure",
+   "date": "2026-10-13",
+   "verdict": "no exact match; tools for individual steps only"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|normal_locus",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean, Mathlib/RingTheory/Localization/Integral.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match; tools for individual steps only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.IsN1OfLocalCharacterization",
+  "group": "H2",
+  "date": "2026-10-13"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-n1-local-characterization",
+   "place": "second reading: separate local approximation and compactness patching from final normalization identification",
+   "via": [
+    "lem-weil-pbc-n1-local-characterization",
+    "lem-weil-pbc-normal-nagata-monogenic-n1",
+    "lem-weil-pbc-nagata-universally-japanese",
+    "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-weil-pbc-etale-colimit-normal-local-domain"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-local-normal-intermediate-algebra",
+ "title": "Finite intermediate algebra normal above one maximal ideal",
+ "statement": "Let A be an integral domain with fraction field K, and let m be a maximal ideal of A. If A_m is N-1 [def-weil-pbc-japanese-domain], there is an A-subalgebra B of K contained in the integral closure of A in K [def-weil-pbc-integral-closure], finite as an A-module [def-weil-finitely-generated-module], such that for every prime q of B contracting to m, B_q is integrally closed [def-weil-pbc-normal-ring]. Here A_m and B_q are prime localizations [def-weil-pbc-localization-at-prime].",
+ "stmt_deps": [
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Identify the fraction field of A_m with K, using the unique fraction-field isomorphism fixing A_m. The N-1 hypothesis gives finitely many module generators of its integral closure. By commutation of integral closure with localization, write each as x_j/s_j with x_j integral over A and s_j outside m.",
+   "uses": [
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set B = A[x_1,...,x_n]. It is finite over A, and contained in the integral closure. After localization outside m it contains all the module generators, so it equals the integral closure of A_m in K, a normal domain.",
+   "uses": [
+    "lem-weil-pbc-finite-of-integral-generators",
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If q contracts to m, all elements of A outside m avoid q. Thus B_q is a further localization of this normal domain, hence is integrally closed.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalNormalIntermediateAlgebra",
+  "file": "lean/Sheaf/RingTheory/LocalNormalIntermediateAlgebra.lean",
+  "declaration": "exists_local_normal_intermediate_algebra",
+  "statement": "theorem exists_local_normal_intermediate_algebra (A : Type u) (K : Type v) [CommRing A] [IsDomain A] [Field K] [Algebra A K] [IsFractionRing A K] (m : Ideal A) [m.IsMaximal] (hm : IsN1 (Localization.AtPrime m) (FractionRing (Localization.AtPrime m))) : ∃ B : Subalgebra A K, B ≤ integralClosure A K ∧ Module.Finite A B ∧ ∀ (q : Ideal B) [q.IsPrime], Ideal.comap (algebraMap A B) q = m → IsIntegrallyClosed (Localization.AtPrime q)",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T212207-L-1097300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T212207-L-1097300",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

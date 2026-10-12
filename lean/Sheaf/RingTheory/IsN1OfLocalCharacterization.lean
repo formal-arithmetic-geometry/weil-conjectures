@@ -10,7 +10,9 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Paper.NormalLocusOpen
+import Sheaf.RingTheory.LocalNormalIntermediateAlgebra
+import Sheaf.RingTheory.PatchLocalNormalIntermediateAlgebras
+import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
 
 /-!
 # A local criterion for N-1 domains
@@ -67,4 +69,17 @@ theorem isN1_of_local_characterization (A : Type u) (K : Type v)
     (hMaximal : ∀ (m : Ideal A) [m.IsMaximal],
       IsN1 (Localization.AtPrime m) (FractionRing (Localization.AtPrime m))) :
     IsN1 A K := by
-  sorry
+  obtain ⟨B, hB, hfinite, hnormal⟩ :=
+    exists_finite_locally_normal_intermediate_algebra A K hAway
+      (fun m _ ↦ exists_local_normal_intermediate_algebra A K m (hMaximal m))
+  have : IsIntegrallyClosed B :=
+    IsIntegrallyClosed.of_localization_maximal (fun q _ _ ↦ hnormal q)
+  have hclosure : integralClosure A K = B := by
+    apply le_antisymm ?_ hB
+    intro x hx
+    obtain ⟨y, hy⟩ := (isIntegrallyClosed_iff K).mp ‹IsIntegrallyClosed B›
+      (((mem_integralClosure_iff A K).mp hx).tower_top (A := B))
+    exact hy ▸ y.property
+  change Module.Finite A (integralClosure A K)
+  rw [hclosure]
+  exact hfinite
