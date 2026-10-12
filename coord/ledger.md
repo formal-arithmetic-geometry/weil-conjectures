@@ -8999,3 +8999,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/M2/Sheaf.Paper.KoszulDifferential (stage 3; reviewer PASS; first push; landing 20261012T184319-L-4010103 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/M2/Sheaf.RingTheory.RegularLocalFibreFinrank (stage 3; reviewer PASS; first push; landing 20261012T184319-L-4010201 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/M3/Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage (stage 3; reviewer PASS; first push; landing 20261012T184319-L-4010339 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/M3/Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian (stage 3; reviewer PASS; after a return; landing 20261012T184320-L-4010447 (proof); batch 20261012T184234; modules 1; new nodes 0)
