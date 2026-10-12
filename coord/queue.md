@@ -58,7 +58,6 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.ConstructibleSheaf.LocallyConstantRetraction` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalGlobalSectionsExact` | 4 | 1 | proof |
-| `Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction` | 5 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleColimitCocone` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ConstructibleFilteredData` | 5 | 1 | proof |
@@ -77,6 +76,7 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.IntegralConstantModulePushforwardColimit` | 6 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.ModuleValuedInjectiveCohomology` | 6 | 1 | proof |
+| `Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.SiteCechMathlibComparison` | 6 | 1 | proof |
 | `Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic` | 6 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections` | 6 | 6 | proof |
@@ -87,9 +87,9 @@ Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement 
 | `Sheaf.Topology.ClosedUnionCohomologyVanishing` | 7 | 1 | proof |
 | `Sheaf.Topology.CohomologyReductionConstantSubsheaves` | 7 | 1 | proof |
 | `Sheaf.Topology.ConstantSubsheafFiniteFiltration` | 7 | 1 | proof |
-| `Sheaf.Topology.IrreducibleNoetherianConstantAcyclic` | 7 | 1 | proof |
 | `Sheaf.Topology.NoetherianOpenClosedCohomologySequence` | 7 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival` | 7 | 3 | proof |
+| `Sheaf.Topology.FlasqueZariskiAcyclic` | 8 | 1 | proof |
 | `Sheaf.Topology.IrreducibleConstantSections` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading` | 8 | 1 | proof |
