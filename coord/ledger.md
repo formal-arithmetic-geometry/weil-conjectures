@@ -8003,3 +8003,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/Y3/Sheaf.Algebra.Homology.StalkTensorComplex (stage 3; reviewer PASS; first push; landing 20261012T135339-L-1702543 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:53 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.EtaleRingDirectImageComparison (stage 3; reviewer PASS; first push; landing 20261012T135339-L-1702688 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:53 L: merged deliver/Y3/Sheaf.AlgebraicGeometry.GabberH0ZariskiLocalData (stage 3; reviewer PASS; first push; landing 20261012T135339-L-1702857 (interface); batch 20261012T135212; modules 4; new nodes 3)
+- 13:53 L: merged deliver/Y3/Sheaf.RingTheory.PopescuMaximalBadQuotient (stage 3; reviewer PASS; first push; landing 20261012T135340-L-1703078 (proof); batch 20261012T135212; modules 1; new nodes 0)
