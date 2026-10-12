@@ -13,6 +13,7 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.CategoryTheory.Functor.OfSequence
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 
 /-! # Infinitesimal fibre cohomology and its canonical stalk maps
 
@@ -102,6 +103,49 @@ theorem formalFibreTransition_ι {X Y : Scheme.{uF}} (f : X ⟶ Y) (y : Y) (n : 
     formalFibreι f y n = formalFibreTransition f y n ≫ formalFibreι f y (n + 1) := by
   simp [formalFibreTransition, formalFibreι]
 
+private theorem eval_factorPow {R : Type uF} [CommRing R] (I : Ideal R)
+    (n : ℕ) (a : AdicCompletion I R) :
+    Ideal.Quotient.factorPow I (Nat.le_succ (n + 1))
+      (AdicCompletion.evalₐ I (n + 2) a) = AdicCompletion.evalₐ I (n + 1) a := by
+  induction a using AdicCompletion.induction_on with
+  | h a =>
+    simp only [AdicCompletion.evalₐ_mk, Ideal.Quotient.factorPow]
+    simpa using AdicCompletion.Ideal.mk_eq_mk I (Nat.le_succ (n + 1)) a
+
+private theorem scalarMap_transition {X Y : Scheme.{uF}} (f : X ⟶ Y) (y : Y)
+    (n : ℕ) (a : (Y.presheaf.stalk y) ⧸ formalFibreIdeal Y y (n + 1)) :
+    (formalFibreTransition f y n).appTop.hom (formalFibreScalarMap f y (n + 1) a) =
+      formalFibreScalarMap f y n
+        (Ideal.Quotient.factorPow (maximalIdeal (Y.presheaf.stalk y))
+          (Nat.le_succ (n + 1)) a) := by
+  let q := CommRingCat.ofHom
+    (Ideal.Quotient.factorPow (maximalIdeal (Y.presheaf.stalk y))
+      (Nat.le_succ (n + 1)))
+  have h : formalFibreTransition f y n ≫
+      pullback.fst (formalFibreBaseMap Y y (n + 1)) f =
+      pullback.fst (formalFibreBaseMap Y y n) f ≫ Spec.map q := by
+    simp [formalFibreTransition, q]
+  have hΓ := congrArg Scheme.Hom.appTop h
+  simp only [Scheme.Hom.comp_appTop] at hΓ
+  have hs := Scheme.ΓSpecIso_inv_naturality q
+  have hc : (Scheme.ΓSpecIso _).inv ≫
+      (pullback.fst (formalFibreBaseMap Y y (n + 1)) f).appTop ≫
+        (formalFibreTransition f y n).appTop =
+      q ≫ (Scheme.ΓSpecIso _).inv ≫
+        (pullback.fst (formalFibreBaseMap Y y n) f).appTop := by
+    rw [hΓ, ← Category.assoc, ← hs, Category.assoc]
+  exact congrArg (fun k ↦ k.hom a) hc
+
+private theorem completedScalarMap_transition {X Y : Scheme.{uF}} (f : X ⟶ Y) (y : Y)
+    (n : ℕ)
+    (a : AdicCompletion (maximalIdeal (Y.presheaf.stalk y)) (Y.presheaf.stalk y)) :
+    (formalFibreTransition f y n).appTop.hom
+      (formalFibreScalarMap f y (n + 1)
+        (AdicCompletion.evalₐ (maximalIdeal (Y.presheaf.stalk y)) (n + 2) a)) =
+      formalFibreScalarMap f y n
+        (AdicCompletion.evalₐ (maximalIdeal (Y.presheaf.stalk y)) (n + 1) a) := by
+  rw [scalarMap_transition, eval_factorPow]
+
 /-- The transition h-map F_(n+1) → j_n* F_n: the adjoint, for the canonical
 tensor-pullback adjunction of i_(n+1), of the unit of i_n followed by the composition
 identification of direct images. It is the adjoint of the canonical identification
@@ -151,6 +195,22 @@ def formalFibreCohomologyTransitionAddHom {X Y : Scheme.{uF}} (f : X ⟶ Y) (y :
   (Scheme.Modules.moduleCohomologyFMap (formalFibreTransition f y n)
     (formalFibreTransitionFMap f y F n) p).hom
 
+private theorem cohomologyFMap_smul {X Y : Scheme.{uF}} (h : X ⟶ Y)
+    {G : Y.Modules} {F : X.Modules} (φ : G ⟶ (Scheme.Modules.pushforward h).obj F)
+    (p : ℕ) (a : Γ(Y, ⊤)) (x : (Y.toRingedSpace.moduleCohomology p).obj G) :
+    (Scheme.Modules.moduleCohomologyFMap h φ p).hom (a • x) =
+      h.appTop.hom a •
+        (show (X.toRingedSpace.moduleCohomology p).obj F from
+          (Scheme.Modules.moduleCohomologyFMap h φ p).hom x) := by
+  obtain ⟨L, hL⟩ :=
+    (Scheme.Modules.moduleCohomologyFMap_basic_properties h (G := G) (F := F) φ p).1
+  have he : L.hom.toAddMonoidHom = (Scheme.Modules.moduleCohomologyFMap h φ p).hom :=
+    congrArg (fun k ↦ k.hom) hL
+  have hs := L.hom.map_smul a x
+  change L.hom (a • x) = h.appTop.hom a • L.hom x at hs
+  rw [← he]
+  exact hs
+
 /-- The cohomology j_n-map is linear over the completed local ring.
 Source: Stacks, Tags 02OD, 01FB (blueprint: def-weil-pbc-formal-fibre-cohomology).
 Proof: maps on cohomology induced by h-maps are linear over global sections of the
@@ -163,7 +223,14 @@ theorem formalFibreCohomologyTransition_smul {X Y : Scheme.{uF}} (f : X ⟶ Y) (
     (x : formalFibreCohomology f y F p (n + 1)) :
     formalFibreCohomologyTransitionAddHom f y F p n (a • x) =
       a • formalFibreCohomologyTransitionAddHom f y F p n x := by
-  sorry
+  have h := cohomologyFMap_smul (formalFibreTransition f y n)
+    (G := (Scheme.Modules.tensorPullback (formalFibreι f y (n + 1))).obj F)
+    (F := (Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F)
+    (formalFibreTransitionFMap f y F n) p
+    (formalFibreScalarMap f y (n + 1)
+      (AdicCompletion.evalₐ (maximalIdeal (Y.presheaf.stalk y)) (n + 2) a)) x
+  rw [completedScalarMap_transition] at h
+  exact h
 
 /-- The transition H^p(X_(n+1), F_(n+1)) → H^p(X_n, F_n): the cohomology j_n-map,
 as a map of modules over the completed local ring.
@@ -245,7 +312,14 @@ theorem formalFibreSectionsTransition_smul {X Y : Scheme.{uF}} (f : X ⟶ Y) (y 
     (x : formalFibreSections f y (n + 1)) :
     formalFibreSectionsTransitionAddHom f y n (a • x) =
       a • formalFibreSectionsTransitionAddHom f y n x := by
-  sorry
+  change Γ(formalFibre f y (n + 1), ⊤) at x
+  change (formalFibreTransition f y n).appTop.hom
+      (formalFibreScalarMap f y (n + 1)
+        (AdicCompletion.evalₐ (maximalIdeal (Y.presheaf.stalk y)) (n + 2) a) * x) =
+    formalFibreScalarMap f y n
+      (AdicCompletion.evalₐ (maximalIdeal (Y.presheaf.stalk y)) (n + 1) a) *
+        (formalFibreTransition f y n).appTop.hom x
+  rw [map_mul, completedScalarMap_transition]
 
 /-- Section pullback Γ(X_(n+1), O) → Γ(X_n, O) along j_n, a completed-ring-linear map.
 Source: Stacks, Tag 02OD, p=0 (blueprint: def-weil-pbc-formal-fibre-cohomology). -/
