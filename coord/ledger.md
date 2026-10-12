@@ -5908,3 +5908,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:36 L: returned deliver/M1/Sheaf.Topology.CohomologyReductionConstantSubsheaves (reviewer RETURN: (the landing tools, head f24743109) the delivery did not land: NOT MERGED Sheaf.Topology.CohomologyReductionConstantSubs)
 - 03:38 L: merged deliver/M2/WeilConjectures.SixFunctors.Etale.Gabber (stage 3; reviewer PASS; first push; landing 20261012T033636-L-1481564 (interface); modules 3; new nodes 2)
 - 03:39 L: merged deliver/N1/Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic (stage 3; reviewer PASS; first push; landing 20261012T033900-L-1493291 (interface); modules 2; new nodes 1)
+- 03:40 L: merged deliver/Z2/def-nagata-separated-descent-stage (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataSeparatedDescentStage AlgebraicGeometry.nagataSeparatedDescentStage)
