@@ -59,6 +59,27 @@ theorem IsUniversalFirstOrderThickening.unique {Z Z₁ Z₂ X : Scheme.{u}}
     (H₂ : IsUniversalFirstOrderThickening h i₂ h₂) :
     (∃! φ : Z₁ ⟶ Z₂, φ ≫ h₂ = h₁ ∧ i₁ ≫ φ = i₂) ∧
       ∀ φ : Z₁ ⟶ Z₂, φ ≫ h₂ = h₁ → i₁ ≫ φ = i₂ → IsIso φ := by
-  sorry
+  have lift₁₂ := H₂.2.2 i₁ h₁ (𝟙 Z) H₁.1 (by simpa using H₁.2.1)
+  have lift₂₁ := H₁.2.2 i₂ h₂ (𝟙 Z) H₂.1 (by simpa using H₂.2.1)
+  have self₁ := H₁.2.2 i₁ h₁ (𝟙 Z) H₁.1 (by simpa using H₁.2.1)
+  have self₂ := H₂.2.2 i₂ h₂ (𝟙 Z) H₂.1 (by simpa using H₂.2.1)
+  constructor
+  · simpa only [Category.id_comp] using lift₁₂
+  · intro φ hφ hiφ
+    obtain ⟨ψ, hψ, _⟩ := lift₂₁
+    have hφψ : φ ≫ ψ = 𝟙 Z₁ := by
+      apply self₁.unique
+      · constructor
+        · rw [Category.assoc, hψ.1, hφ]
+        · rw [← Category.assoc, hiφ, hψ.2]
+      · simp only [Category.id_comp, Category.comp_id, and_self]
+    have hψφ : ψ ≫ φ = 𝟙 Z₂ := by
+      apply self₂.unique
+      · constructor
+        · rw [Category.assoc, hφ, hψ.1]
+        · rw [← Category.assoc, hψ.2, Category.id_comp, hiφ]
+          simp only [Category.id_comp]
+      · simp only [Category.id_comp, Category.comp_id, and_self]
+    exact ⟨ψ, hφψ, hψφ⟩
 
 end AlgebraicGeometry
