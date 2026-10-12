@@ -8142,3 +8142,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/K3/Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative (stage 3; reviewer PASS; first push; landing 20261012T144126-L-2101088 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/K3/Sheaf.RingTheory.FiniteGabberSectionModel (stage 3; reviewer PASS; after a return; landing 20261012T144126-L-2101247 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/K3/Sheaf.RingTheory.HenselizationPairGRingCore (stage 3; reviewer PASS; after a return; landing 20261012T144127-L-2101350 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:41 L: merged deliver/K3/Sheaf.RingTheory.PolynomialCompleteLocalGenericFibre (stage 3; reviewer PASS; first push; landing 20261012T144127-L-2101448 (proof); batch 20261012T144049; modules 1; new nodes 0)
