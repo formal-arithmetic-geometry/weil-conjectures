@@ -1,0 +1,134 @@
+{
+ "id": "lem-sc-relative-differentials-affine-sections",
+ "kind": "statement",
+ "title": "Affine differential sections with the universal derivation formula",
+ "statement": "Let $f:X\\to S$ be a scheme morphism [def-pc-scheme], and let $U\\subset X$ and $V\\subset S$ be affine opens with $U\\subset f^{-1}V$. Set $A=\\Gamma(X,U)$ and $R=\\Gamma(S,V)$, with the ring map induced by $f$. There is an $A$-linear equivalence $e:\\Omega_{A/R}\\to\\Gamma(U,\\Omega_{X/S})$ [def-sc-relative-differential-sheaf], [def-weil-pbc-kahler-differentials] satisfying $e(\\mathrm da)=\\mathrm d_{X/S}a$ for every $a\\in A$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UT (https://stacks.math.columbia.edu/tag/01UT) (read online, 2026-10-13)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the relative differential sheaf along the open immersion of U and factor the restricted scheme morphism through V. The derivation-preserving restriction and base-open isomorphisms relativeDifferentialsRestrictIso and relativeDifferentialsCompIso reduce the problem to the morphism U → V.",
+   "uses": [
+    "def-sc-relative-differential-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UT (read online, 2026-10-13), reduction to the affine schemes"
+   }
+  },
+  {
+   "text": "Identify U and V with the spectra of A and R. The equality IsAffineOpen.SpecMap_appLE_fromSpec identifies the morphism with Spec of the section ring map. Apply the proved relativeDifferentialsSpecΓIso to identify differential sections with Ω[A/R]. Transport the scalar action through the canonical affine section-ring isomorphisms. The formula relativeDifferentialsSpecΓHom_d, together with relativeDifferentialsToRestrict_app_d and the definition of relativeDifferentialsCompIso, identifies the inverse equivalence on each da with the original sheaf differential. This gives the stated A-linear equivalence and formula.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UT (read online, 2026-10-13)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01UT (https://stacks.math.columbia.edu/tag/01UT)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On affine opens of schemes relative differential sheaf sections are Kahler differentials of the section rings compatible with the universal derivation",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of relative differential sheaf on arbitrary affine opens are Kahler differentials of the section ring preserving the universal derivation",
+   "results": "PresheafOfModules.DifferentialsConstruction.derivation', PresheafOfModules.DifferentialsConstruction.isUniversal', PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d, PresheafOfModules.HasDifferentials.exists_universal_derivation, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, CommRingCat.KaehlerDifferential.d, CommRingCat.KaehlerDifferential",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level match; related ring or presheaf results only"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials.*(Spec|Restrict|Comp)|conormal",
+   "results": "No matching declarations",
+   "date": "2026-10-13",
+   "verdict": "No exact scheme-level match; related ring or presheaf results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DiagonalConormalAffineComparison",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, diagonal conormal identification: the conormal sheaf of Delta is Omega_{X/S}; Bijectivity of the normalized diagonal comparison on an affine chart; Affine differential sections with the universal derivation formula",
+   "via": [
+    "lem-sc-diagonal-conormal-affine-comparison",
+    "lem-sc-smooth-proper-diagonal-conormal-differentials",
+    "lem-sc-smooth-proper-relative-dualizing-general"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDifferentialsAffineSections.lean",
+  "declaration": "AlgebraicGeometry.relativeDifferentials_affine_sections",
+  "statement": "theorem relativeDifferentials_affine_sections (f : X ⟶ S) (U : X.affineOpens) (V : S.affineOpens) (hUV : U.1 ≤ f ⁻¹ᵁ V.1) : ∃ e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) ≃ₗ[Γ(X, U.1)] Γ(f.relativeDifferentials, U.1), ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) = f.relativeDifferentialsDerivation.d (X := op U.1) a",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T173901-L-3305441",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T173901-L-3305441",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
