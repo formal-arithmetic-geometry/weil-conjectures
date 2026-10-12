@@ -45,6 +45,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ArtinSchreier
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
@@ -88,6 +89,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.PushforwardZero
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 public import WeilConjectures.AlgebraicGeometry.CompactificationDimension
+public import WeilConjectures.AlgebraicGeometry.CoordinateGenericFibre
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Curve.AffineBaseChange
@@ -646,6 +648,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquareBraided
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
+public import WeilConjectures.CategoryTheory.Monoidal.Rigid.ToIhomIhomTwist
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
 public import WeilConjectures.CategoryTheory.Monoidal.TensorInverse
 public import WeilConjectures.CategoryTheory.MorphismProperty.IndSpreads
