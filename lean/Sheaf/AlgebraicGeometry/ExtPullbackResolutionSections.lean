@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.SheafHExtResolutionSectionsIso
-import Sheaf.AlgebraicGeometry.ExtPullbackHomComplex
-import Sheaf.AlgebraicGeometry.ConstantSheafPullbackTranspose
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Pullback computed on a comparison of injective resolutions -/
 
@@ -16,17 +16,6 @@ universe u
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Scheme Etale
-
-private lemma sectionsEquiv_naturality (X : Scheme.{u})
-    {F F' : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (f : F ⟶ F')
-    (a : SheafPullbackResolution.ZSheaf X ⟶ F) :
-    SheafPullbackResolution.sectionsEquiv X F' (a ≫ f) =
-      (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).map f
-        (SheafPullbackResolution.sectionsEquiv X F a) := by
-  dsimp only [SheafPullbackResolution.sectionsEquiv, AddEquiv.trans_apply,
-    Adjunction.homAddEquiv_apply]
-  rw [Adjunction.homEquiv_naturality_right]
-  rfl
 
 /-- Ext pullback is the homology map of the unit section map followed by the lift.
 Source: Stacks Project, Tag 01F8, equations 01F9 and 01FA; site version Tag 08J6.
@@ -70,62 +59,6 @@ theorem extPullback_resolution_sections
         HomologicalComplex.homologyMap b (q : ℤ) =
       AddCommGrpCat.ofHom (cohomologyMap g' G q) ≫
         (SheafPullbackResolution.extSectionsIso X' (L.obj G) q).hom := by
-  let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
-  let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1}
-  let L := upperStar AddCommGrpCat.{u + 1} g'
-  let η : Γ ⟶ L ⋙ Γ' :=
-    (Functor.leftUnitor Γ).inv ≫
-      Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').unit Γ ≫
-      (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g').hom
-  let R := injectiveResolution G
-  let R' := injectiveResolution (L.obj G)
-  let α := (upperStarConstantSheafIso AddCommGrpCat.{u + 1} g').inv.app
-    (AddCommGrpCat.of (ULift.{u + 1} ℤ))
-  let c := SheafPullbackResolution.homPullbackMap L α R.cochainComplex R'.cochainComplex φ
-  let b := (NatTrans.mapHomologicalComplex η (.up ℤ)).app R.cochainComplex ≫
-    (Γ'.mapHomologicalComplex (.up ℤ)).map φ
-  have htranspose (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-      (a : SheafPullbackResolution.ZSheaf X ⟶ F) :
-      SheafPullbackResolution.sectionsEquiv X' (L.obj F) (α ≫ L.map a) =
-        (η.app F) (SheafPullbackResolution.sectionsEquiv X F a) := by
-    have h := constantSheaf_pullback_transpose g'
-      (AddCommGrpCat.of (ULift.{u + 1} ℤ)) F a
-    dsimp only [SheafPullbackResolution.sectionsEquiv, AddEquiv.trans_apply,
-      Adjunction.homAddEquiv_apply]
-    rw [h]
-    rfl
-  have hc : c ≫ (SheafPullbackResolution.complexSectionsIso X' R'.cochainComplex).hom =
-      (SheafPullbackResolution.complexSectionsIso X R.cochainComplex).hom ≫ b := by
-    ext n a
-    obtain ⟨a, rfl⟩ :=
-      CochainComplex.HomComplex.Cochain.fromSingleMk_surjective a n (zero_add n)
-    change SheafPullbackResolution.sectionsEquiv X' (R'.cochainComplex.X n)
-        (CochainComplex.HomComplex.Cochain.fromSingleEquiv (zero_add n)
-          (CochainComplex.HomComplex.Cochain.fromSingleMk
-            (α ≫ L.map (CochainComplex.HomComplex.Cochain.fromSingleEquiv (zero_add n)
-              (CochainComplex.HomComplex.Cochain.fromSingleMk a (zero_add n))) ≫ φ.f n)
-            (zero_add n))) =
-      Γ'.map (φ.f n) ((η.app (R.cochainComplex.X n))
-        (SheafPullbackResolution.sectionsEquiv X (R.cochainComplex.X n)
-          (CochainComplex.HomComplex.Cochain.fromSingleEquiv (zero_add n)
-            (CochainComplex.HomComplex.Cochain.fromSingleMk a (zero_add n)))))
-    simp only [CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk]
-    rw [← Category.assoc, sectionsEquiv_naturality, htranspose]
-    rfl
-  have hh := congrArg
-    ((HomologicalComplex.homologyFunctor AddCommGrpCat (.up ℤ) (q : ℤ)).map) hc
-  simp only [HomologicalComplex.homologyFunctor_map,
-    HomologicalComplex.homologyMap_comp] at hh
-  dsimp only [b] at hh
-  have he := SheafPullbackResolution.extPullback_homComplex g' G q φ hφ
-  dsimp only [SheafPullbackResolution.extSectionsIso,
-    SheafPullbackResolution.classSectionsIso, Iso.trans_hom, Iso.symm_hom,
-    Functor.mapIso_hom]
-  simp only [HomologicalComplex.homologyFunctor_map, Category.assoc]
-  rw [← hh]
-  simpa only [Category.assoc] using congrArg
-    (fun f ↦ f ≫ HomologicalComplex.homologyMap
-      (SheafPullbackResolution.complexSectionsIso X' R'.cochainComplex).hom (q : ℤ)) he
+  sorry
 
 end AlgebraicGeometry

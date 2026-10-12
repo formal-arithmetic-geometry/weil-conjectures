@@ -1,152 +1,156 @@
 {
- "id": "lem-weil-pbc-ext-pullback-resolution-sections",
- "kind": "statement",
- "title": "Ext pullback map on chosen resolution sections",
- "statement": "Let $g:X^{\\prime}\\to X$ be a morphism of schemes [def-pc-scheme], $G$ an abelian sheaf on $X_{\\mathrm{et}}$ [def-weil-pbc-abelian-etale-sheaves], and $q\\in\\mathbb N$. Let $L=g^{-1}$ [def-weil-pbc-derived-inverse-image], $\\Gamma=\\Gamma(X,-)$, and $\\Gamma^{\\prime}=\\Gamma(X^{\\prime},-)$ [def-weil-pbc-etale-cohomology]. Write $s:G[0]\\to I$ and $t:(LG)[0]\\to J$ for the chosen injective resolutions [def-sp-injective-resolutions]. Let $\\varphi:LI\\to J$ be a chain map with $L(s);\\varphi$ homotopic to the composite of the canonical single-complex isomorphism $L(G[0])\\cong (LG)[0]$ and $t$. Let $\\eta:\\Gamma\\to L\\Gamma^{\\prime}$ be the unit section map followed by $\\Gamma(X,g_*(-))\\cong\\Gamma(X^{\\prime},-)$, and let $b=\\eta(I);\\Gamma^{\\prime}(\\varphi)$. For the explicitly defined comparisons $a$ of [def-weil-pbc-ext-resolution-sections-iso], we have $a_{X,G,q};H^q(b)=\\operatorname{cohomologyMap}(g,G,q);a_{X^{\\prime},LG,q}$ [def-weil-pbc-cohomology-pullback].",
- "source": {
-  "document": "https://stacks.math.columbia.edu/tag/01F8",
-  "place": "cohomology.tex lemma-functoriality; equations equation-functorial-derived (01F9) and equation-functorial (01FA); derived.tex lemma-compute-ext-resolutions (06XR). The site analogue uses sites-cohomology.tex remark-before-Leray (08J6)."
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-etale-cohomology",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-derived-inverse-image",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-ext-resolution-sections-iso"
- ],
- "proof": [
-  {
-   "text": "Compute pullback on the Hom complexes of the two chosen resolutions, before evaluating at 1.",
-   "uses": [
-    "lem-weil-pbc-ext-pullback-hom-complex"
-   ],
-   "elementary": false
+  "id": "lem-weil-pbc-ext-pullback-resolution-sections",
+  "kind": "statement",
+  "title": "Ext pullback map on chosen resolution sections",
+  "statement": "Let $g:X^{\\prime}\\to X$ be a morphism of schemes [def-pc-scheme], $G$ an abelian sheaf on $X_{\\mathrm{et}}$ [def-weil-pbc-abelian-etale-sheaves], and $q\\in\\mathbb N$. Let $L=g^{-1}$ [def-weil-pbc-derived-inverse-image], $\\Gamma=\\Gamma(X,-)$, and $\\Gamma^{\\prime}=\\Gamma(X^{\\prime},-)$ [def-weil-pbc-etale-cohomology]. Write $s:G[0]\\to I$ and $t:(LG)[0]\\to J$ for the chosen injective resolutions [def-sp-injective-resolutions]. Let $\\varphi:LI\\to J$ be a chain map with $L(s);\\varphi$ homotopic to the composite of the canonical single-complex isomorphism $L(G[0])\\cong (LG)[0]$ and $t$. Let $\\eta:\\Gamma\\to L\\Gamma^{\\prime}$ be the unit section map followed by $\\Gamma(X,g_*(-))\\cong\\Gamma(X^{\\prime},-)$, and let $b=\\eta(I);\\Gamma^{\\prime}(\\varphi)$. For the explicitly defined comparisons $a$ of [def-weil-pbc-ext-resolution-sections-iso], we have $a_{X,G,q};H^q(b)=\\operatorname{cohomologyMap}(g,G,q);a_{X^{\\prime},LG,q}$ [def-weil-pbc-cohomology-pullback].",
+  "source": {
+    "document": "https://stacks.math.columbia.edu/tag/01F8",
+    "place": "cohomology.tex lemma-functoriality; equations equation-functorial-derived (01F9) and equation-functorial (01FA); derived.tex lemma-compute-ext-resolutions (06XR). The site analogue uses sites-cohomology.tex remark-before-Leray (08J6)."
   },
-  {
-   "text": "Use the transpose formula for the constant-sheaf comparison degreewise. Naturality of evaluation in the lift gives a commuting square of explicit chain maps. Apply the homology functor and expand extSectionsIso to combine that square with the Ext computation.",
-   "uses": [
-    "lem-weil-pbc-constant-sheaf-pullback-transpose",
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-weil-pbc-abelian-etale-sheaves",
+    "def-weil-pbc-etale-cohomology",
+    "def-sp-injective-resolutions",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-cohomology-pullback",
     "def-weil-pbc-ext-resolution-sections-iso"
-   ],
-   "elementary": true
+  ],
+  "proof": [
+    {
+      "text": "Represent an Ext class by a cocycle into I using Ext computed by an injective resolution. Apply exact inverse image and precompose the constant-integer-sheaf comparison, then postcompose with the supplied lift φ. Its augmentation homotopy identifies this cocycle with the Ext pullback in the derived category, because the target J is K-injective.",
+      "uses": [
+        "lem-weil-pbc-ext-via-injective-resolution",
+        "lem-weil-pbc-kinjective-hom-derived",
+        "prop-weil-pbc-inverse-image-exact",
+        "def-weil-pbc-cohomology-pullback"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Evaluation at 1 identifies the inverse-image cocycle with the section unit η(I). Evaluation is natural under φ by the constant-sheaf/global-sections adjunction, so this is precisely b on sections. The evaluation chain isomorphism preserves differentials and boundaries. Descend the equality of cocycles to homology; the explicit a is the composite of exactly these equivalences.",
+      "uses": [
+        "def-weil-pbc-ext-resolution-sections-iso"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-cohomology-pullback",
+    "def-weil-pbc-ext-resolution-sections-iso",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-inverse-image-exact"
+  ],
+  "proof_origin": {
+    "by": "X2 stage-3 worker",
+    "document": "https://stacks.math.columbia.edu/tag/01F8",
+    "place": "equations 01F9 and 01FA",
+    "note": "strictly smaller resolution-level interface"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Ext cohomology computed by an injective resolution compatibility with exact functor pullback",
+      "date": "2026-10-12",
+      "results": "CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
+      "verdict": "Candidates inspected; no pullback comparison."
+    },
+    {
+      "tool": "grep",
+      "query": "rightDerivedBaseChange|extAddEquivCohomologyClass",
+      "date": "2026-10-12",
+      "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+      "verdict": "Candidates inspected; no pullback comparison."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "classical right derived base change computed by comparison of injective resolutions",
+      "date": "2026-10-12",
+      "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+      "verdict": "Candidates inspected; no pullback comparison."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Ext sheaf cohomology pullback computed on injective resolutions",
+      "date": "2026-10-12",
+      "results": "service unavailable: Internal Server Error",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "grep",
+      "query": "mapExactFunctor|extMk_comp|rightDerivedFunctorPlusBaseChange_fac",
+      "date": "2026-10-12",
+      "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+      "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+    },
+    {
+      "tool": "loogle",
+      "query": "InjectiveResolution.isoRightDerivedObjCochainComplex",
+      "date": "2026-10-12",
+      "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObjCochainComplex'",
+      "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "derived natural transformation evaluated on injective complexes via unit compatibility",
+      "date": "2026-10-12",
+      "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+      "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.SheafHRightDerivedPullback",
+    "date": "2026-10-12",
+    "group": "X2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-weil-pbc-strict-local-exchange",
+      "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; identify the cohomology pullback map.",
+      "via": [
+        "lem-weil-pbc-sheafH-right-derived-pullback",
+        "lem-weil-pbc-abelian-derived-global-ext-pullback",
+        "lem-weil-pbc-strict-local-abelian-total-exchange",
+        "lem-weil-pbc-strict-local-total-cohomology-exchange"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections",
+    "file": "lean/Sheaf/AlgebraicGeometry/ExtPullbackResolutionSections.lean",
+    "declaration": "AlgebraicGeometry.extPullback_resolution_sections",
+    "statement": "theorem extPullback_resolution_sections {X X' : Scheme.{u}} (g' : X' ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (φ : ((upperStar AddCommGrpCat.{u + 1} g').mapHomologicalComplex (.up ℤ)).obj (injectiveResolution G).cochainComplex ⟶ (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g').obj G)).cochainComplex) (hφ : Nonempty (Homotopy (((upperStar AddCommGrpCat.{u + 1} g').mapHomologicalComplex (.up ℤ)).map (injectiveResolution G).ι' ≫ φ) ((HomologicalComplex.singleMapHomologicalComplex (upperStar AddCommGrpCat.{u + 1} g') (.up ℤ) 0).hom.app G ≫ (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g').obj G)).ι'))) : let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1} let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1} let L := upperStar AddCommGrpCat.{u + 1} g' let η : Γ ⟶ L ⋙ Γ' := (Functor.leftUnitor Γ).inv ≫ Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').unit Γ ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g').hom let b := (NatTrans.mapHomologicalComplex η (.up ℤ)).app (injectiveResolution G).cochainComplex ≫ (Γ'.mapHomologicalComplex (.up ℤ)).map φ (SheafPullbackResolution.extSectionsIso X G q).hom ≫ HomologicalComplex.homologyMap b (q : ℤ) = AddCommGrpCat.ofHom (cohomologyMap g' G q) ≫ (SheafPullbackResolution.extSectionsIso X' (L.obj G) q).hom",
+    "branch": "sheaf-dag",
+    "by": "X2",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "X2",
+    "result": "pass",
+    "landing": "20261012T144159-L-2112121",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "X2",
+    "result": "pass",
+    "landing": "20261012T144159-L-2112121",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "lem-weil-pbc-ext-pullback-hom-complex",
-  "lem-weil-pbc-constant-sheaf-pullback-transpose",
-  "def-weil-pbc-ext-resolution-sections-iso"
- ],
- "proof_origin": {
-  "by": "E1 stage-3 worker",
-  "document": "https://stacks.math.columbia.edu/tag/01F8",
-  "place": "equations 01F9 and 01FA",
-  "note": "Compiled reduction: explicit chain-map square and homology functoriality, using the unevaluated Ext comparison and the proved adjunction transpose."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Ext cohomology computed by an injective resolution compatibility with exact functor pullback",
-   "date": "2026-10-12",
-   "results": "CategoryTheory.InjectiveResolution.extMk, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.extEquivCohomologyClass, CategoryTheory.InjectiveResolution.extMk_surjective, CategoryTheory.InjectiveResolution.extMk_comp_mk₀, CategoryTheory.InjectiveResolution.mk₀_comp_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom",
-   "verdict": "Candidates inspected; no pullback comparison."
-  },
-  {
-   "tool": "grep",
-   "query": "rightDerivedBaseChange|extAddEquivCohomologyClass",
-   "date": "2026-10-12",
-   "results": "Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Injective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean, Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
-   "verdict": "Candidates inspected; no pullback comparison."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "classical right derived base change computed by comparison of injective resolutions",
-   "date": "2026-10-12",
-   "results": "CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
-   "verdict": "Candidates inspected; no pullback comparison."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Ext sheaf cohomology pullback computed on injective resolutions",
-   "date": "2026-10-12",
-   "results": "service unavailable: Internal Server Error",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "grep",
-   "query": "mapExactFunctor|extMk_comp|rightDerivedFunctorPlusBaseChange_fac",
-   "date": "2026-10-12",
-   "results": "Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
-   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
-  },
-  {
-   "tool": "loogle",
-   "query": "InjectiveResolution.isoRightDerivedObjCochainComplex",
-   "date": "2026-10-12",
-   "results": "loogle: unknown identifier 'InjectiveResolution.isoRightDerivedObjCochainComplex'",
-   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "derived natural transformation evaluated on injective complexes via unit compatibility",
-   "date": "2026-10-12",
-   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero'; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
-   "verdict": "Second reading: no direct cross-scheme resolution map formula; same-category naturality candidates do not close either computation."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.SheafHRightDerivedPullback",
-  "date": "2026-10-12",
-  "group": "X2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "prop-weil-pbc-strict-local-exchange",
-   "place": "Proof: compute the stalk of exchange termwise before closed-fibre comparison; identify the cohomology pullback map.",
-   "via": [
-    "lem-weil-pbc-sheafH-right-derived-pullback",
-    "lem-weil-pbc-abelian-derived-global-ext-pullback",
-    "lem-weil-pbc-strict-local-abelian-total-exchange",
-    "lem-weil-pbc-strict-local-total-cohomology-exchange"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ExtPullbackResolutionSections",
-  "file": "lean/Sheaf/AlgebraicGeometry/ExtPullbackResolutionSections.lean",
-  "declaration": "AlgebraicGeometry.extPullback_resolution_sections",
-  "statement": "theorem extPullback_resolution_sections {X X' : Scheme.{u}} (g' : X' ⟶ X) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) (φ : ((upperStar AddCommGrpCat.{u + 1} g').mapHomologicalComplex (.up ℤ)).obj (injectiveResolution G).cochainComplex ⟶ (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g').obj G)).cochainComplex) (hφ : Nonempty (Homotopy (((upperStar AddCommGrpCat.{u + 1} g').mapHomologicalComplex (.up ℤ)).map (injectiveResolution G).ι' ≫ φ) ((HomologicalComplex.singleMapHomologicalComplex (upperStar AddCommGrpCat.{u + 1} g') (.up ℤ) 0).hom.app G ≫ (injectiveResolution ((upperStar AddCommGrpCat.{u + 1} g').obj G)).ι'))) : let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1} let Γ' := Sheaf.Γ X'.smallEtaleTopology AddCommGrpCat.{u + 1} let L := upperStar AddCommGrpCat.{u + 1} g' let η : Γ ⟶ L ⋙ Γ' := (Functor.leftUnitor Γ).inv ≫ Functor.whiskerRight (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g').unit Γ ≫ (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft L (lowerStarCompGlobalSectionsIso AddCommGrpCat.{u + 1} g').hom let b := (NatTrans.mapHomologicalComplex η (.up ℤ)).app (injectiveResolution G).cochainComplex ≫ (Γ'.mapHomologicalComplex (.up ℤ)).map φ (SheafPullbackResolution.extSectionsIso X G q).hom ≫ HomologicalComplex.homologyMap b (q : ℤ) = AddCommGrpCat.ofHom (cohomologyMap g' G q) ≫ (SheafPullbackResolution.extSectionsIso X' (L.obj G) q).hom",
-  "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
-  "result": "pass",
-  "landing": "20261012T144159-L-2112121",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
-  "result": "pass",
-  "landing": "20261012T165509-L-2932421",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

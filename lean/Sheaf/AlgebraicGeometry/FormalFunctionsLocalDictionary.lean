@@ -10,10 +10,20 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison
-import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientComparison
+import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSections
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.HigherDirectImagePresheaf
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # The geometric dictionary for stalkwise formal functions
@@ -86,32 +96,6 @@ theorem formalFunctions_local_dictionary {X Y : Scheme.{u}} (f : X ⟶ Y) [IsPro
         ∀ (n : ℕ) (z : formalFunctionsStalk f y F p),
           κ n z = (b.hom.app (op n))
             ((C.map (formalModuleQuotientπ J (n + 1) F')) (a z)) := by
-  dsimp
-  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
-  obtain ⟨hq, ht⟩ :=
-    (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hF
-  have : F.IsQuasicoherent := hq
-  have : F.IsFiniteType := ht
-  let g := pullback.snd (Y.fromSpecStalk y) f
-  let F' := (Scheme.Modules.tensorPullback g).obj F
-  have : IsLocallyNoetherian (pullback (Y.fromSpecStalk y) f) :=
-    LocallyOfFiniteType.isLocallyNoetherian (pullback.fst (Y.fromSpecStalk y) f)
-  let e : Scheme.Modules.tensorPullback g ≅ Scheme.Modules.pullback g :=
-    (Scheme.Modules.nonempty_tensorPullbackAdjunction g).some.leftAdjointUniq
-      (Scheme.Modules.pullbackPushforwardAdjunction g)
-  have hq' : F'.IsQuasicoherent :=
-    (SheafOfModules.isQuasicoherent
-      (pullback (Y.fromSpecStalk y) f).ringCatSheaf).prop_of_iso (e.app F).symm (by infer_instance)
-  have ht' : F'.IsFiniteType :=
-    (Scheme.Modules.tensorPullback_isFiniteType _ _ g F).1
-  have hcoh := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType
-    (pullback (Y.fromSpecStalk y) f) F').mpr ⟨hq', ht'⟩
-  refine ⟨hcoh, ?_⟩
-  obtain ⟨a, ha⟩ := formalFunctions_local_stalk_comparison f F hF y p
-  refine ⟨a, ?_⟩
-  obtain ⟨b, r, heq, hr⟩ := formalFunctions_finite_quotient_comparison f F hF y p
-  refine ⟨b, fun n ↦ (r n).comp a.toLinearMap, hr a.toLinearMap ha, ?_⟩
-  intro n z
-  exact heq n (a z)
+  sorry
 
 end AlgebraicGeometry

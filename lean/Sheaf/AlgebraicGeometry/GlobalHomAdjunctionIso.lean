@@ -13,7 +13,8 @@ public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.DQCoheratorDerivedGlobalSections
 import Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction
-import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
 
 /-!
 Canonical adjunction and tensor data are pinned by their characterising equations.
@@ -176,103 +177,6 @@ private theorem lerayNaturality {U U' : C} {V V' : D} (u : U ⟶ U') (v : V ⟶ 
 
 end LerayNaturality
 
-/-- Derived Leray from acyclicity and an exact change of scalar category.
-Source: Stacks, Tag 0D5T (blueprint: lem-pc-global-hom-adjunction). -/
-private theorem lerayCore
-    {C D B E : Type*} [Category* C] [Category* D] [Category* B] [Category* E]
-    [Abelian C] [Abelian D] [Abelian B] [Abelian E]
-    [HasDerivedCategory C] [HasDerivedCategory D]
-    [HasDerivedCategory B] [HasDerivedCategory E]
-    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
-    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ B) (S : B ⥤ E)
-    [F.Additive] [G.Additive] [H.Additive] [S.Additive]
-    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
-    (e : F ⋙ G ≅ H ⋙ S)
-    (h : ∀ (I : CochainComplex C ℤ) [I.IsKInjective],
-      IsIso (G.rightDerivedFunctorUnit.app
-        ((F.mapHomotopyCategory (.up ℤ)).obj
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj I)))) :
-    ∃ c : F.rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅
-        H.rightDerivedFunctor ⋙ S.mapDerivedCategory,
-      ∀ K : HomotopyCategory C (.up ℤ),
-        G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K) ≫
-            G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app K) ≫
-            c.hom.app (DerivedCategory.Qh.obj K) =
-          DerivedCategory.Qh.map
-            ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K ≫
-              (Functor.mapHomotopyCategoryCompIso e.symm (.up ℤ)).inv.app K) ≫
-            S.mapDerivedCategoryFactorsh.inv.app ((H.mapHomotopyCategory (.up ℤ)).obj K) ≫
-            S.mapDerivedCategory.map (H.rightDerivedFunctorUnit.app K) := by
-  let α : (F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
-      DerivedCategory.Qh ⋙ (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) :=
-    Functor.whiskerRight
-        (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv
-          DerivedCategory.Qh ≫
-      (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft (F.mapHomotopyCategory (.up ℤ)) G.rightDerivedFunctorUnit ≫
-      (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight F.rightDerivedFunctorUnit G.rightDerivedFunctor ≫
-      (Functor.associator _ _ _).hom
-  let β : (F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶
-      DerivedCategory.Qh ⋙ (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) :=
-    Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso e.symm (.up ℤ)).inv
-        DerivedCategory.Qh ≫
-      (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft (H.mapHomotopyCategory (.up ℤ))
-        S.mapDerivedCategoryFactorsh.inv ≫
-      (Functor.associator _ _ _).inv ≫
-      Functor.whiskerRight H.rightDerivedFunctorUnit S.mapDerivedCategory ≫
-      (Functor.associator _ _ _).hom
-  have hα : (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).IsRightDerivedFunctor α
-      (HomotopyCategory.quasiIso C (.up ℤ)) := by
-    refine (HomotopyCategory.KInjectives.localizerMorphism_derives
-      ((F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso
-        _ (fun J ↦ ?_)
-    obtain ⟨I, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective J
-    change IsIso (α.app ((HomotopyCategory.quotient C (.up ℤ)).obj I))
-    have h₁ : IsIso (F.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient C (.up ℤ)).obj I)) := inferInstance
-    have h₂ := h I
-    dsimp [α]
-    infer_instance
-  have hβ : (H.rightDerivedFunctor ⋙ S.mapDerivedCategory).IsRightDerivedFunctor β
-      (HomotopyCategory.quasiIso C (.up ℤ)) := by
-    refine (HomotopyCategory.KInjectives.localizerMorphism_derives
-      ((F ⋙ G).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)).isRightDerivedFunctor_of_isIso
-        _ (fun J ↦ ?_)
-    obtain ⟨I, _, rfl⟩ := HomotopyCategory.KInjectives.mk_surjective J
-    change IsIso (β.app ((HomotopyCategory.quotient C (.up ℤ)).obj I))
-    have h₁ : IsIso (H.rightDerivedFunctorUnit.app
-      ((HomotopyCategory.quotient C (.up ℤ)).obj I)) := inferInstance
-    dsimp [β]
-    infer_instance
-  let δ := (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor).rightDerivedDesc α
-    (HomotopyCategory.quasiIso C (.up ℤ))
-    (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) β
-  have : IsIso δ :=
-    (Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc
-      (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) α
-      (HomotopyCategory.quasiIso C (.up ℤ))
-      (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) β).mp hβ
-  refine ⟨asIso δ, ?_⟩
-  intro K
-  have hd := Functor.rightDerived_fac_app
-    (F.rightDerivedFunctor ⋙ G.rightDerivedFunctor) α
-    (HomotopyCategory.quasiIso C (.up ℤ))
-    (H.rightDerivedFunctor ⋙ S.mapDerivedCategory) β K
-  simp only [α, β, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Category.id_comp, Category.comp_id] at hd
-  have hd' := congrArg
-    (fun z ↦ DerivedCategory.Qh.map
-      ((Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) ≫ z) hd
-  simp only [Category.assoc] at hd'
-  rw [← Category.assoc, ← DerivedCategory.Qh.map_comp,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at hd'
-  simpa only [δ, α, β, asIso_hom,
-    CategoryTheory.Functor.map_comp, Category.assoc] using hd'
-
-
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
@@ -330,18 +234,7 @@ theorem exists_schemeGlobalSectionsDirectImageIso {X Y : Scheme.{u}} (f : X ⟶ 
           (schemeGlobalScalarRestriction f).map
             ((RingedSpace.globalSectionsFunctor X.toRingedSpace).rightDerivedFunctorUnit.app K))
       := by
-  let F := RingedSpace.moduleDirectImage f.toLRSHom.toShHom
-  let G := RingedSpace.globalSectionsFunctor Y.toRingedSpace
-  let H := RingedSpace.globalSectionsFunctor X.toRingedSpace
-  let S := ModuleCat.restrictScalars.{u}
-    (R := (moduleRings Y.toRingedSpace).obj.obj (op ⊤))
-    (S := (moduleRings X.toRingedSpace).obj.obj (op ⊤)) f.appTop.hom
-  let c₀ : F ⋙ G ≅ H ⋙ S := Iso.refl _
-  obtain ⟨c, hc⟩ := lerayCore F G H S c₀
-    (fun I ↦ isIso_directImage_globalSections_unit_on_kInjective f I)
-  refine ⟨c₀, c, ?_, hc⟩
-  intro M x
-  rfl
+  sorry
 
 /-- The canonical derived Leray isomorphism, chosen with its unit compatibility.
 Source: Stacks, Tags 0B6I and 0D5T (blueprint: lem-pc-global-hom-adjunction). -/

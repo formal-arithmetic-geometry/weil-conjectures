@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite
-import Sheaf.Algebra.FiniteReesModuleGeneration
+import Sheaf.Paper.PQFCohomology
 
 @[expose] public section
 
@@ -61,73 +61,6 @@ theorem cohomology_powers_ideal_image_bound
               ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom).obj
                 ((RingedSpace.moduleCohomology X.toRingedSpace q).obj
                   (Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F))))) := by
-  classical
-  let G := fun n ↦ Scheme.idealModuleProduct (Scheme.idealSheafPower J.toModulesι n).2 F
-  let inc := fun n ↦ Scheme.idealModuleProductι (Scheme.idealSheafPower J.toModulesι n).2 F
-  let H := RingedSpace.moduleCohomology X.toRingedSpace q
-  let R := ModuleCat.restrictScalars
-    ((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫ f.appTop).hom
-  let M := fun n ↦ (R.obj (H.obj (G n)) : Type v)
-  obtain ⟨lam, hsection, hzero, mod, hfin, hact⟩ :=
-    cohomology_powers_ideal_rees_finite f I J hJ F hF q
-  let L := fun k n a ha ↦ (R.map (H.map (lam k n a ha))).hom
-  obtain ⟨c0, hgen⟩ := finite_rees_module_single_degree_generation A I M L hzero mod hfin hact
-  have hcompat (k c n : ℕ) (hn : n ≤ c) (a : A) (ha : a ∈ I ^ k) (x : M c) :
-      (R.map (H.map (i (c + k) n (by omega)))).hom (L k c a ha x) =
-        a • (R.map (H.map (i c n hn))).hom x := by
-    have ha0 : a ∈ I ^ 0 := by simp
-    have heq : lam k c a ha ≫ i (c + k) n (by omega) =
-        i c n hn ≫ lam 0 n a ha0 := by
-      have : Mono (inc n) := by
-        dsimp [inc, Scheme.idealModuleProductι]
-        infer_instance
-      apply (cancel_mono (inc n)).1
-      have hiinc : ∀ (r s : ℕ) (h : s ≤ r), i r s h ≫ inc s = inc r := hi
-      simp only [Category.assoc, hiinc]
-      apply SheafOfModules.hom_ext
-      apply PresheafOfModules.hom_ext
-      intro U
-      ext s
-      have hc := hsection k c a ha U.unop s
-      have hn' := hsection 0 n a ha0 U.unop ((i c n hn).val.app U s)
-      have hi' := congrArg (fun g ↦ g.val.app U s) (hi c n hn)
-      change (inc (c + k)).val.app U ((lam k c a ha).val.app U s) = _ at hc
-      change (inc n).val.app U ((lam 0 n a ha0).val.app U
-        ((i c n hn).val.app U s)) = _ at hn'
-      change (inc n).val.app U ((i c n hn).val.app U s) = (inc c).val.app U s at hi'
-      change (inc (c + k)).val.app U ((lam k c a ha).val.app U s) =
-        (inc n).val.app U ((lam 0 n a ha0).val.app U ((i c n hn).val.app U s))
-      exact hc.trans ((congrArg (fun t ↦
-        (((Scheme.ΓSpecIso (CommRingCat.of A)).inv ≫
-          f.appLE ⊤ U.unop le_top).hom a) • t) hi'.symm).trans hn'.symm)
-    have hx := congrArg (fun g ↦ (R.map (H.map g)).hom x) heq
-    simp only [Functor.map_comp, ModuleCat.hom_comp, LinearMap.comp_apply] at hx
-    exact hx.trans (hzero n a ha0 ((R.map (H.map (i c n hn))).hom x))
-  refine ⟨c0, fun c hc n m hnm ↦ ?_⟩
-  let d := max c n
-  have hd : c0 ≤ d := le_trans hc (le_max_left _ _)
-  have hdle : d ≤ n + m := max_le hnm (Nat.le_add_right n m)
-  let k := n + m - d
-  have hdk : d + k = n + m := Nat.add_sub_of_le hdle
-  have hk : k = m - (c - n) := by dsimp [k, d]; omega
-  let t := (R.map (H.map (i (d + k) n (le_trans (le_max_right c n)
-    (Nat.le_add_right d k))))).hom
-  have ht : LinearMap.range t ≤ I ^ k • (⊤ : Submodule A (M n)) := by
-    rw [LinearMap.range_le_iff_comap, ← top_le_iff, ← hgen d hd k]
-    apply Submodule.span_le.mpr
-    rintro _ ⟨⟨a, x⟩, rfl⟩
-    change t (L k d a a.property x) ∈ I ^ k • (⊤ : Submodule A (M n))
-    rw [show t (L k d a a.property x) =
-      (a : A) • (R.map (H.map (i d n (le_max_right c n)))).hom x from
-        hcompat k d n (le_max_right c n) a a.property x]
-    exact Submodule.smul_mem_smul a.property (Submodule.mem_top)
-  have hndk : n ≤ d + k := le_trans (le_max_right c n) (Nat.le_add_right d k)
-  have ht' (r : ℕ) (hr : d + k = r) :
-      LinearMap.range ((R.map (H.map (i r n (by omega)))).hom) ≤
-        I ^ k • (⊤ : Submodule A (M n)) := by
-    subst r
-    exact ht
-  rw [← hk]
-  exact ht' (n + m) hdk
+  sorry
 
 end AlgebraicGeometry

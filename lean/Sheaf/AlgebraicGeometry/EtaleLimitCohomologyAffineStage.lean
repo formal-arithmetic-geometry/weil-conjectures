@@ -6,8 +6,6 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
-import Mathlib.CategoryTheory.Filtered.Final
-import Sheaf.AlgebraicGeometry.EtaleReindexComparisonCoherence
 
 /-! # Continuity when one stage is affine
 
@@ -23,9 +21,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
--- Preserve the original binder names in the higher-order hypothesis. Its proof arguments
--- do not occur in the conclusion of that hypothesis.
-set_option linter.unusedVariables false in
 /-- Affine-stage continuity applies when just one chosen stage is affine.
 
 Source: Stacks Project, Tag 09YQ (theorem-colimit); cofinal-tail reduction in
@@ -74,46 +69,6 @@ theorem etale_limit_cohomology_affine_stage
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)),
       Nonempty (IsColimit B))
-    (S : Scheme.{u}) [IsAffine S] : EtaleCohomologyStageContinuity S  := by
-  constructor
-  intro I _ _ _ D c hc hcompact hqs hhom F φ hidentity hcomposition G eG hG L hL p H eH hH
-    B eB hB i₀ ⟨e₀⟩
-  let J := {i : I // i₀ ≤ i}
-  have : Nonempty J := ⟨⟨i₀, le_rfl⟩⟩
-  have : IsDirected J (· ≤ ·) := ⟨by
-    intro i j
-    obtain ⟨k, hik, hjk⟩ := exists_ge_ge i.val j.val
-    exact ⟨⟨k, i.property.trans hik⟩, hik, hjk⟩⟩
-  let t : J ⥤ I := (Subtype.mono_coe (fun i => i₀ ≤ i)).functor
-  have : t.Final := by
-    apply (Monotone.final_functor_iff _).2
-    intro i
-    obtain ⟨j, hij, h₀j⟩ := exists_ge_ge i i₀
-    exact ⟨⟨j, h₀j⟩, hij⟩
-  have : IsAffine (D.obj (op i₀)) := IsAffine.of_isIso e₀.hom
-  have : ∀ j : Jᵒᵖ, IsAffine ((t.op ⋙ D).obj j) := by
-    intro j
-    exact isAffine_of_isAffineHom (D.map (homOfLE j.unop.property).op)
-  have : ∀ j : Jᵒᵖ, CompactSpace ((t.op ⋙ D).obj j) :=
-    fun j => hcompact (t.op.obj j)
-  have : ∀ j : Jᵒᵖ, QuasiSeparatedSpace ((t.op ⋙ D).obj j) :=
-    fun j => hqs (t.op.obj j)
-  have : ∀ (i j : Jᵒᵖ) (f : i ⟶ j), IsAffineHom ((t.op ⋙ D).map f) :=
-    fun i j f => hhom (t.op.obj i) (t.op.obj j) (t.op.map f)
-  have hc' := (Functor.Initial.isLimitWhiskerEquiv t.op c).symm hc
-  have hL' := (Functor.Final.isColimitWhiskerEquiv t L).symm hL
-  -- Only the coefficient and comparison coherence checks are split off.
-  obtain ⟨hidentity', hcomposition'⟩ :=
-    reindex_etale_transition_coherence t D F φ hidentity hcomposition
-  obtain ⟨hG', hH', hB'⟩ :=
-    reindex_etale_comparison_coherence t D c F φ G eG hG L p H eH hH B eB hB
-  have hL'' : IsColimit (reindexEtaleCocone t D c G L) := Eq.mp (by rfl) hL'
-  obtain ⟨hB''⟩ := haffine (t.op ⋙ D) (c.whisker t.op) hc'
-    (reindexEtaleCoefficients t D F) (reindexEtaleTransitions t D F φ)
-    hidentity' hcomposition' (reindexEtaleDiagram t D c G)
-    (reindexEtalePullbackIso t D c F G eG) hG' (reindexEtaleCocone t D c G L)
-    hL'' p (t ⋙ H) (reindexEtaleCohomologyIso t D F p H eH) hH'
-    (B.whisker t) (reindexEtaleVertexIso t D c G L p H B eB) hB'
-  exact ⟨(Functor.Final.isColimitWhiskerEquiv t B) hB''⟩
+    (S : Scheme.{u}) [IsAffine S] : EtaleCohomologyStageContinuity S  := by sorry
 
 end AlgebraicGeometry.Etale
