@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+ "kind": "statement",
+ "title": "Maximal ideal and structural map in an affine strict-henselization chart",
+ "statement": "Let S be a scheme, Ω an algebraically closed field, R a commutative ring, i : Spec R → S an open immersion and xR : Spec Ω → Spec R. Put s = xR followed by i and C = [def-weil-pbc-strict-henselization-limit], the coordinate ring of S_(s). There exist a local-ring structure on C and a ring map ρ : R → C such that Spec(ρ) followed by i is [def-weil-pbc-strict-henselization-structural-map] and the maximal ideal of C is the extension under ρ of the prime xR(closedPoint Ω).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 04HX, affine-chart colimit identification; Tag 04GW, triple colimit; Tag 04GP, property (4). Sources read at https://stacks.math.columbia.edu/tag/04HX, /04GW and /04GP."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply etale_local_ring_triples to the affine open i and geometric point xR. It supplies the chart restriction, the equivalence E with residue triples, the natural diagram isomorphism δ, and compatible colimit cocones cn and ct. Apply strictHenselization_triples with the relative separable closure to obtain a local colimit c, its R-map ρ, and maximalIdeal(c) = p.map(ρ).",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse small-model equivalence followed by strictHenselizationAffineInclusion is an equivalence q. The final-functor colimit isomorphism for q, the comparison with cn, the chart-to-triples comparison and uniqueness of the triple colimit yield ringIso : strictHenselizationRing(xR ≫ i) ≅ c.pt. Transport locality by the inverse ring equivalence and use ρ ≫ ringIso.inv as the R-map.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a representative j isomorphic to the pointed chart (Spec R,xR). Its affine image b has a map g to Spec R. Coprojection formulas for all colimit comparisons and the equation (ΓSpecIso R).inv ≫ g.appTop ≫ δ = the triple R-map give (ΓSpecIso R).inv ≫ g.appTop ≫ colimit.ι(j) = ρ ≫ ringIso.inv. Apply Spec and naturality of isoSpec.inv, and compose with i. Since g ≫ i is the neighbourhood structure map, its structural-map coprojection equation gives Spec.map(ρ ≫ ringIso.inv) ≫ i = strictHenselizationStructuralMap(xR ≫ i).",
+   "uses": [
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ring equivalences carry maximal ideals to maximal ideals. Map maximalIdeal(c) = p.map(ρ) through ringIso.inv and use Ideal.map_map to get the required ideal identity. The point p in SpecToEquivOfField equals xR(closedPoint Ω).",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof_origin": {
+  "kind": "agent",
+  "by": "M1",
+  "date": "2026-10-13",
+  "note": "Lean proof of colimit transport following Stacks Tags 04HX, 04GW and 04GP; no new proof holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict henselization maximal ideal extension of prime ideal affine chart",
+   "results": "Service returned Internal Server Error; unavailable. Other search kinds and local library search performed.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prime of the strict henselization contracting to the distinguished prime is the maximal ideal",
+   "results": "Generic local-ring, localization and primes-over results; no canonical chart colimit or strict-henselization map theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.map_le_iff_le_comap",
+   "results": "Generic ideal-map adjunction found and used in the parent fibre proof, but no strict-henselization chart comparison.",
+   "date": "2026-10-13",
+   "verdict": "no exact match for chart theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|maximalIdeal.*map",
+   "results": "No Mathlib strict-henselization chart theorem. Library search found StrictHenselizationLocalStructure and the triple colimit theorem, but neither supplies both the chart structural-map and extended-ideal equations. Blueprint searches for 04GP, 04HX and strict henselization maximal ideal found no matching imported node.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberForward",
+  "date": "2026-10-13",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Affine-chart and extended-maximal-ideal steps of the singleton-fibre argument in the compatible strict-henselization geometric-stalk comparison",
+   "via": [
+    "lem-weil-pbc-strict-henselization-closed-fiber-forward",
+    "lem-weil-pbc-strict-henselization-closed-fiber",
+    "compatible-strict-henselization-core-completion",
+    "compatible-strict-henselization-core-data",
+    "compatible-strict-henselization-residues-core",
+    "lem-weil-pbc-p1-strict-local-model-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationChartMaximalIdeal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.strictHenselization_chart_maximalIdeal",
+  "statement": "theorem strictHenselization_chart_maximalIdeal {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i] (xR : Spec (.of Ω) ⟶ Spec R) : ∃ (_ : IsLocalRing (strictHenselizationRing (xR ≫ i))) (ρ : R ⟶ strictHenselizationRing (xR ≫ i)), Spec.map ρ ≫ i = strictHenselizationStructuralMap (xR ≫ i) ∧ IsLocalRing.maximalIdeal (strictHenselizationRing (xR ≫ i)) = (xR (IsLocalRing.closedPoint Ω)).asIdeal.map ρ.hom",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T173841-L-3299828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T173841-L-3299828",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
