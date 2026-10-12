@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.DenseOpenComponentModificationsEmpty
+import Sheaf.AlgebraicGeometry.DenseOpenComponentModificationsNonempty
 
 /-!
 # Dense-open gluing of component modifications
@@ -54,6 +56,8 @@ theorem exists_dense_open_isIso_component_modifications
     (hν : ∀ i, ∃ U : (C i).Opens, Dense (U : Set (C i)) ∧ IsIso (ν i ∣_ U)) :
     ∃ U : X.Opens, Dense (U : Set X) ∧
       IsIso (CategoryTheory.Limits.Sigma.desc (fun i => ν i ≫ ι i) ∣_ U) := by
-  sorry
+  rcases Nat.eq_zero_or_pos n with rfl | hn
+  · exact exists_dense_open_isIso_component_modifications_of_zero X C ι hC hinj hcover Y ν hν
+  · exact exists_dense_open_isIso_component_modifications_of_pos X n hn C ι hC hinj hcover Y ν hν
 
 end AlgebraicGeometry
