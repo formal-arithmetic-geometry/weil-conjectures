@@ -7,7 +7,7 @@ module
 
 public import Sheaf.LinearAlgebra.IdempotentCharpoly
 public import Mathlib.RingTheory.Jacobson.Ideal
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
+import Sheaf.LinearAlgebra.IdempotentCharpolyLeadingCoeff
 
 /-! # Monicity of the determinant on an idempotent summand
 
@@ -48,6 +48,45 @@ theorem idempotentCharpoly_monic_of_map_monic
     (T P : Matrix n n A) (hP : P * P = P) (hTP : T * P = P * T)
     (hmonic : ((idempotentCharpoly T P).map (Ideal.Quotient.mk I)).Monic) :
     (idempotentCharpoly T P).Monic := by
-  sorry
+  classical
+  cases subsingleton_or_nontrivial A with
+  | inl h =>
+    let := h
+    exact Subsingleton.elim _ _
+  | inr h =>
+    let := h
+    have hproper : I ≠ ⊤ := by
+      intro hi
+      have hj : Ideal.jacobson (⊥ : Ideal A) = ⊤ := top_unique (hi ▸ hI)
+      exact bot_ne_top ((Ideal.jacobson_eq_top_iff).mp hj)
+    let : Nontrivial (A ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hproper
+    let f := idempotentCharpoly T P
+    have he : f.leadingCoeff * f.leadingCoeff = f.leadingCoeff :=
+      isIdempotentElem_idempotentCharpoly_leadingCoeff T P hP hTP
+    have hzero : ∀ e : A, e * e = e → Ideal.Quotient.mk I e = 0 → e = 0 := by
+      intro e he hq
+      have hj := hI (Ideal.Quotient.eq_zero_iff_mem.mp hq)
+      have hu : IsUnit (e * (-1) + 1) := Ideal.mem_jacobson_bot.mp hj (-1)
+      apply hu.mul_right_eq_zero.mp
+      calc
+        (e * (-1) + 1) * e = -(e * e) + e := by ring
+        _ = 0 := by rw [he]; ring
+    have hne : Ideal.Quotient.mk I f.leadingCoeff ≠ 0 := by
+      intro hz
+      have hf : f = 0 := Polynomial.leadingCoeff_eq_zero.mp (hzero _ he hz)
+      exact hmonic.ne_zero (by simp [← show f = idempotentCharpoly T P from rfl, hf])
+    have hcoeff : Ideal.Quotient.mk I f.leadingCoeff = 1 := by
+      rw [← Polynomial.leadingCoeff_map_of_leadingCoeff_ne_zero _ hne]
+      exact hmonic
+    have hsub : (1 - f.leadingCoeff) * (1 - f.leadingCoeff) = 1 - f.leadingCoeff := by
+      calc
+        (1 - f.leadingCoeff) * (1 - f.leadingCoeff) =
+            1 - f.leadingCoeff - f.leadingCoeff + f.leadingCoeff * f.leadingCoeff := by
+          ring
+        _ = 1 - f.leadingCoeff := by rw [he]; ring
+    have hq : Ideal.Quotient.mk I (1 - f.leadingCoeff) = 0 := by
+      rw [map_sub, map_one, hcoeff, sub_self]
+    have hh := hzero _ hsub hq
+    exact (sub_eq_zero.mp hh).symm
 
 end Matrix

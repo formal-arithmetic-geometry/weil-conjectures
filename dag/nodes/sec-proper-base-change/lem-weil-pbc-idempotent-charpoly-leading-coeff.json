@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-idempotent-charpoly-leading-coeff",
+ "kind": "statement",
+ "title": "Idempotent leading coefficient of a commuting idempotent determinant",
+ "statement": "Let $A$ be a commutative ring, $J$ a finite set, and $T,P\\in\\operatorname{Mat}_J(A)$ with $P^2=P$ and $TP=PT$. Let $D(T,P)$ be the polynomial of [def-weil-pbc-idempotent-charpoly]. Its leading coefficient $c$ satisfies $c^2=c$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), splitting and characteristic-polynomial paragraphs; matrix formula and omitted details written out by G2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-idempotent-charpoly"
+ ],
+ "proof": [
+  {
+   "text": "Reindex the finite ambient module by Fin of its cardinality. Apply [lem-weil-pbc-idempotent-endomorphism-image-base-change] to P and 1-P to obtain complementary finite projective images, whose split decomposition persists under localization. Choose finite standard free covers for both images using [lem-weil-pbc-finite-projective-standard-free-cover], and refine to the product cover. Each summand is finite free on each refined localization. The products still generate the unit ideal, by multiplying the two expressions for 1 in the two original generated ideals.",
+   "uses": [
+    "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Commutation with P makes T preserve both summands. In the concatenation of their bases, P is diag(1,0), T is block diagonal and the matrix defining D(T,P) [def-weil-pbc-idempotent-charpoly] is diag(X-T_image,1). Determinant base change and basis invariance identify its localized determinant with the characteristic polynomial on the first summand. By [lem-weil-pbc-charpoly-free-module-properties], it is monic of degree r, the rank of that summand, on every nonzero localization.",
+   "uses": [
+    "def-weil-pbc-idempotent-charpoly",
+    "lem-weil-pbc-charpoly-free-module-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put d=natDegree D(T,P). Polynomial degree cannot increase under a ring map: all coefficients above d remain zero. Thus each local degree r is at most d. The image of the global coefficient at d is 1 when r=d, and 0 when r<d, by the local monicity and vanishing of coefficients above the local degree. It is therefore idempotent in every nonzero cover localization. In zero localizations the idempotence equation is automatic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localized-span-eq-zero] with module A to the element c*c-c, where c is the leading coefficient, on the refined standard cover. Every localized image is zero by the previous step, hence c*c-c=0 over A. For A the zero ring this equation is automatic.",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "def-weil-pbc-idempotent-charpoly",
+  "lem-weil-pbc-charpoly-free-module-properties",
+  "lem-weil-pbc-localized-span-eq-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "A2 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), characteristic-polynomial paragraph; local coefficient calculation of the determinant formula supplied explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "leadingCoeff.*idempotent|idempotent.*leadingCoeff",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact statement found."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, Polynomial.leadingCoeff",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact statement found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The leading coefficient of the determinant of 1-P+(X-T)P for a commuting idempotent matrix P is idempotent",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.LinearAlgebra.IdempotentCharpolyMonic",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); determinant realization of the lifted-idempotent monic-factorization step; local characteristic-polynomial leading coefficient calculation",
+   "via": [
+    "lem-weil-pbc-idempotent-charpoly-monic",
+    "lem-weil-pbc-idempotent-splitting-monic-factorization",
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.LinearAlgebra.IdempotentCharpolyLeadingCoeff",
+  "file": "lean/Sheaf/LinearAlgebra/IdempotentCharpolyLeadingCoeff.lean",
+  "declaration": "Matrix.isIdempotentElem_idempotentCharpoly_leadingCoeff",
+  "statement": "theorem isIdempotentElem_idempotentCharpoly_leadingCoeff\n    {A : Type u} [CommRing A] {n : Type v} [Fintype n] [DecidableEq n]\n    (T P : Matrix n n A) (hP : P * P = P) (hTP : T * P = P * T) :\n    IsIdempotentElem (idempotentCharpoly T P).leadingCoeff",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085209-L-1329",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T085209-L-1329",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

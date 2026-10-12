@@ -12,47 +12,31 @@
  ],
  "proof": [
   {
-   "text": "The identities P²=P and P+(1-P)=1 give a split decomposition of A^J into the images of P and 1-P. Both are finite projective. Obtain finite standard free covers for both and refine to their product cover so both summands have bases.",
+   "text": "Apply [lem-weil-pbc-idempotent-charpoly-leading-coeff] to get c*c=c for c=leadingCoeff D(T,P). Treat the zero ring directly. Otherwise I is proper since it is contained in the Jacobson radical, so A/I is nonzero.",
    "uses": [
-    "lem-weil-pbc-finite-projective-standard-free-cover"
+    "lem-weil-pbc-idempotent-charpoly-leading-coeff"
    ],
    "elementary": false
   },
   {
-   "text": "T preserves both images because TP=PT. In their concatenated local basis P is diag(1,0), T is block diagonal, and 1-P+(X-T)P is diag(X-T_image,1). Its determinant is the ordinary characteristic polynomial on the image of P, monic of its local rank. Determinant invariance under conjugation and determinant base change justify these comparisons.",
-   "uses": [
-    "def-weil-pbc-idempotent-charpoly",
-    "lem-weil-pbc-charpoly-free-module-properties"
-   ],
-   "elementary": false
+   "text": "An idempotent e with image zero in A/I lies in I and hence in the Jacobson radical. The element 1-e is a unit by the Jacobson characterization, and (1-e)*e=0, so e=0. If the image of c were zero, c would be zero and D(T,P) would be zero, contradicting monicity of its reduction over the nonzero ring A/I. Thus c survives reduction.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "If A is nonzero, A/I is nonzero since I is in the Jacobson radical. Let d be the degree of the monic reduction. At every prime containing I, reduce the local determinant to the residue field. Degree preservation of the monic reduction and of the local monic determinant show that the image of P has rank d there. Its rank is locally constant. The closed locus where the rank differs from d, if nonempty, contains a maximal ideal. Every maximal ideal contains I, giving a contradiction. The rank is consequently d everywhere.",
-   "uses": [
-    "lem-weil-pbc-finite-projective-rank-locally-constant"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On each nonzero localization of the standard cover the determinant therefore has coefficient 1 at degree d and zero coefficients above d; these same equations hold on zero localizations. Injectivity on a standard cover gives these equations over A. They imply monicity. When A is zero its only polynomial is monic.",
-   "uses": [
-    "lem-weil-pbc-localized-span-eq-zero"
-   ],
-   "elementary": false
+   "text": "Because c survives reduction, the leading coefficient of the mapped polynomial is the image of c. Monicity of the reduction gives that image equal to 1. The element 1-c is idempotent and maps to zero; the preceding idempotent argument gives 1-c=0. Hence c=1 and D(T,P) is monic.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "def-weil-pbc-idempotent-charpoly",
-  "lem-weil-pbc-charpoly-free-module-properties",
-  "lem-weil-pbc-finite-projective-rank-locally-constant",
-  "lem-weil-pbc-localized-span-eq-zero"
+  "lem-weil-pbc-idempotent-charpoly-leading-coeff"
  ],
  "proof_origin": {
   "by": "agent",
-  "name": "G2 stage-3 worker",
+  "name": "A2 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 09XI, proof of (3) implies (1); an explicit determinant realization of its characteristic polynomials, with omitted details filled in"
+  "place": "Tag 09XI, lemma-characterize-henselian-pair, proof of (3) implies (1), characteristic-polynomial paragraph; local coefficient calculation of the determinant formula supplied explicitly"
  },
  "mathlib_searches": [
   {
@@ -138,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T053933-L-2635992",
+  "landing": "20261012T085209-L-1329",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
