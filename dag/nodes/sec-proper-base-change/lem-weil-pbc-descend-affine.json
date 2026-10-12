@@ -29,104 +29,57 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the base changes and their projections).* Write $f_{ii'}:S_i\\to S_{i'}$ ($i\\ge i'$) for the transition morphisms, $f_{ii}=\\mathrm{id}$, and $p_i:S\\to S_i$ for the projections of the limit. Let $T$ be $S_i$ for some $i\\ge0$, with $c_T=f_{i0}:T\\to S_0$, or $S$, with $c_T=p_0$. Put $X_T=X_0\\times_{S_0}T$, $Y_T=Y_0\\times_{S_0}T$ [def-pc-fibre-product] and $f_T=f_0\\times\\mathrm{id}_T:X_T\\to Y_T$, so $f_{S_i}=f_i$ and $f_S=f$; for $T=S_0$ the first projections $X_0\\times_{S_0}S_0\\to X_0$, $Y_0\\times_{S_0}S_0\\to Y_0$ are isomorphisms (base change along the identity) under which $f_{S_0}=f_0$, and we identify along them. (a) $c_T$ is affine: $f_{i0}$ is a transition morphism (affine by hypothesis; $f_{00}=\\mathrm{id}$ is affine, the preimage of an affine open being itself [pqf-def-affine-morphism]) and $p_0$ is affine by [lem-weil-pbc-limit-affine-transition]. The first projection $\\mathrm{pr}_1:Y_T\\to Y_0$ is the base change of $c_T$ along the structure morphism $h:Y_0\\to S_0$ (by the symmetry of the fibre product), hence affine by [lem-weil-pbc-affine-morphism-permanence](1); likewise $\\mathrm{pr}_1:X_T\\to X_0$ is affine. (b) Apply [lem-weil-pbc-cartesian-square-pasting] to the diagram with left column $X_T\\xrightarrow{f_T}Y_T\\xrightarrow{\\mathrm{pr}_2}T$, right column $X_0\\xrightarrow{f_0}Y_0\\xrightarrow{h}S_0$ and horizontal maps the first projections and $c_T$: it commutes ($\\mathrm{pr}_1f_T=f_0\\mathrm{pr}_1$ by definition of $f_0\\times\\mathrm{id}_T$, $h\\,\\mathrm{pr}_1=c_T\\mathrm{pr}_2$), the lower square is cartesian by definition of $Y_T$, and the outer rectangle is cartesian by definition of $X_T$ (the structure morphism of $X_0$ is $hf_0$, and $\\mathrm{pr}_2f_T=\\mathrm{pr}_2$); so the upper square is cartesian: $f_T$ is the base change of $f_0$ along $\\mathrm{pr}_1:Y_T\\to Y_0$. (c) Since $X_0$ is quasi-compact and quasi-separated and $Y_0$ is quasi-separated [def-weil-pbc-scheme-conventions], $f_0$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1), and so is its base change $f_T$ by [lem-weil-pbc-qcqs-morphism-permanence](3).",
-   "uses": [
-    "def-pc-fibre-product",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1750), proof (lines 1757-1770): the notation $f_i$, $f$ of Situation Tag 081D (line 1739); the base changes are written out here"
-   }
-  },
-  {
-   "text": "*Step 2 (a finite affine covering and the pieces $V_{j,T}$, $U_{j,T}$).* $Y_0$ is a scheme, hence covered by affine opens [def-pc-scheme], and quasi-compact [def-weil-pbc-scheme-conventions], so $Y_0=\\bigcup_{j=1}^mV_{j,0}$ for finitely many affine opens $V_{j,0}$ ($m=0$ if $Y_0=\\emptyset$). Put $U_{j,0}=f_0^{-1}(V_{j,0})\\subseteq X_0$ and, for $T$ as in step 1, $V_{j,T}=\\mathrm{pr}_1^{-1}(V_{j,0})\\subseteq Y_T$ and $U_{j,T}=f_T^{-1}(V_{j,T})\\subseteq X_T$; write $V_{j,i},U_{j,i}$ for $T=S_i$ and $V_j,U_j$ for $T=S$ (for $T=S_0$ this agrees with $V_{j,0},U_{j,0}$ under the identification of step 1). (a) The $V_{j,T}$ ($j=1,\\dots,m$) cover $Y_T$, being the preimages of a covering. (b) Each $V_{j,T}$ is an affine open of $Y_T$: it is the preimage of the affine open $V_{j,0}$ under the affine morphism $\\mathrm{pr}_1:Y_T\\to Y_0$ (step 1(a), [pqf-def-affine-morphism]). (c) Since $\\mathrm{pr}_1\\circ f_T=f_0\\circ\\mathrm{pr}_1$ (step 1(b)), $U_{j,T}=f_T^{-1}\\mathrm{pr}_1^{-1}(V_{j,0})=\\mathrm{pr}_1^{-1}f_0^{-1}(V_{j,0})=\\mathrm{pr}_1^{-1}(U_{j,0})$, the preimage of $U_{j,0}$ under $\\mathrm{pr}_1:X_T\\to X_0$. (d) $U_{j,T}$ is quasi-compact and quasi-separated: by [lem-weil-pbc-open-preimage-fibre-product] the restriction $f_T|:U_{j,T}\\to V_{j,T}$ is the base change of $f_T$ along the inclusion $V_{j,T}\\hookrightarrow Y_T$, hence quasi-compact and quasi-separated by step 1(c) and [lem-weil-pbc-qcqs-morphism-permanence](3); as $V_{j,T}$ is affine, [lem-weil-pbc-qcqs-over-affine] gives that $U_{j,T}$ is quasi-compact and quasi-separated.",
-   "uses": [
-    "def-pc-scheme",
-    "def-weil-pbc-scheme-conventions",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-qcqs-over-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1750), proof (lines 1757-1770): 'Let $Y_0=\\bigcup_{j=1,\\ldots,m}V_{j,0}$ be a finite affine open covering. Set $U_{j,0}=f_0^{-1}(V_{j,0})$ ... $U_j=f^{-1}(V_j)$'; the quasi-compactness and quasi-separatedness of the $U_{j,i}$, which Lemma 01Z6 (Situation 086P) requires, is supplied here"
-   }
-  },
-  {
-   "text": "*Step 3 ($U_j$ is affine).* Take $T=S$ in step 2: $V_j$ is an affine open of $Y$ (step 2(b)) and $f$ is affine by hypothesis, so $U_j=f^{-1}(V_j)$ is affine [pqf-def-affine-morphism]. (The source says 'since $U_j$ is affine by assumption'; $V_j$ is affine because the projection $p_0:S\\to S_0$ is affine, step 1(a).)",
-   "uses": [
-    "pqf-def-affine-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1750), proof (lines 1757-1770): 'Since $U_j$ is affine by assumption'"
-   }
-  },
-  {
-   "text": "*Step 4 ($U_j=\\varprojlim_{i\\ge0}U_{j,i}$, with affine transition morphisms).* Apply [lem-weil-pbc-scheme-over-limit] with the $S_0$-scheme $X_0$ in place of $T$: the schemes $X_i=X_0\\times_{S_0}S_i$ ($i\\ge0$) with $t_{ii'}=\\mathrm{id}_{X_0}\\times f_{ii'}:X_i\\to X_{i'}$ ($i\\ge i'\\ge0$) form an inverse system over the directed set $I_{\\ge0}$ with affine transition morphisms, and $X=X_0\\times_{S_0}S$ with the morphisms $q_i=\\mathrm{id}_{X_0}\\times p_i:X\\to X_i$ is its limit in the category of schemes. Under the identification $X_0\\times_{S_0}S_0=X_0$ of step 1, $t_{i0}$ and $q_0$ are the first projections $\\mathrm{pr}_1:X_i\\to X_0$, $\\mathrm{pr}_1:X\\to X_0$. Now apply [lem-weil-pbc-limit-cone-affine-projections-opens](2) to this inverse system over $I_{\\ge0}$, the index $0$ (the least element of $I_{\\ge0}$) and the open $U_{j,0}\\subseteq X_0$: the opens $t_{i0}^{-1}(U_{j,0})\\subseteq X_i$ ($i\\ge0$), with the restricted transition morphisms, form an inverse system over $I_{\\ge0}$ with affine transition morphisms, and $q_0^{-1}(U_{j,0})\\subseteq X$, with the restricted projections, is its limit in the category of schemes. By step 2(c), $t_{i0}^{-1}(U_{j,0})=U_{j,i}$ and $q_0^{-1}(U_{j,0})=U_j$. So $U_j=\\varprojlim_{i\\ge0}U_{j,i}$ with affine transition morphisms $U_{j,i}\\to U_{j,i'}$.",
+   "text": "Restrict to the directed upper tail J = {i | i₀ ≤ i}. The explicitly proved equivalence Jᵒᵖ ≌ Over(op i₀) identifies the base-change diagram Eᵢ = X₀ ×_{S₀} Sᵢ with baseChangeDiagram D (f₀ ≫ h). By [lem-weil-pbc-scheme-over-limit], baseChangeCone is limiting, and whiskering through the equivalence preserves this property. Transitions are affine base changes. Their projections to X₀ are affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence]; [lem-weil-pbc-qcqs-morphism-permanence](2) gives qcqs of every Eᵢ. The compatible maps Eᵢ → Y₀ are the first projections followed by f₀.",
    "uses": [
     "lem-weil-pbc-scheme-over-limit",
-    "lem-weil-pbc-limit-cone-affine-projections-opens"
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1750), proof (lines 1757-1770): 'Then $U_j=\\lim_{i\\ge0}U_{j,i}$ (see Lemma \\ref{lemma-directed-inverse-system-has-limit})', i.e. Lemma Tag 01YX(2), applied to the system $X_i$ whose limit is $X$ by Lemma Tag 01YZ (lemma-scheme-over-limit, line 114)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 5 (each $U_{j,i}$ is affine for $i$ large).* Fix $j$. The inverse system $(U_{j,i})_{i\\ge0}$ over the directed set $I_{\\ge0}$ consists of quasi-compact and quasi-separated schemes (step 2(d)), has affine transition morphisms and limit $U_j$ (step 4), and $U_j$ is affine (step 3). By [lem-weil-pbc-limit-affine-stage] (with $I_{\\ge0}$ in place of $I$) there is $i_j\\ge0$ such that $U_{j,i}$ is affine for every $i\\ge i_j$.",
+   "text": "The projection S → S₀ is affine by [lem-weil-pbc-limit-cone-affine-projections-opens](1). Therefore its base change Y → Y₀ is affine by [lem-weil-pbc-affine-morphism-permanence](1). The hypothesis says f : X → Y is affine. The composite X → Y₀ is consequently affine: preimages of affine opens are affine by applying [pqf-def-affine-morphism] twice. The equation f ≫ pr₁ = pr₁ ≫ f₀ follows from pullback.map_fst.",
    "uses": [
-    "lem-weil-pbc-limit-affine-stage"
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-def-affine-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1750), proof (lines 1757-1770): 'we see that each $U_{j,i}$ is affine for $i$ large enough, see Lemma \\ref{lemma-limit-affine}' (Lemma Tag 01Z6, line 680)"
-   }
+   "elementary": true
   },
   {
-   "text": "*Step 6 (a common index; $f_i$ is affine).* Since $I$ is directed and there are finitely many $j$, there is $i\\in I$ with $i\\ge0$ and $i\\ge i_j$ for $j=1,\\dots,m$ (induction on $m$; $i=0$ if $m=0$). Take $T=S_i$ in step 2: the $V_{j,i}$ ($j=1,\\dots,m$) are affine opens covering $Y_i$ (step 2(a),(b)), and $f_i^{-1}(V_{j,i})=U_{j,i}$ is affine for every $j$ (step 5, as $i\\ge i_j$). Hence $f_i$ is affine by [pqf-lem-affine-local-target] (the implication from the existence of an affine open covering of the target with affine preimages; Morphisms, Lemma Tag 01S8, (2)$\\Rightarrow$(1)).",
+   "text": "Apply [lem-weil-pbc-eventually-affine] with fixed base T = Y₀, diagram E on Jᵒᵖ, its base-change limit cone, and structure maps pr₁ ≫ f₀. The qcqs hypotheses are those of step 1 and of Y₀, and the limit map is affine by step 2. Obtain j ∈ J such that Eⱼ → Y₀ is affine.",
    "uses": [
+    "lem-weil-pbc-eventually-affine"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The projection gⱼ : Yⱼ → Y₀ is affine by base change of Sⱼ → S₀. Since fⱼ ≫ gⱼ = pr₁ ≫ f₀ is affine, fⱼ is affine (Mathlib IsAffineHom.comp_iff). For completeness, this cancellation follows from [pqf-lem-affine-local-target]: on each affine open V of Y₀, both gⱼ⁻¹(V) and (gⱼfⱼ)⁻¹(V) are affine, so the induced map between them is affine; these opens cover Yⱼ. Thus return j.val and j.property. The tail contains i₀ even if the schemes are empty, so no nonemptiness of any scheme or affine-cover member is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-def-affine-morphism",
     "pqf-lem-affine-local-target"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1750), proof (lines 1757-1770): 'As there are finitely many $j$ we can pick an $i$ which works for all $j$. Thus $f_i$ is affine for $i$ large enough, see Morphisms, Lemma \\ref{morphisms-lemma-characterize-affine}' (literature/stacks-project/morphisms.tex, Lemma Tag 01S8, line 1736)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "pqf-def-affine-morphism",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-pc-scheme",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-qcqs-over-affine",
   "lem-weil-pbc-scheme-over-limit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-pc-fibre-product",
   "lem-weil-pbc-limit-cone-affine-projections-opens",
-  "lem-weil-pbc-limit-affine-stage",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-eventually-affine",
   "pqf-lem-affine-local-target"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma Tag 01ZN (lemma-descend-affine-finite-presentation, line 1750) and its proof (lines 1757-1770), in Situation Tag 081D (situation-descent-property, line 1739)"
+  "place": "Lemma 01ZN, reduced to the existing fixed-target theorem 09ZM (lem-weil-pbc-eventually-affine) using base change of limits 01YZ and affine cancellation. The Lean proof is written by S1; no new unproved result is introduced."
  },
  "mathlib_searches": [
   {
@@ -213,5 +166,15 @@
   "group": "F1",
   "result": "pass",
   "note": "I:Type u (schemes' universe, checked pp.universes: single param u) Preorder+IsDirected; D:Iᵒᵖ⥤Scheme.{u} affine transitions; Cone+IsLimit S; i₀=0; S₀,X₀,Y₀ CompactSpace+QuasiSeparatedSpace; f₀ over S₀ via h with X₀→S₀=f₀≫h; X_i,Y_i,f_i = pullback.map (f₀≫h) p h p f₀ 𝟙 𝟙 (arg order #checked); hf IsAffineHom at c.π.app; conclusion ∃ i ≥ i₀ IsAffineHom f_i; no hollow hyps; imports only landed LimitAffineTransition"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d79d9",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T070550-L-3476959",
+  "kind": "interface",
+  "note": "independent Codex review: Unchanged Lean signature matched the node and Stacks 01ZN (https://stacks.math.columbia.edu/tag/01ZN); proof matched updated DAG dependencies; compilation and axiom checks passed."
  }
 }
