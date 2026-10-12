@@ -1,6 +1,6 @@
 # Work queue
 
-108 items; claim with `tools/claim.py next <group> [--stage N]`.
+107 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (8)
 
@@ -15,12 +15,11 @@
 | `lemma-weil-pbc-stein-connectedness` | 2006 | rests_on_sorry |
 | `thm-weil-pbc-stein-inputs` | 2007 | sorry_here |
 
-## Stage 2: nodes to state (2)
+## Stage 2: nodes to state (1)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-nagata-finite-presentation-descent` | 3 | state | 3 |
-| `lem-sc-qcoh-complex-alternating-cech-derived-sections` | 1 | state | 0 |
 
 Not open yet: 42 nodes that wait for stage 1, 3 nodes that wait for a statement dependency.
 
