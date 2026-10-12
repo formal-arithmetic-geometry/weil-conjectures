@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-affine-free-finite-stalk-generation",
+ "kind": "statement",
+ "title": "Finite affine free maps generating one module stalk",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $\\Lambda$ a commutative ring, and $F$ a sheaf of $\\Lambda$-modules on its small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. For $x\\in X$, let $\\bar x$ be the geometric point given by an algebraic closure of its residue field. Assume $F_{\\bar x}$ [def-weil-pbc-geometric-stalks] is finitely generated over $\\Lambda$. For an etale object $W$, let $P_W$ be the sheafification [def-weil-presheaf-modules-sheafification] of $V\\mapsto\\Lambda^{(\\operatorname{Hom}_X(V,W))}$. Set $I=\\{(W,f):W\\text{ affine etale over }X, f:P_W\\to F\\}$. There is a finite subset $S\\subset I$ such that the stalk map of $\\bigoplus_{(W,f)\\in S}P_W\\to F$, induced by the maps $f$, is surjective at $\\bar x$. No finiteness of the ring, constructibility, or compactness of the scheme is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095N, lemma-category-constructible-modules, sentence using finite type of each geometric stalk; explicit free generator construction as in Modules on Sites Tag 03DI."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Represent a stalk element by a section z on a pointed etale neighbourhood (V,v). In Lean use Point.toPresheafFiber_jointly_surjective after shrinking the universe of the filtered-colimit preservation instance for forget (ModuleCat Λ).",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine open Spec R→V through v(default). The geometric point factors through it by the universal property of an open immersion. Restrict z along this open immersion and use Point.toPresheafFiber_w to keep the same germ.",
+   "uses": [
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the resulting affine object W and section z, explicitly define a presheaf map η sending the generator indexed by h:V→W to F(h)(z). ModuleCat.freeDesc gives its linear components and functoriality proves naturality. Sheafify this map with sheafifyLift; toSheafify_sheafifyLift proves that the generator indexed by id_W maps to z. Point.toPresheafFiber_naturality therefore puts the chosen germ in the range of the stalk of the sheaf map.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unpack Module.Finite.fg_top into a finite set T spanning the stalk. Choose one affine free map for each t∈T and take the finite image S of these choices. Each chosen map factors through the S-indexed coproduct injection. Applying the stalk functor and Sigma.ι_desc shows T is contained in the range of the total stalk map. The range is a submodule; Submodule.span_le and span(T)=top give range=top, hence surjectivity. Empty T produces empty S.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095N, lemma-category-constructible-modules, sentence using finite type of each geometric stalk; explicit free generator construction as in Modules on Sites Tag 03DI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A constructible etale sheaf of modules is a quotient of a finite coproduct of free module sheaves on affine etale schemes",
+   "results": "SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.IsFiniteType, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing elementary algebra and stalk lemmas used"
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber_jointly_surjective|isZero_iff_subsingleton|epi_iff_surjective",
+   "results": "Mathlib/Condensed/EffectiveEpi.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Light/TopComparison.lean, Mathlib/Condensed/Light/TopComparison.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing elementary algebra and stalk lemmas used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finitely generated geometric stalk generated by finitely many affine etale free representable sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "available": false
+  },
+  {
+   "tool": "leanfinder",
+   "query": "failure of surjectivity of a morphism of constructible etale module sheaves is a constructible subset",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, PrimeSpectrum.isConstructible_range_comap, PrimeSpectrum.exists_range_eq_of_isConstructible, Algebra.etaleLocus_eq_compl_support, PrimeSpectrum.isConstructible_comap_image, Algebra.isOpen_etaleLocus, Algebra.IsStandardEtale.of_surjective",
+   "date": "2026-10-12",
+   "verdict": "no exact match; existing elementary algebra and stalk lemmas used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteZeroCokernel",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constructible-finitely-presented",
+   "place": "Proof of Tag 09Z4 via the finite-presentation input Tag 095N; Tag 095N, lemma-category-constructible-modules, sentence using finite type of each geometric stalk; explicit free generator construction as in Modules on Sites Tag 03DI.",
+   "via": [
+    "lem-weil-pbc-constructible-module-finite-presentation",
+    "lem-weil-pbc-constructible-module-finite-zero-cokernel"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFreeFiniteStalkGeneration",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFreeFiniteStalkGeneration.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finset_affine_free_stalk_surjective",
+  "statement": "theorem exists_finset_affine_free_stalk_surjective (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X) (hx : Module.Finite Λ (((pointSmallEtale (X.algClosurePoint x)).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F)) : let P : X.Etale → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) := fun W => (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (uliftYoneda.{u + 1}.obj W ⋙ ModuleCat.free Λ) let I := Σ W : {W : X.Etale // IsAffine W.left}, P W.val ⟶ F ∃ S : Finset I, Function.Surjective (((pointSmallEtale (X.algClosurePoint x)).sheafFiber (A := ModuleCat.{u + 1} Λ)).map (Sigma.desc (fun i : S => i.val.2)))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085233-L-12029",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085233-L-12029",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
