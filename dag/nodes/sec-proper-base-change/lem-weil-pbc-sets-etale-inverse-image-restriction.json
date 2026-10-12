@@ -27,89 +27,38 @@
  ],
  "proof": [
   {
-   "text": "Write $Y=U$, so $j:Y\\to X$ and $G|_Y=G|_U$. By [lem-weil-pbc-etale-localization-functor-adjoint] the functor $\\iota_j:Y_{\\Et}\\to X_{\\Et}$ sending $V\\to Y$ to $V\\to X$ is well-defined, and the base-change functor $b_j:X_{\\Et}\\to Y_{\\Et}$ sends $W$ to $W\\times_XY$. The adjunction $\\iota_j\\dashv b_j$ has counit the projection $p_W:W\\times_XY\\to W$. By [lem-weil-pbc-sets-etale-inverse-image-composition-units] the direct image on sheaves of sets is $(j_*F)(W)=F(W\\times_XY)$, i.e. precomposition with $b_j$.",
+   "text": "Use the Mathlib site adjunction [lem-weil-pbc-etale-localization-functor-adjoint], MorphismProperty.Over.mapPullbackAdj, and the continuous-functor instances already provided by the source library. Apply Adjunction.sheafPushforwardContinuous with coefficients Type (u + 1), as in [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction], to obtain restriction left adjoint to direct image. Its unit at G and W is definitionally G applied to the opposite of the site counit.",
    "uses": [
     "lem-weil-pbc-etale-localization-functor-adjoint",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topologies.tex",
-    "place": "Tags 021H and 021I"
-   }
+   "elementary": false
   },
   {
-   "text": "Precomposition with $\\iota_j$ preserves sheaves: a covering of an object of $Y_{\\Et}$ remains a jointly surjective etale covering after viewing all maps over $X$, and fibre products are unchanged. Precomposition with $b_j$ preserves sheaves because [lem-weil-pbc-etale-covering-base-change] makes the base-changed family a covering and [lem-weil-pbc-etale-base-change-finite-limits] identifies the base-changed fibre products. Therefore $G|_Y=G\\circ\\iota_j$ is a sheaf of sets and $j_*F=F\\circ b_j$ is a sheaf of sets.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-etale-covering-base-change",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-pbc-etale-sheaf-of-sets",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WW and Topologies Tags 021F and 021I"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction] to $\\lambda=\\iota_j$ and $\\beta=b_j$. It gives an adjunction from sheaves of sets on $X_{\\Et}$ to sheaves of sets on $Y_{\\Et}$, with unit $u_G(W)=G(p_W):G(W)\\to G(W\\times_XY)$.",
+   "text": "The definition Scheme.etaleSetPullback is the left Kan extension and sheafification construction. Its adjunction to the same continuous direct image is Functor.sheafPullbackConstruction.sheafAdjunctionContinuous [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. The natural isomorphism rho is Adjunction.leftAdjointUniq applied to these two adjunctions, as in [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction].",
    "uses": [
     "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
-    "lem-weil-pbc-etale-localization-functor-adjoint",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaf-of-sets"
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XX (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction], the sheafified inverse image along the base-change functor is left adjoint to precomposition with that functor; by [lem-weil-pbc-sets-etale-inverse-image-composition-units] this is the set-valued inverse image $j^{-1}$ and direct image $j_*$, and $\\eta_{j,G}:G\\to j_*j^{-1}G$, $s\\mapsto j^*s$, is its unit. The functor $b_j$ satisfies the hypothesis by Step 2. The uniqueness clause of [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction] therefore gives a unique natural isomorphism $\\rho:j^{-1}\\xrightarrow{\\sim}(-)|_Y$ such that $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$. This proves clause (1), including naturality.",
+   "text": "Apply Adjunction.unit_leftAdjointUniq_hom_app to the two adjunctions and G [lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction]. Apply congrArg with the function sending a sheaf morphism f to f.hom.app (op W) s. Continuous direct image acts on sheaf morphisms by precomposition, and the second unit is definitionally restriction along the site counit; hence the resulting equality is exactly the requested section equation.",
    "uses": [
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+    "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00XX (2), 00XY and Etale Cohomology Tag 03S2"
-   }
-  },
-  {
-   "text": "Evaluate $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ at $W\\in X_{\\Et}$. Since $(j_*\\rho_G)(W)=\\rho_G(W\\times_XY)$ and $u_G(W)=G(p_W)$, this is exactly $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W)=s|_{W\\times_XY}$ for $s\\in G(W)$. Taking $W=X$ and identifying $X\\times_XY$ with $Y$ gives the global-sections assertion; $\\rho_G(Y)$ is an isomorphism as a component of $\\rho$.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XZ"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-localization-functor-adjoint",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "def-weil-pbc-etale-site",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-weil-pbc-etale-sheaf-of-sets",
   "lem-weil-pbc-sets-adjoint-continuous-restriction-adjunction",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker S1 stage 3",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 00WW, 00XX, 00XY, 00XZ, 021F, 021H and 021I"
+  "place": "Tags 00XX and 00XY; the existing Mathlib adjunction constructions give the restriction comparison and its unit equation directly."
  },
  "mathlib_searches": [
   {
@@ -188,5 +137,15 @@
   "group": "G1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042419-L-1820875",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

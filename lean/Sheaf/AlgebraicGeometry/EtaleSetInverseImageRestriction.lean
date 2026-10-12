@@ -62,6 +62,15 @@ theorem etaleSetInverseImageRestriction {X U : Scheme.{u}} (j : U ⟶ X) [Etale 
           G.obj.map
             ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ j
               inferInstance trivial).counit.app W).op s := by
-  sorry
+  let adj₁ := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ j) (Type (u + 1))
+    (X.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
+  let siteAdj := MorphismProperty.Over.mapPullbackAdj @Etale ⊤ j inferInstance trivial
+  let adj₂ := siteAdj.sheafPushforwardContinuous (E := Type (u + 1))
+        (U.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale)
+  refine ⟨adj₁.leftAdjointUniq adj₂, ?_⟩
+  intro G W s
+  have h := Adjunction.unit_leftAdjointUniq_hom_app adj₁ adj₂ G
+  exact congrArg (fun f ↦ f.hom.app (op W) s) h
 
 end AlgebraicGeometry
