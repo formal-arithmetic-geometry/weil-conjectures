@@ -1,0 +1,122 @@
+{
+ "id": "lem-sc-artin-schreier-scheme-section-data",
+ "kind": "statement",
+ "title": "Construction of sectionwise Artin-Schreier maps",
+ "statement": "Let X be a scheme [def-pc-scheme] and p a prime with p = 0 in its global functions. For the lifted étale structure-module sheaf G [def-sc-etale-qcoherent-module] there are natural additive equivalences a_U from G(U) to Γ(U,O_U), morphisms wp:G→G and iota from the constant Z/p sheaf [def-sc-constant-sheaves] to G with zero composite, such that wp is x↦x^p-x under a and iota sends constant c to c.val. No exactness is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-sc-etale-qcoherent-module",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0A3J",
+  "place": "Opening Artin-Schreier short exact sequence for every scheme in characteristic p, together with the proof of Tag 03PL for local surjectivity."
+ },
+ "proof": [
+  {
+   "text": "The pullback of the structure module along each étale U → X is canonically\nits structure module. The tensor-pullback units and composition isomorphisms identify\nrestrictions with pullback of functions. Taking global sections and removing ULift\ntherefore gives natural additive equivalences a. The image of hp under U → X makes\np vanish in each section ring. The characteristic-p binomial identity makes\nx ↦ x^p - x additive, and ring maps commute with it. Conjugating by a defines a\nnatural presheaf endomorphism, hence a sheaf morphism wp. The maps c ↦ c.val • 1\nfrom ZMod p are additive (p = 0), commute with restrictions, and extend uniquely\nfrom the constant presheaf through sheafification to iota. Their values satisfy\nc^p = c, so the composite is zero on the sheafification unit. The universal\nproperty of sheafification implies iota ≫ wp = 0. These constructions give all\nthree displayed formulas. No assertion about kernels or local preimages is used.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-structure-sheaf",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "def-sc-etale-qcoherent-module",
+    "def-sc-constant-sheaves",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-sc-etale-qcoherent-module",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0A3J",
+  "place": "Construction and exactness argument for the opening sequence; local surjectivity by Tag 03PL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Existence of natural section identifications and Frobenius minus identity maps for the etale structure sheaf of a characteristic p scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius minus identity morphism of etale structure sheaves and local surjectivity",
+   "results": "8 results, including Algebra.IsStandardEtale.of_surjective and Algebra.FormallyEtale.iff_of_surjective; no sheaf Artin-Schreier construction or exactness theorem.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\"",
+   "results": "12 results, including CategoryTheory.ShortComplex.ShortExact, ShortExact.mk packaging via exact/mono/epi, shortExact_of_iso; these provide categorical packaging, not Artin-Schreier maps or their exactness.",
+   "date": "2026-10-12",
+   "verdict": "No Artin-Schreier statement; generic packaging available."
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|ArtinSchreier|artinSchreier",
+   "results": "25 displayed Mathlib hits, on Gauss sums, perfect closures, Frobenius numbers and field theory; no exact sheaf statement. Additional local rg on lean/ and slopmaster2 finds the curve-only ArtinSchreierData/Exact and relative affine-space Artin-Schreier geometry, not the general-scheme section-data or conditional exactness statement.",
+   "date": "2026-10-12",
+   "verdict": "No duplicate; curve hypotheses do not apply to arbitrary X."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ArtinSchreierSequenceScheme",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-artin-schreier-sequence-scheme",
+   "place": "Construction and section formulas",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionData",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinSchreierSchemeSectionData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_artinSchreier_section_data",
+  "statement": "theorem exists_artinSchreier_section_data (X : Scheme.{u}) (p : ℕ) [Fact p.Prime]\n    (hp : (p : Γ(X, ⊤)) = 0) :\n    let G := (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n      (Modules.etaleTensorSectionsSheaf (Modules.unit X))\n    ∃ (a : ∀ U : X.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))\n      (wp : G ⟶ G) (iota : X.constantZMod p ⟶ G) (hzero : iota ≫ wp = 0),\n      (∀ (U V : X.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),\n        a V (G.obj.map g x) = g.unop.left.appTop (a U x)) ∧\n      (∀ (U : X.Etaleᵒᵖ) (x : G.obj.obj U),\n        a U (wp.hom.app U x) = (a U x) ^ p - a U x) ∧\n      (∀ (U : X.Etaleᵒᵖ) (c : ZMod p),\n        a U (iota.hom.app U\n          ((toSheafify X.smallEtaleTopology\n            ((Functor.const X.Etaleᵒᵖ).obj\n              (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =\n          (c.val : Γ(U.unop.left, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T060732-L-2904579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T060732-L-2904579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

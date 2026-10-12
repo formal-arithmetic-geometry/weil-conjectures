@@ -6338,3 +6338,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists (stage 3; reviewer PASS; first push; landing 20261012T060731-L-2904190 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:07 L: merged deliver/B3/Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective (stage 3; reviewer PASS; first push; landing 20261012T060731-L-2904343 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/B3/Sheaf.AlgebraicGeometry.LocallyConstantNonzeroGerms (stage 3; reviewer PASS; first push; landing 20261012T060732-L-2904468 (interface); batch 20261012T060728; modules 3; new nodes 2)
+- 06:07 L: merged deliver/C1/Sheaf.AlgebraicGeometry.ArtinSchreierSequenceScheme (stage 3; reviewer PASS; first push; landing 20261012T060732-L-2904579 (interface); batch 20261012T060728; modules 3; new nodes 2)

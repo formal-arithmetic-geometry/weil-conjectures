@@ -6,12 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
-import Sheaf.AlgebraicGeometry.EtaleTensorSections
-import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
-import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
-import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionData
+import Sheaf.AlgebraicGeometry.ArtinSchreierSchemeSectionExact
 
 /-!
 # Artin–Schreier exactness for schemes of characteristic p
@@ -54,6 +50,10 @@ theorem exists_artinSchreier_shortExact (X : Scheme.{u}) (p : ℕ) [Fact p.Prime
       (Modules.etaleTensorSectionsSheaf (Modules.unit X))
     ∃ (iota : X.constantZMod p ⟶ G) (wp : G ⟶ G) (hzero : iota ≫ wp = 0),
       (ShortComplex.mk iota wp hzero).ShortExact := by
-  sorry
+  dsimp
+  obtain ⟨a, wp, iota, hzero, hrestr, hwp, hiota⟩ :=
+    exists_artinSchreier_section_data X p hp
+  exact ⟨iota, wp, hzero,
+    artinSchreier_section_data_shortExact X p hp _ a wp iota hzero hrestr hwp hiota⟩
 
 end AlgebraicGeometry.Scheme
