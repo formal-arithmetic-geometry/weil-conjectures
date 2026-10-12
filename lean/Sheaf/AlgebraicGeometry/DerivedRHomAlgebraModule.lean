@@ -9,7 +9,6 @@ public import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-!
 # Derived internal Hom with its algebra module structure
@@ -62,7 +61,20 @@ theorem sheafAlgebraMul_linear (U : Opens Y) (b : B.right.obj.obj (op U))
         r • (@id (B.toModule.val.obj (op W.unop.left))
           (B.right.obj.map W.unop.hom.op b *
             (@id (B.right.obj.obj (op W.unop.left)) x)))) := by
-  sorry
+  dsimp [Scheme.CommAlgebraSheaf.toModule, SheafOfModules.restrictScalars,
+    PresheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj,
+    SheafOfModules.unit, PresheafOfModules.unit, ModuleCat.restrictScalars,
+    ModuleCat.RestrictScalars.obj']
+  constructor
+  · intro x y
+    change _ * (x + y : B.right.obj.obj (op W.unop.left)) = _
+    exact mul_add _ _ _
+  · intro r x
+    let r' : B.right.obj.obj (op W.unop.left) := (B.hom.hom.app _).hom r
+    let x' : B.right.obj.obj (op W.unop.left) := x
+    let b' : B.right.obj.obj (op W.unop.left) := B.right.obj.map W.unop.hom.op b
+    change b' * (r' * x') = r' * (b' * x')
+    exact mul_left_comm _ _ _
 
 /-- The component of multiplication by b on B restricted to U.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -90,7 +102,18 @@ theorem sheafAlgebraMul_naturality (U : Opens Y) (b : B.right.obj.obj (op U))
         (sheafAlgebraMulApp Y B U b V) =
       sheafAlgebraMulApp Y B U b W ≫
         ((PresheafOfModules.restrictOver Y.sheaf.obj U).obj B.toModule.val).map f := by
-  sorry
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  change B.right.obj.map V.unop.hom.op b *
+    B.right.obj.map f.unop.left.op (@id (B.right.obj.obj (op W.unop.left)) x) =
+    B.right.obj.map f.unop.left.op
+      (B.right.obj.map W.unop.hom.op b * (@id (B.right.obj.obj (op W.unop.left)) x))
+  rw [map_mul]
+  have hb : B.right.obj.map f.unop.left.op (B.right.obj.map W.unop.hom.op b) =
+      B.right.obj.map V.unop.hom.op b := by
+    rw [← CommRingCat.comp_apply, ← Functor.map_comp, ← op_comp, Over.w]
+  rw [hb]
 
 /-- Multiplication by b on the first argument, on every open over U.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -123,7 +146,7 @@ theorem sheafAlgebraHom_smul (F : SheafOfModules.{u}
     (W : (Over U.unop)ᵒᵖ) (x : B.toModule.val.obj (op W.unop.left)) :
     (b • φ).app W x = φ.app W
       (B.right.obj.map W.unop.hom.op b * (@id (B.right.obj.obj (op W.unop.left)) x)) := by
-  sorry
+  rfl
 
 /-- The explicit action satisfies the module axioms.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -143,7 +166,54 @@ theorem sheafAlgebraHom_module_axioms (F : SheafOfModules.{u}
     (∀ (b c : B.right.obj.obj U) (φ : sheafAlgebraHomSections Y B F U),
       (b + c) • φ = b • φ + c • φ) ∧
     (∀ φ : sheafAlgebraHomSections Y B F U, (0 : B.right.obj.obj U) • φ = 0) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro φ
+    apply PresheafOfModules.hom_ext
+    intro W
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    simp only [sheafAlgebraHom_smul, map_one, one_mul]
+    rfl
+  · intro b c φ
+    apply PresheafOfModules.hom_ext
+    intro W
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    simp only [sheafAlgebraHom_smul, map_mul, mul_assoc, id_eq]
+    exact congrArg (fun z : B.right.obj.obj (op W.unop.left) ↦ φ.app W z)
+      (mul_left_comm _ _ _)
+  · intro b φ ψ
+    apply PresheafOfModules.hom_ext
+    intro W
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    rfl
+  · intro b
+    apply PresheafOfModules.hom_ext
+    intro W
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    rfl
+  · intro b c φ
+    apply PresheafOfModules.hom_ext
+    intro W
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    simp only [sheafAlgebraHom_smul, map_add, add_mul, map_add]
+    rfl
+  · intro φ
+    apply PresheafOfModules.hom_ext
+    intro W
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    simp only [sheafAlgebraHom_smul, map_zero, zero_mul]
+    rfl
 
 /-- The B(U)-module structure with the explicitly defined scalar action.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -174,7 +244,20 @@ theorem sheafAlgebraHom_restrict_smul (F : SheafOfModules.{u}
       @SMul.smul _ (sheafAlgebraHomSections Y B F V)
         (sheafAlgebraHomSMul Y B F V) (B.right.obj.map f b)
         ((PresheafOfModules.homObj.{u, u, u, u} B.toModule.val F.val).presheaf.map f φ) := by
-  sorry
+  apply PresheafOfModules.hom_ext
+  intro W
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  let φ' := PresheafOfModules.restrictOverMap f.unop φ
+  let b' : B.right.obj.obj (op W.unop.left) :=
+    B.right.obj.map ((Over.map f.unop).obj W.unop).hom.op b
+  let c' : B.right.obj.obj (op W.unop.left) :=
+    B.right.obj.map W.unop.hom.op (B.right.obj.map f b)
+  let x' : B.right.obj.obj (op W.unop.left) := x
+  change φ'.app W (b' * x') = φ'.app W (c' * x')
+  have hb : b' = c' := PresheafOfModules.overSections_coe_map_obj f.unop b W
+  rw [hb]
 
 /-- The Hom sheaf with B-module sections and the existing Hom restriction maps.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -209,7 +292,8 @@ theorem sheafAlgebraHom_map_smul {F G : SheafOfModules.{u}
       @SMul.smul _ (sheafAlgebraHomSections Y B G U)
         (sheafAlgebraHomSMul Y B G U) b
         ((PresheafOfModules.homObjMap (𝟙 B.toModule.val) g.val).app U φ) := by
-  sorry
+  simp only [PresheafOfModules.homObjMap_app_apply]
+  exact (Category.assoc _ _ _).symm
 
 /-- The functor map is the existing postcomposition map with its B-linearity proof.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -239,7 +323,19 @@ theorem sheafAlgebraHom_functor_axioms :
       (forget₂ CommRingCat RingCat)).obj Y.sheaf)) (f : F ⟶ G) (g : G ⟶ H),
       sheafAlgebraHomMap Y B (f ≫ g) =
         sheafAlgebraHomMap Y B f ≫ sheafAlgebraHomMap Y B g) := by
-  sorry
+  constructor
+  · intro F
+    ext U φ
+    change (PresheafOfModules.homObjMap (𝟙 B.toModule.val) (𝟙 F.val)).app U φ = φ
+    rw [PresheafOfModules.homObjMap_id]
+    rfl
+  · intro F G H f g
+    ext U φ
+    change (PresheafOfModules.homObjMap (𝟙 B.toModule.val) (f.val ≫ g.val)).app U φ =
+      (PresheafOfModules.homObjMap (𝟙 B.toModule.val) g.val).app U
+        ((PresheafOfModules.homObjMap (𝟙 B.toModule.val) f.val).app U φ)
+    simp only [PresheafOfModules.homObjMap_app_apply]
+    simp
 
 /-- The explicit algebra-valued Hom functor: sections are Hom and maps postcompose.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -260,7 +356,19 @@ Source: Stacks Project, Section 48.11, Tag 0BUZ
 Proof: On every section postcomposition by f + g is the sum of postcomposition by f and g.
 Extensionality gives additivity. -/
 theorem sheafAlgebraHom_additive : (sheafAlgebraHom Y B).Additive := by
-  sorry
+  constructor
+  intro F G f g
+  ext U φ
+  change (PresheafOfModules.homObjMap (𝟙 B.toModule.val) (f.val + g.val)).app U φ =
+    (PresheafOfModules.homObjMap (𝟙 B.toModule.val) f.val).app U φ +
+      (PresheafOfModules.homObjMap (𝟙 B.toModule.val) g.val).app U φ
+  simp only [PresheafOfModules.homObjMap_app_apply]
+  apply PresheafOfModules.hom_ext
+  intro W
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  rfl
 
 attribute [instance] sheafAlgebraHom_additive
 
@@ -276,7 +384,20 @@ theorem sheafAlgebraHom_underlying_linear (F : SheafOfModules.{u}
     (φ : sheafAlgebraHomSections Y B F U) :
     (B.hom.hom.app U).hom r • φ =
       r • (φ : (PresheafOfModules.homObj.{u, u, u, u} B.toModule.val F.val).obj U) := by
-  sorry
+  apply PresheafOfModules.hom_ext
+  intro W
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  rw [sheafAlgebraHom_smul]
+  change φ.app W (B.right.obj.map W.unop.hom.op ((B.hom.hom.app U).hom r) *
+      (@id (B.right.obj.obj (op W.unop.left)) x)) =
+    (Y.sheaf.obj.map W.unop.hom.op r) • φ.app W x
+  have hr := congrArg (fun k ↦ k r) (congrArg CommRingCat.Hom.hom
+    (B.hom.hom.naturality W.unop.hom.op))
+  dsimp at hr
+  rw [← hr]
+  exact (φ.app W).hom.map_smul (Y.sheaf.obj.map W.unop.hom.op r) x
 
 /-- Restricting the explicitly constructed Hom functor gives the existing O-module Hom.
 Source: Stacks Project, Section 48.11, Tag 0BUZ
@@ -388,8 +509,9 @@ theorem derivedRHomAlgebraModule_comparison :
       sheafAlgebraHomResolution Y ⋙
         (sheafAlgebraHom Y B).mapHomologicalComplex (ComplexShape.up ℤ) ⋙
           DerivedCategory.Q) := by
-  sorry
+  exact ⟨Localization.fac _ (sheafAlgebraHomResolution_inverts Y B) DerivedCategory.Q⟩
 
+set_option linter.unusedSectionVars false in
 /-- Restriction of algebra scalars preserves finite limits.
 Source: Stacks Project, Section 48.11, Tag 0BV1
 (blueprint: def-pc-derived-rhom-algebra-module).
@@ -399,10 +521,21 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat RingCat)).map B.hom)) := by
-  sorry
+  let O := (sheafCompose (Opens.grothendieckTopology Y)
+    (forget₂ CommRingCat RingCat)).obj Y.sheaf
+  let A := (sheafCompose (Opens.grothendieckTopology Y)
+    (forget₂ CommRingCat RingCat)).obj B.right
+  let F := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).map B.hom)
+  have : PreservesFiniteLimits (F ⋙ SheafOfModules.toSheaf O) := by
+    change PreservesFiniteLimits (SheafOfModules.toSheaf A)
+    infer_instance
+  exact preservesFiniteLimits_of_reflects_of_preserves F (SheafOfModules.toSheaf O)
 
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteLimits
 
+set_option linter.unusedSectionVars false in
 /-- Restriction of algebra scalars preserves finite colimits.
 Source: Stacks Project, Section 48.11, Tag 0BV1
 (blueprint: def-pc-derived-rhom-algebra-module).
@@ -412,7 +545,18 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteColimits :
     PreservesFiniteColimits (SheafOfModules.restrictScalars.{u}
       ((sheafCompose (Opens.grothendieckTopology Y)
         (forget₂ CommRingCat RingCat)).map B.hom)) := by
-  sorry
+  let O := (sheafCompose (Opens.grothendieckTopology Y)
+    (forget₂ CommRingCat RingCat)).obj Y.sheaf
+  let A := (sheafCompose (Opens.grothendieckTopology Y)
+    (forget₂ CommRingCat RingCat)).obj B.right
+  let F := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose (Opens.grothendieckTopology Y)
+      (forget₂ CommRingCat RingCat)).map B.hom)
+  have : PreservesFiniteColimits (SheafOfModules.toSheaf O) := inferInstance
+  have : PreservesFiniteColimits (F ⋙ SheafOfModules.toSheaf O) := by
+    change PreservesFiniteColimits (SheafOfModules.toSheaf A)
+    infer_instance
+  exact preservesFiniteColimits_of_reflects_of_preserves F (SheafOfModules.toSheaf O)
 
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteColimits
 
