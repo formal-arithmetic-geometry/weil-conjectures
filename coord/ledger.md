@@ -8056,3 +8056,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/D2/Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison (stage 3; reviewer PASS; first push; landing 20261012T144058-L-2090745 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:40 L: merged deliver/D2/Sheaf.AlgebraicGeometry.ProperNormalizedFibres (stage 3; reviewer PASS; first push; landing 20261012T144059-L-2090844 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/D2/Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackQCoHLocal (stage 3; reviewer PASS; first push; landing 20261012T144059-L-2090941 (interface); batch 20261012T144049; modules 2; new nodes 1)
+- 14:41 L: merged deliver/D2/Sheaf.Topology.NestedSliceExtensionStalks (stage 3; reviewer PASS; first push; landing 20261012T144059-L-2091039 (proof); batch 20261012T144049; modules 1; new nodes 0)
