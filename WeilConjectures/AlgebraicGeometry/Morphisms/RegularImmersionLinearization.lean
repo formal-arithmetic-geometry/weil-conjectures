@@ -117,7 +117,7 @@ theorem etale_linearization {k : Type u} [Field k] [PerfectField k] (c : ℕ) (i
     exact (RingHom.Smooth.of_bijective hιk).comp h₁
   have := LocallyOfFiniteType.isLocallyNoetherian aX
   have : IsNoetherianRing Γ(X, U.1) := IsLocallyNoetherian.component_noetherian U
-  -- the prime of `A` at `i z`
+  -- the prime of `Γ(X, U)` at `i z`
   obtain ⟨q, hq⟩ : i z ∈ Set.range U.2.fromSpec := by rw [U.2.range_fromSpec]; exact hzU
   have hp : RingHom.ker (algebraMap Γ(X, U.1) Γ(Z, i ⁻¹ᵁ U.1)) ≤ q.asIdeal := by
     intro s hs
