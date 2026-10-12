@@ -8,7 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.KFlatPullback
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
+import Sheaf.AlgebraicGeometry.AffineAlgebraStalkFlat
+import Sheaf.AlgebraicGeometry.StalkFlatTensorPullbackKernels
+import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-! # Exact tensor pullback to an affine morphism's direct-image algebra
 
@@ -63,6 +66,23 @@ theorem affine_algebra_tensorModulePullback_exact
         (TopCat.Sheaf.inverseImageModuleMap (toDirectImageAlgebraSpace f).hom.base
           (directImageAlgebraSpace f).sheaf M a) ≫ eqToHom (h N).symm) :
     PreservesFiniteLimits P ∧ PreservesFiniteColimits P := by
-  sorry
+  obtain ⟨Q, hQ, hmQ, hadd, ⟨adj⟩⟩ :=
+    RingedSpace.exists_tensorModulePullback (toDirectImageAlgebraSpace f)
+  let e : P ≅ Q := NatIso.ofComponents
+    (fun M ↦ eqToIso ((h M).trans (hQ M).symm)) (by
+      intro M N a
+      dsimp only [eqToIso]
+      rw [hm, hmQ]
+      simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_trans])
+  let : Q.Additive := hadd
+  let : Q.IsLeftAdjoint := adj.isLeftAdjoint
+  let : P.Additive := Functor.additive_of_iso e.symm
+  let : PreservesFiniteColimits P := preservesFiniteColimits_of_natIso e.symm
+  have {M N : SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f))}
+      (a : M ⟶ N) : PreservesLimit (parallelPair a 0) P :=
+    RingedSpace.stalkFlat_tensorModulePullback_preservesKernels
+      (toDirectImageAlgebraSpace f)
+      (fun x ↦ affine_algebra_stalkMap_flat f x) P h hm a
+  exact ⟨Functor.preservesFiniteLimits_of_preservesKernels P, inferInstance⟩
 
 end AlgebraicGeometry

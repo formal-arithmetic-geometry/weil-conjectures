@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-affine-algebra-stalk-flat",
+ "kind": "statement",
+ "title": "Stalkwise flatness over the affine direct-image algebra",
+ "statement": "Let $f:X\\to Y$ be an affine morphism of schemes [pqf-def-affine-morphism, def-pc-scheme], and let $g:(X,O_X)\\to(Y,f_*O_X)$ be the canonical ringed-space morphism [def-sc-direct-image-algebra-derived-category]. For every $x\\in X$, the canonical stalk ring homomorphism $(f_*O_X)_{f(x)}\\to O_{X,x}$ is flat [def-weil-pbc-flat-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, affine stalk calculation; read at https://stacks.math.columbia.edu/tag/0AVW"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-pc-scheme",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighborhood Spec B of f(x); its inverse image is Spec A. For p = x and q = f(x), distinguished opens D(b) with b outside q are cofinal neighborhoods. Their inverse images have section rings A localized at the image of b. Taking the stalk colimit gives S^{-1}A for S the image of B minus q. Germ compatibility identifies the source-to-target map with S^{-1}A → A_p.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "S avoids p, so A_p is a further localization of S^{-1}A. Localization is flat. The calculation applies at each point; the empty source case is vacuous.",
+   "uses": [
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0AVW, lemma-affine-morphism-equivalence, affine stalk calculation; read at https://stacks.math.columbia.edu/tag/0AVW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stalkwise flat tensor pullback ringed space preserves kernels and affine direct image algebra stalk localization",
+   "results": "Service returned Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RingHom.Flat\"",
+   "results": "RingHom.Flat, Flat.id, Flat.respectsIso, Flat.ofLocalizationPrime and other algebraic property declarations; no direct-image-algebra or ringed-space tensor-kernel theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalkMap.*Flat|preservesFiniteLimits.*tensor",
+   "results": "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; scheme Flat.stalkMap requires a flat scheme morphism. Local source inspection also found ModuleCat.preservesFiniteLimits_extendScalars_of_flat and StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom. No exact match for either new ringed-space statement.",
+   "date": "2026-10-12",
+   "verdict": "partial matches"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraTensorPullbackExact",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 0AVW affine stalk calculation and exactness of g-star, part of finite duality via the affine derived equivalence",
+   "via": [
+    "lem-sc-affine-algebra-tensor-pullback-exact",
+    "lem-sc-affine-algebra-derived-adjunction-qcoh",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraStalkFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraStalkFlat.lean",
+  "declaration": "AlgebraicGeometry.affine_algebra_stalkMap_flat",
+  "statement": "theorem affine_algebra_stalkMap_flat\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] (x : X) :\n    ((toDirectImageAlgebraSpace f).hom.stalkMap x).hom.Flat",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T112853-L-772992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T112853-L-772992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

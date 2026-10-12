@@ -16,33 +16,35 @@
  ],
  "proof": [
   {
-   "text": "Cover Y by affine opens Spec B, with inverse image Spec A. At p in Spec A above q in Spec B, the stalk (f_*O_X)_q is S^{-1}A for S the image of B minus q. The stalk O_X,p is A_p. Since S avoids p, A_p is a further localization of S^{-1}A, hence flat. The identification of the first stalk follows by taking the filtered colimit of A localized at elements of B minus q; these distinguished opens are cofinal among neighborhoods of q. The second is the scheme stalk formula. These calculations hold over each affine open, thus everywhere.",
+   "text": "Obtain the concrete additive tensor pullback Q and its adjunction to module direct image. The prescribed object and map equalities construct a natural isomorphism P ≅ Q: the two transported tensor maps agree after composing the equality isomorphisms. Transfer additivity and finite-colimit preservation from the additive left adjoint Q to P.",
+   "uses": [
+    "lem-pc-ringed-space-tensor-pullback-underived"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every stalk map of the canonical morphism to the affine direct-image algebra is flat. Apply the general stalkwise-flat tensor-pullback kernel theorem to P, using its transferred additivity and its prescribed object and map formulas.",
+   "uses": [
+    "lem-sc-affine-algebra-stalk-flat",
+    "lem-sc-stalk-flat-tensor-pullback-kernels"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "An additive kernel-preserving functor between these abelian categories preserves finite limits by Mathlib CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels. Combine with the finite-colimit instance from the first step.",
    "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The stalk of inverse image is G_q and stalks commute with sheafification and tensor products. The latter follows because stalks are filtered colimits and tensor commutes with colimits, with pure tensors giving the comparison and its inverse. Hence the stalk of P(G) is A_p tensor over S^{-1}A with G_q. The specified morphism formula identifies stalk maps with tensor products of module stalk maps. By flat tensor exactness this carries each stalkwise short exact sequence to a short exact sequence.",
-   "uses": [
-    "lem-weil-pbc-flat-tensor-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use exactness detection on stalks to conclude that P preserves short exact sequences. The morphism formula also makes P additive: inverse image, tensoring and sheafification preserve sums and zero maps. An additive functor between abelian categories preserving short exact sequences preserves kernels and cokernels as well as finite biproducts, hence finite limits and finite colimits. Empty X poses no problem: its module category is trivial.",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-module-stalk-exact"
+  "lem-pc-ringed-space-tensor-pullback-underived",
+  "lem-sc-affine-algebra-stalk-flat",
+  "lem-sc-stalk-flat-tensor-pullback-kernels"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Derived Categories of Schemes, Tag 0AVW, Lemma 36.5.4, affine stalk calculation in the proof; checked against https://stacks.math.columbia.edu/tag/0AVW"
+  "place": "Tag 0AVW, affine-morphism-equivalence; kernel/left-adjoint decomposition formalized by W2, 2026-10-12; source read at https://stacks.math.columbia.edu/tag/0AVW"
  },
  "mathlib_searches": [
   {
@@ -114,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A2",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261012T095850-L-311410",
+  "landing": "20261012T112853-L-772992",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
