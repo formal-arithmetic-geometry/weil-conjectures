@@ -22,65 +22,38 @@
  ],
  "proof": [
   {
-   "text": "Choose a proper closed subscheme annihilating G. Its ideal also annihilates the tensor square and cube and the structure sheaf quotient; quasi-coherence and the finite-type affine criterion make these coherent.",
+   "text": "Lift algebra operations and compatible adjoint maps, obtaining B, e, b, their section formula and transition compatibility. This is the operations-only part of the source; it does not supply quotient sections.",
    "uses": [
-    "lem-weil-pbc-module-support-proper-over-base",
-    "def-sbc-closed-immersion-ideal-sheaf",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-weil-pbc-finite-structure-algebra-operations-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "X is Noetherian by finite type over A. Coherence gives quasi-coherence of G, which transports across e to B.toModule. For each n the canonical thickening j_n is a closed immersion (surjective quotient spectrum and pullback stability). Compose pullback of e with psi_n and use the adjoint section formula to apply the single-closed-immersion affine exactness theorem. It gives surjectivity and the exact kernel ideal.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
     "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+    "lem-weil-pbc-closed-immersion-algebra-sections-exact"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor pullback and its canonical comparison commute with multiplication, unit and the monoidal constraints. Conjugate the canonical finite direct-image multiplications by psi; the displayed compatibility equation makes the family compatible.",
-   "uses": [
-    "lem-weil-pbc-module-pullback-tensor",
-    "lem-weil-pbc-module-tensor-symmetric-monoidal",
-    "lem-weil-pbc-affine-pushforward-base-change"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use full faithfulness of Grothendieck existence on the tensor square and the supporting structure-sheaf quotient to lift multiplication and unit uniquely. Faithfulness on the tensor cube, square and G checks associativity, commutativity and both unit identities. Equip the additive sheaf of G with these operations, yielding a commutative ring sheaf and its structure map. Its underlying module is isomorphic to G.",
-   "uses": [
-    "prop-weil-pbc-grothendieck-existence",
-    "def-weil-pbc-comm-algebra-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Take the adjoints of psi as the reduction maps. The multiplication and unit comparisons show they are ring maps; their compatibility follows by adjunction from hpsi. On affine U the canonical thickening has ring R/J, where J is the kernel of j_n on sections. The affine tilde/pullback formula identifies the reduction with B(U)/JB(U), and the isomorphism psi gives the stated ring equivalence with the formula on quotient classes.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-tilde-pullback-base-change"
-   ],
-   "elementary": false
+   "text": "For each affine open, compose Ideal.quotEquivOfEq for the kernel equality with RingHom.quotientKerEquivOfSurjective. The two quotient representative formulas give the requested formula. Package this family with e and b and retain the transition equality from the operations lemma.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-support-proper-over-base",
-  "def-sbc-closed-immersion-ideal-sheaf",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-weil-pbc-finite-structure-algebra-operations-lift",
+  "pqf-lem-locnoeth-lft",
   "pqf-lem-coherent-ft-locnoeth",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-module-pullback-tensor",
-  "lem-weil-pbc-module-tensor-symmetric-monoidal",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "prop-weil-pbc-grothendieck-existence",
-  "def-weil-pbc-comm-algebra-sheaf",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-tilde-pullback-base-change"
+  "lem-weil-pbc-closed-immersion-algebra-sections-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "09ZT, proof; expanded by G3 along the parent node steps",
-  "note": "Remaining algebra-only portion, after actual module algebraization"
+  "place": "09ZT algebra lifting followed by the affine computation of 01I9",
+  "note": "U3 reduction: operations-only lift plus proved general affine closed-immersion exactness and Mathlib first isomorphism theorem."
  },
  "mathlib_searches": [
   {
@@ -157,9 +130,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261012T112841-L-768142",
+  "landing": "20261012T144151-L-2109425",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

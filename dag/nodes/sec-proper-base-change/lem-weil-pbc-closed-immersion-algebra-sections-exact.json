@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-closed-immersion-algebra-sections-exact",
+ "kind": "statement",
+ "title": "Exact algebra reduction on affine sections of a closed immersion",
+ "statement": "Let j:Z -> X be a closed immersion of schemes [def-weil-closed-immersion], p:Y -> Z any scheme morphism [def-pc-scheme], and B a commutative algebra sheaf [def-weil-pbc-comm-algebra-sheaf] with quasi-coherent underlying module [pqf-def-coherent]. Let alpha:j^*B.toModule ≅ p_* O_Y be an isomorphism of modules, where j^* is tensor pullback [def-pc-module-pullback]. Suppose b:B -> (p j)_* O_Y is an algebra-sheaf map whose section map on every open equals the adjunction unit B.toModule -> j_*j^*B.toModule followed by j_*(alpha.hom) and the pushforward-composition comparison. For each affine open U [def-weil-affine-spectrum], b(U) is surjective and its ring kernel is the extension along O_X(U) -> B(U) of the kernel of j.app(U). This concerns one arbitrary closed immersion and assumes neither a formal system, nor completeness, nor proper support.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Stacks 01I9 (1), with 01BJ; read online at https://stacks.math.columbia.edu/tag/01I9"
+ },
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Restrict j to affine U. The inverse image is affine and j.app U is surjective. Set R=O_X(U), S=O_Z(j inverse U), T=B(U), phi=j.appLE U (j inverse U), and J=ker phi. The appLE map equals app because the restriction is the identity. The first isomorphism theorem gives the R-algebra equivalence R/J ≅ S.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical affine tensor-pullback section comparison to B.toModule. Compose its additive equivalence with T tensor_R (R/J) ≅ T tensor_R S and the Mathlib algebra equivalence T/(JT) ≅ T tensor_R (R/J). Its value on the class of x is the adjunction unit at x, by the pure-tensor formula and map_one.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate alpha to obtain an additive section equivalence and compose it with the preceding quotient equivalence. The hypothesis hb identifies its value on every quotient representative with b(U)(x). Surjectivity follows by choosing a quotient representative of the inverse image. Injectivity of the additive equivalence and the quotient zero criterion identify the ring kernel with JT. This is real Lean using only Mathlib and the existing affine section comparison, with no remaining hole.",
+   "uses": [
+    "def-weil-pbc-comm-algebra-sheaf",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Stacks 01I9 (1), with 01BJ; read online at https://stacks.math.columbia.edu/tag/01I9",
+  "note": "Expanded source argument; Lean docstring spells out the construction and edge cases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of pullback of quasi-coherent module along closed immersion on affine opens form quotient by defining ideal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-coherent algebra sheaf, pullback along a closed immersion on affine sections is surjective with kernel the extended ideal",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective; AlgebraicGeometry.Scheme.Hom.app_surjective; AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion; AlgebraicGeometry.Scheme.Hom.ker_apply; AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine; AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem; component lemmas used or retained as proof dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "quotIdealMapEquivTensorQuot|isClosedImmersion.*surjective|app_surjective",
+   "results": "Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean; Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem; component lemmas used or retained as proof dependencies."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.quotientKerAlgEquivOfSurjective",
+   "results": "Four first-isomorphism-theorem declarations; no sheaf algebra lifting theorem. Used quotientKerAlgEquivOfSurjective in the exactness proof.",
+   "date": "2026-10-12",
+   "verdict": "Component match only; second-reader search."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteStructureAlgebraLift",
+  "date": "2026-10-12",
+  "group": "U3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "09ZT algebraization subargument; affine quotient-section formula",
+   "via": [
+    "lem-weil-pbc-finite-structure-algebra-lift",
+    "lem-weil-pbc-algebraize-finite-structure-algebra"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ClosedImmersionAlgebraSectionsExact",
+  "file": "lean/Sheaf/Paper/ClosedImmersionAlgebraSectionsExact.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_algebra_sections_exact",
+  "statement": "theorem closedImmersion_algebra_sections_exact\n    {X Z Y : Scheme.{u}} (j : Z ⟶ X) [IsClosedImmersion j] (p : Y ⟶ Z)\n    (B : X.CommAlgebraSheaf) [B.toModule.IsQuasicoherent]\n    (α : (Scheme.Modules.tensorPullback j).obj B.toModule ≅\n      (Scheme.Modules.pushforward p).obj (SheafOfModules.unit Y.ringCatSheaf))\n    (b : B ⟶ 𝒪⁎(p ≫ j))\n    (hb : ∀ (U : X.Opens) (x : B.right.obj.obj (op U)),\n      (b.right.hom.app (op U)).hom x =\n        ((Scheme.Modules.pushforwardComp p j).hom.app\n          (SheafOfModules.unit Y.ringCatSheaf)).app U\n            (((Scheme.Modules.pushforward j).map α.hom).app U\n              (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j)).unit.app\n                B.toModule).app U x)))\n    (U : X.Opens) (hU : IsAffineOpen U) :\n    Function.Surjective (b.right.hom.app (op U)).hom ∧\n      RingHom.ker (b.right.hom.app (op U)).hom =\n        (RingHom.ker (j.app U).hom).map (B.hom.hom.app (op U)).hom",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T144151-L-2109425",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T144151-L-2109425",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

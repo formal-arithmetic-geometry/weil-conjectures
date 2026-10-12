@@ -16,15 +16,12 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 
-import Sheaf.AlgebraicGeometry.GrothendieckExistence
-import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
-import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.Paper.FiniteStructureAlgebraOperationsLift
+import Sheaf.Paper.ClosedImmersionAlgebraSectionsExact
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.TensorPullbackTilde
-import Sheaf.AlgebraicGeometry.ModulePullbackTensor
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Algebra structures on algebraized finite direct images
 
@@ -45,6 +42,10 @@ set_option hygiene false in
 local notation "𝒪⁎" g:max => Under.mk (⟨(g).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (g).base).obj (Scheme.sheaf _))
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Transport through the module isomorphism and identify the section quotient ideals.
 /-- Lift the algebra structure on an already algebraized coherent module system.
 Source: Stacks Project, Lemma 09ZT, the multiplication and unit paragraphs;
 Theorem 088E and Remark 088F, and Schemes Lemma 01I9.
@@ -131,6 +132,33 @@ theorem finite_structure_algebra_lift
               ((fnY n ≫ pullback.fst f
                 (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))) ⁻¹ᵁ U)
               (by rw [← Scheme.Hom.comp_preimage, hw n]) =
-            (b n).right.hom.app (op U)) := by sorry
+            (b n).right.hom.app (op U)) := by
+  obtain ⟨B, e, b, hb, hcompat⟩ :=
+    finite_structure_algebra_operations_lift A I X f i hi hp c hc
+      Yn fnY gn hcart hw G hG hproper ψ hψ
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+  have hqc : G.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X G).mp hG).1
+  have : B.toModule.IsQuasicoherent :=
+    (SheafOfModules.isQuasicoherent X.ringCatSheaf).prop_of_iso e.symm hqc
+  refine ⟨B, ⟨e⟩, b, ?_, hcompat⟩
+  intro n U hU
+  let j := pullback.fst f
+    (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))))
+  let qhom := CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))
+  have hqhom : Function.Surjective qhom.hom := Ideal.Quotient.mk_surjective
+  have : IsClosedImmersion (Spec.map qhom) :=
+    IsClosedImmersion.spec_of_surjective qhom hqhom
+  have : IsClosedImmersion j := by infer_instance
+  let α := (Scheme.Modules.tensorPullback j).mapIso e ≪≫ ψ n
+  obtain ⟨hsurj, hker⟩ := closedImmersion_algebra_sections_exact
+    j (fnY n) B α (b n) (hb n) U hU
+  refine ⟨(Ideal.quotEquivOfEq hker.symm).trans
+    (RingHom.quotientKerEquivOfSurjective hsurj), ?_⟩
+  intro x
+  exact (congrArg (RingHom.quotientKerEquivOfSurjective hsurj)
+    (Ideal.quotEquivOfEq_mk hker.symm x)).trans
+      (RingHom.quotientKerEquivOfSurjective_apply_mk hsurj x)
+
 
 end AlgebraicGeometry
