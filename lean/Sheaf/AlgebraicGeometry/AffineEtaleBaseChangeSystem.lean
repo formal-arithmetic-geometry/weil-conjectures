@@ -5,12 +5,11 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-public import Mathlib.CategoryTheory.Category.Cat
-public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+public import Mathlib.CategoryTheory.Sites.Continuous
+import Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeGeometry
+import Sheaf.AlgebraicGeometry.AffineEtaleCartesianSheafAdjunction
+import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # AffineEtaleBaseChangeSystem
@@ -120,6 +119,20 @@ theorem exists_affineEtale_baseChange_system
             Sheaf (fullAffineEtaleTopology c.pt) (Type u),
           Nonempty (L ⊣ (v i).sheafPushforwardContinuous (Type u)
             (fullAffineEtaleTopology (D.obj (op i))) (fullAffineEtaleTopology c.pt)) ∧
-          PreservesFiniteLimits L)) := by sorry
+          PreservesFiniteLimits L)) := by
+  obtain ⟨d, hd⟩ := exists_affineEtale_baseChange_geometry D c hc
+  rcases hd with ⟨hid, hp, hq, hγl, hγr, hδ, hγp, hδp, hγc, hδc,
+    hUc, hUp, hvc, hvp, hUcont, hvcont⟩
+  refine ⟨d.U, d.v, d.p, d.q, d.gamma, d.delta, hid, hp, hq, hγl, hγr, hδ,
+    hγp, hδp, hγc, hδc, hUc, hUp, hvc, hvp, hUcont, hvcont, ?_, ?_⟩
+  · intro i j h
+    have := hUcont i j h
+    exact affineEtale_cartesian_sheafAdjunction (D.map (homOfLE h).op)
+      (d.U i j h) (d.p i j h) (hp i j h)
+  · intro i
+    have := hvcont i
+    have := AlgebraicGeometry.isAffineHom_π_app D c hc (op i)
+    exact affineEtale_cartesian_sheafAdjunction (T := c.pt) (c.π.app (op i))
+      (d.v i) (d.q i) (hq i)
 
 end AlgebraicGeometry.Scheme

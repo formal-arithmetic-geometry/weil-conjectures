@@ -30,69 +30,37 @@
  ],
  "proof": [
   {
-   "text": "1. The cone projections are affine by uniqueness of limits and\n   lem-weil-pbc-limit-affine-transition. Affine morphism permanence makes base change\n   preserve affine objects; étaleness is stable under base change.",
+   "text": "Choose the normalized geometric system and unpack its fourteen geometric clauses and two continuity families.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-base-change-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the cartesian affine étale sheaf-adjunction theorem separately to every affine transition, using its first projection and cartesian square.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-cartesian-sheaf-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The limit cone projections are affine by Mathlib AlgebraicGeometry.isAffineHom_π_app. Apply the same sheaf-adjunction theorem to each cone projection and its cartesian square. Assemble the original existential witnesses and conjunction.",
    "uses": [
     "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-etale-base-change-finite-limits"
+    "lem-weil-pbc-affine-etale-cartesian-sheaf-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
-   }
-  },
-  {
-   "text": "2. Choose identity functors on diagonal indices, ordinary restricted base change on\n   other indices, and base change along the cone projections for v. The first projections\n   give natural transformations p and q. For diagonal indices use the identity projection.",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
-   }
-  },
-  {
-   "text": "3. Pullback pasting and uniqueness give natural comparisons gamma and delta compatible\n   with the first projections. Use identity comparisons on diagonal indices. Both sides\n   of every cocycle have the same two projections, hence agree by pullback uniqueness.",
-   "uses": [
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
-   }
-  },
-  {
-   "text": "4. Base change preserves finite jointly surjective étale coverings and all pullbacks.\n   This gives continuity. Restriction to the affine site is a sheaf equivalence (04HR).\n   Conjugate small-site inverse image by these equivalences to obtain the displayed\n   adjunctions and finite-limit preservation for sheaves of Type u. The construction is\n   coefficient-universe independent; equivalences preserve finite limits.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-etale-base-change-continuous",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+  "lem-weil-pbc-affine-etale-base-change-geometry",
+  "lem-weil-pbc-affine-etale-cartesian-sheaf-adjunction",
+  "lem-weil-pbc-limit-affine-transition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Adaptation of the cited proof steps to chosen pullback squares and the original universe levels; source read online at https://stacks.math.columbia.edu/tag/0EYL"
+  "place": "0EYL and 03Q1(2), with Topologies 04HR; stage-3 reduction into geometric system and cartesian sheaf adjunction; second reading by G1"
  },
  "mathlib_searches": [
   {
@@ -151,11 +119,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "X-12add",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T044740-L-2033435",
+  "landing": "20261012T095901-L-316164",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the unchanged item signature and reduction with its node, both helper statements with their Lean signatures and sources, and import changes with the sole user's imports; compilation and axiom checks pass."
  }
 }

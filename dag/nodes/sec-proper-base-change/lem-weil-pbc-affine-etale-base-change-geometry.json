@@ -1,0 +1,230 @@
+{
+ "id": "lem-weil-pbc-affine-etale-base-change-geometry",
+ "kind": "statement",
+ "title": "Normalized geometric affine étale base-change system",
+ "statement": "Let I be a nonempty directed preorder in universe u, D : I^op → Scheme.{u} an inverse system of schemes [def-pc-scheme] with affine transition morphisms [pqf-def-affine-morphism] and quasi-compact quasi-separated stages [def-weil-pbc-scheme-conventions], and c a limiting cone of D. Write C_i for the full affine étale site of D_i and C for that of c.pt, with the precoverages and generated topologies of [def-weil-pbc-full-affine-etale-site]. There exist functors U_ij : C_i → C_j for i ≤ j and v_i : C_i → C, natural first projections p_ij and q_i on underlying schemes, and natural isomorphisms gamma_ijk : U_ij U_jk ≅ U_ik and delta_ij : U_ij v_j ≅ v_i. Each U_ii is the identity. The squares of p_ij and q_i with the structure maps and D_ji and c_i are pullbacks [def-pc-fibre-product]. Gamma with either adjacent indices equal and delta_ii are heterogeneously equal to identity isomorphisms. Gamma and delta commute with first projections: their first projections are respectively p_jk followed by p_ij and q_j followed by p_ij. Gamma satisfies the associativity cocycle, and delta satisfies the cone cocycle with gamma. Every U_ij and v_i preserves finite standard covering presieves and every cospan pullback, and is continuous for the generated topologies [def-weil-pbc-sites-and-cohomology]. No sheaf-adjunction conclusion is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, geometric base-change system in the qcqs case; Sites 00X1"
+ },
+ "proof": [
+  {
+   "text": "1. The cone projections are affine by uniqueness of limits and\n   lem-weil-pbc-limit-affine-transition. Affine morphism permanence makes base change\n   preserve affine objects; étaleness is stable under base change.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
+   }
+  },
+  {
+   "text": "2. Choose identity functors on diagonal indices, ordinary restricted base change on\n   other indices, and base change along the cone projections for v. The first projections\n   give natural transformations p and q. For diagonal indices use the identity projection.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
+   }
+  },
+  {
+   "text": "3. Pullback pasting and uniqueness give natural comparisons gamma and delta compatible\n   with the first projections. Use identity comparisons on diagonal indices. Both sides\n   of every cocycle have the same two projections, hence agree by pullback uniqueness.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "0EYL, proof of the qcqs case; steps 1--4 of the parent node"
+   }
+  },
+  {
+   "text": "Base change preserves finite jointly surjective étale covers and cospan pullbacks, including the empty cover. Apply Mathlib Functor.isContinuous_toGrothendieck_of_pullbacksPreservedBy to the generated topologies. No sheaf adjunction is asserted here.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "lem-weil-pbc-etale-base-change-continuous"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "0EYL, geometric base-change system in the qcqs case; Sites 00X1; source read online; adapted to full affine subcategories and Type u"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T05:17:59Z",
+   "tool": "leanfinder",
+   "query": "pullback functor affine etale site continuous left exact sheaf adjoint",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+    "SheafOfModules.pullbackIso",
+    "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback",
+    "CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+    "CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous",
+    "SheafOfModules.instIsLeftAdjointPullback",
+    "SheafOfModules.pullback",
+    "CategoryTheory.Functor.sheafPullback"
+   ],
+   "digest": "76775910a27603d7",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, SheafOfModules.pullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback, CategoryTheory.Functor.sheafPullback",
+   "verdict": "no exact match after checking the relevant signatures"
+  },
+  {
+   "t": "2026-10-12T05:18:01Z",
+   "tool": "loogle",
+   "query": "Functor.IsContinuous",
+   "sub": "",
+   "ok": true,
+   "n_hits": 0,
+   "note": "loogle: unknown identifier 'Functor.IsContinuous'",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "loogle: unknown identifier 'Functor.IsContinuous'",
+   "verdict": "query failed to resolve its identifier; no absence verdict"
+  },
+  {
+   "t": "2026-10-12T05:18:52Z",
+   "tool": "grep",
+   "query": "pullbackComp|isContinuous_toGrothendieck_of_pullbacksPreservedBy|sheafAdjunctionContinuous",
+   "sub": "",
+   "ok": true,
+   "n_hits": 25,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "Mathlib/CategoryTheory/Subobject/MonoOver.lean",
+    "Mathlib/CategoryTheory/Subobject/MonoOver.lean",
+    "Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean"
+   ],
+   "digest": "dc244a9a3d00a7de",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "verdict": "no exact match after checking the relevant signatures"
+  },
+  {
+   "t": "2026-10-12T05:20:29Z",
+   "tool": "grep",
+   "query": "isContinuous_toGrothendieck_of_pullbacksPreservedBy|sheafAdjunctionContinuous",
+   "sub": "CategoryTheory/Sites",
+   "ok": true,
+   "n_hits": 7,
+   "note": "",
+   "top": [
+    "Mathlib/CategoryTheory/Sites/Point/Comap.lean",
+    "Mathlib/CategoryTheory/Sites/Pullback.lean",
+    "Mathlib/CategoryTheory/Sites/Pullback.lean",
+    "Mathlib/CategoryTheory/Sites/Pullback.lean",
+    "Mathlib/CategoryTheory/Sites/Pullback.lean",
+    "Mathlib/CategoryTheory/Sites/Pullback.lean",
+    "Mathlib/CategoryTheory/Sites/Continuous.lean"
+   ],
+   "digest": "b9bfafe26205d26e",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Pullback.lean, Mathlib/CategoryTheory/Sites/Continuous.lean",
+   "verdict": "no exact match after checking the relevant signatures"
+  },
+  {
+   "t": "2026-10-12T05:20:29Z",
+   "tool": "leansearch",
+   "query": "coherent affine etale base change functors cartesian sheaf pushforward left adjoint finite limits",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no absence verdict"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeSystem",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "affine-case proof via pair henselization and the limit theorem 09YQ: coherent affine étale base change underlying the affine-site colimit",
+   "via": [
+    "lem-weil-pbc-affine-etale-base-change-system",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleBaseChangeGeometry.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_affineEtale_baseChange_geometry",
+  "statement": "theorem exists_affineEtale_baseChange_geometry\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ (i : Iᵒᵖ), CompactSpace (D.obj i)]\n    [∀ (i : Iᵒᵖ), QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) :\n    ∃ d : AffineEtaleBaseChangeSystemData D c, affineEtaleBaseChangeGeometry D c d",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-12add",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095901-L-316164",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-12add",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T095901-L-316164",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged item signature and reduction with its node, both helper statements with their Lean signatures and sources, and import changes with the sole user's imports; compilation and axiom checks pass."
+ }
+}
