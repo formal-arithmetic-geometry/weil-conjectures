@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-data-target-naturality",
+ "kind": "statement",
+ "title": "Target naturality for arbitrary resolution data",
+ "statement": "For h:X -> Y, phi:G -> h_*F and b:F -> Fprime, let D and E be arbitrary resolution data of [def-weil-pbc-module-cohomology-fmap] for phi and phi followed by h_*b respectively. For every p, D.map(p) followed by H^p(X,b) of [def-sc-ringed-space-module-cohomology] equals E.map(p).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7, Equation 01F9 and Remark 01FB; Derived Categories 013P, 013S, 05TG for resolution comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Proof: lift b to c : D.I -> E.I, and lift the identity of G to\nv : D.J -> E.J, both commuting with augmentations. Since E.K is a bounded\nbelow complex of injectives and D.lambda is a quasi-isomorphism, there is a\nmap e : D.K -> E.K with D.lambda followed by e homotopic to h_*c followed\nby E.lambda. Extend the nonnegative complexes by zero to apply 05TG.\nThe maps D.beta followed by e and v followed by E.beta have homotopic\ncomposites with the augmentation of D.J: use the two compatibility squares,\nthe augmentation equation for c, and the homotopy just constructed. Uniqueness\nup to homotopy (013S) therefore identifies these two maps. Global sections\npreserves homotopies, so both comparison squares commute on homology.\nWrite B_D and B_E for H(Gamma beta), and M_D and M_E for the invertible\nvertical homology maps. The squares say B_D H(Gamma e) = H(Gamma v) B_E\nand M_D H(Gamma e) = H(Gamma c) M_E, after the canonical section comparisons.\nMultiply the second square by the two inverses and substitute the first.\nThe resulting equality is B_D M_D inverse H(Gamma c) =\nH(Gamma v) B_E M_E inverse. Naturality of isoRightDerivedObj for c and v\nand naturality of the forgetful homology isomorphisms give the displayed\nformula. No invertibility of c, e or b is required.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-sc-ringed-space-module-cohomology",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Parent basic-properties proof, clause (4), made precise for arbitrary resolution data"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor degree zero augmentation naturality and semilinearity of cohomology maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps on cohomology computed using injective resolutions are natural in a morphism of target sheaves",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.desc_commutes_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match for arbitrary h-map resolution data; generic comparison tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero_eq|mapHomologyIso_inv_naturality",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match for arbitrary h-map resolution data; generic comparison tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*homology|homology.*restrictScalars|toRightDerivedZero.*naturality",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology comparison for restriction of scalars along a ring homomorphism preserves scalar multiplication",
+   "results": "ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalars.smul_def', ModuleCat.restrictScalars.smul_def, CategoryTheory.Mod_.scalarRestriction_smul, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, LinearMap.restrictScalars_smul, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.restrictScalarsComp'_hom_app",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties",
+  "group": "V2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Basic-properties proof clause (4) comparison on homology",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapDataTargetNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapDataTargetNaturality.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ModuleCohomologyFMapData.map_target_naturality",
+  "statement": "theorem ModuleCohomologyFMapData.map_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y) {G : SheafOfModules.{u} Y.ringCatSheaf} {F F' : SheafOfModules.{u} X.ringCatSheaf} (φ : G ⟶ (pushforward h).obj F) (b : F ⟶ F') (D : ModuleCohomologyFMapData h G F φ) (E : ModuleCohomologyFMapData h G F' (φ ≫ (pushforward h).map b)) (p : ℕ) : D.map p ≫ (forget₂ _ AddCommGrpCat.{u}).map ((X.toRingedSpace.moduleCohomology p).map b) = E.map p",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T165538-L-2941949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T165538-L-2941949",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

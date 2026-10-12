@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-module-cohomology-fmap-zero-augmentation",
+ "kind": "statement",
+ "title": "Augmentation compatibility in degree zero",
+ "statement": "For h:X -> Y, phi:G -> h_*F and any resolution data D of [def-weil-pbc-module-cohomology-fmap], the canonical map Gamma(Y,G) -> H^0(Y,G) followed by D.map(0) equals Gamma(phi) followed by Gamma(X,F) -> H^0(X,F). Cohomology and the augmentations are those of [def-sc-ringed-space-module-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Section 01F7, Equation 01F9 and Remark 01FB; Derived Categories 013P, 013S, 05TG for resolution comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Proof: express each toRightDerivedZero using its resolution by\nInjectiveResolution.toRightDerivedZero_eq. Before the inverse vertical map is\napplied, both routes send a section s of G to the zero-cycle represented by\nβ⁰(s_J(s)): D.compatible identifies this with lambda⁰(h_*s_I(φ(s))).\nThe comparison D.a.inv is the canonical restriction along h⁻¹(Y) = X by\nD.sections, so it identifies the latter section with s_I(φ_Y(s)) on X.\nNaturality of cyclesMap and homologyπ transfers the augmentation equation to\nH⁰. The vertical homology map is invertible by D.invertible; compose with its\ninverse and cancel. Finally cancel the two resolution comparison isomorphisms.\nThe result is the stated augmentation square; left exactness is only needed\nlater to invert its two augmentation maps.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "def-sc-ringed-space-module-cohomology",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Parent basic-properties proof, clause (2), made precise for arbitrary resolution data"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "right derived functor degree zero augmentation naturality and semilinearity of cohomology maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps on cohomology computed using injective resolutions are natural in a morphism of target sheaves",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom', CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.InjectiveResolution.desc_commutes_assoc",
+   "date": "2026-10-12",
+   "verdict": "no exact match for arbitrary h-map resolution data; generic comparison tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero_eq|mapHomologyIso_inv_naturality",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match for arbitrary h-map resolution data; generic comparison tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*homology|homology.*restrictScalars|toRightDerivedZero.*naturality",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology comparison for restriction of scalars along a ring homomorphism preserves scalar multiplication",
+   "results": "ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalars.smul_def', ModuleCat.restrictScalars.smul_def, CategoryTheory.Mod_.scalarRestriction_smul, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, LinearMap.restrictScalars_smul, CategoryTheory.Mod_.scalarRestriction_hom, ModuleCat.restrictScalarsComp'_hom_app",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-13",
+   "verdict": "No exact match for h-map resolution data; restriction-of-scalars and augmentation comparison tools only (second reading)."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties",
+  "group": "V2",
+  "date": "2026-10-12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Basic-properties proof clause (2) augmentation square",
+   "via": [
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleCohomologyFMapZeroAugmentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCohomologyFMapZeroAugmentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.ModuleCohomologyFMapData.map_zero_augmentation",
+  "statement": "theorem ModuleCohomologyFMapData.map_zero_augmentation {X Y : Scheme.{u}} {h : X ⟶ Y} {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf} {φ : G ⟶ (pushforward h).obj F} (D : ModuleCohomologyFMapData h G F φ) : (forget₂ _ AddCommGrpCat.{u}).map ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).toRightDerivedZero.app G) ≫ D.map 0 = (forget₂ _ AddCommGrpCat.{u}).map ((RingedSpace.globalSectionsFunctor Y.toRingedSpace).map φ) ≫ (forget₂ (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{u}).map ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app F)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T165538-L-2941949",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T165538-L-2941949",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
