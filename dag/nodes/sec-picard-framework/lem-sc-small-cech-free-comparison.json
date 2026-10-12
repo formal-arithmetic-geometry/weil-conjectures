@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-small-cech-free-comparison",
+ "kind": "statement",
+ "title": "Free Yoneda comparison of small categorical Cech differentials",
+ "statement": "For the category $C$, family $\\pi_i:U_i\\to X$, and free presheaf chain complex $K$ of [lem-sc-small-cech-free-exact], let $P:C^{op}\\to\\mathrm{Ab}_v$ be any presheaf. Let $L$ be the categorical categorical Cech cochain complex of this family with values in $P$. Define $e_n:\\operatorname{Hom}(K_n,P)\\simeq_+ L^n$ by evaluating a natural transformation on the identity generator in each represented product, then identifying those sections with the categorical product by its universal property. For every $n\\in\\mathbb N$ and $a:K_n\\to P$, one has $e_{n+1}(d_{n+1,n}\\circ a)=d_L^n(e_n(a))$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AS",
+  "place": "Tag 03AS (lemma-cech-complex), its free representable identification"
+ },
+ "stmt_deps": [
+  "lem-sc-small-cech-free-exact"
+ ],
+ "proof": [
+  {
+   "text": "Construct the free Yoneda additive equivalence by evaluating a transformation on identity generators. Construct its inverse by applying the presheaf restriction map to each supplied section and extending linearly to the free group. Naturality and the generator universal property prove the two inverse identities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the explicit dependent-function product limit cone to obtain the categorical product comparison. Its inverse followed by a product projection is evaluation at that index.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of a transformation shows that precomposition by every free face map corresponds to the restriction map along the underlying product projection. Expand both alternating differentials, use additivity to pass through sums and integer multiples, and apply product extensionality and the projection identity to equate every summand.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/03AS",
+  "place": "Proof of Tag 03AS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Free abelian representable Yoneda adjunction identifies Cech differentials with alternating projection boundaries",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free abelian representable Yoneda adjunction identifies Cech differentials with alternating projection boundaries",
+   "results": "AlternatingFaceMapComplex and Moore-complex formulas; no direct comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "free.*[Cc]ech|[Cc]ech.*free|cochainEquiv_boundary",
+   "results": "No Mathlib matches. Local source searches found the max(u,v)-valued cofree-presheaf theorem and module-presheaf free complexes; neither directly identifies the small abelian categorical complex here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SmallInjectivePresheafCechExact",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-spectral",
+   "place": "Row-augmentation argument in the proof of the Cech-to-cohomology spectral sequence; sk-thm-picard-cech Step 3: free presheaf chains followed by Hom into injectives.",
+   "via": [
+    "lem-sc-small-injective-presheaf-cech-exact",
+    "lem-sc-injective-cech-augmentation-quasi-iso",
+    "lem-sc-injective-cech-total-sections-nat",
+    "lem-sc-injective-cech-total-sections",
+    "lem-sc-cech-resolution-total"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SmallCechFreeComparison",
+  "file": "lean/Sheaf/CategoryTheory/SmallCechFreeComparison.lean",
+  "declaration": "CategoryTheory.SmallCech.cochainEquiv_boundary",
+  "declarations": [
+   "CategoryTheory.SmallCech.freeDesc",
+   "CategoryTheory.SmallCech.freeHomEquiv",
+   "CategoryTheory.SmallCech.productIso",
+   "CategoryTheory.SmallCech.sectionsEquiv",
+   "CategoryTheory.SmallCech.cochainEquiv",
+   "CategoryTheory.SmallCech.cochainEquiv_boundary"
+  ],
+  "statement": "theorem cochainEquiv_boundary (n : ℕ) (a : (freeComplex X U π).X n ⟶ P) : cochainEquiv X U π P (n + 1) ((freeComplex X U π).d (n + 1) n ≫ a) = (((cechComplexFunctor (fun i ↦ Over.mk (π i))).obj ((Over.forget X).op ⋙ P)).d n (n + 1)) (cochainEquiv X U π P n a)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

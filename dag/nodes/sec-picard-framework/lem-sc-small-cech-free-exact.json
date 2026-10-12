@@ -1,0 +1,128 @@
+{
+ "id": "lem-sc-small-cech-free-exact",
+ "kind": "statement",
+ "title": "Positive exactness of small free abelian Cech presheaf chains",
+ "statement": "Let $C$ be a category with objects in universe $u$ and Hom sets in $v$, with finite wide pullbacks. Let $X\\in C$, let $I$ be a type in $v$, and let $\\pi_i:U_i\\to X$ be any family. In degree $n$, define the presheaf $T_n(Z)=\\coprod_{t:\\mathrm{Fin}(n+1)\\to I}\\operatorname{Hom}_C(Z,(\\prod_{j}\\,(U_{t(j)}\\to X)).\\mathrm{left})$. Restriction precomposes the represented maps. Faces delete the indicated coordinate using the product projection. Apply the free abelian group functor objectwise and take the alternating chain complex $K$, with differential $\\sum_j(-1)^j\\delta_j$. Then $K$ is exact at $q+1$ for every $q\\in\\mathbb N$. No covering or injectivity condition is required.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AT",
+  "place": "Tag 03AT (lemma-homology-complex), with the complex of Tag 03AS"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Evaluate at any object Z and partition the degree-n basis by the common composite Z -> X. The product universal property identifies each fibre with (n+1)-tuples of lifts of that composite to the family. Projections delete entries, preserving the fibre. All basis sets are v-small.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For each nonempty lift set choose one lift and prepend it to every tuple. The first face of this insertion is the identity; its remaining faces are insertions after deleting an entry, with opposite signs. Extending to the free abelian group proves d h + h d = id in positive degrees. Empty lift sets give zero chain groups. This is the explicit homotopy argument in Stacks 03AT.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The free group on the disjoint union is the direct sum of its fibre groups. A cycle has finite support, so the fibrewise primitives combine to a primitive in that direct sum. Kernels and cokernels of abelian presheaves are computed objectwise; therefore the evaluated exactness proves exactness of K at q+1.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/03AT",
+  "place": "Proof of Tag 03AT"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The alternating chain complex of free abelian representable presheaves on a family of fiber products is exact in positive degrees",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The alternating chain complex of free abelian representable presheaves on a family of fiber products is exact in positive degrees",
+   "results": "Generic exactness results, including ChainComplex.alternatingConst_exactAt; no theorem for these representable sums.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "free.*[Cc]ech|[Cc]ech.*free|cochainEquiv_boundary",
+   "results": "No Mathlib matches. Local source searches found the max(u,v)-valued cofree-presheaf theorem and module-presheaf free complexes; neither directly identifies the small abelian categorical complex here.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SmallInjectivePresheafCechExact",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-spectral",
+   "place": "Row-augmentation argument in the proof of the Cech-to-cohomology spectral sequence; sk-thm-picard-cech Step 3: free presheaf chains followed by Hom into injectives.",
+   "via": [
+    "lem-sc-small-injective-presheaf-cech-exact",
+    "lem-sc-injective-cech-augmentation-quasi-iso",
+    "lem-sc-injective-cech-total-sections-nat",
+    "lem-sc-injective-cech-total-sections",
+    "lem-sc-cech-resolution-total"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SmallCechFreeExact",
+  "file": "lean/Sheaf/CategoryTheory/SmallCechFreeExact.lean",
+  "declaration": "CategoryTheory.SmallCech.freeComplex_exactAt",
+  "declarations": [
+   "CategoryTheory.SmallCech.tupleRepresentables",
+   "CategoryTheory.SmallCech.tupleRepresentablesMap",
+   "CategoryTheory.SmallCech.freePresheaf",
+   "CategoryTheory.SmallCech.freeComplex",
+   "CategoryTheory.SmallCech.freeComplex_exactAt"
+  ],
+  "statement": "theorem freeComplex_exactAt (q : ℕ) : (freeComplex X U π).ExactAt (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019714",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T184343-L-4019714",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
