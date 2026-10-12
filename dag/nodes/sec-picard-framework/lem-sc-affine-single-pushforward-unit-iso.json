@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-affine-single-pushforward-unit-iso",
+ "kind": "statement",
+ "title": "Canonical affine single-complex pushforward comparison is invertible",
+ "statement": "Let $f:X\\to Y$ be affine and $M$ a quasi-coherent $\\mathcal O_X$-module [def-pc-derived-category, def-pc-derived-direct-image]. The map $(f_*M)[0]\\to Rf_*(M[0])$ obtained by the inverse termwise single-complex comparison followed by the right-derived unit is an isomorphism in the chosen derived category. This is the specified unit composite, not an arbitrary isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/coherent.tex; literature/stacks-project/discriminant.tex",
+  "place": "Tag 01XC, with the right-derived-unit naturality argument for an acyclic module"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Module direct image is a right adjoint, hence left exact. Affine higher-direct-image vanishing makes M right-acyclic. Zero terms are right-acyclic as well, so every term of M[0] is.",
+   "uses": [
+    "lem-pc-affine-morphism-hi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a bounded-below resolution i:M[0]->I with injective terms. Injective objects are right-acyclic, and bounded-below injective complexes are K-injective.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-bounded-below-injectives-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply quasiIso_map_of_rightAcyclic to i. Thus Q(F(i)) is invertible, as is RF(Q(i)). The unit is invertible at the K-injective complex I.",
+   "uses": [
+    "lem-weil-pbc-leray-acyclicity-quasi-iso",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality gives Q(F(i)) >> unit(I) = unit(M[0]) >> RF(Q(i)). Cancel the invertible last factor to obtain an invertible unit at M[0]. Compose with Q of the single-complex isomorphism. This is exactly the morphism in the statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-morphism-hi",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-leray-acyclicity-quasi-iso",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and cited Lean declarations",
+  "place": "Tag 01XC, with the right-derived-unit naturality argument for an acyclic module; detailed assembly by Q2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar restriction sheaf-Hom adjoint; canonical affine unit; finite duality degree-zero counit action",
+   "results": "Each query returned Internal Server Error. Recorded as unavailable; no mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction of scalars sheaves of modules right adjoint; affine acyclic single-complex unit; finite sheaf internal Hom counit precomposition",
+   "results": "SheafOfModules.restrictScalars, module pullback adjunctions, singleFunctorCompHomologyFunctorIso, mapDerivedCategorySingleFunctor; unrelated condensed-Hom evaluations. Signatures checked. None supplies finite degree-zero counit/action compatibility.",
+   "date": "2026-10-12",
+   "verdict": "generic APIs used for infrastructure; no duplicate of remaining compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "rg restrictScalars|ofNatIsoLeft Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean Mathlib/CategoryTheory/Adjunction/Basic.lean; rg rightDerivedFunctorUnit|finite.*duality|homObjEvalId Mathlib/AlgebraicGeometry Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Scalar restriction, natural-isomorphism adjunction transport and localization APIs found; no finite duality. Source library supplies Leray acyclicity and exact right-derived comparison. The existing Sheaf finite duality modules were inspected and used.",
+   "date": "2026-10-12",
+   "verdict": "no duplicate; infrastructure proved from existing declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "finite-flat duality proof: Canonical affine single-complex pushforward comparison is invertible",
+   "via": [
+    "lem-sc-finite-flat-duality-evaluation",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSinglePushforwardUnitIso.lean",
+  "declaration": "AlgebraicGeometry.affine_singlePushforward_unit_isIso",
+  "statement": "theorem affine_singlePushforward_unit_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (M : X.Modules) (hM : M.IsQuasicoherent) : IsIso (DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085322-L-32902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085322-L-32902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

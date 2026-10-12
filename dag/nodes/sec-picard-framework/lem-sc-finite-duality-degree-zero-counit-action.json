@@ -1,0 +1,146 @@
+{
+ "id": "lem-sc-finite-duality-degree-zero-counit-action",
+ "kind": "statement",
+ "title": "Degree-zero finite-duality counit and algebra-action compatibility",
+ "statement": "Let $f:X\\to Y$ be finite between Noetherian schemes, $A=f_*\\mathcal O_X$ finite locally free, and $L$ invertible. Fix $R:D_{QCoh}(X)\\to D_{QCoh}(Y)$ with comparison to $Rf_*$ and right adjoint $a$, $K\\simeq L[0]$, a quasi-coherent module $M$, $e_0:M[0]\\simeq aK$, and the canonical right-derived-unit comparison $c:(f_*M)[0]\\simeq Rf_*(M[0])$. Then there exist $e:f_*M\\simeq\\mathcal Hom(A,L)$ and $\\epsilon:f_*M\\to L$ such that $\\epsilon[0]$ equals c followed by $Rf_*(e_0)$, the functor comparison, the adjunction counit and $K\\simeq L[0]$. On every open U, $\\epsilon(\\omega)=e(\\omega)(1)$ and $e(a\\omega)(b)=e(\\omega)(ab)$ for actual sections of $\\mathcal O_X(f^{-1}U)$. This assumes rather than constructs M, e0 and c; it does not assert the final arbitrary-section evaluation identity.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex; literature/stacks-project/coherent.tex; literature/stacks-project/discriminant.tex",
+  "place": "Tags 0AX2 and 0AX3; Tag 0FKW first and second remarks; canonical exact sheaf-Hom model"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-sc-invertible-module",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-category",
+  "def-pur-sheaf-hom",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Use the affine underived sheaf-Hom adjunction, whose A-valued Hom carries precomposition by multiplication and evaluates its counit at one. The locally finite free dual of A is locally finite free. Canonical evaluation identifies tensor by the dual with Hom(A,-), hence Hom is exact. Restriction of scalars is exact and conservative, so the A-valued Hom functor is exact too.",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine",
+    "lem-sc-ext-evaluation",
+    "lem-sc-ext-tensor-exact",
+    "def-pc-derived-rhom-algebra-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive this exact Hom model with its canonical single-complex comparison, retaining evaluation and the action. The finite affine derived equivalence identifies it with the right adjoint on D_QCoh at K=L[0]. Uniqueness of right adjoints preserves counits, encoded by the finite-duality equations and the affine derived-adjunction counit equation. Normalize the Hom-from-unit identification to actual evaluation, rather than an arbitrary automorphism.",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine-adjoint",
+    "lem-sc-finite-affine-derived-equivalence",
+    "lem-sc-finite-duality-derived-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical affine comparison for M and naturality along e0. Both sides of the A-linear derived identification are now in degree zero. Full faithfulness of singleFunctor in the A-module category lifts it to an A-linear isomorphism; after restriction this is e. Lift the counit to epsilon. The derived counit identity gives the displayed singleFunctor equation.",
+   "uses": [
+    "lem-sc-affine-single-pushforward-unit-iso",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical exact model retains the underived evaluation formula and action formula on each open. Specialize the Over(U) precomposition formula from sheafHom_affine_rightAdjoint to the identity inclusion to obtain Phi(a omega)(b)=Phi(omega)(ab). No division, nonzero rank, nonempty open or cancellation is needed.",
+   "uses": [
+    "lem-sc-finite-sheafhom-affine"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-sheafhom-affine",
+  "lem-sc-ext-evaluation",
+  "lem-sc-ext-tensor-exact",
+  "def-pc-derived-rhom-algebra-module",
+  "lem-sc-finite-sheafhom-affine-adjoint",
+  "lem-sc-finite-affine-derived-equivalence",
+  "lem-sc-finite-duality-derived-hom",
+  "lem-sc-affine-single-pushforward-unit-iso",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project and cited Lean declarations",
+  "place": "Tags 0AX2 and 0AX3; Tag 0FKW first and second remarks; canonical exact sheaf-Hom model; detailed assembly by Q2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar restriction sheaf-Hom adjoint; canonical affine unit; finite duality degree-zero counit action",
+   "results": "Each query returned Internal Server Error. Recorded as unavailable; no mathematical verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived restriction of scalars sheaves of modules right adjoint; affine acyclic single-complex unit; finite sheaf internal Hom counit precomposition",
+   "results": "SheafOfModules.restrictScalars, module pullback adjunctions, singleFunctorCompHomologyFunctorIso, mapDerivedCategorySingleFunctor; unrelated condensed-Hom evaluations. Signatures checked. None supplies finite degree-zero counit/action compatibility.",
+   "date": "2026-10-12",
+   "verdict": "generic APIs used for infrastructure; no duplicate of remaining compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "rg restrictScalars|ofNatIsoLeft Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean Mathlib/CategoryTheory/Adjunction/Basic.lean; rg rightDerivedFunctorUnit|finite.*duality|homObjEvalId Mathlib/AlgebraicGeometry Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "Scalar restriction, natural-isomorphism adjunction transport and localization APIs found; no finite duality. Source library supplies Leray acyclicity and exact right-derived comparison. The existing Sheaf finite duality modules were inspected and used.",
+   "date": "2026-10-12",
+   "verdict": "no duplicate; infrastructure proved from existing declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "finite-flat duality proof: Degree-zero finite-duality counit and algebra-action compatibility",
+   "via": [
+    "lem-sc-finite-flat-duality-evaluation",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteDualityDegreeZeroCounitAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDualityDegreeZeroCounitAction.lean",
+  "declaration": "AlgebraicGeometry.finiteDuality_degreeZero_counit_action",
+  "statement": "theorem finiteDuality_degreeZero_counit_action {X Y : Scheme.{u}} (f : X ⟶ Y) [IsNoetherian X] [IsNoetherian Y] [IsFinite f] [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] (L : Y.Modules) [L.IsInvertible] [SheafOfModules.IsFiniteLocallyFree.{u, u, u} ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf))] (R : schemeDerivedQCohCategory X ⥤ schemeDerivedQCohCategory Y) (comparison : R ⋙ (schemeDerivedQCohProperty Y).ι ≅ (schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f) (a : schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X) (adj : R ⊣ a) (K : schemeDerivedQCohCategory Y) (eL : K.obj ≅ (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj L) (M : X.Modules) (_hM : M.IsQuasicoherent) (e₀ : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M ≅ (a.obj K).obj) (c : (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj ((Scheme.Modules.pushforward f).obj M) ≅ (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) (_hc : c.hom = DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫ (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))) : ∃ (e : (Scheme.Modules.pushforward f).obj M ≅ SheafOfModules.homObj (R := Y.toRingedSpace.sheaf) ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)) L), ∃ (ε : (Scheme.Modules.pushforward f).obj M ⟶ L), (DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).map ε = c.hom ≫ (schemeDerivedDirectImage f).map e₀.hom ≫ comparison.inv.app (a.obj K) ≫ (adj.counit.app K).hom ≫ eL.hom ∧ (∀ (U : Y.Opens) (ω : ((Scheme.Modules.pushforward f).obj M).presheaf.obj (Opposite.op U)), ε.app U ω = (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) ω)) (1 : X.presheaf.obj (Opposite.op (f ⁻¹ᵁ U)))) ∧ (∀ (U : Y.Opens) (a₁ b : X.presheaf.obj (Opposite.op (f ⁻¹ᵁ U))) (ω : M.val.obj (Opposite.op (f ⁻¹ᵁ U))), (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) (a₁ • ω))) b = (PresheafOfModules.homObjEvalId ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val L.val U ((Scheme.Modules.Hom.app e.hom U) ω)) (a₁ * b))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085322-L-32902",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085322-L-32902",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

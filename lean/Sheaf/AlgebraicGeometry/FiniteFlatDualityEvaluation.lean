@@ -12,6 +12,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.AffineDerivedConcentration
 import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
+import Sheaf.AlgebraicGeometry.FiniteRestrictionDerivedRightAdjoint
+import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
+import Sheaf.AlgebraicGeometry.FiniteDualityDegreeZeroCounitAction
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom
 import Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree
 
@@ -31,6 +35,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 400000 in
+-- Composing the derived comparisons requires unfolding several large sheaf functors.
 /-- Finite flat duality identifies the right-adjoint image of an invertible module with
 an internal Hom sheaf.  The counit is evaluation at the unit, and the resulting
 module action satisfies the displayed evaluation formula. The adjunction is on
@@ -121,6 +127,51 @@ theorem finiteFlatDualityEvaluation
           ((Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)).val
           L.val U ((Scheme.Modules.Hom.app e.hom U) (a₁ • ω)))
             (1 : X.presheaf.obj (Opposite.op (f ⁻¹ᵁ U)))) := by
-  sorry
+  classical
+  let S := DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
+  let A := (Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf)
+  let H := SheafOfModules.homObj (R := Y.toRingedSpace.sheaf) A L
+  have hA := (Scheme.Modules.isFiniteLocallyFree_pushforward_unit f).1
+  let : SheafOfModules.IsFiniteLocallyFree.{u, u, u} A := hA
+  have hK : ∃ n : ℤ, K.obj.IsGE n := by
+    have : K.obj.IsGE 0 := DerivedCategory.TStructure.t.isGE_of_iso eL.symm 0
+    exact ⟨0, this⟩
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings (directImageAlgebraSpace f)))
+  obtain ⟨ρR, ⟨adjA⟩⟩ := finiteRestriction_derived_rightAdjoint f
+  obtain ⟨ι, cA, φ, d, _⟩ := finite_duality_derived_hom f R comparison a adj ρR adjA K hK
+  let ρ := (SheafOfModules.restrictScalars
+    (R := moduleRings Y.toRingedSpace)
+    (R' := moduleRings (directImageAlgebraSpace f))
+    ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩).rightDerivedFunctor
+  let d₀ := (cA.app (a.obj K).obj).symm ≪≫ ρ.mapIso φ ≪≫ d
+  obtain ⟨q⟩ := (finiteLocallyFree_derivedInternalHom_single Y A L).1
+  let t : (schemeDerivedDirectImage f).obj (a.obj K).obj ≅ S.obj H :=
+    d₀ ≪≫ (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf).mapIso
+      (Iso.prod (Iso.refl _) eL) ≪≫ q
+  let p : (R.obj (a.obj K)).obj ≅ S.obj H := comparison.app (a.obj K) ≪≫ t
+  have hH : H.IsQuasicoherent := by
+    let z := (DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).mapIso p ≪≫
+      (DerivedCategory.singleFunctorCompHomologyFunctorIso
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).app H
+    exact (SheafOfModules.isQuasicoherent Y.ringCatSheaf).prop_of_iso z
+      ((R.obj (a.obj K)).property 0)
+  obtain ⟨M, hM, ⟨m⟩⟩ :=
+    (affine_derived_concentration f (a.obj K).obj (a.obj K).property).1.mpr ⟨H, hH, ⟨t⟩⟩
+  let e₀ := m.symm
+  have := affine_singlePushforward_unit_isIso f M hM
+  let c := asIso (DerivedCategory.Q.map
+    ((HomologicalComplex.singleMapHomologicalComplex
+      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) (ComplexShape.up ℤ) 0).inv.app M) ≫
+    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ _).obj ((CochainComplex.singleFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)))
+  obtain ⟨e, ε, hε, heval, hlin⟩ :=
+    finiteDuality_degreeZero_counit_action f L R comparison a adj K eL M hM e₀ c rfl
+  refine ⟨M, e₀, c, rfl, e, ε, hε, heval, hlin, ?_⟩
+  intro U a₁ ω
+  simpa only [mul_one] using (hlin U a₁ 1 ω).symm
 
 end AlgebraicGeometry
