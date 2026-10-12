@@ -1,0 +1,153 @@
+{
+ "id": "lem-pc-finite-free-stalk-degreewise-lift",
+ "kind": "statement",
+ "title": "Degreewise finite free stalk-map extension",
+ "statement": "Let Y be a scheme [def-pc-scheme], and P,Q cochain complexes of O_Y-modules\n[def-pc-derived-category] supported in integer intervals [a,b] and [c,e]. Assume\nevery term is zero or isomorphic to a finite free sheaf [def-weil-pbc-free-module].\nLet y be a point of Y, T the termwise pullback along Y.fromSpecStalk y\n[def-pc-derived-pullback], and t_n:T(P)^n -> T(Q)^n any degreewise family, with no\nchain-equation assumption. There are an open U containing y and maps\ng_n:R_U(P)^n -> R_U(Q)^n such that S_U(g_n)=E_U(P).hom_n ; t_n ; E_U(Q).inv_n\nfor every n, where R_U is open restriction, S_U is pullback along the stalk map\ninto U, and E_U is the comparison [def-pc-stalk-restriction-complex-iso]. No\ncommutativity with differentials is concluded.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2, finite coefficient extension before imposing differential equations; expansion of the finite matrix calculation of lem-pc-perfect-locus"
+ },
+ "proof": [
+  {
+   "text": "Choose the finite bases of the nonzero terms. Pullback carries finite free sheaves to finite free sheaves. On Spec O_{Y,y}, their maps are finite matrices of global functions, hence matrices over O_{Y,y}. Components involving a zero term are unique. There are finitely many potentially nonzero components since only degrees in the intersection of the two support intervals contribute.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-pc-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each entry is the germ of a structure-sheaf section near y. Intersect the finitely many neighbourhoods, restrict the sections and bases, and form g_n from these matrices. Set components involving a zero term to the unique map. If the list is empty use the whole scheme.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The comparison E_U is restriction as pullback along the open inclusion followed by pullback composition with the stalk map. Thus it identifies each represented coefficient with its germ, yielding the stated degreewise equality.",
+   "uses": [
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-stalk-restriction-complex-iso",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Expansion of lem-pc-finite-free-stalk-chain-map-lift-local, steps 1--2, finite coefficient extension before imposing differential equations"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between bounded complexes of finite free sheaves at a stalk extends to an open neighbourhood",
+   "results": "8 hits: AlgebraicGeometry.exists_lift_of_germInjective_aux; AlgebraicGeometry.exists_lift_of_germInjective; ModuleCat.Tilde.exists_const; AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero; ModuleCat.Tilde.toOpen_germ_apply; ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap; ModuleCat.Tilde.toOpen_germ; AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ",
+   "date": "2026-10-12",
+   "verdict": "No direct degreewise extension or chain-defect shrinking theorem; germ and free-module ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecStalk\", \"mapHomologicalComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "No direct degreewise extension or chain-defect shrinking theorem; germ and free-module ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv|exists_res_eq_zero_of_germ_eq_zero|exists_germ_eq",
+   "results": "25 hits: Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean; Mathlib/Geometry/RingedSpace/Basic.lean; Mathlib/Geometry/RingedSpace/Basic.lean; Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/Spec.lean; Mathlib/AlgebraicGeometry/SpreadingOut.lean; Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "date": "2026-10-12",
+   "verdict": "No direct degreewise extension or chain-defect shrinking theorem; germ and free-module ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of morphisms between finite free sheaves over a stalk extends degreewise to an open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degreewise family between bounded finite free sheaf complexes commuting with differentials after stalk pullback commutes after shrinking the neighbourhood",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq; ModuleCat.Tilde.toOpen_germ_assoc; smoothSheafCommRing.ι_forgetStalk_inv_assoc; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc; smoothSheafCommRing.ι_forgetStalk_hom_assoc; SheafOfModules.generatorsOfIsCokernelFree_π; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; smoothSheafCommRing.ι_forgetStalk_inv",
+   "date": "2026-10-12",
+   "verdict": "No direct degreewise extension or chain-defect shrinking theorem; germ and free-module ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many differential commutativity equations of finite free sheaf maps with zero stalk defects hold on a smaller open neighbourhood",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftLocal",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "steps 1--2, finite coefficient extension before imposing differential equations",
+   "via": [
+    "lem-pc-finite-free-stalk-chain-map-lift-local",
+    "lem-pc-finite-free-stalk-chain-map-lift",
+    "lem-pc-finite-free-stalk-chain-map-pair-lift",
+    "lem-pc-finite-free-stalk-homotopy-spread",
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkDegreewiseLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_degreewise_of_stalk_local",
+  "statement": "theorem exists_degreewise_of_stalk_local\n    {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)\n    (a b c e : ℤ)\n    (hPa : P.IsStrictlyGE a) (hPb : P.IsStrictlyLE b)\n    (hQc : Q.IsStrictlyGE c) (hQe : Q.IsStrictlyLE e)\n    (hPfree : ∀ n : ℤ, IsZero (P.X n) ∨ ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (hQfree : ∀ n : ℤ, IsZero (Q.X n) ∨ ∃ s : ℕ, Nonempty\n      (Q.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (y : Y)\n    (t : ∀ n : ℤ,\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P).X n ⟶\n      (((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj Q).X n) :\n    ∃ (U : Y.Opens), ∃ (hyU : y ∈ U), ∃ (g : ∀ n : ℤ,\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n ⟶\n      (((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q).X n),\n      ∀ n : ℤ, (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map (g n) =\n        ((stalkRestrictionComplexIso U y hyU).app P).hom.f n ≫ t n ≫\n          ((stalkRestrictionComplexIso U y hyU).app Q).inv.f n",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T202244-L-706179",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T202244-L-706179",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
