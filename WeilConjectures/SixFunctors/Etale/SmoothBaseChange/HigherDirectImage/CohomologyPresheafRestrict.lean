@@ -244,6 +244,106 @@ lemma freeSheafPullbackSectionHom_restrict {T T' : Scheme.{u}} (t : T ⟶ X) (t'
   apply ModuleSheaf.pullSection_congr
   apply pullback.hom_ext <;> simp [hu]
 
+/-- For an étale `S`-scheme `V`, the adjoint `p_! Λ ⟶ f^* Λ[V]` of the canonical section of
+`p^* f^* Λ[V]` over `V ×_S X` (where `p : V ×_S X ⟶ X` is the projection) is an isomorphism:
+both sides corepresent sections over `V ×_S X`. -/
+lemma isIso_homEquiv_symm_freeSheafPullbackSectionHom (V : S.Etale) :
+    IsIso (((Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
+      ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V).hom
+      ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V).prop).homEquiv _ _).symm
+        (freeSheafPullbackSectionHom Λ f ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V).hom
+          V (pullback.fst V.hom f) pullback.condition)) := by
+  set U := (MorphismProperty.Over.pullback @Etale ⊤ f).obj V
+  set adj := Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) U.hom U.prop
+  rw [isIso_iff_coyoneda_map_bijective]
+  intro G
+  have h : (fun φ ↦ (adj.homEquiv _ _).symm (freeSheafPullbackSectionHom Λ f U.hom V
+      (pullback.fst V.hom f) pullback.condition) ≫ φ) =
+      (adj.homEquiv _ _).symm ∘ (constSheafHomEquiv Λ _).symm ∘
+        (ModuleSheaf.pullSection U.hom G (V := Etale.finalObject U.left) (U := U) (𝟙 U.left)
+          (by simp)) ∘
+        (fun φ : (f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V) ⟶ G ↦
+          φ.hom.app (op U) (freeSheafPullbackGenerator Λ f V)) := by
+    funext φ
+    apply (adj.homEquiv _ _).injective
+    rw [Function.comp_apply, Function.comp_apply, Function.comp_apply, Equiv.apply_symm_apply,
+      adj.homEquiv_naturality_right, Equiv.apply_symm_apply]
+    apply (constSheafHomEquiv Λ _).injective
+    rw [constSheafHomEquiv_comp, Equiv.apply_symm_apply, freeSheafPullbackSectionHom,
+      Equiv.apply_symm_apply, freeSheafPullbackSection, pullSection_naturality]
+    apply ModuleSheaf.pullSection_congr
+    exact pullback.lift_fst_snd (f := V.hom) (g := f)
+  rw [h]
+  exact (adj.homEquiv _ _).symm.bijective.comp ((constSheafHomEquiv Λ _).symm.bijective.comp
+    ((pullSection_id_bijective Λ U G).comp (bijective_app_freeSheafPullbackGenerator Λ f V G)))
+
+variable (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)
+
+/-- The restriction of a class `x ∈ Extᵠ(f^* Λ[V], F) = Hᵠ(V ×_S X, F|)` to a `T`-point `b` of
+`V` over `t : T ⟶ X`: pull `x` back along `t` and precompose with the canonical section
+`Λ ⟶ t^* f^* Λ[V]` given by `b`. -/
+noncomputable def extRestrict {T : Scheme.{u}} (t : T ⟶ X) (V : S.Etale) (b : T ⟶ V.left)
+    (hb : b ≫ V.hom = t ≫ f) :
+    Ext ((f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V)) F q →+
+      Ext (SemiSimplicialObject.constSheaf T.smallEtaleTopology Λ)
+        ((t)^*[ModuleCat.{u + 1} Λ].obj F) q :=
+  ((Ext.mk₀ (freeSheafPullbackSectionHom Λ f t V b hb)).precomp _ (zero_add q)).comp
+    ((t)^*[ModuleCat.{u + 1} Λ].mapExtAddHom _ _ q)
+
+lemma extRestrict_apply {T : Scheme.{u}} (t : T ⟶ X) (V : S.Etale) (b : T ⟶ V.left)
+    (hb : b ≫ V.hom = t ≫ f)
+    (x : Ext ((f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V)) F q) :
+    extRestrict Λ f F q t V b hb x = (Ext.mk₀ (freeSheafPullbackSectionHom Λ f t V b hb)).comp
+      (x.mapExactFunctor (t)^*[ModuleCat.{u + 1} Λ]) (zero_add q) :=
+  rfl
+
+/-- Restriction to a point is compatible with the transition maps `V' ⟶ V`. -/
+lemma extRestrict_mk₀_comp {T : Scheme.{u}} (t : T ⟶ X) {V V' : S.Etale} (g : V' ⟶ V)
+    (b' : T ⟶ V'.left) (hb' : b' ≫ V'.hom = t ≫ f)
+    (x : Ext ((f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V)) F q) :
+    extRestrict Λ f F q t V' b' hb'
+        ((Ext.mk₀ ((f)^*[ModuleCat.{u + 1} Λ].map ((Etale.freeSheaf Λ S).map g))).comp x
+          (zero_add q)) =
+      extRestrict Λ f F q t V (b' ≫ g.left)
+        (by rw [Category.assoc, MorphismProperty.Over.w g, hb']) x := by
+  rw [extRestrict_apply, extRestrict_apply, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀,
+    Ext.mk₀_comp_mk₀_assoc, freeSheafPullbackSectionHom_comp]
+
+/-- Restriction to a point is compatible with the restriction maps of étale cohomology. -/
+lemma cohomologyRestrictOver_extRestrict {T T' : Scheme.{u}} (t : T ⟶ X) (t' : T' ⟶ X)
+    (u : T' ⟶ T) (hu : u ≫ t = t') (V : S.Etale) (b : T ⟶ V.left) (hb : b ≫ V.hom = t ≫ f)
+    (x : Ext ((f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V)) F q) :
+    cohomologyRestrictOver Λ t' t u hu F q (extRestrict Λ f F q t V b hb x) =
+      extRestrict Λ f F q t' V (u ≫ b) (by rw [Category.assoc, hb, reassoc_of% hu]) x := by
+  have : PreservesFiniteLimits ((t)^*[ModuleCat.{u + 1} Λ] ⋙ (u)^*[ModuleCat.{u + 1} Λ]) :=
+    comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits ((t)^*[ModuleCat.{u + 1} Λ] ⋙ (u)^*[ModuleCat.{u + 1} Λ]) :=
+    comp_preservesFiniteColimits _ _
+  have h : cohomologyRestrictOver Λ t' t u hu F q (extRestrict Λ f F q t V b hb x) =
+      ((Ext.mk₀ ((Etale.constantSheafCompUpperStarIso Λ u).app (ModuleCat.of Λ Λ)).inv).comp
+        ((extRestrict Λ f F q t V b hb x).mapExactFunctor (u)^*[ModuleCat.{u + 1} Λ])
+        (zero_add q)).comp
+        (Ext.mk₀ ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) u t t' hu.symm).inv.app F))
+        (add_zero q) :=
+    rfl
+  rw [h, extRestrict_apply, extRestrict_apply, Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀,
+    Ext.mk₀_comp_mk₀_assoc, Ext.comp_assoc_of_third_deg_zero, Ext.mapExactFunctor_mapExactFunctor,
+    Ext.mapExactFunctor_comp_mk₀_app _ _
+      (Etale.upperStarComp (ModuleCat.{u + 1} Λ) u t t' hu.symm).inv x,
+    Ext.mk₀_comp_mk₀_assoc, Category.assoc, freeSheafPullbackSectionHom_restrict Λ f t t' u hu]
+
+/-- Restricting classes on `V ×_S X` to the tautological point of `V` over `V ×_S X` is
+bijective: `Extᵠ(f^* Λ[V], F) ≅ Hᵠ(V ×_S X, F|)`. -/
+theorem extRestrict_bijective (V : S.Etale) :
+    Function.Bijective (extRestrict Λ f F q
+      ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V).hom V (pullback.fst V.hom f)
+      pullback.condition) := by
+  have := isIso_homEquiv_symm_freeSheafPullbackSectionHom Λ f V
+  exact (Etale.etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
+    ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V).hom
+    ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V).prop).bijective_mk₀_comp_mapExactFunctor
+      _ F q
+
 end Restrict
 
 end AlgebraicGeometry.Etale
