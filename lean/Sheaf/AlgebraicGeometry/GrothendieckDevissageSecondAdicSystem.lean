@@ -9,8 +9,8 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Functor.Currying
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCore
+import Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemComparison
 
 /-! # The second adic system in Grothendieck devissage
 
@@ -86,6 +86,9 @@ theorem grothendieckDevissage_secondAdicSystem
           (kernel (δ.hom.app (op e)))) ∧
         IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2
           (cokernel (δ.hom.app (op e))))) := by
-  sorry
+  obtain ⟨θ, hθ⟩ := grothendieckDevissage_secondAdicSystem_comparison I K H.obj
+  obtain ⟨N, δ, σ, hsquare, htorsionδ⟩ :=
+    grothendieckDevissage_secondAdicSystem_core I K M hthick H α htorsion θ hθ
+  exact ⟨N, δ, σ, θ, hθ, hsquare, htorsionδ⟩
 
 end AlgebraicGeometry
