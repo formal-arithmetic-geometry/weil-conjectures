@@ -293,6 +293,10 @@ internal to the fixed closed symmetric monoidal category $\Sh(X_\proet,\Ab)$.
 \item If $\mathcal{C}$ is closed symmetric Grothendieck abelian, so is $\Mod_{\mathcal{R}}$
   (internal hom as an equalizer, separator $\mathcal{R}\otimes G$), with functorial flat
   resolutions $\mathcal{R}\otimes P(M)\to M$.
+\item For $\mathcal{C}=\Ab$ the functorial flat resolutions are a theorem, not an assumption:
+  the unit $\mathbb Z$ is a flat separator of $\Ab$ (\lean{AddCommGrpCat.isSeparator_tensorUnit}), and a
+  flat separator produces functorial flat resolutions
+  (\lean{Abelian.hasFunctorialFlatResolution_of_flat_separator}).
 \end{itemize}
 
 \subsection{Change of scalars}
@@ -354,7 +358,8 @@ its right adjoint: $K\lotimes-\dashv\RHom(K,-)$.
 \label{sec:rationalization}
 
 $E$-coefficients are modules over $E_X$ itself, \emph{not} defined by inverting $\ell$ on
-$\cO_E$-coefficients in a triangulated category; the comparison is a theorem, for a finite
+$\cO_E$-coefficients in a triangulated category; the comparison is a theorem about
+\emph{bounded constructible} complexes, for a finite
 subextension $E\subseteq\Qlbar$ and the pulled-back rings $\cO_{E,X}=p_X^*\underline{\cO}_E$,
 $E_X=p_X^*\underline E$ (\lean{CategoryTheory/ModuleObjects/EllAdicRationalization}). Finiteness of
 $E$ is what makes inverting $\ell$ the right statement: every nonzero element of the discrete
@@ -368,16 +373,39 @@ i.e.\ the localization at morphisms with $M$-torsion cone. It is triangulated an
 over $R[M^{-1}]$.
 \end{definition}
 
-\begin{choice}[Comparison via derived extension of scalars]
-For $\varphi=p_X^*(\underline{\cO}_E\to\underline E)\colon\cO_{E,X}\to E_X$
-(\lean{ProEtale.padicIntegersToPadicSubfield}) the comparison functor is
-$E\lotimes_{\cO_E}-=L(\Ext_\varphi)\colon\D(\Mod_{\cO_{E,X}})\to\D(\Mod_{E_X})$, and the
-statement is that it is a localization at the morphisms whose cone is killed by a power of
-$\ell$ (\lean{ProEtale.isLocalization_derivedExtendScalars}).
+\begin{choice}[Comparison via derived extension of scalars, on $\Dc$ only]
+Let $\varphi=p_X^*(\underline{\cO}_E\to\underline E)\colon\cO_{E,X}\to E_X$
+(\lean{ProEtale.padicIntegersToPadicSubfield}) and
+$E\lotimes_{\cO_E}-:=L(\Ext_\varphi)\colon\D(\Mod_{\cO_{E,X}})\to\D(\Mod_{E_X})$. The
+comparison is stated for its restriction to bounded constructible complexes
+(\S\ref{sec:constructible}),
+\[
+  E\lotimes_{\cO_E}-\colon\Dc(X_\proet,\cO_E)\to\Dc(X_\proet,E)
+\]
+(\lean{ProEtale.boundedConstructibleExtendScalars}), which is well defined because
+$L(\Ext_\varphi)$ preserves bounded constructible complexes
+(\lean{ProEtale.boundedConstructible_derivedExtendScalars_obj}) and commutes with the
+inclusions by construction
+(\lean{ProEtale.boundedConstructibleExtendScalarsCompatibility}).
 \end{choice}
-Hence $\D(\Mod_{\cO_{E,X}})[\ell^{-1}]\simeq\D(\Mod_{E_X})$
-(\lean{ProEtale.rationalizationEquivalence}), compatibly with
-$E\lotimes_{\cO_E}-$; neither description is taken as the definition of the other.
+
+\begin{proposition}[$E$ is $\cO_E$ with $\ell$ inverted]
+Let $X$ be topologically Noetherian, so that $\Dc(X_\proet,\cO_E)$ is a triangulated
+subcategory (\lean{ProEtale.isTriangulated_boundedConstructible}). Then
+$E\lotimes_{\cO_E}-\colon\Dc(X_\proet,\cO_E)\to\Dc(X_\proet,E)$ is a localization functor at the
+class of morphisms of $\Dc(X_\proet,\cO_E)$ whose cone is killed by some power $\ell^n$
+(\lean{ProEtale.isLocalization_boundedConstructibleExtendScalars}). Consequently
+\[
+  \Dc(X_\proet,\cO_E)[\ell^{-1}]\ \simeq\ \Dc(X_\proet,E)
+\]
+(\lean{ProEtale.rationalizationEquivalence}), and under this equivalence the localization
+functor $\Dc(X_\proet,\cO_E)\to\Dc(X_\proet,\cO_E)[\ell^{-1}]$ corresponds to
+$E\lotimes_{\cO_E}-$ (\lean{ProEtale.rationalizationQCompEquivalenceIso}).
+\end{proposition}
+Neither description is taken as the definition of the other. No statement is made for the
+unbounded $L(\Ext_\varphi)\colon\D(\Mod_{\cO_{E,X}})\to\D(\Mod_{E_X})$. The Noetherian
+hypothesis is needed only so that $\Dc$ is triangulated, which the definition of the
+rationalization requires.
 
 %======================================================================
 \section{Constructibility}
@@ -457,8 +485,21 @@ $j_!$ is exact and fully faithful; $f_!\to f_*$ is an isomorphism for $f$ proper
   (Brown representability), used only through the adjunction.
   \end{choice}
   So $Rf_!\dashv Rf^!$ is the composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$:
-  that $Rf_!$ is a left adjoint is a theorem, not an assumption. On $\D^+$, $Rf^!$ is the
-  restriction of the unbounded one, and the adjunction restricts.
+  that $Rf_!$ is a left adjoint is a theorem, not an assumption.
+  \begin{choice}[Exceptional pullback: unbounded only]
+  The exceptional pullbacks available with finite coefficients are
+  \[
+    Rf^!_c:=\D(i^*)\circ Rg^!\colon\D(Y_\proet,\mathcal{A})\to\D(X_\proet,\mathcal{A}),\qquad
+    Rf_!^c\dashv Rf^!_c,
+  \]
+  for a compactification $c$ (\lean{ProEtale.rightDerivedUpperShriekOfCompactification},
+  \lean{ProEtale.rightDerivedUpperShriekOfCompactificationAdjunction}), and $Rf^!:=Rf^!_c$ for
+  the chosen one, with $Rf_!\dashv Rf^!$ (\lean{ProEtale.rightDerivedUpperShriek},
+  \lean{ProEtale.rightDerivedUpperShriekAdjunction}); the \'etale ones are identical
+  (\lean{Etale.rightDerivedUpperShriekOfCompactification}, \dots). There is no exceptional
+  pullback on $\D^+$: on bounded below complexes only $R^+f_!$, the restriction of $Rf_!$,
+  is defined.
+  \end{choice}
 \item $R\Gamma_c(X/Y,-):=R\Gamma(Y,Rf_!-)$.
 \end{itemize}
 The \'etale $Rf^!$ is constructed in the same way.
@@ -691,67 +732,180 @@ $\Lambda$, and the coefficient ring is an input of the statements.
 \label{sec:basechange}
 %======================================================================
 
-Fix a commutative square of schemes
+Throughout this section fix a commutative square of schemes
 \[
 \begin{array}{ccc}
 X' & \xrightarrow{\;g'\;} & X\\
 {\scriptstyle f'}\downarrow & & \downarrow{\scriptstyle f}\\
 Y' & \xrightarrow{\;g\;} & Y
 \end{array}
+\qquad f\circ g'=g\circ f',
 \]
-in the setting of \S\ref{sec:sixCons}. Everything is on $\Dc(-,\Lambda)$ and mirrors the
-\'etale constructions.
+recorded in Lean as \lean{sq : CommSq g' f' f g}, resp.\ \lean{sq : IsPullback g' f' f g}
+when the square is cartesian. Functors are written here in the usual order $G\circ F$; Lean
+writes them in diagrammatic order $F\ \ggg\ G$. Base change is set up in two parallel settings,
+with the same constructions:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{\'Etale, torsion coefficients}: the bounded below derived categories
+  $\D^+(X_{\mathrm{\acute et}},\mathcal{A})$ for a Grothendieck abelian $\mathcal{A}$
+  (folder \lean{SixFunctors/Etale/BaseChangeTheorems}).
+\item \textbf{Pro-\'etale, $\ell$-adic coefficients}: the bounded constructible categories
+  $\Dc(-,\Lambda)$ of \S\ref{sec:sixCons}, in the setting there (separated schemes of finite
+  type over $k$, $k$-morphisms), for a commutative condensed ring $\Lambda$ (folder
+  \lean{SixFunctors/ProEtale/ModuleObject/BaseChangeTheorems}).
+\end{enumerate}
 
-\begin{choice}[The base change morphism]
-$\mathrm{BC}_{sq}\colon g^*\circ Rf_*\to Rf'_*\circ g'^*$
-(\lean{ProEtale.CondensedRing.boundedConstructibleBaseChange}) is the composite of three
-steps, exactly as in the \'etale case: insert the unit of $Lf'^*\dashv Rf'_*$, transport the
-pullback comparison $Lf'^*\circ Lg^*\cong Lg'^*\circ Lf^*$ (from the composition
-isomorphisms of the levelwise pullbacks and commutativity of the square), and contract the
-counit of $Lf^*\dashv Rf_*$. No hypothesis on the square or on $\Lambda$ enters the
-definition.
-\end{choice}
+\subsection{The three base change morphisms}
 
-\begin{proposition}[Proper base change]
-For a cartesian square with $f$ proper, $\mathrm{BC}_{sq}$ is an isomorphism, for
-$\Lambda=\underline E$ with $E/\mathbb Q_\ell$ finite and for $\Lambda=\underline{\Qlbar}$
-(\lean{ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper},
-\lean{ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl});
-no hypothesis on $g$.
-\end{proposition}
-For $E$ this reduces to the \'etale torsion case by writing a constructible
-$\cO_E$-complex as the derived limit of its reductions modulo $\varpi^n$ and inverting $\ell$
-(Bhatt--Scholze \S6.7); for $\Qlbar$ it reduces to finite $E$, a constructible
-$\Qlbar$-complex being defined over some finite $E$.
-
-\paragraph{Base change for extension by zero.} For a square of open immersions $j$, $j'$, the
-canonical exchange morphism $Lg'^*\circ j'_!\to j_!\circ Lg^*$ (diagrammatic order;
-\lean{ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChange}) is again
-built from unit, square transport and counit (for $j_!\dashv j^*$), and is an isomorphism for
-a cartesian square.
-
-\begin{choice}[Compact-support base change, relative to an explicit compactification]
-For a cartesian square and a compactification $c=(X\xrightarrow{i}Z\xrightarrow{p}Y)$ of $f$,
-let $c'$ be the base-changed compactification $X'\to Z\times_YY'\to Y'$ of $f'$
-(\lean{Compactification.baseChange}). The morphism
+\begin{choice}[The base change morphism $\mathrm{BC}_{sq}$]
+For an arbitrary commutative square, $\mathrm{BC}_{sq}\colon Lg^*\circ Rf_*\to Rf'_*\circ
+Lg'^*$ is the composite
 \[
-  \mathrm{Ex}_!^c\colon g^*\circ Rf_!^c\longrightarrow Rf'^{\,c'}_!\circ g'^*
+  Lg^*Rf_*\xrightarrow{\ \eta\ }Rf'_*Lf'^*\,Lg^*Rf_*
+  \xrightarrow{\ Rf'_*\theta_{sq}Rf_*\ }Rf'_*Lg'^*\,Lf^*Rf_*
+  \xrightarrow{\ \varepsilon\ }Rf'_*Lg'^*,
 \]
-(\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange}) is the pasting
-of $\mathrm{BC}$ for the proper square of $c'$ with the \emph{inverse} of the
-extension-by-zero exchange for its open square.
+where $\eta$ is the unit of $Lf'^*\dashv Rf'_*$, $\varepsilon$ the counit of $Lf^*\dashv
+Rf_*$, and $\theta_{sq}\colon Lf'^*Lg^*\cong L(g f')^*=L(f g')^*\cong Lg'^*Lf^*$ is the
+pullback comparison built from the composition isomorphisms of $L(-)^*$ and $f g'=g f'$. In
+Lean: \lean{Etale.baseChange} (steps \lean{Etale.baseChangeUnitStep},
+\lean{Etale.baseChangeSquareStep}, \lean{Etale.baseChangeCounitStep}; comparison
+\lean{Etale.pullbackSquareComparison}) on $\D^+$, and
+\lean{ProEtale.CondensedRing.boundedConstructibleBaseChange} (steps
+\lean{boundedConstructibleBaseChangeUnitStep}, \lean{boundedConstructibleBaseChangeSquareStep},
+\lean{boundedConstructibleBaseChangeCounitStep}; comparison
+\lean{boundedConstructiblePullbackSquareComparison}) on $\Dc(-,\Lambda)$, using the restricted
+adjunctions of \S\ref{sec:sixCons}. The middle step is the generic
+\lean{Functor.squareTransport}, whose component at $K$ is $Rf'_*(\theta_{sq,Rf_*K})$.
 \end{choice}
+No hypothesis on the square, on $f$, $g$, or on the coefficients enters the definition:
+proper base change and smooth base change are both statements that this single morphism is
+an isomorphism, under different hypotheses.
+
+\begin{choice}[The extension-by-zero exchange $\mathrm{Ex}_{j}$]
+For a commutative square as above with $j:=f\colon X\to Z$ and $j':=f'\colon X'\to Z'$
+open immersions (and $g\colon Z'\to Z$), the exchange morphism
+\[
+  \mathrm{Ex}_{j}\colon j'_!\circ Lg'^*\longrightarrow Lg^*\circ j_!
+\]
+is the composite of the unit of $j_!\dashv j^*$, the transport of
+$\theta\colon Lg'^*Lj^*\cong Lj'^*Lg^*$, and the counit of $j'_!\dashv j'^*$
+(\lean{Etale.openImmersionLowerShriekBaseChange},
+\lean{ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChange}).
+\end{choice}
+
+\begin{choice}[The compact-support base change morphism $\mathrm{Ex}_!^c$]
+Let the square be cartesian, and let $c=(X\xrightarrow{i}Z\xrightarrow{p}Y)$ be a
+compactification of $f$ ($i$ an open immersion, $p$ proper), so that $Rf_!^c=Rp_*\circ i_!$.
+Its base change along $g$ is the compactification
+$c'=(X'\xrightarrow{i'}Z':=Z\times_YY'\xrightarrow{p'}Y')$ of $f'$
+(\lean{Compactification.baseChange}); with $\bar g\colon Z'\to Z$ the projection, it comes
+with two cartesian squares
+\[
+\begin{array}{ccccc}
+X' & \xrightarrow{\;i'\;} & Z' & \xrightarrow{\;p'\;} & Y'\\
+{\scriptstyle g'}\downarrow & & \downarrow{\scriptstyle\bar g} & & \downarrow{\scriptstyle g}\\
+X & \xrightarrow{\;i\;} & Z & \xrightarrow{\;p\;} & Y
+\end{array}
+\]
+(\lean{Compactification.baseChange_isPullback_i}, \lean{Compactification.baseChange_isPullback_g}).
+Then
+\[
+  \mathrm{Ex}_!^c\colon Lg^*\circ Rf_!^c=Lg^*Rp_*i_!
+  \xrightarrow{\ \mathrm{BC}_{p}\,i_!\ }Rp'_*L\bar g^*i_!
+  \xrightarrow{\ Rp'_*\,\mathrm{Ex}_{i}^{-1}\ }Rp'_*i'_!Lg'^*=Rf'^{\,c'}_!\circ Lg'^*,
+\]
+the pasting of $\mathrm{BC}$ for the proper square with the \emph{inverse} of the
+extension-by-zero exchange for the open square (\lean{Etale.lowerShriekBaseChange} on $\D^+$,
+\lean{ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange} on $\Dc(-,\Lambda)$).
+\end{choice}
+Taking the inverse of $\mathrm{Ex}_i$ requires base change for extension by zero
+(Proposition~\ref{prop:bc-open} below) already in the definition. Independence of
+$\mathrm{Ex}_!^c$ from the compactification is not treated: all statements are relative to
+an explicit $c$.
+
+\subsection{The base change theorems}
+
+\begin{proposition}[Base change for extension by zero]
+\label{prop:bc-open}
+For a \emph{cartesian} square with $j\colon X\to Z$ and $j'\colon X'\to Z'$ open
+immersions, $\mathrm{Ex}_j\colon j'_!\circ Lg'^*\to Lg^*\circ j_!$ is an isomorphism, for an
+arbitrary coefficient category $\mathcal{A}$ on $\D^+$
+(\lean{Etale.isIso_openImmersionLowerShriekBaseChange}) and for an arbitrary commutative
+condensed ring $\Lambda$ on $\Dc(-,\Lambda)$
+(\lean{ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekBaseChange}).
+The inverses are \lean{Etale.openImmersionLowerShriekBaseChangeIso},
+\lean{ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekBaseChangeIso}.
+\end{proposition}
+Since $X'=g^{-1}(X)$, on (geometric, resp.\ pro-\'etale) stalks both sides are the
+pulled-back stalk at points of $X'$ and vanish outside $X'$. Both are \texttt{sorry}.
+
+\begin{proposition}[Proper base change, \'etale]
+\label{prop:pbc-etale}
+Let the square be cartesian with $f$ proper; no hypothesis on $g$.
+\begin{enumerate}[label=(\alph*)]
+\item (\lean{Etale.isIso_baseChange_of_isProper}) For \emph{abelian} \'etale sheaves,
+  i.e.\ $\mathcal{A}=\Ab$, and every $K\in\D^+(X_{\mathrm{\acute et}},\Ab)$ all of whose
+  cohomology sheaves are torsion (\lean{Etale.DerivedCategory.Plus.torsionHomology}: every
+  geometric stalk of every $\mathcal H^n(K)$ is a torsion abelian group,
+  \lean{Scheme.IsTorsionSheaf}),
+  \[
+    \mathrm{BC}_{sq}(K)\colon Lg^*Rf_*K\xrightarrow{\ \sim\ }Rf'_*Lg'^*K
+    \quad\text{in }\D^+(Y'_{\mathrm{\acute et}},\Ab).
+  \]
+  This is SGA~4, Exp.~XII, Thm.~5.1 / Stacks~0DDE.
+\item (\lean{Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring}) For a commutative
+  ring $\Lambda$ that is torsion as an additive group (e.g.\ $\Lambda=\mathbb Z/\ell^n$),
+  $\mathrm{BC}_{sq}\colon Lg^*\circ Rf_*\to Rf'_*\circ Lg'^*$ is an isomorphism of functors
+  $\D^+(X_{\mathrm{\acute et}},\Lambda)\to\D^+(Y'_{\mathrm{\acute et}},\Lambda)$.
+\end{enumerate}
+\end{proposition}
+Both are \texttt{sorry}, and (b) is stated separately from (a). The expected deduction of
+(b) from (a) is by restriction of scalars along $\mathbb Z\to\Lambda$, which is exact,
+conservative, and compatible with the base change mates.
+
+\begin{proposition}[Proper base change, $\ell$-adic]
+\label{prop:pbc-ladic}
+In the setting of \S\ref{sec:sixCons}, let the square be cartesian with $f$ proper; no
+hypothesis on $g$. Then
+\[
+  \mathrm{BC}_{sq}\colon Lg^*\circ Rf_*\xrightarrow{\ \sim\ }Rf'_*\circ Lg'^*\colon
+  \Dc(X,\Lambda)\to\Dc(Y',\Lambda)
+\]
+is an isomorphism of functors for $\Lambda=\underline E$, $E/\mathbb Q_\ell$ finite
+(\lean{ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper}), and for
+$\Lambda=\underline{\Qlbar}$
+(\lean{ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl}).
+\end{proposition}
+Both are \texttt{sorry}. For $E$ the expected proof reduces to
+Proposition~\ref{prop:pbc-etale}(b): a constructible $\cO_E$-complex is the derived limit of
+its reductions modulo $\varpi^n$, these are torsion, and $E$ is $\cO_E$ with $\ell$ inverted
+on $\Dc$ (\S\ref{sec:rationalization}) (Bhatt--Scholze \S6.7). For $\Qlbar$ it reduces to
+finite $E$, every object of $\Dc(X,\Qlbar)$ coming from some $\Dc(X,E)$
+(\S\ref{sec:Qlbar-colimit}).
 
 \begin{proposition}[Base change for the lower shriek]
-For $\Lambda=\underline E$ and $\Lambda=\underline{\Qlbar}$, $\mathrm{Ex}_!^c$ is an
-isomorphism (\lean{ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange},
-\lean{ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl}); it
-follows from proper base change for $p$ and base change for extension by zero, with no
-properness of $f$.
+\label{prop:bc-shriek}
+Let the square be cartesian and $c$ a compactification of $f$; no properness of $f$ and no
+hypothesis on $g$.
+\begin{enumerate}[label=(\alph*)]
+\item (\lean{Etale.isIso_lowerShriekBaseChange_of_isAddTorsion_ring}) For $\Lambda$ torsion
+  as an additive group, $\mathrm{Ex}_!^c\colon Lg^*\circ Rf_!^c\to Rf'^{\,c'}_!\circ Lg'^*$ is
+  an isomorphism of functors $\D^+(X_{\mathrm{\acute et}},\Lambda)\to
+  \D^+(Y'_{\mathrm{\acute et}},\Lambda)$.
+\item (\lean{ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange},
+  \lean{ProEtale.CondensedRing.isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl})
+  For $\Lambda=\underline E$ and $\Lambda=\underline{\Qlbar}$, $\mathrm{Ex}_!^c$ is an
+  isomorphism of functors $\Dc(X,\Lambda)\to\Dc(Y',\Lambda)$.
+\end{enumerate}
 \end{proposition}
-Independence of $\mathrm{Ex}_!^c$ from the compactification is not treated: all statements
-are relative to an explicit $c$. The \'etale $\mathrm{Ex}_!^c$ is set up identically on the
-bounded below derived categories, and is an isomorphism for torsion coefficients.
+These are \emph{proved}, not sorried, modulo
+Propositions~\ref{prop:bc-open}--\ref{prop:pbc-ladic}: in the defining composite of
+$\mathrm{Ex}_!^c$, the second factor $Rp'_*\mathrm{Ex}_i^{-1}$ is an isomorphism by
+construction, and the first factor $\mathrm{BC}_p\,i_!$ is an isomorphism by proper base
+change for the proper $p$ applied to the proper square of $c'$. Properness enters only
+through $p$. In (a) the proof applies Proposition~\ref{prop:pbc-etale}(b) as an isomorphism
+of functors, so no condition on $i_!K$ is needed.
 
 %======================================================================
 \section{Change of coefficients}
@@ -864,8 +1018,8 @@ $Rf_!$ & $R(g_*)\circ\D(i_!)$ (composite of derived) & same; on $\Dc$ assembled 
   restricted $i_!$, $Rg_*$\\
 $Rf^!$ & $\D(i^*)\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ & only on $\Dc$, for $\ell$-adic
   $\Lambda$: $i^*\circ Rg^!$, $Rg^!$ right adjoint of $Rg_*$ on $\Dc$\\
-$Rf_!\dashv Rf^!$ & composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$; on $\D^+$
-  by restriction & composite of $i_!\dashv i^*$ and $Rg_*\dashv Rg^!$ on $\Dc$\\
+$Rf_!\dashv Rf^!$ & composite of $\D(i_!)\dashv\D(i^*)$ and $Rg_*\dashv Rg^!$; unbounded
+  only, no $R^+f^!$ & composite of $i_!\dashv i^*$ and $Rg_*\dashv Rg^!$ on $\Dc$\\
 $\lotimes$, $\RHom$ & K-flat derived $\otimes$, right adjoint &
   K-flat derived $\otimes_{\Lambda_X}$, right adjoint\\
 on $\Dc$ & --- & restrictions of the above\\
