@@ -427,6 +427,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Spreading
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistGenerator
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistMul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistTensor
@@ -437,6 +438,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Mul
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Sheaf
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorIso
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.TensorObj
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Transition
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import WeilConjectures.AlgebraicGeometry.Regular
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
