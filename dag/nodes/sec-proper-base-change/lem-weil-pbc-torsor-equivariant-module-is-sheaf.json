@@ -21,20 +21,36 @@
  ],
  "proof": [
   {
-   "text": "Proof: Let a matching family of equivariant sections be given on an etale cover\nof an etale object W. Base change this cover along the torsor to obtain an etale\nsurjective cover of W times_V c.P. Etale maps are open, so matching locally\nconstant functions on this cover glue uniquely to a locally constant function:\ndefine its value at a point using any lift, with independence given by matching\non the fibre products. Surjectivity of the maps from the fibre products to the\ncorresponding products of geometric fibres gives independence for arbitrary\nscheme points too. Openness gives local constancy of the glued function.\nApply the same uniqueness to the pullback by each group action and the function\nobtained by applying the representation action. They agree on the cover by\nlocal equivariance, hence agree globally. Gluing is linear since addition and\nscalar multiplication are pointwise. Thus every matching family in the module\npresheaf has a unique amalgamation, proving the module-valued sheaf condition.",
+   "text": "Give the representation carrier the discrete topology. Form the type-valued presheaf H by precomposing Scheme.Etale.continuousMapSheaf on c.P with MorphismProperty.Over.pullback along c.π and forgetting abelian groups. Etale.isContinuous_overPullback and Functor.op_comp_isSheaf_of_isSheaf prove H is a sheaf. This reuses the existing library construction of the continuous-function sheaf instead of reconstructing pointwise gluing.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define the private equivarianceSubfunctor of H by s(action(g,x)) = rho(g)(s(x)). The pullback universal property proves that sectionRestriction commutes with sectionAction, so the condition is stable under restrictions. Given a section locally in the subfunctor, compare s composed with action(g) with rho(g) composed with s. Both are continuous (the representation carrier is discrete), and restrictions agree by local equivariance and the commutation identity. Separatedness of H proves equality, so equivariance is local. Apply Mathlib Subfunctor.isSheaf_iff to obtain the sheaf condition for the equivariant continuous functions.",
    "uses": [
     "def-weil-pbc-torsor-associated-module"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Construct the natural isomorphism from the underlying type presheaf of equivariantModulePresheaf to equivarianceSubfunctor.toFunctor. Its forward map turns locally constant functions into continuous functions and its inverse uses IsLocallyConstant.iff_continuous for the discrete carrier. Both inverses are pointwise identities; naturality follows from pullback.hom_ext identifying sectionRestriction with the base-change functor map. Transport the type-valued sheaf condition along this isomorphism. Reflect it through the module forgetful functor using explicit HasLimitsOfSize, PreservesLimitsOfSize and ReflectsLimitsOfSize instances. The coefficient ring ZMod ell has universe zero, so ModuleCat.hasLimitsOfSize uses universe arguments (u, u+1, u+1, 0).",
+   "uses": [
+    "def-weil-pbc-torsor-associated-module"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-etale-base-change-continuous",
   "def-weil-pbc-torsor-associated-module"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS"
+  "place": "Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex Tags 04TR and 04TS. Reuses the continuous-function sheaf construction and Mathlib subsheaf criterion.",
+  "note": "Y3 adapted the completed private-helper argument of Sheaf.ConstructibleSheaf.TorsorEquivariantPresheafSheaf to the unreduced coefficient ring, keeping the existing declaration signature unchanged."
  },
  "mathlib_searches": [
   {
@@ -108,11 +124,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-9cf2f",
-  "group": "N1",
+  "reviewer": "COMPILER",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261012T135257-L-1679505",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged fullness signature and implemented proof with its node, all three helper signatures and proofs in words with their nodes, and the earlier repairs; all four delivered modules and the sole direct importer compile cleanly, with only allowed axioms and expected sorryAx."
+  "landing": "20261012T165543-L-2943383",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
