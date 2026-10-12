@@ -1,0 +1,137 @@
+{
+ "id": "lem-sc-affine-finite-projective-hom-model",
+ "kind": "statement",
+ "title": "Finite-free preparation of the affine module Hom complex",
+ "statement": "Let R be a commutative ring and X = Spec R [lem-weil-pbc-spec-module-tilde-sections]. Let p,l be cochain complexes of R-modules, with p strictly zero above b, every p^i finite projective, and H^i(l)=0 for i<a [def-sbc-standard-tstructure-derived-category]. Let c have terms Hom_R^n(p,l) and differentials d_l h - (-1)^n h d_p under specified degreewise isomorphisms. Then there exist sheaf complexes E,G and a quasi-isomorphism f:E→tilde(p), with E strictly zero above b, each E^i finite free [lem-weil-pbc-spec-tilde-free-module], and G strictly zero below a. Moreover Q(G) is isomorphic to Q(tilde(l)), and Q(Hom(E,G)) [def-pur-hom-complex] is isomorphic to Q(tilde(c)). This is a preparation statement for ordinary Hom complexes; it makes no assertion about derived internal Hom or its quasi-coherence.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, proof of clause (3)(a); more-algebra.tex Tag 064U, proof of (3) implies (1); cohomology.tex Tag 08I5, ordinary Hom-complex terms"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Using the complementary-projective construction of Stacks Tag 064U, take a bounded-above finite-free complex F with a projection F → p whose kernel is the direct sum of two-term identity complexes. This is a homotopy equivalence, with the same upper bound b.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Good truncation l′ = truncGE l a is strictly bounded below and l → l′ is a quasi-isomorphism by [def-sbc-standard-tstructure-derived-category]. By [lem-sc-bounded-above-projective-kprojective], p is K-projective. Applying Hom(p,-) to the acyclic cone of l → l′ gives an acyclic Hom complex: its cocycles are chain maps into shifts of the cone, nullhomotopic by K-projectivity; homotopies are exactly coboundaries. Thus Hom(p,l) → Hom(p,l′) is a quasi-isomorphism. Hom(F,l′) and Hom(p,l′) are homotopy equivalent by precomposition with the homotopy equivalence of step 1.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sc-bounded-above-projective-kprojective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set E = tilde(F), G = tilde(l′), and f = tilde(F → p), termwise. The affine sheaf construction [lem-weil-pbc-spec-module-tilde-sections] is additive and exact by [lem-weil-pbc-localization-module-exact]: on stalks it is exact module localization. Hence it preserves the homotopy equivalence, the bounds and the quasi-isomorphisms from step 2. The truncation gives Q(G) ≅ Q(tilde(l)); [lem-weil-pbc-spec-tilde-free-module] gives finite free terms of E.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree n, only a-n ≤ i ≤ b contributes to Hom(F,l′). The internal sheaf Hom out of a finite free module is a finite power of its target: use [lem-weil-pbc-spec-tilde-free-module] and [lem-weil-pbc-spec-module-tilde-sections]. Finite products therefore identify the termwise tilde of module Hom with sheaf Hom. The differential d_l′ h - (-1)^n h d_F agrees under this identification by the matrix formulas for finite free modules and the definition [def-pur-hom-complex]. Localize this complex isomorphism and compose with the quasi-isomorphisms of step 2 after exact tilde, using e and hc to identify c with the module Hom complex.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0A6H, affine calculation, with finite-free replacement as in Tag 064U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded above finite projective complex finite free homotopy equivalent replacement associated sheaf Hom complex",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred from this service.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded above finite projective module complex has finite free homotopy equivalent complex compatible with associated sheaf Hom",
+   "results": "CochainComplex.isKProjective_of_projective and IsKProjective, projective resolutions and homotopy invariance. No finite-free affine Hom preparation theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match for preparation; K-projectivity already recorded"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*free.*homotopy|homotopy.*finite.*free|tilde.*homComplex",
+   "results": "msearch: zero Mathlib/source hits. DAG and full Sheaf search found the parent plan and special finite-complex/stalk replacement statements; none prepares bounded-above finite-projective Hom against an arbitrary cohomologically bounded-below representative. blueprint_refs searches finite free replacement and 0A6H found no blueprint node.",
+   "date": "2026-10-13",
+   "verdict": "no existing matching statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent",
+  "date": "2026-10-13",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, Tag 0A6H clause (1), affine reduction to clause (3): preparation before computing derived Hom",
+   "via": [
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFiniteProjectiveHomModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFiniteProjectiveHomModel.lean",
+  "declaration": "CategoryTheory.affineFiniteProjectiveHomModel",
+  "statement": "theorem affineFiniteProjectiveHomModel\n    (R : Type u) [CommRing R]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      (moduleRings (Spec (CommRingCat.of R)).toRingedSpace))]\n    (p l : CochainComplex (ModuleCat.{u} R) ℤ)\n    (b a : ℤ) (hp : p.IsStrictlyLE b) (hl : l.IsGE a)\n    (hfinite : ∀ i : ℤ, Module.Finite R (p.X i))\n    (hprojective : ∀ i : ℤ, Module.Projective R (p.X i))\n    (c : CochainComplex (ModuleCat.{u} R) ℤ)\n    (e : ∀ n : ℤ, c.X n ≅ ModuleCat.of R (CochainComplex.HomComplex.Cochain p l n))\n    (hc : ∀ n m : ℤ, c.d n m ≫ (e m).hom =\n      (e n).hom ≫ ModuleCat.ofHom (CochainComplex.HomComplex.δ_hom R p l n m)) :\n    let T := (@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} R)\n      (SheafOfModules.{u} (moduleRings (Spec (CommRingCat.of R)).toRingedSpace))\n      _ _ _ _ (tilde.functor (CommRingCat.of R))\n      ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ))\n    ∃ (E G : CochainComplex (SheafOfModules.{u}\n        (moduleRings (Spec (CommRingCat.of R)).toRingedSpace)) ℤ)\n      (f : E ⟶ T.obj p),\n      QuasiIso f ∧ E.IsStrictlyLE b ∧ G.IsStrictlyGE a ∧\n      (∀ i : ℤ, ∃ r : ℕ, Nonempty (E.X i ≅\n        SheafOfModules.free\n          (R := moduleRings (Spec (CommRingCat.of R)).toRingedSpace)\n          (ULift.{u} (Fin r)))) ∧\n      Nonempty (DerivedCategory.Q.obj G ≅ DerivedCategory.Q.obj (T.obj l)) ∧\n      Nonempty (DerivedCategory.Q.obj\n        (homComplex (R := (Spec (CommRingCat.of R)).sheaf) E G) ≅\n        DerivedCategory.Q.obj (T.obj c))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T194141-L-465082",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T194141-L-465082",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

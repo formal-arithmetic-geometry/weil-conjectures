@@ -26,73 +26,53 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded-above complex representing $P$ with finite projective terms, say zero above degree $b$. As in Stacks Tag 064U (proof of (3)$\\Rightarrow$(1)), choose finite projective $C^n$ with $F^{b}=P^{b}\\oplus C^{b}$ finite free and inductively $F^{n-1}=P^{n-1}\\oplus C^{n}\\oplus C^{n-1}$ finite free for $n\\le b$, with differential $F^{n-1}\\to F^n$ equal to $d_P$ on $P^{n-1}$, the identity $C^n\\to C^n$, and zero on $C^{n-1}$. The projection $E^\\bullet:=F^\\bullet\\to P^\\bullet$ is a map of complexes whose kernel is a direct sum of complexes $C^n\\xrightarrow{\\mathrm{id}}C^n$, so it is a homotopy equivalence; $E^\\bullet$ is a bounded-above complex of finite free $R$-modules, zero above degree $b$. (A single principal open on which every term of $P$ is free need not exist when $P$ has infinitely many nonzero terms, so this global finite-free replacement is used instead of a localization.)",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 064U, lemma-pseudo-coherent, proof of (3) implies (1)"
-   }
-  },
-  {
-   "text": "Choose a representative of $L$ bounded below, say zero below degree $a$, by applying the standard truncation construction in [def-sbc-standard-tstructure-derived-category] to a representative with cohomology zero below $a$. By [lem-sc-affine-projective-complex-derived-hom] applied to the bounded-above complex $E^\\bullet$ of (finite free, hence) projective modules and this bounded-below $L$, the module Hom complex $C^\\bullet=\\operatorname{Hom}_R^\\bullet(E,L)$ represents $R\\operatorname{Hom}_R(E,L)\\cong R\\operatorname{Hom}_R(P,L)$, the isomorphism induced by the quasi-isomorphism $E\\to P$ of Step 1. Here $C^n=\\prod_{p}\\operatorname{Hom}_R(E^p,L^{p+n})$ is a finite product over $a-n\\le p\\le b$, and $C^n=0$ for $n<a-b$.",
+   "text": "Choose b from the strict upper bound of p, and a from the lower cohomological bound of L. Transport along eL:Q(l)≅L and use the canonical t-structure [def-sbc-standard-tstructure-derived-category] to obtain l.IsGE a. Apply [lem-sc-affine-finite-projective-hom-model] to obtain E,G,f with E bounded above and finite free, G bounded below, f:E→tilde(p) a quasi-isomorphism, Q(G)≅Q(tilde(l)), and Q(Hom(E,G))≅Q(tilde(c)).",
    "uses": [
     "def-sbc-standard-tstructure-derived-category",
-    "lem-sc-affine-projective-complex-derived-hom"
+    "lem-sc-affine-finite-projective-hom-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0GM8, lemma-stalk-internal-hom, case (2), affine derived-Hom computation"
-   }
+   "elementary": false
   },
   {
-   "text": "Applying the module construction [lem-weil-pbc-spec-module-tilde-sections] termwise is an additive functor, so it carries the homotopy equivalence $E\\to P$ of Step 1 to a homotopy equivalence, in particular a quasi-isomorphism, $\\widetilde E\\to\\widetilde P$; and $\\widetilde{R^{\\oplus r}}=\\mathcal O_U^{\\oplus r}$, so $\\widetilde E$ is a bounded-above complex of finite-rank free $\\mathcal O_U$-modules, while $\\widetilde L$ is bounded below. By [lem-sc-derived-hom-finite-free-model], $\\mathcal Hom^\\bullet_{\\mathcal O_U}(\\widetilde E,\\widetilde L)$ represents $R\\mathcal Hom_U(\\widetilde P,\\widetilde L)$ on all of $U$. Its degree-$n$ term is the finite product $\\prod_{a-n\\le p\\le b}\\mathcal Hom(\\mathcal O_U^{\\oplus r_p},\\widetilde{L^{p+n}})=\\prod_p(\\widetilde{L^{p+n}})^{\\oplus r_p}=\\widetilde{C^n}$, and the matrix formulas for the differentials (matrices over $R=\\Gamma(U,\\mathcal O_U)$) show these identifications commute with the differentials. Hence $R\\mathcal Hom_U(\\widetilde P,\\widetilde L)\\cong\\widetilde{C^\\bullet}$, the termwise associated complex of a representative of $R\\operatorname{Hom}_R(P,L)$.",
+   "text": "Apply [lem-sc-derived-hom-finite-free-model] to E,G,f on all of Spec R. It gives Q(Hom(E,G))≅RHom(Q(tilde(p)),Q(G)). Apply the derived Hom functor [def-pur-derived-internal-hom] to the identity in its first variable and the preparation isomorphism Q(G)≅Q(tilde(l)) in its second. Invert and compose with Q(Hom(E,G))≅Q(tilde(c)) to obtain the required isomorphism.",
+   "uses": [
+    "lem-sc-derived-hom-finite-free-model",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that termwise tilde preserves homology: it is additive by [lem-weil-pbc-spec-module-tilde-sections], preserves finite colimits by its affine tilde/global-sections adjunction, and preserves monomorphisms by injectivity of module localization [lem-weil-pbc-localization-module-exact]. Mathlib then gives preservation of homology. The derived homology comparison and the short-complex mapHomologyIso identify H^n(Q(tilde(c))) with tilde(H^n(c)), which is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections]. Transport quasi-coherence along the isomorphism of step 2.",
    "uses": [
     "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-sc-derived-hom-finite-free-model"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-localization-module-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (3)(a), affine calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Localization of $R$-modules is exact [lem-weil-pbc-localization-module-exact], so by the description of sections over principal opens in [lem-weil-pbc-spec-module-tilde-sections], kernels, images and cohomology of $\\widetilde{C^\\bullet}$ are computed on every $D(f)$ by localizing those of $C^\\bullet$; this gives canonical isomorphisms $\\mathcal H^i(R\\mathcal Hom_U(\\widetilde P,\\widetilde L))\\cong\\widetilde{H^i(C^\\bullet)}$ for every $i$.",
+   "text": "Use the universal product property of [def-pur-hom-complex]. For n<a-b, every factor Hom(E^i,G^(i+n)) vanishes: if b<i its source is zero; otherwise i+n<a and its target is zero. The internal Hom functors are additive in each variable, hence preserve zero objects. Product uniqueness makes the identity of the degree-n Hom object zero, so Hom(E,G) is strictly ≥a-b. The canonical t-structure [def-sbc-standard-tstructure-derived-category] puts Q(Hom(E,G)) in degrees ≥a-b. Transport along the step-2 representation to give the requested bound on RHom.",
    "uses": [
-    "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "def-pur-hom-complex",
+    "def-sbc-standard-tstructure-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (3)(a), localization of the affine Hom complex"
-   }
-  },
-  {
-   "text": "Each sheaf $\\widetilde{H^i(C^\\bullet)}$ is quasi-coherent by [lem-weil-pbc-spec-module-tilde-sections], and it is zero for $i<a-b$ by Step 2. Combining this with Steps 3 and 4 proves the asserted isomorphism, quasi-coherence and vanishing in all sufficiently negative degrees.",
-   "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clause (3)(a), conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-sbc-standard-tstructure-derived-category",
-  "lem-sc-affine-projective-complex-derived-hom",
-  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-affine-finite-projective-hom-model",
   "lem-sc-derived-hom-finite-free-model",
-  "lem-weil-pbc-localization-module-exact"
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-localization-module-exact",
+  "def-pur-hom-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, clauses (1) and (3)(a)"
+  "place": "Tag 0A6H, proof of clause (3)(a); complementary-projective replacement as in Tag 064U; Lean assembly and product lower bound by T1"
  },
  "mathlib_searches": [
   {
@@ -179,5 +159,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T194141-L-465082",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
