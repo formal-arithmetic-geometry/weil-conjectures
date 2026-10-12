@@ -2,7 +2,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
-import Sheaf.LinearAlgebra.MatrixRankFieldExtension
+import Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlock
+import Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockVanishes
+import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 @[expose] public section
 
@@ -15,17 +17,18 @@ namespace AlgebraicGeometry.Scheme.Modules
 Source: `thm-pc-semicontinuity-base-change`, proof (3), normal-form claim.
 (blueprint: lem-pc-constant-rank-map-local-normal-form-nonempty)
 
-Proof: Work around an arbitrary point of `Z` on an affine open.  The residue-field
-ranks are all `a` by invariance under the field extensions supplied by `hrank`.
-The `(a+1)`-minors therefore lie in every prime and vanish in the reduced affine
-ring.  A nonzero `a`-minor at the point remains invertible after shrinking to its
-principal open.  Row and column permutations and elementary invertible block
-operations then give `diag (I a, 0)`: the Schur-complement entries are the
-vanishing `(a+1)`-minors divided by the invertible pivot determinant.  Reordering
-the resulting bases yields the displayed biproduct factorization.  The case
-`a = 0` uses the empty minor, and the pointwise conclusion is assembled for each
-point of the nonempty open subscheme. -/
- theorem exists_local_normal_form_of_constantRank_nonempty
+Proof: At z choose the field-valued point from hrank. The proved rank-minor
+criterion le_rank_map_appTop_iff gives an a by a minor nonvanishing at j(z).
+Apply exists_local_invertible_minor_block to obtain local decompositions with
+an invertible leading block f. Mathlib's Biprod.gaussian constructs invertible
+row and column operations and a complementary block δ, giving diag(f, δ).
+Apply complementary_block_eq_zero_of_rank_le using the upper bound supplied
+by hrank on U; this is the reducedness step and gives δ = 0. Absorb f into the
+source basis and use the biproduct braiding to place the complementary source
+coordinates first. The biproduct projection/inclusion identities yield the
+claimed equality. The empty minor and zero biproduct summands include rank
+zero and maximal rank without separate cases. -/
+theorem exists_local_normal_form_of_constantRank_nonempty
     {Y Z : Scheme.{u}} [IsReduced Y] [Nonempty Z] {M N : Y.Modules} {m n : ℕ}
     (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))
     (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))
@@ -39,6 +42,49 @@ point of the nonempty open subscheme. -/
         (eT : ((Modules.pullback j).obj N).restrict U.ι ≅
           free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),
         (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =
-          eS.hom ≫ biprod.snd ≫ biprod.inl ≫ eT.inv := by sorry
+          eS.hom ≫ biprod.snd ≫ biprod.inl ≫ eT.inv := by
+  classical
+  intro z
+  obtain ⟨R, hR, g, hpoint, hRank⟩ := hrank z
+  let := hR.toField
+  obtain ⟨x⟩ : Nonempty (Spec R) := inferInstance
+  have hx : g.base x = j.base z := by
+    have hx' : g.base x ∈ Set.range g.base := ⟨x, rfl⟩
+    simpa only [hpoint, Set.mem_singleton_iff] using hx'
+  obtain ⟨rows, cols, hminor⟩ :=
+    (le_rank_map_appTop_iff (isField_Γ_Spec hR) g x
+      (freeMatrix (eM.inv ≫ φ ≫ eN.hom)) a).mp (le_of_eq hRank.symm)
+  rw [hx] at hminor
+  obtain ⟨U, hzU, eS, eT, hblock⟩ :=
+    exists_local_invertible_minor_block eM eN φ j a z rows cols hminor
+  let ψ := (restrictFunctor U.ι).map ((Modules.pullback j).map φ)
+  let F := eS.inv ≫ ψ ≫ eT.hom
+  let f := biprod.inl ≫ F ≫ biprod.fst
+  have : IsIso f := by
+    simpa only [f, F, ψ, Category.assoc] using hblock
+  obtain ⟨L, Q, δ, hdiag⟩ := Biprod.gaussian F
+  let eS' := eS ≪≫ L.symm
+  let eT' := eT ≪≫ Q
+  have hform : ψ = eS'.hom ≫ biprod.map f δ ≫ eT'.inv := by
+    rw [← hdiag]
+    simp [eS', eT', F, Category.assoc]
+  have hδ : δ = 0 := complementary_block_eq_zero_of_rank_le eM eN φ j a U
+    (fun w _ => by
+      obtain ⟨K, hK, k, hk, hr⟩ := hrank w
+      exact ⟨K, hK, k, hk, le_of_eq hr⟩) eS' eT' f δ hform
+  let B := biprod.mapIso (asIso f)
+    (Iso.refl (free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin (m - a)))))
+  let C := biprod.braiding (free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin a)))
+    (free (ULift.{u} (Fin (m - a))))
+  refine ⟨U, hzU, eS' ≪≫ B ≪≫ C, eT', ?_⟩
+  change ψ = _
+  rw [hform, hδ]
+  have hmap : biprod.map f (0 : free (R := U.toScheme.ringCatSheaf)
+      (ULift.{u} (Fin (m - a))) ⟶ free (ULift.{u} (Fin (n - a)))) =
+      B.hom ≫ C.hom ≫ biprod.snd ≫ biprod.inl := by
+    apply biprod.hom_ext <;> simp [B, C]
+  simp only [Iso.trans_hom, Category.assoc]
+  rw [hmap]
+  simp only [Category.assoc]
 
 end AlgebraicGeometry.Scheme.Modules

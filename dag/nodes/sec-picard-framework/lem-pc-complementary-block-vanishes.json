@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-complementary-block-vanishes",
+ "kind": "statement",
+ "title": "Reducedness kills the complementary diagonal block",
+ "statement": "Let $Y$ be a reduced scheme [def-pc-reduced-scheme], $j:Z\\to Y$ an open immersion [def-weil-open-immersion], $M,N$ finite free sheaves of ranks $m,n$ [def-weil-pbc-free-module], with chosen bases $e_M,e_N$, and $\\phi:M\\to N$. Fix $a\\in\\mathbb N$ and an open $U\\subseteq Z$. Assume that for every $z\\in U$ there is a field $R$ and a morphism $g:\\operatorname{Spec}R\\to Y$ with image exactly $\\{j(z)\\}$ for which the matrix of $\\phi$ evaluated by $g^\\sharp$ has rank at most $a$ [def-weil-matrix-rank]. Suppose given isomorphisms $e_S:(j^*M)|_U\\simeq\\mathcal O_U^a\\oplus\\mathcal O_U^{m-a}$ and $e_T:(j^*N)|_U\\simeq\\mathcal O_U^a\\oplus\\mathcal O_U^{n-a}$, an automorphism $f$ of $\\mathcal O_U^a$, and a morphism $\\delta:\\mathcal O_U^{m-a}\\to\\mathcal O_U^{n-a}$, with $(j^*\\phi)|_U=e_T^{-1}\\operatorname{diag}(f,\\delta)e_S$. Then $\\delta=0$. Here pullback, restriction and biproduct are those of [def-pc-module-pullback, lem-weil-pbc-module-restriction-open-immersion-colimits, def-weil-additive-category]. This conclusion only concerns the given complementary block and does not construct any neighbourhood or bases.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; source argument retained in the parent node docstring and unit record"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-additive-category",
+  "def-pc-reduced-scheme",
+  "def-weil-matrix-rank"
+ ],
+ "proof": [
+  {
+   "text": "For z in U choose the field point from the rank bound. Its image lies in the image of the composite open immersion U→Z→Y, hence it factors uniquely through U. Pull back the given diagonal equality. Under the pullback free isomorphisms its fibre map is block diagonal with invertible a-dimensional block f. The matrix rank is unchanged by the chosen basis isomorphisms; its image is the direct sum of the full first summand and the image of the fibre of δ. Therefore its rank is a plus the rank of that fibre, so the bound by a forces the latter rank to be zero. A zero-rank linear map over a field is zero.",
+   "uses": [
+    "def-weil-matrix-rank",
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map to the chosen field factors through the residue field at z via the stalk map. A unital homomorphism between fields is injective, so every matrix entry of δ vanishes already in the residue field at z. On any affine open V inside U it therefore belongs to every prime of Γ(V,O). The intersection of these primes is the nilradical. Γ(V,O) is reduced because U is an open subscheme of reduced Y, hence this intersection is zero.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All entries of δ are zero on each affine open V. Its value on each finite free basis element is consequently zero on this affine cover. The sheaf axiom makes these sections globally zero, and the universal property of the free sheaf gives δ=0. Empty U gives the zero sheaf category, a=0 treats the whole map this way, and zero-sized complementary summands give the same conclusion.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-reduced-scheme",
+  "def-weil-matrix-rank",
+  "def-weil-pbc-free-module",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; K1 explicit subargument, 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A complementary block of a matrix over a reduced ring vanishes if the fibre ranks equal the invertible pivot block size",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a reduced scheme a block diagonal map of finite free sheaves with an invertible rank a block and fibre ranks at most a has zero complementary block",
+   "results": "LinearMap.trace_eq_zero_of_mapsTo_ne; rankCondition_iff_le_of_comp_eq_one; Module.isLocallyConstant_rankAtStalk_freeLocus; LinearMap.diag_toMatrix_directSum_collectedBasis_eq_zero_of_mapsTo_ne; LinearMap.nilRankAux_le; Module.rankAtStalk_pi; Module.isLocallyConstant_rankAtStalk; ModuleCat.free_shortExact_finrank_add",
+   "date": "2026-10-12",
+   "verdict": "No theorem of the geometric statement; related results only."
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*fromBlocks|rank_eq_zero",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "No theorem of the geometric statement; related results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-semicontinuity-base-change",
+   "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring",
+   "via": [
+    "lem-pc-constant-rank-map-local-normal-form-nonempty",
+    "lem-pc-constant-rank-map-local-normal-form",
+    "lem-pc-constant-rank-map-kernel-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockVanishes",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ComplementaryBlockVanishes.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.complementary_block_eq_zero_of_rank_le",
+  "statement": "theorem complementary_block_eq_zero_of_rank_le\n    {Y Z : Scheme.{u}} [IsReduced Y] {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ) (U : Z.Opens)\n    (hrank : ∀ z : Z, z ∈ U →\n      ∃ (R : CommRingCat.{u}) (_ : IsField R) (g : Spec R ⟶ Y),\n        Set.range g.base = {j.base z} ∧\n        ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).map g.appTop).rank ≤ a)\n    (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n      free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (m - a))))\n    (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n      free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a))))\n    (f : free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin a)) ⟶\n      free (ULift.{u} (Fin a))) [IsIso f]\n    (δ : free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin (m - a))) ⟶\n      free (ULift.{u} (Fin (n - a))))\n    (hform : (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =\n      eS.hom ≫ biprod.map f δ ≫ eT.inv) : δ = 0",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T173838-L-3299230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T173838-L-3299230",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-pc-local-invertible-minor-block",
+ "kind": "statement",
+ "title": "Local bases exposing an invertible minor block",
+ "statement": "Let $Y,Z$ be schemes [def-pc-scheme], $j:Z\\to Y$ an open immersion [def-weil-open-immersion], $M,N$ sheaves of modules [def-weil-sheaf-of-modules-category], and $e_M:M\\simeq\\mathcal O_Y^m$, $e_N:N\\simeq\\mathcal O_Y^n$ finite free bases [def-weil-pbc-free-module]. Let $\\phi:M\\to N$, $a\\in\\mathbb N$, $z\\in Z$, $r:[a]\\to[n]$, $c:[a]\\to[m]$, and $A$ the global matrix of $e_N\\phi e_M^{-1}$ [def-weil-matrix]. Suppose $j(z)\\in D(\\det(A_{r,c}))$, the locus where the germ of the selected determinant is a unit [def-weil-pbc-matrix-determinant]. Then there is an open neighbourhood $U$ of $z$ and isomorphisms $e_S:(j^*M)|_U\\simeq\\mathcal O_U^a\\oplus\\mathcal O_U^{m-a}$ and $e_T:(j^*N)|_U\\simeq\\mathcal O_U^a\\oplus\\mathcal O_U^{n-a}$ such that the leading component $\\pi_1 e_T((j^*\\phi)|_U)e_S^{-1}\\iota_1:\\mathcal O_U^a\\to\\mathcal O_U^a$ is an isomorphism. The biproducts are those of [def-weil-additive-category] and the pullback and restriction those of [def-pc-module-pullback, lem-weil-pbc-module-restriction-open-immersion-colimits]. No reducedness or condition on other fibre ranks is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: choose a nonzero a-minor and shrink to make it invertible; source argument retained in the parent node docstring and unit record"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-additive-category",
+  "def-weil-matrix",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood V of j(z) inside the intersection of the image of j and the basic open of the chosen determinant. The determinant restricts to a unit on V, since all its germs are units. Nonvanishing at j(z) forces the selected row and column maps to be injective: repeated columns give zero determinant, and repeated rows follow by transposing. Thus a is at most both m and n.",
+   "uses": [
+    "lem-weil-pbc-det-repeated-column-zero",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the selected row and column lists to bijections [a] disjoint union [n-a] with [n], and [a] disjoint union [m-a] with [m]. In their induced free bases the leading a by a block is the chosen submatrix. Its inverse is the adjugate multiplied by the inverse of its unit determinant, by the adjugate identity. This defines inverse sheaf maps on every smaller open, since the restrictions are ring homomorphisms.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let U be the preimage of V in Z. Transport these coordinate decompositions through eM and eN, the pullback free isomorphisms and restriction. The natural isomorphism of open-immersion restriction with pullback identifies the leading component with the invertible chosen block. The point z belongs to U. For a=0 the empty determinant is 1 and the leading component is the unique automorphism of the zero free sheaf.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-det-repeated-column-zero",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: choose a nonzero a-minor and shrink to make it invertible; K1 explicit subargument, 2026-10-13"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A nonvanishing minor of a map of finite free sheaves gives a local invertible leading block",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible minor of a map between free sheaves gives a local direct sum decomposition with an invertible leading block",
+   "results": "SheafOfModules.generatorsOfIsCokernelFree_I; SheafOfModules.generatorsOfIsCokernelFree_s; SheafOfModules.presentationOfIsCokernelFree_generators; SheafOfModules.generatorsOfIsCokernelFree_π; SheafOfModules.ιFree; SheafOfModules.QuasicoherentData.localGeneratorsData_generators; SheafOfModules.GeneratingSections.π; SheafOfModules.generatorsOfIsCokernelFree",
+   "date": "2026-10-12",
+   "verdict": "No theorem of the geometric statement; related results only."
+  },
+  {
+   "tool": "grep",
+   "query": "minor|det.*[Ii]so|[Ii]so.*det",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "No theorem of the geometric statement; related results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalFormNonempty",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-semicontinuity-base-change",
+   "place": "Proof (3), reduced-ring normal form: choose a nonzero a-minor and shrink to make it invertible",
+   "via": [
+    "lem-pc-constant-rank-map-local-normal-form-nonempty",
+    "lem-pc-constant-rank-map-local-normal-form",
+    "lem-pc-constant-rank-map-kernel-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.LocalInvertibleMinorBlock",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocalInvertibleMinorBlock.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_local_invertible_minor_block",
+  "statement": "theorem exists_local_invertible_minor_block\n    {Y Z : Scheme.{u}} {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ) (z : Z)\n    (rows : Fin a → ULift.{u} (Fin n)) (cols : Fin a → ULift.{u} (Fin m))\n    (hminor : j.base z ∈\n      Y.basicOpen ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).submatrix rows cols).det) :\n    ∃ U : Z.Opens, z ∈ U ∧\n      ∃ (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (m - a))))\n        (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n          free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a)))),\n        IsIso (biprod.inl ≫ eS.inv ≫\n          (restrictFunctor U.ι).map ((Modules.pullback j).map φ) ≫\n          eT.hom ≫ biprod.fst)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T173838-L-3299230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T173838-L-3299230",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
