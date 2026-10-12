@@ -29,63 +29,38 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (notation; a finite affine covering of $T$).* Write $f_{i'i}:Z_{i'}\\to Z_i$ ($i'\\ge i$) for the transition morphisms and $p_i:Z\\to Z_i$ for the projections of the limit, so $h_i\\circ f_{i'i}=h_{i'}$, $f_{i'i}\\circ p_{i'}=p_i$ and $h=h_i\\circ p_i$ for every $i$. Since $I$ is nonempty, fix an index $0\\in I$; the set $I_{\\ge0}=\\{i\\in I: i\\ge0\\}$ is directed (two elements $i,i'\\ge0$ have an upper bound $k\\ge i,i'$, and then $k\\ge0$). $T$ is a scheme, hence covered by affine opens [def-pc-scheme], and quasi-compact [def-weil-pbc-scheme-conventions], so $T=\\bigcup_{j=1}^nV_j$ for finitely many affine opens $V_j\\subseteq T$ ($n=0$ if $T=\\emptyset$).",
+   "text": "Fix b in the nonempty index category I^op and take the finite subcover of T.affineCover. Its ranges V_a are affine opens and their supremum is top. The finite index type may be empty.",
    "uses": [
     "def-pc-scheme",
     "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 09ZM (lemma-eventually-affine), proof, lines 902-911: 'Choose a finite affine open covering $S=\\bigcup_{j=1,\\ldots,n}V_j$'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 2 (the pieces $W_{j,i}$, $W_j$; $W_j$ is affine and each $W_{j,i}$ is quasi-compact and quasi-separated).* For $j=1,\\dots,n$ put $W_{j,i}=h_i^{-1}(V_j)\\subseteq Z_i$ ($i\\in I$) and $W_j=h^{-1}(V_j)\\subseteq Z$, open subschemes. (a) For $i\\ge0$, $h_i=h_0\\circ f_{i0}$ gives $W_{j,i}=f_{i0}^{-1}(W_{j,0})$, and $h=h_0\\circ p_0$ gives $W_j=p_0^{-1}(W_{j,0})$. (b) $W_j$ is affine, being the preimage of the affine open $V_j$ under the affine morphism $h$ [pqf-def-affine-morphism]. (c) $W_{j,i}$ is quasi-compact and quasi-separated: $Z_i$ is quasi-compact and quasi-separated and $T$ is quasi-separated, so $h_i$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1); by [lem-weil-pbc-open-preimage-fibre-product] the restriction $h_i|:W_{j,i}\\to V_j$ is the base change of $h_i$ along the inclusion $V_j\\hookrightarrow T$, hence quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](3); as $V_j$ is affine, [lem-weil-pbc-qcqs-over-affine] gives that the scheme $W_{j,i}$ is quasi-compact and quasi-separated. (The source does not check this hypothesis of Lemma 01Z6.)",
+   "text": "For each V_a put U_a = h_b^{-1}(V_a). The map h_b is quasi-compact since its source is compact and its target is quasi-separated (quasiCompact_of_compactSpace). Thus U_a is compact by QuasiCompact.isCompact_preimage. For every k in Over b, the open D(k.hom)^{-1}(U_a) is compact because the transition is affine, hence quasi-compact, and it is quasi-separated because it is an open of the quasi-separated scheme D(k.left). This uses the topological isQuasiSeparated_iff_quasiSeparatedSpace and IsQuasiSeparated.of_quasiSeparatedSpace, rather than a base-change description of h_b restricted to V_a.",
    "uses": [
     "pqf-def-affine-morphism",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-open-preimage-fibre-product",
-    "lem-weil-pbc-qcqs-over-affine"
+    "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 09ZM (lemma-eventually-affine), proof, lines 902-911: 'Denote $f:X\\to S$ and $f_i:X_i\\to S$ the structure morphisms. For each $j$ the scheme $f^{-1}(V_j)$ ... is affine'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 3 ($W_j=\\varprojlim_{i\\ge0}W_{j,i}$ with affine transition morphisms).* $Z$ with the projections $p_i$ is a limit of the inverse system $(Z_i,f_{i'i})$, whose transition morphisms are affine. Apply [lem-weil-pbc-limit-cone-affine-projections-opens](2) to it, with the index $0$ and the open $W_{j,0}\\subseteq Z_0$: the open subschemes $f_{i0}^{-1}(W_{j,0})\\subseteq Z_i$ ($i\\ge0$) with the restricted transition morphisms form an inverse system over $I_{\\ge0}$ with affine transition morphisms, and $p_0^{-1}(W_{j,0})\\subseteq Z$ with the restricted projections is its limit in the category of schemes. By step 2(a) these are $W_{j,i}$ and $W_j$. So $W_j=\\varprojlim_{i\\ge0}W_{j,i}$, with affine transition morphisms $W_{j,i'}\\to W_{j,i}$ ($i'\\ge i\\ge0$).",
+   "text": "Use opensDiagram D b U_a and opensCone D c b U_a. Mathlib isLimitOpensCone gives the restricted limit and the opensDiagram instance gives affine transitions. Its point c.pi_b^{-1}(U_a) equals f^{-1}(V_a) by compatibility _hf b, so it is affine since f is affine. Apply Scheme.exists_isAffine_of_isLimit to choose k_a in Over b with affine D(k_a.hom)^{-1}(U_a). Naturality of h identifies this open with h_{k_a.left}^{-1}(V_a).",
    "uses": [
-    "lem-weil-pbc-limit-cone-affine-projections-opens"
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-limit-affine-stage",
+    "pqf-def-affine-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 09ZM (lemma-eventually-affine), proof, lines 902-911: '$f^{-1}(V_j)=\\lim_if_i^{-1}(V_j)$'"
-   }
+   "elementary": false
   },
   {
-   "text": "*Step 4 (each $W_{j,i}$ is affine for $i$ large).* Fix $j$. The inverse system $(W_{j,i})_{i\\ge0}$ over the nonempty directed set $I_{\\ge0}$ (step 1) consists of quasi-compact and quasi-separated schemes (step 2(c)) and has affine transition morphisms and limit $W_j$ (step 3); $W_j$ is affine (step 2(b)). (A limit is unique up to unique isomorphism and an open subscheme isomorphic to an affine scheme is affine, so it does not matter which limit of the system is taken.) By [lem-weil-pbc-limit-affine-stage] (Limits, Lemma 01Z6, with $I_{\\ge0}$ in place of $I$) there is $i_j\\ge0$ such that $W_{j,i}$ is affine for every $i\\ge i_j$.",
+   "text": "Use IsCofiltered.inf_objs_exists on the finite set of k_a.left to choose i with arrows gi_a : i -> k_a.left. For any j >= i.unop the preorder supplies g : op j -> i. Pulling the affine open h_{k_a.left}^{-1}(V_a) back along the affine transition D(g followed by gi_a) gives an affine open; naturality identifies it with h_{op j}^{-1}(V_a). HasAffineProperty.of_iSup_eq_top applied to the finite affine cover proves IsAffineHom(h_{op j}). If the cover is empty, inf_objs_exists still supplies i by nonemptiness and the local criterion applies vacuously.",
    "uses": [
-    "lem-weil-pbc-limit-affine-stage"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 09ZM (lemma-eventually-affine), proof, lines 902-911: 'Hence by Lemma lemma-limit-affine there exists an $i\\in I$ such that each $f_i^{-1}(V_j)$ is affine'"
-   }
-  },
-  {
-   "text": "*Step 5 (a common index; $h_i$ is affine).* Since $I$ is directed and there are finitely many $j$, there is $i_0\\in I$ with $i_0\\ge0$ and $i_0\\ge i_j$ for $j=1,\\dots,n$ (induction on $n$; $i_0=0$ if $n=0$). Let $i\\ge i_0$. Then $i\\ge i_j$ for every $j$, so $h_i^{-1}(V_j)=W_{j,i}$ is affine for $j=1,\\dots,n$ (step 4), and the $V_j$ are affine opens covering $T$ (step 1). Hence $h_i:Z_i\\to T$ is affine by [pqf-lem-affine-local-target] (the implication from the existence of an affine open covering of the target with affine preimages; Morphisms, Lemma Tag 01S8, (2)$\\Rightarrow$(1)).",
-   "uses": [
+    "pqf-def-affine-morphism",
     "pqf-lem-affine-local-target"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 09ZM (lemma-eventually-affine), proof, lines 902-911: 'In other words, $f_i:X_i\\to S$ is affine for $i$ large enough, see Morphisms, Lemma morphisms-lemma-characterize-affine' (Tag 01S8, literature/stacks-project/morphisms.tex line 1736)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -93,8 +68,6 @@
   "def-weil-pbc-scheme-conventions",
   "pqf-def-affine-morphism",
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-open-preimage-fibre-product",
-  "lem-weil-pbc-qcqs-over-affine",
   "lem-weil-pbc-limit-cone-affine-projections-opens",
   "lem-weil-pbc-limit-affine-stage",
   "pqf-lem-affine-local-target"
@@ -102,7 +75,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma Tag 09ZM (lemma-eventually-affine, line 891) and its proof (lines 902-911); Lemma Tag 01Z6 (lemma-limit-affine, line 680); Morphisms, Lemma Tag 01S8 (morphisms.tex, lemma-characterize-affine, line 1736)"
+  "place": "Lemma Tag 09ZM, proof lines 902-911; realized using Mathlib opensDiagram/isLimitOpensCone, Scheme.exists_isAffine_of_isLimit, and HasAffineProperty.of_iSup_eq_top. The qcqs checks use direct compact preimages and quasi-separated open subspaces."
  },
  "mathlib_searches": [
   {
@@ -190,5 +163,15 @@
   "group": "H1",
   "result": "fix",
   "note": "I : Type u (was independent w: INDEX UNIVERSES), nonempty directed preorder, qcqs T and stages, IsAffineHom transitions, Cone+IsLimit, inverse system over T as K1 6fc533ce2 (h : D ⟶ const T, f, c.π ≫ h = f), IsAffineHom f non-hollow, conclusion ∃ i ∀ j ≥ i IsAffineHom (h.app (op j))"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T085349-L-43491",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
