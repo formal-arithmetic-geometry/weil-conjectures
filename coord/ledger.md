@@ -6576,3 +6576,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/B3/Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift (stage 3; reviewer PASS; first push; landing 20261012T070528-L-3466626 (interface); batch 20261012T070523; modules 3; new nodes 2)
 - 07:05 L: merged deliver/B3/Sheaf.ConstructibleSheaf.MonoidalParts (stage 3; reviewer PASS; first push; landing 20261012T070528-L-3466837 (interface); batch 20261012T070523; modules 1; new nodes 0; change records: coord/changes/monoidal-parts-proof-imports.md)
 - 07:05 L: merged deliver/B3/Sheaf.RingTheory.HenselianFactorizationCriterion (stage 3; reviewer PASS; first push; landing 20261012T070529-L-3466994 (proof); batch 20261012T070523; modules 1; new nodes 0)
+- 07:05 L: merged deliver/B3/Sheaf.RingTheory.HenselianOfEtaleSectionLifting (stage 3; reviewer PASS; first push; landing 20261012T070529-L-3467110 (proof); batch 20261012T070523; modules 1; new nodes 0)

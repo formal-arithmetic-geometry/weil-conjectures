@@ -22,16 +22,47 @@
  ],
  "proof": [
   {
-   "text": "Use the étale neighbourhood lifting construction and descend the lifted idempotent along the section; uniqueness follows from the Jacobson radical congruence argument.",
+   "text": "Get I contained in the Jacobson radical from etale_section_lifting_radical_and_henselian. A finite A-algebra B is integral. For each maximal ideal M of B its contraction is maximal in A, so I maps into M. Intersecting over M gives IB contained in the Jacobson radical of B. The Lean proof uses Ideal.isMaximal_comap_of_isIntegral_of_isMaximal and the definition Ideal.jacobson.",
+   "uses": [
+    "lem-weil-pbc-etale-section-lifting-radical-and-henselian",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-algebra-ideal-in-radical"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_etale_lift_isIdempotentElem to obtain an etale A-algebra C, a canonical quotient equivalence alpha : A/I to C/IC, an idempotent eprime in B tensor_A C, and a canonical quotient equivalence beta carrying e0 to the class of eprime. Use the inverse of alpha composed with the quotient map C to C/IC as sigma : C to A/I; the section-lifting hypothesis (via lift_small_etale_section) gives tau : C to A.",
+   "uses": [
+    "lem-weil-pbc-lift-idempotent-upstairs"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The identity on B and the map C to A to B induce phi : B tensor_A C to B. It sends I(B tensor_A C) into IB, hence induces delta on the quotients. On every representative b, delta(beta([b])) = [phi(b tensor 1)] = [b]. Surjectivity of the quotient map gives delta composed with beta equal to the identity. Apply delta to beta(e0) = [eprime] to get [phi(eprime)] = e0; phi(eprime) is idempotent because ring maps preserve idempotents.",
    "uses": [],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "If e is another idempotent lift, the quotient equality gives e - phi(eprime) in IB. Apply IsIdempotentElem.eq_of_sub_mem_of_le_jacobson with the radical containment from step 1. This proves existence and uniqueness.",
+   "uses": [
+    "lem-weil-pbc-idempotents-determined-modulo-radical"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-section-lifting-radical-and-henselian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-algebra-ideal-in-radical",
+  "lem-weil-pbc-lift-idempotent-upstairs",
+  "lem-weil-pbc-idempotents-determined-modulo-radical"
+ ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 09XI, proof of (4) ⇒ (3)"
+  "by": "worker",
+  "group": "B3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/more-algebra.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 09XI, proof of (2) implies (4) implies (3); the root-lifting component is proved directly using Tags 00UB and 00UC (standard etale algebra of a monic polynomial localized at its derivative). The tensor descent is written out on quotient representatives."
  },
  "mathlib_searches": [
   {
@@ -91,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T053929-L-2634024",
+  "landing": "20261012T070529-L-3467110",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
