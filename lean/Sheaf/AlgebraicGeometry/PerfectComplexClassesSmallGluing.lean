@@ -8,9 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallOnOpen
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
-import Sheaf.AlgebraicGeometry.DerivedCategory
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluingCore
 
 /-! # Gluing smallness of perfect isomorphism classes
 
@@ -69,6 +67,8 @@ theorem perfectComplex_classesSmallOnOpen_union (X : Scheme.{u})
     (pU : PerfectComplexClassesSmallOnOpen.{u, w} X U)
     (pV : PerfectComplexClassesSmallOnOpen.{u, w} X V)
     (pUV : PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊓ V)) :
-    PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊔ V) := by sorry
+    PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊔ V) := by
+  intro Y f inst hr _ _
+  exact perfectComplex_classesSmallOnOpen_union_core X U V hU hV pU pV pUV Y f hr
 
 end AlgebraicGeometry.Scheme

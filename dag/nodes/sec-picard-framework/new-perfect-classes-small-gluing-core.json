@@ -1,0 +1,104 @@
+{
+ "id": "new-perfect-classes-small-gluing-core",
+ "kind": "statement",
+ "title": "Fixed-open core for gluing smallness of perfect classes",
+ "statement": "For a fixed open immersion f : Y ⟶ X with opensRange f = U ⊔ V, under the three smallness hypotheses on U, V and U ⊓ V and derived-category structures on Y and all its opens, the skeleton of perfect derived quasi-coherent objects on Y is u-small.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV and Step 2 of lem-pc-perfect-complexes-compact-set"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-classes-small-on-open",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Transport the three smallness hypotheses to the inverse-image opens of Y, use the derived Mayer--Vietoris triangle, and encode perfect cocones by a u-small type of triples and maps computed via K-injective resolutions. Uniqueness of cocones up to isomorphism gives a surjection onto the perfect skeleton; apply small_of_surjective.",
+   "uses": [
+    "lem-pc-derived-mayer-vietoris-triangle",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-mayer-vietoris-triangle",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BV and Step 2 of lem-pc-perfect-complexes-compact-set"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "small_of_surjective skeleton smallness",
+   "date": "2026-10-12",
+   "results": "No exact theorem found; use Mathlib.Logic.Small.Basic."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Small Skeleton ObjectProperty",
+   "date": "2026-10-12",
+   "results": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "small_of_surjective",
+   "date": "2026-10-12",
+   "results": "Mathlib.Logic.Small.Basic contains small_of_surjective."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluing",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-classes-small-gluing",
+   "place": "fixed-open Mayer--Vietoris core"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PerfectComplexClassesSmallGluingCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/PerfectComplexClassesSmallGluingCore.lean",
+  "declaration": "AlgebraicGeometry.Scheme.perfectComplex_classesSmallOnOpen_union_core",
+  "statement": "theorem perfectComplex_classesSmallOnOpen_union_core (X : Scheme.{u}) [QuasiSeparatedSpace X] (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsAffineOpen V) (pU : PerfectComplexClassesSmallOnOpen.{u, w} X U) (pV : PerfectComplexClassesSmallOnOpen.{u, w} X V) (pUV : PerfectComplexClassesSmallOnOpen.{u, w} X (U ⊓ V)) (Y : Scheme.{u}) (f : Y ⟶ X) [IsOpenImmersion f] (hr : f.opensRange = U ⊔ V) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ W : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over W))] : Small.{u} (Skeleton (ObjectProperty.FullSubcategory (fun E : schemeDerivedQCohCategory Y ↦ IsPerfect Y E.obj)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T110256-L-612752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T110256-L-612752",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
