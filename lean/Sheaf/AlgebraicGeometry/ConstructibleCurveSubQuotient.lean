@@ -6,6 +6,8 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleCurveSubPart
+import Sheaf.AlgebraicGeometry.ConstructibleCurveQuotPart
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
@@ -72,6 +74,7 @@ theorem constructible_sub_quotient {k : Type u} [Field k] [IsAlgClosed k]
     (AlgebraicGeometry.CurveCoefficientPair.IsConstructible { P with F := F₁, isTorsion := h₁ }) ∧
       (AlgebraicGeometry.CurveCoefficientPair.IsConstructible
         { P with F := F₂, isTorsion := h₂ }) := by
-  sorry
+  exact ⟨constructible_sub_part P F₁ F₂ h₁ h₂ α β w hS hF,
+    constructible_quot_part P F₁ F₂ h₁ h₂ α β w hS hF⟩
 
 end AlgebraicGeometry.CurveCoefficientPair
