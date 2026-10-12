@@ -6,20 +6,12 @@ Authors: SHEAF group Y2
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.CohomologyColimitSites
-import Sheaf.CategoryTheory.ColimitSites
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyDegreeZeroDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyConnectingLadder
 
 /-! # Finite-stage representatives of limit cohomology classes
 
-Source: Stacks Project, Tags 09YQ, 09YP, 0EYL and 0A50.
+Source: Stacks Project, Tags 09YQ, 09YP, 09YN, 0EXZ and 0739.
 (blueprint: lem-weil-pbc-etale-limit-cohomology-class-descent).
 -/
 
@@ -33,55 +25,21 @@ namespace AlgebraicGeometry.Etale
 
 /-- Finite-stage representatives of limit cohomology classes.
 
-Source: Stacks Project, Theorem 09YQ (theorem-colimit), via 0EYL and 09YP;
-the qcqs gluing argument uses 0A50 and the parent node steps 2-8.
+Source: Stacks Project, Theorem 09YQ, via 09YP, using the degree-zero
+section comparison 09YN and dimension shifting 0739.
 (blueprint: lem-weil-pbc-etale-limit-cohomology-class-descent).
 
-Proof:
-Pass to the cofinal tail above a chosen stage. Initiality for scheme limits and
-finality for filtered colimits preserve the limit cone, the sheaf colimit, and the
-canonical comparison. When that stage is affine, every scheme on the tail is affine.
-Use the affine etale site colimit presentation (0EYL), including its strictification,
-and the affine etale restriction equivalence (04HR). Base-change direct images agree
-on affine objects; uniqueness of their left adjoints identifies inverse images,
-compatibly with the adjunction units and composition. Transport F, phi, G and L
-through these equivalences. Apply cohomology_colimit_of_sites (09YP) at the final
-affine object. Its object-cohomology is global cohomology. The unit-compatible
-comparisons identify its transition maps with hH and its legs with hB, so they
-establish affine continuity for the specified comparison, in every degree.
-
-For a quasi-compact open of a stage, restrict on the cofinal tail to its inverse
-images. Limits commute with these restrictions (01YX); transitions remain affine,
-and the restricted schemes are qcqs. Inverse image preserves the sheaf colimit,
-so these are systems of exactly the same kind. For a cover by two quasi-compact
-opens, Mayer-Vietoris (0A50), its pullback compatibility, and its naturality in
-coefficients give a map from the filtered colimit of the stage long exact sequences
-to the sequence on the limit. Filtered group colimits are exact. If comparisons on
-the opens and their intersection are isomorphisms in all degrees, the five lemma
-makes the comparison on their union an isomorphism; degree zero uses the initial
-zero terms of the same exact sequences.
-
-Induct first on a finite affine cover of a separated stage. The base with no opens
-is empty and has zero cohomology; the single-open case is affine. Split a larger
-cover into one affine U and the union V of the remaining affines. V and U intersect V
-have covers with fewer affines, since intersections of affine opens of a separated
-scheme are affine. Induction and the preceding gluing argument apply. Then induct
-on a finite affine cover of an arbitrary qcqs stage. V has fewer affines, U is affine,
-and U intersect V is a quasi-compact separated open in U, covered by the first
-induction. Gluing again gives the canonical comparison for the whole stage.
-Compactness supplies the initial finite affine cover. All these operations respect
-the specified cohomology legs by pullback functoriality; the isomorphisms eG, eH and
-eB merely transport objects and do not change any image or kernel assertion.
-
-Take a class y of B.pt, transport it by eB, and lift it along the surjective
-canonical comparison just constructed. Every element of the filtered colimit of
-abelian groups has a representative x at some stage i. The comparison equation hB
-and the inverse of eB give (B.ι.app i).hom x = y. This proves existence only; no
-assertion about a class becoming zero is part of this conclusion.
-
-Edge cases: the index is nonempty. Degree zero uses sections; zero sheaves and
-empty schemes have only the zero class, represented at any stage. A one-object
-index gives the same assertion along the canonical comparison isomorphism.
+Proof: Induct on the degree, simultaneously for all coefficient systems and
+all supplied cohomology diagrams and comparison cocones. In degree zero use
+the finite-stage section comparison. In successor degree take the cokernel
+coefficient system and its connecting-map ladder. The surjective limit
+connecting map lifts the target class to the preceding degree for that system.
+The induction hypothesis represents this lift at a stage. Apply that stage's
+connecting map to its representative. The commuting square of the ladder,
+followed by the two representative equalities, proves the required image
+identity. The induction is on degree, not on the fixed coefficient sheaf;
+it uses no assertion about detection of zero. Empty schemes and zero sheaves
+are included in the two intermediate lemmas; degree zero needs no negative term.
 -/
 theorem etale_limit_cohomology_class_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
@@ -117,6 +75,24 @@ theorem etale_limit_cohomology_class_descent
     (hB : ∀ i : I, B.ι.app i ≫ eB.hom =
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) :
-    ∀ y : B.pt, ∃ (i : I) (x : H.obj i), (B.ι.app i).hom x = y := by sorry
+    ∀ y : B.pt, ∃ (i : I) (x : H.obj i), (B.ι.app i).hom x = y := by
+  induction p generalizing F φ G L H B with
+  | zero =>
+    exact etale_limit_cohomology_degree_zero_descent
+      D c hc F φ hidentity hcomposition G eG hG L hL H eH hH B eB hB
+  | succ n ih =>
+    obtain ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR, LR, hLR,
+        HR, eHR, hHR, BR, eBR, hBR, δ, δstage, hδ, hcomm⟩ :=
+      etale_limit_cohomology_connecting_ladder
+        D c hc F φ hidentity hcomposition G eG hG L hL n H eH hH B eB hB
+    intro y
+    obtain ⟨z, hz⟩ := hδ y
+    obtain ⟨i, x, hx⟩ := ih FR φR hidentityR hcompositionR GR eGR hGR LR hLR
+      HR eHR hHR BR eBR hBR z
+    refine ⟨i, (δstage i).hom x, ?_⟩
+    calc
+      (B.ι.app i).hom ((δstage i).hom x) = δ.hom ((BR.ι.app i).hom x) :=
+        ConcreteCategory.congr_hom (hcomm i) x
+      _ = y := by rw [hx, hz]
 
 end AlgebraicGeometry.Etale

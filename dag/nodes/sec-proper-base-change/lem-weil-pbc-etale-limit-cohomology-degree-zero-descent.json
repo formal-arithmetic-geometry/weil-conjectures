@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-etale-limit-cohomology-degree-zero-descent",
+ "kind": "statement",
+ "title": "Degree-zero representatives for etale inverse-limit cohomology",
+ "statement": "Let $I$ be a nonempty directed preordered set and let $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ be an inverse diagram of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms. Let $(X,(f_i))$ be a limit cone [def-weil-pbc-category-colimit]. For each $i$, let $F_i$ be an abelian sheaf on $(D_i)_{\\acute{e}t}$ [def-weil-pbc-abelian-etale-sheaves], with maps $\\varphi_f:D(f^{\\mathrm{op}})^{-1}F_i\\to F_j$ for $f:i\\to j$ [def-weil-pbc-inverse-image] satisfying the canonical inverse-image identity and composition laws. Let $G:I\\to\\operatorname{Ab}(X_{\\acute{e}t})$ be identified objectwise with $f_i^{-1}F_i$ by isomorphisms, its arrows being inverse-image composition followed by pullback of $\\varphi_f$. Let $L$ be a colimit cocone on $G$, with coprojections $\\iota_i$. Take $p=0$. Let $H:I\\to\\operatorname{Ab}$ have specified object isomorphisms $e_i:H_i\\cong H^p(D_i,F_i)$ [def-weil-pbc-etale-cohomology] and arrows conjugate to $H^p(\\varphi_f)\\circ D(f^{\\mathrm{op}})^*$ [def-weil-pbc-cohomology-pullback]. Let $B$ be a cocone on $H$ with an isomorphism $e:B_{\\mathrm{pt}}\\cong H^p(X,L_{\\mathrm{pt}})$ such that, for every $i$, its leg $b_i$ satisfies $e\\circ b_i=H^p(\\iota_i)\\circ f_i^*\\circ e_i$, including the specified identification $G_i\\cong f_i^{-1}F_i$. Then $\\forall y\\in B_{\\mathrm{pt}}\\;\\exists i\\in I\\;\\exists x\\in H_i:\\ b_i(x)=y$. This asserts existence of representatives only.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09YP",
+  "place": "Degree-zero case (09YN) and injective-system dimension shifting via 0EXZ and 0739; scheme passage via 09YQ, 0EYL and 04HR. Pages checked 2026-10-12."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Identify H^0 with sections at the terminal etale object, naturally in coefficients. The adjunction-unit characterization of degree-zero cohomology pullback identifies the given cohomology legs with section legs.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass to cofinal tails. For affine stages use 0EYL to express the affine etale site at the limit as the colimit of stage sites. The affine sheaf equivalence and uniqueness of left adjoints identify inverse images and units. Apply the degree-zero section formula 09YN. For general qcqs stages choose finite affine covers and finite affine refinements of overlaps; their inverse systems are affine on a cofinal tail. The finite sheaf equalizer and commutation of filtered colimits with finite limits give the same section comparison globally.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-colimit-of-sites-sections",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-pretopology-sheaf-condition",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every element of the filtered group colimit is represented at some stage. Transport it back across eH and eB. The section-leg comparison from step 1 and hB prove the displayed representative equation. Nonempty indexing represents zero even on the empty scheme.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-cohomology-pullback-degree-zero",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-colimit-of-sites-sections",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-pretopology-sheaf-condition",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09YP",
+  "place": "Explicit scheme translation of the degree-zero and dimension-shifting parts of 09YP/0739, retaining finite qcqs covers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Degree zero etale cohomology of inverse limits of qcqs schemes and compatible injective coefficient systems",
+   "date": "2026-10-12",
+   "results": "Internal Server Error from service",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible injective sheaf systems on inverse limits have a surjective connecting homomorphism from lower degree cokernel cohomology",
+   "date": "2026-10-12",
+   "results": "Eight hits on local surjectivity, group-cohomology connecting maps and complex factorizations; no scheme inverse-system theorem. Loogle Sheaf.H finds H.equiv₀ and injective vanishing, but no limit descent.",
+   "verdict": "No matching statement"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*(Sheaf.H|cohomology)|cohomology.*colimit|connecting.*[Ll]adder in Mathlib Sites and AlgebraicGeometry; library inverse-limit descent",
+   "date": "2026-10-12",
+   "results": "No Mathlib match; existing site connecting ladder has different site-system input, requiring scheme transport. Existing fixed-base class descent imposes torsion and does not accept varying sheaves.",
+   "verdict": "No matching statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.equiv₀",
+   "date": "2026-10-12",
+   "results": "H.equiv₀, H.equiv₀_naturality, H.equiv₀_symm_naturality, H.longSequence_equiv₀_exact₃.",
+   "verdict": "Degree-zero identification and naturality only; none supplies inverse-limit sections or a compatible ladder."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered systems of abelian etale sheaves admit compatible injective embeddings and dimension shifting maps on inverse limit schemes",
+   "date": "2026-10-12",
+   "results": "Eight hits: structure-sheaf section descent and vanishing in AffineTransitionLimit, local representability and gluing.",
+   "verdict": "No arbitrary abelian sheaf cohomology or injective-system ladder match."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Existence half of continuity used in the injective-restriction-acyclicity proof, split by degree as in 09YP and 0739",
+   "via": [
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyDegreeZeroDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitCohomologyDegreeZeroDescent.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_cohomology_degree_zero_descent",
+  "statement": "theorem etale_limit_cohomology_degree_zero_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (H : I ⥤ AddCommGrpCat.{u + 1})\n    (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) 0))\n    (hH : ∀ (i j : I) (f : i ⟶ j), H.map f =\n      (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) 0) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map (φ f) 0) ≫ (eH j).inv)\n    (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt 0))\n    (hB : ∀ i : I, B.ι.app i ≫ eB.hom =\n      (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) 0) ≫\n        AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) 0)) :\n    ∀ y : B.pt, ∃ (i : I) (x : H.obj i), (B.ι.app i).hom x = y",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085234-L-12487",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T085234-L-12487",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

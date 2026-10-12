@@ -18,151 +18,28 @@
  ],
  "proof": [
   {
-   "text": "*The system on $X$ and the map.* For $i'\\ge i$ we have $f_i=f_{i'i}\\circ f_{i'}$; let $\\psi_{i'i}:f_i^{-1}\\mathcal F_i\\cong f_{i'}^{-1}f_{i'i}^{-1}\\mathcal F_i\\xrightarrow{f_{i'}^{-1}\\varphi_{i'i}}f_{i'}^{-1}\\mathcal F_{i'}$, the first arrow the inverse of the isomorphism $c_{f_{i'i},f_{i'}}$ of [lem-weil-pbc-inverse-image-composition]. The cocycle condition $\\varphi_{i''i}=\\varphi_{i''i'}\\circ f_{i''i'}^{-1}\\varphi_{i'i}$, the naturality of $c$ and its compatibility with triple composites ([lem-weil-pbc-inverse-image-composition], uniqueness of $c$ compatible with the units) give $\\psi_{i''i}=\\psi_{i''i'}\\circ\\psi_{i'i}$, so $(f_i^{-1}\\mathcal F_i,\\psi)$ is a directed system in $\\Ab(X_{\\Et})$ and $\\mathcal F=\\varinjlim f_i^{-1}\\mathcal F_i$ exists [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-category-colimit], with coprojections $\\iota_i$. Put $\\theta_i=H^p(\\iota_i)\\circ f_i^*:H^p((X_i)_{\\Et},\\mathcal F_i)\\to H^p(X_{\\Et},f_i^{-1}\\mathcal F_i)\\to H^p(X_{\\Et},\\mathcal F)$ ([def-weil-pbc-cohomology-pullback]). The transition maps of the system $(H^p((X_i)_{\\Et},\\mathcal F_i))_i$ are $H^p(\\varphi_{i'i})\\circ f_{i'i}^*$; by the naturality and composition parts of [lem-weil-pbc-cohomology-pullback-functorial], $f_{i'}^*\\circ H^p(\\varphi_{i'i})\\circ f_{i'i}^*=H^p(f_{i'}^{-1}\\varphi_{i'i})\\circ f_{i'}^*\\circ f_{i'i}^*=H^p(\\psi_{i'i})\\circ f_i^*$, so $\\theta_{i'}\\circ H^p(\\varphi_{i'i})\\circ f_{i'i}^*=H^p(\\iota_{i'}\\circ\\psi_{i'i})\\circ f_i^*=\\theta_i$. Hence the $\\theta_i$ induce the canonical map $\\theta:\\varinjlim_iH^p((X_i)_{\\Et},\\mathcal F_i)\\to H^p(X_{\\Et},\\mathcal F)$ of the statement; the claim is that $\\theta$ is bijective.",
+   "text": "Induct on p simultaneously for all F, phi, G, L, H and B, with all their object identifications and coherence witnesses. At p=0 apply the finite-stage degree-zero section theorem.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-etale-limit-cohomology-degree-zero-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Paragraph after Definition definition-inverse-system-sheaves (line 7316: 'This turns $f_i^{-1}\\mathcal F_i$ into a system of sheaves on $X_\\etale$ over $I$ (it is a good exercise to check this)') and Theorem Tag 09YQ (theorem-colimit, line 7400)"
-   }
+   "elementary": false
   },
   {
-   "text": "*Passing to a cofinal part of $I$.* For $i_0\\in I$ the subset $I_{\\ge i_0}$ is directed and cofinal in $I$. The limit of $(X_i)_{i\\ge i_0}$ is again $X$ with the same projections (a cone over $I_{\\ge i_0}$ extends uniquely to $I$: for each $i$ choose $j\\ge i,i_0$ and compose its leg at $j$ with $X_j\\to X_i$; directedness and the cone equations make this independent of $j$; [lem-weil-pbc-limit-affine-transition] gives the limit), the colimit $\\mathcal F$ is unchanged, and so is $\\varinjlim H^p((X_i)_{\\Et},\\mathcal F_i)$ together with $\\theta$, by [lem-weil-pbc-colimit-initial-full-subcategory](1) applied to the inclusion $I_{\\ge i_0}\\subseteq I$ (every $i$ has some $i'\\ge i,i_0$). So in proving the theorem we may replace $I$ by $I_{\\ge i_0}$ for any $i_0$.",
+   "text": "For p=n+1 apply the connecting ladder to obtain a cokernel coefficient system in degree n, a surjective limit connecting map delta and stage connecting maps commuting with the canonical cocone legs. Lift y to z along delta; apply the induction hypothesis to the different coefficient system in degree n to get a stage representative x of z. The stage connecting map sends x to the required representative of y. Applying the commuting square to x and rewriting the two representative equalities proves its image equation.",
    "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-colimit-initial-full-subcategory"
+    "lem-weil-pbc-etale-limit-cohomology-connecting-ladder"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Theorem Tag 09YQ; standard reduction, written out by the agent"
-   }
-  },
-  {
-   "text": "*Affine case, translation to the affine etale sites.* Assume every $X_i$ is affine; then $X$ is affine ([lem-weil-pbc-limit-affine-transition], last clause). For each scheme $T\\in\\{X,X_i\\}$ let $T_{affine,\\Et}$ be the small affine etale site and $\\mathcal G\\mapsto\\mathcal G|_{aff}$ the equivalence of [lem-weil-pbc-affine-etale-site-topos]. By [lem-weil-pbc-affine-etale-site-colimit] the base change functors $u_{i'i}$, $u_i$ make $((X_i)_{affine,\\Et})_{i\\in I^{\\mathrm{op}}}$ a system of sites as in [lem-weil-pbc-colimit-of-sites] whose colimit site is $X_{affine,\\Et}$ with the functors $u_i$; write $g_{i'i}:(X_{i'})_{affine,\\Et}\\to(X_i)_{affine,\\Et}$ and $g_i:X_{affine,\\Et}\\to(X_i)_{affine,\\Et}$ for the morphisms of sites they define [def-weil-pbc-sites-and-cohomology]. Claim: for $h\\in\\{f_{i'i},f_i\\}$ with corresponding $g$ and $u$, $(h^{-1}\\mathcal G)|_{aff}\\cong g^{-1}(\\mathcal G|_{aff})$ naturally in $\\mathcal G$, compatibly with composition. Proof: for an abelian sheaf $\\mathcal H$ on the source etale site and an affine $V$ etale over the target, $(h_*\\mathcal H)(V)=\\mathcal H(V\\times h)$ [def-weil-pbc-direct-image] and $V\\times h=u(V)$ is affine, so $(h_*\\mathcal H)|_{aff}=g_*(\\mathcal H|_{aff})$ (both are $V\\mapsto\\mathcal H(u(V))$), naturally in $\\mathcal H$. Thus under the equivalences $|_{aff}$ the functors $h_*$ and $g_*=u^s$ correspond; their left adjoints $h^{-1}$ [def-weil-pbc-inverse-image] and $g^{-1}=u_s$ then correspond up to a unique isomorphism compatible with the units (a left adjoint is unique up to unique isomorphism, and an equivalence transports adjunctions), and uniqueness gives compatibility with composites ($u_{i'}\\circ u_{i'i}=u_i$, $f_i=f_{i'i}\\circ f_{i'}$, matched with [lem-weil-pbc-inverse-image-composition]). Consequently $(\\mathcal F_i|_{aff},\\varphi_{i'i}|_{aff})$ (transported along these isomorphisms) is a system of abelian sheaves on the sites $(X_i)_{affine,\\Et}$ satisfying the cocycle condition of [lem-weil-pbc-cohomology-colimit-of-sites], and since an equivalence preserves colimits, $\\mathcal F|_{aff}\\cong\\varinjlim g_i^{-1}(\\mathcal F_i|_{aff})$ compatibly with the coprojections.",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-affine-etale-site-colimit",
-    "lem-weil-pbc-colimit-of-sites",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-cohomology-colimit-of-sites"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proof of Theorem Tag 09YQ (line 7413: 'By Topologies, Lemma 04HR we can compute the cohomology of $\\mathcal F$ on $X_{affine,\\etale}$'), with Lemma Tag 0EYL; the identification of the inverse images across the equivalence is left implicit in the source and written out here by the agent"
-   }
-  },
-  {
-   "text": "*Affine case, conclusion.* Keep the assumption of the previous step and fix $i\\in I$. $X_i$ (with the identity) is an object of $(X_i)_{affine,\\Et}$, and $u_{i'i}(X_i)=X_{i'}$, $u_i(X_i)=X$. By [lem-weil-pbc-cohomology-colimit-of-sites] applied to the system of the previous step and the object $X_i$, $\\varinjlim_{i'\\ge i}H^p(X_{i'},\\mathcal F_{i'}|_{aff})\\to H^p(X,\\mathcal F|_{aff})$ (cohomology over objects of the affine sites) is an isomorphism, the maps being pullback along $g_{i'}$ followed by the coprojection. By [lem-weil-pbc-affine-etale-site-topos] (cohomology clause, with $U=X_{i'}$ final in $(X_{i'})_{\\Et}$, resp. $U=X$) the source terms are $H^p((X_{i'})_{\\Et},\\mathcal F_{i'})$ and the target is $H^p(X_{\\Et},\\mathcal F)$, functorially in the sheaf; since these isomorphisms are functorial and the pullbacks are both induced by the adjunction units on injective resolutions, which correspond under the equivalences by the previous step, the map becomes $\\theta$ restricted to $I_{\\ge i}$ ([def-weil-pbc-cohomology-pullback]). By step 2 ($I_{\\ge i}$ cofinal), $\\theta$ is an isomorphism. This proves the theorem when all $X_i$ are affine, and by step 2 also when $X_{i_0}$ is affine for some $i_0$ (then every $X_i$, $i\\ge i_0$, is affine, being affine over the affine $X_{i_0}$ [def-weil-pbc-scheme-conventions]).",
-   "uses": [
-    "lem-weil-pbc-cohomology-colimit-of-sites",
-    "lem-weil-pbc-affine-etale-site-topos",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Proof of Theorem Tag 09YQ: 'the result by a combination of Lemma 0EYL and Cohomology on Sites, Lemma 09YP'"
-   }
-  },
-  {
-   "text": "*Restriction to an open of a stage.* Let $i_0\\in I$ and $W_{i_0}\\subseteq X_{i_0}$ a quasi-compact open; for $i\\ge i_0$ let $W_i=f_{ii_0}^{-1}(W_{i_0})$ and $W=f_{i_0}^{-1}(W_{i_0})$. Then $W_i$ is quasi-compact (preimage of a quasi-compact open under the affine, hence quasi-compact, $f_{ii_0}$) and quasi-separated (open in the quasi-separated $X_i$), the restricted transition maps are affine and $W=\\varprojlim_{i\\ge i_0}W_i$ ([lem-weil-pbc-limit-affine-transition], open clause). With $j_{W_i}$, $j_W$ the open immersions (etale), $\\mathcal F_i|_{W_i}=j_{W_i}^{-1}\\mathcal F_i$ and the maps $\\varphi_{i'i}|$ obtained by applying $j_{W_{i'}}^{-1}$ and the isomorphisms of [lem-weil-pbc-inverse-image-composition] ($f_{i'i}\\circ j_{W_{i'}}=j_{W_i}\\circ f_{i'i}|$) form a system on $(W_i)$ as in the statement, and $\\varinjlim(f_i|_W)^{-1}(\\mathcal F_i|_{W_i})\\cong j_W^{-1}\\varinjlim f_i^{-1}\\mathcal F_i=\\mathcal F|_W$, because $j_W^{-1}$, a left adjoint of $j_{W*}$ [def-weil-pbc-inverse-image], preserves colimits [lem-weil-pbc-left-adjoint-preserves-colimits] and $j_W^{-1}f_i^{-1}\\cong(f_i|_W)^{-1}j_{W_i}^{-1}$ [lem-weil-pbc-inverse-image-composition], compatibly with the transition maps. So the data restricted to $W_{i_0}$ again satisfy the hypotheses of the theorem, with limit $W$ and colimit sheaf $\\mathcal F|_W$; we call this the restricted system.",
-   "uses": [
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Lemma Tag 01YX (lemma-directed-inverse-system-has-limit) part (2); the restriction of the system of sheaves is written out by the agent"
-   }
-  },
-  {
-   "text": "*Induction by Mayer-Vietoris.* Let $i_0\\in I$ and $X_{i_0}=U_{i_0}\\cup V_{i_0}$ with $U_{i_0},V_{i_0}$ quasi-compact opens, and suppose the theorem holds for the restricted systems (step 5) of $U_{i_0}$, $V_{i_0}$ and $U_{i_0}\\cap V_{i_0}$ (quasi-compact, $X_{i_0}$ being quasi-separated). For $i\\ge i_0$ the Mayer-Vietoris sequences [lem-weil-pbc-etale-mayer-vietoris] of $(X_i,U_i,V_i,\\mathcal F_i)$ form a directed system of long exact sequences: the transition maps $H^p(\\varphi_{i'i})\\circ f_{i'i}^*$ are morphisms of long exact sequences by [lem-weil-pbc-etale-mayer-vietoris-pullback] (for $f_{i'i}$, with $U_{i'}=f_{i'i}^{-1}U_i$, $V_{i'}=f_{i'i}^{-1}V_i$) and the functoriality in the sheaf of [lem-weil-pbc-etale-mayer-vietoris] (for $\\varphi_{i'i}$). Its colimit is a long exact sequence [lem-weil-pbc-filtered-colimit-abelian-groups-exact], and the maps $\\theta$ (pullback along $f_i$ by [lem-weil-pbc-etale-mayer-vietoris-pullback], then the coprojection, by functoriality in the sheaf) form a morphism from it to the Mayer-Vietoris sequence of $(X,U,V,\\mathcal F)$, $U=f_{i_0}^{-1}U_{i_0}$, $V=f_{i_0}^{-1}V_{i_0}$, the terms over $U$, $V$, $U\\cap V$ being identified with those of the restricted systems by step 5. In each segment $\\varinjlim H^{p-1}(U_i\\cap V_i)\\to\\varinjlim H^p(X_i)\\to\\varinjlim H^p(U_i)\\oplus\\varinjlim H^p(V_i)\\to\\varinjlim H^p(U_i\\cap V_i)$ (with $\\varinjlim H^{p-1}(U_i)\\oplus\\varinjlim H^{p-1}(V_i)$ in front; for $p=0$ the terms of degree $-1$ are $0$) the four outer maps are isomorphisms by hypothesis, so the middle map $\\theta$ for $X$ is an isomorphism by the five lemma [lem-weil-pbc-five-lemma].",
-   "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lem-weil-pbc-etale-mayer-vietoris-pullback",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A50 (lemma-mayer-vietoris); this reduction is not in the source (agent-written: Stacks' proof of 09YQ applies Lemma 09YP to the object $X_i$ of $(X_i)_{affine,\\etale}$, which exists only when $X_i$ is affine)"
-   }
-  },
-  {
-   "text": "*Separated case.* Suppose $X_{i_0}$ is separated for some $i_0$ and covered by $n$ affine opens; we show the theorem by induction on $n$ (for all systems). By step 2 we may index by $I_{\\ge i_0}$. If $n=0$, the chosen stage and every stage on its tail are empty (a scheme mapping to the empty scheme is empty); the limit is empty and all abelian sheaf cohomology groups are zero, so the comparison is an isomorphism. If $n=1$, $X_{i_0}$ is affine: step 4. If $n\\ge2$, write $X_{i_0}=U_{i_0}\\cup V_{i_0}$ with $U_{i_0}$ one of the affines and $V_{i_0}$ the union of the other $n-1$. Then $U_{i_0}\\cap V_{i_0}$ is a union of $n-1$ affine opens [lem-weil-pbc-separated-affine-open-intersection] and separated, $V_{i_0}$ is separated and a union of $n-1$ affines, and $U_{i_0}$ is affine; the restricted systems (step 5) of these three opens satisfy the theorem by induction and by step 4, so step 6 gives the theorem for $X$.",
-   "uses": [
-    "lem-weil-pbc-separated-affine-open-intersection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "agent-written reduction (the standard induction on the number of affines, cf. the proof of Lemma Tag 03Q5 (lemma-colimit) sketched in the source)"
-   }
-  },
-  {
-   "text": "*General case.* $X_{i_0}$ ($i_0\\in I$ arbitrary) is quasi-compact, so it is covered by $n$ affine opens; induct on $n$. For $n=0$ use the empty-scheme argument of step 7. For $n=1$ use step 4. For $n\\ge2$ write $X_{i_0}=U_{i_0}\\cup V_{i_0}$ with $U_{i_0}$ affine and $V_{i_0}$ a union of $n-1$ affines. $V_{i_0}$ is quasi-compact and quasi-separated, so its restricted system satisfies the theorem by induction; $U_{i_0}\\cap V_{i_0}$ is a quasi-compact open of the affine (so separated) $U_{i_0}$, hence separated and a finite union of affines, so its restricted system satisfies the theorem by step 7; $U_{i_0}$ is handled by step 4. Step 6 gives the theorem for $X$. This proves the theorem for every $p\\ge0$.",
-   "uses": [
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "agent-written, as step 7"
-   }
-  },
-  {
-   "text": "Take y in B.pt. Steps 1-8 construct the canonical comparison and prove its surjectivity without using the parent continuity theorem as a premise. Transport y along eB, lift it to the filtered group colimit, and choose a stage representative x. The canonical-leg equations, followed by eB inverse, give b_i(x)=y. No zero-detection assertion is assumed at the end.",
-   "uses": [],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-affine-etale-site-topos",
-  "lem-weil-pbc-affine-etale-site-colimit",
-  "lem-weil-pbc-colimit-of-sites",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-cohomology-colimit-of-sites",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-mayer-vietoris",
-  "lem-weil-pbc-etale-mayer-vietoris-pullback",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-separated-affine-open-intersection"
+  "lem-weil-pbc-etale-limit-cohomology-degree-zero-descent",
+  "lem-weil-pbc-etale-limit-cohomology-connecting-ladder"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Existence half of Theorem 09YQ. Affine case follows 0EYL and 09YP; the two finite-cover inductions are the agent-written reduction of parent steps 5-8. The final filtered-colimit element argument is written by Y2."
+  "document": "https://stacks.math.columbia.edu/tag/09YP",
+  "place": "Degree induction and dimension shifting from 09YP via 0739; scheme translation and degree-zero descent follow 09YQ/0EYL/04HR/09YN. Main Lean induction and square evaluation by F1."
  },
  "mathlib_searches": [
   {
@@ -261,9 +138,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T070559-L-3480875",
+  "landing": "20261012T085234-L-12487",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
