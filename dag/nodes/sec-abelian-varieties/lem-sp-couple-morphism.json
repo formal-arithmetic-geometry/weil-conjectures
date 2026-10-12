@@ -20,42 +20,31 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sp-derived-couple-functoriality], the compatible maps on the derived couples iterate to maps on every $E_r$ commuting with $d_r$, and induce a map on $E_\\infty$ through $Z_\\infty/B_\\infty$.",
+   "text": "Package the given maps and squares as a CoupleMorphism, transporting the type-zero g target to its initialG target by eqToHom naturality. Apply derivedCoupleFunctoriality to obtain compatible page maps, differential commutation and the kernel/projection squares, as well as the limiting cycle restriction and quotient maps for any limiting subobjects.",
    "uses": [
-    "lem-sp-derived-couple-functoriality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spectral-sequences.tex",
-    "place": "Tags 011R and 011T"
-   }
-  },
-  {
-   "text": "Under the hypotheses of [thm-sp-half-plane-convergence], the abutment in total degree $n$ is $A^n=D^{0,n}$ and its filtration is $F^pA^n=G_{n-p}A^n=\\operatorname{im}(\\alpha^p:D^{p,n-p}\\to D^{0,n})$ for $0\\leq p\\leq n$ (and $F^pA^n=A^n$ for $p\\leq0$, $F^pA^n=0$ for $p>n-a$ by the vanishing of $D^{p,n-p}$). Commutation with every power of $\\alpha$ gives $t_D^{0,n}(F^pA^n)\\subseteq F'^pA'^n$, so $t_D^{0,n}$ is filtration preserving.",
-   "uses": [
-    "thm-sp-half-plane-convergence",
-    "def-sp-exact-couple"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
-    "place": "## Proof"
-   }
-  },
-  {
-   "text": "The associated graded map of a filtration-preserving morphism is obtained by restricting to each $F^p$ and passing to the quotient by $F^{p+1}$. By [lem-sp-half-plane-graded-canonical], for $q=n-p$ the identification $E_\\infty^{p,q}\\cong\\operatorname{gr}^pA^n$ of [thm-sp-half-plane-convergence] is induced by the two epimorphisms $\\gamma:D^{p,q}\\to E_\\infty^{p,q}$ (from $g$) and $\\varphi:D^{p,q}\\to\\operatorname{gr}^pA^n$ (from $\\alpha^p$), which have the same kernel; likewise for the primed couple. For $y\\in D^{p,q}$, $t_D\\alpha^py=\\alpha'^pt_Dy$ and $t_Egy=g't_Dy$, so $\\operatorname{gr}(t_D)\\circ\\varphi=\\varphi'\\circ t_D$ and $t_\\infty\\circ\\gamma=\\gamma'\\circ t_D$, where $t_\\infty$ is the map on $E_\\infty=Z_\\infty/B_\\infty$ [def-sp-convergence] from Step 1 [lem-sp-derived-couple-functoriality]. Since $\\varphi$ is an epimorphism, $\\operatorname{gr}(t_D)$ corresponds to $t_\\infty$ under the identifications.",
-   "uses": [
-    "thm-sp-half-plane-convergence",
-    "lem-sp-half-plane-graded-canonical",
     "lem-sp-derived-couple-functoriality",
-    "def-sp-filtration",
+    "def-sp-exact-couple",
     "def-sp-convergence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
-    "place": "## Proof"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply halfPlaneConvergence separately to X and Y, retaining its normalized colimits, limiting subobjects and canonical graded comparisons. Commutation with alpha gives commutation with alphaDiagonal by eqToHom naturality. The maps tD followed by the target cocone form a cocone on the source diagonal; the universal property of AlphaColimit produces f with every cocone square. The normalization at first index zero makes that cocone map an isomorphism, so cancellation in the index-zero square identifies f with tD at (0,n) after the specified object transports. Apply Mathlib imageSubobjectMap to each cocone square to supply the restrictions witnessing filtration preservation.",
+   "uses": [
+    "thm-sp-half-plane-convergence",
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the limiting cycle restriction z and quotient map tInf from derivedCoupleFunctoriality. The factorization of initialG through the limiting cycles commutes with z: cancel the monic target cycle inclusion and use the initialG square. Postcompose with the boundary cokernel projection and use its quotient square to show toPageInfinity is natural in tD. Choose the canonical isomorphisms e and e-prime directly from halfPlaneConvergence, which already states their squares with toPageInfinity and toGradedPiece. Define gr as e inverse followed by tInf and e-prime. The two canonical comparison squares, the naturality of toPageInfinity and the inverse identities prove the toGradedPiece square and the final graded compatibility square. No separate half-plane graded canonical theorem is needed.",
+   "uses": [
+    "lem-sp-derived-couple-functoriality",
+    "thm-sp-half-plane-convergence",
+    "def-sp-convergence"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -63,13 +52,12 @@
   "def-sp-filtration",
   "thm-sp-half-plane-convergence",
   "lem-sp-derived-couple-functoriality",
-  "lem-sp-half-plane-graded-canonical",
   "def-sp-convergence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/lem-sp-couple-morphism.md",
-  "place": "## Proof"
+  "place": "## Proof; direct colimit/image construction and the canonical comparison squares already stated by halfPlaneConvergence"
  },
  "mathlib_searches": [
   {
@@ -161,5 +149,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41177",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

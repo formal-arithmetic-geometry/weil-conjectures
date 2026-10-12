@@ -7,10 +7,6 @@ module
 
 public import Sheaf.CategoryTheory.HalfPlaneConvergence
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.ExactCoupleConvergence
-import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.HalfPlaneGradedCanonical
 
 /-!
 # Morphisms of exact couples and their abutments
@@ -117,6 +113,87 @@ theorem coupleMorphism
               (∀ p q : ℤ, Y.toPageInfinity M p q ≫ (e' p q).hom =
                 Y.toGradedPiece B p q) ∧
               (∀ p q : ℤ, (e p q).hom ≫ gr p q = tInf p q ≫ (e' p q).hom)) := by
-  sorry
+  classical
+  let T : CoupleMorphism X Y :=
+    { tD := tD
+      tE := tE
+      alpha_comm := fun p q ↦ (hα p q).symm
+      f_comm := fun p q ↦ (hf p q).symm
+      g_comm := fun p q ↦ by
+        apply (cancel_mono (eqToHom (show Y.E (p + 0) (q - 0) = Y.E p q by
+          congr 1 <;> omega))).1
+        simp only [Category.assoc]
+        rw [eqToHom_naturality (fun pq : ℤ × ℤ ↦ tE pq.1 pq.2)
+          (show (p + (0 : ℕ), q - (0 : ℕ)) = (p, q) by ext <;> omega)]
+        simpa only [initialG, Category.assoc] using (hg p q).symm }
+  obtain ⟨⟨P, hPD, hPE, hPα, hPk, hPd⟩, hInf⟩ :=
+    derivedCoupleFunctoriality X Y T
+  refine ⟨fun r p q ↦ (P r).tE p q, hPE, fun r p q ↦ (hPd r p q).symm, hPk, ?_⟩
+  intro a b hDX hEX hDY hEY
+  obtain ⟨L, A, hA, hA0, hAX⟩ := halfPlaneConvergence X a hDX hEX
+  obtain ⟨M, B, hB, hB0, hBY⟩ := halfPlaneConvergence Y b hDY hEY
+  have hdiag (n p : ℤ) :
+      X.alphaDiagonal n p ≫ tD p (n - p) =
+        tD (p + 1) (n - (p + 1)) ≫ Y.alphaDiagonal n p := by
+    dsimp [alphaDiagonal]
+    rw [Category.assoc, ← eqToHom_naturality (fun pq : ℤ × ℤ ↦ tD pq.1 pq.2)
+      (show (p + 1 - 1, n - (p + 1) + 1) = (p, n - p) by ext <;> omega)]
+    rw [← Category.assoc, hα, Category.assoc]
+  have hcoc (n p : ℤ) :
+      X.alphaDiagonal n p ≫ (tD p (n - p) ≫ (B n).ι p) =
+        tD (p + 1) (n - (p + 1)) ≫ (B n).ι (p + 1) := by
+    rw [← Category.assoc, hdiag, Category.assoc, (B n).comm]
+  choose f hf huniq using fun n ↦ (A n).isColimit (B n).obj
+    (fun p ↦ tD p (n - p) ≫ (B n).ι p) (hcoc n)
+  have hf0 (n : ℤ) : f n = eqToHom (hA n) ≫ tD 0 n ≫ eqToHom (hB n).symm := by
+    have hιA : (A n).ι 0 = eqToHom (show X.D 0 (n - 0) = (A n).obj by
+        rw [hA n]; congr 1; omega) := by
+      apply (cancel_mono (eqToHom (hA n))).1
+      simpa only [eqToHom_trans] using hA0 n
+    have hιB : (B n).ι 0 = eqToHom (show Y.D 0 (n - 0) = (B n).obj by
+        rw [hB n]; congr 1; omega) := by
+      apply (cancel_mono (eqToHom (hB n))).1
+      simpa only [eqToHom_trans] using hB0 n
+    have : IsIso ((A n).ι 0) := by rw [hιA]; infer_instance
+    apply (cancel_epi ((A n).ι 0)).1
+    rw [hf, hιA, hιB]
+    simp only [← Category.assoc, eqToHom_trans]
+    trans tD 0 (n - 0) ≫
+      eqToHom (show Y.D 0 (n - 0) = Y.D 0 n by congr 1; omega) ≫
+        eqToHom (hB n).symm
+    · simp only [eqToHom_trans]
+    · rw [← Category.assoc,
+        eqToHom_naturality (fun pq : ℤ × ℤ ↦ tD pq.1 pq.2)
+          (show (0, n - 0) = (0, n) by ext <;> omega)]
+  let F (n : ℤ) : FilteredObject.Hom
+      (⟨(A n).obj, X.imageFiltration n (A n)⟩ : FilteredObject C)
+      (⟨(B n).obj, Y.imageFiltration n (B n)⟩ : FilteredObject C) :=
+    { hom := f n
+      preserves := fun p ↦ by
+        refine ⟨imageSubobjectMap
+          (Arrow.homMk (tD p (n - p)) (f n) (hf n p).symm), ?_⟩
+        exact imageSubobjectMap_arrow _ }
+  choose e he using hAX.2.2.2.2.1
+  choose e' he' using hBY.2.2.2.2.1
+  choose tInf z hz htInf using (hInf L M).2
+  have hpage (p q : ℤ) :
+      X.toPageInfinity L p q ≫ tInf p q = tD p q ≫ Y.toPageInfinity M p q := by
+    dsimp [toPageInfinity]
+    rw [Category.assoc, ← htInf, ← Category.assoc, ← Category.assoc]
+    apply congrArg (fun k : X.D p q ⟶ (M.Z p q : C) ↦
+      k ≫ cokernel.π (Subobject.ofLE (M.B p q) (M.Z p q)
+        (limitBoundary_le_cycle Y M p q)))
+    apply (cancel_mono (M.Z p q).arrow).1
+    simp only [Category.assoc, ← hz, Subobject.factorThru_arrow]
+    rw [← Category.assoc, Subobject.factorThru_arrow]
+    exact hg p q
+  let gr (p q : ℤ) := (e p q).inv ≫ tInf p q ≫ (e' p q).hom
+  refine ⟨L, M, A, B, hA, hB, hA0, hB0, F, hf0, hf, z, tInf, gr, e, e',
+    fun p q ↦ (hz p q).symm, fun p q ↦ (htInf p q).symm, ?_, he, he', ?_⟩
+  · intro p q
+    dsimp [gr]
+    rw [← he, Category.assoc, Iso.hom_inv_id_assoc, ← Category.assoc, hpage, Category.assoc, he']
+  · intro p q
+    simp [gr]
 
 end CategoryTheory.BigradedExactCouple
