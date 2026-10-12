@@ -761,6 +761,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.DirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteEtaleChart
+public import WeilConjectures.DeligneLaumon.Reduction.FiniteMap
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
