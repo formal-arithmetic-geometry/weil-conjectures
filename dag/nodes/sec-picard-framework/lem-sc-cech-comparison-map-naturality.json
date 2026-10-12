@@ -32,79 +32,37 @@
  ],
  "proof": [
   {
-   "text": "Fix an injective resolution $\\mathcal F\\to\\mathcal I^\\bullet$, which exists by the enough-injectives statement. Form the first-quadrant double complex $D^{p,q}=\\check{\\mathcal C}^p(\\mathcal U,\\mathcal I^q)$ and its total complex $T_{\\mathcal F}$. Restriction of global sections gives a cochain map $\\alpha_{\\mathcal F}:\\Gamma(X,\\mathcal I^\\bullet)\\to T_{\\mathcal F}$ in Cech degree zero, while the augmentation gives $\\beta_{\\mathcal F}:\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal F)\\to T_{\\mathcal F}$ in resolution degree zero; the Cech functoriality statement supplies the induced cochain maps and their maps on cohomology.",
+   "text": "Use moduleCechAlpha_isIso from def-sc-module-cech-comparison in every degree and Mathlib quasiIso_iff to obtain the alpha quasi-isomorphism.",
    "uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-site-cech-complex",
-    "def-sp-double-complex-total",
-    "def-sc-zariski-site"
+    "def-sc-module-cech-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof: construction of the double complex and the maps alpha and beta"
-   }
+   "elementary": true
   },
   {
-   "text": "For every injective term $\\mathcal I^q$ of $\\Mod(\\mathcal O_X)$, $\\check H^p(\\mathcal U,\\mathcal I^q)=0$ for $p>0$ by the injective Cech-acyclicity statement, and $\\check H^0(\\mathcal U,\\mathcal I^q)=\\ker d^0$ is identified with $\\mathcal I^q(X)$ by restriction, by the gluing and uniqueness axioms of the sheaf $\\mathcal I^q$ on $X_{\\rm Zar}$. Regard $\\Gamma(X,\\mathcal I^\\bullet)$ as the first-quadrant double complex $D'$ concentrated in the column $p=0$ ($D'^{0,q}=\\mathcal I^q(X)$, $d_I=0$); since $d^0$ of the restriction of a global section is $0$, $\\alpha_{\\mathcal F}$ is the map on total complexes of a morphism of double complexes $D'\\to D$. By functoriality of the second spectral sequence (rows first, ${}''E_1^{q,p}=H^p_I(D^{\\bullet,q})$), this morphism induces on ${}''E_1$ the maps $H^p_I(D'^{\\bullet,q})\\to\\check H^p(\\mathcal U,\\mathcal I^q)$, which are isomorphisms for all $p,q$ by the two facts above; hence it is an isomorphism on ${}''E_\\infty$, i.e. on all graded pieces of the finite image filtrations of $H^n(\\operatorname{Tot}D')=H^n(\\Gamma(X,\\mathcal I^\\bullet))$ and $H^n(T_{\\mathcal F})$ given by convergence, and an induction on the filtration degree with the five lemma shows that $H^n(\\alpha_{\\mathcal F})$ is an isomorphism for every $n$.",
+   "text": "Install EnoughInjectives using moduleSheaves_abelian_enoughInjectives from lem-sc-ringed-space-module-sheaves-enough-injectives. Choose an injective resolution I and define c = H(beta_I) followed by the inverse of H(alpha_I) and the inverse resolution identification. These inverses exist by moduleCechAlpha_isIso. For a lift of a coefficient morphism, take homology of the alpha and beta squares of lem-sc-module-cech-lift-squares and use isoRightDerivedObj_hom_naturality; associativity gives comparison_transport. Applying it to the identity from I to an arbitrary resolution J proves that c satisfies IsModuleCechComparison for every J. For two given comparisons, apply comparison_transport and the equation for cG, then cancel the composite of the resolution identification and H(alpha_J). This proves naturality.",
    "uses": [
-    "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-    "thm-sp-double-complex-spectral-sequences",
-    "def-sp-double-complex-total",
-    "def-sc-zariski-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof; Lemma Tag 01EP for injective Cech acyclicity"
-   }
-  },
-  {
-   "text": "Let $\\iota_{\\mathcal I}^p:H^p(X,\\mathcal F)\\xrightarrow{\\sim}H^p(\\Gamma(X,\\mathcal I^\\bullet))$ be the isomorphism of the derived-map statement for $v=\\Gamma(X,-)$ on $\\Mod(\\mathcal O_X)$, which has enough injectives, $H^p(X,-)$ being its right derived functors. Define $c_{\\mathcal F}=(\\iota^p_{\\mathcal I})^{-1}\\circ H^p(\\alpha_{\\mathcal F})^{-1}\\circ H^p(\\beta_{\\mathcal F})$. Independence of the resolution: for a second resolution $\\mathcal F\\to\\mathcal J^\\bullet$ (with primes for its data), the lift statement gives a morphism of complexes $\\psi:\\mathcal I^\\bullet\\to\\mathcal J^\\bullet$ lifting $\\mathrm{id}_{\\mathcal F}$; by the computation of Step 4 applied to $\\varphi=\\mathrm{id}_{\\mathcal F}$ and the lift $\\psi$, the map $\\tau$ of total complexes induced by $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\psi)$ satisfies $\\tau\\alpha_{\\mathcal F}=\\alpha'_{\\mathcal F}\\Gamma(X,\\psi)$ and $\\tau\\beta_{\\mathcal F}=\\beta'_{\\mathcal F}$, so $H^p(\\alpha'_{\\mathcal F})^{-1}H^p(\\beta'_{\\mathcal F})=H^p(\\Gamma(X,\\psi))\\,H^p(\\alpha_{\\mathcal F})^{-1}H^p(\\beta_{\\mathcal F})$, and the derived-map statement with $h=\\mathrm{id}$ gives $(\\iota^p_{\\mathcal J})^{-1}H^p(\\Gamma(X,\\psi))\\iota^p_{\\mathcal I}=H^p(X,\\mathrm{id})=\\mathrm{id}$. Hence both resolutions give the same $c_{\\mathcal F}$.",
-   "uses": [
-    "pqf-def-cohomology",
-    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-sc-module-cech-lift-squares",
+    "def-sc-module-cech-comparison",
     "lem-weil-pbc-injective-resolution-lift-exists",
-    "lem-weil-pbc-derived-functor-map-via-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof: final derived-category paragraph and independence of the injective resolution"
-   }
-  },
-  {
-   "text": "For a morphism $\\varphi:\\mathcal F\\to\\mathcal F'$, choose injective resolutions and a lift $\\widetilde\\varphi:\\mathcal I^\\bullet\\to\\mathcal I'^\\bullet$ with $\\widetilde\\varphi^0\\circ r=r'\\circ\\varphi$. Applying the Cech functor termwise gives a morphism of double complexes and hence a map of total complexes. The squares with the two alpha maps commute because restriction maps commute with each component $\\widetilde\\varphi^q$, and the squares with the beta maps commute by the lifting equation in degree zero. Taking cohomology, using the definition of $c_{\\mathcal F}$ and the lifted-complex formula for $H^p(X,\\varphi)$, yields $c_{\\mathcal F'}\\circ\\check H^p(\\mathcal U,\\varphi)=H^p(X,\\varphi)\\circ c_{\\mathcal F}$.",
-   "uses": [
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "def-weil-pbc-site-cech-complex",
     "lem-weil-pbc-derived-functor-map-via-lift",
-    "def-sp-double-complex-total"
+    "def-sc-ringed-space-module-cohomology",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology of Sheaves, Lemma Tag 01EQ, proof: functoriality of the alpha and beta squares (expanded from the source's natural transformation statement)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-scheme-modules-enough-injectives",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-site-cech-complex",
-  "def-sp-double-complex-total",
-  "def-sc-zariski-site",
-  "lem-weil-pbc-module-injective-open-cover-cech-acyclic",
-  "thm-sp-double-complex-spectral-sequences",
-  "pqf-def-cohomology",
+  "def-sc-module-cech-comparison",
+  "lem-sc-module-cech-lift-squares",
   "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-weil-pbc-derived-functor-map-via-lift"
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Cohomology of Sheaves, Lemma Tag 01EQ (cohomology-lemma-cech-cohomology), proof"
+  "place": "Cohomology of Sheaves, Lemma Tag 01EQ (cohomology-lemma-cech-cohomology) and its proof: the transformation of functors $\\check{\\mathcal C}^\\bullet(\\mathcal U,-)\\to R\\Gamma(U,-)$ on Mod(O_X) built from the double complex $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I^\\bullet)$"
  },
  "mathlib_searches": [
   {
@@ -206,5 +164,15 @@
   "group": "C1",
   "result": "pass",
   "note": "independent Codex review: Matched X, indexed open cover, module coefficients, alpha quasi-isomorphism, per-module comparison predicate, and predicate-guarded naturality square to the node clause by clause; compile is clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0a9a",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135319-L-1693817",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature, assembly proof, lift-square statement and definitions, DAG proof records, report and earlier repairs; compiled both delivered modules and all five direct importers; checked axioms."
  }
 }

@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-module-cech-lift-squares",
+ "kind": "statement",
+ "title": "Commuting alpha and beta squares for an injective resolution lift",
+ "statement": "For a scheme X, any family U of opens, a morphism of modules F to G and any cochain map between injective resolutions lifting it, the induced map of total Cech complexes commutes with the global-sections restriction alpha and with the augmentation beta. No cover hypothesis is required. The induced map is total.map of the termwise Cech functor applied to the lift. The maps and complexes are those of [def-sc-module-cech-comparison].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma Tag 01EQ (cohomology-lemma-cech-cohomology) and its proof: the transformation of functors $\\check{\\mathcal C}^\\bullet(\\mathcal U,-)\\to R\\Gamma(U,-)$ on Mod(O_X) built from the double complex $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I^\\bullet)$"
+ },
+ "stmt_deps": [
+  "def-sc-module-cech-comparison"
+ ],
+ "proof": [
+  {
+   "text": "In degree n alpha lands in the (n,0) summand. The total-map coprojection formula reduces its square to the naturality of moduleCechZero: restrictions of sections commute with module morphisms, including the natural scalar restriction identity at the whole open. Beta lands in the (0,n) summand; the same coprojection formula and functoriality reduce its square to the given degree-zero augmentation equation. Equality of cochain maps follows componentwise. The empty family gives the unique maps into empty products; degree zero uses the same formulas.",
+   "uses": [
+    "def-sc-module-cech-comparison",
+    "def-sp-double-complex-total",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology of Sheaves, Lemma Tag 01EQ (cohomology-lemma-cech-cohomology) and its proof: the transformation of functors $\\check{\\mathcal C}^\\bullet(\\mathcal U,-)\\to R\\Gamma(U,-)$ on Mod(O_X) built from the double complex $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I^\\bullet)$"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-cech-comparison",
+  "def-sp-double-complex-total",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Cohomology of Sheaves, Lemma Tag 01EQ (cohomology-lemma-cech-cohomology) and its proof: the transformation of functors $\\check{\\mathcal C}^\\bullet(\\mathcal U,-)\\to R\\Gamma(U,-)$ on Mod(O_X) built from the double complex $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I^\\bullet)$"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Cech to derived functor cohomology comparison using injective resolutions",
+   "results": "[\"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc', 'CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc', 'CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality', 'CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality']",
+   "date": "2026-10-12",
+   "verdict": "No matching alpha/beta lift-square declaration; derived-map naturality available separately."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "results": "['CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality']",
+   "date": "2026-10-12",
+   "verdict": "No matching alpha/beta lift-square declaration; derived-map naturality available separately."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCechAlpha|isoRightDerivedObj_hom_naturality",
+   "results": "['Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean', 'Mathlib/CategoryTheory/Abelian/RightDerived.lean']",
+   "date": "2026-10-12",
+   "verdict": "No matching alpha/beta lift-square declaration; derived-map naturality available separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech complex augmentation naturality for injective resolution maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "Service unavailable; no result. Used LeanFinder/Loogle and source grep."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CechComparisonMapNaturality",
+  "date": "2026-10-12",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-p1-duality",
+   "place": "proof, Step 1: naturality in the first locally free argument of the Ext/cohomology identification; commuting alpha and beta squares in the canonical Cech comparison",
+   "via": [
+    "lem-sc-cech-comparison-map-naturality",
+    "lem-sc-cech-comparison-natural",
+    "lem-sc-p1-ext-locally-free-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleCechLiftSquares",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleCechLiftSquares.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleCechLiftSquares",
+  "statement": "theorem moduleCechLiftSquares {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)\n    {F G : X.Modules} (φ : F ⟶ G) (I : InjectiveResolution F)\n    (J : InjectiveResolution G) (ψ : I.cocomplex ⟶ J.cocomplex)\n    (hψ : I.ι.f 0 ≫ ψ.f 0 = φ ≫ J.ι.f 0) :\n    let T := HomologicalComplex₂.total.map\n      ((SheafOfModules.forget X.ringCatSheaf ⋙\n        PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op ⋙\n          CategoryTheory.cechComplexFunctor U).mapHomologicalComplex\n            (ComplexShape.up ℕ) |>.map ψ) (ComplexShape.up ℕ)\n    moduleCechAlpha U I ≫ T =\n      ((RingedSpace.globalSectionsFunctor X.toRingedSpace).mapHomologicalComplex\n        (ComplexShape.up ℕ)).map ψ ≫ moduleCechAlpha U J ∧\n    moduleCechBeta U I ≫ T =\n      (CategoryTheory.cechComplexFunctor U).map\n        ((PresheafOfModules.forgetToPresheafModuleCat (op ⊤) isTerminalTop.op).map\n          φ.val) ≫ moduleCechBeta U J",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0a9a",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135319-L-1693817",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c0a9a",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T135319-L-1693817",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged theorem signature, assembly proof, lift-square statement and definitions, DAG proof records, report and earlier repairs; compiled both delivered modules and all five direct importers; checked axioms."
+ }
+}
