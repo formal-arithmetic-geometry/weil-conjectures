@@ -222,7 +222,7 @@ lemma inverse_algebraMap (p : MvPolynomial ι (A ⧸ I)) :
     P.inverse I (algebraMap P.Ring B p) = P.inverseAux I p := by
   have : P.quotientEquiv.symm (algebraMap P.Ring B p) = Ideal.Quotient.mk _ p := by
     rw [AlgEquiv.symm_apply_eq, Presentation.quotientEquiv_mk]
-  show Ideal.Quotient.lift P.ker (P.inverseAux I) (fun _ h ↦ P.ker_le_ker_inverseAux I h)
+  change Ideal.Quotient.lift P.ker (P.inverseAux I) (fun _ h ↦ P.ker_le_ker_inverseAux I h)
     (P.quotientEquiv.symm (algebraMap P.Ring B p)) = _
   rw [this, Ideal.Quotient.lift_mk]
 
