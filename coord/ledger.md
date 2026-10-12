@@ -7657,3 +7657,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:46 L: returned deliver/K2/Sheaf.CategoryTheory.CohomologyColimitSitesExactLadder (reviewer RETURN: (reviewer X-55e83, head 55e83616c) B6 / brief point 6: Correct two Mathlib declaration records. (1) In dag/nodes/sec-pro)
 
 - 20:48 L: batch 20261012T120425 bisection test completed
+- 12:48 L: returned deliver/K3/Sheaf.RingTheory.HenselizationPairGRingCore (reviewer RETURN: (reviewer X-43dae, head 43dae26ba) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.Henseliza)
