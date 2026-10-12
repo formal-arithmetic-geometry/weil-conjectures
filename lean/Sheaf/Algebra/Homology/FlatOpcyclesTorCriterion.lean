@@ -7,9 +7,9 @@ module
 
 public import Mathlib.RingTheory.Flat.CategoryTheory
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-public import Mathlib.Algebra.Homology.Additive
 import Sheaf.Algebra.FlatTorIdealCriterion
 import Sheaf.CategoryTheory.OpcyclesTorSurjection
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-!
 # Flatness of opcycles from exactness after tensoring
@@ -39,6 +39,13 @@ theorem opcycles_of_exactAt {R : Type u} [CommRing R]
     (hexact : ∀ N : ModuleCat R,
       (((tensorRight N).mapHomologicalComplex (.up ℤ)).obj P).ExactAt (a - 1)) :
     Module.Flat R (P.opcycles a) := by
-  sorry
+  rw [CategoryTheory.flat_iff_tor_one_quotient_ideal]
+  intro I
+  obtain ⟨τ, hτ⟩ := CategoryTheory.exists_epi_homology_tensor_to_tor_opcycles R P a hflat
+  let N := ModuleCat.of R (R ⧸ I)
+  have : Epi (τ.app N) := hτ N
+  apply Limits.IsZero.of_epi (τ.app N)
+  exact ((hexact N).of_iso
+    (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor (ModuleCat R)) N P).symm).isZero_homology
 
 end Module.Flat
