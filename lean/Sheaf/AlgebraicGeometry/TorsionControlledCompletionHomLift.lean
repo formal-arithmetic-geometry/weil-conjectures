@@ -6,10 +6,8 @@ Authors: SHEAF group Y2
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.RingTheory.FormalGlueingComplexExact
-import Sheaf.Topology.GlueSheavesOfModules
+import Sheaf.AlgebraicGeometry.TorsionControlledCompletionHomLiftExists
+import Sheaf.AlgebraicGeometry.CoherentMapTorsionCompletionExt
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
@@ -70,6 +68,14 @@ theorem torsionControlled_completion_hom_lift
         (cokernel a'.hom))))
     (θ : (completion X J).obj F ⟶ (completion X J).obj F')
     (hθ : θ ≫ (completion X J).map a' = (completion X J).map a) :
-    ∃! g : F ⟶ F', g ≫ a' = a ∧ (completion X J).map g = θ := by sorry
+    ∃! g : F ⟶ F', g ≫ a' = a ∧ (completion X J).map g = θ := by
+  obtain ⟨g, hg⟩ := torsionControlled_completion_hom_lift_exists J H F F' a a' ha ha' θ hθ
+  refine ⟨g, hg, ?_⟩
+  intro g' hg'
+  obtain ⟨s, hs, hk, hc⟩ := ha'
+  symm
+  apply coherentMap_torsion_completion_ext J F F' H a' ⟨s, hs, hk⟩ g g'
+  · exact hg.1.trans hg'.1.symm
+  · exact hg.2.trans hg'.2.symm
 
 end AlgebraicGeometry
