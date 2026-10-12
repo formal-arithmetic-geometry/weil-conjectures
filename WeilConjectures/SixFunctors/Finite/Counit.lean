@@ -74,6 +74,7 @@ instance Etale.epi_upperStarLowerStarAdjunction_counit_app_of_isFinite
     exact epi_comp _ _
   exact this
 
+omit [HasSmallSiteSheafify A] in
 include hJ in
 /-- **The direct image along a finite morphism reflects zero objects**: if `f_* G` is zero, so
 is `f^* f_* G`, which maps epimorphically onto `G`. -/

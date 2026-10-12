@@ -72,8 +72,18 @@ Let `p : Z ⟶ S` be a finite morphism of Noetherian schemes and `F` an étale s
 `Λ`-modules on `Z`. If its direct image `p_* F` is constructible, then `F` is constructible. -/
 theorem Scheme.IsConstructibleSheaf.of_lowerStar_of_isFinite {Z S : Scheme.{u}} [IsNoetherian Z]
     [IsNoetherian S] (p : Z ⟶ S) [IsFinite p] (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (hF : IsConstructibleSheaf ((p)_*[ModuleCat.{u + 1} Λ].obj F)) : IsConstructibleSheaf F :=
-  sorry
+    (hF : IsConstructibleSheaf ((p)_*[ModuleCat.{u + 1} Λ].obj F)) : IsConstructibleSheaf F := by
+  let ε := (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).counit.app F
+  have : IsConstructibleSheaf
+      (((p)_*[ModuleCat.{u + 1} Λ] ⋙ (p)^*[ModuleCat.{u + 1} Λ]).obj F) :=
+    IsConstructibleSheaf.upperStar p ((p)_*[ModuleCat.{u + 1} Λ].obj F)
+  have : IsConstructibleSheaf (Limits.kernel ε) := IsConstructibleSheaf.of_mono
+    (F := ((p)_*[ModuleCat.{u + 1} Λ] ⋙ (p)^*[ModuleCat.{u + 1} Λ]).obj F) (kernel.ι ε)
+  have : IsConstructibleSheaf (Limits.cokernel (kernel.ι ε)) := IsConstructibleSheaf.cokernel _
+  let e : Limits.cokernel (kernel.ι ε) ≅ F :=
+    (cokernelIsCokernel (kernel.ι ε)).coconePointUniqueUpToIso
+      (Abelian.epiIsCokernelOfKernel _ (limit.isLimit _))
+  exact IsConstructibleSheaf.of_iso e
 
 end AlgebraicGeometry
 
