@@ -31,30 +31,50 @@
  ],
  "proof": [
   {
-   "text": "Let H be the internal Hom sheaf. The formal-functions comparison identifies Gamma(X,H) with lim_n Gamma(X,H/I^n H), and the completion-internal-Hom comparison identifies that inverse limit with morphisms between the completed modules. Both comparisons are bijections, and their composite is exactly u |-> u^ by compatibility with reduction modulo I^n. Therefore this composite is injective.",
+   "text": "Form the actual internal Hom sheaf H = Hom(G,F) and equip it with coherence using isCoherent_homObj. Identify morphisms G -> F with compatible global sections using homObjSectionsEquiv. Reduce a section by the explicit cokernel projections at every positive level; cokernel factorization proves transition compatibility.",
    "uses": [
-    "lem-weil-pbc-completion-internal-hom",
-    "lem-weil-pbc-formal-functions-complete-base",
+    "lem-weil-pbc-coherent-sheaf-hom-coherent",
     "def-pur-sheaf-hom",
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 0883 (lemma-fully-faithful), line 6760"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply completion_internal_hom_bijective to obtain its specified maps e and Phi. Prove Phi applied to the reductions of a morphism v equals completion.map v componentwise. Apply the defining factorization equation for e to the internal Hom section, use naturality of homObjSectionsEquiv under precomposition and postcomposition, and cancel the epimorphic source cokernel projection.",
+   "uses": [
+    "lem-weil-pbc-completion-internal-hom",
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If v and w have equal completions, the component identification and injectivity of Phi give equality of their compatible reductions.",
+   "uses": [
+    "lem-weil-pbc-completion-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply globalSections_formalFunctions_complete_base to the coherent internal Hom H. Its canonical isomorphism q is injective; the specified limit projections and equality of the reductions imply equality of q applied to the two top sections by Concrete.limit_ext. Thus the top sections agree. Every section restricts from the top section, so the compatible global sections agree, and injectivity of homObjSectionsEquiv.symm identifies v and w.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-complete-base",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-completion-internal-hom",
-  "lem-weil-pbc-formal-functions-complete-base",
   "def-pur-sheaf-hom",
-  "def-weil-pbc-coherent-formal-module"
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-coherent-sheaf-hom-coherent",
+  "lem-weil-pbc-completion-internal-hom",
+  "lem-weil-pbc-formal-functions-complete-base"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 0883 (lemma-fully-faithful) and its proof"
+  "place": "Cohomology of Schemes, proof of Lemma 0883; canonical comparisons of Lemmas 0882 and 087U, with internal Hom coherence from Modules Lemma 01CQ"
  },
  "mathlib_searches": [
   {
@@ -132,9 +152,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T173810-L-3291142",
-  "kind": "interface"
+  "landing": "20261012T184256-L-4002110",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
