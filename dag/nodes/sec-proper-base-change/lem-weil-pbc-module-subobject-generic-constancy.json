@@ -16,47 +16,52 @@
  ],
  "proof": [
   {
-   "text": "Use generic constancy of G. At each of the finitely many irreducible component generic points, choose an etale trivialization and remove the other components. The target is constant with value a finitely generated module M on an irreducible neighbourhood.",
+   "text": "Apply IsConstructibleSheaf.exists_dense_open to G, obtaining a dense open U on which G is finite locally constant. Restrict the monomorphism to U. This open subscheme is Noetherian: its space is compact because X is topologically Noetherian, and it is locally Noetherian by open restriction.",
    "uses": [
     "prop-constructible-generic-constancy",
-    "def-constructible-locally-constant",
-    "lem-weil-pbc-noetherian-finitely-many-components"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The geometric generic stalk identifies F with a submodule N of M. N has finitely many generators over the Noetherian ring. Choose representatives on a common pointed etale neighbourhood and shrink so their images are the fixed constant generators.",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "def-constructible-constant"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The two pullbacks of each representative agree because their images are constant and the inclusion is monic. The sheaf axiom descends them over the open image. Thus the constant N is contained in F. The quotient F/N is a subsheaf of constant M/N with zero generic stalk, hence zero: any nonzero constant germ on a nonempty etale neighbourhood of an irreducible scheme persists at a generic point. These local trivializations descend to finite local constancy about each component generic point. Take disjoint component opens by removing the other components; their finite union is dense. This is the generic-neighbourhood argument of Stacks 09BH (3), without the subsequent Noetherian induction.",
-   "uses": [
     "def-weil-pbc-etale-site",
-    "def-weil-pbc-geometric-stalks",
-    "def-constructible-constant",
-    "def-constructible-locally-constant"
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At every geometric point of U, the stalk map of the restricted monomorphism is injective. Its target is finitely generated, so the source stalk is finitely generated over the Noetherian coefficient ring. This establishes IsFiniteSheaf for the restriction of F to U directly in Lean, using AB5OfSize_shrink and FinitelyGeneratedOfMono. For each component generic point of U, apply the local-neighbourhood lemma to obtain an open V_eta where F is locally constant. Finiteness pulls back to V_eta, making each restriction finite locally constant.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lemma-constructible-pullback-finite",
+    "lem-weil-pbc-module-subobject-generic-neighbourhood"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let W be the union of the V_eta inside U. Every generic point lies in W, so W is dense, by genericPoints.closure for the sober underlying space of a scheme. Use Opens.iSupOpenCover and IsFiniteLocallyConstantSheaf.of_openCover to glue the finite locally constant restrictions on W; the pullbacks are identified by upperStarComp and homOfLE_ι. The composite open immersion W -> U -> X has dense range, by DenseRange.comp. Its open image is the desired open of X: upperStarComp and invariance under equal immersion images identify the restriction there with the restriction to W. The empty-index cover handles the empty scheme.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point",
+    "prop-constructible-generic-constancy",
+    "lemma-constructible-immersion-independence",
+    "def-weil-pbc-etale-site"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-constructible-constant",
-  "def-constructible-locally-constant",
+  "def-sc-generic-point",
   "def-weil-pbc-etale-site",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-weil-pbc-scheme-conventions",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-module-subobject-generic-neighbourhood",
   "lem-weil-pbc-noetherian-submodule-finite",
-  "prop-constructible-generic-constancy"
+  "lemma-constructible-immersion-independence",
+  "lemma-constructible-pullback-finite",
+  "prop-constructible-generic-constancy",
+  "prop-weil-pbc-geometric-stalks-exact"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tag 09BH, proof of (3); implementation follows the parent node’s generic-open/closed-complement route"
+  "place": "Tag 09BH (3); C1 Lean reduction: generic constancy of G, stalk finiteness, local generic neighbourhoods, and dense-union gluing"
  },
  "mathlib_searches": [
   {
@@ -150,11 +155,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c4612",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T023042-L-1092605",
+  "landing": "20261012T031311-L-1334105",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean signatures match the nodes; proofs, dependencies, source arguments and report agree. All three modules compile cleanly; axiom checks show only allowed axioms plus sorryAx from the named generic-constancy lemma."
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

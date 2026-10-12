@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.ConstructibleSheaf.GenericConstancy
+import Sheaf.AlgebraicGeometry.ModuleSubobjectGenericNeighbourhood
 
 /-! # Generic constancy of module subsheaves -/
 
@@ -43,6 +45,68 @@ theorem exists_dense_open_of_mono_noetherian
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (φ : F ⟶ G) [Mono φ] [IsConstructibleSheaf G] :
     ∃ U : X.Opens, Dense (U : Set X) ∧
-      IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F) := by sorry
+      IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F) := by
+  classical
+  obtain ⟨U, hU, hG⟩ := IsConstructibleSheaf.exists_dense_open G
+  have : CompactSpace U.toScheme :=
+    isCompact_iff_compactSpace.mp (TopologicalSpace.NoetherianSpace.isCompact (U : Set X))
+  have : IsNoetherian U.toScheme := ⟨⟩
+  have : AB5OfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+    AB5OfSize_shrink.{u, u, u + 1, u + 1} _
+  let F' := (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F
+  let G' := (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj G
+  let φ' : F' ⟶ G' := (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map φ
+  have : IsFiniteLocallyConstantSheaf G' := hG
+  have : Mono φ' := by dsimp [φ']; infer_instance
+  have hfin : IsFiniteSheaf F' := by
+    constructor
+    intro Ω _ _ s
+    have : Limits.HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
+      Limits.hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} _
+    exact ConcreteCategory.FinitelyGeneratedOfMono.isFinitelyGenerated_of_mono
+      (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).map φ')
+      (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (F := G') Ω s)
+  have hlocal (η : genericPoints U.toScheme) :=
+    exists_open_locallyConstant_of_mono_at_genericPoint φ' η.val η.property
+  choose V hη hV using hlocal
+  have hFV (η : genericPoints U.toScheme) :
+      IsFiniteLocallyConstantSheaf
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) (V η).ι).obj F') := by
+    have := hfin
+    exact { toIsLocallyConstantSheaf := hV η
+            toIsFiniteSheaf := IsFiniteSheaf.upperStar (V η).ι F' }
+  let W : U.toScheme.Opens := ⨆ η, V η
+  have hW : Dense (W : Set U.toScheme) := by
+    apply (dense_iff_closure_eq.mpr (genericPoints.closure (α := U.toScheme))).mono
+    intro η hη'
+    exact (TopologicalSpace.Opens.mem_iSup).mpr ⟨⟨η, hη'⟩, hη ⟨η, hη'⟩⟩
+  have hFW : IsFiniteLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) W.ι).obj F') := by
+    have hcover (η : genericPoints U.toScheme) : IsFiniteLocallyConstantSheaf
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) ((Opens.iSupOpenCover V).f η)).obj
+          ((Etale.upperStar (ModuleCat.{u + 1} Λ) W.ι).obj F')) := by
+      have := hFV η
+      refine IsFiniteLocallyConstantSheaf.of_iso (F :=
+        (Etale.upperStar (ModuleCat.{u + 1} Λ) (V η).ι).obj F') ?_
+      exact eqToIso (congrArg (fun m ↦ (Etale.upperStar (ModuleCat.{u + 1} Λ) m).obj F')
+        (homOfLE_ι U.toScheme (le_iSup V η)).symm) ≪≫
+          (Etale.upperStarComp _ ((Opens.iSupOpenCover V).f η) W.ι).app F'
+    exact IsFiniteLocallyConstantSheaf.of_openCover (Opens.iSupOpenCover V) _
+  let f : W.toScheme ⟶ X := W.ι ≫ U.ι
+  have hFf : IsFiniteLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).obj F) := by
+    have : IsFiniteLocallyConstantSheaf
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι ⋙
+          Etale.upperStar (ModuleCat.{u + 1} Λ) W.ι).obj F) := hFW
+    exact IsFiniteLocallyConstantSheaf.of_iso
+      ((Etale.upperStarComp _ W.ι U.ι).app F).symm
+  refine ⟨f.opensRange, ?_, ?_⟩
+  · have hd : DenseRange U.ι := by simpa [DenseRange, Opens.range_ι] using hU
+    have hd' : DenseRange W.ι := by simpa [DenseRange, Opens.range_ι] using hW
+    exact hd.comp hd' U.ι.continuous
+  · have := hFf
+    apply IsFiniteLocallyConstantSheaf.upperStar_of_range_subset f.opensRange.ι f _ F
+    simp [Opens.range_ι, Hom.coe_opensRange]
+
 
 end AlgebraicGeometry.Scheme
