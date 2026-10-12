@@ -9280,3 +9280,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/T3/Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries (stage 3; reviewer PASS; after a return; landing 20261012T194143-L-465785 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/T3/Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule (stage 3; reviewer PASS; first push; landing 20261012T194144-L-465894 (proof); batch 20261012T194054; modules 1; new nodes 0)
 - 19:41 L: merged deliver/T3/Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree (stage 3; reviewer PASS; first push; landing 20261012T194144-L-465996 (interface); batch 20261012T194054; modules 4; new nodes 3)
+- 19:41 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTransport (stage 3; reviewer PASS; first push; landing 20261012T194144-L-466176 (interface); batch 20261012T194054; modules 5; new nodes 4)

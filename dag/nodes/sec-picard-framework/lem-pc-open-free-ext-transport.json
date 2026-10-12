@@ -13,44 +13,38 @@
  ],
  "proof": [
   {
-   "text": "Use the exact open-extension adjunction [lem-weil-pbc-zariski-extension-by-zero-adjunction, lem-weil-pbc-zariski-extension-by-zero-exact], transported between the localized open site and the opens of the open subscheme. The free sheaf L_W of [lem-pc-free-mayer-vietoris-short-exact] is j_! L_top(W), because both represent sections on W by the free/forgetful and sheafification adjunctions. Restriction identifies the underlying coefficient of j^*M with F|W. The Ext adjunction therefore gives t_n from Ext on W to Ext from L_W on X. Postcomposition naturality identifies restriction of each R-scalar and proves the first equation.",
+   "text": "Use the degree-zero restriction-data theorem to obtain e, d, c and d′, with the two scalar squares and the cartesian coefficient square. Define e′ as c at L_W followed by G_W applied to e; it is therefore coherent with e, rather than independently chosen.",
    "uses": [
-    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
-    "lem-weil-pbc-zariski-extension-by-zero-exact",
-    "lem-pc-free-mayer-vietoris-short-exact",
-    "def-pc-flat-cohomology-comparison"
+    "lem-pc-open-restriction-data"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Let p:X_S→X and p_W:W_S→W be the projections defined in [def-pc-flat-cohomology-comparison]. The cartesian base-change square of j identifies W_S with the preimage open of W in X_S. Restriction commutes with direct image in this square (Stacks 04J0). Taking left adjoints identifies p^-1 j_! with j_S! p_W^-1, with the comparison determined by their units. Composition of module pullbacks identifies j_S^* p^*M with p_W^*j^*M. Applying the exact open-extension Ext adjunction on X_S gives t_n′. Naturality for S-scalar coefficient morphisms gives the second equation.",
+   "text": "Construct q_n and q′_n by the explicit Ext restriction homomorphisms. The open-restriction bijectivity theorem applies to these actual homomorphisms and the chosen isomorphisms. Let t_n and t′_n be their inverse additive equivalences (AddEquiv.ofBijective followed by symm). Their construction uses inverses of uniquely determined bijections, not arbitrary witnesses of existence.",
    "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
-    "lem-weil-pbc-zariski-extension-by-zero-exact"
+    "lem-pc-ext-restriction-map-calculus",
+    "lem-pc-open-restriction-ext-bijective"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The units of the pullback/pushforward module adjunctions restrict to each other under the cartesian coefficient comparison. Their abelian adjoints, the displayed coefficient morphisms φ and φ_W of [def-pc-flat-cohomology-comparison], consequently commute with that comparison. Compute t_n and t_n′ by the Ext adjunction: apply exact extension by zero to an Ext class, then postcompose with the counit, and transport the representing free sheaf and coefficient isomorphisms. The base-change isomorphism of left adjoints intertwines their counits by uniqueness of mates. Functoriality of Ext under exact functors and associativity of Ext composition give the third equation. This is a statement entirely about Ext; no cohomology-to-Ext comparison is used. Empty opens and zero coefficients have zero Ext groups, and for the top open the constructions reduce to identity transport up to the canonical scheme isomorphisms.",
+   "text": "For the R-scalar equation apply injectivity of q_n and its coefficient-naturality identity; cancel q_n followed by t_n. The S-scalar equation follows by the same calculation with q′_n, d′ and t′_n. For the base-change equation apply injectivity of q′_n, use the constructed-restriction square identity on t_n(x), and cancel q_n followed by t_n. All three calculations are written in Lean; they do not assume compatibility of arbitrary independent equivalences.",
    "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
-    "lem-weil-pbc-zariski-extension-by-zero-exact"
+    "lem-pc-ext-restriction-map-calculus",
+    "lem-pc-open-restriction-ext-bijective"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison",
-  "lem-pc-free-mayer-vietoris-short-exact",
-  "lem-weil-pbc-zariski-extension-by-zero-adjunction",
-  "lem-weil-pbc-zariski-extension-by-zero-exact"
+  "lem-pc-ext-restriction-map-calculus",
+  "lem-pc-open-restriction-data",
+  "lem-pc-open-restriction-ext-bijective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 00A7, 01AK, 04J0, 01F7",
-  "place": "Open-extension derived adjunction and its cartesian inverse-image mate, expanded from the open free Ext comparison plan."
+  "document": "Stacks Project, Tags 00A7, 01AK, 03DI, 03DJ, 04J0, 01F7",
+  "place": "Inverse of the constructed restriction Ext bijection; coefficient naturality and the coherent exact-functor-square calculation, formalized by U1."
  },
  "mathlib_searches": [
   {
@@ -128,9 +122,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T163611-L-2784205",
+  "landing": "20261012T194144-L-466176",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

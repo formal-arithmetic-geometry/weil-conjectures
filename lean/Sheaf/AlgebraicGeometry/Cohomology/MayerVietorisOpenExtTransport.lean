@@ -5,6 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
 import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact
@@ -83,6 +84,36 @@ theorem H.openFreeExtTransport (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.O
       (∀ n a x, t' n (x.comp (Ext.mk₀ (τW a)) (add_zero n)) =
         (t' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧
       (∀ n x, t' n ((x.mapExactFunctor GW).comp (Ext.mk₀ φW) (add_zero n)) =
-        ((t n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) := by sorry
+        ((t n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) := by
+  classical
+  dsimp only
+  obtain ⟨e, d, c, d', hρ, hτ, hφ⟩ :=
+    H.openRestrictionData (S := S) f M W
+  let e' := (c.app (H.openFreeSheaf W)) ≪≫
+    (invImage (baseChangeFst (S := S) (W.ι ≫ f))).mapIso e
+  obtain ⟨hq, hq'⟩ := H.openRestrictionExt_bijective (S := S) f M W e d e' d'
+  let q := fun n ↦ Ext.restrictAddHom (invImage W.ι) e d n
+  let q' := fun n ↦ Ext.restrictAddHom
+    (invImage (H.openBaseChangeInclusion (S := S) f W)) e' d' n
+  let t := fun n ↦ (AddEquiv.ofBijective (q n) (hq n)).symm
+  let t' := fun n ↦ (AddEquiv.ofBijective (q' n) (hq' n)).symm
+  have ht (n : ℕ) (x) : q n (t n x) = x :=
+    (AddEquiv.ofBijective (q n) (hq n)).apply_symm_apply x
+  have ht' (n : ℕ) (x) : q' n (t' n x) = x :=
+    (AddEquiv.ofBijective (q' n) (hq' n)).apply_symm_apply x
+  refine ⟨t, t', ?_, ?_, ?_⟩
+  · intro n a x
+    apply (hq n).1
+    rw [ht]
+    rw [Ext.restrictAddHom_comp (invImage W.ι) e d _ _ (hρ a), ht]
+  · intro n a x
+    apply (hq' n).1
+    rw [ht']
+    rw [Ext.restrictAddHom_comp
+      (invImage (H.openBaseChangeInclusion (S := S) f W)) e' d' _ _ (hτ a), ht']
+  · intro n x
+    apply (hq' n).1
+    rw [ht']
+    rw [Ext.restrictAddHom_square _ _ _ _ c e d d' _ _ hφ n (t n x), ht]
 
 end AlgebraicGeometry.Scheme.Modules

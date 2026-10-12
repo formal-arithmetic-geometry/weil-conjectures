@@ -1,0 +1,116 @@
+{
+ "id": "lem-pc-ext-exact-functor-square",
+ "kind": "statement",
+ "title": "Ext maps intertwine a natural isomorphism of composite exact functors",
+ "statement": "Let $\\mathcal C_1,\\mathcal C_2,\\mathcal C_3,\\mathcal C_4$ be abelian categories [def-sp-abelian] with Ext groups in chosen universes [def-pc-ext]. Let $G:\\mathcal C_1\\to\\mathcal C_2$, $J:\\mathcal C_1\\to\\mathcal C_3$, $J':\\mathcal C_2\\to\\mathcal C_4$, and $G_W:\\mathcal C_3\\to\\mathcal C_4$ be additive functors preserving finite limits and finite colimits. Let $c:J'G\\xrightarrow{\\sim}G_WJ$ be a natural isomorphism. For $A,F\\in\\mathcal C_1$, $n\\geq0$, and $x\\in\\operatorname{Ext}^n(A,F)$, write $G(x)$ for the map on Ext induced by the exact functor $G$. Then\n$$J'(G(x))\\cdot[c_F]=[c_A]\\cdot G_W(J(x))\\quad\\text{in }\\operatorname{Ext}^n(J'GA,G_WJF),$$\nwhere brackets denote degree-zero Ext classes and the left expression is postcomposition, while the right expression is precomposition. No adjunction, geometry, scalar representations, or bijectivity is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/015F",
+  "place": "Functoriality of cohomology (01F7) and derived functors of exact functors (015F, lemma-right-derived-exact-functor); specialization to derived morphisms between single complexes."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-pc-ext"
+ ],
+ "proof": [
+  {
+   "text": "Apply the four exact functors termwise to complexes. Their induced derived functors and single-complex and shift comparisons are those of the exact-functor factorization theorem. The termwise natural isomorphism c induces a natural chain isomorphism between the composite functors, commuting with shifts in each degree.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize this chain isomorphism at quasi-isomorphisms. Its naturality for chain maps holds also for inverses of quasi-isomorphisms by cancelling isomorphisms, and then for composites of such maps, hence for derived morphisms. Apply naturality to the morphism A[0] to F[0][n] representing x. Under the single-complex comparisons its components at A and F are the degree-zero classes of c_A and c_F. The two orders of applying exact functors have the same termwise comparison; their shift comparisons agree termwise. The resulting equality is the displayed one; shrinking the morphism sets does not change it.",
+   "uses": [
+    "def-pc-ext",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ext",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01F7; https://stacks.math.columbia.edu/tag/015F",
+  "place": "Functoriality of cohomology (01F7) and derived functors of exact functors (015F, lemma-right-derived-exact-functor); specialization to derived morphisms between single complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact functors map Ext classes naturally under natural isomorphisms and composition",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext mapExactFunctor composite functors natural isomorphism",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.mapExtLinearMap_apply, CategoryTheory.Functor.mapExtAddHom_apply, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom, CategoryTheory.Functor.mapExtAddHom",
+   "verdict": "API candidates read; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|smallShiftedHomMap",
+   "date": "2026-10-12",
+   "results": "8 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "verdict": "API candidates read; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTransport",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+   "place": "single-open Ext presentation: formal naturality of exact inverse-image maps on Ext in the cartesian square",
+   "via": [
+    "lem-pc-open-free-ext-transport",
+    "lem-pc-open-free-ext-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisExtFunctorSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/MayerVietorisExtFunctorSquare.lean",
+  "declaration": "CategoryTheory.Abelian.Ext.mapExactFunctor_square",
+  "statement": "theorem mapExactFunctor_square\n    {C₁ : Type u₁} [Category.{v₁} C₁] [Abelian C₁] [HasExt.{w₁} C₁]\n    {C₂ : Type u₂} [Category.{v₂} C₂] [Abelian C₂] [HasExt.{w₂} C₂]\n    {C₃ : Type u₃} [Category.{v₃} C₃] [Abelian C₃] [HasExt.{w₃} C₃]\n    {C₄ : Type u₄} [Category.{v₄} C₄] [Abelian C₄] [HasExt.{w₄} C₄]\n    (G : C₁ ⥤ C₂) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    (J : C₁ ⥤ C₃) [J.Additive] [PreservesFiniteLimits J] [PreservesFiniteColimits J]\n    (J' : C₂ ⥤ C₄) [J'.Additive] [PreservesFiniteLimits J'] [PreservesFiniteColimits J']\n    (GW : C₃ ⥤ C₄) [GW.Additive] [PreservesFiniteLimits GW] [PreservesFiniteColimits GW]\n    (c : G ⋙ J' ≅ J ⋙ GW) {A F : C₁} (n : ℕ) (x : Ext A F n) :\n    ((x.mapExactFunctor G).mapExactFunctor J').comp (Ext.mk₀ (c.app F).hom)\n        (add_zero n) =\n      (Ext.mk₀ (c.app A).hom).comp ((x.mapExactFunctor J).mapExactFunctor GW)\n        (zero_add n)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T194144-L-466176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T194144-L-466176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
