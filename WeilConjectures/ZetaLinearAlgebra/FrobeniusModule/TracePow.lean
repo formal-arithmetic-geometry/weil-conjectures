@@ -112,6 +112,12 @@ theorem Equiv.trace_frobeniusEnd_pow {M N : FrobeniusModule.{u, v} K} (e : M.Equ
       LinearMap.trace K M.carrier (M.frobeniusEnd ^ n) := by
   rw [e.frobeniusEnd_eq_conj, LinearEquiv.conj_pow, LinearMap.trace_conj']
 
+/-- The traces of the powers of the Frobenius of a zero module vanish. -/
+theorem trace_frobeniusEnd_pow_eq_zero_of_subsingleton (M : FrobeniusModule.{u, v} K)
+    [Subsingleton M.carrier] (n : ℕ) :
+    LinearMap.trace K M.carrier (M.frobeniusEnd ^ n) = 0 := by
+  rw [Subsingleton.elim (M.frobeniusEnd ^ n) 0, map_zero]
+
 /-- The traces of the powers of the Frobenius of a direct sum are the sums of the traces. -/
 theorem trace_frobeniusEnd_pow_prod (M : FrobeniusModule.{u, v} K)
     (N : FrobeniusModule.{t, v} K) (n : ℕ) :
@@ -125,7 +131,8 @@ theorem trace_frobeniusEnd_pow_prod (M : FrobeniusModule.{u, v} K)
     induction k with
     | zero => rw [pow_zero, pow_zero, pow_zero, LinearMap.prodMap_one]
     | succ k ih => rw [pow_succ, ih, LinearMap.prodMap_mul, pow_succ, pow_succ]
-  rw [hF, hpow, LinearMap.trace_prodMap']
+  rw [hF, hpow]
+  exact LinearMap.trace_prodMap' _ _
 
 /-- The traces of the powers of a rescaled Frobenius `c F` are `cⁿ tr (Fⁿ)`. -/
 theorem trace_frobeniusEnd_pow_rescale (M : FrobeniusModule.{u, v} K) {c : K} (hc : c ≠ 0)
@@ -133,7 +140,7 @@ theorem trace_frobeniusEnd_pow_rescale (M : FrobeniusModule.{u, v} K) {c : K} (h
     LinearMap.trace K (M.rescale c).carrier ((M.rescale c).frobeniusEnd ^ n) =
       c ^ n * LinearMap.trace K M.carrier (M.frobeniusEnd ^ n) := by
   have hF : (M.rescale c).frobeniusEnd = c • M.frobeniusEnd :=
-    LinearMap.ext fun x ↦ frobeniusEnd_rescale_apply hc x
+    LinearMap.ext fun x ↦ frobeniusEnd_rescale_apply (M := M) hc x
   rw [hF, smul_pow, map_smul, smul_eq_mul]
   rfl
 
@@ -149,7 +156,8 @@ theorem trace_frobeniusEnd_pow_dual (M : FrobeniusModule.{u, v} K) (n : ℕ) :
     | succ k ih =>
       rw [pow_succ, ih, Module.End.mul_eq_comp, LinearMap.dualMap_comp_dualMap, pow_succ']
       rfl
-  rw [← LinearMap.trace_transpose', ← LinearMap.dualMap_def, ← hpow]
+  refine Eq.trans ?_ (LinearMap.trace_transpose' (M.frobenius.symm.toLinearMap ^ n))
+  rw [← LinearMap.dualMap_def, ← hpow]
   rfl
 
 /-- **The twisted dual of a pure module has the conjugate traces.** If `M` is `ι`-pure of weight

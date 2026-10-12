@@ -49,6 +49,40 @@ lemma linearHom_frobenius_apply (M : FrobeniusModule.{u, v} K) (N : FrobeniusMod
       N.frobenius.toLinearMap ∘ₗ f ∘ₗ M.frobenius.symm.toLinearMap :=
   rfl
 
+/-- A line on which the Frobenius acts by the scalar `μ` has `μ ≠ 0`. -/
+lemma ne_zero_of_frobeniusEnd_eq_smul {M : FrobeniusModule.{u, v} K}
+    (hM : Module.finrank K M.carrier = 1) {μ : K} (hμ : M.frobeniusEnd = μ • LinearMap.id) :
+    μ ≠ 0 := by
+  rintro rfl
+  have hb := (Module.finBasisOfFinrankEq K M.carrier hM).ne_zero 0
+  rw [← M.frobenius.map_ne_zero_iff] at hb
+  exact hb ((LinearMap.congr_fun hμ _).trans (by rw [zero_smul, LinearMap.zero_apply]))
+
+/-- On a line on which the Frobenius acts by the scalar `μ`, the inverse Frobenius acts by
+`μ⁻¹`. -/
+lemma frobenius_symm_apply_of_finrank_eq_one {M : FrobeniusModule.{u, v} K}
+    (hM : Module.finrank K M.carrier = 1) {μ : K} (hμ : M.frobeniusEnd = μ • LinearMap.id)
+    (x : M.carrier) : M.frobenius.symm x = μ⁻¹ • x := by
+  have hF (y : M.carrier) : M.frobenius y = μ • y := LinearMap.congr_fun hμ y
+  refine M.frobenius.injective ?_
+  rw [LinearEquiv.apply_symm_apply, map_smul, hF, smul_smul,
+    inv_mul_cancel₀ (ne_zero_of_frobeniusEnd_eq_smul hM hμ), one_smul]
+
+/-- If the Frobenius of a line `M` is multiplication by `μ`, then `Hom_K(M, N)` is `N` with the
+Frobenius rescaled by `μ⁻¹`, through the evaluation at a basis vector of `M`. -/
+noncomputable def linearHomEquivRescale {M N : FrobeniusModule.{u, v} K}
+    (hM : Module.finrank K M.carrier = 1) {μ : K} (hμ : M.frobeniusEnd = μ • LinearMap.id) :
+    (M.linearHom N).Equiv (N.rescale μ⁻¹) where
+  toLinearEquiv := ((Module.finBasisOfFinrankEq K M.carrier hM).constr K).symm ≪≫ₗ
+    LinearEquiv.funUnique (Fin 1) K N.carrier
+  map_frobenius (f : M.carrier →ₗ[K] N.carrier) := by
+    refine Eq.trans ?_ (frobeniusEnd_rescale_apply (M := N)
+      (inv_ne_zero (ne_zero_of_frobeniusEnd_eq_smul hM hμ)) _).symm
+    calc _ = N.frobenius (f (M.frobenius.symm (Module.finBasisOfFinrankEq K M.carrier hM 0))) :=
+          rfl
+      _ = μ⁻¹ • N.frobenius (f (Module.finBasisOfFinrankEq K M.carrier hM 0)) := by
+          rw [frobenius_symm_apply_of_finrank_eq_one hM hμ, map_smul, map_smul]
+
 end FrobeniusModule
 
 namespace AlgebraicGeometry.ProEtale
@@ -231,6 +265,16 @@ lemma stalkAtTensorObjLinearEquiv_frobenius {F : WeilSheaf k₀ l X} (hF : F.IsL
     stalkAtTensorObjLinearEquiv_apply]
   exact evaluationPairing_stalkAt_tensorObj_frobenius s m hs hF G d y
 
+/-- The isomorphism `(F ⊗ G)_s ≅ Hom((F^∨)_s, G_s)` intertwines the Frobenius of `(F ⊗ G)_s`
+with that of the Frobenius module `Hom((F^∨)_s, G_s)`. -/
+lemma stalkAtTensorObjLinearEquiv_map_frobenius {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
+    (G : WeilSheaf k₀ l X) (d : ((F.tensorObj G hF).stalkAt s m hs).carrier) :
+    stalkAtTensorObjLinearEquiv s m hs hF G (((F.tensorObj G hF).stalkAt s m hs).frobenius d) =
+      (((F.dual hF).stalkAt s m hs).linearHom (G.stalkAt s m hs)).frobenius
+        (stalkAtTensorObjLinearEquiv s m hs hF G d) := by
+  rw [FrobeniusModule.linearHom_frobenius_apply]
+  exact stalkAtTensorObjLinearEquiv_frobenius s m hs hF G d
+
 /-- The stalk of the tensor product `F ⊗ G = [F^∨, G]` at a geometric point is
 `Hom(F^∨_s, G_s)` with the Frobenius `f ↦ F_G ∘ f ∘ F_{F^∨}⁻¹`: the pairing of stalks induced by
 the evaluation is perfect
@@ -242,7 +286,7 @@ noncomputable def stalkAtTensorObjEquiv {F : WeilSheaf k₀ l X} (hF : F.IsLisse
     ((F.tensorObj G hF).stalkAt s m hs).Equiv
       (((F.dual hF).stalkAt s m hs).linearHom (G.stalkAt s m hs)) where
   toLinearEquiv := stalkAtTensorObjLinearEquiv s m hs hF G
-  map_frobenius := stalkAtTensorObjLinearEquiv_frobenius s m hs hF G
+  map_frobenius := stalkAtTensorObjLinearEquiv_map_frobenius s m hs hF G
 
 end TensorStalk
 
