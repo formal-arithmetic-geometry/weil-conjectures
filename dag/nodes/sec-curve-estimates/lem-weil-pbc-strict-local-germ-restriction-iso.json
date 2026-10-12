@@ -17,44 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open containing the image of s. The comparison [lem-weil-pbc-etale-local-ring-triples] identifies the coordinate-ring colimit of affine pointed neighbourhoods with the colimit of etale residue triples over this affine chart, compatibly with all pointed ring maps. [lem-weil-pbc-strict-henselization-triples] makes the latter a strictly henselian local ring and supplies its residue map to the relative separable closure inside Omega. Transport this local-ring structure and map through the colimit isomorphism. Compose the residue map with its inclusion into Omega to obtain the geometric closed point of the chosen strict-henselization scheme. The compatibility with each pointed ring map makes its composite with the structural map equal to s.",
+   "text": "Apply clause (1) of [lem-weil-pbc-strict-henselization-functoriality], implemented by strictHenselizationResidue, using the algebra structure on Omega induced by the given geometric point. Obtain the local and strictly henselian structures, the residue equivalence sigma, and the geometric lift y whose composites with all representative limit legs are their marked points and whose composite with the structural map is s. The map y is the spectrum of the residue map followed by sigma and the inclusion into Omega. The prime-comap formula for a residue map shows y lies over the closed point.",
    "uses": [
-    "lem-weil-pbc-etale-local-ring-triples",
-    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-strict-henselization-functoriality",
     "def-weil-pbc-strict-henselization-limit"
    ],
    "elementary": false
   },
   {
-   "text": "The strict-henselization limit has its geometric closed point above s. Identify the inverse-image stalk there with the original stalk, compatibly with germs, using [lem-weil-pbc-inverse-image-stalk-germ]. Strict-local global sections identify with the closed-point stalk by [lem-weil-pbc-strictly-henselian-sections-stalk]. Compose these two isomorphisms in the direction from the original stalk to global sections.",
+   "text": "Let P be the inverse image of G on the strict henselization. Apply [lem-weil-pbc-strictly-henselian-sections-stalk] to the closed geometric point y to make the identity-neighbourhood germ gamma an isomorphism. The terminal evaluation isomorphism identifies global sections with sections on this identity neighbourhood. Apply [lem-weil-pbc-inverse-image-stalk-germ] and the equality y followed by the structural map equals s to obtain the inverse-image stalk isomorphism c to G_s with its germ formula. Define r0 as c inverse, followed by gamma inverse and inverse terminal evaluation.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-strictly-henselian-sections-stalk"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At every representative affine pointed neighbourhood the germ compatibility of the inverse-image stalk comparison and the pointed limit section show that this composite is the unit followed by restriction along that section. These are the defining section restrictions. Uniqueness in [def-weil-pbc-strict-henselization-restriction] identifies it with r, which is therefore invertible.",
-   "uses": [
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
     "lem-weil-pbc-inverse-image-stalk-germ",
     "def-weil-pbc-strict-henselization-restriction"
    ],
    "elementary": false
+  },
+  {
+   "text": "For each representative neighbourhood, the lift y followed by its strict-local section has first pullback projection equal to the marked point, by the residue factorization equation, and second projection y, because it is a section. Pullback extensionality identifies this with the pointed neighbourhood in the inverse-image germ formula. The colimit germ relation for restriction along the section then proves germ followed by r0 equals strictHenselizationSectionRestriction. Cancelling c and gamma gives exactly the defining restriction equations. Uniqueness in [def-weil-pbc-strict-henselization-restriction] yields r = r0; r0 is a composite of isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-strict-henselization-restriction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-restriction",
-  "lem-weil-pbc-etale-local-ring-triples",
   "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-strictly-henselian-sections-stalk"
  ],
  "proof_origin": {
   "by": "document",
   "document": "Stacks Project, etale-cohomology.tex",
-  "place": "Tags 03QO and 03Q9, canonical restriction construction"
+  "place": "Tags 03QO and 03Q9, canonical restriction construction; the local structure and pointed factorization are supplied by clause (1) of strictHenselizationResidue (Tags 04HX and 03PS)."
  },
  "mathlib_searches": [
   {
@@ -126,10 +125,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T044759-L-2043013",
-  "kind": "interface",
+  "landing": "20261012T060743-L-2910159",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
