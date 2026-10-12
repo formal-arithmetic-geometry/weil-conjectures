@@ -9592,3 +9592,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:27 L: merged deliver/U2/Sheaf.AlgebraicGeometry.ModuleHigherDirectImageCoproductEpi (stage 3; reviewer PASS; first push; landing 20261012T212724-L-1131877 (interface); batch 20261012T212719; modules 2; new nodes 1)
 - 21:27 L: merged deliver/X2/Sheaf.RingTheory.ArtinianSeparableResidueLift (stage 3; reviewer PASS; first push; landing 20261012T212724-L-1131975 (interface); batch 20261012T212719; modules 3; new nodes 2)
 - 21:27 L: merged deliver/Y3/Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing (stage 3; reviewer PASS; first push; landing 20261012T212725-L-1132076 (proof); batch 20261012T212719; modules 1; new nodes 0)
+- 21:28 L: returned deliver/C1/Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIsoR (reviewer RETURN: (reviewer X-f065c, head f065cdcf0) F: Required direct-importer review cannot be completed from this stale clone. Supply )
