@@ -7849,3 +7849,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/K2/Sheaf.Algebra.Homology.FirstQuadrantAugmentation (stage 3; reviewer PASS; first push; landing 20261012T135248-L-1675133 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:52 L: merged deliver/K2/Sheaf.Algebra.Homology.InverseImageStalkScalarTransport (stage 3; reviewer PASS; first push; landing 20261012T135248-L-1675330 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/K2/Sheaf.AlgebraicGeometry.AlternatingCechSection (stage 3; reviewer PASS; first push; landing 20261012T135248-L-1675443 (interface); batch 20261012T135212; modules 2; new nodes 1)
+- 13:52 L: merged deliver/K2/Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange (stage 3; reviewer PASS; first push; landing 20261012T135248-L-1675589 (proof); batch 20261012T135212; modules 1; new nodes 0)

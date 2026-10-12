@@ -8,7 +8,6 @@ module
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 
 /-!
@@ -47,6 +46,7 @@ theorem isHomeomorph_baseChange_of_isPurelyInseparable
     IsHomeomorph
       (pullback.fst (X ↘ Spec (CommRingCat.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k K)))).base := by
-  sorry
+  exact (pullback.fst (X ↘ Spec (CommRingCat.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k K)))).isHomeomorph
 
 end AlgebraicGeometry
