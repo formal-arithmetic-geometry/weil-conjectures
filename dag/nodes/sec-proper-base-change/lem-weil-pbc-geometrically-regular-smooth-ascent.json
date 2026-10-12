@@ -40,7 +40,7 @@
    }
   },
   {
-   "text": "Fix a finite purely inseparable field extension $k'/k$ and put $A'=k'\\otimes_kA$. Since $A$ is geometrically regular over $k$, the ring $A'$ is a regular ring (Noetherian, all localizations at primes regular local), by the definition [def-weil-pbc-g-ring]. (Stacks lets $k'/k$ run over finitely generated field extensions, condition (1) of Lemma 0381; the definition used here is condition (2), finite purely inseparable extensions, which are finitely generated, and the argument is the same.)",
+   "text": "Fix a finite purely inseparable extension $K/k$. In Lean its universe may differ from the one quantified over in geometric regularity of $A$. Since $K$ is finite as a $k$-module it is small in the universe of $k$ (Mathlib Module.Finite.small), so shrink it into Type (max u v), obtaining a $k$-algebra-isomorphic field $K_0$. Finiteness and pure inseparability transfer along this isomorphism. By [def-weil-pbc-g-ring], $K_0\\otimes_k A$ is regular. Tensor symmetry gives regularity of $C=A\\otimes_k K_0$.",
    "uses": [
     "def-weil-pbc-g-ring"
    ],
@@ -51,10 +51,9 @@
    }
   },
   {
-   "text": "The ring map $\\mathrm{id}_{k'}\\otimes\\varphi:A'=k'\\otimes_kA\\to k'\\otimes_kB$ is smooth. By base change of smooth ring maps [lem-weil-pbc-smooth-ring-map-base-change-composition](1), applied to the smooth map $A\\to B$ and the ring map $A\\to A'$, $a\\mapsto1\\otimes a$, the map $A'\\to A'\\otimes_AB$, $x\\mapsto x\\otimes1$, is smooth. By [lem-weil-pbc-tensor-cancel-base-change] with $R=k$, $S=A$, the $k$-algebra $k'$ and the $A$-algebra $B$ (via $\\varphi$), there is an isomorphism $B\\otimes_A(A\\otimes_kk')\\cong B\\otimes_kk'$, $b\\otimes(a\\otimes c)\\mapsto\\varphi(a)b\\otimes c$. Composing it with the symmetry isomorphisms of tensor products, $A'\\otimes_AB\\to B\\otimes_A(A\\otimes_kk')\\to B\\otimes_kk'\\to k'\\otimes_kB$ sends $(c\\otimes a)\\otimes b\\mapsto c\\otimes\\varphi(a)b$; it is a ring isomorphism, and composed with $x\\mapsto x\\otimes1$ it is $c\\otimes a\\mapsto c\\otimes\\varphi(a)$, i.e. it is an isomorphism of $A'$-algebras from $A'\\otimes_AB$ to $k'\\otimes_kB$ (with $A'$ acting through $\\mathrm{id}_{k'}\\otimes\\varphi$). The three conditions of [def-weil-pbc-smooth-ring-map] (finite presentation, $H_1(L)=0$, $\\Omega$ finite projective) are invariant under isomorphism of $A'$-algebras, so $\\mathrm{id}_{k'}\\otimes\\varphi$ is smooth (in Mathlib: Algebra.Smooth.of_equiv, RingTheory/Smooth/Basic.lean line 554).",
+   "text": "Give $B$ its $A$-algebra structure through $\\varphi$; compatibility with $k$ is IsScalarTower.of_algHom. Base change of the smooth algebra $B/A$ along $A\\to C$ gives smoothness of $C\\otimes_A B$ over $C$, by [lem-weil-pbc-smooth-ring-map-base-change-composition](1). The symmetry isomorphism TensorProduct.commRight transports it to smoothness of $D=B\\otimes_A C$ over $C$, using the right-algebra structure on $D$ and Algebra.Smooth.of_equiv.",
    "uses": [
     "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-tensor-cancel-base-change",
     "def-weil-pbc-smooth-ring-map"
    ],
    "elementary": false,
@@ -64,9 +63,10 @@
    }
   },
   {
-   "text": "$k'\\otimes_kB$ is a regular ring: it receives the smooth ring map $\\mathrm{id}_{k'}\\otimes\\varphi$ of step 3 from the regular ring $A'$ of step 2, so it is Noetherian with all localizations at primes regular local by ascent of regularity along smooth ring maps [lem-weil-pbc-regular-ring-smooth-ascent].",
+   "text": "By [lem-weil-pbc-regular-ring-smooth-ascent], the smooth $C$-algebra $D$ is regular. Cancellation [lem-weil-pbc-tensor-cancel-base-change] identifies $D=B\\otimes_A(A\\otimes_k K_0)$ with $B\\otimes_k K_0$. Transfer regularity across this ring isomorphism, tensor symmetry, and the tensor-product isomorphism induced by $K_0\\cong K$. These give regularity of $K\\otimes_k B$. In Lean regularity is transferred with IsRegularRing.of_ringEquiv.",
    "uses": [
-    "lem-weil-pbc-regular-ring-smooth-ascent"
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-weil-pbc-tensor-cancel-base-change"
    ],
    "elementary": false,
    "source": {
@@ -173,5 +173,15 @@
   "group": "H1",
   "result": "pass",
   "note": "k Field, A B CommRing k-algebras, phi A->[k]B, Algebra.Smooth A B via phi.toAlgebra (fields = FP + projective Omega + subsingleton H1Cotangent, inferInstance fails), IsNoetherianRing A, Algebra.IsGeometricallyRegular k A (Type (max u v) tests, k':=Q at Type 0 instantiates), conclusion Noetherian B and geometrically regular B; #check resolves Algebra.IsGeometricallyRegular"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T085253-L-20750",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

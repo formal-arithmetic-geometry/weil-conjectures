@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.GRing
+import Mathlib.Algebra.Field.Shrink
 import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
@@ -46,6 +47,32 @@ theorem isGeometricallyRegular_of_smooth
     (hsmooth : letI : Algebra A B := φ.toRingHom.toAlgebra; Algebra.Smooth A B)
     (hnoetherian : IsNoetherianRing A) (hregular : IsGeometricallyRegular k A) :
     IsNoetherianRing B ∧ IsGeometricallyRegular k B := by
-  sorry
+  let : Algebra A B := φ.toRingHom.toAlgebra
+  let : Smooth A B := hsmooth
+  let : IsNoetherianRing A := hnoetherian
+  let : IsScalarTower k A B := IsScalarTower.of_algHom φ
+  have hB : IsNoetherianRing B := FiniteType.isNoetherianRing A B
+  refine ⟨hB, hB, ?_⟩
+  intro K _ _ _ _
+  -- The definition for A tests extensions in Type (max u v).
+  have : Small.{max u v} K := Module.Finite.small k K
+  let K₀ := Shrink.{max u v} K
+  have : IsPurelyInseparable k K₀ := (Shrink.algEquiv k K).symm.isPurelyInseparable
+  have : IsRegularRing (TensorProduct k K₀ A) := hregular.2 K₀
+  have : IsRegularRing (TensorProduct k A K₀) :=
+    IsRegularRing.of_ringEquiv (TensorProduct.comm k K₀ A).toRingEquiv
+  -- Use the right-algebra structure on the base change, then cancel it as a ring.
+  let : Algebra (TensorProduct k A K₀) (TensorProduct A B (TensorProduct k A K₀)) :=
+    TensorProduct.rightAlgebra
+  have : Smooth (TensorProduct k A K₀) (TensorProduct A B (TensorProduct k A K₀)) :=
+    Smooth.of_equiv (TensorProduct.commRight A (TensorProduct k A K₀) B)
+  have : IsRegularRing (TensorProduct A B (TensorProduct k A K₀)) :=
+    isRegularRing_of_smooth (TensorProduct k A K₀) _
+  have : IsRegularRing (TensorProduct k B K₀) :=
+    IsRegularRing.of_ringEquiv (TensorProduct.cancelBaseChange k A B B K₀).toRingEquiv
+  have : IsRegularRing (TensorProduct k K₀ B) :=
+    IsRegularRing.of_ringEquiv (TensorProduct.comm k B K₀).toRingEquiv
+  exact IsRegularRing.of_ringEquiv
+    (TensorProduct.congr (Shrink.algEquiv k K) (AlgEquiv.refl : B ≃ₐ[k] B)).toRingEquiv
 
 end Algebra
