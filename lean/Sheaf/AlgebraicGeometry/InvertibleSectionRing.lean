@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.RingTheory.GradedAlgebra.Basic
+import Mathlib.Tactic.CategoryTheory.Monoidal.Basic
 
 /-!
 # The graded section ring of an invertible module
@@ -15,7 +16,8 @@ Source: Stacks Project, Tags 01PZ and 01N8
 (blueprint: def-sc-invertible-section-ring).
 
 The homogeneous component is literally the global sections of the indicated tensor power.
-All operations are specified; only their algebraic laws remain to be proved.
+All operations are specified, and their algebraic laws are proved from tensor-section coherence
+and local free generators.
 
 ## Main definitions
 
@@ -88,19 +90,81 @@ theorem sectionRing_add_mul (L : X.Modules) [L.IsInvertible]
       (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection b c)
   rw [add_tmulSection, map_add]
 
+private theorem eqToHom_app_heq {M N : X.Modules} {U : X.Opens} (h : M = N)
+    (a : Γ(M, U)) : HEq ((eqToHom h).app U a) a := by
+  subst N
+  rfl
+
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The degree-zero section is the
 monoidal unit; the left unitor and the exponent isomorphism cancel. -/
 theorem sectionRing_one_mul (L : X.Modules) [L.IsInvertible]
     (a : GradedMonoid (SectionRingComponent L)) :
     1 * a = a := by
-  sorry
+  obtain ⟨i, a⟩ := a
+  apply Sigma.ext (Nat.zero_add i)
+  change HEq ((L.tensorPowAddIso 0 i).inv.app ⊤
+    (tmulSection (unitSectionsEquiv ⊤ 1) a)) a
+  exact (eqToHom_app_heq (congrArg L.tensorPow (Nat.zero_add i).symm) _).trans
+    (heq_of_eq ((leftUnitor_hom_app_tmulSection 1 a).trans (one_smul _ _)))
+
+-- The recursive exponent-zero isomorphism agrees with the right unitor.
+private theorem tensorPowAddIso_zero_inv (L : X.Modules) (n : ℕ) :
+    (L.tensorPowAddIso n 0).inv = (ρ_ (L.tensorPow n)).hom := by
+  induction n with
+  | zero =>
+    simp only [tensorPowAddIso, Iso.trans_inv, Iso.symm_inv, eqToIso.inv,
+      eqToHom_refl, Category.comp_id]
+    exact unitors_equal
+  | succ n ih =>
+    simp only [tensorPowAddIso, Iso.trans_inv, Iso.symm_inv, eqToIso.inv,
+      eqToHom_refl, Category.comp_id, tensorIso_inv, Iso.refl_inv, ih]
+    simp only [id_tensorHom, rightUnitor_tensor_hom, tensorPow_succ]
+    rfl
 
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The right unitor identifies
 tensoring with the section one with the identity; coherence cancels the exponent isomorphism. -/
 theorem sectionRing_mul_one (L : X.Modules) [L.IsInvertible]
     (a : GradedMonoid (SectionRingComponent L)) :
     a * 1 = a := by
-  sorry
+  obtain ⟨i, a⟩ := a
+  apply Sigma.ext (Nat.add_zero i)
+  apply heq_of_eq
+  change (L.tensorPowAddIso i 0).inv.app ⊤
+    (tmulSection a (unitSectionsEquiv ⊤ 1)) = a
+  rw [tensorPowAddIso_zero_inv]
+  exact (rightUnitor_hom_app_tmulSection 1 a).trans (one_smul _ _)
+
+-- Naturality moves the exponent casts to the end; the induction then uses the pentagon.
+private theorem tensorPowAddIso_assoc_inv (L : X.Modules) (i j k : ℕ) :
+    (L.tensorPowAddIso i j).inv ▷ L.tensorPow k ≫
+      (L.tensorPowAddIso (i + j) k).inv =
+    (α_ (L.tensorPow i) (L.tensorPow j) (L.tensorPow k)).hom ≫
+      L.tensorPow i ◁ (L.tensorPowAddIso j k).inv ≫
+      (L.tensorPowAddIso i (j + k)).inv ≫
+      eqToHom (congrArg L.tensorPow (Nat.add_assoc i j k).symm) := by
+  induction i with
+  | zero =>
+    dsimp only [tensorPowAddIso, Iso.trans_inv, Iso.symm_inv, eqToIso.inv]
+    rw [comp_whiskerRight, eqToHom_whiskerRight, Category.assoc,
+      ← eqToHom_iso_inv_naturality (fun n ↦ L.tensorPowAddIso n k) (Nat.zero_add j).symm]
+    simp only [Category.assoc, eqToHom_trans]
+    simp only [← Category.assoc]
+    congr 1
+    monoidal
+  | succ i ih =>
+    simp only [tensorPowAddIso, Iso.trans_inv, Iso.symm_inv, eqToIso.inv,
+      tensorPow_succ, tensorIso_inv, Iso.refl_inv, id_tensorHom]
+    rw [comp_whiskerRight, comp_whiskerRight, eqToHom_whiskerRight,
+      Category.assoc, Category.assoc,
+      ← eqToHom_iso_inv_naturality (fun n ↦ L.tensorPowAddIso n k)
+        (Nat.succ_add i j).symm]
+    simp only [tensorPowAddIso, Iso.trans_inv, Iso.symm_inv, eqToIso.inv,
+      tensorIso_inv, Iso.refl_inv, id_tensorHom, Category.assoc, eqToHom_trans]
+    rw [associator_naturality_middle_assoc, ← whiskerLeft_comp_assoc, ih]
+    simp only [whiskerLeft_comp, Category.assoc, whiskerLeft_eqToHom, eqToHom_trans]
+    simp only [← Category.assoc]
+    congr 1
+    monoidal
 
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). The associator sends (a tensor
 b) tensor c to a tensor (b tensor c). The exponent isomorphisms agree by monoidal coherence,
@@ -108,7 +172,88 @@ including the equality of the two degree sums. -/
 theorem sectionRing_mul_assoc (L : X.Modules) [L.IsInvertible]
     (a b c : GradedMonoid (SectionRingComponent L)) :
     a * b * c = a * (b * c) := by
-  sorry
+  obtain ⟨i, a⟩ := a
+  obtain ⟨j, b⟩ := b
+  obtain ⟨k, c⟩ := c
+  apply Sigma.ext (Nat.add_assoc i j k)
+  have h := congrArg
+    (fun f ↦ f.app ⊤ (tmulSection (tmulSection a b) c))
+    (tensorPowAddIso_assoc_inv L i j k)
+  simp only [Hom.comp_app, ConcreteCategory.comp_apply, whiskerRight_app_tmulSection,
+    whiskerLeft_app_tmulSection, associator_hom_app_tmulSection] at h
+  exact (heq_of_eq h).trans (eqToHom_app_heq _ _)
+
+-- Tensor powers of a section over an arbitrary open, without extending it globally.
+private noncomputable def tensorPowLocalSection {L : X.Modules} {U : X.Opens}
+    (e : Γ(L, U)) : (n : ℕ) → Γ(L.tensorPow n, U)
+  | 0 => unitSectionsEquiv U 1
+  | n + 1 => tmulSection e (tensorPowLocalSection e n)
+
+private theorem tensorPowLocalSection_transport {L : X.Modules} {U : X.Opens}
+    (e : Γ(L, U)) {m n : ℕ} (h : m = n) :
+    (eqToHom (congrArg L.tensorPow h)).app U (tensorPowLocalSection e m) =
+      tensorPowLocalSection e n := by
+  subst n
+  rfl
+
+private theorem tensorPowLocalSection_mul {L : X.Modules} {U : X.Opens}
+    (e : Γ(L, U)) (i j : ℕ) :
+    (L.tensorPowAddIso i j).inv.app U
+      (tmulSection (tensorPowLocalSection e i) (tensorPowLocalSection e j)) =
+        tensorPowLocalSection e (i + j) := by
+  induction i with
+  | zero =>
+    rw [tensorPowAddIso, Iso.trans_inv, Iso.symm_inv, eqToIso.inv, Hom.comp_app,
+      ConcreteCategory.comp_apply]
+    exact (congrArg _ ((leftUnitor_hom_app_tmulSection 1 _).trans (one_smul _ _))).trans
+      (tensorPowLocalSection_transport e (Nat.zero_add j).symm)
+  | succ i ih =>
+    rw [tensorPowAddIso, Iso.trans_inv, Iso.trans_inv, Iso.symm_inv, eqToIso.inv,
+      Hom.comp_app, Hom.comp_app, ConcreteCategory.comp_apply, ConcreteCategory.comp_apply]
+    change (eqToHom (congrArg L.tensorPow (Nat.succ_add i j).symm)).app U
+      ((Iso.refl L ⊗ᵢ L.tensorPowAddIso i j).inv.app U
+      ((α_ L (L.tensorPow i) (L.tensorPow j)).hom.app U
+        (tmulSection (tmulSection e (tensorPowLocalSection e i))
+          (tensorPowLocalSection e j)))) = _
+    rw [associator_hom_app_tmulSection]
+    have h : (Iso.refl L ⊗ᵢ L.tensorPowAddIso i j).inv.app U
+        (tmulSection e (tmulSection (tensorPowLocalSection e i)
+          (tensorPowLocalSection e j))) = tmulSection e (tensorPowLocalSection e (i + j)) := by
+      rw [tensorIso_inv, Iso.refl_inv, tensorHom_app_tmulSection, ih, Hom.id_app]
+      rfl
+    rw [h]
+    exact tensorPowLocalSection_transport e (Nat.succ_add i j).symm
+
+private theorem tensorPowLocalSection_generator {L : X.Modules} {U : X.Opens}
+    {e : Γ(L, U)} (he : IsFreeGenerator e) (n : ℕ) :
+    IsFreeGenerator (tensorPowLocalSection e n) := by
+  induction n with
+  | zero => exact isFreeGenerator_one U
+  | succ n ih => exact he.tmulSection ih
+
+private theorem tensorPowLocalSection_comm {L : X.Modules} {U : X.Opens}
+    {e : Γ(L, U)} (he : IsFreeGenerator e) (i j : ℕ)
+    (a : Γ(L.tensorPow i, U)) (b : Γ(L.tensorPow j, U)) :
+    (L.tensorPowAddIso i j).inv.app U (tmulSection a b) =
+      (eqToHom (congrArg L.tensorPow (Nat.add_comm j i))).app U
+        ((L.tensorPowAddIso j i).inv.app U (tmulSection b a)) := by
+  obtain ⟨f, rfl⟩ := (tensorPowLocalSection_generator he i).exists_smul_eq a
+  obtain ⟨g, rfl⟩ := (tensorPowLocalSection_generator he j).exists_smul_eq b
+  rw [smul_tmulSection, tmulSection_smul, smul_tmulSection, tmulSection_smul]
+  simp only [Hom.app_smul, tensorPowLocalSection_mul, smul_smul]
+  rw [mul_comm]
+  exact congrArg (fun z ↦ (g * f) • z)
+    (tensorPowLocalSection_transport e (Nat.add_comm j i)).symm
+
+-- Convert the scheme-module trivialization to a trivialization over the restricted site.
+private theorem exists_localGenerator (L : X.Modules) [L.IsInvertible] (x : X) :
+    ∃ (U : X.Opens), x ∈ U ∧ ∃ e : Γ(L, U), IsFreeGenerator e := by
+  obtain ⟨U, hx, ⟨e⟩⟩ := IsInvertible.exists_isoUnit (M := L) x
+  let e' := (overEquiv U).functor.preimageIso
+    ((overFunctorEquiv U).app L ≪≫ (restrictFunctorIsoPullback U.ι).app L ≪≫ e ≪≫
+      overEquivFunctorObjUnitIso U)
+  obtain ⟨s, hs⟩ := exists_isFreeGenerator_of_iso e'
+  exact ⟨U, hx, s, hs⟩
 
 /-- Stacks, Tag 01PZ (blueprint: def-sc-invertible-section-ring). Locally trivialize the
 invertible module. Both products then multiply the same two functions in the commutative structure
@@ -117,7 +262,31 @@ the degree sum supplies the dependent equality. -/
 theorem sectionRing_mul_comm (L : X.Modules) [L.IsInvertible]
     (a b : GradedMonoid (SectionRingComponent L)) :
     a * b = b * a := by
-  sorry
+  obtain ⟨i, a⟩ := a
+  obtain ⟨j, b⟩ := b
+  apply Sigma.ext (Nat.add_comm i j)
+  let S : Sieve (⊤ : X.Opens) := {
+    arrows U _ := ∃ e : Γ(L, U), IsFreeGenerator e
+    downward_closed := fun ⟨e, he⟩ g ↦ ⟨_, he.map (leOfHom g)⟩ }
+  have hS : S ∈ Opens.grothendieckTopology X ⊤ := by
+    intro x _
+    obtain ⟨U, hx, e, he⟩ := exists_localGenerator L x
+    exact ⟨U, homOfLE le_top, ⟨e, he⟩, hx⟩
+  have h : (L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a b) =
+      (eqToHom (congrArg L.tensorPow (Nat.add_comm j i))).app ⊤
+        ((L.tensorPowAddIso j i).inv.app ⊤ (tmulSection b a)) := by
+    refine ((L.tensorPow (i + j)).isSheaf_presheaf_comp_forget _ hS).isSeparatedFor.ext
+      fun U f ⟨e, he⟩ ↦ ?_
+    change (L.tensorPow (i + j)).presheaf.map f.op
+      ((L.tensorPowAddIso i j).inv.app ⊤ (tmulSection a b)) =
+        (L.tensorPow (i + j)).presheaf.map f.op
+          ((eqToHom (congrArg L.tensorPow (Nat.add_comm j i))).app ⊤
+            ((L.tensorPowAddIso j i).inv.app ⊤ (tmulSection b a)))
+    have hf : f = homOfLE (leOfHom f) := Subsingleton.elim _ _
+    rw [hf]
+    simp only [← Hom.app_presheaf_map, tmulSection_map]
+    exact tensorPowLocalSection_comm he i j _ _
+  exact (heq_of_eq h).trans (eqToHom_app_heq _ _)
 
 /-- The graded commutative ring laws on tensor-power sections (Stacks, Tag 01PZ;
 (blueprint: def-sc-invertible-section-ring)). All operations are explicit; the law fields
