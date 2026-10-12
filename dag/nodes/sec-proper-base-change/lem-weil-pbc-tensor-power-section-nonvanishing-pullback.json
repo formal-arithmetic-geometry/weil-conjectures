@@ -1,139 +1,133 @@
 {
-  "id": "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
-  "kind": "statement",
-  "title": "Tensor-power sections pull back with inverse-image nonvanishing locus",
-  "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module], $n>0$ an integer, and $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$. There exists $t\\in\\Gamma(Y,(g^*\\mathcal L)^{\\otimes n})$ such that $Y_t=g^{-1}(X_s)$, where $g^*$ is module pullback [def-pc-module-pullback] and the nonvanishing loci use the germ-outside-maximal-ideal predicate of [def-weil-pbc-ample-invertible-module]. No affineness, quasi-compactness, or ampleness assumption is imposed.",
-  "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Lemma Tag 0892 (morphisms-lemma-pullback-ample-tensor-relatively-ample), proof, equality f^{-1}(Y_t) = X_{f^*t}; tensor comparison is Modules Lemma Tag 01CD (lemma-tensor-product-pullback), and invertibility of powers is Modules Lemma Tag 01CT"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-sc-invertible-module",
+ "id": "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
+ "kind": "statement",
+ "title": "Tensor-power sections pull back with inverse-image nonvanishing locus",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], $\\mathcal L$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module], $n>0$ an integer, and $s\\in\\Gamma(X,\\mathcal L^{\\otimes n})$. There exists $t\\in\\Gamma(Y,(g^*\\mathcal L)^{\\otimes n})$ such that $Y_t=g^{-1}(X_s)$, where $g^*$ is module pullback [def-pc-module-pullback] and the nonvanishing loci use the germ-outside-maximal-ideal predicate of [def-weil-pbc-ample-invertible-module]. No affineness, quasi-compactness, or ampleness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lemma Tag 0892 (morphisms-lemma-pullback-ample-tensor-relatively-ample), proof, equality f^{-1}(Y_t) = X_{f^*t}; tensor comparison is Modules Lemma Tag 01CD (lemma-tensor-product-pullback), and invertibility of powers is Modules Lemma Tag 01CT"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical adjunction of tensorPullback to pushforward from [lem-pc-module-pullback-adjunction], whose unit is fixed sectionwise by its tensor formula. Uniqueness of left adjoints gives an isomorphism to the usual pullback. Apply the proved source theorem nonempty_pullback_tensorPow_iso (WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula) and use the existing private tensorPow_iso from AmpleIso, accessed through proof-only import all, on the inverse comparison on L to identify tensorPullback(L.tensorPow n) with (tensorPullback(L)).tensorPow n. The proved source instance IsInvertible.tensorPow supplies invertibility of L.tensorPow n. Apply the chosen adjunction unit to s and transport its section by this isomorphism.",
+   "uses": [
     "def-pc-module-pullback",
-    "def-weil-pbc-ample-invertible-module"
-  ],
-  "proof": [
-    {
-      "text": "The tensor-formula pullback and the usual Scheme.Modules.pullback are left adjoints of the same pushforward [def-pc-module-pullback]. Uniqueness of left adjoints identifies them. The usual pullback has the proved monoidal structure and unit comparison (WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf, pullbackObjUnitIso). Induct on n, using the binary tensor comparison [lem-weil-pbc-invertible-pullback-tensor] and this unit comparison, to identify g^*(L^{tensor n}) with (g^*L)^{tensor n}. Tensor powers are invertible by induction on n using the unit and the tensor-invertibility clause of the same lemma. Pull back s via the adjunction unit, restrict from the inverse image of the top open to the top open, and transport along this power isomorphism to obtain t.",
-      "uses": [
-        "def-pc-module-pullback",
-        "lem-weil-pbc-invertible-pullback-tensor"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "At each stalk, extending scalars to the residue field is quotienting by the maximal ideal times the module [lem-weil-pbc-tensor-over-quotient-ring, clause (1)]. The quotient isomorphism sends 1 tensor v to v modulo that submodule. Consequently the nonvanishing predicate of [def-weil-pbc-ample-invertible-module] is precisely that the residue value is nonzero. An isomorphism of modules induces an isomorphism of these quotients, preserving whether this value is zero.",
-      "uses": [
-        "lem-weil-pbc-tensor-over-quotient-ring",
-        "def-weil-pbc-ample-invertible-module"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "Apply the fibre-value clause of [lem-weil-pbc-invertible-pullback-tensor] to L^{tensor n}. The value of the pulled-back s at y is 1 tensor s(g(y)) over the residue-field map. This map is injective since it is a unital field homomorphism. A nonzero vector remains nonzero after field extension: extend it to a basis and take its coordinate functional; after base extension this functional takes 1 tensor v to 1. A zero vector stays zero by bilinearity. Transporting through the power isomorphism preserves zero by step 2. Thus y belongs to Y_t if and only if g(y) belongs to X_s, proving equality of sets.",
-      "uses": [
-        "lem-weil-pbc-invertible-pullback-tensor"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "lem-weil-pbc-tensor-over-quotient-ring",
-    "def-weil-pbc-ample-invertible-module"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 0892, proof: inverse-image nonvanishing equality, with tensor-power transport and the residue-fibre criterion written out"
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "The nonvanishing locus of a pulled back section of a tensor power of an invertible sheaf is the inverse image of its nonvanishing locus",
-      "results": "Service unavailable: Internal Server Error. This is not recorded as a negative mathematical search result.",
-      "date": "2026-10-12",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "pullback global section of tensor power of invertible module nonvanishing locus preimage",
-      "results": "Eight results about scheme pullbacks, Proj charts, residue fields and tilde sections. No exact section/nonvanishing statement.",
-      "date": "2026-10-12",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "TensorProduct.quotTensorEquivQuotSMul",
-      "results": "Seven hits including quotTensorEquivQuotSMul, quotTensorEquivQuotSMul_mk_one_tmul and quotTensorEquivQuotSMul_symm_mk. These prove the stalk-to-fibre quotient calculation, but not the requested scheme-section transport.",
-      "date": "2026-10-12",
-      "verdict": "partial match"
-    },
-    {
-      "tool": "grep",
-      "query": "generatingLocus|nonvanishing|quotTensorEquivQuotSMul|pullback.*tensorPow",
-      "results": "25 hits, including Mathlib/LinearAlgebra/TensorProduct/Quotient.lean:153 and :169; no scheme tensor-power section/nonvanishing pullback theorem. Local source rg additionally found nonempty_pullback_tensorPow_iso (ProjectionFormula.lean:73), for the usual pullback, and preimage_generatingLocus_le (FieldBaseChange.lean:68), for a different predicate.",
-      "date": "2026-10-12",
-      "verdict": "partial match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.AmplePullback",
-    "date": "2026-10-12",
-    "group": "H2"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-finite-etale-lifting",
-      "place": "auxiliary affine pullback of ampleness used in step 7 of thm-weil-pbc-finite-etale-lifting; step 1 of lem-weil-pbc-pullback-ample-invertible (transport of tensor-power sections and inverse-image nonvanishing equality)",
-      "via": [
-        "lem-weil-pbc-pullback-ample-invertible",
-        "lem-weil-pbc-formal-systems-graded-vanishing",
-        "lem-weil-pbc-grothendieck-existence-projective",
-        "prop-weil-pbc-grothendieck-existence",
-        "lem-weil-pbc-algebraize-finite-over-proper",
-        "lem-weil-pbc-finite-etale-lifting-complete",
-        "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback",
-    "file": "lean/Sheaf/AlgebraicGeometry/Modules/TensorPowerSectionNonvanishingPullback.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPow_section_nonvanishing_pullback",
-    "statement": "theorem exists_tensorPow_section_nonvanishing_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (L : X.Modules) [L.IsInvertible] (n : ℕ) (hn : 0 < n) (s : (L.tensorPow n).val.presheaf.obj (Opposite.op ⊤)) : ∃ t : (((tensorPullback g).obj L).tensorPow n).val.presheaf.obj (Opposite.op ⊤), nonvanishingLocus (((tensorPullback g).obj L).tensorPow n) t = g ⁻¹' nonvanishingLocus (L.tensorPow n) s",
-    "branch": "sheaf-dag",
-    "by": "H2",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "H2",
-    "result": "pass",
-    "landing": "20261012T085246-L-17727",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "H2",
-    "result": "pass",
-    "landing": "20261012T085246-L-17727",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Use the existing private nonvanishingLocus_iso from Sheaf.AlgebraicGeometry.AmpleIso, accessed through proof-only import all: it preserves the nonvanishing locus under the tensor-power comparison. Apply [lem-sc-nonvanishing-tensor-pullback] to the canonical pulled-back section of L.tensorPow n at each y. Set extensionality yields the inverse-image equality.",
+   "uses": [
+    "lem-sc-nonvanishing-tensor-pullback",
+    "lem-sc-ample-iso"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-sc-ample-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Lean proof using the existing AmpleIso private tensorPow_iso and nonvanishingLocus_iso via import all, the usual pullback tensor-power comparison, and lem-sc-nonvanishing-tensor-pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The nonvanishing locus of a pulled back section of a tensor power of an invertible sheaf is the inverse image of its nonvanishing locus",
+   "results": "Service unavailable: Internal Server Error. This is not recorded as a negative mathematical search result.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback global section of tensor power of invertible module nonvanishing locus preimage",
+   "results": "Eight results about scheme pullbacks, Proj charts, residue fields and tilde sections. No exact section/nonvanishing statement.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.quotTensorEquivQuotSMul",
+   "results": "Seven hits including quotTensorEquivQuotSMul, quotTensorEquivQuotSMul_mk_one_tmul and quotTensorEquivQuotSMul_symm_mk. These prove the stalk-to-fibre quotient calculation, but not the requested scheme-section transport.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "generatingLocus|nonvanishing|quotTensorEquivQuotSMul|pullback.*tensorPow",
+   "results": "25 hits, including Mathlib/LinearAlgebra/TensorProduct/Quotient.lean:153 and :169; no scheme tensor-power section/nonvanishing pullback theorem. Local source rg additionally found nonempty_pullback_tensorPow_iso (ProjectionFormula.lean:73), for the usual pullback, and preimage_generatingLocus_le (FieldBaseChange.lean:68), for a different predicate.",
+   "date": "2026-10-12",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmplePullback",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "auxiliary affine pullback of ampleness used in step 7 of thm-weil-pbc-finite-etale-lifting; step 1 of lem-weil-pbc-pullback-ample-invertible (transport of tensor-power sections and inverse-image nonvanishing equality)",
+   "via": [
+    "lem-weil-pbc-pullback-ample-invertible",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/TensorPowerSectionNonvanishingPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_tensorPow_section_nonvanishing_pullback",
+  "statement": "theorem exists_tensorPow_section_nonvanishing_pullback {X Y : Scheme.{u}} (g : Y ⟶ X) (L : X.Modules) [L.IsInvertible] (n : ℕ) (hn : 0 < n) (s : (L.tensorPow n).val.presheaf.obj (Opposite.op ⊤)) : ∃ t : (((tensorPullback g).obj L).tensorPow n).val.presheaf.obj (Opposite.op ⊤), nonvanishingLocus (((tensorPullback g).obj L).tensorPow n) t = g ⁻¹' nonvanishingLocus (L.tensorPow n) s",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T085246-L-17727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T135215-L-1655028",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

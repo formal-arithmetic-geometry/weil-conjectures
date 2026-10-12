@@ -7,7 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import all Sheaf.AlgebraicGeometry.AmpleIso
+import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Pullback of tensor-power sections and their nonvanishing loci
 
@@ -56,6 +58,20 @@ theorem exists_tensorPow_section_nonvanishing_pullback {X Y : Scheme.{u}}
     (s : (L.tensorPow n).val.presheaf.obj (Opposite.op ⊤)) :
     ∃ t : (((tensorPullback g).obj L).tensorPow n).val.presheaf.obj (Opposite.op ⊤),
       nonvanishingLocus (((tensorPullback g).obj L).tensorPow n) t =
-        g ⁻¹' nonvanishingLocus (L.tensorPow n) s := by sorry
+        g ⁻¹' nonvanishingLocus (L.tensorPow n) s := by
+  classical
+  have _hpos : 0 < n := hn
+  let a := (Classical.choose (exists_tensorPullbackAdjunction g)).leftAdjointUniq
+    (pullbackPushforwardAdjunction g)
+  obtain ⟨b⟩ := nonempty_pullback_tensorPow_iso g L n
+  obtain ⟨c⟩ := tensorPow_iso (a.app L).symm n
+  let e := a.app (L.tensorPow n) ≪≫ b ≪≫ c
+  let r : Γ((tensorPullback g).obj (L.tensorPow n), ⊤) :=
+    ((Classical.choose (exists_tensorPullbackAdjunction g)).unit.app
+      (L.tensorPow n)).val.app (Opposite.op ⊤) s
+  refine ⟨e.hom.app ⊤ r, ?_⟩
+  rw [nonvanishingLocus_iso e r]
+  ext y
+  exact nonvanishing_tensorPullback g (L.tensorPow n) s y
 
 end AlgebraicGeometry.Scheme.Modules
