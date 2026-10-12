@@ -19,6 +19,29 @@ theorem locallyConstantMaps_gluing_exists (X : TopCat.{w}) (R : Type z) :
       Presheaf.IsCompatible (locallyConstantMapsPresheaf X R) U sf →
       ∃ s : ToType ((locallyConstantMapsPresheaf X R).obj (op (iSup U))),
         Presheaf.IsGluing (locallyConstantMapsPresheaf X R) U sf s := by
-  sorry
+  classical
+  intro ι U sf hsf
+  change ∀ i, LocallyConstant (U i) R at sf
+  choose index index_spec using fun x : ↑(iSup U) ↦ Opens.mem_iSup.mp x.2
+  let f : ↑(iSup U) → R := fun x ↦ sf (index x) ⟨x.1, index_spec x⟩
+  have hf (i : ι) (x : U i) :
+      f ⟨x.1, (le_iSup U i) x.2⟩ = sf i x := by
+    exact LocallyConstant.congr_fun (hsf (index ⟨x.1, (le_iSup U i) x.2⟩) i)
+      ⟨x.1, index_spec ⟨x.1, (le_iSup U i) x.2⟩, x.2⟩
+  have hlocal : IsLocallyConstant f := by
+    apply (IsLocallyConstant.iff_exists_open f).2
+    intro x
+    let i := index x
+    let xi : U i := ⟨x.1, index_spec x⟩
+    obtain ⟨V, hV, hxV, hconst⟩ := (sf i).isLocallyConstant.exists_open xi
+    let inc : U i → ↑(iSup U) := Set.inclusion (le_iSup U i)
+    refine ⟨inc '' V, (U i).isOpen.isOpenMap_inclusion (le_iSup U i) V hV,
+      ⟨xi, hxV, rfl⟩, ?_⟩
+    rintro y ⟨z, hz, rfl⟩
+    exact (hf i z).trans ((hconst z hz).trans (hf i xi).symm)
+  refine ⟨⟨f, hlocal⟩, ?_⟩
+  intro i
+  apply LocallyConstant.ext
+  exact hf i
 
 end TopCat
