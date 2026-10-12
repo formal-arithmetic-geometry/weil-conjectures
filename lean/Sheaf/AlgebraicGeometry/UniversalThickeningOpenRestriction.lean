@@ -6,10 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.Thickening
 import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
-import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
+import Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestrictionCore
+import Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestrictionConormal
 
 /-!
 # Universal thickenings and conormal sheaves on open subschemes
@@ -77,6 +76,12 @@ theorem universalFirstOrderThickening_open_restriction
                   ((Scheme.Modules.restrictFunctor V.ι).obj
                       (@formallyUnramifiedConormal _ _ _ h hform i h' H) ≅
                     @formallyUnramifiedConormal _ _ _ hV hVform iV hV' HV) := by
-  sorry
+  obtain ⟨hV, hVeq, V', iV, hV', hdata⟩ :=
+    universalFirstOrderThickening_open_restriction_core h i h' H V U hVU
+  obtain ⟨hVform, HV, hiso⟩ :=
+    universalFirstOrderThickening_open_restriction_conormal
+      h i h' H hform hdata
+  exact ⟨hV, hVeq, hVform, V', iV, hV', hdata.1, hdata.2.1, hdata.2.2.1,
+    hdata.2.2.2.1, hdata.2.2.2.2.1, hdata.2.2.2.2.2, ⟨hVform, HV, hiso⟩⟩
 
 end AlgebraicGeometry
