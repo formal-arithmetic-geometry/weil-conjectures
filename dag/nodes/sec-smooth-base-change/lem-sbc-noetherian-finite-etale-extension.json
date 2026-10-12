@@ -15,28 +15,35 @@
  ],
  "proof": [
   {
-   "text": "Over a discrete valuation ring, the special fibre is a regular Cartier divisor.\nRamification indices divide the group order, so the cover is tame. The normalization is\nfinite locally free and has the standard tame local form (0EYG, 0EYH). The rational point\nand the simply transitive action split the fibre over the generic section point. The trait\ncriterion (0EYI) gives étaleness near the special section point, hence at the generic point\nof the irreducible special fibre. Purity (0EYE) extends the cover across that divisor.",
-   "uses": [],
+   "text": "Spread the given generic finite etale cover to an open containing the generic point, with its comparison square.",
+   "uses": [
+    "lem-sbc-generic-open-finite-etale-model"
+   ],
    "elementary": false
   },
   {
-   "text": "Over a Noetherian normal base, choose the maximal open carrying an extension. At a\nminimal point of its complement, dimension one is the trait case. In dimension at least\ntwo, normality gives depth at least two, and flatness transfers this to the total space.\nThe depth-two extension (0EY6) is finite and commutes with flat base change. Complete an\naffine neighbourhood along the section: the completion is a power series ring over the\nlocal base. The cover on the punctured section is split, by normality and its split generic\nfibre. The full faithfulness theorem (0EY9) makes the cover over the punctured completion\nsplit too. Its depth-two extension is split, so flat descent gives étaleness at the generic\npoint of the missing fibre; 0EYB gives étaleness everywhere. Spread to a larger open,\ncontradicting maximality. The action needed during this construction extends by normality.",
-   "uses": [],
-   "elementary": false
+   "text": "Perform well-founded induction with respect to strict enlargement of opens. IsNoetherian S supplies the Noetherian topology and wellFounded_gt on S.Opens. At any proper open carrying a model, the strict-enlargement lemma supplies V > U and a model there; apply the induction hypothesis to V.",
+   "uses": [
+    "lem-sbc-enlarge-open-finite-etale-model"
+   ],
+   "elementary": true
   },
   {
-   "text": "For a disconnected torsor, the finite group acts transitively on its connected components. Each component is a torsor for its stabilizer and meets the split section fibre. Apply the preceding construction with this subgroup, whose order divides the invertible group order, and induce and take the disjoint union to recover the original torsor. Retain only the underlying finite etale morphism and its generic comparison.",
+   "text": "When U is the whole base, the inclusion of c⁻¹(U) is the isomorphism C.topIso.hom. Compose the finite etale structure map with this isomorphism. Paste its comparison square with the vertical-isomorphism square whose commutativity is jU followed by the inclusion equals j. This gives the required pullback over j.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sbc-generic-open-finite-etale-model",
+  "lem-sbc-enlarge-open-finite-etale-model"
+ ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "G3",
+  "by": "M2",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ, proof of Lemma 58.31.8, trait case and maximal-open argument",
-  "note": "Grouped strict part of the parent argument, stated for independent stage-3 proof. The disconnected-torsor component reduction is included."
+  "place": "Tag 0EYJ, proof of Lemma 58.31.8, maximal-open argument",
+  "note": "Lean uses well-founded induction on increasing opens in place of choosing a maximal open; retains the trait and depth-two local extension argument in the enlargement lemma."
  },
  "mathlib_searches": [
   {
@@ -126,9 +133,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G3",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T085244-L-16680",
+  "landing": "20261012T110311-L-618930",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
