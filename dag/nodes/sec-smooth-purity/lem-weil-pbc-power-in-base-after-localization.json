@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "Since E is a finite A'-algebra, it is a finitely generated A'-module [def-weil-finite-integral-morphism]; choose A'-module generators e_1,...,e_r, so every element of E is an A'-linear combination of the e_i. Since L/K' is a field extension [def-pc-field-extension], A' -> K' -> L is injective, so A' -> E is injective and E is a subring of its fraction field L; each e_i lies in L. By the definition [def-weil-pbc-finite-purely-inseparable-extension], in characteristic 0 we have L=K', so e_i=b_i/t_i with b_i,t_i in A', t_i nonzero; in characteristic p>0 there are n_i with e_i^{p^{n_i}} in K', and with N = max n_i also e_i^{p^N}=(e_i^{p^{n_i}})^{p^{N-n_i}} in K', say e_i^{p^N}=b_i/t_i with b_i,t_i in A', t_i nonzero. Put s = t_1...t_r, nonzero since A' is a domain. Then A''=A'[1/s] is a subring of K', E''=E[1/s] is a subring of L (localization of a domain at a nonzero element), and the image of A'' in E'' is A'' itself; in characteristic 0 each e_i lies in A'', in characteristic p each e_i^{p^N} lies in A''.",
+   "text": "Choose a finite set g spanning E as an A'-module using Module.Finite.fg_top [def-weil-finite-integral-morphism]. The finite purely inseparable field extension [def-pc-field-extension] [def-weil-pbc-finite-purely-inseparable-extension] has a uniform exponent N by Mathlib IsPurelyInseparable.hasExponent_of_finiteDimensional. For each e in g, write the q^N-th power of its image in L as the image of c in K', with q=ringExpChar K'. IsLocalization.surj writes c times a nonzero denominator t as a numerator b in A'. The scalar tower equalities and injectivity E -> L give (algebraMap A' E t)*e^(q^N)=algebraMap A' E b in E. Let s be the product of these denominators. It is nonzero; each t divides s, so its image is a unit in Localization.Away s. Map the equality to E tensor Localization.Away s and multiply by the inverse of that unit. This is the fully proved private helper localized_generator_powers.",
    "uses": [
     "def-weil-finite-integral-morphism",
     "def-pc-field-extension",
@@ -32,38 +32,34 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+    "place": "Section 0BR5, denominator-clearing input to Lemma 0BR8; implemented using Mathlib.FieldTheory.PurelyInseparable.Exponent and the fraction-ring and tensor-product APIs"
    }
   },
   {
-   "text": "In characteristic 0, step 1 gives e_i in A'' for every module generator e_i, so E''=sum A'' e_i is contained in A''; the reverse inclusion is the structure map A''->E'', which is injective by step 1. Hence E''=A''.",
-   "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
-   }
-  },
-  {
-   "text": "Assume characteristic p>0. The e_i generate E'' as an A''-module, so every x in E'' is x=sum a_i e_i with a_i in A''. Since the Frobenius y -> y^{p^N} is a ring endomorphism in characteristic p, x^{p^N}=sum a_i^{p^N} e_i^{p^N}, and by step 1 each e_i^{p^N} lies in A''; hence x^{p^N} lies in the image of A''. Thus every x in E'' has a p-power in the base, with the uniform exponent n=N.",
-   "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
-   }
-  },
-  {
-   "text": "Localization preserves the displayed fraction-field identification: A'' has fraction field K' and E'' has fraction field L, since s is nonzero and E is a domain finite over A'. Therefore the two characteristic cases establish all clauses of the statement.",
+   "text": "The fully proved private helper powers_from_generators propagates a fixed positive power k that distributes over addition. First use Submodule.span_induction to extend the generator condition to all e in E: addition uses the distributing identity, and scalar multiplication uses the k-th power of the scalar in the base. Then use TensorProduct.induction_on: pure tensors are the product of e tensor 1 and includeRight(b); sums use the same distributing identity. All base witnesses are explicit sums or products, so no embedding of the tensor product in L is required.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+    "place": "Section 0BR5, denominator-clearing input to Lemma 0BR8; implemented using Mathlib.FieldTheory.PurelyInseparable.Exponent and the fraction-ring and tensor-product APIs"
+   }
+  },
+  {
+   "text": "In characteristic zero, ringExpChar K'=1, hence q^N=1. Apply powers_from_generators with k=1, whose additive identity is tautological, to obtain surjectivity of includeRight. This proves the characteristic-zero clause for the same s.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 0BR5, denominator-clearing input to Lemma 0BR8; implemented using Mathlib.FieldTheory.PurelyInseparable.Exponent and the fraction-ring and tensor-product APIs"
+   }
+  },
+  {
+   "text": "In characteristic p>0, Fact p.Prime and CharP K' p imply ExpChar K' p, so ringExpChar K'=p. If the tensor product is subsingleton the required witness is n=0 and a=0. Otherwise transfer CharP from K' to A' using the injective fraction-field map, then to the nontrivial tensor product using CharP.of_ringHom_of_ne_zero. Mathlib add_pow_char_pow supplies distributivity of the power p^N. Apply powers_from_generators with k=p^N, which is nonzero, and choose n=N. This proves the characteristic-p clause for the same s.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 0BR5, denominator-clearing input to Lemma 0BR8; implemented using Mathlib.FieldTheory.PurelyInseparable.Exponent and the fraction-ring and tensor-product APIs"
    }
   }
  ],
@@ -73,9 +69,9 @@
   "def-weil-pbc-finite-purely-inseparable-extension"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Section 0BR5 (algebra-section-universal-homeomorphism): finite-algebra spreading input for Lemma 0BR8 (algebra-lemma-powers); the argument here is the elementary denominator clearing"
+  "place": "Section 0BR5, denominator-clearing input to Lemma 0BR8; implemented using Mathlib.FieldTheory.PurelyInseparable.Exponent and the fraction-ring and tensor-product APIs",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -160,5 +156,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T085347-L-43011",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
