@@ -16,20 +16,59 @@
  ],
  "proof": [
   {
-   "text": "Compare the pulled-back finite free complex with the original complex after tensoring to the field; flatness preserves the single cohomology and its rank.",
+   "text": "Finite locally free sheaves are flat: apply finiteLocallyFree_tensorLeft_exact and use the tensor braiding to obtain exactness of tensorRight. The finite free terms of P are therefore flat. The bound hle gives bounded-above support.",
    "uses": [
-    "lem-pc-flat-complex-derived-pullback"
+    "lem-sc-ext-tensor-exact",
+    "def-amb-finite-locally-free-module"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply flatComplexDerivedPullback to P. Its object and map equalities identify the termwise functor with tensorPullback by CategoryTheory.Functor.ext. Uniqueness of left adjoints identifies tensorPullback with Modules.pullback, using nonempty_tensorPullbackAdjunction and pullbackPushforwardAdjunction. The quotient and mapHomotopyCategoryFactors isomorphisms give Q(f*P) isomorphic to Lf*(Q(P)).",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Nonnegative support makes negative homology zero. Together with hzero this makes Q(P) concentrated in integer degree i. Mathlib DerivedCategory.isGE_iff, isLE_iff and exists_iso_singleFunctor_obj_of_isGE_of_isLE give Q(P) isomorphic to a single object M in degree i. Applying homologyFunctorFactors and singleFunctorCompHomologyFunctorIso identifies M with H^i(P), so M is finite locally free of rank r and flat.",
+   "uses": [
+    "def-pc-derived-category",
+    "lem-sc-ext-tensor-exact",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The single complex on the flat sheaf M is bounded above by i; its term at i is M and all other terms are zero and flat. The zero-flat argument uses the monoidal preadditive structure supplied by tensorClosed and ObjectProperty.flat_of_isZero. Apply the same termwise derived-pullback comparison and HomologicalComplex.singleMapHomologicalComplex to identify Lf*(M[-i]) with (f*M)[-i]. Compose with the isomorphisms of the preceding steps.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply each homology functor to the resulting isomorphism. Homology of a single complex vanishes away from i and equals f*M at i (Mathlib isZero_single_obj_homology and singleObjHomologySelfIso). The already proved library instance AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_pullback in WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank preserves rank r. Transport both assertions along the homology isomorphisms. No flatness of the map to the field is used, and rank zero, i outside the support, and the empty scheme are included.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-flat-complex-derived-pullback"
+  "lem-sc-ext-tensor-exact",
+  "def-amb-finite-locally-free-module",
+  "lem-pc-flat-complex-derived-pullback",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
-  "place": "Proof step 4"
+  "place": "Proof step 4: bounded-flat comparison and flat single-cohomology argument; implemented by X2"
  },
  "mathlib_searches": [
   {
@@ -115,10 +154,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H3",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T154244-L-2434890",
-  "kind": "interface",
+  "landing": "20261012T163624-L-2788903",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
