@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "*(0) Set-up.* Write $y=f(x)$. By [def-weil-pbc-topological-inverse-image], $f^{-1}\\mathcal G=(f_p\\mathcal G)^\\#$ with sheafification map $\\theta=\\theta_{\\mathcal G}:f_p\\mathcal G\\to f^{-1}\\mathcal G$ (a morphism of presheaves on $X$ with values in $\\mathcal C$), $i_{\\mathcal G,V}:\\mathcal G(V)\\to f_p\\mathcal G(f^{-1}V)$ is the coprojection of index $V$, and the unit is $\\eta_{\\mathcal G,V}=\\theta_{f^{-1}V}\\circ i_{\\mathcal G,V}$ for every open $V\\subseteq Y$.",
+   "text": "Define the canonical stalk morphism as the stalk map of the sheaf-adjunction unit followed by stalkPushforward. The germ formula follows from stalkFunctor_map_germ and stalkPushforward_germ. Compare the abstract pullback adjunction with the explicit sheafified-presheaf construction by Adjunction.leftAdjointUniq. The equality of their units is Adjunction.unit_leftAdjointUniq_hom_app; the explicit unit is the presheaf unit followed by toSheafify, by map_restrictFullyFaithful_unit_app and comp_unit_app.",
    "uses": [
     "def-weil-pbc-topological-inverse-image"
    ],
@@ -61,7 +61,7 @@
    }
   },
   {
-   "text": "*(3) The isomorphism and the germ formula.* Put $c_{\\mathcal G}=\\theta_x\\circ c^p:\\mathcal G_y\\to(f^{-1}\\mathcal G)_x$, an isomorphism in $\\mathcal C$ as a composite of the isomorphisms of steps (1) and (2). For an open $V\\ni y$ and $s\\in\\mathcal G(V)$, steps (1), (2) and (0) give $c_{\\mathcal G}(s_y)=\\theta_x((i_{\\mathcal G,V}(s))_x)=(\\theta_{f^{-1}V}(i_{\\mathcal G,V}(s)))_x=(\\eta_{\\mathcal G,V}(s))_x$.",
+   "text": "The canonical stalk map followed by the stalk map of the comparison isomorphism agrees on every germ with the composite of stalkPullbackHom and the stalk map of toSheafify. By stalk_hom_ext they agree. The latter composite is an isomorphism by steps (1) and (2), and the comparison is an isomorphism; hence the canonical stalk map is an isomorphism. Its germ formula was established in step (0).",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
     "def-weil-pbc-module-stalk",
@@ -74,10 +74,9 @@
    }
   },
   {
-   "text": "*(4) Every element is such a germ.* Every element of $\\mathcal G_y$ is a germ $s_y$ with $s\\in\\mathcal G(V)$ for some open $V\\ni y$: for abelian groups by [def-weil-pbc-module-stalk]; for commutative rings by [lem-weil-pbc-filtered-colimit-algebras-elementwise] (2) with $R=\\mathbb Z$ (commutative rings are the commutative $\\mathbb Z$-algebras), the open neighbourhoods of $y$ forming a directed set. Since $c_{\\mathcal G}$ is surjective, every element of $(f^{-1}\\mathcal G)_x$ is $c_{\\mathcal G}(s_y)=(\\eta_{\\mathcal G,V}(s))_x$ by step (3).",
+   "text": "Apply Mathlib TopCat.Presheaf.exists_germ_eq to the inverse image under the stalk isomorphism of the given target element. This works directly for both AddCommGrpCat and CommRingCat, since their forgetful functors preserve filtered colimits. The germ formula and inv_hom_id give the desired representation; no passage through commutative integer algebras is needed.",
    "uses": [
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "def-weil-pbc-module-stalk"
    ],
    "elementary": true,
    "source": {
@@ -86,11 +85,10 @@
    }
   },
   {
-   "text": "*(5) Naturality.* Let $u:\\mathcal G\\to\\mathcal G'$ be a morphism of sheaves on $Y$ with values in $\\mathcal C$. The unit is natural: $(f^{-1}u)_{f^{-1}V}\\circ\\eta_{\\mathcal G,V}=\\eta_{\\mathcal G',V}\\circ u_V$, since by [def-weil-pbc-topological-inverse-image] $(f^{-1}u)\\circ\\theta_{\\mathcal G}=\\theta_{\\mathcal G'}\\circ f_pu$ and $(f_pu)_{f^{-1}V}\\circ i_{\\mathcal G,V}=i_{\\mathcal G',V}\\circ u_V$ (the defining property of $f_pu$ on coprojections), and step (0). The stalk maps of [def-weil-pbc-module-stalk] satisfy $u_y(s_y)=(u_V(s))_y$ and $(f^{-1}u)_x(t_x)=((f^{-1}u)_U(t))_x$. Hence for $s\\in\\mathcal G(V)$, $V\\ni y$, by step (3): $c_{\\mathcal G'}(u_y(s_y))=(\\eta_{\\mathcal G',V}(u_V(s)))_x=((f^{-1}u)_{f^{-1}V}(\\eta_{\\mathcal G,V}(s)))_x=(f^{-1}u)_x(c_{\\mathcal G}(s_y))$. The two morphisms $c_{\\mathcal G'}\\circ u_y$ and $(f^{-1}u)_x\\circ c_{\\mathcal G}$ agree on all germs, which exhaust $\\mathcal G_y$ (step (4)), so they are equal: $c$ is natural in $\\mathcal G$.",
+   "text": "Construct the natural isomorphism by NatIso.ofComponents using asIso of the canonical stalk map. For a sheaf morphism, apply stalk_hom_ext, rewrite both sides using stalkFunctor_map_germ and the germ formula of step (0), and apply the sheaf-adjunction unit naturality evaluated on the chosen open. This proves categorical naturality without an elementwise exhaustiveness argument.",
    "uses": [
     "def-weil-pbc-topological-inverse-image",
-    "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "def-weil-pbc-module-stalk"
    ],
    "elementary": true,
    "source": {
@@ -104,13 +102,12 @@
   "lem-weil-pbc-presheaf-inverse-image-stalk",
   "lem-weil-pbc-stalk-sheafification-space",
   "lem-weil-pbc-ring-stalk-sheafification-space",
-  "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+  "def-weil-pbc-module-stalk"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Sheaves, Lemma 008H (lemma-stalk-pullback), proved from Lemma 008G (lemma-stalk-pullback-presheaf) and Lemma 007Z (lemma-stalk-sheafification); Lemma 008O and Section 008P for abelian groups and algebraic structures; the germ formula and naturality (omitted in the source) written out from the construction"
+  "place": "Tags 008H, 008O and Section 008P: presheaf inverse-image stalks followed by sheafification. B2 formalization uses Mathlib stalkPullbackIso and stalkFunctor_map_unit_toSheafify_isIso; abstract/explicit adjunction units are compared by leftAdjointUniq. Naturality and the germ formula are proved categorically; representation uses exists_germ_eq directly in both categories."
  },
  "mathlib_searches": [
   {
@@ -235,5 +232,15 @@
   "group": "H1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c9ad3",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T085214-L-3179",
+  "kind": "interface",
+  "note": "independent Codex review: Both unchanged theorem signatures and proofs match the node’s natural stalk isomorphism, unit germ formula, and element representation; compilation is clean, axioms are exactly propext/Classical.choice/Quot.sound, helper scope is private, and proof metadata and pruning agree with Lean."
  }
 }

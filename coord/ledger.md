@@ -6744,3 +6744,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/B2/Sheaf.AlgebraicGeometry.LerayComplexCocycleComparison (stage 3; reviewer PASS; first push; landing 20261012T085213-L-2889 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/B2/Sheaf.RingTheory.CompletionMapBijective (stage 3; reviewer PASS; first push; landing 20261012T085213-L-2985 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/B2/Sheaf.RingTheory.CompletionOfDVR (stage 3; reviewer PASS; first push; landing 20261012T085214-L-3084 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:52 L: merged deliver/B2/Sheaf.Topology.InverseImageStalk (stage 3; reviewer PASS; first push; landing 20261012T085214-L-3179 (interface); batch 20261012T085205; modules 1; new nodes 0; change records: coord/changes/InverseImageStalkScopedHelpers.md)
