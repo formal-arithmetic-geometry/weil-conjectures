@@ -67,7 +67,7 @@ lemma quasiIso_limMap {F₁ F₂ : J ⥤ HomologicalComplex C c} (f : F₁ ⟶ F
 complexes is a quasi-isomorphism. -/
 lemma quasiIso_piMap {J : Type*} [HasLimitsOfShape (Discrete J) C]
     [HasExactLimitsOfShape (Discrete J) C] {K L : J → HomologicalComplex C c}
-    (f : ∀ j, K j ⟶ L j) [∀ j, QuasiIso (f j)] : QuasiIso (Pi.map f) :=
+    (f : ∀ j, K j ⟶ L j) [∀ j, QuasiIso (f j)] : QuasiIso (Limits.Pi.map f) :=
   quasiIso_limMap _ fun j ↦ by
     rw [mem_quasiIso_iff]
     exact inferInstanceAs (QuasiIso (f j.as))
@@ -89,15 +89,15 @@ noncomputable def isLimitFanQPi (K : J → CochainComplex A ℤ) :
   choose I hI i hi using fun j ↦ Abelian.HasKInjectiveResolutions.exists_isKInjective (K j)
   have := fun j ↦ (hi j).2
   have h := isLimitFanQOfIsKInjective (productIsProduct I)
-  have : IsIso (Q.map (Pi.map i)) := by
+  have : IsIso (Q.map (Limits.Pi.map i)) := by
     have := HomologicalComplex.quasiIso_piMap i
     infer_instance
   refine IsLimit.ofIsoLimit ((IsLimit.postcomposeHomEquiv
     (Discrete.natIso fun j ↦ (asIso (Q.map (i j.as))).symm) _).symm h)
-    (Fan.ext (asIso (Q.map (Pi.map i))).symm fun j ↦ ?_)
+    (Fan.ext (asIso (Q.map (Limits.Pi.map i))).symm fun j ↦ ?_)
   simp only [fan_mk_proj, Iso.symm_hom, asIso_inv, Cone.postcompose_obj_pt, Cone.postcompose_obj_π,
     NatTrans.comp_app, Discrete.natIso_hom_app, IsIso.eq_inv_comp]
-  change Q.map (Pi.map i) ≫ Q.map (Pi.π I j) ≫ inv (Q.map (i j)) = _
+  change Q.map (Limits.Pi.map i) ≫ Q.map (Pi.π I j) ≫ inv (Q.map (i j)) = _
   rw [← Q.map_comp_assoc, Pi.map_π, Q.map_comp_assoc, IsIso.hom_inv_id, Category.comp_id]
 
 end DerivedCategory
