@@ -296,6 +296,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresent
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersionLinearization
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
@@ -976,6 +977,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FinitePresentation
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.PushoutSurjective
 public import WeilConjectures.Mathlib.Algebra.Central.Matrix
 public import WeilConjectures.Mathlib.Algebra.Central.TensorProduct
 public import WeilConjectures.Mathlib.Algebra.CharP.Algebra
@@ -1371,6 +1373,7 @@ public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE
 public import WeilConjectures.Mathlib.RingTheory.DualNumber
 public import WeilConjectures.Mathlib.RingTheory.Etale.Basic
+public import WeilConjectures.Mathlib.RingTheory.Etale.Coordinates
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiberDegree
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
