@@ -8315,3 +8315,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/M3/Sheaf.ConstructibleSheaf.ConstantFiniteMatrixDualKernel (stage 3; reviewer PASS; first push; landing 20261012T151910-L-2289101 (interface); batch 20261012T151904; modules 2; new nodes 1)
 - 15:19 L: merged deliver/N1/Sheaf.Algebra.FiniteTorsionExtensionInduction (stage 3; reviewer PASS; first push; landing 20261012T151910-L-2289205 (interface); batch 20261012T151904; modules 2; new nodes 1)
 - 15:19 L: merged deliver/N1/Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication (stage 3; reviewer PASS; first push; landing 20261012T151910-L-2289338 (interface); batch 20261012T151904; modules 4; new nodes 3)
+- 15:19 L: merged deliver/P2/Sheaf.AlgebraicGeometry.FiniteEtaleTraceLocalizationSectionFormula (stage 3; reviewer PASS; first push; landing 20261012T151911-L-2289499 (proof); batch 20261012T151904; modules 1; new nodes 0)
