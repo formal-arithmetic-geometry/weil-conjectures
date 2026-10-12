@@ -31,7 +31,7 @@ AUTO (landed by ~/cc1/autoland.py with tools/merge_delivery.py --stage 2 --revie
   every other delivery, i.e. the plain statement of a lemma with `sorry`.
 """
 from __future__ import annotations
-import hashlib, json, pathlib, subprocess, sys
+import os, hashlib, json, pathlib, subprocess, sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 if not (ROOT / "dag").exists(): ROOT = pathlib.Path.home() / "weil-conjectures-sheaf"
 SAMPLE = 10
@@ -105,8 +105,24 @@ def branches():
 if __name__ == "__main__":
     a = sys.argv[1:]
     if a == ["list"]:
+        # With some 150 branches a full classification takes minutes, and the reader's script lists every 30 s:
+        # a class is kept per branch head for 20 minutes (local/review-class-cache.json; a new head is classified at once).
+        import json as _j, time as _t
+        cf = ROOT / "local" / "review-class-cache.json"
+        try: cache = _j.loads(cf.read_text())
+        except (OSError, ValueError): cache = {}
+        now = _t.time(); new = {}
         for g, i in branches():
-            c, why, h = classify(g, i); print(f"{c}\t{g}\t{i}\t{h[:9]}\t{why}")
+            hd = git("rev-parse", f"deliver/{g}/{i}").strip(); k = f"{g}/{i}"
+            e = cache.get(k)
+            if e and e[0] == hd and now - e[3] < 1200: c, why, h = e[1], e[2], hd
+            else:
+                c, why, h = classify(g, i); e = [h, c, why, now]
+            new[k] = [hd, c, why, e[3]]
+            print(f"{c}\t{g}\t{i}\t{h[:9]}\t{why}", flush=True)
+        try:
+            tmp = cf.with_suffix(".tmp%d" % os.getpid()); tmp.write_text(_j.dumps(new)); tmp.replace(cf)
+        except OSError: pass
     elif len(a) == 2:
         c, why, h = classify(*a); print(c if c == "AUTO" else f"{c}: {why}")
     else: print(__doc__); sys.exit(2)
