@@ -9984,3 +9984,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/Y3/Sheaf.RingTheory.TorKernelBoundaryConstructionExactRight (stage 3; reviewer PASS; first push; landing 20261012T225340-L-1816544 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:57 L: returned deliver/T2/Sheaf.RingTheory.NagataOfCompleteLocal (reviewer RETURN: (reviewer X-e60d0, head e60d03a79) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.RingTheory.NagataOfC)
 - 22:59 L: returned deliver/P2/Sheaf.Paper.FiniteStructureAlgebraOperationsLift (reviewer RETURN: (reviewer X-aa844, head aa844457d) G1 / brief point 2 and reader gate: the promised coordinated repair is absent. Only F)
+- 23:00 L: returned deliver/H4/Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts (reviewer RETURN: (reviewer X-7836e, head 7836e9fa0) D1: `derivedTensorRight_preservesCofan` is logically equivalent to the target `Preser)
