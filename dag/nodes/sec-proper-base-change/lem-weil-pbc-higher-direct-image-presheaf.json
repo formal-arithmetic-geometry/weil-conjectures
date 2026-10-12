@@ -32,123 +32,70 @@
  ],
  "proof": [
   {
-   "text": "(Injective resolution; $R^pf_*\\mathcal F$ as the cohomology of $f_*\\mathcal I^\\bullet$.) $\\Mod(\\mathcal O_X)$ has enough injectives [lem-weil-pbc-scheme-modules-enough-injectives], so $\\mathcal F$ has an injective resolution $s:\\mathcal F\\to\\mathcal I^\\bullet$ with $\\mathcal I^q=0$ for $q<0$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (1). The direct image $f_*:\\Mod(\\mathcal O_X)\\to\\Mod(\\mathcal O_Y)$, $(f_*\\mathcal G)(V)=\\mathcal G(f^{-1}V)$ with $\\mathcal O_Y(V)$ acting through $f^\\sharp$ [def-weil-pbc-module-cohomology-fmap], is additive and left exact, since kernels and finite direct sums of modules are computed sectionwise [def-weil-sheaf-of-modules-category] and $f_*$ is sectionwise the identity on $\\mathcal G(f^{-1}V)$. $R^pf_*$ is its $p$-th right derived functor [pqf-def-cohomology], so there is an isomorphism $\\iota^p_{\\mathcal I}:R^pf_*\\mathcal F\\xrightarrow{\\sim}\\mathcal H^p(f_*\\mathcal I^\\bullet)$, the $p$-th cohomology of the complex $f_*\\mathcal I^0\\to f_*\\mathcal I^1\\to\\cdots$ in the abelian category $\\Mod(\\mathcal O_Y)$, compatible with the maps induced by morphisms of resolutions [lem-weil-pbc-derived-functor-map-via-lift]. For $p=0$, $f_*(s)$ induces an isomorphism $f_*\\mathcal F\\xrightarrow{\\sim}\\mathcal H^0(f_*\\mathcal I^\\bullet)$ [lem-weil-pbc-left-exact-injective-resolution-degree-zero] (2), whence $R^0f_*\\mathcal F\\cong f_*\\mathcal F$.",
+   "text": "Use the existing canonical sectionCohomologyComparison. Its first factor is the inverse of the exact-sheafification homology comparison. Its second factor is homology applied to the sheafification counit on the complex. The counit is invertible degreewise, hence is an isomorphism of complexes and remains invertible on homology. Compose with the inverse of isoRightDerivedObj to prove clause (1).",
    "uses": [
-    "lem-weil-pbc-scheme-modules-enough-injectives",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-weil-sheaf-of-modules-category",
-    "pqf-def-cohomology",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "lem-weil-pbc-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-derived-functor-map-via-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01E4 (lemma-describe-higher-direct-images, line 590), proof, first sentence ('R^if_*F is by definition the i-th cohomology sheaf of the complex f_*I^0 -> f_*I^1 -> ...'); Section 01DH/Theorem 01DU for the injective resolution"
-   }
+   "elementary": false
   },
   {
-   "text": "(Cohomology over an open $U\\subseteq X$ from the same resolution.) Let $U\\subseteq X$ be open (in the application $U=f^{-1}(V)$, an open subscheme). By [lem-weil-pbc-module-open-restriction-injectives], $\\mathcal F|_U\\to\\mathcal I^\\bullet|_U$ is an injective resolution in $\\Mod(\\mathcal O_U)$, with $\\mathcal I^q|_U=0$ for $q<0$. $H^p(U,\\mathcal F|_U)$ is the $p$-th right derived functor of the left exact functor $\\Gamma(U,-)$ on $\\Mod(\\mathcal O_U)$ [pqf-def-cohomology], so [lem-weil-pbc-derived-functor-map-via-lift] gives an isomorphism $\\kappa_U:H^p(U,\\mathcal F|_U)\\xrightarrow{\\sim}H^p(\\Gamma(U,\\mathcal I^\\bullet|_U))=H^p(\\mathcal I^\\bullet(U))$, using $(\\mathcal I^q|_U)(U)=\\mathcal I^q(U)$ [lem-weil-pbc-module-restriction-open-immersion-colimits]; it is $\\mathcal O_X(U)$-linear, the module structure on $H^p(U,\\mathcal F|_U)$ being the action on the global sections of an injective resolution [lem-weil-pbc-module-cohomology-fmap-basic-properties].",
+   "text": "Let c be that composite isomorphism. Given a presheaf map a to a sheaf Q, its unique factor is c^{-1} followed by the inverse adjunction hom-equivalence applied to a. Naturality of the adjunction identifies its composite with theta with a. Cancellation by c and injectivity of the hom-equivalence prove uniqueness, giving clause (2).",
    "uses": [
-    "lem-weil-pbc-module-open-restriction-injectives",
-    "pqf-def-cohomology",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-module-cohomology-fmap-basic-properties"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01E1 (lemma-cohomology-of-open, line 495) and its proof: 'F|_U -> I^bullet|_U is an injective resolution in Mod(O_U). Hence H^p(U,F|_U) is equal to H^p(Gamma(U,I^bullet|_U))'"
-   }
-  },
-  {
-   "text": "(The restriction maps are induced by restricting the resolution.) Let $U'\\subseteq U$ be opens of $X$, $j:U'\\to U$ the inclusion, and $\\mathrm{res}^U_{U'}:H^p(U,\\mathcal F|_U)\\to H^p(U',\\mathcal F|_{U'})$ the restriction of [def-weil-pbc-module-cohomology-fmap] (b) for the scheme $U$ and the $\\mathcal O_U$-module $\\mathcal G=\\mathcal F|_U$ (so $\\mathcal G|_{U'}=\\mathcal F|_{U'}$, both having sections $\\mathcal F(W)$ over $W\\subseteq U'$ [lem-weil-pbc-module-restriction-open-immersion-colimits]). Compute it with the following admissible choices in that definition: $\\mathcal J^\\bullet=\\mathcal I^\\bullet|_U$ for $\\mathcal G$ and $\\mathcal I^\\bullet|_{U'}$ for $\\mathcal G|_{U'}$ (injective resolutions by Step 2); $\\mathcal J'^\\bullet=j_*(\\mathcal I^\\bullet|_{U'})$, a complex of injective $\\mathcal O_U$-modules [lem-weil-pbc-module-open-restriction-injectives] (3), with $\\lambda=\\mathrm{id}$ (trivially a quasi-isomorphism); and $\\beta=\\rho_{\\mathcal I}:\\mathcal I^\\bullet|_U\\to j_*(\\mathcal I^\\bullet|_{U'})$, the restriction maps $\\mathcal I^q(W)\\to\\mathcal I^q(W\\cap U')$, a morphism of complexes since the differentials commute with restriction. The required identity $\\beta^0\\circ s_{\\mathcal G}=\\lambda^0\\circ j_*(s|_{U'})\\circ\\rho_{\\mathcal G}$ says $s(t)|_{W\\cap U'}=s(t|_{W\\cap U'})$ for $t\\in\\mathcal F(W)$, which holds because $s$ is a morphism of sheaves. Then $\\mu=\\Gamma(U,\\lambda)$ is the identity of $\\Gamma(U,j_*(\\mathcal I^\\bullet|_{U'}))=\\mathcal I^\\bullet(U')$, and $\\mathrm{res}^U_{U'}=H^p(\\Gamma(U,\\beta))$ is the map induced on $H^p$ by the restriction $\\mathcal I^\\bullet(U)\\to\\mathcal I^\\bullet(U')$. By independence of the choices [lem-weil-pbc-module-cohomology-fmap-functorial] (1) this is $\\mathrm{res}^U_{U'}$ for any choices; so under the isomorphisms $\\kappa_U,\\kappa_{U'}$ of Step 2, $\\mathrm{res}^U_{U'}$ is $H^p$ of the restriction maps of $\\mathcal I^\\bullet$ (Stacks' equation 01E2).",
-   "uses": [
-    "def-weil-pbc-module-cohomology-fmap",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-module-open-restriction-injectives",
-    "lem-weil-pbc-module-cohomology-fmap-functorial"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Equation 01E2 (equation-restriction-mapping, lines 527-555): the restriction H^n(V,F) -> H^n(U,F) is induced by the restriction maps Gamma(V,I^bullet) -> Gamma(U,I^bullet); the comparison with the DAG's definition [def-weil-pbc-module-cohomology-fmap] (b) is written by the agent"
-   }
-  },
-  {
-   "text": "(The presheaf of sections of $f_*\\mathcal I^\\bullet$.) By the definition of $f_*$ (Step 1), $(f_*\\mathcal I^q)(V)=\\mathcal I^q(f^{-1}V)$ with $\\mathcal O_Y(V)$ acting through $f^\\sharp$, the differentials of $f_*\\mathcal I^\\bullet$ over $V$ are those of $\\mathcal I^\\bullet$ over $f^{-1}V$, and the restriction along $V'\\subseteq V$ is the restriction $\\mathcal I^\\bullet(f^{-1}V)\\to\\mathcal I^\\bullet(f^{-1}V')$. Hence the presheaf of $\\mathcal O_Y$-modules $\\mathcal Q_p:V\\mapsto H^p((f_*\\mathcal I^\\bullet)(V))=\\Ker(\\mathcal I^p(f^{-1}V)\\to\\mathcal I^{p+1}(f^{-1}V))/\\Im(\\mathcal I^{p-1}(f^{-1}V)\\to\\mathcal I^p(f^{-1}V))$ is, via the isomorphisms $\\kappa_{f^{-1}V}$ of Step 2 (which are $\\mathcal O_Y(V)$-linear, being $\\mathcal O_X(f^{-1}V)$-linear) and Step 3 with $U=f^{-1}V$, $U'=f^{-1}V'$, isomorphic as a presheaf of $\\mathcal O_Y$-modules to $\\mathcal P_p:V\\mapsto H^p(f^{-1}V,\\mathcal F|_{f^{-1}V})$ with the restriction maps of [def-weil-pbc-module-cohomology-fmap] (b).",
-   "uses": [
-    "def-weil-pbc-module-cohomology-fmap"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01E4, proof: 'this is obviously equal to Ker(I^i(f^{-1}V) -> I^{i+1}(f^{-1}V))/Im(...) which is equal to H^i(f^{-1}(V),F)'"
-   }
-  },
-  {
-   "text": "(The cohomology sheaf of a complex of $\\mathcal O_Y$-modules is the sheafified presheaf cohomology.) Let $\\mathcal K^\\bullet=f_*\\mathcal I^\\bullet$, a complex in $\\Mod(\\mathcal O_Y)$, and $\\iota:\\Mod(\\mathcal O_Y)\\to\\mathrm{PMod}(\\mathcal O_Y)$ the inclusion. In $\\mathrm{PMod}(\\mathcal O_Y)$ cohomology is computed sectionwise, so the $p$-th cohomology presheaf of $\\iota\\mathcal K^\\bullet$ is $\\mathcal Q_p$ [lem-weil-pbc-module-presheaf-sheafification-exact] (1). Sheafification $\\#$ [def-weil-presheaf-modules-sheafification] is exact (ibid. (2)), so it commutes with cohomology of complexes [lem-weil-pbc-exact-functor-complex-cohomology]: $\\mathcal H^p(\\#\\iota\\mathcal K^\\bullet)\\cong(\\mathcal Q_p)^\\#$, compatibly with the inclusions of cycles and the projections onto cohomology. Since $\\#\\circ\\iota\\cong\\mathrm{id}$ (ibid. (3)), $\\#\\iota\\mathcal K^\\bullet\\cong\\mathcal K^\\bullet$ and $\\mathcal H^p(\\mathcal K^\\bullet)\\cong(\\mathcal Q_p)^\\#$. Composing the unit $\\mathcal Q_p\\to\\iota(\\mathcal Q_p)^\\#$ with this isomorphism gives a morphism of presheaves of $\\mathcal O_Y$-modules $\\vartheta:\\mathcal Q_p\\to\\iota\\mathcal H^p(\\mathcal K^\\bullet)$ that is universal among maps to sheaves of $\\mathcal O_Y$-modules [def-weil-pbc-sheafification]; by the compatibility with cycles it sends the class of a cocycle $z\\in\\Ker(d^p)(V)=\\Ker(d^p_V)$ (kernels being sectionwise) to the image of $z$ under the projection $\\Ker d^p\\to\\mathcal H^p(\\mathcal K^\\bullet)$.",
-   "uses": [
-    "lem-weil-pbc-module-presheaf-sheafification-exact",
     "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01E4, proof: 'By definition of the abelian category structure on O_Y-modules this cohomology sheaf is the sheaf associated to the presheaf V -> Ker(f_*I^i(V) -> f_*I^{i+1}(V))/Im(f_*I^{i-1}(V) -> f_*I^i(V))'; with Modules, Section 01AF (kernels sectionwise, cokernels sheafified)"
-   }
+   "elementary": true
   },
   {
-   "text": "(Conclusion: $R^pf_*\\mathcal F=\\mathcal P_p^\\#$.) Put $\\theta=(\\iota^p_{\\mathcal I})^{-1}\\circ\\vartheta\\circ\\kappa^{-1}:\\mathcal P_p\\to R^pf_*\\mathcal F$, with $\\kappa:\\mathcal Q_p\\cong\\mathcal P_p$ of Step 4, $\\vartheta$ of Step 5 and $\\iota^p_{\\mathcal I}$ of Step 1. It is the canonical map of the statement, and it is universal among morphisms from $\\mathcal P_p$ to sheaves of $\\mathcal O_Y$-modules because $\\vartheta$ is and $\\kappa$, $\\iota^p_{\\mathcal I}$ are isomorphisms [def-weil-pbc-sheafification]. It does not depend on the injective resolution: for a second resolution $\\mathcal F\\to\\mathcal I'^\\bullet$ and a morphism of complexes $\\varphi:\\mathcal I^\\bullet\\to\\mathcal I'^\\bullet$ over $\\mathrm{id}_{\\mathcal F}$, the maps $\\iota^p$, $\\kappa_U$ for the two resolutions differ by $H^p$ of $f_*\\varphi$, resp. $\\varphi(U)$ [lem-weil-pbc-derived-functor-map-via-lift], and $\\vartheta$, being natural in the complex, commutes with $f_*\\varphi$; so the two maps $\\theta$ agree.",
+   "text": "Expand the adjunction hom-equivalence as the unit followed by the forgetful image of c. On module stalks the unit is invertible: after forgetting scalars this is precisely TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso; forgetting to additive groups reflects isomorphisms. The other factor is the stalk image of an isomorphism. This proves clause (3).",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-derived-functor-map-via-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01E4, proof, last line ('and we win')"
-   }
-  },
-  {
-   "text": "(Stalks.) Let $\\eta:\\mathcal P_p\\to\\mathcal P_p^\\#$ be the sheafification as a presheaf of $\\mathcal O_Y$-modules [def-weil-presheaf-modules-sheafification]. Both $\\eta$ and $\\theta$ (Step 6) are universal, so there is a unique isomorphism of $\\mathcal O_Y$-modules $\\psi:\\mathcal P_p^\\#\\to R^pf_*\\mathcal F$ with $\\psi\\circ\\eta=\\theta$, and $\\theta_y=\\psi_y\\circ\\eta_y$ on stalks [def-weil-pbc-module-stalk]. The underlying map of abelian presheaves of $\\eta$ is the sheafification of the underlying abelian presheaf of $\\mathcal P_p$ [def-weil-presheaf-modules-sheafification], so $\\eta_y:(\\mathcal P_p)_y\\to(\\mathcal P_p^\\#)_y$ is bijective [lem-weil-pbc-stalk-sheafification-space]; $\\psi_y$ is bijective with inverse $(\\psi^{-1})_y$. Both are $\\mathcal O_{Y,y}$-linear, being induced by morphisms of presheaves of $\\mathcal O_Y$-modules [def-weil-pbc-module-stalk]. Hence $\\theta_y:\\varinjlim_{V\\ni y}H^p(f^{-1}V,\\mathcal F)=(\\mathcal P_p)_y\\to(R^pf_*\\mathcal F)_y$ is an isomorphism of $\\mathcal O_{Y,y}$-modules.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification",
     "def-weil-pbc-module-stalk",
-    "lem-weil-pbc-stalk-sheafification-space"
+    "lem-weil-pbc-stalk-sheafification-space",
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 007Z (lemma-stalk-sheafification: F_x = F^#_x), with Lemma 0085 (sheafification of an abelian presheaf has the sheafification of sets as underlying sheaf)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For W included in V, openModuleCohomologyRestriction is the right-derived transformation of sectionwise restriction by definition. Compute its component using InjectiveResolution.rightDerived_app_eq and cancel the resolution comparison. Evaluation of the direct-image complex on V is definitionally sections of the original resolution on the inverse image of V. ShortComplex.homologyMap_mapNatTrans expresses the resulting restriction map as the evaluation-homology comparison at V, restriction on the homology presheaf, and the inverse evaluation-homology comparison at W. Cancel the last inverse with its hom, obtaining clause (4). No separately restricted resolution or h-map choice is needed.",
+   "uses": [
+    "def-sc-open-module-cohomology",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module direct image agrees definitionally with Scheme.Modules.pushforward, a right adjoint, and so preserves finite limits. Apply Mathlib's degree-zero right-derived isomorphism instance to prove clause (5). Existing ringed-space module Grothendieck/enough-injectives instances supply all right-derived constructions.",
+   "uses": [
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-pc-ringed-spaces-derived-direct-image",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-scheme-modules-enough-injectives",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "def-weil-pbc-module-cohomology-fmap",
-  "def-weil-sheaf-of-modules-category",
-  "pqf-def-cohomology",
-  "lem-weil-pbc-derived-functor-map-via-lift",
-  "lem-weil-pbc-module-open-restriction-injectives",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "def-weil-pbc-flat-base-change-open-choices",
   "lem-weil-pbc-module-presheaf-sheafification-exact",
-  "def-weil-presheaf-modules-sheafification",
   "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "def-weil-presheaf-modules-sheafification",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-stalk-sheafification-space"
+  "lem-weil-pbc-stalk-sheafification-space",
+  "def-sc-open-module-cohomology",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 01E4 (lemma-describe-higher-direct-images, line 590) and its proof, with Lemma 01E1 (lemma-cohomology-of-open) and Equation 01E2 (equation-restriction-mapping); stalks: literature/stacks-project/sheaves.tex Lemma 007Z. Step 3 (comparison of 01E2 with the DAG's definition of restriction, def-weil-pbc-module-cohomology-fmap (b)) is written by the agent"
+  "place": "Lemma 01E4, via exact sheafification and the existing right-derived section-restriction definition; stalks via Sheaves Lemma 007Z. Lean proof by X3."
  },
  "mathlib_searches": [
   {
@@ -245,5 +192,15 @@
   "group": "R1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T085403-L-49337",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

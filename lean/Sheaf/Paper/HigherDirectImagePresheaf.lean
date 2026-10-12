@@ -7,12 +7,8 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Sheaf.Topology.OpenModuleCohomology
 public import Sheaf.Topology.PresheafModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
-import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
-import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
-import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
-import Sheaf.Paper.PQFCohomology
+import Mathlib.Topology.Sheaves.Sheafify
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 
 @[expose] public section
 
@@ -26,6 +22,10 @@ Source: literature/stacks-project/cohomology.tex, Lemma 01E4
 (blueprint: lem-weil-pbc-higher-direct-image-presheaf).
 -/
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 750000 in
+-- The explicit resolution and evaluation comparisons require substantial elaboration.
 /-- Stacks 01E4 with every datum tied. For an injective resolution I of F, the presheaf
 P_p is `sectionCohomologyPresheaf (f_*I) p`, V ↦ H^p(I(f⁻¹V)); theta is
 `sectionCohomologyTheta (f_*I) p` followed by the resolution comparison
@@ -94,6 +94,123 @@ theorem higherDirectImagePresheaf {X Y : Scheme.{u}} (f : X ⟶ Y)
           (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
             (ComplexShape.up ℕ)).obj I.cocomplex) p).presheaf.map i.op) ∧
     IsIso ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).toRightDerivedZero.app F) := by
-  sorry
+  let K : CochainComplex Y.Modules ℕ :=
+    ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj I.cocomplex
+  let e : ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj F ≅
+      K.homology p :=
+    I.isoRightDerivedObj (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p
+  let A := PresheafOfModules.sheafificationAdjunction (𝟙 Y.ringCatSheaf.obj)
+  let : PreservesFiniteLimits
+      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) := by
+    change PreservesFiniteLimits (Scheme.Modules.pushforward f)
+    infer_instance
+  have hc : IsIso (Scheme.Modules.sectionCohomologyComparison K p) := by
+    unfold Scheme.Modules.sectionCohomologyComparison
+    have : IsIso ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K) := by
+      have : ∀ n, IsIso
+          (((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K).f n) := by
+        intro n
+        change IsIso (A.counit.app (K.X n))
+        dsimp [A]
+        infer_instance
+      exact HomologicalComplex.Hom.isIso_of_components _
+    apply IsIso.comp_isIso'
+    · infer_instance
+    · change IsIso ((HomologicalComplex.homologyFunctor Y.Modules
+        (ComplexShape.up ℕ) p).map
+          ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K))
+      exact (HomologicalComplex.homologyFunctor Y.Modules (ComplexShape.up ℕ) p).map_isIso
+        ((A.counit.mapHomologicalComplex (ComplexShape.up ℕ)).app K)
+  refine ⟨?_, ?_, ?_, ?_, by infer_instance⟩
+  · change IsIso (Scheme.Modules.sectionCohomologyComparison K p ≫ e.inv)
+    infer_instance
+  · change ∀ (Q : Y.Modules)
+        (a : Scheme.Modules.sectionCohomologyPresheaf K p ⟶
+          (SheafOfModules.forget Y.ringCatSheaf).obj Q),
+      ∃! b : ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p).obj F ⟶ Q,
+        Scheme.Modules.sectionCohomologyTheta K p ≫
+          (SheafOfModules.forget Y.ringCatSheaf).map (e.inv ≫ b) = a
+    intro Q a
+    let c := Scheme.Modules.sectionCohomologyComparison K p ≫ e.inv
+    have : IsIso c := by dsimp [c]; infer_instance
+    refine ⟨inv c ≫ (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).symm a, ?_, ?_⟩
+    · change A.homEquiv _ _ (Scheme.Modules.sectionCohomologyComparison K p) ≫
+        (SheafOfModules.forget Y.ringCatSheaf ⋙
+          PresheafOfModules.restrictScalars (𝟙 Y.ringCatSheaf.obj)).map
+            (e.inv ≫ (inv c ≫
+              (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).symm a)) = a
+      rw [← A.homEquiv_naturality_right]
+      change A.homEquiv _ _ (c ≫ inv c ≫
+        (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).symm a) = a
+      simpa only [IsIso.hom_inv_id_assoc] using
+        (A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).apply_symm_apply a
+    · intro b hb
+      apply (cancel_epi c).mp
+      apply (A.homEquiv _ _).injective
+      have hb' : A.homEquiv _ _ (c ≫ b) = a := by
+        rw [show c ≫ b = Scheme.Modules.sectionCohomologyComparison K p ≫
+            (e.inv ≫ b) by simp [c]]
+        rw [A.homEquiv_naturality_right]
+        exact hb
+      rw [hb']
+      simpa only [IsIso.hom_inv_id_assoc] using
+        ((A.homEquiv (Scheme.Modules.sectionCohomologyPresheaf K p) Q).apply_symm_apply a).symm
+  · change ∀ y : Y, IsIso
+      ((PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y).map
+        (Scheme.Modules.sectionCohomologyTheta K p ≫
+          (SheafOfModules.forget Y.ringCatSheaf).map e.inv))
+    intro y
+    let S := PresheafOfModules.moduleStalkFunctor Y.ringCatSheaf.obj y
+    have hu : IsIso (S.map (A.unit.app
+        (Scheme.Modules.sectionCohomologyPresheaf K p))) := by
+      rw [← isIso_iff_of_reflects_iso _ (forget₂ _ AddCommGrpCat.{u})]
+      change IsIso ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} y).map
+        ((PresheafOfModules.toPresheaf Y.ringCatSheaf.obj).map
+          (A.unit.app (Scheme.Modules.sectionCohomologyPresheaf K p))))
+      simp only [A, PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app]
+      exact TopCat.Presheaf.stalkFunctor_map_unit_toSheafify_isIso y _ _
+    change IsIso (S.map (A.homEquiv _ _
+      (Scheme.Modules.sectionCohomologyComparison K p) ≫
+        (SheafOfModules.forget Y.ringCatSheaf ⋙
+          PresheafOfModules.restrictScalars (𝟙 Y.ringCatSheaf.obj)).map e.inv))
+    rw [← A.homEquiv_naturality_right, Adjunction.homEquiv_unit, S.map_comp]
+    infer_instance
+  · intro V W i
+    let α : RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V) ⟶
+        RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ W) :=
+      Functor.whiskerLeft (SheafOfModules.forget (moduleRings X.toRingedSpace) ⋙
+        PresheafOfModules.toPresheaf (moduleRings X.toRingedSpace).obj)
+          ((evaluation X.Opensᵒᵖ AddCommGrpCat.{u}).map
+            (homOfLE (f.preimage_mono (leOfHom i))).op)
+    let L := ((SheafOfModules.forget Y.ringCatSheaf).mapHomologicalComplex
+      (ComplexShape.up ℕ)).obj K
+    let EV := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
+      (evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op V)
+    let EW := PresheafOfModules.toPresheaf Y.ringCatSheaf.obj ⋙
+      (evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).obj (op W)
+    let τ : EV ⟶ EW := Functor.whiskerLeft
+      (PresheafOfModules.toPresheaf Y.ringCatSheaf.obj)
+        ((evaluation Y.Opensᵒᵖ AddCommGrpCat.{u}).map i.op)
+    let eV := I.isoRightDerivedObj
+      (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ V)) p
+    let eW := I.isoRightDerivedObj
+      (RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ W)) p
+    change (NatTrans.rightDerived α p).app F ≫
+      (eW.hom ≫ ((L.sc p).mapHomologyIso EW).hom) =
+        eV.hom ≫ ((L.sc p).mapHomologyIso EV).hom ≫ τ.app (L.sc p).homology
+    rw [I.rightDerived_app_eq α p]
+    change (eV.hom ≫
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) p).map
+        ((NatTrans.mapHomologicalComplex α _).app I.cocomplex) ≫ eW.inv) ≫
+          (eW.hom ≫ ((L.sc p).mapHomologyIso EW).hom) = _
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    rw [cancel_epi]
+    change ShortComplex.homologyMap ((L.sc p).mapNatTrans τ) ≫
+      ((L.sc p).mapHomologyIso EW).hom =
+        ((L.sc p).mapHomologyIso EV).hom ≫ τ.app (L.sc p).homology
+    have h := congrArg (fun t ↦ t ≫ ((L.sc p).mapHomologyIso EW).hom)
+      ((L.sc p).homologyMap_mapNatTrans τ)
+    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using h
 
 end AlgebraicGeometry
