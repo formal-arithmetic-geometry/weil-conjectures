@@ -18,69 +18,32 @@
  ],
  "proof": [
   {
-   "text": "Give G its uniquely determined Z/n-module structure, lifting the finite ring to the coefficient universe. Represent each closed-fibre class by a constructible Z/n-module sheaf C mapping to G. Use constructible filtered colimits, exact inverse image, preservation of colimits by the coefficient forgetful functor, and cohomology continuity. This construction needs no comparison theorem.",
-   "uses": [
-    "lem-weil-pbc-module-sheaf-colimit-constructible",
-    "lem-weil-pbc-constructible-restriction-class",
-    "lem-weil-pbc-constant-module-sheaves-forget-colimits",
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-etale-module-pullback-forget-naturality"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Embed C into a finite sum of finite pushforwards of finite constant Z/n-modules (09Z7). Finite exchange and finite-pushforward cohomology identify each closed-fibre component class with a finite constant class on the finite cover. Kill each by 09ZD. Push forward the monic unit of the finite surjective killing cover; the edge/unit compatibility shows that the component class dies. Taking the finite sum and composing with the embedding gives a monomorphism C to C-prime killing the represented class.",
-   "uses": [
-    "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
-    "lemma-weil-pbc-finite-exchange",
-    "lem-weil-pbc-finite-pushforward-cohomology",
-    "lem-weil-pbc-integral-cover-kills-constant-cohomology",
-    "lem-weil-pbc-finite-surjective-unit-mono",
-    "lem-weil-pbc-finite-pushforward-unit-edge-compatibility"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Push out C to C-prime along C to G. Pushouts of monomorphisms are monic in the abelian category of Z/n-module sheaves. The pushout identity and functoriality of inverse image and H show that the original class dies. All coefficients remain Z/n-modules, including the cokernel. The same construction for I=0 effaces source classes.",
-   "uses": [
-    "lem-weil-pbc-abelian-pushout-mono",
-    "lem-weil-pbc-cohomology-pullback-functorial"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Induct simultaneously on q for all Z/n-module sheaves, proving bijectivity as an auxiliary claim. Degree zero follows from the finite-connected-intersection criterion and henselian connectedness, transported through the degree-zero pullback comparison. In the successor degree, source effacement and the long exact sequence prove injectivity using bijectivity in the previous degree. Closed-fibre effacement and the same sequence lift a fibre class from the cokernel in the previous degree, proving surjectivity. Naturality of the boundary maps identifies the lift. Retain only surjectivity and forget the module structure. Neither effacement nor comparison from Gabber.lean is used. For n=1 the coefficient sheaf is zero; q=0 and empty spectra are included.",
+   "text": "Identify the quotient immersion image with V(I). Apply henselian Stein connectedness and the finite-connected-intersection criterion to obtain bijective abelian global sections; conjugate by the degree-zero section/cohomology identifications. This is the degree-zero proof already in Gabber.lean, reused without a cyclic import.",
    "uses": [
     "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
     "lem-weil-pbc-cohomology-pullback-degree-zero",
-    "lem-weil-pbc-cohomology-pullback-functorial",
     "lemma-weil-pbc-stein-connectedness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on the degree, uniformly for sheaves killed by the fixed n, applying the finite-coefficient successor step to the preceding-degree bijectivity hypothesis. Retain surjectivity.",
+   "uses": [
+    "lem-weil-pbc-henselian-bounded-abelian-comparison-step"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaf-colimit-constructible",
-  "lem-weil-pbc-constructible-restriction-class",
-  "lem-weil-pbc-constant-module-sheaves-forget-colimits",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-etale-module-pullback-forget-naturality",
-  "lem-weil-pbc-constructible-module-finite-pushforward-embedding",
-  "lemma-weil-pbc-finite-exchange",
-  "lem-weil-pbc-finite-pushforward-cohomology",
-  "lem-weil-pbc-integral-cover-kills-constant-cohomology",
-  "lem-weil-pbc-finite-surjective-unit-mono",
-  "lem-weil-pbc-finite-pushforward-unit-edge-compatibility",
-  "lem-weil-pbc-abelian-pushout-mono",
-  "lem-weil-pbc-cohomology-pullback-functorial",
   "lem-weil-pbc-etale-abelian-h0-finite-connected-criterion",
   "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "lemma-weil-pbc-stein-connectedness"
+  "lemma-weil-pbc-stein-connectedness",
+  "lem-weil-pbc-henselian-bounded-abelian-comparison-step"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "Stacks Project",
-  "place": "Tags 09ZE, 09ZH and 09ZI, proofs; finite Z/n coefficient case"
+  "place": "Tag 09ZH degree-zero argument; induction using the finite Z/n coefficient successor step from Tags 09ZE and 09ZI"
  },
  "mathlib_searches": [
   {
@@ -230,11 +193,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0ade0",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261012T194127-L-460521",
+  "landing": "20261012T211618-L-1058610",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered proofs, signatures, imports, node records, retirement change record and report against the library, unit route and cited sources; compilation and axiom checks pass."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
