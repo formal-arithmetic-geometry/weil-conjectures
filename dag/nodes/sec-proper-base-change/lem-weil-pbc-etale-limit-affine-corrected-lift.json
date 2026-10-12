@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-etale-limit-affine-corrected-lift",
+ "kind": "statement",
+ "title": "etale limit affine corrected lift",
+ "statement": "Let I be a nonempty directed preorder, D : Iᵒᵖ → Scheme a diagram of affine qcqs schemes with affine transitions, and c a limit cone. Let F_i be abelian sheaves on the small etale sites of D_i, with inverse-image transition maps phi satisfying the identity and composition laws. Let G_i be their pullbacks along c.pi_i, with specified isomorphisms eG commuting with transitions, and let L be a colimit cocone for G. For every n ≥ 0 there is a compatible coefficient system R with limit pullback diagram T, colimit K, and additive connecting maps delta_i : H^n(R_i) → H^(n+1)(F_i) commuting with stage transitions. For every x in H^(n+1)(F_i) with zero limit image, there is a later stage j, an arrow f : i → j, and z in H^n(R_j) with zero limit image such that delta_j(z) is the f-transition of x. Conventions: schemes [def-pc-scheme, def-weil-pbc-scheme-conventions]; abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves]; inverse images [def-weil-pbc-inverse-image]; cohomology and pullback maps [def-weil-pbc-etale-cohomology, def-weil-pbc-cohomology-pullback]; diagrams, cones and colimits [def-weil-pbc-category-colimit].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/09YP",
+  "place": "Dimension-shifting proof of eventual vanishing"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Apply the exact-ladder theorem to obtain E, R, their limit diagrams and colimits, the degree-n comparison diagram for E, and the connecting maps and exact comparison squares. Lift x by surjectivity of the stage connecting map to z0. Its limit image lies in ker beta, hence equals alpha_0(w) for some w by limit exactness.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-affine-exact-ladder"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply etale_limit_cohomology_class_descent to the E system in degree n to represent w by a class v at stage k. This is existence in a smaller degree, not eventual-zero detection.",
+   "uses": [
+    "lem-weil-pbc-etale-limit-cohomology-class-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a common stage j above i and k, transport v and z0, and subtract alpha_j(v) from the R class. Cocone naturality and the alpha comparison square show that its limit image is zero. Connecting naturality and delta alpha=0 show that its connecting image is the transition of x. Directedness is supplied by IsFiltered.max and its two arrows.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-limit-affine-exact-ladder",
+  "lem-weil-pbc-etale-limit-cohomology-class-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/09YP",
+  "place": "Lean implementation: exact-ladder elimination, degree-n class descent, common-stage transport and subtraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine etale cohomology filtered colimit eventual zero",
+   "date": "2026-10-12",
+   "results": "No exact match",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "eventual vanishing cohomology filtered colimit sites",
+   "date": "2026-10-12",
+   "results": "No exact arbitrary-sheaf match",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology colimit filtered etale",
+   "date": "2026-10-12",
+   "results": "No exact match",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitAffineEventualZero",
+  "date": "2026-10-12",
+  "group": "H2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-limit-affine-eventual-zero",
+   "place": "Proof decomposition for the affine eventual-zero argument",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitAffineCorrectedLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitAffineCorrectedLift.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_affine_corrected_lift",
+  "statement": "theorem etale_limit_affine_corrected_lift\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)]\n    [∀ i : Iᵒᵖ, IsAffine (D.obj i)]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n    (L : Cocone G) (hL : IsColimit L)\n    (n : ℕ) :\n    ∃ (R : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (ρ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (R i) ⟶ R j)\n    (_hidentityR : ∀ i : I, ρ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (R i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (R i))\n    (_hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      ρ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (R i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (ρ f) ≫ ρ g)\n    (T : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eT : ∀ i : I, T.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (R i))\n    (_hT : ∀ (i j : I) (f : i ⟶ j), T.map f =\n      (eT i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (R i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (ρ f) ≫ (eT j).inv)\n    (K : Cocone T) (_hK : IsColimit K)\n    (δ : ∀ k : I, Sheaf.H (R k) n →+ Sheaf.H (F k) (n + 1)),\n      (∀ (j k : I) (g : j ⟶ k) (z : Sheaf.H (R j) n),\n        δ k (Sheaf.H.map (ρ g) n (cohomologyMap (D.map g.op) (R j) n z)) =\n          Sheaf.H.map (φ g) (n + 1)\n            (cohomologyMap (D.map g.op) (F j) (n + 1) (δ j z))) ∧\n      (∀ (i : I) (x : Sheaf.H (F i) (n + 1)),\n        Sheaf.H.map ((eG i).inv ≫ L.ι.app i) (n + 1)\n          (cohomologyMap (c.π.app (op i)) (F i) (n + 1) x) = 0 →\n        ∃ (j : I) (f : i ⟶ j) (z : Sheaf.H (R j) n),\n          Sheaf.H.map ((eT j).inv ≫ K.ι.app j) n\n            (cohomologyMap (c.π.app (op j)) (R j) n z) = 0 ∧\n          δ j z = Sheaf.H.map (φ f) (n + 1)\n            (cohomologyMap (D.map f.op) (F i) (n + 1) x))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6e169",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135239-L-1667651",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6e169",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T135239-L-1667651",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all four Lean signatures with their nodes, the unchanged item signature with the clone, and proof dependencies with the induction; all delivered modules and direct importer Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineComparison compile cleanly; axioms are standard plus expected sorryAx."
+ }
+}

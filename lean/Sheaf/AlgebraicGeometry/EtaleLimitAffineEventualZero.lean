@@ -6,14 +6,9 @@ Authors: SHEAF group E3
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.CategoryTheory.CohomologyColimitSitesEventualVanishing
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.CategoryTheory.ColimitSites
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitAffineDegreeZeroKernel
+import Sheaf.AlgebraicGeometry.EtaleLimitAffineCorrectedLift
 
 /-! # EtaleLimitAffineEventualZero
 
@@ -29,38 +24,39 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+private theorem cohomologyMap_comp_explicit {X Y Z : Scheme.{u}}
+    (a : X ⟶ Y) (b : Y ⟶ Z) (c : X ⟶ Z) (hc : c = a ≫ b)
+    (F : Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) (p : ℕ)
+    (x : Sheaf.H F p) :
+    cohomologyMap a ((upperStar AddCommGrpCat.{u + 1} b).obj F) p
+        (cohomologyMap b F p x) =
+      Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} a b c hc).hom.app F) p
+        (cohomologyMap c F p x) := by
+  subst c
+  exact (cohomologyPullbackFunctorial a b F p).2.1 x
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The kernel half of affine-stage cohomology continuity.
 
 Source: Stacks Project, Theorem 09YQ, via Lemmas 0EYL, 04HR and 09YP,
 and the dimension-shifting argument of 0739.
 (blueprint: lem-weil-pbc-etale-limit-affine-eventual-zero).
 
-Proof: use `exists_affineEtaleSite_colimit` to obtain the strictified affine
-sites. Restriction to the affine site is a sheaf equivalence by 04HR. The right
-adjoints evaluate on the same cartesian base changes, so uniqueness of left
-adjoints gives unit-compatible inverse-image comparisons. Their composite
-units agree, giving the coherence needed to transport the coefficient system,
-G, L and its coprojections. Equivalences preserve the coefficient colimit.
-Pass to the cofinal tail above a stage. Its identity affine etale object is
-final, and its base changes are the final objects at later stages and the
-limit. Object cohomology at these final objects is global cohomology. Transport
-along the restriction and strictification equivalences preserves Ext and the
-adjunction-unit pullback maps, naturally in the coefficients. Universe lifts
-to the coefficient universe preserve these equivalences and colimits.
+Proof: Induct on the cohomological degree, generalizing the coefficient
+system, its pullback diagram, its colimit cocone, and the initial stage.
+The degree-zero kernel theorem gives the base case. In successor degree n+1,
+the corrected-lift theorem supplies a cokernel coefficient system R with
+natural additive connecting maps, and a degree-n class z at a later stage j.
+The limit image of z is zero and its connecting image is the transition of x.
+The induction hypothesis for R kills z after a transition j → k. Naturality
+of the connecting maps then kills the successive transitions of x.
+Cohomology pullback naturality, its composition comparison, and the supplied
+coefficient composition law identify these successive transitions with the
+single transition i → k. This gives the required witness.
 
-Use the finite-stage kernel half of the connecting-ladder argument (09YP,
-0739). Degree zero is detection of zero in the filtered colimit of sections.
-In successor degree the stage long exact sequence lifts the class to the
-preceding cohomology of the cokernel system. Its limit image comes from the
-injective system because the original limit class is zero. Descend this
-injective-system class using existence in the preceding degree. At a common
-later stage, the difference of the two preceding-degree classes is zero by
-inductive detection of zero. The stage connecting map then kills the original
-class. This uses existence and detection only in a smaller degree.
-
-Apply `cohomology_colimit_sites_eventual_vanishing` at this
-final object. The unit-compatible comparisons identify its legs with the
-cohomology maps displayed here. Cofinality of the tail gives the assertion on I.
+The geometric base case and exact-ladder construction remain separate named
+theorems. Corrected lifting uses finite-stage class descent only in degree n;
+it does not invoke eventual detection of zero in that degree.
 
 Edge cases: the index is nonempty; an empty scheme has zero cohomology; degree
 zero is the section assertion. For a singleton system the assertion is
@@ -96,6 +92,29 @@ theorem etale_limit_affine_eventual_zero
     (hx : Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p
       (cohomologyMap (c.π.app (op i)) (F i) p x) = 0) :
     ∃ (j : I) (f : i ⟶ j),
-      Sheaf.H.map (φ f) p (cohomologyMap (D.map f.op) (F i) p x) = 0 := by sorry
+      Sheaf.H.map (φ f) p (cohomologyMap (D.map f.op) (F i) p x) = 0 := by
+  induction p generalizing F φ G L i with
+  | zero =>
+    exact etale_limit_affine_degree_zero_kernel
+      D c hc F φ hidentity hcomposition G eG hG L hL i x hx
+  | succ n ih =>
+    obtain ⟨R, ρ, hidR, hcompR, T, eT, hT, K, hK, δ, hδ, hlift⟩ :=
+      etale_limit_affine_corrected_lift
+        D c hc F φ hidentity hcomposition G eG hG L hL n
+    obtain ⟨j, f, z, hz, hzx⟩ := hlift i x hx
+    obtain ⟨k, g, hg⟩ := ih R ρ hidR hcompR T eT hT K hK j z hz
+    refine ⟨k, f ≫ g, ?_⟩
+    have hzero :
+        Sheaf.H.map (φ g) (n + 1)
+          (cohomologyMap (D.map g.op) (F j) (n + 1)
+            (Sheaf.H.map (φ f) (n + 1)
+              (cohomologyMap (D.map f.op) (F i) (n + 1) x))) = 0 := by
+      rw [← hzx, ← hδ, hg, map_zero]
+    rw [cohomologyMap_map, cohomologyMap_comp_explicit (D.map g.op)
+      (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)] at hzero
+    rw [hcomposition]
+    simp only [Sheaf.H.map_comp_apply]
+    convert hzero using 1
+    rfl
 
 end AlgebraicGeometry.Etale
