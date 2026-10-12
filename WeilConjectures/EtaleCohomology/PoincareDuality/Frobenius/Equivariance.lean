@@ -46,7 +46,9 @@ section Equivariance
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y}
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
+  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
+omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 /-- Blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
 
 **The derived Poincaré pairing is a morphism of Weil objects.** Let `φ` be a Weil datum on `K`,
@@ -71,6 +73,7 @@ theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h) (γ : TateOrient
       (leftDerivedUpperStarUnitIso _ h).hom (γ.poincarePairing K) :=
   Etale.isWeilPairing_poincarePairing sq γ.dualizingComplexIso φ τ ψ hψ hTr
 
+omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 /-- Blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
 
 **Frobenius equivariance of the degreewise pairing**, in the form
@@ -102,6 +105,7 @@ theorem degreewisePoincarePairing_frobeniusOperator (sq : IsPullback g a a h)
     (isWeilPairing_poincarePairing sq γ φ τ ψ hψ hTr).degreewisePairing_frobeniusOperator,
     frobeniusOperator_shiftWeilDatum_comp_shiftFunctorZero']
 
+omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
 /-- Blueprint `sk-thm-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
 
 **Frobenius invariance of the degreewise pairing**: `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = ⟨x, y⟩_i`,

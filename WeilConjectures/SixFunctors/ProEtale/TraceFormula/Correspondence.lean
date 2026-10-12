@@ -857,7 +857,7 @@ on a geometric scheme `X`, whose ordinary leg `c₂` is proper: the composite
 ```
 of the unit of `c₂^* ⊣ Rc₂_*`, the proper identification `Rc₂_* = Rc₂_!` and the counit of
 `Rc₁_! ⊣ c₁^!`, acting on compactly supported cohomology `RΓ_c(X, K) = Ra_{X!} K`
-(blueprint: `sk-d-operator`). -/
+(blueprint: `sk-d-operator`, `def-trf-global-operator`). -/
 noncomputable def globalOperator (G : GeometricOperations A s)
     (c : Correspondence aX aX K K) (hK : G.ctf X K) [IsGeometric aX] [IsGeometric c.str]
     [HasCompactification aX] [IsProper c.snd] [HasCompactification c.str] :
