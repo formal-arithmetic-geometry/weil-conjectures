@@ -1,162 +1,130 @@
 {
-  "id": "lem-weil-pbc-zariski-etale-pushed-resolution",
-  "kind": "statement",
-  "title": "Local vanishing gives the pushed injective-resolution augmentation as a quasi-isomorphism",
-  "statement": "Let X be a scheme [def-pc-scheme], i:X.Opens -> X.Etale a continuous functor whose underlying scheme functor is open restriction [def-sc-zariski-site, def-weil-pbc-etale-site, def-weil-pbc-sites-and-cohomology]. Use abelian sheaves with the coefficient universe of X, assume sheafification on both sites and HasExt in an arbitrary common Ext universe, and assume abelian sheafPullback i additive. Let F be an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves]. Suppose for q>0 the zero endomorphism of U -> H^q(i(U),F) is locally injective [lem-weil-pbc-site-sheafification-iso-locally-bijective]. Then (1) abelian sheafPullback i preserves finite limits; (2) for every injective resolution I of F [def-sp-injective-resolutions], the fixed augmentation single(i_*F) -> i_*I, obtained from the inverse single-complex functor comparison followed by i_*(I.ι), is a quasi-isomorphism. The assertion constructs no replacement complex and makes no choice of a comparison map.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 072W and 0733(1), direct injective-resolution proof; etale-cohomology.tex Tag 09AX; sites.tex Tags 00X5 and 00X6; extension by zero as in sites-modules.tex Tag 03DJ."
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-sc-zariski-site",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
-  ],
-  "proof": [
-    {
-      "text": "Put W=i(top). Applying the forgetful equality to U -> top identifies its underlying map with the open immersion X|U -> X. Thus i factors through the localized etale site over W as the usual Zariski inclusion for the underlying scheme W.left=X. The latter inverse image is exact. Direct image is restriction to W followed by this usual direct image, so its left adjoint is usual inverse image followed by extension by zero along the localized-site projection. Extension by zero is exact, so uniqueness of left adjoints gives finite-limit preservation for the specified abelian sheafPullback i. The existential usual-inclusion lemma alone is not applied to this arbitrary i.",
-      "uses": [
-        "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-        "lem-weil-pbc-site-extension-by-zero-exact",
-        "def-weil-pbc-sites-and-cohomology"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Fix an injective resolution I. The free abelian sheaf on a representable represents object sections by sheafification adjunction, free-abelian adjunction and Yoneda. Apply this to I degreewise and use InjectiveResolution.extAddEquivCohomologyClass to identify the Ext cohomology presheaf naturally with the section-complex cohomology presheaf. This comparison handles the arbitrary Ext universe without assuming sheafification there: the section complex and its homology stay in the coefficient universe. Restriction maps commute with the termwise comparison.",
-      "uses": [
-        "def-weil-pbc-sites-and-cohomology",
-        "def-sp-injective-resolutions"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "The local-injectivity hypothesis on zero transfers through that natural additive comparison, and says every positive section-complex cohomology class is locally zero. The map of that presheaf to zero is locally injective; local surjectivity is automatic because its target has only the zero section, lifted by zero. Its sheafification is therefore zero by the locally-bijective sheafification criterion. Exact sheafification identifies this sheaf with homology of i_*I, as in 072W. Thus all positive homology of i_*I vanishes.",
-      "uses": [
-        "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-        "lem-weil-pbc-sheafification-exact",
-        "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Continuous direct image is a right adjoint and hence preserves the kernel of I^0 -> I^1. Its degree-zero kernel is i_*F. The specified single-complex comparison is the identity in degree zero, so the augmentation induces this kernel identification there. In positive degrees its source and target homology vanish, so its homology maps are also isomorphisms. This is exactly QuasiIso of the displayed fixed augmentation.",
-      "uses": [
-        "def-weil-pbc-sites-and-cohomology",
-        "def-sp-injective-resolutions"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "lem-weil-pbc-site-extension-by-zero-exact",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 072W and 0733(1), direct injective-resolution proof; etale-cohomology.tex Tag 09AX; sites.tex Tags 00X5 and 00X6; extension by zero as in sites-modules.tex Tag 03DJ.",
-    "note": "Resolution proof of the cited source, with universe and canonical-map bridges spelled out by S3."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "The cohomology map from direct image followed by counit is represented by the pushed injective resolution",
-      "results": "Internal Server Error; service unavailable. No absence verdict inferred.",
-      "date": "2026-10-12",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Ext is cohomology of the evaluated injective resolution natural in the coefficients and connecting homomorphisms",
-      "results": "InjectiveResolution.extAddEquivCohomologyClass and extMk supply Ext computation, but not the canonical object-cohomology comparison.",
-      "date": "2026-10-12",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg cohomologyPresheaf|InjectiveResolution|leray|mapExt in Mathlib and lean/WeilConjectures and lean/Sheaf",
-      "results": "SiteLerayDegenerate only gives unspecified isomorphisms. CohomologyRightDerivedSections assumes equal universes, while CohomologyDerivedEvaluation concerns a terminal object and the global H model. ZariskiEtaleInclusionMorphismOfSites constructs one inclusion, not every i in the statement. None supplies either new interface.",
-      "date": "2026-10-12",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.ZariskiEtaleCanonicalLeray",
-    "date": "2026-10-12",
-    "group": "S3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-gabber-effacement",
-      "place": "step 7 of its split (source: Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), etale-cohomology.tex line 14900, proof, second paragraph; Lemma 09ZD (label lemma-integral-cover-trivial-cohomology, line 14467) part (2)); intermediary for lem-weil-pbc-gabber-strict-henselian-zariski-comparison (steps 1, 2, 4 and 5)",
-      "via": [
-        "lem-weil-pbc-zariski-etale-canonical-leray",
-        "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
-        "lem-weil-pbc-gabber-criterion",
-        "lem-weil-pbc-gabber-absolutely-algebraically-closed",
-        "lem-weil-pbc-integral-cover-trivial-cohomology",
-        "lem-weil-pbc-integral-cover-kills-constant-cohomology"
-      ]
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.ZariskiEtalePushedResolution",
-    "file": "lean/Sheaf/Paper/ZariskiEtalePushedResolution.lean",
-    "declaration": "zariski_etale_pushed_resolution",
-    "statement": "theorem zariski_etale_pushed_resolution\n    {X : Scheme.{u + 1}}\n    (i : X.Opens ⥤ X.Etale)\n    (hi_inclusion : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier)\n      X.smallEtaleTopology)\n    [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}]\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [HasExt\n      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1})]\n    [HasExt (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    [(sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hvan : ∀ q : ℕ, 0 < q →\n      Presheaf.IsLocallyInjective (Opens.grothendieckTopology X.carrier)\n        (0 : i.op ⋙ Sheaf.cohomologyPresheaf F q ⟶\n          i.op ⋙ Sheaf.cohomologyPresheaf F q)) :\n    PreservesFiniteLimits (sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology) ∧\n    ∀ (I : InjectiveResolution F),\n      QuasiIso\n        ((HomologicalComplex.singleMapHomologicalComplex\n          (i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology)\n          (ComplexShape.up ℕ) 0).inv.app F ≫\n          ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex\n              (ComplexShape.up ℕ)).map I.ι)",
-    "branch": "sheaf-dag",
-    "by": "S3",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "S3",
-    "result": "pass",
-    "landing": "20261012T110318-L-621602",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "S3",
-    "result": "pass",
-    "landing": "20261012T110318-L-621602",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ "id": "lem-weil-pbc-zariski-etale-pushed-resolution",
+ "kind": "statement",
+ "title": "Local vanishing gives the pushed injective-resolution augmentation as a quasi-isomorphism",
+ "statement": "Let X be a scheme [def-pc-scheme], i:X.Opens -> X.Etale a continuous functor whose underlying scheme functor is open restriction [def-sc-zariski-site, def-weil-pbc-etale-site, def-weil-pbc-sites-and-cohomology]. Use abelian sheaves with the coefficient universe of X, assume sheafification on both sites and HasExt in an arbitrary common Ext universe, and assume abelian sheafPullback i additive. Let F be an abelian etale sheaf [def-weil-pbc-abelian-etale-sheaves]. Suppose for q>0 the zero endomorphism of U -> H^q(i(U),F) is locally injective [lem-weil-pbc-site-sheafification-iso-locally-bijective]. Then (1) abelian sheafPullback i preserves finite limits; (2) for every injective resolution I of F [def-sp-injective-resolutions], the fixed augmentation single(i_*F) -> i_*I, obtained from the inverse single-complex functor comparison followed by i_*(I.ι), is a quasi-isomorphism. The assertion constructs no replacement complex and makes no choice of a comparison map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 072W and 0733(1), direct injective-resolution proof; etale-cohomology.tex Tag 09AX; sites.tex Tags 00X5 and 00X6; extension by zero as in sites-modules.tex Tag 03DJ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-limit component to i and the quasi-isomorphism component to i,F and the local vanishing hypothesis; combine the two conclusions with And.intro.",
+   "uses": [
+    "lem-weil-pbc-zariski-etale-pushed-resolution-finite-limits",
+    "lem-weil-pbc-zariski-etale-pushed-resolution-quasi-iso"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zariski-etale-pushed-resolution-finite-limits",
+  "lem-weil-pbc-zariski-etale-pushed-resolution-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 072W and 0733(1), direct injective-resolution proof; etale-cohomology.tex Tag 09AX; sites.tex Tags 00X5 and 00X6; extension by zero as in sites-modules.tex Tag 03DJ.",
+  "note": "S1 decomposition into the two strict conjuncts; one upper hole replaced by two lower holes, not a net proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cohomology map from direct image followed by counit is represented by the pushed injective resolution",
+   "results": "Internal Server Error; service unavailable. No absence verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext is cohomology of the evaluated injective resolution natural in the coefficients and connecting homomorphisms",
+   "results": "InjectiveResolution.extAddEquivCohomologyClass and extMk supply Ext computation, but not the canonical object-cohomology comparison.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg cohomologyPresheaf|InjectiveResolution|leray|mapExt in Mathlib and lean/WeilConjectures and lean/Sheaf",
+   "results": "SiteLerayDegenerate only gives unspecified isomorphisms. CohomologyRightDerivedSections assumes equal universes, while CohomologyDerivedEvaluation concerns a terminal object and the global H model. ZariskiEtaleInclusionMorphismOfSites constructs one inclusion, not every i in the statement. None supplies either new interface.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZariskiEtaleCanonicalLeray",
+  "date": "2026-10-12",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "step 7 of its split (source: Lemma 09ZE (label lemma-efface-cohomology-on-closed-by-finite-cover), etale-cohomology.tex line 14900, proof, second paragraph; Lemma 09ZD (label lemma-integral-cover-trivial-cohomology, line 14467) part (2)); intermediary for lem-weil-pbc-gabber-strict-henselian-zariski-comparison (steps 1, 2, 4 and 5)",
+   "via": [
+    "lem-weil-pbc-zariski-etale-canonical-leray",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZariskiEtalePushedResolution",
+  "file": "lean/Sheaf/Paper/ZariskiEtalePushedResolution.lean",
+  "declaration": "zariski_etale_pushed_resolution",
+  "statement": "theorem zariski_etale_pushed_resolution\n    {X : Scheme.{u + 1}}\n    (i : X.Opens ⥤ X.Etale)\n    (hi_inclusion : i ⋙ Scheme.Etale.forget X = X.restrictFunctor)\n    (hi : i.IsContinuous (Opens.grothendieckTopology X.carrier)\n      X.smallEtaleTopology)\n    [HasSheafify (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1}]\n    [HasSheafify X.smallEtaleTopology AddCommGrpCat.{u + 1}]\n    [HasExt\n      (Sheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1})]\n    [HasExt (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})]\n    [(sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).Additive]\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (hvan : ∀ q : ℕ, 0 < q →\n      Presheaf.IsLocallyInjective (Opens.grothendieckTopology X.carrier)\n        (0 : i.op ⋙ Sheaf.cohomologyPresheaf F q ⟶\n          i.op ⋙ Sheaf.cohomologyPresheaf F q)) :\n    PreservesFiniteLimits (sheafPullback i AddCommGrpCat.{u + 1}\n      (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology) ∧\n    ∀ (I : InjectiveResolution F),\n      QuasiIso\n        ((HomologicalComplex.singleMapHomologicalComplex\n          (i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology)\n          (ComplexShape.up ℕ) 0).inv.app F ≫\n          ((i.sheafPushforwardContinuous AddCommGrpCat.{u + 1}\n            (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology).mapHomologicalComplex\n              (ComplexShape.up ℕ)).map I.ι)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T110318-L-621602",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T131917-L-1402366",
+  "kind": "interface"
+ }
 }

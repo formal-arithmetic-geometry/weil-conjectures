@@ -7700,3 +7700,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:16 L: returned deliver/Q3/Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise (reviewer RETURN: (reviewer X-e2fdc, head e2fdc3a93) G1/H7: In dag/nodes/sec-proper-base-change/lem-weil-pbc-filtered-colimit-algebras-ten)
 - 13:17 L: returned deliver/T1/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (reviewer RETURN: (reviewer X-da256, head da2560c9b) E1/E2 (review point 4): glued_model_chart_pullbacks remains false with := by sorry. F)
 - 13:17 L: merged deliver/R3/Sheaf.AlgebraicGeometry.AffineEtaleBaseChangeGeometry (stage 3; reviewer PASS; first push; landing 20261012T131745-L-1392371 (interface); batch 20261012T120425; modules 3; new nodes 2)
+- 13:19 L: merged deliver/S1/Sheaf.Paper.ZariskiEtalePushedResolution (stage 3; reviewer PASS; first push; landing 20261012T131917-L-1402366 (interface); batch 20261012T120425; modules 3; new nodes 2)
