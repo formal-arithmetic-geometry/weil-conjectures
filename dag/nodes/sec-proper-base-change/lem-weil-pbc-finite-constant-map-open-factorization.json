@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-finite-constant-map-open-factorization",
+ "kind": "statement",
+ "title": "Open extension of a finite constant-map stalk factorization",
+ "statement": "Let $X$ be any scheme [def-weil-pbc-scheme-conventions], $\\Lambda$ a commutative ring, and $\\varphi:F\\to G$ a monomorphism of $\\Lambda$-module sheaves on its small etale site [def-weil-pbc-etale-site]. Let $N$ be a finitely generated $\\Lambda$-module [def-weil-finitely-generated-module] and $\\alpha:N_X\\to G$ a morphism from the constant sheaf [def-constructible-constant]. Fix $x\\in X$ and the geometric point $s_x$ given by the algebraic closure of its residue field. If there is a map $l:(N_X)_{s_x}\\to F_{s_x}$ such that $l\\varphi_{s_x}=\\alpha_{s_x}$, then there exist an open $U$ containing $x$ and a morphism $\\psi:(N_X)|_U\\to F|_U$ satisfying $\\psi(\\varphi|_U)=\\alpha|_U$. Stalks are those of [def-weil-pbc-geometric-stalks]. No constancy of G, irreducibility of X, or finiteness of G is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09BH, Proposition 59.74.1 (3), generic submodule and generator-lifting paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-constructible-constant",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose finitely many generators of N. The stalk map l assigns a germ of F to each generator. Represent these germs on pointed etale neighbourhoods and take one common refinement. Refine again until their images under phi equal the images under alpha of the constant generators; these equalities hold in the stalk by the hypothesis, and filtered-colimit equality is witnessed after refinement.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "def-constructible-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The etale neighbourhood has open image U containing x. On its fibre product over U, the two pullbacks of each lifted generator have equal images in G because alpha is a global map from the constant sheaf. By monicity their pullbacks in F coincide. Sheaf descent for the surjective etale covering of U produces sections over U.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every relation between the generators has zero image in G, since alpha is linear, hence is zero in F by monicity. The descended sections therefore define a linear map from N to global sections of F restricted to U. By the constant-sheaf/global-sections adjunction and the pullback/constant comparison it defines psi. Checking on the generators proves psi followed by the restriction of phi equals the restriction of alpha. When N is zero use the zero map on all of X. Infinite relations require no further shrinking because monicity kills them all.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-maps-global-sections",
+    "def-constructible-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constant",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "proof_origin": {
+  "by": "J1 stage 3",
+  "document": "Stacks Project, with agent-written details of the indicated step",
+  "place": "Tag 09BH (3), finite generator lifting and descent paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a finitely generated constant sheaf factors through a subsheaf on an open neighborhood if it factors on a geometric stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a finitely generated constant etale module sheaf factoring through a monomorphism at a geometric stalk factors on an open neighborhood",
+   "results": [
+    "AlgebraicGeometry.exists_lift_of_germInjective_aux",
+    "AlgebraicGeometry.exists_lift_of_germInjective",
+    "Algebra.basicOpen_subset_etaleLocus_iff",
+    "AlgebraicGeometry.spread_out_of_isGermInjective'",
+    "ModuleCat.Tilde.exists_const",
+    "Algebra.basicOpen_subset_etaleLocus_iff_etale",
+    "Algebra.isOpen_etaleLocus",
+    "AlgebraicGeometry.spread_out_of_isGermInjective"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No matching etale module-sheaf result. Signatures inspected; the spreading-out results concern structure sheaves, and the constant-sheaf result is only the counit formula."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*subsheaf|subsheaf.*constant|constant.*factor|factor.*constant",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No matching etale module-sheaf result. Signatures inspected; the spreading-out results concern structure sheaves, and the constant-sheaf result is only the counit formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NoetherianConstantSubsheafGeneric",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-eight-curve-devissage",
+   "place": "Proof step 2(b), constructibility of module subsheaves: lifting and descending finite generic generators",
+   "via": [
+    "lem-weil-pbc-noetherian-constant-subsheaf-generic",
+    "lem-weil-pbc-module-generic-generators",
+    "lem-weil-pbc-module-subobject-generic-neighbourhood",
+    "lem-weil-pbc-module-subobject-generic-constancy",
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantMapOpenFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantMapOpenFactorization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_open_factorization_of_finite_constant_map",
+  "statement": "theorem exists_open_factorization_of_finite_constant_map {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G) [Mono φ] (N : ModuleCat.{u + 1} Λ) [Module.Finite Λ N] (α : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N ⟶ G) (x : X) (l : (pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) ⟶ (pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F) (hl : l ≫ (pointSmallEtale (X.algClosurePoint x)).sheafFiber.map φ = (pointSmallEtale (X.algClosurePoint x)).sheafFiber.map α) : ∃ (U : X.Opens) (_hU : x ∈ U) (ψ : (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N) ⟶ (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).obj F), ψ ≫ (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map φ = (Etale.upperStar (ModuleCat.{u + 1} Λ) U.ι).map α",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T070539-L-3472019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T070539-L-3472019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
