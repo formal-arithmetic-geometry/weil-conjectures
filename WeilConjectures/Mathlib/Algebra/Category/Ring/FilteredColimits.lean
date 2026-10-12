@@ -112,7 +112,8 @@ lemma subalgebraDesc_val (hP : ⨆ A : {A : Subalgebra ℤ R // P A}, A.1 = ⊤)
 
 /-- If the `ℤ`-subalgebras of a commutative ring `R` satisfying `P` form a nonempty
 directed poset with supremum `⊤`, then `R` is their colimit in `CommRingCat`. This is the
-categorical companion of `Subalgebra.iSupLift`. -/
+categorical companion of `Subalgebra.iSupLift`.
+(blueprint: `lem-weil-pbc-directed-subalgebra-ring-colimit`) -/
 noncomputable def isColimitSubalgebraCocone
     (hP : ⨆ A : {A : Subalgebra ℤ R // P A}, A.1 = ⊤) : IsColimit (subalgebraCocone R P) where
   desc s := ofHom (subalgebraDesc R P hP s)
