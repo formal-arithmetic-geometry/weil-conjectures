@@ -38,56 +38,18 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal I=\\mathcal I_Z\\subseteq\\mathcal O_X$ be the sheaf of ideals of the reduced induced closed subscheme structure on the closed subset $Z$ [lem-weil-pbc-reduced-induced-closed-subscheme] (1): it is a quasi-coherent sheaf of ideals, and on every affine open $U=\\operatorname{Spec}R$ of $X$ one has $\\mathcal I(U)=I$, the radical ideal with $V(I)=Z\\cap U$. Put $V(\\mathcal I)=\\{x\\in X:\\mathcal I_x\\neq\\mathcal O_{X,x}\\}$, the stalk $\\mathcal I_x$ being an ideal of $\\mathcal O_{X,x}$ [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine]. By [lem-weil-pbc-quasi-coherent-ideal-zero-set-affine], $V(\\mathcal I)\\cap U=V(\\mathcal I(U))=V(I)=Z\\cap U$ for every affine open $U$; affine opens cover $X$, so $V(\\mathcal I)=Z$. In particular $\\mathcal I_x=\\mathcal O_{X,x}$ for every $x\\notin Z$, and $\\mathcal I_x\\neq\\mathcal O_{X,x}$ for every $x\\in Z$.",
+   "text": "Take the actual Mathlib vanishing ideal K of Z. Its support is Z. The quasi-coherent ideal zero-set theorem applied to its canonical closed subscheme identifies the proper-stalk locus with this support.",
    "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
     "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YD (lemma-prepare-filter-support), proof, coherent.tex lines 2956-2979: first sentence ('Let $\\mathcal I$ be the sheaf of ideals defining the reduced induced closed subscheme structure on $Z$, Schemes Lemma 01J3')"
+    "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CE. Read online at https://stacks.math.columbia.edu/tag/01YD."
    }
   },
   {
-   "text": "For $n\\ge1$ let $\\mathcal I^n$ and $\\mathcal G'_n=\\mathcal I^n\\mathcal F\\subseteq\\mathcal F$ be as in [def-weil-pbc-coherent-formal-module] (0), and $\\mathcal G_n=\\mathcal F/\\mathcal I^n\\mathcal F$ the cokernel of the inclusion $\\iota_n:\\mathcal G'_n\\to\\mathcal F$; for $n=0$ put $\\mathcal G'_0=\\mathcal F$, $\\mathcal G_0=\\mathcal F/\\mathcal F=0$. By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (1) (applied inductively with $\\mathcal J=\\mathcal I$ and the quasi-coherent module $\\mathcal I^{n-1}$, resp. $\\mathcal F$: each $\\mathcal I^n$ is a quasi-coherent sheaf of ideals, and $\\mathcal I^n\\mathcal F$ is quasi-coherent, $\\mathcal F$ being coherent hence quasi-coherent [pqf-def-coherent]) $\\mathcal G'_n$ is a quasi-coherent sub-$\\mathcal O_X$-module of the coherent module $\\mathcal F$; since $X$ is locally Noetherian, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] (2) shows that $\\mathcal G'_n$ and $\\mathcal G_n$ are coherent.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "pqf-def-coherent",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YD (lemma-prepare-filter-support), proof, coherent.tex lines 2956-2979: 'Consider the subsheaves $\\mathcal G'_n=\\mathcal I^n\\mathcal F$ and the quotients $\\mathcal G_n=\\mathcal F/\\mathcal I^n\\mathcal F$' (coherence: section intro, 'a quasi-coherent subquotient of a coherent sheaf is coherent')"
-   }
-  },
-  {
-   "text": "For each $n$ the sequence $0\\to\\mathcal G'_n\\xrightarrow{\\iota_n}\\mathcal F\\xrightarrow{c_n}\\mathcal G_n\\to0$, $c_n$ the cokernel map, is exact. By [lem-weil-pbc-module-stalk-exact] (5) it suffices to check exactness on stalks at every $x\\in X$: $(\\iota_n)_x$ is injective by (1) of that lemma ($\\iota_n$ is injective on sections), $(c_n)_x$ is surjective with kernel $(\\iota_n)_x((\\mathcal G'_n)_x)$ by (3), and $c_n\\circ\\iota_n=0$. (For $n=0$ the sequence is $0\\to\\mathcal F\\xrightarrow{\\mathrm{id}}\\mathcal F\\to0\\to0$.)",
-   "uses": [
-    "lem-weil-pbc-module-stalk-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YD (lemma-prepare-filter-support), proof, coherent.tex lines 2956-2979: 'For each $n$ we have a short exact sequence $0\\to\\mathcal G'_n\\to\\mathcal F\\to\\mathcal G_n\\to0$'"
-   }
-  },
-  {
-   "text": "$\\operatorname{Supp}(\\mathcal G_n)\\subseteq Z$ for every $n$ [def-weil-pbc-closed-subset-proper-over-base] (2). For $n=0$, $\\mathcal G_0=0$. For $n\\ge1$ and $x\\notin Z$, step 1 gives $\\mathcal I_x=\\mathcal O_{X,x}$, so $(\\mathcal I_x)^n=\\mathcal O_{X,x}$ and, by [lem-weil-pbc-ideal-module-product-stalk] (4), $(\\mathcal G_n)_x\\cong\\mathcal F_x/(\\mathcal I_x)^n\\mathcal F_x=\\mathcal F_x/\\mathcal F_x=0$. (The source states this for $x\\in Z'\\setminus Z$; the argument holds for every $x\\notin Z$.)",
-   "uses": [
-    "def-weil-pbc-closed-subset-proper-over-base",
-    "lem-weil-pbc-ideal-module-product-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YD (lemma-prepare-filter-support), proof, coherent.tex lines 2956-2979: 'For every point $x$ of $Z'\\setminus Z$ we have $\\mathcal I_x=\\mathcal O_{X,x}$ and hence $\\mathcal G_{n,x}=0$. Thus we see that $\\operatorname{Supp}(\\mathcal G_n)\\subset Z$'"
-   }
-  },
-  {
-   "text": "Let $V=X\\setminus Z'$, an open subset; the open subscheme $V$ is Noetherian [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The restriction $\\mathcal F|_V$ is a coherent $\\mathcal O_V$-module [lem-weil-pbc-coherent-module-local-on-open-cover] (1), and $\\mathcal I|_V\\subseteq\\mathcal O_V$ is a quasi-coherent sheaf of ideals [lem-weil-pbc-module-restriction-open-immersion-colimits] (2). For $x\\in V$ the open neighbourhoods of $x$ contained in $V$ are cofinal among all open neighbourhoods of $x$, so by the definition of stalks as colimits [def-weil-pbc-module-stalk] $(\\mathcal F|_V)_x=\\mathcal F_x$, $(\\mathcal I|_V)_x=\\mathcal I_x$ and $\\mathcal O_{V,x}=\\mathcal O_{X,x}$. Hence $\\operatorname{Supp}(\\mathcal F|_V)=\\operatorname{Supp}(\\mathcal F)\\cap V=(Z\\cup Z')\\setminus Z'\\subseteq Z$, and for $x\\in Z\\cap V$ step 1 gives $(\\mathcal I|_V)_x=\\mathcal I_x\\neq\\mathcal O_{X,x}=\\mathcal O_{V,x}$; thus $\\operatorname{Supp}(\\mathcal F|_V)\\subseteq V(\\mathcal I|_V)=\\{x\\in V:(\\mathcal I|_V)_x\\neq\\mathcal O_{V,x}\\}$. By [lem-weil-pbc-coherent-support-power-ideal-kills] applied to the Noetherian scheme $V$, the coherent module $\\mathcal F|_V$ and the ideal $\\mathcal K=\\mathcal I|_V$, there is $t\\ge0$ with $(\\mathcal I|_V)^t(\\mathcal F|_V)=0$ (with $(\\mathcal I|_V)^0(\\mathcal F|_V)=\\mathcal F|_V$).",
+   "text": "On the Noetherian open V = X minus Z', restrict F and K. Coherence restricts, restriction identifies stalks, and support_comap identifies the ideal support with its preimage. Thus the support of F restricted to V lies in the proper-stalk locus of K restricted to V. The ideal-power annihilation theorem supplies an exponent t.",
    "uses": [
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "lem-weil-pbc-coherent-module-local-on-open-cover",
@@ -98,52 +60,79 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YD (lemma-prepare-filter-support), proof, coherent.tex lines 2956-2979: 'Note that $X\\setminus Z'$ is a Noetherian scheme. Hence by Lemma 01Y9 there exists an $n$ such that $\\mathcal G'_n|_{X\\setminus Z'}=\\mathcal I^n\\mathcal F|_{X\\setminus Z'}=0$'"
+    "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CE. Read online at https://stacks.math.columbia.edu/tag/01YD."
    }
   },
   {
-   "text": "$(\\mathcal I^t\\mathcal F)|_V=(\\mathcal I|_V)^t(\\mathcal F|_V)$ as submodules of $\\mathcal F|_V$: for $t=0$ both are $\\mathcal F|_V$; for $t\\ge1$, [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (3) gives $(\\mathcal J\\mathcal G)|_V=(\\mathcal J|_V)(\\mathcal G|_V)$ for every quasi-coherent ideal $\\mathcal J$ and quasi-coherent $\\mathcal G$, which applied with $\\mathcal G=\\mathcal I^{k}$ gives $(\\mathcal I^{k+1})|_V=(\\mathcal I|_V)^{k+1}$ by induction on $k$, and then with $\\mathcal J=\\mathcal I^t$, $\\mathcal G=\\mathcal F$ gives the claim. Hence $\\mathcal G'_t|_V=0$ by step 5, so $(\\mathcal G'_t)_x=(\\mathcal G'_t|_V)_x=0$ for every $x\\in V$ (stalks as in step 5) and $\\operatorname{Supp}(\\mathcal G'_t)\\subseteq X\\setminus V=Z'$.",
+   "text": "The ideal-power restriction zero comparison shows that K^t F restricts to zero on V. Set G' = K^t F and take its canonical image inclusion i into F.",
    "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "def-weil-pbc-module-stalk",
-    "def-weil-pbc-closed-subset-proper-over-base"
+    "lem-weil-pbc-ideal-power-product-restriction-zero",
+    "lem-weil-pbc-ideal-module-product-stalk"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YD (lemma-prepare-filter-support), proof, coherent.tex lines 2956-2979: 'For such an $n$ we see that $\\operatorname{Supp}(\\mathcal G'_n)\\subset Z'$'"
+    "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CE. Read online at https://stacks.math.columbia.edu/tag/01YD."
    }
   },
   {
-   "text": "Put $\\mathcal G'=\\mathcal G'_t$ and $\\mathcal G=\\mathcal G_t$: by steps 2-6, $0\\to\\mathcal G'\\to\\mathcal F\\to\\mathcal G\\to0$ is a short exact sequence of coherent $\\mathcal O_X$-modules with $\\mathcal G'\\subseteq\\mathcal F$ a coherent submodule, $\\mathcal G=\\mathcal F/\\mathcal G'$, $\\operatorname{Supp}(\\mathcal G')\\subseteq Z'$ and $\\operatorname{Supp}(\\mathcal G)\\subseteq Z$.",
-   "uses": [],
-   "elementary": true,
+   "text": "Coherence implies quasi-coherence on a locally Noetherian scheme. Every ideal power is quasi-coherent, including exponent zero (the unit sheaf). Its tensor product with F is quasi-coherent, and so is the image of multiplication. The coherent-submodule theorem gives coherence of G' and its cokernel.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01YD (lemma-prepare-filter-support), proof, coherent.tex lines 2956-2979: 'Thus setting $\\mathcal G'=\\mathcal G'_n$ and $\\mathcal G=\\mathcal G_n$ works'"
+    "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CE. Read online at https://stacks.math.columbia.edu/tag/01YD."
+   }
+  },
+  {
+   "text": "The image inclusion is monic; the abelian cokernel sequence is short exact by ShortComplex.cokernelSequence_exact. The restriction-stalk comparison makes the stalk of G' zero at every point outside Z'.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CE. Read online at https://stacks.math.columbia.edu/tag/01YD."
+   }
+  },
+  {
+   "text": "Outside Z the stalk inclusion of K is surjective, so its image ideal is top. The ideal-power quotient stalk formula identifies the cokernel stalk with F_x/F_x, hence it is a singleton. At exponent zero apply the product quotient formula directly to the identity inclusion of the unit sheaf. Package these two support bounds with coherence and short exactness.",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CE. Read online at https://stacks.math.columbia.edu/tag/01YD."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
   "lem-weil-pbc-quasi-coherent-ideal-zero-set-affine",
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "pqf-def-coherent",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-module-stalk-exact",
-  "def-weil-pbc-closed-subset-proper-over-base",
-  "lem-weil-pbc-ideal-module-product-stalk",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-coherent-module-local-on-open-cover",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "def-weil-pbc-module-stalk",
-  "lem-weil-pbc-coherent-support-power-ideal-kills"
+  "lem-weil-pbc-coherent-support-power-ideal-kills",
+  "lem-weil-pbc-ideal-power-product-restriction-zero",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
+  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01YD (label lemma-prepare-filter-support, coherent.tex line 2944), proof lines 2956-2979; with Schemes 01J3, Cohomology of Schemes 01Y9, Properties 01OW/01OZ"
+  "place": "Tag 01YD, lemma-prepare-filter-support, proof: restriction of I^n F to X minus Z'; with Schemes Tag 01I8 and Modules Tag 01CE. Read online at https://stacks.math.columbia.edu/tag/01YD."
  },
  "mathlib_searches": [
   {
@@ -222,5 +211,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T184342-L-4019500",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
