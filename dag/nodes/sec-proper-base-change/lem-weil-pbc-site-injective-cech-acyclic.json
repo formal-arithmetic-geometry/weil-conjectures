@@ -14,7 +14,7 @@
  },
  "kind": "statement",
  "title": "Injective abelian sheaves on a site have trivial higher Cech cohomology",
- "statement": "Let $\\mathcal C$ be a site and $\\mathcal I$ an injective object of $\\textit{Ab}(\\mathcal C)$ [def-weil-pbc-sites-and-cohomology]. Then for every covering $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$ of $\\mathcal C$ the Cech cohomology [def-weil-pbc-site-cech-complex] satisfies $\\check H^p(\\mathcal U,\\mathcal I)=0$ for all $p>0$ (and $\\check H^0(\\mathcal U,\\mathcal I)=\\mathcal I(U)$). (General-site version of [lem-weil-pbc-injective-sheaf-cech-acyclic], which is stated for the small etale site; its proof is the same: $\\mathcal I$ is injective in $\\textit{PAb}(\\mathcal C)$ (Lemma 03F6, sheafification being an exact left adjoint of the inclusion), and $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)=\\operatorname{Hom}_{\\textit{PAb}}(\\mathbf Z_{\\mathcal U,\\bullet},\\mathcal I)$ with $\\mathbf Z_{\\mathcal U,\\bullet}$ exact in positive degrees.)",
+ "statement": "Let C : Type u be a category with hom universe v, and let the site precoverage J have isomorphisms, composition stability, base-change stability and covering pullbacks [def-weil-pbc-sites-and-cohomology]. For every covering family indexed by T : Type (max u v), with chosen fibre products [def-weil-pbc-site-cech-complex], and every injective abelian sheaf I valued in AddCommGrpCat.{max u v}, positive Cech cohomology is zero and degree-zero Cech cohomology is isomorphic to I(U). The coefficient universe contains the objects and homs of C, as required for exact sheafification and cofree presheaves.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Lemma Tag 03AW (lemma-injective-trivial-cech) and its proof (Lemma Tag 03F6 lemma-injective-abelian-sheaf-injective-presheaf, Lemma Tag 03AU lemma-cech-cohomology-derived-presheaves, Lemma Tag 03AN lemma-cech-h0)"
@@ -25,73 +25,39 @@
  ],
  "proof": [
   {
-   "text": "Write PAb(C) for presheaves of abelian groups and let I be the given injective sheaf. The inclusion Ab(C) into PAb(C) has sheafification as an exact left adjoint: finite limits are sectionwise and sheafification preserves finite limits and colimits. Therefore an extension problem from a monomorphism of presheaves into I sheafifies to an extension problem between sheaves, which is solved by injectivity of I; composing the extension with the unit of sheafification gives an extension in presheaves. Thus I is injective in PAb(C).",
+   "text": "Exact sheafification and its adjunction transfer injectivity to the underlying presheaf. Use the natural monomorphism into Presheaf.cofree and factor the identity through it by injectivity; functoriality of the chosen Cech complex gives a retraction of complexes.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03F6 (injective sheaf is injective presheaf)"
-   }
-  },
-  {
-   "text": "Let K_p be the direct sum of the free presheaves Z_{U_t0 x_U ... x_U U_tp} over tuples of covering indices, with alternating face differential. At an object W, decompose K_p(W) by the composite phi: W -> U. The summand for phi is the free abelian group on S_phi^(p+1), where S_phi is the disjoint union of lifts W -> U_t over phi. Face maps delete one entry. If S_phi is empty the summand is zero; otherwise choosing s in S_phi gives the contracting homotopy (s0,...,sp) -> (s,s0,...,sp) in positive degrees. Hence K is exact in every positive degree as a presheaf.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemmas Tags 03AS and 03AT (free Cech complex and contracting homotopy)"
-   }
-  },
-  {
-   "text": "For every presheaf G, Yoneda identifies Hom(Z_V,G) with G(V), naturally in V and G. Hom out of a direct sum is a product, so Hom(K_p,G) is the product of G on the iterated fibre products; precomposition with a face is restriction along the corresponding projection. The resulting cochain differential is exactly the Cech differential, so Hom(K,I) is the Cech complex of I.",
-   "uses": [
+    "lem-weil-pbc-sheafification-exact",
     "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AS (Cech complex as Hom from the free complex)"
-   }
+   "elementary": false
   },
   {
-   "text": "For p>0, a cocycle s: K_p -> I vanishes on im(d_{p+1}) = ker(d_p), hence factors through B = im(d_p) included in K_{p-1}. Injectivity of I in presheaves extends B -> I to K_{p-1} -> I, whose composite with d_p is s. Every positive-degree cocycle is therefore a coboundary, and Cech H^p(U,I)=0.",
+   "text": "The cofree complex is exact at each positive degree by the insertion contraction. Map a cocycle into it, obtain a primitive, and map that primitive back through the retraction. The chain-map equations and retraction equation identify its differential with the original cocycle. ExactAt gives IsZero homology.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AW via the second paragraph of Lemma Tag 03AU"
-   }
-  },
-  {
-   "text": "In degree zero, a Cech cocycle is a section of I(U) whose restrictions to every pairwise fibre product agree. The sheaf condition identifies these compatible families with the unique section on U, giving Cech H^0(U,I)=I(U).",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-cech-cofree-exact",
     "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AN (Cech H0)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the degree-zero sheaf gluing identification.",
+   "uses": [
+    "lem-weil-pbc-site-cech-zero-cohomology"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
   "lem-weil-pbc-sheafification-exact",
-  "def-weil-pbc-site-cech-complex"
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-site-cech-cofree-exact",
+  "lem-weil-pbc-site-cech-zero-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemmas Tags 03AW, 03F6, 03AS, 03AT, 03AU and 03AN"
+  "place": "03AW, 03F6 and 03AT; cofree implementation from WeilConjectures.CategoryTheory.Sites.CechComplex and repaired prior C2 delivery"
  },
  "mathlib_searches": [
   {
@@ -165,10 +131,10 @@
   "module": "Sheaf.CategoryTheory.SiteInjectiveCechAcyclic",
   "declaration": "CategoryTheory.site_injective_cech_acyclic",
   "file": "lean/Sheaf/CategoryTheory/SiteInjectiveCechAcyclic.lean",
-  "statement": "theorem site_injective_cech_acyclic {C : Type u} [Category.{v} C] {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] {T : Type w} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom) (I : Sheaf J.toGrothendieck AddCommGrpCat.{w}) [Injective I] : (∀ p : ℕ, 0 < p → IsZero ((S.cohomologyFunctor p).obj I.obj)) ∧ Nonempty (((S.cohomologyFunctor 0).obj I.obj) ≅ I.obj.obj (op U))",
+  "statement": "theorem site_injective_cech_acyclic {C : Type u} [Category.{v} C] {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks] {T : Type (max u v)} {U : C} (f : T → C) (hom : ∀ t, f t ⟶ U) (hcover : Presieve.ofArrows f hom ∈ J U) (S : SiteCechComplex f hom) (I : Sheaf J.toGrothendieck AddCommGrpCat.{max u v}) [Injective I] : (∀ p : ℕ, 0 < p → IsZero ((S.cohomologyFunctor p).obj I.obj)) ∧ Nonempty (((S.cohomologyFunctor 0).obj I.obj) ≅ I.obj.obj (op U))",
   "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-11",
+  "by": "X3",
+  "date": "2026-10-12",
   "existing": false
  },
  "reviewed_lean": {
@@ -182,17 +148,138 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c6c63",
-  "group": "E2",
+  "reviewer": "X-aef81",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T060735-L-2906394",
+  "landing": "20261012T150959-L-2233024",
   "kind": "interface",
-  "note": "independent Codex review: Delivery files and declarations match the node statements; compilation succeeds, proofs contain no unauthorized axioms or sorry usage beyond the explicitly disputed original theorem, and the reported universe counterexample is documented.",
-  "sorry_before": [
-   "CategoryTheory.site_injective_cech_acyclic"
+  "note": "independent Codex review: Delivered modules and DAG records match; both compile cleanly, permitted axioms only, and all four direct importers compile unchanged against the corrected interface."
+ },
+ "statement_change": {
+  "date": "2026-10-12",
+  "by": "X3 stage 2",
+  "old_statement": "Let $\\mathcal C$ be a site and $\\mathcal I$ an injective object of $\\textit{Ab}(\\mathcal C)$ [def-weil-pbc-sites-and-cohomology]. Then for every covering $\\mathcal U=\\{U_t\\to U\\}_{t\\in T}$ of $\\mathcal C$ the Cech cohomology [def-weil-pbc-site-cech-complex] satisfies $\\check H^p(\\mathcal U,\\mathcal I)=0$ for all $p>0$ (and $\\check H^0(\\mathcal U,\\mathcal I)=\\mathcal I(U)$). (General-site version of [lem-weil-pbc-injective-sheaf-cech-acyclic], which is stated for the small etale site; its proof is the same: $\\mathcal I$ is injective in $\\textit{PAb}(\\mathcal C)$ (Lemma 03F6, sheafification being an exact left adjoint of the inclusion), and $\\check{\\mathcal C}^\\bullet(\\mathcal U,\\mathcal I)=\\operatorname{Hom}_{\\textit{PAb}}(\\mathbf Z_{\\mathcal U,\\bullet},\\mathcal I)$ with $\\mathbf Z_{\\mathcal U,\\bullet}$ exact in positive degrees.)",
+  "what": "Correct independent coefficient universes, which admit the documented E2 Type 1 / Type 0 counterexample; size the coefficients and covering indices at max u v. This follows the usual sized categories of Stacks 03AW, not a weakening of its conclusion.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Lemma Tag 03AW (lemma-injective-trivial-cech) and its proof (Lemma Tag 03F6 lemma-injective-abelian-sheaf-injective-presheaf, Lemma Tag 03AU lemma-cech-cohomology-derived-presheaves, Lemma Tag 03AN lemma-cech-h0)"
+  },
+  "citers": [
+   {
+    "id": "lem-sc-injective-cech-total-sections",
+    "holds": true,
+    "note": "This citer uses a separate sized-total-complex argument (U1 report); it no longer applies the disputed theorem directly."
+   },
+   {
+    "id": "lem-sc-cech-spectral",
+    "holds": true,
+    "note": "The mathematical use remains valid in the appropriately sized sheaf category; no conclusion changes."
+   },
+   {
+    "id": "lem-weil-pbc-site-cech-vanishing-dimension-shift",
+    "holds": true,
+    "note": "SmallCategory and coefficients at the object universe specialize max u v to u; unchanged caller compiled."
+   },
+   {
+    "id": "lem-weil-pbc-injective-sheaf-cech-acyclic",
+    "holds": true,
+    "note": "The small etale category and coefficients both have universe u+1; unchanged caller compiled."
+   },
+   {
+    "id": "lem-weil-pbc-colimit-sites-acyclic-replacement",
+    "holds": true,
+    "note": "The mathematical use remains valid in the appropriately sized sheaf category; no conclusion changes."
+   },
+   {
+    "id": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "holds": true,
+    "note": "The mathematical use remains valid in the appropriately sized sheaf category; no conclusion changes."
+   },
+   {
+    "id": "lem-sc-topological-filtered-injective-cech-acyclic",
+    "holds": true,
+    "note": "Opens X has object universe u and hom universe 0; max u 0 is u; unchanged caller compiled."
+   },
+   {
+    "id": "lem-sc-directed-injective-derived-sections-acyclic",
+    "holds": true,
+    "note": "Opens X has object universe u and hom universe 0; max u 0 is u. The unchanged direct caller compiled against the corrected dependency during the landing repair."
+   },
+   {
+    "id": "lem-sc-injective-cech-total-sections-nat",
+    "holds": true,
+    "note": "No direct Lean use of this declaration. The row comparison keeps its original signature with explicit HasSheafify and hom-sized coefficients; it can use the free-abelian-representable argument in hom universe v, as in its parent total-sections route, without requiring the max-sized cofree specialization."
+   },
+   {
+    "id": "lem-weil-pbc-etale-limit-injective-colimit-acyclic",
+    "holds": true,
+    "note": "The stage small etale sites and coefficients have the same universe u+1, so the corrected max universe specializes to u+1. The compatible injective-system acyclicity conclusion is unchanged."
+   }
   ],
-  "sorry_after": [
-   "CategoryTheory.site_injective_cech_acyclic"
+  "old_proof": [
+   {
+    "text": "Write PAb(C) for presheaves of abelian groups and let I be the given injective sheaf. The inclusion Ab(C) into PAb(C) has sheafification as an exact left adjoint: finite limits are sectionwise and sheafification preserves finite limits and colimits. Therefore an extension problem from a monomorphism of presheaves into I sheafifies to an extension problem between sheaves, which is solved by injectivity of I; composing the extension with the unit of sheafification gives an extension in presheaves. Thus I is injective in PAb(C).",
+    "uses": [
+     "def-weil-pbc-sites-and-cohomology",
+     "lem-weil-pbc-sheafification-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Lemma Tag 03F6 (injective sheaf is injective presheaf)"
+    }
+   },
+   {
+    "text": "Let K_p be the direct sum of the free presheaves Z_{U_t0 x_U ... x_U U_tp} over tuples of covering indices, with alternating face differential. At an object W, decompose K_p(W) by the composite phi: W -> U. The summand for phi is the free abelian group on S_phi^(p+1), where S_phi is the disjoint union of lifts W -> U_t over phi. Face maps delete one entry. If S_phi is empty the summand is zero; otherwise choosing s in S_phi gives the contracting homotopy (s0,...,sp) -> (s,s0,...,sp) in positive degrees. Hence K is exact in every positive degree as a presheaf.",
+    "uses": [
+     "def-weil-pbc-sites-and-cohomology"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Lemmas Tags 03AS and 03AT (free Cech complex and contracting homotopy)"
+    }
+   },
+   {
+    "text": "For every presheaf G, Yoneda identifies Hom(Z_V,G) with G(V), naturally in V and G. Hom out of a direct sum is a product, so Hom(K_p,G) is the product of G on the iterated fibre products; precomposition with a face is restriction along the corresponding projection. The resulting cochain differential is exactly the Cech differential, so Hom(K,I) is the Cech complex of I.",
+    "uses": [
+     "def-weil-pbc-site-cech-complex"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Lemma Tag 03AS (Cech complex as Hom from the free complex)"
+    }
+   },
+   {
+    "text": "For p>0, a cocycle s: K_p -> I vanishes on im(d_{p+1}) = ker(d_p), hence factors through B = im(d_p) included in K_{p-1}. Injectivity of I in presheaves extends B -> I to K_{p-1} -> I, whose composite with d_p is s. Every positive-degree cocycle is therefore a coboundary, and Cech H^p(U,I)=0.",
+    "uses": [
+     "def-weil-pbc-site-cech-complex",
+     "def-weil-pbc-sites-and-cohomology"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Lemma Tag 03AW via the second paragraph of Lemma Tag 03AU"
+    }
+   },
+   {
+    "text": "In degree zero, a Cech cocycle is a section of I(U) whose restrictions to every pairwise fibre product agree. The sheaf condition identifies these compatible families with the unique section on U, giving Cech H^0(U,I)=I(U).",
+    "uses": [
+     "def-weil-pbc-sites-and-cohomology",
+     "def-weil-pbc-site-cech-complex"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Lemma Tag 03AN (Cech H0)"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-pbc-sites-and-cohomology",
+   "lem-weil-pbc-sheafification-exact",
+   "def-weil-pbc-site-cech-complex"
   ]
  }
 }

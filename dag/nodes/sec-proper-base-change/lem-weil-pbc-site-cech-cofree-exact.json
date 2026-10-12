@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-site-cech-cofree-exact",
+ "kind": "statement",
+ "title": "Cofree presheaf Cech complex is exact in positive degrees",
+ "statement": "For C : Type u, Category.{v} C, T : Type (max u v), a chosen SiteCechComplex and P : Cᵒᵖ ⥤ AddCommGrpCat.{max u v}, the positive-degree Cech complex of the cofree presheaf Presheaf.cofree P is exact.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03AT (insertion contracting homotopy)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate at each object Z and map to a chosen fibre product. For each fixed composite v : Z → U admitting a lift to the family, choose one lift once, independently of the tuple. Every tuple supplies existence by its zeroth projection. Prepend that fixed lift to each tuple over v; the universal property uniquely determines the inserted tuple map. Faces preserve v, so the same chosen lift is used for all faces. Evaluating the cocycle equation on the prepended tuple identifies the original cochain with the differential of the inserted cochain (the nonzero faces contribute its negative in the cocycle equation).",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "03AT; contraction from source CechComplex and prior C2 proof, with duplicate helper removed by X3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of a cofree abelian presheaf is exact in positive degrees",
+   "results": "Service unavailable: Internal Server Error, recorded by msearch.py",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech complex of an injective abelian presheaf is exact in positive degrees",
+   "results": "8 hits, including InjectiveResolution.ofCocomplex_exactAt_succ and MayerVietorisSquare.shortComplex_exact; no direct chosen-complex theorem",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective.factorThru",
+   "results": "Injective.factorThru, Injective.comp_factorThru, Injective.comp_factorThru_assoc",
+   "date": "2026-10-12",
+   "verdict": "retraction tools"
+  },
+  {
+   "tool": "grep",
+   "query": "rg cofree|exactAt_cechComplex_of_injective lean/WeilConjectures/CategoryTheory/Sites/CechComplex.lean",
+   "results": "Presheaf.cofree, toCofree, exactAt_cechComplex_cofree, exactAt_cechComplex_of_injective; different categorical product complex, adapted to chosen products",
+   "date": "2026-10-12",
+   "verdict": "implementation guide"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteInjectiveCechAcyclic",
+  "date": "2026-10-12",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero'); positive-degree exactness ingredient",
+   "via": [
+    "lem-weil-pbc-site-injective-cech-acyclic",
+    "lem-weil-pbc-cohomology-colimit-of-sites",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteCechCofreeExact",
+  "file": "lean/Sheaf/CategoryTheory/SiteCechCofreeExact.lean",
+  "declaration": "CategoryTheory.SiteCechComplex.exactAt_cofree",
+  "statement": "theorem exactAt_cofree {C : Type u} [Category.{v} C] {T : Type (max u v)} {U : C} {f : T → C} {hom : ∀ t, f t ⟶ U} (S : SiteCechComplex f hom) (P : Cᵒᵖ ⥤ AddCommGrpCat.{max u v}) (q : ℕ) : (S.complex (Presheaf.cofree P)).ExactAt (q + 1)",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aef81",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T150959-L-2233024",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-aef81",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T150959-L-2233024",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules and DAG records match; both compile cleanly, permitted axioms only, and all four direct importers compile unchanged against the corrected interface."
+ }
+}
