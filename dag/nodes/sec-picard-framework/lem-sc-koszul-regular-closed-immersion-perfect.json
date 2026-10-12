@@ -28,63 +28,56 @@
  ],
  "proof": [
   {
-   "text": "Fix a point y of Y and an affine neighbourhood U=Spec(A) as in the hypothesis, with I=(f_1,\\dots,f_r). By the affine description of a closed immersion [def-weil-closed-immersion], i^{-1}(U)=Spec(A/I). On an affine open D(g) of U its structure sheaf has sections (A/I)_g, so (i_*\\mathcal O_Z)|_U is the sheaf associated to the A-module A/I.",
+   "text": "For every affine chart, use the existing normalized integer-indexed Koszul quotient augmentation. Compose with extendSingleIso and take the preimage through fullyFaithfulExtendFunctor. Its extension is the original quasi-isomorphism composed with an isomorphism, so quasiIso_extendMap_iff proves that the resulting natural-number-indexed augmentation is a quasi-isomorphism.",
    "uses": [
-    "def-weil-closed-immersion"
+    "lem-sc-koszul-regular-sequence-dual-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "Tag 068C, Lemma 37.61.7, affine-local reduction"
-   }
+   "elementary": true
   },
   {
-   "text": "By Koszul-regularity [def-weil-pbc-koszul-regular-sequence], H_j(K_\\bullet(f_1,\\dots,f_r))=0 for every j\\ne0. The Koszul-complex definition [def-weil-pbc-koszul-complex] gives K_0=A, K_1=A^{\\oplus r}, and d_1(e_i)=f_i. Hence im(d_1)=(f_1,\\dots,f_r)=I and H_0(K_\\bullet)=A/I. The quotient map in degree zero and zero maps in other degrees define an augmentation K_\\bullet\\to A/I; it is a quasi-isomorphism by these homology calculations. Sheafification on Spec(A) is exact, as can be checked after localization at each prime, so this yields a quasi-isomorphism of the sheafified Koszul complex with (i_*\\mathcal O_Z)|_U from Step 1.",
-   "uses": [
-    "def-weil-pbc-koszul-regular-sequence",
-    "def-weil-pbc-koszul-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "Tag 068C, Lemma 37.61.7, Koszul resolution"
-   }
-  },
-  {
-   "text": "By [def-weil-pbc-koszul-complex], K_j=\\bigwedge^j_A(A^{\\oplus r}) is finite free with basis indexed by the j-element subsets of {1,\\dots,r}, and K_j=0 for j>r. The augmentation of Step 2 is therefore a finite free resolution of A/I. Its sheafification gives a strictly perfect complex on U representing (i_*\\mathcal O_Z)|_U. Since the chosen affine neighbourhoods cover Y, the definition [def-pc-perfect-complex] gives that i_*\\mathcal O_Z is a perfect complex on Y.",
+   "text": "The Koszul terms are exterior powers of Fin r →₀ A. Mathlib exteriorPower.instFree and instFinite give freeness and finiteness. The exterior-power basis has index Set.powersetCard (Fin r) n. If r<n, card_le_univ shows this index is empty; the basis representation then proves that the term is a subsingleton, hence a zero object.",
    "uses": [
     "def-weil-pbc-koszul-complex",
-    "def-pc-perfect-complex"
+    "lem-weil-pbc-exterior-power-free-basis"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "Tag 068C, Lemma 37.61.7, conclusion"
-   }
+   "elementary": true
   },
   {
-   "text": "For every chosen affine U=Spec(A), Step 3 supplies a finite resolution of A/I by finite free A-modules. The local criterion for a perfect closed immersion [def-sc-perfect-closed-immersion] applies to this covering, so i is perfect as a morphism of schemes. For the empty scheme the covering is empty and the conclusion holds vacuously; for r=0 the complex is A in degree zero, while for r=1 it is A\\xrightarrow{f_1}A and Koszul-regularity makes the positive homology vanish.",
+   "text": "Apply the affine quotient resolution sheafification theorem to the augmentation of Step 1 and each quotient presentation. Combine its quasi-isomorphism with the term properties of Step 2 to prove the full universal chart clause.",
+   "uses": [
+    "lem-sc-affine-quotient-resolution-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At each point choose the chart in the hypothesis. Bundle the explicit Koszul chain complex and augmentation of Step 1 into a ProjectiveResolution: free modules are projective. Its finite and projective term properties follow from Step 2, and choose r+1 as the vanishing threshold. Insert this resolution and the original quotient presentation directly into IsPerfectClosedImmersion.",
    "uses": [
     "def-sc-perfect-closed-immersion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-on-morphisms.tex",
-    "place": "Tag 068C, Lemma 37.61.7, perfect ring-map conclusion"
-   }
+   "elementary": true
+  },
+  {
+   "text": "On each chosen chart, apply the local strictly perfect model theorem to the sheafified augmentation of Step 3, using the finite free terms and bound of Step 2. Insert its complex and derived isomorphism into the pointwise definition of Scheme.IsPerfect.",
+   "uses": [
+    "lem-sc-affine-finite-free-resolution-perfect-model",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-closed-immersion",
-  "def-weil-pbc-koszul-regular-sequence",
+  "lem-sc-koszul-regular-sequence-dual-complex",
   "def-weil-pbc-koszul-complex",
-  "def-pc-perfect-complex",
-  "def-sc-perfect-closed-immersion"
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sc-affine-quotient-resolution-sheafification",
+  "def-sc-perfect-closed-immersion",
+  "lem-sc-affine-finite-free-resolution-perfect-model",
+  "def-pc-perfect-complex"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "Lean proof",
   "document": "literature/stacks-project/more-on-morphisms.tex",
-  "place": "Tag 068C, Lemma 37.61.7"
+  "place": "Tag 068C; existing normalized Koszul augmentation, Mathlib exterior-power bases, and two affine geometric bridges (G2, 2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -171,5 +164,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T110303-L-615341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

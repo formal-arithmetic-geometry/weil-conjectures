@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-affine-finite-free-resolution-perfect-model",
+ "kind": "statement",
+ "title": "A bounded finite free affine resolution gives a local strictly perfect model",
+ "statement": "Let Y be a scheme [def-pc-scheme], U an affine open, A=\\Gamma(Y,U), and M an \\mathcal O_Y-module. Assume the derived categories of modules on Y and on its localized open sites exist [def-pc-derived-category]. Let K_\\bullet be a nonnegative chain complex of A-modules [def-weil-pbc-module-chain-complex-homology] with every term finite free [def-weil-pbc-free-module] and K_n=0 for n>r, where r\\ge0. Suppose a quasi-isomorphism q from its termwise associated-sheaf complex transported to U to (M|_U)[0] is given. Then there exists a cochain complex L on the localized site over U, strictly perfect [def-pc-perfect-complex], together with an isomorphism from the derived restriction to U of M[0] to the derived image of L. This is a local assertion for the specified open and the specified resolution, not a global perfectness assertion.",
+ "source": {
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "Tag 068C, Lemma 37.61.7, affine finite free resolution argument; Cohomology of Sheaves, Tags 08C4 and 08CM"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-perfect-complex",
+  "def-weil-pbc-module-chain-complex-homology",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Extend the sheafified chain complex by zero to cohomological degree -n. On the localized open site use the inverse of Scheme.Modules.overEquiv U. Terms vanish outside [-r,0] by the extension convention and the assumed bound.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each nonnegative degree, freeness and finiteness give a finite basis. Apply associated sheaf to its basis isomorphism; the associated sheaf of a finite direct sum of A is the free structure-sheaf module. Restriction along the affine-chart isomorphism and the localized-site equivalence preserve the unit and finite coproducts, so the images are finite free as well. Reindex each basis by ULift(Fin m), taking m=0 for zero terms. The resulting inverse maps satisfy the direct-summand identity of strict perfectness.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-free-module",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend q by zero and transport it through the localized-site equivalence. Its homology maps are those of q in degrees -n and maps between zero modules outside the image, hence it remains a quasi-isomorphism. The derived localization inverts this map.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The natural isomorphism overFunctorEquiv U identifies open restriction followed by the site equivalence with restriction to U.toScheme. This identification commutes with single complexes and the derived localization. Compose that derived restriction comparison with the inverse of the quasi-isomorphism in Step 3 to give M[0]|_U isomorphic to the constructed strictly perfect complex.",
+   "uses": [
+    "def-pc-derived-category",
+    "def-pc-perfect-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-chain-complex-homology",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-on-morphisms.tex",
+  "place": "Tag 068C, affine-local finite free resolution argument, expanded for an arbitrary input resolution"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafification affine quotient closed immersion preserves quasi isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded finite free chain complex sheafification strictly perfect local derived representative",
+   "results": "8 hits: derived bounded representatives and K-projective complexes; none states either affine sheafification comparison or finite free localized-site perfect model.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "strictlyPerfect|tilde.*QuasiIso|QuasiIso.*tilde",
+   "results": "0 hits",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, diagonal step: a Koszul-regular immersion is perfect; A bounded finite free affine resolution gives a local strictly perfect model",
+   "via": [
+    "lem-sc-smooth-proper-diagonal-koszul-regular",
+    "lem-sc-koszul-regular-closed-immersion-perfect"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineFiniteFreeResolutionPerfectModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFiniteFreeResolutionPerfectModel.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_finite_free_perfect_model",
+  "statement": "theorem exists_affine_finite_free_perfect_model {Y : Scheme.{u}}\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ U : Y.Opens,\n      HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (U : Y.Opens) (hU : IsAffineOpen U)\n    (M : SheafOfModules.{u} (moduleRings Y.toRingedSpace))\n    (K : ChainComplex (ModuleCat.{u} (Γ(Y, U) : Type u)) ℕ) (r : ℕ)\n    (hfree : ∀ n, Module.Free (Γ(Y, U) : Type u) (K.X n))\n    (hfinite : ∀ n, Module.Finite (Γ(Y, U) : Type u) (K.X n))\n    (hzero : ∀ n, r < n → IsZero (K.X n))\n    (q : ((tilde.functor Γ(Y, U) ⋙\n          Scheme.Modules.restrictFunctor hU.isoSpec.hom).mapHomologicalComplex\n            (ComplexShape.down ℕ)).obj K ⟶\n        (ChainComplex.single₀ U.toScheme.Modules).obj\n          ((Scheme.Modules.restrictFunctor U.ι).obj M))\n    [QuasiIso q] :\n    ∃ L : CochainComplex\n        (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U)) ℤ,\n      Scheme.IsStrictlyPerfect Y U L ∧\n      Nonempty ((SheafOfModules.overFunctor.{u}\n        (moduleRings Y.toRingedSpace) U).mapDerivedCategory.obj\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj M) ≅\n              DerivedCategory.Q.obj L)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T110303-L-615341",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T110303-L-615341",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
