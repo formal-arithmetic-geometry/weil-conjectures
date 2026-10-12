@@ -5952,3 +5952,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/F1/Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable (stage 3; reviewer PASS; first push; landing 20261012T042406-L-1814333 (proof); batch 20261012T042402; modules 1; new nodes 1)
 - 04:24 L: merged deliver/F1/Sheaf.CategoryTheory.InjectiveSheafCechAcyclic (stage 3; reviewer PASS; first push; landing 20261012T042406-L-1814454 (proof); batch 20261012T042402; modules 1; new nodes 0)
 - 04:24 L: merged deliver/F2/Sheaf.AlgebraicGeometry.LocallyConstantFiniteValuesFiniteType (stage 3; reviewer PASS; first push; landing 20261012T042406-L-1814590 (proof); batch 20261012T042402; modules 1; new nodes 0)
+- 04:24 L: merged deliver/G1/Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology (stage 3; reviewer PASS; first push; landing 20261012T042407-L-1814756 (proof); batch 20261012T042402; modules 1; new nodes 0)

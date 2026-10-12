@@ -17,54 +17,48 @@
  ],
  "proof": [
   {
-   "text": "Apply lem-weil-pbc-module-sheaf-constant-ring-equivalence to identify ModuleCat-valued sheaves with modules over the constant ring sheaf, retaining underlying abelian sheaves by its natural forgetful-functor isomorphism. The equivalence preserves injectivity. The free module Cech complex of every covering is exact in positive homological degrees.",
+   "text": "Use moduleSheaf_constantRing_equivalence to obtain an equivalence to modules over the constant ring sheaf R of Lambda. Set I=e.functor.obj J; equivalences preserve injective objects. Its underlying abelian sheaf G is naturally isomorphic to the underlying abelian sheaf of J.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-free-cech-complex-exact",
     "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
    ],
    "elementary": false
   },
   {
-   "text": "The underlying presheaf of modules of an injective sheaf of modules is injective. Apply the exact functor Hom(-,J) to the free complex; by Yoneda the resulting complex is the Cech complex. Its positive cohomology vanishes. Forgetting coefficients retains this complex.",
+   "text": "The topology associated to the precoverage X.smallEtaleTopology.toPrecoverage is X.smallEtaleTopology (the two standard inclusions). For every covering, choose SiteCechComplex S and apply injective_module_cech_cohomology_isZero to I. The comparison nonempty_etale_siteCech_complex_iso transports this zero homology to the categorical Cech complex in the slice.",
    "uses": [
-    "lem-weil-pbc-injective-module-injective-presheaf",
-    "def-weil-pbc-cech-complex",
-    "def-weil-pbc-abelian-etale-sheaves"
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
+    "lem-weil-pbc-etale-site-cech-complex-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The Cech criterion for all objects and coverings gives positive right-derived abelian evaluation vanishing. Evaluation at the terminal object computes global sections. Apply lem-sp-derived-functor-single-identification to identify its rightDerived groups with the homology of derived global sections of the degree-zero single complex. Then lem-weil-pbc-sheafH-ext-derived-comparison identifies these groups with Sheaf.H (Ext from the constant integer sheaf). This proves the subsingleton with abelian carriers in universe u+1 on X : Scheme.{u}.",
+   "text": "Apply isZero_rightDerived_etale_of_cech_vanishing with all objects and all coverings, each cover refining itself by identity maps. It gives zero positive right-derived abelian evaluation of G at the terminal etale object T=Etale.mk(identity X).",
    "uses": [
-    "lem-weil-pbc-cech-vanishing-criterion",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-sheafH-ext-derived-comparison",
-    "lem-sp-derived-functor-single-identification"
+    "lem-weil-pbc-cech-vanishing-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib Sheaf.GammaNatIsoSheafSections identifies global sections with evaluation at T. Apply NatTrans.rightDerived to its hom and inverse; rightDerived_comp and rightDerived_id show these maps are inverse. Transport the zero evaluation group to the right-derived global sections group. Use homologyRightDerivedFunctorObjSingleFunctorIso (the unbounded compatibility of the bounded-below single identification) and nonempty_sheafH_extDerivedIso to transport zero to Sheaf.functorH(G,q). Finally map the underlying abelian sheaf isomorphism through Sheaf.functorH and use AddCommGrpCat.subsingleton_of_isZero.",
+   "uses": [
+    "lem-sp-derived-functor-single-identification",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-cech-complex",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site",
-  "def-weil-presheaf-modules-sheafification",
   "lem-sp-derived-functor-single-identification",
   "lem-weil-pbc-cech-vanishing-criterion",
-  "lem-weil-pbc-free-cech-complex-exact",
-  "lem-weil-pbc-injective-module-injective-presheaf",
+  "lem-weil-pbc-etale-site-cech-complex-comparison",
   "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
   "lem-weil-pbc-sheafH-ext-derived-comparison"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "G1 stage 3 worker",
   "document": "https://stacks.math.columbia.edu/tag/03FD",
-  "place": "Lemma cohomology-modules-abelian-agree, second paragraph of proof, applied to the terminal object of the small etale site"
+  "place": "Second paragraph of proof; generic ringed-site Cech acyclicity, categorical Cech comparison, and derived global sections comparison."
  },
  "mathlib_searches": [
   {
@@ -139,10 +133,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T030019-L-1269397",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T042407-L-1814756",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
