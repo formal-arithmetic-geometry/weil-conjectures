@@ -31,136 +31,95 @@
  ],
  "proof": [
   {
-   "text": "Induct on the finite Krull dimension $d=\\dim A$: it is finite because the maximal ideal of a Noetherian local ring has finitely many generators and [lem-weil-pbc-noetherian-local-dimension-le-generators] bounds its dimension by their number. If $d=0$, the only prime of the local domain $A$ is $(0)=\\mathfrak m$, so $A$ is a field; its $\\mathfrak m$-adic completion is $A$, which is reduced. In the inductive step assume the assertion for all Noetherian local Nagata domains of dimension strictly less than $d$.",
+   "text": "Prove by natural-number induction that every Noetherian local Nagata domain of Krull dimension at most n is analytically unramified. The bound ringKrullDim_le_spanFinrank_maximalIdeal supplies such an n for the original ring. At n = 0, Ring.KrullDimLE.isField_of_isDomain gives a field; its maximal ideal is zero and AdicCompletion.ofAlgEquiv identifies its completion with itself. This also handles fields in any positive-dimensional induction step.",
    "uses": [
     "def-weil-pbc-adic-completion",
     "def-weil-pbc-krull-dimension-ring",
     "lem-weil-pbc-noetherian-local-dimension-le-generators"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0331 (lemma-local-nagata-domain-analytically-unramified), first paragraph of proof, lines 45972-45975"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $S$ be the integral closure of $A$ in $K=\\operatorname{Frac}(A)$. Since $A$ is Nagata, its quotient by $(0)$ is N-2 [def-weil-pbc-nagata-ring], so $S$ is a finite $A$-module [def-weil-pbc-japanese-domain]. It is a normal domain with fraction field $K$ [lem-weil-pbc-integral-closure-finite-extension-normal], and is Nagata [lem-weil-pbc-finite-over-nagata-nagata]. Finiteness makes $S$ Noetherian [lem-weil-pbc-finite-algebra-noetherian] and integral over $A$ [lem-weil-pbc-finite-algebra-is-integral], so $\\dim S\\le d$ [lem-weil-pbc-integral-extension-dimension]. The finite fibre $S/\\mathfrak mS$ has finitely many maximal ideals by [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum]; their preimages are exactly the finitely many maximal ideals $\\mathfrak n_1,\\ldots,\\mathfrak n_r$ of $S$, since each contracts to $\\mathfrak m$ [lem-weil-pbc-finite-algebra-local-radical].",
+   "text": "Construct S as integralClosure A (FractionRing A). Apply the Nagata-domain N-2 theorem and isN1_of_isN2 to obtain Module.Finite A S. Mathlib gives Noetherianity and integrality from finiteness, and integralClosure.isIntegrallyClosedOfFiniteExtension gives normality. Finite-over-Nagata gives IsNagataRing S. Integral extension dimension bounds dim S by dim A.",
    "uses": [
-    "def-weil-pbc-nagata-ring",
+    "lem-weil-pbc-nagata-domain-n2",
     "def-weil-pbc-japanese-domain",
     "lem-weil-pbc-integral-closure-finite-extension-normal",
-    "lem-weil-pbc-finite-over-nagata-nagata",
     "lem-weil-pbc-finite-algebra-noetherian",
     "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-integral-extension-dimension",
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-finite-algebra-local-radical"
+    "lem-weil-pbc-finite-over-nagata-nagata",
+    "lem-weil-pbc-integral-extension-dimension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0331, proof, lines 45977-45985; Definition Tag 032R and Lemmas Tag 032T, 00OK (lemma-integral-sub-dim-equal)"
-   }
+   "elementary": false
   },
   {
-   "text": "The inclusion $A\\hookrightarrow S$ is an injection of finite $A$-modules, with finite cokernel because $A$ is Noetherian. Exactness of completion on finite modules [lem-weil-pbc-completion-exact-finite-modules] makes the induced ring map $\\widehat A_{\\mathfrak m}\\hookrightarrow\\widehat S_{\\mathfrak mS}$ injective. Hence reducedness of the latter implies reducedness of $\\widehat A_{\\mathfrak m}$.",
-   "uses": [
-    "lem-weil-pbc-completion-exact-finite-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0331, proof, lines 45986-45990; Lemma Tag 00MB (lemma-completion-flat), exactness of completion"
-   }
-  },
-  {
-   "text": "For each $n\\ge1$, $A/\\mathfrak m^n$ is Artinian local [lem-weil-pbc-noetherian-local-quotient-artinian-local]. The finite algebra $B_n=S/\\mathfrak m^nS$ over it has exactly the maximal ideals $\\mathfrak n_i/\\mathfrak m^nS$ and Jacobson radical consisting of nilpotent elements [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum]. The product decomposition [lem-weil-pbc-product-of-localizations-at-maximal], with each factor identified by [lem-weil-pbc-localization-at-prime-of-quotient], gives $B_n\\cong\\prod_i S_{\\mathfrak n_i}/\\mathfrak m^nS_{\\mathfrak n_i}$, compatibly with reduction in $n$. Taking compatible inverse limits yields $\\widehat S_{\\mathfrak mS}\\cong\\prod_i\\varprojlim_n S_{\\mathfrak n_i}/\\mathfrak m^nS_{\\mathfrak n_i}$. Put $J=\\bigcap_i\\mathfrak n_i$. The ideal $J/\\mathfrak mS$ is finitely generated, since $S/\\mathfrak mS$ is Noetherian [lem-weil-pbc-finite-algebra-noetherian] and [lem-weil-pbc-noetherian-submodule-finite] applies; each generator is nilpotent by the finite-fibre result, so a sufficiently high power of their ideal vanishes. Thus $J^N\\subseteq\\mathfrak mS$ for some $N$, whereas $\\mathfrak mS\\subseteq J$. On localization at $\\mathfrak n_i$, distinct maximal ideals become the unit ideal, so $JS_{\\mathfrak n_i}=\\mathfrak n_iS_{\\mathfrak n_i}$. Thus the powers of $\\mathfrak mS_{\\mathfrak n_i}$ and $\\mathfrak n_iS_{\\mathfrak n_i}$ are cofinal, and [lem-weil-pbc-change-ideal-completion] identifies each displayed inverse limit with $\\widehat{S_{\\mathfrak n_i}}_{\\mathfrak n_i}$. Consequently $\\widehat S_{\\mathfrak mS}\\cong\\prod_i\\widehat{S_{\\mathfrak n_i}}_{\\mathfrak n_i}$.",
-   "uses": [
-    "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "lem-weil-pbc-localization-at-prime-of-quotient",
-    "lem-weil-pbc-finite-algebra-noetherian",
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-weil-pbc-change-ideal-completion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0331, proof, lines 45983-45996; Lemma Tag 00DT (lemma-chinese-remainder) and Lemma Tag 0319 (lemma-change-ideal-completion)"
-   }
-  },
-  {
-   "text": "Each $S_{\\mathfrak n_i}$ is a Noetherian local normal domain of dimension at most $d$ by [lem-weil-pbc-localization-dimension-chains-below-prime], and is Nagata by [lem-weil-pbc-nagata-localization]. If its dimension is less than $d$, the induction hypothesis gives reduced completion. For factors of dimension $d$ it remains to prove the assertion for a normal local Nagata domain $R$ of dimension $d$; the argument in the next two steps does this. Products of reduced rings are reduced, so this proves reducedness of $\\widehat S_{\\mathfrak mS}$ and then, by step 3, of $\\widehat A_{\\mathfrak m}$.",
+   "text": "For each prime p of S over the maximal ideal of A, S_p is a Noetherian local normal domain and is Nagata. Its dimension is the height of p, which is at most dim S, hence at most the induction bound for A. Thus the assertion for normal local Nagata domains at that same bound will give reduced completions for every factor.",
    "uses": [
     "lem-weil-pbc-localization-normal-domain",
     "lem-weil-pbc-nagata-localization",
     "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0331, proof, lines 45994-45999, reduction to the normal local case"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $(R,\\mathfrak n)$ be a Noetherian normal local Nagata domain with $\\dim R=d>0$. Choose $0\\ne x\\in\\mathfrak n$. Since $xR=R\\cap xR$ inside $\\operatorname{Frac}(R)$, [lem-weil-pbc-normal-domain-fractional-principal-quotient-ass] says $R/xR$ has no embedded associated primes and every associated prime $\\mathfrak p$ has height one. The localization $R_{\\mathfrak p}$ is a one-dimensional Noetherian normal local domain: normality comes from [lem-weil-pbc-localization-normal-domain], and its dimension is one by [lem-weil-pbc-localization-dimension-chains-below-prime]. Hence it is regular by [lem-weil-pbc-regular-local-dim-one-iff-normal]. This verifies conditions (2) and (3)(a) of [lem-weil-pbc-analytic-unramified-principal-criterion], while $x\\ne0$ and $x\\in\\mathfrak n$ verify its condition (1).",
+   "text": "Use completion_finite_extension_decomposition at the maximal ideal m of A to identify C tensor_A S with the product of those reduced local completions, where C is the completion of A_m. C is flat over A_m by Mathlib completion flatness, and over A by flat localization and Module.Flat.trans. The inclusion A into S is injective. Algebra.TensorProduct.includeLeft_injective therefore embeds C into C tensor_A S; isReduced_of_injective descends reducedness from the product to C. IsLocalization.atUnits identifies A with A_m, and AdicCompletion.exists_ringEquiv identifies their maximal-ideal completions. Descend reducedness along this equivalence to obtain analytic unramifiedness of A.",
    "uses": [
-    "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass",
+    "lem-weil-pbc-completion-finite-extension-decomposition",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-weil-pbc-localization-units-or-zero",
+    "lem-weil-pbc-adic-completion-ring-equiv"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "It remains to establish the normal local assertion at bound n+1 using the induction hypothesis at n. If the normal ring is a field, use the zero-ideal completion argument. Otherwise choose nonzero x in its maximal ideal. The principal-quotient associated-height theorem gives height one for every associated prime p of R/(x). Each contains (x), since the annihilator of R/(x) is (x). A prime q between (x) and p cannot be zero. A strict containment q < p would force height(q)+1 <= height(p)=1, contradicting height(q)>=1. Thus p is minimal over (x). Localization normality and the equality dim R_p = height(p) = 1 give regularity by the one-dimensional regularity/normality equivalence.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
     "lem-weil-pbc-localization-normal-domain",
     "lem-weil-pbc-localization-dimension-chains-below-prime",
-    "lem-weil-pbc-regular-local-dim-one-iff-normal",
-    "lem-weil-pbc-analytic-unramified-principal-criterion"
+    "lem-weil-pbc-regular-local-dim-one-iff-normal"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0331, proof, lines 46000-46011; Lemma Tag 031T (lemma-normal-domain-intersection-localizations-height-1), clause (3) specialized to y=x, and Lemma Tag 00PD (lemma-characterize-dvr)"
-   }
+   "elementary": false
   },
   {
-   "text": "For each associated prime $\\mathfrak p$ above, $R/\\mathfrak p$ is a Noetherian local domain and is Nagata by the quotient clause of [lem-weil-pbc-finite-over-nagata-nagata]. Its dimension is strictly less than $d$: any chain of primes above $\\mathfrak p$ lifts to a chain in $R$, and prepending $(0)\\subsetneq\\mathfrak p$ lengthens it by one. The induction hypothesis therefore says $R/\\mathfrak p$ is analytically unramified, verifying condition (3)(b). Apply [lem-weil-pbc-analytic-unramified-principal-criterion] with $t=x$ to obtain reducedness of $\\widehat R_{\\mathfrak n}$, completing the normal case and the induction.",
+   "text": "For such an associated prime p, the element x is a nonzero divisor in the domain R and maps to zero in R/p. Mathlib ringKrullDim_succ_le_of_surjective gives dim(R/p)+1 <= dim R <= n+1. Cancel one using ENat.WithBot.add_le_add_one_right_iff to obtain dim(R/p)<=n. The quotient is a Noetherian local domain and is Nagata by finite-over-Nagata. Apply the induction hypothesis. The image of the original maximal ideal is the quotient maximal ideal by IsLocalRing.map_maximalIdeal_of_surjective, so this proves Ideal.IsAnalyticallyUnramified p with exactly its defined ideal. Apply the principal-quotient criterion to x and the minimality, regularity and analytic-unramifiedness just proved. This completes the normal step, normalization descent, and induction.",
    "uses": [
     "lem-weil-pbc-finite-over-nagata-nagata",
     "lem-weil-pbc-analytic-unramified-principal-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 0331, proof, lines 46011-46020; Lemma Tag 032T (lemma-quasi-finite-over-nagata) and Lemma Tag 0330 (lemma-criterion-analytically-unramified)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-krull-dimension-ring",
   "lem-weil-pbc-noetherian-local-dimension-le-generators",
-  "def-weil-pbc-nagata-ring",
+  "lem-weil-pbc-nagata-domain-n2",
   "def-weil-pbc-japanese-domain",
   "lem-weil-pbc-integral-closure-finite-extension-normal",
-  "lem-weil-pbc-finite-over-nagata-nagata",
   "lem-weil-pbc-finite-algebra-noetherian",
   "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-over-nagata-nagata",
   "lem-weil-pbc-integral-extension-dimension",
-  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "lem-weil-pbc-finite-algebra-local-radical",
-  "lem-weil-pbc-completion-exact-finite-modules",
-  "lem-weil-pbc-noetherian-local-quotient-artinian-local",
-  "lem-weil-pbc-product-of-localizations-at-maximal",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-change-ideal-completion",
   "lem-weil-pbc-localization-normal-domain",
   "lem-weil-pbc-nagata-localization",
   "lem-weil-pbc-localization-dimension-chains-below-prime",
-  "lem-weil-pbc-normal-domain-fractional-principal-quotient-ass",
+  "lem-weil-pbc-completion-finite-extension-decomposition",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-weil-pbc-localization-units-or-zero",
+  "lem-weil-pbc-adic-completion-ring-equiv",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
   "lem-weil-pbc-regular-local-dim-one-iff-normal",
   "lem-weil-pbc-analytic-unramified-principal-criterion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra Lemma 0331"
+  "place": "Tag 0331, proof: induction, normalization reduction, and normal principal-quotient criterion; Tag 07N9 packages the finite-completion product. Y3 uses the principal clause of Tag 031T instead of its fractional-principal clause, and Mathlib flatness to descend reducedness."
  },
  "mathlib_searches": [
   {
@@ -246,5 +205,15 @@
   "group": "E1",
   "result": "pass",
   "note": "A:Type u CommRing; Noetherian=IsNoetherianRing; local=IsLocalRing (m=maximalIdeal); domain=IsDomain; Nagata=recorded IsNagataRing (Noetherian ∧ N-2 prime quotients, L in quotient's universe u, not vacuous); conclusion IsAnalyticallyUnramified = IsReduced (AdicCompletion (maximalIdeal A) A) by Iff.rfl; node diff only the lean record"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T212725-L-1132076",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
