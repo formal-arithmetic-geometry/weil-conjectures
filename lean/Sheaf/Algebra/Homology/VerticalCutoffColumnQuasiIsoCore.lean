@@ -1,7 +1,8 @@
 module
 
 public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
-import Sheaf.Algebra.Homology.DoubleComplexVerticalWindow
+import Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictCases
+import Sheaf.Algebra.Homology.VerticalCutoffColumnQuasiIsoStrictPositive
 
 @[expose] public section
 
@@ -42,6 +43,8 @@ theorem verticalCutoff_column_quasiIso_strict
       (CochainComplex.truncLEMap
         (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a) (b - 1))
       ComplexShape.embeddingUpNat) : QuasiIso q := by
-  sorry
+  by_cases ha : a ≤ 0
+  · exact verticalCutoff_column_quasiIso_strict_nonpositive L a b hab ha g hg q hq
+  · exact verticalCutoff_column_quasiIso_strict_positive L a b hab (lt_of_not_ge ha) g hg q hq
 
 end HomologicalComplex₂
