@@ -951,6 +951,43 @@ noncomputable def integral {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a] [HasCo
       (α ≫ (G.dualizingCongr (Category.comp_id a).symm).hom) ≫
     G.dualizingBase.hom
 
+/-- Blueprint `def-trf-integration`: the *integration* `∫_T τ ∈ End (A_s)` of a Borel-Moore
+section `τ : A_T ⟶ ω_T` over a geometric scheme `a : T ⟶ s` proper over the base: the composite
+
+```
+  A_s ──η──▶ Ra_* La^* A_s ≃ Ra_* A_T ──τ──▶ Ra_* ω_T ≃ Ra_! ω_T ≃ Ra_! a^! A_s ──ε──▶ A_s
+```
+
+of the unit of `La^* ⊣ Ra_*`, the identification `Ra_* = Ra_!` for the proper `a`,
+`ω_T ≃ a^! A_s` (`GeometricOperations.dualizingIso`) and the counit of `Ra_! ⊣ a^!` at `A_s`.
+The blueprint reads it in `A` through `RΓ(s, -)`; here it is kept in `End (A_s)`. It agrees
+with the pushforward to the point (`integration_eq_integral`). -/
+noncomputable def integration {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a]
+    [HasCompactification a] [IsProper a] (τ : G.borelMooreSections a) :
+    End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A))) :=
+  (derivedUpperStarLowerStarAdjunction A a).unit.app (𝟙_ _) ≫
+    ((lowerStar A a).rightDerivedFunctor).map ((G.upperStarUnit a).hom ≫ τ) ≫
+    ((G.properComparison a (.of_isGeometric a)).inv.app
+      ⟨G.dualizing a, G.ctf_dualizing a⟩).hom ≫
+    (rightDerivedLowerShriek A a).map (G.dualizingIso a).hom ≫
+    G.exceptionalCounit a (.of_isGeometric a) (𝟙_ _) (G.ctf_unit (.id (𝟙 s)))
+
+/-- Blueprint `lem-trf-integration-linear`: the integration is `A`-linear,
+`∫_T (τ + c · τ') = ∫_T τ + c ∫_T τ'` for Borel-Moore sections `τ`, `τ'` and a scalar
+`c ∈ End (A_s)`, acting on Borel-Moore sections on `T` through its pullback
+`La^* c : A_T ≃ La^* A_s ⟶ La^* A_s ≃ A_T`. -/
+theorem integration_add_smul {T : Scheme.{u}} (a : T ⟶ s) [IsGeometric a]
+    [HasCompactification a] [IsProper a] (τ τ' : G.borelMooreSections a)
+    (c : End (𝟙_ (DerivedCategory (Sheaf (Scheme.ProEt.topology s) A)))) :
+    G.integration a (τ + ((G.upperStarUnit a).inv ≫
+        ((upperStar A a).leftDerivedFunctor).map c ≫ (G.upperStarUnit a).hom) ≫ τ') =
+      G.integration a τ + (show End _ from c ≫ G.integration a τ') := by
+  simp only [integration, Preadditive.comp_add, Functor.map_add, Preadditive.add_comp,
+    Category.assoc, Iso.hom_inv_id_assoc, Functor.map_comp]
+  congr 1
+  rw [← Category.assoc c, ← (derivedUpperStarLowerStarAdjunction A a).unit_naturality c]
+  simp only [Category.assoc]
+
 end GeometricOperations
 
 end AlgebraicGeometry.ProEtale

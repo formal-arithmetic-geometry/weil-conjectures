@@ -253,9 +253,7 @@ noncomputable def ctfLowerShriekCongr {f g : X ⟶ Y} (e : f = g) [HasCompactifi
     (h₂ : ∀ K, DerivedCategory.constructibleFiniteTor A X K →
       DerivedCategory.constructibleFiniteTor A Y ((rightDerivedLowerShriek A g).obj K)) :
     ctfLowerShriek f h₁ ≅ ctfLowerShriek g h₂ :=
-  eqToIso <| by
-    subst e
-    rfl
+  by subst e; exact Iso.refl _
 
 /-- A natural transformation between functors into `Dᵇctf(X)`, given by one between their
 composites with the inclusion into `D(X, A)`. -/
@@ -747,6 +745,35 @@ structure GeometricOperations (s : Scheme.{u}) extends GeometricCoefficients A s
               (.mk (aY := a) rfl))).app ⟨dualizing a, ctf_dualizing a⟩) ≪≫
         (rightDerivedUpperShriek A f).mapIso (dualizingComp g a) ≪≫ dualizingComp f (g ≫ a) ≪≫
         eqToIso (congrArg dualizing (Category.assoc f g a).symm)
+  /-- `dualizingComp` is the canonical isomorphism of blueprint
+  `thm-trf-dualizing-complex-composition`: when `a` and `f ≫ a` admit compactifications it is
+  the composite
+
+  ```
+    f^! ω_a ≃ f^! a^! A ≃ (f ≫ a)^! A ≃ ω_{f ≫ a}
+  ```
+
+  of `dualizingIso a`, the composition isomorphism of `(-)^!` on `Dᵇctf` (the conjugate of
+  `lowerShriekComp f a`) and `dualizingIso (f ≫ a)`. -/
+  dualizingComp_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (a : Y ⟶ s) [IsGeometric a]
+      [IsGeometric (f ≫ a)] [HasCompactification f] [HasCompactification a]
+      [HasCompactification (f ≫ a)] :
+    dualizingComp f a =
+      (rightDerivedUpperShriek A f).mapIso (dualizingIso a) ≪≫
+        (DerivedCategory.constructibleFiniteTor A X).ι.mapIso
+          (X := (toGeometricCoefficients.upperShriekCtf f (.mk (aY := a) rfl)).obj
+            ((toGeometricCoefficients.upperShriekCtf a (.of_isGeometric a)).obj
+              ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩))
+          (Y := (toGeometricCoefficients.upperShriekCtf (f ≫ a) (.of_isGeometric (f ≫ a))).obj
+            ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩)
+          ((conjugateIsoEquiv
+            (toGeometricCoefficients.exceptionalAdjunction (f ≫ a) (.of_isGeometric (f ≫ a)))
+            ((toGeometricCoefficients.exceptionalAdjunction f (.mk (aY := a) rfl)).comp
+              (toGeometricCoefficients.exceptionalAdjunction a (.of_isGeometric a)))
+            (lowerShriekComp f a (.mk (aY := a) rfl) (.of_isGeometric a)
+              (.of_isGeometric (f ≫ a)))).symm.app
+            ⟨𝟙_ _, toGeometricCoefficients.ctf_unit (.id (𝟙 s))⟩) ≪≫
+        (dualizingIso (f ≫ a)).symm
   /-- `properComparison` is compatible with the shifts: the identification `Rf_! ≃ Rf_*` at
   `K⟦n⟧` is, through the commutation of `Rf_!` and `Rf_*` with the shift, the shift of the
   identification at `K`. The two functors are triangulated and the identification is one of

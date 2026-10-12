@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperStarCompCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.TopologicalInvariance
 
@@ -330,6 +331,18 @@ noncomputable abbrev graph (G : GeometricOperations A s) [IsGeometric aX] (hW : 
   Correspondence.ofGraph G aX W.obj hW (W.frobeniusIterate m) (W.frobeniusIterate_comp m)
     (W.coeffIterate m)
 
+/-- Blueprint `def-trf-frobenius-coefficient-morphism` (4): the *global operator* in degree `m`
+of the Frobenius coefficient morphism `φ` of a Weil complex, `F_{c,m}(φ) = T_{c_m}(φ_m)` on
+`RΓ_c(X, K) = Ra_{X!} K`: the global operator of the graph correspondence
+`c_m = (id_X, Φ_m)` with coefficient map `φ_m` (`WeilComplex.graph`), defined when `Φ_m` is
+proper (for the model Frobenius it is finite). Items (1)–(3) of the blueprint definition are
+`WeilComplex.coeff`, `WeilComplex.coeffIterate` and `WeilComplex.graph`. -/
+noncomputable def globalFrobenius (G : GeometricOperations A s) [IsGeometric aX]
+    [HasCompactification aX] (hW : G.ctf X W.obj) (m : ℕ) [IsProper (W.frobeniusIterate m)] :
+    (rightDerivedLowerShriek A aX).obj W.obj ⟶ (rightDerivedLowerShriek A aX).obj W.obj :=
+  haveI : IsProper (W.graph G hW m).snd := ‹IsProper (W.frobeniusIterate m)›
+  Correspondence.globalOperator G (W.graph G hW m) hW
+
 end Graph
 
 /-- The geometric-stalk Frobenius `F_{x,m} = (φ_m)_x̄` of a Weil complex at a point
@@ -359,7 +372,8 @@ lemma stalkFrobenius_eq_pow {x : s ⟶ X} (hx : x ≫ W.frobenius = x) (m : ℕ)
   induction m with
   | zero =>
     have h := leftDerivedUpperStarComp_id_right_app (A := A) x W.obj
-    change (leftDerivedUpperStarCongr A (Category.comp_id x)).inv.app W.obj ≫ (leftDerivedUpperStarComp A x (𝟙 X)).hom.app W.obj ≫
+    change (leftDerivedUpperStarCongr A (Category.comp_id x)).inv.app W.obj ≫
+        (leftDerivedUpperStarComp A x (𝟙 X)).hom.app W.obj ≫
         ((upperStar A x).leftDerivedFunctor).map ((leftDerivedUpperStarId A X).hom.app W.obj) =
       𝟙 _
     rw [h, leftDerivedUpperStarCongr_inv_app, leftDerivedUpperStarCongr_hom_app_trans,
@@ -809,5 +823,73 @@ instance WeilComplex.isIso_lowerShriekPush_coeff {aX : X ⟶ s} {aY : Y ⟶ s}
   infer_instance
 
 end
+
+
+namespace StrictWeilComplex
+
+variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+
+open Limits in
+/-- The Weil complex underlying a strict Weil complex `(K, φ)` for an automorphism `g` of `X`:
+the Frobenius `g` and the coefficient morphism `φ : Lg^* K ⟶ K`, over the terminal scheme,
+since `g` need not be a morphism over any other base (for the geometric Frobenius `g_γ` of the
+blueprint it acts on the scalar field). -/
+noncomputable def toWeilComplex {g : X ≅ X} (K : StrictWeilComplex A g) :
+    WeilComplex (A := A) (terminal.from X) where
+  frobenius := g.hom
+  frobenius_comp := terminal.hom_ext _ _
+  obj := (DerivedCategoryFiniteTor.ι A X).obj K.obj
+  coeff := K.frobenius.hom
+
+variable {g : X ≅ X} (K : StrictWeilComplex A g)
+
+/-- Blueprint `def-trf-iterated-weil-map`: the *iterated Weil isomorphism*
+`φ^[m] = φ ∘ Lg^* φ ∘ ⋯ ∘ L(g^{m-1})^* φ : L(g^m)^* K ⟶ K` of a strict Weil complex `(K, φ)`,
+where `g^m` is `K.toWeilComplex.frobeniusIterate m`: the iterates of the coefficient morphism
+of the underlying Weil complex. It is invertible (`isIso_iteratedWeilMap`). -/
+noncomputable def iteratedWeilMap (m : ℕ) :
+    ((upperStar A (K.toWeilComplex.frobeniusIterate m)).leftDerivedFunctor).obj
+        ((DerivedCategoryFiniteTor.ι A X).obj K.obj) ⟶
+      (DerivedCategoryFiniteTor.ι A X).obj K.obj :=
+  K.toWeilComplex.coeffIterate m
+
+instance isIso_iteratedWeilMap (m : ℕ) : IsIso (K.iteratedWeilMap m) :=
+  haveI : IsIso K.toWeilComplex.coeff := inferInstanceAs (IsIso K.frobenius.hom)
+  inferInstanceAs (IsIso (K.toWeilComplex.coeffIterate m))
+
+/-- Blueprint `lem-trf-iterated-weil-cocycle`: the cocycle identity
+`φ^[m + n] = φ^[n] ∘ L(g^n)^* φ^[m]` for the iterated Weil isomorphism of a strict Weil complex,
+after the composition isomorphism `L(g^{m + n})^* ≃ L(g^n)^* L(g^m)^*` of `g^{m + n} = g^n g^m`. -/
+lemma iteratedWeilMap_add (m n : ℕ) :
+    K.iteratedWeilMap (m + n) =
+      (leftDerivedUpperStarCongr A (K.toWeilComplex.frobeniusIterate_add m n)).hom.app _ ≫
+        (leftDerivedUpperStarComp A (K.toWeilComplex.frobeniusIterate n)
+          (K.toWeilComplex.frobeniusIterate m)).hom.app _ ≫
+        ((upperStar A (K.toWeilComplex.frobeniusIterate n)).leftDerivedFunctor).map
+          (K.iteratedWeilMap m) ≫
+        K.iteratedWeilMap n :=
+  K.toWeilComplex.coeffIterate_add m n
+
+/-- Blueprint `def-trf-iterated-weil-map`: the *scheme-Frobenius map*
+`u_m = φ^[m] ∘ κ^{(m)}_K : LΦ_m^* K ⟶ K` of a strict Weil complex, for a natural isomorphism
+`κ^{(m)} : LΦ_m^* ≃ L(g^m)^*` comparing the pullbacks along the scheme Frobenius `Φ_m` and the
+geometric Frobenius `g^m` (blueprint `prop-trf-scheme-galois-comparison`, which constructs it
+for the model Frobenius; it is an argument here). -/
+noncomputable def schemeFrobeniusMap (m : ℕ) {Φ : X ⟶ X}
+    (κ : (upperStar A Φ).leftDerivedFunctor ≅
+      (upperStar A (K.toWeilComplex.frobeniusIterate m)).leftDerivedFunctor) :
+    ((upperStar A Φ).leftDerivedFunctor).obj ((DerivedCategoryFiniteTor.ι A X).obj K.obj) ⟶
+      (DerivedCategoryFiniteTor.ι A X).obj K.obj :=
+  κ.hom.app _ ≫ K.iteratedWeilMap m
+
+instance isIso_schemeFrobeniusMap (m : ℕ) {Φ : X ⟶ X}
+    (κ : (upperStar A Φ).leftDerivedFunctor ≅
+      (upperStar A (K.toWeilComplex.frobeniusIterate m)).leftDerivedFunctor) :
+    IsIso (K.schemeFrobeniusMap m κ) := by
+  dsimp only [schemeFrobeniusMap]
+  infer_instance
+
+end StrictWeilComplex
 
 end AlgebraicGeometry.ProEtale
