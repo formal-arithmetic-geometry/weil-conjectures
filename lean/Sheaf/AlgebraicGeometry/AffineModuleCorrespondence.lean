@@ -9,15 +9,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
-import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
-import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.AffineModuleTensorConstruction
+import Sheaf.AlgebraicGeometry.AffineModuleTensorComparisonIsIso
 import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
-import Sheaf.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Quasi-coherent modules along an affine morphism
 
@@ -83,6 +80,35 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
+private theorem equivalence_on_full_subcategories
+    {C D : Type*} [Category C] [Category D] (p : ObjectProperty C) (q : ObjectProperty D)
+    (F : C ⥤ D) (G : D ⥤ C)
+    (hF : ∀ X, p X → q (F.obj X)) (hG : ∀ Y, q Y → p (G.obj Y))
+    (α : F ⋙ G ⟶ 𝟭 C) (β : 𝟭 D ⟶ G ⋙ F)
+    (hα : ∀ X, p X → IsIso (α.app X)) (hβ : ∀ Y, q Y → IsIso (β.app Y)) :
+    ∃ E : p.FullSubcategory ≌ q.FullSubcategory,
+      Nonempty (E.functor ⋙ q.ι ≅ p.ι ⋙ F) ∧
+      Nonempty (E.inverse ⋙ p.ι ≅ q.ι ⋙ G) := by
+  let F' := q.lift (p.ι ⋙ F) (fun X ↦ hF X.obj X.property)
+  let G' := p.lift (q.ι ⋙ G) (fun Y ↦ hG Y.obj Y.property)
+  let a : F' ⋙ G' ≅ 𝟭 p.FullSubcategory :=
+    NatIso.ofComponents (fun X ↦ by
+      let := hα X.obj X.property
+      exact ObjectProperty.isoMk _ (asIso (α.app X.obj))) (by
+        intro X Y f
+        apply InducedCategory.hom_ext
+        exact α.naturality f.hom)
+  let b : 𝟭 q.FullSubcategory ≅ G' ⋙ F' :=
+    NatIso.ofComponents (fun Y ↦ by
+      let := hβ Y.obj Y.property
+      exact ObjectProperty.isoMk _ (asIso (β.app Y.obj))) (by
+        intro X Y f
+        apply InducedCategory.hom_ext
+        exact β.naturality f.hom)
+  exact ⟨CategoryTheory.Equivalence.mk F' G' a.symm b.symm, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
+
+set_option maxHeartbeats 500000 in
+-- The dependent tensor-functor witnesses require substantial elaboration.
 /-- For an affine morphism, pushforward gives the equivalence of quasi-coherent modules
 with quasi-coherent modules over its direct-image algebra. Quasi-coherence is unchanged
 by restriction to the structure sheaf. The inverse is the two tensor operations in 01SB,
@@ -95,7 +121,8 @@ Proof:
    (`lem-weil-pbc-affine-morphism-relative-spec`). Apply quasi-coherence under scalar
    restriction (`lem-weil-pbc-quasi-coherence-scalar-restriction`) to obtain clause (1).
 2. Pushforward has the sectionwise algebra action and sends quasi-coherent modules to
-   quasi-coherent modules (`lem-weil-pbc-affine-pushforward-base-change`).
+   quasi-coherent modules (`pqf-lem-pushforward-qcoh`), since an affine morphism is
+   quasi-compact and separated, hence quasi-separated.
 3. Form the pulled-back algebra by the tensor pushout, and the pulled-back module by
    extension of scalars. Associativity of tensor products gives `κ`, with its stated
    formula. The counit is multiplicative and induces `ε`, hence the second extension
@@ -166,7 +193,37 @@ theorem affine_module_correspondence [IsAffineHom f] :
             ∃ E : (qU).FullSubcategory ≌ (qA).FullSubcategory,
               Nonempty (E.functor ⋙ (qA).ι ≅ (qU).ι ⋙ R) ∧
               Nonempty (E.inverse ⋙ (qU).ι ≅ (qA).ι ⋙ H) := by
-  sorry
+  classical
+  have hqc (G : SheafOfModules.{u} (𝓡 A)) :
+      G.IsQuasicoherent ↔ ((S).obj G).IsQuasicoherent := by
+    exact quasiCoherent_iff_restrictScalars X (Under.mk ρ)
+      ((affine_morphism_relative_spec X).1 f inferInstance) G
+  have hpush (F : U.Modules) (hF : F.IsQuasicoherent) :
+      ((R).obj F).IsQuasicoherent := by
+    let := hF
+    let := IsSeparated.of_isAffineHom f
+    apply (hqc ((R).obj F)).mpr
+    exact isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f F
+  refine ⟨hqc, hpush, ?_⟩
+  refine Exists.elim (affine_module_tensor_construction f) (fun B hB ↦ ?_)
+  refine Exists.elim hB (fun b hb ↦ ?_)
+  refine Exists.elim hb (fun t ht ↦ ?_)
+  refine Exists.elim ht (fun ε hring ↦ ?_)
+  refine Exists.elim hring.2.2.2 (fun P hP₀ ↦ ?_)
+  refine Exists.elim hP₀ (fun pobj hP₁ ↦ ?_)
+  refine Exists.elim hP₁ (fun κ hP ↦ ?_)
+  refine Exists.elim hP.2.2 (fun H hH₀ ↦ ?_)
+  refine Exists.elim hH₀ (fun hobj hH₁ ↦ ?_)
+  refine Exists.elim hH₁ (fun γ hH ↦ ?_)
+  refine Exists.elim hH.2.2.2 (fun α hβ₀ ↦ ?_)
+  refine Exists.elim hβ₀ (fun β hcomp ↦ ?_)
+  have hiso := affine_module_tensor_comparison_isIso f B b t ε
+    ⟨hring.1, hring.2.1, hring.2.2.1⟩ P pobj κ ⟨hP.1, hP.2.1⟩ H hobj γ
+    ⟨hH.1, hH.2.1, hH.2.2.1⟩ α β hcomp
+  have hE := equivalence_on_full_subcategories qU qA R H hpush hH.2.2.1 α β
+    hiso.1 hiso.2
+  exact ⟨B, b, t, ε, hring.1, hring.2.1, hring.2.2.1, P, pobj, κ, hP.1, hP.2.1,
+    H, hobj, γ, hH.1, hH.2.1, hH.2.2.1, α, β, hcomp.1, hcomp.2, hiso.1, hiso.2, hE⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

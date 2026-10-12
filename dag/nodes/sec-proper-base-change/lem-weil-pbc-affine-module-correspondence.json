@@ -34,117 +34,47 @@
  ],
  "proof": [
   {
-   "text": "Assertion (1). By [lem-weil-pbc-affine-morphism-relative-spec] (1), $\\mathcal A=u_*\\mathcal O_U$ is a sheaf of commutative $\\mathcal O_X$-algebras whose underlying $\\mathcal O_X$-module is quasi-coherent. The definition of quasi-coherence as an $\\mathcal A$-module in the statement is the one of [lem-weil-pbc-quasi-coherence-scalar-restriction] for $S=X$ and this $\\mathcal A$, so that lemma gives (1).",
+   "text": "Quasi-coherence of the direct-image algebra follows from affine relative Spec. Apply scalar restriction to obtain clause (1).",
    "uses": [
     "lem-weil-pbc-affine-morphism-relative-spec",
     "lem-weil-pbc-quasi-coherence-scalar-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof: 'The final statement is Lemma 0H88'"
-   }
+   "elementary": false
   },
   {
-   "text": "The functor. Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_U$-module. For opens $V'\\subseteq V$ of $X$ the $\\mathcal O_U(u^{-1}V)$-module structure on $\\mathcal F(u^{-1}V)$ is compatible with restriction, so $u_*\\mathcal F$ is a sheaf of $\\mathcal A$-modules, and its underlying $\\mathcal O_X$-module (through $u^\\sharp$) is the pushforward $u_*\\mathcal F$ of [def-pc-module-pullback]. By [lem-weil-pbc-affine-pushforward-base-change] (1) (the morphism $u$ is affine) $u_*\\mathcal F$ is a quasi-coherent $\\mathcal O_X$-module, hence a quasi-coherent $\\mathcal A$-module by Step 1. An $\\mathcal O_U$-linear $\\psi:\\mathcal F\\to\\mathcal F'$ gives the $\\mathcal A$-linear $u_*\\psi$ (components $\\psi_{u^{-1}V}$). So $u_*$ is a functor from quasi-coherent $\\mathcal O_U$-modules to quasi-coherent $\\mathcal A$-modules.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "lem-weil-pbc-quasi-coherence-scalar-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof, first paragraph (via Lemma 01S7 and Schemes, Lemma 01LC)"
-   }
-  },
-  {
-   "text": "The construction $h$ and the two maps. By [def-pc-module-pullback], $u^*\\mathcal A=\\mathcal O_U\\otimes_{u^{-1}\\mathcal O_X}u^{-1}\\mathcal A$ and $u^*\\mathcal G=\\mathcal O_U\\otimes_{u^{-1}\\mathcal O_X}u^{-1}\\mathcal G$ are sheafifications of presheaf tensor products; $u^{-1}\\mathcal A$ is a sheaf of commutative $u^{-1}\\mathcal O_X$-algebras, so $u^*\\mathcal A$ is a sheaf of commutative $\\mathcal O_U$-algebras, and $(b\\otimes a)(b'\\otimes g)=bb'\\otimes ag$ on the presheaf level makes $u^*\\mathcal G$ a $u^*\\mathcal A$-module; the unit $\\eta_{\\mathcal G}:\\mathcal G\\to u_*u^*\\mathcal G$ sends $g$ to (the class of) $1\\otimes g$, so $\\eta_{\\mathcal A}(a)\\eta_{\\mathcal G}(g)=\\eta_{\\mathcal G}(ag)$ and $\\eta_{\\mathcal A}$ is multiplicative. The counit $\\epsilon:u^*\\mathcal A\\to\\mathcal O_U$ (adjoint to $\\mathrm{id}:\\mathcal A\\to u_*\\mathcal O_U$) is $b\\otimes a\\mapsto b\\cdot a$ on the presheaf level, a morphism of $\\mathcal O_U$-algebras. Set $h(\\mathcal G)=u^*\\mathcal G\\otimes_{u^*\\mathcal A}\\mathcal O_U$ (change of rings along $\\epsilon$, [def-pur-sheaf-tensor-product]) and $h(\\psi)=u^*\\psi\\otimes1$ for $\\mathcal A$-linear $\\psi$; $u^*\\psi$ is $u^*\\mathcal A$-linear. Quasi-coherence: $\\mathcal G$ is a quasi-coherent $\\mathcal O_X$-module by Step 1 and $\\mathcal A$ is one by [lem-weil-pbc-affine-morphism-relative-spec] (1), so $u^*\\mathcal G$ and $u^*\\mathcal A$ are quasi-coherent $\\mathcal O_U$-modules by [lem-weil-pbc-module-pullback-quasi-coherent]; [lem-weil-pbc-quasi-coherent-algebra-change-of-rings] with $Y=U$, $\\mathcal B=u^*\\mathcal A$, $\\mathcal C=\\mathcal O_U$, $\\varphi=\\epsilon$, $\\mathcal P=u^*\\mathcal G$ shows that $h(\\mathcal G)$ is a quasi-coherent $\\mathcal O_U$-module and that $t_W:(u^*\\mathcal G)(W)\\otimes_{(u^*\\mathcal A)(W)}\\mathcal O_U(W)\\to h(\\mathcal G)(W)$ is bijective for every affine open $W\\subseteq U$. The maps: for a quasi-coherent $\\mathcal O_U$-module $\\mathcal F$, regard $\\mathcal F$ as a $u^*\\mathcal A$-module through $\\epsilon$; the counit $\\varepsilon_{\\mathcal F}:u^*u_*\\mathcal F\\to\\mathcal F$ is $u^*\\mathcal A$-linear (on the presheaf level it is $b\\otimes s\\mapsto b\\cdot s$, and $(b\\otimes a)(b'\\otimes s)=bb'\\otimes as\\mapsto bb'as=\\epsilon(b\\otimes a)\\cdot(b's)$), so by the universal property of the sectionwise tensor product and of sheafification it induces the $\\mathcal O_U$-linear $\\alpha_{\\mathcal F}:h(u_*\\mathcal F)\\to\\mathcal F$, $p\\otimes c\\mapsto c\\cdot\\varepsilon_{\\mathcal F}(p)$. For a quasi-coherent $\\mathcal A$-module $\\mathcal G$ let $\\gamma:u^*\\mathcal G\\to h(\\mathcal G)$, $p\\mapsto p\\otimes1$, and $\\beta_{\\mathcal G}=u_*(\\gamma)\\circ\\eta_{\\mathcal G}:\\mathcal G\\to u_*h(\\mathcal G)$, an $\\mathcal O_X$-linear map with $\\beta_{\\mathcal G}(g)=\\eta_{\\mathcal G}(g)\\otimes1$. Both are natural in $\\mathcal F$, resp. $\\mathcal G$, because the counit, the unit and $\\gamma$ are.",
-   "uses": [
-    "def-pc-module-pullback",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-quasi-coherent-algebra-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof, second paragraph (construction of h and 'Elucidation')"
-   }
-  },
-  {
-   "text": "Sections over $u^{-1}(V)$. Let $V\\subseteq X$ be an affine open, $W=u^{-1}(V)$, which is affine because $u$ is affine [pqf-def-affine-morphism], $R=\\mathcal O_X(V)$, $B=\\mathcal O_U(W)=\\mathcal A(V)$, $\\rho=u^\\sharp_V:R\\to B$. For a quasi-coherent $\\mathcal O_X$-module $\\mathcal H$, [lem-weil-pbc-module-pullback-affine-sections] (with $f=u$ and the affine opens $V$ and $W\\subseteq u^{-1}V$) gives the $B$-linear bijection $c_{\\mathcal H}:\\mathcal H(V)\\otimes_RB\\to(u^*\\mathcal H)(W)$, $s\\otimes b\\mapsto b\\cdot\\eta_{\\mathcal H}(s)|_W$. For $\\mathcal H=\\mathcal A$: $c_{\\mathcal A}$ is a ring isomorphism $B\\otimes_RB\\to(u^*\\mathcal A)(W)$, since $c_{\\mathcal A}(a\\otimes b)c_{\\mathcal A}(a'\\otimes b')=bb'\\eta_{\\mathcal A}(a)\\eta_{\\mathcal A}(a')=bb'\\eta_{\\mathcal A}(aa')=c_{\\mathcal A}(aa'\\otimes bb')$ (Step 3), and $\\epsilon_W\\circ c_{\\mathcal A}$ is the multiplication $\\mu:B\\otimes_RB\\to B$, $a\\otimes b\\mapsto ab$, because $\\epsilon(\\eta_{\\mathcal A}(a))=a$ (Step 3). For $\\mathcal H=\\mathcal G$ a quasi-coherent $\\mathcal A$-module (quasi-coherent over $\\mathcal O_X$ by Step 1), $N=\\mathcal G(V)$ is a $B$-module and, again by $\\eta_{\\mathcal A}(a)\\eta_{\\mathcal G}(g)=\\eta_{\\mathcal G}(ag)$, $c_{\\mathcal G}$ carries the $B\\otimes_RB$-module structure $(b_1\\otimes b_2)(n\\otimes b)=b_1n\\otimes b_2b$ on $N\\otimes_RB$ to the $(u^*\\mathcal A)(W)$-module structure of $(u^*\\mathcal G)(W)$. With the bijection $t_W$ of Step 3 we get a bijection $\\kappa_{\\mathcal G}:(N\\otimes_RB)\\otimes_{B\\otimes_RB}B\\to h(\\mathcal G)(W)$, $(n\\otimes b)\\otimes c\\mapsto t_W(c_{\\mathcal G}(n\\otimes b)\\otimes c)$, where $B$ is a $B\\otimes_RB$-algebra through $\\mu$; it is $B$-linear for the action of $B=\\mathcal O_U(W)$ on the last factor.",
+   "text": "An affine morphism is quasi-compact and separated, hence quasi-separated. Apply qcqs pushforward quasi-coherence and clause (1) to get clause (2), without using any base-change assertion.",
    "uses": [
     "pqf-def-affine-morphism",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-quasi-coherent-algebra-change-of-rings"
+    "pqf-lem-pushforward-qcoh"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof: 'This may be checked on the members of an affine covering, i.e., when X and S are affine'"
-   }
+   "elementary": false
   },
   {
-   "text": "The algebra identity. Let $\\rho:R\\to B$ be a ring map, $N$ a $B$-module, $N\\otimes_RB$ the $B\\otimes_RB$-module with $(b_1\\otimes b_2)(n\\otimes b)=b_1n\\otimes b_2b$, and $B$ a $B\\otimes_RB$-algebra through $\\mu(b_1\\otimes b_2)=b_1b_2$. Then $\\theta:(N\\otimes_RB)\\otimes_{B\\otimes_RB}B\\to N$, $(n\\otimes b)\\otimes c\\mapsto bc\\,n$, is a well-defined isomorphism, $B$-linear for the action on the last factor, with inverse $n\\mapsto(n\\otimes1)\\otimes1$. Well defined: $(n,b,c)\\mapsto bcn$ is $R$-balanced in $(n,b)$ and additive in each variable, and for $x=b_1\\otimes b_2$ both $(x(n\\otimes b))\\otimes c=(b_1n\\otimes b_2b)\\otimes c\\mapsto b_2bc\\,b_1n$ and $(n\\otimes b)\\otimes\\mu(x)c\\mapsto b\\,b_1b_2c\\,n$ agree. $\\theta((n\\otimes1)\\otimes1)=n$. Conversely $(n\\otimes b)\\otimes c=((1\\otimes b)(n\\otimes1))\\otimes c=(n\\otimes1)\\otimes bc$ and $(bc\\,n\\otimes1)\\otimes1=((bc\\otimes1)(n\\otimes1))\\otimes1=(n\\otimes1)\\otimes bc$, so $(\\theta((n\\otimes b)\\otimes c)\\otimes1)\\otimes1=(n\\otimes b)\\otimes c$ on generators. $B$-linearity on the last factor: $\\theta((n\\otimes b)\\otimes c'c)=bc'c\\,n=c'\\theta((n\\otimes b)\\otimes c)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof: 'the key algebra observation ... (N tensor_R A) tensor_{(A tensor_R A)} A = N ... We omit the details' (details written by the agent)"
-   }
-  },
-  {
-   "text": "$\\alpha_{\\mathcal F}$ is an isomorphism. Let $\\mathcal F$ be a quasi-coherent $\\mathcal O_U$-module and $\\mathcal G=u_*\\mathcal F$ (quasi-coherent $\\mathcal A$-module by Step 2). For an affine open $V\\subseteq X$ with $W=u^{-1}V$, $N=\\mathcal G(V)=\\mathcal F(W)$. By the triangle identity $u_*(\\varepsilon_{\\mathcal F})\\circ\\eta_{u_*\\mathcal F}=\\mathrm{id}$ we have $\\varepsilon_{\\mathcal F}(\\eta_{u_*\\mathcal F}(n)|_W)=n$, so by Steps 3 and 4 $(\\alpha_{\\mathcal F})_W\\circ\\kappa_{\\mathcal G}((n\\otimes b)\\otimes c)=c\\cdot\\varepsilon_{\\mathcal F}(b\\cdot\\eta(n)|_W)=bc\\,n=\\theta((n\\otimes b)\\otimes c)$. As $\\kappa_{\\mathcal G}$ and $\\theta$ (Step 5) are bijective, $(\\alpha_{\\mathcal F})_W$ is bijective. If $V$ runs over an affine open cover of $X$, the opens $u^{-1}V$ form an affine open cover of $U$; $h(u_*\\mathcal F)$ and $\\mathcal F$ are quasi-coherent $\\mathcal O_U$-modules (Step 3), so [lem-weil-pbc-quasi-coherent-iso-on-affine-cover] shows that $\\alpha_{\\mathcal F}$ is an isomorphism.",
+   "text": "Choose the tensor pushout, extension-of-scalars functors, and canonical maps using affine_module_tensor_construction. Apply affine_module_tensor_comparison_isIso to these exact data to obtain invertibility on quasi-coherent objects.",
    "uses": [
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+    "lem-weil-pbc-affine-module-tensor-construction",
+    "lem-weil-pbc-affine-module-tensor-comparison-isIso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof, last two paragraphs"
-   }
+   "elementary": false
   },
   {
-   "text": "$\\beta_{\\mathcal G}$ is an isomorphism of $\\mathcal A$-modules. Let $\\mathcal G$ be a quasi-coherent $\\mathcal A$-module, $V\\subseteq X$ affine open, $W=u^{-1}V$, $N=\\mathcal G(V)$. By Steps 3 and 4, $(\\beta_{\\mathcal G})_V(n)=t_W(\\eta_{\\mathcal G}(n)|_W\\otimes1)=\\kappa_{\\mathcal G}((n\\otimes1)\\otimes1)=\\kappa_{\\mathcal G}(\\theta^{-1}(n))$, a bijection $N\\to h(\\mathcal G)(W)=(u_*h(\\mathcal G))(V)$ by Steps 4 and 5. $\\mathcal G$ is a quasi-coherent $\\mathcal O_X$-module (Step 1), $u_*h(\\mathcal G)$ is one by [lem-weil-pbc-affine-pushforward-base-change] (1) applied to the quasi-coherent $h(\\mathcal G)$ (Step 3), and $\\beta_{\\mathcal G}$ is $\\mathcal O_X$-linear; [lem-weil-pbc-quasi-coherent-iso-on-affine-cover] applied to the cover of $X$ by all affine opens shows that $\\beta_{\\mathcal G}$ is an isomorphism of $\\mathcal O_X$-modules. It is $\\mathcal A$-linear: for $a\\in\\mathcal A(V)=B$ and $n\\in N$, $(\\beta_{\\mathcal G})_V(an)=\\kappa_{\\mathcal G}(\\theta^{-1}(an))=\\kappa_{\\mathcal G}(a\\cdot\\theta^{-1}(n))=a\\cdot(\\beta_{\\mathcal G})_V(n)$, using the $B$-linearity of $\\theta$ and of $\\kappa_{\\mathcal G}$ for the action on the last factor, which is the action of $\\mathcal A(V)=\\mathcal O_U(W)$ on $(u_*h(\\mathcal G))(V)$; for an arbitrary open $V'$, $a\\in\\mathcal A(V')$, $g\\in\\mathcal G(V')$, the sections $\\beta(ag)$ and $a\\beta(g)$ agree on every affine open $V\\subseteq V'$, hence are equal since affine opens form a basis and $u_*h(\\mathcal G)$ is a sheaf. An $\\mathcal A$-linear map that is bijective on all sections has an $\\mathcal A$-linear inverse.",
-   "uses": [
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof, last two paragraphs"
-   }
-  },
-  {
-   "text": "Conclusion. By Step 2, $u_*$ is a functor from quasi-coherent $\\mathcal O_U$-modules to quasi-coherent $\\mathcal A$-modules; by Step 3, $h$ is a functor in the other direction (each $h(\\mathcal G)$ quasi-coherent); by Steps 6 and 7 the natural transformations $\\alpha:h\\circ u_*\\to\\mathrm{id}$ and $\\beta:\\mathrm{id}\\to u_*\\circ h$ are natural isomorphisms. Hence $u_*$ is an equivalence with quasi-inverse $h$, which is (2) and (3).",
+   "text": "Lift R and H to the full quasi-coherent subcategories using the preservation assertions. Lift the components of α and β to natural isomorphisms with ObjectProperty.isoMk and NatIso.ofComponents; naturality follows from the original transformations. Use CategoryTheory.Equivalence.mk with the inverse of α and inverse of β. Both inclusion comparisons are reflexive isomorphisms. Reassemble all witnesses and conjuncts of the original statement.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms, Lemma 01SB, proof: 'To finish the proof it suffices to show that these maps are isomorphisms'"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-affine-morphism-relative-spec",
   "lem-weil-pbc-quasi-coherence-scalar-restriction",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-quasi-coherent-algebra-change-of-rings",
   "pqf-def-affine-morphism",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-quasi-coherent-iso-on-affine-cover"
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-affine-module-tensor-construction",
+  "lem-weil-pbc-affine-module-tensor-comparison-isIso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Morphisms, Lemma 01SB (morphisms-lemma-affine-equivalence-modules) and its proof; the omitted algebra details (Step 5) and the affine-section bookkeeping (Steps 3, 4) are written by the agent"
+  "place": "Lemma 01SB; tensor construction and affine invertibility split into two smaller nodes; full-subcategory categorical assembly proved by D2"
  },
  "mathlib_searches": [
   {
@@ -272,5 +202,15 @@
   "group": "K1",
   "result": "pass",
   "note": "IsAffineHom f sole hyp; A=f_*O_U CommRingCat pushforward, S=restrictScalars f^#, R=pushforward id; (1) iff qc over A vs O_X; (2) R preserves qc + E between qc full subcats with E.functor≅R; (3) B pinned by IsPushout r0 t0 (r0≫id=t0≫e0 consistent), ε by b≫ε=1,t≫ε=e0; P,H pinned by obj/map eqs; κ,γ pinned on generating sections; α pinned (γ epi), β pinned (S faithful); IsIso α/β on qc; E.inverse≅H; all universes u; stmt_dep added landed"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085222-L-7160",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
