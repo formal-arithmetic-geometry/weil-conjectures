@@ -31,93 +31,43 @@
  ],
  "proof": [
   {
-   "text": "Set-up. Let $\\mathfrak q\\in T$, say $\\mathfrak q=\\pi^{-1}(\\mathfrak P)$ with $\\mathfrak P\\subset C_1$ prime, and $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Since $\\pi$ vanishes on $IB$, $IB\\subseteq\\mathfrak q$; for $a\\in I$, $\\varphi(a)\\in IB\\subseteq\\mathfrak q$, so $a\\in\\mathfrak p$: $I\\subseteq\\mathfrak p$. Choose $u\\in B$ whose class in $B/IB$ is $1-\\varepsilon$; then $\\pi(u)=\\varepsilon(1-\\varepsilon)=0\\in\\mathfrak P$, so $u\\in\\mathfrak q$. Put $F=B\\otimes_A\\kappa(\\mathfrak p)$ and $j:B\\to F$, $b\\mapsto b\\otimes1$.",
+   "text": "Let pi:B→C₁ be the quotient projection. It is surjective. Its map f on prime spectra is a closed embedding by PrimeSpectrum.isClosedEmbedding_comap_of_surjective. Factor f through Spec(B/IB). The product-spectrum homeomorphism identifies the first-factor inclusion with Sum.inl, so its image is open in Spec(B/IB). The quotient embedding therefore gives an open subset O of Spec(B) such that range(f)=O intersect V(IB).",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix q=f(r), put p=q∩A and p₀=r∩(A/I). Compatibility of the algebra structure gives p=comap(A→A/I)(p₀). Let S be the fibre over p₀ in Spec(C₁). The finite (A/I)-module C₁ is a quasi-finite algebra by the Mathlib instance; Algebra.QuasiFinite.isDiscrete_comap_preimage_singleton makes S discrete. Its image f(S) is discrete because f is inducing. The chosen q belongs to f(S), so some open U of Spec(B) meets f(S) exactly in {q}. This is the finite-fibre discreteness argument implemented directly by Mathlib, without constructing an idempotent quotient of the fibre ring.",
+   "uses": [
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let F be the set-theoretic fibre over p in Spec(B). Compatibility and injectivity of comap(A→A/I) show f(S)=range(f) intersect F. Since I⊆p, every point of F contains IB; hence F⊆V(IB). Therefore f(S)=O intersect F, and (U intersect O) intersect F={q}. Its preimage under the subtype inclusion is the open singleton of q in F.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2512-2516, proof of Lemma Tag 09XH (lemma-helper-finite-type), first sentence ('by looking at fibre rings, see Algebra, Definition 00PL'); details written out by the worker"
-   }
+   "elementary": true
   },
   {
-   "text": "The map $\\rho:B/IB\\to F$. The structure map $A\\to\\kappa(\\mathfrak p)=A_{\\mathfrak p}/\\mathfrak pA_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] sends $a\\in\\mathfrak p$ to the class of $a/1\\in\\mathfrak pA_{\\mathfrak p}$, i.e. to $0$; as $I\\subseteq\\mathfrak p$ (step 1) it kills $I$. Hence for $a\\in I$, $b\\in B$: $j(\\varphi(a)b)=\\varphi(a)b\\otimes1=b\\otimes(a\\cdot1)=0$, so the ring map $j$ vanishes on $IB$ and induces a ring map $\\rho:B/IB\\to F$ with $\\rho(\\bar b)=j(b)$. Then $e:=\\rho(\\varepsilon)$ is an idempotent of $F$ and $1-e=\\rho(1-\\varepsilon)=j(u)$. Also $j(\\varphi(a))=\\varphi(a)\\otimes1=1\\otimes(a\\cdot1)$, i.e. $j\\circ\\varphi$ is the composite $A\\to\\kappa(\\mathfrak p)\\to F$.",
+   "text": "Transfer the open singleton through PrimeSpectrum.preimageHomeomorphFiber A B p. The resulting open singleton in Spec(p.Fiber B) is precisely Algebra.IsQuasiFiniteAtPrime A B q. The point q in the component was arbitrary.",
    "uses": [
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2512-2516, proof of Lemma Tag 09XH (lemma-helper-finite-type), first sentence ('by looking at fibre rings, see Algebra, Definition 00PL'); details written out by the worker"
-   }
-  },
-  {
-   "text": "The prime $\\mathfrak Q$ of the fibre ring. By [lem-weil-pbc-fibre-ring-primes-bijection] (applied to $\\varphi$, $\\mathfrak p$ and the prime $\\mathfrak q$, which satisfies $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$) there is a unique prime $\\mathfrak Q\\subset F$ with $j^{-1}(\\mathfrak Q)=\\mathfrak q$; it is the prime of $F$ corresponding to $\\mathfrak q$. Since $u\\in\\mathfrak q$ (step 1), $1-e=j(u)\\in\\mathfrak Q$ (step 2).",
-   "uses": [
-    "lem-weil-pbc-fibre-ring-primes-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2512-2516, proof of Lemma Tag 09XH (lemma-helper-finite-type), first sentence ('by looking at fibre rings, see Algebra, Definition 00PL'); details written out by the worker"
-   }
-  },
-  {
-   "text": "$F/(1-e)F$ is a finite $\\kappa(\\mathfrak p)$-algebra. Let $\\bar F=F/(1-e)F$, a $\\kappa(\\mathfrak p)$-algebra via $\\lambda\\mapsto1\\otimes\\lambda$. As $b\\otimes\\lambda=\\lambda\\cdot(b\\otimes1)$, $F$ is spanned over $\\kappa(\\mathfrak p)$ by the $j(b)$, $b\\in B$, so $\\bar F$ is spanned by their classes. Since $j(b)(1-e)\\in(1-e)F$, the class of $j(b)$ equals the class of $j(b)e=\\rho(\\bar b\\varepsilon)$. Let $c_1,\\dots,c_n\\in\\varepsilon(B/IB)=C_1$ generate $C_1$ as an $A/I$-module, where $\\bar a\\in A/I$ acts by multiplication by $\\varepsilon\\bar\\varphi(\\bar a)$. Then $\\bar b\\varepsilon\\in C_1$ is $\\sum_i\\varepsilon\\bar\\varphi(\\bar a_i)c_i=\\sum_i\\bar\\varphi(\\bar a_i)c_i$ for some $a_i\\in A$, so $\\rho(\\bar b\\varepsilon)=\\sum_ij(\\varphi(a_i))\\rho(c_i)=\\sum_i(a_i\\cdot1_{\\kappa(\\mathfrak p)})\\cdot\\rho(c_i)$ by step 2. Hence the classes of $\\rho(c_1),\\dots,\\rho(c_n)$ span $\\bar F$ over $\\kappa(\\mathfrak p)$: $\\bar F$ is a finite $\\kappa(\\mathfrak p)$-algebra.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2512-2516, proof of Lemma Tag 09XH (lemma-helper-finite-type), first sentence ('by looking at fibre rings, see Algebra, Definition 00PL'); details written out by the worker"
-   }
-  },
-  {
-   "text": "The primes of $F$ containing $1-e$. The field $\\kappa(\\mathfrak p)$ is a local ring whose only prime ideal is its maximal ideal $0$. By [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] (with $R=\\kappa(\\mathfrak p)$ and the finite $\\kappa(\\mathfrak p)$-algebra $\\bar F$ of step 4), $\\bar F$ has only finitely many prime ideals, each of them maximal. By the correspondence between ideals of $F$ containing $(1-e)F$ and ideals of $\\bar F$, the primes of $F$ containing $1-e$ are the preimages of the primes of $\\bar F$, and such a prime $\\mathfrak Q'$ is maximal in $F$ because $F/\\mathfrak Q'\\cong\\bar F/(\\mathfrak Q'/(1-e)F)$ is a field. So $V(1-e)\\subseteq\\operatorname{Spec}(F)$ [def-weil-affine-spectrum] is a finite set of maximal ideals, containing $\\mathfrak Q$ (step 3); each of its points $\\mathfrak M$ is closed in $\\operatorname{Spec}(F)$, as $\\{\\mathfrak M\\}=V(\\mathfrak M)$.",
-   "uses": [
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2512-2516, proof of Lemma Tag 09XH (lemma-helper-finite-type), first sentence ('by looking at fibre rings, see Algebra, Definition 00PL'); details written out by the worker"
-   }
-  },
-  {
-   "text": "$\\mathfrak Q$ is isolated. A prime of $F$ contains exactly one of $e$ and $1-e$: not both, since $e+(1-e)=1$, and at least one, since $e(1-e)=0$. So $V(1-e)=D(e)$, which is open in $\\operatorname{Spec}(F)$ by [lem-weil-pbc-spec-clopen-idempotent] (applied to the idempotent $e$ of $F$). The set $W=V(1-e)\\setminus\\{\\mathfrak Q\\}$ is a finite union of closed points (step 5), hence closed. Therefore $\\{\\mathfrak Q\\}=D(e)\\cap(\\operatorname{Spec}(F)\\setminus W)$ is open in $\\operatorname{Spec}(F)$: $\\mathfrak Q$ is an isolated point of $\\operatorname{Spec}(B\\otimes_A\\kappa(\\mathfrak p))$.",
-   "uses": [
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "more-algebra.tex:2512-2516, proof of Lemma Tag 09XH (lemma-helper-finite-type), first sentence ('by looking at fibre rings, see Algebra, Definition 00PL'); details written out by the worker"
-   }
-  },
-  {
-   "text": "Conclusion. $A\\to B$ is of finite type and the prime $\\mathfrak Q$ of $B\\otimes_A\\kappa(\\mathfrak p)$ corresponding to $\\mathfrak q$ (step 3) is an isolated point of its spectrum (step 6); by [def-weil-pbc-ring-map-quasi-finite-at-prime] (Stacks 00PL via 00PK (1)) $A\\to B$ is quasi-finite at $\\mathfrak q$. As $\\mathfrak q\\in T$ was arbitrary, this holds at every prime of $T$.",
-   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
     "def-weil-pbc-ring-map-quasi-finite-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "algebra.tex:30195-30241, Lemma Tag 00PK (1) and Definition Tag 00PL"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
   "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
   "def-weil-pbc-ring-map-quasi-finite-at-prime"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "proof of Lemma Tag 09XH (lemma-helper-finite-type), lines 2512-2516, which gives only the hint 'by looking at fibre rings, see Algebra, Definition 00PL'; the fibre-ring argument (steps 1-6) is written out by the worker, the definition is algebra.tex Tag 00PL with Tag 00PK (1)"
+  "place": "Tag 09XH, proof of lemma-helper-finite-type, first sentence; V2 implements the finite-component fibre argument using discrete subsets and the product-spectrum homeomorphism rather than an explicit quotient of the fibre ring."
  },
  "mathlib_searches": [
   {
@@ -208,5 +158,15 @@
   "group": "E1",
   "result": "fix",
   "note": "phi:A->B finite type; I, IB=I.map; B/IB = C1 x C2 as ring iso + hcompat pinning A/I-structure on C1 (Module.Finite), nothing on C2; pi = fst o e o mk; T = range comap pi; forall q in T, IsQuasiFiniteAtPrime A B q (recorded def, Fiber); edge cases I=top, C1=0 vacuous"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T144154-L-2110497",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
