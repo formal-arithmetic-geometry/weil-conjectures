@@ -1,6 +1,6 @@
 # Work queue
 
-66 items; claim with `tools/claim.py next <group> [--stage N]`.
+68 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (5)
 
@@ -22,7 +22,7 @@
 
 Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement dependency.
 
-## Stage 3: modules to prove (58)
+## Stage 3: modules to prove (60)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
@@ -43,7 +43,6 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `WeilConjectures.ConstructibleSheaf.KernelCokernel` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian` | 2 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.Gabber` | 2 | 4 | proof |
-| `Sheaf.AlgebraicGeometry.AffineClosedInjectiveAcyclic` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.ReducedConstantLowerShriekAssertions` | 3 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleH0FiniteConnectedCriterion` | 3 | 1 | proof |
@@ -51,6 +50,8 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy` | 3 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.HenselianConnectedness` | 3 | 1 | proof |
 | `WeilConjectures.ConstructibleSheaf.LocallyConstantReduction` | 3 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AffineClosedEtaleNeighborhoodComparison` | 4 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.InjectiveModuleSheafHCohomology` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso` | 4 | 1 | proof |
 | `Sheaf.Paper.ZeroDimensionalGlobalSectionsExact` | 4 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction` | 5 | 1 | proof |
@@ -61,6 +62,7 @@ Not open yet: 42 nodes that wait for stage 1, 5 nodes that wait for a statement 
 | `Sheaf.AlgebraicGeometry.ConstructibleModuleIntegralStalkEmbedding` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange` | 5 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment` | 5 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.RestrictedCohomologyColimit` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk` | 5 | 1 | proof |
 | `Sheaf.RingTheory.StrictlyHenselianOfDimensionZero` | 5 | 1 | proof |
