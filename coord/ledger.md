@@ -6191,3 +6191,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/F2/Sheaf.AlgebraicGeometry.EtaleInjectiveColimitAcyclic (stage 3; reviewer PASS; first push; landing 20261012T053930-L-2634507 (proof); batch 20261012T053916; modules 1; new nodes 0)
 - 05:39 L: merged deliver/F2/Sheaf.CategoryTheory.ColimitSiteCechComplex (stage 3; reviewer PASS; first push; landing 20261012T053930-L-2634602 (interface); batch 20261012T053916; modules 3; new nodes 2; change records: coord/changes/colimit-site-cech-intermediates.md)
 - 05:39 L: merged deliver/F2/Sheaf.RingTheory.HenselizationColimit (stage 3; reviewer PASS; first push; landing 20261012T053930-L-2634713 (proof); batch 20261012T053916; modules 1; new nodes 0)
+- 05:39 L: merged deliver/G1/Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec (stage 3; reviewer PASS; first push; landing 20261012T053931-L-2634849 (interface); batch 20261012T053916; modules 4; new nodes 3)

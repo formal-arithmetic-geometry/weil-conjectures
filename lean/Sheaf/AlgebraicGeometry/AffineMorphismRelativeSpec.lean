@@ -10,9 +10,12 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraAffineInclusion
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.AffineStructureAlgebraFullyFaithful
+import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
+import Sheaf.AlgebraicGeometry.RelativeSpecMorphismChart
 
 /-! # Affine morphisms and quasi-coherent algebras (relative spectrum)
 
@@ -39,6 +42,76 @@ set_option hygiene false in
 local notation "𝒪⁎" f:max => Under.mk (⟨(f).c⟩ : Scheme.sheaf _ ⟶
   (TopCat.Sheaf.pushforward CommRingCat.{u} (f).base).obj (Scheme.sheaf _))
 
+private theorem qc {X S : Scheme.{u}} (f : X ⟶ S) [IsAffineHom f] :
+    (Scheme.CommAlgebraSheaf.toModule (𝒪⁎ f)).IsQuasicoherent := by
+  let := IsSeparated.of_isAffineHom f
+  have := SheafOfModules.isQuasicoherent_unit.{u, u, u} (R := X.ringCatSheaf)
+  exact Scheme.Modules.isQuasicoherent_pushforward_of_quasiCompact_quasiSeparated f
+    (SheafOfModules.unit X.ringCatSheaf)
+private noncomputable def affineStructureAlgebraFunctor (S : Scheme.{u}) :
+    (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ⥤
+      ObjectProperty.FullSubcategory
+        (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent) := by
+  refine {
+    obj := fun Y ↦ ⟨𝒪⁎ Y.unop.obj.hom, @qc _ _ Y.unop.obj.hom Y.unop.property⟩
+    map := fun {Y Y'} h ↦ ⟨Under.homMk ⟨{
+      app := fun V ↦ h.unop.hom.left.appLE (Y.unop.obj.hom ⁻¹ᵁ V.unop)
+        (Y'.unop.obj.hom ⁻¹ᵁ V.unop)
+        (by rw [← Over.w h.unop.hom, Scheme.Hom.comp_preimage])
+      naturality := ?_ }⟩ ?_⟩
+    map_id := ?_
+    map_comp := ?_ }
+  · intro U V i
+    change Y.unop.obj.left.presheaf.map
+        ((Opens.map Y.unop.obj.hom.base).map i.unop).op ≫ _ = _ ≫
+      Y'.unop.obj.left.presheaf.map ((Opens.map Y'.unop.obj.hom.base).map i.unop).op
+    simp only [Scheme.Hom.map_appLE, Scheme.Hom.appLE_map]
+  · apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    change Y.unop.obj.hom.app V.unop ≫ h.unop.hom.left.appLE _ _ _ =
+      Y'.unop.obj.hom.app V.unop
+    rw [← Scheme.Hom.comp_appLE]
+    exact (Scheme.Hom.congr_app (Over.w h.unop.hom).symm V.unop).symm
+  · intro Y
+    apply InducedCategory.hom_ext
+    apply StructuredArrow.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    change Scheme.Hom.appLE (𝟙 Y.unop.obj.left) _ _ _ = 𝟙 _
+    simp only [Scheme.Hom.appLE, Scheme.Hom.id_base, Scheme.Hom.id_app,
+      homOfLE_refl, op_id, Category.id_comp]
+    exact CategoryTheory.Functor.map_id _ _
+  · intro Y Y' Y'' h k
+    apply InducedCategory.hom_ext
+    apply StructuredArrow.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    change (k.unop.hom.left ≫ h.unop.hom.left).appLE _ _ _ =
+      h.unop.hom.left.appLE _ _ _ ≫ k.unop.hom.left.appLE _ _ _
+    rw [Scheme.Hom.appLE_comp_appLE]
+
+private noncomputable def structureAlgebraRestrictionIso {X S : Scheme.{u}}
+    (f : X ⟶ S) (V : S.Opens) :
+    ((Under.post (V.ι.isOpenEmbedding.sheafPullback CommRingCat.{u})).obj
+      (𝒪⁎ f) : V.toScheme.CommAlgebraSheaf) ≅ 𝒪⁎ (f ∣_ V) := by
+  refine Under.isoMk (ObjectProperty.isoMk _ (NatIso.ofComponents
+    (fun W ↦ X.presheaf.mapIso (eqToIso
+      (image_morphismRestrict_preimage f V W.unop)).op) ?_)) ?_
+  · intro W W' i
+    change X.presheaf.map _ ≫ X.presheaf.map _ = X.presheaf.map _ ≫ X.presheaf.map _
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    congr 1
+  · apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext W
+    change f.app (V.ι ''ᵁ W.unop) ≫ _ = (f ∣_ V).app W.unop
+    exact (morphismRestrict_app f V W.unop).symm
+
+set_option maxHeartbeats 600000 in
+-- The equivalence witnesses and sectionwise naturality require substantial dependent elaboration.
 /-- (1) For an affine `f : X ⟶ S`, `f_* 𝒪_X` is a quasi-coherent `𝒪_S`-algebra.
 (3) An anti-equivalence `E` from schemes affine over `S` to quasi-coherent `𝒪_S`-algebras whose
 functor is `f ↦ f_* 𝒪_X` on objects (`hobj`) and `h ↦ f'_* h^♯` on morphisms (sections:
@@ -107,6 +180,51 @@ theorem affine_morphism_relative_spec (S : Scheme.{u}) :
             Spec.map (((E.counitIso.app A).inv.hom ≫
               eqToHom (hobj (E.inverse.obj A).unop)).right.hom.app (op (V.ι ''ᵁ W)) ≫
               (ρ (E.inverse.obj A).unop V).hom.right.hom.app (op W)))) := by
-  sorry
+  classical
+  refine ⟨fun f hf ↦ @qc _ _ f hf, ?_⟩
+  let F := affineStructureAlgebraFunctor S
+  have hobj : ∀ Y, (F.obj (op Y)).obj = 𝒪⁎ Y.obj.hom := fun _ ↦ rfl
+  have hmap : ∀ (Y Y') (h : Y ⟶ Y') (V : S.Opens),
+      (F.map h.op).hom.right.hom.app (op V) =
+        eqToHom (by rw [hobj Y']; rfl) ≫
+          h.hom.left.appLE (Y'.obj.hom ⁻¹ᵁ V) (Y.obj.hom ⁻¹ᵁ V)
+            (by rw [← Over.w h.hom, Scheme.Hom.comp_preimage]) ≫
+          eqToHom (by rw [hobj Y]; rfl) := by
+    intros
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  have hFF : F.Full ∧ F.Faithful :=
+    affine_structure_algebra_full_faithful S F hobj hmap
+  have : F.Full := hFF.1
+  have : F.Faithful := hFF.2
+  have : F.EssSurj := by
+    refine ⟨fun A ↦ ?_⟩
+    obtain ⟨X, f, hf, ⟨α⟩⟩ := exists_affine_structure_algebra S A.obj A.property
+    let Y : ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom) :=
+      ⟨Over.mk f, hf⟩
+    refine ⟨op Y, ⟨ObjectProperty.isoMk _ ?_⟩⟩
+    exact (eqToIso (hobj Y)) ≪≫ α.symm
+  let : F.IsEquivalence := {}
+  let E := F.asEquivalence
+  refine ⟨E, hobj, fun Y V ↦ structureAlgebraRestrictionIso Y.obj.hom V,
+    hmap, ?_, ?_, ?_, ?_⟩
+  · intro A U hU
+    have : IsAffineHom (E.inverse.obj A).unop.obj.hom := (E.inverse.obj A).unop.property
+    have : IsIso ((E.inverse.obj A).unop.obj.hom ⁻¹ᵁ U).toSpecΓ :=
+      (hU.preimage _).isoSpec.isIso_hom
+    infer_instance
+  · exact relative_spec_morphism_chart S E hobj
+  · intro Y V W
+    simp only [structureAlgebraRestrictionIso, Scheme.Opens.ι_appLE]
+    rfl
+  · intro A V
+    have : IsAffineHom (E.inverse.obj A).unop.obj.hom := (E.inverse.obj A).unop.property
+    have : IsAffineHom ((E.inverse.obj A).unop.obj.hom ∣_ V) :=
+      IsZariskiLocalAtTarget.restrict ‹IsAffineHom _› V
+    refine ⟨(isPullback_morphismRestrict _ V).flip, inferInstance, ?_⟩
+    intro W hW
+    have : IsIso (((E.inverse.obj A).unop.obj.hom ∣_ V) ⁻¹ᵁ W).toSpecΓ :=
+      (hW.preimage _).isoSpec.isIso_hom
+    infer_instance
 
 end AlgebraicGeometry
