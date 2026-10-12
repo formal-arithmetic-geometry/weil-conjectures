@@ -7912,3 +7912,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/R1/Sheaf.AlgebraicGeometry.SerreSectionModuleFractionLift (stage 3; reviewer PASS; first push; landing 20261012T135308-L-1688658 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/R2/Sheaf.AlgebraicGeometry.FinitePiecePersistence (stage 3; reviewer PASS; first push; landing 20261012T135308-L-1688811 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:53 L: merged deliver/R2/Sheaf.AlgebraicGeometry.GaloisPointActionOpen (stage 3; reviewer PASS; first push; landing 20261012T135308-L-1688960 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:53 L: merged deliver/R2/Sheaf.AlgebraicGeometry.ProjGradedModuleChartGluing (stage 3; reviewer PASS; first push; landing 20261012T135309-L-1689152 (proof); batch 20261012T135212; modules 1; new nodes 0)

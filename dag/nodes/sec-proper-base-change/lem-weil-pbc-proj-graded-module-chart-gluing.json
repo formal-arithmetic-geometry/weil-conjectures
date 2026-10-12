@@ -17,30 +17,33 @@
  ],
  "proof": [
   {
-   "text": "1. Use standardOpenProperties to obtain the unit-ideal generators\n   u_i = g_i^deg(f)/f^deg(g_i) in R[f] for the displayed cover.",
+   "text": "Apply gradedModuleAwayRestriction. Its submodules equal the given Z by extensionality of their degreeZeroFractions carriers. Represent each element of Z_f by an ordinary localized fraction and use the two fraction formulas to identify the given rho with the constructed restriction. No comparison of rhoS is needed.",
    "uses": [
+    "lem-weil-pbc-graded-module-away-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the value formula for U(f,g) to identify it with g^deg(f)/f^deg(g). Injectivity of homogeneous localization into ordinary localization, multiplication of fractions, and pow_add prove U(f,gh)=U(f,g)*U(f,h). Apply the finite-cover clause of standardOpenProperties to obtain Ideal.span(range U(f,g_i))=top, including the empty cover.",
+   "uses": [
+    "lem-weil-pbc-graded-module-away-restriction",
     "lem-weil-pbc-proj-standard-open-inclusion"
    ],
    "elementary": false
   },
   {
-   "text": "2. Apply gradedModuleAwayRestriction. Its submodule has the same carrier as Z, so\n   Submodule.ext identifies them. The given rho agrees with its restriction: represent\n   each element by an ordinary localized fraction and use the stated fraction formula.\n   The ambient ring maps agree by the uniqueness of maps out of S_f that commute with S;\n   injectivity of homogeneous-localization inclusion gives equality of rhoS.",
+   "text": "Pull q_i back along theta(f,g_i) to s_i. For each product chart, take the two commuting squares from gradedModuleAwayRestriction and transport their common target using U(f,g_i*g_j)=U(f,g_i)*U(f,g_j). Uniqueness of kappa identifies both maps with the canonical IsLocalizedModule.lift maps of coverModuleExact, because these maps all send x/1 to x/1. Injectivity of the common comparison equivalence and the given overlap equality imply compatibility of the s_i.",
    "uses": [
-    "lem-weil-pbc-graded-module-away-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "3. Transport the principal localization comparisons to Z. The comparison to each chart\n   sends t/1 to rho(t). The generator for the product chart is u_i*u_j: this follows by\n   multiplying the two fractions. The comparison composition law identifies the two\n   overlap maps with the canonical localization maps in coverModuleExact.",
-   "uses": [
-    "lem-weil-pbc-graded-module-away-restriction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "4. Transport q_i back along these comparisons. The overlap assumption is exactly the\n   compatibility hypothesis of coverModuleExact. That theorem gives a unique t in Z f,\n   and its localization equations give the asserted restriction equations. Conversely\n   any solution localizes to this glued t and hence equals it. For n=0 the unit-ideal\n   hypothesis forces R[f] to be the zero ring and Z f the zero module, so the same\n   existence and uniqueness proof applies without a maximum over an empty set.",
-   "uses": [
+    "lem-weil-pbc-graded-module-away-restriction",
     "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coverModuleExact to R_f, Z_f and the generators U(f,g_i). Its unique x localizes to s_i. Applying theta(f,g_i) and its formula on x/1 proves rho(f,g_i)(x)=q_i. Conversely, injectivity of theta(f,g_i) turns any other solution into the same localization equations, so uniqueness in coverModuleExact proves it equals x. The same proof handles n=0 without selecting an index.",
+   "uses": [
+    "lem-weil-pbc-cover-module-exact",
+    "lem-weil-pbc-graded-module-away-restriction"
    ],
    "elementary": false
   }
@@ -52,11 +55,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q2",
+  "group": "R2",
   "date": "2026-10-12",
   "document": "literature/stacks-project/constructions.tex",
   "place": "Section 01M3, text before Definition 01M6; Lemma 01M7 (1)--(3); Lemma 01MB",
-  "note": "Source argument specialized to the existing Lean chart interfaces."
+  "note": "Lean proof from the existing restriction comparisons, standard-open covering criterion, and finite module localization gluing. Ring-restriction comparison is unnecessary."
  },
  "mathlib_searches": [
   {
@@ -127,10 +130,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q2",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T110315-L-620526",
-  "kind": "interface",
+  "landing": "20261012T135309-L-1689152",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
