@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-ind-smooth-quotient-compatibility",
+ "kind": "statement",
+ "title": "Ind-smoothness is compatible with successive quotients",
+ "statement": "Let R → Λ be a homomorphism of commutative rings, and let K ≤ I be ideals of R. If Λ/IΛ is a filtered colimit of smooth R/I-algebras [def-weil-pbc-filtered-colimit-smooth-algebras], then (Λ/KΛ)/(I/K)(Λ/KΛ) is a filtered colimit of smooth (R/K)/(I/K)-algebras.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Smoothing Ring Maps, Proposition 07CM, induction on the nilpotence exponent"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-filtered-colimit-smooth-algebras"
+ ],
+ "proof": [
+  {
+   "text": "Put J = I.map(algebraMap R Λ) and L = K.map(algebraMap R Λ). Monotonicity gives L ≤ J. The ideal extended from I.map(Quotient.mk K) to Λ/L equals J.map(Quotient.mk L): ideal map composition and commutativity of the quotient algebra square give the equality. DoubleQuot.quotQuotEquivQuotOfLE identifies (R/K)/(I/K) with R/I and (Λ/L)/(J/L) with Λ/J. These maps send the double class of each element to its single class, so they commute with the structure maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict scalar actions along the base ring isomorphism and its inverse. On algebra homomorphisms keep the underlying functions; scalar compatibility follows by substitution. These functors are inverse up to the identity maps on underlying rings. Smoothness is preserved: transport a finite polynomial presentation by changing coefficients along the isomorphism, and transport the square-zero lifting problem along the same scalar action; the original lift is a lift after transport. Thus both finite presentation and formal smoothness hold for each transported term.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the transport functor to the given diagram and its colimit cocone, keeping the same small filtered index category. It remains a colimit: send any competing cocone through the inverse functor, use the original universal property, and transport its unique map back. Compose the transported vertex with the compatible algebra isomorphism from the first step. The resulting cocone has the required double quotient as vertex and smooth terms, hence witnesses ObjectProperty.ind.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-12",
+  "note": "Explicit elementary quotient and scalar-transport argument expanding the implicit induction in Stacks Project Proposition 07CM; checked in the second reading."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "third isomorphism theorem and equivalence of algebra categories",
+   "results": "DoubleQuot.quotQuotEquivQuotOfLE and DoubleQuot.quotQuotEquivQuotOfLEₐ (Mathlib.RingTheory.Ideal.Quotient.Operations); AlgCat.restrictScalarsEquivalenceOfRingEquiv is for AlgCat, not directly CommAlgCat. ObjectProperty.ind_iff_of_equivalence supplies categorical transport once the compatible equivalence is built.",
+   "date": "2026-10-12",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit smooth algebras transport under isomorphism of base rings",
+   "results": "Algebra.Smooth.of_equiv and Algebra.FormallySmooth.iff_of_equiv; no ind-smooth transport theorem",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.ind",
+   "results": "msearch.py returned zero hits: unknown identifier ObjectProperty.ind. The local source search found ObjectProperty.ind_iff_of_equivalence.",
+   "date": "2026-10-12",
+   "verdict": "no remote match; local partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ind smooth algebra quotient quotient ideal ring isomorphism",
+   "results": "Service unavailable: Internal Server Error (msearch.py, 2026-10-12)",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "successive quotient rings isomorphic transport diagram colimit smoothness",
+   "results": "DoubleQuot.quotQuotEquivComm_comp_quotQuotMk and quotient transition lemmas, no full ind-smooth compatibility result",
+   "date": "2026-10-12",
+   "verdict": "no exact match; independent second reading"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.quotQuotEquivQuotOfLEₐ",
+   "results": "Unknown identifier; corrected locally to DoubleQuot.quotQuotEquivQuotOfLEₐ",
+   "date": "2026-10-12",
+   "verdict": "local partial match; independent second reading"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.PopescuLiftNilpotent",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-lift-nilpotent",
+   "place": "induction step",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.IndSmoothQuotientCompatibility",
+  "file": "lean/Sheaf/Algebra/IndSmoothQuotientCompatibility.lean",
+  "declaration": "Algebra.ind_smooth_quotient_compatibility",
+  "statement": "theorem ind_smooth_quotient_compatibility\n    (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]\n    (I K : Ideal R) (hKI : K ≤ I)\n    (hΛ : ObjectProperty.ind.{max u v}\n      (fun C : CommAlgCat.{max u v} (R ⧸ I) ↦ Smooth (R ⧸ I) C)\n      (CommAlgCat.of (R ⧸ I) (Λ ⧸ I.map (algebraMap R Λ)))) :\n    let R' := R ⧸ K\n    let Λ' := Λ ⧸ K.map (algebraMap R Λ)\n    let I' := I.map (Ideal.Quotient.mk K)\n    ObjectProperty.ind.{max u v}\n      (fun C : CommAlgCat.{max u v} (R' ⧸ I') ↦ Smooth (R' ⧸ I') C)\n      (CommAlgCat.of (R' ⧸ I') (Λ' ⧸ I'.map (algebraMap R' Λ')))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110310-L-618260",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T110310-L-618260",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
