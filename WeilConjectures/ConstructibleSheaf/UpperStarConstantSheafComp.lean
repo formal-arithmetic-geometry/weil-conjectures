@@ -72,7 +72,8 @@ private lemma lowerStarComp_hom_app_sheafSections (F : Sheaf X.smallEtaleTopolog
       PreservesTerminal.iso (Hom.Etale g)).symm).hom_ext _ _))
 
 /-- The identifications `f^* A_Y ≅ A_X` are compatible with composition: the identification for
-`g ≫ h` is `(g ≫ h)^* A_Z ≅ g^* h^* A_Z ≅ g^* A_Y ≅ A_X`. -/
+`g ≫ h` is `(g ≫ h)^* A_Z ≅ g^* h^* A_Z ≅ g^* A_Y ≅ A_X`.
+(blueprint: `lem-weil-pbc-constant-pullback-composition-coherence`) -/
 lemma upperStarConstantSheafIso_comp (a : A) :
     (upperStarComp A g h).hom.app ((constantSheaf Z.smallEtaleTopology A).obj a) ≫
         (g)^*[A].map ((upperStarConstantSheafIso A h).hom.app a) ≫

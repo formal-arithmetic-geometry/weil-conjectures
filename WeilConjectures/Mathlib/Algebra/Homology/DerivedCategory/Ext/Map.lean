@@ -113,7 +113,8 @@ lemma mk₀_comp_mapExactFunctor_comp_eq_zero_iff (G₁ : C ⥤ D) [G₁.Additiv
 /-- Let `G₁ : C ⥤ D`, `G₂ : D ⥤ E` and `G : C ⥤ E` be exact functors with an isomorphism
 `τ : G ≅ G₁ ⋙ G₂`. Pushing a class of `Extⁿ(A, B)` forward along `G` agrees, up to `τ`, with
 pushing it forward along `G₁` and then along `G₂`. The proof is by dimension shifting along an
-injective envelope of `B`. -/
+injective envelope of `B`.
+(blueprint: `lem-weil-pbc-ext-exact-functor-composition-comparison`) -/
 lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁] (G₂ : D ⥤ E) [G₂.Additive]
     [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂] (G : C ⥤ E) [G.Additive]
