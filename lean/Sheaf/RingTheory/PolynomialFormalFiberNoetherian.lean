@@ -1,19 +1,15 @@
 module
 public import Mathlib.Algebra.Polynomial.Basic
 public import Sheaf.RingTheory.GRing
+import Mathlib.RingTheory.Polynomial.Basic
 import Sheaf.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
-import Sheaf.RingTheory.CompletionFiniteExtension
-import Sheaf.RingTheory.Derivation.CompletionAndLocalization
-import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
-import Sheaf.RingTheory.HypersurfaceDerivationRegular
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
-import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
 @[expose] public section
 universe u
 namespace Polynomial
+
+-- The signature also carries hypotheses used by the geometric-regularity component.
+set_option linter.unusedVariables false in
 /-- Noetherianity component of the formal-fibre theorem.
 Source: Stacks Project, More on Algebra, Lemma 07PU.
 (blueprint: lem-weil-pbc-another-helper-g-ring-noetherian-component)
@@ -30,5 +26,10 @@ theorem formalFiber_isNoetherian (A : Type u) [CommRing A] [IsDomain A]
     (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) :
     let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
       (Localization.AtPrime q)
-    IsNoetherianRing (r.Fiber C) := by sorry
+    IsNoetherianRing (r.Fiber C) := by
+  have : IsNoetherianRing (Localization.AtPrime q) := inferInstance
+  have : IsNoetherianRing
+      (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q))
+        (Localization.AtPrime q)) := AdicCompletion.isNoetherianRing _
+  exact Ideal.isNoetherianRing_fiber r
 end Polynomial
