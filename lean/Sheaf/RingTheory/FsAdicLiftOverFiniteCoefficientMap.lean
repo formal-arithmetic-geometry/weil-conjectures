@@ -11,10 +11,19 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.FiniteOverCompleteRing
-import Sheaf.RingTheory.FormallySmoothAdicLift
+import Sheaf.RingTheory.FsAdicClosedFiberModel
 import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import Mathlib.RingTheory.Filtration
+import Mathlib.RingTheory.Noetherian.Basic
+import Sheaf.RingTheory.FiniteCoefficientTensorReductionSurjective
+import Sheaf.RingTheory.FiniteCoefficientTensorKernelReduction
+import Mathlib.RingTheory.Nakayama
+import Mathlib.RingTheory.Ideal.GoingUp
+import Mathlib.RingTheory.TensorProduct.Maps
+import Mathlib.RingTheory.TensorProduct.Finite
+import Mathlib.RingTheory.AdicCompletion.Functoriality
+import Mathlib.RingTheory.AdicCompletion.Noetherian
+import Sheaf.RingTheory.FiniteModuleComplete
 
 /-!
 # Lifting over a finite coefficient map
@@ -29,6 +38,40 @@ Lemmas 07NR and 07NJ, and Proposition 07PM.
 universe u v w
 
 namespace RingHom
+
+private theorem closed_ideal_of_complete_local
+    {R : Type w} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
+    (J : Ideal R) (hJ : J ≤ IsLocalRing.maximalIdeal R) :
+    J = ⨅ (n : ℕ) (_ : 1 ≤ n), J ⊔ IsLocalRing.maximalIdeal R ^ n := by
+  have hproper : J ≠ ⊤ := ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal R).ne_top hJ
+  let : Nontrivial (R ⧸ J) := Ideal.Quotient.nontrivial_iff.mpr hproper
+  let : IsLocalRing (R ⧸ J) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
+  let : IsNoetherianRing (R ⧸ J) :=
+    isNoetherianRing_of_surjective R (R ⧸ J) (Ideal.Quotient.mk J)
+      Ideal.Quotient.mk_surjective
+  have hmax : (IsLocalRing.maximalIdeal R).map (Ideal.Quotient.mk J) =
+      IsLocalRing.maximalIdeal (R ⧸ J) :=
+    IsLocalRing.map_maximalIdeal_of_surjective _ Ideal.Quotient.mk_surjective
+  apply le_antisymm
+  · exact le_iInf fun n ↦ le_iInf fun _ ↦ le_sup_left
+  · intro x hx
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    have hzero := Ideal.iInf_pow_eq_bot_of_isLocalRing
+      (IsLocalRing.maximalIdeal (R ⧸ J))
+      (IsLocalRing.maximalIdeal.isMaximal (R ⧸ J)).ne_top
+    have hmem : Ideal.Quotient.mk J x ∈
+        ⨅ n : ℕ, IsLocalRing.maximalIdeal (R ⧸ J) ^ n := by
+      refine Ideal.mem_iInf.mpr fun n ↦ ?_
+      by_cases hn : 1 ≤ n
+      · have hx' := Ideal.mem_iInf.mp (Ideal.mem_iInf.mp hx n) hn
+        have h := Ideal.mem_map_of_mem (Ideal.Quotient.mk J) hx'
+        simp only [Ideal.map_sup, Ideal.map_quotient_self, bot_sup_eq, Ideal.map_pow,
+          hmax] at h
+        exact h
+      · have : n = 0 := Nat.eq_zero_of_not_pos hn
+        simp [this]
+    simpa only [hzero, Ideal.mem_bot] using hmem
 
 /-- Lifting a formally smooth complete local algebra along a finite coefficient map.
 
@@ -107,6 +150,127 @@ theorem exists_fs_adic_lift_over_finite_coefficient_map
           ∃ F : RingHom (TensorProduct A₀ C A) B,
             Function.Bijective F ∧
             ∀ c a, F (TensorProduct.tmul A₀ c a) = ψ c * φ a := by
-  sorry
+  intro hfs
+  obtain ⟨C, instC, instLocalC, instAlgC, hnoeth, hcomplete, γ, hγ, hlocalγ,
+    hsmooth, θ, hsurjθ, hkerθ, hθγ⟩ :=
+    exists_fs_adic_closed_fiber_model α hα hres φ hφ hfs
+  let : CommRing C := instC
+  let : IsLocalRing C := instLocalC
+  let : Algebra A₀ C := instAlgC
+  let : IsNoetherianRing C := hnoeth
+  let : IsAdicComplete (IsLocalRing.maximalIdeal C) C := hcomplete
+  let : IsLocalHom γ := hlocalγ
+  let : Algebra A₀ B := (φ.comp α).toAlgebra
+  let J : Ideal B := (IsLocalRing.maximalIdeal A).map φ
+  have hJ : J ≤ IsLocalRing.maximalIdeal B := IsLocalRing.map_maximalIdeal_le φ
+  have hproper : J ≠ ⊤ :=
+    ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal B).ne_top hJ
+  let : Nontrivial (B ⧸ J) := Ideal.Quotient.nontrivial_iff.mpr hproper
+  let : IsLocalRing (B ⧸ J) :=
+    IsLocalRing.of_surjective' (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
+  let g : C →ₐ[A₀] B ⧸ J :=
+    { θ with
+      commutes' := fun a ↦ by
+        change θ (algebraMap A₀ C a) = Ideal.Quotient.mk J (φ (α a))
+        rw [hγ]
+        exact RingHom.congr_fun hθγ a }
+  have hg : ∀ x ∈ IsLocalRing.maximalIdeal C ^ 1,
+      g x ∈ (IsLocalRing.maximalIdeal B).map (Ideal.Quotient.mk J) := by
+    intro x hx
+    let : IsLocalHom θ := IsLocalHom.of_surjective θ hsurjθ
+    have h := map_nonunit θ x (by simpa using hx)
+    rwa [← IsLocalRing.map_maximalIdeal_of_surjective
+      (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective] at h
+  obtain ⟨ψalg, hψθ, hψm⟩ := hsmooth.exists_lift_into_complete
+    (IsLocalRing.maximalIdeal C) (IsLocalRing.maximalIdeal B) J
+    1 le_rfl (by simpa using hJ) (closed_ideal_of_complete_local J hJ) g
+    1 le_rfl hg
+  let ψ : C →+* B := ψalg.toRingHom
+  have hlocalψ : IsLocalHom ψ := by
+    refine ⟨fun x hx ↦ ?_⟩
+    by_contra hunit
+    have hx' : x ∈ IsLocalRing.maximalIdeal C := hunit
+    have hmem : ψ x ∈ IsLocalRing.maximalIdeal B := by
+      change ψalg x ∈ IsLocalRing.maximalIdeal B
+      simpa only [mul_one, pow_one] using hψm x (by simpa using hx')
+    exact hmem hx
+  have hψγ : ψ.comp γ = φ.comp α := by
+    ext a
+    change ψalg (γ a) = (algebraMap A₀ B) a
+    rw [← hγ]
+    exact ψalg.commutes a
+  have hqψ : (Ideal.Quotient.mk J).comp ψ = θ := by
+    ext x
+    exact AlgHom.congr_fun hψθ x
+  let : IsLocalHom ψ := hlocalψ
+  let φalg : A →ₐ[A₀] B :=
+    { φ with
+      commutes' := fun a ↦ by
+        change φ (algebraMap A₀ A a) = φ (α a)
+        rw [hα] }
+  let F : TensorProduct A₀ C A →+* B :=
+    (Algebra.TensorProduct.productMap ψalg φalg).toRingHom
+  have hF : ∀ c a, F (TensorProduct.tmul A₀ c a) = ψ c * φ a := by
+    intro c a
+    rfl
+  let D := TensorProduct A₀ C A
+  let I : Ideal D := (IsLocalRing.maximalIdeal C).map (algebraMap C D)
+  have hleft : F.comp (algebraMap C D) = ψ := by
+    ext c
+    change F (TensorProduct.tmul A₀ c 1) = ψ c
+    rw [hF, map_one, mul_one]
+  have hmap : I.map F = (IsLocalRing.maximalIdeal C).map ψ := by
+    change ((IsLocalRing.maximalIdeal C).map (algebraMap C D)).map F = _
+    rw [Ideal.map_map, hleft]
+  let : Module.Finite C D := inferInstance
+  let : IsAdicComplete (IsLocalRing.maximalIdeal C) D :=
+    finite_module_complete_over_complete_noetherian C (IsLocalRing.maximalIdeal C) D
+  let : IsAdicComplete I D :=
+    (IsAdicComplete.map_algebraMap_iff (IsLocalRing.maximalIdeal C) D).mpr inferInstance
+  let : IsHausdorff (I.map F) B := by
+    apply IsHausdorff.of_isLocalRing
+    rw [hmap]
+    exact (IsLocalRing.map_maximalIdeal_lt_top ψ).ne
+  have hsurj : Function.Surjective F := by
+    apply surjective_of_mk_map_comp_surjective F (I := I)
+    rw [hmap]
+    exact finite_coefficient_tensor_reduction_surjective α hα γ hγ φ ψ hψγ F hF
+      (by rw [hqψ]; exact hsurjθ)
+  let ιA : A →+* D := Algebra.TensorProduct.includeRight.toRingHom
+  let L : Ideal D := (IsLocalRing.maximalIdeal A).map ιA
+  have hbase : ιA.comp α = (algebraMap C D).comp γ := by
+    ext a
+    rw [← hα, ← hγ]
+    exact (Algebra.TensorProduct.includeRight.commutes a).trans
+      (Algebra.TensorProduct.includeLeft.commutes a).symm
+  have hrad : L ≤ Ideal.jacobson (⊥ : Ideal D) := by
+    apply le_sInf
+    intro M hM
+    let : M.IsMaximal := hM.2
+    let : (M.comap (algebraMap C D)).IsMaximal :=
+      Ideal.isMaximal_comap_of_isIntegral_of_isMaximal M
+    have hMC : M.comap (algebraMap C D) = IsLocalRing.maximalIdeal C :=
+      IsLocalRing.eq_maximalIdeal (inferInstance)
+    have hM₀ : (M.comap ιA).comap (algebraMap A₀ A) =
+        IsLocalRing.maximalIdeal A₀ := by
+      rw [Ideal.comap_comap, hα, hbase, ← Ideal.comap_comap, hMC]
+      exact IsLocalRing.maximalIdeal_comap γ
+    let : (M.comap ιA).IsPrime := Ideal.comap_isPrime ιA M
+    let : (M.comap ιA).IsMaximal :=
+      Ideal.isMaximal_of_isIntegral_of_isMaximal_comap _
+        (hM₀.symm ▸ IsLocalRing.maximalIdeal.isMaximal A₀)
+    have hMA : M.comap ιA = IsLocalRing.maximalIdeal A :=
+      IsLocalRing.eq_maximalIdeal (inferInstance)
+    exact Ideal.map_le_iff_le_comap.mpr hMA.symm.le
+  let : IsNoetherianRing D := IsNoetherianRing.of_finite C D
+  have hK : (RingHom.ker F : Submodule D D) ≤ L • (RingHom.ker F : Submodule D D) :=
+    finite_coefficient_tensor_kernel_reduction α hα hres γ hγ φ ψ hψγ F hF hflat hsurj
+      (by rw [hqψ]; exact hkerθ)
+  have hker : RingHom.ker F = ⊥ :=
+    Submodule.eq_bot_of_le_smul_of_le_jacobson_bot L (RingHom.ker F)
+      (IsNoetherian.noetherian _) hK hrad
+  have hinj : Function.Injective F := (RingHom.injective_iff_ker_eq_bot F).mpr hker
+  exact ⟨C, instC, instLocalC, instAlgC, hnoeth, hcomplete, γ, hγ, hlocalγ,
+    hsmooth, ψ, hlocalψ, hψγ, F, ⟨hinj, hsurj⟩, hF⟩
 
 end RingHom

@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-complete-source-surjective-mod-ideal",
+ "kind": "statement",
+ "title": "Surjectivity modulo an ideal implies surjectivity from a precomplete ring",
+ "statement": "Let $R,S$ be commutative rings, $I$ an ideal of $R$ and $f:R\\to S$ a ring map. Suppose $R$ is $I$-adically precomplete (the surjectivity part of [def-weil-pbc-adically-complete-ring]) and $S$ is $IS$-adically Hausdorff, with $IS=I\\cdot S$ through $f$. If $R\\to S/IS$ is surjective, then $f$ is surjective.",
+ "source": {
+  "document": "Mathlib/RingTheory/AdicCompletion/Functoriality.lean",
+  "place": "surjective_of_mk_map_comp_surjective, lines 447–459; proved by successive approximation, surjective completion map and Hausdorffness. Stacks Algebra 0315 lifting method."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib surjective_of_mk_map_comp_surjective with the displayed ideal and ring map. This is exactly its signature: precompleteness of the source, Hausdorffness for the extended ideal in the target, and surjectivity of the composed quotient map. The result is surjectivity of f.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "Mathlib/RingTheory/AdicCompletion/Functoriality.lean",
+  "place": "surjective_of_mk_map_comp_surjective, lines 447–459; proved by successive approximation, surjective completion map and Hausdorffness. Stacks Algebra 0315 lifting method."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ring map from a finite tensor product of complete local rings is surjective if it is surjective on the closed fibre",
+   "results": "Service unavailable: Internal Server Error. No verdict inferred from unavailable search.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite local coefficient map, smooth complete closed fibre, tensor base change isomorphism",
+   "results": "Smooth and discrete formally smooth theorems found, none supplying this adic model or the finite tensor-map argument. Loogle Algebra.TensorProduct.lift also identified the proved productMap construction.",
+   "date": "2026-10-13",
+   "verdict": "no match for the new intermediate statements"
+  },
+  {
+   "tool": "grep",
+   "query": "rg tensor.*surjective|injective.*tensor; rg FormallySmoothAdic lean/Sheaf/RingTheory lean/WeilConjectures; inspect Mathlib tensor, adic completion, Flat.Equalizer",
+   "results": "Found existing residue-field lift and complete-target lift. Found surjective_of_mk_map_comp_surjective, finite-module completeness, integrality/maximal-ideal and Nakayama lemmas; no model, residue-density, or flat-kernel-reduction statement with the required interfaces.",
+   "date": "2026-10-13",
+   "verdict": "use existing tools; isolate only their remaining glue"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "surjective_of_mk_map_comp_surjective",
+  "file": "Mathlib/RingTheory/AdicCompletion/Functoriality.lean",
+  "line": 447,
+  "how": "Exact signature: [IsPrecomplete I R] [IsHausdorff (I.map f) S], surjective quotient composite implies Function.Surjective f."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FsAdicLiftOverFiniteCoefficientMap",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs)",
+   "via": [
+    "lem-weil-pbc-fs-adic-lift-over-finite-coefficient-map",
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Mathlib.RingTheory.AdicCompletion.Functoriality",
+  "declaration": "surjective_of_mk_map_comp_surjective",
+  "branch": "mathlib",
+  "by": "T2",
+  "date": "2026-10-13",
+  "existing": true,
+  "statement": "theorem surjective_of_mk_map_comp_surjective [IsPrecomplete I R] [haus : IsHausdorff (I.map f) S] (h : Function.Surjective ((Ideal.Quotient.mk (I.map f)).comp f)) : Function.Surjective f"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T202253-L-709125",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T202253-L-709125",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
