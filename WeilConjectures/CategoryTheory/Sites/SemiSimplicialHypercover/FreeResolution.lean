@@ -65,6 +65,12 @@ noncomputable abbrev freeYoneda : C ⥤ Cᵒᵖ ⥤ ModuleCat.{max u v} R :=
 noncomputable abbrev freeSheaf : C ⥤ Sheaf J (ModuleCat.{max u v} R) :=
   freeYoneda R ⋙ presheafToSheaf J _
 
+/-- Morphisms `R[V] ⟶ F` from a free sheaf are sections of `F` over `V` (Yoneda, the free module
+adjunction and the sheafification adjunction). -/
+noncomputable def freeSheafHomEquiv (V : C) (F : Sheaf J (ModuleCat.{max u v} R)) :
+    ((freeSheaf J R).obj V ⟶ F) ≃ F.obj.obj (op V) :=
+  sorry
+
 /-- The free complex `⋯ ⟶ R[U₂] ⟶ R[U₁] ⟶ R[U₀]` of a semi-simplicial object, with the
 alternating sums of the face maps as differentials. -/
 noncomputable def freeComplex (U : SemiSimplicialObject C) :

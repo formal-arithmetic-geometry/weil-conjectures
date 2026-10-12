@@ -49,11 +49,6 @@ namespace CategoryTheory.SemiSimplicialObject
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {R : Type (max u v)} [Ring R] [HasSheafify J (ModuleCat.{max u v} R)]
 
-/-- Morphisms `R[V] ⟶ F` from a free sheaf are sections of `F` over `V`. -/
-noncomputable def freeSheafHomEquiv (V : C) (F : Sheaf J (ModuleCat.{max u v} R)) :
-    ((freeSheaf J R).obj V ⟶ F) ≃ F.obj.obj (op V) :=
-  sorry
-
 /-- The cocycles of the cochain complex `C^•(U, F)` in degree `q`. -/
 def IsCocycle (U : SemiSimplicialObject C) (F : Sheaf J (ModuleCat.{max u v} R)) (q : ℕ)
     (z : F.obj.obj (op (U.obj q))) : Prop :=

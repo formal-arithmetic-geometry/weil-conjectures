@@ -88,6 +88,18 @@ lemma id_app (U : SemiSimplicialObject C) (n : ℕ) : Hom.app (𝟙 U) n = 𝟙 
 lemma comp_app {U V W : SemiSimplicialObject C} (f : U ⟶ V) (g : V ⟶ W) (n : ℕ) :
     (f ≫ g).app n = f.app n ≫ g.app n := rfl
 
+section Map
+
+/-- The image of a semi-simplicial object under a functor. -/
+@[simps]
+def map {D : Type u'} [Category.{v'} D] (G : C ⥤ D) (U : SemiSimplicialObject C) :
+    SemiSimplicialObject D where
+  obj n := G.obj (U.obj n)
+  δ n i := G.map (U.δ n i)
+  δ_comp_δ n _ _ h := by simp only [← G.map_comp, U.δ_comp_δ n h]
+
+end Map
+
 section Compatible
 
 variable (U : SemiSimplicialObject C)
