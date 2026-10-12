@@ -7633,3 +7633,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 12:21 L: returned deliver/X2/Sheaf.AlgebraicGeometry.FiniteEtaleSchemeTorsorLift (reviewer RETURN: (reviewer X-6c2c1, head 6c2c1b204) the reviewer passed it, but the landing failed: eilConjectures.AlgebraicGeometry.Morp)
 - 12:22 L: merged deliver/A3/Sheaf.AlgebraicGeometry.Modules.TensorPowerSectionNonvanishingPullback (stage 3; reviewer PASS; after a return; landing 20261012T122229-L-1053874 (proof); batch 20261012T120425; modules 1; new nodes 0)
 - 12:22 L: returned deliver/D3/Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule (reviewer RETURN: (reviewer X-312aa, head 312aa4f8b) F: coord/changes/DerivedRHomAlgebraModule_imports.md has stale importer metadata. Del)
+- 12:22 L: returned deliver/W2/Sheaf.Paper.StrictHenselizationPointedMap (reviewer RETURN: (reviewer X-2f76c, head 2f76c0eff) E2 (review point 4): lean/Sheaf/Paper/StrictHenselizationPointedMap.lean retains the )
