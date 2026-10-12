@@ -41,14 +41,14 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
-  "place": "Second reading by N1, 2026-10-13: geometric determinant compatibility and matrix-to-sheaf inverse construction"
+  "place": "Proof (3), pivot-minor step; complete Lean proof by T2, 2026-10-13, using free sheaf reindexing and determinant compatibility"
  },
  "id": "lem-pc-local-invertible-minor-block-data",
  "title": "Local coordinate decompositions with compatible unit determinant",
  "statement": "For schemes Y,Z [def-pc-scheme], an open immersion j:Z→Y [def-weil-open-immersion], finite free bases eM and eN of modules M,N [def-weil-pbc-free-module, def-weil-sheaf-of-modules-category], a morphism phi:M→N, a natural number a, a point z in Z, and selected row and column maps from Fin a, suppose j(z) belongs to the basic open of the selected minor determinant [def-weil-matrix, def-weil-pbc-matrix-determinant]. There exist an open U containing z and decompositions of (j* M)|U and (j* N)|U into free factors of ranks (a,m-a) and (a,n-a) [def-pc-module-pullback, lem-weil-pbc-module-restriction-open-immersion-colimits, def-weil-additive-category]. The determinant of their leading block equals the image of the selected global determinant under (U.ι followed by j).appTop, and that image is a unit. No sheaf inverse is asserted.",
  "proof": [
   {
-   "text": "Let delta be the selected determinant. Take U as the preimage of D(delta) intersected with the image of j. The unit germs of delta have unique local inverses which glue to a global inverse section on U. Repeated columns or rows would give zero determinant, so nonvanishing at j(z) forces both selected index maps to be injective. Hence a≤m,n.",
+   "text": "Set A = freeMatrix (eM.inv followed by phi followed by eN.hom). A repeated selected row or column makes the selected determinant zero by Matrix.det_zero_of_row_eq or Matrix.det_zero_of_column_eq. Its basic open would then be empty, contradicting hminor. Thus rows and cols are injective (the private proved lemma minor_indices_injective).",
    "uses": [
     "def-weil-pbc-matrix-determinant",
     "lem-weil-pbc-det-repeated-column-zero"
@@ -56,9 +56,16 @@
    "elementary": false
   },
   {
-   "text": "Enumerate the complementary index sets to extend the selected lists to permutations. Pull back the finite free bases and restrict to U; free coproducts split selected from complementary coordinates. The resulting leading matrix is the selected submatrix restricted along U.ι followed by j, after simultaneous ULift reindexing. Determinants commute with ring maps and simultaneous reindexing, yielding the equality. For a=0 both determinants are 1 and the complementary factors are the original full free objects.",
+   "text": "Fintype.card_le_of_injective gives a at most each ambient rank. Choose a finite equivalence from the sum of the selected and complementary index types to the ambient type. Equiv.Perm.exists_extending_pair adjusts it to agree with the specified injective list on the selected factor. Apply freeFunctor to this equivalence and use freeSumIso and biprod.isoCoprod to construct coordinateIso. The inclusion and projection identities are proved by free_hom_ext and biprod.hom_ext'. These imply that conjugating a free map and taking its leading block gives exactly its selected submatrix.",
    "uses": [
-    "def-weil-pbc-free-module",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let delta be the selected determinant and take U = Z.basicOpen (j.appTop delta), which is the preimage of Y.basicOpen delta. The point z lies in U by Scheme.preimage_basicOpen_top; the restricted determinant is a unit by Scheme.isUnit_ι_appTop_basicOpen. Pull back eM,eN using pullbackFreeIso and restrict using restrictFreeIso, then compose with the coordinate isomorphisms. Naturality of restrictFunctorIsoPullback and freeMatrix_pullback compute the resulting free matrix. The coordinate inclusion/projection identities identify its leading matrix with the restricted selected minor after ULift reindexing. Matrix.det_submatrix_equiv_self and RingHom.map_det give the required determinant equality. Every step works for a=0; no inverse of the leading sheaf map is constructed.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
     "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
    "elementary": false
@@ -113,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T194126-L-460191",
-  "kind": "interface",
+  "landing": "20261012T215156-L-1304901",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
