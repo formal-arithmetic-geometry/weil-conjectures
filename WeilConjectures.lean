@@ -457,7 +457,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleEssentiallySmall
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleIsoTorsor
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleMayerVietoris
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicard
 public import WeilConjectures.AlgebraicGeometry.Sites.EtalePicardMul
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleRigidity
@@ -493,7 +492,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90Etale
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
-public import WeilConjectures.AlgebraicGeometry.Sites.PairHenselizationCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
@@ -503,6 +501,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 public import WeilConjectures.AlgebraicGeometry.Sites.SplitSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.StalkwiseCokernel
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationCompatible
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationFunctoriality
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
@@ -1629,7 +1628,6 @@ public import WeilConjectures.RingTheory.GenericIrreducibility
 public import WeilConjectures.RingTheory.GradedAlgebra.LinearPair
 public import WeilConjectures.RingTheory.GradedAlgebra.Standard
 public import WeilConjectures.RingTheory.Henselian.EtaleRetraction
-public import WeilConjectures.RingTheory.Henselian.PairHenselization
 public import WeilConjectures.RingTheory.HopfAlgebra.Cartier
 public import WeilConjectures.RingTheory.HopfAlgebra.Etale
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup
@@ -1705,6 +1703,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Cancellation
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ExchangeCube
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.FibreSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
