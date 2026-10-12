@@ -1,0 +1,115 @@
+{
+ "id": "lem-pqf-kernel-finite-presentation-noetherian",
+ "kind": "statement",
+ "title": "Finitely presented kernels on locally Noetherian schemes",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], $M$ an $\\mathcal O_X$-module of finite presentation [lem-weil-pbc-quasi-coherent-finite-type-affine], and $N$ a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent]. For every morphism $\\varphi:M\\to N$, its categorical kernel is of finite presentation.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 01XZ, proof: Noetherian affine finite-module argument; the general kernel form is proved in WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel, lines 284-310"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved source theorem AlgebraicGeometry.Scheme.Modules.isFinitePresentation_kernel with the same X, M, N and morphism. The source proof first proves the kernel quasi-coherent using exact localization on affine opens. On each affine open V of X, restrict to Spec Gamma(X,V). The sections of the source module M are finite, because M has local finite presentations and finite generation descends from a finite basic-open cover. Kernel sections inject into these source sections. Gamma(X,V) is Noetherian, so this submodule is finite. Over a Noetherian ring a finite module has a finite presentation; the affine tilde/global-sections isomorphism transports it to a finite sheaf presentation. Gluing these presentations over the affine open cover proves finite presentation of the kernel. This node records the existing closed declaration rather than introducing another Lean theorem.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean",
+  "place": "isFinitePresentation_kernel, lines 284-310"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "kernel of a map from a finitely presented sheaf to a quasicoherent sheaf on a locally Noetherian scheme",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of a morphism from a finitely presented sheaf to a quasi-coherent sheaf on a locally Noetherian scheme is finitely presented",
+   "results": "Eight results: generic finite-presentation data, IsFinitePresentation, and its quasi-coherence and finite-type instances. No scheme kernel result.",
+   "date": "2026-10-12",
+   "verdict": "no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "isFinitePresentation_kernel|isQuasicoherent_kernel",
+   "results": "msearch Mathlib grep: zero hits. Repository rg found the exact proved isFinitePresentation_kernel at lean/WeilConjectures/AlgebraicGeometry/Modules/QuasicoherentKernel.lean:287; no DAG node names this declaration.",
+   "date": "2026-10-12",
+   "verdict": "exact source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "pqf-lem-coherent-ft-locnoeth",
+   "place": "Reverse implication: finite generation of the kernel of a finite free map on Noetherian affine opens",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.isFinitePresentation_kernel",
+     "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
+     "line": 287
+    }
+   ]
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFinitePresentation_kernel",
+  "statement": "theorem isFinitePresentation_kernel [IsLocallyNoetherian X] {M N : X.Modules} [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) M] [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N] (φ : M ⟶ N) : SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) (kernel φ)",
+  "branch": "slopmaster2",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T070537-L-3471159",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T070537-L-3471159",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

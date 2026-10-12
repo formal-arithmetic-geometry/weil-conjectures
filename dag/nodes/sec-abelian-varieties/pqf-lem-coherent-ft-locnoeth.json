@@ -21,46 +21,31 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Forward direction. Assume $\\mathcal F$ is coherent. It is of finite type by [pqf-def-coherent]: every point $x$ has an open neighbourhood $U$ with a surjection $\\psi:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$. By the coherence clause of [pqf-def-coherent] applied to $\\psi$, $\\ker\\psi$ is of finite type, so $x$ has an open neighbourhood $W\\subseteq U$ with a surjection $\\mathcal O_W^{\\oplus m}\\to(\\ker\\psi)|_W$. Composing with the inclusion of $\\ker\\psi$ gives an exact sequence $\\mathcal O_W^{\\oplus m}\\to\\mathcal O_W^{\\oplus n}\\to\\mathcal F|_W\\to0$, so $\\mathcal F$ is of finite presentation in the sense of [lem-weil-pbc-quasi-coherent-finite-type-affine], and part (0) of that statement makes $\\mathcal F$ quasi-coherent. Thus $\\mathcal F$ is quasi-coherent of finite type.",
+   "text": "If F is coherent, take finite local generator data. Reindex each finite generator set by ULift(Fin n), and apply the coherence kernel clause to that epimorphism. Take finite local generators of its kernel. Restriction preserves cokernels and takes free modules to free modules; composing the local relation epimorphism with the restricted kernel inclusion therefore gives a finite presentation on each refined open. Bind these local presentations and glue them with SheafOfModules.IsFinitePresentation.of_coversTop. Mathlib instIsQuasicoherentOfIsFinitePresentation gives quasi-coherence; finite type is the first defining clause of coherence.",
    "uses": [
-    "pqf-def-coherent",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+    "pqf-def-coherent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01XZ (coherent-lemma-coherent-Noetherian), proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Reverse direction. Assume $\\mathcal F$ is quasi-coherent and of finite type. Let $U$ be open and $\\varphi:\\mathcal O_U^{\\oplus n}\\to\\mathcal F|_U$ any map. The source is quasi-coherent (on an affine $\\operatorname{Spec}A$ it is $\\widetilde{A^{n}}$, a finite direct sum of $\\widetilde A$, by [lem-weil-pbc-affine-tilde-gamma-adjunction] (4)), so [lem-weil-pbc-quasi-coherent-module-kernel] makes $\\ker\\varphi$ a quasi-coherent $\\mathcal O_U$-module with sections $(\\ker\\varphi)(V)=\\ker(\\varphi_V)$. On every affine $V=\\operatorname{Spec}A\\subseteq U$, part (a) of [lem-weil-pbc-quasi-coherent-finite-type-affine] makes $M=\\mathcal F(V)$ a finite $A$-module, and $(\\ker\\varphi)(V)=K=\\ker(A^n\\to M)$. The ring $A$ is Noetherian by [pqf-def-locnoeth] and [def-weil-pbc-noetherian-ring], and $K$ is finitely generated: induct on $n$, projecting $K\\subseteq A^n$ to $A^{n-1}$, lifting finitely many generators, and adjoining generators of the ideal $K\\cap Ae_n$ (the case $n=0$ is zero). By part (a) of [lem-weil-pbc-quasi-coherent-finite-type-affine] applied to $\\ker\\varphi$ on $U$, $(\\ker\\varphi)|_V$ is of finite type; as such $V$ cover $U$, $\\ker\\varphi$ is of finite type, and [pqf-def-coherent] gives coherence.",
+   "text": "Conversely, retain finite type and fix an arbitrary finite free map on an open U. Quasi-coherence restricts to F.over U. Transport through Scheme.Modules.overEquiv U to modules on the open subscheme. Transport of presentations preserves finiteness, and a finite free module has the explicit presentation by the zero map from the free module on PEmpty. The open subscheme is locally Noetherian, so [lem-pqf-kernel-finite-presentation-noetherian] gives a finitely presented kernel of the transported map. The equivalence preserves kernels: its unit isomorphism composed with the inverse image of PreservesKernel.iso identifies the original kernel with the transported one. Finite presentations transfer back through the continuous slice equivalence, and finite presentation implies finite type by Mathlib. Thus every kernel in the defining coherent predicate is finite type.",
    "uses": [
     "pqf-def-locnoeth",
-    "def-weil-pbc-noetherian-ring",
     "pqf-def-coherent",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-weil-pbc-quasi-coherent-module-kernel"
+    "lem-pqf-kernel-finite-presentation-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 01XZ (coherent-lemma-coherent-Noetherian), proof"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "pqf-def-locnoeth",
-  "def-weil-pbc-noetherian-ring",
   "pqf-def-coherent",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine",
-  "lem-weil-pbc-quasi-coherent-module-kernel"
+  "pqf-def-locnoeth",
+  "lem-pqf-kernel-finite-presentation-noetherian"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 01XZ (coherent-lemma-coherent-Noetherian), proof"
+  "document": "Stacks Project",
+  "place": "Tags 01BW and 01XZ; local finite-presentation construction and the proved source-library Noetherian kernel theorem"
  },
  "mathlib_searches": [
   {
@@ -167,5 +152,15 @@
   "group": "C1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T070537-L-3471159",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
