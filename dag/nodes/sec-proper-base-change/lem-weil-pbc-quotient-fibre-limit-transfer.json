@@ -18,15 +18,15 @@
  ],
  "proof": [
   {
-   "text": "Naturality sends the inverse-image ideal K_i into K_j. Define quotient transitions by Ideal.quotientMap. Every element of A/I comes from a stage; a representative whose image lies in I belongs to K_i. Compatible maps out of the quotient stages therefore induce a unique map out of A/I, giving the quotient colimit.",
+   "text": "Naturality sends each inverse-image ideal into the next one. Construct the quotient diagram, the quotient projections, and its cocone by Ideal.quotientMap; quotient induction proves all functor and naturality laws. For any quotient cocone, compose with the projections and descend from the supplied colimit A. Every element of I has a stage representative in its inverse-image ideal, so this descent kills I. Ideal.Quotient.lift then gives the descent from A/I. Quotient induction and the original colimit factorization prove its factorization and uniqueness.",
    "uses": [
     "lem-weil-pbc-filtered-colimit-algebras-elementwise",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Apply Spec to the quotient colimit and form stagewise pullbacks of g_i. Induced transitions and cone maps satisfy the two projection equations. The universal property of each pullback, the supplied limit of X, and the Spec limits identify compatible maps to the stages with maps to the closed fibre of Y; hence the cone is limiting.",
+   "text": "Apply Scheme.Spec to the opposite of the original colimiting cocone and of the proved quotient colimiting cocone. Its preservation of limits gives limits with vertices Spec A and Spec(A/I). Form D by stagewise pullbacks, using pullback.map for transitions and pullback.lift for the cone legs. The two projection equations follow from the pullback lift equations. For any cone over D, its two projected cones lift uniquely to Y and Spec(A/I). Their composites to Spec A agree by hom_ext for the Spec A limit. Lift this pair to the closed fibre of Y. The projected limit factorization equations prove factorization; hom_ext for the two projected limits and for the pullback proves uniqueness.",
    "uses": [
     "lem-weil-pbc-spec-colimit-limit",
     "def-pc-fibre-product"
@@ -34,9 +34,8 @@
    "elementary": false
   },
   {
-   "text": "For an arrow from stage j to stage i, factor the induced fibre transition through X_j times over X_i with its closed fibre. The first arrow is a closed immersion because the extended K_i is contained in K_j. The second is a base change of the given affine transition. Both are affine, and their composite is affine. Identity isomorphisms can be used for the stage pullbacks.",
+   "text": "The first projection from each stage pullback is affine by base change, since its other defining map is between affine schemes. A transition of D followed by the next first projection equals the preceding first projection followed by the supplied affine transition of Xs, hence is affine. The next first projection is separated because it is affine. Mathlib IsAffineHom.of_comp therefore proves the transition affine. Use identity isomorphisms for the specified stage pullbacks.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-base-change",
     "lem-weil-pbc-affine-morphism-permanence",
     "pqf-def-affine-morphism"
    ],
@@ -46,16 +45,14 @@
  "proof_deps": [
   "def-pc-fibre-product",
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-filtered-colimit-algebras-elementwise",
   "lem-weil-pbc-spec-colimit-limit",
   "pqf-def-affine-morphism"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project",
-  "place": "Tags 0GS2 General case and 0A0P affine-base approximation; official text read 2026-10-12."
+  "document": "Stacks Project and pinned Mathlib",
+  "place": "Tag 0GS2, General case (quotient colimit and closed-fibre limit), and Tag 01YW; categorical universal-property proof written by R3. The affineness shortcut is Mathlib.AlgebraicGeometry.IsAffineHom.of_comp in Morphisms/Separated.lean, using affine first projections."
  },
  "mathlib_searches": [
   {
@@ -133,10 +130,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "R3",
   "result": "pass",
-  "landing": "20261012T135308-L-1688533",
-  "kind": "interface",
+  "landing": "20261012T151913-L-2290637",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
