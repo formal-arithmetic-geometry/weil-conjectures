@@ -96,7 +96,8 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 omit [HasSmallSiteSheafify A] in
 /-- **The stalk of the extension by zero inside `U`.** For a geometric point `t` of `U`, the
 stalk of `j_! F` at `t ≫ j` is the stalk of `F` at `t`, naturally in `F`: it is the stalk at
-`t` of `j^* j_! F ≅ F`. (blueprint: `def-weil-pbc-extension-by-zero`) -/
+`t` of `j^* j_! F ≅ F`.
+(blueprint: `def-weil-pbc-extension-by-zero`, `lem-weil-pbc-extension-by-zero-stalks`) -/
 def Etale.openImmersionLowerShriekCompUliftSheafFiberIso {Ω : Type u} [Field Ω]
     [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ U) :
     (j)_!open[A] ⋙ ((pointSmallEtale (t ≫ j)).ulift.{u + 1}).sheafFiber ≅
@@ -111,7 +112,7 @@ omit [HasSmallSiteSheafify A] in
 /-- **The stalk of the extension by zero outside `U` vanishes**: for a geometric point `s`
 of `X` not lying in `U`, the stalk of `j_! F` at `s` is zero. It is the stalk of
 `s^* j_! F`, which vanishes since the ranges of `s` and `j` are disjoint.
-(blueprint: `def-weil-pbc-extension-by-zero`) -/
+(blueprint: `def-weil-pbc-extension-by-zero`, `lem-weil-pbc-extension-by-zero-stalks`) -/
 lemma Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj {Ω : Type u} [Field Ω]
     [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
     (hs : s.base (IsLocalRing.closedPoint Ω) ∉ Set.range j.base)

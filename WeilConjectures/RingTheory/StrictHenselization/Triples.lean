@@ -55,7 +55,7 @@ variable (R : Type u) [CommRing R] (p : Ideal R) (K : Type u) [Field K] [Algebra
 /-- An *étale triple* `(S, q, φ)` over `(R, p, K)`: an étale `R`-algebra `S`, a prime `q` of `S`
 lying over `p` and an `R`-algebra map `φ : κ(q) → K` from the residue field of `q`.
 
-(blueprint: `lem-weil-pbc-strict-henselization-triples`) -/
+(blueprint: `lem-weil-pbc-strict-henselization-triples`, `def-weil-pbc-etale-residue-triples`) -/
 structure EtaleTriple where
   /-- the étale `R`-algebra -/
   S : Type u
@@ -294,7 +294,8 @@ instance : FinallySmall.{u} (EtaleTriple R p K) := by
 
 variable (R p K)
 
-/-- The diagram `(S, q, φ) ↦ S` of `R`-algebras over the étale triples. -/
+/-- The diagram `(S, q, φ) ↦ S` of `R`-algebras over the étale triples.
+(blueprint: `def-weil-pbc-etale-residue-triples`) -/
 noncomputable def diagram : EtaleTriple R p K ⥤ CommAlgCat.{u} R where
   obj t := CommAlgCat.of R t.S
   map f := CommAlgCat.ofHom f.β
