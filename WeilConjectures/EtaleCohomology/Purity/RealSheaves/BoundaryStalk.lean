@@ -50,6 +50,38 @@ namespace AlgebraicGeometry
 
 open Scheme Scheme.FiniteEtale
 
+namespace Scheme
+
+section Germs
+
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
+
+lemma FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber {Λ : Type (u + 1)}
+    [CommRing Λ] [Finite Λ] (F : Y.FiniteLocallyConstantModule Λ) (V : Y.Etale)
+    (v : (pointSmallEtale s).fiber.obj V) (z : ToType (F.obj.obj.obj (op V))) :
+    FiniteLocallyConstantModule.forgetStalkEquiv s F
+        ((pointSmallEtale s).toPresheafFiber V v ((FiniteLocallyConstantModule.forget Y Λ).obj
+          F).obj.obj z) =
+      (pointSmallEtale s).toPresheafFiber V v F.obj.obj z :=
+  ConcreteCategory.congr_hom
+    ((pointSmallEtale s).toPresheafFiber_presheafFiberCompIso_hom_app
+      (FiniteLocallyConstantModule.forgetModule Λ) V v F.obj.obj) z
+
+lemma FiniteLocallyConstant.isoStalkEquiv_toPresheafFiber {F : Y.FiniteLocallyConstant}
+    {P : Y.FiniteEtale} (i : F ≅ (FiniteEtale.toFiniteLocallyConstant Y).obj P) (V : Y.Etale)
+    (v : (pointSmallEtale s).fiber.obj V) (z : ToType (F.obj.obj.obj (op V))) :
+    FiniteLocallyConstant.isoStalkEquiv s i ((pointSmallEtale s).toPresheafFiber V v F.obj.obj z) =
+      ULift.up ((pointSmallEtale s).fiber.map (i.hom.hom.hom.app (op V) z).down v) := by
+  change FiniteEtale.sheafFiberToSheafEquiv s P
+    ((pointSmallEtale s).presheafFiber.map i.hom.hom.hom
+      ((pointSmallEtale s).toPresheafFiber V v F.obj.obj z)) = _
+  rw [GrothendieckTopology.Point.toPresheafFiber_naturality_apply]
+  exact FiniteEtale.presheafFiberUliftYonedaEquiv_toPresheafFiber s P.obj v _
+
+end Germs
+
+end Scheme
+
 namespace Etale
 
 variable {C U : Scheme.{u}} (j : U ⟶ C) [IsOpenImmersion j] [IsIntegral C]
@@ -204,6 +236,68 @@ theorem galoisStalkMap_boundarySpecialization (hσ' : σ ∈ Q.inertia (Ω ≃�
   exact (ConcreteCategory.congr_hom h x).symm
 
 end Decomposition
+
+section Surjective
+
+variable [QuasiCompact j] [IsDedekindDomain Γ(C, W)] (ϖ : Γ(C, W)) (hϖ : ϖ ≠ 0)
+  (hWU : j.opensRange ⊓ W = C.basicOpen ϖ) (m : Ideal Γ(C, W)) [m.IsMaximal]
+  [PerfectField m.ResidueField] [Q.LiesOver m]
+
+include hϖ hWU m in
+/-- Blueprint `lem-wf-boundary-stalk-invariants` (the inertia invariants lie in the image): for `F`
+finite locally constant, every inertia invariant of the geometric generic stalk `F_η` comes from
+the boundary stalk `(j_* F)_x̄`. -/
+theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+    [ConnectedSpace U]
+    (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
+    (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
+    (x : ToType ((pointSmallEtale (genericGeometricPoint (Ω := Ω) j)).sheafFiber.obj F))
+    (hx : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω), galoisStalkMap F σ x = x) :
+    ∃ y, boundarySpecialization j Q F y = x := by
+  let F₀ : U.FiniteLocallyConstantModule Λ := ⟨F, inferInstance⟩
+  let F' := (FiniteLocallyConstantModule.forget U Λ).obj F₀
+  let P := FiniteLocallyConstant.rep U F'
+  let i := FiniteLocallyConstant.repIso F'
+  let η := genericGeometricPoint (Ω := Ω) j
+  -- `x` as a germ, and the corresponding point `t` of `P` over `η`
+  obtain ⟨V₀, v₀, z₀, hz₀⟩ := (pointSmallEtale η).toPresheafFiber_jointly_surjective
+    (P := F'.obj.obj) ((FiniteLocallyConstantModule.forgetStalkEquiv η F₀).symm x)
+  have hx₀ : (pointSmallEtale η).toPresheafFiber V₀ v₀ F.obj z₀ = x := by
+    rw [← FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber η F₀]
+    exact (congrArg (FiniteLocallyConstantModule.forgetStalkEquiv η F₀) hz₀).trans
+      (Equiv.apply_symm_apply _ x)
+  let f₀ := (i.hom.hom.hom.app (op V₀) z₀).down
+  let t : (fiber η).obj P := (pointSmallEtale η).fiber.map f₀ v₀
+  have hgerm (V : U.Etale) (v : (pointSmallEtale η).fiber.obj V)
+      (z : ToType (F'.obj.obj.obj (op V))) :
+      FiniteLocallyConstant.isoStalkEquiv η i
+        ((FiniteLocallyConstantModule.forgetStalkEquiv η F₀).symm
+          ((pointSmallEtale η).toPresheafFiber V v F.obj z)) =
+        ULift.up ((pointSmallEtale η).fiber.map (i.hom.hom.hom.app (op V) z).down v) := by
+    rw [← FiniteLocallyConstantModule.forgetStalkEquiv_toPresheafFiber η F₀, Equiv.symm_apply_apply,
+      FiniteLocallyConstant.isoStalkEquiv_toPresheafFiber]
+  have ht : ∀ σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω),
+      (galoisToAut (genericPointLift j) σ).hom.app P t = t := by
+    intro σ hσ
+    have h := hx σ hσ
+    rw [← hx₀, galoisStalkMap] at h
+    have h' := ConcreteCategory.congr_hom (toPresheafFiber_pointSmallEtaleHom_sheafFiber_app η
+      (σ : Ω →+* Ω) (specMap_comp_genericGeometricPoint j σ) F V₀ v₀) z₀
+    rw [ConcreteCategory.comp_apply] at h'
+    replace h := h'.symm.trans h
+    have h'' : (pointSmallEtale η).fiber.map f₀ ((pointSmallEtaleHom η (σ : Ω →+* Ω)
+        (specMap_comp_genericGeometricPoint j σ)).hom.app V₀ v₀) =
+          (pointSmallEtale η).fiber.map f₀ v₀ := by
+      apply ULift.up_injective
+      rw [← hgerm, ← hgerm]
+      exact congrArg (fun y ↦ FiniteLocallyConstant.isoStalkEquiv η i
+        ((FiniteLocallyConstantModule.forgetStalkEquiv η F₀).symm y)) h
+    refine fiber_ext _ ?_
+    rw [galoisToAut_hom_app_left]
+    exact (Category.assoc _ _ _).symm.trans (congrArg Over.Hom.left h'')
+  sorry
+
+end Surjective
 
 end Etale
 
