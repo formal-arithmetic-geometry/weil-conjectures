@@ -52,7 +52,7 @@ Over an affine open `V` of `T`, `R^q f_* ℱ|_V` is the higher direct image alon
 images then shows quasi-coherence by induction on the number of affine opens
 (`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
 
-(blueprint: `lem-pc-finite-support-hi`) -/
+(blueprint: `sk-thm-picard-coherence`, `lem-pc-finite-support-hi`) -/
 theorem isQuasicoherent_higherDirectImage (q : ℕ) :
     ((higherDirectImage f q).obj ℱ).IsQuasicoherent := by
   refine isQuasicoherent_of_iSup_opensRange_eq_top _
@@ -576,8 +576,9 @@ quasi-compact and separated and `ℱ` a quasi-coherent `𝒪_X`-module, every po
 open neighbourhood `U` and a bound `d` with `R^q f_* ℱ|_U = 0` for all `q ≥ d`.
 
 Take for `U` an affine open neighbourhood of `t`: then `f ⁻¹ᵁ U` is covered by finitely many,
-say `d`, affine opens whose intersections are affine, and the Čech complex of this cover
-computes `R f_* ℱ|_U` [Stacks, Tag 01XD], so `R^q f_* ℱ|_U = 0` for `q ≥ d`.
+say `d`, affine opens whose intersections are affine, and the Mayer–Vietoris sequence of the
+higher direct images gives `R^q f_* ℱ|_U = 0` for `q ≥ d` by induction on `d` [Stacks, Tag 01XJ]
+(`AlgebraicGeometry.Scheme.Modules.exists_higherDirectImageBound_top`).
 
 The bound is only local on `T`: over `T = ⨆ₙ Spec k` with `X = ⨆ₙ ℙⁿ_k` and `ℱ = 𝒪(-n-1)` on
 the `n`-th piece, `R^n f_* ℱ ≠ 0` for every `n`.

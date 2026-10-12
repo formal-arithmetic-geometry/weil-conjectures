@@ -62,6 +62,7 @@ noncomputable def pushforwardRestrictMapApp {W W' : X.Opens} (h : W' ≤ W) (M :
     (pushforward (W'.ι ≫ f)).map ((restrictFunctorComp (X.homOfLE h) W.ι).inv.app M ≫
       (restrictFunctorCongr (Scheme.homOfLE_ι X h)).hom.app M)
 
+/-- The open of `f_{W',*}`-sections over `V` is contained in that of `f_{W,*}`-sections. -/
 lemma le_of_image_preimage_ι_comp {W W' : X.Opens} (h : W' ≤ W) (V : T.Opens) :
     W'.ι ''ᵁ ((W'.ι ≫ f) ⁻¹ᵁ V) ≤ W.ι ''ᵁ ((W.ι ≫ f) ⁻¹ᵁ V) := by
   rw [image_preimage_ι_comp, image_preimage_ι_comp]
@@ -144,7 +145,8 @@ lemma biprod_app_ext {A B : T.Modules} {V : T.Opens} {z z' : Γ(A ⊞ B, V)}
     exact this.symm
   rw [h z, h z', h₁, h₂]
 
-lemma Hom.neg_app' {M N : T.Modules} (φ : M ⟶ N) (V : T.Opens) (x : Γ(M, V)) :
+/-- Evaluating the negative of a morphism of `𝒪_T`-modules on a section. -/
+lemma Hom.neg_app_apply {M N : T.Modules} (φ : M ⟶ N) (V : T.Opens) (x : Γ(M, V)) :
     (-φ).app V x = -φ.app V x :=
   rfl
 
@@ -239,7 +241,7 @@ lemma mvShortComplex_app_exact (M : X.Modules) (W : T.Opens)
       (inf_le_left : U ⊓ V ≤ U)).app M + biprod.snd ≫ (-(pushforwardRestrictMap f
       (inf_le_right : U ⊓ V ≤ V)).app M) from biprod.desc_eq] at hy
   rw [Hom.add_app, AddCommGrpCat.hom_add_apply, Hom.comp_app, Hom.comp_app,
-    ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, Hom.neg_app', add_neg_eq_zero,
+    ConcreteCategory.comp_apply, ConcreteCategory.comp_apply, Hom.neg_app_apply, add_neg_eq_zero,
     pushforwardRestrictMap_app_app, pushforwardRestrictMap_app_app] at hy
   refine ⟨hs.glue _ _ hy, biprod_app_ext ?_ ?_⟩
   · exact (mvShortComplex_f_fst f U V M W _).trans (hs.map_f₂₄_op_glue _ _ hy)
@@ -258,7 +260,7 @@ lemma mvShortComplex_app_surjective (M : X.Modules)
       (-(pushforwardRestrictMap f (inf_le_right : U ⊓ V ≤ V)).app M))
   simp only [Hom.comp_app] at h
   refine h.trans ?_
-  rw [Hom.neg_app', map_neg, neg_neg, pushforwardRestrictMap_app_app]
+  rw [Hom.neg_app_apply, map_neg, neg_neg, pushforwardRestrictMap_app_app]
   exact hb
 
 /-- The Mayer–Vietoris short complex of an `𝒪_X`-module is exact, with a monomorphism on the

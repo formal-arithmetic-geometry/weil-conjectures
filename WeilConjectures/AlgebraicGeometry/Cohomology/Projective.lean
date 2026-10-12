@@ -58,10 +58,14 @@ quasi-separated, with `T` quasi-compact. There is an integer `n` such that `R^p 
 all `p ≥ n`, all base changes `f' : X' ⟶ T'` of `f` along morphisms `g : T' ⟶ T`, and all
 quasi-coherent `𝒪_{X'}`-modules `ℱ'`.
 
-Over an affine open of `T`, cover `X` by `t` affine opens with affine pairwise intersections
-refined as necessary; induction on `t` with the Mayer–Vietoris sequence for `U₁` and
-`U₂ ∪ ⋯ ∪ U_t` gives `n = t`, and the base change of the covering is again such a covering
-of `X'` [Stacks, Tag 01XJ]. Quasi-coherence of the `R^p f_* ℱ`, the first part of the blueprint
+Over an affine open `A` of `T`, cover `f⁻¹ A` by `t` affine opens `Uᵢ`, each intersection
+`Uᵢ ∩ Uⱼ` being covered by at most `m` affine opens (`X` is quasi-separated over `T`). Induction
+on `t` with the Mayer–Vietoris sequence of the higher direct images for `U₁` and `U₂ ∪ ⋯ ∪ U_t`,
+where `U₁ ∩ (U₂ ∪ ⋯ ∪ U_t)` is a union of affine opens of the affine `U₁`, gives the bound
+`n = t m + 2` (`AlgebraicGeometry.Scheme.Modules.higherDirectImageBound_of_affineCover`).
+Over an affine open `W' ⊆ g⁻¹ A` of `T'`, the preimages of these opens in `f'⁻¹ W'` are
+again affine, being fibre products of affine schemes, and form a covering of the same shape
+[Stacks, Tag 01XJ]. Quasi-coherence of the `R^p f_* ℱ`, the first part of the blueprint
 lemma, is `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_higherDirectImage`.
 
 (blueprint: `lem-pc-finite-support-hi`) -/
@@ -145,8 +149,10 @@ variable {n : Type u} [Finite n] {X : Scheme.{u}}
 
 /-- **Vanishing of the cohomology of a projective scheme above the dimension.** Let
 `i : X ⟶ ℙᵈ_A` be a closed immersion, `ℙᵈ_A = ℙ(n; Spec A)` with `Nat.card n = d + 1`, and
-`ℱ` a quasi-coherent `𝒪_X`-module. Then `H^q(X, ℱ) = 0` for `q > d`: the cohomology of `ℱ` is
-that of `i_* ℱ`, computed by the Čech complex of the `d + 1` standard affine opens.
+`ℱ` a quasi-coherent `𝒪_X`-module. Then `H^q(X, ℱ) = 0` for `q > d`: the separated scheme `X` is
+covered by the `d + 1` affine preimages of the standard affine opens, and quasi-coherent
+cohomology vanishes above the number of affine opens in such a covering
+(`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_card_le`).
 
 This is the vanishing clause of the blueprint lemma.
 
@@ -200,9 +206,10 @@ theorem isFinitePresentation_higherDirectImage_of_isClosedImmersion [IsLocallyNo
 include hi in
 /-- **Vanishing of the higher direct images of a projective morphism.** In the situation of
 `isFinitePresentation_higherDirectImage_of_isClosedImmersion`, with `Nat.card n = d + 1`, the
-higher direct images `R^q f_* ℱ` vanish for `q > d`: over an affine open `Spec A` of `S`, they
-are the sheaves associated with the `H^q(f⁻¹(Spec A), ℱ)`, which vanish by
-`AlgebraicGeometry.Scheme.Modules.subsingleton_H_of_isClosedImmersion`.
+higher direct images `R^q f_* ℱ` vanish for `q > d`: over an affine open `S'` of `S`, the base
+change of `X` is separated and covered by the `d + 1` affine preimages of the standard affine
+opens, and the Mayer–Vietoris sequence of the higher direct images gives the vanishing above
+`d` (`AlgebraicGeometry.Scheme.Modules.higherDirectImageBound_finsetSup`).
 
 (blueprint: `lem-pc-projective-coherent-higher-images`) -/
 theorem isZero_higherDirectImage_of_isClosedImmersion {d : ℕ} (hn : Nat.card n = d + 1)
