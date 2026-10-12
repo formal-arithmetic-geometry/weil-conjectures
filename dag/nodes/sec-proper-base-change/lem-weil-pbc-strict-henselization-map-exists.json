@@ -18,74 +18,61 @@
  ],
  "proof": [
   {
-   "text": "Residue maps of composite scheme morphisms compose. Under the given equations for the Omega algebra maps, the image of kappa(s) lies in the image of kappa(t). Separability is preserved on extending the coefficient field, giving an inclusion K_S -> K_T. Conjugate this inclusion by sigmaS and sigmaT to obtain the required residue-field map.",
+   "text": "The given sigmaT defines a local ring map psiT into Omega. Its supplied pointed factorizations and any one neighbourhood imply that Spec(psiT) composed with the structural map is barT. Its image is the closed point. Apply strictHenselizationLocalStructure to make the T colimit strictly henselian.",
    "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
     "def-weil-geometric-point",
     "def-weil-residue-field",
     "def-weil-pbc-relative-separable-closure",
-    "def-weil-locally-ringed-space-morphism"
+    "def-weil-pbc-strict-henselization-structural-map",
+    "def-weil-pbc-henselian-terminology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 04GU and 08HR; etale-cohomology.tex paragraph following Tag 03PS and parent steps 5--7"
-   }
+   "elementary": false
   },
   {
-   "text": "Use local structure and the pointed colimit map to identify the canonical residues and the closed points. The supplied sigma maps agree with those pointed maps, since two such maps agree on all colimit coprojections; cancel the injective embeddings into Omega and the surjective residue maps. Choose an affine open U=Spec A through s. The map g composed with jT from the local T spectrum factors through U, giving an A-algebra structure on C_T. The affine-neighbourhood/triple comparison presents C_S as a filtered colimit of etale A-algebras.",
+   "text": "Pull each affine pointed etale S-neighbourhood back to Spec C_T. Choose an affine chart B through its marked point q. Localize at q. The map C_T -> B_q is local and weakly etale, hence an isomorphism by Olivier. Its inverse defines a section; extension of the field map to B_q proves that the section preserves the chosen Omega-point. This is a pointed refinement of the section argument in Stacks 03QO, with Olivier (092Z) replacing the etale decomposition theorem.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-local-structure",
-    "lem-weil-pbc-strict-henselization-pointed-map",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-etale-local-ring-triples",
+    "thm-weil-pbc-weak-etale-strict-local",
     "def-weil-affine-spectrum",
     "def-weil-open-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 04GU and 08HR; etale-cohomology.tex paragraph following Tag 03PS and parent steps 5--7"
-   }
+   "elementary": false
   },
   {
-   "text": "Both maximal ideals contract to the prime of s, and the residue map of the first step respects kappa(s). The T colimit is henselian by its local structure. Apply map_into_henselian_colimit to obtain the A-algebra map h with the prescribed maximal-ideal contraction and residue map. The contraction makes h local; the residue condition gives the displayed equation into Omega. Its A-algebra condition gives the structural-map equation after composing with U -> S.",
+   "text": "Compatibility follows from the open diagonal of an etale morphism: two maps over S that agree on the geometric closed point agree everywhere, since every point of a local spectrum generalizes the closed point. This argument is written in the Lean proof using Mathlib FormallyUnramified.isOpenImmersion_diagonal, IsLocalRing.specializes_closedPoint and IsOpenImmersion.lift. Transport the compatible maps through isoSpec to form a cone and use strictHenselization_properties and IsLimit.lift.",
    "uses": [
-    "lem-weil-pbc-map-into-henselian-colimit",
-    "def-weil-pbc-henselian-terminology",
-    "def-weil-locally-ringed-space-morphism",
-    "def-weil-residue-field",
-    "def-weil-affine-spectrum"
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-category-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 04GU and 08HR; etale-cohomology.tex paragraph following Tag 03PS and parent steps 5--7"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Spec.preimage converts the limit morphism into a ring map. Its cone-leg equations give the structural equality. IsLimit.hom_ext and the supplied sigmaS factorizations give the equality of maps into Omega. Mathlib isLocalHom_of_comp then proves locality from the local residue composite.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-geometric-point",
-  "def-weil-residue-field",
-  "def-weil-pbc-relative-separable-closure",
-  "def-weil-locally-ringed-space-morphism",
-  "lem-weil-pbc-strict-henselization-local-structure",
-  "lem-weil-pbc-strict-henselization-pointed-map",
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-category-colimit",
-  "def-weil-pbc-strict-henselization-structural-map",
-  "lem-weil-pbc-etale-local-ring-triples",
   "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-weil-locally-ringed-space-morphism",
   "def-weil-open-immersion",
-  "lem-weil-pbc-map-into-henselian-colimit",
-  "def-weil-pbc-henselian-terminology"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-residue-field",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "thm-weil-pbc-weak-etale-strict-local"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 04GU and 08HR; etale-cohomology.tex paragraph following Tag 03PS and parent steps 5--7",
-  "note": "Stage-3 Lean argument and explicit transport steps by Y2, following the cited source; sources read online because the literature checkout is absent on this machine."
+  "document": "Stacks Project",
+  "place": "Tags 03QO (pointed etale sections), 092Z (Olivier), 02GE (open diagonal); strict-henselization colimit universal property",
+  "note": "Second reading N1: removed a false arbitrary-local-map compatibility assertion and both proposed split nodes. Completed the original statement through pointed sections and a limit cone. The localization calculation adapts the existing private proof in StrictlyHenselianOpenSectionsStalk; no duplicate public declaration is introduced. Sources 03QO and 092Z read online on 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -155,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T044800-L-2043896",
-  "kind": "interface",
+  "landing": "20261012T060746-L-2911636",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
