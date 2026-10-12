@@ -1,0 +1,142 @@
+{
+ "id": "lem-pc-derived-free-cover-columns",
+ "kind": "statement",
+ "title": "Exact successive free-cover columns before totalization",
+ "statement": "Let $A$ be a commutative ring and $M^\\bullet$ a cochain complex of $A$-modules [def-pc-cochain-complex-modules]. There exist a bicomplex $K^{p,q}$ with commuting horizontal and vertical differentials and a cochain map $a:K^{0,\\bullet}\\to M^\\bullet$ such that every positive column is zero; for each $q$, the augmented row $\\cdots\\to K^{-2,q}\\to K^{-1,q}\\to K^{0,q}\\xrightarrow{a}M^q\\to0$ is exact, and the augmented row of vertical cycles is exact. For every $p\\le0$ there is a degreewise split short exact sequence $0\\to U_p^\\bullet\\to B_p^\\bullet\\to V_p^\\bullet\\to0$ with $B_p^\\bullet\\cong K^{p,\\bullet}$, where $U_p$ and $V_p$ are coproducts of single copies of $A$ concentrated in integer degrees, indexed by types in the universe of $A$. No total complex or total augmentation is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Set $N_0=M$. At each stage choose the cover $P_i\\to N_i$ and its split two-step sequence using [lem-pc-derived-free-complex-cover]. Set $N_{i+1}=\\ker(P_i\\to N_i)$. Compose $P_{i+1}\\to N_{i+1}$ with the kernel inclusion into $P_i$. The resulting successive maps compose to zero.",
+   "uses": [
+    "lem-pc-derived-free-complex-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
+   }
+  },
+  {
+   "text": "Degreewise surjectivity of the covers identifies each image with the next kernel, including the kernel of $P_0\\to M$. If a cycle in $P_i$ maps to zero, its unique factor through the kernel $N_{i+1}$ is a cycle, since the kernel inclusion is injective and commutes with differentials. Cycle surjectivity of $P_{i+1}\\to N_{i+1}$ lifts this cycle. This proves exactness of the augmented rows of terms and of cycles, including surjectivity at $M$.",
+   "uses": [
+    "lem-pc-derived-free-complex-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
+   }
+  },
+  {
+   "text": "Place P_i in horizontal degree -i and zero in positive degrees. The maps are cochain maps and their consecutive composites vanish by the kernel condition. Thus they define a bicomplex K. Set a to the first cover. Retain the split short exact sequence and the two coproduct decompositions supplied for each cover. No total complex or total augmentation is asserted here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-free-complex-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KP, proof (https://stacks.math.columbia.edu/tag/09KP)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every cochain complex admits an augmented bicomplex of free two step covers with exact rows and exact rows of cycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cochain complex has a bicomplex concentrated in nonpositive columns whose augmented rows of terms and vertical cycles are exact and whose columns are free two step covers",
+   "results": "8 hits: CochainComplex.isLE_iff, CochainComplex.isGE_iff, CochainComplex.exactAt_of_isLE, CochainComplex.exactAt_of_isGE, CochainComplex.exactAt_succ_single_obj, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CochainComplex.isKInjective_of_injective_aux, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ; no matching augmented free-cover column construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_freeCoverColumns|exists_freeCoverBicomplex|exact.*cyclesMap",
+   "results": "3 hits: Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/SpectralObject/Cycles.lean, Mathlib/Algebra/Homology/SpectralObject/Differentials.lean; no matching augmented free-cover column construction.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FreeCoverBicomplex",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): successive free covers and exact rows, before direct-sum totalization",
+   "via": [
+    "lem-pc-derived-free-cover-bicomplex",
+    "lem-pc-derived-filtered-free-resolution",
+    "lem-pc-derived-module-free-generation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FreeCoverColumns",
+  "file": "lean/Sheaf/Algebra/Homology/FreeCoverColumns.lean",
+  "declaration": "CochainComplex.exists_freeCoverColumns",
+  "statement": "theorem exists_freeCoverColumns {A : Type u} [CommRing A] (M : CochainComplex (ModuleCat.{u} A) ℤ) : ∃ K : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ), ∃ a : K.X 0 ⟶ M, (∀ p : ℤ, 0 < p → IsZero (K.X p)) ∧ (∀ (p q : ℤ), p < -1 → Function.Exact ((K.d p (p + 1)).f q).hom ((K.d (p + 1) (p + 2)).f q).hom) ∧ (∀ q : ℤ, Function.Exact ((K.d (-1) 0).f q).hom (a.f q).hom) ∧ (∀ q : ℤ, Function.Surjective (a.f q).hom) ∧ (∀ (p q : ℤ), p < -1 → Function.Exact (HomologicalComplex.cyclesMap (K.d p (p + 1)) q).hom (HomologicalComplex.cyclesMap (K.d (p + 1) (p + 2)) q).hom) ∧ (∀ q : ℤ, Function.Exact (HomologicalComplex.cyclesMap (K.d (-1) 0) q).hom (HomologicalComplex.cyclesMap a q).hom) ∧ (∀ q : ℤ, Function.Surjective (HomologicalComplex.cyclesMap a q).hom) ∧ (∀ p : ℤ, p ≤ 0 → ∃ S : ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ), Nonempty (S.X₂ ≅ K.X p) ∧ S.ShortExact ∧ (∀ k : ℤ, Nonempty (S.map (HomologicalComplex.eval (ModuleCat.{u} A) (ComplexShape.up ℤ) k)).Splitting) ∧ ∃ (I₁ I₃ : Type u) (d₁ : I₁ → ℤ) (d₃ : I₃ → ℤ), Nonempty (S.X₁ ≅ ∐ (fun i : I₁ ↦ (HomologicalComplex.single (ModuleCat.{u} A) (ComplexShape.up ℤ) (d₁ i)).obj (ModuleCat.of A A))) ∧ Nonempty (S.X₃ ≅ ∐ (fun i : I₃ ↦ (HomologicalComplex.single (ModuleCat.{u} A) (ComplexShape.up ℤ) (d₃ i)).obj (ModuleCat.of A A))))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T095905-L-317580",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T095905-L-317580",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
