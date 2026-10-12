@@ -16,55 +16,35 @@
  ],
  "proof": [
   {
-   "text": "Put A = R_p and B = A tensor_R S. B is finite over the Noetherian local ring A. Localization identifies the primes of B over its maximal ideal m with Q, and their local rings with S_q. Every B/m^n B for n > 0 is Artinian. Its canonical map to the product of S_q/m^n S_q is an isomorphism by Tags 00JA and 00CT.",
+   "text": "For an element x in the kernel of f, use quotient separation to reduce x=0 to E_n(x)=0 for every n. Choose the sufficiently deep exponent k from finite quotient detection.",
    "uses": [
-    "lem-weil-pbc-localization-base-change",
-    "lem-weil-pbc-localization-prime-residue-field-iso",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "lem-weil-pbc-localization-at-prime-of-quotient"
+    "lem-weil-pbc-completion-tensor-quotient-separated",
+    "lem-weil-pbc-local-tensor-quotient-detection"
    ],
    "elementary": false
   },
   {
-   "text": "These canonical maps commute with reduction. Thus the map from the m-adic completion of B into the product of the m-adic completions of S_q is injective: if every component is zero, each quotient coordinate is zero by the quotient product isomorphism, and the original compatible sequence is zero.",
+   "text": "Write x as a finite sum a_i tensor s_i. Choose r_i in A representing the kth quotient evaluation of a_i. S-linearity gives f(a_i tensor s_i)=s_i f(a_i tensor 1). The compatibility hypothesis on f then identifies its kth local quotient with phi_q(r_i)(s_i/1). Since f(x)=0, these finite sums vanish for every q.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "In S_q, the extended ideal m S_q has radical q S_q. Noetherianity gives a power of q S_q contained in m S_q; the converse inclusion is immediate. Tag 0394 identifies the two completions by the identity on S_q. Therefore replacing the factors by the maximal-ideal completions preserves injectivity.",
+   "text": "Finite quotient detection gives the vanishing of the sum (r_i mod m^n) tensor s_i. Compatibility of the coordinates of a_i and n<=k identifies r_i mod m^n with its nth evaluation. Hence E_n(x)=0. Quotient separation gives x=0. Finally apply this to x-y when f(x)=f(y), proving injectivity.",
    "uses": [
-    "lem-weil-pbc-finite-after-completion"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Tag 00MA identifies C tensor_A B with the m-adic completion of B, and tensor cancellation identifies C tensor_A B with C tensor_R S. Under this canonical comparison the resulting map sends a tensor s to the tuple g_q(a) times s. The hypothesis on f determines g_q: choose a representative of each quotient coordinate of a and apply the displayed equation, then use extensionality of compatible sequences. S-linearity and tensor induction identify f with this comparison map. Composing the injections proves the claim. The zero algebra and empty Q are included: B/m^n B and its completion are then zero.",
-   "uses": [
-    "lem-weil-pbc-completion-finite-module-tensor",
-    "lem-weil-pbc-tensor-cancel-base-change"
+    "lem-weil-pbc-completion-tensor-quotient-separated",
+    "lem-weil-pbc-local-tensor-quotient-detection"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-completion-finite-module-tensor",
-  "lem-weil-pbc-finite-after-completion",
-  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-localization-at-prime-of-quotient",
-  "lem-weil-pbc-localization-base-change",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-prime-residue-field-iso",
-  "lem-weil-pbc-product-of-localizations-at-maximal",
-  "lem-weil-pbc-tensor-cancel-base-change"
+  "lem-weil-pbc-completion-tensor-quotient-separated",
+  "lem-weil-pbc-local-tensor-quotient-detection"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 07N9, injective direction of the canonical comparison"
+  "place": "Tag 07N9, injective direction expressed through finite quotient detection and Krull separation"
  },
  "mathlib_searches": [
   {
@@ -148,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T184253-L-4000888",
+  "landing": "20261012T203942-L-830264",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

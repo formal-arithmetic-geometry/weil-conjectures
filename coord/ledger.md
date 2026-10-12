@@ -9444,3 +9444,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/F2/Sheaf.RingTheory.ExistsCompleteLocalFlatPresentation (stage 3; reviewer PASS; first push; landing 20261012T203941-L-829887 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/F2/Sheaf.RingTheory.FlatLocalExtensionGivenResidueField (stage 3; reviewer PASS; first push; landing 20261012T203941-L-830044 (interface); batch 20261012T203936; modules 3; new nodes 2)
 - 20:39 L: merged deliver/G1/Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemComparison (stage 3; reviewer PASS; first push; landing 20261012T203942-L-830166 (proof); batch 20261012T203936; modules 1; new nodes 0)
+- 20:39 L: merged deliver/G3/Sheaf.RingTheory.CompletionTensorLocalMapsInjective (stage 3; reviewer PASS; first push; landing 20261012T203942-L-830264 (interface); batch 20261012T203936; modules 3; new nodes 2)

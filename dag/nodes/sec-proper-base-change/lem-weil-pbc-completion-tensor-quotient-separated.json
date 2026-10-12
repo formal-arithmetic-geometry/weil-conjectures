@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-completion-tensor-quotient-separated",
+ "kind": "statement",
+ "title": "Quotient projections separate a completed finite tensor",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], $S$ a commutative $R$-algebra finite as an $R$-module [def-weil-finitely-generated-module], and $\\mathfrak p$ a prime ideal. Put $A=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime], $\\mathfrak m$ its maximal ideal and $C=\\varprojlim_n A/\\mathfrak m^n$ [def-weil-pbc-adic-completion]. Write $E_n:C\\otimes_R S\\to(A/\\mathfrak m^n)\\otimes_R S$ for the tensor product of the canonical quotient evaluation with the identity of $S$ [def-weil-module-base-change]. For every $x\\in C\\otimes_R S$, if $E_n(x)=0$ for all $n\\geq0$, then $x=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, separation of completed tensors; Tags 0316, 05GG, 05GI, 00DF and 00IQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Localization makes A Noetherian; Tag 0316 makes C Noetherian, and local completion makes C local with maximal ideal mC. Base change of the finite R-module S makes T=C tensor_R S finite over C.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module and ring quotient evaluations of C are identified by the quotient equivalence. The kernel formula of Tag 05GG at every power gives ker(C -> A/m^n)=m^n C. Right exactness of tensor product extends this kernel to T. Thus E_n(x)=0 puts x in (mC)^n T.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The maximal ideal of C lies in its Jacobson radical. Apply Krull intersection to the finite C-module T: membership in every power forces x=0.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07N9, separation of completed tensors; Tags 0316, 05GG, 05GI, 00DF and 00IQ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quotient projections of the completed tensor of a finite algebra detect zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient projections of the completed tensor of a finite algebra detect zero",
+   "results": "AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero, TensorProduct.vanishesTrivially_iff_sum_tmul_eq_zero_of_rTensor_injective, TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective, TensorProduct.vanishesTrivially_iff_sum_tmul_eq_zero, TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero_of_rTensor_injective, AdicCompletion.tensor_map_id_left_injective_of_injective, Submodule.exists_fg_of_baseChange_eq_zero",
+   "date": "2026-10-13",
+   "verdict": "partial ingredients; no exact statement, source signatures read"
+  },
+  {
+   "tool": "grep",
+   "query": "rTensor_ker|pow_smul_top_eq_ker_eval|of_isLocalRing",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/RightExactness.lean, Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean, Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean",
+   "date": "2026-10-13",
+   "verdict": "partial ingredients; no exact statement, source signatures read"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.CompletionTensorLocalMapsInjective",
+  "date": "2026-10-13",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, essential-surjectivity paragraphs), via Tag 07N9: injective direction of the completion product comparison; Tag 07N9, separation of completed tensors; Tags 0316, 05GG, 05GI, 00DF and 00IQ",
+   "via": [
+    "lem-weil-pbc-completion-tensor-local-maps-injective",
+    "lem-weil-pbc-completion-finite-extension-decomposition",
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompletionTensorQuotientSeparated",
+  "file": "lean/Sheaf/RingTheory/CompletionTensorQuotientSeparated.lean",
+  "declaration": "AdicCompletion.completion_tensor_quotient_separated",
+  "statement": "theorem completion_tensor_quotient_separated\n    (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]\n    [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :\n    let A := Localization.AtPrime p\n    let m := IsLocalRing.maximalIdeal A\n    let C := AdicCompletion m A\n    ∀ x : C ⊗[R] S,\n      (∀ n : ℕ, Algebra.TensorProduct.map ((evalₐ m n).restrictScalars R)\n        (AlgHom.id R S) x = 0) → x = 0",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T203942-L-830264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T203942-L-830264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
