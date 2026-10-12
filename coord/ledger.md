@@ -7514,3 +7514,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/H1/Sheaf.RingTheory.PopescuSmoothLiftModuloEight (stage 3; reviewer PASS; first push; landing 20261012T112841-L-768405 (interface); batch 20261012T112824; modules 2; new nodes 1)
 - 11:28 L: merged deliver/H3/Sheaf.CategoryTheory.SheafRingObjectsBijective (stage 3; reviewer PASS; first push; landing 20261012T112841-L-768542 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/J1/Sheaf.AlgebraicGeometry.AffineEtaleColimitPresentation (stage 3; reviewer PASS; first push; landing 20261012T112842-L-768639 (proof); batch 20261012T112824; modules 1; new nodes 0)
+- 11:28 L: merged deliver/J1/Sheaf.AlgebraicGeometry.Curve.ReductionUnitsFiltration (stage 3; reviewer PASS; first push; landing 20261012T112842-L-768734 (interface); batch 20261012T112824; modules 4; new nodes 3)

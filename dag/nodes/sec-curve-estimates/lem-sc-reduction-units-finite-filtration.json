@@ -19,22 +19,22 @@
  ],
  "proof": [
   {
-   "text": "The nilradical N of the Noetherian scheme is coherent and nilpotent: choose a finite affine cover and the maximum of the affine nilpotence exponents. On etale affines, flat pullback preserves N and its powers, and the quotient by the pulled-back N is reduced, since it is etale over X_red. Thus the kernel of restriction of units is 1+N.",
+   "text": "Apply exists_nilradical_pow_succ_eq_bot to choose n with N^(n+1)=0. Define the filtration terms on X by the actual kernels E_j=reductionUnitsPowerKernel X j. The first term is the kernel of restriction to X_red, by N^1=N. The last term is zero: restriction to the closed subscheme of the zero ideal is an isomorphism, so its units map is an isomorphism and its kernel is zero. This last assertion is proved using the upperStar/lowerStar adjunction, its invertible unit for an isomorphism, and isIso_upperStarGmSheafToGmSheaf.",
    "uses": [
-    "etale-proposition-etale-reduced",
-    "def-sc-etale-qcoherent-module"
+    "lem-sc-reduction-nilradical-nilpotent",
+    "def-sc-reduction-units-power-kernel"
    ],
    "elementary": false
   },
   {
-   "text": "Choose m>=1 with N^m=0. Filter 1+N by 1+N^(j+1), for 0<=j<=m-1. Multiplication becomes addition modulo N^(j+2), since 2j+2>=j+2. The quotient is the associated additive sheaf of the quasi-coherent module N^(j+1)/N^(j+2), and local unit lifting gives the short exact sequences. Lift the coefficients sectionwise; this preserves exactness.",
+   "text": "Use exists_reduction_units_power_quotient for each j<n to obtain the required short exact complex on X and its additive quasi-coherent quotient. No arbitrary filtration is chosen from an unproved existence statement.",
    "uses": [
-    "def-sc-etale-qcoherent-module"
+    "lem-sc-reduction-units-power-quotient"
    ],
    "elementary": false
   },
   {
-   "text": "Reduction is a universal homeomorphism, so its inverse image is an exact equivalence. Pull back the filtration and its short exact sequences. The adjunction counit on G_m,X_red is invertible; applying inverse image to the original units comparison and then the counit gives upperStarGmSheafToGmSheaf. Preservation of kernels identifies the first term with its kernel. The final term is zero. Reduced and empty schemes have the zero-length filtration.",
+   "text": "The reduction is a surjective closed immersion, hence a universal homeomorphism. Etale.isEquivalence_upperStar and Etale.isEquivalence_lowerStar identify its inverse and direct images as equivalences. Pull back the constructed E_j and use Functor.map_isZero and ShortExact.map_of_exact for the last term and short exact complexes. Map the three endpoint isomorphisms by Functor.mapIso. Identify U(E_0) with the kernel of U of the original units map by PreservesKernel.iso. The adjunction counit on G_m,X_red is invertible; kernelCompMono identifies the kernel after composing with it. Adjunction.homEquiv_counit says that this composite is upperStarGmSheafToGmSheaf, and kernelIsoOfEq completes the identification. This proves the original statement with no signature change.",
    "uses": [
     "lem-weil-pbc-reduction-universal-homeomorphism",
     "prop-weil-pbc-universal-homeomorphism-topos"
@@ -43,15 +43,16 @@
   }
  ],
  "proof_deps": [
-  "etale-proposition-etale-reduced",
-  "def-sc-etale-qcoherent-module",
+  "lem-sc-reduction-nilradical-nilpotent",
+  "def-sc-reduction-units-power-kernel",
+  "lem-sc-reduction-units-power-quotient",
   "lem-weil-pbc-reduction-universal-homeomorphism",
   "prop-weil-pbc-universal-homeomorphism-topos"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
-  "place": "Proof, Step 1 and its Claim; geometric nilpotent-units filtration, before taking cohomology"
+  "place": "Proof, Step 1 and its Claim; direct finite-cover and nilpotent-unit argument, J1 stage 3"
  },
  "mathlib_searches": [
   {
@@ -150,9 +151,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V2",
+  "group": "J1",
   "result": "pass",
-  "landing": "20261012T095927-L-325994",
+  "landing": "20261012T112842-L-768734",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
