@@ -42,6 +42,13 @@ theorem isPseudoCoherent_singleFunctor_obj_of_isCoherent (Y : Scheme.{u}) [IsNoe
     Y.IsPseudoCoherent
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0).obj F) := by
-  sorry
+  intro y
+  obtain ⟨U, A, _, _, hy, _, M, _, _, _, e, _, E, hE, hfree, q, hq⟩ :=
+    AlgebraicGeometry.coherent_affine_free_resolution Y F hF y
+  refine ⟨U, hy, E, hE, hfree, ?_⟩
+  have : QuasiIso q := hq
+  exact ⟨((SheafOfModules.overFunctor.{u}
+    (moduleRings Y.toRingedSpace) U).mapDerivedCategorySingleFunctor 0).app F ≪≫
+      (asIso (DerivedCategory.Q.map q)).symm⟩
 
 end AlgebraicGeometry.Scheme
