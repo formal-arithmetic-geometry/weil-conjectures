@@ -16,25 +16,24 @@
  ],
  "proof": [
   {
-   "text": "Use the divisor-class comparison to identify Picard classes with divisors modulo principal divisors on the two smooth connected curves. Restrict D by forgetting the coefficients outside C. Pullback of its point-ideal class is the class of this restricted divisor: at retained points use the point-lifting comparison and at omitted points use boundary triviality; then use finite additivity.",
+   "text": "Install the k-scheme structures. Finite type gives Noetherianity; connected smooth schemes are regular, reduced and integral. Dimension one on C gives smooth relative dimension one. Restrict D using the Picard-compatible divisor restriction statement, obtaining R and equality of all retained coefficients.",
    "uses": [
-    "lem-sc-divisor-class-toPic-equivalence",
-    "lem-sc-pic-restriction-point-lift",
-    "lem-sc-pic-restriction-boundary-trivial"
+    "lem-sc-divisor-restriction-picard",
+    "lem-sc-smooth-regular",
+    "lem-sc-regular-connected-integral"
    ],
    "elementary": false
   },
   {
-   "text": "Since the restricted Picard class is 1, the restricted divisor is principal by injectivity of the divisor-class comparison, so it equals div_C(a) for a nonzero rational function a. The open immersion identifies the generic stalks (the function fields), and identifies local rings at all retained closed points, hence their normalized valuations.",
+   "text": "The Picard pullback assumption gives toPic(R)=0. Apply the existing divisor-class equivalence to infer [R]=0. QuotientAddGroup.eq_zero_iff gives a unit a with div_C(a)=R. Extend its principal divisor through the open immersion to b on Z, with equal orders at all retained closed points.",
    "uses": [
     "lem-sc-divisor-class-toPic-equivalence",
-    "def-sc-function-field",
-    "def-sc-divisor"
+    "lem-sc-principal-divisor-open-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Transport a to the common function field of c.Z and form E = D - div_Z(a). Equality of orders on the open curve gives E(P)=0 at every retained point. The divisor div_Z(a) is principal, hence its toPic class is zero by the class equivalence; thus E and D have identical toPic classes. Their supports are finite by Noetherianity. If the boundary is empty, E is zero.",
+   "text": "Set E=D-div_Z(b). A principal divisor has zero quotient class, hence zero toPic class by the ambient divisor-class equivalence. Additivity now gives toPic(E)=toPic(D). For any retained P choose Q furnished by restriction; equality of orders and div_C(a)=R show E(P)=D(P)-R(Q)=0.",
    "uses": [
     "lem-sc-divisor-class-toPic-equivalence",
     "def-sc-divisor"
@@ -43,10 +42,11 @@
   }
  ],
  "proof_deps": [
+  "lem-sc-divisor-restriction-picard",
+  "lem-sc-smooth-regular",
+  "lem-sc-regular-connected-integral",
   "lem-sc-divisor-class-toPic-equivalence",
-  "lem-sc-pic-restriction-point-lift",
-  "lem-sc-pic-restriction-boundary-trivial",
-  "def-sc-function-field",
+  "lem-sc-principal-divisor-open-extension",
   "def-sc-divisor"
  ],
  "proof_origin": {
@@ -144,9 +144,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T085218-L-4953",
+  "landing": "20261012T095855-L-313768",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

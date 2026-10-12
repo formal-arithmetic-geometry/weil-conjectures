@@ -1,0 +1,139 @@
+{
+ "id": "lem-sc-divisor-restriction-picard",
+ "kind": "statement",
+ "title": "Picard-compatible divisor restriction",
+ "statement": "Let k be algebraically closed, C a smooth affine connected curve, and c a compactification with smooth connected ambient curve Z. For every divisor D on Z there exists a divisor R on C whose point-ideal Picard class is the pullback of the class of D, and such that each closed point P of Z in the image has a closed preimage Q with D(P)=R(Q). The structure morphisms are smooth of relative dimension one. [def-sc-curves, lem-sc-compactification, def-sc-divisor, def-sc-picard-group, def-sc-function-field].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+  "place": "Proof: first paragraph, restriction and boundary divisors"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "lem-sc-compactification",
+  "def-sc-divisor",
+  "def-sc-picard-group",
+  "def-sc-function-field"
+ ],
+ "proof": [
+  {
+   "text": "the open immersion is injective on points and identifies the local rings. A closed\npoint of C maps to a closed point of Z because it is rational over the algebraically closed\nfield and Z is separated over that field. Conversely a closed point of Z in the image has a\nclosed preimage by continuity and injectivity. Retain just the coefficients at these points;\nthis constructs a finitely supported divisor R on C. On a retained point the point-lift\ncomparison identifies the pullback of its point-ideal class with the class on C. On an omitted\npoint the boundary-triviality comparison gives the identity. Induct on the finite sum of\npoint divisors, using additivity and integer powers to obtain the Picard equality. If D is\nzero, take R zero; if the boundary is empty every coefficient is retained.",
+   "uses": [
+    "lem-sc-pic-restriction-point-lift",
+    "lem-sc-pic-restriction-boundary-trivial"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-pic-restriction-point-lift",
+  "lem-sc-pic-restriction-boundary-trivial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+  "place": "Proof: first paragraph, restriction and boundary divisors"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A divisor trivial on an open smooth curve differs from a boundary supported divisor by a principal divisor",
+   "results": "8 hits: MeromorphicNFOn.zero_set_eq_divisor_support, MeromorphicOn.divisor_of_toMeromorphicNFOn, MeromorphicOn.divisor_sub_const_of_ne, Function.locallyFinsuppWithin.toClosedBall_divisor, MeromorphicOn.divisor, Function.FactorizedRational.divisor, MeromorphicOn.divisor_congr_codiscreteWithin_of_eqOn_compl, MeromorphicOn.divisor_congr_codiscreteWithin",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.ord",
+   "results": "12 hits: AlgebraicGeometry.Scheme.ord, AlgebraicGeometry.Scheme.ord_eq_zero_of_coheight_neq_one, AlgebraicGeometry.Scheme.ord_zero, AlgebraicGeometry.Scheme.ord_eq_ordHom_of_coheight_eq_one, AlgebraicGeometry.Scheme.ord_mul, AlgebraicGeometry.Scheme.ord_eq_iff, AlgebraicGeometry.Scheme.le_ord_iff, AlgebraicGeometry.Scheme.ord_add",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ord.*(stalkMap|restrict)|functionField.*(Equiv|stalkMap)",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Principal divisors on a nonempty open subscheme extend to principal divisors on an integral scheme with equal orders",
+   "results": "Unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible sheaf associated to a divisor commutes with restriction to an open subscheme",
+   "results": "Second reader: results concern basic-open restrictions or abstract valued-ring equivalences; no scheme divisor restriction or open principal-extension theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\"",
+   "results": "Second reader: functionField definitions and fraction-ring instances only; no open-immersion divisor compatibility.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "div.*(restrict|pullback)|toPic.*map|map.*toPic; rg on lean/Sheaf/AlgebraicGeometry/Curve and FunctionField/OrderOfVanishing",
+   "results": "Second reader: point-lift and boundary-triviality supply the single-point Picard comparisons; no arbitrary-divisor restriction or principal-extension theorem. FunctionField and OrderOfVanishing have no scheme morphism compatibility theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PicRestrictionDivisorCorrection",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Affine case: restriction from the smooth compactification and principal divisor correction",
+   "via": [
+    "lem-sc-pic-restriction-divisor-correction",
+    "lem-sc-pic-restriction-exact",
+    "lem-sc-pic-restriction-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DivisorRestrictionPicard",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DivisorRestrictionPicard.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_divisor_restriction_picard",
+  "statement": "theorem Scheme.Hom.exists_divisor_restriction_picard\n    {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]\n    (c : Compactification f) [IsConnectedCurve c.g]\n    [hsm : SmoothOfRelativeDimension 1 c.g]\n    [hC : SmoothOfRelativeDimension 1 f] (D : c.Z.Divisor) :\n    ∃ R : C.Divisor,\n      (@Scheme.Divisor.toPic k _ C ⟨f⟩ hC R).toMul =\n        Scheme.Pic.mapHom c.i (@Scheme.Divisor.toPic k _ c.Z ⟨c.g⟩ hsm D).toMul ∧\n      ∀ P : closedPoints c.Z, P.val ∈ Set.range c.i.base →\n        ∃ Q : closedPoints C, c.i.base Q.val = P.val ∧ D P = R Q",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T095855-L-313768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T095855-L-313768",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
