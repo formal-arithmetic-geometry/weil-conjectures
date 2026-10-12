@@ -86,23 +86,24 @@ section VanishingLocus
 variable (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
 /-- The points of an étale `X`-scheme `W` near which a section `σ` of `M` over `W` vanishes:
-those in the image of an étale `W' ⟶ W` on which `σ` restricts to zero. -/
-def vanishingLocus {W : X.Etale} (σ : ToType (M.obj.obj (op W))) : Set W.left :=
+those in the image of an étale `W' ⟶ W` on which `σ` restricts to zero. This is the analogue for
+sheaves of `Λ`-modules of `AlgebraicGeometry.Etale.vanishingLocus` for abelian sheaves. -/
+def moduleVanishingLocus {W : X.Etale} (σ : ToType (M.obj.obj (op W))) : Set W.left :=
   {w | ∃ (W' : X.Etale) (g : W' ⟶ W) (w' : W'.left), g.left w' = w ∧ M.obj.map g.op σ = 0}
 
 variable {M}
 
 /-- The vanishing locus of a section is open, étale morphisms being open. -/
-lemma isOpen_vanishingLocus {W : X.Etale} (σ : ToType (M.obj.obj (op W))) :
-    IsOpen (vanishingLocus M σ) := by
+lemma isOpen_moduleVanishingLocus {W : X.Etale} (σ : ToType (M.obj.obj (op W))) :
+    IsOpen (moduleVanishingLocus M σ) := by
   rw [isOpen_iff_forall_mem_open]
   rintro w ⟨W', g, w', rfl, hg⟩
   exact ⟨Set.range g.left, fun _ ⟨w'', hw''⟩ ↦ ⟨W', g, w'', hw'', hg⟩,
     g.left.isOpenMap.isOpen_range, w', rfl⟩
 
 /-- A section whose vanishing locus is everything is zero, by the sheaf condition. -/
-lemma eq_zero_of_vanishingLocus_eq_univ {W : X.Etale} {σ : ToType (M.obj.obj (op W))}
-    (h : vanishingLocus M σ = Set.univ) : σ = 0 := by
+lemma eq_zero_of_moduleVanishingLocus_eq_univ {W : X.Etale} {σ : ToType (M.obj.obj (op W))}
+    (h : moduleVanishingLocus M σ = Set.univ) : σ = 0 := by
   let S : Sieve W :=
     { arrows W' g := M.obj.map g.op σ = 0
       downward_closed {W W'} g hg g' := by
@@ -110,7 +111,7 @@ lemma eq_zero_of_vanishingLocus_eq_univ {W : X.Etale} {σ : ToType (M.obj.obj (o
   refine Sheaf.isSeparated M W S ?_ σ 0 fun W' g hg ↦ by rw [map_zero]; exact hg
   rw [mem_smallEtaleTopology_iff]
   intro w
-  obtain ⟨W', g, w', hw', hg⟩ : w ∈ vanishingLocus M σ := h ▸ Set.mem_univ w
+  obtain ⟨W', g, w', hw', hg⟩ : w ∈ moduleVanishingLocus M σ := h ▸ Set.mem_univ w
   exact ⟨W', g, hg, w', hw'⟩
 
 /-- **A locally constant sheaf is locally a constant sheaf.** Near a point `w` of an étale
@@ -179,9 +180,9 @@ lemma exists_isZero_iff_of_isLocallyConstantSheaf [IsLocallyConstantSheaf M] {W 
 /-- **The vanishing locus of a section of a locally constant sheaf is open and closed.** Near a
 point outside it the section is a nonzero constant, and a nonzero constant vanishes on no
 nonempty étale scheme. -/
-theorem isClopen_vanishingLocus [IsLocallyConstantSheaf M] {W : X.Etale}
-    (σ : ToType (M.obj.obj (op W))) : IsClopen (vanishingLocus M σ) := by
-  refine ⟨?_, isOpen_vanishingLocus σ⟩
+theorem isClopen_moduleVanishingLocus [IsLocallyConstantSheaf M] {W : X.Etale}
+    (σ : ToType (M.obj.obj (op W))) : IsClopen (moduleVanishingLocus M σ) := by
+  refine ⟨?_, isOpen_moduleVanishingLocus σ⟩
   rw [← isOpen_compl_iff, isOpen_iff_forall_mem_open]
   intro w hw
   obtain ⟨W₂, g, w₂, N, n, hw₂, hn⟩ := exists_isZero_iff_of_isLocallyConstantSheaf σ w
@@ -197,11 +198,11 @@ theorem isClopen_vanishingLocus [IsLocallyConstantSheaf M] {W : X.Etale}
 /-- **Sections of a locally constant sheaf over a connected étale scheme are determined near a
 point.** If a section of a locally constant sheaf `M` over an étale `X`-scheme with connected
 underlying space vanishes near one point, it is zero. -/
-theorem eq_zero_of_mem_vanishingLocus [IsLocallyConstantSheaf M] {W : X.Etale}
+theorem eq_zero_of_mem_moduleVanishingLocus [IsLocallyConstantSheaf M] {W : X.Etale}
     [PreconnectedSpace W.left] {σ : ToType (M.obj.obj (op W))} {w : W.left}
-    (hw : w ∈ vanishingLocus M σ) : σ = 0 :=
-  eq_zero_of_vanishingLocus_eq_univ
-    ((isClopen_vanishingLocus σ).eq_univ ⟨w, hw⟩)
+    (hw : w ∈ moduleVanishingLocus M σ) : σ = 0 :=
+  eq_zero_of_moduleVanishingLocus_eq_univ
+    ((isClopen_moduleVanishingLocus σ).eq_univ ⟨w, hw⟩)
 
 end VanishingLocus
 
@@ -249,7 +250,7 @@ theorem bijective_toSheafify_app_of_preconnectedSpace {W : X.Etale} [Preconnecte
     (Presheaf.imageSieve_mem X.smallEtaleTopology
       (toSheafify X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).obj N)) σ) w
   change ToType N at n
-  refine ⟨n, (sub_eq_zero.1 (eq_zero_of_mem_vanishingLocus
+  refine ⟨n, (sub_eq_zero.1 (eq_zero_of_mem_moduleVanishingLocus
     (M := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj N)
     (w := w) ⟨W₂, g₂, w₂, hw₂, ?_⟩))⟩
   rw [map_sub, sub_eq_zero]

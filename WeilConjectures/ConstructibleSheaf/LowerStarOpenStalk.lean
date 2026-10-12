@@ -67,7 +67,7 @@ lemma injective_toPresheafFiber_of_preconnectedSpace [IsLocallyConstantSheaf M]
   intro a b hab
   rw [← sub_eq_zero]
   obtain ⟨Y, f, y, hy, hf⟩ := ((pointSmallEtale s).toPresheafFiber_eq_iff' W w a b).1 hab
-  refine eq_zero_of_mem_vanishingLocus (w := w.left (IsLocalRing.closedPoint Ω))
+  refine eq_zero_of_mem_moduleVanishingLocus (w := w.left (IsLocalRing.closedPoint Ω))
     ⟨Y, f, y.left (IsLocalRing.closedPoint Ω), ?_, ?_⟩
   · rw [← hy]
     rfl
