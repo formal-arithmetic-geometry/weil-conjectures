@@ -32,9 +32,8 @@
  ],
  "proof": [
   {
-   "text": "The ring map and module structures. By definition of a morphism of ringed spaces [def-weil-locally-ringed-space-morphism], $g^\\sharp:\\mathcal O_X\\to g_*\\mathcal O_Y$ gives on global sections the ring map $g^\\sharp_X:R=\\mathcal O_X(X)\\to\\mathcal O_Y(g^{-1}X)=\\mathcal O_Y(Y)=S$, which makes $S$ an $R$-algebra. For an $\\mathcal O_Y$-module $\\mathcal H$ the pushforward has $(g_*\\mathcal H)(U)=\\mathcal H(g^{-1}U)$ with $\\mathcal O_X(U)$ acting through $g^\\sharp_U$ [def-pc-module-pullback]; so $\\Gamma(X,g_*\\mathcal H)=\\Gamma(Y,\\mathcal H)$, and its $R$-module structure is the $S$-module structure of $\\Gamma(Y,\\mathcal H)$ restricted along $g^\\sharp_X$. For an $\\mathcal O_Y$-linear $\\beta:\\mathcal H\\to\\mathcal H'$, $(g_*\\beta)_X=\\beta_Y$.",
+   "text": "For a scheme morphism $g:Y\\to X$, its global ring map is $g.appTop$. The module $\\Gamma(X,g_*\\mathcal H)$ is definitionally the restriction along this map of $\\Gamma(Y,\\mathcal H)$, and pushforward on morphisms at the top open is the original morphism at the top open. These identifications unfold the module pushforward [def-pc-module-pullback]; no separate morphism lemma is needed.",
    "uses": [
-    "def-weil-locally-ringed-space-morphism",
     "def-pc-module-pullback"
    ],
    "elementary": true,
@@ -44,7 +43,7 @@
    }
   },
   {
-   "text": "A bijection natural in the target. Fix an $R$-module $M$ and put $A=g^*\\mathcal F_M$, $B=\\mathcal F_{S\\otimes_RM}$. For every $\\mathcal O_Y$-module $\\mathcal H$ compose the four bijections\n(a) $\\operatorname{Hom}_{\\mathcal O_Y}(A,\\mathcal H)\\to\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,g_*\\mathcal H)$, $\\psi\\mapsto g_*\\psi\\circ\\eta_{\\mathcal F_M}$, the adjunction $g^*\\dashv g_*$ [def-pc-module-pullback];\n(b) $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,g_*\\mathcal H)\\to\\operatorname{Hom}_R(M,\\Gamma(X,g_*\\mathcal H))=\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))$, $\\varphi\\mapsto\\varphi_X\\circ c_M$ [lem-weil-pbc-associated-module-hom] on $X$, with Step 1;\n(c) $\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))\\to\\operatorname{Hom}_S(S\\otimes_RM,\\Gamma(Y,\\mathcal H))$, the inverse of $\\chi\\mapsto(m\\mapsto\\chi(1\\otimes m))$ [lem-weil-pbc-scalar-extension-hom], for the $S$-module $N=\\Gamma(Y,\\mathcal H)$, whose restriction to $R$ is the module of (b) by Step 1;\n(d) $\\operatorname{Hom}_S(S\\otimes_RM,\\Gamma(Y,\\mathcal H))\\to\\operatorname{Hom}_{\\mathcal O_Y}(B,\\mathcal H)$, the inverse of $\\chi\\mapsto\\chi_Y\\circ c_{S\\otimes_RM}$ [lem-weil-pbc-associated-module-hom] on $Y$ (whose ring of global sections is $S$).\nCall the composite $\\Phi_{\\mathcal H}$. Each of (a)-(d) is natural in $\\mathcal H$ (for (b) and (c) because $(g_*\\beta)_X=\\beta_Y$ by Step 1, and the naturality clauses of the cited nodes), so $\\Phi_{\\mathcal H'}(\\beta\\circ\\psi)=\\beta\\circ\\Phi_{\\mathcal H}(\\psi)$ for $\\mathcal O_Y$-linear $\\beta:\\mathcal H\\to\\mathcal H'$. Tracing an element: (a) followed by (b) sends $\\psi$ to $m\\mapsto(g_*\\psi)_X(\\eta_{\\mathcal F_M,X}(c_M(m)))=\\psi_Y(g^*c_M(m))$; hence $\\chi=\\Phi_{\\mathcal H}(\\psi)$ is the unique $\\mathcal O_Y$-linear map $B\\to\\mathcal H$ with $\\chi_Y(c_{S\\otimes_RM}(1\\otimes m))=\\psi_Y(g^*c_M(m))$ for all $m\\in M$. In particular the map $\\psi\\mapsto(m\\mapsto\\psi_Y(g^*c_M(m)))$, $\\operatorname{Hom}_{\\mathcal O_Y}(A,\\mathcal H)\\to\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))$, being (b)$\\circ$(a), is injective.",
+   "text": "A bijection natural in the target. Fix an $R$-module $M$ and put $A=g^*\\mathcal F_M$, $B=\\mathcal F_{S\\otimes_RM}$. For every $\\mathcal O_Y$-module $\\mathcal H$ compose the four bijections\n(a) $\\operatorname{Hom}_{\\mathcal O_Y}(A,\\mathcal H)\\to\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,g_*\\mathcal H)$, $\\psi\\mapsto g_*\\psi\\circ\\eta_{\\mathcal F_M}$, the adjunction $g^*\\dashv g_*$ [def-pc-module-pullback];\n(b) $\\operatorname{Hom}_{\\mathcal O_X}(\\mathcal F_M,g_*\\mathcal H)\\to\\operatorname{Hom}_R(M,\\Gamma(X,g_*\\mathcal H))=\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))$, $\\varphi\\mapsto\\varphi_X\\circ c_M$ [lem-weil-pbc-associated-module-hom] on $X$, with Step 1;\n(c) $\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))\\to\\operatorname{Hom}_S(S\\otimes_RM,\\Gamma(Y,\\mathcal H))$, the inverse of $\\chi\\mapsto(m\\mapsto\\chi(1\\otimes m))$ [lem-weil-pbc-scalar-extension-hom], for the $S$-module $N=\\Gamma(Y,\\mathcal H)$, whose restriction to $R$ is the module of (b) by Step 1;\n(d) $\\operatorname{Hom}_S(S\\otimes_RM,\\Gamma(Y,\\mathcal H))\\to\\operatorname{Hom}_{\\mathcal O_Y}(B,\\mathcal H)$, the inverse of $\\chi\\mapsto\\chi_Y\\circ c_{S\\otimes_RM}$ [lem-weil-pbc-associated-module-hom] on $Y$ (whose ring of global sections is $S$).\nCall the composite $\\Phi_{\\mathcal H}$. Each of (a)-(d) is natural in $\\mathcal H$ (for (b) and (c) because $(g_*\\beta)_X=\\beta_Y$ by Step 1, and the naturality clauses of the cited nodes), so $\\Phi_{\\mathcal H'}(\\beta\\circ\\psi)=\\beta\\circ\\Phi_{\\mathcal H}(\\psi)$ for $\\mathcal O_Y$-linear $\\beta:\\mathcal H\\to\\mathcal H'$. Tracing an element: (a) followed by (b) sends $\\psi$ to $m\\mapsto(g_*\\psi)_X(\\eta_{\\mathcal F_M,X}(c_M(m)))=\\psi_Y(g^*c_M(m))$; hence $\\chi=\\Phi_{\\mathcal H}(\\psi)$ is the unique $\\mathcal O_Y$-linear map $B\\to\\mathcal H$ with $\\chi_Y(c_{S\\otimes_RM}(1\\otimes m))=\\psi_Y(g^*c_M(m))$ for all $m\\in M$. In particular the map $\\psi\\mapsto(m\\mapsto\\psi_Y(g^*c_M(m)))$, $\\operatorname{Hom}_{\\mathcal O_Y}(A,\\mathcal H)\\to\\operatorname{Hom}_R(M,\\Gamma(Y,\\mathcal H))$, being (b)$\\circ$(a), is injective. Lean implements the two maps to the common R-linear Hom set as equivalences p and q, using associatedModuleHom_bijective on X and Y and ModuleCat.extendRestrictScalarsAdj. Its e is q followed by the inverse of p (the inverse orientation of Phi above). The evaluation formulas hp and hq and p(e(f)) = q(f) prove naturality in the target directly on elements.",
    "uses": [
     "def-pc-module-pullback",
     "lem-weil-pbc-associated-module-hom",
@@ -59,11 +58,9 @@
    }
   },
   {
-   "text": "Existence and isomorphism. By Step 2 the bijections $\\Phi_{\\mathcal H}:\\operatorname{Hom}(A,\\mathcal H)\\to\\operatorname{Hom}(B,\\mathcal H)$ are natural in $\\mathcal H$ in the category of $\\mathcal O_Y$-modules, so by [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] $\\kappa=\\Phi_A(\\mathrm{id}_A):B\\to A$ is an isomorphism with $\\Phi_{\\mathcal H}(\\psi)=\\psi\\circ\\kappa$. Put $\\theta_M=\\kappa^{-1}:g^*\\mathcal F_M\\to\\mathcal F_{S\\otimes_RM}$. The characterization of Step 2 for $\\psi=\\mathrm{id}_A$ gives $\\kappa_Y(c_{S\\otimes_RM}(1\\otimes m))=g^*c_M(m)$, i.e. $\\theta_{M,Y}(g^*c_M(m))=c_{S\\otimes_RM}(1\\otimes m)$ for all $m\\in M$.",
-   "uses": [
-    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
-   ],
-   "elementary": false,
+   "text": "For $A=g^*\\mathcal F_M$ and $B=\\mathcal F_{S\\otimes_R M}$, let $e_H:\\operatorname{Hom}(B,H)\\simeq\\operatorname{Hom}(A,H)$ be the inverse of the equivalence of Step 2. Define $\\theta=e_B(\\mathrm{id}_B)$ and $\\kappa=e_A^{-1}(\\mathrm{id}_A)$. Naturality of e in H gives $\\theta\\circ\\kappa=\\mathrm{id}_B$ after applying the injective e_B, and $\\kappa\\circ\\theta=\\mathrm{id}_A$ directly. Thus the pair forms an isomorphism. The evaluation formula of Step 2 applied to id_B gives the required canonical-section equation. This is the elementary co-Yoneda argument, realized by the explicit inverse rather than an imported co-Yoneda theorem.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/modules.tex",
     "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent), proof: F_M = pi^*M (Lemma 01BH (1)) and the square of ringed spaces with ({*}, R), ({*}, S); Sheaves, Lemma 0097 (push-pull-composition-modules), whose proof is pushforwards compose plus uniqueness of adjoints; here unwound into hom bijections, pi_* being Gamma"
@@ -79,7 +76,7 @@
    }
   },
   {
-   "text": "Naturality in $M$. Let $u:M\\to M'$ be $R$-linear. The two $\\mathcal O_Y$-linear maps $\\theta_{M'}\\circ g^*(\\mathcal F_u)$ and $\\mathcal F_{\\mathrm{id}_S\\otimes u}\\circ\\theta_M$ from $g^*\\mathcal F_M$ to $\\mathcal F_{S\\otimes_RM'}$ agree on the sections $g^*c_M(m)$: naturality of the unit $\\eta$ of $g^*\\dashv g_*$ [def-pc-module-pullback] gives $(g^*\\mathcal F_u)_Y(g^*c_M(m))=g^*(\\mathcal F_{u,X}(c_M(m)))=g^*c_{M'}(u(m))$ by $\\mathcal F_{u,X}\\circ c_M=c_{M'}\\circ u$ [def-weil-pbc-associated-module], which $\\theta_{M'}$ sends to $c_{S\\otimes_RM'}(1\\otimes u(m))$ (Step 3); and $\\theta_M$ sends $g^*c_M(m)$ to $c_{S\\otimes_RM}(1\\otimes m)$, which $\\mathcal F_{\\mathrm{id}_S\\otimes u}$ sends to $c_{S\\otimes_RM'}((\\mathrm{id}_S\\otimes u)(1\\otimes m))=c_{S\\otimes_RM'}(1\\otimes u(m))$ [def-weil-pbc-associated-module], [def-weil-module-base-change]. By the injectivity of Step 2 (for $\\mathcal H=\\mathcal F_{S\\otimes_RM'}$) the two maps are equal.",
+   "text": "Naturality in $M$. Let $u:M\\to M'$ be $R$-linear. The two $\\mathcal O_Y$-linear maps $\\theta_{M'}\\circ g^*(\\mathcal F_u)$ and $\\mathcal F_{\\mathrm{id}_S\\otimes u}\\circ\\theta_M$ from $g^*\\mathcal F_M$ to $\\mathcal F_{S\\otimes_RM'}$ agree on the sections $g^*c_M(m)$: naturality of the unit $\\eta$ of $g^*\\dashv g_*$ [def-pc-module-pullback] gives $(g^*\\mathcal F_u)_Y(g^*c_M(m))=g^*(\\mathcal F_{u,X}(c_M(m)))=g^*c_{M'}(u(m))$ by $\\mathcal F_{u,X}\\circ c_M=c_{M'}\\circ u$ [def-weil-pbc-associated-module], which $\\theta_{M'}$ sends to $c_{S\\otimes_RM'}(1\\otimes u(m))$ (Step 3); and $\\theta_M$ sends $g^*c_M(m)$ to $c_{S\\otimes_RM}(1\\otimes m)$, which $\\mathcal F_{\\mathrm{id}_S\\otimes u}$ sends to $c_{S\\otimes_RM'}((\\mathrm{id}_S\\otimes u)(1\\otimes m))=c_{S\\otimes_RM'}(1\\otimes u(m))$ [def-weil-pbc-associated-module], [def-weil-module-base-change]. By the injectivity of Step 2 (for $\\mathcal H=\\mathcal F_{S\\otimes_RM'}$) the two maps are equal. Lean uses associatedModuleCanonicalSection_natural twice, for u on X and extendScalars.map u on Y. The unit_naturality equalities of the pullback adjunction and scalar-extension adjunction identify the two generator images. Injectivity of p then gives equality of the sheaf morphisms.",
    "uses": [
     "def-pc-module-pullback",
     "def-weil-pbc-associated-module",
@@ -93,18 +90,16 @@
   }
  ],
  "proof_deps": [
-  "def-weil-locally-ringed-space-morphism",
   "def-pc-module-pullback",
   "lem-weil-pbc-associated-module-hom",
   "lem-weil-pbc-scalar-extension-hom",
   "def-weil-pbc-associated-module",
-  "def-weil-module-base-change",
-  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+  "def-weil-module-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent) and its proof via Lemma 01BH and Sheaves, Lemma 0097, with the composition-of-pullbacks isomorphism unwound into the adjunction bijections (pi_* = Gamma, pi^* -| pi_* = Lemma 01BH (4), Algebra 05DQ for the point ({*}, R) -> ({*}, S))"
+  "place": "Modules, Lemma 01BJ (lemma-restrict-quasi-coherent) and its proof via Lemma 01BH and Sheaves, Lemma 0097, with the composition-of-pullbacks isomorphism unwound into the adjunction bijections (pi_* = Gamma, pi^* -| pi_* = Lemma 01BH (4), Algebra 05DQ for the point ({*}, R) -> ({*}, S)); H1 stage-3 implementation: explicit inverse form of co-Yoneda and elementwise naturality, with no new intermediate statements"
  },
  "mathlib_searches": [
   {
@@ -189,5 +184,15 @@
   "group": "C1",
   "result": "fix",
   "note": "g:Y->X schemes; R,S = Gamma(top), S an R-algebra via g.appTop; F_M, c_M, F_u = landed J1 associatedModule/CanonicalSection/Functor; g^* = H1 tensorPullback, unit of the chosen nonempty_tensorPullbackAdjunction at top; S(x)_R M = extendScalars, 1(x)m = Unit.map; FIXED: per-M uniqueness among all morphisms satisfying the section equation (theta' = theta M <-> equation), was only uniqueness of the whole family satisfying all three conjuncts; iso; naturality"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T044744-L-2035329",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
