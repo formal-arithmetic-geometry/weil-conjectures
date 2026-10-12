@@ -6,6 +6,7 @@ module
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumCompatibilityTransport
 /-!
 # Compatible transport on an etale local representative
 
@@ -52,5 +53,13 @@ theorem finiteLocalModels_descentDatum_compatibility
           ((MorphismProperty.Over.w a).trans (MorphismProperty.Over.w b).symm)
           (Over.homMk ((e.hom.app (op (Over.mk a))) s).down.left
             (MorphismProperty.Over.w ((e.hom.app (op (Over.mk a))) s).down))).left =
-          ((e.hom.app (op (Over.mk b))) s).down.left := by sorry
+          ((e.hom.app (op (Over.mk b))) s).down.left := by
+  obtain ⟨t⟩ := finiteLocalModels_descentDatum_compatibility_datum T E U Q e
+  obtain ⟨hself, hcomp⟩ := finiteLocalModels_descentDatum_compatibility_transport T E U Q e t
+  let d : Over.DescentDatum U.hom (Over.mk Q.obj.hom) :=
+    { transport := t.transport
+      transport_homMk_comp := t.naturality
+      transport_self := fun a x ↦ hself _ a x
+      transport_transport := fun a b c hab hbc x ↦ hcomp _ a b c hab hbc x }
+  exact ⟨d, t.compatibility⟩
 end AlgebraicGeometry.Scheme

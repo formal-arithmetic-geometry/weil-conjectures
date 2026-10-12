@@ -16,45 +16,36 @@
  },
  "proof": [
   {
-   "text": "Over H=U times_T U, pull back Q along both projections. Each pullback represents the restriction of E to H via the given isomorphism e and the corresponding projection. This identification is natural in etale objects over H by naturality of e and the pullback universal property. Yoneda full faithfulness gives the unique scheme comparison isomorphism over H.",
+   "text": "Construct a natural transport structure on arbitrary scheme points by pulling back the Yoneda comparison on the overlap U ×_T U. The structure carries the compatibility equation for etale W and sections of E.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "lem-galois-yoneda-fully-faithful"
+    "lem-weil-pbc-finite-local-model-compatible-transport-datum"
    ],
    "elementary": false
   },
   {
-   "text": "Over U times_T U times_T U the comparisons all identify the same section of E. Composing the first two comparisons therefore gives the third. Yoneda faithfulness proves the cocycle equality of scheme morphisms. Pullback along the diagonal similarly gives the identity comparison.",
+   "text": "The diagonal and cocycle identities follow by evaluating compatibility on universal etale Q-points and pulling the equalities back by naturality.",
    "uses": [
-    "lem-galois-yoneda-fully-faithful"
+    "lem-weil-pbc-finite-local-model-compatible-transport-transport"
    ],
    "elementary": false
   },
   {
-   "text": "For any scheme W and lifts a,b with equal composite to T, base change the comparison along (a,b):W to H, and apply it to points of Q over a. Pullback functoriality proves naturality in arbitrary W. The diagonal and cocycle equalities give transport_self and transport_transport, yielding a scheme descent datum. It is legitimate to construct the comparison on the small site: H and the pullback representatives are etale over the indicated bases. The later base change to W does not evaluate E on W unless W is etale over T.",
+   "text": "Package the transport, naturality, diagonal and cocycle fields as Over.DescentDatum and retain the compatibility equation.",
    "uses": [
     "def-pd-descent-datum"
    ],
-   "elementary": false
-  },
-  {
-   "text": "For an etale W over T, the comparison is defined under the two representation isomorphisms to identify the same section s of E(W). Evaluating its transport on the point e_a(s) therefore gives e_b(s), exactly the displayed underlying scheme-map equality. Empty objects satisfy this equation by their unique sections.",
-   "uses": [
-    "def-weil-pbc-etale-sheaf-of-sets"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "lem-galois-yoneda-fully-faithful",
-  "def-pd-descent-datum",
-  "def-weil-pbc-etale-sheaf-of-sets"
+  "lem-weil-pbc-finite-local-model-compatible-transport-datum",
+  "lem-weil-pbc-finite-local-model-compatible-transport-transport",
+  "def-pd-descent-datum"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03RV and 02W5; small-site and arbitrary-scheme transport details expanded by S1 after reading the online text (local checkout absent)."
+  "place": "Tags 03RV and 02W5; universal-point proof of diagonal and cocycle"
  },
  "mathlib_searches": [
   {
@@ -141,9 +132,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T085334-L-37394",
+  "landing": "20261012T095904-L-317235",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
