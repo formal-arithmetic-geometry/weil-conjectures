@@ -30,17 +30,17 @@
    "elementary": false
   },
   {
-   "text": "For change of rings, exists_changeOfRingsMap asserts the balanced sectionwise restriction map on extension-of-scalars tensors. changeOfRingsMap chooses it. This existence theorem remains open.",
+   "text": "Construct the sectionwise change-of-rings restriction using Mathlib ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars. The map m ↦ 1 tensor M(f)(m) is linear over R1(X) into the twice-restricted target: M.map_smul and naturality of the ring morphism alpha identify the scalar actions. The universal property sends s tensor m to R2(f)(s) tensor M(f)(m), by TensorProduct.lift.tmul and ExtendScalars.smul_tmul. This proves exists_changeOfRingsMap.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "changeOfRingsMap_id is proved by ModuleCat.ExtendScalars.hom_ext: test on 1 tensor m, apply Classical.choose_spec to exists_changeOfRingsMap, simplify the identity restrictions and ModuleCat.restrictScalarsId'App_inv_apply. No new lemma or hypothesis is introduced.",
+   "text": "Classical.choose_spec gives the pure-tensor formula for the chosen changeOfRingsMap. Apply Mathlib ModuleCat.ExtendScalars.hom_ext to the identity and composition assertions. On generators 1 tensor m, the formula reduces the assertions to the ring-presheaf and module-presheaf identity and composition laws; the restrictScalarsId and restrictScalarsComp comparisons act as the identity on underlying elements.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The named composition and morphism-naturality theorems remain open. They supply the proof fields of changeOfRingsPresheaf and changeOfRingsHom; sheafification supplies changeOfRings and its map on morphisms.",
+   "text": "For changeOfRingsHom_naturality, apply Mathlib ModuleCat.ExtendScalars.hom_ext. Evaluate both composites at 1 tensor m using the chosen-map formula and ExtendScalars.map_tmul. PresheafOfModules.naturality_apply for the original module morphism identifies the module factors. Sheafifying these section maps gives changeOfRingsHom as already defined.",
    "uses": [
     "def-weil-presheaf-modules-sheafification"
    ],
@@ -54,7 +54,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 03EK; stage-3 partial realization by T1: identity restriction via Mathlib extension-of-scalars extensionality; existence, composition and morphism naturality remain open"
+  "place": "Section 03EK, sectionwise tensor restriction construction; formalized by G1 using Mathlib extension-of-scalars universal property"
  },
  "mathlib_searches": [
   {
@@ -179,11 +179,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0b621",
-  "group": "T1",
+  "reviewer": "X-63671",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T003034-L-577946",
+  "landing": "20261012T004254-L-631013",
   "kind": "proof",
-  "note": "independent Codex review: Matched the delivered Lean and node against the clone: only changeOfRingsMap_id's proof and proof metadata change; compilation is clean, axioms are permitted with sorryAx from the recorded open existence theorem, and the remaining obligations and unit route agree."
+  "note": "independent Codex review: Matched the delivered proofs and node proof record with the unchanged Lean signatures and definitions; compilation is clean, all nine public declarations and the private helper use only permitted axioms, and no sorry remains."
  }
 }
