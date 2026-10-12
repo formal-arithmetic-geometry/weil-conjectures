@@ -1,122 +1,126 @@
 {
-  "id": "lem-weil-pbc-etale-limit-cohomology-affine-stage",
-  "kind": "statement",
-  "title": "A single affine stage suffices for continuity",
-  "statement": "Assume affine continuity in all degrees: for every system described in [def-weil-pbc-etale-cohomology-stage-continuity] with every $D_i$ affine, its supplied cohomology cocone $B$ is a colimit. Then every affine scheme $S$ [def-weil-pbc-scheme-conventions] satisfies $C(S)$ of [def-weil-pbc-etale-cohomology-stage-continuity]. In particular only one specified affine stage is required; earlier stages need not be affine.",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09YQ (theorem-colimit), agent-written finite-cover reduction of the parent; Tag 0A50 (lemma-mayer-vietoris) for binary gluing."
-  },
-  "stmt_deps": [
-    "def-weil-pbc-etale-cohomology-stage-continuity",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "For a system with a chosen stage isomorphic to S, restrict to the directed tail above that stage. Its inclusion is final and its opposite initial, so the whiskered scheme cone remains limiting and the whiskered sheaf cocone remains a colimit.",
-      "uses": [
-        "lem-weil-pbc-colimit-initial-full-subcategory"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Each tail scheme is affine: its transition morphism to the chosen affine stage is affine. Restrict all the supplied sheaf identifications, transition maps, coherence equations and cohomology legs. Functor composition and proof irrelevance identify their equations with the original ones. Apply the given affine-continuity hypothesis. Finality reflects the colimit universal property of B.",
-      "uses": [
-        "def-weil-pbc-scheme-conventions"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-etale-limit-cohomology-affine-stage",
+ "kind": "statement",
+ "title": "A single affine stage suffices for continuity",
+ "statement": "Assume affine continuity in all degrees: for every system described in [def-weil-pbc-etale-cohomology-stage-continuity] with every $D_i$ affine, its supplied cohomology cocone $B$ is a colimit. Then every affine scheme $S$ [def-weil-pbc-scheme-conventions] satisfies $C(S)$ of [def-weil-pbc-etale-cohomology-stage-continuity]. In particular only one specified affine stage is required; earlier stages need not be affine.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), agent-written finite-cover reduction of the parent; Tag 0A50 (lemma-mayer-vietoris) for binary gluing."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-cohomology-stage-continuity",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "For the chosen stage isomorphism to the affine S, infer affineness of D_i0 via its isomorphism. Class descent supplies a representative at a finite stage of every element of B.pt. The single-affine-stage zero-detection theorem kills any stage representative whose image in B.pt is zero.",
+   "uses": [
     "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-colimit-initial-full-subcategory"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09YQ (theorem-colimit), agent-written finite-cover reduction of the parent; Tag 0A50 (lemma-mayer-vietoris) for binary gluing."
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-limit-affine-stage-eventual-zero"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Etale cohomology continuity for inverse limits of quasi compact quasi separated schemes from affine continuity",
-      "date": "2026-10-12",
-      "results": "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
-      "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
-    },
-    {
-      "tool": "grep",
-      "query": "cohomology.*(colimit|limit)|colimit.*cohomology",
-      "date": "2026-10-12",
-      "results": "Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean",
-      "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
-    },
-    {
-      "tool": "loogle",
-      "query": "IsCompact, \"induction\"",
-      "date": "2026-10-12",
-      "results": "IsCompact.induction_on, Topology.IsConstructible.induction_of_isTopologicalBasis, AlgebraicGeometry.compact_open_induction_on",
-      "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Continuity of cohomology glues from two quasi compact opens by Mayer Vietoris",
-      "date": "2026-10-12",
-      "results": "service unavailable: Internal Server Error",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyQcqsGluing",
-    "date": "2026-10-12",
-    "group": "E3"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-injective-restriction-acyclicity",
-      "place": "Continuity invocation in the proof of Tag 0A51: A single affine stage suffices for continuity",
-      "via": [
-        "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
-        "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
-        "lem-weil-pbc-etale-cohomology-limit-of-schemes"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineStage",
-    "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitCohomologyAffineStage.lean",
-    "declaration": "AlgebraicGeometry.Etale.etale_limit_cohomology_affine_stage",
-    "statement": "theorem etale_limit_cohomology_affine_stage (haffine : ∀ {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J] (D : Jᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : Jᵒᵖ, CompactSpace (D.obj i)] [∀ i : Jᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ (i j : Jᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Jᵒᵖ, IsAffine (D.obj i)] (F : ∀ i : J, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ {i j : J} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j) (hidentity : ∀ i : J, φ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i)) (hcomposition : ∀ (i j k : J) (f : i ⟶ j) (g : j ⟶ k), φ (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g) (G : J ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eG : ∀ i : J, G.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i)) (hG : ∀ (i j : J) (f : i ⟶ j), G.map f = (eG i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv) (L : Cocone G) (hL : IsColimit L) (p : ℕ) (H : J ⥤ AddCommGrpCat.{u + 1}) (eH : ∀ i : J, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) p)) (hH : ∀ (i j : J) (f : i ⟶ j), H.map f = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map (φ f) p) ≫ (eH j).inv) (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt p)) (hB : ∀ i : J, B.ι.app i ≫ eB.hom = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)), Nonempty (IsColimit B)) (S : Scheme.{u}) [IsAffine S] : EtaleCohomologyStageContinuity S",
-    "branch": "sheaf-dag",
-    "by": "E3",
-    "date": "2026-10-12"
-  },
-  "reviewed": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-5233b",
-    "group": "E3",
-    "result": "pass",
-    "landing": "20261012T112835-L-766268",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "X-5233b",
-    "group": "E3",
-    "result": "pass",
-    "landing": "20261012T112835-L-766268",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered files match the recorded node statements and compile cleanly; the changed parent theorem signature is unchanged, and its direct importer also compiles."
+  {
+   "text": "Form the abelian-group colimit of H. Every colimit element has a stage representative. Zero detection makes colimit.desc H B injective, and class descent makes it surjective. A bijective abelian-group homomorphism is an isomorphism. Transport the canonical colimit cocone along this isomorphism; colimit.ι_desc verifies every leg. The affine-continuity hypothesis is unused because the smaller zero-detection statement uses affine comparison directly.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-limit-affine-stage-eventual-zero",
+  "lem-weil-pbc-etale-limit-cohomology-class-descent",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ: split surjectivity and finite-stage kernel detection, assembled through the canonical filtered group colimit by U1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology continuity for inverse limits of quasi compact quasi separated schemes from affine continuity",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(colimit|limit)|colimit.*cohomology",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean",
+   "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact, \"induction\"",
+   "date": "2026-10-12",
+   "results": "IsCompact.induction_on, Topology.IsConstructible.induction_of_isTopologicalBasis, AlgebraicGeometry.compact_open_induction_on",
+   "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuity of cohomology glues from two quasi compact opens by Mayer Vietoris",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyQcqsGluing",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Continuity invocation in the proof of Tag 0A51: A single affine stage suffices for continuity",
+   "via": [
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitCohomologyAffineStage.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_cohomology_affine_stage",
+  "statement": "theorem etale_limit_cohomology_affine_stage (haffine : ∀ {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J] (D : Jᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : Jᵒᵖ, CompactSpace (D.obj i)] [∀ i : Jᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ (i j : Jᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Jᵒᵖ, IsAffine (D.obj i)] (F : ∀ i : J, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ {i j : J} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j) (hidentity : ∀ i : J, φ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i)) (hcomposition : ∀ (i j k : J) (f : i ⟶ j) (g : j ⟶ k), φ (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g) (G : J ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eG : ∀ i : J, G.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i)) (hG : ∀ (i j : J) (f : i ⟶ j), G.map f = (eG i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv) (L : Cocone G) (hL : IsColimit L) (p : ℕ) (H : J ⥤ AddCommGrpCat.{u + 1}) (eH : ∀ i : J, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) p)) (hH : ∀ (i j : J) (f : i ⟶ j), H.map f = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map (φ f) p) ≫ (eH j).inv) (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt p)) (hB : ∀ i : J, B.ι.app i ≫ eB.hom = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)), Nonempty (IsColimit B)) (S : Scheme.{u}) [IsAffine S] : EtaleCohomologyStageContinuity S",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5233b",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112835-L-766268",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T225332-L-1813737",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

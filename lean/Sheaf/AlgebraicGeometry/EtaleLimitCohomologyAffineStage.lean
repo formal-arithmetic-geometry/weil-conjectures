@@ -6,6 +6,9 @@ Authors: SHEAF group E3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitAffineStageEventualZero
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Continuity when one stage is affine
 
@@ -21,18 +24,23 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 /-- Affine-stage continuity applies when just one chosen stage is affine.
 
 Source: Stacks Project, Tag 09YQ (theorem-colimit); cofinal-tail reduction in
 step 1 of lem-weil-pbc-etale-limit-cohomology-qcqs-gluing.
 (blueprint: lem-weil-pbc-etale-limit-cohomology-affine-stage).
 
-Proof: restrict to the directed tail above the chosen stage. Its inclusion is final,
-and its opposite is initial. Every later stage is affine over the chosen affine
-scheme. Whiskering preserves the scheme limit and the two colimit universal
-properties. Restrict every supplied identification and coherence equation along
-the inclusion, apply affine continuity, and reflect the colimit by finality.
-Empty affine schemes and degree zero use exactly the same argument. -/
+Proof: the chosen stage is affine by its isomorphism to S. Class descent supplies
+surjectivity of the canonical group-colimit comparison. For injectivity, represent
+an element of its kernel at a stage and apply finite-stage detection of zero with
+the chosen affine stage. The colimit transition equation then kills this
+representative. A bijective group homomorphism is an isomorphism, so transport the
+canonical colimit cocone along it; the comparison's leg equations identify the
+transported cocone with B. The supplied affine-continuity hypothesis is retained
+in the statement but is not needed by this elementwise reduction. The geometric
+cofinal-tail argument remains in the finite-stage zero-detection theorem.
+Empty affine schemes and degree zero use the same colimit argument. -/
 theorem etale_limit_cohomology_affine_stage
     (haffine : ∀ {J : Type u} [Preorder J] [IsDirected J (· ≤ ·)] [Nonempty J]
     (D : Jᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)
@@ -69,6 +77,40 @@ theorem etale_limit_cohomology_affine_stage
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)),
       Nonempty (IsColimit B))
-    (S : Scheme.{u}) [IsAffine S] : EtaleCohomologyStageContinuity S  := by sorry
+    (S : Scheme.{u}) [IsAffine S] : EtaleCohomologyStageContinuity S  := by
+  constructor
+  intro I _ _ _ D c hc hcompact hqs hmaps F φ hid hcomp G eG hG L hL p H eH hH B eB hB
+    i₀ hi
+  obtain ⟨e⟩ := hi
+  have : IsAffine (D.obj (op i₀)) := isAffine_of_isAffineHom e.hom
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  have hlift := etale_limit_cohomology_class_descent D c hc F φ hid hcomp
+    G eG hG L hL p H eH hH B eB hB
+  have hzero := etale_limit_affine_stage_eventual_zero D c hc F φ hid hcomp
+    G eG hG L hL p H eH hH B eB hB i₀
+  have hbij : Function.Bijective (colimit.desc H B) := by
+    constructor
+    · apply (injective_iff_map_eq_zero (colimit.desc H B).hom).2
+      intro z hz
+      obtain ⟨i, x, rfl⟩ := Concrete.colimit_exists_rep H z
+      have hx : (B.ι.app i).hom x = 0 := by
+        change (colimit.ι H i ≫ colimit.desc H B) x = 0 at hz
+        rwa [colimit.ι_desc] at hz
+      obtain ⟨j, f, hf⟩ := hzero i x hx
+      calc
+        colimit.ι H i x = colimit.ι H j (H.map f x) :=
+          (colimit.w_apply H f x).symm
+        _ = 0 := by rw [hf]; exact map_zero (colimit.ι H j).hom
+    · intro y
+      obtain ⟨i, x, hx⟩ := hlift y
+      refine ⟨colimit.ι H i x, ?_⟩
+      change (colimit.ι H i ≫ colimit.desc H B) x = y
+      rw [colimit.ι_desc]
+      exact hx
+  have : IsIso (colimit.desc H B) :=
+    (ConcreteCategory.isIso_iff_bijective (colimit.desc H B)).2 hbij
+  exact ⟨(colimit.isColimit H).ofIsoColimit
+    (Cocone.ext (asIso (colimit.desc H B)) (by intro i; simp))⟩
 
 end AlgebraicGeometry.Etale
