@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-formal-functions-finite-sheaf-quotient",
+ "kind": "statement",
+ "title": "Finite-fibre sheaf quotient with its canonical unit",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, $F$ an $\\mathcal O_X$-module and $y\\in Y$. Put $A=\\mathcal O_{Y,y}$, $\\mathfrak m=\\mathfrak m_A$, $X'=\\operatorname{Spec}(A)\\times_Y X$, $g:X'\\to X$, $F'=g^*F$ and $J=\\mathfrak m\\mathcal O_{X'}$ [def-pc-fibre-product, def-pc-module-pullback, def-nagata-extended-ideal]. For $n\\ge0$ put $X_n=\\operatorname{Spec}(A/\\mathfrak m^{n+1})\\times_Y X$, let $i_n:X_n\\to X$ and $j_n:X_n\\to X'$ be the canonical maps, and put $F_n=i_n^*F$ [def-weil-pbc-formal-fibre-cohomology, def-weil-pbc-formal-functions-finite-pullback]. Write $q_n:F'\\to F'/J^{n+1}F'$ for the quotient projection [def-weil-pbc-coherent-formal-module] and $u_n:F'\\to j_{n,*}F_n$ for formalFunctionsFiniteFMap. Then $j_n$ is a closed immersion and there exists an isomorphism $e_n:F'/J^{n+1}F'\\cong j_{n,*}F_n$ with $e_n\\circ q_n=u_n$. This is a sheaf statement, without cohomology or transition assertions.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 02OD and 04CJ (1); read at https://stacks.math.columbia.edu/tag/02OD and the individual cited tags"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-functions-finite-pullback",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "For A = O_(Y,y), paste the pullback squares to identify the finite fibre immersion j_n : X_n -> X_prime with the base change of Spec(A/m^(n+1)) -> Spec A. The quotient base-change calculation proves that j_n is closed and that its kernel ideal is the extension of m^(n+1). Products commute with ideal extension, giving J^(n+1). On an affine basis the recursively defined sheaf power inclusion is the usual ideal-power inclusion; the equality glues.",
+   "uses": [
+    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
+    "def-nagata-extended-ideal",
+    "def-weil-pbc-coherent-formal-module",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the closed-immersion unit quotient theorem to F_prime. Identify the iterated tensor pullback with F_n by uniqueness of left adjoints and the equality j_n followed by the projection to X = i_n. The adjunction-unit formula is exactly formalFunctionsFiniteFMap. Transport the cokernel isomorphism across these identifications to obtain e_n with q_n followed by e_n = this finite unit. Since q_n is a cokernel projection, it is epi and determines e_n uniquely.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-pbc-formal-functions-finite-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-functions-finite-pullback",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 02OD and 04CJ (1); canonical-map and adjunction details expanded from these proofs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an ideal quotient sheaf equals cohomology on its closed subscheme, compatibly with infinitesimal transitions",
+   "results": [
+    "AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso",
+    "AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app",
+    "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom",
+    "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj",
+    "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap",
+    "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι",
+    "AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι_assoc",
+    "AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι"
+   ],
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "formalFunctionsFiniteι|formalModuleQuotient.*cohomology|finite_quotient_iso_b",
+   "results": [],
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion gives a quotient sheaf isomorphism compatible with adjunction units and cohomology transitions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIsoB",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Step 2 of the henselian idempotent-lifting split: the finite-level quotient identification and its transition naturality in the formal-functions input (Stacks Tag 02OD).",
+   "via": [
+    "lem-weil-pbc-formal-functions-finite-quotient-iso-b",
+    "lem-weil-pbc-formal-functions-finite-quotient-iso",
+    "lem-weil-pbc-formal-functions-finite-quotient-comparison",
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsFiniteSheafQuotient.lean",
+  "declaration": "AlgebraicGeometry.formalFunctions_finite_sheaf_quotient",
+  "statement": "theorem formalFunctions_finite_sheaf_quotient {X Y : Scheme.{u}} (f : X ⟶ Y) (F : X.Modules) (y : Y) : let F' := (Scheme.Modules.tensorPullback (pullback.snd (Y.fromSpecStalk y) f)).obj F let J := (Scheme.IdealSheafData.ofIdealTop ((maximalIdeal (Y.presheaf.stalk y)).map (Scheme.ΓSpecIso (CommRingCat.of (Y.presheaf.stalk y))).inv.hom)).comap (pullback.fst (Y.fromSpecStalk y) f) ∀ n : ℕ, IsClosedImmersion (formalFunctionsFiniteι f y n) ∧ ∃ e : formalModuleQuotient J (n + 1) F' ≅ (Scheme.Modules.pushforward (formalFunctionsFiniteι f y n)).obj ((Scheme.Modules.tensorPullback (formalFibreι f y n)).obj F), formalModuleQuotientπ J (n + 1) F' ≫ e.hom = formalFunctionsFiniteFMap f y F n",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T234225-L-2126975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T234225-L-2126975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

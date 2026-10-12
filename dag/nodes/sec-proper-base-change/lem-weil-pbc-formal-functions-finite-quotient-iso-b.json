@@ -23,48 +23,57 @@
  ],
  "proof": [
   {
-   "text": "This is the corresponding finite-level construction from the source proof: construct the closed-immersion quotient identifications, apply cohomology and the affine edge map, and check scalar and transition compatibility.",
+   "text": "Use the finite sheaf quotient identifications to obtain closed immersions j_n and sheaf isomorphisms e_n whose composites with quotient projections equal the canonical finite FMaps. Coherence on the locally Noetherian source implies quasi-coherence. Identify tensor pullback with the usual pullback by uniqueness of left adjoints to deduce that each F_n is quasi-coherent.",
    "uses": [
-    "def-nagata-extended-ideal",
-    "def-pc-fibre-product",
-    "def-pc-module-pullback",
-    "def-weil-pbc-coherent-formal-module",
-    "def-weil-pbc-formal-functions-finite-pullback",
-    "lem-pc-module-pullback-adjunction",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "lem-weil-pbc-closed-immersion-unit-quotient",
-    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
-    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-formal-functions-finite-sheaf-quotient",
+    "pqf-lem-coherent-ft-locnoeth",
     "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
-    "pqf-def-affine-morphism"
+    "lem-pc-module-pullback-adjunction",
+    "def-weil-proper-morphism",
+    "pqf-def-locnoeth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OD, finite-level identifications; Tags 089W, 01F7 and 01FB (read at https://stacks.math.columbia.edu/tag/02OD, /089W and /01FB)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Source naturality writes H(j_n,e_n) as H(e_n) followed by the affine edge map. Both factors are invertible. The basic properties supply the global-sections-linear lift. Pullback.fst and Gamma-Spec naturality identify the composite local scalar map with the scalar map through A/m^(n+1); evaluation of the algebra map into the completion is the quotient map. Use Mathlib restriction-of-scalars composition isomorphisms to produce invertible components b_n in modules over A.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "lem-weil-pbc-module-cohomology-fmap-basic-properties",
+    "def-weil-pbc-formal-functions-finite-pullback",
+    "def-weil-pbc-formal-fibre-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjacent cohomology compatibility statement applied to the sheaf maps e_n makes the components b_n natural. NatTrans.ofOpSequence extends adjacent naturality to all arrows, and componentwise invertibility makes the transformation an isomorphism. Source naturality applied to q_n followed by e_n proves the required quotient-unit equation.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-finite-quotient-transition",
+    "lem-weil-pbc-module-cohomology-fmap-functorial",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-nagata-extended-ideal",
-  "def-pc-fibre-product",
-  "def-pc-module-pullback",
   "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-fibre-cohomology",
   "def-weil-pbc-formal-functions-finite-pullback",
+  "def-weil-proper-morphism",
   "lem-pc-module-pullback-adjunction",
   "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-formal-functions-finite-quotient-transition",
+  "lem-weil-pbc-formal-functions-finite-sheaf-quotient",
   "lem-weil-pbc-module-cohomology-fmap-basic-properties",
   "lem-weil-pbc-module-cohomology-fmap-functorial",
   "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-quotient-base-change-closed-immersion-ideal",
-  "pqf-def-affine-morphism"
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 02OD, finite-level identifications; Tags 089W, 01F7 and 01FB (read at https://stacks.math.columbia.edu/tag/02OD, /089W and /01FB); expanded canonical maps, unit equations and resolution-independence details from the cited proof."
+  "document": "Stacks Project",
+  "place": "Tags 02OD, 089W, 01F7 and 01FB; compiled assembly from a sheaf quotient identification and adjacent cohomology compatibility using Mathlib restriction-of-scalars isomorphisms"
  },
  "mathlib_searches": [
   {
@@ -161,9 +170,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T205628-L-931633",
+  "landing": "20261012T234225-L-2126975",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
