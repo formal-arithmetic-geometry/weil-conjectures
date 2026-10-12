@@ -9935,3 +9935,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/N3/Sheaf.Paper.AffineOpenSectionsCanonicalColimit (stage 3; reviewer PASS; first push; landing 20261012T225322-L-1810580 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/N3/Sheaf.RingTheory.PopescuClearConormalChart (stage 3; reviewer PASS; first push; landing 20261012T225323-L-1810696 (interface); batch 20261012T225253; modules 2; new nodes 1)
 - 22:53 L: merged deliver/P1/Sheaf.CategoryTheory.RightDerivedExactComposite (stage 3; reviewer PASS; first push; landing 20261012T225323-L-1810847 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/P2/Sheaf.AlgebraicGeometry.ModulePullbackIdealPowerProductImage (stage 3; reviewer PASS; after a return; landing 20261012T225323-L-1811010 (proof); batch 20261012T225253; modules 1; new nodes 0)
