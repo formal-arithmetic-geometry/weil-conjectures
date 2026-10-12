@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData
 
 /-! # Compatible strict henselizations and geometric residue maps
 
@@ -85,7 +86,13 @@ theorem Etale.projectiveLine_compatibleStrictHenselizationResidues_core
                 eA.hom ≫ strictHenselizationStructuralMap s = σ ∧
               ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫
                 eB.hom ≫ strictHenselizationStructuralMap t = τ ∧
-              True := by sorry
+              True := by
+  dsimp
+  obtain ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB,
+      hUA, hUB, hbase, hρA, hρB⟩ :=
+    Etale.exists_compatibleStrictHenselizationCoreData σ τ ι hι hσ hτ ν
+  exact ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB,
+    hUA, hUB, hbase, hρA, hρB, True.intro⟩
 
 end AlgebraicGeometry
 

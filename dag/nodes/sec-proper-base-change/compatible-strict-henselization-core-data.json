@@ -1,0 +1,95 @@
+{
+ "id": "compatible-strict-henselization-core-data",
+ "kind": "statement",
+ "title": "Compatible strict henselization core data without final residue square",
+ "statement": "The compatible strict henselization rings, maps, universal homeomorphisms, structural equalities and residue factorizations exist.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX, 03PS, 04GU and 04DY"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Construct coordinate-ring colimits of pointed affine etale neighbourhoods and apply strict henselization functoriality.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 04HX, 03PS, 04GU and 04DY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compatible strict henselization residue field structural map universal homeomorphism",
+   "results": "No exact matching theorem found in the available library.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compatible strict henselization residue field map",
+   "results": "No exact matching theorem found in Mathlib or the project.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg compatibleStrictHenselization|strictHenselizationStructuralMap lean/ Mathlib",
+   "results": "Only the lower-level strict henselization APIs were found; no construction theorem exists.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "compatible-strict-henselization-residues-core",
+   "place": "core construction"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationCoreData.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationCoreData",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreData\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)\n    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :\n    let s := ν ≫ ι ≫ σ\n    let t := ν ≫ τ\n    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),\n      letI := cA\n      letI := cB\n      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),\n        letI := hA\n        letI := hB\n        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))\n          (sB : IsSepClosed (IsLocalRing.ResidueField B)),\n          letI := sA\n          letI := sB\n          ∃ (φ : A →+* B) (hφ : IsLocalHom φ),\n            letI := hφ\n            ∃ (eA : Spec (.of A) ≅ strictHenselizationScheme s)\n              (eB : Spec (.of B) ≅ strictHenselizationScheme t)\n              (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n              (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),\n              IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧\n              Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n                strictHenselizationStructuralMap s =\n                eB.hom ≫ strictHenselizationStructuralMap t ≫ g ∧\n              ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n                eA.hom ≫ strictHenselizationStructuralMap s = σ ∧\n              ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n                eB.hom ≫ strictHenselizationStructuralMap t = τ",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T112854-L-773511",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T112854-L-773511",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

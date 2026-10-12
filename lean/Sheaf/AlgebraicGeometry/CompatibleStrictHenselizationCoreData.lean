@@ -1,0 +1,56 @@
+module
+public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+@[expose] public section
+universe u
+set_option autoImplicit false
+open CategoryTheory Limits
+namespace AlgebraicGeometry
+open Scheme Etale
+/-- Construction of compatible strict henselization data from pointed affine etale neighbourhoods.
+Source: Stacks Tags 04HX, 03PS, 04GU, 04DY. (blueprint: compatible-strict-henselization-core-data)
+
+Proof: construct the coordinate-ring colimits of pointed affine etale neighbourhoods.
+Tags 04HX and 03PS identify these colimits with strict henselizations and their residue
+fields. Functoriality from Tag 04GU gives the local map, structural equality, and residue
+factorizations. Tag 04DY gives universal homeomorphisms on residue spectra.
+-/
+theorem Etale.exists_compatibleStrictHenselizationCoreData
+    {S T : Scheme.{u}} {g : T ⟶ S}
+    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']
+    [Field Ω] [IsAlgClosed Ω]
+    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)
+    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)
+    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),
+      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)
+    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),
+      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)
+    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :
+    let s := ν ≫ ι ≫ σ
+    let t := ν ≫ τ
+    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),
+      letI := cA
+      letI := cB
+      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),
+        letI := hA
+        letI := hB
+        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))
+          (sB : IsSepClosed (IsLocalRing.ResidueField B)),
+          letI := sA
+          letI := sB
+          ∃ (φ : A →+* B) (hφ : IsLocalHom φ),
+            letI := hφ
+            ∃ (eA : Spec (.of A) ≅ strictHenselizationScheme s)
+              (eB : Spec (.of B) ≅ strictHenselizationScheme t)
+              (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))
+              (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),
+              IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧
+              Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫
+                strictHenselizationStructuralMap s =
+                eB.hom ≫ strictHenselizationStructuralMap t ≫ g ∧
+              ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫
+                eA.hom ≫ strictHenselizationStructuralMap s = σ ∧
+              ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫
+                eB.hom ≫ strictHenselizationStructuralMap t = τ := by sorry
+end AlgebraicGeometry
