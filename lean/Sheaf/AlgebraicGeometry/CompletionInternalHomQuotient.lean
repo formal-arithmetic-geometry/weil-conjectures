@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.CompletionInternalHomQuotientIso
+import Sheaf.AlgebraicGeometry.CompletionInternalHomQuotientAnnihilation
 
 /-! # Internal Hom factorization through ideal-power quotients
 
@@ -53,6 +55,8 @@ theorem completion_internal_hom_quotient {X : Scheme.{u}}
         (𝟙 G) (formalModuleQuotientπ I n F) = 0) ∧
     IsIso (SheafOfModules.homObjMap (R := X.toRingedSpace.sheaf)
       (formalModuleQuotientπ I m G) (𝟙 (formalModuleQuotient I n F))) := by
-  sorry
+  constructor
+  · exact completion_internal_hom_quotient_annihilation I F G n
+  · exact completion_internal_hom_quotient_isIso I F G m n h
 
 end AlgebraicGeometry

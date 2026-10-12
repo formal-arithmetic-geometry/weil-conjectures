@@ -29,41 +29,22 @@
  ],
  "proof": [
   {
-   "text": "Let J=I^n. The ideal-module product is the image of the multiplication map J tensor F → F. Its cokernel Q is annihilated by J: tensoring the quotient projection is epi, multiplication is natural, and multiplication into Q is zero after this epi because the cokernel projection kills the product image.",
+   "text": "Apply the finite-level annihilation theorem to I, F, G and n for the first conjunct; apply the quotient precomposition isomorphism theorem to I, F, G, m, n and h for the second conjunct. Combine by conjunction introduction.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-pbc-completion-internal-hom-quotient-annihilation",
+    "lem-weil-pbc-completion-internal-hom-quotient-isIso"
    ],
-   "elementary": false
-  },
-  {
-   "text": "On any open, an O-linear map G → F/I^n F sends a product ax with a in I^m to a times the image of x, which is zero because I^m is contained in I^n when n≤m. Local finite sums generate the ideal product sheaf, so this map kills I^m G and factors uniquely through its cokernel G/I^m G. Restriction to an open preserves cokernels; uniqueness ensures the local factorizations respect restriction and addition and scalar multiplication. Thus the resulting inverse on each open is an inverse of the indicated internal-Hom sheaf map.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Postcomposition sends a local product ah in I^n Hom(G,F) to the map x ↦ a times the class of h(x) in F/I^n F, which is zero by the first step. Locally these products generate the ideal product; hence the composite from that sheaf is zero.",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "def-pur-sheaf-hom",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-coherent-formal-module",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom"
+  "lem-weil-pbc-completion-internal-hom-quotient-annihilation",
+  "lem-weil-pbc-completion-internal-hom-quotient-isIso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Detailed construction and finite-level universal property following Tag 0882 and the parent proof; the local checkout omits the literature file; the published Tag 0882 was read online."
+  "place": "Tag 0882 comparison map; Lean reduction by conjunction introduction from the two finite-level components. This is decomposition, not net hole closure."
  },
  "mathlib_searches": [
   {
@@ -121,9 +102,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T194152-L-468849",
+  "landing": "20261012T213042-L-1151980",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
