@@ -1,0 +1,114 @@
+{
+ "kind": "lemma",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 13.34.2, Tag 07KC"
+ },
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-derived-limit-products-core"
+ },
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-derived-countable-products-properties",
+ "title": "Properties of countable derived products",
+ "statement": "Assume the hypotheses of lem-weil-derived-limit-products-core and countable products in the derived category. Then every termwise product cone is limiting after Q and every homology functor preserves countable discrete limits.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "lem-weil-derived-countable-products-existence"
+ ],
+ "proof": [
+  {
+   "text": "Exact products identify cycles, boundaries and homology of termwise products. Product quasi-isomorphisms and the localization fraction calculus transfer the termwise universal property to the derived category and identify the homology limit comparison.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pc-left-localization-hom-colimit",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pc-left-localization-hom-colimit",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 13.34.2, Tag 07KC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "homology preserves products derived category",
+   "results": "No exact existing theorem found; inspected Mathlib and local library.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "PreservesLimitsOfShape homologyFunctor",
+   "results": "No exact existing theorem found; inspected Mathlib and local library.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCone limit cone homologyFunctor",
+   "results": "No exact existing theorem found; inspected Mathlib and local library.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsProperties",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/DerivedCountableProductsProperties.lean",
+  "declaration": "CategoryTheory.derivedCategory_countableProducts_properties",
+  "statement": "theorem derivedCategory_countableProducts_properties\n    (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableProducts A] [CountableAB4Star A]\n    [HasCountableProducts (DerivedCategory A)] :\n      (∀ (J : Type t) [Countable J] (C : J → CochainComplex A ℤ),\n        Nonempty (IsLimit (DerivedCategory.Q.mapCone (limit.cone (Discrete.functor C))))) ∧\n      (∀ (J : Type t) [Countable J] (p : ℤ),\n        PreservesLimitsOfShape (Discrete J) (DerivedCategory.homologyFunctor A p))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T154831-L-2473312",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T154831-L-2473312",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -4,7 +4,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
-import Sheaf.CategoryTheory.LocalizationHomColimit
+import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsExistence
+import Sheaf.CategoryTheory.Triangulated.DerivedCountableProductsProperties
 
 @[expose] public section
 universe t w v u
@@ -38,6 +39,9 @@ theorem derivedCategory_countableProducts_core
         Nonempty (IsLimit (DerivedCategory.Q.mapCone (limit.cone (Discrete.functor C))))) ∧
       (∀ (J : Type t) [Countable J] (p : ℤ),
         PreservesLimitsOfShape (Discrete J) (DerivedCategory.homologyFunctor A p)) := by
-  sorry
+  let hP : HasCountableProducts (DerivedCategory A) :=
+    derivedCategory_hasCountableProducts A
+  have hprops := @derivedCategory_countableProducts_properties A _ _ _ _ _ hP
+  exact ⟨hP, hprops⟩
 
 end CategoryTheory
