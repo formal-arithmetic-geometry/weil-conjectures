@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-affine-module-tensor-counit-linear",
+ "kind": "statement",
+ "title": "B-linearity of the transported pullback counit",
+ "statement": "Let $f:U\\to X$ be a morphism of schemes [def-pc-scheme]. Let $A=f_*\\mathcal O_U$, $\\rho:\\mathcal O_X\\to A$ the structure map, $R$ pushforward of modules to A-module sheaves and $S$ restriction along $\\rho$ [def-weil-sheaf-of-modules-category]. Write $I=f^{-1}$ on A-modules and $IA=f^{-1}A$, $r_0:f^{-1}\\mathcal O_X\\to\\mathcal O_U$ for the structure map, $t_0=f^{-1}\\rho$, and $e:IA\\to\\mathcal O_U$ for the ring-sheaf counit. Let $b:\\mathcal O_U\\to B$ and $t:IA\\to B$ form a pushout of $r_0,t_0$, and let $\\epsilon:B\\to\\mathcal O_U$ satisfy $b\\epsilon=1$ and $t\\epsilon=e$. Let $P$ be a functor from A-module sheaves to B-module sheaves, with specified identifications $P(G)=B\\otimes_{IA}I(G)$ and map $P(a)$ the transported sheafification of $1\\otimes I(a)$. Let $\\kappa:P\\operatorname{Res}_b\\simeq S f^*$ be a natural isomorphism, where $f^*$ is tensor pullback [def-pc-module-pullback]. All tensor products are scalar-first and sheafified [def-pur-sheaf-tensor-product]. Assume for every open $V$ of X and $g\\in G(V)$ that $\\kappa_G^{-1}(\\eta^{f^*}_{SG,V}(g))=\\theta_t(1\\otimes\\eta^{\\mathrm{ab}}_{G,V}(g))$ over $f^{-1}V$, where $\\theta_t$ is the tensor sheafification unit and $\\eta^{\\mathrm{ab}}$ the abelian inverse-image unit, and $\\eta^{f^*}$ is the unit of the canonical adjunction [lem-pc-module-pullback-adjunction]. Then for each $\\mathcal O_U$-module sheaf F there is a B-linear morphism $\\delta_F:P(RF)\\to\\operatorname{Res}_\\epsilon F$ whose underlying section map on every open W sends p to $\\operatorname{counit}_F(\\kappa_{RF}(p))$. Thus only the scalar linearity of the transported counit is asserted; no factorization through H or epimorphy is asserted.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 01SB (lemma-affine-equivalence-modules), construction of h and elucidation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Let q be the O_U-linear composite of kappa with the canonical pullback counit. The canonical pullback unit formula and hP identify its value on theta_t(1 tensor eta(g)) with g viewed as a section of F over f inverse V. This is the adjunction triangle.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse-image module adjunction gives the inverse-image counit I(RF) to F, linear over IA for the action through e. Evaluate c tensor s as epsilon(c) times that counit of s. The equality t epsilon=e makes the map balanced, and the formula is B-linear. It commutes with restrictions and sheafifies to delta.",
+   "uses": [
+    "lem-pc-module-inverse-image-adjunction",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluation delta and q agree on the unit images from the first step. The pushout identifies Res_b P(RF) with O_U tensor over f inverse O_X of I(RF). Inverse-image unit sections locally generate I(RF), and their O_U multiples locally generate this tensor sheaf. Both delta and q are O_U-linear, the former by b epsilon=1. Thus equality on those unit sections extends to all local sections and hence to all sections. The section formula determines delta uniquely, including empty opens and zero rings.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-module-inverse-image-adjunction",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E1 worker",
+  "date": "2026-10-12",
+  "note": "Expanded the B-linearity step in the construction of h in Stacks 01SB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "counit of pullback of modules is linear over the pullback of the direct image algebra",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback pushforward counit linear over tensor product algebra",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; CategoryTheory.ExponentiableMorphism.pushforwardId_hom_counit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; PresheafOfModules.pullbackPushforwardAdjunction; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-algebra counit-linearity match."
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*[Ll]inear|[Ll]inear.*counit",
+   "results": "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/RingTheory/HopfAlgebra/Basic.lean; Mathlib/RingTheory/HopfAlgebra/Basic.lean; Mathlib/RingTheory/Bialgebra/Quotient.lean; Mathlib/RingTheory/Bialgebra/TensorProduct.lean; Mathlib/RingTheory/Bialgebra/TensorProduct.lean; Mathlib/RingTheory/Bialgebra/TensorProduct.lean; Mathlib/RingTheory/Bialgebra/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-algebra counit-linearity match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineModuleTensorCounitFactor",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Stacks 01SB construction of h: linearity of the adjunction map over the pullback direct-image algebra.",
+   "via": [
+    "lem-weil-pbc-affine-module-tensor-counit-factor",
+    "lem-weil-pbc-affine-module-tensor-coherence-comparisons",
+    "lem-weil-pbc-affine-module-tensor-construction",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineModuleTensorCounitLinear",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineModuleTensorCounitLinear.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_module_tensor_counitLinear",
+  "statement": "theorem affine_module_tensor_counitLinear\n    (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)\n    (ε : B ⟶ U.sheaf) (hpush : IsPushout r₀ t₀ b t)\n    (hb : b ≫ ε = 𝟙 U.sheaf) (ht : t ≫ ε = e₀)\n    (P : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))\n        (pobj : ∀ G, P.obj G = SheafOfModules.changeOfRings.{u, u, u} t (I G))\n        (κ : P ⋙ SheafOfModules.restrictScalars (𝓻 b) ≅ S ⋙ tensorPullback f)\n    (hP :\n        (∀ (G G' : SheafOfModules.{u} (𝓡 A)) (a : G ⟶ G'),\n          P.map a = eqToHom (pobj G) ≫\n            SheafOfModules.changeOfRingsHom.{u, u, u} t (I G)\n              (TopCat.Sheaf.inverseImageModuleMap f.base A G a) ≫\n            eqToHom (pobj G').symm) ∧\n        (∀ (G : SheafOfModules.{u} (𝓡 A)) (V : (Opens X)ᵒᵖ) (g : G.val.obj V),\n          ((eqToHom (pobj G)).val.app ((Opens.map f.base).op.obj V))\n            ((κ.inv.app G).val.app ((Opens.map f.base).op.obj V)\n              (((adj₀).unit.app ((S).obj G)).val.app V g)) =\n            ((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app\n              (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I G))).app\n                ((Opens.map f.base).op.obj V)\n                ((1 : B.obj.obj ((Opens.map f.base).op.obj V))\n                  ⊗ₜ[(IA).obj.obj ((Opens.map f.base).op.obj V),(t.hom.app\n                    ((Opens.map f.base).op.obj V)).hom]\n                  (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n                    (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app\n                      ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)))) :\n    ∀ F : U.Modules,\n      ∃ δ : P.obj ((R).obj F) ⟶ (SheafOfModules.restrictScalars (𝓻 ε)).obj F,\n        ∀ (W : (Opens U)ᵒᵖ) (p : (P.obj ((R).obj F)).val.obj W),\n          δ.val.app W p =\n            ((adj₀).counit.app F).val.app W ((κ.hom.app ((R).obj F)).val.app W p)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T163613-L-2784829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T163613-L-2784829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
