@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.FieldTheory.IsAlgClosed.Spectrum
 public import Mathlib.LinearAlgebra.Contraction
-public import Mathlib.LinearAlgebra.Eigenspace.Charpoly
 public import Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
@@ -31,6 +29,9 @@ under tensor products.
   invertible, is such a product.
 - `FrobeniusModule.tensor`, `FrobeniusModule.hom`: the tensor product and the internal hom.
 - `FrobeniusModule.homDualEquiv`: `Hom(M^∨, N) ≅ M ⊗ N`.
+- `FrobeniusModule.Equiv.ofBilinear`: a perfect Frobenius-invariant pairing `P × A → C`
+  identifies `P` with `Hom(A, C)`; `FrobeniusModule.Equiv.tensorOfHomDual`: `P ≅ Hom(A, N)` and
+  `A ≅ M^∨` give `P ≅ M ⊗ N`.
 - `FrobeniusModule.HasWeightsAtMost.tensor`, `FrobeniusModule.IsPureOfWeight.tensor`: weights
   of tensor products.
 -/
@@ -173,8 +174,7 @@ def Equiv.homCongr {M M' : FrobeniusModule.{u, v} K} {N N' : FrobeniusModule.{t,
 
 /-- A perfect pairing `p : P × A → C` invariant under the Frobenius,
 `p (F_P x) (F_A y) = F_C (p x y)`, identifies `P` with `Hom(A, C)`. -/
-noncomputable def Equiv.ofBilinear {P : FrobeniusModule.{max u t, v} K}
-    {A : FrobeniusModule.{u, v} K} {C : FrobeniusModule.{t, v} K}
+noncomputable def Equiv.ofBilinear {P A C : FrobeniusModule.{u, v} K}
     (p : P.carrier →ₗ[K] A.carrier →ₗ[K] C.carrier) (hp : Function.Bijective p)
     (h : ∀ x y, p (P.frobenius x) (A.frobenius y) = C.frobenius (p x y)) :
     P.Equiv (A.hom C) where

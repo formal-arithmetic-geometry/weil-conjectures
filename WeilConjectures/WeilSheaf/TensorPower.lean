@@ -21,6 +21,8 @@ product is the tensor product of the stalks, with the tensor product of the loca
 
 - `AlgebraicGeometry.WeilSheaf.tensorPow`: the tensor power `F^{⊗ k}`.
 - `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.tensorPow`: weights of tensor powers.
+- `AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalk_tensorPow`: if `α` is an eigenvalue of the
+  local Frobenius of `F` at `x`, then `α ^ k` is one of that of `F^{⊗ k}`.
 -/
 
 @[expose] public section
@@ -45,8 +47,6 @@ theorem isLisse_tensorPow (F : WeilSheaf k₀ l X) (hF : F.IsLisse) :
     ∀ k : ℕ, (F.tensorPow hF k).IsLisse
   | 0 => isLisse_adicConstant k₀ l X
   | k + 1 => ProEtale.IsAdicLisseSheaf.ihom hF.dual (isLisse_tensorPow F hF k)
-
-variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- If a lisse Weil sheaf `F` has weights at most `β`, then its tensor power `F^{⊗ k}` has
 weights at most `k β`: the local Frobenius of `F^{⊗ k}` at a closed point is the `k`-fold tensor

@@ -27,12 +27,16 @@ Frobenius with the tensor product of the local Frobenii.
 
 ## Main declarations
 
+- `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.bijective_evaluationPairing_ihom`:
+  `𝓗om(L, G)_s ≅ Hom(L_s, G_s)` for `L` lisse.
 - `AlgebraicGeometry.WeilSheaf.stalkAtTensorObjHomEquiv`: `(F ⊗ G)_s ≅ Hom((F^∨)_s, G_s)`.
 - `AlgebraicGeometry.WeilSheaf.stalkAtTensorObjEquiv`: `(F ⊗ G)_s ≅ F_s ⊗ G_s`.
 - `AlgebraicGeometry.WeilSheaf.stalkTensorObjEquiv`: the same at a closed point.
 - `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.tensorObj`,
   `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.tensorObj`: weights add under tensor
-  products.
+  products; `AlgebraicGeometry.WeilSheaf.hasEigenvalue_stalk_tensorObj` and
+  `AlgebraicGeometry.WeilSheaf.exists_of_hasEigenvalue_stalk_tensorObj`: the eigenvalues of the
+  local Frobenius of `F ⊗ G` are the products of those of `F` and `G`.
 -/
 
 @[expose] public section
@@ -78,40 +82,20 @@ end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.WeilCoefficients
 
-variable {l : ℕ} [Fact l.Prime] {M N L : WeilCoefficients.{u} l}
+variable {l : ℕ} [Fact l.Prime]
 
-/-- A pairing `M × N → L` of modules over `ULift ℚ̄_ℓ`, as a `ℚ̄_ℓ`-linear map from `M` to the
-`ℚ̄_ℓ`-linear maps `N → L` of the underlying `ℚ̄_ℓ`-vector spaces. -/
-noncomputable def homLinearMap
-    (p : M →ₗ[ULift.{u + 1} (PadicAlgCl l)] N →ₗ[ULift (PadicAlgCl l)] L) :
-    (toModuleCat l).obj M →ₗ[PadicAlgCl l]
-      ((toModuleCat l).obj N →ₗ[PadicAlgCl l] (toModuleCat l).obj L) where
-  toFun (m : M) :=
-    { toFun (n : N) := (p m n : L)
-      map_add' (n n' : N) := map_add (p m) n n'
-      map_smul' c (n : N) := (p m).map_smul (ULift.up c) n }
-  map_add' (m m' : M) := by
-    ext (n : N)
-    exact LinearMap.congr_fun (map_add p m m') n
-  map_smul' c (m : M) := by
-    ext (n : N)
-    exact LinearMap.congr_fun (p.map_smul (ULift.up c) m) n
+/-- `FrobeniusModule.Equiv.ofBilinear` for Frobenius modules over `ℚ̄_ℓ`: a perfect
+Frobenius-invariant pairing `P × A → C` identifies `P` with `Hom(A, C)`.
 
-lemma homLinearMap_apply (p : M →ₗ[ULift.{u + 1} (PadicAlgCl l)] N →ₗ[ULift (PadicAlgCl l)] L)
-    (m : M) (n : N) : homLinearMap p m n = p m n :=
-  rfl
-
-lemma bijective_homLinearMap
-    {p : M →ₗ[ULift.{u + 1} (PadicAlgCl l)] N →ₗ[ULift (PadicAlgCl l)] L}
-    (hp : Function.Bijective p) : Function.Bijective (homLinearMap p) := by
-  refine ⟨fun (m : M) (m' : M) h ↦ hp.1 (LinearMap.ext fun (n : N) ↦ LinearMap.congr_fun h n),
-    fun φ ↦ ?_⟩
-  let ψ : N →ₗ[ULift.{u + 1} (PadicAlgCl l)] L :=
-    { toFun (n : N) := φ n
-      map_add' n n' := φ.map_add n n'
-      map_smul' c n := φ.map_smul c.down n }
-  obtain ⟨m, hm⟩ := hp.2 ψ
-  exact ⟨m, LinearMap.ext fun (n : N) ↦ LinearMap.congr_fun hm n⟩
+Implementation note: the type of `p` is elaborated here with the instances of `ℚ̄_ℓ` itself, as in
+the statements about stalks of Weil sheaves; applying the general
+`FrobeniusModule.Equiv.ofBilinear` directly to stalks makes the kernel compare the two
+elaborations of these instances in the presence of the stalks, which is very expensive. -/
+noncomputable def frobeniusEquivOfBilinear {P A C : FrobeniusModule.{u + 1, 0} (PadicAlgCl l)}
+    (p : P.carrier →ₗ[PadicAlgCl l] A.carrier →ₗ[PadicAlgCl l] C.carrier)
+    (hp : Function.Bijective p)
+    (h : ∀ x y, p (P.frobenius x) (A.frobenius y) = C.frobenius (p x y)) : P.Equiv (A.hom C) :=
+  FrobeniusModule.Equiv.ofBilinear p hp h
 
 end AlgebraicGeometry.WeilCoefficients
 
@@ -227,7 +211,6 @@ lemma tensorObjStalkAtPairing_frobenius (F G : WeilSheaf k₀ l X) (hF : F.IsLis
   rw [tensorObjStalkAtPairing_apply, tensorObjStalkAtPairing_apply]
   exact tensorObj_evaluationPairing_stalkAt_frobenius s m hs F G hF d y
 
-set_option maxHeartbeats 3000000 in
 /-- The stalk of the tensor product `F ⊗ G = [F^∨, G]` of a lisse Weil sheaf `F` and a Weil
 sheaf `G` at a geometric point is `Hom((F^∨)_s, G_s)`, with the Frobenius
 `X ↦ F_G ∘ X ∘ F_{F^∨}⁻¹`: the pairing induced by the evaluation is perfect
@@ -237,8 +220,7 @@ with the Frobenius
 noncomputable def stalkAtTensorObjHomEquiv (F G : WeilSheaf k₀ l X) (hF : F.IsLisse) :
     ((F.tensorObj G hF).stalkAt s m hs).Equiv
       (((F.dual hF).stalkAt s m hs).hom (G.stalkAt s m hs)) :=
-  FrobeniusModule.Equiv.ofBilinear (P := (F.tensorObj G hF).stalkAt s m hs)
-    (A := (F.dual hF).stalkAt s m hs) (C := G.stalkAt s m hs) (tensorObjStalkAtPairing s m hs F G hF)
+  WeilCoefficients.frobeniusEquivOfBilinear (tensorObjStalkAtPairing s m hs F G hF)
     (bijective_tensorObjStalkAtPairing s m hs F G hF)
     (tensorObjStalkAtPairing_frobenius s m hs F G hF)
 
@@ -311,6 +293,7 @@ theorem exists_of_hasEigenvalue_stalk_tensorObj {F G : WeilSheaf k₀ l X} (hF :
       μ = a * b :=
   FrobeniusModule.exists_of_hasEigenvalue_tensor ((stalkTensorObjEquiv F G hF x).hasEigenvalue h)
 
+/-- The residue cardinality `q_x` at a closed point is positive. -/
 lemma residueCard_pos (x : X.finitePoints) :
     0 < (X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 :=
   pow_pos Nat.card_pos _
