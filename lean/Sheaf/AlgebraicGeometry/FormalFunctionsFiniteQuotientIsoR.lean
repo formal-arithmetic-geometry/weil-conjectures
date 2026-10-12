@@ -1,9 +1,9 @@
 module
-public import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteQuotientIsoB
+public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
@@ -18,9 +18,9 @@ namespace AlgebraicGeometry
 /-- The finite pullback maps are linear and factor through a quotient-system isomorphism.
 Source: Stacks Project, Tag 02OD and Tags 01F7, 01FB.
 (blueprint: lem-weil-pbc-formal-functions-finite-quotient-iso-r)
-Proof: Define each component by canonical finite pullback. The scalar identity for
-restricted completed scalars proves linearity, and the quotient-unit equation gives
-both displayed component formulas. -/
+Proof: Compose the linear map underlying each component of b with the linear
+cohomology map induced by the quotient projection. The first component formula is
+definitional; the supplied quotient-unit equation gives the finite pullback formula. -/
 theorem formalFunctions_finite_quotient_iso_r {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f] [IsLocallyNoetherian Y] (F : X.Modules)
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) (y : Y) (p : ℕ) :
@@ -46,5 +46,12 @@ theorem formalFunctions_finite_quotient_iso_r {X Y : Scheme.{u}} (f : X ⟶ Y)
           r n z = (b.hom.app (op n)) ((C.map (formalModuleQuotientπ J (n + 1) F')) z)) ∧
         ∀ (n : ℕ) (z : formalFunctionsLocalCohomology f y F p),
           r n z = formalFunctionsFinitePullback f y F p n z := by
-  sorry
+  have _hF := hF
+  intro X' f' F' J C b hb
+  refine ⟨fun n ↦ (b.hom.app (op n)).hom.comp
+    (C.map (formalModuleQuotientπ J (n + 1) F')).hom, ?_, ?_⟩
+  · intro n z
+    rfl
+  · intro n z
+    exact hb n z
 end AlgebraicGeometry
