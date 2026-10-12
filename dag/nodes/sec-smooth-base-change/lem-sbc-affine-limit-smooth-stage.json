@@ -1,0 +1,149 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0C0C, Lemma 32.8.9, in Situation 081D; affine algebra descent via 0CAQ and comparison via 01ZM(2)-(3)"
+ },
+ "proof": [
+  {
+   "text": "Restrict to Over i, an initial index category with the same limit. Cover the Noetherian base stage by finitely many affine opens and each of their inverse images under p by finitely many affine opens. These restricted morphisms are finitely presented. Their base changes are affine because the transitions and limit projections are affine. The base-changed charts form covers at every stage. Global-sections continuity identifies each limit chart ring with the filtered colimit of its stage rings.",
+   "uses": [
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each limit chart the ring morphism is smooth, being the restriction of f. Smooth-algebra filtered-colimit descent provides a smooth model over some later base chart, with an isomorphism to the given limit chart. This new model and the original chart model are of finite presentation over their common base. Descend their comparison isomorphism and its inverse using 01ZM(2), and the two composite identity equations using 01ZM(3). At a further stage the original chart model is therefore isomorphic to a smooth model and is smooth.",
+   "uses": [
+    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cofilteredness gives a common later index for the finitely many charts. Pullbacks of smooth chart morphisms remain smooth. The chart covers persist under base change, so smoothness is local on the source and target and the second projection at this common stage is smooth. Empty charts and an empty source are admitted.",
+   "uses": [
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-global-sections-colimit",
+  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "thm-pd-spreading-out",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 0C0C, expanding its affine-local reduction via 0CAQ and 01ZM(2)-(3)",
+  "note": "General affine-transition systems are required; the existing NoetherianApproximation theorem requires stages of finite type over the integers, which is not assumed here."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "id": "lem-sbc-affine-limit-smooth-stage",
+ "title": "Eventual smoothness over an arbitrary affine-transition limit",
+ "statement": "Let $I$ be a small cofiltered category and $X:I\\to\\mathrm{Scheme}$ a diagram with affine transition morphisms and Noetherian quasi-separated stages [def-weil-pbc-scheme-conventions]. Let $\\alpha:S\\to X$ be a limiting cone. Fix $i\\in I$ and a morphism $p:P\\to X_i$ that is locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. Let $c:C\\to S$ be smooth [def-sbc-smooth-morphisms], and let $a:C\\to P$ give a cartesian square $(a,c,p,\\alpha_i)$ [def-pc-fibre-product]. There exist an object $j\\in I$ and an arrow $f:j\\to i$ such that $P\\times_{X_i}X_j\\to X_j$ is smooth.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-pc-fibre-product"
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PointedSmoothFamilyStage",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Tag 0EZJ, proof of Lemma 58.31.9, family descent paragraph; Tags 01ZM, 0C0C, 055R, and 01Z0",
+   "via": [
+    "lem-sbc-pointed-smooth-family-stage",
+    "lem-sbc-normal-pointed-family-approximation",
+    "lem-sbc-normal-family-generic-limit",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely presented morphism of schemes that is smooth after base change to a cofiltered affine transition limit is smooth at a later stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of finite presentation with section descends to a finite stage of a cofiltered inverse limit of schemes",
+   "results": "Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; instLocallyOfFinitePresentationOfSmooth; isAffineHom_π_app. No eventual smoothness theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth",
+   "results": "Smooth base change and composition instances and locally finite presentation; no eventual smoothness theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*smooth.*[Ll]imit; smooth.*[Dd]escen; [Dd]escen.*smooth; smooth.*[Ii]sColimit",
+   "results": "No Mathlib or source-library eventual-smoothness theorem. Sheaf.AlgebraicGeometry.NoetherianApproximationSmoothStage states a specialized theorem requiring a finite-type-over-Z approximation. RingTheory.Etale.Descent proves faithfully-flat descent, whose hypothesis is absent here.",
+   "verdict": "no applicable existing declaration",
+   "date": "2026-10-13"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/AffineLimitSmoothStage.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_smooth_stage_of_affine_limit",
+  "statement": "theorem exists_smooth_stage_of_affine_limit {I : Type u} [SmallCategory I]\n    [IsCofiltered I] {S C : Scheme.{u}}\n    (X : I ⥤ Scheme.{u}) (α : (Functor.const I).obj S ⟶ X)\n    (hα : IsLimit (Cone.mk S α))\n    (hXa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (X.map f))\n    (hN : ∀ i, IsNoetherian (X.obj i))\n    (hqs : ∀ i, QuasiSeparatedSpace (X.obj i))\n    {i : I} {P : Scheme.{u}} (p : P ⟶ X.obj i)\n    [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]\n    (c : C ⟶ S) [Smooth c] (a : C ⟶ P)\n    (H : IsPullback a c p (α.app i)) :\n    ∃ j : Over i, Smooth (pullback.snd p (X.map j.hom))",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T173914-L-3308974",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T173914-L-3308974",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

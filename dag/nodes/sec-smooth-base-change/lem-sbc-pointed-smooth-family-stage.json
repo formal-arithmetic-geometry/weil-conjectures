@@ -14,39 +14,47 @@
  ],
  "proof": [
   {
-   "text": "Apply finite-presentation descent [lemma-nagata-finite-presentation-descends] to the qcqs smooth morphism c, which is locally of finite presentation. Apply morphism descent and equality descent [thm-pd-spreading-out] to its section and section equation. Pass to a common later stage and descend smoothness by Stacks Tag 0C0C.",
-   "uses": [
-    "lemma-nagata-finite-presentation-descends",
-    "thm-pd-spreading-out"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-sbc-smooth-section-component-geometrically-irreducible] to the descended smooth family with its section and restrict to this open component. Each geometrically connected original fibre maps into that component, since it contains its section point. Thus its base change is all of C and the comparison remains cartesian. The component is an open of a Noetherian finite-presentation scheme, so it is quasi-compact and quasi-separated; its geometrically irreducible fibres are geometrically connected.",
-   "uses": [
-    "lem-sbc-smooth-section-component-geometrically-irreducible"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Global functions commute with this cofiltered limit by [lem-weil-pbc-limit-global-sections-colimit]. Descend the inverse to n as an element of a stage global section ring, then descend the equality n times that element equals one to a later stage. Pass to a common later stage with the family model. Pullback preserves the section identity, smoothness, geometric connectedness, and the qcqs properties. This gives the single-stage model and unit with all the stated equations.",
+   "text": "First descend an inverse to n using global-section continuity. Descend the equation n*t=1 by zero-equality descent for n*t-1. Restrict to Over k at the resulting unit stage; every subsequent stage still has n invertible by functoriality of global sections.",
    "uses": [
     "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the qcqs smooth family by finite-presentation descent. Apply eventual smoothness for arbitrary affine-transition systems to its model and pass to that later pullback.",
+   "uses": [
+    "lemma-nagata-finite-presentation-descends",
+    "lem-sbc-affine-limit-smooth-stage"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply fixed-stage map descent to the section composed with the comparison into the smooth model. Pull back the model to that refinement and construct the section as the pullback lift of the descended map and the identity. Its section equation is the second projection identity, and compatibility follows from both projection identities. No separate equality-descent step is needed.",
+   "uses": [
+    "lem-sbc-pointed-section-stage-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the open section component from the smooth section-component theorem. The image under the comparison of a connected original fibre is preconnected and contains the image of its section, hence lies in the model fibre component through its section. Lift both the comparison and section through the open. Prove the restricted square cartesian by its universal property and cancellation against the open immersion. The smooth finitely presented model over a Noetherian stage is Noetherian; hence its open has a Noetherian underlying space, making its structural map quasi-compact and quasi-separated. Geometric irreducibility of the open gives geometric connectedness. Read its index back in I and transport the stage unit along the transition map.",
+   "uses": [
+    "lem-sbc-smooth-section-component-geometrically-irreducible"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-sbc-affine-limit-smooth-stage",
+  "lem-sbc-pointed-section-stage-descent",
   "lem-sbc-smooth-section-component-geometrically-irreducible",
   "lem-weil-pbc-limit-global-sections-colimit",
-  "lemma-nagata-finite-presentation-descends",
-  "thm-pd-spreading-out"
+  "lemma-nagata-finite-presentation-descends"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project",
   "place": "Tag 0EZJ, proof of Lemma 58.31.9, family descent paragraph; Tags 01ZM, 0C0C, 055R, and 01Z0",
-  "note": "Source argument transcribed by S1; omitted chart and gluing details expanded in the docstring."
+  "note": "V3 Lean reduction: descend the unit first, descend the section as a map into the model, and use the pullback projection to construct its section identity. Only general eventual smoothness is split off."
  },
  "mathlib_searches": [
   {
@@ -126,9 +134,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "V3",
   "result": "pass",
-  "landing": "20261012T154246-L-2435413",
+  "landing": "20261012T173914-L-3308974",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
