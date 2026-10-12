@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-local-system-generic-zero-map",
+ "kind": "statement",
+ "title": "Generic detection of maps into a locally constant module sheaf",
+ "statement": "Let X be an irreducible scheme [def-weil-pbc-scheme-conventions] with generic point eta [def-sc-generic-point], and Lambda a commutative ring. Let phi:F to G be a morphism of Lambda-module sheaves on its small etale site [def-weil-pbc-etale-site] and suppose G is locally constant [def-constructible-locally-constant]. If for every separably closed field Omega and every map s:Spec Omega to X with image eta the geometric stalk map phi_s is zero [def-weil-pbc-geometric-stalks], then phi is zero. Neither F nor G need have finitely generated stalks and neither X nor Lambda need be Noetherian.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 09BG, Lemma 59.73.12 (3), lemma-irreducible-subsheaf-constant-zero, with the etale-local persistence argument used in Tag 09BH (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sc-generic-point",
+  "def-weil-pbc-etale-site",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Assume the morphism is nonzero. By exactness and conservativity of geometric stalks its image has a nonzero geometric germ, represented by a section of F whose image in G has nonzero germ.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back to an etale trivialization of G and refine the pointed neighbourhood until the image of this section is a fixed nonzero constant section. This uses the stalk as a filtered colimit and the constant-sheaf stalk formula; refinements preserve the selected nonzero germ.",
+   "uses": [
+    "def-constructible-locally-constant",
+    "def-constructible-constant",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The neighbourhood has nonempty open image in X; irreducibility forces that image to contain eta. Choose a geometric point of its nonempty etale fibre over eta, passing to a separably closed field if needed. The same constant section remains nonzero at this geometric generic point, contradicting the assumed zero map on every such stalk.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "def-sc-generic-point",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All image stalks must therefore vanish. Exactness and conservativity make the image zero and hence the morphism zero. The zero source or target is included and the empty scheme cannot furnish eta. No finiteness hypotheses are used.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constant",
+  "def-constructible-locally-constant",
+  "def-sc-generic-point",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-flat-lfp-open",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tag 09BG, Lemma 59.73.12 (3), lemma-irreducible-subsheaf-constant-zero, with the etale-local persistence argument used in Tag 09BH (3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism into a locally constant etale sheaf on an irreducible scheme is zero if its generic stalk is zero",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism into a locally constant etale sheaf on an irreducible scheme is zero if its generic stalk is zero",
+   "results": [
+    "AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero",
+    "ModuleCat.Tilde.exists_const",
+    "AlgebraicGeometry.Scheme.zero_of_zero_cover"
+   ],
+   "verdict": "Only neighbouring structure-sheaf or quasi-coherent results; none supplies the stated etale module-sheaf lemma.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg generic|IsLocallyConstant|IsConstant in Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean and Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; rg generic and subsheaf in lean/WeilConjectures and lean/Sheaf",
+   "results": [
+    "Sheaf.IsConstant",
+    "AlgebraicGeometry.constant_subsheaf_generic",
+    "AlgebraicGeometry.Scheme.mono_of_mono_generic_stalk"
+   ],
+   "verdict": "ConstantSubsheafGeneric assumes a finite ring and finite underlying module. LisseGenericKernel is for abelian-group sheaves with a different local-constancy predicate and concludes monicity of a map out of a local system, not this assertion. No exact match.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModuleSubobjectGenericNeighbourhood",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-module-subobject-generic-constancy",
+   "place": "Proof step 3: persistence of a nonzero constant germ at a geometric generic point",
+   "via": [
+    "lem-weil-pbc-module-subobject-generic-neighbourhood",
+    "lem-weil-pbc-module-subobject-generic-constancy",
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalSystemGenericZeroMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalSystemGenericZeroMap.lean",
+  "declaration": "AlgebraicGeometry.Scheme.eq_zero_of_generic_sheafFiber_eq_zero",
+  "statement": "theorem eq_zero_of_generic_sheafFiber_eq_zero\n    {X : Scheme.{u}} [IrreducibleSpace X] {Λ : Type (u + 1)} [CommRing Λ]\n    (η : X) (hη : IsGenericPoint η Set.univ)\n    {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}\n    [IsLocallyConstantSheaf G] (φ : F ⟶ G)\n    (hφ : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),\n      s (IsLocalRing.closedPoint Ω) = η → (pointSmallEtale s).sheafFiber.map φ = 0) :\n    φ = 0",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T042411-L-1817147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T042411-L-1817147",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
