@@ -41,6 +41,47 @@ theorem henselianRing_quotient_maximalIdeal
     (A : Type u) [CommRing A] [IsLocalRing A]
     [HenselianRing A (maximalIdeal A)] (I : Ideal A) (hI : I ≤ maximalIdeal A) :
     HenselianRing (A ⧸ I) ((maximalIdeal A).map (Ideal.Quotient.mk I)) := by
-  sorry
+  classical
+  let π := Ideal.Quotient.mk I
+  have hproper : I ≠ ⊤ :=
+    ne_top_of_le_ne_top (maximalIdeal.isMaximal A).ne_top hI
+  let : Nontrivial (A ⧸ I) := Ideal.Quotient.nontrivial_iff.mpr hproper
+  let : IsLocalRing (A ⧸ I) :=
+    IsLocalRing.of_surjective' π Ideal.Quotient.mk_surjective
+  have hmax : (maximalIdeal A).map π = maximalIdeal (A ⧸ I) :=
+    IsLocalRing.map_maximalIdeal_of_surjective π Ideal.Quotient.mk_surjective
+  let : Nontrivial ((A ⧸ I) ⧸ (maximalIdeal A).map π) :=
+    Ideal.Quotient.nontrivial_iff.mpr (hmax ▸ (maximalIdeal.isMaximal (A ⧸ I)).ne_top)
+  refine ⟨?_, ?_⟩
+  · rw [hmax, jacobson_eq_maximalIdeal ⊥ bot_ne_top]
+  · intro f hf b hb hu
+    obtain ⟨g, rfl, -, hg⟩ := Polynomial.lifts_and_natDegree_eq_and_monic
+      (Polynomial.map_surjective π Ideal.Quotient.mk_surjective f) hf
+    obtain ⟨a₀, rfl⟩ := Ideal.Quotient.mk_surjective b
+    have heval : (g.map π).eval (π a₀) = π (g.eval a₀) :=
+      Polynomial.eval_map_apply _ _
+    have hderiv : (g.map π).derivative.eval (π a₀) = π (g.derivative.eval a₀) := by
+      rw [Polynomial.derivative_map]
+      exact Polynomial.eval_map_apply _ _
+    have hmem : g.eval a₀ ∈ maximalIdeal A := by
+      rw [heval] at hb
+      change g.eval a₀ ∈ Ideal.comap π ((maximalIdeal A).map π) at hb
+      simpa [Ideal.comap_map_of_surjective π Ideal.Quotient.mk_surjective,
+        π, ← RingHom.ker_eq_comap_bot, Ideal.mk_ker, sup_eq_left.mpr hI] using hb
+    have hunit : IsUnit (g.derivative.eval a₀) := by
+      by_contra hn
+      have hm : g.derivative.eval a₀ ∈ maximalIdeal A := by
+        rw [mem_maximalIdeal]
+        exact hn
+      have hz : Ideal.Quotient.mk ((maximalIdeal A).map π)
+          ((g.map π).derivative.eval (π a₀)) = 0 := by
+        rw [hderiv, Ideal.Quotient.eq_zero_iff_mem]
+        exact Ideal.mem_map_of_mem π hm
+      exact not_isUnit_zero (hz ▸ hu)
+    obtain ⟨a, ha, ham⟩ := HenselianRing.is_henselian g hg a₀ hmem (hunit.map _)
+    refine ⟨π a, ?_, ?_⟩
+    · rw [Polynomial.IsRoot.def, Polynomial.eval_map_apply, Polynomial.IsRoot.def.mp ha, map_zero]
+    · rw [← map_sub]
+      exact Ideal.mem_map_of_mem π ham
 
 end IsLocalRing
