@@ -42,6 +42,23 @@ theorem precomp_bijective_of_quasiIso
       (fun g : (HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj B ⟶
           (HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj I ↦
         (HomotopyCategory.quotient C (ComplexShape.up ℤ)).map s ≫ g) := by
-  sorry
+  let q := HomotopyCategory.quotient C (ComplexShape.up ℤ)
+  let f := DerivedCategory.Qh.map (q.map s)
+  have hf : IsIso f := by
+    change IsIso ((q ⋙ DerivedCategory.Qh).map s)
+    rw [NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso C)]
+    infer_instance
+  constructor
+  · intro g h e
+    apply (Qh_map_bijective (q.obj B) I).injective
+    apply (cancel_epi f).mp
+    simpa only [f, ← Functor.map_comp] using congrArg DerivedCategory.Qh.map e
+  · intro g
+    obtain ⟨h, hh⟩ := (Qh_map_bijective (q.obj B) I).surjective
+      (inv f ≫ DerivedCategory.Qh.map g)
+    refine ⟨h, (Qh_map_bijective (q.obj A) I).injective ?_⟩
+    rw [Functor.map_comp, hh]
+    change f ≫ inv f ≫ DerivedCategory.Qh.map g = _
+    simp
 
 end CochainComplex.IsKInjective
