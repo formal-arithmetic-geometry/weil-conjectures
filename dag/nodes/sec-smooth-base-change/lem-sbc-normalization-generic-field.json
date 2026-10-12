@@ -1,0 +1,103 @@
+{
+ "id": "lem-sbc-normalization-generic-field",
+ "kind": "statement",
+ "title": "Generic field of normalization in an algebraic extension",
+ "statement": "Let $Z$ be an integral scheme with function field $K$ [def-sc-function-field], and let $L/K$ be an algebraic field extension. Let $Z^L$ be its normalization in $L$, and $a:\\operatorname{Spec}L\\to Z^L$ the canonical map [def-fin-normalization-extension]. There is an isomorphism $e:\\operatorname{Spec}L\\cong\\operatorname{Spec}K(Z^L)$ such that $a$ equals $e$ followed by the generic-point morphism of $Z^L$.",
+ "stmt_deps": [
+  "def-sc-function-field",
+  "def-fin-normalization-extension"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Normalization.lean",
+  "place": "exists_iso_toNormalization_normalizationIn, lines 362-463; full proof read"
+ },
+ "proof": [
+  {
+   "text": "Use the existing proved theorem Scheme.exists_iso_toNormalization_normalizationIn. On a nonempty affine chart with ring A, every element of L integral over A is in the image of the generic stalk of the normalization, by normalizationObjIso. Every algebraic element of L has a nonzero A-multiple integral over A. Thus that generic stalk maps surjectively onto L, and injectivity follows because it is a map of fields. The resulting Spec isomorphism commutes with the canonical generic map. No new Lean proof or axiom is introduced.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Normalization.lean",
+  "place": "exists_iso_toNormalization_normalizationIn, lines 362-463; full proof read",
+  "note": "D2 follows the cited source using existing proved library interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The function field of the normalization of an integral scheme in an algebraic extension L of its function field is L",
+   "results": "Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The function field of the normalization of an integral scheme in an algebraic extension L is L",
+   "results": "Mathlib function-field and fraction-ring instances; no normalization-in-extension result.",
+   "verdict": "no Mathlib match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "function field.*normalization|normalization.*function field",
+   "results": "No Mathlib hit. Local source read: WeilConjectures/Mathlib/AlgebraicGeometry/Normalization.lean:362-463 proves the required compatible isomorphism.",
+   "verdict": "source-library match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalFiniteStageUniversal",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "normal approximation paragraph: identify the generic field of the absolute image normalization",
+   "via": [
+    "lem-sbc-normal-finite-stage-universal",
+    "lem-sbc-normal-noetherian-refinement",
+    "lem-sbc-normal-finite-stage-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Normalization",
+  "declaration": "AlgebraicGeometry.Scheme.exists_iso_toNormalization_normalizationIn",
+  "statement": "theorem exists_iso_toNormalization_normalizationIn [Algebra.IsAlgebraic X.functionField L] : ∃ e : Spec (.of L) ≅ Spec (X.normalizationIn L).functionField, e.hom ≫ (X.normalizationIn L).fromSpecFunctionField = (X.fromSpecOfAlgebraFunctionField L).toNormalization",
+  "branch": "slopmaster2",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T220518-L-1392395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T220518-L-1392395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

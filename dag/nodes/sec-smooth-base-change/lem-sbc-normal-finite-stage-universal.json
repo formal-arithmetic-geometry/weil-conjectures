@@ -14,21 +14,43 @@
  },
  "proof": [
   {
-   "text": "Form the scheme-theoretic image Z of the projection S -> N_i. It is integral\nbecause S is integral, and is a closed subscheme of a finite type integer scheme.\nConstruct X as the normalization of Z in its own function field, by gluing the spectra\nof the integral closures of affine chart rings in their fraction fields. These closures\nare finite by finiteTypeZDomain_integralClosure_finite. Integral closure commutes with\nlocalization, so the gluing gives an integral scheme with integrally closed stalks and\na finite map p to N_i. The dominant map S -> Z factors through X: the embedding of\nfunction fields sends integral elements into the integrally closed local rings of S.\nThis yields a dominant alpha and alpha followed by p is the projection.\nFor any Y, beta and g in the conclusion, the image of g lies in Z: beta is dominant,\nand Y is reduced, so the pullback of the ideal defining Z vanishes on Y. The induced\nmap Y -> Z is dominant since its composite with beta is S -> Z. Normality of Y\ntherefore gives a unique lift to X by the same integral-closure argument. Uniqueness\nalso shows beta followed by this lift is alpha. This proves the asserted universal\nproperty. In particular it determines (X, alpha, p) up to unique compatible isomorphism;\nno arbitrary witness of mere existence is used as the data of a definition.",
+   "text": "Let t:S -> N_i be the projection. It is quasi-compact since S is compact and N_i quasi-separated. Set Z=t.image, the concrete scheme-theoretic image. The scheme-theoretically dominant t.toImage descends reducedness from S; its dense range descends irreducibility. Thus Z is integral. Its closed immersion into N_i makes it locally of finite type over the integers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set X=Z.normalization, the existing absolute normalization in K(Z). The relative-normalization instance gives integrality, and the source-library normal-stalk theorem applied to Spec K(Z) gives normality. For finiteness, over a nonempty affine U of Z the preimage in Spec K(Z) is top. Its sections therefore identify with K(Z), the fraction field of A=Gamma(Z,U). Local finite type over ULift Z gives finite type over Z. Apply finiteTypeZDomain_integralClosure_finite and transfer finiteness along mapIntegralClosure. Apply isFinite_fromNormalization_of_finite and compose with the closed immersion Z -> N_i.",
    "uses": [
+    "lem-weil-pbc-normalization-normal-stalks",
     "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply dominant lifting to t.toImage:S -> Z to obtain dominant alpha:S -> X. Its composition with p=Z.fromNormalization;t.imageι is t.",
+   "uses": [
+    "lem-sbc-normalization-dominant-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For Y,beta,g in the universal property, beta is scheme-theoretically dominant because Y is reduced. Kernel invariance under precomposition gives ker(t)=ker(g), so IsClosedImmersion.lift factors g through Z. Cancel Z -> N_i to obtain beta;gZ=t.toImage; hence gZ is dominant. Lift gZ through normalization. Uniqueness gives beta;f=alpha, and composition gives f;p=g. Any other compatible f-prime is dominant since beta;f-prime=alpha. Cancelling Z -> N_i reduces uniqueness to uniqueness of the dominant lift of gZ.",
+   "uses": [
+    "lem-sbc-normalization-dominant-lift"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-z-domain-normalization-finite"
+  "lem-sbc-normalization-dominant-lift",
+  "lem-weil-pbc-finite-type-z-domain-normalization-finite",
+  "lem-weil-pbc-normalization-normal-stalks"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "Stacks Project",
-  "place": "Tags 035E, 035Q, 0EZJ and 0335",
-  "note": "K2 spells out the single-stage scheme-theoretic-image and absolute-normalization argument."
+  "place": "Tags 035Q (4), 035L, 0335 and 0EZJ",
+  "note": "D2 implements image normalization with proved private chart-finiteness and image-integrality helpers and a proved general dominant-lifting module. No new sorry."
  },
  "mathlib_searches": [
   {
@@ -104,11 +126,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c6c53",
-  "group": "K2",
+  "reviewer": "COMPILER",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261012T194121-L-458493",
+  "landing": "20261012T220518-L-1392395",
   "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures with their DAG statements, diagram assembly with its recorded proof dependencies, and the remaining lemma with image normalization; scratch compilation and axiom checks passed."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

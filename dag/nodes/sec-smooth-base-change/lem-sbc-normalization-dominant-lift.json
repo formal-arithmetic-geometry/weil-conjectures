@@ -1,0 +1,143 @@
+{
+ "id": "lem-sbc-normalization-dominant-lift",
+ "kind": "statement",
+ "title": "Dominant lifting through absolute normalization",
+ "statement": "Let $Y,Z$ be integral schemes [def-weil-pbc-scheme-conventions, def-sbc-normal-dominant-galois] and $g:Y\\to Z$ a dominant morphism. Suppose every local ring of $Y$ is integrally closed. For the absolute normalization $\\nu:Z^{\\nu}\\to Z$ [def-sc-normalization], there is a unique dominant morphism $f:Y\\to Z^{\\nu}$ with $\\nu\\circ f=g$. No quasi-compactness, Noetherian, or finite-type hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-sc-normalization"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 035Q, part (4), normal-domain specialization of the universal property"
+ },
+ "proof": [
+  {
+   "text": "Dominance sends the generic point of Y to that of Z, by taking the image of its closure and using denseRange.closure_range. Stalk-map naturality gives m:Spec K(Y) -> Spec K(Z) with m;jZ=jY;g.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Scheme.isIso_fromNormalization_restrict at the top open to normal integral Y, then remove top-open inclusions. Its already proved general Lean interface has no finite-type hypothesis, unlike the restricted blueprint wording.",
+   "uses": [
+    "lem-sc-normalization-over-normal-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let a=m followed by Spec K(Z) -> Z.normalization. Lift (a,jY) to the pullback of the integral map Z.fromNormalization along g. Apply jY.normalizationDesc to the integral pullback projection, and precompose with the inverse of Y.fromNormalization. The first projection defines f:Y -> Z.normalization. The normalizationDesc equations give f;Z.fromNormalization=g and jY;f=a.",
+   "uses": [
+    "lem-sbc-relative-normalization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every map between spectra of fields is dominant because the target has one point and the source is nonempty. Thus m and a are dominant, and jY;f=a implies f is dominant.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For dominant lifts f and f-prime, factor their generic restrictions through the generic point of Z.normalization. The generic-field isomorphism identifies that point with Spec K(Z). Postcomposition into Z gives equal maps. Cancel the monomorphism Spec K(Z) -> Z to deduce equality of the generic restrictions.",
+   "uses": [
+    "lem-sbc-normalization-generic-field"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Z.fromNormalization is integral, hence affine and separated. The dominant jY is scheme-theoretically dominant because Y is reduced. Apply the relative separated-target rigidity theorem to the two lifts with equal generic restrictions.",
+   "uses": [
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-normalization-generic-field",
+  "lem-sbc-relative-normalization-universal-property",
+  "lem-sc-normalization-over-normal-locus",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tag 035Q, part (4), normal-domain specialization of the universal property",
+  "note": "D2 follows the cited source using existing proved library interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A dominant morphism from a normal integral scheme uniquely factors through the absolute normalization of an integral scheme",
+   "results": "Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dominant morphism from a normal integral scheme uniquely lifts through the normalization of an integral scheme",
+   "results": "Relative normalizationDesc and normalization.hom_ext found; neither states the absolute-normalization lifting theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationDesc|normalization.*hom_ext|normalization.*dominant",
+   "results": "Mathlib relative normalization API found. The source-library normal-locus and generic-field results complete the proof.",
+   "verdict": "no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.NormalFiniteStageUniversal",
+  "date": "2026-10-13",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "normal approximation paragraph: factor normal schemes through normalization of the image",
+   "via": [
+    "lem-sbc-normal-finite-stage-universal",
+    "lem-sbc-normal-noetherian-refinement",
+    "lem-sbc-normal-finite-stage-diagram"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.NormalizationDominantLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/NormalizationDominantLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_lift_normalization_of_dominant",
+  "statement": "theorem existsUnique_lift_normalization_of_dominant {Y Z : Scheme.{u}} [IsIntegral Y] [IsIntegral Z] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y)) (g : Y ⟶ Z) [IsDominant g] : ∃! f : Y ⟶ Z.normalization, f ≫ Z.fromNormalization = g ∧ IsDominant f",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T220518-L-1392395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T220518-L-1392395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
