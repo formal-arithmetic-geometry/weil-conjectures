@@ -9440,3 +9440,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:39 L: merged deliver/D3/Sheaf.RingTheory.PopescuDelocalizeDenominators (stage 3; reviewer PASS; first push; landing 20261012T203939-L-829186 (interface); batch 20261012T203936; modules 2; new nodes 1)
 - 20:39 L: merged deliver/E1/Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf (stage 3; reviewer PASS; first push; landing 20261012T203940-L-829387 (proof); batch 20261012T203936; modules 1; new nodes 0)
 - 20:39 L: merged deliver/E2/Sheaf.AlgebraicGeometry.HigherDirectImageRawDiagram (stage 3; reviewer PASS; first push; landing 20261012T203940-L-829517 (interface); batch 20261012T203936; modules 3; new nodes 2)
+- 20:39 L: merged deliver/E3/Sheaf.RingTheory.PopescuLiftSmooth (stage 3; reviewer PASS; first push; landing 20261012T203940-L-829636 (interface); batch 20261012T203936; modules 3; new nodes 2)

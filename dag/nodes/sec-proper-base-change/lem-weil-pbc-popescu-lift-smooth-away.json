@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-popescu-lift-smooth-away",
+ "kind": "statement",
+ "title": "Smoothness of the principal localization of the prepared Popescu quotient",
+ "statement": "Let R and Cbar be commutative rings, with an R-algebra structure and an R/pi^2R-algebra structure on Cbar, and pi an element of R. Let d be prepared polynomial data [lem-weil-pbc-popescu-lift-preparation], and define its explicit quotient D=ULift(R[x,z]/(f_j-pi z_j, a_k z_l-sum_{j in E_k}h_{klj}z_j-pi g_{kl})). Then the principal localization D[1/pi] is a smooth R-algebra [def-weil-pbc-smooth-ring-map]. No Noetherian or annihilator hypothesis and no special-fibre maps are required.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (https://stacks.math.columbia.edu/tag/07CP), key equality and property (b)."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-popescu-lift-preparation",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Use the cleared Prepared relations to expand pi p_{kl}=-a_k(f_l-pi z_l)+sum_{j in E_k}h_{klj}(f_j-pi z_j).",
+   "uses": [
+    "lem-weil-pbc-popescu-lift-preparation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "After inverting pi, the p_{kl} are redundant. Substitute z_j=pi^{-1}f_j to construct inverse R-algebra maps between D[1/pi] and R[x][1/pi]. Transport across ULift. This is an explicit substitution, not a chosen arbitrary algebra.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The polynomial algebra R[x] is smooth over R. Its principal localization remains smooth, and the explicit algebra equivalence transfers this to D[1/pi].",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-ring-map-principal-localization",
+    "def-weil-pbc-smooth-ring-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-popescu-lift-preparation",
+  "lem-weil-pbc-smooth-ring-map-principal-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Stacks Project, Tag 07CP (https://stacks.math.columbia.edu/tag/07CP), key equality and property (b)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localization of a polynomial algebra is smooth and smoothness is preserved by an algebra equivalence",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable; no negative verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial quotient by equations f_j minus pi times z_j becomes a polynomial algebra after inverting pi, and is smooth",
+   "date": "2026-10-12",
+   "results": "Algebra.IsStandardSmooth, Algebra.SubmersivePresentation.isStandardSmooth, RingHom.IsStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.instSmoothOfIsStandardSmooth, RingHom.IsStandardSmooth.toAlgebra, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension",
+   "verdict": "Ingredients only; no theorem for this explicit quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth",
+   "date": "2026-10-12",
+   "results": "Algebra.Smooth, Algebra.Smooth.formallySmooth, Algebra.Smooth.finitePresentation, Algebra.Smooth.of_isLocalization_Away, Algebra.Smooth.mk, Algebra.smooth_iff, Algebra.Smooth.of_equiv, Algebra.Smooth.comp",
+   "verdict": "Ingredients only; no theorem for this explicit quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*smooth|smooth.*localization|annihilator.*flat|flat.*annihilator",
+   "date": "2026-10-12",
+   "results": "Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Unramified/LocalStructure.lean",
+   "verdict": "Ingredients only; no theorem for this explicit quotient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PopescuLiftSmooth",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-popescu-lift-smooth",
+   "place": "strict component split of the parent proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.PopescuLiftSmoothAway",
+  "file": "lean/Sheaf/RingTheory/PopescuLiftSmoothAway.lean",
+  "declaration": "Algebra.popescu_lift_smooth_away",
+  "statement": "theorem popescu_lift_smooth_away (R : Type a) (Cbar : Type c)\n    [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)\n    [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]\n    (d : PopescuLiftPresentation R Cbar π) (hd : d.Prepared) :\n    Smooth R (Localization.Away (algebraMap R d.liftingAlgebra π))",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T203940-L-829636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T203940-L-829636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

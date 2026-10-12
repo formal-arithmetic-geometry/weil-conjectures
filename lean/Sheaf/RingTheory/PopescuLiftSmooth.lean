@@ -6,13 +6,8 @@ Authors: SHEAF group T2
 module
 
 public import Sheaf.RingTheory.PopescuLiftPresentation
-import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
-import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
-import Sheaf.RingTheory.EquationCountFibreDimensionFlat
-import Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
-import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
-import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
-import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.PopescuLiftSmoothAway
+import Sheaf.RingTheory.PopescuLiftSmoothSpecial
 
 /-! # Smoothness of the explicit Popescu quotient
 
@@ -87,6 +82,10 @@ theorem popescu_lift_smooth (R : Type a) (Cbar : Type c)
       @IsSmoothAtPrime (Cbar ⧸ Ideal.span ({algebraMap R Cbar π} : Set Cbar))
         (d.liftingAlgebra ⧸
           Ideal.span ({algebraMap R d.liftingAlgebra π} : Set d.liftingAlgebra))
-        _ _ cmod.toAlgebra q) := by sorry
+        _ _ cmod.toAlgebra q) := by
+  refine ⟨?_, popescu_lift_smooth_special R Cbar π d hd hAnnR c cmod hc hcmod⟩
+  intro q hq
+  exact ⟨algebraMap R d.liftingAlgebra π, hq,
+    popescu_lift_smooth_away R Cbar π d hd⟩
 
 end Algebra
