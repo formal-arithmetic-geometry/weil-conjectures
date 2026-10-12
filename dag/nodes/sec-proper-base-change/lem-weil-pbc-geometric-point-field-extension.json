@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-geometric-point-field-extension",
+ "kind": "statement",
+ "title": "Extension of separably closed geometric point fields",
+ "statement": "Let S be a scheme [def-pc-scheme], k and l separably closed fields [def-pc-separably-closed], s:Spec k -> S a point [def-weil-geometric-point], and a:Spec l -> Spec k any morphism. For an abelian etale sheaf F [def-weil-pbc-abelian-etale-sheaves], precomposition of pointed etale lifts U by a induces a canonical map F_s -> F_(a s) of geometric stalks [def-weil-pbc-geometric-stalks]. This map is an isomorphism, natural in F. There is no algebraicity assumption on l/k.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Tag 03PN, Remark 59.29.8 (remark-morphism-geometric-points), geometric-field enlargement; proof using Mathlib etale lifting and flat epimorphisms. Online Stacks text read by Y2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-separably-closed",
+  "def-weil-geometric-point",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "For an etale neighbourhood U, precomposition gives a natural map on pointed lifts. Its injectivity follows by cancellation of the faithfully flat, surjective field-spectrum map. For surjectivity base change U along s, lift the identity of Spec k through the underlying point of the given Spec l lift, using etale lifting over a separably closed field. This section of the etale projection is an open immersion. The Spec l lift factors through its open image, since it has the same unique underlying point. Composing the factorization with the projection proves that it is a, so the section gives the required pointed lift over k. Each component of the natural transformation is thus bijective; the associated isomorphism of points induces an isomorphism on sheaf fibres. This proof is written and checked in Lean from Mathlib and the source library.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker Y2",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Stacks Project, Tag 03PN, Remark 59.29.8 (remark-morphism-geometric-points), geometric-field enlargement; proof using Mathlib etale lifting and flat epimorphisms. Canonical-map formulation written by an agent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of derived base change exchange to a commutative cube compatible stalk maps strict henselization",
+   "results": "8 hits; RingHom.IsStableUnderBaseChange.pullback_fst_appTop, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange, AlgebraicGeometry.of_pullback_fst_Spec_of_codescendsAlong, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "c81f8b5804217d05"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|pointSmallEtale.*[Ee]xtension|stalk.*[Ee]xtension",
+   "results": "0 hits; ; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"Iso\"",
+   "results": "12 hits; CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso, CategoryTheory.GrothendieckTopology.Point.sheafToPresheafCompPresheafFiberIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso, CategoryTheory.GrothendieckTopology.Point.presheafFiberCompIso, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberCompIso_hom_app, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_presheafFiberCompIso_hom_app_assoc, CategoryTheory.GrothendieckTopology.Point.shrinkYonedaCompPresheafFiberIso_inv_app_toPresheafFiber, CategoryTheory.GrothendieckTopology.Point.sheafFiberCompIso_hom_app; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match",
+   "digest": "6ed54e2659cbe196"
+  },
+  {
+   "tool": "leansearch",
+   "query": "precomposing geometric point by an extension of separably closed fields induces an isomorphism on etale stalks",
+   "results": "0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselizationAbelianStalkExchangeLocalization",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "Original stalk restriction to total strict-local spaces, before the closed-fibre calculation; Extension of separably closed geometric point fields",
+   "via": [
+    "lem-weil-pbc-abelian-stalk-exchange-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GeometricPointFieldExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricPointFieldExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_pointSmallEtalePrecomp_sheafFiber",
+  "statement": "theorem isIso_pointSmallEtalePrecomp_sheafFiber {S : Scheme.{u}} {k l : Type u} [Field k] [IsSepClosed k] [Field l] [IsSepClosed l] (s : Spec (.of k) ⟶ S) (a : Spec (.of l) ⟶ Spec (.of k)) (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) : IsIso ((pointSmallEtalePrecomp s a).sheafFiber.app F)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T110326-L-625176",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T110326-L-625176",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

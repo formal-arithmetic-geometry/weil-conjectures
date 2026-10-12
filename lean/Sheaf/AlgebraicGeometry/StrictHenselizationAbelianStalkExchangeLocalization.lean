@@ -8,13 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.BaseChange.Square
+
+import Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsos
+import Sheaf.AlgebraicGeometry.GeometricPointFieldExtension
 
 /-! # Localization of an abelian stalk exchange to strict henselian bases
 
@@ -130,6 +128,80 @@ theorem Etale.exists_addEquiv_strictHenselization_abelian_stalkExchange
         (t₀.sheafFiber (A := AddCommGrpCat.{u + 1})).obj L₂),
       ∀ x, c₂ ((((pointSmallEtale τ).sheafFiber
           (A := AddCommGrpCat.{u + 1})).map e).hom x) =
-        ((t₀.sheafFiber (A := AddCommGrpCat.{u + 1})).map e₀).hom (c₁ x) := by sorry
+        ((t₀.sheafFiber (A := AddCommGrpCat.{u + 1})).map e₀).hom (c₁ x) := by
+  classical
+  let jA := eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)
+  let jB := eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ)
+  let g₀ := Spec.map (CommRingCat.ofHom φ)
+  have h : jB ≫ g = g₀ ≫ jA := by
+    simpa only [jB, g₀, jA, Category.assoc] using hφ.symm
+  have hp : (p₁ ≫ p₀) ≫ f = (f₁ ≫ jB) ≫ g := by
+    calc
+      (p₁ ≫ p₀) ≫ f = p₁ ≫ f₀ ≫ jA := by rw [Category.assoc, sq₀.w]
+      _ = f₁ ≫ g₀ ≫ jA := by rw [← Category.assoc, sq₁.w, Category.assoc]
+      _ = (f₁ ≫ jB) ≫ g := by
+        simpa only [Category.assoc] using congrArg (fun z ↦ f₁ ≫ z) h.symm
+  let b := sq.lift (p₁ ≫ p₀) (f₁ ≫ jB) hp
+  have hb : b ≫ g' = p₁ ≫ p₀ := sq.lift_fst _ _ _
+  have hb' : b ≫ f' = f₁ ≫ jB := sq.lift_snd _ _ _
+  have outer : IsPullback (b ≫ g') f₁ f (jB ≫ g) := by
+    rw [hb, h]
+    exact sq₁.paste_horiz sq₀
+  have sqB : IsPullback b f₁ f' jB := outer.of_right hb' sq
+  let t := ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))
+  have ht : t ≫ jB = τ := by simpa only [t, jB, Category.assoc] using hρB
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G
+  let K₀ := (DerivedCategory.Plus.singleFunctor _ 0).obj
+    (((p₀)^*[AddCommGrpCat.{u + 1}]).obj G)
+  let M₁ := (R+((f)_*[AddCommGrpCat.{u + 1}]) ⋙
+    D+((g)^*[AddCommGrpCat.{u + 1}])).obj K
+  let M₂ := (D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙
+    R+((f')_*[AddCommGrpCat.{u + 1}])).obj K
+  let N₁ := (R+((f₀)_*[AddCommGrpCat.{u + 1}]) ⋙
+    D+((g₀)^*[AddCommGrpCat.{u + 1}])).obj K₀
+  let N₂ := (D+((p₁)^*[AddCommGrpCat.{u + 1}]) ⋙
+    R+((f₁)_*[AddCommGrpCat.{u + 1}])).obj K₀
+  let r₁ := derivedStalkComparison jB t τ ht M₁ N₁
+    (exchangeCubeSourceComparison sq₀.toCommSq h G) (q : ℤ)
+  let r₂ := derivedStalkComparison jB t τ ht M₂ N₂
+    (exchangeCubeTargetComparison sqB.toCommSq hb G) (q : ℤ)
+  have hiso := isIso_strictHenselization_exchangeCube_stalkComparisons
+    sq σ τ ι hι ν eA eB φ ρA ρB hφ hρA hρB hρ p₀ f₀ sq₀ p₁ f₁ sq₁ b sqB hb G q
+  change IsIso r₁ ∧ IsIso r₂ at hiso
+  have : IsIso r₁ := hiso.1
+  have : IsIso r₂ := hiso.2
+  let L₁ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj N₁
+  let L₂ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj N₂
+  let t₀ := pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))
+  let a₁ := (pointSmallEtalePrecomp
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) ρB).sheafFiber.app L₁
+  let a₂ := (pointSmallEtalePrecomp
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) ρB).sheafFiber.app L₂
+  have : IsIso a₁ := isIso_pointSmallEtalePrecomp_sheafFiber _ _ L₁
+  have : IsIso a₂ := isIso_pointSmallEtalePrecomp_sheafFiber _ _ L₂
+  let d₁ := r₁ ≫ inv a₁
+  let d₂ := r₂ ≫ inv a₂
+  let E := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+    ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)
+  let E₀ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+    ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq₁.toCommSq).app K₀)
+  have hc : r₁ ≫ (pointSmallEtale t).sheafFiber.map E₀ =
+      (pointSmallEtale τ).sheafFiber.map E ≫ r₂ :=
+    exchangeCube_stalk_square sq.toCommSq sq₀.toCommSq sq₁.toCommSq sqB.toCommSq
+      h hb t τ ht G (q : ℤ)
+  have hn : t₀.sheafFiber.map E₀ ≫ a₂ =
+      a₁ ≫ (pointSmallEtale t).sheafFiber.map E₀ :=
+    (pointSmallEtalePrecomp
+      (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) ρB).sheafFiber.naturality E₀
+  have hd : d₁ ≫ t₀.sheafFiber.map E₀ = (pointSmallEtale τ).sheafFiber.map E ≫ d₂ := by
+    apply (cancel_mono a₂).mp
+    dsimp only [d₁, d₂]
+    simp only [Category.assoc, hn, IsIso.inv_hom_id, Category.comp_id]
+    rw [IsIso.inv_hom_id_assoc, hc]
+  refine ⟨(asIso d₁).addCommGroupIsoToAddEquiv,
+    (asIso d₂).addCommGroupIsoToAddEquiv, ?_⟩
+  intro x
+  exact congrArg (fun m ↦ m.hom x) hd.symm
+
 
 end AlgebraicGeometry
