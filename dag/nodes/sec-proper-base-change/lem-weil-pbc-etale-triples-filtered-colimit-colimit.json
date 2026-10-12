@@ -12,14 +12,14 @@
  ],
  "proof": [
   {
-   "text": "Use essential smallness of affine etale schemes over Spec R. For each representative its primes and residue embeddings in K form a small set; transporting these along affine isomorphisms yields a small full category of triples equivalent to the original category.",
+   "text": "Send a triple to its canonical arrow B to K from the opposite affine etale category over Spec R. The functor is fully faithful: its inverse on morphisms takes the underlying ring map, recovers R-compatibility by injectivity of Spec.map, and uses the costructured-arrow equation for K-compatibility. Mathlib CostructuredArrow.essentiallySmall and essentiallySmall_of_fully_faithful now give essential smallness of triples.",
    "uses": [
     "lem-weil-pbc-affine-etale-essentially-small-cover"
    ],
    "elementary": false
   },
   {
-   "text": "Mathlib CommRingCat.hasColimits_commRingCat supplies the colimit of the restricted small ring diagram; hasColimit_of_equivalence_comp transports the colimit to the full category.",
+   "text": "Apply HasColimitsOfShape.of_essentiallySmall to the triples category and CommRingCat.hasColimits_commRingCat to get the colimit cocone and its universal property. The local-smallness instance is inferred for the induced under-over category.",
    "uses": [],
    "elementary": true
   },
@@ -37,7 +37,7 @@
  "proof_deps": [
   "lem-weil-pbc-affine-etale-essentially-small-cover"
  ],
- "proof_origin": "Stacks Tag 04GW; smallness and ordinary small ring colimits from Mathlib, then identity-triple naturality and the colimit universal property. Expanded by the C2 second reader.",
+ "proof_origin": "Stacks Tag 04GW; Mathlib affine etale essential smallness, costructured-arrow essential smallness, and ring colimits. M2 formalizes the fully faithful embedding of triples into pointed affine etale rings, then constructs rho by identity-triple naturality and psi by descent of the K-valued cocone.",
  "status": "split",
  "created": {
   "by": "worker",
@@ -116,10 +116,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C2",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T060733-L-2905295",
-  "kind": "interface",
+  "landing": "20261012T070544-L-3474267",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
