@@ -1,0 +1,109 @@
+{
+ "id": "def-weil-pbc-formal-functions-local-comparison",
+ "kind": "definition",
+ "title": "Local-base-change cohomology and canonical germ comparison",
+ "statement": "Let f:X→Y be a scheme morphism, y∈Y, F an O_X-module and p≥0 [def-pc-fibre-product, def-pc-module-pullback, pqf-def-cohomology, def-weil-pbc-module-stalk]. Put A=O_(Y,y), X′=Spec(A)×_Y X, g′:X′→X and f′:X′→Spec(A). Define H=H^p(X′,g′*F) with A-action through Gamma-Spec and f′.appTop. For an A-linear map a:(R^p f_*F)_y→H, define IsFormalFunctionsLocalComparison by the following formula for every resolution I of F, resolution K of g′*F, neighbourhood V of y, open comparison choices D [def-weil-pbc-flat-base-change-open-choices] and class xi on f^{-1}V. Restriction to W=g′^{-1}(f^{-1}V) of a applied to the germ of the resolutionSectionClass of xi is moduleCohomologyFMap of the restricted g′-map D.psi applied to xi [def-weil-pbc-module-cohomology-fmap]. All class maps and restriction units are the canonical ones in the Lean formula.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02OD (lemma-formal-functions-stalk), proof before the final application of Theorem 02OC, coherent.tex lines 5759-5798; Tag 02KH (lemma-flat-base-change-cohomology), Tag 01E4 and Tag 089W. The omitted identifications and transition compatibilities are expanded in steps 1-7 of lem-weil-pbc-formal-functions-stalk."
+ },
+ "stmt_deps": [
+  "def-nagata-extended-ideal",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-coherent-formal-module",
+  "def-weil-pbc-formal-fibre-cohomology",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-module-stalk",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-higher-direct-image-presheaf",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-flat-base-change-open-choices"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct image stalk cohomology over local base change and cohomology of infinitesimal fibres",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image stalk cohomology over spectrum of local ring flat base change and infinitesimal fibres",
+   "results": "Flat.stalkMap, StructureSheaf.toPushforwardStalk_comp, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap; none identifies the derived stalk or finite quotient system. Loogle Scheme.fromSpecStalk finds the canonical map and its topological properties only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.functions|formalFunctions|infinitesimal.fibre|higher.*direct.*image.*stalk in Mathlib/AlgebraicGeometry; local stalk comparison and finite quotient cohomology in blueprint_refs.py",
+   "results": "No Mathlib or blueprint match for these comparisons. Existing DAG has the unsplit combined dictionary only.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFunctionsLocalDictionary",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Local-base-change cohomology and canonical germ comparison in the geometric reduction of the formal-functions input to henselian idempotent lifting.",
+   "via": [
+    "lem-weil-pbc-formal-functions-local-dictionary",
+    "lem-weil-pbc-formal-functions-stalk",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFunctionsLocalStalkComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFunctionsLocalStalkComparison.lean",
+  "declaration": "AlgebraicGeometry.IsFormalFunctionsLocalComparison",
+  "statement": "def IsFormalFunctionsLocalComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (y : Y)\n    (F : X.Modules) (p : ℕ)\n    (a : formalFunctionsStalk f y F p →ₗ[Y.presheaf.stalk y]\n      formalFunctionsLocalCohomology f y F p) : Prop",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T173841-L-3299965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T173841-L-3299965",
+  "kind": "interface"
+ }
+}
