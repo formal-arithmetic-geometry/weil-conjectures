@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-stein-fibre-idempotent-image-noetherian",
+ "kind": "statement",
+ "title": "Proper fibre idempotent image over a locally Noetherian base",
+ "statement": "Let f:X→S be a proper morphism of schemes [def-weil-proper-morphism], S locally Noetherian [pqf-def-locnoeth], and s∈S. For each idempotent e in Γ(X_s,O) on its scheme-theoretic fibre [def-pc-scheme-fibre], there is an open neighbourhood U of s and t∈Γ(f⁻¹U,O_X) whose pullback along X_s→X is e.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Noetherian part of Tag 0G7X, Steps 1--4"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-scheme-fibre"
+ ],
+ "proof": [
+  {
+   "text": "(Noetherian case, setup.) In Steps 1-4 assume moreover that $S$ is locally Noetherian [pqf-def-locnoeth]. Put $A=\\mathcal O_{S,s}$, $\\mathfrak m=\\mathfrak m_s$, $M=(f_*\\mathcal O_X)_s$ (an $A$-module) and, for $n\\ge1$, $A_n=A/\\mathfrak m^n$, $X_n=\\operatorname{Spec}A_n\\times_SX$, so that $X_1=\\operatorname{Spec}\\kappa(s)\\times_SX$ is the fibre $X_s$ [def-pc-scheme-fibre] (up to the symmetry of the fibre product). By the definition of locally Noetherian, $s$ lies in an affine open $\\operatorname{Spec}B\\subseteq S$ with $B$ Noetherian; $A=B_{\\mathfrak p}$ for the prime $\\mathfrak p$ of $s$, so $A$ is a Noetherian local ring [lem-weil-pbc-localization-noetherian] and $\\mathfrak m$ is finitely generated.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, second paragraph ('Assume S is Noetherian'), lines 8128-8132"
+   }
+  },
+  {
+   "text": "(Lifting $e$ to the infinitesimal neighbourhoods.) For $n\\ge1$, $X_1=X_n\\times_{\\operatorname{Spec}A_n}\\operatorname{Spec}(A_n/\\mathfrak mA_n)$ (associativity of fibre products, $A_n/\\mathfrak mA_n=\\kappa(s)$), and the ideal $J=\\mathfrak m/\\mathfrak m^n$ of $A_n$ satisfies $J^n=0$. Hence the restriction $\\Gamma(X_n,\\mathcal O_{X_n})\\to\\Gamma(X_1,\\mathcal O_{X_1})$ along the closed immersion $X_1\\to X_n$ is a bijection on idempotents [lem-weil-pbc-base-change-nilpotent-thickening-idempotents] (this is the statement that $X_n$ and $X_s$ have the same underlying space, so the decomposition $X_s=T_1\\amalg T_2$ given by $e$ lifts to $X_n$). Let $e_n\\in\\Gamma(X_n,\\mathcal O_{X_n})$ be the unique idempotent restricting to $e$. For $n\\le n'$ the restriction of $e_{n'}$ to $X_n$ is an idempotent whose restriction to $X_1$ is $e$ (the composite $X_1\\to X_n\\to X_{n'}$ is the closed immersion $X_1\\to X_{n'}$), so it equals $e_n$ by uniqueness. Thus $(e_n)_n\\in\\varprojlim_n H^0(X_n,\\mathcal O_{X_n})$, with first component $e_1=e$.",
+   "uses": [
+    "lem-weil-pbc-base-change-nilpotent-thickening-idempotents"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, lines 8133-8146 ('Since the underlying topological space of X_n is equal to that of X_s ... e_{n+1} restricts to e_n on X_n')"
+   }
+  },
+  {
+   "text": "(Formal functions.) By the theorem on formal functions at $s$ [lem-weil-pbc-formal-functions-stalk] with $p=0$ and $\\mathcal F=\\mathcal O_X$ ($f$ proper, $S$ locally Noetherian, $\\mathcal O_X$ coherent), the maps $\\theta_n:M\\to H^0(X_n,\\mathcal O_{X_n})$ (pull back a germ of a section of $\\mathcal O_X$ over $f^{-1}(V)$ to $X_n$) induce an $A$-linear isomorphism $\\theta:M^\\wedge\\to\\varprojlim_nH^0(X_n,\\mathcal O_{X_n})$, $M^\\wedge=\\varprojlim_nM/\\mathfrak m^nM$, with $\\theta\\circ\\iota=(\\theta_n)_n$ for the canonical map $\\iota:M\\to M^\\wedge$. Note that $\\theta_1:M\\to H^0(X_1,\\mathcal O_{X_1})=H^0(X_s,\\mathcal O_{X_s})$ is the map of the statement. Put $e_\\infty=\\theta^{-1}((e_n)_n)\\in M^\\wedge$; its image under the first component of $\\theta$ is $e$.",
+   "uses": [
+    "lem-weil-pbc-formal-functions-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, lines 8132-8149, citing Cohomology of Schemes, Lemma 02OD (coherent-lemma-formal-functions-stalk)"
+   }
+  },
+  {
+   "text": "(Descending from the completion.) Since $\\mathfrak m$ is finitely generated, the projection $p_1:M^\\wedge\\to M/\\mathfrak mM$ is surjective with kernel $\\mathfrak mM^\\wedge$, and $p_1\\circ\\iota$ is the quotient map $M\\to M/\\mathfrak mM$ [lem-weil-pbc-module-completion-complete] (part (2), $n=1$; this is Algebra 05GG, $M^\\wedge/\\mathfrak mM^\\wedge=M/\\mathfrak mM$). Choose $x\\in M$ with $p_1(\\iota(x))=p_1(e_\\infty)$; then $\\iota(x)-e_\\infty\\in\\mathfrak mM^\\wedge$, so, $\\theta$ being $A$-linear, $\\theta(\\iota(x))-(e_n)_n\\in\\mathfrak m\\cdot\\varprojlim_nH^0(X_n,\\mathcal O_{X_n})$. Its first component lies in $\\mathfrak m\\,H^0(X_1,\\mathcal O_{X_1})=0$, since $A$ acts on $H^0(X_1,\\mathcal O_{X_1})$ through $A\\to\\kappa(s)$ ($X_1$ is a scheme over $\\operatorname{Spec}\\kappa(s)$). Hence $\\theta_1(x)=e_1=e$, i.e. $e$ is in the image of $(f_*\\mathcal O_X)_s\\to H^0(X_s,\\mathcal O_{X_s})$. This proves the lemma when $S$ is locally Noetherian.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-formal-functions-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, lines 8150-8157, citing Algebra, Lemma 05GG (algebra-lemma-hathat-finitely-generated)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+  "lem-weil-pbc-formal-functions-stalk",
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Noetherian part of Tag 0G7X, Steps 1--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper fibre idempotent image over a locally Noetherian base",
+   "results": "Service unavailable: Internal Server Error. Search attempted through msearch.py; no absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper fibre idempotent image over a locally Noetherian base",
+   "results": "Generic affine-transition-limit section descent or pushforward-stalk lemmas, but none bundles this proper-fibre assertion. Also searched all blueprint nodes for idempotent; no matching existing blueprint statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*(stalk|fiber)|Noetherian.*idempotent in Mathlib and lean/WeilConjectures; DAG proper fibre idempotent",
+   "results": "No exact theorem; existing proper-fibre image node is the parent and its general case is not a descent-only assertion. Generic formal functions and affine-transition-limit declarations are the stated dependencies.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFibreIdempotentImage",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Noetherian part of Tag 0G7X, Steps 1--4 of the proper-fibre image lemma used in step 2 of henselian idempotent lifting",
+   "via": [
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFibreIdempotentImageNoetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFibreIdempotentImageNoetherian.lean",
+  "declaration": "AlgebraicGeometry.proper_fibre_idempotent_image_noetherian",
+  "statement": "theorem proper_fibre_idempotent_image_noetherian {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [IsLocallyNoetherian S] (s : S) (e : Γ(f.fiber s, ⊤)) (he : IsIdempotentElem e) : ∃ (U : S.Opens), s ∈ U ∧ ∃ (h : (⊤ : (f.fiber s).Opens) ≤ (f.fiberι s) ⁻¹ᵁ (f ⁻¹ᵁ U)) (t : Γ(X, f ⁻¹ᵁ U)), (f.fiberι s).appLE (f ⁻¹ᵁ U) ⊤ h t = e",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T144135-L-2103938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T144135-L-2103938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "id": "lem-weil-pbc-stein-fibre-idempotent-descent",
+ "kind": "statement",
+ "title": "Descent of a proper fibre idempotent to a Noetherian model",
+ "statement": "Let f:X→S be a proper morphism of schemes [def-weil-proper-morphism], s∈S, and e an idempotent in Γ(X_s,O), where X_s is its scheme-theoretic fibre [def-pc-scheme-fibre]. There exist an open neighbourhood W of s, schemes Y,T, a proper morphism g:Y→T with T locally Noetherian [pqf-def-locnoeth], p:f⁻¹W→Y, r:W→T, a:X_s→f⁻¹W, q:X_s→Y_{r(s)}, and an idempotent e₀∈Γ(Y_{r(s)},O), such that pg=(f|W)r, a followed by the open inclusion is the fibre embedding, q followed by the model fibre embedding is ap, and q*(e₀)=e. The restriction f|W is as in [def-weil-pbc-scheme-conventions].",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "(General case: reduction to $S$ affine.) Let $V\\subseteq S$ be an affine open neighbourhood of $s$ and $f_V:f^{-1}(V)\\to V$ the restriction, the base change of $f$ along the open immersion $V\\to S$, hence proper [lem-weil-pbc-proper-base-change]. The stalk $(f_*\\mathcal O_X)_s$ is the colimit of $\\mathcal O_X(f^{-1}(W))$ over open $W\\ni s$, which may be taken inside $V$, so it equals $(f_{V,*}\\mathcal O_{f^{-1}(V)})_s$; and $\\operatorname{Spec}\\kappa(s)\\to S$ factors through $V$, so $X_s=f^{-1}(V)\\times_V\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre], compatibly with the maps to $H^0(X_s,\\mathcal O_{X_s})$. Hence we may replace $f$ by $f_V$ and assume $S=\\operatorname{Spec}R$ affine.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, third paragraph, line 8163 ('We may replace S by an affine open neighbourhood of s')"
+   }
+  },
+  {
+   "text": "(Noetherian approximation.) As $S$ is affine, by [lem-weil-pbc-proper-limit-noetherian] (Limits 0A0P, affine clause) there are a directed set $\\Lambda$ and an inverse system of proper morphisms $f_\\lambda:X_\\lambda\\to S_\\lambda=\\operatorname{Spec}A_\\lambda$ with affine transition morphisms, $A_\\lambda$ a finitely generated $\\mathbf Z$-algebra, such that $X=\\varprojlim X_\\lambda$, $S=\\varprojlim S_\\lambda$ and $f=\\varprojlim f_\\lambda$. Each $A_\\lambda$ is a Noetherian ring [lem-weil-pbc-finite-type-algebra-noetherian] (applied to $\\mathbf Z\\to A_\\lambda$, $\\mathbf Z$ being a principal ideal domain, hence Noetherian), so each $S_\\lambda$ is locally Noetherian [pqf-def-locnoeth] (covered by the single affine open $S_\\lambda$).",
+   "uses": [
+    "lem-weil-pbc-proper-limit-noetherian",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, lines 8165-8168, citing Limits, Lemma 0A0P (limits-lemma-proper-limit-of-proper-finite-presentation-noetherian)"
+   }
+  },
+  {
+   "text": "(The fibre as a limit.) Let $s_\\lambda\\in S_\\lambda$ be the image of $s$. Then $\\operatorname{Spec}\\kappa(s)=\\varprojlim_\\lambda\\operatorname{Spec}\\kappa(s_\\lambda)$ over the $S_\\lambda$ [lem-weil-pbc-limit-residue-field] (Limits 0CUG, $s=\\lim s_\\lambda$), and therefore the fibres $X_{\\lambda,s_\\lambda}=X_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}\\kappa(s_\\lambda)$ form an inverse system with affine transition morphisms whose limit is $X_s$, with projections the induced morphisms $q_\\lambda:X_s\\to X_{\\lambda,s_\\lambda}$ [lem-weil-pbc-limit-fibre-products] (limits commute with limits, Categories 002M). Each $X_{\\lambda,s_\\lambda}$ is proper over $\\operatorname{Spec}\\kappa(s_\\lambda)$ [lem-weil-pbc-proper-base-change], hence quasi-compact and separated, the base being affine [pqf-lem-proper-basic], hence quasi-compact and quasi-separated (a closed immersion is quasi-compact, so a separated morphism is quasi-separated).",
+   "uses": [
+    "lem-weil-pbc-limit-residue-field",
+    "lem-weil-pbc-limit-fibre-products",
+    "lem-weil-pbc-proper-base-change",
+    "pqf-lem-proper-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, lines 8168-8172, citing Limits, Lemma 0CUG (limits-lemma-inverse-limit-irreducibles) and Categories, Lemma 002M (categories-lemma-colimits-commute)"
+   }
+  },
+  {
+   "text": "(Descending the idempotent.) By [lem-weil-pbc-limit-global-sections-colimit] (Limits 01Z0 for the structure sheaf), applied to the system $(X_{\\lambda,s_\\lambda})_\\lambda$, $\\Gamma(X_s,\\mathcal O_{X_s})=\\varinjlim_\\lambda\\Gamma(X_{\\lambda,s_\\lambda},\\mathcal O)$ via the $q_\\lambda^\\sharp$. So $e=q_\\lambda^\\sharp(a)$ for some $\\lambda$ and $a\\in\\Gamma(X_{\\lambda,s_\\lambda},\\mathcal O)$. Then $q_\\lambda^\\sharp(a^2-a)=e^2-e=0$, so $a^2-a$ restricts to $0$ on $X_{\\mu,s_\\mu}$ for some $\\mu\\ge\\lambda$; the restriction $e_\\mu$ of $a$ to $X_{\\mu,s_\\mu}$ is an idempotent with $q_\\mu^\\sharp(e_\\mu)=e$ (the $q$'s are compatible with the transition morphisms).",
+   "uses": [
+    "lem-weil-pbc-limit-global-sections-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "proof of Lemma 0G7X, lines 8172-8174, citing Limits, Lemma 01Z0 (limits-lemma-descend-section)"
+   }
+  },
+  {
+   "text": "Take Y=X_μ, T=S_μ, g=f_μ and e₀=e_μ. Take p and r to be the limit projections on the chosen affine restriction W. The original fibre factors uniquely through f⁻¹W since its base image is s∈W; this defines a. The induced fibre projection is q. Its compatibility with the fibre embeddings gives q followed by g.fiberι = a followed by p, and the descended section has q*(e₀)=e.",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0G7X, general case, construction of the model and its projections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-base-change",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-proper-limit-noetherian",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-limit-residue-field",
+  "lem-weil-pbc-limit-fibre-products",
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-limit-global-sections-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Descent of a proper fibre idempotent to a Noetherian model",
+   "results": "Service unavailable: Internal Server Error. Search attempted through msearch.py; no absence verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of a proper fibre idempotent to a Noetherian model",
+   "results": "Generic affine-transition-limit section descent or pushforward-stalk lemmas, but none bundles this proper-fibre assertion. Also searched all blueprint nodes for idempotent; no matching existing blueprint statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*(stalk|fiber)|Noetherian.*idempotent in Mathlib and lean/WeilConjectures; DAG proper fibre idempotent",
+   "results": "No exact theorem; existing proper-fibre image node is the parent and its general case is not a descent-only assertion. Generic formal functions and affine-transition-limit declarations are the stated dependencies.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperFibreIdempotentImage",
+  "date": "2026-10-12",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "General case of Tag 0G7X, Steps 5--8 before applying the Noetherian case of the proper-fibre image lemma used in step 2 of henselian idempotent lifting",
+   "via": [
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperFibreIdempotentDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFibreIdempotentDescent.lean",
+  "declaration": "AlgebraicGeometry.proper_fibre_idempotent_descent",
+  "statement": "theorem proper_fibre_idempotent_descent {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S) (e : Γ(f.fiber s, ⊤)) (he : IsIdempotentElem e) : ∃ (W : S.Opens) (hs : s ∈ W) (Y T : Scheme.{u}) (g : Y ⟶ T) (_ : IsProper g) (_ : IsLocallyNoetherian T) (p : (f ⁻¹ᵁ W).toScheme ⟶ Y) (r : W.toScheme ⟶ T) (a : f.fiber s ⟶ (f ⁻¹ᵁ W).toScheme) (q : f.fiber s ⟶ g.fiber (r ⟨s, hs⟩)) (e₀ : Γ(g.fiber (r ⟨s, hs⟩), ⊤)), p ≫ g = (f ∣_ W) ≫ r ∧ a ≫ (f ⁻¹ᵁ W).ι = f.fiberι s ∧ q ≫ g.fiberι (r ⟨s, hs⟩) = a ≫ p ∧ IsIdempotentElem e₀ ∧ q.appTop e₀ = e",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T144135-L-2103938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T144135-L-2103938",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
