@@ -31,46 +31,35 @@
  ],
  "proof": [
   {
-   "text": "Let $G\\subset F$, with $F$ constructible. For a constant finite module sheaf\n$\\underline M$ on an irreducible scheme $W$, and a subsheaf\n$H\\subset\\underline M$, put\n$$\n W_m=\\{w:\\ m\\text{ belongs to }H_{\\bar w}\\subset M\\}\n \\qquad(m\\in M).\n$$\nThis is independent of the choice of geometric point above $w$. It is open.\nIndeed, membership is represented by a section of $H$ on an etale\nneighbourhood whose image in $\\underline M$, after refinement, is the\nconstant section $m$. Its image in $W$ is open because a flat, locally\nfinitely presented morphism is open. Such images cover exactly $W_m$. The\nlocal lifts of $m$ glue uniquely, because $H\\to\\underline M$ is injective.",
+   "text": "Use isConstructibleEtaleModuleSheaf_iff to convert the finite constant-value constructibility hypothesis on F to the existing IsConstructibleSheaf predicate.",
    "uses": [
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-constant-subsheaf-generic"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Every nonempty $W_m$ contains the generic point of $W$. The finite\nintersection $W^\\circ$ of the nonempty $W_m$'s is therefore nonempty and\nopen. On it membership in $H$ is the fixed submodule\n$M'=H_{\\bar\\eta}\\subset M$. The glued sections give\n$\\underline{M'}\\to H|_{W^\\circ}$, and this is an isomorphism on all stalks,\nhence an isomorphism by conservativity of geometric stalks.",
+   "text": "A finite commutative ring is Noetherian (the Mathlib finite-module Noetherian instance). Apply constructible_of_mono_noetherian to the given monomorphism G -> F. Its generic-constancy and closed-subscheme Noetherian-induction proof gives IsConstructibleSheaf G.",
    "uses": [
-    "lem-weil-pbc-constant-subsheaf-generic",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-weil-pbc-constructible-module-subobject-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "We now use Noetherian induction on closed subsets of $T$. Pullback to any\nsuch subset preserves the injection, by exactness of geometric stalks, and\npreserves the finite partition defining constructibility. Reducible closed\nsubsets are handled by their finitely many components, using the\nfinitely-many-components lemma for Noetherian schemes and removing the\npreceding components from each partition. For a reduced irreducible closed\nsubset, choose a nonempty open on which $F$ is lisse (the stratum of the irreducible lisse partition containing the generic point; a locally closed set containing the generic point is open), and an etale\ntrivialization near its generic point. Removing the other irreducible\ncomponents of this Noetherian trivializing scheme gives a nonempty\nirreducible open $W$. It still dominates the chosen base open: the image of\na nonempty etale open is open and contains its generic point. The preceding\ncalculation gives $W^\\circ$ on which $G$ is constant. Its image $O$ in the\nbase is nonempty and open; $W^\\circ\\to O$ is an etale cover, so $G|_O$ is\nfinite locally constant. Induction supplies a finite lisse partition on the\nproper closed complement. Adjoin $O$ to obtain a partition of the whole\nsubset; its parts are locally closed, hence constructible since $T$ is Noetherian (Stacks, Tag 005L), as the definition requires. At $T$ this proves the assertion. This is the strong subobject\nassertion of [Stacks Project, Section\n59.74](https://stacks.math.columbia.edu/tag/03RY), with its Noetherian\nhypothesis retained.",
+   "text": "Convert the conclusion back through isConstructibleEtaleModuleSheaf_iff. The statement and all hypotheses are unchanged, including finiteness of the ring and Noetherianity of the scheme.",
    "uses": [
-    "lem-weil-pbc-irreducible-lisse-strata",
-    "lem-weil-pbc-noetherian-finite-components",
-    "lem-weil-pbc-flat-lfp-open",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-constant-subsheaf-generic"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-irreducible-lisse-strata",
-  "lem-weil-pbc-constant-subsheaf-generic",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-noetherian-finite-components",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-constructible-module-subobject-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-constructible-subobjects-noetherian.md",
-  "place": "## Proof"
+  "document": "Stacks Project, Tags 03RY, 09BH, 095E, 03RU and 09XZ",
+  "place": "Proposition 59.74.1(3), Proposition 09BH(3), and the existing constructibility comparison; specialized to a finite coefficient ring by J1"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -153,5 +142,15 @@
   "result": "pass",
   "note": "T Noetherian = [AlgebraicGeometry.IsNoetherian T] (#check-resolved); finite comm ring Λ : Type (u+1) [CommRing][Finite] as the recorded def; subsheaf = arbitrary (i : G ⟶ F) [Mono i] in Sheaf T.smallEtaleTopology (ModuleCat Λ); hypothesis and conclusion = recorded Scheme.IsConstructibleEtaleModuleSheaf; no extra hypotheses; docstring carries the 3-step proof"
  },
- "lead_note": "2026-10-11 09:34 UTC L: stmt_deps: def-weil-pbc-constructible-complexes replaced by def-weil-pbc-etale-constructible-sheaf (the statement is about constructible étale sheaves, not complexes; K1 af4acecea reviewer note). Statement unchanged."
+ "lead_note": "2026-10-11 09:34 UTC L: stmt_deps: def-weil-pbc-constructible-complexes replaced by def-weil-pbc-etale-constructible-sheaf (the statement is about constructible étale sheaves, not complexes; K1 af4acecea reviewer note). Statement unchanged.",
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T053935-L-2636904",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

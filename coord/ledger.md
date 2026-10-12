@@ -6208,3 +6208,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:39 L: merged deliver/H2/Sheaf.RingTheory.GRingMaximalIdealCriterion (stage 3; reviewer PASS; first push; landing 20261012T053935-L-2636508 (interface); batch 20261012T053916; modules 2; new nodes 1)
 - 05:39 L: merged deliver/H2/Sheaf.RingTheory.GeometricRegularitySeparableExtension (stage 3; reviewer PASS; first push; landing 20261012T053935-L-2636650 (proof); batch 20261012T053916; modules 1; new nodes 2)
 - 05:39 L: merged deliver/H2/WeilConjectures.ConstructibleSheaf.Monoidal (stage 3; reviewer PASS; first push; landing 20261012T053935-L-2636772 (interface); batch 20261012T053916; modules 2; new nodes 2)
+- 05:39 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian (stage 3; reviewer PASS; first push; landing 20261012T053935-L-2636904 (proof); batch 20261012T053916; modules 1; new nodes 0)
