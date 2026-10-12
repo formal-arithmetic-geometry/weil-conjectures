@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 
 /-!
@@ -72,25 +73,33 @@ variable {X S : Scheme.{u}} (f : X ⟶ S)
 noncomputable def freeSheafGenerator (V : S.Etale) : ((Etale.freeSheaf Λ S).obj V).obj.obj (op V) :=
   Etale.freeSheafHomEquiv Λ V _ (𝟙 _)
 
-/-- For `t : T ⟶ X` and a `T`-point `b : T ⟶ V` of an étale `S`-scheme `V` over `f`, the
-section map `T ⟶ (V ×_S X) ×_X T` over `T`. -/
-noncomputable def pullbackPullbackSectionHom {T : Scheme.{u}} (t : T ⟶ X) (V : S.Etale)
-    (b : T ⟶ V.left) (hb : b ≫ V.hom = t ≫ f) :
-    Etale.finalObject T ⟶ (MorphismProperty.Over.pullback @Etale ⊤ t).obj
-      ((MorphismProperty.Over.pullback @Etale ⊤ f).obj V) :=
-  MorphismProperty.Over.homMk (pullback.lift (pullback.lift b t hb) (𝟙 T)
-    ((pullback.lift_snd b t hb).trans (Category.id_comp t).symm)) (pullback.lift_snd _ _ _)
+/-- The generator is natural: `Λ[a]` maps the generator of `Λ[V']` to the restriction of the
+generator of `Λ[V]` along `a : V' ⟶ V`. -/
+lemma freeSheaf_map_freeSheafGenerator {V V' : S.Etale} (a : V' ⟶ V) :
+    ((Etale.freeSheaf Λ S).map a).hom.app (op V') (freeSheafGenerator Λ V') =
+      ((Etale.freeSheaf Λ S).obj V).obj.map a.op (freeSheafGenerator Λ V) := by
+  rw [freeSheafGenerator, freeSheafGenerator, ← Etale.freeSheafHomEquiv_comp,
+    ← Etale.freeSheafHomEquiv_map, Category.id_comp, Category.comp_id]
 
-/-- The canonical global section of `t^* f^* Λ[V]` attached to a `T`-point `b` of `V` over `f`:
-the generator of `Λ[V]`, pulled back along `f` and `t`, and restricted along the section
-`T ⟶ (V ×_S X) ×_X T`. -/
+/-- The canonical global section of `t^* f^* Λ[V]` attached to a `T`-point `b` of `V` over `f`
+(with `t : T ⟶ X`): the generator of `Λ[V]`, pulled back along `f`, and then pulled back along
+the morphism `T ⟶ X ×_S V` given by `b` and `t`. -/
 noncomputable def freeSheafPullbackSection {T : Scheme.{u}} (t : T ⟶ X) (V : S.Etale)
     (b : T ⟶ V.left) (hb : b ≫ V.hom = t ≫ f) :
     ((t)^*[ModuleCat.{u + 1} Λ].obj ((f)^*[ModuleCat.{u + 1} Λ].obj
       ((Etale.freeSheaf Λ S).obj V))).obj.obj (op (Etale.finalObject T)) :=
-  ((t)^*[ModuleCat.{u + 1} Λ].obj ((f)^*[ModuleCat.{u + 1} Λ].obj
-      ((Etale.freeSheaf Λ S).obj V))).obj.map (pullbackPullbackSectionHom f t V b hb).op
-    (Etale.pullbackSection Λ t _ _ (Etale.pullbackSection Λ f _ V (freeSheafGenerator Λ V)))
+  ModuleSheaf.pullSection t ((f)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ S).obj V))
+    (V := Etale.finalObject T) (U := (MorphismProperty.Over.pullback @Etale ⊤ f).obj V)
+    (pullback.lift b t hb) ((pullback.lift_snd _ _ _).trans (Category.id_comp t).symm)
+    (Etale.pullbackSection Λ f _ V (freeSheafGenerator Λ V))
+
+/-- The morphism `Λ ⟶ t^* f^* Λ[V]` corresponding to `freeSheafPullbackSection`. -/
+noncomputable def freeSheafPullbackMap {T : Scheme.{u}} (t : T ⟶ X) (V : S.Etale)
+    (b : T ⟶ V.left) (hb : b ≫ V.hom = t ≫ f) :
+    SemiSimplicialObject.constSheaf T.smallEtaleTopology Λ ⟶
+      (t)^*[ModuleCat.{u + 1} Λ].obj ((f)^*[ModuleCat.{u + 1} Λ].obj
+        ((Etale.freeSheaf Λ S).obj V)) :=
+  (constSheafHomEquiv Λ _).symm (freeSheafPullbackSection Λ f t V b hb)
 
 variable (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ)
 
@@ -103,10 +112,41 @@ noncomputable def cohomologyPresheafRestrict {T : Scheme.{u}} (t : T ⟶ X) (V :
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V) →+
       Ext (SemiSimplicialObject.constSheaf T.smallEtaleTopology Λ)
         ((t)^*[ModuleCat.{u + 1} Λ].obj F) q :=
-  ((Ext.mk₀ ((constSheafHomEquiv Λ _).symm (freeSheafPullbackSection Λ f t V b hb))).precomp
-      _ (zero_add q)).comp
-    (((t)^*[ModuleCat.{u + 1} Λ].mapExtAddHom _ _ q).comp
-      (DerivedCategory.Plus.shiftedHomAddEquivExt _ _ q).toAddMonoidHom)
+  ((t)^*[ModuleCat.{u + 1} Λ].mapExtPrecomp (freeSheafPullbackMap Λ f t V b hb) F q).comp
+    (DerivedCategory.Plus.shiftedHomAddEquivExt _ _ q).toAddMonoidHom
+
+/-- **Naturality in `V`** of `cohomologyPresheafRestrict`. -/
+lemma cohomologyPresheafRestrict_map {T : Scheme.{u}} (t : T ⟶ X) {V V' : S.Etale} (a : V' ⟶ V)
+    (b : T ⟶ V'.left) (hb : b ≫ V'.hom = t ≫ f)
+    (p : (Etale.higherDirectImagePresheaf Λ f q
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V)) :
+    cohomologyPresheafRestrict Λ f F q t V' b hb
+        ((Etale.higherDirectImagePresheaf Λ f q
+          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).map a.op p) =
+      cohomologyPresheafRestrict Λ f F q t V (b ≫ a.left)
+        (by rw [Category.assoc, MorphismProperty.Over.w a, hb]) p := by
+  have hsec : ((t)^*[ModuleCat.{u + 1} Λ].map ((f)^*[ModuleCat.{u + 1} Λ].map
+      ((Etale.freeSheaf Λ S).map a))).hom.app _ (freeSheafPullbackSection Λ f t V' b hb) =
+      freeSheafPullbackSection Λ f t V (b ≫ a.left)
+        (by rw [Category.assoc, MorphismProperty.Over.w a, hb]) := by
+    simp only [freeSheafPullbackSection]
+    rw [ModuleSheaf.pullSection_naturality, Etale.pullbackSection_naturality,
+      freeSheaf_map_freeSheafGenerator, ← Etale.pullbackSection_map,
+      ← ModuleSheaf.pullSection_comp]
+    exact ModuleSheaf.pullSection_congr _ _ _ (by apply pullback.hom_ext <;> simp) _
+  have hσ : freeSheafPullbackMap Λ f t V' b hb ≫ (t)^*[ModuleCat.{u + 1} Λ].map
+      ((f)^*[ModuleCat.{u + 1} Λ].map ((Etale.freeSheaf Λ S).map a)) =
+      freeSheafPullbackMap Λ f t V (b ≫ a.left)
+        (by rw [Category.assoc, MorphismProperty.Over.w a, hb]) := by
+    apply (constSheafHomEquiv Λ _).injective
+    rw [constSheafHomEquiv_comp, freeSheafPullbackMap, freeSheafPullbackMap,
+      Equiv.apply_symm_apply, Equiv.apply_symm_apply, hsec]
+  simp only [cohomologyPresheafRestrict, AddMonoidHom.coe_comp, Function.comp_apply,
+    AddEquiv.coe_toAddMonoidHom, Functor.mapExtPrecomp_apply]
+  erw [DerivedCategory.Plus.shiftedHomAddEquivExt_precomp]
+  rw [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀, ← Ext.comp_assoc_of_second_deg_zero,
+    Ext.mk₀_comp_mk₀]
+  exact congrArg (fun φ ↦ (Ext.mk₀ φ).comp _ (zero_add q)) hσ
 
 end Restrict
 

@@ -142,6 +142,19 @@ lemma pullSection_sub {V : T.Etale} {U : R.Etale} (φ : V.left ⟶ U.left)
   simp only [pullSection]
   rw [map_sub, map_sub]
 
+omit G in
+/-- Naturality of `φ^* g` in the sheaf. -/
+lemma pullSection_naturality {G G' : Sheaf R.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+    (α : G ⟶ G') {V : T.Etale} {U : R.Etale} (φ : V.left ⟶ U.left)
+    (hφ : φ ≫ U.hom = V.hom ≫ t) (g : G.obj.obj (op U)) :
+    ((t)^*[(ModuleCat.{u + 1} Λ)].map α).hom.app (op V) (pullSection t G φ hφ g) =
+      pullSection t G' φ hφ (α.hom.app (op U) g) := by
+  simp only [pullSection]
+  rw [NatTrans.naturality_apply]
+  congr 1
+  exact (congrArg (fun k ↦ k.hom.app (op U) g)
+    ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) t).unit.naturality α)).symm
+
 section Local
 
 /-- The colimits computing the left Kan extension along the opposite of base change are
