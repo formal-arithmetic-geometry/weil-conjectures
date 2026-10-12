@@ -8355,3 +8355,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:30 L: merged deliver/T2/Sheaf.AlgebraicGeometry.UnderivedGlobalGermExchange (stage 3; reviewer PASS; first push; landing 20261012T153012-L-2351466 (proof); batch 20261012T153007; modules 1; new nodes 0)
 - 15:30 L: merged deliver/V1/Sheaf.RingTheory.PolynomialRegularBaseFormalFibre (stage 3; reviewer PASS; first push; landing 20261012T153013-L-2351563 (interface); batch 20261012T153007; modules 2; new nodes 1)
 - 15:30 L: merged deliver/W2/Sheaf.AlgebraicGeometry.EtaleFieldPointMapLocal (stage 3; reviewer PASS; first push; landing 20261012T153013-L-2351753 (proof); batch 20261012T153007; modules 1; new nodes 0)
+- 15:30 L: merged deliver/W3/Sheaf.RingTheory.PolynomialFormalFiberGeometric (stage 3; reviewer PASS; first push; landing 20261012T153013-L-2351874 (interface); batch 20261012T153007; modules 3; new nodes 2)

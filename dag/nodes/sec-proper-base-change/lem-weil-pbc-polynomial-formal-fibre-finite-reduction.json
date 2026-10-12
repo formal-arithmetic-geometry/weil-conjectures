@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-polynomial-formal-fibre-finite-reduction",
+ "kind": "statement",
+ "title": "Finite product presentation of extended polynomial formal fibres",
+ "statement": "Let $A$ be a complete Noetherian local domain [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring] whose fraction field has prime characteristic $p$. Let $q\\subset A[X]$ be a maximal ideal contracting to the maximal ideal of $A$, and let $0\\ne r\\subseteq q$ be a prime ideal contracting to zero in $A$ [def-weil-polynomial-ring]. Let $L/\\kappa(r)$ be a finite purely inseparable field extension [def-weil-pbc-g-ring], where residue fields are those of [def-weil-pbc-localization-at-prime]. Put $C=(A[X]_q)^\\wedge$, completed at the maximal ideal [def-weil-pbc-adic-completion]. There exist $n\\ge0$, complete Noetherian local domains $B_i$ for $i\\in\\operatorname{Fin}(n)$, maximal ideals $q_i\\subset B_i[X]$ contracting to the maximal ideals of $B_i$, and nonzero prime ideals $s_i\\subseteq q_i$ contracting to zero in $B_i$, such that each canonical $B_i$-algebra $\\kappa(s_i)$ is a fraction field of $B_i$ and there is a ring isomorphism $L\\otimes_{\\kappa(r)}(\\kappa(r)\\otimes_{A[X]}C)\\cong\\prod_{i\\in\\operatorname{Fin}(n)}\\left(\\kappa(s_i)\\otimes_{B_i[X]}(B_i[X]_{q_i})^\\wedge\\right)$. All $B_i$ have the same universe as $L$. The empty product is the zero ring; no regularity assumption or conclusion occurs in this presentation.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), proof"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof": [
+  {
+   "text": "The nonzero prime r above zero becomes a maximal ideal of K[X], so κ(r)/K is finite. For each finite purely inseparable L/κ(r), clear denominators in monic equations for finitely many K-generators to construct a finite A-subalgebra B of L whose fraction field is L.",
+   "uses": [
+    "lem-weil-pbc-localization-prime-residue-field-iso",
+    "lem-weil-pbc-finite-of-integral-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "B is a domain, Noetherian, local and complete, with maximal ideal over that of A. Evaluation B[X] to L has a nonzero prime kernel s above zero; the fraction field of its image, hence its residue field, is L.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-local-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply completion-finite-extension to A[X] to B[X] at q. Tensor with L, using associativity and finite-product distributivity, to identify the extended fibre with the finite product of the fibres of the polynomial completions over B.",
+   "uses": [
+    "lem-weil-pbc-completion-finite-extension",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "lem-weil-pbc-algebra-tensor-product-distributes-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The primes q_i over q are maximal by integrality and contract to the maximal ideal of B. When s is not contained in q_i, an element of s outside q_i is invertible and zero in the fibre, making that fibre the zero ring. Remove the zero factors by restricting the product to the finite subset of q_i containing s; the inverse supplies the unique zero coordinate at removed indices. Enumerate the retained set by Fin n, using copies of B and s in each coordinate. This gives all ideal relations, fraction-field structures and the asserted ring isomorphism; the retained index set may be empty.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebra-tensor-product-distributes-product",
+  "lem-weil-pbc-completion-finite-extension",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 07PU (lemma-another-helper-G-ring), proof, first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "formal fibre polynomial completion finite extension reduction to residue field equal fraction field",
+   "results": "HTTP Internal Server Error; no results obtained.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite extension reduction of polynomial formal fibres to coefficient fraction field equal to residue field",
+   "results": "Polynomial.fiberEquivQuotient and Polynomial.residueFieldMapCAlgEquiv concern residue fields and tensor quotients, not the finite-extension reduction.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "formal.?fib|linear_formalFiber|IsGeometricallyRegular",
+   "results": "No Mathlib hits from msearch; repository searches found no existing linear-fibre presentation or finite-extension reduction theorem.",
+   "verdict": "no match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PolynomialFormalFiberGeometric",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 4–7 of the split proof of lem-weil-pbc-another-helper-g-ring (finite-extension reduction)",
+   "via": [
+    "lem-weil-pbc-another-helper-g-ring-geometric-component",
+    "lem-weil-pbc-another-helper-g-ring",
+    "lem-weil-pbc-polynomial-complete-local-formal-fibres",
+    "lem-weil-pbc-finite-type-over-g-ring",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialFormalFiberFiniteReduction",
+  "file": "lean/Sheaf/RingTheory/PolynomialFormalFiberFiniteReduction.lean",
+  "declaration": "Polynomial.formalFiber_finiteExtension_reduction",
+  "statement": "theorem formalFiber_finiteExtension_reduction (A : Type u) [CommRing A] [IsDomain A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (p : ℕ) (hp : p.Prime) [CharP (Localization.AtPrime (⊥ : Ideal A)) p] (q : Ideal (Polynomial A)) [q.IsMaximal] (hq : q.comap (Polynomial.C : A →+* Polynomial A) = IsLocalRing.maximalIdeal A) (r : Ideal (Polynomial A)) [r.IsPrime] (hrq : r ≤ q) (hr : r ≠ ⊥) (hrA : r.comap (Polynomial.C : A →+* Polynomial A) = ⊥) (L : Type u) [Field L] [Algebra r.ResidueField L] [Module.Finite r.ResidueField L] [IsPurelyInseparable r.ResidueField L] : let C := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime q)) (Localization.AtPrime q) ∃ (n : ℕ) (B : Fin n → Type u) (rings : ∀ i, CommRing (B i)), letI := rings ∃ (domains : ∀ i, IsDomain (B i)) (noeth : ∀ i, IsNoetherianRing (B i)) (locals : ∀ i, IsLocalRing (B i)), letI := domains letI := noeth letI := locals ∃ (complete : ∀ i, IsAdicComplete (IsLocalRing.maximalIdeal (B i)) (B i)) (q' : ∀ i, Ideal (Polynomial (B i))) (qmax : ∀ i, (q' i).IsMaximal) (s : ∀ i, Ideal (Polynomial (B i))) (sprime : ∀ i, (s i).IsPrime), letI := qmax letI := sprime (∀ i, IsFractionRing (B i) (s i).ResidueField) ∧ (∀ i, (q' i).comap (Polynomial.C : B i →+* Polynomial (B i)) = IsLocalRing.maximalIdeal (B i)) ∧ (∀ i, s i ≤ q' i) ∧ (∀ i, s i ≠ ⊥) ∧ (∀ i, (s i).comap (Polynomial.C : B i →+* Polynomial (B i)) = ⊥) ∧ Nonempty ((TensorProduct r.ResidueField L (r.Fiber C)) ≃+* (∀ i, (s i).Fiber (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime (q' i))) (Localization.AtPrime (q' i)))))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T153013-L-2351874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T153013-L-2351874",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
