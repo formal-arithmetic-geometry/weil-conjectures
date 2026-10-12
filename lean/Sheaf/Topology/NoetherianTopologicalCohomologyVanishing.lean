@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.Topology.NoetherianVanishingByIrreducibleComponents
 
 /-!
 # Noetherian topological cohomology vanishing
@@ -49,6 +50,9 @@ theorem isZero_noetherian_topological_cohomology_of_dimension_bound
     (d : ℕ) (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
     (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
     (q : ℕ) (hq : d < q) : IsZero (Sheaf.H' F q (⊤ : Opens X)) := by
-  sorry
+  exact noetherian_vanishing_of_irreducible_components
+    (fun Y _ _ _ d hdim F q hq =>
+      noetherian_vanishing_irreducible Y d hdim F q hq)
+    X d hdim F q hq
 
 end TopCat

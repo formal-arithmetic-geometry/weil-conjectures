@@ -1,0 +1,142 @@
+{
+ "id": "new-node-noetherian-irreducible",
+ "kind": "statement",
+ "title": "Noetherian irreducible cohomology vanishing",
+ "statement": "Let X be an irreducible Noetherian topological space, let d be a nonnegative integer with dim X <= d [def-kun-topological-krull-dimension], and let F be an abelian sheaf on X. Then H^q(X,F) [def-sc-topological-abelian-cohomology] is zero for every integer q>d.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Proposition 02UZ proof, irreducible case"
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Induct on d with the assertion quantified over all Noetherian spaces of dimension at most d, all abelian sheaves, and all degrees q>d; the empty-space case follows from the empty-cover sheaf axiom.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In the irreducible d=0 case every nonempty open is X, so F is the constant sheaf F(X), and irreducible constant-sheaf acyclicity gives vanishing above zero.",
+   "uses": [
+    "lem-sc-irreducible-noetherian-constant-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For d>0, Noetherianity verifies the first three hypotheses of 02UX. For a quasi-compact open U, the empty case is zero; otherwise Z=X\\U is Noetherian of dimension at most d-1. The open-closed sequence for the constant sheaf and closed-immersion comparison give the exact segment H^(q-1)(Z,Z_Z) -> H^q(X,j_!Z_U) -> H^q(X,Z_X), whose outer terms vanish by outer induction and constant acyclicity because q-1>d-1.",
+   "uses": [
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-noetherian-open-closed-cohomology-sequence",
+    "lem-sc-cohomology-closed-immersion-pushforward",
+    "lem-sc-irreducible-noetherian-constant-acyclic",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All four hypotheses of 02UX give the irreducible result at the fixed bound d. Extend this to all Noetherian spaces at d by induction on their finite number of irreducible components: zero components is the empty case, one component uses the irreducible result just established, and otherwise choose a component Z and put U=X\\Z and Zprime=closure(U), the union of the remaining components. Both closed subspaces are Noetherian, have dimension at most d, and have fewer components. The open-closed sequence expresses its outer terms as closed pushforwards from Z and Zprime; component induction, closed-pushforward cohomology comparison, and the long exact sequence kill H^q(X,F). This completes the outer dimension induction without applying the all-dimensions component theorem.",
+   "uses": [
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-noetherian-open-closed-cohomology-sequence",
+    "lem-sc-cohomology-closed-immersion-pushforward",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-noetherian-open-closed-cohomology-sequence",
+  "lem-sc-cohomology-closed-immersion-pushforward",
+  "lem-sc-irreducible-noetherian-constant-acyclic",
+  "lem-sc-noetherian-extension-by-zero-reduction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Proposition 02UZ proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian irreducible cohomology vanishing above Krull dimension",
+   "results": "No match; only primitive dimension and H' declarations",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian topological sheaf cohomology vanishing",
+   "results": "No matching declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg vanishing Noetherian cohomology Mathlib",
+   "results": "No matching theorem",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.NoetherianTopologicalCohomologyVanishing",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "Lemma 09NY proof sentence invoking Proposition 02UZ: use its irreducible case of 02UZ, including the dimension-zero constant-sheaf argument and the 02UX extension-by-zero reduction.",
+   "via": [
+    "lem-sc-noetherian-topological-cohomology-vanishing",
+    "lem-sc-noetherian-cohomology-vanishing-abelian-dim-one",
+    "lem-sc-pic-lift-closed-immersion-dim-le-one",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.NoetherianVanishingByIrreducibleComponents",
+  "file": "lean/Sheaf/Topology/NoetherianVanishingByIrreducibleComponents.lean",
+  "declaration": "TopCat.noetherian_vanishing_irreducible",
+  "statement": "theorem noetherian_vanishing_irreducible\n    (X : Type u) [TopologicalSpace X] [NoetherianSpace X]\n    [IrreducibleSpace X] (d : ℕ)\n    (hdim : topologicalKrullDim X ≤ (d : WithBot ℕ∞))\n    (F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})\n    (q : ℕ) (hq : d < q) :\n    IsZero (Sheaf.H' F q (⊤ : Opens X))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-30a49",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T001958-L-539284",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-30a49",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T001958-L-539284",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, cited dependencies, Stacks 02UZ/02UX, and the earlier return; compilation and axiom checks passed."
+ }
+}

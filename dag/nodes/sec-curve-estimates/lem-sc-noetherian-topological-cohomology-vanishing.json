@@ -27,81 +27,26 @@
  ],
  "proof": [
   {
-   "text": "We induct on d. If X is empty, the sheaf axiom for the empty cover makes every cohomology group vanish, so the assertion is immediate. The d=0 case is handled in the irreducible step below.",
+   "text": "Apply the component induction theorem, supplying the irreducible vanishing theorem for each irreducible Noetherian space.",
    "uses": [
-    "def-sc-topological-abelian-cohomology"
+    "new-node-noetherian-components",
+    "new-node-noetherian-irreducible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ, induction on d, including the empty space"
-   }
-  },
-  {
-   "text": "For fixed d, induct on the finite number of irreducible components of X, using [lem-sc-noetherian-finite-irreducible-components]. The open-closed short exact sequence [lem-sc-noetherian-open-closed-cohomology-sequence] and the long exact sequence in [def-sc-topological-abelian-cohomology] reduce the assertion for a union of components to a proper closed subspace and a space with fewer components, so it suffices to treat irreducible X.",
-   "uses": [
-    "lem-sc-noetherian-finite-irreducible-components",
-    "lem-sc-noetherian-open-closed-cohomology-sequence",
-    "def-sc-topological-abelian-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ proof; Topology Lemma 0052"
-   }
-  },
-  {
-   "text": "Assume X irreducible. If d=0, X has no nonempty proper open: otherwise a nonempty proper closed subset has an irreducible component Z' and Z'\\subsetneq X gives a chain of irreducible closed subsets, contradicting dimension zero. Thus every abelian sheaf F is the constant sheaf with value F(X), as in the 02UZ proof, and [lem-sc-irreducible-noetherian-constant-acyclic] gives H^q(X,F)=0 for q>0. Now assume d>0. Since X is Noetherian, every subset is quasi-compact, so X is quasi-compact, quasi-compact opens form a basis, and intersections of quasi-compact opens are quasi-compact; these verify hypotheses (1)-(3) of [lem-sc-noetherian-extension-by-zero-reduction].",
-   "uses": [
-    "lem-sc-irreducible-noetherian-constant-acyclic",
-    "lem-sc-noetherian-extension-by-zero-reduction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ proof and Lemma 02UX hypotheses"
-   }
-  },
-  {
-   "text": "It remains to verify hypothesis (4) of [lem-sc-noetherian-extension-by-zero-reduction]. Let j:U\\to X be quasi-compact open. If U is empty, j_!Z_U=0. If U is nonempty, irreducibility makes U dense; with Z=X\\setminus U, Z is a proper closed Noetherian subspace and dim Z\\leq d-1, since any chain in Z extends by X. Applying [lem-sc-noetherian-open-closed-cohomology-sequence] to F=Z_X gives 0\\to j_!Z_U\\to Z_X\\to i_*Z_Z\\to0 (j^*Z_X=Z_U and i^*Z_X=Z_Z). For p>d, H^p(X,Z_X)=0 by [lem-sc-irreducible-noetherian-constant-acyclic], while H^{p-1}(X,i_*Z_Z)=H^{p-1}(Z,Z_Z)=0 by [lem-sc-cohomology-closed-immersion-pushforward] and the outer induction hypothesis applied to Z (p-1>d-1\\geq\\dim Z). The exact segment H^{p-1}(X,i_*Z_Z)\\to H^p(X,j_!Z_U)\\to H^p(X,Z_X) of the long exact sequence from [def-sc-topological-abelian-cohomology] therefore gives H^p(X,j_!Z_U)=0.",
-   "uses": [
-    "lem-sc-noetherian-extension-by-zero-reduction",
-    "lem-sc-noetherian-open-closed-cohomology-sequence",
-    "lem-sc-irreducible-noetherian-constant-acyclic",
-    "lem-sc-cohomology-closed-immersion-pushforward",
-    "def-sc-topological-abelian-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ proof after Lemma 02UX; Lemma 02UX"
-   }
-  },
-  {
-   "text": "All four hypotheses of [lem-sc-noetherian-extension-by-zero-reduction] now hold, so it gives H^p(X,F)=0 for every p>d and every abelian sheaf F on irreducible X. The inner induction on components and then the outer induction on d complete the proof.",
-   "uses": [
-    "lem-sc-noetherian-extension-by-zero-reduction",
-    "lem-sc-noetherian-finite-irreducible-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Proposition 02UZ conclusion"
+    "place": "Proposition 02UZ proof"
    }
   }
  ],
  "proof_deps": [
-  "def-sc-topological-abelian-cohomology",
-  "lem-sc-noetherian-finite-irreducible-components",
-  "lem-sc-noetherian-open-closed-cohomology-sequence",
-  "lem-sc-irreducible-noetherian-constant-acyclic",
-  "lem-sc-noetherian-extension-by-zero-reduction",
-  "lem-sc-cohomology-closed-immersion-pushforward"
+  "new-node-noetherian-components",
+  "new-node-noetherian-irreducible"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Proposition 02UZ (cohomology-proposition-vanishing-Noetherian), proof by induction on dimension"
+  "place": "Proposition 02UZ proof, reduced to named irreducible and component-induction obligations"
  },
  "mathlib_searches": [
   {
@@ -180,5 +125,15 @@
   "group": "V1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-30a49",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T001958-L-539284",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, cited dependencies, Stacks 02UZ/02UX, and the earlier return; compilation and axiom checks passed."
  }
 }
