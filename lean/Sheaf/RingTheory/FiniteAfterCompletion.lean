@@ -5,7 +5,11 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Finiteness.Defs
 import Sheaf.Algebra.ChangeIdealCompletion
+import Mathlib.RingTheory.Artinian.Module
+import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Sheaf.RingTheory.FiniteOverCompleteRing
+import Sheaf.RingTheory.ExtendedCompletionModuleReduction
 
 /-!
 # Finite modules after completion
@@ -63,6 +67,120 @@ theorem finite_after_completion
         AdicCompletion.evalₐ n k (φhat x) = Ideal.Quotient.mk (n ^ k) (φ r)) ∧
       letI := φhat.toAlgebra
       Module.Finite (AdicCompletion m R) (AdicCompletion n S) := by
-  sorry
+  subst m
+  subst n
+  let J := Ideal.map φ (IsLocalRing.maximalIdeal R)
+  have hJn : J ≤ IsLocalRing.maximalIdeal S := IsLocalRing.map_maximalIdeal_le φ
+  let := (Ideal.quotientMap J φ Ideal.le_comap_map).toAlgebra
+  have : Module.Finite (R ⧸ IsLocalRing.maximalIdeal R) (S ⧸ J) := hfinite
+  let := Ideal.Quotient.field (IsLocalRing.maximalIdeal R)
+  have : IsArtinianRing (S ⧸ J) :=
+    IsArtinianRing.of_finite (R ⧸ IsLocalRing.maximalIdeal R) (S ⧸ J)
+  have hrad : IsLocalRing.maximalIdeal S ≤ J.radical := by
+    rw [Ideal.radical_eq_sInf]
+    apply le_sInf
+    intro P hP
+    have : P.IsPrime := hP.2
+    let q := Ideal.Quotient.mk J
+    have : (Ideal.map q P).IsPrime := Ideal.map_isPrime_of_surjective
+      Ideal.Quotient.mk_surjective (by simpa [q] using hP.1)
+    have hmax : P.IsMaximal := by
+      have h := Ideal.comap_isMaximal_of_surjective q
+        Ideal.Quotient.mk_surjective (K := Ideal.map q P)
+      simpa [Ideal.comap_map_of_surjective q Ideal.Quotient.mk_surjective,
+        q, ← RingHom.ker_eq_comap_bot, Ideal.mk_ker, sup_of_le_left hP.1] using h
+    have heq : P = IsLocalRing.maximalIdeal S := IsLocalRing.eq_maximalIdeal hmax
+    exact le_of_eq heq.symm
+  obtain ⟨c, hc⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hrad hn_fg
+  have hc' : (IsLocalRing.maximalIdeal S) ^ (c + 1) ≤ J :=
+    (Ideal.pow_le_pow_right (by omega)).trans hc
+  obtain ⟨γ, hγ⟩ := changeIdealCompletionRing
+    (IsLocalRing.maximalIdeal S) J (c + 1) 1 (by omega) (by omega) hc'
+    (by simpa using hJn)
+  have hγeval (k : ℕ) (x : AdicCompletion J S) (s : S)
+      (hx : evalₐ J k x = Ideal.Quotient.mk (J ^ k) s) :
+      evalₐ (IsLocalRing.maximalIdeal S) k (γ x) =
+        Ideal.Quotient.mk ((IsLocalRing.maximalIdeal S) ^ k) s := by
+    have hv : x.val (1 * k) = Submodule.Quotient.mk s := by
+      have h := factor_evalₐ_eq_eval J (n := 1 * k) x (by simp)
+      have hx' : evalₐ J (1 * k) x =
+          Ideal.Quotient.mk (J ^ (1 * k)) s := by
+        rw [Nat.one_mul k]
+        exact hx
+      rw [hx'] at h
+      exact h.symm
+    have hv' := hγ x k
+    rw [hv] at hv'
+    have h := factor_eval_eq_evalₐ (IsLocalRing.maximalIdeal S) (n := k) (γ x) (by simp)
+    rw [show eval (IsLocalRing.maximalIdeal S) S k (γ x) =
+      Submodule.Quotient.mk s from hv'] at h
+    exact h.symm
+  let f (k : ℕ) : AdicCompletion (IsLocalRing.maximalIdeal R) R →+* S ⧸ J ^ k :=
+    (Ideal.quotientMap (J ^ k) φ (by
+      rw [← Ideal.map_le_iff_le_comap, Ideal.map_pow])).comp
+        (evalₐ (IsLocalRing.maximalIdeal R) k).toRingHom
+  have hf {i j : ℕ} (hij : i ≤ j) :
+      (Ideal.Quotient.factorPow J hij).comp (f j) = f i := by
+    ext x
+    obtain ⟨r, hr⟩ := Ideal.Quotient.mk_surjective
+      (evalₐ (IsLocalRing.maximalIdeal R) j x)
+    have hi : evalₐ (IsLocalRing.maximalIdeal R) i x =
+        Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R) ^ i) r := by
+      have hv : x.val j = Submodule.Quotient.mk r := by
+        have h := factor_evalₐ_eq_eval (IsLocalRing.maximalIdeal R) (n := j) x (by simp)
+        rw [← hr] at h
+        exact h.symm
+      have hvi := x.property hij
+      rw [hv] at hvi
+      have h := factor_eval_eq_evalₐ (IsLocalRing.maximalIdeal R) (n := i) x (by simp)
+      rw [show eval (IsLocalRing.maximalIdeal R) R i x =
+        Submodule.Quotient.mk r from hvi.symm] at h
+      exact h.symm
+    simp [f, ← hr, hi]
+  let ψ := liftRingHom J f (fun hij ↦ hf hij)
+  have hψ (k : ℕ) (x : AdicCompletion (IsLocalRing.maximalIdeal R) R) (r : R)
+      (hx : evalₐ (IsLocalRing.maximalIdeal R) k x =
+        Ideal.Quotient.mk ((IsLocalRing.maximalIdeal R) ^ k) r) :
+      evalₐ J k (ψ x) = Ideal.Quotient.mk (J ^ k) (φ r) := by
+    rw [evalₐ_liftRingHom]
+    simp only [f, RingHom.comp_apply, AlgHom.toRingHom_eq_coe,
+      AlgHom.coe_toRingHom, hx, Ideal.quotientMap_mk]
+  let φhat := γ.toRingHom.comp ψ
+  refine ⟨γ, φhat, hγeval, ?_, ?_⟩
+  · intro k x r hx
+    exact hγeval k (ψ x) (φ r) (hψ k x r hx)
+  · have hprops := extendedCompletion_module_reduction R S
+      (IsLocalRing.maximalIdeal R) φ hm_fg hfinite ψ hψ
+    let := ψ.toAlgebra
+    let K := (IsLocalRing.maximalIdeal R).map
+      (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R))
+    have : IsAdicComplete K (AdicCompletion (IsLocalRing.maximalIdeal R) R) :=
+      isAdicComplete_self (IsLocalRing.maximalIdeal R) hm_fg
+    let := φ.toAlgebra
+    have hψof (r : R) :
+        ψ (algebraMap R (AdicCompletion (IsLocalRing.maximalIdeal R) R) r) =
+          algebraMap R (AdicCompletion J S) r := by
+      apply ext_evalₐ
+      intro k
+      change evalₐ J k (ψ (of (IsLocalRing.maximalIdeal R) R r)) =
+        evalₐ J k (of J S (φ r))
+      rw [evalₐ_of]
+      exact hψ k (of (IsLocalRing.maximalIdeal R) R r) r
+        (evalₐ_of (IsLocalRing.maximalIdeal R) k r)
+    have : IsScalarTower R (AdicCompletion (IsLocalRing.maximalIdeal R) R)
+        (AdicCompletion J S) := IsScalarTower.of_algebraMap_eq hψof
+    have hhaus : IsHausdorff (IsLocalRing.maximalIdeal R) (AdicCompletion J S) :=
+      (IsHausdorff.map_algebraMap_iff (I := IsLocalRing.maximalIdeal R) (S := S)).mp inferInstance
+    have : IsHausdorff K (AdicCompletion J S) :=
+      (IsHausdorff.map_algebraMap_iff (I := IsLocalRing.maximalIdeal R)
+        (S := AdicCompletion (IsLocalRing.maximalIdeal R) R)).mpr hhaus
+    have : Module.Finite
+        (AdicCompletion (IsLocalRing.maximalIdeal R) R ⧸ K)
+        (AdicCompletion J S ⧸ (K • ⊤ :
+          Submodule (AdicCompletion (IsLocalRing.maximalIdeal R) R) (AdicCompletion J S))) :=
+      hprops
+    have hψfinite : ψ.Finite :=
+      (Module.finite_and_span_eq_top_of_adicComplete K (AdicCompletion J S)).1
+    exact γ.finite.comp hψfinite
 
 end AdicCompletion

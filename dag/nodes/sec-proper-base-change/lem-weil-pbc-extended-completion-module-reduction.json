@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-extended-completion-module-reduction",
+ "kind": "statement",
+ "title": "Finite reduction of the completed algebra along an extended ideal",
+ "statement": "Let R and S be commutative rings, I a finitely generated ideal of R, and φ : R → S a ring homomorphism. Put J = IS, Â = lim R/I^k and B̂ = lim S/J^k [def-weil-pbc-adic-completion]. Assume S/J is a finitely generated R/I-module via the induced quotient homomorphism [def-weil-finitely-generated-module]. Let ψ : Â → B̂ be a ring homomorphism such that for every k, x and r, if the kth coordinate of x is r modulo I^k then the kth coordinate of ψ(x) is φ(r) modulo J^k. Give B̂ the Â-module structure via ψ and put K = IÂ. Then B̂/KB̂ is a finitely generated Â/K-module via the quotient module action.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0394 (lemma-finite-after-completion), final paragraph; Lemma Tag 05GG (lemma-hathat-finitely-generated), parts (1) and (2). Source read at https://stacks.math.columbia.edu/tag/0394 and https://stacks.math.columbia.edu/tag/05GG because the local literature copy is absent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Give S its R-module structure via φ and put J = I S. The identities J^k = map φ (I^k) identify S/J^k with S/(I^k S), and hence the J-adic ring completion with the I-adic R-module completion of S. The given coordinate condition determines ψ uniquely and makes its action the canonical action of the completed base. Expanding generators of the extended ideal gives K^k S-completion = I^k S-completion after restriction of scalars.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By completion of modules for a finitely generated ideal (05GG), evaluation onto S/IS is surjective and its kernel is I times the module completion. The preceding scalar comparison identifies this kernel with K times the completed algebra, so the quotient module is S/IS.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "By 05GG for R, the first evaluation identifies R-completion/K with R/I. The component condition on ψ identifies the action on the quotient from the preceding step with the given quotientMap action on S/IS. Transport the finite generating family of S/IS across these scalar and module isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-module-completion-complete"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Lemma Tag 0394 (lemma-finite-after-completion), final paragraph; Lemma Tag 05GG (lemma-hathat-finitely-generated), parts (1) and (2). Source read at https://stacks.math.columbia.edu/tag/0394 and https://stacks.math.columbia.edu/tag/05GG because the local literature copy is absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The quotient of completion of an algebra S along extended ideal I by the extended ideal in completion of R is finite over the residue quotient of completed R when S/IS is finite over R/I",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedCompletion|map_algebraMap_iff|pow_smul_top_eq_ker_eval",
+   "results": "Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Finite, AdicCompletion",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated ideal I and ring homomorphism R to S, if S modulo IS is finite over R modulo I, then completion of S for IS is finite over completion of R for I",
+   "results": "AdicCompletion.instCommRing; AdicCompletion.instAlgebra; module_finite_of_liesOver; IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion; AdicCompletion.flat_of_isNoetherian; Ideal.finite_quotient_pow; IsAdicComplete.toIsPrecomplete; IsAdic.isPrecomplete_iff",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteAfterCompletion",
+  "date": "2026-10-12",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Steps 4–6 of lem-weil-pbc-finite-after-completion: comparison of scalar actions and finiteness of the reduction needed for 031D.",
+   "via": [
+    "lem-weil-pbc-finite-after-completion",
+    "lem-weil-pbc-flat-local-completion-iso",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ExtendedCompletionModuleReduction",
+  "file": "lean/Sheaf/RingTheory/ExtendedCompletionModuleReduction.lean",
+  "declaration": "AdicCompletion.extendedCompletion_module_reduction",
+  "statement": "theorem extendedCompletion_module_reduction (R : Type u) (S : Type v) [CommRing R] [CommRing S] (I : Ideal R) (φ : R →+* S) (hI : I.FG) (hfinite : letI := (Ideal.quotientMap (Ideal.map φ I) φ Ideal.le_comap_map).toAlgebra Module.Finite (R ⧸ I) (S ⧸ Ideal.map φ I)) (ψ : AdicCompletion I R →+* AdicCompletion (Ideal.map φ I) S) (hψ : ∀ (k : ℕ) (x : AdicCompletion I R) (r : R), AdicCompletion.evalₐ I k x = Ideal.Quotient.mk (I ^ k) r → AdicCompletion.evalₐ (Ideal.map φ I) k (ψ x) = Ideal.Quotient.mk ((Ideal.map φ I) ^ k) (φ r)) : letI := ψ.toAlgebra let K := I.map (algebraMap R (AdicCompletion I R)) Module.Finite (AdicCompletion I R ⧸ K) (AdicCompletion (Ideal.map φ I) S ⧸ (K • ⊤ : Submodule (AdicCompletion I R) (AdicCompletion (Ideal.map φ I) S)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T095855-L-313672",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261012T095855-L-313672",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
