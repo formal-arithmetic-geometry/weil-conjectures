@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheaf
+
+import Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZeroAux
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Paper.SiteSheafificationSectionsLocal
 
@@ -51,6 +53,11 @@ theorem etale_section_colimit_eventual_zero
     ∀ (i : I) (s : (G.obj i).obj.obj (Opposite.op U)),
       ((c.ι.app i).hom.app (Opposite.op U)).hom s = 0 →
       ∃ (j : I) (f : i ⟶ j), ((G.map f).hom.app (Opposite.op U)).hom s = 0 := by
-  sorry
+  intro i s hs
+  obtain ⟨K, hK, V, q, hlocal, hsep⟩ :=
+    etale_section_colimit_finite_zero_cover X Λ U I G c hc i s hs
+  let _ : Finite K := hK
+  exact etale_section_colimit_eventual_zero_of_finite_cover
+    X Λ U I G i s K V q hlocal hsep
 
 end AlgebraicGeometry

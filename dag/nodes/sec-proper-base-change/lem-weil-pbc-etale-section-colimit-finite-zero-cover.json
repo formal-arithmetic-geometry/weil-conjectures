@@ -1,0 +1,95 @@
+{
+ "id": "lem-weil-pbc-etale-section-colimit-finite-zero-cover",
+ "kind": "statement",
+ "title": "Finite local zero cover for an etale sheaf colimit section",
+ "statement": "From a section whose image is zero in a filtered colimit sheaf on a quasi-compact etale object, extract a finite family of etale arrows with local eventual vanishing and the separatedness implication.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 0738, proof of part (2)"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use sheafification local equality, openness of etale maps, and quasi-compactness to obtain a finite covering; record the induced local vanishing and separatedness properties.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Lemma Tag 0738, proof of part (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite cover filtered sheaf colimit eventual zero",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsFiltered finite cover sheaf section zero",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*cover.*zero",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZero",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-section-colimit-eventual-zero",
+   "place": "Step 1 and Step 2"
+  },
+  "via": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionColimitEventualZeroAux",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionColimitEventualZeroAux.lean",
+  "declaration": "AlgebraicGeometry.etale_section_colimit_finite_zero_cover",
+  "statement": "theorem etale_section_colimit_finite_zero_cover\n    (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]\n    (U : X.Etale) [CompactSpace U.left]\n    (I : Type w) [SmallCategory I] [IsFiltered I]\n    (G : I ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{max v w} Λ))\n    (c : Cocone G) (hc : IsColimit c) (i : I)\n    (s : (G.obj i).obj.obj (Opposite.op U))\n    (hs : ((c.ι.app i).hom.app (Opposite.op U)).hom s = 0) :\n    ∃ (K : Type w) (_ : Finite K) (V : K → X.Etale) (q : ∀ k, V k ⟶ U),\n      (∀ k, ∃ (j : I) (f : i ⟶ j),\n        ((G.map f).hom.app (Opposite.op (V k))).hom\n          (((G.obj i).obj.map (q k).op).hom s) = 0) ∧\n      (∀ (j : I) (t : (G.obj j).obj.obj (Opposite.op U)),\n        (∀ k, ((G.obj j).obj.map (q k).op).hom t = 0) → t = 0)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T053943-L-2640512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T053943-L-2640512",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
