@@ -8546,3 +8546,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:36 L: merged deliver/B2/Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying (stage 3; reviewer PASS; first push; landing 20261012T163611-L-2783953 (interface); batch 20261012T163610; modules 2; new nodes 1)
 - 16:36 L: merged deliver/B3/Sheaf.AlgebraicGeometry.Cohomology.AffineCechInverseImage (stage 3; reviewer PASS; first push; landing 20261012T163611-L-2784052 (interface); batch 20261012T163610; modules 4; new nodes 3)
 - 16:36 L: merged deliver/C1/Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtComparison (stage 3; reviewer PASS; first push; landing 20261012T163611-L-2784205 (interface); batch 20261012T163610; modules 2; new nodes 1)
+- 16:36 L: merged deliver/C1/Sheaf.AlgebraicGeometry.FiniteCoefficientOfFiniteStalks (stage 3; reviewer PASS; first push; landing 20261012T163612-L-2784309 (interface); batch 20261012T163610; modules 2; new nodes 1)

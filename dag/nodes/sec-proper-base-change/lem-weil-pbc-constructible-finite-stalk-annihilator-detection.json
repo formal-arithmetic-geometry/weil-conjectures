@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-constructible-finite-stalk-annihilator-detection",
+ "kind": "statement",
+ "title": "Finite geometric detection of scalar annihilation",
+ "statement": "Let Λ be a commutative ring, X a Noetherian scheme, and F a constructible sheaf of Λ-modules on the small étale site of X. Then there are n and points x_i of X such that the intersection of the annihilators of the geometric stalks of F at the algebraic-closure points of x_i is contained in the intersection, over all étale objects U of X, of the annihilators of F(U).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "finite-coefficient reduction, steps 1 and 3"
+ },
+ "stmt_deps": [
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof": [
+  {
+   "text": "Choose the finite constructible stratification [def-constructible-constructible]. Its strata have Noetherian underlying spaces as embedded subspaces of X. The images of an etale trivializing cover of each locally constant restriction [def-constructible-finite-locally-constant] are open and cover the stratum. Compactness gives finitely many members; discard empty members and choose one point on each. Compose with the stratum immersion to obtain a finite list x_i in X.",
+   "uses": [
+    "def-constructible-constructible",
+    "def-constructible-finite-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each selected member, the algebraic-closure point of x_i lifts through its locally closed stratum and the etale chart. The inverse-image stalk isomorphism identifies its stalk of F with the constant value of that chart. Use the constant-sheaf stalk formula and the natural uliftSheafFiberIso to make this a linear isomorphism. A scalar annihilating the selected stalk therefore annihilates the chart value. Every geometric point of X lifts through its unique stratum and some selected chart, so the scalar annihilates all geometric stalks of F.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar endomorphism of F is zero on every geometric stalk, hence zero by geometric stalk conservativity [lemma-weil-pbc-geometric-stalk-conservative]. On evaluating at an arbitrary etale object U the scalar kills every section of F(U), and hence belongs to their annihilator intersection. For empty X take n=0: there are no stalk conditions and conservativity forces every scalar endomorphism to be zero. For a zero sheaf all the annihilators are the unit ideal.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Finite-cover argument in steps 1 and 3 of lem-weil-pbc-finite-coefficient-of-finite-stalks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "There are finitely many geometric stalks of a constructible module sheaf on a Noetherian scheme that detect whether a scalar annihilates the sheaf",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There are finitely many geometric stalks of a constructible module sheaf on a Noetherian scheme that detect scalar annihilation of the sheaf",
+   "results": "SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.LocalGeneratorsData.IsFiniteType; Module.isLocallyConstant_rankAtStalk_freeLocus. No finite detection theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator.*stalk|stalk.*annihilator|finite.*geometric.*detect",
+   "results": "msearch grep: 0 hits. Direct searches also found no detection theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteCoefficientOfFiniteStalks",
+  "date": "2026-10-13",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-normalization-exact-sequence",
+   "place": "constructibility of the middle term; finite coefficient reduction, finite chart selection and annihilator detection",
+   "via": [
+    "lem-weil-pbc-finite-coefficient-of-finite-stalks",
+    "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+    "lem-weil-pbc-normalization-mono-cokernel"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleFiniteStalkAnnihilatorDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleFiniteStalkAnnihilatorDetection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_stalk_annihilator_detection",
+  "statement": "theorem exists_finite_stalk_annihilator_detection (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}} [IsNoetherian X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F) : ∃ (n : ℕ) (x : Fin n → X), (⨅ i : Fin n, Module.annihilator Λ ((((pointSmallEtale (X.algClosurePoint (x i))).ulift.{u + 1}).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F)) ≤ ⨅ U : X.Etaleᵒᵖ, Module.annihilator Λ (F.obj.obj U)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T163612-L-2784309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T163612-L-2784309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
