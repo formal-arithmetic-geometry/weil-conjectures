@@ -72,6 +72,17 @@ lemma kFlatUpperStar_quotient_obj_resolutionFunctor_obj [ProEtale.UpperStarPrese
           ObjectProperty.flat.essImage_ι_le K).colimitsOfShape))
 
 omit [Abelian.HasFunctorialFlatResolution A] in
+/-- A complex whose image in the homotopy category is in `kFlatUpperStar A g` has a K-flat
+pullback by `g`. -/
+lemma kFlat_mapHomologicalComplex_obj_of_kFlatUpperStar
+    {K : CochainComplex (Sheaf (Scheme.ProEt.topology Y) A) ℤ}
+    (hK : kFlatUpperStar A g ((HomotopyCategory.quotient _ _).obj K)) :
+    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K) :=
+  (HomotopyCategory.kFlat_quotient_obj_iff _).1 (ObjectProperty.prop_of_iso _
+    (((g)^*[A].mapHomotopyCategoryFactors (.up ℤ)).app K) hK)
+
+omit [Abelian.HasFunctorialFlatResolution A] in
 /-- Given a functorial flat resolution `Λ` of pro-étale sheaves on `Y`, the complexes whose
 pullback by `g` is K-flat form a left derivability structure on `K(Y_proét)` for the
 quasi-isomorphisms. -/

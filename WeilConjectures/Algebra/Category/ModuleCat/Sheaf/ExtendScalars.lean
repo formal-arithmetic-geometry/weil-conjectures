@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
@@ -14,10 +13,10 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 # Extension of scalars for sheaves of modules over a constant ring
 
 Let `S` be an algebra over a commutative ring `R` and `J` a Grothendieck topology. Extension of
-scalars `F ↦ S ⊗_R F` of sheaves of `R`-modules is the sheafification of the objectwise extension
-of scalars (`CategoryTheory.Sheaf.extendScalars`). It is left adjoint to restriction of scalars
-(`CategoryTheory.Sheaf.extendRestrictScalarsAdj`), and restricting the scalars of `S ⊗_R F` back
-to `R` gives the tensor product `F ⊗ S_X` with the constant sheaf
+scalars `F ↦ S ⊗_R F` of sheaves of `R`-modules is the sheafification
+`Sheaf.composeAndSheafify J (ModuleCat.extendScalars (algebraMap R S))` of the objectwise extension
+of scalars. Restricting the scalars of `S ⊗_R F` back to `R` gives the tensor product `F ⊗ S_X`
+with the constant sheaf
 (`CategoryTheory.Sheaf.extendScalarsCompRestrictScalarsIso`).
 
 This generalises the reduction `CategoryTheory.Sheaf.quotSMulTop` modulo an ideal, the case
@@ -39,30 +38,14 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   [J.HasSheafCompose (forget (ModuleCat.{u + 1} S))]
   [J.WEqualsLocallyBijective (ModuleCat.{u + 1} S)]
 
-/-- Extension of scalars along an algebra map `R → S` for sheaves of modules over a constant
-ring: the sheafification of `U ↦ S ⊗_R F(U)`. -/
-noncomputable def extendScalars :
-    Sheaf J (ModuleCat.{u + 1} R) ⥤ Sheaf J (ModuleCat.{u + 1} S) :=
-  Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} (algebraMap R S))
-
-/-- Extension of scalars of sheaves is left adjoint to restriction of scalars. -/
-noncomputable def extendRestrictScalarsAdj :
-    extendScalars J R S ⊣ restrictScalars J (algebraMap R S) :=
-  Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} (algebraMap R S))
-
-instance : (extendScalars J R S).IsLeftAdjoint :=
-  (extendRestrictScalarsAdj J R S).isLeftAdjoint
-
-instance : (extendScalars J R S).Additive :=
-  (extendRestrictScalarsAdj J R S).left_adjoint_additive
-
 set_option synthInstance.maxHeartbeats 400000 in
 -- `HasWeakSheafify` for sheaves of modules over the two rings is slow to synthesize
 /-- **Restricting the scalars of the extension gives the tensor product with `S`.** For a
 sheaf `F` of `R`-modules, the extension `S ⊗_R F` with scalars restricted back to `R` is
 `F ⊗ S_X`, naturally in `F`. -/
 noncomputable def extendScalarsCompRestrictScalarsIso :
-    extendScalars J R S ⋙ restrictScalars J (algebraMap R S) ≅
+    Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} (algebraMap R S)) ⋙
+        restrictScalars J (algebraMap R S) ≅
       tensorRight ((constantSheaf J (ModuleCat.{u + 1} R)).obj (ModuleCat.of R S)) :=
   haveI : J.PreservesSheafification (ModuleCat.restrictScalars.{u + 1} (algebraMap R S)) :=
     preservesSheafification_of_adjunction J
