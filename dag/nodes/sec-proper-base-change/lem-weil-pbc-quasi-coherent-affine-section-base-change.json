@@ -28,82 +28,33 @@
  ],
  "proof": [
   {
-   "text": "*The affine charts.* Let $\\iota_U:\\operatorname{Spec}R\\to S$ and $\\iota_{U'}:\\operatorname{Spec}R'\\to S$ be the canonical open immersions with images $U$ and $U'$ [lem-weil-pbc-affine-open-spec-points], and $\\rho:R'\\to R$ the restriction map. By [lem-weil-pbc-affine-open-inclusion-spec-map], $j:=\\operatorname{Spec}\\rho:\\operatorname{Spec}R\\to\\operatorname{Spec}R'$ is an open immersion and $\\iota_{U'}\\circ j=\\iota_U$; this is the bottom arrow $U\\to U'$ of the square of Constructions 01LN, a morphism of affine schemes given by the ring map $\\rho$.",
+   "text": "Apply exists_tensorPullback_affine_sections to f = id_X and the nested affine opens V and U. Its algebra map id_X.appLE is definitionally the restriction O(V) -> O(U). Obtain c with bijectivity, scalar compatibility, and the unit pure-tensor formula.",
    "uses": [
-    "lem-weil-pbc-affine-open-spec-points",
-    "lem-weil-pbc-affine-open-inclusion-spec-map"
+    "lem-weil-pbc-module-pullback-affine-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); Schemes, Lemma 01I2 (morphisms of affine schemes are Spec of ring maps)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$\\mathcal M$ on $U'$ is $\\widetilde{M'}$.* Put $\\mathcal N'=\\mathcal M|_{\\operatorname{Spec}R'}$, the restriction of $\\mathcal M$ along the open immersion $\\iota_{U'}$ [lem-weil-pbc-module-restriction-open-immersion-colimits]: $\\mathcal N'(V)=\\mathcal M(\\iota_{U'}(V))$, so $\\Gamma(\\operatorname{Spec}R',\\mathcal N')=\\mathcal M(U')=M'$, and $R'=\\Gamma(\\operatorname{Spec}R',\\mathcal O)$ acts on it through $\\iota_{U'}^\\sharp:\\mathcal O_S(U')\\cong R'$, i.e. by the given $R'$-module structure of $M'$. By part (2) of that node $\\mathcal N'$ is quasi-coherent, so by [lem-weil-pbc-affine-tilde-gamma-adjunction] (3) the counit $\\varepsilon:\\widetilde{M'}\\to\\mathcal N'$, the map of $\\mathcal O_{\\operatorname{Spec}R'}$-modules corresponding to $\\mathrm{id}_{M'}$, is an isomorphism; by the description of the adjunction bijection in (1), $\\varepsilon_{\\operatorname{Spec}R'}(\\tau(m'))=m'$ for $m'\\in M'$.",
+   "text": "Let adj be the canonical tensor pullback adjunction for id_X. Transport its right adjoint along pushforwardId X, and compare the resulting left adjoint with the identity adjunction using leftAdjointUniq. This gives k : tensorPullback(id_X) ~= id. The Mathlib unit_leftAdjointUniq_hom_app equation, evaluated on sections, proves k(eta(s)) = s.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections"
+    "lem-pc-module-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); Schemes, Lemmas 01IA (lemma-quasi-coherent-affine) and 01IB (lemma-equivalence-quasi-coherent): a quasi-coherent module on Spec R' is the sheaf associated to its global sections"
-   }
+   "elementary": true
   },
   {
-   "text": "*Restricting to $U$.* Restrict $\\mathcal N'$ along $j$: $(\\mathcal N'|_{\\operatorname{Spec}R})(V)=\\mathcal N'(j(V))=\\mathcal M(\\iota_{U'}(j(V)))=\\mathcal M(\\iota_U(V))$, with the same restriction maps and the same $\\mathcal O$-action (both through $\\iota_U^\\sharp$, since $\\iota_{U'}\\circ j=\\iota_U$), so $\\mathcal N'|_{\\operatorname{Spec}R}$ is the restriction of $\\mathcal M$ along $\\iota_U$ and $\\Gamma(\\operatorname{Spec}R,\\mathcal N'|_{\\operatorname{Spec}R})=\\mathcal N'(j(\\operatorname{Spec}R))=\\mathcal M(U)=M$, the $R$-module structure being the given one. For $m'\\in M'=\\mathcal N'(\\operatorname{Spec}R')$ the element $m'|_{j(\\operatorname{Spec}R)}$ of this module is $m'|_U$.",
-   "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); the identification of the square's bottom arrow with $U\\subseteq U'$"
-   }
-  },
-  {
-   "text": "*The pullback of $\\widetilde{M'}$.* Apply the restriction functor along $j$ to the isomorphism $\\varepsilon$ of step 2 and combine with [lem-weil-pbc-open-immersion-module-pullback-restriction] and [lem-weil-pbc-tilde-pullback-base-change] (for $\\varphi=\\rho$, $\\psi=j$): this gives isomorphisms of $\\mathcal O_{\\operatorname{Spec}R}$-modules\n$$\\widetilde{R\\otimes_{R'}M'}\\xrightarrow{\\theta^{-1}}j^*\\widetilde{M'}\\xrightarrow{\\kappa^{-1}}\\widetilde{M'}|_{\\operatorname{Spec}R}\\xrightarrow{\\varepsilon|}\\mathcal N'|_{\\operatorname{Spec}R}.$$\nTaking sections over $\\operatorname{Spec}R$ and precomposing with the isomorphism $\\tau:R\\otimes_{R'}M'\\to\\Gamma(\\operatorname{Spec}R,\\widetilde{R\\otimes_{R'}M'})$ of [lem-weil-pbc-affine-tilde-gamma-adjunction] (2), and using step 3, gives a bijection $\\Phi:R\\otimes_{R'}M'\\to M$. It is $R$-linear: each map in the chain is a morphism of $\\mathcal O_{\\operatorname{Spec}R}$-modules, hence linear over $\\Gamma(\\operatorname{Spec}R,\\mathcal O)=R$ on global sections, and $\\tau$ is $R$-linear.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-weil-pbc-tilde-pullback-base-change",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); Schemes, Lemma 01I9 (lemma-widetilde-pullback) (1): $\\psi^*\\widetilde M=\\widetilde{S\\otimes_RM}$, applied to $\\psi=j$; for an open immersion the pullback of modules is the restriction (Sheaves, Lemma 00A0)"
-   }
-  },
-  {
-   "text": "*$\\Phi$ is the canonical map.* Let $m'\\in M'$. By [lem-weil-pbc-tilde-pullback-base-change], $\\theta^{-1}(\\tau(1\\otimes m'))=\\eta(\\tau(m'))$, the image of $\\tau(m')\\in\\Gamma(\\operatorname{Spec}R',\\widetilde{M'})$ under the unit of $j^*\\dashv j_*$. By [lem-weil-pbc-open-immersion-module-pullback-restriction] (with $W=\\operatorname{Spec}R'$, $f^{-1}W=\\operatorname{Spec}R$), $\\kappa^{-1}(\\eta(\\tau(m')))=\\tau(m')|_{j(\\operatorname{Spec}R)}$. Since $\\varepsilon$ is a morphism of sheaves it commutes with restriction, so $\\varepsilon(\\tau(m')|_{j(\\operatorname{Spec}R)})=\\varepsilon_{\\operatorname{Spec}R'}(\\tau(m'))|_{j(\\operatorname{Spec}R)}=m'|_U$ by steps 2 and 3. Hence $\\Phi(1\\otimes m')=m'|_U$, and by $R$-linearity $\\Phi(r\\otimes m')=r\\,m'|_U$. So $\\Phi$ is the canonical map $M'\\otimes_{R'}R\\cong R\\otimes_{R'}M'\\to M$ of the statement, which is therefore an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-tilde-pullback-base-change",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof, first sentence ('the map $R\\otimes_{R'}A'\\to A$ is an isomorphism as $\\mathcal A$ is quasi-coherent (see Schemes, Lemma 01I9)'); the isomorphism there is 'the map $R\\otimes_{R'}A'\\to A$', i.e. the canonical map; this check is not written in the source and is written out here"
-   }
+   "text": "On U, k is a bijective O(U)-linear section map d, also O(V)-linear by restriction of scalars. Take d composed with c. Bijectivity follows by composition, and O(U)-scalar compatibility follows from the corresponding property of c and module morphism linearity. Naturality of k with respect to U <= V followed by k(eta(m)) = m proves the canonical formula d(c(m tensor r)) = r times m restricted to U.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-open-spec-points",
-  "lem-weil-pbc-affine-open-inclusion-spec-map",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "lem-weil-pbc-tilde-pullback-base-change"
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Lemma 01LN (lemma-spec-inclusion), proof; Schemes, Lemmas 01I9 (lemma-widetilde-pullback), 01IA, 01IB (literature/stacks-project/schemes.tex)"
+  "place": "Tag 01LN via Schemes Tags 01I9, 01IA, 01HV: use the existing affine pullback-sections theorem at the identity morphism; the identity comparison and unit computation use Mathlib uniqueness of left adjoints. Lean proof written by D3."
  },
  "mathlib_searches": [
   {
@@ -204,5 +155,15 @@
   "group": "H1",
   "result": "fix",
   "note": "X scheme, F quasi-coherent [F.IsQuasicoherent], U V : affineOpens with U.1 ≤ V.1, restriction algebra/module letIs; conclusion restated in M1 b9579ee07 form: ∃ c : M'⊗[R']R →ₗ[R'] M, Bijective c ∧ R-linearity on second factor (comm-swap) ∧ c(m⊗r)=r•m|_U; single universe; no let/hollow hyps"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T085226-L-8735",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
