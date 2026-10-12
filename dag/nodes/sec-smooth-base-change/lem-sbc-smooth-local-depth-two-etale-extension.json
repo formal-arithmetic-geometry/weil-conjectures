@@ -1,0 +1,136 @@
+{
+ "id": "lem-sbc-smooth-local-depth-two-etale-extension",
+ "kind": "statement",
+ "title": "Finite etale extension from a fibrewise dense open over a depth-two local base",
+ "statement": "Let A be a Noetherian local ring with closed point a in Spec A [def-weil-pbc-noetherian-ring, def-weil-affine-spectrum]. Let q:L → Spec A be smooth [def-sbc-smooth-morphisms] and U an open of L [def-weil-pbc-scheme-conventions]. Assume every point of L not lying over a belongs to U, and the inverse image of U in the scheme-theoretic fibre L_a is dense [def-pc-fibre-product]. If depth A ≥ 2 [def-weil-pbc-depth], then every finite etale morphism f:X → U [def-weil-finite-integral-morphism, def-weil-etale-morphism] extends: there are E, a finite etale p:E → L, and an isomorphism e:E|_U ≅ X over U, satisfying e;f = p|_U. No domain, normality, geometric connectedness, quasi-compactness or quasi-separatedness of q is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0EYB (Lemma 58.26.3), 0EY6 (Lemma 58.21.5), 0337; proof of step 2 of lem-sbc-finite-normal-depth-two-purity"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-depth",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The whole fibre at every s different from a lies in U, by haway. At a its inverse image is dense by hclosed. Therefore U is dense in each fibre. The stalk of Spec A at its closed point is canonically A, so depth A ≥ 2 ensures that a is not a point of base depth at most one. At every base point of depth at most one the whole fibre is in U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the extension argument of Tag 0EYB. Its depth test follows from the flat local depth formula 0337: outside U the total-space stalk has depth at least two. Construct the extension as the relative spectrum of the pushforward of f_* O_X, as in 0EY6; it is a finite algebra, reflexive as a module, and its formation commutes with flat base change. To check etaleness, enlarge U to the etale locus and suppose its complement is nonempty. Choose a base point minimal under generalization in its image, localize there, and choose a closed point of the complement in that fibre. A finite flat base change realizes its residue field, then an etale local slice provides a section through that point. Completing an affine smooth chart at the section gives A[[x_1,...,x_d]]. Fibrewise density forces d > 0 and puts the generic point of the special fibre in U. The power-series purity calculation (0EYA, Lemma 58.26.2) makes the base-changed extension etale. Flat descent contradicts membership of the chosen point in the complement. Thus the extension p is etale everywhere. Its restriction to U is f by construction, yielding e and its equation.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-depth-formula"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E2",
+  "document": "Stacks Project",
+  "place": "Tags 0EYB (Lemma 58.26.3), 0EY6 (Lemma 58.21.5), 0337; proof of step 2 of lem-sbc-finite-normal-depth-two-purity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite etale cover of a fibrewise dense open in a smooth scheme over a Noetherian local ring of depth at least two extends to the entire scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale cover of a fibrewise dense open in a smooth scheme over a Noetherian local ring of depth at least two extends to the entire scheme",
+   "results": "8 hits: Algebra.isOpen_etaleLocus, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|etale.*depth|depth.*etale",
+   "results": "0 hits: ; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDepthTwoPurity",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local boundary extension in the trait and depth-two paragraphs, as used in Tag 0EYJ; Purity for a finite normal cover over a depth-two local base; Finite etale extension from a fibrewise dense open over a depth-two local base",
+   "via": [
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothLocalDepthTwoEtaleExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothLocalDepthTwoEtaleExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_finite_etale_extension_of_local_depth_two",
+  "statement": "theorem exists_finite_etale_extension_of_local_depth_two\n    (A : Type u) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]\n    {L : Scheme.{u}} (q : L ⟶ Spec (.of A)) [Smooth q]\n    (U : L.Opens)\n    (haway : ∀ y : L, q y ≠ IsLocalRing.closedPoint A → y ∈ U)\n    (hclosed : Dense (↑((q.fiberι (IsLocalRing.closedPoint A)) ⁻¹ᵁ U) :\n      Set (q.fiber (IsLocalRing.closedPoint A))))\n    (hdepth : (2 : ℕ∞) ≤ IsLocalRing.depth (R := A) A)\n    {X : Scheme.{u}} (f : X ⟶ U.toScheme) [IsFinite f] [Etale f] :\n    ∃ (E : Scheme.{u}) (p : E ⟶ L), IsFinite p ∧ Etale p ∧\n      ∃ e : (p ⁻¹ᵁ U).toScheme ≅ X, e.hom ≫ f = p ∣_ U",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T235110-L-2171388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T235110-L-2171388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

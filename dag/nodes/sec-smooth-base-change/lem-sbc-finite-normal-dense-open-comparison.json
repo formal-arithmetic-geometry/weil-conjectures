@@ -1,0 +1,141 @@
+{
+ "id": "lem-sbc-finite-normal-dense-open-comparison",
+ "kind": "statement",
+ "title": "Comparison of a finite normal cover with an etale extension over a dense open",
+ "statement": "Let B be a locally Noetherian integral scheme whose local rings are integrally closed [def-weil-pbc-scheme-conventions, def-pc-integral-scheme, def-weil-pbc-normal-ring]. Let n:N → B and p:E → B be finite [def-weil-finite-integral-morphism], with p etale [def-weil-etale-morphism]. Suppose every stalk of N is an integrally closed domain. Let U be a nonempty open of B such that n^{-1}U is dense in N and n|_U is etale. Given an isomorphism e_U:N|_U ≅ E|_U over U, there is an isomorphism e:N ≅ E with e;p = n. Empty and disconnected covers are allowed. This asserts only comparison with an already supplied etale extension, not existence of that extension.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 035I, 035L and 0BQM; finite normal algebra comparison in Tag 0EYJ, step 3 of lem-sbc-finite-normal-depth-two-purity"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "On an affine open Spec R of the normal integral base B, write the finite covers as Spec C and Spec D. They are Noetherian and normal: the first by hN and the second by etale ascent of normality 033C. A Noetherian ring with domain integrally closed stalks is the finite product of its normal-domain components. Each component of C meets n^{-1}U by density. Its nonempty part over U has open image in B because n|_U is etale, so its image contains the generic point. Every component of D also dominates B, since the etale morphism p is open. Thus both algebras embed into their finite generic algebras.",
+   "uses": [
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The nonempty open U contains the generic point of B. Hence e_U identifies the generic algebras of C and D over the fraction field of R. Componentwise, each algebra is exactly the integral closure of R in its generic field. Finiteness gives inclusion into that closure; conversely an element integral over R is integral over the component algebra, hence belongs to it by integral closedness. The isomorphism of generic algebras therefore identifies C with D. This is the affine relative-normalization characterization of 035I, applied componentwise, including the zero algebra for an empty cover.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "These affine isomorphisms agree on overlaps: both are determined by the same isomorphism of generic algebras, and normal component algebras inject into those algebras. Glue the isomorphisms to e:N ≅ E. Each affine isomorphism is an R-algebra isomorphism, so e;p=n.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "E2",
+  "document": "Stacks Project",
+  "place": "Tags 035I, 035L and 0BQM; finite normal algebra comparison in Tag 0EYJ, step 3 of lem-sbc-finite-normal-depth-two-purity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two finite normal covers of a normal integral scheme agreeing on a dense open are isomorphic",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two finite normal covers of a normal integral scheme agreeing on a dense open are isomorphic",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|integralClosure",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDepthTwoPurity",
+  "date": "2026-10-13",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local boundary extension in the trait and depth-two paragraphs, as used in Tag 0EYJ; Purity for a finite normal cover over a depth-two local base; Comparison of a finite normal cover with an etale extension over a dense open",
+   "via": [
+    "lem-sbc-finite-normal-depth-two-purity",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FiniteNormalDenseOpenComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_normal_iso_of_dense_open_etale_comparison",
+  "statement": "theorem finite_normal_iso_of_dense_open_etale_comparison\n    {B N E : Scheme.{u}} [IsLocallyNoetherian B] [IsIntegral B]\n    (hB : ∀ y : B, IsIntegrallyClosed (B.presheaf.stalk y))\n    (n : N ⟶ B) (p : E ⟶ B) [IsFinite n] [IsFinite p] [Etale p]\n    (hN : ∀ z : N, IsDomain (N.presheaf.stalk z) ∧\n      IsIntegrallyClosed (N.presheaf.stalk z))\n    (U : B.Opens) (hU : (U : Set B).Nonempty)\n    (hdense : Dense (↑(n ⁻¹ᵁ U) : Set N))\n    (hnU : Etale (n ∣_ U))\n    (eU : (n ⁻¹ᵁ U).toScheme ≅ (p ⁻¹ᵁ U).toScheme)\n    (heU : eU.hom ≫ p ∣_ U = n ∣_ U) :\n    ∃ e : N ≅ E, e.hom ≫ p = n",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T235110-L-2171388",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T235110-L-2171388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

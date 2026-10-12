@@ -19,36 +19,52 @@
  ],
  "proof": [
   {
-   "text": "Let T be the union of q inverse V and W. Etaleness is local on the target, so the restriction of n to T is finite etale. Every fibre over a point different from a is entirely contained in T. The closed fibre is integral because q is smooth and geometrically connected, and W meets it, so T is dense on it.",
+   "text": "Put T=q^{-1}V ∪ W. The private proved helper etale_restrict_sup applies target locality using its two-open cover and the double-restriction isomorphism, giving etaleness of n|_T. Finiteness of the restriction follows by base change. For y not over a, hV places y in q^{-1}V, hence in T.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For each base point of depth at most one the entire fibre is in T: the only possibly missing base point is a, whose depth is at least two. Apply Tag 0EYB to obtain a finite etale extension E over L. The depth calculation in that theorem is the flat local depth formula 0337; its construction and uniqueness are the depth-two extension 0EY6.",
+   "text": "Smoothness and geometric connectedness imply geometric irreducibility by the proved source-library theorem GeometricallyIrreducible.of_smooth_of_geometricallyConnected (WeilConjectures.AlgebraicGeometry.Regular). Thus the closed fibre is irreducible. Lift x to it with q.fiberHomeo; hx shows the inverse image of T is a nonempty open, hence dense by IsOpen.dense.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_finite_etale_extension_of_local_depth_two to q,T and the finite etale restriction n|_T, using haway, hclosed and hdepth. Obtain E,p and e:E|_T ≅ N|_T over T.",
    "uses": [
-    "lem-weil-pbc-flat-local-depth-formula"
+    "lem-sbc-smooth-local-depth-two-etale-extension"
    ],
    "elementary": false
   },
   {
-   "text": "Smoothness over the normal base makes L normal; E is normal by etaleness. Density excludes vertical components of N. Both N and E have the same generic finite algebra, since they agree on q inverse V. A finite normal algebra is the full integral closure of the base in its generic algebra: an integral element over the base is integral over that algebra, hence lies in it by normality. Thus both algebras agree on every affine chart and the identifications glue over L. Transport etaleness across this isomorphism.",
+   "text": "The stalks of Spec A are prime localizations of the normal domain A, so they are integrally closed. Apply smooth_connected_generic_geometry_core to q and its canonical generic fibre: it gives IsIntegral L and integrally closed stalks. Nonemptiness is witnessed by x. L is locally Noetherian by its smooth finite-type morphism to Spec A.",
    "uses": [
-    "lem-weil-pbc-smooth-over-normal-ring-normal",
-    "lem-weil-pbc-etale-over-normal-ring-normal"
+    "lem-sbc-smooth-connected-generic-geometry-core"
    ],
    "elementary": false
+  },
+  {
+   "text": "Density of n^{-1}(q^{-1}V) implies density of n^{-1}T by inclusion. The open T is nonempty since x belongs to W. Invert e; its equation over T follows by cancellation. Apply finite_normal_iso_of_dense_open_etale_comparison, obtaining i:N ≅ E with i;p=n.",
+   "uses": [
+    "lem-sbc-finite-normal-dense-open-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rewrite n as i.hom;p. Isomorphisms are etale, and etaleness is closed under composition. This proves Etale n without changing its statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-flat-local-depth-formula",
-  "lem-weil-pbc-smooth-over-normal-ring-normal",
-  "lem-weil-pbc-etale-over-normal-ring-normal"
+  "lem-sbc-finite-normal-dense-open-comparison",
+  "lem-sbc-smooth-connected-generic-geometry-core",
+  "lem-sbc-smooth-local-depth-two-etale-extension"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "C1",
+  "by": "E2",
   "document": "Stacks Project",
-  "place": "Tags 0EYB (pione-lemma-purity-smooth-over-depth2), 0EY6 (pione-lemma-extend-S2) and 0EYJ (depth-two paragraph)"
+  "place": "Tags 0EYB, 0EY6 and 0EYJ; compiling assembly via two strictly smaller extension and comparison theorems, with union locality and fibrewise density proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -136,9 +152,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T223359-L-1634629",
+  "landing": "20261012T235110-L-2171388",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
