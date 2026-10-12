@@ -24,52 +24,22 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-derived-ambient-direct-sums], $D(\\mathcal O_X)$ has set-indexed direct sums represented by termwise direct sums of complexes, and their degree-$q$ cohomology sheaf is $\\bigoplus_i H^q(E_i)$ for every integer $q$.",
+   "text": "Install ambient coproducts from lem-pc-derived-ambient-has-coproducts and closure of quasi-coherent cohomology under every discrete colimit from lem-pc-derived-qcoh-closed-coproducts. Apply Mathlib full-subcategory colimit instance.",
    "uses": [
-    "lem-pc-derived-ambient-direct-sums"
+    "lem-pc-derived-ambient-has-coproducts",
+    "lem-pc-derived-qcoh-closed-coproducts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 08DT (lemma-quasi-coherence-direct-sums), first three sentences, citing Injectives, Lemma 07D9 (lemma-derived-products)"
-   }
-  },
-  {
-   "text": "Fix a degree $q$ and a family $(E_i)_{i\\in I}$ in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Each $H^q(E_i)$ is quasi-coherent by [def-pc-derived-category]. The finite subsets $J\\subseteq I$, ordered by inclusion, form a directed set even when $I$ is empty: $\\varnothing$ is a member and $J\\cup K$ is an upper bound. Set $F_J=\\bigoplus_{i\\in J}H^q(E_i)$, with the usual inclusion maps. $F_{\\varnothing}=0$ is quasi-coherent from its affine-local definition, and induction on the size of $J$ using [lem-weil-pbc-quasi-coherent-module-direct-sum] makes every $F_J$ quasi-coherent. For any sheaf $G$, compatible maps $F_J\\to G$ are exactly families of maps $H^q(E_i)\\to G$: restrict to singleton subsets in one direction, and use the finite-sum universal property in the other. Hence the colimit of $(F_J)_J$ in $\\mathcal O_X$-modules is $\\bigoplus_{i\\in I}H^q(E_i)$. It is quasi-coherent by [lem-weil-pbc-quasi-coherent-module-colimit-affine-sections].",
-   "uses": [
-    "def-pc-derived-category",
-    "lem-weil-pbc-quasi-coherent-module-direct-sum",
-    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 08DT (lemma-quasi-coherence-direct-sums), last sentence; Schemes, Section 01LA (section-quasi-coherent)"
-   }
-  },
-  {
-   "text": "Step 2 applied to the cohomology identity of Step 1 shows that the ambient sum $E=\\bigoplus_i E_i$ has quasi-coherent cohomology in every degree; hence $E$ belongs to $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ by [def-pc-derived-category]. For any $G$ in that full subcategory, the ambient coproduct bijection $\\operatorname{Hom}_{D(\\mathcal O_X)}(E,G)\\cong\\prod_i\\operatorname{Hom}_{D(\\mathcal O_X)}(E_i,G)$ from [lem-pc-derived-ambient-direct-sums] is the same bijection in the full subcategory. Thus $E$ is its coproduct, also for the empty and singleton families.",
-   "uses": [
-    "def-pc-derived-category",
-    "lem-pc-derived-ambient-direct-sums"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "proof of Lemma 08DT (lemma-quasi-coherence-direct-sums), conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-ambient-direct-sums",
-  "def-pc-derived-category",
-  "lem-weil-pbc-quasi-coherent-module-direct-sum",
-  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
+  "lem-pc-derived-ambient-has-coproducts",
+  "lem-pc-derived-qcoh-closed-coproducts"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemma 08DT (lemma-quasi-coherence-direct-sums) and its proof"
+  "place": "Lemma 08DT; categorical assembly via ObjectProperty full-subcategory colimits"
  },
  "mathlib_searches": [
   {
@@ -172,5 +142,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T060753-L-2914849",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

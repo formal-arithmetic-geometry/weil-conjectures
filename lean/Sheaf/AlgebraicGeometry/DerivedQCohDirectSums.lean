@@ -6,9 +6,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
-import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
-import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+
 
 /-! # Direct sums in the quasi-coherent derived category
 
@@ -44,6 +43,11 @@ including empty and singleton families. -/
 theorem derivedQCohDirectSums (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     HasCoproducts.{u} (schemeDerivedQCohCategory X) := by
-  sorry
+  let : HasCoproducts.{u} (schemeDerivedCategory X) :=
+    derivedAmbientHasCoproducts X
+  let (I : Type u) :
+      (schemeDerivedQCohProperty X).IsClosedUnderColimitsOfShape (Discrete I) :=
+    schemeDerivedQCohClosedUnderCoproducts X I
+  infer_instance
 
 end AlgebraicGeometry
