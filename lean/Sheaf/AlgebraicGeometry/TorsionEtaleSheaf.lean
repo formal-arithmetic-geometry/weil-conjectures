@@ -51,7 +51,9 @@ theorem torsionKernelTransition_condition {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
     (n m : PositiveNat) (hnm : n.1 ∣ m.1) :
     kernel.ι (n.val • 𝟙 F) ≫ (m.val • 𝟙 F) = 0 := by
-  sorry
+  obtain ⟨r, hr⟩ := hnm
+  rw [hr, mul_nsmul, Preadditive.comp_nsmul, kernel.condition,
+    nsmul_zero]
 
 /-- The canonical kernel inclusions satisfy the identity law. Source: blueprint
 `sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
@@ -59,7 +61,8 @@ theorem torsionKernelTransition_id {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (n : PositiveNat) :
     kernel.lift (n.val • 𝟙 F) (kernel.ι (n.val • 𝟙 F))
         (torsionKernelTransition_condition F n n (dvd_refl n.1)) = 𝟙 _ := by
-  sorry
+  apply (cancel_mono (kernel.ι (n.val • 𝟙 F))).1
+  simp only [kernel.lift_ι, Category.id_comp]
 
 /-- The canonical kernel inclusions satisfy the composition law. Source: blueprint
 `sec-proper-base-change/sk-def-pbc`, statement (blueprint: def-weil-pbc-torsion-etale-sheaf). -/
@@ -72,7 +75,8 @@ theorem torsionKernelTransition_comp {T : Scheme.{u}}
         (torsionKernelTransition_condition F m k hmk) =
       kernel.lift (k.val • 𝟙 F) (kernel.ι (n.val • 𝟙 F))
         (torsionKernelTransition_condition F n k (dvd_trans hnm hmk)) := by
-  sorry
+  apply (cancel_mono (kernel.ι (k.val • 𝟙 F))).1
+  simp only [Category.assoc, kernel.lift_ι]
 
 /-- Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement
 (blueprint: def-weil-pbc-torsion-etale-sheaf). For a sheaf `F` of abelian groups on the
