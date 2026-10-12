@@ -1,0 +1,117 @@
+{
+ "id": "lem-pc-leray-edge-grothendieck-comparison",
+ "kind": "statement",
+ "title": "Cocycle Leray edge agrees with the Grothendieck edge",
+ "statement": "For schemes X,Y [def-pc-scheme], f:X→Y, and a cocycle Leray edge ε [lem-pc-leray-edge-cocycle-data] on module sheaves [def-weil-sheaf-of-modules-category], put D=f_* and G=Γ(Y,−), with module cohomology defined by [pqf-def-cohomology]. For every acyclicity witness hFG [def-sp-composite-acyclicity], there are natural isomorphisms e_q from H^q(X,−), after forgetting scalars, to R^q(D⋙G), after forgetting scalars. Each ε_q is e_q followed by the underlying additive Grothendieck left edge [lem-sp-grothendieck-edge-maps]. No vanishing assumption is made.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F4 (2), construction of the Leray edge"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-cohomology",
+  "lem-pc-leray-edge-cocycle-data",
+  "def-sp-composite-acyclicity",
+  "lem-sp-grothendieck-edge-maps"
+ ],
+ "proof": [
+  {
+   "text": "Identify sections of a direct image with sections upstairs, after forgetting scalars. Apply the natural identification termwise to injective resolutions [def-sp-injective-resolutions], take homology, and compare with the derived functors [pqf-def-cohomology] to get e_q.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cocycle clause of [lem-pc-grothendieck-edge-cocycle] describes the canonical edge. Each cohomology class comes from a global cycle because homologyπ is epi in modules. The lift of this cycle to sections of the cycle sheaf is unique because its inclusion is monic and sections preserves monomorphisms. The characterization [lem-pc-leray-edge-cocycle-data] therefore gives the same edge value on every class, proving the displayed equality.",
+   "uses": [
+    "lem-pc-grothendieck-edge-cocycle",
+    "lem-pc-leray-edge-cocycle-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "pqf-def-cohomology",
+  "lem-pc-grothendieck-edge-cocycle",
+  "lem-pc-leray-edge-cocycle-data"
+ ],
+ "proof_origin": {
+  "by": "stage-3 worker K1",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F4 (2)"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LerayEdgeVanishingIso",
+  "date": "2026-10-12",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-leray-edge-vanishing-iso",
+   "place": "proof steps 1-2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical Grothendieck spectral sequence edge agrees with cocycle map on injective resolutions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence edge is isomorphism if cohomology of higher direct images vanishes",
+   "results": "Connecting-map isomorphism results for group cohomology and homological complexes; no Leray specialization",
+   "date": "2026-10-12",
+   "verdict": "no matching specialized theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieckLeftEdgeMap|globalSections.*DirectImage|leray",
+   "results": "No Mathlib hits. Source has grothendieckLeftEdgeMap and project has grothendieck_left_edge_cocycle, but neither identifies LerayEdgeCocycle.",
+   "date": "2026-10-12",
+   "verdict": "comparison not already stated"
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LerayEdgeGrothendieckComparison",
+  "declaration": "AlgebraicGeometry.leray_edge_grothendieck_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LerayEdgeGrothendieckComparison.lean",
+  "statement": "theorem leray_edge_grothendieck_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (ε : LerayEdge X Y f) (hε : LerayEdgeCocycle f ε) : letI := SheafOfModules.isGrothendieckAbelian (moduleRings X.toRingedSpace) letI := SheafOfModules.isGrothendieckAbelian (moduleRings Y.toRingedSpace) letI := HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings X.toRingedSpace)) letI := HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) let G := RingedSpace.globalSectionsFunctor Y.toRingedSpace letI := HasDerivedCategory.standard (ModuleCat.{u} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) letI : PreservesFiniteLimits G := inferInstanceAs (PreservesFiniteLimits (SheafOfModules.evaluation (moduleRings Y.toRingedSpace) (op ⊤))) let D := RingedSpace.moduleDirectImage f.toLRSHom.toShHom ∀ hFG : D.IsAcyclicComposablePair G, ∃ e : ∀ q : ℕ, (RingedSpace.moduleCohomology X.toRingedSpace q ⋙ forget₂ _ AddCommGrpCat) ≅ ((D ⋙ G).rightDerived q ⋙ forget₂ _ AddCommGrpCat), ∀ (q : ℕ) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)), (ε q).app F = (e q).hom.app F ≫ (forget₂ _ AddCommGrpCat).map ((D.grothendieckLeftEdgeMap G hFG q).app F)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085257-L-22390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T085257-L-22390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

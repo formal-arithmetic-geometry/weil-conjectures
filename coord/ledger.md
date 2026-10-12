@@ -6899,3 +6899,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.EtaleLocalizeUpstairs (stage 3; reviewer PASS; first push; landing 20261012T085256-L-22031 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.EtaleSubsheafSupportStalk (stage 3; reviewer PASS; first push; landing 20261012T085257-L-22134 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.GroupScheme.LieLocalDimension (stage 3; reviewer PASS; first push; landing 20261012T085257-L-22229 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:52 L: merged deliver/K1/Sheaf.AlgebraicGeometry.LerayEdgeVanishingIso (stage 3; reviewer PASS; first push; landing 20261012T085257-L-22390 (interface); batch 20261012T085205; modules 2; new nodes 1)
