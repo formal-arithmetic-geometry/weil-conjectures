@@ -9,31 +9,38 @@
  },
  "proof": [
   {
-   "text": "Form P = W_B times_B U and the induced map k : W_U -> P. Pasting the B-model Cartesian square with the canonical restriction pullback squares identifies the pullback of P to X_U with V_U. The U-model square makes the same identification for W_U. Reconstruction identifies the base change of k with the identity under these identifications.",
+   "text": "Let x : X_U → X_B and c : V_U → V_B be the canonical cover transitions. Their projection equations follow by unfolding Cover.trans on a pulled-back directed cover and pullback.map. Cancel the B defining pullback square from the U defining pullback square using IsPullback.of_right to get IsPullback c snd_U snd_B x. Paste it with hp B. The reconstruction equation hr and the second projection equation for x identify the resulting outer square with IsPullback (r U ≫ t) snd_U (W B).hom (q_U ≫ i).",
    "uses": [
     "def-pc-fibre-product"
    ],
    "elementary": true
   },
   {
-   "text": "The singleton X_U -> U is fpqc by base change of f. Apply full faithfulness of fpqc descent of morphisms to descend the inverse of the base-changed k; inverse compatibility follows by inverting the compatibility of k. Faithfulness gives the two inverse identities, so k is an isomorphism. Compose k with the pullback square defining P to obtain the claimed Cartesian square.",
+   "text": "The singleton q_U : X_U → U is fpqc by base change of hf, using Precoverage.mem_coverings_of_isPullback on the flipped canonical pullback square. Regard it as Precoverage.ZeroHypercover.singleton q_U hq. The fpqc topology is subcanonical by the cited representable-descent Mathlib leaf. Apply Precoverage.ZeroHypercover.isPullback_of_forall_isPullback to the flipped desired square, with this cover of U.",
    "uses": [
     "lem-galois-fpqc-covering-base-change",
-    "lem-galois-fpqc-morphisms-descend",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-fpqc-representable-descent"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "The criterion asks for the pullback square on pullback (W U).hom q_U. The given hp U supplies its canonical isomorphism from V_U. Transport the flipped outer square of Step 1 along (hp U).isoPullback using IsPullback.of_iso; its projection equations are isoPullback_hom_snd and isoPullback_hom_fst. All other objects have identity isomorphisms. This proves the local square, so the criterion proves the flipped desired square. Flip back and retain the given commutativity ht. No descent witnesses are chosen by this module.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
   "lem-galois-fpqc-covering-base-change",
-  "lem-galois-fpqc-morphisms-descend"
+  "lem-weil-pbc-fpqc-representable-descent"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 02W3, nested affine comparison; full faithfulness from Tag 02W0. The auxiliary statement isolates the Cartesian verification after reconstruction."
+  "place": "Tag 02W3, nested affine comparison, and Tag 023Q (fpqc subcanonicity). Second reader S1 shortened the agent-written proof using Mathlib CategoryTheory.Precoverage.ZeroHypercover.isPullback_of_forall_isPullback (Sites/Hypercover/Subcanonical.lean), transporting the pasted square along hp U.isoPullback. Sources read at https://stacks.math.columbia.edu/tag/02W3 and https://stacks.math.columbia.edu/tag/023Q on 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -108,10 +115,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T173916-L-3309816",
-  "kind": "interface",
+  "landing": "20261012T202251-L-708280",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
