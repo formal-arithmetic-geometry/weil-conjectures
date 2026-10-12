@@ -1,0 +1,140 @@
+{
+ "id": "lem-pod-module-local-constancy-of-finite-underlying",
+ "kind": "statement",
+ "title": "Local constancy of module operations on a finite locally constant underlying sheaf",
+ "statement": "Let Y be any scheme and Λ a finite ring, not necessarily commutative. Let F be a sheaf of left Λ-modules on the small etale site of Y [def-weil-pbc-etale-site]. If the underlying sheaf of sets is finite locally constant [def-weil-pbc-etale-sheaves], then F is locally constant as a sheaf of modules [def-constructible-locally-constant]: there is an etale cover on each member of which F is isomorphic to the constant sheaf [def-weil-pbc-constant-sheaf] of some Λ-module. This conclusion imposes no finiteness condition on those modules.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-constructible-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Trivialize the underlying set sheaf on an etale cover. On each nonempty member choose a geometric point. Its stalk identifies the constant value with a finite set, by the finite-stalk hypothesis. On an empty member every sheaf is the unique sheaf; retain it separately and use the zero module later.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects"
+   }
+  },
+  {
+   "text": "Trivialize products using the same finite constant set. Addition has source the square of that set, negation and each scalar multiplication have that set as source, and zero has singleton source. For each element of any of these finite sources, its image is a section of the constant target. Sheafification of a constant presheaf is locally represented by constant sections, so an etale refinement makes that image one specified constant section. Take successive fiber-product refinements over all source elements and all operations. There are finitely many such choices because the sources and the coefficient ring are finite. This gives a covering on each member on which every operation is induced by a function of finite constant sets, the finite-source argument of 093S (1).",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects"
+   }
+  },
+  {
+   "text": "On a nonempty refined member, evaluate the equations of module operations at a geometric point. The constant-sheaf fiber is its value, so addition, zero, negation and scalar multiplication on that value satisfy exactly the left-module axioms. Transporting the original underlying-set trivialization identifies the module sheaf with the constant sheaf of this module: its section maps preserve addition and scalar multiplication, their inverses do too, and naturality is inherited. On an empty refined member use the constant zero module. Composing the refined covers gives a LocallyConstantDatum of the original module sheaf. No finiteness of the module constant models is asserted in the conclusion.",
+   "uses": [
+    "def-constructible-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-locally-constant",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DV5, proof of (2)--(3), expanded using sites-modules Tag 093S (1); local finite-operation refinement from step 2 of lem-pod-lisse-module-sheaves-as-module-objects",
+  "note": "The Stacks argument with additional structure and the omitted finite-source refinement of 093S (1) expanded explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally constant finite sheaf of sets with module operations over a finite ring is locally constant as a sheaf of modules",
+   "results": "Service unavailable: Internal Server Error. No verdict from this service.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules over a finite ring is locally constant if its underlying sheaf of sets is locally constant",
+   "results": "Eight results concern locally constant condensed modules, not small etale sheaves. Loogle constantCommuteCompose found commutation of forgetting with constants, and isConstant_of_forget requires full faithful constant functors on the site, not available on arbitrary disconnected members.",
+   "date": "2026-10-12",
+   "verdict": "no applicable match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg locallyConstant|LocallyConstant|constantSheaf.*forget|forget.*constantSheaf lean/WeilConjectures/AlgebraicGeometry lean/Sheaf/Paper Mathlib/CategoryTheory/Sites; rg -l 093S dag/nodes; tools/blueprint_refs.py search 093S",
+   "results": "Mathlib has Sheaf.isConstant_of_forget with additional full-faithfulness assumptions. The proved module_pullback_isConstant_of_set_pullback requires a connected scheme and a commutative ring. Neither applies to an arbitrary scheme and Ring Λ. Only the parent node and the connected pullback node cite 093S; no separate duplicate of this local-constancy statement was found in the library or blueprint.",
+   "date": "2026-10-12",
+   "verdict": "no applicable match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseModuleSheaves",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "step 1, identification of lisse sheaves with module objects; local-operation refinement in step 2 of lem-pod-lisse-module-sheaves-as-module-objects",
+   "via": [
+    "lem-pod-lisse-module-sheaves-as-module-objects"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying",
+  "file": "lean/Sheaf/Paper/ModuleLocalConstancyOfFiniteUnderlying.lean",
+  "declaration": "AlgebraicGeometry.Scheme.module_localConstancy_of_finite_underlying",
+  "statement": "theorem module_localConstancy_of_finite_underlying\n    {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hF : IsFiniteLocallyConstantEtaleSheafOfSets\n      ((sheafForget Y.smallEtaleTopology).obj F)) :\n    IsLocallyConstantSheaf F",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6fb62",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T150952-L-2230666",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-6fb62",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T150952-L-2230666",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with both nodes, unchanged existing signatures and definitions, the DAG route, report, and Stacks 0DV5/093S; both modules and both direct importers compile cleanly, and axiom checks show only permitted axioms plus sorryAx from the named remaining theorem."
+ }
+}

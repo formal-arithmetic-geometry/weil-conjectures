@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "If $\\mathcal F$ is lisse, choose an etale covering on which it is isomorphic, as a sheaf of $\\Lambda$-modules, to the constant sheaf of a finite left $\\Lambda$-module $M_i$. Forgetting the module structure gives an isomorphism of sheaves of sets with the constant finite sheaf underlying $M_i$, so the underlying sheaf lies in $\\mathrm{FLC}(Y)$.",
+   "text": "From a finite-module trivializing cover, retain the cover after forgetting modules. Constants commute with forgetting and restriction, giving local constancy of the underlying set sheaf. For any geometric point, joint surjectivity and etale lifting give a lift to one covering member. moduleConstantValueStalkIso identifies the module stalk with that member's finite module value. moduleUnderlyingStalkIso commutes the geometric stalk with forgetting, so the underlying set stalk is finite. These two conclusions give finite local constancy.",
    "uses": [
     "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-etale-site"
@@ -36,8 +36,9 @@
    }
   },
   {
-   "text": "Conversely, suppose the underlying sheaf of sets of a sheaf of left $\\Lambda$-modules $\\mathcal F$ is finite locally constant. Trivialize the underlying sheaf on an etale cover, and also trivialize the finite products that occur as operation sources. For any one of the finitely many operations, each element of its finite constant source has an image section of the finite constant target; after an etale refinement that image is a specified constant section, and refining simultaneously over the finite source makes the operation a map of finite constant sets. Since there are only finitely many operations (because $\\Lambda$ is finite), one common refinement makes all of them constant maps. The module axioms already hold as sheaf-map equalities, so the induced finite maps satisfy them; the local constant finite set is therefore a finite left $\\Lambda$-module and the local identification is an isomorphism of sheaves of $\\Lambda$-modules, proving that $\\mathcal F$ is lisse.",
+   "text": "Apply module_localConstancy_of_finite_underlying to obtain a LocallyConstantDatum for F as a module sheaf. For each member U of its cover use finiteModuleConstantModel_over: if U is empty, the equivalence with sheaves on U identifies both F.over U and the constant singleton zero module with the zero sheaf. Otherwise choose a geometric point of U with algebraically closed residue-field closure. A constant model exists by the datum, and moduleConstantValueStalkIso together with moduleUnderlyingStalkIso identifies its underlying set with the finite underlying stalk of F at the composite geometric point. Thus that model is finite. Retain the datum's cover with these finite module models, proving IsLisseModuleSheaf F.",
    "uses": [
+    "lem-pod-module-local-constancy-of-finite-underlying",
     "def-weil-pbc-etale-sheaves",
     "def-weil-pbc-etale-site"
    ],
@@ -59,12 +60,13 @@
  ],
  "proof_deps": [
   "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-etale-site"
+  "def-weil-pbc-etale-site",
+  "lem-pod-module-local-constancy-of-finite-underlying"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0DV5, proof of parts (1)-(3), with Lemma 093S(1)"
+  "place": "0DV5 (1)--(3), with local-operation constancy split into lem-pod-module-local-constancy-of-finite-underlying and finite-model extraction proved from geometric stalk comparison; the existing clause (2) reconstruction proof is retained."
  },
  "mathlib_searches": [
   {
@@ -157,11 +159,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-8cfba",
-  "group": "R3",
+  "reviewer": "X-6fb62",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261012T135312-L-1690278",
-  "kind": "proof",
-  "note": "independent Codex review: Matched the reconstruction proof and remaining clause (1) with the node, unchanged interfaces, DAG and report; delivered module and both direct importers compile cleanly; axiom checks show only permitted axioms plus sorryAx from clause (1)."
+  "landing": "20261012T150952-L-2230666",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean with both nodes, unchanged existing signatures and definitions, the DAG route, report, and Stacks 0DV5/093S; both modules and both direct importers compile cleanly, and axiom checks show only permitted axioms plus sorryAx from the named remaining theorem."
  }
 }

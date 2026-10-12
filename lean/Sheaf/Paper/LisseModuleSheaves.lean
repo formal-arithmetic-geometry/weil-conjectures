@@ -3,6 +3,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Sites.Adjunction
+import Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 /-!
 # Lisse sheaves of finite modules and module objects
@@ -186,6 +189,79 @@ private theorem moduleObjectStruct_ext
       g.hom.app U x := by
   exact sheafType_congr (prod.lift_snd f g) U x
 
+private instance : JointlySurjective etalePrecoverage.{u} :=
+  inferInstanceAs (JointlySurjective (precoverage @Etale))
+
+private noncomputable def moduleUnderlyingStalkIso
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
+    ((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj
+      ((sheafForget Y.smallEtaleTopology).obj F) ≅
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)).obj
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) := by
+  let : PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  exact ((pointSmallEtale s).sheafFiberCompIso
+    (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).app F
+
+private noncomputable def moduleConstantValueStalkIso
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (U : Y.Etale) (M : ModuleCat.{u + 1} Λ)
+    (e : F.over U ≅
+      (constantSheaf (Y.smallEtaleTopology.over U) (ModuleCat.{u + 1} Λ)).obj M)
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ U.left) :
+    ((pointSmallEtale (s ≫ U.hom)).sheafFiber
+      (A := ModuleCat.{u + 1} Λ)).obj F ≅ M := by
+  let : PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  let eU : (Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F ≅
+      (constantSheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M :=
+    (overSheafEquivFunctorObjOverIso (ModuleCat.{u + 1} Λ) U F).symm ≪≫
+      (Etale.overSheafEquiv U (ModuleCat.{u + 1} Λ)).functor.mapIso e ≪≫
+      ((Etale.overEquiv U).constantSheafSheafCongrIso
+        (Y.smallEtaleTopology.over U) U.left.smallEtaleTopology
+        (ModuleCat.{u + 1} Λ) CategoryTheory.Over.mkIdTerminal).app M
+  exact ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) U.hom s).app F).symm ≪≫
+    (pointSmallEtale s).sheafFiber.mapIso eU ≪≫
+      (pointSmallEtale s).sheafFiberConstantSheafIso M
+
+private theorem finiteModuleConstantModel_over
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (U : Y.Etale)
+    (hc : (F.over U).IsConstant (Y.smallEtaleTopology.over U))
+    (hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+      Finite (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj
+        ((sheafForget Y.smallEtaleTopology).obj F))) :
+    ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧
+      Nonempty (F.over U ≅
+        (constantSheaf (Y.smallEtaleTopology.over U) (ModuleCat.{u + 1} Λ)).obj M) := by
+  classical
+  by_cases hU : IsEmpty U.left
+  · let := hU
+    let E := (Etale.overSheafEquiv U (ModuleCat.{u + 1} Λ)).functor
+    have hF : IsZero (E.obj (F.over U)) := Etale.isZero_sheaf_of_isEmpty _
+    have hM : IsZero (E.obj
+        ((constantSheaf (Y.smallEtaleTopology.over U)
+          (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ PUnit))) :=
+      Etale.isZero_sheaf_of_isEmpty _
+    exact ⟨ModuleCat.of Λ PUnit, inferInstance, ⟨E.preimageIso (hF.iso hM)⟩⟩
+  · have : Nonempty U.left := not_isEmpty_iff.mp hU
+    let x : U.left := Classical.choice inferInstance
+    let Ω := AlgebraicClosure (U.left.residueField x)
+    let s : Spec (.of Ω) ⟶ U.left :=
+      Spec.map (CommRingCat.ofHom (algebraMap (U.left.residueField x) Ω)) ≫
+        U.left.fromSpecResidueField x
+    let := hc
+    obtain ⟨M, ⟨e⟩⟩ := (F.over U).mem_essImage_of_isConstant
+    have : Finite (((pointSmallEtale (s ≫ U.hom)).sheafFiber
+        (A := Type (u + 1))).obj ((sheafForget Y.smallEtaleTopology).obj F)) :=
+      hf Ω (s ≫ U.hom)
+    let eM := moduleUnderlyingStalkIso F (s ≫ U.hom) ≪≫
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)).mapIso
+        (moduleConstantValueStalkIso F U M e.symm s)
+    exact ⟨M, Finite.of_equiv _ eM.toEquiv, ⟨e.symm⟩⟩
+
 /-- Clause (1): a sheaf of left modules over a finite ring `Λ` is lisse if and only if its
 underlying sheaf of sets lies in `FLC(Y)`. Source: Stacks Project, Lemma 0DV5 (1), using
 Lemma 093S (1) (blueprint: lem-pod-lisse-module-sheaves-as-module-objects).
@@ -205,7 +281,36 @@ theorem lisseModuleSheaf_iff_underlying_finiteLocallyConstant [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsLisseModuleSheaf F ↔
       IsFiniteLocallyConstantEtaleSheafOfSets ((sheafForget Y.smallEtaleTopology).obj F) := by
-  sorry
+  constructor
+  · rintro ⟨𝒰, h𝒰⟩
+    constructor
+    · refine ⟨𝒰, fun i ↦ ?_⟩
+      obtain ⟨M, _, ⟨e⟩⟩ := h𝒰 i
+      have : (F.over (𝒰.etalePrecoverageToEtale i)).IsConstant
+          (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)) :=
+        Sheaf.isConstant_of_iso _ e
+      change ((sheafCompose (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i))
+        (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
+        (F.over (𝒰.etalePrecoverageToEtale i))).IsConstant _
+      infer_instance
+    · intro Ω _ _ s
+      obtain ⟨i, x, hx⟩ := 𝒰.exists_eq (s default)
+      have : Etale (𝒰.f i) := 𝒰.map_prop i
+      obtain ⟨t, ht, -⟩ := exists_fac_of_etale_of_isSepClosed (𝒰.f i) s x hx
+      obtain ⟨M, hM, ⟨e⟩⟩ := h𝒰 i
+      let := hM
+      let es := moduleUnderlyingStalkIso F s
+      have em := moduleConstantValueStalkIso F (𝒰.etalePrecoverageToEtale i) M e t
+      change ((pointSmallEtale (t ≫ 𝒰.f i)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).obj F ≅ M at em
+      rw [ht] at em
+      exact Finite.of_equiv M
+        (es ≪≫ (CategoryTheory.forget (ModuleCat.{u + 1} Λ)).mapIso em).toEquiv.symm
+  · intro hF
+    let := module_localConstancy_of_finite_underlying F hF
+    obtain ⟨d⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
+    exact ⟨d.cover, fun i ↦ finiteModuleConstantModel_over F
+      (d.cover.etalePrecoverageToEtale i) (d.isConstant i) hF.2⟩
 
 /-- The underlying sheaf of sets of a sheaf of `Λ`-modules carries exactly one module-object
 structure given on sections by the operations of the modules `F(U)`. Source: Stacks Project,
