@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.ConeHorizontalStepStable
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
+import Sheaf.Algebra.Homology.ConeHorizontalQuotientIso
+import Sheaf.Algebra.Homology.ConeHorizontalProjectionDifferential
 
 /-! # The graded complexes of the horizontal cone filtration
 
@@ -56,6 +58,36 @@ theorem coneHorizontal_graded_iso
     Nonempty (F.gradedPiece p ≅
       (CochainComplex.mappingCone
         (HomologicalComplex.extendMap (f.f p.toNat) ComplexShape.embeddingUpNat))⟦-p⟧) := by
-  sorry
+  classical
+  let q := p.toNat
+  have h : Nonempty (F.gradedPiece (q : ℤ) ≅
+      (CochainComplex.mappingCone
+        (HomologicalComplex.extendMap (f.f q) ComplexShape.embeddingUpNat))⟦-(q : ℤ)⟧) := by
+    have hquot := fun n ↦ (coneHorizontal_quotient_iso f F hF q n).exists
+    choose a ha using hquot
+    have hi : ∀ n, IsIso (a n) := fun n ↦ (ha n).1
+    let e := fun n ↦ asIso (a n)
+    refine ⟨HomologicalComplex.Hom.isoOfComponents e ?_⟩
+    intro i j hij
+    have hj : i + 1 = j := hij
+    subst j
+    change a i ≫ _ = _ ≫ a (i + 1)
+    let π := F.complexQuotientπ (q : ℤ) ((q : ℤ) + 1) (by omega)
+    have hπ : Epi (π.f i) := by
+      dsimp only [π, DecreasingFiltration.complexQuotientπ]
+      infer_instance
+    apply (cancel_epi (π.f i)).1
+    calc
+      π.f i ≫ a i ≫ _ =
+          ((F.step (q : ℤ)).arrow.f i ≫ coneHorizontalProjection f q i) ≫ _ := by
+        rw [← Category.assoc, (ha i).2]
+      _ = (F.step (q : ℤ) : CochainComplex C ℤ).d i (i + 1) ≫
+          (F.step (q : ℤ)).arrow.f (i + 1) ≫ coneHorizontalProjection f q (i + 1) :=
+        coneHorizontal_projection_differential f F hF q i
+      _ = (F.step (q : ℤ) : CochainComplex C ℤ).d i (i + 1) ≫
+          π.f (i + 1) ≫ a (i + 1) := by rw [(ha (i + 1)).2]
+      _ = π.f i ≫ (F.gradedPiece (q : ℤ)).d i (i + 1) ≫ a (i + 1) := by
+        exact (π.comm_assoc i (i + 1) (a (i + 1))).symm
+  simpa only [q, Int.toNat_of_nonneg hp] using h
 
 end HomologicalComplex₂

@@ -1,0 +1,192 @@
+{
+ "id": "lem-sp-cone-horizontal-projection-differential",
+ "kind": "statement",
+ "title": "Restricted signed column projection commutes with differentials",
+ "statement": "Let C be abelian admitting first-quadrant total complexes, let f:A to B be a morphism of such bicomplexes, and let F be a decreasing filtration of M=Cone(extend(Tot(f))) whose degreewise steps equal coneHorizontalStep f at every integer index and degree [lem-sp-cone-horizontal-step-stable; def-sp-filtered-complex-subquotients]. For each natural p and integer n, put R_n=coneHorizontalProjection f p n [def-sp-cone-horizontal-projection] and T=Cone(extend(f^{p,bullet}))[-p]. Then (F.step p).arrow^n followed by R_n followed by d_T^{n,n+1} equals d_{F.step p}^{n,n+1} followed by (F.step p).arrow^{n+1} followed by R_{n+1}. This concerns only the restricted explicit projection, without quotient invertibility.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-cone-horizontal-step-stable",
+  "def-sp-cone-horizontal-projection"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "First horizontal filtration and Lemma 12.25.1(1); column-cone refinement in lem-sp-cone-horizontal-graded-iso."
+ },
+ "proof": [
+  {
+   "text": "test the two maps on the diagonal source and target inclusions generating the tail. The total differential is the sum of the horizontal differential, which raises the index, and (-1)^h times the vertical differential at index h. For h>p both projections vanish, as do projections of the resulting terms. For h=p the horizontal term goes to p+1 and is killed by the projection. The cone source block is minus the total differential and its off-diagonal block is f; the target block is the total differential. After projection the blocks are -e*d_A, e*d_B and f, where e=(-1)^p. The shifted column cone has blocks -e*d_A, e*d_B and e*f. Multiplying the source projection by e and leaving the target projection fixed gives equality of the diagonal blocks; the off-diagonal equality is e squared times f equals f. Extension by zero handles the boundary n=p-1 (only source survives) and degrees below it. Equality on all generators implies equality on the finite biproduct tail, and hence on its representative subobject F.step (p : ℤ) via hF.",
+   "uses": [
+    "def-sp-cone-horizontal-projection",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-cone-horizontal-step-stable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-cone-horizontal-projection",
+  "def-sp-filtered-complex-subquotients",
+  "lem-sp-cone-horizontal-step-stable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012X",
+  "place": "Explicit construction and elementary column-cone refinement of the first-filtration formulas."
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T21:39:39Z",
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.isoOfComponents",
+   "sub": "",
+   "ok": true,
+   "n_hits": 4,
+   "note": "",
+   "top": [
+    "HomologicalComplex.Hom.isoOfComponents",
+    "HomologicalComplex.Hom.isoOfComponents_app",
+    "HomologicalComplex.Hom.isoOfComponents_hom_f",
+    "HomologicalComplex.Hom.isoOfComponents_inv_f"
+   ],
+   "digest": "451d3a95828e43e7",
+   "results": "4 hits: HomologicalComplex.Hom.isoOfComponents, HomologicalComplex.Hom.isoOfComponents_app, HomologicalComplex.Hom.isoOfComponents_hom_f, HomologicalComplex.Hom.isoOfComponents_inv_f",
+   "verdict": "Mathlib supplies totalDesc, cone component and shift APIs, and finite biproduct cokernel isomorphisms. None directly identifies this explicit tail subobject with a biproduct or provides the signed restricted projection equation. These APIs support the construction and the stated proofs; no duplicate theorem found.",
+   "date": "2026-10-12"
+  },
+  {
+   "t": "2026-10-12T21:39:40Z",
+   "tool": "leanfinder",
+   "query": "Cokernel of consecutive tails of a finite direct sum projects isomorphically onto a single summand",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_hom",
+    "CategoryTheory.Limits.cokernelBiproductFromSubtypeIso",
+    "CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_inv",
+    "CategoryTheory.Limits.cokernelBiproductιIso",
+    "CategoryTheory.Limits.cokernelBiproductιIso_hom",
+    "CategoryTheory.Limits.cokernelBiproductιIso_inv",
+    "ModuleCat.range_mkQ_cokernelIsoRangeQuotient_inv",
+    "CategoryTheory.Limits.cokernelBiprodInrIso_hom"
+   ],
+   "digest": "d36aff63dba287cd",
+   "results": "8 hits: CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_hom, CategoryTheory.Limits.cokernelBiproductFromSubtypeIso, CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_inv, CategoryTheory.Limits.cokernelBiproductιIso, CategoryTheory.Limits.cokernelBiproductιIso_hom, CategoryTheory.Limits.cokernelBiproductιIso_inv, ModuleCat.range_mkQ_cokernelIsoRangeQuotient_inv, CategoryTheory.Limits.cokernelBiprodInrIso_hom",
+   "verdict": "Mathlib supplies totalDesc, cone component and shift APIs, and finite biproduct cokernel isomorphisms. None directly identifies this explicit tail subobject with a biproduct or provides the signed restricted projection equation. These APIs support the construction and the stated proofs; no duplicate theorem found.",
+   "date": "2026-10-12"
+  },
+  {
+   "t": "2026-10-12T21:46:52Z",
+   "tool": "leanfinder",
+   "query": "Signed projection onto a column of a bicomplex total complex commutes with the vertical differential after restricting to the horizontal tail",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "HomologicalComplex₂.totalAux.ιMapObj_D₂",
+    "HomologicalComplex₂.totalAux.ιMapObj_D₁",
+    "HomologicalComplex₂.ι_D₂",
+    "HomologicalComplex₂.ι_D₁",
+    "HomologicalComplex.mapBifunctor.ι_D₂",
+    "HomologicalComplex₂.totalAux.d₂_eq",
+    "HomologicalComplex₂.totalAux.ιMapObj_D₁_assoc",
+    "HomologicalComplex₂.totalAux.ιMapObj_D₂_assoc"
+   ],
+   "digest": "7e9160c61d49cb08",
+   "results": "8 hits: HomologicalComplex₂.totalAux.ιMapObj_D₂, HomologicalComplex₂.totalAux.ιMapObj_D₁, HomologicalComplex₂.ι_D₂, HomologicalComplex₂.ι_D₁, HomologicalComplex.mapBifunctor.ι_D₂, HomologicalComplex₂.totalAux.d₂_eq, HomologicalComplex₂.totalAux.ιMapObj_D₁_assoc, HomologicalComplex₂.totalAux.ιMapObj_D₂_assoc",
+   "verdict": "Mathlib supplies totalDesc, cone component and shift APIs, and finite biproduct cokernel isomorphisms. None directly identifies this explicit tail subobject with a biproduct or provides the signed restricted projection equation. These APIs support the construction and the stated proofs; no duplicate theorem found.",
+   "date": "2026-10-12"
+  },
+  {
+   "t": "2026-10-12T21:48:12Z",
+   "tool": "leansearch",
+   "query": "Projection onto a column identifies the quotient of consecutive horizontal filtration tails with the column, and its differential is the signed vertical differential",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "t": "2026-10-12T21:49:55Z",
+   "tool": "grep",
+   "query": "totalDesc|cokernelBiproductFromSubtypeIso|shiftFunctor_obj_d",
+   "sub": "Algebra/Homology",
+   "ok": true,
+   "n_hits": 24,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+    "Mathlib/Algebra/Homology/Bifunctor.lean",
+    "Mathlib/Algebra/Homology/Bifunctor.lean",
+    "Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean",
+    "Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+    "Mathlib/Algebra/Homology/BifunctorHomotopy.lean"
+   ],
+   "digest": "002f643d7c142627",
+   "results": "24 hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean, Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/Bifunctor.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+   "verdict": "Mathlib supplies totalDesc, cone component and shift APIs, and finite biproduct cokernel isomorphisms. None directly identifies this explicit tail subobject with a biproduct or provides the signed restricted projection equation. These APIs support the construction and the stated proofs; no duplicate theorem found.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ConeHorizontalGradedIso",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-cone-horizontal-graded-iso",
+   "place": "Explicit column projection and separate objectwise quotient / differential calculations.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ConeHorizontalProjectionDifferential",
+  "file": "lean/Sheaf/Algebra/Homology/ConeHorizontalProjectionDifferential.lean",
+  "declaration": "HomologicalComplex₂.coneHorizontal_projection_differential",
+  "statement": "theorem coneHorizontal_projection_differential\n    {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}\n    (f : A ⟶ B)\n    (F : DecreasingFiltration (CochainComplex.mappingCone\n      (HomologicalComplex.extendMap (total.map f (ComplexShape.up ℕ))\n        ComplexShape.embeddingUpNat)))\n    (hF : ∀ p n : ℤ, F.complexStep p n = coneHorizontalStep f p n)\n    (p : ℕ) (n : ℤ) :\n    ((F.step (p : ℤ)).arrow.f n ≫ coneHorizontalProjection f p n) ≫\n      ((CochainComplex.mappingCone\n        (HomologicalComplex.extendMap (f.f p)\n          ComplexShape.embeddingUpNat))⟦-(p : ℤ)⟧).d n (n + 1) =\n    (F.step (p : ℤ) : CochainComplex C ℤ).d n (n + 1) ≫\n      (F.step (p : ℤ)).arrow.f (n + 1) ≫ coneHorizontalProjection f p (n + 1)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T223410-L-1638421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T223410-L-1638421",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
