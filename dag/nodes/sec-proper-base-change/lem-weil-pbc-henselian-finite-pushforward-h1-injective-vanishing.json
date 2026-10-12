@@ -22,20 +22,34 @@
  ],
  "proof": [
   {
-   "text": "View J as a module over the constant ring sheaf Λ; this equivalence preserves injectivity and the underlying abelian sheaf. Apply Stacks 03FD (the injective-module abelian acyclicity argument) at the terminal etale object Y, then identify derived section cohomology with Ext from the constant integer sheaf. The existing node states this with small-universe coefficients, SheafOfModules and rightDerived evaluation, so the constant-ring module equivalence, arbitrary coefficient universe and Ext comparison are still needed here.",
+   "text": "Let F be the underlying abelian sheaf of J. For every covering family of every object U, its first Cech cohomology vanishes by [lem-weil-pbc-injective-etale-module-cech-h1]. Only degree one is needed.",
    "uses": [
-    "lem-weil-pbc-injective-module-abelian-acyclic"
+    "lem-weil-pbc-injective-etale-module-cech-h1"
    ],
    "elementary": false
+  },
+  {
+   "text": "Fix any short exact sequence 0 → F → E → Q → 0 of abelian sheaves. Apply [lem-weil-pbc-ses-cech-h1-surjective] at the terminal etale object T = (Y → Y), taking Cov to be all coverings. Every chosen family is a covering by definition; each covering refines itself, with the same indices and identity refinement maps. The Cech hypothesis is Step 1. Thus every section of Q at T lifts to E.",
+   "uses": [
+    "lem-weil-pbc-ses-cech-h1-surjective",
+    "lem-weil-pbc-injective-etale-module-cech-h1"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved library theorem CategoryTheory.Sheaf.subsingleton_H_one_of_surjective (WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic). Its hypothesis is exactly Step 2, and T is terminal by MorphismProperty.Over.mkIdTerminal. The theorem embeds F into an injective abelian sheaf, represents every Ext¹ class by the connecting homomorphism of its cokernel sequence, and kills that class because the cokernel section lifts. This gives Subsingleton (Sheaf.H F 1).",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-injective-module-abelian-acyclic"
+  "lem-weil-pbc-injective-etale-module-cech-h1",
+  "lem-weil-pbc-ses-cech-h1-surjective"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 03FD"
+  "place": "Lemma 03FD, degree-one case of its second paragraph, via 03FC and 03F8; Ext vanishing from the proved library section-lifting theorem"
  },
  "status": "split",
  "created": {
@@ -96,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-0e535",
-  "group": "G1",
+  "reviewer": "X-8fbf7",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T011430-L-757597",
+  "landing": "20261012T015045-L-906585",
   "kind": "interface",
-  "note": "independent Codex review: Matched all three Lean signatures and the delivered proof with their DAG nodes, dependency statements, source arguments, report, and earlier return; existing interfaces and unit route are preserved."
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with the nodes, cited sources, dependencies, pruning report, and second reading; both modules compile cleanly and the axiom checks pass."
  }
 }

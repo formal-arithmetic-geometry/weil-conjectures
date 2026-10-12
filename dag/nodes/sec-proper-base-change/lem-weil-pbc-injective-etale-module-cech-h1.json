@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-injective-etale-module-cech-h1",
+ "kind": "lemma",
+ "title": "First Cech cohomology of an injective ModuleCat-valued etale sheaf vanishes",
+ "statement": "Let Y be a scheme, Λ a commutative ring, and J an injective sheaf of Λ-modules on its small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves]. Let U be an etale object and let (V_i → U) indexed by an arbitrary set I be a covering. Write F for the underlying abelian sheaf [def-weil-pbc-abelian-etale-sheaves]. The first homology object of the Cech cochain complex of F on this covering [def-weil-pbc-cech-complex], formed in the slice category Over U with differential the alternating restriction maps, is zero. In Lean, for Y : Scheme.{u}, the ring, modules and index set may live in Type (u + 1).",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03FC (lemma-injective-module-trivial-cech), positive-degree conclusion and proof; Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), second paragraph"
+ },
+ "proof": [
+  {
+   "text": "Regard J as a sheaf of modules over the constant ring sheaf O associated to Λ [def-weil-sheaf-of-modules-category]. Concretely, a section of O is locally the image of a constant scalar. On a covering where this holds, multiply the restricted section of J by those scalars and glue. Independence follows after refining the two coverings and using equality of the scalar images. This defines the O-action. Conversely restrict the O-action along Λ → O. The sheaf axiom makes the two constructions inverse, on morphisms as well as objects. The equivalence leaves the underlying abelian sheaf unchanged and preserves injectivity by transporting monomorphisms and their lifting property.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-site-injective-module-cech-acyclic] to this O-module and the chosen covering, in degree p = 1. Its argument is the source 03FC: exact sheafification makes J injective among module presheaves; the free module chain complex on the covering has zero positive homology, and Yoneda identifies Hom from that complex into J with the alternating section complex. Exactness of Hom into an injective gives zero first cohomology. The theorem is valid for arbitrary index and coefficient universes.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the chosen-fibre-product Cech complex [def-weil-pbc-site-cech-complex] with Mathlib cechComplexFunctor on the family i ↦ Over.mk (V_i → U). In each degree, the unique projection-compatible isomorphisms of the iterated fibre products identify their section groups. The categorical product in AddCommGrpCat is the product of these groups. Projection uniqueness implies that these isomorphisms commute with every omitted-factor map, hence with the alternating sum differential. The resulting isomorphism of cochain complexes transports zero homology to the stated object. Forgetting scalars does not alter sections or restrictions.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex",
+    "def-weil-pbc-cech-complex",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma 03FC and the underlying-abelian identification in 03FD; constant-coefficient and Cech-model interface identifications written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology of underlying abelian presheaf of injective sheaf of modules vanishes for every covering",
+   "results": "Eight hits: sheaf cohomology definitions and general injective-resolution instances; no injective-module Cech vanishing theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.cechComplexFunctor, CategoryTheory.Injective",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*cech|cech.*injective; direct rg of Mathlib Sites and source CechComplex/CechCriterion",
+   "results": "Mathlib only Stone-Cech unrelated hits. Source exactAt_cechComplex_of_injective assumes an injective abelian presheaf and uses a different cochain model. Existing ringed-site theorem uses SheafOfModules and SiteCechComplex, so two interface comparisons remain.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech complex of an injective module sheaf has zero positive cohomology",
+   "results": "Service unavailable: Internal Server Error. Other three search kinds completed.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Injective-module Cech vanishing in the proof of lem-weil-pbc-henselian-finite-pushforward-h1-injective-vanishing, used only in degree one",
+   "via": [
+    "lem-weil-pbc-henselian-finite-pushforward-h1-injective-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1",
+  "file": "lean/Sheaf/AlgebraicGeometry/InjectiveEtaleModuleCechH1.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_cech_H_one_of_injective_module_sheaf",
+  "statement": "theorem isZero_cech_H_one_of_injective_module_sheaf\n    (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]\n    (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J]\n    (U : Y.Etale) {I : Type (u + 1)} (V : I → Y.Etale) (f : ∀ i : I, V i ⟶ U)\n    (hcover : Sieve.ofArrows V f ∈ Y.smallEtaleTopology U) :\n    IsZero (((cechComplexFunctor fun i : I ↦ Over.mk (f i)).obj\n      ((Over.forget U).op ⋙ ((sheafCompose Y.smallEtaleTopology\n        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj J).obj)).homology 1)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "proof_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cech-complex",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-site-cech-complex",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8fbf7",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T015045-L-906585",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8fbf7",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T015045-L-906585",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proof with the nodes, cited sources, dependencies, pruning report, and second reading; both modules compile cleanly and the axiom checks pass."
+ }
+}
