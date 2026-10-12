@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Sites.InjectiveModuleAcyclic
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomologyPresheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapEtale
 
 /-!
@@ -186,6 +186,21 @@ section DieLocally
 
 variable {X Y : Scheme.{u}} (h : Y ⟶ X)
 
+/-- Over an étale `X`-scheme `W` with affine underlying scheme, the base change along a
+quasi-compact quasi-separated `h : Y ⟶ X` is quasi-compact and quasi-separated. -/
+private lemma Etale.compactSpace_and_quasiSeparatedSpace_pullback_of_isAffine [QuasiCompact h]
+    [QuasiSeparated h] (W : X.Etale) [IsAffine W.left] :
+    CompactSpace ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h).obj W).left ∧
+      QuasiSeparatedSpace
+        ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h).obj W).left := by
+  rw [show ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h).obj W).left =
+    Limits.pullback W.hom h from rfl]
+  have : CompactSpace ((𝟭 Scheme).obj W.left) := inferInstanceAs (CompactSpace W.left)
+  have : QuasiSeparatedSpace ((𝟭 Scheme).obj W.left) :=
+    inferInstanceAs (QuasiSeparatedSpace W.left)
+  exact ⟨QuasiCompact.compactSpace_of_compactSpace (Limits.pullback.fst W.hom h),
+    quasiSeparatedSpace_of_quasiSeparated (Limits.pullback.fst W.hom h)⟩
+
 /-- Every class of the abelian cohomology of the restriction of `A` to `W ×_X Y`, for an
 affine scheme `W` étale over `X`, dies on an étale cover of `W`. -/
 def Etale.ClassesDieLocallyAb (A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -279,7 +294,7 @@ lemma Etale.classesDieLocallyAb_cokernel [QuasiCompact h] [QuasiSeparated h]
     rw [Sheaf.H.δSucc_apply, Etale.cohomologyMap_comp_extClass] at h₁
     obtain ⟨y, hy⟩ := (Sheaf.H.exact_map_δSucc
       (hSW.map_of_exact ((F.map g).left)^*[AddCommGrpCat.{u + 1}]) (m + 1) _).1 h₁
-    obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback h W'
+    obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback_of_isAffine h W'
     have : Subsingleton (Sheaf.H (((F.map g).left)^*[AddCommGrpCat.{u + 1}].obj SW.X₂)
         (m + 1)) :=
       Etale.subsingleton_H_upperStar_localizationRestriction_forget₂ Λ (F.obj W)
@@ -630,7 +645,7 @@ lemma Etale.constantClassesDieLocally_of_forall_fg [QuasiCompact h] [QuasiSepara
       (AddCommGrpCat.of (AddSubgroup.closure (s : Set A)))) :
     Etale.ConstantClassesDieLocally h W q A := by
   intro η
-  obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback h W
+  obtain ⟨_, _⟩ := Etale.compactSpace_and_quasiSeparatedSpace_pullback_of_isAffine h W
   let D : Finset A ⥤ AddCommGrpCat.{u + 1} :=
     { obj s := AddCommGrpCat.of (AddSubgroup.closure (s : Set A))
       map {s t} f := AddCommGrpCat.ofHom (AddSubgroup.inclusion
@@ -746,7 +761,7 @@ filtered colimits (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_of_la
 finitely generated subgroup is a finite direct sum of cyclic groups `ℤ/e` with `e ∣ d`, for
 which the classes die locally by hypothesis. -/
 @[stacks 03Q8]
-theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists {X Y : Scheme.{u}}
+theorem Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists_tmp {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (d q : ℕ)
     (H : ∀ e : ℕ, e ∣ d → ∀ ⦃U : Scheme.{u}⦄ (u : U ⟶ X) [Etale u] [IsAffine U]
       (ξ : Sheaf.H ((pullback h u).constantZMod e) q),
