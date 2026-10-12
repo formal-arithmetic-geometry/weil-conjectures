@@ -32,47 +32,36 @@
  ],
  "proof": [
   {
-   "text": "If $m=0$, the empty family is the basis of the zero free module, so assume $m>0$. Regard the coordinate map $R^{\\oplus m}\\to F$ sending the $k$-th standard vector to $v_k$; in the given basis $(b_l)$ its matrix is $(t_{kl})$. This map is the map whose being an isomorphism is equivalent to $(v_k)$ being a basis.",
+   "text": "Apply the given basis representation to the coordinate equations. Module.Basis.toMatrix_apply and repr_self show that b.toMatrix v is the transpose of t (the first index of t indexes vectors, whereas the first matrix index indexes coordinates).",
    "uses": [
     "def-weil-pbc-free-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: writing the images of basis vectors in the other basis"
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: the two changes of basis 'after a change of basis of $R^{n_i}$ and $R^{n_{i-1}}$' and '$e'_j=e_j-a_{j1}e_1$ for $j>1$', used there without proof that the new families are bases"
    }
   },
   {
-   "text": "Suppose first that $t_{kl}=0$ for $l<k$ (upper-triangular rows). For spanning, solve successively from $k=m$ down to $k=1$: the coefficient of $b_m$ in $v_m$ is the unit $t_{mm}$, so $b_m$ lies in the span of $v_m$; after $b_{k+1},\\ldots,b_m$ have been obtained, the equation $v_k=t_{kk}b_k+\\sum_{l>k}t_{kl}b_l$ and the inverse of the unit $t_{kk}$ give $b_k$ in the span of $v_k,\\ldots,v_m$. For independence, if $\\sum_k a_kv_k=0$, inspect the coefficient of $b_1$: only $v_1$ can contribute to it, so $a_1t_{11}=0$ and $a_1=0$; after $a_1,\\ldots,a_{k-1}=0$, the coefficient of $b_k$ gives $a_kt_{kk}=0$, hence $a_k=0$. Thus the family spans and is linearly independent.",
+   "text": "Transposition exchanges the two triangular orientations. Matrix.det_of_isLowerTriangular or Matrix.det_of_isUpperTriangular computes the determinant as the product of the diagonal t k k. IsUnit.prod_univ_iff and the diagonal hypotheses show that this determinant is a unit; the empty product also covers m = 0. Module.Basis.det_apply identifies it with b.det v.",
    "uses": [
     "def-weil-pbc-free-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: the first basis change and the subsequent unit-column elimination"
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: the two changes of basis 'after a change of basis of $R^{n_i}$ and $R^{n_{i-1}}$' and '$e'_j=e_j-a_{j1}e_1$ for $j>1$', used there without proof that the new families are bases"
    }
   },
   {
-   "text": "Suppose instead that $t_{kl}=0$ for $l>k$ (lower-triangular rows). The same argument with the order reversed proves spanning: start with $b_1$ from $v_1=t_{11}b_1$, then solve for $b_k$ using $v_k=t_{kk}b_k+\\sum_{l<k}t_{kl}b_l$. For a relation $\\sum_k a_kv_k=0$, inspect the coefficient of $b_m$ first and then descend: only $v_m$ can contribute after the later coefficients have been shown zero, so the unit $t_{mm}$ gives $a_m=0$, and induction gives every $a_k=0$. Hence the family spans and is independent in this case as well.",
+   "text": "Module.Basis.is_basis_iff_det yields LinearIndependent R v and span R (range v) = top. Module.Basis.mk constructs a basis and Module.Basis.mk_apply shows its vectors equal v. No field or nontriviality assumption is needed.",
    "uses": [
     "def-weil-pbc-free-module"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641; the lower-triangular orientation is the transposed coordinate convention"
-   }
-  },
-  {
-   "text": "A spanning, linearly independent family of $m$ vectors in the free module with basis $(b_l)$ is a basis (equivalently, the coordinate map in Step 1 is an isomorphism). Therefore $(v_1,\\ldots,v_m)$ is a basis of $F$ in either triangular orientation.",
-   "uses": [
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641"
+    "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: the two changes of basis 'after a change of basis of $R^{n_i}$ and $R^{n_{i-1}}$' and '$e'_j=e_j-a_{j1}e_1$ for $j>1$', used there without proof that the new families are bases"
    }
   }
  ],
@@ -82,7 +71,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641; the basis changes are expanded into the two triangular orientations"
+  "place": "Algebra, Lemma Tag 00MT (lemma-add-trivial-complex), proof lines 24630--24641: the two changes of basis 'after a change of basis of $R^{n_i}$ and $R^{n_{i-1}}$' and '$e'_j=e_j-a_{j1}e_1$ for $j>1$', used there without proof that the new families are bases; stage-3 implementation by the Mathlib determinant criterion (Module.Basis.is_basis_iff_det, det_apply and the triangular determinant formulas), replacing recursive elimination below the unit level"
  },
  "mathlib_searches": [
   {
@@ -189,5 +178,15 @@
   "group": "S1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T165517-L-2934779",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
