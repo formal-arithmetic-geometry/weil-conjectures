@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore
 
 /-! # Compatible strict henselizations and geometric residue maps
 
@@ -87,6 +87,13 @@ theorem Etale.projectiveLine_compatibleStrictHenselizationResidues
               ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫
                 eB.hom ≫ strictHenselizationStructuralMap t = τ ∧
               ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) =
-                ι ≫ ρA := by sorry
+                ι ≫ ρA := by
+  dsimp
+  obtain ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB,
+      hUA, hUB, hbase, hρA, hρB, _⟩ :=
+    Etale.projectiveLine_compatibleStrictHenselizationResidues_core σ τ ι hι hσ hτ ν
+  refine ⟨A, B, cA, cB, hA, hB, sA, sB, φ, hφ, eA, eB, ρA, ρB, ?_⟩
+  exact ⟨hUA, hUB, hbase, hρA, hρB,
+    Etale.compatibleStrictHenselization_residue_square (g := g) ι φ hφ eA eB ρA ρB⟩
 
 end AlgebraicGeometry
