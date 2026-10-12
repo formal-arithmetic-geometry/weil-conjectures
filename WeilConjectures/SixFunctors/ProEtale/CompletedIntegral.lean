@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
@@ -180,5 +181,65 @@ noncomputable def restrictScalarsReductionMap (n : ℕ) :
     SheafOfModules.{u + 1} (reductionRingSheaf Y I n) ⥤
       SheafOfModules.{u + 1} (reductionRingSheaf Y I (n + 1)) :=
   SheafOfModules.restrictScalars (reductionRingSheafMap Y I n)
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme SheafOfModules
+
+variable (Y : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) (n : ℕ)
+
+instance additive_restrictScalarsReduction : (restrictScalarsReduction Y I n).Additive :=
+  inferInstanceAs (SheafOfModules.restrictScalars _).Additive
+
+/-- The restriction of scalars `Res_n` does not change the underlying sheaves of abelian groups:
+`Res_n` followed by the forgetful functor to abelian sheaves is the forgetful functor. -/
+noncomputable def restrictScalarsReductionCompToSheafIso :
+    restrictScalarsReduction Y I n ⋙ toSheaf.{u + 1} (completedIntegralSheaf Y I) ≅
+      toSheaf.{u + 1} (reductionRingSheaf Y I n) :=
+  Iso.refl _
+
+/-- Blueprint `lem-weil-restriction-of-scalars-exact`: Exactness of restriction of scalars, the
+left exactness half. `Res_n` preserves finite limits: it is the identity on the underlying
+sheaves of abelian groups (`restrictScalarsReductionCompToSheafIso`), and the forgetful functor
+`SheafOfModules.toSheaf` to abelian sheaves preserves finite limits and reflects isomorphisms,
+hence reflects finite limits. -/
+instance preservesFiniteLimits_restrictScalarsReduction :
+    PreservesFiniteLimits (restrictScalarsReduction Y I n) where
+  preservesFiniteLimits J _ _ := by
+    have : PreservesLimitsOfShape J
+        (restrictScalarsReduction Y I n ⋙ toSheaf.{u + 1} (completedIntegralSheaf Y I)) :=
+      preservesLimitsOfShape_of_natIso (restrictScalarsReductionCompToSheafIso Y I n).symm
+    have : ReflectsLimitsOfShape J (toSheaf.{u + 1} (completedIntegralSheaf Y I)) :=
+      reflectsLimitsOfShape_of_reflectsIsomorphisms
+    exact preservesLimitsOfShape_of_reflects_of_preserves _
+      (toSheaf.{u + 1} (completedIntegralSheaf Y I))
+
+/-- Blueprint `lem-weil-restriction-of-scalars-exact`: Exactness of restriction of scalars, the
+right exactness half. `Res_n` preserves finite colimits: it is the identity on the underlying
+sheaves of abelian groups (`restrictScalarsReductionCompToSheafIso`), and the forgetful functor
+`SheafOfModules.toSheaf` to abelian sheaves preserves finite colimits and reflects
+isomorphisms, hence reflects finite colimits. -/
+instance preservesFiniteColimits_restrictScalarsReduction :
+    PreservesFiniteColimits (restrictScalarsReduction Y I n) where
+  preservesFiniteColimits J _ _ := by
+    have : PreservesColimitsOfShape J
+        (restrictScalarsReduction Y I n ⋙ toSheaf.{u + 1} (completedIntegralSheaf Y I)) :=
+      preservesColimitsOfShape_of_natIso (restrictScalarsReductionCompToSheafIso Y I n).symm
+    have : ReflectsColimitsOfShape J (toSheaf.{u + 1} (completedIntegralSheaf Y I)) :=
+      reflectsColimitsOfShape_of_reflectsIsomorphisms
+    exact preservesColimitsOfShape_of_reflects_of_preserves _
+      (toSheaf.{u + 1} (completedIntegralSheaf Y I))
+
+/-- Blueprint `lem-weil-restriction-of-scalars-exact`: Exactness of restriction of scalars.
+`Res_n : Sh(Y_proét, A_{E,n}) ⥤ Sh(Y_proét, 𝒪_E)` is exact: it preserves finite limits and
+finite colimits (`preservesFiniteLimits_restrictScalarsReduction`,
+`preservesFiniteColimits_restrictScalarsReduction`), so it sends short exact sequences to short
+exact sequences. -/
+theorem restrictScalarsReduction_exact :
+    PreservesFiniteLimits (restrictScalarsReduction Y I n) ∧
+      PreservesFiniteColimits (restrictScalarsReduction Y I n) :=
+  ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.ProEtale

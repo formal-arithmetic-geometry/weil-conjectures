@@ -105,6 +105,7 @@ variable {X T₁ T₂ T₃ : Scheme.{u}} (u : T₁ ⟶ T₂) (v : T₂ ⟶ T₃)
   (j₃ : X ⟶ T₃) [IsProper u] [IsProper v] [IsOpenImmersion j₁] [IsOpenImmersion j₂]
   [IsOpenImmersion j₃] (h₁ : j₁ ≫ u = j₂) (h₂ : j₂ ≫ v = j₃)
 
+set_option maxHeartbeats 800000 in -- the final rewrites unify large derived-category terms
 /-- Blueprint `lem-weil-pbc-proper-open-comparison-composition`: Composition of proper-open
 comparison maps. For proper `u : T₁ ⟶ T₂`, `v : T₂ ⟶ T₃` and open immersions `jᵢ : X ⟶ Tᵢ` with
 `j₁ ≫ u = j₂`, `j₂ ≫ v = j₃`,
@@ -125,29 +126,31 @@ theorem comparison_comp :
           (Functor.rightDerivedFunctorPlusCompIso' ((u)_*[ModuleCat.{u + 1} Λ])
             ((v)_*[ModuleCat.{u + 1} Λ]) (Etale.lowerStarComp _ u v (u ≫ v) rfl)).hom := by
   symm
-  refine ProperOpenDatum.eq_comparison Λ _ _ ?_
+  refine ProperOpenDatum.eq_comparison Λ
+    (⟨T₁, T₃, u ≫ v, j₁, j₃, by rw [reassoc_of% h₁, h₂], inferInstance, inferInstance,
+        inferInstance⟩ : ProperOpenDatum X) _ ?_
   ext K : 2
+  have h₁' := comparison_app_toLowerStar_app Λ
+    (⟨T₁, T₂, u, j₁, j₂, h₁, inferInstance, inferInstance, inferInstance⟩ : ProperOpenDatum X) K
+  have h₂' := comparison_app_toLowerStar_app Λ
+    (⟨T₂, T₃, v, j₂, j₃, h₂, inferInstance, inferInstance, inferInstance⟩ : ProperOpenDatum X) K
   have hassoc := NatTrans.congr_app (rightDerivedFunctorPlusCompIso'_lowerStarComp_assoc
     (ModuleCat.{u + 1} Λ) j₁ u v j₂ (u ≫ v) j₃ h₁.symm rfl h₂.symm) K
   have hnat := (Functor.rightDerivedFunctorPlusCompIso' ((u)_*[ModuleCat.{u + 1} Λ])
     ((v)_*[ModuleCat.{u + 1} Λ]) (Etale.lowerStarComp _ u v (u ≫ v) rfl)).hom.naturality
     ((openImmersionLowerShriekToLowerStarPlus Λ j₁).app K)
-  have h₁' := comparison_app_toLowerStar_app
-    (⟨T₁, T₂, u, j₁, j₂, h₁, inferInstance, inferInstance, inferInstance⟩ : ProperOpenDatum X)
-    Λ K
-  have h₂' := comparison_app_toLowerStar_app
-    (⟨T₂, T₃, v, j₂, j₃, h₂, inferInstance, inferInstance, inferInstance⟩ : ProperOpenDatum X)
-    Λ K
   rw [toLowerStar_app] at h₁' h₂'
   dsimp only at h₁' h₂'
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_obj, Functor.comp_map] at hassoc hnat
+  rw [NatTrans.comp_app, NatTrans.comp_app, toLowerStar_app]
+  dsimp only
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_obj, Category.assoc]
   have h₁'' := congrArg ((v)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map h₁'
   simp only [Functor.map_comp] at h₁''
-  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.comp_obj, Functor.comp_map] at hassoc hnat ⊢
-  rw [toLowerStar_app]
-  dsimp only
-  simp only [assoc]
-  rw [reassoc_of% hnat, ← hassoc, reassoc_of% h₁'', h₂']
+  rw [← reassoc_of% hnat, ← hassoc, reassoc_of% h₁'', h₂']
+
 
 /-- The identity law of blueprint `lem-weil-pbc-proper-open-comparison-composition`: for the
 identity of `T` (and `j₁ = j₂ = j`), the comparison map is the inverse of the identity
@@ -158,7 +161,9 @@ theorem comparison_id {T : Scheme.{u}} (j : X ⟶ T) [IsOpenImmersion j] :
       Functor.whiskerLeft D+((j)_!open[ModuleCat.{u + 1} Λ])
         (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) T).inv := by
   symm
-  refine ProperOpenDatum.eq_comparison Λ _ _ ?_
+  refine ProperOpenDatum.eq_comparison Λ
+    (⟨T, T, 𝟙 T, j, j, Category.comp_id j, inferInstance, inferInstance, inferInstance⟩ :
+      ProperOpenDatum X) _ ?_
   ext K : 2
   have hnat := (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) T).inv.naturality
     ((openImmersionLowerShriekToLowerStarPlus Λ j).app K)
@@ -166,9 +171,11 @@ theorem comparison_id {T : Scheme.{u}} (j : X ⟶ T) [IsOpenImmersion j] :
     (whiskerLeft_lowerStarIdDerivedPlus_inv_comp_rightDerivedFunctorPlusCompIso' Λ j) K
   simp only [Functor.id_map, Functor.id_obj] at hnat
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, NatTrans.id_app] at hunit
-  rw [NatTrans.comp_app, Functor.whiskerLeft_app, toLowerStar_app, reassoc_of% hnat]
+  rw [NatTrans.comp_app, Functor.whiskerLeft_app, toLowerStar_app]
+  dsimp only
+  rw [← reassoc_of% hnat]
   erw [hunit]
-  rw [comp_id]
+  exact comp_id _
 
 end ProperOpenDatum
 

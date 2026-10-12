@@ -5,7 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Derived.CompactSupportCandidate
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 
 /-!
 # The exceptional adjoint on the bounded comparison class

@@ -61,6 +61,18 @@ namespace CategoryTheory.Pretriangulated
 
 open Limits Opposite Preadditive
 
+section Preadditive
+
+variable {C : Type u} [Category.{w} C] [Preadditive C]
+
+/-- An object `X` of a preadditive category is *compact* if every morphism from `X` to a
+coproduct indexed by a type in `Type w` factors through a finite partial sum. -/
+def IsCompactObject (X : C) : Prop :=
+  ∀ ⦃J : Type w⦄ (f : J → C) (c : Cofan f), IsColimit c → ∀ φ : X ⟶ c.pt,
+    ∃ (s : Finset J) (ψ : ∀ j, X ⟶ f j), φ = ∑ j ∈ s, ψ j ≫ c.inj j
+
+end Preadditive
+
 variable {C : Type u} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
 
@@ -69,12 +81,6 @@ lemma _root_.CategoryTheory.Functor.map_op_comp_apply {D : Type*} [Category* D]
     (H : Dᵒᵖ ⥤ AddCommGrpCat.{w}) {A B E : D} (f : A ⟶ B) (g : B ⟶ E) (x : H.obj (op E)) :
     H.map (f ≫ g).op x = H.map f.op (H.map g.op x) := by
   rw [op_comp, H.map_comp, ConcreteCategory.comp_apply]
-
-/-- An object `X` of a pretriangulated category is *compact* if every morphism from `X` to a
-coproduct indexed by a type in `Type w` factors through a finite partial sum. -/
-def IsCompactObject (X : C) : Prop :=
-  ∀ ⦃J : Type w⦄ (f : J → C) (c : Cofan f), IsColimit c → ∀ φ : X ⟶ c.pt,
-    ∃ (s : Finset J) (ψ : ∀ j, X ⟶ f j), φ = ∑ j ∈ s, ψ j ≫ c.inj j
 
 /-- A family `S` of objects is a family of *compact generators* if all shifts of its members
 are compact and they detect zero objects: an object `Y` with `Hom(S i⟦n⟧, Y) = 0` for all `i`
@@ -110,9 +116,13 @@ noncomputable def brownHom (Y : C) : (Y ⟶ X) →+ H.obj (op Y) where
   map_zero' := by simp
   map_add' φ ψ := by simp [op_add, H.map_add]
 
+omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 @[simp]
 lemma brownHom_apply {Y : C} (φ : Y ⟶ X) : brownHom H u Y φ = H.map φ.op u := rfl
 
+omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
 lemma brownHom_comp {Y Y' : C} (g : Y' ⟶ Y) (φ : Y ⟶ X) :
     brownHom H u Y' (g ≫ φ) = H.map g.op (brownHom H u Y φ) := by
   simp

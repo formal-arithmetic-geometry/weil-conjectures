@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.CategoryTheory.Triangulated.Brown.Basic
 
 /-!
@@ -75,7 +76,7 @@ lemma generator (k : κ) : IsCellular G (G k) := fun _ h₁ _ _ ↦ h₁ k
 /-- A cellular object is cellular for any larger family. -/
 lemma of_iso {X Y : C} (e : X ≅ Y) (hX : IsCellular G X) : IsCellular G Y := by
   let c : Cofan (fun _ : PUnit.{w + 1} ↦ X) := Cofan.mk Y fun _ ↦ e.hom
-  have hc : IsColimit c := mkCofanColimit c (fun s ↦ e.inv ≫ s.inj PUnit.unit)
+  have hc : IsColimit c := Cofan.IsColimit.mk c (fun s ↦ e.inv ≫ s.inj PUnit.unit)
     (fun s j ↦ by simp [c]) (fun s m hm ↦ by simp [← hm PUnit.unit, c])
   exact of_cofan c hc fun _ ↦ hX
 
@@ -83,43 +84,48 @@ end IsCellular
 
 section Algebra
 
-/-- Let `Q` be a coproduct of a sequence `Zₙ`, with `σ : Q ⟶ Q` induced by maps
-`gₙ : Zₙ ⟶ Z_{n+1}`. A finite sum `∑ ψₙ ≫ ιₙ` killed by `1 - σ` is zero. -/
-lemma sum_eq_zero_of_comp_sub_eq_zero {Z : ℕ → C} (g : ∀ n, Z n ⟶ Z (n + 1)) (Q : Cofan Z)
-    (hQ : IsColimit Q) (σ : Q.pt ⟶ Q.pt) (hσ : ∀ n, Q.inj n ≫ σ = g n ≫ Q.inj (n + 1))
-    {Y : C} (s : Finset ℕ) (ψ : ∀ n, Y ⟶ Z n)
+omit [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C] in
+/-- Let `Q` be a coproduct of a sequence `Zₙ` (indexed by `ULift ℕ`), with `σ : Q ⟶ Q` induced
+by maps `gₙ : Zₙ ⟶ Z_{n+1}`. A finite sum `∑ ψₙ ≫ ιₙ` killed by `1 - σ` is zero. -/
+lemma sum_eq_zero_of_comp_sub_eq_zero {Z : ℕ → C} (g : ∀ n, Z n ⟶ Z (n + 1))
+    (Q : Cofan (fun n : ULift.{w} ℕ ↦ Z n.down)) (hQ : IsColimit Q) (σ : Q.pt ⟶ Q.pt)
+    (hσ : ∀ n : ℕ, Q.inj ⟨n⟩ ≫ σ = g n ≫ Q.inj ⟨n + 1⟩)
+    {Y : C} (s : Finset (ULift.{w} ℕ)) (ψ : ∀ n : ULift.{w} ℕ, Y ⟶ Z n.down)
     (h : (∑ n ∈ s, ψ n ≫ Q.inj n) ≫ (𝟙 _ - σ) = 0) : ∑ n ∈ s, ψ n ≫ Q.inj n = 0 := by
   classical
   -- projections `Q ⟶ Z m`
   let p (m : ℕ) : Q.pt ⟶ Z m := Cofan.IsColimit.desc hQ fun n ↦
-    if hn : n = m then eqToHom (congrArg Z hn) else 0
-  have hp (n m : ℕ) : Q.inj n ≫ p m = if hn : n = m then eqToHom (congrArg Z hn) else 0 :=
+    if hn : n.down = m then eqToHom (congrArg Z hn) else 0
+  have hp (n : ULift.{w} ℕ) (m : ℕ) :
+      Q.inj n ≫ p m = if hn : n.down = m then eqToHom (congrArg Z hn) else 0 :=
     Cofan.IsColimit.fac hQ _ n
-  let ψ' (n : ℕ) : Y ⟶ Z n := if n ∈ s then ψ n else 0
+  have hσ' (n : ULift.{w} ℕ) : Q.inj n ≫ σ = g n.down ≫ Q.inj ⟨n.down + 1⟩ := hσ n.down
+  let ψ' (m : ℕ) : Y ⟶ Z m := if (⟨m⟩ : ULift.{w} ℕ) ∈ s then ψ ⟨m⟩ else 0
   set x := ∑ n ∈ s, ψ n ≫ Q.inj n with hx
   have hxp (m : ℕ) : x ≫ p m = ψ' m := by
     simp only [x, ψ', sum_comp, Category.assoc, hp]
     split_ifs with hm
-    · rw [Finset.sum_eq_single m (fun b _ hb ↦ by rw [dif_neg hb, comp_zero])
-        (fun h ↦ absurd hm h)]
+    · rw [Finset.sum_eq_single (⟨m⟩ : ULift.{w} ℕ) (fun b _ hb ↦ by
+        rw [dif_neg (fun h ↦ hb (ULift.ext _ _ h)), comp_zero]) (fun h ↦ absurd hm h)]
       simp
     · exact Finset.sum_eq_zero fun n hn ↦ by
-        rw [dif_neg (fun h ↦ hm (h ▸ hn)), comp_zero]
+        rw [dif_neg (fun h ↦ hm (by rw [← h]; exact hn)), comp_zero]
   have hxσp (m : ℕ) : x ≫ σ ≫ p (m + 1) = ψ' m ≫ g m := by
-    simp only [x, ψ', sum_comp, Category.assoc, reassoc_of% hσ, hp]
+    simp only [x, ψ', sum_comp, Category.assoc, reassoc_of% hσ', hp]
     split_ifs with hm
-    · rw [Finset.sum_eq_single m (fun b _ hb ↦ by
-        rw [dif_neg (fun h ↦ hb (by omega)), comp_zero, comp_zero])
+    · rw [Finset.sum_eq_single (⟨m⟩ : ULift.{w} ℕ) (fun b _ hb ↦ by
+        rw [dif_neg (fun h ↦ hb (ULift.ext _ _ (by simpa using h))), comp_zero, comp_zero])
         (fun h ↦ absurd hm h)]
       simp
     · rw [zero_comp]
       exact Finset.sum_eq_zero fun n hn ↦ by
-        rw [dif_neg (fun h ↦ hm (by rw [show m = n by omega]; exact hn)), comp_zero,
-          comp_zero]
+        rw [dif_neg (fun h ↦ hm (by
+          rw [show m = n.down by simpa using h.symm]; exact hn)), comp_zero, comp_zero]
   have hxσ0 : x ≫ σ ≫ p 0 = 0 := by
-    simp only [x, sum_comp, Category.assoc, reassoc_of% hσ, hp]
+    simp only [x, sum_comp, Category.assoc, reassoc_of% hσ', hp]
     exact Finset.sum_eq_zero fun n _ ↦ by
-      rw [dif_neg (Nat.succ_ne_zero n), comp_zero, comp_zero]
+      rw [dif_neg (Nat.succ_ne_zero n.down), comp_zero, comp_zero]
   have hψ' : ∀ m, ψ' m = 0 := by
     intro m
     induction m with
@@ -134,26 +140,22 @@ lemma sum_eq_zero_of_comp_sub_eq_zero {Z : ℕ → C} (g : ∀ n, Z n ⟶ Z (n +
         sub_zero, zero_comp] at this
       exact this
   refine Finset.sum_eq_zero fun n hn ↦ ?_
-  have := hψ' n
+  have := hψ' n.down
   simp only [ψ', hn, if_true] at this
   rw [this, zero_comp]
 
 end Algebra
 
+variable [HasCoproducts.{w} C]
+
 
 variable (H : Cᵒᵖ ⥤ AddCommGrpCat.{w}) [H.Additive] {κ : Type w} (G : κ → C)
-  [HasCoproducts.{w} C]
-
-include G in
-omit [H.Additive] in
-lemma hasCoproductsOfShape_nat : HasCoproductsOfShape ℕ C := hasCoproductsOfShape_of_small.{w} C ℕ
-
-attribute [local instance] hasCoproductsOfShape_nat
 
 section Tower
 
 variable {H}
 
+omit [H.Additive] in
 lemma IsBrownFunctor.exists_stage₀ (hH : IsBrownFunctor H) :
     ∃ (X : C) (u : H.obj (op X)), IsCellular G X ∧
       ∀ k (x : H.obj (op (G k))), ∃ φ : G k ⟶ X, H.map φ.op u = x := by
@@ -164,6 +166,7 @@ lemma IsBrownFunctor.exists_stage₀ (hH : IsBrownFunctor H) :
     fun i ↦ IsCellular.generator i.1, fun k x ↦ ⟨Sigma.ι f ⟨k, x⟩, ?_⟩⟩
   exact congrFun hu ⟨k, x⟩
 
+omit [H.Additive] in
 lemma IsBrownFunctor.exists_step (hH : IsBrownFunctor H) (X : C) (u : H.obj (op X)) :
     ∃ (X' : C) (f : X ⟶ X') (u' : H.obj (op X')), (IsCellular G X → IsCellular G X') ∧
       H.map f.op u' = u ∧ ∀ k (φ : G k ⟶ X), H.map φ.op u = 0 → φ ≫ f = 0 := by
@@ -175,7 +178,7 @@ lemma IsBrownFunctor.exists_step (hH : IsBrownFunctor H) (X : C) (u : H.obj (op 
     apply (hH.bijective F _ (coproductIsCoproduct F)).1
     funext i
     simp only [cofan_mk_inj, map_zero]
-    rw [← H.map_op_comp_apply]
+    refine (H.map_op_comp_apply (Sigma.ι F i) g u).symm.trans ?_
     simp only [g, Sigma.ι_desc]
     exact i.2.2
   obtain ⟨u', hu'⟩ := hH.exact _ hT u hg
@@ -201,6 +204,7 @@ structure BrownTower where
 
 variable {H G}
 
+omit [H.Additive] in
 lemma IsBrownFunctor.nonempty_brownTower (hH : IsBrownFunctor H) :
     Nonempty (BrownTower H G) := by
   obtain ⟨X₀, u₀, hX₀, hsurj⟩ := hH.exists_stage₀ G
@@ -221,19 +225,6 @@ lemma IsBrownFunctor.nonempty_brownTower (hH : IsBrownFunctor H) :
     surj := hsurj
     kill n := hkill _ _ }⟩
 
-namespace BrownTower
-
-variable (𝒯 : BrownTower H G)
-
-/-- The shift map `∐ Xₙ ⟶ ∐ Xₙ`. -/
-noncomputable def σ : ∐ 𝒯.X ⟶ ∐ 𝒯.X := Sigma.desc fun n ↦ 𝒯.f n ≫ Sigma.ι 𝒯.X (n + 1)
-
-@[reassoc (attr := simp)]
-lemma ι_σ (n : ℕ) : Sigma.ι 𝒯.X n ≫ 𝒯.σ = 𝒯.f n ≫ Sigma.ι 𝒯.X (n + 1) := by
-  simp [σ]
-
-end BrownTower
-
 /-- The output of the construction: an object `X` with a class `u` such that `φ ↦ H φ u` is
 bijective on the `G k`, and `X` is cellular. -/
 lemma IsBrownFunctor.exists_cellular (hH : IsBrownFunctor H)
@@ -241,12 +232,19 @@ lemma IsBrownFunctor.exists_cellular (hH : IsBrownFunctor H)
     ∃ (X : C) (u : H.obj (op X)), IsCellular G X ∧
       ∀ k, Function.Bijective (fun φ : G k ⟶ X ↦ H.map φ.op u) := by
   obtain ⟨𝒯⟩ := hH.nonempty_brownTower (G := G)
-  obtain ⟨X, π, δ, hT⟩ := distinguished_cocone_triangle (𝟙 (∐ 𝒯.X) - 𝒯.σ)
-  let πn (n : ℕ) : 𝒯.X n ⟶ X := Sigma.ι 𝒯.X n ≫ π
+  -- the coproduct of the tower, indexed by `ULift ℕ`
+  let Xu : ULift.{w} ℕ → C := fun n ↦ 𝒯.X n.down
+  obtain ⟨c, ⟨hc⟩⟩ : ∃ c : Cofan Xu, Nonempty (IsColimit c) := ⟨_, ⟨coproductIsCoproduct Xu⟩⟩
+  let σ : c.pt ⟶ c.pt := Cofan.IsColimit.desc hc fun n ↦ 𝒯.f n.down ≫ c.inj ⟨n.down + 1⟩
+  have ι_σ (n : ℕ) : c.inj ⟨n⟩ ≫ σ = 𝒯.f n ≫ c.inj ⟨n + 1⟩ := Cofan.IsColimit.fac hc _ ⟨n⟩
+  obtain ⟨X, π, δ, hT⟩ := distinguished_cocone_triangle (𝟙 c.pt - σ)
+  have h₁₂ : (𝟙 c.pt - σ) ≫ π = 0 := comp_distTriang_mor_zero₁₂ _ hT
+  have h₃₁ : δ ≫ (𝟙 c.pt - σ)⟦(1 : ℤ)⟧' = 0 := comp_distTriang_mor_zero₃₁ _ hT
+  let πn (n : ℕ) : 𝒯.X n ⟶ X := c.inj ⟨n⟩ ≫ π
   have hπ (n : ℕ) : 𝒯.f n ≫ πn (n + 1) = πn n := by
-    have := Sigma.ι 𝒯.X n ≫= comp_distTriang_mor_zero₁₂ _ hT
-    simp only [Triangle.mk_mor₁, Triangle.mk_mor₂, comp_sub, Category.comp_id,
-      sub_comp, 𝒯.ι_σ_assoc, comp_zero, sub_eq_zero] at this
+    have := c.inj ⟨n⟩ ≫= h₁₂
+    simp only [comp_sub, Category.id_comp, sub_comp, reassoc_of% ι_σ, comp_zero,
+      sub_eq_zero] at this
     exact this.symm
   have hπle (n : ℕ) : ∀ N, n ≤ N → ∃ g : 𝒯.X n ⟶ 𝒯.X N, g ≫ πn N = πn n := by
     intro N hN
@@ -256,52 +254,53 @@ lemma IsBrownFunctor.exists_cellular (hH : IsBrownFunctor H)
       obtain ⟨g, hg⟩ := ih
       exact ⟨g ≫ 𝒯.f N, by rw [Category.assoc, hπ, hg]⟩
   -- the class `u`
-  obtain ⟨U, hU⟩ := (hH.bijective 𝒯.X _ (coproductIsCoproduct 𝒯.X)).2 𝒯.u
-  have hU' (n : ℕ) : H.map (Sigma.ι 𝒯.X n).op U = 𝒯.u n := congrFun hU n
-  obtain ⟨u, hu⟩ := hH.exact _ hT U (by
-    apply (hH.bijective 𝒯.X _ (coproductIsCoproduct 𝒯.X)).1
-    funext n
-    simp only [cofan_mk_inj, Triangle.mk_mor₁, map_zero]
+  obtain ⟨U, hU⟩ := (hH.bijective Xu c hc).2 fun n ↦ 𝒯.u n.down
+  have hU' (n : ℕ) : H.map (c.inj ⟨n⟩).op U = 𝒯.u n := congrFun hU ⟨n⟩
+  have hU0 : H.map (𝟙 c.pt - σ).op U = 0 := by
+    apply (hH.bijective Xu c hc).1
+    funext ⟨n⟩
+    simp only [map_zero]
     rw [← H.map_op_comp_apply, comp_sub, Category.comp_id,
-      𝒯.ι_σ, op_sub, H.map_sub, AddCommGrpCat.hom_sub, AddMonoidHom.sub_apply, hU',
-      H.map_op_comp_apply, hU', 𝒯.hu, sub_self])
+      ι_σ, op_sub, H.map_sub]
+    change H.map (c.inj ⟨n⟩).op U - H.map (𝒯.f n ≫ c.inj ⟨n + 1⟩).op U = 0
+    rw [hU', H.map_op_comp_apply, hU', 𝒯.hu, sub_self]
+  obtain ⟨u, hu⟩ : ∃ u : H.obj (op X), H.map π.op u = U := hH.exact _ hT U hU0
   have hun (n : ℕ) : H.map (πn n).op u = 𝒯.u n := by
-    simp only [πn, H.map_op_comp_apply]
-    erw [hu]
+    simp only [πn, H.map_op_comp_apply, hu]
     exact hU' n
   -- maps from compact objects factor through a finite stage
   have hfac (k : κ) (φ : G k ⟶ X) : ∃ (N : ℕ) (ψ : G k ⟶ 𝒯.X N), φ = ψ ≫ πn N := by
-    have hP1 := isColimitCofanMkObjOfIsColimit (shiftFunctor C (1 : ℤ)) 𝒯.X _
-      (coproductIsCoproduct 𝒯.X)
+    have hP1 := isColimitCofanMkObjOfIsColimit (shiftFunctor C (1 : ℤ)) Xu c.inj
+      (hc : IsColimit (Cofan.mk c.pt c.inj))
     obtain ⟨s, ψ, hψ⟩ := hG k _ _ hP1 (φ ≫ δ)
     have hδ : φ ≫ δ = 0 := by
       rw [hψ]
-      refine sum_eq_zero_of_comp_sub_eq_zero (fun n ↦ (𝒯.f n)⟦(1 : ℤ)⟧') _ hP1
-        (𝒯.σ⟦(1 : ℤ)⟧') (fun n ↦ ?_) s ψ ?_
-      · simp only [cofan_mk_inj, ← Functor.map_comp, 𝒯.ι_σ]
-      · have h₀ := comp_distTriang_mor_zero₃₁ _ hT
-        simp only [Triangle.mk_mor₃, Triangle.mk_mor₁, Functor.map_sub, Functor.map_id] at h₀
+      refine sum_eq_zero_of_comp_sub_eq_zero (Z := fun n ↦ (𝒯.X n)⟦(1 : ℤ)⟧)
+        (fun n ↦ (𝒯.f n)⟦(1 : ℤ)⟧') _ hP1 (σ⟦(1 : ℤ)⟧') (fun n ↦ ?_) s ψ ?_
+      · simp only [cofan_mk_inj, ← Functor.map_comp, ι_σ]
+      · simp only [Functor.map_sub, Functor.map_id] at h₃₁
         simp only [Cofan.mk_pt] at hψ ⊢
-        rw [← hψ, Category.assoc, h₀, comp_zero]
+        rw [← hψ, Category.assoc, h₃₁, comp_zero]
     obtain ⟨χ, hχ⟩ := Triangle.coyoneda_exact₃ _ hT φ hδ
-    obtain ⟨s', χ', hχ'⟩ := hG k _ _ (coproductIsCoproduct 𝒯.X) χ
-    obtain ⟨N, hN⟩ : ∃ N, ∀ n ∈ s', n ≤ N := ⟨s'.sup id, fun n hn ↦ Finset.le_sup (f := id) hn⟩
-    choose g hg using fun n (hn : n ∈ s') ↦ hπle n N (hN n hn)
-    refine ⟨∑ n ∈ s'.attach, χ' n ≫ g n.1 n.2, ?_⟩
+    replace hχ : φ = χ ≫ π := hχ
+    obtain ⟨s', χ', hχ'⟩ := hG k _ _ hc χ
+    obtain ⟨N, hN⟩ : ∃ N, ∀ n ∈ s', n.down ≤ N :=
+      ⟨s'.sup ULift.down, fun n hn ↦ Finset.le_sup (f := ULift.down) hn⟩
+    choose g hg using fun n (hn : n ∈ s') ↦ hπle n.down N (hN n hn)
+    refine ⟨N, ∑ n ∈ s'.attach, χ' n ≫ g n.1 n.2, ?_⟩
     rw [hχ, hχ']
-    simp only [cofan_mk_inj, Triangle.mk_mor₂, sum_comp, Category.assoc]
+    simp only [sum_comp, Category.assoc]
     rw [← Finset.sum_attach]
     refine Finset.sum_congr rfl fun n _ ↦ ?_
     rw [hg]
   refine ⟨X, u, ?_, fun k ↦ ⟨?_, fun x ↦ ?_⟩⟩
   · refine IsCellular.of_triangle _ hT ?_ ?_ <;>
-      exact IsCellular.of_cofan _ (coproductIsCoproduct 𝒯.X) 𝒯.cellular
-  · rw [← AddMonoidHom.coe_mk (M := G k ⟶ X) ⟨fun φ ↦ H.map φ.op u, by simp⟩ (by
-      intro a b; simp [op_add, H.map_add])]
+      exact IsCellular.of_cofan _ hc fun n ↦ 𝒯.cellular n.down
+  · change Function.Injective (brownHom H u (G k))
     rw [injective_iff_map_eq_zero]
     intro φ hφ
     obtain ⟨N, ψ, rfl⟩ := hfac k φ
-    simp only [AddMonoidHom.coe_mk, ZeroHom.coe_mk, H.map_op_comp_apply,
+    simp only [brownHom_apply, H.map_op_comp_apply,
       hun] at hφ
     rw [← hπ, ← Category.assoc, 𝒯.kill N k ψ hφ, zero_comp]
   · obtain ⟨φ, hφ⟩ := 𝒯.surj k x
@@ -317,6 +316,8 @@ def IsGoodFor (Y : C) : Prop := Function.Bijective (fun φ : Y ⟶ X ↦ H.map �
 
 variable {u}
 
+omit [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+  [Pretriangulated C] [HasCoproducts.{w} C] in
 lemma IsGoodFor.of_iso {Y Y' : C} (e : Y ≅ Y') (h : IsGoodFor u Y) : IsGoodFor u Y' := by
   have key : (fun φ : Y' ⟶ X ↦ H.map φ.op u) =
       (fun x ↦ H.map e.inv.op x) ∘ (fun φ : Y ⟶ X ↦ H.map φ.op u) ∘ (fun φ ↦ e.hom ≫ φ) := by
@@ -327,13 +328,16 @@ lemma IsGoodFor.of_iso {Y Y' : C} (e : Y ≅ Y') (h : IsGoodFor u Y) : IsGoodFor
   exact (Function.bijective_iff_has_inverse).2 ⟨fun φ ↦ e.inv ≫ φ, fun φ ↦ by simp,
     fun φ ↦ by simp⟩
 
+omit [HasCoproducts.{w} C] in
 lemma exact_leftComp (T : Triangle C) (hT : T ∈ distTriang C) (X : C) :
     Function.Exact (leftComp X T.mor₂) (leftComp X T.mor₁) := fun y ↦ by
   change T.mor₁ ≫ y = 0 ↔ ∃ z, T.mor₂ ≫ z = y
-  refine ⟨fun hy ↦ ?_, fun ⟨z, hz⟩ ↦ by rw [← hz, comp_distTriang_mor_zero₁₂_assoc _ hT]⟩
+  refine ⟨fun hy ↦ ?_, fun ⟨z, hz⟩ ↦ by
+    rw [← hz, comp_distTriang_mor_zero₁₂_assoc _ hT, zero_comp]⟩
   obtain ⟨z, hz⟩ := Triangle.yoneda_exact₂ T hT y hy
   exact ⟨z, hz.symm⟩
 
+omit [HasCoproducts.{w} C] in
 lemma IsBrownFunctor.isGoodFor_obj₃ (hH : IsBrownFunctor H) (T : Triangle C)
     (hT : T ∈ distTriang C) (h₁ : IsGoodFor u T.obj₁) (h₂ : IsGoodFor u T.obj₂)
     (h₁' : IsGoodFor u (T.obj₁⟦(1 : ℤ)⟧)) (h₂' : IsGoodFor u (T.obj₂⟦(1 : ℤ)⟧)) :
@@ -358,6 +362,7 @@ lemma IsBrownFunctor.isGoodFor_obj₃ (hH : IsBrownFunctor H) (T : Triangle C)
 /-- `Y` is good for `u` in all shifts. -/
 def IsGoodForAll (u : H.obj (op X)) (Y : C) : Prop := ∀ n : ℤ, IsGoodFor u (Y⟦n⟧)
 
+omit [HasCoproducts.{w} C] in
 lemma IsBrownFunctor.isGoodForAll_obj₃ (hH : IsBrownFunctor H) (T : Triangle C)
     (hT : T ∈ distTriang C) (h₁ : IsGoodForAll u T.obj₁) (h₂ : IsGoodForAll u T.obj₂) :
     IsGoodForAll u T.obj₃ := fun n ↦
@@ -365,6 +370,7 @@ lemma IsBrownFunctor.isGoodForAll_obj₃ (hH : IsBrownFunctor H) (T : Triangle C
     ((h₁ (n + 1)).of_iso ((shiftFunctorAdd C n 1).app _))
     ((h₂ (n + 1)).of_iso ((shiftFunctorAdd C n 1).app _))
 
+omit [H.Additive] [HasCoproducts.{w} C] in
 lemma IsBrownFunctor.isGoodForAll_of_cofan (hH : IsBrownFunctor H) {J : Type w} {f : J → C}
     (c : Cofan f) (hc : IsColimit c) (hf : ∀ j, IsGoodForAll u (f j)) :
     IsGoodForAll u c.pt := fun n ↦ by
@@ -381,11 +387,13 @@ lemma IsBrownFunctor.isGoodForAll_of_cofan (hH : IsBrownFunctor H) {J : Type w} 
       (fun (ψ : ∀ j, (f j)⟦n⟧ ⟶ X) (j : J) ↦ H.map (ψ j).op u) ∘
         (fun (φ : c.pt⟦n⟧ ⟶ X) (j : J) ↦ (c.inj j)⟦n⟧' ≫ φ) := by
     funext φ j
-    simp only [Function.comp_apply, ← H.map_op_comp_apply, Iso.inv_hom_id_assoc]
-  have := hP.comp hA
-  rw [← key] at this
-  exact (Function.Bijective.of_comp_iff' hB _).1 this
+    exact (H.map_op_comp_apply _ _ u).symm
+  have h₂ : Function.Bijective ((fun (ψ : ∀ j, (f j)⟦n⟧ ⟶ X) (j : J) ↦ H.map (ψ j).op u) ∘
+      (fun (φ : c.pt⟦n⟧ ⟶ X) (j : J) ↦ (c.inj j)⟦n⟧' ≫ φ)) := hP.comp hA
+  rw [← key] at h₂
+  exact (Function.Bijective.of_comp_iff' hB _).1 h₂
 
+omit [HasCoproducts.{w} C] in
 lemma IsCellular.isGoodForAll {κ : Type w} {G : κ → C} (hH : IsBrownFunctor H) {Y : C}
     (hY : IsCellular G Y) (hG : ∀ k, IsGoodForAll u (G k)) : IsGoodForAll u Y :=
   hY (fun Y ↦ IsGoodForAll u Y) hG (fun _ _ c hc hf ↦ hH.isGoodForAll_of_cofan c hc hf)
