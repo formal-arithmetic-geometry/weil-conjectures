@@ -1,0 +1,130 @@
+{
+ "id": "lem-sc-etale-small-generator-sections",
+ "kind": "statement",
+ "title": "Section-size bound for the affine etale generator",
+ "statement": "For every scheme X in universe u and every U in the opposite of its small etale site [def-weil-pbc-etale-site], the underlying type of the abelian section group G_X(U) of the concretely constructed sheaf [def-sc-etale-small-generator] is u-small.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Sheafified free abelian representables; see also Tag 03EW (3) and Mathlib.CategoryTheory.Generator.Sheaf."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sc-etale-small-generator"
+ ],
+ "proof": [
+  {
+   "text": "On the u-small model C, each free abelian representable presheaf is a coproduct of lifted integers indexed by a u-small hom set, hence the coefficient lift of its u-valued version. Compute sheafification by applying the plus construction twice: matching-family limits have u-small index types, and the filtered partially ordered set of covering sieves is u-small. Coefficient lifting preserves these limits and colimits, so it commutes with sheafification. The coproduct indexed by C times Unit likewise commutes with lifting, because lifting preserves coproducts and sheafification is a left adjoint. Thus every section group of the constructed coproduct on C is u-small. Uniqueness of sheafification and of coproducts identifies these computations with the particular choices used in G_X.",
+   "uses": [
+    "def-sc-etale-small-generator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The small-model comparison transfers the section bound to affine etale objects. Cover any etale object U by its affine open subschemes, indexed by a u-small subset of its opens. Separatedness of the transported sheaf injects its sections on U into the product of its section groups on that covering. Each factor is u-small, the index is u-small, and a type injecting into a u-small product is u-small. This handles non-quasi-compact U as well as empty U (empty product, hence singleton sections).",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-sc-etale-small-generator"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-small-generator",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Free abelian representable sheaves; universe-explicit affine-model construction using Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparator\", \"Small\"",
+   "date": "2026-10-12",
+   "results": "No hits.",
+   "verdict": "Construction and generic separator tools found; no theorem for the section-size bound of this transported generator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a generator for abelian sheaves on the etale site whose sections are small in the universe of the scheme",
+   "date": "2026-10-12",
+   "results": "SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections; AlgebraicGeometry.Scheme.smallEtaleTopology; SheafOfModules.LocalGeneratorsData.X; SheafOfModules.IsFiniteType; SheafOfModules.GeneratingSections; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+   "verdict": "Construction and generic separator tools found; no theorem for the section-size bound of this transported generator."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves on a small site have a generator with small section groups",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "grep",
+   "query": "small.*freeYoneda|freeYoneda.*small|Small.*sheaf|sheaf.*Small",
+   "date": "2026-10-12",
+   "results": "Mathlib/CategoryTheory/Topos/Sheaf.lean; Mathlib/CategoryTheory/Topos/Sheaf.lean; Mathlib/CategoryTheory/Topos/Sheaf.lean; Mathlib/CategoryTheory/Topos/Sheaf.lean; Mathlib/CategoryTheory/Topos/Sheaf.lean; Mathlib/CategoryTheory/Limits/Indization/IndObject.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Limits/Preserves/Presheaf.lean",
+   "verdict": "Construction and generic separator tools found; no theorem for the section-size bound of this transported generator."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSmallInjectiveCriterion",
+  "date": "2026-10-12",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-ulift-injective",
+   "place": "Small affine-model generators in the proof of the small extension injectivity criterion.",
+   "via": [
+    "lem-sc-etale-small-injective-criterion",
+    "lem-sc-etale-ulift-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSmallGeneratorSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSmallGeneratorSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleSmallGenerator_sections_small",
+  "statement": "theorem etaleSmallGenerator_sections_small (X : Scheme.{u}) (U : X.Etaleᵒᵖ) : Small.{u} ((etaleSmallGenerator X).obj.obj U)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144149-L-2108531",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T144149-L-2108531",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
