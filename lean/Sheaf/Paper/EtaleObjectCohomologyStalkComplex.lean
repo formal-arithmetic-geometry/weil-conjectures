@@ -12,6 +12,11 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+import Sheaf.Paper.ObjectCohomologyPresheafResolution
+
 /-! # Object cohomology stalks and section complexes
 
 Source: Stacks Project, Cohomology on Sites, Tag 03F3; Etale Cohomology, Tag 09AX.
@@ -76,4 +81,19 @@ theorem etaleObjectCohomology_stalk_complex
           (((OpenNhds.inclusion (X := X.toLocallyRingedSpace.toTopCat) x) ⋙ i).op ⋙
             Sheaf.cohomologyPresheaf F q ⋙ AddCommGrpCat.uliftFunctor.{u + 2, w})) ≃+
           (((etaleObjectStalkSections X i x).mapHomologicalComplex (.up ℕ)).obj
-            I.cocomplex).homology q) := by sorry
+            I.cocomplex).homology q) := by
+  classical
+  let I := injectiveResolution F
+  let K := ((sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).mapHomologicalComplex
+    (.up ℕ)).obj I.cocomplex
+  let R := (Functor.whiskeringLeft _ _ AddCommGrpCat.{u + 1}).obj
+    ((OpenNhds.inclusion (X := X.toLocallyRingedSpace.toTopCat) x) ⋙ i).op ⋙ colim
+  obtain ⟨e⟩ := objectCohomologyPresheaf_resolution X.smallEtaleTopology F I q
+  refine ⟨I, ?_⟩
+  let N := ((OpenNhds.inclusion
+    (X := X.toLocallyRingedSpace.toTopCat) x) ⋙ i).op
+  let d := colim.mapIso (Functor.isoWhiskerLeft N e)
+  let h := (K.sc q).mapHomologyIso R
+  let t := d ≪≫ (preservesColimitIso AddCommGrpCat.uliftFunctor (N ⋙ K.homology q)).symm
+  let z := t ≪≫ AddCommGrpCat.uliftFunctor.mapIso h.symm
+  exact ⟨z.addCommGroupIsoToAddEquiv.trans AddEquiv.ulift⟩

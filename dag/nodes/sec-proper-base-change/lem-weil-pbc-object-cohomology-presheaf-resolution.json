@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-object-cohomology-presheaf-resolution",
+ "kind": "statement",
+ "title": "Object cohomology presheaf is homology of a supplied injective resolution",
+ "statement": "Let C be a category with objects in universe u and morphisms in universe v, and J a Grothendieck topology [def-weil-pbc-sites-and-cohomology]. Assume abelian sheafification with coefficients AddCommGrpCat in universe v [def-weil-pbc-sheafification], and HasExt in universe w for the abelian sheaves on J. Let F be an abelian sheaf, I an injective resolution of F [def-sp-injective-resolutions], and q a natural number. Apply sheafToPresheaf to I degreewise, and let K be the resulting cochain complex of presheaves. The object cohomology presheaf H^q(-,F), lifted from universe w to max(u,v,w), is naturally isomorphic to the presheaf K.homology q, lifted from universe v to max(u,v,w). No existence of a resolution is asserted: I is supplied. Naturality is with respect to every morphism of objects of C.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT, definition of cohomology over an object; Tag 03F3, proof. Read online at https://stacks.math.columbia.edu/tag/03F3; the Ext/free-representable encoding is Mathlib SheafCohomology.Basic."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "For each object U, form A(U), the sheafification of the free abelian presheaf on yoneda U. The sheafification adjunction, the free abelian adjunction and Yoneda identify Hom(A(U),G) additively with G(U). On a morphism U -> V this identification sends precomposition by A(U) -> A(V) to restriction G(V) -> G(U). This is the representable Ext definition of object cohomology in Mathlib.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the additive Hom-sections identification to every term and differential of I. Compute Ext using InjectiveResolution.extAddEquivCohomologyClass. The extended integer complex is zero in negative degrees; the resulting degree-q homology agrees with that of the original nonnegative complex, including degree zero. Naturality for precomposition follows on cocycles from InjectiveResolution.mk₀_comp_extMk, and descends to classes. The supplied Ext universe w gives the same cohomology classes through this additive equivalence, independently of the sheaf morphism universe.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation on presheaves is exact, so it preserves homology. Its homology comparison identifies evaluation of K.homology q with homology of I evaluated at U. The comparisons commute with restrictions by naturality of the exact-functor homology comparison. Lift both sides to max(u,v,w); ULift preserves homology, and additive ULift equivalences align the two lifts of the same cohomology class group. Assemble the component isomorphisms into a natural isomorphism. Empty sites, zero sheaves and q=0 require no separate extra hypotheses.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "def-sp-injective-resolutions",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 01FT, definition of cohomology over an object; Tag 03F3, proof. Read online at https://stacks.math.columbia.edu/tag/03F3; the Ext/free-representable encoding is Mathlib SheafCohomology.Basic.",
+  "note": "D3 spells out the natural Ext/free-representable encoding of the source resolution computation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Object cohomology presheaf as homology of an injective resolution",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology presheaf is naturally homology of sections of an injective resolution",
+   "results": "Sheaf.cohomologyPresheaf and InjectiveResolution.extAddEquivCohomologyClass found separately; no presheaf natural isomorphism. Loogle query CategoryTheory.Sheaf.cohomologyPresheaf found only its definition and Mayer-Vietoris maps.",
+   "date": "2026-10-12",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologyPresheaf.*resolution|resolution.*cohomologyPresheaf; blueprint_refs.py search object cohomology and free abelian; rg both library roots and Mathlib",
+   "results": "No complete comparison found. EtaleFreeSheafDerivedSections handles module sheaves at the terminal object, in fixed universes, not this presheaf. Blueprint object cohomology search gave zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleObjectCohomologyStalkComplex",
+  "date": "2026-10-12",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-gabber-effacement",
+   "place": "Injective-resolution computation of object cohomology used in the Tag 09AX effacement argument; presheaf naturality before taking Zariski stalks.",
+   "via": [
+    "lem-weil-pbc-etale-object-cohomology-stalk-complex",
+    "lem-weil-pbc-strict-henselian-cohomology-locally-zero",
+    "lem-weil-pbc-gabber-strict-henselian-zariski-comparison",
+    "lem-weil-pbc-gabber-criterion",
+    "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+    "lem-weil-pbc-integral-cover-trivial-cohomology",
+    "lem-weil-pbc-integral-cover-kills-constant-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ObjectCohomologyPresheafResolution",
+  "file": "lean/Sheaf/Paper/ObjectCohomologyPresheafResolution.lean",
+  "declaration": "objectCohomologyPresheaf_resolution",
+  "statement": "theorem objectCohomologyPresheaf_resolution\n    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{v}]\n    [HasExt.{w} (Sheaf J AddCommGrpCat.{v})]\n    (F : Sheaf J AddCommGrpCat.{v}) (I : InjectiveResolution F) (q : ℕ) :\n    Nonempty\n      (Sheaf.cohomologyPresheaf F q ⋙ AddCommGrpCat.uliftFunctor.{max u v, w} ≅\n        (((sheafToPresheaf J AddCommGrpCat.{v}).mapHomologicalComplex (.up ℕ)).obj\n          I.cocomplex).homology q ⋙ AddCommGrpCat.uliftFunctor.{max u w, v})",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T144100-L-2091335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T144100-L-2091335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
