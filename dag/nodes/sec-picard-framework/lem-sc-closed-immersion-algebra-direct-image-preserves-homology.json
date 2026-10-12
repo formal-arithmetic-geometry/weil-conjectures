@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-closed-immersion-algebra-direct-image-preserves-homology",
+ "kind": "statement",
+ "title": "Homology under closed-immersion algebra direct image",
+ "statement": "Let i : Z ⟶ Y be a closed immersion of schemes. The module direct-image functor over the direct-image algebra preserves homology of short complexes.",
+ "source": {
+  "document": "Stacks Project, Sheaves on Spaces and Sheaves of Modules",
+  "place": "Tags 00AE and 01AX, stalkwise exactness"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Compute the direct-image stalk on the closed image and on its open complement, obtaining exactness on stalks; module-sheaf exactness is detected stalkwise.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-sc-direct-image-algebra-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-sc-direct-image-algebra-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project, Sheaves on Spaces and Sheaves of Modules",
+  "place": "Tags 00AE and 01AX, stalkwise exactness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pushforward of sheaves of modules along a closed embedding is an exact functor",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward of sheaves of modules along a closed embedding is exact, since its stalks are source stalks on the image and zero off the image",
+   "results": "8 hits; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.bijective_pushforwardSections, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, CategoryTheory.Sheaf.hasExactColimitsOfShape, SheafOfModules.pushforward; no exact match; pushforward is a right adjoint, but finite colimit preservation along a closed embedding is missing",
+   "date": "2026-10-12",
+   "verdict": "no exact match; pushforward is a right adjoint, but finite colimit preservation along a closed embedding is missing"
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent|clopen|IsClosedEmbedding",
+   "results": "0 hits; ; no matches in Mathlib module-sheaf files; source and Sheaf searches likewise have no closed-embedding exactness theorem",
+   "date": "2026-10-12",
+   "verdict": "no matches in Mathlib module-sheaf files; source and Sheaf searches likewise have no closed-embedding exactness theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImageExact",
+  "date": "2026-10-13",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Finite colimits under closed-immersion algebra direct image in the rank-stratum assembly",
+   "via": [
+    "lem-sc-closed-immersion-ranked-cohomology-reconstruction",
+    "lem-sc-koszul-regular-immersion-algebra-dual",
+    "lem-sc-smooth-proper-diagonal-koszul-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImagePreservesEpimorphisms",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedImmersionAlgebraDirectImagePreservesEpimorphisms.lean",
+  "declaration": "AlgebraicGeometry.closedImmersion_algebraDirectImage_preservesHomology",
+  "statement": "theorem closedImmersion_algebraDirectImage_preservesHomology\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :\n    (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)).PreservesHomology",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T184308-L-4006328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T184308-L-4006328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

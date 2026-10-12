@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImagePreservesEpimorphisms
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Exact direct image over a closed immersion's algebra
@@ -43,6 +44,10 @@ The empty source is covered by the zero-stalk case. -/
 theorem closedImmersion_algebraDirectImage_preservesFiniteColimits
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] :
     PreservesFiniteColimits
-      (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i))  := by sorry
+      (RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i))  := by
+  let F := RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace i)
+  let : F.PreservesHomology :=
+    closedImmersion_algebraDirectImage_preservesHomology i
+  exact Functor.preservesFiniteColimits_of_preservesHomology F
 
 end AlgebraicGeometry
