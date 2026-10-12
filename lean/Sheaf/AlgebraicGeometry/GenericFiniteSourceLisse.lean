@@ -8,10 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
+import Sheaf.AlgebraicGeometry.FiniteGenericFiberStratumInteriors
+import Sheaf.AlgebraicGeometry.LisseStratumInteriors
 import Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
 /-!
 # Generic lissity on the source of a finite morphism
@@ -72,6 +71,28 @@ theorem exists_dense_open_lisse_finite_source
         ((sheafCompose (g ⁻¹ᵁ U).toScheme.smallEtaleTopology
           (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
             ((Etale.upperStar AddCommGrpCat.{u + 1} (g ⁻¹ᵁ U).ι).obj E)) := by
-  sorry
+  classical
+  obtain ⟨T, hT⟩ := hE
+  let W := T.interiorUnion
+  have hW := lisse_on_stratum_interiors E T hT
+  let U : S.Opens := ⟨(g '' (W : Set Z)ᶜ)ᶜ,
+    (g.isClosedMap _ W.isOpen.isClosed_compl).isOpen_compl⟩
+  have hη : genericPoint S ∈ U := by
+    rintro ⟨x, hx, hxη⟩
+    exact hx (generic_fiber_subset_stratum_interiors S g T x hxη)
+  have hUd : Dense (U : Set S) := by
+    apply dense_iff_closure_eq.mpr
+    apply Set.eq_univ_of_univ_subset
+    rw [← genericPoint_closure S]
+    exact closure_mono (Set.singleton_subset_iff.mpr hη)
+  have hUW : g ⁻¹ᵁ U ≤ W := by
+    intro x hx
+    by_contra hxW
+    exact hx ⟨x, hxW, rfl⟩
+  refine ⟨U, hUd, ?_⟩
+  have h := (pullback_finite_locally_constant
+    (Z.homOfLE hUW) W.ι E hW).2
+  rw [Scheme.homOfLE_ι] at h
+  exact h
 
 end AlgebraicGeometry.Scheme
