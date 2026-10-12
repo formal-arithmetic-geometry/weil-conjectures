@@ -13,24 +13,48 @@
  ],
  "proof": [
   {
-   "text": "Represent a class by a cocycle in a resolution J of f_*F. Lift any coefficient\nmap g:F -> G to a map between injective resolutions I and I' and lift f_*g between\nJ and J'. Choose comparisons J -> f_*I and J' -> f_*I'. The two composites from J\ninto f_*I' extend the same augmentation map and are homotopic, because f_*I' is\ntermwise injective. Their global-section maps therefore agree on cohomology.\nAs a sends the generators to terminal-section generators, precomposition\nz maps to a >> f_*z is a bijection Hom(KZ,T) -> Hom(KX,f_*T), natural in T.\nThus for each comparison and source cycle there exists a unique matching z;\nthe bijection commutes with differentials, so z is a cycle. Apply the formula\nfor tau to these matching cycles. The Ext functor maps a cycle class by composing\nwith a resolution lift of the coefficient map (InjectiveResolution.extMk_comp_mk₀).\nThis identifies the two paths around the naturality square with the composites. Every Ext class\nhas a cocycle representative, so the\nsquare commutes on every element; extensionality of additive homomorphisms gives\nthe displayed equality. This also covers degree zero and zero coefficient maps.",
+   "text": "Use Mathlib InjectiveResolution.extMk_surjective to represent an arbitrary input class by s in J. Lift the coefficient map g and its pushforward with InjectiveResolution.desc. Apply the already proved terminal-section resolution-cocycle lifting theorem first to s and then to s followed by the lifted pushforward coefficient map, obtaining phi,z and phi-prime,z-prime. The two composites into f_*I-prime agree after the augmentation by their augmentation equations and the coefficient-lift equations.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sc-topological-resolution-cocycle-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Direct image sends each term of I-prime to an injective object. Subtract the two composites. Factor its degree-zero component through J.d(0,1) using J.exact-zero.descToInjective. For positive degrees inductively produce t,t-prime with delta(n+1)=t followed by the target differential plus the source differential followed by t-prime: subtract the preceding t-prime followed by the differential, check that the preceding source differential kills this difference using the chain-map identity, and use J.exact-succ.descToInjective. Precomposition by a source cycle makes delta zero in degree zero and a boundary in every positive degree. This is the explicit null-homotopy argument of Derived Categories Tag 013S, with its induction as in Tag 013R; the target complex is not assumed exact.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-sc-topological-pushforward-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse sectionEquiv and sectionEquiv_apply from the existing resolution-cocycle lift module (proof-only import all). These sheafification, free-forgetful and Yoneda adjunctions identify terminal-sheaf morphisms with terminal sections. Evaluate on the identity generator. The generator equation ha and naturality show that precomposition z maps to a followed by f_*z corresponds to restriction along the terminal-open equality, an isomorphism. Hence this precomposition is bijective for every coefficient sheaf. Transfer the boundary in the preceding step through this bijection: z followed by the coefficient lift and z-prime differ by a boundary. Mathlib InjectiveResolution.sub_extMk and extMk_eq_zero_iff identify their Ext classes; degree zero instead gives equality of the morphisms by injectivity.",
    "uses": [
     "def-sc-topological-abelian-cohomology",
-    "def-weil-pbc-topological-inverse-image",
-    "lem-sc-topological-pushforward-injective"
+    "lem-sc-topological-resolution-cocycle-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the assumed cocycle formula h-tau to the two matching cycles. Mathlib InjectiveResolution.extMk_comp_mk-zero computes the coefficient maps in terms of the resolution lifts. The equality of output Ext classes therefore proves the naturality square on the arbitrary input class. ConcreteCategory.hom_ext proves equality of the additive homomorphisms. Degree zero and zero coefficient maps need no extra hypotheses.",
+   "uses": [
+    "def-sc-topological-abelian-cohomology",
+    "def-sp-injective-resolutions"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-topological-abelian-cohomology",
-  "def-weil-pbc-topological-inverse-image",
-  "lem-sc-topological-pushforward-injective"
+  "def-sp-injective-resolutions",
+  "lem-sc-topological-resolution-cocycle-lift",
+  "lem-sc-topological-pushforward-injective",
+  "def-sc-topological-abelian-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/013G",
-  "place": "Derived Categories, Lemmas 13.18.6 and 13.18.7; with the cohomology definition of Tag 01DZ and terminal-section identity of the proof of Tag 01EZ; explicit terminal-representable and Ext glue expanded by H3"
+  "place": "Tags 013P and 013S (comparison and uniqueness), with the explicit null-homotopy induction of Lemma 13.18.4, and Tag 01DZ terminal-section representation; G3 Lean proof uses the existing proved resolution-cocycle lift and proves the null-comparison boundary argument locally. Returned-delivery repair: reuse the lift module private sectionEquiv and sectionEquiv_apply via import all, removing both duplicate declarations."
  },
  "mathlib_searches": [
   {
@@ -120,11 +144,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-118cf",
-  "group": "H3",
+  "reviewer": "X-2a11f",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T173834-L-3297854",
+  "landing": "20261012T194115-L-456489",
   "kind": "interface",
-  "note": "independent Codex review: Matched the delivered files, node statements and proof records, change record, report, compilation results, and forced caller adaptation against the stage-3 review brief; all checks pass."
+  "note": "independent Codex review: Matched the unchanged Lean signature and completed proof with the node, dependencies, unit route, change record, report, and earlier return; delivery and sole direct importer compile cleanly, and all checked axioms are permitted."
  }
 }
