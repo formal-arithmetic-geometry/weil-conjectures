@@ -6610,3 +6610,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:05 L: merged deliver/H2/Sheaf.AlgebraicGeometry.Curve.DenseOpenFinitenessComparison (stage 3; reviewer PASS; first push; landing 20261012T070538-L-3471476 (interface); batch 20261012T070523; modules 4; new nodes 3)
 - 07:05 L: merged deliver/H2/Sheaf.Topology.ClosedEmbeddingRestrictionTransport (stage 3; reviewer PASS; first push; landing 20261012T070538-L-3471650 (interface); batch 20261012T070523; modules 2; new nodes 1)
 - 07:05 L: merged deliver/J1/Sheaf.AlgebraicGeometry.HigherDirectImageLimitClassVanishing (stage 3; reviewer PASS; first push; landing 20261012T070538-L-3471784 (interface); batch 20261012T070523; modules 2; new nodes 1)
+- 07:05 L: merged deliver/J1/Sheaf.AlgebraicGeometry.IrreducibleStratificationRefinement (stage 3; reviewer PASS; first push; landing 20261012T070539-L-3471895 (proof); batch 20261012T070523; modules 1; new nodes 0)
