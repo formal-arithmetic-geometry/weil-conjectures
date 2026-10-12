@@ -156,10 +156,13 @@ lemma globalSectionsTransport_comp_germ {S Y Y' : Scheme.{u}} {L : Type u} [Fiel
       Functor.whiskerRight_app, Functor.leftUnitor_inv_app, Category.assoc, Category.id_comp,
       Category.comp_id]
     rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
-    simp
+    simp only [Functor.id_obj, Category.id_comp]
     exact Category.comp_id _
   · rw [upperStarComp_id_left]
-    simp
+    simp only [Functor.comp_obj, Functor.id_obj, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.rightUnitor_inv_app,
+      Functor.whiskerLeft_app, Category.id_comp, NatTrans.naturality, Functor.id_map,
+      Category.assoc, Iso.inv_hom_id_app_assoc, Category.comp_id]
     exact Category.comp_id _
 
 /-- The global section of an isomorphism `ℚ̄_ℓ ≅ M` on a connected scheme is nonzero. -/

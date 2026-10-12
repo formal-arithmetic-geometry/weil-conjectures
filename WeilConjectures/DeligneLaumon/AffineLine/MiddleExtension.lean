@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
+public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
 
 /-!
 # Irreducible middle extensions under the Fourier transform
@@ -114,21 +115,17 @@ theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducible
     D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
   ⟨D.isFourierNonexceptional_of_isNonexceptional ψ hD, fun h a ha ↦ h.2 a ⟨hirr, ha⟩⟩
 
--- TODO(adic): the semisimplicity half is available sheaf-theoretically (as in
--- `AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.exists_iso_biproduct_unit`, `F̄` is a quotient
--- of a sum of Frobenius translates of the constituent); missing are the ramification of
--- `ℒ_{ψ(a x)}`, `a ∈ k̄ˣ`, at `∞` for geometric sheaves (`lem-a1-artin-schreier-ramified-infinity`,
--- not yet in Lean) and the passage of lisseness at `∞` to direct summands of `F̄`.
 /-- A lisse sheaf unramified at infinity has no geometric constituent `ℒ_{ψ(a x)}|_U` with
-`a ≠ 0`: the restriction of `M_η̄` to the geometric fundamental group is semisimple
-(`Representation.isSemisimpleRepresentation_comp_subtype`), so such a constituent is a direct
-summand, on which the inertia group at `∞` acts trivially; but it acts on `ℒ_{ψ(a x)}` through
-the nontrivial character `ψ`. (blueprint: `lem-a1-unramified-nonexceptional`, case `a ≠ 0`) -/
+`a ≠ 0`: on the punctured disc at `∞` the sheaf becomes constant, so such a constituent would be
+a subquotient of a constant sheaf there, while the inertia group at `∞` acts on `ℒ_{ψ(a x)}`
+through the nontrivial character `ψ`
+(the primed variant, `not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`,
+which needs no irreducibility). (blueprint: `lem-a1-unramified-nonexceptional`, case `a ≠ 0`) -/
 theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
-    (hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
+    (_hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
     {a : AlgebraicClosure k₀} (ha : a ≠ 0) :
-    ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by
-  sorry
+    ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j :=
+  D.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity' ψ hψ hinf ha
 
 -- TODO(adic): needs the transforms of skyscraper sheaves (`lem-fd-first-formula`), the base
 -- change of the transform to `k̄` (`lem-fd-base-change`), Fourier inversion

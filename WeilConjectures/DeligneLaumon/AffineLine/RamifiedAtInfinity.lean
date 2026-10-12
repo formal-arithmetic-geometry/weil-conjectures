@@ -35,7 +35,7 @@ linear Artin–Schreier sheaf is not unramified at infinity
 (`AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`), and the case `a ≠ 0` of
 `lem-a1-unramified-nonexceptional`: a lisse sheaf unramified at infinity has no geometric
 constituent `ℒ_{ψ(a x)}|_U` with `a ≠ 0`
-(`AlgebraicGeometry.WeilSheaf.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity`).
+(`WeilSheaf.LisseOnDenseOpen.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`).
 The second statement needs no semisimplicity: a subquotient of a constant sheaf on `Spec K` is
 already excluded.
 
@@ -44,7 +44,7 @@ already excluded.
 - `AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`
 - `AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`
 - `AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`
-- `AlgebraicGeometry.WeilSheaf.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity`
+- `WeilSheaf.LisseOnDenseOpen.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`
 -/
 
 @[expose] public section
@@ -128,7 +128,8 @@ theorem exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity {F : WeilS
   have hj' : j' ≫ W.ι = j ≫ ι := IsOpenImmersion.lift_fac _ _ _
   obtain ⟨zW, hzW⟩ := exists_comp_geometricFiberMap_eq_powerSeriesInfinityPoint k₀ W hcov
   -- the point `x = 1 / t` of `Ū` is the restriction of the point `z = t` of `W̄`
-  have hsq : zU ≫ Scheme.Hom.geometricFiberMap j' (comp_over j' _) = Spec.map (CommRingCat.ofHom (algebraMap (PowerSeries (AlgebraicClosure k₀)) K̄)) ≫ zW := by
+  set ρ := Spec.map (CommRingCat.ofHom (algebraMap (PowerSeries (AlgebraicClosure k₀)) K̄))
+  have hsq : zU ≫ Scheme.Hom.geometricFiberMap j' (comp_over j' _) = ρ ≫ zW := by
     rw [← cancel_mono (Scheme.Hom.geometricFiberMap W.ι (comp_over W.ι _)), Category.assoc,
       Category.assoc, hzW, ← laurentPoint_one_comp_geometricFiberMap_affineChart, ← hzU,
       Category.assoc, ← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_comp]
@@ -139,8 +140,8 @@ theorem exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity {F : WeilS
   refine ⟨n, ⟨(zU)^*ᵃ[l].mapIso
       ((ObjectProperty.ι _ ⋙ Endofunctor.IsoAlgebra.forget _).mapIso e).symm ≪≫
     ProEtale.adicUpperStarCompObjIso hsq _ ≪≫
-    (ProEtale.adicUpperStarCompObjIso rfl _).symm ≪≫ (Spec.map (CommRingCat.ofHom (algebraMap (PowerSeries (AlgebraicClosure k₀)) K̄)))^*ᵃ[l].mapIso
-      eW ≪≫ Functor.mapBiproduct _ _ ≪≫ biproduct.mapIso fun _ ↦ ProEtale.adicUpperStarUnitIso l _⟩⟩
+    (ProEtale.adicUpperStarCompObjIso rfl _).symm ≪≫ (ρ)^*ᵃ[l].mapIso eW ≪≫
+      Functor.mapBiproduct _ _ ≪≫ biproduct.mapIso fun _ ↦ ProEtale.adicUpperStarUnitIso l _⟩⟩
 
 end WeilSheaf
 
@@ -149,7 +150,8 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 /-- **Linear Artin–Schreier sheaves are ramified at infinity.** For a nontrivial additive
 character `ψ` and `a ≠ 0`, the Artin–Schreier sheaf `ℒ_{ψ(a x)}` on `𝔸¹_{k₀}` does not extend
 to a lisse sheaf on a neighbourhood of `∞` in `ℙ¹`: otherwise it would be constant on the
-punctured disc at `∞` (`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
+punctured disc at `∞`
+(`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
 while the inertia group at `∞` acts on it through `ψ`.
 (blueprint: `lem-a1-artin-schreier-ramified-infinity`) -/
 theorem not_isUnramifiedAtInfinity_artinSchreier (hψ : ψ ≠ 1) {a : k₀} (ha : a ≠ 0) :
@@ -188,7 +190,8 @@ theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity' (hψ : 
       affineLine.geometricSMul k₀ a) ≫
         Scheme.Hom.geometricFiberMap (affineLine.smul k₀ 1) (comp_over _ _) =
       laurentPoint k₀ (algebraMap k₀ (AlgebraicClosure k₀) 1 * (a * 1)) := by
-    rw [Category.assoc, Category.assoc, reassoc_of% hzU, reassoc_of% laurentPoint_comp_geometricSMul,
+    rw [Category.assoc, Category.assoc, reassoc_of% hzU,
+      reassoc_of% laurentPoint_comp_geometricSMul,
       laurentPoint_comp_geometricFiberMap_smul]
   have hb : algebraMap k₀ (AlgebraicClosure k₀) 1 * (a * 1) ≠ 0 := by simpa using ha
   exact affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage ψ hψ hb
