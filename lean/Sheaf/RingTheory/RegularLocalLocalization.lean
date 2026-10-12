@@ -7,7 +7,6 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.GlobalDimension
 import Sheaf.RingTheory.LocalizationFiniteGlobalDimension
 import Sheaf.RingTheory.RegularLocalFiniteGlobalDimension
 import Sheaf.RingTheory.RegularLocalOfFiniteGlobalDimension
@@ -45,6 +44,26 @@ theorem localization_at_prime_and_isRegularRing
     {R : Type u} [CommRing R] [IsRegularLocalRing R]
     (p : Ideal R) [p.IsPrime] :
     IsRegularLocalRing (Localization.AtPrime p) ∧ IsRegularRing R := by
-  sorry
+  have hdim : ∃ d : ℕ, ringKrullDim R = (d : WithBot ℕ∞) := by
+    obtain ⟨a, ha⟩ := (WithBot.ne_bot_iff_exists.mp (ringKrullDim_ne_bot (R := R)))
+    have ha_top : a ≠ ⊤ := by
+      intro htop
+      apply ringKrullDim_ne_top (R := R)
+      simp [← ha, htop]
+    obtain ⟨d, hd⟩ := ENat.ne_top_iff_exists.mp ha_top
+    exact ⟨d, ha.symm.trans (congrArg (fun n : ℕ∞ ↦ (n : WithBot ℕ∞)) hd).symm⟩
+  obtain ⟨d, hd⟩ := hdim
+  have hgl : Ring.HasGlobalDimensionLE.{u, u} R d :=
+    IsRegularLocalRing.hasGlobalDimensionLE_of_ringKrullDim_eq R d hd
+  have hreg (q : Ideal R) [q.IsPrime] :
+      IsRegularLocalRing (Localization.AtPrime q) := by
+    have hglq : Ring.HasGlobalDimensionLE.{u, u} (Localization.AtPrime q) d := by
+      exact (Ring.localization_preserves_projective_and_global_dimension R q.primeCompl d).2.1 hgl
+    have hfdq : Ring.HasFiniteGlobalDimension.{u, u} (Localization.AtPrime q) := ⟨d, hglq⟩
+    exact IsRegularLocalRing.of_hasFiniteGlobalDimension _ hfdq
+  refine ⟨hreg p, ?_⟩
+  apply isRegularRing_iff.mpr
+  intro q hq
+  exact hreg q
 
 end IsRegularLocalRing

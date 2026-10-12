@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "$R_{\\mathfrak p}$ is a Noetherian local ring. The regular local ring $R$ is Noetherian by definition [def-weil-regular-scheme]. The map $R\\to R_{\\mathfrak p}=S^{-1}R$, $S=R\\setminus\\mathfrak p$ (a multiplicative subset since $\\mathfrak p$ is prime), is the localization of [def-weil-pbc-localization-at-prime], so it satisfies (a), (b), (c) of [lem-weil-pbc-localization-noetherian] for $S$, and $R_{\\mathfrak p}$ is Noetherian [def-weil-pbc-noetherian-ring]. By [def-weil-pbc-localization-at-prime], $R_{\\mathfrak p}$ is local with maximal ideal $\\mathfrak pR_{\\mathfrak p}$.",
+   "text": "R is Noetherian and local by IsRegularLocalRing [def-weil-regular-scheme, def-weil-pbc-noetherian-ring]. For any prime q, Mathlib supplies the Noetherian instance for Localization q.primeCompl (IsLocalization.isNoetherianRing [lem-weil-pbc-localization-noetherian]) and the local-ring instance for Localization.AtPrime q [def-weil-pbc-localization-at-prime]. No explicit instance construction is needed.",
    "uses": [
     "def-weil-regular-scheme",
     "def-weil-pbc-localization-at-prime",
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "$R$ has finite global dimension: with $d=\\dim R$, every $R$-module has a projective resolution of length $\\le d$, by [lem-weil-pbc-regular-local-finite-gl-dim] applied to the regular local ring $R$ [def-weil-pbc-finite-global-dimension].",
+   "text": "Mathlib supplies FiniteRingKrullDim R for Noetherian local rings, via Krulls height theorem. Since ringKrullDim R is neither bottom nor top, WithBot.ne_bot_iff_exists and ENat.ne_top_iff_exists give a natural number d with ringKrullDim R = d (including d = 0). Apply IsRegularLocalRing.hasGlobalDimensionLE_of_ringKrullDim_eq [lem-weil-pbc-regular-local-finite-gl-dim] to obtain Ring.HasGlobalDimensionLE R d [def-weil-pbc-finite-global-dimension].",
    "uses": [
     "lem-weil-pbc-regular-local-finite-gl-dim",
     "def-weil-pbc-finite-global-dimension"
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "$R_{\\mathfrak p}$ has finite global dimension. Apply [lem-weil-pbc-localization-finite-gl-dim], part (2), with the multiplicative subset $S=R\\setminus\\mathfrak p$ and $n=d$: since $R$ has global dimension $\\le d$ (Step 2), $S^{-1}R=R_{\\mathfrak p}$ [def-weil-pbc-localization-at-prime] has global dimension $\\le d$, in particular finite global dimension [def-weil-pbc-finite-global-dimension].",
+   "text": "For each prime q, apply the global-dimension implication (part 2.1) of Ring.localization_preserves_projective_and_global_dimension [lem-weil-pbc-localization-finite-gl-dim] to q.primeCompl and d. This gives Ring.HasGlobalDimensionLE (Localization.AtPrime q) d [def-weil-pbc-localization-at-prime]. The pair of d and that proof gives finite global dimension [def-weil-pbc-finite-global-dimension].",
    "uses": [
     "lem-weil-pbc-localization-finite-gl-dim",
     "def-weil-pbc-localization-at-prime",
@@ -67,7 +67,7 @@
    }
   },
   {
-   "text": "$R_{\\mathfrak p}$ is a regular local ring: it is a Noetherian local ring (Step 1) of finite global dimension (Step 3), so [lem-weil-pbc-finite-gl-dim-regular-local] applies and gives that $R_{\\mathfrak p}$ is a regular local ring [def-weil-regular-scheme]. This is the first assertion.",
+   "text": "Apply IsRegularLocalRing.of_hasFiniteGlobalDimension [lem-weil-pbc-finite-gl-dim-regular-local] to the Noetherian local ring Localization.AtPrime q and the finite-global-dimension proof. This gives regular localness [def-weil-regular-scheme] uniformly for every prime q.",
    "uses": [
     "lem-weil-pbc-finite-gl-dim-regular-local",
     "def-weil-regular-scheme"
@@ -79,7 +79,7 @@
    }
   },
   {
-   "text": "Consequence. $R$ is Noetherian [def-weil-regular-scheme] and, by Steps 1-4 applied to each prime ideal $\\mathfrak p$ of $R$, every localization $R_{\\mathfrak p}$ at a prime is a regular local ring; this is the definition of a regular ring in [def-weil-regular-scheme]. (For $\\mathfrak p=\\mathfrak m$ the localization $R_{\\mathfrak m}$ is isomorphic to $R$, so the two notions do not conflict.)",
+   "text": "Use the uniform regular-localness proof at p for the first conjunct. For the second, apply Mathlib isRegularRing_iff [def-weil-regular-scheme] and use the same proof for each prime q. Noetherianity of R is supplied by its regular-local-ring instance.",
    "uses": [
     "def-weil-regular-scheme"
    ],
@@ -103,7 +103,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 0AFS (lemma-localization-of-regular-local-is-regular) with its proof, and Definition Tag 00OD"
+  "place": "Algebra, Lemma Tag 0AFS and Definition Tag 00OD; formalized through the existing finite-global-dimension nodes, with Mathlib Krull-dimension finiteness and localization instances (second reading V1, 2026-10-12)"
  },
  "mathlib_searches": [
   {
@@ -207,5 +207,15 @@
   "group": "K1",
   "result": "pass",
   "note": "R: CommRing + IsRegularLocalRing (Noetherian local, m generated by dim R elts); p prime; conj1 IsRegularLocalRing (Localization.AtPrime p) = R_p regular local; conj2 IsRegularRing R = consequence (Noetherian + all prime localizations regular local); recorded mathlib decls; universe u free"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T160144-L-2567042",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
