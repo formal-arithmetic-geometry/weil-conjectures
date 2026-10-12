@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-right-derived-functor-countable-products",
+ "kind": "statement",
+ "title": "A right derived functor preserves countable products",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: derived functor comparison with the truncation tower",
+   "via": [
+    "lem-pc-derived-functor-commutes-derived-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. Let $F:\\operatorname{Mod}(\\mathcal O_X)\\to\\operatorname{Ab}$ be an additive functor preserving countable products [def-sp-left-exact-additive, def-weil-category-product]. Assume both categories have K-injective resolutions [def-weil-pbc-kinjective-resolutions] and chosen derived categories [def-weil-abstract-derived-category]. Then the unbounded right derived functor $RF:D(\\mathcal O_X)\\to D(\\operatorname{Ab})$ preserves all countable products, with their projection maps.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sp-left-exact-additive",
+  "def-weil-category-product",
+  "def-weil-pbc-kinjective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 08U1, proof of lemma-RF-commutes-with-Rlim"
+ },
+ "proof": [
+  {
+   "text": "For each object $K_n$ of the chosen derived category choose a K-injective representative $I_n$ and a representative isomorphism. By [lem-pc-ringed-space-product-kinjective], the termwise product $P$ is K-injective and its localized projection cone is a limit cone for the family $Q(I_n)$. Transport along the representative isomorphisms to identify this cone with a product cone of the $K_n$.",
+   "uses": [
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right-derived-functor unit is an isomorphism on the K-injective complexes $P$ and $I_n$. Applying $F$ termwise preserves the product cone because $F$ preserves countable products degreewise; limits of complexes are termwise. Since abelian groups have exact countable products, the termwise-product clause of [lem-weil-derived-limit-existence] gives a product cone in their derived category after localization.",
+   "uses": [
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality of the unit on each product projection identifies the image of the source product cone with this target product cone. Transport limit cones along these isomorphisms and the representative isomorphisms. Every discrete natural-number diagram is isomorphic to its family of object values, so preservation for family diagrams yields preservation of all limits of shape Discrete natural numbers.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-existence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 08U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "right derived additive functor preserving countable products preserves products in derived category",
+   "results": "No exact match; CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*[Pp]roduct|PreservesLimitsOfShape.*rightDerivedFunctor",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unbounded right derived functor preserves countable products if the additive functor preserves products and target products are exact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts",
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/RightDerivedFunctorCountableProducts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rightDerivedFunctor_preservesCountableProducts",
+  "statement": "theorem rightDerivedFunctor_preservesCountableProducts (X : Scheme.{u}) (F : X.Modules ⥤ AddCommGrpCat.{u}) [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F] [Abelian.HasKInjectiveResolutions X.Modules] [Abelian.HasKInjectiveResolutions AddCommGrpCat.{u}] [HasDerivedCategory X.Modules] [HasDerivedCategory AddCommGrpCat.{u}] : PreservesLimitsOfShape (Discrete ℕ) F.rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T095921-L-323667",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T095921-L-323667",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

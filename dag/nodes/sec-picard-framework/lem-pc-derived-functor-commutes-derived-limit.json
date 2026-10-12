@@ -25,55 +25,37 @@
  ],
  "proof": [
   {
-   "text": "Choose a Roos triangle for the derived limit $K=R\\varprojlim_nK_n$ as in [def-weil-derived-limit]. Its first two non-shifted terms are the product $\\prod_nK_n$ and the same product, and its middle map is $1-s$ formed from the transition maps.",
+   "text": "Apply [lem-pc-right-derived-functor-countable-products] to obtain countable product preservation by RF. The standard product comparison isomorphism e has projection equations e.hom followed by the nth projection equals RF of the source projection.",
+   "uses": [
+    "lem-pc-right-derived-functor-countable-products"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Using the definitions in [def-weil-derived-limit], check RF(1-s) followed by e.hom equals e.hom followed by the target 1-s. Compose with each target projection: additivity and functoriality reduce both sides to RF of the nth projection minus RF of the next projection followed by RF of the transition map. Product extensionality gives the equality.",
    "uses": [
     "def-weil-derived-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim, statement and proof"
-   }
+   "elementary": true
   },
   {
-   "text": "Represent every $K_n$ by a K-injective complex $I_n^\\bullet$. The termwise product $\\prod_n I_n^\\bullet$ is K-injective and represents the product in $D(\\operatorname{Mod}(\\mathcal O_X))$ by [lem-pc-ringed-space-product-kinjective]. Applying the K-injective construction of the right derived functor [def-sp-left-exact-additive] gives $RF(\\prod_nK_n)=F(\\prod_n I_n^\\bullet)$. The hypothesis that $F$ commutes with countable products identifies this complex with $\\prod_nF(I_n^\\bullet)$, and the termwise-product clause of [lem-weil-derived-limit-existence] identifies the latter with $\\prod_nRF(K_n)$ in $D(\\operatorname{Ab})$.",
-   "uses": [
-    "lem-pc-ringed-space-product-kinjective",
-    "def-sp-left-exact-additive",
-    "lem-weil-derived-limit-existence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim, proof paragraphs on K-injective representatives and products"
-   }
-  },
-  {
-   "text": "By [lem-pc-right-derived-functor-triangulated], $RF$ has the shift commutation and triangulated-functor structure required by [lem-pc-homotopy-limit-map]. Step 2 identifies the image of each product vertex with the product of the $RF(K_n)$, so that theorem sends the Roos triangle of Step 1 to a homotopy-limit cone for $(RF(K_n))$. Thus $RF(K)$, with the image of the Roos triangle, is a derived limit of $(RF(K_n))$ in the sense of [def-weil-derived-limit], i.e. $RF(K)=R\\varprojlim_nRF(K_n)$. (The products in $D(\\mathcal O_X)$ required by [lem-pc-homotopy-limit-map] exist by Step 2, every object being represented by a K-injective complex.)",
+   "text": "By [lem-pc-right-derived-functor-triangulated], RF sends the given distinguished Roos triangle to a distinguished triangle. Construct a triangle isomorphism from the requested target triangle to the image triangle: identity on RF(L), e.inv on both product vertices. The first square follows from inverse cancellation, the second from the transition equality, and the third from the specified connecting map and shift of the identity. Closure of distinguished triangles under isomorphism proves the conclusion.",
    "uses": [
     "lem-pc-right-derived-functor-triangulated",
-    "lem-pc-homotopy-limit-map",
     "def-weil-derived-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim, final paragraph of the proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pc-right-derived-functor-countable-products",
   "def-weil-derived-limit",
-  "def-sp-left-exact-additive",
-  "lem-weil-derived-limit-existence",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pc-homotopy-limit-map"
+  "lem-pc-right-derived-functor-triangulated"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/injectives.tex",
-  "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim"
+  "place": "Tag 08U1; product comparison isolated, projection and triangle transport glue formalized by R1"
  },
  "mathlib_searches": [
   {
@@ -166,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T095921-L-323667",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

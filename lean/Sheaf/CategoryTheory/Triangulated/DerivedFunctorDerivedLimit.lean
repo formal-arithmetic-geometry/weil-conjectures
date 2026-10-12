@@ -8,10 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+import Sheaf.CategoryTheory.Triangulated.RightDerivedFunctorCountableProducts
 
 /-!
 # Right derived functors and countable derived limits
@@ -62,6 +59,34 @@ theorem rightDerivedFunctor_isDerivedLimitTriangle (X : Scheme.{u})
         (F.rightDerivedFunctor.obj L) (F.rightDerivedFunctor.map p ≫ e.hom)
         (e.inv ≫ F.rightDerivedFunctor.map δ ≫
           (F.rightDerivedFunctor.commShiftIso (1 : ℤ)).hom.app L) := by
-  sorry
+  let Φ := F.rightDerivedFunctor
+  have := rightDerivedFunctor_preservesCountableProducts X F
+  let e := PreservesProduct.iso Φ K
+  have he (n : ℕ) : e.hom ≫ Pi.π _ n = Φ.map (Pi.π K n) := by
+    simp [e]
+  refine ⟨e, he, ?_⟩
+  have ht : Φ.map (towerTransitionEndomorphism f) ≫ e.hom =
+      e.hom ≫ towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
+      Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
+      Pi.lift_π, Functor.map_sub]
+    rw [← Category.assoc, he, ← Functor.map_comp]
+    rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+  exact Pretriangulated.isomorphic_distinguished _ (Φ.map_distinguished _ h) _
+    (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm
+      (by change (Φ.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ Φ.map p; simp)
+      (by
+        change towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) ≫ e.inv =
+          e.inv ≫ Φ.map (towerTransitionEndomorphism f)
+        apply (cancel_mono e.hom).1
+        simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+          Iso.inv_hom_id_assoc] using congrArg (fun t ↦ e.inv ≫ t) ht.symm)
+      (by
+        change (e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L) ≫
+          (shiftFunctor _ (1 : ℤ)).map (𝟙 _) =
+            e.inv ≫ (Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L)
+        simp))
 
 end AlgebraicGeometry.Scheme
