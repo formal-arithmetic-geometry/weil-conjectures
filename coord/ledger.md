@@ -6317,3 +6317,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 05:44 L: returned deliver/N1/Sheaf.AlgebraicGeometry.ConstantModulePushforwardLimit (reviewer RETURN: (reviewer X-656a9, head 656a9eff7) D1/D2 (brief point 4): ConstantModulePushforwardLimit.lean lines 69–84 move the entir)
 - 05:50 L: returned deliver/C1/Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance (reviewer RETURN: (reviewer X-29324, head 29324e78b) E3/H8: EtaleSetPullbackSheafEquivalence.lean lines 22–24 incorrectly infer equality o)
 - 05:50 L: returned deliver/T1/Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification (reviewer RETURN: (reviewer X-783bd, head 783bd57d6) H8 — Both new theorem docstrings omit complete natural-language proofs. In lean/Sheaf)
+- 05:50 L: returned deliver/S1/Sheaf.AlgebraicGeometry.DescendAffine (reviewer RETURN: (reviewer X-Conne, head Connectio) the reviewer passed it, but the landing failed: [--drop-files DROP_FILES] [--revert-s)
