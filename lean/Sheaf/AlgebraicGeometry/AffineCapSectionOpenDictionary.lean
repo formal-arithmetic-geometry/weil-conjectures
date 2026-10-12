@@ -11,9 +11,12 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.Paper.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.Modules.InvertibleSections
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership
-import Sheaf.RingTheory.FiniteProjectiveOfStandardCover
+import Mathlib.RingTheory.Localization.Module
+import Mathlib.RingTheory.Ideal.Maps
+import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Affine dictionary for an invertible module and its section
 
@@ -31,6 +34,33 @@ open AlgebraicGeometry.QuasicoherentTilde
 
 namespace AlgebraicGeometry.Scheme.Modules
 
+private theorem invertible_global_sections
+    {R : Type u} [CommRing R]
+    (M : (Spec (.of R)).Modules) [M.IsInvertible] :
+    Module.Invertible R ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M) := by
+  let A : Type u := Γ(Spec (.of R), ⊤)
+  let N : Type u := Γ(M, ⊤)
+  let : Module R N :=
+    ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M).isModule
+  have : Module.Invertible A N :=
+    invertible_sections_of_isAffineOpen M (isAffineOpen_top _)
+  let e : A ≃+* R := (Scheme.ΓSpecIso (.of R)).commRingCatIsoToRingEquiv
+  let : Algebra A R := e.toRingHom.toAlgebra
+  have : IsScalarTower A R N := ⟨fun a r n ↦ by
+    change (e a * r) • n = a • (r • n)
+    rw [mul_smul, smul_top_eq M]
+    change (Scheme.ΓSpecIso (.of R)).inv ((Scheme.ΓSpecIso (.of R)).hom a) •
+      (r • n) = a • (r • n)
+    rw [Iso.hom_inv_id_apply]⟩
+  let ea : A ≃ₐ[A] R := AlgEquiv.ofRingEquiv (f := e) fun _ ↦ rfl
+  have : IsLocalization (⊥ : Submonoid A) A := IsLocalization.self bot_le
+  have : IsLocalization (⊥ : Submonoid A) R :=
+    IsLocalization.isLocalization_of_algEquiv ⊥ ea
+  have := isLocalizedModule_id (⊥ : Submonoid A) N R
+  exact Module.Invertible.of_isLocalization (⊥ : Submonoid A) (LinearMap.id : N →ₗ[A] N)
+
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The affine dictionary for an invertible module and a section of it.
 
 Source: literature/stacks-project/schemes.tex, Schemes, Lemmas 01IA and 01IB,
@@ -73,6 +103,87 @@ theorem affine_cap_section_open_dictionary
         {p : PrimeSpectrum R |
           ¬ s ∈ p.asIdeal •
             (⊤ : Submodule R ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M))}) := by
-  sorry
+  have : M.IsQuasicoherent := IsInvertible.isQuasicoherent M
+  have := invertible_global_sections M
+  refine ⟨isIso_fromTildeΓ_of_isQuasicoherent M,
+    ⟨inferInstance, inferInstance⟩, ?_, ?_⟩
+  · intro p hp
+    have : Module.Invertible (Localization.AtPrime p)
+        (LocalizedModule p.primeCompl ((moduleSpecΓFunctor (R := CommRingCat.of R)).obj M)) :=
+      Module.Invertible.of_isLocalization p.primeCompl
+        (LocalizedModule.mkLinearMap p.primeCompl _)
+    exact ⟨Module.Invertible.free_iff_linearEquiv.mp inferInstance,
+      Module.prime_mem_localized_iff s p⟩
+  · ext p
+    let N := (moduleSpecΓFunctor (R := CommRingCat.of R)).obj M
+    let K : CommRingCat.{u} := (Spec (.of R)).presheaf.stalk p
+    let T : Type u := M.presheaf.stalk p
+    let : Module K T := inferInstanceAs
+      (Module ((Spec (.of R)).presheaf.stalk p) (M.presheaf.stalk p))
+    let : Algebra R K := StructureSheaf.stalkAlgebra R p
+    have : IsLocalization.AtPrime K p.asIdeal := StructureSheaf.IsLocalization.to_stalk R p
+    let : Module R T := Module.compHom T (algebraMap R K)
+    have : IsScalarTower R K T := IsScalarTower.of_compHom R K T
+    let c := fromTildeΓ (R := CommRingCat.of R) M
+    have : IsIso c := isIso_fromTildeΓ_of_isQuasicoherent M
+    let ec : (tilde N).presheaf.stalk p ≃ₗ[K] T :=
+      LinearEquiv.ofBijective (c.stalkLinearMap p) (by
+        change Function.Bijective
+          ((TopCat.Presheaf.stalkFunctor Ab.{u} p).map c.mapPresheaf)
+        change Function.Bijective
+          (((toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor Ab.{u} p).map c))
+        exact ConcreteCategory.bijective_of_isIso _)
+    let : Module R ((tilde N).presheaf.stalk p) :=
+      tilde.instModuleCarrierCarrierStalkAbPresheaf N p
+    have : IsScalarTower R K ((tilde N).presheaf.stalk p) := inferInstanceAs
+      (IsScalarTower R ((structurePresheafInCommRingCat R).stalk p)
+        ↑(TopCat.Presheaf.stalk (moduleStructurePresheaf R N).presheaf p))
+    let ecR := ec.restrictScalars R
+    let g : N →ₗ[R] T := ecR.toLinearMap ∘ₗ (tilde.toStalk N p).hom
+    have : IsLocalizedModule p.asIdeal.primeCompl (tilde.toStalk N p).hom :=
+      tilde.instIsLocalizedModuleCarrierCarrierOfCarrierStalkAbPresheafPrimeComplAsIdealHomToStalk
+        N p
+    have : IsLocalizedModule p.asIdeal.primeCompl g :=
+      IsLocalizedModule.of_linearEquiv _ _ ecR
+    let e := IsLocalizedModule.iso p.asIdeal.primeCompl g
+    have hgs : g s = M.presheaf.germ ⊤ p trivial s := by
+      change c.stalkLinearMap p ((tilde N).presheaf.germ ⊤ p trivial
+        (tilde.toOpen N ⊤ s)) = _
+      erw [Hom.stalkLinearMap_germ]
+      have h := toOpen_fromTildeΓ_app (R := CommRingCat.of R) M ⊤
+      have hs := congrArg (fun f ↦ f s) h
+      simp only [ConcreteCategory.comp_apply] at hs
+      change c.app ⊤ (tilde.toOpen N ⊤ s) =
+        M.presheaf.map (homOfLE (le_top : (⊤ : (Spec (.of R)).Opens) ≤ ⊤)).op s at hs
+      rw [show (homOfLE (le_top : (⊤ : (Spec (.of R)).Opens) ≤ ⊤)).op =
+        𝟙 (op ⊤) from Subsingleton.elim _ _,
+        CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] at hs
+      exact congrArg (M.presheaf.germ ⊤ p trivial) hs
+    have hmax : Ideal.map (algebraMap R K) p.asIdeal = IsLocalRing.maximalIdeal K :=
+      IsLocalization.AtPrime.map_eq_maximalIdeal p.asIdeal K
+    have hm : M.presheaf.germ ⊤ p trivial s ∈
+        (IsLocalRing.maximalIdeal K) • (⊤ : Submodule K T) ↔
+        LocalizedModule.mk s 1 ∈
+          (Ideal.map (algebraMap R (Localization.AtPrime p.asIdeal)) p.asIdeal) •
+            (⊤ : Submodule (Localization.AtPrime p.asIdeal)
+              (LocalizedModule p.asIdeal.primeCompl N)) := by
+      rw [← hmax]
+      change M.presheaf.germ ⊤ p trivial s ∈
+        (((Ideal.map (algebraMap R K) p.asIdeal) • (⊤ : Submodule K T)).restrictScalars R) ↔
+        LocalizedModule.mk s 1 ∈
+        (((Ideal.map (algebraMap R (Localization.AtPrime p.asIdeal)) p.asIdeal) •
+          (⊤ : Submodule (Localization.AtPrime p.asIdeal)
+            (LocalizedModule p.asIdeal.primeCompl N))).restrictScalars R)
+      rw [Submodule.restrictScalars_map_smul_eq, Submodule.restrictScalars_map_smul_eq,
+        Submodule.restrictScalars_top, Submodule.restrictScalars_top, ← hgs,
+        ← IsLocalizedModule.iso_mk_one p.asIdeal.primeCompl g s]
+      have hmap := Submodule.map_smul'' p.asIdeal (⊤ : Submodule R
+        (LocalizedModule p.asIdeal.primeCompl N)) e.toLinearMap
+      rw [Submodule.map_top, LinearEquiv.range] at hmap
+      rw [← hmap, Submodule.mem_map_equiv]
+      change e.symm (e (LocalizedModule.mk s 1)) ∈ _ ↔ _
+      rw [LinearEquiv.symm_apply_apply]
+    change ¬ _ ↔ ¬ _
+    exact not_congr (hm.trans (Module.prime_mem_localized_iff s p.asIdeal))
 
 end AlgebraicGeometry.Scheme.Modules

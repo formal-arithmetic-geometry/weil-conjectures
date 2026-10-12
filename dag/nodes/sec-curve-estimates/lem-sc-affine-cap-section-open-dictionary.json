@@ -28,58 +28,44 @@
  ],
  "proof": [
   {
-   "text": "Because M is quasi-coherent on the affine scheme X, the counit of the affine tilde/Gamma adjunction identifies M with the sheaf tilde(Gamma(X,M))=tilde(N).",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemmas 01IA and 01IB (quasi-coherent sheaves on affine schemes)"
-   }
-  },
-  {
-   "text": "Since M is locally free of rank one [def-sc-invertible-module], choose for each point of Spec(R) a standard open D(f) on which M is isomorphic to O_X. Quasi-compactness of Spec(R) and the principal-open/unit-ideal criterion [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact] give finitely many f_1,...,f_r generating the unit ideal and covering X. By step 1 and [lem-weil-pbc-spec-module-tilde-sections], N_{f_i}=tilde(N)(D(f_i)) is isomorphic to M(D(f_i)) and hence to R_{f_i}. The finite-standard-open converse of Stacks Tag 00NX [lem-sc-affine-standard-cover-finite-projective] therefore makes N finite projective. For every prime p, choose i with f_i not in p; then N_p is isomorphic to (N_{f_i})_p and hence to R_p, so its rank is one.",
+   "text": "Use IsInvertible.isQuasicoherent and Mathlib isIso_fromTildeΓ_of_isQuasicoherent to obtain the canonical counit isomorphism.",
    "uses": [
     "def-sc-invertible-module",
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "lem-sc-affine-standard-cover-finite-projective"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemmas Tags 01IA and 01IB; literature/stacks-project/algebra.tex, Lemma Tag 00NX (lemma-finite-projective), implication (7) => (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "The stalk identification in [lem-weil-pbc-spec-tilde-stalk-localization] identifies M_p with N_p and carries s_p to s/1. Applying [lem-sc-affine-finite-projective-prime-membership] gives s/1 in pN_p if and only if s is in pN. Since the stalk of the structure sheaf at p is the local ring R_p with maximal ideal pR_p, the definition of the nonvanishing locus in [lem-weil-pbc-nonvanishing-section-trivializes] yields exactly the primes p for which s is not in pN.",
+   "text": "Apply the existing affine invertible-sections theorem to M and the top affine open. Transport its Module.Invertible structure across ΓSpecIso using localization at the bottom submonoid and the identity module map. Mathlib then supplies Module.Finite and Module.Projective. At a prime, Module.Invertible.of_isLocalization supplies invertibility of the localized module; the local-ring Picard-group instance makes it free, and free_iff_linearEquiv gives N_p ≃ R_p. Apply prime_mem_localized_iff to s for the membership equivalence.",
+   "uses": [
+    "lem-sc-affine-invertible-sections",
+    "lem-sc-affine-finite-projective-prime-membership"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The counit induces a bijective stalk linear map. Compose it with tilde.toStalk to obtain a localization g of N at p.primeCompl, and let e be the canonical localization equivalence. Naturality of the counit (toOpen_fromTildeΓ_app) proves g(s)=germ(s). The stalk ring is R localized at p, so map_eq_maximalIdeal identifies its maximal ideal with the extension of p. Submodule.restrictScalars_map_smul_eq identifies membership in this extended ideal times the stalk with membership in p times the stalk regarded as an R-module, and likewise on the explicit localization. Transport this membership through e using map_smul and e(mk s 1)=g(s). The prime-membership theorem and negation give equality of the two loci by extensionality.",
    "uses": [
     "lem-weil-pbc-spec-tilde-stalk-localization",
-    "lem-sc-affine-finite-projective-prime-membership",
-    "lem-weil-pbc-nonvanishing-section-trivializes"
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sc-affine-finite-projective-prime-membership"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma Tag 01CY (lemma-s-open), together with Schemes, Lemma Tag 01HV item (7)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-sc-invertible-module",
-  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-sc-affine-standard-cover-finite-projective",
-  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sc-affine-invertible-sections",
   "lem-sc-affine-finite-projective-prime-membership",
-  "lem-weil-pbc-nonvanishing-section-trivializes"
+  "lem-weil-pbc-spec-tilde-stalk-localization"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemmas 01IA and 01IB, together with Modules, Lemma 01CY"
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-13",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/InvertibleSections.lean; Mathlib.AlgebraicGeometry.Modules.Tilde; Mathlib.RingTheory.Ideal.Maps",
+  "place": "Existing affine invertible-sections theorem; canonical tilde stalk localization and scalar restriction of extended ideal products. The original Stacks 01IA/01IB/01CY route is realized with the closed source affine-sections theorem in place of the unfinished standard-cover converse."
  },
  "mathlib_searches": [
   {
@@ -167,5 +153,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T173826-L-3296017",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
