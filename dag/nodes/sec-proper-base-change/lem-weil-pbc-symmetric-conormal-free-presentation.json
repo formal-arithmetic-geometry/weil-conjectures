@@ -1,0 +1,154 @@
+{
+ "id": "lem-weil-pbc-symmetric-conormal-free-presentation",
+ "kind": "statement",
+ "title": "The canonical polynomial map to the symmetric algebra of a projective conormal module has free conormal",
+ "statement": "Let R and A be commutative rings with an R-algebra structure on A, and P a finite polynomial presentation of A with n variables and m relations [def-weil-pbc-finitely-presented-algebra], over the polynomial ring [def-weil-pbc-mv-polynomial-ring]. Let N be the conormal of this presentation. Let M be a projective A-module [def-weil-pbc-projective-module], equipped with an A-linear equivalence e : N ≃ M. Write C = Sym_A(M) [lem-weil-pbc-symmetric-algebra-universal-property], with any R-algebra structure compatible with R → A → C. For each relation r_j of P put z_j = e(class(r_j)). Let f : R[t_1,…,t_{n+m}] → C send the first n variables to the images of the n chosen generators of A, and the last m variables to ι(z_j). Then, for J = ker(f), its conormal J/J² is free over R[t]/J [def-weil-pbc-free-module]. The indexing includes n = 0 and m = 0, and R, A, and M may lie in different universes.",
+ "source": {
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma Tag 07CE, lines 357–414, at a = 1; polynomial surjection and equation-sequence. Online source checked at https://stacks.math.columbia.edu/tag/07CE."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "The m relation classes span the conormal module of the finite presentation P. Form the coordinate surjection q from A^m to this module; transport it along e to M. Because M is projective, q splits, with kernel K, and M × K is linearly equivalent to A^m. This also proves that K is finite projective.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let I be the kernel of P, identify its quotient with A using P.quotientEquiv, and identify its conormal with M using e. Apply the symmetric-projective-presentation-conormal lemma to the finite relation generators, their coordinate map q, and the canonical maps from R[x][y] and A[y] to the symmetric algebra. The lemma gives the conormal of the first map as C ⊗_A (M × K), together with a linear equivalence from this tensor product to C^m.",
+   "uses": [
+    "lem-weil-pbc-symmetric-projective-presentation-conormal",
+    "lem-weil-pbc-symmetric-algebra-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the symmetric algebra universal property to transport the coefficient-ring quotient equivalence and e. Flatten the iterated polynomial ring, then reindex its n + m variables using finSumFinEquiv. On x variables and y variables the resulting map is exactly the aeval written in the statement, by polynomial-homomorphism extensionality. The ring equivalence transports the kernel and its square, hence their conormal quotient and its quotient-ring scalar action. The two conormal equivalences above transport the basis of C^m to a basis of the stated kernel conormal. No nonzero-ring assumption or positive index assumption is needed.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-symmetric-projective-presentation-conormal",
+  "lem-weil-pbc-symmetric-algebra-universal-property",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-free-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/smoothing.tex",
+  "place": "Proof of Lemma Tag 07CE, lines 357–414, at a = 1; polynomial surjection and equation-sequence. Online source checked at https://stacks.math.columbia.edu/tag/07CE."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "symmetric algebra of a projective conormal module admits a polynomial presentation with free conormal module",
+   "results": "Service unavailable: HTTP Internal Server Error on two attempts. No verdict inferred from this unavailable service.",
+   "date": "2026-10-13",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "symmetric algebra of a projective conormal module has a polynomial presentation whose conormal module is free",
+   "results": "exists_presentation_of_free_cotangent assumes the needed freeness; SubmersivePresentation.free_cotangent assumes a submersive presentation; SymmetricAlgebra.IsSymmetricAlgebra.mvPolynomial requires a free module. None supplies this projective-conormal calculation.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SymmetricAlgebra, Ideal.Cotangent",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg conormal.*free|Cotangent.*Projective|Projective.*Cotangent in Mathlib/RingTheory, lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search symmetric conormal",
+   "results": "The existing Algebra.symmetric_projective_presentation_conormal gives the required conormal equivalences for an iterated polynomial ring over a literal quotient base. No declaration performs the coefficient-algebra equivalence, module universe change, polynomial flattening, and quotient-ring scalar transport required here. No blueprint duplicate found.",
+   "date": "2026-10-13",
+   "verdict": "no direct match; existing dependency retained"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ImprovePresentationSmoothConormalFree",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7: smooth-retract construction, canonical symmetric algebra presentation and its free conormal (Stacks 07CE).",
+   "via": [
+    "lem-weil-pbc-improve-presentation-smooth-conormal-free",
+    "lem-weil-pbc-smooth-retract-relative-global-complete-intersection",
+    "lem-weil-pbc-smooth-retract-standard-smooth",
+    "lem-weil-pbc-popescu-delocalize-base",
+    "lem-weil-pbc-popescu-reduce-to-field",
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SymmetricConormalFreePresentation",
+  "file": "lean/Sheaf/RingTheory/SymmetricConormalFreePresentation.lean",
+  "declaration": "Algebra.Presentation.symmetric_conormal_free_presentation",
+  "statement": "theorem symmetric_conormal_free_presentation\n    {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]\n    {n m : ℕ} (P : Algebra.Presentation R A (Fin n) (Fin m))\n    (M : Type w) [AddCommGroup M] [Module A M] [Module.Projective A M]\n    (e : P.toExtension.Cotangent ≃ₗ[A] M)\n    [Algebra R (SymmetricAlgebra A M)] [IsScalarTower R A (SymmetricAlgebra A M)] :\n    let x : Fin m → M := fun j ↦ e (Extension.Cotangent.mk\n      ⟨P.relation j, P.relation_mem_ker j⟩)\n    let f : MvPolynomial (Fin (n + m)) R →ₐ[R] SymmetricAlgebra A M :=\n      MvPolynomial.aeval (fun i ↦ Sum.elim\n        (fun j ↦ algebraMap A (SymmetricAlgebra A M) (P.val j))\n        (fun j ↦ SymmetricAlgebra.ι A M (x j)) (finSumFinEquiv.symm i))\n    Module.Free (MvPolynomial (Fin (n + m)) R ⧸ RingHom.ker f.toRingHom)\n      (RingHom.ker f.toRingHom).Cotangent",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T205630-L-932222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T205630-L-932222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

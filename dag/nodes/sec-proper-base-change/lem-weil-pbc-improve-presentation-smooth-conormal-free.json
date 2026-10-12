@@ -32,62 +32,47 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite presentation $A=P/I$, $P=R[x_1,\\dots,x_n]$, $I=(f_1,\\dots,f_m)$: a smooth ring map is finitely presented by [def-weil-pbc-smooth-ring-map] and [def-weil-pbc-finitely-presented-algebra]. Write $M=I/I^2$ and let $q:A^{\\oplus m}\\to M$ take $e_j$ to $f_j\\bmod I^2$. Apply [lem-weil-pbc-smooth-localization-conormal-split] with the smooth algebra $A$ and $a=1$. It gives $M\\oplus\\Omega_{A/R}\\cong A^{\\oplus n}$, so $M$ is finite projective. Because $q$ is surjective and $M$ is projective, choose an $A$-linear section $s:M\\to A^{\\oplus m}$; with $K=\\ker q$, the maps $(k,u)\\mapsto k+s(u)$ and $v\\mapsto(v-s(q(v)),q(v))$ are inverse, hence $K\\oplus M\\cong A^{\\oplus m}$.",
+   "text": "Choose a finite presentation P of A using Algebra.Presentation.exists_presentation_fin. Smoothness implies formal smoothness, and Mathlib Algebra.Extension.formallySmooth_iff_split_injection splits the conormal differential. Its codomain is free, so Module.Projective.of_split gives projectivity of P.toExtension.Cotangent. The finite relation generators give Module.Finite through Algebra.Extension.Cotangent.finite.",
    "uses": [
     "def-weil-pbc-smooth-ring-map",
     "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-smooth-localization-conormal-split"
+    "def-weil-pbc-projective-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE (lemma-improve-presentation), lines 357-364 and 404-407. In the smooth case projectivity of I/I^2 also follows from the split conormal sequence, as in proof of Lemma Tag 07CH, lines 606-617."
-   }
+   "elementary": false
   },
   {
-   "text": "Set $C=\\operatorname{Sym}_A(M)$ [lem-weil-pbc-symmetric-algebra-universal-property]. Applying its universal property to the zero $A$-linear map $M\\to A$ gives an $A$-algebra homomorphism $\\rho:C\\to A$; since it is an $A$-algebra homomorphism, $\\rho\\circ(A\\to C)=\\mathrm{id}_A$. As $M$ is finite projective by step 1, [lem-weil-pbc-symmetric-algebra-finite-projective-smooth] says $A\\to C$ is smooth. By [lem-weil-pbc-symmetric-algebra-finite-presentation](a), the images of $f_1\\bmod I^2,\\dots,f_m\\bmod I^2$ generate $C$ as an $A$-algebra; with the images of $x_1,\\dots,x_n$ generating $A$ over $R$, they give a surjective $R$-algebra map $Q=R[x_1,\\dots,x_n,y_1,\\dots,y_m]\\to C$, taking $y_j$ to the canonical image of $f_j\\bmod I^2$. Put $J=\\ker(Q\\to C)$.",
+   "text": "Module.Finite.small permits shrinking the conormal to Type v. Use this concrete Shrink module M and construct C = SymmetricAlgebra A M, with its R-algebra structure explicitly composed through A. The shrink linear equivalence transports finiteness and projectivity. The finite-projective symmetric algebra theorem makes C smooth over A. Lift the zero A-linear map M → A to its augmentation ρ; the algebra-homomorphism commutation equation proves ρ composed with A → C is the identity.",
    "uses": [
     "lem-weil-pbc-symmetric-algebra-universal-property",
-    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
-    "lem-weil-pbc-symmetric-algebra-finite-presentation",
-    "def-weil-pbc-mv-polynomial-ring"
+    "lem-weil-pbc-symmetric-algebra-finite-projective-smooth"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE, lines 357-366 (C = Sym_A(I/I^2), degree-zero retraction, and the polynomial surjection); clause (1), lines 344-350 (C smooth over A)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-symmetric-projective-presentation-conormal] to the presentation and the finite projective module $M$ from step 1 and the map $Q\\to C$ of step 2. Its hypotheses include the projectivity of $M$, which step 1 established; it gives a split exact sequence $0\\to M\\otimes_A C\\to J/J^2\\to K\\otimes_A C\\to0$. Thus $J/J^2\\cong (M\\oplus K)\\otimes_A C\\cong A^{\\oplus m}\\otimes_A C\\cong C^{\\oplus m}$ by the explicit decomposition of step 1, so $J/J^2$ is a free $C$-module [def-weil-pbc-free-module]. Reindexing the $n+m$ variables of $Q$ as $y_1,\\dots,y_{n+m}$ gives the required surjective polynomial presentation. Together with the smooth map and retraction of step 2, this proves the statement.",
+   "text": "Reindex the n + m variables using finSumFinEquiv and define f by evaluating the x variables at P.val and the y variables at the degree-one relation classes. The restriction of f to R[x] is the structure map into C composed with P. The relation classes span the conormal by Extension.Cotangent.span_eq_top_of_span_eq_ker. Submodule induction places every degree-one element in the range; symmetric-algebra induction then proves surjectivity of f. The symmetric-conormal-free-presentation lemma gives freeness of (ker f)/(ker f)^2 for this exact map. Choose J = ker f.",
    "uses": [
-    "lem-weil-pbc-symmetric-projective-presentation-conormal",
-    "def-weil-pbc-free-module",
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-symmetric-algebra-universal-property",
+    "lem-weil-pbc-symmetric-conormal-free-presentation",
+    "def-weil-pbc-free-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE, equation-sequence and its splitting, lines 367-414, specialized to a = 1; the projective hypothesis is verified in step 1."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-smooth-ring-map",
   "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-smooth-localization-conormal-split",
+  "def-weil-pbc-projective-module",
   "lem-weil-pbc-symmetric-algebra-universal-property",
   "lem-weil-pbc-symmetric-algebra-finite-projective-smooth",
-  "lem-weil-pbc-symmetric-algebra-finite-presentation",
-  "lem-weil-pbc-symmetric-projective-presentation-conormal",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-symmetric-conormal-free-presentation",
   "def-weil-pbc-free-module"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07CE (lemma-improve-presentation), lines 357-414, clause (1) at a = 1 for smooth A. Projectivity of I/I^2 follows from the smooth conormal sequence used in Tag 07CH; the conormal calculation is isolated in lem-weil-pbc-symmetric-projective-presentation-conormal, with the projective hypothesis needed to repair the false general form of More on Algebra Tag 07EV."
+  "place": "Proof of Lemma Tag 07CE at a = 1; direct formal-smooth cotangent splitting replaces localization at one. The remaining canonical conormal freeness and presentation transport are isolated in lem-weil-pbc-symmetric-conormal-free-presentation."
  },
  "mathlib_searches": [
   {
@@ -172,5 +157,15 @@
   "group": "J1",
   "result": "fix",
   "note": "R,A CommRing + [Smooth R A] (Mathlib Algebra.Smooth as H1 47f74a238); ∃ C : Type v (finite type over A, so no universe loss) with CommRing, Algebra R/A, IsScalarTower R A C (R-structure via A), Smooth A C; ρ : C →ₐ[A] A with ρ∘ofId = id; m : ℕ (m=0 allowed), f : MvPolynomial (Fin m) R →ₐ[R] C surjective, J = ker f, Module.Free (P ⧸ J) J.Cotangent (Ideal.Cotangent = J/J², C-module via P/J ≅ C); #check ok; FIX: H8 docstring lacked the node's proof steps, H9 moved from AlgebraicGeometry to RingTheory beside ImprovePresentation; left out new module(s) lean/Sheaf/AlgebraicGeometry/ImprovePresentationSmoothConormalFree.lean (--drop-files, or a record fixed to existing: true)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T205630-L-932222",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
