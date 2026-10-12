@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-derived-pullback-assoc-kflat",
+ "kind": "statement",
+ "title": "Associativity comparison components on K-flat representatives",
+ "statement": "Let every scheme X [def-pc-scheme] have a chosen derived category D(O_X) [def-pc-derived-category]. For every morphism f:X→Y let T_f be the additive tensor pullback pinned by the adjunction of [lem-pc-module-pullback-adjunction], and let L_f be derivedPullback f [def-pc-derived-pullback]. Write Q_X for the localization from the homotopy category of O_X-module cochain complexes, and T_f^h for the functor induced by T_f on homotopy categories. Choose natural transformations ε_f:Q_Y⋙L_f→T_f^h⋙Q_X making L_f a left derived functor; assume their components on every K-flat complex [def-pc-kflat-complex] are invertible. For each composable f:X→Y and g:Y→Z choose c(f,g):L_g⋙L_f≅L_(f≫g) such that its hom is the left-derived lift of the two successive counits followed by Q_X applied to the homotopy-category composition comparison. This underived comparison is the adjunction conjugate of pushforwardComp(f,g)^(-1), using exactly the pinned adjunctions Classical.choose of exists_tensorPullbackAdjunction. All functor reassociations in this lift are the canonical associators. For h:W→X, f:X→Y, g:Y→Z and every K-flat complex P of O_Z-modules, at Q_Z(P) the components of the following two natural transformations agree: the hom of whiskerRight c(f,g) L_h followed by c(h,f≫g); and the hom of the associator of L_g,L_f,L_h followed by whiskerLeft L_g c(h,f), then c(h≫f,g), then transport along Category.assoc h f g. This is only equality on K-flat representatives and contains no identity comparison or unit law.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5S, Cohomology Lemma 20.27.2; tensor mate assoc laws in Mathlib.CategoryTheory.Adjunction.CompositionIso"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-kflat-complex",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The termwise tensor pullbacks of P along g and then f are K-flat. Thus the successive counits at these representatives and at P are invertible.",
+   "uses": [
+    "lem-pc-kflat-pullback-preservation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the lift factorizations for (f,g), (h,f), (h,f≫g), and (h≫f,g) at P or the appropriate tensor pullback representative. Postcompose each triple path with the counit of the total composite at P. Naturality moves the counits through comparisons and both expressions become the same ordered three counits followed by the two underived tensor triple comparisons. Adjunction.leftAdjointCompIso_assoc applied to the pinned adjunctions and pushforward_assoc identifies these comparisons, including transport along Category.assoc. Cancel the invertible total-composite counit at P to obtain the equality. No global natural-transformation descent is asserted.",
+   "uses": [
+    "def-pc-derived-pullback",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "lem-pc-kflat-pullback-preservation",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5S K-flat computation, expanded by C2 using the pinned-adjunction mate laws; component calculation only"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical composition comparisons for left derived pullback satisfy unit and associativity component equalities on K flat complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "unit and associativity comparison for left derived tensor pullback evaluated at K flat complex",
+   "results": "CategoryTheory.Tor'_map_app; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor'; CategoryTheory.Tor; CategoryTheory.Tor_obj; Rep.Tor_map",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointCompIso_assoc",
+   "results": "loogle: unknown identifier 'Adjunction.leftAdjointCompIso_assoc'",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullbackComposition.*unit|derivedPullbackComposition.*assoc|leftAdjointCompIso_(comp_id|id_comp|assoc)",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match; generic underived mate laws only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCoherence",
+  "date": "2026-10-12",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "derived pullback composition: identity and associativity coherence; assoc calculation on a K-flat representative",
+   "via": [
+    "lem-pc-derived-pullback-comparison-coherence",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-pc-proper-derived-direct-image-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackCompositionAssocKFlat",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackCompositionAssocKFlat.lean",
+  "declaration": "AlgebraicGeometry.derivedPullbackComposition_assoc_kflat",
+  "statement": "theorem derivedPullbackComposition_assoc_kflat [d : ∀ X : Scheme.{u₁}, HasDerivedCategory.{w₁} (SheafOfModules.{u₁} (moduleRings X.toRingedSpace))] (a : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (Scheme.Modules.tensorPullback f).Additive) (ε : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), DerivedCategory.Qh ⋙ derivedPullback f ⟶ (Scheme.Modules.tensorPullback f).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace))) (hL : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y), (derivedPullback f).IsLeftDerivedFunctor (ε f) (HomotopyCategory.quasiIso (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ))) (hK : ∀ {X Y : Scheme.{u₁}} (f : X ⟶ Y) (P : CochainComplex (SheafOfModules.{u₁} (moduleRings Y.toRingedSpace)) ℤ), CochainComplex.IsKFlat (R := Y.sheaf) P → IsIso ((ε f).app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))) (c : ∀ {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z), derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g)) (hc :∀ {X Y Z : Scheme.{u₁}} (f : X ⟶ Y) (g : Y ⟶ Z), (c f g).hom = (derivedPullback (f ≫ g)).leftDerivedLift (ε (f ≫ g)) (HomotopyCategory.quasiIso (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) (ComplexShape.up ℤ)) (derivedPullback g ⋙ derivedPullback f) ((Functor.associator DerivedCategory.Qh (derivedPullback g) (derivedPullback f)).inv ≫ Functor.whiskerRight (ε g) (derivedPullback f) ≫ (Functor.associator _ DerivedCategory.Qh (derivedPullback f)).hom ≫ Functor.whiskerLeft _ (ε f) ≫ (Functor.associator _ _ (DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace)))).inv ≫ Functor.whiskerRight (Functor.mapHomotopyCategoryCompIso ((conjugateIsoEquiv (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (f ≫ g))) ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).comp (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)))).symm (Scheme.Modules.pushforwardComp f g).symm) (ComplexShape.up ℤ)).hom (DerivedCategory.Qh (C := SheafOfModules.{u₁} (moduleRings X.toRingedSpace))))) {W X Y Z : Scheme.{u₁}} (h : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z) (P : CochainComplex (SheafOfModules.{u₁} (moduleRings Z.toRingedSpace)) ℤ) (hP : CochainComplex.IsKFlat (R := Z.sheaf) P) : (Functor.isoWhiskerRight (c f g) (derivedPullback h) ≪≫ c h (f ≫ g)).hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) = (Functor.associator (derivedPullback g) (derivedPullback f) (derivedPullback h) ≪≫ Functor.isoWhiskerLeft (derivedPullback g) (c h f) ≪≫ c (h ≫ f) g ≪≫ eqToIso (congrArg (fun k : W ⟶ Z ↦ derivedPullback k) (Category.assoc h f g))).hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089948",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T144056-L-2089948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
