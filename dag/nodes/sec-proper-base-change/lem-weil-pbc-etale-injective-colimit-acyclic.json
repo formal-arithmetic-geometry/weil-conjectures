@@ -1,0 +1,162 @@
+{
+ "id": "lem-weil-pbc-etale-injective-colimit-acyclic",
+ "kind": "statement",
+ "title": "Filtered colimits of injective etale sheaves are globally acyclic",
+ "statement": "Let X be a quasi-compact quasi-separated scheme of universe u [def-weil-pbc-scheme-conventions]. Let I be a small filtered category with objects and morphisms in universe u+1, and J an I-diagram of abelian sheaves on the small etale site of X [def-weil-pbc-abelian-etale-sheaves], with section groups in universe u+1. Suppose each J_i is injective [def-sp-injective-resolutions]. For any colimit cocone c of J [def-weil-pbc-category-colimit] and integer q > 0, the q-th right derived functor [def-sp-left-exact-additive] of global sections [def-weil-pbc-global-sections-functor] evaluated on c.pt is a zero object. No torsion hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739 (lemma-colim-works-over-collection), proof, last paragraph: acyclicity of the colimit of injectives; qcqs etale basis of Tag 03Q5; checked against https://stacks.math.columbia.edu/tag/0739 on 2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-category-colimit",
+  "def-sp-left-exact-additive",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof": [
+  {
+   "text": "Let B be the qcqs objects U -> X of the small etale site of X. Let Cov consist of finite etale covers whose base and members belong to B. The terminal identity object belongs to B. Every finite fibre product of members of a Cov-cover belongs to B: a morphism between qcqs schemes is quasi-compact and quasi-separated, these properties are stable under base change, and composition with a qcqs base gives a qcqs source. Every cover of a B-object admits a finite affine etale refinement, which is a Cov-cover; affines are qcqs. Thus B and Cov satisfy the basis and refinement hypotheses of the Cech vanishing criterion.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every qcqs etale object U, evaluation on U commutes with filtered colimits at coefficient universe u+1. Apply the module sections theorem with coefficients Z, transporting abelian sheaves to Z-module sheaves along the coefficient equivalence. The induced compose-and-sheafify functor is left adjoint and is naturally isomorphic to sheafCompose, hence preserves colimits. Reflect the module-valued evaluation colimit through the coefficient equivalence. This argument works for arbitrary filtered categories at the coefficient size.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let G be the supplied colimit of the injective diagram J. On every Cov-cover, each Cech term is a finite product of sections on finite covering fibre products. These products lie in B, so by the preceding sections comparison the Cech complex of G identifies with the colimit of the Cech complexes of J_i, including the differentials. Finite products of abelian groups are finite direct sums and commute with colimits. Each injective J_i has zero positive Cech cohomology. Exactness of filtered abelian-group colimits gives zero positive Cech cohomology for G. Apply the Cech vanishing criterion to obtain zero positive right derived evaluation on every B-object.",
+   "uses": [
+    "lem-weil-pbc-cech-vanishing-criterion",
+    "def-weil-pbc-cech-complex",
+    "lem-weil-pbc-injective-sheaf-cech-acyclic",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take U to be the terminal etale object X, which is qcqs. Global sections are naturally isomorphic to evaluation there. Transport right derived functors along that natural isomorphism to obtain zero R^q Gamma of the supplied colimit for every positive q. The acyclicity statement depends only on the image of the original coprojections, so it holds for any colimit cocone of the injective diagram.",
+   "uses": [
+    "def-weil-pbc-global-sections-functor",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "def-weil-pbc-cech-complex",
+  "lem-weil-pbc-injective-sheaf-cech-acyclic",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "def-weil-pbc-global-sections-functor",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0739 (lemma-colim-works-over-collection), proof, last paragraph: acyclicity of the colimit of injectives; qcqs etale basis of Tag 03Q5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimits of injective etale sheaves on a quasi compact quasi separated scheme are acyclic for global sections",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of injective sheaves on an etale site is acyclic for global sections over a quasi compact quasi separated scheme",
+   "date": "2026-10-12",
+   "results": "Eight hits; K-injectivity of bounded below injective complexes, Grothendieck abelianness of sheaf categories, and scheme global sections of inverse limits. No theorem on acyclicity of filtered injective-sheaf colimits.",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]olimit|[Cc]olimit.*rightDerived; colimit.*injective in Mathlib/CategoryTheory/Sites/SheafCohomology and project source",
+   "date": "2026-10-12",
+   "results": "Only HasPointwiseRightDerivedFunctorAt.hasColimit, which concerns construction of pointwise derived functors. No matching injective-colimit acyclicity theorem.",
+   "verdict": "No matching declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive sheaf cohomology vanishes for direct limits of injective objects on a coherent site",
+   "date": "2026-10-12",
+   "results": "Eight hits: K-injective and injective resolution facts, sheaf cohomology definitions. No filtered injective-colimit acyclicity statement. Second reading rg found the existing smaller-index EtaleFilteredInjectiveAcyclic theorem, but its I : Type u cannot accept the present I : Type (u+1).",
+   "verdict": "No applicable replacement at coefficient-size index universe."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "Original proof Steps 2–3: canonical comparison for the restricted constructible presentation; Directed etale cohomology colimits at coefficient size.; Tag 0739 (lemma-colim-works-over-collection), proof, last paragraph: acyclicity of the colimit of injectives; qcqs etale basis of Tag 03Q5",
+   "via": [
+    "lem-weil-pbc-etale-directed-cohomology-colimit",
+    "lem-weil-pbc-restricted-cohomology-colimit",
+    "lem-weil-pbc-constructible-restriction-class-core",
+    "lem-weil-pbc-constructible-restriction-class"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInjectiveColimitAcyclic",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInjectiveColimitAcyclic.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize",
+  "statement": "theorem isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]\n    {J : I ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (hinjective : ∀ i, Injective (J.obj i)) {c : Cocone J} (hc : IsColimit c)\n    (q : ℕ) (hq : 0 < q) :\n    IsZero (((Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerived q).obj\n      c.pt)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T035753-L-1605198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T035753-L-1605198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

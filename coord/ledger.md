@@ -5924,3 +5924,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:56 L: merged deliver/B2/Sheaf.ConstructibleSheaf.LocallyConstantRetraction (stage 3; reviewer PASS; first push; landing 20261012T035539-L-1594250 (interface); modules 2; new nodes 1)
 - 03:56 L: returned deliver/H1/WeilConjectures.AlgebraicGeometry.Curve.Affine (reviewer RETURN: (reviewer X-3e0c3, head 3e0c31309) H9 (import contract; stages/2-statements.md §3.7 and review point 5): the two new sor)
 - 03:57 L: merged deliver/B3/WeilConjectures.AlgebraicGeometry.Morphisms.Slicing (stage 3; reviewer PASS; first push; landing 20261012T035647-L-1600045 (interface); modules 2; new nodes 2)
+- 03:58 L: merged deliver/C1/Sheaf.AlgebraicGeometry.EtaleDirectedCohomologyColimit (stage 3; reviewer PASS; first push; landing 20261012T035753-L-1605198 (interface); modules 2; new nodes 1)

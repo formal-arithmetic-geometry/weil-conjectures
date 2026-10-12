@@ -6,16 +6,10 @@ Authors: SHEAF group U1
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
 import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
-import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.EtaleInjectiveColimitAcyclic
+import Sheaf.CategoryTheory.Abelian.RightDerived.FilteredColimitSuccessor
+import Mathlib.CategoryTheory.Sites.Adjunction
 
 /-!
 # Directed colimits of derived etale cohomology at coefficient size
@@ -31,6 +25,34 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem sections_isColimit (X : Scheme.{u}) (U : X.Etale)
+    [CompactSpace U.left] [QuasiSeparatedSpace U.left]
+    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+    {D : I ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
+    (hc : IsColimit c) :
+    Nonempty (IsColimit
+      (((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (Opposite.op U)).mapCocone c)) := by
+  let J := X.smallEtaleTopology
+  let G := (Functor.asEquivalence (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1})).inverse
+  have : IsGrothendieckAbelian.{u + 1} (ModuleCat.{u + 1} ℤ) :=
+    IsGrothendieckAbelian.of_equivalence
+      (Functor.asEquivalence (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1})).symm
+  let S := sheafCompose J G
+  let E := (sheafSections J (ModuleCat.{u + 1} ℤ)).obj (Opposite.op U)
+  let e : Sheaf.composeAndSheafify J G ≅ S :=
+    Functor.isoWhiskerLeft S (sheafificationNatIso J (ModuleCat.{u + 1} ℤ)).symm ≪≫
+      Functor.rightUnitor S
+  have : S.IsLeftAdjoint := Functor.isLeftAdjoint_of_iso e
+  have hS : IsColimit (S.mapCocone c) := isColimitOfPreserves S hc
+  have hb := etale_sections_filtered_colimit X ℤ U I (D ⋙ S) (S.mapCocone c) hS
+  have : IsIso (colimit.desc ((D ⋙ S) ⋙ E) (E.mapCocone (S.mapCocone c))) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr hb
+  obtain ⟨hE⟩ :=
+    (colimit.isColimit ((D ⋙ S) ⋙ E)).nonempty_isColimit_iff_isIso_desc.mpr
+      (inferInstance : IsIso (colimit.desc ((D ⋙ S) ⋙ E) (E.mapCocone (S.mapCocone c))))
+  exact ⟨isColimitOfReflects G hE⟩
 
 /-- Derived etale cohomology preserves directed colimit cocones indexed in the
 same universe as the abelian coefficients.
@@ -68,6 +90,38 @@ theorem etaleCohomology_isColimit_of_isDirected (X : Scheme.{u}) [CompactSpace X
     Nonempty (IsColimit
       ((DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
         Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ)).mapCocone c)) := by
-  sorry
+  let Γ := Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}
+  have : CompactSpace (Scheme.Etale.mk (𝟙 X)).left := ‹CompactSpace X›
+  have : QuasiSeparatedSpace (Scheme.Etale.mk (𝟙 X)).left := ‹QuasiSeparatedSpace X›
+  have hΓ : PreservesColimitsOfShape I Γ := by
+    let e := Sheaf.ΓNatIsoSheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}
+      ((CategoryTheory.Over.mkIdTerminal (X := X)).isTerminalOfObj
+        (Scheme.Etale.forget X) (Scheme.Etale.mk (𝟙 X)))
+    have : PreservesColimitsOfShape I
+        ((sheafSections X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+          (Opposite.op (Scheme.Etale.mk (𝟙 X)))) :=
+      ⟨fun {D} ↦ ⟨fun {c} hc ↦ sections_isColimit X (Scheme.Etale.mk (𝟙 X)) hc⟩⟩
+    exact preservesColimitsOfShape_of_natIso e.symm
+  have hderived : ∀ n : ℕ, PreservesColimitsOfShape I (Γ.rightDerived n) := by
+    intro n
+    induction n with
+    | zero =>
+      exact preservesColimitsOfShape_of_natIso Γ.rightDerivedZeroIsoSelf.symm
+    | succ n hn =>
+      let := hn
+      exact Γ.preservesColimitsOfShape_rightDerived_succ I n
+        (fun J hJ ↦
+          isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize X hJ
+            (colimit.isColimit J) (n + 1) (Nat.succ_pos n))
+  let := hderived q
+  let e : DerivedCategory.singleFunctor
+      (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
+      Etale.cohomology AddCommGrpCat.{u + 1} X (q : ℤ) ≅ Γ.rightDerived q :=
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
+        Γ.rightDerivedFunctorPlusCompatibility.symm)
+      (DerivedCategory.homologyFunctor AddCommGrpCat (q : ℤ)) ≪≫
+        Γ.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso q
+  exact ⟨IsColimit.mapCoconeEquiv e.symm (isColimitOfPreserves (Γ.rightDerived q) hc)⟩
 
 end AlgebraicGeometry.Scheme
