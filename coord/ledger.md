@@ -8125,3 +8125,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/J2/Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient (stage 3; reviewer PASS; first push; landing 20261012T144120-L-2099219 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/J2/Sheaf.AlgebraicGeometry.ReciprocalCoverLineBundle (stage 3; reviewer PASS; first push; landing 20261012T144121-L-2099318 (interface); batch 20261012T144049; modules 1; new nodes 0; change records: coord/changes/reciprocal_cover_generators_import.md)
 - 14:41 L: merged deliver/J2/Sheaf.RingTheory.FilteredColimitSmoothProduct (stage 3; reviewer PASS; first push; landing 20261012T144121-L-2099416 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/J2/Sheaf.RingTheory.QuasiFiniteAtPrimePermanence (stage 3; reviewer PASS; first push; landing 20261012T144121-L-2099519 (proof); batch 20261012T144049; modules 1; new nodes 0)
