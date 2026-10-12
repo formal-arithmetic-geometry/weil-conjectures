@@ -275,8 +275,9 @@ lemma cohomologyPresheafRestrict_comp {T T' : Scheme.{u}} (t : T ⟶ X) (h : T' 
       (Ext.mk₀ (freeSheafPullbackMap Λ f (h ≫ t) V (h ≫ b)
         (by rw [Category.assoc, hb, Category.assoc]))).comp
         (x.mapExactFunctor ((h ≫ t)^*[ModuleCat.{u + 1} Λ])) (zero_add q) =
-      cohomologyRestrictOver Λ (h ≫ t) t h rfl F q ((Ext.mk₀ (freeSheafPullbackMap Λ f t V b hb)).comp
-        (x.mapExactFunctor (t)^*[ModuleCat.{u + 1} Λ]) (zero_add q)) from key _
+      cohomologyRestrictOver Λ (h ≫ t) t h rfl F q
+        ((Ext.mk₀ (freeSheafPullbackMap Λ f t V b hb)).comp
+          (x.mapExactFunctor (t)^*[ModuleCat.{u + 1} Λ]) (zero_add q)) from key _
   intro x
   have M := Ext.mapExactFunctor_comp_mk₀_eq (t)^*[ModuleCat.{u + 1} Λ]
     (h)^*[ModuleCat.{u + 1} Λ] ((h ≫ t)^*[ModuleCat.{u + 1} Λ]) τ q x
@@ -450,7 +451,8 @@ noncomputable def higherDirectImageStalkComparison :
     (fun V V' a v ↦ AddCommGrpCat.ext fun p ↦
       cohomologyPresheafRestrict_stalkPoint_map Λ f s F q a v p)
 
-lemma toPresheafFiber_stalkComparison (V : S.Etale) (v : (Scheme.pointSmallEtale s).fiber.obj V)
+lemma toPresheafFiber_higherDirectImageStalkComparison (V : S.Etale)
+    (v : (Scheme.pointSmallEtale s).fiber.obj V)
     (p : (Etale.higherDirectImagePresheaf Λ f q
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F)).obj (op V)) :
     higherDirectImageStalkComparison Λ f s F q ((Scheme.pointSmallEtale s).toPresheafFiber V v
@@ -526,7 +528,7 @@ theorem nonempty_geometricStalk_higherDirectImage_addEquiv {X S : Scheme.{u}} (f
         cohomologyRestrictOver Λ c.pt.hom (D.obj j).hom (c.π.app j).left (Over.w _) F q
           (cohomologyPresheafRestrict Λ f F q (pullback.snd (V j).hom f) (V j)
             (pullback.fst (V j).hom f) pullback.condition p) :=
-    (toPresheafFiber_stalkComparison Λ f s F q (V j) (v j) p).trans
+    (toPresheafFiber_higherDirectImageStalkComparison Λ f s F q (V j) (v j) p).trans
       (cohomologyPresheafRestrict_comp' Λ f F q (pullback.snd (V j).hom f) (c.π.app j).left (V j)
         (pullback.fst (V j).hom f) pullback.condition _ (Over.w _) _ (KI j) p)
   refine ⟨(injective_iff_map_eq_zero Θ.hom).2 fun ξ hξ ↦ ?_, fun x ↦ ?_⟩

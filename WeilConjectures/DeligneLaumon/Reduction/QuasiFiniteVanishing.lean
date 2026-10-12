@@ -26,8 +26,9 @@ Frobenius of quasi-finite direct images in
 - `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerStar_of_neg` and
   `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg`: vanishing in
   negative degrees.
-- `AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`: blueprint
-  `lemma-weil-pbc-finite-direct-image-exact`.
+- `AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`: the analogue for Weil sheaves
+  of the exactness of finite direct images of étale sheaves
+  (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isFinite`).
 - `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`: blueprint
   `sk-l-dl-general-quasifinite`, `lem-zl-quasi-finite`, part 1.
 -/
@@ -104,10 +105,14 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 
 end LowerShriek
 
-/-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
-with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
-`p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
-`r > 0`. -/
+/-- **Finite direct images of Weil sheaves are exact**: for a finite morphism `p : T ⟶ Y` of
+`k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for `r > 0`.
+
+This is the analogue, for pro-étale `ℚ̄_ℓ`-sheaves with Weil structure
+(`def-weil-pbc-qbar-category`), of the exactness of finite direct images of étale sheaves
+(blueprint `lemma-weil-pbc-finite-direct-image-exact`, formalised as
+`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isFinite`); the passage to pro-étale
+`ℚ̄_ℓ`-coefficients is not formalised here. -/
 theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
     [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]

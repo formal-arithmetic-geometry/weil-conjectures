@@ -37,17 +37,6 @@ open Etale
 
 variable {k : Type u} [Field k] {C : Scheme.{u}}
 
-/-- Sheaf cohomology groups of isomorphic sheaves: if `H^n(B) = 0` and `A ≅ B`, then
-`H^n(A) = 0`. -/
-lemma _root_.CategoryTheory.Sheaf.H.subsingleton_of_iso {D : Type*} [Category D]
-    {J : GrothendieckTopology D} [HasSheafify J AddCommGrpCat.{u + 1}]
-    [HasExt (Sheaf J AddCommGrpCat.{u + 1})] {A B : Sheaf J AddCommGrpCat.{u + 1}} (e : A ≅ B)
-    (n : ℕ) [Subsingleton (Sheaf.H B n)] : Subsingleton (Sheaf.H A n) :=
-  Function.Injective.subsingleton (f := Sheaf.H.map e.hom n) fun x y h ↦ by
-    have h' := congrArg (Sheaf.H.map e.inv n) h
-    rwa [← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply, e.hom_inv_id, Sheaf.H.map_id_apply,
-      Sheaf.H.map_id_apply] at h'
-
 /-- **Sheaves acyclic on affine étale schemes have no `H²` on a curve.** Let `C` be a curve over
 an algebraically closed field `k` and `F` an abelian étale sheaf on `C` such that
 `Hᵠ(W, w^* F) = 0` for every étale morphism `w : W ⟶ C` from an affine scheme and every `q ≥ 1`.

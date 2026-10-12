@@ -207,6 +207,15 @@ lemma Sheaf.H.subsingleton_X₃_of_shortExact (q : ℕ) [Subsingleton (H S.X₂ 
   obtain ⟨y, rfl⟩ := Ext.covariant_sequence_exact₃ _ hS x rfl (Subsingleton.elim _ _)
   rw [Subsingleton.elim y 0, Ext.zero_comp]
 
+omit hS in
+/-- Sheaf cohomology groups of isomorphic sheaves: if `Hⁿ(B) = 0` and `A ≅ B`, then `Hⁿ(A) = 0`. -/
+lemma Sheaf.H.subsingleton_of_iso {A B : Sheaf J AddCommGrpCat.{w}} (e : A ≅ B) (n : ℕ)
+    [Subsingleton (H B n)] : Subsingleton (H A n) :=
+  Function.Injective.subsingleton (f := H.map e.hom n) fun x y h ↦ by
+    have h' := congrArg (H.map e.inv n) h
+    rwa [← H.map_comp_apply, ← H.map_comp_apply, e.hom_inv_id, H.map_id_apply,
+      H.map_id_apply] at h'
+
 end Shift
 
 end CategoryTheory

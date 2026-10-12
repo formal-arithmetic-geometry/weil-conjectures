@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericCohomologicalDimension
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
 
 /-!
@@ -90,13 +91,21 @@ variable [IsAlgClosed k]
 
 /-- Blueprint `lem-sc-cohomological-dimension`: **cohomological dimension of a smooth curve.**
 For a smooth separated connected curve `C` over an algebraically closed field and any torsion
-étale sheaf `F` on `C`, `Hᵠ(C, F) = 0` for `q > 2`. Neither smoothness nor connectedness is
-needed: this is a special case of `AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le`.
+étale sheaf `F` on `C`, `Hᵠ(C, F) = 0` for `q > 2`. A smooth connected curve is integral, and
+the argument at the generic point of
+`AlgebraicGeometry.IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral` applies; smoothness is
+not needed for it.
 (blueprint: `lem-sc-cohomological-dimension`) -/
 theorem IsConnectedCurve.subsingleton_sheafH_of_two_lt_of_smooth (f : C ⟶ Spec (.of k))
     [IsConnectedCurve f] [Smooth f] (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hF : F.IsTorsion) (q : ℕ) (hq : 2 < q) : Subsingleton (Sheaf.H F q) :=
-  IsCurve.subsingleton_sheafH_of_three_le f F hF q hq
+    (hF : F.IsTorsion) (q : ℕ) (hq : 2 < q) : Subsingleton (Sheaf.H F q) := by
+  have := IsConnectedCurve.connectedSpace' f
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : IsReduced C := isReduced_of_isReduced_stalk C
+  have : IsIntegral C := isIntegral_of_irreducibleSpace_of_isReduced C
+  exact IsCurve.subsingleton_sheafH_of_three_le_of_isIntegral f F hF q hq
 
 /-- **Vanishing in high degrees, complex form.** Let `C` be a curve over an algebraically
 closed field `k` and `K` a bounded complex of abelian étale sheaves on `C` (an object of the
