@@ -15,24 +15,24 @@
  ],
  "proof": [
   {
-   "text": "If U is empty then P is empty, B is the zero ring, and the zero K-algebra supplies an injective structural map. Otherwise U contains the generic point of the integral X. Identify the generic stalk on V with Frac(A), and let alpha:Spec K -> U be the induced generic map.",
+   "text": "Put A = Gamma(X,V) and K = Frac(A). Mathlib functionField_isFractionRing_of_isAffineOpen identifies the function field of X with K as an A-algebra. Compose Spec of this isomorphism with X.fromSpecFunctionField to construct a:Spec K -> X. It is dominant and quasi-compact; quasi-compactness follows because Spec K is a finite topological space.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Form P_eta = P times_U Spec K and D = Gamma(P_eta,O). Base change preserves finiteness and etaleness, so P_eta is affine and D is finite etale over K. These are the standard Mathlib IsFinite pullback instances, Etale pullback instances and HasRingHomProperty affine dictionary.",
+   "text": "Form Q = U times_X Spec K. The projection q:Q -> Spec K is an open immersion. Its source is reduced and has at most one point; its target is Jacobson. Hence Mathlib isFinite_iff_locallyOfFiniteType_of_jacobsonSpace makes q finite, including when Q is empty. Form T = P times_U Q, with r:T -> Spec K the composite of its projection to Q and q. Both factors are finite and etale. Therefore T is affine and D = Gamma(T,top), with its structural K-algebra map, is finite and formally etale. Apply finite_appTop, HasRingHomProperty.iff_of_isAffine, and the natural isomorphism between K and Gamma(Spec K,top).",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The generic map alpha is quasi-compact: each inverse image of an open is empty or the one-point Spec K. Its image is dense, and its target U is reduced, so it is scheme-theoretically dominant. Apply flat base change of scheme-theoretic dominance to the flat P -> U. The resulting projection P_eta -> P is quasi-compact and scheme-theoretically dominant; its maps on all section rings are injective. Use Mathlib IsSchemeTheoreticallyDominant.of_isPullback and Scheme.Hom.app_injective.",
+   "text": "Paste the two pullback squares to see that s:T -> P is the base change of a along the flat composite f:P -> U -> X. Dominance of a and reducedness of X give scheme-theoretic dominance of a. Mathlib IsSchemeTheoreticallyDominant.of_isPullback gives scheme-theoretic dominance of s, and quasi-compactness also survives base change. Thus s.app on f inverse V is injective by Scheme.Hom.app_injective.",
    "uses": [
     "lemma-nagata-dense-flat-pullback"
    ],
    "elementary": false
   },
   {
-   "text": "Since V contains the generic point, the inverse image of f^{-1}V in P_eta is all of P_eta. Composing the injective section map with this open-equality isomorphism gives B -> D. Naturality of section maps in the pullback square and the generic-stalk/fraction-field identification give its A-algebra compatibility.",
+   "text": "Every point of Spec K maps under a to the generic point of X, which belongs to the nonempty open V. The pullback square therefore identifies the inverse image of f inverse V under s with top. Compose s.app with the section isomorphism for this equality to obtain an injective B -> D. The formula fromSpecStalk_app, naturality of Spec section maps and GammaSpecIso, and A-linearity of the fraction-field isomorphism identify a.appLE on V with A -> K -> Gamma(Spec K,top). The pasted square and appLE_comp_appLE then show B -> D commutes with A, making it the required algebra homomorphism.",
    "uses": [],
    "elementary": true
   }
@@ -42,10 +42,10 @@
  ],
  "proof_origin": {
   "kind": "written-by-agent",
-  "by": "P2",
+  "by": "K1",
   "document": "Stacks Project and Mathlib",
-  "place": "Tags 02GL (lemma-etale-over-field) and 081I (flat base change of scheme-theoretic images); application to the generic-point map",
-  "note": "Affine generic-algebra route below the local finiteness node."
+  "place": "Tags 02GL and 081I; Mathlib FunctionField, Morphisms.Finite, and Morphisms.SchemeTheoreticallyDominant",
+  "note": "Direct construction by two pullbacks, treating the empty open uniformly; compiled complete Lean proof."
  },
  "mathlib_searches": [
   {
@@ -134,10 +134,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T213852-L-1209305",
-  "kind": "interface",
+  "landing": "20261012T225318-L-1809057",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

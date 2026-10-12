@@ -9921,3 +9921,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/J4/Sheaf.AlgebraicGeometry.FirstOrderThickeningBaseChange (stage 3; reviewer PASS; first push; landing 20261012T225317-L-1808609 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/K1/Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations (stage 3; reviewer PASS; first push; landing 20261012T225317-L-1808759 (proof); batch 20261012T225253; modules 1; new nodes 0)
 - 22:53 L: merged deliver/K1/Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen (stage 3; reviewer PASS; first push; landing 20261012T225318-L-1808939 (interface); batch 20261012T225253; modules 5; new nodes 4)
+- 22:53 L: merged deliver/K1/Sheaf.AlgebraicGeometry.Morphisms.FiniteEtaleOpenGenericAlgebra (stage 3; reviewer PASS; first push; landing 20261012T225318-L-1809057 (proof); batch 20261012T225253; modules 1; new nodes 0)
