@@ -12,6 +12,7 @@ public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology
+import Sheaf.Topology.CohomologyPresheafDerivedSectionsEvaluation
 import Sheaf.Topology.RingedSpaceRGammaDerivedLimit
 
 /-!
@@ -30,6 +31,23 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.RingedSpace
 
+private theorem tower_limit_projection_injective
+    (F : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (n₀ : ℕ)
+    (h : ∀ n (hn : n₀ ≤ n), Function.Injective (F.map (homOfLE hn).op)) :
+    Function.Injective (limit.π F (op n₀)) := by
+  intro s t heq
+  apply Concrete.limit_ext F s t
+  intro j
+  obtain ⟨n⟩ := j
+  by_cases hn : n₀ ≤ n
+  · apply h n hn
+    simpa only [← ConcreteCategory.comp_apply, limit.w] using heq
+  · have hn' : n ≤ n₀ := Nat.le_of_not_ge hn
+    have hh := congrArg (fun z ↦ F.map (homOfLE hn').op z) heq
+    simpa only [← ConcreteCategory.comp_apply, limit.w] using hh
+
+set_option maxHeartbeats 800000 in
+-- Transport between derived sections, presheaf evaluation and module stalks needs extra reduction.
 /-- Eventual injectivity of open cohomology and vanishing of its first derived inverse
 limit imply injectivity of the specified projection on cohomology stalks.
 Source: Stacks Project, Cohomology of Sheaves, Tag 0D61,
@@ -70,6 +88,63 @@ theorem derivedLimit_stalk_injective (X : RingedSpace.{u})
     Function.Injective ((moduleStalkFunctor X x).map
       ((DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings X)) m).map
         (p ≫ Pi.π (fun n : ℕ => K.obj (op n)) n₀))).hom := by
-  sorry
+  have hlocal : ∀ U ∈ B, Function.Injective
+      ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).map
+        ((openModuleDerivedSections X U).map (p ≫ Pi.π _ n₀))) := by
+    intro U hU
+    obtain ⟨a, b, hz, hseq, hb⟩ := (rgamma_derivedLimit X U K L p δ hK).2 m
+    have ha : a = 0 := (hlim U hU).eq_of_src a 0
+    have : Mono b := hseq.exact.mono_g ha
+    have hb_inj := (AddCommGrpCat.mono_iff_injective b).mp inferInstance
+    have hπ := tower_limit_projection_injective
+      (K ⋙ openModuleDerivedSections X U ⋙
+        DerivedCategory.homologyFunctor AddCommGrpCat.{u} m) n₀ (hinj U hU)
+    rw [← hb n₀]
+    exact hπ.comp hb_inj
+  obtain ⟨P, hP, e, θ, hθ, hrep, hzero, hnat⟩ := sheafification_cohomology X m
+  let f := p ≫ Pi.π (fun n : ℕ ↦ K.obj (op n)) n₀
+  have hP_inj : ∀ U ∈ B, Function.Injective ((P.map f).app (op U)) := by
+    intro U hU
+    obtain ⟨eU⟩ := cohomology_presheaf_derivedSections_evaluation X m P hP U
+    intro s t hst
+    apply (ConcreteCategory.bijective_of_isIso (eU.hom.app L)).1
+    apply hlocal U hU
+    have hs := congrArg (fun z ↦ eU.hom.app (K.obj (op n₀)) z) hst
+    change eU.hom.app (K.obj (op n₀))
+        ((P ⋙ (evaluation _ AddCommGrpCat.{u}).obj (op U)).map f s) =
+      eU.hom.app (K.obj (op n₀))
+        ((P ⋙ (evaluation _ AddCommGrpCat.{u}).obj (op U)).map f t) at hs
+    rw [eU.hom.naturality_apply, eU.hom.naturality_apply] at hs
+    exact hs
+  apply (injective_iff_map_eq_zero _).2
+  intro t ht
+  obtain ⟨U, hxU, s, hs⟩ := hrep L x t
+  have hst : (TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ U x hxU)
+      ((θ.app (K.obj (op n₀))).app (op U) ((P.map f).app (op U) s)) = 0 := by
+    rw [hnat, hs]
+    exact ht
+  obtain ⟨V, hxV, i, hi⟩ := hzero (K.obj (op n₀)) U x hxU _ hst
+  obtain ⟨W, hW, hWV⟩ := hB_basis V hxV
+  let j : W ⟶ V := homOfLE hWV
+  have hV : (P.map f).app (op V) ((P.obj L).map i.op s) = 0 := by
+    rw [← ConcreteCategory.comp_apply, (P.map f).naturality]
+    exact hi
+  have hWzero : (P.map f).app (op W)
+      ((P.obj L).map j.op ((P.obj L).map i.op s)) = 0 := by
+    rw [← ConcreteCategory.comp_apply, (P.map f).naturality,
+      ConcreteCategory.comp_apply, hV, map_zero]
+  have hsW : (P.obj L).map j.op ((P.obj L).map i.op s) = 0 :=
+    (hP_inj W hW) (by simpa using hWzero)
+  have hres : ∀ {A C : Opens X} (k : C ⟶ A) (hxC : x ∈ C)
+      (z : (P.obj L).obj (op A)),
+      (TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ C x hxC)
+          ((θ.app L).app (op C) ((P.obj L).map k.op z)) =
+        (TopCat.Presheaf.germ (C := AddCommGrpCat.{u}) _ A x (k.le hxC))
+          ((θ.app L).app (op A) z) := by
+    intro A C k hxC z
+    rw [(θ.app L).naturality_apply]
+    exact TopCat.Presheaf.germ_res_apply _ k x hxC _
+  rw [← hs, ← hres i hxV s,
+    ← hres j (hB_mem W hW) ((P.obj L).map i.op s), hsW, map_zero, map_zero]
 
 end AlgebraicGeometry.RingedSpace

@@ -1,0 +1,133 @@
+{
+ "id": "lem-pc-cohomology-presheaf-derived-sections-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of K-injective cohomology presheaf agrees with derived sections",
+ "statement": "Let (X, O_X) be a ringed space and let q be any integer. Write Q for localization from complexes of O_X-modules to their derived category [def-weil-abstract-derived-category], I for the functorial K-injective replacement [lem-weil-pbc-kinjective-functorial-existence], and A for the underlying abelian-group presheaf functor on module sheaves [def-weil-sheaf-of-modules-category]. Suppose P is a functor from D(O_X) to presheaves of abelian groups equipped with a natural isomorphism Q composed with P to I composed with termwise A composed with q-th cohomology. Then for every open U, evaluation of P at U is naturally isomorphic to q-th cohomology of RΓ(U,-) [def-pc-open-module-derived-sections].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0BKJ, proof, the K-injective computation of H^q(U,K); Tag 0D60, setup of derived sections"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-open-module-derived-sections"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation at U in abelian-group presheaves is exact. Whisker the given natural isomorphism Q followed by P with evaluation and commute evaluation with homology via ShortComplex.homologyFunctorIso. The resulting complex is termwise openModuleSections by its definition [def-pc-open-module-derived-sections].",
+   "uses": [
+    "def-pc-open-module-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The functorial replacement I and its natural map from the identity are given by [lem-weil-pbc-kinjective-functorial-existence]. That map becomes a natural isomorphism under Q. The unit of the unbounded right derived sections functor is an isomorphism on I(T), since I(T) is K-injective. Using the quotient-to-derived-category comparison, obtain a natural isomorphism between Q followed by derived sections and I followed by termwise sections followed by Q.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "def-pc-open-module-derived-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply cohomology to the preceding isomorphism and use DerivedCategory.homologyFunctorFactors. Compose with the evaluated presentation of P, and descend the natural isomorphism along the localization Q using Localization.liftNatIso. This supplies the claimed natural isomorphism for all derived morphisms.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-module-derived-sections",
+  "lem-weil-pbc-kinjective-functorial-existence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-13",
+  "note": "Formal comparison expanding the K-injective computation in Tags 0BKJ and 0D60."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "homologyFunctorIso|mapHomotopyCategoryFactors",
+   "results": "22 hits: Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean; building blocks only, no specialized comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of the cohomology presheaf computed with K-injective resolutions is naturally isomorphic to cohomology of derived sections on an open subset",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.H, groupCohomologyIso, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk, CochainComplex.HomComplex.homologyAddEquiv, groupCohomology.isoCocycles₁_inv_comp_iCocycles, CochainComplex.HomComplex.leftHomologyData'_H_coe; building blocks only, no specialized comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatIso",
+   "results": "3 hits: CategoryTheory.Localization.liftNatIso, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv; building blocks only, no specialized comparison.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of a cohomology presheaf computed on functorial K-injective resolutions agrees with cohomology of derived sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.DerivedLimitStalkInjective",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: identify local cohomology representatives with derived sections",
+   "via": [
+    "lem-pc-ringed-space-derived-limit-stalk-injective",
+    "lem-pc-ringed-space-pointwise-truncation-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-functorial-existence"
+ ],
+ "lean": {
+  "module": "Sheaf.Topology.CohomologyPresheafDerivedSectionsEvaluation",
+  "file": "lean/Sheaf/Topology/CohomologyPresheafDerivedSectionsEvaluation.lean",
+  "declaration": "AlgebraicGeometry.RingedSpace.cohomology_presheaf_derivedSections_evaluation",
+  "statement": "theorem cohomology_presheaf_derivedSections_evaluation (X : RingedSpace.{u}) [HasDerivedCategory.{v} (SheafOfModules.{u} (moduleRings X))] [HasDerivedCategory.{w} AddCommGrpCat.{u}] (q : ℤ) (P : DerivedCategory (SheafOfModules.{u} (moduleRings X)) ⥤ ((Opens X)ᵒᵖ ⥤ AddCommGrpCat.{u})) (hP : Nonempty (DerivedCategory.Q ⋙ P ≅ CochainComplex.kInjectiveResolutionFunctor.{u} (SheafOfModules.{u} (moduleRings X)) ⋙ (Functor.mapHomologicalComplex (SheafOfModules.toSheaf (moduleRings X) ⋙ sheafToPresheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (ComplexShape.up ℤ)) ⋙ HomologicalComplex.homologyFunctor _ (ComplexShape.up ℤ) q)) (U : Opens X) : Nonempty (P ⋙ (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op U) ≅ openModuleDerivedSections X U ⋙ DerivedCategory.homologyFunctor AddCommGrpCat.{u} q)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T184337-L-4017597",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T184337-L-4017597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

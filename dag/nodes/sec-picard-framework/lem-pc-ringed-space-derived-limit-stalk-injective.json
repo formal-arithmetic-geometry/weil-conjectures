@@ -31,9 +31,10 @@
  ],
  "proof": [
   {
-   "text": "Let $\\gamma\\in H^m(K)_x$ map to zero in $H^m(K_{n(x)})_x$ under the map induced by $\\mathrm{pr}_{n(x)}\\circ p$. By [lem-pc-ringed-space-sheafification-cohomology], choose an open neighborhood $U_0$ of $x$ and a class $\\widetilde\\gamma_0\\in H^m(U_0,K)$ representing $\\gamma$. Its image in $H^m(K_{n(x)})_x$ is zero, so the final clause of that node (applied to $K_{n(x)}$) lets us shrink to an open $U_1\\subseteq U_0$ containing $x$ on which the image of $\\widetilde\\gamma_0$ in $H^m(U_1,K_{n(x)})$ is zero. Since $\\mathfrak U_x$ is a fundamental system, choose $U\\in\\mathfrak U_x$ with $U\\subseteq U_1$, and let $\\widetilde\\gamma\\in H^m(U,K)$ be the restriction of $\\widetilde\\gamma_0$; it still represents $\\gamma$, and its image $\\widetilde\\gamma_{n(x)}\\in H^m(U,K_{n(x)})$ is zero, being a restriction of zero. Hypotheses (i) and (ii) therefore apply to this $U$.",
+   "text": "Apply [lem-pc-ringed-space-sheafification-cohomology] to obtain P, its sheafification comparison, local representatives and zero detection. For each open U, [lem-pc-cohomology-presheaf-derived-sections-evaluation] naturally identifies P evaluated at U with H^m(RΓ(U,-)).",
    "uses": [
-    "lem-pc-ringed-space-sheafification-cohomology"
+    "lem-pc-ringed-space-sheafification-cohomology",
+    "lem-pc-cohomology-presheaf-derived-sections-evaluation"
    ],
    "elementary": false,
    "source": {
@@ -42,9 +43,10 @@
    }
   },
   {
-   "text": "For this $U\\in\\mathfrak U_x$, the short exact sequence of [lem-pc-ringed-space-rgamma-derived-limit] gives $0\\to R^1\\varprojlim_n H^{m-1}(U,K_n)\\to H^m(U,K)\\to\\varprojlim_n H^m(U,K_n)\\to0$, whose right map has components $H^m(U,\\mathrm{pr}_n\\circ p)$. The left term is zero by hypothesis (i). The map from the inverse limit on the right to $H^m(U,K_{n(x)})$ is injective: a compatible family whose $n(x)$-component is zero has zero $n$-component for every $n\\ge n(x)$ by hypothesis (ii), and each earlier component is the image of the zero $n(x)$-component under the transition maps. Since $\\widetilde\\gamma_{n(x)}=0$, $\\widetilde\\gamma$ maps to zero in the inverse limit and therefore is zero.",
+   "text": "For every U in the fundamental system, apply the short exact sequence of [lem-pc-ringed-space-rgamma-derived-limit]. Vanishing of its left term makes the right map injective. The inverse-limit projection to level n₀ is injective: for n ≥ n₀ use the assumed injectivity and compatibility, and for n < n₀ apply compatibility to the equal n₀ components. The projection equations identify the composite with H^m(U,p followed by pr_n₀). Transport injectivity to P using naturality of the comparison from [lem-pc-cohomology-presheaf-derived-sections-evaluation].",
    "uses": [
-    "lem-pc-ringed-space-rgamma-derived-limit"
+    "lem-pc-ringed-space-rgamma-derived-limit",
+    "lem-pc-cohomology-presheaf-derived-sections-evaluation"
    ],
    "elementary": false,
    "source": {
@@ -53,7 +55,7 @@
    }
   },
   {
-   "text": "Since the representative restricts to zero on a neighborhood of $x$, its germ $\\gamma$ is zero. Thus the natural map $H^m(R\\varprojlim_nK_n)_x\\to H^m(K_{n(x)})_x$ is injective.",
+   "text": "Represent a stalk element in the kernel by a P-section over U. Naturality on germs makes its image have zero germ, so zero detection gives a smaller neighborhood V where the image vanishes. Choose W in the fundamental system inside V; naturality of restriction still gives zero image. Injectivity on W kills the restricted section. Naturality of the sheafification comparison and invariance of germs under restriction show that the original stalk element is zero.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -64,12 +66,13 @@
  ],
  "proof_deps": [
   "lem-pc-ringed-space-sheafification-cohomology",
-  "lem-pc-ringed-space-rgamma-derived-limit"
+  "lem-pc-ringed-space-rgamma-derived-limit",
+  "lem-pc-cohomology-presheaf-derived-sections-evaluation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0D61, label lemma-cohomology-derived-limit-injective"
+  "place": "Tag 0D61, proof; the evaluation comparison is expanded in lem-pc-cohomology-presheaf-derived-sections-evaluation"
  },
  "mathlib_searches": [
   {
@@ -154,5 +157,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T184337-L-4017597",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
