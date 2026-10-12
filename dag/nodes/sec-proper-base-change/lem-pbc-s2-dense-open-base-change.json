@@ -17,82 +17,43 @@
  ],
  "proof": [
   {
-   "text": "Let Z be the reduced closed complement of U. Finite type makes X Noetherian with finitely many irreducible components. Density and openness put the generic point of every component in U: if its closure meets U, every generalization of that point of intersection lies in U. Thus no irreducible component lies in Z. Any strict chain of nonempty irreducible closed subsets in Z would extend by a component of X to a chain of length at least two in X, contradicting dimension at most one. Hence Z has dimension at most zero. Its underlying space is finite and discrete, and each residue field is k. The same argument applies to any open immersion W into X and the complement W times_X Z.",
+   "text": "For each cartesian square use the simultaneous low-degree comparison equivalence. In degrees above one both horizontal counit maps are bijective. Naturality cohomologyMap_map gives a commuting square; an explicit injectivity and surjectivity argument with those two horizontal bijections transfers the vertical comparison bijections. Combine the low and high ranges to obtain the all-degree comparison equivalence for each square.",
    "uses": [
-    "def-weil-pbc-curve-setting",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-closed-point-residue-field-base"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The open-closed short exact sequence of module sheaves is 0 -> G -> F -> i_*i^*F -> 0, with the first arrow the specified adjunction counit. Forgetting module structure gives a short exact sequence of abelian sheaves. Finite exact direct image and the Leray identification give H^q(X,i_*i^*F)=H^q(Z,i^*F). This vanishes for q>0. Inverse image along any open immersion is exact and computes the analogous closed direct image over the intersection with Z.",
-   "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-extension-by-zero-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a cartesian square of algebraically closed field extension, inverse image identifies each new geometric stalk on the closed complement with its original stalk. The degree-zero pullback of the closed term is the corresponding product map and is bijective; the positive-degree maps are between zero groups. Use the global-sections pullback theorem in dimension zero for degree zero and zero-dimensional cohomology for the other degrees. Leray and finite exact direct image identify these with the maps for B=i_*i^*F.",
-   "uses": [
-    "lem-weil-pbc-zero-dimensional-pullback-global-sections",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-zero-dimensional-cohomology",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "lemma-weil-pbc-finite-direct-image-exact"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "The pullback-cohomology ladder has canonical cohomologyMap vertical arrows. Its higher-degree counit maps are bijective over both fields. Its low-degree part is 0 -> H^0(G) -> H^0(F) -> H^0(B) -> H^1(G) -> H^1(F) -> 0. When all vertical maps for G are bijective, apply the five lemma at H^0(F) and H^1(F). Conversely, when those for F are bijective, apply it at H^0(G) and H^1(G). The known B and zero end maps supply the remaining isomorphisms. This proves that the simultaneous comparison bijections for all degrees transfer in both directions.",
-   "uses": [
-    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-    "lem-weil-pbc-five-lemma",
+    "lem-pbc-x2-dense-open-low-base-change",
+    "lem-pbc-x2-dense-open-pulled-counit-high",
     "lem-pbc-s2-dense-open-high-cohomology"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "This proves the conditional proper assertion. For the invertible-order assertion, the stalks of G are those of F on U and zero outside it; both are r-torsion. If r is invertible in k, both have invertible-order torsion and use the ladder. If r is the positive characteristic, an invertible-order hypothesis on either sheaf forces it to be zero, by coprimality of its stalk annihilators; both that sheaf and its pullback have zero cohomology. Thus the conditional implications hold even when the invertible-order predicates themselves are different.",
+   "text": "Map the prime-annihilation identity through inverse image and extension by zero to get the same identity for G. If r is a unit on Spec k, map this identity to each stalk and use r as its invertible annihilator; both F and G then satisfy the invertible-order condition. Apply the per-square all-degree equivalence in both directions. If r is not a unit, the invertible-order hypothesis on either sheaf makes its source and pullback cohomology subsingletons by the nonunit-prime vanishing theorem, hence every comparison is bijective. This proves the conditional C6 equivalence even when the torsion predicates differ.",
    "uses": [
-    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-pbc-x2-prime-torsion-nonunit-cohomology",
     "def-weil-pbc-primary-torsion",
-    "def-weil-pbc-eight-curve-assertions",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "def-weil-pbc-eight-curve-assertions"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Under the properness instance, specialize each square in the all-degree equivalence and quantify over all algebraically closed field extensions. This proves the C7 equivalence; combine it with C6 by conjunction introduction.",
+   "uses": [
+    "def-weil-pbc-eight-curve-assertions"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-curve-setting",
   "def-weil-pbc-eight-curve-assertions",
   "def-weil-pbc-primary-torsion",
   "lem-pbc-s2-dense-open-high-cohomology",
-  "lem-weil-pbc-closed-point-residue-field-base",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-zero-dimensional-cohomology",
-  "lem-weil-pbc-zero-dimensional-pullback-global-sections",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lem-pbc-x2-dense-open-low-base-change",
+  "lem-pbc-x2-dense-open-pulled-counit-high",
+  "lem-pbc-x2-prime-torsion-nonunit-cohomology"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "X2",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJA; canonical ModuleCat counit formulation and conditional prime-torsion cases written out by S2 from the source proof."
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the five-term exact sequence and remark (c); implemented per-square comparison, degree partition and unit/nonunit torsion cases."
  },
  "mathlib_searches": [
   {
@@ -168,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S2",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T042419-L-1821220",
+  "landing": "20261012T054002-L-2649579",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
