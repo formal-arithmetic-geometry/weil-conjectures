@@ -8856,3 +8856,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:38 L: returned deliver/W3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNaturality (reviewer RETURN: (reviewer X-bf1b4, head bf1b49310) F/G1: In coord/reports/W3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomologyNatur)
 - 18:38 L: returned deliver/G3/Sheaf.Topology.TopologicalCocycleNaturality (reviewer RETURN: (reviewer X-aca84, head aca84904b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Topology.Topological)
 - 18:42 L: returned deliver/A3/Sheaf.AlgebraicGeometry.EtaleFpqcAgreementOpenCompatibility (reviewer RETURN: (the landing tools, head 46b01f420) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 18:42 L: returned deliver/B3/Sheaf.Algebra.Homology.ZigzagModuleFunctorial (reviewer RETURN: (the landing tools, head dff54d904) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
