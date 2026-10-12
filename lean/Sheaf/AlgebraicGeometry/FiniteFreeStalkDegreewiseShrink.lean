@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.FiniteFreeStalkFiniteEquations
+import Sheaf.AlgebraicGeometry.StalkRestrictionSubopenCompatibility
+import Mathlib.Data.Int.Interval
 
 /-! # Shrinking differential-commutativity defects
 
@@ -82,6 +85,61 @@ theorem exists_shrink_degreewise_comm_of_stalk
         ((stalkRestrictionComplexIso U y hyU).app P).inv.f n ≫
         (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map (g n) ≫
         ((stalkRestrictionComplexIso U y hyU).app Q).hom.f n ≫
-        ((stalkRestrictionComplexIso V y hyV).app Q).inv.f n) := by sorry
+        ((stalkRestrictionComplexIso V y hyV).app Q).inv.f n) := by
+  classical
+  let I := ↥(Finset.Icc (max a (c - 1)) (min b (e - 1)))
+  let R := (restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)
+  let f : ∀ i : I, (restrictFunctor U.ι).obj (P.X i.val) ⟶
+      (restrictFunctor U.ι).obj (Q.X (i.val + 1)) :=
+    fun i => g i.val ≫ (R.obj Q).d i.val (i.val + 1)
+  let t : ∀ i : I, (restrictFunctor U.ι).obj (P.X i.val) ⟶
+      (restrictFunctor U.ι).obj (Q.X (i.val + 1)) :=
+    fun i => (R.obj P).d i.val (i.val + 1) ≫ g (i.val + 1)
+  have hft : ∀ i : I,
+      (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map (f i) =
+      (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map (t i) := by
+    intro i
+    simpa only [f, t, R, Functor.map_comp, Functor.mapHomologicalComplex_obj_d]
+      using hcomm i.val
+  obtain ⟨V, hyV, hVU, hV⟩ := exists_shrink_finite_free_map_eq
+    (fun i : I => P.X i.val) (fun i : I => Q.X (i.val + 1))
+    (fun i => hPfree i.val) (fun i => hQfree (i.val + 1)) y U hyU f t hft
+  let T := restrictFunctor (Y.homOfLE hVU)
+  let C := NatIso.mapHomologicalComplex
+    ((restrictFunctorCongr (Y.homOfLE_ι hVU)).symm ≪≫
+      restrictFunctorComp (Y.homOfLE hVU) U.ι) (ComplexShape.up ℤ)
+  let k := fun n : ℤ => (C.app P).hom.f n ≫ T.map (g n) ≫ (C.app Q).inv.f n
+  refine ⟨V, hyV, hVU, k, ?_, ?_⟩
+  · intro n
+    by_cases hn : n ∈ Finset.Icc (max a (c - 1)) (min b (e - 1))
+    · have heq := hV ⟨n, hn⟩
+      have hc := congrArg
+        (fun z => (C.app P).hom.f n ≫ z ≫ (C.app Q).inv.f (n + 1)) heq
+      dsimp [f, t] at hc
+      simp only [Functor.map_comp, Category.assoc] at hc
+      have hQ := (C.app Q).inv.comm n (n + 1)
+      have hP := (C.app P).hom.comm n (n + 1)
+      simp only [Functor.mapHomologicalComplex_obj_d, Functor.comp_map] at hQ hP
+      dsimp only [k]
+      simp only [Functor.mapHomologicalComplex_obj_d, Category.assoc]
+      rw [hQ]
+      simp only [R, Functor.mapHomologicalComplex_obj_d] at hc
+      exact hc.trans (by
+        simpa only [T, Category.assoc, Iso.app_hom, Iso.app_inv] using congrArg
+          (fun z => z ≫ T.map (g (n + 1)) ≫ (C.app Q).inv.f (n + 1)) hP)
+    · have hn' : n < a ∨ b < n ∨ n + 1 < c ∨ e < n + 1 := by
+        simp only [Finset.mem_Icc, max_le_iff, le_min_iff] at hn
+        omega
+      rcases hn' with hn' | hn' | hn' | hn'
+      · exact ((restrictFunctor V.ι).map_isZero
+          (P.isZero_of_isStrictlyGE a n hn')).eq_of_src _ _
+      · exact ((restrictFunctor V.ι).map_isZero
+          (P.isZero_of_isStrictlyLE b n hn')).eq_of_src _ _
+      · exact ((restrictFunctor V.ι).map_isZero
+          (Q.isZero_of_isStrictlyGE c (n + 1) hn')).eq_of_tgt _ _
+      · exact ((restrictFunctor V.ι).map_isZero
+          (Q.isZero_of_isStrictlyLE e (n + 1) hn')).eq_of_tgt _ _
+  · intro n
+    exact stalkRestrictionComplexIso_map_subopen P Q y U V hyU hyV hVU n (g n)
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-stalk-restriction-subopen-compatibility",
+ "kind": "statement",
+ "title": "Canonical stalk comparison under a subopen restriction",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] and $P,Q$ arbitrary cochain complexes of $\\mathcal O_Y$-modules [def-pc-derived-category]. Fix $y\\in V\\subseteq U\\subseteq Y$, an integer $n$, and a map $f:R_U(P^n)\\to R_U(Q^n)$. Write $j:V\\to U$, $C:R_V\\cong R_U R_j$ for the canonical restriction-composition isomorphism, $S_U,S_V$ for module pullback from $\\operatorname{Spec}\\mathcal O_{Y,y}$ [def-pc-module-pullback], and $E_U,E_V$ for stalkRestrictionComplexIso [def-pc-stalk-restriction-complex-iso]. Then $S_V(C(P).\\mathrm{hom}_n;R_j(f);C(Q).\\mathrm{inv}_n)=E_V(P).\\mathrm{hom}_n;E_U(P).\\mathrm{inv}_n;S_U(f);E_U(Q).\\mathrm{hom}_n;E_V(Q).\\mathrm{inv}_n$. No chain equations on $f$, boundedness, or finite freeness are assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pc-derived-category",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "lem-pc-finite-free-stalk-degreewise-shrink, step 3: transitivity and associativity of stalk pullback comparisons"
+ },
+ "proof": [
+  {
+   "text": "Define C by restrictFunctorCongr(homOfLE_ι) inverse followed by restrictFunctorComp, then apply NatIso.mapHomologicalComplex. Let j:V->U. Cancel U.ι in the equality of the two morphisms from Spec O_(Y,y) into U and use fromSpecStalkOfMem_ι to obtain V.fromSpecStalkOfMem ; j = U.fromSpecStalkOfMem. Replace restriction along j by pullback, then use pullbackComp and pullbackCongr to obtain D:R_j ; S_V ~= S_U.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Replace all restriction functors by pullbacks through restrictFunctorIsoPullback. Its compatibility with restriction composition follows by comparing the units of the restriction and pullback adjunctions; these maps are the uniqueness-of-left-adjoint isomorphisms of the common pushforward. Apply Scheme.Modules.pseudofunctor_associativity to the three maps from the stalk scheme through V and U to Y. This identifies S_V(C(M)) ; D(R_U M) with E_V(M) ; E_U(M) inverse. Use naturality of D on f, substitute this identification on P and Q, cancel inverse/hom pairs, and take the n-th component. The argument applies to U=V and zero objects without changes.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "lem-pc-finite-free-stalk-degreewise-shrink, step 3: transitivity and associativity of stalk pullback comparisons; detailed expansion of the already recorded finite matrix argument"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality and transitivity of stalk pullback comparisons under composition of open restrictions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of restriction followed by stalk pullback is compatible with restricting a module morphism to a smaller open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.resLEStalkMap, AlgebraicGeometry.morphismRestrictStalkMap, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom, ModuleCat.Tilde.toOpen_germ_assoc, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem found; recorded hits supply ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudofunctor_associativity|restrictFunctorIsoPullback|fromSpecStalkOfMem_ι",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Stalk.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact theorem found; recorded hits supply ingredients only"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkDegreewiseShrink",
+  "date": "2026-10-13",
+  "group": "P3"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "lem-pc-finite-free-stalk-degreewise-shrink, step 3: transitivity and associativity of stalk pullback comparisons",
+   "via": [
+    "lem-pc-finite-free-stalk-degreewise-shrink",
+    "lem-pc-finite-free-stalk-chain-map-lift-local",
+    "lem-pc-finite-free-stalk-chain-map-lift",
+    "lem-pc-finite-free-stalk-chain-map-pair-lift",
+    "lem-pc-finite-free-stalk-homotopy-spread",
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StalkRestrictionSubopenCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/StalkRestrictionSubopenCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.stalkRestrictionComplexIso_map_subopen",
+  "statement": "theorem stalkRestrictionComplexIso_map_subopen\n    {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)\n    (y : Y) (U V : Y.Opens) (hyU : y ∈ U) (hyV : y ∈ V) (hVU : V ≤ U)\n    (n : ℤ)\n    (f : (restrictFunctor U.ι).obj (P.X n) ⟶\n      (restrictFunctor U.ι).obj (Q.X n)) :\n    let C := NatIso.mapHomologicalComplex\n      ((restrictFunctorCongr (Y.homOfLE_ι hVU)).symm ≪≫\n        restrictFunctorComp (Y.homOfLE hVU) U.ι) (ComplexShape.up ℤ)\n    (Modules.pullback (V.fromSpecStalkOfMem y hyV)).map\n      (((C.app P).hom.f n) ≫ (restrictFunctor (Y.homOfLE hVU)).map f ≫\n        ((C.app Q).inv.f n)) =\n      ((stalkRestrictionComplexIso V y hyV).app P).hom.f n ≫\n        ((stalkRestrictionComplexIso U y hyU).app P).inv.f n ≫\n        (Modules.pullback (U.fromSpecStalkOfMem y hyU)).map f ≫\n        ((stalkRestrictionComplexIso U y hyU).app Q).hom.f n ≫\n        ((stalkRestrictionComplexIso V y hyV).app Q).inv.f n",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T212723-L-1131657",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261012T212723-L-1131657",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
