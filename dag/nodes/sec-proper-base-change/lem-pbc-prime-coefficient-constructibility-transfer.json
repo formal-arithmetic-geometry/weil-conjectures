@@ -13,32 +13,31 @@
  ],
  "proof": [
   {
-   "text": "Choose the finite constructible stratification of F. On each stratum its pullback is finite locally constant. The finite-module-values equivalence gives etale local constant finite module values. Forget their coefficients to obtain finite constant abelian values.",
+   "text": "Choose the stratification S supplied by IsConstructibleSheaf.exists_stratification for F. Fix a stratum, and let F′ and G′ be the module pullbacks to it.",
    "uses": [
-    "def-constructible-constructible",
-    "lem-weil-pbc-finite-locally-constant-module-values"
+    "def-constructible-constructible"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The underlying abelian sheaf of F′ is locally constant: use its same LocallyConstantDatum and forget each constant restriction, since constants commute with coefficient forgetting. Its geometric stalks are finite: finite generation over the finite coefficient ring implies finiteness, and Point.sheafFiberCompIso identifies the abelian stalk with the underlying module stalk. This is proved directly in the private helper finiteAbelianLocal_of_module.",
+   "uses": [
+    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "def-constructible-constructible"
    ],
    "elementary": false
   },
   {
-   "text": "Inverse image commutes with forgetting module coefficients: compute inverse image by the left Kan extension and sheafification; the forgetful functor preserves the filtered colimits in the Kan extension and preserves sheafification. Restriction to a cover member is sectionwise. Forgetting a constant module sheaf gives its constant abelian sheaf, since constants are sheafifications of constant presheaves. Thus the given abelian isomorphism supplies finite constant abelian trivializations for the pullback of G on the same strata.",
+   "text": "For each coefficient ring form asIso of the canonical inverse-image comparison. Its invertibility is isIso_moduleAbelianInverseImageComparison. Compose the inverse comparison for G, the abelian inverse image of e, and the comparison for F to obtain an isomorphism from the underlying abelian sheaf of G′ to that of F′. Transport local constancy by IsLocallyConstantSheaf.of_iso and finite stalks by the equivalence induced by the stalk functor.",
    "uses": [
-    "lem-weil-pbc-module-abelian-inverse-image-comparison",
-    "lem-weil-pbc-constant-module-sheaf-underlying"
+    "lem-weil-pbc-module-abelian-inverse-image-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Discard empty cover members. On a nonempty member, the constant abelian value identifies with a geometric stalk; that stalk is killed by r because it comes from a prime-field module sheaf. Its finite abelian group therefore has the canonical ZMod r module structure, lifted to ULift(ZMod r). Every additive map between groups killed by r is linear: represent each scalar by an integer and use preservation of integer multiplication. Consequently the abelian trivializations and their inverses lift to module trivializations.",
+   "text": "Primality gives NeZero r. Apply finite_local_cyclic_module_forget_iff to G′ and the abelian local-constancy and finite-stalk data, obtaining finite constant module values. Apply finite_locally_constant_module_values_iff to conclude IsFiniteLocallyConstantSheaf G′. Repeat for every stratum of S and use the constructor of IsConstructibleSheaf. The empty stratification, empty cover members, and zero sheaf require no additional hypotheses.",
    "uses": [
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-finite-local-cyclic-module-forget"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Each finite prime-field value is finitely generated. Apply the finite-module-values equivalence on each stratum and retain the original stratification to witness constructibility of G. For empty strata use the empty covers; for the zero ring or zero sheaf the finite values are zero.",
-   "uses": [
+    "lem-weil-pbc-finite-local-cyclic-module-forget",
     "lem-weil-pbc-finite-locally-constant-module-values",
     "def-constructible-constructible"
    ],
@@ -47,16 +46,15 @@
  ],
  "proof_deps": [
   "def-constructible-constructible",
-  "lem-weil-pbc-finite-locally-constant-module-values",
-  "lem-weil-pbc-module-abelian-inverse-image-comparison",
   "lem-weil-pbc-constant-module-sheaf-underlying",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-finite-local-cyclic-module-forget"
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "lem-weil-pbc-finite-local-cyclic-module-forget",
+  "lem-weil-pbc-finite-locally-constant-module-values"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "U2 stage 3",
   "document": "Stacks Project",
-  "place": "Theorem 03SC second proof paragraph and Definition 03RW (2),(3); explicit prime-coefficient transport of the existing global stratification."
+  "place": "Theorem 03SC second proof paragraph and Definition 03RW (2),(3); preserve the original stratification, forget finite module stalks, and apply the existing cyclic-coefficient finite-values equivalence."
  },
  "mathlib_searches": [
   {
@@ -137,10 +135,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T070531-L-3468373",
-  "kind": "interface",
+  "landing": "20261012T085347-L-42660",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
