@@ -25,51 +25,47 @@
  ],
  "proof": [
   {
-   "text": "For an $\\mathcal O_S$-module $\\mathcal G$ and $t\\in T$ the inverse-image stalk isomorphism gives $(g^{-1}\\mathcal G)_t\\cong\\mathcal G_{g(t)}$, naturally in $\\mathcal G$ [lem-weil-pbc-topological-inverse-image-stalk]. Since exactness of a sequence of sheaves on $T$ is checked on stalks, $g^{-1}$ is exact; applied termwise it sends acyclic complexes to acyclic complexes and quasi-isomorphisms to quasi-isomorphisms [def-pc-quasi-iso-modules], and commutes with cones, so it induces an exact functor $g^{-1}:D(\\mathcal O_S)\\to D(g^{-1}\\mathcal O_S)$.",
+   "text": "Obtain the additive exact inverse-image functor I and its K-flat resolution clause from the inverse-image preservation theorem.",
    "uses": [
-    "lem-weil-pbc-topological-inverse-image-stalk",
-    "def-pc-quasi-iso-modules"
+    "lem-pc-inverse-image-exact-kflat-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Section Tag 06YI (label section-derived-pullback), Lemma Tag 06YJ (label lemma-derived-base-change), proof"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-pur-derived-change-of-rings] on the site of open subsets of $T$ to $\\varphi=g^\\sharp:g^{-1}\\mathcal O_S\\to\\mathcal O_T$: it gives the exact functor $L\\varphi^*=-\\otimes^{\\mathbf L}_{g^{-1}\\mathcal O_S}\\mathcal O_T:D(g^{-1}\\mathcal O_S)\\to D(\\mathcal O_T)$, computed on any K-flat resolution $\\mathcal Q^\\bullet\\to\\mathcal G^\\bullet$ of $g^{-1}\\mathcal O_S$-modules by $\\mathcal Q^\\bullet\\otimes_{g^{-1}\\mathcal O_S}\\mathcal O_T$, with canonical comparison isomorphisms between resolutions. Hence $Lg^*=L\\varphi^*\\circ g^{-1}$ is a well-defined exact functor $D(\\mathcal O_S)\\to D(\\mathcal O_T)$.",
+   "text": "Take E to be the recorded tensor pullback. Its adjunction with pushforward makes it a left adjoint, so it preserves finite colimits and is additive. Its induced homotopy functor is triangulated by the additive mapping-cone construction, and so is its composite F with the target derived localization.",
    "uses": [
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Section Tag 06YI (label section-derived-pullback), Lemma Tag 06YJ (label lemma-derived-base-change), proof"
-   }
-  },
-  {
-   "text": "Let $\\mathcal P^\\bullet\\to E$ be a K-flat resolution [lem-pc-kflat-resolution]. By step 1, $g^{-1}\\mathcal P^\\bullet\\to g^{-1}E$ is a quasi-isomorphism. Apply [lem-pc-kflat-pullback-preservation] to the morphism of ringed spaces $(T,g^{-1}\\mathcal O_S)\\to(S,\\mathcal O_S)$ given by $g$ with adjoint ring map the identity of $g^{-1}\\mathcal O_S$: its pullback of $\\mathcal P^\\bullet$ is $g^{-1}\\mathcal P^\\bullet\\otimes_{g^{-1}\\mathcal O_S}g^{-1}\\mathcal O_S\\cong g^{-1}\\mathcal P^\\bullet$, so $g^{-1}\\mathcal P^\\bullet$ is K-flat over $g^{-1}\\mathcal O_S$. By step 2, $Lg^*E\\cong g^{-1}\\mathcal P^\\bullet\\otimes_{g^{-1}\\mathcal O_S}\\mathcal O_T$, which is the termwise module pullback $g^*\\mathcal P^\\bullet$ [def-pc-module-pullback], canonically and independently of $\\mathcal P^\\bullet$ by the canonical comparisons of step 2. In particular $g^*$ carries quasi-isomorphisms between K-flat complexes to quasi-isomorphisms.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-kflat-pullback-preservation",
     "def-pc-module-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Cohomology, Lemma Tag 06YJ (label lemma-derived-base-change), proof, citing Lemma Tag 06YC (label lemma-pullback-K-flat) and Lemma Tag 06YG"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Let C consist of homotopy-category objects represented by K-flat complexes. Every homotopy object is represented by a complex G. Choose a K-flat resolution P -> G; quotienting gives a quasi-isomorphism from an object of C. For any morphism between two objects of C, fullness of the homotopy quotient gives a representative complex map. If it is a quasi-isomorphism, tensor pullback preserves that property by the preservation theorem; the target derived localization therefore inverts it.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-tensor-pullback-kflat-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the resolving-class left-derived theorem to F and C. It supplies L, the universal counit, a shift-compatible triangulated structure, and a counit isomorphism on C. Every K-flat complex P represents an object of C, giving the required final clause. Combine these with I and the definitional object and map formulas for E.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-topological-inverse-image-stalk",
-  "def-pc-quasi-iso-modules",
-  "lem-pur-derived-change-of-rings",
+  "lem-pc-inverse-image-exact-kflat-resolution",
+  "def-pc-module-pullback",
   "lem-pc-kflat-resolution",
-  "lem-pc-kflat-pullback-preservation",
-  "def-pc-module-pullback"
+  "lem-pc-tensor-pullback-kflat-quasi-iso",
+  "lem-pur-left-derived-from-kflat-class"
  ],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma Tag 06YJ (lemma-derived-base-change), proof: direct resolving-class construction of LF"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -199,5 +195,15 @@
   "group": "K1",
   "result": "pass",
   "note": "g:T⟶S on Scheme.{u}; source/target schemeDerivedCategory S/T on the moduleRings carrier with sibling HasDerivedCategory.{w} binders; L pinned by IsLeftDerivedFunctor ε for E pinned (obj/map eqToHom) to tensorPullbackObj/Map g; CommShift+IsTriangulated; ε invertible on every IsKFlat P (Lg*E ≅ g*P); I pinned to inverseImageModule/Map, exact, carries K-flat resolutions to K-flat resolutions over inverseImageRing (06YC); def = Classical.choose as exists_tensorPullbackAdjunction; no source/Mathlib O_X-module derived pullback (source only étale upperStar.leftDerivedFunctor); recompiled on sheaf-dag c77be01c6 with #check"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T063519-L-3159337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

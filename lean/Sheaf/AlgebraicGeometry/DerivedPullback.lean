@@ -9,10 +9,11 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Topology.InverseImageStalk
+import Sheaf.AlgebraicGeometry.InverseImageExactKFlat
+import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Derived pullback of modules on schemes
 
@@ -99,7 +100,58 @@ theorem exists_derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
             ∀ P : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ,
               CochainComplex.IsKFlat (R := S.sheaf) P →
                 IsIso (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)) := by
-  sorry
+  obtain ⟨I, hI, hImap, hIadd, hIlim, hIcolim, hIres⟩ :=
+    exists_inverseImage_exact_kFlat g
+  let E : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
+      SheafOfModules.{u} (moduleRings T.toRingedSpace) := Scheme.Modules.tensorPullback g
+  obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction g
+  let : E.IsLeftAdjoint := ⟨_, ⟨adj⟩⟩
+  let : E.Additive := CategoryTheory.rightExactFunctor_le_additiveFunctor _ _ E
+    (by
+      rw [CategoryTheory.rightExactFunctor_iff]
+      infer_instance)
+  let A := SheafOfModules.{u} (moduleRings S.toRingedSpace)
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let F := E.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
+  have : F.IsTriangulated := by
+    dsimp only [F]
+    set_option synthInstance.maxSize 512 in infer_instance
+  let C : Set (HomotopyCategory A (ComplexShape.up ℤ)) :=
+    {X | ∃ P : CochainComplex A ℤ,
+      CochainComplex.IsKFlat (R := S.sheaf) P ∧ q.obj P = X}
+  have hres : ∀ X : HomotopyCategory A (ComplexShape.up ℤ),
+      ∃ (X' : HomotopyCategory A (ComplexShape.up ℤ)) (s : X' ⟶ X),
+        X' ∈ C ∧ HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s := by
+    intro X
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨P, s, hP, _, hs, _⟩ := CochainComplex.exists_isKFlatResolution (R := S.sheaf) G
+    refine ⟨q.obj P, q.map s, ⟨P, hP, rfl⟩, ?_⟩
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs
+  have hinv : ∀ (X X' : HomotopyCategory A (ComplexShape.up ℤ)) (s : X ⟶ X'),
+      X ∈ C → X' ∈ C → HomotopyCategory.quasiIso A (ComplexShape.up ℤ) s →
+        IsIso (F.map s) := by
+    intro X X' s hX hX' hs
+    obtain ⟨P, hP, rfl⟩ := hX
+    obtain ⟨P', hP', rfl⟩ := hX'
+    obtain ⟨s, rfl⟩ := q.map_surjective s
+    have hsq : QuasiIso s := (HomotopyCategory.quotient_map_mem_quasiIso_iff s).1 hs
+    have ht := tensorPullback_quasiIso_of_isKFlat g s hP hP' hsq
+    change IsIso (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map
+        ((E.mapHomologicalComplex (ComplexShape.up ℤ)).map s)))
+    exact Localization.inverts DerivedCategory.Qh
+      (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 ht)
+  obtain ⟨_, L, ε, hL, htri, hε⟩ :=
+    CategoryTheory.Functor.leftDerived_from_resolvingClass A
+      (schemeDerivedCategory T) F C hres hinv
+  refine ⟨L, I, hI, hImap, hIadd, hIlim, hIcolim, hIres,
+    E, (fun _ ↦ rfl), ?_, inferInstance, ε, hL, htri, ?_⟩
+  · intro M N a
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  · intro P hP
+    exact hε (q.obj P) ⟨P, hP, rfl⟩
 
 /-- The derived pullback `L g^* : D(𝒪_S) ⥤ D(𝒪_T)`.
 

@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-tensor-pullback-kflat-quasi-iso",
+ "kind": "lemma",
+ "status": "split",
+ "title": "Tensor pullback preserves quasi-isomorphisms between K-flat complexes",
+ "statement": "Let $g:T\\to S$ be a morphism of schemes [def-pc-scheme], and use the additive structure of its tensor pullback functor $g^*$ [def-pc-module-pullback]. Let $s:P^\\bullet\\to Q^\\bullet$ be a quasi-isomorphism of complexes of $\\mathcal O_S$-modules [def-pc-quasi-iso-modules], with $P^\\bullet$ and $Q^\\bullet$ K-flat [def-pc-kflat-complex]. Then the termwise tensor pullback map $g^*(s):g^*P^\\bullet\\to g^*Q^\\bullet$ is a quasi-isomorphism of complexes of $\\mathcal O_T$-modules. No flatness hypothesis on $g$ is needed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma Tag 06YJ (lemma-derived-base-change), proof; Lemma Tag 06YC (lemma-pullback-K-flat)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-quasi-iso-modules"
+ ],
+ "proof": [
+  {
+   "text": "Exact inverse image preserves s and sends P and Q to K-flat complexes over g^{-1} O_S. K-flatness follows by using the identity adjoint ring map on (T,g^{-1} O_S), as in the inverse-image resolution theorem.",
+   "uses": [
+    "lem-pc-inverse-image-exact-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the quasi-isomorphism preservation clause of derived change of rings to g^{-1} O_S -> O_T. For this application choose standard derived categories locally; no derived-category instance occurs in the statement being proved. The clause sends the inverse-image quasi-isomorphism between the two K-flat complexes to a quasi-isomorphism. Its natural object and map formulas identify the resulting termwise map with the recorded tensor pullback map, using the tensor-pullback definition.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-inverse-image-exact-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma Tag 06YJ (lemma-derived-base-change), proof; Lemma Tag 06YC (lemma-pullback-K-flat)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves is exact and tensor pullback preserves quasi-isomorphisms of K-flat complexes",
+   "results": "Service unavailable: Internal Server Error; 0 hits returned.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves of modules preserves K-flat resolutions",
+   "results": "8 hits about ordinary flat modules, including Module.Flat.iff_lTensor_preserves_shortComplex_exact; none states preservation of K-flat sheaf resolutions.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*(exact|KFlat)|tensorPullback.*(QuasiIso|Additive)",
+   "results": "msearch grep returned 0 hits. Local rg also found only etale/coefficient-specific exactness and the existing underived tensor pullback.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullback",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pc-derived-pullback",
+   "place": "original proof step 3, final assertion: tensor pullback carries quasi-isomorphisms between K-flat complexes to quasi-isomorphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackKFlatQuasiIso.lean",
+  "declaration": "AlgebraicGeometry.tensorPullback_quasiIso_of_isKFlat",
+  "statement": "theorem tensorPullback_quasiIso_of_isKFlat {T S : Scheme.{u}} (g : T ⟶ S) [(Scheme.Modules.tensorPullback g).Additive] {P Q : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ} (s : P ⟶ Q) (hP : CochainComplex.IsKFlat (R := S.sheaf) P) (hQ : CochainComplex.IsKFlat (R := S.sheaf) Q) (hs : QuasiIso s) : QuasiIso (((Scheme.Modules.tensorPullback g).mapHomologicalComplex (ComplexShape.up ℤ)).map s)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "mathlib_match": null,
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T063519-L-3159337",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T063519-L-3159337",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
