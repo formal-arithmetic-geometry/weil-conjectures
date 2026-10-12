@@ -38,7 +38,7 @@ Proof: apply the underlying point map to `pullback.condition`.
 (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
 theorem point_eq (z : ↥(Limits.pullback f g)) :
     f ((pullback.fst f g) z) = g ((pullback.snd f g) z) := by
-  sorry
+  exact congrArg (fun h : Limits.pullback f g ⟶ S ↦ h z) (pullback.condition (f := f) (g := g))
 
 /-- Base stalk ring. Source: Stacks, Tag 08IB
 (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
@@ -69,11 +69,99 @@ noncomputable abbrev rightAlgebra (z : ↥(Limits.pullback f g)) : Algebra (R f 
 
 attribute [local instance] leftAlgebra rightAlgebra
 
+/-- The projection stalk maps agree on the base stalk. Source: Stacks, Tag 01JX.
+Proof: expand the stalk maps of both composites in the pullback square; use
+`pullback.condition` to identify these composites and transport their base point.
+(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+theorem stalk_square (z : ↥(Limits.pullback f g)) :
+    f.stalkMap ((pullback.fst f g) z) ≫ (pullback.fst f g).stalkMap z =
+      (S.presheaf.stalkCongr (.of_eq (point_eq f g z))).hom ≫
+        g.stalkMap ((pullback.snd f g) z) ≫ (pullback.snd f g).stalkMap z := by
+  simpa only [Scheme.Hom.stalkMap_comp, Category.assoc] using
+    Scheme.Hom.stalkMap_congr_hom
+      (pullback.fst f g ≫ f) (pullback.snd f g ≫ g) (pullback.condition (f := f) (g := g)) z
+
+/-- The scalar structure on the pullback stalk is the composite left stalk map.
+Source: Stacks, Tag 08IB (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+noncomputable abbrev stalkAlgebra (z : ↥(Limits.pullback f g)) :
+    Algebra (R f g z) (C f g z) :=
+  (f.stalkMap ((pullback.fst f g) z) ≫ (pullback.fst f g).stalkMap z).hom.toAlgebra
+
+attribute [local instance] stalkAlgebra
+
+/-- The left projection stalk map as an algebra homomorphism. Source: Stacks,
+Tag 08IB (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+noncomputable def leftStalkHom (z : ↥(Limits.pullback f g)) :
+    A f g z →ₐ[R f g z] C f g z :=
+  { ((pullback.fst f g).stalkMap z).hom with commutes' := fun _ ↦ rfl }
+
+/-- The right projection respects base scalars. Source: Stacks, Tags 01JX and 08IB.
+Proof: evaluate the stalk square at a base-stalk element and reverse its equality.
+(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+theorem rightStalkHom_commutes (z : ↥(Limits.pullback f g)) (r : R f g z) :
+    ((pullback.snd f g).stalkMap z).hom (algebraMap (R f g z) (B f g z) r) =
+      algebraMap (R f g z) (C f g z) r := by
+  exact (congrArg (fun h ↦ h.hom r) (stalk_square f g z)).symm
+
+/-- The right projection stalk map as an algebra homomorphism. Source: Stacks,
+Tag 08IB (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+noncomputable def rightStalkHom (z : ↥(Limits.pullback f g)) :
+    B f g z →ₐ[R f g z] C f g z :=
+  { ((pullback.snd f g).stalkMap z).hom with
+    commutes' := rightStalkHom_commutes f g z }
+
+/-- The canonical tensor-to-stalk map constructed by the tensor-product lift.
+On a pure tensor it multiplies the images under the two projection stalk maps.
+Source: Stacks, Tag 08IB (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+noncomputable def tensorToStalk (z : ↥(Limits.pullback f g)) :
+    A f g z ⊗[R f g z] B f g z →+* C f g z :=
+  (Algebra.TensorProduct.lift (leftStalkHom f g z) (rightStalkHom f g z)
+    (fun _ _ ↦ Commute.all _ _)).toRingHom
+
+/-- The pure-tensor formula for the explicit comparison. Source: Stacks, Tag 08IB.
+Proof: the tensor-product lift is defined on pure tensors by multiplication.
+(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+theorem tensorToStalk_tmul (z : ↥(Limits.pullback f g)) (a : A f g z) (b : B f g z) :
+    tensorToStalk f g z (a ⊗ₜ[R f g z] b) =
+      ((pullback.fst f g).stalkMap z).hom a * ((pullback.snd f g).stalkMap z).hom b := by
+  rfl
+
+/-- The explicit comparison has the two prescribed restrictions.
+Source: Stacks, Tags 01JX and 08IB.
+Proof: evaluate the lift on a tensor with one factor equal to one, and apply
+preservation of one by the corresponding projection stalk map.
+(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+theorem tensorToStalk_spec (z : ↥(Limits.pullback f g)) :
+    (tensorToStalk f g z).comp
+        (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
+      ((pullback.fst f g).stalkMap z).hom ∧
+    (tensorToStalk f g z).comp Algebra.TensorProduct.includeRight.toRingHom =
+      ((pullback.snd f g).stalkMap z).hom := by
+  constructor
+  · ext a
+    simp [tensorToStalk, leftStalkHom, rightStalkHom]
+  · ext b
+    simp [tensorToStalk, leftStalkHom, rightStalkHom]
+
+/-- The restrictions uniquely characterize the explicit comparison.
+Source: Stacks, Tag 08IB.
+Proof: tensor-product ring homomorphisms agreeing on both inclusions agree on
+pure tensors, hence on all tensors by additivity.
+(blueprint: def-pc-pullback-stalk-tensor-comparison). -/
+theorem tensorToStalk_unique (z : ↥(Limits.pullback f g))
+    (φ : A f g z ⊗[R f g z] B f g z →+* C f g z)
+    (hleft : φ.comp (algebraMap (A f g z) (A f g z ⊗[R f g z] B f g z)) =
+      ((pullback.fst f g).stalkMap z).hom)
+    (hright : φ.comp Algebra.TensorProduct.includeRight.toRingHom =
+      ((pullback.snd f g).stalkMap z).hom) : φ = tensorToStalk f g z := by
+  apply Algebra.TensorProduct.ringHom_ext
+  · exact hleft.trans (tensorToStalk_spec f g z).1.symm
+  · exact hright.trans (tensorToStalk_spec f g z).2.symm
+
 /-- The tensor-to-stalk ring map exists with the two prescribed restrictions.
 Source: Stacks, Tag 01JX and Tag 08IB.
-Proof: the two projection stalk maps agree on R by `pullback.condition` and
-functoriality of stalk maps. The universal property of A tensor-over-R B gives
-one ring map; its restrictions are the two input maps.
+Proof: use the explicit tensor-product lift. On the left inclusion its formula
+is p(a)q(1)=p(a); on the right inclusion it is p(1)q(b)=q(b).
 (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
 theorem exists_tensorToStalk (z : ↥(Limits.pullback f g)) :
     ∃ φ : A f g z ⊗[R f g z] B f g z →+* C f g z,
@@ -81,13 +169,7 @@ theorem exists_tensorToStalk (z : ↥(Limits.pullback f g)) :
         ((pullback.fst f g).stalkMap z).hom ∧
       φ.comp Algebra.TensorProduct.includeRight.toRingHom =
         ((pullback.snd f g).stalkMap z).hom := by
-  sorry
-
-/-- The canonical tensor-to-stalk map, selected from its universal property.
-Source: Stacks, Tag 08IB (blueprint: def-pc-pullback-stalk-tensor-comparison). -/
-noncomputable def tensorToStalk (z : ↥(Limits.pullback f g)) :
-    A f g z ⊗[R f g z] B f g z →+* C f g z :=
-  Classical.choose (exists_tensorToStalk f g z)
+  exact ⟨tensorToStalk f g z, tensorToStalk_spec f g z⟩
 
 /-- The pullback stalk is an algebra over the tensor of the two original stalks.
 Source: Stacks, Tag 08IB (blueprint: def-pc-pullback-stalk-tensor-comparison). -/

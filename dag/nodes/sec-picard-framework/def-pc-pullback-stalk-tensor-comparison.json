@@ -18,9 +18,39 @@
   "document": "literature/stacks-project/perfect.tex",
   "place": "Tag 08IB, lemma-compare-base-change, affine derived-tensor comparison; module pullback stalks Tag 0098; K-flat pullback computation Tag 06YJ"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the point map at z to pullback.condition to obtain f(p(z))=g(q(z)). Expand Scheme.Hom.stalkMap_comp on both sides of Scheme.Hom.stalkMap_congr_hom for this equality of composites. This proves the transported base-stalk square.",
+   "uses": [
+    "def-pc-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Give C its R-algebra structure using the composite of the left base-stalk map and the left projection stalk map. Regard the left projection as an R-algebra homomorphism with scalar compatibility by reflexivity. Evaluate the stalk square at each r in R to prove scalar compatibility of the right projection.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define tensorToStalk by Algebra.TensorProduct.lift of these explicit algebra homomorphisms, with Commute.all since C is commutative, then take toRingHom. The lift formula sends a pure tensor a tensor b to p_z(a)q_z(b). Substituting one in either factor gives tensorToStalk_spec, and witnesses exists_tensorToStalk. Algebra.TensorProduct.ringHom_ext proves uniqueness from those restrictions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the explicitly constructed ring map for tensorAlgebra, stalkTensorComplex and cohomologyModel. The stalkwise Tor condition and IsComparisonIso retain their original definitions and signatures.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Z2",
+  "date": "2026-10-12",
+  "note": "Explicit construction and Lean verification of the canonical map described in Stacks Tags 01JX and 08IB, using Mathlib stalk functoriality and the tensor-product lift."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -91,8 +121,8 @@
   "file": "lean/Sheaf/AlgebraicGeometry/PullbackStalkTensorComparison.lean",
   "statement": "def IsComparisonIso [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings (Limits.pullback f g).toRingedSpace))] (P : schemeDerivedCategory X) (z : ↥(Limits.pullback f g)) : Prop",
   "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-11",
+  "by": "Z2",
+  "date": "2026-10-12",
   "existing": false,
   "declarations": [
    "AlgebraicGeometry.PullbackStalkTensor.point_eq",
@@ -102,15 +132,24 @@
    "AlgebraicGeometry.PullbackStalkTensor.C",
    "AlgebraicGeometry.PullbackStalkTensor.leftAlgebra",
    "AlgebraicGeometry.PullbackStalkTensor.rightAlgebra",
-   "AlgebraicGeometry.PullbackStalkTensor.exists_tensorToStalk",
+   "AlgebraicGeometry.PullbackStalkTensor.stalk_square",
+   "AlgebraicGeometry.PullbackStalkTensor.stalkAlgebra",
+   "AlgebraicGeometry.PullbackStalkTensor.leftStalkHom",
+   "AlgebraicGeometry.PullbackStalkTensor.rightStalkHom_commutes",
+   "AlgebraicGeometry.PullbackStalkTensor.rightStalkHom",
    "AlgebraicGeometry.PullbackStalkTensor.tensorToStalk",
+   "AlgebraicGeometry.PullbackStalkTensor.tensorToStalk_tmul",
+   "AlgebraicGeometry.PullbackStalkTensor.tensorToStalk_spec",
+   "AlgebraicGeometry.PullbackStalkTensor.tensorToStalk_unique",
+   "AlgebraicGeometry.PullbackStalkTensor.exists_tensorToStalk",
    "AlgebraicGeometry.PullbackStalkTensor.tensorAlgebra",
    "AlgebraicGeometry.PullbackStalkTensor.IsTorIndependent",
    "AlgebraicGeometry.PullbackStalkTensor.stalkComplex",
    "AlgebraicGeometry.PullbackStalkTensor.cohomologyModel",
    "AlgebraicGeometry.PullbackStalkTensor.stalkTensorComplex",
    "AlgebraicGeometry.PullbackStalkTensor.IsComparisonIso"
-  ]
+  ],
+  "note": "Definition repair: tensorToStalk is the explicit Algebra.TensorProduct.lift of the two projection stalk maps, not an existentially chosen map. Its restrictions and uniqueness are proved; all pre-existing signatures and the mathematical statement remain unchanged."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -127,5 +166,15 @@
   "group": "F1",
   "result": "pass",
   "note": "f,g arbitrary; X'=pullback f g, g_X=fst; IsTorIndependent over all x,t with f x=g t, Tor'_i i>0 over O_{S,f x}, B's algebra via stalkCongr (= E1 hRB); P : schemeDerivedCategory X, Scheme.IsPerfect; all z, all i:ℤ; R,A,B,C actual stalks; E->C tensorToStalk tied to fst/snd stalkMaps; c_i = baseDerivedTensorCohomologyModel.localizedComparison (E1 form); target via derivedPullback fst, ∀ e iso ⇒ equivalent to IsIso c_i; combined compile + #check ok, hTor not inferInstance"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-361aa",
+  "group": "Z2",
+  "result": "pass",
+  "landing": "20261012T135340-L-1703431",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, node record, change record, report, and direct importers match the stated proof and compile cleanly with allowed axioms."
  }
 }
