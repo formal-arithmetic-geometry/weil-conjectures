@@ -1,0 +1,137 @@
+{
+ "id": "lem-pc-open-free-ext-transport",
+ "kind": "statement",
+ "title": "Open-subscheme Ext transport compatible with scalar maps and base change",
+ "statement": "Let $R,S$ be commutative rings in the same universe, $S$ an $R$-algebra, $f:X\\to\\operatorname{Spec}R$ a scheme morphism, $M$ an $\\mathcal O_X$-module, and $j:W\\hookrightarrow X$ an arbitrary open subscheme. Use the base-change schemes, module pullbacks, underlying abelian sheaves, scalar representations and adjoint coefficient morphisms of [def-pc-flat-cohomology-comparison]. Put $p:X_S\\to X$, $p_W:W_S\\to W$, $M_W=j^*M$, $F=U(M)$, $F_W=U(M_W)$, $N=U(p^*M)$ and $N_W=U(p_W^*M_W)$. Let $G=p^{-1}$ and $G_W=p_W^{-1}$ on abelian sheaves, and let $\\varphi:G F\\to N$ and $\\varphi_W:G_W F_W\\to N_W$ be the adjoints of the module pullback units. Write $\\rho,\\rho_W$ for the $R$-scalar representations on $F,F_W$, and $\\tau,\\tau_W$ for the $S$-scalar representations on $N,N_W$, induced by the displayed scheme morphisms to the affine bases. Write $L_W$ for the free abelian sheaf represented by $W$ in $X$, and $L_{\\top,W}$ for the free sheaf represented by the top open of the scheme $W$ [lem-pc-free-mayer-vietoris-short-exact]. For all $n\\geq0$ there exist additive equivalences $t_n:\\operatorname{Ext}^n_W(L_{\\top,W},F_W)\\cong\\operatorname{Ext}^n_X(L_W,F)$ and $t_n':\\operatorname{Ext}^n_{W_S}(G_W L_{\\top,W},N_W)\\cong\\operatorname{Ext}^n_{X_S}(G L_W,N)$ such that, writing $x\\cdot\\alpha$ for Ext postcomposition with the degree-zero class of $\\alpha$, $t_n(x\\cdot\\rho_W(a))=t_n(x)\\cdot\\rho(a)$ for $a\\in R$, $t_n'(y\\cdot\\tau_W(b))=t_n'(y)\\cdot\\tau(b)$ for $b\\in S$, and $t_n'(G_W(x)\\cdot\\varphi_W)=G(t_n(x))\\cdot\\varphi$. No flatness, finiteness, nonemptiness or quasi-coherence hypothesis is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/00A7; https://stacks.math.columbia.edu/tag/01AK; https://stacks.math.columbia.edu/tag/04J0; https://stacks.math.columbia.edu/tag/01F7",
+  "place": "Open-extension adjunction and exactness (00A7, 01AK); localization of a ringed-site morphism (04J0); derived functoriality (01F7), specialized to open-subscheme Ext adjunction and the cartesian scalar-extension square."
+ },
+ "stmt_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact open-extension adjunction [lem-weil-pbc-zariski-extension-by-zero-adjunction, lem-weil-pbc-zariski-extension-by-zero-exact], transported between the localized open site and the opens of the open subscheme. The free sheaf L_W of [lem-pc-free-mayer-vietoris-short-exact] is j_! L_top(W), because both represent sections on W by the free/forgetful and sheafification adjunctions. Restriction identifies the underlying coefficient of j^*M with F|W. The Ext adjunction therefore gives t_n from Ext on W to Ext from L_W on X. Postcomposition naturality identifies restriction of each R-scalar and proves the first equation.",
+   "uses": [
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "lem-weil-pbc-zariski-extension-by-zero-exact",
+    "lem-pc-free-mayer-vietoris-short-exact",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let p:X_S→X and p_W:W_S→W be the projections defined in [def-pc-flat-cohomology-comparison]. The cartesian base-change square of j identifies W_S with the preimage open of W in X_S. Restriction commutes with direct image in this square (Stacks 04J0). Taking left adjoints identifies p^-1 j_! with j_S! p_W^-1, with the comparison determined by their units. Composition of module pullbacks identifies j_S^* p^*M with p_W^*j^*M. Applying the exact open-extension Ext adjunction on X_S gives t_n′. Naturality for S-scalar coefficient morphisms gives the second equation.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "lem-weil-pbc-zariski-extension-by-zero-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The units of the pullback/pushforward module adjunctions restrict to each other under the cartesian coefficient comparison. Their abelian adjoints, the displayed coefficient morphisms φ and φ_W of [def-pc-flat-cohomology-comparison], consequently commute with that comparison. Compute t_n and t_n′ by the Ext adjunction: apply exact extension by zero to an Ext class, then postcompose with the counit, and transport the representing free sheaf and coefficient isomorphisms. The base-change isomorphism of left adjoints intertwines their counits by uniqueness of mates. Functoriality of Ext under exact functors and associativity of Ext composition give the third equation. This is a statement entirely about Ext; no cohomology-to-Ext comparison is used. Empty opens and zero coefficients have zero Ext groups, and for the top open the constructions reduce to identity transport up to the canonical scheme isomorphisms.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison",
+    "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+    "lem-weil-pbc-zariski-extension-by-zero-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-free-mayer-vietoris-short-exact",
+  "lem-weil-pbc-zariski-extension-by-zero-adjunction",
+  "lem-weil-pbc-zariski-extension-by-zero-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 00A7, 01AK, 04J0, 01F7",
+  "place": "Open-extension derived adjunction and its cartesian inverse-image mate, expanded from the open free Ext comparison plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext from free abelian sheaf represented by an open equals cohomology of restricted sheaf",
+   "results": "Sheaf.H and cohomologyPresheaf; InjectiveResolution.extAddEquivCohomologyClass; no open-subscheme transport or inverse-image compatibility.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.extAddEquiv",
+   "results": "0 hits; unknown identifier in Mathlib search. The source library has the generic exact-adjunction Ext equivalence, but not this open-subscheme cartesian specialization.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "extAddEquiv|extensionByZero|openFreeExtComparison",
+   "results": "Generic Adjunction.extAddEquiv in the source Ext/MapBijective module; current open/global comparison and free complex; no compatible cartesian open transport.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext adjunction for restriction to an open subset and extension by zero compatible with inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtComparison",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cohomology-mayer-vietoris-ext-presentation",
+   "place": "single-open Ext presentation: derived open-extension adjunction and cartesian compatibility, after the global top-open presentation",
+   "via": [
+    "lem-pc-open-free-ext-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/MayerVietorisOpenExtTransport.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.H.openFreeExtTransport",
+  "statement": "theorem H.openFreeExtTransport (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :\n    let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M\n    let G := invImage (baseChangeFst (S := S) f)\n    let N := (SheafOfModules.toSheaf (baseChangedScheme (S := S) f).ringCatSheaf).obj\n      (baseChangedModule (S := S) f M)\n    let φ := coeff (baseChangeFst (S := S) f) (baseChangeUnit (S := S) f M)\n    let ρ := (scalarRep M).comp (((Scheme.ΓSpecIso (.of R)).inv ≫ f.appTop).hom)\n    let τ := (scalarRep (baseChangedModule (S := S) f M)).comp\n      (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) f).appTop).hom)\n    let MW := (pullback W.ι).obj M\n    let FW := (SheafOfModules.toSheaf W.toScheme.ringCatSheaf).obj MW\n    let GW := invImage (baseChangeFst (S := S) (W.ι ≫ f))\n    let NW := (SheafOfModules.toSheaf\n      (baseChangedScheme (S := S) (W.ι ≫ f)).ringCatSheaf).obj\n      (baseChangedModule (S := S) (W.ι ≫ f) MW)\n    let φW := coeff (baseChangeFst (S := S) (W.ι ≫ f))\n      (baseChangeUnit (S := S) (W.ι ≫ f) MW)\n    let ρW := (scalarRep MW).comp\n      (((Scheme.ΓSpecIso (.of R)).inv ≫ (W.ι ≫ f).appTop).hom)\n    let τW := (scalarRep (baseChangedModule (S := S) (W.ι ≫ f) MW)).comp\n      (((Scheme.ΓSpecIso (.of S)).inv ≫ (baseChangeSnd (S := S) (W.ι ≫ f)).appTop).hom)\n    ∃ (t : ∀ n, Ext (H.openFreeSheaf (⊤ : W.toScheme.Opens)) FW n ≃+\n        Ext (H.openFreeSheaf W) F n)\n      (t' : ∀ n, Ext (GW.obj (H.openFreeSheaf (⊤ : W.toScheme.Opens))) NW n ≃+\n        Ext (G.obj (H.openFreeSheaf W)) N n),\n      (∀ n a x, t n (x.comp (Ext.mk₀ (ρW a)) (add_zero n)) =\n        (t n x).comp (Ext.mk₀ (ρ a)) (add_zero n)) ∧\n      (∀ n a x, t' n (x.comp (Ext.mk₀ (τW a)) (add_zero n)) =\n        (t' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧\n      (∀ n x, t' n ((x.mapExactFunctor GW).comp (Ext.mk₀ φW) (add_zero n)) =\n        ((t n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T163611-L-2784205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T163611-L-2784205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

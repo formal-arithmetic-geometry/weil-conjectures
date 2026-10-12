@@ -5,6 +5,8 @@ Authors: SHEAF group W2
 -/
 module
 public import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
+import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisGlobalExtComparison
+import Sheaf.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTransport
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 /-! # Free abelian sheaves for a two-open cover
 
@@ -55,6 +57,23 @@ theorem H.openFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.
       (∀ n a x, e n (a • x) = (e n x).comp (Ext.mk₀ (ρ a)) (add_zero n)) ∧
       (∀ n a x, e' n (a • x) = (e' n x).comp (Ext.mk₀ (τ a)) (add_zero n)) ∧
       (∀ n x, e' n (H.baseChangeLinear (S := S) (W.ι ≫ f) ((pullback W.ι).obj M) n x) =
-        ((e n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) := by sorry
+        ((e n x).mapExactFunctor G).comp (Ext.mk₀ φ) (add_zero n)) := by
+  obtain ⟨e, e', he, he', hb⟩ :=
+    H.globalFreeExtComparison (S := S) (W.ι ≫ f) ((pullback W.ι).obj M)
+  obtain ⟨t, t', ht, ht', htb⟩ := H.openFreeExtTransport (S := S) f M W
+  refine ⟨fun n ↦ (e n).trans (t n), fun n ↦ (e' n).trans (t' n), ?_, ?_, ?_⟩
+  · intro n a x
+    change t n (e n (a • x)) = _
+    rw [he, ht]
+    rfl
+  · intro n a x
+    change t' n (e' n (a • x)) = _
+    rw [he', ht']
+    rfl
+  · intro n x
+    change t' n (e' n (H.baseChangeLinear (S := S) (W.ι ≫ f)
+      ((pullback W.ι).obj M) n x)) = _
+    rw [hb, htb]
+    rfl
 
 end AlgebraicGeometry.Scheme.Modules

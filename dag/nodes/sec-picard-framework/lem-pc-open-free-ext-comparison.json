@@ -13,22 +13,36 @@
  ],
  "proof": [
   {
-   "text": "The sheafification of the free abelian presheaf on the represented open\nrepresents sections on that open by the free/forgetful and sheafification\nadjunctions. Restriction and extension by zero for an open immersion are exact\nadjoint functors. Their derived adjunction identifies Ext from this free sheaf\nwith cohomology of the restricted coefficient sheaf. For the top open this is\nalso the usual constant-integer-sheaf definition of global cohomology. Naturality\nin coefficients identifies scalar multiplication with Ext postcomposition.\nInverse image carries the represented free sheaf to the free sheaf on the\npreimage open: under inverse-image adjunction both represent sections of direct\nimage on the original open. Cartesian open-subscheme isomorphisms and composition\nof module pullback identify its coefficients with the displayed base-changed\nmodule. Apply the same derived adjunction on the base-changed scheme. Its\ncoefficient naturality gives the second scalar equation. Its naturality under\ninverse image and the adjoint coefficient morphism identifies the comparison with\nH.baseChangeLinear, whose definition uses this same constant-sheaf comparison and\ncoefficient map. This proves the last equation. Empty opens and zero coefficients\ngive zero groups and require no additional hypotheses.",
+   "text": "Apply [lem-pc-global-free-ext-comparison] on the open subscheme W with structure map W.ι ≫ f and module (pullback W.ι).obj M. This supplies e_n and e_n′ from the two cohomology terms into Ext from the top-open free sheaf of W and its inverse image, together with their scalar and base-change equations.",
    "uses": [
-    "def-pc-flat-cohomology-comparison",
-    "lem-pc-free-mayer-vietoris-short-exact"
+    "lem-pc-global-free-ext-comparison"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use [lem-pc-open-free-ext-transport] to obtain additive equivalences t_n and t_n′ transporting these Ext groups to Ext from the represented open W in X and its inverse image in X_S. The transport theorem only compares Ext groups and their maps; it does not identify any cohomology term with Ext.",
+   "uses": [
+    "lem-pc-open-free-ext-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the required equivalences to be e_n.trans t_n and e_n′.trans t_n′. For the R-scalar equation first rewrite by the source scalar equation for e_n, then by the scalar postcomposition equation for t_n. Do the same with e_n′ and t_n′ for the S-scalar equation. For base change first rewrite by the equation for e_n′, then by the cartesian Ext transport equation. Each remaining expression is definitionally the desired composition. These are exactly the three Lean rewrites in the delivered proof; there are no partial-proof sorries.",
+   "uses": [
+    "lem-pc-global-free-ext-comparison",
+    "lem-pc-open-free-ext-transport"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-flat-cohomology-comparison",
-  "lem-pc-free-mayer-vietoris-short-exact"
+  "lem-pc-global-free-ext-comparison",
+  "lem-pc-open-free-ext-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/01EB",
-  "place": "Expansion of free-sheaf Ext argument and Section 01F7"
+  "document": "Stacks Project, Tags 01EB, 00A7, 01AK, 04J0, 01F7",
+  "place": "C1: specialize the existing global free-sheaf Ext comparison to W and compose with open-extension/cartesian Ext transport; all three compatibility equations combined in Lean."
  },
  "mathlib_searches": [
   {
@@ -104,9 +118,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T135331-L-1698936",
+  "landing": "20261012T163611-L-2784205",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
