@@ -20,40 +20,36 @@
  ],
  "proof": [
   {
-   "text": "Let $N=\\ker(\\phi)\\subseteq F$. By exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], for every geometric point $\\bar s$ the sequence $0\\to N_{\\bar s}\\to F_{\\bar s}\\to G_{\\bar s}$ is exact; in particular $N_{\\bar\\eta}=0$ and each $N_{\\bar s}\\to F_{\\bar s}$ is injective. Suppose $N\\neq0$. Then $N\\to0$ is not an isomorphism, so by [lemma-weil-pbc-geometric-stalk-conservative] there is a geometric point $\\bar s$ with $N_{\\bar s}\\neq0$. Since $F$ is locally constant as an abelian sheaf [def-weil-pbc-etale-sheaves], there are an etale $V\\to S$ in the covering, an abelian group $M$ and an isomorphism $F|_V\\cong\\underline M$ [def-weil-pbc-constant-sheaf] whose image contains the image of $\\bar s$; since $V\\times_S\\operatorname{Spec}\\Omega$ is a nonempty scheme etale over the algebraically closed field $\\Omega$, it has an $\\Omega$-point, i.e. $\\bar s$ lifts to a geometric point $\\bar v$ of $V$. (Elementary: every pointed etale neighbourhood $(U,\\bar u)$ of $\\bar s$ is refined by $(U\\times_SV,(\\bar u,\\bar v))$, which lies over $V$; so by cofinality in the colimit of [def-weil-pbc-geometric-stalks] the stalk of $F|_V$ at $\\bar v$ is $F_{\\bar s}$, and likewise for $N$, and the same holds at every geometric point of $V$.) Choose a pointed etale neighbourhood $(U,\\bar u)$ of $\\bar v$ in $V$ and $\\sigma\\in N(U)$ with nonzero germ; its image $\\tau\\in F(U)$ has nonzero germ in $F_{\\bar s}$. By [lem-weil-pbc-constant-sheaf-geometric-stalk] applied on $V$ at $\\bar v$, transported along $F|_V\\cong\\underline M$, this germ is the germ of $\\iota_V(m)$ for a unique $m\\in M$, and $m\\neq0$ because $\\iota_V(0)=0$. Two elements of a filtered colimit that agree are already equal at some stage, so after replacing $(U,\\bar u)$ by a smaller pointed etale neighbourhood $(W,\\bar w)$ over $V$ we have $\\sigma\\in N(W)$ whose image in $F(W)$ corresponds to $\\iota_V(m)|_W$, $m\\neq0$. In particular $W$ is nonempty.",
+   "text": "It suffices by Abelian.mono_of_kernel_ι_eq_zero to show kernel.ι φ=0. If this inclusion were nonzero, apply the local nonzero-germ theorem to N=kernel φ, F, and ψ=kernel.ι φ. Obtain a nonempty etale neighbourhood U and a section s of the kernel whose image has nonzero germ at every geometric point with a lift to U.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "lem-weil-pbc-locally-constant-nonzero-germs"
    ],
    "elementary": false
   },
   {
-   "text": "Etale morphisms are flat and locally of finite presentation, so by [lem-weil-pbc-flat-lfp-open] the image of $W\\to S$ is a nonempty open of $S$; as $S$ is irreducible it contains $\\eta$. Hence $W\\times_S\\operatorname{Spec}\\Omega_{\\bar\\eta}$ is a nonempty scheme etale over an algebraically closed field and has a rational point, i.e. a geometric point $\\bar w'$ of $W$ lying over $\\bar\\eta$. Then $(W,\\bar w')$ is a pointed etale neighbourhood of $\\bar\\eta$ [def-weil-pbc-geometric-stalks], so the germ of $\\sigma$ there lies in $N_{\\bar\\eta}=0$, and therefore the germ of its image in $F_{\\bar\\eta}$ is $0$. On the other hand, by the cofinality remark of the previous step applied at the image $\\bar v'$ of $\\bar w'$ in $V$, $F_{\\bar\\eta}$ is the stalk of $F|_V\\cong\\underline M$ at $\\bar v'$, and there the germ of $\\iota_V(m)$ is the image of $m\\neq0$ under the isomorphism $M\\to\\underline M_{\\bar v'}$ of [lem-weil-pbc-constant-sheaf-geometric-stalk], hence nonzero. This contradiction shows $N=0$, so $\\phi$ is a monomorphism.",
+   "text": "The image of U.hom is open by Mathlib UniversallyOpen.of_flat and Scheme.Hom.isOpenMap, since an etale map is flat and locally of finite presentation. The image is nonempty, so IsGenericPoint.mem_open_set_iff shows it contains η. Choose w over η. Mathlib Scheme.pointSmallEtaleFiberObjToPreimage_surjective applied to barη and w gives a pointed lift t∈(pointSmallEtale barη).fiber.obj U.",
    "uses": [
     "lem-weil-pbc-flat-lfp-open",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Applying the generic stalk functor to kernel.condition gives stalk(kernel.ι φ)≫stalk(φ)=0. Cancel the monic stalk(φ) to conclude stalk(kernel.ι φ)=0. Naturality of toPresheafFiber then makes the germ of the image of s equal to zero. This contradicts the nonzero germ assertion at Ω,barη,t. Hence kernel.ι φ=0 and φ is mono. This only uses preservation of zero morphisms, not a kernel comparison or full exactness of stalks.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-flat-lfp-open",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact"
+  "lem-weil-pbc-locally-constant-nonzero-germs"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-lisse-generic-kernel.md",
-  "place": "## Proof"
+  "place": "Proof steps 1–2, reduced via locally nonzero sections and cancellation of the generic stalk map"
  },
  "mathlib_searches": [
   {
@@ -157,5 +153,15 @@
   "group": "K1",
   "result": "fix",
   "note": "S nonempty irreducible (hX,hne), generic point eta (IsGenericPoint univ), geometric point over eta (Omega alg. closed, barη default = η), F,G abelian etale sheaves (Sheaf smallEtaleTopology AddCommGrpCat.{u+1}, def-weil-pbc-abelian-etale-sheaves), F locally constant = recorded def-weil-pbc-etale-sheaves IsLocallyConstantEtaleSheafOfSets of the underlying set sheaf (FIX: was source IsLocallyConstantSheaf of def-constructible-locally-constant, not a stmt_dep, H4; G1 faa2456ba form), phi_etabar injective = Mono of sheafFiber.map (AddCommGrpCat), conclusion Mono phi; theorem true in the set-sheaf reading (compare germs of s and 0 in the constant set M)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T044759-L-2042909",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
