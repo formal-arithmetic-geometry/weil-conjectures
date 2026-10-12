@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Local lifting of units along reduction
@@ -24,6 +24,56 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
+
+-- A surjective map detects the nonvanishing locus of a global function.
+private lemma isUnit_of_surjective_appTop {T V : Scheme.{u}} (g : T ⟶ V)
+    [Surjective g] (a : Γ(V, ⊤)) (ha : IsUnit (g.appTop a)) : IsUnit a := by
+  apply isUnit_of_basicOpen_eq_top
+  apply TopologicalSpace.Opens.ext
+  apply Set.preimage_injective.mpr g.surjective
+  change (g ⁻¹ᵁ V.basicOpen a : Set T) = (g ⁻¹ᵁ ⊤ : Set T)
+  rw [Scheme.preimage_basicOpen_top, Scheme.basicOpen_of_isUnit _ ha]
+  rfl
+
+-- On an affine target a closed immersion is surjective on functions; a unit lift
+-- remains a unit because the immersion is surjective on points.
+private lemma surjective_units_appTop {T V : Scheme.{u}} (g : T ⟶ V)
+    [IsClosedImmersion g] [Surjective g] [IsAffine V] :
+    Function.Surjective (Units.map g.appTop.hom.toMonoidHom) := by
+  intro b
+  obtain ⟨a, ha⟩ := (IsClosedImmersion.isAffine_surjective_of_isAffine g).2 (b : Γ(T, ⊤))
+  have hu : IsUnit a := isUnit_of_surjective_appTop g a (ha ▸ b.isUnit)
+  refine ⟨hu.unit, ?_⟩
+  apply Units.ext
+  change g.appTop (hu.unit : Γ(V, ⊤)) = (b : Γ(T, ⊤))
+  rw [hu.unit_spec, ha]
+
+-- Apply affine unit lifting after base change on an affine open cover of each
+-- etale object. This proves local surjectivity without identifying its nilradical.
+private lemma locallySurjective_gmSheafToLowerStar_of_thickening
+    {T X : Scheme.{u}} (i : T ⟶ X) [IsClosedImmersion i] [Surjective i] :
+    Sheaf.IsLocallySurjective (gmSheafToLowerStarGmSheaf i) where
+  imageSieve_mem {U} s := by
+    let V (j : U.left.affineCover.I₀) : X.Etale :=
+      .mk (U.left.affineCover.f j ≫ U.hom)
+    let g (j : U.left.affineCover.I₀) : V j ⟶ U :=
+      MorphismProperty.Over.homMk (U.left.affineCover.f j) rfl
+    refine GrothendieckTopology.superset_covering _ ?_
+      ((ofArrows_mem_smallEtaleTopology_iff g).2 U.left.affineCover.iUnion_range)
+    rw [Sieve.ofArrows, Sieve.generate_le_iff]
+    rintro _ _ ⟨j⟩
+    let t := ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj T.gmSheaf).obj.map
+      (g j).op s
+    have : IsAffine (V j).left := by
+      change IsAffine (U.left.affineCover.X j)
+      infer_instance
+    obtain ⟨a, ha⟩ := surjective_units_appTop (V := (V j).left)
+      (Limits.pullback.fst (V j).hom i)
+      (Additive.toMul t.down)
+    refine ⟨⟨Additive.ofMul a⟩, ?_⟩
+    apply ULift.ext
+    apply Additive.toMul.injective
+    exact ha
 
 /-- The comparison from pulled-back units to units on the reduction is an epimorphism.
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/
@@ -44,6 +94,16 @@ The transpose of the preceding epimorphism is i^*G_m,X -> G_m,X_red, so it too i
 For empty or already reduced X the same reasoning applies, with zero ideal. -/
 theorem epi_upperStarGmSheafToGmSheaf_reduction (X : Scheme.{u}) :
     Epi (upperStarGmSheafToGmSheaf X.nilradical.subschemeι) := by
-  sorry
+  have : Surjective X.nilradical.subschemeι :=
+    (AlgebraicGeometry.reduction_isReduced_isClosedImmersion_isSurjective_isUniversalHomeomorphism
+      X).2.2.1
+  have : IsUniversalHomeomorphism X.nilradical.subschemeι := {}
+  have := Etale.isEquivalence_lowerStar AddCommGrpCat.{u + 1} X.nilradical.subschemeι
+  have := Etale.isEquivalence_upperStar AddCommGrpCat.{u + 1} X.nilradical.subschemeι
+  have := locallySurjective_gmSheafToLowerStar_of_thickening X.nilradical.subschemeι
+  have := Sheaf.epi_of_isLocallySurjective (gmSheafToLowerStarGmSheaf
+    X.nilradical.subschemeι)
+  rw [upperStarGmSheafToGmSheaf, Adjunction.homEquiv_counit]
+  infer_instance
 
 end AlgebraicGeometry.Scheme

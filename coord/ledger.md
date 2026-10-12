@@ -7077,3 +7077,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/U1/WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech (stage 3; reviewer PASS; first push; landing 20261012T085346-L-42442 (interface); batch 20261012T085205; modules 4; new nodes 3)
 - 08:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.ConstructibleCurveAnnihilator (stage 3; reviewer PASS; first push; landing 20261012T085346-L-42550 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Curve.PrimeCoefficientConstructibilityTransfer (stage 3; reviewer PASS; first push; landing 20261012T085347-L-42660 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/U2/Sheaf.AlgebraicGeometry.Curve.ReductionUnitsEpi (stage 3; reviewer PASS; first push; landing 20261012T085347-L-42788 (proof); batch 20261012T085205; modules 1; new nodes 0)
