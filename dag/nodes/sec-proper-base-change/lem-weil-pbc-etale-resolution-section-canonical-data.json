@@ -12,14 +12,14 @@
  ],
  "proof": [
   {
-   "text": "Use the constant-sheaf/sections adjunction and evaluation at 1 in each resolution term. Its naturality identifies cocycles and boundaries, and the injective-resolution Ext equivalence sends the class represented by f to extMk f. This gives the normalized global comparison in every degree.",
+   "text": "Apply the proved private represented_resolution lemma to evaluation at the terminal etale object, represented by the constant integer sheaf through the constant-sheaf adjunction and evaluation at 1. The helper maps cycles by extMk, proves that its kernel is precisely the boundaries using extMk_eq_zero_iff in positive degrees and the vanishing degree minus one in degree zero, and descends along the cokernel homology projection. extMk_surjective proves surjectivity. Thus the resulting additive equivalence has the required value on every representing cocycle.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the sheafification/free/Yoneda sections equivalence at every open W in each term; it commutes with differentials. The same Ext computation gives the section homology to free-representable Ext comparison. Compose with the independently constructed bijective open-object cohomology map; its values on cocycles are the required normalized values.",
+   "text": "Apply the same represented_resolution lemma to evaluation at each open etale object, represented by the free abelian sheaf using sectionsEquiv and sectionsEquiv_naturality. Compose its additive equivalence with AddEquiv.ofBijective of etaleOpenObjectCohomologyMap using etaleOpenObjectCohomologyMap_bijective. The open cocycle formula follows by the helper normalization and application of this independently defined map. Assemble the degreewise equivalences and the two formulas into ResolutionSectionCanonicalComparison.",
    "uses": [
     "def-weil-pbc-etale-open-comparison-data",
     "lem-weil-pbc-etale-open-object-cohomology-map-bijective"
@@ -35,7 +35,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0A50, sections of an injective resolution; Tag 03F3 (2), localization; Read the corresponding Stacks tag pages; cocycle expansion of the parent proof, written by W3."
+  "place": "Tags 0A50 and 03F3; resolution computation via Mathlib InjectiveResolution.extMk, extMk_eq_zero_iff, extMk_surjective and ShortComplex.descHomology. Lean quotient argument written by T2."
  },
  "mathlib_searches": [
   {
@@ -117,11 +117,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-2f41c",
-  "group": "W3",
+  "reviewer": "X-e6c74",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T194154-L-469615",
+  "landing": "20261012T223418-L-1641583",
   "kind": "interface",
-  "note": "independent Codex review: Matched Lean signatures, cocycle normalization, six identities, DAG records, change record and repaired second reading. All six modules compile cleanly; direct importer EtaleResolutionSectionHomology and its importer EtaleMayerVietorisSectionComparison compile. Original caller fails exactly as reported; adaptation preserves signatures and changes only necessary lines. Axioms are standard plus sorryAx from the three documented obligations. Targets unchanged."
+  "note": "independent Codex review: Matched the unchanged theorem signature and normalized comparison fields with the node, proof dependencies, node diff, change record, report and earlier return repairs. Delivery and direct importer Sheaf.AlgebraicGeometry.EtaleResolutionSectionHomology compile cleanly against the delivered module; both private helpers and the public theorem use only propext, Classical.choice and Quot.sound. Targets unchanged; no remaining sorry, unused import or unit-route bypass found."
  }
 }
