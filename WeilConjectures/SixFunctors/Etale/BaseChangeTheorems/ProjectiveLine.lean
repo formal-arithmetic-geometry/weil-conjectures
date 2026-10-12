@@ -22,7 +22,7 @@ arbitrary proper morphism by a projective one.
 
 Both halves are stated here and combined into
 `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_isProper`, from which
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` of
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology` of
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper` is derived.
 
 ## The proof of the projective-line case
@@ -57,7 +57,8 @@ disposes of `π`.
 ## Prerequisites not yet formalised
 
 The reduction is stated without a noetherian hypothesis, matching
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper`. The Chow factorisation available in
+`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`.
+The Chow factorisation available in
 this repository, `AlgebraicGeometry.ChowModification.nonempty_data` together with
 `AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpace`, assumes a
 noetherian base. Closing the gap is the blueprint's `lemma:weil-pbc-chow-factorization`,
