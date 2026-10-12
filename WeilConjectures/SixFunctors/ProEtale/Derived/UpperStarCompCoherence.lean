@@ -507,7 +507,8 @@ lemma leftDerivedUpperStarComp_cocycle_aux {Φ P Q R S T : X ⟶ X} (e₁ : S = 
   simp only [leftDerivedUpperStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp,
     Functor.map_comp, Category.assoc]
   rw [leftDerivedUpperStarCongr_hom_naturality_assoc,
-    leftDerivedUpperStarComp_hom_app_congr_left_assoc, leftDerivedUpperStarCongr_hom_app_trans_assoc,
+    leftDerivedUpperStarComp_hom_app_congr_left_assoc,
+    leftDerivedUpperStarCongr_hom_app_trans_assoc,
     leftDerivedUpperStarComp_hom_naturality_assoc, leftDerivedUpperStarComp_assoc_app_assoc,
     leftDerivedUpperStarCongr_hom_app_trans_assoc,
     leftDerivedUpperStarCongr_hom_app_proof e₁

@@ -237,6 +237,37 @@ end Correspondence
 
 namespace GeometricOperations
 
+variable [DerivedBraiding A] (G : GeometricOperations A s)
+
+section TraceMap
+
+/-- The adjunction `Lf^* ⊣ Rf_*` restricted to the categories `Dᵇctf`, for a proper morphism
+`f` of geometric schemes. -/
+noncomputable def upperStarLowerStarCtfAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (hf : IsGeometricHom s f) [IsProper f] :
+    G.upperStarCtf f hf ⊣ G.lowerStarCtf f hf :=
+  (derivedUpperStarLowerStarAdjunction A f).restrictFullyFaithful
+    (DerivedCategory.constructibleFiniteTor A Y).fullyFaithfulι
+    (DerivedCategory.constructibleFiniteTor A X).fullyFaithfulι (Iso.refl _) (Iso.refl _)
+
+variable {F C X Z : Scheme.{u}} {i : F ⟶ C} {d : F ⟶ X} {c : C ⟶ Z} {δ : X ⟶ Z}
+  (sq : IsPullback i d c δ) (hc : IsGeometricHom s c) (hδ : IsGeometricHom s δ)
+  (hd : IsGeometricHom s d) (hi : IsGeometricHom s i) [HasCompactification c]
+  [HasCompactification d] [IsProper δ] [IsProper i]
+
+/-- The right-adjoint form `Rc^! Rδ_* ≃ Ri_* Rd^!` on `Dᵇctf` of `!`-base change along a
+Cartesian square with `δ` and `i` proper: the conjugate of the inverse of the base change
+`Lδ^* Rc_! ≃ Rd_! Li^*` along the composite adjunctions
+`Rc_! ⋙ Lδ^* ⊣ Rδ_* ⋙ Rc^!` and `Li^* ⋙ Rd_! ⊣ Rd^! ⋙ Ri_*` (blueprint
+`thm-trf-fixed-point-base-change` (2), right-adjoint form, for the fixed square). -/
+noncomputable def baseChangeRightAdjoint :
+    G.lowerStarCtf δ hδ ⋙ G.upperShriekCtf c hc ≅ G.upperShriekCtf d hd ⋙ G.lowerStarCtf i hi :=
+  conjugateIsoEquiv ((G.exceptionalAdjunction c hc).comp (G.upperStarLowerStarCtfAdjunction δ hδ))
+    ((G.upperStarLowerStarCtfAdjunction i hi).comp (G.exceptionalAdjunction d hd))
+    (G.baseChange sq hc hδ hd hi).symm
+
+end TraceMap
+
 end GeometricOperations
 
 end AlgebraicGeometry.ProEtale

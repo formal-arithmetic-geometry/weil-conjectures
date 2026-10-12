@@ -2011,6 +2011,7 @@ public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Pairing
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.ProperPushforward
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.TraceClass
+public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.TraceMap
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
