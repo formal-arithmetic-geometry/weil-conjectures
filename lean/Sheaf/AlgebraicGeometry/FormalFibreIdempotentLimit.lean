@@ -6,7 +6,8 @@ Authors: SHEAF group S2
 module
 
 public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
-import Sheaf.AlgebraicGeometry.NilpotentBaseChangeIdempotents
+import Sheaf.AlgebraicGeometry.FormalFibreTransitionIdempotents
+import Mathlib.LinearAlgebra.Span.Basic
 
 /-! # Compatible lifting of formal-fibre idempotents
 
@@ -39,6 +40,42 @@ theorem formalFibre_idempotent_limit {X S : Scheme.{u}} (f : X ⟶ S) (s : S)
     (e : Γ(formalFibre f s 0, ⊤)) (he : IsIdempotentElem e) :
     ∃ v : ↥(limit (formalFibreSectionsSystem f s)),
       (limit.π (formalFibreSectionsSystem f s) (op 0)) v = e := by
-  sorry
+  classical
+  let R := AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk s))
+    (S.presheaf.stalk s)
+  let step (n : ℕ) (a : {a : Γ(formalFibre f s n, ⊤) // IsIdempotentElem a}) :
+      {a : Γ(formalFibre f s (n + 1), ⊤) // IsIdempotentElem a} :=
+    Classical.choose (formalFibreTransition_idempotents f s n a.val a.property)
+  have hstep (n : ℕ) (a : {a : Γ(formalFibre f s n, ⊤) // IsIdempotentElem a}) :
+      (formalFibreSectionsTransition f s n).hom (step n a).val = a.val :=
+    (Classical.choose_spec (formalFibreTransition_idempotents f s n a.val a.property)).1
+  let a : (n : ℕ) → {a : Γ(formalFibre f s n, ⊤) // IsIdempotentElem a} :=
+    fun n ↦ Nat.rec (motive := fun n ↦
+      {a : Γ(formalFibre f s n, ⊤) // IsIdempotentElem a}) ⟨e, he⟩ step n
+  let legs (n : ℕ) : ModuleCat.of R R ⟶ formalFibreSections f s n :=
+    ModuleCat.ofHom (X := ModuleCat.of R R) (Y := formalFibreSections f s n)
+      (LinearMap.toSpanSingleton R (formalFibreSections f s n) (a n).val)
+  let c : Cone (formalFibreSectionsSystem f s) :=
+    { pt := ModuleCat.of R R
+      π := NatTrans.ofOpSequence (F := (Functor.const ℕᵒᵖ).obj (ModuleCat.of R R))
+        (G := formalFibreSectionsSystem f s) legs (by
+          intro n
+          simp only [Functor.const_obj_map, formalFibreSectionsSystem,
+            Functor.ofOpSequence_map_homOfLE_succ]
+          change legs n = legs (n + 1) ≫ formalFibreSectionsTransition f s n
+          apply ModuleCat.hom_ext
+          apply LinearMap.ext
+          intro r
+          change r • (show formalFibreSections f s n from (a n).val) =
+            (formalFibreSectionsTransition f s n).hom
+              (r • (show formalFibreSections f s (n + 1) from (a (n + 1)).val))
+          rw [map_smul]
+          exact congrArg (fun x ↦ r • x) (hstep n (a n)).symm) }
+  refine ⟨(limit.lift (formalFibreSectionsSystem f s) c).hom 1, ?_⟩
+  have hπ := limit.lift_π c (op 0)
+  have hval := congrArg (fun q ↦ q.hom 1) hπ
+  exact hval.trans (by
+    change (1 : R) • (show formalFibreSections f s 0 from e) = e
+    exact one_smul R (show formalFibreSections f s 0 from e))
 
 end AlgebraicGeometry

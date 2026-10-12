@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-formal-fibre-transition-idempotents",
+ "kind": "statement",
+ "title": "Unique one-step lifting of formal-fibre idempotents",
+ "statement": "Let $f:X\\to S$ be any morphism of schemes, $s\\in S$, and $n\\in\\mathbb N$. Put $A=\\mathcal O_{S,s}$ and $\\mathfrak m=\\mathfrak m_s$, and use $X_n=\\operatorname{Spec}(A/\\mathfrak m^{n+1})\\times_S X$ and $j_n:X_n\\to X_{n+1}$ of [def-weil-pbc-formal-fibre-cohomology]. Every idempotent $e\\in\\Gamma(X_n,\\mathcal O_{X_n})$ has exactly one idempotent lift $e^{\\prime}\\in\\Gamma(X_{n+1},\\mathcal O_{X_{n+1}})$ satisfying $j_n^*(e^{\\prime})=e$. No properness, Noetherian or henselian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0G7X, infinitesimal-idempotent paragraph; Tags 09ZU, 04EX and 00EE"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formal-fibre-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For A and m as in the statement, in B=A/m^(n+2) the image J of m^(n+1) has square zero because 2(n+1) ≥ n+2. The quotient isomorphism B/J ≃ A/m^(n+1) identifies its quotient map with factorPow. Pullback pasting identifies the base change of X_(n+1) along Spec(B/J) → Spec(B) with X_n, and the projection with j_n.",
+   "uses": [
+    "def-weil-pbc-formal-fibre-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply nilpotent_baseChange_idempotents to X_(n+1) → Spec(B), J, N=2 and J^2=0. Transport the existence and uniqueness of idempotent lifts along the preceding pullback isomorphism. This also covers n=0, e=0, e=1 and empty fibres.",
+   "uses": [
+    "lem-weil-pbc-base-change-nilpotent-thickening-idempotents"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formal-fibre-cohomology",
+  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0G7X infinitesimal lifting, specialized to one transition using Tags 09ZU and 00EE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsIdempotentElem.*(lift|unique)|existsUnique_isIdempotent|ofOpSequence",
+   "results": "Found 0 hits: . No exact infinitesimal-fibre transition statement. The ring idempotent lemma assumes membership in the image and cannot establish scheme-global-section surjectivity.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique lifting of idempotent global sections across an infinitesimal fibre transition from level n to n+1",
+   "results": "Found 8 hits: Algebra.FormallyUnramified.lift_unique, Algebra.Extension.homInfinitesimal, Algebra.FormallyUnramified.ext, Algebra.FormallyUnramified.lift_unique', Algebra.FormallyUnramified.lift_unique_of_ringHom, Algebra.FormallyUnramified.ext_of_iInf, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit. No exact infinitesimal-fibre transition statement. The ring idempotent lemma assumes membership in the image and cannot establish scheme-global-section surjectivity.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, ∃! _, _",
+   "results": "Found 2 hits: PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen, existsUnique_isIdempotentElem_eq_of_ker_isNilpotent. No exact infinitesimal-fibre transition statement. The ring idempotent lemma assumes membership in the image and cannot establish scheme-global-section surjectivity.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "existsUnique_isIdempotent|[Ii]dempotent.*(thickening|[Ll]ift)",
+   "results": "Found 7 hits: Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Idempotents.lean, Mathlib/RingTheory/Etale/QuasiFinite.lean, Mathlib/CategoryTheory/Preadditive/Biproducts.lean. No exact infinitesimal-fibre transition statement. The ring idempotent lemma assumes membership in the image and cannot establish scheme-global-section surjectivity.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Idempotent sections lift uniquely along first order thickenings of schemes, including successive infinitesimal fibres",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FormalFibreIdempotentLimit",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Tag 0G7X Noetherian case, compatible idempotents on infinitesimal fibres; unique lifting across one successor transition",
+   "via": [
+    "lem-weil-pbc-formal-fibre-idempotent-limit",
+    "lem-weil-pbc-stein-fibre-idempotent-image-noetherian",
+    "lem-weil-pbc-stein-fibre-idempotent-image",
+    "lem-weil-pbc-stein-normalized-fibre-idempotent",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FormalFibreTransitionIdempotents",
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalFibreTransitionIdempotents.lean",
+  "declaration": "AlgebraicGeometry.formalFibreTransition_idempotents",
+  "statement": "theorem formalFibreTransition_idempotents {X S : Scheme.{u}} (f : X ⟶ S) (s : S) (n : ℕ) (e : Γ(formalFibre f s n, ⊤)) (he : IsIdempotentElem e) : ∃! e' : {a : Γ(formalFibre f s (n + 1), ⊤) // IsIdempotentElem a}, (formalFibreTransition f s n).appTop.hom e'.val = e",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T173828-L-3296351",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T173828-L-3296351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
