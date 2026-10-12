@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Cohomology.CupProduct
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DualityPairing
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 
@@ -42,6 +43,8 @@ The form `t` is obtained abstractly; it is not identified here with the residue 
   `k`-linear bijection `H⁰(X, Hom(ℱ, ω)) ≅ H¹(X, ℱ)^∨`, together with the other side
   `H¹(X, ℱ) ≅ H⁰(X, Hom(ℱ, ω))^∨` of the perfect pairing (the case `q = 0` of duality, applied
   to `ℱᵛ ⊗ ω`).
+- `AlgebraicGeometry.Scheme.exists_trace_perfect_cupPairing`: the same perfect pairing in the
+  cup-product form `H¹(ℱ) ⊗ H⁰(ℱᵛ ⊗ ω) → H¹(ℱ ⊗ ℱᵛ ⊗ ω) → H¹(ω) → k` of the blueprint.
 
 (blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`)
 -/
@@ -149,5 +152,46 @@ theorem exists_trace_bijective_dualPairingH :
     rfl
   rw [hflip, LinearMap.coe_comp]
   exact L.dualMap.bijective.comp (Module.evalEquiv k (ℱ.H 1)).bijective
+
+open MonoidalCategory in
+open scoped AlgebraicGeometry.Scheme.Modules in
+/-- **Serre duality on a curve as a perfect cup-product pairing.** Let `X` be a smooth proper
+curve over `k` with canonical module `ω = Ω¹_{X/k}`. There is a `k`-linear form
+`t : H¹(X, ω) → k` such that for every finite locally free `ℱ` the pairing
+```
+  H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) --∪--> H¹(X, ℱ ⊗ ℱᵛ ⊗ ω) --H¹(ev)--> H¹(X, ω) --t--> k
+```
+(`Modules.cupPairing`: cup product `Modules.cupH0`, evaluation `Modules.evalTensor`) is perfect:
+both `H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ)^∨` and `H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. This is
+`exists_trace_bijective_dualPairingH` transported along `ℱᵛ ⊗ ω ≅ Hom(ℱ, ω)`
+(`Modules.cupPairing_eq`). The form `t` is not identified with the residue trace.
+
+(blueprint: `sk-thm-picard-duality`, `thm-sc-serre-duality-curve`) -/
+theorem exists_trace_perfect_cupPairing :
+    ∃ t : Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1),
+      ∀ (ℱ : X.Modules), SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ →
+        Function.Bijective (Modules.cupPairing t ℱ) ∧
+          Function.Bijective (Modules.cupPairing t ℱ).flip := by
+  have := Hom.isInvertible_relativeDifferentials (X ↘ Spec (.of k))
+  have := Modules.IsInvertible.of_sheafOfModules (X ↘ Spec (.of k)).relativeDifferentials
+  obtain ⟨t, ht⟩ := exists_trace_bijective_dualPairingH (k := k) (X := X)
+  refine ⟨t, fun ℱ hℱ ↦ ?_⟩
+  obtain ⟨h₁, h₂⟩ := ht ℱ hℱ
+  let L : Modules.H (X := X) (ℱᵛ ⊗ (X ↘ Spec (.of k)).relativeDifferentials) 0 ≃ₗ[k]
+      Modules.H (X := X) (Modules.homObj ℱ (X ↘ Spec (.of k)).relativeDifferentials) 0 :=
+    LinearEquiv.ofBijective (Modules.H.mapLinearMap k
+      (Modules.dualTensorHom ℱ (X ↘ Spec (.of k)).relativeDifferentials) 0)
+      (Modules.H.mapLinearEquiv
+        (asIso (Modules.dualTensorHom ℱ (X ↘ Spec (.of k)).relativeDifferentials)) 0).bijective
+  have hc := Modules.cupPairing_eq t ℱ
+  refine ⟨?_, ?_⟩
+  · rw [hc, LinearMap.coe_comp]
+    exact h₁.comp L.bijective
+  · have hflip : (Modules.cupPairing t ℱ).flip =
+        L.dualMap.toLinearMap ∘ₗ (Modules.dualPairingH t ℱ).flip := by
+      rw [hc]
+      rfl
+    rw [hflip, LinearMap.coe_comp]
+    exact L.dualMap.bijective.comp h₂
 
 end AlgebraicGeometry.Scheme
