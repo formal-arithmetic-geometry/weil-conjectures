@@ -32,92 +32,37 @@
  ],
  "proof": [
   {
-   "text": "(Presentations and primes.) By [def-weil-pbc-finite-type-algebra] there are $n\\ge0$ and a surjective $k$-algebra homomorphism $\\alpha:P=k[x_1,\\dots,x_n]\\to S$ [def-weil-pbc-mv-polynomial-ring]; let $I=\\ker\\alpha$. By [lem-weil-pbc-polynomial-ring-field-regular-ring] $P$ is Noetherian, so $I=(f_1,\\dots,f_m)$ for some $f_1,\\dots,f_m\\in P$ [def-weil-pbc-noetherian-ring]. Let $P_K=K[x_1,\\dots,x_n]$ and $\\kappa:P\\to P_K$ the ring map applying $\\iota$ to the coefficients. By [lem-weil-pbc-presentation-base-change] (with $R=k$, $R'=K$, $A=S$, $\\pi=\\alpha$) the $K$-algebra map $\\alpha':P_K\\to S_K$, $x_i\\mapsto\\alpha(x_i)\\otimes1$, is surjective with kernel $I'=(\\kappa(f_1),\\dots,\\kappa(f_m))$. The ring maps $\\alpha'\\circ\\kappa$ and $j\\circ\\alpha:P\\to S_K$ agree on the constants ($c\\mapsto1\\otimes\\iota(c)=\\iota(c)\\cdot(1\\otimes1)$) and on every $x_i$, hence are equal [def-weil-pbc-mv-polynomial-ring]. Put $\\mathfrak q'=\\alpha^{-1}(\\mathfrak q)$, a prime of $P$ containing $I$, and $\\mathfrak q'_K=\\alpha'^{-1}(\\mathfrak q_K)$, a prime of $P_K$ containing $I'$. Then $\\kappa^{-1}(\\mathfrak q'_K)=(\\alpha'\\circ\\kappa)^{-1}(\\mathfrak q_K)=(j\\circ\\alpha)^{-1}(\\mathfrak q_K)=\\alpha^{-1}(j^{-1}(\\mathfrak q_K))=\\alpha^{-1}(\\mathfrak q)=\\mathfrak q'$, so $\\mathfrak q'_K$ lies over $\\mathfrak q'$ just as $\\mathfrak q_K$ lies over $\\mathfrak q$: this is the commutative square of the source, with vertical maps $\\kappa$ and $j$.",
+   "text": "Choose a surjective k-algebra map f from a polynomial ring in n variables, by Algebra.FiniteType.iff_quotient_mvPolynomial''. Apply the scalar-extension polynomial presentation height theorem to get a surjective map g over K and equality of cross sums of the four heights.",
    "uses": [
     "def-weil-pbc-finite-type-algebra",
     "def-weil-pbc-mv-polynomial-ring",
-    "lem-weil-pbc-polynomial-ring-field-regular-ring",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-presentation-base-change"
+    "lem-weil-pbc-polynomial-presentation-height-field-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, proof from line 28319), 'Choose a presentation S = k[x_1,...,x_n]/I. This gives a presentation K (x)_k S = K[x_1,...,x_n]/(K (x)_k I). Let q_K', resp. q' be the corresponding primes'"
-   }
+   "elementary": false
   },
   {
-   "text": "(The four rings are Noetherian and both vertical maps are flat.) $P$ and $P_K$ are Noetherian by [lem-weil-pbc-polynomial-ring-field-regular-ring] (over $k$, resp. $K$); $S\\cong P/I$ and $S_K\\cong P_K/I'$ (step 1) are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian] (with $R=P$, resp. $R=P_K$, and $n=0$). Since $\\iota:k\\to K$ is a ring homomorphism of fields, $K/k$ is a field extension [def-pc-field-extension]. By [lem-weil-pbc-field-extension-base-change-faithfully-flat] (with $D=S$) the map $j:S\\to S\\otimes_kK=S_K$ is faithfully flat, hence flat [def-weil-pbc-faithfully-flat-ring-map]. Likewise (with $D=P$) $\\epsilon:P\\to P\\otimes_kK$, $p\\mapsto p\\otimes1$, is flat. By [lem-weil-pbc-presentation-base-change] applied to $A=P$, $\\pi=\\mathrm{id}_P$, $m=0$, the $K$-algebra map $\\pi':P_K\\to P\\otimes_kK$, $x_i\\mapsto x_i\\otimes1$, is bijective, and $\\pi'\\circ\\kappa=\\epsilon$ (both ring maps send $c\\in k$ to $1\\otimes\\iota(c)=c\\otimes1$ and $x_i$ to $x_i\\otimes1$). So $\\kappa=\\pi'^{-1}\\circ\\epsilon$ makes $P_K$ a $P$-module isomorphic to $P\\otimes_kK$ through $\\pi'$, and $\\kappa$ is flat [def-weil-pbc-flat-ring-map] (the flatness condition is invariant under an isomorphism of $P$-modules). (The source localizes these flat maps at the primes; the height formula of step 4 is stated for the global flat maps and the primes, so no localization is needed here.)",
+   "text": "Apply the polynomial-quotient dimension formula to both surjections. For each surjection use quotientKerEquivOfSurjective, the induced homeomorphism of spectra, and RingEquiv.height_comap to transport the quotient formula to the codomain. A homeomorphism preserves local dimension by its bijection on open neighbourhoods and equality of their dimensions.",
    "uses": [
-    "lem-weil-pbc-polynomial-ring-field-regular-ring",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "def-pc-field-extension",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "def-weil-pbc-faithfully-flat-ring-map",
-    "lem-weil-pbc-presentation-base-change",
-    "def-weil-pbc-flat-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, proof from line 28319), 'Both vertical arrows are flat because they are localizations of the flat ring maps S -> S_K and k[x_1,...,x_n] -> K[x_1,...,x_n]'"
-   }
-  },
-  {
-   "text": "(The vertical maps have the same fibre rings.) Let $\\mathfrak q'P_K$ be the ideal of $P_K$ generated by $\\kappa(\\mathfrak q')$ and $\\mathfrak qS_K$ the ideal of $S_K$ generated by $j(\\mathfrak q)$. Since $\\alpha$ is surjective, $\\alpha(\\mathfrak q')=\\mathfrak q$, so $\\alpha'(\\mathfrak q'P_K)$, the ideal generated by $\\alpha'(\\kappa(\\mathfrak q'))=j(\\alpha(\\mathfrak q'))=j(\\mathfrak q)$ ($\\alpha'$ surjective, so the image of an ideal is an ideal and the image of the ideal generated by a set is the ideal generated by its image), equals $\\mathfrak qS_K$. Also $\\ker\\alpha'=I'\\subseteq\\mathfrak q'P_K$, as $I'$ is generated by the $\\kappa(f_j)$ with $f_j\\in I\\subseteq\\mathfrak q'$. Hence $\\alpha'^{-1}(\\mathfrak qS_K)=\\mathfrak q'P_K+\\ker\\alpha'=\\mathfrak q'P_K$, and $\\alpha'$ induces a ring isomorphism $\\bar\\alpha':P_K/\\mathfrak q'P_K\\to S_K/\\mathfrak qS_K$. Moreover $\\mathfrak q'P_K\\subseteq\\mathfrak q'_K$ (as $\\kappa(\\mathfrak q')\\subseteq\\mathfrak q'_K$ by step 1) and $\\mathfrak qS_K\\subseteq\\mathfrak q_K$ (as $j(\\mathfrak q)\\subseteq\\mathfrak q_K$), and $\\bar\\alpha'$ maps the prime $\\mathfrak q'_K/\\mathfrak q'P_K$ onto $\\alpha'(\\mathfrak q'_K)/\\mathfrak qS_K=\\mathfrak q_K/\\mathfrak qS_K$ ($\\alpha'(\\alpha'^{-1}(\\mathfrak q_K))=\\mathfrak q_K$ by surjectivity). A ring isomorphism carries chains of primes contained in a prime bijectively to chains contained in its image, so $\\operatorname{ht}(\\mathfrak q'_K/\\mathfrak q'P_K)=\\operatorname{ht}(\\mathfrak q_K/\\mathfrak qS_K)=:h$, heights computed in $P_K/\\mathfrak q'P_K$ and $S_K/\\mathfrak qS_K$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, proof from line 28319), 'Moreover, the vertical arrows have the same fibre rings'"
-   }
-  },
-  {
-   "text": "(Heights.) By [lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference] (over $k$ with $S=P/I$ via $\\alpha$, and over $K$ with $S_K=P_K/I'$ via $\\alpha'$) the heights $\\operatorname{ht}\\mathfrak q\\le\\operatorname{ht}\\mathfrak q'\\le n$ and $\\operatorname{ht}\\mathfrak q_K\\le\\operatorname{ht}\\mathfrak q'_K\\le n$ are finite. By [lem-weil-pbc-flat-height-formula], applied to the flat map $\\kappa:P\\to P_K$ of Noetherian rings with the prime $\\mathfrak q'_K$ over $\\mathfrak q'$ and to the flat map $j:S\\to S_K$ of Noetherian rings with the prime $\\mathfrak q_K$ over $\\mathfrak q$ (steps 1 and 2), $\\operatorname{ht}\\mathfrak q'_K=\\operatorname{ht}\\mathfrak q'+\\operatorname{ht}(\\mathfrak q'_K/\\mathfrak q'P_K)$ and $\\operatorname{ht}\\mathfrak q_K=\\operatorname{ht}\\mathfrak q+\\operatorname{ht}(\\mathfrak q_K/\\mathfrak qS_K)$. Both fibre terms equal $h$ (step 3), and $h\\le\\operatorname{ht}\\mathfrak q'_K\\le n$ is finite, so subtracting: $\\operatorname{ht}\\mathfrak q'-\\operatorname{ht}\\mathfrak q=\\operatorname{ht}\\mathfrak q'_K-\\operatorname{ht}\\mathfrak q_K$.",
-   "uses": [
-    "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
-    "lem-weil-pbc-flat-height-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, proof from line 28319), 'Hence, we see from Lemma 00ON (lemma-dimension-base-fibre-equals-total) that height(q') - height(q) = height(q_K') - height(q_K)'"
-   }
-  },
-  {
-   "text": "(Conclusion.) The isomorphism $P/I\\cong S$ induced by $\\alpha$ gives a homeomorphism $\\operatorname{Spec}S\\to\\operatorname{Spec}(P/I)$ [def-weil-affine-spectrum] sending $\\mathfrak q$ to $\\mathfrak q'/I$, and the dimension at a point [def-kun-topological-dimension-at-point] is preserved by homeomorphisms (open neighbourhoods and their Krull dimensions correspond); likewise for $\\alpha'$, $S_K$, $\\mathfrak q_K$ and $\\mathfrak q'_K/I'$. By [lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference] over $k$ and over $K$, $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=n-(\\operatorname{ht}\\mathfrak q'-\\operatorname{ht}\\mathfrak q)$ and $\\dim_{\\mathfrak q_K}(\\operatorname{Spec}S_K)=n-(\\operatorname{ht}\\mathfrak q'_K-\\operatorname{ht}\\mathfrak q_K)$. By step 4 the right-hand sides are equal, so $\\dim_{\\mathfrak q}(\\operatorname{Spec}S)=\\dim_{\\mathfrak q_K}(\\operatorname{Spec}S_K)$.",
-   "uses": [
-    "def-weil-affine-spectrum",
-    "def-kun-topological-dimension-at-point",
     "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, proof of Lemma Tag 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, proof from line 28319), the displayed chain n - dim_x X = dim_{x'} X' - dim_x X = height(q') - height(q) = height(q_K') - height(q_K) = dim_{x'_K} X'_K - dim_{x_K} X_K = n - dim_{x_K} X_K, by Lemma 00P2 (lemma-codimension) with dim_{x'} X' = n"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The formula supplies natural-number heights h,h' and H,H', bounded above by n. Cast the cross-sum equality to naturals. From h'+H=H'+h and the bounds, omega gives n-h'+h=n-H'+H. The two dimension identities now give the result.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-mv-polynomial-ring",
-  "lem-weil-pbc-polynomial-ring-field-regular-ring",
-  "def-weil-pbc-noetherian-ring",
-  "lem-weil-pbc-presentation-base-change",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "def-pc-field-extension",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference",
-  "lem-weil-pbc-flat-height-formula",
-  "def-weil-affine-spectrum",
-  "def-kun-topological-dimension-at-point"
+  "lem-weil-pbc-polynomial-presentation-height-field-extension",
+  "lem-weil-pbc-polynomial-quotient-dimension-at-point-height-difference"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 00P4 (label lemma-dimension-at-a-point-preserved-field-extension, line 28307), proof lines 28319-28365; tags 00ON (lemma-dimension-base-fibre-equals-total) and 00P2 (lemma-codimension) of the proof verified in stacks-project/tags/tags"
+  "place": "Algebra, Lemma Tag 00P4, proof lines 28319-28365; the Lean proof uses the presentation and the flat height formula of Tag 00ON"
  },
  "mathlib_searches": [
   {
@@ -244,5 +189,15 @@
   "group": "F1",
   "result": "pass",
   "note": "fields k,K + [Algebra k K]=iota; S CommRing+Algebra k S+[Algebra.FiniteType k S]; S_K = S ⊗[k] K (node's order); j = includeLeftRingHom s↦s⊗1; qK : Spec(.of (S⊗[k]K)) arbitrary prime; q = PrimeSpectrum.comap j qK; both sides recorded root topologicalKrullDimAt on Spec carriers (#check); conclusion dim_q Spec S = dim_qK Spec S_K; zero algebra vacuous, universes independent"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085243-L-16434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

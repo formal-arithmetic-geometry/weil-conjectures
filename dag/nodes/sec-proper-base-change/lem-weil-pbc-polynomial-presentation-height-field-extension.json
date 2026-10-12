@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-polynomial-presentation-height-field-extension",
+ "kind": "statement",
+ "title": "Height difference in a polynomial presentation after field extension",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7: essential-surjectivity paragraphs, dimension comparison in the smooth/local-complete-intersection argument; realized here by steps 1–4 of Tag 00P4",
+   "via": [
+    "lem-weil-pbc-dimension-at-point-field-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "statement": "Let k and K be fields, S a commutative k-algebra, and f : k[x_1,…,x_n] → S a surjective k-algebra map [def-weil-pbc-mv-polynomial-ring; def-weil-pbc-finite-type-algebra]. There exists a surjective ring map g : K[x_1,…,x_n] → S ⊗[k] K such that for every prime Q of S ⊗[k] K, with q its contraction to S, height(f⁻¹(q)) + height(Q) = height(g⁻¹(Q)) + height(q). The proof constructs g by scalar extension of f.",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finite-type-algebra"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00P4 (00P4), lines 28319–28327, using Tag 00ON"
+ },
+ "proof": [
+  {
+   "text": "Construct the base-changed polynomial map by the tensor-product map and the canonical polynomial/tensor-product ring equivalence. Right exactness gives surjectivity and identifies its kernel with the extension of the original kernel. The square commutes on coefficients and variables. Use Algebra.TensorProduct.map_surjective, MvPolynomial.algebraTensorAlgEquiv, and Algebra.TensorProduct.rTensor_ker directly; Algebra.Presentation.baseChange is not invoked.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two quotient rings by the extended prime ideals are isomorphic, carrying the induced primes to one another, so their heights agree by RingEquiv.height_map. Both vertical maps are flat and all rings are Noetherian; apply Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown to both maps and reassociate addition. Flatness is inferred from Module.Flat tensor-product stability over a field, via RingHom.flat_algebraMap_iff; faithful flatness is not needed. Noetherianity uses polynomial-ring instances, Algebra.FiniteType.isNoetherianRing, and isNoetherianRing_of_surjective.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, proof of Lemma Tag 00P4, lines 28319–28327 and Tag 00ON"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "polynomial presentation under scalar extension height difference of primes",
+   "results": "unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.height Ideal.comap Ideal.map",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "height.*(tensor|presentation)|flat.*height in Mathlib",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "heights of primes in a commutative square of flat ring maps with surjective horizontal maps and isomorphic fibre quotients",
+   "results": "Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown and Algebra.HasGoingDown.of_flat; no combined square theorem",
+   "date": "2026-10-12",
+   "verdict": "components used; no combined statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"height\", \"comap\"",
+   "results": "RingEquiv.height_comap and IsLocalization.height_comap; no combined statement",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PolynomialPresentationHeightFieldExtension",
+  "file": "lean/Sheaf/RingTheory/PolynomialPresentationHeightFieldExtension.lean",
+  "declaration": "AlgebraicGeometry.polynomial_presentation_height_field_extension",
+  "statement": "theorem polynomial_presentation_height_field_extension\n    {k : Type u} {K : Type v} {S : Type w} [Field k] [Field K] [CommRing S]\n    [Algebra k K] [Algebra k S] (n : ℕ)\n    (f : MvPolynomial (Fin n) k →ₐ[k] S) (hf : Function.Surjective f) :\n    ∃ g : MvPolynomial (Fin n) K →+* (S ⊗[k] K), Function.Surjective g ∧\n      ∀ Q : PrimeSpectrum (S ⊗[k] K),\n        let q := PrimeSpectrum.comap\n          (Algebra.TensorProduct.includeLeftRingHom (R := k) (A := S) (B := K)) Q\n        (q.asIdeal.comap f.toRingHom).height + Q.asIdeal.height =\n          (Q.asIdeal.comap g).height + q.asIdeal.height",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085243-L-16434",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T085243-L-16434",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
