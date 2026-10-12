@@ -8,8 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 
 /-! # Module sections after algebraically closed field extension
 
@@ -45,6 +44,61 @@ theorem isIso_globalSectionsUpperStarMap_algClosed_extension
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n)))) :
     IsIso (globalSectionsUpperStarMap
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod n)))
-      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) G) := by sorry
+      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) G) := by
+  let R := ULift.{u + 1} (ZMod n)
+  let p := pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let F := (sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} R))).obj G
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ p) (Type (u + 1))
+    (X.smallGrothendieckTopology @Etale)
+    ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).smallGrothendieckTopology
+      @Etale)
+  let H := (sheafCompose _ (forget (ModuleCat.{u + 1} R))).obj
+    ((p)^*[ModuleCat.{u + 1} R].obj G)
+  let c := (adj.homEquiv F H).symm
+    ((sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} R))).map
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G))
+  have : IsIso c := isIso_upperStar_forget_comparison R p G
+  let : X.Over (Spec (.of k)) := ⟨f⟩
+  have hb := etale_sections_base_field_extension k K X F
+  have hc : Function.Bijective (c.hom.app
+      (Opposite.op ((MorphismProperty.Over.pullback @Etale ⊤ p).obj (Scheme.Etale.mk (𝟙 X))))) :=
+    (isIso_iff_bijective _).mp (inferInstance)
+  have hfac := congrArg (fun a ↦ a.hom.app (Opposite.op (Scheme.Etale.mk (𝟙 X))))
+    ((adj.homEquiv F H).apply_symm_apply
+      ((sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} R))).map
+        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G)))
+  rw [Adjunction.homEquiv_unit] at hfac
+  change (adj.unit.app F).hom.app (Opposite.op (Scheme.Etale.mk (𝟙 X))) ≫
+    c.hom.app (Opposite.op ((MorphismProperty.Over.pullback @Etale ⊤ p).obj
+      (Scheme.Etale.mk (𝟙 X)))) =
+    (forget (ModuleCat.{u + 1} R)).map
+      (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G).hom.app
+        (Opposite.op (Scheme.Etale.mk (𝟙 X)))) at hfac
+  have hu : Function.Bijective
+      (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G).hom.app
+        (Opposite.op (Scheme.Etale.mk (𝟙 X)))) := by
+    change Function.Bijective ((forget (ModuleCat.{u + 1} R)).map
+      (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G).hom.app
+        (Opposite.op (Scheme.Etale.mk (𝟙 X)))))
+    rw [← hfac]
+    exact hc.comp hb
+  have : IsIso (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G).hom.app
+      (Opposite.op (Scheme.Etale.mk (𝟙 X)))) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr hu
+  unfold globalSectionsUpperStarMap
+  have ht : IsIso (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} R)).obj
+      (Opposite.op (⊤_ X.Etale))).map
+        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G)) := by
+    change IsIso (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G).hom.app
+      (Opposite.op (⊤_ X.Etale)))
+    let e := terminalIsoIsTerminal (MorphismProperty.Over.mkIdTerminal @Etale X)
+    let T := ((p)_*[ModuleCat.{u + 1} R].obj ((p)^*[ModuleCat.{u + 1} R].obj G)).obj
+    let α : G.obj ⟶ T := ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) p).unit.app G).hom
+    have he : IsIso (α.app (Opposite.op (⊤_ X.Etale)) ≫ T.map e.inv.op) := by
+      rw [← α.naturality]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (T.map e.inv.op)
+  infer_instance
 
 end AlgebraicGeometry.Etale

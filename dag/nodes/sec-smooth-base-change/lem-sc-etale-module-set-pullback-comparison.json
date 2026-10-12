@@ -1,0 +1,118 @@
+{
+ "id": "lem-sc-etale-module-set-pullback-comparison",
+ "kind": "statement",
+ "title": "Canonical module-to-set etale inverse-image comparison",
+ "statement": "Let $R$ be any ring, $g:X\\to Y$ any morphism of schemes, and $G$ a sheaf of $R$-modules on the small etale site of $Y$ [def-weil-pbc-inverse-image]. Let $U_X,U_Y$ forget module coefficients to sets. The canonical map $g^{-1}_{Set}(U_YG)\\to U_X(g^{-1}_{Mod}G)$, defined as the adjoint transpose of $U_Y(G\\to g_*g^{-1}_{Mod}G)$ using the set inverse-image adjunction, is an isomorphism.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03D3",
+  "place": "Module inverse-image adjunction; its concrete Kan-extension/sheafification compatibility, as used in lem-sc-algclosed-extension-module-sections proof step 2. Mathlib canonical comparison identities."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Base change is representably flat. Thus its opposite comma categories are filtered. Use preservation of filtered colimits by the module forgetful functor (shrinking the hom universe from u+1 to u) and pointwise Kan-extension preservation to construct lanCompIsoOfPreserves.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use sheafComposeNatIso for the module forgetful functor, which preserves sheafification. Compose its component with sheafification applied to the inverse of the Kan-extension comparison. Both are isomorphisms.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the units of the restricted Kan-extension/sheafification adjunctions. Naturality of the sheafification unit, sheafComposeNatTrans_fac and leftKanExtensionCompIsoOfPreserves_inv_fac show that the composite is the adjoint transpose of the forgotten module unit. Therefore that transpose is invertible.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03D3",
+  "place": "Module inverse-image adjunction; its concrete Kan-extension/sheafification compatibility, as used in lem-sc-algclosed-extension-module-sections proof step 2. Mathlib canonical comparison identities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The forgetful functor from module valued sheaves to sheaves of sets commutes with inverse image and its adjunction unit",
+   "results": "8 hits, primarily SheafOfModules sheafification comparisons; no exact comparison for the constructed Etale.upperStar.",
+   "date": "2026-10-12",
+   "verdict": "Use Mathlib Kan-extension and sheafification comparison APIs to prove the statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Forgetting module coefficients commutes with inverse image of sheaves on the small etale site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*forget|forget.*sheafPullback|sheafComposeNatTrans_fac|leftKanExtensionCompIsoOfPreserves_inv_fac",
+   "results": "10 hits, including canonical factorization identities in Mathlib.CategoryTheory.Sites.PreservesSheafification and Mathlib.CategoryTheory.Functor.KanExtension.Preserves.",
+   "date": "2026-10-12",
+   "verdict": "These APIs suffice for a complete proof; no exact existing etale comparison found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections",
+  "date": "2026-10-12",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-algebraically-closed-invariance",
+   "place": "General qcqs invariance input: coefficient-forgetting comparison for degree-zero sections",
+   "via": [
+    "lem-sc-algclosed-extension-module-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleSetPullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleSetPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_upperStar_forget_comparison",
+  "statement": "theorem isIso_upperStar_forget_comparison (R : Type (u + 1)) [Ring R]\n    {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :\n    IsIso (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1))\n      (Y.smallGrothendieckTopology (Q := @Etale) @Etale)\n      (X.smallGrothendieckTopology (Q := @Etale) @Etale)).homEquiv\n      ((sheafCompose Y.smallEtaleTopology (forget (ModuleCat.{u + 1} R))).obj G)\n      ((sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} R))).obj\n        ((g)^*[ModuleCat.{u + 1} R].obj G))).symm\n        ((sheafCompose Y.smallEtaleTopology (forget (ModuleCat.{u + 1} R))).map\n          ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).unit.app G)))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085214-L-3420",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T085214-L-3420",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
