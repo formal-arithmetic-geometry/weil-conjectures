@@ -41,6 +41,10 @@ that the pullback of cohomology classes along an étale morphism is the restrict
 ## Main statements
 
 - `AlgebraicGeometry.Etale.classesDieLocally_of_classesDieLocallyAb`: the comparison.
+- `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_forall_exists`: the
+  higher direct image `R^q h_* (Λ/dΛ)` vanishes as soon as every class of
+  `H^q(U ×_X Y, ℤ/e)`, for `e ∣ d` and `U` affine étale over `X`, dies on an étale cover of `U`
+  (blueprint `sbc-lem-higher-direct-image-presheaf`).
 -/
 
 @[expose] public section
@@ -73,7 +77,7 @@ lemma Etale.upperStarFreeSheafHomEquivSections_comp (W : X.Etale)
     Etale.upperStarFreeSheafHomEquivSections Λ h W C' (s ≫ π) =
       π.hom.app _ (Etale.upperStarFreeSheafHomEquivSections Λ h W C s) := by
   simp only [Etale.upperStarFreeSheafHomEquivSections, Equiv.trans_apply,
-    Adjunction.homEquiv_naturality_right, Etale.freeSheafHomEquiv_comp]
+    Adjunction.homEquiv_naturality_right]
   rfl
 
 lemma Etale.upperStarFreeSheafHomEquivSections_map {W W' : X.Etale} (g : W' ⟶ W)
@@ -605,6 +609,7 @@ noncomputable def Etale.cyclicFactorIncl [DecidableEq ι] :
   | .inl j => (AddMonoidHom.inl _ _).comp (Finsupp.singleAddHom j)
   | .inr i => (AddMonoidHom.inr _ _).comp (DirectSum.of (fun i ↦ ZMod (p i ^ e i)) i)
 
+omit [Fintype ι] in
 lemma Etale.cyclicFactorProj_cyclicFactorIncl [DecidableEq ι] (k : Fin n ⊕ ι)
     (z : ZMod (Etale.cyclicFactorOrder p e k)) :
     Etale.cyclicFactorProj p e k (Etale.cyclicFactorIncl p e k z) = z := by
@@ -663,7 +668,7 @@ lemma Etale.constantClassesDieLocally_of_addGroupFG {W : X.Etale} {q d : ℕ}
   · ext m
     change (∑ k, π k ≫ ι' k).hom m = m
     rw [show (∑ k, π k ≫ ι' k).hom = ∑ k, (π k ≫ ι' k).hom from
-      map_sum AddCommGrpCat.homAddEquiv _ _, AddMonoidHom.finset_sum_apply]
+      map_sum AddCommGrpCat.homAddEquiv _ _, AddMonoidHom.finsetSum_apply]
     change ∑ k, φ.symm (Etale.cyclicFactorIncl p e k (Etale.cyclicFactorProj p e k (φ m))) = m
     rw [← map_sum, Etale.sum_cyclicFactorIncl_cyclicFactorProj, AddEquiv.symm_apply_apply]
   · rw [← ZMod.natCast_eq_zero_iff, ← nsmul_one]
