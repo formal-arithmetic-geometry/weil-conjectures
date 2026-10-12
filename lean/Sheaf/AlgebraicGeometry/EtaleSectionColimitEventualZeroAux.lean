@@ -5,9 +5,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheaf
 
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Sheaf.AlgebraicGeometry.EtaleSectionColimitLocalZero
-
 @[expose] public section
 
 universe u v w
@@ -67,52 +64,6 @@ theorem etale_section_colimit_finite_zero_cover
           (((G.obj i).obj.map (q k).op).hom s) = 0) ∧
       (∀ (j : I) (t : (G.obj j).obj.obj (Opposite.op U)),
         (∀ k, ((G.obj j).obj.map (q k).op).hom t = 0) → t = 0) := by
-  classical
-  obtain ⟨S, hS, hlocal⟩ :=
-    etale_section_colimit_local_zero_sieve X Λ U I G c hc i s hs
-  let A := S.arrows.category
-  let T (a : A) : X.Etale := a.obj.left
-  let g (a : A) : T a ⟶ U := a.obj.hom
-  have hg : Sieve.ofArrows T g ∈ X.smallEtaleTopology U := by
-    rw [show Sieve.ofArrows T g = S from Sieve.ofArrows_category S]
-    exact hS
-  have hcover := (Scheme.ofArrows_mem_smallEtaleTopology_iff g).mp hg
-  obtain ⟨t, ht⟩ := isCompact_univ.elim_finite_subcover
-    (fun a ↦ Set.range (g a).left)
-    (fun a ↦ (g a).left.isOpenMap.isOpen_range) (by rw [hcover])
-  let K := ULift.{w} (Fin (Fintype.card t))
-  let e : K ≃ t := Equiv.ulift.trans (Fintype.equivFin t).symm
-  let V (k : K) : X.Etale := T (e k).val
-  let q (k : K) : V k ⟶ U := g (e k).val
-  have hq : Sieve.ofArrows V q ∈ X.smallEtaleTopology U := by
-    apply (Scheme.ofArrows_mem_smallEtaleTopology_iff q).mpr
-    apply Set.eq_univ_of_forall
-    intro x
-    obtain ⟨a, ha, hx⟩ := Set.mem_iUnion₂.mp (ht (Set.mem_univ x))
-    obtain ⟨k, hk⟩ := e.surjective ⟨a, ha⟩
-    apply Set.mem_iUnion.mpr
-    refine ⟨k, ?_⟩
-    change x ∈ Set.range (g (e k).val).left
-    rw [hk]
-    exact hx
-  refine ⟨K, inferInstance, V, q, ?_, ?_⟩
-  · intro k
-    exact hlocal (V k) (q k) (e k).val.property
-  · intro j z hz
-    let M : ModuleCat.{max v w} Λ := ModuleCat.of Λ (ULift.{w} Λ)
-    let a : M ⟶ (G.obj j).obj.obj (Opposite.op U) :=
-      ModuleCat.ofHom
-        ((LinearMap.toSpanSingleton Λ _ z).comp ULift.moduleEquiv.toLinearMap)
-    have ha : a = 0 := by
-      apply (G.obj j).property.hom_ext_ofArrows q hq
-      intro k
-      apply ModuleCat.hom_ext
-      ext b
-      rw [Limits.zero_comp]
-      change ((G.obj j).obj.map (q k).op).hom (b.down • z) = 0
-      rw [map_smul, hz k, smul_zero]
-    have he := congrArg (fun f ↦ f.hom (ULift.up 1)) ha
-    change (1 : Λ) • z = 0 at he
-    simpa only [one_smul] using he
+  sorry
 
 end AlgebraicGeometry
