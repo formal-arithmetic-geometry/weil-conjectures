@@ -1,0 +1,193 @@
+{
+ "id": "lem-weil-pbc-galois-finite-invariant-clopen-partition",
+ "kind": "statement",
+ "title": "A Galois clopen partition becomes invariant over a finite intermediate field",
+ "statement": "Let $k$ be a field and let $L/k$ be a Galois extension (separable algebraic [def-weil-pbc-separable-algebraic-extension] and normal); its degree may be infinite. Let $X$ be a scheme over $k$ with structure map $f$ [def-weil-scheme-over-base], and write $X_L=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$ [def-pc-base-change]. Let $U\\subseteq X_L$ be open and closed, with both $U$ and its complement nonempty. Then there is an intermediate subfield $k\\subseteq K\\subseteq L$ [def-pc-field-extension], finite-dimensional over $k$, and an open and closed subset $V\\subseteq (X_K)_L$, with both $V$ and its complement nonempty, such that every $\\sigma\\in\\operatorname{Aut}(L/K)$ preserves $V$ under the base-change action $\\operatorname{id}_{X_K}\\times\\operatorname{Spec}(\\sigma)$ [def-weil-affine-spectrum]. No quasi-compactness or quasi-separatedness assumption on $X$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 0389, proof paragraphs 2--5 (lines 959--1012), and the pullback identification in the last paragraph (lines 1012--1019); checked online at https://stacks.math.columbia.edu/tag/0389 on 2026-10-12"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Let p : X_L → X be the projection. For an affine open W of X, p⁻¹(W) is compact: Spec L → Spec k is quasi-compact since its source is affine and its target quasi-separated, and quasi-compactness is stable under base change [lem-weil-pbc-qcqs-morphism-permanence]. The quasi-compact morphism definition [def-weil-finite-type-morphism] gives compactness of the inverse image. The open subset A = p⁻¹(W) ∩ U is compact because U is closed [lem-weil-pbc-closed-in-quasi-compact]. Apply [lem-weil-pbc-galois-base-change-qc-open-descends] to A to obtain a finite intermediate field E such that every k-automorphism of L fixing E preserves A. The same declaration gives isomorphisms for the base-change action and its contravariant composition law; the pullback projection is fixed by that action.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "lem-weil-pbc-galois-base-change-qc-open-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, second paragraph (lines 959--970), using Lemma Tag 04KU"
+   }
+  },
+  {
+   "text": "Choose u in U and an affine open W₀ of X containing p(u). Set K = K_W₀, where the previous step gives the finite intermediate field. The subgroup H = Aut(L/K) preserves p⁻¹(W₀) intersected with U, which contains u. The complement Uᶜ is nonempty by hypothesis. No separable-closure property is used here.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, third paragraph (lines 971--983)"
+   }
+  },
+  {
+   "text": "($\\Leftarrow$), finiteness of the $H$-translates. Let $W$ be a quasi-compact open of $X$ and $A:=W_{L}\\cap\\bar U$, with $k_W$ as above. If $\\sigma,\\tau\\in H$ and $\\sigma^{-1},\\tau^{-1}$ agree on $k_W$, then $\\rho:=\\tau\\circ\\sigma^{-1}$ fixes $k_W$ pointwise (for $x\\in k_W$: $\\rho(x)=\\tau(\\sigma^{-1}(x))=\\tau(\\tau^{-1}(x))=x$), and $\\tau=\\rho\\circ\\sigma$ gives $\\tau_Y(A)=\\sigma_Y(\\rho_Y(A))=\\sigma_Y(A)$. The restrictions $\\sigma^{-1}|_{k_W}$ are $k$-algebra homomorphisms $k_W\\toL$, of which there are finitely many since $\\dim_kk_W<\\infty$ [lem-weil-pbc-finite-extension-finitely-many-embeddings]. Hence $\\{\\sigma_Y(A):\\sigma\\in H\\}$ and likewise $\\{\\sigma_Y(W_{L}\\cap\\bar V):\\sigma\\in H\\}$ are finite families. (The source phrases this as invariance under an open subgroup of the profinite Galois group.)",
+   "uses": [
+    "lem-weil-pbc-finite-extension-finitely-many-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fourth paragraph (lines 985--996: 'the union and intersection above are finite')"
+   }
+  },
+  {
+   "text": "Define V as the intersection of all H-translates of U on X_L. It is closed. On the inverse image of an affine open W of X, invariance of p under H shows that V intersects p⁻¹(W) in the intersection of the translates of p⁻¹(W) intersected with U. Those translates form a finite family by the preceding step, and every member is open. Hence this intersection is an open neighbourhood inside V of each of its points. Affine opens cover X, so V is open globally. This is the proved generic helper orbit_intersection: it uses the finite family of local translates rather than separately gluing U_W and V_W.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fourth paragraph (lines 985--998)"
+   }
+  },
+  {
+   "text": "Reindexing multiplication in H shows that V is H-invariant: a translate of a point in every translate of U is again in every translate of U; the converse follows by the inverse homeomorphism. Because p⁻¹(W₀) intersected with U is nonempty, H-invariant and contained in U, it is contained in every translate and hence in V. The identity translate shows V is contained in U, so its complement contains the original nonempty complement Uᶜ. This proves both nonemptiness assertions without quasi-compactness or quasi-separatedness of X.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fifth paragraph (lines 1000--1004, 'Verification omitted')"
+   }
+  },
+  {
+   "text": "No gluing hypothesis remains: the globally defined intersection V is clopen and nontrivial by the previous two steps. All of the local arguments used only affine opens of X, whose inverse images are compact because the field-spectrum projection is quasi-compact. Thus arbitrary, including non-quasi-compact, schemes are covered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389 (lemma-characterize-geometrically-disconnected), proof, lines 948--1020, fifth paragraph (lines 1004--1012)"
+   }
+  },
+  {
+   "text": "Pullback pasting identifies X_L with the iterated base change (X_K)_L. The two actions of an automorphism of L over K have the same two projections, hence agree by the pullback universal property. Transport the nontrivial invariant partition along this isomorphism. This uses only the pasting and action identification at the start of the original final step, and does not descend closed subsets or assert connectedness.",
+   "uses": [
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Varieties, Lemma Tag 0389, proof paragraphs 2--5 (lines 959--1012), and the pullback identification in the last paragraph (lines 1012--1019); checked online at https://stacks.math.columbia.edu/tag/0389 on 2026-10-12"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-galois-base-change-qc-open-descends",
+  "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-pc-fibre-product",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Varieties, Lemma Tag 0389, proof paragraphs 2--5 (lines 959--1012), and the pullback identification in the last paragraph (lines 1012--1019); checked online at https://stacks.math.columbia.edu/tag/0389 on 2026-10-12; R2 proves the construction in Lean using a global orbit intersection, with openness verified on affine opens."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois base change finite intermediate field invariant clopen subset",
+   "results": "Attempted twice through msearch.py; service returned Internal Server Error. No absence verdict inferred from this unavailable search.",
+   "date": "2026-10-12",
+   "verdict": null
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial clopen subset of a Galois base change gives a nontrivial clopen partition invariant over a finite intermediate field",
+   "results": "Krull topology and finite-intermediate-field fixing subgroups, and a clopen partition result for profinite spaces; none applies to a scheme with no quasi-compactness hypothesis. Loogle IsClopen, Field returned valuation subrings only.",
+   "date": "2026-10-12",
+   "verdict": "no matching declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*Galois|Galois.*clopen|invariant.*partition; blueprint_refs.py search invariant clopen; rg over lean/Sheaf, lean/WeilConjectures, Mathlib/AlgebraicGeometry and dag/nodes",
+   "results": "No invariant-partition declaration or blueprint node. The existing Tag 04KU node descends only quasi-compact opens and Tag 038B descends only already invariant closed subsets.",
+   "date": "2026-10-12",
+   "verdict": "no matching declaration found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest",
+  "date": "2026-10-12",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-henselian-idempotent-lifting",
+   "place": "Finite invariant clopen partition in steps 5--10 of the finite-separable connectedness test used in step 2 of henselian idempotent lifting; pullback identification at the start of step 11.",
+   "via": [
+    "lem-weil-pbc-geometrically-connected-finite-separable-test",
+    "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GaloisFiniteInvariantClopenPartition",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisFiniteInvariantClopenPartition.lean",
+  "declaration": "AlgebraicGeometry.exists_finite_invariant_clopen_partition",
+  "statement": "theorem exists_finite_invariant_clopen_partition\n    (k L : Type u) [Field k] [Field L] [Algebra k L] [IsGalois k L]\n    (X : Scheme.{u}) (f : X ⟶ Spec (.of k))\n    (U : Set ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap k L)))))\n    (hU : IsClopen U) (hne : U.Nonempty) (hne' : Uᶜ.Nonempty) :\n    ∃ K : IntermediateField k L, FiniteDimensional k K ∧\n      ∃ V : Set ↥(pullback\n          (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n          (Spec.map (CommRingCat.ofHom (algebraMap K L)))),\n        IsClopen V ∧ V.Nonempty ∧ Vᶜ.Nonempty ∧\n          ∀ σ : L ≃ₐ[K] L,\n            (baseChangeMap\n              (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))\n              (specAlgEquivOver σ)) '' V = V",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T151913-L-2290528",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T151913-L-2290528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
