@@ -22,12 +22,11 @@
  ],
  "proof": [
   {
-   "text": "*The finitely presented envelope.* Since $f$ is proper it is separated, quasi-compact, quasi-separated and of finite type [def-weil-proper-morphism]; as $S$ is quasi-compact and quasi-separated, so is $X$ [lem-weil-pbc-qcqs-morphism-permanence] (2). By Stacks Proposition 01ZJ [prop-nagata-finite-type-closed-in-fp] (the envelope of [def-nagata-finite-type-closed-in-fp]; Lean: Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation, closed) there are a scheme $Y$, a closed immersion $i:X\\to Y$ and a morphism $g:Y\\to S$ that is separated and of finite presentation with $g\\circ i=f$. Since $g$ is quasi-compact and quasi-separated and $S$ is quasi-compact and quasi-separated, $Y$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2).",
+   "text": "*The finitely presented envelope.* Since $f$ is proper it is separated, quasi-compact, quasi-separated and of finite type [def-weil-proper-morphism]; as $S$ is quasi-compact and quasi-separated, so is $X$ [lem-weil-pbc-qcqs-morphism-permanence] (2). By Stacks Proposition 01ZJ [prop-nagata-finite-type-closed-in-fp] (Lean: Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation, closed) there are a scheme $Y$, a closed immersion $i:X\\to Y$ and a morphism $g:Y\\to S$ that is separated and of finite presentation with $g\\circ i=f$. Since $g$ is quasi-compact and quasi-separated and $S$ is quasi-compact and quasi-separated, $Y$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence] (2).",
    "uses": [
     "def-weil-proper-morphism",
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "prop-nagata-finite-type-closed-in-fp",
-    "def-nagata-finite-type-closed-in-fp"
+    "prop-nagata-finite-type-closed-in-fp"
    ],
    "elementary": false,
    "source": {
@@ -50,13 +49,12 @@
    }
   },
   {
-   "text": "*$X$ as a limit of finitely presented closed subschemes of $Y$.* Since $Y$ is quasi-compact and quasi-separated and $i$ is a closed immersion, Stacks Lemma 09ZP [lemma-nagata-closed-subscheme-fp-system] (with the system of [def-nagata-closed-subscheme-fp-system]; Lean: Scheme.IdealSheafData.isLimitFgSubCone, closed) gives: let $\\mathcal I\\subseteq\\mathcal O_Y$ be the quasi-coherent ideal of $X$, $I$ the set of quasi-coherent subideals $\\mathcal I_\\alpha\\subseteq\\mathcal I$ of finite type ordered by inclusion (nonempty: it contains $0$; directed: $\\mathcal I_\\alpha+\\mathcal I_\\beta$ is of finite type), $X_\\alpha=V(\\mathcal I_\\alpha)\\subseteq Y$; then every $i_\\alpha:X_\\alpha\\to Y$ is a closed immersion of finite presentation, the transition morphisms $X_\\beta\\to X_\\alpha$ ($\\alpha\\le\\beta$, from $\\mathcal I_\\alpha\\subseteq\\mathcal I_\\beta$) and the morphisms $X\\to X_\\alpha$ (from $\\mathcal I_\\alpha\\subseteq\\mathcal I$) are closed immersions, and $X=\\varprojlim_\\alpha X_\\alpha$ in the category of schemes. Put $g_\\alpha=g\\circ i_\\alpha:X_\\alpha\\to S$. Then $g_\\alpha$ is of finite presentation [lem-weil-pbc-proper-fp-permanence] (d), separated and locally of finite type (closed immersions are proper (c), hence separated and of finite type, and (e)). Closed immersions are finite, hence affine [lem-weil-pbc-closed-immersion-finite], so the system has affine transition morphisms [lem-weil-pbc-limit-affine-transition].",
+   "text": "*$X$ as a limit of finitely presented closed subschemes of $Y$.* Since $Y$ is quasi-compact and quasi-separated and $i$ is a closed immersion, Stacks Lemma 09ZP [lemma-nagata-closed-subscheme-fp-system] (with the system of [def-nagata-closed-subscheme-fp-system]; Lean: Scheme.IdealSheafData.isLimitFgSubCone, closed) gives: let $\\mathcal I\\subseteq\\mathcal O_Y$ be the quasi-coherent ideal of $X$, $I$ the set of quasi-coherent subideals $\\mathcal I_\\alpha\\subseteq\\mathcal I$ of finite type ordered by inclusion (nonempty: it contains $0$; directed: $\\mathcal I_\\alpha+\\mathcal I_\\beta$ is of finite type), $X_\\alpha=V(\\mathcal I_\\alpha)\\subseteq Y$; then every $i_\\alpha:X_\\alpha\\to Y$ is a closed immersion of finite presentation, the transition morphisms $X_\\beta\\to X_\\alpha$ ($\\alpha\\le\\beta$, from $\\mathcal I_\\alpha\\subseteq\\mathcal I_\\beta$) and the morphisms $X\\to X_\\alpha$ (from $\\mathcal I_\\alpha\\subseteq\\mathcal I$) are closed immersions, and $X=\\varprojlim_\\alpha X_\\alpha$ in the category of schemes. Put $g_\\alpha=g\\circ i_\\alpha:X_\\alpha\\to S$. Then $g_\\alpha$ is of finite presentation [lem-weil-pbc-proper-fp-permanence] (d), separated and locally of finite type (closed immersions are proper (c), hence separated and of finite type, and (e)). Closed immersions are finite [lem-weil-pbc-closed-immersion-finite]. The limiting cone is the explicit fgSubCone with isLimitFgSubCone; no general affine-transition limit existence theorem is used.",
    "uses": [
     "lemma-nagata-closed-subscheme-fp-system",
     "def-nagata-closed-subscheme-fp-system",
     "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-limit-affine-transition"
+    "lem-weil-pbc-closed-immersion-finite"
    ],
    "elementary": false,
    "source": {
@@ -65,7 +63,7 @@
    }
   },
   {
-   "text": "*Inverse images in $Y'$.* Put $X'_\\alpha=Y'\\times_YX_\\alpha$ and $X'=Y'\\times_YX$ [def-pc-fibre-product] (the scheme-theoretic inverse images of $X_\\alpha$, $X$ in $Y'$), with projections $\\pi_\\alpha:X'_\\alpha\\to X_\\alpha$, $\\pi_X:X'\\to X$ and $e_\\alpha:X'_\\alpha\\to Y'$, $e:X'\\to Y'$. The morphisms $e_\\alpha$, $e$ are closed immersions (base changes of $i_\\alpha$, $i$) [lem-weil-pbc-proper-fp-permanence] (b). The transition morphisms $X'_\\beta\\to X'_\\alpha$ and the morphisms $X'\\to X'_\\alpha$ induced by $X_\\beta\\to X_\\alpha$, $X\\to X_\\alpha$ are closed immersions: $X'_\\beta=X'_\\alpha\\times_{X_\\alpha}X_\\beta$ and $X'=X'_\\alpha\\times_{X_\\alpha}X$ (pasting of fibre squares), so they are base changes of closed immersions (b). And $X'=\\varprojlim_\\alpha X'_\\alpha$: for every scheme $T$, $\\operatorname{Hom}(T,X')=\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\operatorname{Hom}(T,X)=\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\varprojlim_\\alpha\\operatorname{Hom}(T,X_\\alpha)=\\varprojlim_\\alpha\\bigl(\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\operatorname{Hom}(T,X_\\alpha)\\bigr)=\\varprojlim_\\alpha\\operatorname{Hom}(T,X'_\\alpha)$, naturally in $T$, where the third equality holds because limits of sets commute with limits and the index set $I$ is nonempty and directed, hence connected, so the constant factors $\\operatorname{Hom}(T,Y')$ and $\\operatorname{Hom}(T,Y)$ pass through $\\varprojlim_\\alpha$. By Yoneda $X'$ with the morphisms $X'\\to X'_\\alpha$ is the limit.",
+   "text": "*Inverse images in $Y'$.* Put $X'_\\alpha=Y'\\times_YX_\\alpha$ and $X'=Y'\\times_YX$ [def-pc-fibre-product] (the scheme-theoretic inverse images of $X_\\alpha$, $X$ in $Y'$), with projections $\\pi_\\alpha:X'_\\alpha\\to X_\\alpha$, $\\pi_X:X'\\to X$ and $e_\\alpha:X'_\\alpha\\to Y'$, $e:X'\\to Y'$. The morphisms $e_\\alpha$, $e$ are closed immersions (base changes of $i_\\alpha$, $i$) [lem-weil-pbc-proper-fp-permanence] (b). The transition morphisms $X'_\\beta\\to X'_\\alpha$ and the morphisms $X'\\to X'_\\alpha$ induced by $X_\\beta\\to X_\\alpha$, $X\\to X_\\alpha$ are closed immersions: $X'_\\beta=X'_\\alpha\\times_{X_\\alpha}X_\\beta$ and $X'=X'_\\alpha\\times_{X_\\alpha}X$ (pasting of fibre squares), so they are base changes of closed immersions (b). And $X'=\\varprojlim_\\alpha X'_\\alpha$: for every scheme $T$, $\\operatorname{Hom}(T,X')=\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\operatorname{Hom}(T,X)=\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\varprojlim_\\alpha\\operatorname{Hom}(T,X_\\alpha)=\\varprojlim_\\alpha\\bigl(\\operatorname{Hom}(T,Y')\\times_{\\operatorname{Hom}(T,Y)}\\operatorname{Hom}(T,X_\\alpha)\\bigr)=\\varprojlim_\\alpha\\operatorname{Hom}(T,X'_\\alpha)$, naturally in $T$, where the third equality holds because limits of sets commute with limits and the index set $I$ is nonempty and directed, hence connected, so the constant factors $\\operatorname{Hom}(T,Y')$ and $\\operatorname{Hom}(T,Y)$ pass through $\\varprojlim_\\alpha$. By Yoneda $X'$ with the morphisms $X'\\to X'_\\alpha$ is the limit. In Lean, construct the pullback diagram E, its cone d and the projection β to fgSubDiagram explicitly. Each cone-leg square is isPullback_pullback_map, so isLimitOfIsPullbackOfIsConnected applied to isLimitFgSubCone proves d is limiting. The directed nonempty index category is connected.",
    "uses": [
     "def-pc-fibre-product",
     "lem-weil-pbc-proper-fp-permanence"
@@ -126,7 +124,6 @@
   "def-weil-proper-morphism",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "prop-nagata-finite-type-closed-in-fp",
-  "def-nagata-finite-type-closed-in-fp",
   "def-weil-pbc-scheme-conventions",
   "lem-weil-pbc-chow-finite-type",
   "def-nagata-projective-space-base-change",
@@ -135,7 +132,6 @@
   "def-nagata-closed-subscheme-fp-system",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-limit-affine-transition",
   "def-pc-fibre-product",
   "lem-weil-pbc-proper-over-separated",
   "lem-weil-pbc-proper-immersion-closed",
@@ -147,7 +143,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Lemma 09ZR, last sentence"
+  "place": "Lemma 09ZR, proof; Lean assembly by M1, 2026-10-12, using the explicit finite-subideal cone and connected pullback limits"
  },
  "status": "split",
  "created": {
@@ -211,10 +207,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T053922-L-2631044",
-  "kind": "interface",
+  "landing": "20261012T085304-L-25263",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

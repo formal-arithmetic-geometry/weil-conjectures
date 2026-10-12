@@ -6923,3 +6923,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/M1/Sheaf.AlgebraicGeometry.AffineOpenDirectedRingSystem (stage 3; reviewer PASS; first push; landing 20261012T085303-L-24907 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne (stage 3; reviewer PASS; first push; landing 20261012T085303-L-25047 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:53 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ImmersionFiberDegreeOne (stage 3; reviewer PASS; first push; landing 20261012T085304-L-25160 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/M1/Sheaf.AlgebraicGeometry.ProperFinitePresentationClosedLimitEnvelope (stage 3; reviewer PASS; first push; landing 20261012T085304-L-25263 (proof); batch 20261012T085205; modules 1; new nodes 0)
