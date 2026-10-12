@@ -24,18 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Regard $E$ and $F$ as $k$-algebras through their field-extension structures and put $T=E\\otimes_kF$. The canonical factor maps $E\\to T$ and $F\\to T$ are injective by [lem-weil-common-extension-fields-tensor-inclusions].",
-   "uses": [
-    "lem-weil-common-extension-fields-tensor-inclusions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma 9.2, tag 0H7K (construction via tensor product)"
-   }
-  },
-  {
-   "text": "Since $E$ and $F$ are fields, they are domains, so [lem-weil-common-extension-fields-tensor-nontrivial] gives that $T$ is nontrivial.",
+   "text": "Put $T=E\\otimes_k F$. The algebra maps from $k$ into the fields $E$ and $F$ are injective, and the fields are domains. Apply [lem-weil-common-extension-fields-tensor-nontrivial] (Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_isDomain) to make $T$ nontrivial; injectivity of the tensor-factor inclusions is not needed.",
    "uses": [
     "lem-weil-common-extension-fields-tensor-nontrivial"
    ],
@@ -46,7 +35,7 @@
    }
   },
   {
-   "text": "Choose a maximal ideal $I$ of $T$ using [lem-weil-common-extension-fields-maximal-ideal], and set $M=T/I$. By [lem-weil-common-extension-fields-quotient-field], $M$ is a field.",
+   "text": "Choose a maximal ideal $I$ of $T$ by [lem-weil-common-extension-fields-maximal-ideal], implemented directly with Ideal.exists_maximal, and set $M=T/I$. Install the field structure Ideal.Quotient.field I by [lem-weil-common-extension-fields-quotient-field]; the quotient carries its canonical $k$-algebra structure.",
    "uses": [
     "lem-weil-common-extension-fields-maximal-ideal",
     "lem-weil-common-extension-fields-quotient-field"
@@ -58,7 +47,7 @@
    }
   },
   {
-   "text": "The quotient map $T\\to M$ composed with the two canonical factor maps gives $k$-algebra homomorphisms $E\\to M$ and $F\\to M$. Their kernels are ideals of the fields $E$ and $F$; each map sends $1$ to $1$, so its kernel is not the whole ring and therefore is zero. Hence these maps are $k$-field embeddings.",
+   "text": "Compose Ideal.Quotient.mkₐ k I with Algebra.TensorProduct.includeLeft and includeRight to obtain $k$-algebra homomorphisms $i:E\\to M$ and $j:F\\to M$. Homomorphisms from fields to a nontrivial ring are injective (AlgHom.injective): a nonzero element in a kernel would have an inverse, forcing $1=0$. The quotient type lives in universe max(v,w), so these maps give the required existential witness.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -68,7 +57,6 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-common-extension-fields-tensor-inclusions",
   "lem-weil-common-extension-fields-tensor-nontrivial",
   "lem-weil-common-extension-fields-maximal-ideal",
   "lem-weil-common-extension-fields-quotient-field"
@@ -76,7 +64,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/fields.tex",
-  "place": "Fields, Lemma 9.2, tag 0H7K (fields-lemma-common-extension-field)"
+  "place": "Fields, Lemma 9.2, tag 0H7K (tensor product and maximal-ideal quotient; direct Mathlib implementation, factor-inclusion injectivity omitted)"
  },
  "mathlib_searches": [
   {
@@ -170,5 +158,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T085400-L-47800",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

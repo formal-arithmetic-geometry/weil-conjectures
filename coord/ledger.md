@@ -7123,3 +7123,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/W3/Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge (stage 3; reviewer PASS; first push; landing 20261012T085359-L-47432 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/W3/Sheaf.CategoryTheory.SpectralSequencePageInduction (stage 3; reviewer PASS; first push; landing 20261012T085359-L-47568 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:54 L: merged deliver/W3/Sheaf.CategoryTheory.Triangulated.MilnorSequence (stage 3; reviewer PASS; first push; landing 20261012T085359-L-47693 (interface); batch 20261012T085205; modules 3; new nodes 2)
+- 08:54 L: merged deliver/W3/Sheaf.FieldTheory.CommonExtensionFields (stage 3; reviewer PASS; first push; landing 20261012T085400-L-47800 (proof); batch 20261012T085205; modules 1; new nodes 0)
