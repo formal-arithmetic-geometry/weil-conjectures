@@ -1,0 +1,138 @@
+{
+ "id": "lem-sc-etale-contracted-product-exists-universal",
+ "kind": "statement",
+ "title": "Universal property of the explicit sheafified orbit quotient",
+ "statement": "Let $S,G,G^{\\prime},\\varphi,T,P,Q,q$ be as in [lem-sc-etale-contracted-product-exists-data]. For every sheaf of sets $F$ and every family $a_U:T(U)\\times G^{\\prime}(U)\\to F(U)$ which respects restrictions and satisfies $a_U(g+t,h-\\varphi(g))=a_U(t,h)$, there is a unique sheaf morphism $l:Q\\to F$ with $l_U(q_U(t,h))=a_U(t,h)$ for all $U,t,h$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, label lemma-torsors-h1, fibre-of-a-section construction; contracted-product construction from lem-sc-etale-torsor-pushout-extension step 2; torsors as in Tag 03AH"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-sc-gm-torsor",
+  "def-weil-pbc-sheafification",
+  "lem-sc-etale-contracted-product-exists-data"
+ ],
+ "proof": [
+  {
+   "text": "Quot.lift descends a to P because invariance identifies each generating relation. Quotient induction reduces the naturality equation to the supplied naturality of a.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply sheafifyLift to the descended presheaf morphism. The sheafification unit equation gives its values on q. If another sheaf morphism has these values, quotient induction makes its composite with the unit equal to the constructed composite. sheafify_hom_ext proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A3",
+  "date": "2026-10-12",
+  "note": "Formalized from the original contracted-product plan; explicit quotient, local coordinates and sheafification factorization compiled."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every invariant natural map from a torsor times a group sheaf factors uniquely through the sheafification of the orbit quotient",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of the orbit quotient of a torsor along a group homomorphism is a torsor",
+   "results": "8 presheaf-of-modules sheafification hits; no theorem about torsor orbit quotients.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafifyLift\"",
+   "results": "12 hits including CategoryTheory.sheafifyLift, toSheafify_sheafifyLift, sheafifyLift_unique. The adjunction closes factorization; it does not supply the torsor action.",
+   "date": "2026-10-12",
+   "verdict": "tools used"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafify_hom_ext|toSheafify_sheafifyLift|Quot.lift",
+   "results": "25 hits; Quot.lift is the elementary set quotient factorization tool. Direct source inspection in Mathlib/CategoryTheory/Sites/Sheafification.lean supplies the sheafification tools.",
+   "date": "2026-10-12",
+   "verdict": "tools used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.EtaleContractedProductExists",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Proper and affine cases: compatibility of the Kummer/Picard torsor-class identifications with pullback; geometric contracted-product construction for coefficient change",
+   "via": [
+    "lem-sc-etale-torsor-h1-functoriality",
+    "lem-sc-h1-gm-pic-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.EtaleContractedProductUniversal",
+  "file": "lean/Sheaf/CategoryTheory/Sites/EtaleContractedProductUniversal.lean",
+  "declaration": "CategoryTheory.Sheaf.Torsor.contracted_product_universal",
+  "declarations": [
+   "CategoryTheory.Sheaf.Torsor.contracted_product_universal"
+  ],
+  "statement": "theorem contracted_product_universal (S : Scheme.{u}) {G G' : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : G ⟶ G') (T : Torsor G) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (a : ∀ U : S.Etaleᵒᵖ, T.sheaf.obj.obj U → G'.obj.obj U → F.obj.obj U) (hn : ∀ ⦃U V : S.Etaleᵒᵖ⦄ (f : U ⟶ V) t h, F.obj.map f (a U t h) = a V (T.sheaf.obj.map f t) (G'.obj.map f h)) (hi : ∀ U g t h, a U (T.vadd U g t) (h - φ.hom.app U g) = a U t h) : ∃! l : contractedOrbitSheaf S φ T ⟶ F, ∀ U t h, l.hom.app U (contractedOrbitQuotient S φ T U t h) = a U t h",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T095850-L-311607",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T095850-L-311607",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
