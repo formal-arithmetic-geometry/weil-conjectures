@@ -143,7 +143,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.FinitePushforwardConstructibleDescent` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.RetractAssertions` | 5 | 1 | proof |
-| `Sheaf.AlgebraicGeometry.EtaleCechSectionwiseShortExact` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections` | 5 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible` | 5 | 1 | proof |
@@ -747,7 +746,6 @@ Not open yet: 47 nodes that wait for stage 1.
 | `WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology` | 8 | 1 | proof |
 | `WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup` | 8 | 1 | proof |
 | `WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech` | 8 | 2 | proof |
-| `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension` | 8 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum` | 8 | 1 | proof |
 | `WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition` | 8 | 1 | proof |
 | `Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat` | 9 | 1 | proof |
@@ -773,6 +771,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.Algebra.PopescuLiftNilpotent` | 9 | 1 | proof |
 | `Sheaf.Algebra.TorDimensionShifting` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AffineDerivedPushforwardTExact` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.AlgClosedExtensionModuleSections` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.AmpleTwistGlobalGeneration` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.BoundsFiberDegreesComp` | 9 | 2 | proof |
 | `Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange` | 9 | 1 | proof |
@@ -792,6 +791,7 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.AlgebraicGeometry.CoherentThickeningSystem` | 9 | 3 | proof |
 | `Sheaf.AlgebraicGeometry.CompletionInternalHom` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundary` | 9 | 1 | proof |
+| `Sheaf.AlgebraicGeometry.CurveCohomologyConnectedReduction` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedAdjoint` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedFunctorTruncationStabilization` | 9 | 1 | proof |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackComposition` | 9 | 1 | proof |
@@ -1851,10 +1851,11 @@ Not open yet: 47 nodes that wait for stage 1.
 | `Sheaf.RingTheory.FiniteMaximalsOverElement` | 20 | 1 | proof |
 | `Sheaf.RingTheory.Flat.LocalizationPreservesFlatness` | 20 | 1 | proof |
 
-Waiting, not claimable: 3 modules whose proof uses a node that has no Lean declaration yet.
+Waiting, not claimable: 4 modules whose proof uses a node that has no Lean declaration yet.
 
 | module | distance to a target | sorry |
 |---|---|---|
 | `WeilConjectures.ConstructibleSheaf.FinitePushforward` | 3 | 4 |
 | `WeilConjectures.AlgebraicGeometry.Picard.Jacobian` | 7 | 2 |
+| `Sheaf.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic` | 9 | 1 |
 | `Sheaf.AlgebraicGeometry.Modules.ConstantRankComplexHomology` | 10 | 1 |
