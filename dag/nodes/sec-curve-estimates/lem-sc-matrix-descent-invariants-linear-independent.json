@@ -1,0 +1,136 @@
+{
+ "id": "lem-sc-matrix-descent-invariants-linear-independent",
+ "kind": "statement",
+ "title": "Linear independence of twisted invariant matrices survives scalar extension",
+ "statement": "Let $K$ be a field, $S=K^{\\mathrm{sep}}$, $n\\in\\mathbf N$, and $b:\\operatorname{Gal}(S/K)\\to\\operatorname{GL}_n(S)$ any function. Let $A_b$ be [def-sc-matrix-descent-invariants], let $I$ be any index type and let $v:I\\to A_b$ be $K$-linearly independent. Then the underlying matrices $(v_i)_{i\\in I}$ are $S$-linearly independent in $\\operatorname{Mat}_n(S)$. No local constancy or action laws for $b$ are assumed.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 03R6 (Galois forms of matrix algebras); finite descent details expanded by an agent in lem-sc-matrix-descent-scalar-map-bijective step 4, coefficient uniqueness"
+ },
+ "stmt_deps": [
+  "def-sc-matrix-descent-invariants"
+ ],
+ "proof": [
+  {
+   "text": "Embed the K-independent family into the matrix space by the injective subalgebra inclusion. Linear independence can be checked on finite subfamilies. Induct on a finite set of indices, starting from the empty set.",
+   "uses": [
+    "def-sc-matrix-descent-invariants"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the induction step, suppose v_i is in the S-span of the preceding independent vectors and choose coefficients c_j in their finite expansion. Applying M ↦ b(g)g(M)b(g)^(-1) to that equality gives another expansion with coefficients g(c_j). This uses only matrix distributivity, entrywise multiplicativity of g, scalar compatibility and the defining invariance of each v_j. Uniqueness of coefficients, by the inductive S-independence, gives g(c_j)=c_j for every g,j.",
+   "uses": [
+    "def-sc-matrix-descent-invariants"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "InfiniteGalois.mem_range_algebraMap_iff_fixed, with IsGalois K (SeparableClosure K), says each c_j is the image of a coefficient d_j in K. The resulting K-linear expansion of v_i contradicts K-linear independence, using linearIndepOn_insert. This completes finite-set induction and hence proves independence of the full family.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-matrix-descent-invariants"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology and Mathlib",
+  "place": "Expanded descent argument of lem-sc-matrix-descent-scalar-map-bijective; finite-set induction and InfiniteGalois.mem_range_algebraMap_iff_fixed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Invariant vectors of a locally constant semilinear Galois action span over the separable closure",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally constant semilinear Galois action fixed vectors span the vector space",
+   "results": "Module.Basis.groupSMul_span_eq_top; Module.End.span_orbit_mem_invtSubmodule; Algebra.IsInvariant.isIntegral_of_profinite; mem_galBasis_iff; IntermediateField.fixingSubgroup_isOpen; groupCohomology.Hilbert90.aux. No fixed-vector spanning or semilinear descent theorem.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.span, IsLocallyConstant",
+   "results": "0 hits.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*descent|semilinear.*invariant|linearIndependent.*fixed",
+   "results": "Mathlib/LinearAlgebra/Transvection/Generation.lean, lines 310 and 314: unrelated fixedSubmodule linear independence. Local rg over FieldTheory, LinearIndependent and RepresentationTheory found only degree-one Hilbert 90, not the matrix descent statement.",
+   "date": "2026-10-13",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.MatrixDescentScalarMapBijective",
+  "date": "2026-10-13",
+  "group": "X3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "Proper case: comparison of field Brauer classes with continuous Galois units classes, crossed-product realization; projective matrix descent coefficient uniqueness",
+   "via": [
+    "lem-sc-matrix-descent-scalar-map-bijective",
+    "lem-sc-projective-matrix-descent",
+    "new-crossed-product-for-cocycle",
+    "lem-sc-brauer-scalar-defect-surjective-crossed-product-realization",
+    "lem-sc-brauer-scalar-defect-surjective",
+    "lem-sc-brauer-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.FieldTheory.MatrixDescentInvariantsLinearIndependent",
+  "file": "lean/Sheaf/FieldTheory/MatrixDescentInvariantsLinearIndependent.lean",
+  "declaration": "Field.matrixDescentInvariants_linearIndependent",
+  "statement": "theorem matrixDescentInvariants_linearIndependent (K : Type u) [Field K] (n : ℕ)\n    (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →\n      Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))\n    {ι : Type v} (v : ι → matrixDescentInvariants K n b)\n    (hv : LinearIndependent K v) :\n    LinearIndependent (SeparableClosure K)\n      (fun i ↦ (v i : Matrix (Fin n) (Fin n) (SeparableClosure K)))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T225339-L-1816266",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261012T225339-L-1816266",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
