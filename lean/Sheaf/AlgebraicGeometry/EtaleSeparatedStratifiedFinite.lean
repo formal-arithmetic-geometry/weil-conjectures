@@ -10,11 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.Constructible
-import Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification
-import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.ConstructibleStratifiedFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
-import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Finite étale strata of a separated étale morphism
@@ -61,6 +59,10 @@ theorem exists_etale_separated_stratified_finite {X U : Scheme.{u}}
       (∀ i : Fin S.n,
         IsFinite (pullback.snd j (S.immersion i)) ∧
         Etale (pullback.snd j (S.immersion i))) := by
-  sorry
+  let hj : Hom.IsQuasiFinite j :=
+    (Hom.isQuasiFinite_iff_isLocallyQuasiFinite_and_quasiCompact j).mpr
+      ⟨Hom.isLocallyQuasiFinite_of_unramified j ⟨inferInstance, inferInstance⟩, inferInstance⟩
+  obtain ⟨S, hScon, hSfin⟩ := exists_constructible_stratified_finite j hj
+  refine ⟨S, hScon, fun i ↦ ⟨hSfin i, inferInstance⟩⟩
 
 end AlgebraicGeometry.Scheme
