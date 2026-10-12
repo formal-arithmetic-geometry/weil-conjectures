@@ -10,20 +10,43 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This is the corresponding strictly smaller intermediate assertion in the coefficient-ring and parameter construction of Tag 032D.",
+   "text": "Obtain the equal-dimension parameter algebra A and its Hausdorff target and finite reduction. The field/Cohen power-series theorem supplies regularity, completeness and the domain property of A.",
    "uses": [
-    "lem-weil-pbc-complete-local-domain-finite-over-regular"
+    "split-complete-local-domain-parameter-map",
+    "lem-weil-pbc-power-series-field-cohen-regular-complete"
    ],
    "elementary": false
+  },
+  {
+   "text": "Apply the finite-over-complete-ring theorem to the maximal ideal of A and the A-module R, giving finite generation of R over A. Restrict to the image B of A in R; the inclusion B → R is finite by Mathlib RingHom.Finite.of_comp_finite.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Finiteness gives integrality by Mathlib Algebra.IsIntegral.of_finite. Incomparability (Ideal.IsIntegral.comap_lt_comap) makes contraction on prime spectra strictly monotone, so dim R ≤ dim B by Order.krullDim_le_of_strictMono. If the parameter map killed a nonzero x, the source domain makes x a nonzerodivisor and ringKrullDim_succ_le_of_surjective gives dim B + 1 ≤ dim A. Equal dimensions then give dim R + 1 ≤ dim R. The power-series dimension is a natural number, so ENat.WithBot.add_one_le_natCast_iff yields an impossible strict self-inequality. Thus the map is injective.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The bijective range restriction gives a ring equivalence A ≃ B. Transport regularity with IsRegularLocalRing.of_ringEquiv; transport maximal-ideal-adic completeness with map_ringEquiv_maximalIdeal and IsAdicComplete.congr_ringEquiv. The already proved finiteness of B → R gives Module.Finite B R.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-complete-local-domain-finite-over-regular"
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "split-complete-local-domain-parameter-map"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 032D"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/032D",
+  "place": "Coefficient/parameter construction split off; finite generation, dimension injectivity and range identification formalized from existing declarations and Mathlib"
  },
  "mathlib_searches": [
   {
@@ -87,11 +110,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
+  "reviewer": "X-0ae57",
+  "group": "X3",
   "result": "pass",
-  "landing": "20261012T112855-L-773871",
+  "landing": "20261012T151000-L-2233197",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered modules and DAG records match their statements; both modules and the direct importer compile cleanly, with the public import removal documented."
  }
 }
