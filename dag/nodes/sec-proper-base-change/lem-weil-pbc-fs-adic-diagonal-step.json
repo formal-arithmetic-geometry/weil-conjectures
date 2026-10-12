@@ -1,0 +1,148 @@
+{
+ "id": "lem-weil-pbc-fs-adic-diagonal-step",
+ "kind": "statement",
+ "title": "One continuous diagonal successor for the adic quotient grid",
+ "statement": "Let $R,S,A$ be commutative rings, with $R$-algebra structures on $S$ and $A$ [def-weil-pbc-algebra-hom-quotient]. Let $\\mathfrak n$ be an ideal of $S$ and assume $S$ is formally smooth over $R$ for the $\\mathfrak n$-adic topology [def-weil-pbc-formally-smooth-adic]. Let $I,J$ be ideals of $A$ and $k\\geq1$. Suppose $f:S\\to A/(J^k+I^k)$ and $t:S\\to A/(J+I^{k+1})$ are $R$-algebra maps, each annihilating some positive power of $\\mathfrak n$, whose reductions to $A/(J+I^k)$ agree. There exists an $R$-algebra map $f\\prime:S\\to A/(J^{k+1}+I^{k+1})$ reducing to $f$ and $t$ under the two quotient maps and annihilating some positive power of $\\mathfrak n$. The universe of $A$ is independent of those of $R,S$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Lemma Tag 07NJ (lemma-lift-continuous), square-zero surjection and inductive lifting paragraphs; diagonal specialization and small-subalgebra universe reduction written by F2. https://stacks.math.columbia.edu/tag/07NJ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Set K=J^k+I^k, L=J+I^(k+1), D=J^(k+1)+I^(k+1). Their sum is K+L=J+I^k. Compatible representatives x,y satisfy x-y=z+t with z in K and t in L. The element x-z=y+t proves that A/D surjects onto the fibre product of A/K and A/L over A/(K+L). Its kernel is (K intersection L)/D.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the modular-lattice identities to express K intersection L as (J^k + (I^k intersection J)) + I^(k+1). The square of J^k is contained in J^(k+1), each mixed product of J^k and I^k intersection J is contained in J^(k+1), and the square of I^k intersection J is contained in I^(2*k), hence in I^(k+1). Every product involving I^(k+1) lies in I^(k+1). Thus (K intersection L)^2 is contained in D. This calculation is proved in Lean.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The compatible pair annihilates n^e for the maximum e of its two positive annihilation exponents. For a square-zero surjection in independent universe w, choose representatives of the given images of S and form the R-subalgebra they generate. Algebra.small_adjoin proves this subalgebra is small in Type(max u v). Transport its algebra structure to Shrink, restrict the surjection, factor the given map through the quotient by its kernel using quotientKerAlgEquivOfSurjective, and apply the definition of adic formal smoothness. Compose the resulting lift with the inclusion. The restricted kernel has square zero by the injectivity of the inclusion and the original kernel-square identity. This entire universe reduction is proved as the private theorem lift_surjective.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Projecting the lifting identity gives the two required equations. The lift sends n^e into the square-zero kernel, and hence annihilates n^(2*e). This is a positive exponent.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proof of Lemma Tag 07NJ (lemma-lift-continuous), square-zero surjection and inductive lifting paragraphs; diagonal specialization and small-subalgebra universe reduction written by F2. https://stacks.math.columbia.edu/tag/07NJ All steps now proved in Lean by F2; private helpers establish small-subalgebra lifting and general compatible-quotient lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "adic formally smooth compatible lifts algebra homomorphisms quotient ideals powers",
+   "date": "2026-10-12",
+   "results": "8 hits: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_lift, IsAdicComplete.mk_liftAlgHom, Algebra.FormallySmooth.mk_lift, Algebra.FormallySmooth.comp_lift, Algebra.FormallySmooth.lift, IsAdicComplete.mkₐ_comp_liftAlgHom",
+   "verdict": "No adic formally smooth two-quotient lifting lemma; quotient factor API and discrete formally smooth results only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "square zero lifting compatible algebra homomorphisms two quotient ideals",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.factorₐ",
+   "date": "2026-10-12",
+   "results": "12 hits: Ideal.Quotient.factorₐ, Ideal.Quotient.factorₐ_comp_mk, Ideal.quotientEquivAlgOfEq_coe_eq_factorₐ, Ideal.Quotient.factorₐ_refl, Ideal.Quotient.factorₐ_comp, Ideal.Quotient.factorₐ_apply, Ideal.Quotient.factorₐ_apply_mk, Ideal.Quotient.coe_factorₐ",
+   "verdict": "No adic formally smooth two-quotient lifting lemma; quotient factor API and discrete formally smooth results only."
+  },
+  {
+   "tool": "grep",
+   "query": "square.zero|pullback|fiberProduct",
+   "date": "2026-10-12",
+   "results": "12 hits: Mathlib/RingTheory/Smooth/Quotient.lean, Mathlib/RingTheory/Smooth/Quotient.lean, Mathlib/RingTheory/Smooth/Quotient.lean, Mathlib/RingTheory/Smooth/Kaehler.lean, Mathlib/RingTheory/Smooth/Kaehler.lean, Mathlib/RingTheory/Smooth/Kaehler.lean, Mathlib/RingTheory/Smooth/Kaehler.lean, Mathlib/RingTheory/Smooth/Kaehler.lean",
+   "verdict": "No adic formally smooth two-quotient lifting lemma; quotient factor API and discrete formally smooth results only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothAdicQuotientGrid",
+  "date": "2026-10-13",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 07NJ finite quotient-grid construction: square-zero lifting, specialized to an old diagonal entry and the next prescribed first-row entry. Parent node lem-weil-pbc-fs-adic-compatible-quotient-grid steps 2-5. The recorded created.item chain terminates at a Lean module name.",
+   "via": [
+    "lem-weil-pbc-fs-adic-compatible-quotient-grid"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormallySmoothAdicDiagonalStep",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothAdicDiagonalStep.lean",
+  "declaration": "Algebra.FormallySmoothAdic.exists_diagonal_successor",
+  "statement": "theorem FormallySmoothAdic.exists_diagonal_successor\n    {R : Type u} {S : Type v} {A : Type w}\n    [CommRing R] [CommRing S] [CommRing A] [Algebra R S] [Algebra R A]\n    (n : Ideal S) (hS : FormallySmoothAdic R S n) (I J : Ideal A)\n    (k : ℕ) (hk : 1 ≤ k)\n    (f : S →ₐ[R] A ⧸ (J ^ k ⊔ I ^ k))\n    (t : S →ₐ[R] A ⧸ (J ⊔ I ^ (k + 1)))\n    (hf : ∃ e : ℕ, 1 ≤ e ∧ ∀ x ∈ n ^ e, f x = 0)\n    (ht : ∃ e : ℕ, 1 ≤ e ∧ ∀ x ∈ n ^ e, t x = 0)\n    (hcompat :\n      (Ideal.Quotient.factorₐ R (sup_le_sup (Ideal.pow_le_self (by omega)) le_rfl)).comp f =\n        (Ideal.Quotient.factorₐ R (sup_le_sup le_rfl\n          (Ideal.pow_le_pow_right (Nat.le_succ k)))).comp t) :\n    ∃ f' : S →ₐ[R] A ⧸ (J ^ (k + 1) ⊔ I ^ (k + 1)),\n      (Ideal.Quotient.factorₐ R (sup_le_sup\n        (Ideal.pow_le_pow_right (Nat.le_succ k))\n        (Ideal.pow_le_pow_right (Nat.le_succ k)))).comp f' = f ∧\n      (Ideal.Quotient.factorₐ R (sup_le_sup\n        (Ideal.pow_le_self (show k + 1 ≠ 0 by omega)) le_rfl)).comp f' = t ∧\n      ∃ e : ℕ, 1 ≤ e ∧ ∀ x ∈ n ^ e, f' x = 0",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T184256-L-4002207",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T184256-L-4002207",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
