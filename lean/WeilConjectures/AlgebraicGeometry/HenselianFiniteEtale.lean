@@ -13,14 +13,8 @@ import Sheaf.AlgebraicGeometry.HenselianClopenRestriction
 import Sheaf.AlgebraicGeometry.SchemeClopenIdempotent
 import Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
-import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
-import Sheaf.AlgebraicGeometry.FiniteEtaleDescent
-import Sheaf.AlgebraicGeometry.GaloisCategories
-import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
-import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair
@@ -120,7 +114,18 @@ theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
     ∀ E : Sheaf T.smallEtaleTopology (Type (u + 1)), IsFiniteLocallyConstantSheafOfTypes E →
       ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),
         Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) :=
-  sorry
+  by
+    constructor
+    · intro P π _ _
+      let F := (T.smallEtaleTopology.uliftYoneda.{u + 1}).obj (Scheme.Etale.mk π)
+      obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := Scheme.finiteEtale_yoneda_local_trivializations T P π
+      refine ⟨F.property, ⟨⟨𝒰, ?_⟩, hfin⟩⟩
+      intro j
+      obtain ⟨S, _, ⟨e⟩⟩ := h𝒰 j
+      exact Sheaf.isConstant_of_iso _ e
+    · intro E hE
+      exact Scheme.finiteLocallyConstant_sets_representable T E hE.1 hE.2
+
 
 section Henselian
 

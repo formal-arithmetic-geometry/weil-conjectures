@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-finite-locally-constant-sets-representability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+   "place": "converse descent part",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "FiniteLocallyConstantSetsRepresentability",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and $E$ a sheaf of sets on its small etale site [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets]. Suppose an etale cover makes its restriction on each member a constant sheaf [def-weil-pbc-constant-sheaf], and every separably closed geometric stalk is finite. Then there are a finite etale morphism $P\\to T$ [def-weil-pbc-finite-etale-category] and an isomorphism of its sheaf of sections with $E$ (equivalently an isomorphism of the underlying presheaves).",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV, lemma-characterize-finite-locally-constant; converse descent part"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "On each nonempty member of a trivializing cover, choose a geometric point. The stalk of the constant sheaf is its value, so finite stalks force finite local values. Discard empty members. The constant-sheaf coproduct comparison represents each local model by finitely many copies of the member; finite values can be resized to the scheme universe.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On the overlaps, the restriction isomorphisms give unique isomorphisms of the representing schemes by Yoneda full faithfulness. The cocycle follows from equality on sheaves by Yoneda faithfulness.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply effective finite etale descent to the coproduct of the cover. This yields a finite etale T-scheme with the prescribed local representatives. The local sheaf isomorphisms glue, as their descent data were chosen from E. On an empty base use the empty scheme.",
+   "uses": [
+    "lem-galois-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-galois-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV, read on the Stacks website; expanded local-model and descent argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite etale schemes define finite locally constant representable sheaves and every finite locally constant sheaf is representable",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaves of finite sets on the small etale site are represented by finite etale schemes",
+   "results": "Eight hits about condensed sheaves, LocallyConstant.functor and PresheafIsFinite; none gives this scheme statement.",
+   "date": "2026-10-12",
+   "verdict": "no matching scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isConstant_of_iso",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso in Mathlib.CategoryTheory.Sites.ConstantSheaf constructs the local-constancy witness from an isomorphism, but does not produce finite local models or representability.",
+   "date": "2026-10-12",
+   "verdict": "used in the combining proof; no matching complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "uliftYoneda|IsFiniteSheaf|finite_stalk_of_finite_locally_constant_sets; local rg in Mathlib/AlgebraicGeometry and both library roots",
+   "results": "Mathlib has canonical uliftYoneda sheaves; WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale supplies subcanonical_smallEtaleTopology. FiniteLocallyConstantStalk states finiteness at algebraically closed points. No theorem supplies these local-model or descent statements without importing the original item.",
+   "date": "2026-10-12",
+   "verdict": "no direct usable statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyConstantSetsRepresentability.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocallyConstant_sets_representable",
+  "statement": "theorem finiteLocallyConstant_sets_representable\n    (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1)))\n    (hloc : ∃ 𝒰 : Cover.{u} etalePrecoverage T, ∀ i,\n      (E.over (𝒰.etalePrecoverageToEtale i)).IsConstant\n        (T.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)))\n    (hfin : IsFiniteSheaf E) :\n    ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),\n      Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Etale.mk π))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T042407-L-1814906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T042407-L-1814906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

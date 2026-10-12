@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-finite-etale-yoneda-local-trivializations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+   "place": "forward local-model part",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "FiniteEtaleYonedaLocalTrivializations",
+ "statement": "Let $T$ and $P$ be schemes [def-pc-scheme] and $\\pi:P\\to T$ finite etale [def-weil-pbc-finite-etale-category]. Let $h_P$ be its canonical sheaf of sections on $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaf-of-sets], with values raised to the universe of sets used in the library. There is an etale cover $\\{U_i\\to T\\}$ and, for each $i$, a finite set $S_i$ and an isomorphism $h_P|_{U_i}\\cong\\underline{S_i}$ [def-weil-pbc-constant-sheaf]. Moreover the stalk of $h_P$ at every separably closed geometric point of $T$ is finite, equivalently $h_P$ satisfies Scheme.IsFiniteSheaf.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV, lemma-characterize-finite-locally-constant; forward local-model part"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-finite-etale-category"
+ ],
+ "proof": [
+  {
+   "text": "For each point of T, apply finite etale local splitting. The resulting pointed etale neighbourhoods are jointly surjective and form a cover, with a finite set of sheets on each member.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant-sheaf coproduct comparison identifies the sections of each split cover with the constant sheaf of its finite set of sheets. Restriction to the localized small etale site respects this identification.",
+   "uses": [
+    "lem-galois-constant-sheaf-sets-representable"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift a geometric point to a member of the cover. The local finite constant model makes its stalk finite, by the finite local-value stalk argument. The same argument works for separably closed points: finite etale fibres split over a separably closed field. Finiteness is precisely finite generation of a set. Empty sheets and the empty base are allowed.",
+   "uses": [
+    "lem-galois-flc-set-stalk-finite"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-galois-flc-set-stalk-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV, read on the Stacks website; expanded local-model and descent argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite etale schemes define finite locally constant representable sheaves and every finite locally constant sheaf is representable",
+   "results": "Service returned Internal Server Error; unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaves of finite sets on the small etale site are represented by finite etale schemes",
+   "results": "Eight hits about condensed sheaves, LocallyConstant.functor and PresheafIsFinite; none gives this scheme statement.",
+   "date": "2026-10-12",
+   "verdict": "no matching scheme theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.isConstant_of_iso",
+   "results": "CategoryTheory.Sheaf.isConstant_of_iso in Mathlib.CategoryTheory.Sites.ConstantSheaf constructs the local-constancy witness from an isomorphism, but does not produce finite local models or representability.",
+   "date": "2026-10-12",
+   "verdict": "used in the combining proof; no matching complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "uliftYoneda|IsFiniteSheaf|finite_stalk_of_finite_locally_constant_sets; local rg in Mathlib/AlgebraicGeometry and both library roots",
+   "results": "Mathlib has canonical uliftYoneda sheaves; WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale supplies subcanonical_smallEtaleTopology. FiniteLocallyConstantStalk states finiteness at algebraically closed points. No theorem supplies these local-model or descent statements without importing the original item.",
+   "date": "2026-10-12",
+   "verdict": "no direct usable statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleYonedaLocalTrivializations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtale_yoneda_local_trivializations",
+  "statement": "theorem finiteEtale_yoneda_local_trivializations\n    (T P : Scheme.{u}) (π : P ⟶ T) [IsFinite π] [Etale π] :\n    (∃ 𝒰 : Cover.{u} etalePrecoverage T, ∀ i,\n      ∃ S : Type (u + 1), Finite S ∧\n        Nonempty (((T.smallEtaleTopology.uliftYoneda.{u + 1}).obj (Etale.mk π)).over\n            (𝒰.etalePrecoverageToEtale i) ≅\n          (constantSheaf (T.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i))\n            (Type (u + 1))).obj S)) ∧\n    IsFiniteSheaf ((T.smallEtaleTopology.uliftYoneda.{u + 1}).obj (Etale.mk π))",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T042407-L-1814906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T042407-L-1814906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

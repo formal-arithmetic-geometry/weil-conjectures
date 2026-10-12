@@ -15,16 +15,28 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Given a sheaf $E$, choose a finite etale cover $U\\to T$ trivializing it with\nfinite fibre $S$. The descent isomorphism on $U\\times_TU$ is a permutation\nof $S$ satisfying the cocycle equation, hence descends the disjoint union\n$\\coprod_{s\\in S}U$ to a finite etale scheme $P$. Conversely, the sheaf of\nsections of a finite etale $P$ is finite locally constant; the two constructions\nare inverse because both are computed after the same trivializing cover.\nAn $M$-action is a compatible family of permutations, so it descends exactly\nwhen the sheaf action is compatible with the descent cocycle.",
-   "uses": [],
-   "elementary": null
+   "text": "For a finite etale P over T, use the canonical uliftYoneda sheaf, whose sheaf property comes from subcanonical_smallEtaleTopology. The finite-local-model theorem supplies an etale cover, finite constant sheaf isomorphisms and IsFiniteSheaf. Each isomorphism gives IsConstant by Sheaf.isConstant_of_iso. Pair this local constancy with the supplied finiteness.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-yoneda-local-trivializations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a locally constant sheaf with finite stalks, pass the two fields of IsFiniteLocallyConstantSheafOfTypes to the descent representability theorem. Combine the two independently proved implications as the required conjunction.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-sets-representability"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-yoneda-local-trivializations",
+  "lem-weil-pbc-finite-locally-constant-sets-representability"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-finite-locally-constant-etale-equivalence.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV: G1 Lean reduction separates finite local models from effective descent and builds the local constancy witnesses"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -81,20 +93,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T034034-L-1502684",
+  "landing": "20261012T042407-L-1814906",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing",
-   "AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing",
-   "AlgebraicGeometry.Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing",
-   "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing",
-   "AlgebraicGeometry.Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
