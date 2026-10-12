@@ -3213,6 +3213,94 @@ theorem exists_representableBy_picardFunctorDegree_pullback_homEquiv {K : Type u
     Functor.RepresentableBy.ofAdjunction_homEquiv]
   erw [Equiv.symm_apply_apply, Equiv.apply_symm_apply]
 
+/-- **The base change of a Jacobian, with its group law.** Let `C` be a proper curve of finite
+presentation over `k`, let `J` be a commutative group scheme representing `Pic^0_{C/k}` by `r`
+compatibly with the group laws (`AlgebraicGeometry.IsPicardZeroMul`), let `K/k` be a field
+extension and let `C' = C ×_k K` be presented by a cartesian square. Then `J_K = J ×_k K`
+represents `Pic^0_{C'/K}` by the base change `rK` of `r`
+(`AlgebraicGeometry.exists_representableBy_picardFunctorDegree_pullback_homEquiv`), and the base
+change of the group law of `J` makes `J_K` a commutative group scheme for which `rK` respects the
+group laws: `(J_C)_K ≅ J_{C_K}` as group schemes.
+
+The group law of `J_K` is the base change of that of `J` in the sense of functors of points: for
+every `K`-scheme `T`, the bijection `(T ⟶ J_K) ≃ (T ⟶ J)` of the base change adjunction
+(`Over.mapPullbackAdj`) is a group isomorphism. By the Yoneda lemma this determines the group
+law, and it is the unique one for which `rK` respects the group laws
+(`AlgebraicGeometry.existsUnique_iso_isMonHom_of_isPicardZeroMul`).
+
+(blueprint: `thm-sc-jacobian-representability`, `sk-prop-jacobian`, the clause
+`J_{C_{k'}} ≅ (J_C)_{k'}`; `thm-pd-jacobian-general-field`, the clause `J_K ≅ Pic^0_{C_K/K}`) -/
+theorem exists_commGrpObj_representableBy_picardFunctorDegree_pullback_isPicardZeroMul
+    {K : Type u} [Field K] [Algebra k K] {C C' : Scheme.{u}} [C.Over (Spec (.of k))]
+    [C'.Over (Spec (.of K))] [IsProper (C ↘ Spec (.of k))]
+    [LocallyOfFinitePresentation (C ↘ Spec (.of k))]
+    (q : C' ⟶ C) (h : IsPullback q (C' ↘ Spec (.of K)) (C ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) {J : Over (Spec (.of k))}
+    [CommGrpObj J] (r : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.RepresentableBy J)
+    (hr : IsPicardZeroMul _ r) :
+    ∃ (rK : (picardFunctorDegree (C' ↘ Spec (.of K)) 0).obj.RepresentableBy
+        (Over.mk (Limits.pullback.snd J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))))
+      (_ : CommGrpObj
+        (Over.mk (Limits.pullback.snd J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K)))))),
+      (∀ (T : Over (Spec (.of K)))
+        (y : (picardFunctorDegree (C ↘ Spec (.of k)) 0).obj.obj
+          (.op ((Over.map (Spec.map (CommRingCat.ofHom (algebraMap k K)))).obj T))),
+        rK.homEquiv.symm ((picardFunctorDegreeIsoOfIsPullback q h 0).hom.app (.op T) y) =
+          (Over.mapPullbackAdj _).homEquiv T J (r.homEquiv.symm y)) ∧
+      IsPicardZeroMul _ rK ∧
+      ∀ {T : Over (Spec (.of K))} (a b : T ⟶
+          Over.mk (Limits.pullback.snd J.hom (Spec.map (CommRingCat.ofHom (algebraMap k K))))),
+        ((Over.mapPullbackAdj _).homEquiv T J).symm (a * b) =
+          ((Over.mapPullbackAdj _).homEquiv T J).symm a *
+            ((Over.mapPullbackAdj _).homEquiv T J).symm b := by
+  set g := Spec.map (CommRingCat.ofHom (algebraMap k K))
+  let adj := Over.mapPullbackAdj g
+  obtain ⟨rK, hrK⟩ := exists_representableBy_picardFunctorDegree_pullback_homEquiv q h 0 r
+  -- the functor of points of `J`, restricted to `K`-schemes, as a presheaf of commutative groups
+  let F : (Over (Spec (.of K)))ᵒᵖ ⥤ CommGrpCat.{u} :=
+    { obj T := CommGrpCat.of ((Over.map g).obj T.unop ⟶ J)
+      map φ := CommGrpCat.ofHom ((yonedaGrpObj J).map ((Over.map g).map φ.unop).op).hom }
+  let α : (F ⋙ forget _).RepresentableBy ((Over.pullback g).obj J) :=
+    { homEquiv := (adj.homEquiv _ _).symm
+      homEquiv_comp φ a := adj.homEquiv_naturality_left_symm φ a }
+  let := CommGrpObj.ofRepresentableBy _ F α
+  have hmul {T : Over (Spec (.of K))} (a b : T ⟶ (Over.pullback g).obj J) :
+      (adj.homEquiv T J).symm (a * b) =
+        (adj.homEquiv T J).symm a * (adj.homEquiv T J).symm b :=
+    ((yonedaGrpObjIsoOfRepresentableBy _ (F ⋙ forget₂ CommGrpCat GrpCat) α).hom.app
+      (.op T)).hom.map_mul a b
+  refine ⟨rK, this, hrK, fun {T} L M hL hM hLM ↦ ?_, hmul⟩
+  -- transport the classes to `C ×_k T`
+  let e := pullbackIsoOfIsPullback h T
+  have hback (N : (pullback (C' ↘ Spec (.of K)) T.hom).Pic) :
+      Pic.map e.hom (Pic.map e.inv N) = N := by
+    rw [← Pic.map_comp, Iso.hom_inv_id, Pic.map_id]
+  have hmem (N : (pullback (C' ↘ Spec (.of K)) T.hom).Pic)
+      (hN : N ∈ (picardSubfunctorDegree (C' ↘ Spec (.of K)) 0).obj (.op T)) :
+      Pic.map e.inv N ∈ (picardSubfunctorDegree (C ↘ Spec (.of k)) 0).obj
+        (.op ((Over.map g).obj T)) :=
+    (pic_map_pullbackIsoOfIsPullback_mem_picardSubfunctorDegree_iff q h 0 T _).1
+      ((hback N).symm ▸ hN)
+  have hcl (N : (pullback (C' ↘ Spec (.of K)) T.hom).Pic)
+      (hN : N ∈ (picardSubfunctorDegree (C' ↘ Spec (.of K)) 0).obj (.op T)) :
+      rK.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of K)))
+          (picardSubfunctorDegree (C' ↘ Spec (.of K)) 0).toFunctor).app (.op T) ⟨N, hN⟩) =
+        adj.homEquiv T J (r.homEquiv.symm ((toSheafify (fppfTopology.over (Spec (.of k)))
+          (picardSubfunctorDegree (C ↘ Spec (.of k)) 0).toFunctor).app _
+            ⟨Pic.map e.inv N, hmem N hN⟩)) := by
+    rw [← hrK]
+    refine congrArg _ (Eq.trans ?_
+      (picardFunctorDegreeIsoOfIsPullback_hom_app_toSheafify q h 0 T _ (hmem N hN)).symm)
+    exact congrArg _ (Subtype.ext (hback N).symm)
+  have hLM' : Pic.map e.inv L * Pic.map e.inv M ∈
+      (picardSubfunctorDegree (C ↘ Spec (.of k)) 0).obj (.op ((Over.map g).obj T)) :=
+    Pic.map_mul e.inv L M ▸ hmem _ hLM
+  apply (adj.homEquiv T J).symm.injective
+  rw [hcl, hcl, hcl, hmul, Equiv.symm_apply_apply, Equiv.symm_apply_apply,
+    Equiv.symm_apply_apply, ← hr _ _ (hmem L hL) (hmem M hM) hLM']
+  congr 3
+  exact Pic.map_mul e.inv L M
+
 /-- **The Jacobian over an arbitrary ground field commutes with base change, naturally.** Let `C`
 be a smooth projective geometrically integral curve of genus `g` over a field `k`. Then there is
 an abelian variety `J` of dimension `g` over `k` (a proper, smooth, geometrically integral
