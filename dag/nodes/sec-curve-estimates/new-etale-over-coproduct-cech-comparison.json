@@ -1,0 +1,128 @@
+{
+ "id": "new-etale-over-coproduct-cech-comparison",
+ "kind": "statement",
+ "title": "Finite coproduct comparison for Cech complexes over an etale object",
+ "statement": "Let X be a scheme, U an object of its small etale category, I a finite type in Type (u+1), V_i etale X-schemes with arrows f_i to U. Let W be an etale X-scheme with g:W→U and c_i:V_i→W, whose underlying scheme cofan is a coproduct and c_i followed by g equals f_i. For every abelian sheaf G on X_et, the Mathlib Cech complexes in Over U for (f_i) and the singleton (g) with the restricted G are isomorphic. No covering or affineness hypothesis is imposed. [def-weil-pbc-cech-complex] [def-weil-pbc-etale-site]",
+ "stmt_deps": [
+  "def-weil-pbc-cech-complex",
+  "def-weil-pbc-etale-site"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03OZ, equation 59.22.1.1 and the fibre-product coproduct formula in the proof; https://stacks.math.columbia.edu/tag/03OZ"
+ },
+ "proof": [
+  {
+   "text": "Restrict G to the slice over U and transport it through the proved upstream Etale.overSheafEquiv to U.left.smallEtaleTopology; Etale.overEquiv preserves finite products and projections. Reindex I by Fin n, including the tuple products and omitted-factor maps. Use the cofan universal property to identify W with the canonical coproduct. Apply fibre-product distribution over that finite coproduct to identify each singleton iterated product with the coproduct of the indexed family products, with projection compatibility.",
+   "uses": [
+    "lem-sc-etale-fibre-product-coproduct"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict G to the disjoint summands. Its sheaf axiom identifies sections with their product, by the disjoint-cover restriction isomorphism. The summands remain etale objects over X. Empty summands and the empty family use terminal sections on the empty scheme.",
+   "uses": [
+    "lem-sc-etale-coproduct-cech-restriction-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the chosen fibre products with Mathlib products in Over U. The distribution projection equations show the restriction maps commute with every face and hence their alternating sums. Take the degreewise inverse to orient the complex isomorphism from the family to the singleton.",
+   "uses": [
+    "lem-weil-pbc-etale-site-cech-complex-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-fibre-product-coproduct",
+  "lem-sc-etale-coproduct-cech-restriction-bijective",
+  "lem-weil-pbc-etale-site-cech-complex-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 03OZ, equation 59.22.1.1 and the fibre-product coproduct formula in the proof; https://stacks.math.columbia.edu/tag/03OZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite coproduct comparison for Cech complexes over an etale object",
+   "results": "Internal Server Error: service unavailable; no absence verdict based on this search.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex of affine quasi coherent module sections is isomorphic to the Amitsur tensor complex",
+   "results": "Eight hits including SheafOfModules.mapFree and representation standard-complex isomorphisms, none states this geometric comparison.",
+   "verdict": "No direct match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": "One hit: CategoryTheory.cechComplexFunctor, its definition only. The amitsur query returned no hits.",
+   "verdict": "No direct match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "amitsur|Amitsur|coproduct.*cech|cech.*coproduct",
+   "results": "Eleven Mathlib hits in generic FormalCoproduct Cech definitions and extra degeneracy. Library rg found the standard cover theorem, whose small-index literal-Spec signature requires additional transport; no affine singleton comparison. Blueprint search: no coproduct-Cech node, only lem-pc-cech-exact for Amitsur, which asserts exactness.",
+   "verdict": "No duplicate statement.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineTensorCechAmitsurComparison",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent",
+   "place": "Affine proof: finite cover replaced by its coproduct and singleton tensor-section complex identified with Amitsur before applying exactness.",
+   "via": [
+    "new-etale-affine-tensor-cech-amitsur-comparison",
+    "new-etale-affine-tensor-cech-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOverCoproductCechComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOverCoproductCechComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_etale_over_coproduct_cech_iso",
+  "statement": "theorem nonempty_etale_over_coproduct_cech_iso\n    (X : Scheme.{u}) (U : X.Etale) (I : Type (u + 1)) [Finite I]\n    (V : I → X.Etale) (f : ∀ i : I, V i ⟶ U)\n    (W : X.Etale) (g : W ⟶ U) (c : ∀ i : I, V i ⟶ W)\n    (hc : IsColimit (Cofan.mk W.left (fun i ↦ (c i).left)))\n    (hw : ∀ i : I, c i ≫ g = f i)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    Nonempty (((cechComplexFunctor fun i : I ↦ Over.mk (f i)).obj\n      ((Over.forget U).op ⋙ G.obj)) ≅\n      ((cechComplexFunctor fun _ : Fin 1 ↦ Over.mk g).obj\n        ((Over.forget U).op ⋙ G.obj)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T110259-L-613579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T110259-L-613579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

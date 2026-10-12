@@ -1,0 +1,134 @@
+{
+ "id": "new-etale-affine-singleton-tensor-amitsur",
+ "kind": "statement",
+ "title": "Affine singleton tensor-section Cech complex as Amitsur",
+ "statement": "Let X be a scheme and F a quasi-coherent X-module. Let U,W be etale X-schemes whose underlying schemes are affine and let g:W→U. Put A=Γ(U.left,top), B=Γ(W.left,top) with algebra structure given by g.appTop, and M=Γ(U.hom tensor-pullback F,top). The Mathlib Cech complex for the singleton g of the restricted ULift tensor-section sheaf is isomorphic to the Amitsur complex A,B,M after forgetting scalars and applying ULift. Flatness and surjectivity are not assumed. [def-sc-etale-qcoherent-module] [lem-pc-cech-exact]",
+ "stmt_deps": [
+  "def-sc-etale-qcoherent-module",
+  "lem-pc-cech-exact",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, affine-case proof, paragraph identifying the singleton Cech complex with (B/A) tensor M before exactness; https://stacks.math.columbia.edu/tag/03P2"
+ },
+ "proof": [
+  {
+   "text": "Compare tensorPullback with Mathlib pullback by uniqueness of left adjoints to pushforward, with the unit-compatible comparison, and transport the proved quasi-coherence instance across this isomorphism. The normalized composition comparison identifies restricted tensor sections over X with sections of that pullback over U.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use affine charts and pullbackSpecIso inductively to identify the (p+1)-fold fibre product ring with the indexed tensor power of B over A. Apply the affine pullback-sections formula to identify its coefficient sections with M tensor that ring. Its pure-tensor equation and the normalized composition unit equation identify omitted-factor restrictions with insertion of one.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the singleton product over maps Fin (p+1)→Fin 1 at the unique tuple. Lift the resulting additive isomorphisms and inverses. Every coface agrees by the preceding pure-tensor formula, so their alternating sums agree and the component isomorphisms give a complex isomorphism. Empty W gives zero rings and zero sections; identity maps give the usual tensor-unit comparison.",
+   "uses": [
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project",
+  "place": "Tag 03P2, affine-case proof, paragraph identifying the singleton Cech complex with (B/A) tensor M before exactness; https://stacks.math.columbia.edu/tag/03P2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Affine singleton tensor-section Cech complex as Amitsur",
+   "results": "Internal Server Error: service unavailable; no absence verdict based on this search.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex of affine quasi coherent module sections is isomorphic to the Amitsur tensor complex",
+   "results": "Eight hits including SheafOfModules.mapFree and representation standard-complex isomorphisms, none states this geometric comparison.",
+   "verdict": "No direct match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": "One hit: CategoryTheory.cechComplexFunctor, its definition only. The amitsur query returned no hits.",
+   "verdict": "No direct match.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "amitsur|Amitsur|coproduct.*cech|cech.*coproduct",
+   "results": "Eleven Mathlib hits in generic FormalCoproduct Cech definitions and extra degeneracy. Library rg found the standard cover theorem, whose small-index literal-Spec signature requires additional transport; no affine singleton comparison. Blueprint search: no coproduct-Cech node, only lem-pc-cech-exact for Amitsur, which asserts exactness.",
+   "verdict": "No duplicate statement.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineTensorCechAmitsurComparison",
+  "date": "2026-10-12",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-affine-qcoherent",
+   "place": "Affine proof: finite cover replaced by its coproduct and singleton tensor-section complex identified with Amitsur before applying exactness.",
+   "via": [
+    "new-etale-affine-tensor-cech-amitsur-comparison",
+    "new-etale-affine-tensor-cech-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineSingletonTensorAmitsur",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineSingletonTensorAmitsur.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_etale_affine_singleton_tensor_amitsur_iso",
+  "statement": "theorem nonempty_etale_affine_singleton_tensor_amitsur_iso\n    (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]\n    (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left) :\n    letI : Algebra Γ(U.left, ⊤) Γ(W.left, ⊤) := g.left.appTop.hom.toAlgebra\n    Nonempty (((cechComplexFunctor fun _ : Fin 1 ↦ Over.mk g).obj\n      ((Over.forget U).op ⋙\n        ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj\n          (Modules.etaleTensorSectionsSheaf F)).obj)) ≅\n      (((forget₂ (ModuleCat.{u} Γ(U.left, ⊤)) AddCommGrpCat.{u}) ⋙\n        AddCommGrpCat.uliftFunctor.{u + 1, u}).mapHomologicalComplex (.up ℕ)).obj\n          (Algebra.TensorProduct.amitsurComplex Γ(U.left, ⊤) Γ(W.left, ⊤)\n            Γ((Modules.tensorPullback U.hom).obj F, ⊤)))",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T110259-L-613579",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T110259-L-613579",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
