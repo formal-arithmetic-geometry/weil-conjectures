@@ -10,8 +10,11 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
-import Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
+import Sheaf.AlgebraicGeometry.FiniteCoefficientOfFiniteStalks
+import Sheaf.AlgebraicGeometry.ConstructibleUnderlyingSetsOfFiniteStalks
+import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
 
 /-!
 # Finite direct image of constructible module sheaves with finite stalks
@@ -65,6 +68,18 @@ theorem isConstructibleSheaf_lowerStar_of_finite_stalks
       Finite ((((pointSmallEtale s).ulift.{u + 1}).sheafFiber
         (A := ModuleCat.{u + 1} Λ)).obj F)) :
     IsConstructibleSheaf ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj F) := by
-  sorry
+  have : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType f
+  let I : Ideal Λ := ⨅ U : Y.Etaleᵒᵖ, Module.annihilator Λ (F.obj.obj U)
+  have hI : Finite (Λ ⧸ I) :=
+    finite_quotient_section_annihilator_of_finite_stalks Λ F hF hfin
+  have hsets := isConstructibleEtaleSheafOfSets_of_finite_module_stalks Λ F hF hfin
+  let E := (sheafCompose Y.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+  have hpush := isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian f E hsets
+  refine isConstructibleSheaf_of_finite_coefficient_underlying_sets Λ _ ?_ I hI ?_
+  · exact hpush
+  · intro U r hr m
+    exact Module.mem_annihilator.mp
+      (Ideal.mem_iInf.mp hr ((MorphismProperty.Over.pullback @Etale ⊤ f).op.obj U)) m
 
 end AlgebraicGeometry.Scheme

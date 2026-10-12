@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-constructible-module-of-finite-coefficient-sets",
+ "kind": "statement",
+ "title": "Reconstructing module constructibility from finite coefficient set charts",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a commutative ring, and $F$ a sheaf of $\\Lambda$-modules on its small etale site [def-weil-pbc-etale-sheaves]. Assume that the underlying sheaf of sets, obtained by forgetting first to abelian groups and then to sets, is constructible in the finite-set stratum sense of [def-weil-pbc-etale-sheaves]. Let $I$ be an ideal such that $\\Lambda/I$ is finite, and assume $r m=0$ for every etale object $U$, every section $m\\in F(U)$ and every $r\\in I$. Then $F$ is constructible in the module sense of [def-constructible-constructible].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Constructibility of the middle term; step 3 finite-operation module refinement of lem-weil-pbc-finite-pushforward-finite-stalk-module; agent-formulated generalization of the finite prime-field case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-constructible"
+ ],
+ "proof": [
+  {
+   "text": "The sectionwise annihilation defines a canonical Lambda/I action on each section module by quotient induction. The sheaf restrictions are linear for this action. Pullback to each constructible stratum retains the action, because inverse image is formed from colimits and sheafification.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose finite-set trivializing charts on each stratum and discard empty chart members. At a geometric point transport the stalk module operations to the finite labels. Equality of germs is witnessed on pointed etale neighbourhoods. For zero, addition, negation and multiplication by each scalar of the finite quotient ring there are finitely many input tuples; cofilteredness yields one neighbourhood where all comparisons hold. Do this near every underlying point, giving an etale refinement of the charts. The original module laws hold on this refinement.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-constructible-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The refined set charts are module charts with finite constant values. Finite modules are finitely generated over Lambda; the source stratification therefore meets IsFiniteLocallyConstantSheaf on each stratum, and witnesses IsConstructibleSheaf. Empty strata and the zero quotient ring are allowed.",
+   "uses": [
+    "def-constructible-finite-locally-constant",
+    "def-constructible-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "S2: formal decomposition of steps 1 and 3 of lem-weil-pbc-finite-pushforward-finite-stalk-module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Module sheaf constructibility from constructible underlying finite sets and a finite quotient coefficient ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules annihilated by an ideal with finite quotient is constructible if its underlying sheaf of finite sets is constructible",
+   "results": "No exact sheaf-constructibility theorem; hits: SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstant.*ModuleCat|ModuleCat.*IsConstant",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-normalization-exact-sequence",
+   "place": "Proof: constructibility of the finite-pushforward middle term in the normalization exact sequence",
+   "via": [
+    "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+    "lem-weil-pbc-normalization-mono-cokernel"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleModuleOfFiniteCoefficientSets.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleSheaf_of_finite_coefficient_underlying_sets",
+  "statement": "theorem isConstructibleSheaf_of_finite_coefficient_underlying_sets (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))) (I : Ideal Λ) (hI : Finite (Λ ⧸ I)) (hkill : ∀ (U : X.Etaleᵒᵖ) (r : Λ), r ∈ I → ∀ m : F.obj.obj U, r • m = 0) : IsConstructibleSheaf F",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474320",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474320",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

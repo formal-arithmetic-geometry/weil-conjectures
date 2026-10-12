@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-constructible-underlying-sets-of-finite-stalks",
+ "kind": "statement",
+ "title": "Constructible underlying sets of module sheaves with finite stalks",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ any commutative ring. Let $F$ be a sheaf of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-sheaves], constructible in the sense of [def-constructible-constructible]. Suppose every geometric stalk over a separably closed field [def-weil-pbc-geometric-stalks] is finite as a set. Then the sheaf of sets obtained by forgetting the module structure first to abelian groups and then to sets is constructible in the finite-set stratification sense of [def-weil-pbc-etale-sheaves]. No Noetherian hypothesis on $X$ or finiteness hypothesis on $\\Lambda$ is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Constructibility of the middle term; step 1 underlying-set construction of lem-weil-pbc-finite-pushforward-finite-stalk-module; agent-formulated generalization of the finite prime-field case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-constructible",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Retain the module constructible stratification. Forgetting each locally constant module datum yields a locally constant set datum on each stratum. Import all Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets and use its existing private underlyingSetPullbackIso, without redeclaring it, to compare set inverse image with the underlying set sheaf of module inverse image. This comparison has no finite-coefficient-ring hypothesis.",
+   "uses": [
+    "def-constructible-constructible",
+    "def-constructible-locally-constant",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-constructible-module-underlying-sets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the inverse-image geometric-fiber isomorphism to identify each module stalk on a stratum with the corresponding source stalk. The point-ulift sheaf-fiber isomorphism handles the hypothesis universe. Forgetting commutes with the geometric fiber, since it preserves filtered colimits. Thus every underlying set stalk on every stratum is finite. Transport these facts through the inverse-image comparison, producing the desired set stratification. Empty strata cause no exception.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constructible",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-constructible-module-underlying-sets"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "S2: formal decomposition of steps 1 and 3 of lem-weil-pbc-finite-pushforward-finite-stalk-module; repair: reuse the existing private pullback comparison via import all"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible module sheaf with finite geometric stalks has a constructible underlying sheaf of finite sets",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module sheaf with finite geometric stalks has a constructible underlying sheaf of finite sets",
+   "results": "No exact sheaf-constructibility theorem; hits: SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.isFinitePresentation",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*forget|forget.*constructible",
+   "results": "No hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-normalization-exact-sequence",
+   "place": "Proof: constructibility of the finite-pushforward middle term in the normalization exact sequence",
+   "via": [
+    "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+    "lem-weil-pbc-normalization-mono-cokernel"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleUnderlyingSetsOfFiniteStalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleUnderlyingSetsOfFiniteStalks.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleEtaleSheafOfSets_of_finite_module_stalks",
+  "statement": "theorem isConstructibleEtaleSheafOfSets_of_finite_module_stalks (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F) (hfin : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X), Finite ((((pointSmallEtale s).ulift.{u + 1}).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F)) : IsConstructibleEtaleSheafOfSets ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj ((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474320",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474320",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

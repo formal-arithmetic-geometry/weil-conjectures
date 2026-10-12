@@ -14,42 +14,38 @@
  ],
  "proof": [
   {
-   "text": "Choose a constructible module stratification of F. Every stratum is Noetherian and quasi-compact. Discard empty members of its etale constant-module covers; on each remaining member, the constant module is a geometric stalk of F and therefore finite. Select finitely many cover members on each of the finitely many strata. Intersect the annihilators of their finite constant modules. This ideal I kills every geometric stalk of F, hence F itself. Lambda/I embeds in the finite product of their endomorphism rings, hence is finite. For empty Y use I = Lambda. This is the finite-coefficient reduction; its proof is part of this new theorem, not assumed as a separate lemma.",
+   "text": "A finite morphism to the Noetherian target has Noetherian source: apply AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType, with the finite-type and quasi-compact instances of the finite morphism. Define the ideal I explicitly as the intersection of all annihilators of source section modules. Apply finite_quotient_section_annihilator_of_finite_stalks to obtain that Lambda/I is finite.",
    "uses": [
-    "def-constructible-constructible",
-    "def-weil-pbc-geometric-stalks"
+    "lem-weil-pbc-finite-coefficient-of-finite-stalks"
    ],
    "elementary": false
   },
   {
-   "text": "Regard F as a sheaf of modules over the finite ring Lambda/I, with the same source stratification and constant values. Apply the module-underlying-sets theorem over this finite ring. The finite morphism is finitely presented because its target is Noetherian. Apply the finite abelian direct-image theorem over the Noetherian target to the underlying abelian sheaf. Forgetting commutes with direct image, which is precomposition with base change, so this gives a finite-set constructible stratification of f_*F. The source annihilator still kills every direct-image section.",
+   "text": "Apply the proved isConstructibleEtaleSheafOfSets_of_finite_module_stalks to obtain constructible underlying source sets, with no coefficient-ring finiteness assumed. Forget F to an abelian sheaf E. Apply isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian to f and E. Its conclusion is definitionally the underlying set sheaf of the module direct image.",
    "uses": [
-    "lem-weil-pbc-constructible-module-underlying-sets",
+    "lem-weil-pbc-constructible-underlying-sets-of-finite-stalks",
     "lem-weil-pbc-finite-pushforward-constructible-noetherian"
    ],
    "elementary": false
   },
   {
-   "text": "On each finite-set constant stratum, locally constant maps between constant finite sets are trivialized by refining the etale cover for their finitely many input values. Apply this to addition, zero, and each scalar operation of the finite ring Lambda/I; intersect the finitely many covering sieves and use transitivity of the topology. The algebraic relations remain those of the original sheaf. The resulting constant finite Lambda/I-modules are finitely generated over Lambda too. Thus these refinements trivialize f_*F as a module sheaf, with finitely generated geometric stalks, giving the required original Scheme.IsConstructibleSheaf. Empty strata can be discarded and zero stalks are handled by the zero module.",
+   "text": "Membership in I implies membership in each source section-module annihilator, hence sectionwise annihilation by Module.mem_annihilator. Direct image sections are definitionally source sections on the base-changed etale object, so I still kills them. Apply isConstructibleSheaf_of_finite_coefficient_underlying_sets to the direct image, its set constructibility, the canonical I and its finite quotient.",
    "uses": [
-    "def-constructible-finite-locally-constant",
-    "def-weil-pbc-etale-sheaves"
+    "lem-weil-pbc-constructible-module-of-finite-coefficient-sets"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-constructible-constructible",
-  "def-constructible-finite-locally-constant",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-constructible-module-underlying-sets",
+  "lem-weil-pbc-constructible-module-of-finite-coefficient-sets",
+  "lem-weil-pbc-constructible-underlying-sets-of-finite-stalks",
+  "lem-weil-pbc-finite-coefficient-of-finite-stalks",
   "lem-weil-pbc-finite-pushforward-constructible-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
-  "place": "Constructibility of the middle term: finite abelian pushforward and finite-ring module refinement; generalized finite-stalk formulation by T2, using Stacks Tag 095R"
+  "place": "S2 Lean reduction: canonical annihilator quotient, proved underlying-set conversion, existing abelian finite pushforward, sectionwise annihilation, module reconstruction."
  },
  "mathlib_searches": [
   {
@@ -120,9 +116,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T135317-L-1692855",
+  "landing": "20261012T154835-L-2474320",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

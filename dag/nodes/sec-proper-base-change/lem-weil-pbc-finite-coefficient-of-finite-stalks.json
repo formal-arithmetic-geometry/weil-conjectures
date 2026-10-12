@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-finite-coefficient-of-finite-stalks",
+ "kind": "statement",
+ "title": "Canonical finite coefficient quotient for constructible module sheaves",
+ "statement": "Let $X$ be a Noetherian scheme and $\\Lambda$ a commutative ring, not necessarily finite or Noetherian. Let $F$ be a sheaf of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-sheaves], constructible in the sense of [def-constructible-constructible]. Suppose its geometric stalk at every separably closed field-valued point [def-weil-pbc-geometric-stalks] is finite as a set. Define $I=\\bigcap_{U\\in X_{\\mathrm{Et}}}\\operatorname{Ann}_{\\Lambda} F(U)$, where an annihilator is the ideal of scalars killing every section. Then the quotient ring $\\Lambda/I$ is finite as a set.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "Constructibility of the middle term; step 1 finite-coefficient reduction of lem-weil-pbc-finite-pushforward-finite-stalk-module; agent-formulated generalization of the finite prime-field case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-constructible",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Take a finite constructible module stratification. Every stratum is quasi-compact as a subspace of the Noetherian underlying space. Choose finite subcovers of the etale trivializing covers, discard empty members, and identify their constant modules with geometric stalks; they are finite by the hypothesis.",
+   "uses": [
+    "def-constructible-constructible",
+    "def-constructible-finite-locally-constant",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Intersect the annihilators of these finitely many finite module values, obtaining J. Their ring actions identify Lambda/J with a subring of a finite product of finite endomorphism rings, so Lambda/J is finite. The finite action maps have kernel exactly J.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Show J=I. A scalar in J kills all stalks on every stratum, hence all source geometric stalks. Geometric stalks detect the zero scalar endomorphism of F, so it kills every section on every etale object and belongs to I. Conversely, a scalar killing every section kills the colimit defining any stalk and therefore each of the selected constant values. For empty X use I=Lambda, yielding the zero ring.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-constructible",
+  "def-constructible-finite-locally-constant",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+  "place": "S2: formal decomposition of steps 1 and 3 of lem-weil-pbc-finite-pushforward-finite-stalk-module"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constructible module sheaf with finite geometric stalks is annihilated by an ideal with finite quotient ring",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible module sheaf with finite geometric stalks has a finite quotient coefficient ring annihilating its sections",
+   "results": "No exact sheaf-constructibility theorem; hits: SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|annihilator.*Quotient",
+   "results": "No exact sheaf-constructibility theorem; hits: Mathlib/RingTheory/Depth/Rees.lean, Mathlib/RingTheory/KrullDimension/Module.lean, Mathlib/RingTheory/SimpleModule/Basic.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean, Mathlib/LinearAlgebra/Dual/Lemmas.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FinitePushforwardFiniteStalkModule",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-normalization-exact-sequence",
+   "place": "Proof: constructibility of the finite-pushforward middle term in the normalization exact sequence",
+   "via": [
+    "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "lem-weil-pbc-finite-pushforward-open-quotient-constant",
+    "lem-weil-pbc-normalization-mono-cokernel"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoefficientOfFiniteStalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoefficientOfFiniteStalks.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finite_quotient_section_annihilator_of_finite_stalks",
+  "statement": "theorem finite_quotient_section_annihilator_of_finite_stalks (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}} [IsNoetherian X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsConstructibleSheaf F) (hfin : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X), Finite ((((pointSmallEtale s).ulift.{u + 1}).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F)) : Finite (Λ ⧸ ⨅ U : X.Etaleᵒᵖ, Module.annihilator Λ (F.obj.obj U))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474320",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T154835-L-2474320",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
