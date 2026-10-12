@@ -6,6 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMap
+import Sheaf.AlgebraicGeometry.RelativeDifferentialsAffineSectionsMapBijective
 
 /-!
 # Differential sections on an affine chart
@@ -44,6 +46,9 @@ theorem relativeDifferentials_affine_sections (f : X ⟶ S)
     ∃ e : CommRingCat.KaehlerDifferential (f.appLE V.1 U.1 hUV) ≃ₗ[Γ(X, U.1)]
         Γ(f.relativeDifferentials, U.1),
       ∀ a : Γ(X, U.1), e (CommRingCat.KaehlerDifferential.d a) =
-        f.relativeDifferentialsDerivation.d (X := op U.1) a := by sorry
+        f.relativeDifferentialsDerivation.d (X := op U.1) a := by
+  obtain ⟨e, he⟩ := relativeDifferentials_affine_sections_map f U V hUV
+  exact ⟨LinearEquiv.ofBijective e
+    (relativeDifferentials_affine_sections_map_bijective f U V hUV e he), he⟩
 
 end AlgebraicGeometry
