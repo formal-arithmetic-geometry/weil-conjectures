@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+import Sheaf.Topology.TopologicalLeraySpectralObjectAugmentation
 
 /-! # Objectwise topological cocycle comparison -/
 
@@ -15,6 +16,7 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 universe u
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace CategoryTheory
+set_option linter.unusedVariables false in
 /-- Objectwise additive maps on canonical cohomology, independent of comparisons.
 Source: Stacks Project, Cohomology, Section 20.2 (Tag 01DZ); Derived Categories,
 Section 13.18, Lemmas 13.18.6 and 13.18.7 (comparison and homotopy uniqueness).
@@ -84,6 +86,26 @@ theorem exists_topological_cocycle_objectwise
             I.cocomplex.X p)
         (hz : z ≫ I.cocomplex.d p (p + 1) = 0)
         (hsz : a ≫ (TopCat.Sheaf.pushforwardAb f).map z = s ≫ φ.f p),
-        τ (J.extMk s (p + 1) rfl hs) = I.extMk z (p + 1) rfl hz := by sorry
+        τ (J.extMk s (p + 1) rfl hs) = I.extMk z (p + 1) rfl hz := by
+  let HX : ℕ → (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤
+      AddCommGrpCat.{u}) := fun n => Sheaf.cohomologyPresheafFunctor
+        (Opens.grothendieckTopology X) n ⋙
+          (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  let HZ : ℕ → (Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤
+      AddCommGrpCat.{u}) := fun n => Sheaf.cohomologyPresheafFunctor
+        (Opens.grothendieckTopology Z) n ⋙
+          (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  have hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor
+      (Opens.grothendieckTopology X) n ⋙
+        (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ => rfl
+  have hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor
+      (Opens.grothendieckTopology Z) n ⋙
+        (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ => rfl
+  obtain ⟨Y, hY, h, e, he⟩ :=
+    exists_topological_leray_spectral_object_augmentation f HX HZ hX hZ a ha
+  refine ⟨(Functor.whiskerRight (TopCat.Sheaf.pushforwardAb f).toRightDerivedZero (HX p) ≫
+    (e p 0).inv ≫ @Abelian.SpectralObject.bottomEdge _ _ _ Y hY p ≫ (h p).hom).app F, ?_⟩
+  intro I J φ hφ s hs z hz hsz
+  simpa [HX, HZ] using he F I J φ hφ p s hs z hz hsz
 
 end CategoryTheory
