@@ -9,7 +9,6 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Sheaf.RingTheory.PolynomialOriginRegularLocal
 
 /-! # Residue identifications for a powered parameter quotient
 
@@ -23,6 +22,49 @@ final paragraph, identification of the residue field extension.
 universe u v w
 
 namespace Algebra
+
+private theorem polynomial_constants {k : Type u} {F : Type w}
+    [Field k] [CommRing F] [Algebra k F] {σ : Type*}
+    (f : MvPolynomial σ k →ₐ[k] F) (hX : ∀ i, f (MvPolynomial.X i) = 0)
+    (x : MvPolynomial σ k) : ∃ a : k, f x = algebraMap k F a := by
+  induction x using MvPolynomial.induction_on with
+  | C a => exact ⟨a, f.commutes a⟩
+  | add x y hx hy =>
+    obtain ⟨a, ha⟩ := hx
+    obtain ⟨b, hb⟩ := hy
+    exact ⟨a + b, by rw [map_add, ha, hb, map_add]⟩
+  | mul_X x i hx => exact ⟨0, by simp [hX]⟩
+
+private theorem residue_constants_surjective {k : Type u} {A : Type w}
+    [Field k] [CommRing A] [Algebra k A] (p : Ideal A) [p.IsPrime]
+    (h : Function.Surjective (algebraMap k (A ⧸ p))) :
+    Function.Surjective (algebraMap k p.ResidueField) := by
+  let e := RingEquiv.ofBijective (algebraMap k (A ⧸ p)) ⟨RingHom.injective _, h⟩
+  have hp : p.IsMaximal := (Ideal.Quotient.maximal_ideal_iff_isField_quotient p).mpr
+    (e.symm.isField (Field.toIsField k))
+  let := hp
+  rw [IsScalarTower.algebraMap_eq k (A ⧸ p) p.ResidueField]
+  exact p.bijective_algebraMap_quotient_residueField.surjective.comp h
+
+private theorem quotient_equivs_compatible {k R S F : Type*}
+    [Field k] [CommRing R] [CommRing S] [CommRing F]
+    [Algebra k R] [Algebra k S] [Algebra R S] [Algebra k F] [IsScalarTower k R S]
+    (I : Ideal R) (eR : (R ⧸ I) ≃ₐ[k] k)
+    (eS : (S ⧸ I.map (algebraMap R S)) ≃ₐ[k] F)
+    (hR : Function.Surjective (algebraMap k (R ⧸ I))) :
+    ∀ r : R ⧸ I,
+      eS (algebraMap (R ⧸ I) (S ⧸ I.map (algebraMap R S)) r) =
+        algebraMap k F (eR r) := by
+  intro r
+  obtain ⟨a, rfl⟩ := hR r
+  change eS (algebraMap (R ⧸ I) (S ⧸ I.map (algebraMap R S))
+    (Ideal.Quotient.mk I (algebraMap k R a))) =
+      algebraMap k F (eR (algebraMap k (R ⧸ I) a))
+  rw [Ideal.Quotient.algebraMap_quotient_map_quotient]
+  rw [← IsScalarTower.algebraMap_apply k R S]
+  change eS (algebraMap k (S ⧸ I.map (algebraMap R S)) a) = _
+  rw [eS.commutes, eR.commutes]
+  rfl
 
 /-- The residue base and closed fiber of a powered parameter quotient identify with
 k and κ(q), compatibly with the original field map.
@@ -73,6 +115,96 @@ theorem parameter_quotient_residue_ringEquivs
       ∃ eL : (L ⧸ I.map (algebraMap R₀ L)) ≃+* q.asIdeal.ResidueField,
         ∀ r : R₀ ⧸ I,
           eL (algebraMap (R₀ ⧸ I) (L ⧸ I.map (algebraMap R₀ L)) r) =
-            algebraMap k q.asIdeal.ResidueField (eR r) := by sorry
+            algebraMap k q.asIdeal.ResidueField (eR r) := by
+  classical
+  let := φ.toRingHom.toAlgebra
+  dsimp only
+  let P := MvPolynomial (Fin d) k
+  have : IsScalarTower k P Λ := IsScalarTower.of_algHom φ
+  let J : Ideal P := Ideal.span (Set.range (fun i : Fin d ↦ (MvPolynomial.X i ^ c) ^ 8))
+  let J_Λ := J.map (algebraMap P Λ)
+  intro q₀ hq
+  let p₀ := q₀.asIdeal.under (P ⧸ J)
+  let R₀ := Localization.AtPrime p₀
+  let L₀ := Localization.AtPrime q₀.asIdeal
+  let := Localization.AtPrime.algebraOfLiesOver p₀ q₀.asIdeal
+  have : IsScalarTower k (P ⧸ J) (Λ ⧸ J_Λ) :=
+    IsScalarTower.of_algebraMap_eq fun a ↦ by
+      change Ideal.Quotient.mk J_Λ (algebraMap k Λ a) =
+        Ideal.Quotient.mk J_Λ (φ (MvPolynomial.C a))
+      exact congrArg (Ideal.Quotient.mk J_Λ) (φ.commutes a).symm
+  have : IsScalarTower k R₀ L₀ := inferInstance
+  let L := ULift.{max u v} L₀
+  have : IsScalarTower k R₀ L := inferInstance
+  let I := IsLocalRing.maximalIdeal R₀
+  -- Powers vanish in every prime of the parameter quotient.
+  have hXp : ∀ i : Fin d, Ideal.Quotient.mk J (MvPolynomial.X i) ∈ p₀ := by
+    intro i
+    apply ((inferInstance : p₀.IsPrime).pow_mem_iff_mem c
+      (lt_of_lt_of_le Nat.zero_lt_one hc)).mp
+    apply (inferInstance : p₀.IsPrime).mem_of_pow_mem (n := 8)
+    rw [← map_pow, ← map_pow, Ideal.Quotient.eq_zero_iff_mem.mpr
+      (Ideal.subset_span (Set.mem_range_self i))]
+    exact p₀.zero_mem
+  have hbase : Function.Surjective (algebraMap k ((P ⧸ J) ⧸ p₀)) := by
+    intro x
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+    let f : P →ₐ[k] ((P ⧸ J) ⧸ p₀) := IsScalarTower.toAlgHom k P _
+    have hX : ∀ i : Fin d, f (MvPolynomial.X i) = 0 := by
+      intro i
+      change Ideal.Quotient.mk p₀ (Ideal.Quotient.mk J (MvPolynomial.X i)) = 0
+      exact Ideal.Quotient.eq_zero_iff_mem.mpr (hXp i)
+    obtain ⟨a, ha⟩ := polynomial_constants f hX x
+    exact ⟨a, ha.symm⟩
+  have hR : Function.Surjective (algebraMap k (R₀ ⧸ I)) :=
+    residue_constants_surjective p₀ hbase
+  let eR : (R₀ ⧸ I) ≃ₐ[k] k :=
+    (AlgEquiv.ofBijective (Algebra.ofId k (R₀ ⧸ I)) ⟨RingHom.injective _, hR⟩).symm
+  have hq' : q.asIdeal = q₀.asIdeal.comap (Ideal.Quotient.mk J_Λ) :=
+    (congrArg PrimeSpectrum.asIdeal hq).symm
+  let f := Localization.localRingHom q.asIdeal q₀.asIdeal (Ideal.Quotient.mk J_Λ) hq'
+  have hf : Function.Surjective f :=
+    RingHom.SurjectiveOnStalks.localRingHom_surjective
+      (RingHom.surjectiveOnStalks_of_surjective Ideal.Quotient.mk_surjective) _ _ hq'
+  have hXI : ∀ i : Fin d,
+      algebraMap (P ⧸ J) R₀ (Ideal.Quotient.mk J (MvPolynomial.X i)) ∈ I := by
+    intro i
+    exact (IsLocalization.AtPrime.to_map_mem_maximal_iff R₀ p₀ _).mpr (hXp i)
+  have hfX : ∀ i : Fin d,
+      f (algebraMap Λ (Localization.AtPrime q.asIdeal) (φ (MvPolynomial.X i))) =
+        algebraMap R₀ L₀
+          (algebraMap (P ⧸ J) R₀ (Ideal.Quotient.mk J (MvPolynomial.X i))) := by
+    intro i
+    rw [Localization.localRingHom_to_map]
+    rw [← IsScalarTower.algebraMap_apply (P ⧸ J) R₀ L₀]
+    rw [IsScalarTower.algebraMap_apply (P ⧸ J) (Λ ⧸ J_Λ) L₀]
+    rfl
+  -- The surjective local map transports the original maximal-ideal generators.
+  have hm : I.map (algebraMap R₀ L₀) = IsLocalRing.maximalIdeal L₀ := by
+    apply le_antisymm
+    · exact IsLocalRing.map_maximalIdeal_le _
+    · rw [← IsLocalRing.map_maximalIdeal_of_surjective f hf, ← hgen]
+      rw [Ideal.map_span f (Set.range (fun i : Fin d ↦
+        algebraMap Λ (Localization.AtPrime q.asIdeal) (φ (MvPolynomial.X i))))]
+      apply Ideal.span_le.mpr
+      rintro _ ⟨_, ⟨i, rfl⟩, rfl⟩
+      rw [hfX]
+      exact Ideal.mem_map_of_mem _ (hXI i)
+  -- A quotient map induces a canonical isomorphism on the corresponding residue fields.
+  let eQ : q.asIdeal.ResidueField ≃ₐ[k] q₀.asIdeal.ResidueField :=
+    AlgEquiv.ofBijective
+      (Ideal.ResidueField.mapₐ q.asIdeal q₀.asIdeal (Ideal.Quotient.mkₐ k J_Λ) hq')
+      (RingHom.SurjectiveOnStalks.residueFieldMap_bijective
+        (RingHom.surjectiveOnStalks_of_surjective Ideal.Quotient.mk_surjective) _ _ hq')
+  have hmU : IsLocalRing.maximalIdeal L₀ =
+      (I.map (algebraMap R₀ L)).map (ULift.algEquiv (R := k) : L ≃ₐ[k] L₀).toRingHom := by
+    rw [Ideal.map_map]
+    change IsLocalRing.maximalIdeal L₀ = I.map (algebraMap R₀ L₀)
+    exact hm.symm
+  let eL : (L ⧸ I.map (algebraMap R₀ L)) ≃ₐ[k] q.asIdeal.ResidueField :=
+    (Ideal.quotientEquivAlg (I.map (algebraMap R₀ L)) (IsLocalRing.maximalIdeal L₀)
+      (ULift.algEquiv (R := k)) hmU).trans eQ.symm
+  exact ⟨eR.toRingEquiv, eL.toRingEquiv, quotient_equivs_compatible I eR eL hR⟩
 
 end Algebra
