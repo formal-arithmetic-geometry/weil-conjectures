@@ -1,0 +1,146 @@
+{
+ "id": "lem-pbc-k2-dense-open-complement-pullback-vanishing",
+ "kind": "statement",
+ "title": "Positive cohomology of a dense-open complement after open restriction",
+ "statement": "Let k be an algebraically closed field, f:X -> Spec k a separated finite-type curve of dimension at most one [def-weil-pbc-curve-setting], U a dense open of X [def-weil-open-immersion], and i:Z -> X a closed immersion with image X minus U [def-weil-closed-immersion]. For any commutative coefficient ring Lambda and Lambda-module etale sheaf G on Z [def-weil-pbc-etale-sheaves], every open immersion a:W -> X satisfies H^q(W,a^{-1}(forget(i_*G)))=0 for all q>0, where direct image, inverse image and cohomology are [def-weil-pbc-direct-image], [def-weil-pbc-inverse-image], [def-weil-pbc-etale-cohomology]. Neither G nor its stalks need to be torsion or constructible.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof, closed-complement vanishing and remark (d)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-curve-setting",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "X is Noetherian by finite type over k. Density of the open U places all generic points of the finitely many irreducible components in U. If the closed complement contained a strict specialization chain of length one, a generic point of X generalizing its upper point would lie outside the complement and extend the chain to length two, contradicting dim X <= 1. The complement is therefore zero-dimensional. The closed immersion i identifies Z topologically with this complement. Z is finite type over k and Noetherian; its finitely many irreducible components are single closed points. Their residue fields are k.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-closed-immersion-finite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the pullback Z_W = W times_X Z. Its projection to Z is an open immersion, so it is an open subset of a finite zero-dimensional space. It is again separated finite type over k and zero-dimensional. The other projection i_W is a closed immersion, hence finite. Finite direct image commutes with pullback by the finite-exchange theorem. Forgetting module structure commutes with direct image sectionwise, and the module-pullback/forget natural isomorphism identifies the displayed object with i_W,* of the underlying abelian sheaf G restricted to Z_W.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-etale-module-pullback-forget-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite direct image does not change cohomology, by the bijective finite edge map. Positive cohomology on the zero-dimensional finite-type scheme Z_W vanishes. Equivalently, reduction is a finite union of spectra of the algebraically closed field k and its etale site has exact global sections. Transport the resulting Subsingleton instance across the comparison bijection in each positive degree. This includes empty Z_W and arbitrary module coefficients, with no torsion or constructibility assumption.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-cohomology",
+    "lem-weil-pbc-zero-dimensional-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-exchange",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-module-pullback-forget-naturality",
+  "lem-weil-pbc-finite-pushforward-cohomology",
+  "lem-weil-pbc-zero-dimensional-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof, closed-complement vanishing and remark (d)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "positive etale cohomology of sheaf supported on finite closed points of curve vanishes after open restriction",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "positive etale cohomology of sheaf supported on finite closed points of curve vanishes after open restriction",
+   "results": "Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-12",
+   "verdict": "No matching complement-vanishing theorem; the listed results do not identify the displayed restricted closed direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "Subsingleton, CategoryTheory.Sheaf.H",
+   "results": "CategoryTheory.Sheaf.subsingleton_H_of_isZero, CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat",
+   "date": "2026-10-12",
+   "verdict": "No matching complement-vanishing theorem; the listed results do not identify the displayed restricted closed direct image."
+  },
+  {
+   "tool": "grep",
+   "query": "complement.*cohomology|cohomology.*complement|dense.*krullDim",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "No matching complement-vanishing theorem; the listed results do not identify the displayed restricted closed direct image."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomologyPullback",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-dense-open-reduction",
+   "place": "Proof: closed complement of the dense open has cohomology concentrated in degree zero; apply the same observation after open restriction.",
+   "via": [
+    "lem-pbc-s2-dense-open-cohomology-pullback"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.DenseOpenComplementPullbackVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/DenseOpenComplementPullbackVanishing.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.dense_open_complement_pullback_vanishing",
+  "statement": "theorem dense_open_complement_pullback_vanishing (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsAlgClosed k] {X Z : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsCurve f] (U : X.Opens) (hU : Dense (U : Set X)) (i : Z ⟶ X) [IsClosedImmersion i] (hi : Set.range i.base = (U : Set X)ᶜ) (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {W : Scheme.{u}} (a : W ⟶ X) [IsOpenImmersion a] : ∀ q : ℕ, 0 < q → Subsingleton (Sheaf.H (((a)^*[AddCommGrpCat.{u + 1}]).obj ((sheafCompose X.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj (((i)_*[ModuleCat.{u + 1} Λ]).obj G))) q)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T063514-L-3156808",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T063514-L-3156808",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
