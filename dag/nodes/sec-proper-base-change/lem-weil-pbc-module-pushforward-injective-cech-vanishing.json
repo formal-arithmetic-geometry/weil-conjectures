@@ -17,7 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Pull back the covering to h⁻¹U. Inverse image preserves unions and finite intersections. On the poset of opens, the universal properties of the products C.W p t identify them with the relevant intersections, so their inverse images are the products of the inverse-image family.",
+   "text": "For a tuple t, form the finite intersection B of the opens V_(t k). The inclusions B → V_(t k) commute because the category of opens is thin. The universal property of C gives B → C.W p t; thus a point in every V_(t k) belongs to C.W p t. Define the pulled-back Čech data explicitly by W′ p t = h⁻¹(C.W p t), with projections and index maps obtained using Opens.map h.base. Any open Z mapping to every h⁻¹(V_(t k)) lies in W′ by the preceding pointwise argument. All required equalities and uniqueness follow from thinness. Degree-zero equality is the inverse image of C.W_zero. Inverse image commutes with the union of the cover, yielding a cover of h⁻¹U.",
    "uses": [
     "def-sc-zariski-site",
     "def-weil-pbc-site-cech-complex"
@@ -29,9 +29,8 @@
    }
   },
   {
-   "text": "Direct image sections on W are I(h⁻¹W), with scalar restriction leaving the additive groups unchanged. The restrictions agree; hence the products of sections and alternating sums identify both additive Čech complexes, including every differential.",
+   "text": "Mathlib scheme module pushforward is sectionwise restriction of scalars: its underlying additive presheaf on W has precisely I(h⁻¹W), and its restriction along an inclusion is that of I along the inverse-image inclusion. With the explicit pulled-back data of Step 1, the products of groups, differentials, complexes and their cohomology are definitionally equal in Lean. No tensor pullback or comparison isomorphism is needed.",
    "uses": [
-    "def-pc-module-pullback",
     "def-weil-pbc-site-cech-complex"
    ],
    "elementary": true,
@@ -41,7 +40,7 @@
    }
   },
   {
-   "text": "Apply module_injective_open_cover_cech_acyclic to the inverse-image covering on X. Transport IsZero across the cohomology isomorphism. Uniqueness of products makes the argument independent of the chosen C.",
+   "text": "Apply module_injective_open_cover_cech_acyclic to I, the open h⁻¹U, the inverse-image family and covering equality, and the explicit pulled-back Čech data. Its positive-degree IsZero conclusion is definitionally the requested conclusion by Step 2. This works for the original arbitrary choice C without replacing it.",
    "uses": [
     "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
    ],
@@ -55,13 +54,14 @@
  "proof_deps": [
   "def-sc-zariski-site",
   "def-weil-pbc-site-cech-complex",
-  "def-pc-module-pullback",
   "lem-weil-pbc-module-injective-open-cover-cech-acyclic"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 01EX (1), proof using Tag 01EP"
+  "place": "Tag 01EX (1), using Tag 01EP; explicit inverse-image Čech construction and definitional comparison"
  },
  "mathlib_searches": [
   {
@@ -146,10 +146,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U2",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T060757-L-2917450",
-  "kind": "interface",
+  "landing": "20261012T085253-L-20383",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
