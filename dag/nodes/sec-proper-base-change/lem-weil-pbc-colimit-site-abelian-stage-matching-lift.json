@@ -16,45 +16,52 @@
  ],
  "proof": [
   {
-   "text": "Every Q cover is finite by hQ and hfinite. Sieves containing a Q cover form a Grothendieck topology: isomorphism covers give maximality; finite base change gives pullback stability; for transitivity choose covers over the finitely many arrows of a Q cover and use finite composition. Thus every sieve covering in Q.toGrothendieck contains a finite Q cover. By hQ this is an image stage cover. Refine its target presentation to a stage above i. For each local section, expand its subgroup membership as a finite additive expression in generators. Lift the finitely many restriction arrows, align their endpoints by eventual object equality, and move the stage sections to a common stage. Naturality and unit-characterized transitions identify their images with the original sections. Addition and negation at the common stage produce the desired individual representatives. No amalgamation is taken.",
+   "text": "Every Q-cover has finitely many actual arrows: use hQ, finiteness of the stage presieve and the surjection from its arrows to those of its image. Induct on the saturation defining Q.toGrothendieck to show that each covering sieve contains a Q-cover. For pullback, index the old cover by its finite uncurry type and apply finite base change to its covering pullbacks. For transitivity, choose a cover below the pullback along each arrow of the finite old cover, index each by its finite uncurry type and apply finite composition. Isomorphism covers handle maximality. This is the proved private helper finite_cover_of_mem.",
    "uses": [
     "def-weil-pbc-finite-precoverage",
-    "def-weil-pbc-colimit-site-abelian-stage-image",
-    "def-weil-pbc-arrows-functor",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false
   },
   {
-   "text": "For each pair of arrows of the finite transported stage cover, take its covering pullback. The difference of the two restrictions of the lifted sections has zero alpha image by compatibility of the original family. The unit-compatible uniqueness isomorphism between composite and direct left adjoints identifies the kernel of alpha with the kernel of the cocone inverse-image unit. Apply finite source-unit zero detection to this difference, taking the already pulled-back stage sheaf as the source sheaf, at the covering-pullback object. It yields a stage transition unit killing the difference. Composite-adjunction uniqueness identifies this with equality of the two canonical transitioned restrictions. Filteredness imposes these finitely many persistent equalities at a common later stage. Covering pullback preservation identifies the resulting equations with pullback compatibility; the full compatible family follows. Naturality and the unit equations retain the local alpha-image formulas. For an empty covering use the empty matching family and impose no equations. This concludes only existence of a compatible lift on a stage cover, without gluing or uniqueness.",
+   "text": "Restrict x to the Q-cover R just obtained and apply the individual-cover-section-lift theorem. This gives a stage cover T, a family y, and its alpha-image equation, with no compatibility assumption on y.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-finite-precoverage",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-    "lem-weil-pbc-colimit-site-finite-unit-zero-detection"
+    "lem-weil-pbc-colimit-site-abelian-cover-section-lift"
    ],
    "elementary": false
+  },
+  {
+   "text": "The underlying H-valued family xH obtained by subtype inclusion is compatible by congrArg Subtype.val applied to hx. Rewrite the alpha images of y using its representative equations. Functoriality maps every commuting stage test square to a commuting square in the colimit site (and compose its two sides with eqToHom hY). Compatibility of xH therefore makes the alpha-image family of y compatible.",
+   "uses": [
+    "def-weil-pbc-colimit-site-abelian-stage-image",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite-family stabilization to y and this alpha-image compatibility. It supplies a compatible family y' on a new stage cover, with target equality hW and with each new cover arrow factoring through an old cover arrow; its alpha value is the corresponding restriction of the old alpha value.",
+   "uses": [
+    "lem-weil-pbc-colimit-site-abelian-finite-family-stabilization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose hW with hY. The factorization of each new cover arrow, together with downward closure of S, proves that it belongs to S. Sieve compatibility of xH identifies the restriction of its old value with its new value. Combining this with the two alpha-image equations gives the required final image formula. Equality transport is handled by eqToHom_trans and proof irrelevance. Return the new cover and compatible family. No amalgamation is used.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-arrows-functor",
-  "def-weil-pbc-category-colimit",
   "def-weil-pbc-colimit-site-abelian-stage-image",
   "def-weil-pbc-finite-precoverage",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-colimit-site-finite-unit-zero-detection",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+  "lem-weil-pbc-colimit-site-abelian-cover-section-lift",
+  "lem-weil-pbc-colimit-site-abelian-finite-family-stabilization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0A35, finite-cover matching equalizer argument; abelian extension Tag 03CO. Compatibility stabilization uses the existing finite source-unit zero-detection statement rather than rebuilding the raw presheaf."
+  "place": "Tag 0A35, finite-cover and matching-equalizer paragraphs; Tag 03CO for abelian coefficients. Lean decomposition into individual cover lifts and finite-family stabilization; finite-cover containment and all combination steps proved in the parent module."
  },
  "mathlib_searches": [
   {
@@ -136,9 +143,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J3",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261012T220522-L-1394169",
+  "landing": "20261012T234216-L-2124111",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

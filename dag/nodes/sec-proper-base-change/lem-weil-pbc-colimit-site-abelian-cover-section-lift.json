@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-colimit-site-abelian-cover-section-lift",
+ "kind": "statement",
+ "title": "Individual lifts of generated abelian sections on a stage cover",
+ "statement": "Let $J$ be a small filtered category, $F:J\\to\\mathrm{Cat}$ a diagram of small categories [def-weil-pbc-category-colimit], $P_j$ precoverages [def-weil-pbc-sites-and-cohomology], and $V$ a cocone whose object and arrow set cocones are colimiting [def-weil-pbc-arrows-functor]. Assume each $P_j$-cover has finitely many arrows, transition functors map covers to covers and are continuous, and $Q$ is a precoverage on $V.pt$ whose covers are exactly transported images of stage covers. Assume the cocone functors are continuous. Fix $i$ and an abelian sheaf $G$ on $P_i$. Write $A_t=F(t.hom)^{-1}G$ and $H=V_i^{-1}G$. Let $\\alpha_t:A_t\\to V_t^*H$ have composites with the stage units equal, componentwise as arrows, to the $V_i$ unit. Let $B$ be the subgroup-generated presheaf of restrictions of stage images [def-weil-pbc-colimit-site-abelian-stage-image]. For an object $Y$, a covering presieve $R\\in Q(Y)$ and any family $x$ of $B$-sections on $R$ (with no compatibility assumption), there exist $t\\in\\mathrm{Under}(i)$, $W\\in F(t.right)$, $T\\in P_{t.right}(W)$, $h:V_tW=Y$, and a family $y$ of $A_t$-sections on $T$ such that $V_t(g)\\circ h$ lies in $R$ and $\\alpha_t(y_g)=x_{V_t(g)\\circ h}$ as an underlying $H$-section. No compatibility of $y$ or amalgamation is asserted; no finite closure or covering-pullback axiom is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, general-object presentation, finite-cover equalizer and adjunction paragraphs; Tag 03CO, abelian extension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-colimit-site-abelian-stage-image"
+ ],
+ "proof": [
+  {
+   "text": "Use hQ to present R by a stage cover. Move its stage above i by filteredness and hcover; the covering presieve is finite by hfinite. For each covering member, x supplies a section of the generated subgroup. Expand it into a finite additive expression in generators. There are finitely many expressions in total.",
+   "uses": [
+    "def-weil-pbc-colimit-site-abelian-stage-image",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each generating restriction r, use surjectivity of the arrow colimit to lift it. Move its representative and the section stage together with the covering stage to a common stage. Eventual equality in the object colimit aligns both endpoints with the forward images of the prescribed cover source and generator source. Compose the lifted arrow with these endpoint transports. Eventual equality and filteredness impose all finitely many choices and endpoint equations at once. The resulting cocone images are precisely the original restriction arrows.",
+   "uses": [
+    "def-weil-pbc-arrows-functor",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the direct stage unit through the preceding stage adjunction to obtain transition maps between inverse images. Uniqueness of adjuncts proves their composition law and that alpha after transition equals the old alpha by h-alpha. Naturality along the lifted restriction arrows gives representatives of the generators, and additivity gives representatives of their sums and negatives at the common stage.",
+   "uses": [
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the cover using hcover. For each actual arrow of its image presieve choose one of the indexed representatives. Duplicate indices have the same prescribed target value x, so this still satisfies every alpha-image equation. The transported cover and this family satisfy the conclusion. An empty cover has the empty family and requires no section equations. No compatibility or gluing is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-colimit-site-abelian-stage-image",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, general-object presentation and finite-cover paragraphs; Tag 03CO for abelian coefficients. Expanded individual-representative part of the parent plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite covering family of sections generated by images of inverse image sheaves has individual representatives on a common filtered stage cover",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite families of sections in a subgroup generated by stage inverse image sections lift individually to a common filtered stage",
+   "results": "nonempty_sections_of_finite_inverse_system; TopCat.partialSections.nonempty; nonempty_sections_of_finite_cofiltered_system.init; GroupExtension.Section.exists_eq_mul_inl; GroupExtension.Section.exists_eq_inl_mul; GrpCat.sectionsSubgroup; nonempty_sections_of_finite_cofiltered_system; GroupExtension.Section.exists_mul_eq_inl_mul_mul",
+   "date": "2026-10-13",
+   "verdict": "Generic filtered-colimit or matching-family tools only; no filtered-site abelian family lift/stabilization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "FamilyOfElements.*Compatible|exists_familyOfElements",
+   "results": "Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean; Mathlib/CategoryTheory/Sites/Coherent/CoherentSheaves.lean; Mathlib/CategoryTheory/Sites/Coherent/RegularSheaves.lean; Mathlib/CategoryTheory/Sites/Sheaf.lean; Mathlib/CategoryTheory/Sites/Sheaf.lean",
+   "date": "2026-10-13",
+   "verdict": "Generic filtered-colimit or matching-family tools only; no filtered-site abelian family lift/stabilization theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteAbelianStageMatchingLift",
+  "date": "2026-10-13",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 0A35, individual representatives for the finite covering family",
+   "via": [
+    "lem-weil-pbc-colimit-site-abelian-stage-matching-lift",
+    "lem-weil-pbc-colimit-site-abelian-stage-image-sheaf",
+    "lem-weil-pbc-colimit-site-abelian-section-representatives",
+    "lem-weil-pbc-colimit-site-abelian-section-universality",
+    "lem-weil-pbc-colimit-site-abelian-inverse-image",
+    "lem-weil-pbc-colimit-of-sites-reduced"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteAbelianCoverSectionLift",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteAbelianCoverSectionLift.lean",
+  "declaration": "CategoryTheory.colimit_site_abelian_cover_section_lift",
+  "statement": "theorem colimit_site_abelian_cover_section_lift\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n          ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),\n            S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R))\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck AddCommGrpCat.{u})\n    (α : ∀ t : Under i,\n      (sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck (P\n        t.right).toGrothendieck).obj G ⟶\n      ((V.ι.app t.right).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (P\n        t.right).toGrothendieck Q.toGrothendieck).obj\n        ((sheafPullback (V.ι.app i).toFunctor AddCommGrpCat.{u} (P i).toGrothendieck\n          Q.toGrothendieck).obj G))\n    (hα : ∀ (t : Under i) (X : F.obj i),\n      Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor AddCommGrpCat.{u} (P\n        i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app (op X) ≫ (α t).hom.app\n        (op ((F.map t.hom).toFunctor.obj X))) =\n      Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor AddCommGrpCat.{u} (P\n        i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X)))\n    (Y : V.pt) (R : Presieve Y) (hR : R ∈ Q Y)\n    (x : R.FamilyOfElements\n      (ColimitSiteStageImage.presheaf F P V Q i G α ⋙ forget AddCommGrpCat.{u})) :\n    ∃ (t : Under i) (W : F.obj t.right) (T : Presieve W), T ∈ P t.right W ∧\n      ∃ (hY : (V.ι.app t.right).toFunctor.obj W = Y)\n        (hTR : ∀ {Z : F.obj t.right} (g : Z ⟶ W), T g →\n          R ((V.ι.app t.right).toFunctor.map g ≫ eqToHom hY))\n        (y : T.FamilyOfElements\n          (((sheafPullback (F.map t.hom).toFunctor AddCommGrpCat.{u}\n            (P i).toGrothendieck (P t.right).toGrothendieck).obj G).obj ⋙\n              forget AddCommGrpCat.{u})),\n        ∀ {Z : F.obj t.right} (g : Z ⟶ W) (hg : T g),\n          (α t).hom.app (op Z) (y g hg) =\n            (x ((V.ι.app t.right).toFunctor.map g ≫ eqToHom hY) (hTR g hg)).val",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T234216-L-2124111",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T234216-L-2124111",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
