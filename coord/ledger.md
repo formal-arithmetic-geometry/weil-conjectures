@@ -6498,3 +6498,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/K2/Sheaf.AlgebraicGeometry.Curve.DenseOpenLowBaseChange (stage 3; reviewer PASS; first push; landing 20261012T063514-L-3156950 (interface); batch 20261012T063502; modules 2; new nodes 1)
 - 06:35 L: merged deliver/M1/Sheaf.Paper.PowerSetComplexContractible (stage 3; reviewer PASS; first push; landing 20261012T063514-L-3157144 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/M1/Sheaf.Topology.PresheafModuleStalkFunctor (stage 3; reviewer PASS; first push; landing 20261012T063514-L-3157254 (proof); batch 20261012T063502; modules 1; new nodes 0)
+- 06:35 L: merged deliver/M2/Sheaf.AlgebraicGeometry.Curve.DenseOpenPulledCounitHigh (stage 3; reviewer PASS; first push; landing 20261012T063515-L-3157398 (interface); batch 20261012T063502; modules 2; new nodes 1)

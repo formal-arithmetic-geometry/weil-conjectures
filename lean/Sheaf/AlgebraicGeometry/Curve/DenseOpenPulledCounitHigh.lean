@@ -7,12 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.Paper.ZeroDimensionalCohomology
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.OpenClosed.Exact
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import WeilConjectures.SixFunctors.OpenClosed.Complex
+import Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenBaseChangeBoundary
 
 /-! # Dense-open field-extension comparison ingredients -/
 
@@ -50,6 +48,32 @@ theorem dense_open_pulled_counit_high (Λ : Type (u + 1)) [CommRing Λ]
         ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).counit.app F)
     ∀ q : ℕ, 1 < q → Function.Bijective
       (Sheaf.H.map (((ι')^*[AddCommGrpCat.{u + 1}]).map ε) q) := by
-  sorry
+  dsimp only
+  let εΛ := (openImmersionLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} Λ) U.ι).counit.app F
+  let ε := (sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map εΛ
+  let V := ι' ⁻¹ᵁ U
+  obtain ⟨hfin, hcl, hsep⟩ := dense_open_baseChange_boundary f h U hU
+  have hε : IsIso ((U.ι)^*[AddCommGrpCat.{u + 1}].map ε) := by
+    obtain ⟨e⟩ := exists_upperStar_forget₂_natIso Λ U.ι
+    exact (NatIso.isIso_map_iff e εΛ).mp (by
+      change IsIso ((sheafCompose (U : Scheme.{u}).smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map
+          ((U.ι)^*[ModuleCat.{u + 1} Λ].map εΛ))
+      infer_instance)
+  have hε' : IsIso ((V.ι)^*[AddCommGrpCat.{u + 1}].map
+      (((ι')^*[AddCommGrpCat.{u + 1}]).map ε)) := by
+    let e := (upperStarComp AddCommGrpCat.{u + 1} V.ι ι').symm ≪≫
+      upperStarComp AddCommGrpCat.{u + 1} (ι' ∣_ U) U.ι (V.ι ≫ ι')
+        (morphismRestrict_ι ι' U).symm
+    exact (NatIso.isIso_map_iff e ε).mpr (by
+      change IsIso (((ι' ∣_ U)^*[AddCommGrpCat.{u + 1}]).map
+        ((U.ι)^*[AddCommGrpCat.{u + 1}].map ε))
+      infer_instance)
+  intro q hq
+  obtain ⟨n, rfl⟩ : ∃ n, q = n + 2 := ⟨q - 2, by omega⟩
+  exact bijective_H_map_of_isIso_upperStar_map V hfin hcl hsep
+    (((ι')^*[AddCommGrpCat.{u + 1}]).map ε) hε' n
 
 end AlgebraicGeometry.IsCurve
