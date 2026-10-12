@@ -2,7 +2,7 @@
  "id": "lem-pc-cech-comparison-system-existence-connecting",
  "kind": "statement",
  "title": "Connecting law for normalized Cech comparison morphisms",
- "statement": "Let X be a scheme and U an open cover. Given comparison morphisms from Cech cohomology to sheaf cohomology in every degree, for every sectionwise-surjective short exact coefficient sequence the comparison morphisms satisfy the connecting-map identity.",
+ "statement": "Given a normalized Cech comparison system c on an open cover, for every sectionwise-surjective short exact coefficient sequence the stored comparison morphisms satisfy the connecting-map identity.",
  "source": {
   "document": "https://stacks.math.columbia.edu/tag/01EQ",
   "place": "Lemmas 20.11.2 and 20.15.1"
@@ -12,20 +12,20 @@
  ],
  "proof": [
   {
-   "text": "For a sectionwise-surjective short exact sequence, the Cech complexes are short exact. Horseshoe resolutions and naturality of homology boundaries identify the Cech and sheaf connecting morphisms, yielding the displayed identity.",
+   "text": "The identity is exactly the connecting field of the supplied CechComparisonSystem; project that field.",
    "uses": [
-    "lem-sc-injective-cech-augmentation-quasi-iso"
+    "def-pc-cech-comparison-system"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-injective-cech-augmentation-quasi-iso"
+  "def-pc-cech-comparison-system"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "https://stacks.math.columbia.edu/tag/01EQ",
-  "place": "Augmented ordered Cech double-complex construction"
+  "document": "Lean structure projection",
+  "place": "CechComparisonSystem.connecting field"
  },
  "mathlib_searches": [
   {
@@ -72,7 +72,7 @@
   "module": "Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemConnecting",
   "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/CechComparisonSystemConnecting.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.cechComparisonSystem_comparison_connecting",
-  "statement": "theorem cechComparisonSystem_comparison_connecting\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)\n    (comparison : ∀ q, TopCat.Sheaf.cechCohomologyFunctor U q ⟶\n      Sheaf.functorH (Opens.grothendieckTopology X) q)\n    (q : ℕ) (T : ShortComplex\n      (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l))))) :\n    TopCat.Sheaf.cechδ U hT hg q ≫ (comparison (q + 1)).app T.X₁ =\n      (comparison q).app T.X₃ ≫ Sheaf.functorHδ hT q",
+  "statement": "theorem cechComparisonSystem_comparison_connecting\n    {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤)\n    (c : CechComparisonSystem U hcover)\n    (q : ℕ) (T : ShortComplex\n      (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))\n    (hT : T.ShortExact)\n    (hg : ∀ (k : ℕ) (y : Fin (k + 1) → ι),\n      Function.Surjective (T.g.hom.app (op (⨅ l, U (y l))))) :\n    TopCat.Sheaf.cechδ U hT hg q ≫ (c.comparison (q + 1)).app T.X₁ =\n      (c.comparison q).app T.X₃ ≫ Sheaf.functorHδ hT q",
   "branch": "sheaf-dag",
   "by": "W2",
   "date": "2026-10-13"
@@ -90,11 +90,40 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "W2",
+  "reviewer": "X-a2ef9",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T194152-L-468714",
+  "landing": "20261012T213848-L-1208054",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched the delivered files and DAG records against the packet, base repository, forced-adaptation compile, adapted compile, import-prune check, and axiom probe."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "F2 stage 2",
+  "old_statement": "Let X be a scheme and U an open cover. Given comparison morphisms from Cech cohomology to sheaf cohomology in every degree, for every sectionwise-surjective short exact coefficient sequence the comparison morphisms satisfy the connecting-map identity.",
+  "what": "Replace the false universal quantification over arbitrary degreewise comparison morphisms by a supplied CechComparisonSystem, whose connecting field carries the required compatibility. The conclusion uses c.comparison.",
+  "source": {
+   "document": "https://stacks.math.columbia.edu/tag/01EQ",
+   "place": "Lemmas 20.11.2 and 20.15.1; compatibility is part of the normalized comparison system interface"
+  },
+  "citers": [
+   {
+    "id": "lem-pc-cech-comparison-system-existence",
+    "holds": false,
+    "note": "Its previous proof applied the old arbitrary-family theorem; after the interface correction it requires a direct compatible-system construction."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "For a sectionwise-surjective short exact sequence, the Cech complexes are short exact. Horseshoe resolutions and naturality of homology boundaries identify the Cech and sheaf connecting morphisms, yielding the displayed identity.",
+    "uses": [
+     "lem-sc-injective-cech-augmentation-quasi-iso"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sc-injective-cech-augmentation-quasi-iso"
+  ]
  }
 }

@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
 import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemComparison
-import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemConnecting
 import Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
 /-! # Existence of normalized additive Cech comparisons
@@ -44,11 +43,5 @@ theorem exists_cechComparisonSystem
     {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (hcover : iSup U = ⊤) :
     Nonempty (CechComparisonSystem U hcover) := by
-  obtain ⟨comparison, hzero⟩ := exists_cechComparisonSystem_comparison U hcover
-  let c : CechComparisonSystem U hcover :=
-    { comparison := comparison
-      zero := hzero
-      connecting := fun T hT hg q =>
-        cechComparisonSystem_comparison_connecting U hcover comparison q T hT hg }
-  exact ⟨c⟩
+  sorry
 end AlgebraicGeometry.Scheme.Modules
