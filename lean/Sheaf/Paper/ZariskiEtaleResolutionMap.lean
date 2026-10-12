@@ -10,8 +10,9 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import Sheaf.CategoryTheory.SiteCohomologyPullback
+
+import Sheaf.Paper.ZariskiEtaleResolutionComparisonExists
+import Sheaf.Paper.ZariskiEtaleResolutionHomologyIndependent
 
 /-! # Resolution representation of canonical cohomology comparison
 
@@ -132,4 +133,11 @@ theorem zariski_etale_resolution_map
         (HomologicalComplex.homologyMap
           (((sheafToPresheaf (Opens.grothendieckTopology X.carrier) AddCommGrpCat.{u + 1} ⋙
             (evaluation X.Opensᵒᵖ AddCommGrpCat.{u + 1}).obj (op V)).mapHomologicalComplex
-               (ComplexShape.up ℕ)).map a) q).hom (e₁ x) := by sorry
+               (ComplexShape.up ℕ)).map a) q).hom (e₁ x) := by
+  obtain ⟨b, hb, e₁, e₂, h⟩ :=
+    zariski_etale_resolution_comparison_exists i hi fstar hfstar F I R q V
+  refine ⟨e₁, e₂, ?_⟩
+  intro x
+  rw [h x]
+  have he := zariski_etale_resolution_homology_independent i hi F I R a ha b hb q V
+  rw [he]
