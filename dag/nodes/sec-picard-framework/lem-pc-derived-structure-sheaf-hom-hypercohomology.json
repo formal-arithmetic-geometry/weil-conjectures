@@ -15,60 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective representative J of E using [lem-pc-scheme-modules-grothendieck-abelian] and [prop-pur-kinjective-resolutions-exist]. The K-injective localization bijection [lem-weil-pbc-kinjective-hom-derived] identifies derived maps from the degree-zero structure sheaf with homotopy classes of chain maps into J.",
+   "text": "Apply [lem-pc-derived-structure-sheaf-global-sections-hom] to identify maps from O_X[0] with maps from A[0] to RΓ(E). Apply the proved [lem-pc-derived-free-module-hom-homology] to identify the latter group with H^0(RΓ(E)). Compose their additive equivalences.",
    "uses": [
-    "lem-pc-scheme-modules-grothendieck-abelian",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-pc-derived-structure-sheaf-global-sections-hom",
+    "lem-pc-derived-free-module-hom-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
-   }
+   "elementary": true
   },
   {
-   "text": "Evaluation at 1 identifies O_X-linear maps O_X → J^n with global sections of J^n. Chain-map equations from O_X[0] say the section in degree zero is closed. A homotopy from this one-term source is a section in degree -1 whose differential is the difference of the two cycles. Hence homotopy classes are the additive group H^0(Γ(X,J)). The K-injective resolution computation in [def-pc-global-derived-rhom] identifies this group with H^0(RΓ(X,E)).",
+   "text": "Rewrite the first equivalence applied to g≫f by its naturality; apply the second equivalence naturality to RΓ(f). This is exactly F(f) of the composed equivalence at g. The Lean proof uses AddEquiv.trans, rw, and the two naturality equations.",
    "uses": [
-    "def-pc-global-derived-rhom",
-    "def-sc-ringed-space-module-cohomology"
+    "lem-pc-derived-structure-sheaf-global-sections-hom",
+    "lem-pc-derived-free-module-hom-homology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
-   }
-  },
-  {
-   "text": "For a derived morphism f between K-injective representatives, the localization bijection supplies a chain-map lift. Postcomposition on cycles is application of Γ(f), so it induces exactly F(f) on H^0. Changing the lift by a homotopy leaves its map on cohomology unchanged. The K-injective comparison maps intertwine the same operations; consequently the additive equivalences descend independently of representatives and obey the stated naturality equation.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pc-global-derived-rhom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-scheme-modules-grothendieck-abelian",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-pc-global-derived-rhom",
-  "def-sc-ringed-space-module-cohomology"
+  "lem-pc-derived-structure-sheaf-global-sections-hom",
+  "lem-pc-derived-free-module-hom-homology"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "V1",
+  "agent": "H1",
   "based_on": {
    "document": "literature/stacks-project/perfect.tex",
    "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
   },
-  "note": "Detailed structure-sheaf specialization of the first paragraph of Tag 09M1; calculations expanded by V1.",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+  "note": "Lean reduction through the derived-global-sections Hom comparison and the proved free-module zeroth-homology calculation; signatures unchanged."
  },
  "mathlib_searches": [
   {
@@ -158,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V1",
+  "reviewer": "X-045a5",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T110322-L-623155",
+  "landing": "20261012T144116-L-2097730",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched Lean signatures and proofs with the nodes and cited sources; verified unchanged existing interface, clean compilation of all three delivered modules and direct importer DerivedTensorUnitCompact, and permitted axioms with expected sorryAx."
  }
 }

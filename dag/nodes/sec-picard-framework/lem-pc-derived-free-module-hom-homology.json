@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-derived-free-module-hom-homology",
+ "kind": "statement",
+ "title": "Derived maps from a free module compute zeroth homology",
+ "statement": "Let A be any ring, and D(A) the unbounded derived category of left A-modules (localization of cochain complexes at quasi-isomorphisms [def-weil-abstract-derived-category]). Let A[0] be the free rank-one left A-module in degree zero. There are additive equivalences b_E:Hom_D(A)(A[0],E) ≃+ H^0(E), where H^0(E) is viewed as an additive group, natural in every derived morphism: b_E'(g≫f)=H^0(f)(b_E(g)) for f:E→E' and g:A[0]→E. No commutativity of A or boundedness of E is assumed.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For a projective object P and E≤-1, choose a strictly bounded-above representative of E. Mathlib DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective makes every map P[0]→E zero. This is the proved private helper projective_single_to_negative_eq_zero.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use the truncation triangle τ<0(E)→E→τ≥0(E). Maps from P[0] to its first object and to that object shifted by 1 vanish by the preceding helper. The exact Hom sequence therefore makes postcomposition E→τ≥0(E) bijective. The source-library homologyFunctor_map_bijective_of_isLE_of_isGE makes H^0 bijective on maps P[0]→τ≥0(E); H^0(E)→H^0(τ≥0(E)) is an isomorphism. Combining the two squares proves projective_single_homology_bijective.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Take P=A, which is projective. Turn the bijective additive map H^0 on morphisms into an additive equivalence. Precompose with the inverse of H^0(A[0])≅A and apply ModuleCat.homAddEquiv and LinearMap.ringLmapEquivSelf A ℤ to evaluate at 1. The resulting map is b_E(g)=(ε.inv≫H^0(g))(1). The functor composition law gives naturality immediately; the final Lean proof uses rw and rfl.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "H1",
+  "based_on": {
+   "document": "literature/stacks-project/perfect.tex",
+   "place": "Proposition perfect-proposition-compact-is-perfect (Tag 09M1), proof, first paragraph; structure-sheaf case"
+  },
+  "note": "Structure-sheaf specialization of Tag 09M1; expanded by H1. The module calculation is proved using projectivity and the canonical truncation triangle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hom.*hypercohomology|hypercohomology.*hom",
+   "results": "{\"t\": \"2026-10-12T12:45:56Z\", \"tool\": \"grep\", \"query\": \"hom.*hypercohomology|hypercohomology.*hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom from a free rank one module in degree zero to a derived complex is zeroth cohomology",
+   "results": "{\"t\": \"2026-10-12T12:45:57Z\", \"tool\": \"leanfinder\", \"query\": \"Hom from a free rank one module in degree zero to a derived complex is zeroth cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.\\u03c0_comp_H0IsoOfIsTrivial_hom_apply\", \"groupCohomology.cocyclesIso\\u2080\", \"groupCohomology.\\u03c0_comp_H0IsoOfIsTrivial_hom\", \"groupCohomology.cochainsIso\\u2080\", \"groupCohomology.H0Iso\", \"groupCohomology.H1IsoOfIsTrivial\", \"groupCohomology.cochainsIso\\u2081\", \"groupCohomology.H0IsoOfIsTrivial_hom\"], \"digest\": \"0f518dedd91efc2f\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor",
+   "results": "{\"t\": \"2026-10-12T12:45:57Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory.singleFunctor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctor\", \"DerivedCategory.instAdditiveSingleFunctor\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.singleFunctorIsoCompQh\", \"DerivedCategory.Q_obj_single_obj\", \"DerivedCategory.singleFunctorIsoCompQ_hom_app\", \"DerivedCategory.singleFunctorIsoCompQ_inv_app\", \"DerivedCategory.Q_map_single_map\"], \"digest\": \"b7fb8a83f1bb9ad3\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections adjunction maps from the structure sheaf to a complex equal maps from the global sections ring to derived global sections",
+   "results": "{\"t\": \"2026-10-12T13:05:34Z\", \"tool\": \"leanfinder\", \"query\": \"Derived global sections adjunction maps from the structure sheaf to a complex equal maps from the global sections ring to derived global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.\\u0393Spec_adjunction_homEquiv_eq\", \"AlgebraicGeometry.\\u0393Spec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"CategoryTheory.Sheaf.\\u0393HomEquiv\", \"AlgebraicGeometry.\\u0393SpecIso_inv_\\u0393Spec_adjunction_homEquiv\", \"AlgebraicGeometry.\\u0393Spec.adjunction_homEquiv_apply\", \"AlgebraicGeometry.\\u0393Spec.locallyRingedSpaceAdjunction_homEquiv_apply\", \"AlgebraicGeometry.\\u0393Spec.locallyRingedSpaceAdjunction_homEquiv_apply'\", \"CategoryTheory.Sheaf.\\u0393ObjEquivHom_naturality\"], \"digest\": \"bd5eff96941da5be\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"projective\"",
+   "results": "{\"t\": \"2026-10-12T13:05:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"homology\\\", \\\"projective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective\", \"CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_apply\", \"CochainComplex.HomComplex.CohomologyClass.equivOfIsKProjective_symm_apply\", \"CategoryTheory.ProjectiveResolution.hasHomology\", \"CategoryTheory.preservesHomology_preadditiveCoyonedaObj_of_projective\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.ProjectiveResolution.extLinearEquivCohomologyClass\"], \"digest\": \"78734d8dec7c969d\"}",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from the structure sheaf in the derived category are naturally zeroth cohomology of derived global sections",
+   "results": "{\"t\": \"2026-10-12T13:15:41Z\", \"tool\": \"leansearch\", \"query\": \"Maps from the structure sheaf in the derived category are naturally zeroth cohomology of derived global sections\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: Internal Server Error\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedStructureSheafHomHypercohomology",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Structure-sheaf compactness calculation in the derived direct-sums argument; right adjoint commutes with direct sums: compactness of the structure sheaf in the perfect-object argument",
+   "via": [
+    "lem-pc-derived-structure-sheaf-hom-hypercohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedFreeModuleHomology",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedFreeModuleHomology.lean",
+  "declaration": "AlgebraicGeometry.derivedFreeModule_hom_homology",
+  "statement": "theorem derivedFreeModule_hom_homology (A : Type u) [Ring A]\n    [HasDerivedCategory.{w} (ModuleCat.{u} A)] :\n    let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0 ⋙\n      forget₂ (ModuleCat.{u} A) AddCommGrpCat\n    ∃ e : ∀ E : DerivedCategory (ModuleCat.{u} A),\n      (((DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj\n        (ModuleCat.of A A)) ⟶ E) ≃+ H.obj E,\n      ∀ (E E' : DerivedCategory (ModuleCat.{u} A)) (f : E ⟶ E')\n        (g : (DerivedCategory.singleFunctor (ModuleCat.{u} A) 0).obj\n          (ModuleCat.of A A) ⟶ E),\n        e E' (g ≫ f) = H.map f (e E g)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-045a5",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T144116-L-2097730",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-045a5",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T144116-L-2097730",
+  "kind": "interface",
+  "note": "independent Codex review: Matched Lean signatures and proofs with the nodes and cited sources; verified unchanged existing interface, clean compilation of all three delivered modules and direct importer DerivedTensorUnitCompact, and permitted axioms with expected sorryAx."
+ }
+}

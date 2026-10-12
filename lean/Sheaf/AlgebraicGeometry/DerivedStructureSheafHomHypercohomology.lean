@@ -8,9 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
-import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.DerivedStructureSheafGlobalSectionsHom
+import Sheaf.Algebra.Homology.DerivedFreeModuleHomology
 
 /-! # Hom from the derived structure sheaf
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
@@ -25,6 +24,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+set_option maxHeartbeats 800000 in
+-- The sheaf instances and nested derived functors require extra elaboration heartbeats.
+-- The sheaf instances and nested derived functors require extra elaboration heartbeats.
 /-- Hom from the degree-zero structure sheaf is naturally the zeroth derived global sections.
 Source: Stacks Project, Tag 09M1, proof of Proposition perfect-proposition-compact-is-perfect,
 first paragraph (blueprint: lem-pc-derived-structure-sheaf-hom-hypercohomology).
@@ -51,6 +53,16 @@ theorem derivedStructureSheaf_hom_hypercohomology (X : Scheme.{u})
         (DerivedCategory.singleFunctor
           (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj
             (SheafOfModules.unit (moduleRings X.toRingedSpace)) ⟶ E),
-        e E' (g ≫ f) = F.map f (e E g) := by sorry
+        e E' (g ≫ f) = F.map f (e E g) := by
+  let := HasDerivedCategory.standard
+    (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))
+  obtain ⟨a, ha⟩ := derivedStructureSheaf_globalSections_hom X
+  obtain ⟨b, hb⟩ := derivedFreeModule_hom_homology
+    ((moduleRings X.toRingedSpace).obj.obj (op ⊤))
+  refine ⟨fun E ↦ (a E).trans (b _), ?_⟩
+  intro E E' f g
+  change b _ (a E' (g ≫ f)) = _
+  rw [ha E E' f g]
+  exact hb _ _ _ _
 
 end AlgebraicGeometry
