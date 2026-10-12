@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-constant-subsheaf-stalk-bound",
+ "kind": "statement",
+ "title": "Uniform bound for integer stalk images",
+ "statement": "Let $X$ be a topological space and $\\iota:K\\to C$ a monomorphism of abelian sheaves, where $C$ is isomorphic to the constant integer sheaf [def-weil-pbc-constant-sheaf]. Suppose $K$ receives an epimorphism from $\\bigoplus_{i=1}^n j_{i!}\\underline{\\mathbf Z}_{U_i}$ for a finite family of quasi-compact opens $U_i$, using extension by zero [def-sc-abelian-open-extension-by-zero], including $n=0$. Stalks and their maps are those of [def-weil-pbc-module-stalk]. Then there are abelian-group isomorphisms $e_x:C_x\\simeq\\mathbf Z$ for all $x\\in X$ and a natural number $b$ such that for every $x$ the image of $e_x\\iota_x$ is $a\\mathbf Z$ for some natural number $a\\le b$ (with $a=0$ allowed).",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Choose canonical stalk coordinates for the constant sheaf: the colimit of the constant diagram of open neighborhoods is the integers, and sheafification preserves stalks. The sheafification unit is locally surjective, so every section has locally constant integer coordinates. Transport these coordinates along the given ambient sheaf isomorphism.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-stalk-sheafification-space",
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph"
+   }
+  },
+  {
+   "text": "For each generating summand, use its extension section and the image of 1 to obtain a section of the ambient constant sheaf on its compact open. Its locally constant integer coordinates have finite range. Take the supremum of their absolute values and sum these finitely many bounds. Stalks preserve the generating epimorphism and coproduct; if the image at a point is nonzero, one summand has nonzero image. Extension-by-zero stalks force that point to lie in its open and identify the summand stalk with the integers. Naturality of germs identifies the image of 1 with the bounded section value.",
+   "uses": [
+    "def-sc-abelian-open-extension-by-zero",
+    "def-weil-pbc-module-stalk",
+    "lem-sc-topological-extension-by-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph"
+   }
+  },
+  {
+   "text": "Every subgroup of the integers is cyclic, by Mathlib Int.subgroup_cyclic. Replace its generator by its natural absolute value. If the map is zero the generator is zero. Otherwise this positive generator divides the nonzero bounded section value from the previous step, so is bounded by its absolute value. This proves the asserted bound with no gcd closure or compact-intersection hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-abelian-open-extension-by-zero",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-module-stalk",
+  "lem-sc-topological-extension-by-zero-stalks",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "lem-weil-pbc-stalk-sheafification-space"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 0A38, first paragraph; direct bounded-section argument using Mathlib constant colimits, locally constant finite ranges, stalk preservation, and integer subgroup cyclicity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finitely generated subsheaf of the constant integer sheaf has uniformly bounded positive generators of its stalk subgroups",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated subsheaf of the constant integer sheaf has uniformly bounded positive generators of its stalk subgroups",
+   "results": "8 hits: SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.Presentation.IsFinite.isFiniteType_generators",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(constant|[Gg]enerator)|constant.*stalk",
+   "results": "No matching declarations in Mathlib/Topology/Sheaves",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.ConstantSubsheafFiniteFiltration",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "the finite filtration of a finitely generated subsheaf of the constant sheaf in the proof of Lemma 02UX: Lemma 0A38 (cohomology-lemma-subsheaf-of-constant-sheaf), first paragraph",
+   "via": [
+    "lem-sc-noetherian-extension-by-zero-reduction",
+    "lem-sc-constant-subsheaf-finite-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.ConstantSubsheafStalkBound",
+  "file": "lean/Sheaf/Topology/ConstantSubsheafStalkBound.lean",
+  "declaration": "TopCat.Sheaf.constantSubsheaf_stalk_bound",
+  "statement": "theorem constantSubsheaf_stalk_bound (X : TopCat.{u}) (K C : Sheaf AddCommGrpCat X) (ι : K ⟶ C) [Mono ι] (hC : Nonempty (C ≅ (constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) (hgen : ∃ (n : ℕ) (U : Fin n → Opens X) (_ : ∀ i, IsCompact ((U i : Opens X) : Set X)), ∃ g : (∐ fun i => (abelianOpenExtensionByZero (U i)).obj ((constantSheaf (Opens.grothendieckTopology ((Opens.toTopCat X).obj (U i))) AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ)))) ⟶ K, Epi g) : ∃ e : ∀ x : X, TopCat.Presheaf.stalk C.obj x ≅ AddCommGrpCat.of (ULift.{u} ℤ), ∃ b : ℕ, ∀ x : X, ∃ a : ℕ, a ≤ b ∧ Set.range (fun t : ToType (TopCat.Presheaf.stalk K.obj x) ↦ (e x).hom ((TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).map ι.hom t)) = Set.range (fun z : ULift.{u} ℤ ↦ (a : ℤ) • z)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-de6a2",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T053944-L-2640999",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-de6a2",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T053944-L-2640999",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files compile cleanly; parent statement and node lean statement are unchanged, imports/change record/users align, exactly one documented peel-layer sorry remains, and metadata/report agree."
+ }
+}
