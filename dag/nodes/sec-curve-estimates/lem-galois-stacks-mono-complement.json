@@ -1,0 +1,146 @@
+{
+ "id": "lem-galois-stacks-mono-complement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-abstract-equivalence",
+   "place": "The component and subcoproduct argument (steps 3-4), giving the SGA1 summand axiom needed to use Mathlib for the equivalence.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Monomorphisms admit coproduct complements under the Stacks Galois axioms",
+ "statement": "Let $C$ be a category and $F:C\\to\\mathbf{Sets}$ a functor satisfying [def-galois-category]. For any monomorphism $i:X\\to Y$, there exist an object $Z$ and a map $j:Z\\to Y$ such that the binary cofan with vertex $Y$ and legs $i,j$ is a colimit, i.e. $Y$ is the coproduct of $X$ and $Z$ via those maps.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Definition 0BMY; Lemma 0BN0(2),(3); component argument in Proposition 0BN4"
+ },
+ "stmt_deps": [
+  "def-galois-category"
+ ],
+ "proof": [
+  {
+   "text": "Use [def-galois-category] to decompose Y into a finite colimit cofan of connected objects Y_a. Exactness gives a colimit cofan of their fibres. Pull back i along each coprojection kappa_a to obtain p_a:P_a -> Y_a; p_a is mono by pullback stability. By connectedness p_a is an isomorphism when P_a is noninitial. [lem-galois-axioms](3) identifies initial P_a with empty fibre.",
+   "uses": [
+    "def-galois-category",
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Definition 0BMY; Lemma 0BN0(2),(3); component argument in Proposition 0BN4"
+   }
+  },
+  {
+   "text": "Let J be the subset of indices a with initial P_a, let Z be the finite coproduct of Y_a over J, and let j:Z -> Y be induced by the coprojections. Preservation of pullbacks shows that the image of F(kappa_a) misses the image of F(i) for a in J: any intersection point gives an element of F(P_a), contradicting emptiness. For a outside J, p_a is an isomorphism, so every point of F(Y_a) lies in the image of F(i), by the pullback square. The colimit cofans of the fibres of Y and Z give injectivity of F(j) and identify its image with the complement of the image of F(i). [lem-galois-axioms](2) gives injectivity of F(i).",
+   "uses": [
+    "def-galois-category",
+    "lem-galois-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Definition 0BMY; Lemma 0BN0(2),(3); component argument in Proposition 0BN4"
+   }
+  },
+  {
+   "text": "Apply Mathlib CategoryTheory.Limits.Types.binaryCofan_isColimit_iff to the two injective maps with complementary ranges. This proves that BinaryCofan.mk (F.map i) (F.map j) is a colimit. Exactness and reflection of isomorphisms in [def-galois-category] imply reflection of finite colimits (Mathlib reflectsFiniteColimitsOfReflectsIsomorphisms). Reflect the binary colimit with isColimitOfReflectsOfMapIsColimit. The resulting cofan has precisely the legs i and j, giving the required complement.",
+   "uses": [
+    "def-galois-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Definition 0BMY; Lemma 0BN0(2),(3); component argument in Proposition 0BN4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-category",
+  "lem-galois-axioms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Argument from the stated Stacks axioms and the recorded component proof of 0BN4; source text unavailable locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Galois category every monomorphism is a coproduct inclusion",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a category with finite connected decompositions and conservative exact functor to sets every monomorphism admits a coproduct complement",
+   "results": "PreGaloisCategory.monoInducesIsoOnDirectSummand is an axiom of the class being constructed; FinitaryExtensive.mono_ι proves coprojections are mono; no result derives the summand axiom from IsStacksGaloisCategory.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; cannot use the PreGaloisCategory field before constructing its instance"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Types.binaryCofan_isColimit_iff",
+   "results": "Mathlib.CategoryTheory.Limits.Types.Coproducts: binary coproduct criterion for injective maps with complementary ranges in Type.",
+   "date": "2026-10-12",
+   "verdict": "used for the fibre cofan; does not itself realize the complement in C"
+  },
+  {
+   "tool": "grep",
+   "query": "rg mono.*complement|complement.*mono|mono.*summand in Mathlib/CategoryTheory/Galois, lean/Sheaf/CategoryTheory and lean/WeilConjectures/CategoryTheory; blueprint_refs.py search monomorphism complement",
+   "results": "The Mathlib PreGaloisCategory field and its uses; no Stacks comparison theorem in either library; no blueprint node with this statement. Types.isCoprodOfMono only constructs a complement in Type.",
+   "date": "2026-10-12",
+   "verdict": "no existing result under the Stacks hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Galois.AbstractEquivalence",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Galois.StacksMonoComplement",
+  "file": "lean/Sheaf/CategoryTheory/Galois/StacksMonoComplement.lean",
+  "declaration": "CategoryTheory.stacksGalois_mono_complement",
+  "statement": "theorem stacksGalois_mono_complement {C : Type u} [Category.{v} C] (F : C ⥤ Type w) (hG : IsStacksGaloisCategory F) {X Y : C} (i : X ⟶ Y) [Mono i] : ∃ (Z : C) (j : Z ⟶ Y), Nonempty (IsColimit (BinaryCofan.mk i j))",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T060745-L-2911293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T060745-L-2911293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7,10 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 public import Mathlib.CategoryTheory.Galois.Equivalence
-import Sheaf.CategoryTheory.Galois.AutProfinite
-import Sheaf.CategoryTheory.Galois.GaloisTransitive
 import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
-import Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists
+import Sheaf.CategoryTheory.Galois.StacksMonoComplement
 
 /-!
 # The abstract equivalence theorem for Stacks Galois categories
@@ -73,6 +71,39 @@ Proof (Stacks, Proposition 0BN4):
 theorem stacksGalois_functorToContAction_isEquivalence {C : Type u} [Category.{v} C]
     (F : C ⥤ FintypeCat.{w}) (hG : IsStacksGaloisCategory (F ⋙ FintypeCat.incl)) :
     (PreGaloisCategory.functorToContAction F).IsEquivalence := by
-  sorry
+  let := hG.hasFiniteLimits
+  let := hG.hasFiniteColimits
+  let := hG.preservesFiniteLimits
+  let := hG.preservesFiniteColimits
+  let := hG.reflectsIsomorphisms
+  let : Limits.PreservesFiniteLimits F :=
+    Limits.preservesFiniteLimits_of_reflects_of_preserves F FintypeCat.incl
+  let : Limits.PreservesFiniteColimits F :=
+    Limits.preservesFiniteColimits_of_reflects_of_preserves F FintypeCat.incl
+  let : F.ReflectsIsomorphisms := reflectsIsomorphisms_of_comp F FintypeCat.incl
+  let : PreGaloisCategory C := {
+    monoInducesIsoOnDirectSummand := fun i ↦
+      stacksGalois_mono_complement (F ⋙ FintypeCat.incl) hG i
+    hasQuotientsByFiniteGroups := fun G _ _ ↦ by
+      obtain ⟨G', hgroup, hfinite, ⟨e⟩⟩ := Finite.exists_type_univ_nonempty_mulEquiv G
+      let := hgroup
+      let := hfinite
+      let := Fintype.ofFinite G'
+      exact Limits.hasColimitsOfShape_of_equivalence e.toSingleObjEquiv.symm }
+  let : F.PreservesEpimorphisms := {
+    preserves := fun f _ ↦ by
+      apply ConcreteCategory.epi_of_surjective
+      exact ((stacksGaloisCategory_axioms.{0, 0, w, v, u} (F ⋙ FintypeCat.incl) hG).2.1 f).2.mp
+        inferInstance }
+  let : PreGaloisCategory.FiberFunctor F := {
+    preservesQuotientsByFiniteGroups := fun G _ _ ↦ by
+      obtain ⟨G', hgroup, hfinite, ⟨e⟩⟩ := Finite.exists_type_univ_nonempty_mulEquiv G
+      let := hgroup
+      let := hfinite
+      let := Fintype.ofFinite G'
+      exact Limits.preservesColimitsOfShape_of_equiv e.toSingleObjEquiv.symm F }
+  let : GaloisCategory C := {
+    hasFiberFunctor := ⟨F ⋙ FintypeCat.uSwitch.{w, v}, ⟨inferInstance⟩⟩ }
+  infer_instance
 
 end CategoryTheory
