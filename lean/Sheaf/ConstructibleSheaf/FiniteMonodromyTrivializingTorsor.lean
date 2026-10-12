@@ -10,9 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
-import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
-import Sheaf.Paper.GaloisLisseRepresentations
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Sheaf.Paper.LisseModuleSheaves
+import Sheaf.ConstructibleSheaf.FiniteSetMonodromyTorsor
+import Sheaf.ConstructibleSheaf.ModuleConstantOfSetPullback
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-!
 # A connected finite monodromy torsor trivializing a module sheaf
@@ -59,6 +61,28 @@ theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_monodromy_trivializing
       (_ : FiniteDimensional (ULift.{u + 1} (ZMod ℓ)) A),
       Nonempty ((c.π)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G ≅
         (constantSheaf c.P.smallEtaleTopology
-          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj A) := by sorry
+          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj A) := by
+  classical
+  let R := ULift.{u + 1} (ZMod ℓ)
+  obtain ⟨d, hd⟩ := (Scheme.finite_locally_constant_module_values_iff G).1.mpr
+    (inferInstance : IsFiniteLocallyConstantSheaf G)
+  have hlisse : Scheme.IsLisseModuleSheaf G := ⟨d.cover, hd⟩
+  have hsets := (Scheme.lisseModuleSheaf_iff_underlying_finiteLocallyConstant G).mp hlisse
+  obtain ⟨Q, hQ, hfin, c, hconn, hconstant⟩ :=
+    Scheme.exists_connected_torsor_constant_set_pullback
+      ((sheafForget U.smallEtaleTopology).obj G) hsets
+  let := hQ
+  have := hfin
+  have := hconn
+  have hmodule := Scheme.module_pullback_isConstant_of_set_pullback R c.π G hconstant
+  have := hmodule
+  obtain ⟨A, ⟨e⟩⟩ :=
+    ((Etale.upperStar (ModuleCat.{u + 1} R) c.π).obj G).mem_essImage_of_isConstant
+  have : IsFiniteSheaf ((Etale.upperStar (ModuleCat.{u + 1} R) c.π).obj G) :=
+    IsFiniteSheaf.upperStar c.π G
+  have : IsFiniteSheaf ((constantSheaf c.P.smallEtaleTopology
+      (ModuleCat.{u + 1} R)).obj A) := IsFiniteSheaf.of_iso e.symm
+  have : Module.Finite R A := Scheme.moduleFinite_of_isFiniteSheaf_constantSheaf (Y := c.P) A
+  exact ⟨Q, hQ, hfin, c, hconn, A, inferInstance, ⟨e.symm⟩⟩
 
 end AlgebraicGeometry
