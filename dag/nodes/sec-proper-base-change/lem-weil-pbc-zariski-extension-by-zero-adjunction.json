@@ -30,77 +30,73 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (restriction is an additive functor $\\textit{Ab}(X_{\\rm Zar})\\to\\textit{Ab}(U_{\\rm Zar})$).* The objects of $X_{\\rm Zar}$ are the opens of $X$ and its morphisms the inclusions, so between two objects there is at most one morphism; the same holds for $U_{\\rm Zar}$, whose objects and morphisms are among those of $X_{\\rm Zar}$ [def-sc-zariski-site]. Let $\\mathcal G\\in\\textit{Ab}(X_{\\rm Zar})$. Then $W\\mapsto\\mathcal G(W)$ ($W\\subseteq U$ open) with the restriction maps of $\\mathcal G$ is a presheaf of abelian groups on $U_{\\rm Zar}$ (functoriality is that of $\\mathcal G$ on the subcategory). It is a sheaf: a covering $\\{W_i\\to W\\}$ of $W\\subseteq U$ in $U_{\\rm Zar}$ is a family of opens of $W$ with union $W$, i.e. a covering of $W$ in $X_{\\rm Zar}$ [def-sc-zariski-site]; the fibre products $W_i\\times_WW_k=W_i\\cap W_k$ are the same opens in both sites; so the equalizer diagram $\\mathcal G|_U(W)\\to\\prod_i\\mathcal G|_U(W_i)\\rightrightarrows\\prod_{i,k}\\mathcal G|_U(W_i\\cap W_k)$ of [def-weil-pbc-sites-and-cohomology] (1) is, term by term and map by map, the one for $\\mathcal G$ on this covering of $X_{\\rm Zar}$, which is an equalizer. For a morphism $\\psi:\\mathcal G\\to\\mathcal H$ the components $\\psi_W$, $W\\subseteq U$, commute with the restriction maps of $\\mathcal G|_U$, $\\mathcal H|_U$ (these are restriction maps of $\\mathcal G$, $\\mathcal H$), so $\\psi|_U$ is a morphism of $\\textit{Ab}(U_{\\rm Zar})$; $(\\psi'\\psi)|_U=\\psi'|_U\\psi|_U$ and $\\mathrm{id}|_U=\\mathrm{id}$ componentwise. $\\textit{Ab}(\\mathcal C)$ is a full subcategory of the category $\\textit{PAb}(\\mathcal C)$ of presheaves of abelian groups [def-weil-pbc-sites-and-cohomology] (1), whose morphisms are added sectionwise, $(\\varphi+\\psi)_W=\\varphi_W+\\psi_W$, composition being biadditive [lem-weil-pbc-abelian-presheaves-evaluation-exact]; hence $(\\varphi+\\psi)|_U=\\varphi|_U+\\psi|_U$, and restriction is an additive functor. (This is the functor $\\mathcal G\\mapsto\\mathcal G|_U$ named in the statement.)",
+   "text": "Step 1 (restriction). Let $j:U\\hookrightarrow X$ and let $e:(\\operatorname{Opens}U)^{op}\\to(\\operatorname{Opens}X)^{op}$ send an open to its image. Restriction is precomposition with $e$ on underlying presheaves, restricted to sheaves [def-sc-zariski-site, def-weil-pbc-sites-and-cohomology]. Mathlib Topology.IsOpenEmbedding.sheafPullback gives this functor R, and sheafPullbackIso identifies the usual TopCat.Sheaf.pullback with R.",
    "uses": [
     "def-sc-zariski-site",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Definition 04IX (label definition-localize-ringed-site, line 2019) (4): 'described by the simple rule j_U^*(F)(X/U)=F(X)', for the ringed site (X_Zar, Z); the verification that this is a sheaf is written here"
-   }
-  },
-  {
-   "text": "*Step 2 ($j_{p!}$ on presheaves).* Let $\\mathcal F\\in\\textit{Ab}(U_{\\rm Zar})$. The rule for $j_{p!}\\mathcal F$ is well defined: if $V'\\subseteq V$ and $V\\subseteq U$ then $V'\\subseteq U$, so the restriction $\\mathcal F(V)\\to\\mathcal F(V')$ lands in $(j_{p!}\\mathcal F)(V')$; if $V\\not\\subseteq U$ the source is $0$ and the map is $0$. For $V''\\subseteq V'\\subseteq V$ the composite of the restriction maps is the restriction along $V''\\subseteq V$: for $V\\subseteq U$ all three are restriction maps of $\\mathcal F$, for $V\\not\\subseteq U$ both maps start at $0$; restriction along $V\\subseteq V$ is the identity in both cases. So $j_{p!}\\mathcal F$ is a presheaf of abelian groups on $X_{\\rm Zar}$, an object of $\\textit{PAb}(X_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology]. (Since $\\Mor_{X_{\\rm Zar}}(V,U)$ has one element if $V\\subseteq U$ and none otherwise, this is the presheaf $V\\mapsto\\bigoplus_{\\varphi\\in\\Mor(V,U)}\\mathcal F(V\\xrightarrow{\\varphi}U)$ of Stacks 03DI for the site $X_{\\rm Zar}$ and the object $U$, whose localization $X_{\\rm Zar}/U$ is $U_{\\rm Zar}$.) For $\\alpha:\\mathcal F\\to\\mathcal F'$ the family $j_{p!}\\alpha$ ($\\alpha_V$ for $V\\subseteq U$, $0$ otherwise) consists of group homomorphisms and commutes with the restriction maps (for $V\\subseteq U$ by the naturality of $\\alpha$, otherwise both composites start at $0$), so it is a morphism of $\\textit{PAb}(X_{\\rm Zar})$. Sectionwise one reads off $j_{p!}(\\beta\\alpha)=j_{p!}\\beta\\circ j_{p!}\\alpha$, $j_{p!}(\\mathrm{id})=\\mathrm{id}$ and, morphisms being added sectionwise [lem-weil-pbc-abelian-presheaves-evaluation-exact], $j_{p!}(\\alpha+\\alpha')=j_{p!}\\alpha+j_{p!}\\alpha'$ (at $V\\not\\subseteq U$ both sides are $0$).",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
+    "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, line 4685) part (2), proof 'Omitted', with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2)"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) (abelian sheaves) and the object U, whose localization X_Zar/U is U_Zar and for which every V has at most one morphism to U, so the presheaf of 03DI is j_{p!}F; the topological form is Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, literature/stacks-project/sheaves.tex line 4685) part (2), with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2). The proof of 00A5 is omitted and that of 03DI omits the verification that the two constructions are inverse."
    }
   },
   {
-   "text": "*Step 3 (clause (1): $j_!$ is an additive functor).* By [def-weil-pbc-sheafification] (values in abelian groups) the presheaf $j_{p!}\\mathcal F$ of Step 2 has a sheafification $\\theta_{\\mathcal F}:j_{p!}\\mathcal F\\to j_!\\mathcal F$: $j_!\\mathcal F$ is an abelian sheaf on $X_{\\rm Zar}$ and every morphism of presheaves of abelian groups from $j_{p!}\\mathcal F$ to an abelian sheaf factors uniquely through $\\theta_{\\mathcal F}$. For $\\alpha:\\mathcal F\\to\\mathcal F'$ the morphism $\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha:j_{p!}\\mathcal F\\to j_!\\mathcal F'$ has target an abelian sheaf, so there is exactly one morphism $j_!\\alpha:j_!\\mathcal F\\to j_!\\mathcal F'$ with $j_!\\alpha\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha$ (it is a morphism of $\\textit{Ab}(X_{\\rm Zar})$, a full subcategory of $\\textit{PAb}(X_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology] (1)); this is the $j_!\\alpha$ of the statement. Functoriality: for $\\beta:\\mathcal F'\\to\\mathcal F''$, both $j_!\\beta\\circ j_!\\alpha$ and $j_!(\\beta\\alpha)$ satisfy $(-)\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F''}\\circ j_{p!}(\\beta\\alpha)$ (for the first: $j_!\\beta\\, j_!\\alpha\\,\\theta_{\\mathcal F}=j_!\\beta\\,\\theta_{\\mathcal F'}\\,j_{p!}\\alpha=\\theta_{\\mathcal F''}\\,j_{p!}\\beta\\, j_{p!}\\alpha=\\theta_{\\mathcal F''}\\,j_{p!}(\\beta\\alpha)$ by Step 2), and $\\mathrm{id}$ satisfies the condition defining $j_!(\\mathrm{id}_{\\mathcal F})$ ($j_{p!}\\mathrm{id}=\\mathrm{id}$), so by uniqueness $j_!(\\beta\\alpha)=j_!\\beta\\circ j_!\\alpha$ and $j_!(\\mathrm{id})=\\mathrm{id}$. Additivity: morphisms of $\\textit{PAb}(X_{\\rm Zar})$, hence of $\\textit{Ab}(X_{\\rm Zar})$, are added sectionwise and composition is biadditive [lem-weil-pbc-abelian-presheaves-evaluation-exact]; so $(j_!\\alpha+j_!\\alpha')\\circ\\theta_{\\mathcal F}=\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha+\\theta_{\\mathcal F'}\\circ j_{p!}\\alpha'=\\theta_{\\mathcal F'}\\circ j_{p!}(\\alpha+\\alpha')$ (Step 2), and uniqueness gives $j_!(\\alpha+\\alpha')=j_!\\alpha+j_!\\alpha'$. This is clause (1).",
+   "text": "Step 2 (the presheaf). Construct $E=\\mathrm{forget}_U\\circ\\operatorname{Lan}_e$ using Mathlib Functor.lan, and put $P(F)=E(F)$. This is an actual colimit construction. The functor e is fully faithful, since inclusion of U is injective. The pointwise Kan-extension unit is therefore an isomorphism (LeftExtension.IsPointwiseLeftKanExtension.isIso_hom). If $V\\subseteq U$, the image of $j^{-1}V$ equals V (Opens.functor_map_eq_inf), so mapping this equality and inverting the unit gives $P(F)(V)\\cong F(j^{-1}V)$. If $V\\not\\subseteq U$, an object of CostructuredArrow e (op V) would give $V\\subseteq j(W)\\subseteq U$, a contradiction. Thus the indexing diagram is zero, vacuously, and IsColimit.isZero_pt gives $P(F)(V)=0$. These arguments include V empty, U empty, and U=X.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-abelian-presheaves-evaluation-exact"
+    "def-sc-zariski-site",
+    "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, line 4685) part (2), proof 'Omitted', with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2)"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) (abelian sheaves) and the object U, whose localization X_Zar/U is U_Zar and for which every V has at most one morphism to U, so the presheaf of 03DI is j_{p!}F; the topological form is Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, literature/stacks-project/sheaves.tex line 4685) part (2), with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2). The proof of 00A5 is omitted and that of 03DI omits the verification that the two constructions are inverse."
    }
   },
   {
-   "text": "*Step 4 (the adjunction on the presheaf level).* Let $\\mathcal F\\in\\textit{Ab}(U_{\\rm Zar})$ and $\\mathcal G\\in\\textit{Ab}(X_{\\rm Zar})$, with $\\mathcal G|_U\\in\\textit{Ab}(U_{\\rm Zar})$ (Step 1). Let $\\Phi:\\Hom_{\\textit{PAb}(X_{\\rm Zar})}(j_{p!}\\mathcal F,\\mathcal G)\\to\\Hom_{\\textit{Ab}(U_{\\rm Zar})}(\\mathcal F,\\mathcal G|_U)$, $\\varphi\\mapsto\\varphi|_U=(\\varphi_W)_{W\\subseteq U}$: for $W\\subseteq U$ open, $\\varphi_W:\\mathcal F(W)=(j_{p!}\\mathcal F)(W)\\to\\mathcal G(W)=(\\mathcal G|_U)(W)$ is a homomorphism, and for $W'\\subseteq W\\subseteq U$ the restriction maps of $j_{p!}\\mathcal F$ and of $\\mathcal G|_U$ are those of $\\mathcal F$ and of $\\mathcal G$, so $\\varphi|_U$ is a natural transformation, a morphism of the full subcategory $\\textit{Ab}(U_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology] (1). Conversely (the map of the proof of Stacks 03DI, $s\\mapsto\\alpha(s)$), for $a:\\mathcal F\\to\\mathcal G|_U$ let $\\tilde a_V=a_V$ for $V\\subseteq U$ and $\\tilde a_V=0:0\\to\\mathcal G(V)$ for $V\\not\\subseteq U$. Each $\\tilde a_V$ is a homomorphism. For $V'\\subseteq V$: if $V\\subseteq U$, then $V'\\subseteq U$ and $\\tilde a_{V'}(s|_{V'})=a_{V'}(s|_{V'})=a_V(s)|_{V'}$ by the naturality of $a$; if $V\\not\\subseteq U$, both composites $(j_{p!}\\mathcal F)(V)=0\\to\\mathcal G(V')$ are $0$. So $\\tilde a$ is a morphism of $\\textit{PAb}(X_{\\rm Zar})$. Clearly $\\Phi(\\tilde a)=a$; and $\\widetilde{\\Phi(\\varphi)}=\\varphi$, since both agree at $V\\subseteq U$ and at $V\\not\\subseteq U$ both are homomorphisms out of $0$, hence $0$. So $\\Phi$ is bijective with inverse $a\\mapsto\\tilde a$. Naturality: for $\\alpha:\\mathcal F'\\to\\mathcal F$ in $\\textit{Ab}(U_{\\rm Zar})$, $\\Phi(\\varphi\\circ j_{p!}\\alpha)$ has components $\\varphi_W\\circ\\alpha_W$ ($W\\subseteq U$), i.e. $\\Phi(\\varphi\\circ j_{p!}\\alpha)=\\Phi(\\varphi)\\circ\\alpha$; for $\\gamma:\\mathcal G\\to\\mathcal G'$ in $\\textit{Ab}(X_{\\rm Zar})$, $\\Phi(\\gamma\\circ\\varphi)=\\gamma|_U\\circ\\Phi(\\varphi)$ componentwise.",
+   "text": "Step 3 (sheafification). Set $L=E\\circ\\mathrm{presheafToSheaf}$ and $\\theta_F=\\mathrm{toSheafify}(P(F))$ [def-weil-pbc-sheafification]. For every sheaf H and presheaf morphism $\\eta:P(F)\\to H$, apply the inverse of sheafificationAdjunction.homEquiv to obtain the factorization. The equivalence apply_symm_apply proves its defining equation, and injectivity of the equivalence proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) (abelian sheaves) and the object U, whose localization X_Zar/U is U_Zar and for which every V has at most one morphism to U, so the presheaf of 03DI is j_{p!}F; the topological form is Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, literature/stacks-project/sheaves.tex line 4685) part (2), with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2). The proof of 00A5 is omitted and that of 03DI omits the verification that the two constructions are inverse."
+   }
+  },
+  {
+   "text": "Step 4 (adjunction). Compose Functor.lanAdjunction for e with sheafificationAdjunction [def-weil-pbc-sheafification]. Restrict this composite along fullyFaithfulSheafToPresheaf on U and the identity on sheaves on X, using Adjunction.restrictFullyFaithful. The two comparison isomorphisms are reflexivity: restriction of underlying presheaves is the underlying presheaf of R. This gives $L\\dashv R$. Transport the right adjoint by the inverse of sheafPullbackIso to obtain $L\\dashv j^{-1}$. Its hom equivalences are bijective by Equiv.bijective. The composite adjunction is exactly composition with theta followed by the Kan hom equivalence, so it realizes the map in the statement.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) (abelian sheaves) and the object U, whose localization X_Zar/U is U_Zar and for which every V has at most one morphism to U, so the presheaf of 03DI is j_{p!}F; the topological form is Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, literature/stacks-project/sheaves.tex line 4685) part (2), with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2). The proof of 00A5 is omitted and that of 03DI omits the verification that the two constructions are inverse."
+   }
+  },
+  {
+   "text": "Step 5 (additivity). Give L its IsLeftAdjoint instance using the adjunction of Step 4. It preserves binary coproducts and zero morphisms. In preadditive sheaf categories, preservesBinaryBiproducts_of_preservesBinaryCoproducts turns this into preservation of binary biproducts, and Functor.additive_of_preservesBinaryBiproducts yields Functor.Additive L. Together with Steps 2 and 3 and the adjunction of Step 4 this proves all clauses.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and its proof (lines 2085-2140), with Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) and the object U"
-   }
-  },
-  {
-   "text": "*Step 5 (clause (2)).* Let $\\mathcal F$, $\\mathcal G$ be as in Step 4. Since $\\mathcal G$ is an abelian sheaf, the universal property of the sheafification $\\theta_{\\mathcal F}$ [def-weil-pbc-sheafification] says that $\\psi\\mapsto\\psi\\circ\\theta_{\\mathcal F}$ is a bijection $\\Hom_{\\textit{Ab}(X_{\\rm Zar})}(j_!\\mathcal F,\\mathcal G)\\to\\Hom_{\\textit{PAb}(X_{\\rm Zar})}(j_{p!}\\mathcal F,\\mathcal G)$ (existence of the factorization is surjectivity, its uniqueness injectivity; $\\textit{Ab}(X_{\\rm Zar})$ is a full subcategory of $\\textit{PAb}(X_{\\rm Zar})$ [def-weil-pbc-sites-and-cohomology] (1)). Composing with the bijection $\\Phi$ of Step 4, the map $\\psi\\mapsto\\Phi(\\psi\\circ\\theta_{\\mathcal F})=(\\psi\\circ\\theta_{\\mathcal F})|_U$ of the statement, with components $\\psi_W\\circ\\theta_{\\mathcal F,W}$ ($W\\subseteq U$), is bijective; its inverse sends $a:\\mathcal F\\to\\mathcal G|_U$ to the unique $\\psi$ with $\\psi\\circ\\theta_{\\mathcal F}=\\tilde a$. Naturality in $\\mathcal G$: for $\\gamma:\\mathcal G\\to\\mathcal G'$, $((\\gamma\\psi)\\circ\\theta_{\\mathcal F})|_U=\\Phi(\\gamma\\circ(\\psi\\theta_{\\mathcal F}))=\\gamma|_U\\circ(\\psi\\circ\\theta_{\\mathcal F})|_U$ by Step 4. Naturality in $\\mathcal F$: for $\\alpha:\\mathcal F'\\to\\mathcal F$, $(\\psi\\circ j_!\\alpha)\\circ\\theta_{\\mathcal F'}=\\psi\\circ\\theta_{\\mathcal F}\\circ j_{p!}\\alpha$ by the defining property of $j_!\\alpha$ (Step 3), so $((\\psi\\circ j_!\\alpha)\\circ\\theta_{\\mathcal F'})|_U=\\Phi(\\psi\\theta_{\\mathcal F}\\circ j_{p!}\\alpha)=(\\psi\\circ\\theta_{\\mathcal F})|_U\\circ\\alpha$ by Step 4. Hence the bijection is natural in $\\mathcal F$ and $\\mathcal G$, and the additive functor $j_!$ of Step 3 is left adjoint to the restriction functor $\\mathcal G\\mapsto\\mathcal G|_U$ of Step 1. This is clause (2).",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and its proof (lines 2085-2140), with Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) and the object U"
+    "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058) and Definition 04IX (label definition-localize-ringed-site, line 2019) (4),(5), for the ringed site (X_Zar, Z) (abelian sheaves) and the object U, whose localization X_Zar/U is U_Zar and for which every V has at most one morphism to U, so the presheaf of 03DI is j_{p!}F; the topological form is Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, literature/stacks-project/sheaves.tex line 4685) part (2), with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2). The proof of 00A5 is omitted and that of 03DI omits the verification that the two constructions are inverse."
    }
   }
  ],
  "proof_deps": [
   "def-sc-zariski-site",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
   "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Modules on Sites, Lemma 03DI (label lemma-extension-by-zero, line 2058), proof lines 2085-2140 (presheaf map s -> alpha(s), then sheafification), which omits the check that the two constructions are inverse; topological form Sheaves, Lemma 00A5 (label lemma-j-shriek-abelian, literature/stacks-project/sheaves.tex line 4685) part (2), proof 'Omitted', with Definition 00A4 (label definition-j-shriek-structures, line 4612) (1),(2). The steps are written by an agent after these, following the reviewed module analogue lem-weil-pbc-module-extension-by-zero-adjunction (Steps 1-4)."
+  "place": "Stacks Tags 03DI, 00A4 and 00A5: the presheaf-extension/sheafification argument, implemented by Mathlib pointwise left Kan extension, composition and restriction of adjunctions. Complete Lean proof by G3; no new unproved statement."
  },
  "mathlib_searches": [
   {
@@ -206,5 +202,15 @@
   "group": "N1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T204508-L-869249",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
