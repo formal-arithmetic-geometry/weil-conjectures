@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.Sites.SemiSimplicialHypercover.Coho
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-!
 # Étale hypercovers of quasi-compact quasi-separated schemes
@@ -127,7 +129,10 @@ noncomputable def _root_.AlgebraicGeometry.Etale.cohomologyRestrict
     Ext (SemiSimplicialObject.constSheaf X.smallEtaleTopology Λ) F q →+
       Ext (SemiSimplicialObject.constSheaf Y.smallEtaleTopology Λ)
         ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).obj F) q :=
-  sorry
+  AddMonoidHom.mk' (fun x ↦
+    (Ext.mk₀ ((Etale.constantSheafCompUpperStarIso Λ g).app (ModuleCat.of Λ Λ)).inv).comp
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapExtAddHom _ _ q x) (zero_add q))
+    (fun x y ↦ by rw [map_add, Ext.comp_add])
 
 /-- Base change is compatible with classes of hypercover cocycles. -/
 theorem _root_.AlgebraicGeometry.Etale.cohomologyRestrict_cohomologyClass
