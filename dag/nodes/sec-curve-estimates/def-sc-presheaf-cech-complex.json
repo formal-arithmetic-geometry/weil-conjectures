@@ -1,0 +1,113 @@
+{
+ "id": "def-sc-presheaf-cech-complex",
+ "kind": "definition",
+ "title": "Čech cochains of a map of presheaves of sets",
+ "statement": "Let $\\mathcal C$ be a category and $f:P\\to Q$ a map of presheaves of sets. Let $F$ be an abelian presheaf. Form $N_n(f)=P\\times_Q\\cdots\\times_Q P$ with $n+1$ factors in the presheaf category. Apply the free abelian group functor objectwise to $N_\\bullet(f)$, then apply $\\operatorname{Hom}_{\\operatorname{PAb}(\\mathcal C)}(-,F)$. The resulting cosimplicial abelian group defines a cochain complex $\\check C^n(f,F)=\\operatorname{Hom}(\\mathbf Z[N_n(f)],F)$, whose differential is the alternating sum of precomposition by the face maps deleting one factor. This is a real construction, without any assumptions on fibre products in $\\mathcal C$; it is the presheaf-nerve variant of [def-weil-pbc-site-cech-complex].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03AK and 03AS; presheaf nerve as in Hypercoverings Tag 01GC"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03AK and 03AS; presheaf nerve as in Hypercoverings Tag 01GC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cech cochain complex of a map of presheaves of sets",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cochain complex of a map of presheaves of sets",
+   "results": "Mathlib Arrow.cechNerve and alternatingCofaceMapComplex provide the components, but no matching presheaf cochain constructor.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.descToInjective; CategoryTheory.Sheaf.H; alternatingCofaceMapComplex",
+   "results": "Exact.descToInjective and comp_descToInjective are available, as are Sheaf.H and generic injective vanishing. No complete presheaf nerve criterion. alternatingCofaceMapComplex was not found by the remote index; local source contains it.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "presheaf.*Cech|Cech.*presheaf|descToInjective; blueprint searches presheaf Cech nerve, 079Z, injective module presheaf",
+   "results": "Mathlib has Arrow.cechNerve, alternatingCofaceMapComplex, preadditiveYoneda, ShortComplex.Exact.descToInjective. Existing Sheaf.SiteCechComplex and SiteCechVanishingCriterion use representable fibre products and extra precoverage/small-category hypotheses. Sheaf.AlgebraicTopology.SetCechNerveFreeResolution provides the set contraction. No matching blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: injective module sheaves are acyclic after forgetting module structure; presheaf-nerve formulation avoids site pullback hypotheses",
+   "via": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.PresheafCechComplex",
+  "declaration": "CategoryTheory.presheafCechComplex",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafCechComplex.lean",
+  "statement": "def presheafCechComplex {C : Type u} [Category.{v} C] (f : Arrow (Cᵒᵖ ⥤ Type v)) (F : Cᵒᵖ ⥤ AddCommGrpCat.{v}) : CochainComplex AddCommGrpCat.{max u v} ℕ",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

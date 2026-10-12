@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-injective-presheaf-module-nerve-acyclic",
+ "kind": "statement",
+ "title": "Injective module presheaves are acyclic on presheaf Čech nerves",
+ "statement": "Let $\\mathcal C$ be a category, $R$ a presheaf of rings, and $M$ an injective module presheaf [def-sp-injective-resolutions, def-weil-presheaf-modules-sheafification]. For every map $f:P\\to Q$ of presheaves of sets, the complex $\\check C^\\bullet(f,M_{ab})$ [def-sc-presheaf-cech-complex] has zero cohomology in all degrees $q>0$. The values of $R$, $M$, $P$, and $Q$ belong to the same universe, so the free $R$-module presheaves used in the proof belong to the category in which $M$ is injective. No covering or site pullback hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proof of Tag 03FC, using 03F5, 03AT, 03AS; presheaf nerve version from Hypercoverings 01GC"
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-presheaf-modules-sheafification",
+  "def-sc-presheaf-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Apply the free R-module presheaf functor to the Čech nerve. At each object, replace the target by the image of f, which leaves the nerve unchanged. The map onto its image is surjective. Apply the set-level free nerve resolution with the ring R(X) to prove exactness in every positive chain degree. Empty image fibres contribute zero.",
+   "uses": [
+    "lem-weil-pbc-set-cech-nerve-free-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F5, fibrewise contraction in Tag 03AT; Hypercoverings 01GC"
+   }
+  },
+  {
+   "text": "Exactness is objectwise in module presheaves. A cocycle into M factors through the image of the outgoing chain differential. Injectivity extends it to the preceding term, by Mathlib ShortComplex.Exact.descToInjective and comp_descToInjective. Free module and free abelian adjunctions identify these Hom groups and their differentials with the complex of def-sc-presheaf-cech-complex. Thus every positive cocycle is a coboundary.",
+   "uses": [
+    "def-sc-presheaf-cech-complex",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC proof, following 03FB, via Tag 03AS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-set-cech-nerve-free-resolution",
+  "def-sc-presheaf-cech-complex",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Proof of Tag 03FC, using 03F5, 03AT, 03AS; presheaf nerve version from Hypercoverings 01GC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cochain complex Hom from a free module Cech nerve into an injective presheaf of modules is acyclic",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cochain complex Hom from a free module Cech nerve into an injective presheaf of modules is acyclic",
+   "results": "LeanFinder returned generic injective/K-injective constructions, not this nerve theorem.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.descToInjective; CategoryTheory.Sheaf.H; alternatingCofaceMapComplex",
+   "results": "Exact.descToInjective and comp_descToInjective are available, as are Sheaf.H and generic injective vanishing. No complete presheaf nerve criterion. alternatingCofaceMapComplex was not found by the remote index; local source contains it.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "presheaf.*Cech|Cech.*presheaf|descToInjective; blueprint searches presheaf Cech nerve, 079Z, injective module presheaf",
+   "results": "Mathlib has Arrow.cechNerve, alternatingCofaceMapComplex, preadditiveYoneda, ShortComplex.Exact.descToInjective. Existing Sheaf.SiteCechComplex and SiteCechVanishingCriterion use representable fibre products and extra precoverage/small-category hypotheses. Sheaf.AlgebraicTopology.SetCechNerveFreeResolution provides the set contraction. No matching blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: injective module sheaves are acyclic after forgetting module structure; presheaf-nerve formulation avoids site pullback hypotheses",
+   "via": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.InjectivePresheafModuleNerveAcyclic",
+  "declaration": "CategoryTheory.injective_presheaf_module_nerve_acyclic",
+  "file": "lean/Sheaf/CategoryTheory/Sites/InjectivePresheafModuleNerveAcyclic.lean",
+  "statement": "theorem injective_presheaf_module_nerve_acyclic {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v}) (M : PresheafOfModules.{v} R) [Injective M] (f : Arrow (Cᵒᵖ ⥤ Type v)) (q : ℕ) (hq : 0 < q) : IsZero ((presheafCechComplex f M.presheaf).homology q)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

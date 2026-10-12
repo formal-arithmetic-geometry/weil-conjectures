@@ -1,0 +1,154 @@
+{
+ "id": "lem-sc-presheaf-cech-vanishing-criterion",
+ "kind": "statement",
+ "title": "Presheaf Čech vanishing implies derived cohomology vanishing",
+ "statement": "Let $(\\mathcal C,J)$ be a Grothendieck site and $F$ an abelian sheaf [def-weil-pbc-sites-and-cohomology]. Suppose that for every map $f:P\\to Q$ of presheaves of sets whose values lie in the universe of $F$, the complex $\\check C^\\bullet(f,F)$ [def-sc-presheaf-cech-complex] has zero cohomology in each positive degree. Then $H^q(U,F)=0$ for every $U\\in\\mathcal C$ and $q>0$, where $H^q(U,F)$ is Mathlib Sheaf.H', equivalently Ext from the sheafified free abelian representable. HasSheafify and HasExt are assumed as in that definition. The site need not have pullbacks and its object and morphism universes need not agree.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03F9 and 079Z; presheaf-nerve vanishing variant using Yoneda extensions and the first-quadrant descent spectral sequence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sc-presheaf-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write Z[P] for the sheafified free abelian presheaf on P. Induct on q>0 simultaneously for all small-valued P. Represent an Ext class from Z[P] to F by a finite Yoneda extension, ending in an epimorphism G → Z[P]. The presheaf E of lifts of the generator map P → Z[P] is small-valued and E → P is locally surjective. The class pulls back to zero on Z[E] because the last epimorphism splits after this pullback.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9 induction principle; generalized sections in Section 079V; finite Yoneda Ext and local lifting"
+   }
+  },
+  {
+   "text": "The augmented sheafified free nerve of E → P is exact, by fibrewise free nerve resolution and exact sheafification. Its derived Hom filtration gives the spectral sequence of Tag 079Z, E_1^(a,b)=Ext^b(Z[E_a],F) ⇒ Ext^(a+b)(Z[P],F). In a fixed degree only a finite first-quadrant range matters. This is also a Yoneda-Ext spectral sequence and does not require an extra enough-injectives hypothesis in the theorem signature.",
+   "uses": [
+    "lem-weil-pbc-set-cech-nerve-free-resolution",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 079Z (lemma-cech-to-cohomology-sheaf-sets); Hypercoverings 01GC"
+   }
+  },
+  {
+   "text": "Induction kills rows 0<b<q, and the hypothesis kills positive cohomology of the zero row, which is exactly presheafCechComplex(E → P,F). The other filtration pieces in total degree q are therefore zero, so the edge map to Ext^q(Z[E],F) is injective. The class has zero image and is zero. For q=1 there are no intermediate rows. Take P=yoneda(U) to obtain H'(F,q,U).",
+   "uses": [
+    "def-sc-presheaf-cech-complex",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9 vanishing induction, using 079Z and Mathlib definition Sheaf.H'"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-set-cech-nerve-free-resolution",
+  "def-sc-presheaf-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03F9 and 079Z; presheaf-nerve vanishing variant using Yoneda extensions and the first-quadrant descent spectral sequence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf with vanishing Cech cohomology for every presheaf nerve has vanishing cohomology over every representable object",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf with vanishing Cech cohomology for every presheaf nerve has vanishing cohomology over every representable object",
+   "results": "LeanFinder returned Sheaf.cohomologyPresheaf and low-degree sheaf conditions; no generic presheaf nerve criterion.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact.descToInjective; CategoryTheory.Sheaf.H; alternatingCofaceMapComplex",
+   "results": "Exact.descToInjective and comp_descToInjective are available, as are Sheaf.H and generic injective vanishing. No complete presheaf nerve criterion. alternatingCofaceMapComplex was not found by the remote index; local source contains it.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "presheaf.*Cech|Cech.*presheaf|descToInjective; blueprint searches presheaf Cech nerve, 079Z, injective module presheaf",
+   "results": "Mathlib has Arrow.cechNerve, alternatingCofaceMapComplex, preadditiveYoneda, ShortComplex.Exact.descToInjective. Existing Sheaf.SiteCechComplex and SiteCechVanishingCriterion use representable fibre products and extra precoverage/small-category hypotheses. Sheaf.AlgebraicTopology.SetCechNerveFreeResolution provides the set contraction. No matching blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-ga-cohomology",
+   "place": "proof, second paragraph: injective module sheaves are acyclic after forgetting module structure; presheaf-nerve formulation avoids site pullback hypotheses",
+   "via": [
+    "lem-sc-injective-module-abelian-acyclic-zariski",
+    "lem-sc-module-abelian-zariski-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.PresheafCechVanishingCriterion",
+  "declaration": "CategoryTheory.Sheaf.isZero_H'_of_presheafCech_vanishing",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PresheafCechVanishingCriterion.lean",
+  "statement": "theorem isZero_H'_of_presheafCech_vanishing {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{v}] [HasExt.{w'} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (hcech : ∀ (f : Arrow (Cᵒᵖ ⥤ Type v)) (q : ℕ), 0 < q → IsZero ((presheafCechComplex f F.obj).homology q)) (U : C) (q : ℕ) (hq : 0 < q) : IsZero (H' F q U)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,8 +8,9 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Sheaf.CategoryTheory.SiteCechVanishingCriterion
-import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
+import Sheaf.CategoryTheory.InjectiveModulePresheaf
+import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleNerveAcyclic
+import Sheaf.CategoryTheory.Sites.PresheafCechVanishingCriterion
 
 /-!
 # Injective module sheaves are acyclic after forgetting to abelian sheaves
@@ -18,9 +19,10 @@ Source: literature/stacks-project/sites-cohomology.tex, Lemma Tag 03FD
 (lemma-cohomology-modules-abelian-agree), proof, second paragraph (via Lemmas 03FC and 03F9)
 (blueprint: lem-sc-injective-module-abelian-acyclic-zariski).
 
-The proof uses `lem-weil-pbc-ringed-site-injective-module-cech-acyclic` for vanishing of
-Čech cohomology for every covering, and `lem-weil-pbc-site-cech-vanishing-criterion` to
-pass from Čech vanishing to derived cohomology.
+The proof uses the presheaf-nerve form of the Čech argument: fibre products are formed
+in presheaves, where they always exist, and the presheaf Čech vanishing criterion
+passes from Čech vanishing to derived cohomology. This avoids imposing extra pullback
+or universe hypotheses on the site.
 -/
 
 @[expose] public section
@@ -37,15 +39,13 @@ Source: Stacks Project, `sites-cohomology.tex`, Tag 03FD
 (`lemma-cohomology-modules-abelian-agree`), proof, second paragraph, via Tags 03FC and 03F9.
 (blueprint: lem-sc-injective-module-abelian-acyclic-zariski)
 
-Proof: for every covering of every object, apply
-`lem-weil-pbc-ringed-site-injective-module-cech-acyclic` (Tag 03FC) to obtain vanishing
-of the positive Čech cohomology of the underlying abelian sheaf. Apply
-`lem-weil-pbc-site-cech-vanishing-criterion` (Tag 03F9) with the collection of objects
-equal to all objects and the collection of coverings equal to all coverings.
-Its first assumption holds because every covering object and iterated fibre product
-is an object of the site. Its second holds because every covering refines itself.
-Its third is the Čech vanishing just obtained. The criterion therefore gives
-vanishing of derived cohomology over every object in every positive degree. -/
+Proof: exact module sheafification makes `I.val` injective as a module presheaf
+(Tag 03FB). For every map of small-valued presheaves of sets, its free-module
+Čech nerve is exact in positive degrees by the fibrewise contraction of Tags
+03F5 and 03AT. Applying Hom into `I.val` gives positive Čech vanishing for the
+underlying abelian presheaf. Apply the presheaf-nerve Čech vanishing criterion
+(Tags 03F9 and 079Z), then turn `IsZero` into `Subsingleton`. All fibre products
+in this variant are taken in presheaves, so no pullbacks of `C` are required. -/
 theorem injective_module_abelian_acyclic
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{v}} [HasSheafify J AddCommGrpCat.{v}]
@@ -54,6 +54,13 @@ theorem injective_module_abelian_acyclic
     (U : C) (I : SheafOfModules.{v} R) [Injective I] :
     ∀ (q : ℕ), 0 < q →
       Subsingleton (Sheaf.H' ((SheafOfModules.toSheaf R).obj I) q U) := by
-  sorry
+  let F := (SheafOfModules.toSheaf R).obj I
+  have hI : Injective I.val := injective_module_sheaf_injective_presheaf R I
+  have hcech (f : Arrow (Cᵒᵖ ⥤ Type v)) (q : ℕ) (hq : 0 < q) :
+      CategoryTheory.Limits.IsZero ((presheafCechComplex f F.obj).homology q) := by
+    exact injective_presheaf_module_nerve_acyclic R.obj I.val f q hq
+  intro q hq
+  exact AddCommGrpCat.subsingleton_of_isZero
+    (Sheaf.isZero_H'_of_presheafCech_vanishing F hcech U q hq)
 
 end CategoryTheory

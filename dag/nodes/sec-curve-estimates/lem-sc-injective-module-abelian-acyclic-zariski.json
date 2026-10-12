@@ -25,36 +25,48 @@
  ],
  "proof": [
   {
-   "text": "For every covering $\\mathcal U$ of every object $U$, the injective module Cech lemma [lem-weil-pbc-ringed-site-injective-module-cech-acyclic] gives $\\check H^p(\\mathcal U,I_{\\mathrm{ab}})=0$ for all $p>0$.",
+   "text": "Exact sheafification and its adjunction imply that the underlying module presheaf I.val is injective; use injective_module_sheaf_injective_presheaf.",
    "uses": [
-    "lem-weil-pbc-ringed-site-injective-module-cech-acyclic"
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FD, proof, second paragraph via Lemma Tag 03FC"
+    "place": "Tag 03FB"
    }
   },
   {
-   "text": "Apply the Cech-to-derived vanishing criterion [lem-weil-pbc-site-cech-vanishing-criterion] to the abelian sheaf $I_{\\mathrm{ab}}$ with $\\mathcal B=\\operatorname{Ob}(\\mathcal C)$ and $\\mathrm{Cov}$ the set of all coverings of $\\mathcal C$. Its assumptions (1) and (2) hold trivially (every object lies in $\\mathcal B$, and every covering of an object is refined by itself, which lies in $\\mathrm{Cov}$), and its assumption (3) is the vanishing established in Step 1. It yields $H^q(U,I_{\\mathrm{ab}})=0$ for every object $U$ and every $q>0$.",
+   "text": "For every small-valued presheaf map f, apply injective_presheaf_module_nerve_acyclic to I.val. The resulting complex is definitionally presheafCechComplex f F.obj for F=(SheafOfModules.toSheaf R).obj I.",
    "uses": [
-    "lem-weil-pbc-site-cech-vanishing-criterion"
+    "lem-sc-injective-presheaf-module-nerve-acyclic"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03FD, proof, second paragraph via Lemma Tag 03F9"
+    "place": "Tag 03FC, presheaf-nerve variant"
+   }
+  },
+  {
+   "text": "Apply isZero_H'_of_presheafCech_vanishing to F with the preceding vanishing family. Convert IsZero to Subsingleton by Mathlib AddCommGrpCat.subsingleton_of_isZero.",
+   "uses": [
+    "lem-sc-presheaf-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD second paragraph, with presheaf-nerve criterion from 03F9 and 079Z"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
-  "lem-weil-pbc-site-cech-vanishing-criterion"
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-sc-injective-presheaf-module-nerve-acyclic",
+  "lem-sc-presheaf-cech-vanishing-criterion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03FD (lemma-cohomology-modules-abelian-agree), proof, second paragraph, via Lemmas 03FC and 03F9"
+  "place": "Tag 03FD second paragraph via 03FB and 03FC, replacing the site-fibre-product criterion by its presheaf-nerve form using Tag 079Z"
  },
  "mathlib_searches": [
   {
@@ -144,5 +156,15 @@
   "group": "H1",
   "result": "fix",
   "note": "general ringed site (C,J), ring sheaf R, object U, I : SheafOfModules R with Mathlib Injective, I_ab = SheafOfModules.toSheaf, Sheaf.H' (recorded on def-weil-pbc-sites-and-cohomology), Subsingleton for all q>0; FIX: ring universe tied to module universe v (was object universe u)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T112828-L-763599",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
