@@ -8,9 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 
-import Sheaf.Paper.ColimitSitesInjectiveSystem
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.AlgebraicGeometry.EtaleReplacementStageDiagram
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 
 /-! # Etale replacement: construction and vanishing
@@ -24,6 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 /-- Compatible stage short exact sequences and their limit sequence.
 Source: Stacks Project, Tags 0EXZ and 09YP, construction of the injective system and
 its cokernel; exactness of filtered sheaf colimits.
@@ -119,6 +118,53 @@ theorem etale_limit_replacement_exact_systems
       (∀ i : I, Injective (FI i)) ∧
       (∀ i : I, (t i).τ₁ = (eG i).inv ≫ L.ι.app i) ∧
       (∀ i : I, (t i).τ₃ = (eGR i).inv ≫ LR.ι.app i)
-    := by sorry
+    := by
+  classical
+  have _ := hc
+  have : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
+    AB5OfSize_of_univLE.{u, u, u + 1, u + 1} _
+  obtain ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR,
+    FI, ψ, hidentityI, hcompositionI, GI, eGI, hGI,
+    ai, bi, wi, hi, α, β, wz, s, hinj, hS, hs₁, hs₃⟩ :=
+    etale_replacement_stage_diagram D c F φ hidentity hcomposition G eG hG
+  let LI := colimit.cocone GI
+  let LR := colimit.cocone GR
+  let e : colimit G ≅ L.pt := (colimit.isColimit G).coconePointUniqueUpToIso hL
+  let a : L.pt ⟶ LI.pt := e.inv ≫ colim.map α
+  let b : LI.pt ⟶ LR.pt := colim.map β
+  have w : a ≫ b = 0 := by
+    dsimp only [a, b]
+    rw [Category.assoc, ← Functor.map_comp, wz, Functor.map_zero, comp_zero]
+  let S := ShortComplex.mk α β wz
+  have hex : (S.map (colim (J := I))).ShortExact := hS.map_of_exact colim
+  let E := ShortComplex.mk a b w
+  let eS : S.map (colim (J := I)) ≅ E :=
+    ShortComplex.isoMk e (Iso.refl _) (Iso.refl _)
+      (by simp [S, E, a]) (by simp [S, E, b])
+  have hE : E.ShortExact := ShortComplex.shortExact_of_iso eS hex
+  let q (i : I) : ShortComplex.mk (α.app i) (β.app i)
+      (congrArg (fun f ↦ f.app i) wz) ⟶ E :=
+    { τ₁ := L.ι.app i
+      τ₂ := colimit.ι GI i
+      τ₃ := colimit.ι GR i
+      comm₁₂ := by
+        dsimp only [E, a, ShortComplex.mk]
+        have he : L.ι.app i = colimit.ι G i ≫ e.hom := by simp [e]
+        rw [he]
+        simp only [Category.assoc, Iso.hom_inv_id_assoc, colimit.ι_map]
+      comm₂₃ := by
+        dsimp only [E, b, ShortComplex.mk]
+        exact colimit.ι_map β i }
+  refine ⟨FR, φR, hidentityR, hcompositionR, GR, eGR, hGR, LR,
+    colimit.isColimit GR, FI, ψ, hidentityI, hcompositionI, GI, eGI, hGI, LI,
+    colimit.isColimit GI, a, b, w, hE, ai, bi, wi, hi,
+    fun i ↦ s i ≫ q i, hinj, ?_, ?_⟩
+  · intro i
+    change (s i).τ₁ ≫ L.ι.app i = _
+    rw [hs₁]
+  · intro i
+    change (s i).τ₃ ≫ colimit.ι GR i = _
+    rw [hs₃]
+    rfl
 
 end AlgebraicGeometry.Etale

@@ -19,41 +19,33 @@
  ],
  "proof": [
   {
-   "text": "Choose injective embeddings F_k -> A_k. Define E_i as the product of direct images of A_k over arrows i -> k. Adjunction transposes the maps F_i -> E_i and gives their compatibility. The identity component proves they are monomorphisms. Exact inverse image implies direct image preserves injectives; products of injectives are injective. Take the stage cokernels R_i and cancel their epimorphisms to prove the unit and cocycle laws.",
+   "text": "Obtain compatible injective and cokernel systems and their pulled-back short exact diagram from the stage-diagram theorem. This leaves the construction problem below and does not assume any colimit exact sequence.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites-injective-system",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-etale-replacement-stage-diagram"
    ],
    "elementary": false
   },
   {
-   "text": "Pull these systems to the limit and take filtered sheaf colimits. Exactness gives 0 -> L -> LE -> LR -> 0 with its canonical coprojection maps.",
+   "text": "Use Mathlib exactness of filtered colimits of abelian sheaves, restricting AB5 from universe u+1 to u via AB5OfSize_of_univLE. Apply ShortComplex.ShortExact.map_of_exact to colim. Choose the canonical colimit cocones for GI and GR; compare the canonical colimit of G with the given cocone L by its unique colimit isomorphism. Define a by the inverse comparison followed by colim.map α and define b as colim.map β. Functoriality proves a composed with b is zero, and transport of the mapped short complex across the first-object comparison proves short exactness.",
    "uses": [
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact"
+    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
    ],
    "elementary": false
   },
   {
-   "text": "The compatible embedding and quotient maps pull back to morphisms of systems. Their filtered-colimit maps give a short complex. Exact filtered colimits prove its short exactness. Each triple of canonical coprojections defines a morphism from the stage pulled-back short complex, and the first and third components have the asserted formulas by construction.",
-   "uses": [
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-site-pullback-abelian-exact"
-   ],
-   "elementary": false
+   "text": "Define a morphism from each component diagram to the colimit short complex using the three coprojections. Its two squares are colimit.ι_map, with the first one transported through the unique colimit comparison. Compose with the stage-diagram morphism s. The first component reduces to eG.inv followed by L.ι and the third to eGR.inv followed by the canonical GR coprojection. These are the prescribed formulas.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites-injective-system",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-etale-replacement-stage-diagram",
   "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ",
-  "place": "Steps 1 and 2 of the parent acyclic-replacement plan: injective system, stage cokernels and filtered-colimit short exact sequence, with its canonical short-complex morphisms."
+  "document": "Stacks Project, Tags 0EXZ and 03CO; Mathlib ShortComplex.ShortExact.map_of_exact and Sheaf.hasExactColimitsOfShape",
+  "place": "Q1: complete Lean filtered-colimit construction and canonical component formulas from the separate stage diagram; the stage-diagram construction remains a named theorem."
  },
  "mathlib_searches": [
   {
@@ -123,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-74905",
-  "group": "T3",
+  "reviewer": "COMPILER",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261012T135320-L-1694208",
+  "landing": "20261012T151912-L-2290053",
   "kind": "interface",
-  "note": "independent Codex review: Lean signatures, proof, node records, source arguments, pruning and report match the stage-3 brief; all delivered modules and the sole direct importer compile cleanly; axioms are standard plus expected sorryAx."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

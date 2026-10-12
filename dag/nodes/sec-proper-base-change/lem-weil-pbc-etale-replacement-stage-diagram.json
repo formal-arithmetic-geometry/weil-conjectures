@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-etale-replacement-stage-diagram",
+ "kind": "statement",
+ "title": "The stage diagram of a compatible étale injective replacement",
+ "statement": "Let $I$ be a nonempty directed preordered set, $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ an inverse diagram of schemes [def-pc-scheme], and $c$ any cone with point $X$ [def-weil-pbc-category-colimit]. Let $F_i$ be abelian étale sheaves [def-weil-pbc-abelian-etale-sheaves] with transitions $D(f^{\\mathrm{op}})^{-1}F_i\\to F_j$ satisfying the canonical inverse-image identity and composition laws [def-weil-pbc-inverse-image]. Let $G:I\\to\\operatorname{Ab}(X_{\\acute et})$ be equipped with objectwise isomorphisms $e_{G,i}:G_i\\simeq c_i^{-1}F_i$ and the canonical transition equations. There exist compatible coefficient systems $A_i,R_i$, with the same inverse-image identity and composition laws, and pulled-back functors $G_A,G_R$ on $X$ with objectwise isomorphisms $e_{A,i},e_{R,i}$ and canonical transition equations. There are maps $a_i:F_i\\to A_i$ and $b_i:A_i\\to R_i$ such that their short complexes are short exact [def-weil-pbc-exact-sequence], and every $A_i$ is injective. There are natural transformations $\\alpha:G\\to G_A$, $\\beta:G_A\\to G_R$ with $\\alpha\\beta=0$ whose short complex in the functor category is short exact. For each $i$ there is a morphism from the inverse image under $c_i$ of the stage short complex to the component at $i$ of this functor-category short complex, whose first component is $e_{G,i}^{-1}$ and whose third component is $e_{R,i}^{-1}$. No colimit cocone, colimit exact sequence, limit property of $c$, quasi-compactness or affine transition hypothesis is required. An injective sheaf is an object for which every map into it extends across every monomorphism; a morphism of short complexes consists of three maps commuting with both differentials.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0EXZ",
+  "place": "Proof of Lemma 21.16.5: product of direct images, its system transitions and compatible embeddings; stage cokernels and exact inverse-image transport use Tag 04JC. This is the stage-diagram portion of steps 1 and 3 of the parent node, before filtered colimits."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Use enough injectives on the essentially small étale topoi to obtain canonical Injective.under embeddings. At i form the product, indexed by pairs (k, i to k), of lowerStar of these embeddings. Define the embedding component by transposing the coefficient transition followed by the canonical injective embedding through the upperStar/lowerStar adjunction. Transpose transitions through the upperStar/lowerStar adjunction. Direct images preserve injectives because inverse image is exact; products preserve injectivity. The identity-arrow component proves that the embedding is mono, and the adjunction unit, composition comparison and product projections prove the identity, cocycle and embedding compatibility equations. Use stagewise cokernels; exact inverse image preserves their universal properties, so compatibility induces cokernel transitions and cancellation of cokernel projections proves their system equations.",
+   "uses": [
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-product-injectives",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the cone equation to compose stage transitions with the upperStar comparison isomorphisms, giving GI and GR. Transport embeddings and quotient maps through the prescribed objectwise isomorphisms to natural transformations α and β. Their composite is zero. Exact inverse image gives short exactness at each stage; kernels and cokernels in the functor category are objectwise, hence the natural-transformation short complex is short exact. The inverse objectwise identifications give the short-complex maps s; their first and third components are the inverse comparisons by construction. This produces only the stage diagram, without taking any colimit.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-product-injectives",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Tags 0EXZ and 04JC",
+  "place": "The product/direct-image proof of 0EXZ, with stage cokernels and exact pullback to an arbitrary cone; Q1 records the unresolved scheme-interface construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of schemes admits a compatible injective abelian etale sheaf system with short exact cokernel sequences and exact filtered colimits",
+   "date": "2026-10-12",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex",
+   "verdict": "No exact match for the compatible scheme étale stage diagram. ShortExact.map_of_exact supplies the separate colimit argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Limits.colim",
+   "date": "2026-10-12",
+   "results": "0 hits: ",
+   "verdict": "No exact match for the compatible scheme étale stage diagram. ShortExact.map_of_exact supplies the separate colimit argument."
+  },
+  {
+   "tool": "grep",
+   "query": "ShortExact.*colim|colim.*ShortExact",
+   "date": "2026-10-12",
+   "results": "2 hits: Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/CategoryTheory/Abelian/ShortExact.lean",
+   "verdict": "No exact match for the compatible scheme étale stage diagram. ShortExact.map_of_exact supplies the separate colimit argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every compatible system of abelian etale sheaves embeds into a compatible injective system and has compatible cokernels, giving a short exact diagram after inverse image",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitReplacementExactSystems",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "The injective-restriction-acyclicity proof, through the étale-limit acyclic-replacement construction: stage injective embeddings and cokernels before the filtered-colimit sequence.",
+   "via": [
+    "lem-weil-pbc-etale-limit-replacement-exact-systems",
+    "lem-weil-pbc-etale-limit-acyclic-replacement",
+    "lem-weil-pbc-etale-limit-cohomology-connecting-ladder",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleReplacementStageDiagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleReplacementStageDiagram.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_replacement_stage_diagram",
+  "statement": "theorem etale_replacement_stage_diagram\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)\n    (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j)\n    (hidentity : ∀ i : I, φ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i))\n    (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g)\n    (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eG : ∀ i : I, G.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i))\n    (hG : ∀ (i j : I) (f : i ⟶ j), G.map f =\n      (eG i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv)\n :\n    ∃ (FR : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (φR : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FR i) ⟶ FR j)\n    (hidentityR : ∀ i : I, φR (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (FR i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FR i))\n    (hcompositionR : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      φR (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FR i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φR f) ≫ φR g)\n    (GR : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eGR : ∀ i : I, GR.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FR i))\n    (hGR : ∀ (i j : I) (f : i ⟶ j), GR.map f =\n      (eGR i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (FR i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φR f) ≫ (eGR j).inv)\n    (FI : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1})\n    (ψ : ∀ {i j : I} (f : i ⟶ j),\n      (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (FI i) ⟶ FI j)\n    (hidentityI : ∀ i : I, ψ (𝟙 i) =\n      (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app\n        (FI i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (FI i))\n    (hcompositionI : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k),\n      ψ (f ≫ g) =\n        (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op)\n          (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (FI i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (ψ f) ≫ ψ g)\n    (GI : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (eGI : ∀ i : I, GI.obj i ≅\n      (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (FI i))\n    (hGI : ∀ (i j : I) (f : i ⟶ j), GI.map f =\n      (eGI i).hom ≫\n        (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op)\n          (c.π.app (op i)) (c.w f.op).symm).hom.app (FI i) ≫\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (ψ f) ≫ (eGI j).inv)\n    (ai : ∀ i : I, F i ⟶ FI i) (bi : ∀ i : I, FI i ⟶ FR i)\n    (wi : ∀ i : I, ai i ≫ bi i = 0)\n    (hi : ∀ i : I, (ShortComplex.mk (ai i) (bi i) (wi i)).ShortExact)\n    (α : G ⟶ GI) (β : GI ⟶ GR) (w : α ≫ β = 0)\n    (s : ∀ i : I,\n      (ShortComplex.mk (ai i) (bi i) (wi i)).map\n        (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))) ⟶\n      (ShortComplex.mk (α.app i) (β.app i) (congrArg (fun f ↦ f.app i) w))),\n      (∀ i : I, Injective (FI i)) ∧\n      (ShortComplex.mk α β w).ShortExact ∧\n      (∀ i : I, (s i).τ₁ = (eG i).inv) ∧\n      (∀ i : I, (s i).τ₃ = (eGR i).inv)",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T151912-L-2290053",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T151912-L-2290053",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
