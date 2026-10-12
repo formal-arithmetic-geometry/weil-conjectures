@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-p1-strict-local-model-comparison",
+ "kind": "statement",
+ "title": "Strict-local model comparison for projective-line stalk exchange",
+ "statement": "For the projective-line pullback square and integral geometric points of the reduction theorem, strict henselian local rings and a local map between them, a restricted torsion sheaf, source and target stalk additive equivalences, and residue cohomology additive equivalences exist and commute with the stalk exchange and cohomology pullback maps.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Theorem Tag 095T, paragraphs 3--4; strict-henselization stalk comparison"
+ },
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "Strict henselization at compatible geometric points and its functoriality give the local rings, local map, and restricted torsion sheaf.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4"
+   }
+  },
+  {
+   "text": "The strict-henselization stalk formula and termwise exchange comparison give stalk equivalences and the exchange compatibility.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-weil-pbc-derived-exchange-termwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4"
+   }
+  },
+  {
+   "text": "Topological invariance and cohomology functoriality give residue equivalences and compatibility of the cohomology pullback.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "proof of Theorem Tag 095T, paragraphs 3--4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Theorem Tag 095T, paragraphs 3--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Conjugacy geometric stalk exchange strict henselization",
+   "results": "Service unavailable",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization geometric stalk exchange",
+   "results": "Residue-field map hits only",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddEquiv.trans",
+   "results": "AddEquiv.trans_apply",
+   "date": "2026-10-12",
+   "verdict": "generalization"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*stalk|baseChangeHomologyMap",
+   "results": "No Mathlib hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction",
+  "date": "2026-10-12",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "upper square: reducing the stalk exchange to the strict-local square through the maps Phi_S and Phi_T",
+   "via": [
+    "Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineStrictLocalModelComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_strictLocal_modelComparison",
+  "statement": "theorem Etale.projectiveLine_strictLocal_modelComparison (Λ : Type (u + 1)) [CommRing Λ] {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S} (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g) {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (hσ : ∃ (s : S) (φ : S.residueField s ⟶ .of k), φ.hom.IsIntegral ∧ Spec.map φ ≫ S.fromSpecResidueField s = σ) (hτ : ∃ (t : T) (φ : T.residueField t ⟶ .of k'), φ.hom.IsIntegral ∧ Spec.map φ ≫ T.fromSpecResidueField t = τ) (F : Sheaf (ProjectiveLine S).smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheaf F] (q : ℕ) : ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B), letI := cA letI := cB ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B), letI := hA letI := hB ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A)) (sB : IsSepClosed (IsLocalRing.ResidueField B)), letI := sA letI := sB ∃ (φ : A →+* B) (hφ : IsLocalHom φ), letI := hφ ∃ (F₀ : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF₀ : IsTorsionSheaf F₀), letI := hF₀ let t₀ := pointSmallEtale (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B))) let rA := Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) let g₀ := Spec.map (CommRingCat.ofHom φ) let i₀ := Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) let G₀ := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ rA)^*[ModuleCat.{u + 1} Λ].obj F₀) let G := (sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F) ∃ (a₁ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeSourceFunctor Λ g (ProjectiveLine S ↘ S) q).obj F) ≃+ (t₀.sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeSourceFunctor Λ g₀ (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A)) q).obj F₀)) (a₂ : ((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeTargetFunctor Λ g' f' q).obj F) ≃+ (t₀.sheafFiber (A := ModuleCat.{u + 1} Λ)).obj ((Etale.baseChangeTargetFunctor Λ (ProjectiveSpace.map _ g₀) (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B)) q).obj F₀)) (b₁ : Sheaf.H G₀ q ≃+ Sheaf.H G q) (b₂ : Sheaf.H ((ProjectiveSpace.map _ i₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q ≃+ Sheaf.H ((ProjectiveSpace.map _ ι)^*[AddCommGrpCat.{u + 1}].obj G) q), (∀ x, a₂ ((((pointSmallEtale τ).sheafFiber (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ sq q F)).hom x) = ((t₀.sheafFiber (A := ModuleCat.{u + 1} Λ)).map (Etale.baseChangeHomologyMap Λ (ProjectiveSpace.isPullback_map _ g₀) q F₀)).hom (a₁ x)) ∧ (∀ y, b₂ (Etale.cohomologyMap (ProjectiveSpace.map _ i₀) G₀ q y) = Etale.cohomologyMap (ProjectiveSpace.map _ ι) G q (b₁ y))",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-bd978",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T002323-L-552422",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-bd978",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261012T002323-L-552422",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered modules compile without errors or warnings; target signature is unchanged, the circular import is removed, the new named sorry has a matching node and report, proof metadata agrees, and axiom checks show only permitted axioms plus sorryAx from that dependency."
+ }
+}

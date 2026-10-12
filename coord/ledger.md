@@ -5746,3 +5746,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:19 L: merged deliver/R1/Sheaf.AlgebraicGeometry.BaseChangeConventions (stage 3; reviewer PASS; first push; landing 20261012T001929-L-536948 (proof); modules 1; new nodes 0)
 - 00:19 L: returned deliver/G1/Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image (reviewer RETURN: (reviewer X-81e3b, head 81e3b3738) D1: In HenselianFinitePushforwardH1Lift.lean lines 30–35, replace the conclusion `∃ z)
 - 00:20 L: merged deliver/H1/Sheaf.Topology.NoetherianTopologicalCohomologyVanishing (stage 3; reviewer PASS; after a return; landing 20261012T001958-L-539284 (interface); modules 2; new nodes 2)
+- 00:25 L: merged deliver/Q1/Sheaf.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction (stage 3; reviewer PASS; after a return; landing 20261012T002323-L-552422 (interface); modules 2; new nodes 1; change records: coord/changes/ProjectiveLineGeometricStalkReduction.md)

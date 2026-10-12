@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Sheaf.AlgebraicGeometry.ProjectiveLineStrictLocalModelComparison
 
 /-!
 # Reduction of the geometric-stalk exchange to the strict-local exchange
@@ -19,6 +20,7 @@ blueprint geometric-stalk lemma, its strict-henselization upper square.
 
 universe u
 set_option autoImplicit false
+set_option linter.style.haveILetI false
 
 open CategoryTheory Limits
 
@@ -120,6 +122,26 @@ theorem Etale.geometricStalk_projectiveLine_of_strictLocal
           (Etale.baseChangeHomologyMap Λ sq q F)).hom x) =
         Etale.cohomologyMap (ProjectiveSpace.map _ ι)
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) := by sorry
+            ((ProjectiveSpace.map _ σ)^*[ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) := by
+  obtain ⟨A, B, cA, cB, hmodel⟩ :=
+    Etale.projectiveLine_strictLocal_modelComparison Λ sq σ τ ι hι hσ hτ F q
+  letI := cA
+  letI := cB
+  obtain ⟨hA, hB, hmodel⟩ := hmodel
+  letI := hA
+  letI := hB
+  obtain ⟨sA, sB, hmodel⟩ := hmodel
+  letI := sA
+  letI := sB
+  obtain ⟨φ, hφ, hmodel⟩ := hmodel
+  letI := hφ
+  obtain ⟨F₀, hF₀, a₁, a₂, b₁, b₂, ha, hb⟩ := hmodel
+  letI := hF₀
+  obtain ⟨e₁, e₂, he⟩ := hLocal A B φ F₀ q
+  refine ⟨(a₁.trans e₁).trans b₁, (a₂.trans e₂).trans b₂, ?_⟩
+  intro x
+  change b₂ (e₂ (a₂ _)) = _
+  rw [ha, he, hb]
+  rfl
 
 end AlgebraicGeometry
