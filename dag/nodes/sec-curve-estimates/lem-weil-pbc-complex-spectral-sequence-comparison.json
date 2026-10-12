@@ -26,48 +26,36 @@
  ],
  "proof": [
   {
-   "text": "For each page r, take the filtered colimit of the page complexes and their differentials. Exactness of filtered colimits in Ab [lem-weil-pbc-filtered-colimit-abelian-groups-exact] identifies the colimit of kernels and images with the kernel and image of the colimit differential. Starting from the assumed E_1 isomorphism and inducting on r, the induced map from the colimit of E_{r,i}^{p,q} to E_r^{p,q} is therefore an isomorphism in every bidegree; the page-to-page homology identifications are those in the definition of a spectral sequence [def-sp-spectral-sequence].",
+   "text": "For each (p,q), form the functor Q of terms on the supplied finite page N(p,q). The maps v_i form a cocone on Q, by applying page evaluation to hv. Let θ be its colimit descent. Finite-page comparison makes θ an isomorphism. Set ψ=θ followed by conv'(p,q). The source convergence maps conv(i,p,q) give models for the graded pieces in degree p+q; hconv supplies transition compatibility, and hconv' supplies the graded cocone equations for ψ. Composition of isomorphisms gives IsIso ψ.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "def-sp-spectral-sequence"
+    "lem-weil-pbc-spectral-sequence-finite-page-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, passage from the E_1 page through successive pages"
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
    }
   },
   {
-   "text": "The common vanishing region $p<0$ or $q<a$ is preserved on every page by the page-to-page homology identifications. Fix $(p,q)$ in the remaining region. By the bidegree assumed in the statement, the outgoing target of $d_r$ is $(p-r+1,q+r)$ and vanishes for $r>p+1$, while the incoming source is $(p+r-1,q-r)$ and vanishes for $r>q-a$. Thus $R(p,q)=\\max(p+1,q-a)+1$, independent of $i$, has $E_{R,i}^{p,q}=E_{\\infty,i}^{p,q}$ and $E_R^{p,q}=E_\\infty^{p,q}$ via the assumed stabilization. Step 1 at page $R$, followed by the assumed compatibility of the convergence isomorphisms with $u_{i'i}$ and $v_i$, gives $\\varinjlim_i \\operatorname{gr}^q A_i^{p+q}\\cong \\operatorname{gr}^q A^{p+q}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, boundedness and finite-term spectral-sequence comparison"
-   }
-  },
-  {
-   "text": "Fix $n$. By the filtration bounds, $F^qA_i^n=A_i^n$ and $F^qA^n=A^n$ for $q\\leq a$, while $F^qA_i^n=F^qA^n=0$ for $q>n$; hence only the finite range $a\\leq q\\leq n$ occurs. For $q$ descending from $n$ to $a$, use the short exact sequences $0\\to F^{q+1}A_i^n\\to F^qA_i^n\\to \\operatorname{gr}^qA_i^n\\to0$ and their compatible maps to the corresponding sequence for $A^n$. Filtered-colimit exactness [lem-weil-pbc-filtered-colimit-abelian-groups-exact] preserves these sequences. The induction starts at $q>n$, where all terms vanish, and the graded isomorphism of Step 2 together with the five lemma [lem-weil-pbc-five-lemma] gives an isomorphism at each successive $q$. At $q\\leq a$ this identifies the canonical map $\\varinjlim_iA_i^n\\to A^n$ with an isomorphism. Since $n$ was arbitrary, the result holds for every $n$.",
+   "text": "For fixed n and each q, use p=n-q in the constructed graded model and rewrite n-q+q=n. Apply finite filtered-colimit comparison with bounds L=a₀, U=n, using hfil,hfil' and the supplied filtered abutment maps a,b and their compatibility. This proves IsIso φ for every φ with the stated cocone equations.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-five-lemma"
+    "lem-weil-pbc-finite-filtered-colimit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, finite filtration induction on the abutment"
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "def-sp-spectral-sequence",
-  "lem-weil-pbc-five-lemma"
+  "lem-weil-pbc-spectral-sequence-finite-page-comparison",
+  "lem-weil-pbc-finite-filtered-colimit-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison after Theorem Tag 09YQ"
+  "place": "Tag 0EZM finite-term comparison, implemented via compatible finite-page models and finite filtration induction; supplied convergence pages avoid a separate uniform stabilization construction"
  },
  "mathlib_searches": [
   {
@@ -148,5 +136,15 @@
   "result": "fix",
   "note": "directed I; E: I ⥤ SpectralSequence (up' ⟨1-r,r⟩) from page 1 = node's d_r:(p,q)→(p-r+1,q+r); v,hv cocone of SS morphisms; A_i^n, B^n with DecreasingFiltration, a,b FilteredObject.Hom, hb; (iii) stabilization page N with vanishing d_r in/out; conv/conv' E_∞≅gr^q A^{p+q} commuting via gradedMap; (i) induced page-1 map iso; (ii) vanishing p<0 or q<a; (iv) F^q=⊤ for q≤a, ⊥ for q>n; conclusion: induced colim A^n → A^n iso"
  },
- "lead_note": "2026-10-11 10:16 UTC L (via B-1015): stmt_deps += lem-sp-finite-filtration-induction (the lean statement uses `FilteredObject.gradedMap`)."
+ "lead_note": "2026-10-11 10:16 UTC L (via B-1015): stmt_deps += lem-sp-finite-filtration-induction (the lean statement uses `FilteredObject.gradedMap`).",
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

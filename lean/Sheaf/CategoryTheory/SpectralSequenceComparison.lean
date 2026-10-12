@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.Filtration
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
+import Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison
+import Sheaf.CategoryTheory.FiniteFilteredColimitComparison
 
 /-!
 # Uniformly bounded spectral-sequence comparison
@@ -31,6 +33,9 @@ namespace CategoryTheory
 
 open Limits
 
+-- The explicit convergence pages make the stabilization and vanishing assumptions redundant
+-- in this proof. Keep the original signature, including all its hypothesis names.
+set_option linter.unusedVariables false in
 /-- The finite-term comparison of uniformly bounded spectral sequences.
 
 The index set is the directed set `I`; the transition morphisms `u_{i'i}` of spectral sequences
@@ -45,14 +50,15 @@ into and out of `(p, q)` vanish from page `N p q` on), so `E_∞^{p,q}` is displ
 on graded pieces (`hconv`, `hconv'`). (i) is `hpage`, (ii) is `hvanish`, `hvanish'`, (iv) is
 `hfil`, `hfil'`.
 
-Proof: filtered-colimit exactness in abelian groups identifies the colimit of each page's
-kernels and images with the kernel and image of the colimit differential, so induction on pages
-propagates the page-one isomorphism to every page. The vanishing region (ii) gives the
-stabilization page `max (p + 1) (q - a) + 1` independent of `i`, and the compatible convergence
-isomorphisms identify `colim_i gr^q A_i^{p+q}` with `gr^q A^{p+q}`. Finally, descending
-induction through the finite filtration range `a ≤ q ≤ n` uses the short exact sequences of
-successive filtration steps and the five lemma, starting above `n` where the steps vanish and
-ending at `a` where the filtration is the whole abutment.
+Proof: apply finite-page comparison to the page `N p q`. Construct its comparison
+cocone from `v` and `hv`. Composing its colimit descent with `conv' p q` gives an
+isomorphism to the target graded piece. The two convergence compatibility equations
+show that `conv i p q` identifies the page diagram with the source graded diagram,
+and that this isomorphism is induced by `b` on graded pieces. For fixed `n`, take
+`p = n - q` for each `q` and cancel `n - q + q = n`. The finite filtered-colimit
+comparison, with common lower bound `a₀` and upper bound `n`, then gives the claim.
+No additional stabilization argument is needed: the displayed finite pages and their
+convergence isomorphisms are already hypotheses of this statement.
 (blueprint: lem-weil-pbc-complex-spectral-sequence-comparison) -/
 theorem complex_spectral_sequence_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
@@ -101,6 +107,48 @@ theorem complex_spectral_sequence_comparison
     (hfil' : ∀ n q : ℤ, (q ≤ a₀ → (G n).step q = ⊤) ∧ (n < q → (G n).step q = ⊥)) :
     ∀ (n : ℤ) (φ : colimit (A n) ⟶ B n),
       (∀ i : I, colimit.ι (A n) i ≫ φ = (b n i).hom) → IsIso φ := by
-  sorry
+  have graded : ∀ p q : ℤ, ∃ (Q : I ⥤ AddCommGrpCat.{u})
+      (e : ∀ i : I, Q.obj i ≅ (F (p + q) i).gradedPiece q),
+      (∀ {i j : I} (f : i ⟶ j),
+        Q.map f ≫ (e j).hom = (e i).hom ≫
+          FilteredObject.gradedMap (a (p + q) f) q) ∧
+      ∃ ψ : colimit Q ⟶ (G (p + q)).gradedPiece q,
+        (∀ i : I, colimit.ι Q i ≫ ψ = (e i).hom ≫
+          FilteredObject.gradedMap (b (p + q) i) q) ∧ IsIso ψ := by
+    intro p q
+    let Q := E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u}
+      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 (N p q) (hN p q) ⋙
+      HomologicalComplex.eval _ _ ⟨p, q⟩
+    let c : Cocone Q :=
+      { pt := (E'.page (N p q) (hN p q)).X ⟨p, q⟩
+        ι :=
+          { app := fun i ↦ ((v i).hom (N p q) (hN p q)).f ⟨p, q⟩
+            naturality := by
+              intro i j f
+              have h := congrArg
+                (fun w ↦ (w.hom (N p q) (hN p q)).f ⟨p, q⟩) (hv f)
+              simpa [Q] using h } }
+    let θ : colimit Q ⟶ c.pt := colimit.desc Q c
+    have hθ : ∀ i : I, colimit.ι Q i ≫ θ =
+        ((v i).hom (N p q) (hN p q)).f ⟨p, q⟩ := by
+      intro i
+      exact colimit.ι_desc c i
+    have : IsIso θ := spectral_sequence_finite_page_comparison
+      E E' v hv hpage (N p q) (hN p q) p q θ hθ
+    refine ⟨Q, fun i ↦ conv i p q, ?_, θ ≫ (conv' p q).hom, ?_, ?_⟩
+    · intro i j f
+      exact hconv f p q
+    · intro i
+      rw [← Category.assoc, hθ]
+      exact hconv' i p q
+    · infer_instance
+  intro n φ hφ
+  apply finite_filtered_colimit_comparison (A n) (F n) (B n) (G n)
+    (a n) (ha n) (b n) (hb n) a₀ n (hfil n) (hfil' n) _ φ hφ
+  intro q
+  have H := graded (n - q) q
+  have hn : n - q + q = n := by omega
+  rw [hn] at H
+  exact H
 
 end CategoryTheory

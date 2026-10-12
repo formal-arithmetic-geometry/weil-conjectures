@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-spectral-sequence-finite-page-comparison",
+ "kind": "statement",
+ "title": "Filtered-colimit comparison on every finite spectral-sequence page",
+ "statement": "Let I be a small directed preordered set [def-weil-pbc-category-colimit], possibly empty. Let E : I → SpectralSequence(Ab) be a functor of spectral sequences [def-sp-spectral-sequence], starting at page 1 with differential (p,q) → (p+1-r,q+r) on page r. Let E' be another such spectral sequence and v_i : E_i → E' a compatible cocone of spectral-sequence morphisms. Assume every map from colim_i E_{1,i}^{p,q} to E'_1^{p,q} with cocone equations induced by v_i is an isomorphism. Then for every integer r≥1 and bidegree (p,q), every map from colim_i E_{r,i}^{p,q} to E'_r^{p,q} satisfying the corresponding cocone equations is an isomorphism. No abutments, convergence, vanishing region or stabilization assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "For nonempty I, take the directed colimit of the r-th-page complexes. Complex colimits are computed degreewise. The cocone v gives a chain map to the target page, and the initial hypothesis or induction hypothesis makes its components isomorphisms. Thus this chain map and its induced homology maps are isomorphisms.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+   }
+  },
+  {
+   "text": "Directed-colimit exactness identifies the homology of the colimit complex with the colimit of the r-th-page homologies. The page-to-page isomorphisms of E and E' and their naturality in all morphisms identify this isomorphism with the canonical comparison at r+1. Induct on the natural integer r-1.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+   }
+  },
+  {
+   "text": "Any map with the required cocone equations equals the canonical map by colimit.hom_ext. When I is empty, colimits are zero and the initial comparison hypothesis forces E'_1 to be zero degreewise. Homology then forces all subsequent pages to be zero, proving the empty case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-spectral-sequence",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "the complex-continuity input of the ancestor strict-henselization stalk formula, finite-page induction (parent comparison Step 1); expanded omitted comparison details from Tag 0EZM using Tags 00DB and 0127"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Filtered colimit comparison of spectral sequences: an isomorphism on page one induces isomorphisms on every finite page",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible map from the filtered colimit of spectral sequence pages is an isomorphism on every page if it is an isomorphism on page one",
+   "results": "CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit; CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'; CategoryTheory.OrthogonalReflection.isIso_toSucc_iff; CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f; HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃; HomologicalComplex.isIso_homologyι; HomologicalComplex.isIso_pOpcycles; HomologicalComplex.instIsIsoFRestrictionToTruncGE'OfIsStrictlySupported",
+   "date": "2026-10-12",
+   "verdict": "No theorem with the required filtered spectral-sequence or graded-colimit compatibility; related building blocks only."
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*comparison|graded.*colimit|colimit.*graded|finite.*filtration",
+   "results": "Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean",
+   "date": "2026-10-12",
+   "verdict": "No theorem with the required filtered spectral-sequence or graded-colimit compatibility; related building blocks only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SpectralSequenceComparison",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the complex-continuity input of the ancestor strict-henselization stalk formula, finite-page induction (parent comparison Step 1)",
+   "via": [
+    "lem-weil-pbc-complex-spectral-sequence-comparison",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SpectralSequenceFinitePageComparison",
+  "file": "lean/Sheaf/CategoryTheory/SpectralSequenceFinitePageComparison.lean",
+  "declaration": "CategoryTheory.spectral_sequence_finite_page_comparison",
+  "statement": "theorem spectral_sequence_finite_page_comparison\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (E : I ⥤ SpectralSequence AddCommGrpCat.{u}\n      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n    (E' : SpectralSequence AddCommGrpCat.{u}\n      (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1)\n    (v : ∀ i : I, E.obj i ⟶ E')\n    (hv : ∀ {i j : I} (f : i ⟶ j), E.map f ≫ v j = v i)\n    (hpage : ∀ (p q : ℤ)\n      (φ : colimit (E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 1 ⋙\n        HomologicalComplex.eval _ _ ⟨p, q⟩) ⟶ (E'.page 1).X ⟨p, q⟩),\n      (∀ i : I, colimit.ι _ i ≫ φ = ((v i).hom 1).f ⟨p, q⟩) → IsIso φ) :\n    ∀ (r : ℤ) (hr : 1 ≤ r) (p q : ℤ)\n      (φ : colimit (E ⋙ SpectralSequence.pageFunctor AddCommGrpCat.{u}\n        (fun r ↦ ComplexShape.up' (⟨1 - r, r⟩ : ℤ × ℤ)) 1 r hr ⋙\n        HomologicalComplex.eval _ _ ⟨p, q⟩) ⟶ (E'.page r hr).X ⟨p, q⟩),\n      (∀ i : I, colimit.ι _ i ≫ φ = ((v i).hom r hr).f ⟨p, q⟩) → IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

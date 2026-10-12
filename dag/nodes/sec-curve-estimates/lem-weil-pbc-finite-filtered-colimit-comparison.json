@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-finite-filtered-colimit-comparison",
+ "kind": "statement",
+ "title": "Finite filtered-colimit comparison from graded models",
+ "statement": "Let I be a small directed preordered set [def-weil-pbc-category-colimit], possibly empty. Let A:I→Ab, decreasing filtrations F_i on A_i and G on B [def-sp-filtration], filtered transition maps a_f lifting A(f), and compatible filtered cocone maps b_i:(A_i,F_i)→(B,G). Let L,U be common integers such that both F_i^q and G^q are whole for q≤L and zero for q>U. Suppose that for every q there exist a functor Q:I→Ab, isomorphisms e_i:Q_i≅gr^q F_i commuting with the transition graded maps [lem-sp-finite-filtration-induction], and an isomorphism ψ:colim Q→gr^q G with ψ∘ι_i=gr^q(b_i)∘e_i. Then every φ:colim A→B satisfying φ∘ι_i=b_i is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sp-filtration",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite filtered colimit model to obtain H, filtered legs c_i and a filtered descent f with underlying map φ. H is finite. The bounds L and U+1 make G finite. For a given q, take the supplied graded model Q,e and isomorphism ψ. The colimit model supplies the compatible isomorphism θ:colim Q→gr^q H.",
+   "uses": [
+    "lem-weil-pbc-finite-filtered-colimit-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+   }
+  },
+  {
+   "text": "Prove restriction and gradedMap functoriality by cancelling the target monic filtration inclusion, then the source epimorphic cokernel projection. Check θ followed by gr^q f = ψ on each colimit leg, using the displayed equations and c_i followed by f=b_i. Therefore gr^q f = θ^{-1} followed by ψ is an isomorphism.",
+   "uses": [
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+   }
+  },
+  {
+   "text": "Apply finite_filtration_induction to f, finite H,G, and these graded isomorphisms. Its first conclusion says the underlying map of f is an isomorphism; replace that underlying map by φ.",
+   "uses": [
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZM (lemma-colimit-variant-complexes), proof, finite-term spectral-sequence comparison; detailed exactness input Tag 00DB and filtration induction Tag 0127"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-filtered-colimit-model",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "the complex-continuity input of the ancestor strict-henselization stalk formula, finite filtration induction (parent comparison Step 3); expanded omitted comparison details from Tag 0EZM using Tags 00DB and 0127"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map from a directed colimit of uniformly finite filtered abelian groups is an isomorphism if the induced maps from colimits of the associated graded groups are isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a directed colimit of uniformly finite filtered abelian groups is an isomorphism if the induced maps from colimits of the associated graded groups are isomorphisms",
+   "results": "CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity.isIso_f; CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit; CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit'; CommGrpCat.FilteredColimits.colimitCoconeIsColimit; AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit; GrpCat.FilteredColimits.colimitInvAux_eq_of_rel; localCohomology.isoOfFinal; CommGrpCat.FilteredColimits.colimit",
+   "date": "2026-10-12",
+   "verdict": "No theorem with the required filtered spectral-sequence or graded-colimit compatibility; related building blocks only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"filtration\", \"IsIso\"",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No theorem with the required filtered spectral-sequence or graded-colimit compatibility; related building blocks only."
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*comparison|graded.*colimit|colimit.*graded|finite.*filtration",
+   "results": "Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean",
+   "date": "2026-10-12",
+   "verdict": "No theorem with the required filtered spectral-sequence or graded-colimit compatibility; related building blocks only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SpectralSequenceComparison",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "the complex-continuity input of the ancestor strict-henselization stalk formula, finite filtration induction (parent comparison Step 3)",
+   "via": [
+    "lem-weil-pbc-complex-spectral-sequence-comparison",
+    "lem-weil-pbc-derived-etale-cohomology-limit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FiniteFilteredColimitComparison",
+  "file": "lean/Sheaf/CategoryTheory/FiniteFilteredColimitComparison.lean",
+  "declaration": "CategoryTheory.finite_filtered_colimit_comparison",
+  "statement": "theorem finite_filtered_colimit_comparison\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (A : I ⥤ AddCommGrpCat.{u})\n    (F : ∀ i : I, DecreasingFiltration (A.obj i))\n    (B : AddCommGrpCat.{u}) (G : DecreasingFiltration B)\n    (a : ∀ {i j : I} (_ : i ⟶ j),\n      (⟨A.obj i, F i⟩ : FilteredObject AddCommGrpCat.{u}) ⟶ ⟨A.obj j, F j⟩)\n    (ha : ∀ {i j : I} (f : i ⟶ j), (a f).hom = A.map f)\n    (b : ∀ i : I,\n      (⟨A.obj i, F i⟩ : FilteredObject AddCommGrpCat.{u}) ⟶ ⟨B, G⟩)\n    (hb : ∀ {i j : I} (f : i ⟶ j), A.map f ≫ (b j).hom = (b i).hom)\n    (L U : ℤ)\n    (hF : ∀ (i : I) (q : ℤ),\n      (q ≤ L → (F i).step q = ⊤) ∧ (U < q → (F i).step q = ⊥))\n    (hG : ∀ q : ℤ, (q ≤ L → G.step q = ⊤) ∧ (U < q → G.step q = ⊥))\n    (hgraded : ∀ q : ℤ, ∃ (Q : I ⥤ AddCommGrpCat.{u})\n      (e : ∀ i : I, Q.obj i ≅ (F i).gradedPiece q),\n      (∀ {i j : I} (f : i ⟶ j),\n        Q.map f ≫ (e j).hom = (e i).hom ≫ FilteredObject.gradedMap (a f) q) ∧\n      ∃ ψ : colimit Q ⟶ G.gradedPiece q,\n        (∀ i : I, colimit.ι Q i ≫ ψ = (e i).hom ≫\n          FilteredObject.gradedMap (b i) q) ∧ IsIso ψ) :\n    ∀ φ : colimit A ⟶ B,\n      (∀ i : I, colimit.ι A i ≫ φ = (b i).hom) → IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915568",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915568",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
