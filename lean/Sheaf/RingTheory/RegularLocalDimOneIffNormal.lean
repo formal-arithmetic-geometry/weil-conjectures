@@ -7,9 +7,6 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Sheaf.RingTheory.PrincipalMaximalDimOneRegular
-import Sheaf.RingTheory.ValuationRingNormal
-import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
@@ -43,6 +40,15 @@ Proof:
 theorem iff_isDomain_and_isIntegrallyClosed_of_dim_one (A : Type u) [CommRing A]
     [IsNoetherianRing A] [IsLocalRing A] (hdim : ringKrullDim A = 1) :
     IsRegularLocalRing A ↔ IsDomain A ∧ IsIntegrallyClosed A := by
-  sorry
+  constructor
+  · intro hreg
+    let : IsRegularLocalRing A := hreg
+    let : IsDiscreteValuationRing A := IsRegularLocalRing.isDiscreteValuationRing A hdim
+    exact ⟨inferInstance, inferInstance⟩
+  · rintro ⟨hdom, hclosed⟩
+    let : IsDomain A := hdom
+    let : IsIntegrallyClosed A := hclosed
+    apply IsRegularLocalRing.of_isIntegrallyClosed A
+    rw [hdim]
 
 end IsRegularLocalRing
