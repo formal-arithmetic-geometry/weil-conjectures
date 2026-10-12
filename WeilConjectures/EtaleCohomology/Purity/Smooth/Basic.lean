@@ -9,6 +9,7 @@ public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundleSectionInvariant
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
@@ -142,30 +143,35 @@ diagonal argument. Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed 
 smooth projection `p₁`.
 1. `𝒞(p₁, Δ) ≅ ω_f` by smooth base change
    (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`).
-2. The deformation to the normal cone of `Δ` (`sk-thm-dnc`,
-   `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
-   with the section invariant of its normal bundle, a rank-`d` vector bundle.
-3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
-   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
-   finite type over the field.
+2. The deformation to the normal cone of `Δ` (`sk-lem-geometry`,
+   `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`) and DNC invariance
+   (`sk-thm-dnc`, `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identify
+   `𝒞(p₁, Δ)` with the section invariant `𝒞(π_N, 0_N)` of the normal bundle
+   `N_Δ = V(Δ^* Ω_{W/X})` (`AlgebraicGeometry.Scheme.Hom.sectionNormalCone`), which is the
+   relative tangent bundle `T_{X/Y}`, a vector bundle of rank `d` since `p₁` is smooth of
+   relative dimension `d`.
+3. `𝒞(π_N, 0_N) ≅ Λ_X(d)[2d]` by vector-bundle purity (`cor-pur-vector-bundle-purity`,
+   `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_twistShift_of_isVectorBundleOfRank`).
 
-The normal bundle of `Δ` is the relative tangent bundle `T_{X/Y}`, which is étale-locally
-trivial of rank `d` (`sk-lem-diag-reg`), so that step 3 is affine-space purity étale-locally.
-Mathlib has neither vector bundles nor `T_{X/Y}`, and the normal cone datum
-`AlgebraicGeometry.Scheme.Hom.NormalConeData` is not yet tied to the immersion, so the proof is
-left as a TODO. -/
+The normal bundle is compactifiable, being the fibre over `t = 0` of the compactifiable
+deformation space. -/
 theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
     Nonempty (dualizingComplex (ModuleCat.{u + 1} Λ) f ≅
-      (twistShift Λ X d).obj (constantComplex Λ X)) :=
-  -- TODO: step 2 needs a deformation to the normal cone of `Δ` whose normal cone datum is the
-  -- normal bundle `T_{X/Y}` (`nonempty_iso_sectionInvariant_normalCone`), and step 3
-  -- vector-bundle purity for it. `NormalConeData` does not yet tie the datum to the immersion,
-  -- and the existence of a deformation datum (`nonempty_deformationToNormalConeData`) is false
-  -- for an arbitrary one, so the proof waits for the normal bundle
-  -- (`prove2/sk-thm-smooth-purity-2`).
-  sorry
+      (twistShift Λ X d).obj (constantComplex Λ X)) := by
+  -- the deformation to the normal cone of the diagonal, a closed section of `p₁`
+  obtain ⟨D⟩ := Scheme.Hom.nonempty_deformationToNormalConeData d (pullback.fst f f)
+    (pullback.diagonal f) (pullback.diagonal_fst f)
+  have : HasCompactification
+      ((pullback.fst f f).sectionNormalCone (pullback.diagonal f) d).proj :=
+    .of_isPullback D.isPullback_zeroFibre
+  obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
+  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_normalCone Λ d _ _ _ D (f ≫ aY)
+  obtain ⟨e₃⟩ := nonempty_iso_sectionInvariant_twistShift_of_isVectorBundleOfRank Λ d
+    ((pullback.fst f f).sectionNormalCone (pullback.diagonal f) d).proj
+    ((pullback.fst f f).sectionNormalCone (pullback.diagonal f) d).zeroSection (f ≫ aY)
+  exact ⟨e₁.symm ≪≫ e₂ ≪≫ e₃⟩
 
 /-! ### The smooth purity map -/
 

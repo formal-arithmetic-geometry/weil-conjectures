@@ -341,6 +341,7 @@ public import WeilConjectures.AlgebraicGeometry.NoetherNormalization
 public import WeilConjectures.AlgebraicGeometry.NoetherNormalizationChart
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximation
 public import WeilConjectures.AlgebraicGeometry.NoetherianApproximationFamily
+public import WeilConjectures.AlgebraicGeometry.NormalBundle
 public import WeilConjectures.AlgebraicGeometry.Picard.AffineSpaceRigidity
 public import WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
@@ -910,6 +911,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Transport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Twist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundleSectionInvariant
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
