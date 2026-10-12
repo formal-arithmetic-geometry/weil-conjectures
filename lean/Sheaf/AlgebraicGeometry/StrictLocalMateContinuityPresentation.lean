@@ -7,12 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import Sheaf.AlgebraicGeometry.GlobalCohomologyContinuityPresentation
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
-import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.AlgebraicGeometry.StrictLocalGermRestrictionIso
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometryExistence
+import Sheaf.AlgebraicGeometry.StrictLocalCohomologySourceColimit
+import Sheaf.AlgebraicGeometry.StrictLocalMateProjectionFormulas
 
 /-! # Presenting the strict-local mate as projection restriction
 
@@ -29,6 +26,8 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
 /-- Present the source of the strict-local mate as neighbourhood hypercohomology,
 and identify its germ components with projection pullbacks to the limit.
 This supplies the input to derived continuity, without applying continuity and without
@@ -73,6 +72,32 @@ theorem nonempty_strictLocalBaseChange_continuityPresentation
             (TwoSquare.mk _ _ _ _ (pullbackSquareComparison AddCommGrpCat.{v + 1}
               (IsPullback.of_hasPullback f
                 (Scheme.strictHenselizationStructuralMap s)).toCommSq).hom))
-                |>.natTrans.app K)))) := by sorry
+                |>.natTrans.app K)))) := by
+  classical
+  obtain ⟨Q⟩ := nonempty_strictLocalNeighbourhoodGeometry f s
+  obtain ⟨E⟩ := nonempty_strictLocalMateProjectionData f s K n Q
+  let := (Scheme.strictHenselization_properties s).2.1
+  obtain ⟨hsource⟩ := isColimit_strictLocalCohomologySourceLegs s
+    ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
+  let : ∀ i, CompactSpace ((strictLocalNeighbourhoodDiagram f s).obj i) := Q.compact
+  let : ∀ i, QuasiSeparatedSpace ((strictLocalNeighbourhoodDiagram f s).obj i) := Q.quasiSeparated
+  let : ∀ {i j} (a : i ⟶ j), IsAffineHom ((strictLocalNeighbourhoodDiagram f s).map a) := Q.affine
+  refine ⟨{
+    I := SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)
+    D := strictLocalNeighbourhoodDiagram f s
+    c := Cone.mk _ Q.legs
+    isLimit := Q.isLimit
+    t := strictLocalNeighbourhoodProjection f s
+    p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+    «over» := Q.over
+    F := strictLocalCohomologyNeighbourhoodFunctor s
+      ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
+    e := E.e
+    transition := E.transition
+    sourceLegs := strictLocalCohomologySourceLegs s
+      ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) n
+    sourceIsColimit := hsource
+    limitIso := strictLocalBaseChangeTargetIso f s K n
+    restriction := fun i ↦ E.restriction i }⟩
 
 end AlgebraicGeometry.Etale

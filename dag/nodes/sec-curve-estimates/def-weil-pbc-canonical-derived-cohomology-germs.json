@@ -1,0 +1,106 @@
+{
+ "id": "def-weil-pbc-canonical-derived-cohomology-germs",
+ "kind": "definition",
+ "title": "StrictLocalCohomologyGerms",
+ "statement": "For L in D⁺(Ab(S_et)) and n an integer, define the derived sections presheaf U↦Hom(Z[U][0],L[n]). Define its canonical cohomology germ map by applying degree-zero homology, evaluation at the free generator and the homology shift isomorphism. Restrict this functor to the small affine pointed neighbourhoods of a geometric point s [def-weil-pbc-strict-local-neighbourhood-geometry]. Define the source legs as the presheaf germs followed by the stalk map of this canonical comparison and the unique strict-local germ restriction transported through exact-inverse-image homology. The latter restriction is an isomorphism [lem-weil-pbc-strict-local-germ-restriction-iso].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-local-neighbourhood-geometry",
+  "def-weil-pbc-strict-henselization-restriction",
+  "lem-weil-pbc-strict-local-germ-restriction-iso"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "G2 following document",
+  "document": "Stacks Project",
+  "place": "Tags 03Q9 and 0BKV, with canonical derived Hom comparisons expanded by G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology germs and strict-local neighbourhood projection restriction",
+   "results": "Service unavailable: Internal Server Error; no verdict based on this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk of higher direct image as colimit of cohomology of affine etale neighbourhoods with restriction map to strict henselization",
+   "results": "Eight results about structure-sheaf stalks and ordinary module pullback; none realizes these abelian derived-section maps. Loogle presheafToSheaf, homology and IsPullback, IsAffineHom queries returned no hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*sheaf|sheaf.*homology|mate.*section|IsAffineHom.*pullback",
+   "results": "Mathlib has general stalk and pullback infrastructure, but no strict-local derived mate or the canonical derived Hom-to-germ comparison. The existing AbelianHigherDirectImagePresheaf has private definitions of the comparison, inaccessible from another module.",
+   "date": "2026-10-12",
+   "verdict": "No existing public declaration for this part."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 neighbourhood colimit and final injective-complex restriction paragraph",
+   "via": [
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalCohomologyGerms",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalCohomologyGerms.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalCohomologySourceLegs",
+  "declarations": [
+   "AlgebraicGeometry.Etale.strictLocalFreeSheaf",
+   "AlgebraicGeometry.Etale.strictLocalFreeSheafSections",
+   "AlgebraicGeometry.Etale.strictLocalDerivedHomToHomology",
+   "AlgebraicGeometry.Etale.strictLocalCohomologyPresheaf",
+   "AlgebraicGeometry.Etale.strictLocalCohomologyGermMap",
+   "AlgebraicGeometry.Etale.strictLocalCohomologySourceIso",
+   "AlgebraicGeometry.Etale.strictLocalCohomologyNeighbourhoodFunctor",
+   "AlgebraicGeometry.Etale.strictLocalCohomologySourceLegs"
+  ],
+  "statement": "def strictLocalCohomologySourceLegs {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : strictLocalCohomologyNeighbourhoodFunctor s L n ⟶ (Functor.const _).obj ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology AddCommGrpCat.{v + 1}).obj ((DerivedCategory.Plus.homologyFunctor _ n).obj ((upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlus.obj L)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

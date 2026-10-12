@@ -1,0 +1,101 @@
+{
+ "id": "def-weil-pbc-strict-local-neighbourhood-geometry",
+ "kind": "definition",
+ "title": "StrictLocalNeighbourhoodGeometry",
+ "statement": "For a scheme morphism f:X→S and a geometric point s, let I be the small representative category of affine pointed etale neighbourhoods. Define N:I→S_et, D(i)=N(i)×_S X and its projections t to X. StrictLocalNeighbourhoodGeometry consists of a limiting cone with vertex X×_S S_(s), qcqs stages, affine transitions and cone legs whose two pullback components are the strict-henselization cone leg and the projection to X. The first-component equation canonically fixes the cone; no cohomology occurs.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "G2 following document",
+  "document": "Stacks Project",
+  "place": "Tags 03Q9 and 0BKV, with canonical derived Hom comparisons expanded by G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology germs and strict-local neighbourhood projection restriction",
+   "results": "Service unavailable: Internal Server Error; no verdict based on this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk of higher direct image as colimit of cohomology of affine etale neighbourhoods with restriction map to strict henselization",
+   "results": "Eight results about structure-sheaf stalks and ordinary module pullback; none realizes these abelian derived-section maps. Loogle presheafToSheaf, homology and IsPullback, IsAffineHom queries returned no hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*sheaf|sheaf.*homology|mate.*section|IsAffineHom.*pullback",
+   "results": "Mathlib has general stalk and pullback infrastructure, but no strict-local derived mate or the canonical derived Hom-to-germ comparison. The existing AbelianHigherDirectImagePresheaf has private definitions of the comparison, inaccessible from another module.",
+   "date": "2026-10-12",
+   "verdict": "No existing public declaration for this part."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 neighbourhood colimit and final injective-complex restriction paragraph",
+   "via": [
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalNeighbourhoodGeometry.lean",
+  "declaration": "AlgebraicGeometry.Etale.StrictLocalNeighbourhoodGeometry",
+  "declarations": [
+   "AlgebraicGeometry.Etale.strictLocalNeighbourhoods",
+   "AlgebraicGeometry.Etale.strictLocalNeighbourhoodDiagram",
+   "AlgebraicGeometry.Etale.strictLocalNeighbourhoodProjection",
+   "AlgebraicGeometry.Etale.StrictLocalNeighbourhoodGeometry"
+  ],
+  "statement": "structure StrictLocalNeighbourhoodGeometry {X S : Scheme.{v}} (f : X ⟶ S) {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

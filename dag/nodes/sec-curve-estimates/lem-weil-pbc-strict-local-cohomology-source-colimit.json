@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-strict-local-cohomology-source-colimit",
+ "kind": "statement",
+ "title": "StrictLocalCohomologySourceColimit",
+ "statement": "For a scheme S, geometric point s, L in D⁺(Ab(S_et)) and n an integer, the cocone with the canonical source legs [def-weil-pbc-canonical-derived-cohomology-germs] is colimiting. Its vertex is Γ(S_(s),H^n(g^*L)); its domain is the derived-sections presheaf restricted to small affine pointed neighbourhoods.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 03Q9, 03Q8 and 0BKV; neighbourhood colimit and final injective-complex paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-canonical-derived-cohomology-germs"
+ ],
+ "proof": [
+  {
+   "text": "initiality of the small affine pointed representatives makes the restricted\npresheaf germ cocone colimiting. The derived-sections-to-homology-sheaf map induces\nan isomorphism on stalks. Compose it with the strict-local germ restriction and the\nexact-inverse-image homology isomorphism. Transport the germ cocone through this\ncomposite isomorphism; its legs are exactly the displayed canonical source legs.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-derived-cohomology-germ-isomorphism",
+    "def-weil-pbc-canonical-derived-cohomology-germs"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-derived-cohomology-germ-isomorphism",
+  "def-weil-pbc-canonical-derived-cohomology-germs"
+ ],
+ "proof_origin": {
+  "by": "G2 following document",
+  "document": "Stacks Project",
+  "place": "Tags 03Q9 and 0BKV, with canonical derived Hom comparisons expanded by G2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology germs and strict-local neighbourhood projection restriction",
+   "results": "Service unavailable: Internal Server Error; no verdict based on this service.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk of higher direct image as colimit of cohomology of affine etale neighbourhoods with restriction map to strict henselization",
+   "results": "Eight results about structure-sheaf stalks and ordinary module pullback; none realizes these abelian derived-section maps. Loogle presheafToSheaf, homology and IsPullback, IsAffineHom queries returned no hits.",
+   "date": "2026-10-12",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*sheaf|sheaf.*homology|mate.*section|IsAffineHom.*pullback",
+   "results": "Mathlib has general stalk and pullback infrastructure, but no strict-local derived mate or the canonical derived Hom-to-germ comparison. The existing AbelianHigherDirectImagePresheaf has private definitions of the comparison, inaccessible from another module.",
+   "date": "2026-10-12",
+   "verdict": "No existing public declaration for this part."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+   "place": "03Q9 neighbourhood colimit and final injective-complex restriction paragraph",
+   "via": [
+    "lem-weil-pbc-strict-local-mate-continuity-presentation",
+    "lem-weil-pbc-strict-local-base-change-global-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalCohomologySourceColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalCohomologySourceColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.isColimit_strictLocalCohomologySourceLegs",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isColimit_strictLocalCohomologySourceLegs"
+  ],
+  "statement": "theorem isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})) (n : ℤ) : Nonempty (IsColimit (Cocone.mk _ (strictLocalCohomologySourceLegs s L n)))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085242-L-16042",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
