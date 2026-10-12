@@ -8,7 +8,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Sites.Etale
 
 @[expose] public section
 universe u
@@ -133,6 +133,113 @@ theorem finiteEtaleTrace_unique :
             (pullback.lift (𝟙 W.left) (W.hom ≫ t j ≫ i j)
               (by simp [Category.assoc, hinv₁]))
             (by simp [B, Category.assoc, hinv₁])).op)) → tr₁ = tr₂ := by
-  sorry
+  classical
+  dsimp only
+  intro tr₁ tr₂ h₁ h₂
+  funext X Y f hfin hf F
+  let := hfin
+  let := hf
+  -- The split formula determines components after a splitting localization.
+  have hlocal (U : Scheme.{u}) (g : U ⟶ X) (hg : Etale g)
+      (J : Type u) [Fintype J] (V : J → Scheme.{u})
+      (i : ∀ j, V j ⟶ pullback f g)
+      (hc : IsColimit (Cofan.mk (pullback f g) i))
+      (hi : ∀ j, IsOpenImmersion (i j) ∧ IsClosedImmersion (i j))
+      (e : ∀ j, V j ≅ U) (he : ∀ j, (e j).hom = i j ≫ pullback.snd f g)
+      (W : U.Etale) :
+      (tr₁ X Y f hfin hf F).hom.app
+          (op ((MorphismProperty.Over.map ⊤ hg).obj W)) =
+        (tr₂ X Y f hfin hf F).hom.app
+          (op ((MorphismProperty.Over.map ⊤ hg).obj W)) := by
+    let := hg
+    let f' := pullback.snd f g
+    let hf' : Etale f' := inferInstance
+    let F' := (upperStar AddCommGrpCat.{u + 1} g).obj F
+    let t : ∀ j, U ⟶ V j := fun j ↦ (e j).inv
+    have ht₁ (j : J) : t j ≫ i j ≫ f' = 𝟙 U := by
+      simp [t, f', ← he j]
+    have ht₂ (j : J) : i j ≫ f' ≫ t j = 𝟙 (V j) := by
+      dsimp [t, f']
+      rw [← Category.assoc, ← he j, Iso.hom_inv_id]
+    have hs := (h₁.2.2 _ _ f' inferInstance hf' F' J V i t hc ht₁ ht₂
+      (fun j ↦ (hi j).1) (fun j ↦ (hi j).2) W).trans
+      (h₂.2.2 _ _ f' inferInstance hf' F' J V i t hc ht₁ ht₂
+        (fun j ↦ (hi j).1) (fun j ↦ (hi j).2) W).symm
+    let B := fun {S T : Scheme.{u}} (a : T ⟶ S) (ha : Etale a) (Z : S.Etale) ↦
+      (MorphismProperty.Over.map ⊤ ha).obj
+        ((MorphismProperty.Over.pullback @Etale ⊤ a).obj Z)
+    -- Construct the comparison of the iterated and single pullbacks over X.
+    let k : pullback W.hom f' ⟶ pullback (W.hom ≫ g) f :=
+      pullback.lift (pullback.fst W.hom f')
+        (pullback.snd W.hom f' ≫ pullback.fst f g) (by
+          rw [Category.assoc, pullback.condition, ← Category.assoc,
+            pullback.condition]
+          simp [f'])
+    let l : pullback (W.hom ≫ g) f ⟶ pullback W.hom f' :=
+      pullback.lift (pullback.fst (W.hom ≫ g) f)
+        (pullback.lift (pullback.snd (W.hom ≫ g) f)
+          (pullback.fst (W.hom ≫ g) f ≫ W.hom) (by
+            rw [Category.assoc, ← pullback.condition])) (by simp [f'])
+    let q : pullback W.hom f' ≅ pullback (W.hom ≫ g) f :=
+      { hom := k
+        inv := l
+        hom_inv_id := by
+          apply pullback.hom_ext
+          · simp [k, l]
+          · apply pullback.hom_ext
+            · simp [k, l]
+            · simp [k, l, f', ← pullback.condition]
+        inv_hom_id := by
+          apply pullback.hom_ext <;> simp [k, l] }
+    let κ : (MorphismProperty.Over.map ⊤ hg).obj (B f' hf' W) ≅
+        B f hf ((MorphismProperty.Over.map ⊤ hg).obj W) :=
+      MorphismProperty.Over.isoMk q (by
+        change k ≫ (pullback.snd (W.hom ≫ g) f ≫ f) =
+          (pullback.snd W.hom f' ≫ f') ≫ g
+        dsimp only [k]
+        rw [← Category.assoc, pullback.lift_snd, Category.assoc, pullback.condition]
+        rfl)
+    have hk₁ : κ.hom.left ≫ pullback.fst (W.hom ≫ g) f =
+        pullback.fst W.hom f' := by simp [κ, q, k]
+    have hk₂ : κ.hom.left ≫ pullback.snd (W.hom ≫ g) f =
+        pullback.snd W.hom f' ≫ pullback.fst f g := by simp [κ, q, k]
+    have hl₁ := h₁.2.1 X Y U f hfin hf g hg F W κ hk₁ hk₂
+    have hl₂ := h₂.2.1 X Y U f hfin hf g hg F W κ hk₁ hk₂
+    -- Localization gives equality after precomposition with three isomorphisms.
+    have hh := hl₁.symm.trans ((congrArg (fun a ↦ a ≫
+      ((upperStarIsoLocalizationRestriction AddCommGrpCat.{u + 1} g hg).app F).hom.hom.app
+        (op W)) hs).trans hl₂)
+    exact (cancel_epi _).mp ((cancel_epi _).mp ((cancel_epi _).mp hh))
+  -- Pull back the splitting neighborhoods to cover each object of the small site.
+  choose U g u hg hu J V i hJ hc hi hp using finite_etale_etale_local_split f
+  let (x : X) : Etale (g x) := hg x
+  let (x : X) : Finite (J x) := hJ x
+  let (x : X) : Fintype (J x) := Fintype.ofFinite (J x)
+  choose e he using hp
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext W
+  induction W using Opposite.rec with
+  | _ W =>
+    let Z (x : X) : (U x).Etale :=
+      (MorphismProperty.Over.pullback @Etale ⊤ (g x)).obj W
+    let Z' (x : X) : X.Etale := (MorphismProperty.Over.map ⊤ (hg x)).obj (Z x)
+    let a (x : X) : Z' x ⟶ W :=
+      MorphismProperty.Over.homMk (pullback.fst W.hom (g x))
+        (by exact pullback.condition)
+    have hcov : Sieve.ofArrows Z' a ∈ X.smallEtaleTopology W := by
+      apply (Scheme.ofArrows_mem_smallEtaleTopology_iff a).mpr
+      apply Set.eq_univ_of_forall
+      intro w
+      obtain ⟨z, hz, _⟩ := Scheme.Pullback.exists_preimage_pullback
+        w (u (W.hom w)) (hu (W.hom w)).symm
+      exact Set.mem_iUnion.mpr ⟨W.hom w, z, hz⟩
+    -- Separatedness and naturality turn local component equality into global equality.
+    apply F.property.hom_ext_ofArrows a hcov
+    intro x
+    rw [← (tr₁ X Y f hfin hf F).hom.naturality,
+      ← (tr₂ X Y f hfin hf F).hom.naturality]
+    rw [hlocal (U x) (g x) (hg x) (J x) (V x) (i x) (hc x).some (hi x)
+      (e x) (he x) (Z x)]
 
 end AlgebraicGeometry.Etale

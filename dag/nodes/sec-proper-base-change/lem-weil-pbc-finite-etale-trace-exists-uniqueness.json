@@ -32,50 +32,47 @@
  ],
  "proof": [
   {
-   "text": "*Reduction to presheaf maps $F(W_Y)\\to F(W)$.* For $F\\in\\Ab(X_{\\Et})$ let $P_F$ be the presheaf of abelian groups on $X_{\\Et}$ with $P_F(W)=F(W_Y)$ and, for a morphism $h:W'\\to W$ of $X_{\\Et}$, restriction $F(h_Y)$, where $h_Y=h\\times_X\\mathrm{id}_Y:W'_Y\\to W_Y$ [def-pc-fibre-product]; $h_Y$ is a morphism over $X$ between objects of $X_{\\Et}$ ($W_Y\\to X$ is etale as the composite of the base change $p_W$ of the etale $f$ with $w$ [lem-weil-pbc-etale-base-change-finite-limits(1), lem-weil-pbc-etale-composition-cancellation(2)]), and $(h\\circ h')_Y=h_Y\\circ h'_Y$, $(\\mathrm{id}_W)_Y=\\mathrm{id}$ by the uniqueness in [def-pc-fibre-product]. By the definition of direct image [def-weil-pbc-direct-image], $P_F$ is literally $f_*(F|_Y)$ ($F|_Y(W_Y\\to Y)=F(W_Y\\to Y\\to X)$, and $W_Y\\to Y\\to X$ equals $w\\circ p_W$), so $P_F$ is an abelian sheaf, and $c_F=f_*(\\rho^f_F):f_*f^{-1}F\\xrightarrow{\\sim}P_F$, with components $c_{F,W}$, is an isomorphism of abelian sheaves natural in $F$, since $\\rho^f$ is natural in $F$ [lem-weil-pbc-etale-inverse-image-restriction(1)] ($f$ is etale) and $f_*$ is a functor. Hence giving a morphism $\\operatorname{tr}:f_*f^{-1}F\\to F$ is the same as giving a morphism of presheaves $\\overline{\\operatorname{tr}}=\\operatorname{tr}\\circ c_F^{-1}:P_F\\to F$, i.e. maps $\\overline{\\operatorname{tr}}_W:F(W_Y)\\to F(W)$ that are additive and satisfy $F(h)\\circ\\overline{\\operatorname{tr}}_W=\\overline{\\operatorname{tr}}_{W'}\\circ F(h_Y)$ for all $h:W'\\to W$ ($\\Ab(X_{\\Et})$ is a full subcategory of presheaves [def-weil-pbc-abelian-etale-sheaves]); and $\\operatorname{tr}$ is natural in $F$ in the sense of (0) iff $\\overline{\\operatorname{tr}}$ is, i.e. $\\varphi_W\\circ\\overline{\\operatorname{tr}}_{f,F,W}=\\overline{\\operatorname{tr}}_{f,G,W}\\circ\\varphi_{W_Y}$ for $\\varphi:F\\to G$ (because $c_G\\circ f_*f^{-1}\\varphi=f_*(\\varphi|_Y)\\circ c_F$ and $f_*(\\varphi|_Y)$ has components $\\varphi_{W_Y}$). The base change $f'$ in (1) is finite etale by [lem-weil-pbc-finite-morphism-permanence(a)] and [lem-weil-pbc-etale-base-change-finite-limits(1)], so (1) makes sense; and $\\kappa_W$ is an isomorphism over $W$ by [lem-weil-pbc-cartesian-square-pasting] (the squares $W\\times_{X'}Y'\\to Y'\\to Y$ over $W\\to X'\\to X$), hence an isomorphism of $X_{\\Et}$.",
+   "text": "Fix two trace families satisfying the displayed properties and fix finite etale f:Y→X and F. For any etale g:U→X for which f′=pullback.snd f g has a finite clopen coproduct splitting i_j:V_j→Y×_X U with e_j:V_j≅U and e_j.hom=i_j≫f′, take t_j=e_j.inv. The two inverse identities follow from e_j. Apply each family’s split formula to f′ and F′=g⁻¹F at every W of U_et. Their transported components are equal because they equal exactly the same finite sum. This includes an empty splitting. The comparison isomorphism κ:W×_U(Y×_X U)≅W×_X Y is constructed with pullback.lift, with first projection unchanged and second projection followed by pullback.fst f g. Its inverse is the nested pullback lift. The two composites are identities by pullback.hom_ext. Lift κ to an isomorphism of X_et objects using its equation over X. Apply both localization identities with this κ and its two projection identities. Composing the equality of split components with the restriction isomorphism at W gives equality after precomposition with the restriction isomorphism at the double pullback, F(κ⁻¹), and the inverse restriction isomorphism for f. All three are isomorphisms; cancel their epimorphisms to obtain equality of the original trace components at the image of W in X_et.",
    "uses": [
     "def-pc-fibre-product",
     "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-etale-composition-cancellation",
     "def-weil-pbc-direct-image",
     "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-finite-morphism-permanence",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-finite-morphism-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
+    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'; uses Etale Morphisms Lemma 04HN (etale.tex, lemma-finite-etale-etale-local)"
    }
   },
   {
-   "text": "*Splitting coverings exist.* Let $T$ be an object of $X_{\\Et}$. For each $x\\in X$, [lem-weil-pbc-finite-etale-etale-local-split] (Stacks 04HN) gives an etale $g_x:U_x\\to X$, a point $u_x\\in U_x$ over $x$, and a decomposition of $Y\\times_XU_x$ into pairwise disjoint open and closed subschemes each mapped isomorphically onto $U_x$ by the second projection; transporting it along the canonical isomorphism $Y\\times_XU_x\\cong U_x\\times_XY=(U_x)_Y$ over $U_x$ [def-pc-fibre-product] gives a splitting $D_x$ of $(U_x)_Y$ (with $U_x$ an object of $X_{\\Et}$ via $g_x$). The family $(g_x)_{x\\in X}$ is etale and jointly surjective, so by [lem-weil-pbc-etale-covering-base-change] the projections $q_x:T_x=T\\times_XU_x\\to T$ are etale and jointly surjective; $T_x$ with $T_x\\to T\\to X$ is an object of $X_{\\Et}$ [lem-weil-pbc-etale-composition-cancellation(2)], $\\{q_x\\}_x$ is a covering of $T$ in $X_{\\Et}$ [def-weil-pbc-etale-site], and the second projection $r_x:T_x\\to U_x$ is a morphism of $X_{\\Et}$, so $r_x^*D_x$ is a splitting of $(T_x)_Y$ by step 3. So every object of $X_{\\Et}$ has a covering in $X_{\\Et}$ by objects $T_a$ with $(T_a)_Y$ split. This is where finiteness of $f$ enters; it is the statement 'every finite etale morphism is etale locally on $X$ of the form (2)' of Stacks 03SH / 'tout revetement etale est localement constant' of SGA 4 IX 5.1.",
+   "text": "For every x∈X choose U_x,g_x,u_x and the finite clopen splitting of f over U_x from finite_etale_etale_local_split (04HN). For any W→X in X_et form Z_x=W×_X U_x over U_x and regard it as an object Z′_x of X_et by composition with g_x. The first projection a_x:Z′_x→W is an X_et morphism by the pullback equation. The family is jointly surjective: given w∈W, choose x=W.hom(w); since g_x(u_x)=x, Scheme.Pullback.exists_preimage_pullback supplies a point of W×_X U_x mapping to w. Therefore Sieve.ofArrows Z′ a is a cover by Scheme.ofArrows_mem_smallEtaleTopology_iff. The empty W case is included by the same universally quantified coverage proof.",
    "uses": [
     "lem-weil-pbc-finite-etale-etale-local-split",
     "def-pc-fibre-product",
-    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-fibre-product-points",
     "def-weil-pbc-etale-site"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'"
+    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'; uses Etale Morphisms Lemma 04HN (etale.tex, lemma-finite-etale-etale-local)"
    }
   },
   {
-   "text": "Proof. Fix two such families, a finite étale `f`, and a sheaf `F`. Transport their\ncomponents through the restriction isomorphism to morphisms `P_F → F`, where\n`P_F(W) = F(W ×_X Y)`. For any object `W` choose a jointly surjective étale covering\n`h_a : W_a → W` such that `W_a ×_X Y → W_a` splits into finitely many clopen pieces.\nSuch a covering follows from Stacks 04HN and covering base change.\n\nApply each family's localization identity to `g_a : W_a → X` and the terminal\nobject of `W_a.Etale`. Pullback pasting identifies its double fibre product with\n`W_a ×_X Y`. Apply the split formula to the pullback of `f` over `W_a`: its sections\nare exactly the transported sections of the chosen splitting. Naturality of the\nrestriction isomorphism turns both formulas into the same sum of restrictions\n`F(W_a ×_X Y) → F(W_a)`. Cancel the restriction and pasting isomorphisms, which are\ninvertible; the two transported trace components at `W_a` are equal.\n\nFor `t ∈ P_F(W)`, naturality of each sheaf morphism in `W` now says that the two\nimages of `t` have identical restrictions along every `h_a`. Separatedness of `F`\ngives equality in `F(W)`. This proves component equality for all `W` and `t`, hence\nmorphism equality. Transport back through the restriction isomorphism and apply\nfunction extensionality in `X`, `Y`, `f`, its proofs, and `F` to obtain family equality.\nThe argument does not require the naturality-in-`F` hypotheses. The empty splitting\nhas zero local sum, and the empty base has zero sections by the empty-cover sheaf\ncondition, so these cases are included.",
+   "text": "Apply F.property.hom_ext_ofArrows to the two trace components at W and the covering family a_x. Naturality of each trace sheaf morphism identifies its component followed by F(a_x) with the source restriction followed by the component at Z′_x. Step 1, applied to the splitting from step 2 and W=Z_x over U_x, identifies these components, so all covered restrictions agree. Sheaf separatedness gives component equality at W. Use NatTrans.ext and Sheaf.hom_ext for sheaf-morphism equality, then dependent function extensionality in X,Y,f, its finiteness and etaleness proofs, and F for equality of families. Naturality in F is not needed.",
    "uses": [
-    "def-pc-fibre-product",
     "def-weil-pbc-abelian-etale-sheaves",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "def-weil-pbc-etale-site"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "SGA 4 Expose IX, 5.1: 'Le morphisme trace est caracterise par les deux proprietes suivantes ... L'unicite est triviale a partir de (i), (ii) puisque tout revetement etale est localement constant. Ayant l'unicite, l'existence s'ensuit par l'argument usuel de descente.'"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Section 03SH (section-trace-method), paragraph after Definition 03SE: 'The trace map is characterized by the following two properties ... Hence we can define the trace map using the characterization given'; uses Etale Morphisms Lemma 04HN (etale.tex, lemma-finite-etale-etale-local)"
    }
   }
  ],
@@ -84,18 +81,17 @@
   "def-weil-pbc-abelian-etale-sheaves",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-etale-site",
-  "lem-weil-pbc-cartesian-square-pasting",
   "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-etale-composition-cancellation",
-  "lem-weil-pbc-etale-covering-base-change",
   "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-fibre-product-points",
   "lem-weil-pbc-finite-etale-etale-local-split",
   "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Section 03SH, after Definition 03SE; detailed descent argument adapted from the original node, existence steps 1–9 and uniqueness by local splitting and separatedness."
+  "place": "Stacks Section 03SH, characterization after Definition 03SE; Lean proof by split localization, explicit pullback comparison, covering point lifting and sheaf separatedness (S2, 2026-10-12)."
  },
  "mathlib_searches": [
   {
@@ -232,10 +228,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T060731-L-2904190",
-  "kind": "interface",
+  "landing": "20261012T070551-L-3477246",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
