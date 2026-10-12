@@ -13,6 +13,8 @@ public import Mathlib.Algebra.BigOperators.Group.List.Basic
 import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.AffinePushoutRingSectionPresentation
+import Sheaf.AlgebraicGeometry.AffinePushoutModuleSectionPresentation
 
 /-! # Affine pushout ring and first tensor sections
 
@@ -73,6 +75,8 @@ local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 set_option hygiene false in
 local notation "fV" V => (Opens.map f.base).op.obj V
 
+set_option maxHeartbeats 800000 in
+-- The categorical expressions in this theorem require extra elaboration time.
 /-- Affine identification of the pushout algebra and the first tensor pullback, with
 both actions and the canonical unit; no assertion about the final extension module.
 Source: Stacks Project, Morphisms, Tag 01SB, construction of h and affine reduction.
@@ -139,7 +143,18 @@ theorem affine_pushout_first_tensor_sections [IsAffineHom f]
           p (d ⊗ₜ[Γ(X, V)] (c • n))) ∧
         ∀ n, p ((1 : Γ(U, f ⁻¹ᵁ V)) ⊗ₜ[Γ(X, V)] n) =
           (κ.inv.app G).val.app (fV (op V))
-            (((adj₀).unit.app ((S).obj G)).val.app (op V) n) := by sorry
+            (((adj₀).unit.app ((S).obj G)).val.app (op V) n) := by
+  classical
+  dsimp only
+  let : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra
+  let : Module Γ(X, V) (G.val.obj (op V)) := Module.compHom _ (f.app V).hom
+  let : Module Γ(X, V) ((P.obj G).val.obj (op (f ⁻¹ᵁ V))) :=
+    Module.compHom _ ((b.hom.app (op (f ⁻¹ᵁ V))).hom.comp (f.app V).hom)
+  obtain ⟨δ, hεδ, hgen⟩ :=
+    affine_pushout_ring_section_presentation f B b t ε hring V hV
+  obtain ⟨p, hpb, hpd, hpu⟩ :=
+    affine_pushout_module_section_presentation f B b t ε hring P pobj κ hP G hG V hV δ
+  exact ⟨δ, hεδ, hgen, p, hpb, hpd, hpu⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

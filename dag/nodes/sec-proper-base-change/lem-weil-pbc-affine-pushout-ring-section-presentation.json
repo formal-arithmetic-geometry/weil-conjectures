@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-affine-pushout-ring-section-presentation",
+ "kind": "statement",
+ "title": "Affine pushout ring section presentation",
+ "statement": "The affine pushout ring has a second inclusion section map whose counit is the identity and whose products with the first inclusion additively generate every affine section.",
+ "stmt_deps": [],
+ "source": {
+  "document": "Stacks Project, Morphisms",
+  "place": "Tag 01SB, affine pushout section calculation"
+ },
+ "proof": [
+  {
+   "text": "Apply the affine pullback section comparison to the restricted-scalar module; transport it through the object identification and κ, then verify the two actions and the unit formula on pure tensors.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Morphisms",
+  "place": "Tag 01SB, affine pushout section calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "affine pushout ring sections tensor inclusion additive generation",
+   "results": "no exact match found",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "affine pushout module sections tensor linear equivalence action formulas",
+   "results": "no exact match found",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*section.*tensor",
+   "results": "no exact match in Mathlib or library",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePushoutFirstTensorSections",
+  "date": "2026-10-13",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-pushout-first-tensor-sections"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePushoutRingSectionPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePushoutRingSectionPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_pushout_ring_section_presentation",
+  "statement": "theorem affine_pushout_ring_section_presentation [IsAffineHom f]\n    (B : U.toTopCat.Sheaf CommRingCat.{u})\n    (b : U.sheaf ⟶ B) (t : IA ⟶ B) (ε : B ⟶ U.sheaf)\n    (hring : IsPushout r₀ t₀ b t ∧ b ≫ ε = 𝟙 U.sheaf ∧ t ≫ ε = e₀)\n    (V : X.Opens) (hV : IsAffineOpen V) :\n    letI : Algebra Γ(X, V) Γ(U, f ⁻¹ᵁ V) := (f.app V).hom.toAlgebra\n    ∃ δ : Γ(U, f ⁻¹ᵁ V) →+* B.obj.obj (op (f ⁻¹ᵁ V)),\n      (∀ c, (ε.hom.app (op (f ⁻¹ᵁ V))).hom (δ c) = c) ∧\n      (∀ r : B.obj.obj (op (f ⁻¹ᵁ V)),\n        ∃ l : List (Γ(U, f ⁻¹ᵁ V) × Γ(U, f ⁻¹ᵁ V)),\n          r = (l.map fun x ↦ (b.hom.app (op (f ⁻¹ᵁ V))).hom x.1 * δ x.2).sum)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T194137-L-463608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T194137-L-463608",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
