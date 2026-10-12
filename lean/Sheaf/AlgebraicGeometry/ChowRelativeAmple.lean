@@ -12,7 +12,8 @@ public import Sheaf.AlgebraicGeometry.Morphisms.Projective
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
+import Sheaf.AlgebraicGeometry.ChowRelativeAmpleGeometric
+import Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwist
 
 /-!
 # Chow immersion and relative ampleness
@@ -32,6 +33,7 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- The Chow immersion is closed and its pulled-back twisting module is relatively ample.
 Source: Stacks Project, Cohomology of Schemes, Remark 30.18.2 and Proposition 30.19.1,
 Tag 02O5 (blueprint: lem-pc-chow-relative-ample).
@@ -116,6 +118,8 @@ theorem chow_relative_ample (m : ℕ) (S Z X' : Scheme.{u})
                     (ULift.{u} (Fin (m + 1))) S)).obj
                     (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))
                       (ULift.{u} ℤ)) 1)))) hW) := by
-  sorry
+  have hA := chow_relative_ample_geometric m S Z X' g π j hj
+  have hB := chow_relative_ample_twist m S Z X' g π j hj
+  exact ⟨hA.1, hA.2.1, hA.2.2.1, hA.2.2.2, hB⟩
 
 end AlgebraicGeometry

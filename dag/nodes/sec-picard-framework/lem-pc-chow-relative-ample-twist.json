@@ -1,0 +1,125 @@
+{
+ "id": "lem-pc-chow-relative-ample-twist",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-chow-relative-ample",
+   "place": "a strict conjunct of the Chow relative ampleness conclusion",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Twisting module consequences of the Chow immersion",
+ "statement": "Let m be a natural number, S, Z and X′ schemes [def-pc-scheme], g : Z → S and π : X′ → Z proper [def-weil-proper-morphism], and j : X′ → P^m_S an immersion [def-weil-closed-immersion] with π ≫ g = j ≫ p_S [def-nagata-projective-space-base-change]. Put L = j*O(1) and j′ = (j,π) : X′ → P^m_Z, using tensor pullback [def-pc-module-pullback]. Then L is isomorphic to j′*O(1), is invertible [def-sc-invertible-module], and its restrictions to (π ≫ g)⁻¹(V) for every affine open V of S and to π⁻¹(W) for every affine open W of Z are invertible and ample [def-weil-pbc-ample-invertible-module].",
+ "stmt_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-module-pullback",
+  "def-pc-morphism-conventions",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-proper-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 30.19.1 (Tag 02O5), Chow paragraph"
+ },
+ "proof": [
+  {
+   "text": "Source: Stacks Project, Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5).\nProof in words: first apply `chow_relative_ample_geometric` to obtain both\nclosed immersions. Identify both displayed modules by functoriality of tensor\npullback, since the two composites to the integral projective model agree\nunder `hj`; this gives the displayed `Nonempty` isomorphism.  The standard\nchart trivializations of the integral Proj twist pull back along `j`, proving\ninvertibility of the resulting module.  After restricting to an affine open\nof `S` (respectively `Z`), base-change the closed immersion and apply the\naffine-base theorem `projective_closedImmersion_ample_invertible` to obtain\ninvertibility and ampleness of the restriction. More explicitly, identify the\naffine open with the spectrum of its section ring, transport the base-changed\nimmersion to that spectrum, and identify its twist with the restriction using\n`ProjectiveSpace.liftBaseChange_toProjInt` and composite tensor pullback.\nThe standard-chart trivializations give invertibility before restriction; their\nrestrictions also give the witnesses `hV` and `hW`. The proof of ampleness is\nindependent of these witnesses by proof irrelevance. Transporting these properties\nacross the pullback\nisomorphism gives both quantified affine-open clauses.",
+   "uses": [
+    "lem-pc-chow-relative-ample-geometric",
+    "def-pc-module-pullback",
+    "def-nagata-projective-space-base-change",
+    "lem-weil-pbc-projective-ample-invertible",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-chow-relative-ample-geometric",
+  "def-pc-module-pullback",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-projective-ample-invertible",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 30.19.1 (Tag 02O5), Chow paragraph; Properties Lemma 01PU"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion",
+   "results": "25 hits in Mathlib/AlgebraicGeometry/Morphisms, including closed immersion and universally closed instances. Additional rg reading located IsClosedImmersion.of_isPreimmersion and IsProper.of_comp; no relative-ampleness theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsClosedImmersion",
+   "results": "Immersion factorization and liftCoborder found; no relative-ampleness statement.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of the twisting sheaf O(1) along a closed immersion in projective space is relatively ample on affine opens",
+   "results": "Proj.pullbackAwayιIso, fromOfGlobalSections and Proj.isSeparated returned; no full relative-ampleness statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An immersion into projective space from a proper scheme is closed and its pulled back O(1) is relatively ample",
+   "results": "Service unavailable: Internal Server Error; no mathematical conclusion from this search. Other search services and local source searches used.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowRelativeAmple",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwist",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowRelativeAmpleTwist.lean",
+  "declaration": "AlgebraicGeometry.chow_relative_ample_twist",
+  "statement": "theorem chow_relative_ample_twist (m : ℕ) (S Z X' : Scheme.{u})\n    (g : Z ⟶ S) (π : X' ⟶ Z)\n    (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))\n    [IsProper g] [IsProper π] [IsImmersion j]\n    (hj : π ≫ g = j ≫ (ℙ(ULift.{u} (Fin (m + 1)); S) ↘ S)) :\n      Nonempty (((Scheme.Modules.tensorPullback j).obj\n          ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n            (ULift.{u} (Fin (m + 1))) S)).obj\n            (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n              (ULift.{u} ℤ)) 1))) ≅\n        ((Scheme.Modules.tensorPullback (ProjectiveSpace.liftBaseChange π j hj)).obj\n            ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n              (ULift.{u} (Fin (m + 1))) Z)).obj\n              (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                (ULift.{u} ℤ)) 1)))) ∧\n      ∃ hL : ((Scheme.Modules.tensorPullback j).obj\n          ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n            (ULift.{u} (Fin (m + 1))) S)).obj\n            (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n              (ULift.{u} ℤ)) 1))).IsInvertible,\n        (∀ V : S.Opens, IsAffineOpen V →\n          ∃ hV : ((Scheme.Modules.tensorPullback ((π ≫ g) ⁻¹ᵁ V).ι).obj\n              ((Scheme.Modules.tensorPullback j).obj\n              ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                (ULift.{u} (Fin (m + 1))) S)).obj\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                  (ULift.{u} ℤ)) 1)))).IsInvertible,\n            @Scheme.Modules.IsAmple ((π ≫ g) ⁻¹ᵁ V).toScheme\n              ((Scheme.Modules.tensorPullback ((π ≫ g) ⁻¹ᵁ V).ι).obj\n                  ((Scheme.Modules.tensorPullback j).obj\n                  ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                    (ULift.{u} (Fin (m + 1))) S)).obj\n                    (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                      (ULift.{u} ℤ)) 1)))) hV) ∧\n        (∀ W : Z.Opens, IsAffineOpen W →\n          ∃ hW : ((Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).obj\n              ((Scheme.Modules.tensorPullback j).obj\n              ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                (ULift.{u} (Fin (m + 1))) S)).obj\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                  (ULift.{u} ℤ)) 1)))).IsInvertible,\n            @Scheme.Modules.IsAmple (π ⁻¹ᵁ W).toScheme\n              ((Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).obj\n                  ((Scheme.Modules.tensorPullback j).obj\n                  ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                    (ULift.{u} (Fin (m + 1))) S)).obj\n                    (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                      (ULift.{u} ℤ)) 1)))) hW)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

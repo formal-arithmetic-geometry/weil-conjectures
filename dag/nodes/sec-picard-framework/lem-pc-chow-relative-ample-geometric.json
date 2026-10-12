@@ -1,0 +1,127 @@
+{
+ "id": "lem-pc-chow-relative-ample-geometric",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-chow-relative-ample",
+   "place": "a strict conjunct of the Chow relative ampleness conclusion",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Geometric consequences of the Chow immersion",
+ "statement": "Let m be a natural number, S, Z and X′ schemes [def-pc-scheme], g : Z → S and π : X′ → Z proper morphisms [def-weil-proper-morphism], and j : X′ → P^m_S an immersion [def-weil-closed-immersion] satisfying π ≫ g = j ≫ p_S, where p_S is the structure map [def-nagata-projective-space-base-change]. Then j is a closed immersion, π ≫ g is projective [def-pc-projective-morphism], the induced map (j, π) : X′ → P^m_Z is a closed immersion, and π is projective.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-pc-projective-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 30.19.1 (Tag 02O5), Chow paragraph"
+ },
+ "proof": [
+  {
+   "text": "Composition gives properness of π ≫ g. Rewrite by hj and cancel the separated projective-space structure map using Mathlib IsProper.of_comp. The closed-range criterion IsClosedImmersion.of_isPreimmersion applied to j.isClosedMap.isClosed_range makes j closed. ProjectiveSpace.isClosedImmersion_liftBaseChange gives closedness of the induced map. The two displayed closed immersions and their factorization equalities witness IsHProjective; properness supplies QuasiCompact, giving IsProjective for both composites.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "def-pc-projective-morphism",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "def-pc-projective-morphism",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N2",
+  "date": "2026-10-13",
+  "text": "Lean proof using Mathlib proper cancellation and closed-range criterion, ProjectiveSpace base-change instance and the definition of IsProjective; follows the Chow paragraph of Stacks Tag 02O5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion",
+   "results": "25 hits in Mathlib/AlgebraicGeometry/Morphisms, including closed immersion and universally closed instances. Additional rg reading located IsClosedImmersion.of_isPreimmersion and IsProper.of_comp; no relative-ampleness theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsClosedImmersion",
+   "results": "Immersion factorization and liftCoborder found; no relative-ampleness statement.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of the twisting sheaf O(1) along a closed immersion in projective space is relatively ample on affine opens",
+   "results": "Proj.pullbackAwayιIso, fromOfGlobalSections and Proj.isSeparated returned; no full relative-ampleness statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An immersion into projective space from a proper scheme is closed and its pulled back O(1) is relatively ample",
+   "results": "Service unavailable: Internal Server Error; no mathematical conclusion from this search. Other search services and local source searches used.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowRelativeAmple",
+  "date": "2026-10-13",
+  "group": "N2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowRelativeAmpleGeometric",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowRelativeAmpleGeometric.lean",
+  "declaration": "AlgebraicGeometry.chow_relative_ample_geometric",
+  "statement": "theorem chow_relative_ample_geometric (m : ℕ) (S Z X' : Scheme.{u})\n    (g : Z ⟶ S) (π : X' ⟶ Z)\n    (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))\n    [IsProper g] [IsProper π] [IsImmersion j]\n    (hj : π ≫ g = j ≫ (ℙ(ULift.{u} (Fin (m + 1)); S) ↘ S)) :\n    IsClosedImmersion j ∧ IsProjective (π ≫ g) ∧\n      IsClosedImmersion (ProjectiveSpace.liftBaseChange π j hj) ∧ IsProjective π",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394466",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T220523-L-1394466",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
