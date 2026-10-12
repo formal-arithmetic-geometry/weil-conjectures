@@ -15,25 +15,20 @@
  ],
  "proof": [
   {
-   "text": "Apply exists_restriction_tensor_comparison to U.ι for each pair of modules. Its inverse is characterized by local pure tensors. Both naturality composites send a local pure tensor s tensor t to f(s) tensor g(t), so they agree by the sectionwise tensor universal property and sheafification. Conjugating with the comparisons gives naturality of the forward maps.",
+   "text": "Compose Mathlib Scheme.Modules.overFunctorEquiv U with restrictFunctorIsoPullback U.ι. This naturally identifies the displayed canonical over-site functor R with Mathlib Scheme.Modules.pullback U.ι. Use the proved upstream monoidal structure of that pullback, and transport it to R along the inverse natural isomorphism with Functor.Monoidal.transport. Choose e(F,G) to be the inverse of Functor.Monoidal.μIso R F G. The symmetry of Functor.OplaxMonoidal.δ_natural R f g is precisely the stated square. No hypothesis on U is used, so the empty open is included.",
    "uses": [
-    "lem-weil-pbc-module-restriction-tensor-comparison"
+    "lem-pc-adjoint-module-pullback-monoidal"
    ],
-   "elementary": true
-  },
-  {
-   "text": "Scheme.Modules.overFunctorEquiv U naturally identifies the canonical over-site composite with restriction along U.ι. Transport the tensor comparisons through its components and the common SheafOfModules carrier of Scheme.Modules. Its naturality transports both module-map squares to the stated square. The empty open has the zero module category and introduces no exception.",
-   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-restriction-tensor-comparison"
+  "lem-pc-adjoint-module-pullback-monoidal"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/01CD",
-  "place": "Expanded the functorial pullback tensor comparison; transport uses Mathlib Scheme.Modules.overFunctorEquiv."
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/PullbackMonoidal.lean",
+  "place": "pullbackMonoidal; Mathlib Scheme.Modules.overFunctorEquiv and restrictFunctorIsoPullback; Functor.Monoidal.transport and OplaxMonoidal.δ_natural"
  },
  "mathlib_searches": [
   {
@@ -112,10 +107,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T173842-L-3300211",
-  "kind": "interface",
+  "landing": "20261012T184259-L-4002963",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

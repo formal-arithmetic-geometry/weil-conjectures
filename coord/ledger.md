@@ -8936,3 +8936,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:42 L: merged deliver/G1/Sheaf.AlgebraicGeometry.FormalFunctionsCompleteBase (stage 3; reviewer PASS; first push; landing 20261012T184258-L-4002608 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:42 L: merged deliver/G1/Sheaf.CategoryTheory.HypercohomologyLeftEdgeSingle (stage 3; reviewer PASS; first push; landing 20261012T184258-L-4002705 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:42 L: merged deliver/G1/Sheaf.RingTheory.PolynomialLinearFormalFiberPresentation (stage 3; reviewer PASS; first push; landing 20261012T184258-L-4002850 (interface); batch 20261012T184234; modules 2; new nodes 1)
+- 18:42 L: merged deliver/G2/Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality (stage 3; reviewer PASS; first push; landing 20261012T184259-L-4002963 (proof); batch 20261012T184234; modules 1; new nodes 1)

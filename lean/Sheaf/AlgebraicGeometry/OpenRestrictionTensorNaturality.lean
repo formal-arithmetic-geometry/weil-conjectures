@@ -3,7 +3,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
-import Sheaf.AlgebraicGeometry.Modules.RestrictionTensorComparison
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackMonoidal
 
 @[expose] public section
 
@@ -27,19 +27,13 @@ noncomputable local instance tensorNaturality (X : Scheme.{u}) :
 /-- The tensor comparison for canonical open restriction is natural in both modules.
 Source: Stacks Project, Tag 01CD, functoriality of pullback and tensor product;
 Tag 08DX, proof of (1), applies the resulting comparison locally.
-Proof: apply exists_restriction_tensor_comparison to U.ι. Its inverse is determined
-by its pure-tensor formula: a map from a sheafified sectionwise tensor is determined
-by local pure tensors. For maps f and g, the two naturality composites both send
-a pure tensor s tensor t to the tensor of f(s) and g(t). This proves naturality of
-the inverse comparisons. Multiply by the comparisons on both sides to obtain the
-stated naturality of the forward comparisons. Use Scheme.Modules.overFunctorEquiv U,
-which is natural and identifies over-site restriction followed by overEquiv with
-restriction along U.ι. Transport the comparisons along its components, using the
-canonical agreement between Scheme.Modules and the underlying SheafOfModules carrier.
-The naturality squares of overFunctorEquiv transport the previous tensor naturality
-square to the displayed square. No complexes, coproducts, boundedness or flatness
-occur in this assertion. For the empty open all objects are zero, and the unique maps
-satisfy the same formula.
+Proof: Scheme.Modules.overFunctorEquiv identifies the canonical over-site composite
+with restriction along U.ι. Compose with restrictFunctorIsoPullback to identify it
+naturally with Scheme.Modules.pullback U.ι. The source library gives this pullback
+its monoidal structure. Transport that structure along the inverse natural
+isomorphism using Functor.Monoidal.transport. Choose the inverse tensorators of
+the transported structure; Functor.OplaxMonoidal.δ_natural gives the displayed
+square. This construction applies to every open, including the empty open.
 (blueprint: lem-pc-open-restriction-tensor-natural). -/
 theorem exists_openRestriction_tensor_natural (X : Scheme.{u}) (U : X.Opens) :
     let R :=
@@ -54,6 +48,16 @@ theorem exists_openRestriction_tensor_natural (X : Scheme.{u}) (U : X.Opens) :
         (f : F ⟶ F') (g : G ⟶ G'),
         R.map (f ⊗ₘ g) ≫ (e F' G').hom =
           (e F G).hom ≫ (R.map f ⊗ₘ R.map g) := by
-  sorry
+  dsimp only
+  let i := Scheme.Modules.overFunctorEquiv U ≪≫
+    Scheme.Modules.restrictFunctorIsoPullback U.ι
+  let R := SheafOfModules.overFunctor X.ringCatSheaf U ⋙
+    (Scheme.Modules.overEquiv U).functor
+  let : (Scheme.Modules.pullback U.ι).Monoidal :=
+    Scheme.Modules.pullbackMonoidal U.ι
+  let : R.Monoidal := Functor.Monoidal.transport i.symm
+  refine ⟨fun F G ↦ (Functor.Monoidal.μIso R F G).symm, ?_⟩
+  intro F F' G G' f g
+  exact (Functor.OplaxMonoidal.δ_natural R f g).symm
 
 end AlgebraicGeometry
