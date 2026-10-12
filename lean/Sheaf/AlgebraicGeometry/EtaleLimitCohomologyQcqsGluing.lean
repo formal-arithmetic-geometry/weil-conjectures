@@ -7,12 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyAffineStage
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyBinaryGluing
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Cohomology continuity glues from affine stages to qcqs stages
 
@@ -28,6 +25,16 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+set_option backward.isDefEq.respectTransparency true
+
+private theorem stageContinuity_of_iso {S T : Scheme.{u}} (e : S ≅ T)
+    (h : EtaleCohomologyStageContinuity T) : EtaleCohomologyStageContinuity S := by
+  constructor
+  intro I _ _ _ D c hc _ _ _ F φ hid hcomp G eG hG L hL p H eH hH B eB hB i hi
+  exact h.holds D c hc F φ hid hcomp G eG hG L hL p H eH hH B eB hB i
+    (hi.map (fun ei ↦ ei ≪≫ e))
+
+set_option linter.unusedVariables false in
 /-- The qcqs gluing reduction for cohomology continuity.
 
 The hypothesis is affine-stage continuity for every system and every degree in
@@ -155,6 +162,65 @@ theorem etale_limit_cohomology_qcqs_gluing
     (hB : ∀ i : I, B.ι.app i ≫ eB.hom =
       (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫
         AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) :
-    Nonempty (IsColimit B) := by sorry
+    Nonempty (IsColimit B) := by
+  have ha : ∀ (X : Scheme.{u}) (U : X.Opens), IsAffineOpen U →
+      EtaleCohomologyStageContinuity U.toScheme := by
+    intro X U hU
+    let : IsAffine U.toScheme := hU
+    exact @etale_limit_cohomology_affine_stage @haffine U.toScheme hU
+  have hsep : ∀ (X : Scheme.{u}) [X.IsSeparated] (U : X.Opens),
+      IsCompact (U : Set X) → EtaleCohomologyStageContinuity U.toScheme := by
+    intro X _ U hU
+    have hpair : ∀ (V : X.Opens), IsCompact (V : Set X) →
+        EtaleCohomologyStageContinuity V.toScheme ∧
+        ∀ W : X.affineOpens, EtaleCohomologyStageContinuity (V ⊓ W.1).toScheme := by
+      intro V hV
+      refine compact_open_induction_on V hV ?_ ?_
+      · constructor
+        · exact ha X ⊥ (isAffineOpen_bot X)
+        · intro W
+          simpa using ha X ⊥ (isAffineOpen_bot X)
+      · intro V hV W ih
+        have hW := ha X W.1 W.2
+        constructor
+        · exact etale_limit_cohomology_binary_gluing X V W.1 hV W.2.isCompact
+            ih.1 hW (ih.2 W)
+        · intro Z
+          have hVZ : IsCompact ((V ⊓ Z.1) : Set X) :=
+            hV.inter_of_isOpen Z.2.isCompact V.2 Z.1.2
+          have hWZ := W.2.inf Z.2
+          have hI : EtaleCohomologyStageContinuity ((V ⊓ Z.1) ⊓ (W.1 ⊓ Z.1)).toScheme := by
+            have h := ih.2 ⟨W.1 ⊓ Z.1, hWZ⟩
+            simpa [inf_assoc, inf_left_comm, inf_comm] using h
+          simpa [inf_sup_right] using
+            etale_limit_cohomology_binary_gluing X (V ⊓ Z.1) (W.1 ⊓ Z.1)
+              hVZ hWZ.isCompact (ih.2 Z) (ha X _ hWZ) hI
+    exact @And.left _ _ (hpair U hU)
+  have hqcqs : ∀ (X : Scheme.{u}) [QuasiSeparatedSpace X] (U : X.Opens),
+      IsCompact (U : Set X) → EtaleCohomologyStageContinuity U.toScheme := by
+    intro X _ U hU
+    refine compact_open_induction_on U hU ?_ ?_
+    · exact ha X ⊥ (isAffineOpen_bot X)
+    · intro V hV W ih
+      let : IsAffine W.1.toScheme := W.2
+      have hI : IsCompact ((V ⊓ W.1) : Set X) :=
+        hV.inter_of_isOpen W.2.isCompact V.2 W.1.2
+      let f : (V ⊓ W.1).toScheme ⟶ W.1.toScheme := X.homOfLE inf_le_right
+      let : (V ⊓ W.1).toScheme.IsSeparated := by
+        constructor
+        rw [← terminal.comp_from f]
+        infer_instance
+      let : CompactSpace (V ⊓ W.1).toScheme := isCompact_iff_compactSpace.mp hI
+      have hcont := hsep (V ⊓ W.1).toScheme ⊤ (by simpa using isCompact_univ)
+      have hcont' : EtaleCohomologyStageContinuity (V ⊓ W.1).toScheme :=
+        stageContinuity_of_iso (V ⊓ W.1).toScheme.topIso.symm hcont
+      exact etale_limit_cohomology_binary_gluing X V W.1 hV W.2.isCompact
+        ih (ha X W.1 W.2) hcont'
+  let i : I := Classical.choice inferInstance
+  have ht := hqcqs (D.obj (op i)) ⊤ (by simpa using isCompact_univ)
+  have hstage : EtaleCohomologyStageContinuity (D.obj (op i)) :=
+    stageContinuity_of_iso (D.obj (op i)).topIso.symm ht
+  exact hstage.holds D c hc F φ hidentity hcomposition G eG hG L hL p H eH hH B eB hB i
+    ⟨Iso.refl _⟩
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+ "kind": "statement",
+ "title": "Two compact opens glue the continuity property",
+ "statement": "Let $X$ be any scheme [def-pc-scheme] and $U,V\\subseteq X$ quasi-compact opens [def-weil-pbc-scheme-conventions]. Define $C(T)$ for a scheme $T$ as in [def-weil-pbc-etale-cohomology-stage-continuity]. If $C(U)$, $C(V)$ and $C(U\\cap V)$ hold, then $C(U\\cup V)$ holds. All these assertions quantify over every degree, every scheme and sheaf limit, and the specified comparison legs. The ambient scheme $X$ need not be quasi-compact, quasi-separated or separated.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), agent-written finite-cover reduction of the parent; Tag 0A50 (lemma-mayer-vietoris) for binary gluing."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-cohomology-stage-continuity",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Fix the system and stage identified with U union V. Restrict to its cofinal tail. Transfer the two opens along the chosen isomorphism and pull them back to each later stage and the limit. The restricted scheme cones are limits; transitions remain affine and restricted schemes are qcqs. Restrict the sheaves by inverse image. Composition supplies their transitions and coherence, and inverse image preserves the sheaf colimit. Pullback functoriality gives exactly the required H and B legs. Apply C(U), C(V), C(U intersection V) in each degree.",
+   "uses": [
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mayer-Vietoris sequence is natural in the sheaf and compatible with scheme pullbacks. Thus the comparison maps form a morphism of long exact sequences from the filtered colimit of the stage sequences to the sequence of the limit. The filtered colimit sequence is exact, and filtered group colimits commute with the finite products occurring in it.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For p>0, the five-term segment with terms H^(p-1)(U) plus H^(p-1)(V), H^(p-1)(U intersection V), H^p(U union V), H^p(U) plus H^p(V), H^p(U intersection V) has all four outer comparisons invertible. The five lemma proves the middle comparison invertible. For p=0, use the initial zero terms instead. Transport the colimit along this comparison and eB, then reflect it by the final tail inclusion. Its legs are the prescribed hB by the naturality of step 1.",
+   "uses": [
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), agent-written finite-cover reduction of the parent; Tag 0A50 (lemma-mayer-vietoris) for binary gluing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology continuity for inverse limits of quasi compact quasi separated schemes from affine continuity",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_map_preimage_eq_map_preimage, AlgebraicGeometry.exists_map_preimage_le_map_preimage",
+   "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(colimit|limit)|colimit.*cohomology",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/CategoryTheory/Sites/NonabelianCohomology/H1.lean",
+   "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCompact, \"induction\"",
+   "date": "2026-10-12",
+   "results": "IsCompact.induction_on, Topology.IsConstructible.induction_of_isTopologicalBasis, AlgebraicGeometry.compact_open_induction_on",
+   "verdict": "No exact continuity predicate, affine-tail reduction or binary gluing result. Compact-open induction is used in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuity of cohomology glues from two quasi compact opens by Mayer Vietoris",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyQcqsGluing",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Continuity invocation in the proof of Tag 0A51: Two compact opens glue the continuity property",
+   "via": [
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyBinaryGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitCohomologyBinaryGluing.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_cohomology_binary_gluing",
+  "statement": "theorem etale_limit_cohomology_binary_gluing (X : Scheme.{u}) (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hCU : EtaleCohomologyStageContinuity U.toScheme) (hCV : EtaleCohomologyStageContinuity V.toScheme) (hCI : EtaleCohomologyStageContinuity (U ⊓ V).toScheme) : EtaleCohomologyStageContinuity (U ⊔ V).toScheme",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5233b",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112835-L-766268",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-5233b",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T112835-L-766268",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and compile cleanly; the changed parent theorem signature is unchanged, and its direct importer also compiles."
+ }
+}
