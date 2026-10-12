@@ -1067,6 +1067,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplexFiltration
 public import WeilConjectures.Mathlib.Algebra.Lie.CartanCriterion
 public import WeilConjectures.Mathlib.Algebra.Lie.Engel
 public import WeilConjectures.Mathlib.Algebra.Lie.LieTheorem
