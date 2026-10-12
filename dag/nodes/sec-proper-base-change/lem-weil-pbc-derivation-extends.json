@@ -87,48 +87,30 @@
    }
   },
   {
-   "text": "((2), uniqueness.) Let $\\delta:W^{-1}R\\to W^{-1}R$ be a derivation with $\\delta\\circ\\lambda=\\lambda\\circ D$. For $w\\in W$, $\\lambda(w)\\cdot(1/w)=1$, so by step 1 (applied to $\\delta$) and the Leibniz rule $0=\\delta(1)=\\lambda(w)\\delta(1/w)+(1/w)\\lambda(D(w))$; multiplying by $1/w$ gives $\\delta(1/w)=-D(w)/w^2$. Then $a/w=\\lambda(a)\\cdot(1/w)$ gives $\\delta(a/w)=\\lambda(a)\\delta(1/w)+(1/w)\\lambda(D(a))=D(a)/w-aD(w)/w^2$. So $\\delta$ is determined by $D$ and is given by the stated formula.",
+   "text": "For localization existence, use the already proved source-library construction IsLocalization.extendDerivation in WeilConjectures.RingTheory.Derivation.Localization. Compose D with the localization algebra map to obtain an additive map delta : R -> W^{-1}R satisfying the Leibniz rule along the identity ring homomorphism. The source construction extends the ring homomorphism a -> (lambda(a), delta(a)) into the trivial square-zero extension through the localization universal property, and takes its second component. Its extendDerivation_mul and extendDerivation_algebraMap lemmas give Leibniz and extension. Additivity implies integer-linearity, and Leibniz at 1 gives derivative of 1 equal to zero, so this is a Derivation over the integers. No arbitrary existence witness is used to define data.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of (2)"
+    "document": "lean/WeilConjectures/RingTheory/Derivation/Localization.lean",
+    "place": "IsLocalization.extendDerivation, extendDerivation_mul, extendDerivation_algebraMap (proved square-zero-extension construction)"
    }
   },
   {
-   "text": "((2), well defined.) Put $\\delta(a,w)=(D(a)w-aD(w))/w^2\\in W^{-1}R$ for $a\\in R$, $w\\in W$; it equals $D(a)/w-aD(w)/w^2$. Suppose $a/w=a'/w'$, i.e. $u z=0$ for some $u\\in W$, where $z=aw'-a'w$. Applying $D$ to $uz=0$ gives $D(u)z+uD(z)=0$; multiplying by $u$ and using $uz=0$ gives $u^2D(z)=0$. Now put $E=D(a)ww'^2-aD(w)w'^2-D(a')w'w^2+a'D(w')w^2$, so that $\\delta(a,w)-\\delta(a',w')=E/(ww')^2$. Expanding $D(z)=D(a)w'+aD(w')-D(a')w-a'D(w)$ and $D(ww')=D(w)w'+wD(w')$ one checks $E=ww'D(z)-zD(ww')$. Hence $u^2E=ww'\\cdot u^2D(z)-D(ww')\\cdot u\\cdot uz=0$ with $u^2\\in W$, so $E/(ww')^2=0$ in $W^{-1}R$ and $\\delta(a,w)=\\delta(a',w')$. Thus $D_W(a/w):=\\delta(a,w)$ is a well defined map $W^{-1}R\\to W^{-1}R$.",
+   "text": "The quotient rule follows from the Leibniz rule of the constructed extension. Let b=1/w. Since b*lambda(w)=1, Derivation.leibniz_of_mul_eq_one gives Dw(b)=-b^2*lambda(D(w)). Write a/w=lambda(a)*b, differentiate and use extension on a and w. The localization identities mk'_eq_mul_mk'_one and mk'_pow then turn the result into D(a)/w-aD(w)/w^2; the remaining equality is a commutative-ring identity.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of (2)"
+    "place": "More on Algebra, Lemma Tag 07PE (lemma-derivation-extends, line 11754), items (1) and (2), and their proof; the last sentence of 07PE (finite type extensions R subset R') is not stated here"
    }
   },
   {
-   "text": "((2), additive.) $a/w+b/v=(av+bw)/wv$, and with $D(av+bw)=D(a)v+aD(v)+D(b)w+bD(w)$, $D(wv)=D(w)v+wD(v)$ the numerator of $\\delta(av+bw,wv)$ is $wv\\,D(av+bw)-(av+bw)D(wv)=v^2(D(a)w-aD(w))+w^2(D(b)v-bD(v))$, so $\\delta(av+bw,wv)=\\delta(a,w)+\\delta(b,v)$, i.e. $D_W(a/w+b/v)=D_W(a/w)+D_W(b/v)$.",
+   "text": "Uniqueness uses the proved IsLocalization.derivation_ext in the same source module. Both candidate derivations satisfy Leibniz along the identity homomorphism and agree on lambda(R) because they extend D. The extensionality lemma gives equality of their functions, and Derivation.coe_injective gives equality of the bundled derivations. This proves the localization clause, which is paired with the componentwise completion construction.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of (2)"
-   }
-  },
-  {
-   "text": "((2), Leibniz rule.) $(a/w)(b/v)=ab/wv$ and $D_W(ab/wv)=\\big((aD(b)+bD(a))wv-ab(D(w)v+wD(v))\\big)/w^2v^2$, while $(a/w)D_W(b/v)+(b/v)D_W(a/w)=\\big(aw(D(b)v-bD(v))+bv(D(a)w-aD(w))\\big)/w^2v^2$; both numerators equal $aD(b)wv+bD(a)wv-abwD(v)-abvD(w)$. So $D_W$ is a derivation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of (2)"
-   }
-  },
-  {
-   "text": "((2), extension.) $D_W(\\lambda(a))=D_W(a/1)=(D(a)\\cdot1-aD(1))/1=\\lambda(D(a))$ by step 1. With steps 7 to 10 this proves (2).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of (2)"
+    "document": "lean/WeilConjectures/RingTheory/Derivation/Localization.lean",
+    "place": "IsLocalization.derivation_ext"
    }
   }
  ],
@@ -136,9 +118,9 @@
   "def-weil-pbc-adic-completion"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 07PE (lemma-derivation-extends), proof of (1) and (2); the verifications the source omits (\"we omit the verification\", \"check the axioms\") are written out"
+  "place": "Stacks Tag 07PE, proof of (1), implemented on compatible quotient coordinates; proof of (2) shortened using the already proved square-zero localization construction and extensionality in WeilConjectures.RingTheory.Derivation.Localization, followed by the quotient-rule computation. Online source read at https://stacks.math.columbia.edu/tag/07PE because the local literature checkout is absent."
  },
  "mathlib_searches": [
   {
@@ -249,5 +231,15 @@
   "group": "H1",
   "result": "pass",
   "note": "R CommRing univ u; D Derivation ℤ R R (additive Leibniz); (1) ∀ I, ∃ Dc derivation on AdicCompletion I R with Dc∘algebraMap = algebraMap∘D, ∃ additive d n : R/I^(n+1)→R/I^n with d n (a mod I^(n+1)) = D a mod I^n for n≥1, evalₐ n (Dc x) = d n (evalₐ (n+1) x) for all x, n≥1 (evalₐ_of checked = a mod I^n; n=0 component R/R trivial); (2) ∀ W Submonoid, ∃ Dw on Localization W extending D, Dw(mk a w)=mk (D a) w − mk (a D w) (w^2), unique among all extending derivations; no added hypotheses; compiles, sorry only"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261012T144152-L-2109621",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

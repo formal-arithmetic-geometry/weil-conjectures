@@ -8221,3 +8221,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/U3/Sheaf.AlgebraicGeometry.AffineAlgebraDerivedUnitHomologyFactorization (stage 3; reviewer PASS; first push; landing 20261012T144151-L-2109321 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/U3/Sheaf.Paper.FiniteStructureAlgebraLift (stage 3; reviewer PASS; first push; landing 20261012T144151-L-2109425 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/U3/Sheaf.RingTheory.AnnihilatorLocalizationAway (stage 3; reviewer PASS; first push; landing 20261012T144152-L-2109524 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/U3/Sheaf.RingTheory.Derivation.CompletionAndLocalization (stage 3; reviewer PASS; first push; landing 20261012T144152-L-2109621 (proof); batch 20261012T144049; modules 1; new nodes 0)
