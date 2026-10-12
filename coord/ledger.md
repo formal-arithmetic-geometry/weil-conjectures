@@ -6695,3 +6695,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 07:44 L: returned deliver/T2/Sheaf.CategoryTheory.Abelian.HorseshoePrescribedRows (reviewer RETURN: (the batch landing, head bfe668dc6) the global build refused the delivery; it was taken out of the library again (landin)
 - 07:45 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen (reviewer RETURN: (reviewer X-c2a06, head c2a0627d4) E4/E2 (review point 4): The remaining sorry is false. For nonempty X, empty U, q = 0 )
 - 07:46 L: returned deliver/H2/Sheaf.AlgebraicGeometry.StrictHenselization (reviewer RETURN: (reviewer X-9280d, head 9280dc9aa) F (brief point 2): In coord/changes/strictHenselization-proof-imports.md, before line)
+- 07:46 L: returned deliver/C2/Sheaf.CategoryTheory.SiteInjectiveCechAcyclic (reviewer RETURN: (reviewer X-34ea1, head 34ea14282) B9: In dag/nodes/sec-proper-base-change/lem-weil-pbc-site-cech-cofree-exact.json, rep)
