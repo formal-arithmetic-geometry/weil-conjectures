@@ -9,9 +9,8 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
-import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint
-import Sheaf.CategoryTheory.EquivalenceInternalModule
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModulesData
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModulesAction
 
 /-!
 # Abelian etale sheaves on a field and discrete Galois modules
@@ -29,6 +28,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Source: Stacks Project, Etale Cohomology, Tags 04JQ and 03QT
@@ -98,6 +98,17 @@ theorem abelianSheaves_equiv_discreteGModules
         (j.hom.app F) ((Eset.functor.obj F).obj.obj.ρ g
           ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z) := by
-  sorry
+  dsimp
+  obtain ⟨Eset, j, hj⟩ := abelianSheaves_equiv_discreteGModules_action.{u, v} K Ks Ω
+  obtain ⟨E, i, hi, hcompat⟩ := abelianSheaves_equiv_discreteGModules_core.{u, v}
+    (Spec (.of K)).smallEtaleTopology
+    (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω))))
+    (Gal(Ks/K)) Eset j
+  refine ⟨E, Eset, i, j, hi, ?_, hj⟩
+  intro F g τ hτ X x x' hx z
+  let Fset : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)) :=
+    (sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v})).obj F
+  have hset := hj Fset g τ hτ X x x' hx z
+  exact hcompat F g X x x' z hset
 
 end AlgebraicGeometry.Scheme

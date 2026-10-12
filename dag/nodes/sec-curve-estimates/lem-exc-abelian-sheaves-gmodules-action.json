@@ -1,0 +1,160 @@
+{
+ "id": "lem-exc-abelian-sheaves-gmodules-action",
+ "kind": "statement",
+ "title": "Canonical set-valued stalk equivalence for any algebraically closed extension",
+ "statement": "Let K,Ks,Omega be fields in Type u, with Ks a separable closure of K [def-pd-separable-closure], Omega algebraically closed, compatible K- and Ks-algebra structures, and a scalar tower K->Ks->Omega. Let J be the small etale topology on Spec K [def-weil-pbc-etale-sheaves], p the point Spec Omega->Spec K [def-weil-pbc-geometric-stalks], G=Gal(Ks/K) with Krull topology, and w=max(u+1,v). There is an equivalence Eset:Sh(J,Type w) ≌ DiscreteContAction(Type w,G) and a natural underlying-set stalk comparison j. For every sheaf F, g in G, K-automorphism tau of Omega satisfying tau|Ks=g, etale X, pointed lifts x,x' with x'=Spec(tau) followed by x, and section z in F(X), j identifies the g-translate of the germ at x with the germ at x'. In particular Omega need not be algebraic over K; the representable-stalk comparison is not part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point; Tags 03QT and 03QW"
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Represent an element of $F_{\\bar s}$ by a triple $(U,\\bar u,t)$ as in [def-weil-pbc-geometric-stalks]. For $\\sigma\\in G$, change the lift to $\\bar u\\circ\\operatorname{Spec}(\\tilde\\sigma)$, where $\\tilde\\sigma\\in\\operatorname{Aut}(\\Omega/K)$ extends $\\sigma$. This is independent of the extension: each point of the etale $K$-scheme $U$ has finite separable residue field by [lem-weil-pbc-etale-fibre-discrete-separable-points], so an automorphism fixing $K^{\\rm sep}$ fixes every such lift. The action is functorial on triples; the stabilizer of this element contains $\\operatorname{Gal}(K^{\\rm sep}/L)$ for the finite separable image $L\\subseteq K^{\\rm sep}$ of its residue field, hence is open.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QW, section-galois-action-stalks, action formula and paragraph before Tag 03QT"
+   }
+  },
+  {
+   "text": "For each etale $K$-scheme $X$, [lem-weil-pbc-small-etale-representable-presheaf-sheaf] makes $h_X$ a sheaf. By [lem-galois-stalk-representable], evaluation on a pointed neighbourhood identifies its stalk with $\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,X)$. By [lem-weil-pbc-etale-fibre-discrete-separable-points], $X$ is a disjoint union of spectra of finite separable extensions of $K$; every $K$-embedding of any such extension in $\\Omega$ lands in $K^{\\rm sep}$. Thus restriction gives a natural bijection with $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},X)$, compatible with the action from step 1. This proves (ii).",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, the stalk of the representable sheaf (details omitted)"
+   }
+  },
+  {
+   "text": "First let A be the subfield of Omega of elements algebraic over K. It is an algebraic closure of K containing Ks. By [lem-weil-pbc-etale-fibre-discrete-separable-points], every pointed lift to an etale K-scheme factors uniquely through Spec A. These natural bijections identify the pointed-neighbourhood diagrams, their stalks, and their germ maps. Automorphisms of Omega restrict to A, and the identifications respect the action. Apply [lem-exc-field-sections-stalk-invariants] at A, where its algebraicity hypothesis holds, and transfer its section bijections and embedding-compatibility formulas to Omega. Thus sections over each finite separable L are the invariants under its fixing subgroup. Decompose each etale K-scheme into finite separable components using [lem-weil-pbc-etale-fibre-discrete-separable-points]; its sections are the product of their sections by the sheaf condition. Equivariant stalk maps therefore give natural maps on all sections, and the invariant-section bijections show this construction is inverse to taking stalks. This proves full faithfulness.",
+   "uses": [
+    "lem-exc-field-sections-stalk-invariants",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, inverse and omitted full-faithfulness details; Tag 04JM, lemma-global-sections-point, direct proof"
+   }
+  },
+  {
+   "text": "Decompose a discrete continuous G-set M in Type w into its orbits. Each orbit is finite since its stabilizer is open in the compact absolute Galois group, and can be realized in Type u. Apply [lem-exc-etale-field-gsets] to each such small orbit, giving an etale K-scheme X for it. The representable sheaf of X exists by [lem-weil-pbc-small-etale-representable-presheaf-sheaf], and its stalk is that orbit by step 2 and [lem-galois-stalk-representable]. Form the coproduct of these representable sheaves in Type w, indexed by the orbit set in Type w. The stalk preserves coproducts; the action on germs commutes with coproduct injections, so the resulting stalk is M as a G-set. This avoids requiring the entire orbit coproduct scheme to belong to the smaller site universe. Together with step 3, essential surjectivity gives the equivalence.",
+   "uses": [
+    "lem-exc-etale-field-gsets",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-stalk-representable",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, construction of inverse using Tag 03QR"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "lem-exc-etale-field-gsets",
+  "lem-exc-field-sections-stalk-invariants",
+  "lem-galois-stalk-representable",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point; Tags 03QT and 03QW; formal categorical specialization and universe adaptation by worker Y2; second reader Y2: algebraic-subfield comparison for the invariants lemma and sheaf coproducts for larger-universe essential surjectivity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of abelian sheaves and discrete continuous Galois modules induced by a geometric stalk equivalence",
+   "results": "8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscrete, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CompHausLike.LocallyConstant.functorIso, CondensedMod.isDiscrete_tfae. No exact equivalence lifting or arbitrary geometric point theorem among the hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Equivalence",
+   "results": "12 hits: CategoryTheory.sheafBotEquivalence, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.instPreservesFiniteLimitsFunctorOppositeSheafTransportAndSheafify. No exact equivalence lifting or arbitrary geometric point theorem among the hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberCompIso|InternalModule.*equiv|equiv.*InternalModule",
+   "results": "7 hits: Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean, Mathlib/CategoryTheory/Sites/Point/Conservative.lean. No exact equivalence lifting or arbitrary geometric point theorem among the hits.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of sheaves of sets with discrete group actions lifts to an equivalence of abelian sheaves and discrete group modules, compatibly with stalks",
+   "results": "service unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianSheavesGModules",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-abelian-sheaves-gmodules",
+   "place": "proof step 1, canonical set-valued equivalence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AbelianSheavesGModulesAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianSheavesGModulesAction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.abelianSheaves_equiv_discreteGModules_action",
+  "statement": "theorem abelianSheaves_equiv_discreteGModules_action (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] : let S := Spec (.of K) let J := S.smallEtaleTopology let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)) let p := pointSmallEtale s let G := Gal(Ks/K) let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G)) ∃ (Eset : Sheaf J (Type (max (u + 1) v)) ≌ DiscreteContAction (Type (max (u + 1) v)) G) (j : Eset.functor ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber), (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (j.hom.app F) ((Eset.functor.obj F).obj.obj.ρ g ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2918866",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T060800-L-2918866",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
