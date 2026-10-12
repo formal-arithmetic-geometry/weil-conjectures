@@ -1,0 +1,133 @@
+{
+ "id": "lem-galois-finite-stalks-comparison",
+ "kind": "statement",
+ "title": "Algebraically closed stalks detect finiteness at separably closed points",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] and $E$ a sheaf of sets on its small etale site [def-weil-pbc-etale-sheaf-of-sets]. Suppose the stalk of $E$ [def-weil-pbc-geometric-stalks] at every morphism $s:\\operatorname{Spec}\\Omega\\to Y$ with $\\Omega$ algebraically closed is finite. Then $E$ satisfies the source library's $\\mathrm{IsFiniteSheaf}$ predicate [def-constructible-finite]: at every such morphism with $\\Omega$ merely separably closed, its stalk is finite (equivalently finitely generated as an object of the category of sets).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "def-weil-pbc-geometric-stalks",
+  "def-constructible-finite"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/04FN",
+  "place": "Remark 59.29.8, invariance of stalks under extension of geometric points; the same proof for separably closed fields is made explicit here using Mathlib exists_fac_of_etale_of_isSepClosed"
+ },
+ "proof": [
+  {
+   "text": "Fix a separably closed field K, a field L, a map j: Spec L -> Spec K and s: Spec K -> Y. Precomposition by j gives a map on lifts to every etale V over Y. It is injective: j is surjective because both spectra are singletons; the open diagonal of V implies that two lifts agreeing after j agree on all of Spec K. This is implemented by the already proved Scheme.Hom.ext_of_surjective_of_formallyUnramified.",
+   "uses": [
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a lift t from Spec L, form W = V ×_Y Spec K and its etale projection q. The image of the induced map l: Spec L -> W has a section r: Spec K -> W through it, by exists_fac_of_etale_of_isSepClosed applied to q and id. Since r q = id, r is a monomorphism; cancellation makes r etale, so the flat-monomorphism criterion makes r an open immersion. The singleton source of l puts its image in the image of r. Factor l = k r through this open immersion; composing with q shows k = j. The composite r followed by W -> V is the desired lift before extension.",
+   "uses": [
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-section-clopen-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Now take L to be an algebraic closure of K. The lift bijections are natural in V because (j a) f = j (a f). They give an isomorphism between the two site points and hence between their sheaf stalk functors, using Point.isoMk and Point.sheafFiberIso. Equivalently the isomorphic categories of pointed neighbourhoods give the same colimit.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The hypothesis gives a finite stalk at the algebraically closed extended point. Transfer finiteness to the original stalk by the displayed isomorphism. For Type-valued sheaves finite is equivalent to ConcreteCategory.IsFinitelyGenerated. Construct every field of IsFiniteSheaf this way. Empty stalks are allowed, and on an empty Y there are no points to check.",
+   "uses": [
+    "def-constructible-finite"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-unramified-morphism",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "def-weil-pbc-geometric-stalks",
+  "def-constructible-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/04FN",
+  "place": "J1: explicit proof of the field-extension lift bijection, followed by Point.sheafFiberIso and transfer of finiteness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale sheaf stalk invariant under extension of a separably closed field algebraic closure",
+   "results": "Service unavailable: Internal Server Error; no search verdict drawn.",
+   "verdict": "unavailable",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pointSmallEtale\"",
+   "results": "Seven hits: pointSmallEtale and its fiber description, conservativity, pointSmallEtaleFiberObjToPreimage and surjectivity. No finiteness comparison or field-extension stalk isomorphism.",
+   "verdict": "no exact match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "isFiniteSheaf_of|pointSmallEtale.*Congr|sheafFiberIso",
+   "results": "Point.sheafFiberIso transports isomorphic site points; pointSmallEtaleCongr handles only isomorphisms of field spectra. No comparison of the two finiteness predicates. Local rg on lean/Sheaf and lean/WeilConjectures also found none.",
+   "verdict": "tools for a proof, no exact match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-galois-lc-etale",
+   "place": "Step 3, applying representability to a sheaf in FLC(Y): reconciliation of the two geometric finiteness predicates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/FiniteStalksComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isFiniteSheaf_of_finite_algClosed_stalks",
+  "statement": "theorem isFiniteSheaf_of_finite_algClosed_stalks {Y : Scheme.{v}} (E : Sheaf Y.smallEtaleTopology (Type (v + 1))) (h : ∀ (Ω : Type v) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y), Finite (((pointSmallEtale s).sheafFiber (A := Type (v + 1))).obj E)) : IsFiniteSheaf E",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T053936-L-2637022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T053936-L-2637022",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

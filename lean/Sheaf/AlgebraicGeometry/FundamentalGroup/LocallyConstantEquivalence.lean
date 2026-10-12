@@ -8,10 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
-import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
-import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Finite étale covers as finite locally constant sheaves
@@ -60,7 +59,49 @@ theorem exists_finiteEtale_flc_equivalence (Y : Scheme.{v}) :
           ObjectProperty.ι _ ⋙ X.smallEtaleTopology.uliftYoneda.{v + 1}) ∧
         Nonempty (Φ.functor ⋙ ObjectProperty.ι _ ⋙ etaleSetPullback f ≅
           FiniteEtale.pullback f ⋙ Ψ.functor ⋙ ObjectProperty.ι _)) := by
-  sorry
+  classical
+  have hobj (T : Scheme.{v}) (P : T.FiniteEtale) :
+      IsFiniteLocallyConstantEtaleSheafOfSets
+        ((T.smallEtaleTopology.uliftYoneda.{v + 1}).obj P.obj) := by
+    have : IsFinite P.obj.hom := P.property
+    obtain ⟨hs, hfin⟩ :=
+      (isFiniteLocallyConstant_yoneda_and_exists_iso T).1 P.obj.left P.obj.hom
+    refine ⟨hfin.1, ?_⟩
+    intro Ω _ _ s
+    have := hfin.2.isFinitelyGenerated_sheafFiber Ω s
+    exact (ConcreteCategory.isFinitelyGenerated_iff_finite _).mp this
+  let H (T : Scheme.{v}) : T.FiniteEtale ⥤ T.FLC :=
+    ObjectProperty.lift _
+      (ObjectProperty.ι _ ⋙ T.smallEtaleTopology.uliftYoneda.{v + 1}) (hobj T)
+  have heq (T : Scheme.{v}) : (H T).IsEquivalence := by
+    have : (H T).EssSurj := ⟨fun E ↦ by
+      have hfin := isFiniteSheaf_of_finite_algClosed_stalks E.obj E.property.2
+      obtain ⟨P, π, hπ, hEt, ⟨e⟩⟩ :=
+        (isFiniteLocallyConstant_yoneda_and_exists_iso T).2 E.obj ⟨E.property.1, hfin⟩
+      let Q : T.FiniteEtale := ⟨Etale.mk π, hπ⟩
+      refine ⟨Q, ⟨?_⟩⟩
+      exact ObjectProperty.isoMk _ (ObjectProperty.isoMk _ e.symm)⟩
+    exact { faithful := inferInstance, full := inferInstance }
+  let Φ := (H Y).asEquivalence
+  refine ⟨Φ, ⟨Iso.refl _⟩, ?_, ?_⟩
+  · intro Ω _ _ s
+    let p := pointSmallEtale s
+    let e : Y.smallEtaleTopology.uliftYoneda.{v + 1} ⋙
+        p.sheafFiber (A := Type (v + 1)) ≅ p.fiber ⋙ uliftFunctor.{v + 1, v} :=
+      Functor.isoWhiskerLeft Y.smallEtaleTopology.uliftYoneda
+        (p.uliftSheafFiberIso (Type (v + 1))).symm ≪≫
+      Functor.isoWhiskerRight uliftYonedaIsoShrinkYoneda
+        p.ulift.{v + 1}.presheafFiber ≪≫
+      p.ulift.{v + 1}.shrinkYonedaCompPresheafFiberIso
+    exact ⟨Functor.isoWhiskerLeft (ObjectProperty.ι _) e⟩
+  · intro X f
+    let Ψ := (H X).asEquivalence
+    refine ⟨Ψ, ⟨Iso.refl _⟩, ?_⟩
+    obtain ⟨e⟩ := AlgebraicGeometry.nonempty_inverseImage_representable_iso.{v, v + 1} f
+      (etaleSetPullback f)
+      (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous f.Etale
+        (Type (v + 1)) Y.smallEtaleTopology X.smallEtaleTopology)
+    exact ⟨Functor.isoWhiskerLeft (ObjectProperty.ι _) e⟩
 
 /-- The Yoneda equivalence carries a finite abelian torsor and its action to its sheaf torsor.
 Source: Stacks Project, proof of Tag 09ZB, with Tag 03RV
@@ -85,6 +126,13 @@ theorem finiteEtale_flc_preserves_torsors {Y : Scheme.{v}}
               (MorphismProperty.Over.homMk (t.vadd m) (t.vadd_π m)))).hom.hom.app (op U) x) =
             ⟨(ε.hom.hom.app (op U) x).down ≫
               MorphismProperty.Over.homMk (t.vadd m) (t.vadd_π m)⟩ := by
-  sorry
+  intro M _ _ t
+  refine ⟨α.app ⟨t.toEtale, t.isFinite⟩, rfl, ?_⟩
+  intro U m x
+  let P : Y.FiniteEtale := ⟨t.toEtale, t.isFinite⟩
+  let g : P ⟶ P := ObjectProperty.homMk
+    (MorphismProperty.Over.homMk (t.vadd m) (t.vadd_π m))
+  have h := α.hom.naturality g
+  exact congrArg (fun f ↦ f.hom.app (op U) x) h
 
 end AlgebraicGeometry.Scheme
