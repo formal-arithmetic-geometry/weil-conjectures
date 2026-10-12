@@ -25,51 +25,34 @@
  ],
  "proof": [
   {
-   "text": "For a module sheaf $\\mathcal M$, use the epimorphism of [lem-pc-sites-modules-quotient-j-shriek] indexed by all pairs $(U,s)$ with $s\\in\\mathcal M(U)$, whose summand map is adjoint to $1\\mapsto s$; a module map $u:\\mathcal M\\to\\mathcal M'$ sends the $(U,s)$ summand to the $(U,u_U(s))$ summand, so these epimorphisms define a functorial $q_{\\mathcal M}:Q(\\mathcal M)\\twoheadrightarrow\\mathcal M$. By [lem-pc-sites-modules-j-shriek-flat] each generator is flat, and by [lem-pc-sites-modules-coproduct-flat] the coproduct is flat. Set $\\mathcal E^N=Q(\\mathcal F^N)$ and descend. Having constructed $\\mathcal E^{i+1}\\to\\mathcal F^{i+1}$ and its differential, form $P^i=\\mathcal F^i\\times_{\\mathcal F^{i+1}}Z(\\mathcal E^{i+1})$, where $Z(\\mathcal E^{i+1})=\\ker(d_{\\mathcal E}^{i+1})$ maps to $\\mathcal F^{i+1}$ through $\\mathcal E^{i+1}\\to\\mathcal F^{i+1}$, and set $\\mathcal E^i=Q(P^i)$. The maps through the two projections give $\\mathcal E^i\\to\\mathcal F^i$ and $\\mathcal E^i\\to Z(\\mathcal E^{i+1})\\hookrightarrow\\mathcal E^{i+1}$; hence $d_{\\mathcal E}^{i+1}d_{\\mathcal E}^i=0$ and the maps form a complex map. Inductively, $Z(\\mathcal E^{i+1})\\to Z(\\mathcal F^{i+1})$ is epimorphic: for a cycle $z$ in $\\mathcal F^{i+1}$, lift it through the preceding cycle-valued pullback, using that $d_{\\mathcal F}z=0$. Therefore $P^i\\to\\mathcal F^i$ is epimorphic because $d_{\\mathcal F}^if$ is a cycle and can be lifted to a cycle in $\\mathcal E^{i+1}$. Thus each $\\mathcal E^i\\to\\mathcal F^i$ is termwise epi; the construction is zero above $N$.",
+   "text": "Choose T and pi using [lem-pc-sites-modules-functorial-flat-cover]. Zero module sheaves are flat: install the additive symmetric monoidal structure from [lem-pc-sheaf-modules-tensor-closed], and apply the proved source lemma ObjectProperty.flat_of_isZero, taking its right tensor exactness clause. Apply [lem-pc-functorial-cycle-pullback-construction] with S=SheafOfModules.IsFlat to obtain Q, epsilon, flat terms, the same bound, and the compatible-pair lifting property.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-sites-modules-quotient-j-shriek",
-    "lem-pc-sites-modules-j-shriek-flat",
-    "lem-pc-sites-modules-coproduct-flat"
+    "lem-pc-sites-modules-functorial-flat-cover",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-functorial-cycle-pullback-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS, bounded-above flat replacement construction"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\mathcal K^i=\\ker(\\mathcal E^i\\to\\mathcal F^i)$. The repaired pullback description shows that every cycle $\\kappa\\in Z(\\mathcal K^{i+1})=\\ker(d_{\\mathcal E}^{i+1})\\cap\\ker(\\mathcal E^{i+1}\\to\\mathcal F^{i+1})$ lifts along $\\mathcal K^i\\to Z(\\mathcal K^{i+1})$: the pair $(0,\\kappa)$ lies in $P^i$, and a lift through the epimorphism $\\mathcal E^i\\twoheadrightarrow P^i$ lies in $\\mathcal K^i$ and maps to $\\kappa$. Thus $\\mathcal K^i\\to Z(\\mathcal K^{i+1})$ is surjective, so boundaries equal cycles and $H^i(\\mathcal K)=0$. The short exact sequence of complexes and the definition of quasi-isomorphism [def-pc-quasi-iso-modules] then give that the termwise epimorphism $\\mathcal E^\\bullet\\to\\mathcal F^\\bullet$ is a quasi-isomorphism.",
-   "uses": [
-    "def-pc-quasi-iso-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS, verification that the kernel is acyclic"
-   }
-  },
-  {
-   "text": "For a map of complexes $u:\\mathcal F^\\bullet\\to\\mathcal G^\\bullet$ with the same bound $N$, the indexed generator map sends the $(U,s)$ summand of $Q(\\mathcal F^i)$ to the $(U,u^i_U(s))$ summand of $Q(\\mathcal G^i)$ and commutes with the epimorphisms to the terms. Inductively, $u^i$ and the already constructed map in degree $i+1$ induce a map of the pullbacks $P^i(\\mathcal F)\\to P^i(\\mathcal G)$; applying the same indexed construction gives $\\mathcal E^i(\\mathcal F)\\to\\mathcal E^i(\\mathcal G)$. The pullback projections show compatibility with both differentials and augmentation maps. Thus the replacements and their quasi-isomorphisms are functorial.",
+   "text": "To prove epsilon^i epic, use Mathlib epi_iff_surjective_up_to_refinements. Given y:B to F^i, first apply the compatible-pair property in degree i+1 to (0,d_F y). This gives, after an epic refinement p1, a cycle x1 lifting d_F y. Apply the property in degree i to (x1,p1 y). The resulting x2 lifts p2 p1 y, and the composite refinement is epic. This proves termwise epimorphy.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 06YS, functoriality of the bounded-above replacement"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For each degree i use quasiIsoAt_iff_isIso_homologyMap and isIso_iff_mono_and_epi. Mathlib HomologicalComplex.mono_homologyMap_iff_up_to_refinements reduces monicity to lifting a cycle x whose image is a boundary d_F y. The compatible-pair property in degree i-1 gives z with d_E z=p x, exactly the required local boundary lift. HomologicalComplex.epi_homologyMap_iff_up_to_refinements reduces epimorphy to lifting a target cycle y. Apply the compatible-pair property in degree i to (0,y): the resulting z is a cycle and its image is p y, so take the correction boundary to be zero. Thus each homology map is an isomorphism and epsilon is a quasi-isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-flat-sheaf-modules",
-  "def-pc-quasi-iso-modules",
-  "lem-pc-sites-modules-quotient-j-shriek",
-  "lem-pc-sites-modules-j-shriek-flat",
-  "lem-pc-sites-modules-coproduct-flat"
+  "lem-pc-functorial-cycle-pullback-construction",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-modules-functorial-flat-cover"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 06YS"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1), with the source refinement criteria for homology maps and the sheafified free cover of 03EW"
  },
  "mathlib_searches": [
   {
@@ -147,5 +130,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T085405-L-50060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

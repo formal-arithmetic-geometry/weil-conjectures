@@ -11,9 +11,11 @@ public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
-import Sheaf.CategoryTheory.QuotientJShriek
+import Sheaf.Algebra.Homology.FlatCoverFunctor
+import Sheaf.Algebra.Homology.CyclePullbackResolution
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.Algebra.Homology.Refinements
 
 /-!
 # Functorial bounded-above flat replacements on a ringed site
@@ -39,22 +41,20 @@ Source: Stacks Project, Lemma 06YS via 077J and 06XX, using the cycle-pullback
 construction of Lemma 05T7 (1) and the canonical flat covers of Lemma 03EW (3), (4)
 (blueprint: lem-pc-kflat-bounded-flat-replacement).
 
-Proof: (1) For a module sheaf `M`, take the canonical epimorphism `Q(M) → M`
-indexed by pairs `(U,s)` of an object and a section, using
-lem-pc-sites-modules-quotient-j-shriek. Its summands are flat by
-lem-pc-sites-modules-j-shriek-flat, and its coproduct is flat by
-lem-pc-sites-modules-coproduct-flat. Start at degree `N` and descend, applying `Q`
-to `F^i ×_{F^{i+1}} Z(E^{i+1})`. The projections give the augmentation and a
-differential landing in cycles, so the square of the differential is zero.
-The map on cycles is epimorphic inductively (lift a cycle by the pair `(z,0)`),
-so each pullback projects epimorphically onto `F^i`. Set all terms above `N` to zero.
-(2) Every cycle in the kernel of the augmentation lifts through the pair `(0,k)`
-in the preceding pullback. Thus this kernel is acyclic, and the short exact
-sequence gives a quasi-isomorphism, by def-pc-quasi-iso-modules.
-(3) The canonical indexed generators send `(U,s)` to `(U,f(s))` under a module map.
-Inductively this induces maps of the pullbacks and of their flat covers,
-commuting with the differentials and augmentations. Identities and compositions
-are respected, giving the functor and natural transformation asserted here. -/
+Proof: (1) Sheafify the free module presheaf on the underlying presheaf of sets.
+Its evaluation counit is epic, and sheafification preserves flatness and epimorphisms;
+this gives a functorial flat cover. Zero sheaves are flat by tensor closedness.
+Apply the generic descending cycle-pullback construction to obtain flat terms,
+the same bound, and local lifts of compatible pairs `(y,x)`, where `x` is a cycle
+in the next degree and its augmentation equals the differential of `y`.
+(2) To prove termwise epimorphy, first lift the cycle `d(y)` using the pair `(d(y),0)`
+in the next degree. Lift the resulting compatible pair in the current degree;
+the composite of the two epic refinements supplies a local lift of `y`.
+(3) Mathlib's homology-map refinement criteria prove the quasi-isomorphism.
+A source cycle whose image is a boundary lifts through the compatible pair in the
+preceding degree, showing injectivity on homology. A target cycle lifts through
+`(y,0)` in the current degree to a source cycle, showing surjectivity on homology.
+Functoriality is supplied by the generic construction from the fixed cover functor. -/
 theorem exists_functorial_boundedAbove_flat_replacement
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (N : ℤ) :
@@ -67,6 +67,48 @@ theorem exists_functorial_boundedAbove_flat_replacement
           (∀ (i : ℤ), SheafOfModules.IsFlat ((Q.obj F).X i)) ∧
           (∀ (i : ℤ), N < i → IsZero ((Q.obj F).X i)) ∧
           (∀ (i : ℤ), Epi ((ε.app F).f i)) ∧ QuasiIso (ε.app F) := by
-  sorry
+  let A := SheafOfModules.{u}
+    ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  obtain ⟨T, π, hT⟩ := SheafOfModules.exists_functorial_flat_cover J R
+  have hzero (X : A) (hX : IsZero X) : SheafOfModules.IsFlat X := by
+    let := SheafOfModules.monoidalCategory R
+    let := SheafOfModules.symmetricCategory R
+    obtain ⟨⟨hpre⟩, _, _⟩ := SheafOfModules.tensorClosed R
+    let := hpre
+    exact (ObjectProperty.flat_of_isZero hX).2
+  obtain ⟨Q, ε, hQ⟩ := exists_functorial_cyclePullback_construction
+    (fun X : A ↦ SheafOfModules.IsFlat X) hzero T π
+    (fun X ↦ (hT X).1) (fun X ↦ (hT X).2) N
+  refine ⟨Q, ε, fun F ↦ ⟨(hQ F).1, (hQ F).2.1, ?_, ?_⟩⟩
+  · intro i
+    rw [epi_iff_surjective_up_to_refinements]
+    intro B y
+    -- First lift the cycle d(y), then lift the resulting compatible pair.
+    obtain ⟨B₁, p₁, hp₁, x₁, hx₁, hd₁⟩ :=
+      (hQ F).2.2 (i + 1) B 0 (y ≫ F.obj.d i (i + 1)) (by simp)
+        (by simp)
+    have hx : x₁ ≫ (ε.app F).f (i + 1) =
+        (p₁ ≫ y) ≫ F.obj.d i (i + 1) := by
+      simpa only [Category.assoc] using hx₁
+    obtain ⟨B₂, p₂, hp₂, x₂, hx₂, _⟩ :=
+      (hQ F).2.2 i B₁ x₁ (p₁ ≫ y) (by simpa using hd₁) hx
+    exact ⟨B₂, p₂ ≫ p₁, inferInstance, x₂, by simpa [Category.assoc] using hx₂.symm⟩
+  · rw [quasiIso_iff]
+    intro i
+    rw [quasiIsoAt_iff_isIso_homologyMap, isIso_iff_mono_and_epi]
+    constructor
+    · rw [HomologicalComplex.mono_homologyMap_iff_up_to_refinements
+        (ε.app F) (i - 1) i (i + 1) (by simp) (by simp)]
+      intro B x hx y hy
+      have hlift := (hQ F).2.2 (i - 1)
+      rw [show i - 1 + 1 = i by omega] at hlift
+      obtain ⟨B', p, hp, z, _, hz⟩ := hlift B x y hx hy
+      exact ⟨B', p, hp, z, by simpa using hz.symm⟩
+    · rw [HomologicalComplex.epi_homologyMap_iff_up_to_refinements
+        (ε.app F) (i - 1) i (i + 1) (by simp) (by simp)]
+      intro B y hy
+      obtain ⟨B', p, hp, z, hz, hd⟩ :=
+        (hQ F).2.2 i B 0 y (by simp) (by simpa using hy.symm)
+      exact ⟨B', p, hp, z, by simpa using hd, 0, by simpa using hz.symm⟩
 
 end CochainComplex

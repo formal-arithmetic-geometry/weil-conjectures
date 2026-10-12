@@ -1,0 +1,115 @@
+{
+ "id": "lem-pc-sites-modules-functorial-flat-cover",
+ "kind": "statement",
+ "title": "Functorial flat cover of a module sheaf",
+ "statement": "Let $(\\mathcal C,J)$ be a small site and let $R$ be a sheaf of commutative rings. On the category $A=\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category], there exist a functor $T:A\\to A$ and a natural transformation $\\pi:T\\to\\operatorname{Id}_A$ such that $T(M)$ is flat [def-pc-flat-sheaf-modules] and $\\pi_M$ is an epimorphism for every $M$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EW (3), (4), last sentence of proof (sheafifying), with Lemma 03ET"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Forget M to a presheaf and take the free module presheaf on its underlying presheaf of sets. Mathlib PresheafOfModules.free and freeObjDesc define this functor and its evaluation counit. Evaluation on freeMk x is x (ModuleCat.freeDesc_apply), proving sectionwise surjectivity and hence epimorphy by PresheafOfModules.epi_of_surjective. Naturality is checked on free generators, using ModuleCat.free_map_apply.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Section modules of this free presheaf are free, hence flat (Module.Flat.finsupp). Module.Flat supplies finite-limit preservation of tensorRight for each section module. Evaluation preserves limits and jointly reflects them (PresheafOfModules.evaluationJointlyReflectsLimits), giving finite-limit preservation of the presheaf tensor functor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Sheafify the free presheaf. Apply [lem-pc-sites-modules-sheafification-flat] to the identity map of the ring presheaf to prove flatness of the resulting module sheaf. Compose the sheafified evaluation counit with the sheafification adjunction counit. The former is epi since sheafification is a left adjoint, and the latter is an isomorphism. Whiskering and composing the natural transformations gives the functorial epic augmentation.",
+   "uses": [
+    "lem-pc-sites-modules-sheafification-flat"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-modules-sheafification-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma 03EW (3), (4), last sentence of proof (sheafifying), with Lemma 03ET"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functorial flat covers of sheaves of modules on a ringed site",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf of modules has functorial epimorphism from a flat sheaf by sheafifying a free presheaf",
+   "results": "SheafOfModules.GeneratingSections.epi, SheafOfModules.GeneratingSections.ofEpi, SheafOfModules.GeneratingSections.opEpi_comp, SheafOfModules.GeneratingSections.ofEpi_I, PresheafOfModules.sheafification, SheafOfModules.GeneratingSections.ofEpi_s, PresheafOfModules.sheafify, SheafOfModules.IsFinitePresentation",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "freeAdjunction|isFlat_sheafification_obj",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedFlatReplacement",
+  "date": "2026-10-12",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the bounded-above flat replacement in the proof of the K-flat resolution lemma: Functorial flat cover of a module sheaf",
+   "via": [
+    "lem-pc-kflat-bounded-flat-replacement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FlatCoverFunctor",
+  "file": "lean/Sheaf/Algebra/Homology/FlatCoverFunctor.lean",
+  "declaration": "SheafOfModules.exists_functorial_flat_cover",
+  "statement": "theorem exists_functorial_flat_cover\n    {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u}) :\n    let A := SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)\n    ∃ T : A ⥤ A, ∃ π : T ⟶ 𝟭 A,\n      ∀ M : A, IsFlat (T.obj M) ∧ Epi (π.app M)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T085405-L-50060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261012T085405-L-50060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
