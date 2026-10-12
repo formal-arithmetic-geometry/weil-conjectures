@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryConstruction
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryPurity
+public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
+public import WeilConjectures.PointCountBound
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.EulerRadius
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
@@ -232,7 +233,7 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
     have h := hw y a' (E.hasEigenvalue ((hroot x).1 ha'))
     rwa [Scheme.Hom.residueCard, hdeg, hy, Nat.cast_pow, ← Real.rpow_natCast_mul hq0.le,
       mul_comm, Real.rpow_mul_natCast hq0.le] at h
-  obtain ⟨A, hA⟩ := WeilGroup.exists_card_filter_degreeOver_le_of_isAffine (p := p)
+  obtain ⟨A, hA⟩ := p.exists_card_filter_degreeOver_le (IsCurve.krullDim_le_one p)
   -- Step 2: the eigenvalues on `H_c²`
   set S := ((J.compactlySupportedCohomology 2).frobeniusEnd.charpoly.roots).map ι with hSdef
   have hS : ∀ b ∈ S, ‖b‖ ≤ q * c := by

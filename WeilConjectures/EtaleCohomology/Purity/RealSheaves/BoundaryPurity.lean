@@ -276,38 +276,6 @@ theorem eulerSeries_eq_tprod_mul_prod {T : Set C.finitePoints} (hT : Tᶜ.Finite
   congr 1
   exact tprod_congr_set_coe _ hT.coe_toFinset.symm
 
-/-- On an affine curve, the closed points of degree `e` number at most `A q ^ e`
-(`lem-wf-point-count-linear-growth`), in any finite set of them. -/
-theorem exists_card_filter_degreeOver_le_of_isAffine [IsAffine C] :
-    ∃ A : ℝ, ∀ (T : Set C.finitePoints) (t : Finset T) (e : ℕ),
-      ((t.filter fun x ↦ p.degreeOver x.1.1 = e).card : ℝ) ≤ A * (Nat.card K : ℝ) ^ e := by
-  classical
-  obtain ⟨d, hd⟩ := p.exists_pointCount_le_mul_pow (IsCurve.krullDim_le_one p)
-  refine ⟨d, fun T t e ↦ ?_⟩
-  rcases eq_or_ne e 0 with rfl | he
-  · rw [Finset.card_eq_zero.2 (Finset.filter_eq_empty_iff.2 fun x _ ↦
-      p.degreeOver_ne_zero x.1.2)]
-    simp
-  set S := (t.filter fun x ↦ p.degreeOver x.1.1 = e).image Subtype.val
-  have hS : S.card = (t.filter fun x ↦ p.degreeOver x.1.1 = e).card :=
-    Finset.card_image_of_injective _ Subtype.val_injective
-  set T' := (p.finite_setOf_degreeOver_le e).toFinset
-  have hcount := p.pointCount_eq_sum he (T := T') fun y hy ↦ by
-    simpa [T'] using Nat.le_of_dvd (Nat.pos_of_ne_zero he) hy
-  have hST : S ⊆ T'.filter fun y ↦ p.degreeOver y.1 ∣ e := by
-    intro y hy
-    obtain ⟨x, hx, rfl⟩ := Finset.mem_image.1 hy
-    have hxe := (Finset.mem_filter.1 hx).2
-    simp [T', hxe]
-  have hle : S.card ≤ p.pointCount e := by
-    rw [hcount]
-    calc S.card = ∑ y ∈ S, 1 := by simp
-      _ ≤ ∑ y ∈ S, p.degreeOver y.1 := Finset.sum_le_sum fun y _ ↦
-          Nat.one_le_iff_ne_zero.2 (p.degreeOver_ne_zero y.2)
-      _ ≤ _ := Finset.sum_le_sum_of_subset hST
-  rw [← hS]
-  exact_mod_cast hle.trans (hd e he)
-
 /-- Steps 0–3 of `lem-wf-boundary-semicontinuity` for a lisse sheaf on an affine curve.
 
 Let `C₀` be a smooth geometrically connected affine curve, `ℱ` lisse on `C₀` and `T` a set of
@@ -333,7 +301,7 @@ theorem frobeniusWeight_le_add_two_of_isAffine [IsAffine C] [SmoothOfRelativeDim
   · linarith [hw s hs α hα]
   -- the Euler product identity
   obtain ⟨P, hP⟩ := exists_eulerSeries_mul_eq_coe ρ ι hρ
-  obtain ⟨A, hA⟩ := exists_card_filter_degreeOver_le_of_isAffine (p := p)
+  obtain ⟨A, hA⟩ := p.exists_card_filter_degreeOver_le (IsCurve.krullDim_le_one p)
   set lp : C.finitePoints → Polynomial ℂ := fun x ↦
     ((W.localPolynomial l ρ x).map ι).comp (Polynomial.X ^ p.degreeOver x.1)
   set B : Polynomial ℂ := ∏ x ∈ hT.toFinset, lp x

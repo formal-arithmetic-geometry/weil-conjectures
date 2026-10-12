@@ -45,10 +45,6 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
--- `Spec k₀` is over itself through `Over` of the identity; the instance `specOverSpec` (for
--- `k₀` as a `k₀`-algebra) is not reducibly defeq to it.
-attribute [-instance] specOverSpec
-
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
   (ι : PadicAlgCl l →+* ℂ)
 
