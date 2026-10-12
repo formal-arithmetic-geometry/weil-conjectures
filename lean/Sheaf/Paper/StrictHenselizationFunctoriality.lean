@@ -8,10 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.ResidueField
-import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.RingTheory.MapIntoHenselianColimit
-import Sheaf.RingTheory.StrictHenselizationTriples
+import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.Paper.StrictHenselizationLocalStructure
+import Sheaf.Paper.StrictHenselizationPointedMap
+import Sheaf.Paper.EtalePointedMapRigidity
+import Sheaf.Paper.StrictHenselizationMapExists
 
 /-! # Strict henselization functoriality
 
@@ -33,6 +34,7 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The strictly henselian ring, canonical base map, and unique pointed residue
 identification of clause (1). The factorization condition forces the residue
 identification to respect the base residue field; using ring equivalences therefore
@@ -196,7 +198,82 @@ theorem strictHenselizationResidue
               σ.toRingHom).comp
             (IsLocalRing.residue (Scheme.strictHenselizationRing barY)))) ≫
           Scheme.strictHenselizationStructuralMap barY = barY := by
-  sorry
+  obtain ⟨hlocal, hstrict⟩ := strictHenselizationLocalStructure barY
+  let := hlocal
+  obtain ⟨ψ, hsurj, hker, hpoint⟩ := strictHenselizationPointedMap barY hΩ
+  let σ : IsLocalRing.ResidueField (Scheme.strictHenselizationRing barY) ≃+*
+      separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω :=
+    (Ideal.quotEquivOfEq hker.symm).trans (ψ.quotientKerEquivOfSurjective hsurj)
+  have hσ : σ.toRingHom.comp
+      (IsLocalRing.residue (Scheme.strictHenselizationRing barY)) = ψ := by
+    ext x
+    rfl
+  have hpointσ : ∀ j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barY),
+      Spec.map (CommRingCat.ofHom
+        (((IntermediateField.val
+          (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+            σ.toRingHom).comp
+          (IsLocalRing.residue (Scheme.strictHenselizationRing barY)))) ≫
+        (Scheme.strictHenselizationCone barY).π.app (Opposite.op (Opposite.op j)) ≫
+        (Spec (Opposite.unop ((equivSmallModel.{v}
+          (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).1.left)).isoSpec.inv =
+        ((equivSmallModel.{v}
+          (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2.left := by
+    simpa only [RingHom.comp_assoc, hσ] using hpoint
+  let pointLift := Spec.map (CommRingCat.ofHom
+    (((IntermediateField.val
+      (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+        σ.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barY))))
+  have hbase : pointLift ≫ Scheme.strictHenselizationStructuralMap barY = barY := by
+    have hn := (Scheme.strictHenselization_properties barY).2.1
+    let := hn
+    let j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barY) :=
+      Classical.choice IsCofiltered.nonempty
+    have hj := Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barY) j
+    have hp := hpointσ j
+    have hw := ((equivSmallModel.{v}
+      (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).2.w
+    change pointLift ≫ Classical.choose
+      (Scheme.exists_strictHenselizationStructuralMap barY) = barY
+    rw [← hj]
+    simpa only [pointLift, Scheme.isoSpec_Spec_inv, Category.assoc] using!
+      (congrArg (fun f ↦ f ≫ ((Scheme.AffineEtale.Spec Y).obj
+        ((equivSmallModel.{v}
+          (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj j).1).hom) hp).trans hw
+  have hclosed : pointLift (IsLocalRing.closedPoint Ω) =
+      IsLocalRing.closedPoint (Scheme.strictHenselizationRing barY) := by
+    change PrimeSpectrum.comap
+      ((((IntermediateField.val
+        (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom).comp
+          σ.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barY)))
+      (IsLocalRing.closedPoint Ω) = _
+    rw [PrimeSpectrum.comap_comp]
+    exact IsLocalRing.PrimeSpectrum.comap_residue _ _
+  refine ⟨hlocal, hstrict, ?_, IsSepClosure.sep_closed
+    (Y.residueField (barY (IsLocalRing.closedPoint Ω))), σ, ⟨hpointσ, hbase⟩, ?_⟩
+  · simpa only [Scheme.Hom.comp_apply, hclosed] using!
+      congrArg (fun f ↦ f (IsLocalRing.closedPoint Ω)) hbase
+  · intro σ' hσ'
+    let f := CommRingCat.ofHom
+      (((IntermediateField.val
+        (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+          σ.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barY)))
+    let f' := CommRingCat.ofHom
+      (((IntermediateField.val
+        (separableClosure (Y.residueField (barY (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+          σ'.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barY)))
+    have hmaps : Spec.map f' = Spec.map f := by
+      obtain ⟨hl⟩ := (Scheme.strictHenselization_properties barY).2.2
+      apply hl.hom_ext
+      intro j
+      apply (cancel_mono (Spec (Opposite.unop ((equivSmallModel.{v}
+        (Scheme.strictHenselizationNeighbourhoods barY)).inverse.obj
+          j.unop.unop).1.left)).isoSpec.inv).1
+      exact (hσ'.1 j.unop.unop).trans (hpointσ j.unop.unop).symm
+    have hrings := congrArg CommRingCat.Hom.hom (Spec.map_injective hmaps)
+    ext x
+    obtain ⟨r, rfl⟩ := IsLocalRing.residue_surjective (R := Scheme.strictHenselizationRing barY) x
+    exact congrArg (fun q ↦ q r) hrings
 
 /-- Clauses (2)--(4), for the canonical maps and residue identifications of clause (1).
 Residue compatibility is expressed after the injective embeddings in Ω: the equality
@@ -420,6 +497,100 @@ theorem strictHenselizationFunctoriality
             (Spec (Opposite.unop ((equivSmallModel.{v}
               (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).1.left)).isoSpec.inv)
     := by
-  sorry
+  obtain ⟨h, hhlocal, hhbase, hhres⟩ :=
+    strictHenselizationMapExists g barT barS hbar hΩS hΩT σS σT hσS hσT
+  let ψS := (((IntermediateField.val
+    (separableClosure (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+      σS.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barS)))
+  let ψT := (((IntermediateField.val
+    (separableClosure (T.residueField (barT (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
+      σT.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing barT)))
+  have hres : ψS = ψT.comp h.hom := hhres
+  have hspec : Spec.map (CommRingCat.ofHom ψT) ≫ Spec.map h =
+      Spec.map (CommRingCat.ofHom ψS) := by
+    rw [← Spec.map_comp]
+    congr 1
+    exact CommRingCat.hom_ext hres.symm
+  let cS := fun a : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS) ↦
+    (Scheme.strictHenselizationCone barS).π.app (Opposite.op (Opposite.op a)) ≫
+      (Spec (Opposite.unop ((equivSmallModel.{v}
+        (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).1.left)).isoSpec.inv
+  let cT := fun b : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT) ↦
+    (Scheme.strictHenselizationCone barT).π.app (Opposite.op (Opposite.op b)) ≫
+      (Spec (Opposite.unop ((equivSmallModel.{v}
+        (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).1.left)).isoSpec.inv
+  let pS := fun a : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barS) ↦
+    ((Scheme.AffineEtale.Spec S).obj ((equivSmallModel.{v}
+      (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).1).hom
+  let pT := fun b : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods barT) ↦
+    ((Scheme.AffineEtale.Spec T).obj ((equivSmallModel.{v}
+      (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).1).hom
+  have hcS : ∀ a, cS a ≫ pS a = Scheme.strictHenselizationStructuralMap barS := by
+    intro a
+    simpa only [cS, pS, Scheme.isoSpec_Spec_inv] using!
+      Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barS) a
+  have hcT : ∀ b, cT b ≫ pT b = Scheme.strictHenselizationStructuralMap barT := by
+    intro b
+    simpa only [cT, pT, Scheme.isoSpec_Spec_inv] using!
+      Classical.choose_spec (Scheme.exists_strictHenselizationStructuralMap barT) b
+  have hψS : ∀ a, Spec.map (CommRingCat.ofHom ψS) ≫ cS a =
+      ((equivSmallModel.{v}
+        (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).2.left := hσS
+  have hψT : ∀ b, Spec.map (CommRingCat.ofHom ψT) ≫ cT b =
+      ((equivSmallModel.{v}
+        (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).2.left := hσT
+  have hlocalψT : IsLocalHom ψT := inferInstance
+  let := hlocalψT
+  refine ⟨?_, h, hhlocal, hhbase, hhres, ?_, ?_⟩
+  · intro x hx
+    let z : separableClosure (S.residueField (barS (IsLocalRing.closedPoint Ω))) Ω := ⟨x, hx⟩
+    obtain ⟨r, hr⟩ := IsLocalRing.residue_surjective
+      (R := Scheme.strictHenselizationRing barS) (σS.symm z)
+    have heq : ψS r = x := by
+      change (σS (IsLocalRing.residue _ r)).val = x
+      rw [hr]
+      exact congrArg Subtype.val (σS.apply_symm_apply z)
+    have heqT : ψT (h.hom r) = x :=
+      (congrArg (fun q ↦ q r) hres).symm.trans heq
+    exact heqT ▸ (σT (IsLocalRing.residue _ (h.hom r))).property
+  · intro h' _ hh'base hh'res
+    have hspec' : Spec.map (CommRingCat.ofHom ψT) ≫ Spec.map h' =
+        Spec.map (CommRingCat.ofHom ψS) := by
+      rw [← Spec.map_comp]
+      congr 1
+      exact CommRingCat.hom_ext hh'res.symm
+    apply Spec.map_injective
+    obtain ⟨hl⟩ := (Scheme.strictHenselization_properties barS).2.2
+    apply hl.hom_ext
+    intro j
+    apply (cancel_mono (Spec (Opposite.unop ((equivSmallModel.{v}
+      (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj
+        j.unop.unop).1.left)).isoSpec.inv).1
+    change Spec.map h' ≫ cS j.unop.unop = Spec.map h ≫ cS j.unop.unop
+    apply etalePointedMapRigidity ψT (pS j.unop.unop)
+    · simpa only [Category.assoc, hcS] using hh'base.trans hhbase.symm
+    · simpa only [Category.assoc] using!
+        (congrArg (fun q ↦ q ≫ cS j.unop.unop) hspec').trans
+          (congrArg (fun q ↦ q ≫ cS j.unop.unop) hspec).symm
+  · intro a b w hw hp
+    change cT b ≫ w = Spec.map h ≫ cS a
+    apply etalePointedMapRigidity ψT (pS a)
+    · calc
+        (cT b ≫ w) ≫ pS a = (cT b ≫ pT b) ≫ g := by
+          simpa only [Category.assoc] using congrArg (fun q ↦ cT b ≫ q) hw
+        _ = Scheme.strictHenselizationStructuralMap barT ≫ g := by rw [hcT]
+        _ = Spec.map h ≫ Scheme.strictHenselizationStructuralMap barS := hhbase.symm
+        _ = (Spec.map h ≫ cS a) ≫ pS a := by rw [Category.assoc, hcS]
+    · calc
+        Spec.map (CommRingCat.ofHom ψT) ≫ cT b ≫ w =
+            ((equivSmallModel.{v}
+              (Scheme.strictHenselizationNeighbourhoods barT)).inverse.obj b).2.left ≫ w := by
+          rw [← Category.assoc, hψT]
+        _ = ((equivSmallModel.{v}
+              (Scheme.strictHenselizationNeighbourhoods barS)).inverse.obj a).2.left := hp
+        _ = Spec.map (CommRingCat.ofHom ψS) ≫ cS a := (hψS a).symm
+        _ = Spec.map (CommRingCat.ofHom ψT) ≫ Spec.map h ≫ cS a := by
+          simpa only [Category.assoc] using!
+            (congrArg (fun q ↦ q ≫ cS a) hspec).symm
 
 end AlgebraicGeometry

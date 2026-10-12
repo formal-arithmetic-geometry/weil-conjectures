@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-etale-pointed-map-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of maps from a local spectrum to an etale scheme",
+ "statement": "Let $B$ be a commutative local ring, $\\Omega$ a field, and $\\beta:B\\to\\Omega$ a local ring map [def-weil-locally-ringed-space-morphism]. Let $f:X\\to S$ be an etale morphism [def-weil-etale-morphism] of schemes [def-pc-scheme]. If $u,v:\\operatorname{Spec}B\\to X$ [def-weil-affine-spectrum] satisfy $f\\circ u=f\\circ v$ and $u\\circ\\operatorname{Spec}\\beta=v\\circ\\operatorname{Spec}\\beta$, then $u=v$. Henselianity of $B$, algebraic closure of $\\Omega$, and locality of $u$ and $v$ are not assumed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GE, open diagonal; algebra.tex Tag 08HQ, uniqueness; direct diagonal argument written in Lean by Y2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The base equality defines d:Spec B -> X times_S X. The diagonal of an etale morphism is an open immersion (Mathlib FormallyUnramified.isOpenImmersion_diagonal; Stacks 02GE). By the pointed equality and the pullback universal property, Spec beta followed by d equals Spec beta followed by u and the diagonal.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GE, open diagonal; algebra.tex Tag 08HQ, uniqueness; direct diagonal argument written in Lean by Y2"
+   }
+  },
+  {
+   "text": "Since beta is local, Spec beta sends the closed point of Spec Omega to the closed point of Spec B. Evaluate the preceding equality there: d sends this closed point into the open range of the diagonal. Every point of Spec B generalizes its closed point, so every image under d lies in that range. This uses IsLocalRing.specializes_closedPoint and stability of opens under generization.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GE, open diagonal; algebra.tex Tag 08HQ, uniqueness; direct diagonal argument written in Lean by Y2"
+   }
+  },
+  {
+   "text": "IsOpenImmersion.lift factors d through the diagonal, whose two projections coincide. Composing lift_fac with the two projections gives l=u and l=v, hence u=v.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GE, open diagonal; algebra.tex Tag 08HQ, uniqueness; direct diagonal argument written in Lean by Y2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-locally-ringed-space-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GE, open diagonal; algebra.tex Tag 08HQ, uniqueness; direct diagonal argument written in Lean by Y2",
+  "note": "Stage-3 Lean argument and explicit transport steps by Y2, following the cited source; sources read online because the literature checkout is absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two morphisms from the spectrum of a local ring to an etale scheme agree if they agree at a field valued closed point",
+   "results": "Service returned Internal Server Error; no search results obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no verdict about a match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion.lift",
+   "results": "IsOpenImmersion.lift, lift_fac and lift_uniqueness give the open-immersion factorization used in the proof. No single matching rigidity theorem found.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; use the recorded component declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|strict_henselization|isOpenImmersion_diagonal|specializes_closedPoint",
+   "results": "Searched Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes. StrictHenselization, EtaleLocalRingTriples and StrictHenselizationTriples provide the existing objects and algebraic input; no declaration supplies this transport statement. For rigidity: FormallyUnramified.isOpenImmersion_diagonal, IsLocalRing.specializes_closedPoint, and IsOpenImmersion.lift suffice, but no existing combined declaration or blueprint node was found. Blueprint search found only the strict-henselization definition and geometric-stalk unit, and no pointed rigidity node.",
+   "date": "2026-10-12",
+   "verdict": "no duplicate; components used rather than redeclared"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselizationFunctoriality",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "step 1, 4 of its split (source: proof of Theorem Tag 095T ('$\\kappa(s)^{sep}$ is the residue field of $\\mathcal O^{sh}_{S,\\bar s}$, i.e. the separable algebraic closure of $\\kappa(s)$ in $k$'; 'Since $\\kappa(s)^{sep}\\subset\\kappa(t)^{sep}$'); paragraph after Definition Tag 03PS; algebra.tex Lemma Tag 04GU); intermediate argument in lem-weil-pbc-strict-henselization-functoriality",
+   "via": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtalePointedMapRigidity",
+  "file": "lean/Sheaf/Paper/EtalePointedMapRigidity.lean",
+  "declaration": "AlgebraicGeometry.etalePointedMapRigidity",
+  "statement": "theorem etalePointedMapRigidity {B : CommRingCat.{v}} [IsLocalRing B] {Ω : Type v} [Field Ω] (β : B →+* Ω) [IsLocalHom β] {X S : Scheme.{v}} (f : X ⟶ S) [Etale f] (u v : Spec B ⟶ X) (hbase : u ≫ f = v ≫ f) (hpoint : Spec.map (CommRingCat.ofHom β) ≫ u = Spec.map (CommRingCat.ofHom β) ≫ v) : u = v",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T044800-L-2043896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T044800-L-2043896",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

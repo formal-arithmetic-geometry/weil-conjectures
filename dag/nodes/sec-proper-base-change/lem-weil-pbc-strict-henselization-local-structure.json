@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-strict-henselization-local-structure",
+ "kind": "statement",
+ "title": "Local structure of the chosen strict-henselization colimit",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme] and $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point]. The chosen coordinate-ring colimit $C=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ [def-weil-pbc-strict-henselization-limit] admits a local-ring structure and is strictly henselian [def-weil-pbc-henselian-terminology]. No identification of its residue field or factorization of the geometric point is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, with algebra.tex Tags 04GW and 04GP; online text read at https://stacks.math.columbia.edu/tag/04HX and /tag/04GW and /tag/04GP"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open Spec A containing the image of the geometric point. Its entire image lies there because Spec Omega has a single point, so factor the point through that open. Put p equal to the resulting prime and K equal to the relative separable closure of its residue field in Omega.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-geometric-point",
+    "def-weil-open-immersion",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, with algebra.tex Tags 04GW and 04GP; online text read at https://stacks.math.columbia.edu/tag/04HX and /tag/04GW and /tag/04GP"
+   }
+  },
+  {
+   "text": "Apply etale_local_ring_triples to obtain colimit cocones cn and ct on affine neighbourhoods and residue triples, and the isomorphism s:cn.pt -> ct.pt. Apply strictHenselization_triples to get another colimit cocone c on the identical triple diagram, together with its local and strictly henselian structures.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, with algebra.tex Tags 04GW and 04GP; online text read at https://stacks.math.columbia.edu/tag/04HX and /tag/04GW and /tag/04GP"
+   }
+  },
+  {
+   "text": "The small representative functor followed by strictHenselizationAffineInclusion is an equivalence. Its opposite pulls the all-affine coordinate diagram back definitionally to strictHenselizationDiagram. HasColimit.isoOfEquivalence and colimit.isoColimitCocone identify the chosen strictHenselizationRing with cn.pt. Compose with s and the unique comparison of ct with c. Transfer local and strictly henselian structures along the inverse ring equivalence, then transport along the equation saying the chosen affine factorization is barY.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, with algebra.tex Tags 04GW and 04GP; online text read at https://stacks.math.columbia.edu/tag/04HX and /tag/04GW and /tag/04GP"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-point",
+  "def-weil-open-immersion",
+  "def-weil-pbc-relative-separable-closure",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, with algebra.tex Tags 04GW and 04GP; online text read at https://stacks.math.columbia.edu/tag/04HX and /tag/04GW and /tag/04GP",
+  "note": "Stage-3 Lean argument and explicit transport steps by Y2, following the cited source; sources read online because the literature checkout is absent on this machine."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The colimit of affine pointed etale neighborhoods is strictly henselian with residue field the separable closure",
+   "results": "Service returned Internal Server Error; no search results obtained.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no verdict about a match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The colimit of affine pointed etale neighborhoods is strictly henselian with residue field the separable closure",
+   "results": "IsLocalRing.ResidueField.lift, lift_comp_residue, map, map_comp_residue, and HenselianLocalRing.TFAE give component lemmas only; none states the geometric colimit transport or existence assertion.",
+   "date": "2026-10-12",
+   "verdict": "no exact match; use the recorded component declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|strict_henselization|isOpenImmersion_diagonal|specializes_closedPoint",
+   "results": "Searched Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes. StrictHenselization, EtaleLocalRingTriples and StrictHenselizationTriples provide the existing objects and algebraic input; no declaration supplies this transport statement. For rigidity: FormallyUnramified.isOpenImmersion_diagonal, IsLocalRing.specializes_closedPoint, and IsOpenImmersion.lift suffice, but no existing combined declaration or blueprint node was found. Blueprint search found only the strict-henselization definition and geometric-stalk unit, and no pointed rigidity node.",
+   "date": "2026-10-12",
+   "verdict": "no duplicate; components used rather than redeclared"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictHenselizationFunctoriality",
+  "date": "2026-10-12",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "step 1, 4 of its split (source: proof of Theorem Tag 095T ('$\\kappa(s)^{sep}$ is the residue field of $\\mathcal O^{sh}_{S,\\bar s}$, i.e. the separable algebraic closure of $\\kappa(s)$ in $k$'; 'Since $\\kappa(s)^{sep}\\subset\\kappa(t)^{sep}$'); paragraph after Definition Tag 03PS; algebra.tex Lemma Tag 04GU); intermediate argument in lem-weil-pbc-strict-henselization-functoriality",
+   "via": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictHenselizationLocalStructure",
+  "file": "lean/Sheaf/Paper/StrictHenselizationLocalStructure.lean",
+  "declaration": "AlgebraicGeometry.strictHenselizationLocalStructure",
+  "statement": "theorem strictHenselizationLocalStructure {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Y) : ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing barY)), IsStrictlyHenselianLocalRing (Scheme.strictHenselizationRing barY)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T044800-L-2043896",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T044800-L-2043896",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
