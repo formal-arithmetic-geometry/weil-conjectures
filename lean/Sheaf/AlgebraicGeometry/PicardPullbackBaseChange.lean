@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 import Sheaf.AlgebraicGeometry.FiniteLocallyFreeTensorUnit
+import Sheaf.AlgebraicGeometry.PicardPullbackBaseChangePrimal
+import Sheaf.AlgebraicGeometry.PicardPullbackBaseChangeDual
 
 /-! # Canonical base change for a pulled-back module
 
@@ -62,6 +64,9 @@ theorem picard_pullback_base_change {X S T : Scheme.{u}}
       IsIso (Modules.moduleBaseChangeMap (pullback.snd f g)
         (pullback.snd (pullback.snd f g) h) h (pullback.fst (pullback.snd f g) h)
         pullback.condition
-          ((Modules.tensorPullback (pullback.fst f g)).obj (Modules.dual E))) := by sorry
+          ((Modules.tensorPullback (pullback.fst f g)).obj (Modules.dual E))) := by
+  intro T' h
+  exact ⟨picard_pullback_base_change_primal f hO E g N e h,
+    picard_pullback_base_change_dual f hO E g N e h⟩
 
 end AlgebraicGeometry.Scheme

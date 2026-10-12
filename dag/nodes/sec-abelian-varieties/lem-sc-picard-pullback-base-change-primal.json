@@ -1,0 +1,98 @@
+{
+ "id": "lem-sc-picard-pullback-base-change-primal",
+ "kind": "statement",
+ "title": "Primal pulled-back module base change",
+ "statement": "Under the hypotheses of lem-sc-picard-pullback-base-change, the canonical base-change map for the pulled-back module E is invertible for every h.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "projection-formula paragraph"
+ },
+ "stmt_deps": [
+  "lem-sc-finite-locally-free-tensor-unit",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Use finite local frames and the projection formula to identify both sides with h-pullback of N; the adjoint-defined map is the identity under these identifications.",
+   "uses": [
+    "lem-sc-finite-locally-free-tensor-unit",
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-locally-free-tensor-unit",
+  "lem-weil-pbc-module-base-change-map-open-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/0BDP",
+  "place": "projection-formula paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite locally free pulled back module base change isomorphism",
+   "results": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module base change map isomorphism tensor pullback",
+   "results": "no exact match",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleBaseChangeMap IsIso finite locally free",
+   "results": "existing declarations inspected; no exact match",
+   "date": "2026-10-13"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardPullbackBaseChange",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-picard-pullback-base-change"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardPullbackBaseChangePrimal",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardPullbackBaseChangePrimal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.picard_pullback_base_change_primal",
+  "statement": "theorem picard_pullback_base_change_primal {X S T : Scheme.{u}}\n    (f : X ⟶ S)\n    (hO : ∀ {T' : Scheme.{u}} (g' : T' ⟶ S),\n      IsIso ((Classical.choose\n        (Modules.exists_tensorPullbackAdjunction (pullback.snd f g'))).unit.app\n          (SheafOfModules.unit T'.ringCatSheaf)))\n    (E : X.Modules) [E.IsFiniteLocallyFree] (g : T ⟶ S) (N : T.Modules) [N.IsFiniteLocallyFree]\n    (e : Nonempty ((Modules.tensorPullback (pullback.fst f g)).obj E ≅\n      (Modules.tensorPullback (pullback.snd f g)).obj N))\n    {T' : Scheme.{u}} (h : T' ⟶ T) :\n      IsIso (Modules.moduleBaseChangeMap (pullback.snd f g)\n        (pullback.snd (pullback.snd f g) h) h (pullback.fst (pullback.snd f g) h)\n        pullback.condition ((Modules.tensorPullback (pullback.fst f g)).obj E))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T220525-L-1395345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T220525-L-1395345",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

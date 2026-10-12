@@ -9732,3 +9732,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:05 L: merged deliver/Q2/Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescentAux (stage 3; reviewer PASS; first push; landing 20261012T220524-L-1394854 (proof); batch 20261012T220515; modules 1; new nodes 1)
 - 22:05 L: merged deliver/R3/Sheaf.AlgebraicGeometry.ChowModificationData (stage 3; reviewer PASS; first push; landing 20261012T220525-L-1395049 (interface); batch 20261012T220515; modules 2; new nodes 1)
 - 22:05 L: merged deliver/S1/Sheaf.AlgebraicGeometry.GluedEffectiveModelChartsPullback (stage 3; reviewer PASS; first push; landing 20261012T220525-L-1395230 (interface); batch 20261012T220515; modules 2; new nodes 1)
+- 22:05 L: merged deliver/S2/Sheaf.AlgebraicGeometry.PicardPullbackBaseChange (stage 3; reviewer PASS; first push; landing 20261012T220525-L-1395345 (interface); batch 20261012T220515; modules 3; new nodes 2)
