@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-coherent-ideal-sum-cokernel-reduction",
+ "kind": "statement",
+ "title": "Coherent ideal-sum map has smaller-support cokernel",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], $i:Z\\to X$ a closed immersion [def-weil-closed-immersion], $r\\in\\mathbb N$, and $I$ an ideal sheaf represented by $Z.\\mathrm{IdealSheafData}$ [def-sbc-closed-immersion-ideal-sheaf]. Suppose $I$ is coherent [pqf-def-coherent]. Let $F$ be a coherent $\\mathcal O_X$-module [def-weil-sheaf-of-modules-category], and let $\\alpha:i_*(I^{\\oplus r})\\to F$ be any module morphism, with pushforward as in [def-pc-module-pullback]. Suppose $x\\in X$ has nonzero stalk $F_x$ [def-weil-pbc-module-stalk], and there is an open neighbourhood $W$ of $x$ such that $\\alpha|_W$ is an isomorphism. Then $I\\ne0$, the source of $\\alpha$ and its cokernel $Q$ are coherent, and $\\{y\\mid Q_y\\ne0\\}\\subsetneq\\{y\\mid F_y\\ne0\\}$.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YF, label lemma-coherent-filter, final proof paragraph; read online at https://stacks.math.columbia.edu/tag/01YF because the literature checkout is absent locally"
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Apply finite-sum coherence to the biproduct of the ideal modules and transport along biproduct.isoCoproduct. Finite closed pushforward gives coherent source. Coherent cokernel closure gives coherent Q.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-finite-pushforward-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source-library overFunctorEquiv identifies module restriction to W with overFunctor followed by its site equivalence. NatIso.isIso_map_iff and Scheme.Modules.bijective_stalk_of_isIso_restrict therefore give a bijective alpha stalk at x. The cokernel projection is surjective on every stalk by module_stalk_exact. Its composite with alpha is zero, hence Q_x is zero and Supp(Q) is contained in Supp(F). The nonzero F_x witnesses strictness.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If I is bottom, the range_toModulesι_app description on affine opens and injective_toModulesι_app make every affine section module zero. The source-library isZero_of_forall_affineOpens makes I.toModules zero. Sigma.hom_ext shows its finite coproduct is zero. Pushforward and module stalks preserve zero objects, so bijectivity of alpha_x makes F_x zero, a contradiction.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YF, label lemma-coherent-filter, final proof paragraph; read online at https://stacks.math.columbia.edu/tag/01YF because the literature checkout is absent locally"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a finite direct sum of coherent sheaves is coherent and filtrations are closed under finite direct sums",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a monomorphism from pushforward of a finite sum of a coherent ideal which is locally an isomorphism at a nonzero stalk has coherent cokernel with strictly smaller support",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal; Module.support_quotient; AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter; SheafOfModules.IsFiniteType; AlgebraicGeometry.Scheme.IdealSheafData.le_of_iSup_eq_top",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.biproduct, CategoryTheory.Limits.cokernel",
+   "results": "CategoryTheory.Limits.cokernelBiproductιIso; CategoryTheory.Limits.cokernelBiproductFromSubtypeIso; CategoryTheory.Limits.cokernelBiproductιIso_hom; CategoryTheory.Limits.cokernelBiproductιIso_inv; CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_hom; CategoryTheory.Limits.cokernelBiproductFromSubtypeIso_inv",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*cokernel|cokernel.*support|filtration.*ideal|ideal.*filtration",
+   "results": "No matches",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite biproduct subobjects chain successive quotient each summand",
+   "results": "biproduct.fromSubtype, biproduct.toSubtype_fromSubtype, and associated split inclusion identities; no scheme coherent integral filtration theorem",
+   "date": "2026-10-13",
+   "verdict": "second reading: components only, no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Subobject\", \"biproduct\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernelBiproduct|fromSubtype|sum.*subobject|subobject.*sum; repository rg for HasCoherentIntegralFiltration and summand filtration",
+   "results": "Mathlib biproduct subtype inclusions; repository filtration predicate, extension and adic/generic reduction modules, but no proved ideal-sum filtration",
+   "date": "2026-10-13",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationGenericStep",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-integral-filtration-generic-step",
+   "place": "final generic-point paragraph: Coherent ideal-sum map has smaller-support cokernel",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentIdealSumCokernelReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIdealSumCokernelReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_ideal_sum_cokernel_reduction",
+  "statement": "theorem coherent_ideal_sum_cokernel_reduction\n    {X Z : Scheme.{u}} [IsLocallyNoetherian X]\n    (i : Z ⟶ X) [IsClosedImmersion i]\n    (r : ℕ) (I : Z.IdealSheafData)\n    (hI : RingedSpace.IsCoherent Z.toRingedSpace I.toModules)\n    (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)\n    (α : (pushforward i).obj (∐ fun _ : Fin r => I.toModules) ⟶ F)\n    (x : X) (hx : ¬ Subsingleton (F.presheaf.stalk x))\n    (W : X.Opens) (hxW : x ∈ W)\n    (hαW : IsIso ((SheafOfModules.overFunctor X.ringCatSheaf W).map α)) :\n    I ≠ ⊥ ∧\n      RingedSpace.IsCoherent X.toRingedSpace\n        ((pushforward i).obj (∐ fun _ : Fin r => I.toModules)) ∧\n      RingedSpace.IsCoherent X.toRingedSpace (cokernel α) ∧\n      {y : X | ¬ Subsingleton ((cokernel α).presheaf.stalk y)} ⊂\n        {y : X | ¬ Subsingleton (F.presheaf.stalk y)}",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T204510-L-870088",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T204510-L-870088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

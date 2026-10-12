@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
+import Sheaf.AlgebraicGeometry.CoherentIdealSumCokernelReduction
+import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationIdealSum
+import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import Mathlib.Algebra.Homology.ShortComplex.Abelian
 
 /-! # The generic-point step of the coherent integral-ideal filtration
 
@@ -55,6 +61,48 @@ theorem coherentIntegralFiltration_generic_step
     (hSupp : {x : X | ¬ Subsingleton (F.presheaf.stalk x)} = (T : Set X))
     (hkill : ∀ a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk ξ),
       ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj F, a • m = 0) :
-    HasCoherentIntegralFiltration F := by sorry
+    HasCoherentIntegralFiltration F := by
+  classical
+  let J := Scheme.IdealSheafData.vanishingIdeal T
+  let Z := J.subscheme
+  let i : Z ⟶ X := J.subschemeι
+  have hrange : Set.range i.base = (T : Set X) := by
+    change Set.range J.subschemeι = (T : Set X)
+    simp [J]
+  let e : Z ≃ₜ (T : Set X) :=
+    i.isClosedEmbedding.isEmbedding.toHomeomorph.trans (Homeomorph.setCongr hrange)
+  have : IrreducibleSpace (T : Set X) := Subtype.irreducibleSpace hξ.isIrreducible
+  have : IrreducibleSpace Z := e.irreducibleSpace_iff.mpr inferInstance
+  have : IsIntegral Z := isIntegral_of_irreducibleSpace_of_isReduced Z
+  have hpoint : i (genericPoint Z) = ξ := by
+    have h := (genericPoint_spec Z).image i.continuous
+    rw [Set.image_univ, hrange, T.isClosed.closure_eq] at h
+    exact h.eq hξ
+  have hkill' : ∀ a ∈ IsLocalRing.maximalIdeal
+      (X.presheaf.stalk (i.base (genericPoint Z))),
+      ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace
+        (i.base (genericPoint Z))).obj F, a • m = 0 := by
+    rw [hpoint]
+    exact hkill
+  obtain ⟨r, I, hI, α, hα, W, hW, hαW⟩ :=
+    coherent_generic_point_ideal_inclusion i F hF hkill'
+  have : Mono α := hα
+  have hx : ¬ Subsingleton (F.presheaf.stalk (i.base (genericPoint Z))) := by
+    have hx' : ξ ∈ {x : X | ¬ Subsingleton (F.presheaf.stalk x)} := by
+      rw [hSupp]
+      exact hξ.mem
+    rw [hpoint]
+    exact hx'
+  obtain ⟨hne, hA, hQ, hQsub⟩ :=
+    coherent_ideal_sum_cokernel_reduction i r I hI F hF α
+      (i.base (genericPoint Z)) hx W hW hαW
+  have hQfil : HasCoherentIntegralFiltration (cokernel α) := by
+    apply hsmaller (cokernel α) hQ
+    simpa only [hSupp] using hQsub
+  have hS : (ShortComplex.mk α (cokernel.π α) (cokernel.condition α)).ShortExact := by
+    exact { exact := ShortComplex.exact_cokernel α }
+  exact coherentIntegralFiltration_of_shortExact X
+    (ShortComplex.mk α (cokernel.π α) (cokernel.condition α)) hS hA hF hQ
+    (coherentIntegralFiltration_ideal_sum i r I hne hI) hQfil
 
 end AlgebraicGeometry.Scheme.Modules

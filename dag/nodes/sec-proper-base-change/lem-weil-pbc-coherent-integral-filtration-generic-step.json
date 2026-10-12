@@ -19,20 +19,43 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The construction is the induced filtration / adic reduction / generic-point argument described in the declaration docstring.",
+   "text": "Construct J=vanishingIdeal T and Z=J.subscheme. The source-library reduced subscheme instance and closed embedding identify Z with the irreducible closed subset T, giving IsIntegral Z. Its generic point maps to xi by genericPoint_spec.image and uniqueness of generic points in the T0 space X.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Lemma 01YF proof"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Rewrite the maximal-ideal annihilation hypothesis along the equality i(genericPoint Z)=xi. Apply coherent_generic_point_ideal_inclusion to get r,I,alpha and an open neighbourhood W on which alpha is invertible. The equality Supp(F)=T and the generic-point membership show that the target stalk there is nonzero.",
+   "uses": [
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coherent_ideal_sum_cokernel_reduction to obtain I nonzero, coherent source A, coherent Q=cokernel alpha, and Supp(Q) strictly contained in Supp(F)=T. Apply hsmaller to Q. Apply coherentIntegralFiltration_ideal_sum to A.",
+   "uses": [
+    "lem-weil-pbc-coherent-ideal-sum-cokernel-reduction",
+    "lem-weil-pbc-coherent-integral-filtration-ideal-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mono alpha and ShortComplex.exact_cokernel alpha give the canonical short exact sequence A -> F -> Q. Apply coherentIntegralFiltration_of_shortExact to the two filtrations.",
+   "uses": [
+    "lem-weil-pbc-coherent-integral-filtration-extension"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-coherent-ideal-sum-cokernel-reduction",
+  "lem-weil-pbc-coherent-integral-filtration-ideal-sum",
+  "lem-weil-pbc-coherent-integral-filtration-extension"
+ ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 01YF proof"
+  "place": "Tag 01YF, label lemma-coherent-filter, final proof paragraph; read online at https://stacks.math.columbia.edu/tag/01YF because the literature checkout is absent locally"
  },
  "mathlib_searches": [
   {
@@ -94,9 +117,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "R1",
   "result": "pass",
-  "landing": "20261012T184321-L-4010987",
+  "landing": "20261012T204510-L-870088",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
