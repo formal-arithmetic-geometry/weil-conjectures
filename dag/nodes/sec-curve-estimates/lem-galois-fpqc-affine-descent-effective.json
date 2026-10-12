@@ -38,122 +38,34 @@
    }
   },
   {
-   "text": "*Step 2 (finite coproducts of affine morphisms are affine: hypothesis (2)).* Let $h_j:Y_j\\to V_j$ ($j=1,\\dots,m$) be affine, and let $Y=\\coprod_jY_j$, $V=\\coprod_jV_j$ with coprojections $\\iota'_j:Y_j\\to Y$, $\\iota_j:V_j\\to V$ [lem-weil-pbc-scheme-coproduct-family]: open immersions with pairwise disjoint images covering $Y$, resp. $V$. Let $h:Y\\to V$ be the induced morphism, $h\\circ\\iota'_j=\\iota_j\\circ h_j$; then $h^{-1}(\\iota_j(V_j))=\\iota'_j(Y_j)$ (a point $\\iota'_k(y)$ maps to $\\iota_k(h_k(y))$, which lies in $\\iota_j(V_j)$ only for $k=j$). Let $W\\subseteq V$ be an affine open [pqf-def-affine-morphism]; we show $h^{-1}(W)$ is affine. Put $W_j=W\\cap\\iota_j(V_j)$: open, and closed in $W$, its complement in $W$ being $W\\cap\\bigcup_{k\\ne j}\\iota_k(V_k)$. Under an isomorphism $W\\cong\\operatorname{Spec}R_W$ [def-pc-scheme], $W_j=D(e_j)$ for an idempotent $e_j\\in R_W$ [lem-weil-pbc-spec-clopen-idempotent], which is the image of the open immersion $\\operatorname{Spec}(R_W)_{e_j}\\to W$ [lem-weil-pbc-principal-localization-open-immersion]; so $W_j$ is an affine open of $V$, and $\\iota_j^{-1}(W_j)$ is an affine open of $V_j$ ($\\iota_j$ is an isomorphism onto its open image). Since $h_j$ is affine, $h_j^{-1}(\\iota_j^{-1}(W_j))$ is affine, hence so is its isomorphic image $\\iota'_j(h_j^{-1}(\\iota_j^{-1}(W_j)))=h^{-1}(W_j)$. Thus the open subscheme $h^{-1}(W)$ is covered by the finitely many pairwise disjoint affine opens $h^{-1}(W_1),\\dots,h^{-1}(W_m)$; it is therefore their coproduct (morphisms out of the pieces glue uniquely, the overlaps being empty), and a finite disjoint union of affine schemes is affine [lem-weil-pbc-affine-morphism-permanence] (4). Hence $h$ is affine [pqf-def-affine-morphism]. (Source: 'Being affine is a property of morphisms of schemes which is local on the base, see Morphisms, Lemma 01S8'; the locality on the base is used here only for the decomposition of $W$ into the clopen pieces $W_j$.)",
+   "text": "Prove finite coproduct stability directly in Lean: the coprojections form an open cover. Disjointness of their images and Sigma.ι_map identify the pullback of the sum map along the i-th coprojection with the i-th component map. IsZariskiLocalAtTarget.of_openCover and invariance under isomorphism prove the sum map affine. This replaces the clopen-idempotent argument.",
    "uses": [
     "lem-weil-pbc-scheme-coproduct-family",
-    "pqf-def-affine-morphism",
-    "def-pc-scheme",
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-affine-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 0245, proof, first sentence (Morphisms Tag 01S8, morphisms-lemma-characterize-affine), applied to hypothesis (2) of Lemma Tag 02W3"
-   }
-  },
-  {
-   "text": "*Step 3 (hypothesis (3), set-up: rings).* Let $X\\to S$ be a flat surjective morphism of affine schemes and $(V,\\varphi)$ a descent datum over $X/S$ [def-pd-descent-datum] with $V\\to X$ affine. Choose isomorphisms $X\\cong\\operatorname{Spec}A$, $S\\cong\\operatorname{Spec}R$ [def-pc-scheme]; transporting $X\\to S$, $V\\to X$, $\\varphi$ and the sought $U,\\psi$ along them (the fibre products over isomorphic bases are canonically isomorphic [def-pc-fibre-product]) we may assume $X=\\operatorname{Spec}A$, $S=\\operatorname{Spec}R$. Then $X\\to S$ is $\\operatorname{Spec}$ of a unique ring map $R\\to A$ [def-weil-affine-spectrum], which is flat since $X\\to S$ is [lem-weil-pbc-flat-ring-map-iff-flat-affine]. As $V\\to X$ is affine and $X$ is affine, $V$ is affine [lem-weil-pbc-affine-morphism-permanence] (2); so (again up to an isomorphism) $V=\\operatorname{Spec}B$ and $V\\to X$ is $\\operatorname{Spec}$ of a ring map $A\\to B$, making $B$ an $A$-algebra [def-weil-affine-spectrum]. (Surjectivity of $X\\to S$, i.e. faithful flatness of $R\\to A$, is not needed below.)",
-   "uses": [
-    "def-pd-descent-datum",
-    "def-pc-scheme",
-    "def-pc-fibre-product",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-    "lem-weil-pbc-affine-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 0245, proof: 'Say X = Spec(A) and S = Spec(R) so that R -> A is a faithfully flat ring map ... V = Spec(B) for some A-algebra B (Morphisms, Definition 01S6)'"
-   }
-  },
-  {
-   "text": "*Step 4 (the descent datum in rings).* All tensor products are over $R$; for commutative $R$-algebras they are the rings of [lem-weil-pbc-algebra-tensor-pushout-universal-property], whose universal property (2),(3) gives the associativity and symmetry isomorphisms used tacitly, e.g. $B\\otimes_A(A\\otimes A)\\cong B\\otimes A$. By [lem-weil-pbc-fibre-product-affine-spectra] (applied twice for the triple products) $X_2=X\\times_SX=\\operatorname{Spec}(A\\otimes A)$ with $\\mathrm{pr}_0,\\mathrm{pr}_1$ the spectra of $a\\mapsto a\\otimes1$, $a\\mapsto1\\otimes a$; $\\mathrm{pr}_0^*V=V\\times_{X,\\mathrm{pr}_0}X_2=\\operatorname{Spec}(B\\otimes A)$ and $\\mathrm{pr}_1^*V=\\operatorname{Spec}(A\\otimes B)$ as schemes over $X_2$ ($A\\otimes A$ acting factorwise); $X_3=\\operatorname{Spec}(A\\otimes A\\otimes A)$, and the pullbacks along $\\mathrm{pr}_{01},\\mathrm{pr}_{12},\\mathrm{pr}_{02}$ of $\\mathrm{pr}_0^*V$ and $\\mathrm{pr}_1^*V$ are the spectra of $B\\otimes A\\otimes A$, $A\\otimes B\\otimes A$, $A\\otimes A\\otimes B$ (the factor $B$ in the slot of the corresponding projection). Morphisms between spectra are the spectra of unique ring maps, contravariantly [def-weil-affine-spectrum], so $\\varphi=\\operatorname{Spec}(\\varphi^\\sharp)$ for an isomorphism of $A\\otimes A$-algebras $\\varphi^\\sharp:A\\otimes B\\to B\\otimes A$. Put $\\theta=(\\varphi^\\sharp)^{-1}:B\\otimes A\\to A\\otimes B$, an isomorphism of $A\\otimes A$-algebras. Then $\\mathrm{pr}_{01}^*\\varphi$, $\\mathrm{pr}_{12}^*\\varphi$, $\\mathrm{pr}_{02}^*\\varphi$ are the spectra of the inverses of $\\theta_{01}=\\theta\\otimes\\mathrm{id}_A:B\\otimes A\\otimes A\\to A\\otimes B\\otimes A$, $\\theta_{12}=\\mathrm{id}_A\\otimes\\theta:A\\otimes B\\otimes A\\to A\\otimes A\\otimes B$ and $\\theta_{02}:B\\otimes A\\otimes A\\to A\\otimes A\\otimes B$, $b\\otimes a\\otimes a'\\mapsto\\sum_kx_k\\otimes a\\otimes y_k$ where $\\theta(b\\otimes a')=\\sum_kx_k\\otimes y_k$ ($\\theta$ acting on the slots $0,2$). By contravariance the cocycle condition $\\mathrm{pr}_{02}^*\\varphi=\\mathrm{pr}_{12}^*\\varphi\\circ\\mathrm{pr}_{01}^*\\varphi$ of [def-pd-descent-datum] becomes $\\theta_{02}^{-1}=\\theta_{01}^{-1}\\circ\\theta_{12}^{-1}$, i.e. $\\theta_{02}=\\theta_{12}\\circ\\theta_{01}$. (This is the source's 'Inverting these arrows we see that we have a descent datum for modules with respect to $R\\to A$ as in Definition 023G'.)",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-affine-spectrum",
-    "def-pd-descent-datum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 0245, proof: 'The isomorphism phi corresponds to an isomorphism of rings phi^#: B (x)_R A <- A (x)_R B as A (x)_R A-algebras. The cocycle condition ... Inverting these arrows ... descent datum for modules ... Definition 023G' (definition-descent-datum-modules, line 271)"
-   }
-  },
-  {
-   "text": "*Step 5 (the coaction $\\delta$; counit and coassociativity).* Define $\\delta:B\\to A\\otimes B$, $\\delta(b)=\\theta(b\\otimes1)$. It is a ring map (composite of $b\\mapsto b\\otimes1$ and $\\theta$), and $A$-linear for the left $A$-structure of $A\\otimes B$: $\\delta(ab)=\\theta((a\\otimes1)\\cdot(b\\otimes1))=(a\\otimes1)\\theta(b\\otimes1)$ by $A\\otimes A$-linearity of $\\theta$; so $\\delta$ is a homomorphism of $A$-algebras. *Coassociativity.* Write $\\delta(b)=\\sum_kx_k\\otimes y_k$. Evaluate $\\theta_{02}=\\theta_{12}\\circ\\theta_{01}$ (Step 4) at $b\\otimes1\\otimes1$: the left side is $\\sum_kx_k\\otimes1\\otimes y_k=(\\mathrm{id}_A\\otimes\\iota)(\\delta(b))$; the right side is $\\theta_{12}(\\sum_kx_k\\otimes y_k\\otimes1)=\\sum_kx_k\\otimes\\theta(y_k\\otimes1)=(\\mathrm{id}_A\\otimes\\delta)(\\delta(b))$, under $A\\otimes(A\\otimes B)=A\\otimes A\\otimes B$. *Counit* (the source's remark after Definition 023V that $\\Delta^*\\varphi=\\mathrm{id}$, written out). Let $m:A\\otimes A\\otimes A\\to A$ be the multiplication and tensor each of $\\theta_{01},\\theta_{12},\\theta_{02}$ (maps of $A\\otimes A\\otimes A$-modules) with $A$ over $A\\otimes A\\otimes A$ via $m$; the three modules $B\\otimes A\\otimes A$, $A\\otimes B\\otimes A$, $A\\otimes A\\otimes B$ become $B$ (e.g. $b\\otimes a\\otimes a'\\mapsto aa'b$). Tracing $b\\mapsto b\\otimes1\\otimes1$ (resp. $1\\otimes b\\otimes1$) through the definitions, each of the three becomes the same map $\\varepsilon:B\\to B$, $\\varepsilon(b)=\\mu(\\delta(b))$ with $\\mu(a\\otimes b)=ab$; and each is bijective, being the base change of an isomorphism. Hence $\\varepsilon=\\varepsilon\\circ\\varepsilon$ with $\\varepsilon$ bijective, so $\\varepsilon=\\mathrm{id}_B$, i.e. $\\mu(\\delta(b))=b$ for all $b$.",
-   "uses": [
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 0245, proof (the cocycle diagram, lines 9180-9188); Definition Tag 023V and the paragraph after it (line 8136: 'In fact, Delta^* phi is equal to the identity. This is a good exercise'), written out here"
-   }
-  },
-  {
-   "text": "*Step 6 (descending the algebra).* By Steps 3 and 5, $R\\to A$ is flat and $\\delta:B\\to A\\otimes B$ is a homomorphism of $A$-algebras satisfying the counit and coassociativity conditions of [lem-galois-flat-algebra-descent]. That node gives the $R$-subalgebra $C=\\{b\\in B:\\delta(b)=1\\otimes b\\}=\\{b\\in B:\\theta(b\\otimes1)=1\\otimes b\\}$ of $B$ and the isomorphism of $A$-algebras $\\kappa:A\\otimes C\\to B$, $a\\otimes c\\mapsto ac$. (The source: 'apply Proposition 023N to obtain an $R$-module $C=\\mathrm{Ker}(B\\to A\\otimes_RB)$ and an isomorphism $A\\otimes_RC\\cong B$ ... the product $cc'$ lies in $C$ since $\\varphi$ is an algebra homomorphism'.)",
-   "uses": [
-    "lem-galois-flat-algebra-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 0245, proof, lines 9192-9200 (Proposition Tag 023N, proposition-descent-module)"
-   }
-  },
-  {
-   "text": "*Step 7 (the descended scheme and the compatibility).* Put $U=\\operatorname{Spec}C$ with $U\\to S$ the spectrum of $R\\to C$. By [lem-weil-pbc-fibre-product-affine-spectra], $U\\times_SX=\\operatorname{Spec}(A\\otimes C)$ (up to the symmetry isomorphism) over $X=\\operatorname{Spec}A$, and $U\\times_SX_2=\\operatorname{Spec}(A\\otimes A\\otimes C)$, through which $\\mathrm{can}_U$ factors. Let $\\psi=\\operatorname{Spec}(\\kappa^{-1}):U\\times_SX\\to V$; it is an isomorphism of schemes over $X$ since $\\kappa$ is an isomorphism of $A$-algebras [def-weil-affine-spectrum]. Identify $\\mathrm{pr}_0^*(U\\times_SX)$ and $\\mathrm{pr}_1^*(U\\times_SX)$ with $U\\times_SX_2$ by the canonical isomorphisms, so that $\\mathrm{can}_U$ becomes the identity; then $\\mathrm{pr}_0^*\\psi$ and $\\mathrm{pr}_1^*\\psi$ are the spectra of the $A\\otimes A$-algebra maps $\\beta_0:B\\otimes A\\to A\\otimes A\\otimes C$, $b\\otimes a'\\mapsto(1\\otimes a'\\otimes1)\\cdot\\kappa^{-1}(b)_{02}$, and $\\beta_1:A\\otimes B\\to A\\otimes A\\otimes C$, $a\\otimes b\\mapsto(a\\otimes1\\otimes1)\\cdot\\kappa^{-1}(b)_{12}$ (with $(\\,)_{02}$, $(\\,)_{12}$ placing $A\\otimes C$ in the slots $0,2$, resp. $1,2$). The required identity $\\varphi\\circ\\mathrm{pr}_0^*\\psi=\\mathrm{pr}_1^*\\psi\\circ\\mathrm{can}_U$ is, by contravariance [def-weil-affine-spectrum], $\\beta_0\\circ\\varphi^\\sharp=\\beta_1$, i.e. $\\beta_0=\\beta_1\\circ\\theta$. Both sides are $A\\otimes A$-algebra maps $B\\otimes A\\to A\\otimes A\\otimes C$, and $B\\otimes A$ is generated as an $A\\otimes A$-module by the elements $c\\otimes1$, $c\\in C$ (as $\\kappa$ is surjective, every $b$ is $\\sum_ia_ic_i$, and $b\\otimes a'=\\sum_i(a_i\\otimes a')(c_i\\otimes1)$). On these, $\\beta_0(c\\otimes1)=1\\otimes1\\otimes c$ because $\\kappa^{-1}(c)=1\\otimes c$, and $\\beta_1(\\theta(c\\otimes1))=\\beta_1(\\delta(c))=\\beta_1(1\\otimes c)=1\\otimes1\\otimes c$ because $c\\in C$. Hence $\\beta_0=\\beta_1\\circ\\theta$, and $(V,\\varphi)$ is effective. This verifies hypothesis (3) of [lem-galois-fpqc-descending-types-morphisms] for $\\mathcal P$ = affine. (Source: 'Hence C is an R-algebra whose base change to A is isomorphic to B compatibly with descent data. Applying Spec we obtain a scheme U over S such that $(V,\\varphi)\\cong(X\\times_SU,can)$'.)",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-affine-spectrum",
-    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-    "lem-galois-fpqc-descending-types-morphisms"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 0245, proof, last two sentences (lines 9200-9204)"
-   }
-  },
-  {
-   "text": "*Step 8 (conclusion).* By Steps 1, 2 and 3-7, the property $\\mathcal P$ = 'affine' [pqf-def-affine-morphism] satisfies hypotheses (1), (2), (3) of [lem-galois-fpqc-descending-types-morphisms]. Applying it to the fpqc covering $\\{f:X\\to S\\}$ and to the descent datum $(V,\\varphi)$ with $V\\to X$ affine gives $U\\to S$ and $\\psi:U\\times_SX\\to V$ over $X$ with $\\varphi\\circ\\mathrm{pr}_0^*\\psi=\\mathrm{pr}_1^*\\psi\\circ\\mathrm{can}_U$, which is the statement. (Source: 'Hence Lemma 02W3 applies and it suffices to prove the statement of the lemma in case the fpqc-covering is given by a single {X -> S} flat surjective morphism of affines.')",
-   "uses": [
-    "lem-galois-fpqc-descending-types-morphisms",
+    "lem-weil-pbc-affine-morphism-permanence",
     "pqf-def-affine-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Lemma Tag 0245, proof, second sentence (Lemma Tag 02W3, lemma-descending-types-morphisms)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-galois-fpqc-descending-types-morphisms] to the affine morphism property. Base change stability is Step 1, finite coproduct stability is Step 2, and the affine flat surjective case is [lem-galois-affine-flat-descent-effective]. The resulting conclusion is effectivity for the given singleton fpqc cover.",
+   "uses": [
+    "lem-galois-fpqc-descending-types-morphisms",
+    "lem-galois-affine-flat-descent-effective"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "pqf-def-affine-morphism",
-  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-galois-affine-flat-descent-effective",
   "lem-galois-fpqc-descending-types-morphisms",
+  "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-scheme-coproduct-family",
-  "def-pc-scheme",
-  "lem-weil-pbc-spec-clopen-idempotent",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "def-pd-descent-datum",
-  "def-pc-fibre-product",
-  "def-weil-affine-spectrum",
-  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "def-weil-pbc-module-tensor-product",
-  "lem-galois-flat-algebra-descent"
+  "pqf-def-affine-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Lemma Tag 0245 (lemma-affine, line 9148), proof lines 9161-9205; Step 5's counit is the exercise after Definition Tag 023V (line 8136), written out"
+  "place": "Lemma Tag 0245, proof: reduction by 02W3; finite coproduct hypothesis proved using Mathlib open-cover locality and the coprojection pullback squares."
  },
  "mathlib_searches": [
   {
@@ -225,5 +137,15 @@
   "group": "F1",
   "result": "pass",
   "note": "X Y Scheme.{u}, p = f; singleton p in fpqcPrecoverage (propQC @Flat: flat + affine opens covered by finitely many qc opens) = node fpqc covering; V : Over X with IsAffineHom V.hom = affine V->X; Over.DescentDatum (recorded def-pd-descent-datum, transport form, unit follows from cocycle) = phi + cocycle; IsEffective (V0 over Y, IsPullback q, transport-invariant q) = U, psi, compatibility with can_U; docstring = node's 8 steps"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-8be3f",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261012T060738-L-2907709",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged main signature and new affine-case statement to their nodes and [Stacks 0245](https://stacks.math.columbia.edu/tag/0245); both modules compile cleanly, axiom checks match the named open dependencies, and proof/pruning records agree with Lean."
  }
 }
