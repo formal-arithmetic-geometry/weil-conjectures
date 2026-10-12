@@ -2,6 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeQuotientApproximation
 
 /-! Finite principal equations for a degree sublevel locus on an affine open. -/
 
@@ -12,6 +13,16 @@ universe u
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Hom
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem range_affine_quotient
+    {S : Scheme.{u}} {W : S.Opens} (hW : IsAffineOpen W) (I : Ideal Γ(S, W)) :
+    Set.range (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)) ≫ hW.fromSpec) =
+      S.zeroLocus (U := W) I ∩ W := by
+  rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp]
+  change hW.fromSpec '' Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk I)) = _
+  rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker]
+  exact hW.fromSpec_image_zeroLocus I
 
 /-- The degree sublevel locus restricted to an affine open is the zero locus of a finitely
     generated ideal.
@@ -36,7 +47,40 @@ theorem exists_finitely_generated_zeroLocus_ideal_degree_sublevel_inter_affine
     ∃ I : Ideal Γ(S, W), I.FG ∧ ∀ s : S, s ∈ W →
       (s ∈ {s : S | (f.fiberToSpecResidueField s).finrankΓ ≤ r} ↔
         s ∈ S.zeroLocus (U := W) I) := by
-  sorry
+  classical
+  let Z : Set S := {s : S | (f.fiberToSpecResidueField s).finrankΓ ≤ r}
+  let I : Ideal Γ(S, W) := PrimeSpectrum.vanishingIdeal (hW.fromSpec ⁻¹' Z)
+  have hZI : PrimeSpectrum.zeroLocus (I : Set Γ(S, W)) = hW.fromSpec ⁻¹' Z := by
+    rw [PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
+    exact (hclosed.preimage hW.fromSpec.continuous).closure_eq
+  have hIZ : S.zeroLocus (U := W) I ∩ W = Z ∩ W := by
+    rw [← hW.fromSpec_image_zeroLocus, hZI, Set.image_preimage_eq_inter_range,
+      hW.range_fromSpec]
+  let g := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)) ≫ hW.fromSpec
+  have hg : Set.range g = Z ∩ W := (range_affine_quotient hW I).trans hIZ
+  have hfree : (pullback.snd f g).IsFiniteLocallyFreeOfDegree r := by
+    apply (hdegree _ g).2
+    intro s hs
+    obtain ⟨hz, hw⟩ := hg ▸ hs
+    exact Nat.le_antisymm hz (hWge s hw)
+  have : QuasiCompact f := hf.2.1
+  obtain ⟨J, hJI, hJ, hfreeJ⟩ :=
+    exists_fg_subideal_isFiniteLocallyFreeOfDegree f Γ(S, W) hW.fromSpec I r hfree
+  refine ⟨J, hJ, ?_⟩
+  intro s hs
+  constructor
+  · intro hz
+    have hi : s ∈ S.zeroLocus (U := W) I := by
+      have hm : s ∈ Z ∩ W := ⟨hz, hs⟩
+      exact (hIZ.symm ▸ hm).1
+    exact S.zeroLocus_mono hJI hi
+  · intro hj
+    have hrange : s ∈ Set.range
+        (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)) ≫ hW.fromSpec) := by
+      rw [range_affine_quotient hW J]
+      exact ⟨hj, hs⟩
+    have heq := (hdegree _ _).1 hfreeJ hrange
+    exact Nat.le_of_eq heq
 
 /-- A finitely generated ideal on an affine open has finitely many principal equations.
 
