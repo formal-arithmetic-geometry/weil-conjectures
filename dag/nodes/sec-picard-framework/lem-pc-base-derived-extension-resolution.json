@@ -1,0 +1,150 @@
+{
+ "id": "lem-pc-base-derived-extension-resolution",
+ "kind": "statement",
+ "title": "Triangulated derived scalar extension computed on resolutions",
+ "statement": "Let R and B be commutative rings with B an R-algebra [def-weil-module-base-change], module carriers in a universe containing both rings, and chosen derived categories [def-weil-abstract-derived-category] with a common morphism universe. Assume ordinary extension is additive. There exist a functor L:D(R) to D(B) and a counit Qh_R followed by L to ordinary homotopy scalar extension followed by Qh_B, exhibiting L as the total left derived functor. L has a shift structure for which it is triangulated. For every complex E there are a complex P and a quasi-isomorphism s:P to E such that the counit at P is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-module-base-change"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, lemma-derived-base-change; Triangulated derived scalar extension computed on resolutions"
+ },
+ "proof": [
+  {
+   "text": "Resolve R-complexes by K-flat complexes [lem-pc-kflat-resolution], or the ordinary module functorial flat resolution construction. With unequal ring universes first lift the rings to the common module carrier universe and use the restriction equivalences along the lift ring isomorphisms. These equivalences preserve complexes, homotopies and quasi-isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize fixed-second-factor tensor [lem-pc-derived-tensor-second-factor-functor] to B in degree zero and identify its ordinary total complex naturally with termwise extension of scalars. Thus quasi-isomorphisms between K-flat models are inverted after derived localization. Apply [lem-pur-left-derived-from-kflat-class] to obtain L, the universal counit, a shift structure and triangulatedness. Its counit is invertible on K-flat models. Transport this pair through the lift-ring equivalences when necessary. For each E retain a resolution P to E; the last clause is exactly counit invertibility at P.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06Y6, proof of lemma-derived-base-change and explicit scalar transport"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension of scalars total left derived functor computed by K-flat resolutions",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "total left derived functor extension of scalars additive linear",
+   "results": "8 hits, including DerivedCategory linear localization and exact mapDerivedCategory; none constructs unbounded non-flat scalar extension",
+   "date": "2026-10-12",
+   "verdict": "No exact match; exactFunctor requires exactness of ordinary extension."
+  },
+  {
+   "tool": "grep",
+   "query": "homologyMap_smul|HasFunctorialFlatResolution|totalLeftDerived",
+   "results": "ShortComplex.homologyMap_smul and Functor.totalLeftDerived found; existence hypotheses still need resolving-class construction. Local blueprint search derived base change found only lem-pc-rf-base-change-flat-module, a different geometric statement.",
+   "date": "2026-10-12",
+   "verdict": "Use homologyMap_smul for scalar proof; no existing full resolution-counit statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a natural transformation invertible on resolutions transports scalar multiplication to a derived functor",
+   "results": "Second reader: eight hits, including linear exact mapDerivedCategory, linear Qh/Q and abelian leftDerived_map_eq; no non-flat unbounded construction or resolution-counit scalar transport statement.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; exact-functor infrastructure requires exact ordinary extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsLeftDerivedFunctor; ShortComplex.homologyMap_smul",
+   "results": "Second reader: index reported unknown identifier for both queries. Local Mathlib search confirms homologyMap_smul exists and is used.",
+   "date": "2026-10-13",
+   "verdict": "Loogle index cannot resolve these names; checked local sources instead."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BaseDerivedExtensionLinear",
+  "date": "2026-10-12",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Tag 06Y6 derived base change: Triangulated derived scalar extension computed on resolutions",
+   "via": [
+    "lem-pc-base-derived-extension-linear",
+    "lem-pc-base-derived-tensor-cohomology-action",
+    "def-pc-base-derived-tensor-cohomology-model",
+    "lem-pc-tor-independent-projective-complex-tensor",
+    "lem-pc-tor-independent-perfect-pullback-comparison",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-affine-morphism-hom-out-of-perfect",
+    "lem-sc-proper-flat-right-adjoint-affine-basechange",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "lem-sc-smooth-proper-diagonal-basechange-upper-shriek",
+    "lem-sc-smooth-proper-diagonal-pushforward-structure",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.BaseDerivedExtensionResolution",
+  "file": "lean/Sheaf/Algebra/Homology/BaseDerivedExtensionResolution.lean",
+  "declaration": "ModuleCat.exists_baseDerivedExtension_resolution",
+  "statement": "theorem exists_baseDerivedExtension_resolution [(extendScalars.{_, _, max uR uB v} (algebraMap R B)).Additive] : ∃ (L : DerivedCategory (ModuleCat.{max uR uB v} R) ⥤ DerivedCategory (ModuleCat.{max uR uB v} B)) (ε : DerivedCategory.Qh ⋙ L ⟶ (extendScalars.{_, _, max uR uB v} (algebraMap R B)).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh), L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{max uR uB v} R) (.up ℤ)) ∧ (∃ c : L.CommShift ℤ, letI := c; L.IsTriangulated) ∧ ∀ E : CochainComplex (ModuleCat.{max uR uB v} R) ℤ, ∃ (P : CochainComplex (ModuleCat.{max uR uB v} R) ℤ) (s : P ⟶ E), QuasiIso s ∧ IsIso (ε.app ((HomotopyCategory.quotient _ _).obj P))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T160826-L-2610575",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261012T160826-L-2610575",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

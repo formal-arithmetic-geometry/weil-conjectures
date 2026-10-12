@@ -8,9 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
-import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.Algebra.Homology.BaseDerivedExtensionResolution
+import Sheaf.Algebra.Homology.BaseDerivedExtensionScalar
 
 /-!
 # Linear total derived extension of scalars
@@ -69,6 +68,11 @@ theorem exists_baseDerivedExtension_linear
         algebraMap R B r • 𝟙
           ((DerivedCategory.homologyFunctor (ModuleCat.{max uR uB v} B) i).obj
             (derived.obj (DerivedCategory.Qh.obj
-              ((HomotopyCategory.quotient _ _).obj E)))) := by sorry
+              ((HomotopyCategory.quotient _ _).obj E)))) := by
+  obtain ⟨L, ε, hL, ⟨c, htri⟩, hres⟩ := exists_baseDerivedExtension_resolution R B
+  let := c
+  let := htri
+  refine ⟨L, ε, hL, inferInstance, ?_⟩
+  exact baseDerivedExtension_scalar R B L ε hres
 
 end ModuleCat
