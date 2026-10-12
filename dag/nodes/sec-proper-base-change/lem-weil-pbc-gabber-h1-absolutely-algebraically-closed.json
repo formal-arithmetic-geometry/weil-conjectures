@@ -30,57 +30,28 @@
  ],
  "proof": [
   {
-   "text": "Let $\\xi\\in H^1(Z_{\\Et},\\underline M)$. By [thm-galois-torsor-h1] (Cohomology on Sites Lemma 03AJ), $\\xi$ corresponds canonically to an isomorphism class of $\\underline M$-torsors on $Z_{\\Et}$. To prove that $\\xi=0$, it is enough to show that the corresponding torsor is trivial.",
+   "text": "Apply the torsor-to-cohomology bridge to reduce vanishing to triviality of every finite constant torsor.",
    "uses": [
-    "thm-galois-torsor-h1",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-finite-torsors"
+    "lem-weil-pbc-gabber-h1-torsor-cohomology-bridge"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZB, proof, first sentence; Cohomology on Sites Lemma 03AJ identifies H^1 with torsors"
-   }
+   "elementary": false
   },
   {
-   "text": "An $\\underline M$-torsor is finite locally constant by its definition [def-weil-pbc-finite-torsors]. The equivalence between finite locally constant sheaves and finite etale schemes [thm-galois-lc-etale] therefore represents it by a finite etale surjective morphism $V\\to Z$ equipped with the simply transitive $M$-action.",
+   "text": "Finite locally constant torsors are represented by finite etale surjections; the Gabber section theorem supplies a section and hence triviality.",
    "uses": [
-    "def-weil-pbc-finite-torsors",
-    "thm-galois-lc-etale"
+    "lem-weil-pbc-gabber-h1-torsors-trivial"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZB, proof, first sentence; Lemma 03RV represents finite locally constant torsors by finite etale surjective schemes"
-   }
-  },
-  {
-   "text": "The finite etale surjection $V\\to Z$ from the preceding step represents the corresponding $\\underline M$-torsor as an etale sheaf. Apply [lem-weil-pbc-gabber-finite-etale-section] (Stacks 09ZA) to the closed subscheme $Z\\subseteq X$; its section $s:Z\\to V$ is therefore a global sheaf section of that torsor. Translation by this global section identifies the torsor with the constant torsor $\\underline M$, so its class in $\\operatorname{Tor}^1(Z,M)$ is the base point and $\\xi=0$. Since every $\\xi$ is zero, $H^1(Z_{\\Et},\\underline M)=0$.",
-   "uses": [
-    "lem-weil-pbc-gabber-finite-etale-section",
-    "thm-galois-lc-etale",
-    "thm-galois-torsor-h1"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZB, proof, final sentence; Lemma 09ZA supplies a section, which gives a global section of the torsor and trivializes it"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-galois-torsor-h1",
-  "def-weil-pbc-etale-cohomology",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-finite-torsors",
-  "thm-galois-lc-etale",
-  "lem-weil-pbc-gabber-finite-etale-section"
+  "lem-weil-pbc-gabber-h1-torsor-cohomology-bridge",
+  "lem-weil-pbc-gabber-h1-torsors-trivial"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "K1 stage 3",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09ZB, proof; the torsor-to-finite-etale dictionary is written via Lemmas 03AJ and 03RV"
+  "place": "Lemma 09ZB proof"
  },
  "mathlib_searches": [
   {
@@ -160,5 +131,15 @@
   "reviewer": "R-gab",
   "group": "J1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T053937-L-2637656",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

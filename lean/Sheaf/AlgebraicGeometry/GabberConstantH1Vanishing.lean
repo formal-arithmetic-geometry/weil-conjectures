@@ -10,9 +10,8 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection
-import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
-import WeilConjectures.CategoryTheory.Sites.Torsor
+import Sheaf.AlgebraicGeometry.GabberH1TorsorCohomologyBridge
+import Sheaf.AlgebraicGeometry.GabberFiniteConstantTorsorsTrivial
 
 /-!
 # Gabber's vanishing of first constant étale cohomology
@@ -52,6 +51,7 @@ theorem isZero_constant_cohomology_one_of_isIntegrallyClosed
       ((DerivedCategory.singleFunctor (Sheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj
         ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           (AddCommGrpCat.of M)))) := by
-  sorry
+  apply isZero_constant_cohomology_one_of_torsors_trivial R Z i M
+  exact torsors_trivial_of_finite_etale_sections R Z i M
 
 end AlgebraicGeometry.Etale
