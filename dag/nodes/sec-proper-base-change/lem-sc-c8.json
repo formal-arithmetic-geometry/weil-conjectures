@@ -19,28 +19,40 @@
  ],
  "proof": [
   {
-   "text": "By [lem-sc-compactification] and [lem-sc-affine-open-proper],\neither $C$ is proper, or $C$ is affine. If $C$ is proper and\n$U=C$, the map is the identity. If $C$ is proper and\n$U\\subsetneq C$, then $U$ is affine by\n[lem-sc-affine-open-proper], hence\n$H^2(U,\\mathbf F_r)=0$ by [lem-sc-c2] (with $n=r$);\nthe map from an abelian group to $0$ is surjective. If $C$ is\naffine, then $H^2(C,\\mathbf F_r)=0$ by [lem-sc-c2] and the map is\ntrivially surjective.",
+   "text": "Split according to whether the open immersion a:W→C is surjective. If it is, it is an isomorphism and therefore a universal homeomorphism. Topological invariance of etale cohomology gives bijectivity, hence surjectivity, for the underlying abelian constant coefficient sheaf.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Suppose a is not surjective. Smoothness makes C regular, and connectedness makes it irreducible. If C has dimension one, compactify C into a smooth proper connected curve Z using lem-sc-compactification. The image V of W in Z is not all of Z: otherwise injectivity of C→Z would make W→C surjective. By lem-sc-affine-open-proper V is affine; the isomorphism W≅V makes W affine. If C has dimension zero, irreducibility and the T0 property imply that C is a singleton (use the proved subsingleton_of_topologicalKrullDim_le_zero lemma); the open immersion embeds W into this singleton, so W is a subsingleton scheme and hence affine.",
    "uses": [
     "lem-sc-compactification",
-    "lem-sc-affine-open-proper",
-    "lem-sc-c2"
+    "lem-sc-affine-open-proper"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c8.md",
-    "place": "## Proof"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The open W is again a curve: it is quasi-compact because C is Noetherian, and its dimension is at most that of C. The constant coefficient sheaf Λ/rΛ is r-torsion, as is its inverse image on W. Apply lem-sc-affine-curve-h2-vanishing to this inverse image sheaf on the affine curve W. Its H² is a subsingleton, so every target class equals the image of zero. This constructs the required surjection without needing to identify the inverse image constant sheaf with a separately chosen constant sheaf on W.",
+   "uses": [
+    "lem-sc-affine-curve-h2-vanishing"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "prop-weil-pbc-universal-homeomorphism-topos",
   "lem-sc-compactification",
   "lem-sc-affine-open-proper",
-  "lem-sc-c2"
+  "lem-sc-affine-curve-h2-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lem-sc-c8.md",
-  "place": "## Proof"
+  "place": "Proof, proper-open affine argument; implemented uniformly using a compactification, with dimension-zero edge case",
+  "group": "C1",
+  "date": "2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -144,30 +156,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-57c3b",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261012T054002-L-2649820",
+  "landing": "20261012T085218-L-5119",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.subsingleton_sheafH_constantModSheaf_of_one_lt_of_charP",
-   "AlgebraicGeometry.IsCurve.surjective_cohomologyMap_constantModSheaf_two"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_charP",
-   "AlgebraicGeometry.IsCurve.assertions_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.bijective_cohomologyMap_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_isProper",
-   "AlgebraicGeometry.IsCurve.finite_sheafH_constantModSheaf_of_ne_zero",
-   "AlgebraicGeometry.IsCurve.surjective_cohomologyMap_constantModSheaf_two"
-  ]
+  "note": "independent Codex review: Matched the C₈ proof with lem-sc-c8 and its dependencies; signatures and targets are unchanged, node edits are permitted, all 100 downstream users are recorded, compilation is clean, and axioms match unfinished upstream dependencies."
  }
 }

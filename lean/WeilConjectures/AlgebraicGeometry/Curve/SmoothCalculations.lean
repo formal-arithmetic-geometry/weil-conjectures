@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Sheaf.AlgebraicGeometry.ArtinSchreier
 import Sheaf.AlgebraicGeometry.ArtinSchreierSequence
@@ -28,7 +28,6 @@ import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
 
 /-!
 # The curve assertions for constant coefficients on smooth curves
@@ -237,7 +236,65 @@ theorem surjective_cohomologyMap_constantModSheaf_two [IsCurve f] [Smooth f] [Co
     Function.Surjective (Etale.cohomologyMap a
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
         (Etale.constantModSheaf Λ C r)) 2) :=
-  sorry
+  by
+    classical
+    let F := (sheafCompose _
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
+        (Etale.constantModSheaf Λ C r)
+    by_cases ha : Function.Surjective a
+    · have : Surjective a := ⟨ha⟩
+      have : IsIso a := (isIso_iff_isOpenImmersion_and_surjective a).mpr
+        ⟨inferInstance, inferInstance⟩
+      exact (Etale.cohomologyMap_bijective a F 2).surjective
+    · have hW : IsAffine W := by
+        have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+        have : IsRegular C := IsRegular.of_smooth f
+        have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+        by_cases hdim : topologicalKrullDim C = 1
+        · have : IsConnectedCurve f :=
+            { krullDim_le_one := IsCurve.krullDim_le_one (f := f)
+              connectedSpace := inferInstance
+              krullDim_eq_one := hdim }
+          obtain ⟨c, hc, hs, _hfin, _hcl⟩ :=
+            IsConnectedCurve.exists_smooth_properCompactification f
+          have := hc
+          have := hs
+          have := c.isProper
+          have := c.isOpenImmersion
+          let V := (a ≫ c.i).opensRange
+          have hV : V ≠ ⊤ := by
+            intro htop
+            apply ha
+            intro x
+            have hx : c.i x ∈ V := by rw [htop]; trivial
+            obtain ⟨w, hw⟩ := hx
+            exact ⟨w, c.i.isOpenEmbedding.injective hw⟩
+          have : IsAffine V := IsConnectedCurve.isAffine_of_ne_top c.g V hV
+          let e : W ≅ (V : Scheme.{u}) :=
+            IsOpenImmersion.isoOfRangeEq (a ≫ c.i) V.ι
+              (by rw [Scheme.Opens.range_ι]; rfl)
+          exact IsAffine.of_isIso e.hom
+        · have h0 : topologicalKrullDim C ≤ 0 := by
+            have h1 : topologicalKrullDim C < ((0 : ℕ) : WithBot ℕ∞) + 1 :=
+              lt_of_le_of_ne (IsCurve.krullDim_le_one (f := f)) hdim
+            exact ENat.WithBot.lt_add_one_iff.1 h1
+          have : Subsingleton C := subsingleton_of_topologicalKrullDim_le_zero h0
+          have : Subsingleton W := ⟨fun x y ↦ a.isOpenEmbedding.injective
+            (Subsingleton.elim _ _)⟩
+          infer_instance
+      have : IsAffine W := hW
+      have : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
+      have : TopologicalSpace.NoetherianSpace W :=
+        a.isOpenEmbedding.isInducing.noetherianSpace
+      have : QuasiCompact a := ⟨fun U _ _ ↦
+        TopologicalSpace.NoetherianSpace.isCompact _⟩
+      have : IsCurve (a ≫ f) :=
+        { krullDim_le_one := a.isOpenEmbedding.isInducing.topologicalKrullDim_le.trans
+            (IsCurve.krullDim_le_one (f := f)) }
+      have hF := Etale.isTorsion_constantModSheaf Λ C (Fact.out : r.Prime).pos
+      have : Subsingleton (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} a).obj F) 2) :=
+        subsingleton_sheafH_two_of_isAffine (a ≫ f) _ (Etale.isTorsion_upperStar a hF)
+      exact fun y ↦ ⟨0, Subsingleton.elim _ _⟩
 
 /-! ### The smooth-curve calculations -/
 
