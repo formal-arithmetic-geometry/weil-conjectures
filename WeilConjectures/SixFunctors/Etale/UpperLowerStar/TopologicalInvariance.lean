@@ -178,7 +178,8 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The comparison map on étale cohomology induced by a morphism of schemes `f : X ⟶ Y`: an
 `Ext`-class out of the constant sheaf `ℤ` on the small étale site of `Y` is pushed forward
 along the exact functor `f^*` and then precomposed with the comparison `ℤ_X ≅ f^* ℤ_Y` of
-constant sheaves of `AlgebraicGeometry.Scheme.upperStarConstantSheafIso`. -/
+constant sheaves of `AlgebraicGeometry.Scheme.upperStarConstantSheafIso`.
+(blueprint: `def-weil-pbc-cohomology-pullback`) -/
 noncomputable def cohomologyMap :
     Sheaf.H F n →+ Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj F) n :=
   Sheaf.H.mapFunctor _
@@ -203,7 +204,7 @@ variable {F} in
    H^n(Y_ét, G) ──cohomologyMap f G n──→ H^n(X_ét, f^* G)
 ```
 
-commutes. -/
+commutes. (blueprint: `lem-weil-pbc-cohomology-pullback-functorial`, naturality) -/
 lemma cohomologyMap_map {G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : F ⟶ G)
     (x : Sheaf.H F n) :
     cohomologyMap f G n (Sheaf.H.map φ n x) =

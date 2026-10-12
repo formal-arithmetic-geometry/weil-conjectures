@@ -1519,6 +1519,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 public import WeilConjectures.SixFunctors.BaseChange.Forget
 public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
+public import WeilConjectures.SixFunctors.BaseChange.OpenImmersionSquare
 public import WeilConjectures.SixFunctors.BaseChange.Pasting
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.BaseChange.Sections

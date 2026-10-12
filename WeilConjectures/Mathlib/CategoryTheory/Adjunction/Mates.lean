@@ -40,6 +40,8 @@ and it is the latter that one wants when transporting the coherence of a pseudof
   conjugating an isomorphism `ED ⋙ M ≅ M ⋙ EC` for self-equivalences `EC` and `ED`.
 - `CategoryTheory.mateEquiv_eq_of_unit`, `CategoryTheory.conjugateEquiv_eq_of_unit`: a mate, resp. a
   conjugate, is determined by its compatibility with the units.
+- `CategoryTheory.unit_comp_map_eq_iff_eq_conjugateIsoEquiv_symm_hom`: the conjugate isomorphism
+  `L₁ ≅ L₂` of `R₂ ≅ R₁` is the unique natural transformation satisfying the unit equation.
 -/
 
 @[expose] public section
@@ -406,6 +408,19 @@ lemma conjugateEquiv_eq_of_unit (α : L₂ ⟶ L₁) (β : R₁ ⟶ R₂)
   ext a
   apply (adj₂.homEquiv _ _).injective
   rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← h, unit_conjugateEquiv_symm adj₁ adj₂]
+
+/-- Given adjunctions `L₁ ⊣ R₁`, `L₂ ⊣ R₂` and a natural isomorphism `δ : R₂ ≅ R₁`, a natural
+transformation `c : L₁ ⟶ L₂` satisfies the unit equation `η₁ ≫ R₁ c = η₂ ≫ δ_{L₂}` if and only
+if it is the conjugate isomorphism of `δ`. In particular there is a unique such `c`, and it is
+an isomorphism. (blueprint: `lem-weil-pbc-conjugate-iso-unit-equation`) -/
+lemma unit_comp_map_eq_iff_eq_conjugateIsoEquiv_symm_hom (δ : R₂ ≅ R₁) (c : L₁ ⟶ L₂) :
+    (∀ a, adj₁.unit.app a ≫ R₁.map (c.app a) = adj₂.unit.app a ≫ δ.hom.app (L₂.obj a)) ↔
+      c = ((conjugateIsoEquiv adj₂ adj₁).symm δ).hom := by
+  refine ⟨fun h ↦ ?_, ?_⟩
+  · exact (Equiv.eq_symm_apply _).2
+      (conjugateEquiv_eq_of_unit adj₂ adj₁ c δ.hom fun a ↦ (h a).symm)
+  · rintro rfl a
+    exact (unit_conjugateEquiv_symm adj₂ adj₁ δ.hom a).symm
 
 end ConjugateUnit
 
