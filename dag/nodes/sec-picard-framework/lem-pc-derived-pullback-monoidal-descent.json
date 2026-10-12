@@ -18,60 +18,36 @@
  },
  "proof": [
   {
-   "text": "Work first on K-flat representatives. The supplied F is the recorded termwise pullback, so it preserves K-flatness. Tensor products of K-flat complexes are K-flat. The derived counit of any left-derived presentation agrees, up to the unique isomorphism of left-derived functors, with the K-flat computation of the recorded pullback, so its components are invertible on K-flat objects. Localization tensorators are invertible on K-flat pairs in the recorded derived monoidal construction.",
+   "text": "Obtain the natural isomorphism of derived tensor bifunctors with the prescribed K-flat computation. Its naturality gives the left and right naturality fields by taking components of the naturality identities.",
    "uses": [
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure",
-    "lem-pc-kflat-pullback-preservation",
-    "lem-pc-kflat-tensor-product"
+    "lem-pc-derived-pullback-tensor-comparison-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
-   }
+   "elementary": false
   },
   {
-   "text": "For a K-flat pair set A=L(mu_Q(P,N)), B=epsilon_{P tensor N};Q(phi), and C=(epsilon_P tensor epsilon_N);mu_Q(FP,FN). Define the tensorator by C;B^{-1};A^{-1}; it is invertible and satisfies mu;A;B=C. Replace arbitrary arguments by K-flat resolutions. Naturality of epsilon and phi makes this assignment commute with comparison quasi-isomorphisms, and localization of the resolving class therefore gives a well-defined natural tensorator on all derived objects.",
+   "text": "Apply the associativity statement to this chosen comparison. Independently obtain its unit isomorphism and the two unit laws. These statements are instantiated with the same supplied F, counit, phi, summand condition and the comparison equation.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-derived-pullback",
-    "def-pc-scheme-derived-tensor-structure"
+    "lem-pc-derived-pullback-tensor-associativity",
+    "lem-pc-derived-pullback-tensor-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
-   }
+   "elementary": false
   },
   {
-   "text": "Resolve three arguments by K-flat complexes. Precompose the two associativity composites by every triple summand inclusion; the given summand formula for phi reduces equality to the associativity law of m_F, so it holds before and after localization. The structure sheaf in degree zero is K-flat, and F sends it to the target unit by m_F. Use the inverse unit counit and that unit isomorphism to give the derived unit. On summands, the two derived unit diagrams are exactly the unit diagrams of m_F. Descend their equality and package the invertible tensorator and unit as CoreMonoidal. The equation remains the defining equation from the K-flat construction.",
-   "uses": [
-    "def-pc-scheme-derived-tensor-structure",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
-   }
+   "text": "Construct CoreMonoidal with the unit isomorphism, components of the bifunctor isomorphism, its two naturality identities, associativity and the two unit laws. Its tensorator is definitionally that bifunctor component, so the original K-flat computation is exactly the equation delivered with the comparison.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-derived-pullback",
-  "def-pc-kflat-complex",
-  "def-pc-scheme-derived-tensor-structure",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-pullback-preservation",
-  "lem-pc-kflat-resolution",
-  "lem-pc-kflat-tensor-product"
+  "lem-pc-derived-pullback-tensor-comparison-descent",
+  "lem-pc-derived-pullback-tensor-associativity",
+  "lem-pc-derived-pullback-tensor-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Original model docstring: left-derived universal property descends comparisons and laws; unit complex K-flat; Stacks Cohomology 079U and Section 20.27",
-  "note": "The cited source is not installed on this machine; the complete coherence argument is written here and in the declaration docstring."
+  "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; original descent proof steps 1--3",
+  "note": "Y2 reduction: extend the natural tensor comparison, prove associativity, and prove the independent unit laws in three named statements. The original theorem assembles their results into CoreMonoidal with a complete Lean proof; its statement and all original public instances remain unchanged."
  },
  "mathlib_searches": [
   {
@@ -156,11 +132,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-43026",
-  "group": "C2",
+  "reviewer": "X-9c512",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T163612-L-2784419",
+  "landing": "20261012T184400-L-4025866",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered statements, predicate, proofs and nodes against the originals and cited sources; all three modules and both direct importers compile cleanly; original predicate equality verified by rfl; axiom probes contain only permitted axioms and expected sorryAx."
+  "note": "independent Codex review: Delivered files matched the packet and repository declarations; all modules and the direct importer compiled cleanly."
  }
 }

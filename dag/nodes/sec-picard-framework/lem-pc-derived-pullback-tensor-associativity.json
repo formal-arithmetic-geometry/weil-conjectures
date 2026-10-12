@@ -1,0 +1,139 @@
+{
+ "id": "lem-pc-derived-pullback-tensor-associativity",
+ "kind": "statement",
+ "title": "Associativity of the descended derived pullback tensor comparison",
+ "statement": "Let $g:T\\to X$ be a morphism of schemes [def-pc-scheme], with the recorded derived categories [def-pc-derived-category], derived tensor structures [def-pc-scheme-derived-tensor-structure], and derived pullback $L=Lg^*$ [def-pc-derived-pullback]. Let $F$ be an additive functor between the categories of sheaves of modules, identified on objects and morphisms with the tensor-formula module pullback [def-pc-module-pullback]: supply equalities $h_M:F(M)=g^*M$ and require $F(a)=h_M;g^*(a);h_N^{-1}$. Let $\\epsilon:Q_hL\\to K(F)Q_h$ exhibit $L$ as a left-derived functor for quasi-isomorphisms. For every pair of complexes $P,N$, supply an isomorphism $\\varphi_{P,N}:F\\operatorname{Tot}(P\\otimes N)\\cong\\operatorname{Tot}(FP\\otimes FN)$ [def-pc-tensor-complex-sheaves]. Give $F$ a strong monoidal structure $m_F$, and require that for every $p+q=n$, $F(\\iota_{p,q});\\varphi_{P,N}^n=\\mu_{m_F}(P^p,N^q)^{-1};\\iota_{p,q}$, where $\\iota$ is the corresponding summand inclusion in the total tensor complex. Give a natural isomorphism of bifunctors $\\mu:(A,B)\\mapsto LA\\otimes LB\\cong(A,B)\\mapsto L(A\\otimes B)$. Assume for every K-flat pair $P,N$ [def-pc-kflat-complex] that $\\mu_{QP,QN};L(\\mu_Q(P,N));\\epsilon_{\\operatorname{Tot}(P\\otimes N)};Q(\\varphi_{P,N})=(\\epsilon_P\\otimes\\epsilon_N);\\mu_Q(FP,FN)$. Then for every $A,B,C\\in D(\\mathcal O_X)$, $(\\mu_{A,B}\\otimes1_{LC});\\mu_{A\\otimes B,C};L(\\alpha_{A,B,C})=\\alpha_{LA,LB,LC};(1_{LA}\\otimes\\mu_{B,C});\\mu_{A,B\\otimes C}$. This asserts associativity only, and requires no derived unit comparison.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-module-pullback",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, step 3 (associativity)"
+ },
+ "proof": [
+  {
+   "text": "Choose K-flat representatives of A,B,C. Their two bracketed tensor products remain K-flat, so the supplied computation applies to all tensorators in the associativity diagram. Compose both sides with the invertible localization tensorators and the counits computing L on K-flat inputs.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pc-kflat-tensor-product",
+    "def-pc-derived-pullback",
+    "def-pc-scheme-derived-tensor-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree n precompose by every triple summand inclusion indexed by p+q+r=n. The summand formula for phi replaces each occurrence by the inverse tensorator of m_F. The resulting diagram is precisely associativity of the supplied CoreMonoidal structure m_F. Coproduct extensionality proves equality of the maps of complexes. Applying Q and cancelling the isomorphisms proves the identity on the chosen K-flat representatives.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both composites are natural in all three variables, because mu is an isomorphism of bifunctors. Naturality transports the identity along the three resolution isomorphisms to A,B,C.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-derived-pullback",
+  "def-pc-scheme-derived-tensor-structure",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 079U, lemma-pullback-tensor-product, and section-derived-pullback; parent lem-pc-derived-pullback-monoidal-descent proof, step 3 (associativity)",
+  "note": "Refinement of the parent proof. Stacks establishes the K-flat bifunctor comparison; the detailed coherence checks with the supplied counit and summand formula are written by this worker."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Associativity coherence of a derived tensor pullback comparison",
+   "results": "service unavailable: ",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no mathematical verdict)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity of the strong monoidal tensor comparison for a left derived pullback functor",
+   "results": "8 hits: CategoryTheory.Over.tensorHom_left_fst_assoc, CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left_fst_assoc, CategoryTheory.Over.tensorHom_left_snd_assoc, CategoryTheory.Over.μ_pullback_left_snd, CategoryTheory.Over.μ_pullback_left_fst_fst', CategoryTheory.ChosenPullbacksAlong.Over.tensorHom_left_snd_assoc, CategoryTheory.Over.μ_pullback_left_fst_snd', CategoryTheory.Over.μ_pullback_left_fst_snd",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*associativity|associativity.*derived",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent",
+  "date": "2026-10-13",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Parent descent proof, step 3, associativity; refines the derived tensor comparisons used in lem-sc-finite-duality-trace.",
+   "via": [
+    "lem-pc-derived-pullback-monoidal-descent",
+    "def-pc-derived-pullback-monoidal-model",
+    "lem-pc-perfect-rhom-tensor-comparison",
+    "lem-pc-perfect-tensor-hom-duality",
+    "lem-sc-smooth-proper-tensor-perfect-case",
+    "lem-sc-smooth-proper-diagonal-tensor-formula",
+    "lem-sc-smooth-proper-relative-dualizing-general",
+    "lem-sc-smooth-proper-curve-dualizing",
+    "lem-sc-finite-duality-trace"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorAssociativity",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTensorAssociativity.lean",
+  "declaration": "AlgebraicGeometry.derivedPullback_tensor_associativity",
+  "statement": "theorem derivedPullback_tensor_associativity {T X : Scheme.{uModel}} (g : T ⟶ X)\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]\n    (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤\n      SheafOfModules.{uModel} (moduleRings T.toRingedSpace))\n    (hF : ∀ M, F.obj M = Scheme.Modules.tensorPullbackObj g M)\n    (hmap : ∀ {M N} (a : M ⟶ N),\n      F.map a = eqToHom (hF M) ≫ Scheme.Modules.tensorPullbackMap g a ≫\n        eqToHom (hF N).symm)\n    [F.Additive]\n    (mF : F.CoreMonoidal)\n    (ε : DerivedCategory.Qh ⋙ derivedPullback g ⟶\n      F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hε : (derivedPullback g).IsLeftDerivedFunctor ε\n      (HomotopyCategory.quasiIso\n        (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) (ComplexShape.up ℤ)))\n    (φ : ∀ P N : CochainComplex\n          (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,\n        (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj\n            (CochainComplex.mapBifunctor P N (curriedTensor _)) ≅\n          CochainComplex.mapBifunctor\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)\n            ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) (curriedTensor _))\n    (hφ : ∀ P N p q n (h : p + q = n),\n          F.map (HomologicalComplex.ιMapBifunctor P N (curriedTensor _)\n              (ComplexShape.up ℤ) p q n h) ≫ (φ P N).hom.f n =\n            (mF.μIso (P.X p) (N.X q)).inv ≫\n              HomologicalComplex.ιMapBifunctor\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N)\n                (curriedTensor _) (ComplexShape.up ℤ) p q n h)\n    (μ : curriedTensorPre (derivedPullback g) ≅ curriedTensorPost (derivedPullback g))\n    (hμ : ∀ P N : CochainComplex\n            (SheafOfModules.{uModel} (moduleRings X.toRingedSpace)) ℤ,\n          CochainComplex.IsKFlat (R := X.sheaf) P →\n          CochainComplex.IsKFlat (R := X.sheaf) N →\n          ((μ.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj N)).hom ≫\n              (derivedPullback g).map (Functor.LaxMonoidal.μ DerivedCategory.Q P N) ≫\n              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj\n                (CochainComplex.mapBifunctor P N (curriedTensor _))) ≫\n              DerivedCategory.Q.map (φ P N).hom =\n            (ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P) ⊗ₘ\n              ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫\n              Functor.LaxMonoidal.μ DerivedCategory.Q\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)\n                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N))\n    : ∀ A B C : schemeDerivedCategory X,\n        ((μ.app A).app B).hom ▷ (derivedPullback g).obj C ≫\n            ((μ.app (A ⊗ B)).app C).hom ≫ (derivedPullback g).map (α_ A B C).hom =\n          (α_ ((derivedPullback g).obj A) ((derivedPullback g).obj B)\n            ((derivedPullback g).obj C)).hom ≫\n            (derivedPullback g).obj A ◁ ((μ.app B).app C).hom ≫\n            ((μ.app A).app (B ⊗ C)).hom",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9c512",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184400-L-4025866",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-9c512",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T184400-L-4025866",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and repository declarations; all modules and the direct importer compiled cleanly."
+ }
+}

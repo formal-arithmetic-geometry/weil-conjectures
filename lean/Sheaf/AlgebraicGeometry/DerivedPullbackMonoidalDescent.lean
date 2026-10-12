@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
+public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorAssociativity
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit
 
 /-! # Descent of coherent tensor pullback comparisons
 
@@ -64,6 +67,15 @@ noncomputable local instance pullbackDescentQLax (S : Scheme.{uModel})
     Functor.LaxMonoidal
       (DerivedCategory.Q (C := SheafOfModules.{uModel} (moduleRings S.toRingedSpace))) :=
   inferInstance
+
+attribute [local instance] tensorDescentPullbackDescentModuleTensor
+  tensorDescentModuleSymmetric
+  tensorDescentModulePreadditive
+  tensorDescentModuleClosed
+  tensorDescentModuleGrothendieck
+  tensorDescentModuleResolutions
+  tensorDescentModuleDerivedMonoidal
+  tensorDescentPullbackDescentQLax
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -153,6 +165,22 @@ theorem derivedPullback_monoidal_descent {T X : Scheme.{uModel}} (g : T ⟶ X)
               ε.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj N)) ≫
               Functor.LaxMonoidal.μ DerivedCategory.Q
                 ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)
-                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) := by sorry
+                ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj N) := by
+  obtain ⟨μ, hμ⟩ := derivedPullback_tensor_comparison_exists g F hF hmap ε hε
+    φ hnatural hiso
+  have hassoc := derivedPullback_tensor_associativity g F hF hmap mF ε hε φ hφ μ hμ
+  obtain ⟨η, hleft, hright⟩ :=
+    derivedPullback_tensor_unit g F hF hmap mF ε hε φ hφ μ hμ
+  let m : (derivedPullback g).CoreMonoidal :=
+    { εIso := η
+      μIso A B := (μ.app A).app B
+      μIso_hom_natural_left f A := NatTrans.congr_app (μ.hom.naturality f) A
+      μIso_hom_natural_right A f := (μ.hom.app A).naturality f
+      associativity := hassoc
+      left_unitality := hleft
+      right_unitality := hright }
+  refine ⟨m, ?_⟩
+  intro P N hP hN
+  exact hμ P N hP hN
 
 end AlgebraicGeometry
