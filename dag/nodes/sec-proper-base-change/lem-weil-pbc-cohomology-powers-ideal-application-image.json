@@ -17,34 +17,37 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-cohomology-powers-ideal-rees-finite] the sum of M_n is a finite graded Rees(I)-module with the stated scalar-induced products. Monic inclusions into F identify i with the canonical maps and give composition, commutation with products, and transition after a product equal to ordinary scalar multiplication. Apply the cohomology functor.",
+   "text": "Obtain the homogeneous multiplication maps, their section formula, degree-zero scalar action, and finite convolution Rees-module structure from lem-weil-pbc-cohomology-powers-ideal-rees-finite. Apply lem-weil-pbc-finite-rees-module-single-degree-generation to the restricted-scalar cohomology modules.",
    "uses": [
     "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
-    "pqf-def-cohomology",
-    "lem-weil-pbc-ideal-module-product-stalk"
+    "lem-weil-pbc-finite-rees-module-single-degree-generation"
    ],
    "elementary": false
   },
   {
-   "text": "Replace finite generators by their finitely many homogeneous components. Bound their degrees by c0, taking zero for the empty set. Comparing degree-r components and factoring I^(r-d)=I^(r-c) I^(c-d) gives M_r=B_(r-c) M_c for every r>=c>=c0.",
-   "uses": [],
-   "elementary": true
+   "text": "For n<=c, cancel the monic inclusion of J^n F into F (its image construction in lem-weil-pbc-ideal-module-product-stalk) to prove lambda(k,c,a) followed by i(c+k,n) equals i(c,n) followed by lambda(0,n,a). The section formula and hi identify both composites after inclusion. Applying the cohomology functor and its degree-zero scalar formula gives H(i(c+k,n))(L(k,c,a)(x))=a*H(i(c,n))(x).",
+   "uses": [
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
   },
   {
-   "text": "For n>=c, factor the coefficients again to get M_(n+m)=B_m M_n; transition gives image in I^m M_n. For n<c, generate M_(n+m) from M_c with coefficients in I^(n+m-c). Commuting products through M_c -> M_n gives the asserted image bound. Finite sums and truncated subtraction cover the boundary cases.",
+   "text": "For c>=c0 and n+m>=c, set d=max(c,n) and k=n+m-d. Single-degree generation gives M_(d+k) as the span of L(k,d,a)(x). The preceding identity sends every generator into I^k M_n. Use span_le and range_le_iff_comap to obtain the range containment. Finally d+k=n+m and k=m-(c-n) by natural-number arithmetic.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-cohomology-powers-ideal-rees-finite",
+  "lem-weil-pbc-finite-rees-module-single-degree-generation",
   "lem-weil-pbc-ideal-module-product-stalk",
-  "pqf-def-cohomology"
+  "def-sc-ringed-space-module-cohomology"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 02OA, proof of (1) and (2)"
+  "place": "Lemma 02OA, proofs of (1) and (2); G3 formalized transition compatibility and span/range reduction using d=max(c,n), leaving only abstract single-degree generation."
  },
  "mathlib_searches": [
   {
@@ -126,9 +129,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "N1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T151910-L-2289338",
+  "landing": "20261012T165514-L-2933708",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
