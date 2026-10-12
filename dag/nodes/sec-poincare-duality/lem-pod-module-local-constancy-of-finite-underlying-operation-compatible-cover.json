@@ -2,23 +2,43 @@
  "id": "lem-pod-module-local-constancy-of-finite-underlying-operation-compatible-cover",
  "kind": "statement",
  "title": "Operation lifting from an underlying constant trivialization",
- "statement": "Let Y be a scheme, Λ a finite ring, F a sheaf of left Λ-modules, G the underlying sheaf of sets with hG identifying it with the underlying sheaf of F, and 𝒰 an etale cover on which G is constant. Then F is locally constant as a sheaf of Λ-modules.",
+ "statement": "Let Y be a scheme, Λ a finite ring (not necessarily commutative), F a sheaf of left Λ-modules, and G its underlying sheaf of sets. Assume every geometric stalk of G is finite [def-weil-pbc-etale-sheaves]. Let 𝒰 be an etale cover on which G is constant. Then F is locally constant as a sheaf of Λ-modules [def-constructible-locally-constant].",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 0DV5 proof of (2)--(3), expanded with Tag 093S (1)"
  },
  "proof": [
   {
-   "text": "Refine the given trivialization successively for addition, zero, negation and scalar multiplication over the finite ring; evaluate the module identities on geometric points and package the resulting constant module sheaves.",
+   "text": "Discard empty members of the given cover, retaining surjectivity. On each remaining member, identify the underlying constant model with a finite geometric stalk. The explicit chain of isomorphisms uses localization equivalence, etale pullback/stalk compatibility, forgetting/stalk compatibility, and the proved constant-sheaf stalk isomorphism. Thus the label set S is finite. This is the private proved finite_constant_module_value calculation in the module.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Form the finite family of sections indexed by Unit ⊕ (S × S) ⊕ S ⊕ (Λ × S): zero, sums, negatives, and scalar multiples of labels. Apply [lem-weil-pbc-finite-constant-set-sections-cover] to obtain a common covering sieve on which every section is a label. On an object with a point the label map is injective, because the empty sieve cannot cover it. The proved private finite_module_label_sections_cover and finite_constant_label_submodule_neighborhood calculations transport these equalities to the localized terminal section module.",
+   "uses": [
+    "lem-weil-pbc-finite-constant-set-sections-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The range of the injective label map is an actual submodule of the terminal section module: zero, sums, and scalar multiples belong to it by the preceding calculation. Transport its abelian group and left Λ-module structures through the bijection with S. Restrict its linear inclusion along terminal arrows to produce a natural linear map from the constant module presheaf to F. Its underlying set map is the sheafification unit followed by the chosen set isomorphism. This is the proved finite_constant_module_neighborhood construction; no module data are chosen from an unproved existence assertion.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The underlying natural map is locally injective and surjective, hence its module sheafification is an isomorphism. At each point choose the neighborhood furnished by the proved construction, then use Cover.mkOfCovers to obtain a refining cover. Bind all refinements to the original nonempty-member cover and use their constant-sheaf isomorphisms to construct LocallyConstantDatum F. For the empty scheme the cover has no members.",
    "uses": [],
    "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-constant-set-sections-cover"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "B2 stage-3 worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DV5 and 093S (1)"
+  "place": "Tag 0DV5 proof of (2)--(3), expanded with Tag 093S (1)",
+  "note": "Complete finite-label Lean proof, adapting the proved private finite-coefficient helpers of Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets to arbitrary finite rings; all scalars are enumerated directly."
  },
  "mathlib_searches": [
   {
@@ -75,12 +95,15 @@
   "module": "Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlyingOperationCompatibleCover",
   "file": "lean/Sheaf/Paper/ModuleLocalConstancyOfFiniteUnderlyingOperationCompatibleCover.lean",
   "declaration": "AlgebraicGeometry.Scheme.module_operationCompatibleCover",
-  "statement": "theorem module_operationCompatibleCover\n    {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (G : Sheaf Y.smallEtaleTopology (Type (u + 1)))\n    (hG : G = (sheafForget Y.smallEtaleTopology).obj F)\n    (𝒰 : Cover.{u} etalePrecoverage Y)\n    (h𝒰 : ∀ i : 𝒰.I₀,\n      (G.over (𝒰.etalePrecoverageToEtale i)).IsConstant\n        (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i))) :\n    IsLocallyConstantSheaf F",
+  "statement": "theorem module_operationCompatibleCover\n    {Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ] [Finite Λ]\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (G : Sheaf Y.smallEtaleTopology (Type (u + 1)))\n    (hG : G = (sheafForget Y.smallEtaleTopology).obj F)\n    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),\n      Finite (((pointSmallEtale s).sheafFiber (A := Type (u + 1))).obj G))\n    (𝒰 : Cover.{u} etalePrecoverage Y)\n    (h𝒰 : ∀ i : 𝒰.I₀,\n      (G.over (𝒰.etalePrecoverageToEtale i)).IsConstant\n        (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i))) :\n    IsLocallyConstantSheaf F",
   "branch": "sheaf-dag",
   "by": "B2",
-  "date": "2026-10-12"
+  "date": "2026-10-13"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-constructible-locally-constant"
+ ],
  "reviewed": {
   "date": "2026-10-12",
   "by": "L",
@@ -94,17 +117,37 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-fb1a0",
+  "reviewer": "X-a9536",
   "group": "B2",
   "result": "pass",
-  "landing": "20261012T184241-L-3995661",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module/report match the packet and node; theorem signature is unchanged, compilation passes, and the counterexample substantiates STATEMENT-DISPUTED.",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.module_operationCompatibleCover"
+  "landing": "20261012T202230-L-701163",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivery diffs, node/change records, compilation, importer adaptation, and axioms matched: delivery compiles; original importer fails against the changed interface and adapted importer passes; no target changes or forbidden proofs found."
+ },
+ "statement_change": {
+  "date": "2026-10-13",
+  "by": "B2 stage 2",
+  "old_statement": "Let Y be a scheme, Λ a finite ring, F a sheaf of left Λ-modules, G the underlying sheaf of sets with hG identifying it with the underlying sheaf of F, and 𝒰 an etale cover on which G is constant. Then F is locally constant as a sheaf of Λ-modules.",
+  "what": "Repair the previously reviewed STATEMENT-DISPUTED statement by retaining finite underlying geometric stalks. A finite coefficient ring alone does not allow simultaneous refinement of operations on an infinite constant set. The parent already assumes finite stalks and now passes hF.2; no target or parent signature changes. The finite-source condition is required by Tag 093S (1).",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 0DV5 proof of (2)--(3), expanded with Tag 093S (1)"
+  },
+  "citers": [
+   {
+    "id": "lem-pod-module-local-constancy-of-finite-underlying",
+    "holds": true,
+    "note": "Its finite-locally-constant hypothesis supplies finite geometric stalks; only the call must pass hF.2."
+   }
   ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.module_operationCompatibleCover"
-  ]
+  "old_stmt_deps": [],
+  "old_proof": [
+   {
+    "text": "Refine the given trivialization successively for addition, zero, negation and scalar multiplication over the finite ring; evaluate the module identities on geometric points and package the resulting constant module sheaves.",
+    "uses": [],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": []
  }
 }

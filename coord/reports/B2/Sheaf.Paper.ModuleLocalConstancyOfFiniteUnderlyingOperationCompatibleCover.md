@@ -1,156 +1,186 @@
 ## What changed
 
-Marked `AlgebraicGeometry.Scheme.module_operationCompatibleCover` as
-`STATEMENT-DISPUTED` in its own module, with a counterexample at the declaration.
-Its signature, visibility, proof, and imports are unchanged. No other module is
-adapted. This is a disputed-statement delivery, not a proof or a decomposition.
+Repaired and proved
+`AlgebraicGeometry.Scheme.module_operationCompatibleCover` in
+`Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlyingOperationCompatibleCover`.
+The old, already disputed intermediate statement was false: it omitted finite
+underlying geometric stalks. The corrected signature explicitly takes `hfinite`.
+The parent `Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying` now passes `hF.2`
+in its sole call; the parent's signature and visibility are unchanged.
+This is an interface repair with a complete proof of the repaired statement,
+not a proof of the original false assertion.
 
-The short-route search used the prescribed `msearch.py` services: LeanFinder for
-"A sheaf of modules whose underlying sheaf of sets is locally constant is locally
-constant", Loogle for `CategoryTheory.Sheaf.IsConstant`, and grep for
-`IsConstant|operationCompatibleCover`. The Loogle result
-`CategoryTheory.Sheaf.isConstant_of_forget` was read in
-`Mathlib/CategoryTheory/Sites/ConstantSheaf.lean`; it requires full and faithful
-constant-sheaf functors and does not apply on this arbitrary scheme. Searches in
-both library roots found no unconditional lifting result.
+The proof adapts the existing proved finite-label calculations in
+`Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets`. Its helpers
+are private and fully proved. That existing module only handles commutative
+rings with finite quotient coefficients. Here all elements of the finite ring
+are enumerated directly; the proof retains arbitrary `Ring Λ`, including
+noncommutative rings. The label range is constructed as a real submodule of
+sections and its structure is transported through an explicit equivalence.
+No data come from an unproved mere-existence statement.
 
-The cited local Stacks source files are absent from this machine. The exact source
-statements were read at https://stacks.math.columbia.edu/tag/093S and
-https://stacks.math.columbia.edu/tag/0DV5. They explicitly retain the missing
-finiteness condition.
+Three proof-only imports supply finite-family section lifting, localization
+and pullback/stalk comparisons, and the constant-sheaf stalk isomorphism:
+`WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections`,
+`WeilConjectures.ConstructibleSheaf.Pullback`, and
+`WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf`.
+The original public imports remain for the public statement. The item's node
+now records the finite-family lifting tool and the complete implemented route.
+The parent's node records that its finite-stalk conjunct is passed along.
+
+The interface change record is
+`coord/changes/module-operation-compatible-cover-finite-stalks.md`.
 
 ## Proved and sorry left
 
-Closed 0 of 1 holes; added 0 holes; split off 0 statements.
-
-The sole hole remains
+Closed the sole hole of the repaired
 `AlgebraicGeometry.Scheme.module_operationCompatibleCover`, node
 `lem-pod-module-local-constancy-of-finite-underlying-operation-compatible-cover`.
-It must not be proved from an invented false intermediate theorem.
+Added 0 holes; split off 0 statements. No sorry remains in either delivered module.
+The original false signature is explicitly corrected, not silently counted as proved.
 
-As a separate scratch check, `scratchpad/TailProjection.lean` proves, without
-`sorry`, `tail_eventually_zero`, `tail_ne_zero`, and `tail_not_uniform` for
-`V = ℕ →₀ ZMod 2` and `tail n v = v.filter (n ≤ ·)`. These are not delivered
-library declarations or new DAG nodes. They check the elementary obstruction
-used below, not the entire scheme/sheaf counterexample in Lean.
+The four private helper proofs are `finite_module_label_sections_cover`,
+`finite_constant_label_submodule_neighborhood`, `finite_constant_module_neighborhood`,
+and `finite_constant_module_value`. They respectively prove closure of finite labels
+on a common sieve, obtain a neighborhood through each point, construct the module
+and the linear natural transformation, and identify each model with a finite stalk.
+
+Both delivered modules compile through `lcompile.py --all` without errors or warnings.
+A separate scratch compilation of the entire item with `#print axioms` reports exactly
+`propext`, `Classical.choice`, and `Quot.sound` for
+`AlgebraicGeometry.Scheme.module_operationCompatibleCover`, with no `sorryAx`.
+This is a complete proof, not a decomposition.
 
 ## No longer needed
 
-None. No import, node, or module was pruned: the theorem is disputed, and no valid
-replacement route has been installed. No blueprint unit was bypassed.
+None. No original import, module, or named proof dependency was removed; the old
+node had no proof dependencies. The commutative-ring finite-quotient module was
+read as proof material and was never imported. Its ideal, scalar representative
+choices, and annihilation hypotheses are unnecessary for a finite ring and are
+absent from this proof. There are no new public declarations or new nodes.
+No blueprint unit route was bypassed; `sk-lem-finite.realized` is unchanged.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-STATEMENT-DISPUTED: the theorem has no assumption of finite underlying stalks or
-finite constant models. A finite coefficient ring gives finitely many scalar
-maps; it does not give finite sources for those maps or for addition. The
-single supposedly elementary DAG proof step cannot apply Tag 093S (1), which
-requires its source sheaf to be finite locally constant. The theorem's docstring
-incorrectly says underlying-stalk finiteness is needed only to obtain the cover.
+The earlier attempt correctly detected that the statement was false and supplied
+a mathematical counterexample, but left its sole hole untouched. Its old second
+reading described that dispute-only delivery; it has been removed from this report
+because it is not a review of the present repair.
 
-Here is a counterexample on a scheme, including why an etale refinement cannot
-repair it. Put k = F₂ and let A be the Boolean ring of eventually constant
-sequences (a_n) in k. Its spectrum K is the one-point compactification of the
-discrete natural numbers: evaluation at each n gives an isolated point and
-passage to the eventual value gives the limit point ∞. The idempotents of A
-have finite or cofinite support. Consequently the prime ideals are precisely
-these evaluations, and the neighborhoods of ∞ contain all sufficiently large
-n. Let Y = Spec A and let Λ = k × k, a finite unital commutative ring.
+The missing hypothesis is required by
+[Stacks Tag 093S (1)](https://stacks.math.columbia.edu/tag/093S), which assumes a
+finite locally constant source. The additional-structure argument in
+[Stacks Tag 0DV5](https://stacks.math.columbia.edu/tag/0DV5) also concerns finite
+objects. A finite coefficient ring does not make an infinite constant set finite.
+The old docstring incorrectly claimed finite stalks were needed only to obtain
+the original cover. The corrected proof uses them to make every nonempty chart's
+constant labels finite, which makes simultaneous operation refinement possible.
 
-Put V = ⊕_{j∈ℕ} k and let G be the constant sheaf of sets with value V on the
-small etale site of Y. First construct a sheaf of Λ-modules on the Zariski site
-with this underlying constant set sheaf. Addition is the usual addition on V.
-At the point n let P_n be projection onto the coordinates j ≥ n, and at ∞
-let P_∞ = 0. Define the scalar action by
+The original infinite-tail counterexample remains an explanation for the repair:
+over Spec of the Boolean ring of eventually constant F₂ sequences, the constant
+set ⊕ℕ F₂ admits an F₂ × F₂-module structure whose first idempotent acts by a
+nonzero tail projection at every isolated point and by zero at the limit point.
+Finite support makes each operation continuous, but no neighborhood of the limit
+has constant module stalks. Thus a proof of the original signature is impossible.
+The parent already has the necessary finite-stalk assumption and now retains it.
 
-    (a,b) ·_x v = a P_x(v) + b (v - P_x(v)).
+Edge cases checked in the construction: empty schemes have empty covers;
+empty covering members are discarded without losing joint surjectivity; an empty
+label set on a nonempty member cannot occur since its stalk is a module containing
+zero; singleton models and the zero ring give the zero submodule; no connectedness
+or commutativity hypothesis is introduced. The module laws are inherited from
+an actual submodule, so no unproved faithfulness assertion is needed.
 
-Each P_x is an idempotent k-linear endomorphism, so this formula satisfies the
-Λ-module axioms. For a fixed v its support is finite, hence P_n(v) = 0 for all
-sufficiently large n. Thus x ↦ P_x(v) is locally constant, including at ∞.
-The same holds for each fixed scalar and vector. These formulas therefore define
-operations on locally constant V-valued sections and make the constant underlying
-set sheaf into a Zariski sheaf of Λ-modules. Pull it back to the etale topos.
-Inverse image preserves constant objects and finite products, hence preserves
-these operations and the module identities; denote the resulting module sheaf
-by F. Its underlying set sheaf is G. The identity covering of Y supplies the
-hypothesis h𝒰, because G itself is constant.
+The new proof dependency
+`lem-weil-pbc-finite-constant-set-sections-cover` is a proved general site tool
+from another unit, used for finite section refinement; it does not replace any
+statement or step of the item's blueprint unit.
 
-Let e = (1,0). On the geometric stalk at ∞, e acts as zero on all of V. At each
-isolated n it acts nontrivially, since P_n sends the basis vector v_n to itself.
-Thus those Λ-module stalks are not isomorphic to the stalk at ∞: the property
-that e annihilates the whole module is invariant under a Λ-linear isomorphism.
-For any etale neighborhood U containing a point above ∞, its image in Y is an
-open neighborhood of ∞ (etale maps are open). This image contains isolated n,
-and a geometric point above such an n has the nonzero e-action. If F restricted
-to U were a constant module sheaf, every geometric stalk on U would be isomorphic
-to the same module. The two stalks just described forbid this. An etale
-trivializing cover would have a member containing a point above ∞, so no such
-cover exists. This disproves the theorem with all its current hypotheses.
+## Forced adaptations
 
-Edge checks: the zero ring and finite-dimensional constant models do not exhibit
-this obstruction; the example uses a nonzero finite ring with four elements and
-an infinite direct sum with finite-support vectors. At n = 0, P_n is the identity;
-at every finite n it remains nonzero, and at ∞ it is zero. Pointwise eventual
-vanishing is exactly what ensures continuity, while failure of uniform eventual
-vanishing prevents local constancy.
+`Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying` is unclaimed in the current
+repository. The original module was separately compiled against the repaired
+item using the sandbox's compiled overlay and fails at line 56:
 
-The parent `Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying` actually has the
-needed finite-stalk assumption in `hF.2`, but its current proof discards it and
-calls this stronger, false theorem. A subsequent statement repair should retain
-that assumption in the operation-lifting interface and pass `hF.2` from the
-parent. This delivery does not silently change either statement or adapt the
-parent. The target statements and definitions remain untouched.
+```text
+Application type mismatch: The argument 𝒰 has type Cover etalePrecoverage Y
+but is expected to have type
+∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ Y),
+  Finite ((pointSmallEtale s).sheafFiber.obj ((sheafForget Y.smallEtaleTopology).obj F))
+in the application module_operationCompatibleCover F _ rfl 𝒰
+```
+
+The sole changed line is
+`exact module_operationCompatibleCover F _ rfl hF.2 𝒰 h𝒰`.
+Passing `hF.2` supplies the new finite-stalk argument. The adapted module compiles.
+Every existing signature, visibility, import, and docstring of the parent is
+identical to the original. No extra proof changes occur in that module.
 
 ## Second reading by B2
 
-1. **Interfaces unchanged — pass.** Compared the only delivered module with
-   the repository using `diff -u`: the sole change is the eight-line
-   `STATEMENT-DISPUTED` comment. The existing theorem signature, visibility,
-   docstring, proof and all imports are byte-for-byte unchanged. No definitions,
-   target statements, other modules or change records are delivered.
-2. **Compilation and axioms — pass as a dispute, not as a proof.** Compiled the
-   module through `lcompile.py` with exit code 0 and no warnings. Scanned the
-   delivered source: its only hole is the existing named theorem
-   `AlgebraicGeometry.Scheme.module_operationCompatibleCover`; no forbidden
-   declarations or hollow definitions occur. A scratch copy with `#print axioms`
-   reports exactly `propext`, `Classical.choice`, `Quot.sound`, and `sorryAx`.
-   Separately recompiled the tail-projection scratch file and checked all three
-   scratch theorems' axioms: only the three permitted axioms, no `sorryAx`.
-3. **Split statements and truth — no split statements; dispute confirmed.**
-   Independently read Tags 093S and 0DV5: the former's set-map assertion requires
-   a finite locally constant source; the latter retains finite objects. Checked
-   the counterexample: ultrafilters of the finite/cofinite Boolean algebra give
-   exactly the isolated natural-number points and the limit point; each vector
-   has finite support, making the scalar action continuous at the limit. The
-   complementary idempotents define a unital left module over F₂ × F₂.
-   The predicate that (1,0) annihilates the whole stalk distinguishes the limit
-   stalk from every isolated stalk, independently of any chosen trivialization.
-   Every etale neighborhood above the limit has open image containing isolated
-   points, so it cannot support a constant module sheaf. Pullback from the
-   Zariski topos preserves the constant underlying object, finite products and
-   the algebraic identities. The identity cover meets the stated hypothesis.
-   The scratch results verify the pointwise-versus-uniform tail obstruction;
-   they do not constitute a formal Lean refutation of the entire theorem.
-4. **Route and pruning — pass for the disputed-statement delivery.** Re-read
-   Mathlib's `Sheaf.isConstant_of_forget`: its full/faithful constant-functor
-   assumptions cannot supply this missing finiteness condition on an arbitrary
-   scheme. Independently searched the library roots by declaration and concept,
-   and ran `msearch.py ... grep "locally constant finite source morphism"`
-   (no hits). No legitimate proof of the unchanged false assertion is available.
-   All three imports support the public statement; there are no proof-only
-   public imports to downgrade. Old `proof_deps` is empty, so `## No longer
-   needed` is complete. Inspected `dag/units/sk-lem-finite.json`: neither its
-   route nor its `realized` fields are changed or bypassed.
-5. **DAG agreement — existing mathematical fault explicitly reported.** The
-   node's `lean.statement` agrees with the unchanged declaration and its empty
-   dependency list agrees with the unchanged `sorry` proof. Its purported
-   elementary operation-refinement step and corresponding docstring are false
-   without finite sources, as reported above. No successful proof route is
-   claimed and no node fields are changed. The parent currently discards the
-   finite-stalk conjunct; repairing that interface and adapting the parent is
-   future work, not silently included in this delivery.
+1. Compared both delivered Lean modules with the read-only repository by `diff`.
+   Verdict: the only existing signature change is the declared finite-geometric-stalk
+   hypothesis of `module_operationCompatibleCover`, recorded verbatim in
+   `coord/changes/module-operation-compatible-cover-finite-stalks.md`. This repairs
+   the already disputed false intermediate assertion; it does not prove its old
+   signature. The parent differs only by passing `hF.2`; its signature, definitions,
+   visibility, imports, and docstring are unchanged. No target statement changes.
+   A repository-wide search finds no other direct caller needing adaptation.
+2. Read all four helper proofs and the public proof, then compiled both modules
+   through `lcompile.py --all`: no errors or warnings. Compiled a full scratch copy
+   with `#print axioms AlgebraicGeometry.Scheme.module_operationCompatibleCover`:
+   exactly `propext`, `Classical.choice`, `Quot.sound`, with no `sorryAx`.
+   The delivered sources contain no `sorry` or forbidden trust mechanism.
+   The label module comes from the explicit range submodule and equivalence; the
+   existence witnesses used in the proof are all supplied by proved theorems.
+   Verdict: complete proof of the repaired assertion, no new holes.
+3. There are no split-off statements or new nodes. Checked the finite operation
+   index, injection on objects not covered by the empty sieve, transport of the
+   module laws, and the stalk equivalence making labels finite. Empty schemes
+   and empty cover members are handled by the nonempty-member subcover; a
+   nonempty chart cannot have empty labels because closure includes zero.
+   Singleton labels and the zero ring yield the zero module. Arbitrary finite
+   noncommutative rings remain permitted. Verdict: no weakened conclusion,
+   hidden connectedness assumption, or unproved arbitrary-witness construction.
+4. Independently searched the library for constant module reflection and read
+   `ModuleConstantOfSetPullback` and `ConstructibleModuleOfFiniteCoefficientSets`.
+   The former needs a connected scheme and commutative coefficients; the latter
+   has commutative quotient coefficients and private helpers. Neither supplies
+   this arbitrary-scheme, finite-`Ring` result. Loogle search for constant-sheaf
+   reflection found no applicable result. Read the proved finite-family lifting
+   and label-injectivity tools actually applied. All three added imports are
+   proof-only; the public Adjunction import supplies `sheafForget` appearing in
+   the public signature. No old proof dependency is omitted, since the old list
+   was empty. The unit `sk-lem-finite.realized` is unchanged, and no unit step is
+   bypassed. Verdict: route and pruning report agree with the implementation.
+5. Compared both node records with their repository versions and the Lean.
+   The item's updated signature and statement-change record include exactly the
+   new hypothesis; its four proof steps describe the finite-label construction,
+   and its sole named proof dependency is the finite-family lifting tool used.
+   The parent's node records the forced `hF.2` argument and retains its statement.
+   Verified the source conditions against [Tag 093S (1)]
+   (https://stacks.math.columbia.edu/tag/093S) and [Tag 0DV5]
+   (https://stacks.math.columbia.edu/tag/0DV5): the operation sources are finite.
+   Verdict: DAG, source, change record, and Lean agree.
 
-Second reading changed only this report by adding the independent review and
-verification results. The disputed-statement comment is accepted unchanged.
-Closed 0 holes; added 0 holes; split off 0 statements; pruned none.
+Second reading changed only this report, adding the independent checks and
+verdicts. No repair of the delivered Lean proof or node records was necessary.
+
+## Forced adaptations
+
+### Sheaf.Paper.ModuleLocalConstancyOfFiniteUnderlying
+Original against changed dependencies failed:
+```
+/tmp/forced-adaptation-8v40vvgp/lean/Sheaf/Paper/ModuleLocalConstancyOfFiniteUnderlying.lean:56:48: error: Application type mismatch: The argument
+  𝒰
+has type
+  Cover etalePrecoverage Y
+of sort `Type (u + 1)` but is expected to have type
+  ∀ (Ω : Type u) [inst : Field Ω] [inst_1 : IsAlgClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ Y),
+    Finite ((pointSmallEtale s).sheafFiber.obj ((sheafForget Y.smallEtaleTopology).obj F))
+of sort `Prop` in the application
+  module_operationCompatibleCover F ((sheafForget Y.smallEtaleTopology).obj F) rfl 𝒰
+
+(with the modules compiled into /tmp/forced-adaptation-8v40vvgp/.lbuild) [4.1 s]
+```
+Adapted module compiled in the delivered set. Explain the forced changed lines in the change record; CODEX verifies them.

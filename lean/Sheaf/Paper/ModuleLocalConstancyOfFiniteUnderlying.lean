@@ -53,6 +53,6 @@ theorem module_localConstancy_of_finite_underlying
       ((sheafForget Y.smallEtaleTopology).obj F)) :
     IsLocallyConstantSheaf F := by
   rcases hF.1 with ⟨𝒰, h𝒰⟩
-  exact module_operationCompatibleCover F _ rfl 𝒰 h𝒰
+  exact module_operationCompatibleCover F _ rfl hF.2 𝒰 h𝒰
 
 end AlgebraicGeometry.Scheme
