@@ -8,10 +8,8 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.Module
-import Sheaf.Algebra.Homology.UnitEntrySplits
-import Sheaf.RingTheory.FiniteFreeResolution
-import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
-import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
+import Sheaf.RingTheory.BoundedFiniteFreeResolution
+import Sheaf.RingTheory.MinimalizeBoundedFiniteFreeResolution
 
 /-!
 # Minimal finite free resolutions over a Noetherian local ring
@@ -61,6 +59,7 @@ theorem exists_minimal_finite_free_resolution {R : Type u} [CommRing R]
       (∀ i : ℕ, i < d →
         LinearMap.range (P.complex.d (i + 1) i).hom ≤
           IsLocalRing.maximalIdeal R • (⊤ : Submodule R (P.complex.X i))) := by
-  sorry
+  obtain ⟨P, hzero, hfree⟩ := exists_bounded_finite_free_resolution M d h
+  exact minimalize_bounded_finite_free_resolution M d P hzero hfree
 
 end ModuleCat
