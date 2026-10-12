@@ -1,0 +1,116 @@
+{
+ "id": "def-weil-pbc-finite-etale-trace-splitting-data",
+ "kind": "definition",
+ "title": "Explicit splitting data, splitting presieve, and local sum",
+ "statement": "Let $f:Y\\to X$ be a morphism of schemes [def-weil-pbc-scheme-conventions] and $T\\to X$ an object of the small etale site [def-weil-pbc-etale-site]. A splitting is a finite type $J$, schemes $V_j$, a clopen coproduct cofan $i_j:V_j\\to T\\times_XY$ [def-pc-fibre-product, def-weil-open-immersion, def-weil-closed-immersion], and inverse projections $t_j:T\\to V_j$, with $t_ji_jp=1$ and $i_jpt_j=1$. The split presieve on $W$ consists of all arrows $T\\to W$ with some such splitting. For etale $f$ the sheet section is $t_ji_j:T\\to B_fT$, and for an abelian sheaf $F$ [def-weil-pbc-abelian-etale-sheaves] the splitting sum on $s\\in F(B_fT)$ is $\\sum_jF(t_ji_j)s$. Empty $J$ is allowed. All data are explicit constructor inputs.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite clopen coproduct splitting schemes sheet sections coincide locally up to bijection",
+   "results": "HTTP Internal Server Error; service unavailable. This is not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two trivializations of a finite covering differ by locally constant permutation of sheets",
+   "results": "IsEvenlyCovered.toTrivialization and FiberBundleCore.localTrivAsPartialEquiv_trans treat topological covering data; none supplies scheme morphism equality or small etale covering presieves. Generic IsSheafFor handles the subsequent descent.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*(bijection|permutation)|clopen.*(bijection|permutation)|splitting.*section",
+   "results": "Only unrelated group-extension and Lie algebra splittings in Mathlib. Project FiniteEtaleYonedaLocalTrivializations constructs constant models, not sheet correspondence or sums; FiniteEtaleTraceLocalSums predicates on an existing trace, whose construction depends on this item.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSectionDescent",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "Trace retraction in the locally constant reduction; lem-weil-pbc-finite-etale-trace-exists-existence: Unique section obtained by descent of locally split sums; Explicit splitting data, splitting presieve, and local sum",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-section-descent",
+    "lem-weil-pbc-finite-etale-trace-exists-existence",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSplitting",
+  "declaration": "AlgebraicGeometry.Etale.FiniteEtaleTraceSplitting",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FiniteEtaleTraceSplitting",
+   "AlgebraicGeometry.Etale.finiteEtaleTraceSplitPresieve",
+   "AlgebraicGeometry.Etale.FiniteEtaleTraceSplitting.sectionMap",
+   "AlgebraicGeometry.Etale.FiniteEtaleTraceSplitting.sum"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceSplitting.lean",
+  "statement": "structure FiniteEtaleTraceSplitting {X Y : Scheme.{u}} (f : Y ⟶ X) (T : X.Etale)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T110259-L-613771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T110259-L-613771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

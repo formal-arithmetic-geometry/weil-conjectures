@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-finite-etale-trace-split-reindexing",
+ "kind": "statement",
+ "title": "Local reindexing of sheets in a commuting square",
+ "statement": "Let $f:Y\\to X$ be etale [def-weil-pbc-scheme-conventions], $B_fT=T\\times_XY$ [def-pc-fibre-product], and let $W,T_1,T_2,Z$ be objects of $X_{\\mathrm{Et}}$ [def-weil-pbc-etale-site] with $h_i:T_i\\to W$, $g_i:Z\\to T_i$ and $h_1g_1=h_2g_2$. Given explicit splittings $D_i$ with index sets $J_i$ as in [def-weil-pbc-finite-etale-trace-splitting-data], there is a covering presieve $R$ on $Z$ such that for every $k:Q\\to Z$ in $R$ there is a bijection $e:J_1\\simeq J_2$ with $B_f(h_1)\\circ\\sigma_{1,j}\\circ g_1\\circ k=B_f(h_2)\\circ\\sigma_{2,e(j)}\\circ g_2\\circ k$ for every sheet $j$. The presieve may be empty when $Z$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-trace-splitting-data",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Pull the two finite clopen coproducts back to Z. Pasting identifies the two ambient schemes with Z times_X Y, and the commuting square identifies their maps to W times_X Y. The pulled-back pieces remain a coproduct and their projections are isomorphisms to Z.",
+   "uses": [
+    "def-weil-pbc-finite-etale-trace-splitting-data",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Intersect every pair of sheets. Projection through either sheet isomorphism gives the same clopen subset of Z. At a point, the two clopen coproduct partitions give exactly one matching second sheet for each first sheet and conversely, hence a bijection. Intersect finitely many clopen matching loci to obtain a neighbourhood where this bijection is constant.",
+   "uses": [
+    "def-weil-pbc-finite-etale-trace-splitting-data",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The neighbourhoods cover Z. On each, matching sections factor through the same intersection piece and invert its projection, so coincide; compose to the common ambient pullback over W using the commuting square. Their inclusion arrows give R. If the index sets cannot be bijected, the pointwise construction forces Z empty and the empty presieve covers vacuously.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-finite-etale-trace-splitting-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-finite-etale-trace-splitting-data",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-open-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03SH (section-trace-method), paragraph after Definition 03SE; descent details as in SGA 4, Expose IX, 5.1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite clopen coproduct splitting schemes sheet sections coincide locally up to bijection",
+   "results": "HTTP Internal Server Error; service unavailable. This is not a negative search.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two trivializations of a finite covering differ by locally constant permutation of sheets",
+   "results": "IsEvenlyCovered.toTrivialization and FiberBundleCore.localTrivAsPartialEquiv_trans treat topological covering data; none supplies scheme morphism equality or small etale covering presieves. Generic IsSheafFor handles the subsequent descent.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "coproduct.*(bijection|permutation)|clopen.*(bijection|permutation)|splitting.*section",
+   "results": "Only unrelated group-extension and Lie algebra splittings in Mathlib. Project FiniteEtaleYonedaLocalTrivializations constructs constant models, not sheet correspondence or sums; FiniteEtaleTraceLocalSums predicates on an existing trace, whose construction depends on this item.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSectionDescent",
+  "date": "2026-10-12",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-locally-constant-reduction",
+   "place": "Trace retraction in the locally constant reduction; lem-weil-pbc-finite-etale-trace-exists-existence: Unique section obtained by descent of locally split sums; Local reindexing of sheets in a commuting square",
+   "via": [
+    "lem-weil-pbc-finite-etale-trace-section-descent",
+    "lem-weil-pbc-finite-etale-trace-exists-existence",
+    "lem-weil-pbc-finite-etale-trace-exists"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTraceSplitReindexing",
+  "declaration": "AlgebraicGeometry.Etale.finiteEtaleTrace_split_reindexing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteEtaleTrace_split_reindexing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTraceSplitReindexing.lean",
+  "statement": "theorem finiteEtaleTrace_split_reindexing {X Y : Scheme.{u}} (f : Y ⟶ X) (hf : Etale f) : let B := MorphismProperty.Over.pullback @Etale ⊤ f ⋙ MorphismProperty.Over.map ⊤ hf ∀ (W T₁ T₂ Z : X.Etale) (h₁ : T₁ ⟶ W) (h₂ : T₂ ⟶ W) (g₁ : Z ⟶ T₁) (g₂ : Z ⟶ T₂), g₁ ≫ h₁ = g₂ ≫ h₂ → ∀ (D₁ : FiniteEtaleTraceSplitting f T₁) (D₂ : FiniteEtaleTraceSplitting f T₂), ∃ R : Presieve Z, Sieve.generate R ∈ X.smallEtaleTopology Z ∧ ∀ (Q : X.Etale) (k : Q ⟶ Z), R k → ∃ e : D₁.J ≃ D₂.J, ∀ j, k ≫ g₁ ≫ D₁.sectionMap hf j ≫ B.map h₁ = k ≫ g₂ ≫ D₂.sectionMap hf (e j) ≫ B.map h₂",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T110259-L-613771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T110259-L-613771",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

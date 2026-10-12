@@ -7343,3 +7343,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:02 L: merged deliver/D3/Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange (stage 3; reviewer PASS; first push; landing 20261012T110258-L-613463 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:02 L: merged deliver/E2/Sheaf.AlgebraicGeometry.EtaleAffineTensorCechAmitsurComparison (stage 3; reviewer PASS; first push; landing 20261012T110259-L-613579 (interface); batch 20261012T110249; modules 3; new nodes 2)
 - 11:02 L: merged deliver/E3/Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact (stage 3; reviewer PASS; first push; landing 20261012T110259-L-613676 (proof); batch 20261012T110249; modules 1; new nodes 0)
+- 11:02 L: merged deliver/F1/Sheaf.AlgebraicGeometry.FiniteEtaleTraceSectionDescent (stage 3; reviewer PASS; first push; landing 20261012T110259-L-613771 (interface); batch 20261012T110249; modules 5; new nodes 4)
