@@ -14,86 +14,62 @@
  ],
  "proof": [
   {
-   "text": "Presentation. By (1) and the definition of strictly standard [def-weil-pbc-strictly-standard-element] there are a presentation [def-weil-pbc-finitely-presented-algebra], i.e. an isomorphism of $R$-algebras $\\theta:R[x_1,\\dots,x_n]/(f_1,\\dots,f_m)\\xrightarrow{\\sim}A$ ($f_j\\in R[x_1,\\dots,x_n]$ [def-weil-pbc-mv-polynomial-ring]), and an integer $0\\le c\\le\\min(n,m)$ such that (i) $\\pi=\\sum_{I\\subset\\{1,\\dots,n\\},|I|=c}a_I\\,\\theta\\big(\\det(\\partial f_j/\\partial x_i)_{j=1,\\dots,c,\\ i\\in I}\\big)$ in $A$ for some $a_I\\in A$ ($\\partial/\\partial x_i$ the formal partial derivatives [def-weil-pbc-polynomial-partial-derivative]; $\\theta(P)$ means $\\theta$ of the class of $P$), and (ii) $\\pi f_{c+j}\\in(f_1,\\dots,f_c)+(f_1,\\dots,f_m)^2$ in $R[x_1,\\dots,x_n]$ for $j=1,\\dots,m-c$. Write $\\rho$ for the map of (2) and $\\alpha:A\\to\\Lambda$ for the given map; for $y\\in A$ write $\\bar y$ for its class in $A/\\pi^4A$.",
+   "text": "Apply the translated-presentation theorem to obtain P, c<=min(n,m), lambda_i, relation constant coefficients pi^4 a_j, a scalar t, the constant minor membership for (1-pi^3 t)pi, and the original chosen-lift ideal-square conditions.",
    "uses": [
-    "def-weil-pbc-strictly-standard-element",
-    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-popescu-translated-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form M_ij=constantCoeff(partial_i f_j) for j<c. Apply the first clause of scalar_left_inverse_maximal_minors to obtain S M=(1-pi^3 t)pi times the identity; set s_ik=S_ki. Reading the (k,j) entries and commuting scalars gives sum_i r_ji s_ik=(1-pi^3 t)pi delta_jk.",
+   "uses": [
+    "lem-weil-pbc-matrix-left-inverse-minors",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove first-order expansion by polynomial induction: f=C(constantCoeff f)+sum_i C(constantCoeff(partial_i f))X_i+q with q in the square of the variable ideal. Constants have zero remainder; remainders add under sums. For f X_i the first-order term is C(constantCoeff f)X_i, since constantCoeff(partial_j(f X_i)) is delta_ji constantCoeff f. The remainder is (the linear part of f+q)X_i, a product of two elements of the variable ideal. This is the proved private helper first_order_expansion, with no new hole.",
+   "uses": [
     "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-polynomial-partial-derivative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1682-1691 (choice of the presentation and of c with (equation-strictly-standard-one) and (equation-star))"
-   }
+   "elementary": false
   },
   {
-   "text": "Translation of the variables (Stacks: 'we can replace $x_i$ by $x_i-r_i$'). Choose $r_i\\in R$ with $\\rho(\\overline{\\theta(x_i)})=r_i\\bmod\\pi^4$ ($R/\\pi^4R$ is a quotient of $R$). Let $\\sigma$ be the $R$-algebra endomorphism of $R[x_1,\\dots,x_n]$ with $\\sigma(x_i)=x_i+r_i$ [def-weil-pbc-mv-polynomial-ring]; it is an automorphism with inverse $x_i\\mapsto x_i-r_i$ (the composites fix every $x_i$, so are the identity by the uniqueness in the universal property). Put $f'_j=\\sigma(f_j)$. Then $\\sigma$ maps the ideal $(f_1,\\dots,f_m)$ onto $(f'_1,\\dots,f'_m)$ and induces an isomorphism $\\bar\\sigma:R[x]/(f)\\to R[x]/(f')$, so $\\theta'=\\theta\\circ\\bar\\sigma^{-1}:R[x]/(f')\\to A$ is again a presentation, with $\\theta'(P)=\\theta(\\sigma^{-1}P)$, hence $\\theta'(\\sigma Q)=\\theta(Q)$ for all $Q$, and $\\theta'(x_i)=\\theta(x_i)-r_i$, so $\\rho(\\overline{\\theta'(x_i)})=0$. Derivatives: $\\partial(\\sigma Q)/\\partial x_i=\\sigma(\\partial Q/\\partial x_i)$ for all $Q$. Indeed $D_1=\\partial_i\\circ\\sigma$ and $D_2=\\sigma\\circ\\partial_i$ are $R$-linear and both satisfy $D(PQ)=\\sigma(P)D(Q)+\\sigma(Q)D(P)$ (Leibniz rule of [def-weil-pbc-polynomial-partial-derivative] and multiplicativity of $\\sigma$); $D_1(1)=D_2(1)=0$ and $D_1(x_k)=\\partial(x_k+r_k)/\\partial x_i=\\delta_{ik}=\\sigma(\\delta_{ik})=D_2(x_k)$; by induction on the degree they agree on all monomials, hence everywhere by $R$-linearity. Therefore $\\theta'\\big(\\det(\\partial f'_j/\\partial x_i)_{j\\le c,i\\in I}\\big)=\\theta'\\big(\\sigma\\det(\\partial f_j/\\partial x_i)_{j\\le c,i\\in I}\\big)=\\theta\\big(\\det(\\partial f_j/\\partial x_i)_{j\\le c,i\\in I}\\big)$ ($\\sigma$ is a ring map and the determinant a polynomial in the entries), so (i) holds for $(f',\\theta')$ with the same $a_I$; applying $\\sigma$ to a relation $\\pi f_{c+j}=\\sum_{k\\le c}a_kf_k+\\sum_{l\\le l'}b_{ll'}f_lf_{l'}$ gives (ii) for $f'$. From now on we write $f_j,\\theta$ for $f'_j,\\theta'$ and $x_i$ also for $\\theta(x_i)\\in A$; thus $\\rho(\\bar x_i)=0$ for all $i$. Consequences: (a) $\\rho\\circ(A\\to A/\\pi^4A)$ is an $R$-algebra map $A\\to R/\\pi^4R$ killing every $x_i$, so it sends $\\theta(P)$ to $P(0)\\bmod\\pi^4$ for every $P\\in R[x]$ (both are $R$-algebra maps $R[x]\\to R/\\pi^4R$ agreeing on the $x_i$); applied to $\\theta(f_j)=0$ this gives $f_j(0)\\in\\pi^4R$. (b) By the compatibility in (2), the class of $\\alpha(x_i)$ in $\\Lambda/\\pi^4\\Lambda$ is the image of $\\rho(\\bar x_i)=0$, so $\\alpha(x_i)=\\pi^4\\lambda_i$ for some $\\lambda_i\\in\\Lambda$.",
-   "uses": [
-    "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-polynomial-partial-derivative",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-strictly-standard-element"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1692-1697 ('Say rho maps x_i to the class of r_i ... A -> Lambda maps x_i to pi^4 lambda_i')"
-   }
-  },
-  {
-   "text": "Linear terms and the unit $u$. Let $r_{ji}\\in R$ be the coefficient of $x_i$ in $f_j$; write $f_j=f_j(0)+\\sum_{i=1}^nr_{ji}x_i+Q_j$ with $Q_j$ a sum of monomials of degree $\\ge2$, i.e. $Q_j\\in(x_1,\\dots,x_n)^2$. By the explicit formula of [def-weil-pbc-polynomial-partial-derivative] the constant term of $\\partial f_j/\\partial x_i$ is $r_{ji}$ (a monomial $rx^e$ contributes a constant only if $e$ is the $i$-th unit vector). Apply $\\rho$ to (i): by Step 2(a), $\\rho(\\bar\\pi)=\\pi\\bmod\\pi^4$ and $\\rho$ sends the image of $\\det(\\partial f_j/\\partial x_i)_{j\\le c,i\\in I}$ to $\\det(r_{ji})_{j\\le c,i\\in I}\\bmod\\pi^4$; choosing $r_I\\in R$ with $\\rho(\\bar a_I)=r_I\\bmod\\pi^4$ we get $\\pi=\\sum_{|I|=c}r_I\\det(r_{ji})_{j=1,\\dots,c,\\ i\\in I}+\\pi^4t$ for some $t\\in R$. Put $u=1-\\pi^3t\\in1+\\pi^3R$; then $u\\pi=\\sum_{|I|=c}r_I\\det(r_{ji})_{j\\le c,\\,i\\in I}$.",
-   "uses": [
-    "def-weil-pbc-polynomial-partial-derivative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1697-1714 ('Write f_j = f_j(0) + sum r_ji x_i + h.o.t. ... for some u in 1 + pi^3 R')"
-   }
-  },
-  {
-   "text": "The matrix $(s_{ik})$. Let $M$ be the $n\\times c$ matrix over $R$ with entries $M_{ij}=r_{ji}$ ($1\\le i\\le n$, $1\\le j\\le c$); $n\\ge c$. For $I\\subset\\{1,\\dots,n\\}$, $|I|=c$, the submatrix $M_I$ of the rows with index in $I$ is the transpose of $(r_{ji})_{j\\le c,i\\in I}$, so $\\det M_I=\\det(r_{ji})_{j\\le c,i\\in I}$ (a determinant equals that of its transpose). By Step 3, $u\\pi$ lies in the ideal generated by the $c\\times c$ minors of $M$, so by [lem-weil-pbc-matrix-left-inverse-minors](1) there is a $c\\times n$ matrix $S'$ with $S'M=u\\pi\\cdot1_{c\\times c}$. With $s_{ik}=S'_{ki}$ this reads $\\sum_{i=1}^nr_{ji}s_{ik}=u\\pi\\,\\delta_{jk}$ for all $j,k=1,\\dots,c$.",
-   "uses": [
-    "lem-weil-pbc-matrix-left-inverse-minors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1715-1722 (Algebra, Lemma 07DQ, lemma-matrix-left-inverse)"
-   }
-  },
-  {
-   "text": "The elements $h_i$, $g_j$, $\\varphi_j$. Let $P=R[x_1,\\dots,x_n,v_1,\\dots,v_c,w_1,\\dots,w_n]$ and $\\xi_i=\\pi^2\\sum_{k=1}^cs_{ik}v_k+\\pi^3w_i\\in R[v,w]$, $h_i=x_i-\\xi_i\\in P$. (a) Elimination: the $R$-algebra map $\\epsilon:P\\to R[v,w]$, $x_i\\mapsto\\xi_i$, $v\\mapsto v$, $w\\mapsto w$ [def-weil-pbc-mv-polynomial-ring], is surjective with kernel $(h_1,\\dots,h_n)$: it kills the $h_i$, and $F-\\epsilon(F)\\in(h_1,\\dots,h_n)$ for every $F\\in P$ (true for $x_i$, $v_k$, $w_i$, and the set of such $F$ is closed under sums and products since $FG-\\epsilon(F)\\epsilon(G)=F(G-\\epsilon G)+\\epsilon(G)(F-\\epsilon F)$); hence $P/(h)\\cong R[v,w]$, and for every $F\\in R[x]$, $F-F(\\xi)\\in(h)$. (b) Computation of $f_j(\\xi)=\\epsilon(f_j)$: since $\\xi_i\\in\\pi^2R[v,w]$, $Q_j(\\xi)\\in(\\xi_1,\\dots,\\xi_n)^2\\subset\\pi^4R[v,w]$, and $f_j(0)\\in\\pi^4R$ (Step 2(a)); hence $f_j(\\xi)\\equiv\\sum_ir_{ji}\\xi_i=\\pi^2\\sum_{k=1}^c\\big(\\sum_ir_{ji}s_{ik}\\big)v_k+\\pi^3\\sum_ir_{ji}w_i\\pmod{\\pi^4R[v,w]}$. For $j\\le c$, Step 4 gives $\\pi^2\\sum_k(\\sum_ir_{ji}s_{ik})v_k=u\\pi^3v_j=\\pi^3v_j+(u-1)\\pi^3v_j$ with $(u-1)\\pi^3\\in\\pi^6R$; so $f_j(\\xi)=\\pi^3\\big(v_j+\\sum_ir_{ji}w_i\\big)+\\pi^4e_j$ for some $e_j\\in R[v,w]$. Put $g_j=v_j+\\sum_{i=1}^nr_{ji}w_i+\\pi e_j\\in R[v,w]\\subset P$ ($j=1,\\dots,c$). Then $f_j(\\xi)=\\pi^3g_j$ in $R[v,w]$, $g_j\\equiv v_j+\\sum_ir_{ji}w_i\\pmod\\pi$, and by (a) $f_j-\\pi^3g_j\\in(h_1,\\dots,h_n)$ in $P$. (c) For every $j$ (in particular $j>c$) each term of $f_j(0)+\\sum_ir_{ji}\\xi_i+Q_j(\\xi)$ lies in $\\pi^2R[v,w]$, so $f_j(\\xi)=\\pi^2\\varphi_j$ for some $\\varphi_j\\in R[v,w]$.",
+   "text": "Work directly with ULift-indexed variables V_j,W_i, and substitute xi_i=pi^2 sum_k s_ik V_k+pi^3 W_i. Every xi_i lies in (pi^2). Mapping the variable ideal gives an ideal contained in (pi^2), so mapping its square puts the remainder in (pi^4). Hence F_j=pi^4 b_j+sum_i r_ji xi_i for some polynomial b_j, and every F_j belongs to (pi^2). No element is cancelled.",
    "uses": [
     "def-weil-pbc-mv-polynomial-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma 07CR (lemma-desingularize), lines 1723-1754 (the h_i, 'without further mention', the computation of f_j mod pi^4 and the choice of g_j)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the substitution to the strictly standard relation for every remaining equation. The first c equations are pi^3 times g_j, so their ideal is contained in G=(g). Hence pi F_j is in G+(F)^2 for every j. All F_j belong to (pi^2) by the explicit expansion. Rename the variables using ULift, which changes no polynomial identities. The chosen lift P.σ(algebraMap R A pi) and C pi have the same image in A, so their difference belongs to the relation ideal. Multiplying their difference by any relation belongs to its square; this justifies replacing the chosen lift by C pi before substitution.",
+   "text": "For j<c, exchange the two finite sums in the linear term and use the scalar inverse to obtain sum_i r_ji xi_i=pi^3(V_j+sum_i r_ji W_i)-pi^6 t V_j. Explicitly set e_j=b_j-pi^2 t V_j and g_j=V_j+sum_i r_ji W_i+pi e_j. Ring arithmetic proves F_j=pi^3 g_j and the asserted formula for g_j.",
    "uses": [
-    "def-weil-pbc-strictly-standard-element",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let I be the relation ideal and I0 the initial relation ideal. C(pi)-P.sigma(pi) belongs to I because evaluation kills this difference, and the presentation identifies its kernel with I. Multiplication by any relation puts the correction in I^2; adding it to the given condition yields C(pi)f_j in I0+I^2 for j>=c. For j<c the containment is immediate from membership in I0. The substitution maps I onto (F), and maps I0 into (g) since F_j=pi^3 g_j for initial j. Ideal maps commute with sums and squares, yielding C(pi)F_j in (g)+(F)^2 for every j. Return the lambda_i supplied by the translated presentation.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
     "def-weil-pbc-mv-polynomial-ring"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strictly-standard-element",
   "def-weil-pbc-finitely-presented-algebra",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-polynomial-partial-derivative",
-  "lem-weil-pbc-matrix-left-inverse-minors"
+  "lem-weil-pbc-matrix-left-inverse-minors",
+  "lem-weil-pbc-popescu-translated-presentation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CR (lemma-desingularize)"
+  "place": "Stacks Project, Tag 07CR (lemma-desingularize), proof through cubic substitution and the two observations; M2 formalizes polynomial induction and ideal transport explicitly"
  },
  "mathlib_searches": [
   {
@@ -189,11 +165,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-33db4",
-  "group": "V1",
+  "reviewer": "COMPILER",
+  "group": "M2",
   "result": "pass",
-  "landing": "20261012T220527-L-1395874",
+  "landing": "20261012T231637-L-1962684",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled successfully, and the direct importer compiled against them; signatures, nodes, reports, proofs, and remaining sorry statements satisfy the review brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
