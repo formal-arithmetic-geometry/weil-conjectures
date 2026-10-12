@@ -105,45 +105,39 @@ namespace WeilSheaf
 
 open WeilComplex
 
-/-- **The transform of a punctual sheaf** (Steps 1–3 of `prop-fd-zero-extension-comparison`).
-Let `F` be a Weil sheaf on the affine line vanishing on a dense open `U₀`. Then
-`FT_ψ(F) ≅ B'[1]` for a lisse Weil sheaf `B'` on the dual line: with `i : Z₀ ↪ 𝔸¹` the reduced
-closed complement of `U₀`, `F ≅ i_* i^* F` and `B' = π_*(q^* i^* F ⊗ i'^* 𝓚_ψ)` for the finite
-étale projection `π : Z₀ × 𝔸¹ ⟶ 𝔸¹`. -/
-theorem exists_isLisse_iso_fourierTransform_of_isZero_upperStar
+/-- **The transform of a punctual sheaf, explicitly** (Steps 1–3 of
+`prop-fd-zero-extension-comparison`). Let `F` be a Weil sheaf on the affine line vanishing on a
+dense open `U₀` with closed complement `i : Z₀ ↪ 𝔸¹`, and let `X'` be the base change of `i` along
+the first projection of `𝔸¹ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and `i' : X' ⟶ 𝔸¹ × 𝔸¹`, and
+`π = pr₂ ∘ i'` finite. Then `FT_ψ(F) ≅ (π_*(i'^* 𝓚_ψ ⊗ q^* i^* F))[1]`: `F ≅ i_* i^* F`, compact
+support base change, the projection formula and the composition law give
+`FT_ψ(i_* E) ≅ Rπ_!(i'^*𝓚_ψ ⊗ q^*E)[1]`, and `Rπ_!` of a sheaf is the sheaf `π_*` in degree zero
+since `π` is finite. -/
+theorem nonempty_iso_fourierTransform_toComplex_of_isPullback
     (ψ : AddChar k₀ (PadicAlgCl l)) {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     (j : U ⟶ affineLine k₀) [IsOpenImmersion j] [QuasiCompact j]
-    [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
+    [j.IsOver (Spec (CommRingCat.of k₀))]
+    {Z X' : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] [X'.Over (Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀))]
+    (i : Z ⟶ affineLine k₀) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+    (hi : Set.range i.base = (Set.range j.base)ᶜ)
+    (q : X' ⟶ Z) [q.IsOver (Spec (CommRingCat.of k₀))]
+    (i' : X' ⟶ affinePlane k₀) [i'.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated i']
+    [LocallyOfFiniteType i'] [QuasiCompact i']
+    (π : X' ⟶ affineLine k₀) [π.IsOver (Spec (CommRingCat.of k₀))] [IsFinite π]
+    (hπ : i' ≫ affinePlane.snd k₀ = π) (hP : IsPullback q i' i (affinePlane.fst k₀))
     (F : WeilSheaf k₀ l (affineLine k₀)) (hF : IsZero ((WeilSheaf.upperStar j).obj F)) :
-    ∃ B' : WeilSheaf k₀ l (affineLine k₀), B'.IsLisse ∧
-      Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj F) ≅
-        WeilSheaf.toShiftedComplex.obj B') := by
-  obtain ⟨Z, _, i, _, _, _, _, hi⟩ := exists_isReduced_isClosedImmersion_range_eq_compl j
+    Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj F) ≅
+      WeilSheaf.toShiftedComplex.obj ((WeilSheaf.lowerStar π).obj
+        (((WeilSheaf.upperStar i').obj (fourierKernel ψ)).tensorObj
+          ((WeilSheaf.upperStar q).obj ((WeilSheaf.upperStar i).obj F))
+          (ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ))))) := by
   have : QuasiCompact (affinePlane.fst k₀) := MorphismProperty.pullback_fst _ _ inferInstance
   have : QuasiSeparated (affinePlane.fst k₀) := MorphismProperty.pullback_fst _ _ inferInstance
   have : QuasiCompact (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) :=
     inferInstanceAs (QuasiCompact (affinePlane.fst k₀ ≫ _))
   have : QuasiSeparated (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) :=
     inferInstanceAs (QuasiSeparated (affinePlane.fst k₀ ≫ _))
-  let X' := pullback i (affinePlane.fst k₀)
-  let q : X' ⟶ Z := pullback.fst i (affinePlane.fst k₀)
-  let i' : X' ⟶ affinePlane k₀ := pullback.snd i (affinePlane.fst k₀)
-  let : X'.Over (Spec (CommRingCat.of k₀)) := ⟨i' ≫ affinePlane k₀ ↘ Spec (CommRingCat.of k₀)⟩
-  have : i'.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
-  have : q.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
-    change q ≫ Z ↘ Spec (CommRingCat.of k₀) = i' ≫ affinePlane.fst k₀ ≫ _
-    rw [← comp_over i (Spec (CommRingCat.of k₀)), ← Category.assoc, pullback.condition,
-      Category.assoc]⟩
-  let π : X' ⟶ affineLine k₀ := i' ≫ affinePlane.snd k₀
-  have hP : IsPullback q π (Z ↘ Spec (CommRingCat.of k₀))
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
-    have := (IsPullback.of_hasPullback i (affinePlane.fst k₀)).paste_vert
-      (IsPullback.of_hasPullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
-        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
-    rwa [comp_over] at this
-  have : IsFinite π := MorphismProperty.of_isPullback hP inferInstance
-  have : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)) :=
-    inferInstanceAs (LocallyOfFiniteType (i' ≫ _))
   -- Step 1: `F ≅ i_* i^* F`
   set K := WeilSheaf.toComplex.obj F
   obtain ⟨α, β, γ, hT⟩ := exists_distTriang_derivedLowerShriek_openClosed_comp j i hi (𝟙 _) j i
@@ -156,19 +150,16 @@ theorem exists_isLisse_iso_fourierTransform_of_isZero_upperStar
   let e₁ : K ≅ (derivedLowerShriek k₀ l i).obj ((WeilComplex.upperStar i).obj K) :=
     (eId.app K).symm ≪≫ asIso β
   -- Step 2: base change, the projection formula and composition
-  obtain ⟨e₂⟩ := nonempty_upperStarDerivedLowerShriekIso_of_isPullback
-    (IsPullback.of_hasPullback i (affinePlane.fst k₀)) ((WeilComplex.upperStar i).obj K)
+  obtain ⟨e₂⟩ := nonempty_upperStarDerivedLowerShriekIso_of_isPullback hP
+    ((WeilComplex.upperStar i).obj K)
   obtain ⟨e₃⟩ := nonempty_tensorLisseDerivedLowerShriekIso i' (fourierKernel ψ)
     (isLisse_fourierKernel ψ) ((WeilComplex.upperStar q).obj ((WeilComplex.upperStar i).obj K))
   obtain ⟨eC⟩ := nonempty_derivedLowerShriekCompIso (k₀ := k₀) (l := l) i'
-    (affinePlane.snd k₀) π rfl
+    (affinePlane.snd k₀) π hπ
   let L : WeilSheaf k₀ l X' := (WeilSheaf.upperStar i').obj (fourierKernel ψ)
   have hL : L.IsLisse := ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ)
   let E : WeilSheaf k₀ l X' := (WeilSheaf.upperStar q).obj ((WeilSheaf.upperStar i).obj F)
-  have hE : E.IsLisse :=
-    ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_of_isFinite_of_isReduced _)
   let G : WeilSheaf k₀ l X' := L.tensorObj E hL
-  have hG : G.IsLisse := ProEtale.IsAdicLisseSheaf.ihom (IsLisse.dual hL) hE
   let e₅ : (WeilComplex.upperStar q).obj ((WeilComplex.upperStar i).obj K) ≅
       WeilSheaf.toComplex.obj E :=
     (WeilComplex.upperStar q).mapIso ((toComplexCompUpperStarIso i).app F) ≪≫
@@ -200,9 +191,53 @@ theorem exists_isLisse_iso_fourierTransform_of_isZero_upperStar
       rw [hn]
       exact hpos n (by omega)
   obtain ⟨eF⟩ := nonempty_iso_toShiftedComplex _ hFT
-  refine ⟨_, (isLisse_lowerStar_of_isPullback hP G hG).of_iso ?_, ⟨eF⟩⟩
-  exact e₀.symm ≪≫ (homologySheafShiftIso Kπ 1 (-1) 0 rfl).symm ≪≫
-    ((homologySheaf (-1)).mapIso e).symm
+  exact ⟨eF ≪≫ WeilSheaf.toShiftedComplex.mapIso ((homologySheaf (-1)).mapIso e ≪≫
+    homologySheafShiftIso Kπ 1 (-1) 0 rfl ≪≫ e₀)⟩
+
+/-- **The transform of a punctual sheaf** (Steps 1–3 of `prop-fd-zero-extension-comparison`).
+Let `F` be a Weil sheaf on the affine line vanishing on a dense open `U₀`. Then
+`FT_ψ(F) ≅ B'[1]` for a lisse Weil sheaf `B'` on the dual line: with `i : Z₀ ↪ 𝔸¹` the reduced
+closed complement of `U₀`, `F ≅ i_* i^* F` and `B' = π_*(q^* i^* F ⊗ i'^* 𝓚_ψ)` for the finite
+étale projection `π : Z₀ × 𝔸¹ ⟶ 𝔸¹`
+(`AlgebraicGeometry.WeilSheaf.nonempty_iso_fourierTransform_toComplex_of_isPullback`). -/
+theorem exists_isLisse_iso_fourierTransform_of_isZero_upperStar
+    (ψ : AddChar k₀ (PadicAlgCl l)) {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+    (j : U ⟶ affineLine k₀) [IsOpenImmersion j] [QuasiCompact j]
+    [j.IsOver (Spec (CommRingCat.of k₀))] [IsDominant j]
+    (F : WeilSheaf k₀ l (affineLine k₀)) (hF : IsZero ((WeilSheaf.upperStar j).obj F)) :
+    ∃ B' : WeilSheaf k₀ l (affineLine k₀), B'.IsLisse ∧
+      Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj F) ≅
+        WeilSheaf.toShiftedComplex.obj B') := by
+  obtain ⟨Z, _, i, _, _, _, _, hi⟩ := exists_isReduced_isClosedImmersion_range_eq_compl j
+  let X' := pullback i (affinePlane.fst k₀)
+  let q : X' ⟶ Z := pullback.fst i (affinePlane.fst k₀)
+  let i' : X' ⟶ affinePlane k₀ := pullback.snd i (affinePlane.fst k₀)
+  let : X'.Over (Spec (CommRingCat.of k₀)) := ⟨i' ≫ affinePlane k₀ ↘ Spec (CommRingCat.of k₀)⟩
+  have : i'.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+  have : q.IsOver (Spec (CommRingCat.of k₀)) := ⟨by
+    change q ≫ Z ↘ Spec (CommRingCat.of k₀) = i' ≫ affinePlane.fst k₀ ≫ _
+    rw [← comp_over i (Spec (CommRingCat.of k₀)), ← Category.assoc, pullback.condition,
+      Category.assoc]⟩
+  let π : X' ⟶ affineLine k₀ := i' ≫ affinePlane.snd k₀
+  have hP : IsPullback q π (Z ↘ Spec (CommRingCat.of k₀))
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
+    have := (IsPullback.of_hasPullback i (affinePlane.fst k₀)).paste_vert
+      (IsPullback.of_hasPullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)))
+    rwa [comp_over] at this
+  have : IsFinite π := MorphismProperty.of_isPullback hP inferInstance
+  have : LocallyOfFiniteType (X' ↘ Spec (CommRingCat.of k₀)) :=
+    inferInstanceAs (LocallyOfFiniteType (i' ≫ _))
+  obtain ⟨e⟩ := nonempty_iso_fourierTransform_toComplex_of_isPullback ψ j i hi q i' π rfl
+    (IsPullback.of_hasPullback i (affinePlane.fst k₀)) F hF
+  let L : WeilSheaf k₀ l X' := (WeilSheaf.upperStar i').obj (fourierKernel ψ)
+  have hL : L.IsLisse := ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_fourierKernel ψ)
+  let E : WeilSheaf k₀ l X' := (WeilSheaf.upperStar q).obj ((WeilSheaf.upperStar i).obj F)
+  have hE : E.IsLisse :=
+    ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_of_isFinite_of_isReduced _)
+  let G : WeilSheaf k₀ l X' := L.tensorObj E hL
+  have hG : G.IsLisse := ProEtale.IsAdicLisseSheaf.ihom (IsLisse.dual hL) hE
+  exact ⟨(WeilSheaf.lowerStar π).obj G, isLisse_lowerStar_of_isPullback hP G hG, ⟨e⟩⟩
 
 end WeilSheaf
 
