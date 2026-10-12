@@ -1,0 +1,96 @@
+{
+ "id": "new-tower-comparison-first",
+ "kind": "statement",
+ "title": "First projection of tower comparison",
+ "statement": "For the explicit cycle-pullback tower, the comparison isomorphism exists and satisfies the first pullback projection equation.",
+ "stmt_deps": [
+  "lem-pc-cycle-pullback-tower-comparison-stage3"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1)"
+ },
+ "proof": [
+  {
+   "text": "Compute evaluation of the functor-category kernel and pullback and apply T to the resulting canonical isomorphism.",
+   "uses": [
+    "lem-pc-cycle-pullback-tower-comparison-stage3"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-cycle-pullback-tower-comparison-stage3"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Lemma 05T7 (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pointwise pullback comparison",
+   "results": "none",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "pullback projection equation",
+   "results": "none",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.fst pullback.snd",
+   "results": "local search",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.CyclePullbackTowerComparison",
+  "date": "2026-10-13",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-cycle-pullback-tower-comparison-stage3"
+  }
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CyclePullbackTowerComparison",
+  "file": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "declaration": "CochainComplex.CyclePullback.tower_comparison_first",
+  "statement": "theorem tower_comparison_first {A : Type u} [Category.{v} A] [Abelian A]\n    {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)\n    (F : B ⥤ CochainComplex A ℤ) (N : ℤ) (b : B) (i : ℤ) (hi : i ≤ N) :\n    let d := (differential T π F N (i + 1)).app b\n    let f := (F.obj b).d i (i + 1)\n    let g := kernel.ι d ≫ (augmentation T π F N (i + 1)).app b\n    ∃ (c : (term T π F N i).obj b ≅ T.obj (pullback f g)),\n      c.hom ≫ π.app (pullback f g) ≫ pullback.fst f g =\n        (augmentation T π F N i).app b",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T184337-L-4017780",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261012T184337-L-4017780",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

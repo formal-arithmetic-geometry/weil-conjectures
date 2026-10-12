@@ -12,34 +12,28 @@
  ],
  "proof": [
   {
-   "text": "Identify the selected stage at i with the successor of the selected stage at i+1; at i=N the latter is the initial zero stage. The successor current functor is literally stepPullback followed by T.",
+   "text": "Apply tower_comparison_first to obtain the comparison isomorphism and the first projection equation.",
    "uses": [
-    "def-pc-cycle-pullback-tower-data-stage3"
+    "new-tower-comparison-first"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Evaluation preserves kernels and pullbacks. Use PreservesKernel.iso for the next differential and pullbackObjIso for the cospan, then the pullback isomorphism induced by the kernel comparison and the proved degree transports. This identifies evaluation of stepPullback with the displayed pointwise pullback. Apply T.mapIso to obtain c.",
+   "text": "Apply tower_comparison_second to the same comparison isomorphism and first projection equation, then pair the two equations.",
    "uses": [
-    "def-pc-cycle-pullback-tower-data-stage3"
+    "new-tower-comparison-second"
    ],
-   "elementary": true
-  },
-  {
-   "text": "Use naturality of pi to commute the comparison through pi. The pullback comparison equations for the first and second projections, together with the kernel comparison inclusion equation, give respectively the two displayed equations. Transport across the degree and next-term equalities. The zero initial stage is included in the same universal-property calculation.",
-   "uses": [
-    "def-pc-cycle-pullback-tower-data-stage3"
-   ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-cycle-pullback-tower-data-stage3"
+  "new-tower-comparison-first",
+  "new-tower-comparison-second"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 05T7 (1); explicit formalization in the abelian functor category by S3"
+  "by": "worker",
+  "document": "lean/Sheaf/Algebra/Homology/CyclePullbackTowerComparison.lean",
+  "place": "the decomposition proof of tower_comparison"
  },
  "mathlib_searches": [
   {
@@ -114,10 +108,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S3",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261012T173903-L-3305716",
-  "kind": "interface",
+  "landing": "20261012T184337-L-4017780",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
