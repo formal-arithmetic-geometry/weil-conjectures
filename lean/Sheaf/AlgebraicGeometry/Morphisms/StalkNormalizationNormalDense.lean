@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
 public import Mathlib.AlgebraicGeometry.Normalization
 
-import Sheaf.RingTheory.SmoothNormalRing
-import Sheaf.RingTheory.EtaleNormalRing
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationDensePart
 
 /-!
 # Normality and density of the localized relative normalization
@@ -61,6 +61,8 @@ theorem stalk_normalization_normal_and_dense {S C : Scheme.{u}}
       IsDomain ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z) ∧
       IsIntegrallyClosed ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z)) ∧
     Dense (↑(n ⁻¹ᵁ (l ⁻¹ᵁ (c ⁻¹ᵁ U))) :
-      Set (pullback f.fromNormalization l : Scheme.{u})) := by sorry
+      Set (pullback f.fromNormalization l : Scheme.{u})) := by
+  exact ⟨stalk_normalization_normal_part hS c U PA s,
+    stalk_normalization_dense_part hS c U PA s⟩
 
 end AlgebraicGeometry.Scheme

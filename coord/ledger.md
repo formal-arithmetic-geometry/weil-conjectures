@@ -10167,3 +10167,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:51 L: merged deliver/P3/Sheaf.Algebra.Homology.HomTensorTotal (stage 3; reviewer PASS; first push; landing 20261012T235113-L-2172370 (interface); batch 20261012T235109; modules 4; new nodes 3)
 - 23:51 L: merged deliver/S2/Sheaf.AlgebraicGeometry.SourceDerivedSectionsNaturality (stage 3; reviewer PASS; first push; landing 20261012T235114-L-2172563 (interface); batch 20261012T235109; modules 2; new nodes 3)
 - 23:51 L: merged deliver/S4/Sheaf.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison (stage 3; reviewer PASS; first push; landing 20261012T235114-L-2172672 (proof); batch 20261012T235109; modules 1; new nodes 0)
+- 23:51 L: merged deliver/U1/Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense (stage 3; reviewer PASS; first push; landing 20261012T235114-L-2172770 (interface); batch 20261012T235109; modules 3; new nodes 2)

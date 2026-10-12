@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-stalk-normalization-normal-part",
+ "kind": "statement",
+ "title": "Normality part of localized relative normalization",
+ "statement": "Let $S$ be an integral Noetherian quasi-separated scheme whose local rings are integrally closed [def-weil-pbc-scheme-conventions, def-weil-pbc-normal-ring]. Let $c:C\\to S$ be quasi-compact, quasi-separated and smooth [def-sbc-smooth-morphisms]. Let $U\\subset S$ be open, $P\\to C_U=c^{-1}(U)$ a finite etale scheme [def-weil-pbc-finite-etale-category], and $s\\in S$. Put $f:P\\to C_U\\to C$, $L=C\\times_S\\operatorname{Spec}\\mathcal O_{S,s}$ with projection $l:L\\to C$ [def-pc-fibre-product], and $n:N=f.\\mathrm{normalization}\\times_C L\\to L$, where relative normalization means integral closure of $\\mathcal O_C$ in $f_*\\mathcal O_P$ [lem-weil-pbc-relative-normalization].. Then every local ring of N is a domain and integrally closed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 033C, 035L, 0307"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-normal-ring",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-etale-category",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Normality of S follows from its domain stalks and hS. Smooth ascent gives normality of C, and etale ascent normality of P. Finite presentation gives locally Noetherian sources and therefore finitely many irreducible components in every quasi-compact source open.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Stacks 035L to the affine integral-closure charts of relative normalization: each source chart splits into finitely many normal integral components with normal domain section rings; the integral closures are normal domains, and the normalization chart is their disjoint union.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Over an affine neighbourhood Spec R of s, the pullback to Spec R_p localizes the integral-closure chart rings at R minus p. Nonzero such localizations are normal domains; zero rings have empty spectrum. Further localization at each point gives the desired stalk properties. This is localization of the explicitly constructed chart rings, not an assertion that normality survives arbitrary flat base change.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-relative-normalization"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "U1",
+  "document": "Stacks Project",
+  "place": "Tags 033C, 035L, 0307"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed.*integralClosure|integralClosure.*IsIntegrallyClosed|normalization.*IsNormal",
+   "results": "25 hits: Mathlib/NumberTheory/FunctionField.lean, Mathlib/NumberTheory/NumberField/Basic.lean, Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean, Mathlib/RingTheory/NormalClosure.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean",
+   "date": "2026-10-13",
+   "verdict": "Useful tools, but no exact match for the full statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, integralClosure",
+   "results": "6 hits: integralClosure.isIntegrallyClosedOfFiniteExtension, IsIntegrallyClosed.integralClosure_eq_bot, IsIntegrallyClosed.integralClosure_eq_bot_iff, minpoly.ofSubring, integralClosure.isNoetherianRing, integralClosure_le_span_dualBasis",
+   "date": "2026-10-13",
+   "verdict": "Useful tools, but no exact match for the full statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral closure in finite product of integrally closed domains is normal after localization",
+   "results": "8 hits: IsIntegrallyClosed.of_localization, Ring.instFiniteNormalClosure_1, Ring.instFiniteNormalClosure, IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization_submonoid, IsIntegrallyClosed.of_localization_maximal, Ring.instIsIntegrallyClosedNormalClosure, IsLocalization.Away.integralClosure",
+   "date": "2026-10-13",
+   "verdict": "Useful tools, but no exact match for the full statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative normalization in a locally Noetherian normal scheme has normal local rings, also after base change to a stalk",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalDense",
+  "date": "2026-10-13",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Local boundary extension in the trait and depth-two paragraphs, as used in Tag 0EYJ; Normality and density of the localized relative normalization; normal-local-ring clause",
+   "via": [
+    "lem-sbc-stalk-normalization-normal-dense",
+    "lem-sbc-stalk-normalization-fibre-purity",
+    "lem-sbc-stalk-normalization-etale",
+    "lem-sbc-stalk-finite-etale-model",
+    "lem-sbc-local-finite-etale-model-overlap",
+    "lem-sbc-enlarge-open-finite-etale-model",
+    "lem-sbc-noetherian-finite-etale-extension",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationNormalPart",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StalkNormalizationNormalPart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.stalk_normalization_normal_part",
+  "statement": "theorem stalk_normalization_normal_part {S C : Scheme.{u}}\n    [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]\n    (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))\n    (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c]\n    (U : S.Opens)\n    (PA : (c ⁻¹ᵁ U).toScheme.FiniteEtale)\n    (s : S) :\n    letI : IsFinite PA.obj.hom := PA.property\n    letI : QuasiCompact (c ⁻¹ᵁ U).ι :=\n      MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)\n        (inferInstance : QuasiCompact U.ι)\n    let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι\n    let l := pullback.fst c (S.fromSpecStalk s)\n    let n := pullback.snd f.fromNormalization l\n    ∀ z : (pullback f.fromNormalization l : Scheme.{u}),\n      IsDomain ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z) ∧\n      IsIntegrallyClosed ((pullback f.fromNormalization l : Scheme.{u}).presheaf.stalk z)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T235114-L-2172770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261012T235114-L-2172770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
