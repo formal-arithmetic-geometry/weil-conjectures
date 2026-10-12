@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalVerdierDuality
@@ -36,6 +38,13 @@ is perfect: its tensor–internal-hom adjoint is an isomorphism.
 
 - `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek`
   (`sk-thm-sf-global-duality`): `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
+- `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`
+  (`sk-thm-sf-global-duality`): the same isomorphism, natural in `K`, for any coefficient
+  category in which the projection formula holds.
+- `AlgebraicGeometry.Etale.nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit`
+  (`sk-thm-sf-global-duality`): `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`.
+- `AlgebraicGeometry.Etale.dualizingComplexIdIso` (`lem-sf-point`): `ω_S ≅ Λ_S` for the
+  identity of the base.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation`
   (`sk-thm-sf-identification`): under an orientation, `RΓ(X, K^∨(d))[2d] ≅ RΓ_c(X, K)^∨`.
 
@@ -83,6 +92,128 @@ open Scheme
 
 namespace Etale
 
+section General
+
+universe u'
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+section Point
+
+variable (S : Scheme.{u})
+
+/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the derived lower shriek along
+the identity of `S` is the identity, `R(𝟙_S)_! ≅ 𝟭`. The identity is proper, so `R(𝟙_S)_!` is
+`R(𝟙_S)_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and
+`(𝟙_S)_* ≅ 𝟭`. -/
+noncomputable def rightDerivedLowerShriekIdIso : R(𝟙 S)_![A] ≅ 𝟭 _ :=
+  rightDerivedLowerShriekIsoRightDerivedLowerStar A (𝟙 S) ≪≫
+    Functor.rightDerivedFunctorNatIso (lowerStarId A S) ≪≫
+    (𝟭 _).rightDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _
+
+/-- The derived lower shriek along the identity of `S` is a left adjoint, being isomorphic to
+the identity (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIdIso`). -/
+instance isLeftAdjoint_rightDerivedLowerShriek_id : (R(𝟙 S)_![A]).IsLeftAdjoint :=
+  ⟨_, ⟨Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm⟩⟩
+
+/-- Blueprint `lem-sf-point` (the dualizing complex of the base): the exceptional inverse image
+along the identity of `S` is the identity, `R(𝟙_S)^! ≅ 𝟭`, being right adjoint to
+`R(𝟙_S)_! ≅ 𝟭`. -/
+noncomputable def rightDerivedUpperShriekIdIso : R(𝟙 S)^![A] ≅ 𝟭 _ :=
+  (rightDerivedUpperShriekAdjunction A (𝟙 S)).rightAdjointUniq
+    (Adjunction.id.ofNatIsoLeft (rightDerivedLowerShriekIdIso A S).symm)
+
+/-- Blueprint `lem-sf-point`: for the structure morphism `a_s = 𝟙_s` of the base, the dualizing
+complex is the unit, `ω_s = Ra_s^! Λ ≅ Λ_s`. -/
+noncomputable def dualizingComplexIdIso : dualizingComplex A (𝟙 S) ≅ 𝟙_ _ :=
+  (rightDerivedUpperShriekIdIso A S).app _
+
+end Point
+
+variable {X S : Scheme.{u}} (aX : X ⟶ S) [HasCompactification aX] [(R(aX)_![A]).IsLeftAdjoint]
+
+/-- The Verdier dual of the unit is the dualizing complex, `𝔻_X Λ_X = RHom(Λ_X, ω_X) ≅ ω_X`. -/
+noncomputable def verdierDualObjUnitIso :
+    (verdierDual A aX).obj (op (𝟙_ _)) ≅ dualizingComplex A aX :=
+  (MonoidalClosed.unitNatIso.app _).symm
+
+variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
+  [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
+  [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A]
+  [(CategoryTheory.forget A).ReflectsIsomorphisms]
+  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+
+/-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality, as a natural isomorphism.
+
+If the projection formula holds for `a_X : X ⟶ S`, the coefficient dual of the compactly
+supported direct image is the direct image of the Verdier dual, naturally in `K ∈ D(X_ét)`:
+
+`(Ra_{X!} K)^∨ ≅ Ra_{X*} (𝔻_X K)`.
+
+It is the tensor–Hom exchange `AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`
+evaluated at the unit `Λ_S`. Applying `RΓ(S, -)` gives `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`. -/
+noncomputable def coefficientDualRightDerivedLowerShriekIso [IsIso (projectionMap A aX)] :
+    (R(aX)_![A]).op ⋙ DerivedCategory.coefficientDual A S ≅ verdierDual A aX ⋙ R((aX)_*[A]) :=
+  (Functor.isoWhiskerRight (derivedHomRightDerivedLowerShriekIso A aX)
+    ((CategoryTheory.evaluation _ _).obj (𝟙_ _))).symm
+
+section Shift
+
+variable {Z : Scheme.{u}}
+
+attribute [local instance] Sheaf.monoidalCategory in
+/-- Tensoring with a shifted complex shifts the tensor product, `K⟦a⟧ ⊗ᴸ M ≅ (K ⊗ᴸ M)⟦a⟧`,
+naturally in `M`. -/
+noncomputable def derivedTensorObjShiftIso
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
+    (derivedTensor A Z).obj (K⟦a⟧) ≅ (derivedTensor A Z).obj K ⋙ shiftFunctor _ a :=
+  NatIso.ofComponents (fun M ↦ (((derivedTensor A Z).flip.obj M).commShiftIso a).app K)
+    (fun f ↦
+      have : NatTrans.CommShift ((derivedTensor A Z).flip.map f) ℤ :=
+        Functor.CommShift₂.commShift_flip_map (h := .int)
+          (G := curriedTensor (_root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))) f
+      (NatTrans.shift_app_comm ((derivedTensor A Z).flip.map f) a K).symm)
+
+/-- The derived internal hom out of a shifted complex, `RHom(K⟦a⟧, M) ≅ RHom(K, M⟦-a⟧)`,
+naturally in `M`: the conjugate of `K⟦a⟧ ⊗ᴸ - ≅ (K ⊗ᴸ -)⟦a⟧`. -/
+noncomputable def derivedHomShiftIso
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
+    (RHom(Z)[A]).obj (op (K⟦a⟧)) ≅ shiftFunctor _ (-a) ⋙ (RHom(Z)[A]).obj (op K) :=
+  conjugateIsoEquiv (derivedTensorHomAdjunction A (K⟦a⟧))
+    ((derivedTensorHomAdjunction A K).comp (shiftEquiv _ a).toAdjunction)
+    (derivedTensorObjShiftIso A K a).symm
+
+/-- The coefficient dual turns shifts into opposite shifts, `(K⟦a⟧)^∨ ≅ (K^∨)⟦-a⟧`. -/
+noncomputable def coefficientDualShiftIso
+    (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) (a : ℤ) :
+    (DerivedCategory.coefficientDual A Z).obj (op (K⟦a⟧)) ≅
+      ((DerivedCategory.coefficientDual A Z).obj (op K))⟦-a⟧ :=
+  (derivedHomShiftIso A K a).app (𝟙_ _) ≪≫
+    (((RHom(Z)[A]).obj (op K)).commShiftIso (-a)).app (𝟙_ _)
+
+/-- Blueprint `sk-thm-sf-global-duality` (shifts): global duality for a shifted complex is the
+shift of global duality, `RΓ_c(X, K⟦a⟧)^∨ ≅ RΓ(X, 𝔻_X K)⟦-a⟧`. It is the coefficient dual of the
+commutation `Ra_{X!}(K⟦a⟧) ≅ (Ra_{X!} K)⟦a⟧`, then `(-)^∨` turning `⟦a⟧` into `⟦-a⟧`
+(`AlgebraicGeometry.Etale.coefficientDualShiftIso`), then the shift of global duality for `K`.
+
+This is only the object-level form of the shift compatibility: it does not state that this
+isomorphism agrees with the shift of the global duality isomorphism for `K`, which the
+blueprint also asks for. -/
+noncomputable def coefficientDualRightDerivedLowerShriekShiftIso [IsIso (projectionMap A aX)]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
+    (DerivedCategory.coefficientDual A S).obj (op ((R(aX)_![A]).obj (K⟦a⟧))) ≅
+      ((R((aX)_*[A])).obj ((verdierDual A aX).obj (op K)))⟦-a⟧ :=
+  ((DerivedCategory.coefficientDual A S).mapIso (((R(aX)_![A]).commShiftIso a).app K).op).symm ≪≫
+    coefficientDualShiftIso A _ a ≪≫
+      (shiftFunctor _ (-a)).mapIso ((coefficientDualRightDerivedLowerShriekIso A aX).app (op K))
+
+end Shift
+
+end General
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (aX : X ⟶ S)
   [HasCompactification aX]
 
@@ -97,14 +228,29 @@ cohomology of the Verdier dual of `K`:
 `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`.
 
 It is stated here for `Ra_{X!} K` and `Ra_{X*} (𝔻_X K)` in `D(S_ét)`; applying `RΓ(S, -)`
-gives the displayed form, since `RΓ_c(X/S, -) = RΓ(S, Ra_{X!} -)`. It is the tensor–Hom
-exchange `Ra_{X*} RHom(K, Ra_X^! N) ≅ RHom(Ra_{X!} K, N)` at `N = Λ_S`. -/
+gives the displayed form, since `RΓ_c(X/S, -) = RΓ(S, Ra_{X!} -)`. It is the component at `K`
+of the natural isomorphism `AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`,
+the tensor–Hom exchange `Ra_{X*} RHom(K, Ra_X^! N) ≅ RHom(Ra_{X!} K, N)` at `N = Λ_S`, the
+projection formula holding at finite coefficients. -/
 theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
         (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
       (R((aX)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) aX).obj (op K))) :=
-  (nonempty_iso_derivedHom_rightDerivedLowerShriek Λ aX K (𝟙_ _)).map Iso.symm
+  have := isIso_projectionMap_of_finite Λ aX
+  ⟨(coefficientDualRightDerivedLowerShriekIso (ModuleCat.{u + 1} Λ) aX).app (op K)⟩
+
+/-- Blueprint `sk-thm-sf-global-duality`: Global Verdier duality for the constant coefficients.
+
+For `K = Λ_X`, global duality reads `RΓ_c(X, Λ)^∨ ≅ RΓ(X, ω_X)`: here, one step earlier,
+`(Ra_{X!} Λ_X)^∨ ≅ Ra_{X*} ω_X` in `D(S_ét)`, since `𝔻_X Λ_X = RHom(Λ_X, ω_X) ≅ ω_X`
+(`AlgebraicGeometry.Etale.verdierDualObjUnitIso`). -/
+theorem nonempty_iso_coefficientDual_rightDerivedLowerShriek_unit :
+    Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) S).obj
+        (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj (𝟙_ _))) ≅
+      (R((aX)_*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex (ModuleCat.{u + 1} Λ) aX)) :=
+  (nonempty_iso_coefficientDual_rightDerivedLowerShriek Λ aX (𝟙_ _)).map fun e ↦
+    e ≪≫ (R((aX)_*[ModuleCat.{u + 1} Λ])).mapIso (verdierDualObjUnitIso _ aX)
 
 /-- Blueprint `sk-thm-sf-identification`: The derived Poincaré pairing is the duality
 isomorphism.
