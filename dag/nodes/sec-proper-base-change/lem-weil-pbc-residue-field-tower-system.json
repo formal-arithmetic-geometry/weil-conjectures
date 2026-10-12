@@ -32,120 +32,52 @@
  ],
  "proof": [
   {
-   "text": "(Claim M, monogenic step: statement and the transcendental case.) *Claim M.* Let $(A,\\mathfrak m_A)$ be a local ring, $\\phi:A\\to K$ a ring map with $\\ker\\phi=\\mathfrak m_A$, $F=\\phi(A)$ (a subfield of $K$, image of the field $A/\\mathfrak m_A$), and $\\alpha\\in K$. Then there are a local ring $B$ with maximal ideal $\\mathfrak m_AB$, a flat ring map $\\beta:A\\to B$ [def-weil-pbc-flat-ring-map] and a ring map $\\phi_B:B\\to K$ with $\\phi_B\\circ\\beta=\\phi$, $\\ker\\phi_B=\\mathfrak m_AB$ and $\\phi_B(B)=F(\\alpha)$, the smallest subfield of $K$ containing $F$ and $\\alpha$ [def-weil-simple-field-extension]. *Proof when $\\alpha$ is not algebraic over $F$* [def-weil-algebraic-element]. Let $A[x]$ be the polynomial ring [def-weil-polynomial-ring] and $h:A[x]\\to K$, $\\sum a_nx^n\\mapsto\\sum\\phi(a_n)\\alpha^n$, a ring map. If $h(P)=0$ then the polynomial $\\sum\\phi(a_n)x^n\\in F[x]$ vanishes at $\\alpha$, hence is $0$ as $\\alpha$ is transcendental over $F$; so every $a_n\\in\\mathfrak m_A$. Thus $\\ker h$ is the set of polynomials with all coefficients in $\\mathfrak m_A$, which is $\\mathfrak q=\\mathfrak m_AA[x]$ (each such polynomial is $\\sum a_nx^n$ with $a_n\\in\\mathfrak m_A$; conversely the generators $a\\cdot1$, $a\\in\\mathfrak m_A$, have coefficients in $\\mathfrak m_A$ and these polynomials form an ideal). As the kernel of a map to a field, $\\mathfrak q$ is prime. Put $B=A[x]_{\\mathfrak q}$ and $\\beta:A\\to A[x]\\to B$. By [def-weil-pbc-localization-at-prime] $B$ is local with maximal ideal $\\mathfrak qB=\\mathfrak m_AB$. Flatness: $A[x]$ is a free $A$-module with basis $(x^n)_{n\\ge0}$ (definition of $A[x]$ as finitely supported sequences) [def-weil-pbc-free-module], hence flat [lem-weil-pbc-projective-module-flat]; $A[x]\\to B$ is flat [lem-weil-pbc-localization-flat]; so $\\beta$ is flat [lem-weil-pbc-flat-ring-map-comp]. Since $h(s)\\neq0$ for $s\\notin\\mathfrak q$, $\\phi_B(r/s)=h(r)h(s)^{-1}$ is well defined (if $r/s=r'/s'$ then $u(rs'-r's)=0$ for some $u\\notin\\mathfrak q$, and $h(u)\\neq0$ in the field $K$) and a ring map with $\\phi_B\\circ\\beta=\\phi$. Its kernel: $h(r)h(s)^{-1}=0$ iff $r\\in\\mathfrak q$ iff $r/s=(r/1)(1/s)\\in\\mathfrak qB$ (and $r/s\\in\\mathfrak qB$ means $r/s=r'/s'$ with $r'\\in\\mathfrak q$, whence $u(rs'-r's)=0$, $h(r)h(s')=h(r')h(s)=0$, $r\\in\\mathfrak q$); so $\\ker\\phi_B=\\mathfrak m_AB$. Its image: every polynomial over $F$ is the image of one over $A$ ($\\phi:A\\to F$ is onto), so $\\phi_B(B)=\\{P(\\alpha)Q(\\alpha)^{-1}:P,Q\\in F[x],\\ Q(\\alpha)\\neq0\\}$, a subfield of $K$ containing $F$ and $\\alpha$ and contained in every such subfield; it is $F(\\alpha)$.",
+   "text": "Use ULift R as a concrete initial stage. Its structure map is a ring equivalence, hence flat; the maximal ideal and kernel conditions follow by transport and injectivity of the residue-field embedding.",
    "uses": [
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-simple-field-extension",
-    "def-weil-algebraic-element",
-    "def-weil-polynomial-ring",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-projective-module-flat",
-    "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-flat-ring-map-comp"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 03C3, proof, first paragraph ('if $\\alpha$ is transcendental over $k$, then we let $R'$ be the localization of $R[x]$ at the prime $\\mathfrak mR[x]$'); the verification that this is a triple is written by the agent"
-   }
-  },
-  {
-   "text": "(Claim M, the algebraic case.) Let $\\alpha$ be algebraic over $F$ [def-weil-algebraic-element], with minimal polynomial $P=T^d+\\sum_{i=1}^dc_iT^{d-i}\\in F[T]$, $d\\ge1$, the monic generator of the kernel of $F[T]\\to K$, $T\\mapsto\\alpha$ [def-weil-pbc-separable-algebraic-extension]. Choose $\\lambda_i\\in A$ with $\\phi(\\lambda_i)=c_i$ and put $f=T^d+\\sum_i\\lambda_iT^{d-i}\\in A[T]$, monic, $B=A[T]/(f)$, $\\beta:A\\to B$. By [lem-weil-pbc-monic-quotient-free] $B$ is a free $A$-module (basis the classes of $1,\\dots,T^{d-1}$), hence $\\beta$ is flat [lem-weil-pbc-projective-module-flat], and $B$ is a finitely generated $A$-module. The ring map $h:A[T]\\to K$, $\\sum a_nT^n\\mapsto\\sum\\phi(a_n)\\alpha^n$, kills $f$ ($h(f)=P(\\alpha)=0$), so it induces $\\phi_B:B\\to K$ with $\\phi_B\\circ\\beta=\\phi$. Kernel: $\\mathfrak m_AB\\subseteq\\ker\\phi_B$ as $\\phi(\\mathfrak m_A)=0$. Conversely if $h(Q)=0$, the image $\\bar Q\\in F[T]$ of $Q$ (coefficients mapped by $\\phi$) vanishes at $\\alpha$, so $\\bar Q=PG$ with $G\\in F[T]$; lifting $G$ to $G'\\in A[T]$, the polynomial $Q-fG'$ has image $PG-PG=0$, i.e. all its coefficients lie in $\\mathfrak m_A$, so $Q\\in(f)+\\mathfrak m_AA[T]$ and the class of $Q$ lies in $\\mathfrak m_AB$. Hence $\\ker\\phi_B=\\mathfrak m_AB$. Image: $\\phi_B(B)=h(A[T])=F[\\alpha]=\\{\\bar Q(\\alpha)\\}$, an $F$-subspace of $F(\\alpha)$ [def-weil-simple-field-extension] containing $1,\\alpha,\\dots,\\alpha^{e-1}$, $e=[F(\\alpha):F]$, which form an $F$-basis of $F(\\alpha)$ [lem-weil-pbc-simple-algebraic-extension-power-basis]; so $\\phi_B(B)=F(\\alpha)$. Thus $B/\\mathfrak m_AB\\cong F(\\alpha)$ is a field, i.e. $\\mathfrak m_AB$ is a maximal ideal (in particular $B\\neq0$). By [lem-weil-pbc-finite-algebra-local-radical] (with $(A,\\mathfrak m_A)$ local and $B$ finite over $A$) every maximal ideal of $B$ contains $\\mathfrak m_AB$, hence equals it. So $B$ is local with maximal ideal $\\mathfrak m_AB$, and Claim M is proved.",
-   "uses": [
-    "def-weil-algebraic-element",
-    "def-weil-pbc-separable-algebraic-extension",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-projective-module-flat",
-    "def-weil-simple-field-extension",
-    "lem-weil-pbc-simple-algebraic-extension-power-basis",
-    "lem-weil-pbc-finite-algebra-local-radical"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 03C3, proof, first paragraph ('If $\\alpha$ is algebraic with minimal polynomial $T^d+\\sum\\overline\\lambda_iT^{d-i}$, then we let $R'=R[T]/(T^d+\\sum\\lambda_iT^{d-i})$'); the verification (locality, kernel, residue field) is written by the agent"
-   }
-  },
-  {
-   "text": "(Claim M for $R$-towers.) Let $(A,\\rho,\\phi)$ be an $R$-tower (the definition of an R-tower) with image $F=\\phi(A)$ and let $\\alpha\\in K$. Apply Claim M (the two monogenic cases) to the local ring $(A,\\mathfrak mA)$ and $\\phi$ (whose kernel is $\\mathfrak mA$): we get $\\beta:A\\to B$ flat, $B$ local with maximal ideal $(\\mathfrak mA)B=\\mathfrak mB$ (the ideal generated by the image of $\\mathfrak m$ under $\\beta\\circ\\rho$), and $\\phi_B$ with $\\phi_B\\circ\\beta=\\phi$, $\\ker\\phi_B=\\mathfrak mB$, $\\phi_B(B)=F(\\alpha)$. The composite $\\beta\\circ\\rho:R\\to B$ is flat [lem-weil-pbc-flat-ring-map-comp] and $\\phi_B\\circ\\beta\\circ\\rho=\\phi\\circ\\rho=\\varphi_0$. So $(B,\\beta\\circ\\rho,\\phi_B)$ is an $R$-tower with image $F(\\alpha)$, together with a ring map $\\beta:A\\to B$ compatible with the maps from $R$ and to $K$.",
-   "uses": [
-    "lem-weil-pbc-flat-ring-map-comp"
+    "def-weil-pbc-flat-ring-map"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 03C3, proof, fourth paragraph ('we can let $R(x')\\subset R(x)$ be the local ring extension constructed in the first paragraph')"
+    "place": "Algebra, Lemma Tag 03C3, proof; https://stacks.math.columbia.edu/tag/03C3"
    }
   },
   {
-   "text": "At every noninitial limit stage use the explicit direct limit of the previous compatible local R-algebras. The flat-local-tower-direct-limit lemma gives locality, flatness, the generated maximal ideal and the kernel of the induced map to K. The image is the union of the stage images because every limit element has a representative. At an initial stage use the universe lift of R.",
+   "text": "For a nonempty linearly ordered tower take its explicit direct limit. Apply flat_local_tower_directLimit to get locality, flatness, maximal-ideal and kernel equalities. Adjoin the requested element by the monogenic extension. Compose the maps from each old stage, and prove cocone compatibility, flatness of the composite and the maximal-ideal equality using map_map.",
    "uses": [
     "lem-weil-pbc-flat-local-tower-direct-limit",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
+    "new-flat-local-monogenic-extension",
+    "lem-weil-pbc-flat-ring-map-comp"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 03C3, third paragraph"
+    "place": "Algebra, Lemma Tag 03C3, proof; https://stacks.math.columbia.edu/tag/03C3"
    }
   },
   {
-   "text": "(The well-ordering and the subfields $K(x)$.) Choose a well-ordering $\\le$ of the set $K$ [lem-weil-pbc-well-ordering-theorem]. For $x\\in K$ let $K(x)$ (resp. $K_{<x}$) be the subfield of $K$ generated by $F_0$ and $\\{y\\in K:y\\le x\\}$ (resp. $\\{y:y<x\\}$), i.e. the intersection of all subfields containing these. Then: (a) $K(x)=K_{<x}(x)$ [def-weil-simple-field-extension], both being the smallest subfield containing $F_0$, the $y<x$ and $x$; (b) $y\\le x$ implies $K(y)\\subseteq K(x)$, and $y<x$ implies $K(y)\\subseteq K_{<x}$; (c) if $\\{y<x\\}=\\emptyset$ then $K_{<x}=F_0$; if it is nonempty then $K_{<x}=\\bigcup_{y<x}K(y)$: by (b) the $K(y)$, $y<x$, form a chain of subfields, so their union is a subfield, it contains $F_0$ and each $y<x$ ($y\\in K(y)$), and it is contained in $K_{<x}$; (d) $\\bigcup_{x\\in K}K(x)=K$, as $z\\in K(z)$.",
+   "text": "Apply the generic compatible-ring recursion theorem with the predicate consisting of locality, flatness, the generated maximal ideal, the kernel and the fixed composite to K. Extract the local-ring instances and witnesses. For x choose index ULift.up x to obtain coverage.",
    "uses": [
-    "lem-weil-pbc-well-ordering-theorem",
-    "def-weil-simple-field-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 03C3, proof, fourth paragraph ('we choose a well ordering on $K$. For $x\\in K$ we let $K(x)$ be the subfield of $K$ generated by all elements of $K$ which are $\\leq x$')"
-   }
-  },
-  {
-   "text": "(The recursion.) For a subset $D\\subseteq K$ closed downwards, a *coherent system on $D$* is a family of $R$-towers $(A_y,\\rho_y,\\phi_y)_{y\\in D}$ with $\\phi_y(A_y)=K(y)$ and ring maps $\\psi_{y'y}:A_{y'}\\to A_y$ for $y'\\le y$ in $D$ satisfying the compatibilities of step 5 ($\\psi_{yy}=\\mathrm{id}$, $\\psi_{y''y'}\\psi_{y'y}=\\psi_{y''y}$, $\\psi_{y'y}\\rho_{y'}=\\rho_y$, $\\phi_y\\psi_{y'y}=\\phi_{y'}$). Let $\\mathcal V$ be the class of tuples $(A,\\rho,\\phi,(B_y,\\beta_y)_{y\\in K})$ with $A,B_y$ commutative rings and $\\rho:R\\to A$, $\\phi:A\\to K$, $\\beta_y:B_y\\to A$ ring maps. For $x\\in K$ define $G_x$ on families $c=(c_y)_{y<x}$ in $\\mathcal V$ as follows (fixing the choices once and for all by the axiom of choice). If $c$ is a coherent system on $\\{y<x\\}$ (the components of $c_y$ being $A_y,\\rho_y,\\phi_y$ and $\\beta$'s from $A_{y'}$, $y'<y$, giving $\\psi_{yy'}$): let $(A',\\rho',\\phi')=(R,\\mathrm{id}_R,\\varphi_0)$ if $\\{y<x\\}=\\emptyset$ (an $R$-tower with image $F_0=K_{<x}$, the subfield-union identity); otherwise the colimit $R$-tower of Claim C (the direct-limit lemma) over $J=\\{y<x\\}$, with image $\\bigcup_{y<x}K(y)=K_{<x}$ (the subfield-union identity) and maps $\\iota_y:A_y\\to A'$. Apply the composed monogenic extension to $(A',\\rho',\\phi')$ and $\\alpha=x$: an $R$-tower $(A_x,\\rho_x,\\phi_x)$ with image $K_{<x}(x)=K(x)$ (the simple-extension identity) and $\\beta:A'\\to A_x$; put $G_x(c)=(A_x,\\rho_x,\\phi_x,(A_y,\\beta\\iota_y)_{y<x})$ (with $\\psi_{xy}=\\beta\\iota_y$; no $\\iota$'s in the empty case). If $c$ is not coherent, $G_x(c)=(R,\\mathrm{id},\\varphi_0,\\emptyset)$. By [lem-weil-pbc-transfinite-recursion] there is a family $(c_x)_{x\\in K}$ with $c_x=G_x((c_y)_{y<x})$. By induction along the well-ordering (a least $x$ for which $(c_y)_{y\\le x}$ fails to be coherent would have $(c_y)_{y<x}$ coherent: a failure of coherence on $\\{y\\le x'\\}$ for some $x'<x$ would already occur below $x$), $(c_y)_{y\\le x}$ is coherent for every $x$: if $(c_y)_{y<x}$ is coherent, $c_x$ is an $R$-tower with image $K(x)$ by construction, and the new maps satisfy the compatibilities: $\\psi_{xy}\\psi_{yy'}=\\beta\\iota_y\\psi_{yy'}=\\beta\\iota_{y'}=\\psi_{xy'}$, $\\psi_{xy}\\rho_y=\\beta\\iota_y\\rho_y=\\beta\\rho'=\\rho_x$, $\\phi_x\\psi_{xy}=\\phi_x\\beta\\iota_y=\\phi'\\iota_y=\\phi_y$ (steps 4, 6). Hence $(c_x)_{x\\in K}$ is a coherent system on $K$.",
-   "uses": [
-    "lem-weil-pbc-transfinite-recursion"
+    "new-compatible-ring-tower-recursion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 03C3, proof, fourth paragraph ('By transfinite recursion on $x\\in K$ we will produce ring maps $R\\subset R(x)$ as in the lemma with residue field extension $K(x)/k$ ... $R(x)$ will contain $R(y)$ for all $y\\leq x$'); the source treats successor and limit $x$ separately, here both by one rule (for $x$ with predecessor $x'$ the colimit over $\\{y<x\\}$ is $R(x')$ up to isomorphism), and the least element of $K$ is given $A'=R$ (the source's 'colimit over $x'<x$' would be over the empty set)"
-   }
-  },
-  {
-   "text": "Use the ring constructed at index x (after adjoining x) as A_x. Its map ψ_x to K has x in its image. Hence for each z∈K, choosing index ULift.up z gives a stage preimage. The induction gives coherent R-algebra transition maps, flatness, maximal-ideal equality, kernels and the common composite ι∘residue. The linear order on ULift K is the chosen well-order. Colimits indexed by subsets of ULift K, polynomial rings, monic quotients and localizations all live in Type(max u v); initially lift R to this universe. This constructs only the system, not its final colimit.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 03C3, fourth paragraph"
+    "place": "Algebra, Lemma Tag 03C3, proof; https://stacks.math.columbia.edu/tag/03C3"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-flat-ring-map",
-  "def-weil-simple-field-extension",
-  "def-weil-algebraic-element",
-  "def-weil-polynomial-ring",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-free-module",
-  "lem-weil-pbc-projective-module-flat",
-  "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-flat-ring-map-comp",
-  "def-weil-pbc-separable-algebraic-extension",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-simple-algebraic-extension-power-basis",
-  "lem-weil-pbc-finite-algebra-local-radical",
   "lem-weil-pbc-flat-local-tower-direct-limit",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-well-ordering-theorem",
-  "lem-weil-pbc-transfinite-recursion"
+  "new-flat-local-monogenic-extension",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "new-compatible-ring-tower-recursion"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 03C3, proof"
+  "place": "Algebra, Lemma Tag 03C3, proof; https://stacks.math.columbia.edu/tag/03C3"
  },
  "mathlib_searches": [
   {
@@ -213,9 +145,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261012T203941-L-830044",
+  "landing": "20261012T234226-L-2127186",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
