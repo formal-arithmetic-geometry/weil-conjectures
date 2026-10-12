@@ -6,6 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.Algebra.Homology.TotalFreeFiltrationTerms
+import Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelOddAux
 
 /-!
 # Splittings and free quotients of the alternating column filtration
@@ -51,6 +52,8 @@ theorem cokernel_odd
         (ComplexShape.up ℤ) (degree i)).obj (ModuleCat.of A A)))) :
     Nonempty (cokernel (step K S e h_positive (2 * j + 1)) ≅
       ∐ (fun i : I ↦ (HomologicalComplex.single (ModuleCat.{u} A)
-        (ComplexShape.up ℤ) (degree i - (j : ℤ))).obj (ModuleCat.of A A))) := by sorry
+        (ComplexShape.up ℤ) (degree i - (j : ℤ))).obj (ModuleCat.of A A))) := by
+  rcases h_endpoint with ⟨h_endpoint⟩
+  exact cokernel_odd_core K S e h_positive h_exact j I degree h_endpoint
 
 end CochainComplex.TotalFreeFiltration

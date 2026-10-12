@@ -1,0 +1,102 @@
+{
+ "kind": "statement",
+ "title": "Core odd filtration quotient calculation",
+ "id": "lem-pc-derived-total-filtration-cokernel-odd-core",
+ "statement": "Under the hypotheses of lem-pc-derived-total-filtration-cokernel-odd, with an explicitly specified endpoint isomorphism rather than a Nonempty wrapper, the categorical cokernel of the odd stage inclusion is isomorphic to the reindexed coproduct of single-degree copies.",
+ "source": {
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, proof, alternating two-step column filtration"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "stmt_deps": [
+  "lem-pc-derived-total-filtration-stable"
+ ],
+ "proof": [
+  {
+   "text": "Compute the cokernel degreewise using short exactness, identify it with the third endpoint, verify the total differential compatibility, and compose with the specified endpoint isomorphism and degree reindexing.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-derived-total-filtration-stable"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S1",
+  "date": "2026-10-12",
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelOdd",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-filtration-cokernel-odd",
+   "place": "proof calculation"
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cokernel odd filtration",
+   "results": "No exact existing theorem found in Mathlib or repository.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Nonempty (cokernel _ ≅ _)",
+   "results": "Only generic cokernel isomorphism results; no filtration-specific match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "odd filtration quotient total complex",
+   "results": "No exact match.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelOddAux",
+  "file": "lean/Sheaf/Algebra/Homology/TotalFreeFiltrationCokernelOddAux.lean",
+  "declaration": "CochainComplex.TotalFreeFiltration.cokernel_odd_core",
+  "statement": "theorem cokernel_odd_core\n    (h_exact : ∀ j, (S j).ShortExact)\n    (j : ℕ) (I : Type u) (degree : I → ℤ)\n    (h_endpoint : (S j).X₃ ≅\n      ∐ (fun i : I ↦ (HomologicalComplex.single (ModuleCat.{u} A)\n        (ComplexShape.up ℤ) (degree i)).obj (ModuleCat.of A A))) :\n    Nonempty (cokernel (step K S e h_positive (2 * j + 1)) ≅\n      ∐ (fun i : I ↦ (HomologicalComplex.single (ModuleCat.{u} A)\n        (ComplexShape.up ℤ) (degree i - (j : ℤ))).obj (ModuleCat.of A A)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T160830-L-2612251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T160830-L-2612251",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
