@@ -25,71 +25,71 @@
  ],
  "proof": [
   {
-   "text": "Ideal modules and their closed pushforwards are coherent, by the locally Noetherian and finite-pushforward results. The zero ideal case uses rank one, zero submodule and zero quotient, with G prime zero and P(0).",
+   "text": "Apply the property-independent geometric embedding lemma to the coherent G from the hypothesis and the chosen I. It supplies r≥1 and either a zero middle sum or an ideal inclusion ι:J→OX, generically surjective, with a mono τ:JG→M bijective at ξ.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "pqf-lem-locnoeth-lft",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-finite-pushforward-coherent"
+    "lem-weil-pbc-coherent-ideal-patching-generic-embedding"
    ],
    "elementary": true
   },
   {
-   "text": "The generic point η of Z maps to ξ by [lem-weil-pbc-scheme-sober] and the closed embedding. Apply [lem-weil-pbc-coherent-generic-point-ideal-inclusion] to G: obtain a mono from i_*(I^{⊕r}) into G which is an isomorphism near ξ. Since Supp(G)=i(Z), G_ξ is nonzero, so r≥1 and I is nonzero. For every nonzero ideal I′≤I, its generic stalk inclusion is bijective by [lem-weil-pbc-integral-scheme-ideal-generic-stalk]. Sectionwise pushforward commutes with finite sums. Its composite β:(i_*I′)^{⊕r}→G is a mono, bijective at ξ by naturality [lem-weil-pbc-closed-pushforward-stalks].",
+   "text": "Prove the ideal on Z coherent: closed immersion makes Z locally Noetherian; the structure sheaf is coherent, and the ideal is its quasi-coherent submodule. Quasi-coherence follows by applying affine pushforward to the structure sheaf of its closed subscheme, then taking the kernel of the structure-sheaf restriction. Finite pushforward proves i_*I coherent, and finite-sum closure proves M coherent.",
    "uses": [
-    "lem-weil-pbc-scheme-sober",
-    "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-closed-immersion-finite",
+    "pqf-lem-locnoeth-lft",
+    "lem-pc-affine-morphism-hi",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Outside i(Z), every stalk of i_*I is zero by closed-pushforward stalks. Apply the additive underlying abelian-group stalk functor to the biproduct identity sum πjιj=id. All factors through these zero stalks vanish, so the identity on Mx is zero, and Mx is zero.",
+   "uses": [
     "lem-weil-pbc-closed-pushforward-stalks"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a nonzero ideal I on Z, intersect it with the nonzero ideal A supplied by the generic inclusion. Embed its positive sum in G. Form its coherent cokernel Q0 and its annihilator J; J is quasi-coherent and has unit stalk at ξ. JG factors through the sum because J kills Q0. The hypothesis on G supplies a coherent G prime inside JG with full generic stalk and P(G prime). Pull it back through the mono into G to obtain an isomorphic coherent module H.",
+   "text": "In the zero-middle case choose H=G prime=0 and use P(0). Otherwise apply the hypothesis on G to ι, obtaining coherent G prime satisfying P and h:G prime→JG with G prime.arrow=h followed by the ideal-product inclusion. Its composite is mono, so h is mono and f=hτ is mono. The ideal-product stalk inclusion is injective; cancel it against the generic surjectivity of G prime.arrow to prove hξ surjective. Compose with bijectivity of τξ to prove fξ surjective.",
    "uses": [
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-scheme-theoretic-support",
-    "lem-weil-pbc-finite-type-module-support-closed",
-    "lem-weil-pbc-module-iso-on-stalks",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-ideal-module-product-stalk"
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The intersection is nonzero because products of nonzero sections on a nonempty affine open in the integral scheme are nonzero. Include H through the intersection sum into the specified biproduct of i_*I. Its cokernel Q is coherent, supported in i(Z) and vanishes at ξ by stalk exactness. The kernel-cokernel short complex is short exact and has the specified middle object. This construction never invokes extension closure, positive-sum descent, or a small-support property of P.",
+   "text": "Take the canonical complex S=(H→M→coker f), which is short exact because f is mono. Its cokernel is coherent by coherent cokernel closure. Stalk exactness makes every stalk cokernel projection surjective. Outside i(Z) its source stalk is zero, so its target stalk is zero. At ξ every source element lifts through fξ, and the cokernel projection annihilates it; hence the cokernel stalk is again zero. Choose G prime=H and the identity isomorphism. The middle object is literally the specified biproduct.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-ideal-intersection",
-    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
     "lem-weil-pbc-module-stalk-exact"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
+  "lem-pc-affine-morphism-hi",
   "lem-weil-pbc-closed-immersion-finite",
   "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-coherent-ideal-patching-generic-embedding",
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "lem-weil-pbc-finite-pushforward-coherent",
-  "lem-weil-pbc-finite-type-module-support-closed",
   "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
-  "lem-weil-pbc-module-iso-on-stalks",
   "lem-weil-pbc-module-stalk-exact",
-  "lem-weil-pbc-quasi-coherent-ideal-intersection",
-  "lem-weil-pbc-scheme-sober",
-  "lem-weil-pbc-scheme-theoretic-support",
-  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
   "pqf-lem-locnoeth-lft"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 01YL (lemma-property-irreducible-higher-rank-cohomological), third proof paragraph and its final ideal-intersection argument; 01YM (lemma-property-higher-rank-cohomological). Read online at https://stacks.math.columbia.edu/tag/01YL because the literature checkout is absent on this machine."
+  "by": "agent",
+  "agent": "H1",
+  "date": "2026-10-13",
+  "based_on": {
+   "document": "literature/stacks-project/coherent.tex",
+   "place": "Tag 01YL, lemma-property-irreducible-higher-rank-cohomological, third proof paragraph and final ideal intersection argument; Tag 01YE for the generic ideal inclusion. Read the source at https://stacks.math.columbia.edu/tag/01YL."
+  },
+  "note": "Compiled Lean reduction: coherence, support, property selection and the cokernel sequence are proved; only the generic embedding is split off."
  },
  "mathlib_searches": [
   {
@@ -187,9 +187,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "H1",
   "result": "pass",
-  "landing": "20261012T194148-L-467234",
+  "landing": "20261012T225313-L-1806760",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

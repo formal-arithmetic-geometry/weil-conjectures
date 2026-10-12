@@ -1,0 +1,193 @@
+{
+ "id": "lem-weil-pbc-coherent-ideal-patching-generic-embedding",
+ "kind": "statement",
+ "title": "Generic embedding of an ideal multiple into an ideal sum",
+ "statement": "Let $X$ be locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-scheme-conventions]. Let $i:Z\\to X$ be a closed immersion with $Z$ integral [def-weil-closed-immersion, def-pc-integral-scheme], and let $\\xi\\in X$ satisfy $\\overline{\\{\\xi\\}}=i(Z)$. Let $G$ be a coherent $\\mathcal O_X$-module [pqf-def-coherent, def-weil-sheaf-of-modules-category] whose nonzero-stalk locus is $i(Z)$ and whose $\\xi$-stalk is annihilated by the maximal ideal of $\\mathcal O_{X,\\xi}$ [def-weil-pbc-module-stalk, def-weil-residue-field]. For each quasi-coherent ideal $I$ of $\\mathcal O_Z$ [def-sbc-closed-immersion-ideal-sheaf], there is $r\\ge1$ such that, writing $M=(i_*I)^{\\oplus r}$ for the specified categorical biproduct, either $M$ is a zero object, or there is a quasi-coherent ideal inclusion $\\iota:J\\hookrightarrow\\mathcal O_X$ surjective at the $\\xi$-stalk, and a monomorphism $\\tau:JG\\hookrightarrow M$ [lem-weil-pbc-ideal-module-product-stalk] whose map on $\\xi$-stalks is bijective. No property $P$ of modules, choice of a $P$-subobject, or short exact sequence occurs in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YL, lemma-property-irreducible-higher-rank-cohomological, third proof paragraph and final ideal intersection argument; Tag 01YE for the generic ideal inclusion. Read the source at https://stacks.math.columbia.edu/tag/01YL."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "def-weil-residue-field",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The closed immersion is finite, and Z is locally Noetherian. Ideals on Z are quasi-coherent submodules of its coherent structure sheaf and hence coherent. Their finite closed pushforwards and finite sums are coherent. If I is the zero ideal, its pushforward is zero, so r=1 gives the first alternative.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Assume I is nonzero. The image of the generic point of the integral scheme Z is ξ: its closure is the closed image, as is the closure of ξ, and generic points in the sober scheme X are unique. Apply the generic-point ideal inclusion to G. It gives an ideal A and a monomorphism from the pushforward of its rank-r sum into G, an isomorphism near ξ. As G has the whole closed image as support, its ξ-stalk is nonzero. Thus r≥1 and A is nonzero.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-coherent-generic-point-ideal-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put B=I∩A. On a nonempty affine open both ideals have nonzero sections. The affine ring is a domain, so the product of two such sections is nonzero and belongs to B. Hence B is nonzero. Its inclusions into I and A are bijective on generic stalks, since each nonzero ideal of the generic field equals that field. Their pushforward rank-r sums have a common coherent module K, with monomorphisms β:K→G and γ:K→M. Both are bijective at ξ. Closed pushforward commutes with finite sums because it is additive and preserves finite products; stalk naturality identifies the generic maps.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-ideal-intersection",
+    "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+    "lem-weil-pbc-closed-pushforward-stalks",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Q=coker β. Coherent cokernel closure makes Q coherent. Stalk exactness and the generic bijectivity of β show Qξ=0. Its support is closed; therefore Q vanishes on an open neighborhood of ξ. The quasi-coherent annihilator ideal J supplied by scheme-theoretic support annihilates Q and is the whole structure sheaf on this neighborhood. Its inclusion ι:J→OX is consequently surjective at ξ.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-stalk-exact",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "lem-weil-pbc-scheme-theoretic-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Multiplication J⊗G→G followed by G→Q is zero because J annihilates Q. Hence its image JG maps to the kernel of G→Q, which is K via β. Denote this factor by t:JG→K and put τ=t followed by γ. Since βt is the canonical mono JG→G, t and τ are monomorphisms. The ideal-product stalk formula and surjectivity of Jξ→OX,ξ show (JG)ξ→Gξ is bijective. Since βξ and γξ are also bijective, τξ is bijective. This gives the second alternative.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ideal-module-product-stalk",
+    "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-abelian-exact-iff-epi-kernel-lift",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-pushforward-stalks",
+  "lem-weil-pbc-coherent-generic-point-ideal-inclusion",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "lem-weil-pbc-ideal-module-product-stalk",
+  "lem-weil-pbc-integral-scheme-ideal-generic-stalk",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-quasi-coherent-ideal-intersection",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "pqf-lem-coherent-ft-locnoeth",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YL, lemma-property-irreducible-higher-rank-cohomological, third proof paragraph and final ideal intersection argument; Tag 01YE for the generic ideal inclusion. Read the source at https://stacks.math.columbia.edu/tag/01YL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on an integral closed subscheme embeds an ideal multiple into a finite direct sum of any nonzero ideal, isomorphic at the generic point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.IsAffineOpen.mem_ideal_iff, AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso, AlgebraicGeometry.Scheme.IdealSheafData.le_of_iSup_eq_top. No generic ideal-product embedding theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.exact_cokernel",
+   "results": "1 hits: CategoryTheory.ShortComplex.exact_cokernel. No generic ideal-product embedding theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*(patching|ideal)|shortExact.*cokernel",
+   "results": "7 hits: Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean, Mathlib/Algebra/Homology/Factorizations/CM5a.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean, Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean, Mathlib/CategoryTheory/Abelian/Preradical/Colon.lean. No generic ideal-product embedding theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "coherent sheaf generic point ideal multiple injection finite direct sum of ideals",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentIdealPatchingExactSequence",
+  "date": "2026-10-13",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Geometric preparation within the coherent ideal devissage used by the finite etale lifting argument: Tag 01YL, third paragraph, the inclusion J^n G into the intersection ideal sum, before applying the property hypothesis.",
+   "via": [
+    "lem-weil-pbc-coherent-ideal-patching-exact-sequence",
+    "lem-weil-pbc-coherent-property-integral-ideals-of-small-support",
+    "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target",
+    "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "lem-weil-pbc-thickening-affine-scheme",
+    "lem-weil-pbc-thickening-integral",
+    "lem-weil-pbc-thickening-finite-cartesian",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentIdealPatchingGenericEmbedding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_ideal_patching_generic_embedding",
+  "statement": "theorem coherent_ideal_patching_generic_embedding\n    (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]\n    (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]\n    (ξ : X) (hclosure : closure ({ξ} : Set X) = Set.range i.base)\n    (G : X.Modules) (hG : RingedSpace.IsCoherent X.toRingedSpace G)\n    (hsupport : {x : X | ¬ Subsingleton (G.presheaf.stalk x)} = Set.range i.base)\n    (hkill : ∀ g : X.presheaf.stalk ξ,\n      ∀ m : (RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).obj G,\n        g ∈ IsLocalRing.maximalIdeal _ → g • m = 0)\n    (I : Z.IdealSheafData) :\n    ∃ (r : ℕ), 1 ≤ r ∧\n      let M := @biproduct (Fin r) X.Modules _ _\n        (fun _ : Fin r ↦ (pushforward i).obj I.toModules)\n        (HasBiproduct.of_hasProduct (fun _ : Fin r ↦ (pushforward i).obj I.toModules))\n      (IsZero M ∨\n        ∃ (J : X.Modules) (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf),\n          Mono ι ∧ J.IsQuasicoherent ∧\n          Function.Surjective\n            ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map ι).hom ∧\n          ∃ (τ : idealModuleProduct ι G ⟶ M), Mono τ ∧\n            Function.Bijective\n              ((RingedSpace.moduleStalkFunctor X.toRingedSpace ξ).map τ).hom)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T225313-L-1806760",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T225313-L-1806760",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

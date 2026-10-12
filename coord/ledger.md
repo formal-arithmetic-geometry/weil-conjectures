@@ -9907,3 +9907,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: merged deliver/G4/Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness (stage 3; reviewer PASS; first push; landing 20261012T225312-L-1806258 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/G4/Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMap (stage 3; reviewer PASS; first push; landing 20261012T225312-L-1806437 (interface); batch 20261012T225253; modules 3; new nodes 2)
 - 22:53 L: merged deliver/G4/Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism (stage 3; reviewer PASS; first push; landing 20261012T225312-L-1806625 (proof); batch 20261012T225253; modules 1; new nodes 0)
+- 22:53 L: merged deliver/H1/Sheaf.AlgebraicGeometry.CoherentIdealPatchingExactSequence (stage 3; reviewer PASS; first push; landing 20261012T225313-L-1806760 (interface); batch 20261012T225253; modules 2; new nodes 1)
