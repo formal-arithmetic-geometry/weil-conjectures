@@ -125,6 +125,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.BrauerReduced
 public import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimensionComplex
+public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimensionReduction
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf

@@ -5,12 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.FunctionFieldCohomology
-public import WeilConjectures.AlgebraicGeometry.Curve.GenericRestriction
-public import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFiniteness
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
-public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
@@ -51,12 +46,6 @@ namespace AlgebraicGeometry.IsCurve
 open Etale
 
 variable {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}
-
-theorem subsingleton_sheafH_of_three_le_of_isIntegral (f : C ⟶ Spec (.of k)) [IsCurve f]
-    [IsIntegral C]
-    (F : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
-    (hq : 3 ≤ q) : Subsingleton (Sheaf.H F q) :=
-  sorry
 
 /-- **Cohomological dimension of a curve, by reduction to integral curves.** Let `C` be a curve
 over an algebraically closed field `k`. Then `Hᵠ(C, F) = 0` for every torsion étale sheaf `F` on

@@ -141,6 +141,16 @@ lemma upperStarComp_hom_app_comp_upperStarForget₂Comparison (h₁ : X ⟶ Y) (
     Category.assoc]
   exact ((Φ Z).map_comp _ _).symm
 
+/-- Naturality of the comparison `f^* (forget₂ G) ⟶ forget₂ (f^* G)` of
+`AlgebraicGeometry.Etale.upperStarForget₂Comparison` in `G`. -/
+@[reassoc]
+lemma upperStarForget₂Comparison_naturality (f : X ⟶ Y)
+    {G G' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : G ⟶ G') :
+    ((f)^*[AddCommGrpCat.{u + 1}]).map ((Φ Y).map φ) ≫ upperStarForget₂Comparison Λ f G' =
+      upperStarForget₂Comparison Λ f G ≫ (Φ X).map (((f)^*[ModuleCat.{u + 1} Λ]).map φ) := by
+  rw [← upperStarForget₂_natTrans_app, ← upperStarForget₂_natTrans_app]
+  exact (upperStarForget₂ Λ f).natTrans.naturality φ
+
 end Forget
 
 end AlgebraicGeometry.Etale
@@ -168,7 +178,7 @@ the isomorphism. -/
 lemma mapExactFunctor_eq_of_iso (τ : F ≅ G) {A B : C} {n : ℕ} (x : Ext A B n) :
     x.mapExactFunctor F = (mk₀ (τ.hom.app A)).comp
       ((x.mapExactFunctor G).comp (mk₀ (τ.inv.app B)) (add_zero n)) (zero_add n) := by
-  rw [← comp_assoc_of_second_deg_zero, ← mapExactFunctor_comp_mk₀_app F G τ.hom,
+  rw [← comp_assoc_of_third_deg_zero, ← mapExactFunctor_comp_mk₀_app F G τ.hom,
     comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, Iso.hom_inv_id_app, comp_mk₀_id]
 
 end CategoryTheory.Abelian.Ext
@@ -218,6 +228,13 @@ noncomputable def cohomologyForget₂AddEquiv {Y : Scheme.{u}} (p : Y ⟶ S) (q 
   ((AddEquiv.ofBijective _
       (Functor.mapExt_bijective_of_preservesInjectiveObjects (Ψ Y) _ _ q)).trans
     (Ext.postcompAddEquiv _ (forget₂UpperStarObjIso ε p) q)).trans
+    (Ext.precompAddEquiv (constantSheafForget₂Iso e p) _ q)
+
+lemma cohomologyForget₂AddEquiv_apply {Y : Scheme.{u}} (p : Y ⟶ S) (q : ℕ) (x) :
+    cohomologyForget₂AddEquiv e ε p q x = (Ext.mk₀ (constantSheafForget₂Iso e p).hom).comp
+      ((x.mapExactFunctor (Ψ Y)).comp (Ext.mk₀ (forget₂UpperStarObjIso ε p).hom) (add_zero q))
+      (zero_add q) :=
+  rfl
 
 /-- The identifications `AlgebraicGeometry.Etale.constantSheafForget₂Iso` are compatible with
 pullbacks. -/
@@ -230,7 +247,21 @@ lemma constantSheafForget₂Iso_hom_comp {Y Z : Scheme.{u}} (pZ : Z ⟶ S) (f : 
   simp only [constantSheafForget₂Iso, Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Functor.mapIso_hom,
     asIso_hom, Iso.app_hom, constantSheafCompUpperStarIso_eq_upperStarConstantSheafIso,
     Functor.map_comp, Category.assoc]
-  done
+  rw [← cancel_epi ((Scheme.upperStarConstantSheafIso AddCommGrpCat.{u + 1} (f ≫ pZ)).hom.app _),
+    Iso.hom_inv_id_app_assoc, ← Scheme.upperStarConstantSheafIso_comp AddCommGrpCat.{u + 1} f pZ,
+    Category.assoc, Category.assoc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  have hn := (upperStarComp AddCommGrpCat.{u + 1} f pZ).hom.naturality e.hom
+  simp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn]
+  congr 1
+  rw [upperStarForget₂Comparison_naturality,
+    reassoc_of% upperStarComp_hom_app_comp_upperStarForget₂Comparison]
+  congr 1
+  rw [← Functor.map_comp, ← Functor.map_comp,
+    ← Scheme.upperStarConstantSheafIso_comp (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) f pZ]
+  simp
 
 /-- The identifications `AlgebraicGeometry.Etale.forget₂UpperStarObjIso` are compatible with
 pullbacks. -/
@@ -242,6 +273,40 @@ lemma forget₂UpperStarObjIso_hom_comp {Y Z : Scheme.{u}} (pZ : Z ⟶ S) (f : Y
         (upperStarComp AddCommGrpCat.{u + 1} f pZ).inv.app F := by
   simp only [forget₂UpperStarObjIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
     asIso_inv, Functor.map_comp, Category.assoc]
+  have hn := (upperStarComp AddCommGrpCat.{u + 1} f pZ).inv.naturality ε.hom
+  simp only [Functor.comp_map] at hn
+  rw [hn]
+  simp only [← Category.assoc]
+  congr 1
+  simp only [Category.assoc]
+  rw [← cancel_epi ((upperStarComp AddCommGrpCat.{u + 1} f pZ).hom.app _ ≫
+    ((f)^*[AddCommGrpCat.{u + 1}]).map (upperStarForget₂Comparison (ULift.{u + 1} ℤ) pZ G) ≫
+    upperStarForget₂Comparison (ULift.{u + 1} ℤ) f _)]
+  simp only [Category.assoc]
+  rw [
+    reassoc_of% upperStarComp_hom_app_comp_upperStarForget₂Comparison, ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, IsIso.hom_inv_id,
+    IsIso.hom_inv_id_assoc, ← Functor.map_comp_assoc,
+    IsIso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
+
+/-- The identifications `AlgebraicGeometry.Etale.cohomologyForget₂AddEquiv` intertwine the
+restriction maps `AlgebraicGeometry.Etale.cohomologyRestrictOver` of the cohomology of sheaves of
+`ULift ℤ`-modules with the pullback maps `AlgebraicGeometry.Etale.cohomologyMap` of the
+cohomology of abelian sheaves. -/
+lemma cohomologyForget₂AddEquiv_cohomologyRestrictOver {Y Z : Scheme.{u}} (pY : Y ⟶ S)
+    (pZ : Z ⟶ S) (f : Y ⟶ Z) (hf : f ≫ pZ = pY) (q : ℕ)
+    (x : Ext (SemiSimplicialObject.constSheaf Z.smallEtaleTopology (ULift.{u + 1} ℤ))
+      (((pZ)^*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)]).obj G) q) :
+    cohomologyForget₂AddEquiv e ε pY q
+        (cohomologyRestrictOver (ULift.{u + 1} ℤ) pY pZ f hf G q x) =
+      Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} f pZ pY hf.symm).inv.app F) q
+        (cohomologyMap f _ q (cohomologyForget₂AddEquiv e ε pZ q x)) := by
+  subst hf
+  rw [cohomologyForget₂AddEquiv_apply, cohomologyForget₂AddEquiv_apply, cohomologyMap_apply,
+    Sheaf.H.map_apply]
+  simp only [cohomologyRestrictOver, cohomologyRestrict, AddMonoidHom.comp_apply,
+    AddMonoidHom.mk'_apply, Functor.mapExtAddHom_apply, Ext.mapExactFunctor_comp,
+    Ext.mapExactFunctor_mk₀]
   done
 
 end Transport
