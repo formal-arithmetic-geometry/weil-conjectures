@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineSectionVanishing
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 
 /-! # Classes in fibers of higher direct images under scheme limits
 
@@ -94,6 +94,53 @@ theorem exists_higherDirectImage_limit_fiber_eq_zero {S : Scheme.{v}}
       ∃ (j : I) (f : i ⟶ j),
         (((S.uliftPointSmallEtale s).sheafFiber
           (A := AddCommGrpCat.{v + 1})).map (K.map f)) y = 0 := by
-  sorry
+  classical
+  have : PreservesFilteredColimitsOfSize.{v + 1, v + 1}
+      (forget AddCommGrpCat.{v + 1}) := inferInstance
+  have : LocallySmall.{v + 1} S.Etale := locallySmall_max.{v + 1}
+  let Φ := S.uliftPointSmallEtale s
+  intro i y hy
+  obtain ⟨U, x, z, hz⟩ := Φ.toPresheafFiber_jointly_surjective (P := (K.obj i).obj) y
+  let Q : S.Etaleᵒᵖ ⥤ AddCommGrpCat.{v + 1} := ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
+    (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))).obj
+  have hzero : Φ.toPresheafFiber U x Q ((η.app i).hom.app (op U) z) =
+      Φ.toPresheafFiber U x Q 0 := by
+    rw [map_zero]
+    dsimp only [Q]
+    have hn := Φ.toPresheafFiber_naturality_apply (η.app i).hom U x z
+    dsimp only [Functor.const_obj_obj] at hn
+    exact hn.symm.trans (by rw [hz]; exact hy)
+  obtain ⟨W, g, w, hw, hW⟩ := (Φ.toPresheafFiber_eq_iff' U x _ _).mp hzero
+  have hWzero : (η.app i).hom.app (op W) ((K.obj i).obj.map g.op z) = 0 := by
+    rw [NatTrans.naturality_apply]
+    simpa only [Q, Functor.const_obj_obj, map_zero] using hW
+  let A := Scheme.AffineEtale.Spec S
+  obtain ⟨T, t, ⟨a⟩, u, hu⟩ := Φ.jointly_surjective _
+    (A.is_cover_of_isCoverDense S.smallEtaleTopology W) w
+  let V := A.obj a.obj
+  have : IsAffine V.left := by
+    dsimp only [V, A]
+    rw [Scheme.AffineEtale.Spec_obj_left]
+    infer_instance
+  let v := Φ.fiber.map a.lift u
+  let zV := (K.obj i).obj.map a.map.op ((K.obj i).obj.map g.op z)
+  have hzV : Φ.toPresheafFiber V v (K.obj i).obj zV = y := by
+    rw [Φ.toPresheafFiber_w_apply, Φ.toPresheafFiber_w_apply]
+    have hv : Φ.fiber.map a.map v = w := by
+      dsimp only [v]
+      simpa only [Functor.map_comp, ConcreteCategory.comp_apply] using
+        (congrArg (fun f ↦ Φ.fiber.map f u) a.fac).trans hu
+    rw [hv, hw, hz]
+  have hVzero : (η.app i).hom.app (op V) zV = 0 := by
+    dsimp only [zV]
+    rw [NatTrans.naturality_apply, hWzero, map_zero]
+  obtain ⟨j, f, hf⟩ := exists_higherDirectImage_affine_section_eq_zero
+    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη V i zV hVzero
+  refine ⟨j, f, ?_⟩
+  rw [← hzV]
+  change Φ.presheafFiber.map (K.map f).hom
+    (Φ.toPresheafFiber V v (K.obj i).obj zV) = 0
+  rw [Φ.toPresheafFiber_naturality_apply, hf, map_zero]
 
 end AlgebraicGeometry.Etale

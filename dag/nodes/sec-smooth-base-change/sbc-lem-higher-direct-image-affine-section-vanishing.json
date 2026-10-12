@@ -1,0 +1,136 @@
+{
+ "id": "sbc-lem-higher-direct-image-affine-section-vanishing",
+ "kind": "statement",
+ "title": "Eventual vanishing of affine higher direct image sections",
+ "statement": "Let I be a nonempty directed preorder and X_i an inverse system over a scheme S [def-weil-pbc-scheme-conventions] with affine transitions and qcqs structure maps, with limit X whose structure map is qcqs. Let F_i be compatible abelian etale sheaves [def-weil-pbc-etale-sheaves], with unital and composable transition maps f_ji^* F_i to F_j [def-weil-pbc-inverse-image]. Set F = colim_i f_i^* F_i. Fix p >= 0. Let K be a presentation of the directed diagram R^p g_i,* F_i [def-weil-pbc-direct-image], and eta its canonical comparison cocone into R^p g_* F, using [def-sbc-abelian-higher-direct-image-map]. For every affine etale object $V\\to S$ and every $z\\in K_i(V)$ with $\\eta_i(V)(z)=0$, there exist $j\\in I$ and $f:i\\to j$ such that $K(f)(V)(z)=0$. Here $K_i(V)$ denotes sections on V of the sheaf in the given presentation.",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 09Z1, proof on qcqs etale objects; Tag 03Q8"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-sbc-abelian-higher-direct-image-map",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "By the higher direct image presheaf theorem, locally lift a stage sheaf section to restricted cohomology. Naturality of the derived adjunction comparison identifies the maps with the canonical cohomology comparisons specified by hK and hη. Since the limit sheaf section is zero, refine the neighborhood to make the limit cohomology representative zero. Refine further by affine etale objects.",
+   "uses": [
+    "sbc-lem-higher-direct-image-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each affine member U, base change of the scheme diagram and cone preserves the limit and affine transitions. The maps to affine U are qcqs, hence the stages and limit are qcqs schemes. Exact inverse image preserves the colimit and degree-zero complexes. Apply complex cohomology continuity with lower bound zero. Its injectivity and the filtered-colimit equality criterion imply that the restricted cohomology representative vanishes at a later stage.",
+   "uses": [
+    "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine V is quasi-compact, so finitely many of these etale neighborhoods cover it. Choose a common later stage for their finitely many indices and compose transitions. There the original section is zero on the cover by naturality of the presheaf comparison, hence zero by separatedness of the higher direct image sheaf.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-etale-cohomology-limit-complex-systems"
+ ],
+ "proof_origin": {
+  "by": "worker J1",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Tag 09Z1: local cohomology comparison and finite covering assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A section of a higher direct image on an affine etale neighborhood which is zero at the scheme limit vanishes at some later stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a higher direct image on an affine etale object which vanishes at the inverse limit eventually vanishes",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*section|higherDirectImage.*limit|higher_direct_image.*limit",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A higher direct image section on a quasi compact etale scheme becomes zero at a later index if its image under a limit comparison is zero",
+   "results": "Eight results about structure sheaf sections and affine scheme limits; none concerns varying abelian higher direct images.",
+   "date": "2026-10-12",
+   "verdict": "no match (second reading)"
+  },
+  {
+   "tool": "grep",
+   "query": "eventual|eventually|section.*eq_zero|exists.*eq_zero|IsColimit",
+   "results": "Read EtaleSectionColimitEventualZero (ModuleCat, assumes the comparison is already a colimit) and higherDirectImage_limit (fixed pulled-back ModuleCat sheaf). Neither proves this varying AddCommGrpCat comparison. EtaleComplexClassVanishing still requires the relative base-change and cohomology identification supplied by this local lemma.",
+   "date": "2026-10-12",
+   "verdict": "no match (second reading)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.HigherDirectImageLimitClassVanishing",
+  "date": "2026-10-12",
+  "group": "J1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-higher-direct-image-limit",
+   "place": "Tag 09Z1 proof, qcqs etale-object cohomology comparison: injectivity on affine section representatives",
+   "via": [
+    "sbc-lem-higher-direct-image-limit-class-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageAffineSectionVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageAffineSectionVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_higherDirectImage_affine_section_eq_zero",
+  "statement": "theorem exists_higherDirectImage_affine_section_eq_zero {S : Scheme.{v}} {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom] [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom] (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom] (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i))) (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g)) ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g)) (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1}) (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i)) (hH : ∀ {i j : I} (f : i ⟶ j), H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv) [HasColimit H] (p : ℕ) (K : I ⥤ Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) (eK : ∀ i : I, K.obj i ≅ (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+(((D.obj (op i)).hom)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i)))) (hK : ∀ {i j : I} (f : i ⟶ j), K.map f = (eK i).hom ≫ abelianHigherDirectImageMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) ≫ (eK j).inv) [HasColimit K] (η : K ⟶ (Functor.const I).obj ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H))))) (hη : ∀ i : I, η.app i = (eK i).hom ≫ abelianHigherDirectImageMap (c.π.app (op i)).left (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i)) (V : S.Etale) [IsAffine V.left] : ∀ (i : I) (z : (K.obj i).obj.obj (op V)), (η.app i).hom.app (op V) z = 0 → ∃ (j : I) (f : i ⟶ j), (K.map f).hom.app (op V) z = 0",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T070538-L-3471784",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T070538-L-3471784",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
