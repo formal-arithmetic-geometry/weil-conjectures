@@ -9,6 +9,11 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
+import Sheaf.RingTheory.CohenRingModPowFormallySmooth
+import Sheaf.RingTheory.CohenRingsExist
+import Sheaf.RingTheory.ExistsCoefficientSubring
+import Sheaf.RingTheory.FiniteOverCompleteRing
+import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 
 /-!
 # Power series presentations of complete local rings

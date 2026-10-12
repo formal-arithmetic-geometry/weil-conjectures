@@ -8,6 +8,11 @@ module
 public import Sheaf.RingTheory.JapaneseDomain
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+import Sheaf.RingTheory.IsN2OfFiniteExtension
+import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
+import Sheaf.RingTheory.PowerSeriesNormalDomain
+import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import Sheaf.RingTheory.TateN2CompletePrincipal
 
 /-!
 # Power series over a Japanese domain

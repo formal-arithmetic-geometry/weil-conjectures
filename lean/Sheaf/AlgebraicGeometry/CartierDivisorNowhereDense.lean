@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import Sheaf.AlgebraicGeometry.AffineNonZeroDivisorComplementDense
+import WeilConjectures.Blowup.BlowupUniversal
 
 /-!
 # The complement of an effective Cartier divisor is dense

@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Sheaf.CategoryTheory.EssentiallyConstantSystem
+import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels
+import Sheaf.CategoryTheory.MittagLefflerExactSequence
+import Sheaf.CategoryTheory.MittagLefflerLimitExact
 
 /-!
 # Homology of the limit of a Mittag-Leffler system of four-term complexes

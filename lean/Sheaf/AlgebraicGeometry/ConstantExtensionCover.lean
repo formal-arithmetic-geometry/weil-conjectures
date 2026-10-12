@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift
+import WeilConjectures.ConstructibleSheaf.Biproduct
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-!
 # Local presentations of extensions with finite constant outer terms

@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Sheaf.Paper.LimitTowerEssentiallyFinitePresentation
+import Sheaf.RingTheory.ColimitEventuallyFlat
+import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
 
 /-!
 # Flatness from flatness over the base and on the closed fibre

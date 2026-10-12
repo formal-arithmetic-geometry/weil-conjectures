@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
+import Sheaf.AlgebraicGeometry.SmoothZeroDifferentialsAffineOpenEtale
 
 /-!
 # Étale near a point smooth of fibre dimension zero

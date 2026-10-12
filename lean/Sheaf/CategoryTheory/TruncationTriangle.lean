@@ -4,6 +4,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
+import Sheaf.Algebra.Homology.UpperTruncationStepSES
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension
+import Sheaf.CategoryTheory.TruncationDescends
 
 /-!
 # Distinguished triangle for canonical truncations

@@ -6,6 +6,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-! # Comparing the two encodings of constant-coefficient module sheaves
 

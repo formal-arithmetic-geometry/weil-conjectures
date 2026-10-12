@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.Extension.Presentation.Submersive
 public import Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.RingTheory.LciConormalFreeRankCodimension
+import Sheaf.RingTheory.SmoothLocalCompleteIntersection
 
 /-!
 # Dimension at points of a standard smooth algebra over a field

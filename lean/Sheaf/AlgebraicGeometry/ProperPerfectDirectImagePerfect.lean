@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.PerfectMorphism
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
 
 /-! # Perfect direct image along a proper perfect morphism
 

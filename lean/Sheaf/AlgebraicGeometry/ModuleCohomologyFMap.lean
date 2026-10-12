@@ -7,6 +7,11 @@ module
 
 public import Sheaf.Paper.PQFCohomology
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
+import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Maps on module cohomology induced by scheme maps
 

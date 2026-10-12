@@ -27,6 +27,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.Morphisms.Projective
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # The Jacobian of a smooth projective curve

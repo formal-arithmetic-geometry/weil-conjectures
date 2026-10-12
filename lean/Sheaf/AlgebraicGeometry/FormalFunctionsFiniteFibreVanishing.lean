@@ -12,6 +12,11 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.FiniteDiscreteFiber
+import Sheaf.AlgebraicGeometry.FormalFunctionsStalk
+import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-! # Formal functions vanishing over finite fibres
 

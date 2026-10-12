@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.Morphisms.Projective
+import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 
 /-!
 # Projective morphisms are stable under base change

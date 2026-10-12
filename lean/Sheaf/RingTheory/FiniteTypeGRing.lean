@@ -6,6 +6,16 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.FiniteType
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.FlatCompletion
+import Sheaf.RingTheory.GRingMaximalIdealCriterion
+import Sheaf.RingTheory.PolynomialCompleteLocalFormalFibres
+import Sheaf.RingTheory.QuotientGRing
+import Sheaf.RingTheory.RegularBaseChange
+import Sheaf.RingTheory.RegularComposition
+import Sheaf.RingTheory.RegularLocalMaximal
+import Sheaf.RingTheory.RegularPermanence
 
 /-!
 # Finite type algebras over G-rings

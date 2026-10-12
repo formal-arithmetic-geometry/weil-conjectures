@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
 
 /-!
 # Finite presentation of cokernels on a ringed space

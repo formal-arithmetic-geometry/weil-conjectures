@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.DedekindDomain.Basic
 public import Mathlib.RingTheory.Spectrum.Maximal.Defs
+import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
 
 /-!
 # Normalization of a one-dimensional semilocal domain

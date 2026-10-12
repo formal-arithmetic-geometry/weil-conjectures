@@ -6,6 +6,13 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompleteLocalGRing
+import Sheaf.RingTheory.FlatCompletion
+import Sheaf.RingTheory.LocalizationRegular
+import Sheaf.RingTheory.RegularComposition
+import Sheaf.RingTheory.RegularPermanence
+import Sheaf.RingTheory.RegularThroughLocalization
 
 /-!
 # Checking the G-ring condition at maximal ideals

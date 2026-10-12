@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.Extension.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
+import Sheaf.Algebra.TwoTermHomotopyEquivalenceDirectSum
+import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import Sheaf.RingTheory.PresentationsHomotopyEquivalent
 
 /-!
 # Conormal modules under principal localization

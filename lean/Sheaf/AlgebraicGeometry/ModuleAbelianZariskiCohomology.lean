@@ -3,6 +3,11 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 
 /-! # Cohomology of a module sheaf agrees with that of its underlying abelian sheaf
 

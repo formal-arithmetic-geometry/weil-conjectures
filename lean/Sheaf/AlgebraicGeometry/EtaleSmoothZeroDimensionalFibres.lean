@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale
+import Sheaf.AlgebraicGeometry.FormallySmooth
 
 /-!
 # An étale morphism is smooth with zero-dimensional fibres

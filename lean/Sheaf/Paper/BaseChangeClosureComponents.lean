@@ -6,6 +6,15 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.AlgebraicGeometry.ClopenSmoothProper
+import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import Sheaf.AlgebraicGeometry.GlobalSectionsProperVariety
+import Sheaf.AlgebraicGeometry.GlobalSectionsSeparable
+import Sheaf.AlgebraicGeometry.Variety
+import Sheaf.FieldTheory.SeparableTensorAlgebraicClosure
+import Sheaf.Paper.EulerCharacteristicWellDefined
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 
 /-!
 # Components after base change to an algebraic closure

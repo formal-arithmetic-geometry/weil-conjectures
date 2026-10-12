@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Component intersections on a Noetherian scheme of dimension at most one

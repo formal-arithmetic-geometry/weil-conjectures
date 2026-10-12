@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regular hypersurfaces with a unit derivative

@@ -4,6 +4,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import WeilConjectures.ZetaSeries
+import Sheaf.RingTheory.IsolatedPrimeResidueFinite
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
 
 @[expose] public section
 

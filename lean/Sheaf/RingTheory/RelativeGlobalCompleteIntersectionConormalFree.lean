@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.FreeModule.Basic
+import Sheaf.RingTheory.RegularSequenceConormal
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence
 
 /-!
 # Conormal basis of a relative global complete intersection

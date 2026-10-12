@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 
 /-!
 # Exact inverse image of set-valued small etale sheaves

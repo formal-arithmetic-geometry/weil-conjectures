@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.AlgebraicGeometry.EtaleSupport
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import Sheaf.Paper.InverseImageStalkGerm
+import Sheaf.Topology.SpectralConstructibleFiniteIntersection
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Support of a constructible etale module sheaf

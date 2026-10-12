@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.DimOneResidueFieldsFinite
+import Sheaf.RingTheory.KrullAkizukiNoetherian
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 
 /-!
 # Integral closure of a one-dimensional Noetherian domain

@@ -7,6 +7,9 @@ module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import Sheaf.RingTheory.FormallySmoothAdicFlat
+import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
 
 /-!
 # Flatness and geometric regularity of the closed fibre of an adically formally smooth map

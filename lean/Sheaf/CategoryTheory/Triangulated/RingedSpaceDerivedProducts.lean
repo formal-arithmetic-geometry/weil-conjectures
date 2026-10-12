@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Products in the derived category of a ringed space

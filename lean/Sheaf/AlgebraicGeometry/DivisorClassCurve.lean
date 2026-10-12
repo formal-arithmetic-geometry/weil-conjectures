@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.DivisorModuleLocal
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
+import Sheaf.AlgebraicGeometry.DivisorModule
+import Sheaf.AlgebraicGeometry.FunctionField
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
 /-!
 # Divisor classes and the Picard group of a smooth connected curve

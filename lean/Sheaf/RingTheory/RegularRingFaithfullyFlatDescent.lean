@@ -5,6 +5,7 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.RingTheory.FlatUnderRegular
 
 /-!
 # Regularity descends along faithfully flat ring maps

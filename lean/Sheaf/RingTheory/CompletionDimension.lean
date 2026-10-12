@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.AdicCompletionNoetherian
 
 /-!
 # Dimension of the completion of a Noetherian local ring

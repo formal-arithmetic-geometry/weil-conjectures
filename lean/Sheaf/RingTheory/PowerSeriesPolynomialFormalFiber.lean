@@ -8,6 +8,21 @@ module
 public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 public import Mathlib.RingTheory.MvPowerSeries.NoZeroDivisors
 public import Sheaf.RingTheory.GRing
+import Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.CompletionFiniteQuotient
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.RingTheory.Derivation.DetectNonPthPower
+import Sheaf.RingTheory.FiniteSubalgebraFractionField
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import Sheaf.RingTheory.PurelyInseparableIntegralPrimeUnique
+import Sheaf.RingTheory.RadicialPrimeUniqueDegreeP
+import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularRingNormal
+import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Generic formal fibres of polynomial rings over power series fields

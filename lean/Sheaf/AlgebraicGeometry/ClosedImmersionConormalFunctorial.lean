@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineConormalSections
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Functoriality of conormal sheaves of closed immersions

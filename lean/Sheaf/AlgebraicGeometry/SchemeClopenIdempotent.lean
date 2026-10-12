@@ -6,6 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 
 /-! # Clopen subsets and idempotent global functions of schemes
 

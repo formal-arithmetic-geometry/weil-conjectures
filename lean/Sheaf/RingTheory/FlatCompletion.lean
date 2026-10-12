@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.Flat.FlatModulePowers
 
 /-!
 # Flatness of completion along a flat local map

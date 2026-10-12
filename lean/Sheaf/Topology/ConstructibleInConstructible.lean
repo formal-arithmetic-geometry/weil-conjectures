@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.Topology.Constructible
+import Sheaf.Topology.ConstructibleIntersection
+import Sheaf.Topology.ConstructibleIsRetrocompact
 
 /-!
 # Constructible subsets of constructible subspaces

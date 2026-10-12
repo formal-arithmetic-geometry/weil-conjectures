@@ -9,6 +9,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
+import Sheaf.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Quasi-coherent modules along an affine morphism
 

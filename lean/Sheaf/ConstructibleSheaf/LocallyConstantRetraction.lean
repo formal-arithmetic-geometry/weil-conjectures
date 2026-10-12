@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite étale trace splitting

@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.FiniteSheafHomAffine
 
 /-! # The affine derived sheaf-Hom adjunction
 

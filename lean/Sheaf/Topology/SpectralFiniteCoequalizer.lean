@@ -5,6 +5,14 @@ public import Mathlib.Topology.Sheaves.Limits
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.Topology.Sheaves.Stalks
 public import Sheaf.Topology.SetsExtensionByEmpty
+import Sheaf.Paper.ConstantSheafOpenMaps
+import Sheaf.Paper.InverseImageExtensionByEmptyConstant
+import Sheaf.Topology.SetsExtensionByEmptyAdjunction
+import Sheaf.Topology.SetsInverseImageComposition
+import Sheaf.Topology.SpectralDirectedLimit
+import Sheaf.Topology.SpectralDirectedLimitFiniteSober
+import Sheaf.Topology.SpectralLimitDescendOpens
+import Sheaf.Topology.SpectralLimitPullbackSections
 
 /-!
 # Finite-space descent of spectral coequalizers

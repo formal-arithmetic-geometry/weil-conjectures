@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
+import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
 
 /-!
 # Associated primes of a fractional principal quotient of a normal domain

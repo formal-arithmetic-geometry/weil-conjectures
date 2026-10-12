@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.SingleComplexInheritedTensorCondition
+import Sheaf.AlgebraicGeometry.SingleComplexQcqsInduction
 
 /-! # Single-complex criterion for derived direct-image base change
 

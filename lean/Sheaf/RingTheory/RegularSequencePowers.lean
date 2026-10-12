@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Data.List.OfFn
+import Sheaf.RingTheory.RegularSequenceShortExactSequence
 
 /-!
 # Positive powers of a regular sequence

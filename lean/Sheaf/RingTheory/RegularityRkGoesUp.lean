@@ -7,6 +7,8 @@ module
 public import Sheaf.RingTheory.SerreConditions
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 
 /-!
 # Ascent of Serre regularity in codimension

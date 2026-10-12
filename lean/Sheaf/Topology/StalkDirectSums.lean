@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalks commute with direct sums of sheaves of modules

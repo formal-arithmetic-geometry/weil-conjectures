@@ -7,6 +7,8 @@ module
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-!
 # Cotangent dimension and strict henselization

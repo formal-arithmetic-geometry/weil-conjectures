@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Module.LocalizedModule.Away
+import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
 
 /-! # Flatness of the lower truncation image on principal opens
 

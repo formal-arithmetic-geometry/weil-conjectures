@@ -10,6 +10,9 @@ public import Mathlib.Topology.Sheaves.Limits
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.Bases
+import Sheaf.Paper.ConstantSheafOpenMaps
+import Sheaf.Topology.SetsExtensionByEmptyAdjunction
+import Sheaf.Topology.SheavesInjectiveDirectedColimitSections
 
 /-!
 # Finite support of relations between coproducts of open constant sheaves

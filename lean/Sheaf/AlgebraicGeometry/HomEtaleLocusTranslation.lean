@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.EtaleAtFieldExtension
 
 /-!
 # Translation invariance of the étale locus of a group homomorphism

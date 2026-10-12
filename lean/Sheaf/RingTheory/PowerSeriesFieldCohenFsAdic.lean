@@ -7,6 +7,10 @@ module
 
 public import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
 public import Mathlib.Algebra.Algebra.ZMod
+import Sheaf.RingTheory.CohenRing
+import Sheaf.RingTheory.ExistsLiftOfFieldCharP
+import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 
 /-!
 # Adic formal smoothness of power series over fields and Cohen rings

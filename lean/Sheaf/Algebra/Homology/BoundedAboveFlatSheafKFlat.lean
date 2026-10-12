@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic
+import Sheaf.Algebra.Homology.FilteredColimitsTensor
 
 /-!
 # Bounded-above flat complexes on a ringed site are K-flat

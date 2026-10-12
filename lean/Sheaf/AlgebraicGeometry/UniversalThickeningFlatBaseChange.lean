@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
 public import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange
+import Sheaf.AlgebraicGeometry.FirstOrderThickeningBaseChange
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.Thickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
 
 /-!
 # Universal first order thickenings under flat base change

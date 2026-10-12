@@ -4,6 +4,20 @@ public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.GRing
+import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.LocalCompletionQuotient
+import Sheaf.RingTheory.PolynomialFormalFiber
+import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
+import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularRingSmoothAscent
 
 @[expose] public section
 

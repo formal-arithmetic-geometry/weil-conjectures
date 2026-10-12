@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.CategoryTheory.BrownCohomologicalRepresentability
 
 /-!
 # Brown representability criterion for a right adjoint

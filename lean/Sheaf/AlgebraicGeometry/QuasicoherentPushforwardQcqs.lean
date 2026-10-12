@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.AssociatedSectionsLocalize
+import Sheaf.AlgebraicGeometry.Coherent
 
 /-!
 # Quasi-coherence of pushforward along a qcqs morphism

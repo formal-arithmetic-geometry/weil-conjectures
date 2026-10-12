@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.RingTheory.SmoothProductAlgebra
 
 /-!
 # Smoothness over a product ring

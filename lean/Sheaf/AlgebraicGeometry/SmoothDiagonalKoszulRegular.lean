@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
+import Sheaf.AlgebraicGeometry.SmoothDiagonalRegularGenerators
+import Sheaf.RingTheory.RegularSequenceKoszulRegular
 
 /-!
 # The smooth diagonal is Koszul regular, perfect and proper

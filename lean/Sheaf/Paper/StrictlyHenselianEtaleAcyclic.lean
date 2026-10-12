@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Limits.ExactFunctor
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-!
 # Etale acyclicity of a strictly henselian local scheme

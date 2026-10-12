@@ -6,6 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie
+import Sheaf.AlgebraicGeometry.MixedCommutatorTangent
 
 /-!
 # Tangent matrices and the differential of a rational representation

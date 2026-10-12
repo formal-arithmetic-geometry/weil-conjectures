@@ -6,6 +6,12 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.SymmetricProductProperties
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+import Sheaf.AlgebraicGeometry.SymmetricProductOverBase
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Surjectivity of the symmetric-product morphism

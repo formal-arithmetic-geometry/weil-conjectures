@@ -10,6 +10,11 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Extension.Basic
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.AlgebraicGeometry.CotangentComplexSymmetricAlgebra
+import Sheaf.RingTheory.ConormalIntersectionRegularQuotient
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
+import Sheaf.RingTheory.RegularSequenceConormal
+import Sheaf.RingTheory.SymmetricAlgebraBaseChange
 
 /-!
 # Conormal sequence of a projective symmetric-algebra presentation

@@ -13,6 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.ClosedImmersionOfValuativeFactorization
+import Sheaf.AlgebraicGeometry.PicardLocusClosedValuationTriviality
 
 /-!
 # Closedness of the invertible-module pullback locus

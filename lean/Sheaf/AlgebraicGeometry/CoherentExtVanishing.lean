@@ -11,6 +11,11 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+import Sheaf.AlgebraicGeometry.ExtSupportCohomologyVanishing
+import Sheaf.AlgebraicGeometry.ProjectiveLineRegularDimensionOne
+import Sheaf.AlgebraicGeometry.SheafExtStalkLocalization
+import Sheaf.Paper.ExtSheafToGlobalSpectralSequence
+import Sheaf.RingTheory.RegularLocalExtVanishing
 
 /-!
 # Higher Ext vanishing for coherent modules on regular schemes

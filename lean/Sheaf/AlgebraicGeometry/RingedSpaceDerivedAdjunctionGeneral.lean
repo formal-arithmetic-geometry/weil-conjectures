@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Algebra.Homology.KFlatPullback
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Derived pullback/direct-image adjunction for ringed spaces

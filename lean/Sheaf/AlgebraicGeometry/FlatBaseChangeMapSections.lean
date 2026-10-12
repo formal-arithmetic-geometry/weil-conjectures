@@ -10,6 +10,13 @@ public import Sheaf.AlgebraicGeometry.FlatModulePullbackExact
 public import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
+import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # The flat base-change map on sections
 

@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Constructible
 public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+import Sheaf.Topology.InverseImageClosedPushforwardConstant
+import Sheaf.Topology.SkyscraperConstantOnPointClosure
+import Sheaf.Topology.SpectralFiniteCoequalizer
 
 /-!
 # Embedding finitely presented sheaves on spectral spaces

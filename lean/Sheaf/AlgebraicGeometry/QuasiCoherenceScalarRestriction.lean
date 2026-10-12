@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Quasi-coherence and restriction of scalars
 

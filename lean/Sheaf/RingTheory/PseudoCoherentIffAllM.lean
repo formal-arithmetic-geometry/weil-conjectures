@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
+import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
+import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 
 /-!
 # Pseudo-coherence and degreewise pseudo-coherence

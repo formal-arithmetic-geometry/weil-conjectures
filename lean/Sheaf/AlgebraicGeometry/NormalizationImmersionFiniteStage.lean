@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FiniteApproximation
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Descent of the normalization immersion to a finite stage

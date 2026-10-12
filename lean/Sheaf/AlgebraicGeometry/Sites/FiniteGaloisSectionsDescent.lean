@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import Mathlib.FieldTheory.Galois.Basic
+import Sheaf.AlgebraicGeometry.FiniteGaloisTensorDecomposition
 
 /-!
 # Finite Galois descent for sections of an etale sheaf

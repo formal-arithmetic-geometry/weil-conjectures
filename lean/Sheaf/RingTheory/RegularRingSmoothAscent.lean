@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.RingTheory.RegularityRkGoesUp
+import Sheaf.RingTheory.SmoothFibreRegularLocal
 
 /-!
 # Regularity ascends along smooth ring maps

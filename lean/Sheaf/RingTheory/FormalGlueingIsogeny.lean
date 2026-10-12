@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.Algebra.Category.ModuleCat.Basic
+import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
+import Sheaf.RingTheory.FormalGlueingData
+import Sheaf.RingTheory.FormalGlueingEquivalence
 
 /-!
 # Formal glueing of maps with ideal-power torsion kernel and cokernel

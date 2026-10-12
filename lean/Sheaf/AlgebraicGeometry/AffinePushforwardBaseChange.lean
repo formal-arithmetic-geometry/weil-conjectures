@@ -13,6 +13,12 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapPasting
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
 /-! # Affine pushforward and arbitrary base change
 

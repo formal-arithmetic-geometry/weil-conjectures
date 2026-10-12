@@ -3,6 +3,7 @@ module
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Sites.Spaces
+import Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtension
 
 /-!
 # Extensions and torsors on the Zariski site

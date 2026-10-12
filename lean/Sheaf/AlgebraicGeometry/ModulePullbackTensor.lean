@@ -6,6 +6,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Pullback of modules and tensor products

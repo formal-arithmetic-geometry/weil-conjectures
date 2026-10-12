@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.Paper.FlatLocalCriterionNonzerodivisor
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Flatness over a regular local ring

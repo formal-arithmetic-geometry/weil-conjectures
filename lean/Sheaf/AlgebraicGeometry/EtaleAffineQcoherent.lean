@@ -9,6 +9,15 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.EtaleStandardCoverCech
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Étale acyclicity of a quasi-coherent module on an affine scheme

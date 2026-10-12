@@ -6,6 +6,11 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-! # RHom base change for a perfect complex
 

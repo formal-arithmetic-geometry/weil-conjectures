@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal
 
 /-!
 # Separable residue field: the cotangent space injects into the differentials

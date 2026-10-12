@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
+import Sheaf.AlgebraicGeometry.AffineCohomologyLocalization
+import Sheaf.AlgebraicGeometry.CohomologySectionLocalizationGluing
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Localization of graded cohomology at a section
 

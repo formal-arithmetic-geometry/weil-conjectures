@@ -6,6 +6,11 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Pullback of finite locally constant abelian etale sheaves

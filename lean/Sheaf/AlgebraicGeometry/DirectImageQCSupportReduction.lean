@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Quasi-compact reduction for a proper-support complex

@@ -10,6 +10,7 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Sheaf.RingTheory.FiniteHomogeneousGenerators
 
 /-!
 # Graded Nakayama generation over the projective-line polynomial ring

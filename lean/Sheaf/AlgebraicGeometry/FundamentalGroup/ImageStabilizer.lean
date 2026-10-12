@@ -7,6 +7,13 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import Mathlib.GroupTheory.Index
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import Sheaf.AlgebraicGeometry.GaloisCategories
+import Sheaf.CategoryTheory.Galois.GaloisTransitive
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 
 /-!
 # The image of the fundamental group of a finite étale cover

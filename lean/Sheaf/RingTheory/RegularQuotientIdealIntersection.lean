@@ -6,6 +6,9 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.Paper.KoszulComplex
+import Sheaf.RingTheory.KoszulRegularSequence
+import Sheaf.RingTheory.RegularSequenceKoszulRegular
 
 /-!
 # Ideal intersection for a sequence regular modulo an ideal

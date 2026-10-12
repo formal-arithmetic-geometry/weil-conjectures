@@ -3,6 +3,10 @@ module
 public import Sheaf.Paper.ShiftedKoszulAugmentation
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import Sheaf.Paper.KoszulComplex
+import Sheaf.RingTheory.ModuleLocalizationFilteredColimit
 
 /-!
 # The affine Koszul Hom colimit and the alternating Čech complex

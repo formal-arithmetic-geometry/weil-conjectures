@@ -13,6 +13,9 @@ public import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 public import Sheaf.CategoryTheory.DeltaFunctor
 public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 public import Sheaf.CategoryTheory.SiteMorphismComposition
+import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
+import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import Sheaf.CategoryTheory.InjectiveResolutionSESComplexes
 
 /-!
 # Pullback on cohomology over objects of sites

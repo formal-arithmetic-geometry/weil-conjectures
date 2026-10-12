@@ -8,6 +8,17 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
+import Sheaf.AlgebraicGeometry.EtaleInjectiveRetract
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
+import Sheaf.CategoryTheory.FirstQuadrantRowCollapse
+import Sheaf.Paper.VanishingDescendsRetract
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Cancellation of proper base change along a proper surjection

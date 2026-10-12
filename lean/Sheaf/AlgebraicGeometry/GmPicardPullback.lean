@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.CategoryTheory.Sites.EtaleTorsorH1Functoriality
+import WeilConjectures.AlgebraicGeometry.Sites.Gm
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Naturality of the Picard identification with étale cohomology

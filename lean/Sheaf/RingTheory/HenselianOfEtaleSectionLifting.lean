@@ -7,6 +7,9 @@ module
 
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Henselian
+import Sheaf.RingTheory.IdempotentsDeterminedModuloRadical
+import Sheaf.RingTheory.LiftIdempotentUpstairs
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Henselian pairs from lifting sections of étale algebras

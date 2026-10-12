@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 
 /-!
 # Composition of derived direct images

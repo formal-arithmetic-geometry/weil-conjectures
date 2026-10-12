@@ -11,6 +11,17 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne
+import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import WeilConjectures.AlgebraicGeometry.Picard.Defs
+import WeilConjectures.AlgebraicGeometry.Picard.Degree
+import WeilConjectures.AlgebraicGeometry.PicardFunctor
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # The morphism from the Hilbert scheme to the degree component of the Picard scheme

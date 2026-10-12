@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.RingTheory.IndStandardSmooth
+import Sheaf.RingTheory.NakayamaNilpotent
 
 /-!
 # Factoring through a quotient of a smooth algebra over a square-zero base

@@ -5,6 +5,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Irreducible
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
 
 @[expose] public section
 

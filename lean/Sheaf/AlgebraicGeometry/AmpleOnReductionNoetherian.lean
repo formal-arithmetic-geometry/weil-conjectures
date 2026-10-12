@@ -6,6 +6,15 @@ public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.AmplePullback
+import Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills
+import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 
 /-! # Ampleness on a Noetherian reduction
 

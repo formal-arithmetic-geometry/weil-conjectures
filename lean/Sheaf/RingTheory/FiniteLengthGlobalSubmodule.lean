@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.QuotSMulTop
+import Sheaf.RingTheory.FiniteMaximalsOverElement
+import Sheaf.RingTheory.LengthQuotSMulTopFractionFieldSubmodule
 
 /-!
 # Global finite length for a fraction-field submodule

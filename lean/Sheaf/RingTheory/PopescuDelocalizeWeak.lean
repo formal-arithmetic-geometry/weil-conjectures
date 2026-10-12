@@ -10,6 +10,11 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.FiniteStability
 public import Mathlib.RingTheory.Localization.Submodule
+import Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth
+import Sheaf.RingTheory.PopescuFinalSolve
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SmoothStandardSmoothRetract
+import Sheaf.RingTheory.StandardSmoothIncludeGenerators
 
 /-!
 # Weak delocalization of a Popescu resolution

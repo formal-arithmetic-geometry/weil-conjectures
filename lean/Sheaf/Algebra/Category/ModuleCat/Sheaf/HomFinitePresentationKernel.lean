@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.CategoryTheory.Sites.Spaces
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-!
 # Internal Hom and a finite free presentation

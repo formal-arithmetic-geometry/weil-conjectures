@@ -9,6 +9,9 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.Algebra.Homology.FiniteProductCohomology
+import Sheaf.CategoryTheory.FiniteProductFunctorLeftExact
+import Sheaf.CategoryTheory.FiniteProductInjectiveResolutions
 
 /-!
 # Right derived functors and finite products

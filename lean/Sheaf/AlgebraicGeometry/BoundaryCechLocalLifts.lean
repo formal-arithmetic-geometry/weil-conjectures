@@ -10,6 +10,9 @@ public import Sheaf.CategoryTheory.CommAlgebraSheafModule
 public import Sheaf.AlgebraicGeometry.CechH1MapNatural
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.CechH1Injective
+import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.Paper.BoundaryCechCompatibility
 
 /-! # Boundary classes represented by differences of local lifts
 

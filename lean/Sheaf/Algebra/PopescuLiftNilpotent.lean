@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.RingTheory.FilteredColimitOfFactorization
+import Sheaf.RingTheory.PopescuLiftOnce
+import Sheaf.RingTheory.PopescuLiftTwice
 
 /-!
 # Lifting ind-smoothness across nilpotent thickenings

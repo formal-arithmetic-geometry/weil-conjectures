@@ -6,6 +6,8 @@ module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.ExactSequence
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Five-term exact sequence of a first-quadrant spectral sequence

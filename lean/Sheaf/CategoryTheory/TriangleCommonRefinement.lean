@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+import Sheaf.CategoryTheory.Triangulated.DenominatorTriangleCompletion
 
 /-! # Common refinements of denominator triangles
 

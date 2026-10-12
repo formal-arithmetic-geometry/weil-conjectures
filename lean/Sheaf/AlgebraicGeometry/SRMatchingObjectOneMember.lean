@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
+import Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence
+import Sheaf.CategoryTheory.SimplicialMatchingObject
+import Sheaf.Paper.FiniteSplitEtaleHypercover
 
 /-!
 # Matching schemes and one-member semi-representable families

@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.Paper.NormalLocusOpen
 
 /-!
 # A local criterion for N-1 domains

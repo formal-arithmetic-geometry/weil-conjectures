@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover
+import Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
+import Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover
 
 /-!
 # Properness descends along a field extension

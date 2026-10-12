@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.DescentPullbackCanonicalIso
+import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
 
 /-!
 # Full faithfulness of refinement for fpqc descent data

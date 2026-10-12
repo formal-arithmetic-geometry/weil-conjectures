@@ -10,6 +10,8 @@ public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+import Sheaf.RingTheory.FreeComplexModNonzerodivisorExact
+import Sheaf.RingTheory.UnitMaximalMinorOfDepthZero
 
 /-!
 # Buchsbaum--Eisenbud regular sequence from an exact free complex

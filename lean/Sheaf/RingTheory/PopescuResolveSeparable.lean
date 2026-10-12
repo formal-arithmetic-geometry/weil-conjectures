@@ -9,6 +9,19 @@ public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.Algebra.PopescuLiftNilpotent
+import Sheaf.FieldTheory.SeparableSmoothColimit
+import Sheaf.RingTheory.ExistsGeneratorsWithControlledAnnihilators
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.ImprovePresentation
+import Sheaf.RingTheory.PolynomialOriginRegularLocal
+import Sheaf.RingTheory.PopescuDelocalizeHeightZero
+import Sheaf.RingTheory.PopescuLiftSolution
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
+import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Resolving Popescu's local problem with separable residue field

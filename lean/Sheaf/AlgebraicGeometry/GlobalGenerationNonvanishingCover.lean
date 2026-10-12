@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Global generation gives a cover by nonvanishing loci
 

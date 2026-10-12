@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Topology.InverseImageModule
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
+import Sheaf.Algebra.Homology.KFlatStalkCriterion
+import Sheaf.Topology.InverseImageStalk
 
 /-!
 # Pullback preserves K-flat complexes

@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleGraphSectionExtensionMap
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Linearity of extension of graph sections over the constant ring sheaf

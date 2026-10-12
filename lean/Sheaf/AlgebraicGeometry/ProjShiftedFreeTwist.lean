@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Module.DegreeZeroFractions
 public import Sheaf.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
+import Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists
 
 /-!
 # Shifted free graded modules and the glued twists on the projective line

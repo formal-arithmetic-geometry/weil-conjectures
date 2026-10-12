@@ -8,6 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+import Sheaf.AlgebraicGeometry.AffineModuleCechComparisonNatural
+import Sheaf.AlgebraicGeometry.ExtEvaluation
+import Sheaf.CategoryTheory.RightDerivedExactComposite
+import Sheaf.CategoryTheory.RightDerivedExactCompositeNatural
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
+import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic
 
 /-!
 # Naturality of the locally free Ext comparison

@@ -12,6 +12,10 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Sheaf.Algebra.TorOneSurjectiveChangeRings
+import Sheaf.RingTheory.TorIdealKernelNaturality
+import Sheaf.RingTheory.TorOneSurjectiveFlatMiddle
+import WeilConjectures.Mathlib.RingTheory.Filtration
 
 /-!
 # Another variant of the local criterion of flatness

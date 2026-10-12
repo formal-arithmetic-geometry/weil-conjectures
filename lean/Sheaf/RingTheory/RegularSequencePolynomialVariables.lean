@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Data.List.OfFn
+import Sheaf.Paper.PolynomialIdealCoefficientsMonomial
+import Sheaf.RingTheory.RegularSequenceSwapTwo
 
 /-!
 # Regular sequences multiplied by polynomial variables

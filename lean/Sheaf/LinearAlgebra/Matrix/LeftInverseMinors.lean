@@ -9,6 +9,7 @@ public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.Data.Finset.Sort
 public import Mathlib.Data.Fintype.Powerset
 public import Mathlib.RingTheory.Ideal.Span
+import Sheaf.LinearAlgebra.Matrix.CauchyBinet
 
 /-!
 # Scalar left inverses and maximal minors

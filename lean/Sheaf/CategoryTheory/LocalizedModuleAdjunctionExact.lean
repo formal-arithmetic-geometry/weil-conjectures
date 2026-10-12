@@ -10,6 +10,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.CategoryTheory.SiteExtensionByZeroExact
+import Sheaf.CategoryTheory.SiteExtensionByZeroPresheafAdjoint
+import Sheaf.Paper.SiteRestrictionExact
 
 /-!
 # Exact restriction and extension by zero on a localized ringed site

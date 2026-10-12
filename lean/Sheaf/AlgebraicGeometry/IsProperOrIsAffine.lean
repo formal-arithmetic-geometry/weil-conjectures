@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 
 /-!
 # A smooth separated connected curve is proper or affine

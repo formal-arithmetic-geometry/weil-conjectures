@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 /-!
 # Inverse image on small étale sites and algebraic structures
 Source: Stacks Project, Sites and Sheaves, Tags 00X6, 00X1, and 00YV

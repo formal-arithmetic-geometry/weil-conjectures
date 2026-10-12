@@ -6,6 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 
 /-! # Left derived values commute with shifts
 

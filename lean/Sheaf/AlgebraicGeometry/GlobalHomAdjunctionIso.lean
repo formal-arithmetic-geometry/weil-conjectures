@@ -11,6 +11,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.AlgebraicGeometry.DQCoheratorAdjunction
+import Sheaf.AlgebraicGeometry.QCqsSheafRHomAdjunction
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 
 /-! # Canonical global Hom adjunction
 Source: Stacks Project, duality.tex, Tag 0B6I (lemma-iso-global-hom).

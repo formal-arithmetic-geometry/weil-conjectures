@@ -4,6 +4,17 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.GRing
+import Sheaf.Algebra.PopescuLiftNilpotent
+import Sheaf.RingTheory.DesingularizeStrictlyStandard
+import Sheaf.RingTheory.FilteredColimitOfFactorization
+import Sheaf.RingTheory.FilteredColimitSmoothProduct
+import Sheaf.RingTheory.PopescuDelocalizeBase
+import Sheaf.RingTheory.PopescuFinalSolve
+import Sheaf.RingTheory.PopescuLifting
+import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import Sheaf.RingTheory.RegularBaseChange
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Popescu's theorem reduces to a field as base

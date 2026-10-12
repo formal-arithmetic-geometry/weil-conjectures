@@ -6,6 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
+import Sheaf.Paper.CechComparisonMapNaturality
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-! # Naturality of the affine-cover Čech comparison isomorphisms
 

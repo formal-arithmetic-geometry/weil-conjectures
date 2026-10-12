@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.RingTheory.ConormalIntersectionRegularQuotient
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
 
 /-!
 # Left injectivity in Jacobi–Zariski for a regular-sequence presentation

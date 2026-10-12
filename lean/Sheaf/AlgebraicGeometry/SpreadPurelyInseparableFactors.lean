@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.FieldTheory.PowerInBaseAfterLocalization
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 /-!
 # Spreading purely inseparable factors

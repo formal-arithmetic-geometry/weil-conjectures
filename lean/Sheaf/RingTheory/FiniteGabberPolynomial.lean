@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.Polynomial.AlgebraMap
+import Sheaf.RingTheory.LiftIdempotentUpstairs
 
 /-!
 # Gabber's polynomial for a finite algebra over a Zariski pair

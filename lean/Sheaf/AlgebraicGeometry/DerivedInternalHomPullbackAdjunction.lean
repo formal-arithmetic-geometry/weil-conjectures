@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.RhomGlobalSections
+import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Derived internal Hom adjunction for pullback and direct image
 

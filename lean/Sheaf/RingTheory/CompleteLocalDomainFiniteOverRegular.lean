@@ -9,6 +9,12 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.RingTheory.CohenRing
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
+import Sheaf.Algebra.ChangeIdealCompletion
+import Sheaf.RingTheory.ExistsCoefficientSubring
+import Sheaf.RingTheory.FiniteOverCompleteRing
+import Sheaf.RingTheory.IntegralExtensionDimension
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import Sheaf.RingTheory.PowerSeriesOntoCompletion
 
 /-!
 # Complete local domains finite over regular subrings

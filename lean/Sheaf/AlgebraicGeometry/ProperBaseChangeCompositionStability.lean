@@ -3,6 +3,14 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 @[expose] public section
 

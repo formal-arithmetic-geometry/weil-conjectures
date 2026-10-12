@@ -3,6 +3,9 @@ module
 public import Mathlib.RingTheory.Localization.InvSubmonoid
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
+import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 
 /-!
 # Openness of the quasi-finite locus for a finite-type ring map

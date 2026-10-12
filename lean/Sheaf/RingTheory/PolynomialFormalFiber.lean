@@ -7,6 +7,16 @@ module
 
 public import Mathlib.Algebra.Polynomial.Basic
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.FiniteOverCompleteLocalProduct
+import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.FormallySmoothCompleteLocalRegular
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.PolynomialLocalCompletionFormallySmooth
 
 /-!
 # Formal fibres of a polynomial ring over a complete local domain

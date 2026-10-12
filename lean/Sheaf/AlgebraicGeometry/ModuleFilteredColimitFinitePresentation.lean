@@ -9,6 +9,13 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationRepresentatives
+import Sheaf.AlgebraicGeometry.FinitePresentationBiprod
+import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import Sheaf.AlgebraicGeometry.ModuleFinitePresentationExtension
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
+import Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-!
 # Quasi-coherent modules as filtered colimits of finitely presented modules

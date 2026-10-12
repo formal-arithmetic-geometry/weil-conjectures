@@ -8,6 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.ChowFiniteType
+import Sheaf.AlgebraicGeometry.EventuallyClosedImmersion
+import Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Proper schemes as limits of proper finitely presented schemes
 

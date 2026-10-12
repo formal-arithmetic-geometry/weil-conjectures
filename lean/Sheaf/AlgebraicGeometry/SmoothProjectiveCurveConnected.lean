@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
 public import WeilConjectures.AlgebraicGeometry.Curve
+import Sheaf.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.Variety
 
 /-!
 # Smooth projective curves are smooth connected curves

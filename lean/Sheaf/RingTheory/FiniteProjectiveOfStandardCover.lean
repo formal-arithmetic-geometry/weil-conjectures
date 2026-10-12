@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover
 
 /-!
 # Finite projectivity from a finite standard-open free cover

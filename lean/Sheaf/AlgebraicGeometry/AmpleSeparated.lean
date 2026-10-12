@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.SeparatedAffineCoverCriterion
+import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-! # Separatedness from an ample invertible module
 

@@ -5,6 +5,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.AlgebraicGeometry.EtalePullbackForgetModules
+import Sheaf.RingTheory.PairHenselization
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.SixFunctors.Etale.Gabber
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Cohomology comparison with affine etale neighborhoods
 

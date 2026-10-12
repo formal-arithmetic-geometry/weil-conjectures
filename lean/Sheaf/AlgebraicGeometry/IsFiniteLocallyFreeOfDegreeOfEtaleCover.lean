@@ -7,6 +7,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import Sheaf.AlgebraicGeometry.FiberDegreeBound
+import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import Sheaf.AlgebraicGeometry.FlatOfFpqcCover
+import Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover
+import Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
 
 /-!
 # Descent of finite local freeness of fixed degree along an étale covering

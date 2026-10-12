@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent
+import Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent
+import Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension
+import Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor
 
 /-! # Perfect direct image of a bounded coherent finite-Tor complex
 

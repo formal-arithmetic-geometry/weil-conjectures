@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 public import Mathlib.RingTheory.Flat.CategoryTheory
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 
 /-!
 # Bounded-above flat module complexes are K-flat

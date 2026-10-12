@@ -2,6 +2,7 @@ module
 
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.Spectral.Basic
+import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 
 /-!
 # Finite intersections of constructible subsets of a spectral space

@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Mathlib.RingTheory.Ideal.Operations
+import Sheaf.LinearAlgebra.SplitExtensionFreePresentation
 
 /-!
 # Split injections detected modulo arbitrarily high ideal powers

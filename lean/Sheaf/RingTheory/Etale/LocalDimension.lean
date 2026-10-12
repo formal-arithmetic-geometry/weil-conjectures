@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.RingHom.Etale
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
+import Sheaf.RingTheory.QuasiFiniteLocalDimension
+import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 
 /-!
 # Local dimension under an étale ring map

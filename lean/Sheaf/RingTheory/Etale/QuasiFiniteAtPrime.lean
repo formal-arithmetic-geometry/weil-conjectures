@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
 
 /-!
 # Étale ring maps are quasi-finite at every prime

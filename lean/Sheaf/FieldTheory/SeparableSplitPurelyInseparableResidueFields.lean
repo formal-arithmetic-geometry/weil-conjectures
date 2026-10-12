@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
 public import Mathlib.Algebra.Field.IsField
+import Sheaf.FieldTheory.FiniteGaloisReceivingSeparableExtensions
 
 /-!
 # Separable splitting with purely inseparable residue fields

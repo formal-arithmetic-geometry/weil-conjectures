@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.CategoryTheory.SiteSystemStrictification
+import Sheaf.AlgebraicGeometry.DescendSurjective
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.CategoryTheory.ColimitSites
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # The affine étale site of an inverse limit

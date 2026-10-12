@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
+import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
+import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
+import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Unramified morphisms are locally quasi-finite

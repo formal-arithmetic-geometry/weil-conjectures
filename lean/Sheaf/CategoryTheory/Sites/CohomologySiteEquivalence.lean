@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Continuous
+import Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites
+import Sheaf.Paper.SiteCoveringIsomorphicFamily
 
 /-!
 # Cohomology over corresponding objects of equivalent sites

@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.Paper.NonvanishingSectionTrivializes
+import Sheaf.RingTheory.AffineFiniteProjectivePrimeMembership
+import Sheaf.RingTheory.FiniteProjectiveOfStandardCover
 
 /-! # Affine dictionary for an invertible module and its section
 

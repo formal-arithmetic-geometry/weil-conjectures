@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.RingTheory.HenselianLocalRootLifting
+import Sheaf.RingTheory.RootLiftingEtaleRetraction
 
 /-!
 # Sections over a strictly henselian local scheme and the geometric stalk

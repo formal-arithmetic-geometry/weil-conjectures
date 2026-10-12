@@ -3,6 +3,8 @@ module
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Spectral.ConstructibleTopology
 public import Mathlib.Topology.Spectral.Hom
+import Sheaf.Topology.Spectral.ConstructibleTopologyHausdorff
+import Sheaf.Topology.SpectralMapConstructibleContinuous
 
 /-!
 # Compatible points in constructibly closed subsets of spectral spaces

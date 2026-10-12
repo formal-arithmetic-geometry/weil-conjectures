@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.ClosedPointOfAffineOpen
+import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.RingTheory.InfiniteSetOfIsMaximalOfRingKrullDimPos
 
 /-!
 # Infinitely many closed points in a positive-dimensional irreducible closed subset

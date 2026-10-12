@@ -5,6 +5,21 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
+import Sheaf.AlgebraicGeometry.GrothendieckExistence
+import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 
 /-!
 # Algebraization of finite schemes over thickenings of a proper scheme

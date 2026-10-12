@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
 # Isomorphisms of abelian étale sheaves are detected on an étale covering

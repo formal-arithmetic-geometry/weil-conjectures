@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Topology.OpenRestrictionAdjunction
 
 /-!
 # Restriction of colimits of sheaves of modules to an open

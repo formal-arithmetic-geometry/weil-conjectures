@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sets.OpenCover
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection
 
 /-! # Cofinal finite affine open coverings of a qcqs scheme
 

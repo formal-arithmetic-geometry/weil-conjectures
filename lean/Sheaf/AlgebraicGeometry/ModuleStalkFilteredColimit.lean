@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.PresheafModuleStalkFilteredColimit
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Filtered colimits and ordinary module stalks

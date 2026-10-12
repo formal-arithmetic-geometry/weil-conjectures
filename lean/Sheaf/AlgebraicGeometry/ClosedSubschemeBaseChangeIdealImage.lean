@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Subobject.Limits
+import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 
 /-!
 # The ideal sheaf of a base-changed closed subscheme

@@ -9,6 +9,9 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Exactness of tensoring by a finite locally free module

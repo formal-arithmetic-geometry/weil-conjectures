@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.Single
+import Sheaf.Paper.KoszulComplex
 
 /-!
 # Koszul-regular closed immersions are perfect

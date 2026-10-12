@@ -6,6 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Mathlib.RingTheory.Flat.Basic
+import Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings
 
 /-! # Flat modules over directed unions of subrings
 

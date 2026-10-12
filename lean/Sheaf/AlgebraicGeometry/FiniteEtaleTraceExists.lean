@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Existence and uniqueness of the finite étale trace

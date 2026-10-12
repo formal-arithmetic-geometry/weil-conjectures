@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
 
 /-!
 # Dimension at a closed point of an affine scheme over a field

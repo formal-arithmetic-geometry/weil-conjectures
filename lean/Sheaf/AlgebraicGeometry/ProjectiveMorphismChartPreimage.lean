@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Chart preimages and coordinate ratios for generating sections

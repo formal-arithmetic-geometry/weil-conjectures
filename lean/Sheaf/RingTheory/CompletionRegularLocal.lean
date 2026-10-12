@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompletionDimension
 
 /-!
 # Regularity and completion of Noetherian local rings

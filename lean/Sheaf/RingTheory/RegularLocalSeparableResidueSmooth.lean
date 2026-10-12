@@ -5,6 +5,12 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.FieldTheory.SeparableExtension
 public import Sheaf.RingTheory.SingularIdeal
+import Sheaf.FieldTheory.SeparablyGeneratedDifferentialsDimension
+import Sheaf.Paper.SeparableResidueCotangentInjective
+import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Sheaf.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Regularity with separable residue field characterizes smoothness over a field

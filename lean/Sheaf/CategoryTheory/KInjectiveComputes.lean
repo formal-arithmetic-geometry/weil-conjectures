@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.KInjectiveBridge
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
 
 /-!
 # K-injective resolutions compute derived functors

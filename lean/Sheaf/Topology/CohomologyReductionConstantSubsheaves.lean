@@ -10,6 +10,7 @@ public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Topology.Compactness.Compact
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.TopologicalFilteredCohomology
 
 /-! # Finite-generation reduction for topological cohomology
 

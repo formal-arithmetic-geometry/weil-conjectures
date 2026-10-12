@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Finiteness.Projective
 public import Mathlib.RingTheory.Localization.Finiteness
+import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
 
 /-! # A finite standard free cover for a finite projective module
 

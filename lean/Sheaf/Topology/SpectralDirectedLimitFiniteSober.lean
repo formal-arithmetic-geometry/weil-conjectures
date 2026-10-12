@@ -8,6 +8,7 @@ module
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Category.TopCat.Basic
 public import Mathlib.Order.Directed
+import Sheaf.Topology.ExistsUniqueIsGenericPointOfFinite
 
 /-!
 # Spectral spaces as directed inverse limits of finite sober spaces

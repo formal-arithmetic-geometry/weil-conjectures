@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Ideal.Maps
+import Sheaf.Paper.FreeComplexMapsToResolution
 
 /-!
 # Naturality of the ideal-kernel description of first Tor

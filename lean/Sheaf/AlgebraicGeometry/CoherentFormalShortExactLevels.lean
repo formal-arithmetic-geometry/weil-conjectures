@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Levels of a short exact sequence of coherent formal modules
 

@@ -2,6 +2,11 @@ module
 
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Sheaves.Functors
+import Sheaf.Topology.ClosedPushforwardConstantRestriction
+import Sheaf.Topology.SheavesDirectedColimitSections
+import Sheaf.Topology.SpectralClosedClopenDecompositionLift
+import Sheaf.Topology.SpectralClosedSubspace
+import Sheaf.Topology.SpectralSheafColimitConstantEmbeddings
 
 @[expose] public section
 

@@ -6,6 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.SymmetricProductProperties
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # The symmetric-product morphism is over the base

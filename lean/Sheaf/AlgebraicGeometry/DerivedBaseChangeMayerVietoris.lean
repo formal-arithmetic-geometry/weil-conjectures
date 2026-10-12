@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
 public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
+import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 
 /-! # Base change and the relative Mayer--Vietoris triangle
 

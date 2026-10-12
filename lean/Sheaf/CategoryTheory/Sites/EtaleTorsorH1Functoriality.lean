@@ -9,6 +9,12 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension
+import Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension
 
 /-!
 # Functoriality of the étale torsor classification of H¹

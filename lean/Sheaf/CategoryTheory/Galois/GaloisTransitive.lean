@@ -6,6 +6,8 @@ Authors: SHEAF contributors
 module
 
 public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
+import Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists
 
 /-!
 # Transitivity of the automorphism action

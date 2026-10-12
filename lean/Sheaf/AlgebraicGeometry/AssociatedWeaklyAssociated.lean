@@ -5,6 +5,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Ideal.Colon
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.RingTheory.AnnihilatorEqIffMinimalPrimeOfFG
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 @[expose] public section
 

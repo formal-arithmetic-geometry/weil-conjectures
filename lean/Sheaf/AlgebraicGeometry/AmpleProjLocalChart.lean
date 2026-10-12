@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap
+import Sheaf.AlgebraicGeometry.AmpleSeparated
+import Sheaf.AlgebraicGeometry.InvertSCOhomology
 
 /-! # Affine charts of the canonical section-ring morphism
 

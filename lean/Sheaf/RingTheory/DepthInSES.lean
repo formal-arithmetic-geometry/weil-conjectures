@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.RingTheory.DepthExt
 
 /-!
 # Depth in a short exact sequence

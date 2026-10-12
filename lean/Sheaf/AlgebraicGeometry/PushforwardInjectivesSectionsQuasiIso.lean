@@ -10,6 +10,11 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-! # Global sections of a resolution of the direct image of injectives
 

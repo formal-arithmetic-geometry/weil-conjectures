@@ -7,6 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.GroupTheory.QuotientGroup.Defs
+import Sheaf.AlgebraicGeometry.AffineUnitDivisorBaseChange
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+import WeilConjectures.AlgebraicGeometry.Curve.DivisorSequence
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Units modulo powers under algebraically closed base change

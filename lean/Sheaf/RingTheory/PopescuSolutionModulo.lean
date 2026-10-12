@@ -10,6 +10,16 @@ public import Sheaf.RingTheory.EssentiallySmooth
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.LocalRing.Defs
+import Sheaf.RingTheory.ArtinianFlatSubalgebras
+import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.FlatPermanence
+import Sheaf.RingTheory.GeometricallyRegularH1Injective
+import Sheaf.RingTheory.GeometricallyRegularOverFieldFlat
+import Sheaf.RingTheory.LocalizationOfRegularRing
+import Sheaf.RingTheory.PolynomialOriginRegularLocal
+import Sheaf.RingTheory.PopescuSolutionModuloChoose
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Solving modulo a prime power through an essentially smooth Artinian algebra

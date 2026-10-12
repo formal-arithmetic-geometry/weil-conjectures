@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Surjectivity near a stalk for a finite type target

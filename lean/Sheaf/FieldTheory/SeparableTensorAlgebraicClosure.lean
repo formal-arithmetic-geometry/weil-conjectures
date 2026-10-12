@@ -9,6 +9,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Sheaf.FieldTheory.SeparableExtension
 public import Sheaf.FieldTheory.FieldTower
+import Sheaf.FieldTheory.SeparableQuotientProduct
 
 /-!
 # A finite separable field tensored with an algebraically closed field

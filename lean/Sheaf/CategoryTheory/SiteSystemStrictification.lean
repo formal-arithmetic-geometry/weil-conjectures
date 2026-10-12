@@ -7,6 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Category.Preorder
+import Sheaf.CategoryTheory.FilteredColimitCategories
+import Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport
 
 /-!
 # Strictification of a directed system of sites

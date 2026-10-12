@@ -2,6 +2,9 @@ module
 
 public import Sheaf.CategoryTheory.SiteMorphismComposition
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+import Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites
+import Sheaf.Paper.SiteCoveringIsomorphicFamily
 
 /-!
 # Transport of morphisms of sites across equivalences

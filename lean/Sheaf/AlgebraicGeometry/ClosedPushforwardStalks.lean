@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalks of pushforward along a closed immersion

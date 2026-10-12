@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+import Sheaf.AlgebraicGeometry.FibreProductPointResidueField
+import Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite
 
 /-!
 # Residue fields at isolated points of fibres

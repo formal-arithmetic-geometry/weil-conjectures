@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.TorsionSubsheafQuotient
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.FunctionField
+import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Torsion-free coherent modules on regular curves

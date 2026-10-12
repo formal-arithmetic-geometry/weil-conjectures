@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 
 /-!
 # H¹ injectivity and the multiple Picard triviality locus

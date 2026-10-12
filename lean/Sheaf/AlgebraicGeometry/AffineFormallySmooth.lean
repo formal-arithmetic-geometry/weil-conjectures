@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FormallySmooth
 public import Mathlib.RingTheory.RingHom.Smooth
+import Sheaf.AlgebraicGeometry.Thickening
 
 /-!
 # Affine formal smoothness and the square-zero lifting property

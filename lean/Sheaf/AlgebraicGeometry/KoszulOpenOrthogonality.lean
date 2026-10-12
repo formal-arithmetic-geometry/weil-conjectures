@@ -10,6 +10,8 @@ public import Sheaf.Paper.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+import Sheaf.AlgebraicGeometry.KoszulAffineDetection
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Koszul orthogonality detects extension from an open
 

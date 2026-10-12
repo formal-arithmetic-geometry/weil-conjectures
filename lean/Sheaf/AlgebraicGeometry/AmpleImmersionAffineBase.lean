@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.AmpleSeparated
+import Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing
+import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # An ample module gives an immersion into projective space over an affine base
 

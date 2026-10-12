@@ -6,6 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Sheafification preserves flatness of module presheaves

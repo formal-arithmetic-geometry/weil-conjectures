@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Filtration
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
+import Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
 
 /-!
 # Localization of intersections of powers

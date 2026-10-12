@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.Ideal.Cotangent
+import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality
 
 /-!
 # Injectivity of the differential implies surjectivity on cotangent spaces

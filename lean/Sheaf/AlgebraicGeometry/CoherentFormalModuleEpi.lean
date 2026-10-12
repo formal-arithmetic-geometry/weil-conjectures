@@ -6,6 +6,10 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Epimorphisms of coherent formal modules
 

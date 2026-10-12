@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.ConstantSubsheafGeneric
+import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Subsheaves of constructible module sheaves on Noetherian schemes

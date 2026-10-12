@@ -9,6 +9,12 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+import Sheaf.RingTheory.ImprovePresentationSmoothConormalFree
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Sheaf.RingTheory.SmoothLocalizationConormalSplit
+import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Smooth retract by a relative global complete intersection

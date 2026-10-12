@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
 
 /-!
 # Affineness of a thickening

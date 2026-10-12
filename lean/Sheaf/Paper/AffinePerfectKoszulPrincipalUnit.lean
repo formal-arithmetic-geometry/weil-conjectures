@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.ShiftedKoszulAugmentation
+import Sheaf.Paper.KoszulComplex
 
 /-! # Powers Koszul complexes are perfect on a principal-open cover
 

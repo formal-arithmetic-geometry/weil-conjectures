@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.FieldTheory.GeometricallyReducedExtensionSeparable
+import Sheaf.FieldTheory.SeparablyGeneratedTensorReduced
 
 /-!
 # Separably generated field extensions are separable

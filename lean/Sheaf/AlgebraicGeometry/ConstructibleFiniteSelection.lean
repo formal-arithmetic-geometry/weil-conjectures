@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Limits.Shapes.Biproducts
+import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
+import Sheaf.AlgebraicGeometry.LisseGenericKernel
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Finite selection of geometric stalk tests

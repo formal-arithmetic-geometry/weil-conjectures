@@ -8,6 +8,13 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Ring.ULift
+import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.KilledSheafModuleLift
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Constructible approximation for one prime and one pullback -/
 

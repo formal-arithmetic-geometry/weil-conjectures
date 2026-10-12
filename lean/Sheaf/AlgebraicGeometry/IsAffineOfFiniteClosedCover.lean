@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
 
 /-!
 # Affineness from a finite closed cover

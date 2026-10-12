@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Module.ULift
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
+import Sheaf.RingTheory.FiniteFreeResolution
 
 /-! # Tor against ideal-power quotients is strictly pro-zero
 

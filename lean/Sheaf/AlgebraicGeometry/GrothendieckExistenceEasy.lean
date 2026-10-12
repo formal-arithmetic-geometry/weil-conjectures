@@ -2,6 +2,18 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.RingTheory.FiniteIffFormalGlueing
+import Sheaf.RingTheory.FormalGlueingComplexExact
+import Sheaf.RingTheory.FormalGlueingIsogeny
+import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-!
 # Easy algebraization of formal coherent modules

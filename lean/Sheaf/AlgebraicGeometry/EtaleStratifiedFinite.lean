@@ -9,6 +9,12 @@ public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Topology.Constructible
+import Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification
+import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite
+import Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluing
+import Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-!
 # Etale morphisms become finite etale on constructible strata

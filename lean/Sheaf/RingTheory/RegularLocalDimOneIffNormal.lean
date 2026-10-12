@@ -7,6 +7,10 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.RingTheory.PrincipalMaximalDimOneRegular
+import Sheaf.RingTheory.ValuationRingNormal
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regularity and normality for one-dimensional Noetherian local rings

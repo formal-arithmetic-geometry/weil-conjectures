@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
+import Sheaf.AlgebraicGeometry.UnramifiedOverFieldDiscrete
 
 /-!
 # Isolated points in fibres of unramified morphisms

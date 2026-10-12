@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.Modules.LocalSplittingFiniteFree
+import Sheaf.LinearAlgebra.ExteriorTopDirectSum
 
 /-!
 # Determinants in short exact sequences

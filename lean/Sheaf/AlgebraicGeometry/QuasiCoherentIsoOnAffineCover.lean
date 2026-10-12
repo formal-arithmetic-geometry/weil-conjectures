@@ -6,6 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 
 /-!
 # Isomorphisms of quasi-coherent modules detected on an affine open cover

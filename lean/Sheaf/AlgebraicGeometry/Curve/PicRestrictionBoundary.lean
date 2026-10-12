@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import Mathlib.GroupTheory.QuotientGroup.Basic
+import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
+import Sheaf.AlgebraicGeometry.DivisorClassCurve
+import WeilConjectures.AlgebraicGeometry.Curve
 
 /-!
 # Restriction of Picard groups across a finite boundary

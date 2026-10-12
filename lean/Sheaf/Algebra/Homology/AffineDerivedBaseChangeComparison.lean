@@ -9,6 +9,10 @@ public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-!
 # Affine derived base change and localization

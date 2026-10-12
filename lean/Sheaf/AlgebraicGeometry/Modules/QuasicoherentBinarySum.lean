@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
+import Sheaf.AlgebraicGeometry.Coherent
 
 /-!
 # Binary direct sums of quasi-coherent modules

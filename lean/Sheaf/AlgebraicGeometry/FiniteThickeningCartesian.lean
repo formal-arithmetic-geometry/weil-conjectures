@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.AlgebraicGeometry.Thickening
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeThickening
+import Sheaf.AlgebraicGeometry.ThickeningIntegral
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 
 /-!
 # Finiteness across a cartesian finite order thickening

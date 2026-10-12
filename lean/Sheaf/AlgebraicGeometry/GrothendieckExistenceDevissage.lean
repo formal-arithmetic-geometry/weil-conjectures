@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
+import Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy
 
 /-!
 # Grothendieck existence by devissage

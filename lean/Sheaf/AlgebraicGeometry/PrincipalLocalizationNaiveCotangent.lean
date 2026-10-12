@@ -6,6 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.RingTheory.Extension.Cotangent.LocalizationAway
+import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
 
 /-!
 # Principal localization and the naive cotangent complex

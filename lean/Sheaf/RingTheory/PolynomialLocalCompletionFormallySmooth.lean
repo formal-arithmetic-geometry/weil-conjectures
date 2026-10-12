@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.FormallySmoothAdicCompletion
 
 /-!
 # Adic formal smoothness of a completed polynomial local ring

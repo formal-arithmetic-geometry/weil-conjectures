@@ -16,6 +16,9 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 public import Sheaf.RingTheory.MinimalPresentationTor
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Sheaf.RingTheory.GradedKernelFinite
+import Sheaf.RingTheory.GradedNakayamaGeneration
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Graded Nakayama freeness criterion

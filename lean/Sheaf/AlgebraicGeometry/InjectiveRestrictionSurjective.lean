@@ -2,6 +2,8 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Injective sheaves have surjective restriction maps
 

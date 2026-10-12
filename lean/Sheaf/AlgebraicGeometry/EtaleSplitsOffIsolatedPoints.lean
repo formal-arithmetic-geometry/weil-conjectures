@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementary
+import Sheaf.AlgebraicGeometry.FinitePiecePersistence
 
 /-!
 # Splitting off isolated fibre points in an elementary étale neighbourhood

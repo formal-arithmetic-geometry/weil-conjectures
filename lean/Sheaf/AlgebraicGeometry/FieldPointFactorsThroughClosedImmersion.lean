@@ -6,6 +6,7 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
 
 /-!
 # Field-valued points factor through closed immersions

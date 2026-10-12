@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Bounded-below injective resolutions on a small ringed site

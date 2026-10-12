@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.RingTheory.MapIntoHenselianColimit
+import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-! # Strict henselization functoriality
 

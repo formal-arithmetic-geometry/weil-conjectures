@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Composition of inverse images of étale sheaves of sets, with units
 

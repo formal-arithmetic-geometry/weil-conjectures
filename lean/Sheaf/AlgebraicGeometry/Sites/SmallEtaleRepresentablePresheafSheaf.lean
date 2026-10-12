@@ -2,6 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.IsSheafFor
+import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 
 /-!
 # Representable presheaves are sheaves on the small étale site

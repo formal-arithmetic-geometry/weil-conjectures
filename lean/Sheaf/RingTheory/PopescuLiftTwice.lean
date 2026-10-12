@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Ideal.Over
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.RingTheory.PopescuLiftOnce
 
 /-!
 # Killing an ideal through a smooth algebra over a square-zero base

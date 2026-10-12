@@ -12,6 +12,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescent
+import Sheaf.Paper.GabberZariskiEtaleRestrictionInjective
+import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.Topology.ClosedPushforwardConstantStalks
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement
 
 /-!
 # Gabber's degree-zero criterion for etale sheaves of sets

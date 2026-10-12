@@ -9,6 +9,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings
+import Sheaf.Paper.IntegralCoverTrivialCohomology
+import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Finite covers kill classes with finite constant coefficients

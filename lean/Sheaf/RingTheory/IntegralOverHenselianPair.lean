@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+import Sheaf.RingTheory.HenselianIntegralIdempotentLifting
 
 /-!
 # Integral algebras over henselian pairs

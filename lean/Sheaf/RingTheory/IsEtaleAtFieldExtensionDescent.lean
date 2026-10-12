@@ -7,6 +7,9 @@ module
 
 public import Mathlib.RingTheory.Etale.Locus
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
+import Sheaf.RingTheory.FlatPermanence
+import Sheaf.RingTheory.LocalRingHomTensorProductFieldExtensionFaithfullyFlat
 
 /-!
 # Descent of etaleness at a prime under field extension

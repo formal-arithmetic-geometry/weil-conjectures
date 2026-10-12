@@ -8,6 +8,10 @@ module
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Height
 public import Mathlib.RingTheory.Spectrum.Prime.Basic
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.MaximalChainLengthOfDepth
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Maximal chains in polynomial rings over fields

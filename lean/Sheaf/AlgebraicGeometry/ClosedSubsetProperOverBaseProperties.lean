@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.SchemeTheoreticUnion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Closed subsets proper over a base: structures, subsets, and images

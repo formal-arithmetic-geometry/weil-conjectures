@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.TensorProduct.Map
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
 /-!
 # Sections of module pullback on affine opens

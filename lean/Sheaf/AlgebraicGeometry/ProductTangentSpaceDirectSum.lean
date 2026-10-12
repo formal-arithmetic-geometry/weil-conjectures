@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 public import WeilConjectures.PointCount
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.TangentMapLinear
+import Sheaf.AlgebraicGeometry.TangentVectorsVectorSpace
 
 /-!
 # Tangent space of a product

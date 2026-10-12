@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.QuasiFiniteIntegralClosureOpen
 
 /-!
 # A quasi-finite affine morphism embeds in a finite affine morphism

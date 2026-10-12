@@ -6,6 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 
 /-!
 # Finite acyclic resolutions and right derived functors

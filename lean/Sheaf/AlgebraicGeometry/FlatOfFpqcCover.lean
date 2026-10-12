@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
 
 /-!
 # Flatness descends along fpqc covering families

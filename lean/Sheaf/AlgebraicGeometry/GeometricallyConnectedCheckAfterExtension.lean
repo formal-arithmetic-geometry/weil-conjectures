@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Over
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.FieldTheory.CommonExtensionFields
 
 /-!
 # Geometric connectedness after a field extension

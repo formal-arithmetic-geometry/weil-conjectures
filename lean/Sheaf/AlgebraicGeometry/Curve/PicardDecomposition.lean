@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.DivisorClassCurve
+import Sheaf.AlgebraicGeometry.DivisorModule
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.PicardFunctor
 
 /-!
 # The Picard group of a proper curve splits as `ℤ × Pic⁰`

@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Homology.TotalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-!
 # Total complexes of first quadrant double complexes

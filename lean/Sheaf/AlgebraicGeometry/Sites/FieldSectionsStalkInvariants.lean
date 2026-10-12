@@ -10,6 +10,9 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
+import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import Sheaf.AlgebraicGeometry.Sites.FiniteGaloisSectionsDescent
+import Sheaf.FieldTheory.FiniteGaloisReceivingSeparableExtensions
 
 /-!
 # Sections over finite separable fields and geometric stalk invariants

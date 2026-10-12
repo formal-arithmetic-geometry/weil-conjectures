@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
+import Sheaf.Paper.QuasiCompactH1Zero
+import WeilConjectures.Compactification.FiniteTypeDirected
 
 /-!
 # Serre's criterion for affineness

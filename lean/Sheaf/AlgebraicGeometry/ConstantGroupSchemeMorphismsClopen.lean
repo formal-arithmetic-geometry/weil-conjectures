@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ConstantGroupScheme
 public import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
 public import Mathlib.Topology.LocallyConstant.Algebra
+import Sheaf.AlgebraicGeometry.ConstantGroupSchemeMultiplication
 
 /-!
 # Constant group scheme morphisms and clopen decompositions

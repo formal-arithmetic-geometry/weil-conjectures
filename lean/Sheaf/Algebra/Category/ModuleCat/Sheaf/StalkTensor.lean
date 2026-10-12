@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalk of a tensor product of modules on a ringed space

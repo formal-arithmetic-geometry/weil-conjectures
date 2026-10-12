@@ -6,6 +6,13 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectLocalizingClosure
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.PerfectGenerationAffineBase
+import Sheaf.AlgebraicGeometry.PerfectGenerationOpenInduction
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
+import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Perfect complexes generate the quasi-coherent derived category
 

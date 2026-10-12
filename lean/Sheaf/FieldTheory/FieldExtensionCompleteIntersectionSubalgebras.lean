@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
 
 /-!
 # Complete-intersection subalgebras in field extensions

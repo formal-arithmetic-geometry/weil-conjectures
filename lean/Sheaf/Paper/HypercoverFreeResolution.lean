@@ -12,6 +12,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison
+import Sheaf.CategoryTheory.MatchingObjectCoskeleton
+import Sheaf.Paper.CechNerveFreeHomology
 
 /-!
 # The augmented free complex of a split étale hypercover

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Local constancy of a module subsheaf near a component generic point -/
 

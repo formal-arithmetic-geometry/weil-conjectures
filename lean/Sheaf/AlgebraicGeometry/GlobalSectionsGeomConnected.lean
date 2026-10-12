@@ -6,6 +6,11 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
 
 /-!
 # Global sections and geometric connectedness

@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Homology.HomologicalBicomplex
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+import Sheaf.CategoryTheory.Abelian.HorseshoePrescribedResolutions
+import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-! # Existence of Cartan--Eilenberg injective resolutions
 

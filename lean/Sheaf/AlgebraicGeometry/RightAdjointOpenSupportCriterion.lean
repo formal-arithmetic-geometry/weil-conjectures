@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.AlgebraicGeometry.OpenRestrictionSupportTriangle
+import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
 
 /-!
 # Support criterion for restriction of a right adjoint to an open

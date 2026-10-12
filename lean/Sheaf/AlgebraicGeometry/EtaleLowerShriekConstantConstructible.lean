@@ -7,6 +7,11 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
+import Sheaf.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 
 /-!
 # Constructibility of extension by zero of a finite constant module sheaf

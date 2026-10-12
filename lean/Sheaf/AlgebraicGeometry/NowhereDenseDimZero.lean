@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.GDelta.Basic
 public import Sheaf.AlgebraicGeometry.Dimension
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Nowhere-dense closed subschemes in dimension at most one

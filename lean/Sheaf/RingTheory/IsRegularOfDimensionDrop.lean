@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-!
 # Dimension drop gives a regular sequence in a Cohen-Macaulay local ring

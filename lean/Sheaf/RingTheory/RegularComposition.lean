@@ -6,6 +6,9 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.GeometricallyRegularFieldExtension
+import Sheaf.RingTheory.RegularBaseChange
+import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 
 /-!
 # Composition of regular ring maps

@@ -1,6 +1,7 @@
 module
 
 public import Mathlib.Topology.Sheaves.Sheaf
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-!
 # Sections of directed colimits of sheaves over quasi-compact opens

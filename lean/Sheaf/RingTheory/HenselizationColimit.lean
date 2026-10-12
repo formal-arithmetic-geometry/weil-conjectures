@@ -7,6 +7,9 @@ module
 
 public import Sheaf.RingTheory.PairHenselization
 public import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.RingTheory.FilteredColimitHenselianPair
+import Sheaf.RingTheory.HenselizationUniversalProperty
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Henselization of pairs commutes with filtered colimits

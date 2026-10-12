@@ -2,6 +2,9 @@ module
 
 public import Mathlib.CategoryTheory.Sites.ConcreteSheafification
 public import Mathlib.CategoryTheory.Sites.Coverage
+import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
+import Sheaf.Paper.SitePlusInjectiveSeparated
+import Sheaf.Paper.SitePlusSeparated
 /-! # The plus construction of a separated presheaf is a sheaf
 Source: literature/stacks-project/sites.tex, Sites, Definition 00WA and
 Theorem 00WB, part (2).

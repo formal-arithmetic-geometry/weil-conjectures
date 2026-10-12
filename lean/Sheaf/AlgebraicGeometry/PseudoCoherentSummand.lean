@@ -6,6 +6,9 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+import Sheaf.Algebra.Homology.RingPseudoCoherentSummand
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # Pseudo-coherence is preserved by direct summands
 

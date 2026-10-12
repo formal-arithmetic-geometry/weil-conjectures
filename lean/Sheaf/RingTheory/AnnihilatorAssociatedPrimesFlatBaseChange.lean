@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Module.Submodule.Pointwise
 public import Mathlib.Algebra.Module.TransferInstance
+import Sheaf.RingTheory.AnnihilatorAssociatedPrimesExactSequence
+import Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Associated primes under flat base change

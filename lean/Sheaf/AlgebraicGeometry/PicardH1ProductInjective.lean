@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.DensePoints
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.PicardKunnethQcoh
+import Sheaf.AlgebraicGeometry.ProperBasic
 
 /-!
 # Injectivity of the two slice pullbacks in degree one

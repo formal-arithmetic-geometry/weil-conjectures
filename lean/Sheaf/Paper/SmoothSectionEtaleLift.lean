@@ -9,6 +9,13 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
+import Sheaf.AlgebraicGeometry.EtaleLocalizeUpstairs
+import Sheaf.AlgebraicGeometry.LiftProjectiveModuleEtale
+import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
+import Sheaf.RingTheory.JacobiZariskiQuotientSmooth
+import Sheaf.RingTheory.SmoothConormalSequenceExact
+import Sheaf.RingTheory.SymmetricAlgebraSmooth
 
 /-! # Sections of smooth algebras modulo an ideal lift over an étale neighbourhood
 

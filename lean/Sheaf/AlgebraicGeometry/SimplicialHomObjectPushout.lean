@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SimplicialHomObject
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Square
+import Sheaf.AlgebraicGeometry.SemiRepresentableObject
 
 /-! # Hom objects and simplicial pushouts
 

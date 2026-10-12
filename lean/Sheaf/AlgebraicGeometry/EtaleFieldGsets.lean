@@ -11,6 +11,10 @@ public import Mathlib.CategoryTheory.Action.Continuous
 public import Mathlib.CategoryTheory.Action.Concrete
 public import Mathlib.CategoryTheory.Types.Basic
 public import Mathlib.FieldTheory.KrullTopology
+import Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
+import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import Sheaf.FieldTheory.EtaleFieldGaloisClassification
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # Étale schemes over a field and continuous G-sets

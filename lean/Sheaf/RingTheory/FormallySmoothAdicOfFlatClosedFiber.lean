@@ -9,6 +9,19 @@ public import Sheaf.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.AdicFieldDifferentialsInjective
+import Sheaf.RingTheory.CompleteLocalMapCohenPresentation
+import Sheaf.RingTheory.FlatCompletion
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import Sheaf.RingTheory.FormallySmoothAdicCompletion
+import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
+import Sheaf.RingTheory.LocalCompletionQuotient
+import Sheaf.RingTheory.PowerSeriesFieldCohenFsAdic
+import Sheaf.RingTheory.PowerSeriesParameterQuotient
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 
 /-!
 # Adic formal smoothness from flatness and the closed fibre

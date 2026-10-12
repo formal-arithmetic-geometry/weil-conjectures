@@ -11,6 +11,14 @@ public import Mathlib.RingTheory.Lasker
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
+import Sheaf.RingTheory.HilbertAffineDenominatorModule
+import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Regular-section exact sequences give lower-dimensional differences
 

@@ -3,6 +3,10 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 public import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward
+import Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative
+import Sheaf.CategoryTheory.Sites.ZariskiTorsorExtensionPushout
+import Sheaf.Topology.ClosedPushforwardBoundaryNaturality
 
 /-! # Functoriality of the torsor description of H¹
 

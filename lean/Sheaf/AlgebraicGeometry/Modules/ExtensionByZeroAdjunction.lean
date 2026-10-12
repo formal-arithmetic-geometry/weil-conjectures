@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Extension by zero of modules on an open subscheme

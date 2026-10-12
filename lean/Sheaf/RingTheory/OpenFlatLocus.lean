@@ -9,6 +9,10 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.RingTheory.ColimitEventuallyFlat
+import Sheaf.RingTheory.LimitModuleFinitePresentation
+import WeilConjectures.Mathlib.RingTheory.Flat.Localization
 
 /-!
 # Openness of the flat locus of a finitely presented module

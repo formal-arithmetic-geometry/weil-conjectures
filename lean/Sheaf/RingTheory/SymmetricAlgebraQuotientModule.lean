@@ -6,6 +6,7 @@ module
 
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.LinearAlgebra.SymmetricAlgebra.DegreeExact
 
 /-!
 # Symmetric algebra of a quotient module

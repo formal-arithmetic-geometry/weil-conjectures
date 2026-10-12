@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Sheaf.Topology.OpenModuleDerivedSections
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 
 /-! # Derived sections of a derived direct image
 

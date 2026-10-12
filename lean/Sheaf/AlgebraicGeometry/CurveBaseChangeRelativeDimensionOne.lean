@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Sheaf.AlgebraicGeometry.Variety
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 
 /-!
 # Relative dimension of a base change of a smooth curve

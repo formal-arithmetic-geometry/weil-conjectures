@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # A Noetherian scheme of dimension at most zero is finite and discrete

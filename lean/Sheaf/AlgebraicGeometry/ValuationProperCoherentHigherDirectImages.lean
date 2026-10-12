@@ -8,6 +8,12 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.LeraySpectralSequence
+import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.RingTheory.CoherentRingPerfectComplexCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 @[expose] public section
 

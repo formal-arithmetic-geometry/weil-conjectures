@@ -8,6 +8,10 @@ module
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.FiniteType
+import Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG
+import Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen
+import Sheaf.RingTheory.FiniteQuotientComponentQuasiFinite
+import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
 # Integral-closure localization of a finite fibre component

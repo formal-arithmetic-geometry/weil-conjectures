@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.EtaleNormalRing
+import Sheaf.RingTheory.FilteredColimitNormalRing
 
 /-!
 # Local filtered colimits of etale algebras over normal domains

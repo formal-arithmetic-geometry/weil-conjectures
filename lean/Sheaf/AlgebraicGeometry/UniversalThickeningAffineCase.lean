@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.AlgebraicGeometry.Thickening
 
 /-!
 # Spectra of universal square-zero algebra extensions

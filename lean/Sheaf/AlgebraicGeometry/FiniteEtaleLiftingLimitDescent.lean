@@ -6,6 +6,15 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
+import Sheaf.RingTheory.FiniteTypeIntGRing
+import Sheaf.RingTheory.HenselizationColimit
+import Sheaf.RingTheory.HenselizationPairGRing
+import Sheaf.RingTheory.PairHenselization
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Reduction of finite étale lifting to henselian G-rings

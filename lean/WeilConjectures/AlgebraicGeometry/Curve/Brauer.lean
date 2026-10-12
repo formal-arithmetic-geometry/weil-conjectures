@@ -13,6 +13,16 @@ public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import WeilConjectures.SixFunctors.Finite.Exact
 
 /-!
 # Tsen's theorem and the Brauer group of a curve

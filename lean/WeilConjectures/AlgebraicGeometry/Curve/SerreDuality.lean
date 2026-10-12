@@ -28,6 +28,13 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.OrderOfVanishing
 public import WeilConjectures.Mathlib.RingTheory.RamificationInertia.Basic
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation
+import Sheaf.AlgebraicGeometry.ProperUpperShriekComposition
+import Sheaf.AlgebraicGeometry.SmoothProperCurveDualizing
+import WeilConjectures.AlgebraicGeometry.Modules.Dual
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 
 /-!
 # Local theory of smooth curves and finite morphisms to the projective line

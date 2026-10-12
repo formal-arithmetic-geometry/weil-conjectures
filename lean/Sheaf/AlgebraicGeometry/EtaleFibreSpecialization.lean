@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification
+import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
 
 /-!
 # Specialization bound for geometric fibres of separated étale morphisms

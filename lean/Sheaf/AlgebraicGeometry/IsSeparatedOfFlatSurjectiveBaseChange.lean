@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover
 
 /-!
 # Descent of separatedness along a flat surjective quasi-compact morphism

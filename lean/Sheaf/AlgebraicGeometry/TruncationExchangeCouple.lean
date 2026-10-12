@@ -7,6 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.CategoryTheory.TruncationTriangle
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Exchange on truncation exact couples

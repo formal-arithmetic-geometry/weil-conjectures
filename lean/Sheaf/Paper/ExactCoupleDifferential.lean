@@ -7,6 +7,16 @@ module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.ExactCoupleMorphism
+import Sheaf.CategoryTheory.TruncationCouple
+import Sheaf.CategoryTheory.TruncationCoupleExact
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Compatibility of the exact-couple differential
 

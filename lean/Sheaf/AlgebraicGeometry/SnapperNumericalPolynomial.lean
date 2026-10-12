@@ -12,6 +12,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
+import Sheaf.AlgebraicGeometry.HilbertDifference
+import Sheaf.AlgebraicGeometry.RegularMeromorphicSectionExists
+import Sheaf.AlgebraicGeometry.RemoveEmbeddedPoints
+import Sheaf.Paper.SchemeTheoreticSupport
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
+import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 
 /-! # Snapper's numerical polynomial for several invertible twists
 

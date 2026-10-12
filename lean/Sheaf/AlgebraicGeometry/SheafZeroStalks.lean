@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # A sheaf with vanishing stalks is zero

@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointDirectSums
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointOpenSupport
+import Sheaf.AlgebraicGeometry.RightAdjointOpenSupportCriterion
 
 /-! # Restriction compatibility for the proper-flat right adjoint
 

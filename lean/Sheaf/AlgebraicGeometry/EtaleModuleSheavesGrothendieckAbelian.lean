@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Grothendieck abelianness of constant-coefficient etale module sheaves

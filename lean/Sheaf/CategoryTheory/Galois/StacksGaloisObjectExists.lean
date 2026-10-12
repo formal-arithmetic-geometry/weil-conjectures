@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
+import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 
 /-!
 # Galois objects above connected objects

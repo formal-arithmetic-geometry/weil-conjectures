@@ -9,6 +9,8 @@ public import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 public import Mathlib.Data.Fin.Tuple.Basic
+import Sheaf.RepresentationTheory.CoinducedHomotopyContinuous
+import Sheaf.RepresentationTheory.CoinducedHomotopyIdentity
 
 /-!
 # Acyclicity of discrete continuous coinduction

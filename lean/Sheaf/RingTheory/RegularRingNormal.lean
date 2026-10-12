@@ -7,6 +7,10 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.SerreConditions
+import Sheaf.RingTheory.SerreCriterionNormal
 
 /-!
 # A regular ring is normal

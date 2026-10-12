@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.RingTheory.AdicCompletion.Functoriality
 public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Sheaf.Paper.AdicTowerReconstruction
+import Sheaf.RingTheory.FiniteModuleComplete
+import Sheaf.RingTheory.FiniteOverCompleteRing
 
 /-!
 # Adic systems of finite modules over p-adic coefficient rings

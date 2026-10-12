@@ -8,6 +8,9 @@ module
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Limits
+import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
+import Sheaf.AlgebraicGeometry.FpqcRefinementFullyFaithful
+import Sheaf.AlgebraicGeometry.FpqcSingletonAffineRefinement
 
 /-!
 # Effective fpqc descent reduced to affine faithfully flat morphisms

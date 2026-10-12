@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
+import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
+import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Étale cohomology of a smooth proper connected curve

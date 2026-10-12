@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.Topology.StalkDirectSums
 
 /-!
 # Stalks commute with total tensor complexes

@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.FinitelyPresentedComplexDescent
+import Sheaf.AlgebraicGeometry.FlatModuleDescent
 
 /-!
 # Descent of bounded finitely presented flat complexes

@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.SimplicialHomObject
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.HypercoverOneMoreSimplex
+import Sheaf.AlgebraicGeometry.SemiRepresentableCoveringPermanence
+import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+import Sheaf.Paper.SimplicialSetAddSimplices
 
 /-!
 # Local lifting along finite simplicial inclusions in a hypercover

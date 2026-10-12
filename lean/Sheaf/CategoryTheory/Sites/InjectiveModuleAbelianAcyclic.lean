@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.CategoryTheory.SiteCechVanishingCriterion
+import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 
 /-!
 # Injective module sheaves are acyclic after forgetting to abelian sheaves

@@ -8,6 +8,11 @@ module
 public import Sheaf.RingTheory.AnalyticallyUnramified
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.AnnihilatorAssociatedPrimesFlatBaseChange
+import Sheaf.RingTheory.CodimensionOneAnalyticallyUnramified
+import Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes
+import Sheaf.RingTheory.RegularLocalDimOneIffNormal
 
 /-!
 # A principal-quotient criterion for an analytically unramified local domain

@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # Perfect generation over an affine base
 

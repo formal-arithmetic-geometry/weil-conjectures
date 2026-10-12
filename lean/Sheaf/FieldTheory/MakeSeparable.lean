@@ -8,6 +8,8 @@ module
 public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Sheaf.FieldTheory.MakeSeparablyGenerated
+import Sheaf.FieldTheory.SeparablyGeneratedSeparable
 
 /-!
 # Making a finitely generated field extension separable

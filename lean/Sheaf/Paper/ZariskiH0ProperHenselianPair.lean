@@ -8,6 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.Topology.Sheaves.Functors
+import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import Sheaf.RingTheory.HenselianPairPrimeConnected
+import Sheaf.RingTheory.IntegralOverHenselianPair
+import Sheaf.Topology.SpectralClosedRestriction
+import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-!
 # Zariski degree-zero comparison for a proper scheme over a henselian pair

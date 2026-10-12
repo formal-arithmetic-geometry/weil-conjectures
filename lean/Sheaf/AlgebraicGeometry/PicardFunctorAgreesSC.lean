@@ -5,6 +5,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Defs
 public import WeilConjectures.AlgebraicGeometry.PicardFunctor
 public import Sheaf.AlgebraicGeometry.FppfAffineSheafificationRestriction
 public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 
 @[expose] public section
 

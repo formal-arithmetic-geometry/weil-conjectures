@@ -11,6 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import Mathlib.GroupTheory.QuotientGroup.Basic
+import WeilConjectures.AlgebraicGeometry.Curve.Affine
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-! # Compatibility of the affine Picard quotient with field extension
 

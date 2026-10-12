@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebra
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Filtered.Basic
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.CategoryTheory.SheafAlgebrasDirectedColimit
 
 /-! # Directed colimits of quasi-coherent algebra sheaves
 

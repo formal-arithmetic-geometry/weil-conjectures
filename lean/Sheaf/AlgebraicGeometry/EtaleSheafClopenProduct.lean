@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.CategoryTheory.Pi.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Abelian etale sheaves on a finite coproduct

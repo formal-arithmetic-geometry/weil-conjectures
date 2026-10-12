@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
+import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Base change of a first order thickening

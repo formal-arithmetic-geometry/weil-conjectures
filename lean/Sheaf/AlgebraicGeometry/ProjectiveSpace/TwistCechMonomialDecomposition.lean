@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistSections
 public import Sheaf.AlgebraicGeometry.AlternatingCechComputes
 public import Sheaf.AlgebraicGeometry.ProjectiveSpace.ExponentCechComplex
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-!
 # Laurent monomial decomposition of the alternating twist Čech complex

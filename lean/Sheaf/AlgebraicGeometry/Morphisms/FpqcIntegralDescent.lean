@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.FpqcAffineDescent
+import Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover
 
 /-!
 # Descent of integral morphisms along fpqc covering families

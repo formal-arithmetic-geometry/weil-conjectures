@@ -7,6 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Sheaf.Paper.DirectImageSplitCoverProduct
+import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.ConstructibleSheaf.Biproduct
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite etale pushforward of finite locally constant module sheaves

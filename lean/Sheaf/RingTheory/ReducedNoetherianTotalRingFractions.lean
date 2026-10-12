@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Total ring of fractions of a reduced Noetherian ring

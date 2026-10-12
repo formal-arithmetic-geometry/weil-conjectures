@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.RingTheory.LocalRing.Module
+import Sheaf.RingTheory.NakayamaNilpotent
 
 /-!
 # Lifting bases over a local ring with nilpotent maximal ideal

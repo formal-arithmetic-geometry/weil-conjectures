@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Smooth.StandardSmooth
+import Sheaf.RingTheory.FilteredColimitOfFactorization
+import Sheaf.RingTheory.SmoothStandardSmoothRetract
 
 /-!
 # Filtered colimits of standard smooth algebras

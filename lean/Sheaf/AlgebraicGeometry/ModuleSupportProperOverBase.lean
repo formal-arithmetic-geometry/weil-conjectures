@@ -11,6 +11,11 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.SchemeTheoreticSupport
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Support of a finite type module proper over a base
 

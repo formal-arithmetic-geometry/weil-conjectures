@@ -8,6 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
+import Sheaf.RingTheory.StrictHenselizationDimension
+import Sheaf.RingTheory.StrictHenselizationNoetherian
+import Sheaf.RingTheory.StrictHenselizationRegular
+import Sheaf.RingTheory.StrictHenselizationTriples
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # DVR property of strict henselizations

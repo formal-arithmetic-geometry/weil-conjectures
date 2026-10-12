@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Derivation.Basic
 public import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
 
 /-!
 # Extending derivations along formally smooth adic maps

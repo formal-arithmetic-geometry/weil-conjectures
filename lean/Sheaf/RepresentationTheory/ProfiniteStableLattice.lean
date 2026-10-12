@@ -10,6 +10,7 @@ public import Mathlib.Topology.Algebra.Module.FiniteDimension
 public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 public import Mathlib.LinearAlgebra.Dimension.Free
 public import Mathlib.Topology.Algebra.Group.Basic
+import Sheaf.NumberTheory.Padics.LatticeStabilizerOpen
 
 /-!
 # Stable lattices for compact groups

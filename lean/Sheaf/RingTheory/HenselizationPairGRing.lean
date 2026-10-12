@@ -7,6 +7,11 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PairHenselization
+import Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit
+import Sheaf.RingTheory.FlatLocalCompletionIso
+import Sheaf.RingTheory.GRingMaximalIdealCriterion
+import Sheaf.RingTheory.GeometricRegularitySeparableExtension
+import Sheaf.RingTheory.PairHenselizationNoetherianCompletion
 
 /-!
 # G-rings and henselizations of pairs

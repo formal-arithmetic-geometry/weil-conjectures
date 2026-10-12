@@ -7,6 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.FormalFunctionsStalk
+import Sheaf.AlgebraicGeometry.LimitFibreProducts
+import Sheaf.AlgebraicGeometry.LimitResidueField
+import Sheaf.AlgebraicGeometry.NilpotentBaseChangeIdempotents
+import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
 
 /-!
 # Idempotents on a proper fibre come from a neighbourhood

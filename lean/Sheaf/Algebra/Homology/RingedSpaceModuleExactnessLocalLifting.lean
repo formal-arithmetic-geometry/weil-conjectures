@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Local lifting for epimorphisms and exact complexes of module sheaves

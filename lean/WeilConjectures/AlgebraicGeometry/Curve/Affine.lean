@@ -17,6 +17,20 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.Curve.PicAffineQuotient
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.FieldDiscreteModules
+import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceDegree
+import Sheaf.AlgebraicGeometry.NormalGenericConstant
+import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.RepresentationTheory.SylowModuleFiltration
+import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.SixFunctors.Finite.GlobalSections
 
 /-!
 # Smooth affine curves over an algebraically closed field

@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Abelian
 public import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.AbelianSheafShortExactStalkwise
 
 @[expose] public section
 

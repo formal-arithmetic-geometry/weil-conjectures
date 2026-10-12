@@ -8,6 +8,17 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.ExtEvaluation
+import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.CategoryTheory.RightDerivedExactComposite
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # The canonical locally free Ext comparison

@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.PerfectThickClosure
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent
+import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
+import Sheaf.CategoryTheory.CompactFactorThroughThick
+import Sheaf.CategoryTheory.CompactHomHocolim
 
 /-! # Perfect annihilator for a map to a supported complex
 

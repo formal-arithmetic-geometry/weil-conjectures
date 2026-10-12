@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest
 public import Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeResidueIso
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.PerfectCutComplexDegreeZero
+import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
+import Sheaf.AlgebraicGeometry.PerfectSummand
 
 /-! # The degree-zero residue-field criterion for a perfect complex
 

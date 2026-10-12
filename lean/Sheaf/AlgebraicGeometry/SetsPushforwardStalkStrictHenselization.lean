@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import Sheaf.AlgebraicGeometry.EtaleSetSectionContinuity
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.CategoryTheory.ExistsDirectedReindexing
 
 /-! # Stalk of a direct image over the strict henselization
 

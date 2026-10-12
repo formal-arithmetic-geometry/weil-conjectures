@@ -10,6 +10,10 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.Algebra.Homology.MittagLefflerLimitHomology
+import Sheaf.Paper.TorLongExactFirstVariable
+import Sheaf.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.TorStrictlyProZero
 
 /-!
 # Inverse limits of flat modules over ideal-power quotients

@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Exactness of stalks of sheaves of modules

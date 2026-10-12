@@ -7,6 +7,13 @@ module
 
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.FinitePresentation
+import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
+import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import Sheaf.RingTheory.EquationCountFibreDimensionFlat
+import Sheaf.RingTheory.ExistsAnnihilatorOfSubsingletonLocalizedModule
+import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Sheaf.RingTheory.SmoothAtPrimeFreeConormalBasis
 
 /-! # Popescu lifting lemma
 

@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.FlatModuleCompletion
+import Sheaf.RingTheory.StrictHenselizationModPowerFree
 
 /-!
 # Flatness over the base of the completed strict henselization

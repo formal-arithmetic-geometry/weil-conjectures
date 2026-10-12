@@ -11,6 +11,16 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+import Sheaf.FieldTheory.ExistsPBasis
+import Sheaf.FieldTheory.IntersectionSubfieldsDifferentials
+import Sheaf.Paper.DerivationExtendsFiniteType
+import Sheaf.RingTheory.CohenRing
+import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.KaehlerDifferentialZeroIffPow
+import Sheaf.RingTheory.NoetherNormalizationOverDomain
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import Sheaf.RingTheory.PowerSeriesRingSubfields
 
 /-!
 # Detecting non-pth-powers by absolute derivations

@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Algebra.Category.ModuleCat.Differentials.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.StandardSmoothDimensionAtPoints
 
 /-!
 # Differentials of a smooth morphism and fibre dimension

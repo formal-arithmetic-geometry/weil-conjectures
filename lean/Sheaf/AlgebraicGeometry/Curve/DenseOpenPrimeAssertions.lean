@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions
+import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 /-! # Dense-open comparison for prime-torsion module sheaves -/
 

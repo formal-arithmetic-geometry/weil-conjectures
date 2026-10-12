@@ -8,6 +8,13 @@ module
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Sheaf.RingTheory.GRing
+import Sheaf.Paper.SmoothSectionEtaleLift
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.EtaleSectionLiftingOfGabberRoots
+import Sheaf.RingTheory.GRingCompletionRegular
+import Sheaf.RingTheory.HenselianFactorizationCriterion
+import Sheaf.RingTheory.PopescuSmoothing
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Approximation for henselian pairs with a Noetherian G-ring

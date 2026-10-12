@@ -4,6 +4,9 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Abelian.Images
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalks of ideal-module products, quotients, and powers

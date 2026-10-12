@@ -7,6 +7,9 @@ module
 
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
+import Sheaf.FieldTheory.MakeSeparable
+import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 
 /-!
 # Vanishing of the first cotangent homology of a field over its positive prime field

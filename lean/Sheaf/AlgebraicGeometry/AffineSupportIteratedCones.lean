@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Data.Nat.Choose.Basic
+import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
 
 /-! # Affine support from successive cones
 

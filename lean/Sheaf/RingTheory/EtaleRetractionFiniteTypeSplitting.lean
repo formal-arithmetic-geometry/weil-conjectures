@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.EtaleFiniteFactorDecomposition
 
 /-!
 # Finite-type splitting from étale retractions

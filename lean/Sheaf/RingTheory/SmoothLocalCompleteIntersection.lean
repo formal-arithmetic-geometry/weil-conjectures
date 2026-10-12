@@ -7,6 +7,11 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
+import Sheaf.RingTheory.LocalCompleteIntersectionFieldChange
+import Sheaf.RingTheory.PolynomialOriginRegularLocal
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.SmoothLocalizationConormalSplit
 
 /-!
 # Smooth algebras over fields are local complete intersections

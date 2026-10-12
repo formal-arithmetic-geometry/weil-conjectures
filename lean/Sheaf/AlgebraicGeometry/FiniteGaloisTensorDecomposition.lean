@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.FieldTheory.Galois.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.EtaleCoproductOfFiniteSeparableFields
+import Sheaf.AlgebraicGeometry.FiniteGaloisTensorCoproduct
+import Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections
+import Sheaf.RingTheory.PolynomialDistinctLinearCRT
 
 /-!
 # Tensor decomposition of a finite Galois field extension

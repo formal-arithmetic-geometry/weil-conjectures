@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Sections over graphs extend by zero
 

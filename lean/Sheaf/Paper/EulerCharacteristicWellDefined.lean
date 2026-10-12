@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.Algebra.BigOperators.Finprod
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Well-definedness of the Euler characteristic
 

@@ -6,6 +6,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum
+import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
 
 /-! # Direct sums in the quasi-coherent derived category
 

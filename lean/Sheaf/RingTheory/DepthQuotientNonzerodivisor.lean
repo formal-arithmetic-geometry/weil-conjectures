@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Regular
+import Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-!
 # Cohen–Macaulay quotients by a nonzerodivisor

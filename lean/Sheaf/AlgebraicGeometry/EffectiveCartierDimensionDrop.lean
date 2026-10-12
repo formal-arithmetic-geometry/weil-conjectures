@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+import Sheaf.AlgebraicGeometry.EffectiveCartierAffineDimensionDrop
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Dimension of an effective Cartier divisor

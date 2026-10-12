@@ -3,6 +3,12 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.RingTheory.FlatUnderRegular
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Smooth algebras over fields have regular local rings

@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Sheaf.RingTheory.CoverModuleExact
+import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
 
 /-!
 # Exactness of the formal glueing complex

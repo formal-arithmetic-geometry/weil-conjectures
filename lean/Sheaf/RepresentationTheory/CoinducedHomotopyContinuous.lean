@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
 public import Mathlib.Data.Fin.Tuple.Basic
+import Sheaf.CategoryTheory.DiscreteModulesAbelian
 
 /-!
 # Continuity of the coinduced contracting operator

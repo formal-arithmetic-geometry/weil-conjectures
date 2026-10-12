@@ -8,6 +8,7 @@ public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.FieldTheory.SeparableClosure
 public import Mathlib.Topology.Algebra.Group.Basic
+import Sheaf.FieldTheory.OpenSubgroupFixedField
 
 /-!
 # Finite separable extensions and finite continuous Galois sets

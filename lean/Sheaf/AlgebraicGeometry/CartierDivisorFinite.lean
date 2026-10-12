@@ -8,6 +8,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import Sheaf.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense
+import Sheaf.AlgebraicGeometry.NowhereDenseDimZero
+import Sheaf.AlgebraicGeometry.ProperDimZeroFiniteOverField
 
 /-!
 # Effective Cartier divisors on proper schemes of dimension at most one

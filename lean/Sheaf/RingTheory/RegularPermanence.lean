@@ -1,6 +1,9 @@
 module
 
 public import Sheaf.RingTheory.GRing
+import Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange
+import Sheaf.RingTheory.FlatPermanence
+import Sheaf.RingTheory.GeometricallyRegularDescent
 
 /-!
 # Permanence of regular ring maps

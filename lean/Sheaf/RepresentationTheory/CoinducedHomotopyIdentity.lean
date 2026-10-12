@@ -6,6 +6,7 @@ Authors: SHEAF worker H1
 module
 
 public import Sheaf.RepresentationTheory.CoinducedHomotopyContinuous
+import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
 
 /-!
 # The coinduced contraction satisfies the homotopy identity

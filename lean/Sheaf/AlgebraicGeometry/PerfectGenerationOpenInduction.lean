@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
+import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
+import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
+import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Extending perfect generators across an affine open
 

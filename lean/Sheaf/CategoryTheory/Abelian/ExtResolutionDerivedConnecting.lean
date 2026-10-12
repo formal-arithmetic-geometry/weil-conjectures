@@ -7,6 +7,9 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+import Sheaf.CategoryTheory.Abelian.RHomDerivedConnecting
+import Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-!
 # Injective-resolution and derived connecting morphisms agree

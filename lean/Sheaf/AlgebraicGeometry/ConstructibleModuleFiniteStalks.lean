@@ -2,6 +2,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Sheaf.AlgebraicGeometry.FieldPointFactorsThroughImmersion
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite geometric stalks of constructible module sheaves

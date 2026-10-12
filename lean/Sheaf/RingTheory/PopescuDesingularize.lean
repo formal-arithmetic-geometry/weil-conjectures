@@ -9,6 +9,13 @@ public import Sheaf.RingTheory.StrictlyStandardElement
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
+import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
+import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import Sheaf.RingTheory.EquationCountFibreDimensionFlat
+import Sheaf.RingTheory.StandardSmoothDimensionAtPoints
+import Sheaf.RingTheory.StrictlyStandardLocalizationSmooth
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # The desingularization lemma

@@ -8,6 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Proper base change implies injective acyclicity

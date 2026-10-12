@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.Dimension
 public import Sheaf.AlgebraicGeometry.Morphisms.Projective
+import Sheaf.AlgebraicGeometry.DimOneQuasiProjective
 
 /-!
 # Projectivity of proper schemes of dimension at most one

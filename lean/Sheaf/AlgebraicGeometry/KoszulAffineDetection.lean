@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # Koszul powers detect supported objects on an affine scheme
 

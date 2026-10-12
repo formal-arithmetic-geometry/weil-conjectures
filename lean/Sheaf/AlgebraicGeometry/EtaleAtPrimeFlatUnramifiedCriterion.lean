@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Etale.Locus
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing
+import Sheaf.RingTheory.OpenFlatLocus
 
 /-!
 # Étale at a prime and flat unramifiedness

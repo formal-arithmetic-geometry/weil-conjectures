@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.AssociatedModulePullback
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Pullback of associated modules on affine schemes

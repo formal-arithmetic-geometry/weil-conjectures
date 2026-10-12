@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Single
+import Sheaf.Algebra.Homology.UpperTruncationStepSES
 
 /-!
 # Descent of canonical truncations to the derived category

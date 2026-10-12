@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Injective systems on a filtered colimit of sites
 

@@ -6,6 +6,9 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
 
 /-!
 # The tensor-formula pullback of modules is left adjoint to pushforward

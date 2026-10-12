@@ -11,6 +11,7 @@ public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.Algebra.Module.LocalizedModule.Exact
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
+import Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent
 
 /-!
 # Exactness of degree-zero localization on the projective line

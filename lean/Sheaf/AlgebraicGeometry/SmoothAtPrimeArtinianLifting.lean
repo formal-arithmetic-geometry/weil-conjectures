@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.RingTheory.RingHom.FiniteType
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.LocalRing.Basic
+import Sheaf.Paper.ArtinianIdealLengthOneFiltration
+import Sheaf.RingTheory.JacobiZariskiQuotientSmooth
+import Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal
+import Sheaf.RingTheory.SplitInjectionAfterCompletion
 
 /-!
 # Smoothness near a prime and lifting along Artinian small extensions

@@ -7,6 +7,19 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
+import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+import Sheaf.Paper.SeparableResidueCotangentInjective
+import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionConormalFree
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionSmoothJacobian
+import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Smoothness at a maximal ideal from a differential dimension bound

@@ -8,6 +8,11 @@ module
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.Paper.NoetherianApproximation
+import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
+import Sheaf.RingTheory.FibreLocalRingNaturalIso
+import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
+import Sheaf.RingTheory.RegularSequenceFlatClosedFiber
 
 /-!
 # Local regularity of equations of a relative global complete intersection

@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.Topology.LocallyConstant.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeStructureSheaf
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Finite flat pushforwards are locally free of locally constant rank

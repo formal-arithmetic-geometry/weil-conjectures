@@ -2,6 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
 
 /-!
 # Product of geometrically irreducible schemes over a field

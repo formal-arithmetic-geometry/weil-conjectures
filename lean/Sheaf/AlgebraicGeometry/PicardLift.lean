@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.PicardH1RestrictionCompatibility
+import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.Topology.NoetherianCohomologyDimOne
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 
 /-! # Lifting invertible modules along closed immersions in dimension at most one
 

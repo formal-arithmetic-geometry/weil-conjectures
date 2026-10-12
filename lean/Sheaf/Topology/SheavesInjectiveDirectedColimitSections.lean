@@ -8,6 +8,7 @@ module
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.Topology.Compactness.Compact
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-!
 # Sections of directed colimits with injective transition maps

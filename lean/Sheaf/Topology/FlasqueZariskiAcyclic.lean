@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.Sheaves.Flasque
+import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
 
 /-!
 # Flasque sheaves are acyclic

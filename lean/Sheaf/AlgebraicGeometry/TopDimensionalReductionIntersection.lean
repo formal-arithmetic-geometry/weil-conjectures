@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.IntersectionNumber
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import Mathlib.RingTheory.Length
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.NumericalPolynomialLeadingTerm
 
 /-! # Reduction of intersection numbers to top-dimensional components
 

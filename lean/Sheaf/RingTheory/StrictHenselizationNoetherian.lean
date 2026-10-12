@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
+import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
 
 /-!
 # Noetherianity and strict henselization

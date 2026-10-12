@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Quasi-finiteness at a prime and principal localization

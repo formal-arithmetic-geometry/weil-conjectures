@@ -4,6 +4,9 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import Sheaf.AlgebraicGeometry.CoherentPseudoCoherent
+import Sheaf.AlgebraicGeometry.PseudoCoherentDistinguishedTriangle
 
 /-! # Bounded coherent complexes on Noetherian schemes are pseudo-coherent
 

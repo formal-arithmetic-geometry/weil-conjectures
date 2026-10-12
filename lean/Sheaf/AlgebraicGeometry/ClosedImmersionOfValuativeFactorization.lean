@@ -6,6 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+import Sheaf.AlgebraicGeometry.ValuativeSquareOfMemClosureRange
 
 /-!
 # Closedness of an immersion from valuative factorization

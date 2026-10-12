@@ -10,6 +10,9 @@ public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.Algebra.Algebra.Pi
 public import Mathlib.Algebra.Algebra.Prod
+import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
+import Sheaf.RingTheory.EtaleRetractionFiniteTypeSplitting
+import Sheaf.RingTheory.HenselianEtaleRetraction
 
 /-!
 # Finite-type algebras over henselian local rings

@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
+import Sheaf.RingTheory.CohenStructurePowerSeriesSurjection
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 
 /-!
 # Cohen power series presentations

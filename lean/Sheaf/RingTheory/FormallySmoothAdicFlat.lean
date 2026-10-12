@@ -9,6 +9,12 @@ public import Sheaf.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.ExistsCompleteLocalFlatPresentation
+import Sheaf.RingTheory.FlatPermanence
+import Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget
+import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
 
 /-!
 # Flatness of adically formally smooth local ring maps

@@ -9,6 +9,9 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-!
 # Derived change of rings on a ringed site

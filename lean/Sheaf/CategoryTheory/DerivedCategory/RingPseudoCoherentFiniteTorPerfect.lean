@@ -8,6 +8,9 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.RingTheory.Flat.CategoryTheory
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 
 /-! # Pseudo-coherent complexes of finite Tor dimension are perfect
 

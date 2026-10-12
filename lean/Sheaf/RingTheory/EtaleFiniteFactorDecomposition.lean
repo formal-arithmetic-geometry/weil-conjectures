@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Etale.Basic
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType
 
 /-!
 # A finite factor after an étale base change

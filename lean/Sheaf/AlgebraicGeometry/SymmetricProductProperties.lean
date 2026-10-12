@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.SymmetricProductSections
 public import Sheaf.AlgebraicGeometry.SymmetricProductPolynomial
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-!
 # No common zero and permutation invariance

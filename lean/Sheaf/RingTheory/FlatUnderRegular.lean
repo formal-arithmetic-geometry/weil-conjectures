@@ -7,6 +7,12 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.GlobalDimension
+import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
+import Sheaf.RingTheory.RegularLocalFiniteGlobalDimension
+import Sheaf.RingTheory.ResidueFieldProjectiveDimension
+import Sheaf.RingTheory.ResidueFieldProjectiveDimensionLowerBound
 
 /-!
 # Regularity descends along flat local homomorphisms

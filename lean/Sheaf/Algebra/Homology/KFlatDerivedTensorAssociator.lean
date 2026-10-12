@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
 public import Mathlib.CategoryTheory.Functor.Currying
+import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-!
 # The mixed-ring K-flat tensor associator

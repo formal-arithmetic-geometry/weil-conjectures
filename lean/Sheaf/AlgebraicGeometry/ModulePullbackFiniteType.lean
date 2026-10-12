@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 
 /-!
 # Finite type is preserved by module pullback

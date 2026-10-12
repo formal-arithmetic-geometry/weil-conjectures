@@ -10,6 +10,14 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Data.List.TFAE
 public import Mathlib.RingTheory.Ideal.Operations
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.KernelCokernelAnnihilatedModIdeal
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Annihilation of kernels and cokernels of coherent formal module maps
 

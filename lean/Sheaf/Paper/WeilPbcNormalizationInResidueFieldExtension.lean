@@ -3,6 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+import Sheaf.AlgebraicGeometry.SpecFieldPointResidueField
 
 @[expose] public section
 

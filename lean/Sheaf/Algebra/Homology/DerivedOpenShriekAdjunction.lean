@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 
 /-!
 # Derived extension-by-zero and restriction adjunction

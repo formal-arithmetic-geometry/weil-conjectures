@@ -8,6 +8,13 @@ module
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Extension.ExtendScalars
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+import Sheaf.FieldTheory.PthRootsExtensionDegree
+import Sheaf.Paper.CartierEquality
+import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.PthRootPresentationDifferentials
+import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
+import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
 
 /-!
 # Geometric regularity and the first cotangent homology of the residue field

@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.LinearAlgebra.Dimension.Free
+import Sheaf.AlgebraicGeometry.FunctionField
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Invertible modules and their generic stalk

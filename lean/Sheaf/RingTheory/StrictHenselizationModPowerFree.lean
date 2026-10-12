@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.LinearAlgebra.Finsupp.Defs
+import Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent
+import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-!
 # Fixed bases for strict henselization quotients and their completed comparison

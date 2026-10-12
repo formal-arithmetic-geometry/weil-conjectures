@@ -6,6 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra
+import Sheaf.AlgebraicGeometry.AffineCapSectionOpenDictionary
 
 /-! # Affine opens intersected with section nonvanishing loci
 

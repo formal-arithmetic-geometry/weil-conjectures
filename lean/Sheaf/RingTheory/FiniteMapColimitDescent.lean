@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.Paper.DirectedColimitBaseChangeElementwise
 
 /-!
 # Descent of finiteness of an algebra map along a directed ring colimit

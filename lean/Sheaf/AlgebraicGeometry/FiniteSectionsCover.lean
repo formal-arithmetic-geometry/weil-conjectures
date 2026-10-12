@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover
 
 /-!
 # Finite nonvanishing covers from global generation

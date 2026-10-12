@@ -8,6 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.Paper.PQFCohomology
 public import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # The Čech vanishing criterion for module sheaves

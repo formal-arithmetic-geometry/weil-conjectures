@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
 public import Sheaf.Paper.NonvanishingSectionTrivializes
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Morphism to polynomial Proj from generating sections
 

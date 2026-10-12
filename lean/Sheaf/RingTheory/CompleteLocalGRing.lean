@@ -6,6 +6,16 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.RingTheory.GRing
+import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.FormalFibreQuasiFiniteAscent
+import Sheaf.RingTheory.GRingPairsOfPrimes
+import Sheaf.RingTheory.PowerSeriesPolynomialFormalFiber
+import Sheaf.RingTheory.RegularLocalLocalization
 
 /-!
 # Complete local Noetherian rings are G-rings

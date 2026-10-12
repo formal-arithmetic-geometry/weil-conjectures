@@ -6,6 +6,9 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTarget
+import Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
+import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 
 /-! # Affine target of a surjective universally closed morphism
 

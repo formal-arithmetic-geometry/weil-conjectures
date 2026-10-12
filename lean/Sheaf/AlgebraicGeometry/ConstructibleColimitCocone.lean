@@ -2,6 +2,10 @@ module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleSheafGeneration
+import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 @[expose] public section
 

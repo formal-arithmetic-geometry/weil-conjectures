@@ -9,6 +9,7 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # The polynomial ring localized at the origin

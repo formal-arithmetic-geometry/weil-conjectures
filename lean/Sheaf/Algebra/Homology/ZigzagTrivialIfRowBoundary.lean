@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Algebra.Homology.ZigzagModuleFunctorial
 
 /-! # Exact-row zig-zags are trivial
 

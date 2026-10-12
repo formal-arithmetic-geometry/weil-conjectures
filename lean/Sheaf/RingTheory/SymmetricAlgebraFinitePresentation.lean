@@ -9,6 +9,7 @@ public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.Extension.Presentation.Basic
+import Sheaf.RingTheory.SymmetricAlgebraQuotientModule
 
 /-!
 # Generators and finite presentation of symmetric algebras

@@ -11,6 +11,17 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.GroupTheory.QuotientGroup.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
+import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
+import Sheaf.AlgebraicGeometry.Curve.ProperProjective
+import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+import Sheaf.AlgebraicGeometry.Variety
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
+import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+import WeilConjectures.AlgebraicGeometry.DensePoints
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Torsion and divisibility of the Picard group of a proper curve

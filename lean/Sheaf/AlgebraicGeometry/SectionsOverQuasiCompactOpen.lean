@@ -9,6 +9,14 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.Grp.Colimits
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal
+import Sheaf.Paper.SectionsOverQuasiCompactOpen
+import Sheaf.Topology.GlueSheavesOfModules
 
 /-! # Sections over the complement of a finite type ideal
 

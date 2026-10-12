@@ -12,6 +12,7 @@ public import Sheaf.AlgebraicGeometry.Morphisms.Projective
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
 
 /-!
 # Chow immersion and relative ampleness

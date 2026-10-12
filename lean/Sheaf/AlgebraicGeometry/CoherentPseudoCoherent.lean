@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution
 
 /-! # Coherent modules are pseudo-coherent on Noetherian schemes
 

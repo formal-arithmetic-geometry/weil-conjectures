@@ -6,6 +6,8 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.RingTheory.SerreConditions
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Serre's criterion for reducedness

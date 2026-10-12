@@ -7,6 +7,10 @@ module
 
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Composition and coherence of derived inverse images

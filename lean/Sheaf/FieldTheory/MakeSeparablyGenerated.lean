@@ -7,6 +7,7 @@ module
 
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.FieldTheory.SeparableRootPthPower
 
 /-!
 # Making a finitely generated field extension separably generated

@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Sheaf.RingTheory.ColimitFlatRingMap
 
 /-!
 # Descent of flatness to a finite stage

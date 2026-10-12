@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
+import Sheaf.AlgebraicGeometry.ZariskiCohomologyLocallyZero
+import Sheaf.Paper.StrictHenselianZariskiEtaleComparison
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Gabber's criterion for vanishing of higher etale cohomology

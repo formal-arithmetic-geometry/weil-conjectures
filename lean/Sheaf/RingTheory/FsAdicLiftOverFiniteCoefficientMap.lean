@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.FiniteOverCompleteRing
+import Sheaf.RingTheory.FormallySmoothAdicLift
+import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
 
 /-!
 # Lifting over a finite coefficient map

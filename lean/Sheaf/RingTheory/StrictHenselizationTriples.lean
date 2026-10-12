@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.RingTheory.HenselianLocalRootLifting
 
 /-!
 # Strict henselization from etale triples

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Spectral.Hom
+import Sheaf.Topology.SpectralLimitConstructibleClosedNonempty
 
 /-!
 # Descent of compact opens in directed limits of spectral spaces

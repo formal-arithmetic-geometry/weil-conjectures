@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Module.Torsion.Basic
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+import Sheaf.RingTheory.KrullIntersectionLocalization
+import WeilConjectures.Mathlib.RingTheory.Filtration
 
 /-!
 # Flatness from flatness modulo every power of an ideal

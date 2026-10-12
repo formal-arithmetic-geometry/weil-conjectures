@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DiagonalConormal
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
+import Sheaf.AlgebraicGeometry.AffineConormalSections
 
 /-!
 # Conormal sheaf of the diagonal and relative differentials

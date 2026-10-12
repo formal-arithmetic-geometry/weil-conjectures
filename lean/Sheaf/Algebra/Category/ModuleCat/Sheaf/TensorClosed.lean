@@ -8,6 +8,7 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf
 
 /-!
 # Tensor closed structure on sheaves of modules

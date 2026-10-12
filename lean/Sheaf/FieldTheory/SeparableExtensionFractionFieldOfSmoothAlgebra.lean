@@ -8,6 +8,8 @@ module
 public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SmoothAtGenericPointOverField
 
 /-!
 # A separable extension as the fraction field of a smooth algebra

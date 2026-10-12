@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.AlgebraicGeometry.Over
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.BaseChangeProduct
+import Sheaf.AlgebraicGeometry.IrreducibleProductOverField
 
 /-!
 # Products of geometrically irreducible schemes over a field

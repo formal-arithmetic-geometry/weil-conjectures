@@ -8,6 +8,13 @@ module
 public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+import Sheaf.RingTheory.CohenRing
+import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.N2AscendsFiniteDomainExtension
+import Sheaf.RingTheory.PowerSeriesN2
+import Sheaf.RingTheory.TateN2CompletePrincipal
 
 /-!
 # Complete Noetherian local rings are Nagata

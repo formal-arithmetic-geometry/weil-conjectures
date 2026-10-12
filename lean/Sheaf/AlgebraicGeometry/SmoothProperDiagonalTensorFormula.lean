@@ -12,6 +12,11 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
+import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts
+import Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase
 
 /-!
 # Tensor formula for the right adjoint of a perfect proper immersion

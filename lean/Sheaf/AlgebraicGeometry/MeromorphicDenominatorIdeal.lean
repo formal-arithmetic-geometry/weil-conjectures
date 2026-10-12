@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.MeromorphicModule
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Topology.GDelta.Basic
+import Sheaf.AlgebraicGeometry.PrincipalOpenDenseOfNonZeroDivisor
 
 /-!
 # The denominator ideal of a regular meromorphic section

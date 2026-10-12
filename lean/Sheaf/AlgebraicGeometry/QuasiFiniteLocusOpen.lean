@@ -6,6 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.RingTheory.QuasiFiniteLocusOpen
 
 /-!
 # Openness of the quasi-finite locus

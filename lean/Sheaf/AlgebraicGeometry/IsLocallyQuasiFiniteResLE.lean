@@ -6,6 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Restriction of locally quasi-finite morphisms to open subschemes

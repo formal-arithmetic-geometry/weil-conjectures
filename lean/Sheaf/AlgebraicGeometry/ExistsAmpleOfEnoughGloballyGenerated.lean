@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.FiniteSectionsCover
+import Sheaf.AlgebraicGeometry.TensorGloballyGenerated
+import Sheaf.AlgebraicGeometry.TensorSectionAffineOpen
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Enough globally generated invertible modules give an ample module
 

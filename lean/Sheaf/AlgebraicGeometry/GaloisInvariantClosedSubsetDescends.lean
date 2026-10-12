@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.Galois.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import Sheaf.FieldTheory.TensorFieldExtensionGaloisInvariants
 
 /-!
 # Descent of Galois-invariant closed subsets

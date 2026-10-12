@@ -9,6 +9,14 @@ public import Sheaf.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+import Sheaf.CategoryTheory.CartanEilenbergComparisonIndependence
+import Sheaf.CategoryTheory.CartanEilenbergExists
+import Sheaf.CategoryTheory.CartanEilenbergFunctorial
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.FirstQuadrantRowCollapse
+import Sheaf.Paper.CartanEilenbergLeftExactCohomology
+import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 
 /-! # The Cartan--Eilenberg construction of the Grothendieck spectral sequence
 

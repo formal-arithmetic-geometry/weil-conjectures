@@ -8,6 +8,11 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+import Sheaf.Algebra.ProjectiveDimensionWellDefined
+import Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
 
 /-!
 # Projective dimension of the residue field

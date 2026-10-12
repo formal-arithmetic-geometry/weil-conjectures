@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Flat.Basic
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-!
 # Flat base change for global sections of a proper scheme

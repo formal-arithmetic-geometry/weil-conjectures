@@ -2,6 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+import Sheaf.Paper.SiteCoveringIsomorphicFamily
 
 @[expose] public section
 

@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Sheaf.RingTheory.StrictlyStandardElement
+import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
+import Sheaf.RingTheory.SmoothLocalizationConormalSplit
 
 /-!
 # Powers of an element with smooth free localization are strictly standard

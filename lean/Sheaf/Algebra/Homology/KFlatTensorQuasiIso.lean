@@ -6,6 +6,9 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Tensoring a K-flat quasi-isomorphism with an arbitrary complex

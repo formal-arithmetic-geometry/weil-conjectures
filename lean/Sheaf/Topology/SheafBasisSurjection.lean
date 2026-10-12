@@ -8,6 +8,7 @@ module
 public import Sheaf.Topology.SetsExtensionByEmpty
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.Bases
+import Sheaf.Topology.SetsExtensionByEmptyAdjunction
 
 /-!
 # Covering a sheaf of sets by constant sheaves on basis opens

@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.AffineTruncationKernelFlat
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
 
 /-! # Finite local freeness of an affine truncation kernel
 

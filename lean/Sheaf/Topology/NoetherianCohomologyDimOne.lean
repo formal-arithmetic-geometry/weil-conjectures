@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.Topology.NoetherianTopologicalCohomologyVanishing
 
 /-!
 # Second cohomology on Noetherian spaces of dimension at most one

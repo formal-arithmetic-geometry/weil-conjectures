@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-!
 # The internal Hom is a sheaf of modules

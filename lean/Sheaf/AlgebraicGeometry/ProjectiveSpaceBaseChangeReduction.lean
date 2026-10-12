@@ -7,6 +7,17 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveLinePower
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
+import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
+import Sheaf.AlgebraicGeometry.ProperBaseChangeCompositionStability
+import Sheaf.AlgebraicGeometry.SymmetricProductFinite
+import Sheaf.AlgebraicGeometry.SymmetricProductOverBase
+import Sheaf.AlgebraicGeometry.SymmetricProductProperties
+import Sheaf.AlgebraicGeometry.SymmetricProductSurjective
+import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChangeCancellation
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # Reduction of projective-space base change to the projective line

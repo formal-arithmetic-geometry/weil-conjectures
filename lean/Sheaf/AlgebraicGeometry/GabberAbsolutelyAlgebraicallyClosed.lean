@@ -8,6 +8,13 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.GabberConstantH1Vanishing
+import Sheaf.Paper.GabberCriterion
+import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.Mathlib.RingTheory.Henselian
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Gabber vanishing for absolutely algebraically closed normal domains
 

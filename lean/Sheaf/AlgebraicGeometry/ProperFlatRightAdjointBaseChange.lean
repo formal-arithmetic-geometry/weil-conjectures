@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointAffineBaseChange
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
 
 /-! # Base change for the right adjoint of proper flat direct image
 

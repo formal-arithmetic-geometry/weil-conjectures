@@ -6,6 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 
 /-!
 # Naturality of acyclic-resolution comparisons

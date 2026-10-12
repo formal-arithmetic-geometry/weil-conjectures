@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
+import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
+import Sheaf.Algebra.Homology.DerivedTensorTransitivity
 
 /-!
 # Scalar actions and the balanced derived tensor comparison

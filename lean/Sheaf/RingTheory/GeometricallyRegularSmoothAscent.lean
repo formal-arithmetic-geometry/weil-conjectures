@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Geometric regularity ascends along smooth algebra maps

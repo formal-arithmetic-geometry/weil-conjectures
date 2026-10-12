@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Exact extension by zero and restriction on a ringed space
 

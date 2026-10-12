@@ -2,6 +2,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.AmpleSeparated
+import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import Sheaf.Paper.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 
 /-! # Sections of ample powers in an ideal sheaf
 

@@ -8,6 +8,17 @@ module
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.ProperProjective
+import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+import Sheaf.AlgebraicGeometry.Variety
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+import WeilConjectures.AlgebraicGeometry.DensePoints
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Genus and Jacobians under algebraically closed extension

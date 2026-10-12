@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.Artinian.Module
+import Sheaf.AlgebraicGeometry.SmoothAtPrimeArtinianLifting
 
 /-!
 # Artinian lifting criterion for smoothness at a point

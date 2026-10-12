@@ -6,6 +6,8 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit
 
 /-!
 # Existence of inverse limits with affine transition morphisms

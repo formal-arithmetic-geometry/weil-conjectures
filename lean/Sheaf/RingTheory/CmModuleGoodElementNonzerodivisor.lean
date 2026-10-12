@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Module
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Regular.IsSMulRegular
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.IsSMulRegularOfGoodSequence
 
 /-!
 # A dimension-cutting element on a Cohen–Macaulay module

@@ -8,6 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementary
+import Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
+import Sheaf.AlgebraicGeometry.FibreProductPointResidueField
+import Sheaf.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint
+import Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange
+import Sheaf.FieldTheory.SeparableSplitPurelyInseparableResidueFields
 
 /-!
 # Finite neighborhoods of multiple isolated fiber points after etale localization

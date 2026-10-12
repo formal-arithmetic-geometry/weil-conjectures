@@ -9,6 +9,16 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
+import Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.CategoryTheory.SiteLerayDegenerate
+import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
+import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
+import Sheaf.Paper.ZariskiModuleAbelianCohomologyAgree
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Étale and Zariski cohomology of quasi-coherent modules
 

@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.CoherentPseudoCoherent
+import Sheaf.AlgebraicGeometry.DerivedCategoryQCoherentAlgebra
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
+import Sheaf.AlgebraicGeometry.PseudoCoherentRHomQuasiCoherent
 
 /-! # Quasi-coherence of derived Hom from a finite pushforward algebra
 

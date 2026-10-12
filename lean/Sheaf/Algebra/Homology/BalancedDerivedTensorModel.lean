@@ -14,6 +14,9 @@ public import Mathlib.Algebra.Homology.Linear
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
 
 /-!
 # Balanced K-flat models and the action of the second coefficient ring

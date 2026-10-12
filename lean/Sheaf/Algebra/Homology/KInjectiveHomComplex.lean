@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.Algebra.Homology.HomTensorTotal
 
 /-!
 # K-injectivity of the sheaf Hom complex

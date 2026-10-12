@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.AmpleImmersionAffineBase
+import Sheaf.AlgebraicGeometry.ExistsAmpleOfDimLEOne
 
 /-!
 # Quasi-projectivity in dimension at most one

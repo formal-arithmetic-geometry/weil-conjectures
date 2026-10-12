@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.LinearAlgebra.Charpoly.ToMatrix
+import Sheaf.LinearAlgebra.IdempotentImageBaseChange
 
 /-!
 # Characteristic polynomial of an idempotent endomorphism over a field

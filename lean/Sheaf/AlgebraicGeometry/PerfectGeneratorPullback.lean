@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineDerivedPushforwardConservative
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
+import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
+import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Affine pullback of a perfect generator
 

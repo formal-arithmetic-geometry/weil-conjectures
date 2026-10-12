@@ -6,6 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
+import Sheaf.AlgebraicGeometry.PicardOfField
 
 /-!
 # The normalized Picard functor at the base field

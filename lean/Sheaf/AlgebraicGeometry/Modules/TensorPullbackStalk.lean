@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Topology.InverseImageStalk
 
 /-!
 # Stalks and germs of the tensor pullback of modules

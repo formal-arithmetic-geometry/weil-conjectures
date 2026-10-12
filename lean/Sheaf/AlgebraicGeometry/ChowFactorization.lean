@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope
+import WeilConjectures.AlgebraicGeometry.ChowLemma
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Chow factorization over an affine base

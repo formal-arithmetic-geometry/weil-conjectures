@@ -7,6 +7,14 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.RhomGlobalSections
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Derived internal-Hom adjunction on a scheme
 

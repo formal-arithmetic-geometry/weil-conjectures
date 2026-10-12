@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.FieldTheory.FiniteExtensionTensorAlgebraicClosureReduced
+import Sheaf.Paper.EulerCharacteristicWellDefined
 
 /-!
 # Separability of global sections of a proper geometrically reduced scheme

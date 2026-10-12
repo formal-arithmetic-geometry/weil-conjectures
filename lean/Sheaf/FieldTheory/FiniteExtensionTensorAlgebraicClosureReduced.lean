@@ -8,6 +8,8 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 public import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.FieldTheory.FiniteInseparableElement
+import Sheaf.FieldTheory.InseparableTensorNilpotent
 
 /-!
 # Reduced tensor products and separability of finite field extensions

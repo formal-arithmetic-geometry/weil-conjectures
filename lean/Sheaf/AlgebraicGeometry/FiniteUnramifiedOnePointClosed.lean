@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
+import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
 
 /-!
 # A finite unramified morphism with one purely inseparable fibre point is locally a closed immersion

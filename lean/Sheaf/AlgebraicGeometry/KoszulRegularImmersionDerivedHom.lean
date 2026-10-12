@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.AlgebraicGeometry.KoszulRegularClosedImmersionPerfect
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 
 /-!
 # Derived Hom for a Koszul-regular closed immersion

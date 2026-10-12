@@ -8,6 +8,9 @@ module
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+import Sheaf.AlgebraicGeometry.ConstantGroupSchemeMorphismsClopen
+import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-!
 # Sections of a constant étale sheaf

@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.Data.ZMod.Basic
 public import Sheaf.RingTheory.CohenRing
+import Sheaf.RingTheory.ExistsLiftOfFieldCharP
+import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Formal smoothness of a Cohen ring modulo a prime power

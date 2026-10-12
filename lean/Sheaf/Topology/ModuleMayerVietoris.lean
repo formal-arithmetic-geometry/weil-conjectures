@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Exact.Basic
+import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.Topology.RestrictInjectiveResolution
+import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Mayer--Vietoris for modules on a ringed space
 

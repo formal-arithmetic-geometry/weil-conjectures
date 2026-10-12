@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
+import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Internal Hom from a strictly perfect complex
 

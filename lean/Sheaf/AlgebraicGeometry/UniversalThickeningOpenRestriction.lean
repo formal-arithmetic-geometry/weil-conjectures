@@ -6,6 +6,10 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.Thickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
 
 /-!
 # Universal thickenings and conormal sheaves on open subschemes

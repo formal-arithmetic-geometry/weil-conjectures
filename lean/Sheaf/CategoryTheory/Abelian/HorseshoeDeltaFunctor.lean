@@ -8,6 +8,8 @@ module
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Sheaf.CategoryTheory.DeltaFunctor
+import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift
+import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
 
 /-!
 # Horseshoe connecting morphisms for right derived functors

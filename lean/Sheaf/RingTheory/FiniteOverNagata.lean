@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.RingTheory.JapaneseDomain
 
 /-!
 # Finite algebras over Nagata rings

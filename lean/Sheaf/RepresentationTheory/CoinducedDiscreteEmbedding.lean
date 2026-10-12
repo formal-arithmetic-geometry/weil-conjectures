@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.DiscreteModulesAbelian
 public import Mathlib.Topology.LocallyConstant.Algebra
+import Sheaf.Topology.ContinuousOpenNormalStabilizer
 
 /-!
 # Coinduced embeddings of discrete continuous modules

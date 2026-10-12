@@ -10,6 +10,14 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.IsLimit
+import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.RingTheory.FilteredColimitOfFactorization
+import Sheaf.RingTheory.PopescuFinalSolve
+import Sheaf.RingTheory.PopescuReduceToField
+import Sheaf.RingTheory.PopescuResolution
+import Sheaf.RingTheory.PopescuResolveCharP
+import Sheaf.RingTheory.PopescuResolveSeparable
+import Sheaf.RingTheory.SingularIdeal
 
 /-!
 # Popescu smoothing

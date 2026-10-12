@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.GeometricallyRegularFieldExtension
 
 /-!
 # Regular maps and finite type base change

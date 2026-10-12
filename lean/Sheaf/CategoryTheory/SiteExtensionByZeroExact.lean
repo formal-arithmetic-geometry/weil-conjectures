@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.CategoryTheory.SiteExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.SiteExtensionByZeroPresheafAdjoint
 
 /-! # Exactness of extension by zero on a localized site
 

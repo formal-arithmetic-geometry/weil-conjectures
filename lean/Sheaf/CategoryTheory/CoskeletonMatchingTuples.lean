@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicTopology.SimplicialObject.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
+import Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits
 
 /-!
 # Compatible truncated simplex families in a coskeleton

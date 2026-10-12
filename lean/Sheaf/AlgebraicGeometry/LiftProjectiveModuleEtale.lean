@@ -3,6 +3,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField
+import Sheaf.LinearAlgebra.IdempotentImageBaseChange
+import Sheaf.RingTheory.LiftIdempotentUpstairs
 
 @[expose] public section
 

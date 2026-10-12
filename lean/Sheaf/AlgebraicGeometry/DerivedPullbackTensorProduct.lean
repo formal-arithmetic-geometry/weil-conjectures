@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTensorProduct
 
 /-!
 # Derived pullback and derived tensor product
@@ -31,7 +34,8 @@ namespace AlgebraicGeometry
 
 /-- The tensor product of sheaves of `𝒪_X`-modules, `SheafOfModules.monoidalCategory X.sheaf`
 (def-pc-tensor-complex-sheaves), made a local instance for the total tensor complexes below. -/
-noncomputable local instance (X : Scheme.{uPull}) :
+noncomputable local instance instMonoidalCategoryModulesOfDerivedPullbackTensorProduct
+    (X : Scheme.{uPull}) :
     MonoidalCategory (SheafOfModules.{uPull} (moduleRings X.toRingedSpace)) :=
   SheafOfModules.monoidalCategory X.sheaf
 

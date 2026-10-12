@@ -6,6 +6,7 @@ Authors: SHEAF contributors
 module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # A localization of a regular ring is regular

@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.RingTheory.FlatPermanence
+import WeilConjectures.Mathlib.RingTheory.Filtration
 
 /-!
 # The Noetherian fibre criterion for flatness

@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.Modules.PullbackLocalCoefficient
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-!
 # Pullback compatibility of the zero locus

@@ -6,6 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.AmpleProjOpen
+import Sheaf.AlgebraicGeometry.ProjStandardOpenBasis
+import Sheaf.RingTheory.GradedPrimeAvoidance
 
 /-! # Affine neighbourhoods of finite sets on schemes with an ample invertible module
 

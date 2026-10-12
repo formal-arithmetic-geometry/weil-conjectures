@@ -27,7 +27,7 @@ section
 
 variable {X : SheafedSpace CommRingCat.{u}}
 
-noncomputable local instance : MonoidalCategory
+noncomputable local instance instMonoidalCategoryModulesOfKFlatTensorProduct : MonoidalCategory
     (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology (X : Type u))
       (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) :=
   SheafOfModules.monoidalCategory X.sheaf

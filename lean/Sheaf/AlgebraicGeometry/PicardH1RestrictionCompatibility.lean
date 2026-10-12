@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
+import Sheaf.CategoryTheory.Sites.TorsorH1Functoriality
+import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 
 /-!
 # Picard restriction and first cohomology of units

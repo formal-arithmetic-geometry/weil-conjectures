@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.AlgebraicGeometry.LimitResidueField
 public import Sheaf.AlgebraicGeometry.FibreProductLimit
+import Sheaf.AlgebraicGeometry.AffineFibreProductTransition
 
 /-!
 # Fibre products commute with limits along affine transition morphisms

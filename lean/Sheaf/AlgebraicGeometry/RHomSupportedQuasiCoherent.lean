@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Paper.DerivedInternalHomRestrictOpen
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
+import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 
 /-! # Quasi-coherence and support of derived internal Hom
 

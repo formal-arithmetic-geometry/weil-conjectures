@@ -8,6 +8,9 @@ module
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
 public import Sheaf.CategoryTheory.KInjectiveComputes
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.KInjectiveBridge
 
 /-! # The first hypercohomology spectral sequence
 

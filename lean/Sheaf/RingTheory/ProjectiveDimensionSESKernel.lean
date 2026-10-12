@@ -2,6 +2,7 @@ module
 
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
 
 @[expose] public section
 

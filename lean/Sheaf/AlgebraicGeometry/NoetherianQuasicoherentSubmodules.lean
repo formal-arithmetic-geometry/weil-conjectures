@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.CategoryTheory.Subobject.Basic
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Ascending chains of quasi-coherent submodules
 

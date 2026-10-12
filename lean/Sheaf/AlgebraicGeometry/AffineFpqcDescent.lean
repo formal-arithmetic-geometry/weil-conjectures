@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms
+import WeilConjectures.Mathlib.RingTheory.Flat.DescentAlgebra
 
 /-!
 # Effective fpqc descent of affine morphisms

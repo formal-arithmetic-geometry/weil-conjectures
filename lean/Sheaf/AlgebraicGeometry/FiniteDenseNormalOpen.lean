@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+import Sheaf.AlgebraicGeometry.NormalScheme
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # A finite-type integral scheme contains a normal open

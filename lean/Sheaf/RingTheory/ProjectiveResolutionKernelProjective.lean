@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Algebra.Schanuel
 
 /-!
 # Projective kernels in partial projective resolutions

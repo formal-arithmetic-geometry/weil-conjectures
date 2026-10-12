@@ -8,6 +8,9 @@ module
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.RingTheory.StrictHenselizationCotangentDimension
+import Sheaf.RingTheory.StrictHenselizationDimension
+import Sheaf.RingTheory.StrictHenselizationNoetherian
 
 /-!
 # Regularity and strict henselization

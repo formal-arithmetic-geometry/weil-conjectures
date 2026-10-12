@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Sheaf.AlgebraicGeometry.DescendClosedImmersion
 
 /-!
 # Separatedness descends to a finite stage

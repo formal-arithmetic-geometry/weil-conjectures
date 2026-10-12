@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.Topology.Constructible
+import Sheaf.RingTheory.AffineBasicSetsDisjointRefinement
 
 /-! # Affine constructible pieces of an immersed scheme
 

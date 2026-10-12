@@ -6,6 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.Algebra.Homology.DerivedTensorTransitivity
 
 /-! # Tensor inheritance of the single-complex base-change condition
 

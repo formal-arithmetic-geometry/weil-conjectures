@@ -11,6 +11,11 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.Topology.Bases
 public import Mathlib.Order.Directed
+import Sheaf.Topology.SheafBasisSurjection
+import Sheaf.Topology.SheafFiniteRelationTruncations
+import Sheaf.Topology.SheafFiniteTruncationColimit
+import Sheaf.Topology.SheavesDirectedColimitSections
+import Sheaf.Topology.SurjectionKernelPairCoequalizer
 
 /-!
 # Directed presentations of sheaves by finite coequalizers

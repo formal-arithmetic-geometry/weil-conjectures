@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalk of internal Hom with finitely presented source

@@ -2,6 +2,7 @@ module
 
 public import Sheaf.CategoryTheory.ColimitSites
 public import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-! # Čech complexes and filtered colimits of sites
 

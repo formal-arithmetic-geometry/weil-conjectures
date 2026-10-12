@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 
 /-!
 # Termwise derived pullback of a bounded-above flat complex

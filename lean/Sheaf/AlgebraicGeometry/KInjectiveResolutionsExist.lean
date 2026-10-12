@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-!
 # Existence and uniqueness of K-injective resolutions on the small étale site

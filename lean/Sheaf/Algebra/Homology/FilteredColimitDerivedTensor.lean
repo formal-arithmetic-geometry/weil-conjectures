@@ -9,6 +9,11 @@ public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
+import Sheaf.Algebra.Homology.FilteredColimitsTensor
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Filtered colimits and cohomology of derived tensor products

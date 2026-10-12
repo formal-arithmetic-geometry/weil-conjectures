@@ -5,6 +5,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import Mathlib.Algebra.Category.Grp.Basic
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
 @[expose] public section
 

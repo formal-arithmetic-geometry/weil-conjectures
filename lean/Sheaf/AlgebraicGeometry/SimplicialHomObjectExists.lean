@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
 public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
+import Sheaf.AlgebraicTopology.SimplicialIndexFiniteInitial
 
 /-!
 # Objects of compatible simplicial maps in semi-representable objects

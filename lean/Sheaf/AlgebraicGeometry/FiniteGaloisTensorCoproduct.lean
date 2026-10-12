@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.FieldTheory.Galois.Basic
+import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
 
 /-!
 # Fibre product of a finite Galois field extension

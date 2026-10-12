@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
 
 /-! # Perfect complexes are pseudo-coherent and locally of finite Tor dimension
 Source: literature/stacks-project/cohomology.tex, Lemma 08CQ, implication (1) => (2)

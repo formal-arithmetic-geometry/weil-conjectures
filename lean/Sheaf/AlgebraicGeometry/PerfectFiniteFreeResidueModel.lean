@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
+import Sheaf.Algebra.Homology.AffinePerfectColimitDescent
+import Sheaf.AlgebraicGeometry.AffinePerfectHomColimit
+import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+import Sheaf.CategoryTheory.DerivedCategory.PerfectScalarExtension
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
+import Sheaf.RingTheory.MinimalFreeModel
 
 
 /-! # Finite free local models with prescribed residue cohomology ranks

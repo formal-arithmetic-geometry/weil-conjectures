@@ -15,6 +15,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
+import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDerivedHom
 
 /-! # Dualizing object of a Koszul-regular closed immersion
 

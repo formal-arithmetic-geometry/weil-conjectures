@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 
 /-!
 # Inverse image of representable sheaves on the small étale site

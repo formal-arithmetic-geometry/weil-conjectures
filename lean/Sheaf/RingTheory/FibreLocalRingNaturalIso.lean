@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # The natural local-ring map of a fibre

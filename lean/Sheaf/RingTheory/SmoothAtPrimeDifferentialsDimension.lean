@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.StandardSmoothDimensionAtPoints
 
 /-!
 # Dimension of differentials at a smooth point over a field

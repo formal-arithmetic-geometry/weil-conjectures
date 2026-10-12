@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
 public import Sheaf.AlgebraicGeometry.InvertibleModuleGenericStalk
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Orders of a rational section of an invertible module

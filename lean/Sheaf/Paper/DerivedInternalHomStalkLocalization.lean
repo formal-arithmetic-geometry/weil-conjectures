@@ -7,6 +7,11 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.Algebra.Homology.DerivedHomProjectiveResolution
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
 
 @[expose] public section
 

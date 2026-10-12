@@ -8,6 +8,7 @@ module
 public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.EssentialFiniteness
+import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
 
 /-!
 # Finitely generated separable extensions and smooth subalgebras

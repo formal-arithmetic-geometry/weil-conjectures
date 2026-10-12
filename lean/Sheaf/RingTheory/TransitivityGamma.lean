@@ -6,6 +6,8 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.FieldTheory.FieldExtensionCompleteIntersectionSubalgebras
+import Sheaf.RingTheory.JacobiZariskiRegularSequenceLeftInjective
 
 /-!
 # Left exactness of the Jacobi–Zariski sequence for fields

@@ -10,6 +10,17 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.ArtinSchreierSequence
+import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
+import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
+import Sheaf.AlgebraicGeometry.EtaleZariskiCohomology
+import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
+import Sheaf.CategoryTheory.KInjectiveComputes
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
 /-!
 # Artin–Schreier vanishing on a smooth connected curve

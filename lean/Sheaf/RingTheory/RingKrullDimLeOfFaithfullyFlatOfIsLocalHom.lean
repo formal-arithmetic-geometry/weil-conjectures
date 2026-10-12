@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.LocalRing.Defs
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+import Sheaf.RingTheory.KrullDimension.GoingDown
 
 /-!
 # Faithfully flat local maps do not lower Krull dimension

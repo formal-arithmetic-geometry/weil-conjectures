@@ -9,6 +9,12 @@ public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
+import Sheaf.AlgebraicGeometry.InjectiveRestrictionSurjective
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Functoriality of derived Mayer--Vietoris triangles
 

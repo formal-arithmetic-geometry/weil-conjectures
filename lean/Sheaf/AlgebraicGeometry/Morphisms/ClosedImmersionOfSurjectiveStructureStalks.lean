@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
 # Closed immersions from surjective structure-sheaf stalk maps

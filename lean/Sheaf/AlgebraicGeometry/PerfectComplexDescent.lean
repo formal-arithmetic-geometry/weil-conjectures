@@ -4,6 +4,11 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
+import Sheaf.Algebra.Homology.AffinePerfectColimitDescent
+import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import Sheaf.AlgebraicGeometry.DerivedOpenGluing
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.PerfectDescendMorphisms
 
 /-! # Descent of a perfect complex
 

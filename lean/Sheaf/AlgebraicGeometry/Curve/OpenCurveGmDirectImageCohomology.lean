@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.Curve.OpenCurveBoundaryHigherDirectImageVanishing
+import Sheaf.Paper.OpenCurveEtaleLerayLowDegree
 
 /-!
 # Direct-image cohomology of the multiplicative group on an open curve

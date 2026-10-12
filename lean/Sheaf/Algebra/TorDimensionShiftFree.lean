@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Algebra.Homology.FreeResolutionSesSplit
 
 /-!
 # Dimension shifting for Tor along a free presentation

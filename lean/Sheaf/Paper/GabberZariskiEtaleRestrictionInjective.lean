@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.Paper.SiteSheafificationSectionsLocal
+import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 
 /-! # Gabber's Zariski--étale restriction injectivity
 

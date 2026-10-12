@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.CompactObject
 public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
+import Sheaf.CategoryTheory.CompactHomHocolim
 
 /-!
 # Building objects from compact generators

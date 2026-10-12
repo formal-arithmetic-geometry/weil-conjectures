@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.RingTheory.WeaklyAssociated
+import Sheaf.AlgebraicGeometry.AssociatedWeaklyAssociated
 
 /-!
 # Associated and weakly associated points of the structure sheaf

@@ -10,6 +10,10 @@ public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantIndHomColimit
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
+import Sheaf.CategoryTheory.LocalizationHomColimit
+import Sheaf.CategoryTheory.RightLocalizationHomColimit
 
 /-!
 # Pre-derived adjunction from essentially constant derived systems

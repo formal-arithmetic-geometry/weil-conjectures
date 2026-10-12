@@ -6,6 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
+import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
 
 /-!
 # Quotient base change and its ideal sheaf

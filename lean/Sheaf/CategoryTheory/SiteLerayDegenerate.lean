@@ -2,6 +2,9 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.CategoryTheory.SiteCohomologyPullback
+import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-! # Degeneration of the Leray comparison for a morphism of sites
 

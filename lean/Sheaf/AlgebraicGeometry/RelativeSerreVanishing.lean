@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+import Sheaf.AlgebraicGeometry.CoherentSerreVanishing
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
 
 /-!
 # Relative Serre vanishing

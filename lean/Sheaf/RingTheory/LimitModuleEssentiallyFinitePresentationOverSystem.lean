@@ -15,6 +15,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 
 /-!
 # Descent of a local algebra and a presented module along a given local-ring system

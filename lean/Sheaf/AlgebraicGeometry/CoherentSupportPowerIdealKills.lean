@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # An ideal power kills a coherent module exactly when its support lies in the zero set
 

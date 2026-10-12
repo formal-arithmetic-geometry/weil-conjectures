@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.RingTheory.AnnihilatorLocalizationAway
 
 /-! # Scheme-theoretic support
 

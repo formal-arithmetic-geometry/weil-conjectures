@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.RingTheory.Kaehler.JacobiZariski
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.JacobiZariskiLeftTermVanishing
 
 /-! # Jacobi–Zariski sequence for a quotient of a smooth algebra
 

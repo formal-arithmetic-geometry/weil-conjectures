@@ -3,6 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.Topology.SheafCokernelLocalImage
 
 /-!
 # Surjectivity of module sections from vanishing Čech H¹

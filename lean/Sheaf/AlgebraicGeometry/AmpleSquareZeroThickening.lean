@@ -6,6 +6,13 @@ public import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian
+import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology
+import Sheaf.Paper.BoundaryDerivationSquareZero
 
 /-! # Ampleness lifts along a square-zero thickening
 

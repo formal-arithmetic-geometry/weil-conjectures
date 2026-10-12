@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.Topology.BasisSheafCofinalCoverings
+import Sheaf.Topology.SheafOnBasisExtends
 
 /-!
 # Extending modules from a basis

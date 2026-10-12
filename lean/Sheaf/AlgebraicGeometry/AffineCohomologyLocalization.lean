@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.AffineSectionLocalization
+import Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent
 
 /-! # Localization of cohomology on an affine scheme
 

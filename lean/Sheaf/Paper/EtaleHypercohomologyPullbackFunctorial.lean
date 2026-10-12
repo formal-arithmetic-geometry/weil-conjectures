@@ -8,6 +8,15 @@ module
 public import Sheaf.Paper.EtaleTermwiseHypercohomology
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.CartanEilenbergFunctorial
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Pullback naturality of the termwise hypercohomology spectral sequence
 

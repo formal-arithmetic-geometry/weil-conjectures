@@ -7,6 +7,9 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
+import Sheaf.CategoryTheory.LeftDerivedExactWhenDefined
 
 /-!
 # Left derived functors computed by a resolving class

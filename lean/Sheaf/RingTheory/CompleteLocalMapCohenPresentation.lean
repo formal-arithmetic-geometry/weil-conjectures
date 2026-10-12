@@ -11,6 +11,14 @@ public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.RingTheory.RingHom.Flat
 public import Sheaf.RingTheory.CohenRing
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
+import Sheaf.RingTheory.CohenPowerSeriesPresentation
+import Sheaf.RingTheory.FieldCohenPowerSeriesFormallySmooth
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import Sheaf.RingTheory.PowerSeriesAdicEvaluation
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Compatible Cohen presentations of complete local homomorphisms

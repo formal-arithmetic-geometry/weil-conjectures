@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.FieldTheory.FinitelyGeneratedFieldCompleteIntersectionModel
+import Sheaf.RingTheory.RegularSequenceConormal
 
 /-!
 # Cartier equality

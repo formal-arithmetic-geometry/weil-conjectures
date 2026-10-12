@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.Sheaves.SheafCondition.Sites
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroExact
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Restriction of abelian Zariski sheaves to an open

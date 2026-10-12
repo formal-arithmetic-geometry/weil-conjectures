@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Algebra.Rat
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Prime localizations of the integers

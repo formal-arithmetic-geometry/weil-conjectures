@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Algebra compatibility of the structure-sheaf base change map

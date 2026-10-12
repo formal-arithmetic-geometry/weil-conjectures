@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
+import Sheaf.Algebra.Homology.FreeComplexCover
+import Sheaf.Paper.DerivedTotalResolutionQuasiIso
 
 /-!
 # Filtered free resolutions of cochain complexes

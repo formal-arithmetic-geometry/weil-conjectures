@@ -7,6 +7,12 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Global sections of derived internal Hom

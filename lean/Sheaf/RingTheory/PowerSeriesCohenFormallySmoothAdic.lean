@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.CohenRing
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.Algebra.Algebra.Rat
+import Sheaf.RingTheory.CohenRingModPowFormallySmooth
+import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 
 /-!
 # Adic formal smoothness of power series over fields and Cohen rings

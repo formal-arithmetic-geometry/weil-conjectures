@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Scheme
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover
+import Sheaf.AlgebraicGeometry.AmpleProjLocalChart
 
 /-!
 # An ample invertible module gives an open immersion into Proj

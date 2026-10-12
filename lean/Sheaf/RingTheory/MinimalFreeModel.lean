@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.RingTheory.StablyFreeComplexLift
 
 /-!
 # Minimal finite free models over local rings

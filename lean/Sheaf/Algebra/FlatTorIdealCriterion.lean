@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import Sheaf.Paper.TorLongExactFirstVariable
 
 /-!
 # Flatness characterized by first Tor with ideal quotients

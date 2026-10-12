@@ -7,6 +7,12 @@ module
 
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.Paper.NoetherianApproximation
+import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
+import Sheaf.RingTheory.DirectedUnionSubringsFlatModule
+import Sheaf.RingTheory.FibreLocalRingNaturalIso
+import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
+import Sheaf.RingTheory.RegularSequenceFlatClosedFiber
 
 /-!
 # Flatness of successive localized complete-intersection quotients

@@ -11,6 +11,8 @@ public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology
+import Sheaf.Topology.RingedSpaceRGammaDerivedLimit
 
 /-!
 # Stalk injectivity for a derived inverse limit

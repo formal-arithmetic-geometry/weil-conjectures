@@ -6,6 +6,8 @@ Authors: SHEAF group S1
 module
 
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
+import WeilConjectures.Compactification.ValuativeCriterion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 /-!
 # Valuation probes at closure points of a quasi-compact immersion

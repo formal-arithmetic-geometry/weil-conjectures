@@ -10,6 +10,11 @@ public import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.AlgebraicGeometry.EtaleLfpAndFiniteType
+import Sheaf.AlgebraicGeometry.EtaleSupport
+import Sheaf.AlgebraicGeometry.FiniteClosedPoints
+import Sheaf.AlgebraicGeometry.GeometricStalkSupport
 
 /-!
 # Approximation of sheaves supported at closed points

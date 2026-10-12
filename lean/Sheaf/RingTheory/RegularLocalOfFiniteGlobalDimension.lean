@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.GlobalDimension
+import Sheaf.RingTheory.ResidueFieldProjectiveDimension
+import Sheaf.RingTheory.ResidueFieldProjectiveDimensionLowerBound
 
 /-!
 # Regularity from finite global dimension

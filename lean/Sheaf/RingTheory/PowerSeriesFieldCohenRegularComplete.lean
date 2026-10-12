@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.PowerSeriesCompleteOverCompleteBase
+import Sheaf.RingTheory.PowerSeriesQuotientVariables
 
 /-!
 # Power series over a field or Cohen ring

@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.RingTheory.RegularQuotientIdealIntersection
 
 /-!
 # Conormal intersection for a regular ideal quotient

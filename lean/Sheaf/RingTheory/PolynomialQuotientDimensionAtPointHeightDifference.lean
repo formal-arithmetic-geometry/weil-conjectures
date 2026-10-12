@@ -9,6 +9,10 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Ideal.Height
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.DimensionAtPointComponents
+import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
 
 /-!
 # Dimension at a point of a polynomial quotient

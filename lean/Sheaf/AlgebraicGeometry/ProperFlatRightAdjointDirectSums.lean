@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Basic
+import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
 
 /-!
 # The right adjoint of proper flat derived direct image preserves direct sums

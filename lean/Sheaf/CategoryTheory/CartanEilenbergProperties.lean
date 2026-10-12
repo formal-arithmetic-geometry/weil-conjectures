@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.Embedding.Restriction
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
+import Sheaf.Paper.CartanEilenbergLeftExactCohomology
 
 /-!
 # Cartan--Eilenberg resolution properties

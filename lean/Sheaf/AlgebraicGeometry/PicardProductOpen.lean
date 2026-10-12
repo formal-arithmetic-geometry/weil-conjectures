@@ -12,6 +12,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.PicardH1MultipleLocus
+import Sheaf.AlgebraicGeometry.PicardH1ProductInjective
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-!
 # Triviality on two slices and one fibre is open in a product family

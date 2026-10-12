@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Map
+import WeilConjectures.Mathlib.RingTheory.Flat.Equalizer
 
 /-!
 # Vanishing of the left base-change term of the Jacobi-Zariski sequence

@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.DerivedLimitRoosAbelianGroups
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Whiskering
+import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-!
 # Milnor exact sequence for a derived inverse limit

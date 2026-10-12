@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import Sheaf.Algebra.Homology.BoundedAboveFiniteFreeHomAcyclic
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
 
 /-!
 # Derived internal Hom from a bounded-above finite free model

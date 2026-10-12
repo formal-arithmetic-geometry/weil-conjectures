@@ -10,6 +10,10 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.Algebra.Homology.FilteredComplexZBDescription
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.ExactCoupleMorphism
+import Sheaf.CategoryTheory.SpectralSequencePageInduction
 
 /-!
 # Spectral sequences of bounded filtered complexes

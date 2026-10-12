@@ -4,6 +4,10 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
+import Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence
 
 /-! # Étale cohomology over an open object
 

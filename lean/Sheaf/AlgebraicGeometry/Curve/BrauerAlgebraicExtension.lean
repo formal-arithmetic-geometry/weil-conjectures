@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.FieldTheory.Separable
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.Algebra.Central.ReducedNorm
+import WeilConjectures.FieldTheory.Cr
+import WeilConjectures.FieldTheory.Tsen
 
 /-!
 # Brauer vanishing over algebraic extensions of curve function fields

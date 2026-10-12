@@ -6,6 +6,11 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.CategoryTheory.HalfPlaneConvergence
+import Sheaf.CategoryTheory.DerivedCoupleExact
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.ExactCoupleMorphism
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Exact functors transport exact couples

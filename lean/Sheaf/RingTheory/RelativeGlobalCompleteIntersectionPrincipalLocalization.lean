@@ -3,6 +3,9 @@ module
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
+import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
+import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Principal localization of a relative global complete intersection

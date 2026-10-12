@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Limits
+import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 
 /-!
 # Discreteness of a scheme unramified over a field

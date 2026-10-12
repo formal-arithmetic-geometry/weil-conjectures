@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.FiniteAffineFibreSections
+import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 
 /-!
 # Structure sheaves of finite locally free morphisms

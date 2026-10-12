@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.FieldTheory.Separable
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # Etale coproducts of spectra of finite separable field extensions

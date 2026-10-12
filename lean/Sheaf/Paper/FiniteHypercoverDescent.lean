@@ -6,6 +6,7 @@ module
 
 public import Sheaf.Paper.FiniteSplitEtaleHypercover
 public import Mathlib.CategoryTheory.Filtered.Basic
+import Sheaf.Paper.EtaleFiniteDataDescent
 
 /-!
 # Finite étale hypercover skeleta descend

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Sheaf.CategoryTheory.EssentiallyConstantSystem
+import Sheaf.CategoryTheory.EssentiallyConstantSplitting
 
 /-!
 # Mittag-Leffler systems in a short exact sequence

@@ -9,6 +9,7 @@ public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Algebra.Module.ULift
+import Sheaf.RingTheory.WellOrderedUnionProjectiveDimension
 
 /-!
 # Testing global dimension on finite and cyclic modules

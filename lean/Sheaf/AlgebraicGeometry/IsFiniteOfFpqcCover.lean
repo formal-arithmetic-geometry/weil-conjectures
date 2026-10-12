@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.Morphisms.FpqcIntegralDescent
+import Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover
 
 /-!
 # Finiteness descends along fpqc covering families

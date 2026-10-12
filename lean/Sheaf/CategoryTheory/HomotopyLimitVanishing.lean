@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Preorder.WellOrderContinuous
 public import Mathlib.SetTheory.Ordinal.Basic
+import Sheaf.Algebra.Homology.AcyclicLimitOrdinal
 
 /-!
 # Vanishing of Hom in a transfinite union of subcomplexes

@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.Paper.TorLongExactFirstVariable
 
 /-!
 # Tor one of a minimal finite graded free presentation

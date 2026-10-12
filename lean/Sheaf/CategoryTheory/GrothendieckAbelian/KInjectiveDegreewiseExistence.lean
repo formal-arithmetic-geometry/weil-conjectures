@@ -7,6 +7,13 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.Algebra.Homology.FunctorialHomotopies
+import Sheaf.CategoryTheory.BoundedSubobjectSize
+import Sheaf.CategoryTheory.GrothendieckAbelian.AcyclicQuotientComplexesBoundedSize
+import Sheaf.CategoryTheory.GrothendieckAbelian.FunctorialInjectiveComplexEmbedding
+import Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveCriterion
+import Sheaf.CategoryTheory.GrothendieckAbelian.ObjectsSmall
+import Sheaf.CategoryTheory.InjectiveIffExtendsSubobjectGenerator
 
 /-!
 # Functorial K-injective resolutions with injective terms

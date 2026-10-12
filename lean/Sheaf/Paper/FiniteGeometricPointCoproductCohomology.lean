@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.GeometricPointCohomology
+import Sheaf.Paper.FiniteCoproductCohomologyAssembly
+import Sheaf.Paper.InverseImageStalkGerm
 
 /-! # Étale cohomology of a finite coproduct of geometric points
 

@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorComplexCohomologyVanishes
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
 
 /-! # A cohomology gap for tensoring with a perfect complex
 

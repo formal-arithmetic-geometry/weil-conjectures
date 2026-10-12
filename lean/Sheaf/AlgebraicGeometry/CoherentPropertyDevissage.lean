@@ -7,6 +7,9 @@ public import Sheaf.Topology.PresheafModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
+import Sheaf.AlgebraicGeometry.CoherentPropertyIrreducible
+import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
 
 @[expose] public section
 

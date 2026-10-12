@@ -7,6 +7,12 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.GlobalDimension
+import Sheaf.Algebra.ProjectiveDimensionWellDefined
+import Sheaf.RingTheory.CohenMacaulayFreeResolution
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.GlobalDimensionFiniteModules
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularLocalMaximalCohenMacaulayFree
 
 /-!
 # Global dimension of a regular local ring

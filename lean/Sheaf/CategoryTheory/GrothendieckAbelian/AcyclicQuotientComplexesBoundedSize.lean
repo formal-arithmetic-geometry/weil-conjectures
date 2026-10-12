@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Sheaf.CategoryTheory.BoundedSubobjectSurjection
 
 /-!
 # Bounded-size generators for acyclic complexes

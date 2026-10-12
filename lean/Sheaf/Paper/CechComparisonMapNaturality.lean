@@ -6,6 +6,12 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 
 /-!
 # Naturality of the canonical Cech-to-cohomology comparison map

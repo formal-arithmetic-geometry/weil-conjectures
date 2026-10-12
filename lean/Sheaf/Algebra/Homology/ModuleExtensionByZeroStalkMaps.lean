@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
+import Sheaf.Topology.AbelianOpenExtensionByZeroStalks
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Stalks and maps for extension by zero of modules
 

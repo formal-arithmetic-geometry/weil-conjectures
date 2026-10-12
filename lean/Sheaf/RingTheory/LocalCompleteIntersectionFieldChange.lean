@@ -7,6 +7,11 @@ module
 
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange
+import Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection
+import Sheaf.RingTheory.LciConormalFreeRankCodimension
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Local complete intersections and extension of the base field

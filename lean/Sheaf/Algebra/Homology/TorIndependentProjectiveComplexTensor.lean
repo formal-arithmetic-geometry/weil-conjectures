@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.Algebra.FiniteProjectiveTorAcyclic
+import Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor
 /-!
 # Tor-independent tensor comparison for a bounded projective complex
 

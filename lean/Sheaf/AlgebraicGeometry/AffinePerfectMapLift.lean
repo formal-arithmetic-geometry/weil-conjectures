@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.Algebra.Homology.RhomGlobalSections
+import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
+import Sheaf.AlgebraicGeometry.PerfectDerivedTensor
+import Sheaf.AlgebraicGeometry.PerfectDerivedTensorHom
+import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherent
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
 
 /-! # Affine lifting of maps from perfect complexes
 

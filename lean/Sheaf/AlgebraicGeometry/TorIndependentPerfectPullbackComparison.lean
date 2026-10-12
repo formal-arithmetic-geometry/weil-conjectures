@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
+import Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 
 /-! # Tor-independent perfect pullback comparison at a stalk
 

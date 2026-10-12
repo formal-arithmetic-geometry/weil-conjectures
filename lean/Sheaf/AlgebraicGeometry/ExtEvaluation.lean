@@ -6,6 +6,10 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-!
 # Evaluation for finite locally free module sheaves

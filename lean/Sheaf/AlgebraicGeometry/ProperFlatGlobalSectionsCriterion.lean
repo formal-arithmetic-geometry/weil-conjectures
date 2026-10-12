@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.PerfectDegreeZeroFibreCriterion
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
 
 /-!
 # Proper flat morphisms with fibrewise constant functions

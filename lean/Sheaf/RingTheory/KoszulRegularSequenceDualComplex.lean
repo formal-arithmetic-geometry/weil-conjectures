@@ -10,6 +10,7 @@ public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 public import Mathlib.RingTheory.Localization.Defs
+import Sheaf.Paper.KoszulComplex
 
 /-!
 # Duality for a Koszul-regular quotient

@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 
 /-!
 # Transitivity of derived tensor products under base change

@@ -7,6 +7,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.PerfectDirectImageBaseChange
+import Sheaf.AlgebraicGeometry.PerfectLowestCohomologyLocus
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-!
 # Universal locally closed pullback locus for a finite locally free module

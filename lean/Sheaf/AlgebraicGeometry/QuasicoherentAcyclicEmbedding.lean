@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Over
+import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
 # Embedding a quasi-coherent module into an acyclic quasi-coherent module

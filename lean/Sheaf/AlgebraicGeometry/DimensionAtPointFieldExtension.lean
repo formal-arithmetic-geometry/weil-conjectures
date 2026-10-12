@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
 
 /-!
 # Dimension at a point under extension of the ground field

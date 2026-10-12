@@ -7,6 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Enough injectives for sheaves of modules on a scheme

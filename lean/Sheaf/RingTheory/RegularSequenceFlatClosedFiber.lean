@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Sheaf.RingTheory.FlatModInjective
 
 /-!
 # Lifting a regular sequence from a closed fibre

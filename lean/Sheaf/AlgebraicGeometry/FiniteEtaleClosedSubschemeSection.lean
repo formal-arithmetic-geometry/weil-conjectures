@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.AlgebraicGeometry.FiniteClopenOpenCoverSection
+import Sheaf.RingTheory.EtaleAlgebraLift
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Étale covers of closed subschemes of an affine normal scheme

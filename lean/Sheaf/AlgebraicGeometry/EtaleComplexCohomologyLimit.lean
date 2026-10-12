@@ -9,6 +9,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import Sheaf.CategoryTheory.KInjectiveBridge
+import Sheaf.CategoryTheory.SpectralSequenceComparison
+import Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial
 
 /-! # Continuity of etale cohomology for systems of complexes
 

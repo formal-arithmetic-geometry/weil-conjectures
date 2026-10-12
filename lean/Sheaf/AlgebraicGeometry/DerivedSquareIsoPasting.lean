@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import Sheaf.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Pasting
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-!
 # Identity and pasting laws of derived square isomorphisms

@@ -7,6 +7,10 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompletionDimension
+import Sheaf.RingTheory.CompletionRegularLocal
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Completion of a discrete valuation ring

@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-!
 # Kernel of the sheafified sectionwise quotient

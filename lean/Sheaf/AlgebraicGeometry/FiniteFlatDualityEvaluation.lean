@@ -10,6 +10,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.AffineDerivedConcentration
+import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom
+import Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree
 
 /-! # Finite flat duality with an invertible target
 

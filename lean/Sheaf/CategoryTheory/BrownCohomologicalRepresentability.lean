@@ -6,6 +6,8 @@ module
 
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
+import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
+import Sheaf.CategoryTheory.CompactHomHocolim
 
 /-!
 # Brown representability for cohomological functors

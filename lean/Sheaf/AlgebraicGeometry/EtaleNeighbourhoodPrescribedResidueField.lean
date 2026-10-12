@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.Separable
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
+import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 
 /-!
 # Étale neighbourhoods with a prescribed residue field

@@ -10,6 +10,8 @@ public import Mathlib.GroupTheory.PGroup
 public import Mathlib.GroupTheory.Index
 public import Mathlib.Topology.Algebra.OpenSubgroup
 public import Mathlib.Topology.Connected.TotallyDisconnected
+import Sheaf.RepresentationTheory.DiscreteContinuousCohomology
+import WeilConjectures.Mathlib.RepresentationTheory.Invariants
 
 /-!
 # Sylow reduction of finite primary discrete modules

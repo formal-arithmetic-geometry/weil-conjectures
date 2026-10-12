@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # Pseudo-coherence is closed under distinguished triangles
 

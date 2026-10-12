@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
 public import WeilConjectures.SixFunctors.BaseChange.Derived
+import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
+import Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Identity and pasting equations for exchange
 

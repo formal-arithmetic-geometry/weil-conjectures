@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.ProperPerfectDirectImagePerfect
 
 /-! # Right adjoints of proper perfect pushforward preserve coproducts
 

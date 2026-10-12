@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent
+import Sheaf.AlgebraicGeometry.SectionRestrictionSTorsion
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Clearing denominators of sections on a nonvanishing locus
 

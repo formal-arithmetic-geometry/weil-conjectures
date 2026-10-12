@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Topology.Sets.Closeds
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Coherent pushforward from an open with closed ambient support
 

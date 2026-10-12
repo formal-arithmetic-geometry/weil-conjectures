@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
 
 /-!
 # Flat local extensions with prescribed residue field

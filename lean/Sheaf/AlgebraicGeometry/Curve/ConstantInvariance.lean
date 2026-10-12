@@ -10,6 +10,19 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Affine
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsion
 public import Sheaf.AlgebraicGeometry.GenusInvariant
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
+import Sheaf.AlgebraicGeometry.Curve.ProperCohomology
+import Sheaf.AlgebraicGeometry.Curve.UnitsQuotientBaseChange
+import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+import WeilConjectures.AlgebraicGeometry.DensePoints
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Constant coefficients under algebraically closed field extension

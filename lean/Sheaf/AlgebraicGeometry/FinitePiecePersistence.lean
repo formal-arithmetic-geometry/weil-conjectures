@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.FibreProductPointResidueField
 
 /-!
 # Persistence of a finite open piece under residue-field-preserving base change

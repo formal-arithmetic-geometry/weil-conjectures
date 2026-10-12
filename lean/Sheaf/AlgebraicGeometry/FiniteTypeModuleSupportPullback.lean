@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
 public import Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.ModulePullbackFiniteType
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # Support and pullback of finite type quasi-coherent modules

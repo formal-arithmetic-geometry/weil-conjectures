@@ -13,6 +13,14 @@ import Sheaf.AlgebraicGeometry.HenselianClopenRestriction
 import Sheaf.AlgebraicGeometry.SchemeClopenIdempotent
 import Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
+import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+import Sheaf.AlgebraicGeometry.FiniteEtaleDescent
+import Sheaf.AlgebraicGeometry.GaloisCategories
+import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair

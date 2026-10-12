@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraAffineInclusion
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 
 /-! # Affine morphisms and quasi-coherent algebras (relative spectrum)
 

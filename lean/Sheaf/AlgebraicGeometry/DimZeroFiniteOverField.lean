@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.Dimension
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.AffineFiniteTypeAlgebra
+import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 
 /-!
 # Zero-dimensional schemes of finite type over a field

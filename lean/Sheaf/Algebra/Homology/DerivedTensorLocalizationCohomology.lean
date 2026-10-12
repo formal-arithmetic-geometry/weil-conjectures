@@ -7,6 +7,10 @@ module
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
+import Sheaf.Algebra.Homology.DerivedTensorActionNaturality
+import Sheaf.Algebra.Homology.DerivedTensorFlatSecondLocalization
+import Sheaf.Algebra.Homology.KFlatPullback
 
 /-! # Localization of cohomology of a derived tensor
 

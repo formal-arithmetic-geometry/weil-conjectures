@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
+import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChange
 
 /-! # Perfect direct image and arbitrary base change
 

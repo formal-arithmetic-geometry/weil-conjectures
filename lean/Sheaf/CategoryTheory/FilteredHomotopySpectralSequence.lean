@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.Filtration
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 public import Mathlib.Algebra.Homology.Homotopy
+import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
 
 /-!
 # Filtered homotopies and spectral sequences

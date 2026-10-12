@@ -6,6 +6,11 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
+import WeilConjectures.SixFunctors.BaseChange.Etale
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-!
 # Etale extension by zero commutes with base change for module sheaves

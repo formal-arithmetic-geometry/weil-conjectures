@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.Paper.MLCohomologyPowersIdeal
+import Sheaf.Paper.PQFCohomology
 
 /-! # The theorem on formal functions
 

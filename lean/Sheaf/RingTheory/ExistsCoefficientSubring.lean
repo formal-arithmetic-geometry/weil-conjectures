@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.Ring.Subring.Defs
 public import Mathlib.Algebra.CharP.Defs
+import Sheaf.RingTheory.CohenRingModPowFormallySmooth
+import Sheaf.RingTheory.CohenRingsExist
+import Sheaf.RingTheory.FormallySmoothAdic
 
 /-!
 # Existence of a coefficient subring

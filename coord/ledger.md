@@ -5912,3 +5912,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:41 L: merged deliver/N1/WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale (stage 3; reviewer PASS; first push; landing 20261012T034034-L-1502684 (interface); modules 3; new nodes 2)
 - 03:42 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteSelection (stage 3; reviewer PASS; first push; landing 20261012T034201-L-1510264 (interface); modules 2; new nodes 1)
 - 03:43 L: merged deliver/P2/Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk (stage 3; reviewer PASS; first push; landing 20261012T034251-L-1514736 (proof); modules 1; new nodes 0)
+- 03:44 L: stage 2 rule 7 applied to the whole library (~/cc1/apply-proof-imports.sh, tools/add_proof_imports.py): wrote 5486 imports into 1613 files; 12 imports left out because they would close a cycle; two anonymous instances named (the repairs of the side copy's build); the commit before: 2242c1bfe

@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+import Sheaf.Algebra.Homology.AffinePerfectCutDegreeZero
+import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 
 /-! # Splitting a perfect complex at degree zero near a point
 

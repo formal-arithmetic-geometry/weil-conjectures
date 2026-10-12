@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.EtaleSetSectionsFlatConnectedFibres
+import Sheaf.FieldTheory.FieldTensorUniqueMinimalPrime
 
 /-!
 # Étale sections after extension of a separably closed base field

@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.RingTheory.HenselianLocalRootLifting
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Retractions of étale algebras over henselian local rings

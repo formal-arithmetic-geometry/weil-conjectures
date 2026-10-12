@@ -9,6 +9,10 @@ public import Sheaf.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
+import Sheaf.RingTheory.MPseudoCoherentVanishingBase
+import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
+import Sheaf.RingTheory.PseudoCoherentIffAllM
 
 /-!
 # Gluing pseudo-coherence over a finite standard-open cover

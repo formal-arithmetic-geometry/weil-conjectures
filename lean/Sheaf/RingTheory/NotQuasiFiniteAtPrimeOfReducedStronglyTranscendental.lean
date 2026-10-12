@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Algebraic.StronglyTranscendental
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfStronglyTranscendental
+import Sheaf.RingTheory.QuasiFiniteFourRings
 
 /-!
 # Strong transcendence prevents quasi-finiteness for reduced rings

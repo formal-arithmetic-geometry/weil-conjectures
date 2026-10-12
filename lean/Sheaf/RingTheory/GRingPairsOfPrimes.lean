@@ -7,6 +7,12 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.LocalCompletionQuotient
+import Sheaf.RingTheory.LocalizationRegular
+import Sheaf.RingTheory.RegularComposition
+import Sheaf.RingTheory.RegularThroughLocalization
 
 /-!
 # The G-ring criterion using pairs of prime ideals

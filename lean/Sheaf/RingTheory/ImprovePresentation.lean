@@ -9,6 +9,13 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Extension.Presentation.Basic
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+import Sheaf.AlgebraicGeometry.CotangentComplexSymmetricAlgebra
+import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.JacobiZariskiQuotientSmooth
+import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
+import Sheaf.RingTheory.SymmetricAlgebraSmooth
 
 /-!
 # Improving a presentation by a symmetric algebra

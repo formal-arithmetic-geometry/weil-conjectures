@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Restrict
+import Sheaf.AlgebraicGeometry.PrincipalOpenDenseOfNonZeroDivisor
+import WeilConjectures.Blowup.BlowupUniversal
 
 /-!
 # Density of a principal nonzerodivisor complement

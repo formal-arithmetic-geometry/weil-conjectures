@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RationalFunctionRing
 public import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Rational functions and generic stalks

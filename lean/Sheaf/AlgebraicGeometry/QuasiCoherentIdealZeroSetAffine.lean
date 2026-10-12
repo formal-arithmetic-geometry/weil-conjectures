@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Zero sets of quasi-coherent ideal sheaves on affine opens
 

@@ -9,6 +9,11 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.Algebra.Homology.ExactSequence
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Exact restriction of module sheaves and injective objects

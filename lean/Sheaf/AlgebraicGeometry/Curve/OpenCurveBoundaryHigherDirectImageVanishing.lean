@@ -9,6 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.Curve.BrauerAlgebraicExtension
+import Sheaf.AlgebraicGeometry.GmStrictHenselizationStalkFormula
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictHenselizationDVR
+import WeilConjectures.AlgebraicGeometry.Sites.Hilbert90
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Higher direct images of the multiplicative group across a curve boundary

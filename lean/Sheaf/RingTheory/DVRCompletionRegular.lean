@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.RingTheory.CompletionOfDVR
 
 /-!
 # Regularity of completion maps for characteristic-zero discrete valuation rings

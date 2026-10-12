@@ -3,6 +3,12 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.EtaleSectionsBaseFieldExtension
+import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 
 /-!
 # Proper exchange over a geometric point

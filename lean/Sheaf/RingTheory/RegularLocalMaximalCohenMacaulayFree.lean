@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.CmModuleGoodElementNonzerodivisor
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Maximal Cohen–Macaulay modules over regular local rings

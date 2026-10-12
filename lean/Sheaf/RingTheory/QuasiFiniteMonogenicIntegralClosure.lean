@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfReducedStronglyTranscendental
 
 /-!
 # Integral closure of a monogenic algebra near a quasi-finite prime

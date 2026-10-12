@@ -6,6 +6,11 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine
+import Sheaf.AlgebraicGeometry.AmpleIdealSection
+import Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal
+import Sheaf.RingTheory.GradedPrimeAvoidance
 
 /-! # Affine section neighbourhoods of finite sets
 

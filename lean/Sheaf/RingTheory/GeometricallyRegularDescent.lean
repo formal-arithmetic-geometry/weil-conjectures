@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
 
 /-!
 # Geometric regularity descends along faithfully flat algebra maps

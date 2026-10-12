@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.StrictHenselizationTriples
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.EtaleTripleStrictHenselizationIdentification
+import Sheaf.RingTheory.StrictHenselizationCompletionFlatOverBase
 
 /-!
 # Flatness of etale triple maps to the completed strict henselization

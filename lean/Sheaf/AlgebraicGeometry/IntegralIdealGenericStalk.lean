@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+import Sheaf.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Nonzero ideals on integral schemes and their generic stalks

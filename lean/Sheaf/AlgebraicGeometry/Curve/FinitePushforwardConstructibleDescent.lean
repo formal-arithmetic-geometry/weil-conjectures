@@ -8,6 +8,16 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.ConstructibleCurveSubQuotient
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import Sheaf.AlgebraicGeometry.LocallyClosedStratification
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-!
 # Constructibility descends from finite direct image on curves

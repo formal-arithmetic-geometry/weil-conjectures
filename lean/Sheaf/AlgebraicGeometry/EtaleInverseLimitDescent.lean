@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent
 
 /-!
 # Descent of étaleness to a stage of an inverse limit

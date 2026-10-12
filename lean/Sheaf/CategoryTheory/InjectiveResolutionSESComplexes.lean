@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
+import Sheaf.CategoryTheory.PushoutShortExactSequence
 
 /-!
 # Injective resolutions of short exact sequences of bounded-below complexes

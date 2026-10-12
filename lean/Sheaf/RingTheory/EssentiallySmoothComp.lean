@@ -6,6 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.RingTheory.EssentiallySmooth
+import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
+import Sheaf.RingTheory.SmoothAlgebraFilteredColimitDescent
 
 /-!
 # Composition of essentially smooth ring maps

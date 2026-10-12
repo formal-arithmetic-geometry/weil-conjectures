@@ -6,6 +6,10 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.RingTheory.NagataRing
+import Sheaf.RingTheory.FiniteOverNagata
+import Sheaf.RingTheory.IsN1AdjoinSingleton
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.PolynomialRingN2
 
 /-!
 # Nagata rings are universally Japanese

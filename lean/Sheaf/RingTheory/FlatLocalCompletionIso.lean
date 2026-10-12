@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.FiniteAfterCompletion
+import Sheaf.RingTheory.FlatModuleCompletion
 
 /-!
 # Flat local maps induce isomorphisms on adic completions

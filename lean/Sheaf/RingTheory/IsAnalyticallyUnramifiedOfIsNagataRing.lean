@@ -7,6 +7,14 @@ module
 
 public import Sheaf.RingTheory.NagataRing
 public import Sheaf.RingTheory.AnalyticallyUnramified
+import Sheaf.Algebra.ChangeIdealCompletion
+import Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
+import Sheaf.RingTheory.FiniteOverNagata
+import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes
+import Sheaf.RingTheory.IntegralExtensionDimension
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataLocalization
+import Sheaf.RingTheory.RegularLocalDimOneIffNormal
 
 /-!
 # Reduced completion of a local Nagata domain

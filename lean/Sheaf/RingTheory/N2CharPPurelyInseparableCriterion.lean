@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.JapaneseDomain
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.Algebra.CharP.Basic
+import Sheaf.FieldTheory.NormalExtensionFixedField
 
 /-!
 # In characteristic p, N-2 is tested on finite purely inseparable extensions

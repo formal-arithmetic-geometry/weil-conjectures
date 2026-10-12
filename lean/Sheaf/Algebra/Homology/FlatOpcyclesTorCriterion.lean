@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Flat.CategoryTheory
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.Additive
+import Sheaf.Algebra.FlatTorIdealCriterion
+import Sheaf.CategoryTheory.OpcyclesTorSurjection
 
 /-!
 # Flatness of opcycles from exactness after tensoring

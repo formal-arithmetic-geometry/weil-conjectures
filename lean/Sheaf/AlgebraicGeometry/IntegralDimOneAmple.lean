@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve
+import Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated
+import Sheaf.AlgebraicGeometry.FindGloballyGenerated
 
 /-! # Ample invertible modules on integral curves
 

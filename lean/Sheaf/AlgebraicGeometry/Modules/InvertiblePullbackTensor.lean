@@ -8,6 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.Modules.ResidueFiber
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.AlgebraicGeometry.ModulePullbackTensor
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import WeilConjectures.AlgebraicGeometry.Modules.Dual
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # Pullback, tensor products and fibres of invertible modules

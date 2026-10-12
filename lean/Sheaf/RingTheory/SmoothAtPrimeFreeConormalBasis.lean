@@ -12,6 +12,8 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.RingTheory.PrescribedResidueBasisSpreads
+import Sheaf.RingTheory.SmoothLocalizationConormalSplit
 
 /-!
 # Free conormal basis near a smooth prime

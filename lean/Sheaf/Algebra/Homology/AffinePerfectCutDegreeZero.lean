@@ -9,6 +9,8 @@ public import Sheaf.Algebra.Homology.ModuleCohomologyBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.Paper.DerivedSplittingUnique
+import Sheaf.RingTheory.FiniteProjectiveCokernelLocalization
 
 /-! # Affine perfect-complex cut in degree zero
 

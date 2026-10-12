@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Constructible
+import Sheaf.Topology.SpectralConstructibleFiniteIntersection
 
 /-!
 # Specializations in the closure of an intersection of constructible sets

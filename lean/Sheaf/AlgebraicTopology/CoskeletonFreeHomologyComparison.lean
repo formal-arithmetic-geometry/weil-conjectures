@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.LeftExact
+import Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan
+import Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits
+import Sheaf.Paper.TrivialKanHomotopyEquivalence
 
 /-!
 # Homology comparison for coskeletal simplicial presheaves

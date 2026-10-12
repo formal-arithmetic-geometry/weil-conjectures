@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.JacobsonSpace
+import Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterClosureSingleton
 
 /-!
 # Closed fibres under separation of closed points

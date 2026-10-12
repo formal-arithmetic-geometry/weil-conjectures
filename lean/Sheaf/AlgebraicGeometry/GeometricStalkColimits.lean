@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Colimits and geometric stalks

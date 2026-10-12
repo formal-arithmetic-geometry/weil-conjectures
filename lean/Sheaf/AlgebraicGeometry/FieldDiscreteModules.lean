@@ -10,6 +10,10 @@ public import Mathlib.FieldTheory.KrullTopology
 public import Mathlib.RepresentationTheory.Invariants
 public import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+import Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint
+import Sheaf.CategoryTheory.DiscreteModulesAbelian
+import Sheaf.RepresentationTheory.DiscreteContinuousCohomology
 
 /-!
 # Etale modules on a field and discrete Galois modules

@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationNearOfFieldExtension
+import Sheaf.RingTheory.IsEtaleAtFieldExtensionDescent
 
 /-!
 # Pointwise étaleness descends along a field extension

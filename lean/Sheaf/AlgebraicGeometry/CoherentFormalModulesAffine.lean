@@ -8,6 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.AdicCompletion.Algebra
+import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.FiniteModuleComplete
+import Sheaf.RingTheory.NakayamaNilpotent
 
 /-! # Coherent formal modules on an affine scheme
 

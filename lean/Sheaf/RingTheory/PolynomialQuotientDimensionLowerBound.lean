@@ -9,6 +9,9 @@ public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Dimension lower bound for a polynomial quotient over a field

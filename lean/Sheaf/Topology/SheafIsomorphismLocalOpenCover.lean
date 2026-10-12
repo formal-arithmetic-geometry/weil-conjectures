@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Topology.GlueSheavesOfModules
 
 /-!
 # Isomorphisms of sheaf modules are local on an open cover

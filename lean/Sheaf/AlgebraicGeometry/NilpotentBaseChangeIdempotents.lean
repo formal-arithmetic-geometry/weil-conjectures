@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Ring.Idempotent
+import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import Sheaf.AlgebraicGeometry.SchemeClopenIdempotent
 
 /-!
 # Idempotents under nilpotent base change

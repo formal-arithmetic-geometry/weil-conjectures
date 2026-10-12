@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Sheaf.AlgebraicGeometry.DescendAffine
+import Sheaf.RingTheory.FiniteMapColimitDescent
 
 /-!
 # Finiteness descends to a finite stage of a limit

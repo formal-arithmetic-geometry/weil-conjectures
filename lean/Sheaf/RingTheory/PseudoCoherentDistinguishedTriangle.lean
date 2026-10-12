@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.MPseudoCoherent
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.RingTheory.DerivedMapLift
 
 /-!
 # Pseudo-coherence in distinguished triangles

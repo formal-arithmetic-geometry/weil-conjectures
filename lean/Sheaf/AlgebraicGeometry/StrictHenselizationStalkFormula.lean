@@ -5,6 +5,12 @@ public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import Sheaf.AlgebraicGeometry.EtaleCohomologyContinuity
+import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
+import Sheaf.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Strict-henselization stalk formula

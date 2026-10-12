@@ -6,6 +6,8 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.Paper.SiteSheafificationSectionsLocal
 
 /-!
 # Local representatives of sections of an étale inverse image

@@ -6,6 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
+import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-!
 # Sections on a connected geometric fibre

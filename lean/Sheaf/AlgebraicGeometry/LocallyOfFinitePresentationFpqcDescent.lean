@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
 
 /-!
 # Descent of local finite presentation along fpqc coverings

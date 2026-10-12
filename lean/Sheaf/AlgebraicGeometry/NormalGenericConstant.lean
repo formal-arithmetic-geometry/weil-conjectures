@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Sheaf.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.EtaleNormalComponents
+import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Constant abelian sheaves at the generic point of a normal scheme

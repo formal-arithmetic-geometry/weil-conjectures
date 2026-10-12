@@ -8,6 +8,7 @@ public import Sheaf.CategoryTheory.SiteCechComplex
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.AlgebraicGeometry.EtaleFibreProductCoproduct
 
 /-!
 # Čech complex of a finite affine étale covering and its disjoint union

@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.RingTheory.Ideal.Operations
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.CohomologyPowersIdealApplication
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 
 /-! # Mittag-Leffler and Artin-Rees bounds for cohomology of ideal-power quotients
 

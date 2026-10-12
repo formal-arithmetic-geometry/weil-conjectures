@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
+import Sheaf.AlgebraicGeometry.GmStrictHenselizationPullback
+import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
 
 /-!
 # Strict-henselization stalk formula for the multiplicative sheaf

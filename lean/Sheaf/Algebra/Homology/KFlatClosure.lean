@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Closure of K-flat complexes under countable sums and cones

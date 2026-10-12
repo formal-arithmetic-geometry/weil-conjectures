@@ -8,6 +8,10 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.NoetherianApproximationData
+import Sheaf.AlgebraicGeometry.NoetherianPerfectDirectImage
+import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Perfect direct image with proper support
 

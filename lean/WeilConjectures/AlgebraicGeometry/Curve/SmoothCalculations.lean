@@ -11,6 +11,23 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import Sheaf.AlgebraicGeometry.ArtinSchreier
+import Sheaf.AlgebraicGeometry.ArtinSchreierSequence
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
+import Sheaf.AlgebraicGeometry.Curve.ConstantInvariance
+import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
+import Sheaf.AlgebraicGeometry.Curve.ProperCohomology
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.AlgebraicGeometry.Curve.Affine
+import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.Sites.Gm
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.LinearAlgebra.SemilinearFrobenius
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # The curve assertions for constant coefficients on smooth curves

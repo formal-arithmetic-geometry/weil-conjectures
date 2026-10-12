@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Restrict
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-!
 # Derived direct image commutes with restriction to an open

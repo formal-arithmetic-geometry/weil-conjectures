@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Generator.Sheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-!
 # Flatness of the sheafified free presheaf

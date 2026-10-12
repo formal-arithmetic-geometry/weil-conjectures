@@ -6,6 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.Paper.ReducedSourceFactors
 
 /-!
 # Images of closed subsets proper over a base

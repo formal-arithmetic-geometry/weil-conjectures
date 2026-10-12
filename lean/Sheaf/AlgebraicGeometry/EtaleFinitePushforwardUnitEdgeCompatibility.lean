@@ -6,6 +6,12 @@ Authors: SHEAF group P1
 module
 
 public import WeilConjectures.SixFunctors.BaseChange.Square
+import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Compatibility of base-changed edge maps with the pushforward of a unit

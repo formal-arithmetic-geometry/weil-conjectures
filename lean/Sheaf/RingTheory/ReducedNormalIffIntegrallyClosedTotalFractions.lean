@@ -9,6 +9,10 @@ public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.FiniteProductNormal
+import Sheaf.RingTheory.IntegralClosureFinitePi
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.NormalRingIntegrallyClosedTotal
 
 /-!
 # Normality and total fractions of a reduced ring

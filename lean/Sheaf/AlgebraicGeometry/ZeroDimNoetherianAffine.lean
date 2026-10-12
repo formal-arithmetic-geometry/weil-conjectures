@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine
+import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Affineness and ampleness in dimension zero
 

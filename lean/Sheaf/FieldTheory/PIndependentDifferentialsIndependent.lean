@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Sheaf.FieldTheory.PBasisDifferentialsBasis
+import Sheaf.FieldTheory.PBasisExtension
 
 /-! # The differentials of a p-independent family are linearly independent
 

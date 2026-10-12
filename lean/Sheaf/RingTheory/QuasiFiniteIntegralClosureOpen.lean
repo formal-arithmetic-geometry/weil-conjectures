@@ -9,6 +9,7 @@ public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
 # Global affine Zariski main theorem

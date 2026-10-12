@@ -15,6 +15,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
+import Sheaf.AlgebraicGeometry.PerfectTensorHomDuality
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Projection comparison for perfect complexes
 

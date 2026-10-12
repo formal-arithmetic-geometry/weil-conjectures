@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Topology.Constructible
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Images of inverse limits in constructible subsets

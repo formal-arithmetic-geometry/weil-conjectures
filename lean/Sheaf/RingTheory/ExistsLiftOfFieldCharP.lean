@@ -9,6 +9,7 @@ public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.Algebra.Field.Defs
 public import Mathlib.RingTheory.Ideal.Operations
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
 
 /-!
 # Lifting ring maps from fields of positive characteristic

@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.Morphisms.FpqcOpenImmersionDescent
+import Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover
 
 /-!
 # Fpqc descent of unramified morphisms

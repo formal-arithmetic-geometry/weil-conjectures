@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Idempotents
+import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
+import Sheaf.RingTheory.RootLiftingEtaleRetraction
 
 /-!
 # Idempotent lifting and simple-root lifting for local rings

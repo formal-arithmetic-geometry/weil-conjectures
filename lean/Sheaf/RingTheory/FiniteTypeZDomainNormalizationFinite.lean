@@ -3,6 +3,9 @@ module
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataRing
+import Sheaf.RingTheory.NagataUniversallyJapanese
 
 /-!
 # Finiteness of the normalization of a finite type domain over ℤ

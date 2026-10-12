@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+import Sheaf.AlgebraicGeometry.HenselianClopenRestriction
 
 /-! # Full faithfulness of finite étale restriction
 Source: corrected blueprint thm-weil-pbc-finite-etale-lifting, proof steps 1–6;

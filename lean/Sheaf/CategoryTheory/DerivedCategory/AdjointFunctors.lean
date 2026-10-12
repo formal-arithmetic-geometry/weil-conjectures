@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 
 /-!
 # Everywhere defined derived functors of an adjoint pair

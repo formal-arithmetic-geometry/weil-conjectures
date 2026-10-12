@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Algebra.Category.Grp.Basic
+import Sheaf.Topology.BasisSheafSectionsGerms
 
 /-!
 # Extending a sheaf of abelian groups from a basis

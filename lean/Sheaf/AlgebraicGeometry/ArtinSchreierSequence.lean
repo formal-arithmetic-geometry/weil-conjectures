@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
+import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # The Artin–Schreier sequence

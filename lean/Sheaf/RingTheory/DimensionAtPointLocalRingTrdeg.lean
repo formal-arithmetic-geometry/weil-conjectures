@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.DimensionAtPointComponents
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
+import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Dimension at a point of a finite type algebra over a field

@@ -8,6 +8,10 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Sheaf.RingTheory.CyclicExtensionFlatDescent
+import Sheaf.RingTheory.DirectSumExtensionAssembly
+import Sheaf.RingTheory.TorsionCyclicPresentation
+import Sheaf.RingTheory.TorsionHomFlatComparison
 
 /-!
 # Descent of extensions with an ideal-power torsion quotient

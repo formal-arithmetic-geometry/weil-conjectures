@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-!
 # Kernels in coherent formal modules

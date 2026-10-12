@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Sheaf.Algebra.Homology.TelescopeColimit
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Homotopy colimit of good truncations

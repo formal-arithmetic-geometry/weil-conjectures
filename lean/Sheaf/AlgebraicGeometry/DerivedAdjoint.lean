@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 
 /-! # Derived pullback/direct image adjunction for schemes
 

@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.FieldTheory.KrullTopology
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint
+import Sheaf.CategoryTheory.EquivalenceInternalModule
 
 /-!
 # Abelian etale sheaves on a field and discrete Galois modules

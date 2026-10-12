@@ -11,6 +11,15 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+import Sheaf.AlgebraicGeometry.AffineModuleFiniteType
+import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
+import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-!
 # Cohomology of a finite type graded module

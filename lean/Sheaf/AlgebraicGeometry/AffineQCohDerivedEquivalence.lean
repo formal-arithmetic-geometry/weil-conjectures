@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.CategoryTheory.Triangulated.Functor
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-!
 # The affine quasi-coherent derived equivalence

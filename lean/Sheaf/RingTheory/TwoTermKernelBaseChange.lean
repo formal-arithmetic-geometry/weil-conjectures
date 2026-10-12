@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.RingTheory.Flat.Equalizer
+import Sheaf.Algebra.TorDimensionShiftFree
+import Sheaf.Paper.TorLongExactFirstVariable
 
 /-!
 # Kernel base change for a two-term complex

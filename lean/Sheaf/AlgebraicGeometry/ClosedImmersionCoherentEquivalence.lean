@@ -9,6 +9,13 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Whiskering
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Coherent modules and adic systems on a closed subscheme
 

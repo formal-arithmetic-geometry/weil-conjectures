@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.DivisorModule
 public import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.Curve.Divisor
+import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Local generators of the divisor module on a smooth connected curve

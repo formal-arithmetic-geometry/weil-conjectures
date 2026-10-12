@@ -32,6 +32,9 @@ import WeilConjectures.SixFunctors.Etale.Gabber
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+import WeilConjectures.SixFunctors.Finite.Exact
 
 /-!
 # Reduction steps for the eight curve-cohomology assertions

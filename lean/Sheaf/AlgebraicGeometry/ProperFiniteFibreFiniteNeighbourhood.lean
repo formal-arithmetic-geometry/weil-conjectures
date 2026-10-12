@@ -3,6 +3,12 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.FiniteDiscreteFiber
+import Sheaf.AlgebraicGeometry.FiniteIffProperFiniteFibres
+import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres
+import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen
 
 /-!
 # Proper morphisms with finite fibres are finite near a point

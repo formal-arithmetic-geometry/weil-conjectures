@@ -12,6 +12,10 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen
+import Sheaf.AlgebraicGeometry.NormalizationProperties
+import Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # A finite smooth modification of a reduced curve

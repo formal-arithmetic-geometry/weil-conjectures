@@ -6,6 +6,13 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.RingTheory.PopescuSolutionModulo
+import Sheaf.RingTheory.BasisIffBasisQuotientOfNilpotent
+import Sheaf.RingTheory.EssentiallySmooth
+import Sheaf.RingTheory.FlatAndFlatOfFlatFibreNoetherian
+import Sheaf.RingTheory.HenselianEtaleRetraction
+import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
+import Sheaf.RingTheory.LocalDimensionZeroHenselian
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # Enlarging a solution modulo a prime power

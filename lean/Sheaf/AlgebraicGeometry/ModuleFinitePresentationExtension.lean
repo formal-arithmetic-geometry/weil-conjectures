@@ -7,6 +7,15 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.AlgebraicGeometry.AffineFiniteTypeGeneratingSections
+import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
+import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeSubmoduleExtension
+import Sheaf.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Extension of finitely presented modules and their morphisms
 

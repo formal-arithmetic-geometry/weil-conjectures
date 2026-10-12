@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Identification of the glued twist with the Serre twist

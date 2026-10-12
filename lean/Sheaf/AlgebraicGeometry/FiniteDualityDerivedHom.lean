@@ -7,6 +7,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
+import Sheaf.AlgebraicGeometry.FinitePushforwardDerivedHomQCoherent
+import Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint
+import Sheaf.AlgebraicGeometry.FiniteTwistedInverseBoundedBelow
+import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
 
 /-!
 # Finite Grothendieck duality as derived internal Hom

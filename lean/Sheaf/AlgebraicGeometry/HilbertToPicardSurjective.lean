@@ -8,6 +8,22 @@ module
 public import Sheaf.AlgebraicGeometry.HilbertToPicardMorphism
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.CartierDivisorFinite
+import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
+import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
+import Sheaf.Paper.EulerCharacteristicWellDefined
+import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+import WeilConjectures.AlgebraicGeometry.DensePoints
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import WeilConjectures.AlgebraicGeometry.Picard.Defs
+import WeilConjectures.AlgebraicGeometry.Picard.Degree
+import WeilConjectures.AlgebraicGeometry.Picard.RationalPoint
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Surjectivity of the Hilbert-to-Picard morphism

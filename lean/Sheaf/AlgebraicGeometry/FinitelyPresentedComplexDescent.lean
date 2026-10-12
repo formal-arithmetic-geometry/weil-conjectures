@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
+import Sheaf.AlgebraicGeometry.FiniteRelationDescent
 
 /-!
 # Descent of bounded finitely presented complexes

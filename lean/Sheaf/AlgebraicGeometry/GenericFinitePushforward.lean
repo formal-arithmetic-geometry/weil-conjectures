@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.GenericFiniteAlgebraSplitting
+import Sheaf.AlgebraicGeometry.IrreducibleLisseStrata
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # Generic lissity of finite direct images

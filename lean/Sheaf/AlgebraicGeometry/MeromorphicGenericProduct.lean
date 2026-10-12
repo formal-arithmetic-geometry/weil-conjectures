@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.TotalQuotientRingMinimalProduct
+import Sheaf.RingTheory.WeakAssZeroDivisors
 
 /-!
 # Meromorphic modules as products at generic points

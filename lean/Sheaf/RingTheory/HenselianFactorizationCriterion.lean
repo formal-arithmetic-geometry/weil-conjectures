@@ -8,6 +8,9 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Coprime.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.RingTheory.EtaleSectionLiftingOfGabberRoots
+import Sheaf.RingTheory.HenselianOfEtaleSectionLifting
+import Sheaf.RingTheory.MonicFactorizationOfIdempotent
 
 /-!
 # Factorization criterion for henselian pairs

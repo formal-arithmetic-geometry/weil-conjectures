@@ -3,6 +3,8 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Flat.Basic
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.LimitFlatModules
 
 /-!
 # Flatness of completed flat modules

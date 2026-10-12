@@ -8,6 +8,13 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.DescendSurjective
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian
+import Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Affineness of a finite surjective image

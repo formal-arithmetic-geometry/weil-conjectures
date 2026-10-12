@@ -8,6 +8,10 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+import Sheaf.AlgebraicGeometry.GeometricallyConnectedFiberEtaleCriterion
+import Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange
+import Sheaf.AlgebraicGeometry.ProperNormalizedFibres
+import Sheaf.AlgebraicGeometry.SteinUniversallyClosedFactor
 
 /-!
 # Stein factorization over an affine base

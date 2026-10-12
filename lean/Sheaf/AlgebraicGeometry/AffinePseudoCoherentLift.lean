@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
+import Sheaf.AlgebraicGeometry.QcOpenDerivedLift
+import Sheaf.RingTheory.ConePseudoCoherent
+import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
 
 /-! # Lifting pseudo-coherent objects from quasi-compact opens of affine schemes
 

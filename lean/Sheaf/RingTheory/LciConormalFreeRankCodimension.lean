@@ -11,6 +11,11 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
+import Sheaf.RingTheory.ConormalModulePrincipalLocalization
+import Sheaf.RingTheory.GlobalCompleteIntersectionLocalRegularSequence
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.RegularSequenceConormal
 
 /-!
 # Rank of the conormal module at a complete intersection point

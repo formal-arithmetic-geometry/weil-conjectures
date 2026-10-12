@@ -7,6 +7,15 @@ module
 
 public import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebra
 public import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.AlgebraicGeometry.AlgebraDirectedColimitFiniteType
+import Sheaf.AlgebraicGeometry.FinitePresentationHomDirectedColimit
+import Sheaf.AlgebraicGeometry.ModuleDirectedColimitFinitePresentation
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraKernelImageIdeal
+import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
 
 /-! # Integral quasi-coherent algebras as directed colimits
 

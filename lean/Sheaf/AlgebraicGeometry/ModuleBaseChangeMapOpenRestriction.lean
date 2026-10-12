@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Module base change maps and open restriction

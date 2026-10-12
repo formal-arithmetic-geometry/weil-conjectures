@@ -2,6 +2,11 @@ module
 
 public import Mathlib.RingTheory.ZariskisMainTheorem
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfReducedStronglyTranscendental
+import Sheaf.RingTheory.QuasiFiniteAtPrimePermanence
+import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
+import Sheaf.RingTheory.QuasiFiniteFourRings
+import Sheaf.RingTheory.QuasiFiniteMonogenicIntegralClosure
 
 @[expose] public section
 

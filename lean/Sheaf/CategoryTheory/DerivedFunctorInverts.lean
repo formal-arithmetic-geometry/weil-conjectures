@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.CategoryTheory.LeftDerivedValueMorphism
+import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 
 /-! # Left derived values invert the multiplicative system
 

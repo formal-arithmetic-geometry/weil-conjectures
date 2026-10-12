@@ -8,6 +8,11 @@ module
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Algebra.MvPolynomial.Basic
+import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Sheaf.RingTheory.FibreDimensionNeighborhood
+import Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound
+import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-! # Noetherian approximation of a relative global complete intersection
 

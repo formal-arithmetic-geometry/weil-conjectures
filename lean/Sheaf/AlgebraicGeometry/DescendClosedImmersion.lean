@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Sheaf.AlgebraicGeometry.DescendAffine
+import Sheaf.Paper.ColimitSurjectiveRingMap
 
 /-!
 # Descent of closed immersions to a stage of an inverse limit

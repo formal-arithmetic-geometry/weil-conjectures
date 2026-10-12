@@ -9,6 +9,10 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Sheaf.FieldTheory.ExistsPBasis
+import Sheaf.FieldTheory.IntersectionSubfieldsSubspace
+import Sheaf.FieldTheory.PBasisDifferentialsBasis
+import Sheaf.FieldTheory.PIndependentDifferentialsIndependent
 
 /-! # Intersection of subfields and differentials
 

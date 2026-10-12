@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Cycles and boundaries of a filtered complex

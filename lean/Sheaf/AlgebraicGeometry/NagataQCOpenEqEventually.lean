@@ -6,6 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.NagataQCOpenEqualityStage
+import Sheaf.Order.DirectedFiniteUpperBound
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Eventual equality of descended quasi-compact opens

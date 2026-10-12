@@ -9,6 +9,7 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Nilpotent.Lemmas
+import Sheaf.FieldTheory.SeparableSplitPurelyInseparableResidueFields
 
 /-!
 # Splitting the reduction of a finite algebra after a separable extension

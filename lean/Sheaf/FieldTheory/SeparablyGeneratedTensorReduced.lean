@@ -8,6 +8,9 @@ module
 public import Sheaf.FieldTheory.SeparableExtension
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Nilpotent.Defs
+import Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced
+import Sheaf.FieldTheory.SeparatingTranscendenceBasisFiniteSubextension
+import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 
 /-!
 # Tensoring a reduced algebra with a separably generated field extension

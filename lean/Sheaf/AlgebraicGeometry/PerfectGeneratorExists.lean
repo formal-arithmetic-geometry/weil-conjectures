@@ -10,6 +10,12 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.PerfectGenerationAffineBase
+import Sheaf.AlgebraicGeometry.PerfectGenerationOpenInduction
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
+import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
 
 /-! # Existence of a single perfect generator
 

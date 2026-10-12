@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPartialLocalFlat
 
 /-!
 # Flatness of relative global complete intersections

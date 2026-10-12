@@ -2,6 +2,8 @@ module
 
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePresentation
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 @[expose] public section
 

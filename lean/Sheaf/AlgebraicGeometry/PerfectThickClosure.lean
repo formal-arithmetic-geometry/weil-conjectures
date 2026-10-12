@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.AlgebraicGeometry.PerfectSummand
+import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
 
 /-! # Perfect complexes form a thick subcategory
 

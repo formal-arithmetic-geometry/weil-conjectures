@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.AffineFiniteTypeGeneratingSections
+import Sheaf.AlgebraicGeometry.AmpleSeparated
+import Sheaf.Paper.NonvanishingSectionTrivializes
+import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Global generation after a sufficiently positive ample twist
 

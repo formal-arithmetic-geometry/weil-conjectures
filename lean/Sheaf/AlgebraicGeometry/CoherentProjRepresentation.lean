@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
+import Sheaf.AlgebraicGeometry.SerreSectionModuleFinite
 
 /-!
 # Coherent modules on the projective line have graded representations

@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+import Sheaf.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
+import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # The symmetric algebra of a quasi-coherent module
 

@@ -10,6 +10,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
+import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
+import Sheaf.AlgebraicGeometry.FormallySmooth
+import Sheaf.AlgebraicGeometry.SmoothArtinianLiftingAtPoint
+import Sheaf.AlgebraicGeometry.Thickening
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Étaleness along a closed subscheme from its infinitesimal neighbourhoods

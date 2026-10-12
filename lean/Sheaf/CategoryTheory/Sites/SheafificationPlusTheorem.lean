@@ -6,6 +6,10 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.Paper.SitePlusSeparated
+import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
+import Sheaf.Paper.PlusConstructionFunctorial
+import Sheaf.Paper.SitePlusOfSeparatedIsSheaf
+import Sheaf.Paper.SitePlusOfSheafIso
 
 /-!
 # The plus construction computes sheafification

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Generic constancy of a subsheaf of a constant finite sheaf

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
 
 /-!
 # Exactness of inverse image on abelian étale sheaves

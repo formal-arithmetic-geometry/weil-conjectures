@@ -8,6 +8,7 @@ module
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Spectral.Hom
 public import Mathlib.Order.Directed
+import Sheaf.Topology.SpectralLimitConstructibleClosed
 
 /-!
 # Directed inverse limits of spectral spaces

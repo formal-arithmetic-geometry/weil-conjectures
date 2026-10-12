@@ -9,6 +9,12 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Ideal.Height
+import Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.DepthInSES
+import Sheaf.RingTheory.DepthLeDimAssociatedPrime
+import Sheaf.RingTheory.SerreConditions
+import Sheaf.RingTheory.SerreCriterionNormal
 
 /-!
 # Associated primes of principal quotients of normal domains

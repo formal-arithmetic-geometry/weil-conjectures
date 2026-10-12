@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+import Sheaf.AlgebraicGeometry.BoundaryUnitExtensionClass
+import Sheaf.AlgebraicGeometry.Modules.BoundaryConnectingNaturality
+import Sheaf.AlgebraicGeometry.Modules.PullbackExtensionClass
 
 /-!
 # Cohomology boundary as composition with an extension class

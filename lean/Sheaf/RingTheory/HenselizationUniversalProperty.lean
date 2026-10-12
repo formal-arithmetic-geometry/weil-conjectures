@@ -7,6 +7,10 @@ module
 
 public import Sheaf.RingTheory.PairHenselization
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
+import Sheaf.RingTheory.EtaleSectionLiftingOfGabberRoots
+import Sheaf.RingTheory.HenselianFactorizationCriterion
+import Sheaf.RingTheory.IdempotentsDeterminedModuloRadical
 
 /-!
 # Universal property of the henselization of a pair

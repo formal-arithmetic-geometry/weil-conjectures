@@ -6,6 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 
 /-!
 # Module sheafification commutes with tensor products

@@ -6,6 +6,10 @@ module
 
 public import Sheaf.Paper.FiniteSplitEtaleHypercover
 public import Sheaf.AlgebraicGeometry.SemiRepresentableObject
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.HypercoverFiniteSimplexLifting
+import Sheaf.AlgebraicGeometry.SRMatchingObjectOneMember
+import Sheaf.Paper.EtaleHypercoverProduct
 
 /-!
 # Finite refinements and local lifting

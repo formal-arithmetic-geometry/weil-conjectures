@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Topology.ClosedPushforwardConstantPresheaf
 public import Mathlib.Topology.Sheaves.Stalks
+import Sheaf.Topology.LocallyConstantGermEvaluation
+import Sheaf.Topology.LocallyConstantMapsSheaf
 
 /-!
 # Stalks of a constant sheaf pushed forward from a closed subset

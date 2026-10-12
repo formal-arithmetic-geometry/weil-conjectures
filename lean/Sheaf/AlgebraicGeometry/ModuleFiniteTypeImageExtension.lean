@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-!
 # Finite type modules: images and extensions

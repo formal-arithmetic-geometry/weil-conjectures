@@ -6,6 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.DVRCompletionRegular
+import Sheaf.RingTheory.IntegerPrimeLocalizations
 
 /-!
 # The integers are a G-ring

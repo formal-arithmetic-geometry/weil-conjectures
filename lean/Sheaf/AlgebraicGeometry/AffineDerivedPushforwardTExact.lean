@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
+import Sheaf.AlgebraicGeometry.AffineDerivedPushforwardConservative
 
 /-!
 # Affine derived direct image preserves and reflects standard cohomological bounds

@@ -9,6 +9,17 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
+import Sheaf.AlgebraicGeometry.EtaleInverseImageColimits
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Sheaf-level proper base change for arbitrary coefficient rings

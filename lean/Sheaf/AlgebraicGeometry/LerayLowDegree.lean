@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.LeraySpectralSequence
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Mathlib.Algebra.Homology.ExactSequence
+import Sheaf.CategoryTheory.LerayFiveTerm
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 
 /-!
 # Low degree terms of the Leray spectral sequence

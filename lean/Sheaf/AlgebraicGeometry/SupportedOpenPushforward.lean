@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 /-! # Perfect pushforward and canonical maps for supported open inclusions
 

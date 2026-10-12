@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
+import Sheaf.AlgebraicGeometry.Modules.ExtPushoutPostcompose
 
 /-!
 # Associativity and the pushout description of Yoneda Ext composition

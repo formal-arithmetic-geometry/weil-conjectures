@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
+import Sheaf.AlgebraicGeometry.ProductTangentSpaceDirectSum
+import Sheaf.AlgebraicGeometry.TangentMapLinear
 
 /-!
 # Differential of group addition at the identity

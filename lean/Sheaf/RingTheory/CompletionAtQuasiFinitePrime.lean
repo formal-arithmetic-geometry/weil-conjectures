@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.FiniteType
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.CompletionFiniteExtension
+import Sheaf.RingTheory.QuasiFiniteAtFiniteSubalgebraAway
 
 @[expose] public section
 

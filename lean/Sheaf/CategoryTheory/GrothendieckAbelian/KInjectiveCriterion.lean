@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.CategoryTheory.HomotopyHomExactOfInjective
+import Sheaf.CategoryTheory.HomotopyLimitVanishing
 
 /-!
 # A bounded-size criterion for K-injectivity

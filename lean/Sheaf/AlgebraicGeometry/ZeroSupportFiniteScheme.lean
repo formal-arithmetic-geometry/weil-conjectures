@@ -14,6 +14,13 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.FiniteSchemeCohomologyTensor
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
+import Sheaf.Paper.SchemeTheoreticSupport
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-! # Finite scheme supporting a coherent module
 

@@ -11,6 +11,7 @@ public import Sheaf.Topology.PresheafModuleStalkFunctor
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.RingTheory.Support
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-!
 # Closed support of a finite type module

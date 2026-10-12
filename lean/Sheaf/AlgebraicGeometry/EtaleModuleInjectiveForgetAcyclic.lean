@@ -6,6 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 
 /-!
 # Underlying abelian acyclicity of injective module-valued étale sheaves

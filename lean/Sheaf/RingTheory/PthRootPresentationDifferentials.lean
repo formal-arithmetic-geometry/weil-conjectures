@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.Algebra.MvPolynomial.CommRing
 public import Mathlib.Algebra.Algebra.ZMod
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
 
 /-!
 # Differentials of a presentation adjoining p-th roots

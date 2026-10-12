@@ -3,6 +3,7 @@ module
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.FiniteType
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
 
 /-!
 # Derivations after finite type localization extensions

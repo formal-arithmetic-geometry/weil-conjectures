@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Sheaf.AlgebraicGeometry.FiberDegreeBound
+import Sheaf.AlgebraicGeometry.BoundsFiberDegreesComp
+import Sheaf.AlgebraicGeometry.FiniteOpenCoverDegreeSum
+import Sheaf.AlgebraicGeometry.ImmersionFiberDegreeOne
+import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
+import Sheaf.AlgebraicGeometry.QuasiFiniteAffineOpenInFinite
+import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 
 /-!
 # Universally bounded fibres from a quasi-compact source

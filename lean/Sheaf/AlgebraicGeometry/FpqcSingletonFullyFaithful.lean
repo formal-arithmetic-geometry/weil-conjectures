@@ -6,6 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
 
 /-!
 # Fully faithful pullback of descent data along an fpqc singleton

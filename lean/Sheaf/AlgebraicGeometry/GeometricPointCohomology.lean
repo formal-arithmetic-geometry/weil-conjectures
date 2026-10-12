@@ -2,6 +2,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 
 /-!
 # Étale cohomology of one geometric point

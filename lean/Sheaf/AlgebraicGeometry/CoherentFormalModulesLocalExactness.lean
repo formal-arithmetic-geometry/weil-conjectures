@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 
 /-! # Restriction and local exactness of coherent formal modules
 

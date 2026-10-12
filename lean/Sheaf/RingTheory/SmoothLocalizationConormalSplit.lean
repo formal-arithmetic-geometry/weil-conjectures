@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import Sheaf.RingTheory.JacobiZariskiQuotientSmooth
 
 /-!
 # Split conormal sequence of a smooth principal localization

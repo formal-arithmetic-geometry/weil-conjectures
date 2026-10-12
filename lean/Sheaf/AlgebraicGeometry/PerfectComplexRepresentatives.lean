@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # A set of representatives for perfect complexes
 

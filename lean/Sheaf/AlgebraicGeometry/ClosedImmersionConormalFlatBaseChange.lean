@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Conormal sheaves under flat base change
 Source: Stacks Project, Morphisms, Lemma 0473 (morphisms-lemma-conormal-functorial-flat),

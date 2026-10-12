@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.Paper.FiniteHypercoverDescent
+import Sheaf.Paper.FiniteSplitHypercoverRefinement
+import Sheaf.Paper.HypercoverCohomology
+import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
 
 /-!
 # Continuity of etale cohomology at inverse limits

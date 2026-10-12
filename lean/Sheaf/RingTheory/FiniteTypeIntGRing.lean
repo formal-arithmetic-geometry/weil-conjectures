@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.FiniteType
+import Sheaf.RingTheory.FiniteTypeGRing
+import Sheaf.RingTheory.IntGRing
 
 /-!
 # Finitely generated integer algebras are G-rings

@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.TensorGeneratingSections
 
 /-!
 # Tensor products of globally generated invertible modules

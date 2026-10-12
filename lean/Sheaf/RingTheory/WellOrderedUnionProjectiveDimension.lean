@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.Order.RelClasses
 public import Mathlib.LinearAlgebra.Quotient.Defs
+import Sheaf.Algebra.ProjectiveDimensionWellDefined
+import Sheaf.RingTheory.ProjectiveDimensionSESKernel
 
 /-!
 # Projective dimension of a well-ordered union of submodules

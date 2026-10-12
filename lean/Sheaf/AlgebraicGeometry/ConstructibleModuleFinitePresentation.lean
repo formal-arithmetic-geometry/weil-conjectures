@@ -9,6 +9,13 @@ public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSupport
+import Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks
+import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.Topology.SpectralConstructibleFiniteIntersection
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # Finite presentations of constructible etale module sheaves

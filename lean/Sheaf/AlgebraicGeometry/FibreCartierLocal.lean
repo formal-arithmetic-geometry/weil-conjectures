@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 
 /-!
 # Local fibre criterion for relative effective Cartier divisors

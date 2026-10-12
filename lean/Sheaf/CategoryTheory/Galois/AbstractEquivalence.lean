@@ -7,6 +7,10 @@ module
 
 public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
 public import Mathlib.CategoryTheory.Galois.Equivalence
+import Sheaf.CategoryTheory.Galois.AutProfinite
+import Sheaf.CategoryTheory.Galois.GaloisTransitive
+import Sheaf.CategoryTheory.Galois.StacksGaloisAxioms
+import Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists
 
 /-!
 # The abstract equivalence theorem for Stacks Galois categories

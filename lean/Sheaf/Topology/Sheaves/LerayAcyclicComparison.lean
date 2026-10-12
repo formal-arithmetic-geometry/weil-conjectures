@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Topology.Sheaves.PushforwardCohomology
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.Topology.TopologicalLeraySpectralSequence
 
 /-!
 # Leray comparison for an acyclic abelian sheaf

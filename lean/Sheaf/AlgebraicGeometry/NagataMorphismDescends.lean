@@ -6,6 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.NagataMorphismDescent
+import Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec
+import Sheaf.RingTheory.FilteredColimitFiniteData
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # The selected finite-stage morphism recovers the original morphism

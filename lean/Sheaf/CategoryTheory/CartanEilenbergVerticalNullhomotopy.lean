@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.CartanEilenbergExists
 public import Mathlib.Algebra.Homology.Homotopy
+import Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly
 
 /-! # Vertical null-homotopy of a Cartan--Eilenberg defect
 

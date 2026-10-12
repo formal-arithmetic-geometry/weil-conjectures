@@ -6,6 +6,8 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 
 /-!
 # Quasi-finite morphisms and finite fibres

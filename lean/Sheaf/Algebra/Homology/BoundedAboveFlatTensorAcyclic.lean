@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 
 /-!
 # Tensoring bounded-above acyclic complexes with bounded-above flat complexes

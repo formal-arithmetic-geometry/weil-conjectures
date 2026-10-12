@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Polynomial.Monic
 public import Mathlib.RingTheory.Coprime.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.RingTheory.HenselianFactorizationCriterion
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Unique lifting of coprime monic factorizations modulo locally nilpotent ideals

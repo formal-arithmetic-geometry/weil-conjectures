@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.DivisorModule
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.AlgebraicGeometry.PointTangentSeparationClosedImmersion
+import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
+import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # The dimension-drop criterion for very ampleness on a curve

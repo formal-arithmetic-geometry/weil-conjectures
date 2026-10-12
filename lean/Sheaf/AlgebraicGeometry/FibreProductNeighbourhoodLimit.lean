@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
 
 /-!
 # Base change and the neighbourhood limit

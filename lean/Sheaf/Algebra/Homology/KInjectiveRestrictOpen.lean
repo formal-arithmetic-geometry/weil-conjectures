@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-!
 # Restriction to an open preserves K-injective complexes

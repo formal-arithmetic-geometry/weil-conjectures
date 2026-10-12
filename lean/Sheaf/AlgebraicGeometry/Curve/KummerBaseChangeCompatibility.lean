@@ -10,6 +10,14 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import Sheaf.AlgebraicGeometry.GmPicardPullback
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.PicAffineBaseChangeCompatibility
+import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.AlgebraicGeometry.Curve.Brauer
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Kummer compatibility under algebraically closed base change

@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalks of topological inverse images

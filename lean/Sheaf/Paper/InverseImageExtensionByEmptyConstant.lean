@@ -2,6 +2,8 @@ module
 
 public import Sheaf.Topology.SetsExtensionByEmpty
 public import Mathlib.Topology.Sheaves.Functors
+import Sheaf.Paper.ConstantSheafOpenMaps
+import Sheaf.Topology.SetsExtensionByEmptyAdjunction
 
 /-!
 # Inverse image of extension by the empty set of a constant sheaf

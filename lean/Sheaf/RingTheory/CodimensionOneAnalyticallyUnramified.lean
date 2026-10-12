@@ -9,6 +9,8 @@ public import Sheaf.RingTheory.AnalyticallyUnramified
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.Ideal.Colon
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.LocalCompletionQuotient
 
 /-!
 # DVR localizations of the completion at associated primes

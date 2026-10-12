@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Trunc
 public import Mathlib.Algebra.MvPolynomial.Eval
+import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 
 /-!
 # Evaluation of power series in an adically complete ring

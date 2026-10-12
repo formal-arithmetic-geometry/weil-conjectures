@@ -7,6 +7,11 @@ module
 
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.Etale.Finite
+import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
+import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
+import Sheaf.RingTheory.HenselianEtaleRetraction
+import Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition
+import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
 
 /-!
 # Finite étale algebras over a henselian local ring

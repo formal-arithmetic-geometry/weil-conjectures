@@ -9,6 +9,15 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine
+import Sheaf.AlgebraicGeometry.AmpleIdealSection
+import Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite
+import Sheaf.AlgebraicGeometry.ConductorSections
+import Sheaf.AlgebraicGeometry.GlueComponentLineBundles
+import Sheaf.AlgebraicGeometry.IntegralDimOneAmple
+import Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover
+import Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine
 
 /-! # Ample invertible modules on reduced Noetherian schemes of dimension at most one
 

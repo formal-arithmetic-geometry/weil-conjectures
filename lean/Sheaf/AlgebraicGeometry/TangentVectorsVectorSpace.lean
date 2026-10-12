@@ -9,6 +9,7 @@ public import Mathlib.Algebra.DualNumber
 public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
+import Sheaf.AlgebraicGeometry.DualNumberSchemePushout
 
 /-!
 # The vector space of dual-number tangent vectors

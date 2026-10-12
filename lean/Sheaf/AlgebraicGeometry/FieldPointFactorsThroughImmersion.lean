@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
+import Sheaf.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion
 
 /-!
 # Field-valued points factor through immersions

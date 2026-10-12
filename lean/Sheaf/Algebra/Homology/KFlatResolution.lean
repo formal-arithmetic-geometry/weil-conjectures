@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Algebra.Homology.KFlatTelescopeClosure
+import Sheaf.Algebra.Homology.TruncationTelescope
 
 /-!
 # K-flat resolutions on a ringed site

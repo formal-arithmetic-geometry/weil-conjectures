@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Topology.Sheaves.Stalks
 public import Mathlib.Topology.Sheaves.Functors
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Stalks of closed-subset pushforward for abelian sheaves

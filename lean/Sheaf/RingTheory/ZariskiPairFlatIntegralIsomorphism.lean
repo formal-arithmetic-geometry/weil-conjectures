@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.ZariskiPairRankOnePropagation
 
 /-! # Flat integral finitely presented algebra over a Zariski pair
 

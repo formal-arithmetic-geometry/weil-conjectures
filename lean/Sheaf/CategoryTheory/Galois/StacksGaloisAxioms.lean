@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.CategoryTheory.Galois.StacksGaloisCategory
+import Sheaf.CategoryTheory.Galois.CoproductMorphismComponents
 
 /-!
 # Consequences of the Stacks Galois category axioms

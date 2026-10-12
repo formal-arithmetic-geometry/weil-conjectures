@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.QuasiFiniteLocalDimension
 
 /-!
 # Dimension of a quasi-finite algebra over affine space

@@ -7,6 +7,9 @@ module
 
 public import Sheaf.RingTheory.PopescuResolution
 public import Sheaf.RingTheory.StrictlyStandardElement
+import Sheaf.RingTheory.PopescuDesingularizeLiftingApply
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.StrictlyStandardBaseChange
 
 /-!
 # Lifting a Popescu resolution modulo eighth powers

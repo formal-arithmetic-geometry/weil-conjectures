@@ -2,6 +2,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
+import Sheaf.AlgebraicGeometry.Curve.RetractAssertions
+import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
 
 @[expose] public section
 universe u

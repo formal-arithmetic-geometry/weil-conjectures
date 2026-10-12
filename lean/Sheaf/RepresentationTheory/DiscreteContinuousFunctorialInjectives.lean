@@ -7,6 +7,9 @@ module
 
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives
+import Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings
+import Sheaf.RepresentationTheory.OpenStabilizerAdjunction
 
 /-!
 # Functorial injective embeddings of discrete continuous representations

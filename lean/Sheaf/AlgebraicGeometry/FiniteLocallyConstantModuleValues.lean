@@ -6,6 +6,13 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.FiniteTypeEtaleModuleStalk
+import Sheaf.AlgebraicGeometry.LocallyConstantFiniteValuesFiniteType
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Finite values of locally constant etale module sheaves

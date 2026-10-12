@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
+import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
+import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Building supported derived objects from a perfect complex
 

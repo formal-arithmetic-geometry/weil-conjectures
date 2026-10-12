@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Topology.Sheaves.Stalks
 public import Mathlib.CategoryTheory.Sites.LeftExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Sheafification of cohomology over open subsets
 

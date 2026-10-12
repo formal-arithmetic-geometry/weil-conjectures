@@ -9,6 +9,11 @@ public import Sheaf.RingTheory.PairHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat
+import Sheaf.RingTheory.FlatColimitRings
+import Sheaf.RingTheory.HenselianFactorizationCriterion
+import Sheaf.RingTheory.PairHenselizationFlatQuotients
 
 /-!
 # Noetherian henselization of a pair and its completion

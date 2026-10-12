@@ -3,6 +3,8 @@ module
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.FiniteFreeMapResidueLocalization
+import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
 
 @[expose] public section
 

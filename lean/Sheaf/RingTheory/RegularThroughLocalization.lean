@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 
 /-!
 # Regularity through localization

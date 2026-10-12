@@ -13,6 +13,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.FinitePresentation
+import Sheaf.Algebra.LimitFinitePresentation
+import Sheaf.Paper.DirectedColimitBaseChangeElementwise
 
 /-!
 # Finite-presentation approximation of modules

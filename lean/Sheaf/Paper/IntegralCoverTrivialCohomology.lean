@@ -2,6 +2,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Sheaf.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed
 
 /-!
 # Integral covers with trivial étale cohomology

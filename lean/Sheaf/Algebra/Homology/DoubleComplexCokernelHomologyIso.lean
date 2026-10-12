@@ -10,6 +10,11 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Algebra.Homology.RowCycleLiftsToZigzag
+import Sheaf.Algebra.Homology.ZigzagModule
+import Sheaf.Algebra.Homology.ZigzagModuleFunctorial
+import Sheaf.Algebra.Homology.ZigzagToRowCokernel
+import Sheaf.Algebra.Homology.ZigzagTrivialIfRowBoundary
 
 /-!
 # Homology of cokernel complexes of an exact double complex

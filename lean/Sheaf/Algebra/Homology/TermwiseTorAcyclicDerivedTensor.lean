@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!
 # Termwise Tor acyclicity computes derived tensor

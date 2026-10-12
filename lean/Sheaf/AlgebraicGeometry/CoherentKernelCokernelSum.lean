@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeSubKernel
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
 
 /-! # Closure properties of coherent modules
 

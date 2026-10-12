@@ -3,6 +3,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
 
 /-!
 # Base change of a relative global complete intersection

@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.Variety
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+import Sheaf.Paper.EulerCharacteristicWellDefined
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-!
 # Global sections of a proper variety

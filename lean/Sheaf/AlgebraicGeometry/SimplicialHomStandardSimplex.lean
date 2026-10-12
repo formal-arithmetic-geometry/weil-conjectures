@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SimplicialHomObject
 public import Mathlib.AlgebraicTopology.SimplicialSet.Boundary
+import Sheaf.CategoryTheory.ProperFaceMatchingObject
+import Sheaf.CategoryTheory.SimplicialMatchingObject
 
 /-!
 # Hom objects of standard simplices and their boundaries

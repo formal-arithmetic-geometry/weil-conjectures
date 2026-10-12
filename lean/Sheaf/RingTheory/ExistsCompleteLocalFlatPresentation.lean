@@ -9,6 +9,15 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.CohenRing
+import Sheaf.RingTheory.CohenStructurePowerSeriesSurjection
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import Sheaf.RingTheory.PowerSeriesQuotientVariables
+import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Flat presentations of maps of complete Noetherian local rings

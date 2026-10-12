@@ -6,6 +6,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.RingTheory.Valuation.ValuationRing
+import Sheaf.AlgebraicGeometry.FibreCartierLocal
+import Sheaf.AlgebraicGeometry.NonzeroSectionIntegralCartier
+import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 
 /-!
 # Zero locus over a valuation base

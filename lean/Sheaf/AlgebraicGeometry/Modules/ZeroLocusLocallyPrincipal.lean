@@ -6,6 +6,7 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-!
 # The zero locus of a morphism of invertible modules is locally principal

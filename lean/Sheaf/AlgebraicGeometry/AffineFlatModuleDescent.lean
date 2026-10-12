@@ -9,6 +9,15 @@ public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import Sheaf.RingTheory.ColimitCategoryFpAlgebras
+import Sheaf.RingTheory.ColimitEventuallyFlat
+import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
+import Sheaf.RingTheory.FlatModuleAtPrime
+import Sheaf.RingTheory.LimitModuleFinitePresentation
+import Sheaf.RingTheory.OpenFlatLocus
 
 /-!
 # Eventual flatness for finitely presented modules over affine inverse limits

@@ -9,6 +9,14 @@ public import Sheaf.AlgebraicGeometry.SymmetricProductProperties
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.RingTheory.MvPolynomial.Symmetric.Defs
+import Sheaf.AlgebraicGeometry.ProjectiveLinePowerAffineCharts
+import Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+import Sheaf.AlgebraicGeometry.SymmetricProductOverBase
+import Sheaf.AlgebraicGeometry.SymmetricProductPolynomial
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Compactification.ProjectiveSpace
 
 /-!
 # Finiteness of the symmetric-product morphism

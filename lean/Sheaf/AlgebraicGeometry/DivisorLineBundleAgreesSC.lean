@@ -2,6 +2,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DivisorModule
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import Sheaf.AlgebraicGeometry.DivisorModuleLocal
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 
 /-!
 # Agreement of divisor modules and effective-Cartier line bundles

@@ -6,6 +6,7 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
 
 /-!
 # Exactness of extension by zero on the small Zariski site

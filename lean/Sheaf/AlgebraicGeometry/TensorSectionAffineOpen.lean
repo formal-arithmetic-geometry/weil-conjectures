@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.PositiveTensorFamily
+import Sheaf.AlgebraicGeometry.AffineCapSectionOpen
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-! # Tensor sections and affine nonvanishing loci
 

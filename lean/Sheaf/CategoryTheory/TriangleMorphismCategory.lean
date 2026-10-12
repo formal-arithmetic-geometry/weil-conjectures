@@ -7,6 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.IsSaturatedTriangulatedMultiplicativeSystem
 public import Mathlib.CategoryTheory.Limits.Final
+import Sheaf.CategoryTheory.TriangleCommonRefinement
+import Sheaf.CategoryTheory.Triangulated.DenominatorTriangleCompletion
 
 /-! # Incoming morphisms of distinguished triangles
 

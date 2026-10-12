@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.FieldTheory.Perfect
+import Sheaf.FieldTheory.ExistsPBasis
+import Sheaf.FieldTheory.PBasisDifferentialsBasis
 
 /-!
 # Vanishing differentials over a perfect field

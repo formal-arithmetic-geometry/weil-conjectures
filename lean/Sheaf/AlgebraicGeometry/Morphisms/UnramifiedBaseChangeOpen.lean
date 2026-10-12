@@ -1,6 +1,7 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+import Sheaf.AlgebraicGeometry.Thickening
 
 /-!
 # Base change and restriction of unramified morphisms

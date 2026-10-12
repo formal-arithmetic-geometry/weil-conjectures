@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
 # Composition of morphisms of sites

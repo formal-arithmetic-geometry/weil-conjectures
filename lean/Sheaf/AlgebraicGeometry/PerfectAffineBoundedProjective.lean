@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
+import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 
 /-! # Perfect objects on affine schemes
 

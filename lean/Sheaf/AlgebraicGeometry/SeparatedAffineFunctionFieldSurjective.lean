@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.FunctionField
+import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
+import Sheaf.RingTheory.LocalDomainDimOnePrincipalLocalization
 
 /-!
 # Separated affine and local charts surject onto the function field

@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 
 /-!
 # Inverse image over a geometric point is constant

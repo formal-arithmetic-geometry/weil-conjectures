@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+import Sheaf.Algebra.Homology.LowerTruncationStepSES
 
 /-!
 # Successive lower truncation triangle

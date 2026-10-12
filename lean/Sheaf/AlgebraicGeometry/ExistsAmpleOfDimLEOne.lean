@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.AmpleOnReductionNoetherian
+import Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne
+import Sheaf.AlgebraicGeometry.PicardLift
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-! # Ample invertible modules in dimension at most one
 

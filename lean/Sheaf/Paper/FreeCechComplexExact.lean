@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Cech
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Sheaf.Paper.PowerSetComplexContractible
 
 /-!
 # Exactness of the free Čech complex on the small étale site

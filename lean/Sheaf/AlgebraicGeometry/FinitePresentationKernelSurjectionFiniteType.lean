@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
 
 /-!
 # Finite type of kernels of finite free surjections

@@ -6,6 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact
+import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
+import Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
 
 /-!
 # Descent of affine morphisms along fpqc coverings

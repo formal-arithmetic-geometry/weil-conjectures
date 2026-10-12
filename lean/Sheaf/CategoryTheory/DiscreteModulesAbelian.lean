@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.Topology.Connected.TotallyDisconnected
 public import Mathlib.Topology.Separation.Hausdorff
 public import Sheaf.RepresentationTheory.DiscreteContinuousRep
+import Sheaf.RepresentationTheory.DiscreteContinuousInjectives
+import Sheaf.RepresentationTheory.DiscreteRep
 
 /-!
 # Discrete modules with profinite group action

@@ -7,6 +7,13 @@ module
 
 public import Sheaf.RingTheory.SerreConditions
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.KollarLocalDichotomy
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
+import Sheaf.RingTheory.RegularLocalDimOneIffNormal
+import Sheaf.RingTheory.SerreCriterionReduced
 
 /-!
 # Serre's criterion for normality

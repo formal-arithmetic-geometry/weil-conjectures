@@ -7,6 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
+import Sheaf.AlgebraicGeometry.DescendFinite
+import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import Sheaf.AlgebraicGeometry.LimitContainedInConstructible
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Descent of finite locally free morphisms

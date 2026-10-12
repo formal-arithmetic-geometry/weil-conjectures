@@ -7,6 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.PolynomialDistinctLinearCRT
 
 /-!
 # Evaluation decomposition of a separable polynomial quotient

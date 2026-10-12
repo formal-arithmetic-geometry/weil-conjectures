@@ -3,6 +3,10 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.MvPolynomial.Basic
+import Sheaf.RingTheory.SmoothLocalizationConormalSplit
+import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
+import Sheaf.RingTheory.SymmetricAlgebraSmooth
+import Sheaf.RingTheory.SymmetricProjectivePresentationConormal
 
 /-!
 # Smooth presentation with free conormal module

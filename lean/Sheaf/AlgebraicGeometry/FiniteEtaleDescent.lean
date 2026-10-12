@@ -6,6 +6,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteEtaleDescentData
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+import Sheaf.AlgebraicGeometry.AffineFpqcDescent
+import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
+import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
+import Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Effective etale descent for finite etale schemes

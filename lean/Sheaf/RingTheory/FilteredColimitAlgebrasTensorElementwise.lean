@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
 
 /-!
 # Base change of a filtered colimit of algebras, elementwise

@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 
 /-! # Tensor products, scalar extension and stalks of lisse sheaves
 

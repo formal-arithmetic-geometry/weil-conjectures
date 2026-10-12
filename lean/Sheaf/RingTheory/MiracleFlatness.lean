@@ -9,6 +9,11 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Sheaf.Paper.FlatLocalCriterionNonzerodivisor
+import Sheaf.RingTheory.DepthQuotientNonzerodivisor
+import Sheaf.RingTheory.IsRegularOfDimensionDrop
+import Sheaf.RingTheory.MaximalChainLengthOfDepth
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Miracle flatness

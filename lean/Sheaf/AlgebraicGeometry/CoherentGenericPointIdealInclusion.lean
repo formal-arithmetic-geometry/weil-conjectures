@@ -10,6 +10,23 @@ public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentHomsOverOpen
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
+import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.SectionsAnnihilatedByIdeal
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # A coherent ideal inclusion near a generic point
 

@@ -8,6 +8,9 @@ module
 public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Spectral.Hom
 public import Sheaf.Topology.SetsInverseImageComposition
+import Sheaf.Topology.SpectralDirectedLimit
+import Sheaf.Topology.SpectralLimitConstructibleClosedNonempty
+import Sheaf.Topology.SpectralLimitDescendOpens
 
 /-!
 # Sections of inverse images on spectral limits

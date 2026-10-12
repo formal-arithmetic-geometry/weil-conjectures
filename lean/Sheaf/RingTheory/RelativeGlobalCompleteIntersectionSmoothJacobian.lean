@@ -9,6 +9,11 @@ public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import Sheaf.LinearAlgebra.Matrix.CauchyBinet
+import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionConormalFree
+import Sheaf.RingTheory.SmoothLocalizationConormalSplit
 
 /-!
 # The Jacobian criterion for a relative global complete intersection

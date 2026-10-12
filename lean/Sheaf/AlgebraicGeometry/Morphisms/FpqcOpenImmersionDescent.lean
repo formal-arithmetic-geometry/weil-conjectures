@@ -6,6 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
 
 /-!
 # Descent of open immersions along an fpqc covering

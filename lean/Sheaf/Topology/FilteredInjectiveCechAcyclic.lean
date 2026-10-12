@@ -3,6 +3,10 @@ module
 public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.CategoryTheory.SiteCechComplex
+import Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets
+import Sheaf.CategoryTheory.SiteCechVanishingCriterion
+import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
+import Sheaf.Topology.SheavesDirectedColimitSections
 
 @[expose] public section
 

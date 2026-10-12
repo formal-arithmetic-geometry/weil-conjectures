@@ -8,6 +8,12 @@ module
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
+import Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact
+import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.CategoryTheory.GrothendieckComposablePair
+import Sheaf.CategoryTheory.GrothendieckSpectralSequence
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Leray spectral sequence for a quasi-coherent module on a scheme

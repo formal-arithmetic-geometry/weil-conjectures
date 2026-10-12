@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Closed subsets are cut out by quasi-coherent ideals
 

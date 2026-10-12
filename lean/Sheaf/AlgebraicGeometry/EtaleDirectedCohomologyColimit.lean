@@ -6,6 +6,16 @@ Authors: SHEAF group U1
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.EtaleSectionsFilteredColimit
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import Sheaf.CategoryTheory.InjectiveSheafCechAcyclic
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
 # Directed colimits of derived etale cohomology at coefficient size

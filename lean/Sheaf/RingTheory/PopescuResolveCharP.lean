@@ -7,6 +7,24 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Sheaf.RingTheory.PopescuResolution
+import Sheaf.AlgebraicGeometry.Ogoma
+import Sheaf.RingTheory.EssentiallySmooth
+import Sheaf.RingTheory.EssentiallySmoothComp
+import Sheaf.RingTheory.FactorsThroughSmooth
+import Sheaf.RingTheory.ImprovePresentation
+import Sheaf.RingTheory.PopescuDelocalizeHeightZero
+import Sheaf.RingTheory.PopescuEnlargeSolutionModulo
+import Sheaf.RingTheory.PopescuLiftSolution
+import Sheaf.RingTheory.PopescuSolutionModulo
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularRingSmoothAscent
+import Sheaf.RingTheory.RegularSequencePolynomialVariables
+import Sheaf.RingTheory.RegularSequencePowers
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SingularIdealLocalizationSmooth
+import Sheaf.RingTheory.SmoothFreeDifferentialsStrictlyStandardPower
+import Sheaf.RingTheory.StrictlyStandardBaseChange
+import Sheaf.RingTheory.StrictlyStandardElement
 
 /-!
 # Resolving Popescu's local problem in positive characteristic

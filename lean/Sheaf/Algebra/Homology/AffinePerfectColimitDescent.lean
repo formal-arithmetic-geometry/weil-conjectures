@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.Algebra.FinitePresentationColimit
 
 /-! # Affine descent of bounded finite projective complexes
 

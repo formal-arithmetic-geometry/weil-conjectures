@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ExactSequence
+import Sheaf.RingTheory.DepthInSES
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-!
 # Finite free resolutions ending in maximal Cohen–Macaulay modules

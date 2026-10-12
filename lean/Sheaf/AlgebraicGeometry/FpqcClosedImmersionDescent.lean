@@ -7,6 +7,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.FpqcAffineDescent
+import Sheaf.AlgebraicGeometry.Morphisms.ClosedImmersionOfSurjectiveStructureStalks
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-!
 # Descent of closed immersions along fpqc coverings

@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Dimension of an irreducible locally algebraic scheme

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.DirectSum.Decomposition
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Finiteness.Defs
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Finite homogeneous generators of a graded module

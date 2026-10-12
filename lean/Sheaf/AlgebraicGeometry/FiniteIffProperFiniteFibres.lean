@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.FiniteIsQuasiFinite
+import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres
+import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 
 /-!
 # Finite morphisms and proper morphisms with finite fibres

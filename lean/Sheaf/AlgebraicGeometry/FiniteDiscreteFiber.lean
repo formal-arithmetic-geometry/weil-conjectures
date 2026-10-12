@@ -6,6 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
+import Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum
 
 /-!
 # Finite fibres of locally finite type morphisms

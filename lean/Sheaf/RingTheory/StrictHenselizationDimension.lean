@@ -7,6 +7,11 @@ module
 
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.Etale.LocalDimension
+import Sheaf.RingTheory.FilteredColimitPrimeChainDimension
+import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
+import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-!
 # Krull dimension of a strict henselization

@@ -6,6 +6,9 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.RingTheory.CohenRing
+import Sheaf.RingTheory.AdicCompletionNoetherianOfQuotient
+import Sheaf.RingTheory.Flat.FlatModulePowers
+import Sheaf.RingTheory.FlatLocalExtensionGivenResidueField
 
 /-!
 # Existence of Cohen rings

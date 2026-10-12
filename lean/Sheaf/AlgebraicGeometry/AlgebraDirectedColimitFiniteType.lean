@@ -7,6 +7,16 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteTypeQuasiCoherentSubalgebras
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.ModuleDirectedColimitFinitePresentation
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraKernelImageIdeal
+import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
 
 /-! # Quasi-coherent algebras as directed colimits of finite type subalgebras
 

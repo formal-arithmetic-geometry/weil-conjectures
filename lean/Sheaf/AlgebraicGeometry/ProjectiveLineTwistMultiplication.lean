@@ -8,6 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Multiplication and coordinate loci of twists on the projective line

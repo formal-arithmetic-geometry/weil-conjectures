@@ -10,6 +10,12 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.DepthLeDimAssociatedPrime
+import Sheaf.RingTheory.DepthQuotSMulTop
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
+import Sheaf.RingTheory.SerreConditions
+import Sheaf.RingTheory.SerreCriterionNormal
 
 /-! # Openness of the normal locus
 

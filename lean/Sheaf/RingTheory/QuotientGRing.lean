@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.RingTheory.LocalCompletionQuotient
+import Sheaf.RingTheory.RegularBaseChange
 
 /-!
 # Quotients of G-rings

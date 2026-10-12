@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+import Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
 
 /-! # Universal factorization before Stein connectedness
 

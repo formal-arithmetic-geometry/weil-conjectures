@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.RingTheory.SmoothOverProductRing
 
 /-!
 # Filtered colimits of smooth algebras and products

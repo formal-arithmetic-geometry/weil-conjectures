@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+import Sheaf.CategoryTheory.Sites.ZariskiExtTorsor
 
 /-!
 # Torsor classes as boundaries of the representative extension

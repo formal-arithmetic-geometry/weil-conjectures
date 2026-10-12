@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.RingTheory.Finiteness.Basic
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-!
 # Finite global generators on an affine scheme

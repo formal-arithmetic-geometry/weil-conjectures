@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+import Sheaf.AlgebraicGeometry.InjectiveModuleAbelianAcyclic
+import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
 
 /-!
 # Higher direct images of an injective module sheaf

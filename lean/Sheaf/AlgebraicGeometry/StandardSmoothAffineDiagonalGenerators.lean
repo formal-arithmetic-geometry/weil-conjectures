@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.RingTheory.Smooth.StandardSmooth
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Mathlib.RingTheory.Regular.RegularSequence
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+import WeilConjectures.Mathlib.RingTheory.RingHom.StandardSmooth
 
 /-!
 # Regular generators for a standard smooth affine diagonal

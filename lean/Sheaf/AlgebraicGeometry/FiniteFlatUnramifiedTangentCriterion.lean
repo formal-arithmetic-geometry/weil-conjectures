@@ -3,6 +3,8 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality
+import Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion
 
 /-!
 # Tangent criterion for etaleness of a finite locally free morphism

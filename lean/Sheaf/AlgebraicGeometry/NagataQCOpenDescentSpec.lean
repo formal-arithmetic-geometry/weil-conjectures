@@ -6,6 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.NagataQCOpenDescent
+import Sheaf.Order.DirectedFiniteUpperBound
 
 /-!
 # Properties of the descended quasi-compact open

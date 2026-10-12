@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
+import Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # The graded Koszul resolution on two polynomial variables

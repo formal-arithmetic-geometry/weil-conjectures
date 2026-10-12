@@ -9,6 +9,8 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.Topology.Sheaves.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Topology.AbelianSheafShortExactStalkwise
+import Sheaf.Topology.ClosedPushforwardAbelianStalks
 
 /-!
 # Exactness of closed-subset pushforward for abelian sheaves

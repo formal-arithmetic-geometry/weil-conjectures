@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import Sheaf.Algebra.Homology.KFlatPullback
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Topology.InverseImageStalk
 
 /-! # Derived pullback of modules on schemes
 

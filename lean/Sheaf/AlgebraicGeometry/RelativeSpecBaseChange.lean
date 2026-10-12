@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
+import Sheaf.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Relative Spec commutes with base change
 

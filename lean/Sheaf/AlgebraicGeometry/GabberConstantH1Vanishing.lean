@@ -10,6 +10,9 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.FiniteEtaleClosedSubschemeSection
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Gabber's vanishing of first constant étale cohomology

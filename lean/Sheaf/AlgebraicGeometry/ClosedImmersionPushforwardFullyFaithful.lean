@@ -2,6 +2,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.ClosedPushforwardStalks
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Pushforward along a closed immersion is fully faithful

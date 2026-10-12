@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.ZariskisMainAway
 
 /-!
 # Local dimension inequality for quasi-finite ring maps

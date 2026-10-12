@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.CategoryTheory.PathCategory.Basic
+import Sheaf.AlgebraicGeometry.DescendSurjective
+import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
+import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Finite-presentation data at an inverse limit

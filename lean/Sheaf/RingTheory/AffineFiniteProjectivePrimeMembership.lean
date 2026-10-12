@@ -3,6 +3,7 @@ module
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.FreePrimeMembership
 
 /-! # Prime membership in a finite projective module is detected at the prime localization
 

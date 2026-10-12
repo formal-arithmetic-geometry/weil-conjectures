@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.CategoryTheory.Preadditive.Projective.Basic
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Algebra.Homology.PreciseVanishing
 
 /-!
 # Splitting and uniqueness for a derived triangle with separated degrees

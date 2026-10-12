@@ -5,6 +5,8 @@ public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Ideal.Operations
+import Sheaf.Algebra.FlatTorIdealCriterion
+import Sheaf.Paper.TorLongExactFirstVariable
 
 /-! # Injectivity modulo the maximal ideal into a flat module (Noetherian local)
 

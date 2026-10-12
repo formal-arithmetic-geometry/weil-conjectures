@@ -6,6 +6,8 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.FiberDegreeBound
+import Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints
+import Sheaf.RingTheory.NakayamaNilpotent
 
 /-!
 # Fibre degree bounds under composition

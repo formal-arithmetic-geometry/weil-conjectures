@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Enough injectives for modules on a ringed space

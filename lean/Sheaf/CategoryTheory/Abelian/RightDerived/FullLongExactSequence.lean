@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
 
 /-!
 # The full long exact sequence of right derived functors

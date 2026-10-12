@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural
+import Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 
 /-!
 # Etale sheaves on an algebraically closed spectrum are constant

@@ -5,6 +5,9 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 
 /-!
 # Dimension of a finite type domain over a field

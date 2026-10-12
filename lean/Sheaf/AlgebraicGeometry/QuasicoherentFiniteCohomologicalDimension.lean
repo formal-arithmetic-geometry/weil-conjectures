@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AlternatingCechComputes
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-!
 # Finite cohomological dimension for quasi-coherent modules

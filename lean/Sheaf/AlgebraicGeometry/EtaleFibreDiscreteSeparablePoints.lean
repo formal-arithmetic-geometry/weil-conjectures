@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.FieldTheory.Separable
+import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
 
 /-!
 # The points of an etale fibre

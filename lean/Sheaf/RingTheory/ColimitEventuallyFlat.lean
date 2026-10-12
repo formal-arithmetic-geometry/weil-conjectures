@@ -15,6 +15,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Localization.Defs
+import Sheaf.RingTheory.FlatOfLocalCriterionBaseChange
 
 /-!
 # Flatness at a stage of a directed colimit

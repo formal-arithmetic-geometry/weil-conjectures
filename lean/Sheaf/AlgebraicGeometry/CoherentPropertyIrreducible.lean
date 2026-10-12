@@ -13,6 +13,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.LinearAlgebra.Dimension.Finite
+import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
+import Sheaf.AlgebraicGeometry.CoherentGenericPointIdealInclusion
+import Sheaf.AlgebraicGeometry.IntegralIdealGenericStalk
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-! # Property devissage on an irreducible closed support
 

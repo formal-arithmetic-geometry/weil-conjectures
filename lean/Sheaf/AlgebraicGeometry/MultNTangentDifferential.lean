@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
+import Sheaf.AlgebraicGeometry.GroupAdditionTangentDifferential
 
 /-!
 # Differential of multiplication by d

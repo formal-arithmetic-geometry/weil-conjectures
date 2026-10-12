@@ -6,6 +6,10 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperUniversallyClosedImage
+import Sheaf.AlgebraicGeometry.ProperCoproduct
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Finite unions and proper preimages of closed subsets proper over a base

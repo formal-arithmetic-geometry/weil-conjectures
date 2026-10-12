@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.RingTheory.HenselianEtaleRetraction
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Maps from ind-étale algebras into henselian local rings

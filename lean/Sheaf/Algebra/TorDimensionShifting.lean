@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 public import Mathlib.CategoryTheory.Monoidal.Tor
+import Sheaf.Algebra.TorDimensionShiftNatural
 
 /-!
 # Two-step dimension shifting for Tor

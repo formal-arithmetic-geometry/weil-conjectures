@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Finite generation of geometric stalks of finite type module sheaves

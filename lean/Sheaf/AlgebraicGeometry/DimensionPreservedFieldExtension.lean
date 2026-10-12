@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Sheaf.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Dimension of an affine spectrum under field extension

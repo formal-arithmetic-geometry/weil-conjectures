@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Sheaf.Algebra.ExtOneDirectSum
 
 /-!
 # Descent of extensions with direct-sum quotient

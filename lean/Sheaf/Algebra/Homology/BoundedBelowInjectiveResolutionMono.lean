@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.Algebra.Homology.Factorizations.CM5a
+import Sheaf.Algebra.Homology.SubcategoryRightResolution
 
 /-!
 # Bounded-below complexes embed into complexes of injectives

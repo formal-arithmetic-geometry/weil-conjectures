@@ -7,6 +7,14 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.Algebra.Homology.RhomGlobalSections
+import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.AlgebraicGeometry.PerfectHypercohomologyGap
+import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
+import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-! # Vanishing of maps from a perfect complex across a cohomology gap
 

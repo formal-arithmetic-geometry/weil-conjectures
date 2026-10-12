@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # Derived tensor-Hom adjunction for perfect complexes
 

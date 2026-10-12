@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Open restriction and pullback units

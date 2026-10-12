@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
+import Sheaf.LinearAlgebra.Matrix.LeftInverseMinors
 
 /-!
 # Smooth localization at a strictly standard element

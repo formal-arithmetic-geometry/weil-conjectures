@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.LinearAlgebra.Matrix.ToLin
+import Sheaf.LinearAlgebra.TriangularChangeOfBasis
 
 /-!
 # Splitting off a unit entry in a finite free chain complex

@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.StrictHenselizationTriples
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.MapIntoHenselianColimit
 
 /-!
 # Strict henselization at an etale triple

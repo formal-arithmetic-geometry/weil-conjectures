@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 
 /-!
 # Sheaf Hom of coherent modules

@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.Thickening
 
 /-!
 # Open pieces of universal first order thickenings

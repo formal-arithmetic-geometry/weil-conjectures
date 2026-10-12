@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
+import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
+import Sheaf.CategoryTheory.ColimitSiteSections
 
 /-!
 # Continuity of sections of étale sheaves of sets

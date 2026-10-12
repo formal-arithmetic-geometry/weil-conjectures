@@ -10,6 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.DiagonalConormalDifferentials
+import Sheaf.AlgebraicGeometry.DiagonalPushforwardStructure
+import Sheaf.AlgebraicGeometry.KoszulRegularImmersionDualizing
+import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import Sheaf.AlgebraicGeometry.SmoothDiagonalKoszulRegular
+import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
 
 /-! # The dualizing complex of a smooth proper morphism
 

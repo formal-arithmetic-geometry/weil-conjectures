@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import Sheaf.Algebra.Homology.LowerTruncationStepTriangle
+import Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Stabilization of derived cohomology on the lower truncation tower

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.RingTheory.DVRValuationRingCharacterization
 
 /-!
 # Tensor surjectivity detects a negative discrete valuation

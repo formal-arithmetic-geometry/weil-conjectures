@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.Algebra.CharP.Algebra
+import Sheaf.RingTheory.DifferentialsInjectiveOfH1CotangentInjectiveCharP
+import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
+import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.GeometricallyRegularH1Injective
 
 /-!
 # Base-field differentials of an adically formally smooth local algebra

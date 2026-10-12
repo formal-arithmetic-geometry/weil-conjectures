@@ -7,6 +7,12 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Sheaf.FieldTheory.MakeSeparable
+import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.FieldTheory.SeparableExtensionFractionFieldOfSmoothAlgebra
+import Sheaf.RingTheory.LocalizationOfRegularRing
+import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
+import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Geometric regularity under finitely generated field extensions

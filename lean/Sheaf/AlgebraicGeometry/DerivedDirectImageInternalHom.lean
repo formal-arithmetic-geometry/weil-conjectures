@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-!
 # Internal-Hom comparison for derived direct image

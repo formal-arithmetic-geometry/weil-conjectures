@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Quasi-finite at a point implies isolated in the fibre

@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 
 /-! # Direct sums in the derived category of module sheaves
 

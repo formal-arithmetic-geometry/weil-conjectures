@@ -17,6 +17,9 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicohe
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Sheaf.AlgebraicGeometry.ZariskiDimensionBound
 import Mathlib.Topology.Sheaves.Abelian
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-!
 # The arithmetic genus and the cohomological degree of a sheaf of modules

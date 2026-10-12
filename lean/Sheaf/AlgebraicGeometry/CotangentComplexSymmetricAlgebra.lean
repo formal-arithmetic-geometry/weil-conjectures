@@ -9,6 +9,8 @@ public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.Kaehler.Polynomial
 public import Mathlib.RingTheory.Extension.Cotangent.Basic
+import Sheaf.RingTheory.SymmetricAlgebraFinitePresentation
+import Sheaf.RingTheory.SymmetricAlgebraQuotientModule
 
 /-!
 # Naive cotangent complex of a symmetric algebra

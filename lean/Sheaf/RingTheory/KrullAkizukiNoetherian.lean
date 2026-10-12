@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.FieldTheory.Finite.Basic
+import Sheaf.RingTheory.FiniteLengthGlobalSubmodule
 
 /-!
 # Krull–Akizuki Noetherianity for intermediate rings

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Thickening
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
+import Sheaf.AlgebraicGeometry.ThickeningAffineScheme
 
 /-!
 # Integrality is insensitive to thickenings

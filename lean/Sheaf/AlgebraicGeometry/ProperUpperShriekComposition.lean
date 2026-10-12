@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.NoetherianDerivedDirectImageRightAdjoint
+import Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.UpperShriekRightAdjoint
 
 /-! # Composition of coherent upper shriek for proper morphisms
 

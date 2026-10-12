@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.AlgebraicGeometry.EtaleLocalFiniteAtPoint
+import Sheaf.AlgebraicGeometry.FibreProductPointResidueField
+import Sheaf.AlgebraicGeometry.FinitePiecePersistence
+import Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange
 
 /-!
 # Finitely many isolated fibre points become finite pieces after an elementary étale base change

@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 
 /-!
 # A filtered colimit of normal rings is normal

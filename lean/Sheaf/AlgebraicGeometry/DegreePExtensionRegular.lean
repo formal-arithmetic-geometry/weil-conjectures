@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Derivation.Basic
 public import Mathlib.Algebra.Polynomial.Basic
+import Sheaf.RingTheory.HypersurfaceDerivationRegular
+import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Regularity of a degree-p polynomial extension

@@ -9,6 +9,9 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.RingTheory.Flat.Basic
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.SkyscraperComplex
 
 /-!
 # Stalks of flat sheaves of modules

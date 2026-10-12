@@ -8,6 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.DescendAffine
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.Paper.EtaleFiniteDataDescent
+import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Pullback of the units sheaf to a strict henselization

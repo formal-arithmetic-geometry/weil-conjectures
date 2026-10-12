@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtensionPresentation
+import Sheaf.CategoryTheory.Sites.ZariskiContractedPowerTorsor
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Extension theorem

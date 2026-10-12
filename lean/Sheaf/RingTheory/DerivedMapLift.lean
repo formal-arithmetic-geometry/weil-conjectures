@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Algebra.Homology.PreciseVanishing
 
 /-!
 # Lifting maps from bounded projective complexes

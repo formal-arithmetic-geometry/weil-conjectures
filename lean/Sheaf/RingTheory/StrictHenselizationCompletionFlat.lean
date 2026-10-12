@@ -8,6 +8,9 @@ module
 public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.RingTheory.EtaleTripleToStrictHenselizationCompletionFlat
+import Sheaf.RingTheory.FlatColimitRings
+import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-!
 # Flatness of the completion of a strict henselization

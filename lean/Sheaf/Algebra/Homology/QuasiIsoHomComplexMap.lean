@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
+import Sheaf.Paper.SiteRestrictionExact
 
 /-!
 # Quasi-isomorphisms of sheaf Hom complexes into K-injectives

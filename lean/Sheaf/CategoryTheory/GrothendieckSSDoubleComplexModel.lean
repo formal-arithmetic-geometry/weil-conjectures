@@ -7,6 +7,12 @@ module
 
 public import Sheaf.CategoryTheory.GrothendieckSpectralSequence
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
+import Sheaf.CategoryTheory.CartanEilenbergProperties
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.GrothendieckComposablePair
+import Sheaf.CategoryTheory.HypercohomologyFirstPage
+import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 
 /-! # The filtered double-complex model and its left edge
 

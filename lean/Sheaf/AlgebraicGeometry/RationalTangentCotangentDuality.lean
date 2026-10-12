@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.Ideal.Cotangent
+import Sheaf.AlgebraicGeometry.RationalPointTangentDerivationIdentification
 
 /-!
 # Rational tangent spaces and cotangent duality

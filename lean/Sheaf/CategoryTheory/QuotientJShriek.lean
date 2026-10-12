@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # The canonical extension-by-zero generator epimorphism

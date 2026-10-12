@@ -8,6 +8,10 @@ module
 public import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Inverse image of the canonical étale torsor extension
 

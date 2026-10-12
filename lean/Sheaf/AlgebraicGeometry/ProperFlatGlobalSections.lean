@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.GlobalSectionsGeomConnected
+import Sheaf.AlgebraicGeometry.ProperFlatGlobalSectionsCriterion
 
 /-!
 # Universal structure-sheaf pushforward for proper flat morphisms

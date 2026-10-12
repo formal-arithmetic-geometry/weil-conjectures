@@ -7,6 +7,9 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.AlgebraicGeometry.Ogoma
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularSequencePowers
 
 /-!
 # Generators of a regular prime with controlled annihilators

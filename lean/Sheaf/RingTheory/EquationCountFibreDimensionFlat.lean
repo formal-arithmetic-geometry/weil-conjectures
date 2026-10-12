@@ -9,6 +9,10 @@ public import Mathlib.RingTheory.MvPolynomial.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RingHom.Flat
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+import Sheaf.RingTheory.FibreDimensionNeighborhood
+import Sheaf.RingTheory.PolynomialQuotientDimensionLowerBound
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionFlat
 
 /-!
 # Flatness from the number of equations and fibre dimension

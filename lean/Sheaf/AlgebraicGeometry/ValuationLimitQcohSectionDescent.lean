@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.AlgebraicGeometry.AffinePushforwardColimit
+import Sheaf.AlgebraicGeometry.OpenModuleCohomologyDirectedColimit
 
 /-! # Quasi-coherent sections descend along affine inverse limits
 

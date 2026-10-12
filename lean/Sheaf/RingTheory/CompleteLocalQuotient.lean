@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.Noetherian.Basic
+import Sheaf.RingTheory.FiniteModuleComplete
 
 /-!
 # Quotients of complete Noetherian local rings

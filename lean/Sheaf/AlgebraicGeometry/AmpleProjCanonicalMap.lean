@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
+import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-!
 # The canonical morphism to Proj of the section ring

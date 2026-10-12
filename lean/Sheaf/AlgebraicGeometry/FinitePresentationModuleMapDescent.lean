@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Algebra.FinitePresentationColimit
 
 /-!
 # Descent of finitely presented quasi-coherent modules and maps

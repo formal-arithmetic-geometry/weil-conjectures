@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.FinitePushforwardSetStalk
+import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 
 /-! # Finite surjective descent of global sections for étale sheaves of sets
 

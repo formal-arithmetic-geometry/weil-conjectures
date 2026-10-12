@@ -6,6 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion
 
 /-!
 # Fpqc descent of local finite type

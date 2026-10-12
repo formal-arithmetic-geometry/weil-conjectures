@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.RingTheory.Flat.CategoryTheory
+import Sheaf.Algebra.Homology.TorAmplitudeFlatModel
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 
 /-! # Tor amplitude under the affine associated-sheaf correspondence
 

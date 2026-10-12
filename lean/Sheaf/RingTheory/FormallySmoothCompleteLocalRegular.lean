@@ -8,6 +8,20 @@ module
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.GRing
+import Sheaf.AlgebraicGeometry.DegreePExtensionRegular
+import Sheaf.FieldTheory.PurelyInseparablePthRootTower
+import Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.Derivation.CompletionAndLocalization
+import Sheaf.RingTheory.Derivation.DetectNonPthPower
+import Sheaf.RingTheory.Derivation.FormallySmoothAdicExtension
+import Sheaf.RingTheory.FiniteModuleComplete
+import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import Sheaf.RingTheory.FormallySmoothAdicClosedFiber
+import Sheaf.RingTheory.FsAdicLiftOverFiniteCoefficientMap
+import Sheaf.RingTheory.GeometricallyRegularFieldExtension
+import Sheaf.RingTheory.LocalizationOfRegularRing
+import Sheaf.RingTheory.RegularLocalOfFlatWithRegularClosedFiber
 
 /-!
 # Regularity of formally smooth maps of complete local rings

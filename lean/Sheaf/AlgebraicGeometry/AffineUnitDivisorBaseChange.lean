@@ -3,6 +3,13 @@ module
 public import Sheaf.AlgebraicGeometry.DivisorModule
 public import Sheaf.AlgebraicGeometry.LocalDvrBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
+import Sheaf.AlgebraicGeometry.Curve.PicAffineBaseChangeCompatibility
+import Sheaf.AlgebraicGeometry.DivisorClassCurve
+import Sheaf.AlgebraicGeometry.GenusInvariant
+import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Boundary principal divisors and algebraically closed base change

@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange
+import Sheaf.CategoryTheory.SiteMorphismComposition
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Comparison of inverse images on the full and affine étale sites

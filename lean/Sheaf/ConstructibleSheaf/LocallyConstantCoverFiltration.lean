@@ -7,6 +7,15 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
+import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import Sheaf.AlgebraicGeometry.GaloisCategories
+import Sheaf.Paper.GaloisLisseRepresentations
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import WeilConjectures.Mathlib.RepresentationTheory.Invariants
 
 /-!
 # Cover and filtration

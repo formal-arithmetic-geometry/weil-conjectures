@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Basic
+import Sheaf.Algebra.Homology.BalancedDerivedTensorModel
+import Sheaf.Algebra.Homology.DerivedTensorActionNaturality
+import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
+import Sheaf.Algebra.Homology.FilteredColimitDerivedTensor
 
 /-!
 # Flat localization of the second derived tensor factor

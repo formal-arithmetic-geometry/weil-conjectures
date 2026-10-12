@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.RingHom.Etale
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
+import Sheaf.RingTheory.SmoothNormalRing
 
 /-!
 # Normality ascends along etale ring maps

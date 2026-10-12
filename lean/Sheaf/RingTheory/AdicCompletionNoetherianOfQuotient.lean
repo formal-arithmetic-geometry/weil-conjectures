@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.AssociatedGradedRing
 
 /-!
 # Noetherian completion from a Noetherian quotient

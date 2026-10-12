@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.JapaneseDomain
 public import Mathlib.Algebra.Polynomial.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.RingTheory.N2CharPPurelyInseparableCriterion
 
 /-!
 # Polynomial rings over Noetherian Japanese domains

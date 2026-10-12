@@ -7,6 +7,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Retract
+import Sheaf.Algebra.Homology.FilteredFreeResolution
+import Sheaf.CategoryTheory.DerivedModuleDirectSums
 
 /-! # Generation of a module derived category by shifts of the ring
 

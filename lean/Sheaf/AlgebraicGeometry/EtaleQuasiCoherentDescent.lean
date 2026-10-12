@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
+import Sheaf.AlgebraicGeometry.FpqcTensorSections
 
 /-!
 # Étale descent for sections of quasi-coherent modules

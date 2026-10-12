@@ -9,6 +9,12 @@ public import Sheaf.AlgebraicGeometry.IntersectionNumber
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.EffectiveCartierDimensionDrop
+import Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial
+import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 
 /-!
 # Intersection with an effective Cartier divisor

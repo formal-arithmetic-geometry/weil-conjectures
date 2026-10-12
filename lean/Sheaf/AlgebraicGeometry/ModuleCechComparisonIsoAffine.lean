@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.Paper.CechComparisonMapNaturality
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-! # The canonical Čech comparison for affine-intersection covers
 

@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.CohenRing
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Mathlib.RingTheory.MvPowerSeries.Basic
+import Sheaf.RingTheory.PowerSeriesCohenFormallySmoothAdic
 
 /-!
 # Formal smoothness of field and Cohen power series rings

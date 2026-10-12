@@ -6,6 +6,7 @@ Authors: SHEAF group J1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.GenericComparison
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Generic-vanishing sheaves as filtered colimits of affine-open kernels

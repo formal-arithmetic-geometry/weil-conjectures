@@ -7,6 +7,19 @@ module
 
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Smooth.StandardSmooth
+import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
+import Sheaf.Paper.SmoothRetractRelativeGlobalCompleteIntersection
+import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.EtaleRingMapConormalCriterion
+import Sheaf.RingTheory.FlatOfFlatClosedFiber
+import Sheaf.RingTheory.KaehlerDifferentialsPolynomialExtension
+import Sheaf.RingTheory.MiracleFlatness
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.SmoothAtPrimeDifferentialsDimension
+import Sheaf.RingTheory.SmoothFibreRegularLocal
+import Sheaf.RingTheory.SmoothLocalizationConormalSplit
 
 /-!
 # Smooth retracts of standard smooth algebras

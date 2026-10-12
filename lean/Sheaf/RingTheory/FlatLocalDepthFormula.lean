@@ -9,6 +9,12 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.DepthOverQuotientRing
+import Sheaf.RingTheory.DepthQuotSMulTop
+import Sheaf.RingTheory.FlatModInjective
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Depth formula for a flat local homomorphism

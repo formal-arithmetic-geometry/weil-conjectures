@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SectionFractionPresentation
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+import Sheaf.AlgebraicGeometry.InvertibleSectionLocalization
 
 /-!
 # Degree-zero localization of sections on an affine scheme

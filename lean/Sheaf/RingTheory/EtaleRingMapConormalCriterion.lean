@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+import Sheaf.RingTheory.JacobiZariskiQuotientSmooth
 
 /-! # Etale ring maps and the conormal criterion
 

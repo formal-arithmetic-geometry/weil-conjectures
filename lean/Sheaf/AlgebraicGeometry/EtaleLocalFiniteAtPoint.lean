@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.FibreProductPointResidueField
 
 /-!
 # An isolated fibre point becomes finite after elementary étale base change

@@ -5,6 +5,7 @@ public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.MeromorphicModule
 public import Sheaf.AlgebraicGeometry.NoEmbeddedPoints
+import Sheaf.AlgebraicGeometry.MeromorphicSheafGenericProduct
 
 @[expose] public section
 

@@ -8,6 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenAssertions
+import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
+import Sheaf.AlgebraicGeometry.ReducedCurveNormalization
+import Sheaf.Paper.ZeroDimensionalCohomology
+import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 /-! # Reduction data for constant coefficients on reduced curves
 

@@ -7,6 +7,10 @@ module
 
 public import Sheaf.RingTheory.AnalyticallyUnramified
 public import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.NagataOfCompleteLocal
+import Sheaf.RingTheory.NagataRing
+import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 
 /-!
 # Analytically unramified local domains are N-1

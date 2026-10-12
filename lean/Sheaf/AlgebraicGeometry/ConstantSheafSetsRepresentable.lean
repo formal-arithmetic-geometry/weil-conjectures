@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.LeftExact
+import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+import Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 
 /-!
 # Constant sheaves of sets represented by disjoint unions

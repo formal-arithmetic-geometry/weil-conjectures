@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
+import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingApproximation
+import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete
+import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingLimitDescent
 
 /-!
 # Essential surjectivity of finite étale lifting over a henselian pair

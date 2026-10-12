@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.EventuallyAffine
+import Sheaf.Paper.DirectedColimitBaseChangeElementwise
 
 /-!
 # Eventual closed immersions in inverse systems

@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import Mathlib.GroupTheory.QuotientGroup.Basic
+import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
+import Sheaf.AlgebraicGeometry.DivisorClassCurve
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # The Picard group of an affine curve as a Jacobian quotient

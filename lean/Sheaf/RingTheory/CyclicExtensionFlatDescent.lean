@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Sheaf.Paper.CyclicExtensionCocycle
+import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
+import Sheaf.RingTheory.TorsionHomFlatComparison
 
 /-!
 # Descent of extensions of cyclic ideal-power quotients

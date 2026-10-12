@@ -2,6 +2,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.LinearAlgebra.TensorProduct.Map
+import Sheaf.AlgebraicGeometry.TensorPullbackTilde
 
 /-! # Affine section base change for quasi-coherent modules
 

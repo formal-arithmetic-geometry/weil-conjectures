@@ -8,6 +8,18 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
+import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMap
 
 /-!
 # Etale cohomological dimension of a smooth connected curve

@@ -6,6 +6,8 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.DerivedCoupleExact
+import Sheaf.CategoryTheory.ExactCouple
 
 /-!
 # Functoriality of derived exact couples

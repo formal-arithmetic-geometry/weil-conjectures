@@ -9,6 +9,16 @@ public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import Sheaf.CategoryTheory.CartanEilenbergComparisonHomotopy
+import Sheaf.CategoryTheory.CartanEilenbergExists
+import Sheaf.CategoryTheory.CartanEilenbergFunctorial
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.FilteredHomotopySpectralSequence
+import Sheaf.CategoryTheory.Filtration
+import Sheaf.Paper.CartanEilenbergLeftExactCohomology
+import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 
 /-! # Independence of Cartan--Eilenberg comparison maps
 

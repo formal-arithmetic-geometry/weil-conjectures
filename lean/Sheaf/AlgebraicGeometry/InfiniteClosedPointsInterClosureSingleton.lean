@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.JacobsonSpace
+import Sheaf.AlgebraicGeometry.InfiniteClosedPointsInterOfTopologicalKrullDimPos
 
 /-!
 # Infinitely many closed specializations of a nonclosed point

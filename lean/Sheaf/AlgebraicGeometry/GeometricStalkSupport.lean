@@ -6,6 +6,12 @@ Authors: SHEAF worker J1
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.EtaleSupport
+import Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
+import WeilConjectures.Mathlib.RingTheory.Henselian
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Independence of the geometric point in étale sheaf support

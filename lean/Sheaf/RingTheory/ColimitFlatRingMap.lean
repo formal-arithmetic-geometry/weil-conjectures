@@ -4,6 +4,13 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.Category.Ring.Colimits
+import Sheaf.Algebra.LimitFinitePresentation
+import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import Sheaf.RingTheory.ColimitCategoryFpAlgebras
+import Sheaf.RingTheory.ColimitEventuallyFlat
+import Sheaf.RingTheory.FilteredColimitAlgebrasUnderlyingModule
+import Sheaf.RingTheory.OpenFlatLocus
 
 /-! # Flatness at a stage of a directed colimit
 

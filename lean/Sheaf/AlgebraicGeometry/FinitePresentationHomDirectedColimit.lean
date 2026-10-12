@@ -10,6 +10,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Order.Directed
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FinitePresentationHomColimit
+import Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+import Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets
+import Sheaf.Topology.SheavesDirectedColimitSections
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # Maps from finitely presented module sheaves into directed colimits

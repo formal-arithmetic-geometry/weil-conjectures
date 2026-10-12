@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+import Sheaf.RingTheory.LengthQuotSMulTopFractionFieldSubmodule
 
 /-!
 # Residue fields above a one-dimensional local domain

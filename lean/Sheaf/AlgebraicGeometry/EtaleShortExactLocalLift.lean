@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Local lifts in a short exact sequence of etale module sheaves

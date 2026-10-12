@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Ideal.Cotangent
+import Sheaf.Paper.FreeComplexMapsToResolution
+import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
 
 /-!
 # Embedding dimension bounds the length of a residue-field resolution

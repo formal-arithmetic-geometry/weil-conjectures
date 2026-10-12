@@ -6,6 +6,8 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.NagataMorphismEqualityStage
+import Sheaf.AlgebraicGeometry.NagataQCOpenEqEventually
+import Sheaf.Order.DirectedFiniteUpperBound
 
 /-!
 # Eventual equality of descended morphisms

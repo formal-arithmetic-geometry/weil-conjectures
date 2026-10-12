@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+import Sheaf.RingTheory.FinitePresentationKerRangeCokernel
 
 /-! # Cohomology of finite projective complexes over coherent rings
 

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SpecLocalRingCanonicalMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # The spectrum of a stalk as a limit of affine neighbourhoods

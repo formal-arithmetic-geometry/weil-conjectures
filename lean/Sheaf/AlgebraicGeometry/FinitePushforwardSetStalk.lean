@@ -6,6 +6,14 @@ Authors: SHEAF group G1
 module
 
 public import WeilConjectures.SixFunctors.Finite.Stalk
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Stalks of finite direct images of étale sheaves of sets

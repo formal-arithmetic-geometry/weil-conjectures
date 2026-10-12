@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.FiniteAffineDerivedEquivalence
 
 /-!
 # Affine derived direct image reflects isomorphisms

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 
 /-! # Derived pullback and tensor preserve quasi-coherent cohomology
 

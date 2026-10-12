@@ -15,6 +15,8 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Sites.LocallySurjective
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Sheaf.AlgebraicTopology.SetCechNerveFreeResolution
+import Sheaf.Paper.ImagePresheafSheafificationIso
 
 /-!
 # Free-module homology of a Čech nerve

@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Polynomial.Basic
 public import Mathlib.RingTheory.Coprime.Basic
+import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
 
 /-!
 # Lifting monic coprime factorizations after an étale extension

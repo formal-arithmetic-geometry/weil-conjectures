@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Mathlib.Algebra.Algebra.Pi
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+import Sheaf.RingTheory.EtaleRetractionFiniteProductLocal
+import Sheaf.RingTheory.HenselianEtaleRetraction
 
 /-!
 # Finite algebras over henselian local rings

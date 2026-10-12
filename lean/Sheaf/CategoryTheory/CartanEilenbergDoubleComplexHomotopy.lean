@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.CartanEilenbergExists
 public import Sheaf.CategoryTheory.DoubleComplexTotal
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.Homotopy
+import Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy
+import Sheaf.CategoryTheory.HorizontalComparisonLift
 
 /-!
 # Horizontal and vertical components of a Cartan--Eilenberg comparison homotopy

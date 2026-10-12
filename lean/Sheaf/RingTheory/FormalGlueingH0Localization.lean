@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.FormalGlueingH0
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.Paper.FormalGlueingCanonicalMaps
+import Sheaf.RingTheory.FormalGlueingData
 
 /-!
 # Localization of compatible sections of formal glueing data

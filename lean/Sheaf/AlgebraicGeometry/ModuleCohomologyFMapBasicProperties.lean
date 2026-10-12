@@ -6,6 +6,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+import Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
+import Sheaf.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Paper.PQFCohomology
 
 /-! # Basic properties of maps on module cohomology
 

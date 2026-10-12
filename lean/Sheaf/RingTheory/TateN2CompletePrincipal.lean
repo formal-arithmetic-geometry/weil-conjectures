@@ -9,6 +9,10 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.FieldTheory.SeparableExtension
+import Sheaf.RingTheory.DimOneResidueFieldsFinite
+import Sheaf.RingTheory.FiniteOverCompleteRing
+import Sheaf.RingTheory.N2CharPPurelyInseparableCriterion
 
 /-!
 # Tate's criterion for an N-2 complete principal domain

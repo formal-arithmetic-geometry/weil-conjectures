@@ -22,6 +22,8 @@ import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image
 import Sheaf.AlgebraicGeometry.ConstructibleRestrictionClass
 import Sheaf.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
+import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
 # The projective line over a strictly henselian local ring

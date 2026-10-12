@@ -6,6 +6,9 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
+import Sheaf.AlgebraicGeometry.AffinePerfectSupportExtension
+import Sheaf.AlgebraicGeometry.DerivedOpenGluing
 
 /-! # Lifting maps from perfect complexes with support
 

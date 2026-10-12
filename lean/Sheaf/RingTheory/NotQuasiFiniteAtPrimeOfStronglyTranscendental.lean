@@ -7,6 +7,9 @@ module
 
 public import Mathlib.RingTheory.Algebraic.StronglyTranscendental
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
+import Sheaf.RingTheory.FibrePrimesResidueFields
+import Sheaf.RingTheory.IsolatedPrimeResidueFinite
+import Sheaf.RingTheory.QuasiFiniteFourRings
 
 /-!
 # A transcendental generator prevents quasi-finiteness for domains

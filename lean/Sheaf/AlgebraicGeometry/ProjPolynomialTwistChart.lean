@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-!
 # Standard charts and twisting module on a polynomial Proj

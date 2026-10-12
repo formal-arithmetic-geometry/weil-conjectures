@@ -6,6 +6,9 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
+import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange
 
 /-! # Inverse image of a set-valued constant étale sheaf is constant
 

@@ -12,6 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.ConductorIdealRestriction
+import Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection
 
 /-! # Extending conductor-supported sections from one component
 

@@ -9,6 +9,8 @@ public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Spectral.Hom
 public import Mathlib.Topology.Spectral.ConstructibleTopology
 public import Mathlib.Topology.Constructions
+import Sheaf.Topology.Spectral.ConstructibleTopologyHausdorff
+import Sheaf.Topology.SpectralMapConstructibleContinuous
 
 /-!
 # Quasi-compact limits of constructibly closed subsets

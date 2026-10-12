@@ -14,6 +14,8 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+import Sheaf.AlgebraicGeometry.DerivedPullbackTorIndependentFlatComplex
+import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeCriterion
 
 /-! # Derived base change for a bounded relatively flat complex
 

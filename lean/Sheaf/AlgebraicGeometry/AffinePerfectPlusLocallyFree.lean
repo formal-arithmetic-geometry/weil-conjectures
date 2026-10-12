@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift
+import Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree
+import Sheaf.AlgebraicGeometry.PerfectHomGap
+import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 
 /-! # Extending perfect complexes after adjoining a shifted locally free sheaf
 

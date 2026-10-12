@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Ideal.Colon
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.RingTheory.AssociatedLocalizationFg
+import Sheaf.RingTheory.WeakAssLocalization
 
 /-!
 # Associated and weakly associated finitely generated primes

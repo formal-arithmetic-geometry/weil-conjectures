@@ -8,6 +8,8 @@ module
 public import Mathlib.RingTheory.Localization.Algebra
 public import Mathlib.RingTheory.Smooth.Basic
 public import Sheaf.RingTheory.StrictlyStandardElement
+import Sheaf.RingTheory.SmoothStandardSmoothRetract
+import Sheaf.RingTheory.StandardSmoothIncludeGenerators
 
 /-!
 # Delocalizing a smooth factorization

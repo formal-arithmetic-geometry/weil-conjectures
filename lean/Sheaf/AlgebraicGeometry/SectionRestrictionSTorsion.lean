@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Restriction-zero sections are killed by a power of an invertible section
 

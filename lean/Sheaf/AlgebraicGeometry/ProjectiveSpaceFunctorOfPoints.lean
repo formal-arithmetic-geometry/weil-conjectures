@@ -12,6 +12,11 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf
+import Sheaf.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
+import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts
+import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-!
 # Projective space as a functor of points

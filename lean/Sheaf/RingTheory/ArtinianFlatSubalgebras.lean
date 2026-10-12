@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.RingTheory.Artinian.Defs
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.Order.Directed
+import Sheaf.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue
+import Sheaf.RingTheory.ExistsLiftOfFieldCharP
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
 
 /-!
 # Flat Artinian subalgebras essentially of finite type

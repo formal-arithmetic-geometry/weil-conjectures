@@ -9,6 +9,13 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.RingHom.Flat
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 public import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+import Sheaf.RingTheory.EquationCountLocalizeRelativeGlobalCompleteIntersection
+import Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization
+import Sheaf.RingTheory.LciConormalFreeRankCodimension
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionPrincipalLocalization
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Syntomic at a prime: a relative global complete intersection neighbourhood

@@ -5,6 +5,10 @@ public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.ValuativeCriterion
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.AlgebraicGeometry.ValuationClosedFibreSectionVanishing
+import Sheaf.AlgebraicGeometry.ValuationProperCoherentSections
+import Sheaf.AlgebraicGeometry.ValuationZeroSectionRelativeCartier
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 @[expose] public section
 

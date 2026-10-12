@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint
 
 /-! # A right adjoint to derived direct image for Noetherian schemes
 

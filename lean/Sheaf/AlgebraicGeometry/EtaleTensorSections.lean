@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Sections of tensor pullbacks on the small étale site

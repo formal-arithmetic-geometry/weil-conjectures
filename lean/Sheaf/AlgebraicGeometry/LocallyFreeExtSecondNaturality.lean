@@ -6,6 +6,16 @@ Authors: SHEAF group E1
 module
 
 public import Sheaf.AlgebraicGeometry.LocallyFreeExtCohomology
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+import Sheaf.AlgebraicGeometry.ExtEvaluation
+import Sheaf.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import Sheaf.CategoryTheory.RightDerivedExactComposite
+import Sheaf.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Second-variable naturality of the locally free Ext comparison

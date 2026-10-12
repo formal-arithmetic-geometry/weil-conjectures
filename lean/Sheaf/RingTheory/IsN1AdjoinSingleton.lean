@@ -8,6 +8,16 @@ module
 public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AsSubring
+import Sheaf.RingTheory.AnalyticallyUnramifiedPrincipalCriterion
+import Sheaf.RingTheory.FiniteOverNagata
+import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes
+import Sheaf.RingTheory.IsAnalyticallyUnramifiedOfIsNagataRing
+import Sheaf.RingTheory.IsN1OfFiniteDomainExtension
+import Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified
+import Sheaf.RingTheory.IsN1OfLocalCharacterization
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataLocalization
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Normalization of a monogenic subalgebra of a normal Nagata domain's fraction field

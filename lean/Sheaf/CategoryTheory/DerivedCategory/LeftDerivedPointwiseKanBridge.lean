@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import Sheaf.CategoryTheory.RightLocalizationHomColimit
 
 /-!
 # Stacks-defined left derived values as pointwise Kan-extension values

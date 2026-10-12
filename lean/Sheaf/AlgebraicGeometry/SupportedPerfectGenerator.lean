@@ -9,6 +9,13 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.KoszulOpenOrthogonality
+import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.SupportedOpenPushforward
+import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Perfect generators with support
 

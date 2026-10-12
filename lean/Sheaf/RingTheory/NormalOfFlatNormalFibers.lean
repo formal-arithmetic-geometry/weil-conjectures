@@ -9,6 +9,11 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.RingTheory.FibreRingNoetherian
+import Sheaf.RingTheory.RegularityRkGoesUp
+import Sheaf.RingTheory.SerreConditions
+import Sheaf.RingTheory.SerreCriterionNormal
+import Sheaf.RingTheory.SerreSkGoesUp
 
 /-!
 # Normality ascends along flat maps with normal fibres

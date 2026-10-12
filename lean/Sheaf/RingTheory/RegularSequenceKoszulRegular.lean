@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.KoszulRegularSequence
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.Paper.KoszulComplex
 
 /-!
 # Regular sequences are Koszul-regular

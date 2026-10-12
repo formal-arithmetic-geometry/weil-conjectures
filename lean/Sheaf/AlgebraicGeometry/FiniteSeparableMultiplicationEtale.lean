@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Etale.Field
 public import Mathlib.RingTheory.TensorProduct.Maps
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # Multiplication of a finite separable field extension

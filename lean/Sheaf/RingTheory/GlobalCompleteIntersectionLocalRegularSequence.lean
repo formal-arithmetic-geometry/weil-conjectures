@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.RingTheory.Depth
+import Sheaf.RingTheory.IsRegularOfDimensionDrop
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
 
 /-!
 # Equations of a global complete intersection at a prime

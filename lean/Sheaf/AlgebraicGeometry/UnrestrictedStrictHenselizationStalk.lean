@@ -6,6 +6,14 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import Sheaf.AlgebraicGeometry.FibreProductNeighbourhoodLimit
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Unrestricted strict-henselization stalk formula

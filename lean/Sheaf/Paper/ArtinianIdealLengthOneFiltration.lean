@@ -2,6 +2,7 @@ module
 
 public import Mathlib.RingTheory.FiniteLength
 public import Mathlib.RingTheory.Length
+import Sheaf.RingTheory.SimpleFiltration
 
 /-!
 # Length-one filtrations of ideals in Artinian rings

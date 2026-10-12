@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Sites.Spaces
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 public import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.Topology.NoetherianOpenClosedCohomologySequence
 
 /-! # Gluing universal vanishing over two closed subsets
 

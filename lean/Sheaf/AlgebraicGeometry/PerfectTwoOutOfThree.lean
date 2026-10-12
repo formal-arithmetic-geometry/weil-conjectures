@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.Paper.AffineProjectiveComplexDerivedHom
 
 /-! # Two out of three for perfect complexes on a scheme
 

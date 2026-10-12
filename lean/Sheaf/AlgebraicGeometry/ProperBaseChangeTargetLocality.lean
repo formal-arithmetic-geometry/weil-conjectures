@@ -7,6 +7,13 @@ module
 
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
+import Sheaf.Paper.ExchangeIdentityPasting
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
+import WeilConjectures.SixFunctors.BaseChange.Square
 
 /-!
 # Target locality of proper base change

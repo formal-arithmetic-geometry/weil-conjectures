@@ -10,6 +10,8 @@ public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.CohomologyPowersIdealReesFinite
+import Sheaf.Paper.PQFCohomology
 
 /-! # Image and kernel bounds for cohomology of ideal powers
 

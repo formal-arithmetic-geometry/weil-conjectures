@@ -9,6 +9,12 @@ public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
+import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
+import Sheaf.AlgebraicGeometry.PerfectObjectCompact
+import Sheaf.CategoryTheory.CompactObject
+import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Compact generation of the quasi-coherent derived category
 

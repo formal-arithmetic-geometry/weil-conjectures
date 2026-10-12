@@ -7,6 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProperFibreIdempotentImage
+import Sheaf.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.SchemeClopenIdempotent
+import Sheaf.AlgebraicGeometry.SteinUniversallyClosedFactor
 
 /-!
 # Connected fibres of a normalized proper morphism to an affine scheme

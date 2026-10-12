@@ -5,6 +5,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.HalfPlaneConvergence
+import Sheaf.CategoryTheory.DerivedCoupleExact
+import Sheaf.CategoryTheory.ExactCouple
+import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # Canonical half-plane graded identification

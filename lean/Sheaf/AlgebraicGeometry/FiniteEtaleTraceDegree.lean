@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.FiniteEtaleTrace
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.FiniteEtaleTraceExists
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import Sheaf.AlgebraicGeometry.GaloisCategories
+import Sheaf.Paper.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Degree and trace of a finite étale cover

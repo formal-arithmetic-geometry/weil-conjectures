@@ -7,6 +7,9 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Sheaf.CategoryTheory.DeltaFunctor
+import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Right derived functors form a universal delta-functor

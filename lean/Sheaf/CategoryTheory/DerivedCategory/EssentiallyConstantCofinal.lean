@@ -2,6 +2,8 @@ module
 
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 public import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProCriterion
+import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProHomColimit
 
 @[expose] public section
 

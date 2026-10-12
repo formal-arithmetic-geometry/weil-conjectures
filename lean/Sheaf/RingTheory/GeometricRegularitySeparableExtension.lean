@@ -7,6 +7,11 @@ module
 
 public import Sheaf.RingTheory.GRing
 public import Mathlib.FieldTheory.Separable
+import Sheaf.AlgebraicGeometry.FiniteSeparableMultiplicationEtale
+import Sheaf.FieldTheory.SeparableTensorPurelyInseparable
+import Sheaf.RingTheory.GeometricRegularitySubfields
+import Sheaf.RingTheory.GeometricallyRegularFieldExtension
+import Sheaf.RingTheory.GeometricallyRegularSmoothAscent
 
 /-!
 # Geometric regularity over a separable algebraic extension

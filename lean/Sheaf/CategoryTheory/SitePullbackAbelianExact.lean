@@ -12,6 +12,9 @@ public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
+import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
 
 /-!
 # Exact inverse image on abelian sheaves

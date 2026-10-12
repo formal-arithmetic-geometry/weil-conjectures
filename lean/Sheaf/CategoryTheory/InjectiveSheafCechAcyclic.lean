@@ -8,6 +8,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.Paper.FreeCechComplexExact
 
 /-!
 # Injective abelian étale sheaves are Čech-acyclic

@@ -11,6 +11,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import Sheaf.CategoryTheory.QuotientJShriek
 
 /-!
 # Functorial bounded-above flat replacements on a ringed site

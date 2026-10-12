@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.EtaleLiftCoprimeFactorization
+import Sheaf.RingTheory.IntegralIdempotentAnnihilatingPolynomial
+import Sheaf.RingTheory.SeparateImageClosedFromClosed
 
 /-!
 # Lifting an idempotent upstairs after an étale neighbourhood

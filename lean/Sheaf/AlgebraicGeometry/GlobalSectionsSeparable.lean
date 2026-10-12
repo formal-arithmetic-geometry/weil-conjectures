@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.SmoothProjectiveCurve
 public import Sheaf.AlgebraicGeometry.ProperGeometricallyReducedGlobalSectionsSeparable
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 
 /-!
 # Separability of global sections of a smooth projective curve

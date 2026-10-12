@@ -8,6 +8,11 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Sheaves.Functors
 public import Sheaf.Topology.AbelianCohomologyDeltaFunctor
+import Sheaf.CategoryTheory.DeltaFunctor
+import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.Topology.ClosedImmersionPushforwardExact
 
 /-!
 # Closed-pushforward cohomology comparison and boundaries

@@ -7,6 +7,10 @@ module
 
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Jacobson.Ideal
+import Sheaf.Paper.IntegralClosureFiniteFibrePartLocalization
+import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
+import Sheaf.RingTheory.FiniteGabberPolynomial
+import Sheaf.RingTheory.ZariskiPairFlatIntegralIsomorphism
 
 /-!
 # Étale section lifting from Gabber's root condition

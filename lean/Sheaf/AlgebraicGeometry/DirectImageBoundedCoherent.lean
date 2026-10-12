@@ -11,6 +11,10 @@ public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.CoherentSupportProperHigherDirectImage
+import Sheaf.AlgebraicGeometry.DerivedDirectImageUniformTruncationBound
+import Sheaf.AlgebraicGeometry.DirectImageQCSupportReduction
+import Sheaf.CategoryTheory.TruncationHypercohomology
 
 /-! # Proper-support direct image preserves bounded coherent complexes
 

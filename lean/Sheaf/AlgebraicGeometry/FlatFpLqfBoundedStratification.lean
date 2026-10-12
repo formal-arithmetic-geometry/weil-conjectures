@@ -11,6 +11,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.Topology.Basic
+import Sheaf.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart
+import Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant
+import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Stratification of flat finitely presented locally quasi-finite morphisms

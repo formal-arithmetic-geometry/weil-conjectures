@@ -7,6 +7,8 @@ module
 
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Smooth.Basic
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
+import Sheaf.RingTheory.SymmetricAlgebraBaseChange
 
 /-!
 # Smoothness of the symmetric algebra of a finite projective module

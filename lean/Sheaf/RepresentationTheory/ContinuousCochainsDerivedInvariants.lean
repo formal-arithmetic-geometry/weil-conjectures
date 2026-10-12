@@ -9,6 +9,12 @@ public import Sheaf.CategoryTheory.DiscreteModulesAbelian
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Data.Fin.Tuple.Basic
+import Sheaf.CategoryTheory.DeltaFunctor
+import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
+import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.RepresentationTheory.CoinducedContinuousAcyclic
+import Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding
+import Sheaf.RepresentationTheory.ContinuousCochainsShortExact
 
 /-!
 # Continuous inhomogeneous cochains compute derived invariants

@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.Algebra.Homology.ModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
 
 /-!
 # The canonical morphism from the spectrum of a local ring

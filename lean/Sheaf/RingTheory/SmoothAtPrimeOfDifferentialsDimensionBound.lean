@@ -11,6 +11,10 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Sheaf.RingTheory.SingularIdeal
+import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Sheaf.Paper.SmoothAtMaximalIdeal
+import Sheaf.RingTheory.ClosedPointDimensionLocalRing
+import Sheaf.RingTheory.SmoothAtPrimeFieldExtensionDescent
 
 /-!
 # A dimension bound on differentials implies smoothness at a prime

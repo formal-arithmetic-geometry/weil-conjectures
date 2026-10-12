@@ -6,6 +6,8 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.CategoryTheory.SimplicialMatchingObject
+import Sheaf.CategoryTheory.CoskeletonMatchingTuples
+import Sheaf.CategoryTheory.ProperFaceMatchingObject
 
 /-!
 # Matching object and coskeleton

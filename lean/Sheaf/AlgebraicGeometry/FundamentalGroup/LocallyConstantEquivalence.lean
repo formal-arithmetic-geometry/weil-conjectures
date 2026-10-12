@@ -8,6 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.GaloisCategories
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorDescent
+import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
+import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Finite étale covers as finite locally constant sheaves

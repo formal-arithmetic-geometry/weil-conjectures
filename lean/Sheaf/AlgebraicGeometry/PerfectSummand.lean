@@ -6,6 +6,9 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension
+import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
+import Sheaf.AlgebraicGeometry.PseudoCoherentSummand
 
 /-! # Direct summands of perfect complexes
 

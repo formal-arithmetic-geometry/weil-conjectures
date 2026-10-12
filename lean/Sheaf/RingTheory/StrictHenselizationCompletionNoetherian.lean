@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.RingTheory.AdicCompletionNoetherianOfQuotient
+import Sheaf.RingTheory.StrictHenselizationCompletionFlat
+import Sheaf.RingTheory.StrictHenselizationTriples
 
 /-!
 # Noetherianity and faithful flatness of the completed strict henselization

@@ -10,6 +10,9 @@ public import Mathlib.Topology.Spectral.Basic
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.Topology.SetsExtensionByEmpty
+import Sheaf.Topology.SheafDirectedColimitFiniteCoequalizers
+import Sheaf.Topology.SpectralFiniteCoequalizerEmbedsConstant
 
 /-!
 # Directed presentations of sheaves on spectral spaces

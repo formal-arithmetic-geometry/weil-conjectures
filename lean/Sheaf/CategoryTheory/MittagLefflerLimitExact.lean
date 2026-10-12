@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.Grp.Preadditive
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import Sheaf.Algebra.Category.ModuleCat.TowerLimitExactSurjectiveKernels
+import Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty
 
 /-!
 # Mittag-Leffler quotients and exact inverse limits

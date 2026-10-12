@@ -8,6 +8,9 @@ module
 public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Basic
+import Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.PerfectComplex
 
 /-! # Derived scalar extension preserves perfect complexes
 

@@ -10,6 +10,10 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Order.Preorder.Chain
 public import Mathlib.Order.RelSeries
+import Sheaf.RingTheory.AssociatedPrimeMinimalOfDepth
+import Sheaf.RingTheory.AssociatedPrimePowerQuotient
+import Sheaf.RingTheory.DepthQuotientNonzerodivisor
+import Sheaf.RingTheory.IsRegularOfDimensionDrop
 
 /-!
 # Length of maximal prime chains in a Cohen–Macaulay local ring

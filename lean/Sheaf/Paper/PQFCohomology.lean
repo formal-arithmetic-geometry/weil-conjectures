@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact
+import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 
 /-!
 # Sheaf cohomology and higher direct images

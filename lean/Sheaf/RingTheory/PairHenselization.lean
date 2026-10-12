@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.EtaleAlgebraFilteredColimitDescent
+import Sheaf.RingTheory.EtaleSectionIdempotentSplitting
+import Sheaf.RingTheory.HenselianOfEtaleSectionLifting
 
 /-!
 # Henselization of a pair

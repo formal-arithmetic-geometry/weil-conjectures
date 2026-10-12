@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
 public import Mathlib.Algebra.Module.ULift
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
 /-!
 # Depth via Ext from the residue field

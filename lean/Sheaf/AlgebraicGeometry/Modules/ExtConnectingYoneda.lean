@@ -6,6 +6,8 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.Modules.ExtYonedaFunctoriality
+import Sheaf.CategoryTheory.Abelian.ExtResolutionDerivedConnecting
+import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-!
 # The degree-zero Ext boundary and Yoneda composition

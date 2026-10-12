@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.CategoryTheory.Abelian.Images
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.Topology.SheafCokernelLocalImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Cokernels and images of quasi-coherent modules
 

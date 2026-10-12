@@ -2,6 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Plus
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
 
 /-!
 # The plus construction of a sheaf is isomorphic to the sheaf

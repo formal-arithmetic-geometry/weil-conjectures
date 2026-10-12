@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-!
 # Pushforward of ideal powers along a closed immersion

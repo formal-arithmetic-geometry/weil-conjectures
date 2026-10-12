@@ -7,6 +7,9 @@ module
 
 public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMaps
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-! # Short exact Mayer--Vietoris sequence for extension by zero
 

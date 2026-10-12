@@ -6,6 +6,8 @@ Authors: SHEAF group U1
 module
 
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
+import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-!
 # Composition of derived direct images of modules on ringed spaces

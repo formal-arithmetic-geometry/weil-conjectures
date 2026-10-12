@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.Dimension
 public import Sheaf.AlgebraicGeometry.Variety
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
+import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
 
 /-!
 # Dimension under field extension and base change

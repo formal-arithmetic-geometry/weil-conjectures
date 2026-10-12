@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import Mathlib.Algebra.BigOperators.Ring.Finset
+import Sheaf.RingTheory.IsolatedPrimeResidueFinite
 
 /-!
 # Quasi-finiteness along a four-ring square

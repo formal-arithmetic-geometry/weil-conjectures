@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.CategoryTheory.Limits.Shapes.WidePullbacks
+import Sheaf.Paper.PowerSetComplexContractible
 
 /-!
 # Exactness of the free presheaf Čech complex

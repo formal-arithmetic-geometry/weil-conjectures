@@ -7,6 +7,7 @@ module
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 
 /-!
 # Smooth fibres have regular local rings

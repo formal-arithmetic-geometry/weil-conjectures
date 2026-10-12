@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings
 
 /-!
 # Flatness over a filtered colimit of commutative rings

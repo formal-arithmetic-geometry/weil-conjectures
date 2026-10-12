@@ -6,6 +6,8 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.Algebra.Homology.RingedSpaceModuleExactnessLocalLifting
+import Sheaf.AlgebraicGeometry.ModuleFiniteTypeImageExtension
 
 /-! # Finite type submodules and kernels of coherent modules
 

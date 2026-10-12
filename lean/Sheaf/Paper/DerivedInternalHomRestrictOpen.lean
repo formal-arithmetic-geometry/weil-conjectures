@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Paper.DerivedHomMayerVietoris
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-!
 # Derived internal Hom commutes with restriction to opens

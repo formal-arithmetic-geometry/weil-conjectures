@@ -2,6 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Plus
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
 
 /-!
 # Injectivity into the plus construction for a separated presheaf

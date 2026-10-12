@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.StrictlyStandardElement
 public import Sheaf.RingTheory.SingularIdeal
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.AnnihilatorElementFlatBaseChange
+import Sheaf.RingTheory.PopescuDesingularize
+import Sheaf.RingTheory.StrictlyStandardBaseChange
 
 /-!
 # Desingularization along a strictly standard element

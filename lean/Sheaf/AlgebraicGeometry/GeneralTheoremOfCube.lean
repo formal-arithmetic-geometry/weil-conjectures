@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.PicardDiagonalLocallyClosed
+import Sheaf.AlgebraicGeometry.PicardLocusClosed
+import Sheaf.AlgebraicGeometry.PicardProductOpen
+import Sheaf.AlgebraicGeometry.ProperFlatGlobalSections
 
 /-!
 # The theorem of the cube over a field, with an arbitrary residue-field fibre

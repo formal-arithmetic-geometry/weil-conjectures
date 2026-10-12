@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections
+import Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle
 
 /-!
 # Gluing invertible modules and sections across components

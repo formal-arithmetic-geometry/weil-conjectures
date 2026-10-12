@@ -8,6 +8,10 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.RingTheory.Flat.CategoryTheory
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion
+import Sheaf.Algebra.Homology.KFlat
 
 /-!
 # Bounded flat models of complexes of modules of finite Tor amplitude

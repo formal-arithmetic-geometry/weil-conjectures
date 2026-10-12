@@ -8,6 +8,12 @@ module
 public import Sheaf.RingTheory.FormalGlueingData
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.Algebra.Module.TorsionSubmoduleFlatBaseChangeIso
+import Sheaf.Paper.FormalGlueingCanonicalMaps
+import Sheaf.Paper.TorsionModuleFlatBaseChangeIso
+import Sheaf.RingTheory.FormalGlueingComplexExact
+import Sheaf.RingTheory.FormalGlueingH0Localization
+import Sheaf.RingTheory.TorsionExtensionFlatDescent
 
 /-!
 # The canonical functor for formal glueing

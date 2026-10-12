@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.AlgebraicGeometry.Ample
+import Sheaf.AlgebraicGeometry.FunctionField
+import Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle
+import Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective
+import Sheaf.RingTheory.JacobsonDenominatorFunctionField
 
 /-! # Globally generated invertible modules with a prescribed affine section locus
 

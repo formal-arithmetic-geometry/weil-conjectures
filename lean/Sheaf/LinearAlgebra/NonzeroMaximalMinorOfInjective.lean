@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Sheaf.LinearAlgebra.Matrix.CauchyBinet
 
 /-!
 # Nonzero maximal minors of injective matrices over fields

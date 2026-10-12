@@ -7,6 +7,10 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.RingTheory.GlobalDimension
+import Sheaf.RingTheory.LocalizationFiniteGlobalDimension
+import Sheaf.RingTheory.RegularLocalFiniteGlobalDimension
+import Sheaf.RingTheory.RegularLocalOfFiniteGlobalDimension
 
 /-! # Localization of a regular local ring
 

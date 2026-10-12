@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.FlatOfFpqcCover
+import Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent
+import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent
 
 /-!
 # Etale descent along fpqc coverings

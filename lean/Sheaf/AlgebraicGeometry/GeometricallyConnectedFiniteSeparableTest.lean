@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.FieldTheory.Separable
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends
+import Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends
+import Sheaf.AlgebraicGeometry.GeometricallyConnectedCheckAfterExtension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!
 # Testing geometric connectedness by finite separable extensions

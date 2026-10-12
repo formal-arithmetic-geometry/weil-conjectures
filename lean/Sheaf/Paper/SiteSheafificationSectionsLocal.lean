@@ -2,6 +2,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem
+import Sheaf.Paper.SitePlusSeparated
 
 @[expose] public section
 

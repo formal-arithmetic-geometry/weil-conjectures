@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.AlgebraicGeometry.Ample
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-!
 # The fibre criterion for generating an invertible module

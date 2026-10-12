@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.Order.Preorder.Chain
 public import Mathlib.Order.RelSeries
+import Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference
+import Sheaf.RingTheory.PolynomialRingMaximalLocalizationDimension
 
 /-!
 # Dimension of local rings of finite type domains over fields

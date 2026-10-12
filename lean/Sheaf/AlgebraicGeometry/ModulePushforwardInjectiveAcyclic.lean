@@ -8,6 +8,12 @@ module
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import Sheaf.AlgebraicGeometry.ModuleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
+import Sheaf.AlgebraicGeometry.ModuleOpenRestrictionInjectives
+import Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.CategoryTheory.SiteCechComplex
 
 /-!
 # Direct images of injective modules are acyclic on every open

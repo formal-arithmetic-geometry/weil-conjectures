@@ -6,6 +6,9 @@ public import Mathlib.RingTheory.DedekindDomain.Basic
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.KrullDimension.Basic
+import Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower
+import Sheaf.RingTheory.FiniteIntegralConductor
+import Sheaf.RingTheory.SemilocalNormalizationDimOne
 
 /-! # Conductor control for a one-dimensional semilocal domain
 

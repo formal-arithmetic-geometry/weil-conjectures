@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription
+import Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent
+import Sheaf.AlgebraicGeometry.EtaleSectionsEqualOpen
 
 /-!
 # Fpqc descent of sections of an etale sheaf of sets

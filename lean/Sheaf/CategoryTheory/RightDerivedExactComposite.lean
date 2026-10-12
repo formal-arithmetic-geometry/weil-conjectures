@@ -6,6 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 
 /-!
 # Right derived functors after an exact functor

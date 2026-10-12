@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Data.ZMod.Basic
+import Sheaf.AlgebraicGeometry.EtaleSheaves
 
 /-!
 # Abelian sheaves killed by n are sheaves of Z/n-modules

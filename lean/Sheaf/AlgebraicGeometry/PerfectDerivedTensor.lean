@@ -3,6 +3,9 @@ module
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 
 /-! # Derived tensor products of perfect complexes
 

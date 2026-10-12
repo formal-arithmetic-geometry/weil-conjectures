@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.InvertibleModuleGenericStalk
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
 
 /-!
 # Nonzero sections on integral schemes

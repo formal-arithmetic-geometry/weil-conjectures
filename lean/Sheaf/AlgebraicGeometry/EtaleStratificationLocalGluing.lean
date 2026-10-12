@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.Constructible
+import Sheaf.Topology.ConstructibleInConstructible
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-!
 # Gluing finite étale constructible stratifications

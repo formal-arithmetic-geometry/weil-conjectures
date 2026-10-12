@@ -6,6 +6,8 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
+import Sheaf.AlgebraicGeometry.AffineKoszulHomAlternatingCech
+import Sheaf.AlgebraicGeometry.QCohComplexAlternatingCechDerivedSections
 
 /-! # Koszul Hom colimits compute derived sections on a principal-open union
 

@@ -6,6 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.CartanEilenbergDoubleComplexHomotopy
+import Sheaf.CategoryTheory.CartanEilenbergExists
+import Sheaf.CategoryTheory.DoubleComplexTotal
+import Sheaf.CategoryTheory.Filtration
 
 /-!
 # Homotopy uniqueness of Cartan--Eilenberg comparison lifts

@@ -13,6 +13,9 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
+import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
 
 /-!
 # Theorem on formal functions over a complete Noetherian base ring

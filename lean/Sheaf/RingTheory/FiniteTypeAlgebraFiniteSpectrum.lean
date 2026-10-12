@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.RingTheory.FiniteSpectrumMaximalPrimes
 
 /-! # Finite-type algebras with finite spectrum
 

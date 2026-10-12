@@ -4,6 +4,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 public import Sheaf.RingTheory.MPseudoCoherent
 public import Sheaf.RingTheory.RingPseudoCoherent
+import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
 
 @[expose] public section
 

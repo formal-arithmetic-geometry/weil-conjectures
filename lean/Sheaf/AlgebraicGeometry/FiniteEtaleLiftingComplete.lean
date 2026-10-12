@@ -11,6 +11,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.AdicCompletion.Basic
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.EtaleInfinitesimalNeighbourhoods
+import Sheaf.AlgebraicGeometry.FiniteThickeningCartesian
+import Sheaf.AlgebraicGeometry.Thickening
+import Sheaf.Paper.AlgebraizeFiniteOverProper
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 
 /-!
 # Lifting finite étale covers over a complete Noetherian base

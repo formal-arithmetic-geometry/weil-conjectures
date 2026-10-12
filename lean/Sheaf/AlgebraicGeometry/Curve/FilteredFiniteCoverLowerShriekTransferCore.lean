@@ -2,6 +2,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardAssertions
+import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 
 @[expose] public section
 universe u

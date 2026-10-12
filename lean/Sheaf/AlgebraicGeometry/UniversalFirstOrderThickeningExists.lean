@@ -7,6 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.Thickening
+import Sheaf.AlgebraicGeometry.UniversalThickeningAffineCase
+import Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces
+import Sheaf.RingTheory.UniversalFirstOrderThickening
 
 /-!
 # Existence and uniqueness of universal first order thickenings

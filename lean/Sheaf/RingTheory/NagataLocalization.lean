@@ -8,6 +8,8 @@ module
 public import Sheaf.RingTheory.NagataRing
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.LocalizationJapaneseDomain
 
 /-!
 # Localizations of Nagata rings

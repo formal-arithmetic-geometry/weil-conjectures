@@ -12,6 +12,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.Algebra.FinitePresentationColimit
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.RhomGlobalSections
+import Sheaf.Paper.AffineProjectiveComplexDerivedHom
 
 /-! # Affine full faithfulness for perfect complexes over a filtered colimit
 

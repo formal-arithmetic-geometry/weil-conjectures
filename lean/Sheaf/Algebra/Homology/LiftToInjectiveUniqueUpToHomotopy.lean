@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.Algebra.Homology.MappingCylinderSplitFactorization
 
 /-! # Uniqueness up to homotopy of lifts into an injective complex
 

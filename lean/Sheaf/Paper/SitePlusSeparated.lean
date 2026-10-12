@@ -6,6 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf
+import Sheaf.CategoryTheory.SiteCoveringsCommonRefinement
 
 /-! # The plus construction is separated and injects into its double plus.
 

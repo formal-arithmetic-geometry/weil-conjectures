@@ -6,6 +6,7 @@ Authors: SHEAF group K1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.Topology.GlueSheavesOfModules
 
 /-!
 # Isomorphisms of coherent formal modules are local

@@ -2,6 +2,7 @@ module
 
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import Sheaf.RingTheory.NakayamaNilpotent
 
 /-! # Finite type lifts along a nilpotent ideal
 

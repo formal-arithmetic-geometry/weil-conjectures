@@ -8,6 +8,13 @@ public import Sheaf.AlgebraicGeometry.FormallySmooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.Thickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening
+import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
+import Sheaf.AlgebraicGeometry.UniversalThickeningFlatBaseChange
+import Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestriction
 
 /-!
 # Flat unramified morphisms are formally étale

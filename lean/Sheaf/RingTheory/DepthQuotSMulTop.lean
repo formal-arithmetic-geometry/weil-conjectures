@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.Finiteness.Basic
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-!
 # Depth drops by one modulo a regular element

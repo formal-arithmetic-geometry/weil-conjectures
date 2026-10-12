@@ -10,6 +10,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicohe
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-!
 # Étale and Zariski cohomology of quasi-coherent modules on curves

@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.Topology.Constructible
+import Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite
+import Sheaf.AlgebraicGeometry.ImmersionAffineConstructiblePieces
+import Sheaf.AlgebraicGeometry.SeparatedAffineCoverCriterion
+import WeilConjectures.ConstructibleSheaf.Refinement
 
 /-!
 # Stratifying an etale affine cover and its overlaps

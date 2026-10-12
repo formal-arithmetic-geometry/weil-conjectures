@@ -10,6 +10,12 @@ public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
+import Sheaf.AlgebraicGeometry.DualizableEvaluationCriterion
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
 
 /-! # Perfect RHom tensor comparison
 

@@ -4,6 +4,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sheaves.Sheaf
+import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.Topology.NoetherianTopologicalCohomologyVanishing
 
 @[expose] public section
 

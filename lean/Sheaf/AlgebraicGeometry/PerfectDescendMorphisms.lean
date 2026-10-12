@@ -9,6 +9,12 @@ public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
+import Sheaf.AlgebraicGeometry.AffinePerfectHomColimit
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.DerivedAdjoint
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisTriangle
+import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
+import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Descent of morphisms between perfect complexes
 

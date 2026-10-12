@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.StrictHenselizationTriples
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
+import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
 
 /-!
 # Faithful flatness of strict henselization

@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.Thickening
 
 /-!
 # Conormal sheaf of a formally unramified morphism

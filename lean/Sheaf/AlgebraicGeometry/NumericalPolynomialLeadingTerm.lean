@@ -15,6 +15,13 @@ public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Length
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
+import Sheaf.AlgebraicGeometry.SnapperNumericalPolynomial
+import Sheaf.RingTheory.LengthOfSupportAtMaximalIdeal
+import Sheaf.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.Topology.ClosedImmersionPushforwardExact
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 
 /-! # Generic lengths determine the leading Euler-characteristic terms
 

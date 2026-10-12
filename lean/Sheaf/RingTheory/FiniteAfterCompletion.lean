@@ -4,6 +4,8 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.Algebra.ChangeIdealCompletion
+import Sheaf.RingTheory.FiniteOverCompleteRing
 
 /-!
 # Finite modules after completion

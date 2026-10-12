@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
+import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
 
 /-!
 # Residue fields at points of inverse limits

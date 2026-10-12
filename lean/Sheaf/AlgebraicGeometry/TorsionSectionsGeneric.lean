@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Data.List.TFAE
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.FunctionField
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Torsion sections detected at the generic point

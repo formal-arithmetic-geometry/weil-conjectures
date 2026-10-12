@@ -13,6 +13,14 @@ public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.RepresentationTheory.Rep.Basic
 public import Sheaf.Paper.LisseTensorScalarExtension
+import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import Sheaf.CategoryTheory.EquivalenceInternalModule
+import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
+import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.Paper.LisseAdicSheaves
+import Sheaf.RepresentationTheory.ProfiniteStableLattice
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-!
 # Galois representations attached to lisse sheaves

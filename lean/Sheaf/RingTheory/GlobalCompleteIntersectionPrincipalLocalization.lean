@@ -7,6 +7,9 @@ module
 
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.AlgebraicGeometry.GlobalCompleteIntersectionEquidimensional
+import Sheaf.Topology.DimensionSupremumLocalDimensions
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Principal localization of a global complete intersection

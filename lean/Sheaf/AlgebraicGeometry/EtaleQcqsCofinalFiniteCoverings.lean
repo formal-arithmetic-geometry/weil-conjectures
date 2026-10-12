@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
 
 /-! # Cofinal finite affine étale coverings
 

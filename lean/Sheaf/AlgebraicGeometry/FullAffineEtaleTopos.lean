@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
 public import Sheaf.CategoryTheory.SpecialCocontinuousCoverings
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Affine étale restriction and cohomology

@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Monoidal.Tor
+import Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso
 
 /-!
 # Symmetry of Tor for modules over a commutative ring

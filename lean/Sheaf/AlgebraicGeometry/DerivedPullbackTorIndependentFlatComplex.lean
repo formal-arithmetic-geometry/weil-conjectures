@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 public import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRings
 
 /-! # Stalkwise Tor-independence of base-flat complexes
 

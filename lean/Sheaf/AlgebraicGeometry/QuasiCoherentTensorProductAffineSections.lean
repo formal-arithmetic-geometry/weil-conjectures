@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.AlgebraicGeometry.Modules.AffineTildeTensor
+import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Tensor products of quasi-coherent modules on affine opens

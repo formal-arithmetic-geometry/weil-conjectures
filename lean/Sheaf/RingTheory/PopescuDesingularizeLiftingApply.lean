@@ -6,6 +6,9 @@ public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.DesingularizeStrictlyStandard
+import Sheaf.RingTheory.PopescuLifting
+import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
 # Lifting a factorization modulo pi^8 (Popescu)

@@ -6,6 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 

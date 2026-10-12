@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 
 /-!
 # Base change along a purely inseparable field extension

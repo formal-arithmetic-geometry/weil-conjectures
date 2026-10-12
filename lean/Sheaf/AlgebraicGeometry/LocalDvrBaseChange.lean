@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.DivisorModule
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DvrFieldExtensionOrder
+import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
+import Sheaf.RingTheory.FibrePrimesResidueFields
 
 /-!
 # Local orders at rational points after extension of algebraically closed fields

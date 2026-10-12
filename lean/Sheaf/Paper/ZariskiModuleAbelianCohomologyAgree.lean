@@ -12,6 +12,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.
 public import Mathlib.Algebra.Category.Grp.AB
 public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.ModuleAbelianZariskiCohomology
+import Sheaf.Paper.PQFCohomology
 
 /-! # Cohomology of a Zariski module and its underlying abelian sheaf
 

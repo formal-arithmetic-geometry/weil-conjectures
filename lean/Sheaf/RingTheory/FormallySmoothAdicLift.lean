@@ -12,6 +12,14 @@ public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.CompleteLocalMapRegularPresentation
+import Sheaf.RingTheory.CompleteLocalQuotient
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import Sheaf.RingTheory.FormallySmoothAdicGeometricallyRegular
+import Sheaf.RingTheory.FormallySmoothAdicOfFlatClosedFiber
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 
 /-!
 # Lifting formally smooth complete local algebras from a residue field

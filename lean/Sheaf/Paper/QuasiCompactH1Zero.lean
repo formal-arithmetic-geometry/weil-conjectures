@@ -3,6 +3,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Sheaf.Paper.PQFCohomology
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 
 /-! # Serre's quasi-compact vanishing criterion
 

@@ -6,6 +6,12 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 import Sheaf.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion
+import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.Paper.FreeCechComplexExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Abelian sheaf cohomology of injective module sheaves
 

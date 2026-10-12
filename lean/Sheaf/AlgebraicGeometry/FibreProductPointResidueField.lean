@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Sheaf.AlgebraicGeometry.SpecFieldPointResidueField
 
 /-!
 # Residue field of a point of a fibre product

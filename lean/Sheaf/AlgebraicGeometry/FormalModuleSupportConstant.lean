@@ -6,6 +6,9 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Constant support of a coherent formal module

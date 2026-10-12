@@ -6,6 +6,11 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
+import Sheaf.AlgebraicGeometry.AffineFiniteTypeGeneratingSections
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Finite type under the affine module correspondence
 

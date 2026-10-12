@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
+import Sheaf.Paper.ZariskiH0ProperHenselianPair
 
 /-!
 # Clopen restriction to a proper henselian closed fibre

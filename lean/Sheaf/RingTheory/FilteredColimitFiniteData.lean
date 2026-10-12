@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Order.Directed
+import Sheaf.Order.DirectedFiniteUpperBound
 
 /-!
 # Finite data and relations in a directed colimit of commutative rings

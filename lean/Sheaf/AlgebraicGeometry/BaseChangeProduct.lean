@@ -6,6 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Base change commutes with a fibre product

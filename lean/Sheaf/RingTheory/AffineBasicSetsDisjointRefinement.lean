@@ -6,6 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
+import Sheaf.RingTheory.AffineBasicSetDifference
 
 /-!
 # Disjoint refinement of basic constructible subsets of an affine spectrum

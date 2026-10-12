@@ -8,6 +8,10 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.Module
+import Sheaf.Algebra.Homology.UnitEntrySplits
+import Sheaf.RingTheory.FiniteFreeResolution
+import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
+import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
 
 /-!
 # Minimal finite free resolutions over a Noetherian local ring

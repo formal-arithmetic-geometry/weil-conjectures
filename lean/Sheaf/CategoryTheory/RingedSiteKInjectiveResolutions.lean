@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence
+import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Functorial K-injective resolutions on small ringed sites

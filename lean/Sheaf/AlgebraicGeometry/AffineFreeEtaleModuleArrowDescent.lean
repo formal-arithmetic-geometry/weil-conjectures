@@ -8,6 +8,14 @@ module
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.EtaleLowerShriekConstantConstructible
+import Sheaf.AlgebraicGeometry.LimitPullbackSectionsColimit
+import Sheaf.Paper.InverseImageFreeEtaleModule
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Descent of arrows between finite sums of affine etale free module sheaves

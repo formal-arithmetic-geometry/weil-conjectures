@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-! # Flat module pullback is exact and direct image preserves injectives
 

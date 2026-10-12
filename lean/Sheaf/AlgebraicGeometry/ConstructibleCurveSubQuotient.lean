@@ -7,6 +7,16 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
+import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
+import Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree
+import Sheaf.AlgebraicGeometry.CurveCoefficientPair
+import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.Paper.InverseImageStalkGerm
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Subobjects and quotients of constructible torsion sheaves on curves

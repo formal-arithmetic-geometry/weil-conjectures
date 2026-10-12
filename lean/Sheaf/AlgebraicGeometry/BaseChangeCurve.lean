@@ -11,6 +11,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
+import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 
 /-!
 # Base change of a curve

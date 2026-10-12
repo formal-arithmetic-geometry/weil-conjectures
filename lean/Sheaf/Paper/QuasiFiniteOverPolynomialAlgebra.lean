@@ -9,6 +9,9 @@ public import Sheaf.RingTheory.QuasiFiniteAtPrime
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.QuasiFiniteFourRings
+import Sheaf.RingTheory.QuasiFiniteLocusOpen
+import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 
 /-! # Quasi-finite over a polynomial algebra
 

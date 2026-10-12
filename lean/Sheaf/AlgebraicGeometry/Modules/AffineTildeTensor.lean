@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkTensor
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Tensor products of tilde modules on an affine scheme

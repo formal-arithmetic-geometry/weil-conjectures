@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.ChowFiniteType
+import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import Sheaf.AlgebraicGeometry.ExistsIsSeparatedOverPullbackMap
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Properness descends to a finite stage

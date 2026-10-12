@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
 
 /-!
 # Fibre dimension after base change

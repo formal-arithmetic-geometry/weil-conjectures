@@ -9,6 +9,9 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem
+import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Integral constant module pushforwards are filtered colimits of finite pushforwards

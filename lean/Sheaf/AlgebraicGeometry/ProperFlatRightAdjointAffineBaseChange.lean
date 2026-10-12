@@ -8,6 +8,14 @@ public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.Algebra.Homology.BaseChangeRHomPerfect
+import Sheaf.AlgebraicGeometry.AffineMorphismHomOutOfPerfect
+import Sheaf.AlgebraicGeometry.FlatPrecomposePus
+import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+import Sheaf.AlgebraicGeometry.PerfectGeneratorExists
+import Sheaf.AlgebraicGeometry.PerfectGeneratorPullback
+import Sheaf.AlgebraicGeometry.ProperSupportPerfectDirectImage
+import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChangeComplex
 
 @[expose] public section
 

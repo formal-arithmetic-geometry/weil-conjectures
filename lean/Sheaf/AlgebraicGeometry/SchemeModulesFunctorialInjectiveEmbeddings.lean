@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction
+import Sheaf.Topology.PresheafModuleStalkFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Functorial injective embeddings of modules on a scheme

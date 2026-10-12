@@ -9,6 +9,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.GabberH0EtaleCriterion
+import Sheaf.Topology.SpectralClosedRestriction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # A finite-cover connectedness criterion for étale module sections

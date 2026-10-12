@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 
 /-!
 # Flatness of the localized unit extended by zero

@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase
+import Sheaf.AlgebraicGeometry.FlatBoundedComplexDescent
+import Sheaf.AlgebraicGeometry.ProperSupportDescent
 
 /-!
 # Descent of bounded flat complexes with proper support

@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.AlgebraicGeometry.StandardSmoothAffineDiagonalGenerators
 
 /-!
 # Local regular generators for a smooth diagonal

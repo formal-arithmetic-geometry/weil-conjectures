@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.Paper.LocalizedCohomologyMayerVietoris
 
 /-! # Mayer--Vietoris gluing for localization of twisted cohomology
 

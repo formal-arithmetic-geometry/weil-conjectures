@@ -7,6 +7,10 @@ module
 
 public import Sheaf.RingTheory.FormallySmoothAdic
 public import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.FormallySmoothAdicBaseChange
+import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
+import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularLocalOfFormallySmoothAdic
 
 /-!
 # Geometric regularity from maximal-ideal-adic formal smoothness

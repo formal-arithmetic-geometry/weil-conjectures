@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
+import Sheaf.Algebra.Homology.FreeResolutionSesSplit
 
 /-!
 # Low-degree Tor exact sequence in the first variable

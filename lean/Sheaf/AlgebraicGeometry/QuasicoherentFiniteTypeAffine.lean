@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine criteria for finite type and finite presentation of modules
 

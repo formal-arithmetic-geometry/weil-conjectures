@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.PowerSeriesOntoCompletion
 
 /-!
 # Noetherianity of adic completion

@@ -6,6 +6,7 @@ Authors: SHEAF group H1
 module
 
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.FieldTheory.PurelyInseparablePthRootTower
 
 /-!
 # A degree-p final step in a finite purely inseparable extension

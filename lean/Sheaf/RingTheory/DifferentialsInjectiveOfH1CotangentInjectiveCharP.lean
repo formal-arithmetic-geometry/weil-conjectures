@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.RingTheory.Extension.ExtendScalars
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.JacobiZariskiConnectingMapNaturality
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.SubsingletonH1CotangentOfCharP
 
 /-!
 # Residue-field differential injectivity in positive characteristic

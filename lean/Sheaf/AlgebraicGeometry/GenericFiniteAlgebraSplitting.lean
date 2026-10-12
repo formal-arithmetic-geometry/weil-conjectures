@@ -7,6 +7,9 @@ public import Mathlib.RingTheory.Nilpotent.Lemmas
 public import Mathlib.RingTheory.Localization.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Spec
+import Sheaf.AlgebraicGeometry.SpreadFiniteSeparableExtension
+import Sheaf.AlgebraicGeometry.SpreadPurelyInseparableFactors
+import Sheaf.FieldTheory.GenericSeparableAlgebraSplitting
 
 /-!
 # Generic splitting of a finite algebra after an étale base change

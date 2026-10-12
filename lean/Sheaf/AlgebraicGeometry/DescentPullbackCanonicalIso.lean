@@ -6,6 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import Sheaf.AlgebraicGeometry.FpqcSingletonFullyFaithful
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Canonical comparisons of pullback functors on scheme descent data

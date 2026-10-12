@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.EtaleFaithfullyFlatLocal
 
 /-!
 # Pointwise étaleness under extension of the base field

@@ -7,6 +7,8 @@ module
 
 public import Sheaf.RingTheory.PairHenselization
 public import Mathlib.RingTheory.RingHom.Flat
+import Sheaf.Algebra.Category.ModuleCat.FilteredColimitFlat
+import Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat
 
 /-!
 # Flatness and ideal-power quotients of a pair henselization

@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.Constructible
+import Sheaf.AlgebraicGeometry.FlatQuasiFiniteStratification
+import Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-!
 # Finite étale strata of a separated étale morphism

@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.Topology.GDelta.Basic
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.HilbertEmbeddedPointsGluing
+import Sheaf.RingTheory.LocalizationEmbeddedPoints
+import Sheaf.RingTheory.RemoveEmbeddedPrimes
 
 /-! # Removing embedded associated points of a coherent module
 

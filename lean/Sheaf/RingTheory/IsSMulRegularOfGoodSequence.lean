@@ -8,6 +8,7 @@ module
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Module
 public import Mathlib.RingTheory.QuotSMulTop
+import Sheaf.RingTheory.DepthLeSupportDimension
 
 /-!
 # Good elements for a maximal regular sequence

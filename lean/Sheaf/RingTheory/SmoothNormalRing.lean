@@ -8,6 +8,12 @@ module
 public import Mathlib.RingTheory.RingHom.Smooth
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.Paper.DirectedColimitBaseChangeElementwise
+import Sheaf.RingTheory.FilteredColimitNormalRing
+import Sheaf.RingTheory.FiniteTypeZDomainNormalizationFinite
+import Sheaf.RingTheory.NormalOfFlatNormalFibers
+import Sheaf.RingTheory.RegularRingNormal
+import Sheaf.RingTheory.RegularRingSmoothAscent
 
 /-!
 # Smooth algebras over normal rings

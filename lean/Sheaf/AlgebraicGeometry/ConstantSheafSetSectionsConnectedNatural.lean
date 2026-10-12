@@ -7,6 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.CoproductCopiesMorphismsClopen
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf
 
 /-!
 # Constant etale sheaf sections on a connected scheme

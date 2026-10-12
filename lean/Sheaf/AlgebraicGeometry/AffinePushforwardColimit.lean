@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraColimit
+import Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
 /-! # Affine pushforward and tensor modules commute with directed limits
 

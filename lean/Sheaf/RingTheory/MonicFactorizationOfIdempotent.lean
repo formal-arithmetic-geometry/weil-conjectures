@@ -9,6 +9,10 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.Jacobson.Ideal
 public import Mathlib.RingTheory.Coprime.Basic
 public import Mathlib.Algebra.Group.Idempotent
+import Sheaf.Algebra.CharpolyLocallyFree
+import Sheaf.Algebra.LocallyFreeCharpoly
+import Sheaf.Algebra.LocallyFreeCharpolyProdMap
+import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
 
 /-!
 # Monic factorization from a lifted idempotent

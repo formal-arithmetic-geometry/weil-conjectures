@@ -7,6 +7,12 @@ module
 
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.FormallySmoothAdic
+import Sheaf.RingTheory.AdicCompletionNoetherian
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.RingTheory.ExistsCoefficientSubring
+import Sheaf.RingTheory.ExistsLiftOfFieldCharP
+import Sheaf.RingTheory.FormallySmoothAdicCompletion
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 
 /-!
 # Adically formally smooth local algebras over fields are regular

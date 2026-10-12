@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.GDelta.Basic
+import Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite
 
 /-!
 # Dimension drop for nowhere-dense closed subsets

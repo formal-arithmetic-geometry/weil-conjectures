@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+import Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLiftExactSource
 
 /-!
 # Comparison maps of Cartan–Eilenberg resolutions

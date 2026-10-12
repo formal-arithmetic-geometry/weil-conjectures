@@ -11,6 +11,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-!
 # Derived tensor with a fixed complex in the second factor

@@ -6,6 +6,7 @@ Authors: SHEAF group G1
 module
 
 public import Sheaf.RingTheory.EssentiallySmooth
+import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
 
 /-!
 # Maps from finitely presented algebras factor through smooth algebras

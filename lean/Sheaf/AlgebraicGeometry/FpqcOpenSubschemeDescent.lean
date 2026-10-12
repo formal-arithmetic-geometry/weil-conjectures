@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement
+import Sheaf.AlgebraicGeometry.StandardFpqcQuotientTopology
 
 /-!
 # Fpqc descent of compatible open subschemes

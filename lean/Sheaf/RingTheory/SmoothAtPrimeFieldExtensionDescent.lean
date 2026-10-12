@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Sheaf.RingTheory.SingularIdeal
+import Sheaf.RingTheory.FiniteProjectivePrimeLocalFree
 
 /-!
 # Descent of smoothness at a prime along a field extension

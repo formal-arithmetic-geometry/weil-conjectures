@@ -19,6 +19,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Product
 
 /-!
 # Smooth proper completion of a smooth curve over a finite field

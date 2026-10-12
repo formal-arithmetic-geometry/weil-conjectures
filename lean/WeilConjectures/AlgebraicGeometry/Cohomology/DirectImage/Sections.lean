@@ -7,6 +7,16 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
+import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.AlgebraicGeometry.ProjectionFormulaLocality
+import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
+import Sheaf.Paper.PQFCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-!
 # Sections of higher direct images over an affine base

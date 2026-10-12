@@ -7,6 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 public import Sheaf.AlgebraicGeometry.GlobalHomAdjunctionIso
+import Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction
 
 /-!
 # Flat precomposition transformation for right-adjoint base change

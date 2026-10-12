@@ -13,6 +13,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.RingTheory.Flat.Basic
+import Sheaf.Algebra.Category.ModuleCat.TorSymmetry
+import Sheaf.Paper.TorLongExactFirstVariable
 
 /-!
 # Tor of an opcycle cokernel

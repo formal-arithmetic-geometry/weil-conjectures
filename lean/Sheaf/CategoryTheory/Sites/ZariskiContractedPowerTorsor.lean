@@ -6,6 +6,7 @@ Authors: SHEAF group M1
 module
 
 public import Sheaf.CategoryTheory.Sites.CoherentContractedPowers
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Existence of coherent contracted powers of a torsor

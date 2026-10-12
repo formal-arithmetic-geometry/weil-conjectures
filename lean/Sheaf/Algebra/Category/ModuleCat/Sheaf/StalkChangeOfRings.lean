@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Topology.PresheafModuleStalkFunctor
+import Sheaf.LinearAlgebra.TensorProduct.ColimitVaryingRings
 
 /-!
 # Stalks of change of rings

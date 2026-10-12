@@ -10,6 +10,13 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.Basis.Defs
+import Sheaf.RingTheory.FlatOverRegular
+import Sheaf.RingTheory.GeometricallyRegularH1Injective
+import Sheaf.RingTheory.JacobiZariskiHomologySequence
+import Sheaf.RingTheory.LocalizationOfRegularRing
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularRingSmoothAscent
+import Sheaf.RingTheory.TransitivityGamma
 
 /-!
 # Flatness over a polynomial localization from a differential basis

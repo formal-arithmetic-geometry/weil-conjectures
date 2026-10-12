@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
+import Sheaf.AlgebraicGeometry.FppfAffineSiteToposEquivalence
 
 /-!
 # Restriction of fppf sheafification to affine schemes

@@ -12,6 +12,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.Algebra.Homology.AcyclicLift
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRings
 
 /-!
 # Lifting a derived complex for a projective class

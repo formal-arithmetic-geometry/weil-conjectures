@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Finite complements of affine opens on integral curves

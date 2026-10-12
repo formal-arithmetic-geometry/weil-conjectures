@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Topology.Constructible
 public import Mathlib.Topology.Semicontinuity.Basic
+import Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 
 /-! # Jump loci of pseudo-coherent complexes
 

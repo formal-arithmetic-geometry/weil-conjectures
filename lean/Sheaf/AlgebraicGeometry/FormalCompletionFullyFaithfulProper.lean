@@ -10,6 +10,13 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.CoherentSheafHom
+import Sheaf.AlgebraicGeometry.CompletionInternalHom
+import Sheaf.AlgebraicGeometry.FormalFunctionsCompleteBase
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Fully faithful completion over a complete proper base
 

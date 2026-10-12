@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints
+import Sheaf.AlgebraicGeometry.FiniteUnramifiedOnePointClosed
+import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
+import Sheaf.AlgebraicGeometry.UnramifiedFibrePointIsolated
 
 /-!
 # Étale-local decomposition near unramified fibre points

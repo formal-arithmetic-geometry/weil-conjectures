@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.BaseChangeConventions
+import Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField
+import Sheaf.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest
 
 /-!
 # Geometric connectedness of a fibre tested on étale neighbourhoods

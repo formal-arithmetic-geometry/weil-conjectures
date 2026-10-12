@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections
+import Sheaf.AlgebraicGeometry.EtaleSectionsFpqcDescent
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
 
 /-!
 # Sections of etale sheaves under flat maps with connected geometric fibres

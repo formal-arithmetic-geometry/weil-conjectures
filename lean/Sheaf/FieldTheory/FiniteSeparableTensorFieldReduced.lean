@@ -9,6 +9,7 @@ public import Mathlib.FieldTheory.Separable
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.GroupWithZero.Basic
+import Sheaf.RingTheory.SeparablePolynomialQuotientReduced
 
 /-!
 # Reducedness of a finite separable extension tensored with a field

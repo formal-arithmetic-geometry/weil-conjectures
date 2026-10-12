@@ -8,6 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 public import Sheaf.CategoryTheory.Galois.AutProfinite
 public import Mathlib.GroupTheory.Index
+import Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer
+import Sheaf.AlgebraicGeometry.GaloisCategories
+import Sheaf.CategoryTheory.Galois.AbstractEquivalence
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 
 /-!
 # The fundamental-group equivalence and base change

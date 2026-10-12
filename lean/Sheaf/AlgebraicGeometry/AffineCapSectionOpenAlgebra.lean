@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import Mathlib.RingTheory.Ideal.Operations
+import Sheaf.AlgebraicGeometry.Morphisms.FpqcOpenImmersionDescent
+import Sheaf.RingTheory.SymmetricAlgebraBaseChange
 
 /-!
 # The affine nonvanishing locus of a section of an invertible module

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Linearity of the underived exchange morphism

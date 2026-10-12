@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGenerator
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 
 /-!
 # Local coefficients of pullback morphisms on affine opens

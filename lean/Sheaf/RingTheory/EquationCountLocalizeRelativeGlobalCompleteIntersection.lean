@@ -9,6 +9,10 @@ public import Sheaf.Paper.RelativeGlobalCompleteIntersection
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
+import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
+import Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation
+import Sheaf.RingTheory.PolynomialQuotientDimensionAtPointHeightDifference
+import Sheaf.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Localizing an equation-count presentation
