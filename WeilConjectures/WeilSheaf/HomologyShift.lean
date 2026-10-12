@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Category
+public import WeilConjectures.DeligneLaumon.Reduction.Weights
 
 /-!
 # Cohomology sheaves of shifted Weil complexes
@@ -15,8 +15,8 @@ The cohomology sheaves of a shifted Weil complex are those of the complex, reind
 
 ## Main declarations
 
-- `AlgebraicGeometry.WeilComplex.homologySheafShiftIso`: the isomorphism
-  `𝓗ᵃ(K[n]) ≅ 𝓗ᵃ'(K)` for `n + a = a'`.
+- `AlgebraicGeometry.WeilComplex.isZero_homologySheaf_shift`: the cohomology sheaves of `K[n]`
+  vanish where those of `K` do.
 - `AlgebraicGeometry.WeilSheaf.homologySheafShiftToComplexIso`: for a Weil sheaf `F`, the
   cohomology sheaf `𝓗⁻ⁿ(F[n])` is `F`.
 -/
@@ -33,14 +33,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
-
-/-- The cohomology sheaves of a shifted Weil complex: `𝓗ᵃ(K[n]) ≅ 𝓗ᵃ'(K)` for `n + a = a'`. -/
-noncomputable def homologySheafShiftIso (K : WeilComplex k₀ l X) (n a a' : ℤ)
-    (h : n + a = a') : (homologySheaf a).obj (K⟦n⟧) ≅ (homologySheaf a').obj K :=
-  ObjectProperty.isoMk _
-    ((_root_.DerivedCategory.homologyFunctor _ a).mapIso
-        (((WeilComplex.objectProperty k₀ l X).ι.commShiftIso n).app K) ≪≫
-      ((_root_.DerivedCategory.homologyFunctor _ 0).shiftIso n a a' h).app K.obj)
 
 /-- The cohomology sheaves of a shifted Weil complex vanish where those of the complex do. -/
 theorem isZero_homologySheaf_shift {K : WeilComplex k₀ l X} {n a a' : ℤ} (h : n + a = a')

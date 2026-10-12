@@ -12,15 +12,12 @@ public import WeilConjectures.WeilSheaf.StalkIso
 # Restricting extensions along an open immersion
 
 Let `j : U ⟶ X` be a quasi-compact open immersion of `k₀`-schemes. The restriction `j^*` of the
-direct image `j_*F` and of the extension by zero `j_!F` of a Weil sheaf `F` on `U` is `F` again,
-and the extension by zero has zero stalks at the closed points outside `U`.
+direct image `j_*F` and of the extension by zero `j_!F` of a Weil sheaf `F` on `U` is `F` again.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.nonempty_upperStar_extensionByZero_iso`: `j^* j_! F ≅ F`.
 - `AlgebraicGeometry.WeilSheaf.nonempty_upperStar_directImage_iso`: `j^* j_* F ≅ F`.
-- `AlgebraicGeometry.WeilSheaf.subsingleton_stalk_extensionByZero`: `(j_! F)_x̄ = 0` for a closed
-  point `x` outside `U`.
 -/
 
 @[expose] public section
@@ -46,13 +43,6 @@ theorem nonempty_upperStar_extensionByZero_iso (F : WeilSheaf k₀ l U) :
 theorem nonempty_upperStar_directImage_iso
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U) :
     Nonempty ((upperStar j).obj ((directImage j).obj F) ≅ F) :=
-  sorry
-
-/-- The extension by zero along an open immersion has zero stalks at the closed points outside
-the image. -/
-theorem subsingleton_stalk_extensionByZero (F : WeilSheaf k₀ l U) (x : X.finitePoints)
-    (hx : x.1 ∉ Set.range j.base) :
-    Subsingleton (((extensionByZero j).obj F).stalk x).carrier :=
   sorry
 
 end AlgebraicGeometry.WeilSheaf

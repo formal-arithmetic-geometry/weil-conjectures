@@ -132,7 +132,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_upperStar
       have hS'' := shortExact_map_directImage ι D.j (S.map (upperStar j')) hS'
         (ProEtale.IsAdicLisseSheaf.upperStar _ h₁) (ProEtale.IsAdicLisseSheaf.upperStar _ h₂)
         (ProEtale.IsAdicLisseSheaf.upperStar _ h₃) hw₁ hw₃
-      exact FrobeniusModule.HasWeightsAtMost.of_exact _ _
+      exact FrobeniusModule.HasWeightsAtMost.of_functionExact _ _
         (WeilComplex.compactlySupportedCohomologyMap_frobenius _ 1)
         (WeilComplex.compactlySupportedCohomologyMap_frobenius _ 1)
         (exact_compactlySupportedCohomologyMap hS'' 1) (hP₁ h₁ hw₁) (hP₃ h₃ hw₃)

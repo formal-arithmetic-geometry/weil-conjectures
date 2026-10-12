@@ -20,8 +20,8 @@ field cardinality `q` becomes `qᵐ`.
 
 - `FrobeniusModule.hasEigenvalue_of_exact`: an eigenvalue of the middle term of an exact
   sequence is one of an outer term.
-- `FrobeniusModule.HasWeightsAtMost.of_exact` (`lem-a1-extension-bounds`): the middle term of an
-  exact sequence inherits a common upper weight bound.
+- `FrobeniusModule.HasWeightsAtMost.of_functionExact` (`lem-a1-extension-bounds`): the middle
+  term of an exact sequence inherits a common upper weight bound.
 - `FrobeniusModule.hasWeightsAtMost_of_forall_hasEigenvalue`
   (`lem-a1-punctual-bound-module-mixed`): a bound on all eigenvalues is an upper weight bound.
 - `FrobeniusModule.HasWeightsAtMost.of_powFrobenius` (`lem-a1-weight-bound-constant-extension`):
@@ -78,28 +78,6 @@ theorem hasEigenvalue_of_hasEigenvector_mem_range {α : K} {y : N.carrier}
   rw [← hzx]
   exact z.2
 
-/-- A Frobenius-stable subspace of a Frobenius module with weights at most `w` has weights at
-most `w`. (blueprint: `lem-a1-subquotient-extension-bounds`) -/
-theorem HasWeightsAtMost.of_injective (hinj : Function.Injective g) {ι : K →+* ℂ} {q : ℕ}
-    {w : ℝ} (h : N.HasWeightsAtMost ι q w) : M.HasWeightsAtMost ι q w := by
-  intro α hα
-  obtain ⟨x, hx⟩ := hα.exists_hasEigenvector
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff] at hx
-  refine h α (Module.End.hasEigenvalue_of_hasEigenvector (x := g x) ?_)
-  rw [Module.End.hasEigenvector_iff, Module.End.mem_eigenspace_iff]
-  refine ⟨?_, (map_ne_zero_iff _ hinj).2 hx.2⟩
-  change N.frobenius (g x) = α • g x
-  rw [← hg, ← map_smul]
-  exact congrArg g hx.1
-
-/-- A Frobenius-equivariant quotient of a Frobenius module with weights at most `w` has weights
-at most `w`. (blueprint: `lem-a1-subquotient-extension-bounds`) -/
-theorem HasWeightsAtMost.of_surjective (hsurj : Function.Surjective g) {ι : K →+* ℂ} {q : ℕ}
-    {w : ℝ} (h : M.HasWeightsAtMost ι q w) : N.HasWeightsAtMost ι q w := by
-  intro α hα
-  obtain ⟨y, hy⟩ := hα.exists_hasEigenvector
-  exact h α (hasEigenvalue_of_hasEigenvector_mem_range g hg hy (hsurj y))
-
 end Range
 
 section Exact
@@ -129,8 +107,8 @@ theorem hasEigenvalue_of_exact (hfg : Function.Exact f g) {α : K}
 /-- **Extension bounds.** If the outer terms of an exact sequence `A → B → C` of Frobenius
 modules have weights at most `w`, so has the middle term. In particular this holds for a short
 exact sequence `0 → A → B → C → 0`. (blueprint: `lem-a1-extension-bounds`) -/
-theorem HasWeightsAtMost.of_exact (hfg : Function.Exact f g) {ι : K →+* ℂ} {q : ℕ} {w : ℝ}
-    (hA : A.HasWeightsAtMost ι q w) (hC : C.HasWeightsAtMost ι q w) :
+theorem HasWeightsAtMost.of_functionExact (hfg : Function.Exact f g) {ι : K →+* ℂ} {q : ℕ}
+    {w : ℝ} (hA : A.HasWeightsAtMost ι q w) (hC : C.HasWeightsAtMost ι q w) :
     B.HasWeightsAtMost ι q w := fun α hα ↦
   (hasEigenvalue_of_exact f g hf hg hfg hα).elim (hA α) (hC α)
 

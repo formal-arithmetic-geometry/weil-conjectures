@@ -17,9 +17,7 @@ weights at most `w + j`; it has *weights at least* `w` if its Verdier dual `D_Y 
 at most `-w`. The upper half is `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost`
 (`WeilConjectures.DeligneLaumon.Reduction.Weights`), with cohomological indexing so that the
 bound in degree `j` is `w + j`; this file records that it is the upper half of the blueprint
-definition and proves its behaviour under the basic operations: the bound is monotone, a Weil
-sheaf placed in degree `a` has weights at most `w` if and only if the sheaf is mixed of weights
-at most `w + a`, and shifting by `n` raises the bound by `n`.
+definition and proves that shifting by `n` raises the bound by `n`.
 
 The lower half is not formalised. It needs, at the level of Weil complexes, the dualizing Weil
 complex `ω_Y` (the exceptional inverse image `Ra_Y^! ℚ̄_ℓ` with its canonical Weil structure)
@@ -33,8 +31,6 @@ complexes is `AlgebraicGeometry.WeilComplex.ihomLisse`, out of a lisse Weil shea
 
 - `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_iff`: the upper half of
   `def-weil-complex-weights`.
-- `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_singleComplex_iff` and
-  `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_toComplex_iff`: a single sheaf.
 - `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_shift_iff`: shifts.
 -/
 
@@ -63,31 +59,10 @@ theorem isMixedOfWeightsAtMost_iff :
       ∀ j : ℤ, ((homologySheaf j).obj K).IsMixedOfWeightsAtMost ι (w + j) :=
   Iff.rfl
 
-/-- Upper weight bounds of Weil complexes are monotone in the bound. -/
-theorem IsMixedOfWeightsAtMost.mono_weight (h : K.IsMixedOfWeightsAtMost ι w) (hw : w ≤ w') :
-    K.IsMixedOfWeightsAtMost ι w' :=
-  fun j ↦ (h j).mono_weight (by linarith)
-
 /-- A zero Weil complex has weights at most `w`, for every `w`. -/
 theorem isMixedOfWeightsAtMost_of_isZero (hK : IsZero K) (w : ℝ) :
     K.IsMixedOfWeightsAtMost ι w :=
   fun j ↦ WeilSheaf.isMixedOfWeightsAtMost_of_isZero ((homologySheaf j).map_isZero hK) _
-
-/-- A Weil sheaf `G` placed in degree `a` has weights at most `w` if and only if `G` is mixed of
-weights at most `w + a`. -/
-theorem isMixedOfWeightsAtMost_singleComplex_iff (a : ℤ) (G : WeilSheaf k₀ l X) :
-    (singleComplex a G).IsMixedOfWeightsAtMost ι w ↔ G.IsMixedOfWeightsAtMost ι (w + a) := by
-  refine ⟨fun h ↦ (h a).of_iso (homologySheafSingleComplexIso a G), fun h b ↦ ?_⟩
-  obtain rfl | hb := eq_or_ne b a
-  · exact h.of_iso (homologySheafSingleComplexIso b G).symm
-  · exact WeilSheaf.isMixedOfWeightsAtMost_of_isZero (isZero_homologySheaf_singleComplex hb G) _
-
-/-- A Weil sheaf placed in degree zero has weights at most `w` if and only if it is mixed of
-weights at most `w`. -/
-theorem isMixedOfWeightsAtMost_toComplex_iff (G : WeilSheaf k₀ l X) :
-    (WeilSheaf.toComplex.obj G).IsMixedOfWeightsAtMost ι w ↔ G.IsMixedOfWeightsAtMost ι w := by
-  rw [WeilSheaf.toComplex_obj, isMixedOfWeightsAtMost_singleComplex_iff]
-  simp
 
 /-- Shifting a Weil complex by `n` raises its upper weight bounds by `n`: `K[n]` has weights at
 most `w + n` if and only if `K` has weights at most `w`, since `𝓗ʲ(K[n]) = 𝓗ʲ⁺ⁿK`. -/
