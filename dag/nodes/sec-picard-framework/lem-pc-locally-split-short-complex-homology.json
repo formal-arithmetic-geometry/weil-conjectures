@@ -1,0 +1,136 @@
+{
+ "id": "lem-pc-locally-split-short-complex-homology",
+ "kind": "statement",
+ "title": "Homology of a locally split short complex",
+ "statement": "Let $Z$ be a scheme [def-pc-scheme], let $S=(M_1\\xrightarrow f M_2\\xrightarrow g M_3)$ be a short complex of $\\mathcal O_Z$-modules, meaning $g\\circ f=0$ [def-weil-sheaf-of-modules-category], and let $k,b\\in\\mathbb N$. Suppose $\\ker g$ is finite locally free of rank $k$ and $\\operatorname{im} f$ is finite locally free of rank $b$ [def-amb-finite-locally-free-module]. The image means the kernel of the cokernel map [lem-weil-pbc-quasi-coherent-module-cokernel-image]. Assume that every point $z\\in Z$ has an open neighbourhood $U$ on which the inclusion $(\\operatorname{im} f)|_U\\to M_2|_U$ admits a retraction. Then $H(S)=\\ker g/\\operatorname{im} f$ is finite locally free of rank $k-b$, with natural subtraction.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "kernel/image splitting argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof": [
+  {
+   "text": "Around each point choose a neighbourhood admitting the image retraction, shrink to an affine open, and trivialize the finite locally free kernel and image. The identity g∘f=0 factors the image inclusion through ker g. Restrict the given retraction M₂→im f to ker g: its composite with im f→ker g is the identity. Thus im f is a direct summand of ker g.",
+   "uses": [
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On affine sections the quotient H=ker g/im f is the complementary direct summand of the finite free kernel. It is finitely generated, as a quotient of a finitely generated module, and projective by the direct-summand theorem [lem-weil-pbc-projective-direct-summand]. Apply the finite-projective standard-free-cover theorem [lem-weil-pbc-finite-projective-standard-free-cover] to refine to principal opens where H is finite free. At any residue field the split exact sequence 0→im f→ker g→H→0 stays split exact after tensoring. Dimension additivity gives b≤k and dimension H=k-b, hence each free piece has rank k-b.",
+   "uses": [
+    "lem-weil-pbc-projective-direct-summand",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine quasi-coherent equivalence identifies the split quotient H with the sheaf cokernel of im f→ker g [lem-weil-pbc-affine-tilde-gamma-adjunction, lem-weil-pbc-quasi-coherent-module-cokernel-image]. The universal properties identify this cokernel with short-complex homology. Restriction to an open subscheme is exact, as can be checked on stalks, and preserves homology; hence these local free quotient sheaves are the restrictions of S.homology. The resulting neighbourhoods cover Z, so finite local freeness of rank k-b follows [def-amb-finite-locally-free-module]. For empty Z the condition is vacuous.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-projective-direct-summand",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "kernel/image splitting argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homology of a short complex with locally free kernel and locally split locally free image is locally free of the difference of their ranks",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homology of a short complex of sheaves with finite locally free cycles and locally split finite locally free boundaries is finite locally free",
+   "results": "SheafOfModules.IsFiniteType; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.instAbelian; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.Presentation.IsFinite; SheafOfModules.IsFiniteType.exists_localGeneratorsData; SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-12",
+   "verdict": "No matching statement; generic free-locus or categorical homology declarations only."
+  },
+  {
+   "tool": "grep",
+   "query": "locally.*free.*(summand|retract)|(?:summand|retract).*locally.*free|homology.*split",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean; Mathlib/Algebra/Homology/ModelCategory/Lifting.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean; Mathlib/Algebra/Homology/ShortComplex/Exact.lean",
+   "date": "2026-10-12",
+   "verdict": "No matching statement; generic free-locus or categorical homology declarations only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ConstantRankComplexHomology",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-semicontinuity-base-change",
+   "place": "Proof (3): kernel/image splitting argument",
+   "via": [
+    "lem-pc-constant-rank-complex-homology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.LocallySplitShortComplexHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocallySplitShortComplexHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isFiniteLocallyFreeOfRank_homology_of_locally_split_image",
+  "statement": "theorem isFiniteLocallyFreeOfRank_homology_of_locally_split_image\n    {Z : Scheme.{u}} (S : ShortComplex Z.Modules) (k b : ℕ)\n    (hkernel : (kernel S.g).IsFiniteLocallyFreeOfRank k)\n    (himage : (Abelian.image S.f).IsFiniteLocallyFreeOfRank b)\n    (hsplit : ∀ z : Z, ∃ U : Z.Opens, z ∈ U ∧\n      IsSplitMono ((restrictFunctor U.ι).map (Abelian.image.ι S.f))) :\n    S.homology.IsFiniteLocallyFreeOfRank (k - b)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085322-L-33000",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T085322-L-33000",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

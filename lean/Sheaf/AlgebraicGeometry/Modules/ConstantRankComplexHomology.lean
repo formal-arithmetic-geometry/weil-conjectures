@@ -7,9 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Properties
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplex
-import Sheaf.LinearAlgebra.MatrixRankFieldExtension
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.AlgebraicGeometry.Modules.ConstantRankMapKernelImage
+import Sheaf.AlgebraicGeometry.Modules.LocallySplitShortComplexHomology
 
 /-! # Homology of a complex with constant differential ranks over a reduced scheme
 
@@ -62,6 +61,23 @@ theorem isFiniteLocallyFreeOfRank_homology_pullback_of_constantRank
       ((freeMatrix ((e q).inv ≫ P.d q (q + 1) ≫ (e (q + 1)).hom)).map g.appTop).rank = a ∧
       ((freeMatrix ((e (q - 1)).inv ≫ P.d (q - 1) q ≫ (e q).hom)).map g.appTop).rank = b) :
     ((((Modules.pullback j).mapHomologicalComplex _).obj P).homology q).IsFiniteLocallyFreeOfRank
-       (r q - a - b) := by sorry
+       (r q - a - b) := by
+  let Q := ((Modules.pullback j).mapHomologicalComplex _).obj P
+  let S := Q.sc' (q - 1) q (q + 1)
+  obtain ⟨hkernel, _, _⟩ :=
+    kernel_image_pullback_of_constantRank (e q) (e (q + 1)) (P.d q (q + 1)) j a (by
+      intro z
+      obtain ⟨R, hR, g, hg, ha, _⟩ := hrank z
+      exact ⟨R, hR, g, hg, ha⟩)
+  obtain ⟨_, himage, hsplit⟩ :=
+    kernel_image_pullback_of_constantRank (e (q - 1)) (e q) (P.d (q - 1) q) j b (by
+      intro z
+      obtain ⟨R, hR, g, hg, _, hb⟩ := hrank z
+      exact ⟨R, hR, g, hg, hb⟩)
+  have : S.homology.IsFiniteLocallyFreeOfRank (r q - a - b) :=
+    isFiniteLocallyFreeOfRank_homology_of_locally_split_image S (r q - a) b
+      hkernel himage hsplit
+  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso
+    (Q.homologyIsoSc' (q - 1) q (q + 1) (by simp) (by simp)).symm
 
 end AlgebraicGeometry.Scheme.Modules

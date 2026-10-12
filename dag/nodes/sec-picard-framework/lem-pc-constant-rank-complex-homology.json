@@ -17,54 +17,40 @@
  ],
  "proof": [
   {
-   "text": "For the complex of finite free sheaves [def-pc-cochain-complex-modules], restrict to affine neighbourhoods in the open subscheme [def-weil-open-immersion]. A field-valued point with singleton image induces an extension of the residue field. By [lem-weil-matrix-rank-field-extension], the two given ranks a and b are the residue-field ranks at every point.",
+   "text": "Apply the constant-rank kernel and image theorem to the outgoing differential on the open pullback, using the chosen free bases and the field-valued singleton-image hypothesis. It gives a finite locally free outgoing kernel of rank r(q)-a.",
    "uses": [
-    "def-pc-cochain-complex-modules",
-    "def-weil-open-immersion",
-    "lem-weil-matrix-rank-field-extension"
+    "lem-pc-constant-rank-map-kernel-image"
    ],
    "elementary": false
   },
   {
-   "text": "The affine rings of the open subscheme are reduced [def-pc-reduced-scheme]. All (a+1)-minors of the outgoing matrix and (b+1)-minors of the incoming matrix vanish in every residue field, hence lie in every prime and in the nilradical, and are zero. At a point choose nonzero maximal minors and invert their product. The size-zero minor is 1. Invertible row and column operations put each matrix in the form diag(I,S), with S its Schur complement. Every entry of S is a larger minor divided by the invertible maximal minor, so S=0. The two differentials may use different bases.",
+   "text": "Apply the same theorem to the incoming differential. It gives a finite locally free incoming image of rank b and local retractions of its inclusion.",
    "uses": [
-    "def-pc-reduced-scheme",
-    "def-weil-matrix-rank"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "On these neighbourhoods the outgoing kernel Z is free of rank r(q)-a and the incoming image B is free of rank b, each a direct summand of the middle free term [def-weil-pbc-free-module]. The complex identity gives B contained in Z. Restrict a retraction of the middle term onto B to Z, making Z/B finite projective of rank r(q)-a-b. The rank inequality a+b <= r(q) holds over the residue fields. Apply [lem-weil-pbc-finite-projective-standard-free-cover] to obtain local free trivializations of the quotient.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
+    "lem-pc-constant-rank-map-kernel-image"
    ],
    "elementary": false
   },
   {
-   "text": "Open pullback is restriction [lem-weil-pbc-open-immersion-module-pullback-restriction] and is exact, as is affine sheafification. Thus the quotient Z/B is the homology of the pulled-back complex. The local trivializations give finite local freeness of the claimed constant rank [def-amb-finite-locally-free-module]. Empty opens require no neighbourhood; zero ranks are covered by the empty-minor case.",
+   "text": "The complex identity identifies the incoming image with a subobject of the outgoing kernel. The locally split short-complex homology theorem therefore identifies the homology with a finite locally free sheaf of rank (r(q)-a)-b.",
    "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-amb-finite-locally-free-module"
+    "lem-pc-locally-split-short-complex-homology"
    ],
+   "elementary": false
+  },
+  {
+   "text": "The three-term short-complex homology is canonically isomorphic to the degree-q homology of the pulled-back homological complex; transport finite local freeness across this isomorphism.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-cochain-complex-modules",
-  "def-weil-open-immersion",
-  "lem-weil-matrix-rank-field-extension",
-  "def-pc-reduced-scheme",
-  "def-weil-matrix-rank",
-  "def-weil-pbc-free-module",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "def-amb-finite-locally-free-module"
+  "lem-pc-constant-rank-map-kernel-image",
+  "lem-pc-locally-split-short-complex-homology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
-  "place": "Proof of (3), reduced-ring normal-form claim and the following kernel/image splitting argument (the existing DAG node records the full source text)."
+  "place": "Proof (3), reduced-ring normal form and kernel/image splitting argument; reduced in Lean to two strictly smaller local splitting statements."
  },
  "mathlib_searches": [
   {
@@ -168,10 +154,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D2",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T040223-L-1633574",
+  "landing": "20261012T085322-L-33000",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
