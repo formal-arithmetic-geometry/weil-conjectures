@@ -1,0 +1,115 @@
+{
+ "id": "lem-sc-finite-free-dual-local-evaluation",
+ "kind": "statement",
+ "title": "Internal dual evaluation over a finite-free open",
+ "statement": "Let X be a scheme [def-pc-scheme], M a sheaf of modules, U an open, and I a finite set. Suppose the restriction of M to U is isomorphic to the free sheaf on I [def-weil-pbc-free-module]. Let V be an open contained in U and put R=O_X(V). Then evaluation at the identity open is an R-linear equivalence from the sections M^\\vee(V) of the internal dual [def-pur-sheaf-hom] to Hom_R(M(V),R). Explicitly, there exists c: M^\\vee(V) \\simeq_R Hom_R(M(V),R) with c(psi)(x)=psi_V(x) for all psi and x. No nonzero-ring, nonempty-open, or positive-rank hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0BRT (lemma-smooth-proper), determinant inversion, expanded by the coordinate arguments in lem-sc-exterior-dual-local-frames proof steps 1-3. The tag was read at https://stacks.math.columbia.edu/tag/0BRT; it uses determinant inversion but does not state this coordinate lemma."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "The finite-free isomorphism gives inclusions S_i and coordinate projections C_i on the localized site over U. Their finite sum of composites C_i followed by S_i is the identity. Restrict these morphisms to the localized site over V. On every W contained in V, naturality of S_i identifies S_i(r) with r times the restriction of m_i=S_i(1) on V. Hence any section x on W is the sum of C_i(x) times the restriction of m_i.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluation of the internal dual at V is linear. If its value on V vanishes, naturality makes its value vanish on every restricted m_i, and the finite expansion above makes the entire localized morphism zero. For a functional l on M(V), the localized morphism sum_i l(m_i) C_i is a preimage under evaluation: its scalar multiplication restricts l(m_i) to W, and at V the expansion of x gives sum_i l(m_i) C_i(x)=l(x), using commutativity of R. This proves bijectivity, so the linear map yields a linear equivalence.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "dag/nodes/sec-picard-framework/lem-sc-exterior-dual-local-frames.json",
+  "place": "Steps 1 and 3 of the frame lemma: evaluation by finite-free coordinate reconstruction in the determinant-inversion argument of lem-sc-finite-duality. Complete coordinate argument written in the Lean docstring; source Tag 0BRT only motivates its use."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free sheaf internal dual evaluation linear equivalence on sections",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal dual sheaf finite free evaluation sections linear equivalence",
+   "results": "SheafOfModules.freeHomEquiv; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; FGModuleCat.FGModuleCatCoevaluation; SheafOfModules.freeHomEquiv_freeMap; FGModuleCat.rightDual; FGModuleCat.FGModuleCatEvaluation; FGModuleCat.FGModuleCatEvaluation_apply; FGModuleCat.FGModuleCatDual_obj",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level theorem; candidates provide definitions and coordinate APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "homObjEvalId.*(bijective|equiv)|exteriorSheaf.*(free|basis|comparison)",
+   "results": "No matches in the pinned Mathlib source.",
+   "date": "2026-10-12",
+   "verdict": "No exact sheaf-level theorem; candidates provide definitions and coordinate APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DeterminantDualLocalFrames",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "Steps 1 and 3 of the frame lemma: evaluation by finite-free coordinate reconstruction in the determinant-inversion argument of lem-sc-finite-duality.",
+   "via": [
+    "lem-sc-exterior-dual-local-frames"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.DualLocalEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DualLocalEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.dual_local_evaluation_equiv",
+  "statement": "theorem dual_local_evaluation_equiv (X : Scheme.{u}) (M : X.Modules)\n    (U : X.Opens) (I : Type u) [Finite I]\n    (e : M.over U ≅ SheafOfModules.free I) (V : X.Opens) (g : V ⟶ U) :\n    ∃ c : (dual M).val.obj (op V) ≃ₗ[X.presheaf.obj (op V)]\n        Module.Dual (X.presheaf.obj (op V)) (M.val.obj (op V)),\n      ∀ (ψ : (dual M).val.obj (op V)) (x : M.val.obj (op V)),\n        c ψ x = ψ.app (op (Over.mk (𝟙 V))) x",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T165531-L-2939565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T165531-L-2939565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

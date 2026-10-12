@@ -15,42 +15,44 @@
  ],
  "proof": [
   {
-   "text": "Restrict the finite free isomorphism along V → U. Its restricted generators identify sections on every smaller open W with O_X(W)^r. On V these are a basis a. A functional with coefficients in O_X(V) extends to the localized sheaf by restricting the coefficients and applying them to the restricted generators; conversely a sheaf morphism is determined by those generators. Applying this to the coordinate functionals gives the internal dual sections φ and their evaluation formula.",
+   "text": "Construct a basis a of M(V) using sectionsLinearEquivOfIsoFree and reindex the lifted finite set. The proved local dual evaluation equivalence identifies M^vee(V) with the ring-linear dual; transport the finite dual basis along its inverse to obtain phi. The evaluation equation follows from the equivalence formula and the dual basis coordinate formula.",
    "uses": [
-    "def-pur-sheaf-hom",
+    "lem-sc-finite-free-dual-local-evaluation",
     "def-weil-pbc-free-module"
    ],
    "elementary": false
   },
   {
-   "text": "The sectionwise exterior presheaves of the trivial sheaf and its dual are finite products of O_X, with basis indexed by increasing n-element subsets. The exterior basis restriction formulas commute with the restrictions of O_X, so these presheaves are sheaves. Their restriction to the localized site is identified with the restriction of their global sheafification by the universal property: smaller-open covers are the same covers in the localized site. Thus the sheafification units carry the two increasing wedge families to bases b and d. This includes the empty index family for n>r and the single empty wedge for n=0.",
+   "text": "Using overHomObjIso and homObjFreeUnitIso, the given trivialization gives a rank-r trivialization of the internal dual on U. Apply the local exterior comparison to M and its internal dual. Transport a.exteriorPower and phiBasis.exteriorPower through the bijective sheafification units on V to obtain d and b. Their basis-vector formulas are exactly exteriorPower.basis_apply followed by the definition of exteriorSheafSection.",
    "uses": [
-    "def-sc-sheaf-exterior-power",
+    "def-pur-sheaf-hom",
+    "lem-sc-exterior-sheaf-local-free-comparison",
     "lem-weil-pbc-exterior-power-free-basis",
-    "lem-pc-sites-module-sheafification-interface"
+    "def-sc-sheaf-exterior-power"
    ],
    "elementary": false
   },
   {
-   "text": "For the now finite free exterior sheaf, repeat coordinate reconstruction on its restricted wedge basis d. Evaluation of a localized morphism at the identity open is a linear equivalence c to the ring-linear dual of the sections; its inverse uses the values on d as coefficients of a natural sheaf morphism. The two composites are identities because they agree on every restricted basis vector. This constructs exactly the evaluation equivalence claimed, without using any exterior dual pairing map.",
+   "text": "The comparison also gives a finite-free trivialization of the exterior sheaf on U, indexed by the lifted increasing subsets. Apply the proved dual evaluation theorem to this trivialization to obtain c and its identity-open evaluation formula. Assemble a, phi, b, d, c with their four formulas.",
    "uses": [
-    "def-pur-sheaf-hom",
-    "def-weil-pbc-free-module"
+    "lem-sc-exterior-sheaf-local-free-comparison",
+    "lem-sc-finite-free-dual-local-evaluation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-hom",
-  "def-sc-sheaf-exterior-power",
+  "lem-sc-finite-free-dual-local-evaluation",
   "def-weil-pbc-free-module",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-weil-pbc-exterior-power-free-basis"
+  "def-pur-sheaf-hom",
+  "lem-sc-exterior-sheaf-local-free-comparison",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/duality.tex",
-  "place": "Expanded local finite-free coordinate argument implicit in determinant inversion of Tag 0BRT. That tag does not itself state the frame lemma; the complete argument is written in the proof steps and Lean docstring."
+  "document": "dag/nodes/sec-picard-framework/lem-sc-exterior-dual-local-frames.json",
+  "place": "Formalized the three original coordinate steps: proved the generic local dual evaluation, transported exterior bases via the remaining local free comparison, and applied evaluation a second time to the exterior sheaf."
  },
  "mathlib_searches": [
   {
@@ -134,9 +136,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "S2",
   "result": "pass",
-  "landing": "20261012T135249-L-1675946",
+  "landing": "20261012T165531-L-2939565",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
