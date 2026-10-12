@@ -1,0 +1,100 @@
+{
+ "id": "lem-pc-flat-model-finite-free-shortening-comparison",
+ "kind": "statement",
+ "title": "Pullback homology comparison for the local replacement",
+ "statement": "Given the hypotheses, structural output V ≤ U and P, and a quasi-isomorphism eP : P ⟶ (V → U)^*C, for every g and q the pullback homology of P is nonempty isomorphic to that of C pulled back to U.",
+ "source": {
+  "document": "literature/stacks-project",
+  "place": "Tags 064U, 0653, 00NX and 06YD, 06YJ"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply pullback to the supplied quasi-isomorphism eP; bounded flatness preserves it and homology yields the displayed isomorphism.",
+   "uses": [
+    "lem-pc-flat-model-finite-free-shortening-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flat-model-finite-free-shortening-construction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project",
+  "place": "Tags 064U, 0653, 00NX and 06YD, 06YJ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite free complex quasi-isomorphism pullback homology",
+   "results": "no existing declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback quasi-isomorphism homology finite free complex",
+   "results": "no existing declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiIso mapHomologicalComplex pullback homology",
+   "results": "no existing declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeShortening",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-model-finite-free-shortening",
+   "place": "strict intermediate part",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatModelFiniteFreeComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatModelFiniteFreeComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.local_finiteFree_homology_comparison",
+  "statement": "theorem local_finiteFree_homology_comparison {T : Scheme.{u}} (U : T.Opens) (C Q : CochainComplex U.toScheme.Modules ℤ) (d : ℕ) (hCge : C.IsStrictlyGE 0) (hCle : C.IsStrictlyLE d) (hCflat : ∀ n : ℤ, (C.X n).IsFlatOver (𝟙 U.toScheme)) (hQle : Q.IsStrictlyLE d) (hQfree : ∀ n : ℤ, ∃ r : ℕ, Nonempty (Q.X n ≅ SheafOfModules.free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r)))) (e : Q ⟶ C) (he : QuasiIso e) (t : T) (V : T.Opens) (hVU : V ≤ U) (P : CochainComplex V.toScheme.Modules ℤ) (hstruct : t ∈ V ∧ P.IsStrictlyGE 0 ∧ P.IsStrictlyLE d ∧ (∀ n : ℤ, ∃ r : ℕ, Nonempty (P.X n ≅ SheafOfModules.free (R := V.toScheme.ringCatSheaf) (ULift.{u} (Fin r))))) (eP : P ⟶ ((Modules.pullback (T.homOfLE hVU)).mapHomologicalComplex _).obj C) (heP : QuasiIso eP) : ∀ {T' : Scheme.{u}} (g : T' ⟶ V.toScheme) (q : ℕ), Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅ (((Modules.pullback (g ≫ T.homOfLE hVU)).mapHomologicalComplex _).obj C).homology q)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T153009-L-2350018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T153009-L-2350018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

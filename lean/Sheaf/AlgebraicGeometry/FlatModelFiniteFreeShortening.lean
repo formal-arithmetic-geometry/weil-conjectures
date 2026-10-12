@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Restrict
+import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeConstruction
+import Sheaf.AlgebraicGeometry.FlatModelFiniteFreeComparison
 
 /-! # Local nonnegative finite-free replacements of bounded flat complexes -/
 
@@ -61,6 +63,12 @@ theorem exists_local_finiteFree_shortening {T : Scheme.{u}} (U : T.Opens)
       ∀ {T' : Scheme.{u}} (g : T' ⟶ V.toScheme) (q : ℕ),
         Nonempty ((((Modules.pullback g).mapHomologicalComplex _).obj P).homology q ≅
           (((Modules.pullback (g ≫ T.homOfLE hVU)).mapHomologicalComplex _).obj C).homology q)
-    := by sorry
+    := by
+  obtain ⟨V, hVU, P, hstruct, hP⟩ :=
+    exists_local_finiteFree_construction U C Q d hCge hCle hCflat hQle hQfree e he t ht
+  obtain ⟨eP, heP⟩ := hP
+  refine ⟨V, hVU, P, hstruct.1, hstruct.2.1, hstruct.2.2.1, hstruct.2.2.2, ?_⟩
+  exact local_finiteFree_homology_comparison U C Q d hCge hCle hCflat hQle hQfree e he t
+    V hVU P hstruct eP heP
 
 end AlgebraicGeometry.Scheme.Modules
