@@ -9060,3 +9060,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/R3/Sheaf.FieldTheory.FgSeparableSmooth (stage 3; reviewer PASS; first push; landing 20261012T184340-L-4018859 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/R3/Sheaf.RingTheory.PolynomialNonzeroFibreHypersurface (stage 3; reviewer PASS; first push; landing 20261012T184340-L-4018961 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/S1/Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs (stage 3; reviewer PASS; first push; landing 20261012T184341-L-4019091 (proof); batch 20261012T184234; modules 1; new nodes 0)
+- 18:43 L: merged deliver/S1/Sheaf.AlgebraicGeometry.SheafAlgebraHomAdjunction (stage 3; reviewer PASS; first push; landing 20261012T184341-L-4019191 (proof); batch 20261012T184234; modules 1; new nodes 0)
