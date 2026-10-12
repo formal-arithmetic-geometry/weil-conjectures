@@ -126,6 +126,43 @@ theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
     refine (hle (Field.toIsField _) g' ((hmem _ g' hg' v rfl).trans ?_)).trans_lt (hgt ▸ hm)
     simpa using hv
 
+/-- **The fibre cohomology is finite dimensional.** In the situation of
+`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, for every point `t` of `T` the
+cohomology `H^q(X_t, ℱ_t)` of the fibre is a finite dimensional `κ(t)`-vector space, so that the
+fibre dimension `AlgebraicGeometry.Scheme.Modules.hFiber` is its dimension.
+
+Near `t` the higher direct images are computed by a bounded complex `P` of finite free modules
+(`AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDirectImage`): the global
+sections of `R^q (f_t)_* ℱ_t`, which are `H^q(X_t, ℱ_t)`, are the cohomology of the complex
+`P ⊗ κ(t)` of finite dimensional vector spaces.
+
+(blueprint: `thm-pc-semicontinuity-base-change`, part (1)) -/
+theorem finiteDimensional_H_fiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) (t : T) :
+    letI := f.fiberOverSpecResidueField t
+    FiniteDimensional (T.residueField t) (((Modules.pullback (f.fiberι t)).obj ℱ).H q) := by
+  obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
+  obtain ⟨g, hg⟩ := exists_comp_ι_eq_fromSpecResidueField htU
+  have := isGrothendieckAbelian (f.fiber t)
+  have sq : IsPullback (f.fiberι t) (f.fiberToSpecResidueField t) f (g ≫ U.ι) := by
+    rw [hg]
+    exact IsPullback.of_hasPullback _ _
+  obtain ⟨e⟩ := hbc g _ _ sq q
+  have := finite_moduleSpecΓFunctor_obj_homology_pullback hP.exists_iso_free
+    (Field.toIsField _) g q
+  let := f.fiberOverSpecResidueField t
+  have : QuasiCompact (f.fiber t ↘ Spec (.of (T.residueField t))) := by
+    change QuasiCompact (f.fiberToSpecResidueField t)
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  have : IsSeparated (f.fiber t ↘ Spec (.of (T.residueField t))) := by
+    change IsSeparated (f.fiberToSpecResidueField t)
+    unfold Scheme.Hom.fiberToSpecResidueField
+    infer_instance
+  obtain ⟨e'⟩ := nonempty_moduleSpecΓFunctor_obj_higherDirectImage_linearEquiv_H
+    ((Modules.pullback (f.fiberι t)).obj ℱ) (T.residueField t) q
+  exact Module.Finite.equiv (((moduleSpecΓFunctor (R := T.residueField t)).mapIso e).toLinearEquiv
+    |>.trans e')
+
 /-- **Grauert's theorem.** In the situation of
 `AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`, if moreover `T` is reduced and
 the `q`-th fibre dimension is locally constant, then `R^q f_* ℱ` is locally free of finite rank,

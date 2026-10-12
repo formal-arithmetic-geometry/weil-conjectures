@@ -472,7 +472,10 @@ variable {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))
   [SmoothOfRelativeDimension 1 f]
 
 include f in
-/-- The ideal sheaf of an effective divisor on a smooth curve is invertible. -/
+/-- The ideal sheaf of an effective divisor on a smooth curve is invertible: every effective
+divisor is an effective Cartier divisor.
+
+(blueprint: `lem-sc-point-cartier`) -/
 lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).IsInvertible := by
   induction E using Finsupp.induction_linear with
   | zero => exact idealSheaf_zero (X := C) ▸ IdealSheafData.isInvertible_top
@@ -480,6 +483,24 @@ lemma isInvertible_idealSheaf (E : closedPoints C →₀ ℕ) : (idealSheaf E).I
   | single P n =>
     exact idealSheaf_single P n ▸
       (isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow n
+
+include f in
+/-- **Effective divisors are effective Cartier divisors.** On a smooth curve, for every finite
+set `s` of closed points and multiplicities `n`, the ideal sheaf `∏_{P ∈ s} 𝓘_P^{n_P}` of the
+effective divisor `∑_{P ∈ s} n_P [P]` is invertible: each `𝓘_P` is invertible
+(`isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one`), and products of invertible
+ideal sheaves are invertible.
+
+(blueprint: `lem-sc-point-cartier`) -/
+lemma isInvertible_prod_vanishingIdeal_pow (s : Finset (closedPoints C))
+    (n : closedPoints C → ℕ) :
+    (∏ P ∈ s, IdealSheafData.vanishingIdeal ⟨{P.1}, P.2⟩ ^ n P).IsInvertible := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => exact IdealSheafData.isInvertible_top
+  | insert P s hP ih =>
+    rw [Finset.prod_insert hP]
+    exact ((isInvertible_vanishingIdeal_of_smoothOfRelativeDimension_one f P.2).pow _).mul ih
 
 variable [IsIntegral C] [IsLocallyNoetherian C]
 
