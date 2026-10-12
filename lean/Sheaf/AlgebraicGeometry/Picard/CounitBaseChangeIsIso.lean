@@ -8,10 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import Sheaf.AlgebraicGeometry.BaseChangeMapCech
-import Sheaf.AlgebraicGeometry.DegreeZeroCohomology
-import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
-import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChange
+import Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeDegreeZeroComparison
+import Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange
 
 /-!
 # Degree-zero base change for an invertible direct image
@@ -67,6 +65,16 @@ theorem isIso_counitBaseChange_of_invertibleDirectImage
       ((pullbackComp f' g).app ((pushforward f).obj M)).symm
     IsIso ((pullbackPushforwardAdjunction f').homEquiv _ _
       (c.inv ≫ (pullback g').map ((pullbackPushforwardAdjunction f).counit.app M))) := by
-  sorry
+  let : ∀ Y : Scheme.{u},
+      HasDerivedCategory (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) :=
+    fun Y ↦ HasDerivedCategory.standard (SheafOfModules.{u} (moduleRings Y.toRingedSpace))
+  let E := (DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M
+  have : IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w E) :=
+    isIso_derivedBaseChange_of_flat_invertible f g g' f' sq M
+  obtain ⟨a, b, hab⟩ := counitBaseChange_degreeZero_comparison f g g' f' sq M h0 hq
+  dsimp only at hab ⊢
+  rw [hab]
+  infer_instance
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,65 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group X2
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.AlgebraicGeometry.RelativelyFlatDerivedBaseChange
+import Sheaf.AlgebraicGeometry.BaseChangeMapCech
+import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+
+/-! # Canonical derived base change for a flat family and a line bundle
+
+Source: the degree-zero argument in `nonempty_arrowIso_pullback_directImageCounit`,
+Step 1; Stacks Project, Tag 0A1D (base change for relatively flat complexes).
+(blueprint: lem-pc-flat-invertible-canonical-derived-base-change).
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+universe u w
+open CategoryTheory Limits
+namespace AlgebraicGeometry.Scheme.Modules
+
+/-- The canonical derived base-change map at a line bundle on a flat qc separated family
+is invertible, without a hypothesis on its higher direct images.
+
+Source: `ZeroScheme.lean`, `nonempty_arrowIso_pullback_directImageCounit` docstring,
+first sentence of its proof; Stacks Project, Tag 0A1D.
+(blueprint: lem-pc-flat-invertible-canonical-derived-base-change).
+
+Proof: An invertible module is quasi-coherent and flat. Since f is flat, it is also
+flat over the base (isFlatOver_of_isInvertible). Restrict to affine opens of S and S'
+with the latter mapping into the former. Choose a finite affine cover of X over each
+such open; all intersections are affine by separatedness. The alternating finite
+Cech complex computes Rf_*M and has flat terms over the base ring. Tensoring these
+terms with the new base ring computes derived pullback and gives exactly the Cech
+complex of the pulled-back cover. The tensor comparison on each intersection is
+induced by pullback of sections. Under the Cech augmentations it is the mate of
+the pullback composition comparison, hence is the displayed canonical derived map.
+Invertibility is local, so these comparisons prove the assertion globally. Flatness
+of M over O_X identifies Lg'^*(M[0]) with (g'^*M)[0]; thus the ordinary-target version
+of relatively flat base change and the displayed version differ by an isomorphism.
+An arbitrary cartesian square is transported from the chosen pullback by its unique
+projection-preserving isomorphism; naturality of the mate preserves the map. If a
+base is empty the same argument uses zero complexes and needs no chosen point. -/
+theorem isIso_derivedBaseChange_of_flat_invertible
+    [∀ Y : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    {X S X' S' : Scheme.{u}} (f : X ⟶ S)
+    [QuasiCompact f] [IsSeparated f] [Flat f]
+    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')
+    (sq : IsPullback g' f' f g)
+    (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] :
+    IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w
+      ((DerivedCategory.singleFunctor
+        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M)) := by
+  sorry
+
+end AlgebraicGeometry.Scheme.Modules

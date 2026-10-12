@@ -7130,3 +7130,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:54 L: merged deliver/X2/Sheaf.AlgebraicGeometry.AffineDerivedHomEvaluationCounit (stage 3; reviewer PASS; first push; landing 20261012T085401-L-48282 (interface); batch 20261012T085205; modules 3; new nodes 2)
 - 08:54 L: merged deliver/X2/Sheaf.AlgebraicGeometry.DerivedOpenLocalization (stage 3; reviewer PASS; first push; landing 20261012T085401-L-48391 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:54 L: merged deliver/X2/Sheaf.AlgebraicGeometry.PerfectObjectCompact (stage 3; reviewer PASS; first push; landing 20261012T085401-L-48510 (interface); batch 20261012T085205; modules 2; new nodes 1)
+- 08:54 L: merged deliver/X2/Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso (stage 3; reviewer PASS; first push; landing 20261012T085402-L-48701 (interface); batch 20261012T085205; modules 3; new nodes 2)

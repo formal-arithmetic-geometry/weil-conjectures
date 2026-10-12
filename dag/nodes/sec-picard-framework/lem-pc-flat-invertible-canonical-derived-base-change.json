@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-flat-invertible-canonical-derived-base-change",
+ "kind": "statement",
+ "title": "Canonical derived base change for an invertible module on a flat family",
+ "statement": "Choose shared derived-category localizations [def-pc-derived-category] for all schemes. Let f:X\\to S be quasi-compact, separated and flat [def-weil-flat-morphism], let (g\\prime,f\\prime,f,g) be a cartesian square [def-pc-fibre-product], and M an invertible O_X-module [def-sc-invertible-module]. Then the canonical derived base-change morphism [def-pc-derived-base-change-map] Lg^*Rf_*(M[0])\\to Rf\\prime_*Lg\\prime^*(M[0]) is invertible. No vanishing of higher direct images is assumed.",
+ "source": {
+  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+  "place": "nonempty_arrowIso_pullback_directImageCounit docstring, Step 1: invertibility of the canonical derived comparison, independently of higher vanishing; Stacks Tags 0A1D and 08HY"
+ },
+ "stmt_deps": [
+  "def-pc-derived-category",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-sc-invertible-module",
+  "def-pc-derived-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Invertibility implies quasi-coherence and flatness, and flatness of f gives isFlatOver_of_isInvertible. Apply the relatively flat Cech base-change argument to M; the Cech comparison is the canonical mate, by the explicit section-pullback description. This proves invertibility of the derived-to-ordinary target comparison, without a higher-cohomology vanishing assumption.",
+   "uses": [
+    "lem-pc-rf-base-change-flat-module",
+    "lem-pc-base-change-map-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-zero complex M[0] is bounded above and flat over O_X. Its derived-to-ordinary pullback comparison is an isomorphism. Cancel its direct image from the comparison in the previous step. Transport from the chosen pullback to the given cartesian square using the projection-preserving isomorphism and naturality.",
+   "uses": [
+    "lem-pc-flat-complex-derived-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rf-base-change-flat-module",
+  "lem-pc-base-change-map-cech",
+  "lem-pc-flat-complex-derived-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+  "place": "Step 1: invertibility of the canonical derived comparison, independently of higher vanishing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived base change for an invertible sheaf on a flat quasi compact separated scheme morphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero cohomology of canonical derived base change equals mate of ordinary pullback composition counit",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit and AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv give underived adjunction formulas only; no derived degree-zero comparison or canonical invertibility result.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "schemeDerivedBaseChangeMap|counitBaseChange_degreeZero|baseChangeMap_cech",
+   "results": "Launcher Mathlib grep: 0 hits. Local library inspection found SchemeDerivedBaseChangeMap, BaseChangeMapCech, SingleComplexQcqsInduction and RelativelyFlatDerivedBaseChangeComplex; none states either bridge at an invertible module.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso",
+  "date": "2026-10-12",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 1: invertibility of the canonical derived comparison, independently of higher vanishing",
+   "via": [
+    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Picard/FlatInvertibleCanonicalDerivedBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_derivedBaseChange_of_flat_invertible",
+  "statement": "theorem isIso_derivedBaseChange_of_flat_invertible\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] [IsSeparated f] [Flat f]\n    (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S')\n    (sq : IsPullback g' f' f g)\n    (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] :\n    IsIso (schemeDerivedBaseChangeMap f f' g g' sq.w\n      ((DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085402-L-48701",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T085402-L-48701",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
