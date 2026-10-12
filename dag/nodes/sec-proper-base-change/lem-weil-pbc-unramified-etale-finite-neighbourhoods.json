@@ -19,14 +19,14 @@
  },
  "proof": [
   {
-   "text": "Restrict to the finite union of the given unramified opens. Unramifiedness and local finite type are local on the source. Select a distinct enumeration of the listed points, retaining representative original indices.",
+   "text": "Choose the given unramified opens O_i and set T to their union. The inclusions O_i -> T form an open cover. Apply Mathlib IsZariskiLocalAtSource.of_openCover to LocallyOfFiniteType and FormallyUnramified, using the equivalence of formal unramifiedness and an open diagonal in the locally finite type case. This proves that T -> S is unramified. Enumerate the finite range of the lifted list in T with Fintype.equivFin; this enumeration is injective and has image precisely the listed points.",
    "uses": [
     "def-weil-unramified-morphism"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "The listed points in this restriction are isolated in their fibres. Apply the finite-multiple-points theorem to the distinct enumeration, obtaining finite opens with unique purely inseparable marked points and exhaustion of all lifts.",
+   "text": "Apply unramified_fibre_point_isolated to the restriction f_T:T -> S, using its top open as an unramified neighbourhood. Apply exists_etale_local_finite_multiple_points to the distinct finite-range enumeration. Retain its finite opens, unique marked points, purely inseparable extensions, injectivity, and exhaustion.",
    "uses": [
     "lem-weil-pbc-unramified-fibre-point-isolated",
     "lem-weil-pbc-etale-local-finite-multiple-points"
@@ -34,15 +34,32 @@
    "elementary": false
   },
   {
-   "text": "Base change and open restriction preserve unramifiedness. The pullback of the source open embeds openly in the full pullback. Transport the finite pieces and their residue-field data along this open embedding.",
+   "text": "The canonical map j:T x_S U -> X x_S U is an open immersion, and its projection identities hold by pullback.map. Apply unramified_baseChange_restrict_open to f_T to obtain unramifiedness of the restricted pullback projection. For each finite open W, form the open image V of W -> T x_S U -> X x_S U and the isomorphism e:W -> V. The projection from V is e.inv followed by the finite projection from W, so is finite. Source open restriction preserves unramifiedness, as does source isomorphism.",
    "uses": [
     "lem-weil-pbc-unramified-base-change-open",
-    "lem-weil-pbc-open-fibre-product"
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-open-immersion-iso-onto-image",
+    "lem-weil-pbc-finite-composition"
    ],
    "elementary": false
   },
   {
-   "text": "Assign the pieces to representative indices and zero pieces to duplicate indices. This preserves injectivity and exhaustion; repeated original entries have the same lifts. For the empty list use the identity neighbourhood and an empty family.",
+   "text": "Set v=e.hom(w). The equation e.hom followed by V inclusion equals W inclusion followed by j proves its base-point equation. A point of V over u maps by e.inv to the unique point w of W over u; applying e.hom proves uniqueness. By functoriality of residue maps the old extension factors through the new residue field. Thus the new field extension is purely inseparable: it is an intermediate field of the old purely inseparable extension (implemented by IsPurelyInseparable.tower_bot, with the scalar tower supplied by the equality of composite residue maps). Equivalently each element has a suitable characteristic-power in the base field, since its image in the old residue field does and field maps are injective.",
+   "uses": [
+    "def-weil-residue-field",
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The marked points remain injective because j is injective. For each original listed point x_i, every lift p is in the range of j by the pullback range formula, since x_i lies in T. Choose its inverse image q. The projection identities show that q lies above u and the finite-range representative of x_i. The exhaustion clause of the finite-multiple-points theorem supplies its marked open; mapping by j proves exhaustion in the full pullback.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a nonempty original list, put all finite pieces in the first output row and give all other rows size zero. A finite-type equivalence identifies this sigma index set with the old finite family. Precomposing the opens and marked points with this equivalence preserves every piece property, injectivity and exhaustion. The statement does not require the first index of a piece to name its original point. For the empty list use the obtained etale neighbourhood with an empty family; all piece, injectivity and exhaustion conditions are vacuous.",
    "uses": [],
    "elementary": true
   }
@@ -52,12 +69,16 @@
   "lem-weil-pbc-unramified-fibre-point-isolated",
   "lem-weil-pbc-etale-local-finite-multiple-points",
   "lem-weil-pbc-unramified-base-change-open",
-  "lem-weil-pbc-open-fibre-product"
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-open-immersion-iso-onto-image",
+  "lem-weil-pbc-finite-composition",
+  "def-weil-residue-field",
+  "def-weil-pbc-finite-purely-inseparable-extension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/etale.tex",
-  "place": "Tag 04HH (lemma-unramified-etale-local-technical), used in Tag 04HI, via Tag 02LM (lemma-etale-makes-quasi-finite-finite-multiple-points); stability Tags 02G6 and 02GA"
+  "place": "Tag 04HH, first finite-neighbourhood construction via 02LM; source-locality and open-image transport are proved in Lean; finite-range enumeration and arbitrary output reindexing replace representative-index bookkeeping"
  },
  "mathlib_searches": [
   {
@@ -133,11 +154,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-165c5",
-  "group": "K1",
+  "reviewer": "COMPILER",
+  "group": "P2",
   "result": "pass",
-  "landing": "20261012T063513-L-3156682",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivered theorem and helper signatures with their nodes, geometric constructions with cited sources, imports with public dependency closure, and proofs with compilation and axiom probes."
+  "landing": "20261012T085317-L-30980",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
