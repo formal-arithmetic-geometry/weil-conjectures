@@ -7354,3 +7354,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:03 L: merged deliver/G1/Sheaf.AlgebraicGeometry.LowerStarPlusTransitionComp (stage 3; reviewer PASS; first push; landing 20261012T110301-L-614790 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/G1/Sheaf.ConstructibleSheaf.ConstantModuleDual (stage 3; reviewer PASS; first push; landing 20261012T110302-L-614935 (proof); batch 20261012T110249; modules 1; new nodes 0)
 - 11:03 L: merged deliver/G1/Sheaf.ConstructibleSheaf.EtaleDualRestriction (stage 3; reviewer PASS; first push; landing 20261012T110302-L-615058 (proof); batch 20261012T110249; modules 1; new nodes 0)
+- 11:03 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Cohomology.FlatAffineTensorReassociation (stage 3; reviewer PASS; first push; landing 20261012T110302-L-615190 (interface); batch 20261012T110249; modules 2; new nodes 1)

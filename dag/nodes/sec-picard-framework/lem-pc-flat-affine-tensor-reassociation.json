@@ -13,20 +13,30 @@
  },
  "proof": [
   {
-   "text": "The cartesian affine ring formula identifies B with S tensor_R A, compatibly with A and S. Tensor associativity and the tensor-unit equivalence identify (S tensor_R A) tensor_A Γ(W,M) with S tensor_R Γ(W,M). The composite is S-linear and sends b tensor s to β(b) tensor s.",
+   "text": "Use the section-ring A-algebra equivalence e:A⊗_R S≃B from the cartesian affine-open formula, with e(1⊗b)=β(b).",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "lem-pc-flat-affine-section-ring-tensor"
    ],
    "elementary": false
+  },
+  {
+   "text": "For an arbitrary A-module N, tensor commutativity identifies S⊗_R N with N⊗_R S. The inverse of Mathlib cancelBaseChange identifies the latter with N⊗_A(A⊗_R S). Tensor e with the identity of N, and commute the A-tensor factors to obtain B⊗_A N. This composite is additive and sends b⊗n to β(b)⊗n. Prove S-linearity by tensor induction using β(cb)=β(c)β(b).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take N to be Γ(W,M) restricted to R along α; IsScalarTower.of_compHom supplies its scalar tower. The canonical restrictScalarsComp isomorphism identifies it with the displayed presheaf P at W. Extend this isomorphism by S and compose with the equivalence of step 2. Its map on pure tensors is the asserted formula.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-fibre-product-affine-spectra"
+  "lem-pc-flat-affine-section-ring-tensor"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/02KG",
-  "place": "Affine calculation in the proof of Lemma 30.5.1."
+  "place": "Proof of Lemma 30.5.1: the tensor reassociation is proved in Lean using Mathlib tensor commutativity, cancelBaseChange, congr, and restrictScalarsComp; the geometric section-ring identification is isolated."
  },
  "mathlib_searches": [
   {
@@ -114,9 +124,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261012T095852-L-312553",
+  "landing": "20261012T110302-L-615190",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
