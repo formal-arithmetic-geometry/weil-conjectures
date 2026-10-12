@@ -4,8 +4,10 @@ public import Mathlib.Topology.Sheaves.Sheaf
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import Mathlib.Topology.Sheaves.Flasque
-public import Sheaf.Topology.IrreducibleConstantSections
+import Sheaf.Topology.IrreducibleConstantSections
+
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+import Sheaf.Topology.FlasqueZariskiAcyclic
 
 @[expose] public section
 
@@ -35,6 +37,34 @@ theorem irreducible_noetherian_constant_acyclic
     ∀ (q : ℕ), 0 < q →
       Subsingleton (CategoryTheory.Sheaf.H' ((constantSheaf (Opens.grothendieckTopology X)
         AddCommGrpCat.{u}).obj (AddCommGrpCat.of A)) q ⊤) := by
-  sorry
+  let F := (constantSheaf (Opens.grothendieckTopology X)
+    AddCommGrpCat.{u}).obj (AddCommGrpCat.of A)
+  obtain ⟨e, he⟩ := irreducible_constant_sections X A
+  have : TopCat.Sheaf.IsFlasque F := by
+    constructor
+    intro U V i
+    apply (AddCommGrpCat.epi_iff_surjective _).2
+    intro s
+    by_cases hV : (V.unop : Set X).Nonempty
+    · have hU : (U.unop : Set X).Nonempty := Set.Nonempty.mono i.unop.le hV
+      refine ⟨(e U.unop hU).symm (e V.unop hV s), ?_⟩
+      apply (e V.unop hV).injective
+      have h := congrFun (he U.unop V.unop i.unop.le hV)
+        ((e U.unop hU).symm (e V.unop hV s))
+      have hi : (homOfLE i.unop.le).op = i := Subsingleton.elim _ _
+      rw [hi] at h
+      simpa using h
+    · have hbot : V.unop = ⊥ := by
+        apply Opens.ext
+        exact Set.not_nonempty_iff_eq_empty.mp hV
+      have : Subsingleton (F.obj.obj V) :=
+        AddCommGrpCat.subsingleton_of_isZero (Sheaf.isTerminalOfEqEmpty F hbot).isZero
+      exact ⟨0, Subsingleton.elim _ _⟩
+  intro q hq
+  have : Subsingleton (CategoryTheory.Sheaf.H'.{u} F q ⊤) :=
+    Sheaf.IsFlasque.subsingleton_H'_top F q hq
+  let eH : CategoryTheory.Sheaf.H'.{w'} F q ⊤ ≃
+      CategoryTheory.Sheaf.H'.{u} F q ⊤ := CategoryTheory.Abelian.Ext.chgUniv
+  exact eH.injective.subsingleton
 
 end TopCat
