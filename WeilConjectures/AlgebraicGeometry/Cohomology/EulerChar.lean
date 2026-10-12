@@ -12,7 +12,9 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.LinearAlgebra.Dimension.Constructions
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Clopen
+public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
@@ -305,6 +307,64 @@ theorem eulerChar_eq_sum_of_pairwise_disjoint [IsNoetherian X] {n : ℕ}
   rw [Finset.sum_comm]
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [eulerChar_eq_sum_range k _ ((topologicalKrullDim_subspace_le X (U i)).trans hn)]
+
+/-- If `H^q(X, M) = 0` for `q > D`, the Euler characteristic of `M` is the finite sum
+`∑_{q ≤ D} (-1)^q h^q(X, M)`. -/
+theorem eulerChar_eq_sum_range_of_subsingleton (M : X.Modules) {D : ℕ}
+    (hD : ∀ q, D < q → Subsingleton (M.H q)) :
+    M.eulerChar k = ∑ q ∈ Finset.range (D + 1), (-1) ^ q * (M.finrankH k q : ℤ) := by
+  refine finsum_eq_sum_of_support_subset _ fun q hq ↦ ?_
+  by_contra h
+  refine hq ?_
+  change (-1) ^ q * (M.finrankH k q : ℤ) = 0
+  simp only [Finset.coe_range, Set.mem_Iio, not_lt] at h
+  have := hD q (by omega)
+  rw [finrankH, Module.finrank_zero_of_subsingleton, Nat.cast_zero, mul_zero]
+
+/-- **The Euler characteristic of a quasi-coherent module is additive over a finite disjoint
+union.** If a quasi-compact separated scheme `X` is the disjoint union of finitely many open
+subschemes `U i`, and the cohomology of the quasi-coherent module `M` is finite-dimensional, then
+`χ(X, M) = ∑ᵢ χ(U i, M|_{U i})`.
+
+This is `AlgebraicGeometry.Scheme.Modules.eulerChar_eq_sum_of_pairwise_disjoint` without the
+appeal to Grothendieck vanishing: the cohomology of quasi-coherent modules on `X` and on the `U i`
+vanishes above the number of affine opens needed to cover them
+(`AlgebraicGeometry.Scheme.Modules.exists_forall_subsingleton_H_of_isQuasicoherent`). -/
+theorem eulerChar_eq_sum_of_pairwise_disjoint_of_isQuasicoherent [CompactSpace X]
+    [IsSeparated (Limits.terminal.from X)] {ι : Type*} [Fintype ι] (U : ι → X.Opens)
+    (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules)
+    [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
+    [∀ q, FiniteDimensional k (M.H q)] :
+    M.eulerChar k = ∑ i,
+      letI : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
+      ((Scheme.Modules.pullback (U i).ι).obj M).eulerChar k := by
+  classical
+  let (i : ι) : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩
+  have hclosed (i : ι) : IsClosed (U i : Set X) := by
+    have : (U i : Set X)ᶜ = (⨆ j : {j // j ≠ i}, U j : X.Opens) := by
+      ext x
+      simp only [Opens.coe_iSup, Set.mem_iUnion, Set.mem_compl_iff, SetLike.mem_coe]
+      refine ⟨fun hi ↦ ?_, fun ⟨j, hj⟩ hi ↦ (Opens.coe_disjoint.mpr (hU j.2)).le_bot ⟨hj, hi⟩⟩
+      have hx : x ∈ ⨆ i, U i := by rw [hcover]; trivial
+      obtain ⟨j, hj⟩ := Opens.mem_iSup.mp hx
+      exact ⟨⟨j, fun h ↦ hi (h ▸ hj)⟩, hj⟩
+    rw [← isOpen_compl_iff, this]
+    exact Opens.isOpen _
+  have (i : ι) : CompactSpace (U i) := isCompact_iff_compactSpace.mp (hclosed i).isCompact
+  have (i : ι) : IsSeparated (Limits.terminal.from (U i).toScheme) := by
+    rw [← Limits.terminal.comp_from (U i).ι]
+    infer_instance
+  obtain ⟨D₀, hD₀⟩ := exists_forall_subsingleton_H_of_isQuasicoherent (X := X)
+  choose D hD using fun i ↦ exists_forall_subsingleton_H_of_isQuasicoherent (X := U i)
+  have hle (i : ι) : D i ≤ D₀ + ∑ j, D j :=
+    le_add_left (Finset.single_le_sum (fun j _ ↦ Nat.zero_le (D j)) (Finset.mem_univ i))
+  rw [eulerChar_eq_sum_range_of_subsingleton k M (D := D₀ + ∑ j, D j)
+    fun q hq ↦ hD₀ M q (by omega)]
+  simp_rw [finrankH_eq_sum_of_pairwise_disjoint k U hU hcover M, Nat.cast_sum, Finset.mul_sum]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun i _ ↦ ?_
+  rw [eulerChar_eq_sum_range_of_subsingleton k _ (D := D₀ + ∑ j, D j)
+    fun q hq ↦ hD i _ q ((hle i).trans_lt hq)]
 
 end Additivity
 
