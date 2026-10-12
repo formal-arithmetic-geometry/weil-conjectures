@@ -1,160 +1,171 @@
 {
-  "id": "lem-pc-module-filtered-colimits-tensor",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-derived-tensor",
-      "place": "the truncation-colimit reduction in the bounded-above flat-complex argument",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-pc-module-filtered-colimits-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-tensor",
+   "place": "the truncation-colimit reduction in the bounded-above flat-complex argument",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Filtered colimits and tensor complexes of sheaves of modules",
-  "statement": "Let $\\mathcal C$ be a site whose underlying category is small and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Filtered colimits in the abelian category of sheaves of $\\mathcal O$-modules are exact. If $(\\mathcal F_i^\\bullet)_{i\\in I}$ is a filtered diagram of cochain complexes of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules] and $\\mathcal P^\\bullet$ is a fixed such complex, then the canonical termwise colimit isomorphism of total tensor complexes [def-pc-tensor-complex-sheaves]\n\n$$\\operatorname{Tot}((\\varinjlim_i\\mathcal F_i^\\bullet)\\otimes_{\\mathcal O}\\mathcal P^\\bullet)\\cong\\varinjlim_i\\operatorname{Tot}(\\mathcal F_i^\\bullet\\otimes_{\\mathcal O}\\mathcal P^\\bullet)$$\n\nholds, where the colimit on complexes is taken degreewise in the category of sheaves of $\\mathcal O$-modules.",
-  "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemmas 03DB (limits and colimits of O-modules) and 03EP (tensor product commutes with colimits)"
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Filtered colimits and tensor complexes of sheaves of modules",
+ "statement": "Let $\\mathcal C$ be a site whose underlying category is small and $\\mathcal O$ a sheaf of commutative rings on $\\mathcal C$. Filtered colimits in the abelian category of sheaves of $\\mathcal O$-modules are exact. If $(\\mathcal F_i^\\bullet)_{i\\in I}$ is a filtered diagram of cochain complexes of sheaves of $\\mathcal O$-modules [def-pc-cochain-complex-modules] and $\\mathcal P^\\bullet$ is a fixed such complex, then the canonical termwise colimit isomorphism of total tensor complexes [def-pc-tensor-complex-sheaves]\n\n$$\\operatorname{Tot}((\\varinjlim_i\\mathcal F_i^\\bullet)\\otimes_{\\mathcal O}\\mathcal P^\\bullet)\\cong\\varinjlim_i\\operatorname{Tot}(\\mathcal F_i^\\bullet\\otimes_{\\mathcal O}\\mathcal P^\\bullet)$$\n\nholds, where the colimit on complexes is taken degreewise in the category of sheaves of $\\mathcal O$-modules.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03DB (limits and colimits of O-modules) and 03EP (tensor product commutes with colimits)"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "The category of sheaves of $\\mathcal O$-modules is Grothendieck abelian, and its filtered colimits are exact, by [prop-pur-kinjective-resolutions-exist] (the standard small-site size convention is understood, and an essentially small site may be replaced by an equivalent small one). Thus filtered colimits preserve kernels and cokernels and therefore commute with cohomology objects of cochain complexes.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5, first paragraph; Modules on Sites Lemmas 03DA and 03DB"
+   }
   },
-  "stmt_deps": [
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-cochain-complex-modules",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves",
-    "def-pc-kflat-complex"
-  ],
-  "proof": [
-    {
-      "text": "The category of sheaves of $\\mathcal O$-modules is Grothendieck abelian, and its filtered colimits are exact, by [prop-pur-kinjective-resolutions-exist] (the standard small-site size convention is understood, and an essentially small site may be replaced by an equivalent small one). Thus filtered colimits preserve kernels and cokernels and therefore commute with cohomology objects of cochain complexes.",
-      "uses": [
-        "prop-pur-kinjective-resolutions-exist"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Section 07A5, first paragraph; Modules on Sites Lemmas 03DA and 03DB"
-      }
-    },
-    {
-      "text": "For a fixed sheaf of modules $\\mathcal P$, the functor $-\\otimes_{\\mathcal O}\\mathcal P$ preserves all colimits because $\\Mod(\\mathcal O)$ is closed symmetric monoidal and tensoring is a left adjoint, by [lem-pc-sheaf-modules-tensor-closed]. Applying this degreewise to a filtered diagram of complexes identifies each term of the tensor complex of the colimit with the filtered colimit of the corresponding tensor-complex terms; the identification is compatible with the differentials because all structure maps are functorial.",
-      "uses": [
-        "lem-pc-sheaf-modules-tensor-closed",
-        "def-pc-tensor-complex-sheaves"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Lemma 03EP (lemma-tensor-commute-colimits), applied termwise to the tensor-complex construction"
-      }
-    },
-    {
-      "text": "In each total degree the direct-sum totalization is a colimit over the set of pairs of degrees with fixed sum. Colimits commute with colimits, so the filtered colimit commutes with this direct sum. Combining this with Step 2 gives a canonical termwise isomorphism $\\operatorname{Tot}((\\varinjlim_i F_i^\\bullet)\\otimes_{\\mathcal O}P^\\bullet)\\cong\\varinjlim_i\\operatorname{Tot}(F_i^\\bullet\\otimes_{\\mathcal O}P^\\bullet)$, and compatibility with the total differential follows from the defining signed sum in [def-pc-tensor-complex-sheaves].",
-      "uses": [
-        "def-pc-tensor-complex-sheaves"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Lemma 03EP and the direct-sum totalization definition"
-      }
-    }
-  ],
-  "proof_deps": [
-    "prop-pur-kinjective-resolutions-exist",
+  {
+   "text": "For a fixed sheaf of modules $\\mathcal P$, the functor $-\\otimes_{\\mathcal O}\\mathcal P$ preserves all colimits because $\\Mod(\\mathcal O)$ is closed symmetric monoidal and tensoring is a left adjoint, by [lem-pc-sheaf-modules-tensor-closed]. Applying this degreewise to a filtered diagram of complexes identifies each term of the tensor complex of the colimit with the filtered colimit of the corresponding tensor-complex terms; the identification is compatible with the differentials because all structure maps are functorial.",
+   "uses": [
     "lem-pc-sheaf-modules-tensor-closed",
     "def-pc-tensor-complex-sheaves"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemmas 03DB and 03EP, with the totalization interchange written out"
+    "place": "Lemma 03EP (lemma-tensor-commute-colimits), applied termwise to the tensor-complex construction"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "filtered colimits exact sheaves of modules tensor commutes colimits",
-      "results": "AB5 sheaf and tensor-colimit infrastructure; no exact declaration for sheaves of modules on an arbitrary ringed site.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Sheaf.hasExactColimitsOfShape",
-      "results": "Unknown identifier; no exact declaration for the ringed-site statement.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "hasExactColimitsOfShape|tensor.*colimit",
-      "results": "Generic categorical tensor-colimit declarations only; no exact ringed-site theorem.",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-pc-bounded-above-flat-kflat-site",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-module-filtered-colimits-tensor",
-    "worker": "stage1",
-    "summary": "Checked the item against the Stacks sources named in its imported node and searched the whole DAG and blueprint for duplicate statements. No exact sorry-free project declaration states the item. The proof is split into exactness of filtered colimits in the module-sheaf category, degreewise tensor-colimit compatibility from the existing closed tensor node, and the elementary interchange of filtered colimits with the direct-sum totalization. No new nodes were needed.",
-    "blueprint": "Realizes the truncation-colimit reduction in def-weil-derived-tensor: filtered colimits are exact, tensoring commutes with them, and totalization is a direct-sum colimit.",
-    "tool_uses": [
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Its Grothendieck-abelian clause supplies exact filtered colimits in Mod(O), the first clause of this item."
-      }
-    ]
-  },
-  "tool_uses": [
-    "prop-pur-kinjective-resolutions-exist"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-fct2507",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fct2507 (reviewer sub-agent of L); spot-checked: Statement is the sheaf-of-modules complex case (not the bare module case, so no Mathlib leaf; not a restatement of lem-weil-pbc-filtered-colimit-tensor-varying-rings). Step 1 matches the Grothendieck clause of prop-pur-kinjective-resolutions-exist incl. the small-site hypothesis now in the statement (tool use accepted, no cycle: that node has no proof deps). Step 2: colimits taken in Mod(O) itself, so sheafification is inside the cited left-adjoint statement of lem-pc-sheaf-modules-tensor-closed (symmetry gives -⊗P). Step 3 elementary colimit interchange. Statement change named with reason (E7). No repairs."
-  },
-  "lead_note": "2026-10-10 L (R-fct2507): Statement now assumes a small site (from prop-pur-kinjective-resolutions-exist); consumer lem-pc-bounded-above-flat-kflat-site states an arbitrary site and should carry the same convention.",
-  "lean": {
-    "module": "Sheaf.Algebra.Homology.FilteredColimitsTensor",
-    "declaration": "SheafOfModules.filteredColimitsTensorComplex",
-    "file": "lean/Sheaf/Algebra/Homology/FilteredColimitsTensor.lean",
-    "statement": "theorem filteredColimitsTensorComplex (C : Type u) [Category.{u} C] (J : GrothendieckTopology C) [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] (R : Sheaf J CommRingCat.{u}) (I : Type u) [Category.{u} I] [IsFiltered I] : HasExactColimitsOfShape I (Mod R) ∧ ∀ P : CochainComplex (Mod R) ℤ, PreservesColimitsOfShape I ((((@curriedTensor (Mod R) _ (monoidalCategory R)).mapBifunctorHomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ)).flip.obj P) ⋙ HomologicalComplex₂.totalFunctor (Mod R) (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))",
-    "branch": "sheaf-dag",
-    "by": "H1",
-    "date": "2026-10-11",
-    "existing": false,
-    "note": "Colimit preservation of the total tensor functor states invertibility of the canonical comparison. The added landed dependency def-pc-kflat-complex supplies the two recorded PreservesZeroMorphisms instances, without using K-flatness."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-fct0947",
-    "group": "H1",
-    "result": "pass",
-    "note": "small site C:Type u/Category.{u}; R:Sheaf J CommRingCat; Mod R = SheafOfModules over forget2; clause 1 HasExactColimitsOfShape I for all small filtered I; clause 2 PreservesColimitsOfShape I of (curriedTensor via source monoidalCategory R).mapBifunctorHomologicalComplex.flip.obj P ⋙ totalFunctor (up Z) = functorial CochainComplex.mapBifunctor (def-pc-tensor-complex-sheaves mathlib_match), canonical comparison iso, degreewise colimits; the two sheafify binders are inferable for a small site (checked by #synth), only needed for the ∀K HasTotal search; KFlat dep for PreservesZeroMorphisms instances"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "In each total degree the direct-sum totalization is a colimit over the set of pairs of degrees with fixed sum. Colimits commute with colimits, so the filtered colimit commutes with this direct sum. Combining this with Step 2 gives a canonical termwise isomorphism $\\operatorname{Tot}((\\varinjlim_i F_i^\\bullet)\\otimes_{\\mathcal O}P^\\bullet)\\cong\\varinjlim_i\\operatorname{Tot}(F_i^\\bullet\\otimes_{\\mathcal O}P^\\bullet)$, and compatibility with the total differential follows from the defining signed sum in [def-pc-tensor-complex-sheaves]. The preservation comparison is packaged by [lem-pc-module-filtered-colimits-tensor-preserves].",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-module-filtered-colimits-tensor-preserves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Lemma 03EP and the direct-sum totalization definition"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-module-filtered-colimits-tensor-preserves",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemmas 03DB and 03EP, with the totalization interchange written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimits exact sheaves of modules tensor commutes colimits",
+   "results": "AB5 sheaf and tensor-colimit infrastructure; no exact declaration for sheaves of modules on an arbitrary ringed site.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.hasExactColimitsOfShape",
+   "results": "Unknown identifier; no exact declaration for the ringed-site statement.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hasExactColimitsOfShape|tensor.*colimit",
+   "results": "Generic categorical tensor-colimit declarations only; no exact ringed-site theorem.",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-bounded-above-flat-kflat-site",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-module-filtered-colimits-tensor",
+  "worker": "stage1",
+  "summary": "Checked the item against the Stacks sources named in its imported node and searched the whole DAG and blueprint for duplicate statements. No exact sorry-free project declaration states the item. The proof is split into exactness of filtered colimits in the module-sheaf category, degreewise tensor-colimit compatibility from the existing closed tensor node, and the elementary interchange of filtered colimits with the direct-sum totalization. No new nodes were needed.",
+  "blueprint": "Realizes the truncation-colimit reduction in def-weil-derived-tensor: filtered colimits are exact, tensoring commutes with them, and totalization is a direct-sum colimit.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Its Grothendieck-abelian clause supplies exact filtered colimits in Mod(O), the first clause of this item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-fct2507",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-fct2507 (reviewer sub-agent of L); spot-checked: Statement is the sheaf-of-modules complex case (not the bare module case, so no Mathlib leaf; not a restatement of lem-weil-pbc-filtered-colimit-tensor-varying-rings). Step 1 matches the Grothendieck clause of prop-pur-kinjective-resolutions-exist incl. the small-site hypothesis now in the statement (tool use accepted, no cycle: that node has no proof deps). Step 2: colimits taken in Mod(O) itself, so sheafification is inside the cited left-adjoint statement of lem-pc-sheaf-modules-tensor-closed (symmetry gives -⊗P). Step 3 elementary colimit interchange. Statement change named with reason (E7). No repairs."
+ },
+ "lead_note": "2026-10-10 L (R-fct2507): Statement now assumes a small site (from prop-pur-kinjective-resolutions-exist); consumer lem-pc-bounded-above-flat-kflat-site states an arbitrary site and should carry the same convention.",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FilteredColimitsTensor",
+  "declaration": "SheafOfModules.filteredColimitsTensorComplex",
+  "file": "lean/Sheaf/Algebra/Homology/FilteredColimitsTensor.lean",
+  "statement": "theorem filteredColimitsTensorComplex (C : Type u) [Category.{u} C] (J : GrothendieckTopology C) [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}] (R : Sheaf J CommRingCat.{u}) (I : Type u) [Category.{u} I] [IsFiltered I] : HasExactColimitsOfShape I (Mod R) ∧ ∀ P : CochainComplex (Mod R) ℤ, PreservesColimitsOfShape I ((((@curriedTensor (Mod R) _ (monoidalCategory R)).mapBifunctorHomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ)).flip.obj P) ⋙ HomologicalComplex₂.totalFunctor (Mod R) (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "Colimit preservation of the total tensor functor states invertibility of the canonical comparison. The added landed dependency def-pc-kflat-complex supplies the two recorded PreservesZeroMorphisms instances, without using K-flatness."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-fct0947",
+  "group": "H1",
+  "result": "pass",
+  "note": "small site C:Type u/Category.{u}; R:Sheaf J CommRingCat; Mod R = SheafOfModules over forget2; clause 1 HasExactColimitsOfShape I for all small filtered I; clause 2 PreservesColimitsOfShape I of (curriedTensor via source monoidalCategory R).mapBifunctorHomologicalComplex.flip.obj P ⋙ totalFunctor (up Z) = functorial CochainComplex.mapBifunctor (def-pc-tensor-complex-sheaves mathlib_match), canonical comparison iso, degreewise colimits; the two sheafify binders are inferable for a small site (checked by #synth), only needed for the ∀K HasTotal search; KFlat dep for PreservesZeroMorphisms instances"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T122917-L-1086063",
+  "kind": "interface"
+ }
 }
