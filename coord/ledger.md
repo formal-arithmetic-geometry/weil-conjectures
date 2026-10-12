@@ -5899,3 +5899,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:25 L: merged deliver/E2/Sheaf.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback (stage 3; reviewer PASS; first push; landing 20261012T032447-L-1407544 (proof); modules 1; new nodes 0)
 - 03:25 L: merged deliver/Z2/def-nagata-finite-presentation-descent (stage 2; reviewer PASS; first push; Sheaf.AlgebraicGeometry.NagataFinitePresentationDescent AlgebraicGeometry.nagataFinitePresentationDescent; statement corrected (3 citers))
 - 03:26 L: merged deliver/F1/Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison (stage 3; reviewer PASS; after a return; landing 20261012T032608-L-1414923 (proof); modules 1; new nodes 0)
+- 03:27 L: merged deliver/G1/Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso (stage 3; reviewer PASS; first push; landing 20261012T032644-L-1418028 (proof); modules 1; new nodes 0)

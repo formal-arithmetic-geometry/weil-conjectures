@@ -3,6 +3,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 
 @[expose] public section
 
@@ -68,6 +69,15 @@ theorem zero_dimensional_etale_cohomology_iso
             (Scheme.pointSmallEtale (s x)).toPresheafFiber
               (Scheme.Etale.mk (𝟙 C))
               (Over.homMk (s x) (Category.comp_id (s x))) F.obj)) := by
-  sorry
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  let : IsSeparated (C ↘ Spec (.of k)) := inferInstanceAs (IsSeparated f)
+  let : LocallyOfFiniteType (C ↘ Spec (.of k)) := inferInstanceAs (LocallyOfFiniteType f)
+  let : QuasiCompact (C ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact f)
+  have hg := (Scheme.zeroDimensional_sections_stalks.{u, u}
+    k C hdim Ω s hs).2.1 F
+  have hr : IsIso (F.ΓRes (op (Scheme.Etale.mk (𝟙 C)))) :=
+    F.isLimitConeΓ.isIso_π_app_of_isInitial _
+      (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale C).op
+  infer_instance
 
 end AlgebraicGeometry
