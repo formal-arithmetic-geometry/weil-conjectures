@@ -13,6 +13,7 @@ import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 import Sheaf.AlgebraicGeometry.QuasiCoherenceScalarRestriction
 import Sheaf.AlgebraicGeometry.QuasiCoherentAlgebraChangeOfRings
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-! # Affine module tensor CoherenceComparisons
 
 Source: Stacks Project, Morphisms, Lemma 01SB.

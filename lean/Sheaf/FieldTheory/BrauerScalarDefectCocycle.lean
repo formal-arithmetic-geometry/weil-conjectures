@@ -5,6 +5,7 @@ Authors: SHEAF worker R2
 -/
 module
 public import Sheaf.FieldTheory.BrauerScalarDefect
+import Sheaf.FieldTheory.GaloisUnitsCohomology
 
 /-!
 # The continuous scalar-defect cocycle

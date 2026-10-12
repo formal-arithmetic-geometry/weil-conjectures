@@ -9,6 +9,7 @@ import Sheaf.Topology.StalkDirectSums
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.EssentiallySmall
+import Sheaf.CategoryTheory.WeakTriangulatedGenerator
 
 /-! # Telescope construction for a given supported compact detector
 

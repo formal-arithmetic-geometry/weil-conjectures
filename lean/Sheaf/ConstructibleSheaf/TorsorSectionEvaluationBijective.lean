@@ -6,6 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorSectionRepresentation
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Bijectivity of normalized evaluation on a connected torsor

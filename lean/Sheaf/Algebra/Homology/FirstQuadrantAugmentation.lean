@@ -5,6 +5,7 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.CategoryTheory.DoubleComplexTotal
 
 /-! # A columnwise criterion for a first-quadrant augmentation
 

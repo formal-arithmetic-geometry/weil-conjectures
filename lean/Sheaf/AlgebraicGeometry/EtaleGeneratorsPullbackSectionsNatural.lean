@@ -6,6 +6,8 @@ Authors: SHEAF group A3
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleGeneratorsPullbackSections
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-! # Naturality of pulled-back generator sections
 

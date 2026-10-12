@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Sheaf.Algebra.Homology.HomComplex
 
 /-! # Evaluation of affine Hom on K-injective complexes
 

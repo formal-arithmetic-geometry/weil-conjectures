@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Two-open gluing of continuity
 

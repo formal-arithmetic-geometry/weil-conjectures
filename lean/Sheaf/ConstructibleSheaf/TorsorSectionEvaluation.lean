@@ -6,6 +6,7 @@ Authors: SHEAF group B2
 module
 
 public import Sheaf.ConstructibleSheaf.TorsorSectionRepresentation
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Evaluation of torsor-trivialized sheaves in their sections over the cover

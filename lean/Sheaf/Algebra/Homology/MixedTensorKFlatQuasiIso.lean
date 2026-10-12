@@ -9,6 +9,9 @@ public import Sheaf.Algebra.Homology.MixedTotalTensor
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.KFlatResolution
+import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-!
 # Quasi-isomorphisms for mixed total tensor

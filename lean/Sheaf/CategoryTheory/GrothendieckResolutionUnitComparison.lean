@@ -6,6 +6,8 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.CategoryTheory.GrothendieckComposablePair
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 
 /-! # Resolution comparisons and the composite derived unit
 

@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.Compactification.BaseChange
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 
 /-! # Boundary point classes under base change
 

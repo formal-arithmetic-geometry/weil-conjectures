@@ -9,6 +9,9 @@ public import Sheaf.Algebra.Homology.KFlatPullback
 public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.CategoryTheory.Preadditive.LeftExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.StalkChangeOfRings
+import Sheaf.Algebra.Homology.InverseImageStalkScalarTransport
+import Sheaf.Algebra.Homology.ModuleStalkExact
 
 /-! # Kernels of tensor pullback along stalkwise flat morphisms
 Source: Stacks Project, Modules, Tag 02N4.

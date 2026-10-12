@@ -2,6 +2,8 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.Over
+import Sheaf.Paper.SiteRestrictionInjectives
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 @[expose] public section
 

@@ -6,6 +6,7 @@ Authors: SHEAF group D3
 module
 
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Affine module tensor ExtensionUnit
 

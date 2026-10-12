@@ -8,6 +8,8 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
+import Sheaf.AlgebraicGeometry.TensorPullback
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-! # Flatness on a union of finite locally free loci
 

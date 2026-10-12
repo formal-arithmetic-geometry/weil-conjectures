@@ -1,6 +1,8 @@
 module
 
 public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
+import Sheaf.CategoryTheory.CartanEilenbergExists
+import Sheaf.Paper.CartanEilenbergLeftExactCohomology
 
 @[expose] public section
 

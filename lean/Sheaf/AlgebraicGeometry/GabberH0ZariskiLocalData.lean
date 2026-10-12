@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Sheaf.AlgebraicGeometry.FiniteSurjectiveSetDescentInjective
+import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites
 
 /-! # Local data for Zariski gluing
 

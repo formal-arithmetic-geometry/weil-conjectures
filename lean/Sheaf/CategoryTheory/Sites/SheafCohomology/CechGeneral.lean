@@ -4,6 +4,9 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.CategoryTheory.CechResolutionColumns
+import Sheaf.CategoryTheory.CechResolutionDoubleComplex
+import Sheaf.CategoryTheory.CechResolutionTotal
 
 /-! General-universe Cech double complex comparison. -/
 

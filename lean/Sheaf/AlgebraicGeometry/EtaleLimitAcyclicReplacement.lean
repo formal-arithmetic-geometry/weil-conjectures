@@ -18,6 +18,8 @@ import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.SiteCechVanishingCriterion
 import Sheaf.CategoryTheory.ColimitSiteSections
 import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Acyclic replacement of an inverse system of etale sheaves
 

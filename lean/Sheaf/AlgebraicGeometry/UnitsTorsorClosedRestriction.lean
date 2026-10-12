@@ -8,6 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction
 public import WeilConjectures.CategoryTheory.Sites.Torsor
+import Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward
+import Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative
+import Sheaf.Topology.ClosedPushforwardBoundaryNaturality
 
 /-!
 # Closed restriction of classes of units torsors
