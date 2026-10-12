@@ -77,12 +77,6 @@ lemma preservesKInjectiveComplexes_restrictScalars (hφ : φ.Flat) (X : Scheme.{
 
 variable (φ)
 
-/-- Restriction of scalars commutes with the direct image, both being computed objectwise. -/
-noncomputable def lowerStarCompRestrictScalarsIso {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    (g)_*[ModuleCat.{u + 1} Λ'] ⋙ Sheaf.restrictScalars Y.smallEtaleTopology φ ≅
-      Sheaf.restrictScalars Z.smallEtaleTopology φ ⋙ (g)_*[ModuleCat.{u + 1} Λ] :=
-  Iso.refl _
-
 /-- Blueprint `lem-fin-coefficients-forgetful-direct-image`: Changing finite coefficient rings in
 a direct image.
 

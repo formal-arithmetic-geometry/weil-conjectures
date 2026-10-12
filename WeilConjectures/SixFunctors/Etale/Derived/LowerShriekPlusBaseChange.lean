@@ -136,7 +136,7 @@ the derived base change map of a cartesian square with proper right side is an i
 `thm-weil-pbc-bounded-below`). -/
 instance [Finite Λ] : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperBaseChange where
   isIso_pfBaseChange {U' U Z' Z t l r b} _ h := by
-    rw [derivedPlusFormalism_pfBaseChange]
+    rw [derivedPlusFormalism_pfBaseChange, ← baseChange_eq_derivedBaseChangeMapPlus]
     exact isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite h
 
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X}
