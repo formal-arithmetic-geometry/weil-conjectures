@@ -110,6 +110,37 @@ noncomputable def cohomologyPresheafRestrict {T : Scheme.{u}} (t : T ⟶ X) (V :
 
 end Restrict
 
+section Stalk
+
+variable {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
+  (s : Spec (.of Ω) ⟶ S)
+
+/-- The geometric stalk of `Hᵠ(Rf_* K)` at `s` is the fibre at `s` of the hypercohomology presheaf
+`V ↦ Hᵠ(V ×_S X, K|)`, of which it is the sheafification. -/
+noncomputable def presheafFiberHigherDirectImagePresheafAddEquiv (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    ((Scheme.pointSmallEtale s).presheafFiber (A := AddCommGrpCat.{u + 1})).obj
+      (Etale.higherDirectImagePresheaf Λ f q K) ≃+
+      (Scheme.geometricStalkFunctor s (ModuleCat.{u + 1} Λ)).obj
+        ((DerivedCategory.Plus.homologyFunctor _ q).obj
+          (R+((f)_*[ModuleCat.{u + 1} Λ]).obj K)) :=
+  have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : LocallySmall.{u} S.Etale := locallySmall_self _
+  have h := Etale.isLocallyBijective_higherDirectImagePresheafToSheaf Λ f q K
+  have := h.1
+  have := h.2
+  (AddEquiv.ofBijective ((Scheme.pointSmallEtale s).presheafFiber.map
+      (Etale.higherDirectImagePresheafToSheaf Λ f q K)).hom
+    ((Scheme.pointSmallEtale s).toPresheafFiber_map_bijective _)).trans
+    (((Scheme.pointSmallEtale s).sheafFiberCompIso
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).app _).addCommGroupIsoToAddEquiv
+
+end Stalk
+
 /-- **Strict-henselization stalk formula** (blueprint
 `prop-weil-pbc-strict-henselization-stalk-formula`): for a quasi-compact quasi-separated
 `f : X ⟶ S`, a sheaf `F` of `Λ`-modules on `X_ét` and a geometric point `s : Spec Ω ⟶ S`, the
