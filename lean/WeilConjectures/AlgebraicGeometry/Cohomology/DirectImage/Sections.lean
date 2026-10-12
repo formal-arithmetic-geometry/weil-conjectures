@@ -7,15 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
-import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
-import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
-import Sheaf.AlgebraicGeometry.ProjectionFormulaLocality
-import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
@@ -32,12 +25,39 @@ their vanishing in high degrees.
 
 universe u
 
-open CategoryTheory Limits
+open CategoryTheory Limits TopologicalSpace
 
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X T : Scheme.{u}}
 variable (f : X ⟶ T) (ℱ : X.Modules)
+
+section QuasiCoherence
+
+variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
+  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
+
+/-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
+quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
+quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
+
+(blueprint: `sk-thm-picard-coherence`) -/
+theorem isQuasicoherent_higherDirectImage (q : ℕ) :
+    ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
+  sorry
+
+end QuasiCoherence
+
+private theorem inverse_comp_naturality {C D : Type*} [Category C] [Category D]
+    {F G H : C ⥤ D} (τ : F ⟶ G) (c : F ≅ H) {M N : C} (φ : M ⟶ N)
+    [IsIso (τ.app M)] [IsIso (τ.app N)] :
+    G.map φ ≫ inv (τ.app N) ≫ c.hom.app N =
+      inv (τ.app M) ≫ c.hom.app M ≫ H.map φ := by
+  have hinv : G.map φ ≫ inv (τ.app N) = inv (τ.app M) ≫ F.map φ := by
+    apply (cancel_mono (τ.app N)).1
+    rw [Category.assoc, IsIso.inv_hom_id, Category.comp_id, Category.assoc,
+      τ.naturality φ, ← Category.assoc, IsIso.inv_hom_id, Category.id_comp]
+  rw [← Category.assoc, hinv, Category.assoc, c.hom.naturality]
 
 /-- **The sections of the higher direct images over an affine base, naturally.** Over an affine
 base, for `f` quasi-compact and separated, the global sections of `R^q f_* ℱ` are the sheaf
@@ -55,8 +75,38 @@ theorem exists_addEquiv_sections_higherDirectImage_H [IsAffine T] [QuasiCompact 
       ∀ (ℱ 𝒢 : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
         [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) 𝒢] (φ : ℱ ⟶ 𝒢)
         (x : Γ((higherDirectImage f q).obj ℱ, ⊤)),
-        e 𝒢 (((higherDirectImage f q).map φ).app ⊤ x) = H.map φ q (e ℱ x) :=
-  sorry
+        e 𝒢 (((higherDirectImage f q).map φ).app ⊤ x) = H.map φ q (e ℱ x) := by
+  classical
+  obtain ⟨a, ha⟩ := exists_moduleCohomology_source_comparison X q
+  obtain ⟨ε, _, hε⟩ := exists_lerayEdge_isIso_of_vanishing f
+  have hvan (M : X.Modules) [M.IsQuasicoherent] (n p : ℕ) (hp : 0 < p) :
+      IsZero ((RingedSpace.moduleCohomology T.toRingedSpace p).obj
+        ((higherDirectImage f n).obj M)) := by
+    have := isQuasicoherent_higherDirectImage f M n
+    obtain ⟨b, _⟩ := exists_moduleCohomology_source_comparison T p
+    obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hp.ne'
+    have hs : Subsingleton (((higherDirectImage f n).obj M).H (k + 1)) :=
+      subsingleton_H_succ_of_isAffine ((higherDirectImage f n).obj M) k
+    have : Subsingleton ((RingedSpace.moduleCohomology T.toRingedSpace (k + 1)).obj
+        ((higherDirectImage f n).obj M)) :=
+      (b ((higherDirectImage f n).obj M)).toEquiv.injective
+        |>.subsingleton
+    exact ModuleCat.isZero_of_subsingleton _
+  have hi (M : X.Modules) [M.IsQuasicoherent] : IsIso ((ε q).app M) :=
+    hε M (hvan M) q
+  let e (M : X.Modules) [M.IsQuasicoherent] :
+      Γ((higherDirectImage f q).obj M, ⊤) ≃+ M.H q :=
+    (asIso ((ε q).app M)).symm.addCommGroupIsoToAddEquiv.trans (a M)
+  refine ⟨e, ?_⟩
+  intro M N _ _ φ x
+  have h := ConcreteCategory.congr_hom
+    (inverse_comp_naturality (ε q) (Iso.refl _) φ) x
+  change inv ((ε q).app N) (((higherDirectImage f q).map φ).app ⊤ x) =
+    ((RingedSpace.moduleCohomology X.toRingedSpace q).map φ).hom
+      (inv ((ε q).app M) x) at h
+  change a N (inv ((ε q).app N) (((higherDirectImage f q).map φ).app ⊤ x)) = _
+  rw [h]
+  exact ha M N φ (inv ((ε q).app M) x)
 
 /-- **The sections of the higher direct images over an affine base, linearly.** Over an affine
 base the global sections of the `q`-th higher direct image are the sheaf cohomology of `ℱ`,
@@ -244,21 +294,7 @@ theorem nonempty_higherDirectImage_tensorObj_pullback_iso (𝒩 : T.Modules) [�
 
 end BaseChange
 
-section QuasiCoherence
 
-variable [QuasiCompact f] [QuasiSeparated f] [HasInjectiveResolutions X.Modules]
-  [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ]
-
-/-- **Quasi-coherence of the higher direct images.** For `f : X ⟶ T` quasi-compact and
-quasi-separated and `ℱ` a quasi-coherent `𝒪_X`-module, the higher direct image `R^q f_* ℱ` is a
-quasi-coherent `𝒪_T`-module for every `q` [Stacks, Tag 01XJ].
-
-(blueprint: `sk-thm-picard-coherence`) -/
-theorem isQuasicoherent_higherDirectImage (q : ℕ) :
-    ((higherDirectImage f q).obj ℱ).IsQuasicoherent :=
-  sorry
-
-end QuasiCoherence
 
 section Vanishing
 
