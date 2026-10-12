@@ -25,76 +25,44 @@
  ],
  "proof": [
   {
-   "text": "Let Ab(Z) and Ab(X) denote the abelian categories of abelian sheaves on the two spaces. By the definition of topological sheaf cohomology, these categories have enough injectives, and H^a(X,-) is the right derived functor R^aΓ(X,-) of the left exact additive global-sections functor. The direct image f_* is left exact and additive because it is computed sectionwise by (f_*G)(U)=G(f^{-1}U).",
+   "text": "Prove topological_pushforwardAb_additive directly: construct the additive-functor instance, introduce two sheaves and morphisms, use componentwise extensionality, and conclude by reflexivity. Direct image is precomposition on sections, and addition is sectionwise.",
    "uses": [
-    "def-sc-topological-abelian-cohomology",
     "def-sp-left-exact-additive"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Section 01DZ (cohomology of abelian sheaves on a topological space) and Lemma 01F2 (cohomology-lemma-Leray)"
-   }
+   "elementary": true
   },
   {
-   "text": "The new injective-pushforward lemma says that f_* sends injectives to injectives. Applying the general acyclicity clause for derived functors to the left exact additive functor Γ(X,-), every f_*I with I injective is Γ(X,-)-acyclic, so f_* sends injectives to Γ(X,-)-acyclics [def-sp-acyclic]. Moreover Ab(Z) and Ab(X) are Grothendieck abelian: an abelian sheaf on a space is the same as a sheaf of modules over the constant sheaf of rings Z on the small site of open subsets, so the Grothendieck-abelian clause of [prop-pur-kinjective-resolutions-exist] applies. Hence (f_*,Γ(X,-)) is a composable pair [def-sp-composite-acyclicity] with f_* sending injectives to Γ(X,-)-acyclics, which is the hypothesis of the Grothendieck spectral-sequence theorem.",
+   "text": "Define HX and HZ as the actual cohomologyPresheafFunctor evaluated at the terminal opens. Their required equality witnesses hX,hZ are reflexivity, not arbitrary abutment choices.",
    "uses": [
-    "lem-sc-topological-pushforward-injective",
-    "lemma-weil-pbc-leray-acyclicity",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-sp-composite-acyclicity",
-    "def-sp-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01F2 (cohomology-lemma-Leray), proof"
-   }
-  },
-  {
-   "text": "The Grothendieck spectral-sequence theorem applied to F=f_* and G=Γ(X,-) gives a functorial first-quadrant cohomological spectral sequence with E_2^{a,b}=R^aΓ(X,R^bf_*F)=H^a(X,R^bf_*F), converging to R^{a+b}(Γ(X,-)∘f_*)F. Since Γ(X,f_*G)=Γ(Z,G) sectionwise, the composite is Γ(Z,-), so its derived functors are H^{a+b}(Z,F).",
-   "uses": [
-    "thm-sp-grothendieck",
     "def-sc-topological-abelian-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Lemma 01F2 (cohomology-lemma-Leray)"
-   }
+   "elementary": true
   },
   {
-   "text": "The construction clause of [thm-sp-grothendieck] identifies the Leray spectral sequence with the second spectral sequence of the double complex Γ(X,I^{•,•}) of [thm-sp-double-complex-spectral-sequences], and the spectral-sequence structure [def-sp-spectral-sequence] identifies the pages and differentials as d_r:E_r^{a,b}\\to E_r^{a+r,b-r+1} with d_r\\circ d_r=0 and E_{r+1}^{a,b}=ker(d_r)/im(d_r), and its first-quadrant convergence gives E_2^{a,b}=0 outside a,b>=0, stabilization E_∞^{a,b}=E_r^{a,b} for all sufficiently large r, and a finite decreasing filtration F^0H^n=H^n⊇...⊇F^{n+1}H^n=0 with F^aH^n/F^{a+1}H^n≅E_∞^{a,n-a}. The construction is functorial in F. The bottom edge is the map R^pΓ(X,f_*F)=H^p(X,f_*F) to the abutment induced by the composite Γ(X,f_*F)=Γ(Z,F), hence is the map induced by f.",
+   "text": "Obtain the natural cohomology map edge and free terminal-sheaf map a, together with its generator and arbitrary-resolution cocycle equations, from lem-sc-topological-induced-cohomology-cocycle.",
    "uses": [
-    "thm-sp-double-complex-spectral-sequences",
-    "thm-sp-grothendieck",
-    "def-sp-filtration",
-    "def-sp-spectral-sequence"
+    "lem-sc-topological-induced-cohomology-cocycle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Lemma 015N (lemma-grothendieck-spectral-sequence), proof and finite-filtration conclusion; Cohomology Lemma 01F2"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply lem-sc-topological-leray-bottom-realization to this edge,a and these two equations. Obtain E,e2,stabilization,T,filtration bounds,g,e0,t,b,k and the prescribed bottom-edge factorization. Assemble all existential witnesses and conjunctions, keeping the generator and cocycle equations from the induced-map theorem. No statement or definition is changed.",
+   "uses": [
+    "lem-sc-topological-leray-bottom-realization"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-topological-abelian-cohomology",
   "def-sp-left-exact-additive",
-  "lem-sc-topological-pushforward-injective",
-  "lemma-weil-pbc-leray-acyclicity",
-  "thm-sp-grothendieck",
-  "thm-sp-double-complex-spectral-sequences",
-  "def-sp-filtration",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-sp-composite-acyclicity",
-  "def-sp-acyclic",
-  "def-sp-spectral-sequence"
+  "def-sc-topological-abelian-cohomology",
+  "lem-sc-topological-induced-cohomology-cocycle",
+  "lem-sc-topological-leray-bottom-realization"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Lemma 01F2 (cohomology-lemma-Leray), using Derived Categories Lemma 015N"
+  "place": "Lemma 01F2 via Derived Categories 015N; Q3 formal assembly from separate induced-map and spectral realization statements"
  },
  "mathlib_searches": [
   {
@@ -194,5 +162,15 @@
   "group": "V1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T095920-L-323475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

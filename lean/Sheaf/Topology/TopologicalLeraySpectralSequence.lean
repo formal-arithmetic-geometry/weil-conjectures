@@ -10,12 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.Topology.TopologicalInducedCohomologyCocycle
+import Sheaf.Topology.TopologicalLerayBottomRealization
 
 /-! # Leray spectral sequence for a continuous map of spaces
 
@@ -44,10 +40,15 @@ Proof: Direct image evaluates a sheaf on inverse-image opens. Addition of sheaf 
 is sectionwise, so precomposition preserves addition. -/
 theorem topological_pushforwardAb_additive {Z X : TopCat.{u}} (f : Z ⟶ X) :
     (TopCat.Sheaf.pushforwardAb f).Additive := by
-  sorry
+  constructor
+  intro F G α β
+  ext U
+  rfl
 
 attribute [instance] topological_pushforwardAb_additive
 
+set_option maxHeartbeats 800000 in
+-- Elaborating the nested functor-category and Ext identifications needs additional heartbeats.
 /-- The functorial first-quadrant Leray spectral sequence, including its canonical bottom edge.
 Source: Stacks Project, Cohomology, Lemma 01F2 (cohomology-lemma-Leray), Section 01DZ,
 and Derived Categories, Lemma 015N (blueprint: lem-sc-topological-leray-spectral-sequence).
@@ -161,6 +162,25 @@ theorem exists_topological_leray_spectralSequence {Z X : TopCat.{u}} (f : Z ⟶ 
                                     ((TopCat.Sheaf.pushforwardAb f).obj F)) (hX p)).symm)
                                     (J.extMk s (p + 1) rfl hs))) =
                                   I.extMk z (p + 1) rfl hz) := by
-  sorry
+  let HX (n : ℕ) :
+      Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u} :=
+    Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology X) n ⋙
+    (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  let HZ (n : ℕ) :
+      Sheaf (Opens.grothendieckTopology Z) AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u} :=
+    Sheaf.cohomologyPresheafFunctor (Opens.grothendieckTopology Z) n ⋙
+    (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤)
+  have hX : ∀ n, HX n = Sheaf.cohomologyPresheafFunctor
+      (Opens.grothendieckTopology X) n ⋙
+        (evaluation (Opens X)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ ↦ rfl
+  have hZ : ∀ n, HZ n = Sheaf.cohomologyPresheafFunctor
+      (Opens.grothendieckTopology Z) n ⋙
+        (evaluation (Opens Z)ᵒᵖ AddCommGrpCat.{u}).obj (op ⊤) := fun _ ↦ rfl
+  obtain ⟨edge, a, ha, hedge⟩ :=
+    exists_topological_induced_cohomology_cocycle f HX HZ hX hZ
+  obtain ⟨E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht, b, hb₂, hb, k, hk, he⟩ :=
+    exists_topological_leray_bottom_realization f HX HZ hX hZ edge a ha hedge
+  exact ⟨HX, HZ, hX, hZ, E, e₂, stable, T, top, bot, g, e₀, he₀, t, ht,
+    b, hb₂, hb, k, hk, edge, he, a, ha, hedge⟩
 
 end CategoryTheory
