@@ -9,29 +9,41 @@
  },
  "proof": [
   {
-   "text": "Restrict to compatible affine opens and identify them with spectra of their section rings. The cartesian square identifies the pulled-back affine with the tensor product ring, and quasi-coherence identifies the module with the associated module of sections.",
-   "uses": [],
+   "text": "Use quasi-coherence of pushforward along the affine morphism. Apply exists_tensorPullback_affine_sections to g, U and W, swap the tensor factors, and use its scalar compatibility and bijectivity to construct the source R-prime-linear equivalence. Its pure-tensor formula gives a.symm(1 tensor m) = eta_g(m) restricted to W.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
    "elementary": false
   },
   {
-   "text": "Apply exists_affineBaseChange_tensorComparisons after the affine and tilde identifications. The open-restriction comparison transports beta to this square. The adjunction identity homEquiv(homEquiv.symm(k)) = k identifies beta after the g-unit with the pushforward of the g'-unit; the sectionwise pushforward composition identifications are identities. The two unit-normalized tensor comparisons give the formula at 1 tensor m, and R'-linearity gives it at r tensor m. This proves only the coordinate formula, without using bijectivity of beta.",
+   "text": "Put V=f inverse-image U and V-prime=f-prime inverse-image W. Affineness is preserved by the cartesian square. Mathlib isIso_pushoutSection_of_isAffineOpen and isIso_pushoutSection_iff give the pushout of the section rings, hence Algebra.IsPushout.equiv identifies the ring on V-prime with R-prime tensor_R B respecting both projections. Apply the affine pullback-sections formula to g-prime, V and V-prime and transport its first tensor factor by this equivalence. Tensor induction proves R-prime-linearity, and the balancing relation proves the normalized target unit formula. Compose the sectionwise pushforward comparison maps and restrictions: the resulting morphisms of opens are equal because the opens category is thin.",
    "uses": [
-    "lem-weil-pbc-affine-base-change-tensor-comparisons",
-    "lem-weil-pbc-module-base-change-map-open-restriction"
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-fibre-product-affine-spectra"
    ],
    "elementary": false
+  },
+  {
+   "text": "The defining adjoint k of moduleBaseChangeMap satisfies eta_g followed by pushforward_g(beta)=k by homEquiv.apply_symm_apply and Adjunction.homEquiv_unit. Evaluate on U, use naturality of beta under restriction to W, and apply the two proved unit normalizations at m and (1,m). This proves the displayed coordinate equation at 1 tensor m. Rewrite r tensor m as r smul (1 tensor m); linearity of a.symm, beta.app W and b gives the equation for arbitrary r.",
+   "uses": [
+    "lem-weil-pbc-module-base-change-map-open-restriction"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-base-change-tensor-comparisons",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-module-base-change-map-open-restriction"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q1",
-  "date": "2026-10-12",
+  "group": "F2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Lemma 02KG"
+  "place": "Lemma 02KG, reduction to spectra; Schemes Tag 01I9 and affine fibre-product sections; formal restriction and adjunction calculation written by F2"
  },
  "mathlib_searches": [
   {
@@ -101,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T165528-L-2938405",
-  "kind": "interface",
+  "landing": "20261012T194110-L-454646",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
