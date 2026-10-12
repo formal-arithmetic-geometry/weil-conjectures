@@ -5770,3 +5770,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 00:58 L: returned deliver/J1/Sheaf.AlgebraicGeometry.Curve.SepClosedComparison (reviewer RETURN: (reviewer X-90c19, head 90c198d36) C1: In dag/nodes/sec-proper-base-change/lemma-weil-pbc-curve-separably-closed-passage)
 - 00:58 L: returned deliver/N1/Sheaf.AlgebraicGeometry.ZeroDimensionalBaseChangePoints (reviewer RETURN: (reviewer X-a92a0, head a92a05bc3) B2/B4: In new-zdbp-residue.json, new-zdbp-fibres-point.json, new-zdbp-fibres-topology)
 - 00:58 L: returned deliver/P1/Sheaf.Topology.NoetherianVanishingByIrreducibleComponents (reviewer RETURN: (reviewer X-0ad79, head 0ad792622) B9: In both new node JSON files, blueprint lacks same_as. In new-node-finite-closed-c)
+- 00:58 L: returned deliver/Q1/Sheaf.Paper.ZeroDimensionalCohomology (reviewer RETURN: (reviewer X-f431e, head f431e23f6) A (brief point 4): The new remaining-sorry theorem needs its own module. Move ZeroDim)
