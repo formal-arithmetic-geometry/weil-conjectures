@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-directed-etale-section-identifications",
+ "kind": "statement",
+ "title": "Identification of section comparisons on an etale upper tail",
+ "statement": "Let I be a preorder, R a scheme [def-weil-pbc-scheme-conventions], B : I opposite -> R.Etale a diagram [def-weil-pbc-etale-site], and c any cone of its underlying scheme diagram. Let p : c.pt -> R and assume each cone leg followed by its stage structure map is p. Let H be a sheaf of sets [def-weil-pbc-etale-sheaf-of-sets], i0 an index, and nu a natural transformation to the sections of p inverse image H at the terminal etale object whose components are the inverse-image unit [lem-weil-pbc-sets-etale-inverse-image-composition-units] followed by restriction along the diagonal pullback lift [def-pc-fibre-product]. Put D equal to the underlying scheme diagram, G equal to the inverse image of H along the structure map at i0, and W0 equal to the terminal etale object over D(i0). For every j in Over(i0 opposite), there exist isomorphisms a_j from H(B_j) to the sections of D(j.hom) inverse image G on the base change of W0, and an isomorphism l from the nu vertex to the sections of the cone-leg-at-i0 inverse image G on the limit-base-change object. For every arrow f : k -> j over i0, H(B(f) opposite) followed by a_k equals a_j followed by the canonical transition section comparison [def-weil-pbc-sets-section-comparison]. Moreover nu_j followed by l equals a_j followed by the canonical cone section comparison. No directedness, qcqs, affine-transition, or limit hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex and sites.tex",
+  "place": "Tag 03S2, paragraph following Definition 03S3; Tags 03CB and 03CC; canonical comparison step of the degree-zero route of Tag 09YQ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sets-section-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Put D equal to the underlying scheme diagram, G equal to the inverse image of H at i0, and W0 equal to its terminal etale object. The over-morphism equations give D(j.hom) followed by the stage-i0 structure morphism equal to the stage-j structure morphism. Apply unit-compatible inverse-image composition and equality transport to identify the iterated inverse image with the inverse image of H along the stage-j structure morphism.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback of the identity object W0 is isomorphic to the terminal etale object at stage j: its second projection is an isomorphism with inverse the pullback lift of the structure map and identity. Evaluate the sheaf-composition isomorphism and then etale restriction at that terminal object. Restriction there is H(Bj); invert the composite to obtain a_j. The same identity-pullback and composition construction along the cone leg at i0 gives the limit-point isomorphism l, using h i0 to identify its composite with p. This needs no etaleness of p or cone legs.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For k to j over i0, expand the canonical section comparison into unit, chosen composition isomorphism, equality transport, and pullback pasting. Move a pulled-back section through it by unit naturality and the composition-unit equation. Under etale restriction the section becomes H on the opposite stage morphism. The two pasting maps have identical pullback projections, so they agree. This proves H(B(f).op) followed by a_k equals a_j followed by the section comparison.",
+   "uses": [
+    "def-weil-pbc-sets-section-comparison",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Repeat the composition-unit calculation for the cone leg at j. The pullback map has first projection c_j and second projection the identity, so pullback uniqueness identifies it with the explicit diagonal lift in hnu. Thus nu at j followed by l equals a_j followed by the cone section comparison. These are isomorphism and naturality statements for any cone, not a continuity or colimit assertion.",
+   "uses": [
+    "def-weil-pbc-sets-section-comparison",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-sets-section-comparison",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "W2 stage-3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex and sites.tex",
+  "place": "Tag 03S2, paragraph following Definition 03S3; Tags 03CB and 03CC; canonical comparison step of the degree-zero route of Tag 09YQ",
+  "note": "Concrete unit and fibre-product calculation making step 3 of the parent proof precise; read the cited Stacks tags online because the local literature texts are absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of an etale sheaf along an etale morphism is restriction, compatibly with inverse image composition and units",
+   "results": "Service unavailable: Internal Server Error, via msearch.py. No verdict inferred from the failure.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit compatible composition and restriction of inverse images of etale sheaves identifies canonical section comparison maps",
+   "results": "Returned Scheme.Modules.restrictFunctorComp_hom_app_app and _inv_app_app for modules on the Zariski site and open immersions; these do not concern arbitrary etale sheaves of sets. The existing project composition-unit and etale-restriction theorems give the constituents, but do not state the simultaneous section identifications.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(restrict|[Cc]omparison)|localizationRestriction; blueprint_refs.py search section comparison and 03S2; rg section identifications in dag/nodes",
+   "results": "Mathlib hits only ring-theoretic restriction of scalars. Project hits are the composition-unit theorem, etale restriction theorem, and canonical section-comparison definition/laws. None states the simultaneous diagram-and-cone identifications with H(Bj). Blueprint 03S2 search finds extension by zero, not this comparison.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DirectedEtaleLimitSections",
+  "date": "2026-10-12",
+  "group": "W2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "Degree-zero Tag 03Q9 stalk computation, using Tag 09YQ: identification of the section continuity cocone with the inverse-image unit and diagonal restriction; step 3 of lem-weil-pbc-directed-etale-limit-sections.",
+   "via": [
+    "lem-weil-pbc-directed-etale-limit-sections",
+    "lem-weil-pbc-cofiltered-etale-limit-sections",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DirectedEtaleSectionIdentifications",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectedEtaleSectionIdentifications.lean",
+  "declaration": "AlgebraicGeometry.directedEtaleSectionIdentifications",
+  "statement": "theorem directedEtaleSectionIdentifications {I : Type u} [Preorder I] {R : Scheme.{u}} (B : Iᵒᵖ ⥤ R.Etale) (c : Cone (B ⋙ Scheme.Etale.forget R ⋙ Over.forget R)) (p : c.pt ⟶ R) (h : ∀ i, c.π.app i ≫ (B.obj i).hom = p) (H : Sheaf R.smallEtaleTopology (Type (u + 1))) (i₀ : I) (ν : B.op ⋙ H.obj ⟶ (Functor.const Iᵒᵖᵒᵖ).obj (((Scheme.etaleSetPullback p).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))))) (hν : ∀ i, ν.app i = (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ p) (Type (u + 1)) (R.smallGrothendieckTopology @Etale) (c.pt.smallGrothendieckTopology @Etale)).unit.app H).hom.app (op (B.obj i.unop))) ≫ ((Scheme.etaleSetPullback p).obj H).obj.map (MorphismProperty.Over.homMk (B := (MorphismProperty.Over.pullback @Etale ⊤ p).obj (B.obj i.unop)) (pullback.lift (c.π.app i.unop) (𝟙 _) (by simpa using h i.unop)) (pullback.lift_snd _ _ _)).op) : let D := B ⋙ Scheme.Etale.forget R ⋙ Over.forget R let G := (Scheme.etaleSetPullback (B.obj (op i₀)).hom).obj H let W₀ := Scheme.Etale.mk (𝟙 (D.obj (op i₀))) ∃ (a : ∀ j : Over (op i₀), H.obj.obj (op (B.obj j.left)) ≅ ((Scheme.etaleSetPullback (D.map j.hom)).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W₀))) (l : ((Scheme.etaleSetPullback p).obj H).obj.obj (op (Scheme.Etale.mk (𝟙 c.pt))) ≅ ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G).obj.obj (op ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W₀))), (∀ (j k : Over (op i₀)) (f : k ⟶ j), H.obj.map (B.map f.left).op ≫ (a k).hom = (a j).hom ≫ etaleSetSectionComparison (D.map f.left) (D.map j.hom) (D.map k.hom) ((D.map_comp f.left j.hom).symm.trans (congrArg (fun t : k.left ⟶ op i₀ ↦ D.map t) f.w)) G W₀) ∧ (∀ j : Over (op i₀), ν.app (op j.left) ≫ l.hom = (a j).hom ≫ etaleSetSectionComparison (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom) G W₀)",
+  "branch": "sheaf-dag",
+  "by": "W2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T063525-L-3162315",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T063525-L-3162315",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

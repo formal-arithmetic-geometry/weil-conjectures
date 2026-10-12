@@ -6535,3 +6535,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:35 L: merged deliver/V2/Sheaf.Paper.DirectImageSplitCoverProduct (stage 3; reviewer PASS; first push; landing 20261012T063524-L-3161876 (interface); batch 20261012T063502; modules 2; new nodes 1)
 - 06:35 L: merged deliver/V2/WeilConjectures.ConstructibleSheaf.Monoidal (stage 3; reviewer PASS; first push; landing 20261012T063525-L-3162010 (proof); batch 20261012T063502; modules 1; new nodes 0)
 - 06:35 L: merged deliver/W2/Sheaf.AlgebraicGeometry.ArtinSchreierDataFormulas (stage 3; reviewer PASS; first push; landing 20261012T063525-L-3162156 (proof); batch 20261012T063502; modules 1; new nodes 0)
+- 06:35 L: merged deliver/W2/Sheaf.AlgebraicGeometry.DirectedEtaleLimitSections (stage 3; reviewer PASS; first push; landing 20261012T063525-L-3162315 (interface); batch 20261012T063502; modules 2; new nodes 1)
