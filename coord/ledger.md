@@ -6370,3 +6370,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 06:07 L: merged deliver/J1/Sheaf.AlgebraicGeometry.AffineEtaleRestrictionUnit (stage 3; reviewer PASS; first push; landing 20261012T060740-L-2908600 (interface); batch 20261012T060728; modules 3; new nodes 2)
 - 06:07 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ConstructibleCurveQuotPart (stage 3; reviewer PASS; first push; landing 20261012T060740-L-2908703 (proof); batch 20261012T060728; modules 1; new nodes 0)
 - 06:07 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ConstructibleCurveSubPart (stage 3; reviewer PASS; first push; landing 20261012T060740-L-2908850 (interface); batch 20261012T060728; modules 2; new nodes 1)
+- 06:07 L: merged deliver/J1/Sheaf.AlgebraicGeometry.DerivedInverseImageComposition (stage 3; reviewer PASS; first push; landing 20261012T060740-L-2908963 (proof); batch 20261012T060728; modules 1; new nodes 0)

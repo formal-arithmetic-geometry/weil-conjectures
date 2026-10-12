@@ -25,102 +25,54 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (sheaf level: associativity).** Notation of [lem-weil-pbc-inverse-image-composition]: units $\\eta_s$ of $s^{-1}\\dashv s_*$ [def-weil-pbc-inverse-image], isomorphisms $d_{s,t}:(st)_*\\xrightarrow{\\sim}s_*t_*$ and $d_S:(\\mathrm{id}_S)_*\\xrightarrow{\\sim}\\mathrm{id}$, and for every composable pair $(s,t)$ the *unit equation* $(E_{s,t})$: $s_*t_*(c_{s,t,G})\\circ s_*(\\eta_{t,s^{-1}G})\\circ\\eta_{s,G}=d_{s,t,(st)^{-1}G}\\circ\\eta_{st,G}$, whose solution among isomorphisms $v^{-1}u^{-1}\\to(uv)^{-1}$ is unique (clause (2)). Put $\\alpha=c_{u,vw}\\circ(c_{v,w}u^{-1})$, $\\beta=c_{uv,w}\\circ(w^{-1}c_{u,v})$ and $\\gamma=\\beta\\circ(c_{v,w}u^{-1})^{-1}:(vw)^{-1}u^{-1}\\xrightarrow{\\sim}(uvw)^{-1}$. We show that $\\gamma$ satisfies $(E_{u,vw})$; by uniqueness $\\gamma=c_{u,vw}$, i.e. $\\beta=\\alpha$. Fix $G$ on $X_{\\Et}$, $H=u^{-1}G$. (a) $(E_{v,w})$ at $H$ gives $\\eta_{vw,H}=d_{v,w}^{-1}\\circ v_*w_*(c_{v,w,H})\\circ v_*(\\eta_{w,v^{-1}H})\\circ\\eta_{v,H}$. (b) Insert this into the left side of $(E_{u,vw})$ for $\\gamma$ and move $u_*(vw)_*(\\gamma_G)$ past $u_*(d_{v,w}^{-1})$ by naturality of $d_{v,w}$: the left side becomes $u_*(d^{-1}_{v,w})\\circ u_*v_*w_*(\\gamma_G\\circ c_{v,w,H})\\circ u_*v_*(\\eta_{w,v^{-1}H})\\circ u_*(\\eta_{v,H})\\circ\\eta_{u,G}$, with $\\gamma_G\\circ c_{v,w,H}=\\beta_G=c_{uv,w,G}\\circ w^{-1}(c_{u,v,G})$. (c) Naturality of $\\eta_w$ for $c_{u,v,G}$: $w_*w^{-1}(c_{u,v,G})\\circ\\eta_{w,v^{-1}H}=\\eta_{w,(uv)^{-1}G}\\circ c_{u,v,G}$; then $(E_{u,v})$ replaces $u_*v_*(c_{u,v,G})\\circ u_*(\\eta_{v,H})\\circ\\eta_{u,G}$ by $d_{u,v}\\circ\\eta_{uv,G}$. The left side is now $u_*(d^{-1}_{v,w})\\circ u_*v_*w_*(c_{uv,w,G})\\circ u_*v_*(\\eta_{w,(uv)^{-1}G})\\circ d_{u,v}\\circ\\eta_{uv,G}$. (d) Naturality of $d_{u,v}$ (for the morphisms $\\eta_{w,(uv)^{-1}G}$ and $w_*(c_{uv,w,G})$) moves $d_{u,v}$ to the left: $u_*(d^{-1}_{v,w})\\circ(d_{u,v}w_*)\\circ(uv)_*w_*(c_{uv,w,G})\\circ(uv)_*(\\eta_{w,(uv)^{-1}G})\\circ\\eta_{uv,G}$, and $(E_{uv,w})$ turns the last three factors into $d_{uv,w}\\circ\\eta_{uvw,G}$. (e) By the associativity of $d$ [lem-weil-pbc-direct-image-composition-coherence] (1), $u_*(d^{-1}_{v,w})\\circ(d_{u,v}w_*)\\circ d_{uv,w}=d_{u,vw}$ (at $(uvw)^{-1}G$). So the left side is $d_{u,vw}\\circ\\eta_{uvw,G}$, the right side of $(E_{u,vw})$. Hence $c_{u,v\\circ w}\\circ(c_{v,w}u^{-1})=c_{u\\circ v,w}\\circ(w^{-1}c_{u,v})$.",
+   "text": "Specialize the existing source-library sheaf coherence lemmas upperStarComp_assoc, upperStarComp_id_right and upperStarComp_id_left to abelian groups. Apply Iso.inv to associativity and evaluate components to remove the identity associator. Evaluate the inverse unit comparisons componentwise to remove the identity unitors. These are exactly the first three conjuncts, with c defined as the inverse of upperStarComp.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-direct-image-composition-coherence",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image"
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 03CB (lemma-composition-morphisms-sites, line 2764) and its proof ($(u\\circ v)_s$ and $u_s\\circ v_s$ both left adjoint to $(u\\circ v)^s$), with the remark after Definition definition-composition-morphisms-sites ($(g\\circ f)^{-1}=f^{-1}\\circ g^{-1}$); the coherence of the identifications is not in Stacks (there the composites are equalities): written out by an agent through the uniqueness clause of lem-weil-pbc-inverse-image-composition, as in the source Lean AlgebraicGeometry.Etale.upperStarComp_assoc / upperStarComp_id_left / upperStarComp_id_right (obtained from lowerStarComp_assoc / _id_left / _id_right by uniqueness of left adjoints)"
-   }
+   "elementary": true
   },
   {
-   "text": "**Step 2 (sheaf level: unit laws).** Clause (3) of [lem-weil-pbc-inverse-image-composition] gives, with naturality of $d_X$ ($(\\mathrm{id}_X)_*(m)=d_X^{-1}\\circ m\\circ d_X$ for every morphism $m$), $(\\mathrm{id}_X)_*(e_{X,G})\\circ\\eta_{\\mathrm{id}_X,G}=d_{X,G}^{-1}\\circ e_{X,G}\\circ d_{X,\\mathrm{id}_X^{-1}G}\\circ\\eta_{\\mathrm{id}_X,G}=d_{X,G}^{-1}$ $(\\ast)$. (a) $c_{\\mathrm{id}_X,u}=u^{-1}e_X$: the candidate $\\gamma_G=u^{-1}(e_{X,G})$ satisfies $(E_{\\mathrm{id}_X,u})$: by naturality of $\\eta_u$ for $e_{X,G}$, $(\\mathrm{id}_X)_*u_*u^{-1}(e_{X,G})\\circ(\\mathrm{id}_X)_*(\\eta_{u,\\mathrm{id}_X^{-1}G})\\circ\\eta_{\\mathrm{id}_X,G}=(\\mathrm{id}_X)_*(\\eta_{u,G})\\circ(\\mathrm{id}_X)_*(e_{X,G})\\circ\\eta_{\\mathrm{id}_X,G}$, which by $(\\ast)$ and naturality of $d_X$ is $d^{-1}_{X,u_*u^{-1}G}\\circ\\eta_{u,G}$; by the unit law [lem-weil-pbc-direct-image-composition-coherence] (2), $d_{\\mathrm{id}_X,u}=(d_Xu_*)^{-1}$, so this is $d_{\\mathrm{id}_X,u,u^{-1}G}\\circ\\eta_{\\mathrm{id}_X\\circ u,G}$, the right side ($\\mathrm{id}_X\\circ u=u$). By uniqueness in clause (2), $c_{\\mathrm{id}_X,u}=u^{-1}e_X$. (b) $c_{u,\\mathrm{id}_Y}=e_Yu^{-1}$: for $\\gamma_G=e_{Y,H}$, $H=u^{-1}G$, the left side of $(E_{u,\\mathrm{id}_Y})$ is $u_*\\bigl((\\mathrm{id}_Y)_*(e_{Y,H})\\circ\\eta_{\\mathrm{id}_Y,H}\\bigr)\\circ\\eta_{u,G}=u_*(d^{-1}_{Y,H})\\circ\\eta_{u,G}$ by $(\\ast)$ on $Y$, and $u_*(d_Y^{-1})=d_{u,\\mathrm{id}_Y}$ by [lem-weil-pbc-direct-image-composition-coherence] (2); this is the right side $d_{u,\\mathrm{id}_Y,H}\\circ\\eta_{u,G}$. By uniqueness, $c_{u,\\mathrm{id}_Y}=e_Yu^{-1}$. This proves (1).",
+   "text": "For composition, specialize upperStarCompDerivedPlus_hom_app_factorsh_assoc. Precompose the desired inverse formula with the hom of the derived composition isomorphism, use hom-inv cancellation, and apply the source formula. Functoriality of Qh and mapHomotopyCategoryPlus turns the remaining sheaf hom-inv composite into an identity. If t satisfies this formula, cancel the factorization isomorphism to show that its components agree with the canonical inverse on all Qh objects; Localization.natTrans_ext then gives equality of natural transformations, and Iso.ext gives equality of isomorphisms. Conversely substitute the canonical isomorphism.",
    "uses": [
+    "def-weil-pbc-derived-inverse-image",
     "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-direct-image-composition-coherence",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image"
+    "lem-weil-pbc-localization-universal-property"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 03CB (lemma-composition-morphisms-sites, line 2764) and its proof ($(u\\circ v)_s$ and $u_s\\circ v_s$ both left adjoint to $(u\\circ v)^s$), with the remark after Definition definition-composition-morphisms-sites ($(g\\circ f)^{-1}=f^{-1}\\circ g^{-1}$); the coherence of the identifications is not in Stacks (there the composites are equalities): written out by an agent through the uniqueness clause of lem-weil-pbc-inverse-image-composition, as in the source Lean AlgebraicGeometry.Etale.upperStarComp_assoc / upperStarComp_id_left / upperStarComp_id_right (obtained from lowerStarComp_assoc / _id_left / _id_right by uniqueness of left adjoints)"
-   }
+   "elementary": true
   },
   {
-   "text": "**Step 3 (the derived isomorphisms on $D$).** For $s\\in\\{u,v,uv,\\mathrm{id}_X\\}$ let $s^{-1}_D$ be the functor on the unbounded derived categories induced termwise, with the natural isomorphism $\\varphi_{s,K}:s^{-1}_D(QK)\\xrightarrow{\\sim}Q(s^{-1}K)$ for every complex $K$, natural in $K$ [def-weil-pbc-derived-inverse-image]; $Q$ is a localization at the quasi-isomorphisms [def-weil-abstract-derived-category]. Since $c_{u,v}$ and $e_X$ are natural, their components form isomorphisms of complexes $c_{u,v,K}=(c_{u,v,K^r})_r:v^{-1}u^{-1}K\\to(uv)^{-1}K$ and $e_{X,K}=(e_{X,K^r})_r:\\mathrm{id}_X^{-1}K\\to K$, natural in $K$. Apply [lem-weil-pbc-localization-universal-property] (2) with $L=Q$, $F_1=Q\\circ(v^{-1}u^{-1})$ (termwise composite), $F_1'=v^{-1}_D\\circ u^{-1}_D$, $\\phi_{1,K}=\\varphi_{v,u^{-1}K}\\circ v^{-1}_D(\\varphi_{u,K})$, $F_2=Q\\circ(uv)^{-1}$, $F_2'=(uv)^{-1}_D$, $\\phi_2=\\varphi_{uv}$, $\\tau=Q(c_{u,v,-})$ ($F_1,F_2$ invert quasi-isomorphisms, being isomorphic to $F_i'\\circ Q$): there is a unique natural transformation $c^D_{u,v}:v^{-1}_Du^{-1}_D\\to(uv)^{-1}_D$ with $c^D_{u,v,QK}=\\varphi_{uv,K}^{-1}\\circ Q(c_{u,v,K})\\circ\\varphi_{v,u^{-1}K}\\circ v^{-1}_D(\\varphi_{u,K})$, an isomorphism since $\\tau$ is. Likewise, with $F_1=Q\\circ\\mathrm{id}_X^{-1}$, $F_1'=(\\mathrm{id}_X^{-1})_D$, $\\phi_1=\\varphi_{\\mathrm{id}_X}$, $F_2=Q$, $F_2'=\\mathrm{id}$, $\\phi_2=\\mathrm{id}$, $\\tau=Q(e_{X,-})$: a unique natural isomorphism $e^D_X:(\\mathrm{id}_X^{-1})_D\\to\\mathrm{id}$ with $e^D_{X,QK}=Q(e_{X,K})\\circ\\varphi_{\\mathrm{id}_X,K}$. These are the formulas of (2).",
+   "text": "For identity, upperStarIdDerivedPlus_hom_app is exactly the prescribed formula. Localization.natTrans_ext compares any isomorphism satisfying that formula with upperStarIdDerivedPlus on all Qh objects; Iso.ext concludes uniqueness. Substitution proves the converse.",
    "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the already proved source-library theorem upperStarCompDerivedPlus_assoc from WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc. Apply IsIso.inv_eq_inv to its two invertible natural transformations, then expand the inverses of composites and whiskered transformations. The resulting reversed equality is exactly derived associativity in the convention cD = upperStarCompDerivedPlus.symm. For the two unit laws, cancel the epi upperStarCompDerivedPlus.hom and use the existing source-library upperStarCompDerivedPlus_id_right and upperStarCompDerivedPlus_id_left laws componentwise; the unitor components are identities.",
+   "uses": [
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-inverse-image-composition",
     "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-weil-pbc-direct-image-composition-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0D6D (lemma-derived-pullback-composition, line 3658): $Lf^*\\circ Lg^*=L(g\\circ f)^*$, computed on a representing complex by the termwise composite; the lift through the localization is literature/stacks-project/categories.tex Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3)"
-   }
-  },
-  {
-   "text": "**Step 4 (restriction to $\\Dplus$; existence and uniqueness in (2)).** The inverse images on $\\Dplus$ are the restrictions of the $s^{-1}_D$ to the full subcategories $\\Dplus$, which they preserve [def-weil-pbc-derived-inverse-image], [def-weil-pbc-derived-categories]; so $v^{-1}u^{-1}$, $(uv)^{-1}$ and $\\mathrm{id}_X^{-1}$ on $\\Dplus$ are restrictions of $v^{-1}_Du^{-1}_D$, $(uv)^{-1}_D$, $(\\mathrm{id}_X^{-1})_D$, and the components of $c^D_{u,v}$, $e^D_X$ of Step 3 at objects of $\\Dplus(X_{\\Et})$ are morphisms of the full subcategory $\\Dplus(Z_{\\Et})$, resp. $\\Dplus(X_{\\Et})$. Their restrictions are natural isomorphisms on $\\Dplus$ with the components of (2) at $QK$, $K$ bounded below ($QK\\in\\Dplus$). Uniqueness: if $\\sigma,\\sigma'$ are natural transformations of functors on $\\Dplus(X_{\\Et})$ agreeing at every $QK$ with $K$ bounded below, then for any $M\\in\\Dplus(X_{\\Et})$ choose an isomorphism $i:M\\xrightarrow{\\sim}QI$ with $I$ a bounded below complex [lem-weil-pbc-dplus-injective-representative]; naturality gives $\\sigma_M=G_2(i)^{-1}\\circ\\sigma_{QI}\\circ G_1(i)=\\sigma'_M$ ($G_1,G_2$ the source and target functors). So $c^D_{u,v}$, $e^D_X$ on $\\Dplus$ are unique with the components of (2).",
-   "uses": [
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-pbc-derived-categories",
-    "lem-weil-pbc-dplus-injective-representative"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0D6D (lemma-derived-pullback-composition, line 3658): $Lf^*\\circ Lg^*=L(g\\circ f)^*$, computed on a representing complex by the termwise composite; the lift through the localization is literature/stacks-project/categories.tex Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3)"
-   }
-  },
-  {
-   "text": "**Step 5 (derived associativity).** Work on $D$ with Step 3's transformations; the identity on $\\Dplus$ is its restriction (Step 4). Both sides $A=c^D_{u,vw}\\circ(c^D_{v,w}u^{-1}_D)$ and $B=c^D_{uv,w}\\circ(w^{-1}_Dc^D_{u,v})$ are natural transformations $w^{-1}_Dv^{-1}_Du^{-1}_D\\to(uvw)^{-1}_D$. Fix a complex $K$ and put $\\Phi_K=\\varphi_{w,v^{-1}u^{-1}K}\\circ w^{-1}_D(\\varphi_{v,u^{-1}K})\\circ w^{-1}_Dv^{-1}_D(\\varphi_{u,K})$. (a) By naturality of $c^D_{v,w}$ for the isomorphism $\\varphi_{u,K}:u^{-1}_D(QK)\\to Q(u^{-1}K)$ and Step 3 at the complex $u^{-1}K$, $c^D_{v,w,u^{-1}_DQK}=(vw)^{-1}_D(\\varphi_{u,K})^{-1}\\circ\\varphi_{vw,u^{-1}K}^{-1}\\circ Q(c_{v,w,u^{-1}K})\\circ\\Phi_K$; composing with $c^D_{u,vw,QK}=\\varphi_{uvw,K}^{-1}\\circ Q(c_{u,vw,K})\\circ\\varphi_{vw,u^{-1}K}\\circ(vw)^{-1}_D(\\varphi_{u,K})$ gives $A_{QK}=\\varphi^{-1}_{uvw,K}\\circ Q(c_{u,vw,K}\\circ c_{v,w,u^{-1}K})\\circ\\Phi_K$. (b) $w^{-1}_D(c^D_{u,v,QK})=w^{-1}_D(\\varphi_{uv,K})^{-1}\\circ w^{-1}_DQ(c_{u,v,K})\\circ w^{-1}_D(\\varphi_{v,u^{-1}K}\\circ v^{-1}_D\\varphi_{u,K})$, and naturality of $\\varphi_w$ in the complex for $c_{u,v,K}$ gives $\\varphi_{w,(uv)^{-1}K}\\circ w^{-1}_DQ(c_{u,v,K})=Q(w^{-1}c_{u,v,K})\\circ\\varphi_{w,v^{-1}u^{-1}K}$; composing with $c^D_{uv,w,QK}=\\varphi^{-1}_{uvw,K}\\circ Q(c_{uv,w,K})\\circ\\varphi_{w,(uv)^{-1}K}\\circ w^{-1}_D(\\varphi_{uv,K})$ gives $B_{QK}=\\varphi^{-1}_{uvw,K}\\circ Q(c_{uv,w,K}\\circ w^{-1}c_{u,v,K})\\circ\\Phi_K$. (c) By Step 1 in each degree, $c_{u,vw,K}\\circ c_{v,w,u^{-1}K}=c_{uv,w,K}\\circ w^{-1}c_{u,v,K}$ as morphisms of complexes, so $A_{QK}=B_{QK}$ for every complex $K$, and $A=B$ by the uniqueness clause (3) of [lem-weil-pbc-localization-universal-property] ($L=Q$).",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3): a functor out of the localization is determined by its composite with Q; with sites-cohomology.tex Lemma 0D6D (line 3658). Written out by an agent, as the source Lean AlgebraicGeometry.Etale.upperStarCompDerivedPlus_id_left/_id_right (Localization.natTrans_ext)"
-   }
-  },
-  {
-   "text": "**Step 6 (derived unit laws).** As in Step 5, on $D$ then restricted. (a) $c^D_{\\mathrm{id}_X,u}=u^{-1}e^D_X$: at $QK$, $u^{-1}_D(e^D_{X,QK})=u^{-1}_D(Q(e_{X,K}))\\circ u^{-1}_D(\\varphi_{\\mathrm{id}_X,K})$, and naturality of $\\varphi_u$ for $e_{X,K}$ gives $u^{-1}_D(Q(e_{X,K}))=\\varphi_{u,K}^{-1}\\circ Q(u^{-1}e_{X,K})\\circ\\varphi_{u,\\mathrm{id}_X^{-1}K}$; so $u^{-1}_D(e^D_{X,QK})=\\varphi^{-1}_{u,K}\\circ Q(u^{-1}e_{X,K})\\circ\\varphi_{u,\\mathrm{id}_X^{-1}K}\\circ u^{-1}_D(\\varphi_{\\mathrm{id}_X,K})$, which is $c^D_{\\mathrm{id}_X,u,QK}$ (Step 3) because $c_{\\mathrm{id}_X,u,K}=u^{-1}e_{X,K}$ degreewise (Step 2). (b) $c^D_{u,\\mathrm{id}_Y}=e^D_Yu^{-1}$: by naturality of $e^D_Y$ for $\\varphi_{u,K}$, $e^D_{Y,u^{-1}_DQK}=\\varphi_{u,K}^{-1}\\circ e^D_{Y,Q(u^{-1}K)}\\circ(\\mathrm{id}_Y^{-1})_D(\\varphi_{u,K})=\\varphi_{u,K}^{-1}\\circ Q(e_{Y,u^{-1}K})\\circ\\varphi_{\\mathrm{id}_Y,u^{-1}K}\\circ(\\mathrm{id}_Y^{-1})_D(\\varphi_{u,K})$, which is $c^D_{u,\\mathrm{id}_Y,QK}$ because $c_{u,\\mathrm{id}_Y,K}=e_{Y,u^{-1}K}$ degreewise (Step 2). In both cases the two transformations agree on every $QK$, hence are equal by [lem-weil-pbc-localization-universal-property] (3); restricting to $\\Dplus$ (Step 4) gives (3).",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3): a functor out of the localization is determined by its composite with Q; with sites-cohomology.tex Lemma 0D6D (line 3658). Written out by an agent, as the source Lean AlgebraicGeometry.Etale.upperStarCompDerivedPlus_id_left/_id_right (Localization.natTrans_ext)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-direct-image-composition-coherence",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-localization-universal-property",
   "def-weil-pbc-derived-inverse-image",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-derived-categories",
-  "lem-weil-pbc-dplus-injective-representative"
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma 0D6D (derived pullbacks compose, on representatives) with sites.tex Lemma 03CB and categories.tex Lemma 04VG; Stacks treats the composites as equalities and states no coherence, so the coherence argument is written by an agent (model: lem-weil-pbc-derived-square-iso-commshift Steps 4-5; source Lean upperStarComp_assoc, upperStarCompDerivedPlus_id_left/_id_right)"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperStarCompAssoc.lean",
+  "place": "upperStarCompDerivedPlus_assoc; UpperLowerStarCoherence.lean: upperStarCompDerivedPlus_hom_app_factorsh and upperStarIdDerivedPlus_hom_app; BaseChange/DerivedPasting/Identity.lean: upperStarCompDerivedPlus_id_left and _id_right; Etale/UpperLowerStar/Coherence.lean: sheaf coherence. J1 specializes these proved results and supplies inverse-form cancellation and localization uniqueness. Second reader J1 keeps the whole proof in one module, proving the conjunction locally for abstract Grothendieck abelian coefficient instances and specializing to AddCommGrpCat; no extracted helper or new public declaration."
  },
  "mathlib_searches": [
   {
@@ -228,5 +180,15 @@
   "group": "H1",
   "result": "pass",
   "note": "schemes X Y Z W + u0,v0,w0 arbitrary; P=upperStar AddCommGrpCat.{u+1}; c=(upperStarComp).symm (conjugate of lowerStarComp, P fg ≅ P g ⋙ P f so symm is node c), e=upperStarId; sheaf assoc whiskerLeft/Right paths and both unit laws match (1); D=mapDerivedCategoryPlus, global instance; (2) iff-characterisations over HomotopyCategory.Plus (strictly bounded below complexes) match cD≫phi_uv = v^-1(phi_u)≫phi_v≫Q(c) and eD = phi_id≫Q(e), agree with upstream *_hom_app formulas; (3) derived assoc/units as (1)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T060740-L-2908963",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
