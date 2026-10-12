@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-etale-coproduct-representation",
+ "kind": "statement",
+ "title": "Etale representations assemble on disjoint scheme components",
+ "statement": "Let $I$ be a type in the universe of schemes, $T$ a scheme [def-pc-scheme], and $E$ a sheaf of sets [def-weil-pbc-etale-sheaf-of-sets] on its small etale site [def-weil-pbc-etale-site]. Let $U_i$ be etale $T$-schemes and $Q_i$ etale $U_i$-schemes. Put $B=\\coprod_i U_i$ and $V=\\coprod_i Q_i$, with their canonical structure maps $B\\to T$ and $\\pi:V\\to B$, and assume these maps are etale. Suppose each restriction $E|_{U_i}$, transported to the small etale site of $U_i$, is isomorphic as a presheaf to the lifted Yoneda presheaf of the chosen $Q_i$. Then $E|_B$, transported to the small etale site of $B$, is isomorphic to the lifted Yoneda presheaf of the explicit etale $B$-scheme $(V,\\pi)$. No finiteness condition or surjectivity of $B\\to T$ is assumed. Empty $I$ is allowed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaf-of-sets"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03RV (lemma-characterize-finite-locally-constant), converse; Descent Tag 02W5 (lemma-descent-data-sheaves)"
+ },
+ "proof": [
+  {
+   "text": "Form B as the coproduct of U_i and V as the coproduct of Q_i, with the morphism pi = Sigma.map(Q_i.hom). For each i its component square is cartesian: the inverse image of U_i in V is Q_i, by disjointness and the coproduct universal property. For etale W over B, the W_i = W times_B U_i cover W and are disjoint open subschemes.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport E.over B to the small etale site of B. Its sections on W_i are the sections of E on W_i to U_i to T. The assumed local representation identifies these sections with morphisms W_i to Q_i over U_i. The component pullback identifies those morphisms with maps W_i to V over B.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The disjoint-cover sheaf axiom identifies sections of the transported sheaf on W with the product of its sections on the W_i. Apply the same axiom to the representable etale presheaf of V. Compose these two product identifications with the local representation isomorphisms. Restriction along W prime to W commutes with the component pullbacks and with the local representation maps; uniqueness of gluing proves naturality. Gluing the inverses gives inverse maps. For empty indices every W is empty, and the empty-cover axiom gives singleton section sets.",
+   "uses": [
+    "lem-weil-pbc-disjoint-etale-sections-product",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-disjoint-etale-sections-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03RV and 02W5, assembly step expanded as disjoint-cover sheaf gluing; online text read on 2026-10-12 by H3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf represented by finite etale schemes on disjoint components is represented by their coproduct",
+   "results": "8 hits: AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.instHasFiniteCoproductsScheme, AlgebraicGeometry.Scheme.coprodPresheafObjIso, AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite, AlgebraicGeometry.IsFinite.instDescScheme, AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall, AlgebraicGeometry.coprodIsoSigma, AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty",
+   "date": "2026-10-12",
+   "verdict": "Supporting coproduct and locality APIs, no matching representation assembly theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sigmaDesc|sigma.*[Ff]inite|[Ff]inite.*sigma",
+   "results": "14 hits: Mathlib/AlgebraicGeometry/Cover/Sigma.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/LimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean",
+   "date": "2026-10-12",
+   "verdict": "Supporting coproduct and locality APIs, no matching representation assembly theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf represented locally on disjoint components of a scheme is represented by the coproduct of the representing schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocalModelsDescentDatumExistence",
+  "date": "2026-10-12",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-finite-locally-constant-etale-equivalence",
+   "place": "Assembly of local representatives over the coproduct of the cover: presheaf identification, step 4 of lem-weil-pbc-finite-local-models-descent-datum-existence",
+   "via": [
+    "lem-weil-pbc-finite-local-models-descent-datum-existence",
+    "lem-weil-pbc-finite-local-models-descent-datum",
+    "lem-weil-pbc-finite-locally-constant-sets-descent",
+    "lem-weil-pbc-finite-locally-constant-sets-representability"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCoproductRepresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCoproductRepresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleCoproduct_representation",
+  "statement": "theorem etaleCoproduct_representation {ι : Type u} (T : Scheme.{u}) (E : Sheaf T.smallEtaleTopology (Type (u + 1))) (U : ι → T.Etale) (Q : ∀ i, (U i).left.Etale) [Etale (CategoryTheory.Limits.Sigma.desc fun i ↦ (U i).hom)] [Etale (CategoryTheory.Limits.Sigma.map fun i ↦ (Q i).hom)] (hrep : ∀ i, Nonempty (((Etale.overSheafEquiv (U i) (Type (u + 1))).functor.obj (E.over (U i))).obj ≅ uliftYoneda.{u + 1}.obj (Q i))) : let B := Etale.mk (CategoryTheory.Limits.Sigma.desc fun i ↦ (U i).hom) Nonempty (((Etale.overSheafEquiv B (Type (u + 1))).functor.obj (E.over B)).obj ≅ uliftYoneda.{u + 1}.obj (Etale.mk (CategoryTheory.Limits.Sigma.map fun i ↦ (Q i).hom)))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T095907-L-318313",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261012T095907-L-318313",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
