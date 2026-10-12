@@ -5,10 +5,9 @@ Authors: SHEAF group X3
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.Pullback
-public import Mathlib.CategoryTheory.Sites.Abelian
-public import Mathlib.Algebra.Category.Grp.Abelian
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import Mathlib.CategoryTheory.Sites.Continuous
+public import Mathlib.Algebra.Category.Grp.Preadditive
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Transitions on an augmented product of direct images
 
@@ -57,6 +56,48 @@ theorem colimitSystem_transition_identity_defect
       φ a ≫ (R a).map
         ((𝟙 (Fs k) - (φ (𝟙 k) ≫ (E k).hom.app (Fs k) : Fs k ⟶ Fs k)) ≫ ι k) =
           0 := by
-  sorry
+  dsimp
+  intro j k a
+  have hc : (F.map a).toFunctor ⋙ (F.map (𝟙 k)).toFunctor =
+      (F.map a).toFunctor := by
+    simpa only [Cat.Hom.comp_toFunctor, Category.comp_id] using
+      congrArg Cat.Hom.toFunctor (F.map_comp a (𝟙 k)).symm
+  have hh : φ a = φ a ≫
+      ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)).map
+        (φ (𝟙 k)) ≫
+      (Functor.sheafPushforwardContinuousComp' (eqToIso hc)
+        AddCommGrpCat.{u} (T j) (T k) (T k)).hom.app (Fs k) := by
+    convert hφ a (𝟙 k) using 1
+    · simp only [Category.comp_id]
+    · exact (congr_arg_heq (fun b : j ⟶ k ↦ φ b) (Category.comp_id a)).symm
+    · congr! 6
+      all_goals simp only [Category.comp_id]
+  have he :
+      (Functor.sheafPushforwardContinuousComp' (eqToIso hc)
+        AddCommGrpCat.{u} (T j) (T k) (T k)).hom.app (Fs k) =
+      ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)).map
+        ((Functor.sheafPushforwardContinuousId'
+          (eqToIso (congrArg Cat.Hom.toFunctor (F.map_id k)))
+          AddCommGrpCat.{u} (T k)).hom.app (Fs k)) := by
+    apply Sheaf.hom_ext
+    ext X
+    simp only [Functor.sheafPushforwardContinuousComp'_hom_app_hom_app,
+      Functor.sheafPushforwardContinuous_map_hom_app,
+      Functor.sheafPushforwardContinuousId'_hom_app_hom_app]
+    congr 3
+    simp only [eqToIso.inv, eqToHom_app]
+  have hfix : φ a ≫
+      ((F.map a).toFunctor.sheafPushforwardContinuous AddCommGrpCat.{u} (T j) (T k)).map
+        (φ (𝟙 k) ≫
+          (Functor.sheafPushforwardContinuousId'
+            (eqToIso (congrArg Cat.Hom.toFunctor (F.map_id k)))
+            AddCommGrpCat.{u} (T k)).hom.app (Fs k)) = φ a := by
+    simpa only [Functor.map_comp, he] using hh.symm
+  have : ((F.map a).toFunctor.sheafPushforwardContinuous
+      AddCommGrpCat.{u} (T j) (T k)).Additive := by
+    dsimp only [Functor.sheafPushforwardContinuous]
+    infer_instance
+  rw [Functor.map_comp, ← Category.assoc, Functor.map_sub, Preadditive.comp_sub,
+    Functor.map_id, Category.comp_id, hfix, sub_self, zero_comp]
 
 end CategoryTheory
