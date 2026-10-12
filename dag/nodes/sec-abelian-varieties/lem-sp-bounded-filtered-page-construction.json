@@ -16,43 +16,39 @@
  ],
  "proof": [
   {
-   "text": "Form the short exact sequences of successive filtration steps and apply the homology long exact sequence. Their inclusion, connecting, and quotient maps give the exact-couple exactness relations. Set D(P,Q)=H^(P+Q)(F^(-Q)) and E(P,Q)=H^(P+Q)(gr^(-Q)). Derive this couple recursively and reindex E by (2p+q,-p); the differential bidegree becomes (r,1-r). The three-step quotient short exact sequence identifies the first differential. This gives S on objects, e1, X, eD, eC and all structural equations.",
+   "text": "Apply lem-sp-filtered-quotient-comparisons to phi and its defining equation, obtaining hBZ, the canonical graded-homology comparisons eH, and natural quotient-image comparisons eQ. Apply lem-sp-filtered-quotient-page-realization to hBZ,eH and their representative normalization. Obtain S and natural page-to-quotient isomorphisms eZ, the first differential and the exact couple. Define e1=eZ at r=1 followed by eH, and eI=eZ followed by eQ.",
    "uses": [
-    "def-sp-exact-couple",
-    "def-sp-spectral-sequence",
-    "def-sp-filtered-complex-subquotients"
+    "lem-sp-filtered-quotient-comparisons",
+    "lem-sp-filtered-quotient-page-realization"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Restrict filtered morphisms to every filtration step and descend through the cokernels. The quotient projection equations determine the descents uniquely, so they respect identities and composition. Naturality of the long exact sequence gives a couple morphism; the page part of lem-sp-couple-morphism gives compatible maps on all derived pages. Thus these maps form the functor S and the naturality equations.",
+   "text": "Compose the eQ first-page square with eZ. For every filtered map use the same s,a,b,g,kz,k supplied by the quotient comparison. Compose eZ naturality at page r with eQ naturality; at page one use its kz1,k1 and eH naturality. Associativity gives the two required page naturality equations.",
    "uses": [
-    "lem-sp-couple-morphism",
-    "def-sp-filtration"
+    "lem-sp-filtered-quotient-comparisons",
+    "lem-sp-filtered-quotient-page-realization"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Use lem-sp-filtered-complex-ZB-description to identify the representative image quotient. A representative x with dx in F^(p+r) is a source quotient cycle; its target cohomology image vanishes exactly for x=dy+f with y in F^(p-r+1), f in F^(p+1). Quotienting this kernel gives the image comparison and its representative equation. The given phi is this descent because both composites with the epimorphic source projection agree. At r=1 phi is the identity; this yields the first-page image equation. The representative maps commute with filtered maps because inclusions, differentials and projections do.",
+   "text": "For the representative clause apply lem-sp-filtered-complex-quotient-image-comparison with hBZ. Cancel the source cokernel projection to identify its transition psi with the supplied phi. If e is its quotient-to-image comparison, take the requested representative page-to-quotient comparison to be eI followed by e inverse. Its inverse followed by eI cancels to e; hence its representative equation is exactly the supplied one. Retain the first differential and exact-couple properties from the realization.",
    "uses": [
-    "lem-sp-filtered-complex-ZB-description",
-    "def-sp-filtered-complex-subquotients"
+    "lem-sp-filtered-complex-quotient-image-comparison",
+    "lem-sp-filtered-quotient-page-realization"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-exact-couple",
-  "def-sp-spectral-sequence",
-  "def-sp-filtered-complex-subquotients",
-  "lem-sp-couple-morphism",
-  "def-sp-filtration",
-  "lem-sp-filtered-complex-ZB-description"
+  "lem-sp-filtered-complex-quotient-image-comparison",
+  "lem-sp-filtered-quotient-comparisons",
+  "lem-sp-filtered-quotient-page-realization"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "G3 stage 3",
   "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-spectral-object-yields.md",
-  "place": "Original proof plan made precise in the new Lean interface"
+  "place": "Construction steps 1--4; composition of quotient realizations and comparisons; representatives obtained directly from the existing quotient-image comparison."
  },
  "mathlib_searches": [
   {
@@ -130,9 +126,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q1",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261012T144137-L-2104646",
+  "landing": "20261012T194114-L-456216",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

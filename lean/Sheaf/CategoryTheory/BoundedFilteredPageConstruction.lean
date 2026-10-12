@@ -10,10 +10,9 @@ public import Sheaf.CategoryTheory.ExactCoupleConvergence
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.CategoryTheory.ExactCouple
-import Sheaf.CategoryTheory.ExactCoupleMorphism
-import Sheaf.CategoryTheory.Filtration
+import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
+import Sheaf.CategoryTheory.FilteredQuotientComparisons
+import Sheaf.CategoryTheory.FilteredQuotientPageRealization
 
 /-!
 # Functorial pages of a finite filtered complex
@@ -176,6 +175,45 @@ theorem boundedFilteredComplex_pageConstruction
                   (p + (s + 1), q - (s + 1) + 1) =
               (X.pageCouple s).d (2 * p + q) (-p) ≫
                 eqToHom (by congr 1 <;> omega) ≫
-                  (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by sorry
+                  (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by
+  obtain ⟨hBZ, eH, eQ, hH, hfirst, hmaps⟩ :=
+    filteredQuotient_comparisons C φ hφ
+  obtain ⟨S, eZ, hnat, hstruct⟩ := filteredQuotient_page_realization C hBZ eH hH
+  refine ⟨S, fun U p q ↦ eZ U p q 1 (by omega) ≪≫ eH U p q,
+    fun U p q r hr ↦ eZ U p q r hr ≪≫ eQ U p q r hr, ?_, ?_, ?_⟩
+  · intro U p q
+    simpa only [Iso.trans_hom, Category.assoc] using
+      congrArg (fun f ↦ (eZ U p q 1 (by omega)).hom ≫ f) (hfirst U p q)
+  · intro U V t p q r hr
+    obtain ⟨s, a, b, g, kz, k, hs, ha, hb, hg, hkz, hk, h₁, hn₁, hnQ⟩ :=
+      hmaps U V t p q r hr
+    obtain ⟨kz₁, k₁, hkz₁, hk₁⟩ := h₁
+    have hnZ := hnat U V t p q r hr s g kz k hs hg hkz hk
+    have hnZ₁ := hnat U V t p q 1 (by omega) s g kz₁ k₁ hs hg hkz₁ hk₁
+    have hnH := hn₁ k₁ ⟨kz₁, hkz₁, hk₁⟩
+    refine ⟨s, a, b, g, hs, ha, hb, hg, ?_, ?_⟩
+    · simpa only [Iso.trans_hom, Category.assoc, hnH] using
+        congrArg (fun f ↦ f ≫ (eH V p q).hom) hnZ₁
+    · simpa only [Iso.trans_hom, Category.assoc, hnQ] using
+        congrArg (fun f ↦ f ≫ (eQ V p q r hr).hom ≫
+          image.ι (HomologicalComplex.homologyMap (φ V p r hr) (p + q))) hnZ
+  · intro U
+    refine ⟨(hstruct U).1, ?_, (hstruct U).2⟩
+    intro p q r hr
+    obtain ⟨ha, hb, ψ, hψ, z, g, hz, hg, e, he⟩ :=
+      DecreasingFiltration.filteredComplex_quotient_image_comparison
+        U.obj.filtration p (p + q) r hr (hBZ U p q r hr)
+    have hpr : p ≤ p + r := by omega
+    let : Epi (U.obj.filtration.complexQuotientπ p (p + r) hpr) := by
+      dsimp [DecreasingFiltration.complexQuotientπ]
+      infer_instance
+    have hψφ : ψ = φ U p r hr := by
+      apply (cancel_epi (U.obj.filtration.complexQuotientπ p (p + r) hpr)).1
+      exact hψ.trans (hφ U p r hr).symm
+    subst ψ
+    let eI := eZ U p q r hr ≪≫ eQ U p q r hr
+    refine ⟨hBZ U p q r hr, eI ≪≫ e.symm, z, g, hz, hg, ?_⟩
+    simpa only [eI, Iso.trans_hom, Iso.trans_inv, Iso.symm_inv, Category.assoc,
+      Iso.inv_hom_id_assoc] using he
 
 end CategoryTheory

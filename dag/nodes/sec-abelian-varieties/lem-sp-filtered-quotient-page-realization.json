@@ -1,0 +1,150 @@
+{
+ "id": "lem-sp-filtered-quotient-page-realization",
+ "kind": "statement",
+ "title": "Exact-couple realization of concrete filtered quotient pages",
+ "statement": "Let $\\mathcal C$ be abelian [def-sp-abelian], and let $\\mathcal F$ be the full category of integer-indexed cochain complexes with finite decreasing subcomplex filtration [def-sp-filtration]. For each $U\\in\\mathcal F$ and $p,q,r\\in\\mathbb Z$, $r\\ge1$, suppose an inclusion $h_{U,p,q,r}:B_r^{p,q}(U)\\le Z_r^{p,q}(U)$ is given, where $B,Z$ are [def-sp-filtered-complex-subquotients], and put $Q_r^{p,q}(U)=\\operatorname{coker}(B_r\\hookrightarrow Z_r)$. Suppose isomorphisms $e_H:Q_1^{p,q}(U)\\cong H^{p+q}(\\operatorname{gr}^pU)$ are given with the canonical representative characterization: there are an epic $z:R_1\\to Z_1$ and a cycle lift $g:R_1\\to Z^{p+q}(\\operatorname{gr}^pU)$ whose composites with the inclusions equal the graded projection of representatives, and $z\\pi e_H=g\\pi_H$. Then there exist a functor $S:\\mathcal F\\to\\mathrm{SpectralSequence}_1(\\mathcal C)$ [def-sp-spectral-sequence] and isomorphisms $e_Z:E_r^{p,q}(U)\\cong Q_r^{p,q}(U)$. If a filtered map $t:U\\to V$ has step restrictions $s$, graded descent $g$, cycle restriction $k_Z$ characterized by $k_Z\\iota_Z=\\iota_Zg^{p+q}$, and quotient descent $k$ characterized by $\\pi_Uk=k_Z\\pi_V$, then $S(t)_re_Z^V=e_Z^Uk$. Under $e_1=e_Ze_H$, the first differential is the connecting map of $0\\to\\operatorname{gr}^{p+1}U\\to F^pU/F^{p+2}U\\to\\operatorname{gr}^pU\\to0$, with both arrows characterized by their quotient projection squares. For every $U$ there is a type-zero exact couple $X$ [def-sp-exact-couple], $e_D:X.D(P,Q)\\cong H^{P+Q}(F^{-Q}U)$ and $e_C:(X.\\operatorname{pageCouple}(s)).E(2p+q,-p)\\cong E_{s+1}^{p,q}(U)$. Under these comparisons alpha is the filtration inclusion, initialG is the quotient projection followed by the first-page inverse comparison, and the derived-couple differential is the page differential, with the index transports written in the Lean record. No quotient-complex image comparison, stabilization or abutment is asserted.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas, lemma-spectral-sequence-filtered-complex, first differential and functoriality; https://stacks.math.columbia.edu/tag/012K"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-spectral-sequence",
+  "def-sp-exact-couple"
+ ],
+ "proof": [
+  {
+   "text": "Construct the homology exact couple of the short exact sequences of successive filtration steps. Set D(P,Q)=H^(P+Q)(F^(-Q)) and E(P,Q)=H^(P+Q)(gr^(-Q)). Inclusion, boundary and quotient maps give its exactness. Derive it recursively and reindex (P,Q)=(2p+q,-p). The differential on representatives is x to dx, of bidegree (r,1-r). Its kernel and boundaries are the next filtered cycles and boundaries, so the positive-page quotient construction identifies the derived pages with Q_r=Z_r/B_r.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-filtered-complex-subquotients",
+    "lem-sp-filtered-complex-positive-pages"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The given first-page eH is pinned by its representative equation: the composite of z with the quotient projection is epic, so that equation uniquely determines eH. This is the homology comparison of the graded complex. The three-step quotient short exact sequence identifies the first differential with its connecting map. The original alpha and initialG are respectively inclusion and quotient projection. Retain these maps and the derived-couple page comparisons eC, yielding all structural equations.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-exact-couple"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A filtered map restricts uniquely to every step. These restrictions commute with inclusion, quotient and connecting maps. Apply the page part of coupleMorphism to the resulting exact-couple morphism. On each quotient page, the induced map is the cokernel descent of the graded cycle restriction kz. The monic Z inclusion fixes kz, and the epic quotient projection fixes k. Consequently every s,g,kz,k obeying the four displayed squares gives the same map. Unique restrictions and descents give identity and composition, and hence a spectral-sequence functor S; the quotient comparison eZ is natural.",
+   "uses": [
+    "lem-sp-couple-morphism",
+    "def-sp-filtration",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-exact-couple",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence",
+  "lem-sp-couple-morphism",
+  "lem-sp-filtered-complex-positive-pages"
+ ],
+ "proof_origin": {
+  "by": "G3 stage 3",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 012K, displayed cycle-boundary formulas, lemma-spectral-sequence-filtered-complex, first differential and functoriality; https://stacks.math.columbia.edu/tag/012K",
+  "note": "Componentwise categorical expansion of the parent construction; no countable sums are assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Functorial spectral sequence of finite filtered cochain complexes with natural cycle boundary quotient pages and exact couple",
+   "date": "2026-10-12",
+   "results": "8 hits. Top results: CochainComplex.exactAt_of_isLE, CochainComplex.shortComplexTruncLE, HomotopyCategory.spectralObjectMappingCone_ω₁, HomotopyCategory.spectralObjectMappingCone, CochainComplex.exactAt_of_isGE, CochainComplex.cm5b, CochainComplex.isLE_iff, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p. Inspected the local filtered-complex and spectral-sequence modules; no exact theorem for this statement.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence.pageFunctor",
+   "date": "2026-10-12",
+   "results": "6 hits. Top results: CategoryTheory.SpectralSequence.pageFunctor, CategoryTheory.SpectralSequence.pageFunctor_obj, CategoryTheory.SpectralSequence.pageHomologyNatIso, CategoryTheory.SpectralSequence.pageFunctor_map, CategoryTheory.SpectralSequence.pageHomologyNatIso_hom_app, CategoryTheory.SpectralSequence.pageHomologyNatIso_inv_app. Inspected the local filtered-complex and spectral-sequence modules; no exact theorem for this statement.",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural image comparison for cycles modulo boundaries of a filtered complex",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "filtered.*spectral|spectral.*filtered|image.*naturality",
+   "date": "2026-10-12",
+   "results": "0 hits. Top results: none. Inspected the local filtered-complex and spectral-sequence modules; no exact theorem for this statement.",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BoundedFilteredPageConstruction",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Construction steps 1--2 and 4: functorial exact-couple pages, first differential and canonical quotient realization",
+   "via": [
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredQuotientPageRealization",
+  "file": "lean/Sheaf/CategoryTheory/FilteredQuotientPageRealization.lean",
+  "declaration": "CategoryTheory.filteredQuotient_page_realization",
+  "statement": "theorem filteredQuotient_page_realization (C : Type u) [Category.{v} C] [Abelian C] (hBZ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), U.obj.filtration.complexBoundaries p (p + q) r ≤ U.obj.filtration.complexCycles p (p + q) r) (eH : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), cokernel (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≅ (U.obj.filtration.gradedPiece p).homology (p + q)) (hH : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q : ℤ), ∃ (z : (U.obj.filtration.complexCycleRepresentatives p (p + q) 1 : C) ⟶ (U.obj.filtration.complexCycles p (p + q) 1 : C)) (g : (U.obj.filtration.complexCycleRepresentatives p (p + q) 1 : C) ⟶ (U.obj.filtration.gradedPiece p).cycles (p + q)), z ≫ (U.obj.filtration.complexCycles p (p + q) 1).arrow = (U.obj.filtration.complexCycleRepresentatives p (p + q) 1).arrow ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q) ∧ g ≫ (U.obj.filtration.gradedPiece p).iCycles (p + q) = (U.obj.filtration.complexCycleRepresentatives p (p + q) 1).arrow ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q) ∧ Epi z ∧ z ≫ cokernel.π (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≫ (eH U p q).hom = g ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q)) : ∃ (S : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite) ⥤ CohomologicalSpectralSequence C 1) (eZ : ∀ (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (p q r : ℤ) (hr : 1 ≤ r), ((S.obj U).page r hr).X (p, q) ≅ cokernel (Subobject.ofLE _ _ (hBZ U p q r hr))), (∀ (U V : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (p q r : ℤ) (hr : 1 ≤ r) (s : ∀ a : ℤ, (U.obj.filtration.step a : CochainComplex C ℤ) ⟶ (V.obj.filtration.step a : CochainComplex C ℤ)) (g : U.obj.filtration.gradedPiece p ⟶ V.obj.filtration.gradedPiece p) (kz : (U.obj.filtration.complexCycles p (p + q) r : C) ⟶ (V.obj.filtration.complexCycles p (p + q) r : C)) (k : cokernel (Subobject.ofLE _ _ (hBZ U p q r hr)) ⟶ cokernel (Subobject.ofLE _ _ (hBZ V p q r hr))) (hs : ∀ i : ℤ, s i ≫ (V.obj.filtration.step i).arrow = (U.obj.filtration.step i).arrow ≫ t.hom.hom) (hg : U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ g = s p ≫ V.obj.filtration.complexQuotientπ p (p + 1) (by omega)) (hkz : kz ≫ (V.obj.filtration.complexCycles p (p + q) r).arrow = (U.obj.filtration.complexCycles p (p + q) r).arrow ≫ g.f (p + q)) (hk : cokernel.π (Subobject.ofLE _ _ (hBZ U p q r hr)) ≫ k = kz ≫ cokernel.π (Subobject.ofLE _ _ (hBZ V p q r hr))), ((S.map t).hom r hr).f (p, q) ≫ (eZ V p q r hr).hom = (eZ U p q r hr).hom ≫ k) ∧ ∀ U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite), (∀ p q : ℤ, ∃ (i : U.obj.filtration.gradedPiece (p + 1) ⟶ U.obj.filtration.complexQuotient p (p + 2) (by omega)) (j : U.obj.filtration.complexQuotient p (p + 2) (by omega) ⟶ U.obj.filtration.gradedPiece p) (hij : i ≫ j = 0) (hS : (ShortComplex.mk i j hij).ShortExact), U.obj.filtration.complexQuotientπ (p + 1) (p + 1 + 1) (by omega) ≫ i = Subobject.ofLE (U.obj.filtration.step (p + 1)) (U.obj.filtration.step p) (U.obj.filtration.antitone_step (by omega)) ≫ U.obj.filtration.complexQuotientπ p (p + 2) (by omega) ∧ U.obj.filtration.complexQuotientπ p (p + 2) (by omega) ≫ j = U.obj.filtration.complexQuotientπ p (p + 1) (by omega) ∧ ((S.obj U).page 1).d (p, q) (p + 1, q) ≫ (eZ U (p + 1) q 1 (by omega) ≪≫ eH U (p + 1) q).hom = (eZ U p q 1 (by omega) ≪≫ eH U p q).hom ≫ hS.δ (p + q) (p + 1 + q) (by simp [ComplexShape.up]; omega)) ∧ (∃ (X : BigradedExactCouple C 0) (eD : ∀ P Q : ℤ, X.D P Q ≅ (U.obj.filtration.step (-Q) : CochainComplex C ℤ).homology (P + Q)) (eC : ∀ (s : ℕ) (p q : ℤ), (X.pageCouple s).E (2 * p + q) (-p) ≅ ((S.obj U).page (s + 1) (by omega)).X (p, q)) , (∀ P Q : ℤ, X.alpha P Q ≫ (eD (P - 1) (Q + 1)).hom = (eD P Q).hom ≫ HomologicalComplex.homologyMap (Subobject.ofLE (U.obj.filtration.step (-Q)) (U.obj.filtration.step (-(Q + 1))) (U.obj.filtration.antitone_step (by omega))) (P + Q) ≫ eqToHom (by rw [show P - 1 + (Q + 1) = P + Q by omega])) ∧ (∀ P Q : ℤ, X.initialG P Q ≫ eqToHom (by congr 1 <;> omega) ≫ (eC 0 (-Q) (P + 2 * Q)).hom ≫ (eZ U (-Q) (P + 2 * Q) 1 (by omega) ≪≫ eH U (-Q) (P + 2 * Q)).hom ≫ eqToHom (by rw [show -Q + (P + 2 * Q) = P + Q by omega] rfl) = (eD P Q).hom ≫ HomologicalComplex.homologyMap (U.obj.filtration.complexQuotientπ (-Q) (-Q + 1) (by omega)) (P + Q)) ∧ (∀ (s : ℕ) (p q : ℤ), (eC s p q).hom ≫ ((S.obj U).page (s + 1) (by omega)).d (p, q) (p + (s + 1), q - (s + 1) + 1) = (X.pageCouple s).d (2 * p + q) (-p) ≫ eqToHom (by congr 1 <;> omega) ≫ (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T194114-L-456216",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T194114-L-456216",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
