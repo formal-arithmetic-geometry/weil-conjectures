@@ -44,6 +44,22 @@ with `f` proper. This file records the sheaf-level forms of the proper base chan
 - `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_singleFunctor_of_isProper` and
   `AlgebraicGeometry.Etale.properBaseChangeTorsionIso`: the derived exchange morphism of a
   torsion sheaf, and its naturality.
+
+## Blueprint pointers
+
+The general facts used by the dévissage are Mathlib (or earlier project) results:
+- `lem-weil-pbc-five-lemma`: `CategoryTheory.Abelian.isIso_of_epi_of_isIso_of_isIso_of_mono`;
+- `lem-weil-pbc-derived-cohomology-ladder`: `CategoryTheory.Functor.homologySequenceδ_naturality`;
+- `lem-weil-pbc-derived-plus-iso-on-cohomology`: `DerivedCategory.Plus.isIso_iff`;
+- `lem-weil-pbc-dplus-injective-representative`:
+  `DerivedCategory.Plus.exists_injective_nonempty_iso`;
+- `lem-weil-pbc-kinjective-shift`: `CochainComplex.instIsKInjectiveObjIntShiftFunctor`;
+- `def-weil-pbc-triangles-with-shift`: `CategoryTheory.Pretriangulated.Triangle`;
+- `lem-weil-pbc-commshift-nattrans-comp-whisker`: `CategoryTheory.NatTrans.CommShift.comp`;
+- `lem-sp-abelian-refinements`: `CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements`;
+- `def-weil-inverse-system`: `CategoryTheory.Functor.ofOpSequence`,
+  `CategoryTheory.NatTrans.ofOpSequence`;
+- `def-weil-preadditive-category`: `CategoryTheory.Preadditive`.
 -/
 
 @[expose] public section

@@ -56,7 +56,7 @@ lemma epi_of_epi_app_obj {C' : Type u'} [Category.{v'} C'] (G : C' ⥤ C) [G.IsC
     rw [← cancel_epi (φ.hom.app (op (G.obj Y))), comp_zero, ← NatTrans.comp_app,
       ← ObjectProperty.FullSubcategory.comp_hom, hg]
     rfl
-  ext V : 2
+  refine Sheaf.hom_ext (NatTrans.ext (funext fun V ↦ ?_))
   refine R.property.hom_ext ⟨_, G.is_cover_of_isCoverDense J V.unop⟩ _ _ fun I ↦ ?_
   obtain ⟨⟨Y, a, b, hab⟩⟩ := I.hf
   rw [← hab, op_comp, Functor.map_comp, ← Category.assoc, ← g.hom.naturality, Category.assoc,
@@ -99,7 +99,7 @@ instance isIso_cechNerve_π_zero : IsIso (WidePullback.π (fun _ : Fin 1 => f.ho
   refine ⟨f.cechNerveZeroSection, ?_, WidePullback.lift_π _ _ _ _ 0⟩
   apply WidePullback.hom_ext
   · intro j
-    obtain rfl : j = 0 := Subsingleton.elim _ _
+    obtain rfl : j = 0 := Subsingleton.elim (α := Fin 1) _ _
     rw [Category.assoc, cechNerveZeroSection, WidePullback.lift_π, Category.comp_id,
       Category.id_comp]
   · rw [Category.assoc, cechNerveZeroSection, WidePullback.lift_base, WidePullback.π_arrow,
@@ -139,6 +139,7 @@ lemma ofArrows_cechNerveBase_mem :
 
 variable {f}
 
+omit [Preadditive A] in
 /-- Sections of a sheaf over the target of a covering morphism inject into the sections over
 the first object of its Čech nerve. -/
 lemma hom_ext_cechNerveBase {P : Cᵒᵖ ⥤ A} (hP : Presheaf.IsSheaf J P) {T : A}
@@ -168,7 +169,7 @@ lemma exists_comp_map_cechNerveBase {P : Cᵒᵖ ⥤ A} (hP : Presheaf.IsSheaf J
       have hl₀ : l ≫ f.cechNerve.δ 0 = b := by
         apply WidePullback.hom_ext
         · intro j
-          obtain rfl : j = 0 := Subsingleton.elim _ _
+          obtain rfl : j = 0 := Subsingleton.elim (α := Fin 1) _ _
           dsimp only [SimplicialObject.δ]
           rw [Category.assoc, cechNerve_map_π]
           exact WidePullback.lift_π _ _ _ _ _
@@ -178,7 +179,7 @@ lemma exists_comp_map_cechNerveBase {P : Cᵒᵖ ⥤ A} (hP : Presheaf.IsSheaf J
       have hl₁ : l ≫ f.cechNerve.δ 1 = a := by
         apply WidePullback.hom_ext
         · intro j
-          obtain rfl : j = 0 := Subsingleton.elim _ _
+          obtain rfl : j = 0 := Subsingleton.elim (α := Fin 1) _ _
           dsimp only [SimplicialObject.δ]
           rw [Category.assoc, cechNerve_map_π]
           exact WidePullback.lift_π _ _ _ _ _
@@ -193,7 +194,7 @@ end Preadditive
 
 section Abelian
 
-variable [Abelian A] {J : GrothendieckTopology C}
+variable [Abelian A] {J : GrothendieckTopology C} [HasSheafify J A]
 
 omit [∀ n : ℕ, HasWidePullback.{0} f.right (fun _ : Fin (n + 1) => f.left) fun _ => f.hom] in
 /-- Sections over an object of a short exact sequence of sheaves form a left exact sequence. -/
@@ -205,8 +206,8 @@ lemma exact_and_mono_map_sections {S : ShortComplex (Sheaf J A)} (hS : S.ShortEx
 
 lemma cechComplex_d_naturality {P Q : Cᵒᵖ ⥤ A} (φ : P ⟶ Q) (n : ℕ) :
     φ.app (op (f.cechNerve.obj (op ⦋n⦌))) ≫ (f.cechComplex Q).d n (n + 1) =
-      (f.cechComplex P).d n (n + 1) ≫ φ.app (op (f.cechNerve.obj (op ⦋n + 1⦌))) :=
-  ((f.cechComplexFunctor.map φ).comm n (n + 1)).symm
+      (f.cechComplex P).d n (n + 1) ≫ φ.app (op (f.cechNerve.obj (op ⦋n + 1⦌))) := by
+  simpa only [cechComplexFunctor_map_f] using ((f.cechComplexFunctor.map φ).comm n (n + 1)).symm
 
 variable {f}
 
@@ -225,10 +226,13 @@ theorem epi_app_right_of_exactAt_cechComplex_one {S : ShortComplex (Sheaf J A)}
           S.g.hom.app (op f.left) ≫
             S.X₃.obj.map (WidePullback.π (fun _ : Fin 1 => f.hom) 0).op := by
       rw [← e, IsIso.inv_hom_id_assoc]
+      rfl
     rw [this]
     infer_instance
   rw [HomologicalComplex.exactAt_iff' _ 0 1 2 (by simp) (by simp)] at h₁
-  obtain ⟨hE₁, _⟩ := exact_and_mono_map_sections hS (f.cechNerve.obj (op ⦋1⦌))
+  obtain ⟨hE₁, hm₁⟩ := exact_and_mono_map_sections hS (f.cechNerve.obj (op ⦋1⦌))
+  have : Mono (S.map (sheafToPresheaf J A ⋙
+      (evaluation Cᵒᵖ A).obj (op (f.cechNerve.obj (op ⦋1⦌))))).f := hm₁
   obtain ⟨-, _⟩ := exact_and_mono_map_sections hS (f.cechNerve.obj (op ⦋2⦌))
   obtain ⟨-, _⟩ := exact_and_mono_map_sections hS (f.cechNerve.obj (op ⦋0⦌))
   rw [epi_iff_surjective_up_to_refinements]
@@ -240,19 +244,20 @@ theorem epi_app_right_of_exactAt_cechComplex_one {S : ShortComplex (Sheaf J A)}
       = 0 := by
     rw [Category.assoc, ← cechComplex_d_naturality, ← Category.assoc, ← ht, Category.assoc,
       Category.assoc, map_cechNerveBase_comp_d, comp_zero, comp_zero]
-  let u := hE₁.lift _ hu
+  let u : T₁ ⟶ S.X₁.obj.obj (op (f.cechNerve.obj (op ⦋1⦌))) := hE₁.lift _ hu
   have hu' : u ≫ S.f.hom.app (op (f.cechNerve.obj (op ⦋1⦌))) =
       t ≫ (f.cechComplex S.X₂.obj).d 0 1 := hE₁.lift_f _ hu
   have hcoc : u ≫ (f.cechComplex S.X₁.obj).d 1 2 = 0 := by
     rw [← cancel_mono (S.f.hom.app (op (f.cechNerve.obj (op ⦋2⦌)))), zero_comp,
-      Category.assoc, cechComplex_d_naturality, ← Category.assoc, hu', Category.assoc,
+      Category.assoc, ← cechComplex_d_naturality (n := 1), ← Category.assoc, hu',
+      Category.assoc,
       HomologicalComplex.d_comp_d, comp_zero]
   obtain ⟨T₂, π₂, _, v, hv⟩ := h₁.exact_up_to_refinements u hcoc
   change π₂ ≫ u = v ≫ (f.cechComplex S.X₁.obj).d 0 1 at hv
   -- the corrected lift is a Čech `0`-cocycle of `G₂`, hence a section over `V`
   let t' := π₂ ≫ t - v ≫ S.f.hom.app (op (f.cechNerve.obj (op ⦋0⦌)))
   have ht' : t' ≫ (f.cechComplex S.X₂.obj).d 0 1 = 0 := by
-    rw [Preadditive.sub_comp, Category.assoc, Category.assoc, ← cechComplex_d_naturality,
+    rw [Preadditive.sub_comp, Category.assoc, Category.assoc, cechComplex_d_naturality (n := 0),
       ← hu', ← Category.assoc, ← Category.assoc, hv, sub_self]
   obtain ⟨z, hz⟩ := exists_comp_map_cechNerveBase hf S.X₂.property t' ht'
   refine ⟨T₂, π₂ ≫ π₁, inferInstance, z, ?_⟩
