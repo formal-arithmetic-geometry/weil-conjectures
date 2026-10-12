@@ -5905,3 +5905,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:33 L: merged deliver/K1/Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule (stage 3; reviewer PASS; first push; landing 20261012T033212-L-1450745 (interface); modules 2; new nodes 1)
 - 03:33 L: merged deliver/K2/Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison (stage 3; reviewer PASS; first push; landing 20261012T033330-L-1461754 (proof); modules 1; new nodes 0)
 - 03:34 L: merged deliver/M1/Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange (stage 3; reviewer PASS; first push; landing 20261012T033402-L-1466006 (proof); modules 1; new nodes 0)
+- 03:36 L: returned deliver/M1/Sheaf.Topology.CohomologyReductionConstantSubsheaves (reviewer RETURN: (the landing tools, head f24743109) the delivery did not land: NOT MERGED Sheaf.Topology.CohomologyReductionConstantSubs)
