@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenFunctions
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
@@ -195,5 +196,49 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_cover
       θ.inv_hom_id, op_id, G.obj.map_id, Category.comp_id]
   rw [h₂]
   exact @IsIso.comp_isIso _ _ _ _ _ _ _ h₁ inferInstance
+
+/-- The unit of `j^* ⊣ j_*` on sheaves along an open immersion is invertible exactly when the
+unit of the restriction adjunction is: both left adjoints of `j_*` agree. -/
+lemma isIso_upperStarLowerStarAdjunction_unit_app_iff {A : Type*} [Category.{u + 1} A]
+    [Abelian A] [IsGrothendieckAbelian.{u + 1} A] {X V : Scheme.{u}} (ι : V ⟶ X)
+    [IsOpenImmersion ι] (G : Sheaf (Scheme.ProEt.topology X) A) :
+    IsIso ((upperStarLowerStarAdjunction A ι).unit.app G) ↔
+      IsIso ((openImmersionRestrictionLowerStarAdjunction A ι).unit.app G) := by
+  let adj := upperStarLowerStarAdjunction A ι
+  let adj' := openImmersionRestrictionLowerStarAdjunction A ι
+  have h : adj.unit.app G = adj'.unit.app G ≫ (ι)_*[A].map ((adj.leftAdjointUniq adj').inv.app G) := by
+    rw [← adj.unit_leftAdjointUniq_hom_app adj' G, Category.assoc, ← Functor.map_comp,
+      Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
+    exact (Category.comp_id _).symm
+  change IsIso (adj.unit.app G) ↔ IsIso (adj'.unit.app G)
+  rw [h]
+  exact ⟨fun _ ↦ IsIso.of_isIso_comp_right _ ((ι)_*[A].map ((adj.leftAdjointUniq adj').inv.app G)),
+    fun _ ↦ inferInstance⟩
+
+/-- **Lisse `ℓ`-adic sheaves extend uniquely over a dense open.** Let `C` be a scheme with
+regular local rings, `j : U ⟶ C` a quasi-compact open immersion with dense image and `F` a lisse
+`ℓ`-adic sheaf on `C`. Then the unit `F ⟶ j_* j^* F` of the adjunction `j^* ⊣ j_*` is an
+isomorphism. This is the `ℓ`-adic content of blueprint `lem-a1-lisse-middle-extension`. -/
+theorem IsAdicLisseSheaf.isIso_adicUpperStarLowerStarAdjunction_unit_app {C U : Scheme.{u}}
+    (hC : ∀ c : C, IsRegularLocalRing (C.presheaf.stalk c)) (j : U ⟶ C) [IsOpenImmersion j]
+    [QuasiCompact j] (hj : Dense (Set.range j)) {F : AdicSheaf l C} (hF : IsAdicLisseSheaf F) :
+    IsIso ((adicUpperStarLowerStarAdjunction l j).unit.app F) := by
+  obtain ⟨R, hR, hRF⟩ := hF
+  obtain ⟨ι, V, f, rfl⟩ := R.exists_eq_ofArrows
+  have hf (i : ι) : WeaklyEtale (f i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hR (.mk i)
+  have hG (i : ι) : ∃ n : ℕ, Nonempty ((localizationRestriction (WeilCoefficients.{u} l) (f i)
+      inferInstance).obj F.X ≅ ⨁ fun _ : Fin n ↦ adicConstantSheaf l (V i)) := by
+    obtain ⟨n, ⟨e⟩⟩ := hRF (f i) (.mk i)
+    exact ⟨n, ⟨((upperStarIsoLocalizationRestriction _ (f i) inferInstance).app F.X).symm ≪≫
+      (AdicSheaf.forget (V i)).mapIso e ≪≫
+        (AdicSheaf.forget (V i)).mapBiproduct fun _ : Fin n ↦ AdicSheaf.unit l (V i)⟩⟩
+  have h := isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_cover hC j hj F.X f hR hG
+  rw [← isIso_upperStarLowerStarAdjunction_unit_app_iff] at h
+  have : IsIso ((Mod.forget _).map ((adicUpperStarLowerStarAdjunction l j).unit.app F)) := by
+    change IsIso ((adicUpperStarLowerStarAdjunction l j).unit.app F).hom
+    rw [adicUpperStarLowerStarAdjunction, Adjunction.modAdjunction_unit_app_hom]
+    exact h
+  exact isIso_of_reflects_iso _ (Mod.forget _)
 
 end AlgebraicGeometry.ProEtale
