@@ -1,0 +1,114 @@
+{
+ "id": "lem-sc-nonvanishing-locus-restrict",
+ "kind": "statement",
+ "title": "Nonvanishing locus under restriction along an open immersion",
+ "statement": "Let f : X → Y be an open immersion of schemes, let M be an O_Y-module, and let s be a global section of M. Under the canonical restriction isomorphism, the nonvanishing locus of the restricted section is the inverse image f⁻¹(Y_s), where nonvanishing means that the germ lies outside the maximal ideal times the stalk module.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 01CY, and properties.tex Lemma 01PV proof, affine translation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "The inverse structure-sheaf stalk isomorphism sends the germ of r on U to the germ of (f.appIso U).inv r on f(U). Prove this using germ_stalkMap and appIso_inv_app, cancelling the stalk isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Represent a scalar stalk element by a germ and represent a module stalk element on a smaller common neighbourhood. The germ_smul identity and germ_restrictStalkNatIso_hom_app show that the additive restriction stalk isomorphism is compatible with the inverse ring stalk isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "A ring equivalence preserves units, hence preserves membership in the maximal ideal. By Submodule.smul_induction_on in both directions and the compatible additive stalk equivalence, membership in maximal ideal times the whole module is preserved. Apply this to the restricted section germ and use germ_res_apply to identify it with the original section germ. Negate the membership equivalence pointwise.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma 01CY"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction open immersion nonvanishing locus section stalk maximal ideal",
+   "results": "No exact declaration; found restrictStalkNatIso and germ_restrictStalkNatIso_hom_app, which are used in the proof",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "restrictStalkNatIso",
+   "results": "Found restrictStalkNatIso, germ_restrictStalkNatIso_hom_app and germ_restrictStalkNatIso_inv_app",
+   "date": "2026-10-12",
+   "verdict": "supporting declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "rg nonvanishingLocus restrictStalkNatIso",
+   "results": "No existing theorem in Sheaf or WeilConjectures",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an open immersion preserves the nonvanishing locus of a module section",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineCapSectionOpen",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-affine-cap-section-open",
+   "place": "proof step 1: restriction to an affine chart"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NonvanishingLocusRestrict",
+  "file": "lean/Sheaf/AlgebraicGeometry/NonvanishingLocusRestrict.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonvanishingLocus_restrict",
+  "statement": "theorem nonvanishingLocus_restrict {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] (M : Y.Modules) (s : M.val.presheaf.obj (op ⊤)) : nonvanishingLocus (M.restrict f) ((M.restrictAppIso f ⊤).inv (M.presheaf.map (homOfLE le_top).op s)) = f ⁻¹' nonvanishingLocus M s",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T085351-L-44332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T085351-L-44332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
