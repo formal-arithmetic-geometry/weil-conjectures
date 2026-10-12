@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.PiProd
 
 /-!
@@ -57,3 +58,18 @@ instance sigmaDesc {ι : Type v} [Finite ι] {X : Scheme.{u}} {Y : ι → Scheme
     infer_instance
 
 end AlgebraicGeometry.IsFinite
+
+namespace AlgebraicGeometry
+
+/-- **A finite morphism to a locally Noetherian scheme is of finite presentation**: it is locally
+of finite presentation, quasi-compact and quasi-separated. Over an affine open `Spec A` of the
+target the source is `Spec B` with `B` a finite module over the Noetherian ring `A`, hence a
+finitely presented `A`-algebra. (blueprint: `pqf-lem-finite-fp-locnoeth`; the definition
+`pqf-def-locnoeth` is `AlgebraicGeometry.IsLocallyNoetherian`, and
+`pqf-lem-affine-open-locnoeth` is `AlgebraicGeometry.IsLocallyNoetherian.component_noetherian`) -/
+theorem IsFinite.locallyOfFinitePresentation_of_isLocallyNoetherian {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsFinite f] [IsLocallyNoetherian Y] :
+    LocallyOfFinitePresentation f ∧ QuasiCompact f ∧ QuasiSeparated f :=
+  ⟨inferInstance, inferInstance, inferInstance⟩
+
+end AlgebraicGeometry
