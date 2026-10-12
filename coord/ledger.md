@@ -9332,3 +9332,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:19 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.AffineFinitePresentationFlatShortening (reviewer RETURN: (reviewer X-73da0, head 73da033fb) C1/C4: Both new node proof step 1s use the non-elementary claim that affine quasi-coh)
 - 20:19 L: returned deliver/F3/Sheaf.RingTheory.TorKernelBoundaryNaturalityOf (reviewer RETURN: (reviewer X-7aa03, head 7aa03ee06) H9 / brief point 5: In lean/Sheaf/RingTheory/TorKernelBoundaryConstruction.lean line )
 - 20:22 L: returned deliver/A3/Sheaf.AlgebraicGeometry.EtaleFpqcAgreementOpenCompatibility (reviewer RETURN: (the landing tools, head 0ef04944e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 20:22 L: returned deliver/M3/Sheaf.Paper.EtaleHypercohomologyCETotalMaps (reviewer RETURN: (the landing tools, head 987b06c10) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
