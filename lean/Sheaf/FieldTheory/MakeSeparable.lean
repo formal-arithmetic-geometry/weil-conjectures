@@ -45,6 +45,18 @@ theorem exists_finite_purelyInseparable_separable_extension
       (_ : Module.Finite k k') (_ : IsPurelyInseparable k k')
       (_ : Module.Finite K K') (_ : IsPurelyInseparable K K'),
       Algebra.IsSeparableExtension k' K' := by
-  sorry
+  obtain ⟨k', hk', akk', K', hK', aKK', akK', hfin, hpi, hFin, hPI, hgen, hcomm⟩ :=
+    FieldExtension.exists_finitePurelyInseparable_separablyGenerated k K hK
+  let : Field k' := hk'
+  let : Field K' := hK'
+  let : Algebra k k' := akk'
+  let : Algebra K K' := aKK'
+  let : Algebra k' K' := akK'
+  let : Algebra k K' := ((algebraMap K K').comp (algebraMap k K)).toAlgebra
+  have htowerK : IsScalarTower k K K' := IsScalarTower.of_algebraMap_eq' rfl
+  have htowerk : IsScalarTower k k' K' :=
+    IsScalarTower.of_algebraMap_eq' hcomm.symm
+  exact ⟨k', K', hk', hK', akk', inferInstance, akK', aKK', htowerk, htowerK,
+    hfin, hpi, hFin, hPI, isSeparableExtension_of_isSeparablyGenerated k' K' hgen⟩
 
 end Algebra
