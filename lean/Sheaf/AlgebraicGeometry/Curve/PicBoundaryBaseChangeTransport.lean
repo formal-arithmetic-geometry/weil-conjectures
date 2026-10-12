@@ -7,12 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
 public import WeilConjectures.Compactification.BaseChange
-import Sheaf.AlgebraicGeometry.BaseChangeCurve
-import Sheaf.AlgebraicGeometry.GenusInvariant
-import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import Sheaf.AlgebraicGeometry.Curve.BoundaryPointClassBaseChange
+import Sheaf.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
 import WeilConjectures.AlgebraicGeometry.Picard.Degree
-import Mathlib.AlgebraicGeometry.AlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 
 /-! # Transport of degree-zero boundary subgroups
 
@@ -76,6 +73,70 @@ theorem pic_boundary_base_change_transport
             L = @Scheme.Pic.ofClosedPoint k' _ c'.Z ⟨c'.g⟩ hsm' P /
               @Scheme.Pic.ofClosedPoint k' _ c'.Z ⟨c'.g⟩ hsm' Q₀} →
         (∀ L : G, j L.val ∈ G') ∧
-        ∃ ej : Λ ≃* Λ', ∀ L : Λ, (ej L : c'.Z.Pic) = j L.val := by sorry
+        ∃ ej : Λ ≃* Λ', ∀ L : Λ, (ej L : c'.Z.Pic) = j L.val := by
+  classical
+  let b := Spec.map (CommRingCat.ofHom (algebraMap k k'))
+  let c' := c.baseChange b
+  let j := Scheme.Pic.mapHom (pullback.fst c.g b)
+  obtain ⟨e, he⟩ := boundary_point_class_base_change (k' := k') f c
+  have hdegree (L : c.Z.Pic) : c'.g.picDegree (j L) = c.g.picDegree L := by
+    let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
+    let : c'.Z.Over (Spec (.of k')) := ⟨c'.g⟩
+    let : (pullback c.g b).Over (Spec (.of k')) := ⟨pullback.snd c.g b⟩
+    have : IsProper (c.Z ↘ Spec (.of k)) := c.isProper
+    let M := (fromSkeleton c.Z.Modules).obj L.val
+    have : SheafOfModules.IsInvertible.{u, u, u} M := L.isInvertible
+    have : Scheme.Modules.IsInvertible M := Scheme.Modules.IsInvertible.of_sheafOfModules M
+    change Scheme.Modules.degree k'
+      ((fromSkeleton c'.Z.Modules).obj (toSkeleton
+        ((Scheme.Modules.pullback (pullback.fst c.g b)).obj M))) =
+      Scheme.Modules.degree k M
+    rw [Scheme.Modules.degree_congr k' (fromSkeletonToSkeletonIso _)]
+    exact Scheme.Modules.degree_pullback_of_isPullback b (pullback.fst c.g b)
+      (IsPullback.of_hasPullback c.g b) M
+  let Q₀ := (e ⟨P₀, hP₀⟩).val
+  refine ⟨Q₀, (e ⟨P₀, hP₀⟩).property, ?_⟩
+  intro G hG Λ hΛ G' hG' Λ' hΛ'
+  have hj : ∀ L : G, j L.val ∈ G' := by
+    intro L
+    rw [← SetLike.mem_coe, hG']
+    change c'.g.picDegree (j L.val) = 0
+    rw [hdegree]
+    have hL : L.val ∈ c.g.picZero := by rw [← hG]; exact L.property
+    exact hL
+  refine ⟨hj, ?_⟩
+  let t : G →* G' :=
+    { toFun := fun L ↦ ⟨j L.val, hj L⟩
+      map_one' := Subtype.ext j.map_one
+      map_mul' := fun L M ↦ Subtype.ext (j.map_mul L.val M.val) }
+  have ht : Function.Injective t :=
+    (picZero_torsion_base_change c.g G hG G' hG' t (fun L ↦ rfl) 1 (by simp)).1
+  have hgen : j ''
+      {L | ∃ P : closedPoints c.Z, P.val ∉ Set.range c.i.base ∧
+        L = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P /
+          @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P₀} =
+      {L | ∃ P : closedPoints c'.Z, P.val ∉ Set.range c'.i.base ∧
+        L = @Scheme.Pic.ofClosedPoint k' _ c'.Z ⟨c'.g⟩ hsm' P /
+          @Scheme.Pic.ofClosedPoint k' _ c'.Z ⟨c'.g⟩ hsm' Q₀} := by
+    ext L
+    constructor
+    · rintro ⟨M, ⟨P, hP, rfl⟩, rfl⟩
+      refine ⟨(e ⟨P, hP⟩).val, (e ⟨P, hP⟩).property, ?_⟩
+      rw [map_div, he ⟨P, hP⟩, he ⟨P₀, hP₀⟩]
+    · rintro ⟨Q, hQ, rfl⟩
+      obtain ⟨P, hP⟩ := e.surjective ⟨Q, hQ⟩
+      refine ⟨_, ⟨P.val, P.property, rfl⟩, ?_⟩
+      rw [map_div, he P, he ⟨P₀, hP₀⟩, hP]
+  have hamb : Subgroup.map j (Subgroup.map G.subtype Λ) =
+      Subgroup.map G'.subtype Λ' := by
+    rw [hΛ, hΛ', MonoidHom.map_closure, hgen]
+  have hmap : Subgroup.map t Λ = Λ' := by
+    apply Subgroup.map_injective (f := G'.subtype) Subtype.val_injective
+    rw [Subgroup.map_map, ← hamb, Subgroup.map_map]
+    rfl
+  let ej := (Λ.equivMapOfInjective t ht).trans (MulEquiv.subgroupCongr hmap)
+  refine ⟨ej, ?_⟩
+  intro L
+  rfl
 
 end AlgebraicGeometry

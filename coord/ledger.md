@@ -7551,3 +7551,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/U3/Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural (stage 3; reviewer PASS; first push; landing 20261012T112852-L-772501 (proof); batch 20261012T112824; modules 1; new nodes 1)
 - 11:28 L: merged deliver/V1/Sheaf.AlgebraicGeometry.SupportedPerfectDetectorAffine (stage 3; reviewer PASS; first push; landing 20261012T112852-L-772597 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/V2/Sheaf.AlgebraicGeometry.HigherDirectImageColimitComparisonEpi (stage 3; reviewer PASS; first push; landing 20261012T112852-L-772694 (interface); batch 20261012T112824; modules 2; new nodes 2)
+- 11:28 L: merged deliver/V3/Sheaf.AlgebraicGeometry.Curve.PicBoundaryBaseChangeTransport (stage 3; reviewer PASS; first push; landing 20261012T112853-L-772798 (interface); batch 20261012T112824; modules 2; new nodes 1)
