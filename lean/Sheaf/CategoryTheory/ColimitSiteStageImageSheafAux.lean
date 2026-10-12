@@ -8,7 +8,10 @@ module
 public import Sheaf.CategoryTheory.ArrowsFunctor
 public import Sheaf.CategoryTheory.FinitePrecoverage
 public import Sheaf.CategoryTheory.ColimitSiteStageImage
-import Sheaf.CategoryTheory.FilteredColimitCategories
+
+import Mathlib.CategoryTheory.Sites.Subsheaf
+import all Sheaf.CategoryTheory.ColimitSiteCoveringConstructionParts
+import Sheaf.CategoryTheory.ColimitSiteStageImageAmalgamation
 
 /-! Local sheaf condition for stage image.
 Source: Stacks Project, Sites, Tag 0A35.
@@ -79,7 +82,41 @@ theorem colimit_site_stage_image_local_isSheafFor
                   Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor (Type u)
                     (P i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X))))
     (Y : V.pt) (S : Sieve Y) (hS : S ∈ Q.toGrothendieck Y) :
-      S.arrows.IsSheafFor (colimitSiteStageImage F P V Q i G α).toFunctor := by sorry
-
+      S.arrows.IsSheafFor (colimitSiteStageImage F P V Q i G α).toFunctor := by
+  let H := (sheafPullback (V.ι.app i).toFunctor (Type u)
+    (P i).toGrothendieck Q.toGrothendieck).obj G
+  let A := colimitSiteStageImage F P V Q i G α
+  have hH : Presieve.IsSheaf Q.toGrothendieck H.obj :=
+    (isSheaf_iff_isSheaf_of_type _ _).mp H.property
+  have hsep : Presieve.IsSeparated Q.toGrothendieck A.toFunctor :=
+    A.isSeparated hH.isSeparated
+  have hQfinite : ∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y → Finite R.uncurry := by
+    intro Y R hR
+    obtain ⟨j, X, T, rfl, hT, rfl⟩ := (hQ Y R).mp hR
+    have : Finite T.uncurry := hfinite j X T hT
+    let f : T.uncurry → (T.map (V.ι.app j).toFunctor).uncurry := fun a ↦
+      ⟨⟨(V.ι.app j).toFunctor.obj a.val.1,
+        (V.ι.app j).toFunctor.map a.val.2⟩, .of a.property⟩
+    apply Finite.of_surjective f
+    rintro ⟨⟨Y, g⟩, hg⟩
+    cases hg with
+    | of h => exact ⟨⟨⟨_, _⟩, h⟩, rfl⟩
+  have hAQ : Presieve.IsSheaf Q.toGrothendieck A.toFunctor := by
+    rw [Q.isSheaf_toGrothendieck_iff]
+    intro X Y g R hR
+    have := Q.hasPullbacks_of_mem g hR
+    rw [← Sieve.pullbackArrows_comm, ← Presieve.isSheafFor_iff_generate]
+    have hT := finite_pullback_cover Q hQfinite R hR g
+    have hcov : Sieve.generate (R.pullbackArrows g) ∈ Q.toGrothendieck Y :=
+      Q.generate_mem_toGrothendieck hT
+    have hs := (hsep (Sieve.generate (R.pullbackArrows g)) hcov)
+    have hs' := (Presieve.isSeparatedFor_iff_generate).mpr hs
+    apply hs'.isSheafFor
+    obtain ⟨j, W, T, rfl, hT, heq⟩ := (hQ Y (R.pullbackArrows g)).mp hT
+    rw [← heq]
+    intro x hx
+    exact colimit_site_stage_image_cover_exists_amalgamation J F P hfinite hcover
+      hpullback V hobjects harrows Q hQ hVpullback i G α hα j W T hT x hx
+  exact hAQ S hS
 
 end CategoryTheory

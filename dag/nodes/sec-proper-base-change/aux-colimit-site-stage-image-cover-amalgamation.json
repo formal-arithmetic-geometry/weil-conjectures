@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35 (lemma-compute-pullback-to-limit), section construction and adjunction paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-arrows-functor",
+  "def-weil-pbc-colimit-site-stage-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, finite-cover equalizer and adjunction paragraphs; source read online at https://stacks.math.columbia.edu/tag/0A35. The Lean existence argument remains open."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "aux-colimit-site-stage-image-cover-amalgamation",
+ "title": "Existence of stage-image amalgamations on a mapped finite stage cover",
+ "statement": "Under the hypotheses of the stage-image local sheaf condition, fix j, X in F(j), and R in P(j)(X). Every compatible family of stage-image sections on the mapped presieve R.map(V.ι.app j) has an amalgamation in the stage-image presheaf. Only existence on this finite stage cover is asserted, not uniqueness or the condition on arbitrary covering sieves.",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ColimitSiteStageImageSheafAux",
+  "date": "2026-10-13",
+  "group": "P1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "aux-colimit-site-stage-image-local-isSheafFor",
+   "place": "Tag 0A35, existence in the finite-stage matching-family equalizer",
+   "via": [
+    "aux-colimit-site-stage-image-local-isSheafFor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ColimitSiteStageImageAmalgamation",
+  "file": "lean/Sheaf/CategoryTheory/ColimitSiteStageImageAmalgamation.lean",
+  "declaration": "CategoryTheory.colimit_site_stage_image_cover_exists_amalgamation",
+  "statement": "theorem colimit_site_stage_image_cover_exists_amalgamation\n    (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})\n    (P : ∀ j : J, Precoverage (F.obj j))\n    [∀ j, (P j).HasIsos] [∀ j, (P j).IsStableUnderFiniteComposition]\n    [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]\n    (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →\n      Finite R.uncurry)\n    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),\n      R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))\n    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),\n      R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (F.map a).toFunctor)\n    [∀ (j k : J) (a : j ⟶ k),\n      (F.map a).toFunctor.IsContinuous (P j).toGrothendieck (P k).toGrothendieck]\n    [∀ (j k : J) (a : j ⟶ k), PreservesFiniteLimits\n      (sheafPullback (F.map a).toFunctor (Type u)\n        (P j).toGrothendieck (P k).toGrothendieck)]\n    (V : Cocone F)\n    (hobjects : IsColimit (Cat.objects.mapCocone V))\n    (harrows : IsColimit (Cat.arrows.mapCocone V))\n    (Q : Precoverage V.pt)\n    [Q.HasIsos] [Q.IsStableUnderFiniteComposition]\n    [Q.IsStableUnderFiniteBaseChange] [Q.HasPullbacks]\n    (hQ : (∀ (Y : V.pt) (R : Presieve Y), R ∈ Q Y ↔\n          ∃ (j : J) (X : F.obj j) (S : Presieve X) (h : (V.ι.app j).toFunctor.obj X = Y),\n            S ∈ P j X ∧ h ▸ S.map (V.ι.app j).toFunctor = R))\n    (hVpullback : (∀ (j : J) (X Y Z : F.obj j) (R : Presieve X), R ∈ P j X →\n            ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n              PreservesLimit (cospan f g) (V.ι.app j).toFunctor))\n    [∀ j : J, (V.ι.app j).toFunctor.IsContinuous\n      (P j).toGrothendieck Q.toGrothendieck]\n    (i : J) (G : Sheaf (P i).toGrothendieck (Type u))\n    (α : ∀ t : Under i,\n                (sheafPullback (F.map t.hom).toFunctor (Type u)\n                  (P i).toGrothendieck (P t.right).toGrothendieck).obj G ⟶\n                ((V.ι.app t.right).toFunctor.sheafPushforwardContinuous (Type u)\n                  (P t.right).toGrothendieck Q.toGrothendieck).obj\n                  ((sheafPullback (V.ι.app i).toFunctor (Type u)\n                    (P i).toGrothendieck Q.toGrothendieck).obj G))\n    (hα : (∀ (t : Under i) (X : F.obj i),\n                  Arrow.mk (((sheafAdjunctionContinuous (F.map t.hom).toFunctor (Type u)\n                    (P i).toGrothendieck (P t.right).toGrothendieck).unit.app G).hom.app\n                      (op X) ≫ (α t).hom.app (op ((F.map t.hom).toFunctor.obj X))) =\n                  Arrow.mk (((sheafAdjunctionContinuous (V.ι.app i).toFunctor (Type u)\n                    (P i).toGrothendieck Q.toGrothendieck).unit.app G).hom.app (op X))))\n    (j : J) (X : F.obj j) (R : Presieve X) (hR : R ∈ P j X)\n    (x : (R.map (V.ι.app j).toFunctor).FamilyOfElements\n      (colimitSiteStageImage F P V Q i G α).toFunctor) (hx : x.Compatible) :\n    ∃ z, x.IsAmalgamation z",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-13"
+ },
+ "proof": [
+  {
+   "text": "Proof: The cover R is finite by hfinite. Choose stage presentations of its finitely\nmany section values using the definition of colimitSiteStageImage. Lift their\npresenting objects and arrows, together with the cover, to one stage above i and j\nusing the object and arrow colimit hypotheses and filteredness. Stage adjunctions\nidentify the maps α with the canonical comparison maps: their composites with the\nunits agree by hα, and adjunction makes those composites determine the maps.\nEquality in the limit inverse-image sheaf is locally equality of presheaf\nrepresentatives. The exact description hQ of covers, finite composition, and\nhfinite let these local equalities be witnessed by finite stage covers. Lift\nthose witnesses to a common stage as well. Stage sheaf separatedness then makes\nthe finitely many matching equations hold on the pairwise covering pullbacks.\nThese pullbacks are preserved by hpullback and\nhVpullback. Equivalently, use that filtered colimits commute with the finite\nmatching-family equalizer, as in Tag 0A35. The transported cover remains covering\nby hcover. The sheaf at that stage therefore glues the family to a section z.\nIts image under α, restricted along the presentation of the cover's target,\nbelongs to colimitSiteStageImage by construction and restricts to each value of x.\nFor the empty cover the equalizer is the terminal set; the stage sheaf supplies\nits unique section by the same argument. Only existence on a mapped stage cover\nis asserted here; uniqueness and passage to the generated topology are separate.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-colimit-site-stage-image",
+    "def-weil-pbc-finite-precoverage",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-filtered-colimit-categories",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-colimit-site-stage-image",
+  "def-weil-pbc-finite-precoverage",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-filtered-colimit-categories",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible family of sections represented at finite stages of a filtered colimit of sites has an amalgamation at a common stage",
+   "results": "IsSheafFor.amalgamate and valid_glue, DenseSubsite.sheaf_eq_amalgamation; no stage-image construction or finite-stage comparison theorem.",
+   "date": "2026-10-13",
+   "verdict": "supporting API only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Presieve.IsSeparatedFor",
+   "results": "IsSeparatedFor.of_mono and IsSeparatedFor.isSheafFor discharge uniqueness and combine it with existence; no stage-image existence result.",
+   "date": "2026-10-13",
+   "verdict": "uniqueness already available"
+  },
+  {
+   "tool": "grep",
+   "query": "stage.*amalgamation|amalgamation.*stage|colimitSiteStageImage",
+   "results": "msearch 0 hits; repository rg finds stage image definition, refinement and representatives, plus raw-section amalgamation on a different Kan-extension construction. Raw-section sheafness does not identify its colimit with the stage image.",
+   "date": "2026-10-13",
+   "verdict": "no duplicate of this existence statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compatible family of stage inverse-image sheaf sections over a finite cover of a filtered colimit site has an amalgamation represented at one stage",
+   "results": "UNAVAILABLE: Internal Server Error; no absence verdict inferred.",
+   "date": "2026-10-13"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T235113-L-2172271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T235113-L-2172271",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
