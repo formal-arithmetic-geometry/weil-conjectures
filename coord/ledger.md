@@ -8505,3 +8505,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:08 L: merged deliver/V1/Sheaf.RingTheory.RegularLocalSeparableResidueSmooth (stage 3; reviewer PASS; first push; landing 20261012T160833-L-2613277 (interface); batch 20261012T160822; modules 2; new nodes 1)
 - 16:08 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.AffineFiniteFreePerfectCore (stage 3; reviewer PASS; first push; landing 20261012T160833-L-2613376 (interface); batch 20261012T160822; modules 3; new nodes 2)
 - 16:08 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.DerivedTensorOpenRestrictionUniverses (stage 3; reviewer PASS; first push; landing 20261012T160833-L-2613488 (interface); batch 20261012T160822; modules 3; new nodes 2)
+- 16:08 L: merged deliver/Y3/Sheaf.Algebra.Homology.ZigzagZeroComponentBoundary (stage 3; reviewer PASS; first push; landing 20261012T160834-L-2613591 (proof); batch 20261012T160822; modules 1; new nodes 0)
