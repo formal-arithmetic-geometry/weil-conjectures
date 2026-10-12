@@ -215,9 +215,13 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Image
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Differential
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Dimension
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.LocalPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
@@ -233,6 +237,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponentBase
+public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Functoriality
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.RankOne
 public import WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Weights
@@ -1554,6 +1559,7 @@ public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Exterior
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.HopfIdeal
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.IdentityComponent
 public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Kronecker
+public import WeilConjectures.RingTheory.HopfAlgebra.GeneralLinearGroup.Regular
 public import WeilConjectures.RingTheory.MvPolynomial.ArtinSchreier
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientBasis
 public import WeilConjectures.RingTheory.MvPolynomial.QuotientSpan
@@ -1746,6 +1752,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius
@@ -2037,6 +2045,7 @@ public import WeilConjectures.WeilSheaf.StalkFrobenius
 public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.WeilSheaf.StalkMonoidal
 public import WeilConjectures.WeilSheaf.StalkPairing
+public import WeilConjectures.WeilSheaf.StalkTateTwist
 public import WeilConjectures.WeilSheaf.StalkUpperStar
 public import WeilConjectures.WeilSheaf.StalkUpperStarCharpoly
 public import WeilConjectures.WeilSheaf.TateTwist
