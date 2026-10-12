@@ -55,97 +55,54 @@
  ],
  "proof": [
   {
-   "text": "*The value $s(y)$.* For $y\\in Y$, $\\mathcal O_{Y,y}$ is a local ring with maximal ideal $\\mathfrak m_y$ and $\\kappa(y)=\\mathcal O_{Y,y}/\\mathfrak m_y$ [def-weil-residue-field]; for any $\\mathcal O_{Y,y}$-module $M$, $M\\otimes_{\\mathcal O_{Y,y}}\\kappa(y)=M/\\mathfrak m_yM$ ($M\\otimes_AA/\\mathfrak m=M/\\mathfrak mM$), and under this identification $s(y)=s_y\\otimes1$ is the class of $s_y$. So $s(y)\\neq0$ iff $s_y\\notin\\mathfrak m_y\\mathcal L_y$: the two descriptions of $Y_s$ in the statement agree.",
-   "uses": [
-    "def-weil-residue-field"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma Tag 01CY (lemma-s-open), proof (the set $X_s$ is defined there by $s_x\\notin\\mathfrak m_x\\mathcal L_x$)"
-   }
-  },
-  {
-   "text": "*Local trivialization and the stalks.* Since $\\mathcal L$ is invertible [def-sc-invertible-module], every $y_0\\in Y$ has an open neighbourhood $U$ with an isomorphism of $\\mathcal O_U$-modules $\\varphi:\\mathcal O_U\\to\\mathcal L|_U$. Put $e=\\varphi_U(1)\\in\\mathcal L(U)$ and $g=\\varphi_U^{-1}(s|_U)\\in\\mathcal O_Y(U)$; since $\\varphi$ is $\\mathcal O$-linear, $\\varphi_V(a)=a\\,e|_V$ for every open $V\\subseteq U$ and $a\\in\\mathcal O_Y(V)$, and $s|_U=g\\,e$. For $y\\in U$, taking stalks gives an isomorphism of $\\mathcal O_{Y,y}$-modules $\\varphi_y:\\mathcal O_{Y,y}\\to\\mathcal L_y$, $a\\mapsto a\\,e_y$ (stalks of $\\mathcal O_U$, $\\mathcal L|_U$ at $y$ are those of $\\mathcal O_Y$, $\\mathcal L$, the open neighbourhoods of $y$ inside $U$ being cofinal). Hence $\\mathcal L_y$ is free of rank one with basis $e_y$, in particular finitely generated, and $s_y=g_y\\,e_y$. An isomorphism of $\\mathcal O_{Y,y}$-modules carries $\\mathfrak m_y\\mathcal O_{Y,y}=\\mathfrak m_y$ onto $\\mathfrak m_y\\mathcal L_y$, so $s_y\\in\\mathfrak m_y\\mathcal L_y$ iff $g_y\\in\\mathfrak m_y$. With $D(g)=\\{y\\in U: g_y\\notin\\mathfrak m_y\\}$ [lem-weil-pbc-basic-open-function] this gives $Y_s\\cap U=D(g)$; equivalently (by that lemma, (a)) $Y_s\\cap U=\\{y\\in U: g(y)\\neq0\\text{ in }\\kappa(y)\\}$.",
+   "text": "Convert Scheme.Modules.IsInvertible to SheafOfModules.IsInvertible using IsInvertible.sheafOfModules_isInvertible. At each point choose an affine trivialization with a free generator e (exists_isFreeGenerator). The private helper stalk_generator_bijective proves that the germ e_x is a free generator of the stalk: represent arbitrary module germs on smaller opens and apply sectionwise surjectivity; represent two scalar germs on smaller opens, shrink until equality holds, and apply sectionwise injectivity.",
    "uses": [
     "def-sc-invertible-module",
-    "lem-weil-pbc-basic-open-function",
-    "def-weil-residue-field"
+    "lem-pc-invertible-sheaf-instance",
+    "def-weil-pbc-module-stalk"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, Lemma Tag 01PW (lemma-invert-s-sections), first paragraph of the proof: with $\\mathcal L|_{U_j}\\cong\\mathcal O_{U_j}$, $s|_{U_j}$ corresponds to $f_j$ and $X_s\\cap U_j=D(f_j)$ (stated there without argument; the argument written out here)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$Y_s$ is open.* By step 2 the opens $U$ on which $\\mathcal L$ is trivial cover $Y$, and for each of them $Y_s\\cap U=D(g)$ is open in $Y$ [lem-weil-pbc-basic-open-function, (b)]. Hence $Y_s=\\bigcup_U(Y_s\\cap U)$ is open in $Y$. (Stacks proves openness by producing the section $t$ of $\\mathcal L^{\\otimes-1}$ near $x$; on a trivializing $U$ this is the same argument, $t$ corresponding to $g^{-1}$ on $D(g)$.)",
+   "text": "Write s restricted to the trivializing affine V as c times e. Since a ↦ a e_x is bijective, the stalk is spanned by e_x, and Submodule.mem_smul_span_singleton shows c_x e_x belongs to the maximal ideal times the stalk exactly when c_x belongs to the maximal ideal. Thus x is in nonvanishingLocus exactly when c_x is a unit. Scheme.mem_basicOpen and the source-library basicOpen_coeff_eq identify this with x lying outside the support of Hom.zeroLocus (homOfGlobalSection L s). The latter complement is already an open U; the private helper nonvanishing_eq_compl_support proves equality of its underlying set with the required locus.",
    "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-pc-zero-scheme-ideal-local",
+    "def-pc-zero-scheme",
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved source-library isFreeGenerator_app_one_of_le on U, the complement of the zero scheme support. This lemma uses the same local coefficient basic opens and inverts c on D(c); therefore Nakayama and the stalkwise isomorphism criterion are unnecessary. homOfGlobalSection_app_one and composition of restrictions give bijectivity of a ↦ a times s restricted to V for every V ≤ U.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pc-zero-scheme",
     "lem-weil-pbc-basic-open-function"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma Tag 01CY (lemma-s-open), proof ('This proves that $X_s$ is open'), with the local description of Properties, Lemma Tag 01PW, proof"
-   }
+   "elementary": false
   },
   {
-   "text": "*The map $\\mu$.* Regard $Y_s$ as an open subscheme, with $\\mathcal O_{Y_s}=\\mathcal O_Y|_{Y_s}$. For an open $V\\subseteq Y_s$ let $\\mu_V:\\mathcal O_Y(V)\\to\\mathcal L(V)$, $a\\mapsto a\\,s|_V$. Each $\\mu_V$ is $\\mathcal O_Y(V)$-linear, and for $W\\subseteq V$ one has $(a\\,s|_V)|_W=a|_W\\,s|_W$ (restriction in an $\\mathcal O_Y$-module is compatible with the module structure), so $\\mu$ is a morphism of $\\mathcal O_{Y_s}$-modules $\\mathcal O_{Y_s}\\to\\mathcal L|_{Y_s}$ [def-weil-sheaf-of-modules-category].",
+   "text": "Forget the restricted sheaf morphism to its underlying presheaf of abelian groups. Evaluation at an object V → U is exactly multiplication by s on V; the bijectivity just proved makes every component an isomorphism. NatTrans.isIso_iff_isIso_app and reflection of isomorphisms through the forgetful functors give IsIso of overFunctor.map (homOfGlobalSection L s). Finally surjectivity chooses the scalar a for each t and injectivity proves its uniqueness.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma Tag 01CY (lemma-s-open), statement: 'the map $s:\\mathcal O_{X_s}\\to\\mathcal L|_{X_s}$'"
-   }
-  },
-  {
-   "text": "*$\\mu$ is bijective on stalks.* Let $y\\in Y_s$. The stalk of $\\mathcal O_{Y_s}$ (resp. $\\mathcal L|_{Y_s}$) at $y$ is $\\mathcal O_{Y,y}$ (resp. $\\mathcal L_y$), the open neighbourhoods of $y$ inside the open $Y_s$ being cofinal, and $\\mu_y(a)=a\\,s_y$ (the germ of $a\\,s|_V$ is $a_y s_y$). By step 2, $\\mathcal L_y$ is a free $\\mathcal O_{Y,y}$-module of rank one with a basis $e_y$, so $\\mathcal L_y/\\mathfrak m_y\\mathcal L_y\\cong\\kappa(y)$ is one-dimensional over $\\kappa(y)$ [def-weil-residue-field]; as $y\\in Y_s$, the class of $s_y$ in it is nonzero, hence spans it. By Nakayama [lem-weil-pbc-nakayama-local-generators] (local ring $\\mathcal O_{Y,y}$, finitely generated module $\\mathcal L_y$, one element $s_y$), $s_y$ generates $\\mathcal L_y$: $\\mu_y$ is surjective. Injectivity: write $s_y=u\\,e_y$ with $u\\in\\mathcal O_{Y,y}$; surjectivity gives $b$ with $b\\,s_y=e_y$, i.e. $(bu-1)e_y=0$, so $bu=1$ because $e_y$ is a basis; if $a\\,s_y=0$ then $au\\,e_y=0$, so $au=0$ and $a=aub=0$. Thus $\\mu_y$ is bijective, i.e. $s_y$ is a basis of $\\mathcal L_y$.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "def-weil-residue-field",
-    "def-sc-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma Tag 01CY (lemma-s-open), proof ('Both $\\mathcal L_x$ and $(\\mathcal L^{\\otimes-1})_x$ are free $\\mathcal O_{X,x}$-modules of rank 1. We conclude from Algebra, Nakayama's Lemma that $s_x$ is a basis for $\\mathcal L_x$'; the injectivity half, implicit in 'basis', written out)"
-   }
-  },
-  {
-   "text": "*$\\mu$ is an isomorphism.* $\\mu$ is a morphism of $\\mathcal O_{Y_s}$-modules on the scheme $Y_s$ (step 4) whose stalk maps at all points of $Y_s$ are bijective (step 5); by [lem-weil-pbc-module-iso-on-stalks] it is an isomorphism $\\mathcal O_{Y_s}\\xrightarrow{\\sim}\\mathcal L|_{Y_s}$.",
-   "uses": [
-    "lem-weil-pbc-module-iso-on-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma Tag 01CY (lemma-s-open), proof (the isomorphism $s:\\mathcal O_{X_s}\\to\\mathcal L|_{X_s}$ of the statement, which the proof deduces from $s_x$ being a basis at every $x\\in X_s$)"
-   }
-  },
-  {
-   "text": "*The quotient $t/s$.* Let $V\\subseteq Y_s$ be open and $t\\in\\mathcal L(V)$. Since $\\mu$ is an isomorphism (step 6) with inverse $\\nu$, the component $\\mu_V:\\mathcal O_Y(V)\\to\\mathcal L(V)$, $a\\mapsto a\\,s|_V$, is bijective with inverse $\\nu_V$. So $a=\\nu_V(t)$ is the unique $a\\in\\mathcal O_Y(V)$ with $t=a\\,s|_V$; it is written $t/s$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties, the map (equation-module-invert-s) before Lemma Tag 01PW, which sends $t$ to $t|_{X_s}\\otimes s|_{X_s}^{-1}$ using that $s$ is invertible over $X_s$ (Modules, Lemma Tag 01CY)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-residue-field",
   "def-sc-invertible-module",
+  "lem-pc-invertible-sheaf-instance",
+  "def-weil-pbc-module-stalk",
   "lem-weil-pbc-basic-open-function",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-module-iso-on-stalks"
+  "lem-pc-zero-scheme-ideal-local",
+  "def-pc-zero-scheme",
+  "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma Tag 01CY (lemma-s-open) and its proof (stalks: Nakayama; the isomorphism), with the local description $X_s\\cap U_j=D(f_j)$ of Properties, Lemma Tag 01PW (lemma-invert-s-sections), proof, for openness in place of the section of $\\mathcal L^{\\otimes-1}$; the injectivity on stalks and the passage from stalks to the isomorphism, implicit in the source, written out"
+  "place": "Lemma Tag 01CY (lemma-s-open), via local coefficients as in Properties Tag 01PW; source-library ClearDenominators.lean basicOpen_coeff_eq and isFreeGenerator_app_one_of_le; the stalk/zero-scheme comparison and sectionwise isomorphism glue are proved in Lean by E2."
  },
  "mathlib_match": null,
  "status": "split",
@@ -203,5 +160,15 @@
   "group": "C1",
   "result": "fix",
   "note": "Y scheme, L : Y.Modules [IsInvertible], s : Γ(L,⊤); Y_s = nonvanishingLocus (germ ∉ m_y L_y; delivered germ ≠ 0 was the support, false); a ↦ a s| as IsIso of overFunctor.map (homOfGlobalSection L s) (delivered bare Nonempty iso); unique t/s on V ≤ U"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261012T085230-L-10582",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

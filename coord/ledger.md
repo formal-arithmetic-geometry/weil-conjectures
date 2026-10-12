@@ -6801,3 +6801,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:52 L: merged deliver/E2/Sheaf.AlgebraicGeometry.AlternatingCechComputes (stage 3; reviewer PASS; first push; landing 20261012T085229-L-10128 (interface); batch 20261012T085205; modules 2; new nodes 1)
 - 08:52 L: merged deliver/E2/Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange (stage 3; reviewer PASS; first push; landing 20261012T085229-L-10293 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:52 L: merged deliver/E2/Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint (stage 3; reviewer PASS; first push; landing 20261012T085229-L-10437 (interface); batch 20261012T085205; modules 2; new nodes 1; change records: coord/changes/brown-right-adjoint-opposite-scope.md)
+- 08:52 L: merged deliver/E2/Sheaf.Paper.NonvanishingSectionTrivializes (stage 3; reviewer PASS; first push; landing 20261012T085230-L-10582 (proof); batch 20261012T085205; modules 1; new nodes 0)
