@@ -8,8 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionUnit
+import Sheaf.AlgebraicGeometry.AffineEtaleRestrictionLargeSets
 import Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Base change on the full affine étale sites
@@ -54,6 +55,98 @@ noncomputable def affineEtaleBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
 
 end Scheme
 
+/-- Source: Stacks Project, Topologies 04HR and 0217, Sites 00WV
+(blueprint: lem-weil-pbc-affine-etale-site-base-change).
+Proof: base change preserves joint surjectivity by the point-lifting property of a
+cartesian square. It preserves étaleness by stability under base change. The affine
+full inclusions create pullbacks, and full étale base change preserves finite limits,
+so the restricted functor preserves pullbacks. For continuity, test the sheaf condition
+on the standard coverings of the pretopology; pullback preservation identifies matching
+families with those on the image covering, where the sheaf condition holds. -/
+private theorem affineEtaleBaseChange_cover_pullback_continuous {T T' : Scheme.{u}} (h : T' ⟶ T)
+    [IsAffineHom h] :
+    (∀ (X : T.FullAffineEtale) (R : Presieve X),
+      R ∈ Scheme.fullAffineEtalePrecoverage T X →
+        R.map (Scheme.affineEtaleBaseChange h) ∈ Scheme.fullAffineEtalePrecoverage T'
+          ((Scheme.affineEtaleBaseChange h).obj X)) ∧
+    (∀ (X Y Z : T.FullAffineEtale) (R : Presieve X),
+      R ∈ Scheme.fullAffineEtalePrecoverage T X →
+      ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
+        PreservesLimit (cospan f g) (Scheme.affineEtaleBaseChange h)) ∧
+    (Scheme.affineEtaleBaseChange h).IsContinuous (Scheme.fullAffineEtaleTopology T)
+      (Scheme.fullAffineEtaleTopology T') := by
+  have hclosure (S : Scheme.{u}) :
+      ObjectProperty.IsClosedUnderLimitsOfShape
+        (fun U : S.Etale ↦ IsAffine U.left) WalkingCospan := ⟨by
+    rintro X ⟨c⟩
+    let G := Scheme.Etale.forget S ⋙ Over.forget S
+    have (j : WalkingCospan) : IsAffine ((c.diag ⋙ G).obj j) := c.prop_diag_obj j
+    exact Scheme.isAffine_of_isLimit (G.mapCone c.toLimitPresentation.cone)
+      (isLimitOfPreserves G c.isLimit)⟩
+  have := hclosure T
+  have := hclosure T'
+  have hi : PreservesLimitsOfShape WalkingCospan (Scheme.fullAffineEtaleInclusion T) := by
+    dsimp [Scheme.fullAffineEtaleInclusion]
+    infer_instance
+  have hr : ReflectsLimitsOfShape WalkingCospan (Scheme.fullAffineEtaleInclusion T') := by
+    dsimp [Scheme.fullAffineEtaleInclusion]
+    infer_instance
+  have hb : PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ h) :=
+    inferInstance
+  have hcomp : PreservesLimitsOfShape WalkingCospan
+      (Scheme.affineEtaleBaseChange h ⋙ Scheme.fullAffineEtaleInclusion T') := by
+    change PreservesLimitsOfShape WalkingCospan
+      (Scheme.fullAffineEtaleInclusion T ⋙ MorphismProperty.Over.pullback @Etale ⊤ h)
+    exact comp_preservesLimitsOfShape _ _
+  have hp : PreservesLimitsOfShape WalkingCospan (Scheme.affineEtaleBaseChange h) := by
+    exact preservesLimitsOfShape_of_reflects_of_preserves _
+      (Scheme.fullAffineEtaleInclusion T')
+  have hc : ∀ (X : T.FullAffineEtale) (R : Presieve X),
+      R ∈ Scheme.fullAffineEtalePrecoverage T X →
+      R.map (Scheme.affineEtaleBaseChange h) ∈ Scheme.fullAffineEtalePrecoverage T'
+        ((Scheme.affineEtaleBaseChange h).obj X) := by
+    rintro X R ⟨n, V, f, rfl, hf, hs⟩
+    rw [Presieve.map_ofArrows]
+    refine ⟨n, _, _, rfl, ?_, ?_⟩
+    · intro i
+      change Etale ((MorphismProperty.Over.pullback @Etale ⊤ h).map
+        ((Scheme.fullAffineEtaleInclusion T).map (f i))).left
+      exact MorphismProperty.of_isPullback (P := @Etale)
+        (MorphismProperty.Over.isPullback_map_left h
+          ((Scheme.fullAffineEtaleInclusion T).map (f i))) (hf i)
+    · intro x
+      obtain ⟨i, y, hy⟩ := hs (pullback.fst X.obj.hom h x)
+      have H := MorphismProperty.Over.isPullback_map_left h
+        ((Scheme.fullAffineEtaleInclusion T).map (f i))
+      obtain ⟨z, hz₁, hz₂⟩ := Scheme.exists_preimage_of_isPullback H y x hy
+      exact ⟨i, z, hz₂⟩
+  have htop (S : Scheme.{u}) (J : Pretopology S.FullAffineEtale)
+      (hJ : J.toPrecoverage = Scheme.fullAffineEtalePrecoverage S) :
+      Scheme.fullAffineEtaleTopology S = J.toGrothendieck := by
+    change (Scheme.fullAffineEtalePrecoverage S).toGrothendieck = J.toGrothendieck
+    rw [← hJ]
+    apply le_antisymm
+    · apply Precoverage.toGrothendieck_le_iff_le_toPrecoverage.mpr
+      intro X R hR
+      exact ⟨R, hR, Sieve.le_generate R⟩
+    · intro X S hS
+      obtain ⟨R, hR, hRS⟩ := hS
+      exact J.toPrecoverage.toGrothendieck.superset_covering
+        (by rw [Sieve.generate_le_iff]; exact hRS)
+        (J.toPrecoverage.generate_mem_toGrothendieck hR)
+  have hu : (Scheme.affineEtaleBaseChange h).IsContinuous
+      (Scheme.fullAffineEtaleTopology T) (Scheme.fullAffineEtaleTopology T') := by
+    refine ⟨fun G ↦ ?_⟩
+    obtain ⟨J, hJ⟩ := Scheme.fullAffineEtalePrecoverage_isPretopology T
+    rw [htop T J hJ, Presieve.isSheaf_pretopology]
+    intro X R hR
+    rw [Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks]
+    exact (isSheaf_iff_isSheaf_of_type _ _).mp G.property |>.isSheafFor_of_mem_precoverage
+      (hc X R (hJ ▸ hR))
+  exact ⟨hc, fun _ _ _ _ _ _ _ _ ↦ inferInstance, hu⟩
+
+-- The existential continuity witness is used only through instance synthesis.
+set_option linter.unusedVariables false in
 /--
 Source: Stacks Project, Étale Cohomology, Lemma 0EYL, and Topologies,
 Lemma 04HR; Sites 00WV, 00WX, 00X1; Étale Cohomology 03Q1(2)
@@ -109,6 +202,44 @@ theorem affineEtaleSiteBaseChange {T T' : Scheme.{u}} (h : T' ⟶ T)
         (Functor.sheafPullbackConstruction.sheafPullback (Scheme.affineEtaleBaseChange h)
           (Type (u + 1))
           (Scheme.fullAffineEtaleTopology T) (Scheme.fullAffineEtaleTopology T'))) := by
-  sorry
+  classical
+  obtain ⟨hc, hp, hu⟩ := affineEtaleBaseChange_cover_pullback_continuous h
+  let U := fun {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f] ↦
+    Scheme.affineEtaleBaseChange f
+  let t : ∀ {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f],
+      U f ⋙ Scheme.fullAffineEtaleInclusion Y ≅
+        Scheme.fullAffineEtaleInclusion X ⋙ MorphismProperty.Over.pullback @Etale ⊤ f :=
+    fun f ↦ Iso.refl _
+  have hcont : ∀ (X Y : Scheme.{u}) (f : Y ⟶ X) [IsAffineHom f],
+      (U f).IsContinuous (Scheme.fullAffineEtaleTopology X)
+        (Scheme.fullAffineEtaleTopology Y) :=
+    fun X Y f ↦ (affineEtaleBaseChange_cover_pullback_continuous f).2.2
+  let L := fun {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f] ↦
+    Functor.sheafPullbackConstruction.sheafPullback (U f) (Type (u + 1))
+      (Scheme.fullAffineEtaleTopology X) (Scheme.fullAffineEtaleTopology Y)
+  let a := fun {X Y : Scheme.{u}} (f : Y ⟶ X) [IsAffineHom f] ↦
+    Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (U f) (Type (u + 1))
+      (Scheme.fullAffineEtaleTopology X) (Scheme.fullAffineEtaleTopology Y)
+  obtain ⟨e, _⟩ := Scheme.affineEtale_inverseImage_restriction_unit U t L a
+  let rho := fun X : Scheme.{u} ↦
+    (Scheme.fullAffineEtaleInclusion X).sheafPushforwardContinuous (Type (u + 1))
+      (Scheme.fullAffineEtaleTopology X) X.smallEtaleTopology
+  have hrho (X : Scheme.{u}) : (rho X).IsEquivalence :=
+    Scheme.fullAffineEtale_large_sets_equivalence X
+  have hfull : PreservesFiniteLimits (Scheme.etaleSetPullback h) :=
+    (etaleSetInverseImage_exact h).2.2.1
+  have hfullcomp : PreservesFiniteLimits (Scheme.etaleSetPullback h ⋙ rho T') :=
+    comp_preservesFiniteLimits _ _
+  have hcomp : PreservesFiniteLimits (rho T ⋙ L h) :=
+    preservesFiniteLimits_of_natIso (e h)
+  have hconjugate : PreservesFiniteLimits ((rho T).inv ⋙ (rho T ⋙ L h)) :=
+    comp_preservesFiniteLimits _ _
+  have hL : PreservesFiniteLimits (L h) :=
+    preservesFiniteLimits_of_natIso
+      ((Functor.associator (rho T).inv (rho T) (L h)).symm ≪≫
+        Functor.isoWhiskerRight (rho T).asEquivalence.counitIso (L h) ≪≫
+        (L h).leftUnitor)
+  have hleft : (L h).IsLeftAdjoint := (a h).isLeftAdjoint
+  exact ⟨hc, hp, hu, ⟨a h⟩, hL, inferInstance⟩
 
 end AlgebraicGeometry

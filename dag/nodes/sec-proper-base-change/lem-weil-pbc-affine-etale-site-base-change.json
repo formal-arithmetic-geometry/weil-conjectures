@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Let $V\\to T$ be an object of $T_{affine,\\Et}$. The base change $V\\times_TT'\\to T'$ is etale by [lem-weil-pbc-etale-base-change-finite-limits](1). It is affine as a scheme: the projection $V\\times_TT'\\to V$ is the base change of the affine map $h$ and is therefore affine by [lem-weil-pbc-affine-morphism-permanence](1); its target $V$ is affine, so its source is affine by (2) of that node. On arrows use the ordinary base-change functor of [lem-weil-pbc-etale-base-change-finite-limits](1). Thus it restricts to the claimed functor $u$ on the full subcategories of affine objects. Lean realization: Scheme.affineEtaleBaseChange_isAffine is proved directly by Mathlib AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, using the affine-object property of V and IsAffineHom h. The definition restricts ordinary base change with ObjectProperty.lift. Steps 2–4 remain an unproved plan in AlgebraicGeometry.affineEtaleSiteBaseChange.",
+   "text": "Let $V\\to T$ be an object of $T_{affine,\\Et}$. The base change $V\\times_TT'\\to T'$ is etale by [lem-weil-pbc-etale-base-change-finite-limits](1). It is affine as a scheme: the projection $V\\times_TT'\\to V$ is the base change of the affine map $h$ and is therefore affine by [lem-weil-pbc-affine-morphism-permanence](1); its target $V$ is affine, so its source is affine by (2) of that node. On arrows use the ordinary base-change functor of [lem-weil-pbc-etale-base-change-finite-limits](1). Thus it restricts to the claimed functor $u$ on the full subcategories of affine objects. Lean realization: Scheme.affineEtaleBaseChange_isAffine is proved directly by Mathlib AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, using the affine-object property of V and IsAffineHom h. The definition restricts ordinary base change with ObjectProperty.lift. Steps 2–4 are realized by the proved private helper AlgebraicGeometry.affineEtaleBaseChange_cover_pullback_continuous and the theorem AlgebraicGeometry.affineEtaleSiteBaseChange.",
    "uses": [
     "lem-weil-pbc-etale-base-change-finite-limits",
     "lem-weil-pbc-affine-morphism-permanence",
@@ -41,13 +41,11 @@
    }
   },
   {
-   "text": "A standard covering $\\{V_i\\to V\\}_{i=1}^m$ in $T_{affine,\\Et}$ is a finite jointly surjective etale family of affine schemes by [lem-weil-pbc-affine-etale-site-topos]. The base-changed family is jointly surjective and etale by [lem-weil-pbc-etale-covering-base-change], and each $V_i\\times_TT'$ is affine by Step 1; hence it is a standard covering in $T'_{affine,\\Et}$. For $A\\to V\\leftarrow B$ in the affine site, $A\\times_VB$ is etale over $T$ by [lem-weil-pbc-etale-base-change-finite-limits](2). It is affine: $A\\to V$ is affine because both schemes are affine [pqf-def-affine-morphism], and its base change $A\\times_VB\\to B$ is affine by [lem-weil-pbc-affine-morphism-permanence](1), with affine target $B$, so (2) applies. Thus this is also the fibre product in the full affine subcategory. The canonical isomorphism $u(A\\times_VB)\\cong u(A)\\times_{u(V)}u(B)$ follows from [lem-weil-pbc-etale-base-change-finite-limits](3); its target is affine by the same argument.",
+   "text": "Base change a finite family of affine etale objects using Scheme.affineEtaleBaseChange. Presieve.map_ofArrows identifies its image family. For each arrow, MorphismProperty.Over.isPullback_map_left and MorphismProperty.of_isPullback give etaleness. Given a point x of the target pullback, joint surjectivity of the original family gives a point y above pullback.fst(x). Scheme.exists_preimage_of_isPullback lifts the pair (y,x) to a point of the corresponding source pullback. Thus the same finite index set gives a covering after base change (the pointwise realization of lem-weil-pbc-etale-covering-base-change). For pullbacks, show that affineness of etale objects is closed under WalkingCospan limits, using Scheme.isAffine_of_isLimit and the forgetful functor to schemes. Hence the affine inclusion preserves pullbacks and the fully faithful target inclusion reflects them. Full etale base change preserves finite limits by lem-weil-pbc-etale-base-change-finite-limits. Its restriction therefore preserves pullbacks by preservesLimitsOfShape_of_reflects_of_preserves.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-topos",
     "lem-weil-pbc-etale-covering-base-change",
     "lem-weil-pbc-etale-base-change-finite-limits",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-morphism-permanence"
+    "def-weil-pbc-full-affine-etale-site"
    ],
    "elementary": false,
    "source": {
@@ -56,9 +54,9 @@
    }
   },
   {
-   "text": "Step 2 gives both conditions in [def-weil-pbc-sites-and-cohomology](3) for continuity: standard coverings are carried to standard coverings, and the comparison on their fibre products is an isomorphism. Thus $u$ is continuous. Its precomposition functor $u^s$ sends sheaves of sets on $T'_{affine,\\Et}$ to sheaves on $T_{affine,\\Et}$, and the sheafified presheaf left Kan extension $u_s$ is left adjoint to $u^s$, by [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. Write $g_*=u^s$ and $g^{-1}=u_s$.",
+   "text": "Use fullAffineEtalePrecoverage_isPretopology of def-weil-pbc-full-affine-etale-site. The topology generated by its underlying precoverage equals the pretopology topology: one inclusion follows from toGrothendieck_le_iff_le_toPrecoverage, the other from upward closure of covering sieves. Test the sheaf condition on the pretopology coverings with Presieve.isSheaf_pretopology. Pullback preservation identifies the matching-family condition with that of the image covering via Presieve.IsSheafFor.comp_iff_of_preservesPairwisePullbacks; Step 2 and the sheaf condition on the target give continuity. The sheafified Kan-extension adjunction is then Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, realizing lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-full-affine-etale-site",
     "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
    "elementary": false,
@@ -68,12 +66,12 @@
    }
   },
   {
-   "text": "For $S=T,T'$ let $R_S:\\operatorname{Sh}(S_{\\Et})\\to\\operatorname{Sh}(S_{affine,\\Et})$ be restriction. It is an equivalence by [lem-weil-pbc-affine-etale-site-topos]. Let $h_*^{full}$ be direct image on the full small etale site; its value at $V\\to T$ is $F(V\\times_TT')$ by [lem-weil-pbc-etale-base-change-continuous](3). For every sheaf $F$ on $T'_{\\Et}$ and every affine $V\\to T$, Step 1 makes $V\\times_TT'$ an affine object, so $(R_T h_*^{full}F)(V)=F(V\\times_TT')=(g_*R_{T'}F)(V)$; the restriction maps agree because both use base change of arrows. This gives $R_T h_*^{full}\\cong g_*R_{T'}$. Taking left adjoints and using quasi-inverses of $R_T,R_{T'}$ gives $g^{-1}\\cong R_{T'}h^{-1}_{full}R_T^{-1}$. The middle functor preserves finite limits and colimits by [lem-weil-pbc-sets-etale-inverse-image-exact]; each $R$ and its quasi-inverse does too, since an equivalence carries any limiting or colimiting cone to one of the same shape (transport the universal property through the full and faithful functor). Hence $g^{-1}$ is exact. Together with Step 3, this is precisely the morphism-of-sites condition of [def-weil-pbc-sites-and-cohomology](3).",
+   "text": "Instantiate lem-weil-pbc-affine-etale-restriction-unit with U=Scheme.affineEtaleBaseChange, the definitional identity U(h) followed by affine inclusion = affine inclusion followed by full etale base change, the continuity of Step 3 for every affine h, and the constructed sheaf adjunction. Its comparison e identifies full inverse image followed by restriction rho_Tprime with rho_T followed by affine inverse image L. Restriction rho is an equivalence in Type (u+1) by lem-stage3-affine-etale-restriction-large-sets (the required universe of the affine-topos comparison). Full inverse image preserves finite limits by lem-weil-pbc-sets-etale-inverse-image-exact. Thus rho_T composed with L preserves finite limits, by preservesFiniteLimits_of_natIso applied to e. Precompose with the inverse equivalence of rho_T, which preserves finite limits, and use the counit isomorphism to identify the composite with L. Finally the constructed adjunction makes L a left adjoint, so it preserves finite colimits. Combine this with Steps 2 and 3 to obtain exactly the stated conjunction.",
    "uses": [
-    "lem-weil-pbc-affine-etale-site-topos",
-    "lem-weil-pbc-etale-base-change-continuous",
+    "lem-weil-pbc-affine-etale-restriction-unit",
+    "lem-stage3-affine-etale-restriction-large-sets",
     "lem-weil-pbc-sets-etale-inverse-image-exact",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -87,16 +85,16 @@
   "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-affine-etale-site-topos",
   "lem-weil-pbc-etale-covering-base-change",
-  "pqf-def-affine-morphism",
-  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-full-affine-etale-site",
   "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
-  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-affine-etale-restriction-unit",
+  "lem-stage3-affine-etale-restriction-large-sets",
   "lem-weil-pbc-sets-etale-inverse-image-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 0EYL uses the affine-site transition maps; the proof here combines Topologies Tag 04HR, Sites Tags 00WV/00WW/00WX and Etale Cohomology Tag 03Q1; stage 3 Y2: the object-affineness helper is closed by the Mathlib affine pullback instance; the site-morphism theorem remains open and its remaining dependency plan is retained"
+  "place": "Stacks 0EYL, Topologies 04HR and 0217, Sites 00WV/00WX/00X1, and Etale Cohomology 03Q1; stage 3 Y2: all remaining clauses proved in Lean by pointwise covering preservation, restriction of finite-limit preservation, the pretopology sheaf criterion, and transport through the existing affine inverse-image restriction comparison and large-set restriction equivalences."
  },
  "mathlib_searches": [
   {
@@ -224,7 +222,7 @@
   "reviewer": "COMPILER",
   "group": "Y2",
   "result": "pass",
-  "landing": "20261012T054003-L-2649936",
+  "landing": "20261012T085404-L-49531",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
