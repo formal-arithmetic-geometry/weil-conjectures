@@ -9,10 +9,9 @@ public import Sheaf.CategoryTheory.GrothendieckComposablePair
 public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.Filtration
-import Sheaf.CategoryTheory.FirstQuadrantRowCollapse
-import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.CategoryTheory.CartanEilenbergAugmentationComparison
+import Sheaf.CategoryTheory.CartanEilenbergSecondImageTruncation
+import Sheaf.CategoryTheory.GrothendieckCanonicalImageFiltration
 
 /-! # CartanEilenbergAcyclicAbutment
 
@@ -126,6 +125,14 @@ theorem exists_cartanEilenberg_acyclic_abutment
           (Subobject.«exists» ((F.grothendieckSpectralObjectHBotTopIso G hFG n).hom.app P.X)).obj
             ((F.grothendieckSpectralObject G P.X).imageFiltration (n : ℤ)
               ((n : ℤ) + 1 - (p : ℤ)))) := by
-  sorry
+  obtain ⟨h, hnat, haug⟩ := exists_cartanEilenberg_augmentation_comparison F G hFG
+  obtain ⟨HF, hstep, hstable, hfnat⟩ :=
+    exists_grothendieck_canonical_image_filtration F G hFG E c
+  have himage := cartanEilenberg_second_image_eq_truncation F G hFG L hL h haug
+  refine ⟨h, HF, hnat, haug, ?_, hstable, hfnat, ?_⟩
+  · intro P p n
+    exact (hstep P.X n p).trans (himage P p n).symm
+  · intro P n p
+    exact hstep P.X n (p : ℤ)
 
 end CategoryTheory

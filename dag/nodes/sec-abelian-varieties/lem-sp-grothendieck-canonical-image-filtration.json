@@ -1,0 +1,152 @@
+{
+ "id": "lem-sp-grothendieck-canonical-image-filtration",
+ "kind": "statement",
+ "title": "Canonical natural image filtration and stable pages",
+ "statement": "Let $F:\\mathcal A\\to\\mathcal B$, $G:\\mathcal B\\to\\mathcal C$ be left exact additive functors between Grothendieck abelian categories with derived categories satisfying injective acyclicity [def-sp-composite-acyclicity]. Let $E$ be an $E_2$ cohomological spectral-sequence functor [def-sp-spectral-sequence], objectwise isomorphic to the Grothendieck truncation spectral sequence. There is a decreasing filtration $HF_X^n$ [def-sp-filtration] on $R^n(GF)(X)$ whose step at every integer p is the canonical abutment transport of imageFiltration(n,n+1-p). Every step is natural in X, and for $p,q\\ge0$, $r\\ge2$, $r>\\max(p,q+1)$, the term $E_r^{p,q}(X)$ is isomorphic to $\\operatorname{gr}^p HF_X^{p+q}$.",
+ "source": {
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tag 015N; spectral-object stable-page and successive-image quotient calculation"
+ },
+ "stmt_deps": [
+  "def-sp-composite-acyclicity",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Construct HF by transporting imageFiltration(n,n+1-p) using Subobject.exists. Monotonicity and functorial order preservation prove antitonicity.",
+   "uses": [
+    "def-sp-composite-acyclicity",
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Express each step as the image of the canonical map H^n(bottom,n+1-p) to the derived composite. Naturality of spectral-object H and of the abutment isomorphism gives a commutative square. imageSubobjectMap gives the required lift on images.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use spectralSequencePageXIso with outer indices q-r+2 and q+r-1. First-quadrant vanishing replaces these by bottom and top. nonempty_cokernel_ofLE_imageFiltration_iso identifies the resulting term with the quotient of consecutive images. Cokernel transport along the abutment isomorphism identifies it with the graded piece of HF. Compose with the page-r component of the supplied c.",
+   "uses": [
+    "def-sp-filtration",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-composite-acyclicity",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Derived Categories",
+  "place": "Tag 015N; spectral-object stable-page and successive-image quotient calculation; expanded and formalized by T3"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartan Eilenberg total complex augmentation quasi isomorphism acyclic columns",
+   "results": "8 hits: CochainComplex.cm5b.instQuasiIsoIntP, ChainComplex.quasiIsoAt₀_iff, HomologicalComplex.quasiIsoAt_extendMap_iff, quasiIsoAt_iff', HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE, CochainComplex.quasiIsoAt₀_iff, HomologicalComplex.quasiIso_extendMap_iff, HomologicalComplex.instQuasiIsoExtendMap",
+   "date": "2026-10-12",
+   "verdict": "searched; no exact match for the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.SpectralObject.imageFiltration",
+   "results": "loogle: unknown identifier 'CategoryTheory.Abelian.SpectralObject.imageFiltration'",
+   "date": "2026-10-12",
+   "verdict": "searched; no exact match for the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "imageFiltration.*(naturality|map)|total.*quasiIso",
+   "results": "0 hits: ",
+   "date": "2026-10-12",
+   "verdict": "searched; no exact match for the full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "first quadrant spectral object image filtration stable page quotient",
+   "results": "8 hits: DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, HomotopyCategory.spectralObjectMappingCone_ω₁, CochainComplex.cm5b, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-12",
+   "verdict": "searched; no exact match for the full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-12",
+   "verdict": "searched; no exact match for the full statement"
+  },
+  {
+   "tool": "grep",
+   "query": "imageFiltration|isoRightDerivedObj|p_fromOpcycles",
+   "results": "25 hits: Mathlib/Algebra/Homology/ShortComplex/Abelian.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/HomologySequence.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean, Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+   "date": "2026-10-12",
+   "verdict": "searched; no exact match for the full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartan Eilenberg acyclic augmentation filtered total complex truncation image filtration",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergAcyclicAbutment",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Cartan--Eilenberg common abutment and its finite image filtration",
+   "via": [
+    "lem-sp-ce-acyclic-abutment"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.GrothendieckCanonicalImageFiltration",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckCanonicalImageFiltration.lean",
+  "declaration": "CategoryTheory.exists_grothendieck_canonical_image_filtration",
+  "statement": "theorem exists_grothendieck_canonical_image_filtration {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A] {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B] {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C] [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G] (hFG : (⟨F, G⟩ : GrothendieckComposablePair A B C).SendsInjectivesToAcyclics) (E : A ⥤ E₂CohomologicalSpectralSequence C) (c : ∀ X : A, E.obj X ≅ (F.grothendieckSpectralObject G X).E₂SpectralSequence) : ∃ (HF : ∀ (X : A) (n : ℕ), DecreasingFiltration (((F ⋙ G).rightDerived n).obj X)), (∀ (X : A) (n : ℕ) (p : ℤ), (HF X n).step p = (Subobject.«exists» ((F.grothendieckSpectralObjectHBotTopIso G hFG n).hom.app X)).obj ((F.grothendieckSpectralObject G X).imageFiltration (n : ℤ) ((n : ℤ) + 1 - p))) ∧ (∀ (X : A) (p q : ℕ) (r : ℤ) (hr : 2 ≤ r), max (p : ℤ) (q + 1 : ℤ) < r → Nonempty (((E.obj X).page r hr).X ((p : ℤ), (q : ℤ)) ≅ (HF X (p + q)).gradedPiece (p : ℤ))) ∧ (∀ (X Y : A) (f : X ⟶ Y) (n : ℕ) (p : ℤ), ∃ a : ((HF X n).step p : C) ⟶ ((HF Y n).step p : C), a ≫ ((HF Y n).step p).arrow = ((HF X n).step p).arrow ≫ ((F ⋙ G).rightDerived n).map f)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T095924-L-324917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T095924-L-324917",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
