@@ -7856,3 +7856,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/K3/Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit (stage 3; reviewer PASS; first push; landing 20261012T135250-L-1676047 (interface); batch 20261012T135212; modules 3; new nodes 2)
 - 13:52 L: merged deliver/M1/Sheaf.Algebra.Homology.VerticalWindowSingleIso (stage 3; reviewer PASS; first push; landing 20261012T135250-L-1676180 (interface); batch 20261012T135212; modules 4; new nodes 3)
 - 13:52 L: merged deliver/M1/Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure (stage 3; reviewer PASS; first push; landing 20261012T135250-L-1676284 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FiniteFreeConstantMapEtaleFactorization (stage 3; reviewer PASS; first push; landing 20261012T135251-L-1676429 (proof); batch 20261012T135212; modules 1; new nodes 0)
