@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclicDegree
 
 /-!
 # Tensoring bounded-above acyclic complexes with bounded-above flat complexes
@@ -63,6 +64,8 @@ theorem acyclic_mapBifunctor_of_boundedAbove_flat_sheaf
     A.Acyclic →
       (letI := SheafOfModules.monoidalCategory R
        mapBifunctor A P (curriedTensor _)).Acyclic := by
-  sorry
+  intro hA n
+  exact isZero_homology_mapBifunctor_of_boundedAbove_flat_sheaf A P hAbounded hPbounded
+    hPflat hA n
 
 end CochainComplex
