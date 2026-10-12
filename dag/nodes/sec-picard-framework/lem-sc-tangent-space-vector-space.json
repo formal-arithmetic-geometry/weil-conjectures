@@ -28,46 +28,36 @@
  ],
  "proof": [
   {
-   "text": "For $\\theta_1,\\theta_2\\in T$ we have $\\theta_1\\circ c=\\theta_2\\circ c$, both being the canonical morphism $\\operatorname{Spec}\\kappa(x)\\to X$. The dual-number pushout [lem-sc-dual-number-scheme-pushout] with $K=\\kappa$ and $n=2$ gives a unique morphism $\\Theta:\\operatorname{Spec}\\kappa[\\epsilon_1,\\epsilon_2]\\to X$ with $\\Theta\\circ j_i=\\theta_i$; this is (a) except the last clause. Composing $\\Theta$ with the structure morphism $p:X\\to\\operatorname{Spec}k$, both $p\\circ\\Theta$ and the structure morphism of $\\operatorname{Spec}\\kappa[\\epsilon_1,\\epsilon_2]$ restrict along $j_i$ to the structure morphism of $\\operatorname{Spec}\\kappa[\\epsilon]$, so they agree by the uniqueness in the same statement (target $\\operatorname{Spec}k$); hence $\\Theta$ is a morphism of $k$-schemes.",
+   "text": "Apply the core conjunct theorem for the pushout, unique gluing, and structure-map compatibility.",
    "uses": [
-    "lem-sc-dual-number-scheme-pushout"
+    "lem-sc-tangent-vectors-core"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2B, varieties-lemma-tangent-space, pushout construction"
-   }
+   "elementary": false
   },
   {
-   "text": "The composite $\\Theta\\circ s$ restricts along $c$ to the common base point because $j_1\\circ c=j_2\\circ c=s\\circ c$. Likewise, precomposition by $\\operatorname{Spec}(m_\\lambda)$ preserves the base point because $m_\\lambda$ fixes the quotient map $\\epsilon\\mapsto0$. Thus the displayed addition and scalar multiplication are closed on $T$, and the constant map through $\\operatorname{Spec}\\kappa$ is the zero element.",
+   "text": "Apply the operations conjunct theorem for the AddCommGroup, Module, zero, addition, and scalar formulas.",
    "uses": [
-    "lem-sc-dual-number-scheme-pushout"
+    "lem-sc-tangent-vectors-operations"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2B, varieties-lemma-tangent-space, closure of operations"
-   }
+   "elementary": false
   },
   {
-   "text": "Each identity is checked by writing both sides as $\\Psi\\circ\\operatorname{Spec}(\\varphi)$ for a $\\kappa$-algebra map $\\varphi:\\kappa[\\epsilon_1,\\dots,\\epsilon_n]\\to\\kappa[\\epsilon]$ and comparing restrictions along the $j_i$, using the uniqueness in [lem-sc-dual-number-scheme-pushout] with $K=\\kappa$ and $n=2$ or $n=3$. For $\\theta_1,\\dots,\\theta_n\\in T$ let $\\Theta_n$ be the unique morphism from $\\operatorname{Spec}\\kappa[\\epsilon_1,\\dots,\\epsilon_n]$ restricting to $\\theta_i$ along $j_i$. Associativity: both $(\\theta_1+\\theta_2)+\\theta_3$ and $\\theta_1+(\\theta_2+\\theta_3)$ equal $\\Theta_3\\circ\\operatorname{Spec}(\\epsilon_1,\\epsilon_2,\\epsilon_3\\mapsto\\epsilon)$, since e.g. the map $\\Theta_3\\circ\\operatorname{Spec}(\\epsilon_1,\\epsilon_2\\mapsto\\epsilon_1,\\ \\epsilon_3\\mapsto\\epsilon_2)$ from $\\operatorname{Spec}\\kappa[\\epsilon_1,\\epsilon_2]$ restricts to $\\theta_1+\\theta_2$ and $\\theta_3$ along $j_1,j_2$ (the first by uniqueness for $n=2$), so it is the $\\Theta$ of that pair. Commutativity: $\\Theta_2\\circ\\operatorname{Spec}(\\epsilon_1\\leftrightarrow\\epsilon_2)$ is the $\\Theta$ of $(\\theta_2,\\theta_1)$, and the swap fixes $s$. Zero: for $\\theta_2=0$, $\\Theta_2=\\theta_1\\circ\\operatorname{Spec}(\\epsilon\\mapsto\\epsilon_1)$, so $\\theta_1+0=\\theta_1$. Scalars: $\\lambda\\theta+\\mu\\theta=\\theta\\circ\\operatorname{Spec}(\\epsilon\\mapsto(\\lambda+\\mu)\\epsilon)$ because the pair $(\\lambda\\theta,\\mu\\theta)$ glues to $\\theta\\circ\\operatorname{Spec}(\\epsilon\\mapsto\\lambda\\epsilon_1+\\mu\\epsilon_2)$; similarly $\\lambda(\\theta_1+\\theta_2)=\\lambda\\theta_1+\\lambda\\theta_2$ via $\\epsilon_i\\mapsto\\lambda\\epsilon_i$, $(\\lambda\\mu)\\theta=\\lambda(\\mu\\theta)$ and $1\\theta=\\theta$ since $m_\\lambda m_\\mu=m_{\\lambda\\mu}$ and $m_1=\\mathrm{id}$, and $\\theta+(-1)\\theta=\\theta\\circ\\operatorname{Spec}(\\epsilon\\mapsto0)$, which is the zero element. Each such $\\varphi$ is a $\\kappa$-algebra map because all products of the $\\epsilon_i$ vanish.",
+   "text": "Assemble the conjunctions by destructing both intermediate results and introducing the selected typeclass instances.",
    "uses": [
-    "lem-sc-dual-number-scheme-pushout"
+    "lem-sc-tangent-vectors-core",
+    "lem-sc-tangent-vectors-operations"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2B, varieties-lemma-tangent-space, verification of vector-space axioms"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-dual-number-scheme-pushout"
+  "lem-sc-tangent-vectors-core",
+  "lem-sc-tangent-vectors-operations"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "stage-3 worker",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0B2B, varieties-lemma-tangent-space"
+  "place": "Tag 0B2B, decomposed into core and operations statements"
  },
  "mathlib_searches": [
   {
@@ -154,5 +144,15 @@
   "group": "C1",
   "result": "pass",
   "note": "Matched k field, X with explicit p (several k-morphisms D,E->X: STATE SCHEMES OVER A FIELD), K=residueField, b=fromSpecResidueField; c=Spec fstHom (eps->0), j_i=Spec map(proj i), s=Spec map(proj0+proj1), m_t=Spec map(t.id), q/r=Spec inlHom; T = c≫θ=b ∧ θ≫p=q≫b≫p (k-morphism, not implied by the first: k->κ[ε] may carry a derivation); (a) IsPushout c c (j 0)(j 1), ∃! Θ, Θ over k; (b) ∃ AddCommGroup/Module K T with zero q≫b, sum s≫Θ, scaling m t≫θ; #check of map/fstHom/inlHom/fromSpecResidueField, recompiled 2.2 s"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T223426-L-1644010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

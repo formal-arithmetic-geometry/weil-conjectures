@@ -10,6 +10,8 @@ public import Mathlib.LinearAlgebra.Pi
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import Sheaf.AlgebraicGeometry.DualNumberSchemePushout
+import Sheaf.AlgebraicGeometry.TangentVectorsVectorSpaceCore
+import Sheaf.AlgebraicGeometry.TangentVectorsVectorSpaceOperations
 
 /-!
 # The vector space of dual-number tangent vectors
@@ -80,6 +82,14 @@ theorem exists_tangentVectors_vectorSpace
           (∀ θ₁ θ₂ : T, ∀ Θ : E ⟶ X,
             j 0 ≫ Θ = θ₁.val → j 1 ≫ Θ = θ₂.val → (θ₁ + θ₂).val = s ≫ Θ) ∧
           (∀ (t : K) (θ : T), (t • θ).val = m t ≫ θ.val)) := by
-  sorry
+  dsimp
+  have hc := tangentVectors_core k X p x
+  have ho := tangentVectors_operations k X p x
+  rcases hc with ⟨hpush, huniq, hover⟩
+  rcases ho with ⟨a, ha⟩
+  let _ := a
+  rcases ha with ⟨v, hv⟩
+  let _ := v
+  exact ⟨hpush, huniq, hover, a, v, hv⟩
 
 end AlgebraicGeometry
