@@ -18,14 +18,14 @@
  ],
  "proof": [
   {
-   "text": "For each x_i, finite presentation makes the localized module of differentials finite. Its free basis is thus finite, also for a zero localization. Add a rank-zero free summand to express stable freeness. Apply the mathematically correct statement of Stacks 07EZ(e) to obtain a positive threshold e_i for all larger powers. The existing Lean record of that node needs the product parentheses repaired before it can be applied.",
+   "text": "For each index install the given smoothness and freeness instances. KaehlerDifferential.finite gives finite generation (the smooth localization is essentially of finite type). Reindex Module.Free.chooseBasis along Fintype.equivFin; its representation identifies the differentials with a finite coordinate module, also over the zero ring. Compose with LinearEquiv.prodUnique to add the zero free summand. Apply smooth_free_differentials_strictly_standard_power with s=0 and t the cardinality of this basis index to obtain a positive threshold valid for all larger exponents.",
    "uses": [
     "lem-weil-pbc-smooth-free-differentials-strictly-standard-power"
    ],
    "elementary": false
   },
   {
-   "text": "Take c=1+Σ_i e_i. Every threshold is at most c, so all x_i^c are strictly standard. The empty family gives c=1.",
+   "text": "Choose all thresholds e_i from the preceding existential statements. Take c=1+Σ_i e_i. Finset.single_le_sum and Nat.le_add_left give e_i≤c for each i. Apply its threshold theorem at c. Nat.le_add_right gives 1≤c, and the same construction gives c=1 for an empty family.",
    "uses": [],
    "elementary": true
   }
@@ -36,7 +36,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Lemma 07EZ(e) and proof of Lemma 07FE, common exponent"
+  "place": "Lemma 07EZ(a),(e); common exponent in Lemma 07FE, using a finite basis and the sum of thresholds"
  },
  "mathlib_searches": [
   {
@@ -101,11 +101,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-c5ea2",
-  "group": "S3",
+  "reviewer": "COMPILER",
+  "group": "B2",
   "result": "pass",
-  "landing": "20261012T184345-L-4020641",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivered proof and two helper statements with their DAG nodes, source arguments, unchanged interfaces, clean compilation and axiom checks."
+  "landing": "20261012T203937-L-828499",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
