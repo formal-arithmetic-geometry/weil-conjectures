@@ -1575,6 +1575,7 @@ public import WeilConjectures.Mathlib.RingTheory.TotallySplit
 public import WeilConjectures.Mathlib.RingTheory.Trace.Basic
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 public import WeilConjectures.Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
+public import WeilConjectures.Mathlib.RingTheory.Unramified.Basic
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Field
 public import WeilConjectures.Mathlib.RingTheory.Unramified.Finite
 public import WeilConjectures.Mathlib.RingTheory.Unramified.LocalStructure
@@ -1667,6 +1668,7 @@ public import WeilConjectures.RingTheory.ProEtale.WeakDimension
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleField
 public import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
+public import WeilConjectures.RingTheory.Regular.Hartogs
 public import WeilConjectures.RingTheory.RegularLocalRing.UniqueFactorization
 public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.RelativeComponentFlatApprox
