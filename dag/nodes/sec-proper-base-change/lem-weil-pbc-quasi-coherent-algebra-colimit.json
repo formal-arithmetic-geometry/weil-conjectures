@@ -30,86 +30,74 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (the colimit in sheaves of $\\mathcal O_S$-algebras).* Apply [lem-weil-pbc-sheaf-algebras-directed-colimit] to the topological space $S$ with its structure sheaf $\\mathcal O_S$ and the system $(\\mathcal A_i,\\varphi_{i'i})$: the presheaf $\\mathcal P:U\\mapsto\\varinjlim_i\\mathcal A_i(U)$ is a presheaf of commutative rings under $\\mathcal O_S$, its sheafification $\\theta:\\mathcal P\\to\\mathcal A=\\mathcal P^\\#$ as a presheaf of commutative rings is a sheaf of commutative $\\mathcal O_S$-algebras, and with $\\iota_i=\\theta\\circ c_i:\\mathcal A_i\\to\\mathcal A$ the pair $(\\mathcal A,(\\iota_i))$ is (1) a colimit of the system in the category of sheaves of commutative $\\mathcal O_S$-algebras and (2), forgetting the multiplications, a colimit of the underlying $\\mathcal O_S$-modules in $\\Mod(\\mathcal O_S)$. This gives the existence of $\\mathcal A$, its description as the sheafification of the presheaf colimit, and its universal property among all sheaves of $\\mathcal O_S$-algebras.",
+   "text": "Take the chosen presheaf-ring colimit p of the underlying presheaf diagram. Evaluation preserves colimits in functor categories, so every evaluated cocone p(U) is a ring colimit. Apply sheafAlgebras_directed_colimit to obtain the algebra cocone c, its algebra universal property, its underlying module universal property, and the equality of its legs with the sheafified legs of p. Its underlying sheaf is definitionally the sheafification of p, so the requested comparison is the identity isomorphism.",
    "uses": [
+    "def-weil-pbc-category-colimit",
     "lem-weil-pbc-sheaf-algebras-directed-colimit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Section 009E item (3) and Lemma 0087; Modules, Lemma 01AH (2)"
+    "place": "Section 009E and Lemma 0087; Modules, Lemma 01AH"
    }
   },
   {
-   "text": "*Step 2 (restriction to an open).* Let $V\\subseteq S$ be open, with inclusion $j:V\\to S$ (an open immersion). For a sheaf of commutative $\\mathcal O_S$-algebras $\\mathcal B$ the restriction $\\mathcal B|_V$ ($W\\mapsto\\mathcal B(W)$ for $W\\subseteq V$) is a sheaf of commutative $\\mathcal O_V$-algebras whose underlying $\\mathcal O_V$-module is the restriction of the underlying $\\mathcal O_S$-module of [lem-weil-pbc-module-restriction-open-immersion-colimits], and restriction of morphisms is a functor. The restricted maps $\\iota_i|_V:\\mathcal A_i|_V\\to\\mathcal A|_V$ form a cocone of $\\mathcal O_V$-algebras on $(\\mathcal A_i|_V)$. By [lem-weil-pbc-sheaf-algebras-directed-colimit] applied on $V$ there is a colimit $(\\mathcal B,(\\beta_i))$ of $(\\mathcal A_i|_V)$ in sheaves of commutative $\\mathcal O_V$-algebras whose underlying module is a colimit in $\\Mod(\\mathcal O_V)$, and a unique algebra map $u:\\mathcal B\\to\\mathcal A|_V$ with $u\\beta_i=\\iota_i|_V$. By Step 1(2), $(\\mathcal A,(\\iota_i))$ is a colimit of $\\mathcal O_S$-modules, so by [lem-weil-pbc-module-restriction-open-immersion-colimits](1) $(\\mathcal A|_V,(\\iota_i|_V))$ is a colimit of the $\\mathcal A_i|_V$ in $\\Mod(\\mathcal O_V)$; hence $u$, being the comparison map between two colimits of the same diagram of $\\mathcal O_V$-modules, is an isomorphism of $\\mathcal O_V$-modules, i.e. bijective on every $W\\subseteq V$. A bijective ring homomorphism has a ring-homomorphism inverse, so $u$ is an isomorphism of sheaves of $\\mathcal O_V$-algebras: $\\mathcal A|_V=\\varinjlim_i(\\mathcal A_i|_V)$ with the coprojections $\\iota_i|_V$, both in sheaves of $\\mathcal O_V$-algebras and (Step 5) in quasi-coherent ones.",
+   "text": "Apply quasiCoherentModuleColimitAffineSections to the diagram F followed by commAlgebraSheafModuleFunctor and to the module colimit just obtained. Its stage hypotheses are definitionally hF. This proves quasi-coherence of c.pt, and on each affine U supplies surjectivity of the section coprojections and the assertion that a stage section mapped to zero vanishes at a later stage.",
    "uses": [
-    "lem-weil-pbc-sheaf-algebras-directed-colimit",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+    "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AJ (2) (pullback, here restriction to an open, commutes with colimits); Sheaves, Lemma 00A0"
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Lemma 01ID (lemma-colimit-quasi-coherent) and Section 01LA (section-quasi-coherent), item (4)"
    }
   },
   {
-   "text": "*Step 3 (an affine open: $\\mathcal A$ is $\\widetilde M$).* Let $U\\subseteq S$ be an affine open and $R=\\mathcal O_S(U)$. Since $U$ is an affine scheme [def-pc-scheme] and $\\Gamma(\\operatorname{Spec}R,\\mathcal O)=R$ [def-weil-affine-spectrum], there is an isomorphism $\\operatorname{Spec}R\\cong U$ inducing the identity on global sections; composing with the inclusion gives an open immersion $g:X=\\operatorname{Spec}R\\to S$ with image $U$. By [lem-weil-pbc-module-restriction-open-immersion-colimits] (with $f=g$) the modules $\\mathcal A_i|_X$ are quasi-coherent ((2), as the $\\mathcal A_i$ are), $\\Gamma(X,\\mathcal A_i|_X)=\\mathcal A_i(U)=:M_i$ and $\\Gamma(X,\\mathcal A|_X)=\\mathcal A(U)$ as $R$-modules, and by (1) together with Step 1(2) $(\\mathcal A|_X,(\\iota_i|_X))$ is a colimit of $(\\mathcal A_i|_X)$ in $\\Mod(\\mathcal O_X)$. By [lem-weil-pbc-affine-tilde-gamma-adjunction](3) the counits $\\varepsilon_i:\\widetilde{M_i}\\to\\mathcal A_i|_X$ are isomorphisms, and they are natural: $(\\varphi_{i'i}|_X)\\circ\\varepsilon_i=\\varepsilon_{i'}\\circ\\widetilde{\\varphi_{i'i,U}}$. So the diagram $(\\widetilde{M_i},\\widetilde{\\varphi_{i'i,U}})$ is isomorphic to $(\\mathcal A_i|_X)$. Let $(M,(c_i))$ be the colimit of the $R$-modules $M_i$ along the $\\varphi_{i'i,U}$. By [lem-weil-pbc-affine-tilde-gamma-adjunction](4) $(\\widetilde M,(\\widetilde{c_i}))$ is a colimit of $(\\widetilde{M_i})$, hence there is a unique isomorphism of $\\mathcal O_X$-modules $\\psi:\\widetilde M\\to\\mathcal A|_X$ with $\\psi\\circ\\widetilde{c_i}=\\iota_i|_X\\circ\\varepsilon_i$ for all $i$ (uniqueness of colimits up to unique isomorphism, [def-weil-pbc-category-colimit]).",
+   "text": "For an affine U, let D be the ring diagram of sections and r its cocone with vertex c.pt(U). Let kappa : colim D -> r.pt be the canonical map. For each i and x, kappa(d_i(x)) = r_i(x) by the colimit factorization identity. The section-surjectivity assertion of the preceding step therefore proves surjectivity of kappa.",
    "uses": [
-    "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "def-pc-scheme",
-    "def-weil-affine-spectrum",
     "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent: on Spec R the colimit of the M_i~ is (colim M_i)~), via Lemma 01I7 (mapping property) and Lemma 01IA/01IB"
-   }
-  },
-  {
-   "text": "*Step 4 (sections over the affine open).* Take global sections in Step 3. By [lem-weil-pbc-affine-tilde-gamma-adjunction](2) and the triangle identity of the adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction](1) ($\\Gamma(\\varepsilon_{\\mathcal F})\\circ\\tau_X=\\mathrm{id}_{\\Gamma(X,\\mathcal F)}$ for $\\mathcal F=\\mathcal A_i|_X$), the $R$-linear bijection $\\lambda=\\Gamma(X,\\psi)\\circ\\tau_X:M\\to\\mathcal A(U)$ satisfies $\\lambda(c_i(m))=\\iota_{i,U}(m)$ for $m\\in M_i=\\mathcal A_i(U)$. Let $C=\\varinjlim_i\\mathcal A_i(U)$ be the directed colimit of commutative rings with coprojections $d_i$, and $\\kappa:C\\to\\mathcal A(U)$ the canonical ring map, $\\kappa d_i=\\iota_{i,U}$. The maps $d_i$ are additive and $R$-linear ($R$ acting through $\\mathcal O_S(U)\\to\\mathcal A_i(U)$), so there is a unique $R$-linear $\\mu:M\\to C$ with $\\mu c_i=d_i$, and $\\kappa\\mu=\\lambda$ (both send $c_i(m)$ to $\\iota_{i,U}(m)$). By [lem-weil-pbc-filtered-colimit-algebras-elementwise](2) (with the base ring $\\mathbf Z$: commutative $\\mathbf Z$-algebras are commutative rings) every element of $C$ is some $d_i(a)=\\mu(c_i(a))$, so $\\mu$ is surjective; since $\\kappa\\mu=\\lambda$ is injective, $\\mu$ is injective too. Hence $\\mu$ is bijective and $\\kappa=\\lambda\\mu^{-1}$ is a bijective ring homomorphism, i.e. the canonical map $\\varinjlim_i\\mathcal A_i(U)\\to\\mathcal A(U)$ is an isomorphism of rings.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Lemma 01HV (2) (Γ(Spec R, M~) = M) and Lemma 01ID"
-   }
-  },
-  {
-   "text": "*Step 5 (quasi-coherence; the colimit among quasi-coherent algebras).* Every point of $S$ has an affine open neighbourhood $U$ [def-pc-scheme], and by Step 3, transported along $\\operatorname{Spec}R\\cong U$, $\\mathcal A|_U\\cong\\widetilde M$ with $\\widetilde M$ quasi-coherent [lem-weil-pbc-spec-module-tilde-sections]; so the underlying $\\mathcal O_S$-module of $\\mathcal A$ is quasi-coherent by the definition [pqf-def-coherent] (local of the form $\\widetilde M$ on affine neighbourhoods). Quasi-coherent $\\mathcal O_S$-algebras form a full subcategory of sheaves of commutative $\\mathcal O_S$-algebras containing all $\\mathcal A_i$ and $\\mathcal A$, so the colimit of Step 1 is also the colimit in quasi-coherent $\\mathcal O_S$-algebras [def-weil-pbc-category-colimit]. The same applies on any open $V$ to the colimit of Step 2 (the $\\mathcal A_i|_V$ are quasi-coherent by [lem-weil-pbc-module-restriction-open-immersion-colimits](2)).",
-   "uses": [
-    "def-pc-scheme",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "pqf-def-coherent",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-module-restriction-open-immersion-colimits"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/schemes.tex",
-    "place": "Schemes, Section 26.24 (section-quasi-coherent), items (1),(4)"
+    "place": "Lemma 01ID and Lemma 01HV (2); the canonical section comparison"
+   }
+  },
+  {
+   "text": "For injectivity, it suffices for the ring map kappa to have trivial kernel. Write a kernel element as d_i(x), using stage representatives for filtered ring colimits. The factorization identity gives r_i(x)=0. The module-colimit assertion from Step 2 gives j >= i with D(i -> j)(x)=0; the module maps and the ring section maps have definitionally identical underlying functions. Naturality of d gives d_i(x)=d_j(D(i -> j)(x))=d_j(0)=0. Thus kappa is bijective, hence an isomorphism of rings. IsColimit.ofPointIso transports the chosen ring colimit to r.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Lemma 01ID; canonical ring comparison using the stage-representative argument"
+   }
+  },
+  {
+   "text": "For every open V, Over.forgetAdjStar V and Adjunction.sheafPushforwardContinuous give an adjunction whose left functor is definitionally the open-site restriction overPullback. The Under.post functor of a left adjoint is a left adjoint (Under.isLeftAdjoint_post). Consequently Under.post overPullback preserves colimits, and isColimitOfPreserves applied to the algebra colimit c proves the restriction clause directly.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 0038 (lemma-adjoint-exact), part (1); Mathlib CategoryTheory/Sites/Over.lean and Continuous.lean for restriction to the open site"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-sheaf-algebras-directed-colimit",
-  "lem-weil-pbc-module-restriction-open-immersion-colimits",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "def-pc-scheme",
-  "def-weil-affine-spectrum",
   "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-sheaf-algebras-directed-colimit",
+  "lem-weil-pbc-quasi-coherent-module-colimit-affine-sections",
   "lem-weil-pbc-filtered-colimit-algebras-elementwise",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "pqf-def-coherent"
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/schemes.tex",
-  "place": "Schemes, Lemma 01ID (lemma-colimit-quasi-coherent) and Section 26.24 item (4) for the module part; Lemma 01I7 (mapping property of M~) and Lemma 01HV (2); Sheaves, Section 009E and Lemma 0087 for the algebra structure; Stacks states the module case only (01ID's proof computes on standard opens; here the colimit is moved through M ↦ M~ by its adjunction, 01I7), the algebra and sections assembly is written by the agent"
+  "place": "Lemma 01ID and Section 01LA item (4), assembled from the existing module-colimit and algebra-sheaf-colimit statements. The ring comparison is proved via representatives and eventual zero; open-site restriction is handled directly by its Mathlib adjunction."
  },
  "mathlib_searches": [
   {
@@ -196,5 +184,15 @@
   "group": "H1",
   "result": "fix",
   "note": "X : Scheme.{u}; I : Type u directed preorder + Nonempty (index in scheme universe); F : I ⥤ X.CommAlgebraSheaf; hF = toModule.IsQuasicoherent (not hollow); colimit cocone + IsColimit in algebra sheaves with QC vertex (full subcategory); presheaf-colimit sheafification iso tied to legs; affine section cocone IsColimit; restriction to V via overPullback/Under.post IsColimit; removed show..from and helper sectionDiagram"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261012T044800-L-2043760",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
