@@ -13,21 +13,35 @@
  ],
  "proof": [
   {
-   "text": "The Čech argument of 03FD gives vanishing of the positive cohomology of the underlying abelian sheaf of I on every object of Z_et. Res_φ does not change that abelian sheaf. The same module/abelian cohomology comparison for Λ therefore gives vanishing of the cohomology of Res_φ I on every object, as well.",
-   "uses": [],
-   "elementary": false
+   "text": "Apply the invertibility of the canonical module/abelian derived direct-image comparison for both Λ and Λ′. The definition of rightDerivedBaseChange evaluates its image under the homology functor, so the classical degree-(n+1) comparison is invertible as well.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": true
   },
   {
-   "text": "For an étale object V over W, the presheaf computing R^r f_* on Res_φ I is its cohomology on V×_W Z. This vanishes for r>0 by the preceding step. Higher direct image is the sheafification of this presheaf, hence is zero. Equivalently, use the arbitrary-f locally bijective comparison isLocallyBijective_higherDirectImagePresheafToSheaf in the source library; no qcqs hypothesis is needed. This is exactly rightAcyclic.",
-   "uses": [],
-   "elementary": false
+   "text": "Positive classical derived direct image of the injective Λ′-module sheaf I is zero by Functor.isZero_rightDerived_obj_injective_succ. Forgetting coefficients preserves zero objects; transport through the Λ′ comparison to obtain vanishing of abelian higher direct image of I_ab.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The underlying abelian sheaf of Res_φ I equals I_ab definitionally. Transport the preceding vanishing through the Λ comparison. The forgetful sheaf functor is faithful and preserves zero morphisms: its image of the identity is zero, so the identity of the Λ-module higher direct image is zero. By IsZero.iff_id_eq_zero that object is zero. This holds in every positive degree and is precisely rightAcyclic.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+ ],
  "proof_origin": {
-  "by": "worker",
+  "by": "worker Q3",
   "document": "Stacks Project, Cohomology on Sites",
-  "place": "Tag 03FD, proof, via Čech vanishing on every object and every slice; Tag 0D6J(3) for coefficient-independent direct image."
+  "place": "Tag 03FD, proof, together with Tag 0D6J(3).",
+  "note": "Use the existing canonical derived coefficient comparison for both rings, then reflect zero objects through the faithful coefficient-forgetting functor."
  },
  "mathlib_searches": [
   {
@@ -99,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V1",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T070556-L-3479336",
-  "kind": "interface",
+  "landing": "20261012T095920-L-323251",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
