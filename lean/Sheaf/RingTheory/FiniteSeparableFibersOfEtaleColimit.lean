@@ -14,7 +14,9 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.FieldTheory.Separable
 import Sheaf.RingTheory.FibrePrimesResidueFields
 import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.FilteredColimitAlgebrasTensorElementwise
+import Sheaf.RingTheory.FilteredEtaleFiberStructure
+import Sheaf.RingTheory.FilteredEtaleFiberSeparableImage
+import Mathlib.RingTheory.HopkinsLevitzki
 
 /-!
 # Finite separable fibres of a Noetherian filtered colimit of etale algebras
@@ -86,6 +88,61 @@ theorem finite_separable_fibers_of_etale_colimit
       ∀ q : F,
         letI := (ρ q).toRingHom.toAlgebra
         Algebra.IsSeparable p.asIdeal.ResidueField q.1.asIdeal.ResidueField := by
-  sorry
+  classical
+  dsimp only
+  let B := ↥(colimit D)
+  let C := p.asIdeal.Fiber B
+  let F := PrimeSpectrum.comap (algebraMap A B) ⁻¹' {p}
+  let ρ : (q : F) → p.asIdeal.ResidueField →ₐ[A] q.1.asIdeal.ResidueField := fun q ↦
+    Ideal.ResidueField.mapₐ p.asIdeal q.1.asIdeal (Algebra.ofId A B)
+      congr($(q.2.symm).asIdeal)
+  let ψ : (q : F) → C →+* q.1.asIdeal.ResidueField := fun q ↦
+    (Algebra.TensorProduct.lift (ρ q)
+      (IsScalarTower.toAlgHom A B q.1.asIdeal.ResidueField)
+      (fun _ _ ↦ Commute.all _ _)).toRingHom
+  obtain ⟨hred, hdim⟩ := filteredEtale_fiber_structure A D hD p
+  let : IsReduced C := hred
+  let : Ring.KrullDimLE 0 C := hdim
+  let : IsNoetherianRing C := Ideal.isNoetherianRing_fiber p.asIdeal
+  let : IsArtinianRing C := IsNoetherianRing.isArtinianRing_of_krullDimLE_zero
+  obtain ⟨e, _, _, hθ⟩ := PrimeSpectrum.fibre_primes_residue_fields A B p
+  let : Finite F := Finite.of_equiv (PrimeSpectrum C) e.toEquiv
+  have hbij : Function.Bijective (RingHom.pi ψ) := by
+    let eM : MaximalSpectrum C ≃ F :=
+      IsArtinianRing.primeSpectrumEquivMaximalSpectrum.symm.trans e.toEquiv
+    let θ (q : F) := (hθ q).choose
+    have hθ' (q : F) := (hθ q).choose_spec
+    let g (q : F) : (C ⧸ (eM.symm q).asIdeal) ≃+* q.1.asIdeal.ResidueField := by
+      change (C ⧸ (e.symm q).asIdeal) ≃+* q.1.asIdeal.ResidueField
+      exact (RingEquiv.ofBijective
+        (algebraMap (C ⧸ (e.symm q).asIdeal) (e.symm q).asIdeal.ResidueField)
+        ((e.symm q).asIdeal.bijective_algebraMap_quotient_residueField)).trans (θ q)
+    let E := (IsArtinianRing.equivPi C).toRingEquiv.trans
+      ((RingEquiv.piCongrLeft' (fun m : MaximalSpectrum C ↦ C ⧸ m.asIdeal) eM).trans
+        (RingEquiv.piCongrRight g))
+    have hE : E.toRingHom = RingHom.pi ψ := by
+      apply RingHom.ext
+      intro x
+      funext q
+      change θ q (algebraMap (C ⧸ (e.symm q).asIdeal)
+        (e.symm q).asIdeal.ResidueField (Ideal.Quotient.mk _ x)) = ψ q x
+      rw [Ideal.algebraMap_quotient_residueField_mk]
+      exact congrArg (fun f : C →+* q.1.asIdeal.ResidueField ↦ f x) (hθ' q)
+    rw [← hE]
+    exact E.bijective
+  refine ⟨inferInstance, hbij, ?_⟩
+  intro q
+  let := (ρ q).toRingHom.toAlgebra
+  refine ⟨fun y ↦ ?_⟩
+  obtain ⟨x, hx⟩ := hbij.surjective (Function.update 0 q y)
+  have hxy : ψ q x = y := by
+    simpa using congrArg (fun z ↦ z q) hx
+  rw [← hxy]
+  apply filteredEtale_fiber_image_isSeparable A D hD p _ (ψ q)
+  intro r
+  change (Algebra.TensorProduct.lift (ρ q)
+    (IsScalarTower.toAlgHom A B q.1.asIdeal.ResidueField) _)
+      (TensorProduct.tmul A r (1 : B)) = ρ q r
+  simp
 
 end CommAlgCat

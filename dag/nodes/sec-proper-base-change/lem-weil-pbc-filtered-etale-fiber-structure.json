@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-filtered-etale-fiber-structure",
+ "kind": "statement",
+ "title": "Reduced zero-dimensional fibres of filtered etale colimits",
+ "statement": "Let $A$ be a commutative ring, $I$ a small filtered category, $D:I\\to\\mathrm{CAlg}_A$ a diagram of commutative $A$-algebras [def-weil-pbc-category-colimit], and $B=\\operatorname{colim}D$. Suppose each $D_i$ is etale over $A$ [def-weil-etale-morphism]. For any prime $p$ of $A$, the fibre $C=\\kappa(p)\\otimes_A B$ [def-weil-pbc-localization-at-prime] is reduced (every nilpotent is zero) and every prime ideal of $C$ is maximal (equivalently, its Krull dimension is at most zero). No Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH1, proof; verified at https://stacks.math.columbia.edu/tag/0AH1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Write C_i=κ(p)⊗_A D_i. Tensor symmetry and the elementwise tensor-colimit statement show every element of C lifts to a C_i, and an element of C_i vanishing in C becomes zero under some transition map.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Etale base change makes C_i etale over κ(p). Mathlib Algebra.FormallyUnramified.finite_of_free and isReduced_of_field give finite-dimensionality and reducedness; IsArtinianRing.of_finite gives Artinianity. In particular every prime of C_i is maximal. These are consequences of the etale-over-field product structure.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x nilpotent in C lift x=γ_i(y). If x^n=0, lift this vanishing to a transition u:i→j; τ_u(y)^n=0, so τ_u(y)=0. The colimit cocone identity γ_j∘τ_u=γ_i gives x=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "If Q≤M are prime ideals in C, their contractions to C_i are comparable prime ideals. Since the smaller contraction is maximal, they coincide. Lift each x∈M to a stage to conclude x∈Q, so Q=M. Apply this with M a maximal ideal containing Q, whose existence follows from Q≠top. Thus every prime is maximal, i.e. Ring.KrullDimLE 0 C.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH1, proof, with elementwise details from the parent DAG proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The fibre of a filtered colimit of etale algebras is reduced and all its prime ideals are maximal",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of etale algebras fibre is reduced and zero dimensional",
+   "results": "Algebra.Etale.exists_subalgebra_fg; Algebra.IsEtaleAt; StandardEtalePair.instFormallyEtaleRing; Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat; Algebra.etaleLocus; Algebra.IsEtaleAt.comp; RingHom.Etale.toAlgebra; Algebra.Etale",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no theorem for a filtered etale fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyUnramified.isReduced_of_field",
+   "results": "Algebra.FormallyUnramified.isReduced_of_field",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no theorem for a filtered etale fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "isReduced_of_field|finite_of_free|kerLiftAlg_injective",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean; Mathlib/RingTheory/TotallySplit.lean; Mathlib/RingTheory/Unramified/LocalStructure.lean; Mathlib/RingTheory/Ideal/Quotient/Operations.lean; Mathlib/RingTheory/NoetherNormalization.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no theorem for a filtered etale fibre"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0AH1 proof, reducedness and absence of specializations",
+   "via": [
+    "lem-weil-pbc-henselization-finite-separable-fibres",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FilteredEtaleFiberStructure",
+  "file": "lean/Sheaf/RingTheory/FilteredEtaleFiberStructure.lean",
+  "declaration": "CommAlgCat.filteredEtale_fiber_structure",
+  "statement": "theorem filteredEtale_fiber_structure (A : Type u) [CommRing A] {I : Type v} [SmallCategory I] [IsFiltered I] (D : I ⥤ CommAlgCat.{v} A) [HasColimit D] (hD : ∀ i : I, Algebra.Etale A (D.obj i)) (p : PrimeSpectrum A) : IsReduced (p.asIdeal.Fiber ↥(colimit D)) ∧ Ring.KrullDimLE 0 (p.asIdeal.Fiber ↥(colimit D))",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T135250-L-1676047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T135250-L-1676047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

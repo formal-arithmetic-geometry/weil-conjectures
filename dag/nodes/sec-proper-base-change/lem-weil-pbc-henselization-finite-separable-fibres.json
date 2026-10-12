@@ -70,121 +70,49 @@
  "merged_into": null,
  "proof": [
   {
-   "text": "Notation. Put $\\kappa=\\kappa(\\mathfrak p)$, $C=B\\otimes_A\\kappa$, $C_i=B_i\\otimes_A\\kappa$, and for $i\\in J$ and $u:i\\to i'$ let $\\gamma_i=\\iota_i\\otimes\\mathrm{id}:C_i\\to C$ and $\\gamma_u=B(u)\\otimes\\mathrm{id}:C_i\\to C_{i'}$, where $\\iota_i:B_i\\to B$ are the coprojections; these are homomorphisms of $\\kappa$-algebras. By [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] (with $R=A$, $N=\\kappa$): (a) every element of $C$ is $\\gamma_i(y)$ for some $i$ and $y\\in C_i$; (b) if $y\\in C_i$ and $\\gamma_i(y)=0$, then $\\gamma_u(y)=0$ for some $u:i\\to i'$. So $C$ is the filtered colimit of the $C_i$.",
+   "text": "By the reduced zero-dimensional fibre lemma, C=κ(p)⊗_A B is reduced and has Krull dimension at most zero.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+    "lem-weil-pbc-filtered-etale-fiber-structure"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, first sentence: 'B (x)_A kappa(p) = colim B_i (x)_A kappa(p) is a filtered colimit'"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $C_i$ is a finite product of finite separable extensions of $\\kappa$. Indeed, $\\operatorname{Spec}(\\kappa\\otimes_AB_i)\\to\\operatorname{Spec}\\kappa$ is etale by [lem-weil-pbc-etale-ring-base-change] (base change of $A\\to B_i$ along $A\\to\\kappa$), and $\\kappa\\otimes_AB_i\\cong B_i\\otimes_A\\kappa=C_i$ as $\\kappa$-algebras by the symmetry of the tensor product. By [lem-weil-pbc-etale-algebra-over-field-product] there is a $\\kappa$-algebra isomorphism $C_i\\cong L_{i,1}\\times\\cdots\\times L_{i,n_i}$ with each $L_{i,k}$ a finite separable algebraic field extension of $\\kappa$.",
+   "text": "The fibre is Noetherian. Apply Mathlib IsNoetherianRing.isArtinianRing_of_krullDimLE_zero (Tag 00KH); its prime spectrum is finite.",
    "uses": [
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-etale-algebra-over-field-product"
+    "lem-weil-pbc-fibre-ring-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'is a filtered colimit of etale kappa(p)-algebras ... An etale kappa(p)-algebra is a finite product of finite separable field extensions (Algebra, Lemma 00U3)'"
-   }
+   "elementary": false
   },
   {
-   "text": "Facts on a finite product $P=L_1\\times\\cdots\\times L_n$ of fields, with idempotents $e_k$ (1 in the $k$-th factor, 0 elsewhere): (a) $P$ is reduced (a nilpotent element has nilpotent, hence zero, components); (b) every prime ideal $\\mathfrak P$ of $P$ is the kernel of a projection $\\mathrm{pr}_k:P\\to L_k$, hence is maximal and $P/\\mathfrak P\\cong L_k$. For (b): $e_ke_l=0\\in\\mathfrak P$ for $k\\ne l$ and $\\sum_ke_k=1\\notin\\mathfrak P$, so exactly one $e_k$ lies outside $\\mathfrak P$; then $1-e_k=\\sum_{l\\ne k}e_l\\in\\mathfrak P$, so $\\ker\\mathrm{pr}_k=(1-e_k)P\\subseteq\\mathfrak P$; as $P/\\ker\\mathrm{pr}_k\\cong L_k$ is a field, $\\ker\\mathrm{pr}_k$ is maximal, so $\\mathfrak P=\\ker\\mathrm{pr}_k$. By Step 2 this applies to every $C_i$: $C_i$ is reduced, all its primes are maximal (so there are no strict inclusions between them), and $C_i/\\mathfrak P$ is one of the $L_{i,k}$ for every prime $\\mathfrak P$ of $C_i$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'Hence there are no nontrivial specializations between the primes (which are all maximal and minimal primes) of the algebras B_i (x)_A kappa(p)'"
-   }
-  },
-  {
-   "text": "$C$ is reduced. Let $x\\in C$ with $x^n=0$. By Step 1(a), $x=\\gamma_i(y)$ with $y\\in C_i$; then $\\gamma_i(y^n)=x^n=0$, so by Step 1(b) $\\gamma_u(y)^n=\\gamma_u(y^n)=0$ for some $u:i\\to i'$. As $C_{i'}$ is reduced (Step 3), $\\gamma_u(y)=0$, and $x=\\gamma_{i'}(\\gamma_u(y))=0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'Thus B (x)_A kappa(p) is reduced'"
-   }
-  },
-  {
-   "text": "There are no strict inclusions between the primes of $C$; hence every prime of $C$ is both minimal and maximal. Let $\\mathfrak Q\\subseteq\\mathfrak Q'$ be primes of $C$. For each $i$, $\\gamma_i^{-1}(\\mathfrak Q)\\subseteq\\gamma_i^{-1}(\\mathfrak Q')$ are primes of $C_i$, so they are equal by Step 3. If $x\\in\\mathfrak Q'$, write $x=\\gamma_i(y)$ (Step 1(a)); then $y\\in\\gamma_i^{-1}(\\mathfrak Q')=\\gamma_i^{-1}(\\mathfrak Q)$, so $x\\in\\mathfrak Q$. Thus $\\mathfrak Q=\\mathfrak Q'$. Every prime is therefore minimal, and it is maximal, since it is contained in some maximal ideal, which is prime.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'hence there are no nontrivial specializations between the primes of B (x)_A kappa(p) ... has finitely many primes which all minimal'"
-   }
-  },
-  {
-   "text": "$C$ has only finitely many primes $\\mathfrak Q_1,\\ldots,\\mathfrak Q_r$ ($r\\ge0$), all maximal. Indeed $C$ is Noetherian by [lem-weil-pbc-fibre-ring-noetherian], since $B$ is; so $C$ has finitely many minimal primes by [lem-weil-pbc-noetherian-finitely-many-minimal-primes], and by Step 5 every prime of $C$ is minimal and maximal.",
-   "uses": [
-    "lem-weil-pbc-fibre-ring-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'and on the other hand it is Noetherian ... has finitely many primes which all minimal'"
-   }
-  },
-  {
-   "text": "$C\\cong\\prod_{j=1}^rC_{\\mathfrak Q_j}$ and each $C_{\\mathfrak Q_j}$ is a field, equal to the residue field $\\kappa(\\mathfrak Q_j)$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq] (with $I=0$) the nilradical of $C$ is the intersection of all primes, i.e. $\\mathfrak Q_1\\cap\\cdots\\cap\\mathfrak Q_r$ (Step 6), and it is $0$ by Step 4. So the maximal ideals $\\mathfrak Q_1,\\dots,\\mathfrak Q_r$ of $C$ satisfy the hypothesis of [lem-weil-pbc-product-of-localizations-at-maximal], and the canonical map $C\\to\\prod_jC_{\\mathfrak Q_j}$, $c\\mapsto(c/1)_j$, into the localizations [def-weil-pbc-localization-at-prime] is an isomorphism of $\\kappa$-algebras, each $C_{\\mathfrak Q_j}$ a local ring. Each projection $\\pi_j:C\\to C_{\\mathfrak Q_j}$ is surjective; $C_{\\mathfrak Q_j}$ is reduced, being a factor of the reduced ring $C$; and every prime $\\mathfrak P$ of $C_{\\mathfrak Q_j}$ is maximal, because $C_{\\mathfrak Q_j}/\\mathfrak P\\cong C/\\pi_j^{-1}(\\mathfrak P)$ is a field ($\\pi_j^{-1}(\\mathfrak P)$ is a prime, hence maximal, ideal of $C$). So the only prime of the local ring $C_{\\mathfrak Q_j}$ is its maximal ideal $\\mathfrak Q_jC_{\\mathfrak Q_j}$, which by [lem-weil-pbc-zero-locus-eq-iff-radical-eq] is its nilradical, i.e. $0$. Hence $C_{\\mathfrak Q_j}=C_{\\mathfrak Q_j}/\\mathfrak Q_jC_{\\mathfrak Q_j}=\\kappa(\\mathfrak Q_j)$ [def-weil-residue-field] is a field.",
-   "uses": [
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-    "lem-weil-pbc-product-of-localizations-at-maximal",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-residue-field"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, 'Thus it is a finite product of fields (use Algebra, Lemma 02LX or Algebra, Proposition 00KJ)'; the product decomposition is Algebra, Lemma 00JA (lemma-product-local), used in the proof of 00KJ"
-   }
-  },
-  {
-   "text": "Primes of $B$ over $\\mathfrak p$ and the canonical isomorphism. Let $j_B:B\\to C$, $b\\mapsto b\\otimes1$, and $\\mathfrak q_j=j_B^{-1}(\\mathfrak Q_j)$. By [lem-weil-pbc-fibre-ring-primes-residue-fields](1), $\\mathfrak q_1,\\dots,\\mathfrak q_r$ are pairwise distinct and are all the primes of $B$ lying over $\\mathfrak p$ (so there are finitely many), and $\\mathfrak Q_j=\\ker\\psi_{\\mathfrak q_j}$ with $\\psi_{\\mathfrak q_j}:C\\to\\kappa(\\mathfrak q_j)$, $b\\otimes\\lambda\\mapsto\\bar b\\,\\bar\\lambda$. By part (2) of that node, $\\psi_{\\mathfrak q_j}$ is the composite of $C\\to\\kappa(\\mathfrak Q_j)$ with an isomorphism $\\kappa(\\mathfrak Q_j)\\cong\\kappa(\\mathfrak q_j)$. Composing the isomorphism $C\\cong\\prod_j\\kappa(\\mathfrak Q_j)$ of Step 7 (whose $j$-th component is $C\\to C_{\\mathfrak Q_j}=\\kappa(\\mathfrak Q_j)$) with these isomorphisms shows that the canonical map $C\\to\\prod_j\\kappa(\\mathfrak q_j)$, $b\\otimes\\lambda\\mapsto(\\psi_{\\mathfrak q_j}(b\\otimes\\lambda))_j=(\\bar b\\,\\bar\\lambda)_j$, is an isomorphism.",
+   "text": "The fibre-prime correspondence e identifies Spec C with F, the primes of B over p. Transfer finiteness along e. Choose the residue-field identifications θ supplied by the same theorem; each is compatible with the canonical scalar map from C.",
    "uses": [
     "lem-weil-pbc-fibre-ring-primes-residue-fields"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, statement 'there are finitely many primes q_1,...,q_r lying over p, we have B (x)_A kappa(p) = prod kappa(q_i)'; the identification of the primes and residue fields of the fibre ring with those of B over p is Algebra, Remarks 00E6 and 0H9M"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $\\kappa(\\mathfrak q_j)/\\kappa$ is separable algebraic. By Step 8, $\\psi_j=\\psi_{\\mathfrak q_j}:C\\to\\kappa(\\mathfrak q_j)$ is surjective and $\\kappa$-linear for the $\\kappa$-structure on $\\kappa(\\mathfrak q_j)$ given by $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q_j)$. Let $\\alpha\\in\\kappa(\\mathfrak q_j)$; write $\\alpha=\\psi_j(x)$ and $x=\\gamma_i(y)$ with $y\\in C_i$ (Step 1(a)). The $\\kappa$-algebra map $\\psi_j\\circ\\gamma_i:C_i\\to\\kappa(\\mathfrak q_j)$ has prime kernel $\\mathfrak P$ (its target is a field), and by Step 3 $C_i/\\mathfrak P\\cong L_{i,k}$ for some $k$; so $\\psi_j\\circ\\gamma_i$ induces a $\\kappa$-embedding of fields $L_{i,k}\\hookrightarrow\\kappa(\\mathfrak q_j)$ whose image contains $\\alpha$. The preimage $\\beta\\in L_{i,k}$ of $\\alpha$ is algebraic and separable over $\\kappa$ (Step 2), and since a $\\kappa$-embedding preserves polynomial relations, $\\alpha$ has the same minimal polynomial over $\\kappa$ as $\\beta$, which is separable. Hence every element of $\\kappa(\\mathfrak q_j)$ is algebraic and separable over $\\kappa$, i.e. $\\kappa(\\mathfrak q_j)/\\kappa(\\mathfrak p)$ is separable algebraic [def-weil-pbc-separable-algebraic-extension].",
+   "text": "Use Mathlib IsArtinianRing.equivPi to decompose reduced Artinian C into quotients by its maximal ideals. Reindex these maximal ideals by F via e and the prime-maximal equivalence. Each maximal quotient maps bijectively to its residue field by Ideal.bijective_algebraMap_quotient_residueField; compose with θ. The resulting ring equivalence E has components ψ_q, as checked by the compatibility of θ and Ideal.algebraMap_quotient_residueField_mk. Hence RingHom.pi ψ is bijective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For q∈F and y∈κ(q), form a product tuple with q-component y. Surjectivity of RingHom.pi ψ yields x∈C with ψ_q(x)=y. Equip κ(q) with the κ(p)-algebra structure induced by ρ_q. The tensor lift formula verifies scalar compatibility. Apply the separable-image lemma to ψ_q and x; thus every y is separable, giving Algebra.IsSeparable.",
    "uses": [
-    "def-weil-pbc-separable-algebraic-extension"
+    "lem-weil-pbc-filtered-etale-fiber-separable-image"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof, last sentence: 'Each of these fields is a colimit of finite separable extensions and hence the final statement of the lemma follows'"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-weil-pbc-filtered-etale-fiber-structure",
   "lem-weil-pbc-fibre-ring-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-product-of-localizations-at-maximal",
-  "def-weil-pbc-localization-at-prime",
-  "def-weil-residue-field",
   "lem-weil-pbc-fibre-ring-primes-residue-fields",
-  "def-weil-pbc-separable-algebraic-extension"
+  "lem-weil-pbc-filtered-etale-fiber-separable-image"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres, line 11236), proof"
+  "place": "Lemma Tag 0AH1, proof; Mathlib reduced Artinian quotient-product route replaces the explicit product of localizations"
  },
  "created": {
   "by": "worker",
@@ -234,5 +162,15 @@
   "group": "M1",
   "result": "pass",
   "note": "A CommRing; I small filtered, D : I ⥤ CommAlgCat A with HasColimit (colimit in A-algebras); hD Algebra.Etale per stage (not hollow); IsNoetherianRing colimit; p prime; F = all primes over p, Finite F (r=0 allowed); ψ = canonical lift of mapₐ and B→κ(q) on p.Fiber B (FIBRE RING), same maps as landed FibrePrimesResidueFields; Algebra.IsSeparable via ρ includes algebraicity, no finiteness; no test universes"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T135250-L-1676047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

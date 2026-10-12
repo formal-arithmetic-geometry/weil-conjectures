@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-filtered-etale-fiber-separable-image",
+ "kind": "statement",
+ "title": "Separable images of elements of filtered etale fibres",
+ "statement": "Let $A$ be a commutative ring, $I$ a small filtered category, $D:I\\to\\mathrm{CAlg}_A$ a diagram [def-weil-pbc-category-colimit] of etale $A$-algebras [def-weil-etale-morphism], and $B=\\operatorname{colim}D$. Let $p$ be a prime of $A$, put $k=\\kappa(p)$ and $C=k\\otimes_A B$ [def-weil-pbc-localization-at-prime]. Let $K$ be a field with a $k$-algebra structure and $f:C\\to K$ a unital ring homomorphism satisfying $f(\\lambda\\otimes1)=\\operatorname{algebraMap}_{k,K}(\\lambda)$ for all $\\lambda\\in k$. Then for every $x\\in C$, the element $f(x)$ is separable over $k$ [def-weil-pbc-separable-algebraic-extension]. No Noetherian or surjectivity hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH1, proof; verified at https://stacks.math.columbia.edu/tag/0AH1"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Tensor symmetry and the elementwise tensor-colimit statement lift x to y∈C_i=κ(p)⊗_A D_i.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar compatibility makes f a κ(p)-algebra homomorphism. Its composite g:C_i→K with the tensor coprojection is a κ(p)-algebra homomorphism. Its kernel P is prime because K is a field.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Base change makes C_i etale over κ(p). Its quotient by P is a finite separable field extension. Lean obtains Algebra.IsSeparable κ(p) (C_i/P) from the quotient instance in Mathlib.RingTheory.Etale.Field; this is the corresponding field factor in the etale-over-field decomposition.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-algebra-over-field-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Ideal.kerLiftAlg g is an injective κ(p)-algebra map from C_i/P into K. Apply IsSeparable.map to the separable element represented by y. The kernel lift sends this element to g(y)=f(x), giving the desired conclusion.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma Tag 0AH1, proof, with elementwise details from the parent DAG proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The image in a field of an element of a filtered colimit of etale algebras over a field is separable over the base field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element in the image of a field algebra homomorphism from a filtered colimit of etale algebras is separable",
+   "results": "Algebra.FormallyEtale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.of_isSeparable_aux; Algebra.FormallyEtale.iff_isSeparable; Algebra.Etale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.of_isSeparable; Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable; Algebra.Etale.comp; RingHom.etale_algebraMap",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no theorem for a filtered etale fibre"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.kerLiftAlg_injective",
+   "results": "Ideal.kerLiftAlg_injective",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no theorem for a filtered etale fibre"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyEtale.*IsSeparable|isSeparable_map_iff",
+   "results": "Mathlib/RingTheory/Smooth/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/RingTheory/Etale/Field.lean; Mathlib/FieldTheory/Separable.lean; Mathlib/FieldTheory/Separable.lean",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no theorem for a filtered etale fibre"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit",
+  "date": "2026-10-12",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Tag 0AH1 proof, final separability sentence",
+   "via": [
+    "lem-weil-pbc-henselization-finite-separable-fibres",
+    "lem-weil-pbc-henselization-pair-g-ring",
+    "lem-weil-pbc-finite-etale-lifting-limit-descent",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FilteredEtaleFiberSeparableImage",
+  "file": "lean/Sheaf/RingTheory/FilteredEtaleFiberSeparableImage.lean",
+  "declaration": "CommAlgCat.filteredEtale_fiber_image_isSeparable",
+  "statement": "theorem filteredEtale_fiber_image_isSeparable (A : Type u) [CommRing A] {I : Type v} [SmallCategory I] [IsFiltered I] (D : I ⥤ CommAlgCat.{v} A) [HasColimit D] (hD : ∀ i : I, Algebra.Etale A (D.obj i)) (p : PrimeSpectrum A) (K : Type w) [Field K] [Algebra p.asIdeal.ResidueField K] (f : p.asIdeal.Fiber ↥(colimit D) →+* K) (hf : ∀ r : p.asIdeal.ResidueField, f (algebraMap p.asIdeal.ResidueField (p.asIdeal.Fiber ↥(colimit D)) r) = algebraMap p.asIdeal.ResidueField K r) (x : p.asIdeal.Fiber ↥(colimit D)) : IsSeparable p.asIdeal.ResidueField (f x)",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T135250-L-1676047",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T135250-L-1676047",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

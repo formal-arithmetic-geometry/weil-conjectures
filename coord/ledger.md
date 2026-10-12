@@ -7853,3 +7853,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/K2/Sheaf.AlgebraicGeometry.Modules.ConstantRankMapNormalForm (stage 3; reviewer PASS; first push; landing 20261012T135249-L-1675741 (interface); batch 20261012T135212; modules 2; new nodes 1)
 - 13:52 L: merged deliver/K3/Sheaf.Algebra.Homology.KFlatTensorQuasiIso (stage 3; reviewer PASS; first push; landing 20261012T135249-L-1675847 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/K3/Sheaf.AlgebraicGeometry.DeterminantDualPairingLocal (stage 3; reviewer PASS; first push; landing 20261012T135249-L-1675946 (interface); batch 20261012T135212; modules 2; new nodes 1)
+- 13:52 L: merged deliver/K3/Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit (stage 3; reviewer PASS; first push; landing 20261012T135250-L-1676047 (interface); batch 20261012T135212; modules 3; new nodes 2)
