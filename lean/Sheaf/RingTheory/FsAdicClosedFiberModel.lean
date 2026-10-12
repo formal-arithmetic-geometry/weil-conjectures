@@ -10,7 +10,8 @@ public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 public import Sheaf.RingTheory.FormallySmoothAdic
 import Sheaf.RingTheory.CompleteLocalQuotient
-import Sheaf.RingTheory.FormallySmoothAdicLift
+import Sheaf.RingTheory.ResidueFormallySmoothTransport
+import Sheaf.RingTheory.ModelOfResidueSmooth
 
 /-!
 # A formally smooth model of the closed fibre
@@ -85,6 +86,56 @@ theorem exists_fs_adic_closed_fiber_model
           RingHom.ker θ = (IsLocalRing.maximalIdeal A₀).map γ ∧
           θ.comp γ =
             (Ideal.Quotient.mk (Ideal.map φ (IsLocalRing.maximalIdeal A))).comp
-              (φ.comp α) := by sorry
+              (φ.comp α) := by
+  intro hfs
+  let E := B ⧸ Ideal.map φ (IsLocalRing.maximalIdeal A)
+  let : Algebra (IsLocalRing.ResidueField A) E :=
+    Ideal.Quotient.algebraQuotientOfLEComap
+      (Eq.mpr (congrArg (fun f : A →+* B => IsLocalRing.maximalIdeal A ≤
+        (Ideal.map φ (IsLocalRing.maximalIdeal A)).comap f) hφ)
+        Ideal.le_comap_map)
+  let J : Ideal B := Ideal.map φ (IsLocalRing.maximalIdeal A)
+  have hJ : J ≤ IsLocalRing.maximalIdeal B := IsLocalRing.map_maximalIdeal_le φ
+  have hproper : J ≠ ⊤ := ne_top_of_le_ne_top
+    (IsLocalRing.maximalIdeal.isMaximal B).ne_top hJ
+  let : Nontrivial E := Ideal.Quotient.nontrivial_iff.mpr hproper
+  let : IsLocalRing E := IsLocalRing.of_surjective' (Ideal.Quotient.mk J)
+    Ideal.Quotient.mk_surjective
+  let : IsNoetherianRing E := isNoetherianRing_of_surjective B E
+    (Ideal.Quotient.mk J) Ideal.Quotient.mk_surjective
+  have hmax : IsLocalRing.maximalIdeal E =
+      (IsLocalRing.maximalIdeal B).map (Ideal.Quotient.mk J) :=
+    (IsLocalRing.map_maximalIdeal_of_surjective (Ideal.Quotient.mk J)
+      Ideal.Quotient.mk_surjective).symm
+  let : IsAdicComplete (IsLocalRing.maximalIdeal E) E := by
+    exact (quotient_complete_local B J hproper).2.2.2
+  let : Algebra (IsLocalRing.ResidueField A₀) E :=
+    ((algebraMap (IsLocalRing.ResidueField A) E).comp
+      (IsLocalRing.ResidueField.map α)).toAlgebra
+  let : Algebra A₀ E := ((Ideal.Quotient.mk J).comp (φ.comp α)).toAlgebra
+  have : IsScalarTower A₀ (IsLocalRing.ResidueField A₀) E := by
+    apply IsScalarTower.of_algebraMap_eq'
+    ext a
+    change (Ideal.Quotient.mk J) (φ (α a)) =
+      algebraMap (IsLocalRing.ResidueField A) E
+        (IsLocalRing.ResidueField.map α (IsLocalRing.residue A₀ a))
+    rw [IsLocalRing.ResidueField.map_residue]
+    change (Ideal.Quotient.mk J) (φ (α a)) =
+      (Ideal.Quotient.mk J) (algebraMap A B (α a))
+    rw [← hα, hφ]
+  have hE := residue_formallySmooth_transport
+    (Ideal.map (Ideal.Quotient.mk J) (IsLocalRing.maximalIdeal B)) α hres hfs
+  have hE' : Algebra.FormallySmoothAdic (IsLocalRing.ResidueField A₀) E
+      (IsLocalRing.maximalIdeal E) := by simpa [hmax] using hE
+  obtain ⟨C, instC, instLocalC, instAlgC, hnoeth, hcomplete, γ, hγ, hlocalγ,
+    hsmooth, θ, hsurj, hker, hcomp⟩ := model_of_residue_smooth (A := A) hE'
+  let : CommRing C := instC
+  let : IsLocalRing C := instLocalC
+  let : Algebra A₀ C := instAlgC
+  refine ⟨C, instC, instLocalC, instAlgC, hnoeth, hcomplete, γ, hγ, hlocalγ,
+    hsmooth, θ, hsurj, hker, ?_⟩
+  rw [hcomp]
+  ext a
+  rfl
 
 end RingHom
