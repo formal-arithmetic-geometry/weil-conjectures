@@ -80,113 +80,60 @@
  ],
  "proof": [
   {
-   "text": "*(ii) and the cover.* Every homogeneous element of $S$ of positive degree is a $\\mathbf Z$-combination of monomials of positive degree, each divisible by some $T_l$; so $T_0,\\dots,T_n$ generate the irrelevant ideal $S_+$, and the standard opens $D_+(T_0),\\dots,D_+(T_n)$ cover $\\mathbf P^n_{\\mathbf Z}$ [prop-nagata-proj-standard-open]. Each $T_j$ is homogeneous of degree $1>0$, so $D_+(T_j)$ is an open subscheme with a canonical isomorphism $D_+(T_j)\\cong\\operatorname{Spec}S_{(T_j)}$, under which $\\Gamma(D_+(T_j),\\mathcal O)=S_{(T_j)}$ [prop-nagata-proj-standard-open]. By [lem-weil-pbc-dehomogenization-polynomial-ring] with $A=\\mathbf Z$, $S_{(T_j)}=\\mathbf Z[T_l/T_j:l\\neq j]$ is the polynomial ring over $\\mathbf Z$ in the $n$ elements $T_l/T_j$. This is (ii) and the last clause of (i).",
+   "text": "Proj.iSup_basicOpen_eq_top' applied to the degree-one variables and MvPolynomial.adjoin_range_X_eq_top gives the standard-open cover. Proj.basicOpenIsoSpec gives each affine chart. The inverse of homogeneousLocalizationAwayXEquiv and homogeneousLocalizationAwayXEquiv_symm_X give the polynomial coordinate ring and its required values.",
    "uses": [
     "prop-nagata-proj-standard-open",
-    "lem-weil-pbc-dehomogenization-polynomial-ring",
-    "def-nagata-homogeneous-localization-degree-zero"
+    "lem-weil-pbc-dehomogenization-polynomial-ring"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01NG (label lemma-standard-covering-projective-space) and its proof ($S_+=(T_0,\\dots,T_n)$); Lemma 01MB (label lemma-proj-scheme); Lemma 01M7 (label lemma-proj-sheaves) (1)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$\\mathcal O(1)$ on the standard opens.* By the definition of $\\mathcal O(1)=\\widetilde{S(1)}$ [def-weil-pbc-proj-twisting-sheaf] and [lem-weil-pbc-proj-graded-module-sheaf-exists] (a),(b),(d): for $g\\in S$ homogeneous of positive degree, $\\mathcal O(1)(D_+(g))=S(1)_{(g)}=(S_g)_1$, the fractions $a/g^m$ with $a\\in S_{m\\deg g+1}$, a module over $\\mathcal O(D_+(g))=S_{(g)}$ by multiplication in $S_g$; for $D_+(h)\\subseteq D_+(g)$ the restriction $(S_g)_1\\to(S_h)_1$ is the canonical localization map, which is compatible with multiplication by elements of $S_{(g)}$; and the global section $T_l$ (the image of $T_l\\in S_1=S(1)_0$) restricts to $T_l/1\\in(S_g)_1$ on every $D_+(g)$.",
+   "text": "Use Proj.isInvertible_twist_homogeneousSubmodule and the existing isomorphism instance for the restriction of Proj.unitToTwist to D_+(T_j). These are the source library's proved degree-one twisting-sheaf trivializations; no new graded-module sheaf is constructed.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+    "def-sc-invertible-module",
+    "def-pc-projective-space-twist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Definition 01MN (label definition-twist); Lemma 01M7 (label lemma-proj-sheaves) (2),(3),(6)"
-   }
+   "elementary": false
   },
   {
-   "text": "*$T_j$ trivializes $\\mathcal O(1)$ on $D_+(T_j)$ (Stacks 01MS with $d=1$, $n=1$).* Let $g$ be homogeneous of positive degree with $D_+(g)\\subseteq D_+(T_j)$. Then $g^e=aT_j$ for some $e\\ge1$ and homogeneous $a$ [lem-weil-pbc-proj-graded-module-sheaf-exists] (a), so $T_j/1$ is a unit of $S_g$ (inverse $a/g^e$). Hence $\\beta_g:S_{(g)}\\to(S_g)_1$, $b\\mapsto b\\cdot(T_j/1)$, is bijective: it is injective because $T_j/1$ is a unit of $S_g$; and for $c\\in(S_g)_1$ the element $b=c\\cdot(T_j/1)^{-1}\\in S_g$ is homogeneous of degree $1-1=0$ (product of homogeneous elements of degrees $1$ and $-1$), so $b\\in(S_g)_0=S_{(g)}$ and $\\beta_g(b)=c$. Now let $\\mu_j:\\mathcal O_{D_+(T_j)}\\to\\mathcal O(1)|_{D_+(T_j)}$, $a\\mapsto a\\cdot T_j|$, a morphism of $\\mathcal O_{D_+(T_j)}$-modules (it is linear on each open, and $(a\\,T_j|_V)|_W=a|_W\\,T_j|_W$). By step 2 its component on $D_+(g)$ is $\\beta_g$, hence bijective. The opens $D_+(g)\\subseteq D_+(T_j)$ form a basis of the topology of $D_+(T_j)$ (the $D_+(g)$ form a basis of the topology of $\\operatorname{Proj}$ [def-nagata-affine-proj], and $D_+(g)\\cap D_+(T_j)=D_+(gT_j)$), so for $x\\in D_+(T_j)$ the stalks of $\\mathcal O$ and $\\mathcal O(1)$ at $x$ are the colimits over the cofinal system of these $D_+(g)\\ni x$, and the stalk map $\\mu_{j,x}$, a colimit of bijections, is bijective. By [lem-weil-pbc-module-iso-on-stalks], $\\mu_j$ is an isomorphism. In particular, for every open $V\\subseteq D_+(T_j)$ each $t\\in\\mathcal O(1)(V)$ is $a\\cdot T_j|_V$ for exactly one $a\\in\\mathcal O(V)$, and for $x\\in D_+(T_j)$ the stalk $\\mathcal O(1)_x$ is free of rank one over $\\mathcal O_x$ with basis $T_{j,x}$.",
+   "text": "The private nonvanishingLocus_app_one identifies a module morphism from the unit with homOfGlobalSection of its value at 1, using unitHomEquiv and naturality. Apply nonvanishingLocus_eq_compl_support_zeroLocus and Proj.compl_support_zeroLocus_unitToTwist, with the homogeneous degree-one cover, to obtain nonvanishing = D_+(T_j).",
    "uses": [
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "def-nagata-affine-proj",
-    "lem-weil-pbc-module-iso-on-stalks"
+    "lem-weil-pbc-section-nonvanishing-zero-locus",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-pc-projective-space-twist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MS (label lemma-when-invertible) and its proof ($S\\to S(nd)$, $x\\mapsto f^nx$, becomes an isomorphism after inverting $f$, so $S_{(f)}\\cong S(nd)_{(f)}$), with $d=n=1$, $f=T_j$; Lemma 01M4 (label lemma-standard-open) (1)(a),(b)"
-   }
+   "elementary": false
   },
   {
-   "text": "*(i).* By step 1 the $D_+(T_j)$ cover $\\mathbf P^n_{\\mathbf Z}$, and by step 3 $\\mathcal O(1)|_{D_+(T_j)}\\cong\\mathcal O_{D_+(T_j)}$ via $\\mu_j$. So $\\mathcal O(1)$ is locally free of rank one; it is quasi-coherent ([lem-weil-pbc-proj-graded-module-sheaf-exists] (c), or because it is locally isomorphic to the structure sheaf). Hence $\\mathcal O(1)$ is invertible [def-sc-invertible-module], and the isomorphisms $\\mu_j$ are the ones claimed in (i).",
-   "uses": [
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "def-sc-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MT (label lemma-apply-modules): $X$ covered by $D_+(f)$, $f\\in S_1$, so $\\mathcal O_X(n)$ is invertible"
-   }
-  },
-  {
-   "text": "*(iv).* In $\\mathcal O(1)(D_+(T_j))=(S_{T_j})_1$ (step 2), $T_l|_{D_+(T_j)}=T_l/1$ and $T_j|_{D_+(T_j)}=T_j/1$, and the $\\mathcal O(D_+(T_j))=S_{(T_j)}$-module structure is multiplication in $S_{T_j}$. Since $(T_l/T_j)\\cdot(T_j/1)=T_lT_j/T_j=T_l/1$ in $S_{T_j}$, with $T_l/T_j\\in S_{(T_j)}$ (degree $0$), we get $T_l|_{D_+(T_j)}=(T_l/T_j)\\cdot T_j|_{D_+(T_j)}$. (For $l=j$, $T_j/T_j=1$.)",
+   "text": "Proj.map_unitToTwist_eq_smul computes T_l = (T_l/T_j) T_j on D_+(T_j); awayXRatio is the named homogeneous fraction and one_smul supplies the degree-one condition, including l=j.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+    "lem-weil-pbc-dehomogenization-polynomial-ring"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "the identity $T_l/1=(T_l/T_j)(T_j/1)$ in $(S_{T_j})_1$; Lemma 01M7 (label lemma-proj-sheaves) (2)"
-   }
+   "elementary": true
   },
   {
-   "text": "*(iii) (Stacks 01MV with $d=1$).* Let $Z=\\{x:T_{j,x}\\notin\\mathfrak m_x\\mathcal O(1)_x\\}$. Fix $k$ and $x\\in D_+(T_k)$. By step 3 (for $k$), $\\mathcal O_x\\to\\mathcal O(1)_x$, $a\\mapsto a\\,T_{k,x}$, is an isomorphism of $\\mathcal O_x$-modules; it carries $\\mathfrak m_x$ onto $\\mathfrak m_x\\mathcal O(1)_x$. By (iv) (step 5, for $k$), $T_{j,x}=(T_j/T_k)_x\\,T_{k,x}$, the image of the germ $(T_j/T_k)_x$ of the function $T_j/T_k\\in S_{(T_k)}=\\Gamma(D_+(T_k),\\mathcal O)$. Hence $x\\in Z$ iff $(T_j/T_k)_x\\notin\\mathfrak m_x$ iff $x\\in D(T_j/T_k)$, the basic open of the function $T_j/T_k$ on the scheme $D_+(T_k)$ [lem-weil-pbc-basic-open-function] ($\\mathcal O_x$ is local with maximal ideal $\\mathfrak m_x$ [def-weil-residue-field]). By [lem-weil-pbc-proj-basic-open-intersection] with $f=T_k$, $g=T_j$, $d=e=1$, $D(T_j/T_k)=D_+(T_k)\\cap D_+(T_j)$. So $Z\\cap D_+(T_k)=D_+(T_j)\\cap D_+(T_k)$ for every $k$, and since the $D_+(T_k)$ cover $\\mathbf P^n_{\\mathbf Z}$ (step 1), $Z=D_+(T_j)$.",
+   "text": "Specialize the existing, proved Proj.existsUnique_polynomial_twist_glued_identification to the finite nonempty index type Fin(n+1). Its conclusion is precisely the required unique comparison with both chart and global coordinate compatibility. X_mem_homogeneousSubmodule_one and isHomogeneous_X express the same degree-one membership. No new comparison or open obligation is introduced.",
    "uses": [
-    "lem-weil-pbc-basic-open-function",
-    "def-weil-residue-field",
-    "lem-weil-pbc-proj-basic-open-intersection"
+    "lem-weil-pbc-projective-space-twist-glued-identification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Lemma 01MV (label lemma-principal-open) and its proof (on $D_+(ab)$ with $\\deg a=\\deg b+d$, here $a=T_k$, $b=1$: $W_s\\cap D_+(ab)$ is the principal open of $b^nf/a^n$, here $T_j/T_k$); Lemma 01MA (label lemma-standard-open-proj)"
-   }
-  },
-  {
-   "text": "*(v) The glued module is $\\mathcal O(1)$.* Let $\\mathcal L$ be the module of [def-pc-projective-space-twist] for $A=\\mathbf Z$, $d=1$, $U_j=D_+(T_j)$: it comes with isomorphisms $\\mathcal O_{U_j}\\cong\\mathcal L|_{U_j}$, $1\\mapsto e_j$, and $e_i=(T_i/T_j)e_j$ on $U_i\\cap U_j$. Define $\\Phi_j:\\mathcal L|_{U_j}\\to\\mathcal O(1)|_{U_j}$, $a\\,e_j\\mapsto a\\,T_j|$, i.e. $\\mu_j$ of step 3 composed with the inverse of $1\\mapsto e_j$; it is an isomorphism of $\\mathcal O_{U_j}$-modules. On $U_i\\cap U_j$: $\\Phi_j(e_i)=\\Phi_j((T_i/T_j)e_j)=(T_i/T_j)T_j=T_i=\\Phi_i(e_i)$ by (iv) restricted to $U_i\\cap U_j$; as $e_i$ is a basis of $\\mathcal L$ on $U_i\\cap U_j$ and both maps are $\\mathcal O$-linear, $\\Phi_i=\\Phi_j$ there. Morphisms of $\\mathcal O$-modules form a sheaf $\\mathcal{H}om(\\mathcal L,\\mathcal O(1))$ [lem-pur-sheaf-hom-is-sheaf], so the $\\Phi_j$ glue to a unique $\\Phi:\\mathcal L\\to\\mathcal O(1)$ with $\\Phi|_{U_j}=\\Phi_j$; likewise the inverses $\\Phi_j^{-1}$ (compatible for the same reason) glue to $\\Psi:\\mathcal O(1)\\to\\mathcal L$, and $\\Psi\\Phi$, $\\Phi\\Psi$ restrict to identities on every $U_j$, hence are identities: $\\Phi$ is an isomorphism with $\\Phi(e_j)=T_j|_{U_j}$. Uniqueness: any $\\Phi'$ with $\\Phi'(e_j)=T_j|_{U_j}$ agrees with $\\Phi_j$ on $U_j$ (both $\\mathcal O$-linear, $e_j$ a basis), so $\\Phi'=\\Phi$ by the sheaf property of $\\mathcal{H}om$. Sections: the local sections $(T_l/T_j)e_j$ on $U_j$ agree on overlaps, since $(T_l/T_i)e_i=(T_l/T_i)(T_i/T_j)e_j=(T_l/T_j)e_j$ by the identity $(T_l/T_i)(T_i/T_j)=T_l/T_j$ in $S_{(T_iT_j)}=\\mathcal O(U_i\\cap U_j)$ (restriction maps of $\\mathcal O$ are the localization maps, [lem-weil-pbc-proj-graded-module-sheaf-exists] (b) with $M=S$), so they glue to $x_l\\in\\Gamma(\\mathbf P^n_{\\mathbf Z},\\mathcal L)$; and $\\Phi(x_l)|_{U_j}=(T_l/T_j)T_j|_{U_j}=T_l|_{U_j}$ by (iv), so $\\Phi(x_l)=T_l$ since the $U_j$ cover (step 1).",
-   "uses": [
-    "def-pc-projective-space-twist",
-    "lem-pur-sheaf-hom-is-sheaf",
-    "lem-weil-pbc-proj-graded-module-sheaf-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "written by an agent: comparison of Constructions Definition 01MN with the gluing description of literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-pn/def-pc-projective-space-twist.md; uses (iv) and step 3"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "prop-nagata-proj-standard-open",
   "lem-weil-pbc-dehomogenization-polynomial-ring",
-  "def-nagata-homogeneous-localization-degree-zero",
   "def-weil-pbc-proj-twisting-sheaf",
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
-  "def-nagata-affine-proj",
-  "lem-weil-pbc-module-iso-on-stalks",
   "def-sc-invertible-module",
-  "lem-weil-pbc-basic-open-function",
-  "def-weil-residue-field",
-  "lem-weil-pbc-proj-basic-open-intersection",
   "def-pc-projective-space-twist",
-  "lem-pur-sheaf-hom-is-sheaf"
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "lem-weil-pbc-projective-space-twist-glued-identification"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions, Lemmas 01M7, 01MS (d=1), 01MT, 01MV (d=1), 01MB, 01NG; step 7 ((v), the comparison with the glued module of def-pc-projective-space-twist) is written by an agent"
+  "place": "M2 assembly of proved Mathlib and source-library declarations for Constructions 01MN, 01MS, 01NG and 01MV; final comparison is the existing Proj.existsUnique_polynomial_twist_glued_identification specialized to Fin(n+1)."
  },
  "mathlib_match": null,
  "status": "split",
@@ -247,5 +194,15 @@
   "reviewer": "R-tsc",
   "group": "V1",
   "result": "pass"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T230759-L-1909357",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8,10 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomIsSheaf
-import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification
+import Sheaf.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 
 /-!
 # The twisting sheaf on the standard charts of integral projective space
@@ -30,7 +29,28 @@ attribute [local instance] MvPolynomial.gradedAlgebra
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option maxHeartbeats 800000 in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem nonvanishingLocus_app_one {X : Scheme} (M : X.Modules)
+    [M.IsInvertible] (a : Scheme.Modules.unit X ⟶ M) :
+    Scheme.Modules.nonvanishingLocus M (a.app ⊤ (Scheme.Modules.unitSectionsEquiv ⊤ 1)) =
+      ((Scheme.Modules.Hom.zeroLocus a).support.compl : Set X) := by
+  have h : Scheme.Modules.homOfGlobalSection M
+      (a.app ⊤ (Scheme.Modules.unitSectionsEquiv ⊤ 1)) = a := by
+    refine (SheafOfModules.unitHomEquiv M).injective (Subtype.ext (funext fun U ↦ ?_))
+    change Scheme.Modules.Hom.app
+      (Scheme.Modules.homOfGlobalSection M (a.app ⊤ (Scheme.Modules.unitSectionsEquiv ⊤ 1)))
+      U.unop (1 : Γ(X, U.unop)) = Scheme.Modules.Hom.app a U.unop (1 : Γ(X, U.unop))
+    rw [Scheme.Modules.homOfGlobalSection_app_one, ← Scheme.Modules.Hom.app_presheaf_map]
+    exact congrArg (Scheme.Modules.Hom.app a U.unop)
+      (map_one (X.presheaf.map (homOfLE (le_top : U.unop ≤ ⊤)).op).hom :)
+  rw [Scheme.Modules.nonvanishingLocus_eq_compl_support_zeroLocus, h]
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.isDefEq.lazyProjDelta false in
+set_option backward.isDefEq.lazyWhnfCore false in
+set_option maxHeartbeats 400000 in
 -- Comparing the section types of the transported twist unfolds the Proj sheaf construction.
 /-- All five clauses of the integral projective-space chart statement.
 Source: Stacks Project, Constructions, Tags 01MN, 01M7, 01MS, 01MB, 01NG, 01MV;
@@ -128,6 +148,38 @@ theorem projectiveSpace_twistingSheaf_charts (n : ℕ) :
           (𝒜 := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ))
           (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) k)).app ⊤
             (1 : Γ(Proj (MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)), ⊤))) := by
-  sorry
+  classical
+  let 𝒜 := MvPolynomial.homogeneousSubmodule (Fin (n + 1)) (ULift.{0} ℤ)
+  have hcover : (⨆ j : Fin (n + 1), Proj.basicOpen 𝒜 (MvPolynomial.X j)) = ⊤ :=
+    Proj.iSup_basicOpen_eq_top' 𝒜 MvPolynomial.X
+      (fun j ↦ ⟨1, MvPolynomial.isHomogeneous_X (ULift.{0} ℤ) j⟩)
+      (MvPolynomial.adjoin_range_X_eq_top _ _)
+  refine ⟨?_, hcover, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · infer_instance
+  · intro j
+    exact (Proj.basicOpenIsoSpec 𝒜 _
+      (MvPolynomial.isHomogeneous_X (ULift.{0} ℤ) j) Nat.one_pos).isIso_hom
+  · intro j
+    refine ⟨(MvPolynomial.homogeneousLocalizationAwayXEquiv (ULift.{0} ℤ) j).symm, ?_⟩
+    intro l
+    exact MvPolynomial.homogeneousLocalizationAwayXEquiv_symm_X (ULift.{0} ℤ) j l
+  · intro j
+    infer_instance
+  · intro j
+    set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      erw [nonvanishingLocus_app_one]
+      exact congrArg (fun U : (Proj 𝒜).Opens ↦ (U : Set (Proj 𝒜)))
+        (Proj.compl_support_zeroLocus_unitToTwist
+          (Proj.exists_mem_basicOpen_homogeneousSubmodule
+            (Fin (n + 1)) (ULift.{0} ℤ))
+          (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) j))
+  · intro j l
+    simpa [MvPolynomial.awayXRatio] using (Proj.map_unitToTwist_eq_smul
+      (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) l)
+      (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) j)
+      (by simpa only [one_smul] using
+        (MvPolynomial.X_mem_homogeneousSubmodule_one (ULift.{0} ℤ) l)))
+  · exact Proj.existsUnique_polynomial_twist_glued_identification (Fin (n + 1))
 
 end AlgebraicGeometry
