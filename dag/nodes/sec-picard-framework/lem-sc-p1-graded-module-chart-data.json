@@ -14,15 +14,21 @@
  ],
  "proof": [
   {
-   "text": "The additive subgroup grading underlying homogeneousSubmodule has the same homogeneous elements, multiplication and direct-sum decomposition. Apply gradedModuleSheaf_exists to this grading and G. Its Proj is canonically isomorphic to the submodule-graded Proj: identify homogeneous ideals by their underlying ideals and identify each homogeneous localization by identical numerators and denominators. The standard-open identifications commute with ring restrictions; glue them on the standard basis to identify the structure sheaves and obtain the scheme isomorphism.",
+   "text": "Present the polynomial homogeneous pieces as their underlying additive subgroups H. Their subtype groups and graded-ring operations are definitionally the same, so construct GradedRing H from MvPolynomial.gradedAlgebra and apply gradedModuleSheaf_exists H to G and hsmul. Obtain Z with the degreeZeroFractions carrier, rho and its fraction formula, and F with chart additive equivalences and scalar and restriction compatibility.",
    "uses": [
-    "lem-weil-pbc-proj-graded-module-sheaf-exists",
-    "lem-weil-pbc-proj-standard-open-inclusion"
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
    ],
    "elementary": false
   },
   {
-   "text": "Transport the sheaf along this scheme isomorphism. Compose the chart additive equivalences supplied by gradedModuleSheaf_exists with inclusion of Z_f into A_f. The composite is injective and has range exactly Z_f. The recorded equality of the carrier of Z_f with degree-zero fractions gives the asserted range. Apply this inclusion to the scalar equation and to the restriction equation; the supplied formula for rho gives the restriction formula g^e=af, y/f^m -> a^my/g^(em).",
+   "text": "Construct the identity graded ring homomorphism phi from homogeneousSubmodule to H. HomogeneousIdeal.toIdeal_irrelevant_le and mem_irrelevant_of_mem show the irrelevant-ideal inclusion needed by Mathlib Proj.map phi. Push F forward along this concrete morphism using Scheme.Modules.pushforward. Proj.map_preimage_basicOpen is definitional, so the old chart groups and additive equivalences are also the new ones. Proj.awayToSection_comp_appLE identifies the new scalar action with the old action after Away.map phi; on fraction representatives Away.map_mk and Away.val_mk show the ordinary localization values are unchanged. Pushforward restriction is definitionally the original restriction, with inclusion proofs identified by proof irrelevance. This is the proved private helper graded_module_chart_regrading; no scheme-isomorphism theorem is assumed.",
+   "uses": [
+    "lem-weil-pbc-proj-graded-module-sheaf-exists"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose each transported additive equivalence with Z.subtype.toAddMonoidHom. Injectivity follows by composing the equivalence injectivity with Subtype.val_injective. The proved helper range_chart_inclusion shows that the composite range equals the carrier of Z, then hZ identifies this carrier with degreeZeroFractions. The transported ambient scalar equation is precisely the required equation. For the given relation g^e=a*f, basicOpen_pow and basicOpen_mul show D_H(g) is contained in D_H(f), directly and without standardOpenProperties. Apply the transported restriction equation, then compose its Subtype.val image with the fraction formula of rho supplied by gradedModuleSheaf_exists.",
    "uses": [
     "lem-weil-pbc-proj-graded-module-sheaf-exists"
    ],
@@ -30,13 +36,12 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-proj-graded-module-sheaf-exists",
-  "lem-weil-pbc-proj-standard-open-inclusion"
+  "lem-weil-pbc-proj-graded-module-sheaf-exists"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "Stacks Project, Constructions of Schemes",
-  "place": "Tag 01M7; interface extraction from the proof of lem-sc-p1-sheafify-graded-chain"
+  "place": "Construction before Definition 01M6 and Lemma 01M7; implemented using Mathlib Proj.map and Scheme.Modules.pushforward, followed by chart inclusion; B3 stage-3 proof, 2026-10-12"
  },
  "mathlib_searches": [
   {
@@ -104,11 +109,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
+  "reviewer": "X-af1bb",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T063527-L-3163148",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T144054-L-2089255",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered module and node proof match the target; compilation and direct importer checks pass."
  }
 }
