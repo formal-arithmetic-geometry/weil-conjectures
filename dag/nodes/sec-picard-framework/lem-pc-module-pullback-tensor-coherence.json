@@ -15,40 +15,54 @@
  },
  "proof": [
   {
-   "text": "Identify F with the tensor-formula pullback using the object equalities and the arrow formula. Naturality of the chosen e is part of the recorded comparison theorem. Its section formula identifies the two triple composites with the same pure triple tensor under the associator. Check after adjunction and sheafification, or on stalks where pure tensors generate; hence the associativity diagram commutes.",
+   "text": "Prove equality of maps out of a tensor sheaf by the sheafification adjunction and induction on pure tensors. For three factors, apply this first to the outer pair. The inner tensorator to the forgetful presheaf is locally surjective; restrict an inner section to a covering sieve where it lifts to the presheaf tensor. Tensor induction there reduces to triple pure tensors, and separatedness of the target sheaf descends equality. These are private, fully proved extensionality helpers in the delivered module.",
    "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-module-pullback-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
-   }
-  },
-  {
-   "text": "Construct the unit comparison by multiplication O_T tensor_{g^{-1}O_X} g^{-1}O_X -> O_T, with inverse a -> a tensor 1. The balanced tensor relations make the maps inverse. The left and right unit diagrams both act as the identity on pure tensors. Thus the inverses of e and this unit comparison give CoreMonoidal. Transport through the specified object equalities yields the asserted eqToHom conjugation.",
-   "uses": [
-    "def-pc-module-pullback",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079U, lemma-pullback-tensor-product; Section 20.27, section-derived-pullback; coherence on pure tensors and K-flat descent"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the chosen tensor-pullback adjunction to the two associativity composites, then use triple-tensor extensionality. The section formula for the chosen comparison, naturality of the adjunction unit and the associator section formula rewrite both sides to the same pure triple tensor of pulled-back sections.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use tensorPullbackObjUnitToUnit and its proved isomorphism and adjunction-unit characterization. Apply the pullback adjunction to each inverse-unit diagram. Naturality moves the inverse unitor to the source section, where it inserts 1. The comparison section formula separates the two pulled-back sections, and the structure-sheaf comparison sends the pulled-back 1 to 1 because the scheme ring map preserves 1. The target inverse unitor inserts exactly this same 1, proving both diagrams on every section.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize the recorded comparison naturality to an identity in each variable and rewrite tensoring with identity as whiskering. Build CoreMonoidal with CoreMonoidal.mk', using the inverse comparison and the inverse of the structure-sheaf isomorphism. Form F ≅ tensorPullback g from eqToIso(hF) and prove naturality using hmap. Transport the monoidal structure along its inverse with coreMonoidalTransport; the inverse tensorator equation is then reflexive.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
   "lem-weil-pbc-module-pullback-tensor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Original model docstring: associativity and unit laws follow from the tensor formula; Stacks Modules 01CD and Cohomology 079U",
-  "note": "The cited source is not installed on this machine; the complete coherence argument is written here and in the declaration docstring."
+  "group": "K2",
+  "date": "2026-10-13",
+  "document": "https://stacks.math.columbia.edu/tag/01CD",
+  "place": "Tag 01CD (proof omitted); Tag 079U cites the underived comparison",
+  "note": "Coherence details supplied by the agent following the existing node plan. Both adjoint diagrams and local triple-tensor generation are fully proved in Lean; the already proved structure-sheaf comparison supplies the unit isomorphism."
  },
  "mathlib_searches": [
   {
@@ -133,11 +147,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-43026",
-  "group": "C2",
+  "reviewer": "COMPILER",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261012T163612-L-2784419",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered statements, predicate, proofs and nodes against the originals and cited sources; all three modules and both direct importers compile cleanly; original predicate equality verified by rfl; axiom probes contain only permitted axioms and expected sorryAx."
+  "landing": "20261012T184313-L-4008181",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
