@@ -8,14 +8,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.AlgebraicGeometry.DescendSurjective
-import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
-import Sheaf.CategoryTheory.ColimitSiteCechComplex
-import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
-import Sheaf.AlgebraicGeometry.FullAffineEtaleTopos
-import Sheaf.CategoryTheory.ColimitSiteSections
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechStageData
+import Sheaf.AlgebraicGeometry.EtaleLimitFiniteCechColimit
+
+set_option linter.unusedVariables false
 
 /-! # Finite Čech complexes on inverse limits of schemes
 
@@ -30,6 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
+
 
 /-- A finite qcqs étale covering has a Čech complex computed by stage Čech complexes.
 Source: Stacks Project, proof of Tag 09YP, the displayed equality of Čech complexes;
@@ -97,6 +94,16 @@ theorem etale_limit_finite_cech_complex_colimit
         ((Over.forget U).op ⋙ L.pt.obj)),
       (∀ j : {j : I // i₀ ≤ j},
         Sieve.ofArrows (Vj j) (fj j) ∈ (D.obj (op j.val)).smallEtaleTopology (Uj j)) ∧
-      Nonempty (IsColimit cA) := by sorry
+      Nonempty (IsColimit cA) := by
+  obtain ⟨i₀, U₀, V₀, f₀, eU, eV, A, eA, cA, eK, eNj, eNlim, γ, δ, hdata⟩ :=
+    exists_etale_limit_finite_cech_stage_data D c hc F φ hidentity
+      hcomposition G eG hG L hL U K V f hV hf
+  let B := fun j : {j : I // i₀ ≤ j} ↦
+    MorphismProperty.Over.pullback @Etale ⊤ (D.map (homOfLE j.property).op)
+  have hcol := finite_cech_stage_data_is_colimit D c hc F φ hidentity
+    hcomposition G eG hG L hL U K V f hV hf i₀ U₀ V₀ f₀ eU eV
+    A eA cA eK eNj eNlim γ δ hdata
+  exact ⟨i₀, A, (fun j ↦ (B j).obj U₀), (fun j k ↦ (B j).obj (V₀ k)),
+    (fun j k ↦ (B j).map (f₀ k)), eA, cA, eK, hdata.2.2.2.1, hcol⟩
 
 end AlgebraicGeometry.Etale
