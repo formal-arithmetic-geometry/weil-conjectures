@@ -15,10 +15,7 @@ import Sheaf.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
 import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
 import Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
 import Sheaf.AlgebraicGeometry.FiniteLocallyConstantSetsRepresentability
-import Sheaf.AlgebraicGeometry.GaloisCategories
-import WeilConjectures.CategoryTheory.Sites.Torsor
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.Mathlib.RingTheory.Henselian
+import Sheaf.AlgebraicGeometry.FiniteEtaleEquivalenceH1
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair
@@ -241,6 +238,8 @@ theorem Etale.bijective_cohomologyMap_one_constantSheaf_of_henselianRing
     (M : Type (u + 1)) [AddCommGroup M] [Finite M] :
     Function.Bijective (Etale.cohomologyMap i
       ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) 1) :=
-  sorry
+  by
+    have hFE := Scheme.isEquivalence_pullback_finiteEtale_of_henselianRing I f i f₀ h
+    exact Etale.bijective_cohomologyMap_one_of_finiteEtale_equivalence i hFE M
 
 end AlgebraicGeometry
