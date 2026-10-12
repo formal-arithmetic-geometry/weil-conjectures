@@ -7562,3 +7562,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:28 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.Morphisms.GenericFibreHomExtensionExistence (stage 3; reviewer PASS; first push; landing 20261012T112855-L-773730 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:28 L: merged deliver/Y3/Sheaf.RingTheory.CompleteLocalDomainFiniteOverRegular (stage 3; reviewer PASS; first push; landing 20261012T112855-L-773871 (interface); batch 20261012T112824; modules 3; new nodes 2)
 - 11:30 L: returned deliver/J3/Sheaf.AlgebraicGeometry.ProjectiveSpace.GradedModuleChartData (reviewer RETURN: (reviewer X-701f4, head 701f4ce08) 3: In ProjGradedModuleSheafExists.lean replace the newly introduced `sorry` in `grade)
+- 11:31 L: returned deliver/M3/Sheaf.AlgebraicGeometry.EtaleSetSectionLiftAffine (reviewer RETURN: (reviewer X-ee0b6, head ee0b686f3) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Et)
