@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-flat-cech-cocycle-comparison",
+ "kind": "statement",
+ "title": "Inverse-image compatibility of Leray comparisons on original Cech cocycle classes",
+ "statement": "Let $R,S$ be commutative rings, $S$ an $R$-algebra (not assumed flat), $f:X\\to\\operatorname{Spec}R$ separated, $U=(U_i)_{i\\in I}$ a finite affine open cover, $M$ a quasi-coherent module and $q\\in\\mathbb N$. Use the scheme, module, cohomology and base-change constructions of [def-pc-scheme], [pqf-def-coherent], [pqf-def-cohomology], [def-pc-base-change] and [def-pc-flat-cohomology-comparison], and the complexes and canonical-coordinate predicate of [lem-pc-flat-cech-base-change]. Let $c:S\\otimes_R C(U,M)\\to C(U_S,M_S)$ satisfy IsCechBaseChange, with no invertibility assumption. Define extendedCechCycles from the composite of scalar extension of the cycles inclusion with $c^q$, by the kernel universal property. There exist $R$-linear and $S$-linear Leray isomorphisms $e:H^q(C(U,M))\\simeq HOver(f,M,q)$ and $e^\\prime:H^q(C(U_S,M_S))\\simeq HOver(f_S,M_S,q)$ such that for every original cycle $z$, $e^\\prime([\\operatorname{extendedCechCycles}(1\\otimes z)])=H.baseChangeLinear(e([z]))$. This assertion concerns original cocycle classes only, before extending the cohomology map to the entire tensor product; no tensor-homology comparison is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-base-change",
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-flat-cech-base-change"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Cohomology, functoriality of the Cech comparison; applied to the separated-case Leray comparisons in 02KH and 01XD"
+ },
+ "proof": [
+  {
+   "text": "Separatedness over Spec R makes every nonempty finite intersection affine. Base change preserves these affine opens and their intersections and preserves the cover; module pullback is quasi-coherent. The Cech-to-cohomology comparisons are therefore isomorphisms by affine acyclicity and Leray. Naturality for multiplication makes them linear over global functions and hence over R and S.",
+   "uses": [
+    "lem-pc-cech-computes",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply functoriality of the augmented Cech double complexes to the adjunction unit M -> p_*p^*M. Compare injective resolutions through a resolution of the pushed-forward target resolution, as in 01FD. The tuple formula in IsCechBaseChange at b=1 identifies the cocycle map with pullback followed by restriction. The commuting augmentation diagram gives equality of its cohomology class with inverse-image Ext cohomology. This is exactly H.baseChangeLinear, before tensor extension. No preservation of homology by tensor is involved. The empty-cover, degree-zero and zero-algebra cases use the same augmentation maps.",
+   "uses": [
+    "lem-sc-cech-spectral",
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-flat-cohomology-comparison",
+  "lem-pc-cech-computes",
+  "lem-sc-cech-spectral",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-separated-affine-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/01FD",
+  "place": "Cohomology, functoriality of the Cech comparison; applied to the separated-case Leray comparisons in 02KH and 01XD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cech.*(pullback|naturality)|[Cc]ech.*[Cc]omparison",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "No statement of inverse-image naturality of the Cech comparison on cocycles found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cohomology comparison natural under inverse image of sheaves and extension of scalars",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; topCatToSheafCompHausLike_map_val_app; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; LightCondensed.ihomPoints_symm_comp; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm",
+   "date": "2026-10-12",
+   "verdict": "No statement of inverse-image naturality of the Cech comparison on cocycles found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech to sheaf cohomology edge map compatible with inverse image on cocycles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechNaturality",
+  "date": "2026-10-12",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-flat-base-change-coherent",
+   "place": "Proof, separated-case paragraph: identify both Cech cohomologies with sheaf cohomology before taking cohomology of the tensor complex",
+   "via": [
+    "lem-pc-flat-cech-cohomology-square",
+    "lem-pc-flat-cohomology-separated"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles",
+  "file": "lean/Sheaf/AlgebraicGeometry/Cohomology/FlatCohomologyCechCocycles.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_cechBaseChange_cocycle_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.extendedCechCycles",
+   "AlgebraicGeometry.Scheme.Modules.exists_cechBaseChange_cocycle_comparison"
+  ],
+  "statement": "theorem exists_cechBaseChange_cocycle_comparison\n    (f : X ⟶ Spec (.of R)) [IsSeparated f] [Finite ι]\n    (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i)) (hcover : iSup U = ⊤)\n    (M : X.Modules) [M.IsQuasicoherent] (q : ℕ)\n    (c : tensorCech (S := S) f U M ⟶\n      cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)\n        (baseChangedModule (S := S) f M)) (hc : IsCechBaseChange f U M c) :\n    ∃ e : (cechOver f U M).homology q ≅ ModuleCat.of R (HOver f M q),\n    ∃ e' : (cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)\n        (baseChangedModule (S := S) f M)).homology q ≅\n          ModuleCat.of S (HOver (baseChangeSnd (S := S) f)\n            (baseChangedModule (S := S) f M) q),\n      ∀ z : (cechOver f U M).cycles q,\n        e'.hom ((cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)\n          (baseChangedModule (S := S) f M)).homologyπ q\n            (extendedCechCycles f U M c q ((1 : S) ⊗ₜ[R] z))) =\n          H.baseChangeLinear (S := S) f M q (e.hom ((cechOver f U M).homologyπ q z))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085223-L-7562",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261012T085223-L-7562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

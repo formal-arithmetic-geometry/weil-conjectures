@@ -7,10 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
 public import Mathlib.Algebra.Category.ModuleCat.Descent
-import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechCocycles
 
 /-! # Compatibility of the Cech model with the canonical flat cohomology comparison
 
@@ -81,6 +78,63 @@ noncomputable def flatCechHomologyIso [Module.Flat R S] (f : X ⟶ Spec (.of R))
       (RingHom.flat_algebraMap_iff.mpr inferInstance)
   exact ((cechOver f U M).sc q).mapHomologyIso (ModuleCat.extendScalars (algebraMap R S)) |>.symm
 
+/-- The exact-tensor homology isomorphism takes an extended cycle to its class.
+This is the universal property of cycles and homology, with no geometric input. -/
+private theorem extendedCechCycles_homology [Module.Flat R S]
+    (f : X ⟶ Spec (.of R)) (U : ι → X.Opens) (M : X.Modules)
+    (c : tensorCech (S := S) f U M ⟶
+      cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
+        (baseChangedModule (S := S) f M)) (q : ℕ) :
+    (ModuleCat.extendScalars (algebraMap R S)).map ((cechOver f U M).homologyπ q) ≫
+      (flatCechHomologyIso (S := S) f U M q).hom ≫
+        HomologicalComplex.homologyMap c q =
+      extendedCechCycles f U M c q ≫
+        (cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
+          (baseChangedModule (S := S) f M)).homologyπ q := by
+  set_option backward.isDefEq.respectTransparency false in
+    have : (ModuleCat.extendScalars.{u, u, u} (algebraMap R S)).Additive :=
+      (ModuleCat.extendRestrictScalarsAdj (algebraMap R S)).left_adjoint_additive
+    have := (ModuleCat.extendRestrictScalarsAdj.{u, u, u}
+      (algebraMap R S)).leftAdjoint_preservesColimits
+    have : PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u} (algebraMap R S)) :=
+      ModuleCat.preservesFiniteLimits_extendScalars_of_flat
+        (RingHom.flat_algebraMap_iff.mpr inferInstance)
+    let C := cechOver f U M
+    let D := cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
+      (baseChangedModule (S := S) f M)
+    change (ModuleCat.extendScalars (algebraMap R S)).map (C.homologyπ q) ≫
+      ((C.sc q).mapHomologyIso (ModuleCat.extendScalars (algebraMap R S))).inv ≫
+        HomologicalComplex.homologyMap c q = extendedCechCycles f U M c q ≫ D.homologyπ q
+    let F := ModuleCat.extendScalars.{u, u, u} (algebraMap R S)
+    let E := (F.mapHomologicalComplex (.up ℕ)).obj C
+    have hπ : F.map (C.homologyπ q) ≫ ((C.sc q).mapHomologyIso F).inv =
+        ((C.sc q).mapCyclesIso F).inv ≫ E.homologyπ q := by
+      change F.map (C.sc q).homologyπ ≫ ((C.sc q).mapHomologyIso F).inv =
+        ((C.sc q).mapCyclesIso F).inv ≫ ((C.sc q).map F).homologyπ
+      let h := (C.sc q).homologyData.left
+      rw [h.mapHomologyIso_eq F, h.mapCyclesIso_eq F]
+      simp only [Iso.trans_inv, Functor.mapIso_inv, Iso.symm_inv, Category.assoc]
+      rw [← Category.assoc, ← F.map_comp, h.homologyπ_comp_homologyIso_hom]
+      rw [F.map_comp, Category.assoc]
+      change F.map h.cyclesIso.hom ≫ (h.map F).π ≫ (h.map F).homologyIso.inv =
+        F.map h.cyclesIso.hom ≫ (h.map F).cyclesIso.inv ≫ ((C.sc q).map F).homologyπ
+      rw [(h.map F).π_comp_homologyIso_inv]
+    rw [← Category.assoc, hπ, Category.assoc, HomologicalComplex.homologyπ_naturality]
+    rw [← Category.assoc]
+    apply congrArg (fun t ↦ t ≫ D.homologyπ q)
+    apply (cancel_mono (D.iCycles q)).mp
+    simp only [Category.assoc]
+    rw [show HomologicalComplex.cyclesMap c q ≫ D.iCycles q = E.iCycles q ≫ c.f q from
+      HomologicalComplex.cyclesMap_i c q]
+    change ((C.sc q).mapCyclesIso F).inv ≫ (E.iCycles q ≫ c.f q) = _
+    have hi : ((C.sc q).mapCyclesIso F).inv ≫ E.iCycles q = F.map (C.iCycles q) := by
+      change ((C.sc q).mapCyclesIso F).inv ≫ ((C.sc q).map F).iCycles =
+        F.map (C.sc q).iCycles
+      rw [← (C.sc q).mapCyclesIso_hom_iCycles F, Iso.inv_hom_id_assoc]
+    rw [← Category.assoc, hi]
+    dsimp only [extendedCechCycles, D, C, F]
+    rw [HomologicalComplex.liftCycles_i]
+
 /-- Leray identifications can be chosen so that any chain map with the canonical
 pure-tensor formula induces the specified sheaf cohomology comparison. This is a
 compatibility statement; it does not assert that the chain map is invertible.
@@ -124,6 +178,61 @@ theorem exists_cechBaseChange_cohomology_square [Module.Flat R S]
         (flatCechHomologyIso (S := S) f U M q).hom ≫
         HomologicalComplex.homologyMap c q ≫ e'.hom =
           ModuleCat.ofHom (H.baseChange (S := S) f M q) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+    obtain ⟨e, e', hz⟩ := exists_cechBaseChange_cocycle_comparison
+      (S := S) f U hU hcover M q c hc
+    refine ⟨e, e', ?_⟩
+    let C := cechOver f U M
+    let D := cechOver (baseChangeSnd (S := S) f) (baseChangeCover (S := S) f U)
+      (baseChangedModule (S := S) f M)
+    have : (ModuleCat.extendScalars.{u, u, u} (algebraMap R S)).Additive :=
+      (ModuleCat.extendRestrictScalarsAdj (algebraMap R S)).left_adjoint_additive
+    have := (ModuleCat.extendRestrictScalarsAdj.{u, u, u}
+      (algebraMap R S)).leftAdjoint_preservesColimits
+    have : PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u} (algebraMap R S)) :=
+      ModuleCat.preservesFiniteLimits_extendScalars_of_flat
+        (RingHom.flat_algebraMap_iff.mpr inferInstance)
+    let F := ModuleCat.extendScalars.{u, u, u} (algebraMap R S)
+    apply (cancel_epi (extendScalarsTensorIso (S := S) (HOver f M q)).hom).mp
+    simp only [Iso.hom_inv_id_assoc]
+    apply (cancel_epi (F.map e.hom)).mp
+    dsimp only [F]
+    rw [← Category.assoc ((ModuleCat.extendScalars (algebraMap R S)).map e.hom),
+      ← Functor.map_comp, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
+    apply (cancel_epi (F.map (C.homologyπ q))).mp
+    dsimp only [F]
+    trans (extendedCechCycles f U M c q ≫ D.homologyπ q) ≫ e'.hom
+    · simpa only [Category.assoc] using congrArg (fun t ↦ t ≫ e'.hom)
+        (show (ModuleCat.extendScalars (algebraMap R S)).map (C.homologyπ q) ≫
+          (flatCechHomologyIso (S := S) f U M q).hom ≫ HomologicalComplex.homologyMap c q =
+            extendedCechCycles f U M c q ≫ D.homologyπ q from
+          extendedCechCycles_homology f U M c q)
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    change e'.hom (D.homologyπ q (extendedCechCycles f U M c q x)) =
+      H.baseChange (S := S) f M q ((extendScalarsTensorIso (S := S) (HOver f M q)).hom
+        (F.map e.hom (F.map (C.homologyπ q) x)))
+    induction x using TensorProduct.induction_on with
+    | zero => simp
+    | add x y hx hy => simp only [map_add, hx, hy]
+    | tmul b z =>
+      have h := hz z
+      have ht : TensorProduct.tmul R b z =
+          (show S from b) • (TensorProduct.tmul R (1 : S) z : F.obj (C.cycles q)) := by
+        rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
+      rw [ht]
+      change e'.hom.hom ((D.homologyπ q).hom ((extendedCechCycles f U M c q).hom
+        ((show S from b) • ((TensorProduct.tmul R (1 : S) z) : F.obj (C.cycles q))))) =
+          H.baseChange (S := S) f M q ((extendScalarsTensorIso (S := S) (HOver f M q)).hom.hom
+            ((F.map e.hom).hom ((F.map (C.homologyπ q)).hom
+              ((show S from b) • ((TensorProduct.tmul R (1 : S) z) : F.obj (C.cycles q))))))
+      simp only [LinearMap.map_smul]
+      apply congrArg (fun t ↦ (show S from b) • t)
+      change e'.hom (D.homologyπ q
+        (extendedCechCycles f U M c q (TensorProduct.tmul R (1 : S) z))) =
+        H.baseChange (S := S) f M q (TensorProduct.tmul R (1 : S) (e.hom (C.homologyπ q z)))
+      simpa only [H.baseChange, extendComparison, TensorProduct.AlgebraTensorModule.lift_tmul,
+        LinearMap.coe_mk, AddHom.coe_mk, LinearMap.smul_apply, one_smul] using h
 
 end AlgebraicGeometry.Scheme.Modules
