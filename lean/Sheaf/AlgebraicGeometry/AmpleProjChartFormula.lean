@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import Sheaf.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic
 import Sheaf.Paper.NonvanishingSectionTrivializes
+import Sheaf.AlgebraicGeometry.AmpleProjCompatibleCharts
+import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
+import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Constructing a section-ring morphism with the fraction formula
 
@@ -58,6 +61,51 @@ theorem exists_sectionRing_proj_chart_formula (X : Scheme.{v}) (L : X.Modules)
               ((s.val ^ n) (n • d)) =
           (L.tensorPow (n • d)).presheaf.map (homOfLE
               (le_top : f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) s.val ≤ ⊤)).op
-            (ξ.val (n • d)) := by sorry
+            (ξ.val (n • d)) := by
+  classical
+  let I := Σ d : ℕ, {s : sectionRingGrade L d // 0 < d}
+  let d : I → ℕ := fun i ↦ i.1
+  let s : ∀ i : I, sectionRingGrade L (d i) := fun i ↦ i.2.1
+  have hd (i : I) : 0 < d i := i.2.2
+  have hopen (i : I) : ∃ U : X.Opens, (U : Set X) =
+      nonvanishingLocus (L.tensorPow (d i)) ((s i).val (d i)) := by
+    obtain ⟨U, hU, _⟩ := nonvanishing_section_trivializes X (L.tensorPow (d i))
+      ((s i).val (d i))
+    exact ⟨U, hU⟩
+  choose U hU using hopen
+  obtain ⟨g, hcompat, hlocal⟩ :=
+    exists_sectionRing_compatible_quotient_charts X L I d s hd U hU
+  have htop : ⨆ i, U i = ⊤ := by
+    apply eq_top_iff.mpr
+    intro x _
+    obtain ⟨e, t, he, hxt⟩ := hcover x
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    refine ⟨⟨e, t, he⟩, ?_⟩
+    change x ∈ (U ⟨e, t, he⟩ : Set X)
+    rw [hU]
+    exact hxt
+  let f := Scheme.Opens.glueMorphismsOfTop U htop g hcompat
+  refine ⟨f, ?_⟩
+  intro e he t n ξ
+  let V := f ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val
+  let W : I → X.Opens := fun i ↦ (U i).ι ''ᵁ ((U i).ι ⁻¹ᵁ V)
+  have hWV (i : I) : W i ≤ V := by
+    exact Set.image_preimage_subset (U i).ι V
+  refine TopCat.Sheaf.eq_of_locally_eq'
+    ⟨(L.tensorPow (n • e)).presheaf, (L.tensorPow (n • e)).isSheaf⟩
+    W V (fun i ↦ homOfLE (hWV i)) ?_ _ _ ?_
+  · intro x hxV
+    have hx : x ∈ ⨆ i, U i := by rw [htop]; trivial
+    obtain ⟨i, hxi⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+    apply TopologicalSpace.Opens.mem_iSup.mpr
+    refine ⟨i, ?_⟩
+    exact ⟨⟨x, hxi⟩, hxV, rfl⟩
+  · intro i
+    have hl := hlocal i e he t n ξ
+    rw [← Scheme.Opens.ι_glueMorphismsOfTop U htop g hcompat i] at hl
+    simp only [Scheme.Hom.comp_preimage, Scheme.Hom.comp_app, CommRingCat.comp_apply,
+      Scheme.Opens.ι_app] at hl
+    rw [map_smul, presheaf_map_map_apply, presheaf_map_map_apply]
+    exact hl
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,143 @@
+{
+ "id": "lem-sc-ample-proj-compatible-quotient-charts",
+ "kind": "statement",
+ "title": "Compatible local quotient charts without a covering hypothesis",
+ "statement": "Let X be a scheme [def-pc-scheme], L an invertible X-module [def-sc-invertible-module], and S its graded section ring [def-sc-invertible-section-ring]. Let I be an arbitrary index type. For each i let d_i > 0, s_i a homogeneous section of degree d_i, and U_i an open whose underlying set is the nonvanishing locus of s_i [def-weil-pbc-ample-invertible-module]. The U_i need not cover X. There exist morphisms g_i:U_i -> Proj(S) [def-pc-proj] which agree on each pairwise intersection. For every i, homogeneous t of any positive degree e, n >= 0, and homogeneous xi of degree ne, let W_i,t be the ambient image in X of g_i^{-1}(D_+(t)). Under the identification O_{U_i}(g_i^{-1}(D_+(t))) = O_X(W_i,t), the pullback by g_i of xi/t^n, multiplied by the restriction of t^n to W_i,t, equals the restriction of xi to W_i,t. This is only local data; there is no assertion of a morphism from X.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (lemma-converse-construction), local quotient maps and overlap calculation, and 01NK (lemma-invertible-map-into-proj), differing positive degrees; Properties Tag 01PZ proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-proj",
+  "def-sc-invertible-section-ring",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "For each i, nonvanishing_section_trivializes makes s_i a free generator of L^{tensor d_i} on U_i. Tensor its generator to divide a degree nd_i section by s_i^n. Equal homogeneous fractions have equal quotients after multiplying by a power of s_i and cancelling this free generator. Tensor multiplication gives additivity, multiplicativity, and the unit. Thus these quotients form a ring map S_(s_i) -> Gamma(U_i,O_X). The affine morphism correspondence and the Proj basic-chart identification give g_i into D_+(s_i).",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (lemma-converse-construction), local quotient maps and overlap calculation, and 01NK (lemma-invertible-map-into-proj), differing positive degrees; Properties Tag 01PZ proof"
+   }
+  },
+  {
+   "text": "For s_i and any positive-degree t of degree e, t^{d_i}/s_i^e pulls back to the quotient of the corresponding sections of L^{tensor d_i e}. This quotient is a unit precisely on U_i intersect X_t, by the residue-field criterion and d_i > 0. On U_i intersect U_j, the two maps therefore factor through D_+(s_i s_j). Their ring maps agree on every a/(s_i s_j)^n: both divide a by (s_i s_j)^n. The affine morphism correspondence proves compatibility. On the inverse image of any D_+(t), the same localization identity makes the pullback of xi/t^n the coefficient of xi relative to t^n. This gives the displayed local equation. Empty opens have unique sections; n=0 uses the tensor-unit coefficient map.",
+   "uses": [
+    "lem-weil-pbc-nonvanishing-section-trivializes",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01N8 (lemma-converse-construction), local quotient maps and overlap calculation, and 01NK (lemma-invertible-map-into-proj), differing positive degrees; Properties Tag 01PZ proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-proj",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01N8 (lemma-converse-construction), local quotient maps and overlap calculation, and 01NK (lemma-invertible-map-into-proj), differing positive degrees; Properties Tag 01PZ proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sectionRing|fromOfGlobalSections|glueMorphisms|eq_of_locally_eq",
+   "date": "2026-10-12",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean; Mathlib/AlgebraicGeometry/EffectiveEpi.lean; Mathlib/AlgebraicGeometry/Cover/Directed.lean; Mathlib/AlgebraicGeometry/Cover/Directed.lean",
+   "verdict": "No exact match. Mathlib constructs maps from ring maps to functions; it does not construct the section-ring quotient maps for a possibly nontrivial invertible module. The gluing and section-extensionality tools are used directly in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc; AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE; AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict",
+   "verdict": "No exact match. Mathlib constructs maps from ring maps to functions; it does not construct the section-ring quotient maps for a possibly nontrivial invertible module. The gluing and section-extensionality tools are used directly in the parent proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical morphism to Proj of section ring of invertible sheaf and local fraction formula",
+   "date": "2026-10-12",
+   "results": "AlgebraicGeometry.Proj.awayToSection; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToΓ; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection; AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply; AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections; AlgebraicGeometry.Proj.awayMap_awayToSection; AlgebraicGeometry.Proj.awayMap_awayToSection_assoc; AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app",
+   "verdict": "No exact match. Mathlib constructs maps from ring maps to functions; it does not construct the section-ring quotient maps for a possibly nontrivial invertible module. The gluing and section-extensionality tools are used directly in the parent proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible local quotient morphisms from nonvanishing opens of an invertible sheaf to Proj of its section ring",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AmpleProjChartFormula",
+  "date": "2026-10-13",
+  "group": "J3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-pic-proper-ntorsion",
+   "place": "## Proof, first sentence: choose powers and sections on each component with affine nonvanishing locus containing T; the canonical-map chart construction and its pointwise verification",
+   "via": [
+    "lem-sc-ample-proj-canonical-map-chart-formula",
+    "lem-sc-ample-proj-canonical-map",
+    "lem-sc-reduced-dim-le-one-ample",
+    "lem-sc-dim-one-ample-invertible",
+    "lem-sc-dim-one-quasi-projective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-curveestimate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AmpleProjCompatibleCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleProjCompatibleCharts.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_sectionRing_compatible_quotient_charts",
+  "statement": "theorem exists_sectionRing_compatible_quotient_charts (X : Scheme.{v}) (L : X.Modules) [L.IsInvertible] (I : Type w) (d : I → ℕ) (s : ∀ i, sectionRingGrade L (d i)) (hd : ∀ i, 0 < d i) (U : I → X.Opens) (hU : ∀ i, (U i : Set X) = nonvanishingLocus (L.tensorPow (d i)) ((s i).val (d i))) : ∃ g : ∀ i, (U i).toScheme ⟶ Proj (sectionRingGrade L), (∀ i j, X.homOfLE (inf_le_left : U i ⊓ U j ≤ U i) ≫ g i = X.homOfLE (inf_le_right : U i ⊓ U j ≤ U j) ≫ g j) ∧ ∀ i (e : ℕ) (_he : 0 < e) (t : sectionRingGrade L e) (n : ℕ) (ξ : sectionRingGrade L (n • e)), (show Γ(X, (U i).ι ''ᵁ (g i ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val)) from (g i).app (Proj.basicOpen (sectionRingGrade L) t.val) (Proj.awayToSection (sectionRingGrade L) t.val (HomogeneousLocalization.Away.mk (sectionRingGrade L) t.property n ξ.val ξ.property))) • (L.tensorPow (n • e)).presheaf.map (homOfLE (le_top : (U i).ι ''ᵁ (g i ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤ ⊤)).op ((t.val ^ n) (n • e)) = (L.tensorPow (n • e)).presheaf.map (homOfLE (le_top : (U i).ι ''ᵁ (g i ⁻¹ᵁ Proj.basicOpen (sectionRingGrade L) t.val) ≤ ⊤)).op (ξ.val (n • e))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-13"
+ },
+ "tool_uses": [
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-nonvanishing-section-trivializes"
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T165517-L-2934544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261012T165517-L-2934544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

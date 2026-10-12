@@ -16,66 +16,42 @@
  ],
  "proof": [
   {
-   "text": "For each positive-degree homogeneous section s of degree d, the nonvanishing open X_s is open and s trivializes L^{tensor d} there by [lem-weil-pbc-nonvanishing-section-trivializes]. On X_s define a ring homomorphism rho_s:S_(s)\\toGamma(X_s,O_X) by rho_s(xi/s^n)=s^{-n}xi, where xi is homogeneous of degree nd; the relation defining graded localization is respected because multiplication by the unit s on X_s is invertible. By [lem-weil-pbc-morphism-into-affine-scheme] and the affine description D_+(s)=Spec(S_(s)) in [def-pc-proj], rho_s determines a morphism f_s:X_s\\toD_+(s).",
+   "text": "Index all positive-degree homogeneous sections. Apply nonvanishing_section_trivializes to each tensor power (tensor powers of an invertible module are invertible) and retain the resulting nonvanishing open. These opens cover X by hcover.",
    "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-pc-proj"
+    "lem-weil-pbc-nonvanishing-section-trivializes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 01PZ proof; Constructions Lemma 01N8, construction of psi_(f) on S_(f)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let s and t have positive degrees d and e. On X_s the degree-zero chart function t^d/s^e maps under rho_s to the quotient of the two sections of L^{tensor de}; by [lem-weil-pbc-morphism-into-affine-scheme] and [def-pc-proj], the inverse image of D_+(t) inside D_+(s) is the locus where this quotient is invertible. Since s trivializes L^{tensor d}, this is X_s cap X_t: in each residue field t(x)^d is nonzero exactly when t(x) is nonzero. Thus f_s and f_t both map X_s cap X_t to D_+(st). On that overlap define rho_st:S_(st)\\toGamma(X_s cap X_t,O_X) by xi/(st)^n |\\to xi/(st)^n, dividing sections of L^{tensor n(d+e)} by the trivializing section (st)^n. The localization map S_(s)\\toS_(st) sends a/s^k to a t^k/(st)^k, whose image under rho_st is a t^k/(s^k t^k)=a/s^k=rho_s(a/s^k)|_{X_s cap X_t}; similarly S_(t)\\toS_(st) sends b/t^k to b s^k/(st)^k, and rho_st gives rho_t(b/t^k) on the overlap. Thus both restrictions have the same ring map from S_(st), and their morphisms to the affine chart D_+(st)=Spec(S_(st)) agree by [lem-weil-pbc-morphism-into-affine-scheme].",
+   "text": "Apply the compatible local quotient charts lemma to this family. It supplies morphisms on these opens, pairwise compatibility, and the intrinsic local fraction formula.",
    "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-pc-proj"
+    "lem-sc-ample-proj-compatible-quotient-charts"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 01PZ proof and Constructions Lemma 01N8, overlap calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "The opens X_s cover X by hypothesis, and the maps f_s agree on pairwise overlaps by Step 2. Therefore [lem-weil-pbc-scheme-morphism-gluing] gives a unique canonical morphism f:X\\toProj(S) restricting to f_s on every X_s.",
+   "text": "Glue the compatible maps by Scheme.Opens.glueMorphismsOfTop, the intersection form of scheme morphism gluing. Its restriction lemma identifies the glued morphism with each local map.",
    "uses": [
     "lem-weil-pbc-scheme-morphism-gluing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Properties Lemma 01PZ proof, gluing the local maps constructed from Lemma 01N8"
-   }
+   "elementary": false
   },
   {
-   "text": "On each nonvanishing chart the glued morphism restricts to the quotient morphism. The equation for the pullback of xi/s^n follows there by the definition of its ring map. For any other chart pullback, restrict to the covering intersections and use the overlap quotient identities in step 2. Sheaf separatedness gives equality of the two tensor-power sections on the entire inverse-image open. The n=0 case is the coefficient map for the tensor unit; the empty open is covered vacuously.",
-   "uses": [
-    "lem-weil-pbc-nonvanishing-section-trivializes",
-    "lem-weil-pbc-morphism-into-affine-scheme",
-    "def-pc-proj"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
-   }
+   "text": "For an arbitrary positive-degree chart D_+(t), restrict the desired equation to the ambient images of the inverse images of D_+(t) in each U_i. These opens cover the full inverse image. Rewrite the local maps as U_i.ι followed by the glued morphism; comp_app and ι_app identify the scalar restriction. map_smul and composition of presheaf restrictions turn the local formula into equality of restrictions of the two desired sections. TopCat.Sheaf.eq_of_locally_eq' gives their equality on the entire inverse-image open, including an empty one.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pc-proj",
-  "lem-weil-pbc-morphism-into-affine-scheme",
   "lem-weil-pbc-nonvanishing-section-trivializes",
+  "lem-sc-ample-proj-compatible-quotient-charts",
   "lem-weil-pbc-scheme-morphism-gluing"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/constructions.tex",
-  "place": "Constructions Lemma 01N8 (lemma-converse-construction), local quotient construction, overlap and inverse-image calculation; Properties Lemma 01PZ (lemma-map-into-proj), proof and clause (1)"
+  "by": "agent",
+  "agent": "J3",
+  "date": "2026-10-13",
+  "note": "Lean reduction of the local chart plan: cover, actual gluing, and sheaf separatedness are proved; only compatible local quotient data are split off."
  },
  "mathlib_searches": [
   {
@@ -165,9 +141,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "M2",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T135253-L-1677333",
+  "landing": "20261012T165517-L-2934544",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
