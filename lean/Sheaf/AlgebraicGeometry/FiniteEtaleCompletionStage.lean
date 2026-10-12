@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group C2
+Authors: SHEAF group Q2
 -/
 module
 
@@ -12,13 +12,9 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.CategoryTheory.MorphismProperty.Comma
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.FinitePresentation
-import Sheaf.AlgebraicGeometry.FiniteEtaleLiftingComplete
-import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.AdicCompletion.Completeness
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.FiniteEtaleCompletionLift
+import Sheaf.AlgebraicGeometry.FiniteEtaleAlgebraStage
+import Mathlib.CategoryTheory.Comma.Over.Pullback
 
 /-!
 # A finite presentation stage for a cover of the closed fibre
@@ -74,6 +70,15 @@ theorem exists_finiteEtale_completion_stage
             Spec.map (CommRingCat.ofHom
               ((AdicCompletion.evalOneₐ I).toRingHom.comp c.toRingHom)) ∧
         Nonempty (Over.mk (pullback.snd W.hom k) ≅ Over.mk V.hom) := by
-  sorry
+  obtain ⟨U, j, hjfst, hjsnd, ⟨eU⟩⟩ := exists_finiteEtale_completion_lift I f V
+  obtain ⟨R, hR, hAR, hfp, c, W, l, hlfst, hlsnd, ⟨eW⟩⟩ :=
+    exists_finiteEtale_algebra_stage f U
+  refine ⟨R, hR, hAR, hfp, c, W, j ≫ l, ?_, ?_, ?_⟩
+  · rw [Category.assoc, hlfst, hjfst]
+  · rw [Category.assoc, hlsnd, ← Category.assoc, hjsnd, Category.assoc,
+      ← Spec.map_comp]
+    rfl
+  · exact ⟨(Over.pullbackComp j l).app (Over.mk W.hom) ≪≫
+      (Over.pullback j).mapIso eW ≪≫ eU⟩
 
 end AlgebraicGeometry.Scheme
