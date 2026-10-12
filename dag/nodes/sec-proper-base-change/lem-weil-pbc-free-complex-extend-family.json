@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-pbc-free-complex-extend-family",
+ "kind": "statement",
+ "title": "Recursive extension of a comparison family",
+ "statement": "For an exact augmented complex N' with differentials d, a complex F with free terms and differentials δ, and a₀ : F 0 ⟶ N' 0, there exists a family α i : F i ⟶ N' i with α 0 = a₀ and α (i+1) ≫ d i = δ i ≫ α i for every i.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00LS, proof of lemma-compare-resolutions (1), lines 17525--17535"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Starting from a₀, each obstruction lands in the next kernel by the two zero-composite identities; exactness makes the differential surjective onto that kernel and projectivity of the next free term gives a lift. Dependent recursion and choice assemble the compatible infinite family.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00LS, proof of lemma-compare-resolutions (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Recursive extension of a comparison family",
+   "results": "No exact match; recursive comparison argument is specialized.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recursive extension of a comparison family",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ShortComplex.Exact.liftFromProjective",
+   "results": "Building block only; does not package this statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FreeComplexMapsToResolution",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-free-complex-maps-to-resolution",
+   "place": "degree-zero and recursive steps"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FreeComplexExtendFamily",
+  "file": "lean/Sheaf/Paper/FreeComplexExtendFamily.lean",
+  "declaration": "free_complex_extend_family",
+  "statement": "theorem free_complex_extend_family (R : Type u) [CommRing R] (N : ModuleCat R) (N' : ℕ → ModuleCat R) (d : ∀ i : ℕ, N' (i + 1) ⟶ N' i) (η : N' 0 ⟶ N) (hd0 : d 0 ≫ η = 0) (hd : ∀ i : ℕ, d (i + 1) ≫ d i = 0) (hex0 : (ShortComplex.mk (d 0) η hd0).Exact) (hex : ∀ i : ℕ, (ShortComplex.mk (d (i + 1)) (d i) (hd i)).Exact) (F : ℕ → ModuleCat R) (δ : ∀ i : ℕ, F (i + 1) ⟶ F i) (hδ : ∀ i : ℕ, δ (i + 1) ≫ δ i = 0) (hfree : ∀ i : ℕ, Module.Free R (F i)) (a₀ : F 0 ⟶ N' 0) : ∃ α : ∀ i : ℕ, F i ⟶ N' i, α 0 = a₀ ∧ (∀ i : ℕ, α (i + 1) ≫ d i = δ i ≫ α i)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T205631-L-932742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T205631-L-932742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

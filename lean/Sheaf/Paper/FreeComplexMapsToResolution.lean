@@ -3,6 +3,10 @@ module
 public import Mathlib.CategoryTheory.Abelian.Exact
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.LinearAlgebra.FreeModule.Basic
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.Algebra.Category.ModuleCat.Abelian
+import Sheaf.Paper.FreeComplexBaseLift
+import Sheaf.Paper.FreeComplexExtendFamily
 
 /-! # A complex of free modules maps to a resolution
 Source: literature/stacks-project/algebra.tex, Tag 00LS
@@ -49,4 +53,8 @@ theorem free_complex_maps_to_resolution
     ∃ α : ∀ i : ℕ, F i ⟶ N' i,
       α 0 ≫ η = π ≫ φ ∧
         (∀ i : ℕ, (α (i + 1)) ≫ d i = (δ i) ≫ α i) := by
-  sorry
+  have _ := hδ0
+  obtain ⟨a₀, ha₀⟩ := free_complex_base_lift R M N φ N' η F π hη (hfree 0)
+  obtain ⟨α, hα₀, hα⟩ := free_complex_extend_family R N N' d η hd0 hd hex0 hex F δ hδ hfree a₀
+  refine ⟨α, ?_, hα⟩
+  rw [hα₀, ha₀]

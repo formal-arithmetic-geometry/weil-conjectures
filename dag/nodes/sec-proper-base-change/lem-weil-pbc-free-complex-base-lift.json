@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-pbc-free-complex-base-lift",
+ "kind": "statement",
+ "title": "Base-degree lift for a free complex",
+ "statement": "For a commutative ring R, modules M,N, a map φ : M ⟶ N, an augmentation η : N' 0 ⟶ N that is surjective, a family F, and π : F 0 ⟶ M with F 0 free, there exists a₀ : F 0 ⟶ N' 0 such that a₀ ≫ η = π ≫ φ.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebra, Tag 00LS, proof of lemma-compare-resolutions (1), lines 17525--17535"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use that a free module is projective and apply Module.projective_lifting_property to the surjective augmentation and the composite φ ∘ π; package the lifted linear map as a ModuleCat morphism.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib.Algebra.Module.Projective",
+  "place": "Module.Projective.of_free and Module.projective_lifting_property"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base-degree lift for a free complex",
+   "results": "No exact match; recursive comparison argument is specialized.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base-degree lift for a free complex",
+   "results": "No exact match.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ShortComplex.Exact.liftFromProjective",
+   "results": "Building block only; does not package this statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": "Module.Projective.of_free; Module.projective_lifting_property",
+ "status": "proved",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FreeComplexMapsToResolution",
+  "date": "2026-10-13",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-free-complex-maps-to-resolution",
+   "place": "degree-zero and recursive steps"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FreeComplexBaseLift",
+  "file": "lean/Sheaf/Paper/FreeComplexBaseLift.lean",
+  "declaration": "free_complex_base_lift",
+  "statement": "theorem free_complex_base_lift (R : Type u) [CommRing R] (M N : ModuleCat R) (φ : M ⟶ N) (N' : ℕ → ModuleCat R) (η : N' 0 ⟶ N) (F : ℕ → ModuleCat R) (π : F 0 ⟶ M) (hη : Function.Surjective η) (hfree : Module.Free R (F 0)) : ∃ a₀ : F 0 ⟶ N' 0, a₀ ≫ η = π ≫ φ",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T205631-L-932742",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T205631-L-932742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
