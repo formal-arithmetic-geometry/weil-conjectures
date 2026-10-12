@@ -8992,3 +8992,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/M1/Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct (stage 3; reviewer PASS; first push; landing 20261012T184316-L-4009201 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/M1/Sheaf.CategoryTheory.ColimitSiteAbelianSectionEventualEquality (stage 3; reviewer PASS; first push; landing 20261012T184317-L-4009345 (interface); batch 20261012T184234; modules 2; new nodes 1)
 - 18:43 L: merged deliver/M1/Sheaf.CategoryTheory.ColimitSiteSetSectionRepresentatives (stage 3; reviewer PASS; first push; landing 20261012T184317-L-4009491 (interface); batch 20261012T184234; modules 4; new nodes 3)
+- 18:43 L: merged deliver/M2/Sheaf.Algebra.Homology.DoubleComplexVerticalQuotientComparison (stage 3; reviewer PASS; first push; landing 20261012T184317-L-4009592 (interface); batch 20261012T184234; modules 2; new nodes 1)

@@ -5,6 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Algebra.Homology.DoubleComplexVerticalTowerMaps
+import Sheaf.Algebra.Homology.RestrictedComplementaryTruncationComparison
+import Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration
+import Sheaf.CategoryTheory.DegreewiseFilteredAcyclic
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # The quotient of a smart vertical cutoff
 
@@ -106,6 +110,31 @@ theorem verticalQuotientToLower_total_quasiIso (a : ℤ) :
     QuasiIso (HomologicalComplex.extendMap
       (total.map (verticalQuotientToLower K a) (ComplexShape.up ℕ))
       ComplexShape.embeddingUpNat) := by
-  sorry
+  let q := verticalQuotientToLower K a
+  obtain ⟨F, hbounds, hneg, hgraded⟩ := firstQuadrant_vertical_cone_filtration q
+  apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).mpr
+  apply degreewiseFiltered_acyclic _ F (fun n ↦ ⟨0, n + 2, hbounds n⟩)
+  intro p n
+  apply ((F.gradedPiece p).exactAt_iff_isZero_homology n).mpr
+  by_cases hp : p < 0
+  · exact hneg p n hp
+  · obtain ⟨e⟩ := hgraded p n (by omega)
+    have : QuasiIso (q.f p.toNat) := by
+      apply CochainComplex.restrictedComplementaryTruncationComparison_quasiIso
+        (K.X p.toNat) a _ ((cokernel.π (verticalCutoffBicomplexι K a)).f p.toNat)
+        (by
+          exact congrArg (fun f ↦ f.f p.toNat)
+            (cokernel.condition (verticalCutoffBicomplexι K a)))
+      · exact isColimitOfHasCokernelOfPreservesColimit
+          (HomologicalComplex.eval (CochainComplex C ℕ) (ComplexShape.up ℕ) p.toNat)
+          (verticalCutoffBicomplexι K a)
+      · have h : cokernel.π (verticalCutoffBicomplexι K a) ≫ verticalQuotientToLower K a =
+            (((verticalLowerπ a).mapHomologicalComplex (ComplexShape.up ℕ)).app K) :=
+          cokernel.π_desc _ _ _
+        exact congrArg (fun f ↦ f.f p.toNat) h
+    have hcol := (CochainComplex.mappingCone.quasiIso_iff_acyclic
+      (HomologicalComplex.extendMap (q.f p.toNat) ComplexShape.embeddingUpNat)).mp
+        (inferInstance : QuasiIso _)
+    exact e.isZero_iff.mpr (hcol (n - p)).isZero_homology
 
 end HomologicalComplex₂

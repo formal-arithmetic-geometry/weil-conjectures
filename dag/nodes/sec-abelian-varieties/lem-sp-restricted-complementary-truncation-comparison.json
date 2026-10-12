@@ -1,0 +1,158 @@
+{
+ "id": "lem-sp-restricted-complementary-truncation-comparison",
+ "kind": "statement",
+ "title": "Restricted complementary smart truncation comparison",
+ "statement": "Let C be an abelian category [def-sp-abelian], L a cochain complex indexed by N, a an integer, and E its extension by zero to Z. Write R for restriction from Z to N, i for R(E.ιTruncLE(a-1)), and π_a for R(E.πTruncGE(a)). Let Q be any cochain complex indexed by N and π:R(E)→Q a cokernel cofork of i, including its colimit universal property. Any map g:Q→R(E.truncGE(a)) satisfying π≫g=π_a is a quasi-isomorphism. No totalization or bicomplex is involved.",
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "source": {
+  "document": "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean",
+  "place": "shortComplexTruncLEX₃ToTruncGE and its QuasiIso instance, lines 306–328; CochainComplex.lean complementary integer embeddings"
+ },
+ "proof": [
+  {
+   "text": "Restriction preserves cokernels because colimits of homological complexes are degreewise. The given cokernel universal property identifies Q with the restriction of the integer cokernel of E.ιTruncLE(a-1), compatibly with π. The equation π≫g=π_a and cokernel uniqueness identify g with the restricted canonical complementary truncation comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The embeddings at a-1 and a are complementary. Mathlib instQuasiIsoShortComplexTruncLEX₃ToTruncGE proves the integer comparison is a quasi-isomorphism. When a>0, its source and target are zero in all negative degrees: E is zero there, so the cokernel of the upper cutoff is zero there, and the lower truncation vanishes below a. Restriction therefore preserves homology: in degree zero both incoming images are zero; in positive degrees the three terms and differentials are unchanged. When a<=0 the cutoff is zero and the lower truncation changes only zero terms, so the comparison is an isomorphism. This covers a=0, a=1, zero complexes and complexes concentrated in degree zero. Transport quasi-isomorphism across the cokernel isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Mathlib/Algebra/Homology/Embedding/AreComplementary.lean",
+  "place": "Canonical comparison with degreewise restriction and cokernel universal-property transport; second reader M2"
+ },
+ "mathlib_searches": [
+  {
+   "t": "2026-10-12T17:39:57Z",
+   "tool": "grep",
+   "query": "shortComplexTruncLEX₃ToTruncGE|quasiIso.*restriction",
+   "sub": "Algebra/Homology",
+   "ok": true,
+   "n_hits": 18,
+   "note": "",
+   "top": [
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+    "Mathlib/Algebra/Homology/Embedding/CochainComplex.lean"
+   ],
+   "digest": "bedc53c5dfa1c5a4",
+   "date": "2026-10-13",
+   "results": "Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean, Mathlib/Algebra/Homology/Embedding/CochainComplex.lean",
+   "verdict": "Mathlib supplies the integer-indexed canonical comparison, not this restricted comparison with an arbitrary cokernel cofork. No exact declaration found."
+  },
+  {
+   "t": "2026-10-12T17:39:58Z",
+   "tool": "leanfinder",
+   "query": "cokernel of complementary smart truncation inclusion quasi-isomorphic to lower truncation",
+   "sub": "",
+   "ok": true,
+   "n_hits": 8,
+   "note": "",
+   "top": [
+    "HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g",
+    "HomologicalComplex.quasiIsoAt_πTruncGE",
+    "HomologicalComplex.instQuasiIsoAtπTruncGEF",
+    "CochainComplex.instQuasiIsoIntιTruncLEOfIsLE",
+    "CochainComplex.instQuasiIsoIntπTruncGEOfIsGE",
+    "HomologicalComplex.quasiIsoAt_ιTruncLE",
+    "HomologicalComplex.instQuasiIsoAtιTruncLEF"
+   ],
+   "digest": "dcb6ad4475601553",
+   "date": "2026-10-13",
+   "results": "HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE, HomologicalComplex.quasiIsoAt_shortComplexTruncLE_g, HomologicalComplex.quasiIsoAt_πTruncGE, HomologicalComplex.instQuasiIsoAtπTruncGEF, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, HomologicalComplex.quasiIsoAt_ιTruncLE, HomologicalComplex.instQuasiIsoAtιTruncLEF",
+   "verdict": "Mathlib supplies the integer-indexed canonical comparison, not this restricted comparison with an arbitrary cokernel cofork. No exact declaration found."
+  },
+  {
+   "t": "2026-10-12T17:39:58Z",
+   "tool": "loogle",
+   "query": "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+   "sub": "",
+   "ok": true,
+   "n_hits": 4,
+   "note": "",
+   "top": [
+    "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE",
+    "HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc"
+   ],
+   "digest": "b8d68cf9efc71a21",
+   "date": "2026-10-13",
+   "results": "HomologicalComplex.shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.instQuasiIsoShortComplexTruncLEX₃ToTruncGE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE, HomologicalComplex.g_shortComplexTruncLEX₃ToTruncGE_assoc",
+   "verdict": "Mathlib supplies the integer-indexed canonical comparison, not this restricted comparison with an arbitrary cokernel cofork. No exact declaration found."
+  },
+  {
+   "t": "2026-10-12T17:49:47Z",
+   "tool": "leansearch",
+   "query": "Restrict the cokernel of the smart upper truncation inclusion of an extension by zero to nonnegative cochain degrees; its canonical comparison to the complementary lower truncation is a quasi-isomorphism.",
+   "sub": "",
+   "ok": false,
+   "n_hits": 0,
+   "note": "service unavailable: Internal Server Error",
+   "top": [],
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-13"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DoubleComplexVerticalQuotientComparison",
+  "date": "2026-10-13",
+  "group": "M2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-double-complex-vertical-quotient-total-comparison",
+   "place": "First proof step: column comparison, before the finite-diagonal totalization argument",
+   "via": []
+  }
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RestrictedComplementaryTruncationComparison",
+  "file": "lean/Sheaf/Algebra/Homology/RestrictedComplementaryTruncationComparison.lean",
+  "declaration": "CochainComplex.restrictedComplementaryTruncationComparison_quasiIso",
+  "statement": "theorem restrictedComplementaryTruncationComparison_quasiIso\n    (L : CochainComplex C ℕ) (a : ℤ) (Q : CochainComplex C ℕ)\n    (π : (L.extend ComplexShape.embeddingUpNat).restriction\n      ComplexShape.embeddingUpNat ⟶ Q)\n    (hzero : HomologicalComplex.restrictionMap\n      (CochainComplex.ιTruncLE (L.extend ComplexShape.embeddingUpNat) (a - 1))\n        ComplexShape.embeddingUpNat ≫ π = 0)\n    (hπ : IsColimit (CokernelCofork.ofπ π hzero))\n    (g : Q ⟶ (CochainComplex.truncGE (L.extend ComplexShape.embeddingUpNat) a).restriction\n      ComplexShape.embeddingUpNat)\n    (hg : π ≫ g = HomologicalComplex.restrictionMap\n      (CochainComplex.πTruncGE (L.extend ComplexShape.embeddingUpNat) a)\n        ComplexShape.embeddingUpNat) :\n    QuasiIso g",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T184317-L-4009592",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T184317-L-4009592",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
