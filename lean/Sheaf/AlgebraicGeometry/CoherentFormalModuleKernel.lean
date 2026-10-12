@@ -7,11 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAffine
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelConstruction
+import Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelFactorization
+import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 
 /-!
 # Kernels in coherent formal modules
@@ -27,6 +25,30 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
+
+private theorem formalMono_of_kernel_transition_zero {X : Scheme.{u}} [IsNoetherian X]
+    {I : X.IdealSheafData} {K F : CoherentFormalModule X I} (ι : K ⟶ F) (c : ℕ)
+    (hz : ∀ n : ℕ, kernel.ι (ι.hom.app (op (n + c))) ≫
+      K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0) : Mono ι := by
+  apply (Preadditive.mono_iff_cancel_zero ι).mpr
+  intro T γ hγ
+  apply ObjectProperty.hom_ext
+  apply NatTrans.ext
+  funext a
+  obtain ⟨n⟩ := a
+  change γ.hom.app (op n) = 0
+  have hcomp : γ.hom.app (op (n + c)) ≫ ι.hom.app (op (n + c)) = 0 := by
+    exact congrArg (fun f => f.hom.app (op (n + c))) hγ
+  have hzero : γ.hom.app (op (n + c)) ≫
+      K.obj.map (homOfLE (Nat.le_add_right n c)).op = 0 := by
+    calc
+      _ = kernel.lift (ι.hom.app (op (n + c))) (γ.hom.app (op (n + c))) hcomp ≫
+          kernel.ι (ι.hom.app (op (n + c))) ≫
+            K.obj.map (homOfLE (Nat.le_add_right n c)).op := by simp
+      _ = 0 := by rw [hz n, comp_zero]
+  have := formalTransition_epi T (Nat.le_add_right n c)
+  apply (cancel_epi (T.obj.map (homOfLE (Nat.le_add_right n c)).op)).mp
+  simpa only [NatTrans.naturality, comp_zero] using hzero
 
 /--
 Source: Stacks Project, Cohomology of Schemes, proof of Lemma 087X, claims (a)--(d)
@@ -93,6 +115,42 @@ theorem coherentFormalModule_kernel {X : Scheme.{u}} [IsNoetherian X]
           ι ≫ α = 0 ∧
           (∀ (T : CoherentFormalModule X I) (γ : T ⟶ F),
             γ ≫ α = 0 → ∃! δ : T ⟶ K, δ ≫ ι = γ) := by
-  sorry
+  obtain ⟨c, hstab, S, j, hS, K, ι, e, htrans, hcomp, hzero⟩ :=
+    coherentFormalModule_kernel_construction I F H α
+  have hjzero (m : ℕ) : j.app (op m) ≫ α.hom.app (op m) = 0 := by
+    obtain ⟨a, ha⟩ := hS m
+    let f := kernel.ι (α.hom.app (op (m + c))) ≫
+      F.obj.map (homOfLE (Nat.le_add_right m c)).op
+    have hf : f ≫ α.hom.app (op m) = 0 := by
+      dsimp only [f]
+      rw [Category.assoc, α.hom.naturality, ← Category.assoc, kernel.condition, zero_comp]
+    have himage : Abelian.image.ι f ≫ α.hom.app (op m) = 0 := by
+      apply (cancel_epi (Abelian.factorThruImage f)).mp
+      simpa only [← Category.assoc, Abelian.image.fac, comp_zero] using hf
+    rw [← ha, Category.assoc]
+    exact (congrArg (a.hom ≫ ·) himage).trans comp_zero
+  have hιzero : ι ≫ α = 0 := by
+    apply ObjectProperty.hom_ext
+    apply NatTrans.ext
+    funext a
+    obtain ⟨n⟩ := a
+    change ι.hom.app (op n) ≫ α.hom.app (op n) = 0
+    have : Epi (formalModuleQuotientπ I (n + 1) (S.obj (op (n + c)))) := by
+      dsimp only [formalModuleQuotientπ]
+      infer_instance
+    apply (cancel_epi (e n).hom).mp
+    apply (cancel_epi (formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))))).mp
+    simp only [comp_zero]
+    rw [← Category.assoc _ _ (α.hom.app (op n)),
+      ← Category.assoc _ _ (α.hom.app (op n)), hcomp n, Category.assoc,
+      α.hom.naturality, ← Category.assoc, hjzero, zero_comp]
+  have : Mono ι := formalMono_of_kernel_transition_zero ι c hzero
+  refine ⟨c, hstab, S, j, hS, K, ι, e, htrans, hcomp, hιzero, ?_⟩
+  intro T γ hγ
+  obtain ⟨δ, hδ⟩ := coherentFormalModule_kernel_factorization
+    I F H α c S j hS K ι e htrans hcomp T γ hγ
+  refine ⟨δ, hδ, ?_⟩
+  intro δ' hδ'
+  exact (cancel_mono ι).mp (hδ'.trans hδ.symm)
 
 end AlgebraicGeometry

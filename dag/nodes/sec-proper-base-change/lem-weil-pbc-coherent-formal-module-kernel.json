@@ -31,94 +31,32 @@
  ],
  "proof": [
   {
-   "text": "(Preliminaries.) Let $(\\mathcal F_n)$ be an object of $\\mathit{Coh}(X,\\mathcal I)$ [def-weil-pbc-coherent-formal-module]. Each transition map $\\mathcal F_{n+1}\\to\\mathcal F_n$ is surjective (it induces $\\mathcal F_{n+1}/\\mathcal I^n\\mathcal F_{n+1}\\cong\\mathcal F_n$), so for $l\\ge m$ the composite $\\mathcal F_l\\to\\mathcal F_m$ is an epimorphism, and it induces an isomorphism $\\mathcal F_l/\\mathcal I^m\\mathcal F_l\\cong\\mathcal F_m$ (induction on $l$: $\\mathcal F_l/\\mathcal I^m\\mathcal F_l\\cong(\\mathcal F_l/\\mathcal I^{l-1}\\mathcal F_l)/\\mathcal I^m(\\ldots)\\cong\\mathcal F_{l-1}/\\mathcal I^m\\mathcal F_{l-1}$ for $m\\le l-1$, as $\\mathcal I^{l-1}\\subseteq\\mathcal I^m$; on the $U_j$ below this is $p_m$ having kernel $I_j^mM\\supseteq I_j^lM$). A morphism $(\\alpha_n)$ of $\\mathit{Coh}(X,\\mathcal I)$ all of whose components are isomorphisms is an isomorphism (the inverses $\\alpha_n^{-1}$ commute with the transition maps). Since $X$ is Noetherian (locally Noetherian [pqf-def-locnoeth] with quasi-compact underlying space) choose a finite covering $X=U_1\\cup\\dots\\cup U_r$ by affine opens $U_j\\cong\\operatorname{Spec}A_j$ with $A_j$ Noetherian. Every quasi-coherent $\\mathcal G$ satisfies $\\mathcal G|_{U_j}\\cong\\widetilde{\\mathcal G(U_j)}$ naturally (counit isomorphism of [lem-weil-pbc-affine-tilde-gamma-adjunction] (3)); hence a morphism of quasi-coherent $\\mathcal O_X$-modules is an isomorphism (resp. zero) as soon as it is bijective (resp. zero) on $U_j$-sections for every $j$ (an isomorphism of sheaves is local on $X$), and two quasi-coherent submodules of a module with the same $U_j$-sections for all $j$, one contained in the other, are equal. In particular $\\mathcal I|_{U_j}=\\widetilde{I_j}$ with $I_j=\\mathcal I(U_j)$, and $\\mathcal I^n(U_j)=I_j^n$, $(\\mathcal I^n\\mathcal G)(U_j)=I_j^n\\mathcal G(U_j)$, $(\\mathcal G/\\mathcal I^n\\mathcal G)(U_j)=\\mathcal G(U_j)/I_j^n\\mathcal G(U_j)$ for quasi-coherent $\\mathcal G$ [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (1),(2). By (3) of that node and since coherence is local, $(\\mathcal F_n|_{U})$ is an object of $\\mathit{Coh}(U,\\mathcal I|_U)$ for every open $U$, and restriction is a functor $\\rho_U$. For $U=U_j$ apply [lem-weil-pbc-coherent-formal-modules-affine] (1): $M=\\varprojlim_n\\mathcal F_n(U_j)$ is a finitely generated $A_j^\\wedge$-module ($A_j^\\wedge$ the $I_j$-adic completion) and $p_n:M\\to\\mathcal F_n(U_j)$ is surjective with kernel $I_j^nM$; for a morphism $\\alpha:(\\mathcal F_n)\\to(\\mathcal G_n)$, with $N=\\varprojlim_n\\mathcal G_n(U_j)$, the map $f=\\varprojlim_n\\alpha_n(U_j):M\\to N$ is $A_j^\\wedge$-linear and $\\alpha_n(U_j)\\circ p_n=p_n\\circ f$, i.e. $\\alpha_n(U_j)$ is $f\\bmod I_j^n:M/I_j^nM\\to N/I_j^nN$. These identifications are used below without mention (\\\"on $U_j$\\\").",
+   "text": "Apply the stabilized-image construction to obtain the bound, coherent quotient system, transition and inclusion equations, and eventual vanishing of component kernels.",
    "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "pqf-def-locnoeth",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-coherent-formal-modules-affine"
+    "lem-weil-pbc-formal-kernel-construction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087X (lemma-inverse-systems-abelian, line 6313): 'To see (a), (b), and (c) we may work affine locally, say X = Spec(A) ... By Lemma 087W alpha corresponds to a map f : M -> N of finite A^-modules'; Lemma 087W (lemma-inverse-systems-affine, line 6272) and its proof"
-   }
+   "elementary": false
   },
   {
-   "text": "(Kernels, claim (a): stabilization by Artin-Rees.) Let $\\alpha:(\\mathcal F_n)\\to(\\mathcal G_n)$. For $l\\ge m$ let $\\mathcal K'_{l,m}\\subseteq\\mathcal F_m$ be the image of the composite $\\operatorname{Ker}\\alpha_l\\subseteq\\mathcal F_l\\to\\mathcal F_m$. As $\\operatorname{Ker}\\alpha_l$ is quasi-coherent [lem-weil-pbc-quasi-coherent-module-kernel], $\\mathcal K'_{l,m}$ is a quasi-coherent submodule of $\\mathcal F_m$ [lem-weil-pbc-quasi-coherent-module-cokernel-image] (1),(2), hence coherent [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] (2); and $\\mathcal K'_{l+1,m}\\subseteq\\mathcal K'_{l,m}$ since $\\mathcal F_{l+1}\\to\\mathcal F_l$ maps $\\operatorname{Ker}\\alpha_{l+1}$ into $\\operatorname{Ker}\\alpha_l$. Fix $j$ and let $M,N,f$ be as in Step 1 for $U_j$, $I=I_j$, $K=\\operatorname{Ker}f$. Kernels are sectionwise, so $(\\operatorname{Ker}\\alpha_l)(U_j)=p_l(f^{-1}(I^lN))$, and by [lem-weil-pbc-quasi-coherent-module-cokernel-image] (3) $\\mathcal K'_{l,m}(U_j)=p_m(f^{-1}(I^lN))=(f^{-1}(I^lN)+I^mM)/I^mM$. The ring $A_j^\\wedge$ is Noetherian [lem-weil-pbc-adic-completion-noetherian], so $K\\subseteq M$ and $f(M)\\subseteq N$ are finitely generated, and the Artin-Rees lemma [lem-weil-pbc-artin-rees] over $A_j^\\wedge$ for the ideal $IA_j^\\wedge$ (note $(IA_j^\\wedge)^nM=I^nM$), applied to $K\\subseteq M$ and to $f(M)\\subseteq N$, gives $c_j\\ge0$ with $K\\cap I^nM\\subseteq I^{n-c_j}K$ and $f(M)\\cap I^nN\\subseteq I^{n-c_j}f(M)=f(I^{n-c_j}M)$ for all $n\\ge c_j$. Consequently $f^{-1}(I^lN)\\subseteq K+I^{l-c_j}M$ for $l\\ge c_j$ (if $f(x)\\in I^lN$, then $f(x)=f(y)$ with $y\\in I^{l-c_j}M$, and $x-y\\in K$). Put $c=\\max_jc_j$; both inclusions hold with $c$ in place of $c_j$. For $l\\ge m+c$ we get $K\\subseteq f^{-1}(I^lN)\\subseteq K+I^mM$, hence $\\mathcal K'_{l,m}(U_j)=(K+I^mM)/I^mM$ for every $j$, so $\\mathcal K'_{l,m}=\\mathcal K'_{m+c,m}$ (Step 1). Write $\\mathcal K'_m=\\mathcal K'_{m+c,m}$; it is the constant value of the decreasing system $(\\mathcal K'_{l,m})_{l\\ge m}$, and $\\mathcal K'_m(U_j)=(K+I^mM)/I^mM\\cong K/(K\\cap I^mM)$.",
+   "text": "Use the proved factorization theorem for existence and its shared formalTransition_epi theorem for epimorphic source transitions. Eventual vanishing of component kernels makes the inclusion monic; cancel it for uniqueness. The image-kernel equation and the quotient compatibility equation prove that the composite with alpha is zero.",
    "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-adic-completion-noetherian",
-    "lem-weil-pbc-artin-rees",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-coherent-formal-modules-affine"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087X, claim (a) and the computation of K'_{l,m}; Stacks chooses c by Algebra, Lemma 00IN (lemma-Artin-Rees) and Lemma 00IO (lemma-map-AR, whose proof is 00IN applied to Im(f) in N, done here directly); Stacks writes 'a^{-1}(I^lN)' for f^{-1}(I^lN) (typo); A^ Noetherian by Algebra, Lemma 0316"
-   }
-  },
-  {
-   "text": "(Kernels, claims (b) and (c).) For $m'\\ge m$ the transition $\\mathcal F_{m'}\\to\\mathcal F_m$ maps $\\mathcal K'_{l,m'}$ into $\\mathcal K'_{l,m}$ (the composite $\\operatorname{Ker}\\alpha_l\\to\\mathcal F_{m'}\\to\\mathcal F_m$ is the map defining $\\mathcal K'_{l,m}$), hence induces $\\tau:\\mathcal K'_{m'}\\to\\mathcal K'_m$, which on $U_j$ is the map $(K+I^{m'}M)/I^{m'}M\\to(K+I^mM)/I^mM$ induced by the identity. By [lem-weil-pbc-ideal-times-quasi-coherent-affine-sections] (1),(2), $\\mathcal I^n\\mathcal K'_m$ is quasi-coherent and $(\\mathcal K'_m/\\mathcal I^n\\mathcal K'_m)(U_j)=K/(K\\cap I^mM+I^nK)$, which equals $K/I^nK$ when $m\\ge n+c$ because then $K\\cap I^mM\\subseteq I^{m-c}K\\subseteq I^nK$ (Step 2). Hence for $m'\\ge m\\ge n+c$ the map $\\mathcal K'_{m'}/\\mathcal I^n\\mathcal K'_{m'}\\to\\mathcal K'_m/\\mathcal I^n\\mathcal K'_m$ induced by $\\tau$ is on every $U_j$ the identity of $K/I^nK$, so an isomorphism (Step 1): the system $(\\mathcal K'_m/\\mathcal I^n\\mathcal K'_m)_{m\\ge n}$ is constant from $m=n+c$ on (claim (b)). Put $\\mathcal K_n=\\mathcal K'_{n+c}/\\mathcal I^n\\mathcal K'_{n+c}$, with transition maps $\\mathcal K_{n+1}\\to\\mathcal K_n$ induced by $\\tau:\\mathcal K'_{n+1+c}\\to\\mathcal K'_{n+c}$ (which maps $\\mathcal I^{n+1}\\mathcal K'_{n+1+c}$ into $\\mathcal I^n\\mathcal K'_{n+c}$). $\\mathcal K_n$ is coherent [lem-weil-pbc-coherent-kernel-cokernel-locnoeth] (2) (quotient of the coherent $\\mathcal K'_{n+c}$ by a quasi-coherent submodule); $\\mathcal I^n\\mathcal K_n=0$ and $\\mathcal K_{n+1}/\\mathcal I^n\\mathcal K_{n+1}\\to\\mathcal K_n$ is an isomorphism, since on $U_j$ these are $I^n(K/I^nK)=0$ and the canonical bijection $(K/I^{n+1}K)/I^n(K/I^{n+1}K)\\to K/I^nK$ (Step 1). So $(\\mathcal K_n)$ is an object of $\\mathit{Coh}(X,\\mathcal I)$ (claim (c)), with $\\mathcal K_n(U_j)=K/I^nK$ compatibly with the transition maps.",
-   "uses": [
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-formal-kernel-factorization",
     "def-weil-pbc-coherent-formal-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087X, claims (b), (c) and the computation 'K'_m/I^nK'_m corresponds to K/(K cap I^mM + I^nK) = K/I^nK for m >= n + c'"
-   }
-  },
-  {
-   "text": "(Kernels, claim (d): the factorization exists.) Let $\\iota_n:\\mathcal K_n\\to\\mathcal F_n$ be induced by the inclusion $\\mathcal K'_{n+c}\\subseteq\\mathcal F_{n+c}$ and $\\mathcal F_{n+c}/\\mathcal I^n\\mathcal F_{n+c}\\cong\\mathcal F_n$; on $U_j$ it is the map $K/I^nK\\to M/I^nM$ induced by $K\\subseteq M$, so $\\iota=(\\iota_n)$ commutes with the transition maps and $\\alpha\\circ\\iota=0$ ($f(K)=0$; Step 1). Let $\\beta:(\\mathcal H_n)\\to(\\mathcal F_n)$ with $\\alpha\\circ\\beta=0$. For $l\\ge m$, $\\beta_l(\\mathcal H_l)\\subseteq\\operatorname{Ker}\\alpha_l$ and $(\\mathcal F_l\\to\\mathcal F_m)\\circ\\beta_l=\\beta_m\\circ(\\mathcal H_l\\to\\mathcal H_m)$; since $\\mathcal H_l\\to\\mathcal H_m$ is an epimorphism (Step 1), the image of $\\beta_m$ is the image of $(\\mathcal F_l\\to\\mathcal F_m)\\circ\\beta_l$, contained in $\\mathcal K'_{l,m}$. Taking $l=m+c$, $\\beta_m$ factors as $\\mathcal H_m\\xrightarrow{\\beta'_m}\\mathcal K'_m\\subseteq\\mathcal F_m$. The map $\\beta'_{n+c}$ sends $\\mathcal I^n\\mathcal H_{n+c}$ into $\\mathcal I^n\\mathcal K'_{n+c}$ and so induces $\\gamma_n:\\mathcal H_n\\cong\\mathcal H_{n+c}/\\mathcal I^n\\mathcal H_{n+c}\\to\\mathcal K_n$. Both $\\iota_n\\circ\\gamma_n$ and $\\beta_n$ are the reduction modulo $\\mathcal I^n$ of $\\beta_{n+c}$ (as $\\beta$ commutes with the transition maps), so $\\iota_n\\circ\\gamma_n=\\beta_n$; and $\\gamma$ commutes with the transition maps, both composites $\\mathcal H_{n+1}\\to\\mathcal K_n$ being the reduction modulo $\\mathcal I^n$ of $\\tau\\circ\\beta'_{n+1+c}=\\beta'_{n+c}\\circ(\\mathcal H_{n+1+c}\\to\\mathcal H_{n+c})$ (equal after composing with the inclusion $\\mathcal K'_{n+c}\\subseteq\\mathcal F_{n+c}$).",
-   "uses": [
-    "def-weil-pbc-coherent-formal-module",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087X, proof of (d): 'Then H_l -> F_l maps into Ker(alpha_l) ... we obtain a system of maps H_m -> K'_{l,m} ... and hence a map H_n -> K_n as desired'"
-   }
-  },
-  {
-   "text": "(Kernels: uniqueness of the factorization.) Let $\\gamma:(\\mathcal H_n)\\to(\\mathcal K_n)$ with $\\iota\\circ\\gamma=0$; we show $\\gamma=0$, so the factorization of Step 4 is unique (apply this to the difference of two factorizations). The sheaf $\\mathcal P=\\operatorname{Ker}\\iota_{n+c}$ is quasi-coherent [lem-weil-pbc-quasi-coherent-module-kernel] with $\\mathcal P(U_j)=\\operatorname{Ker}(K/I^{n+c}K\\to M/I^{n+c}M)=(K\\cap I^{n+c}M)/I^{n+c}K\\subseteq I^nK/I^{n+c}K$ by the Artin-Rees inclusion of Step 2 [lem-weil-pbc-artin-rees]; the transition $\\mathcal K_{n+c}\\to\\mathcal K_n$, on $U_j$ the projection $K/I^{n+c}K\\to K/I^nK$, vanishes on these sections, so its restriction to $\\mathcal P$ is zero (Step 1). As $\\gamma_{n+c}(\\mathcal H_{n+c})\\subseteq\\mathcal P$, we get $\\gamma_n\\circ(\\mathcal H_{n+c}\\to\\mathcal H_n)=(\\mathcal K_{n+c}\\to\\mathcal K_n)\\circ\\gamma_{n+c}=0$, and since $\\mathcal H_{n+c}\\to\\mathcal H_n$ is an epimorphism, $\\gamma_n=0$. Hence $\\iota:(\\mathcal K_n)\\to(\\mathcal F_n)$ is a kernel of $\\alpha$ in $\\mathit{Coh}(X,\\mathcal I)$, and $\\mathit{Coh}(X,\\mathcal I)$ has kernels. (The termwise maps $\\iota_n$ need not be injective: $K\\cap I^nM\\ne I^nK$ in general.)",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-module-kernel",
-    "lem-weil-pbc-artin-rees",
-    "lem-weil-pbc-affine-tilde-gamma-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, proof of Lemma 087X, (d); Stacks proves only the existence of the factorization, the uniqueness is written by the agent from the same Artin-Rees choice of c; uniqueness supplied by the explicit delayed-level Artin–Rees argument written here"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-coherent-formal-module",
-  "lem-weil-pbc-adic-completion-noetherian",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-artin-rees",
-  "lem-weil-pbc-coherent-formal-modules-affine",
-  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-ideal-times-quasi-coherent-affine-sections",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-quasi-coherent-module-kernel",
-  "pqf-def-locnoeth"
+  "lem-weil-pbc-formal-kernel-construction",
+  "lem-weil-pbc-formal-kernel-factorization",
+  "def-weil-pbc-coherent-formal-module"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-13",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 087X proof (claims (a)-(d)); the omitted uniqueness argument is expanded using the same Artin–Rees bound"
+  "place": "Lemma 087X proof, claims (a)--(d), with categorical factorization and uniqueness written in Lean"
  },
  "mathlib_searches": [
   {
@@ -195,5 +133,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T223408-L-1637731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

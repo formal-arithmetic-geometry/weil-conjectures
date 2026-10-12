@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-formal-kernel-factorization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-coherent-formal-module-kernel",
+   "place": "Lemma 087X, claim (d), factorization-existence paragraph",
+   "via": [
+    "lem-weil-pbc-coherent-formal-module-kernel"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Factorization through the stabilized coherent formal kernel",
+ "statement": "theorem coherentFormalModule_kernel_factorization {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hS : ∀ m : ℕ, ∃ a : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), a.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + c))) ≅ K.obj.obj (op n)) (htrans : ∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + c))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) c)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom) (hcomp : ∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) (T : CoherentFormalModule X I) (γ : T ⟶ F) (hγ : γ ≫ α = 0) : ∃ δ : T ⟶ K, δ ≫ ι = γ",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, claim (d), factorization-existence paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Factor each annihilated component through the later levelwise kernel image. Inductively descend compatible maps through successive ideal-power quotient projections. Use idealModuleProduct_quotient_comp_zero_iff already proved privately in Sheaf.AlgebraicGeometry.CoherentFormalModule, accessed by a proof-only import all, to transfer annihilation across epimorphic transitions. Epimorphic transitions establish compatibility and the equation with the inclusion. No duplicate ideal-product or multiplication-naturality lemmas are stated.",
+   "uses": [
+    "lem-weil-pbc-formal-module-ideal-power-factor",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-module-ideal-power-factor",
+  "def-weil-pbc-coherent-formal-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "M2",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Lemma 087X, claim (d), factorization-existence paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "stabilized images of kernels in coherent formal modules",
+   "results": "service unavailable; no matching result",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "factorization through stabilized image quotient of a kernel inverse system",
+   "results": "inverse-system compatibility lemmas only; no matching theorem",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg coherentFormalModule_kernel in Mathlib and lean/WeilConjectures",
+   "results": "no existing declaration",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernel",
+  "group": "M2",
+  "date": "2026-10-13"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFormalModuleKernelFactorization",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFormalModuleKernelFactorization.lean",
+  "declaration": "AlgebraicGeometry.coherentFormalModule_kernel_factorization",
+  "statement": "theorem coherentFormalModule_kernel_factorization {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H) (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj) (hS : ∀ m : ℕ, ∃ a : S.obj (op m) ≅ Abelian.image (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op), a.hom ≫ Abelian.image.ι (kernel.ι (α.hom.app (op (m + c))) ≫ F.obj.map (homOfLE (Nat.le_add_right m c)).op) = j.app (op m)) (K : CoherentFormalModule X I) (ι : K ⟶ F) (e : ∀ n : ℕ, formalModuleQuotient I (n + 1) (S.obj (op (n + c))) ≅ K.obj.obj (op n)) (htrans : ∀ n : ℕ, formalModuleQuotientπ I (n + 2) (S.obj (op (n + 1 + c))) ≫ (e (n + 1)).hom ≫ K.obj.map (homOfLE (Nat.le_succ n)).op = S.map (homOfLE (Nat.add_le_add_right (Nat.le_succ n) c)).op ≫ formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom) (hcomp : ∀ n : ℕ, formalModuleQuotientπ I (n + 1) (S.obj (op (n + c))) ≫ (e n).hom ≫ ι.hom.app (op n) = j.app (op (n + c)) ≫ F.obj.map (homOfLE (Nat.le_add_right n c)).op) (T : CoherentFormalModule X I) (γ : T ⟶ F) (hγ : γ ≫ α = 0) : ∃ δ : T ⟶ K, δ ≫ ι = γ",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T223408-L-1637731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T223408-L-1637731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
