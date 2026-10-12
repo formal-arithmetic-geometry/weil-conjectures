@@ -97,6 +97,56 @@ lemma singleTriangle_distinguished (hS : S.ShortExact) :
   rw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
   exact ι_mapTriangle_obj_singleTriangle_mor₃ hS
 
+
+section Exactness
+
+variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- A functor `Φ` between Weil sheaves which lifts a left exact functor `Ψ` of pro-étale Weil
+sheaves along the inclusions is left exact: the inclusion of Weil sheaves preserves and reflects
+finite limits. -/
+lemma preservesFiniteLimits_of_comp_ι (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y)
+    (Ψ : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l Y) [PreservesFiniteLimits Ψ]
+    (e : Φ ⋙ (WeilSheaf.objectProperty k₀ l Y).ι ≅ (WeilSheaf.objectProperty k₀ l X).ι ⋙ Ψ) :
+    PreservesFiniteLimits Φ := by
+  have : PreservesFiniteLimits (Φ ⋙ (WeilSheaf.objectProperty k₀ l Y).ι) :=
+    preservesFiniteLimits_of_natIso e.symm
+  have : (WeilSheaf.objectProperty k₀ l Y).ι.Full := ObjectProperty.full_ι _
+  have : (WeilSheaf.objectProperty k₀ l Y).ι.Faithful := ObjectProperty.faithful_ι _
+  have : ReflectsFiniteLimits (C := WeilSheaf k₀ l Y) (WeilSheaf.objectProperty k₀ l Y).ι :=
+    inferInstance
+  exact preservesFiniteLimits_of_reflects_of_preserves Φ (WeilSheaf.objectProperty k₀ l Y).ι
+
+/-- A functor `Φ` between Weil sheaves which lifts a right exact functor `Ψ` of pro-étale Weil
+sheaves along the inclusions is right exact: the inclusion of Weil sheaves preserves and reflects
+finite colimits. -/
+lemma preservesFiniteColimits_of_comp_ι (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y)
+    (Ψ : ProEtaleWeilSheaf k₀ l X ⥤ ProEtaleWeilSheaf k₀ l Y) [PreservesFiniteColimits Ψ]
+    (e : Φ ⋙ (WeilSheaf.objectProperty k₀ l Y).ι ≅ (WeilSheaf.objectProperty k₀ l X).ι ⋙ Ψ) :
+    PreservesFiniteColimits Φ := by
+  have : PreservesFiniteColimits (Φ ⋙ (WeilSheaf.objectProperty k₀ l Y).ι) :=
+    preservesFiniteColimits_of_natIso e.symm
+  have : (WeilSheaf.objectProperty k₀ l Y).ι.Full := ObjectProperty.full_ι _
+  have : (WeilSheaf.objectProperty k₀ l Y).ι.Faithful := ObjectProperty.faithful_ι _
+  have : ReflectsFiniteColimits (C := WeilSheaf k₀ l Y) (WeilSheaf.objectProperty k₀ l Y).ι :=
+    inferInstance
+  exact preservesFiniteColimits_of_reflects_of_preserves Φ (WeilSheaf.objectProperty k₀ l Y).ι
+
+variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+
+/-- The pullback of Weil sheaves is left exact. -/
+instance : PreservesFiniteLimits (WeilSheaf.upperStar (k₀ := k₀) (l := l) φ) :=
+  preservesFiniteLimits_of_comp_ι _ (ProEtaleWeilSheaf.upperStar k₀ l φ)
+    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _)
+
+/-- The pullback of Weil sheaves is right exact. -/
+instance : PreservesFiniteColimits (WeilSheaf.upperStar (k₀ := k₀) (l := l) φ) :=
+  preservesFiniteColimits_of_comp_ι _ (ProEtaleWeilSheaf.upperStar k₀ l φ)
+    (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _)
+
+end Exactness
+
 end WeilSheaf
 
 end AlgebraicGeometry

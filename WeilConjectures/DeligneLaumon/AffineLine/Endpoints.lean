@@ -17,6 +17,7 @@ public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
+public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar

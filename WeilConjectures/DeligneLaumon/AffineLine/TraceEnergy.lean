@@ -659,7 +659,7 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
   set R : ℝ := (Nat.card k₀ : ℝ) ^ (-(w + 1))
   have h2 : (T.compactlySupportedCohomology 2).IsPureOfWeight ι (Nat.card k₀) (w + w + 2) :=
     FrobeniusModule.IsPureOfWeight.of_equiv
-      (compactlySupportedCohomologyEquivOfIso (lowerStarIdIso T).symm 2)
+      (compactlySupportedCohomologyEquivOfIso ((lowerStarIdIso k₀ l V).app T).symm 2)
       (isPureOfWeightOver_compactlySupportedCohomology_directImage_two (𝟙 V) T ι hTl hTp)
   have hD : ((T.compactlySupportedCohomology 2).localPolynomial.map ι) ≠ 0 := fun h0 ↦ by
     have := congrArg (Polynomial.coeff · 0) h0
