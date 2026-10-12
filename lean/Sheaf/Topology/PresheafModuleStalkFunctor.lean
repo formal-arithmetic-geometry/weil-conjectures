@@ -53,7 +53,20 @@ theorem stalkMap_linear {X : TopCat.{u}} {R : TopCat.Presheaf RingCat.{u} X} {x 
     {M N : PresheafOfModules.{u} R} (f : M ⟶ N) :
     ∀ (r : R.stalk x) (m : TopCat.Presheaf.stalk (C := Ab.{u}) (X := X) M.presheaf x),
       stalkAddMap f (r • m) = r • stalkAddMap f m := by
-  sorry
+  intro r m
+  obtain ⟨U, hxU, r, rfl⟩ := R.exists_germ_eq r
+  obtain ⟨V, hxV, m, rfl⟩ := TopCat.Presheaf.exists_germ_eq M.presheaf m
+  have hx : x ∈ U ⊓ V := ⟨hxU, hxV⟩
+  rw [← R.germ_res_apply (homOfLE inf_le_left : U ⊓ V ⟶ U) x hx r,
+    ← TopCat.Presheaf.germ_res_apply M.presheaf (homOfLE inf_le_right : U ⊓ V ⟶ V) x hx m,
+    ← germ_ringCat_smul]
+  dsimp only [stalkAddMap]
+  erw [TopCat.Presheaf.stalkFunctor_map_germ_apply,
+    TopCat.Presheaf.stalkFunctor_map_germ_apply]
+  change TopCat.Presheaf.germ N.presheaf (U ⊓ V) x hx
+      ((f.app (Opposite.op (U ⊓ V))) (_ • _)) = _
+  rw [map_smul, germ_ringCat_smul]
+  rfl
 
 /-- Linear stalk map induced by a presheaf-module morphism.
 Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
@@ -75,7 +88,10 @@ theorem stalkMap_id {X : TopCat.{u}}
     {R : TopCat.Presheaf RingCat.{u} X} {x : X}
     (M : PresheafOfModules.{u} R) :
     stalkMap (𝟙 M) = 𝟙 (stalkObj R x M) := by
-  sorry
+  ext m
+  change stalkAddMap (𝟙 M) m = m
+  simp [stalkAddMap]
+  rfl
 
 /-- Stalk maps preserve composition.
 The underlying additive maps are the images under toPresheaf and the abelian-group
@@ -87,7 +103,10 @@ theorem stalkMap_comp {X : TopCat.{u}}
     {M N P : PresheafOfModules.{u} R}
     (f : M ⟶ N) (g : N ⟶ P) :
     stalkMap (x := x) (f ≫ g) = stalkMap (x := x) f ≫ stalkMap (x := x) g := by
-  sorry
+  ext m
+  change stalkAddMap (f ≫ g) m = stalkAddMap g (stalkAddMap f m)
+  simp [stalkAddMap]
+  rfl
 
 /-- The stalk functor on presheaves of modules used in the statement.
 Source: Stacks Project, Sheaves, Section 007I and Lemma 007J.
