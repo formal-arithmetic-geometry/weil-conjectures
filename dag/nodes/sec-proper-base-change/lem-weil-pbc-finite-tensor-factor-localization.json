@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-finite-tensor-factor-localization",
+ "kind": "statement",
+ "title": "Localizing the scalar map to a finite tensor factor",
+ "statement": "Let A and D be commutative rings in universe u and B a commutative A-algebra in any universe. Assume B is finite as an A-module [def-weil-finitely-generated-module], and D is an A-algebra. Let J be an ideal of D, e any element of T=D tensor_A B, and assume that for every t in T there is d in D with t-d in (1-e)+JT. There exist a commutative ring C in universe u and a flat ring map psi:D -> C such that D/J -> C/JC is bijective, and C -> (C tensor_A B)/(1-m(e)) is surjective, where C has its composite A-algebra structure and m is the tensor map psi tensor identity. No idempotency or Jacobson hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-finitely-generated-module"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EM0, proof of lemma-helper-finite, Nakayama localization making the first factor scalar map surjective; https://stacks.math.columbia.edu/tag/0EM0"
+ },
+ "proof": [
+  {
+   "text": "Set T=D tensor_A B, Q=T/(1-e), and let N be the D-linear range of the structure map D -> Q. Mathlib finite base change and quotient instances make Q a finite D-module. The hypothesis and the quotient membership criterion give top <= N + J*top.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Submodule.exists_sub_one_mem_and_smul_le_of_fg_of_le_sup with the finitely generated submodule N′ and P both equal to top. Obtain g with g-1 in J and g*Q contained in N. Thus for each t in T there is d in D whose scalar image equals g times the class of t.",
+   "uses": [
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct C=D[1/g]. Its structure map is flat. Since g=1 modulo J, IsLocalization.Away.lift defines C -> D/J, factoring through C/JC. The resulting inverse to D/J -> C/JC is checked on representatives and by localization ringHom_ext.",
+   "uses": [
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor map m induces Q -> (C tensor_A B)/(1-m(e)). For a pure generator 1 tensor b, the Nakayama relation says its product with the scalar g is a scalar d. Multiply by the scalar inverse of g to express this generator as a scalar. Every c tensor b is c times such a generator, and tensor induction handles zero and sums. Thus the new structure map is surjective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+  "lem-weil-pbc-localization-flat"
+ ],
+ "proof_origin": "Stacks Project Tag 0EM0; tensor-induction implementation of its Nakayama localization step written and proved in Lean by C2.",
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite algebra scalar map surjective modulo ideal surjective after localization Nakayama",
+   "results": "UNAVAILABLE: service returned Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.exists_sub_one_mem_and_smul_le_of_fg_of_le_sup",
+   "results": "Found the Nakayama submodule theorem used in the proof; no complete tensor-factor localization theorem.",
+   "date": "2026-10-13",
+   "verdict": "component used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite algebra idempotent lift etale neighborhood split quotient surjective",
+   "results": "Found etale and idempotent theorems, no exact scalar-factor localization theorem.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_sub_one_mem_and_smul_le_of_fg_of_le_sup|smul_mem_pointwise_smul|Away.algebraMap_isUnit",
+   "results": "Found Nakayama, scalar submodule membership, and localization unit APIs; combined in the proved theorem. Also searched project RingTheory modules and blueprint nodes.",
+   "date": "2026-10-13",
+   "verdict": "components used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FiniteGabberFlatSplit",
+  "date": "2026-10-13",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-zariski-pair-finite-gabber-polynomial",
+   "place": "Tag 0EM0 proof: Nakayama and localization making the first structure map surjective",
+   "via": [
+    "lem-weil-pbc-gabber-flat-split-neighbourhood",
+    "lem-weil-pbc-gabber-upstairs-tensor-coefficients",
+    "lem-weil-pbc-zariski-pair-finite-gabber-polynomial-upstairs-relation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteTensorFactorLocalization",
+  "file": "lean/Sheaf/RingTheory/FiniteTensorFactorLocalization.lean",
+  "declaration": "Algebra.exists_flat_tensor_factor_localization",
+  "statement": "theorem exists_flat_tensor_factor_localization\n    {A : Type u} {B : Type v} {D : Type u}\n    [CommRing A] [CommRing B] [CommRing D] [Algebra A B] [Algebra A D]\n    [Module.Finite A B] (J : Ideal D) (e : TensorProduct A D B)\n    (h : ∀ t : TensorProduct A D B, ∃ d : D,\n      t - algebraMap D (TensorProduct A D B) d ∈\n        Ideal.span {1 - e} ⊔ J.map (algebraMap D (TensorProduct A D B))) :\n    ∃ (C : CommRingCat.{u}) (ψ : D →+* C),\n      letI : Algebra A C := (ψ.comp (algebraMap A D)).toAlgebra\n      let ψA : D →ₐ[A] C := { ψ with commutes' := fun _ => rfl }\n      let m := Algebra.TensorProduct.map ψA (AlgHom.id A B)\n      ψ.Flat ∧\n        Function.Bijective (Ideal.quotientMap (J.map ψ) ψ Ideal.le_comap_map) ∧\n        Function.Surjective\n          (algebraMap C (TensorProduct A C B ⧸ Ideal.span {1 - m e}))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T173813-L-3292009",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T173813-L-3292009",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
