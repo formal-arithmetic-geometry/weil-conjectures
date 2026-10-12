@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import WeilConjectures.RingTheory.ProEtale.StrictlyHenselianRetraction
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 
 /-!
@@ -43,7 +44,18 @@ theorem exists_section_of_weaklyEtale_of_isStrictlyHenselianLocalRing {R : Type 
     [IsStrictlyHenselianLocalRing R] {V : Scheme.{u}} (f : V ⟶ Spec (.of R)) [WeaklyEtale f]
     (hf : IsLocalRing.closedPoint R ∈ Set.range f) :
     ∃ s : Spec (.of R) ⟶ V, s ≫ f = 𝟙 _ := by
-  sorry
+  obtain ⟨v, hv⟩ := hf
+  obtain ⟨u, hu⟩ := V.affineCover.covers v
+  let p := V.affineCover.f (V.affineCover.idx v) ≫ f
+  have : Surjective p := by
+    refine ⟨fun x ↦ ?_⟩
+    obtain ⟨u', -, hu'⟩ := Flat.generalizingMap p (a := u) (b := x) (by
+      simp only [p, Scheme.Hom.comp_apply, hu, hv]
+      exact IsLocalRing.specializes_closedPoint x)
+    exact ⟨u', hu'⟩
+  have := IsStrictlyHenselianLocalRing.isWContractibleRing R
+  obtain ⟨s, hs⟩ := exists_comp_eq_id_of_isWContractibleRing (R := .of R) p
+  exact ⟨s ≫ V.affineCover.f (V.affineCover.idx v), by rwa [Category.assoc]⟩
 
 namespace ProEtale
 
@@ -55,7 +67,17 @@ theorem IsAdicLisseSheaf.exists_iso_biproduct_unit_of_isStrictlyHenselian {R : T
     [CommRing R] [IsStrictlyHenselianLocalRing R] {F : AdicSheaf l (Spec (.of R))}
     (hF : IsAdicLisseSheaf F) :
     ∃ n : ℕ, Nonempty (F ≅ ⨁ fun _ : Fin n ↦ AdicSheaf.unit l (Spec (.of R))) := by
-  sorry
+  obtain ⟨P, hP, h⟩ := hF
+  obtain ⟨𝒰, _, rfl⟩ :=
+    (Scheme.mem_propQCPrecoverage_iff_exists_quasiCompactCover (P := @WeaklyEtale)).1 hP
+  let i := 𝒰.idx (IsLocalRing.closedPoint R)
+  have : WeaklyEtale (𝒰.f i) := 𝒰.map_prop i
+  obtain ⟨s, hs⟩ := exists_section_of_weaklyEtale_of_isStrictlyHenselianLocalRing (𝒰.f i)
+    (𝒰.covers _)
+  obtain ⟨n, ⟨e⟩⟩ := h (𝒰.f i) ⟨i⟩
+  exact ⟨n, ⟨((adicUpperStarId l _).app F).symm ≪≫ (adicUpperStarCongr l hs.symm).app F ≪≫
+    (adicUpperStarComp l s (𝒰.f i)).app F ≪≫ (s)^*ᵃ[l].mapIso e ≪≫
+    (s)^*ᵃ[l].mapBiproduct _ ≪≫ biproduct.mapIso fun _ ↦ adicUpperStarUnitIso l s⟩⟩
 
 end ProEtale
 
