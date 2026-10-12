@@ -1,0 +1,119 @@
+{
+ "id": "lem-pc-derived-pullback-qcoh-component",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): quasi-coherence of the pullback factor in E tensor-derived Lf^*K; affine-local calculation before cover gluing",
+   "via": [
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine-local cohomology of derived pullback",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes [def-pc-scheme] and $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category]. Let $U\\subset X$ and $V\\subset Y$ be affine opens with $f(U)\\subset V$. For each $n\\in\\mathbb Z$, the restriction to $U$ of $H^n(Lf^*E)$ [def-pc-derived-pullback] is quasi-coherent.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW, perfect-lemma-quasi-coherence-pullback, proof of (1) using (2), and Tag 06Z0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "the affine opens U and V give a morphism U → V. Exact restriction\ncommutes with cohomology. On U, restriction of the pullback is the pullback of E|V,\nby the open-restriction comparison. Represent E|V by tilde of a module complex using\n06Z0. The affine pullback comparison expresses its pullback as tilde of the module\ncomplex obtained by derived base change. Exactness of tilde identifies its cohomology\nwith tilde of module cohomology, which is quasi-coherent. Transfer along the comparison\nisomorphisms and pass to the over category of U. This includes empty opens and arbitrary degrees;\nno boundedness or flatness of f is used.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08DW",
+    "place": "Tag 08DW, perfect-lemma-quasi-coherence-pullback, proof of (1) using (2), and Tag 06Z0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08DW",
+  "place": "Tag 08DW, perfect-lemma-quasi-coherence-pullback, proof of (1) using (2), and Tag 06Z0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent cohomology derived tensor pullback schemes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback and derived tensor preserve quasi coherent cohomology",
+   "results": "Eight underived sheaf pullback declarations; no derived preservation theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "IsQuasicoherent.of_coversTop, isQuasicoherent_over and related declarations. The locality lemma is used in the main proof.",
+   "date": "2026-10-12",
+   "verdict": "locality tool found; no affine derived calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Qq]uasi[Cc]oherent|[Qq]uasi[Cc]oherent.*derived|of_coversTop",
+   "results": "Underived locality applications in source library; no affine-local derived pullback/tensor computation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackPreservesQCoh",
+  "declaration": "AlgebraicGeometry.derivedPullback_cohomology_over_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackPreservesQCoh.lean",
+  "statement": "theorem derivedPullback_cohomology_over_affine {X Y : Scheme.{uX}} (f : X ⟶ Y) [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings Y.toRingedSpace))] (E : schemeDerivedCategory Y) (hE : schemeDerivedQCohProperty Y E) (n : ℤ) (U : X.Opens) (V : Y.Opens) (hU : IsAffineOpen U) (hV : IsAffineOpen V) (hUV : U ≤ f ⁻¹ᵁ V) : (((DerivedCategory.homologyFunctor (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj ((derivedPullback f).obj E)).over U).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

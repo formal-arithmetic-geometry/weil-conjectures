@@ -25,38 +25,36 @@
  ],
  "proof": [
   {
-   "text": "Let $E$ be an object of $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$. Quasi-coherence of the cohomology sheaves of $Lf^*E$ is local on $X$, so it suffices to treat affine opens $U=\\operatorname{Spec}(B)\\subseteq X$ with $f(U)\\subseteq V=\\operatorname{Spec}(A)\\subseteq Y$ affine open; these cover $X$. By clause (1) of [lem-pc-affine-derived-pullback-tensor-tilde], $(Lf^*E)|_U\\cong L(f|_U)^*(E|_V)$. As $E|_V$ lies in $D_{\\mathrm{QCoh}}(\\mathcal O_V)$, the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence] gives $E|_V\\cong\\widetilde{M^\\bullet}$ for a complex $M^\\bullet$ of $A$-modules. By clause (2) of [lem-pc-affine-derived-pullback-tensor-tilde], $L(f|_U)^*\\widetilde{M^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}B}$, which lies in $D_{\\mathrm{QCoh}}(\\mathcal O_U)$ because the functor of [lem-pc-affine-qcoh-derived-equivalence] (for $B$) lands there. Hence $Lf^*E$ has quasi-coherent cohomology sheaves.",
+   "text": "For each x in X choose an affine neighborhood V of f(x), and then an affine neighborhood U of x contained in f inverse image V. Apply [lem-pc-derived-pullback-qcoh-component] in each degree on U. These opens cover X, as checked pointwise. Apply Mathlib SheafOfModules.IsQuasicoherent.of_coversTop to glue every cohomology sheaf, giving the first conjunct.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-pc-derived-pullback-qcoh-component"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.3.8 (Tag 08DW), part (1)"
+    "document": "https://stacks.math.columbia.edu/tag/08DW",
+    "place": "proof of (1), affine localization"
    }
   },
   {
-   "text": "Let $K,L$ be objects of $D_{\\mathrm{QCoh}}(\\mathcal O_X)$. Quasi-coherence of the cohomology sheaves is local on $X$, so it suffices to treat an affine open $U=\\operatorname{Spec}(A)\\subseteq X$. By clause (1) of [lem-pc-affine-derived-pullback-tensor-tilde], $(K\\otimes^{\\mathbf L}_{\\mathcal O_X}L)|_U\\cong K|_U\\otimes^{\\mathbf L}_{\\mathcal O_U}L|_U$. By [lem-pc-affine-qcoh-derived-equivalence], $K|_U\\cong\\widetilde{M^\\bullet}$ and $L|_U\\cong\\widetilde{N^\\bullet}$ for complexes of $A$-modules $M^\\bullet,N^\\bullet$. By clause (3) of [lem-pc-affine-derived-pullback-tensor-tilde], $\\widetilde{M^\\bullet}\\otimes^{\\mathbf L}_{\\mathcal O_U}\\widetilde{N^\\bullet}\\cong\\widetilde{M^\\bullet\\otimes_A^{\\mathbf L}N^\\bullet}$, which lies in $D_{\\mathrm{QCoh}}(\\mathcal O_U)$ by [lem-pc-affine-qcoh-derived-equivalence]. Since such $U$ cover $X$, $K\\otimes^{\\mathbf L}_{\\mathcal O_X}L$ is in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$.",
+   "text": "For each degree apply [lem-pc-derived-tensor-qcoh-component] on all affine opens of X. Mathlib iSup_affineOpens_eq_top proves that these cover X; IsQuasicoherent.of_coversTop glues the restricted cohomology sheaves. This gives the second conjunct.",
    "uses": [
-    "lem-pc-affine-derived-pullback-tensor-tilde",
-    "lem-pc-affine-qcoh-derived-equivalence"
+    "lem-pc-derived-tensor-qcoh-component"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Lemma 36.3.9 (Tag 08DX), part (1)"
+    "document": "https://stacks.math.columbia.edu/tag/08DX",
+    "place": "proof of (1), affine localization"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-affine-derived-pullback-tensor-tilde",
-  "lem-pc-affine-qcoh-derived-equivalence"
+  "lem-pc-derived-pullback-qcoh-component",
+  "lem-pc-derived-tensor-qcoh-component"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Lemmas 36.3.8 and 36.3.9; source packet unavailable locally"
+  "by": "agent R1",
+  "document": "Stacks Project, Tags 08DW and 08DX",
+  "place": "Affine chart calculations split off; affine cover and cohomology gluing proved in Lean."
  },
  "mathlib_searches": [
   {
@@ -162,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

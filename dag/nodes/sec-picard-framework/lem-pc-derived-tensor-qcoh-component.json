@@ -1,0 +1,120 @@
+{
+ "id": "lem-pc-derived-tensor-qcoh-component",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-projection-formula",
+   "place": "proof step (2): quasi-coherence of the tensor factor in E tensor-derived Lf^*K; affine-local calculation before cover gluing",
+   "via": [
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine-local cohomology of derived tensor",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $P,N$ complexes of $\\mathcal O_X$-modules, with $P$ K-flat [def-pc-kflat-complex] and $Q(P),Q(N)$ having quasi-coherent cohomology [def-pc-derived-category]. For an affine open $U\\subset X$ and $n\\in\\mathbb Z$, the restriction to $U$ of $H^n(Q(\\operatorname{Tot}(P\\otimes N)))$ [def-pc-tensor-complex-sheaves] is quasi-coherent.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX, perfect-lemma-quasi-coherence-tensor-product, proof of (1) using (2), and Tag 06Z0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "exact restriction commutes with cohomology and with the total tensor of complexes,\nand preserves K-flatness. On the affine U, represent the restrictions of Q(P) and Q(N)\nby tilde of module complexes using 06Z0. Resolve the first module complex by a K-flat\ncomplex. The affine tensor comparison identifies the restricted tensor representative\nwith tilde of the total tensor of this resolution and the second module complex.\nTilde is exact, so every cohomology sheaf is tilde of a module and is quasi-coherent.\nTransfer through the derived comparison and the equivalence with the over category.\nThis works in all degrees, including unbounded complexes and the empty open.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://stacks.math.columbia.edu/tag/08DX",
+    "place": "Tag 08DX, perfect-lemma-quasi-coherence-tensor-product, proof of (1) using (2), and Tag 06Z0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/08DX",
+  "place": "Tag 08DX, perfect-lemma-quasi-coherence-tensor-product, proof of (1) using (2), and Tag 06Z0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent cohomology derived tensor pullback schemes",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pullback and derived tensor preserve quasi coherent cohomology",
+   "results": "Eight underived sheaf pullback declarations; no derived preservation theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent",
+   "results": "IsQuasicoherent.of_coversTop, isQuasicoherent_over and related declarations. The locality lemma is used in the main proof.",
+   "date": "2026-10-12",
+   "verdict": "locality tool found; no affine derived calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Qq]uasi[Cc]oherent|[Qq]uasi[Cc]oherent.*derived|of_coversTop",
+   "results": "Underived locality applications in source library; no affine-local derived pullback/tensor computation.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedTensorPreservesQCoh",
+  "declaration": "AlgebraicGeometry.derivedTensor_cohomology_over_affine",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedTensorPreservesQCoh.lean",
+  "statement": "theorem derivedTensor_cohomology_over_affine {X : Scheme.{uX}} [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))] (P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ) (hP : CochainComplex.IsKFlat (R := X.sheaf) P) (hPQ : schemeDerivedQCohProperty X (DerivedCategory.Q.obj P)) (hNQ : schemeDerivedQCohProperty X (DerivedCategory.Q.obj N)) (n : ℤ) (U : X.Opens) (hU : IsAffineOpen U) : (((DerivedCategory.homologyFunctor (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) n).obj (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P N (curriedTensor _)))).over U).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644151",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T053950-L-2644151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
