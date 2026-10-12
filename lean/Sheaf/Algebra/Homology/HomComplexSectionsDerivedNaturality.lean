@@ -1,9 +1,9 @@
 module
 
 public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
-import Sheaf.Algebra.Homology.LocalizedHomComplexHomotopy
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.Algebra.Homology.HomComplexSectionsHomotopyNaturality
 
 /-! The shifted local derived comparison and its naturality. -/
 
@@ -13,6 +13,8 @@ universe u v w
 open CategoryTheory Opposite
 namespace CategoryTheory
 
+set_option maxHeartbeats 800000 in
+-- Elaborating both shifted sheaf Hom comparisons and localization equivalences needs extra fuel.
 /-- The shifted comparison is natural for arbitrary maps of the two arguments.
 The maps `s` and `t` need not be quasi-isomorphisms.
 Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1), and Tag 0A94.
@@ -58,6 +60,39 @@ theorem homComplex_sections_derived_naturality
           (Q.obj (res.obj L') ⟶ Q.obj ((res.obj I)⟦n⟧)),
         ∀ x, b (HomologicalComplex.homologyMap f n x) =
           Q.map (res.map t) ≫ a x ≫ Q.map ((shiftFunctor _ n).map (res.map s)) := by
-  sorry
+  classical
+  let R₀ := (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R
+  let hzero := module_overFunctor_preservesZero R₀ U
+  let _ := hzero
+  let res := (SheafOfModules.overFunctor.{max u v} R₀ U).mapHomologicalComplex
+    (ComplexShape.up ℤ)
+  let q := HomotopyCategory.quotient (SheafOfModules.{max u v} (R₀.over U))
+    (ComplexShape.up ℤ)
+  let F := DerivedCategory.Qh.{w} (C := SheafOfModules.{max u v} (R₀.over U))
+  let Q := DerivedCategory.Q.{w} (C := SheafOfModules.{max u v} (R₀.over U))
+  let c := DerivedCategory.quotientCompQhIso.{w} (SheafOfModules.{max u v} (R₀.over U))
+  have : CochainComplex.IsKInjective (res.obj I') :=
+    isKInjective_restrict_localized R₀ U hzero I'
+  have : CochainComplex.IsKInjective (res.obj I) :=
+    isKInjective_restrict_localized R₀ U hzero I
+  let e (A B : CochainComplex (SheafOfModules.{max u v} (R₀.over U)) ℤ)
+      [B.IsKInjective] : (q.obj A ⟶ q.obj B) ≃ (Q.obj A ⟶ Q.obj B) :=
+    (Equiv.ofBijective (F.map : (q.obj A ⟶ q.obj B) → _)
+      (CochainComplex.IsKInjective.Qh_map_bijective (q.obj A) B)).trans
+      (Iso.homCongr (c.app A) (c.app B))
+  obtain ⟨a, b, hab⟩ := homComplex_sections_homotopy_naturality R U s t n
+  refine ⟨a.trans (e (res.obj L) ((res.obj I')⟦n⟧)),
+    b.trans (e (res.obj L') ((res.obj I)⟦n⟧)), ?_⟩
+  intro x
+  change e _ _ (b _) = Q.map (res.map t) ≫ e _ _ (a x) ≫
+    Q.map ((shiftFunctor _ n).map (res.map s))
+  rw [hab]
+  change c.inv.app _ ≫ F.map (q.map (res.map t) ≫ a x ≫
+      q.map ((shiftFunctor _ n).map (res.map s))) ≫ c.hom.app _ =
+    Q.map (res.map t) ≫ (c.inv.app _ ≫ F.map (a x) ≫ c.hom.app _) ≫
+      Q.map ((shiftFunctor _ n).map (res.map s))
+  simp only [Functor.map_comp, Category.assoc]
+  rw [DerivedCategory.quotientCompQhIso_hom_naturality]
+  rw [← DerivedCategory.quotientCompQhIso_inv_naturality_assoc]
 
 end CategoryTheory
