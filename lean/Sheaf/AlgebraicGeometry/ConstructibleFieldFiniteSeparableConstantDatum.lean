@@ -1,5 +1,8 @@
 module
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.ConstructibleSheaf.Refinement
+
 @[expose] public section
 universe u
 open CategoryTheory AlgebraicGeometry
@@ -21,5 +24,26 @@ theorem constructible_field_finite_separable_constant_datum
             ((Spec (CommRingCat.of k)).smallEtaleTopology.over
               (d.cover.etalePrecoverageToEtale i))
             (ModuleCat.{u + 1} Λ)).obj M) := by
-  sorry
+  classical
+  obtain ⟨S, _, hS⟩ := hG
+  let x : Spec (CommRingCat.of k) := IsLocalRing.closedPoint k
+  obtain ⟨j, hj⟩ := Set.mem_iUnion.mp
+    (S.iUnion_stratum_eq_univ ▸ Set.mem_univ x)
+  have hrange : Set.range (S.immersion j) = Set.univ := by
+    apply Set.eq_univ_of_forall
+    intro y
+    rw [S.range_immersion j]
+    exact Subsingleton.elim x y ▸ hj
+  have : IsImmersion (S.immersion j) := S.isImmersion j
+  have : IsFiniteLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (S.immersion j)).obj G) :=
+    (finite_locally_constant_module_values_iff _).1.mp (hS j)
+  have : IsFiniteLocallyConstantSheaf
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝟙 (Spec (CommRingCat.of k)))).obj G) :=
+    IsFiniteLocallyConstantSheaf.upperStar_of_range_subset
+      (𝟙 (Spec (CommRingCat.of k))) (S.immersion j) (by rw [hrange]; exact Set.subset_univ _) G
+  have hfinite : IsFiniteLocallyConstantSheaf G :=
+    IsFiniteLocallyConstantSheaf.of_iso
+      ((Etale.upperStarId (ModuleCat.{u + 1} Λ) (Spec (CommRingCat.of k))).app G)
+  exact (finite_locally_constant_module_values_iff G).1.mpr hfinite
 end AlgebraicGeometry

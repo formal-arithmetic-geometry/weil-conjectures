@@ -19,20 +19,42 @@
  },
  "proof": [
   {
-   "text": "Unpack the constructibility witness: on the one-point spectrum of a field, retain the nonempty stratum and its locally constant datum, whose cover members carry finite constant values.",
+   "text": "Unpack the constructibility witness S. Its strata cover Spec(k), so choose a stratum j containing the closed point of k. Since Spec(k) is subsingleton, every point belongs to that stratum. The recorded range equality therefore gives range(S.immersion j) = univ.",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "lean/Sheaf/AlgebraicGeometry/ConstructibleFieldFiniteSeparableConstantDatum.lean",
-    "place": "the theorem proof obligation"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply finite_locally_constant_module_values_iff to the finite constant-value datum supplied by constructibility on stratum j. This makes the pullback along S.immersion j finite locally constant.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply IsFiniteLocallyConstantSheaf.upperStar_of_range_subset with a = identity of Spec(k) and b = S.immersion j. The latter is an immersion and its range is all of Spec(k). Thus the identity pullback of G is finite locally constant.",
+   "uses": [
+    "lemma-constructible-immersion-independence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport finite local constancy through the component at G of Etale.upperStarId. Apply the reverse direction of finite_locally_constant_module_values_iff to G to recover the required datum and its finite constant module values.",
+   "uses": [
+    "lemma-constructible-iso-invariance",
+    "lem-weil-pbc-finite-locally-constant-module-values"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lemma-constructible-immersion-independence",
+  "lemma-constructible-iso-invariance"
+ ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "proof of Lemma 09Z6"
+  "place": "proof of Lemma 09Z6; S1 Lean proof uses existing immersion-independence and finite constant-value equivalence"
  },
  "mathlib_searches": [
   {
@@ -92,10 +114,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261012T053918-L-2628925",
-  "kind": "interface",
+  "landing": "20261012T063519-L-3159241",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
