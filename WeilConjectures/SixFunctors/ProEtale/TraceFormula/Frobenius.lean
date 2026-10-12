@@ -386,6 +386,44 @@ lemma stalkFrobenius_eq_pow {x : s ⟶ X} (hx : x ≫ W.frobenius = x) (m : ℕ)
     exact leftDerivedUpperStarComp_stalk_aux (W.frobeniusIterate_succ m) W.frobeniusIterate_one
       _ _ _ _ _
 
+/-- A point fixed by `Φ_d` is fixed by every `Φ_{d n}`. -/
+lemma comp_frobeniusIterate_mul {x : s ⟶ X} {d : ℕ} (hx : x ≫ W.frobeniusIterate d = x)
+    (n : ℕ) : x ≫ W.frobeniusIterate (d * n) = x := by
+  induction n with
+  | zero => simp
+  | succ n ih => rw [Nat.mul_succ, frobeniusIterate_add, ← Category.assoc, hx, ih]
+
+/-- Part of blueprint `lem-trf-frobenius-degree-formula`: at a point `x` fixed by `Φ_d` (a
+point over a closed point of degree `d`), the stalk Frobenius of `φ_{d n}` is the `n`-th power of
+the one-circuit stalk Frobenius `F_{x,d}`: `F_{x, d n} = F_{x,d}^n`. -/
+lemma stalkFrobenius_mul_eq_pow {x : s ⟶ X} {d : ℕ} (hx : x ≫ W.frobeniusIterate d = x)
+    (n : ℕ) :
+    W.stalkFrobenius (d * n) x (W.comp_frobeniusIterate_mul hx n) =
+      let F : End (((upperStar A x).leftDerivedFunctor).obj W.obj) := W.stalkFrobenius d x hx
+      F ^ n := by
+  induction n with
+  | zero =>
+    have h := leftDerivedUpperStarComp_id_right_app (A := A) x W.obj
+    change (leftDerivedUpperStarCongr A (Category.comp_id x)).inv.app W.obj ≫
+        (leftDerivedUpperStarComp A x (𝟙 X)).hom.app W.obj ≫
+        ((upperStar A x).leftDerivedFunctor).map ((leftDerivedUpperStarId A X).hom.app W.obj) =
+      𝟙 _
+    rw [h, leftDerivedUpperStarCongr_inv_app, leftDerivedUpperStarCongr_hom_app_trans,
+      leftDerivedUpperStarCongr_hom_app_self]
+  | succ n ih =>
+    simp only at ih ⊢
+    rw [pow_succ', End.mul_def, ← ih]
+    simp only [stalkFrobenius]
+    change _ ≫ _ ≫ ((upperStar A x).leftDerivedFunctor).map (W.coeffIterate (d * n + d)) = _
+    rw [coeffIterate_add W (d * n) d]
+    have := leftDerivedUpperStarComp_stalk_aux (A := A) (x := x)
+      (W.frobeniusIterate_add (d * n) d) (rfl : W.frobeniusIterate d = _)
+      (W.comp_frobeniusIterate_mul hx (n + 1)) (W.comp_frobeniusIterate_mul hx n) hx
+      (W.coeffIterate (d * n)) (W.coeffIterate d)
+    simp only [leftDerivedUpperStarCongr_rfl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
+      at this
+    exact this
+
 /-- The Frobenius coefficient morphism of the pullback `Lf^* K` along a morphism
 `f : Y ⟶ X` that intertwines an endomorphism `g : Y ⟶ Y` with `Φ_m`,
 
