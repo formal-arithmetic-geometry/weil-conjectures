@@ -6,10 +6,8 @@ Authors: SHEAF group N1
 module
 
 public import Sheaf.AlgebraicGeometry.ConstantModulePushforwardFunctoriality
-import Sheaf.AlgebraicGeometry.HigherDirectImageLimitSystem
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.ConstantModuleLimitFiberDescent
+import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Surjectivity of the constant-module continuity comparison
 
@@ -98,6 +96,30 @@ theorem epi_constantModulePushforwardComparison
       ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))
     (hι : ∀ i : Iᵒᵖ, c.ι.app i ≫ e.hom =
       (eK i).hom ≫ constantModulePushforwardMap Λ M _ _ (π.app i.unop) (hπ i.unop)) :
-    Epi (colimit.desc K c) := by sorry
+    Epi (colimit.desc K c) := by
+  classical
+  have _ := @hK
+  apply (Scheme.jointlyReflectIsomorphisms_ulift_pointSmallEtale
+    X (ModuleCat.{u + 1} Λ)).epi_of_epi_map
+  rintro ⟨-, ⟨s⟩⟩
+  let T := (X.uliftPointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)
+  apply (ModuleCat.epi_iff_surjective _).2
+  intro x
+  obtain ⟨i, y, hy⟩ := exists_constantModule_limit_fiber_rep
+    Λ M D p hp ν π hπ hc s ((T.map e.hom) x)
+  refine ⟨(T.map (colimit.ι K (op i))) ((T.map (eK (op i)).inv) y), ?_⟩
+  apply (ModuleCat.mono_iff_injective (T.map e.hom)).1 inferInstance
+  have hcomp : colimit.ι K (op i) ≫ colimit.desc K c ≫ e.hom =
+      (eK (op i)).hom ≫ constantModulePushforwardMap Λ M _ _
+        (π.app i) (hπ i) := by
+    rw [colimit.ι_desc_assoc]
+    exact hι (op i)
+  have heq := congrArg (fun f => (T.map f) ((T.map (eK (op i)).inv) y)) hcomp
+  simp only [Functor.map_comp, ModuleCat.comp_apply] at heq
+  have hinv : (T.map (eK (op i)).hom) ((T.map (eK (op i)).inv) y) = y := by
+    rw [← ModuleCat.comp_apply, ← Functor.map_comp, Iso.inv_hom_id,
+      T.map_id, ModuleCat.id_apply]
+  rw [hinv] at heq
+  simpa only [Functor.map_comp, ModuleCat.comp_apply] using heq.trans hy
 
 end AlgebraicGeometry.Etale
