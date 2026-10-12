@@ -7,6 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.CategoryTheory.SiteCechComplex
 public import Mathlib.Algebra.Homology.Homotopy
+import Sheaf.AlgebraicGeometry.AlternatingCechSection
+import Sheaf.AlgebraicGeometry.AlternatingCechKernelNullHomotopic
 
 /-!
 # Homotopy inverse for ordered Čech restriction
@@ -70,6 +72,18 @@ theorem alternatingCechRestrictionHomotopy (X : Scheme.{u}) {I : Type v} [Linear
     ∃ i : A ⟶ S.complex F,
       Nonempty (Homotopy (r ≫ i) (𝟙 (S.complex F))) ∧
       Nonempty (Homotopy (i ≫ r) (𝟙 A)) := by
-  sorry
+  obtain ⟨i, hi⟩ := alternatingCechRestrictionHomotopy_map X U F S A e r hr
+  have hz : ∀ (p : ℕ) (s : S.cochains F p)
+      (t : {t : Fin (p + 1) → I // StrictMono t}),
+      (((r ≫ i - 𝟙 (S.complex F)).f p) s) t.1 = 0 := by
+    intro p s t
+    have heq := congrArg (fun g : A ⟶ A ↦ (e p).hom (g.f p ((r.f p) s))) hi
+    have ht := congrFun heq t
+    simp only [HomologicalComplex.comp_f, HomologicalComplex.id_f,
+      AddCommGrpCat.comp_apply, AddCommGrpCat.id_apply, hr] at ht
+    change ((r ≫ i).f p s) t.1 - s t.1 = 0
+    exact sub_eq_zero.mpr ht
+  obtain ⟨h⟩ := alternatingCechKernelNullHomotopic X U F S (r ≫ i - 𝟙 _) hz
+  exact ⟨i, ⟨⟨Homotopy.equivSubZero.symm h⟩, ⟨Homotopy.ofEq hi⟩⟩⟩
 
 end AlgebraicGeometry.Scheme

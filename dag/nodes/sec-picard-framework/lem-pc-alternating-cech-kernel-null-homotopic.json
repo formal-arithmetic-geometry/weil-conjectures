@@ -1,0 +1,128 @@
+{
+ "id": "lem-pc-alternating-cech-kernel-null-homotopic",
+ "kind": "statement",
+ "title": "Null homotopy for ordered restriction kernel",
+ "statement": "Let X be a scheme, I a linearly ordered type, U : I -> Opens(X) any family, F a presheaf of abelian groups, and S chosen finite products over the terminal open with their universal properties [def-weil-pbc-site-cech-complex]. Let f be an endomorphism of S.complex(F). Suppose for every degree p, cochain s and strictly increasing tuple t, the t-coordinate of f_p(s) is zero. Then f is homotopic to zero.",
+ "source": {
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equations 20.23.6.1 and 20.23.6.2; precompose the composite contraction with f"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-zariski-site",
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof": [
+  {
+   "text": "Let kappa be signed stable sorting of tuples. The first operator H of equation\n20.23.6.1 satisfies dH+Hd = id-kappa: for each tuple t, sum over a the section on\n[t(sigma(0)),...,t(sigma(a)),t(sigma_a(a)),...,t(sigma_a(p))], with coefficient\n(-1)^a sign(sigma_a), where sigma sorts t stably and sigma_a keeps its first a positions\nand orders the remaining positions increasingly. Transport between equal intersections\nusing the unique maps of opens. On expanding the two differentials, terms deleting a\nnonjunction position cancel with the corresponding face term; the junction terms\ntelescope, with endpoints id and minus kappa. This identity also shows kappa is a\ncochain map. Its image is identified by restriction with nondecreasing-tuple cochains.\nOn that image use K of equation 20.23.6.2: on a strictly increasing tuple put zero;\notherwise insert one copy at the first adjacent equality in position a, with sign\n(-1)^a. In dK+Kd the faces away from this first equality cancel in pairs, while the\nfaces in the repeated block give the original value. Consequently dK+Kd is id minus\nthe projection that kills repeated tuples. Pull K back by the signed stable-sorting\nidentification and precompose with kappa. Together with H this gives an operator L\non the full complex satisfying dL+Ld = id-P, where P is signed extension of\nincreasing restriction. Since f vanishes on increasing coordinates, P after f is zero.\nPrecomposing L with f yields d(Lf)+(Lf)d=f, the required null homotopy. Degree-zero\nincoming components are zero; when I is empty all products are trivial. No covering\nhypothesis or nonempty index type is used.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Stacks Project, Cohomology of Sheaves",
+    "place": "Tag 01FM, equations 20.23.6.1 and 20.23.6.2; precompose the composite contraction with f"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-cech-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "Stacks Project, Cohomology of Sheaves",
+  "place": "Tag 01FM, equations 20.23.6.1 and 20.23.6.2; precompose the composite contraction with f"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from the full Cech cochain complex to strictly increasing tuples is a homotopy equivalence",
+   "results": "Candidates: CochainComplex.cm5b.homotopyEquiv, ChainComplex.alternatingConstHomotopyEquiv, HomologicalComplex.homotopyCofiber.descEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_hom, CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_inv, AlgebraicTopology.DoldKan.homotopyEquivNormalizedMooreComplexAlternatingFaceMapComplex_homotopyHomInvId. General homotopy equivalences or Dold-Kan normalization do not supply increasing-tuple restriction and signed extension.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*[Cc]ech|[Cc]ech.*alternating",
+   "results": "No matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction map from all Cech tuples to strictly increasing tuples admits a homotopy inverse",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Homotopy, _ - _",
+   "results": "Homotopy.equivSubZero, sub_eq_nullHomotopicMap. Generic tools for the final composition, no ordered Cech result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AlternatingCechRestrictionHomotopy",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-alternating-cech-restriction-homotopy",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-pn",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AlternatingCechKernelNullHomotopic",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlternatingCechKernelNullHomotopic.lean",
+  "declaration": "AlgebraicGeometry.Scheme.alternatingCechKernelNullHomotopic",
+  "statement": "theorem alternatingCechKernelNullHomotopic (X : Scheme.{u}) {I : Type v} [LinearOrder I]\n    (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})\n    (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))\n    (f : S.complex F ⟶ S.complex F)\n    (hf : ∀ (p : ℕ) (s : S.cochains F p)\n      (t : {t : Fin (p + 1) → I // StrictMono t}), (f.f p s) t.1 = 0) :\n    Nonempty (Homotopy f 0)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T110325-L-624560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T110325-L-624560",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

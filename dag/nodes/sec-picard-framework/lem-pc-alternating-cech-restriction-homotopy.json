@@ -25,70 +25,30 @@
  ],
  "proof": [
   {
-   "text": "The universal properties of the chosen products in the poset of opens identify each W(p,t) with the intersection of the opens indexed by t. Products for permutations or duplicated entries have unique isomorphisms, and all face restriction maps commute with those isomorphisms. Hence sections may be transported between these intersections without any choices of additional maps.",
+   "text": "Apply the signed-extension section theorem to obtain i with i followed by r equal to identity.",
    "uses": [
-    "def-weil-pbc-site-cech-complex",
-    "def-sc-zariski-site"
+    "lem-pc-alternating-cech-section"
    ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
-   }
+   "elementary": false
   },
   {
-   "text": "In every degree restriction is surjective: extend an arbitrary function on increasing tuples by zero on all other tuples. Since e is an isomorphism and r is restriction in its coordinates, r is surjective in every degree. Apply the chain-map identity to such a lift of a section of A; the differential of A in e-coordinates is necessarily the signed face sum on increasing tuples.",
+   "text": "Apply e to the component equation of i followed by r = identity. Using hr twice shows the increasing coordinates of r followed by i minus identity vanish. Apply the kernel-null-homotopy theorem, then Homotopy.equivSubZero to get the first homotopy. Homotopy.ofEq gives the second from the exact section equation.",
    "uses": [
-    "def-weil-pbc-site-cech-complex"
+    "lem-pc-alternating-cech-kernel-null-homotopic"
    ],
-   "elementary": true,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
-   }
-  },
-  {
-   "text": "For a tuple with distinct entries, sort its entries increasingly, multiply the resulting section by the sign of the sorting permutation, and transport along the unique intersection isomorphism. Set the section to zero if entries repeat. This defines extension c from ordered cochains to full cochains. The equality sign(sigma)*(-1)^j = (-1)^sigma(j)*sign(the induced permutation after deleting j) matches every face for distinct tuples. If a tuple has exactly one repeated pair, the only potentially nonzero faces delete the two occurrences; their induced sorting signs and face signs are opposite, so they cancel. With more repetitions all these terms vanish. Thus c commutes with differentials, and its composite with restriction is the identity on increasing tuples. Transport via e gives the chain map i.",
-   "uses": [
-    "def-weil-pbc-site-cech-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
-   }
-  },
-  {
-   "text": "Use the first homotopy of Tag 01FM. For the stable sorting permutation sigma of a tuple t, let sigma_a agree with sigma in positions strictly before a and enumerate the remaining positions in their original increasing order. The degree-lowering operator has value sum over a=0,...,p of (-1)^a sign(sigma_a) times the section on the (p+2)-tuple t(sigma(0)),...,t(sigma(a)),t(sigma_a(a)),...,t(sigma_a(p)), transported to the original intersection. Expanding dh+hd, deletion of a nonjunction entry pairs with applying h to the corresponding face with the opposite face sign. The junction faces telescope as a increases; the two endpoint faces leave s_t minus sign(sigma)*s_(t composed with sigma). This is identity minus the stable-sorting projection kappa, also in degree zero where the incoming differential is zero.",
-   "uses": [
-    "def-weil-pbc-site-cech-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
-   }
-  },
-  {
-   "text": "Restriction identifies the image of kappa with cochains on nondecreasing tuples, with inverse signed stable sorting. In that complex use the second homotopy of Tag 01FM: it is zero on a strictly increasing tuple and otherwise inserts a second copy of the entry at the first adjacent equality in position a, with coefficient (-1)^a. In dh+hd the faces away from this first equality pair with the corresponding inserted-repeat face and cancel; the faces at the repeated block leave s_t when there is a repeat and zero otherwise. Thus dh+hd is identity minus extension by zero from increasing tuples. Compose this homotopy with the first retraction: the full-complex composite r followed by i is homotopic to its identity. The composite i followed by r is exactly the identity, giving its zero homotopy. Transporting by e gives the two claimed homotopies. No covering or nonemptiness condition is used.",
-   "uses": [
-    "def-weil-pbc-site-cech-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "Stacks Project, Cohomology of Sheaves",
-    "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-site-cech-complex",
-  "def-sc-zariski-site"
+  "lem-pc-alternating-cech-section",
+  "lem-pc-alternating-cech-kernel-null-homotopic"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "W3",
+  "date": "2026-10-12",
   "document": "Stacks Project, Cohomology of Sheaves",
-  "place": "Tags 01FJ (lemma-alternating-cech-complex), 01FK (lemma-ordered-cech-complex), 01FM (lemma-alternating-cech-homotopy); https://stacks.math.columbia.edu/tag/01FM"
+  "place": "Tags 01FJ, 01FK and 01FM; split section construction from contraction, then combine in Lean"
  },
  "mathlib_searches": [
   {
@@ -160,9 +120,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T085229-L-10128",
+  "landing": "20261012T110325-L-624560",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
