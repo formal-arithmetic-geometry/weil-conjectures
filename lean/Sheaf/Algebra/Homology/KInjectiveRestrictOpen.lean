@@ -44,6 +44,14 @@ theorem kInjective_of_restrict_open (X : RingedSpace.{u}) (U : Opens X)
       (SheafOfModules.{u} ((moduleRings X).over U)) _ _
       (((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapHomologicalComplex
         (ComplexShape.up ℤ)).obj I) := by
-  sorry
+  obtain ⟨_, _, hlimits, hcolimits, ⟨adj⟩⟩ := open_restriction_adjunction_exact X U
+  let G := SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙
+    PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)
+  have : PreservesFiniteLimits G := hlimits
+  have : PreservesFiniteColimits G := hcolimits
+  have : G.IsLeftAdjoint := adj.isLeftAdjoint
+  have : G.Additive := G.additive_of_preserves_binary_products
+  have := adj.preservesKInjectiveComplexes
+  infer_instance
 
 end AlgebraicGeometry
