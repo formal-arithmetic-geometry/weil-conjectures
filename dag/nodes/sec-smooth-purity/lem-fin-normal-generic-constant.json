@@ -25,28 +25,51 @@
  ],
  "proof": [
   {
-   "text": "Since a morphism of sheaves is an isomorphism once it is one on the objects of a basis of the site, it suffices to evaluate on an etale $W\\to V$ with $W=\\operatorname{Spec}C$ affine and mapping into an affine open $V_0=\\operatorname{Spec}A\\subseteq V$; such $W$ cover every object of $V_{\\Et}$. Then $A$ is a Noetherian domain with fraction field $K$, and $C$ is of finite type over $A$, hence Noetherian, so $W$ is Noetherian.\nBy [lem-fin-etale-normal-components], $W$ has finitely many\nnormal integral open-and-closed components $W_a=\\operatorname{Spec}C_a$, each affine and etale over $V_0$.\nEvery nonempty $W_a$ dominates $V$, since its image is a nonempty\nopen by [lem-weil-pbc-flat-lfp-open], and a nonempty open of the irreducible $V$ contains $\\eta$. Moreover $A\\to C_a$ is flat and $C_a$ is a domain, so every nonzero $a\\in A$ (a nonzerodivisor) has nonzero image in $C_a$.\nIts generic fibre $W_a\\times_V\\operatorname{Spec}K=\\operatorname{Spec}(K\\otimes_AC_a)$ is therefore nonempty and connected by [lem-weil-pbc-generic-fibre-localization-domain-irreducible]. Thus $W$ and $W_K=W\\times_V\\operatorname{Spec}K$ have the\nsame finite set of connected components, $W_a$ and $(W_a)_K$.\nThe sections of a constant sheaf $M$ on a connected scheme are\n$M$, by [lem-weil-pbc-constant-sheaf-sections-connected].\nBoth groups of sections here are therefore $\\prod_aM$, and\nrestriction along $W_K\\to W$ sends constant sections to constant sections, so it is the identity on each factor.\nBy [def-weil-pbc-direct-image], $(e_*\\underline M_K)(W)=\\underline M_K(W_K)$, and these restriction maps are precisely the components of the natural map, which is therefore an isomorphism on this basis of the site.",
+   "text": "Apply the existing normal-scheme constant-unit theorem [lem-weil-pbc-normal-constant-generic] with coefficient ring ULift Z and module structure on the additive group M. The normality hypothesis supplies integrally closed stalks. This proves invertibility of the module adjunction unit for the inclusion of Spec of the generic stalk.",
    "uses": [
-    "lem-fin-etale-normal-components",
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
-    "lem-weil-pbc-constant-sheaf-sections-connected",
-    "def-weil-pbc-direct-image"
+    "lem-weil-pbc-normal-constant-generic"
    ],
    "elementary": false
+  },
+  {
+   "text": "Let U be the functor forgetting modules to abelian groups, J the constant module sheaf, t the underlying module unit, and c its abelian adjoint. The canonical comparison [lem-weil-pbc-module-abelian-inverse-image-comparison] makes c invertible. The adjunction equation is eta_Ab followed by f_*(c) = t. Since t and f_*(c) are invertible, eta_Ab is invertible on U(J). Mathlib constantCommuteCompose identifies U(J) with the constant abelian sheaf [def-weil-pbc-constant-sheaf]; naturality of eta_Ab transports its invertibility to this sheaf.",
+   "uses": [
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic stalk is the function field [def-sc-function-field], a field for an integral scheme (Mathlib AlgebraicGeometry.FunctionField). Its residue map [def-weil-residue-field] is injective as a ring homomorphism from a field and surjective as a quotient map, hence invertible. Thus Spec of this map is an isomorphism. The residue-field inclusion is definitionally the composite of this isomorphism with the generic-stalk inclusion. Apply the unit-compatible composition comparison [lem-weil-pbc-inverse-image-composition]: the unit for the composite, followed by the pushforward of the pullback composition isomorphism, equals the composite-adjunction unit followed by the pushforward composition isomorphism. The unit along the scheme isomorphism is invertible because its pullback is an equivalence (Etale.isEquivalence_upperStar_of_isIso, constructed from identity and composition comparisons). Both factors of the composite-adjunction unit are invertible, so cancellation gives invertibility of the residue-field inclusion unit.",
+   "uses": [
+    "def-sc-function-field",
+    "def-weil-residue-field",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The displayed natural map is this invertible unit followed by the direct image [def-weil-pbc-direct-image] of the canonical pullback-constant-sheaf identification [def-weil-pbc-constant-sheaf]. A functor preserves isomorphisms, and a composite of isomorphisms is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-fin-etale-normal-components",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-generic-fibre-localization-domain-irreducible",
-  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "def-weil-pbc-constant-sheaf",
+  "def-sc-function-field",
+  "def-weil-residue-field",
+  "lem-weil-pbc-inverse-image-composition",
   "def-weil-pbc-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-normal-generic-constant.md",
-  "place": "## Proof"
+  "document": "lean/Sheaf/AlgebraicGeometry/NormalGenericConstant.lean",
+  "place": "W2 stage 3: specialize the existing Stacks 09Z5 module theorem, use the proved canonical module-abelian comparison, and transport along the generic residue isomorphism using unit-compatible composition"
  },
  "mathlib_searches": [
   {
@@ -152,5 +175,15 @@
   "group": "E1",
   "result": "pass",
   "note": "V Noetherian=[IsNoetherian V]; integral=[IsIntegral V] (needed for genericPoint) + normal=IsNormalScheme (J1, as C1); eta=genericPoint, K=residueField, e=fromSpecResidueField; M finite AddCommGrpCat.{u+1}; natural map = unit then e_* of canonical upperStarConstantSheafIso; IsIso; source 09Z5 theorem has ModuleCat/fromSpecStalk + open-immersion conjunct so not exact (H4 ok); docstring = node proof"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261012T063526-L-3162582",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
