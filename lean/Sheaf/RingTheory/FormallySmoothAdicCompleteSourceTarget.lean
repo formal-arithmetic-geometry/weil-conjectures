@@ -9,7 +9,8 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 public import Sheaf.RingTheory.FormallySmoothAdic
-import Sheaf.RingTheory.FormallySmoothAdicCompletion
+import Sheaf.RingTheory.CompletionMapForLocalHom
+import Sheaf.RingTheory.FormallySmoothAdicCompletionTransfer
 
 /-!
 # Adic formal smoothness after completing source and target
@@ -63,6 +64,8 @@ theorem exists_formallySmoothAdic_completeSourceTarget
            (AdicCompletion (IsLocalRing.maximalIdeal B) B)
            ((IsLocalRing.maximalIdeal B).map
              (algebraMap B (AdicCompletion (IsLocalRing.maximalIdeal B) B)))) := by
-  sorry
+  obtain ⟨ψ, hψ⟩ := RingHom.exists_adicCompletion_map_of_local φ
+  refine ⟨ψ, hψ, ?_⟩
+  exact formallySmoothAdic_completion_transfer A B φ ψ hψ
 
 end Algebra

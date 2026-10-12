@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-fs-adic-completion-transfer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-fs-adic-complete-source-target",
+   "place": "intermediate step"
+  }
+ },
+ "kind": "statement",
+ "title": "Formal smoothness transfer for a compatible map of local completions",
+ "statement": "Let φ : A → B be a local homomorphism of Noetherian [def-weil-pbc-noetherian-ring] commutative local rings, and ψ : Â → B̂ a ring homomorphism between their maximal-ideal adic completions [def-weil-pbc-adic-completion] with the coordinate compatibility of lem-weil-pbc-fs-adic-completion-map-local. If B is formally smooth over A for the m_B-adic topology [def-weil-pbc-formally-smooth-adic], then B̂ is formally smooth over Â via ψ for the (m_B B̂)-adic topology.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07ED"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-completion-map-local"
+ ],
+ "proof": [
+  {
+   "text": "Coordinate compatibility and ext_evalₐ give ψ(ι_A(a)) = ι_B(φ(a)). Locality and ideal map identities imply ψ((m_A Â)^n) ⊆ (m_B B̂)^n. The algebra structures are therefore compatible.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Noetherianity makes m_B finitely generated [def-weil-pbc-noetherian-ring]. Apply Algebra.FormallySmoothAdic.adicCompletion [lem-weil-pbc-fs-adic-completion] to obtain formal smoothness of B̂ over A. Restrict a lifting problem over Â to A and obtain an A-algebra lift f : B̂ → D.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-fs-adic-completion",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If g kills (m_B B̂)^k, the quotient-lift identity puts f((m_B B̂)^k) in J. Squaring and J² = 0 show that f kills (m_B B̂)^(k+k). The commutativity of g with the Â-structure map and the ideal inclusion likewise put the image of (m_A Â)^k in J, so Â → D kills (m_A Â)^(k+k). This is Tag 07EC.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Mathlib AdicCompletion.pow_smul_top_eq_ker_eval [lem-weil-pbc-adic-completion-mod-power] identifies the kernel of evalₐ at k+k with (m_A Â)^(k+k). Choose a representative a in A of the quotient coordinate of x. Thus x−ι_A(a) belongs to this power. Both f∘ψ and the structure map kill this difference and agree on ι_A(a) by A-linearity. They agree for all x, making f an Â-algebra map; its unchanged reduction is g.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-fs-adic-completion",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-adic-completion-mod-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07ED, (1) implies (3); with Tag 07EC and Algebra Tag 05GG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Formal smoothness for the adic topology passes from a local ring homomorphism to its source and target completions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A formally smooth algebra for an adic topology remains formally smooth over the completion of the base local ring",
+   "results": "Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; AdicCompletion.instAlgebra; IsAdicComplete.liftAlgHom; IsAdicComplete.henselianRing; AdicCompletion.liftAlgHom; Algebra.FormallySmooth.of_isLocalization; Algebra.Smooth.formallySmooth",
+   "date": "2026-10-13",
+   "verdict": "partial match: the listed constructions are used; no theorem with this complete statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.pow_smul_top_eq_ker_eval",
+   "results": "AdicCompletion.pow_smul_top_eq_ker_eval",
+   "date": "2026-10-13",
+   "verdict": "partial match: the listed constructions are used; no theorem with this complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth|pow_smul_top_eq_ker_eval",
+   "results": "Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/Completeness.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean; Mathlib/RingTheory/AdicCompletion/LocalRing.lean",
+   "date": "2026-10-13",
+   "verdict": "partial match: the listed constructions are used; no theorem with this complete statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothAdicCompletionTransfer",
+  "declaration": "Algebra.formallySmoothAdic_completion_transfer",
+  "file": "lean/Sheaf/RingTheory/FormallySmoothAdicCompletionTransfer.lean",
+  "statement": "theorem formallySmoothAdic_completion_transfer (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B] (φ : A →+* B) [IsLocalHom φ] (ψ : AdicCompletion (IsLocalRing.maximalIdeal A) A →+* AdicCompletion (IsLocalRing.maximalIdeal B) B) (hψ : ∀ (n : ℕ) (x : AdicCompletion (IsLocalRing.maximalIdeal A) A) (a : A), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal A) n x = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ n) a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal B) n (ψ x) = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal B) ^ n) (φ a)) : (letI := φ.toAlgebra FormallySmoothAdic A B (IsLocalRing.maximalIdeal B) → letI := ψ.toAlgebra FormallySmoothAdic (AdicCompletion (IsLocalRing.maximalIdeal A) A) (AdicCompletion (IsLocalRing.maximalIdeal B) B) ((IsLocalRing.maximalIdeal B).map (algebraMap B (AdicCompletion (IsLocalRing.maximalIdeal B) B))))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T205629-L-931924",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T205629-L-931924",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

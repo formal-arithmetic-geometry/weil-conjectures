@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-fs-adic-completion-map-local",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-fs-adic-complete-source-target",
+   "place": "intermediate step"
+  }
+ },
+ "kind": "statement",
+ "title": "Compatible completion map induced by a local homomorphism",
+ "statement": "Let φ : A → B be a local homomorphism of commutative local rings. Their maximal-ideal adic completions [def-weil-pbc-adic-completion] admit a ring homomorphism ψ such that, for each n ≥ 0, if the n-th coordinate of x in the source completion is the class of a in A/m_A^n, then the n-th coordinate of ψ(x) is the class of φ(a) in B/m_B^n. No Noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "More on Algebra, Lemma Tag 07ED"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Locality gives φ(m_A) ⊆ m_B and hence φ(m_A^n) ⊆ m_B^n for every n, including n = 0. Ideal.Quotient.lift induces the quotient maps [def-weil-pbc-algebra-hom-quotient]. Compose them with evaluation of the source completion [def-weil-pbc-adic-completion]. Compatibility with factorPow follows from compatibility of the source coordinates. AdicCompletion.liftRingHom assembles the map; evalₐ_comp_liftRingHom and the quotient lift formula give the required coordinates.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07ED, (1) implies (3); with Tag 07EC and Algebra Tag 05GG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A local homomorphism of commutative local rings extends to a homomorphism of their maximal ideal adic completions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a local ring homomorphism to the inverse limits of quotients by powers of maximal ideals",
+   "results": "AdicCompletion.liftRingHom; IsAdicComplete.liftRingHom; IsAdicComplete.StrictMono.liftRingHom; IsAdicComplete.of_liftRingHom; IsAdicComplete.mk_liftRingHom; AdicCompletion.mkₐ; IsAdicComplete.StrictMono.mk_liftRingHom; AdicCompletion.liftAlgHom",
+   "date": "2026-10-13",
+   "verdict": "partial match: the listed constructions are used; no theorem with this complete statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.liftRingHom",
+   "results": "AdicCompletion.liftRingHom; AdicCompletion.evalₐ_liftRingHom; AdicCompletion.evalₐ_comp_liftRingHom; AdicCompletion.factor_eval_liftRingHom; IsAdicComplete.of_liftRingHom; IsAdicComplete.ofAlgEquiv_comp_liftRingHom",
+   "date": "2026-10-13",
+   "verdict": "partial match: the listed constructions are used; no theorem with this complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "liftRingHom|evalₐ_comp_liftRingHom",
+   "results": "Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/Algebra.lean; Mathlib/RingTheory/AdicCompletion/RingHom.lean; Mathlib/RingTheory/AdicCompletion/RingHom.lean; Mathlib/RingTheory/AdicCompletion/RingHom.lean",
+   "date": "2026-10-13",
+   "verdict": "partial match: the listed constructions are used; no theorem with this complete statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.FormallySmoothAdicCompleteSourceTarget",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletionMapForLocalHom",
+  "declaration": "RingHom.exists_adicCompletion_map_of_local",
+  "file": "lean/Sheaf/RingTheory/CompletionMapForLocalHom.lean",
+  "statement": "theorem exists_adicCompletion_map_of_local {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsLocalRing A] [IsLocalRing B] (φ : A →+* B) [IsLocalHom φ] : ∃ ψ : AdicCompletion (IsLocalRing.maximalIdeal A) A →+* AdicCompletion (IsLocalRing.maximalIdeal B) B, ∀ (n : ℕ) (x : AdicCompletion (IsLocalRing.maximalIdeal A) A) (a : A), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal A) n x = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A) ^ n) a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal B) n (ψ x) = Ideal.Quotient.mk ((IsLocalRing.maximalIdeal B) ^ n) (φ a)",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T205629-L-931924",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T205629-L-931924",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
