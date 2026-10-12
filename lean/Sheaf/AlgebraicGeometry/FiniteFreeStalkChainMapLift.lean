@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Sheaf.AlgebraicGeometry.StalkRestrictionComplexIso
+import Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftLocal
+import Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftRestrict
 
 /-! # Local extension of one map between bounded finite free complexes
 
@@ -64,6 +66,9 @@ theorem exists_restrict_chainMap_of_stalk_eventually
         (ComplexShape.up ℤ)
       let eP := (stalkRestrictionComplexIso V y hyV).app P
       let eQ := (stalkRestrictionComplexIso V y hyV).app Q
-      ∃ (fV : R.obj P ⟶ R.obj Q), S.map fV = eP.hom ≫ f ≫ eQ.inv := by sorry
+      ∃ (fV : R.obj P ⟶ R.obj Q), S.map fV = eP.hom ≫ f ≫ eQ.inv := by
+  obtain ⟨U, hyU, fU, hU⟩ := exists_chainMap_of_stalk_local
+    P Q a b c e hPa hPb hQc hQe hPfree hQfree y f
+  exact ⟨U, hyU, restrict_chainMap_of_stalk_local P Q y U hyU f fU hU⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -1,0 +1,156 @@
+{
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Proof, first two paragraphs: local unit-entry cancellation and extension of the finite calculation; finite matrix coefficient extension and chain equations"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLift",
+  "date": "2026-10-13",
+  "group": "G1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-perfect",
+ "id": "lem-pc-finite-free-stalk-chain-map-lift-local",
+ "kind": "statement",
+ "title": "Finite matrix extension to one neighbourhood",
+ "statement": "Let Y be a scheme [def-pc-scheme] and P,Q cochain complexes of O_Y-modules [def-pc-derived-category], supported in integer intervals [a,b] and [c,e]. Assume each term is zero or isomorphic to a finite free sheaf [def-weil-pbc-free-module]. For y in Y and a chain map f:T(P) -> T(Q), with T the termwise pullback to Spec O_{Y,y} [def-pc-derived-pullback], there exist an open U containing y and a chain map fU:R_U(P) -> R_U(Q) such that S_U(fU)=E_U(P).hom ; f ; E_U(Q).inv, where R_U is open restriction, S_U is stalk pullback on U, and E_U is [def-pc-stalk-restriction-complex-iso]. This asserts existence on one open only.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-weil-pbc-free-module",
+  "def-pc-stalk-restriction-complex-iso"
+ ],
+ "proof": [
+  {
+   "text": "Choose finite bases in the nonzero terms of the bounded complexes P and Q. There are finitely many potentially nonzero components of the single prescribed map. Pullback of free sheaves identifies these with finite matrices over the stalk ring. The zero terms have unique source or target maps.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent every matrix entry by a section near y. Intersect these finitely many neighbourhoods. Each entry of every differential-commutativity defect has zero germ because f is a chain map; shrink again using the germ equality criterion so all defects vanish. The represented matrices now assemble to a chain map on U.",
+   "uses": [
+    "def-weil-pbc-module-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use E_U from [def-pc-stalk-restriction-complex-iso] to identify the stalk pullback of the restricted complexes with their original stalk pullbacks. The represented entries give S_U(f_U)=E_U(P).hom;f;E_U(Q).inv.",
+   "uses": [
+    "def-pc-stalk-restriction-complex-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-stalk-restriction-complex-iso",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-perfect/lem-pc-perfect-locus.md",
+  "place": "Finite-matrix extension on one open (steps 1--3)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A stalk morphism between bounded finite free complexes of sheaves extends to every sufficiently small open neighbourhood",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between bounded complexes of finite free sheaves at a stalk extends to a neighbourhood",
+   "results": "exists_lift_of_germInjective_aux; exists_lift_of_germInjective; RingedSpace.exists_res_eq_zero_of_germ_eq_zero; ModuleCat.Tilde.exists_const; ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+   "date": "2026-10-13",
+   "verdict": "No direct chain-map extension theorem found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fromSpecStalk\", \"mapHomologicalComplex\"",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(lift|restrict).*([Cc]hainMap|[Cc]omplex)|stalkRestrictionComplexIso|fromSpecStalkOfMem.*Iso",
+   "results": "Search of Mathlib AlgebraicGeometry and Algebra/Homology, and both library roots: no one-map local extension. Existing pair lift is the parent; resolution and injective-complex lifts address different hypotheses. InternalHom finite presentation gives stalk linear maps, not maps between these pullback complexes.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite collection of sections with zero germs vanish after restricting to a common neighbourhood, and morphisms between finite free modules are matrices",
+   "results": "LocalGeneratorsData and ModuleCat.Tilde.exists_const; no complex extension theorem.",
+   "date": "2026-10-13",
+   "verdict": "Useful section ingredients only; no duplicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"germ\", \"exists\"",
+   "results": "TopCat.Presheaf.exists_germ_eq; RingedSpace.exists_res_eq_zero_of_germ_eq_zero; germ-injective spreading results.",
+   "date": "2026-10-13",
+   "verdict": "First two are ingredients for matrix extension; spreading theorems require extra hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "freeHomEquiv; chainMap/stalk variants across lean/Sheaf and lean/WeilConjectures",
+   "results": "SheafOfModules.freeHomEquiv and freeHomEquiv_comp_apply encode maps from a free module; FiniteFreeStalkChainMapPairLift imports the item, so using it would be cyclic. No existing one-open extension.",
+   "date": "2026-10-13",
+   "verdict": "No duplicate; matrix and germ ingredients found"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-perfect-locus",
+   "place": "Proof, extension of the finite calculation to a neighbourhood: extend one prescribed chain map and then restrict it to smaller opens",
+   "via": [
+    "lem-pc-finite-free-stalk-chain-map-lift",
+    "lem-pc-finite-free-stalk-chain-map-pair-lift",
+    "lem-pc-finite-free-stalk-homotopy-spread",
+    "lem-pc-finite-free-residue-local-homotopy",
+    "lem-pc-finite-free-pullback-residue-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteFreeStalkChainMapLiftLocal",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFreeStalkChainMapLiftLocal.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_chainMap_of_stalk_local",
+  "statement": "theorem exists_chainMap_of_stalk_local\n    {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)\n    (a b c e : ℤ)\n    (hPa : P.IsStrictlyGE a) (hPb : P.IsStrictlyLE b)\n    (hQc : Q.IsStrictlyGE c) (hQe : Q.IsStrictlyLE e)\n    (hPfree : ∀ n : ℤ, IsZero (P.X n) ∨ ∃ s : ℕ, Nonempty\n      (P.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (hQfree : ∀ n : ℤ, IsZero (Q.X n) ∨ ∃ s : ℕ, Nonempty\n      (Q.X n ≅ SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin s))))\n    (y : Y)\n    (f : ((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj P ⟶\n      ((Modules.pullback (Y.fromSpecStalk y)).mapHomologicalComplex _).obj Q) :\n    ∃ (U : Y.Opens), ∃ (hyU : y ∈ U), ∃ (fU :\n      ((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj P ⟶\n      ((restrictFunctor U.ι).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q),\n      let S := (Modules.pullback (U.fromSpecStalkOfMem y ‹y ∈ U›)).mapHomologicalComplex\n        (ComplexShape.up ℤ)\n      let eP := (stalkRestrictionComplexIso U y ‹y ∈ U›).app P\n      let eQ := (stalkRestrictionComplexIso U y ‹y ∈ U›).app Q\n      S.map fU = eP.hom ≫ f ≫ eQ.inv",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T184257-L-4002507",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T184257-L-4002507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
