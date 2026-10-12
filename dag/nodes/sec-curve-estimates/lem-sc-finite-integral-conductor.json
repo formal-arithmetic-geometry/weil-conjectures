@@ -31,46 +31,45 @@
  ],
  "proof": [
   {
-   "text": "Let M=A/B be the quotient of the finite B-module A by the image of B. The quotient of a finite module is finite. The inclusion A into K and the equality Frac(A)=Frac(B)=K identify the localization of M at the generic prime (0) with zero: every element of A/B becomes zero after inverting a nonzero element of B.",
+   "text": "Apply Mathlib Submodule.FG.of_finite to A.toSubmodule and FractionalIdeal.isFractional_of_fg (Mathlib/RingTheory/FractionalIdeal/Operations.lean:171) to obtain a common denominator d in the non-zero-divisors of B such that d times every element of A is in the image of B. Since B is a domain, d is nonzero. This replaces the finite-quotient generic-support calculation by clearing the denominators of a finite generating set.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof paragraph beginning 'Since the fraction fields of B and A are the same'"
+    "place": "Varieties Lemma 09N2 proof, paragraph beginning 'Since the fraction fields of B and A are the same'"
    }
   },
   {
-   "text": "Every prime in the support of M is therefore nonzero. Because B is a one-dimensional domain, every nonzero prime is maximal. By [lem-weil-pbc-finite-module-support-annihilator], the support is the zero locus V(J) of the annihilator J=Ann_B(M), so every prime containing J is a maximal ideal (not every maximal ideal need contain J). By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], the radical of J is the intersection of the primes in V(J) (the whole ring B if V(J) is empty); an intersection of some maximal ideals contains the intersection of all of them, which is the Jacobson radical m_B. Hence m_B is contained in the radical of J. The ideal m_B is finitely generated because B is Noetherian; [lem-weil-pbc-fg-ideal-radical-power] therefore gives n>0 with m_B^n contained in J, equivalently m_B^n M=0.",
+   "text": "For any prime ideal P containing (d), d is in P and d is nonzero, so P is nonzero. The dimension bound from ringKrullDim B = 1 gives Ring.KrullDimLE 1 B; Mathlib Ideal.IsPrime.isMaximal_of_ne_bot makes P maximal. Hence the intersection of all maximal ideals, jacobson(0), is contained in each prime over (d). Ideal.radical_eq_sInf, the intersection clause of [lem-weil-pbc-zero-locus-eq-iff-radical-eq], gives jacobson(0) contained in radical((d)). Apply [lem-weil-pbc-fg-ideal-radical-power] to the Noetherian (and therefore finitely generated) ideal jacobson(0). If n is the resulting exponent, take n+1; ideal powers decrease as the exponent increases.",
    "uses": [
-    "lem-weil-pbc-finite-module-support-annihilator",
     "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
     "lem-weil-pbc-fg-ideal-radical-power"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof paragraph beginning 'Since the fraction fields of B and A are the same'"
+    "place": "Varieties Lemma 09N2 proof, paragraph beginning 'Since the fraction fields of B and A are the same'"
    }
   },
   {
-   "text": "The equality m_B^n M=0 says that the image of every element of m_B^n A in A/B is zero. Thus m_B^n A is contained in B, as required.",
+   "text": "For b in jacobson(0)^(n+1), its membership in (d) gives b=r*d. For any a in A, the common-denominator property gives c in B with image(c)=image(d)*a. Multiplicativity and associativity show image(r*c)=image(b)*a.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof concluding sentence of the finite-conductor paragraph"
+    "place": "Varieties Lemma 09N2 proof, paragraph beginning 'Since the fraction fields of B and A are the same'"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-module-support-annihilator",
   "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
   "lem-weil-pbc-fg-ideal-radical-power"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Varieties Lemma 09N2 (lemma-semi-local-dimension-one-conductor), proof paragraph beginning 'Since the fraction fields of B and A are the same'"
+  "place": "Varieties Lemma 09N2 proof, paragraph beginning 'Since the fraction fields of B and A are the same'",
+  "note": "U2: common-denominator realization of the finite-conductor paragraph using Mathlib, instead of quotient-module support; compiled complete proof, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -149,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T231642-L-1964198",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
