@@ -8,10 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.AlgebraicGeometry.BaseChangeConventions
-import Sheaf.AlgebraicGeometry.IsolatedFiberPointQuasiFiniteAffinePairs
-import Sheaf.RingTheory.QuasiFiniteAtPrime
-import Sheaf.RingTheory.QuasiFiniteIntegralClosureOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 
 /-!
 # A quasi-finite affine morphism embeds in a finite affine morphism
@@ -56,6 +53,24 @@ theorem Scheme.Hom.exists_isOpenImmersion_isFinite_of_isQuasiFinite_affine
     (hf : f.IsQuasiFinite) :
     ∃ (Z : Scheme.{u}) (j : Y ⟶ Z) (π : Z ⟶ X),
       IsAffine Z ∧ IsOpenImmersion j ∧ IsFinite π ∧ f = j ≫ π := by
-  sorry
+  let : LocallyOfFiniteType f := hf.1
+  let : QuasiCompact f := hf.2.1
+  have hlq : LocallyQuasiFinite f := by
+    apply locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr
+    intro x
+    apply isDiscrete_iff_discreteTopology.mpr
+    apply discreteTopology_iff_isOpen_singleton.mpr
+    rintro ⟨y, hy⟩
+    change f y = x at hy
+    subst x
+    have hopen := hf.2.2 y
+    rw [← (f.fiberHomeo (f y)).isOpen_image] at hopen
+    simpa only [Set.image_singleton, Scheme.Hom.asFiber,
+      Homeomorph.apply_symm_apply] using hopen
+  let := hlq
+  obtain ⟨Z, j, π, hj, _, hπ, hfac⟩ :=
+    f.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite
+  let := hπ
+  exact ⟨Z, j, π, isAffine_of_isAffineHom π, hj, hπ, hfac.symm⟩
 
 end AlgebraicGeometry
