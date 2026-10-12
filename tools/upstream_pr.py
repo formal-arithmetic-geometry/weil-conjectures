@@ -57,7 +57,7 @@ def inventory(upstream):
             p = ROOT/'lean'/path(m)
             if m.startswith('Sheaf.') and m not in modules and p.is_file():
                 modules[m] = p.read_text(); todo.append(m)
-    available = {m for m in modules if m.startswith('WeilConjectures.') and (upstream/path(m)).is_file()}
+    available = {'.'.join(p.relative_to(upstream).with_suffix('').parts) for p in (upstream/'WeilConjectures').rglob('*.lean')}
     destinations = {}
     # A merged mapping is authoritative only when the destination really exists.
     mapfile = ROOT/'coord/upstream-pr-map.tsv'
