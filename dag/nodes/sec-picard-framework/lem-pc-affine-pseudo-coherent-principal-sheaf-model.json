@@ -1,0 +1,135 @@
+{
+ "id": "lem-pc-affine-pseudo-coherent-principal-sheaf-model",
+ "kind": "statement",
+ "title": "Principal-open finite-free model before derived reflection",
+ "statement": "Let A be a commutative ring and M a cochain complex of A-modules. Fix derived categories [def-pc-derived-category] for structure-sheaf modules on X = Spec(A) [def-pc-scheme], on every localized open site of X, and on Spec(A_f), with independently chosen morphism universes for the latter. Let f be an element of A, let U be open with D(f) contained in U, and let P be a cochain complex of structure-sheaf modules on the localized site of U. Assume P is zero in every degree above some integer, each term is isomorphic to the free sheaf on a finite set, and the derived restriction of the termwise associated-sheaf complex of M is isomorphic to Q(P). Then there exist a cochain complex E of A_f-modules and an integer b such that E is strictly zero above b, every term is finite and free, and Q(tilde E) is isomorphic in the sheaf derived category on Spec(A_f) to Q(tilde(A_f tensor_A M)). This asserts only a sheaf-derived comparison, not a module-derived isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7 (perfect-lemma-pseudo-coherent-affine), converse proof, local-model comparison; Tag 06Z0 for the affine derived comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "lem-weil-pbc-spec-module-tilde-sections"
+ ],
+ "proof": [
+  {
+   "text": "Restrict P and the supplied derived isomorphism along the principal open D(f) contained in U; exactness preserves the upper bound and finite-free terms.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify D(f) with Spec(A_f). Use the principal-open tilde sections comparison, naturally in the module and hence in the differentials. Choose finite free modules realizing the restricted terms of P, with zero modules above its bound. Full faithfulness of the ordinary tilde/Gamma adjunction lifts the differentials and proves their square-zero equations, yielding E. Compose the associated-sheaf complex isomorphism with the restricted given derived isomorphism and the localization comparison. This step makes no assertion of an isomorphism in the module derived category.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08E7, local-model comparison up to the sheaf-derived isomorphism; derived reflection remains in the importing theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preimageIso",
+   "results": "CategoryTheory.Functor.preimageIso, CategoryTheory.Functor.preimageIso_mapIso, CategoryTheory.Functor.preimageIso_hom, CategoryTheory.Functor.preimageIso_inv",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the sheaf-model construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between associated sheaf complexes on Spec of a localization is reflected by the affine derived equivalence",
+   "results": "AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso, AlgebraicGeometry.SpecMapRestrictBasicOpenIso, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor, AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the sheaf-model construction"
+  },
+  {
+   "tool": "grep",
+   "query": "tildeFinsupp|fullyFaithfulFunctor|toOpen_res",
+   "results": "Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "date": "2026-10-13",
+   "verdict": "no exact match for the sheaf-model construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of finite free sheaves on a principal open has a finite free module complex with isomorphic associated sheaf complex",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalModel",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "affine pseudo-coherence comparison: single principal-open local model, construction before reflection in the affine derived equivalence",
+   "via": [
+    "lem-pc-affine-pseudo-coherent-principal-model",
+    "lem-pc-affine-pseudo-coherent-localization-cover",
+    "lem-pc-affine-pseudo-coherent-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalSheafModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffinePseudoCoherentPrincipalSheafModel.lean",
+  "declaration": "AlgebraicGeometry.affine_pseudoCoherent_principal_sheaf_model",
+  "statement": "theorem affine_pseudoCoherent_principal_sheaf_model (A : Type u) [CommRing A]\n    [HasDerivedCategory.{wX}\n      (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]\n    [∀ V : (Spec (.of A)).Opens, HasDerivedCategory.{wX}\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over V))]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ) (f : A)\n    [HasDerivedCategory.{wY}\n      (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))]\n    (U : (Spec (.of A)).Opens)\n    (hf : PrimeSpectrum.basicOpen f ≤ U)\n    (P : CochainComplex\n      (SheafOfModules.{u} ((moduleRings (Spec (.of A)).toRingedSpace).over U)) ℤ)\n    (hb : ∃ N : ℤ, ∀ i : ℤ, N < i → CategoryTheory.Limits.IsZero (P.X i))\n    (hfree : ∀ i : ℤ, ∃ r : ℕ, Nonempty (P.X i ≅ SheafOfModules.free\n      (R := (moduleRings (Spec (.of A)).toRingedSpace).over U) (ULift.{u} (Fin r))))\n    (hiso : Nonempty ((SheafOfModules.overFunctor.{u}\n      (moduleRings (Spec (.of A)).toRingedSpace) U).mapDerivedCategory.obj\n        (DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} A)\n            (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))\n            _ _ _ _ (tilde.functor (.of A))\n            ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj M)) ≅\n      DerivedCategory.Q.obj P)) :\n    ∃ E : CochainComplex (ModuleCat.{u} (Localization.Away f)) ℤ,\n      ∃ b : ℤ, E.IsStrictlyLE b ∧\n        (∀ j : ℤ, Module.Free (Localization.Away f) (E.X j) ∧\n          Module.Finite (Localization.Away f) (E.X j)) ∧\n        Nonempty (DerivedCategory.Q.obj\n          ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f))\n            (SheafOfModules.{u}\n              (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))\n            _ _ _ _ (tilde.functor (.of (Localization.Away f)))\n            ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj E) ≅\n          DerivedCategory.Q.obj\n            ((@Functor.mapHomologicalComplex ℤ (ModuleCat.{u} (Localization.Away f))\n              (SheafOfModules.{u}\n                (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))\n              _ _ _ _ (tilde.functor (.of (Localization.Away f)))\n              ⟨fun _ _ ↦ tilde.map_zero⟩ (ComplexShape.up ℤ)).obj\n                ((Functor.mapHomologicalComplex\n                  (ModuleCat.extendScalars (algebraMap A (Localization.Away f)))\n                  (ComplexShape.up ℤ)).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T232905-L-2043589",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T232905-L-2043589",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

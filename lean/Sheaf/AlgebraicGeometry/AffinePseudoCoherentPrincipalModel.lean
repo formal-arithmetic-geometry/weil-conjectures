@@ -10,9 +10,8 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentPrincipalSheafModel
 import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # A module model on one principal open
 
@@ -78,6 +77,19 @@ theorem affine_pseudoCoherent_principal_model (A : Type u) [CommRing A]
     DerivedCategory.IsPseudoCoherent
       (DerivedCategory.Q.obj ((Functor.mapHomologicalComplex
         (ModuleCat.extendScalars (algebraMap A (Localization.Away f)))
-        (ComplexShape.up ℤ)).obj M)) := by sorry
+        (ComplexShape.up ℤ)).obj M)) := by
+  let := HasDerivedCategory.standard
+    (SheafOfModules.{u} (moduleRings (Spec (.of (Localization.Away f))).toRingedSpace))
+  obtain ⟨E, b, hbound, hfreeE, ⟨hmodel⟩⟩ :=
+    affine_pseudoCoherent_principal_sheaf_model A M f U hf P hb hfree hiso
+  obtain ⟨e, ⟨α⟩, _, _, _⟩ :=
+    exists_affineQCohDerivedEquivalence (Localization.Away f)
+  let F := e.functor ⋙ (schemeDerivedQCohProperty (Spec (.of (Localization.Away f)))).ι
+  let L := (Functor.mapHomologicalComplex
+    (ModuleCat.extendScalars (algebraMap A (Localization.Away f)))
+    (ComplexShape.up ℤ)).obj M
+  have h : F.obj (DerivedCategory.Q.obj E) ≅ F.obj (DerivedCategory.Q.obj L) :=
+    α.app E ≪≫ hmodel ≪≫ (α.app L).symm
+  exact ⟨E, b, hbound, hfreeE, ⟨F.preimageIso h⟩⟩
 
 end AlgebraicGeometry
