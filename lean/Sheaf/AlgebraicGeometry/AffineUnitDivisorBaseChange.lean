@@ -1,10 +1,15 @@
 module
 
 public import Sheaf.AlgebraicGeometry.DivisorModule
+public import Sheaf.AlgebraicGeometry.LocalDvrBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import Sheaf.AlgebraicGeometry.AffineUnitDivisorBaseChangeCore
-import Sheaf.AlgebraicGeometry.AffineBoundaryUnitDivisorDescent
-import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.PicAffineBaseChangeCompatibility
+import Sheaf.AlgebraicGeometry.DivisorClassCurve
+import Sheaf.AlgebraicGeometry.GenusInvariant
+import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Boundary principal divisors and algebraically closed base change
@@ -36,16 +41,15 @@ smooth proper connected compactification `c : C ↪ X = c.Z`, boundary
   `C`, `C'`);
 * `ι` maps the set of boundary divisors of units on `C` onto that on `C'`.
 
-Proof: smooth connected curves and their base changes are integral and Noetherian.
-The geometric setup and forward order comparison are
-`affine_unit_divisor_base_change_core`: restriction to the generic point gives the
-compatible maps, rational boundary points have unique fibres, and local DVR base change
-preserves orders. Explicit pullback of a unit witnesses the forward inclusion of ranges.
-`affine_boundary_unit_divisor_descent` gives the reverse inclusion: a transported boundary
-divisor is principal after extension, its degree-zero Picard class vanishes by injectivity
-of the Jacobian point comparison, and the divisor exact sequence supplies a unit before
-extension. Set antisymmetry gives equality. The two cited intermediate geometric statements
-remain open; this is a decomposition of the blueprint argument.
+Proof (blueprint): by lem-sc-pic-affine-base-change-compatibility (1), `X'` is a smooth proper
+connected compactification of `C'` with boundary `{P' : P ∈ S}`, each `P` being a `k`-rational
+point with a single point `P'` above it; this gives `ι`. For a unit `u`, the coefficient of
+`[P]` in `div u` is `v_P(u)`, and `v_{P'}(u') = v_P(u)` by lem-sc-local-dvr-base-change.
+Hence `ι(L) ⊆ L'`. Conversely, a boundary divisor `D' = ι D` of a unit on `C'` is principal,
+so `𝒪_{X'}(D')` is trivial and `deg D = 0`; `𝒪_X(D)` pulls back to `𝒪_{X'}(D')`, and
+`Pic⁰(X) → Pic⁰(X')` is the injective Jacobian map `J_X(k) → J_X(k')`, so `D = div f`; then
+`f` has order `0` at every closed point of `C`, so `f ∈ 𝒪_C(C)ˣ` by the divisor exact
+sequence, and `D ∈ L`.
 
 Source: blueprint sec-curve-estimates/sk-prop-ext-invariance,
   affine-case proof, unit quotient paragraph (blueprint: lem-sc-affine-unit-divisor-base-change). -/
@@ -117,29 +121,6 @@ theorem affine_unit_divisor_base_change
                 Set.range (c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).i.base)
             ((c.baseChange (Spec.map (CommRingCat.ofHom (algebraMap k k')))).Z.div
               (Additive.ofMul (Units.map φ'.toMonoidHom u')))) := by
-  classical
-  let t := Spec.map (CommRingCat.ofHom (algebraMap k k'))
-  let f' := CategoryTheory.Limits.pullback.snd f t
-  let c' := c.baseChange t
-  let : IsConnectedCurve f' := (baseChange_curve (k' := k') f).2.2.2.2.2 inferInstance
-  let : Smooth f' := (baseChange_curve (k' := k') f).2.2.1 inferInstance
-  let : IsConnectedCurve c'.g := (baseChange_curve (k' := k') c.g).2.2.2.2.2 inferInstance
-  let : Smooth c'.g := (baseChange_curve (k' := k') c.g).2.2.1 inferInstance
-  let : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace' c.g
-  let : ConnectedSpace c'.Z := IsConnectedCurve.connectedSpace' c'.g
-  let : IsNoetherian c.Z := isNoetherian_of_locallyOfFiniteType c.g
-  let : IsRegular c.Z := IsRegular.of_smooth c.g
-  let : IsIntegral c.Z := IsRegular.isIntegral c.Z
-  let : IsNoetherian c'.Z := isNoetherian_of_locallyOfFiniteType c'.g
-  let : IsRegular c'.Z := IsRegular.of_smooth c'.g
-  let : IsIntegral c'.Z := IsRegular.isIntegral c'.Z
-  obtain ⟨φ, φ', hφ, hφ', e, he, hord⟩ :=
-    affine_unit_divisor_base_change_core k k' C f c
-  refine ⟨inferInstance, inferInstance, inferInstance, inferInstance,
-    φ, φ', hφ, hφ', e, he, hord, ?_⟩
-  apply Set.Subset.antisymm
-  · rintro D ⟨E, ⟨u, rfl⟩, rfl⟩
-    exact ⟨Units.map (pullback.fst f t).appTop.hom.toMonoidHom u, hord u⟩
-  · exact affine_boundary_unit_divisor_descent k k' C f c φ φ' e ⟨hφ, hφ'⟩ he
+  sorry
 
 end AlgebraicGeometry

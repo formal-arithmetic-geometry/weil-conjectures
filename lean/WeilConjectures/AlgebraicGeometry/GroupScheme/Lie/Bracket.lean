@@ -78,32 +78,7 @@ noncomputable def toδ (v : infPoints G) : Scheme.dualNumbers₂Over S ⟶ G :=
 for `ε = 0` and for `δ = 0`. -/
 theorem commutator_mem_mixedPoints (v w : infPoints G) :
     toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ ∈ mixedPoints G := by
-  have hεδ : Scheme.dualNumbersιεOver S ≫ Scheme.dualNumbersProjδOver S =
-      CartesianMonoidalCategory.toUnit (Scheme.dualNumbersOver S) ≫
-        Scheme.dualNumbersιOver S := by
-    ext : 1
-    simp [Scheme.dualNumbersιεOver, Scheme.dualNumbersProjδOver,
-      Scheme.dualNumbersιOver, Over.toUnit_left]
-  have hδε : Scheme.dualNumbersιδOver S ≫ Scheme.dualNumbersProjεOver S =
-      CartesianMonoidalCategory.toUnit (Scheme.dualNumbersOver S) ≫
-        Scheme.dualNumbersιOver S := by
-    ext : 1
-    simp [Scheme.dualNumbersιδOver, Scheme.dualNumbersProjεOver,
-      Scheme.dualNumbersιOver, Over.toUnit_left]
-  have hε : pointsPrecomp G (Scheme.dualNumbersιεOver S) (toδ G w) = 1 := by
-    change Scheme.dualNumbersιεOver S ≫ Scheme.dualNumbersProjδOver S ≫ w.1 = 1
-    rw [← Category.assoc, hεδ, Category.assoc, (mem_infPoints G).mp w.2,
-      MonObj.comp_one]
-  have hδ : pointsPrecomp G (Scheme.dualNumbersιδOver S) (toε G v) = 1 := by
-    change Scheme.dualNumbersιδOver S ≫ Scheme.dualNumbersProjεOver S ≫ v.1 = 1
-    rw [← Category.assoc, hδε, Category.assoc, (mem_infPoints G).mp v.2,
-      MonObj.comp_one]
-  rw [mem_mixedPoints]
-  constructor
-  · change pointsPrecomp G (Scheme.dualNumbersιεOver S) (_ * _ * _⁻¹ * _⁻¹) = 1
-    simp only [map_mul, map_inv, hε, mul_one, inv_one, mul_inv_cancel]
-  · change pointsPrecomp G (Scheme.dualNumbersιδOver S) (_ * _ * _⁻¹ * _⁻¹) = 1
-    simp only [map_mul, map_inv, hδ, one_mul, inv_one, mul_one, mul_inv_cancel]
+  sorry
 
 /-- The bracket of two infinitesimal points: the mixed term `εδ` of their group commutator
 `v_ε w_δ v_ε⁻¹ w_δ⁻¹` over `S[ε][δ]`. It is the restriction to the identity of the commutator
@@ -198,24 +173,7 @@ theorem coe_infPointsMap_apply (f : G ⟶ H) [IsMonHom f] (v : infPoints G) :
 group commutators and commutes with `η ↦ εδ`. -/
 theorem infPointsMap_infBracket (f : G ⟶ H) [IsMonHom f] (v w : infPoints G) :
     infPointsMap f (infBracket G v w) = infBracket H (infPointsMap f v) (infPointsMap f w) := by
-  have hG : Scheme.dualNumbersMulOver S ≫ (infBracket G v w).1 =
-      toε G v * toδ G w * (toε G v)⁻¹ * (toδ G w)⁻¹ :=
-    congrArg Subtype.val ((mixedEquiv G).apply_symm_apply _)
-  apply (mixedEquiv H).injective
-  apply Subtype.ext
-  change Scheme.dualNumbersMulOver S ≫ (infPointsMap f (infBracket G v w)).1 = _
-  rw [coe_infPointsMap_apply, ← Category.assoc, hG]
-  have hH := congrArg Subtype.val
-    ((mixedEquiv H).apply_symm_apply
-      ⟨_, commutator_mem_mixedPoints H (infPointsMap f v) (infPointsMap f w)⟩)
-  change Scheme.dualNumbersMulOver S ≫
-    (infBracket H (infPointsMap f v) (infPointsMap f w)).1 = _ at hH
-  change _ = Scheme.dualNumbersMulOver S ≫
-    (infBracket H (infPointsMap f v) (infPointsMap f w)).1
-  rw [hH]
-  change (IsMonHom.monoidHom f _) (_ * _ * _⁻¹ * _⁻¹) = _
-  simp only [map_mul, map_inv]
-  rfl
+  sorry
 
 /-- Let `f : G ⟶ H` be a monomorphism of group schemes, a subgroup scheme of `H`. If the
 commutators of the points of `H` over `S[ε][δ]` factor through `G`, then the bracket of two
@@ -226,26 +184,7 @@ its preimage under `η ↦ εδ` is an infinitesimal point of `G` mapping to `[v
 theorem infBracket_mem_range_infPointsMap (f : G ⟶ H) [IsMonHom f] [Mono f]
     (hf : ∀ a b : Scheme.dualNumbers₂Over S ⟶ H, a * b * a⁻¹ * b⁻¹ ∈ (IsMonHom.monoidHom f _).range)
     (v w : infPoints H) : infBracket H v w ∈ (infPointsMap f).range := by
-  obtain ⟨c, hc⟩ := hf (toε H v) (toδ H w)
-  change c ≫ f = _ at hc
-  have hm := (mem_mixedPoints H).1 (commutator_mem_mixedPoints H v w)
-  have hcm : c ∈ mixedPoints G := by
-    rw [mem_mixedPoints]
-    constructor
-    · rw [← cancel_mono f, Category.assoc, hc, hm.1, MonObj.one_comp]
-    · rw [← cancel_mono f, Category.assoc, hc, hm.2, MonObj.one_comp]
-  refine ⟨(mixedEquiv G).symm ⟨c, hcm⟩, ?_⟩
-  apply (mixedEquiv H).injective
-  apply Subtype.ext
-  change Scheme.dualNumbersMulOver S ≫
-    (infPointsMap f ((mixedEquiv G).symm ⟨c, hcm⟩)).1 = _
-  rw [coe_infPointsMap_apply, ← Category.assoc]
-  have hg : Scheme.dualNumbersMulOver S ≫
-      ((mixedEquiv G).symm ⟨c, hcm⟩).1 = c :=
-    congrArg Subtype.val ((mixedEquiv G).apply_symm_apply ⟨c, hcm⟩)
-  rw [hg, hc]
-  exact (congrArg Subtype.val ((mixedEquiv H).apply_symm_apply
-    ⟨_, commutator_mem_mixedPoints H v w⟩)).symm
+  sorry
 
 end GrpObj
 

@@ -10,9 +10,6 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 import Sheaf.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage
-import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions
-import Sheaf.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
-import Sheaf.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
 import Sheaf.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions
 import Sheaf.AlgebraicGeometry.Curve.ReductionModuleAssertions
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
@@ -763,32 +760,6 @@ theorem IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite {k : Type u} [
     (H : IsCurve.Assertions Λ (ν ≫ f)
       ((j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ))) :
     IsCurve.Assertions Λ f ((j)_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U ℓ)) :=
-  by
-    obtain ⟨α, hα, hQ, hQV⟩ :=
-      exists_mono_lowerShriek_constantModSheaf_lowerStar Λ f ν V hV j hj ℓ
-    let F' := (j')_!open[ModuleCat.{u + 1} Λ].obj (Etale.constantModSheaf Λ U' ℓ)
-    let G := (ν)_*[ModuleCat.{u + 1} Λ].obj F'
-    have : Mono α := hα
-    have : Scheme.IsConstructibleSheaf (cokernel α) := hQ
-    have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
-    have : Scheme.IsConstructibleSheaf G :=
-      finite_pushforward_open_constantModSheaf_constructible Λ ν j' ℓ
-    have Hν : IsCurve.Assertions Λ f G :=
-      IsCurve.Assertions.of_finite_pushforward_module Λ ν f F' H
-    have hconst : ℓ • 𝟙 (Etale.constantModSheaf Λ U' ℓ) = 0 := by
-      rw [Etale.constantModSheaf, ← (constantSheaf _ _).map_id, ← Functor.map_nsmul,
-        ← (constantSheaf _ _).map_zero]
-      congr 1
-      ext
-      simpa using (Ideal.Quotient.eq_zero_iff_mem).2
-        (Ideal.mem_span_singleton_self (ℓ : Λ))
-    have hF' : ℓ • 𝟙 F' = 0 := by
-      change ℓ • 𝟙 ((j')_!open[ModuleCat.{u + 1} Λ].obj
-        (Etale.constantModSheaf Λ U' ℓ)) = 0
-      rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hconst, Functor.map_zero]
-    have hG : ℓ • 𝟙 G = 0 := by
-      change ℓ • 𝟙 ((ν)_*[ModuleCat.{u + 1} Λ].obj F') = 0
-      rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hF', Functor.map_zero]
-    exact IsCurve.Assertions.of_finite_support_mono Λ f α ℓ hG V hV hQV Hν
+  sorry
 
 end AlgebraicGeometry

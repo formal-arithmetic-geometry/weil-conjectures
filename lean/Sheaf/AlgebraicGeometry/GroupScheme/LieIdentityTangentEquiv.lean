@@ -1,8 +1,7 @@
 module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
-import Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentTransport
-import Sheaf.AlgebraicGeometry.GroupScheme.IdentityTangentOperations
+import Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDualResidue
 @[expose] public section
 universe u
 open CategoryTheory
@@ -36,24 +35,5 @@ theorem exists_lie_identity_tangent_linearEquiv
       (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom
     letI : Module k (schemeTangentSpace k G.left G.hom x) :=
       Module.compHom (schemeTangentSpace k G.left G.hom x) r
-    Nonempty (Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x) := by
-  let x := unitSection G (IsLocalRing.closedPoint k)
-  let r : k →+* G.left.residueField x :=
-    (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom
-  let : Module k (schemeTangentSpace k G.left G.hom x) :=
-    Module.compHom (schemeTangentSpace k G.left G.hom x) r
-  change Nonempty (Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x)
-  obtain ⟨e, he⟩ := exists_identity_tangent_transport G
-  obtain ⟨hmul, hscale⟩ := identity_tangent_transport_operations G e he
-  refine ⟨{ (lieEquiv G).symm.trans e with
-    map_add' := ?_
-    map_smul' := ?_ }⟩
-  · intro v w
-    change e ((lieEquiv G).symm (v + w)) =
-      e ((lieEquiv G).symm v) + e ((lieEquiv G).symm w)
-    rw [lieEquiv_symm_add, hmul]
-  · intro t v
-    change e ((lieEquiv G).symm (t • v)) = t • e ((lieEquiv G).symm v)
-    change e ((lieEquiv G).symm ((Scheme.ΓSpecIso (.of k)).inv.hom t • v)) = _
-    rw [lieEquiv_symm_smul, hscale]
+    Nonempty (Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x) := by sorry
 end AlgebraicGeometry.GrpObj

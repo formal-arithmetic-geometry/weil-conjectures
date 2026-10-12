@@ -1,138 +1,141 @@
 {
- "id": "lemma-weil-pbc-normalization-exact-sequence",
- "blueprint": {
-  "is": "lemma-weil-pbc-normalization-exact-sequence",
-  "from": null,
-  "same_as": null
- },
- "kind": "statement",
- "title": "Normalization comparison exact sequence",
- "statement": "Let $C$ be a reduced curve, let $\\nu:\\widetilde C\\to C$ be its finite\nnormalization, and let $j:U\\hookrightarrow C$ be open. There is a natural\nexact sequence\n\n$$\n 0\\to j_!\\mathbf F_r\\longrightarrow\n \\nu_*\\widetilde j_!\\mathbf F_r\\longrightarrow Q\\to0,\n$$\n\nwhere $Q$ is constructible and supported on the finite nonnormal locus. The\nsequence, its boundary maps, and its restriction to opens commute with\nalgebraically closed field extension.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
-  "place": "node lemma-weil-pbc-normalization-exact-sequence, order 1177"
- },
- "stmt_deps": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions"
- ],
- "proof": [
-  {
-   "text": "Base change preserves surjectivity, so ν′ is surjective. The adjunction unit R_U → ν′_*ν′^*R_U is mono by [lem-weil-pbc-finite-surjective-unit-mono]. Identify ν′^*R_U with R_U′ using [lemma-constructible-pullback-constant], then apply exact extension by zero [lem-weil-pbc-extension-by-zero-exact] and compose with the finite/open comparison isomorphism [lemma-weil-pbc-finite-pushforward-extension-zero], constructed in [def-weil-pbc-finite-open-comparison]. This gives the concrete monomorphism α=j_!(η followed by ν′_*e) followed by β. The Lean proof proves monicity by preservation of monos, then cancellation of the comparison isomorphisms.",
-   "uses": [
+  "id": "lemma-weil-pbc-normalization-exact-sequence",
+  "blueprint": {
+    "is": "lemma-weil-pbc-normalization-exact-sequence",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "statement",
+  "title": "Normalization comparison exact sequence",
+  "statement": "Let $C$ be a reduced curve, let $\\nu:\\widetilde C\\to C$ be its finite\nnormalization, and let $j:U\\hookrightarrow C$ be open. There is a natural\nexact sequence\n\n$$\n 0\\to j_!\\mathbf F_r\\longrightarrow\n \\nu_*\\widetilde j_!\\mathbf F_r\\longrightarrow Q\\to0,\n$$\n\nwhere $Q$ is constructible and supported on the finite nonnormal locus. The\nsequence, its boundary maps, and its restriction to opens commute with\nalgebraically closed field extension.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "node lemma-weil-pbc-normalization-exact-sequence, order 1177"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-scheme-conventions"
+  ],
+  "proof": [
+    {
+      "text": "Base change preserves surjectivity, so ν′ is surjective. The adjunction unit R_U → ν′_*ν′^*R_U is mono by [lem-weil-pbc-finite-surjective-unit-mono]. Identify ν′^*R_U with R_U′ using [lemma-constructible-pullback-constant], then apply exact extension by zero [lem-weil-pbc-extension-by-zero-exact] and compose with the finite/open comparison isomorphism [lemma-weil-pbc-finite-pushforward-extension-zero], constructed in [def-weil-pbc-finite-open-comparison]. This gives the concrete monomorphism α=j_!(η followed by ν′_*e) followed by β. The Lean proof proves monicity by preservation of monos, then cancellation of the comparison isomorphisms.",
+      "uses": [
+        "lem-weil-pbc-finite-surjective-unit-mono",
+        "lemma-constructible-pullback-constant",
+        "lem-weil-pbc-extension-by-zero-exact",
+        "lemma-weil-pbc-finite-pushforward-extension-zero",
+        "def-weil-pbc-finite-open-comparison"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "Apply [lem-weil-pbc-normalization-mono-cokernel] to the constructed α and its proof of monicity. It supplies precisely constructibility of cokernel α and zero inverse image on V. Package α, Mono α, and these two properties as the existential conclusion. This proves the existing Lean signature; the additional boundary-map compatibility of the prose blueprint is not part of that signature and is not newly asserted here.",
+      "uses": [
+        "lem-weil-pbc-normalization-mono-cokernel"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
     "lem-weil-pbc-finite-surjective-unit-mono",
     "lemma-constructible-pullback-constant",
     "lem-weil-pbc-extension-by-zero-exact",
     "lemma-weil-pbc-finite-pushforward-extension-zero",
-    "def-weil-pbc-finite-open-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply [lem-weil-pbc-normalization-mono-cokernel] to the constructed α and its proof of monicity. It supplies precisely constructibility of cokernel α and zero inverse image on V. Package α, Mono α, and these two properties as the existential conclusion. This proves the existing Lean signature; the additional boundary-map compatibility of the prose blueprint is not part of that signature and is not newly asserted here.",
-   "uses": [
+    "def-weil-pbc-finite-open-comparison",
     "lem-weil-pbc-normalization-mono-cokernel"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-finite-surjective-unit-mono",
-  "lemma-constructible-pullback-constant",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lemma-weil-pbc-finite-pushforward-extension-zero",
-  "def-weil-pbc-finite-open-comparison",
-  "lem-weil-pbc-normalization-mono-cokernel"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
-  "place": "Adjunction-unit and finite/open comparison construction; cokernel part split into lem-weil-pbc-normalization-mono-cokernel"
- },
- "mathlib_searches": [],
- "mathlib_match": null,
- "status": "imported",
- "merged_into": null,
- "import_flags": [
-  "detailed_form",
-  "two_proofs",
-  "unreachable"
- ],
- "blueprint_kind": "lemma",
- "blueprint_order": 1177,
- "blueprint_uses": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-finite-open-comparison",
-  "def-weil-pbc-scheme-conventions",
-  "lemma-weil-pbc-eight-curve-devissage",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lemma-weil-pbc-finite-pushforward-extension-zero",
-  "thm-sc-main"
- ],
- "uses_not_cited": [
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-pbc-scheme-conventions",
-  "lemma-weil-pbc-eight-curve-devissage"
- ],
- "proof_split_by": "paragraphs",
- "blueprint_sketch": [
-  {
-   "statement": "Let $X$ be a reduced curve over an algebraically closed field,\n$\\nu:X^\\nu\\to X$ its finite normalization, $j:U\\hookrightarrow X$ open,\nand $j^\\nu:U^\\nu\\hookrightarrow X^\\nu$ its pullback. For every prime\n$\\ell$, the unit and the finite-open comparison define a monomorphism\n\n$$\n\\alpha:j_!\\underline{\\mathbf F_\\ell}\\longrightarrow\n\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell}\n$$\n\nwhose cokernel $Q$ is constructible and supported on the finite nonnormal\nlocus. The sequence\n\n$$\n0\\longrightarrow j_!\\underline{\\mathbf F_\\ell}\n\\xrightarrow{\\alpha}\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell}\n\\longrightarrow Q\\longrightarrow0\n$$\n\nand all its cohomology boundary maps commute with algebraically closed field\nextension and restriction to opens.",
-   "proof": "Let $v:U^\\nu\\to U$. Define $\\alpha$ as\n\n$$\nj_!\\underline{\\mathbf F_\\ell}\n\\xrightarrow{j_!\\eta}\nj_!v_*\\underline{\\mathbf F_\\ell}\n\\xrightarrow{\\beta_{\\nu,j}}\n\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell},\n$$\n\nwhere $\\eta$ is the unit of $v^{-1}\\dashv v_*$ and $\\beta$ is the comparison\nmap already constructed. At $\\bar x\\in U$, its stalk is the diagonal\n\n$$\n\\mathbf F_\\ell\\longrightarrow\n\\bigoplus_{\\bar z\\in\\nu^{-1}(\\bar x)}\\mathbf F_\\ell,\\qquad\na\\longmapsto(a)_{\\bar z};\n$$\n\noutside $U$, both stalks are zero. Normalization is surjective, so the\ndiagonal is injective. Over the dense open where $\\nu$ is an isomorphism it\nis an isomorphism. Therefore the cokernel $Q$ is supported on the finite\nnonnormal locus, with stalk the quotient of the displayed finite sum by its\ndiagonal. This proves exactness and constructibility.\n\nAfter an algebraically closed extension, $X^\\nu$ remains smooth and normal\nand is the normalization of the reduced base-changed curve. The unit stalk\nmap remains the diagonal, while the base-change rectangle for $\\beta$\nidentifies the two pulled-back comparison maps. Thus the short exact\nsequence pulls back to the primed sequence. Naturality of the connecting\nhomomorphism follows by applying compatible injective resolutions. For an\nopen $W\\subset X$, finite base change replaces $\\nu$ by\n$\\nu^{-1}W\\to W$ and gives the same stalk diagonals, proving compatibility\nwith open restriction.\n\nFinally $H^q(X,Q)=0$ for $q>0$, and\n$H^0(X,Q)$ is the finite direct sum of its stalks; both statements persist\nafter base change. Exact finite direct image and Leray identify\n$H^q(X,\\nu_*j^\\nu_!\\mathbf F_\\ell)$ with\n$H^q(X^\\nu,j^\\nu_!\\mathbf F_\\ell)$. Hence the displayed long exact\nsequence transfers vanishing, finiteness, field-extension isomorphisms, and\nopen-restriction surjectivity from the normalized term to\n$j_!\\mathbf F_\\ell$: in degrees at least two the maps are isomorphisms, and\nin degrees zero and one the finite sequence\n\n$$\n0\\to H^0(j_!\\mathbf F_\\ell)\\to H^0(\\nu_*j^\\nu_!\\mathbf F_\\ell)\n\\to H^0(Q)\\to H^1(j_!\\mathbf F_\\ell)\\to\nH^1(\\nu_*j^\\nu_!\\mathbf F_\\ell)\\to0\n$$\n\ngives the comparison by a five-lemma diagram.",
-   "cites": []
-  }
- ],
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-   ]
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-weil-pbc-normalization-exact-sequence.md",
+    "place": "Adjunction-unit and finite/open comparison construction; cokernel part split into lem-weil-pbc-normalization-mono-cokernel"
   },
-  "slopmaster2": {
-   "state": "sorry_here",
-   "decls": [
+  "mathlib_searches": [],
+  "mathlib_match": null,
+  "status": "imported",
+  "merged_into": null,
+  "import_flags": [
+    "detailed_form",
+    "two_proofs",
+    "unreachable"
+  ],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1177,
+  "blueprint_uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-finite-open-comparison",
+    "def-weil-pbc-scheme-conventions",
+    "lemma-weil-pbc-eight-curve-devissage",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-finite-pushforward-extension-zero",
+    "thm-sc-main"
+  ],
+  "uses_not_cited": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-scheme-conventions",
+    "lemma-weil-pbc-eight-curve-devissage"
+  ],
+  "proof_split_by": "paragraphs",
+  "blueprint_sketch": [
     {
-     "name": "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar",
-     "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-     "lines": [
-      236,
-      265
-     ],
-     "kind": "theorem",
-     "sorry": true
+      "statement": "Let $X$ be a reduced curve over an algebraically closed field,\n$\\nu:X^\\nu\\to X$ its finite normalization, $j:U\\hookrightarrow X$ open,\nand $j^\\nu:U^\\nu\\hookrightarrow X^\\nu$ its pullback. For every prime\n$\\ell$, the unit and the finite-open comparison define a monomorphism\n\n$$\n\\alpha:j_!\\underline{\\mathbf F_\\ell}\\longrightarrow\n\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell}\n$$\n\nwhose cokernel $Q$ is constructible and supported on the finite nonnormal\nlocus. The sequence\n\n$$\n0\\longrightarrow j_!\\underline{\\mathbf F_\\ell}\n\\xrightarrow{\\alpha}\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell}\n\\longrightarrow Q\\longrightarrow0\n$$\n\nand all its cohomology boundary maps commute with algebraically closed field\nextension and restriction to opens.",
+      "proof": "Let $v:U^\\nu\\to U$. Define $\\alpha$ as\n\n$$\nj_!\\underline{\\mathbf F_\\ell}\n\\xrightarrow{j_!\\eta}\nj_!v_*\\underline{\\mathbf F_\\ell}\n\\xrightarrow{\\beta_{\\nu,j}}\n\\nu_*j^\\nu_!\\underline{\\mathbf F_\\ell},\n$$\n\nwhere $\\eta$ is the unit of $v^{-1}\\dashv v_*$ and $\\beta$ is the comparison\nmap already constructed. At $\\bar x\\in U$, its stalk is the diagonal\n\n$$\n\\mathbf F_\\ell\\longrightarrow\n\\bigoplus_{\\bar z\\in\\nu^{-1}(\\bar x)}\\mathbf F_\\ell,\\qquad\na\\longmapsto(a)_{\\bar z};\n$$\n\noutside $U$, both stalks are zero. Normalization is surjective, so the\ndiagonal is injective. Over the dense open where $\\nu$ is an isomorphism it\nis an isomorphism. Therefore the cokernel $Q$ is supported on the finite\nnonnormal locus, with stalk the quotient of the displayed finite sum by its\ndiagonal. This proves exactness and constructibility.\n\nAfter an algebraically closed extension, $X^\\nu$ remains smooth and normal\nand is the normalization of the reduced base-changed curve. The unit stalk\nmap remains the diagonal, while the base-change rectangle for $\\beta$\nidentifies the two pulled-back comparison maps. Thus the short exact\nsequence pulls back to the primed sequence. Naturality of the connecting\nhomomorphism follows by applying compatible injective resolutions. For an\nopen $W\\subset X$, finite base change replaces $\\nu$ by\n$\\nu^{-1}W\\to W$ and gives the same stalk diagonals, proving compatibility\nwith open restriction.\n\nFinally $H^q(X,Q)=0$ for $q>0$, and\n$H^0(X,Q)$ is the finite direct sum of its stalks; both statements persist\nafter base change. Exact finite direct image and Leray identify\n$H^q(X,\\nu_*j^\\nu_!\\mathbf F_\\ell)$ with\n$H^q(X^\\nu,j^\\nu_!\\mathbf F_\\ell)$. Hence the displayed long exact\nsequence transfers vanishing, finiteness, field-extension isomorphisms, and\nopen-restriction surjectivity from the normalized term to\n$j_!\\mathbf F_\\ell$: in degrees at least two the maps are isomorphisms, and\nin degrees zero and one the finite sequence\n\n$$\n0\\to H^0(j_!\\mathbf F_\\ell)\\to H^0(\\nu_*j^\\nu_!\\mathbf F_\\ell)\n\\to H^0(Q)\\to H^1(j_!\\mathbf F_\\ell)\\to\nH^1(\\nu_*j^\\nu_!\\mathbf F_\\ell)\\to0\n$$\n\ngives the comparison by a five-lemma diagram.",
+      "cites": []
     }
-   ],
-   "missing": [],
-   "open": []
+  ],
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": [
+        "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
+      ]
+    },
+    "slopmaster2": {
+      "state": "sorry_here",
+      "decls": [
+        {
+          "name": "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar",
+          "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+          "lines": [
+            236,
+            265
+          ],
+          "kind": "theorem",
+          "sorry": true
+        }
+      ],
+      "missing": [],
+      "open": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "lean": {
+    "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
+    "declaration": "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar",
+    "branch": "sheaf-dag",
+    "line": 696,
+    "declarations": [
+      "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
+    ],
+    "sorry_free": true,
+    "note": "T2 second reading: the existential theorem has no local sorry; its proof constructs the mono and invokes lem-weil-pbc-normalization-mono-cokernel for the remaining cokernel properties. Transitive sorryAx remains; this is not an axiom-free completion."
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "X-bd1bc",
+    "group": "A2",
+    "result": "pass",
+    "landing": "20261012T112828-L-763717",
+    "kind": "interface",
+    "note": "independent Codex review: Delivered finite-quotient signature, node record, change record, report, and Lean source matched each other and the repository; delivered module and downstream caller compiled cleanly.",
+    "sorry_before": [
+      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+    ],
+    "sorry_after": [
+      "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
+    ]
   }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "lean": {
-  "module": "WeilConjectures.AlgebraicGeometry.Curve.Reductions",
-  "declaration": "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar",
-  "branch": "sheaf-dag",
-  "line": 696,
-  "declarations": [
-   "AlgebraicGeometry.exists_mono_lowerShriek_constantModSheaf_lowerStar"
-  ],
-  "sorry_free": true,
-  "note": "T2 second reading: the existential theorem has no local sorry; its proof constructs the mono and invokes lem-weil-pbc-normalization-mono-cokernel for the remaining cokernel properties. Transitive sorryAx remains; this is not an axiom-free completion."
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
-  "result": "pass",
-  "landing": "20261012T144055-L-2089534",
-  "kind": "interface",
-  "sorry_before": [
-   "AlgebraicGeometry.IsCurve.Assertions.lowerShriek_constantModSheaf_of_finite"
-  ],
-  "sorry_after": []
- }
 }

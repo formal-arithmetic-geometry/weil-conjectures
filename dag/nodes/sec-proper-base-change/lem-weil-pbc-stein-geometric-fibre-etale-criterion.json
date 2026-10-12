@@ -1,163 +1,156 @@
 {
- "id": "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-henselian-idempotent-lifting",
-   "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent)",
-   "via": [
-    "lem-weil-pbc-stein-factorization-affine",
-    "lem-weil-pbc-zariski-h0-proper-henselian-pair"
-   ]
+  "id": "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-henselian-idempotent-lifting",
+      "place": "step 2 of its split (source: Lemma 59.91.1 (Tag 0A0B), label lemma-zariski-h0-proper-over-henselian-pair, line 18167; the choice of the sheaf $\\mathcal C$ and the computation of $\\Gamma(T,\\mathcal C|_T)$ written out by the agent)",
+      "via": [
+        "lem-weil-pbc-stein-factorization-affine",
+        "lem-weil-pbc-zariski-h0-proper-henselian-pair"
+      ]
+    },
+    "same_as": null
   },
-  "same_as": null
- },
- "kind": "statement",
- "title": "Etale criterion for geometric connectedness of a fibre",
- "statement": "Let $g:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $s\\in S$. The scheme-theoretic fibre $X_s$ [def-pc-scheme-fibre] is geometrically connected [def-pc-geometrically-irreducible] if and only if, for every etale neighbourhood $(U,u)\\to(S,s)$, the base-changed fibre $X_u=X\\times_SU\\times_U\\operatorname{Spec}\\kappa(u)$ is connected [def-weil-connected-scheme].",
- "source": {
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "More on Morphisms, Lemma 37.53.6 (Tag 03GZ, label lemma-characterize-geometrically-connected-fibres, line 15219)"
- },
- "stmt_deps": [
-  "def-pc-scheme",
-  "def-pc-scheme-fibre",
-  "def-weil-connected-scheme",
-  "def-pc-geometrically-irreducible"
- ],
- "proof": [
-  {
-   "text": "Use Mathlib isPullback_fiberToSpecResidueField_of_isPullback on the canonical pullback square for g and the neighbourhood map e. After replacing s by e(t), this gives the neighbourhood fibre as a cartesian square over the fibre g.fiber s and Spec κ(t). Geometric connectedness applies to this square directly, without a finite-separability hypothesis on the residue extension.",
-   "uses": [
-    "def-pc-scheme-fibre",
-    "def-pc-geometrically-irreducible"
-   ],
-   "elementary": false,
-   "source": {
+  "kind": "statement",
+  "title": "Etale criterion for geometric connectedness of a fibre",
+  "statement": "Let $g:X\\to S$ be a morphism of schemes [def-pc-scheme] and let $s\\in S$. The scheme-theoretic fibre $X_s$ [def-pc-scheme-fibre] is geometrically connected [def-pc-geometrically-irreducible] if and only if, for every etale neighbourhood $(U,u)\\to(S,s)$, the base-changed fibre $X_u=X\\times_SU\\times_U\\operatorname{Spec}\\kappa(u)$ is connected [def-weil-connected-scheme].",
+  "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 03GZ, proof, forward implication; cartesian identification by Mathlib fibre pullback lemma"
-   }
+    "place": "More on Morphisms, Lemma 37.53.6 (Tag 03GZ, label lemma-characterize-geometrically-connected-fibres, line 15219)"
   },
-  {
-   "text": "For the converse apply the finite-separable test to g.fiber s with its canonical structure morphism. For each finite separable extension K/κ(s), realize K as the residue field of an etale neighbourhood by the prescribed-residue-field theorem, with its compatible field isomorphism.",
-   "uses": [
+  "stmt_deps": [
+    "def-pc-scheme",
+    "def-pc-scheme-fibre",
+    "def-weil-connected-scheme",
+    "def-pc-geometrically-irreducible"
+  ],
+  "proof": [
+    {
+      "text": "Write $k=\\kappa(s)$. For an etale neighbourhood $(U,u)\\to(S,s)$, the residue-field map $k\\to\\kappa(u)$ is a finite separable extension by [lem-weil-pbc-etale-residue-field-extension-separable]. Associativity of fibre products identifies the fibre $X_u$ with the base change $X_s\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa(u)$ (the fibre and base-change conventions are [def-pc-scheme-fibre] and [def-pc-base-change]).",
+      "uses": [
+        "def-pc-scheme-fibre",
+        "def-pc-base-change",
+        "lem-weil-pbc-etale-residue-field-extension-separable"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "More on Morphisms, Lemma 03GZ, proof, first paragraph (line 15224), with the fibre-product identification written out"
+      }
+    },
+    {
+      "text": "If $X_s$ is geometrically connected, then its base change along every field extension of $k$ is connected by [def-pc-geometrically-irreducible]. Applying this to the finite separable extension $k\\subseteq\\kappa(u)$ from Step 1 and using the fibre identification there shows that every etale-neighbourhood fibre $X_u$ is connected.",
+      "uses": [
+        "def-pc-geometrically-irreducible"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "More on Morphisms, Lemma 03GZ, proof, first paragraph (line 15224)"
+      }
+    },
+    {
+      "text": "Conversely, assume every etale-neighbourhood fibre is connected. If $X_s$ were not geometrically connected, [lem-weil-pbc-geometrically-connected-finite-separable-test] would provide a finite separable extension $k\\subseteq k'$ for which $X_s\\times_k\\operatorname{Spec}k'$ is disconnected. By [lem-weil-pbc-etale-neighbourhood-prescribed-residue-field] there is an affine etale neighbourhood $(U,u)\\to(S,s)$ whose residue extension $\\kappa(u)/k$ is identified with $k'/k$. Under that identification Step 1 identifies $X_u$ with the disconnected base change, contradicting the hypothesis. Therefore $X_s$ is geometrically connected.",
+      "uses": [
+        "lem-weil-pbc-geometrically-connected-finite-separable-test",
+        "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-morphisms.tex",
+        "place": "More on Morphisms, Lemma 03GZ, proof, second paragraph (lines 15226--15233), using Varieties Lemma 0389 and Lemma 02LF"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-pc-scheme-fibre",
+    "def-pc-base-change",
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "def-pc-geometrically-irreducible",
     "lem-weil-pbc-geometrically-connected-finite-separable-test",
     "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "document",
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 03GZ, proof, converse (using Tags 0389 and 02LF)"
-   }
+    "place": "More on Morphisms, Lemma 37.53.6 (Tag 03GZ, label lemma-characterize-geometrically-connected-fibres), proof lines 15221--15233"
   },
-  {
-   "text": "Apply Spec to the compatible residue-field isomorphism. Spec.map_comp and ring-map extensionality show that it identifies the residue-field map with the algebra map into K. Transport the cartesian square of the first step using IsPullback.of_iso, leaving its top-left corner unchanged. Its isoPullback induces a homeomorphism to the tested field base change. Transfer the assumed ConnectedSpace instance along that homeomorphism; the finite-separable criterion then proves geometric connectedness.",
-   "uses": [
-    "def-pc-scheme-fibre"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 03GZ, proof, identification of X_u with the field base change; categorical and topological glue written by A3"
-   }
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "geometrically connected scheme fibre iff every etale neighbourhood has connected fibre",
+      "results": "AlgebraicGeometry.GeometricallyConnected.iff_geometricallyConnected_fiber; no etale-neighbourhood criterion",
+      "date": "2026-10-10",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "characterize geometrically connected fibres by etale local connectedness",
+      "results": "GeometricallyConnected and its ConnectedSpace fibre instance; no local etale criterion",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rniE 'geometricallyConnected.*etale|etale.*geometricallyConnected|connected.*neighbourhood' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+      "results": "Geometrically/Connected.lean has GeometricallyConnected and fibre instances but no etale-neighbourhood equivalence",
+      "date": "2026-10-10",
+      "verdict": "no exact match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "lem-weil-pbc-stein-factorization-affine",
+    "date": "2026-10-10"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-p1",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
+    "worker": "stage1",
+    "summary": "Split along More on Morphisms Tag 03GZ. The fibre over an etale point is identified with the base change of X_s along its finite separable residue extension (02G8 and the fibre/base-change conventions); the forward implication is geometric connectedness under field base change; the converse uses the finite-separable characterization of geometric connectedness (new public Tag 0389 node) and realizes the witnessing extension by an etale neighbourhood (02LF)."
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "group": "G1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 3 steps along 03GZ; 0389 (varieties-lemma-characterize-geometrically-disconnected) new unsplit node matches the Stacks statement; 02G8 and 02LF nodes exist; def-pc-geometrically-irreducible defines geometric connectedness; correct. L adds the missing citation of that definition in the item statement in a follow-up commit."
+  },
+  "lead_note": "L (2026-10-10): added the citation of def-pc-geometrically-irreducible (which defines geometric connectedness) to the statement; content unchanged.",
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.GeometricallyConnectedFiberEtaleCriterion",
+    "declaration": "AlgebraicGeometry.Scheme.Hom.geometricallyConnected_fiber_iff_connectedSpace_etale_neighbourhood",
+    "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyConnectedFiberEtaleCriterion.lean",
+    "statement": "theorem Scheme.Hom.geometricallyConnected_fiber_iff_connectedSpace_etale_neighbourhood {X S : Scheme.{u}} (g : X ⟶ S) (s : S) : GeometricallyConnected (g.fiberToSpecResidueField s) ↔ ∀ (U : Scheme.{u}) (e : U ⟶ S) [Etale e] (t : U), e t = s → ConnectedSpace ((pullback.snd g e).fiber t)",
+    "branch": "sheaf-dag",
+    "by": "R1",
+    "date": "2026-10-11",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "R1",
+    "result": "pass",
+    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
   }
- ],
- "proof_deps": [
-  "def-pc-scheme-fibre",
-  "def-pc-geometrically-irreducible",
-  "lem-weil-pbc-geometrically-connected-finite-separable-test",
-  "lem-weil-pbc-etale-neighbourhood-prescribed-residue-field"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 03GZ, proof; A3 realizes the argument using Mathlib cartesian fibre squares and compatible Spec isomorphisms (2026-10-12)"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "geometrically connected scheme fibre iff every etale neighbourhood has connected fibre",
-   "results": "AlgebraicGeometry.GeometricallyConnected.iff_geometricallyConnected_fiber; no etale-neighbourhood criterion",
-   "date": "2026-10-10",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "characterize geometrically connected fibres by etale local connectedness",
-   "results": "GeometricallyConnected and its ConnectedSpace fibre instance; no local etale criterion",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rniE 'geometricallyConnected.*etale|etale.*geometricallyConnected|connected.*neighbourhood' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-   "results": "Geometrically/Connected.lean has GeometricallyConnected and fibre instances but no etale-neighbourhood equivalence",
-   "date": "2026-10-10",
-   "verdict": "no exact match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "lem-weil-pbc-stein-factorization-affine",
-  "date": "2026-10-10"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-p1",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-weil-pbc-stein-geometric-fibre-etale-criterion",
-  "worker": "stage1",
-  "summary": "Split along More on Morphisms Tag 03GZ. The fibre over an etale point is identified with the base change of X_s along its finite separable residue extension (02G8 and the fibre/base-change conventions); the forward implication is geometric connectedness under field base change; the converse uses the finite-separable characterization of geometric connectedness (new public Tag 0389 node) and realizes the witnessing extension by an etale neighbourhood (02LF)."
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "group": "G1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of G1; spot-checked by L: L: 3 steps along 03GZ; 0389 (varieties-lemma-characterize-geometrically-disconnected) new unsplit node matches the Stacks statement; 02G8 and 02LF nodes exist; def-pc-geometrically-irreducible defines geometric connectedness; correct. L adds the missing citation of that definition in the item statement in a follow-up commit."
- },
- "lead_note": "L (2026-10-10): added the citation of def-pc-geometrically-irreducible (which defines geometric connectedness) to the statement; content unchanged.",
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.GeometricallyConnectedFiberEtaleCriterion",
-  "declaration": "AlgebraicGeometry.Scheme.Hom.geometricallyConnected_fiber_iff_connectedSpace_etale_neighbourhood",
-  "file": "lean/Sheaf/AlgebraicGeometry/GeometricallyConnectedFiberEtaleCriterion.lean",
-  "statement": "theorem Scheme.Hom.geometricallyConnected_fiber_iff_connectedSpace_etale_neighbourhood {X S : Scheme.{u}} (g : X ⟶ S) (s : S) : GeometricallyConnected (g.fiberToSpecResidueField s) ↔ ∀ (U : Scheme.{u}) (e : U ⟶ S) [Etale e] (t : U), e t = s → ConnectedSpace ((pullback.snd g e).fiber t)",
-  "branch": "sheaf-dag",
-  "by": "R1",
-  "date": "2026-10-11",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "R1",
-  "result": "pass",
-  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A3",
-  "result": "pass",
-  "landing": "20261012T144051-L-2088138",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

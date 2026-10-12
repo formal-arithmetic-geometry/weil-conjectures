@@ -1,128 +1,131 @@
 {
- "id": "lem-ag-lie-identity-tangent-equiv",
- "kind": "statement",
- "title": "Lie algebra is tangent space at identity",
- "statement": "For a field k and group scheme G over Spec k, after the canonical identity residue-field identification, the Lie algebra Lie G is k-linearly equivalent to the dual-number tangent space of G at the identity.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-  "place": "The infinitesimal-point identification in the identity tangent-space paragraph"
- },
- "stmt_deps": [
-  "def-sc-group-scheme",
-  "def-sc-scheme-tangent-space",
-  "def-weil-residue-field"
- ],
- "proof": [
-  {
-   "text": "Obtain the explicitly specified equivalence e from infinitesimal points to scheme tangent vectors by exists_identity_tangent_transport. Obtain its multiplication and scalar compatibility from identity_tangent_transport_operations. Compose e with lieEquiv.symm.",
-   "uses": [
-    "lem-ag-identity-tangent-transport",
-    "lem-ag-identity-tangent-operations",
-    "def-wf-lie-algebra-derivation"
-   ],
-   "elementary": false
+  "id": "lem-ag-lie-identity-tangent-equiv",
+  "kind": "statement",
+  "title": "Lie algebra is tangent space at identity",
+  "statement": "For a field k and group scheme G over Spec k, after the canonical identity residue-field identification, the Lie algebra Lie G is k-linearly equivalent to the dual-number tangent space of G at the identity.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+    "place": "The infinitesimal-point identification in the identity tangent-space paragraph"
   },
-  {
-   "text": "Build a LinearEquiv from this type equivalence. Its additivity follows by rewriting lieEquiv_symm_add and then the transport multiplication identity. Its scalar compatibility follows by restricting Lie scalars through Scheme.ΓSpecIso.inv, rewriting lieEquiv_symm_smul and then the transport scalar identity.",
-   "uses": [
-    "def-wf-lie-algebra-derivation"
-   ],
-   "elementary": false
+  "stmt_deps": [
+    "def-sc-group-scheme",
+    "def-sc-scheme-tangent-space",
+    "def-weil-residue-field"
+  ],
+  "proof": [
+    {
+      "text": "Use lieEquiv and infPointsEquivTangentGroup to identify the Lie algebra with dual-number group points reducing to the identity. Use the residue rationality of the identity to transport the dual-number source from k to the residue field. The two defining conditions are then exactly those of schemeTangentSpace. The inverse transports back.",
+      "uses": [
+        "def-wf-lie-algebra-derivation",
+        "def-sc-group-scheme",
+        "def-sc-scheme-tangent-space",
+        "lem-ag-lie-identity-residue-rational"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The unit laws identify the differential of multiplication at the identity with the sum of the two tangent vectors; lieEquiv_mul gives additivity. Epsilon scaling and toLie_infPointsScale give compatibility with scalars, using Scheme.ΓSpecIso. These operations are the specified operations of schemeTangentSpace, so the bijection is a k-linear equivalence.",
+      "uses": [
+        "def-wf-lie-algebra-derivation",
+        "def-sc-scheme-tangent-space"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-sc-group-scheme",
+    "def-sc-scheme-tangent-space",
+    "def-wf-lie-algebra-derivation",
+    "lem-ag-lie-identity-residue-rational"
+  ],
+  "proof_origin": {
+    "by": "Y3 stage 3",
+    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
+    "place": "The infinitesimal-point identification in the identity tangent-space paragraph"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "Lie algebra group scheme tangent space at identity",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-12",
+      "verdict": "unavailable",
+      "digest": "none"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Lie algebra identifies with tangent space at identity group scheme",
+      "results": "GroupLieAlgebra manifold hits only; no exact match.",
+      "date": "2026-10-12",
+      "verdict": "no exact match",
+      "digest": "96531ca5b227150d"
+    },
+    {
+      "tool": "loogle",
+      "query": "Function.Bijective",
+      "results": "Generic Function.Bijective declarations; no exact identity statement.",
+      "date": "2026-10-12",
+      "verdict": "no exact match",
+      "digest": "2f433c24e47d1539"
+    },
+    {
+      "tool": "grep",
+      "query": "Lie.*CotangentSpace|schemeTangentSpace.*Lie",
+      "results": "No exact hit in pinned Mathlib tree.",
+      "date": "2026-10-12",
+      "verdict": "no exact match",
+      "digest": "4f53cda18c2baa0c"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDual",
+    "date": "2026-10-12",
+    "group": "Y3"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "lem-wf-same-lie-closed-subgroup",
+      "place": "The infinitesimal-point identification in the identity tangent-space paragraph",
+      "via": [
+        "lem-ag-lie-identity-cotangent-dual"
+      ]
+    },
+    "same_as": []
+  },
+  "chapter": "sec-algebraic-groups-lie-algebras",
+  "unit": "sk-i-cartier",
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv",
+    "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieIdentityTangentEquiv.lean",
+    "declaration": "AlgebraicGeometry.GrpObj.exists_lie_identity_tangent_linearEquiv",
+    "statement": "theorem exists_lie_identity_tangent_linearEquiv\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    letI : Module k (schemeTangentSpace k G.left G.hom x) :=\n      Module.compHom (schemeTangentSpace k G.left G.hom x) r\n    Nonempty (Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x)",
+    "branch": "sheaf-dag",
+    "by": "Y3",
+    "date": "2026-10-12"
+  },
+  "reviewed": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "Y3",
+    "result": "pass",
+    "landing": "20261012T110327-L-625402",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-12",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "Y3",
+    "result": "pass",
+    "landing": "20261012T110327-L-625402",
+    "kind": "interface",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
   }
- ],
- "proof_deps": [
-  "def-wf-lie-algebra-derivation",
-  "lem-ag-identity-tangent-operations",
-  "lem-ag-identity-tangent-transport"
- ],
- "proof_origin": {
-  "by": "E3 stage 3",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-  "place": "Identity tangent-space argument; explicit transport and operation compatibility"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "Lie algebra group scheme tangent space at identity",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-12",
-   "verdict": "unavailable",
-   "digest": "none"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Lie algebra identifies with tangent space at identity group scheme",
-   "results": "GroupLieAlgebra manifold hits only; no exact match.",
-   "date": "2026-10-12",
-   "verdict": "no exact match",
-   "digest": "96531ca5b227150d"
-  },
-  {
-   "tool": "loogle",
-   "query": "Function.Bijective",
-   "results": "Generic Function.Bijective declarations; no exact identity statement.",
-   "date": "2026-10-12",
-   "verdict": "no exact match",
-   "digest": "2f433c24e47d1539"
-  },
-  {
-   "tool": "grep",
-   "query": "Lie.*CotangentSpace|schemeTangentSpace.*Lie",
-   "results": "No exact hit in pinned Mathlib tree.",
-   "date": "2026-10-12",
-   "verdict": "no exact match",
-   "digest": "4f53cda18c2baa0c"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDual",
-  "date": "2026-10-12",
-  "group": "Y3"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "lem-wf-same-lie-closed-subgroup",
-   "place": "The infinitesimal-point identification in the identity tangent-space paragraph",
-   "via": [
-    "lem-ag-lie-identity-cotangent-dual"
-   ]
-  },
-  "same_as": []
- },
- "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-i-cartier",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv",
-  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieIdentityTangentEquiv.lean",
-  "declaration": "AlgebraicGeometry.GrpObj.exists_lie_identity_tangent_linearEquiv",
-  "statement": "theorem exists_lie_identity_tangent_linearEquiv\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let x := unitSection G (IsLocalRing.closedPoint k)\n    let r : k →+* G.left.residueField x :=\n      (StructureSheaf.toStalk k (G.hom x) ≫ G.hom.stalkMap x ≫ G.left.residue x).hom\n    letI : Module k (schemeTangentSpace k G.left G.hom x) :=\n      Module.compHom (schemeTangentSpace k G.left G.hom x) r\n    Nonempty (Lie G ≃ₗ[k] schemeTangentSpace k G.left G.hom x)",
-  "branch": "sheaf-dag",
-  "by": "Y3",
-  "date": "2026-10-12"
- },
- "reviewed": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
-  "result": "pass",
-  "landing": "20261012T110327-L-625402",
-  "kind": "interface",
-  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
- },
- "reviewed_proof": {
-  "date": "2026-10-12",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E3",
-  "result": "pass",
-  "landing": "20261012T144104-L-2092562",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }
