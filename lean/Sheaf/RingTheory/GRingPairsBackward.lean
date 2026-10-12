@@ -5,16 +5,56 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.RingTheory.GRing
-import Sheaf.RingTheory.AdicCompletionNoetherian
-import Sheaf.RingTheory.FibreRingNoetherian
-import Sheaf.RingTheory.LocalCompletionQuotient
-import Sheaf.RingTheory.LocalizationRegular
-import Sheaf.RingTheory.RegularComposition
+import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+import Mathlib.RingTheory.Flat.Localization
+import Sheaf.RingTheory.FormalFibreQuotientIso
+import Sheaf.RingTheory.GeometricRegularityFieldIso
 import Sheaf.RingTheory.RegularThroughLocalization
+
+/-!
+# Backward implication of the G-ring criterion
+
+Source: Stacks Project, More on Algebra, proof of Lemma 07PN.
+(blueprint: lem-weil-pbc-g-ring-check-pairs-of-primes-backward)
+-/
 
 @[expose] public section
 
 universe u
+
+private theorem geometricallyRegular_of_subsingleton
+    (k A : Type u) [Field k] [CommRing A] [Algebra k A] [Subsingleton A] :
+    Algebra.IsGeometricallyRegular k A := by
+  refine ⟨inferInstance, ?_⟩
+  intro K _ _ _ _
+  refine ⟨?_⟩
+  intro q hq
+  exact False.elim (hq.ne_top (Subsingleton.elim _ _))
+
+private theorem completion_fiber_subsingleton
+    (R : Type u) [CommRing R] (q p : Ideal R) [q.IsPrime] [p.IsPrime]
+    (hqp : ¬ q ≤ p) :
+    Subsingleton (q.Fiber (AdicCompletion
+      (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p))) := by
+  classical
+  let L := Localization.AtPrime p
+  let C := AdicCompletion (IsLocalRing.maximalIdeal L) L
+  obtain ⟨x, hxq, hxp⟩ := SetLike.not_le_iff_exists.mp hqp
+  have hu : IsUnit (algebraMap R C x) := by
+    rw [IsScalarTower.algebraMap_apply R L C]
+    exact (IsLocalization.map_units L (⟨x, hxp⟩ : p.primeCompl)).map (algebraMap L C)
+  have hz : algebraMap R (q.Fiber C) x = 0 := by
+    change (algebraMap R q.ResidueField x) ⊗ₜ[R] (1 : C) = 0
+    rw [Ideal.algebraMap_residueField_eq_zero.mpr hxq, TensorProduct.zero_tmul]
+  have hzunit : IsUnit (0 : q.Fiber C) := by
+    rw [← hz]
+    have hu' := hu.map
+      (Algebra.TensorProduct.includeRight : C →ₐ[R] q.Fiber C).toRingHom
+    change IsUnit ((Algebra.TensorProduct.includeRight : C →ₐ[R] q.Fiber C)
+      (algebraMap R C x)) at hu'
+    rw [AlgHom.commutes] at hu'
+    exact hu'
+  exact subsingleton_of_zero_eq_one (isUnit_zero_iff.mp hzunit)
 
 /-- Backward implication in the G-ring criterion by pairs of primes. This is the backward
 half of Stacks Project, More on Algebra, Lemma 07PN, using the formal-fibre description of
@@ -29,4 +69,20 @@ theorem isGRing_pairsOfPrimes_backward (R : Type u) [CommRing R] [IsNoetherianRi
       let F := TensorProduct (R ⧸ q) q.ResidueField C
       IsNoetherianRing F ∧ Algebra.IsGeometricallyRegular q.ResidueField F) :
     IsGRing R := by
-  sorry
+  refine ⟨inferInstance, ?_⟩
+  intro p hp
+  let L := Localization.AtPrime p
+  let C := AdicCompletion (IsLocalRing.maximalIdeal L) L
+  apply RingHom.isRegular_of_comp_algebraMap_localization (A := R)
+    (A' := L) (C := C) p.primeCompl
+  rw [RingHom.IsRegular, toAlgebra_algebraMap]
+  refine ⟨?_, ?_⟩
+  · rw [RingHom.flat_algebraMap_iff]
+    exact Module.Flat.trans R L C
+  · intro q hq
+    by_cases hqp : q ≤ p
+    · obtain ⟨e⟩ := nonempty_formalFibre_quotient_algEquiv R q p hqp
+      exact Algebra.isGeometricallyRegular_of_fieldIso (RingEquiv.refl q.ResidueField)
+        e.toRingEquiv (fun x a ↦ e.toLinearEquiv.map_smul x a) (h q p hqp).2
+    · have := completion_fiber_subsingleton R q p hqp
+      exact geometricallyRegular_of_subsingleton q.ResidueField (q.Fiber C)

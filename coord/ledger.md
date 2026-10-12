@@ -8095,3 +8095,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/G1/Sheaf.AlgebraicGeometry.StrictHenselizationExchangeCubeStalkIsos (stage 3; reviewer PASS; first push; landing 20261012T144111-L-2095191 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/G1/Sheaf.ConstructibleSheaf.ConstantModuleDual (stage 3; reviewer PASS; after a return; landing 20261012T144111-L-2095326 (interface); batch 20261012T144049; modules 2; new nodes 1)
 - 14:41 L: merged deliver/G1/Sheaf.RingTheory.CompletionDimensionEquality (stage 3; reviewer PASS; first push; landing 20261012T144112-L-2095465 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/G1/Sheaf.RingTheory.GRingPairsBackward (stage 3; reviewer PASS; first push; landing 20261012T144112-L-2095606 (interface); batch 20261012T144049; modules 2; new nodes 1)

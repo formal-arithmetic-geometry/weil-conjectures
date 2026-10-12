@@ -25,20 +25,55 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Assume all quotient formal fibres for pairs q ≤ p are Noetherian and geometrically regular. The same quotient formal-fibre identification, together with flatness and the characterization of regular maps by geometrically regular fibres, shows each localization-to-completion map is regular, hence R is a G-ring.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Lemma 07PN, proof of the corresponding implication"
-   }
+   "text": "For every p, the composite R → R_p → completion(R_p) is flat: localization is flat, Noetherian completion is flat, and flat modules are transitive.",
+   "uses": [
+    "lem-weil-pbc-localization-flat",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q ≤ p, use the quotient formal-fibre algebra isomorphism. Apply the hypothesis and transport geometric regularity along this residue-field algebra equivalence.",
+   "uses": [
+    "lem-weil-pbc-formal-fibre-quotient-iso",
+    "lem-weil-pbc-geometric-regularity-field-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q not contained in p choose x in q outside p. Its image in completion(R_p) is a unit and its image in kappa(q) is zero. Tensor balancing makes its image in the fibre zero and a unit, so the fibre is the zero ring. Every field extension tensor product is also the zero ring, which is Noetherian and regular since it has no prime ideals.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The flat composite with geometrically regular fibres is regular by definition. Regularity through localization gives regularity of R_p → completion(R_p). Combine this for all p with Noetherianity of R to obtain IsGRing R.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-regular-through-localization"
+   ],
+   "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lem-weil-pbc-formal-fibre-quotient-iso",
+  "lem-weil-pbc-geometric-regularity-field-iso",
+  "def-weil-pbc-g-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-through-localization"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma 07PN"
+  "place": "Lemma 07PN, backward implication; quotient identification split out, vanishing and flatness implemented directly in Lean"
  },
  "mathlib_searches": [
   {
@@ -104,9 +139,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261012T113950-L-822283",
+  "landing": "20261012T144112-L-2095606",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

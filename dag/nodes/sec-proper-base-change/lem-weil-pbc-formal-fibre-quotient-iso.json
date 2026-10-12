@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-formal-fibre-quotient-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-g-ring-check-pairs-of-primes-backward",
+   "place": "quotient formal-fibre identification in the proof of Stacks 07PN",
+   "via": []
+  },
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Quotient identification of formal fibres",
+ "statement": "Let R be a Noetherian commutative ring and let q ≤ p be prime ideals. Put pbar = p/q in R/q, C = completion of (R/q)_pbar at its maximal ideal and Cp = completion of R_p at its maximal ideal. Then kappa(q) tensor_(R/q) C and kappa(q) tensor_R Cp are isomorphic as kappa(q)-algebras. The residue field and completions are those of [def-weil-pbc-localization-at-prime] and [def-weil-pbc-adic-completion].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 07PN, displayed equality in its proof; verified at https://stacks.math.columbia.edu/tag/07PN"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "The quotient map R → R/q is surjective. Its map on prime localizations is surjective by RingHom.surjectiveOnStalks_of_surjective and SurjectiveOnStalks.localRingHom_surjective. IsLocalization.ker_map, the equality of mapped prime complements and Ideal.mk_ker identify its kernel with qR_p. IsLocalRing.map_maximalIdeal_of_surjective identifies its image maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Noetherianity of R_p and AdicCompletion.exists_local_completion_quotient for this localized surjection. Rewrite the target ideal as its maximal ideal and the extended kernel as q completion(R_p). The resulting ring equivalence e sends the quotient class of x to the induced completion map theta(x). Compatibility theta ∘ cA = cD ∘ phi upgrades e to an R-algebra equivalence.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "AlgEquiv.extendScalarsOfSurjective extends the R-algebra equivalence to R/q, using surjectivity of R → R/q. Compose its inverse with Algebra.TensorProduct.quotIdealMapEquivQuotTensor to identify the completion of (R/q)_(p/q) with (R/q) tensor_R completion(R_p) as R/q-algebras. Tensor this equivalence with the identity on kappa(q), as a kappa(q)-algebra equivalence using Algebra.TensorProduct.congr. Algebra.TensorProduct.cancelBaseChange gives the required isomorphism to kappa(q) tensor_R completion(R_p).",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-tensor-cancel-base-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-tensor-cancel-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 07PN, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quotient identification of formal fibres of completion at a prime",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The formal fibre of completion at p over q is isomorphic to generic formal fibre of the localized quotient R/q",
+   "results": "Eight hits: Ideal.Fiber and localization residue-field/prime-spectrum lemmas; none identifies completions of prime quotients.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "IsLocalization.algebraTensorEquiv and tensor localization lemmas; no completion-quotient fibre identification.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "formal[Ff]ib|pairsOfPrimes; direct rg of lean/Sheaf/RingTheory and lean/WeilConjectures/RingTheory",
+   "results": "Mathlib search returned no hits. Project has forward/backward criterion and various formal-fibre regularity statements but no public quotient formal-fibre isomorphism. LocalCompletionQuotient supplies the completion quotient ingredient.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GRingPairsBackward",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FormalFibreQuotientIso",
+  "file": "lean/Sheaf/RingTheory/FormalFibreQuotientIso.lean",
+  "declaration": "nonempty_formalFibre_quotient_algEquiv",
+  "statement": "theorem nonempty_formalFibre_quotient_algEquiv\n    (R : Type u) [CommRing R] [IsNoetherianRing R]\n    (q p : Ideal R) [q.IsPrime] [p.IsPrime] (hqp : q ≤ p) :\n    let pbar := p.map (Ideal.Quotient.mk q)\n    letI : pbar.IsPrime := Ideal.isPrime_map_quotientMk_of_isPrime hqp\n    let L := Localization.AtPrime pbar\n    let C := AdicCompletion (IsLocalRing.maximalIdeal L) L\n    let Cp := AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p))\n      (Localization.AtPrime p)\n    Nonempty ((TensorProduct (R ⧸ q) q.ResidueField C) ≃ₐ[q.ResidueField] q.Fiber Cp)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T144112-L-2095606",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T144112-L-2095606",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
