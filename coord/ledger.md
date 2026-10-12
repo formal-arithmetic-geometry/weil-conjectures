@@ -8710,3 +8710,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:38 L: returned deliver/S1/Sheaf.FieldTheory.BrauerScalarDefectScalarData (reviewer RETURN: (the landing tools, head aeea50a72) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Fie)
 - 17:38 L: returned deliver/U3/Sheaf.AlgebraicGeometry.StrictLocalExchangeCompatibility (reviewer RETURN: (the landing tools, head 4cecbaa8e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 17:38 L: returned deliver/V2/Sheaf.AlgebraicGeometry.EtaleCechSectionsConnectedGeometricFibre (reviewer RETURN: (the landing tools, head 1373619e7) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 17:38 L: merged deliver/A2/Sheaf.AlgebraicGeometry.AffineCapSectionOpenAlgebra (stage 3; reviewer PASS; first push; landing 20261012T173803-L-3289107 (proof); batch 20261012T173801; modules 1; new nodes 0)
