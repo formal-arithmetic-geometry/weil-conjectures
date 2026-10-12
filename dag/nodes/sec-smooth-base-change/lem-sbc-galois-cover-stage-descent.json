@@ -1,0 +1,138 @@
+{
+ "id": "lem-sbc-galois-cover-stage-descent",
+ "kind": "statement",
+ "title": "Unpointed finite Galois torsors descend along affine inverse limits",
+ "statement": "Let I be a small cofiltered category, D:I→Scheme a diagram of qcqs schemes with affine transition morphisms, and κ:X→D a limiting cone. For every finite group G and finite étale G-torsor Z→X (not necessarily connected), there are an object i, a finite étale G-torsor Z₀→Dᵢ, and a map χ:Z.P→Z₀.P making the square with the projections and κᵢ cartesian. The torsor notion is [def-sbc-normal-dominant-galois]; qcqs and affine-transition conventions are [def-weil-pbc-scheme-conventions]; the square is as in [def-pc-fibre-product].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, final paragraph; Tag 0BTV (Lemma 58.14.1); Tag 01ZM (Lemma 32.10.1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Reindex by a coinitial directed poset using [lem-weil-pbc-cofiltered-limit-directed-reindex]. The cone remains limiting and qcqs and affine-transition hypotheses persist. A stage of this restriction is an object of I, so a descended cartesian model gives the required model in I.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-limit-directed-reindex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite étale map Z.π is of finite presentation. Descend it by the object clause of [thm-pd-spreading-out], retaining a cartesian comparison. Its stage source is qcqs because it is finitely presented over a qcqs scheme. Apply [lem-weil-pbc-descend-finite], [lem-weil-pbc-descend-etale], and [lem-weil-pbc-descend-surjective] at a common later stage. Their hypotheses hold: finite presentation gives local finite presentation and local finite type; both stage source and target are qcqs; the limit map has each required property. The result is finite, étale, and surjective.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-descend-finite",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-descend-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Enumerate the finite group by a finite type. By the morphism clause of [thm-pd-spreading-out], descend all the action endomorphisms as maps over the base to a common stage. Its equality clause makes the finitely many unit and multiplication equations hold at a later common stage. The comparison map from the finite coproduct of the model to its fibre square is then defined from these action maps.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite coproducts and fibre products of finitely presented objects are finitely presented and commute with base change; for coproducts use Mathlib FinitaryPreExtensive.isUniversal_finiteCoproducts in Scheme, and for fibre products use pullback pasting. Consequently the stage comparison pulls back to Z.isIso_sigmaDesc. Descend its inverse and both inverse equations by [thm-pd-spreading-out]. The resulting action and invertible comparison, together with the finite étale surjective map, assemble the required GaloisCover. Pasting the model comparisons gives χ and its cartesian square.",
+   "uses": [
+    "thm-pd-spreading-out"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-surjective",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M1",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, final paragraph; Tag 0BTV (Lemma 58.14.1); Tag 01ZM (Lemma 32.10.1)",
+  "note": "The limit-reduction route is unchanged; finite torsor descent is separated from proved section descent and proved base change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale torsor for a finite group descends along a cofiltered limit of qcqs schemes with affine transition maps",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit; AlgebraicGeometry.exists_map_eq_top; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit",
+   "date": "2026-10-12",
+   "verdict": "No finite-group torsor descent theorem; morphism factorization is useful for the pointed step."
+  },
+  {
+   "tool": "grep",
+   "query": "GaloisCover|exists_π_app_comp_eq_of_locallyOfFinitePresentation",
+   "results": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-12",
+   "verdict": "No GaloisCover declaration in Mathlib; found the locally finite presentation factorization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers with an action of a finite group descend along inverse limits of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Limit reduction: finite G-action and rational point descend to a finite stage (Tag 0EZJ, final paragraph).",
+   "via": [
+    "lem-sbc-pointed-galois-cover-limit-descent",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverStageDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GaloisCoverStageDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_stage_of_affine_limits",
+  "statement": "theorem GaloisCover.exists_stage_of_affine_limits\n    {I : Type u} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Scheme.{u})\n    (hDqc : ∀ i, CompactSpace (D.obj i)) (hDqs : ∀ i, QuasiSeparatedSpace (D.obj i))\n    (hDa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f))\n    {X : Scheme.{u}} (κ : (Functor.const I).obj X ⟶ D)\n    (hκ : IsLimit (Cone.mk X κ))\n    (G : Type (u + 1)) [Group G] [Finite G] (Z : GaloisCover G X) :\n    ∃ (i : I) (Z₀ : GaloisCover G (D.obj i)) (χ : Z.P ⟶ Z₀.P),\n      IsPullback χ Z.π Z₀.π (κ.app i)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T135251-L-1676677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T135251-L-1676677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -7858,3 +7858,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:52 L: merged deliver/M1/Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure (stage 3; reviewer PASS; first push; landing 20261012T135250-L-1676284 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/M1/Sheaf.AlgebraicGeometry.FiniteFreeConstantMapEtaleFactorization (stage 3; reviewer PASS; first push; landing 20261012T135251-L-1676429 (proof); batch 20261012T135212; modules 1; new nodes 0)
 - 13:52 L: merged deliver/M1/Sheaf.AlgebraicGeometry.HasUniversallyBoundedFibersOfIsLocallyQuasiFinite (stage 3; reviewer PASS; first push; landing 20261012T135251-L-1676530 (proof); batch 20261012T135212; modules 1; new nodes 0)
+- 13:52 L: merged deliver/M1/Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent (stage 3; reviewer PASS; first push; landing 20261012T135251-L-1676677 (interface); batch 20261012T135212; modules 4; new nodes 3)

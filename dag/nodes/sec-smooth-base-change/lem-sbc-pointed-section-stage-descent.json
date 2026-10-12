@@ -1,0 +1,112 @@
+{
+ "id": "lem-sbc-pointed-section-stage-descent",
+ "kind": "statement",
+ "title": "Maps to a finitely presented scheme descend over a fixed stage",
+ "statement": "Let I be a small cofiltered category, K:I→Scheme a diagram of qcqs schemes with affine transitions, and b:T→K a limiting cone. Fix i∈I, a locally finitely presented morphism p:P→Kᵢ, and a map a:T→P with a p=bᵢ. Then there are j∈I, f:j→i, and a₀:Kⱼ→P such that bⱼ a₀=a and a₀ p=K(f). Schemes and local finite presentation are as in [def-weil-pbc-scheme-conventions] and [def-sbc-locally-finite-presentation].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, final paragraph; Tag 0BTV (Lemma 58.14.1); Tag 01ZM (Lemma 32.10.1)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Restrict K and its cone along Over.forget i. This functor is initial (Mathlib Over.initial_forget), so Functor.Initial.isLimitWhiskerEquiv gives a limiting restricted cone. Its objects are qcqs and its transition maps affine by the original hypotheses. Give this restricted diagram its natural map t to Kᵢ by j↦K.map j.hom; naturality is functoriality and Over.w. The equality a p=bᵢ and naturality of b imply c.π≫t=const.map(a≫p). Apply Mathlib Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation to p, c, and a. Reading the resulting object j of Over i as its domain j.left and arrow j.hom gives exactly the two asserted equalities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M1",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, final paragraph; Tag 0BTV (Lemma 58.14.1); Tag 01ZM (Lemma 32.10.1)",
+  "note": "The limit-reduction route is unchanged; finite torsor descent is separated from proved section descent and proved base change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A map from an inverse limit into a locally finitely presented scheme over a fixed stage descends to a refinement of that stage",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index; AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq; AlgebraicGeometry.ExistsHomHomCompEqCompAux; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-12",
+   "verdict": "No direct fixed-stage version; restrict to Over i and use Mathlib factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.forget",
+   "results": "CategoryTheory.Over.forget; CategoryTheory.Over.forgetCocone; CategoryTheory.Over.forget_faithful; CategoryTheory.Over.forget_reflects_iso; CategoryTheory.Over.forgetCocone_pt; CategoryTheory.Over.forget_obj; CategoryTheory.Over.equivalenceOfIsTerminal_functor; CategoryTheory.Over.mapForget_eq",
+   "date": "2026-10-12",
+   "verdict": "Over.forget supplies the restriction; its initiality and limit transport are in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "isLimitWhiskerEquiv|Over.forget",
+   "results": "Mathlib/CategoryTheory/Limits/Presheaf.lean; Mathlib/CategoryTheory/Limits/Over.lean; Mathlib/CategoryTheory/Limits/Final.lean; Mathlib/CategoryTheory/Limits/Final.lean; Mathlib/CategoryTheory/Limits/Final.lean; Mathlib/CategoryTheory/Limits/Final.lean; Mathlib/CategoryTheory/Limits/Final.lean; Mathlib/CategoryTheory/Limits/Shapes/Pullback/EquifiberedLimits.lean",
+   "date": "2026-10-12",
+   "verdict": "Found Functor.Initial.isLimitWhiskerEquiv; used with Over.initial_forget."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps to a locally finitely presented scheme factor through some stage of an inverse limit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Limit reduction: finite G-action and rational point descend to a finite stage (Tag 0EZJ, final paragraph).",
+   "via": [
+    "lem-sbc-pointed-galois-cover-limit-descent",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.PointedSectionStageDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/PointedSectionStageDescent.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_map_at_refinement_of_affine_limit",
+  "statement": "theorem exists_map_at_refinement_of_affine_limit\n    {I : Type u} [SmallCategory I] [IsCofiltered I] (K : I ⥤ Scheme.{u})\n    (hKqc : ∀ i, CompactSpace (K.obj i)) (hKqs : ∀ i, QuasiSeparatedSpace (K.obj i))\n    (hKa : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (K.map f))\n    {T : Scheme.{u}} (b : (Functor.const I).obj T ⟶ K)\n    (hb : IsLimit (Cone.mk T b)) (i : I)\n    {P : Scheme.{u}} (p : P ⟶ K.obj i) [LocallyOfFinitePresentation p]\n    (a : T ⟶ P) (ha : a ≫ p = b.app i) :\n    ∃ (j : I) (f : j ⟶ i) (a₀ : K.obj j ⟶ P),\n      b.app j ≫ a₀ = a ∧ a₀ ≫ p = K.map f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T135251-L-1676677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T135251-L-1676677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "id": "lem-sbc-galois-cover-base-change",
+ "kind": "statement",
+ "title": "Finite Galois torsors admit base change",
+ "statement": "For schemes X,Y, a finite group G, a finite étale G-torsor Z→X in the sense of [def-sbc-normal-dominant-galois], and f:Y→X, there are a finite étale G-torsor W→Y and a morphism ρ:W.P→Z.P making the square with W.π, Z.π and f cartesian as in [def-pc-fibre-product].",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, final paragraph; Tag 0BTV (Lemma 58.14.1); Tag 01ZM (Lemma 32.10.1)"
+ },
+ "stmt_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Take W.P to be the actual pullback of Z.π and f, W.π its second projection and ρ its first. For each g∈G the pullback universal property lifts (ρ≫Z.smul g,W.π) to an endomorphism a g. Its projection identities prove compatibility with the base, the unit law, and the multiplication law by pullback hom extensionality. Finite, étale, and surjective properties follow from Mathlib base-change stability.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The square between the finite coproducts of W.P and Z.P is cartesian by FinitaryPreExtensive.isUniversal_finiteCoproducts and the cartesian squares on the summands. The square between W.P×Y W.P and Z.P×X Z.P is cartesian: the inverse lift is obtained by lifting its two projections separately, and uniqueness follows from the two pullback universal properties. Both torsor comparison maps commute with these maps, checked after each coprojection and projection using a g≫ρ=ρ≫Z.smul g. IsPullback.of_bot extracts the square between the two comparison maps. The original comparison is invertible, so IsPullback.isIso_snd_of_isIso makes the new comparison invertible. These data form W with the required square.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "M1",
+  "document": "Stacks Project",
+  "place": "Tag 0EZJ, final paragraph; Tag 0BTV (Lemma 58.14.1); Tag 01ZM (Lemma 32.10.1)",
+  "note": "The limit-reduction route is unchanged; finite torsor descent is separated from proved section descent and proved base change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale torsor under a finite group admits base change along any morphism of schemes",
+   "results": "AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; RingHom.Etale.isStableUnderBaseChange; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-12",
+   "verdict": "No bundled torsor base change; individual finite and etale stability results are present."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|GaloisCover|isUniversal_finiteCoproducts",
+   "results": "Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean",
+   "date": "2026-10-12",
+   "verdict": "No bundled torsor base change; universality of finite coproducts is used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers with an action of a finite group descend along inverse limits of schemes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Morphisms.PointedGaloisCoverLimitDescent",
+  "date": "2026-10-12",
+  "group": "M1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-thm-spreading-finite-etale-galois",
+   "place": "Limit reduction: finite G-action and rational point descend to a finite stage (Tag 0EZJ, final paragraph).",
+   "via": [
+    "lem-sbc-pointed-galois-cover-limit-descent",
+    "lem-sbc-noetherian-spreading-data",
+    "lem-sbc-underlying-finite-etale-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/GaloisCoverBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_baseChange",
+  "statement": "theorem GaloisCover.exists_baseChange\n    {X Y : Scheme.{u}} (G : Type (u + 1)) [Group G] [Finite G]\n    (Z : GaloisCover G X) (f : Y ⟶ X) :\n    ∃ (W : GaloisCover G Y) (ρ : W.P ⟶ Z.P), IsPullback ρ W.π Z.π f",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T135251-L-1676677",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261012T135251-L-1676677",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
