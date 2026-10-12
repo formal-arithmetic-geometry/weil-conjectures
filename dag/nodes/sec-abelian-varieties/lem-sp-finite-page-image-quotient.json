@@ -1,0 +1,174 @@
+{
+ "id": "lem-sp-finite-page-image-quotient",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-half-plane-convergence",
+   "place": "proof paragraph 2: finite derived D images, exact triangle quotient and canonical derived-g projection",
+   "via": [
+    "lem-sp-half-plane-weak-convergence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A finite exact-couple page as a quotient of consecutive colimit images",
+ "statement": "Let C be an abelian category and X a type-zero bigraded exact couple [def-sp-exact-couple], with E(p,q)=0 for p<0. Let A(n) be alpha diagonal colimits [def-sp-convergence] normalized to D(0,n), with their zeroth cocone maps the transported identities. Fix r in the natural numbers and integers p,q with p<=r. Suppose the finite derived-couple object D_r(p+2,q-1) is zero, and the original g at (p,q) factors through the rth cycle subobject Z_r(p,q). Then E_r(p,q), where r denotes pageCouple r (actual spectral-sequence page r+2), is isomorphic to the pth graded piece of the image filtration [def-sp-filtration] on A(p+q). The finite cycle factorization of the original g followed by the rth tower projection and this isomorphism equals the canonical map toGradedPiece from D(p,q).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "proof paragraph 2: finite-page successive-image quotient, before passage to the infinite page",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tags 011R, 011T and 0AMJ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sp-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Put u=p-r and v=q+r. The adjacent initial E objects at negative first index vanish. The original exactness identities give ker alpha=0 and im alpha=D at nonpositive first index, so these diagonal transitions are invertible. Iterate the cocone equation from the normalized zeroth map to conclude that the cocone map D(u,v) to A(p+q) is invertible.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct e_n:D(p,q) to D_n(p-n,q+n) recursively: e_0 is the identity; e_(n+1) is e_n followed by the canonical image epimorphism of alpha_n(p-n,q+n), transported to the successor D object. Every e_n is epi. The inclusion recurrences and alpha restriction equation in pageCouple_image identify its composite with the original-D inclusion with the n-fold diagonal alpha composite. By the cocone equations, this inclusion followed by the invertible cocone map at (u,v) is a mono whose composite with e_r is the original cocone map at p. Thus it represents im(iota_p). Applying the same calculation at (p+1,q-1), and then the derived alpha restriction equation, identifies im(alpha_r(u+1,v-1)) with the next image im(iota_(p+1)) inside im(iota_p).",
+   "uses": [
+    "lem-sp-derived-couple-exact",
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The following D term D_r(p+2,q-1) is zero by hypothesis, so f_r(p,q)=0. Exactness at E makes transported g_r(u,v) epimorphic; exactness at D identifies its kernel with im(alpha_r(u+1,v-1)). An epi in an abelian category is the cokernel of its kernel. Under the image identifications of the previous step this is the same inclusion whose cokernel is the graded piece. The unique comparison of these cokernels is the claimed isomorphism.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on n to identify e_n followed by transported g_n with the nth finite-cycle lift of initialG followed by the tower projection. At zero use projection_zero. At a successor, DerivedMaps.g_comm replaces the image-epi/derived-g composite by gToCycles followed by the derived E projection. Cancel the kernel inclusion, using cycleLift_comm and the induction hypothesis, to identify the cycle lift. Then projection_succ gives the successor projection. The monic cycle arrow ensures every factorization of initialG is equal to factorThru(initialG,hg). At r, compose this equality with the cokernel comparison equation of the preceding step. Its other side is precisely the image epimorphism followed by the graded-piece projection, including the prescribed eqToHom transport, namely toGradedPiece.",
+   "uses": [
+    "def-sp-exact-couple",
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-exact-couple",
+  "def-sp-filtration",
+  "lem-sp-derived-couple-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/thm-sp-half-plane-convergence.md",
+  "place": "proof paragraph 2; explicit image-epimorphism induction and projection compatibility expanded by P2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite derived exact couple page is the quotient of two consecutive images in the alpha diagonal colimit",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite derived exact couple page is the quotient of two consecutive images in the alpha diagonal colimit",
+   "results": "CategoryTheory.ShortComplex.Exact.isColimitImage; CategoryTheory.Limits.colim.exact_mapShortComplex; CategoryTheory.ShortComplex.Exact.isColimitCoimage; HomologicalComplex.hasExactColimitsOfShape; Profinite.NobelingProof.succ_exact; CategoryTheory.ShortComplex.SnakeInput.h₃τ₂; CategoryTheory.ShortComplex.SnakeInput.h₃τ₁; CategoryTheory.ComposableArrows.Exact.cokerToKer'",
+   "date": "2026-10-12",
+   "verdict": "no match: the results do not state the finite derived-couple/image-filtration comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ExactCouple|exact couple",
+   "results": "0 hits",
+   "date": "2026-10-12",
+   "verdict": "no match: the results do not state the finite derived-couple/image-filtration comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spectral sequence finite derived couple E term cokernel of successive alpha images",
+   "results": "HomologicalComplex.opcyclesIsCokernel; HomologicalComplex.homologyIsCokernel; homological complex extension cokernel cofork lemmas",
+   "date": "2026-10-13",
+   "verdict": "second reading: no replacement for the finite image and canonical projection comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.Exact, CategoryTheory.Limits.cokernel",
+   "results": "CategoryTheory.ShortComplex.Exact.mono_cokernelDesc; exact_iff_mono_cokernel_desc; exact_cokernel; CategoryTheory.Abelian.tfae_epi; Exact.isLimitImage",
+   "date": "2026-10-13",
+   "verdict": "second reading: no replacement for the finite image and canonical projection comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Ii]mage|[Ii]mage.*derived|spectral.*[Qq]uotient",
+   "results": "5 unrelated derived-category/derived-set hits; separate library search located finitePage_image_lift and finitePage_graded_quotient, which have different hypotheses and no original-g/tower-projection equation",
+   "date": "2026-10-13",
+   "verdict": "second reading: no replacement for the finite image and canonical projection comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.HalfPlaneWeakConvergence",
+  "date": "2026-10-13",
+  "group": "P2"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FinitePageImageQuotient",
+  "file": "lean/Sheaf/CategoryTheory/FinitePageImageQuotient.lean",
+  "declaration": "CategoryTheory.BigradedExactCouple.finitePage_image_quotient",
+  "statement": "theorem finitePage_image_quotient (X : BigradedExactCouple C 0)\n    (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q))\n    (A : ∀ n : ℤ, AlphaColimit X n)\n    (hA : ∀ n : ℤ, (A n).obj = X.D 0 n)\n    (hι : ∀ n : ℤ, (A n).ι 0 ≫ eqToHom (hA n) =\n      eqToHom (by congr 1; omega))\n    (r : ℕ) (p q : ℤ) (hp : p ≤ (r : ℤ))\n    (hnext : IsZero ((X.pageCouple r).D (p + 2) (q - 1)))\n    (hg : (X.cycleBoundaryTower.Z r p q).Factors (X.initialG p q)) :\n    ∃ e : (X.pageCouple r).E p q ≅\n      (X.imageFiltration (p + q) (A (p + q))).gradedPiece p,\n      (X.cycleBoundaryTower.Z r p q).factorThru (X.initialG p q) hg ≫\n        X.cycleBoundaryTower.projection r p q ≫ e.hom = X.toGradedPiece A p q",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T210029-L-953655",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T210029-L-953655",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

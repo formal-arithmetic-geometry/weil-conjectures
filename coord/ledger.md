@@ -9520,3 +9520,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:00 L: returned deliver/W3/Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalenceTermwise (reviewer RETURN: (the landing tools, head 093c7d9b4) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 21:00 L: merged deliver/G1/Sheaf.RingTheory.MPseudoCoherentVanishingBase (stage 3; reviewer PASS; first push; landing 20261012T210028-L-953341 (proof); batch 20261012T210027; modules 1; new nodes 0)
 - 21:00 L: merged deliver/N1/Sheaf.AlgebraicGeometry.FiniteFreeStalkHomotopyPShrink (stage 3; reviewer PASS; first push; landing 20261012T210029-L-953536 (interface); batch 20261012T210027; modules 3; new nodes 2)
+- 21:00 L: merged deliver/P2/Sheaf.CategoryTheory.HalfPlaneWeakConvergence (stage 3; reviewer PASS; after a return; landing 20261012T210029-L-953655 (interface); batch 20261012T210027; modules 2; new nodes 1)
