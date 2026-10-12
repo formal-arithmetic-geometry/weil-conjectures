@@ -1,0 +1,124 @@
+{
+ "id": "lem-pc-kflat-open-restriction",
+ "title": "K-flat complexes remain K-flat under open restriction",
+ "statement": "Let $j:X\\to Y$ be an open immersion of schemes [def-pc-scheme]. Let $K^\\bullet$ be an unbounded cochain complex of $\\mathcal O_Y$-modules [def-weil-sheaf-of-modules-category] which is K-flat [def-pc-kflat-complex]. Termwise restriction by $\\operatorname{Scheme.Modules.restrictFunctor}(j)$ [lem-weil-pbc-module-restriction-open-immersion-colimits] gives a K-flat complex of $\\mathcal O_X$-modules. No quasi-coherence or boundedness hypothesis is assumed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/06YB",
+  "place": "Cohomology, lemma-check-K-flat-stalks, applied to open restriction; Mathlib Scheme.Modules.restrictStalkNatIso"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof": [
+  {
+   "text": "By the stalk criterion, every stalk complex of K at a point y of Y is K-flat over the local ring at y.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For x in X, the open-immersion stalk comparison identifies the additive stalk of the restriction with the stalk at j(x). Its naturality identifies differentials. The scalar actions correspond under the local-ring isomorphism of the open immersion: on germs this is precisely the action of the inverse of j.appIso in the definition of restrictFunctor. Extension and restriction of scalars along this ring isomorphism are exact inverse equivalences, identify pure tensors, and preserve coproducts. Applying them degree by degree identifies total tensor complexes. An acyclic test complex thus corresponds to an acyclic test complex over the other local ring, and the stalk K-flatness gives acyclicity of its tensor.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the reverse direction of the stalk criterion to the restricted complex. If X is empty the universal condition on stalks is vacuous.",
+   "uses": [
+    "lem-pc-kflat-stalk-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "kind": "statement",
+ "proof_deps": [
+  "lem-pc-kflat-stalk-criterion",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/06YB",
+  "place": "Cohomology, lemma-check-K-flat-stalks, applied to open restriction; Mathlib Scheme.Modules.restrictStalkNatIso"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction along an open immersion preserves K flat complexes of sheaves of modules",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a scheme isomorphism preserves K flat complexes",
+   "results": "8 hits concerning flat ring homomorphisms and flat scheme morphisms; no K-flat restriction theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*[Kk]Flat|[Kk]Flat.*restrict|tilde.*[Tt]ensor|[Tt]ensor.*tilde",
+   "results": "0 Mathlib hits. Local library search found isKFlat_tilde and the stalk criterion, but no isKFlat_restrict declaration. Mathlib Scheme.Modules.restrictStalkNatIso gives the comparison of underlying additive stalks.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-tensor-qcoh-component",
+   "place": "affine chart comparison, preservation of K-flat first representatives under exact open restriction",
+   "via": [
+    "lem-pc-affine-derived-tensor-chart-comparison",
+    "lem-pc-derived-tensor-qcoh-component",
+    "lem-pc-derived-pullback-tensor-qcoh"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Modules.IsKFlatRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/IsKFlatRestriction.lean",
+  "declaration": "AlgebraicGeometry.isKFlat_restrict",
+  "statement": "theorem isKFlat_restrict {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (K : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (hK : CochainComplex.IsKFlat (R := Y.sheaf) K) : CochainComplex.IsKFlat (R := X.sheaf) (((Scheme.Modules.restrictFunctor j).mapHomologicalComplex (.up ℤ)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T163620-L-2787452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T163620-L-2787452",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
