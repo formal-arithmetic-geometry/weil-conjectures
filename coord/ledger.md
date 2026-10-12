@@ -10140,3 +10140,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:42 L: merged deliver/N1/Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange (stage 3; reviewer PASS; first push; landing 20261012T234221-L-2125801 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/N2/Sheaf.AlgebraicGeometry.EtaleRestrictedAugmentationInclusion (stage 3; reviewer PASS; first push; landing 20261012T234221-L-2125956 (proof); batch 20261012T234214; modules 1; new nodes 0)
 - 23:42 L: merged deliver/N4/Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift (stage 3; reviewer PASS; first push; landing 20261012T234222-L-2126079 (proof); batch 20261012T234214; modules 1; new nodes 1)
+- 23:42 L: merged deliver/P1/Sheaf.AlgebraicGeometry.EtaleFiniteCoverFactorizationDescent (stage 3; reviewer PASS; after a return; landing 20261012T234222-L-2126206 (interface); batch 20261012T234214; modules 3; new nodes 2)
