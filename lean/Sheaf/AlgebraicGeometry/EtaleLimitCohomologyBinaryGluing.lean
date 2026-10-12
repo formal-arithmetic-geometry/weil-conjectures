@@ -7,12 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleCohomologyStageContinuity
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleLimitCohomologyClassDescent
+import Sheaf.AlgebraicGeometry.EtaleLimitBinaryEventualZero
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Two-open gluing of continuity
 
@@ -64,6 +61,38 @@ theorem etale_limit_cohomology_binary_gluing
     (hCU : EtaleCohomologyStageContinuity U.toScheme)
     (hCV : EtaleCohomologyStageContinuity V.toScheme)
     (hCI : EtaleCohomologyStageContinuity (U ⊓ V).toScheme) :
-    EtaleCohomologyStageContinuity (U ⊔ V).toScheme := by sorry
+    EtaleCohomologyStageContinuity (U ⊔ V).toScheme := by
+  refine ⟨?_⟩
+  intro I _ _ _ D c hc iCompact iQS iAffine F φ hid hcomp G eG hG L hL p H eH hH B eB hB
+    i₀ hi
+  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+  have hlift := etale_limit_cohomology_class_descent D c hc F φ hid hcomp
+    G eG hG L hL p H eH hH B eB hB
+  have hzero := etale_limit_binary_eventual_zero X U V hU hV hCU hCV hCI
+    D c hc F φ hid hcomp G eG hG L hL p H eH hH B eB hB i₀ hi
+  have hbij : Function.Bijective (colimit.desc H B) := by
+    constructor
+    · apply (injective_iff_map_eq_zero (colimit.desc H B).hom).2
+      intro z hz
+      obtain ⟨i, x, rfl⟩ := Concrete.colimit_exists_rep H z
+      have hx : (B.ι.app i).hom x = 0 := by
+        change (colimit.ι H i ≫ colimit.desc H B) x = 0 at hz
+        rwa [colimit.ι_desc] at hz
+      obtain ⟨j, f, hf⟩ := hzero i x hx
+      calc
+        colimit.ι H i x = colimit.ι H j (H.map f x) :=
+          (colimit.w_apply H f x).symm
+        _ = 0 := by rw [hf]; exact map_zero (colimit.ι H j).hom
+    · intro y
+      obtain ⟨i, x, hx⟩ := hlift y
+      refine ⟨colimit.ι H i x, ?_⟩
+      change (colimit.ι H i ≫ colimit.desc H B) x = y
+      rw [colimit.ι_desc]
+      exact hx
+  have : IsIso (colimit.desc H B) :=
+    (ConcreteCategory.isIso_iff_bijective (colimit.desc H B)).2 hbij
+  exact ⟨(colimit.isColimit H).ofIsoColimit
+    (Cocone.ext (asIso (colimit.desc H B)) (by intro i; simp))⟩
 
 end AlgebraicGeometry.Etale

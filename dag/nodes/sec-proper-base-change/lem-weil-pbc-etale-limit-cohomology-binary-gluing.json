@@ -14,55 +14,42 @@
  ],
  "proof": [
   {
-   "text": "Fix the system and stage identified with U union V. Restrict to its cofinal tail. Transfer the two opens along the chosen isomorphism and pull them back to each later stage and the limit. The restricted scheme cones are limits; transitions remain affine and restricted schemes are qcqs. Restrict the sheaves by inverse image. Composition supplies their transitions and coherence, and inverse image preserves the sheaf colimit. Pullback functoriality gives exactly the required H and B legs. Apply C(U), C(V), C(U intersection V) in each degree.",
+   "text": "Fix an instance of the continuity predicate for the union. Apply lem-weil-pbc-etale-limit-cohomology-class-descent to obtain a stage representative of every element of the comparison cocone vertex. Apply lem-weil-pbc-etale-limit-binary-eventual-zero, using the specified union stage and the three continuity hypotheses, to obtain finite-stage killing of every element in the kernel of a comparison leg.",
    "uses": [
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-scheme-conventions"
+    "def-weil-pbc-etale-cohomology-stage-continuity",
+    "lem-weil-pbc-etale-limit-cohomology-class-descent",
+    "lem-weil-pbc-etale-limit-binary-eventual-zero"
    ],
    "elementary": false
   },
   {
-   "text": "The Mayer-Vietoris sequence is natural in the sheaf and compatible with scheme pullbacks. Thus the comparison maps form a morphism of long exact sequences from the filtered colimit of the stage sequences to the sequence of the limit. The filtered colimit sequence is exact, and filtered group colimits commute with the finite products occurring in it.",
+   "text": "Form the canonical homomorphism kappa = colimit.desc H B. The forgetful functor from abelian groups preserves filtered colimits; shrink its preservation universes from u+1 to u as in Mathlib.Algebra.Category.Grp.FilteredColimits. Every element z of colimit H has a stage representative iota_i(x). If kappa(z)=0, the coprojection identity gives b_i(x)=0. Finite-stage killing gives f:i to j with H(f)(x)=0. Cocone naturality then gives iota_i(x)=iota_j(H(f)(x))=0. The additive kernel criterion proves kappa injective. Stage representatives of elements of B.pt prove kappa surjective by the same coprojection identity.",
    "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lem-weil-pbc-etale-mayer-vietoris-pullback",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For p>0, the five-term segment with terms H^(p-1)(U) plus H^(p-1)(V), H^(p-1)(U intersection V), H^p(U union V), H^p(U) plus H^p(V), H^p(U intersection V) has all four outer comparisons invertible. The five lemma proves the middle comparison invertible. For p=0, use the initial zero terms instead. Transport the colimit along this comparison and eB, then reflect it by the final tail inclusion. Its legs are the prescribed hB by the naturality of step 1.",
+   "text": "A bijective homomorphism of abelian groups is an isomorphism (ConcreteCategory.isIso_iff_bijective). Its coprojection identity gives a cocone isomorphism from the chosen colimit cocone to B. Transport colimit.isColimit through this cocone isomorphism using IsColimit.ofIsoColimit, and package the resulting Nonempty IsColimit B as the holds field of continuity for the union.",
    "uses": [
-    "lem-weil-pbc-five-lemma",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-pbc-category-colimit"
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-etale-cohomology-stage-continuity"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-mayer-vietoris",
-  "lem-weil-pbc-etale-mayer-vietoris-pullback",
-  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-weil-pbc-limit-affine-transition"
+  "def-weil-pbc-etale-cohomology-stage-continuity",
+  "lem-weil-pbc-etale-limit-binary-eventual-zero",
+  "lem-weil-pbc-etale-limit-cohomology-class-descent",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 09YQ (theorem-colimit), agent-written finite-cover reduction of the parent; Tag 0A50 (lemma-mayer-vietoris) for binary gluing."
+  "place": "Tag 09YQ (theorem-colimit), elementwise colimit assembly from existing class descent and the kernel half of the two-open Mayer-Vietoris reduction (Tag 0A50)."
  },
  "mathlib_searches": [
   {
@@ -140,11 +127,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-5233b",
-  "group": "E3",
+  "reviewer": "COMPILER",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T112835-L-766268",
+  "landing": "20261012T135333-L-1699843",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files match the recorded node statements and compile cleanly; the changed parent theorem signature is unchanged, and its direct importer also compiles."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

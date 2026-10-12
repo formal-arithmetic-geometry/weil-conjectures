@@ -1,0 +1,166 @@
+{
+ "id": "lem-weil-pbc-etale-limit-binary-eventual-zero",
+ "kind": "statement",
+ "title": "Finite-stage kernel detection for a two-open continuity comparison",
+ "statement": "Let $X$ be a scheme [def-pc-scheme] and $U,V\\subseteq X$ quasi-compact opens [def-weil-pbc-scheme-conventions]. Assume the stage-continuity property $C(U)$, $C(V)$ and $C(U\\cap V)$ of [def-weil-pbc-etale-cohomology-stage-continuity]. Let $I$ be a nonempty directed preordered set and let $D:I^{\\mathrm{op}}\\to\\mathrm{Sch}$ be an inverse diagram of quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions] with affine transition morphisms. Let $(T,(f_i))$ be a limit cone [def-weil-pbc-category-colimit]. For each $i$, let $F_i$ be an abelian sheaf on $(D_i)_{\\acute{e}t}$ [def-weil-pbc-abelian-etale-sheaves], with maps $\\varphi_f:D(f^{\\mathrm{op}})^{-1}F_i\\to F_j$ for $f:i\\to j$ [def-weil-pbc-inverse-image] satisfying the canonical inverse-image identity and composition laws. Let $G:I\\to\\operatorname{Ab}(T_{\\acute{e}t})$ be identified objectwise with $f_i^{-1}F_i$ by isomorphisms, its arrows being inverse-image composition followed by pullback of $\\varphi_f$. Let $L$ be a colimit cocone on $G$, with coprojections $\\iota_i$. Fix $p\\ge0$. Let $H:I\\to\\operatorname{Ab}$ have specified object isomorphisms $e_i:H_i\\cong H^p(D_i,F_i)$ [def-weil-pbc-etale-cohomology] and arrows conjugate to $H^p(\\varphi_f)\\circ D(f^{\\mathrm{op}})^*$ [def-weil-pbc-cohomology-pullback]. Let $B$ be a cocone on $H$ with an isomorphism $e:B_{\\mathrm{pt}}\\cong H^p(T,L_{\\mathrm{pt}})$ such that, for every $i$, its leg $b_i$ satisfies $e\\circ b_i=H^p(\\iota_i)\\circ f_i^*\\circ e_i$, including the specified identification $G_i\\cong f_i^{-1}F_i$. Assume an index $i_0\\in I$ and a scheme isomorphism $D_{i_0}\\cong U\\cup V$. Then $\\forall i\\in I\\;\\forall x\\in H_i:\\ b_i(x)=0\\Rightarrow\\exists j\\in I\\;\\exists(f:i\\to j):\\ H(f)(x)=0$. This asserts detection of zero only.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09YQ (theorem-colimit), agent-written kernel half of the finite-open-cover reduction, using Tag 0A50 (lemma-mayer-vietoris)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-etale-cohomology-stage-continuity"
+ ],
+ "proof": [
+  {
+   "text": "Pass to the cofinal tail above a common upper bound of the chosen class stage i and the union stage i0. Transport U,V to that stage using its supplied isomorphism, and restrict the cone to their inverse images. The limit-affine-transition theorem gives the restricted limits, transferred to the given cone by uniqueness of limits, and affine transitions. Opens inherit quasi-separatedness, affine inverse images of compact opens are compact, and the intersection is compact because the union stage is quasi-separated. Inverse image restricts the coefficients and preserves the sheaf colimit; its composition comparisons give the transition coherence. Pullback functoriality identifies the new comparison legs. Apply C(U), C(V) and C(U intersection V) in all degrees.",
+   "uses": [
+    "def-weil-pbc-etale-cohomology-stage-continuity",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-cohomology-pullback-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the Mayer-Vietoris sequences on stages and on the limit. Naturality in coefficients and scheme pullback yields their comparison ladder. Filtered abelian-group colimits preserve exactness and finite products. In positive degree p=q+1 the five terms are H^q(U) times H^q(V), H^q(U intersection V), H^p(U union V), H^p(U) times H^p(V), H^p(U intersection V). The comparisons of the first, second and fourth terms are isomorphisms by step 1. In degree zero use the initial injective restriction followed by the difference of the restrictions.",
+   "uses": [
+    "lem-weil-pbc-etale-mayer-vietoris",
+    "lem-weil-pbc-etale-mayer-vietoris-pullback",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The middle comparison is injective: if z maps to zero, injectivity of the fourth comparison makes its right restriction zero. Exactness lifts z to a class a in the second top term. Its bottom image maps to zero in the middle bottom term, so is the image of a first bottom term class b. Surjectivity of the first comparison lifts b to bprime. The difference a minus the image of bprime has zero second-term comparison image; injectivity of that comparison makes the difference zero. The composite of the first two top arrows is zero by exactness, hence z=0. At degree zero injectivity of the first restriction and of the comparison on U times V gives the conclusion directly.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The image of the given stage element x in the filtered group colimit maps to zero because the comparison legs are precisely b_i. Step 3 makes that colimit element zero. The elementwise equality criterion for filtered colimits of abelian groups, equivalently integer modules, gives a later stage j and f:i to j with H(f)(x)=H(f)(0)=0. Cofinality of the chosen tail returns this witness to I. Transport through the supplied object and cocone isomorphisms has preserved the zero equations throughout.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-cohomology-stage-continuity",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-mayer-vietoris",
+  "lem-weil-pbc-etale-mayer-vietoris-pullback",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Kernel half of the original binary-gluing node steps 1--3; Mayer-Vietoris of Tag 0A50 and the comparison asserted in Tag 09YQ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In etale cohomology of an inverse limit, a class with zero image is zero at a later stage when continuity holds on two covering compact opens and their intersection",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In etale cohomology of an inverse limit, a class with zero image is zero at a later stage when continuity holds on two covering compact opens and their intersection",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Profinite.NobelingProof.CC_exact, AlgebraicGeometry.Scheme.zero_of_zero_cover, Profinite.NobelingProof.CC_comp_zero, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, ContinuousCohomology.MultiInd.d_comp_d, Profinite.NobelingProof.succ_exact",
+   "date": "2026-10-12",
+   "verdict": "No exact match. The scheme section-zero lemmas concern structure sheaves, not arbitrary etale cohomology systems. Existing general eventual vanishing imports binary gluing and cannot be used here."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(eventual|kernel)|cohomology.*eventual",
+   "results": "Mathlib/Topology/Sheaves/EtaleSpace.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact match. The scheme section-zero lemmas concern structure sheaves, not arbitrary etale cohomology systems. Existing general eventual vanishing imports binary gluing and cannot be used here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleLimitCohomologyBinaryGluing",
+  "date": "2026-10-12",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "Continuity invocation in the proof of Tag 0A51: kernel detection in the two-compact-open Mayer-Vietoris comparison, steps 1--3 of the binary gluing node.",
+   "via": [
+    "lem-weil-pbc-etale-limit-cohomology-binary-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-qcqs-gluing",
+    "lem-weil-pbc-etale-limit-cohomology-eventual-vanishing",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLimitBinaryEventualZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLimitBinaryEventualZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_limit_binary_eventual_zero",
+  "statement": "theorem etale_limit_binary_eventual_zero (X : Scheme.{u}) (U V : X.Opens) (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X)) (hCU : EtaleCohomologyStageContinuity U.toScheme) (hCV : EtaleCohomologyStageContinuity V.toScheme) (hCI : EtaleCohomologyStageContinuity (U ⊓ V).toScheme) {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ (i j : Iᵒᵖ) (f : i ⟶ j), IsAffineHom (D.map f)] (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (upperStar AddCommGrpCat.{u + 1} (D.map f.op)).obj (F i) ⟶ F j) (hidentity : ∀ i : I, φ (𝟙 i) = (eqToIso (congrArg (upperStar AddCommGrpCat.{u + 1}) (D.map_id (op i)))).hom.app (F i) ≫ (upperStarId AddCommGrpCat.{u + 1} (D.obj (op i))).hom.app (F i)) (hcomposition : ∀ (i j k : I) (f : i ⟶ j) (g : j ⟶ k), φ (f ≫ g) = (upperStarComp AddCommGrpCat.{u + 1} (D.map g.op) (D.map f.op) (D.map (f ≫ g).op) (D.map_comp g.op f.op)).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (D.map g.op)).map (φ f) ≫ φ g) (G : I ⥤ Sheaf c.pt.smallEtaleTopology AddCommGrpCat.{u + 1}) (eG : ∀ i : I, G.obj i ≅ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op i))).obj (F i)) (hG : ∀ (i j : I) (f : i ⟶ j), G.map f = (eG i).hom ≫ (upperStarComp AddCommGrpCat.{u + 1} (c.π.app (op j)) (D.map f.op) (c.π.app (op i)) (c.w f.op).symm).hom.app (F i) ≫ (upperStar AddCommGrpCat.{u + 1} (c.π.app (op j))).map (φ f) ≫ (eG j).inv) (L : Cocone G) (hL : IsColimit L) (p : ℕ) (H : I ⥤ AddCommGrpCat.{u + 1}) (eH : ∀ i : I, H.obj i ≅ AddCommGrpCat.of (Sheaf.H (F i) p)) (hH : ∀ (i j : I) (f : i ⟶ j), H.map f = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (D.map f.op) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map (φ f) p) ≫ (eH j).inv) (B : Cocone H) (eB : B.pt ≅ AddCommGrpCat.of (Sheaf.H L.pt p)) (hB : ∀ i : I, B.ι.app i ≫ eB.hom = (eH i).hom ≫ AddCommGrpCat.ofHom (cohomologyMap (c.π.app (op i)) (F i) p) ≫ AddCommGrpCat.ofHom (Sheaf.H.map ((eG i).inv ≫ L.ι.app i) p)) (i₀ : I) (hi : Nonempty (D.obj (op i₀) ≅ (U ⊔ V).toScheme)) : ∀ (i : I) (x : H.obj i), (B.ι.app i).hom x = 0 → ∃ (j : I) (f : i ⟶ j), (H.map f).hom x = 0",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T135333-L-1699843",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261012T135333-L-1699843",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
