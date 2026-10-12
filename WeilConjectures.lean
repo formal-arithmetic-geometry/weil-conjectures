@@ -368,6 +368,7 @@ public import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.PullbackAffine
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Rees
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
+public import WeilConjectures.AlgebraicGeometry.SeparableClosureLimit
 public import WeilConjectures.AlgebraicGeometry.SeparatedEnvelope
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineRefinement
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
