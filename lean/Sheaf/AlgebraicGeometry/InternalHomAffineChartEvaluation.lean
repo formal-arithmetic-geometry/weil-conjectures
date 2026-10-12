@@ -99,6 +99,42 @@ theorem internalHom_evaluation_chart_compare {X : Scheme.{u}} (M F : X.Modules)
     (LinearEquiv.arrowCongr (chartSectionsEquiv M U hU) (chartSectionsEquiv F U hU))
       ((moduleSpecΓFunctor (R := Γ(X, U))).map (chartHomEquiv M F U hU φ)).hom =
         (φ.app (op (Over.mk (𝟙 U)))).hom := by
-  sorry
+  let ψ : M.over U ⟶ F.over U :=
+    (SheafOfModules.fullyFaithfulForget _).preimage φ
+  let V : TopologicalSpace.Opens U := hU.isoSpec.inv ''ᵁ (⊤ : (Spec Γ(X, U)).Opens)
+  ext s
+  simp only [LinearEquiv.arrowCongr_apply]
+  dsimp [chartSectionsEquiv, chartHomEquiv, Iso.homCongr, isoRestrictEquiv,
+    Functor.asEquivalence, Functor.FullyFaithful.homEquiv]
+  change F.presheaf.map _
+    (((restrictFunctorComp hU.isoSpec.inv U.ι).inv.app F).app ⊤
+      (((overFunctorEquiv U).hom.app F).app V
+        (((overEquiv U).functor.map ψ).app V
+          (((overFunctorEquiv U).inv.app M).app V
+            (((restrictFunctorComp hU.isoSpec.inv U.ι).hom.app M).app ⊤
+              (M.presheaf.map _ s)))))) = _
+  simp only [restrictFunctorComp_inv_app_app, restrictFunctorComp_hom_app_app]
+  have hhom (N : X.Modules) (W : (U : Scheme).Opens)
+      (x : Γ((overEquiv U).functor.obj (N.over U), W)) :
+      ((overFunctorEquiv U).hom.app N).app W x = x := rfl
+  have hinv (N : X.Modules) (W : (U : Scheme).Opens)
+      (x : Γ(N.restrict U.ι, W)) :
+      ((overFunctorEquiv U).inv.app N).app W x = x := rfl
+  simp only [hhom, hinv]
+  change F.presheaf.map _ (F.presheaf.map _
+    (φ.app (op ((TopologicalSpace.Opens.overEquivalence U).inverse.obj V))
+      (M.presheaf.map _ (M.presheaf.map _ s)))) = _
+  simp only [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  let W := (TopologicalSpace.Opens.overEquivalence U).inverse.obj V
+  change F.presheaf.map _ (φ.app (op W) (M.presheaf.map W.hom.op s)) = _
+  have hn := PresheafOfModules.naturality_apply φ
+    (Over.homMk W.hom : W ⟶ Over.mk (𝟙 U)).op s
+  change φ.app (op W) (M.presheaf.map W.hom.op s) =
+    F.presheaf.map W.hom.op (φ.app (op (Over.mk (𝟙 U))) s) at hn
+  rw [hn]
+  erw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
+  change F.presheaf.map (𝟙 (op U)) (φ.app (op (Over.mk (𝟙 U))) s) = _
+  erw [CategoryTheory.Functor.map_id]
+  rfl
 
 end AlgebraicGeometry
