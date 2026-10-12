@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.RingTheory.TensorProduct.Maps
 
+import Sheaf.AlgebraicGeometry.AffineOpenDirectedRingSystem
+import Sheaf.AlgebraicGeometry.AffineChartTensorComparison
+
 /-!
 # Directed ring models of base changes of an affine chart
 
@@ -25,6 +28,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct
 
 namespace AlgebraicGeometry
+
+private theorem etale_iff_of_chart_factorization
+    {X Y Z X' Y' : Scheme.{u}} (g : X ⟶ Y) (j : Y ⟶ Z) [IsOpenImmersion j]
+    (q : X ⟶ Z) (h : g ≫ j = q) (p : X' ⟶ Y')
+    (e : Arrow.mk g ≅ Arrow.mk p) : Etale q ↔ Etale p := by
+  rw [← h]
+  exact (MorphismProperty.postcomp_iff (W := @Etale) (W' := @Etale)
+    g j inferInstance).trans (MorphismProperty.arrow_mk_iso_iff (P := @Etale) e)
 
 /-- One affine triple has a finitely presented ring model over the upper tail.
 The model identifies étaleness at the limit, and étaleness at a stage implies
@@ -80,6 +91,25 @@ theorem exists_affineChart_directedRingModel
              (Algebra.TensorProduct.map (AlgHom.id (F.obj ⟨i₀, le_rfl⟩) (F.obj i))
                φ).toRingHom))) →
           Etale (((pullback.fst X₀.hom (D.map (homOfLE i.property).op)) ⁻¹ᵁ U).ι ≫
-            ((Over.pullback (D.map (homOfLE i.property).op)).map f₀).left) := by sorry
+            ((Over.pullback (D.map (homOfLE i.property).op)).map f₀).left) := by
+  obtain ⟨F, e0, hi, eL, hL⟩ :=
+    exists_affineOpen_directedRingSystem D c hc i₀ W hW
+  obtain ⟨B, C, aB, aC, φ, hφ, hcomp⟩ :=
+    exists_affineChart_tensorComparison X₀ Y₀ f₀ W hW V hV eV U hU eU
+      (F.obj ⟨i₀, le_rfl⟩) e0
+  let := aB
+  let := aC
+  refine ⟨F, B, C, aB, aC, φ, hφ, ?_, ?_⟩
+  · let aL : Algebra (F.obj ⟨i₀, le_rfl⟩) (colimit F : CommRingCat.{u}) :=
+      (colimit.ι F ⟨i₀, le_rfl⟩).hom.toAlgebra
+    obtain ⟨g, hg, ⟨eg⟩⟩ := hcomp c.pt (c.π.app (op i₀)) (colimit F) aL eL hL
+    exact etale_iff_of_chart_factorization g _ _ hg _ eg
+  · intro i
+    let ai : Algebra (F.obj ⟨i₀, le_rfl⟩) (F.obj i) :=
+      (F.map (homOfLE i.property)).hom.toAlgebra
+    obtain ⟨ei, hei⟩ := hi i
+    obtain ⟨g, hg, ⟨eg⟩⟩ :=
+      hcomp (D.obj (op i.val)) (D.map (homOfLE i.property).op) (F.obj i) ai ei hei
+    exact (etale_iff_of_chart_factorization g _ _ hg _ eg).mpr
 
 end AlgebraicGeometry

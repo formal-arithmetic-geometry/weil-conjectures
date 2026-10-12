@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-affine-open-directed-ring-system",
+ "kind": "statement",
+ "title": "Compatible spectrum presentations of one affine open along a directed limit",
+ "statement": "Let $I$ be a directed preordered set, $D:I^{\\mathrm{op}}\\to\\mathrm{Scheme}$ a diagram of schemes [def-pc-scheme] with affine transition morphisms [pqf-def-affine-morphism], $c$ a limiting cone [def-weil-pbc-category-colimit], $i_0\\in I$, and $W\\subset D(i_0)$ an affine open. Write $J=\\{i\\in I\\mid i_0\\le i\\}$ and $o=(i_0,i_0\\le i_0)$. There are a functor $F:J\\to\\mathrm{CommRing}$ and an isomorphism $e_0:W\\cong\\operatorname{Spec}(F(o))$ such that for every $i\\in J$ there is an isomorphism $e_i:W_i\\cong\\operatorname{Spec}(F(i))$, where $W_i$ is the inverse image of $W$ under $D(i\\to i_0)$, and $e_0\\circ(W_i\\to W)=\\operatorname{Spec}(F(o\\to i))\\circ e_i$. There is also an isomorphism $e_L:W_L\\cong\\operatorname{Spec}(\\operatorname{colim}F)$, where $W_L$ is the inverse image of $W$ under $c_L\\to D(i_0)$, such that $e_0\\circ(W_L\\to W)=\\operatorname{Spec}(\\iota_o)\\circ e_L$, with $\\iota_o$ the colimit coprojection. All maps from inverse-image opens to $W$ are restrictions of the specified structure maps.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 01YX (lemma-directed-inverse-system-has-limit) and 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Restrict D to the upper tail. Set W_i to the inverse image of W and F(i)=Γ(W_i). Restricted transition maps and functoriality of global sections give the covariant functor F. All W_i are affine. The identity transition at o identifies W_o with W, and affine spectrum presentations give e0 and each ei with the required commutation square.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The opposite of the upper tail is equivalent to Over(op i₀). The restricted cone is limiting by the affine-open limit-cone lemma. Spec sends the opposite colimit cocone of F to another limiting cone. The unique comparison isomorphism of these cones supplies eL, and its leg at o supplies the required coprojection square. Nonemptiness follows from i₀; no quasi-compactness of the original schemes is used.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens",
+    "lem-weil-pbc-spec-colimit-limit",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-weil-pbc-spec-colimit-limit",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 01YX (lemma-directed-inverse-system-has-limit) and 01YW (lemma-directed-inverse-system-affine-schemes-has-limit)",
+  "note": "Source argument written out with the exact spectrum and projection compatibilities required by Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine open in a directed inverse system of schemes has spectrum presentations compatible with a directed colimit of its coordinate rings",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone, AlgebraicGeometry.Scheme.AffineZariskiSite.cocone, AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone, AlgebraicGeometry.exists_isAffineOpen_preimage_eq, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.directedAffineCover_I₀",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no exact combined statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.isLimitOpensCone",
+   "results": "AlgebraicGeometry.isLimitOpensCone",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no exact combined statement"
+  },
+  {
+   "tool": "grep",
+   "query": "opensCone|opensDiagram|preservesColimit_Γ",
+   "results": "Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; no exact combined statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine open in a directed inverse system of schemes has spectrum presentations compatible with a directed colimit of its coordinate rings",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineChartDirectedRingModel",
+  "date": "2026-10-12",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "step 5 of its split (source: Lemma Tag 0A51 (lemma-vanishing-restriction-injective) and its proof: 'By Theorem 09YQ we have H^q(X^h, I|) = colim H^q(Spec(B), I|)... Thus the cohomology groups on the right are zero'); affine reduction in the descendant lem-weil-pbc-descend-etale, steps 2–5; steps 1–2 of the directed-ring-model reduction: base-open coordinate system and its limit",
+   "via": [
+    "lem-weil-pbc-affine-chart-directed-ring-model",
+    "lem-weil-pbc-etale-affine-chart-descent",
+    "lem-weil-pbc-descend-etale",
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenDirectedRingSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenDirectedRingSystem.lean",
+  "declaration": "AlgebraicGeometry.exists_affineOpen_directedRingSystem",
+  "statement": "theorem exists_affineOpen_directedRingSystem\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (W : (D.obj (op i₀)).Opens) (hW : IsAffineOpen W) :\n    ∃ (F : {i : I // i₀ ≤ i} ⥤ CommRingCat.{u})\n      (e0 : W.toScheme ≅ Spec (F.obj ⟨i₀, le_rfl⟩)),\n      (∀ i : {i : I // i₀ ≤ i},\n        ∃ e : (D.map (homOfLE i.property).op ⁻¹ᵁ W).toScheme ≅ Spec (F.obj i),\n          (D.map (homOfLE i.property).op).resLE W _ le_rfl ≫ e0.hom =\n            e.hom ≫ Spec.map (F.map (homOfLE i.property))) ∧\n      ∃ eL : (c.π.app (op i₀) ⁻¹ᵁ W).toScheme ≅ Spec (colimit F),\n        (c.π.app (op i₀)).resLE W _ le_rfl ≫ e0.hom =\n          eL.hom ≫ Spec.map (colimit.ι F ⟨i₀, le_rfl⟩)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T070557-L-3479785",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261012T070557-L-3479785",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
