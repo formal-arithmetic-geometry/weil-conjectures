@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.RingTheory.EtaleResidueTriplesSimpleRootsConstruction
 
 /-!
 # Simple roots lift in the pointed etale colimit
@@ -50,6 +51,9 @@ theorem etaleResidueTriples_colimit_simple_roots
     ∀ f : Polynomial c.pt, f.Monic → ∀ a₀ : K,
       f.eval₂ ψ a₀ = 0 → f.derivative.eval₂ ψ a₀ ≠ 0 →
         ∃ a : c.pt, f.IsRoot a ∧ ψ a = a₀ := by
-  sorry
+  intro f hf a₀ hfa hdfa
+  obtain ⟨t, x, hx, hψx⟩ :=
+    etaleResidueTriples_simple_root_stage R p K c hc ψ hψ f hf a₀ hfa hdfa
+  exact ⟨c.ι.app t x, hx, hψx⟩
 
 end AlgebraicGeometry.Scheme
