@@ -318,16 +318,19 @@ lemma hColimitProp_succ (n : ℕ) (ih : ∀ D : J ⥤ TopCat.Sheaf AddCommGrpCat
     have e3 : Sheaf.H.map (colimit.ι S.X₃ m) n (Sheaf.H.map (S.X₃.map fj) n z) =
         Sheaf.H.map (colimit.ι S.X₃ j) n z := by
       rw [← Sheaf.H.map_comp_apply, colimit.w S.X₃ fj]
-    have e4 : Sheaf.H.map (colimit.ι S.X₃ m) n
-          (Sheaf.H.map (S.g.app m) n (Sheaf.H.map (S.X₂.map fk) n wk)) =
-        Sheaf.H.map (colimit.ι S.X₂ k ≫ (S.map colim).g) n wk := by
+    have hmor : S.X₂.map fk ≫ S.g.app m ≫ colimit.ι S.X₃ m =
+        colimit.ι S.X₂ k ≫ (S.map colim).g := by
       have hk : colimit.ι S.X₂ k ≫ (S.map colim).g = S.g.app k ≫ colimit.ι S.X₃ k :=
         (φ k).comm₂₃
-      rw [← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply, hk,
-        reassoc_of% (S.g.naturality fk), colimit.w S.X₃ fk]
+      rw [hk, reassoc_of% (S.g.naturality fk), colimit.w S.X₃ fk]
+    have e4 : Sheaf.H.map (colimit.ι S.X₃ m) n
+          (Sheaf.H.map (S.g.app m) n (Sheaf.H.map (S.X₂.map fk) n wk)) =
+        Sheaf.H.map (colimit.ι S.X₃ j) n z := by
+      rw [← hw, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply, ← Sheaf.H.map_comp_apply,
+        Category.assoc, hmor]
     have hz' : Sheaf.H.map (colimit.ι S.X₃ m) n (Sheaf.H.map (S.X₃.map fj) n z -
         Sheaf.H.map (S.g.app m) n (Sheaf.H.map (S.X₂.map fk) n wk)) = 0 := by
-      rw [map_sub, e3, e4, Sheaf.H.map_comp_apply, hw, sub_self]
+      rw [map_sub, e3, e4, sub_self]
     obtain ⟨m', a, ha⟩ := (ih S.X₃).2 m _ hz'
     refine ⟨m', fj ≫ a, ?_⟩
     have e := Sheaf.H.map_δSucc (hSj j) (hSj m')

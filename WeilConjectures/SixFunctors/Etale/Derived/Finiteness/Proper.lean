@@ -55,8 +55,52 @@ Let `Λ` be a finite ring killed by an integer invertible in the field `k`. Ever
 `Rᵠf_* F` of constructible sheaves `F` of `Λ`-modules are constructible. -/
 theorem hasConstructibleDirectImages_of_isProper {X S : Scheme.{u}} (aS : S ⟶ Spec (.of k))
     [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) [IsProper f] :
-    HasConstructibleDirectImages Λ f :=
-  sorry
+    HasConstructibleDirectImages Λ f := by
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have : IsNoetherian S := {}
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (f ≫ aS)
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (f ≫ aS)
+  have : IsNoetherian X := {}
+  -- Noetherian induction on the closed subsets `C` of `X`
+  suffices H : ∀ C : TopologicalSpace.Closeds X, ∀ (Z : Scheme.{u}) (i : Z ⟶ X)
+      [IsClosedImmersion i], Set.range i.base = C → HasConstructibleDirectImages Λ (i ≫ f) by
+    simpa using H ⊤ X (𝟙 X) (by simp)
+  intro C
+  induction C using WellFoundedLT.induction with
+  | ind C ih =>
+  intro Z i _ hi
+  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian (i ≫ f ≫ aS)
+  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace (i ≫ f ≫ aS)
+  obtain ⟨Y, π, U, _, _, hU, hπU, N, _, e, _, he⟩ := exists_projective_modification (i ≫ f)
+  have hY : HasConstructibleDirectImages Λ (π ≫ i ≫ f) :=
+    hasConstructibleDirectImages_of_isClosedImmersion aS _ N e he
+  by_cases hZ : IsEmpty Z
+  · exact HasConstructibleDirectImages.of_comp_of_isFinite (i ≫ f ≫ aS) _ π hY
+  rw [not_isEmpty_iff] at hZ
+  have hπ : IsIso (pullback.snd π U.ι) := by
+    have : IsIso ((pullbackRestrictIsoRestrict π U).inv ≫ pullback.snd π U.ι) := hπU
+    exact IsIso.of_isIso_comp_left (pullbackRestrictIsoRestrict π U).inv _
+  refine HasConstructibleDirectImages.of_modification (i ≫ f) π U.ι U.closedComplement
+    (by simp) hπ hY ?_
+  -- the closed complement of `U` has strictly smaller image in `X`
+  let C' : TopologicalSpace.Closeds X :=
+    ⟨Set.range (U.closedComplement ≫ i).base,
+      (U.closedComplement ≫ i).isClosedEmbedding.isClosed_range⟩
+  have hlt : C' < C := by
+    refine lt_of_le_of_ne ?_ fun h ↦ ?_
+    · rintro _ ⟨z, rfl⟩
+      rw [← SetLike.mem_coe, ← hi]
+      exact ⟨_, rfl⟩
+    · obtain ⟨z, hz⟩ := hU.nonempty
+      have : i.base z ∈ (C' : Set X) := by rw [h, ← hi]; exact ⟨z, rfl⟩
+      obtain ⟨w, hw⟩ := this
+      have hw' : U.closedComplement.base w = z :=
+        i.isClosedEmbedding.injective (by simpa using hw)
+      have : U.closedComplement.base w ∈ Set.range U.closedComplement.base := ⟨w, rfl⟩
+      rw [Scheme.Opens.range_closedComplement, hw'] at this
+      exact this hz
+  simpa using ih C' hlt _ (U.closedComplement ≫ i) rfl
 
 /-- Blueprint `thm-fin-proper-case`: The proper case: direct images of proper morphisms.
 

@@ -16,6 +16,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
@@ -46,7 +47,7 @@ the vanishing of `Rᵠf_!` above twice the fibre dimension is read off the sheaf
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field`
 (`cor-fin-deligne-open-over-field`) extended to complexes by
 `AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`. The vanishing clause
-of `sbc-thm-finiteness-finite-type` is stated here with `sorry`.
+of `sbc-thm-finiteness-finite-type` is `lem-dg-compact-support-amplitude`.
 
 ## Main statements
 
@@ -274,7 +275,8 @@ geometric fibres of `f` have dimension at most `e`, then `Rᵠf_! 𝓕 = 0` for 
 This is a node of the blueprint subsection `sk-prop-sf-cbc`, where it is proved. Its other
 clauses, the bounded constructibility of `Rf_* 𝓕` and of `Rf_! 𝓕`, are the sheaf cases of
 `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType` and
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. -/
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek`. The vanishing is
+`lem-dg-compact-support-amplitude`, which bounds `Rf_!` by the dimension of the original fibres. -/
 theorem isZero_homology_rightDerivedLowerShriek_singleFunctor
     [HasInvertibleExponent Λ (Spec (.of k))] (f : X ⟶ Y) [HasCompactification f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -285,7 +287,7 @@ theorem isZero_homology_rightDerivedLowerShriek_singleFunctor
     (hq : (2 * e : ℤ) < q) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
       ((R(f)_![ModuleCat.{u + 1} Λ]).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) :=
-  sorry
+  isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt Λ f aX aY hf e he F q hq
 
 /-! ### Auxiliary lemmas -/
 
