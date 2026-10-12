@@ -7588,3 +7588,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 11:50 L: merged deliver/E3/Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic (stage 3; reviewer PASS; first push; landing 20261012T115005-L-875809 (interface); batch 20261012T114925; modules 2; new nodes 1)
 - 11:50 L: merged deliver/F3/Sheaf.Paper.QCohAcyclicDerivedSectionsComparison (stage 3; reviewer PASS; first push; landing 20261012T115021-L-877059 (interface); batch 20261012T114925; modules 3; new nodes 2)
 - 11:50 L: merged deliver/G1/Sheaf.CategoryTheory.RightDerivedPlusCube (stage 3; reviewer PASS; first push; landing 20261012T115037-L-878199 (proof); batch 20261012T114925; modules 1; new nodes 0)
+- 11:50 L: merged deliver/G3/WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket (stage 3; reviewer PASS; first push; landing 20261012T115053-L-879077 (interface); batch 20261012T114925; modules 2; new nodes 2)

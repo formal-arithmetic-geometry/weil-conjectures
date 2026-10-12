@@ -1,0 +1,110 @@
+{
+ "id": "lem-ag-mixed-coefficient-derivation",
+ "kind": "statement",
+ "title": "The mixed coefficient is a relative derivation",
+ "statement": "Let S be any scheme and G a group scheme over S [def-sc-group-scheme]. Let z:S[ε][δ]→G be a morphism over S, using the dual numbers [def-sc-dual-numbers], whose restrictions to δ=0 and ε=0 are the identity point. Put g=S→S[ε]→S[ε][δ]→G by setting both parameters to zero. There is a relative presheaf derivation D:𝒪_G→g_*𝒪_S over the pullback of 𝒪_S such that for every open V of G and section a, D(a) is the εδ coefficient of z♯(a).",
+ "source": {
+  "document": "Milne, Algebraic Groups (2017)",
+  "place": "Chapter 10, infinitesimal points; coefficient-extraction argument in Bracket.lean toMixed_bijective docstring"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Extracting the remaining single-parameter coefficient of either axis restriction gives zero. Equality of the base maps supplies the canonical transport between preimage opens; restrictions preserve these zero coefficients.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define D componentwise as snd(snd(z♯(a))). Additivity follows from the section ring maps. Expanding multiplication gives the Leibniz law after the pure ε and δ coefficients vanish; the reduced map g supplies the constant coefficient. Naturality follows by applying snd twice to the naturality square of z♯.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Since z is over S, its composite with G→S equals the projection from the double thickening, whose section map has only a constant coefficient. By the pullback-pushforward adjunction the composite from the pullback base presheaf is fixed by the coefficient-killing endomorphism. Extracting snd twice shows D annihilates this composite. This verifies the relative derivation condition and the prescribed coefficient formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Milne, Algebraic Groups (2017)",
+  "place": "Chapter 10, infinitesimal points; coefficient-extraction argument in Bracket.lean toMixed_bijective docstring",
+  "note": "Agent-written detailed coefficient proof; fully checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a scheme morphism from two parameter dual numbers that is constant on both axes the mixed coefficient is a relative derivation",
+   "results": "Service returned Internal Server Error; search unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mixed coefficient of a morphism from iterated dual numbers is a relative derivation",
+   "results": "Found derivationToSquareZeroOfLift and ModuleCat.Derivation.desc_d. These are ring-level constructions and do not provide the relative presheaf derivation on an arbitrary scheme.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualNumbers.*Derivation|mixedCoefficientDerivation in Mathlib; mixed coefficient|mixed.*derivation in dag/nodes",
+   "results": "No matching scheme theorem in Mathlib or existing DAG statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Lie algebra paragraph: dual-number tangent vectors and the mixed commutator bracket",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MixedCoefficientDerivation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MixedCoefficientDerivation.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.exists_mixedCoefficientDerivation",
+  "statement": "theorem exists_mixedCoefficientDerivation {S : Scheme.{u}} (G : Over S) [GrpObj G] (z : Scheme.dualNumbers₂Over S ⟶ G) (hε : Scheme.dualNumbersιεOver S ≫ z = 1) (hδ : Scheme.dualNumbersιδOver S ≫ z = 1) : ∃ D : ((Scheme.Modules.pushforward (S.dualNumbersι ≫ S.dualNumbers.dualNumbersι ≫ z.left)).obj (Scheme.Modules.unitModule S)).val.Derivation' G.hom.pullbackPresheafHom, ∀ {V : (TopologicalSpace.Opens G.left)ᵒᵖ} (a : Γ(G.left, V.unop)), D.d a = (z.left.app V.unop a).snd.snd",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T115053-L-879077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T115053-L-879077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

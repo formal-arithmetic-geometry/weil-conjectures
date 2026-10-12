@@ -1,0 +1,114 @@
+{
+ "id": "lem-ag-mixed-point-bijection",
+ "kind": "statement",
+ "title": "Infinitesimal points are the mixed points",
+ "statement": "For any scheme S and group scheme G over S [def-sc-group-scheme], let infPoints(G) be its S[η]-points reducing to the identity, and let mixedPoints(G) be its S[ε][δ]-points reducing to the identity on each axis, using [def-sc-dual-numbers]. The map induced by η↦εδ is a bijection infPoints(G)→mixedPoints(G).",
+ "source": {
+  "document": "Milne, Algebraic Groups (2017)",
+  "place": "Chapter 10, infinitesimal points; coefficient-extraction argument in Bracket.lean toMixed_bijective docstring"
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sc-dual-numbers"
+ ],
+ "proof": [
+  {
+   "text": "Injectivity: equality after η↦εδ gives equality of the underlying continuous maps and of the section maps after applying DualNumber.mulRingHom. Transport sections along the equality of preimage opens. Extracting fst twice recovers the original constant coefficient and extracting snd twice recovers the original infinitesimal coefficient. Extensionality gives equality of the original scheme morphisms and infinitesimal points.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For a mixed point z, use the mixed-coefficient derivation theorem. Its reduced point g is the identity section by either axis restriction. Construct v from this specified derivation using pointOfDerivation, whose existing theorems make v a morphism over S reducing to the identity.",
+   "uses": [
+    "lem-ag-mixed-coefficient-derivation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To check v maps to z, compare all four coefficients of every section map. The constant coefficient agrees by the definition of g, both pure coefficients vanish by the two axis restrictions, and the mixed coefficient agrees by the defining formula for D. Scheme and subtype extensionality finish surjectivity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-ag-mixed-coefficient-derivation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Milne, Algebraic Groups (2017)",
+  "place": "Chapter 10, infinitesimal points; coefficient-extraction argument in Bracket.lean toMixed_bijective docstring",
+  "note": "Agent-written detailed coefficient proof; fully checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a scheme morphism from two parameter dual numbers that is constant on both axes the mixed coefficient is a relative derivation",
+   "results": "Service returned Internal Server Error; search unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mixed coefficient of a morphism from iterated dual numbers is a relative derivation",
+   "results": "Found derivationToSquareZeroOfLift and ModuleCat.Derivation.desc_d. These are ring-level constructions and do not provide the relative presheaf derivation on an arbitrary scheme.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualNumbers.*Derivation|mixedCoefficientDerivation in Mathlib; mixed coefficient|mixed.*derivation in dag/nodes",
+   "results": "No matching scheme theorem in Mathlib or existing DAG statement.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-lie-algebra-derivation",
+   "place": "Lie algebra paragraph: dual-number tangent vectors and the mixed commutator bracket",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-tangent",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Bracket",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/Lie/Bracket.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.toMixed_bijective",
+  "statement": "theorem toMixed_bijective : Function.Bijective (toMixed G)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T115053-L-879077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T115053-L-879077",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
