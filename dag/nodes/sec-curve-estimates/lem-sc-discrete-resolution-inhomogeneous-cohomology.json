@@ -1,0 +1,165 @@
+{
+ "id": "lem-sc-discrete-resolution-inhomogeneous-cohomology",
+ "kind": "statement",
+ "title": "Invariants of a transported resolution compute locally constant inhomogeneous cohomology",
+ "statement": "Let $G$ be a compact Hausdorff totally disconnected topological group in universe $u$ and let $r=\\max(u,s)$. Let $\\mathcal A$ be an abelian category [def-sp-abelian], $E:\\mathcal A\\simeq\\operatorname{DiscreteRep}_{\\mathbf Z}(G)$ an equivalence [def-exc-discrete-modules-category], and let $V:\\mathcal A\\to\\mathrm{Ab}_r$ be invariants after $E$, followed by the underlying additive-group functor. Assume $V$ is additive [def-sp-left-exact-additive]. Fix $F\\in\\mathcal A$ and an injective resolution $I$ of $F$ [def-sp-injective-resolutions]. Let $K$ be any cochain complex of abelian groups in universe $r$, with additive equivalences $t_n:K^n\\simeq\\operatorname{LC}(G^n,E(F))$. Here $\\operatorname{LC}$ means functions locally constant in the topological domain, with pointwise addition. Suppose for every $x\\in K^n$ and tuple $g=(g_0,\\ldots,g_n)$,\n$t_{n+1}(d x)(g)=\\rho(g_0)t_n(x)(g_1,\\ldots,g_n)+\\sum_{k=0}^n(-1)^{k+1}t_n(x)(\\operatorname{contract}_k(g))$,\nwhere contract multiplies adjacent entries at $k<n$ and drops the last entry at $k=n$. Then for every $q\\ge0$ the underlying types of $H^q(V(I^\\bullet))$ and $H^q(K)$ are equivalent. No finiteness hypothesis is imposed on the scalar ring or coefficient group.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-exc-discrete-modules-category",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "The category of discrete integer representations is abelian: take underlying module kernels and cokernels; open stabilizers pass to subobjects and quotient elements. It has enough injectives: embed the underlying abelian group into an injective abelian group J and then into locally constant functions G to J with right translation. Locally constant coinduction is right adjoint to the exact forgetful functor, so it takes injective abelian groups to injective discrete representations. Compactness and finite clopen partitions give open stabilizers for these functions.",
+   "uses": [
+    "def-exc-discrete-modules-category",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "Construct the locally constant inhomogeneous complex functorially with the displayed differential. Face identities show d squared is zero. The finite image of a locally constant function on a compact power permits a continuous lift through any surjective coefficient map, chosen on its finitely many clopen fibers. Kernels are pointwise. The natural long exact sequence in homology therefore defines a cohomological delta-functor. The degree-zero differential is g*m-m, so its degree-zero functor is invariants.",
+   "uses": [
+    "def-weil-pbc-delta-functor",
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "Embed M into locally constant maps G to M by its orbit map, with right translation action. Finitely many clopen fibers and compactness give open stabilizers. The insertion h(F)(g1,...,g(n-1))(x)=F(x,g1,...,g(n-1))(1) is locally constant into the discrete coinduced module: compactness of the x coordinate turns local constancy on the product into local constancy with the whole function fixed. Expanding the inhomogeneous differential gives dh+hd=1 in positive degrees. Hence every positive degree is effaceable, and the universality criterion applies.",
+   "uses": [
+    "lem-weil-pbc-effaceable-delta-functor-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "Derived invariants are universal and have the same degree zero. Extend the identity in both directions and use uniqueness to obtain inverse comparisons in all degrees. Transport injective resolutions across E, which preserves injectives and exactness. Compute with the supplied I using comparison maps and their homotopy uniqueness. Finally the term equivalences t and their differential equation identify K with the constructed inhomogeneous complex, so transport its homology.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "def-sp-injective-resolutions",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-delta-functor",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "def-sp-left-exact-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Parent comparison steps 1 and 2: transported injective resolution versus inhomogeneous continuous cochains; detailed proof written from the parent plan and checked against the published Tag 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally constant inhomogeneous cochains compute derived invariants of discrete integer modules of profinite groups",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariants of an injective resolution are isomorphic to the homology of locally constant inhomogeneous cochains for a profinite group",
+   "results": "groupCohomologyIso, groupCohomology.linearYonedaObjResProjectiveResolutionIso, ContinuousCohomology.continuousCohomologyZeroIso, Rep.standardResolution.extIso, Rep.barResolution.extIso, groupCohomology.coindIso, Rep.FiniteCyclicGroup.resolution_quasiIso, groupCohomology.H0Iso",
+   "date": "2026-10-13",
+   "verdict": "No exact match: ordinary group cohomology or homogeneous definitions only; no discrete integer profinite comparison or coordinate equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "continuousCochains_derived_invariants|nonempty_equiv_invariantResolution|inhomogeneousCochains.d_comp_d",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match: ordinary group cohomology or homogeneous definitions only; no discrete integer profinite comparison or coordinate equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DiscreteResolutionContinuousCohomology",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "Parent comparison steps 1 and 2: transported injective resolution versus inhomogeneous continuous cochains",
+   "via": [
+    "lem-sc-discrete-resolution-continuous-cohomology",
+    "lem-sc-discrete-invariants-continuous-comparison",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology",
+  "file": "lean/Sheaf/RepresentationTheory/DiscreteResolutionInhomogeneousCohomology.lean",
+  "declaration": "Rep.nonempty_equiv_invariantResolution_inhomogeneous",
+  "statement": "theorem nonempty_equiv_invariantResolution_inhomogeneous\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (A : Type v) [Category.{w} A] [Abelian A]\n    (E : A ≌ DiscreteContinuousRep.{0, u, max u s} ℤ G)\n    [(E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙\n      forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).Additive]\n    (F : A) (I : InjectiveResolution F)\n    (K : CochainComplex AddCommGrpCat.{max u s} ℕ)\n    (t : ∀ n : ℕ, K.X n ≃+ LocallyConstant (Fin n → G) (E.functor.obj F).obj.V)\n    (ht : ∀ (n : ℕ) (x : K.X n) (g : Fin (n + 1) → G),\n      t (n + 1) ((K.d n (n + 1)) x) g =\n        (E.functor.obj F).obj.ρ (g 0) (t n x (fun k ↦ g k.succ)) +\n          ∑ k : Fin (n + 1),\n            (-1 : ℤ) ^ (k.val + 1) • t n x (Fin.contractNth k (· * ·) g))\n    (q : ℕ) :\n    Nonempty (((((E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.invariantsFunctor ℤ G ⋙\n      forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).mapHomologicalComplex\n        (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃ K.homology q)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T205632-L-933092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T205632-L-933092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

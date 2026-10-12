@@ -1,0 +1,132 @@
+{
+ "id": "lem-sc-homogeneous-inhomogeneous-continuous-cohomology",
+ "kind": "statement",
+ "title": "Locally constant inhomogeneous coordinates for homogeneous continuous cochains",
+ "statement": "Let $G$ be a compact Hausdorff totally disconnected topological group in universe $u$, and let $N$ be a topological integer representation with coefficient universe $r=\\max(u,s)$ and discrete coefficient topology. Assume every element has an open stabilizer. Let $H^\\bullet$ be the homogeneous continuous cochain complex: degree $n$ is the invariant subgroup of $n+1$ iterated continuous-map spaces with diagonal action $(g f)(x)=g f(g^{-1}x)$, and differential constant insertion minus the preceding differential applied pointwise. Then there exist additive equivalences $t_n:H^n\\simeq\\operatorname{LC}(G^n,N)$ such that for every $x\\in H^n$ and tuple $g=(g_0,\\ldots,g_n)$,\n$t_{n+1}(d x)(g)=\\rho(g_0)t_n(x)(g_1,\\ldots,g_n)+\\sum_{k=0}^n(-1)^{k+1}t_n(x)(\\operatorname{contract}_k(g))$,\nwhere contract multiplies adjacent entries at $k<n$ and drops the last entry at $k=n$, and LC denotes locally constant functions with pointwise addition. This is a degreewise coordinate and differential statement; it asserts nothing about injective resolutions or their homology.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Open stabilizers and discreteness make the action map G times N to N jointly continuous: hold the coefficient fixed on a singleton and vary the group coordinate in a stabilizer coset. Compact-open currying and uncurrying for compact Hausdorff G identify the iterated continuous-map terms with continuous maps on finite powers. The iterated action becomes the diagonal action.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "An invariant homogeneous cochain is equivariant. Evaluate it at (1,g1,g1*g2,...,g1*...*gn). Conversely c maps (g0,...,gn) to g0*c(g0 inverse*g1,...,g(n-1) inverse*gn). Equivariance shows these maps are inverse; both preserve addition. Products, inverses and the joint action preserve continuity, and continuous functions into discrete N are exactly locally constant.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  },
+  {
+   "text": "Expand the recursive homogeneous differential by induction to alternating omission. Evaluation at cumulative products turns the first omission into the action term, internal omissions into adjacent multiplication, and the final omission into dropping the last coordinate. The signs match (-1)^(k+1). In degree zero the formula is g*m-m. This establishes the asserted equation for every degree.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DVG, section-continuous-group-cohomology, displayed inhomogeneous differential and final profinite comparison; parent proof steps 1-3"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Parent comparison step 3: homogeneous change of variables before coefficient transport and taking homology; detailed proof written from the parent plan and checked against the published Tag 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Homogeneous continuous cochains invariant under diagonal action are isomorphic to locally constant inhomogeneous cochains",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change variables from homogeneous equivariant continuous cochains to inhomogeneous locally constant cochains and compare differentials",
+   "results": "inhomogeneousCochains.d_eq, ContinuousCohomology.homogeneousCochains, ContinuousCohomology.MultiInd.complex, groupCohomology.comp_d₀₁_eq, groupCohomology.inhomogeneousCochains.d_def, groupCohomology.comp_d₁₂_eq, groupCohomology.cochainsMap, groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply",
+   "date": "2026-10-13",
+   "verdict": "No exact match: ordinary group cohomology or homogeneous definitions only; no discrete integer profinite comparison or coordinate equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneousCochains|coind₁_apply_apply|congrRightₗ",
+   "results": "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean",
+   "date": "2026-10-13",
+   "verdict": "No exact match: ordinary group cohomology or homogeneous definitions only; no discrete integer profinite comparison or coordinate equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RepresentationTheory.DiscreteResolutionContinuousCohomology",
+  "date": "2026-10-13",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "Parent comparison step 3: homogeneous change of variables before coefficient transport and taking homology",
+   "via": [
+    "lem-sc-discrete-resolution-continuous-cohomology",
+    "lem-sc-discrete-invariants-continuous-comparison",
+    "lem-sc-etale-units-h2-reverse-embedding",
+    "lem-sc-etale-units-two-cocycle-comparison",
+    "lem-sc-etale-galois-units-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology",
+  "file": "lean/Sheaf/RepresentationTheory/HomogeneousInhomogeneousContinuousCohomology.lean",
+  "declaration": "Rep.exists_homogeneousCochains_inhomogeneous_coordinates",
+  "statement": "theorem exists_homogeneousCochains_inhomogeneous_coordinates\n    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    (N : TopRep.{max u s} ℤ G) [DiscreteTopology N.V]\n    (hN : ∀ x : N.V, IsOpen {g : G | N.ρ g x = x}) :\n    ∃ t : ∀ n : ℕ, (TopRep.homogeneousCochains N).X n ≃+\n        LocallyConstant (Fin n → G) N.V,\n      ∀ (n : ℕ) (x : (TopRep.homogeneousCochains N).X n) (g : Fin (n + 1) → G),\n        t (n + 1) (((TopRep.homogeneousCochains N).d n (n + 1)).hom x) g =\n          N.ρ (g 0) (t n x (fun k ↦ g k.succ)) +\n            ∑ k : Fin (n + 1),\n              (-1 : ℤ) ^ (k.val + 1) • t n x (Fin.contractNth k (· * ·) g)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T205632-L-933092",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T205632-L-933092",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

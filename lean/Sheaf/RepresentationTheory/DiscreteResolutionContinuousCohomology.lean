@@ -9,8 +9,8 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
-import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import Sheaf.RepresentationTheory.DiscreteResolutionInhomogeneousCohomology
+import Sheaf.RepresentationTheory.HomogeneousInhomogeneousContinuousCohomology
 
 /-!
 # Continuous cohomology from a transported injective resolution
@@ -71,6 +71,53 @@ theorem nonempty_equiv_invariantResolution_continuousCohomology
       forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat).mapHomologicalComplex
         (ComplexShape.up ℕ)).obj I.cocomplex).homology q) ≃
       continuousCohomology q N) := by
-  sorry
+  classical
+  have hN : ∀ x : N.V, IsOpen {g : G | N.ρ g x = x} := by
+    intro x
+    have hx := (E.functor.obj F).property (e.symm x)
+    have hs : {g : G | N.ρ g x = x} =
+        {g : G | (E.functor.obj F).obj.ρ g (e.symm x) = e.symm x} := by
+      ext g
+      constructor
+      · intro hg
+        apply e.injective
+        rw [he, e.apply_symm_apply, hg]
+      · intro hg
+        have h := congrArg e hg
+        change N.ρ g x = x
+        simpa only [he, e.apply_symm_apply] using h
+    rw [hs]
+    exact hx
+  obtain ⟨t, ht⟩ := exists_homogeneousCochains_inhomogeneous_coordinates G N hN
+  let V := forget₂ (TopModuleCat.{max u s} ℤ) (ModuleCat.{max u s} ℤ) ⋙
+    forget₂ (ModuleCat.{max u s} ℤ) AddCommGrpCat
+  let K := (V.mapHomologicalComplex (ComplexShape.up ℕ)).obj
+    (TopRep.homogeneousCochains N)
+  let t' : ∀ n : ℕ, K.X n ≃+
+      LocallyConstant (Fin n → G) (E.functor.obj F).obj.V :=
+    fun n ↦ (t n).trans (LocallyConstant.congrRightₗ ℤ e.symm).toAddEquiv
+  have ht' : ∀ (n : ℕ) (x : K.X n) (g : Fin (n + 1) → G),
+      t' (n + 1) ((K.d n (n + 1)) x) g =
+        (E.functor.obj F).obj.ρ (g 0) (t' n x (fun k ↦ g k.succ)) +
+          ∑ k : Fin (n + 1),
+            (-1 : ℤ) ^ (k.val + 1) • t' n x (Fin.contractNth k (· * ·) g) := by
+    intro n x g
+    change e.symm (t (n + 1) ((K.d n (n + 1)) x) g) = _
+    apply e.injective
+    rw [e.apply_symm_apply]
+    change t (n + 1) (((TopRep.homogeneousCochains N).d n (n + 1)).hom x) g = _
+    rw [ht, map_add, map_sum]
+    change N.ρ (g 0) (t n x (fun k ↦ g k.succ)) +
+        ∑ k : Fin (n + 1),
+          (-1 : ℤ) ^ (k.val + 1) • t n x (Fin.contractNth k (· * ·) g) =
+      e ((E.functor.obj F).obj.ρ (g 0) (e.symm (t n x (fun k ↦ g k.succ)))) +
+        ∑ k : Fin (n + 1),
+          e ((-1 : ℤ) ^ (k.val + 1) •
+            e.symm (t n x (Fin.contractNth k (· * ·) g)))
+    simp only [he, e.apply_symm_apply, map_zsmul]
+  obtain ⟨a⟩ := nonempty_equiv_invariantResolution_inhomogeneous G A E F I K t' ht' q
+  let b : K.homology q ≅ V.obj (continuousCohomology q N) :=
+    ((TopRep.homogeneousCochains N).sc q).mapHomologyIso V
+  exact ⟨a.trans b.addCommGroupIsoToAddEquiv.toEquiv⟩
 
 end Rep
