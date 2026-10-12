@@ -1,0 +1,108 @@
+{
+ "kind": "statement",
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-coherence",
+ "status": "split",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 30.19.1 (Tag 02O5), Chow paragraph"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "group": "T2",
+  "date": "2026-10-13",
+  "text": "Decomposition of the two conjuncts of the parent theorem; each component is the corresponding independent part of the Stacks argument."
+ },
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-chow-relative-ample-twist",
+   "place": "strict conjunct",
+   "via": []
+  },
+  "same_as": null
+ },
+ "stmt_deps": [],
+ "proof_deps": [
+  "lem-pc-chow-relative-ample-twist"
+ ],
+ "proof": [
+  {
+   "text": "This component is a strict conjunct of the parent conclusion and follows by the tensor-pullback functoriality argument in Stacks Tag 02O5.",
+   "uses": [
+    "lem-pc-chow-relative-ample-twist"
+   ],
+   "elementary": false
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwist",
+  "date": "2026-10-13",
+  "group": "T2"
+ },
+ "id": "lem-pc-chow-relative-ample-twist-properties",
+ "title": "lem-pc-chow-relative-ample-twist-properties",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChowRelativeAmpleTwistProperties.lean",
+  "declaration": "AlgebraicGeometry.chow_relative_ample_twist_properties",
+  "statement": "theorem chow_relative_ample_twist_properties (m : ℕ) (S Z X' : Scheme.{u})\n    (g : Z ⟶ S) (π : X' ⟶ Z)\n    (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))\n    [IsProper g] [IsProper π] [IsImmersion j]\n    (hj : π ≫ g = j ≫ (ℙ(ULift.{u} (Fin (m + 1)); S) ↘ S)) :\n      ∃ hL : ((Scheme.Modules.tensorPullback j).obj\n          ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n            (ULift.{u} (Fin (m + 1))) S)).obj\n            (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n              (ULift.{u} ℤ)) 1))).IsInvertible,\n        (∀ V : S.Opens, IsAffineOpen V →\n          ∃ hV : ((Scheme.Modules.tensorPullback ((π ≫ g) ⁻¹ᵁ V).ι).obj\n              ((Scheme.Modules.tensorPullback j).obj\n              ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                (ULift.{u} (Fin (m + 1))) S)).obj\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                  (ULift.{u} ℤ)) 1)))).IsInvertible,\n            @Scheme.Modules.IsAmple ((π ≫ g) ⁻¹ᵁ V).toScheme\n              ((Scheme.Modules.tensorPullback ((π ≫ g) ⁻¹ᵁ V).ι).obj\n                  ((Scheme.Modules.tensorPullback j).obj\n                  ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                    (ULift.{u} (Fin (m + 1))) S)).obj\n                    (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                      (ULift.{u} ℤ)) 1)))) hV) ∧\n        (∀ W : Z.Opens, IsAffineOpen W →\n          ∃ hW : ((Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).obj\n              ((Scheme.Modules.tensorPullback j).obj\n              ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                (ULift.{u} (Fin (m + 1))) S)).obj\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                  (ULift.{u} ℤ)) 1)))).IsInvertible,\n            @Scheme.Modules.IsAmple (π ⁻¹ᵁ W).toScheme\n              ((Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).obj\n                  ((Scheme.Modules.tensorPullback j).obj\n                  ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                    (ULift.{u} (Fin (m + 1))) S)).obj\n                    (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                      (ULift.{u} ℤ)) 1)))) hW)",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-13"
+ },
+ "statement": "theorem chow_relative_ample_twist_properties (m : ℕ) (S Z X' : Scheme.{u})\n    (g : Z ⟶ S) (π : X' ⟶ Z)\n    (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))\n    [IsProper g] [IsProper π] [IsImmersion j]\n    (hj : π ≫ g = j ≫ (ℙ(ULift.{u} (Fin (m + 1)); S) ↘ S)) :\n      ∃ hL : ((Scheme.Modules.tensorPullback j).obj\n          ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n            (ULift.{u} (Fin (m + 1))) S)).obj\n            (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n              (ULift.{u} ℤ)) 1))).IsInvertible,\n        (∀ V : S.Opens, IsAffineOpen V →\n          ∃ hV : ((Scheme.Modules.tensorPullback ((π ≫ g) ⁻¹ᵁ V).ι).obj\n              ((Scheme.Modules.tensorPullback j).obj\n              ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                (ULift.{u} (Fin (m + 1))) S)).obj\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                  (ULift.{u} ℤ)) 1)))).IsInvertible,\n            @Scheme.Modules.IsAmple ((π ≫ g) ⁻¹ᵁ V).toScheme\n              ((Scheme.Modules.tensorPullback ((π ≫ g) ⁻¹ᵁ V).ι).obj\n                  ((Scheme.Modules.tensorPullback j).obj\n                  ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                    (ULift.{u} (Fin (m + 1))) S)).obj\n                    (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                      (ULift.{u} ℤ)) 1)))) hV) ∧\n        (∀ W : Z.Opens, IsAffineOpen W →\n          ∃ hW : ((Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).obj\n              ((Scheme.Modules.tensorPullback j).obj\n              ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                (ULift.{u} (Fin (m + 1))) S)).obj\n                (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                  (ULift.{u} ℤ)) 1)))).IsInvertible,\n            @Scheme.Modules.IsAmple (π ⁻¹ᵁ W).toScheme\n              ((Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).obj\n                  ((Scheme.Modules.tensorPullback j).obj\n                  ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt\n                    (ULift.{u} (Fin (m + 1))) S)).obj\n                    (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))\n                      (ULift.{u} ℤ)) 1)))) hW)",
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion",
+   "results": "25 hits in Mathlib/AlgebraicGeometry/Morphisms, including closed immersion and universally closed instances. Additional rg reading located IsClosedImmersion.of_isPreimmersion and IsProper.of_comp; no relative-ampleness theorem.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsClosedImmersion",
+   "results": "Immersion factorization and liftCoborder found; no relative-ampleness statement.",
+   "date": "2026-10-13",
+   "verdict": "partial matches"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of the twisting sheaf O(1) along a closed immersion in projective space is relatively ample on affine opens",
+   "results": "Proj.pullbackAwayιIso, fromOfGlobalSections and Proj.isSeparated returned; no full relative-ampleness statement.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An immersion into projective space from a proper scheme is closed and its pulled back O(1) is relatively ample",
+   "results": "Service unavailable: Internal Server Error; no mathematical conclusion from this search. Other search services and local source searches used.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T225330-L-1813231",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261012T225330-L-1813231",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

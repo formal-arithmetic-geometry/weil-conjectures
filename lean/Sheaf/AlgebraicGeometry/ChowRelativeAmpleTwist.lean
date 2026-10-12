@@ -4,8 +4,8 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Ample
-import Sheaf.AlgebraicGeometry.ChowRelativeAmpleGeometric
-import Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
+import Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistIso
+import Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties
 
 @[expose] public section
 universe u
@@ -14,6 +14,7 @@ open scoped AlgebraicGeometry
 attribute [local instance] MvPolynomial.gradedAlgebra
 namespace AlgebraicGeometry
 
+set_option linter.unusedVariables false in
 /-- Twisting and ampleness consequences.
 
 Source: Stacks Project, Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5).
@@ -84,6 +85,7 @@ theorem chow_relative_ample_twist (m : ℕ) (S Z X' : Scheme.{u})
                     (ULift.{u} (Fin (m + 1))) S)).obj
                     (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (m + 1)))
                       (ULift.{u} ℤ)) 1)))) hW) := by
-  sorry
+  exact ⟨chow_relative_ample_twist_iso m S Z X' g π j hj,
+    chow_relative_ample_twist_properties m S Z X' g π j hj⟩
 
 end AlgebraicGeometry
