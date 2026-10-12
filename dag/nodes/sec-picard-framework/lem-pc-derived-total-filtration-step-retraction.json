@@ -1,0 +1,111 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, proof, alternating two-step column filtration (https://stacks.math.columbia.edu/tag/09KP)"
+ },
+ "stmt_deps": [
+  "def-pc-cochain-complex-modules",
+  "lem-pc-derived-total-filtration-stable"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "id": "lem-pc-derived-total-filtration-step-retraction",
+ "title": "Degreewise retractions of the explicit filtration",
+ "statement": "For a commutative ring A, a nonpositive bicomplex K, short complexes S_j with middle objects identified with column -j, and a degreewise splitting of every S_j, every degree k component of every explicit successive inclusion F_n → F_(n+1) of [lem-pc-derived-total-filtration-stable] has a left inverse. Exactness and freeness are not required.",
+ "proof_origin": {
+  "by": "worker",
+  "group": "A2",
+  "date": "2026-10-12",
+  "document": "Stacks Project, Differential Graded Algebra",
+  "place": "Tag 09KP, proof, alternating two-step column filtration (https://stacks.math.columbia.edu/tag/09KP)",
+  "note": "Split off the explicit degreewise retractions of the explicit filtration argument."
+ },
+ "proof_deps": [
+  "lem-pc-derived-total-filtration-stable"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.TotalFreeFiltrationQuotients",
+  "date": "2026-10-12",
+  "group": "A2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-total-filtration-quotients",
+   "place": "proof step 2"
+  },
+  "same_as": []
+ },
+ "mathlib_match": null,
+ "proof": [
+  {
+   "text": "Decompose the total module in degree k as the coproduct of its column\nterms. At stage 2j the submodule is the sum of full columns -i for i<j;\nat stage 2j+1 it also includes the image of the first arrow of S j.\nProjection onto the preceding full columns retracts the even inclusion.\nFor the odd inclusion, project onto the preceding columns and apply the\nretraction of the first arrow supplied by the splitting of S j in degree k+j,\ntransported through e j. Directness of the column summands proves that these\nmaps restrict to the indicated submodules and compose with the inclusions to\nidentity. Every n is even or odd. For j=0 the preceding sum is zero, so the\nsame constructions apply. No exactness or freeness hypothesis is needed.",
+   "uses": [
+    "lem-pc-derived-total-filtration-stable"
+   ],
+   "elementary": false
+  }
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Successive quotients of alternating column filtration of total complex are shifted single degree free modules",
+   "results": "Eight hits concerning alternating constant complexes and total coproduct inclusions; no filtration quotient theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.single",
+   "results": "Twelve hits for single degree functors, evaluation and morphism constructors; no filtration quotient theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*total|total.*cokernel",
+   "results": "No hits through msearch; repository rg found only this theorem and its upstream users.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A degreewise split filtration on the total complex has coproduct single degree successive cokernels",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.TotalFreeFiltrationStepRetraction",
+  "file": "lean/Sheaf/Algebra/Homology/TotalFreeFiltrationStepRetraction.lean",
+  "declaration": "CochainComplex.TotalFreeFiltration.step_retraction",
+  "statement": "theorem step_retraction\n    (h_split : ∀ j (k : ℤ), Nonempty\n      ((S j).map (HomologicalComplex.eval (ModuleCat.{u} A) (ComplexShape.up ℤ) k)).Splitting)\n    (n : ℕ) (k : ℤ) :\n    ∃ r : (complex K S e h_positive (n + 1)).X k ⟶\n      (complex K S e h_positive n).X k,\n      (step K S e h_positive n).f k ≫ r =\n        𝟙 ((complex K S e h_positive n).X k)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T135213-L-1653960",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261012T135213-L-1653960",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

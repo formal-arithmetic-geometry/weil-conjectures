@@ -13,33 +13,33 @@
  ],
  "proof": [
   {
-   "text": "Use the stable submodules and their restrictions to obtain the concrete successive inclusion maps.",
+   "text": "Apply the degreewise retraction theorem, which needs only the supplied degreewise splittings.",
    "uses": [
-    "lem-pc-derived-total-filtration-stable"
+    "lem-pc-derived-total-filtration-step-retraction"
    ],
    "elementary": false
   },
   {
-   "text": "In degree k, stage 2j is the sum of full columns with index i<j, stage 2j+1 adds the lower image in column -j, and stage 2j+2 adds the rest of that column. Direct-sum projection yields the first retraction; the degreewise splitting of S_j yields the second. This includes j=0 and empty sums.",
-   "uses": [],
-   "elementary": false
-  },
-  {
-   "text": "The two successive quotient complexes are U_j and V_j with degrees reindexed by d-j. The horizontal differential lands in earlier columns and is zero in each quotient; the vertical differential of the endpoint coproducts is zero. Short exactness gives the categorical cokernel isomorphisms, and reindexing each single-degree summand gives the required coproduct decompositions.",
-   "uses": [],
+   "text": "For stage n put j=n/2 and choose the two endpoint bases from h_free j. If n mod 2=0 use the first endpoint and the even cokernel theorem; if n mod 2=1 use the third endpoint and the odd cokernel theorem. In each case reindex the basis degree d by d-j. Pair the retraction and cokernel conclusions.",
+   "uses": [
+    "lem-pc-derived-total-filtration-cokernel-even",
+    "lem-pc-derived-total-filtration-cokernel-odd"
+   ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-derived-total-filtration-stable"
+  "lem-pc-derived-total-filtration-step-retraction",
+  "lem-pc-derived-total-filtration-cokernel-even",
+  "lem-pc-derived-total-filtration-cokernel-odd"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "Q3",
+  "group": "A2",
   "date": "2026-10-12",
   "document": "Stacks Project, Differential Graded Algebra",
   "place": "Tag 09KP, proof, alternating two-step column filtration (https://stacks.math.columbia.edu/tag/09KP)",
-  "note": "Specialization and explicit details of Tag 09KP; exhaustive step uses coproduct universal property and directed submodule supremum."
+  "note": "Lean reduction into degreewise retractions and two fixed-stage cokernel identifications; explicit parity arithmetic combines them."
  },
  "mathlib_searches": [
   {
@@ -123,9 +123,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261012T110316-L-620628",
+  "landing": "20261012T135213-L-1653960",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

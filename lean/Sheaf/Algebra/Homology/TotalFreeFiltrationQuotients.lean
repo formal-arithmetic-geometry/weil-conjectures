@@ -6,6 +6,9 @@ Authors: SHEAF group Q3
 module
 
 public import Sheaf.Algebra.Homology.TotalFreeFiltrationTerms
+import Sheaf.Algebra.Homology.TotalFreeFiltrationStepRetraction
+import Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelEven
+import Sheaf.Algebra.Homology.TotalFreeFiltrationCokernelOdd
 
 /-!
 # Splittings and free quotients of the alternating column filtration
@@ -70,6 +73,21 @@ theorem quotients
     (∀ n, ∃ (I : Type u) (degree : I → ℤ), Nonempty
       (cokernel (step K S e h_positive n) ≅
         ∐ (fun i : I ↦ (HomologicalComplex.single (ModuleCat.{u} A)
-          (ComplexShape.up ℤ) (degree i)).obj (ModuleCat.of A A)))) := by sorry
+          (ComplexShape.up ℤ) (degree i)).obj (ModuleCat.of A A)))) := by
+  constructor
+  · exact step_retraction K S e h_positive h_split
+  · intro n
+    obtain ⟨I₁, I₃, d₁, d₃, h₁, h₃⟩ := h_free (n / 2)
+    rcases Nat.mod_two_eq_zero_or_one n with h | h
+    · have hn : n = 2 * (n / 2) := by omega
+      refine ⟨I₁, fun i ↦ d₁ i - (n / 2 : ℕ), ?_⟩
+      have hc := cokernel_even K S e h_positive h_exact (n / 2) I₁ d₁ h₁
+      rw [← hn] at hc
+      exact hc
+    · have hn : n = 2 * (n / 2) + 1 := by omega
+      refine ⟨I₃, fun i ↦ d₃ i - (n / 2 : ℕ), ?_⟩
+      have hc := cokernel_odd K S e h_positive h_exact (n / 2) I₃ d₃ h₃
+      rw [← hn] at hc
+      exact hc
 
 end CochainComplex.TotalFreeFiltration
