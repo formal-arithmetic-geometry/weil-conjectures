@@ -8046,3 +8046,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:40 L: merged deliver/C1/Sheaf.CategoryTheory.DerivedFunctorShift (stage 3; reviewer PASS; first push; landing 20261012T144055-L-2089743 (proof); batch 20261012T144049; modules 1; new nodes 0)
 - 14:40 L: merged deliver/C1/Sheaf.CategoryTheory.TruncationCanonicalAbutment (stage 3; reviewer PASS; first push; landing 20261012T144056-L-2089848 (interface); batch 20261012T144049; modules 4; new nodes 3)
 - 14:40 L: merged deliver/C2/Sheaf.AlgebraicGeometry.DerivedPullbackCompositionCoherence (stage 3; reviewer PASS; first push; landing 20261012T144056-L-2089948 (interface); batch 20261012T144049; modules 3; new nodes 2)
+- 14:40 L: merged deliver/C2/Sheaf.AlgebraicGeometry.FiniteAffinePushforwardIdealDevissage (stage 3; reviewer PASS; first push; landing 20261012T144056-L-2090047 (proof); batch 20261012T144049; modules 1; new nodes 0)
