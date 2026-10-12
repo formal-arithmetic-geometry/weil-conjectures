@@ -38,15 +38,15 @@
  "mathlib_match": null,
  "proof": [
   {
-   "text": "Base change of each open inclusion is an open immersion; its image is the inverse-image open in Z. The two images cover Z, and the base change of U ∩ V identifies with their intersection. Identify each base-change scheme with its image.",
+   "text": "For each open T, use Mathlib pullbackSymmetry followed by pullbackRestrictIsoRestrict to identify T ×_X Z with the inverse-image open. Its inverse composed with the first projection is the restriction of i; morphismRestrict_ι gives the equality of composites. These are the direct Mathlib implementations of base change of open immersions and identification with their image.",
    "uses": [
     "lem-weil-pbc-open-immersion-base-change",
     "lem-weil-pbc-open-immersion-iso-onto-image"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Inverse-image composition and forgetting module structure identify the restrictions of the underlying abelian sheaf of i^*J with the displayed sheaves; transport across the scheme isomorphisms.",
+   "text": "The private proved helper module_open_pullback_cohomology_equiv applies three upperStarComp isomorphisms to identify the transported module sheaf with the restriction of i^*J. Apply sheafCompose.mapIso, and twice pullback_forget_modules_iso. Apply Sheaf.functorH.mapIso to the resulting abelian-sheaf isomorphism. Compose its additive equivalence with cohomologyEquiv along the inverse scheme isomorphism.",
    "uses": [
     "lem-weil-pbc-inverse-image-composition",
     "lemma-weil-pbc-etale-pullback-forget-modules",
@@ -55,12 +55,16 @@
    "elementary": false
   },
   {
-   "text": "Apply etale_mayerVietoris to F on Z and its inverse-image open cover. Use nonempty_sheafH_extDerivedIso to pass from derived cohomology to Sheaf.H. Transport the connecting and restriction homomorphisms through the additive identifications of the four groups. These preserve images and kernels, yielding the exact pair without any vanishing assumptions.",
+   "text": "Let F be the underlying abelian sheaf of i^*J. Inverse image preserves sup and top, so the inverse-image opens cover Z. Apply etale_mayerVietoris_pullback to this cover and the identity of Z; use only its first sequence, already expressed in Sheaf.H, and extract exactness of δ_r followed by the product of restrictions in degree r+1.",
    "uses": [
-    "lem-weil-pbc-etale-mayer-vietoris",
-    "lem-weil-pbc-sheafH-ext-derived-comparison"
+    "lem-weil-pbc-etale-mayer-vietoris-pullback"
    ],
    "elementary": false
+  },
+  {
+   "text": "Precompose δ_r with the intersection equivalence, and postcompose each restriction with the inverse of its open equivalence. If the new restriction pair is zero, injectivity of the inverse equivalences makes the old pair zero; exactness supplies y, whose inverse intersection image is the required preimage. Conversely old exactness makes both restrictions of δ_r(e_I(y)) zero; applying the inverse open equivalences still gives zero. This proves Function.Exact for the displayed additive homomorphisms.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -69,13 +73,12 @@
   "lem-weil-pbc-inverse-image-composition",
   "lemma-weil-pbc-etale-pullback-forget-modules",
   "prop-weil-pbc-universal-homeomorphism-topos",
-  "lem-weil-pbc-etale-mayer-vietoris",
-  "lem-weil-pbc-sheafH-ext-derived-comparison"
+  "lem-weil-pbc-etale-mayer-vietoris-pullback"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Tags 0A50, 03D3 and 03D7",
-  "place": "Exact segment construction and inverse-image identifications; transport written by J1"
+  "document": "Stacks Project, Tags 0A50, 03D3, 03D7 and 03SI; Mathlib AlgebraicGeometry.Restrict",
+  "place": "E1: explicit inverse-image cohomology equivalences and transport of the first exact sequence supplied by etale_mayerVietoris_pullback."
  },
  "mathlib_searches": [
   {
@@ -130,11 +133,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-a500b",
-  "group": "J1",
+  "reviewer": "COMPILER",
+  "group": "E1",
   "result": "pass",
-  "landing": "20261012T021332-L-1010221",
-  "kind": "interface",
-  "note": "independent Codex review: Matched both Lean signatures with their nodes, the vanishing proof with its metadata, and the remaining exact segment with Stacks Tag 0A50 and its comparison dependencies; compilation and axiom checks pass."
+  "landing": "20261012T031936-L-1372588",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

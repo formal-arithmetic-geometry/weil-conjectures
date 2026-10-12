@@ -5892,3 +5892,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 03:15 L: merged deliver/C1/Sheaf.Topology.ClosedImmersionPushforwardCohomology (stage 3; reviewer PASS; first push; landing 20261012T031507-L-1344750 (proof); modules 1; new nodes 0)
 - 03:17 L: merged deliver/D2/Sheaf.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction (stage 3; reviewer PASS; first push; landing 20261012T031645-L-1352802 (proof); modules 1; new nodes 0)
 - 03:17 L: merged deliver/U1/Sheaf.Topology.IrreducibleNoetherianConstantAcyclic (stage 3; reviewer PASS; first push; landing 20261012T031733-L-1356556 (interface); modules 1; new nodes 0; change records: coord/changes/irreducible-noetherian-constant-acyclic-imports.md)
+- 03:20 L: merged deliver/E1/Sheaf.AlgebraicGeometry.EtaleMayerVietorisModuleExactSegment (stage 3; reviewer PASS; first push; landing 20261012T031936-L-1372588 (proof); modules 1; new nodes 0)
