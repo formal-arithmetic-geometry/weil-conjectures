@@ -16,73 +16,9 @@
  ],
  "proof": [
   {
-   "text": "Noetherian approximation of $Y\\to\\operatorname{Spec}A$. $\\operatorname{Spec}A$ is affine, hence quasi-compact and quasi-separated, and $f$ is proper. By [lem-weil-pbc-proper-limit-noetherian] (affine clause) there are a directed set $\\Lambda$ and an inverse system $(f_\\lambda:Y_\\lambda\\to S_\\lambda)_{\\lambda\\in\\Lambda}$ with affine transition morphisms, $f_\\lambda$ proper, $S_\\lambda=\\operatorname{Spec}A_\\lambda$ with $A_\\lambda$ a finitely generated $\\mathbf Z$-algebra, $Y=\\varprojlim_\\lambda Y_\\lambda$ (projections $p_\\lambda:Y\\to Y_\\lambda$), $\\operatorname{Spec}A=\\varprojlim_\\lambda S_\\lambda$ and $A=\\varinjlim_\\lambda A_\\lambda$ with coprojections $\\alpha_\\lambda:A_\\lambda\\to A$ [lem-weil-pbc-limit-affine-transition], and $f_\\lambda\\circ p_\\lambda=(\\operatorname{Spec}\\alpha_\\lambda)\\circ f$.",
+   "text": "Apply [lem-weil-pbc-finite-etale-finite-type-closed-fibre-stage] to obtain R, alpha, the proper h:X -> Spec R, p, q and the finite etale U on X_0. Its two projection compatibilities and U pulled back along q isomorphic to V are retained. This is exactly steps 1-4 of the original plan, without using henselianness yet.",
    "uses": [
-    "lem-weil-pbc-proper-limit-noetherian",
-    "lem-weil-pbc-limit-affine-transition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
-   }
-  },
-  {
-   "text": "The ideals. Put $I_\\lambda=\\alpha_\\lambda^{-1}(I)\\subseteq A_\\lambda$. For $\\mu\\le\\lambda$ the transition map $\\varphi_{\\mu\\lambda}:A_\\mu\\to A_\\lambda$ satisfies $\\alpha_\\lambda\\varphi_{\\mu\\lambda}=\\alpha_\\mu$, so $\\varphi_{\\mu\\lambda}(I_\\mu)\\subseteq I_\\lambda$ and $(A_\\lambda,I_\\lambda)$ is a directed system of pairs. Every $x\\in A$ is $\\alpha_\\lambda(a)$ for some $\\lambda$ and $a\\in A_\\lambda$ [lem-weil-pbc-filtered-colimit-algebras-elementwise]; if $x\\in I$ then $a\\in I_\\lambda$. Hence $I=\\bigcup_\\lambda\\alpha_\\lambda(I_\\lambda)$, i.e. $(A,I)=\\varinjlim_\\lambda(A_\\lambda,I_\\lambda)$ as pairs, and the induced maps $A_\\lambda/I_\\lambda\\to A/I$ are injective with union $A/I$, so $A/I=\\varinjlim_\\lambda A_\\lambda/I_\\lambda$. (Stacks: 'Thus we also have $I=\\colim I_i$ and $A/I=\\colim A_i/I_i$'.)",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-algebras-elementwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
-   }
-  },
-  {
-   "text": "The closed fibres form an inverse system with limit $Y_0$. Put $S_{\\lambda,0}=\\operatorname{Spec}(A_\\lambda/I_\\lambda)$, $Y_{\\lambda,0}=Y_\\lambda\\times_{S_\\lambda}S_{\\lambda,0}$ and $S_0=\\operatorname{Spec}(A/I)$. (a) By step 2 and [lem-weil-pbc-spec-colimit-limit], $S_0=\\varprojlim_\\lambda S_{\\lambda,0}$. (b) For $\\mu\\le\\lambda$ the morphism $Y_{\\lambda,0}\\to Y_{\\mu,0}$ induced by $Y_\\lambda\\to Y_\\mu$ and $S_{\\lambda,0}\\to S_{\\mu,0}$ factors as $Y_{\\lambda,0}=Y_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}(A_\\lambda/I_\\lambda)\\to Y_\\lambda\\times_{S_\\lambda}\\operatorname{Spec}(A_\\lambda/I_\\mu A_\\lambda)=Y_\\lambda\\times_{Y_\\mu}Y_{\\mu,0}\\to Y_{\\mu,0}$: the first arrow is a base change of the closed immersion $\\operatorname{Spec}(A_\\lambda/I_\\lambda)\\to\\operatorname{Spec}(A_\\lambda/I_\\mu A_\\lambda)$ ($I_\\mu A_\\lambda\\subseteq I_\\lambda$ by step 2), hence a closed immersion [lem-weil-pbc-closed-immersion-base-change], hence affine [pqf-def-affine-morphism]; the second is a base change of the affine $Y_\\lambda\\to Y_\\mu$, hence affine [lem-weil-pbc-affine-morphism-permanence]; a composite of affine morphisms is affine (preimages of affine opens stay affine). So $(Y_{\\lambda,0})$ is an inverse system with affine transition morphisms, and its limit exists [lem-weil-pbc-limit-affine-transition]. (c) Each $Y_{\\lambda,0}\\to S_{\\lambda,0}$ is proper [lem-weil-pbc-proper-base-change], hence quasi-compact and separated [def-weil-proper-morphism]; as $S_{\\lambda,0}$ is affine, $Y_{\\lambda,0}$ is quasi-compact and quasi-separated [lem-weil-pbc-qcqs-morphism-permanence]. (d) $Y_0=\\varprojlim_\\lambda Y_{\\lambda,0}$ with projections $q_\\lambda=p_\\lambda\\times(S_0\\to S_{\\lambda,0}):Y_0\\to Y_{\\lambda,0}$: for every scheme $T$, $\\operatorname{Mor}(T,\\varprojlim Y_{\\lambda,0})=\\varprojlim_\\lambda\\big(\\operatorname{Mor}(T,Y_\\lambda)\\times_{\\operatorname{Mor}(T,S_\\lambda)}\\operatorname{Mor}(T,S_{\\lambda,0})\\big)$ [def-pc-fibre-product], and since limits commute with limits this is $\\operatorname{Mor}(T,Y)\\times_{\\operatorname{Mor}(T,\\operatorname{Spec}A)}\\operatorname{Mor}(T,S_0)=\\operatorname{Mor}(T,Y_0)$ by step 1 and (a), naturally in $T$; conclude by Yoneda. (Stacks: 'The same thing is true for schemes finite etale over $X_0=\\lim(X_i\\times_{S_i}S_{i,0})$'.)",
-   "uses": [
-    "lem-weil-pbc-spec-colimit-limit",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-proper-base-change",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
-   }
-  },
-  {
-   "text": "Descent of $V$ to a finite stage. $V\\to Y_0$ is finite, hence affine, quasi-compact and separated [def-weil-finite-integral-morphism, lem-weil-pbc-affine-morphism-permanence], and etale, hence locally of finite presentation [def-weil-etale-morphism, def-sbc-locally-finite-presentation]; so it is of finite presentation. By [thm-pd-spreading-out] (1), applied to the system $(Y_{\\lambda,0})$ of step 3 (qcqs, affine transitions, limit $Y_0$), there are $\\lambda_0$ and a morphism of finite presentation $V_{\\lambda_0}\\to Y_{\\lambda_0,0}$ with $V_{\\lambda_0}\\times_{Y_{\\lambda_0,0}}Y_0\\cong V$ over $Y_0$; $V_{\\lambda_0}$ is qcqs, being of finite presentation over the qcqs $Y_{\\lambda_0,0}$ [lem-weil-pbc-qcqs-morphism-permanence]. For $\\lambda\\ge\\lambda_0$ put $V_\\lambda=V_{\\lambda_0}\\times_{Y_{\\lambda_0,0}}Y_{\\lambda,0}$: $V_\\lambda\\to Y_{\\lambda,0}$ is the base change of $V_{\\lambda_0}\\to Y_{\\lambda_0,0}$ to the stage $Y_{\\lambda,0}$, and its base change to the limit $Y_0$ is $V\\to Y_0$, finite and etale. By [lem-weil-pbc-descend-finite] ($V_{\\lambda_0}\\to Y_{\\lambda_0,0}$ locally of finite type) and [lem-weil-pbc-descend-etale] (it is locally of finite presentation) there are $\\lambda_1,\\lambda_2\\ge\\lambda_0$ with $V_{\\lambda_1}\\to Y_{\\lambda_1,0}$ finite and $V_{\\lambda_2}\\to Y_{\\lambda_2,0}$ etale; for $\\lambda\\ge\\lambda_1,\\lambda_2$ ($\\Lambda$ directed), $V_\\lambda\\to Y_{\\lambda,0}$ is a base change of both, hence finite etale [def-weil-pbc-finite-etale-category], and $V_\\lambda\\times_{Y_{\\lambda,0}}Y_0\\cong V$ over $Y_0$. Fix such a $\\lambda$ from now on. (Stacks: the category of finite etale schemes over $X_0$ is the limit of those over the $X_{i,0}$, by Limits 01ZM, 01ZO, 07RP; only its essential surjectivity is used here.)",
-   "uses": [
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "def-weil-etale-morphism",
-    "def-sbc-locally-finite-presentation",
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-descend-finite",
-    "lem-weil-pbc-descend-etale",
-    "def-weil-pbc-finite-etale-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups, proof of Lemma Tag 0GS2 (lemma-finite-etale-on-proper-over-henselian-pair, line 1749), paragraph 'General case' (lines ~1846-1878)"
-   }
-  },
-  {
-   "text": "At the chosen stage, henselize the pair (A_i,I_i) using [lem-weil-pbc-pair-henselization]. Its quotient is A_i/I_i and it is henselian. The finite-type integer ring A_i is a G-ring by [lem-weil-pbc-finite-type-z-g-ring], so its henselization B is a G-ring by [lem-weil-pbc-henselization-pair-g-ring]. Apply [lem-weil-pbc-henselization-universal-property] to A_i -> A and the henselian pair (A,I): the ideal I_i maps into I by its definition. This gives beta:B -> A extending the stage map and carrying J=I_i B into I. Only this one-stage factorization is needed, not a colimit of all henselizations.",
-   "uses": [
-    "lem-weil-pbc-pair-henselization",
-    "lem-weil-pbc-finite-type-z-g-ring",
-    "lem-weil-pbc-henselization-pair-g-ring",
-    "lem-weil-pbc-henselization-universal-property"
+    "lem-weil-pbc-finite-etale-finite-type-closed-fibre-stage"
    ],
    "elementary": false,
    "source": {
@@ -91,14 +27,51 @@
    }
   },
   {
-   "text": "Let Z=Y_i times Spec B over Spec A_i, with proper projection g by [lem-weil-pbc-proper-base-change]. The limit projection Y -> Y_i and Spec beta after f define s:Y -> Z by [def-pc-fibre-product]. The quotient isomorphism A_i/I_i -> B/J identifies Z_0 with Y_i,0, using [lem-weil-pbc-cartesian-square-pasting]. Transport the descended finite etale cover to W over Z_0. The induced quotient map B/J -> A/I and the closed-fibre projection define k:Y_0 -> Z_0. Both j_Y followed by s and k followed by j_Z project to the same maps to Y_i and Spec B: the first equality is the limit-cone relation, and the second is Spec of the equality (A -> A/I) composed with beta = (B/J -> A/I) composed with (B -> B/J). Pullback extensionality gives the required equality. Pasting the squares identifies the base change of W along k with the original descended cover pulled back to Y_0, hence with V, over Y_0. No lift over Y or Z is claimed.",
+   "text": "Put K=alpha^{-1}(I). Apply pair_henselization to obtain its cocone c, B=c.pt.right, eta:R -> B, and J=K.map eta. The cocone supplies henselianness of (B,J) and bijectivity of R/K -> B/J. R is a G-ring by isGRing_of_finiteType_int; isGRing_of_pair_henselization proves B is a G-ring.",
    "uses": [
-    "lem-weil-pbc-proper-base-change",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "def-weil-pbc-finite-etale-category"
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-finite-type-z-g-ring",
+    "lem-weil-pbc-henselization-pair-g-ring"
    ],
    "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0GS2, proof, General case, approximation and descent before applying the G-ring lifting case; official online text https://stacks.math.columbia.edu/tag/0GS2"
+   }
+  },
+  {
+   "text": "Since K.map alpha <= I, henselization_universal_property gives beta:B -> A with beta.comp eta=alpha and J.map beta <= I. Put Z=pullback h (Spec eta), with proper g=pullback.snd h (Spec eta). Define s by pullback.lift p (f followed by Spec beta). Its commutativity is p followed by h=f followed by Spec alpha and Spec beta followed by Spec eta=Spec alpha.",
+   "uses": [
+    "lem-weil-pbc-henselization-universal-property",
+    "lem-weil-pbc-proper-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0GS2, proof, General case, approximation and descent before applying the G-ring lifting case; official online text https://stacks.math.columbia.edu/tag/0GS2"
+   }
+  },
+  {
+   "text": "The proved private helper closedFibre_baseChange_iso pastes the two pullbacks and base-changes the quotient isomorphism, using pullbackLeftPullbackSndIso and pullback.map_isIso. It gives e:Z_0 isomorphic to X_0 with both projection identities. Put k=q followed by e.inv. The quotient map n:Spec(A/I) -> Spec(B/J) satisfies n followed by Spec(eta mod ideals)=Spec(alpha mod ideals) and n followed by Spec(B -> B/J)=Spec(A -> A/I) followed by Spec beta. Cancelling the quotient isomorphism proves k.snd=Y_0.snd followed by n. Pullback.hom_ext, the first projection compatibility of q, and this second projection equality then prove j_Y followed by s=k followed by j_Z.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-cartesian-square-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0GS2, proof, General case, approximation and descent before applying the G-ring lifting case; official online text https://stacks.math.columbia.edu/tag/0GS2"
+   }
+  },
+  {
+   "text": "Define W by pulling U back along e.hom; finite and etale are stable under base change. Since k followed by e.hom=q, pullbackLeftPullbackSndIso and pullback.congrHom give W pulled back along k isomorphic to U pulled back along q, over Y_0. Compose with the given isomorphism to V. The code constructs the Over isomorphism and verifies its projection, so no lifting theorem is used.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/pione.tex",
     "place": "Tag 0GS2, proof, General case, approximation and descent before applying the G-ring lifting case; official online text https://stacks.math.columbia.edu/tag/0GS2"
@@ -107,33 +80,19 @@
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "def-sbc-locally-finite-presentation",
-  "def-weil-etale-morphism",
-  "def-weil-finite-integral-morphism",
   "def-weil-pbc-finite-etale-category",
-  "def-weil-proper-morphism",
-  "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-closed-immersion-base-change",
-  "lem-weil-pbc-descend-etale",
-  "lem-weil-pbc-descend-finite",
-  "lem-weil-pbc-filtered-colimit-algebras-elementwise",
+  "lem-weil-pbc-finite-etale-finite-type-closed-fibre-stage",
   "lem-weil-pbc-finite-type-z-g-ring",
   "lem-weil-pbc-henselization-pair-g-ring",
   "lem-weil-pbc-henselization-universal-property",
-  "lem-weil-pbc-limit-affine-transition",
   "lem-weil-pbc-pair-henselization",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-proper-limit-noetherian",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-spec-colimit-limit",
-  "pqf-def-affine-morphism",
-  "thm-pd-spreading-out"
+  "lem-weil-pbc-proper-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0GS2, proof, General case, approximation and descent before applying the G-ring lifting case; official online text https://stacks.math.columbia.edu/tag/0GS2; the commuting-map details expand the final formal deduction"
+  "place": "Tag 0GS2, General case: finite-type descent split off as a strict subargument; existing henselization declarations applied, and base-change compatibility and cover transport proved explicitly in Lean by E2."
  },
  "mathlib_searches": [
   {
@@ -212,9 +171,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R2",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261012T053951-L-2644784",
+  "landing": "20261012T070534-L-3469864",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
