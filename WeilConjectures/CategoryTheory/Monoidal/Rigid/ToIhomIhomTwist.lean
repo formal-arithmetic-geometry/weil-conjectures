@@ -31,16 +31,6 @@ open MonoidalCategory
 
 variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
 
-/-- The comparison map `[X, Z] ⊗ N ⟶ [X, Z ⊗ N]`
-(`CategoryTheory.MonoidalClosed.ihomTensorToIhom`) is natural in `X`. -/
-@[reassoc]
-lemma pre_app_whiskerRight_comp_ihomTensorToIhom {T X : C} (f : T ⟶ X) (Z N : C) :
-    (pre f).app Z ▷ N ≫ ihomTensorToIhom T Z N =
-      ihomTensorToIhom X Z N ≫ (pre f).app (Z ⊗ N) := by
-  apply uncurry_injective
-  rw [uncurry_whiskerRight_comp_ihomTensorToIhom, uncurry_pre_app, uncurry_pre,
-    ihomTensorToIhom, uncurry_curry, comp_whiskerRight, associator_inv_naturality_left_assoc]
-
 section Braided
 
 variable [BraidedCategory C]
