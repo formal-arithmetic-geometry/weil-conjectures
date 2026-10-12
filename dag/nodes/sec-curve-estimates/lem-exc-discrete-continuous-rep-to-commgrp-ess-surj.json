@@ -12,21 +12,21 @@
  ],
  "proof": [
   {
-   "text": "The underlying-type functor preserves finite products. A singleton with trivial action is terminal, and the carrier product with diagonal action is a binary product. The diagonal action is continuous on the discrete carrier because stabilizers are finite intersections of open stabilizers. The usual pairing of equivariant maps proves the universal property. These explicit products compare uniquely to the given Cartesian monoidal products.",
+   "text": "Construct the binary carrier product with diagonal action. Its stabilizers are intersections of two open stabilizers, so it is a discrete continuous action. The projection pair identifies it with the given Cartesian tensor product; on carriers the comparison map is bijective. Construct the singleton trivial action and compare it with the terminal tensor unit. These comparisons prove that the faithful forgetful functor F to types preserves finite products.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply the product comparisons to the internal multiplication, unit and inverse of A. The internal diagrams become the commutative group identities on its carrier. Interpret the group additively and give it the canonical integer-module structure. Equivariance of multiplication and unit shows that each action map is additive, hence integer-linear; the action equations give a representation. Its stabilizers are open by continuity of the orbit maps and discreteness.",
+   "text": "Use Mathlib Functor.Monoidal.ofChosenFiniteProducts, Functor.Braided.ofChosenFiniteProducts, and F.mapCommGrp to transport the internal commutative group A to its carrier. CommGrpTypeEquivalenceCommGrp.commGrpCommGroup gives the concrete commutative group law. For each g, the action maps form a natural transformation F to itself; mapCommGrpNatTrans transports it to a group homomorphism. Passing to Additive and toIntLinearMap constructs an integer representation. The original action equations give its representation equations. The original continuous discrete action gives open stabilizers.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "For every discrete continuous action X, equivariant functions X→A have the transported group law given by pointwise addition. Representability therefore reconstructs exactly the original unit, multiplication and inverse. Hence the identity carrier comparison is an internal group isomorphism H(M)≅A, proving essential surjectivity.",
+   "text": "The carrier isomorphism from the constructed representation to A is the identity function. For the reverse functor of def-exc-discrete-continuous-rep-to-commgrp, the reconstructed unit and multiplication are pointwise zero and addition. Apply the faithful F to their compatibility equations. Functor.map_one and Functor.map_mul for the original internal group, followed by evaluation and the product projection identities, prove these equations. CommGrp.mkIso upgrades this now operation-preserving carrier isomorphism to an internal group isomorphism, giving essential surjectivity.",
    "uses": [
     "def-exc-discrete-continuous-rep-to-commgrp"
    ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -36,7 +36,7 @@
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point",
-  "note": "Explicit categorical and elementwise expansion of the formal identification in the source."
+  "note": "Second reader J3: complete explicit construction; finite-product comparisons and native group transport use the named Mathlib declarations, with no new assumptions or split-off statements."
  },
  "mathlib_searches": [
   {
@@ -129,10 +129,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261012T144126-L-2100952",
-  "kind": "interface",
+  "landing": "20261012T184312-L-4007594",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
