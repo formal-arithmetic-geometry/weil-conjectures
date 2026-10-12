@@ -17,56 +17,30 @@
  },
  "proof": [
   {
-   "text": "Sheafify the constant ring presheaf Λ to obtain R. By lem-weil-pbc-ring-sheafification-underlying-sets, the underlying set presheaf of R is the sheafification of the constant set presheaf Λ, compatibly with the canonical map. Apply lem-weil-pbc-site-sheafification-sections-local to obtain local constant representatives and local equality of representatives with equal images.",
+   "text": "Apply lem-weil-pbc-etale-constant-ring-module-equivalence: the explicit scalar-extension functor F targets module sheaves over the constant ring sheaf R, is an equivalence, and keeps the underlying abelian presheaf unchanged. Set M = F(J).",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-ring-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-weil-pbc-etale-constant-ring-module-equivalence"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "For a local constant representative a of a section of R and a section x of J, multiply the restriction of x by a. The restricted results agree after refining overlaps, because restrictions in J are Λ-linear. Separatedness makes them agree on overlaps, and the sheaf condition glues them uniquely. Refining any two sets of representatives shows independence. Refining jointly representatives of a,b,x proves the module laws from the Λ-module laws. Restriction of a glued product agrees with the glued restricted products by uniqueness. This constructs the R-module M with exactly the underlying abelian presheaf of J.",
+   "text": "Use Mathlib CategoryTheory.Equivalence.map_injective_iff on F.asEquivalence to transport the given injectivity of J to M. The explicit etaleConstantModuleUnderlyingIso, which is Iso.refl, provides the required abelian-presheaf isomorphism. Return R, M, the injectivity proof, and this isomorphism.",
    "uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-abelian-etale-sheaves"
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "def-sp-injective-resolutions"
    ],
-   "elementary": false
-  },
-  {
-   "text": "Restrict any R-module along the constant scalar map Λ → R to get a Λ-module-valued sheaf. Local representatives and uniqueness of gluing show that extending and restricting scalars in these two senses are inverse. A natural transformation of Λ-module sheaves commutes with multiplication by every local representative, hence by every R-section after gluing; conversely R-linearity implies Λ-linearity. This proves the equivalence on morphisms as well as objects.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-constant-sheaf"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "To extend a map to M across a monomorphism of R-modules, apply the inverse equivalence. It takes that monomorphism to a monomorphism of Λ-module sheaves, since the equivalence is fully faithful. Extend the resulting map to J by injectivity, and apply the forward equivalence. The equivalence identities give the desired factorization. Thus M is injective. Its sectionwise identity with J gives the required natural isomorphism of abelian presheaves. This proof requires no nonzero coefficients or nonempty scheme.",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-sp-injective-resolutions",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-sheaves",
-  "def-weil-pbc-sheafification",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-ring-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-etale-constant-ring-module-equivalence"
  ],
  "proof_origin": {
-  "by": "worker",
+  "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 093I (section-constant), opening paragraph, and Section 03CV (section-sheaves-modules); Sites Example 0H7J; constant-coefficient interface of step 1 of lem-weil-pbc-injective-etale-module-cech-h1. The equivalence and injectivity transport are written out here by C1.",
-  "note": "Interface argument written by C1 from the indicated step of the parent node and the cited definitions; no change of the mathematical route."
+  "place": "Constant-scalar equivalence from Sections 093I and 03CV, followed by Mathlib Equivalence.map_injective_iff.",
+  "note": "K1 constructs and proves the equivalence in the new module; no reliance on sorry-bearing dependencies."
  },
  "mathlib_searches": [
   {
@@ -147,9 +121,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C1",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T023945-L-1147078",
+  "landing": "20261012T033212-L-1450745",
   "kind": "interface",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

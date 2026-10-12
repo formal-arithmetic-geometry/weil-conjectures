@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
 
 /-!
 # Realizing injective constant-coefficient sheaves as ringed-site modules
@@ -57,6 +58,11 @@ theorem exists_injective_etale_ring_module
     ∃ (R : Sheaf Y.smallEtaleTopology RingCat.{u + 1})
       (M : SheafOfModules.{u + 1} R), Injective M ∧
         Nonempty (M.val.presheaf ≅ J.obj ⋙
-          forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) := by sorry
+          forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}) := by
+  let F := etaleConstantModuleFunctor Y Λ
+  let : F.IsEquivalence := etaleConstantModuleFunctor_isEquivalence Y Λ
+  refine ⟨etaleConstantModuleRing Y Λ, F.obj J, ?_,
+    ⟨etaleConstantModuleUnderlyingIso Y Λ J⟩⟩
+  exact (F.asEquivalence.map_injective_iff J).mpr inferInstance
 
 end AlgebraicGeometry.Scheme
