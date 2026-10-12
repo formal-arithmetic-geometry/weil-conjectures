@@ -25,60 +25,36 @@
  ],
  "proof": [
   {
-   "text": "Fix an object $W$ of $X_{\\Et}$. Exactness of a complex of presheaves of $\\mathcal O$-modules in a degree is checked objectwise, so it suffices to show $H_p(K_\\bullet(W))=0$ for $p>0$ (this is what the statement asserts). By the definition of $\\mathcal O_V$, $K_p(W)=\\bigoplus_{(i_0,\\ldots,i_p)\\in I^{p+1}}\\bigoplus_{\\psi\\in\\Mor(W,U_{i_0}\\times_U\\cdots\\times_UU_{i_p})}\\mathcal O(W)$, i.e. the free $\\mathcal O(W)$-module $\\mathcal O(W)[M_p]$ on the set $M_p=\\coprod_{(i_0,\\ldots,i_p)}\\Mor(W,U_{i_0}\\times_U\\cdots\\times_UU_{i_p})$, with basis elements $[(i_0,\\ldots,i_p;\\psi)]$. The map $\\mathcal O_V\\to\\mathcal O_{V'}$ induced by $g:V\\to V'$ sends, at $W$, the summand of $\\psi$ identically to the summand of $g\\circ\\psi$; hence the differential of $K_\\bullet(W)$ is the $\\mathcal O(W)$-linear map $[(i_0,\\ldots,i_{p+1};\\psi)]\\mapsto\\sum_{j=0}^{p+1}(-1)^j[(i_0,\\ldots,\\widehat{i_j},\\ldots,i_{p+1};\\mathrm{pr}_{\\hat j}\\circ\\psi)]$, where $\\mathrm{pr}_{\\hat j}$ is the projection omitting the $j$-th factor.",
+   "text": "Use the fibre-comparison theorem to reduce exactness at p+1 to range/kernel equality for the tuple complex of S_phi, separately for each phi:W->U_0.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-etale-site"
+    "lem-weil-pbc-free-cech-complex-fibre-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), proof, first display (the complex Z_{U,bullet}(V) written as sums of Z[Mor(V, U_{i_0} x_U ... x_U U_{i_p})]); with O(V) coefficients as in the proof of Lemma Tag 03F5 (lemma-complex-tensored-still-exact)"
+    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
    }
   },
   {
-   "text": "For $\\varphi\\in\\Mor(W,U)$ put $\\Mor_\\varphi(W,U_i)=\\{\\chi:W\\to U_i\\mid f_i\\circ\\chi=\\varphi\\}$ and $S_\\varphi=\\coprod_{i\\in I}\\Mor_\\varphi(W,U_i)$. Fibre products of objects of $X_{\\Et}$ over $U$ exist in $X_{\\Et}$ [def-weil-pbc-etale-site]. A morphism $\\psi:W\\to U_{i_0}\\times_U\\cdots\\times_UU_{i_p}$ has a well-defined composite $\\varphi:W\\to U$ (the structure map of the fibre product), and by the universal property of the iterated fibre product $\\psi\\mapsto(\\mathrm{pr}_0\\circ\\psi,\\ldots,\\mathrm{pr}_p\\circ\\psi)$ is a bijection from the set of such $\\psi$ with composite $\\varphi$ onto $\\Mor_\\varphi(W,U_{i_0})\\times\\cdots\\times\\Mor_\\varphi(W,U_{i_p})$. Composing with a projection $\\mathrm{pr}_{\\hat j}$ does not change $\\varphi$ and corresponds to deleting the $j$-th coordinate. Taking the disjoint union over $(i_0,\\ldots,i_p)$ gives a bijection $M_p\\cong\\coprod_{\\varphi\\in\\Mor(W,U)}S_\\varphi^{p+1}$, $(i_0,\\ldots,i_p;\\psi)\\mapsto(\\varphi;(i_0,\\mathrm{pr}_0\\psi),\\ldots,(i_p,\\mathrm{pr}_p\\psi))$, under which $(i_0,\\ldots,\\widehat{i_j},\\ldots,i_{p+1};\\mathrm{pr}_{\\hat j}\\circ\\psi)$ corresponds to deleting the $j$-th entry of the tuple in $S_\\varphi^{p+2}$.",
-   "uses": [
-    "def-weil-pbc-etale-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), proof: the sets Mor_phi(V, U_{i_0} x_U ... x_U U_{i_p}) = Mor_phi(V,U_{i_0}) x ... x Mor_phi(V,U_{i_p}), preserved by the projections, and S_phi = coprod_i Mor_phi(V,U_i)"
-   }
-  },
-  {
-   "text": "Since a free module on a disjoint union is the direct sum of the free modules on the pieces, the first two steps give an isomorphism of chain complexes of $\\mathcal O(W)$-modules $K_\\bullet(W)\\cong\\bigoplus_{\\varphi\\in\\Mor(W,U)}C_\\bullet(S_\\varphi;\\mathcal O(W))$, where $C_p(S;A)=A[S^{p+1}]$ with differential $[(s_0,\\ldots,s_{p+1})]\\mapsto\\sum_j(-1)^j[(s_0,\\ldots,\\widehat{s_j},\\ldots,s_{p+1})]$ is the complex of [lem-weil-pbc-power-set-complex-contractible]: the differentials agree on basis elements by the last sentence of the previous step. Homology commutes with direct sums of complexes of modules, so $H_p(K_\\bullet(W))\\cong\\bigoplus_\\varphi H_p(C_\\bullet(S_\\varphi;\\mathcal O(W)))$ for every $p$.",
-   "uses": [
-    "lem-weil-pbc-power-set-complex-contractible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), proof: Z[A] + Z[B] = Z[A coprod B], giving the sum over phi of the complexes Z[S_phi^{p+1}]; Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof, first argument (the same decomposition after tensoring with O(V))"
-   }
-  },
-  {
-   "text": "Let $p>0$ and $\\varphi\\in\\Mor(W,U)$. If $S_\\varphi=\\emptyset$ then $C_\\bullet(S_\\varphi;\\mathcal O(W))=0$ and its homology vanishes. If $S_\\varphi\\neq\\emptyset$, then by [lem-weil-pbc-power-set-complex-contractible] (with $A=\\mathcal O(W)$, $S=S_\\varphi$) the augmented complex $C_\\bullet(S_\\varphi;\\mathcal O(W))\\xrightarrow{\\varepsilon}\\mathcal O(W)$ is exact; its contracting homotopy is $[(s_0,\\ldots,s_p)]\\mapsto[(s,s_0,\\ldots,s_p)]$ for a chosen $s\\in S_\\varphi$. Exactness of the augmented complex at $C_p$ for $p>0$ is $H_p(C_\\bullet(S_\\varphi;\\mathcal O(W)))=0$ (the augmentation only changes degree $0$). Hence every summand in the previous step vanishes, $H_p(K_\\bullet(W))=0$ for all $p>0$ and every $W$, and $K_\\bullet$ is exact in positive degrees.",
+   "text": "For nonempty S_phi, use the positive-degree range/kernel equality clause of powerSetComplex_contractible at p. For empty S_phi, its zero-complex clause makes the middle module subsingleton, so its range and kernel submodules are equal. This establishes every fibre condition and completes the comparison reduction.",
    "uses": [
     "lem-weil-pbc-power-set-complex-contractible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma Tag 03AT (lemma-homology-complex), proof, last paragraph (exactness of Z[S^{bullet+1}] -> Z for nonempty S by the homotopy n_(s_0..s_p) -> n_(s,s_0..s_p)); Lemma Tag 03F5 (lemma-complex-tensored-still-exact), proof (the summands are homotopic to O(V) in degree 0)"
+    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-site",
-  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-cech-complex-fibre-comparison",
   "lem-weil-pbc-power-set-complex-contractible"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Lemma Tag 03F5 (lemma-complex-tensored-still-exact), first argument of the proof, which rests on the proof of Lemma Tag 03AT (lemma-homology-complex); stated there for any category with the fibre products, here for X_et"
+  "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
  },
  "mathlib_searches": [
   {
@@ -154,5 +130,15 @@
   "group": "M1",
   "result": "fix",
   "note": "X, family f : U i ⟶ U₀ (no covering), presheaf of rings O, object W matched; K_• rebuilt as the node's complex: Čech nerve of Over.mk (f i) in Over U₀ (fibre products, projection faces), O_V = PresheafOfModules.free O (yoneda V), alternatingFaceMapComplex signs; conclusion ExactAt (p+1) after evaluation at W = H_q(K(W)) = 0 for all q > 0; ι, O in universe u, no vacuous universe, no hollow hypothesis; dropped duplicate new node(s) def-weil-pbc-free-cech-differential (--drop-nodes; not merged, the item points at the landed declaration)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T044737-L-2031582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

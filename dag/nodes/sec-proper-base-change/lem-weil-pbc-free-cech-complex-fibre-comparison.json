@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-free-cech-complex-fibre-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-projective-line",
+   "place": "step 5 of its split (source: Theorem Tag 095T (theorem-proper-base-change), proof, paragraph 5 (\"In particular, for an injective sheaf of $\\mathbf Z/\\ell\\mathbf Z$-modules the higher direct images of any base change are zero\")); the free Cech exactness subargument, basis decomposition and direct-sum comparison, before prefix contraction",
+   "via": [
+    "lem-weil-pbc-free-cech-complex-exact",
+    "lem-weil-pbc-injective-module-abelian-acyclic",
+    "lem-weil-pbc-injective-module-direct-image-acyclic"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Fibrewise comparison of the evaluated free Cech complex",
+ "statement": "Let X be a scheme and consider its small etale site [def-weil-pbc-etale-site]. Let (f_i:U_i->U_0) indexed by a set I be any family with fixed target, O a presheaf of rings, and W an object. Define O_V(W) to be the free O(W)-module on morphisms W->V as in [def-weil-presheaf-modules-sheafification]. Let K_n be the direct sum over tuples (i_0,...,i_n) of O_(U_i0 x_U0 ... x_U0 U_in), with the alternating projection differential, and evaluate K at W. For each phi:W->U_0 let S_phi be the disjoint union over i of {g:W->U_i | g followed by f_i=phi}. For every natural p, K(W) is exact at degree p+1 if and only if, for every phi, range(d_(p+2):O(W)[S_phi^(p+3)]->O(W)[S_phi^(p+2)]) equals ker(d_(p+1):O(W)[S_phi^(p+2)]->O(W)[S_phi^(p+1)]), where d is the alternating deletion differential of [lem-weil-pbc-power-set-complex-contractible]. This is a comparison of complexes; it does not assert that these ranges equal these kernels.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate at W. The degree n term is the free O(W)-module on pairs (indices i_0,...,i_n; a morphism W to their fibre product over U_0). Evaluation commutes with coproducts of presheaf modules and the free representable module has the indicated basis.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+   }
+  },
+  {
+   "text": "Send a basis pair to its common composite phi:W->U_0 and the tuple of its projections. The universal property of the fibre product gives an inverse from a tuple in S_phi=the disjoint union over i of {g:W->U_i | g followed by f_i=phi}. These inverse bijections identify each degree with the direct sum over phi of O(W)[S_phi^(n+1)]. Deleting a factor preserves phi and deletes the same tuple coordinate, hence the identifications intertwine the alternating differential with the blockwise powerSetComplexDifferential, including its signs.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-power-set-complex-contractible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+   }
+  },
+  {
+   "text": "For a block diagonal differential, the kernel consists of finitely supported families in the individual kernels and its image of finitely supported families in the individual images. If the block ranges equal their kernels, choose preimages only on the finite support of a kernel element. Conversely, embed a single block kernel in the sum and project any preimage to that block. Thus range/kernel equality at degree p+1 is equivalent to equality in every block. Categorical exactness for modules is range/kernel equality; transport it along the degreewise linear identifications. No exactness or contracting homotopy of the blocks is used in this comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-power-set-complex-contractible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AT, proof through the direct-sum decomposition into tuple complexes; Tag 03F5, first proof, with O(W) coefficients (https://stacks.math.columbia.edu/tag/03AT and https://stacks.math.columbia.edu/tag/03F5)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exactness of a chain complex from a direct sum decomposition into free tuple complexes",
+   "results": "ChainComplex.alternatingConst_exactAt, ChainComplex.exactAt_succ_single_obj, HomologicalComplex.exactAt_iff, HomologicalComplex.exactAt_single_obj, HomologicalComplex.exactAt_iff', HomologicalComplex.ExactAt, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, Profinite.NobelingProof.succ_exact; inspected candidates: no comparison between evaluated free representables and tuple blocks.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.range, LinearMap.ker",
+   "results": "LinearMap.ker_rangeRestrict, LinearMap.range_le_ker_iff, LinearMap.ker_le_iff, LinearMap.ker_eq_range_of_comp_eq_id, LinearMap.range_eq_ker_of_leftInverse, Submodule.map_eq_range_iff, LinearMap.range_domRestrict_eq_range_iff, LinearMap.map_eq_top_iff; inspected candidates: no comparison between evaluated free representables and tuple blocks.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cech|exact_iff|directSum",
+   "results": "Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Limits/FormalCoproducts/ExtraDegeneracy.lean; inspected candidates: no comparison between evaluated free representables and tuple blocks.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free module Cech nerve of a family evaluated at an object decomposes as the direct sum of tuple complexes of lifts over each map to the base",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable (no verdict)"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FreeCechComplexExact",
+  "date": "2026-10-12",
+  "group": "B2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FreeCechComplexDecomposition",
+  "file": "lean/Sheaf/Paper/FreeCechComplexDecomposition.lean",
+  "declaration": "AlgebraicGeometry.freeCechComplex_exact_iff_fibres",
+  "statement": "theorem freeCechComplex_exact_iff_fibres (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale)\n    (U : ι → X.Etale) (f : ∀ i : ι, U i ⟶ U₀) (O : X.Etaleᵒᵖ ⥤ RingCat.{u})\n    (W : X.Etale) (p : ℕ) :\n    (((PresheafOfModules.evaluation O (op W)).mapHomologicalComplex _).obj\n      ((AlgebraicTopology.alternatingFaceMapComplex (PresheafOfModules.{u} O)).obj\n        ((FormalCoproduct.mk ι fun i ↦ Over.mk (f i)).cech ⋙\n          (FormalCoproduct.eval (Over U₀) (PresheafOfModules.{u} O)).obj\n            (Over.forget U₀ ⋙ yoneda ⋙ PresheafOfModules.free O)))).ExactAt (p + 1) ↔\n      ∀ φ : W ⟶ U₀,\n        let S := Σ i : ι, {g : W ⟶ U i // g ≫ f i = φ}\n        LinearMap.range (Algebra.powerSetComplexDifferential (O.obj (op W)) S (p + 1)) =\n          LinearMap.ker (Algebra.powerSetComplexDifferential (O.obj (op W)) S p)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T044737-L-2031582",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261012T044737-L-2031582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

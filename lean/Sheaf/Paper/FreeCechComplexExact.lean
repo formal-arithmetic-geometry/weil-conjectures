@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Limits.FormalCoproducts.Cech
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Sheaf.Paper.PowerSetComplexContractible
+import Sheaf.Paper.FreeCechComplexDecomposition
 
 /-!
 # Exactness of the free Čech complex on the small étale site
@@ -55,6 +56,16 @@ theorem freeCechComplex_exact (X : Scheme.{u}) (ι : Type u) (U₀ : X.Etale)
         ((FormalCoproduct.mk ι fun i ↦ Over.mk (f i)).cech ⋙
           (FormalCoproduct.eval (Over U₀) (PresheafOfModules.{u} O)).obj
             (Over.forget U₀ ⋙ yoneda ⋙ PresheafOfModules.free O)))).ExactAt (p + 1) := by
-  sorry
+  classical
+  apply (freeCechComplex_exact_iff_fibres X ι U₀ U f O W p).2
+  intro φ
+  let S := Σ i : ι, {g : W ⟶ U i // g ≫ f i = φ}
+  have h := Algebra.powerSetComplex_contractible (O.obj (op W)) S
+  by_cases hS : Nonempty S
+  · exact (h.2.2.2.1 hS).1 p
+  · have : IsEmpty S := not_nonempty_iff.mp hS
+    have : Subsingleton (Algebra.powerSetComplexObject (O.obj (op W)) S (p + 1)) :=
+      h.2.2.1 inferInstance (p + 1)
+    exact Subsingleton.elim _ _
 
 end AlgebraicGeometry
