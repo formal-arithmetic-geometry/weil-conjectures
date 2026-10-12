@@ -21,28 +21,27 @@
  ],
  "proof": [
   {
-   "text": "*(1) Nonempty; two objects map to a common one.* $B$ itself (identity) is an object: $\\operatorname{Spec}B\\to\\operatorname{Spec}B$ is the identity, an open immersion, hence etale [lem-weil-pbc-etale-composition-cancellation] (1), and $\\bar B\\to B/J$ is the identity. Let $C,C'$ be objects and $C''=C\\otimes_BC'$. $\\operatorname{Spec}C''\\to\\operatorname{Spec}C$ is etale as a base change of $B\\to C'$ along $B\\to C$ [lem-weil-pbc-etale-ring-base-change], hence $\\operatorname{Spec}C''\\to\\operatorname{Spec}B$ is etale (composition, [lem-weil-pbc-etale-composition-cancellation] (2)). Reduction modulo $J$: by associativity and commutativity of tensor products, $C''/JC''=C''\\otimes_B\\bar B\\cong(C\\otimes_B\\bar B)\\otimes_{\\bar B}(C'\\otimes_B\\bar B)=(C/JC)\\otimes_{\\bar B}(C'/JC')$, and under this identification the map $\\bar B\\to C''/JC''$ is the tensor product of the isomorphisms $\\bar B\\to C/JC$, $\\bar B\\to C'/JC'$ over $\\bar B$, so it is the isomorphism $\\bar B\\cong\\bar B\\otimes_{\\bar B}\\bar B\\to(C/JC)\\otimes_{\\bar B}(C'/JC')$. So $C''$ is an object, and the coprojections $C\\to C''$, $C'\\to C''$ are $B$-algebra maps, i.e. morphisms of $\\mathcal C$.",
+   "text": "The identity B-algebra is an object. Spec sends its identity to the identity, which is etale. The induced quotient map is injective by Ideal.quotientMap_injective' and surjective by Ideal.quotientMap_surjective. This gives nonemptiness of the full subcategory.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-etale-ring-base-change"
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'It is nonempty because $\\mathrm{id}:A\\to A$ is an object. If $B$ and $B'$ are two objects of $\\mathcal C$, then $B''=B\\otimes_AB'$ is an object of $\\mathcal C$ (use Algebra, Lemma 00U2)'; the reduction mod $J$ is written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*(1) Parallel morphisms are coequalized; $\\mathcal C$ is filtered.* Let $f,g:C\\to C'$ be morphisms of $\\mathcal C$. Put $E=C'\\otimes_{f,C,g}C'$ and $D=E\\otimes_{C'\\otimes_BC'}C'$, formed with the natural surjection $C'\\otimes_BC'\\to E$ and the multiplication $\\mu:C'\\otimes_BC'\\to C'$. Etaleness over $B$: $f$ is etale (step 1), so the right factor map $C'\\to E$, the base change of $f$ along $g$, is etale [lem-weil-pbc-etale-ring-base-change] and $E$ is etale over $B$ (composition); $C'\\otimes_BC'$ is etale over $B$ (step 3), so $\\mu$ is etale (a map between $B$-algebras etale over $B$, [lem-weil-pbc-etale-composition-cancellation] (3)), so $E\\to D$, its base change, is etale [lem-weil-pbc-etale-ring-base-change] and $D$ is etale over $B$ [lem-weil-pbc-etale-composition-cancellation] (2). Reduction modulo $J$ (written out by the agent; Stacks only states etaleness): base change $-\\otimes_B\\bar B$ commutes with the tensor products, so $D/JD\\cong(\\bar C'\\otimes_{\\bar f,\\bar C,\\bar g}\\bar C')\\otimes_{\\bar C'\\otimes_{\\bar B}\\bar C'}\\bar C'$ with $\\bar C=C/JC$, $\\bar C'=C'/JC'$; the structure maps $\\bar B\\to\\bar C$, $\\bar B\\to\\bar C'$ are isomorphisms through which $\\bar f,\\bar g$ become $\\mathrm{id}_{\\bar B}$ ($B$-algebra maps $\\bar B\\to\\bar B$, step 1), so $D/JD\\cong(\\bar B\\otimes_{\\bar B}\\bar B)\\otimes_{\\bar B\\otimes_{\\bar B}\\bar B}\\bar B\\cong\\bar B$ and the structure map $\\bar B\\to D/JD$ is this isomorphism. So $D$ is an object. Let $c:C'\\to D$ be the right-most factor map $a\\mapsto1\\otimes a$, a $B$-algebra map, hence a morphism. In $D$, $c(a)$ equals the image of $a\\otimes1$ and of $1\\otimes a\\in C'\\otimes_BC'$ (both map to $a$ under $\\mu$); since $f(x)\\otimes1=1\\otimes g(x)$ in $E$ for $x\\in C$, $c(f(x))=c(g(x))$, i.e. $c\\circ f=c\\circ g$. With step 3, $\\mathcal C$ is filtered (Stacks 'directed', Categories Definition Tag 002V).",
+   "text": "For objects C and D, take C tensor_B D and its two factor maps. The existing proved Algebra.Etale.tensorProduct instance is base change followed by composition. To verify the quotient condition, turn the canonical quotient maps B/J to C/JC and D/JD into algebra equivalences. Compose their inverses with the quotient projections and use the tensor universal property to obtain a map C tensor_B D to B/J killing J. Descend it to the quotient and check the two inverse identities using quotient and tensor extensionality. This fully proved private helper quotient_tensor_bijective shows that the tensor product is an object. Package the factor maps as morphisms of the under category and then of its full subcategory.",
    "uses": [
     "lem-weil-pbc-etale-ring-base-change",
     "lem-weil-pbc-etale-composition-cancellation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "proof of Lemma Tag 0A02 (lemma-henselization): 'Suppose that $f,g:B\\to B'$ are two maps between objects of $\\mathcal C$. Then a coequalizer is $(B'\\otimes_{f,B,g}B')\\otimes_{(B'\\otimes_AB')}B'$ which is etale over $A$ by Algebra, Lemmas 00U2 and 00U7'"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For parallel maps f,g:C to D, put S=C tensor_B C, m:S to C the multiplication, k:S to D the map c tensor c' to f(c)g(c'), and T=D tensor_S C. This is the diagonal-base-change presentation of the same coequalizer as the source. The multiplication map is etale by cancellation because S and C are etale over B; its base change D to T is etale, so B to T is etale by composition. The quotient of S by J is B/J by quotient_tensor_bijective. In a tower B to S to A, extension of J composes (Ideal.map_map), and the quotient maps compose. Cancel the bijective map B/J to S/JS: the fully proved private helper quotient_tower_bijective_iff yields that the quotients of D and C by JS are both S/JS. Apply quotient_tensor_bijective over S to T, then compose back to obtain B/J to T/JT bijective. Finally, tensor balance for c tensor 1 and 1 tensor c in S gives f(c) tensor 1 = 1 tensor c = g(c) tensor 1 in T. Extensionality in rings, the under category, and the full subcategory shows f followed by D to T equals g followed by D to T. The three constructions give IsFiltered.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -51,8 +50,10 @@
  ],
  "proof_origin": {
   "by": "worker",
+  "group": "Y2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0A02; second reading K2, 2026-10-12; essential smallness uses Mathlib FGAlgCat"
+  "place": "Tag 0A02, directedness paragraph; diagonal-base-change presentation of its coequalizer; source read at https://stacks.math.columbia.edu/tag/0A02"
  },
  "mathlib_searches": [
   {
@@ -118,10 +119,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K2",
+  "group": "Y2",
   "result": "pass",
-  "landing": "20261012T053939-L-2638311",
-  "kind": "interface",
+  "landing": "20261012T070600-L-3481126",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
