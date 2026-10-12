@@ -38,7 +38,7 @@
  ],
  "proof": [
   {
-   "text": "*Set-up at the specified point of maximal degree.* Fix $s\\in S_m$. The fibre $X_s$ is finite over $\\kappa(s)$, so $X_s\\to\\operatorname{Spec}\\kappa(s)$ has finite fibres [lem-weil-pbc-finite-closed-map-finite-fibres] (2), i.e. $X_s$ is a finite set; the first projection is a homeomorphism of $X_s$ onto $f^{-1}(\\{s\\})$ [def-pc-scheme-fibre], so $f^{-1}(\\{s\\})$ is finite and $X_s$ has at most finitely many isolated points. As $f$ is locally of finite presentation it is locally of finite type (a finitely presented algebra is finitely generated: [def-sbc-locally-finite-presentation], [def-weil-finite-type-morphism]), and it is separated. By [lem-weil-pbc-etale-splits-off-quasi-finite-part] there are an elementary etale neighbourhood $\\varphi:(U,u)\\to(S,s)$ ($\\varphi$ etale [def-weil-etale-morphism]) and a decomposition $U\\times_SX=W\\sqcup V$ into disjoint open subschemes with $V\\to U$ finite and $W_u=\\emptyset$.",
+   "text": "The finite morphism from the fibre at s to Spec κ(s) has finite preimage of the unique point, so the fibre is a finite set (Scheme.Hom.finite_preimage_singleton). Its set of isolated points is therefore finite. Apply exists_etale_splits_off_quasiFinitePart to obtain an elementary etale neighbourhood (U,u), complementary opens W,V in the pullback, a finite map V → U, and empty W fibre at u. Transfer finiteness of the scheme fibre to the set-theoretic fibre using f.fiberHomeo s. The locally quasi-finite hypothesis is not needed by this step: the bound already assumes every fibre finite, and local finite presentation supplies local finite type.",
    "uses": [
     "def-pc-finite-locally-free",
     "lem-weil-pbc-finite-closed-map-finite-fibres",
@@ -55,7 +55,7 @@
    }
   },
   {
-   "text": "*$V\\to U$ is finite locally free.* The projection $U\\times_SX\\to U$ is the base change of $f$ along $\\varphi$, hence flat and locally of finite presentation (step 1). $V$ is an open subscheme of $U\\times_SX$: for $v\\in V$ the local ring $\\mathcal O_{V,v}$ is $\\mathcal O_{U\\times_SX,v}$, so $V\\to U$ is flat at $v$ [def-weil-flat-morphism], and the affine opens around $v$ with finitely presented ring maps given by [def-sbc-locally-finite-presentation] may be shrunk to standard opens $D(a)$ inside $V$ (a localization $B_a$ of a finitely presented $R$-algebra $B$ is finitely presented, $B_a=B[x]/(ax-1)$), so $V\\to U$ is locally of finite presentation. Being also finite, $V\\to U$ is finite locally free [def-pc-finite-locally-free] (finite, flat and locally of finite presentation; this is Stacks Morphisms, Lemma 02KB, which here is the definition).",
+   "text": "The pullback projection g is flat and locally of finite presentation by the Mathlib base-change instances. The open inclusion V.ι has both properties, and composition preserves them. Together with the supplied finiteness, this gives (V.ι ≫ g).IsFiniteLocallyFree directly from its definition.",
    "uses": [
     "lem-weil-pbc-flat-morphism-base-change",
     "lem-weil-pbc-qcqs-morphism-permanence",
@@ -70,13 +70,14 @@
    }
   },
   {
-   "text": "*Shrinking $U$; the degree at $u$ is $m$.* By [lem-weil-pbc-finite-locally-free-degree-locally-constant] the degree function $\\delta_{V\\to U}$ is locally constant; let $d=\\delta_{V\\to U}(u)$ and $U'=\\delta_{V\\to U}^{-1}(d)$, an open (and closed) neighbourhood of $u$ over which the preimage of $U'$ in $V$ is finite locally free of degree $d$ (Stacks Morphisms, Lemma 04MH). Replace $U$ by $U'$, and $W,V$ by their preimages $W',V'$ under $U'\\times_SX\\to U'$; by [lem-weil-pbc-open-preimage-fibre-product] $U'\\times_SX$ is the preimage of $U'$ in $U\\times_SX$ and $U'\\times_SX=W'\\sqcup V'$ with $V'\\to U'$ finite locally free of degree $d$, $W'_u=\\emptyset$; $U'\\to S$ is etale as the composite of the open immersion $U'\\to U$ and $\\varphi$ [lem-weil-pbc-etale-composition-cancellation] (1), (2), and $\\kappa(u)$ is unchanged. The fibre $(U'\\times_SX)_u$ has degree $\\delta_f(s)=m$ (step 1, for the base change along $U'\\to S$, $u\\mapsto s$). It is the disjoint union of its open subschemes $W'_u=\\emptyset$ and $V'_u$ (preimages of $W'$, $V'$; fibres by pasting of cartesian squares [def-pc-fibre-product] with [lem-weil-pbc-open-preimage-fibre-product]), so it equals $V'_u$, whose degree is $d$. Hence $d=m$.",
+   "text": "The proved private finite_fiber_degree_of_pullback applies isPullback_fiberToSpecResidueField_of_isPullback to any cartesian square, transfers finiteness by base-change stability, and compares sections by the proved source-library nonempty_algEquiv_tensorProduct_Γ_of_isPullback. Module.finrank_baseChange then identifies the degrees. The proved private fiberDegree_add_of_finite_fiber applies the source-library fiberDegree_of_isCompl to the finite fibre over its residue field, compares degree there with finrankΓ using fiberDegree_eq_finrankΓ, and transports both summands using fiberRestrictIso and finrankΓ_eq_of_iso. Since the W fibre at u is empty, its degree is zero; additivity and the base-change comparison give degree m for V at u. Apply finiteLocallyFree_fiberDimension_isLocallyConstant and select its degree-m open O, which contains u. Restrict g to O. The preimages W′,V′ remain complementary. Pullback pasting and the canonical pullback isomorphisms identify V′ → O with the degree-m restriction of V → U; thus V′ → O is finite of constant degree m.",
    "uses": [
     "lem-weil-pbc-finite-locally-free-degree-locally-constant",
     "lem-weil-pbc-open-preimage-fibre-product",
     "lem-weil-pbc-etale-composition-cancellation",
     "def-pc-fibre-product",
-    "lem-weil-pbc-fibre-degree-base-change"
+    "lem-weil-pbc-fibre-of-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
    ],
    "elementary": false,
    "source": {
@@ -85,9 +86,8 @@
    }
   },
   {
-   "text": "*$W'=\\emptyset$ and $\\varphi(U')\\subseteq S_m$; $S_m$ is open.* Let $u'\\in U'$ and $s'=\\varphi(u')$. The fibre $F=(U'\\times_SX)_{u'}$ is finite over $\\kappa(u')$ of degree $\\delta_f(s')\\le m$ [lem-weil-pbc-fibre-degree-base-change]. It is the disjoint union of its open subschemes $F_W$, $F_V$, the preimages of $W'$, $V'$, which are the fibres of $W'\\to U'$ and $V'\\to U'$ at $u'$ ([lem-weil-pbc-open-preimage-fibre-product], pasting [def-pc-fibre-product]); by the sheaf axiom for the cover $F=F_W\\sqcup F_V$, $\\Gamma(F,\\mathcal O_F)=\\Gamma(F_W,\\mathcal O)\\times\\Gamma(F_V,\\mathcal O)$, so $\\delta_f(s')=\\dim\\Gamma(F_W,\\mathcal O)+m$ (as $V'\\to U'$ has degree $m$ [def-pc-finite-locally-free]). Hence $\\Gamma(F_W,\\mathcal O)=0$, so $F_W=\\emptyset$ (in a nonempty scheme $1\\ne0$ in some local ring, hence in $\\Gamma$), and $\\delta_f(s')=m$. Since every point of $W'$ lies in the fibre over its image in $U'$, $W'=\\emptyset$: $U'\\times_SX=V'\\to U'$ is finite locally free of degree $m$, and $\\varphi(U')\\subseteq S_m$. The shrunken etale neighbourhood still contains the distinguished point over $s$, and its whole pullback is finite locally free of degree $m$. This proves the local existence statement; no openness or descent assertion is needed here.",
+   "text": "For each point of O the full fibre is finite and has degree at most m, by the proved private base-change comparison. Its degree is the sum of the W′ and V′ degrees, by the proved private additivity helper. Since the V′ degree is m, arithmetic forces the W′ degree to be zero. The private finite_fiber_of_clopen proves this fibre finite using the closed immersion of the complementary open and fiberRestrictIso. The private isEmpty_fiber_of_finite_degree_zero obtains finite-dimensional sections from the finite ring map; Module.finrank_zero_iff makes these sections the zero ring, whose spectrum is empty. Therefore every W′ fibre is empty. Any point of W′ would give a point of its fibre over its image via asFiber, so W′ is empty and V′ is top. Its inclusion is an isomorphism; cancel it to obtain finiteness and constant degree m for the whole restricted projection. Pullback pasting identifies this projection with pullback.snd f (O.ι ≫ φ). The composite O.ι ≫ φ is etale and the point u still maps to s. This constructs the required neighbourhood, including m=0. All five private helpers are completely proved in Lean; no new statement with sorry is introduced.",
    "uses": [
-    "lem-weil-pbc-fibre-degree-base-change",
     "lem-weil-pbc-open-preimage-fibre-product",
     "def-pc-fibre-product",
     "def-pc-finite-locally-free"
@@ -109,7 +109,8 @@
   "def-weil-flat-morphism",
   "lem-weil-pbc-etale-composition-cancellation",
   "lem-weil-pbc-etale-splits-off-quasi-finite-part",
-  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-finite-closed-map-finite-fibres",
   "lem-weil-pbc-finite-locally-free-degree-locally-constant",
   "lem-weil-pbc-flat-morphism-base-change",
@@ -117,9 +118,10 @@
   "lem-weil-pbc-qcqs-morphism-permanence"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "P3 stage-3 worker",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Lemma Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded), proof, second paragraph"
+  "place": "Tag 07RY, proof, second paragraph",
+  "note": "Plan realized in Lean using proved fibre/base-change and global-sections APIs. The source was read at https://stacks.math.columbia.edu/tag/07RY; no new sorry."
  },
  "mathlib_searches": [
   {
@@ -186,11 +188,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "X-63ebe",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261012T085208-L-845",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T135301-L-1685250",
+  "kind": "proof",
+  "note": "independent Codex review: Delivered packet, Lean module, DAG node, report, and direct importer matched; all delivered files compiled cleanly with lcompile.py, including the required importer check."
  }
 }
