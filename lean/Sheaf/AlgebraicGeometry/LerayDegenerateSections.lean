@@ -6,13 +6,8 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
-import Sheaf.AlgebraicGeometry.TensorPullback
-import Sheaf.CategoryTheory.GrothendieckComposablePair
-import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
-import Sheaf.CategoryTheory.GrothendieckSpectralSequence
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
+import Sheaf.AlgebraicGeometry.LerayEdgeCocycleData
+import Sheaf.AlgebraicGeometry.LerayEdgeVanishingIso
 
 /-!
 # The canonical Leray edge and its degeneration
@@ -89,6 +84,7 @@ theorem exists_lerayEdge_isIso_of_vanishing {X Y : Scheme.{u}} (f : X ⟶ Y) :
           IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj
             (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F))) →
         ∀ q : ℕ, IsIso ((ε q).app F)) := by
-  sorry
+  obtain ⟨ε, hε⟩ := leray_edge_cocycle_data f
+  exact ⟨ε, hε, leray_edge_isIso_of_vanishing f ε hε⟩
 
 end AlgebraicGeometry

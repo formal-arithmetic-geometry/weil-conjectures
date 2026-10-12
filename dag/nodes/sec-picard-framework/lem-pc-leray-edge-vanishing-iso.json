@@ -1,0 +1,129 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F4 (2), construction and degeneration of Leray edge"
+ },
+ "proof_origin": {
+  "by": "stage-3 worker A3",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Lemma 01F4 (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grothendieckLeftEdgeMap|globalSections.*DirectImage|leray",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "no matching specialized theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural edge homomorphism cohomology composition left exact functors degeneration",
+   "results": "groupCohomology.map_cochainsFunctor_shortExact; groupCohomology.infNatTrans; groupCohomology.mapShortComplex₁_exact; groupCohomology.mapShortComplex₃_exact; groupCohomology.mapShortComplex₁; groupCohomology.mapShortComplex₃; groupCohomology.mapShortComplex₂_exact; groupCohomology.δ_apply",
+   "date": "2026-10-12",
+   "verdict": "no matching specialized theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology of composition of left exact functors canonical edge morphism isomorphism when higher derived functors vanish",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LerayDegenerateSections",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-leray-degenerate-sections",
+   "place": "proof steps 1-3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "lem-pc-leray-edge-vanishing-iso",
+ "title": "Vanishing makes the Leray edge an isomorphism",
+ "statement": "For a morphism f:X to Y of schemes [def-pc-scheme], let H^q and R^q f_* be the module cohomology and higher direct image functors [pqf-def-cohomology] of module sheaves [def-weil-sheaf-of-modules-category]. Suppose a family of natural homomorphisms from H^q(X,-) to global sections of R^q f_* satisfies the cocycle characterization [lem-pc-leray-edge-cocycle-data]. For every module sheaf F such that H^p(Y,R^q f_* F) is zero for every p>0 and every q, each degree-q component of this family on F is an isomorphism.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "pqf-def-cohomology",
+  "def-sp-injective-resolutions",
+  "lem-pc-leray-edge-cocycle-data"
+ ],
+ "proof": [
+  {
+   "text": "Assume $H^p(Y,R^qf_*\\mathcal F)=0$ for every $p>0$ and every $q$. Via [pqf-def-cohomology], these are precisely the terms $R^pG(R^qF(\\mathcal F))$ off the $p=0$ column of the first-quadrant spectral sequence supplied by [thm-sp-grothendieck]; its finite decreasing abutment filtration is part of the convergence data used by [lem-sp-grothendieck-edge-maps]. The collapse and edge-isomorphism clause of [lem-pc-grothendieck-edge-cocycle], equivalently [lem-sp-edge-collapse] applied to that finite filtration, makes the canonical left edge $H^q(X,\\mathcal F)\\to\\Gamma(Y,R^qf_*\\mathcal F)$ an isomorphism. By Step 2 this edge is $\\varepsilon^q_{\\mathcal F}$, proving (2).",
+   "uses": [
+    "thm-sp-grothendieck",
+    "lem-sp-grothendieck-edge-maps",
+    "lem-pc-grothendieck-edge-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Lemma 01F4, part (2), degeneration of the Leray spectral sequence when the columns p>0 vanish"
+   }
+  },
+  {
+   "text": "The cocycle characterization identifies the given edge with the canonical Grothendieck edge. Each cohomology class is represented by a global cycle; its lift to the cycle sheaf is unique since the cycle inclusion is a monomorphism and global sections preserve monomorphisms. The two edge values therefore agree on every class. Transfer the canonical edge isomorphism to the given edge.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "pqf-def-cohomology",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pushforward-injective-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-sp-grothendieck",
+  "lem-sp-grothendieck-edge-maps",
+  "lem-pc-grothendieck-edge-cocycle",
+  "def-sp-injective-resolutions",
+  "pqf-def-cohomology",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-pushforward-injective-acyclic"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LerayEdgeVanishingIso",
+  "declaration": "AlgebraicGeometry.leray_edge_isIso_of_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/LerayEdgeVanishingIso.lean",
+  "statement": "theorem leray_edge_isIso_of_vanishing {X Y : Scheme.{u}} (f : X ⟶ Y) (ε : LerayEdge X Y f) (hε : LerayEdgeCocycle f ε) : (∀ (F : SheafOfModules.{u} (moduleRings X.toRingedSpace)), (∀ (q p : ℕ), 0 < p → IsZero ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F))) → ∀ q : ℕ, IsIso ((ε q).app F))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T060730-L-2903829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T060730-L-2903829",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
