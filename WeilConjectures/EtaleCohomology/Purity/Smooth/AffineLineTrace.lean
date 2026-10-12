@@ -137,6 +137,11 @@ end Compactification
 section Trace
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ] (Y : Scheme.{u})
+  [HasInvertibleExponent Λ Y]
+
+instance : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y) := .of_hom (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
+
+instance : HasInvertibleExponent Λ (ProjectiveLine Y) := .of_hom (ProjectiveLine Y ↘ Y)
 
 /-- For an isomorphism `e : X ⟶ Y`, the identification `Λ_Y ⟶ Re_! Λ_X`: the unit
 `Λ_Y ⟶ Re_* Le^* Λ_Y`, read through `Le^* Λ_Y ≅ Λ_X` and `Re_! ≅ Re_*`. -/
@@ -230,12 +235,11 @@ geometric fibre the cohomology of `ℙ¹` is free of rank one in degrees `0` and
 `𝒪(1)` generating `H²`, and proper base change concludes. Here `h` is realized as the class of
 the divisor `[0 : 1]` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`), whose
 normalization is the rank-one normalization of the Kummer classes. -/
-theorem isIso_projectiveLineDecomposition [HasKummerClass.IsNormalized Λ]
-    [HasInvertibleExponent Λ Y] :
+theorem isIso_projectiveLineDecomposition [HasKummerClass.IsNormalized Λ] :
     IsIso (projectiveLineDecomposition Λ Y) :=
   sorry
 
-variable [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ Y]
+variable [HasKummerClass.IsNormalized Λ]
 
 /-- Blueprint `def-amb-p1-trace`: the projective-line trace
 
@@ -289,7 +293,7 @@ instance : IsClosedImmersion (ProjectiveLine.infinity Y) := by
     infer_instance
   exact IsClosedImmersion.of_comp _ (ProjectiveLine Y ↘ Y)
 
-omit [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ Y] in
+omit [HasKummerClass.IsNormalized Λ] in
 /-- Restricting a class pulled back from the base to the section at infinity gives the class
 back: `Λ_Y(1)[2] ⟶ Rq_* Λ(1)[2] ⟶ Rq_* R∞_* ∞^* Λ(1)[2]` is an isomorphism, `q ∘ ∞` being the
 identity. -/
