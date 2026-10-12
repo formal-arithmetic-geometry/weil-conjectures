@@ -44,6 +44,28 @@ theorem exists_degree_p_intermediate (K : Type u) (L : Type v) [Field K] [Field 
       Module.finrank K M < Module.finrank K L ∧
       IntermediateField.adjoin M ({z} : Set L) = ⊤ ∧
       (∃ f : M, z ^ p = (f : L)) ∧ Module.finrank M L = p := by
-  sorry
+  set_option linter.style.haveILetI false in
+  letI : Fact (Nat.Prime p) :=
+    ⟨(CharP.char_is_prime_or_zero K p).resolve_right hp.ne'⟩
+  obtain ⟨n, α, _, _, _, _, hfinal⟩ := exists_pth_root_tower K L p
+  have hne : (⊥ : IntermediateField K L) ≠ ⊤ := by
+    intro h
+    have hfin : Module.finrank K L = 1 := by
+      calc
+        Module.finrank K L = Module.finrank (⊥ : IntermediateField K L) L :=
+          (IntermediateField.finrank_bot' (F := K) (E := L)).symm
+        _ = Module.finrank (⊤ : IntermediateField K L) L :=
+          congrArg (fun (M : IntermediateField K L) =>
+            Module.finrank M L) h
+        _ = 1 := IntermediateField.finrank_top (F := K) (E := L)
+    omega
+  obtain ⟨M, z, hn, hM_eq, hz, htop, hMfin, hMpi, hlt, hadj, hdegM, hf, _⟩ := hfinal hne
+  refine ⟨M, z, hMfin, hMpi, hlt, ?_, ?_, hdegM⟩
+  · apply top_unique
+    intro x hx
+    exact hadj x
+  · obtain ⟨f, hf⟩ := hf
+    refine ⟨f, ?_⟩
+    exact hf.symm
 
 end IsPurelyInseparable

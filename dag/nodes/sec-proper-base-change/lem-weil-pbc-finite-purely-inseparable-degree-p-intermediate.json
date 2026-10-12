@@ -29,48 +29,20 @@
  ],
  "proof": [
   {
-   "text": "(The last step of a $p$th-root tower.) Apply [lem-weil-pbc-purely-inseparable-pth-root-tower] to $F=K$, $E=L$ (a finite purely inseparable extension of a field of characteristic $p$): there are $\\alpha_1,\\dots,\\alpha_n\\in L$ with $L=K(\\alpha_1,\\dots,\\alpha_n)$ such that, with $K_{i}=K(\\alpha_1,\\dots,\\alpha_{i})$ ($K_0=K$), for each $i=1,\\dots,n$ we have $\\alpha_i^p\\in K_{i-1}$ and $[K_{i-1}(\\alpha_i):K_{i-1}]=p$. If $n=0$ then $L=K_0=K$ and $[L:K]=1$, against the hypothesis $[L:K]>1$; so $n\\ge1$. Put $M=K_{n-1}$, $z=\\alpha_n$ and $f=z^p$. Then $K\\subseteq M\\subseteq L$ is an intermediate field, $f=\\alpha_n^p\\in K_{n-1}=M$, $M(z)=K(\\alpha_1,\\dots,\\alpha_{n-1})(\\alpha_n)=K(\\alpha_1,\\dots,\\alpha_n)=L$, and the clause $i=n$ gives $[L:M]=[K_{n-1}(\\alpha_n):K_{n-1}]=p$.",
+   "text": "Apply the final-step consequence of the p-th-root tower to K/L. Positive characteristic gives Fact (Nat.Prime p), and hdeg implies the bottom intermediate field is not top. The tower theorem directly supplies M and z with finiteness, pure inseparability, strict finrank drop, generation by z, a p-th power in M, and relative finrank p. Convert its membership statement to equality by top_unique and coerce the witness equation from algebraMap to the subtype coercion.",
    "uses": [
     "lem-weil-pbc-purely-inseparable-pth-root-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable), statement; used in More on Algebra Lemma Tag 07PR (lemma-helper-G-ring), proof, 'Let K subset M subset L be a subfield such that L is a degree p extension of M obtained by adjoining a pth root of an element f in M'"
-   }
-  },
-  {
-   "text": "($M/K$ is finite purely inseparable.) $M$ is a $K$-linear subspace of the finite-dimensional $K$-vector space $L$, hence finite-dimensional over $K$. Every $\\beta\\in M$ is an element of $L$, so by the definition [def-weil-pbc-finite-purely-inseparable-extension] applied to $L/K$ there is $n\\ge0$ with $\\beta^{p^n}\\in K$; hence every element of $M$ is purely inseparable over $K$, and $M/K$ is finite purely inseparable by the same definition.",
-   "uses": [
-    "def-weil-pbc-finite-purely-inseparable-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Definition Tag 09HE (definition-purely-inseparable); used in More on Algebra Lemma Tag 07PR, proof ('Since A subset B subset C are finite and L/M/K are purely inseparable')"
-   }
-  },
-  {
-   "text": "($[M:K]<[L:K]$.) The extensions $M/K$ (Step 2) and $L/M$ ($[L:M]=p$, Step 1) are finite, so [lem-weil-pbc-field-degree-multiplicativity] applied to $K\\subseteq M\\subseteq L$ gives $[L:K]=[L:M]\\,[M:K]=p\\,[M:K]$. As $p\\ge2$ and $[M:K]\\ge1$, $[L:K]=p[M:K]\\ge2[M:K]>[M:K]$.",
-   "uses": [
-    "lem-weil-pbc-field-degree-multiplicativity"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Fields, Lemma Tag 09G9 (lemma-multiplicativity-degrees)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-purely-inseparable-pth-root-tower",
-  "def-weil-pbc-finite-purely-inseparable-extension",
-  "lem-weil-pbc-field-degree-multiplicativity"
+  "lem-weil-pbc-purely-inseparable-pth-root-tower"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/fields.tex",
-  "place": "Fields, Lemma Tag 09HI (lemma-finite-purely-inseparable), read off at its last step, with Lemma Tag 09G9 (lemma-multiplicativity-degrees); the item is the step 'choose K subset M subset L with L/M of degree p obtained by adjoining a pth root' of More on Algebra Lemma Tag 07PR (lemma-helper-G-ring), proof"
+  "place": "Fields Lemma Tag 09HI; use the final-step consequence already stated by the p-th-root tower node"
  },
  "mathlib_searches": [
   {
@@ -181,5 +153,15 @@
   "group": "H1",
   "result": "pass",
   "note": "K L fields+Algebra (extension), Module.Finite+IsPurelyInseparable (finite p.i.), CharP K p + 0<p (char p>0, primality derivable, checked), 1<finrank (degree>1); conclusion M:IntermediateField, z:L, M/K finite p.i., [M:K]<[L:K], M⟮z⟯=⊤, ∃f:M z^p=f, finrank M L = p; #check clean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T194119-L-457720",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

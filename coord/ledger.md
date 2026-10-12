@@ -9207,3 +9207,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:41 L: merged deliver/J1/Sheaf.AlgebraicGeometry.Curve.NilIdealUnitsImageLinearization (stage 3; reviewer PASS; first push; landing 20261012T194118-L-457376 (interface); batch 20261012T194054; modules 4; new nodes 3)
 - 19:41 L: merged deliver/J1/Sheaf.AlgebraicGeometry.IntegralFibreSectionLocalLiftAux (stage 3; reviewer PASS; first push; landing 20261012T194118-L-457477 (interface); batch 20261012T194054; modules 3; new nodes 2)
 - 19:41 L: merged deliver/J1/Sheaf.RingTheory.FormallySmoothCompleteLocalGenericFiber (stage 3; reviewer PASS; after a return; landing 20261012T194118-L-457609 (interface); batch 20261012T194054; modules 5; new nodes 4)
+- 19:41 L: merged deliver/J2/Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate (stage 3; reviewer PASS; first push; landing 20261012T194119-L-457720 (proof); batch 20261012T194054; modules 1; new nodes 0)
