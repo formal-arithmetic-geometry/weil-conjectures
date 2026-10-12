@@ -22,19 +22,8 @@
  ],
  "proof": [
   {
-   "text": "Choose ordinary S-module generators a_1,...,a_t of M. Since M is a direct sum of its graded pieces, each a_i has a finite expansion a_i=\\sum_d a_{i,d} with a_{i,d} in M_d. Collect these finitely many homogeneous components. Every a_i is in their S-span, so that span contains the given generators and equals M (including the case M=0, when the collection can be empty).",
+   "text": "Let H be the set of elements lying in some graded piece. Choose the direct-sum decomposition from hℳ. DirectSum.Decomposition.inductionOn shows every element belongs to the S-span of H: zero belongs, each homogeneous element is a span generator, and the span is closed under addition. Thus span S H = top. Module.Finite.fg_top and Submodule.fg_span_iff_fg_span_finset_subset extract a finite subset of H with the same span. Enumerate it by a Fin r embedding using Set.Finite.fin_embedding and choose a degree for each generator. This is the finite homogeneous generating family.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, construction of F_0 from finitely many homogeneous generators of M; elementary expansion of ordinary generators"
-   }
-  },
-  {
-   "text": "List the components from step 1 as homogeneous generators m_j of degree d_j. By the shift convention [def-weil-pbc-proj-twisting-sheaf] (2), the basis vector 1 in S(-d_j) has degree d_j. Thus s in its degree-n piece is a polynomial of degree n-d_j, and s m_j lies in M_n. The maps S(-d_j) \\to M given by s \\mapsto s m_j are therefore graded and S-linear; their finite direct sum is the displayed graded map F_0 \\to M.",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
@@ -42,22 +31,29 @@
    }
   },
   {
-   "text": "The image of F_0 \\to M is the S-span of the m_j, which is M by step 1. Hence the graded map is surjective.",
+   "text": "Take Finsupp.linearCombination S m as the map from Fin r →₀ S to M. By span_range_eq_top_iff_surjective_finsuppLinearCombination its surjectivity follows from the spanning equality. Finsupp.linearCombination_single and one_smul show its value on the ith basis vector is m i.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-    "place": "proof, surjection from the initial graded free module onto M"
+    "place": "proof, construction of the initial graded free module from homogeneous generators"
+   }
+  },
+  {
+   "text": "For a homogeneous scalar s of degree n, linearity and the basis-vector computation give f (s • single i 1) = s • m i. Apply the stated compatibility hsmul with m i in graded degree d i to obtain membership in degree n + d i. This expresses the shift convention directly, without using the twisting-sheaf construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
+    "place": "proof, construction of the initial graded free module from homogeneous generators"
    }
   }
  ],
- "proof_deps": [
-  "def-weil-pbc-proj-twisting-sheaf"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-duality/lem-sc-p1-graded-resolution.md",
-  "place": "proof, initial graded free module; expanded from the imported ancestor node because the literature file is absent in this checkout"
+  "place": "proof, construction of the initial graded free module from homogeneous generators; G2 Lean proof using Mathlib direct-sum induction, finite spanning-subset extraction, and the linear-combination map"
  },
  "mathlib_searches": [
   {
@@ -135,5 +131,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T085243-L-16312",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
