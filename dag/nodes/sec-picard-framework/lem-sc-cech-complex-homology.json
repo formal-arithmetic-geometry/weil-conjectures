@@ -10,16 +10,30 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "The assertion follows from the objectwise kernel, image, and Ext comparison calculations described in the module docstring.",
-   "uses": [],
+   "text": "Each Cech-degree functor is evaluation on the corresponding formal coproduct. Apply formalCoproductEval_preservesHomology [lem-sc-formal-coproduct-evaluation-homology] to obtain its canonical ShortComplex.mapHomologyIso.",
+   "uses": [
+    "lem-sc-formal-coproduct-evaluation-homology"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Evaluation in the presheaf category preserves homology. Assemble its canonical mapHomologyIso inverses into evalHomologyIso: K.homology q is naturally isomorphic to the objectwise homology presheaf. NatTrans.app_homology proves naturality on each arrow.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose the degreewise homology comparison with the Cech-degree image of evalHomologyIso. Regard the Cech differential as a natural transformation between degree functors. NatTrans.app_homology and naturality of that differential prove the chain-map equation. HomologicalComplex.Hom.isoOfComponents assembles the comparison into the required isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-sc-formal-coproduct-evaluation-homology"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
-  "place": "Step 2"
+  "place": "Step 2; canonical Mathlib short-complex homology comparisons, second reading by H1"
  },
  "mathlib_searches": [
   {
@@ -84,11 +98,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
+  "reviewer": "X-fc8bc",
   "group": "H1",
   "result": "pass",
-  "landing": "20261012T110304-L-615981",
+  "landing": "20261012T135237-L-1667077",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof metadata; all modules and direct importer compile cleanly, with permitted axioms only."
  }
 }

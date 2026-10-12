@@ -1,0 +1,105 @@
+{
+ "id": "lem-sc-formal-coproduct-evaluation-homology",
+ "kind": "statement",
+ "title": "Formal coproduct evaluation preserves homology",
+ "statement": "For a category C and a formal coproduct X of objects of C, the functor from abelian presheaves on C to abelian groups which takes P to the product of its values on the constituents of X preserves homology of every short complex. The indexing family is arbitrary, including empty.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 2, products of complexes of abelian groups have the product of their cohomologies"
+ },
+ "stmt_deps": [
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Restrict presheaves to the discrete category of constituents of X. Restriction preserves finite limits and colimits, computed objectwise. The product-to-limit isomorphism Pi.isoLimit identifies evaluation on X with restriction followed by the discrete limit functor; projection equations prove its naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Products of abelian groups are exact [lem-pc-abelian-groups-exact-products], implemented by Mathlib.Algebra.Category.Grp.AB. Therefore the discrete limit functor preserves finite colimits as well as finite limits. Transfer both preservation properties through the natural isomorphism. Functor.preservesHomologyOfExact then gives the assertion, also for the empty indexing family.",
+   "uses": [
+    "lem-pc-abelian-groups-exact-products"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-abelian-groups-exact-products"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
+  "place": "Step 2; formalization through Mathlib exact products, written during second reading by H1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of abelian presheaves on a formal coproduct preserves homology",
+   "results": "Service unavailable (Internal Server Error); recorded by msearch.py.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The product functor on abelian groups is exact and preserves homology of short complexes",
+   "results": "instHasExactLimitsOfShapeDiscreteAddCommGrpCat and instAB4StarAddCommGrpCat in Mathlib.Algebra.Category.Grp.AB; Functor.preservesHomologyOfExact. These prove the product part, but do not directly identify formal coproduct evaluation with restriction followed by lim.",
+   "date": "2026-10-12",
+   "verdict": "partial match, used"
+  },
+  {
+   "tool": "grep",
+   "query": "AB4Star|HasExactLimitsOfShape",
+   "results": "Mathlib/Algebra/Category/Grp/AB.lean:69 exact discrete limits, :98 AB4Star. Used both through instance synthesis. Library/upstream search found no formal coproduct evaluation homology theorem.",
+   "date": "2026-10-12",
+   "verdict": "partial match, used"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CechComplexHomology",
+  "date": "2026-10-12",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-complex-homology",
+   "place": "product exactness in Step 2"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FormalCoproductEvaluationHomology",
+  "file": "lean/Sheaf/CategoryTheory/FormalCoproductEvaluationHomology.lean",
+  "declaration": "CategoryTheory.formalCoproductEval_preservesHomology",
+  "statement": "theorem formalCoproductEval_preservesHomology\n    {C : Type u} [Category.{v} C] (X : (FormalCoproduct.{v} C)ᵒᵖ) :\n    ((FormalCoproduct.evalOp C AddCommGrpCat.{v}) ⋙\n      (evaluation _ AddCommGrpCat).obj X).PreservesHomology",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fc8bc",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T135237-L-1667077",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-fc8bc",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261012T135237-L-1667077",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files match the recorded node statements and proof metadata; all modules and direct importer compile cleanly, with permitted axioms only."
+ }
+}

@@ -6,6 +6,7 @@ module
 
 public import Sheaf.CategoryTheory.CechResolutionDoubleComplex
 public import Mathlib.Algebra.Homology.Functor
+import Sheaf.CategoryTheory.FormalCoproductEvaluationHomology
 
 /-!
 # Homology and the Čech complex of a complex of presheaves
@@ -21,6 +22,27 @@ namespace CategoryTheory
 
 open Limits
 
+private noncomputable def evalHomologyIso
+    {C : Type u} [Category.{v} C]
+    (K : CochainComplex (C ⥤ AddCommGrpCat.{v}) ℕ) (q : ℕ) :
+    K.homology q ≅ K.asFunctor ⋙ HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) q :=
+  NatIso.ofComponents
+    (fun X ↦ ((K.sc q).mapHomologyIso ((evaluation C AddCommGrpCat).obj X)).symm)
+    (by
+      intro X Y f
+      let τ : (evaluation C AddCommGrpCat).obj X ⟶
+          (evaluation C AddCommGrpCat).obj Y :=
+        { app := fun P ↦ P.map f
+          naturality := fun P Q α ↦ (α.naturality f).symm }
+      have h := NatTrans.app_homology τ (K.sc q)
+      dsimp [τ] at h
+      change (K.sc q).homology.map f ≫
+        ((K.sc q).mapHomologyIso ((evaluation C AddCommGrpCat).obj Y)).inv = _
+      rw [h]
+      simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+      rfl)
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Taking vertical homology of the Čech bicomplex commutes with the Čech construction.
 
 Source: blueprint sk-thm-picard-cech, Step 2.
@@ -47,6 +69,28 @@ theorem cechComplexFunctor_homology
             (((cechComplexFunctor U).mapHomologicalComplex (ComplexShape.up ℕ)).obj K)) ≅
       (cechComplexFunctor U).obj
         (K.asFunctor ⋙ HomologicalComplex.homologyFunctor _ (ComplexShape.up ℕ) q)) := by
-  sorry
+  have : ∀ n, (cechComplexFunctor U ⋙
+      HomologicalComplex.eval AddCommGrpCat (ComplexShape.up ℕ) n).PreservesHomology :=
+    fun n ↦ formalCoproductEval_preservesHomology _
+  let S := K.sc q
+  let F (n : ℕ) := cechComplexFunctor U ⋙
+    HomologicalComplex.eval AddCommGrpCat (ComplexShape.up ℕ) n
+  let h := evalHomologyIso K q
+  let e (n : ℕ) := S.mapHomologyIso (F n) ≪≫ (F n).mapIso h
+  refine ⟨HomologicalComplex.Hom.isoOfComponents e ?_⟩
+  intro i j hij
+  let τ : F i ⟶ F j :=
+    { app := fun P ↦ ((cechComplexFunctor U).obj P).d i j
+      naturality := fun P Q α ↦ ((cechComplexFunctor U).map α).comm i j }
+  have hh := NatTrans.app_homology τ S
+  have hn := τ.naturality h.hom
+  dsimp [τ] at hh hn
+  change (S.mapHomologyIso (F i)).hom ≫ (F i).map h.hom ≫ _ = _
+  dsimp only [S, HomologicalComplex.homology] at hn ⊢
+  rw [hn]
+  dsimp only [S] at hh
+  rw [hh]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  rfl
 
 end CategoryTheory
