@@ -25,10 +25,23 @@
  ],
  "proof": [
   {
-   "text": "localization prime correspondence identifies the lengths of chains below p with those in S_p. Since hd is the finite natural number d, the supremum of these lengths is attained: if no chain had length d, all lengths would be at most d-1 (and for d=0 the single-prime chain already attains it). A length-d chain below p ends at p and starts at a minimal prime q of S; otherwise appending p or prepending a smaller prime would contradict the bound d. It is saturated for the same reason. Ideal correspondence gives a saturated chain from zero to the image of p in the finite type domain S/q. The residue field of p is the fraction field of S/p. The finite type domain dimension/transcendence-degree theorem and hr give dim(S/p) = r, and the maximal-chain theorem supplies a saturated chain of length r above p ending at a maximal ideal. Append this to the length-d chain, counting p only once. It is a maximal chain in S/q. The domain maximal-chain theorem makes its length d+r equal to dim(S/q), giving the required q, its primality and minimality.",
+   "text": "Apply the dimension/transcendence-degree theorem to the domain S/p. Its fraction field is canonically kappa(p) by the Mathlib IsFractionRing instance, so hr identifies dim(S/p) with r. Prime quotient correspondence identifies this dimension with the coheight of p in PrimeSpectrum S.",
    "uses": [
-    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any prime q contained in p, let P be the corresponding prime of S/q. The comap map is strictly monotone and its image is the primes containing q, an upper set, so it preserves coheight and height(P) is at most height(p). The domain common-maximal-chain-length theorem implies dim(S/q) = height(P) + coheight(P): choose longest chains below and above P, prove extremality of the endpoints and saturation of consecutive pairs by contradiction using cons, snoc and insertNth, join the chains with smash, use the existing private saturated_isMaxChain_of_nonempty theorem via a proof-only import all of Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRingChains to show maximality, and apply the common-length theorem to their maximal range. This is proved locally in the private pure_dimension_sum helper.",
+   "uses": [
     "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localization dimension/height correspondence and hd give height(p)=d. Mathlib exists_series_of_height_eq_coe supplies a length-d chain ending at p. Its head q is minimal: a smaller prime would prepend to a length-(d+1) chain below p, contradicting height(p)=d. Lift the whole chain through the quotient prime order isomorphism to S/q; its length gives d<=height(P), and strict monotonicity of comap gives the reverse inequality. Thus height(P)=d, and the preceding domain identity yields dim(S/q)=d+r.",
+   "uses": [
     "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
    "elementary": false
@@ -37,12 +50,13 @@
  "proof_deps": [
   "lem-weil-pbc-finite-type-domain-dimension-trdeg",
   "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "lem-weil-pbc-localization-dimension-chains-below-prime"
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "proof of Tag 00P1"
+  "place": "Proof of Tag 00P1, formalized using prime-spectrum height and coheight; F3; repair reuses existing saturation-to-maximality helper"
  },
  "mathlib_searches": [
   {
@@ -101,10 +115,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T214713-L-1272347",
-  "kind": "interface",
+  "landing": "20261012T234218-L-2124808",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -25,10 +25,23 @@
  ],
  "proof": [
   {
-   "text": "put A = S/q and let P be the image of p in A. Ideal correspondence identifies primes of A with primes of S containing q. The residue field of P is canonically the residue field of p; it is the fraction field of A/P = S/p. Thus the finite type domain dimension/transcendence-degree theorem gives `dim(S/p) = r`. The maximal-chain theorem for that domain supplies a saturated chain from p to a maximal ideal of S of length r. Since hd bounds every chain below p by d, choose a longest chain from q to p, of length s <= d. Such a chain exists: q <= p, and the set of possible natural lengths is nonempty and bounded by d. It is saturated, and its first member is q. Append the chosen chain above p, counting p only once. In the domain A, the resulting chain starts at zero, ends at a maximal ideal, and is saturated, hence is a maximal chain. The finite type domain maximal-chain theorem says its length s+r is dim(A). Therefore dim(S/q) = s+r <= d+r.",
+   "text": "Apply the dimension/transcendence-degree theorem to the domain S/p. Its fraction field is canonically kappa(p) by the Mathlib IsFractionRing instance, so hr identifies dim(S/p) with r. Prime quotient correspondence identifies this dimension with the coheight of p in PrimeSpectrum S.",
    "uses": [
-    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any prime q contained in p, let P be the corresponding prime of S/q. The comap map is strictly monotone and its image is the primes containing q, an upper set, so it preserves coheight and height(P) is at most height(p). The domain common-maximal-chain-length theorem implies dim(S/q) = height(P) + coheight(P): choose longest chains below and above P, prove extremality of the endpoints and saturation of consecutive pairs by contradiction using cons, snoc and insertNth, join the chains with smash, use the existing private saturated_isMaxChain_of_nonempty theorem via a proof-only import all of Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRingChains to show maximality, and apply the common-length theorem to their maximal range. This is proved locally in the private pure_dimension_sum helper.",
+   "uses": [
     "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the localization dimension/height correspondence and hd to get height(p)=d. The preceding identity, coheight(P)=r and height(P)<=d imply dim(S/q)<=d+r. In fact the argument works for every prime q below p; the existing minimality hypothesis is retained unchanged.",
+   "uses": [
     "lem-weil-pbc-localization-dimension-chains-below-prime"
    ],
    "elementary": false
@@ -37,12 +50,13 @@
  "proof_deps": [
   "lem-weil-pbc-finite-type-domain-dimension-trdeg",
   "lem-weil-pbc-finite-type-domain-dimension-local-ring",
-  "lem-weil-pbc-localization-dimension-chains-below-prime"
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-chains"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "proof of Tag 00P1"
+  "place": "Proof of Tag 00P1, formalized using prime-spectrum height and coheight; F3; repair reuses existing saturation-to-maximality helper"
  },
  "mathlib_searches": [
   {
@@ -101,10 +115,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261012T214713-L-1272347",
-  "kind": "interface",
+  "landing": "20261012T234218-L-2124808",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
