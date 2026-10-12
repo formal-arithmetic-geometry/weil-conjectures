@@ -8,8 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
+import Sheaf.AlgebraicGeometry.HigherDirectImageLimitPresheafClassDescent
 
 /-! # Classes in fibers of higher direct images under scheme limits
 
@@ -96,6 +95,37 @@ theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}}
           (A := AddCommGrpCat.{v + 1})).obj (K.obj i)),
         (((S.uliftPointSmallEtale s).sheafFiber
           (A := AddCommGrpCat.{v + 1})).map (η.app i)) y = x := by
-  sorry
+  classical
+  let T := (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj
+    (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj
+      ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))
+  let P := (uliftYoneda.{v + 1} ⋙
+    (Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free ⋙
+    presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{v + 1} ⋙
+    upperStar AddCommGrpCat.{v + 1} c.pt.hom ⋙
+    DerivedCategory.Plus.singleFunctor _ 0).op ⋙
+      preadditiveYoneda.obj
+        (((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H))⟦(p : ℤ)⟧)
+  let Φ := S.uliftPointSmallEtale s
+  have : LocallySmall.{v + 1} S.Etale := locallySmall_max.{v + 1, v, v + 1}
+  obtain ⟨e, hlift⟩ := exists_higherDirectImage_limit_presheaf_class_cover
+    D c hc F φ hφid hφcomp H eH hH p K eK hK η hη
+  let τ : P ⟶ T.obj := toSheafify S.smallEtaleTopology P ≫ e.hom.hom
+  have : Presheaf.IsLocallySurjective S.smallEtaleTopology τ := by
+    dsimp [τ]
+    infer_instance
+  intro x
+  obtain ⟨x', hx'⟩ := Φ.toPresheafFiber_map_surjective τ x
+  obtain ⟨U, u, z, hz⟩ := Φ.toPresheafFiber_jointly_surjective (P := P) x'
+  obtain ⟨R, hR, hRlift⟩ := hlift U z
+  obtain ⟨V, f, hf, w, hw⟩ := Φ.jointly_surjective R hR u
+  obtain ⟨i, y, hy⟩ := hRlift f hf
+  refine ⟨i, Φ.toPresheafFiber V w (K.obj i).obj y, ?_⟩
+  change Φ.presheafFiber.map (η.app i).hom
+    (Φ.toPresheafFiber V w (K.obj i).obj y) = x
+  rw [Φ.toPresheafFiber_naturality_apply, hy]
+  change Φ.toPresheafFiber V w T.obj (T.obj.map f.op (τ.app (op U) z)) = x
+  rw [Φ.toPresheafFiber_w_apply f w T.obj, hw,
+    ← Φ.toPresheafFiber_naturality_apply τ U u, hz, hx']
 
 end AlgebraicGeometry.Etale
