@@ -1,0 +1,130 @@
+{
+ "id": "lem-sbc-pullback-comparison-comp",
+ "kind": "statement",
+ "title": "Composition of coefficient pullback and single-complex comparisons",
+ "statement": "Let Λ be a commutative ring and let T,Y,T₂,Y₂,T₁,Y₁ be schemes [def-weil-pbc-scheme-conventions] with e:Y→T, π₂:T₂→T, a₂:Y₂→Y, e₂:Y₂→T₂, π₁:T₁→T₂, a₁:Y₁→Y₂ and e₁:Y₁→T₁, satisfying a₂≫e=e₂≫π₂ and a₁≫e₂=e₁≫π₁. Let F be an etale Λ-module sheaf on T [def-weil-pbc-etale-sheaves]. In the coefficient part of [sbc-def-base-change-map], write C₂:a₂^*e^*(F[0])→e₂^*((π₂^*F)[0]), C₁:a₁^*e₂^*((π₂^*F)[0])→e₁^*((π₁^*π₂^*F)[0]) and C₀:(a₁≫a₂)^*e^*(F[0])→e₁^*(((π₁≫π₂)^*F)[0]) for the composites of inverse pullback composition comparison, equality transport, forward composition comparison, and pullback/single-complex comparison. Then a₁^*(C₂) followed by C₁ and e₁^* of the degree-zero image of the inverse sheaf comparison π₁^*π₂^*F→(π₁≫π₂)^*F equals the inverse derived comparison a₁^*a₂^*e^*(F[0])→(a₁≫a₂)^*e^*(F[0]) followed by C₀. No direct-image transition or homology functor occurs in this statement.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0F07; https://stacks.math.columbia.edu/tag/09Z1; https://stacks.math.columbia.edu/tag/0D6D",
+  "place": "canonical pullback restriction maps in the proof of condition (1); derived pullback composition, made explicit for exact module pullbacks"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "Expand the three C maps. Apply the closed source theorem upperStarCompDerivedPlus_assoc to (a₁,a₂,e), (a₁,e₂,π₂), and (e₁,π₁,π₂), using the two commutativity witnesses for equality transport. Naturality moves the π₂ pullback/single-complex comparison through the (a₁,e₂) composition comparison. Cancel each intervening composition isomorphism against its inverse. The uncancelled source map is the inverse comparison for (a₁,a₂), and all other maps lie inside e₁^*.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The remaining identity is compatibility of the exact functors π₂^*, π₁^* with the single-complex functor and their composition comparison. Evaluate both maps on a complex supported in degree zero: at degree zero they are precisely the sheaf composition comparison; elsewhere they are the unique maps between zero objects. Map this equality through the homotopy quotient and localization using the defining factorization isomorphisms of mapDerivedCategoryPlusSingleFunctor and upperStarPlusComp. The fully faithful inclusion D⁺→D reflects the equality. Applying e₁^* proves the displayed identity, including the final inverse sheaf composition comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0F07; https://stacks.math.columbia.edu/tag/09Z1; https://stacks.math.columbia.edu/tag/0D6D",
+  "place": "canonical pullback restriction maps in the proof of condition (1); derived pullback composition, made explicit for exact module pullbacks"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherence of derived inverse image composition with the functor placing a sheaf in degree zero",
+   "results": "HTTP Internal Server Error; service unavailable.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback composition isomorphism in a derived category is compatible with sheaves placed in degree zero",
+   "results": "SheafOfModules.pullback_assoc, pullbackComp, and conjugateEquiv_pullbackComp_inv; these concern a different coefficient encoding and do not include the bounded-below derived single-complex comparisons.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarPlusTransition.*comp|upperStarCompDerivedPlus_assoc|mapDerivedCategoryPlusSingleFunctor.*comp",
+   "results": "No Mathlib transition-composition or single-complex composition statement. Source library has upperStarCompDerivedPlus_assoc and the canonical single-complex isomorphisms, but not these two displayed comparison equalities. Blueprint search inverse image composition returned no exact duplicate.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality and composition of exact functor comparisons on a complex concentrated in a single degree",
+   "results": "LeanFinder returned mapDerivedCategorySingleFunctor, mapCochainComplexSingleFunctor, factorization lemmas and singleMapHomologicalComplex. These provide constructions but not the stated two-square bounded-below comparison equality.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryPlusCompIso|mapDerivedCategoryPlusSingleFunctor|homEquiv_counit; local upperStarCompDerivedPlus_assoc and transition coherence",
+   "results": "Read exact-functor comparisons and upstream derived associativity. HigherDirectImageOverCoherence states only homology transitions with coefficients, is itself sorry, and does not supply either required component identity. No duplicate in lean/Sheaf or lean/WeilConjectures.",
+   "date": "2026-10-12",
+   "verdict": "second reading: no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionComp",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof, condition (1): compatibility of the canonical restriction transitions",
+   "via": [
+    "lem-sbc-target-transition-comp"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BaseChangePullbackComparisonComp",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangePullbackComparisonComp.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangePullbackComparison_comp",
+  "statement": "theorem Etale.baseChangePullbackComparison_comp {T Y T₁ T₂ Y₁ Y₂ : Scheme.{u}} (e : Y ⟶ T) (π₂ : T₂ ⟶ T) (a₂ : Y₂ ⟶ Y) (e₂ : Y₂ ⟶ T₂) (wa₂ : a₂ ≫ e = e₂ ≫ π₂) (π₁ : T₁ ⟶ T₂) (a₁ : Y₁ ⟶ Y₂) (e₁ : Y₁ ⟶ T₁) (wa₁ : a₁ ≫ e₂ = e₁ ≫ π₁) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F let c₂ := (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) a₂ e).inv.app K ≫ eqToHom (by rw [wa₂]) ≫ (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) e₂ π₂).hom.app K ≫ D+((e₂)^*[ModuleCat.{u + 1} Λ]).map ((((π₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F) let c₁ := (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) a₁ e₂).inv.app ((DerivedCategory.Plus.singleFunctor _ 0).obj (((π₂)^*[ModuleCat.{u + 1} Λ]).obj F)) ≫ eqToHom (by rw [wa₁]) ≫ (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) e₁ π₁).hom.app ((DerivedCategory.Plus.singleFunctor _ 0).obj (((π₂)^*[ModuleCat.{u + 1} Λ]).obj F)) ≫ D+((e₁)^*[ModuleCat.{u + 1} Λ]).map ((((π₁)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app (((π₂)^*[ModuleCat.{u + 1} Λ]).obj F)) let c₀ := (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) (a₁ ≫ a₂) e).inv.app K ≫ eqToHom (by rw [Category.assoc, wa₂, ← Category.assoc, wa₁, Category.assoc]) ≫ (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) e₁ (π₁ ≫ π₂)).hom.app K ≫ D+((e₁)^*[ModuleCat.{u + 1} Λ]).map ((((π₁ ≫ π₂)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom.app F) D+((a₁)^*[ModuleCat.{u + 1} Λ]).map c₂ ≫ c₁ ≫ D+((e₁)^*[ModuleCat.{u + 1} Λ]).map ((DerivedCategory.Plus.singleFunctor _ 0).map ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) π₁ π₂ (π₁ ≫ π₂) rfl).inv.app F)) = (Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) a₁ a₂).inv.app (D+((e)^*[ModuleCat.{u + 1} Λ]).obj K) ≫ c₀",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085239-L-14480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T085239-L-14480",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
