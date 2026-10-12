@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-etale-locally-constant-open-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+   "place": "Open restriction preserves local constancy",
+   "via": [
+    "lem-weil-pbc-constructible-etale-noetherian-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Open restriction preserves local constancy",
+ "statement": "Let $X$ be a scheme [def-weil-pbc-scheme-conventions], $F$ a locally constant sheaf of sets on its small etale site [def-weil-pbc-etale-sheaves], and $U$ any open subscheme. The set inverse image of $F$ along the inclusion of $U$ [def-weil-pbc-inverse-image] is locally constant on the small etale site of $U$. Neither finite stalks nor Noetherianity is assumed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
+  "place": "Open restriction preserves local constancy"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose an etale cover trivializing F on the localized sites and base change it to U. The etale inverse-image restriction comparison identifies the restriction of the pullback sheaf on each base-changed member with the twice-localized restriction of F.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localization sends a constant sheaf to a constant sheaf: restrict the constant presheaf and use that localization preserves covering families, so its associated sheaf is the localization of the associated constant sheaf. Transport this constancy through the comparison isomorphisms. The base-changed etale cover therefore trivializes the pullback of F. This is the localization/constant-sheaf argument recorded in the declaration docstring; it does not assert finite stalks.",
+   "uses": [
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
+  "place": "Detailed reduction of blueprint proof steps 2--3, as in the Lean declaration docstring; second reading by J2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "local constancy of a sheaf on the small etale site is preserved by restriction to an open subscheme",
+   "results": [
+    "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+    "AlgebraicGeometry.StructureSheaf.res_const'",
+    "ModuleCat.Tilde.res_const",
+    "AlgebraicGeometry.Scheme.restrict_presheaf_obj",
+    "AlgebraicGeometry.LocallyRingedSpace.restrict_presheaf_obj",
+    "TopCat.subpresheafToTypes.isSheaf",
+    "StructureGroupoid.LocalInvariantProp.section_spec",
+    "TopCat.subsheafToTypes"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No exact match; adjacent declarations supply only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open restriction of a finite locally constant etale sheaf of sets is finite locally constant",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.IsConstant",
+   "results": [
+    "CategoryTheory.Sheaf.IsConstant",
+    "CategoryTheory.Sheaf.mem_essImage_of_isConstant",
+    "CategoryTheory.Sheaf.IsConstant.mem_essImage",
+    "CategoryTheory.Sheaf.IsConstant.mk",
+    "CategoryTheory.Sheaf.isConstant_congr",
+    "CategoryTheory.Sheaf.isConstant_of_iso",
+    "CategoryTheory.instIsConstantObjSheafSheafCompose",
+    "CategoryTheory.Sheaf.isConstant_iff_mem_essImage"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No exact match; adjacent declarations supply only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "isConstant.*(over|sheaf)|constantSheaf.*(pullback|restrict)",
+   "results": [
+    "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+    "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+    "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+    "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+    "Mathlib/CategoryTheory/Sites/ConstantSheaf.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No exact match; adjacent declarations supply only ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLocallyConstantOpenPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLocallyConstantOpenPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isLocallyConstantEtaleSheafOfSets_open_pullback",
+  "statement": "theorem isLocallyConstantEtaleSheafOfSets_open_pullback\n    {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (U : X.Opens) (hF : IsLocallyConstantEtaleSheafOfSets F) :\n    IsLocallyConstantEtaleSheafOfSets ((etaleSetPullback U.ι).obj F)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909566",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

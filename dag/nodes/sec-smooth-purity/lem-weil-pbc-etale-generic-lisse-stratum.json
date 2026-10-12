@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-etale-generic-lisse-stratum",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+   "place": "Generic lisse stratum",
+   "via": [
+    "lem-weil-pbc-constructible-etale-noetherian-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Generic lisse stratum",
+ "statement": "Let $X$ be a Noetherian scheme [def-weil-pbc-scheme-conventions] and $F$ a sheaf of sets on its small etale site [def-weil-pbc-etale-sheaves]. Suppose that for every integral [def-pc-integral-scheme] Noetherian affine scheme $S$ and immersion $g:S\\to X$ [def-weil-closed-immersion], there is a dense open $W$ of $S$ on which the iterated set inverse image of $F$ is lisse [def-weil-pbc-inverse-image]. For every irreducible closed subset $T$ of $X$, there exist a proper closed subset $Z\\subsetneq T$, a scheme $R$ and an immersion $r:R\\to X$ with image $T\\setminus Z$, such that the set inverse image of $F$ along $r$ is lisse. Irreducible includes nonempty.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
+  "place": "Generic lisse stratum"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Put I = IdealSheafData.vanishingIdeal T, Y = I.subscheme, and j = I.subschemeι. Mathlib range_subschemeι identifies the image with T; the proved upstream instance IdealSheafData.isReduced_subscheme_vanishingIdeal gives reducedness. The subtype irreducibility instance and isIntegral_of_irreducibleSpace_of_isReduced make Y integral. Choose an affine open U containing a point of Y. The standard open-immersion instances give integral and Noetherian U. This uses the proved upstream construction directly, not the stronger open reduced_induced_closed_subscheme theorem.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the supplied hypothesis to U.ι composed with j. The dense open W is nonempty. Its image V in Y is open. Define Z as j applied to the complement of V; the closed embedding j makes Z closed in X. Injectivity of j and a point of W show Z is proper in T. Injectivity and the range formula show that W.ι composed with U.ι and j has image T minus Z.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the composition comparison for set inverse image to transport the lisse iterated pullback to the composite pullback. The local-constancy component is transported by Sheaf.isConstant_congr on each cover member, and finite geometric stalks by Finite.of_equiv applied to the fiber functor on the sheaf isomorphism.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-finite-pushforward-constructible-noetherian.md",
+  "place": "Detailed reduction of blueprint proof steps 2--3, as in the Lean declaration docstring; second reading by J2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "from dense open local constancy on every integral affine locally closed subscheme obtain one nonempty lisse locally closed stratum of an irreducible closed subset",
+   "results": [
+    "AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat",
+    "AlgebraicGeometry.irreducibleSpace_of_isIntegral",
+    "AlgebraicGeometry.reduce_to_affine_global",
+    "genericPoints.ofComponent",
+    "AlgebraicGeometry.Scheme.Opens.exists_toScheme",
+    "AlgebraicGeometry.reduce_to_affine_nbhd",
+    "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+    "TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No exact match; adjacent declarations supply only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic lisse dense open on an irreducible reduced closed subscheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|IsIrreducible",
+   "results": [
+    "Mathlib/Topology/Sets/Closeds.lean",
+    "Mathlib/Topology/Sets/Closeds.lean",
+    "Mathlib/Topology/Sets/Closeds.lean",
+    "Mathlib/Topology/Sets/Closeds.lean",
+    "Mathlib/Topology/Sets/Closeds.lean",
+    "Mathlib/Topology/Sets/OpenCover.lean",
+    "Mathlib/Algebra/Lie/Weights/IsSimple.lean",
+    "Mathlib/Algebra/Lie/Weights/IsSimple.lean"
+   ],
+   "date": "2026-10-12",
+   "verdict": "No exact match; adjacent declarations supply only ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleEtaleNoetherianCriterion",
+  "date": "2026-10-12",
+  "group": "J2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGenericLisseStratum",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGenericLisseStratum.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_etaleGenericLisseStratum",
+  "statement": "theorem exists_etaleGenericLisseStratum\n    {X : Scheme.{u}} [IsNoetherian X]\n    (F : Sheaf X.smallEtaleTopology (Type (u + 1)))\n    (hF : ∀ (S : Scheme.{u}) [IsIntegral S] [IsNoetherian S] [IsAffine S]\n      (g : S ⟶ X) [IsImmersion g],\n      ∃ W : S.Opens, Dense (W : Set S) ∧\n        IsLisseEtaleSheafOfSets\n          ((etaleSetPullback W.ι).obj ((etaleSetPullback g).obj F)))\n    (T : TopologicalSpace.Closeds X) (hT : IsIrreducible (T : Set X)) :\n    ∃ (Z : TopologicalSpace.Closeds X), Z < T ∧\n      ∃ (S : Scheme.{u}) (g : S ⟶ X), IsImmersion g ∧\n        Set.range g = (T : Set X) \\ (Z : Set X) ∧\n        IsLisseEtaleSheafOfSets ((etaleSetPullback g).obj F)",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909566",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T060742-L-2909566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
