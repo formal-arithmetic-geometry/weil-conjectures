@@ -28,7 +28,8 @@
    "uses": [
     "def-pc-module-pullback",
     "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -39,7 +40,8 @@
   {
    "text": "*(2) The formula on sections.* For $V\\subseteq Y$ open, $s\\in\\mathcal F(V)$, $t\\in\\mathcal G(V)$: $\\alpha(f^*(s\\otimes t))=\\alpha(\\eta(s\\otimes t))=(f_*(\\alpha)\\circ\\eta)(s\\otimes t)=\\beta(s\\otimes t)=f^*s\\otimes f^*t$, the sections of $f_*$ over $V$ being those over $f^{-1}V$ and $f_*(\\alpha)_V=\\alpha_{f^{-1}V}$. This is the defining identity of $\\alpha$ from step (1) evaluated on a section.",
    "uses": [
-    "def-pc-module-pullback"
+    "def-pc-module-pullback",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": true,
    "source": {
@@ -48,45 +50,19 @@
    }
   },
   {
-   "text": "*(3) Stalks.* Let $x\\in X$, $y=f(x)$, $A=\\mathcal O_{Y,y}$, $B=\\mathcal O_{X,x}$, with $f^\\sharp_x:A\\to B$. By [lem-weil-pbc-module-stalk-pullback] and [lem-weil-pbc-module-stalk-tensor] there are isomorphisms of $B$-modules\\n$$\\lambda:(f^*(\\mathcal F\\otimes\\mathcal G))_x\\cong(\\mathcal F\\otimes\\mathcal G)_y\\otimes_AB\\cong(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB,\\qquad (f^*(s\\otimes t))_x\\mapsto(s\\otimes t)_y\\otimes1\\mapsto(s_y\\otimes t_y)\\otimes1,$$\\n$$\\rho:\\mathcal T_x=(f^*\\mathcal F\\otimes f^*\\mathcal G)_x\\cong(f^*\\mathcal F)_x\\otimes_B(f^*\\mathcal G)_x\\cong(\\mathcal F_y\\otimes_AB)\\otimes_B(\\mathcal G_y\\otimes_AB),\\qquad (f^*s\\otimes f^*t)_x\\mapsto(f^*s)_x\\otimes(f^*t)_x\\mapsto(s_y\\otimes1)\\otimes(t_y\\otimes1),$$\\nfor $V\\ni y$, $s\\in\\mathcal F(V)$, $t\\in\\mathcal G(V)$ (the stalk-of-tensor isomorphism applied on $Y$ to $\\mathcal F,\\mathcal G$ and on $X$ to $f^*\\mathcal F,f^*\\mathcal G$; the stalk-of-pullback isomorphism applied to $\\mathcal F\\otimes\\mathcal G$, $\\mathcal F$ and $\\mathcal G$, with base change of the first isomorphism along $A\\to B$). Since $\\alpha$ is $\\mathcal O_X$-linear, $\\alpha_x$ is $B$-linear, and so is $\\gamma=\\rho\\circ\\alpha_x\\circ\\lambda^{-1}:(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB\\to(\\mathcal F_y\\otimes_AB)\\otimes_B(\\mathcal G_y\\otimes_AB)$. By step (2), $\\alpha_x((f^*(s\\otimes t))_x)=(f^*s\\otimes f^*t)_x$, hence $\\gamma((s_y\\otimes t_y)\\otimes1)=(s_y\\otimes1)\\otimes(t_y\\otimes1)$. Every pair of germs $\\sigma\\in\\mathcal F_y$, $\\tau\\in\\mathcal G_y$ is of the form $s_y,t_y$ for sections over one open $V\\ni y$ (represent them over $V_1,V_2$ and restrict to $V_1\\cap V_2$), and the elements $(\\sigma\\otimes\\tau)\\otimes1$ generate $(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB$ as a $B$-module. So $\\gamma$ is the unique $B$-linear map with $(\\sigma\\otimes\\tau)\\otimes1\\mapsto(\\sigma\\otimes1)\\otimes(\\tau\\otimes1)$.",
+   "text": "The map constructed in steps (1)–(2) satisfies the section formula. Apply [lem-weil-pbc-module-pullback-tensor-iso-criterion] to conclude that it is an isomorphism, and form the resulting isomorphism using asIso.",
    "uses": [
-    "lem-weil-pbc-module-stalk-pullback",
-    "lem-weil-pbc-module-stalk-tensor"
+    "lem-weil-pbc-module-pullback-tensor-iso-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Sheaves, Lemma Tag 0098 (label lemma-stalk-pullback-modules) and Modules, Lemma Tag 01CB (label lemma-stalk-tensor-product), as named in the node's source sketch"
-   }
-  },
-  {
-   "text": "*(4) The algebra identity.* By [lem-weil-pbc-base-change-tensor-distrib] applied to $f^\\sharp_x:A\\to B$ and the $A$-modules $M=\\mathcal F_y$, $N=\\mathcal G_y$, the map $\\delta:(\\mathcal F_y\\otimes_A\\mathcal G_y)\\otimes_AB\\to(\\mathcal F_y\\otimes_AB)\\otimes_B(\\mathcal G_y\\otimes_AB)$ with $(\\sigma\\otimes\\tau)\\otimes1\\mapsto(\\sigma\\otimes1)\\otimes(\\tau\\otimes1)$ is an isomorphism of $B$-modules. By the uniqueness in step (3), $\\gamma=\\delta$; hence $\\alpha_x=\\rho^{-1}\\circ\\delta\\circ\\lambda$ is bijective, for every $x\\in X$.",
-   "uses": [
-    "lem-weil-pbc-base-change-tensor-distrib"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 17.16.4 (Tag 01CD, label lemma-tensor-product-pullback; proof omitted in the source)"
-   }
-  },
-  {
-   "text": "*(5) $\\alpha$ is an isomorphism.* $\\alpha$ is a morphism of $\\mathcal O_X$-modules on the scheme $X$ whose stalk maps $\\alpha_x$ are bijective for all $x\\in X$ (step (4)); by [lem-weil-pbc-module-iso-on-stalks] it is an isomorphism of $\\mathcal O_X$-modules $f^*(\\mathcal F\\otimes_{\\mathcal O_Y}\\mathcal G)\\cong f^*\\mathcal F\\otimes_{\\mathcal O_X}f^*\\mathcal G$, and by step (2) it sends $f^*(s\\otimes t)$ to $f^*s\\otimes f^*t$.",
-   "uses": [
-    "lem-weil-pbc-module-iso-on-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma Tag 01AG (label lemma-abelian) with Sheaves, Lemma Tag 007T (label lemma-points-exactness (3))"
-   }
+   "elementary": true
   },
   {
    "text": "*(6) Naturality.* Let $u:\\mathcal F\\to\\mathcal F'$, $v:\\mathcal G\\to\\mathcal G'$ be $\\mathcal O_Y$-linear, with $u\\otimes v$ the induced map of tensor products [def-pur-sheaf-tensor-product] (sheafification of $s\\otimes t\\mapsto u(s)\\otimes v(t)$, so $(u\\otimes v)(s\\otimes t)=u(s)\\otimes v(t)$ on sections). The two $\\mathcal O_X$-linear maps $\\alpha_{\\mathcal F',\\mathcal G'}\\circ f^*(u\\otimes v)$ and $(f^*u\\otimes f^*v)\\circ\\alpha_{\\mathcal F,\\mathcal G}$ from $f^*(\\mathcal F\\otimes\\mathcal G)$ to $f^*\\mathcal F'\\otimes f^*\\mathcal G'$ are equal: by the adjunction [def-pc-module-pullback] it suffices that their adjoints $\\mathcal F\\otimes\\mathcal G\\to f_*(f^*\\mathcal F'\\otimes f^*\\mathcal G')$ (composition with $\\eta_{\\mathcal F\\otimes\\mathcal G}$, after $f_*$) agree, and by the uniqueness in the universal property of sheafification [def-weil-presheaf-modules-sheafification] it suffices that they agree on the sections $s\\otimes t$, which generate the presheaf tensor product over $\\mathcal O_Y(V)$. Using the naturality of the unit, $f^*(w)(f^*z)=f^*(w(z))$ for a morphism $w$ and a section $z$, and step (2): the first sends $s\\otimes t$ to $\\alpha(f^*(u(s)\\otimes v(t)))=f^*(u(s))\\otimes f^*(v(t))$; the second sends it to $(f^*u\\otimes f^*v)(f^*s\\otimes f^*t)=f^*(u(s))\\otimes f^*(v(t))$. Hence $\\alpha$ is natural in $\\mathcal F$ and $\\mathcal G$.",
    "uses": [
     "def-pc-module-pullback",
     "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -99,15 +75,13 @@
   "def-pc-module-pullback",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
-  "lem-weil-pbc-module-stalk-pullback",
-  "lem-weil-pbc-module-stalk-tensor",
-  "lem-weil-pbc-base-change-tensor-distrib",
-  "lem-weil-pbc-module-iso-on-stalks"
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-module-pullback-tensor-iso-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 17.16.4 (Tag 01CD), proof omitted in the source; written by an agent along the sketch recorded in the node's source (adjoint of the bilinear map, check on stalks via Tags 0098, 01CB and the algebra identity, isomorphisms detected on stalks Tags 007T/01AG). Stacks gives a different proof for ringed topoi (Modules on Sites, Lemma Tag 03EL, via Hom/Bilin adjunctions)"
+  "place": "Tag 01CD, label lemma-tensor-product-pullback. Complete Lean construction via bilinear sections and sheafification; adjunction gives the comparison and its section formula; adjunction and tensor extensionality prove naturality; the proved iso criterion carries the stalk argument of original steps 3–5."
  },
  "mathlib_searches": [
   {
@@ -230,5 +204,15 @@
   "group": "F1",
   "result": "fix",
   "note": "f:X⟶Y arbitrary Scheme.{v}; M N : Y.Modules with source monoidal ⊗/⊗ₘ; e iso f^*(M⊗N)≅f^*M⊗f^*N for all M N; two-variable naturality square; section clause over f⁻¹ᵁV via unit of Classical.choose exists_tensorPullbackAdjunction f and tmulSection pins e (pure tensors generate); FIX: let pb (elaborates as have, opaque in stage 3) inlined"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4807e",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1687098",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered mirror, target/node statements, forbidden constructs, and three direct importers all matched and compiled cleanly."
  }
 }

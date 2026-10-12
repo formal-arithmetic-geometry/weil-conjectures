@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-module-pullback-tensor-iso-criterion",
+ "kind": "statement",
+ "title": "A section-compatible tensor-pullback comparison is an isomorphism",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $M,N$ sheaves of $\\mathcal O_Y$-modules. Use the tensor-formula pullback $f^*$ [def-pc-module-pullback] and tensor product [def-pur-sheaf-tensor-product], and write $f^*s=\\eta_M(s)$ for the unit of the canonical adjunction [lem-pc-module-pullback-adjunction]. Suppose $\\alpha:f^*(M\\otimes N)\\to f^*M\\otimes f^*N$ is a morphism of $\\mathcal O_X$-modules such that, for every open $V\\subseteq Y$ and sections $s\\in M(V)$ and $t\\in N(V)$, $\\alpha_{f^{-1}V}(f^*(s\\otimes t))=f^*s\\otimes f^*t$. Then $\\alpha$ is an isomorphism. No naturality in $M,N$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, label lemma-tensor-product-pullback, proof omitted: the stalkwise invertibility part of the agent proof in lem-weil-pbc-module-pullback-tensor, steps 3–5; Sheaves Tag 0098, Modules Tag 01CB and Sheaves Tag 007T."
+ },
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X$, $y=f(x)$, $A=\\mathcal O_{Y,y}$ and $B=\\mathcal O_{X,x}$. The stalk functor [def-pc-module-stalk-functor] and the pullback-stalk identification [lem-weil-pbc-module-stalk-pullback], followed by extension of the tensor-stalk identification [lem-weil-pbc-module-stalk-tensor], give $\\lambda:(f^*(M\\otimes N))_x\\cong B\\otimes_A(M_y\\otimes_A N_y)$. Tensor-stalk identification on $X$, followed by the tensor of the two pullback-stalk identifications, gives $\\rho:(f^*M\\otimes f^*N)_x\\cong(B\\otimes_A M_y)\\otimes_B(B\\otimes_A N_y)$. Both preserve the recorded pure-tensor germ formulas.",
+   "uses": [
+    "def-pc-module-stalk-functor",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-module-stalk-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent $s_y\\in M_y$ and $t_y\\in N_y$ by sections over opens $U,V$ containing $y$, then restrict to $U\\cap V$ [def-weil-pbc-module-stalk]. The pure-tensor germ formula for $\\lambda$ gives $\\lambda((f^*(s\\otimes t))_x)=1\\otimes(s_y\\otimes t_y)$. The hypothesis on $\\alpha$, functoriality of germs, and the germ formula for $\\rho$ give $\\rho(\\alpha_x((f^*(s\\otimes t))_x))=(1\\otimes s_y)\\otimes(1\\otimes t_y)$. Therefore $\\lambda^{-1};\\alpha_x;\\rho$ agrees on $1\\otimes(s_y\\otimes t_y)$ with the base-change tensor isomorphism [lem-weil-pbc-base-change-tensor-distrib]. Tensor induction and $B$-linearity give equality on every element.",
+   "uses": [
+    "def-weil-pbc-module-stalk",
+    "lem-weil-pbc-base-change-tensor-distrib"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The equality in the preceding step writes $\\alpha_x$ as a composite of the three displayed isomorphisms, hence $\\alpha_x$ is an isomorphism. Since this holds for every $x$, [lem-weil-pbc-module-iso-on-stalks] implies that $\\alpha$ is an isomorphism. In Lean forget the stalk module action, apply the abelian-sheaf stalk criterion and reflect isomorphisms through Scheme.Modules.toPresheaf.",
+   "uses": [
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-module-stalk",
+  "lem-weil-pbc-base-change-tensor-distrib",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-module-stalk-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01CD, label lemma-tensor-product-pullback, proof omitted: the stalkwise invertibility part of the agent proof in lem-weil-pbc-module-pullback-tensor, steps 3–5; Sheaves Tag 0098, Modules Tag 01CB and Sheaves Tag 007T."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "pullback tensor product sheaves modules natural comparison pure tensor sections",
+   "results": "SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-12",
+   "verdict": "No exact match; the available abstract pullback and stalk lemmas require the sectionwise comparison argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackId, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-12",
+   "verdict": "No exact match; the available abstract pullback and stalk lemmas require the sectionwise comparison argument."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*tmul|tensorPullback.*tensor",
+   "results": "No hits",
+   "date": "2026-10-12",
+   "verdict": "No exact match; the available abstract pullback and stalk lemmas require the sectionwise comparison argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from pullback of a tensor product to tensor of pullbacks compatible with pure tensor sections is an isomorphism",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModulePullbackTensor",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-properties",
+   "place": "step 1, 2, 3, 5 of its split (source: Etale Cohomology, proof of Lemma 0A4F: the F_j are the integer polynomials with prod(x_i t + y_i) = sum F_j t^{n-j} (Stacks indexes in reverse order))",
+   "via": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.TensorPullbackTensorIsIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/TensorPullbackTensorIsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_tensorPullback_of_tmul",
+  "statement": "theorem isIso_tensorPullback_of_tmul {X Y : Scheme.{v}} (f : X ⟶ Y)\n    (M N : Y.Modules)\n    (α : (tensorPullback f).obj (M ⊗ N) ⟶\n      (tensorPullback f).obj M ⊗ (tensorPullback f).obj N)\n    (hα : ∀ (V : Y.Opens) (s : Γ(M, V)) (t : Γ(N, V)),\n      α.app (f ⁻¹ᵁ V)\n          (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app (M ⊗ N)).val.app\n            (op V) (tmulSection s t) : Γ((tensorPullback f).obj (M ⊗ N), f ⁻¹ᵁ V)) =\n        tmulSection\n          (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app M).val.app\n            (op V) s : Γ((tensorPullback f).obj M, f ⁻¹ᵁ V))\n          (((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app N).val.app\n            (op V) t : Γ((tensorPullback f).obj N, f ⁻¹ᵁ V))) : IsIso α",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4807e",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1687098",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-4807e",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T135305-L-1687098",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered mirror, target/node statements, forbidden constructs, and three direct importers all matched and compiled cleanly."
+ }
+}
