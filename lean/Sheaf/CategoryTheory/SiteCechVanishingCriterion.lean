@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.SiteSesCechH1Surjective
+import Sheaf.CategoryTheory.SiteCechVanishingStep
 
 /-!
 # The Čech vanishing criterion for a general site
@@ -80,6 +81,17 @@ theorem isZero_H'_of_siteCech_vanishing
       (h : Cov U T V f) (p : ℕ), 0 < p →
         IsZero (((S U T V f h).cohomologyFunctor p).obj F.obj)) :
     ∀ (U : C), U ∈ B → ∀ (p : ℕ), 0 < p → IsZero (H' F p U) := by
-  sorry
+  intro U hU p hp
+  have hshift := siteCech_vanishing_dimension_shift J B Cov S F hcover hB hcofinal hcech
+  have hUshift := hshift U hU
+  induction p using Nat.strong_induction_on with
+  | h p ih =>
+      by_cases h₁ : p = 1
+      · simpa [h₁] using hUshift.1
+      · have hlt : 1 < p := by omega
+        apply hUshift.2 p hlt
+        apply ih (p - 1)
+        · omega
+        · omega
 
 end CategoryTheory.Sheaf

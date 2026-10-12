@@ -1,0 +1,108 @@
+{
+ "id": "lem-weil-pbc-site-cech-vanishing-dimension-shift",
+ "blueprint": {
+  "is": null,
+  "from": "lem-weil-pbc-site-cech-vanishing-criterion"
+ },
+ "kind": "statement",
+ "title": "Dimension-shifting data for the site Čech vanishing criterion",
+ "statement": "Under the hypotheses of lem-weil-pbc-site-cech-vanishing-criterion, for every U in B the degree-one cohomology vanishes and vanishing in degree p - 1 implies vanishing in degree p for p > 1.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "proof": [
+  {
+   "text": "Embed a Čech-acyclic sheaf into an injective, use the short exact section sequences and the long exact sequences of derived functors and Čech complexes. The injective is Čech-acyclic and has vanishing higher derived functors; the degree-one case follows from section surjectivity, and the higher case follows by dimension shifting.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Lemma Tag 03F9, injective embedding and dimension-shifting paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-cech-vanishing-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma Tag 03F9, proof"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteCechVanishingCriterion",
+  "date": "2026-10-12",
+  "group": "M2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteCechVanishingStep",
+  "file": "lean/Sheaf/CategoryTheory/SiteCechVanishingStep.lean",
+  "declaration": "CategoryTheory.Sheaf.siteCech_vanishing_dimension_shift",
+  "statement": "theorem siteCech_vanishing_dimension_shift\n    {C : Type u} [SmallCategory C]\n    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]\n    [J.IsStableUnderBaseChange] [J.HasPullbacks]\n    [HasSheafify J.toGrothendieck AddCommGrpCat.{u}]\n    [HasExt.{r} (Sheaf J.toGrothendieck AddCommGrpCat.{u})]\n    (B : Set C)\n    (Cov : ∀ (U : C) (T : Type u) (V : T → C), (∀ t, V t ⟶ U) → Prop)\n    (S : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),\n      Cov U T V f → SiteCechComplex V f)\n    (F : Sheaf J.toGrothendieck AddCommGrpCat.{u})\n    (hcover : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),\n      Cov U T V f → Presieve.ofArrows V f ∈ J U)\n    (hB : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U)\n      (h : Cov U T V f), U ∈ B ∧ (∀ t, V t ∈ B) ∧\n        ∀ (p : ℕ) (a : Fin (p + 1) → T), (S U T V f h).W p a ∈ B)\n    (hcofinal : ∀ (U : C), U ∈ B →\n      ∀ (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),\n        Presieve.ofArrows V f ∈ J U →\n        ∃ (K : Type u) (W : K → C) (g : ∀ k, W k ⟶ U),\n          Cov U K W g ∧ ∀ k, ∃ (t : T) (a : W k ⟶ V t), a ≫ f t = g k)\n    (hcech : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U)\n      (h : Cov U T V f) (p : ℕ), 0 < p →\n        IsZero (((S U T V f h).cohomologyFunctor p).obj F.obj)) :\n    ∀ U, U ∈ B →\n      IsZero (H' F 1 U) ∧\n        ∀ p, 1 < p → IsZero (H' F (p - 1) U) → IsZero (H' F p U)",
+  "branch": "sheaf-dag",
+  "by": "M2",
+  "date": "2026-10-12"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "dimension shifting Cech cohomology vanishing site",
+   "results": "no exact match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor long exact sequence dimension shift IsZero",
+   "results": "generic long exact declarations only; no site criterion",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "siteCech_vanishing_dimension_shift|dimension shifting Cech",
+   "results": "no existing declaration",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T053942-L-2639696",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261012T053942-L-2639696",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
