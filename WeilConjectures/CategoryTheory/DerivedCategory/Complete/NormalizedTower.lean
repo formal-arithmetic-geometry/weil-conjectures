@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Reduction
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
+public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 
 /-!
 # Strict models of normalized towers
@@ -558,5 +559,47 @@ theorem exists_isNormalizedAdicTower :
     Q_map_towerFunctor_map_comp_towerFunctorIso_hom φ ψ hψ L t⟩
 
 end Normalized
+
+section Quotient
+
+variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R)
+  (hI : I = Ideal.span {ϖ})
+
+include hI in
+lemma _root_.Ideal.Quotient.mk_pow_eq_zero_of_eq_span (n : ℕ) :
+    Ideal.Quotient.mk (I ^ n) (ϖ ^ n) = 0 := by
+  rw [Ideal.Quotient.eq_zero_iff_mem, hI, Ideal.span_singleton_pow]
+  exact Ideal.mem_span_singleton_self _
+
+include hϖ hI in
+lemma _root_.Ideal.Quotient.exact_mul_mk_pow (a b : ℕ) :
+    Function.Exact (fun x : R ⧸ I ^ (a + b) ↦ Ideal.Quotient.mk (I ^ (a + b)) (ϖ ^ a) * x)
+      (fun x ↦ Ideal.Quotient.mk (I ^ (a + b)) (ϖ ^ b) * x) := by
+  intro x
+  constructor
+  · intro hx
+    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
+    simp only at hx
+    rw [← map_mul, Ideal.Quotient.eq_zero_iff_mem, hI, Ideal.span_singleton_pow,
+      Ideal.mem_span_singleton] at hx
+    obtain ⟨z, hz⟩ := hx
+    refine ⟨Ideal.Quotient.mk _ z, ?_⟩
+    have : y = ϖ ^ a * z :=
+      (mul_cancel_left_mem_nonZeroDivisors (pow_mem hϖ b)).1 (by rw [hz]; ring)
+    simp only [this, map_mul]
+  · rintro ⟨w, rfl⟩
+    obtain ⟨z, rfl⟩ := Ideal.Quotient.mk_surjective w
+    simp only [← map_mul, Ideal.Quotient.eq_zero_iff_mem, hI, Ideal.span_singleton_pow,
+      Ideal.mem_span_singleton]
+    exact ⟨z, by ring⟩
+
+include hI in
+lemma _root_.Ideal.Quotient.ker_factor_pow_eq_span {n m : ℕ} (h : n ≤ m) :
+    RingHom.ker (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) h)) =
+      Ideal.span {Ideal.Quotient.mk (I ^ m) (ϖ ^ n)} := by
+  rw [Ideal.Quotient.factor_ker, hI]
+  simp only [Ideal.span_singleton_pow, Ideal.map_span, Set.image_singleton]
+
+end Quotient
 
 end DerivedCategory

@@ -11,6 +11,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.AdicTower
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
 public import WeilConjectures.EulerProduct
 public import WeilConjectures.SixFunctors.ProEtale.TraceFormula.Main
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
@@ -177,59 +179,88 @@ noncomputable abbrev levelTransitionRestrictScalars {j n : ℕ} (h : j ≤ n) :
 variable (X) in
 /-- Restricting scalars from `R/Iʲ` to `R/Iⁿ` and then to `R` is restricting scalars from
 `R/Iʲ` to `R`. -/
-noncomputable def levelRestrictScalarsCompIso {j n : ℕ} (h : j ≤ n) :
+noncomputable abbrev levelRestrictScalarsCompIso {j n : ℕ} (h : j ≤ n) :
     levelTransitionRestrictScalars X I h ⋙ levelRestrictScalars X I n ≅
       levelRestrictScalars X I j :=
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (Sheaf.restrictScalarsCompIso _ _ _ _
-      (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right h)).symm)
+  Sheaf.derivedRestrictScalarsCompIso _
+    (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right h)).symm
 
 /-- A tower `K : ℕᵒᵖ ⥤ D(X, R)` is *normalized* with respect to an ideal `I` and levels
-`L_n ∈ D(X, A_n)` over the rings `A_n = R/Iⁿ` if, as in blueprint `sk-prop-trace-adic`:
+`L_n ∈ D(X, A_n)` over the rings `A_n = R/Iⁿ` (blueprints `def-trf-adic-system` and
+`sk-prop-trace-adic`) if
 - `K_n` is `L_n` with scalars restricted to `R`;
-- for `j ≤ n`, the base change `L_n ⊗ᴸ_{A_n} A_n/I^j A_n` of `L_n` along `A_n → A_j` is
-  isomorphic to `L_j` with scalars restricted to `A_n`;
-- the transition `K_n ⟶ K_j` is the restriction to `R` of the reduction
-  `L_n ⟶ L_n ⊗ᴸ_{A_n} A_n/I^j A_n` followed by this isomorphism.
+- the transition `K_{n+1} ⟶ K_n` is the restriction to `R` of a map
+  `t_n : L_{n+1} ⟶ Res L_n` in `D(X, A_{n+1})` exhibiting `L_n` as the derived base change
+  `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n` (`CategoryTheory.Sheaf.IsDerivedBaseChange`): the canonical map
+  `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n ⟶ L_n` is an isomorphism.
 
-The base change is taken over `A_n`, not over `R`: for `I = (ϖ)` with `ϖ` a nonzerodivisor,
-`L_n ⊗ᴸ_R R/Iʲ` has an extra `Tor₁` term, and requiring it to be `L_j` would force the tower
-to vanish. -/
+The transitions `K_n ⟶ K_j` for `j ≤ n` are the composites of the consecutive ones, and their
+`A`-linear adjoints `L_n ⊗ᴸ_{A_n} A_j ⟶ L_j` are isomorphisms since derived base changes
+compose (`CategoryTheory.Sheaf.IsDerivedBaseChange.comp`). The base change is taken over
+`A_{n+1}`, not over `R`: for `I = (ϖ)` with `ϖ` a nonzerodivisor, `L_n ⊗ᴸ_R R/Iʲ` has an extra
+`Tor₁` term. -/
 def IsNormalizedTower
     (K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
     (L : ∀ n : ℕ,
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n)))) :
     Prop :=
   ∃ (eK : ∀ n : ℕ, K.obj (Opposite.op n) ≅ (levelRestrictScalars X I n).obj (L n))
-    (e : ∀ n j : ℕ, ∀ h : j ≤ n,
-      (DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X)
-          (I.map (Ideal.Quotient.mk (I ^ n))) (L n)).obj (Opposite.op j) ≅
-        (levelTransitionRestrictScalars X I h).obj (L j)),
-    ∀ n j : ℕ, ∀ h : j ≤ n, K.map (homOfLE h).op =
-      (eK n).hom ≫ (levelRestrictScalars X I n).map
-        ((DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X)
-          (I.map (Ideal.Quotient.mk (I ^ n))) (L n)).π.app (Opposite.op j) ≫ (e n j h).hom) ≫
-        (levelRestrictScalarsCompIso X I h).hom.app (L j) ≫ (eK j).inv
+    (t : ∀ n : ℕ, L (n + 1) ⟶ (levelTransitionRestrictScalars X I n.le_succ).obj (L n)),
+    (∀ n : ℕ, Sheaf.IsDerivedBaseChange (t n)) ∧
+    ∀ n : ℕ, K.map (homOfLE n.le_succ).op =
+      (eK (n + 1)).hom ≫ (levelRestrictScalars X I (n + 1)).map (t n) ≫
+        (levelRestrictScalarsCompIso X I n.le_succ).hom.app (L n) ≫ (eK n).inv
 
-variable [IsAdicComplete I R] [IsDomain R] (hI : I.IsPrincipal)
+variable {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) (hI : I = Ideal.span {ϖ})
   {K : ℕᵒᵖ ⥤ DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
   {L : ∀ n : ℕ,
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (R ⧸ I ^ n)))}
   (hK : IsNormalizedTower I K L) (c : Cone K) (hc : IsHomotopyLimit c)
 
-include hI hK hc in
-/-- Adic realization, levelwise reduction: the realization `K_{𝒪_E} = R lim_n K_n` of a
-normalized system reduces to the given levels, `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, compatibly with the
-transitions, and the legs `K_{𝒪_E} ⟶ K_n` are the reduction maps followed by these
-isomorphisms (blueprint: `sk-prop-trace-adic`). -/
+include hϖ hI hK hc in
+/-- Adic realization, levelwise reduction (blueprint: `sk-prop-trace-adic` (i)): the realization
+`K_{𝒪_E} = R lim_n K_n` of a normalized system reduces to the given levels,
+`K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, compatibly with the transitions, and the legs `K_{𝒪_E} ⟶ K_n` are the
+reduction maps followed by these isomorphisms.
+
+The tower is first strictified (`DerivedCategory.exists_isNormalizedAdicTower`) into a tower of
+complexes `T_n` of sheaves of `R`-modules with `T_n` killed by `ϖⁿ` and flat over `R/Iⁿ`; the
+statement for such towers is
+`DerivedCategory.exists_derivedCompletionDiagram_iso_of_isNormalizedAdicTower`. -/
 theorem exists_derivedCompletionDiagram_iso :
     ∃ e : DerivedCategory.derivedCompletionDiagram (Scheme.ProEt.topology X) I c.pt ≅ K,
       ∀ n : ℕ, c.π.app (Opposite.op n) =
         (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
-          (Opposite.op n) ≫ e.hom.app (Opposite.op n) :=
-  sorry
+          (Opposite.op n) ≫ e.hom.app (Opposite.op n) := by
+  obtain ⟨eK, t, ht, hmap⟩ := hK
+  obtain ⟨T, e, hT, he⟩ := DerivedCategory.exists_isNormalizedAdicTower
+    (J := Scheme.ProEt.topology X) (R := R) (A := fun n ↦ R ⧸ I ^ n) (fun h ↦ Ideal.Quotient.factor (Ideal.pow_le_pow_right h))
+    (fun n ↦ Ideal.Quotient.mk (I ^ n)) (fun h ↦ Ideal.Quotient.factor_comp_mk _)
+    (fun _ _ ↦ Ideal.Quotient.factor_comp _ _) (Ideal.Quotient.mk_pow_eq_zero_of_eq_span hI)
+    (Ideal.Quotient.exact_mul_mk_pow hϖ hI) (fun _ ↦ Ideal.Quotient.factor_surjective _)
+    (Ideal.Quotient.ker_factor_pow_eq_span hI) L t ht
+  let α : T ⋙ DerivedCategory.Q ⟶ K := NatTrans.ofOpSequence
+    (fun n ↦ (e n).hom ≫ (eK n).inv) (fun n ↦ by
+      dsimp
+      rw [hmap n, reassoc_of% (he n)]
+      simp)
+  have : ∀ n, IsIso (α.app n) := fun n ↦ by
+    simp only [α, NatTrans.ofOpSequence_app]
+    infer_instance
+  have : IsIso α := NatIso.isIso_of_isIso_app _
+  let E := asIso α
+  let c' : Cone (T ⋙ DerivedCategory.Q) := { pt := c.pt, π := c.π ≫ E.inv }
+  have hc' : IsHomotopyLimit c' :=
+    hc.of_iso E.symm c' (Iso.refl _) (fun n ↦ by simp [c'])
+  obtain ⟨e', he'⟩ :=
+    DerivedCategory.exists_derivedCompletionDiagram_iso_of_isNormalizedAdicTower hϖ hI hT hc'
+  refine ⟨e' ≪≫ E, fun n ↦ ?_⟩
+  have h := he' n
+  simp only [c', NatTrans.comp_app] at h
+  calc c.π.app _ = (c.π.app (Opposite.op n) ≫ E.inv.app _) ≫ E.hom.app _ := by simp
+    _ = _ := by rw [h]; simp
 
-include hI hK hc in
+include hϖ hI hK hc in
 /-- Adic realization, levelwise reduction at a single level: `K_{𝒪_E} ⊗ᴸ R/Iⁿ ≅ K_n`, the leg
 `K_{𝒪_E} ⟶ K_n` being the reduction map followed by this isomorphism. -/
 theorem exists_derivedCompletionDiagram_obj_iso (n : ℕ) :
@@ -238,22 +269,22 @@ theorem exists_derivedCompletionDiagram_obj_iso (n : ℕ) :
       c.π.app (Opposite.op n) =
         (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt).π.app
           (Opposite.op n) ≫ e.hom := by
-  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hϖ hI hK c hc
   exact ⟨e.app _, he n⟩
 
-include hI hK hc in
+include hϖ hI hK hc in
 /-- Adic realization, derived completeness: the realization `K_{𝒪_E} = R lim_n K_n` of a
 normalized system `K_•` of finite-level complexes is derived complete, that is, it is the
 derived limit of its own reductions `K_{𝒪_E} ⊗ᴸ R/Iⁿ`: transport the Milnor triangle of `K_•`
 along `exists_derivedCompletionDiagram_iso`. -/
 theorem isHomotopyLimit_derivedCompletionCone :
     IsHomotopyLimit (DerivedCategory.derivedCompletionCone (Scheme.ProEt.topology X) I c.pt) := by
-  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hϖ hI hK c hc
   refine hc.of_iso e.symm _ (Iso.refl _) fun n ↦ ?_
   rw [he n, Category.assoc, Iso.symm_hom, Iso.hom_inv_id_app, Category.comp_id, Iso.refl_hom,
     Category.id_comp]
 
-include hI hK hc in
+include hϖ hI hK hc in
 /-- Adic realization, compact cohomology (blueprint: `sk-prop-trace-adic` (ii)): compactly
 supported cohomology commutes with the realization, `RΓ_c(X, K_{𝒪_E}) ≅ R lim_n RΓ_c(X, K_n)`.
 
@@ -275,12 +306,12 @@ theorem exists_iso_rightDerivedLowerShriek_realization (aX : X ⟶ s) [HasCompac
       ∃ f : d.pt ≅ d'.pt, ∀ n : ℕ, f.hom ≫ d'.π.app (Opposite.op n) =
         d.π.app (Opposite.op n) ≫
           (rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX).map (e.hom.app (Opposite.op n)) := by
-  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hϖ hI hK c hc
   obtain ⟨f, hf⟩ := hd.exists_iso_of_iso
     (Functor.isoWhiskerRight e (rightDerivedLowerShriek (ModuleCat.{u + 1} R) aX)) hd'
   exact ⟨e, he, f, hf⟩
 
-include hI hK hc in
+include hϖ hI hK hc in
 /-- Adic realization, geometric stalks (blueprint: `sk-prop-trace-adic` (ii)): the stalk at a
 geometric point commutes with the realization, `(K_{𝒪_E})_x̄ ≅ R lim_n (K_n)_x̄`.
 
@@ -303,7 +334,7 @@ theorem exists_iso_leftDerivedUpperStar_realization (x : s ⟶ X)
         d.π.app (Opposite.op n) ≫
           ((upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor).map
             (e.hom.app (Opposite.op n)) := by
-  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hI hK c hc
+  obtain ⟨e, he⟩ := exists_derivedCompletionDiagram_iso I hϖ hI hK c hc
   obtain ⟨f, hf⟩ := hd.exists_iso_of_iso
     (Functor.isoWhiskerRight e (upperStar (ModuleCat.{u + 1} R) x).leftDerivedFunctor) hd'
   exact ⟨e, he, f, hf⟩

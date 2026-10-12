@@ -46,33 +46,33 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 attribute [-instance] commShift₂CurriedTensor commShiftTensorLeft commShiftTensorRight
   isTriangulated_tensorLeft isTriangulated_tensorRight monoidalPreadditive monoidalLinear
 
-noncomputable local instance (priority := high) :
+noncomputable local instance (priority := high) adicTowerMonoidalCategory :
     MonoidalCategory (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalCategory
 
-noncomputable local instance (priority := high) :
+noncomputable local instance (priority := high) adicTowerMonoidalPreadditive :
     MonoidalPreadditive (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalPreadditive
 
-noncomputable local instance (priority := high) :
+noncomputable local instance (priority := high) adicTowerMonoidalLinear :
     MonoidalLinear R (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :=
   (sheafTensorStructure J R).monoidalLinear
 
-noncomputable local instance (priority := high) :
+noncomputable local instance (priority := high) adicTowerCommShift₂ :
     (curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).CommShift₂Int :=
   (sheafTensorStructure J R).commShift₂
 
-noncomputable local instance (priority := high)
+noncomputable local instance (priority := high) adicTowerIsTriangulatedLeft
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorLeft K
 
-noncomputable local instance (priority := high)
+noncomputable local instance (priority := high) adicTowerIsTriangulatedRight
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ((curriedTensor (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))).flip.obj K).IsTriangulated :=
   (sheafTensorStructure J R).isTriangulated_tensorRight K
 
-local instance : IsIso (sheafTensorStructure J R).ε := (sheafTensorStructure J R).isIso_ε
+local instance adicTowerIsIsoε : IsIso (sheafTensorStructure J R).ε := (sheafTensorStructure J R).isIso_ε
 
 variable {J}
 
