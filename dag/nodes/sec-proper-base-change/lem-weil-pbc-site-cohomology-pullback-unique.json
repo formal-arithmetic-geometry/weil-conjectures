@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-site-cohomology-pullback-unique",
+ "kind": "statement",
+ "title": "Object cohomology pullback unique",
+ "statement": "theorem siteCohomology_pullback_unique {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (U : C ⥤ D) [U.IsContinuous J K] [(sheafPullback U AddCommGrpCat.{u} J K).Additive] [PreservesFiniteLimits (sheafPullback U AddCommGrpCat.{u} J K)] [PreservesFiniteColimits (sheafPullback U AddCommGrpCat.{u} J K)] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})] [HasExt.{u} (Sheaf K AddCommGrpCat.{u})] (f g : SiteCohomologyFamily J K U) (hf : SiteCohomologyFamily.IsPullback J K U f) (hg : SiteCohomologyFamily.IsPullback J K U g) : f = g Uses [lem-weil-pbc-site-cohomology-pullback-data].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section Tag 01F7 (section-functoriality): Lemma Tag 01F8 (lemma-functoriality) and Remark Tag 01FB, written for ringed spaces; for sites the same construction with f_* = u^s (sites-cohomology.tex Remark Tag 08J6 remark-before-Leray); universality of the delta-functor H^*(V,-): derived.tex Lemma Tag 015B (lemma-higher-derived-functors) (4)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-site-cohomology-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Use injectivity of evaluation at the free generator in degree zero. Induct on the degree. Embed the coefficient sheaf in an injective and take its cokernel. Positive Ext into the injective vanishes, so the connecting map is surjective. Lift a class through this map, use compatibility of both families with the boundary, and use induction on the cokernel.",
+   "uses": [
+    "lem-weil-pbc-site-cohomology-pullback-data",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-cohomology-pullback-data",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Section Tag 01F7 (section-functoriality): Lemma Tag 01F8 (lemma-functoriality) and Remark Tag 01FB, written for ringed spaces; for sites the same construction with f_* = u^s (sites-cohomology.tex Remark Tag 08J6 remark-before-Leray); universality of the delta-functor H^*(V,-): derived.tex Lemma Tag 015B (lemma-higher-derived-functors) (4); Ext-based implementation, adapted from earlier T2 sandbox work."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Ext maps induced by an exact functor preserve composition and extension classes",
+   "results": "Unavailable: service returned Internal Server Error.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "Ext.mapExactFunctor, mapExactFunctor_comp, mapExactFunctor_mk₀, mapExactFunctor_extClass; used as tools. No single theorem is this objectwise normalized family result.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor_extClass|covariant_sequence_exact₁|eq_zero_of_injective in Mathlib/Algebra/Homology/DerivedCategory/Ext",
+   "results": "Map.lean:235; ExactSequences.lean:144; EnoughInjectives.lean:100. These prove the required product, lifting and vanishing steps.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural map on Ext cohomology commuting with connecting homomorphisms is uniquely determined in degree zero",
+   "results": "Found Ext.ext, Ext.ext_iff and injective-resolution equivalences, but none states this family characterization. The proof instead uses the exact-sequence and injective-vanishing APIs directly. Related upstream SheafCohomologyBijective and Ext/MapBijective declarations concern bijective maps, not uniqueness of normalized families.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteCohomologyPullback",
+  "date": "2026-10-12",
+  "group": "T1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-site-cohomology-pullback",
+   "place": "Ext-based proof of the normalized pullback characterization",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SiteCohomologyPullbackUnique",
+  "file": "lean/Sheaf/CategoryTheory/SiteCohomologyPullbackUnique.lean",
+  "declaration": "CategoryTheory.siteCohomology_pullback_unique",
+  "declarations": [
+   "CategoryTheory.siteCohomology_pullback_unique"
+  ],
+  "statement": "theorem siteCohomology_pullback_unique {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (U : C ⥤ D) [U.IsContinuous J K] [(sheafPullback U AddCommGrpCat.{u} J K).Additive] [PreservesFiniteLimits (sheafPullback U AddCommGrpCat.{u} J K)] [PreservesFiniteColimits (sheafPullback U AddCommGrpCat.{u} J K)] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})] [HasExt.{u} (Sheaf K AddCommGrpCat.{u})] (f g : SiteCohomologyFamily J K U) (hf : SiteCohomologyFamily.IsPullback J K U f) (hg : SiteCohomologyFamily.IsPullback J K U g) : f = g",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692603",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261012T135316-L-1692603",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

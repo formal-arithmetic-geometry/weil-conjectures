@@ -13,9 +13,10 @@ public import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 public import Sheaf.CategoryTheory.DeltaFunctor
 public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 public import Sheaf.CategoryTheory.SiteMorphismComposition
-import Sheaf.CategoryTheory.Abelian.HorseshoeResolutions
-import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
-import Sheaf.CategoryTheory.InjectiveResolutionSESComplexes
+
+import Sheaf.CategoryTheory.SiteCohomologyPullbackExists
+import Sheaf.CategoryTheory.SiteCohomologyPullbackUnique
+import Sheaf.CategoryTheory.SiteCohomologyPullbackComposite
 
 /-!
 # Pullback on cohomology over objects of sites
@@ -221,6 +222,17 @@ theorem siteCohomology_pullback
                 ((sheafPullback U AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).obj A) ≫
               ((Sheaf.cohomologyPresheafFunctor L.toGrothendieck p).map (e.inv.app A)).app
                 (op (W.obj (U.obj V))) := by
-  sorry
+  change (∃! f : SiteCohomologyFamily J.toGrothendieck K.toGrothendieck U,
+    SiteCohomologyFamily.IsPullback J.toGrothendieck K.toGrothendieck U f) ∧ _
+  obtain ⟨_, hUl, hUc, _⟩ := sitePullback_abelian_exact J K U hUcover hUpullback
+  let := hUl
+  let := hUc
+  obtain ⟨fstar, hf⟩ := siteCohomology_pullback_exists
+    J.toGrothendieck K.toGrothendieck U
+  refine ⟨⟨fstar, hf, ?_⟩, ?_⟩
+  · intro g hg
+    exact siteCohomology_pullback_unique J.toGrothendieck K.toGrothendieck U g fstar hg hf
+  · exact siteCohomology_pullback_composite J K L U W
+      hUcover hUpullback hWcover hWpullback
 
 end CategoryTheory
