@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
 public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.PopescuLifting
+import Sheaf.RingTheory.PopescuSmoothLiftModuloEightAux
 
 /-! # Lifting the factorization modulo the eighth power -/
 
@@ -57,4 +58,18 @@ theorem exists_popescu_smooth_lift_modulo_eight
         ∀ (a : A) (d : D),
           φ (Ideal.Quotient.mk _ a) = Ideal.Quotient.mk _ d →
           Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (α a) =
-            Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (δ d) := by sorry
+          Ideal.Quotient.mk (Ideal.span {(algebraMap R Λ π) ^ 4}) (δ d) :=
+  set_option linter.style.haveILetI false in by
+  obtain ⟨D, _instD, _algD, _fpD, δ, hsmooth, hφ⟩ :=
+    exists_popescu_smooth_lift_data R Λ A α π hπ hπΛ hmod
+  letI : CommRing D := _instD
+  letI : Algebra R D := _algD
+  letI : Algebra.FinitePresentation R D := _fpD
+  have hz : PrimeSpectrum.zeroLocus (Algebra.singularIdeal R D : Set D) = ∅ := by
+    rw [(Algebra.singularIdeal_zeroLocus R D).1]
+    ext q
+    simp only [Set.mem_empty_iff_false, Set.mem_ofPred_eq, iff_false]
+    exact fun h => h (hsmooth q)
+  have hsing : Algebra.singularIdeal R D = ⊤ :=
+    (PrimeSpectrum.zeroLocus_empty_iff_eq_top.mp hz)
+  exact ⟨D, inferInstance, inferInstance, inferInstance, δ, hsing, hφ⟩
