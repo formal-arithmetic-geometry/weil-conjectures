@@ -25,57 +25,27 @@
  ],
  "proof": [
   {
-   "text": "For the forward implication, a complex P^\\bullet of flat A-modules concentrated in [a,b] is K-flat by the bounded-above flat-complex theorem [lem-pc-module-bounded-flat-kflat]. Therefore derived tensoring P^\\bullet with any A-module N is represented by the ordinary tensor complex P^\\bullet\\otimes_A N, which is zero outside [a,b]; hence its cohomology vanishes outside [a,b].",
-   "uses": [
-    "lem-pc-module-bounded-flat-kflat",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.59.3 (Tag 0654), forward implication"
-   }
+   "text": "Specialize the proved generic theorem DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat to C = ModuleCat A and K = Q.obj M. The instance ModuleCat.hasFunctorialFlatResolution supplies the required resolution hypothesis.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Conversely, assume M^\\bullet has Tor amplitude in [a,b]. By the standard t-structure truncation description [def-sbc-standard-tstructure-derived-category], replace M^\\bullet by its canonical upper truncation at b; the map from this truncation to M^\\bullet is a quasi-isomorphism because the cohomology above b vanishes, and the representative is zero above b. A bounded-above flat replacement of it, obtained by specializing [lem-pc-kflat-bounded-flat-replacement] to the one-point site of A, gives a quasi-isomorphic bounded-above flat complex P^\\bullet vanishing above b. Since P^\\bullet is K-flat by [lem-pc-module-bounded-flat-kflat], its ordinary tensor with every A-module computes the derived tensor. Testing the Tor-amplitude hypothesis against every A-module N therefore shows that P^\\bullet\\otimes_A N is exact in degree a-1; the Tor criterion [lem-pc-module-flat-opcycles-tor-criterion] makes the cokernel P^a/\\operatorname{im}(d^{a-1}) flat.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-module-flat-opcycles-tor-criterion",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.59.3 (Tag 0654), converse implication and truncation"
-   }
+   "text": "For every module N, categorical flatness is equivalent to Module.Flat A N: ObjectProperty.flat_iff_preservesFiniteLimits identifies both with finite-limit preservation of tensorLeft N, via Module.Flat.iff_preservesFiniteLimits_tensorLeft. Convert the generic theorem termwise.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Let E^\\bullet be the complex with E^i=0 for i<a, E^a=P^a/\\operatorname{im}(d^{a-1}), E^i=P^i for i>a, with differentials induced by those of P^\\bullet, and let P^\\bullet\\to E^\\bullet be the evident surjection (this is the canonical truncation \\tau_{\\ge a}P^\\bullet of Tag 0654). A direct computation gives H^i(E^\\bullet)=H^i(P^\\bullet) for i\\ge a (in degree a both equal \\ker d^a/\\operatorname{im}d^{a-1}) and H^i(E^\\bullet)=0 for i<a; since H^i(P^\\bullet)=H^i(M^\\bullet\\otimes_A^{\\mathbf L}A)=0 for i<a by the Tor-amplitude hypothesis with N=A, the surjection is a quasi-isomorphism, hence an isomorphism in D(A) [def-weil-abstract-derived-category]. Its term E^a is flat by the Tor criterion [lem-pc-module-flat-opcycles-tor-criterion] as shown in the preceding step, and E^i=P^i is flat for i>a. As P^\\bullet is zero above b, E^\\bullet is a complex of flat A-modules concentrated in [a,b] representing M^\\bullet in D(A).",
-   "uses": [
-    "lem-pc-module-flat-opcycles-tor-criterion",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.59.3 (Tag 0654), truncation at degree a"
-   }
+   "text": "Convert IsStrictlyGE and IsStrictlyLE to termwise vanishing using the support lemmas, reverse the derived isomorphism, and apply the generic equivalence in both directions. The fixed hab hypothesis is unused because the generic theorem does not require ordering.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [
-  "lem-pc-module-bounded-flat-kflat",
-  "def-pc-kflat-complex",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-module-flat-opcycles-tor-criterion",
-  "def-weil-abstract-derived-category",
-  "def-sbc-standard-tstructure-derived-category"
- ],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.59.3 (Tag 0654)"
+  "by": "agent",
+  "group": "M3",
+  "date": "2026-10-13",
+  "note": "Specialization and elementary interface conversions of the proved generic FlatModel theorem."
  },
  "mathlib_searches": [
   {
@@ -178,5 +148,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261012T203945-L-831000",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
