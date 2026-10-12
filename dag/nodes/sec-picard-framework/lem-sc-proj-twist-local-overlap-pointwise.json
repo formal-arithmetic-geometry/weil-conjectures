@@ -1,0 +1,98 @@
+{
+ "id": "lem-sc-proj-twist-local-overlap-pointwise",
+ "kind": "statement",
+ "title": "Pointwise overlap equality for twist representatives",
+ "statement": "Under the hypotheses and local evaluation data of lem-sc-proj-twist-local-overlap-compatibility, for any fixed chart indices i,j the two canonical representatives have equal value at every homogeneous prime of the basic open.",
+ "stmt_deps": [
+  "lem-sc-proj-twist-local-overlap-compatibility"
+ ],
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "local fraction comparison on the overlap"
+ },
+ "proof": [
+  {
+   "text": "Use additivity and scalar compatibility of each evaluation to identify both localized representatives with the common section value at the prime.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01M7",
+  "place": "local fraction comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localized module overlap representatives pointwise evaluation equality",
+   "results": "No exact match found; theorem is project-specific.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "IsLocalizedModule lift overlap equality",
+   "results": "No exact match found.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "twist local overlap pointwise",
+   "results": "No existing declaration.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility",
+  "date": "2026-10-13",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-proj-twist-local-overlap-compatibility",
+   "place": "pointwise overlap step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjTwistLocalOverlapCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjTwistLocalOverlapCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Proj.twist_localOverlap_pointwise",
+  "statement": "theorem twist_localOverlap_pointwise\n    {A σ : Type v} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]\n    (𝒜 : ℕ → σ) [GradedRing 𝒜] (k : ℤ) (f : A) (b : ℕ)\n    (hb : 0 < b) (hf : f ∈ 𝒜 b)\n    (s : (twist 𝒜 k).val.obj (op (basicOpen 𝒜 f)))\n    (n : ℕ) (g : Fin n → HomogeneousLocalization.Away 𝒜 f)\n    (t : ∀ i : Fin n, LocalizedModule.Away (g i)\n      (LocalizedModule.Away f A))\n    (hlocal : ∀ (i : Fin n) (p : basicOpen 𝒜 f),\n      let F := IsLocalization.map (M := Submonoid.powers f)\n        (T := p.1.asHomogeneousIdeal.toIdeal.primeCompl)\n        (Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal) (RingHom.id A)\n        (Submonoid.powers_le.mpr p.2)\n      IsUnit (F (algebraMap (HomogeneousLocalization.Away 𝒜 f)\n        (LocalizedModule.Away f A) (g i))) →\n      ∃ e : LocalizedModule.Away (g i) (LocalizedModule.Away f A) →+\n          Localization.AtPrime p.1.asHomogeneousIdeal.toIdeal,\n        (∀ z : LocalizedModule.Away f A,\n          e (LocalizedModule.mkLinearMap (Submonoid.powers (g i))\n            (LocalizedModule.Away f A) z) = F z) ∧\n        (∀ (a : HomogeneousLocalization.Away 𝒜 f)\n          (x : LocalizedModule.Away (g i) (LocalizedModule.Away f A)),\n          e (a • x) = F (algebraMap (HomogeneousLocalization.Away 𝒜 f)\n            (LocalizedModule.Away f A) a) * e x) ∧\n        e (t i) = (s.1 p).1)\n    (i j : Fin n) :\n      let ρ := fun (a h : HomogeneousLocalization.Away 𝒜 f) (ha : a ∣ h) ↦\n        IsLocalizedModule.lift (Submonoid.powers a)\n          (LocalizedModule.mkLinearMap (Submonoid.powers a)\n            (LocalizedModule.Away f A))\n          (LocalizedModule.mkLinearMap (Submonoid.powers h)\n            (LocalizedModule.Away f A))\n          (RingTheory.localizationAway_map_units_of_dvd\n            (M := LocalizedModule.Away f A) a h ha)\n      ρ (g i) (g i * g j) (dvd_mul_right (g i) (g j)) (t i) =\n        ρ (g j) (g i * g j) (dvd_mul_left (g j) (g i)) (t j) ",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184314-L-4008282",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T184314-L-4008282",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
