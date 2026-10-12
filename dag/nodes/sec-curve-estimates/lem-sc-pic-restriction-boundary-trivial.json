@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-pic-restriction-boundary-trivial",
+ "kind": "statement",
+ "title": "Omitted point classes restrict trivially",
+ "statement": "Under the hypotheses of lem-sc-pic-restriction-exact, let P be a closed point of c.Z whose underlying point is not in the image of c.i. Then Scheme.Pic.mapHom c.i sends O(P), the dual point-ideal class [def-sc-invertible-module, def-sc-picard-group], to 1.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+  "place": "Proof: first paragraph, restriction and boundary divisors"
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "lem-sc-compactification",
+  "def-sc-invertible-module",
+  "def-sc-picard-group",
+  "def-sc-divisor"
+ ],
+ "proof": [
+  {
+   "text": "Let J be the reduced vanishing ideal of P. Its support is {P}. The support of J.comap c.i is the inverse image of this singleton, which is empty by the boundary hypothesis. support_eq_bot_iff therefore gives J.comap c.i = top. J is invertible by the closed-point Cartier theorem; its comap is invertible as the top ideal.",
+   "uses": [
+    "lem-sc-point-cartier",
+    "def-sc-divisor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The source nonempty_pullback_toModules_iso identifies the pullback of J.toModules with the module of its comap. Pic.eq_iff_nonempty_iso gives equality of their Picard classes. Rewrite O(P) as the inverse of the class of J, use map_inv, and identify the top-ideal class with 1 using Pic.ofIsInvertible_toModules_top. Thus O(P) pulls back to 1.",
+   "uses": [
+    "lem-sc-pic-group",
+    "lem-pc-recd-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-point-cartier",
+  "def-sc-divisor",
+  "lem-sc-pic-group",
+  "lem-pc-recd-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd-affine/lem-sc-pic-affine.md",
+  "place": "Proof: first paragraph, restriction and boundary divisors"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Picard group restriction to an open subscheme of a smooth curve surjective kernel boundary divisors",
+   "results": "Hits: ClassGroup.mkMMem_surjective, ClassGroup.mk0_surjective, Submodule.range_unitsToPic, CommRing.relPic, WeierstrassCurve.Affine.Point.toClass_some, Submodule.mulExact_unitsToPic_mapAlgebra, WeierstrassCurve.Affine.Point.toClass_apply, AlgebraicGeometry.Scheme.IdealSheafData.subschemeι_app_surjective. No scheme Picard restriction or principal-correction statement.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "Finsupp.induction_linear",
+   "results": "Hits: Finsupp.induction_linear. No scheme Picard restriction or principal-correction statement.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "Pic.*restrict|restrict.*Pic|principalDivisors",
+   "results": "Hits: Mathlib/GroupTheory/NoncommPiCoprod.lean, Mathlib/Probability/Process/Filtration.lean, Mathlib/Probability/Process/Filtration.lean, Mathlib/Probability/ProductMeasure.lean, Mathlib/Probability/ProductMeasure.lean, Mathlib/Probability/ProductMeasure.lean, Mathlib/Probability/ProductMeasure.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean. No scheme Picard restriction or principal-correction statement.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a point ideal under an open immersion is the unit ideal when the point is outside the image",
+   "results": "Unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg Pic.*restrict|restrict.*Pic|boundary.*Pic; rg pullback.*toModules|toModules.*pullback; rg comap_map in lean/Sheaf, lean/WeilConjectures and Mathlib",
+   "results": "Curve.Picard supplies the proved toPic class equivalence. EffectiveCartier supplies proved pullback comparisons. IdealSheaf.Functorial supplies comap_map. None states the principal correction. No existing node states either single-point restriction case.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A divisor with trivial line bundle on an open smooth curve differs from a divisor supported on the complement by a principal divisor",
+   "results": "Second reader: only MeromorphicOn/MeromorphicNFOn analytic divisor results and WeierstrassCurve.Affine.CoordinateRing.XYIdeal'; none supplies scheme principal correction.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"principalDivisors\"",
+   "results": "Second reader: no hits.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.PicRestrictionExact",
+  "date": "2026-10-12",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-constant-invariance",
+   "place": "Affine case: restriction from the smooth compactification and the boundary kernel",
+   "via": [
+    "lem-sc-pic-restriction-exact",
+    "lem-sc-pic-restriction-boundary"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-ext-invariance",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundaryTrivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicRestrictionBoundaryTrivial.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.pic_restriction_boundary_trivial",
+  "statement": "theorem Scheme.Hom.pic_restriction_boundary_trivial\n    {k : Type u} [Field k] [IsAlgClosed k] {C : Scheme.{u}}\n    (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f] [IsAffine C]\n    (c : Compactification f) [IsConnectedCurve c.g]\n    [hsm : SmoothOfRelativeDimension 1 c.g]\n    (P : closedPoints c.Z) (hP : P.val ∉ Set.range c.i.base) :\n    Scheme.Pic.mapHom c.i (@Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P) = 1",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T085218-L-4953",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261012T085218-L-4953",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

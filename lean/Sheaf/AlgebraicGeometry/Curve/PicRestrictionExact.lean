@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
-import Sheaf.AlgebraicGeometry.DivisorClassCurve
+import Sheaf.AlgebraicGeometry.Curve.PicRestrictionPointLift
+import Sheaf.AlgebraicGeometry.Curve.PicRestrictionBoundaryTrivial
+import Sheaf.AlgebraicGeometry.Curve.PicRestrictionDivisorCorrection
 
 /-!
 # Exactness of Picard restriction at the boundary
@@ -54,6 +56,93 @@ theorem Scheme.Hom.pic_restriction_exact
     Function.Surjective (Scheme.Pic.mapHom c.i) ∧
       (Scheme.Pic.mapHom c.i).ker = Subgroup.closure
         {L | ∃ P : closedPoints c.Z, P.val ∉ Set.range c.i.base ∧
-          L = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P} := by sorry
+          L = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P} := by
+  classical
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  let : c.Z.Over (Spec (.of k)) := ⟨c.g⟩
+  have : Smooth c.g := SmoothOfRelativeDimension.smooth 1 c.g
+  let : IsNoetherian C := isNoetherian_of_locallyOfFiniteType f
+  let : IsNoetherian c.Z := isNoetherian_of_locallyOfFiniteType c.g
+  have : ConnectedSpace C := IsConnectedCurve.connectedSpace' f
+  have : ConnectedSpace c.Z := IsConnectedCurve.connectedSpace' c.g
+  have : IsRegular C := IsRegular.of_smooth f
+  have : IsRegular c.Z := IsRegular.of_smooth c.g
+  have : IrreducibleSpace C := IsRegular.irreducibleSpace C
+  have : IrreducibleSpace c.Z := IsRegular.irreducibleSpace c.Z
+  have : IsReduced C := isReduced_of_isReduced_stalk C
+  have : IsReduced c.Z := isReduced_of_isReduced_stalk c.Z
+  have : IsIntegral C := isIntegral_of_irreducibleSpace_of_isReduced C
+  have : IsIntegral c.Z := isIntegral_of_irreducibleSpace_of_isReduced c.Z
+  let : SmoothOfRelativeDimension 1 f :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := f))
+  let : SmoothOfRelativeDimension 1 (C ↘ Spec (.of k)) := by
+    change SmoothOfRelativeDimension 1 f
+    infer_instance
+  let : SmoothOfRelativeDimension 1 (c.Z ↘ Spec (.of k)) := by
+    change SmoothOfRelativeDimension 1 c.g
+    exact hsm
+  let : IsCurve (C ↘ Spec (.of k)) := by change IsCurve f; infer_instance
+  let : IsCurve (c.Z ↘ Spec (.of k)) := by change IsCurve c.g; infer_instance
+  have hsurj (X : Scheme.{u}) [X.Over (Spec (.of k))]
+      [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
+      [IsCurve (X ↘ Spec (.of k))] [IsIntegral X] [IsNoetherian X] :
+      Function.Surjective (Scheme.Divisor.toPic k X) := by
+    obtain ⟨e, he⟩ := Scheme.exists_divisorClassGroup_addEquiv_pic (k := k) (C := X)
+    intro L
+    obtain ⟨D, hD⟩ := QuotientAddGroup.mk_surjective (e.symm L)
+    refine ⟨D, ?_⟩
+    rw [← he, hD, e.apply_symm_apply]
+  let r := Scheme.Pic.mapHom c.i
+  let B : Subgroup c.Z.Pic := Subgroup.closure
+    {L | ∃ P : closedPoints c.Z, P.val ∉ Set.range c.i.base ∧
+      L = @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P}
+  have hboundary (P : closedPoints c.Z) (hP : P.val ∉ Set.range c.i.base) :
+      @Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P ∈ B :=
+    Subgroup.subset_closure ⟨P, hP, rfl⟩
+  constructor
+  · intro L
+    obtain ⟨D, hD⟩ := hsurj C (Additive.ofMul L)
+    have hlift (D : C.Divisor) :
+        ∃ M : c.Z.Pic, r M = (Scheme.Divisor.toPic k C D).toMul := by
+      induction D using Finsupp.induction_linear with
+      | zero => exact ⟨1, by rw [map_zero, toMul_zero, map_one]⟩
+      | add D E hD hE =>
+          obtain ⟨M, hM⟩ := hD
+          obtain ⟨N, hN⟩ := hE
+          exact ⟨M * N, by simp [map_add, hM, hN]⟩
+      | single Q n =>
+          obtain ⟨P, _, hP⟩ := f.pic_restriction_point_lift c Q
+          refine ⟨@Scheme.Pic.ofClosedPoint k _ c.Z ⟨c.g⟩ hsm P ^ n, ?_⟩
+          simpa only [map_zpow, Scheme.Divisor.toPic_single, toMul_zsmul,
+            toMul_ofMul] using congrArg (fun M ↦ M ^ n) hP
+    obtain ⟨M, hM⟩ := hlift D
+    exact ⟨M, hM.trans (congrArg Additive.toMul hD)⟩
+  · apply le_antisymm
+    · intro L hL
+      obtain ⟨D, hD⟩ := hsurj c.Z (Additive.ofMul L)
+      have hzero : r (Scheme.Divisor.toPic k c.Z D).toMul = 1 := by
+        rw [hD]
+        exact hL
+      obtain ⟨E, hE, hsupp⟩ := f.pic_restriction_divisor_correction c D hzero
+      have hmem (E : c.Z.Divisor)
+          (hE : ∀ P : closedPoints c.Z, P.val ∈ Set.range c.i.base → E P = 0) :
+          (Scheme.Divisor.toPic k c.Z E).toMul ∈ B := by
+        have heq := Finsupp.sum_single E
+        rw [← heq]
+        rw [map_finsuppSum]
+        simp only [Finsupp.sum, toMul_sum, Scheme.Divisor.toPic_single,
+          toMul_zsmul, toMul_ofMul]
+        apply B.prod_mem
+        intro P hP
+        apply B.zpow_mem
+        apply hboundary
+        intro hPin
+        exact (Finsupp.mem_support_iff.mp hP) (hE P hPin)
+      have := hmem E hsupp
+      simpa only [hE, hD, toMul_ofMul] using this
+    · apply (Subgroup.closure_le _).2
+      rintro L ⟨P, hP, rfl⟩
+      exact f.pic_restriction_boundary_trivial c P hP
 
 end AlgebraicGeometry
