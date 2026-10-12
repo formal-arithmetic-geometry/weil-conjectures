@@ -9784,3 +9784,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/G1/Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationConstruction (stage 3; reviewer PASS; first push; landing 20261012T223404-L-1636443 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261012T223405-L-1636623 (proof); batch 20261012T223357; modules 1; new nodes 0)
 - 22:34 L: merged deliver/G2/Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial (stage 3; reviewer PASS; first push; landing 20261012T223405-L-1636835 (interface); batch 20261012T223357; modules 2; new nodes 1)
+- 22:34 L: merged deliver/G2/Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockResidueVanishes (stage 3; reviewer PASS; first push; landing 20261012T223405-L-1636936 (interface); batch 20261012T223357; modules 2; new nodes 1)

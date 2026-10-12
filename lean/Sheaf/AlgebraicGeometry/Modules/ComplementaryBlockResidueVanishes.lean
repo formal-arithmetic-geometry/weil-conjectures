@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
+import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
+import Sheaf.AlgebraicGeometry.Modules.LocalBlockResidueRank
 import Sheaf.AlgebraicGeometry.TensorPullback
 
 /-! # Fibrewise vanishing of the complementary block -/
@@ -62,6 +65,38 @@ theorem complementary_block_residue_eq_zero_of_rank_le
     (hrank : ∃ (R : CommRingCat.{u}) (_ : IsField R) (g : Spec R ⟶ Y),
       Set.range g.base = {j.base x.1} ∧
       ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).map g.appTop).rank ≤ a) :
-    (freeMatrix δ).map (U.toScheme.Γevaluation x) = 0 := by sorry
+    (freeMatrix δ).map (U.toScheme.Γevaluation x) = 0 := by
+  classical
+  obtain ⟨R, hR, g, himage, hbound⟩ := hrank
+  let A := freeMatrix (eM.inv ≫ φ ≫ eN.hom)
+  let B := (freeMatrix δ).map (U.toScheme.Γevaluation x)
+  let := hR.toField
+  let s : Spec R := IsLocalRing.closedPoint R
+  have hs : g.base s = j.base x.1 := by
+    have hm : g.base s ∈ Set.range g.base := ⟨s, rfl⟩
+    rw [himage] at hm
+    exact Set.mem_singleton_iff.mp hm
+  have hres : (A.map (Y.Γevaluation (j.base x.1))).rank ≤ a := by
+    apply le_trans _ hbound
+    let r := (A.map (Y.Γevaluation (j.base x.1))).rank
+    obtain ⟨i, k, hminor⟩ := (Matrix.le_rank_map_iff A
+      (Y.Γevaluation (j.base x.1)).hom r).mp le_rfl
+    let := (isField_Γ_Spec hR).toField
+    apply (Matrix.le_rank_map_iff A g.appTop.hom r).mpr
+    refine ⟨i, k, ?_⟩
+    apply (g.appTop_ne_zero_iff_mem_basicOpen (isField_Γ_Spec hR) _ s).mpr
+    rw [hs]
+    exact (Y.evaluation_ne_zero_iff_mem_basicOpen _ _ _).mp hminor
+  have hsum : a + B.rank ≤ a := by
+    rw [← local_block_residue_rank eM eN φ j a U eS eT f δ hform x]
+    exact hres
+  have hzero : B.rank = 0 := by omega
+  have hrange : LinearMap.range B.mulVecLin = ⊥ :=
+    Submodule.finrank_eq_zero.mp hzero
+  have hlin : B.mulVecLin = 0 := LinearMap.range_eq_bot.mp hrange
+  ext i k
+  change B i k = 0
+  have hv := congrArg (fun l ↦ l (Pi.single k 1) i) hlin
+  simpa using hv
 
 end AlgebraicGeometry.Scheme.Modules

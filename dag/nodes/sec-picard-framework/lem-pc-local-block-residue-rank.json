@@ -1,0 +1,147 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; source argument retained in the parent node docstring and unit record"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-free-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "def-weil-additive-category",
+  "def-weil-matrix-rank",
+  "def-weil-residue-field"
+ ],
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-pc-local-block-residue-rank",
+ "title": "Residue rank of a local invertible block form",
+ "statement": "Let Y,Z be schemes [def-pc-scheme], j:Z→Y an open immersion [def-weil-open-immersion], and U⊆Z open. Let M,N be sheaves of modules [def-weil-sheaf-of-modules-category] with specified finite free bases eM:M≅O_Y^m and eN:N≅O_Y^n [def-weil-pbc-free-module], and φ:M→N. Fix a natural number a and isomorphisms eS:(j* M)|U≅O_U^a⊕O_U^(m-a) and eT:(j* N)|U≅O_U^a⊕O_U^(n-a) [def-pc-module-pullback, lem-weil-pbc-module-restriction-open-immersion-colimits, def-weil-additive-category]. Suppose f:O_U^a→O_U^a is invertible, δ:O_U^(m-a)→O_U^(n-a), and (j*φ)|U=eS.hom≫diag(f,δ)≫eT.inv. For any x∈U, the rank of the matrix of φ in eM,eN evaluated in κ_Y(j(x)) [def-weil-matrix-rank, def-weil-residue-field] equals a plus the rank of the matrix of δ evaluated in κ_U(x). No field-valued test point or rank-bound assumption is required.",
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Modules.ComplementaryBlockResidueVanishes",
+  "date": "2026-10-13",
+  "group": "G2"
+ },
+ "proof": [
+  {
+   "text": "Pull back the stated normal form along the canonical map Spec κ_U(x)→U. Use restrictFunctorIsoPullback, pullback composition, and the free pullback isomorphisms to identify this with the fibre of φ in its original bases. Naturality of evaluation and the residue-field isomorphism of U→Z→Y identify the matrix rank in κ_Y(j(x)) with its rank in κ_U(x); invariance under extension of fields can be applied after reindexing ULift(Fin k) to Fin k. Isomorphic source and target bases preserve image dimension.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-module-pullback-restriction",
+    "def-pc-module-pullback",
+    "def-weil-open-immersion",
+    "def-weil-residue-field",
+    "lem-weil-matrix-rank-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pullback preserves the biproduct and the invertibility of f. On Spec κ_U(x), global sections identify the image of diag(f,δ) with the direct sum of the full a-dimensional first summand and the image of the evaluated δ. The freeMatrix_pullback identity and ΓSpecIso identify the latter matrix with freeMatrix δ evaluated at x. Additivity of finite vector-space dimension gives rank φ_x = a + rank δ_x. For a=0 the first dimension is zero; for an empty complementary index set the second image is zero. If U is empty there is no x.",
+   "uses": [
+    "def-weil-additive-category",
+    "def-weil-pbc-free-module",
+    "def-weil-matrix-rank",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-additive-category",
+  "def-weil-matrix-rank",
+  "def-weil-open-immersion",
+  "def-weil-pbc-free-module",
+  "def-weil-residue-field",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-matrix-rank-field-extension",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-semicon/thm-pc-semicontinuity-base-change.md",
+  "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; source argument retained in the parent node docstring and unit record; G2 isolates the local residue block-rank calculation from the rank-bound transfer and vanishing deduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The rank in the residue field of a morphism of finite free sheaves in block diagonal form with an invertible block is the size of that block plus the complementary rank",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A block diagonal matrix with an invertible block of size a has rank a plus the rank of the complementary block",
+   "results": "Matrix.Pivot.exists_isTwoBlockDiagonal_of_ne_zero and Matrix.isUnit_fromBlocks_zero₂₁; no sheaf residue rank comparison",
+   "date": "2026-10-13",
+   "verdict": "Related matrix tools only, no exact sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rank.*(block|diagonal)|block.*rank, and rank.*fromBlocks in Mathlib/LinearAlgebra/Matrix and the library Modules directories",
+   "results": "Matrix.Rank has rank invariance under invertible multiplication; the library has freeMatrix_pullback and rank_freeMatrix. Existing ComplementaryBlockVanishes calls the present item and is not a usable rank-comparison lemma. No exact local residue block-rank equality found.",
+   "date": "2026-10-13",
+   "verdict": "No exact existing statement"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-semicontinuity-base-change",
+   "place": "Proof (3), reduced-ring normal form: the complementary block vanishes in every residue field, hence over the reduced ring; source argument retained in the parent node docstring and unit record",
+   "via": [
+    "lem-pc-complementary-block-residue-vanishes",
+    "lem-pc-complementary-block-vanishes",
+    "lem-pc-constant-rank-map-local-normal-form-nonempty",
+    "lem-pc-constant-rank-map-local-normal-form",
+    "lem-pc-constant-rank-map-kernel-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Modules.LocalBlockResidueRank",
+  "file": "lean/Sheaf/AlgebraicGeometry/Modules/LocalBlockResidueRank.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.local_block_residue_rank",
+  "statement": "theorem local_block_residue_rank\n    {Y Z : Scheme.{u}} {M N : Y.Modules} {m n : ℕ}\n    (eM : M ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin m)))\n    (eN : N ≅ free (R := Y.ringCatSheaf) (ULift.{u} (Fin n)))\n    (φ : M ⟶ N) (j : Z ⟶ Y) [IsOpenImmersion j] (a : ℕ) (U : Z.Opens)\n    (eS : ((Modules.pullback j).obj M).restrict U.ι ≅\n      free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (m - a))))\n    (eT : ((Modules.pullback j).obj N).restrict U.ι ≅\n      free (ULift.{u} (Fin a)) ⊞ free (ULift.{u} (Fin (n - a))))\n    (f : free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin a)) ⟶\n      free (ULift.{u} (Fin a))) [IsIso f]\n    (δ : free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin (m - a))) ⟶\n      free (ULift.{u} (Fin (n - a))))\n    (hform : (restrictFunctor U.ι).map ((Modules.pullback j).map φ) =\n      eS.hom ≫ biprod.map f δ ≫ eT.inv)\n    (x : U.toScheme) : ((freeMatrix (eM.inv ≫ φ ≫ eN.hom)).map\n        (Y.Γevaluation (j.base x.1))).rank =\n      a + ((freeMatrix δ).map (U.toScheme.Γevaluation x)).rank",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T223405-L-1636936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T223405-L-1636936",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
