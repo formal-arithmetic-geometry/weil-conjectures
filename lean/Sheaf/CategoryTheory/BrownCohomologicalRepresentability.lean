@@ -6,8 +6,8 @@ module
 
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
-import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
-import Sheaf.CategoryTheory.CompactHomHocolim
+import Sheaf.CategoryTheory.BrownRepresentabilityConstruction
+import Sheaf.CategoryTheory.CohomologicalGeneratorDetection
 
 /-!
 # Brown representability for cohomological functors
@@ -46,6 +46,11 @@ theorem brownCohomologicalRepresentability
     (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological]
     (hH : ∀ (I : Type v), PreservesLimitsOfShape (Discrete I) H) :
     ∃ G : C, Nonempty (H ≅ preadditiveYoneda.obj G) := by
-  sorry
+  obtain ⟨I, E, hcompact, hgenerate⟩ := hC
+  obtain ⟨G, α, hα⟩ := brownRepresentabilityConstruction E hcompact H hH
+  have : ∀ X : Cᵒᵖ, IsIso (α.app X) :=
+    cohomologicalGeneratorDetection E hcompact hgenerate H hH G α hα
+  have : IsIso α := NatIso.isIso_of_isIso_app α
+  exact ⟨G, ⟨(asIso α).symm⟩⟩
 
 end CategoryTheory

@@ -1,0 +1,155 @@
+{
+ "id": "lem-pc-cohomological-generator-detection",
+ "kind": "statement",
+ "title": "Detection on shifted compact generators",
+ "statement": "Let C be a triangulated category [def-weil-triangulated-category] with Type v indexed coproducts and morphism universe v. Let I : Type v and E : I → C consist of compact objects [def-pc-compact-object] whose coproduct weakly generates C [def-pc-generators]. Let H : C opposite → Ab be cohomological [def-sp-homological-functor; def-sp-abelian] and preserve all Type v indexed products. For any G : C and any natural transformation α : Hom_C(-,G) → H, if α on E(i)[n] is an isomorphism for every i and integer n, its component at every object is an isomorphism. The map and object are inputs, not constructed here.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F proof, final localizing-subcategory argument"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "def-pc-generators",
+  "def-sp-homological-functor",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "For the given α define P(Y) to mean invertibility of α on Y[n] for every integer n. Shift composition and naturality give closure under shifts and isomorphisms. Apply the cohomological long exact sequences for representable Hom and H to a distinguished triangle and its shifts. The naturality squares commute, so the five lemma gives P for the third object when it holds for the other two.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-homological-functor",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown"
+   }
+  },
+  {
+   "text": "Both H and the represented Hom functor take coproducts to products. Shift equivalences preserve coproducts; under the product comparison α on a coproduct is the product of its components. Products of isomorphisms are isomorphisms, so P is closed under coproducts. Applied to a telescope triangle, coproduct closure and triangle closure give P for its homotopy colimit whenever all stages satisfy P.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-homological-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown"
+   }
+  },
+  {
+   "text": "The generator hypothesis on α says P(E i). The compactGenerators_buildObjects theorem expresses an arbitrary Y as a telescope with initial object a coproduct of shifts of E and transition cones also such coproducts. Thus the initial object has P; induction using its transition distinguished triangles shows every stage has P. Telescope closure gives P(Y). Taking shift zero and transporting along the canonical shift-zero isomorphism gives invertibility at op Y, hence at every object of C opposite.",
+   "uses": [
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "def-sp-homological-functor",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, Lemma lemma-brown",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct representing map using sequential telescope for additive cohomological functor compact objects; natural transformation isomorphism on compact generators",
+   "results": "Internal Server Error; service unavailable on both queries",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability cohomological functor compactly generated triangulated category; natural transformation between cohomological functors isomorphism on compact generators",
+   "results": "First query found the homological preadditive Yoneda instance and Functor.IsHomological, not Brown representability. Second query found derived-category quasi-isomorphism lemmas, not generator detection. Loogle preadditiveYoneda found only embedding and homological instances.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "brown|compact.*generat|isIso.*generat|generat.*isIso in Mathlib/CategoryTheory, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search Brown",
+   "results": "No Brown construction or cohomological generator-detection theorem. Existing project CompactHomHocolim and CompactGeneratorsBuildObjects supply the telescope comparison and generation statements, not the map or its cohomological closure. Blueprint search found no duplicate of these two substeps.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BrownCohomologicalRepresentability",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the Brown representability input used to produce a right adjoint from representability of Hom(F-, d); Tag 0A8F proof, final localizing-subcategory argument",
+   "via": [
+    "lem-pc-brown-cohomological-representability",
+    "lem-pc-brown-representability-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CohomologicalGeneratorDetection",
+  "file": "lean/Sheaf/CategoryTheory/CohomologicalGeneratorDetection.lean",
+  "declaration": "CategoryTheory.cohomologicalGeneratorDetection",
+  "statement": "theorem cohomologicalGeneratorDetection {I : Type v} (E : I → C) (hcompact : ∀ i : I, IsCompactObject (E i)) (hgenerate : IsTriangulatedGeneratingFamily E) (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological] (hH : ∀ (J : Type v), PreservesLimitsOfShape (Discrete J) H) (G : C) (α : preadditiveYoneda.obj G ⟶ H) (hα : ∀ (i : I) (n : ℤ), IsIso (α.app (Opposite.op ((E i)⟦n⟧)))) : ∀ X : Cᵒᵖ, IsIso (α.app X)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

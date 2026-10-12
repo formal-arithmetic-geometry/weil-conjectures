@@ -1,0 +1,156 @@
+{
+ "id": "lem-pc-brown-generator-construction",
+ "kind": "statement",
+ "title": "Brown telescope map on shifted compact objects",
+ "statement": "Let C be a triangulated category [def-weil-triangulated-category] with Type v indexed coproducts and morphism universe v. Let I : Type v and E : I → C be compact objects [def-pc-compact-object]. Let H : C opposite → Ab be cohomological [def-sp-homological-functor; def-sp-abelian] and preserve all Type v indexed products. Then there exist G : C and a natural transformation α : Hom_C(-,G) → H such that α on E(i)[n] is an isomorphism for every i and integer n. Generation is not assumed, and no invertibility on arbitrary objects is concluded.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F proof, generator coproducts, kernel-killing cones and telescope comparison"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-pc-compact-object",
+  "def-sp-homological-functor",
+  "def-sp-abelian"
+ ],
+ "proof": [
+  {
+   "text": "Replace E by its integer shifts. Each shift is compact because the inverse shift equivalence preserves coproducts and identifies the Hom comparison with the original one. Index the first coproduct by pairs (shifted generator, element of its H-value). This is a Type v index, since I, integers and H-values are small in v. The coproduct-to-product comparison gives an element on the coproduct. Additivity of H makes its Yoneda transformation a transformation of abelian-group-valued functors.",
+   "uses": [
+    "def-pc-compact-object",
+    "def-weil-triangulated-category",
+    "def-sp-homological-functor",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown"
+   }
+  },
+  {
+   "text": "For each stage take the coproduct indexed by maps from shifted E objects into that stage which evaluate to zero under the current Yoneda transformation. The summand maps define a map from this coproduct to the stage. Its image under H annihilates the stage element, as checked on each product projection. Complete it to a distinguished triangle. Cohomological exactness lifts the stage element to the next object. The triangle kills each indexed kernel element after transition. Iterate with choice on natural-number stages.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-sp-homological-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown"
+   }
+  },
+  {
+   "text": "Form a cone of identity minus transition shift on the countable coproduct. The stage elements are compatible, hence their product lies in the kernel of H of this endomorphism. Cohomological exactness lifts them to an element on the cone. Its additive Yoneda transformation α commutes with the stage maps. For any shifted generator compact_hom_hocolim identifies Hom into this cone with the sequential colimit. The first stage includes every H-element, giving surjectivity of α there; every element in its kernel comes from a stage and vanishes at the next stage by construction, giving injectivity. Bijective abelian-group homomorphisms are isomorphisms.",
+   "uses": [
+    "lem-pc-compact-hom-hocolim",
+    "def-sp-homological-functor",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8F, Lemma lemma-brown"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-compact-object",
+  "def-weil-triangulated-category",
+  "def-sp-homological-functor",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pc-compact-hom-hocolim"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8F, Lemma lemma-brown",
+  "by": "document"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Construct representing map using sequential telescope for additive cohomological functor compact objects; natural transformation isomorphism on compact generators",
+   "results": "Internal Server Error; service unavailable on both queries",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brown representability cohomological functor compactly generated triangulated category; natural transformation between cohomological functors isomorphism on compact generators",
+   "results": "First query found the homological preadditive Yoneda instance and Functor.IsHomological, not Brown representability. Second query found derived-category quasi-isomorphism lemmas, not generator detection. Loogle preadditiveYoneda found only embedding and homological instances.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "brown|compact.*generat|isIso.*generat|generat.*isIso in Mathlib/CategoryTheory, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search Brown",
+   "results": "No Brown construction or cohomological generator-detection theorem. Existing project CompactHomHocolim and CompactGeneratorsBuildObjects supply the telescope comparison and generation statements, not the map or its cohomological closure. Blueprint search found no duplicate of these two substeps.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.BrownCohomologicalRepresentability",
+  "date": "2026-10-12",
+  "group": "T3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "the Brown representability input used to produce a right adjoint from representability of Hom(F-, d); Tag 0A8F proof, generator coproducts, kernel-killing cones and telescope comparison",
+   "via": [
+    "lem-pc-brown-cohomological-representability",
+    "lem-pc-brown-representability-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BrownRepresentabilityConstruction",
+  "file": "lean/Sheaf/CategoryTheory/BrownRepresentabilityConstruction.lean",
+  "declaration": "CategoryTheory.brownRepresentabilityConstruction",
+  "statement": "theorem brownRepresentabilityConstruction {I : Type v} (E : I → C) (hcompact : ∀ i : I, IsCompactObject (E i)) (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological] (hH : ∀ (J : Type v), PreservesLimitsOfShape (Discrete J) H) : ∃ G : C, ∃ α : preadditiveYoneda.obj G ⟶ H, ∀ (i : I) (n : ℤ), IsIso (α.app (Opposite.op ((E i)⟦n⟧)))",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

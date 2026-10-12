@@ -26,61 +26,31 @@
  ],
  "proof": [
   {
-   "text": "Choose a set of compact generators for C and close it under shifts. For every generator E_i and element a in H(E_i), form the coproduct X_1 of copies of E_i indexed by these pairs. Since H carries coproducts to products, the family (a) defines an element of H(X_1); Yoneda gives a natural transformation Hom_C(-,X_1) to H.",
+   "text": "Unpack compact generation as a small family E of compact objects whose coproduct generates. Apply the Brown generator-construction theorem to E and H to get G and a natural transformation from its additive Yoneda functor to H, invertible on all shifted generators.",
    "uses": [
-    "def-weil-triangulated-category",
-    "def-sp-abelian",
-    "lem-galois-yoneda-hom-bijection"
+    "lem-pc-brown-generator-construction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0A8F, Lemma lemma-brown proof, construction of X_1"
+    "place": "Tag 0A8F, Lemma lemma-brown"
    }
   },
   {
-   "text": "Inductively, for X_n and a transformation Hom_C(-,X_n) to H, apply the same construction to its kernel on the compact generators. The resulting coproduct K_{n+1} maps to X_n by Yoneda. Complete this map to a distinguished triangle K_{n+1} \\to X_n \\to X_{n+1} \\to K_{n+1}[1], and use the long exact Hom sequences and the cohomological exactness of H [def-sp-homological-functor] to extend the transformation to Hom_C(-,X_{n+1}) \\to H while killing the previous kernel.",
+   "text": "Apply cohomological generator detection to this map using the extracted generation hypothesis. Every component is invertible. Mathlib NatIso.isIso_of_isIso_app upgrades this to an invertible natural transformation; the inverse of asIso α has the required orientation H ≅ preadditiveYoneda.obj G.",
    "uses": [
-    "def-weil-triangulated-category",
-    "def-sp-abelian",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "def-sp-homological-functor"
+    "lem-pc-cohomological-generator-detection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0A8F, Lemma lemma-brown proof, inductive cone construction"
-   }
-  },
-  {
-   "text": "Let X be the homotopy colimit of the X_n, defined by the telescope triangle \\bigoplus_n X_n \\xrightarrow{1-\\mathrm{shift}} \\bigoplus_n X_n \\to X \\to (\\bigoplus_n X_n)[1]. Apply H and its coproduct-to-product property: the compatible elements a_n lift through H(X) to an element a, hence a natural map Hom_C(-,X) \\to H. By [lem-pc-compact-hom-hocolim], Hom_C(E_i,X) is the colimit of Hom_C(E_i,X_n). The map to H(E_i) is surjective because X_1 included every element, and injective because every kernel element at stage n is killed at stage n+1. The objects Y on whose every shift this natural map is an isomorphism form a triangulated subcategory: apply the two cohomological long exact sequences (for Hom_C(-,X) by [lem-weil-pbc-hom-out-of-triangle-exact], for H by [def-sp-homological-functor]) and the five lemma to a triangle with two such objects. It is closed under coproducts because both functors take coproducts to products, hence under homotopy colimits by applying the long exact sequences to their telescope triangles. It contains all shifted generators; [lem-pc-compact-generators-build-objects] expresses every object as a homotopy colimit built from their coproducts and cone triangles, so the subcategory is all of C. The map Hom_C(-,X) \\to H is consequently a natural isomorphism.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "def-sp-abelian",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "def-sp-homological-functor",
-    "lem-weil-pbc-five-lemma",
-    "lem-pc-compact-hom-hocolim",
-    "lem-pc-compact-generators-build-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0A8F, Lemma lemma-brown proof, telescope and compact-generator argument"
+    "place": "Tag 0A8F, Lemma lemma-brown"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-triangulated-category",
-  "def-sp-abelian",
-  "lem-galois-yoneda-hom-bijection",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-five-lemma",
-  "lem-pc-compact-hom-hocolim",
-  "lem-pc-compact-generators-build-objects",
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "def-sp-homological-functor"
+  "lem-pc-brown-generator-construction",
+  "lem-pc-cohomological-generator-detection"
  ],
  "proof_origin": {
   "by": "document",
@@ -172,5 +142,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261012T085343-L-41048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
