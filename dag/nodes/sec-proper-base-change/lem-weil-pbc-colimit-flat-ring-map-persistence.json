@@ -1,0 +1,104 @@
+{
+ "id": "lem-weil-pbc-colimit-flat-ring-map-persistence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-colimit-flat-ring-map",
+   "place": "proof decomposition",
+   "via": []
+  }
+ },
+ "kind": "statement",
+ "title": "Persistence of flatness after a flat stage",
+ "statement": "Intermediate theorem used in the decomposition of lem-weil-pbc-colimit-flat-ring-map.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/limits.tex",
+  "place": "Algebra, Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, algebra.tex line 47331), part (3), applied to the system $(R_\\lambda\\to S_\\lambda,M_\\lambda)=(B_i\\to C_i,C_i)_{i\\ge0}$; this is the algebra result stated in the proof of Limits, Lemma Tag 04AI (lemma-descend-flat-finite-presentation, limits.tex line 1868), second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "This is the corresponding intermediate algebra statement from the Stacks proof; its detailed proof is deferred to a subsequent worker.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/limits.tex",
+    "place": "Algebra, Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, algebra.tex line 47331), part (3), applied to the system $(R_\\lambda\\to S_\\lambda,M_\\lambda)=(B_i\\to C_i,C_i)_{i\\ge0}$; this is the algebra result stated in the proof of Limits, Lemma Tag 04AI (lemma-descend-flat-finite-presentation, limits.tex line 1868), second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lemma Tag 02JO (lemma-flat-finite-presentation-limit-flat, line 47331): proof of (1) (with the system of Lemma 00R0 in place of 00R1, M=S) followed by the proof of (3), M=S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit flat stage",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat filtered colimit",
+   "results": "no declarations",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat stage colimit",
+   "results": "no match",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.ColimitFlatRingMap",
+  "date": "2026-10-12",
+  "group": "G2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.ColimitFlatRingMap",
+  "file": "lean/Sheaf/RingTheory/ColimitFlatRingMap.lean",
+  "declaration": "RingHom.eventually_flat_of_flat_stage",
+  "statement": "theorem eventually_flat_of_flat_stage {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] (F : I ⥤ CommRingCat.{v}) [HasColimit F] (i₀ i₁ : I) (h₀ : i₀ ≤ i₁) (B₀ : Type w) (C₀ : Type x) [CommRing B₀] [CommRing C₀] [Algebra (F.obj i₀) B₀] [Algebra (F.obj i₀) C₀] (φ₀ : B₀ →ₐ[F.obj i₀] C₀) (hstage : letI := (F.map (homOfLE h₀)).hom.toAlgebra (Algebra.TensorProduct.map (R := ((F.obj i₀ : CommRingCat) : Type v)) (S := ((F.obj i₁ : CommRingCat) : Type v)) (A := ((F.obj i₁ : CommRingCat) : Type v)) (B := B₀) (C := ((F.obj i₁ : CommRingCat) : Type v)) (D := C₀) (Algebra.ofId (F.obj i₁) (F.obj i₁)) φ₀).toRingHom.Flat) : ∀ i : I, ∀ hi : i₁ ≤ i, letI := (F.map (homOfLE (h₀.trans hi))).hom.toAlgebra (Algebra.TensorProduct.map (R := ((F.obj i₀ : CommRingCat) : Type v)) (S := ((F.obj i : CommRingCat) : Type v)) (A := ((F.obj i : CommRingCat) : Type v)) (B := B₀) (C := ((F.obj i : CommRingCat) : Type v)) (D := C₀) (Algebra.ofId (F.obj i) (F.obj i)) φ₀).toRingHom.Flat",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T144113-L-2096284",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261012T144113-L-2096284",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
