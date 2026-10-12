@@ -6,10 +6,9 @@ Authors: SHEAF group C1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover
 import Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange
-import Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover
+import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
 # Properness descends along a field extension
@@ -31,20 +30,29 @@ proper. Source: Stacks Project, Descent, Tag 02L1 (lemma-descending-property-pro
 (blueprint: lem-pc-proper-descends-field).
 
 Proof:
-1. The map `Spec K → Spec k` is flat, surjective and quasi-compact, so its singleton family
-   is an fpqc cover (lem-pc-field-extension-fpqc-cover). Its base change of `f` is the second
-   pullback projection (def-pc-base-change), which is proper by hypothesis.
-2. Properness of this projection implies separatedness (def-weil-proper-morphism).
-   Separatedness descends along the cover (lem-weil-pbc-fpqc-descend-separated).
-3. Properness of the projection also implies universal closedness (def-weil-proper-morphism),
-   which descends along the same cover (lem-weil-pbc-fpqc-descend-universally-closed).
-4. The structure morphism `f` is of finite type by hypothesis (def-pc-scheme,
-   def-weil-finite-type-morphism). Together with separatedness and universal closedness,
-   this gives properness by definition (def-weil-proper-morphism). -/
+1. The map `Spec K → Spec k` is flat, surjective and quasi-compact
+   (lem-pc-field-extension-fpqc-cover).
+2. The stated properness of the second pullback projection gives separatedness of `f` by
+   `isSeparated_of_flat_surjective_baseChange` (lem-weil-pbc-fpqc-descend-separated).
+3. Universal closedness descends for this affine pullback along a flat, surjective,
+   quasi-compact map by Mathlib's `DescendsAlong` instance
+   (lem-weil-pbc-universally-closed-affine-descent).
+4. The locally finite type and quasi-compact hypotheses, together with separatedness and
+   universal closedness, give `IsProper f` by the `IsProper` constructor. -/
 theorem isProper_of_field_baseChange {k K : Type u} [Field k] [Field K] [Algebra k K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]
     [IsProper (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K))))] :
     IsProper f := by
-  sorry
+  obtain ⟨hflat, hsurj, hqc, _⟩ :=
+    fpqcCover_specMap_algebraMap_of_field (k := k) (K := K)
+  let := hflat
+  let := hsurj
+  let := hqc
+  let := isSeparated_of_flat_surjective_baseChange f
+    (Spec.map (CommRingCat.ofHom (algebraMap k K)))
+  let : UniversallyClosed f := MorphismProperty.of_pullback_snd_of_descendsAlong
+    (P := @UniversallyClosed) (Q := @Surjective ⊓ @Flat ⊓ @QuasiCompact)
+    ⟨⟨hsurj, hflat⟩, hqc⟩ inferInstance
+  exact ⟨⟩
 
 end AlgebraicGeometry

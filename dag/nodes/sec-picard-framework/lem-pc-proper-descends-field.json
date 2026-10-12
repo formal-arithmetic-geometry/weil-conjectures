@@ -25,11 +25,9 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-field-extension-fpqc-cover], the structure morphism $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is a flat, surjective, quasi-compact morphism and its singleton family is an fpqc covering. The base change of the structure morphism $X\\to\\operatorname{Spec}k$ along this cover is the structure morphism $X_K\\to\\operatorname{Spec}K$, which is proper by hypothesis.",
+   "text": "Apply [lem-pc-field-extension-fpqc-cover] to obtain flatness, surjectivity and quasi-compactness of the spectrum map associated to the field extension. The base-changed structure morphism is the second pullback projection appearing in the properness hypothesis; no comparison theorem for base change is required.",
    "uses": [
-    "lem-pc-field-extension-fpqc-cover",
-    "def-pc-base-change",
-    "def-weil-proper-morphism"
+    "lem-pc-field-extension-fpqc-cover"
    ],
    "elementary": false,
    "source": {
@@ -51,9 +49,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-fpqc-descend-universally-closed] to the same morphism and cover. The base change $X_K\\to\\operatorname{Spec}K$ is universally closed because it is proper [def-weil-proper-morphism]. Therefore $X\\to\\operatorname{Spec}k$ is universally closed.",
+   "text": "The proper second projection is universally closed by [def-weil-proper-morphism]. Since Spec k and Spec K are affine schemes, apply the Mathlib specialization [lem-weil-pbc-universally-closed-affine-descent] directly to the flat surjective spectrum map from step 1. In Lean use MorphismProperty.of_pullback_snd_of_descendsAlong with the Mathlib instance descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact and the quasi-compactness already supplied in step 1. This gives universal closedness of the original morphism without using covering-family descent.",
    "uses": [
-    "lem-weil-pbc-fpqc-descend-universally-closed",
+    "lem-weil-pbc-universally-closed-affine-descent",
     "lem-pc-field-extension-fpqc-cover",
     "def-weil-proper-morphism"
    ],
@@ -79,17 +77,16 @@
  ],
  "proof_deps": [
   "lem-pc-field-extension-fpqc-cover",
-  "def-pc-base-change",
-  "def-weil-proper-morphism",
   "lem-weil-pbc-fpqc-descend-separated",
-  "lem-weil-pbc-fpqc-descend-universally-closed",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-universally-closed-affine-descent",
   "def-pc-scheme",
   "def-weil-finite-type-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Descent, Lemma Tag 02L1 (lemma-descending-property-proper)"
+  "place": "Descent, Lemma Tag 02L1 (lemma-descending-property-proper); the universally-closed step specializes the affine case (02KS), using Mathlib FlatDescent and MorphismProperty.of_pullback_snd_of_descendsAlong"
  },
  "mathlib_searches": [
   {
@@ -183,5 +180,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-c99cc",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261012T095856-L-314326",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged theorem signature and delivered proof with the node and recorded dependencies; checked import pruning, change record, unit route and report; delivery and sole importer compile cleanly; axioms are propext, Classical.choice, Quot.sound and sorryAx from existing open dependencies."
  }
 }
