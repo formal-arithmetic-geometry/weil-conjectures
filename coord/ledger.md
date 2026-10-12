@@ -8116,3 +8116,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/H3/Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedSystem (stage 3; reviewer PASS; after a return; landing 20261012T144118-L-2098330 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/H3/Sheaf.CategoryTheory.HypercohomologyLeftEdgeCanonical (stage 3; reviewer PASS; first push; landing 20261012T144118-L-2098429 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/H3/Sheaf.FieldTheory.BrauerScalarDefectFaithfulForward (stage 3; reviewer PASS; first push; landing 20261012T144118-L-2098528 (interface); batch 20261012T144049; modules 3; new nodes 2)
+- 14:41 L: merged deliver/H3/Sheaf.RingTheory.AssociatedPrimePowerQuotient (stage 3; reviewer PASS; first push; landing 20261012T144118-L-2098628 (proof); batch 20261012T144049; modules 1; new nodes 0)
