@@ -13,6 +13,8 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors
+import Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
 
 /-!
 # Everywhere defined derived functors of an adjoint pair
@@ -81,6 +83,10 @@ theorem exists_derived_adjunction_of_essentially_constant
           d.homEquiv (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj K)
             (α.app M ≫ DerivedCategory.Qh.map f) =
           DerivedCategory.Qh.map ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).homEquiv M K f)
-            ≫ β.app K := sorry
+            ≫ β.app K := by
+  obtain ⟨RF, LG, β, α, hRF, hLG⟩ :=
+    exists_everywhere_defined_derived_functors F G hR hL
+  obtain ⟨d, hd⟩ := exists_derived_adjunction_compatibility F G adj hR hL RF LG β α hRF hLG
+  exact ⟨RF, LG, β, α, hRF, hLG, d, hd⟩
 
 end CategoryTheory.Adjunction

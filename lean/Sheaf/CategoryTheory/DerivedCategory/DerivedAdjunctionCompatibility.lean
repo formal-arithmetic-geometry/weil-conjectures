@@ -1,0 +1,59 @@
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.MorphismProperty.Comma
+public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
+public import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+
+@[expose] public section
+
+universe wA wB vA vB uA uB
+open CategoryTheory CategoryTheory.Limits
+
+/-- The pointwise pre-derived Hom equivalences assemble to a compatible adjunction
+provided the two systems are essentially constant and the supplied comparison maps
+are derived-functor comparisons.
+Source: Stacks Project, Derived Categories, Lemma 09T5 from Lemma 0DVC.
+(blueprint: new-derived-adjunction-compatibility)
+
+Apply the pre-derived adjunction theorem at every pair of complexes and use its
+bifunctoriality to obtain the natural Hom equivalence. The essential-constancy
+hypotheses and the derived-functor comparison properties identify the supplied
+maps with the canonical maps, giving the displayed representative formula. -/
+theorem exists_derived_adjunction_compatibility
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] (adj : G ⊣ F)
+    (hR : ∀ K : HomotopyCategory A (ComplexShape.up ℤ),
+      let W := HomotopyCategory.quasiIso A (ComplexShape.up ℤ)
+      let D := MorphismProperty.Under.forget W ⊤ K ⋙ Under.forget K ⋙
+        F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
+      ∃ X : DerivedCategory B, IsEssentiallyConstantIndDiagram D X)
+    (hL : ∀ M : HomotopyCategory B (ComplexShape.up ℤ),
+      let W := HomotopyCategory.quasiIso B (ComplexShape.up ℤ)
+      let D := MorphismProperty.Over.forget W ⊤ M ⋙ Over.forget M ⋙
+        G.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
+      ∃ X : DerivedCategory A, IsEssentiallyConstantProDiagram D X)
+    (RF : DerivedCategory A ⥤ DerivedCategory B)
+    (LG : DerivedCategory B ⥤ DerivedCategory A)
+    (β : F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶
+      DerivedCategory.Qh ⋙ RF)
+    (α : DerivedCategory.Qh ⋙ LG ⟶
+      G.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
+    (hRF : RF.IsRightDerivedFunctor β (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)))
+    (hLG : LG.IsLeftDerivedFunctor α (HomotopyCategory.quasiIso B (ComplexShape.up ℤ))) :
+    ∃ d : LG ⊣ RF,
+      ∀ (M : HomotopyCategory B (ComplexShape.up ℤ))
+        (K : HomotopyCategory A (ComplexShape.up ℤ))
+        (f : (G.mapHomotopyCategory (ComplexShape.up ℤ)).obj M ⟶ K),
+        d.homEquiv (DerivedCategory.Qh.obj M) (DerivedCategory.Qh.obj K)
+            (α.app M ≫ DerivedCategory.Qh.map f) =
+          DerivedCategory.Qh.map ((adj.mapHomotopyCategory (ComplexShape.up ℤ)).homEquiv M K f)
+            ≫ β.app K := by
+  sorry
+
+end

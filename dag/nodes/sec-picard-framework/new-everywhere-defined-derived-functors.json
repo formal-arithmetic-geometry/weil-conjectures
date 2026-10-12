@@ -1,0 +1,121 @@
+{
+ "id": "new-everywhere-defined-derived-functors",
+ "kind": "statement",
+ "title": "Everywhere-defined derived functors",
+ "statement": "Pointwise essentially constant ind and pro diagrams assemble into derived functors RF and LG with universal comparison transformations.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Derived Categories, Definition 05S9 and Lemma 09T5"
+ },
+ "stmt_deps": [
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "proof": [
+  {
+   "text": "This construction step is isolated as an independently provable theorem from the cited pre-derived adjunction and the Stacks argument.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Definition 05S9 and Lemma 09T5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived adjunction",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived functors adjunction",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functors assemble",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived functors assemble",
+   "results": "no exact match",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors",
+  "date": "2026-10-13",
+  "group": "F1"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFunctors",
+  "declaration": "exists_everywhere_defined_derived_functors",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/EverywhereDefinedDerivedFunctors.lean",
+  "statement": "theorem exists_everywhere_defined_derived_functors {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] (F : A ⥤ B) (G : B ⥤ A) [F.Additive] [G.Additive] (hR : ∀ K : HomotopyCategory A (ComplexShape.up ℤ), let W := HomotopyCategory.quasiIso A (ComplexShape.up ℤ) let D := MorphismProperty.Under.forget W ⊤ K ⋙ Under.forget K ⋙ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ∃ X : DerivedCategory B, IsEssentiallyConstantIndDiagram D X) (hL : ∀ M : HomotopyCategory B (ComplexShape.up ℤ), let W := HomotopyCategory.quasiIso B (ComplexShape.up ℤ) let D := MorphismProperty.Over.forget W ⊤ M ⋙ Over.forget M ⋙ G.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ∃ X : DerivedCategory A, IsEssentiallyConstantProDiagram D X) : ∃ (RF : DerivedCategory A ⥤ DerivedCategory B) (LG : DerivedCategory B ⥤ DerivedCategory A) (β : F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ RF) (α : DerivedCategory.Qh ⋙ LG ⟶ G.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh), RF.IsRightDerivedFunctor β (HomotopyCategory.quasiIso A (ComplexShape.up ℤ)) ∧ LG.IsLeftDerivedFunctor α (HomotopyCategory.quasiIso B (ComplexShape.up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-13",
+  "existing": false,
+  "declarations": [
+   "exists_everywhere_defined_derived_functors"
+  ]
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-derived-adjoint-functors",
+   "place": "assembly step isolated from target proof",
+   "via": [
+    "lem-pc-derived-adjoint-functors"
+   ]
+  },
+  "same_as": []
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194109-L-454392",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261012T194109-L-454392",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
