@@ -1,0 +1,142 @@
+{
+ "id": "lem-sbc-higher-direct-image-forget-comparison",
+ "kind": "statement",
+ "title": "Underlying abelian sheaf commutes with higher direct image",
+ "statement": "Let Lambda be a commutative ring in Type (u+1), let X,Y be schemes in universe u, let h:Y -> X be any morphism [def-pc-scheme], let q be an integer, and let F be a sheaf valued in ModuleCat Lambda on the small etale site of Y [def-weil-pbc-etale-sheaves]. Let U_X and U_Y be the functors to abelian sheaves induced by forgetting scalar multiplication. Then U_X(R^q h_* F) is isomorphic to H^q(R h_* (U_Y(F)[0])), where the higher direct images and bounded-below derived functors are those of [def-weil-pbc-direct-image]. This holds for all q, including negative degrees and degree zero, and for any Lambda, including the zero ring.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03FD, Lemma 21.12.4 and proof (cohomology on every object); Tag 072W, Lemma 21.7.4 and proof (sheafified cohomology presheaf); the acyclic-resolution consequence spelled out here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose an injective module-sheaf resolution of F, bounded below in degree zero. The coefficient forgetful functor is exact, so its image is still a resolution of the underlying abelian sheaf. Use the equivalence with modules over the constant ring sheaf, preserving the underlying abelian sheaf and injectivity.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-module-sheaf-constant-ring-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tag 03FD shows that the underlying abelian sheaf of every injective module-sheaf term has zero positive cohomology over every etale object U. The proof of the arbitrary-ring injective Sheaf.H acyclicity theorem gives this on localized small etale sites as well (restriction to an etale object preserves injectivity because extension by zero is exact). Tag 072W identifies the higher direct images as sheafifications of these cohomology presheaves. Hence every underlying resolution term is acyclic for abelian lowerStar.",
+   "uses": [
+    "lem-weil-pbc-injective-module-sheaf-H-acyclic",
+    "lem-weil-pbc-higher-direct-image-sheafified-presheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An acyclic resolution computes right derived functors, so abelian derived direct image of F_ab is computed by lowerStar of this underlying resolution. Module-valued derived direct image is computed by the original injective resolution. Both ordinary pushforwards are objectwise along the same etale base-change functor, and forgetting commutes with them. Exactness of forgetting gives the isomorphism of their degree-q homology objects. Use the bounded-below derived/single compatibility to identify these with the two displayed objects.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-sp-derived-functor-single-identification",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For q=0 the same comparison is ordinary direct image, and for q<0 the two resolutions have zero cohomology because they start in degree zero. Thus the isomorphism holds for every integer q, without nonzero-ring or flatness hypotheses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-direct-image",
+  "lem-sp-derived-functor-single-identification",
+  "lem-weil-pbc-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-injective-module-sheaf-H-acyclic",
+  "lem-weil-pbc-module-sheaf-constant-ring-equivalence",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent Q3",
+  "document": "Stacks Project, Tags 03FD and 072W",
+  "place": "Acyclic-resolution comparison implicit in the original prime-quotient detection node, step 3; explicit arbitrary-ring and universe formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "forgetting coefficients commutes with higher direct images of module sheaves",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting module coefficients commutes with higher direct image of sheaves on the small etale site, using acyclic injective resolutions",
+   "date": "2026-10-12",
+   "results": "8 hits, including SheafOfModules.toSheafCompSheafToPresheafIso, PresheafOfModules.sheafificationCompForgetCompToPresheaf, SheafOfModules.forgetToSheafModuleCat, and concrete functor formulas.",
+   "verdict": "No matching higher-direct-image comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived",
+   "date": "2026-10-12",
+   "results": "12 hits including Functor.rightDerivedZeroIsoSelf, Functor.isZero_rightDerived_obj_injective_succ, and NatTrans.rightDerived.",
+   "verdict": "General derived functors, no coefficient-forgetful comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*forget|forget.*higherDirectImage; acyclic.*resolution|resolution.*acyclic",
+   "date": "2026-10-12",
+   "results": "No coefficient-forgetful theorem. Source Acyclic.lean supplies rightDerivedObjIsoOfResolution, while PlusComp.lean requires preservation of injectives, which is not available for forgetting coefficients in general.",
+   "verdict": "Acyclic-resolution infrastructure exists; the displayed module/abelian comparison still needs formalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-universal-test",
+   "place": "Coefficient reduction, via step 3 of lem-sbc-prime-quotient-detection: module/abelian higher-direct-image comparison",
+   "via": [
+    "lem-sbc-prime-quotient-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothBaseChange/HigherDirectImageForgetComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_higherDirectImage_forget_iso",
+  "statement": "theorem nonempty_higherDirectImage_forget_iso\n    (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (h : Y ⟶ X)\n    (q : ℤ) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Nonempty\n      ((sheafCompose X.smallEtaleTopology\n        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n          (higherDirectImage Λ h q F) ≅\n        (DerivedCategory.Plus.homologyFunctor\n          (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj\n          ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj\n            ((DerivedCategory.Plus.singleFunctor\n              (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj\n              ((sheafCompose Y.smallEtaleTopology\n                (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33744",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T085324-L-33744",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

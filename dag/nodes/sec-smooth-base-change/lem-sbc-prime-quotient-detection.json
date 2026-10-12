@@ -15,37 +15,45 @@
  ],
  "proof": [
   {
-   "text": "If $1\\in(r)$, an expression $1=ar$ makes $r$ a unit. Therefore $V=\\Lambda/(r)$ is nonzero. Since $r$ is prime, $V$ is an $\\mathbf F_r$-vector space and its vector $1$ is nonzero. Mathlib Module.Projective.exists_dual_eq_one over the field $\\mathbf F_r$ supplies a linear functional $\\phi:V\\to\\mathbf F_r$ with $\\phi(1)=1$. The inclusion $a\\mapsto a\\cdot1$ and $\\phi$ give an additive retraction.",
+   "text": "Set V=Lambda/(r). Ideal.span_singleton_ne_top and Ideal.Quotient.nontrivial_iff make V nontrivial. The image of r is zero, so CharP.charP_iff_prime_eq_zero makes it a ZMod r algebra using ZMod.castHom. Module.Projective.exists_dual_eq_one gives phi with phi(1)=1. Since phi(a*1)=a, this splits the additive inclusion of ZMod r into V. In P=ULift(ZMod r), r=0, so Ideal.quotEquivOfEq, RingEquiv.quotientBot and ULift.ringEquiv identify P/(r) with ZMod r. Compose these maps to obtain the additive Retract of P/(r) from V (private quotient_retract).",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Apply the constant abelian sheaf functor and then abelian $R^qh_*$ to the retraction identities. Thus the degree-$q$ image for $\\mathbf F_r$ is a retract of the degree-$q$ image for $V$. A retract of zero is zero: its identity factors through the zero object and is therefore zero.",
+   "text": "Forgetting ModuleCat coefficients is left adjoint: express it as restriction along integers to Lambda, followed by the equivalence from integer modules to abelian groups. ModuleCat.restrictCoextendScalarsAdj and Functor.isLeftAdjoint_of_iso establish this explicitly, so the functor preserves sheafification. Apply Mathlib constantCommuteCompose to identify the underlying constant module sheaves with the constant abelian sheaves (private preservesSheafification_forget_modules).",
+   "uses": [
+    "lem-weil-pbc-constant-module-sheaf-underlying"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The unit-route injective acyclicity lemma remains imported. The needed derived comparison is now stated as the general forgetful higher-direct-image isomorphism, which is a distinct part of the argument. Apply it to the two coefficient rings and compose with the constant-sheaf isomorphisms. Transfer the assumed module-valued zero object to the abelian derived image of the constant V sheaf.",
+   "uses": [
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-injective-module-direct-image-acyclic"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the additive retract through the constant abelian sheaf functor and then the composite single-in-degree-zero, derived abelian direct image, and degree-q homology functor. The identity of the retract factors through the zero target, hence equals zero. Transfer this zero object back by the prime-coefficient comparison isomorphism. The faithful coefficient forgetful functor preserves zero morphisms objectwise, and reflects a zero identity by map_injective. This proves the original conclusion, in all integer degrees.",
    "uses": [
     "def-weil-pbc-direct-image",
     "def-weil-pbc-constant-sheaf"
    ],
    "elementary": true
-  },
-  {
-   "text": "By [lem-weil-pbc-constant-module-sheaf-underlying], the two constant module sheaves have underlying abelian sheaves $V$ and $\\mathbf F_r$. Resolve them by injective module sheaves. Their underlying abelian sheaves are direct-image acyclic by [lem-weil-pbc-injective-module-direct-image-acyclic], so the same pushforward complexes compute their underlying abelian higher direct images. Forgetting coefficients is faithful and exact, and hence reflects zero objects. Together with the fact that $(r)=0$ in $P_r$, the abelian vanishing from the previous step is exactly the desired module-sheaf vanishing. For negative degrees both sides vanish; degree zero is ordinary pushforward.",
-   "uses": [
-    "lem-weil-pbc-constant-module-sheaf-underlying",
-    "lem-weil-pbc-injective-module-direct-image-acyclic"
-   ],
-   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-direct-image",
+  "lem-sbc-higher-direct-image-forget-comparison",
   "lem-weil-pbc-constant-module-sheaf-underlying",
   "lem-weil-pbc-injective-module-direct-image-acyclic"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "Stacks Project, Tags 0F08 and 03FD",
-  "place": "Coefficient step in 0F08, made precise for arbitrary Lambda; abelian/module comparison in 03FD; vector-space retract for the quotient step"
+  "by": "agent Q3",
+  "document": "Stacks Project, Tags 0F08 and 03FD; Mathlib",
+  "place": "Original quotient retract argument made into Lean; step 3 reduced to a general comparison of coefficient forgetful functors with higher direct images."
  },
  "mathlib_searches": [
   {
@@ -134,10 +142,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T040945-L-1687428",
+  "landing": "20261012T085324-L-33744",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
