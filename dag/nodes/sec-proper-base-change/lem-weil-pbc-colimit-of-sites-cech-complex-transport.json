@@ -14,23 +14,28 @@
  ],
  "proof": [
   {
-   "text": "The image of the covering presieve is the presieve of the image family. Apply hcover at a later stage and hQ with witness i at the colimit site. Choose target product data by SiteCechComplex.exists_of_covering.",
+   "text": "Transport each stage covering by hcover and Presieve.map_ofArrows. Transport the colimit covering using hQ with witness i. For both coverings use SiteCechComplex.exists_of_covering to obtain target product data.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
     "def-weil-pbc-site-cech-complex"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Induct on the number of factors. The single factor is unchanged; each additional factor is a pullback of an original covering arrow along the remaining product map. hpullback preserves this pullback. For the colimit functor, lift test objects, arrows, and compatibility equations to a common stage using the object and arrow set colimits; existence and eventual equality of the stage mediating arrows give the universal property in the colimit, as in the Hom computation of 09YL.",
+   "text": "Apply colimit_site_covering_continuity to obtain preservation of pullbacks of covering arrows by each canonical cocone functor. The stage functors already have this property by hpullback.",
    "uses": [
-    "lem-weil-pbc-colimit-of-sites",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+    "lem-weil-pbc-colimit-site-covering-continuity"
    ],
    "elementary": false
   },
   {
-   "text": "Compare the image product with the chosen target product by their universal properties. The unique projection-compatible maps in both directions are inverse because their composites have the identity projections. This gives the asserted isomorphisms. Empty index sets have no positive-length tuples.",
+   "text": "The private mapped_product_universal proves preservation of the universal property by induction on degree. In degree zero the projection is an isomorphism. For a successor tuple, its chosen product is a pullback of the first covering arrow and the common map from the chosen tail product: construct its second projection using the tail universal property, and verify IsPullback with the full and tail universal properties. Preservation gives a limiting mapped pullback cone. The inductively mapped tail universal property and that cone give the unique mediating arrow for the mapped tuple.",
+   "uses": [
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The private mapped_product_iso compares the mapped universal product and the chosen target universal product. Their universal properties construct arrows in each direction; projection uniqueness proves that the composites are identities. Apply this helper to every stage functor and the colimit functor with the pullback preservation from the preceding steps. Empty covering index types have no positive-length tuples, so those claims are vacuous.",
    "uses": [
     "def-weil-pbc-site-cech-complex"
    ],
@@ -38,14 +43,13 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-colimit-of-sites",
   "def-weil-pbc-site-cech-complex",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+  "lem-weil-pbc-colimit-site-covering-continuity"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 09YL proof, with universal product comparison made explicit"
+  "place": "Tag 09YL Hom pullback argument and induction on products; formalized by V1, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -116,10 +120,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "V1",
   "result": "pass",
-  "landing": "20261012T053930-L-2634602",
-  "kind": "interface",
+  "landing": "20261012T165538-L-2941741",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
