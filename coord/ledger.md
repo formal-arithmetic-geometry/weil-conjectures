@@ -5866,3 +5866,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 02:45 L: returned deliver/F1/Sheaf.CategoryTheory.ExtExactFunctorCompositionComparison (reviewer RETURN: (the landing tools, head 521cd6155) the delivery did not land: NOT MERGED Sheaf.CategoryTheory.ExtExactFunctorCompositio)
 - 02:46 L: merged deliver/G1/Sheaf.CategoryTheory.ExtExactFunctorIdentityComparison (stage 3; reviewer PASS; first push; landing 20261012T024553-L-1186229 (proof); modules 1; new nodes 0)
 - 02:48 L: merged deliver/Z2/lem-weil-pbc-locally-constant-zero-locus-clopen (stage 2; reviewer PASS; first push; Sheaf.Topology.LocallyConstantZeroLocusClopen TopCat.Sheaf.isClopen_setOf_germ_eq_zero_of_locallyConstant)
+- 02:48 L: returned deliver/J1/Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit (reviewer RETURN: (the landing tools, head 47d54d5dd) the delivery did not land: NOT MERGED Sheaf.AlgebraicGeometry.EtaleCohomologyFiltere)
