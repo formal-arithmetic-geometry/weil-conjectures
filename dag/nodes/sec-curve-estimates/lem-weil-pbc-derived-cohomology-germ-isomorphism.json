@@ -12,22 +12,20 @@
  ],
  "proof": [
   {
-   "text": "represent L[n] by a bounded below K-injective complex M. The derived Hom from\nZ[U][0] is represented by cycles in M(U), modulo boundaries. The displayed map sends\nsuch a cycle to its homology section. Locally, every homology section lifts to a cycle,\nbecause cycles surject onto the homology sheaf. If the homology section of a cycle\nvanishes, locally the cycle lifts through the differential from degree -1; the lift is\na null homotopy of the map from Z[U][0]. Hence the comparison is locally bijective.\nSheafification makes it an isomorphism, and geometric stalks are unchanged by\nsheafification. Finally the homology shift isomorphism transports H^0(L[n]) to H^n(L).\nThe cycle and boundary argument applies for every integer n and also for L = 0.",
+   "text": "Use the free-sheaf/sections adjunction to identify morphisms from ℤ[U] with sections. Represent L[n] by a bounded below complex of injectives, using the cited injective-representative lemma. Cycles surject locally onto homology, so every homology section locally comes from a chain map out of the single free sheaf. A class mapping to zero locally lifts through the degree -1 differential; the corresponding single-complex map is null-homotopic, hence zero in the derived category. Transport both local properties through the representative isomorphism. Postcompose with the homology shift isomorphism. The resulting map is locally bijective, hence lies in the sheafification equivalences W. Mathlib Point.W_isInvertedBy_presheafFiber then makes its canonical geometric stalk map an isomorphism. This uses the skyscraper adjunction and requires no local-smallness assumption on the full small-etale category. All these arguments are implemented by proved private helpers; no new statement is left unproved.",
    "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-sheafification-geometric-stalk"
+    "lem-weil-pbc-dplus-injective-representative"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-sheafification-geometric-stalk"
+  "lem-weil-pbc-dplus-injective-representative"
  ],
  "proof_origin": {
-  "by": "G2 following document",
+  "by": "D3 adapting the proved local comparison in AbelianHigherDirectImagePresheaf",
   "document": "Stacks Project",
-  "place": "Tags 03Q8 and 0BKV; local cycles and boundaries for the canonical derived-section comparison"
+  "place": "Tags 03Q8 and 0BKV; cycles, local boundary lifting and null homotopy, followed by Mathlib Point.W_isInvertedBy_presheafFiber"
  },
  "mathlib_searches": [
   {
@@ -99,11 +97,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G2",
+  "reviewer": "X-aa785",
+  "group": "D3",
   "result": "pass",
-  "landing": "20261012T085242-L-16042",
+  "landing": "20261012T112833-L-765603",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Delivered module, node proof route, report, and direct importer match the packet; all compile cleanly and theorem axioms are exactly propext, Classical.choice, Quot.sound."
  }
 }
