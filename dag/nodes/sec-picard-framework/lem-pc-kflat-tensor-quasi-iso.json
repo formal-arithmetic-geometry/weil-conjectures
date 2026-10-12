@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Throughout, $R$ is regarded as a sheaf of rings on the one-point site, whose sheaves of modules are the $R$-modules; so [def-pc-kflat-complex], [def-pc-quasi-iso-modules], [def-pc-tensor-complex-sheaves] and the cited lemmas about complexes of $\\mathcal O$-modules apply to complexes of $R$-modules. (Symmetry.) For complexes $F^\\bullet,G^\\bullet$ of $R$-modules let $\\sigma_{F,G}:\\operatorname{Tot}(F^\\bullet\\otimes_R G^\\bullet)\\to\\operatorname{Tot}(G^\\bullet\\otimes_R F^\\bullet)$ be $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on $F^p\\otimes_R G^q$. It is a chain map: for $x\\in F^p$, $y\\in G^q$, $d(x\\otimes y)=d_Fx\\otimes y+(-1)^p x\\otimes d_Gy$ is sent to $(-1)^{(p+1)q}y\\otimes d_Fx+(-1)^{p+p(q+1)}d_Gy\\otimes x$, while $d((-1)^{pq}y\\otimes x)=(-1)^{pq}d_Gy\\otimes x+(-1)^{pq+q}y\\otimes d_Fx$, and the two agree since $(-1)^{p+p(q+1)}=(-1)^{pq}$. It is an isomorphism with inverse $\\sigma_{G,F}$, and it is natural in both variables: $\\sigma_{F',G'}\\circ\\operatorname{Tot}(f\\otimes g)=\\operatorname{Tot}(g\\otimes f)\\circ\\sigma_{F,G}$ for chain maps $f:F\\to F'$, $g:G\\to G'$ (the sign depends only on the degrees, which $f,g$ preserve). Consequently, for a chain map $f$ and a complex $G$, $\\operatorname{Tot}(f\\otimes 1_G)$ is a quasi-isomorphism if and only if $\\operatorname{Tot}(1_G\\otimes f)$ is (they are conjugate by the isomorphisms $\\sigma$), and $\\operatorname{Tot}(F\\otimes G)$ is acyclic if and only if $\\operatorname{Tot}(G\\otimes F)$ is. (Mathlib's form of this symmetry is HomologicalComplex.mapBifunctorFlipIso with its naturality mapBifunctorFlipIso_hom_naturality, Mathlib/Algebra/Homology/BifunctorFlip.lean.)",
+   "text": "Throughout, $R$ is regarded as a sheaf of rings on the one-point site, whose sheaves of modules are the $R$-modules; so [def-pc-kflat-complex], [def-pc-quasi-iso-modules], [def-pc-tensor-complex-sheaves] and the cited lemmas about complexes of $\\mathcal O$-modules apply to complexes of $R$-modules. (Symmetry.) For complexes $F^\\bullet,G^\\bullet$ of $R$-modules let $\\sigma_{F,G}:\\operatorname{Tot}(F^\\bullet\\otimes_R G^\\bullet)\\to\\operatorname{Tot}(G^\\bullet\\otimes_R F^\\bullet)$ be $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on $F^p\\otimes_R G^q$. It is a chain map: for $x\\in F^p$, $y\\in G^q$, $d(x\\otimes y)=d_Fx\\otimes y+(-1)^p x\\otimes d_Gy$ is sent to $(-1)^{(p+1)q}y\\otimes d_Fx+(-1)^{p+p(q+1)}d_Gy\\otimes x$, while $d((-1)^{pq}y\\otimes x)=(-1)^{pq}d_Gy\\otimes x+(-1)^{pq+q}y\\otimes d_Fx$, and the two agree since $(-1)^{p+p(q+1)}=(-1)^{pq}$. It is an isomorphism with inverse $\\sigma_{G,F}$, and it is natural in both variables: $\\sigma_{F',G'}\\circ\\operatorname{Tot}(f\\otimes g)=\\operatorname{Tot}(g\\otimes f)\\circ\\sigma_{F,G}$ for chain maps $f:F\\to F'$, $g:G\\to G'$ (the sign depends only on the degrees, which $f,g$ preserve). Consequently, for a chain map $f$ and a complex $G$, $\\operatorname{Tot}(f\\otimes 1_G)$ is a quasi-isomorphism if and only if $\\operatorname{Tot}(1_G\\otimes f)$ is (they are conjugate by the isomorphisms $\\sigma$), and $\\operatorname{Tot}(F\\otimes G)$ is acyclic if and only if $\\operatorname{Tot}(G\\otimes F)$ is. (Mathlib's form of this symmetry is HomologicalComplex.mapBifunctorFlipIso with its naturality mapBifunctorFlipIso_hom_naturality, Mathlib/Algebra/Homology/BifunctorFlip.lean.) In Lean, for the acyclicity comparison actually needed, form the componentwise braiding isomorphism from the tensor bicomplex to the bicomplex of the flipped tensor functor, using braiding_naturality_right and braiding_naturality_left for its two differentials. Apply HomologicalComplex₂.total.mapIso and then HomologicalComplex.mapBifunctorFlipIso. Transfer ExactAt along the resulting isomorphism.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-pc-quasi-iso-modules",
@@ -41,11 +41,12 @@
    }
   },
   {
-   "text": "(Tag 06Y0, lemma-K-flat-quasi-isomorphism, in both variables.) Let $K^\\bullet$ be a K-flat complex of $R$-modules and $s:L^\\bullet\\to L'^\\bullet$ a quasi-isomorphism of complexes of $R$-modules. Then $\\operatorname{Tot}(1_K\\otimes s)$ and $\\operatorname{Tot}(s\\otimes 1_K)$ are quasi-isomorphisms. Indeed, the mapping cone $C(s)$ is acyclic because $s$ is a quasi-isomorphism [lem-pur-quasi-iso-cone-acyclic]; hence $\\operatorname{Tot}(C(s)\\otimes_R K)$ is acyclic by the definition of K-flatness of $K$ [def-pc-kflat-complex], and so is $\\operatorname{Tot}(K\\otimes_R C(s))$ by step 1. By [lem-pc-tensor-mapping-cone-iso] (with $\\mathcal A^\\bullet=K^\\bullet$ and the morphism $s:L\\to L'$), $\\operatorname{Tot}(K\\otimes_R C(s))$ is isomorphic as a complex to the mapping cone of $\\operatorname{Tot}(1_K\\otimes s):\\operatorname{Tot}(K\\otimes_R L)\\to\\operatorname{Tot}(K\\otimes_R L')$, which is therefore acyclic, so $\\operatorname{Tot}(1_K\\otimes s)$ is a quasi-isomorphism [lem-pur-quasi-iso-cone-acyclic]. By step 1, $\\operatorname{Tot}(s\\otimes 1_K)$ is a quasi-isomorphism as well.",
+   "text": "(Tag 06Y0, lemma-K-flat-quasi-isomorphism, in both variables.) Let $K^\\bullet$ be a K-flat complex of $R$-modules and $s:L^\\bullet\\to L'^\\bullet$ a quasi-isomorphism of complexes of $R$-modules. Then $\\operatorname{Tot}(1_K\\otimes s)$ and $\\operatorname{Tot}(s\\otimes 1_K)$ are quasi-isomorphisms. Indeed, the mapping cone $C(s)$ is acyclic because $s$ is a quasi-isomorphism [lem-pur-quasi-iso-cone-acyclic]; hence $\\operatorname{Tot}(C(s)\\otimes_R K)$ is acyclic by the definition of K-flatness of $K$ [def-pc-kflat-complex], and so is $\\operatorname{Tot}(K\\otimes_R C(s))$ by step 1. By [lem-pc-tensor-mapping-cone-iso] (with $\\mathcal A^\\bullet=K^\\bullet$ and the morphism $s:L\\to L'$), $\\operatorname{Tot}(K\\otimes_R C(s))$ is isomorphic as a complex to the mapping cone of $\\operatorname{Tot}(1_K\\otimes s):\\operatorname{Tot}(K\\otimes_R L)\\to\\operatorname{Tot}(K\\otimes_R L')$, which is therefore acyclic, so $\\operatorname{Tot}(1_K\\otimes s)$ is a quasi-isomorphism [lem-pur-quasi-iso-cone-acyclic]. By step 1, $\\operatorname{Tot}(s\\otimes 1_K)$ is a quasi-isomorphism as well. The additivity required by the cone isomorphisms comes from the MonoidalPreadditive clause of [lem-pc-sheaf-modules-tensor-closed]. The right-factor assertion uses mapBifunctorMappingCone₁Iso directly; the left-factor assertion uses the acyclicity comparison of step 1 followed by mapBifunctorMappingCone₂Iso. These are proved private helpers, not new open statements.",
    "uses": [
     "lem-pur-quasi-iso-cone-acyclic",
     "def-pc-kflat-complex",
-    "lem-pc-tensor-mapping-cone-iso"
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false,
    "source": {
@@ -65,7 +66,7 @@
    }
   },
   {
-   "text": "The square $$\\begin{array}{ccc}\\operatorname{Tot}(E\\otimes_R K)&\\xrightarrow{\\operatorname{Tot}(\\alpha\\otimes 1_K)}&\\operatorname{Tot}(E'\\otimes_R K)\\\\ \\downarrow{\\scriptstyle\\operatorname{Tot}(1_E\\otimes s)}&&\\downarrow{\\scriptstyle\\operatorname{Tot}(1_{E'}\\otimes s)}\\\\ \\operatorname{Tot}(E\\otimes_R N)&\\xrightarrow{\\operatorname{Tot}(\\alpha\\otimes 1_N)}&\\operatorname{Tot}(E'\\otimes_R N)\\end{array}$$ commutes, both composites being $\\operatorname{Tot}(\\alpha\\otimes s)$, since on each summand $E^p\\otimes K^q$ both are $\\alpha^p\\otimes s^q$ (functoriality of the total tensor complex in both variables [def-pc-tensor-complex-sheaves]).",
+   "text": "The square $$\\begin{array}{ccc}\\operatorname{Tot}(E\\otimes_R K)&\\xrightarrow{\\operatorname{Tot}(\\alpha\\otimes 1_K)}&\\operatorname{Tot}(E'\\otimes_R K)\\\\ \\downarrow{\\scriptstyle\\operatorname{Tot}(1_E\\otimes s)}&&\\downarrow{\\scriptstyle\\operatorname{Tot}(1_{E'}\\otimes s)}\\\\ \\operatorname{Tot}(E\\otimes_R N)&\\xrightarrow{\\operatorname{Tot}(\\alpha\\otimes 1_N)}&\\operatorname{Tot}(E'\\otimes_R N)\\end{array}$$ commutes, both composites being $\\operatorname{Tot}(\\alpha\\otimes s)$, since on each summand $E^p\\otimes K^q$ both are $\\alpha^p\\otimes s^q$ (functoriality of the total tensor complex in both variables [def-pc-tensor-complex-sheaves]). In Lean this equation is exactly the symmetry of (((curriedTensor _).map₂CochainComplex.map α).naturality s).",
    "uses": [
     "def-pc-tensor-complex-sheaves"
    ],
@@ -76,7 +77,7 @@
    }
   },
   {
-   "text": "In the square of step 4 the vertical arrows are quasi-isomorphisms by step 2 applied to the K-flat complex $E$ (resp. $E'$) and the quasi-isomorphism $s$ (the form $\\operatorname{Tot}(1_E\\otimes s)$), and the top arrow is a quasi-isomorphism by step 2 applied to the K-flat complex $K$ and the quasi-isomorphism $\\alpha$ (the form $\\operatorname{Tot}(\\alpha\\otimes 1_K)$). Taking cohomology in degree $i$, $H^i(\\operatorname{Tot}(\\alpha\\otimes 1_N))\\circ H^i(\\operatorname{Tot}(1_E\\otimes s))=H^i(\\operatorname{Tot}(1_{E'}\\otimes s))\\circ H^i(\\operatorname{Tot}(\\alpha\\otimes 1_K))$ with the three maps other than the first isomorphisms, so $H^i(\\operatorname{Tot}(\\alpha\\otimes 1_N))$ is an isomorphism for every $i$, i.e. $\\operatorname{Tot}(\\alpha\\otimes 1_N)$ is a quasi-isomorphism [def-pc-quasi-iso-modules]. (Stacks states the lemma with $\\alpha$ in the second factor, $\\operatorname{Tot}(1_L\\otimes\\alpha)$; the item's form with $\\alpha$ in the first factor is the same argument, and either form follows from the other by step 1.)",
+   "text": "In the square of step 4 the vertical arrows are quasi-isomorphisms by step 2 applied to the K-flat complex $E$ (resp. $E'$) and the quasi-isomorphism $s$ (the form $\\operatorname{Tot}(1_E\\otimes s)$), and the top arrow is a quasi-isomorphism by step 2 applied to the K-flat complex $K$ and the quasi-isomorphism $\\alpha$ (the form $\\operatorname{Tot}(\\alpha\\otimes 1_K)$). Taking cohomology in degree $i$, $H^i(\\operatorname{Tot}(\\alpha\\otimes 1_N))\\circ H^i(\\operatorname{Tot}(1_E\\otimes s))=H^i(\\operatorname{Tot}(1_{E'}\\otimes s))\\circ H^i(\\operatorname{Tot}(\\alpha\\otimes 1_K))$ with the three maps other than the first isomorphisms, so $H^i(\\operatorname{Tot}(\\alpha\\otimes 1_N))$ is an isomorphism for every $i$, i.e. $\\operatorname{Tot}(\\alpha\\otimes 1_N)$ is a quasi-isomorphism [def-pc-quasi-iso-modules]. (Stacks states the lemma with $\\alpha$ in the second factor, $\\operatorname{Tot}(1_L\\otimes\\alpha)$; the item's form with $\\alpha$ in the first factor is the same argument, and either form follows from the other by step 1.) Register quasi-isomorphism instances for the top and right maps, obtain a quasi-isomorphism for their composite, rewrite by commutativity, and apply quasiIso_of_comp_left to cancel the left vertical quasi-isomorphism.",
    "uses": [
     "def-pc-quasi-iso-modules"
    ],
@@ -94,12 +95,13 @@
   "lem-pur-quasi-iso-cone-acyclic",
   "def-pc-kflat-complex",
   "lem-pc-tensor-mapping-cone-iso",
-  "lem-pc-kflat-resolution"
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Lemma 15.60.12, Tag 064L (lemma-derived-tor-quasi-isomorphism-other-side) and Tag 06Y0 (lemma-K-flat-quasi-isomorphism), with the commutativity constraint of Tag 0FNI"
+  "place": "Lemma 15.60.12, Tag 064L (lemma-derived-tor-quasi-isomorphism-other-side) and Tag 06Y0 (lemma-K-flat-quasi-isomorphism), with the commutativity constraint of Tag 0FNI; realized by K3 using both tensor-cone isomorphisms, componentwise braiding followed by total flip, and Mathlib quasiIso_of_comp_left"
  },
  "mathlib_searches": [
   {
@@ -201,5 +203,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261012T135249-L-1675847",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
