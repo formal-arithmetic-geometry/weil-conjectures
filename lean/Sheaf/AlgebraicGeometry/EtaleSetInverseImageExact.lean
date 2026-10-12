@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.CategoryTheory.Sites.Pullback
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Types
 
 /-!
 # Exact inverse image of set-valued small etale sheaves
@@ -63,6 +63,13 @@ theorem etaleSetInverseImage_exact {T T' : Scheme.{u}} (h : T' ⟶ T) :
       (Functor.sheafPullbackConstruction.sheafPullback
         (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1))
         (T.smallGrothendieckTopology @Etale) (T'.smallGrothendieckTopology @Etale)) := by
-  sorry
+  let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1))
+    (T.smallGrothendieckTopology @Etale) (T'.smallGrothendieckTopology @Etale)
+  have := a.isLeftAdjoint
+  refine ⟨inferInstance, ⟨a⟩, ?_, inferInstance⟩
+  let : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+    AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} (Type (u + 1))
+  infer_instance
 
 end AlgebraicGeometry

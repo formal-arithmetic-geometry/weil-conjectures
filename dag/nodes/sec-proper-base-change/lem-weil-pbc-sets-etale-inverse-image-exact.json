@@ -29,63 +29,52 @@
  ],
  "proof": [
   {
-   "text": "The base-change functor on small etale sites is continuous, sends coverings to coverings, preserves the relevant fibre products, and its sectionwise direct image on sheaves of sets is a sheaf, by [lem-weil-pbc-etale-base-change-continuous]. Thus the direct image in the statement is the functor to which the inverse image is adjoint.",
+   "text": "Apply AlgebraicGeometry.Etale.isContinuous_overPullback to h to obtain continuity of the base-change functor. This is [lem-weil-pbc-etale-base-change-continuous].",
    "uses": [
     "lem-weil-pbc-etale-base-change-continuous"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00WV and Lemma 00WW (lemma-pushforward-sheaf)"
-   }
+   "elementary": false
   },
   {
-   "text": "The set-valued inverse image is the sheafification of the presheaf pullback along base change. The existing construction [lem-weil-pbc-etale-inverse-image-algebraic-structures] states that this functor is left adjoint to the sectionwise direct image and commutes with finite limits. Therefore it preserves the finite limits asserted in the statement, including the terminal sheaf and binary products.",
+   "text": "Use the constructed Mathlib sheaf adjunction Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, giving precisely the left Kan extension followed by sheafification as left adjoint to continuous pushforward, as in [lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction]. Package this adjunction in Nonempty and install its isLeftAdjoint instance.",
    "uses": [
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Proposition 00X6 (proposition-get-morphism), with Lemmas 00VE, 00WX and 00WJ"
-   }
+   "elementary": false
   },
   {
-   "text": "Since the inverse image is left adjoint to the direct image by Step 2, it preserves all small colimits by [lem-weil-pbc-left-adjoint-preserves-colimits]. In particular it preserves finite colimits.",
+   "text": "Base change preserves finite limits by [lem-weil-pbc-etale-base-change-finite-limits], hence is representably flat. Its opposite left Kan extension is left exact by the large-category version CategoryTheory.preservesFiniteLimits_op_lan_of_flat of [lem-weil-pbc-presheaf-pullback-sets-left-exact]. The indexing comma categories have objects in universe u+1 and morphisms in universe u. For Type (u+1), install AB5OfSize.{u,u+1} using AB5OfSize_of_univLE from the usual AB5 instance; this is filtered colimits commuting with finite limits, [lem-weil-pbc-filtered-colimits-commute-finite-limits]. Inclusion of sheaves preserves finite limits by [lem-weil-pbc-presheaf-finite-limits-objectwise], and sheafification does by [lem-weil-pbc-sheafification-sets-exact]. Thus the composite constructed sheaf pullback preserves finite limits; typeclass inference composes these instances.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction from step 2 makes the constructed inverse image a left adjoint, so typeclass inference applies preservation of colimits and then finite colimits, [lem-weil-pbc-left-adjoint-preserves-colimits]. Combine continuity, the adjunction witness, finite-limit preservation, and finite-colimit preservation by conjunction introduction.",
    "uses": [
     "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma 0038 (lemma-adjoint-exact), part (1)"
-   }
-  },
-  {
-   "text": "Combining Steps 1–3, the continuous base-change functor has an inverse-image functor preserving finite limits and finite colimits, hence it satisfies the morphism-of-sites condition in [def-weil-pbc-sites-and-cohomology](3).",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Definition 00X1 (definition-morphism-sites)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-base-change-continuous",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "def-weil-pbc-sites-and-cohomology"
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "lem-weil-pbc-left-adjoint-preserves-colimits"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 03Q1 (lemma-stalk-pullback), assertion (2), and Section 03PZ (section-inverse-image), read with Sites Definition 00X1 and Proposition 00X6"
+  "place": "Lemma 03Q1(2), following Sites Proposition 00X6, sheafification Lemma 00WJ, and Categories Lemma 0038; Lean implementation by R3 uses the existing large-universe flat Kan-extension instance and Mathlib sheafPullbackConstruction instances directly."
  },
  "mathlib_searches": [
   {
@@ -176,5 +165,15 @@
   "group": "M1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T085330-L-36004",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
