@@ -1,0 +1,168 @@
+{
+ "id": "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+ "kind": "statement",
+ "title": "lem-weil-pbc-etale-inverse-image-abelian-lift-hom",
+ "statement": "Let U,V be schemes [def-pc-scheme], f : U → V, L the set inverse image on the small étale sites [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves], La the abelian inverse image [def-weil-pbc-inverse-image], and FaU,FaV the forgetful functors from abelian sheaves [def-weil-pbc-abelian-etale-sheaves]. Assume L preserves finite limits. There exists ea : La ⋙ FaU ≅ FaV ⋙ L such that forgetting every adjunct under the abelian inverse/direct-image adjunction [def-weil-pbc-direct-image] equals the set adjunct after precomposing with ea inverse. No operation compatibility is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, proof of (2) and its paragraph on rings; discussion of quadruples and sextuples in Section 00YR; Example 00X2 and uniqueness of adjoints"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The base-change functor is continuous. The recorded set inverse image is left adjoint to its sectionwise set direct image by Mathlib.sheafAdjunctionContinuous. The assumed finite-limit preservation implies finite-product preservation.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-continuous",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the abelian clause of the sheaf/internal-object identification on the source and target sites; its section formulas identify the structure maps with the actual sectionwise operations. Apply the corresponding clause of the product-preserving lifted adjunction to the set adjunction.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the lifted adjunction through the inverse sheaf/internal-object functors. Its right lift evaluates at base-changed objects and hence has exactly the sectionwise operations and restriction maps of the recorded direct image. The resulting right forgetful comparison is the identity; restrict the hom-set equations of the generic lift accordingly.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the transported left adjoint with Etale.upperStar, another left adjoint of the same abelian direct image, using the unique isomorphism compatible with the adjunctions. Composing its underlying comparison with that of the internal-object lift gives ea. The compatibility of adjunction bijections gives precisely the displayed hom-set equation.",
+   "uses": [
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-continuous",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV and uniqueness of adjoints (Example 00X2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of abelian sheaves commutes with underlying sets",
+   "results": "UNAVAILABLE: service returned Internal Server Error on 2026-10-12; no search verdict is asserted.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian sheaf inverse image underlying set sheaf group operations left adjoint uniqueness",
+   "results": "sheafPullbackIso, sheafIsAbelian, sheafHomSectionsEquiv, SheafOfModules.pullbackIso",
+   "date": "2026-10-12",
+   "verdict": "No exact match: these do not compare the algebraic sheaf inverse image with the set inverse image and pin all structure maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq and unit_leftAdjointUniq_hom_app found in Adjunction.Unique; signatures inspected.",
+   "date": "2026-10-12",
+   "verdict": "The uniqueness lemma is a tool; no exact match for this coefficient-specific comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*forget|forget.*sheafPullback|mapCommRing; rg of lean/WeilConjectures, lean/Sheaf and Mathlib Sites/Monoidal",
+   "results": "No exact coefficient-forgetful pullback comparison. Generic liftsGroupRingObjects and sheaves_algebraicStructures_objects supply the internal-object route; topological pushforward_forget concerns the presheaf forgetful functor, not this statement.",
+   "date": "2026-10-12",
+   "verdict": "No existing theorem with these section formulas; use the two existing internal-object dependencies and specialize/transport them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint sheaf forget abelian groups preserves underlying inverse image",
+   "results": "Found module-sheaf pullback adjunctions, condensed free-forget adjunctions, and toSheafCompSheafToPresheafIso; none compares these étale abelian and set inverse images with the required adjunction compatibility.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no exact duplicate; use generic lift and adjoint uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Found leftAdjointUniq and its unit/counit compatibility lemmas; these support the planned uniqueness step but do not supply the coefficient comparison.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no exact duplicate; use generic lift and adjoint uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*forget|forget.*sheafPullback",
+   "results": "Only Mathlib/Topology/Sheaves/Functors.lean:155 (topological presheaf forget). Local rg on étale inverse-image and category-theory modules found generic lifted group-object hom-set equations and the parent theorem, not either strict subclaim.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no exact duplicate; use generic lift and adjoint uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLift",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "the algebraic inverse-image compatibility used by the derived exchange definition; abelian part of steps 4–5 of lem-weil-pbc-etale-inverse-image-algebraic-structures",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageAbelianLiftHom.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageAbelianLift_hom",
+  "statement": "theorem etaleInverseImageAbelianLift_hom (U V : Scheme.{u}) (f : U ⟶ V)\n    (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let L := Scheme.etaleSetPullback f\n    let La := Etale.upperStar AddCommGrpCat.{u + 1} f\n    let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology\n    let FaV := sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology\n    let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b\n      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)\n      (U.smallGrothendieckTopology @Etale)\n    ∃ (ea : La ⋙ FaU ≅ FaV ⋙ L),\n        (∀ (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})\n            (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : La.obj G ⟶ F),\n          FaV.map ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv\n            G F h) =\n              a.homEquiv (FaV.obj G) (FaU.obj F) (ea.inv.app G ≫ FaU.map h))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T060753-L-2914984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T060753-L-2914984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

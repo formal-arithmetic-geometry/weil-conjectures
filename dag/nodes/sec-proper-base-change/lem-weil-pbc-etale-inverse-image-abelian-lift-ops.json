@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-etale-inverse-image-abelian-lift-ops",
+ "kind": "statement",
+ "title": "lem-weil-pbc-etale-inverse-image-abelian-lift-ops",
+ "statement": "Let U,V,f,L,La,FaU,FaV,a be as in the abelian inverse-image comparison [def-pc-scheme, def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-pbc-inverse-image, def-weil-pbc-direct-image, def-weil-pbc-abelian-etale-sheaves]. Assume L preserves finite limits. For every natural isomorphism ea : La ⋙ FaU ≅ FaV ⋙ L satisfying the hom-set compatibility equation, the following operation compatibility holds. For every G, its sectionwise addition, zero and negation are sheaf morphisms addV, zeroV, negV; those of La G are addU, zeroU, negU. They satisfy L(addV) = prodComparison L ≫ prod.map ea_G⁻¹ ea_G⁻¹ ≫ addU ≫ ea_G, L(zeroV) = terminal.from _ ≫ zeroU ≫ ea_G, and L(negV) = ea_G⁻¹ ≫ negU ≫ ea_G. The binary operation formulas use the two chosen product projections, and the constant formulas hold on every section of the chosen terminal sheaf. No unit compatibility or ring assertion is assumed in this lemma.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV, proof of (2) and its paragraph on rings; discussion of quadruples and sextuples in Section 00YR; Example 00X2 and uniqueness of adjoints"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Identify abelian sheaves with internal commutative group objects on each\nsite, with the sectionwise operation formulas of\n`sheaves_algebraicStructures_objects`. Lift the set adjunction by\n`Adjunction.liftsGroupRingObjects`; finite-limit preservation supplies its\nfinite-product hypothesis. Transport this lift back to abelian sheaves. Its right\nadjoint is the sectionwise abelian direct image, because precomposition preserves\nall the sectionwise operations and restriction maps. Uniqueness of left adjoints\ntherefore gives an abelian comparison from La to this lifted left adjoint. After\nforgetting and composing with the lift's underlying comparison, call the resulting\nisomorphism e0. The lifted hom-set equation and the adjunction-compatible abelian\ncomparison give the stated hom-set equation for e0.\n\nThe assumed hom-set equation forces ea = e0: for each G take F to be the lifted\nleft image of G and h to be the abelian comparison isomorphism. The hom-set\nequations for ea and e0 have the same left side. Injectivity of the set adjunction\nbijection and cancellation of the forgotten isomorphism h identify their inverse\ncomponents. Thus ea is the operation-compatible comparison e0.\n\nChoose addV, zeroV, negV and addU, zeroU, negU from the internal-group\nidentifications. Their section formulas are exactly those in the conclusion.\nThe lifted addition equation, composed with the product comparison and transported\nby the abelian comparison, gives the displayed addition equation; naturality of\nthe product comparison identifies its two factors with ea.inv. The lifted zero\nequation gives the zero equation, since any map to the chosen terminal object is\nterminal.from. The lifted inverse equation gives the negation equation after\ncancelling ea. These transports are valid because the abelian comparison is a\ngroup morphism. Substitute ea = e0 to conclude.",
+   "uses": [
+    "lem-weil-pbc-sheaf-algebraic-structures-objects",
+    "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-algebraic-structures-objects",
+  "lem-weil-pbc-adjunction-lifts-group-ring-objects",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Proposition 00YV and uniqueness of adjoints (Example 00X2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of abelian sheaves commutes with underlying sets",
+   "results": "UNAVAILABLE: service returned Internal Server Error on 2026-10-12; no search verdict is asserted.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "abelian sheaf inverse image underlying set sheaf group operations left adjoint uniqueness",
+   "results": "sheafPullbackIso, sheafIsAbelian, sheafHomSectionsEquiv, SheafOfModules.pullbackIso",
+   "date": "2026-10-12",
+   "verdict": "No exact match: these do not compare the algebraic sheaf inverse image with the set inverse image and pin all structure maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "leftAdjointUniq and unit_leftAdjointUniq_hom_app found in Adjunction.Unique; signatures inspected.",
+   "date": "2026-10-12",
+   "verdict": "The uniqueness lemma is a tool; no exact match for this coefficient-specific comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*forget|forget.*sheafPullback|mapCommRing; rg of lean/WeilConjectures, lean/Sheaf and Mathlib Sites/Monoidal",
+   "results": "No exact coefficient-forgetful pullback comparison. Generic liftsGroupRingObjects and sheaves_algebraicStructures_objects supply the internal-object route; topological pushforward_forget concerns the presheaf forgetful functor, not this statement.",
+   "date": "2026-10-12",
+   "verdict": "No existing theorem with these section formulas; use the two existing internal-object dependencies and specialize/transport them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint sheaf forget abelian groups preserves underlying inverse image",
+   "results": "Found module-sheaf pullback adjunctions, condensed free-forget adjunctions, and toSheafCompSheafToPresheafIso; none compares these étale abelian and set inverse images with the required adjunction compatibility.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no exact duplicate; use generic lift and adjoint uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Found leftAdjointUniq and its unit/counit compatibility lemmas; these support the planned uniqueness step but do not supply the coefficient comparison.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no exact duplicate; use generic lift and adjoint uniqueness."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafPullback.*forget|forget.*sheafPullback",
+   "results": "Only Mathlib/Topology/Sheaves/Functors.lean:155 (topological presheaf forget). Local rg on étale inverse-image and category-theory modules found generic lifted group-object hom-set equations and the parent theorem, not either strict subclaim.",
+   "date": "2026-10-12",
+   "verdict": "Second reading: no exact duplicate; use generic lift and adjoint uniqueness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLift",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-derived-exchange",
+   "place": "the algebraic inverse-image compatibility used by the derived exchange definition; abelian part of steps 4–5 of lem-weil-pbc-etale-inverse-image-algebraic-structures",
+   "via": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-derived-inverse-image"
+   ]
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftOperations",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInverseImageAbelianLiftOperations.lean",
+  "declaration": "AlgebraicGeometry.etaleInverseImageAbelianLift_operations",
+  "statement": "theorem etaleInverseImageAbelianLift_operations (U V : Scheme.{u}) (f : U ⟶ V)\n    (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :\n    let b := MorphismProperty.Over.pullback @Etale ⊤ f\n    let L := Scheme.etaleSetPullback f\n    let La := Etale.upperStar AddCommGrpCat.{u + 1} f\n    let FaU := sheafForget (D := AddCommGrpCat.{u + 1}) U.smallEtaleTopology\n    let FaV := sheafForget (D := AddCommGrpCat.{u + 1}) V.smallEtaleTopology\n    let a := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous b\n      (Type (u + 1)) (V.smallGrothendieckTopology @Etale)\n      (U.smallGrothendieckTopology @Etale)\n    ∀ (ea : La ⋙ FaU ≅ FaV ⋙ L),\n        (∀ (G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1})\n            (F : Sheaf U.smallEtaleTopology AddCommGrpCat.{u + 1}) (h : La.obj G ⟶ F),\n          FaV.map ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv\n            G F h) =\n              a.homEquiv (FaV.obj G) (FaU.obj F) (ea.inv.app G ≫ FaU.map h)) →\n        (∀ G : Sheaf V.smallEtaleTopology AddCommGrpCat.{u + 1},\n          ∃ (addV : (FaV.obj G) ⨯ (FaV.obj G) ⟶ (FaV.obj G))\n            (addU : (FaU.obj (La.obj G)) ⨯ (FaU.obj (La.obj G)) ⟶ (FaU.obj (La.obj G)))\n            (zeroV : ⊤_ (Sheaf V.smallEtaleTopology (Type (u + 1))) ⟶ (FaV.obj G))\n            (zeroU : ⊤_ (Sheaf U.smallEtaleTopology (Type (u + 1))) ⟶ (FaU.obj (La.obj G)))\n            (negV : (FaV.obj G) ⟶ (FaV.obj G))\n            (negU : (FaU.obj (La.obj G)) ⟶ (FaU.obj (La.obj G))),\n            (∀ (W : V.Etaleᵒᵖ) (x : ((FaV.obj G) ⨯ (FaV.obj G)).obj.obj W),\n              addV.hom.app W x =\n                (@Add.add (G.obj.obj W) inferInstance\n                  ((prod.fst : (FaV.obj G) ⨯ (FaV.obj G) ⟶\n                      (FaV.obj G)).hom.app W x : G.obj.obj W)\n                  ((prod.snd :\n                    (FaV.obj G) ⨯ (FaV.obj G) ⟶ (FaV.obj G)).hom.app W x :\n                    G.obj.obj W))) ∧\n            (∀ (W : U.Etaleᵒᵖ) (x : ((FaU.obj (La.obj G)) ⨯ (FaU.obj (La.obj G))).obj.obj W),\n              addU.hom.app W x =\n                (@Add.add ((La.obj G).obj.obj W) inferInstance\n                  ((prod.fst :\n                    (FaU.obj (La.obj G)) ⨯ (FaU.obj (La.obj G)) ⟶\n                      (FaU.obj (La.obj G))).hom.app W x :\n                    (La.obj G).obj.obj W)\n                  ((prod.snd :\n                    (FaU.obj (La.obj G)) ⨯ (FaU.obj (La.obj G)) ⟶\n                      (FaU.obj (La.obj G))).hom.app W x :\n                    (La.obj G).obj.obj W))) ∧\n            L.map addV = prodComparison L (FaV.obj G) (FaV.obj G) ≫\n              prod.map (ea.inv.app G) (ea.inv.app G) ≫ addU ≫ ea.hom.app G ∧\n            (∀ (W : V.Etaleᵒᵖ)\n                (x : (⊤_ (Sheaf V.smallEtaleTopology (Type (u + 1)))).obj.obj W),\n              zeroV.hom.app W x = (0 : G.obj.obj W)) ∧\n            (∀ (W : U.Etaleᵒᵖ)\n                (x : (⊤_ (Sheaf U.smallEtaleTopology (Type (u + 1)))).obj.obj W),\n              zeroU.hom.app W x = (0 : (La.obj G).obj.obj W)) ∧\n            L.map zeroV = terminal.from _ ≫ zeroU ≫ ea.hom.app G ∧\n            (∀ (W : V.Etaleᵒᵖ) (x : (FaV.obj G).obj.obj W),\n              negV.hom.app W x = @Neg.neg (G.obj.obj W) inferInstance x) ∧\n            (∀ (W : U.Etaleᵒᵖ) (x : (FaU.obj (La.obj G)).obj.obj W),\n              negU.hom.app W x = @Neg.neg ((La.obj G).obj.obj W) inferInstance x) ∧\n            L.map negV = ea.inv.app G ≫ negU ≫ ea.hom.app G)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T060753-L-2914984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T060753-L-2914984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

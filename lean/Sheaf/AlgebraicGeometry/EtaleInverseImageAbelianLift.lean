@@ -5,13 +5,14 @@ Authors: SHEAF group N1
 -/
 module
 
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
+import Sheaf.AlgebraicGeometry.EtaleInverseImageAbelianLiftOperations
+
 public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
-import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 
 /-!
 # EtaleInverseImageAbelianLift
@@ -102,6 +103,10 @@ theorem etaleInverseImageAbelianLift (U V : Scheme.{u}) (f : U ⟶ V)
               negV.hom.app W x = @Neg.neg (G.obj.obj W) inferInstance x) ∧
             (∀ (W : U.Etaleᵒᵖ) (x : (FaU.obj (La.obj G)).obj.obj W),
               negU.hom.app W x = @Neg.neg ((La.obj G).obj.obj W) inferInstance x) ∧
-            L.map negV = ea.inv.app G ≫ negU ≫ ea.hom.app G) := by sorry
+            L.map negV = ea.inv.app G ≫ negU ≫ ea.hom.app G) := by
+  dsimp
+  obtain ⟨ea, hea⟩ := etaleInverseImageAbelianLift_hom U V f hL
+  refine ⟨ea, hea, ?_⟩
+  exact etaleInverseImageAbelianLift_operations U V f hL ea hea
 
 end AlgebraicGeometry
