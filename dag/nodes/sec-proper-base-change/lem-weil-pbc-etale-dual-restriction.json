@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-etale-dual-restriction",
+ "kind": "statement",
+ "title": "Étale restriction of coefficient duals",
+ "statement": "Let $X$ be a scheme, $\\Lambda$ a commutative ring, $U\\to X$ an étale morphism, and $F$ any sheaf of $\\Lambda$-modules on the small étale site of $X$. Let $\\Lambda_X$ and $\\Lambda_U$ denote the constant coefficient sheaves [def-constructible-constant], equivalently the monoidal units. Then $(F^\\vee)|_U\\cong (F|_U)^\\vee$, where $F^\\vee=\\mathcal Hom_\\Lambda(F,\\Lambda_X)$ and restriction means étale inverse image.",
+ "stmt_deps": [
+  "def-constructible-constant"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring"
+ },
+ "proof": [
+  {
+   "text": "Identify the small étale site of U with the slice of the small étale site of X at the object U. For an object V of this slice, the iterated slice (X_et/U)/V is canonically equivalent to X_et/V.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Describe sections of the coefficient internal Hom over V as the module of morphisms between the two sheaves restricted to X_et/V. The preceding slice equivalence therefore identifies the restrictions of internal Hom with internal Hom of the restrictions, compatibly with further restriction maps. This description follows from the tensor-Hom adjunction applied to the free coefficient sheaf represented by V.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The unit restricts to the unit. Transport the internal Hom identification across the slice-site equivalence to obtain the coefficient-dual isomorphism. No local constancy or finiteness is used and no assertion is made about non-étale pullback.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale pullback sheaves commutes internal Hom",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to slice site commutes with internal hom sheaves",
+   "date": "2026-10-12",
+   "results": "Sheaf ΓRes and sheafHomSectionsEquiv; IsCoverDense.sheafHom_restrict_eq concerns sheaf morphisms, not the ModuleCat monoidal internal Hom. No exact comparison.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*ihom|ihom.*constant|upperStar.*ihom",
+   "date": "2026-10-12",
+   "results": "No matches in the Mathlib search service. Local searches found derived comparisons but no abelian coefficient-dual restriction comparison.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.DualStalk",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Unattached upstream declaration IsFiniteLocallyConstantSheaf.ihom_unit: restriction to an étale trivializing neighborhood",
+   "via": [
+    "lem-weil-pbc-flc-dual-stalk",
+    "lem-weil-pbc-flc-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.EtaleDualRestriction",
+  "file": "lean/Sheaf/ConstructibleSheaf/EtaleDualRestriction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_etaleDualRestrictionIso",
+  "statement": "theorem nonempty_etaleDualRestrictionIso\n    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]\n    (U : X.Etale) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj\n      ((ihom F).obj (𝟙_ _)) ≅\n      (ihom ((Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom).obj F)).obj (𝟙_ _))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T095926-L-325413",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T095926-L-325413",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

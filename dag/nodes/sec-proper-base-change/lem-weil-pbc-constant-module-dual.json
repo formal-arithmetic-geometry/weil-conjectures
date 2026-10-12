@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-constant-module-dual",
+ "kind": "statement",
+ "title": "Dual of a finite constant module sheaf",
+ "statement": "Let $X$ be a scheme and $\\Lambda$ a commutative noetherian ring. Let $M$ be a finitely generated $\\Lambda$-module. Write $M_X$ for its constant coefficient sheaf on the small étale site of $X$ [def-constructible-constant], and $\\Lambda_X$ for the monoidal unit. Then $\\mathcal Hom_\\Lambda(M_X,\\Lambda_X)\\cong (\\operatorname{Hom}_\\Lambda(M,\\Lambda))_X$ as sheaves of $\\Lambda$-modules.",
+ "stmt_deps": [
+  "def-constructible-constant"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring"
+ },
+ "proof": [
+  {
+   "text": "A finite module over the noetherian coefficient ring has a finite presentation Λᵐ → Λⁿ → M → 0. Apply the exact constant sheaf functor to obtain a presentation of M_X by finite free coefficient sheaves. This includes the zero module by taking a zero presentation.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Internal Hom into the unit turns this cokernel presentation into a kernel: maps from any sheaf T into the internal Hom are maps M_X ⊗ T → Λ_X, and tensoring preserves the presentation cokernel. Duals of the finite free coefficient sheaves are finite free, by the tensor-Hom adjunction, and the resulting map is the transpose of the presenting matrix.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Constant sheafification preserves kernels. The module kernel of the transposed matrix is Hom_Λ(M,Λ), since a map Λⁿ → Λ vanishes on the relations exactly when it factors uniquely through M. Uniqueness of the kernel isomorphism gives the asserted constant sheaf comparison. This does not use projectivity of M.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "internal Hom of a constant finitely presented module sheaf is constant",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom constant sheaf finitely presented modules",
+   "date": "2026-10-12",
+   "results": "LightCondensed monoidal-closed instances, ihomPoints, and SheafOfModules.IsFinitePresentation; no exact comparison for coefficient sheaves on the small étale site.",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom.*constantSheaf|constantSheaf.*ihom",
+   "date": "2026-10-12",
+   "results": "No matches in the Mathlib search service. Local rg finds no coefficient constant-sheaf dual comparison.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.ConstructibleSheaf.DualStalk",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Unattached upstream declaration IsFiniteLocallyConstantSheaf.ihom_unit: finite presentation and constant sheaf kernel argument",
+   "via": [
+    "lem-weil-pbc-flc-dual-stalk",
+    "lem-weil-pbc-flc-dual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.ConstructibleSheaf.ConstantModuleDual",
+  "file": "lean/Sheaf/ConstructibleSheaf/ConstantModuleDual.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_constantModuleDualIso",
+  "statement": "theorem nonempty_constantModuleDualIso\n    (X : Scheme.{u}) {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]\n    (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :\n    Nonempty ((ihom ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)).obj\n      (𝟙_ _) ≅ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj\n        (ModuleCat.of Λ (M →ₗ[Λ] Λ)))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T095926-L-325413",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T095926-L-325413",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,6 +8,11 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Sheaf.ConstructibleSheaf.EtaleDualRestriction
+import Sheaf.ConstructibleSheaf.ConstantModuleDual
+
 /-! # Stalk comparison for coefficient duals -/
 
 @[expose] public section
@@ -43,6 +48,48 @@ theorem IsFiniteLocallyConstantSheaf.nonempty_ihom_unit_stalk_iso
     (s : Spec (.of Ω) ⟶ X) :
     Nonempty (((pointSmallEtale s).sheafFiber.obj ((ihom F).obj (𝟙_ _))) ≅
       ModuleCat.of Λ
-        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F →ₗ[Λ] Λ)) := by sorry
+        (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F →ₗ[Λ] Λ)) := by
+  classical
+  have : JointlySurjective etalePrecoverage.{u} :=
+    inferInstanceAs (JointlySurjective (precoverage @Etale))
+  have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨d⟩ := hF.toIsLocallyConstantSheaf.nonempty_locallyConstantDatum
+  obtain ⟨i, x, hx⟩ := d.cover.exists_eq (s default)
+  have : Etale (d.cover.f i) := d.cover.map_prop i
+  obtain ⟨t, ht, -⟩ := exists_fac_of_etale_of_isSepClosed (d.cover.f i) s x hx
+  let U := d.cover.etalePrecoverageToEtale i
+  have htU : t ≫ U.hom = s := ht
+  let P := Etale.upperStar (ModuleCat.{u + 1} Λ) U.hom
+  have hconstant : (P.obj F).IsConstant U.left.smallEtaleTopology :=
+    (isConstant_over_iff_upperStar (ModuleCat.{u + 1} Λ) U F).mp (d.isConstant i)
+  let : (P.obj F).IsConstant U.left.smallEtaleTopology := hconstant
+  obtain ⟨M, ⟨e⟩⟩ := (P.obj F).mem_essImage_of_isConstant (J := U.left.smallEtaleTopology)
+  let eF : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F ≅ M := by
+    have e' := ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) U.hom t).app F).symm
+      ≪≫ (pointSmallEtale t).sheafFiber.mapIso e.symm
+      ≪≫ (pointSmallEtale t).sheafFiberConstantSheafIso M
+    rw [htU] at e'
+    exact e'
+  have : Module.Finite Λ M :=
+    (ModuleCat.isFinitelyGenerated_iff M).1
+      ((hF.toIsFiniteSheaf.isFinitelyGenerated_sheafFiber Ω s).of_iso eF)
+  obtain ⟨eR⟩ := nonempty_etaleDualRestrictionIso U F
+  obtain ⟨eC⟩ := nonempty_constantModuleDualIso U.left M
+  let eD : P.obj ((ihom F).obj (𝟙_ _)) ≅
+      (constantSheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (ModuleCat.of Λ (M →ₗ[Λ] Λ)) :=
+    eR ≪≫ ((MonoidalClosed.internalHom.mapIso e.op).app (𝟙_ _)) ≪≫ eC
+  let eS : ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
+      ((ihom F).obj (𝟙_ _)) ≅ ModuleCat.of Λ (M →ₗ[Λ] Λ) := by
+    have e' := ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) U.hom t).app
+        ((ihom F).obj (𝟙_ _))).symm
+      ≪≫ (pointSmallEtale t).sheafFiber.mapIso eD
+      ≪≫ (pointSmallEtale t).sheafFiberConstantSheafIso (ModuleCat.of Λ (M →ₗ[Λ] Λ))
+    rw [htU] at e'
+    exact e'
+  exact ⟨eS ≪≫ (LinearEquiv.arrowCongr eF.toLinearEquiv.symm
+    (LinearEquiv.refl Λ Λ)).toModuleIso⟩
 
 end AlgebraicGeometry.Scheme

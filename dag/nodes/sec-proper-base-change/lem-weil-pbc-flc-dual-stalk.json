@@ -12,16 +12,32 @@
  ],
  "proof": [
   {
-   "text": "Fix s and an étale trivializing neighborhood through which s lifts. On this neighborhood F is constant with value M, identified with F_s, and M is finitely generated. Noetherianity gives a finite presentation Λᵐ → Λⁿ → M → 0. After exact constant sheafification, internal Hom into the unit is the kernel of the transposed finite matrix. The geometric stalk functor is exact, and its monoidal unit comparison identifies the stalks of the finite free constant sheaves with Λⁿ and Λᵐ. It therefore identifies the stalk of the sheaf dual with the kernel of the same transposed matrix on modules, namely Hom_Λ(M, Λ). Transport along M ≅ F_s yields the asserted module isomorphism. This uses finite presentation, not projectivity, and does not assert that stalks commute with internal Hom for arbitrary sheaves.",
+   "text": "Lift the geometric point through a member U of a trivializing étale cover. Use isConstant_over_iff_upperStar and the essential-image characterization of constant sheaves to obtain a module M and an isomorphism M_U ≅ F|_U. The pullback-stalk comparison and the constant-sheaf stalk comparison give F_s ≅ M. Transport finite generation of F_s along this isomorphism to obtain Module.Finite Λ M.",
    "uses": [],
    "elementary": false
+  },
+  {
+   "text": "Apply the étale dual restriction comparison to F at U. Apply internalHom.mapIso to M_U ≅ F|_U, contravariantly in its first argument. Compose with the constant-module dual comparison for M, obtaining (F^∨)|_U ≅ Hom_Λ(M,Λ)_U.",
+   "uses": [
+    "lem-weil-pbc-etale-dual-restriction",
+    "lem-weil-pbc-constant-module-dual"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the stalk functor at the lifted point. Compose the pullback-stalk and constant-sheaf stalk comparisons to obtain (F^∨)_s ≅ Hom_Λ(M,Λ). Precompose linear maps with F_s ≅ M, using LinearEquiv.arrowCongr, to identify the latter with Hom_Λ(F_s,Λ).",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-etale-dual-restriction",
+  "lem-weil-pbc-constant-module-dual"
+ ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "lean/WeilConjectures/ConstructibleSheaf/Monoidal.lean",
-  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring, local finite presentation and dual finite generation"
+  "place": "IsFiniteLocallyConstantSheaf.ihom_unit docstring; implemented cover lifting, stalk transport, and dual transport in U2"
  },
  "mathlib_searches": [
   {
@@ -114,9 +130,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T085246-L-17622",
+  "landing": "20261012T095926-L-325413",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
