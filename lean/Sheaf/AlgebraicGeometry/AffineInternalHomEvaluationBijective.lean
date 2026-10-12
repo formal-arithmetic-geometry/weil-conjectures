@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Sheaf.AlgebraicGeometry.InternalHomAffineChartEvaluation
 
 /-!
 # Evaluation of internal Hom on affine opens
@@ -23,6 +24,22 @@ universe u
 open CategoryTheory Opposite
 
 namespace AlgebraicGeometry
+
+private theorem spec_map_bijective {R : CommRingCat.{u}}
+    (M F : (Spec R).Modules) [M.IsQuasicoherent] :
+    Function.Bijective (fun φ : M ⟶ F ↦ (moduleSpecΓFunctor (R := R)).map φ) := by
+  let adj := tilde.adjunction (R := R)
+  have : IsIso (adj.counit.app M) :=
+    inferInstanceAs (IsIso (Scheme.Modules.fromTildeΓ M))
+  let e := (Iso.homCongr (asIso (adj.counit.app M)).symm (Iso.refl F)).trans
+    (adj.homEquiv _ F)
+  have he : (fun φ : M ⟶ F ↦ (moduleSpecΓFunctor (R := R)).map φ) = e := by
+    funext φ
+    dsimp [e, Iso.homCongr, Adjunction.homEquiv]
+    simp only [Category.comp_id]
+    rw [Functor.map_comp, ← Category.assoc, adj.right_triangle_components, Category.id_comp]
+  rw [he]
+  exact e.bijective
 
 /-- A morphism from a quasi-coherent module on an affine open is uniquely
 specified by its map on sections, even when the target is not quasi-coherent.
@@ -48,6 +65,23 @@ theorem affine_internalHom_evaluation_bijective
     Function.Bijective
       (fun φ : (SheafOfModules.homObj M F).val.obj (op U) ↦
         (φ.app (op (Over.mk (𝟙 U)))).hom) := by
-  sorry
+  let e := chartHomEquiv M F U hU
+  let c :
+      ((moduleSpecΓFunctor (R := Γ(X, U))).obj (M.restrict hU.fromSpec) →ₗ[Γ(X, U)]
+        (moduleSpecΓFunctor (R := Γ(X, U))).obj (F.restrict hU.fromSpec)) ≃ₗ[Γ(X, U)]
+        (Γ(M, U) →ₗ[Γ(X, U)] Γ(F, U)) :=
+    LinearEquiv.arrowCongr (chartSectionsEquiv M U hU) (chartSectionsEquiv F U hU)
+  have hspec := spec_map_bijective (M.restrict hU.fromSpec) (F.restrict hU.fromSpec)
+  have hcomp := c.bijective.comp (ModuleCat.homEquiv.bijective.comp
+    (hspec.comp e.bijective))
+  have heq :
+      (fun φ : (SheafOfModules.homObj M F).val.obj (op U) ↦
+        c ((moduleSpecΓFunctor (R := Γ(X, U))).map (e φ)).hom) =
+      (fun φ : (SheafOfModules.homObj M F).val.obj (op U) ↦
+        (φ.app (op (Over.mk (𝟙 U)))).hom) := by
+    funext φ
+    exact internalHom_evaluation_chart_compare M F U hU φ
+  rw [← heq]
+  exact hcomp
 
 end AlgebraicGeometry
