@@ -9,22 +9,49 @@
  },
  "proof": [
   {
-   "text": "Use the unit equation for the left-adjoint uniqueness comparison and the normalized composition comparison, then evaluate at top sections.",
+   "text": "Compare the composition of open-restriction adjunctions with restriction along the composite. Their unit equations agree sectionwise by presheaf functoriality, hence the conjugate of restrictFunctorComp.hom is pushforwardComp.hom. Conjugate the inverses of the canonical leftAdjointUniq comparisons; conjugateEquiv_comp and the whiskering equations identify their composite with the inverse normalized tensorSectionsComp. Invert to obtain compatibility of the forward comparison maps with composition.",
    "uses": [
     "new-etale-tensor-open-section-iso",
-    "lem-sc-etale-qcoherent-presheaf-functorial"
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
    "elementary": false
+  },
+  {
+   "text": "Evaluate this composition equation on a top section. Naturality of the tensor adjunction unit moves the comparison past the tensor section unit, and unit_leftAdjointUniq_hom_app turns this into the ordinary restriction-adjunction unit.",
+   "uses": [
+    "new-etale-tensor-open-section-iso",
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "lem-pc-module-pullback-adjunction",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composable open immersions, eliminate the equality of the composite with its specified target morphism. Expand restrictFunctorComp_inv_app_app, restrictAdjunction_unit_app_app and restrict_map. The resulting ordinary presheaf maps compose to the single inclusion map because opens form a thin category. Specialize to homOfLE and the two open inclusions, and compose with the image-top transports; the remaining square follows again from presheaf map_comp and thinness.",
+   "uses": [
+    "new-etale-tensor-open-section-iso",
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Eliminate the equalities identifying the underlying Over objects with open restrictions. Every morphism between these objects equals restrictFunctor.map of the inclusion: cancel the monomorphism U.ι in their equations over X. Apply the preceding open-inclusion result and then the object equalities obtained from hi.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "new-etale-tensor-open-section-iso",
-  "lem-sc-etale-qcoherent-presheaf-functorial"
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/03DR",
-  "place": "Equation (35.8.0.1)"
+  "place": "Equation (35.8.0.1); explicit adjunction-uniqueness and restriction-unit proof in Lean by S3, 2026-10-13."
  },
  "mathlib_searches": [
   {
@@ -104,11 +131,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
+  "reviewer": "X-eeaaa",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261012T184402-L-4026371",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T223416-L-1640762",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged Lean signatures and definitions with node statements; proof and dependency records agree; delivery and both direct importers compile cleanly; axiom checks show only standard axioms and inherited sorryAx."
  }
 }
