@@ -6032,3 +6032,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 04:24 L: merged deliver/Y2/WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorCohomology (stage 3; reviewer PASS; first push; landing 20261012T042427-L-1824421 (proof); batch 20261012T042402; modules 1; new nodes 1)
 - 04:34 L: returned deliver/Q2/WeilConjectures.SixFunctors.Etale.Gabber (reviewer RETURN: (reviewer X-dceda, head dceda9773) C7 / brief point 5: Gabber.lean removes both modules realizing sk-def-pbc's statement)
 - 04:43 L: returned deliver/G1/Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects (reviewer RETURN: (reviewer X-9028d, head 9028d2342) D1/B1: `liftedCommGrpBranch` and `liftedCommRingBranch` are restatements of the paren)
+- 04:43 L: returned deliver/H2/Sheaf.AlgebraicGeometry.StrictHenselization (reviewer RETURN: (reviewer X-1d894, head 1d894026e) F: Brief point 2 requires every downstream user in the change record. Five are missin)
