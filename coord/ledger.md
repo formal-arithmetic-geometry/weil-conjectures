@@ -9416,3 +9416,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:22 L: merged deliver/V3/Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageMatching (stage 3; reviewer PASS; first push; landing 20261012T202256-L-710118 (interface); batch 20261012T202227; modules 3; new nodes 2)
 - 20:22 L: merged deliver/V3/Sheaf.CategoryTheory.FilteredColimitPullbackHomExt (stage 3; reviewer PASS; first push; landing 20261012T202257-L-710221 (proof); batch 20261012T202227; modules 1; new nodes 0)
 - 20:22 L: merged deliver/V3/Sheaf.CategoryTheory.FilteredColimitPullbackLift (stage 3; reviewer PASS; first push; landing 20261012T202257-L-710318 (proof); batch 20261012T202227; modules 1; new nodes 0)
+- 20:22 L: merged deliver/W3/Sheaf.AlgebraicGeometry.FormalModuleSupportSucc (stage 3; reviewer PASS; first push; landing 20261012T202257-L-710417 (proof); batch 20261012T202227; modules 1; new nodes 0)
