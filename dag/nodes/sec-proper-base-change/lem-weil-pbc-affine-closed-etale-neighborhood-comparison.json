@@ -18,44 +18,42 @@
  ],
  "proof": [
   {
-   "text": "Present X and Z as Spec B and Spec B/K. The pair henselization is a filtered colimit of etale neighborhoods with the same closed fibre. Choose a small cofinal directed system of those neighborhoods.",
+   "text": "Apply affine_closed_henselian_neighborhood_colimit to obtain (A,K), t, the closed fibre isomorphism e, and a colimit cocone computing cohomology on Spec A.",
    "uses": [
-    "lem-weil-pbc-pair-henselization"
+    "lem-weil-pbc-affine-closed-henselian-neighborhood-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Apply cohomology continuity to the compatible pullbacks of the underlying abelian sheaf. This gives a colimit cocone of neighborhood cohomology with point the henselization cohomology.",
-   "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-    "lem-weil-pbc-inverse-image-composition",
-    "lemma-weil-pbc-etale-pullback-forget-modules"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Inverse image preserves torsion. Gabber comparison gives the closed-fibre cohomology in every degree. Composition of inverse images and forgetting module coefficients identify it with the restriction along i. Transport the colimit cocone along that isomorphism; do not assert that its point is zero.",
+   "text": "The module inverse image t^*J is torsion by the existing isTorsionSheaf_upperStar instance. Apply Gabber to (A,K) and t^*J, obtaining the additive equivalence E from henselian cohomology to cohomology of the abelian pullback along the quotient immersion k.",
    "uses": [
     "prop-weil-pbc-gabber-pair-comparison",
-    "lem-weil-pbc-inverse-image-torsion",
+    "lem-weil-pbc-inverse-image-torsion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the sheaf isomorphism from the underlying abelian sheaf of i^*J to e^*k^* of the underlying abelian sheaf of t^*J: compose upperStarComp for k,t and e,k≫t, forget module coefficients, and use pullback_forget_modules_iso for k and e. Apply the cohomology functor to it, giving ec. Topological invariance along e gives the additive equivalence ee. Compose ec, the inverse of ee, the inverse of E, and the isomorphism from henselian cohomology to c.pt. The other existential witnesses are unchanged.",
+   "uses": [
     "lem-weil-pbc-inverse-image-composition",
-    "lemma-weil-pbc-etale-pullback-forget-modules"
+    "lemma-weil-pbc-etale-pullback-forget-modules",
+    "prop-weil-pbc-universal-homeomorphism-topos"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-weil-pbc-affine-closed-henselian-neighborhood-colimit",
   "lem-weil-pbc-inverse-image-composition",
-  "lemma-weil-pbc-etale-pullback-forget-modules",
   "lem-weil-pbc-inverse-image-torsion",
-  "lem-weil-pbc-pair-henselization",
-  "prop-weil-pbc-gabber-pair-comparison"
+  "lemma-weil-pbc-etale-pullback-forget-modules",
+  "prop-weil-pbc-gabber-pair-comparison",
+  "prop-weil-pbc-universal-homeomorphism-topos"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "https://stacks.math.columbia.edu/tag/0A51",
-  "place": "Proof, affine case, first two displayed equalities; continuity Tag 09YQ and Gabber Tag 09ZI"
+  "place": "Affine case, construction of the henselization and second displayed equality; Tags 0A02 and 09YQ"
  },
  "mathlib_searches": [
   {
@@ -130,9 +128,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "F1",
   "result": "pass",
-  "landing": "20261012T030019-L-1269397",
+  "landing": "20261012T040757-L-1674610",
   "kind": "interface",
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
