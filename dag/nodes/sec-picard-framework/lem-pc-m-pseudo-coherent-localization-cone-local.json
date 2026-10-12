@@ -1,0 +1,101 @@
+{
+ "id": "lem-pc-m-pseudo-coherent-localization-cone-local",
+ "kind": "statement",
+ "title": "Local pseudo-coherence of the localization cone",
+ "statement": "Given the data E, N and a distinguished triangle from the construction node, with E m-pseudo-coherent and N vanishing above n−1, every localization of N is m-pseudo-coherent.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066D, proof, second and third paragraphs; Tags 064S, 00EO (2), 064R"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "The statement is the corresponding finite-free cone construction/local pseudo-coherence substep of Tag 066D.",
+   "uses": [
+    "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-pseudo-coherent-distinguished-triangle",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 066D, proof, second and third paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For locally pseudo coherent complexes construct a finite free top cohomology surjection whose cone lowers the bound",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free top cohomology approximation has cone with smaller cohomological bound",
+   "date": "2026-10-12",
+   "results": "CochainComplex.cm5b, CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat, CochainComplex.cm5b.instIsStrictlyGEI, CochainComplex.isLE_iff, CochainComplex.isLE_of_le, CochainComplex.isGE_iff, CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+   "verdict": "No exact match; related general tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.*[Tt]riangle|mappingCone.*homology",
+   "date": "2026-10-12",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean",
+   "verdict": "No exact match; related general tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MPseudoCoherentLocalizationConeStep",
+  "date": "2026-10-13",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-m-pseudo-coherent-localization-cone-step",
+   "place": "stage-3 proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MPseudoCoherentLocalizationConeLocal",
+  "file": "lean/Sheaf/RingTheory/MPseudoCoherentLocalizationConeLocal.lean",
+  "declaration": "DerivedCategory.localization_cone_local",
+  "statement": "theorem localization_cone_local {A : Type u₁} [CommRing A] [HasDerivedCategory.{w₁} (ModuleCat.{max u₁ v₁} A)] (M : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ) (r : ℕ) (f : Fin r → A) [∀ i : Fin r, HasDerivedCategory.{w₂} (ModuleCat.{max u₁ v₁} (Localization.Away (f i)))] (hf : Ideal.span (Set.range f) = ⊤) (m n : ℤ) (hmn : m ≤ n) (hvan : ∀ j : ℤ, n < j → IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj M))) (hlocal : ∀ i : Fin r, IsMPseudoCoherent m (Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i)))) (ComplexShape.up ℤ)).obj M))) (E N : CochainComplex (ModuleCat.{max u₁ v₁} A) ℤ) (a : Q.obj E ⟶ Q.obj M) (b : Q.obj M ⟶ Q.obj N) (c : Q.obj N ⟶ (Q.obj E)⟦(1 : ℤ)⟧) (hT : Triangle.mk a b c ∈ distTriang (DerivedCategory (ModuleCat.{max u₁ v₁} A))) (hE : IsMPseudoCoherent m (Q.obj E)) (hN : ∀ j : ℤ, n - 1 < j → IsZero ((homologyFunctor (ModuleCat.{max u₁ v₁} A) j).obj (Q.obj N))) : ∀ i : Fin r, IsMPseudoCoherent m (Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i)))) (ComplexShape.up ℤ)).obj N))",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T223402-L-1635539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T223402-L-1635539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

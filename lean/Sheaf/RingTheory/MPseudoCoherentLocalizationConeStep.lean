@@ -10,6 +10,8 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.RingTheory.FiniteHomologyOfMPseudoCoherent
 import Sheaf.RingTheory.PseudoCoherentDistinguishedTriangle
+import Sheaf.RingTheory.MPseudoCoherentLocalizationConeConstruction
+import Sheaf.RingTheory.MPseudoCoherentLocalizationConeLocal
 
 /-!
 # Lowering the cohomology bound in pseudo-coherent localization descent
@@ -66,6 +68,10 @@ theorem isMPseudoCoherent_localization_cone_step
       (∀ i : Fin r, IsMPseudoCoherent m
         (Q.obj ((Functor.mapHomologicalComplex
           (ModuleCat.extendScalars (algebraMap A (Localization.Away (f i))))
-          (ComplexShape.up ℤ)).obj N))) := by sorry
+          (ComplexShape.up ℤ)).obj N))) := by
+  obtain ⟨E, N, a, b, c, hT, hE, hN⟩ :=
+    localization_cone_construction M r f hf m n hmn hvan hlocal
+  refine ⟨E, N, a, b, c, hT, hE, hN, ?_⟩
+  exact localization_cone_local M r f hf m n hmn hvan hlocal E N a b c hT hE hN
 
 end DerivedCategory
