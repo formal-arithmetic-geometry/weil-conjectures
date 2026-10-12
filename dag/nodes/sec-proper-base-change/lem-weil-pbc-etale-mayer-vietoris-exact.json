@@ -14,88 +14,48 @@
  ],
  "proof": [
   {
-   "text": "*The covering and its fibre products.* The open immersions $j_U:U\\to X$, $j_V:V\\to X$, $j_{U\\cap V}:U\\cap V\\to X$ and the inclusions $k_U:U\\cap V\\to U$, $k_V:U\\cap V\\to V$ are etale [lem-weil-pbc-etale-composition-cancellation] (1), so $X,U,V,U\\cap V$ are objects of $X_{\\Et}$ and the inclusions are morphisms of $X_{\\Et}$ [def-weil-pbc-etale-site]. Since $X=U\\cup V$, the family $\\mathcal U=\\{U\\to X,V\\to X\\}$ is jointly surjective, hence a covering of $X$ in $X_{\\Et}$. By [lem-weil-pbc-open-fibre-product] (with $S=X$, both maps $\\mathrm{id}_X$, and the opens $U,V$ resp. $U,U$, etc.), every fibre product $W_0\\times_XW_1\\times_X\\cdots\\times_XW_p$ with $W_k\\in\\{U,V\\}$ is identified with the open subscheme $W_0\\cap\\cdots\\cap W_p$, the projections becoming the inclusions; in particular $U\\times_XU=U$, $V\\times_XV=V$ (both projections the identity), $U\\times_XV=V\\times_XU=U\\cap V$, and every product containing both $U$ and $V$ is $U\\cap V$.",
+   "text": "Use etale_mayerVietoris_sections to prove injectivity and exactness of the raw section sequence for every abelian coefficient sheaf. This uses the covering condition and the intersection pullback.",
    "uses": [
-    "lem-weil-pbc-etale-composition-cancellation",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-open-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A50 (lemma-mayer-vietoris), proof: 'the covering X = U ∪ V'"
-   }
-  },
-  {
-   "text": "*Sections of an abelian sheaf: left exactness.* Let $\\mathcal I$ be an abelian sheaf on $X_{\\Et}$ and consider $0\\to\\mathcal I(X)\\xrightarrow{a}\\mathcal I(U)\\oplus\\mathcal I(V)\\xrightarrow{b}\\mathcal I(U\\cap V)$ with $a(s)=(s|_U,s|_V)$ and $b(s,t)=s|_{U\\cap V}-t|_{U\\cap V}$; $b\\circ a=0$ since restriction is functorial. The sheaf condition [def-weil-pbc-abelian-etale-sheaves] for the covering $\\mathcal U$ of step 1 says $\\mathcal I(X)\\to\\mathcal I(U)\\times\\mathcal I(V)\\rightrightarrows\\prod_{W,W'\\in\\{U,V\\}}\\mathcal I(W\\times_XW')$ is an equalizer. By step 1 the two components on $U\\times_XU=U$ and on $V\\times_XV=V$ of the two arrows agree for every $(s,t)$ (both projections are the identity), and those on $U\\times_XV$ and $V\\times_XU$ both say $s|_{U\\cap V}=t|_{U\\cap V}$. So $a$ is injective, and $(s,t)$ with $b(s,t)=0$ is $a$ of a (unique) section: the sequence is exact at $\\mathcal I(X)$ and at $\\mathcal I(U)\\oplus\\mathcal I(V)$.",
-   "uses": [
-    "def-weil-pbc-abelian-etale-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A50, proof: 'This is true in the first and middle spots as I is a sheaf'"
-   }
-  },
-  {
-   "text": "*Surjectivity on the right for an injective sheaf.* Let $\\mathcal I$ be an injective object of $\\Ab(X_{\\Et})$ [def-sp-injective-resolutions] and $\\gamma\\in\\mathcal I(U\\cap V)$. Index $\\mathcal U$ by $\\{U,V\\}$ and use the identifications of step 1. Define $c\\in\\check{\\mathcal C}^1(\\mathcal U,\\mathcal I)=\\prod_{(i,j)}\\mathcal I(U_i\\times_XU_j)$ [def-weil-pbc-cech-complex] by $c_{UU}=0$, $c_{VV}=0$, $c_{UV}=\\gamma$, $c_{VU}=-\\gamma$; i.e. $c_{ij}=(\\varphi(j)-\\varphi(i))\\gamma$ with $\\varphi(U)=0,\\varphi(V)=1$, where $\\gamma$ stands for its restriction to $U_i\\times_XU_j$ whenever $i\\neq j$. $c$ is a cocycle: $d(c)_{i_0i_1i_2}=c_{i_1i_2}-c_{i_0i_2}+c_{i_0i_1}$ restricted to $U_{i_0}\\times_XU_{i_1}\\times_XU_{i_2}$; if $i_0=i_1=i_2$ all three terms are $0$; otherwise the triple product is $U\\cap V$, all three terms are multiples of $\\gamma|_{U\\cap V}=\\gamma$ (restrictions along the projections being the identity of $U\\cap V$ or the inclusions, by step 1), and the coefficient is $(\\varphi(i_2)-\\varphi(i_1))-(\\varphi(i_2)-\\varphi(i_0))+(\\varphi(i_1)-\\varphi(i_0))=0$. Since $\\mathcal I$ is injective, $\\check H^1(\\mathcal U,\\mathcal I)=0$ [lem-weil-pbc-injective-sheaf-cech-acyclic], so $c=d(\\sigma)$ for some $\\sigma=(\\sigma_U,\\sigma_V)\\in\\check{\\mathcal C}^0=\\mathcal I(U)\\times\\mathcal I(V)$, i.e. $c_{ij}=\\sigma_j|-\\sigma_i|$. For $(i,j)=(U,V)$: $\\gamma=\\sigma_V|_{U\\cap V}-\\sigma_U|_{U\\cap V}=b(-\\sigma_U,-\\sigma_V)$. Hence $b$ is surjective, and with step 2, $0\\to\\mathcal I(X)\\xrightarrow{a}\\mathcal I(U)\\oplus\\mathcal I(V)\\xrightarrow{b}\\mathcal I(U\\cap V)\\to0$ is exact. (This is Stacks' second argument; its first argument, Cohomology on Sites Lemma 093X, surjectivity of $\\mathcal I(U)\\to\\mathcal I(U\\cap V)$ along the monomorphism $k_U$, would need a node of its own and is not used.)",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-cech-complex",
-    "lem-weil-pbc-injective-sheaf-cech-acyclic"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A50, proof: 'Another way to prove it would be to show that the cokernel of the map I(U) ⊕ I(V) → I(U ∩ V) is the first Čech cohomology group of I with respect to the covering X = U ∪ V which vanishes by Lemmas 03OR (lemma-hom-injective) and 03OV (lemma-forget-injectives)'"
-   }
-  },
-  {
-   "text": "Choose an injective resolution F → I in nonnegative degrees. Apply the injective section sequence from the preceding two steps in each degree. Since its maps are restrictions, they commute with the differentials and produce a degreewise short exact sequence of complexes I(X) → I(U) × I(V) → I(U intersection V). Right derived evaluation is homology of each evaluated resolution, and homology of the finite product is the product of homologies.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+    "lem-weil-pbc-etale-mayer-vietoris-sections"
    ],
    "elementary": false
   },
   {
-   "text": "*The long exact sequence.* By [lem-weil-pbc-complex-ses-homology-long-exact] (in the abelian category of abelian groups) the sequence of step 4 has connecting maps $\\delta^q:\\mathcal H^q(\\mathcal I^\\bullet(U\\cap V))\\to\\mathcal H^{q+1}(\\mathcal I^\\bullet(X))$ with $\\cdots\\to\\mathcal H^q(\\mathcal I^\\bullet(X))\\xrightarrow{\\mathcal H^q(a)}\\mathcal H^q(\\mathcal I^\\bullet(U))\\oplus\\mathcal H^q(\\mathcal I^\\bullet(V))\\xrightarrow{\\mathcal H^q(b)}\\mathcal H^q(\\mathcal I^\\bullet(U\\cap V))\\xrightarrow{\\delta^q}\\mathcal H^{q+1}(\\mathcal I^\\bullet(X))\\to\\cdots$ exact; since all complexes vanish in negative degrees, $\\mathcal H^{-1}=0$ and the sequence starts with $0\\to\\mathcal H^0(\\mathcal I^\\bullet(X))$. $\\mathcal H^q(a)=(\\mathcal H^q(r_U),\\mathcal H^q(r_V))$ and $\\mathcal H^q(b)=\\mathcal H^q(r'_U)-\\mathcal H^q(r'_V)$, where $r_W:\\mathcal I^\\bullet(X)\\to\\mathcal I^\\bullet(W)$, $r'_W:\\mathcal I^\\bullet(W)\\to\\mathcal I^\\bullet(U\\cap V)$ are the restriction maps of complexes.",
+   "text": "The inclusion U∩V→U is a monomorphism, reflected from its underlying scheme open immersion by the faithful forgetful functor. For an injective I, apply injective_sheaf_mono_restriction to lift a section y on U∩V to x on U. The pair (x,0) maps to y under the difference of restrictions, using map_zero and sub_zero. Thus the section sequence is short exact on injective objects.",
    "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact"
+    "lem-weil-pbc-injective-sheaf-mono-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma Tag 0A50, proof: 'the associated long exact cohomology sequence is the sequence of the statement'; homology.tex Lemma Tag 0117"
-   }
+   "elementary": false
   },
   {
-   "text": "For a morphism F → G, lift it to a chain map between injective resolutions. Restriction commutes with that chain map, giving a morphism of the degreewise short exact sequences. Naturality of the homology connecting maps implies naturality in F. Homotopy uniqueness for the lifts also implies independence of resolutions. Thus the connecting maps are natural transformations between the displayed right derived evaluation functors.",
+   "text": "Apply rightDerived_pair_sequence to the four evaluation functors at X,U,V,U∩V, and the four restriction transformations. Discharge its three hypotheses using the two previous steps. This supplies natural connecting transformations and the three interior exactness assertions.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-complex-ses-long-exact-naturality"
+    "lem-weil-pbc-right-derived-pair-sequence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The evaluation functors preserve finite limits, so their canonical degree-zero augmentations are isomorphisms. Given two degree-zero derived sections with identical derived restrictions, choose their preimages under the X augmentation. rightDerived_zero_transformation for the U,V restrictions, and injectivity of the U,V augmentations, show their raw restrictions agree. The proved raw section injection identifies the preimages; apply the X augmentation. Combine this injection with the transformations and exactness supplied above.",
+   "uses": [
+    "lem-weil-pbc-right-derived-zero-transformation",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-etale-mayer-vietoris-sections"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-open-fibre-product",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-sp-injective-resolutions",
-  "def-weil-pbc-cech-complex",
-  "lem-weil-pbc-injective-sheaf-cech-acyclic",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-long-exact-naturality"
+  "lem-weil-pbc-etale-mayer-vietoris-sections",
+  "lem-weil-pbc-injective-sheaf-mono-restriction",
+  "lem-weil-pbc-right-derived-pair-sequence",
+  "lem-weil-pbc-right-derived-zero-transformation",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma Tag 0A50 (lemma-mayer-vietoris), with Cohomology on Sites Lemma Tag 03F3 (sites-cohomology.tex, lemma-cohomology-of-open) for the identification $H^q_{\\Et}(W,F)=H^q(W_{\\Et},F|_W)$",
-  "note": "Second reader separated the resolution comparison from the raw exact sequence; homotopy uniqueness gives coefficient naturality."
+  "place": "Tag 0A50, first proof via Tag 093X and passage to injective resolutions",
+  "note": "F2 proves the geometric section input and the initial derived injection; the general functor-level long exact sequence remains as one strict intermediate theorem."
  },
  "mathlib_searches": [
   {
@@ -162,11 +122,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "U1",
+  "reviewer": "X-67d67",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T044756-L-2041165",
+  "landing": "20261012T085236-L-13419",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent Codex review: Matched all five Lean signatures and proofs with their DAG records, source arguments, unchanged existing interface, clean compilation, and axiom results."
  }
 }

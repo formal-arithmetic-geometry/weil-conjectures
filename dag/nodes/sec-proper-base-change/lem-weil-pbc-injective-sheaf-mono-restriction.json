@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-injective-sheaf-mono-restriction",
+ "kind": "statement",
+ "title": "Injective abelian sheaves restrict surjectively along monomorphisms",
+ "statement": "Let C be a category with Hom-universe v, J a Grothendieck topology with sheafification for AddCommGrpCat in universe max(w,v) [def-weil-pbc-sites-and-cohomology, def-weil-pbc-sheafification]. Let I be an injective abelian J-sheaf [def-sp-injective-resolutions]. For any monomorphism a : U′ → U in C, the restriction I(a.op) : I(U) → I(U′) is surjective. The objects and the coefficient sheaf may be empty or zero; no cover or subcanonicality is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 093X, abelian-group specialization; also the first proof of right-hand exactness in Tag 0A50"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "For W in C, let P(W) be the sheafification of the free abelian presheaf on uliftYoneda W, in the prescribed coefficient universe. A section s over W gives a morphism P(W) → I: on a representable generator φ send it to I(φ.op)(s), then extend freely and by the sheafification adjunction. Evaluation at the identity generator recovers s. These formulas are the abelian specialization of the free Yoneda presheaf module fact, implemented by Sheaf.freeYonedaPresheafHom and its generator lemma in the already-proved source library.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcomposition with a is injective on Hom(T,U′) because a is mono; universe lift is injective as well. The induced map between free abelian groups is mono (AddCommGrpCat.free preserves monos). These component monos give a presheaf mono, and sheafification preserves it, so f : P(U′) → P(U) is mono.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the morphism b corresponding to s in I(U′), injectivity provides g : P(U) → I with f ≫ g = b. Let x be evaluation of g at the sheafified identity generator of U. Naturality of g and of the sheafification unit, together with both free maps sending the identity generator to the generator a, gives I(a.op)(x)=evaluation of b at id_U′=s. This proves surjectivity.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-pbc-sheafification",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 093X, abelian-group specialization; also the first proof of right-hand exactness in Tag 0A50",
+  "note": "F2 Lean reduction of the source argument; proved helpers use the existing Mathlib/source APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of an injective abelian sheaf along a monomorphism in a site is surjective",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective sheaf I and monomorphism a U to V the function I.map a.op is surjective",
+   "results": "CategoryTheory.Sheaf.instMonoAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization, CategoryTheory.Sheaf.mono_of_isLocallyInjective, CategoryTheory.Sheaf.mono_of_injective, PresheafOfModules.mono_iff_surjective, TopCat.Presheaf.app_surjective_of_injective_of_locally_surjective, CategoryTheory.Sheaf.Hom.mono_iff_presheaf_mono, CategoryTheory.instMonoSheafTypeImageι, CategoryTheory.Sheaf.instIsLocallyInjectiveAppArrowPLocallySurjectiveLocallyInjectiveFunctorialLocallySurjectiveInjectiveFactorization",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "(injective.*(restriction|surjective)|surjective.*injective)",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/EpiMono.lean, Mathlib/CategoryTheory/Sites/LocallyBijective.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisExact",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof, induction using Mayer–Vietoris; Tag 0A50 Tag 093X, abelian-group specialization; also the first proof of right-hand exactness in Tag 0A50",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-exact",
+    "lem-weil-pbc-etale-mayer-vietoris"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InjectiveSheafMonoRestriction",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveSheafMonoRestriction.lean",
+  "declaration": "CategoryTheory.injective_sheaf_mono_restriction",
+  "statement": "theorem injective_sheaf_mono_restriction\n    (I : Sheaf J AddCommGrpCat.{max w v}) [Injective I]\n    {U' U : C} (a : U' ⟶ U) [Mono a] : Function.Surjective (I.obj.map a.op)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures and proofs with their DAG records, source arguments, unchanged existing interface, clean compilation, and axiom results."
+ }
+}

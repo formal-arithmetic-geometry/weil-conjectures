@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-right-derived-pair-sequence",
+ "kind": "statement",
+ "title": "Natural long exact sequence from a pair sequence exact on injectives",
+ "statement": "Let C be an abelian category with injective resolutions [def-sp-abelian, def-sp-injective-resolutions]. Let A,B,D,E : C → Ab be additive functors and let a:A→B, b:A→D, c:B→E, d:D→E be natural transformations [def-sp-left-exact-additive]. Assume for every injective I that x↦(a_I x,b_I x) is injective, its image is the kernel of (y,z)↦c_I y-d_I z, and this difference map is surjective. Then there are natural transformations δ_n:RⁿE→Rⁿ⁺¹A such that for every M and n the sequence RⁿA(M) → RⁿB(M)×RⁿD(M) → RⁿE(M) → Rⁿ⁺¹A(M) → Rⁿ⁺¹B(M)×Rⁿ⁺¹D(M) is exact at the three interior positions. Its two restriction maps use the right derived natural transformations (Rⁿa,Rⁿb) and Rⁿc-Rⁿd. No geometric hypothesis or degree-zero injection is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, last paragraph, abstracted to four additive functors; Homology Tag 0117"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "For a coefficient object M choose the canonical nonnegative injective resolution P. In each degree k, the hypotheses apply to the injective object P^k. Naturality of a,b,c,d makes the section maps commute with P differentials, so A(P) → B(P)×D(P) → E(P) is a degreewise short exact sequence of cochain complexes. The termwise zero-composite equation follows from Function.Exact, since every image is in the kernel.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the homology long exact sequence to this short exact sequence of complexes. The three interior exactness assertions are homology_exact₂, homology_exact₃, and homology_exact₁, and its connecting morphism in degrees n,n+1 is δ.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Homology of B(P)×D(P) is the product of the two homologies: cycles and boundaries are componentwise, and the quotient of their product by the product of boundaries is the product of the two quotients. The induced projections identify the map from A(P) with the pair of induced maps, and identify the map into E(P) with the difference. Transport all maps and exactness across the canonical isoRightDerivedObj; rightDerived_app_eq identifies the transported natural-transformation components with those in the statement.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For M→N lift it to a cochain map between their canonical injective resolutions. Naturality of a,b,c,d gives a morphism of short exact sequences of evaluated complexes. The homology connecting map is natural, and isoRightDerivedObj_hom_naturality identifies the other sides with the derived functors on M→N. Hence the transported δ components satisfy the naturality equation. Homotopy uniqueness of resolution lifts implies independence of the lift. These components define δ_n, and the transported exactness assertions prove the conclusion.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-complex-ses-long-exact-naturality",
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-derived-functor-map-via-lift",
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, last paragraph, abstracted to four additive functors; Homology Tag 0117",
+  "note": "F2 Lean reduction of the source argument; proved helpers use the existing Mathlib/source APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sequence of additive functors to abelian groups exact on injective objects yields natural connecting maps and a long exact sequence of right derived functors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of additive functors evaluated on injectives gives a long exact sequence of their right derived functors",
+   "results": "CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact.*rightDerived|rightDerived.*shortExact",
+   "results": "No matches",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisExact",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof, induction using Mayer–Vietoris; Tag 0A50 Tag 0A50, last paragraph, abstracted to four additive functors; Homology Tag 0117",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-exact",
+    "lem-weil-pbc-etale-mayer-vietoris"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedPairSequence",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedPairSequence.lean",
+  "declaration": "CategoryTheory.rightDerived_pair_sequence",
+  "statement": "theorem rightDerived_pair_sequence\n    {C : Type u} [Category.{v} C] [Abelian C] [HasInjectiveResolutions C]\n    (A B D E : C ⥤ AddCommGrpCat.{w})\n    [A.Additive] [B.Additive] [D.Additive] [E.Additive]\n    (a : A ⟶ B) (b : A ⟶ D) (c : B ⟶ E) (d : D ⟶ E)\n    (hinj : ∀ (I : C), Injective I →\n      Function.Injective (fun x => (a.app I x, b.app I x)))\n    (hexact : ∀ (I : C), Injective I →\n      Function.Exact (fun x => (a.app I x, b.app I x))\n        (fun x => c.app I x.1 - d.app I x.2))\n    (hsurj : ∀ (I : C), Injective I →\n      Function.Surjective (fun x : B.obj I × D.obj I => c.app I x.1 - d.app I x.2)) :\n    ∃ δ : ∀ n : ℕ, E.rightDerived n ⟶ A.rightDerived (n + 1),\n      ∀ M : C,\n        ∀ n : ℕ,\n          Function.Exact (fun x => ((a.rightDerived n).app M x,\n            (b.rightDerived n).app M x))\n            (fun x => (c.rightDerived n).app M x.1 - (d.rightDerived n).app M x.2) ∧\n          Function.Exact\n            (fun x : (B.rightDerived n).obj M × (D.rightDerived n).obj M =>\n              (c.rightDerived n).app M x.1 - (d.rightDerived n).app M x.2)\n            ((δ n).app M) ∧\n          Function.Exact ((δ n).app M)\n            (fun x => ((a.rightDerived (n + 1)).app M x,\n              (b.rightDerived (n + 1)).app M x))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures and proofs with their DAG records, source arguments, unchanged existing interface, clean compilation, and axiom results."
+ }
+}

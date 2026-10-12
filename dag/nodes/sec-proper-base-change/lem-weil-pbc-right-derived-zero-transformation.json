@@ -1,0 +1,116 @@
+{
+ "id": "lem-weil-pbc-right-derived-zero-transformation",
+ "kind": "statement",
+ "title": "Zeroth derived augmentation respects transformations of functors",
+ "statement": "Let C,D be abelian categories, C with injective resolutions [def-sp-abelian, def-sp-injective-resolutions], and A,B:C→D additive functors with a natural transformation α:A→B [def-sp-left-exact-additive]. For every M the canonical augmentations η_A:A→R⁰A and η_B:B→R⁰B satisfy η_A(M) ≫ (R⁰α)_M = α_M ≫ η_B(M). Left exactness of the functors is not assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section 0156, right derived functors computed by injective resolutions, and Mathlib.CategoryTheory.Abelian.RightDerived augmentation formulas"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical injective resolution P of M and let φ be the termwise map of evaluated complexes induced by α. The map P.toRightDerivedZero′ A ≫ cyclesMap φ 0 equals α_M ≫ P.toRightDerivedZero′ B: cancel iCycles in the target, use cyclesMap_i and the augmentation-to-iCycles formula, and use naturality of α at P.ι⁰.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand both augmentations using P.toRightDerivedZero_eq and expand R⁰α using P.rightDerived_app_eq. Cancel the inverse/hom pair of the A comparison. Commute homologyMap with homologyπ by homologyπ_naturality, apply the cycles equality from the first step, and reassociate. In nonnegative degree zero isoHomologyπ₀.hom is definitionally homologyπ, giving the desired equation.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-map-via-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-derived-functor-map-via-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Section 0156, right derived functors computed by injective resolutions, and Mathlib.CategoryTheory.Abelian.RightDerived augmentation formulas",
+  "note": "F2 Lean reduction of the source argument; proved helpers use the existing Mathlib/source APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural transformation from an additive functor to its zeroth right derived functor commutes with natural transformations of additive functors",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a natural transformation alpha F to G the zero derived map commutes with toRightDerivedZero",
+   "results": "CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.NatTrans.rightDerived_id, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.rightDerived_fac_app",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero.*natural|rightDerived.*toRightDerivedZero|toRightDerivedZero.*rightDerived",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisExact",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof, induction using Mayer–Vietoris; Tag 0A50 Section 0156, right derived functors computed by injective resolutions, and Mathlib.CategoryTheory.Abelian.RightDerived augmentation formulas",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-exact",
+    "lem-weil-pbc-etale-mayer-vietoris"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedZeroTransformation",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedZeroTransformation.lean",
+  "declaration": "CategoryTheory.rightDerived_zero_transformation",
+  "statement": "theorem rightDerived_zero_transformation\n    {A B : C ⥤ D} [A.Additive] [B.Additive] (α : A ⟶ B) (M : C) :\n    A.toRightDerivedZero.app M ≫ (α.rightDerived 0).app M =\n      α.app M ≫ B.toRightDerivedZero.app M",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures and proofs with their DAG records, source arguments, unchanged existing interface, clean compilation, and axiom results."
+ }
+}

@@ -6,6 +6,10 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.AlgebraicGeometry.EtaleMayerVietorisSections
+import Sheaf.CategoryTheory.InjectiveSheafMonoRestriction
+import Sheaf.CategoryTheory.RightDerivedPairSequence
+import Sheaf.CategoryTheory.RightDerivedZeroTransformation
 
 @[expose] public section
 
@@ -18,21 +22,18 @@ namespace AlgebraicGeometry.Etale
 /-- Source: Stacks Project, Etale Cohomology, Tag 0A50, proof.
 (blueprint: lem-weil-pbc-etale-mayer-vietoris-exact)
 
-Proof: The two open immersions form a cover, and their fiber products are the intersections.
-For every abelian sheaf I, the sheaf condition makes the map I(X) → I(U) × I(V) injective
-with image the kernel of the difference of the restrictions to I(U ∩ V).
-If I is injective, the Cech cocycle with components (0, gamma, -gamma, 0) for any section
-gamma on U ∩ V is a boundary, by injective Cech acyclicity. A boundary gives two sections
-whose difference restricts to gamma (change both signs if necessary). Hence the difference
-map is surjective. Choose an injective resolution of F and apply this short exact sequence
-in each degree. The restriction maps commute with the differentials, so this is a short
-exact sequence of complexes of abelian groups. Its homology sequence gives the three
-exactness assertions in every degree; homology of the two-term product is the product
-of the homologies, and the induced maps are precisely the right derived restriction maps.
-The complexes vanish in negative degrees, giving the initial degree-zero injection.
-Lift a morphism of sheaves to a chain map between injective resolutions. Naturality of the
-homology connecting maps and homotopy uniqueness make the connecting maps independent
-of resolutions and natural in F, hence natural transformations as asserted. -/
+Proof: The two open immersions form a cover, and their intersection is their pullback.
+The sheaf condition makes the section map injective, with image the kernel of the
+difference of restrictions (etale_mayerVietoris_sections). An injective sheaf restricts
+surjectively along the monomorphism U ∩ V → U, by extending a morphism from its free
+abelian representable sheaf (injective_sheaf_mono_restriction, Stacks Tag 093X).
+Thus every intersection section is the difference of a lifted U-section and zero.
+The generic rightDerived_pair_sequence applies this short exact section sequence to
+injective resolutions, takes homology, and supplies natural connecting transformations
+and the three exactness assertions. For the initial injection, evaluation preserves
+finite limits, so its degree-zero augmentation is an isomorphism. Naturality of this
+augmentation in the evaluation functor (rightDerived_zero_transformation) transports
+the proved section injection to the displayed right derived restriction maps. -/
 theorem etale_mayerVietoris_exact (X : Scheme.{u}) (U V : X.Opens) (hcover : U ⊔ V = ⊤) :
 ∃ δ : ∀ n : ℕ,
       (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
@@ -105,6 +106,70 @@ theorem etale_mayerVietoris_exact (X : Scheme.{u}) (U V : X.Opens) (hcover : U �
             (MorphismProperty.Over.homMk (A := Scheme.Etale.mk V.ι)
               (B := Scheme.Etale.mk (𝟙 X)) (V.ι) (Category.comp_id V.ι)).op)).rightDerived (n +
             1)).app F x))) := by
-  sorry
+  let ev (W : X.Etale) :=
+    sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⋙
+      (evaluation _ _).obj (op W)
+  let rU : Scheme.Etale.mk U.ι ⟶ Scheme.Etale.mk (𝟙 X) :=
+    MorphismProperty.Over.homMk U.ι (Category.comp_id U.ι)
+  let rV : Scheme.Etale.mk V.ι ⟶ Scheme.Etale.mk (𝟙 X) :=
+    MorphismProperty.Over.homMk V.ι (Category.comp_id V.ι)
+  let kU : Scheme.Etale.mk (U ⊓ V).ι ⟶ Scheme.Etale.mk U.ι :=
+    MorphismProperty.Over.homMk (X.homOfLE inf_le_left) (X.homOfLE_ι inf_le_left)
+  let kV : Scheme.Etale.mk (U ⊓ V).ι ⟶ Scheme.Etale.mk V.ι :=
+    MorphismProperty.Over.homMk (X.homOfLE inf_le_right) (X.homOfLE_ι inf_le_right)
+  let res {W W' : X.Etale} (f : W ⟶ W') : ev W' ⟶ ev W :=
+    Functor.whiskerLeft (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+      ((evaluation _ _).map f.op)
+  have hkU : Mono kU := by
+    have : Mono ((Scheme.Etale.forget X ⋙ Over.forget X).map kU) :=
+      inferInstanceAs (Mono (X.homOfLE (inf_le_left : U ⊓ V ≤ U)))
+    exact (Scheme.Etale.forget X ⋙ Over.forget X).mono_of_mono_map this
+  obtain ⟨δ, hδ⟩ := rightDerived_pair_sequence
+    (ev (Scheme.Etale.mk (𝟙 X))) (ev (Scheme.Etale.mk U.ι))
+    (ev (Scheme.Etale.mk V.ι)) (ev (Scheme.Etale.mk (U ⊓ V).ι))
+    (res rU) (res rV) (res kU) (res kV)
+    (fun I _ => (etale_mayerVietoris_sections X U V hcover I).1)
+    (fun I _ => (etale_mayerVietoris_sections X U V hcover I).2) (by
+      intro I hI y
+      have : Injective I := hI
+      obtain ⟨x, hx⟩ := injective_sheaf_mono_restriction.{u + 1, u, u + 1}
+        X.smallEtaleTopology I kU y
+      refine ⟨(x, 0), ?_⟩
+      change I.obj.map kU.op x - I.obj.map kV.op 0 = y
+      simpa only [map_zero, sub_zero] using hx)
+  refine ⟨δ, fun F => ⟨?_, hδ F⟩⟩
+  have : PreservesFiniteLimits (ev (Scheme.Etale.mk (𝟙 X))) := inferInstance
+  have : PreservesFiniteLimits (ev (Scheme.Etale.mk U.ι)) := inferInstance
+  have : PreservesFiniteLimits (ev (Scheme.Etale.mk V.ι)) := inferInstance
+  let εX := (ev (Scheme.Etale.mk (𝟙 X))).toRightDerivedZero.app F
+  let εU := (ev (Scheme.Etale.mk U.ι)).toRightDerivedZero.app F
+  let εV := (ev (Scheme.Etale.mk V.ι)).toRightDerivedZero.app F
+  have hU := rightDerived_zero_transformation (res rU) F
+  have hV := rightDerived_zero_transformation (res rV) F
+  have hεX : Function.Surjective εX :=
+    (AddCommGrpCat.epi_iff_surjective εX).mp inferInstance
+  have hεU : Function.Injective εU :=
+    (AddCommGrpCat.mono_iff_injective εU).mp inferInstance
+  have hεV : Function.Injective εV :=
+    (AddCommGrpCat.mono_iff_injective εV).mp inferInstance
+  intro x y hxy
+  obtain ⟨x', rfl⟩ := hεX x
+  obtain ⟨y', rfl⟩ := hεX y
+  apply congrArg εX
+  apply (etale_mayerVietoris_sections X U V hcover F).1
+  apply Prod.ext
+  · apply hεU
+    calc
+      εU ((res rU).app F x') = ((res rU).rightDerived 0).app F (εX x') :=
+        (ConcreteCategory.congr_hom hU x').symm
+      _ = ((res rU).rightDerived 0).app F (εX y') := congrArg Prod.fst hxy
+      _ = εU ((res rU).app F y') := ConcreteCategory.congr_hom hU y'
+  · apply hεV
+    calc
+      εV ((res rV).app F x') = ((res rV).rightDerived 0).app F (εX x') :=
+        (ConcreteCategory.congr_hom hV x').symm
+      _ = ((res rV).rightDerived 0).app F (εX y') := congrArg Prod.snd hxy
+      _ = εV ((res rV).app F y') := ConcreteCategory.congr_hom hV y'
+
 
 end AlgebraicGeometry.Etale

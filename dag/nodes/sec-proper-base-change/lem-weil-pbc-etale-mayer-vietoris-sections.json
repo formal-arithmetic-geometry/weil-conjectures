@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-etale-mayer-vietoris-sections",
+ "kind": "statement",
+ "title": "Sections of a two-open etale cover form an equalizer",
+ "statement": "Let X be a scheme [def-pc-scheme], U,V opens with U ∨ V = top, and F an abelian sheaf on X.smallEtaleTopology [def-weil-pbc-etale-site, def-weil-pbc-abelian-etale-sheaves]. Put a(s)=(s|U,s|V), and b(s,t)=s|U∩V-t|U∩V, using the open-immersion restrictions. Then a is injective and Function.Exact a b. No injectivity assumption on F is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof: first and middle spots, via the sheaf condition"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The inclusions U → X and V → X form a covering of the small etale site: their underlying scheme maps have ranges U and V, and the cover hypothesis says their union is all X. This is checked with Scheme.ofArrows_mem_smallEtaleTopology_iff and Scheme.Opens.range_ι.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scheme pullback of the two open inclusions is U∩V, with its two inclusion maps (isPullback_opens_inf, the open-fibre-product fact). On a cone of compatible sections, apply the sheaf amalgamation axiom to the Bool-indexed covering. For a relation with equal indices cancel the monomorphic open immersion. For a relation with different indices lift the pair of maps through the intersection pullback, then use the cone relation and functoriality of restrictions to verify compatibility.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The amalgamation axiom gives the cone map with its two required composites; separatedness gives uniqueness. Thus the section square is a pullback in abelian groups. Forgetting to sets preserves this limit. The equivalence between a limiting cone point and {(s,t) | s|=t|} proves the section injection and supplies a preimage for every pair killed by the difference. Conversely, restrictions of a global section agree by the square relation.",
+   "uses": [
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-fibre-product",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A50, proof: first and middle spots, via the sheaf condition",
+  "note": "F2 Lean reduction of the source argument; proved helpers use the existing Mathlib/source APIs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An abelian sheaf on two open subsets covering a scheme has an injective section map and its image is the kernel of the difference of restrictions",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "unavailable": true
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a sheaf on a two open cover are the pullback of its sections on the intersection",
+   "results": "TopCat.Sheaf.objSupIsoProdEqLocus, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.interUnionPullbackConeLift, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, TopCat.Sheaf.interUnionPullbackCone_snd, TopCat.Sheaf.interUnionPullbackCone_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.interUnionPullbackCone_pt",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  },
+  {
+   "tool": "grep",
+   "query": "(IsPullback|mayerVietoris).*(section|exact)|(section|exact).*(mayerVietoris|IsPullback)",
+   "results": "Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact matching statement. The concrete proof uses the existing APIs listed in its proof steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisExact",
+  "date": "2026-10-12",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-injective-restriction-acyclicity",
+   "place": "proof, induction using Mayer–Vietoris; Tag 0A50 Tag 0A50, proof: first and middle spots, via the sheaf condition",
+   "via": [
+    "lem-weil-pbc-etale-mayer-vietoris-exact",
+    "lem-weil-pbc-etale-mayer-vietoris"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleMayerVietorisSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleMayerVietorisSections.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_mayerVietoris_sections",
+  "statement": "theorem etale_mayerVietoris_sections (X : Scheme.{u}) (U V : X.Opens)\n    (hcover : U ⊔ V = ⊤) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    Function.Injective (fun x : F.obj.obj (op (Scheme.Etale.mk (𝟙 X))) =>\n      (F.obj.map (MorphismProperty.Over.homMk\n        (A := Scheme.Etale.mk U.ι) (B := Scheme.Etale.mk (𝟙 X))\n        U.ι (Category.comp_id U.ι)).op x,\n       F.obj.map (MorphismProperty.Over.homMk\n        (A := Scheme.Etale.mk V.ι) (B := Scheme.Etale.mk (𝟙 X))\n        V.ι (Category.comp_id V.ι)).op x)) ∧\n    Function.Exact (fun x : F.obj.obj (op (Scheme.Etale.mk (𝟙 X))) =>\n      (F.obj.map (MorphismProperty.Over.homMk\n        (A := Scheme.Etale.mk U.ι) (B := Scheme.Etale.mk (𝟙 X))\n        U.ι (Category.comp_id U.ι)).op x,\n       F.obj.map (MorphismProperty.Over.homMk\n        (A := Scheme.Etale.mk V.ι) (B := Scheme.Etale.mk (𝟙 X))\n        V.ι (Category.comp_id V.ι)).op x))\n      (fun x => F.obj.map (MorphismProperty.Over.homMk\n        (A := Scheme.Etale.mk (U ⊓ V).ι) (B := Scheme.Etale.mk U.ι)\n        (X.homOfLE inf_le_left) (X.homOfLE_ι inf_le_left)).op x.1 -\n        F.obj.map (MorphismProperty.Over.homMk\n        (A := Scheme.Etale.mk (U ⊓ V).ι) (B := Scheme.Etale.mk V.ι)\n        (X.homOfLE inf_le_right) (X.homOfLE_ι inf_le_right)).op x.2)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-67d67",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261012T085236-L-13419",
+  "kind": "interface",
+  "note": "independent Codex review: Matched all five Lean signatures and proofs with their DAG records, source arguments, unchanged existing interface, clean compilation, and axiom results."
+ }
+}
