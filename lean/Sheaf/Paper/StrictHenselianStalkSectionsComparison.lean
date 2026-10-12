@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.EtaleObjectCohomologyStalkComplex
 public import Mathlib.CategoryTheory.Functor.EpiMono
+import Sheaf.Paper.StrictHenselianStalkSectionsComparisonCore
+import Sheaf.Paper.StrictHenselianStalkSectionsComparisonIso
 
 /-! # Degree-zero continuity for etale sections
 
@@ -51,4 +53,7 @@ theorem strictHenselian_stalkSections_comparison
       H.PreservesEpimorphisms ∧
         Nonempty (etaleObjectStalkSections X i x ≅
           H ⋙ (sheafSections (Spec (X.presheaf.stalk x)).smallEtaleTopology
-            AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 _)))) := by sorry
+            AddCommGrpCat.{u + 1}).obj (op (Scheme.Etale.mk (𝟙 _)))) := by
+  obtain ⟨H, ⟨adj⟩⟩ := strictHenselian_stalkSections_comparison_functor (X.fromSpecStalk x)
+  exact ⟨H, Functor.preservesEpimorphisms_of_adjunction adj,
+    strictHenselian_stalkSections_comparison_iso i hi_inclusion x H adj⟩

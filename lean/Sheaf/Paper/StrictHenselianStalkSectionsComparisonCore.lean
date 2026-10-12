@@ -1,0 +1,41 @@
+module
+
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.Algebra.Category.Grp.Basic
+
+/-! # Same-universe inverse image of abelian etale sheaves -/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory AlgebraicGeometry
+
+/-- Direct image on abelian etale sheaves admits an inverse-image left adjoint,
+without increasing the universe of the coefficient groups.
+Source: Stacks Project, Sites and Sheaves, Proposition 7.44.3, and Modules on Sites,
+Tag 03D3, the abelian-sheaf adjunction in its proof.
+(blueprint: new-strict-henselian-stalk-sections-comparison-functor)
+
+Proof: For each scheme choose the site of affine etale schemes of finite presentation,
+encoded by finite presentations over the coordinate rings of an affine open cover.
+The presentations and their morphisms form sets in the scheme universe. These affine
+objects form a dense subsite: affine opens cover each etale object, and an affine object
+has a finite affine refinement of each covering. The comparison lemma identifies sheaves
+on the full etale site with sheaves on this small site, with the same coefficient groups.
+Base change along g is continuous and preserves finite limits, hence defines a morphism
+of topoi. On the small presentations its inverse image is the left Kan extension followed
+by sheafification; both use colimits indexed by sets in the coefficient universe. Inverse
+image of sets preserves finite products, so it transports the zero, addition and negation
+of each abelian sheaf and their equations to an abelian sheaf. The set-sheaf adjunction
+restricts to homomorphisms, since its unit and counit respect these operations. Transport
+this adjunction back through the dense-subsite equivalences. Its right adjoint evaluates
+at the base-changed object, exactly the displayed direct image. This constructs a left
+adjoint H with the required adjunction. Only adjunction existence is asserted; no arbitrary
+witness from this theorem is used as the data of a definition. -/
+theorem strictHenselian_stalkSections_comparison_functor
+    {X Y : Scheme.{u + 1}} (g : Y ⟶ X) :
+    ∃ H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤
+        Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1},
+      Nonempty (H ⊣ g.Etale.sheafPushforwardContinuous AddCommGrpCat.{u + 1}
+        X.smallEtaleTopology Y.smallEtaleTopology) := by sorry
