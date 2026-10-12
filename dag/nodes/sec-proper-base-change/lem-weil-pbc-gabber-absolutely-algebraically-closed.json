@@ -29,107 +29,58 @@
  ],
  "proof": [
   {
-   "text": "*Reduction to $Z=\\operatorname{Spec}R'$ (Stacks: 'Write $X=\\operatorname{Spec}(R)$ and $Z=\\operatorname{Spec}(R')$ so that we have a surjection of rings $R\\to R'$').* Let $K$ be the fraction field of $R$. Since $i:Z\\to X=\\operatorname{Spec}R$ is a closed immersion, by the affine form of [def-weil-closed-immersion] (Stacks 01QO, applied to the affine open $U=X$) there are an ideal $I\\subseteq R$ and an isomorphism of schemes $\\varphi:Z\\xrightarrow{\\sim}\\operatorname{Spec}R'$ over $X$, where $R'=R/I$ and $\\operatorname{Spec}R'\\to X$ is induced by the quotient map $R\\to R'$ [def-weil-affine-spectrum]. Transport of structure along $\\varphi$: the functor $\\Phi:Z_{\\Et}\\to(\\operatorname{Spec}R')_{\\Et}$, $(U\\xrightarrow{u}Z)\\mapsto(U\\xrightarrow{\\varphi u}\\operatorname{Spec}R')$, identity on morphisms, is an isomorphism of categories (inverse via $\\varphi^{-1}$) [def-weil-pbc-etale-site]; it sends a family $\\{U_k\\to U\\}$ to the same family, so it preserves and reflects coverings, and it sends the final object $Z$ to the final object $\\operatorname{Spec}R'$. Hence $G\\mapsto G\\circ\\Phi^{-1}$ is an isomorphism between the categories of abelian sheaves, which preserves injective objects, exactness, K-injective resolutions and global sections, and sends the constant presheaf with value $M$ to the constant presheaf, hence (sheafification being determined by its universal property) $\\underline M_Z$ to $\\underline M_{\\operatorname{Spec}R'}$ [def-weil-pbc-constant-sheaf]. Therefore $H^q(Z_{\\Et},\\underline M)\\cong H^q((\\operatorname{Spec}R')_{\\Et},\\underline M)$ for all $q$ [def-weil-pbc-etale-cohomology], and it suffices to show $H^q((\\operatorname{Spec}R')_{\\Et},\\underline M)=0$ for $q\\ge1$. The same transport applies to any isomorphism of schemes; it is used again in step 4.",
+   "text": "Use Mathlib IsClosedImmersion.Spec_iff to choose I and an isomorphism e : Z to Spec(R/I). The theorem requires no change to its signature.",
    "uses": [
     "def-weil-closed-immersion",
-    "def-weil-affine-spectrum",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-constant-sheaf",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "gabber_quotient_localizations supplies strict henselianity at every prime of R/I. Its proof uses the ring-level 09Z9 theorems and the already stated strictly henselian quotient theorem.",
+   "uses": [
+    "lem-weil-pbc-gabber-quotient-localizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let F be the constant sheaf with value M on Spec(R/I). gabber_quotient_principal_h1 implies every element x of H-one on D(f+g) is zero by Subsingleton.elim. Therefore the kernel implication required by gabberCriterion holds, independently of its two restriction-zero premises.",
+   "uses": [
+    "lem-weil-pbc-gabber-quotient-principal-h1",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Etale.gabberCriterion to R/I, F, and the preceding hypotheses. The positive integer q has q.toNat positive, so the criterion gives Subsingleton (Sheaf.H F q.toNat).",
+   "uses": [
+    "lem-weil-pbc-gabber-criterion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use isZero_constant_cohomology_iff_subsingleton_H_of_iso with e to transfer that vanishing to derived constant cohomology on Z. The equality of the integer cast of q.toNat with q follows from q >= 1, completing the original goal.",
+   "uses": [
+    "lem-weil-pbc-constant-etale-cohomology-iso-comparison",
     "def-weil-pbc-etale-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZC (label lemma-gabber-for-absolutely-algebraically-closed), line 14445, proof, first sentence; the transport along the isomorphism Z = Spec(R') is left implicit by Stacks"
-   }
-  },
-  {
-   "text": "*The local rings of $R$ are strictly henselian (Stacks: 'by Lemma 09Z9').* $X=\\operatorname{Spec}R$ is an integral scheme whose function field is (isomorphic as an $R$-algebra to) $K$, and $\\mathcal O_{X,\\mathfrak p}\\cong R_{\\mathfrak p}$ for every prime $\\mathfrak p$ [lem-weil-pbc-spec-domain-stalks-function-field]. Each $R_{\\mathfrak p}$ is a localization of the normal domain $R$ at $S=R\\setminus\\mathfrak p\\not\\ni0$, hence a normal domain [lem-weil-pbc-localization-normal-domain]; so all local rings of $X$ are normal domains, i.e. $X$ is a normal integral scheme [def-weil-pbc-normal-ring], and its function field $K$ is separably closed by hypothesis [def-pc-separably-closed]. By part (2) of [sbc-lem-etale-over-normal] (Stacks 09Z9; sorry-free Lean in slopmaster2: AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk, whose hypotheses are IsIntegral S, every stalk integrally closed, IsSepClosed S.functionField) every local ring $\\mathcal O_{X,\\mathfrak p}\\cong R_{\\mathfrak p}$ is strictly henselian [def-weil-pbc-henselian-terminology].",
-   "uses": [
-    "lem-weil-pbc-spec-domain-stalks-function-field",
-    "lem-weil-pbc-localization-normal-domain",
-    "def-weil-pbc-normal-ring",
-    "def-pc-separably-closed",
-    "sbc-lem-etale-over-normal",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZC (label lemma-gabber-for-absolutely-algebraically-closed), line 14445, proof, second sentence ('All local rings of R' are strictly henselian by Lemma 09Z9 (label lemma-normal-scheme-with-alg-closed-function-field, line 14312) and Algebra, Lemma 05WS'), first half"
-   }
-  },
-  {
-   "text": "*The local rings of $R'$ are strictly henselian (Stacks: '... and Algebra, Lemma 05WS').* Let $\\mathfrak p'$ be a prime of $R'=R/I$ and $\\mathfrak p\\supseteq I$ its preimage in $R$, so $\\mathfrak p'=\\mathfrak p/I$. Localization is exact, so localizing $0\\to I\\to R\\to R'\\to0$ at $R\\setminus\\mathfrak p$ (whose image in $R'$ is $R'\\setminus\\mathfrak p'$) gives $R'_{\\mathfrak p'}\\cong R_{\\mathfrak p}/IR_{\\mathfrak p}$, and $IR_{\\mathfrak p}\\subseteq\\mathfrak pR_{\\mathfrak p}$, the maximal ideal, since $I\\subseteq\\mathfrak p$. By step 2, $R_{\\mathfrak p}$ is strictly henselian, so $R'_{\\mathfrak p'}$ is strictly henselian by [lem-weil-pbc-strictly-henselian-quotient] [def-weil-pbc-henselian-terminology].",
-   "uses": [
-    "lem-weil-pbc-strictly-henselian-quotient",
-    "def-weil-pbc-henselian-terminology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZC (label lemma-gabber-for-absolutely-algebraically-closed), line 14445, proof, second sentence; literature/stacks-project/algebra.tex Lemma 05WS (label lemma-quotient-strict-henselization), line 43703; the identification $R'_{\\mathfrak p'}=R_{\\mathfrak p}/IR_{\\mathfrak p}$ is schemes.tex line 1588 (Example 01IG)"
-   }
-  },
-  {
-   "text": "*$H^1$ vanishes on every principal open of $\\operatorname{Spec}R'$ (Stacks: 'for any $f'\\in R'$ there is a surjection $R_f\\to R'_{f'}$ where $f\\in R$ is a lift of $f'$. Since $R_f$ is a normal domain with separably closed fraction field we see that $H^1_{\\Et}(D(f'),\\underline M)=0$ by Lemma 09ZB').* Let $h\\in R'$ and let $j_h:D(h)\\to\\operatorname{Spec}R'$ be the principal open subscheme. Claim: $H^1(D(h)_{\\Et},j_h^{-1}\\underline M)=0$. First, $j_h^{-1}\\underline M\\cong\\underline M_{D(h)}$ [lemma-constructible-pullback-constant] [def-weil-pbc-inverse-image]. Choose $f\\in R$ mapping to $h$. If $f=0$ then $h=0$ and $D(h)=\\emptyset$: the small etale site of the empty scheme has the single object $\\emptyset$, covered by the empty family, so every abelian sheaf on it is $0$ and all its cohomology groups vanish. Let $f\\neq0$. By [lem-weil-pbc-localization-normal-domain] (with $S=\\{1,f,f^2,\\dots\\}\\not\\ni0$, as $R$ is a domain) $R_f$ is a normal domain whose fraction field is $K$, which is separably closed [def-pc-separably-closed]. By [lem-weil-pbc-localization-quotient-commute] (with $B=R$, $J=I$, $b=f$, $\\bar b=h$) $R'_h\\cong R_f/IR_f$, compatibly with the maps from $R_f$, so $R_f\\to R'_h$ is surjective with kernel $IR_f$; so the morphism $\\operatorname{Spec}R'_h\\to\\operatorname{Spec}R_f$ is a closed immersion [lem-weil-pbc-spec-quotient-closed-immersion]. By [lem-weil-pbc-gabber-h1-absolutely-algebraically-closed] (Stacks 09ZB) applied to $R_f$ and this closed immersion, $H^1((\\operatorname{Spec}R'_h)_{\\Et},\\underline M)=0$. Finally $\\operatorname{Spec}R'_h\\to\\operatorname{Spec}R'$ is an open immersion with image $D(h)$ [lem-weil-pbc-principal-localization-open-immersion], i.e. an isomorphism $\\operatorname{Spec}R'_h\\xrightarrow{\\sim}D(h)$ onto the open subscheme $D(h)$ [def-weil-open-immersion]; by the transport of step 1, $H^1(D(h)_{\\Et},\\underline M_{D(h)})\\cong H^1((\\operatorname{Spec}R'_h)_{\\Et},\\underline M)=0$, proving the claim.",
-   "uses": [
-    "lemma-constructible-pullback-constant",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-localization-normal-domain",
-    "def-pc-separably-closed",
-    "lem-weil-pbc-localization-quotient-commute",
-    "lem-weil-pbc-spec-quotient-closed-immersion",
-    "lem-weil-pbc-gabber-h1-absolutely-algebraically-closed",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "def-weil-open-immersion",
-    "def-weil-pbc-etale-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZC (label lemma-gabber-for-absolutely-algebraically-closed), line 14445, proof, third and fourth sentences"
-   }
-  },
-  {
-   "text": "*Conclusion by Gabber's criterion (Stacks: 'Thus we may apply Lemma 0GY0 to $Z=\\operatorname{Spec}(R')$ to conclude').* Apply [lem-weil-pbc-gabber-criterion] (Stacks 0GY0) to the ring $R'$ and the abelian sheaf $\\mathcal F=\\underline M$ on $(\\operatorname{Spec}R')_{\\Et}$: all local rings of $R'$ are strictly henselian by step 3, and for all $f,g\\in R'$ the map $H^1(D(f+g)_{\\Et},\\mathcal F|_{D(f+g)})\\to H^1(D(f(f+g))_{\\Et},\\mathcal F|_{D(f(f+g))})\\oplus H^1(D(g(f+g))_{\\Et},\\mathcal F|_{D(g(f+g))})$ has zero kernel because its source is $0$ by step 4 (with $h=f+g$). Hence $H^q((\\operatorname{Spec}R')_{\\Et},\\underline M)=0$ for all $q\\ge1$ [def-weil-pbc-etale-cohomology], and by step 1 $H^q(Z_{\\Et},\\underline M)=0$ for all $q\\ge1$.",
-   "uses": [
-    "lem-weil-pbc-gabber-criterion",
-    "def-weil-pbc-etale-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 09ZC (label lemma-gabber-for-absolutely-algebraically-closed), line 14445, proof, last sentence; Lemma 0GY0 (label lemma-gabber-criterion), line 14228"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-closed-immersion",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-gabber-quotient-localizations",
+  "lem-weil-pbc-gabber-quotient-principal-h1",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-etale-cohomology",
-  "lem-weil-pbc-spec-domain-stalks-function-field",
-  "lem-weil-pbc-localization-normal-domain",
-  "def-weil-pbc-normal-ring",
-  "def-pc-separably-closed",
-  "sbc-lem-etale-over-normal",
-  "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-strictly-henselian-quotient",
-  "lemma-constructible-pullback-constant",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-localization-quotient-commute",
-  "lem-weil-pbc-spec-quotient-closed-immersion",
-  "lem-weil-pbc-gabber-h1-absolutely-algebraically-closed",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-gabber-criterion"
+  "lem-weil-pbc-gabber-criterion",
+  "lem-weil-pbc-constant-etale-cohomology-iso-comparison",
+  "def-weil-pbc-etale-cohomology"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 09ZC (label lemma-gabber-for-absolutely-algebraically-closed), line 14445, proof; the transport along Z = Spec(R'), the empty case f = 0 and the identifications of localizations of R' are written out, Stacks leaves them implicit"
+  "place": "Lemma 09ZC, all five original steps kept; Q2 implemented the ring and principal-open specializations, reusing the proved Ext-to-derived comparison. Localization surjectivity replaces explicit localization-quotient commutation."
  },
  "mathlib_searches": [
   {
@@ -222,5 +173,15 @@
   "group": "J1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

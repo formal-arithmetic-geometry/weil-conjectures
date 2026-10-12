@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-gabber-principal-open-closed-presentation",
+ "kind": "statement",
+ "title": "A principal open of a quotient spectrum has a closed presentation over a normal domain with separably closed fraction field",
+ "statement": "Let R be a normal domain [def-weil-pbc-normal-ring] with separably closed fraction field [def-pc-separably-closed]. For an ideal I of R and h in R/I, there exists a normal domain S with separably closed fraction field and a closed immersion [def-weil-closed-immersion] from the open subscheme D(h) of Spec(R/I) [def-weil-affine-spectrum, def-weil-open-immersion] into Spec S. This includes empty D(h) and I = R.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, proof third and fourth sentences; the empty-open case is written out."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-pc-separably-closed",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Lift h to f in R using Ideal.Quotient.mk_surjective. If f = 0, the open subscheme D(h) is empty. Its unique morphism to Spec R is a closed immersion, so choose S = R. The Lean proof constructs its IsEmpty instance and uses isInitialOfIsEmpty.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "If f is nonzero, let S = Localization.Away f. powers f lies in nonZeroDivisors R, giving an integral domain and integral closedness. Construct S to FractionRing R by IsLocalization.map and use IsFractionRing.isFractionRing_of_isLocalization. Transfer separable closedness to FractionRing S along FractionRing.algEquiv.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "def-pc-separably-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The map Localization.awayMap (Ideal.Quotient.mk I) f is surjective: in awayMap_surjective_iff choose a lift b of a in R/I and exponent zero. Therefore its spectrum morphism is a closed immersion by IsClosedImmersion.spec_of_surjective. Compose it with basicOpenIsoSpecAway.hom for h to obtain the required closed immersion. Localization-quotient commutation is not needed.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-pc-separably-closed",
+  "lem-weil-pbc-principal-localization-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, proof third and fourth sentences; the empty-open case is written out. Q2 implemented the indicated specialization and glue in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A principal open of a quotient spectrum is a closed subscheme of a localized spectrum",
+   "results": "UNAVAILABLE: service returned HTTP Internal Server Error.",
+   "verdict": null,
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The principal open of the spectrum of a quotient ring is a closed subscheme of the spectrum of the localized ring",
+   "results": "IsClosedImmersion.spec_of_quotient_mk and Scheme.IdealSheafData.isLocalization_away: ingredients rather than the whole statement.",
+   "verdict": "No complete Mathlib match; use the listed proved tools and project lemmas.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg on Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes for the relevant theorem names, localizations and cohomology comparisons",
+   "results": "Mathlib AlgebraicGeometry.Restrict.basicOpenIsoSpecAway; ClosedImmersion.spec_of_surjective; Localization.awayMap_surjective_iff; source IsSepClosed.of_ringEquiv.",
+   "verdict": "Use the declarations specified in the proof.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+   "place": "Stage-3 implementation of the corresponding step of Stacks 09ZC.",
+   "via": []
+  },
+  "same_as": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberPrincipalOpenClosedPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberPrincipalOpenClosedPresentation.lean",
+  "declaration": "AlgebraicGeometry.gabber_principal_open_closed_presentation",
+  "statement": "theorem gabber_principal_open_closed_presentation (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] (hsep : IsSepClosed (FractionRing R)) (I : Ideal R) (h : R ⧸ I) : ∃ (S : CommRingCat.{u}) (_ : IsDomain S) (_ : IsIntegrallyClosed S) (_ : IsSepClosed (FractionRing S)), ∃ i : (Scheme.Opens.toScheme (X := Spec (CommRingCat.of (R ⧸ I))) (PrimeSpectrum.basicOpen h)) ⟶ Spec S, IsClosedImmersion i",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

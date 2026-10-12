@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-gabber-quotient-localizations",
+ "kind": "statement",
+ "title": "Prime localizations of a quotient of a normal domain with separably closed fraction field are strictly henselian",
+ "statement": "Let R be a normal domain [def-weil-pbc-normal-ring] with separably closed fraction field [def-pc-separably-closed], and I an arbitrary ideal. For every prime ideal p of R/I, its prime localization (R/I)_p is strictly henselian [def-weil-pbc-henselian-terminology]. No properness assumption on I is needed, since the unit quotient has no primes.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, proof second sentence, using 09Z9 and Algebra Lemma 05WS."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-pc-separably-closed",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Set P = comap of p along the quotient map and A = Localization.AtPrime P. The complement of P contains no zero. Apply isIntegrallyClosed_of_isLocalization and construct the canonical map A to FractionRing R. IsFractionRing.isFractionRing_of_isLocalization shows this is a fraction field of A.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved ring-level source theorems HenselianLocalRing.of_isSepClosed_fractionRing and IsLocalRing.isSepClosed_residueField_of_isSepClosed_fractionRing (WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite, the local-domain form of Stacks 09Z9) to build IsStrictlyHenselianLocalRing A.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The quotient map is surjective, hence is surjective on prime localizations by RingHom.surjectiveOnStalks_of_surjective. Let phi : A to (R/I)_p be Localization.localRingHom. A unit cannot belong to ker phi since the target is nontrivial, so ker phi lies in the maximal ideal. Apply isStrictlyHenselianLocalRing_quotient with this kernel, retain its strict henselianity conjunct, and transfer it along phi.quotientKerEquivOfSurjective. This avoids explicitly identifying the kernel with I A.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-quotient"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-strictly-henselian-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, proof second sentence, using 09Z9 and Algebra Lemma 05WS. Q2 implemented the indicated specialization and glue in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The local rings of a quotient of a normal domain with separably closed fraction field are strictly henselian",
+   "results": "UNAVAILABLE: service returned HTTP Internal Server Error.",
+   "verdict": null,
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime localizations of a quotient of an integrally closed domain with separably closed fraction field are strictly henselian",
+   "results": "Algebra.isUnramifiedAt_iff_map_eq and Field.henselian: no complete match.",
+   "verdict": "No complete Mathlib match; use the listed proved tools and project lemmas.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg on Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes for the relevant theorem names, localizations and cohomology comparisons",
+   "results": "Source Etale/QuasiFinite.lean contains the two proved fraction-field-to-henselianity lemmas; Mathlib localization and surjective-on-stalks APIs provide the ring glue.",
+   "verdict": "Use the declarations specified in the proof.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+   "place": "Stage-3 implementation of the corresponding step of Stacks 09ZC.",
+   "via": []
+  },
+  "same_as": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberQuotientLocalizations",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberQuotientLocalizations.lean",
+  "declaration": "gabber_quotient_localizations",
+  "statement": "theorem gabber_quotient_localizations (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] (hsep : IsSepClosed (FractionRing R)) (I : Ideal R) (p : Ideal (R ⧸ I)) [p.IsPrime] : IsStrictlyHenselianLocalRing (Localization.AtPrime p)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

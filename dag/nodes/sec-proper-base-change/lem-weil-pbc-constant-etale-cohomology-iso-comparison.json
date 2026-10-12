@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-constant-etale-cohomology-iso-comparison",
+ "kind": "statement",
+ "title": "Constant derived etale cohomology vanishing agrees with Ext cohomology vanishing on an isomorphic scheme",
+ "statement": "For schemes X,Y [def-weil-pbc-scheme-conventions], an isomorphism e : X to Y, an arbitrary abelian group M, and a natural number n, the derived etale cohomology H^n(RGamma(X,M[0])) [def-weil-pbc-etale-cohomology, def-weil-pbc-constant-sheaf] is a zero object if and only if the Ext-defined Sheaf.H of the constant sheaf M on Y in degree n is a subsingleton. There are no finiteness, affineness, normality or field hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, implicit transport in the first sentence; comparison of definitions is the existing lem-weil-pbc-sheafH-ext-derived-comparison (Derived Categories 015A, 05TI, 06XR; Etale Cohomology 03Q5)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "For the inverse scheme isomorphism e.inv, cohomologyEquiv identifies H of the constant sheaf on X with H of its pullback to Y. upperStarConstantSheafIso identifies this pullback with the constant sheaf on Y; applying Sheaf.functorH.mapIso gives an additive equivalence. Compose these equivalences to obtain eH.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the natural isomorphism supplied by Scheme.nonempty_sheafH_extDerivedIso X n. Its component at the constant sheaf identifies Sheaf.functorH.obj with derived cohomology of the single complex. A derived zero object therefore gives a subsingleton H on X by AddCommGrpCat.subsingleton_of_isZero. Transfer along eH.symm. Conversely transfer a subsingleton H on Y along eH, apply AddCommGrpCat.isZero_iff_subsingleton, and transport the zero object back along the component isomorphism.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-sheafH-ext-derived-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, implicit transport in the first sentence; comparison of definitions is the existing lem-weil-pbc-sheafH-ext-derived-comparison (Derived Categories 015A, 05TI, 06XR; Etale Cohomology 03Q5). Q2 implemented the indicated specialization and glue in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology defined by derived global sections and by Ext from the constant integer sheaf agrees and is preserved under scheme isomorphisms",
+   "results": "UNAVAILABLE: service returned HTTP Internal Server Error.",
+   "verdict": null,
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of a sheaf in degree zero computes Ext from the constant free abelian sheaf",
+   "results": "Sheaf.H and InjectiveResolution.extAddEquivCohomologyClass; no complete Mathlib comparison. The proved project module EtaleSheafHExtDerivedComparison supplies it.",
+   "verdict": "No complete Mathlib match; use the listed proved tools and project lemmas.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg on Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes for the relevant theorem names, localizations and cohomology comparisons",
+   "results": "rg of the DAG and both library roots found lem-weil-pbc-sheafH-ext-derived-comparison and its proved nonempty_sheafH_extDerivedIso. TopologicalInvariance.cohomologyEquiv supplies isomorphism transport.",
+   "verdict": "Use the declarations specified in the proof.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+   "place": "Stage-3 implementation of the corresponding step of Stacks 09ZC.",
+   "via": []
+  },
+  "same_as": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantEtaleCohomologyIsoComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.isZero_constant_cohomology_iff_subsingleton_H_of_iso",
+  "statement": "theorem isZero_constant_cohomology_iff_subsingleton_H_of_iso (X Y : Scheme.{u}) (e : X ≅ Y) (M : Type (u + 1)) [AddCommGroup M] (n : ℕ) : IsZero ((cohomology AddCommGrpCat.{u + 1} X (n : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj ((constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)))) ↔ Subsingleton (Sheaf.H.{u + 1} ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)) n)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

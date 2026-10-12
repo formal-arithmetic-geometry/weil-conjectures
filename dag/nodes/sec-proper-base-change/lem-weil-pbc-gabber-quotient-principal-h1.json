@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-gabber-quotient-principal-h1",
+ "kind": "statement",
+ "title": "First cohomology vanishes for finite constant sheaves restricted to principal opens of a quotient spectrum",
+ "statement": "Let R be a normal domain [def-weil-pbc-normal-ring] with separably closed fraction field [def-pc-separably-closed], I an arbitrary ideal, M a finite abelian group, and h in R/I. If j : D(h) to Spec(R/I) is the open immersion, Sheaf.H of j-star of the constant abelian sheaf M [def-weil-pbc-constant-sheaf, def-weil-pbc-inverse-image, def-weil-pbc-etale-cohomology] in degree one is a subsingleton.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, proof third and fourth sentences, using 09ZB."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-pc-separably-closed",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use gabber_principal_open_closed_presentation to obtain a closed immersion i from U = D(h) into Spec S, where S is a normal domain with separably closed fraction field. Install the returned instances.",
+   "uses": [
+    "lem-weil-pbc-gabber-principal-open-closed-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isZero_constant_cohomology_one_of_isIntegrallyClosed to S, U, i, M. Use the identity-scheme-isomorphism case of isZero_constant_cohomology_iff_subsingleton_H_of_iso to get Subsingleton of the Ext-defined first cohomology of the constant sheaf on U.",
+   "uses": [
+    "lem-weil-pbc-gabber-h1-absolutely-algebraically-closed",
+    "lem-weil-pbc-constant-etale-cohomology-iso-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "upperStarConstantSheafIso identifies the pullback of the constant sheaf on Spec(R/I) with the constant sheaf on U. Apply Sheaf.functorH.mapIso and convert the group isomorphism to an additive equivalence. Its injectivity transfers subsingletonness back to the restricted sheaf. The instance is passed explicitly because typeclass search does not unfold functorH.obj.",
+   "uses": [
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-gabber-principal-open-closed-presentation",
+  "lem-weil-pbc-gabber-h1-absolutely-algebraically-closed",
+  "lem-weil-pbc-constant-etale-cohomology-iso-comparison",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma 09ZC, proof third and fourth sentences, using 09ZB. Q2 implemented the indicated specialization and glue in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "First etale cohomology of finite constant sheaves on principal opens of a quotient of an integrally closed domain with separably closed fraction field vanishes",
+   "results": "UNAVAILABLE: service returned HTTP Internal Server Error.",
+   "verdict": null,
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "Full-target LeanFinder query returned etale-locus and cotangent cohomology results; no match. Loogle CategoryTheory.Sheaf.H found functorH and subsingleton_H_of_isZero but no geometric vanishing.",
+   "verdict": "No complete Mathlib match; use the listed proved tools and project lemmas.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "rg on Mathlib, lean/WeilConjectures, lean/Sheaf and dag/nodes for the relevant theorem names, localizations and cohomology comparisons",
+   "results": "Source GabberConstantH1Vanishing supplies the precise degree-one theorem; ConstructibleSheaf.Defs supplies upperStarConstantSheafIso. No ready principal-open specialization.",
+   "verdict": "Use the declarations specified in the proof.",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed",
+  "date": "2026-10-12",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-gabber-absolutely-algebraically-closed",
+   "place": "Stage-3 implementation of the corresponding step of Stacks 09ZC.",
+   "via": []
+  },
+  "same_as": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GabberQuotientPrincipalH1",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberQuotientPrincipalH1.lean",
+  "declaration": "AlgebraicGeometry.Etale.gabber_quotient_principal_h1",
+  "statement": "theorem gabber_quotient_principal_h1 (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R] (hsep : IsSepClosed (FractionRing R)) (I : Ideal R) (M : Type (u + 1)) [AddCommGroup M] [Finite M] (h : R ⧸ I) : Subsingleton (Sheaf.H.{u + 1} (((Scheme.Opens.ι (X := Spec (CommRingCat.of (R ⧸ I))) (PrimeSpectrum.basicOpen h))^*[AddCommGrpCat.{u + 1}]).obj ((constantSheaf (Spec (CommRingCat.of (R ⧸ I))).smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M))) 1)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261012T044752-L-2038783",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

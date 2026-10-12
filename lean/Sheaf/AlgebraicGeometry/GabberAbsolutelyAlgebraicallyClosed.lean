@@ -8,13 +8,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.GabberConstantH1Vanishing
+import Sheaf.AlgebraicGeometry.GabberQuotientLocalizations
+import Sheaf.AlgebraicGeometry.GabberQuotientPrincipalH1
+import Sheaf.AlgebraicGeometry.ConstantEtaleCohomologyIsoComparison
 import Sheaf.Paper.GabberCriterion
-import Sheaf.RingTheory.StrictlyHenselianQuotient
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.Mathlib.RingTheory.Henselian
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Gabber vanishing for absolutely algebraically closed normal domains
 
@@ -75,6 +72,24 @@ theorem gabber_absolutely_algebraically_closed
       ((DerivedCategory.singleFunctor _ 0).obj
         ((constantSheaf Z.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
           (AddCommGrpCat.of M)))) := by
-  sorry
+  obtain ⟨I, e, _⟩ := IsClosedImmersion.Spec_iff.mp (inferInstance : IsClosedImmersion i)
+  let F := (constantSheaf (Spec (CommRingCat.of (R ⧸ I))).smallEtaleTopology
+    AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of M)
+  have hR := gabber_quotient_localizations R hsep I
+  have hfg : ∀ (f g : R ⧸ I) (x : Sheaf.H
+      ((Etale.upperStar AddCommGrpCat.{u + 1}
+        (Scheme.Opens.ι (X := Spec (CommRingCat.of (R ⧸ I)))
+          (PrimeSpectrum.basicOpen (f + g)))).obj F) 1),
+      x = 0 := by
+    intro f g x
+    have := Etale.gabber_quotient_principal_h1 R hsep I M (f + g)
+    exact Subsingleton.elim _ _
+  have hvan := Etale.gabberCriterion (R ⧸ I) hR F
+    (fun f g x _ _ ↦ hfg f g x)
+  have hqnonneg : 0 ≤ q := by omega
+  have hqnat : 0 < q.toNat := by omega
+  have hz := (Etale.isZero_constant_cohomology_iff_subsingleton_H_of_iso
+    Z (Spec (CommRingCat.of (R ⧸ I))) e M q.toNat).mpr (hvan q.toNat hqnat)
+  simpa only [Int.toNat_of_nonneg hqnonneg] using hz
 
 end AlgebraicGeometry
