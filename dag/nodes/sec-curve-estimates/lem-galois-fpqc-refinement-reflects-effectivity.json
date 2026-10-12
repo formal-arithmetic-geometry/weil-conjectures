@@ -1,0 +1,133 @@
+{
+ "id": "lem-galois-fpqc-refinement-reflects-effectivity",
+ "kind": "statement",
+ "title": "Effectivity reflected by refinement of singleton fpqc coverings",
+ "statement": "Let $f:X\\to S$ and $g:X\\prime\\to S$ be singleton fpqc coverings [def-weil-pbc-fpqc-covering] of schemes [def-pc-scheme], and let $h:X\\prime\\to X$ satisfy $g=f\\circ h$. Let $D$ on $V\\to X$ and $E$ on $V\\prime\\to X\\prime$ be descent data [def-pd-descent-datum]. Suppose $q:V\\prime\\to V$ gives a pullback square [def-pc-fibre-product] over $h$ and intertwines their transports (IsBaseChange). If $E$ is effective, then $D$ is effective.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, affine-base proof: effectivity after refinement; Tag 02W0"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "An effective object W over S for E gives a canonical datum on W times_S X. Its pullback along h is identified with E by the effective square and pullback associativity. The canonical transport fixes the W-coordinate.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, affine-base proof: effectivity after refinement; Tag 02W0"
+   }
+  },
+  {
+   "text": "Fullness of refinement descends the identification and its inverse to compatible maps between the canonical datum and D. Faithfulness makes the composites identities. The resulting isomorphism gives an invariant projection V to W, witnessing effectivity.",
+   "uses": [
+    "lem-galois-fpqc-refinement-fully-faithful",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, affine-base proof: effectivity after refinement; Tag 02W0"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-refinement-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, affine-base proof: effectivity after refinement; Tag 02W0"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsEffective|descent_pullback|gluing",
+   "results": "['Mathlib/Data/Set/UnionLift.lean', 'Mathlib/Topology/CWComplex/Classical/Basic.lean', 'Mathlib/Topology/Metrizable/CompletelyMetrizable.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean']; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective fpqc descent over affine base from faithfully flat affine refinements",
+   "results": "['AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine', 'AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S', 'AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact', 'AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact']; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DescentDatum",
+   "results": "[]; loogle: unknown identifier 'DescentDatum'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a scheme descent datum and effective descent after a refinement of singleton fpqc covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 2 ('effectivity ... By [lem-galois-glue] the P_i glue to a Y-scheme P'), replaced by Stacks 0245 for the fpqc covering {Y' -> Y}: the first sentence of the proof of 0245, 'Hence Lemma 02W3 applies and it suffices to prove the statement ... in case the fpqc-covering is given by a single {X -> S} flat surjective morphism of affines'",
+   "via": [
+    "lem-galois-fpqc-descending-types-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcRefinementReflectsEffectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcRefinementReflectsEffectivity.lean",
+  "declaration": "AlgebraicGeometry.fpqc_refinement_reflects_effectivity",
+  "statement": "theorem fpqc_refinement_reflects_effectivity {S X X' : Scheme.{u}}\n    (f : X ⟶ S) (g : X' ⟶ S) (h : X' ⟶ X)\n    (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)\n    (hg : Presieve.singleton g ∈ Scheme.fpqcPrecoverage S) (hc : h ≫ f = g)\n    {V : Over X} {V' : Over X'} (q : V'.left ⟶ V.left)\n    (hq : q ≫ V.hom = V'.hom ≫ h)\n    (D : Over.DescentDatum f V) (E : Over.DescentDatum g V')\n    (hp : IsPullback q V'.hom V.hom h)\n    (hD : Over.DescentDatum.IsBaseChange hc hq D E) (hE : E.IsEffective) :\n    D.IsEffective",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,9 +8,10 @@ module
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Limits
-import Sheaf.AlgebraicGeometry.FpqcMorphismsDescend
-import Sheaf.AlgebraicGeometry.FpqcRefinementFullyFaithful
 import Sheaf.AlgebraicGeometry.FpqcSingletonAffineRefinement
+import Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum
+import Sheaf.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
+import Sheaf.AlgebraicGeometry.FpqcEffectivityAffineBaseGluing
 
 /-!
 # Effective fpqc descent reduced to affine faithfully flat morphisms
@@ -51,6 +52,16 @@ theorem fpqcDescentEffective_of_affine
     (hfpqc : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)
     {V : Over X} (D : Over.DescentDatum f V) (hV : P V.hom) :
     D.IsEffective := by
-  sorry
+  have _hcoprod := hcoprod
+  apply fpqc_effectivity_of_affine_bases P hbase ?_ f hfpqc D hV
+  intro X₀ S₀ inst f₀ hf₀ V₀ D₀ hV₀
+  obtain ⟨n, U, hU, h, g, hi, hg, hX, hflat, hsurj, hcover⟩ :=
+    Scheme.exists_fpqc_singleton_affine_refinement f₀ hf₀
+  have hc : h ≫ f₀ = g := hg.symm
+  obtain ⟨E, hE⟩ := exists_canonical_pullback_descent_datum f₀ g h hc D₀
+  have hP : P (pullback.snd V₀.hom h) := hbase V₀.hom h hV₀
+  have heff := haffine g hflat hsurj E hP
+  exact fpqc_refinement_reflects_effectivity f₀ g h hf₀ hcover hc
+    (pullback.fst V₀.hom h) pullback.condition D₀ E (IsPullback.of_hasPullback _ _) hE heff
 
 end AlgebraicGeometry

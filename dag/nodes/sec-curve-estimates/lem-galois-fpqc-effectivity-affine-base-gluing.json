@@ -1,0 +1,151 @@
+{
+ "id": "lem-galois-fpqc-effectivity-affine-base-gluing",
+ "kind": "statement",
+ "title": "Gluing effectivity from affine bases",
+ "statement": "Let $P$ be a property of morphisms of schemes [def-pc-scheme] preserved by every chosen second pullback projection [def-pc-fibre-product]. Assume that for every singleton fpqc covering $f:X\\to A$ [def-weil-pbc-fpqc-covering] with $A$ affine, every descent datum $D$ on $V\\to X$ [def-pd-descent-datum] with $P(V\\to X)$ is effective. Then the same conclusion holds for every singleton fpqc covering $f:X\\to S$ without an affine-base assumption.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof": [
+  {
+   "text": "Pull back the covering and datum to each affine open A of S. The covering stays fpqc and P is preserved; the affine-base hypothesis produces an effective object W_A.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "For B contained in A compare the effective objects over B through their canonical identifications after fpqc pullback. Unique descent of morphisms gives inverse transition maps; uniqueness proves composition and identity, and identifies each transition square as a pullback.",
+   "uses": [
+    "lem-galois-fpqc-morphisms-descend",
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  },
+  {
+   "text": "Relative gluing on the directed affine cover constructs W over S. Glue the compatible local identifications of W times_S X with V and their inverses. Their transport equations hold locally and hence globally, giving an invariant pullback projection V to W.",
+   "uses": [
+    "lem-weil-pbc-relative-glueing-affine-opens",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-covering-base-change",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-galois-fpqc-morphisms-descend",
+  "lem-weil-pbc-relative-glueing-affine-opens",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, general-base proof, affine-open restriction and relative gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsEffective|descent_pullback|gluing",
+   "results": "['Mathlib/Data/Set/UnionLift.lean', 'Mathlib/Topology/CWComplex/Classical/Basic.lean', 'Mathlib/Topology/Metrizable/CompletelyMetrizable.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean']; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective fpqc descent over affine base from faithfully flat affine refinements",
+   "results": "['AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine', 'AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S', 'AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact', 'AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact']; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DescentDatum",
+   "results": "[]; loogle: unknown identifier 'DescentDatum'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a scheme descent datum and effective descent after a refinement of singleton fpqc covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 2 ('effectivity ... By [lem-galois-glue] the P_i glue to a Y-scheme P'), replaced by Stacks 0245 for the fpqc covering {Y' -> Y}: the first sentence of the proof of 0245, 'Hence Lemma 02W3 applies and it suffices to prove the statement ... in case the fpqc-covering is given by a single {X -> S} flat surjective morphism of affines'",
+   "via": [
+    "lem-galois-fpqc-descending-types-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcEffectivityAffineBaseGluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcEffectivityAffineBaseGluing.lean",
+  "declaration": "AlgebraicGeometry.fpqc_effectivity_of_affine_bases",
+  "statement": "theorem fpqc_effectivity_of_affine_bases (P : MorphismProperty Scheme.{u})\n    (hbase : ∀ {Y V V' : Scheme.{u}} (g : Y ⟶ V) (h : V' ⟶ V),\n      P g → P (pullback.snd g h))\n    (hlocal : ∀ {X S : Scheme.{u}} [IsAffine S] (f : X ⟶ S),\n      Presieve.singleton f ∈ Scheme.fpqcPrecoverage S →\n      ∀ {V : Over X} (D : Over.DescentDatum f V), P V.hom → D.IsEffective)\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)\n    {V : Over X} (D : Over.DescentDatum f V) (hV : P V.hom) : D.IsEffective",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

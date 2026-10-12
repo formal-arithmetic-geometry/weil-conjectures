@@ -1,0 +1,131 @@
+{
+ "id": "lem-galois-fpqc-canonical-pullback-datum",
+ "kind": "statement",
+ "title": "Canonical chosen pullback of descent data",
+ "statement": "Let $f:X\\to S$, $g:X'\\to S$ and $h:X'\\to X$ be morphisms of schemes [def-pc-scheme] with $f\\circ h=g$. Let $V\\to X$ have descent datum $D$ relative to $f$ [def-pd-descent-datum]. The chosen fibre product $V\\times_X X'$ [def-pc-fibre-product], with its second projection to $X'$, admits a descent datum $E$ relative to $g$ such that projection to $V$ intertwines the transport of $E$ with that of $D$ along $h$.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023Y(1), lemma-pullback, pulled-back descent datum; transport formulation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof": [
+  {
+   "text": "Project points to V, transport using D, and pair with the new point in Xprime using the pullback universal property. This defines the transport of E.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Y(1), lemma-pullback, pulled-back descent datum; transport formulation"
+   }
+  },
+  {
+   "text": "Equality of the two projections proves naturality, identity and cocycle from the corresponding laws of D. Projection to V is the required transport comparison.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 023Y(1), lemma-pullback, pulled-back descent datum; transport formulation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 023Y(1), lemma-pullback, pulled-back descent datum; transport formulation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsEffective|descent_pullback|gluing",
+   "results": "['Mathlib/Data/Set/UnionLift.lean', 'Mathlib/Topology/CWComplex/Classical/Basic.lean', 'Mathlib/Topology/Metrizable/CompletelyMetrizable.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean', 'Mathlib/Topology/Gluing.lean']; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "effective fpqc descent over affine base from faithfully flat affine refinements",
+   "results": "['AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine', 'AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget', 'AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact', 'AlgebraicGeometry.flat_iff', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S', 'AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact', 'AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact']; ",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DescentDatum",
+   "results": "[]; loogle: unknown identifier 'DescentDatum'",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a scheme descent datum and effective descent after a refinement of singleton fpqc covers",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms",
+  "date": "2026-10-12",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-galois-descent",
+   "place": "lem-galois-descent, proof, Step 2 ('effectivity ... By [lem-galois-glue] the P_i glue to a Y-scheme P'), replaced by Stacks 0245 for the fpqc covering {Y' -> Y}: the first sentence of the proof of 0245, 'Hence Lemma 02W3 applies and it suffices to prove the statement ... in case the fpqc-covering is given by a single {X -> S} flat surjective morphism of affines'",
+   "via": [
+    "lem-galois-fpqc-descending-types-morphisms"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcCanonicalPullbackDatum.lean",
+  "declaration": "AlgebraicGeometry.exists_canonical_pullback_descent_datum",
+  "statement": "theorem exists_canonical_pullback_descent_datum {S X X' : Scheme.{u}}\n    (f : X ⟶ S) (g : X' ⟶ S) (h : X' ⟶ X) (hc : h ≫ f = g)\n    {V : Over X} (D : Over.DescentDatum f V) :\n    ∃ E : Over.DescentDatum g (Over.mk (pullback.snd V.hom h)),\n      Over.DescentDatum.IsBaseChange hc (pullback.condition (f := V.hom) (g := h))\n        D E",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915290",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261012T060754-L-2915290",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
