@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 
 /-!
 # The filtered union of the torsion kernels of an étale sheaf
@@ -51,6 +52,60 @@ lem-weil-pbc-abelian-sheaf-epi-locally-surjective.
 theorem isTorsionAbelianSheaf_of_isTorsion {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) :
     IsTorsionAbelianSheaf F := by
-  sorry
+  classical
+  have : Nonempty PositiveNat := ⟨⟨1, Nat.one_pos⟩⟩
+  have : IsDirectedOrder PositiveNat := ⟨fun n m ↦
+    ⟨⟨n.val * m.val, Nat.mul_pos n.pos m.pos⟩,
+      dvd_mul_right n.val m.val, dvd_mul_left m.val n.val⟩⟩
+  have : IsFiltered PositiveNat := inferInstance
+  dsimp only [IsTorsionAbelianSheaf]
+  let D : PositiveNat ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
+    { obj := fun n ↦ CategoryTheory.Limits.kernel (n.val • 𝟙 F)
+      map := fun {n m} hnm ↦ CategoryTheory.Limits.kernel.lift (m.val • 𝟙 F)
+        (CategoryTheory.Limits.kernel.ι (n.val • 𝟙 F))
+        (torsionKernelTransition_condition F n m hnm.down.down)
+      map_id := fun n ↦ torsionKernelTransition_id F n
+      map_comp := fun hnm hmk ↦
+        (torsionKernelTransition_comp F _ _ _ hnm.down.down hmk.down.down).symm }
+  let c : CategoryTheory.Limits.Cocone D :=
+    { pt := F
+      ι := { app := fun n ↦ CategoryTheory.Limits.kernel.ι (n.val • 𝟙 F)
+             naturality := by intro n m hnm; simp [D] } }
+  change IsIso (CategoryTheory.Limits.colimit.desc D c)
+  have : AB5OfSize.{0, 0} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    AB5OfSize_shrink.{0, 0, u + 1, u + 1} _
+  have : IsConnected PositiveNat := IsFiltered.isConnected _
+  let φ := CategoryTheory.Limits.colimit.desc D c
+  have hmono : Mono φ := by
+    let α : D ⟶ (Functor.const _).obj F := { app n := c.ι.app n }
+    have : ∀ n, Mono (α.app n) := fun n ↦ inferInstanceAs (Mono (CategoryTheory.Limits.kernel.ι _))
+    have : Mono α := NatTrans.mono_of_mono_app _
+    have : Mono (CategoryTheory.Limits.colim.map α) := inferInstance
+    let e := CategoryTheory.Limits.IsColimit.coconePointUniqueUpToIso
+      (CategoryTheory.Limits.colimit.isColimit ((Functor.const PositiveNat).obj F))
+      (CategoryTheory.Limits.isColimitConstCocone PositiveNat F)
+    have : φ = CategoryTheory.Limits.colim.map α ≫ e.hom := by
+      refine CategoryTheory.Limits.colimit.hom_ext fun n ↦ ?_
+      simp [φ, e, α]
+    rw [this]
+    infer_instance
+  have hepi : Epi φ := by
+    have : Sheaf.IsLocallySurjective φ := by
+      refine ⟨fun {V} s ↦ ?_⟩
+      obtain ⟨R, hR, hRs⟩ := hF (U := Opposite.op V) s
+      refine X.smallEtaleTopology.superset_covering ?_ hR
+      intro W g hg
+      obtain ⟨n, hn, hns⟩ := isOfFinAddOrder_iff_nsmul_eq_zero.1 (hRs hg)
+      obtain ⟨t, ht⟩ := AlgebraicGeometry.Etale.exists_kernel_ι_app_eq
+        (n • 𝟙 F) (F.obj.map g.op s) (by
+        change (((sheafToPresheaf _ _).map (n • 𝟙 F)).app (Opposite.op W)) _ = 0
+        rw [Functor.map_nsmul, NatTrans.app_nsmul]
+        exact hns)
+      refine ⟨(CategoryTheory.Limits.colimit.ι D ⟨n, hn⟩).hom.app (Opposite.op W) t, ?_⟩
+      rw [← ConcreteCategory.comp_apply, ← NatTrans.comp_app,
+        ← ObjectProperty.FullSubcategory.comp_hom, CategoryTheory.Limits.colimit.ι_desc]
+      exact ht
+    exact Sheaf.epi_of_isLocallySurjective _
+  exact isIso_of_mono_of_epi φ
 
 end AlgebraicGeometry.Scheme
