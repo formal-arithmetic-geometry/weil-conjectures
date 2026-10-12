@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetConstantPullbackComparison
 public import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.AlgebraicGeometry.EtaleSetConstantPullbackUnitGenerators
+import Sheaf.AlgebraicGeometry.EtaleSetConstantPullbackComposition
 
 /-! # Composition transport on constant generators
 
@@ -20,6 +22,8 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- Maps out of constant sheaves transport compatibly with the chosen composition
 comparison on every constant generator. No invertibility of the map is required.
 
@@ -70,6 +74,47 @@ theorem etaleSetConstantTransportGenerators
             (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)))
         ((toSheafify V.smallEtaleTopology
           ((Functor.const V.Etaleᵒᵖ).obj A)).app
-            (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e) := by sorry
+            (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e)  := by
+  let c := Classical.choose etaleSetInverseImageCompositionUnits.2.2
+  let x := (etaleSetConstantPullbackComparison h).inv.app A ≫
+    (Scheme.etaleSetPullback h).map τ ≫ (c S P U s h).hom.app F
+  have hn := etaleSetInverseImageCompositionUnits.2.1 U V v
+    ((constantSheaf U.smallEtaleTopology (Type (u + 1))).obj A)
+    ((Scheme.etaleSetPullback (h ≫ s)).obj F) x W
+    ((toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj A)).app (op W) e)
+  rw [hn, etaleSetConstantPullbackUnitGenerators U V v A W e]
+  have hc : (etaleSetConstantPullbackComparison v).inv.app A ≫
+      (Scheme.etaleSetPullback v).map x ≫ (c S U V (h ≫ s) v).hom.app F =
+      (etaleSetConstantPullbackComparison (v ≫ h)).inv.app A ≫
+        (Scheme.etaleSetPullback (v ≫ h)).map τ ≫
+        (c S P V s (v ≫ h)).hom.app F ≫
+        eqToHom (congrArg (fun k : V ⟶ S ↦ (Scheme.etaleSetPullback k).obj F)
+          (Category.assoc v h s)) := by
+    dsimp only [x]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [(Classical.choose_spec etaleSetInverseImageCompositionUnits.2.2).2.2
+      S P U V s h v F]
+    rw [← Category.assoc ((Scheme.etaleSetPullback v).map
+      ((Scheme.etaleSetPullback h).map τ))]
+    rw [show (Scheme.etaleSetPullback v).map ((Scheme.etaleSetPullback h).map τ) ≫
+      (c P U V h v).hom.app ((Scheme.etaleSetPullback s).obj F) =
+      (c P U V h v).hom.app _ ≫ (Scheme.etaleSetPullback (v ≫ h)).map τ from
+        (c P U V h v).hom.naturality τ]
+    simpa only [Category.assoc] using congrArg
+      (fun q ↦ q ≫ (Scheme.etaleSetPullback (v ≫ h)).map τ ≫
+        (c S P V s (v ≫ h)).hom.app F ≫
+        eqToHom (congrArg (fun k : V ⟶ S ↦ (Scheme.etaleSetPullback k).obj F)
+          (Category.assoc v h s)))
+      (etaleSetConstantPullbackComposition P U V h v A)
+  have he := ConcreteCategory.congr_hom (NatTrans.congr_app
+    (congrArg (fun k ↦ k.hom) hc)
+    (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)))
+      ((toSheafify V.smallEtaleTopology ((Functor.const V.Etaleᵒᵖ).obj A)).app
+        (op ((MorphismProperty.Over.pullback @Etale ⊤ v).obj W)) e)
+  simp only [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    ConcreteCategory.comp_apply] at he
+  convert he using 1 <;>
+    (simp only [c, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+      ConcreteCategory.comp_apply] <;> first | rfl)
 
 end AlgebraicGeometry

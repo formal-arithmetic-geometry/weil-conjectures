@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-etale-set-constant-pullback-unit-generators",
+ "kind": "statement",
+ "title": "Unit transport on constant generators",
+ "statement": "For schemes P,U [def-pc-scheme], a morphism h:U→P, a type A in Type (u+1), an etale object W over P and e∈A, the inverse-image adjunction unit sends the sheafification generator e of C_P(A) at W to gamma_h(A) inverse applied to the equal-valued sheafification generator e of C_U(A) at W×_P U. Here C is [def-weil-pbc-constant-sheaf] and gamma is [def-weil-pbc-etale-set-constant-pullback-comparison].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-set-constant-pullback-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 0B65 and 03P5"
+ },
+ "proof": [
+  {
+   "text": "Apply the unit equation for uniqueness of left adjoints to the composed constant-sheaf/inverse-image adjunction, transported by the canonical terminal-object comparison. At the terminal object, the constant-sheaf unit is the sheafification generator. The right-adjoint comparison is restriction along the inverse terminal-object isomorphism. Thus the forward constant comparison takes the terminal pulled generator to the terminal constant generator.",
+   "uses": [
+    "def-weil-pbc-etale-set-constant-pullback-comparison",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict this identity along the unique map from the pulled W to the terminal object. Naturality of the constant comparison, inverse-image unit and sheafification unit identifies the restricted sections. The composition of the terminal inverse isomorphism and this unique map is the pullback of the unique map from W to the terminal object, by terminality. Cancel the forward constant comparison to obtain the claimed inverse-comparison equality. For empty A there is no e; empty schemes require no modification.",
+   "uses": [
+    "def-weil-pbc-etale-set-constant-pullback-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-set-constant-pullback-comparison",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-12",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 0B65 and 03P5",
+  "note": "Complete Lean proof from Mathlib adjunction uniqueness and the proved etale inverse-image composition units; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constant sheaf pullback comparison preserves sheafification generators and commutes with inverse image composition",
+   "results": "Relevant adjunction uniqueness and sheafification lemmas; no exact statement for the chosen etale comparison.",
+   "date": "2026-10-12",
+   "verdict": "building blocks"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_inv_app",
+   "results": "loogle: unknown identifier 'CategoryTheory.Adjunction.unit_leftAdjointUniq_inv_app'",
+   "date": "2026-10-12",
+   "verdict": "building blocks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf adjunction unit on generators compatibility with inverse image",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq|constantSheafAdj|comp_unit_app",
+   "results": "Relevant adjunction uniqueness and sheafification lemmas; no exact statement for the chosen etale comparison.",
+   "date": "2026-10-12",
+   "verdict": "building blocks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetConstantTransportGenerators",
+  "date": "2026-10-12",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-set-constant-transport-generators",
+   "place": "intermediate proof step",
+   "via": [
+    "lem-weil-pbc-etale-set-constant-transport-generators"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetConstantPullbackUnitGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetConstantPullbackUnitGenerators.lean",
+  "declaration": "AlgebraicGeometry.etaleSetConstantPullbackUnitGenerators",
+  "statement": "theorem etaleSetConstantPullbackUnitGenerators (P U : Scheme.{u}) (h : U ⟶ P) (A : Type (u + 1)) (W : P.Etale) (e : A) : (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (MorphismProperty.Over.pullback @Etale ⊤ h) (Type (u + 1)) (P.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)).unit.app ((constantSheaf P.smallEtaleTopology (Type (u + 1))).obj A)).hom.app (op W)) ((toSheafify P.smallEtaleTopology ((Functor.const P.Etaleᵒᵖ).obj A)).app (op W) e) = ((etaleSetConstantPullbackComparison h).inv.app A).hom.app (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W)) ((toSheafify U.smallEtaleTopology ((Functor.const U.Etaleᵒᵖ).obj A)).app (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W)) e)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d2acf",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687759",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-d2acf",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T135306-L-1687759",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and reader-gate importer compile all agree; axioms are permitted."
+ }
+}
