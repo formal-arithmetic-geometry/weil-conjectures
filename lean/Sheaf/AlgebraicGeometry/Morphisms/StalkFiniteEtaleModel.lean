@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group F2
+Authors: SHEAF groups F2 and X2
 -/
 module
 
@@ -12,10 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
-import Sheaf.AlgebraicGeometry.Morphisms.GenericFibreActionExtension
-import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
-import Sheaf.RingTheory.FlatLocalDepthFormula
-import Sheaf.RingTheory.NormalLocalDepthTwo
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFinite
+import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationEtale
+import Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Extension over a stalk before spreading
@@ -32,6 +31,36 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
+/-- A generic point of a boundary component has no proper boundary generalization.
+Source: Stacks Project, Tags 004W and 004X, maximal components and generic points. -/
+private theorem exists_minimal_boundary (S : Scheme.{u}) (U : S.Opens) (hU : U ≠ ⊤) :
+    ∃ s : S, s ∉ U ∧ ∀ t : S, t ⤳ s → t ∉ U → t = s := by
+  classical
+  have hne : (U : Set S)ᶜ.Nonempty := by
+    by_contra h
+    apply hU
+    apply top_unique
+    intro x _
+    by_contra hx
+    exact h ⟨x, hx⟩
+  let B := (U : Set S)ᶜ
+  let : Nonempty B := hne.to_subtype
+  have hB : IsClosed B := U.isOpen.isClosed_compl
+  let : QuasiSober B := hB.isClosedEmbedding_subtypeVal.quasiSober
+  let x : B := Classical.choice inferInstance
+  let s := genericPoints.ofComponent
+    (⟨irreducibleComponent x, irreducibleComponent_mem_irreducibleComponents x⟩)
+  refine ⟨s.1.1, s.1.2, ?_⟩
+  intro t hts ht
+  let t' : B := ⟨t, ht⟩
+  have hts' : t' ⤳ s.1 := (Topology.IsInducing.subtypeVal.specializes_iff).mp hts
+  have hcl : closure ({s.1} : Set B) ⊆ closure ({t'} : Set B) :=
+    hts'.closure_subset
+  have heq : closure ({s.1} : Set B) = closure ({t'} : Set B) :=
+    le_antisymm hcl (s.2.2 isIrreducible_singleton.closure hcl)
+  exact congrArg Subtype.val ((isGenericPoint_closure (x := t')).eq
+    (heq ▸ isGenericPoint_closure (x := s.1)))
+
 /-- The cover on the open extends after base change to a suitable stalk.
 
 Source: Stacks Project, Tag 0EYJ (pione-lemma-extend-covering), local claim;
@@ -39,33 +68,25 @@ Tags 0BQM, 0EYG, 0EYH, 0EYI, 0EYE, 0EY6, 0EY9, and 0EYB.
 (blueprint: lem-sbc-stalk-finite-etale-model)
 
 Proof:
-Choose s generic in an irreducible component of the nonempty closed complement of U.
-The inverse image of U in Spec O(S,s) is the punctured spectrum of a normal
-Noetherian local domain A. The generic G-action extends to PA on this punctured
-family by full faithfulness for finite etale covers of normal integral schemes
-(0BQM); faithfulness also gives the action laws and torsor identity.
-If A has dimension one, it is a DVR. Ramification indices divide the invertible
-order of G, so the normalization is tame. Its tame local form (0EYG, 0EYH)
-and the split section fibre test (0EYI) give etaleness near the section.
-The special fibre is geometrically connected and smooth, hence irreducible;
-the etale neighbourhood contains its generic point. Purity for its regular
-Cartier divisor (0EYE) extends the cover across the entire special fibre.
-If A has dimension at least two, normality gives depth at least two; flatness
-propagates this along the missing fibre. The depth-two algebra extension (0EY6)
-is finite, unique with the specified depth, and commutes with flat base change.
-Complete a smooth affine neighbourhood of the section in its section ideal;
-the completion is a power series ring over A and the completion map is flat.
-The section restriction of the punctured cover is split: its generic restriction
-is split by the rational point and torsor action, and normal generic full
-faithfulness extends this splitting. Power series full faithfulness (0EY9)
-then splits the cover on the punctured completion. Uniqueness of the depth-two
-extension makes its extension split as well. Flat descent and the fibre test
-(0EYB) give etaleness on the missing fibre, hence everywhere.
-For a disconnected torsor apply the construction to its components and their
-stabilizers, whose orders divide the invertible group order, and induce to G.
-The construction restricts to PA on the punctured local family, giving precisely
-the isomorphism between the two pullbacks displayed below. No neighbourhood
-of s is constructed in this lemma. -/
+Choose a generic point s of an irreducible component of the nonempty closed
+complement of U. Every generalization of s outside U is s itself: its singleton
+closure in the complement contains the component of s, hence maximality and
+sobriety force equality. Thus localization at s sees the punctured spectrum.
+Set f = PA.obj.hom followed by the open inclusion into C, and use the concrete
+relative normalization of f. Its pullback to the local family at s is finite
+by stalk_normalization_finite, and etale by stalk_normalization_etale, using
+the split-section hypothesis only in the latter step. These two properties
+package this actual scheme and morphism as Q, without choosing an arbitrary
+cover from an unproved existence statement.
+For the comparison, the square with top identity, left PA.obj.hom and bottom
+open inclusion is cartesian because the inclusion is a monomorphism. Thus the
+pullback of f over the open is finite, and its own normalization is itself.
+Normalization commutes with smooth base change, in particular the open inclusion.
+This identifies PA with the restriction of f's normalization. Paste this
+cartesian square with the two overlap pullback squares. Both resulting squares
+have the same cospan by the overlap's commutativity. The canonical isomorphism
+between their pullbacks is over the overlap, so lifts through the etale and
+finite full subcategories to precisely the displayed isomorphism. -/
 theorem GaloisCover.exists_stalk_finiteEtale_model {S C : Scheme.{u}} [IsNoetherian S]
     [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
@@ -87,6 +108,53 @@ theorem GaloisCover.exists_stalk_finiteEtale_model {S C : Scheme.{u}} [IsNoether
         Nonempty ((FiniteEtale.pullback
           (pullback.fst (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))).obj PA ≅
           (FiniteEtale.pullback
-          (pullback.snd (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))).obj Q) := by sorry
+          (pullback.snd (c ⁻¹ᵁ U).ι (pullback.fst c (S.fromSpecStalk s)))).obj Q) := by
+  classical
+  obtain ⟨s, hs, hmin⟩ := exists_minimal_boundary S U hU
+  have : IsFinite PA.obj.hom := PA.property
+  have : QuasiCompact (c ⁻¹ᵁ U).ι :=
+    MorphismProperty.of_isPullback (isPullback_morphismRestrict c U)
+      (inferInstance : QuasiCompact U.ι)
+  let f := PA.obj.hom ≫ (c ⁻¹ᵁ U).ι
+  let l := pullback.fst c (S.fromSpecStalk s)
+  have hfin : IsFinite (pullback.snd f.fromNormalization l) :=
+    GaloisCover.stalk_normalization_finite hS c G hG q j hCη Z U hηU
+      jU PA ψ hjU hψ s hs hmin
+  have het : Etale (pullback.snd f.fromNormalization l) :=
+    GaloisCover.stalk_normalization_etale hS c σ hσ G hG q j hCη sη hsq hsj
+      Z hZ U hηU jU PA ψ hjU hψ s hs hmin hfin
+  let Q : (pullback c (S.fromSpecStalk s)).FiniteEtale :=
+    ⟨MorphismProperty.Over.mk ⊤ (pullback.snd f.fromNormalization l) het, hfin⟩
+  refine ⟨s, hs, Q, ?_⟩
+  let i := (c ⁻¹ᵁ U).ι
+  have hp : IsPullback (𝟙 PA.obj.left) PA.obj.hom f i :=
+    IsPullback.of_horiz_isIso_mono ⟨by simp [f, i]⟩
+  let e := hp.isoPullback
+  have : IsFinite (pullback.snd f i) := by
+    have he : e.inv ≫ PA.obj.hom = pullback.snd f i := hp.isoPullback_inv_snd
+    rw [← he]
+    infer_instance
+  let a := e ≪≫ asIso (pullback.snd f i).toNormalization ≪≫
+    asIso (f.normalizationPullback i)
+  have ha : a.hom ≫ pullback.snd f.fromNormalization i = PA.obj.hom := by
+    simp only [a, Iso.trans_hom, asIso_hom, Category.assoc,
+      Hom.normalizationPullback_snd, Hom.toNormalization_fromNormalization]
+    exact hp.isoPullback_hom_snd
+  have hn : IsPullback (a.hom ≫ pullback.fst f.fromNormalization i)
+      PA.obj.hom f.fromNormalization i :=
+    IsPullback.of_iso_pullback ⟨by rw [Category.assoc, pullback.condition, ← Category.assoc, ha]⟩ a
+      rfl ha
+  let v := pullback.fst i l
+  let w := pullback.snd i l
+  have hA := (IsPullback.of_hasPullback PA.obj.hom v).paste_horiz hn
+  have hB := (IsPullback.of_hasPullback Q.obj.hom w).paste_horiz
+    (IsPullback.of_hasPullback f.fromNormalization l)
+  have hB' : IsPullback
+      (pullback.fst Q.obj.hom w ≫ pullback.fst f.fromNormalization l)
+      (pullback.snd Q.obj.hom w) f.fromNormalization (v ≫ i) := by
+    simpa only [v, w, pullback.condition] using hB
+  let b := hA.isoIsPullback _ _ hB'
+  exact ⟨ObjectProperty.isoMk _ (MorphismProperty.Over.isoMk b
+    (hA.isoIsPullback_hom_snd _ _ hB'))⟩
 
 end AlgebraicGeometry.Scheme

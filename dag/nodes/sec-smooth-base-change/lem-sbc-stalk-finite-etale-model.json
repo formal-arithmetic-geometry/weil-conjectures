@@ -15,50 +15,34 @@
  ],
  "proof": [
   {
-   "text": "Choose s generic in an irreducible component of the nonempty closed complement of U. Its inverse image in Spec O(S,s) is the punctured spectrum of a normal Noetherian local domain A. Smoothness and geometrically connected fibres make the local family normal integral. Extend the generic action and the torsor identity to the cover on this punctured family by generic full faithfulness, using the action-extension lemma after restriction to the punctured base.",
-   "uses": [
-    "lem-sbc-generic-fibre-action-extension"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "In dimension one A is a DVR. The ramification indices divide the invertible group order. Tame normalization and its local normal form (Tags 0EYG and 0EYH), followed by the split-section trait test (0EYI), give etaleness near the section. The regular geometrically connected special fibre is irreducible, so its generic point lies in this etale neighbourhood. Purity across a regular Cartier divisor (0EYE) gives a finite etale extension of the punctured cover.",
+   "text": "Choose a generic point s of an irreducible component of the nonempty closed complement of U. In the closed subspace, if t specializes to s, closure(s) is contained in closure(t). Maximal irreducibility forces equality; T0 uniqueness of a generic point forces t=s. This is the proved private exists_minimal_boundary lemma.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "In dimension at least two use normal-local depth at least two and the flat local depth formula to get depth at least two along the missing fibre. Form the finite depth-two algebra extension by Tag 0EY6. Its uniqueness and compatibility with flat base change are part of that construction.",
+   "text": "Form the actual relative normalization N of the composite f:P -> C and pull it back to L=C times_S Spec O(S,s). Apply the finiteness lemma and then the conditional etaleness lemma. Their property proofs package this concrete pullback morphism into the finite etale object Q. No arbitrary cover is selected from an unproved existence theorem.",
    "uses": [
-    "lem-weil-pbc-normal-local-depth-two",
-    "lem-weil-pbc-flat-local-depth-formula"
+    "lem-sbc-stalk-normalization-finite",
+    "lem-sbc-stalk-normalization-etale"
    ],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Complete a smooth affine section neighbourhood in its section ideal; it is a power series ring over A and the completion map is flat. The rational generic section point and the torsor action split the generic section fibre. Normal generic full faithfulness extends that splitting on the punctured section. Power series full faithfulness (0EY9) splits the cover on the punctured completion. Depth-two uniqueness then splits the completed extension. Flat descent and the fibre criterion (0EYB) give etaleness on the missing fibre. Its restriction to the punctured family is the original cover by construction.",
-   "uses": [
-    "lem-sbc-normal-integral-generic-hom-full"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For disconnected torsors apply the preceding construction componentwise with their stabilizers. Each component meets the split section fibre; each stabilizer has order dividing the invertible group order. Induce the stabilizer covers to G and take their finite disjoint union. The restriction comparisons combine into the displayed pullback isomorphism.",
+   "text": "The identity on P and its structure map form a pullback square over the open inclusion i_U, since i_U is monic. The resulting finite pullback has trivial normalization. Normalization commutes with smooth base change, so its canonical comparison over i_U is an isomorphism and gives a cartesian square from P to N. Paste it with the two pullback squares over the overlap. The cospans agree by the overlap condition, so isoIsPullback gives an isomorphism over the overlap. Lift it by MorphismProperty.Over.isoMk and ObjectProperty.isoMk to the two finite etale pullback objects. This step is fully proved in Lean from Mathlib normalization and pullback lemmas.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sbc-generic-fibre-action-extension",
-  "lem-sbc-normal-integral-generic-hom-full",
-  "lem-weil-pbc-flat-local-depth-formula",
-  "lem-weil-pbc-normal-local-depth-two"
+  "lem-sbc-stalk-normalization-finite",
+  "lem-sbc-stalk-normalization-etale"
  ],
  "proof_origin": {
   "kind": "from-document",
-  "by": "F2",
+  "by": "X2",
   "document": "Stacks Project",
-  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of the local claim before neighbourhood spreading",
-  "note": "Intermediate step of the local extension argument, prior to gluing; written from the local Stacks source."
+  "place": "Tag 0EYJ (pione-lemma-extend-covering), proof of local claim",
+  "note": "Compiling reduction into finiteness and conditional etaleness of an explicitly constructed relative normalization; boundary choice and comparison are fully proved."
  },
  "mathlib_searches": [
   {
@@ -143,9 +127,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261012T153009-L-2350123",
+  "landing": "20261012T173917-L-3309950",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
