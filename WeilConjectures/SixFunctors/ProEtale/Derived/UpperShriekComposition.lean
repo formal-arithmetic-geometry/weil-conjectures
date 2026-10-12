@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
 public import WeilConjectures.SixFunctors.ProEtale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.Derived.UpperShriek
@@ -183,6 +184,8 @@ theorem nonempty_iso_ι_comp_rightDerivedLowerShriek_comp :
 
 variable {Λ}
 
+variable [CompactSpace Y] [CompactSpace Z]
+
 variable (PX : ObjectProperty (_root_.DerivedCategory
     (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))))
   (PY : ObjectProperty (_root_.DerivedCategory
@@ -198,6 +201,7 @@ variable (PX : ObjectProperty (_root_.DerivedCategory
   (hfg₁ : ∀ K, PX K → PZ ((R(f ≫ g)_![ModuleCat.{u + 1} Λ]).obj K))
   (hfg₂ : ∀ L, PZ L → PX ((R(f ≫ g)^![ModuleCat.{u + 1} Λ]).obj L))
 
+omit [CompactSpace Y] [CompactSpace Z] in
 include hPX in
 /-- The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of
 `AlgebraicGeometry.ProEtale.nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`, restricted to full
@@ -265,7 +269,7 @@ section BoundedBelow
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-  [QuasiCompact (f ≫ g)]
+  [QuasiCompact (f ≫ g)] [CompactSpace Y] [CompactSpace Z]
 
 /-- Blueprint `sk-lem-sf-mate`, clause (b), constructible form: the mate of the composition
 isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the bounded below objects of étale origin, under the

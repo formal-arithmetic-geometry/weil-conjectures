@@ -341,6 +341,9 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso_mateEquiv
   simp only [rightDerivedLowerShriekBaseChangeMap, IsIso.inv_comp,
     inv_rightDerivedLowerShriekOfCompactificationBaseChangeMap]
   simp [c', α, β']
+  repeat erw [Functor.map_id]
+  repeat erw [Category.id_comp]
+  rfl
 
 end ReductionToProper
 

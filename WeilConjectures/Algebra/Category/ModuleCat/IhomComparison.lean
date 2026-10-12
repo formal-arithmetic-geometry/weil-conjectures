@@ -9,6 +9,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Biproducts
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
+public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 
 /-!
@@ -57,3 +59,16 @@ theorem isIso_ihomComparison_app_of_finitePresentation (P : ModuleCat.{u} R)
   exact isIso_ihomComparison_app_of_isColimit F S.zero hS.gIsCokernel Q
 
 end ModuleCat
+
+namespace Module.Finite
+
+/-- Over a noetherian ring, the module of linear maps between finitely generated modules is
+finitely generated: it embeds into `(Rⁿ →ₗ N) ≅ Nⁿ` along a surjection `Rⁿ ⟶ M`. -/
+theorem linearMap_of_isNoetherianRing {R M N : Type*} [CommRing R] [IsNoetherianRing R]
+    [AddCommGroup M] [Module R M] [Module.Finite R M] [AddCommGroup N] [Module R N]
+    [Module.Finite R N] : Module.Finite R (M →ₗ[R] N) := by
+  obtain ⟨n, f, hf⟩ := Module.Finite.exists_fin' R M
+  exact Module.Finite.of_injective (LinearMap.lcomp R N f) fun a b h ↦
+    (LinearMap.cancel_right hf).1 h
+
+end Module.Finite

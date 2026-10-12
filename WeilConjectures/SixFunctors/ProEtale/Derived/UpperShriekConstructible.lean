@@ -61,6 +61,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 section Comparison
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
 
 /-- On a bounded below complex of étale origin `ν_Y^* G`, the pro-étale exceptional inverse
 image is `ν_X^* f^× G`: the unit `G ⟶ Rν_* ν^* G` is an isomorphism on bounded below `G`
@@ -125,7 +126,7 @@ need not exist) and `G L` is bounded below of étale origin for a bounded below 
 preservation clauses of `sk-def-sf-admissible` guarantee on `Dctf`), then `G L ≅ Rf^! L`, by
 uniqueness of adjoints on the bounded below objects of étale origin. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_adjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f]
+    [HasCompactification f] [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
     {G : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
       _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⊣ G)
@@ -139,7 +140,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_of_adjunction {X Y : Scheme.{u}} (f
   · apply (adj.homEquiv _ _).symm.injective
     rw [adj.homEquiv_naturality_left_symm, Equiv.symm_apply_apply,
       ← rightDerivedUpperShriekHomEquiv_symm_apply f hGL hL, Equiv.symm_apply_apply,
-      Adjunction.homEquiv_counit, Functor.map_id, Category.id_comp]
+      Adjunction.homEquiv_counit, CategoryTheory.Functor.map_id, Category.id_comp]
   · apply (rightDerivedUpperShriekHomEquiv f hR hL).symm.injective
     rw [rightDerivedUpperShriekHomEquiv_naturality_left_symm f hR hGL, Equiv.symm_apply_apply,
       rightDerivedUpperShriekHomEquiv_symm_id, ← Adjunction.homEquiv_counit,
@@ -160,6 +161,7 @@ instance (X : Scheme.{u}) (a b : ℤ) :
 variable {k : Type u} [Field k] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aY] [QuasiCompact aY] [HasInvertibleExponent Λ Y]
   (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]
+  [Etale.HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f]
 
 include aY
 

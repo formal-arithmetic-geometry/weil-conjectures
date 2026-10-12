@@ -31,8 +31,8 @@ which is taken as an instance argument.
 - `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction` : the adjunction `Rf_! ⊣ Rf^!`
   on the unbounded derived categories.
 
-  below objects, an instance for torsion coefficients and quasi-compact target; and
-  below objects, an instance for torsion coefficients; and
+- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` : `Rf^!` exists and preserves bounded
+  below objects (an instance for torsion coefficients and a quasi-compact target); and
   `AlgebraicGeometry.Etale.HasBoundedBelowUpperShrieks`, the same for every `f`.
 
 ## Implementation notes
@@ -61,7 +61,9 @@ which is taken as an instance argument.
   preserves `D⁺` is recorded, together with the existence of `Rf^!`, by the hypothesis class
   `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek`, which the pro-étale `Rf^!` assumes; it
   is an instance for torsion coefficients and a quasi-compact target
-  (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`).
+  (`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`, in
+  `WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow`, whose proof needs the
+  finiteness of étale cohomology and is kept out of this file).
 
 ## TODO
 
@@ -165,7 +167,7 @@ This is what the constructible pro-étale `Rf^!`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) needs of the étale one. Neither half
 holds for an arbitrary coefficient category: both rest on the finite cohomological amplitude of
 the proper direct image, that is, on torsion coefficients, where the class is the instance
-`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`. Note that `Rf^!` is not left t-exact:
+`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (for a quasi-compact target). Note that `Rf^!` is not left t-exact:
 the bound it produces is shifted by the cohomological amplitude of `Rf_!`, which is why the
 condition is about `t.plus` rather than about `IsGE n` for a fixed `n`. -/
 class HasBoundedBelowUpperShriek : Prop extends (R(f)_![A]).IsLeftAdjoint where
@@ -181,28 +183,15 @@ lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
     DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) :=
   HasBoundedBelowUpperShriek.plus_rightDerivedUpperShriek_obj K hK
 
-/-- For torsion coefficients and a quasi-compact target `Y`, `Rf_!` is a left adjoint
-(`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`) and `Rf^!` preserves bounded
-below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
-by twice the fibre dimension of the compactification: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}`
-then `Rf^!` sends `D^{≥ 0}` into `D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7].
-
-The quasi-compactness of `Y` cannot be dropped: it bounds the fibre dimension of the proper
-part of the compactification. For `Y = ⨆ₙ Spec k` and `X = ⨆ₙ ℙⁿ_k` over `k` separably closed,
-`Rf^! Λ` has the components `Λ[2n](n)`, so it is not bounded below. -/
-instance hasBoundedBelowUpperShriek (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    [CompactSpace Y] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
-  plus_rightDerivedUpperShriek_obj := sorry
-
 /-- `AlgebraicGeometry.Etale.HasBoundedBelowUpperShriek` for every morphism admitting a
 compactification: the coefficients have exceptional inverse images preserving bounded below
 objects.
 
 Warning: this is a hypothesis which torsion coefficients do *not* satisfy, since it quantifies
-over morphisms with a non-quasi-compact target (see the counterexample in the docstring of
-`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`). For torsion coefficients, the condition
-holds for every `f` with quasi-compact target
-(`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`). -/
+over morphisms with a non-quasi-compact target (see the counterexample in
+`WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow`). For torsion coefficients,
+the condition holds for every `f` with quasi-compact target
+(`AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek`, in that file). -/
 class HasBoundedBelowUpperShrieks : Prop where
   hasBoundedBelowUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     HasBoundedBelowUpperShriek A f

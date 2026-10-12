@@ -87,7 +87,7 @@ variable {X : Scheme.{u}} (D : ProperOpenDatum X)
 
 /-- The square `𝟙 ≫ j₁ = s ≫ b` is cartesian, `b` being a monomorphism. -/
 lemma isPullback_section : IsPullback (𝟙 X) D.section D.j₁ D.b :=
-  IsPullback.of_isLimit (PullbackCone.IsLimit.mk (PullbackCone.mk (𝟙 X) D.section (by simp))
+  IsPullback.of_isLimit (PullbackCone.IsLimit.mk (by simp : 𝟙 X ≫ D.j₁ = D.section ≫ D.b)
     (fun c ↦ c.fst) (fun c ↦ comp_id _)
     (fun c ↦ by
       rw [← cancel_mono D.b]
@@ -109,7 +109,8 @@ noncomputable def upperStarBToLowerStar :
 lemma upperStarBToLowerStar_app
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (D.upperStarBToLowerStar Λ).app K =
-      D+((D.b)^*[ModuleCat.{u + 1} Λ]).map ((openImmersionLowerShriekToLowerStarPlus Λ D.j₁).app K) ≫
+      D+((D.b)^*[ModuleCat.{u + 1} Λ]).map
+          ((openImmersionLowerShriekToLowerStarPlus Λ D.j₁).app K) ≫
         (Etale.derivedBaseChangeMapPlus _ D.isPullback_section.toCommSq).app K ≫
         ((D.section)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.map
           ((Etale.upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).hom.app K) := by
@@ -178,12 +179,20 @@ theorem restrictionIso_hom_app_eq
     (Etale.lowerStarComp _ D.section D.p (𝟙 X) D.section_p.symm)).hom.naturality
       ((Etale.upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).hom.app K)
   simp only [Functor.comp_obj, Functor.comp_map] at hnatBC hnatC
+  have hcancel : D+((D.j₂)^*[ModuleCat.{u + 1} Λ]).map
+      ((Functor.rightDerivedFunctorPlusCompIso' ((D.j₁)_*[ModuleCat.{u + 1} Λ])
+        ((D.u)_*[ModuleCat.{u + 1} Λ])
+        (Etale.lowerStarComp _ D.j₁ D.u D.j₂ D.comm.symm)).hom.app K) ≫
+      D+((D.j₂)^*[ModuleCat.{u + 1} Λ]).map
+      ((Functor.rightDerivedFunctorPlusCompIso' ((D.j₁)_*[ModuleCat.{u + 1} Λ])
+        ((D.u)_*[ModuleCat.{u + 1} Λ])
+        (Etale.lowerStarComp _ D.j₁ D.u D.j₂ D.comm.symm)).inv.app K) = 𝟙 _ := by
+    rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
   rw [restrictionIso_hom_app, toLowerStar_app, ← hcounit, hpaste,
     clopenSectionDirectImageIso_hom_app, ← Functor.map_comp_assoc,
     upperStarBLowerShriekIso_hom_app_comp, upperStarBToLowerStar_app]
   simp only [Functor.map_comp, assoc]
-  rw [← hnatC, reassoc_of% hnatBC, ← Functor.map_comp_assoc, ← Functor.map_comp_assoc,
-    Iso.hom_inv_id_app, Functor.map_id, id_comp]
+  rw [reassoc_of% hcancel, reassoc_of% hnatBC, reassoc_of% hnatC]
 
 end ProperOpenDatum
 

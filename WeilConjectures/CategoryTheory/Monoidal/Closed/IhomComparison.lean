@@ -7,6 +7,8 @@ module
 
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
@@ -68,17 +70,41 @@ lemma epi_whiskerRight {A B : C} (f : B ⟶ A) [Epi f] (Z : C) : Epi (f ▷ Z) :
 
 /-- In a braided monoidal closed category, precomposition `[A, X] ⟶ [B, X]` with an epimorphism
 `B ⟶ A` is a monomorphism. -/
-lemma mono_pre_app {A B : C} (f : B ⟶ A) [Epi f] (X : C) : Mono ((pre f).app X) :=
-  have := epi_whiskerRight f
-  ⟨fun a b h ↦ uncurry_injective ((cancel_epi (f ▷ _)).1 (by
-    have h' := congrArg uncurry h
-    rwa [uncurry_pre_app, uncurry_pre_app] at h'))⟩
+lemma mono_pre_app {A B : C} (f : B ⟶ A) [Epi f] (X : C) : Mono ((pre f).app X) := by
+  refine ⟨fun {T} a b h ↦ uncurry_injective ?_⟩
+  have := epi_whiskerRight f T
+  rw [← cancel_epi (f ▷ T), ← uncurry_pre_app, ← uncurry_pre_app, h]
 
 /-- In a braided monoidal closed category, tensoring on the right preserves colimits, being
 isomorphic to tensoring on the left. -/
 lemma preservesColimitsOfSize_tensorRight (Z : C) : PreservesColimitsOfSize (tensorRight Z) :=
   have := (ihom.adjunction Z).leftAdjoint_preservesColimits
   preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight Z)
+
+/-- A preadditive braided monoidal closed category is monoidal preadditive: tensoring on the left
+is a left adjoint, hence additive, and tensoring on the right is isomorphic to it. -/
+lemma monoidalPreadditive_of_braided [Preadditive C] [HasBinaryBiproducts C] :
+    MonoidalPreadditive C := by
+  have (X : C) : (tensorLeft X).Additive := by
+    have := (ihom.adjunction X).isLeftAdjoint
+    have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (tensorLeft X)
+    exact Functor.additive_of_preservesBinaryBiproducts _
+  have hr {X Y : C} (f : X ⟶ Y) (Z : C) : f ▷ Z = (β_ X Z).hom ≫ Z ◁ f ≫ (β_ Y Z).inv := by
+    rw [← BraidedCategory.braiding_naturality_left_assoc, Iso.hom_inv_id, Category.comp_id]
+  have h0 (X Y Z : C) : Z ◁ (0 : X ⟶ Y) = 0 := (tensorLeft Z).map_zero X Y
+  have hadd (X Y Z : C) (f g : X ⟶ Y) : Z ◁ (f + g) = Z ◁ f + Z ◁ g :=
+    (tensorLeft Z).map_add
+  exact
+    { whiskerLeft_zero := h0 _ _ _
+      zero_whiskerRight := by
+        intro X Y Z
+        rw [hr, h0, zero_comp, comp_zero]
+      whiskerLeft_add := by
+        intro X Y Z f g
+        exact hadd _ _ _ f g
+      add_whiskerRight := by
+        intro X Y Z f g
+        rw [hr, hr, hr, hadd, Preadditive.add_comp, Preadditive.comp_add] }
 
 end Braided
 
@@ -116,7 +142,7 @@ noncomputable def isLimitKernelForkPreApp {P₁ P₀ P : C} {f : P₁ ⟶ P₀} 
   refine KernelFork.IsLimit.ofι _ _
     (fun {T} g hg ↦ curry ((hT T).desc (CokernelCofork.ofπ (uncurry g) ?_))) ?_ ?_
   · rw [← uncurry_pre_app, hg]
-    exact uncurry_injective (by simp [uncurry_eq])
+    simp [uncurry_eq]
   · intro T g hg
     refine uncurry_injective ?_
     rw [uncurry_pre_app, uncurry_curry]
@@ -148,7 +174,9 @@ theorem isIso_ihomComparison_app_unit [IsIso (ε F)] (Q : C) :
       (λ_ _).inv ≫ (ihom.ev (𝟙_ D)).app (F.obj Q) =
       F.map ((λ_ _).inv ≫ (ihom.ev (𝟙_ C)).app Q) := by
     rw [leftUnitor_inv_naturality_assoc, leftUnitor_inv_naturality_assoc,
-      id_tensor_pre_app_comp_ev, whisker_exchange_assoc, ihomComparison_ev, F.map_comp,
+      id_tensor_pre_app_comp_ev]
+    dsimp only [Functor.comp_obj]
+    rw [whisker_exchange_assoc, ihomComparison_ev, F.map_comp,
       ← left_unitality_inv_assoc]
   have := isIso_leftUnitor_inv_comp_ev (F.obj Q)
   have := isIso_leftUnitor_inv_comp_ev Q
@@ -176,7 +204,7 @@ variable [Preadditive C] [Preadditive D] [MonoidalPreadditive C] [MonoidalPreadd
 /-- **An additive lax monoidal functor preserves internal homs out of finite biproducts** of
 objects out of which it preserves internal homs: an inverse of the comparison map of `⨁ P` is
 assembled from the inverses for the summands, `[-, Q]` being additive. -/
-theorem isIso_ihomComparison_app_biproduct [F.Additive] {J : Type*} [Finite J] (P : J → C)
+theorem isIso_ihomComparison_app_biproduct [F.Additive] {J : Type} [Finite J] (P : J → C)
     [HasBiproduct P] (Q : C) [∀ j, IsIso ((ihomComparison F (P j)).natTrans.app Q)] :
     IsIso ((ihomComparison F (⨁ P)).natTrans.app Q) := by
   have := Fintype.ofFinite J
@@ -188,14 +216,14 @@ theorem isIso_ihomComparison_app_biproduct [F.Additive] {J : Type*} [Finite J] (
     simp_rw [← map_pre_app_comp_ihomComparison_app_assoc, IsIso.hom_inv_id_assoc,
       ← F.map_comp, ← NatTrans.comp_app, ← pre_map]
     rw [← F.map_sum]
-    have h := map_sum (preAppAddHom (⨁ P) (⨁ P) Q) (fun j ↦ biproduct.π P j ≫ biproduct.ι P j)
-      Finset.univ
+    have h := _root_.map_sum (preAppAddHom (⨁ P) (⨁ P) Q)
+      (fun j ↦ biproduct.π P j ≫ biproduct.ι P j) Finset.univ
     simp only [preAppAddHom_apply] at h
     rw [← h, biproduct.total, pre_id, NatTrans.id_app, F.map_id]
   · rw [Preadditive.sum_comp]
     simp_rw [Category.assoc, map_pre_app_comp_ihomComparison_app, IsIso.inv_hom_id_assoc,
       ← NatTrans.comp_app, ← pre_map, ← F.map_comp]
-    have h := map_sum (preAppAddHom (F.obj (⨁ P)) (F.obj (⨁ P)) (F.obj Q))
+    have h := _root_.map_sum (preAppAddHom (F.obj (⨁ P)) (F.obj (⨁ P)) (F.obj Q))
       (fun j ↦ F.map (biproduct.π P j ≫ biproduct.ι P j)) Finset.univ
     simp only [preAppAddHom_apply] at h
     rw [← h, ← F.map_sum, biproduct.total, F.map_id, pre_id, NatTrans.id_app]
@@ -212,7 +240,9 @@ theorem isIso_ihomComparison_app_of_isColimit [F.PreservesZeroMorphisms] {P₁ P
     [IsIso ((ihomComparison F P₀).natTrans.app Q)]
     [IsIso ((ihomComparison F P₁).natTrans.app Q)] :
     IsIso ((ihomComparison F P).natTrans.app Q) := by
-  have ht := KernelFork.mapIsLimit _ (isLimitKernelForkPreApp w hπ Q) F
+  have ht : IsLimit (KernelFork.ofι (f := F.map ((pre f).app Q)) (F.map ((pre π).app Q))
+      (by rw [← F.map_comp, ← NatTrans.comp_app, ← pre_map, w, pre_zero_app, F.map_zero])) :=
+    KernelFork.mapIsLimit _ (isLimitKernelForkPreApp w hπ Q) F
   have := mono_pre_app (F.map π) (F.obj Q)
   have h₀ := map_pre_app_comp_ihomComparison_app F π Q
   have h₁ : CategoryTheory.inv ((ihomComparison F P₀).natTrans.app Q) ≫
@@ -223,12 +253,12 @@ theorem isIso_ihomComparison_app_of_isColimit [F.PreservesZeroMorphisms] {P₁ P
   obtain ⟨d, hd⟩ := KernelFork.IsLimit.lift' ht
     ((pre (F.map π)).app (F.obj Q) ≫
       CategoryTheory.inv ((ihomComparison F P₀).natTrans.app Q)) (by
-      rw [Category.assoc, KernelFork.map_ι, h₁, ← Category.assoc, ← NatTrans.comp_app,
+      rw [Category.assoc, h₁, ← Category.assoc, ← NatTrans.comp_app,
         ← pre_map, ← F.map_comp, w, F.map_zero, pre_zero_app, zero_comp])
-  simp only [KernelFork.map_ι] at hd
+  simp only [Fork.ι_ofι] at hd
   refine ⟨d, ?_, ?_⟩
   · refine Fork.IsLimit.hom_ext ht ?_
-    simp only [KernelFork.map_ι, Fork.ι_ofι, Category.assoc, hd, Category.id_comp]
+    simp only [Fork.ι_ofι, Category.assoc, hd, Category.id_comp]
     rw [← Category.assoc, ← h₀, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   · rw [← cancel_mono ((pre (F.map π)).app (F.obj Q)), Category.assoc, ← h₀,
       ← Category.assoc, hd, Category.assoc, IsIso.inv_hom_id, Category.comp_id,

@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Group.Units.Equiv
+public import Mathlib.Algebra.Ring.Equiv
 public import Mathlib.CategoryTheory.Endomorphism
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
@@ -58,15 +60,22 @@ lemma unitEndAction_naturality {X Y : C} (φ : X ⟶ Y) (u : End (𝟙_ C)) :
 
 /-- The action of endomorphisms of the unit on the unit is the multiplication. -/
 lemma unitEndAction_unit (u : End (𝟙_ C)) : unitEndAction (𝟙_ C) u = u := by
-  rw [unitEndAction_apply, ← unitors_inv_equal, ← unitors_equal, leftUnitor_inv_naturality_assoc,
-    ← whiskerLeft_comp, Iso.inv_hom_id, whiskerLeft_id, Category.id_comp]
+  rw [unitEndAction_apply, ← unitors_inv_equal, ← unitors_equal, leftUnitor_naturality,
+    Iso.inv_hom_id_assoc]
 
 /-- The action of endomorphisms of the unit, as a ring homomorphism. -/
-@[simps!]
-def unitEndRingHom [Preadditive C] [MonoidalPreadditive C] (X : C) : End (𝟙_ C) →+* End X :=
-  { unitEndAction X with
-    map_zero' := by simp
-    map_add' u v := by simp }
+def unitEndRingHom [Preadditive C] [MonoidalPreadditive C] (X : C) : End (𝟙_ C) →+* End X where
+  toFun u := (ρ_ X).inv ≫ X ◁ u ≫ (ρ_ X).hom
+  map_one' := (unitEndAction X).map_one
+  map_mul' := (unitEndAction X).map_mul
+  map_zero' := by simp
+  map_add' u v := by
+    rw [MonoidalPreadditive.whiskerLeft_add, Preadditive.add_comp, Preadditive.comp_add]
+
+@[simp]
+lemma unitEndRingHom_apply [Preadditive C] [MonoidalPreadditive C] (X : C) (u : End (𝟙_ C)) :
+    unitEndRingHom X u = unitEndAction X u :=
+  rfl
 
 end MonoidalCategory
 
@@ -84,14 +93,15 @@ instance isIso_curry_leftUnitor_hom (X : C) : IsIso (curry (λ_ X).hom) := by
 
 /-- The canonical map `𝟙_ C ⟶ [𝟙_ C, 𝟙_ C]` is an isomorphism. -/
 instance isIso_id_unit : IsIso (id (𝟙_ C)) := by
-  rw [id_eq, ← unitors_equal]
+  rw [MonoidalClosed.id_eq, ← unitors_equal]
   infer_instance
 
 /-- The canonical maps `𝟙_ C ⟶ [X, X]` are compatible with isomorphisms `X ≅ Y`. -/
 lemma id_comp_ihom_map {X Y : C} (f : X ⟶ Y) :
     id X ≫ (ihom X).map f = id Y ≫ (pre f).app Y :=
   uncurry_injective (by
-    rw [uncurry_natural_right, uncurry_pre_app, id_eq, id_eq, uncurry_curry, uncurry_curry,
+    rw [uncurry_natural_right, uncurry_pre_app, MonoidalClosed.id_eq, MonoidalClosed.id_eq,
+      uncurry_curry, uncurry_curry,
       rightUnitor_naturality])
 
 /-- If `𝟙_ C ⟶ [X, X]` is an isomorphism, so is `𝟙_ C ⟶ [Y, Y]` for `Y ≅ X`. -/
@@ -112,7 +122,7 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
 /-- The action of `u` is the uncurried composite of `u` and `𝟙_ C ⟶ [X, X]`. -/
 lemma unitEndAction_apply_eq_uncurry' (X : C) (u : End (𝟙_ C)) :
     unitEndAction X u = uncurry' (u ≫ MonoidalClosed.id X) := by
-  rw [unitEndAction_apply, uncurry', id_eq, uncurry_natural_left, uncurry_curry]
+  rw [unitEndAction_apply, uncurry', MonoidalClosed.id_eq, uncurry_natural_left, uncurry_curry]
 
 /-- **Endomorphisms of an object `X` with `𝟙_ C ≅ [X, X]` are endomorphisms of the unit**: the
 action `End (𝟙_ C) → End X` is bijective. -/
@@ -160,12 +170,14 @@ lemma unitsUnitEndMulEquivAut_apply_hom (X : C) [IsIso (MonoidalClosed.id X)]
 `𝟙_ C ≅ [Y, Y]`: there is a unique unit `u` with `ψ = u • φ`. -/
 theorem existsUnique_hom_eq_comp_unitEndAction {X Y : C} [IsIso (MonoidalClosed.id Y)]
     (φ ψ : X ≅ Y) : ∃! u : (End (𝟙_ C))ˣ, ψ.hom = φ.hom ≫ unitEndAction Y u := by
-  refine ⟨(unitsUnitEndMulEquivAut Y).symm (φ.symm ≪≫ ψ), ?_, fun v hv ↦ ?_⟩
-  · rw [← unitsUnitEndMulEquivAut_apply_hom, MulEquiv.apply_symm_apply, Iso.trans_hom,
-      Iso.symm_hom, Iso.hom_inv_id_assoc]
+  let a : Aut Y := φ.symm ≪≫ ψ
+  have ha : Iso.hom a = φ.inv ≫ ψ.hom := rfl
+  refine ⟨(unitsUnitEndMulEquivAut Y).symm a, ?_, fun v hv ↦ ?_⟩
+  · beta_reduce
+    rw [← unitsUnitEndMulEquivAut_apply_hom, MulEquiv.apply_symm_apply, ha, Iso.hom_inv_id_assoc]
   · rw [MulEquiv.eq_symm_apply]
     refine Iso.ext ?_
-    rw [unitsUnitEndMulEquivAut_apply_hom, Iso.trans_hom, Iso.symm_hom, hv, Iso.inv_hom_id_assoc]
+    rw [unitsUnitEndMulEquivAut_apply_hom, ha, hv, Iso.inv_hom_id_assoc]
 
 end MonoidalCategory
 
@@ -184,7 +196,8 @@ lemma ε_comp_map_id_comp_ihomComparison (X : C) :
       MonoidalClosed.id (F.obj X) :=
   uncurry_injective (by
     rw [uncurry_natural_left, uncurry_natural_left, uncurry_eq, ihomComparison_ev,
-      μ_natural_right_assoc, ← F.map_comp, ← uncurry_eq, id_eq, id_eq, uncurry_curry,
+      μ_natural_right_assoc, ← F.map_comp, ← uncurry_eq,
+      MonoidalClosed.id_eq, MonoidalClosed.id_eq, uncurry_curry,
       uncurry_curry, right_unitality])
 
 /-- If the unit map and the comparison map of `F` at `X` are isomorphisms, `F` maps the

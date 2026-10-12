@@ -106,8 +106,8 @@ lemma upperStarIsoLocalizationRestriction_comp (P : Sheaf R.smallEtaleTopology A
   congr 1
   apply Quiver.Hom.unop_inj
   apply MorphismProperty.Over.Hom.ext
-  simp only [etale_comp_left]
   simp
+  exact Category.id_comp (pullback.fst U.hom (g₁ ≫ g₂))
 
 /-- The inverse form of `AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction_comp`. -/
 lemma localizationRestrictionComp_hom_app_eq (P : Sheaf R.smallEtaleTopology A) :
@@ -261,6 +261,82 @@ lemma exists_localizationRestriction_map_eq (hv : Function.Surjective v.base)
   exact h₁.trans hd
 
 end Descent
+
+lemma localizationRestrictionComp_inv_app_hom_app {T S R : Scheme.{u}} (g₁ : T ⟶ S)
+    (g₂ : S ⟶ R) (g₁₂ : T ⟶ R) (hg : g₁₂ = g₁ ≫ g₂) [Etale g₁] [Etale g₂] [Etale g₁₂]
+    (P : Sheaf R.smallEtaleTopology A) (U : T.Etale) :
+    ((localizationRestrictionComp A g₁ g₂ g₁₂ hg).inv.app P).hom.app (op U) =
+      P.obj.map ((MorphismProperty.Over.mapComp (Q := ⊤) (P := @Etale) (hf := inferInstance)
+        (hg := inferInstance) g₁₂ hg).hom.app U).op := by
+  simp [localizationRestrictionComp]
+
+section PullbackDescent
+
+variable {A} {X' X Z : Scheme.{u}} (v : X' ⟶ X) [Etale v] (p : Z ⟶ X') [Etale p] (w : Z ⟶ X)
+  [Etale w] (hw : w = p ≫ v) {P Q : Sheaf X.smallEtaleTopology A}
+  (ψ : (localizationRestriction A v inferInstance).obj P ⟶
+    (localizationRestriction A v inferInstance).obj Q)
+
+/-- The restriction along `p : Z ⟶ X'` of a morphism `ψ` of restrictions to `X'`, as a morphism
+of restrictions along `w = p ≫ v`. -/
+noncomputable def compRestriction :
+    (localizationRestriction A w inferInstance).obj P ⟶
+      (localizationRestriction A w inferInstance).obj Q :=
+  (localizationRestrictionComp A p v w hw).hom.app P ≫
+    (localizationRestriction A p inferInstance).map ψ ≫
+      (localizationRestrictionComp A p v w hw).inv.app Q
+
+/-- The étale `X`-scheme `W` is the image of the étale `Z`-scheme `g : W ⟶ Z`. -/
+noncomputable def mapMkIso {W : X.Etale} (g : W.left ⟶ Z) [Etale g] (hg : g ≫ w = W.hom) :
+    (MorphismProperty.Over.map ⊤ (inferInstance : Etale w)).obj (Scheme.Etale.mk g) ≅ W :=
+  MorphismProperty.Over.isoMk (Iso.refl _) (by simp [hg])
+
+/-- The component of `ψ` at a lift `q` of `W`, computed through a factorisation `g` of `q` through
+`p : Z ⟶ X'`. -/
+lemma descentComponent_eq_compRestriction {W : X.Etale} (q : W ⟶ Scheme.Etale.mk v)
+    (g : W.left ⟶ Z) [Etale g] (hg : g ≫ p = q.left) :
+    descentComponent v ψ q =
+      P.obj.map (mapMkIso w g (by rw [hw, ← Category.assoc, hg]; exact MorphismProperty.Over.w q)).hom.op ≫
+        (compRestriction v p w hw ψ).hom.app (op (Scheme.Etale.mk g)) ≫
+          Q.obj.map (mapMkIso w g (by rw [hw, ← Category.assoc, hg];
+            exact MorphismProperty.Over.w q)).inv.op := by
+  let k : liftEtale v q ≅ (MorphismProperty.Over.map ⊤ (inferInstance : Etale p)).obj
+      (Scheme.Etale.mk g) := MorphismProperty.Over.isoMk (Iso.refl _) (by simp [liftEtale, hg])
+  rw [descentComponent, hom_app_eq_of_iso v ψ k]
+  simp only [compRestriction, Sheaf.comp_hom, NatTrans.comp_app,
+    localizationRestrictionComp_hom_app_hom_app, localizationRestrictionComp_inv_app_hom_app,
+    localizationRestriction_map_hom_app, localizationRestriction_obj_obj_map, Category.assoc,
+    ← Functor.map_comp, ← Functor.map_comp_assoc, ← op_comp, Quiver.Hom.unop_op]
+  congr 3
+  · apply MorphismProperty.Over.Hom.ext
+    simp [k, mapMkIso]
+  · apply MorphismProperty.Over.Hom.ext
+    simp [k, mapMkIso]
+
+/-- **Gluing of morphisms along a surjective étale morphism** `v : X' ⟶ X`, in terms of the
+restriction functors: for a cartesian square `Z = X' ×_X X'` with projections `r₁, r₂`, a
+morphism `ψ` of restrictions to `X'` whose two restrictions to `Z` agree is the restriction of a
+morphism `P ⟶ Q`. -/
+lemma exists_localizationRestriction_map_eq_of_isPullback (hv : Function.Surjective v.base)
+    (r₁ r₂ : Z ⟶ X') [Etale r₁] [Etale r₂] (h₁ : w = r₁ ≫ v) (h₂ : w = r₂ ≫ v)
+    (hZ : IsPullback r₁ r₂ v v)
+    (hψ : compRestriction v r₁ w h₁ ψ = compRestriction v r₂ w h₂ ψ) :
+    ∃ φ : P ⟶ Q, (localizationRestriction A v inferInstance).map φ = ψ := by
+  refine exists_localizationRestriction_map_eq v ψ hv fun W q₁ q₂ ↦ ?_
+  have hq₁ : q₁.left ≫ v = W.hom := MorphismProperty.Over.w q₁
+  have hq₂ : q₂.left ≫ v = W.hom := MorphismProperty.Over.w q₂
+  let g : W.left ⟶ Z := hZ.lift q₁.left q₂.left (by rw [hq₁, hq₂])
+  have hg₁ : g ≫ r₁ = q₁.left := hZ.lift_fst _ _ _
+  have hg₂ : g ≫ r₂ = q₂.left := hZ.lift_snd _ _ _
+  have hgw : g ≫ w = W.hom := by rw [h₁, ← Category.assoc, hg₁, hq₁]
+  have : Etale (g ≫ w) := by
+    rw [hgw]
+    exact W.prop
+  have : Etale g := Etale.of_comp g w
+  rw [descentComponent_eq_compRestriction v r₁ w h₁ ψ q₁ g hg₁,
+    descentComponent_eq_compRestriction v r₂ w h₂ ψ q₂ g hg₂, hψ]
+
+end PullbackDescent
 
 end Etale
 

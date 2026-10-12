@@ -715,7 +715,7 @@ from `C₀` on `B'` (for instance those of `lem-pur-dnc-section-geometry` (2), (
 which in these coordinates is the identity of `C₀`, `Lu^* Ψ = φ₁ ≫ φ₀⁻¹`.
 
 Existence is `exists_iso_sectionInvariant_normalCone`. Uniqueness: `𝒞(g, s)` is invertible and
-`Lu^*` is faithful on its automorphisms (`lem-pur-lisse-rank-one-aut`). -/
+`Lu^*` is faithful on its automorphisms. -/
 theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d : ℕ)
     (g : V ⟶ B) [SmoothOfRelativeDimension d g] [HasCompactification g] (s : B ⟶ V)
     (N : Scheme.Hom.NormalConeData d s) [HasCompactification N.proj]
