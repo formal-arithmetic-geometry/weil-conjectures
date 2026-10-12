@@ -1,0 +1,107 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03D7, inverse image of modules and underlying abelian inverse image"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "status": "split",
+ "mathlib_match": null,
+ "id": "lemma-weil-pbc-etale-pullback-forget-modules",
+ "title": "Étale pullback commutes with forgetting constant-ring module coefficients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-separably-closed-passage",
+   "place": "proof, applying the algebraically closed hypothesis to the pulled-back module sheaf"
+  },
+  "same_as": []
+ },
+ "statement": "For a commutative ring Λ, a morphism p : X -> Y of schemes [def-pc-scheme], and a sheaf F of Λ-modules on Y's small étale site [def-weil-pbc-etale-sheaves], the underlying abelian sheaf of the module pullback p^*F is isomorphic to the abelian pullback p^* of the underlying abelian sheaf of F [def-weil-pbc-inverse-image, def-weil-pbc-abelian-etale-sheaves]. No torsion, properness, field, or cohomology hypothesis is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the small étale upper-star construction: left Kan extension of the underlying presheaf followed by sheafification. The forgetful functor ModuleCat Λ -> AddCommGrpCat preserves colimits and limits. Use Mathlib Functor.lanCompIsoOfPreserves to commute it with the Kan extension, and sheafComposeNatIso to commute it with sheafification. Their composite gives the asserted isomorphism.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 and 03D7; Lean proof uses Mathlib Kan-extension and sheafification comparison isomorphisms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "pullback of a sheaf of modules commutes with the forgetful functor to abelian sheaves",
+   "results": "Service unavailable: HTTP response Internal Server Error. No no-match verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of a sheaf of modules commutes with forgetting to abelian groups",
+   "results": "Only sheaf-of-modules forgetful functors, no small-etale comparison theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lanCompIsoOfPreserves\"",
+   "results": "Functor.lanCompIsoOfPreserves is the generic Kan-extension comparison used in the proof, not the full sheaf statement.",
+   "date": "2026-10-12",
+   "verdict": "generic ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "(lanCompIsoOfPreserves|sheafComposeNatIso|upperStar.*forget)",
+   "results": "Generic Kan-extension and sheafification comparisons used in the proof; no small-etale theorem.",
+   "date": "2026-10-12",
+   "verdict": "generic ingredients"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtalePullbackForgetModules",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePullbackForgetModules.lean",
+  "declaration": "AlgebraicGeometry.Etale.pullback_forget_modules_iso",
+  "statement": "theorem pullback_forget_modules_iso (Λ : Type (u + 1)) [CommRing Λ]\n    {X Y : Scheme.{u}} (p : X ⟶ Y)\n    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Nonempty ((sheafCompose X.smallEtaleTopology\n      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj\n        ((upperStar (ModuleCat.{u + 1} Λ) p).obj F) ≅\n      (upperStar AddCommGrpCat.{u + 1} p).obj\n        ((sheafCompose Y.smallEtaleTopology\n          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F))",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a8ae7",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T003805-L-609832",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a8ae7",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T003805-L-609832",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and compile checks match the stage-3 brief"
+ }
+}

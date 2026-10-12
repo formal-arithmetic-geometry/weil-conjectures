@@ -1,158 +1,137 @@
 ## What changed
 
-Replaced the algebraically closed theorem's sorry by the existing
-`IsCurve.bijective_cohomologyMap_of_forall_isReduced` reduction and one smaller
-split theorem, `IsCurve.algebraicallyClosedCohomologyInvariant`, for reduced proper
-curves and constructible prime-field coefficients. Both new proof imports are plain
-`import`. The original signatures, definitions, docstrings and public imports are preserved.
-The duplicate separably closed passage split module and its node were removed from
-this sandbox; the original named passage theorem remains open.
+Replaced the invalid `sepClosed_passage_comparison` with
+`AlgebraicGeometry.IsCurve.sepClosed_geometric_comparison` in
+`Sheaf.AlgebraicGeometry.Curve.SepClosedComparison`. The new statement constructs the
+geometric square over algebraically closed fields and its universal-homeomorphism vertical
+maps; it has no sheaf, degree, or algebraically closed cohomology hypothesis.
+
+Added and proved `AlgebraicGeometry.Etale.pullback_forget_modules_iso` in
+`Sheaf.AlgebraicGeometry.EtalePullbackForgetModules`, using Mathlib's left-Kan-extension and
+sheafification comparison isomorphisms. Its imports are only the public modules needed for
+its signature and coefficient instances; redundant Mathlib imports were removed.
+
+Rewrote the proof of
+`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`:
+choose the geometric square, pull back the torsion module sheaf, apply the hypothesis H to
+the bottom proper curve, transport coefficients by the proved isomorphism, use the existing
+`Etale.cohomologyPullbackFunctorial` and `upperStarComp` to identify the two composites,
+and cancel the bijective vertical maps from `Etale.cohomologyMap_bijective`.
+All three added imports in the source module are plain proof-only imports. Every existing
+signature, definition, public import, and docstring is unchanged.
 
 ## Proved and sorry left
 
-Two of the three item declarations have proof bodies without sorry:
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isAlgClosed` (newly closed locally)
-and `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed` (already assembled).
-These are conditional proofs resting on sorry-bearing dependencies, not axiom-free results.
-The original `AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`
-still has its named sorry, with its existing node
-`lemma-weil-pbc-curve-separably-closed-passage` and unchanged proof docstring.
-The one new sorry is `AlgebraicGeometry.IsCurve.algebraicallyClosedCohomologyInvariant`,
-node `e1-algebraically-closed-cohomology-invariant`. It now assumes reducedness and
-constructible prime-field coefficients; it is exactly the hypothesis of the existing reduction.
-The imported reduction itself remains an open theorem in the library.
+One of one previously open declarations in the repository's version of the item now has a
+proof body with no direct sorry:
+`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`
+(node `lemma-weil-pbc-curve-separably-closed-passage`). All three original theorem bodies in
+the item contain no sorry; the other two bodies were already proved in the repository.
+
+The new `AlgebraicGeometry.Etale.pullback_forget_modules_iso` is proved and its printed
+axioms are exactly `propext`, `Classical.choice`, and `Quot.sound`.
+
+Exactly one new sorry remains:
+`AlgebraicGeometry.IsCurve.sepClosed_geometric_comparison`
+(node `lemma-weil-pbc-curve-separably-closed-passage-comparison`). It is a public named
+theorem with a complete natural-language construction in its docstring, sourced to
+[Stacks Tag 0A5E](https://stacks.math.columbia.edu/tag/0A5E).
+The item remains dependent on this obligation and on existing open dependencies, including
+the library's functoriality and algebraically closed core; its printed axioms include
+`sorryAx` as well as the three permitted axioms. This is a reduction, not a fully
+axiom-closed proof of cohomological invariance.
+
+All three delivery modules compile together locally, with no errors or warnings.
+Scratch-copy `#print axioms` checks were run for all three original theorems and both new
+theorems: no other axioms occur, and the scratch files are removed from the delivery.
 
 ## No longer needed
 
-No library module or unit route is globally pruned. The discarded
-`Sheaf.AlgebraicGeometry.Curve.SeparablyClosedPassageInvariant` was only an undelivered
-duplicate, and its proof import is removed. The original public imports are retained as
-existing API exports; no added proof-only import is public.
-The original algebraically closed node now directly uses only
-`lem-weil-pbc-curve-constructible-reduction` and the new reduced prime-coefficient node.
-Every old direct proof dependency other than the existing reduction is listed below.
-These dependencies move into the smaller core or the existing reduction; this list does
-not claim they are globally unnecessary:
+The invalid declarations `sepClosed_passage_injective`, `sepClosed_passage_surjective`,
+and `sepClosed_passage_comparison` and the former component-node proposals are absent.
+The replacement is a genuine geometric obligation, not arbitrary bijections of the
+cohomology groups. No existing library module or unit realization is pruned.
 
-- `lem-weil-pbc-torsion-sheaf-characterizations`
-- `def-weil-pbc-curve-setting`
-- `def-weil-pbc-extension-pullback`
-- `def-weil-pbc-cohomology-pullback`
-- `def-weil-pbc-C7`
-- `def-weil-pbc-eight-curve-assertions`
-- `lem-weil-pbc-zero-dimensional-cohomology`
-- `lem-weil-pbc-zero-dimensional-field-extension`
-- `def-sbc-smooth-morphisms`
-- `def-sc-curves`
-- `def-weil-pbc-extension-by-zero`
-- `lemma-weil-pbc-eight-curve-devissage`
-- `lem-weil-pbc-curve-assertions-finite-pushforward`
-- `thm-sc-main`
-- `def-sc-constant-sheaves`
-- `def-weil-pbc-constructible-torsion`
-- `lem-weil-pbc-curve-assertions-dense-open`
-- `lem-weil-pbc-reduced-curve-normalization`
-- `def-weil-pbc-direct-image`
-- `lem-weil-pbc-finite-pushforward-constructible-noetherian`
-- `lemma-weil-pbc-curve-locally-constant-reduction`
-- `def-weil-pbc-primary-torsion`
-- `lem-weil-pbc-curve-assertions-retract`
-- `thm-pqf-zmt-factorization`
-- `lemma-weil-pbc-finite-pushforward-extension-zero`
-- `def-weil-pbc-finite-open-comparison`
-- `lem-weil-pbc-curve-dense-open-localization`
-- `lem-weil-pbc-constructible-torsion-modules-agree`
+Every old dependency removed from the passage node's direct `proof_deps` is listed here:
+`def-pc-separably-closed`, `def-weil-algebraic-closure`,
+`def-weil-relative-algebraic-closure`, `lem-weil-pbc-relative-algebraic-closure-algclosed`,
+`lem-pc-kbar-pure-insep`, `def-pc-base-change`, `def-weil-universal-homeomorphism`,
+`lem-weil-pbc-cartesian-square-pasting`, `lem-pc-homeo-pure-insep`,
+`def-weil-pbc-cohomology-pullback`, `lem-weil-pbc-proper-base-change`,
+`def-kun-topological-krull-dimension`, and `def-pc-fibre-product`.
+The geometric ingredients remain dependencies of the new geometric node or of its
+statement; the definitions remain in statement dependencies as appropriate. Thus their
+removal from the parent's direct edges does not assert they are globally unreached.
+
+Removed the three redundant explicit Mathlib imports from the new coefficient module
+(`ModuleCat.Colimits`, `Sites.PreservesSheafification`, and
+`Functor.KanExtension.Preserves`): the two public imports already provide them.
+No original public import was removed or changed.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-The first worker's two split statements were restatements of the item's open theorems.
-Moving their sorries to new modules did not advance the proof. Their node records also
-lacked chapter, unit and recorded searches; their lean.statement fields were prose rather
-than verbatim signatures, and proof_deps did not match the steps' uses. The original
-item node was not updated to describe the new proof. The second reading repaired these
-faults rather than delivering the relocation as progress. Neither remaining proof core
-was closed outright in this review.
+The first worker's replacement was still equivalent to the entire original conclusion:
+an arbitrary bijection g with bijective g composed with the original map exists precisely
+when the original map is bijective (the identity supplies the reverse implication).
+Its signature did not specify any algebraic closure, scheme map, or comparison square,
+so its docstring's claimed geometric content was not present in the Lean statement.
+This second reading removed that restatement and wrote the actual cohomological reduction.
+
+The existing repository already proves the algebraically closed theorem using the reduced,
+constructible core; that proof was retained unchanged and its unchanged node is omitted
+from this delivery. The unit `sk-thm-p1` still passes through the curve calculations and
+then the separably closed passage, exactly as its `realized` record requires.
 
 ## New nodes
 
-`e1-algebraically-closed-cohomology-invariant` is the reduced constructible prime-coefficient
-case after the first two paragraphs of Stacks 03SC. Its remaining route is normalization,
-finite locally constant reduction with trace, finite pushforward, extension by zero,
-and dense-open localization. The proof steps come from the original ten-step node,
-restricted to the remaining case; its docstring spells out the argument. No existing
-statement or definition changed, so no statement change record is required.
+`lemma-weil-pbc-curve-separably-closed-passage-comparison`: a geometric comparison square
+with universal-homeomorphism projections and an algebraically closed proper curve as its
+bottom left object. This is the sole new open proof. Its proof steps use the existing
+algebraic-closure, pure-inseparability, pullback-pasting, and proper-base-change nodes.
 
-## Earlier second reading (a previous round; superseded)
+`lemma-weil-pbc-etale-pullback-forget-modules`: the proved isomorphism between module
+pullback followed by forgetting and abelian pullback. It applies to every scheme morphism
+and module sheaf; it has no curve or torsion assumptions. The proof specializes Mathlib's
+Kan-extension and sheafification comparison isomorphisms. The source is
+[Stacks 03D3](https://stacks.math.columbia.edu/tag/03D3) and
+[Stacks 03D7](https://stacks.math.columbia.edu/tag/03D7).
 
-1. Compared the item module with the repository using diff and declaration parsing.
-   All three existing theorem signatures are byte for byte unchanged up to the body
-   delimiter; no hypothesis, conclusion, definition, existing docstring or attribute changed.
-2. Compiled both delivered files locally in import order. No errors, non-sorry warnings,
-   forbidden declarations or hollow definitions. A scratch axiom check of all three item
-   declarations and the new split theorem shows only propext, Classical.choice,
-   Quot.sound and sorryAx; the report identifies the open statements.
-3. Rejected both restatement splits. The retained split is now precisely the reduced
-   constructible prime-coefficient hypothesis of the existing reduction. Checked empty
-   curves, dimension-zero curves, zero sheaves, degree zero, and r equal to the characteristic:
-   no exclusion or invertibility assumption is needed. Checked Stacks 03SC, 03SD and 0A3Q,
-   searched Mathlib with LeanFinder, Loogle and grep (LeanSearch was unavailable), and
-   searched the upstream and Sheaf curve modules. No duplicate exact statement was found.
-4. The proof starts at the item theorem and applies the existing constructible/reduced
-   reduction. Both added imports are proof-only. The new module imports declarations
-   needed by its signature. Original public exports are preserved. The complete old direct
-   dependency accounting is above. `dag/units/sk-thm-p1.json` realizes both the algebraically
-   closed and separably closed nodes in its curve-calculation step; these stay on the route.
-5. Updated the original algebraically closed node's proof, proof_deps, proof_origin and
-   lean note to match the new proof; its sorry_free flag remains false because
-   the axiom check still contains sorryAx. Rebuilt the new node with a verbatim Lean signature,
-   source, complete proof steps, exact union of uses, chapter, unit, creation record and
-   genuine search records. Other existing node statements and records are unchanged.
-
-Changes by the second reader: replaced the two duplicate splits by one smaller reduced
-prime-coefficient obligation; restored the original passage sorry; applied the existing
-reduction; repaired imports, documentation, node metadata, dependency accounting and this report.
-
-## Earlier second reading (a previous round; superseded)
-
-1. Compared the delivered item module with the repository version. Existing declaration
-signatures, definitions, docstrings and public imports are unchanged; only proof-only imports
-and the algebraically closed proof body were added. The new split module has a distinct,
-strictly smaller reduced constructible prime-coefficient statement.
-
-2. Compiled both modules in import order with `lcompile.py --all`; compilation succeeds. The
-only new `sorry` is the named split theorem
-`AlgebraicGeometry.IsCurve.algebraicallyClosedCohomologyInvariant`, recorded by node
-`e1-algebraically-closed-cohomology-invariant`; no forbidden declarations or hollow definitions
-were introduced. The item also retains
-`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed_of_isAlgClosed`,
-with its named sorry and node `lemma-weil-pbc-curve-separably-closed-passage`.
-
-3. Checked the split statement against the reduction's exact hypotheses and edge cases
-(empty and zero-dimensional curves, zero sheaf, and all prime characteristics). Searched
-Mathlib and the project for duplicates; none was found. The statement is true and no stronger
-than the reduction requires.
-
-4. The item proof applies the existing reduced/constructible reduction and then the new split
-core. Added imports are plain proof-only imports; original public exports remain. The updated
-item node's proof, dependencies and origin match this route, and the unit route remains intact.
-
-5. The new node has complete source, proof steps, dependency union, search records, chapter,
-unit, creation and verbatim Lean declaration metadata. No statement or definition change record
-is needed.
-
-Changed in this reading: added this required review record and corrected the delivered DAG and
-report metadata; no Lean proof changes were necessary.
+Searches were independently repeated using LeanFinder, Loogle, and Mathlib grep, and the
+upstream and Sheaf sources were searched for alternative names. No complete existing
+geometric-square or coefficient-comparison declaration was found. LeanSearch was called
+for both new nodes and returned Internal Server Error; this is recorded as unavailable,
+not as a no-match result. The generic Mathlib comparison isomorphisms found are used.
+No existing statement or definition changes, and no change record is required.
 
 ## Second reading by E1
 
-1. Compared the delivered item module with the repository version. Existing theorem signatures, definitions, docstrings, and public imports are unchanged; only two proof-only imports and the algebraically closed proof body differ. The new module is an additional declaration.
+1. Compared the source module with the repository by diff and by raw declaration-signature
+   slices: all three existing signatures are byte for byte unchanged. No definition or
+   public-import change; the additions are proof-only imports. Verdict: pass.
+2. Compiled all three modules in import order. Checked every theorem with scratch-copy
+   `#print axioms`, scanned the delivery for forbidden declarations and for sorry in data,
+   and removed the scratch copies. Only the named geometric theorem has a new direct
+   sorry; no extra axioms beyond the three allowed and existing/open `sorryAx`. Verdict:
+   pass as a partial reduction, with the remaining dependency explicitly reported.
+3. The geometric statement is independent of the target cohomology theorem and true by
+   the compatible algebraic-closure construction in 0A5E. Checked characteristic zero
+   (closures give identity comparisons), positive characteristic (pure inseparability),
+   identity field extension, empty curves, dimension-zero curves, and arbitrary torsion
+   coefficients/degrees. The coefficient statement is fully proved for arbitrary scheme
+   morphisms, independently of all curve/cohomology hypotheses. Repeated searches find
+   no duplicate declaration. Verdict: pass after replacing the equivalent restatement.
+4. Kept the repository's existing shortest algebraically closed reduction. Used the
+   existing functoriality declaration instead of splitting another cohomology obligation,
+   and proved the coefficient comparison from Mathlib. Removed redundant new imports.
+   Listed every old direct proof edge replaced; no unit or module was bypassed. Read
+   `dag/units/sk-thm-p1.json` and its preserved `realized` route. Verdict: pass.
+5. Checked the two new nodes against their exact Lean signatures, sources, recorded
+   searches, and proof steps; each `proof_deps` is the union of the steps' uses. Updated
+   the parent node to describe the actual bottom-map/vertical-map reduction and its
+   named dependencies. No new helper cites the parent as a proof dependency. Verdict:
+   pass after repairing the previous comparison node and adding the proved coefficient
+   node.
 
-2. Compiled both modules with `lcompile.py --all`; compilation succeeds without errors. The only remaining item sorry is the named separably closed passage theorem, and the only new sorry is `algebraicallyClosedCohomologyInvariant`; both are documented and have DAG nodes. No forbidden declarations or hollow definitions were introduced.
-
-3. Checked the new split statement against the reduction's exact reduced, constructible prime-coefficient hypotheses and edge cases (empty and zero-dimensional curves, zero sheaf, and all prime characteristics). Searched Mathlib and the project for duplicate results; none was found. The statement is true and strictly smaller than the item theorem.
-
-4. The item proof applies the existing reduction and the new split core. Added imports are plain proof-only imports, while the original public exports remain. The item node's proof, dependencies, and origin match the Lean route; the unit route remains intact.
-
-5. The new node has a verbatim Lean signature, source, complete proof steps, exact dependency union, chapter, unit, creation record, and search records. No statement or definition changed, so no change record is required.
-
-I repaired the report metadata by adding this complete second-reading section; no Lean proof changes were needed.
+Second reading changed the equivalent helper into a geometric square theorem, added and
+proved the coefficient isomorphism, wrote the real cohomological comparison and cancellation
+in the original theorem, minimized the new imports, and repaired the nodes and this report.

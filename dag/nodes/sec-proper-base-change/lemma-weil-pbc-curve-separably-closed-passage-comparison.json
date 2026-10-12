@@ -1,0 +1,148 @@
+{
+ "id": "lemma-weil-pbc-curve-separably-closed-passage-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-curve-separably-closed-passage",
+   "place": "proof, Step 8: The bottom arrow and the compatible-algebraic-closure comparison square"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Geometric algebraically closed comparison square for separably closed fields",
+ "statement": "Let k and k' be separably closed fields [def-pc-separably-closed], let f : C -> Spec k be a proper curve (separated, finite type, and topological Krull dimension at most one, with the empty scheme allowed) [def-weil-scheme-over-base, def-weil-proper-morphism, def-kun-topological-krull-dimension], and let C' -> C be a cartesian square over a morphism Spec k' -> Spec k [def-pc-base-change]. There exist algebraically closed fields K and K' [def-weil-algebraic-closure], schemes D and D', a proper curve b : D -> Spec K, a morphism b' : D' -> Spec K', a morphism j : Spec K' -> Spec K, and morphisms a : D' -> D, p : D -> C, p' : D' -> C', such that the square (a,b',b,j) is cartesian, p and p' are universal homeomorphisms [def-weil-universal-homeomorphism], and p' followed by C' -> C equals a followed by p. No sheaf, degree, or cohomological invariance hypothesis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemma Tag 0A5E, proof: compatible algebraic closures, universal-homeomorphism vertical maps, and the bottom comparison arrow"
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-pc-base-change",
+  "def-weil-algebraic-closure",
+  "def-weil-universal-homeomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose K' an algebraic closure of k' and K the relative algebraic closure of k in K'; K is algebraically closed and the embeddings commute. Since the ground fields are separably closed, K/k and K'/k' are purely inseparable algebraic extensions.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-relative-algebraic-closure-algclosed",
+    "lem-pc-kbar-pure-insep"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take D = C times Spec K over Spec k and D' = C' times Spec K' over Spec k'. The spectrum maps of the purely inseparable extensions and their base changes p and p' are universal homeomorphisms. Pullback pasting gives a : D' -> D, the cartesian square over K'/K, and p' >> iota' = a >> p.",
+   "uses": [
+    "lem-pc-homeo-pure-insep",
+    "lem-weil-pbc-cartesian-square-pasting",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Properness, separatedness, and finite type are stable under base change. The universal homeomorphism p identifies the underlying topological spaces of D and C, so topological Krull dimension is unchanged, also in the empty and zero-dimensional cases; hence b is a proper curve.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-relative-algebraic-closure-algclosed",
+  "lem-pc-kbar-pure-insep",
+  "lem-pc-homeo-pure-insep",
+  "lem-weil-pbc-cartesian-square-pasting",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-proper-base-change",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A5E, proof, compatible algebraic closures and the two universal-homeomorphism base changes; checked at https://stacks.math.columbia.edu/tag/0A5E on 2026-10-12"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "geometric comparison square for a curve over separably closed fields using compatible algebraic closures",
+   "results": "Service unavailable: HTTP response Internal Server Error. No no-match verdict inferred.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "separably closed fields admit a commutative square of algebraic closures with purely inseparable vertical extensions",
+   "results": "Field embeddings and purely-inseparable algebraic-closure facts only; no scheme comparison-square theorem.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, IsAlgClosed",
+   "results": "Only conversion between closed-field classes; no comparison square.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsSepClosed.*IsPurelyInseparable|IsPurelyInseparable.*IsSepClosed|relativeAlgebraicClosure)",
+   "results": "Mathlib purely-inseparable field ingredients; no geometric square.",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1148,
+ "blueprint_uses": [],
+ "uses_not_cited": [],
+ "proof_split_by": "paragraphs",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.SepClosedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/SepClosedComparison.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.sepClosed_geometric_comparison",
+  "branch": "sheaf-dag",
+  "statement": "theorem sepClosed_geometric_comparison\n    {k k' : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    {C C' : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsProper f]\n    {ι : Spec (.of k') ⟶ Spec (.of k)} {f' : C' ⟶ Spec (.of k')} {ι' : C' ⟶ C}\n    (h : IsPullback ι' f' f ι) :\n    ∃ (K : Type u) (_ : Field K) (_ : IsAlgClosed K)\n      (K' : Type u) (_ : Field K') (_ : IsAlgClosed K')\n      (D D' : Scheme.{u}) (b : D ⟶ Spec (.of K)) (b' : D' ⟶ Spec (.of K'))\n      (j : Spec (.of K') ⟶ Spec (.of K)) (a : D' ⟶ D) (p : D ⟶ C) (p' : D' ⟶ C'),\n      IsCurve b ∧ IsProper b ∧ IsPullback a b' b j ∧\n        IsUniversalHomeomorphism p ∧ IsUniversalHomeomorphism p' ∧ p' ≫ ι' = a ≫ p",
+  "by": "E1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.FieldExtension",
+  "date": "2026-10-12",
+  "group": "E1"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a8ae7",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T003805-L-609832",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-a8ae7",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261012T003805-L-609832",
+  "kind": "interface",
+  "note": "independent Codex review: Packet, delivered files, DAG nodes, report, and compile checks match the stage-3 brief"
+ }
+}
