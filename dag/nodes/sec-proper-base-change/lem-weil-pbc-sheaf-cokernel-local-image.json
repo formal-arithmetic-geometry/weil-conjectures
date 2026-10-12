@@ -30,70 +30,46 @@
  ],
  "proof": [
   {
-   "text": "Let $\\eta:P\\to P^#$ be the sheafification map and write $p_V:\\mathcal G(V)\\to P(V)$ for the sectionwise quotient. The quotient maps commute with restriction, so $P$ is a presheaf of $\\mathcal O_X$-modules and $q_V=\\eta_V\\circ p_V$ defines the morphism $q$. Since $p_V\\circ\\varphi_V=0$ for every open $V$, one has $q\\circ\\varphi=0$. The underlying sheaf of sets of $P^#$ with $\\eta$ is the ordinary sheafification, by lem-weil-pbc-module-sheafification-underlying-sets.",
+   "text": "Write p for the presheaf cokernel projection and eta for the module sheafification unit. The canonical equation hq and cokernel.condition give phi followed by q equal to zero. Faithfulness of the forgetful functor transfers this equality to module sheaves.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-module-sheafification-underlying-sets"
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AH (tag 01AH), proof and statement of parts (1)--(2), lines 204-243; the module sheafification is Modules on Sites, Lemma 03CY (tag 03CY)."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the local-section/equality criterion to the opens site of $X$ (Sites, 00WB and 00WK), using the underlying-sheaf identification from Step 1. For $s\\in\\mathcal G(V)$, the equality $q_V(s)=0$ is the equality $\\eta_V([s])=\\eta_V(0)$ in $P^#(V)$, and therefore holds exactly when some open covering $V=\\bigcup_iV_i$ satisfies $[s|_{V_i}]=0$ in $P(V_i)$. By the definition of the quotient, this is equivalent to the existence of sections $t_i\\in\\mathcal F(V_i)$ with $s|_{V_i}=\\varphi_{V_i}(t_i)$.",
+   "text": "The sheafification adjunction identifies maps from the sheafified cokernel with presheaf maps out of the cokernel. If two maps agree after q, cancel the epic cokernel projection p and use injectivity of sheafificationHomEquiv. Thus q is epic.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-weil-pbc-module-sheafification-underlying-sets",
+    "def-weil-presheaf-modules-sheafification",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Theorem 00WB (tag 00WB, theorem-plus), especially parts (2) and (4), and Lemma 00WK (tag 00WK, lemma-sections-sheafification); applied to the opens site."
-   }
+   "elementary": true
   },
   {
-   "text": "For each open $V$ let $I(V)$ be the set of sections of $\\mathcal G(V)$ that are locally of the form $\\varphi(t)$. Restriction preserves this property. Given two such sections, refine their two covers to a common cover; on each member the sum, difference, and multiplication by a section of $\\mathcal O_X$ are again images under the corresponding linear map. Thus $I$ is a subsheaf of $\\mathcal O_X$-modules of $\\mathcal G$ (the sheaf condition is inherited from $\\mathcal G$). Step 2 identifies $I(V)$ with $\\ker(q_V)$ for every $V$, so $I=\\ker q$ as sheaves of modules.",
+   "text": "Evaluate the cokernel short complex on an open W. Evaluation preserves finite colimits, so ShortComplex.exact_of_g_is_cokernel and ShortComplex.Exact.map give an exact complex of modules. By ShortComplex.moduleCat_exact_iff any section killed by p_W lifts through phi_W.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AH (tag 01AH), together with the sectionwise sheaf-of-modules structure and the local criterion from Sites 00WB/00WK."
-   }
-  },
-  {
-   "text": "The map $\\varphi$ factors through $I$ because every section in its image is locally in the image. Finally, let $h,k:P^#\\to\\mathcal H$ be morphisms with $h q=k q$. For any section $u\\in P^#(V)$, 00WB/00WK gives an open cover $V=\\bigcup_iV_i$ and sections $a_i\\in P(V_i)$ with $\\eta(a_i)=u|_{V_i}$. Each $a_i$ is $p_{V_i}(g_i)$ for some $g_i\\in\\mathcal G(V_i)$, so $u|_{V_i}=q(g_i)$ and $h(u)|_{V_i}=k(u)|_{V_i}$. The sheaf axiom for $\\mathcal H$ gives $h(u)=k(u)$; hence $q$ is an epimorphism. Together with Step 1 this proves all remaining assertions.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-sheafification",
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01AH (tag 01AH), proof that the sheafified sectionwise colimit is the colimit; the local representatives used here are Sites, Theorem 00WB and Lemma 00WK (tags 00WB, 00WK)."
-   }
+   "elementary": true
+  },
+  {
+   "text": "If q_V(s)=0, the underlying additive-group sheafification unit sends p_V(s) and zero to the same section. Its Mathlib local injectivity instance and Presheaf.equalizerSieve_mem give a covering equalizer sieve. Opens.mem_grothendieckTopology supplies a neighborhood W for each point; naturality of p and the evaluated exactness give the required preimage in F(W). Conversely, local preimages and the zero composite show q_V(s) restricts to zero on a covering sieve. Separatedness of the sheafified quotient gives q_V(s)=0.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-weil-presheaf-modules-sheafification",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-module-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "def-weil-pbc-sheafification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01AH (tag 01AH), with the local section/equality argument supplied by Sites, Theorem 00WB and Lemma 00WK (tags 00WB, 00WK)."
+  "place": "Tag 01AH; local equality from Sites Tags 00WB/00WK, implemented directly by Mathlib local injectivity and separatedness. Epimorphy uses the sheafification adjunction."
  },
  "mathlib_searches": [
   {
@@ -171,5 +147,15 @@
   "group": "K1",
   "result": "fix",
   "note": "ringed space restated as X : RingedSpace.{u} with SheafOfModules.{u} (moduleRings X) (STATE MODULE SHEAVES ON A SPACE); q tied to cokernel.π ≫ module sheafification unit instead of toPresheaf/toSheafify equation"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-93204",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T163615-L-2785504",
+  "kind": "interface",
+  "note": "independent Codex review: Matched the unchanged Lean signature and completed proof with the node; verified DAG changes, pruning, report, preserved public import closure, clean compilation of the delivery and its sole direct importer, and only propext, Classical.choice, Quot.sound axioms."
  }
 }
