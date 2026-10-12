@@ -9,6 +9,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Topology.KrullDimension
+import Sheaf.Paper.ZeroDimensionalGlobalSectionsExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso
+import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Zero-dimensional étale cohomology: cohomological remainder
 
@@ -34,29 +38,15 @@ lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
 Stacks Project, Tags 00KH, 00FV, 054M, 03QT, 03QU, 03SI and 03Q1.
 (blueprint: zero-dimensional-etale-cohomology-rest).
 
-Proof:
-1. `lem-weil-pbc-finite-type-dim-zero-artinian` gives a finite discrete space of
-   closed points. `lem-weil-pbc-reduction-universal-homeomorphism` gives the reduced
-   scheme with the same space. It is finite type, being a closed subscheme of C.
-   `lem-weil-pbc-closed-point-residue-field-base` identifies its residue fields with k.
-   Each singleton is open and closed and affine by
-   `lem-weil-pbc-finite-discrete-scheme-affine`. Its reduced coordinate ring has one
-   prime, hence is a field, identified with k by its residue field. The inclusions
-   induce a map from the coproduct supplied by `lem-weil-pbc-scheme-coproduct-family`.
-   Disjoint open summands cover the reduction, so this bijective local isomorphism
-   is an isomorphism with the finite coproduct of Spec k.
-2. `lem-weil-pbc-finite-geometric-point-coproduct-cohomology` computes the cohomology
-   of the pulled-back sheaf there: positive degrees are zero and the canonical
-   degree-zero germ map is an isomorphism. Each chosen `s x` factors through the
-   reduction since its source is reduced. On a Spec k summand, taking the stalk at
-   any algebraically closed geometric field gives the same exact evaluation functor
-   (Stacks 03QT and 03QU); no algebraicity or k-linearity of `s x` is required.
-3. `thm-weil-pbc-universal-homeomorphism-invariance` transports this calculation to C.
-   `lem-weil-pbc-inverse-image-stalk-germ` identifies the pulled-back stalks with those
-   of F, preserving germs of sections. Consequently the transported degree-zero map
-   is the displayed derived-to-underived comparison, restriction to the identity
-   étale object, and product of germs, rather than merely some isomorphism.
-   A zero abelian group is subsingleton, giving the other conjunct.
+Proof: Apply `zero_dimensional_global_sections_preservesFiniteColimits`; global
+sections already preserve finite limits. The exact-functor comparison
+`Functor.singleFunctorCompRightDerivedFunctorIso` identifies derived global
+sections of F in degree zero with ordinary global sections placed in degree zero.
+Transport the vanishing of the homology of a single complex in positive degree
+through this comparison, then use `AddCommGrpCat.subsingleton_of_isZero`.
+The degree-zero conjunct is `zero_dimensional_etale_cohomology_iso`, which keeps
+the reduction, finite coproduct, and canonical germ compatibility route described
+in the source. Neither unresolved obligation restates this conjunction.
 -/
 theorem zero_dimensional_etale_cohomology_rest
     (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})
@@ -78,6 +68,25 @@ theorem zero_dimensional_etale_cohomology_rest
             (Scheme.pointSmallEtale (s x)).toPresheafFiber
               (Scheme.Etale.mk (𝟙 C))
               (Over.homMk (s x) (Category.comp_id (s x))) F.obj)) := by
-  sorry
+  have : PreservesFiniteColimits (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+    zero_dimensional_global_sections_preservesFiniteColimits k C f hdim
+  refine ⟨fun q hq => AddCommGrpCat.subsingleton_of_isZero ?_,
+    zero_dimensional_etale_cohomology_iso k C f hdim F Ω s hs⟩
+  change IsZero ((DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ)).obj
+    ((Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctor.obj
+      ((DerivedCategory.singleFunctor _ 0).obj F)))
+  refine IsZero.of_iso ?_ ((DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso
+    ((Functor.singleFunctorCompRightDerivedFunctorIso
+      (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1})).app F))
+  change IsZero ((DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ)).obj
+    ((DerivedCategory.singleFunctor AddCommGrpCat.{u + 1} 0).obj
+      ((Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj F)))
+  exact (HomologicalComplex.isZero_single_obj_homology (ComplexShape.up ℤ) 0
+    ((Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj F)
+    (q : ℤ) (by omega)).of_iso
+    ((DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso
+      ((DerivedCategory.singleFunctorIsoCompQ AddCommGrpCat.{u + 1} 0).app
+        ((Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}).obj F)) ≪≫
+      (DerivedCategory.homologyFunctorFactors _ (q : ℤ)).app _)
 
 end AlgebraicGeometry

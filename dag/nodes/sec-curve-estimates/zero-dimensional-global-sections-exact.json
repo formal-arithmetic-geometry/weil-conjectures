@@ -1,0 +1,136 @@
+{
+ "id": "zero-dimensional-global-sections-exact",
+ "blueprint": {
+  "is": null,
+  "from": "zero-dimensional-etale-cohomology-rest",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact global sections on a zero-dimensional finite-type scheme",
+ "statement": "Let u be a universe, k : Type u an algebraically closed field, C : Scheme.{u}, f : C ⟶ Spec k a separated, locally finite-type, quasi-compact morphism, and assume topologicalKrullDim C ≤ 0. Then the global sections functor on abelian sheaves in universe u+1 on the small etale site of C preserves finite colimits. Together with its existing finite-limit preservation, this says global sections are exact. The site, sheaves, and global sections are [def-weil-pbc-etale-site], [def-weil-pbc-abelian-etale-sheaves], and [def-weil-pbc-global-sections-functor]. No geometric points, sheaf F, or cohomology conclusion are assumed.\n\nExact Lean signature:\ntheorem zero_dimensional_global_sections_preservesFiniteColimits\n    (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})\n    (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]\n    [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) :\n    PreservesFiniteColimits (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1})",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-zero-dimensional-cohomology.md",
+  "place": "node lem-weil-pbc-zero-dimensional-cohomology, order 1002"
+ },
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-type-dim-zero-artinian], the finite-type\nzero-dimensional scheme $C$ has finite discrete underlying space and every\npoint is closed. Let $i:C_{\\mathrm{red}}\\to C$ be the reduction. By\n[lem-weil-pbc-reduction-universal-homeomorphism], $C_{\\mathrm{red}}$ is reduced\nand $i$ is a universal homeomorphism. Since $C_{\\mathrm{red}}$ is a closed\nsubscheme of the finite-type $k$-scheme $C$, it is itself finite type over $k$.\nApplying [lem-weil-pbc-closed-point-residue-field-base] to $C_{\\mathrm{red}}$\nidentifies every residue field $\\kappa_{C_{\\mathrm{red}}}(c)$ with $k$ (equivalently,\n$\\mathcal O_{C_{\\mathrm{red}},c}=\\mathcal O_{C,c}/\\sqrt{0}$ has the same\nresidue field). The singleton pieces of the finite discrete space\n$C_{\\mathrm{red}}$ are open and closed. Each such piece is affine by\n[lem-weil-pbc-finite-discrete-scheme-affine]. Its coordinate ring is reduced\nand has only one prime, hence is a field; the residue-field identification\nmakes that field $k$. Therefore each piece is $\\operatorname{Spec}k$. By\n[lem-weil-pbc-scheme-coproduct-family], the morphism from the coproduct of\nthese pieces to $C_{\\mathrm{red}}$ induced by their inclusions is an\nisomorphism: its restriction to each summand is the corresponding open\nimmersion, and the summands are pairwise disjoint and cover $C_{\\mathrm{red}}$,\nso it is bijective and a local isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-finite-discrete-scheme-affine",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Lemma 00KH (algebra-lemma-Noetherian-dimension-0) and Theorem 00FV (algebra-theorem-nullstellensatz), together with Morphisms Lemma 054M (morphisms-lemma-reduction-universal-homeomorphism) and the first paragraph of Lemma 0A5B (etale-cohomology-lemma-constant-smooth-statements)"
+   }
+  },
+  {
+   "text": "Use [thm-weil-pbc-universal-homeomorphism-invariance] to identify abelian etale sheaves on C with those on the reduction, compatibly with global sections. Sheaves on the finite coproduct of Spec k are families of sheaves on the summands. An algebraically closed field is strictly henselian. Apply [lem-weil-pbc-strictly-henselian-sections-stalk] to R = k and the identity geometric point: its natural germ isomorphism identifies sections on each summand with its geometric stalk. Restriction of global sections to the terminal etale object is a natural isomorphism. By [prop-weil-pbc-geometric-stalks-exact], this stalk functor preserves finite colimits, hence so do global sections on each summand. Thus global sections on the coproduct are the finite product of exact evaluations. Finite products in abelian groups are biproducts and commute with finite colimits. Transport finite-colimit preservation through the reduction equivalence. The empty scheme gives the constant zero functor and is included.",
+   "uses": [
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03SI and 03QO; geometric stalk exactness via its Mathlib adjunction; finite coproduct assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lem-weil-pbc-zero-dimensional-cohomology.md",
+  "place": "Finite reduction, natural strictly henselian germ comparison (Stacks 03QO), geometric stalk exactness, and finite biproduct assembly, as in the source proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global sections exact finite discrete scheme algebraically closed geometric stalk product",
+   "results": "Eight unrelated affine-scheme and pointsPi hits; no theorem for global sections or the specified germ composite.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.Γ, CategoryTheory.Limits.PreservesFiniteColimits",
+   "results": "Zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toPresheafFiber|PreservesFiniteColimits.*Γ|Γ.*PreservesFiniteColimits",
+   "results": "Generic site-point germ definitions and naturality; no zero-dimensional global sections theorem. Local library search found strictly henselian special cases, which do not apply to a general finite union of nonreduced points.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The global sections functor of abelian etale sheaves on a zero dimensional scheme of finite type over an algebraically closed field is exact and degree zero cohomology is the product of geometric stalks.",
+   "results": "Service unavailable: Internal Server Error. No search verdict; independent leanfinder, loogle and local grep searches used instead.",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZeroDimensionalGlobalSectionsExact",
+  "file": "lean/Sheaf/Paper/ZeroDimensionalGlobalSectionsExact.lean",
+  "declaration": "AlgebraicGeometry.zero_dimensional_global_sections_preservesFiniteColimits",
+  "statement": "theorem zero_dimensional_global_sections_preservesFiniteColimits\n    (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u})\n    (f : C ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f]\n    [QuasiCompact f] (hdim : topologicalKrullDim C ≤ 0) :\n    PreservesFiniteColimits (Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "P1",
+  "date": "2026-10-12"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZeroDimensionalEtaleCohomologyRest",
+  "date": "2026-10-12",
+  "group": "P1"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T025349-L-1240944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261012T025349-L-1240944",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
