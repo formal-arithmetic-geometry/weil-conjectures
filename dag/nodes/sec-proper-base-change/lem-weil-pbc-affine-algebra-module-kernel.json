@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-affine-algebra-module-kernel",
+ "kind": "statement",
+ "title": "Underlying quasi-coherence of a kernel from a free algebra-module sheaf",
+ "statement": "Let S be a scheme [def-pc-scheme], A a quasi-coherent commutative O_S-algebra sheaf [def-weil-pbc-comm-algebra-sheaf, pqf-def-coherent], U any open, M an A|U-module on the slice site [def-weil-sheaf-of-modules-category] whose underlying O_S|U-module is quasi-coherent, and g a morphism from the free A|U-module sheaf on any small type to M. Then the underlying O_S|U-module of ker g is quasi-coherent. U need not be affine and g need not be epi.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01IC and Section 01LA(5) (01LB); EGA I, Proposition 9.6.1"
+ },
+ "proof": [
+  {
+   "text": "Prove simultaneous preservation of small limits and colimits under scalar restriction. For each ring sheaf the forgetful functor simultaneously preserves limits and colimits by moduleSheaves_colimits_forgetful and reflects them by reflection of isomorphisms. Scalar restriction leaves its composite with the forgetful functor unchanged. Extract both preservation instances; kernels use the first and free coproducts use the second.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose scalar restriction with the equivalence from the slice to the open subscheme. Its image of the ring module is the restriction of the underlying algebra, hence quasi-coherent. Preservation of coproducts and closure of quasi-coherent modules under coproducts identify the underlying free term as quasi-coherent.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove that any module on the slice is quasi-coherent if and only if its image on the open subscheme is quasi-coherent. Use the Mathlib pushforward theorem for the equivalence of sites in each direction and the equivalence unit to recover the original slice module. Transport the quasi-coherent target forward by this equivalence, apply isQuasicoherent_kernel on the open subscheme, and use PreservesKernel.iso. Apply the reverse implication of the equivalence to obtain quasi-coherence of the scalar-restricted kernel.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-weil-pbc-quasi-coherent-module-kernel"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Schemes, Lemma 01IC and Section 01LA(5) (01LB); EGA I, Proposition 9.6.1; explicit scalar-restriction and slice transport by second reader G1; repair generalizes private helpers to simultaneous preservation and bidirectional quasi-coherence transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "restriction of scalars of a kernel from a direct sum of quasi coherent algebra sheaves is quasi coherent",
+   "results": "8 hits; SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.X, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.restrictScalars, SheafOfModules.QuasicoherentData.presentation; no exact algebra-scalar slice statement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "4 hits; SheafOfModules.restrictScalars, SheafOfModules.instAdditiveRestrictScalars, SheafOfModules.restrictScalars_obj_val, SheafOfModules.restrictScalars_map_val; no exact algebra-scalar slice statement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|PreservesLimits",
+   "results": "15 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; no exact algebra-scalar slice statement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel of a map from a free module over a quasi coherent algebra has quasi coherent underlying module",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraModulePresentation",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-algebra-module-presentation",
+   "place": "proof: kernel relations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraModuleKernel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.affine_algebraModule_kernel_isQuasicoherent",
+  "statement": "theorem affine_algebraModule_kernel_isQuasicoherent (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (U : S.Opens) (M : SheafOfModules.{u} (((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).obj A.right).over U)) (hA : A.toModule.IsQuasicoherent) (hM : ((SheafOfModules.restrictScalars (((Opens.grothendieckTopology S).overPullback RingCat U).map ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).map A.hom))).obj M).IsQuasicoherent) (ι : Type u) (g : SheafOfModules.free ι ⟶ M) : ((SheafOfModules.restrictScalars (((Opens.grothendieckTopology S).overPullback RingCat U).map ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).map A.hom))).obj (Limits.kernel g)).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T160135-L-2563594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T160135-L-2563594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

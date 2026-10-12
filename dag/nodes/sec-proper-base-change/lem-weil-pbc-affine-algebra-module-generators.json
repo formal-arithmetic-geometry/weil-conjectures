@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-affine-algebra-module-generators",
+ "kind": "statement",
+ "title": "Global generation of algebra modules on an affine open",
+ "statement": "Let S be a scheme [def-pc-scheme], A a commutative O_S-algebra sheaf [def-weil-pbc-comm-algebra-sheaf], U an affine open, and M a module sheaf over A restricted to the slice site over U [def-weil-sheaf-of-modules-category]. If restriction of scalars of M along O_S|U -> A|U is quasi-coherent [pqf-def-coherent], then M admits global generating sections (an epimorphism from a coproduct of copies of A|U). No quasi-coherence hypothesis on A and no relation generators are required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "pqf-def-coherent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0H88, proof, second paragraph; EGA I, Proposition 9.6.1"
+ },
+ "proof": [
+  {
+   "text": "Identify U with Spec O_S(U) and use the affine tilde-Gamma equivalence to write the underlying module as the tilde of its global sections. Fractions of these sections generate on principal opens.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use all global sections as A-module generators. The A-linear evaluation contains the O-linear evaluation image and is locally surjective. The latter condition is unchanged on passing between the open subscheme and its slice site, and is equivalent to epimorphy of module sheaves.",
+   "uses": [
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, Lemma 0H88, proof, second paragraph; EGA I, Proposition 9.6.1; explicit scalar-restriction and slice transport by second reader G1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "global generating sections of an algebra module whose underlying module is quasi coherent on an affine open",
+   "results": "8 hits; SheafOfModules.QuasicoherentData.localGeneratorsData_generators, SheafOfModules.QuasicoherentData.localGeneratorsData, SheafOfModules.QuasicoherentData.localGeneratorsData_I, SheafOfModules.GeneratingSections, SheafOfModules.GeneratingSections.I, SheafOfModules.QuasicoherentData.localGeneratorsData_X, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.generators; no exact algebra-scalar slice statement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections",
+   "results": "12 hits; SheafOfModules.GeneratingSections, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.s, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.GeneratingSections.equivOfIso, SheafOfModules.GeneratingSections.π; no exact algebra-scalar slice statement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "quasicoherent.*kernel|kernel.*quasicoherent|generatingSections",
+   "results": "0 hits; ; no exact algebra-scalar slice statement",
+   "date": "2026-10-12",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra module with quasi coherent underlying structure sheaf module is globally generated on an affine scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineAlgebraModulePresentation",
+  "date": "2026-10-12",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-algebra-module-presentation",
+   "place": "proof: global generators",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineAlgebraModuleGenerators",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineAlgebraModuleGenerators.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_affine_algebraModule_generatingSections",
+  "statement": "theorem nonempty_affine_algebraModule_generatingSections (S : Scheme.{u}) (A : S.CommAlgebraSheaf) (U : S.Opens) (hU : IsAffineOpen U) (M : SheafOfModules.{u} (((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).obj A.right).over U)) (hM : ((SheafOfModules.restrictScalars (((Opens.grothendieckTopology S).overPullback RingCat U).map ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).map A.hom))).obj M).IsQuasicoherent) : Nonempty M.GeneratingSections",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T160135-L-2563594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261012T160135-L-2563594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.AffineAlgebraModuleGenerators
+import Sheaf.AlgebraicGeometry.AffineAlgebraModuleKernel
 
 /-! # Algebra-module presentations on an affine open
 
@@ -68,6 +68,13 @@ theorem nonempty_algebraModule_presentation_over (S : Scheme.{u})
     (hG : (((SheafOfModules.restrictScalars
       ((sheafCompose (Opens.grothendieckTopology S) (forget₂ CommRingCat RingCat)).map
         A.hom)).obj G).over U).IsQuasicoherent) :
-    Nonempty (G.over U).Presentation := by sorry
+    Nonempty (G.over U).Presentation := by
+  obtain ⟨generators⟩ :=
+    nonempty_affine_algebraModule_generatingSections S A U hU (G.over U) hG
+  have hK := affine_algebraModule_kernel_isQuasicoherent
+    S A U (G.over U) hA hG generators.I generators.π
+  obtain ⟨relations⟩ := nonempty_affine_algebraModule_generatingSections
+    S A U hU (Limits.kernel generators.π) hK
+  exact ⟨⟨generators, relations⟩⟩
 
 end AlgebraicGeometry.Scheme.Modules
