@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.ShiftedHomPresheaf
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageCohomology
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.StageTransition
 
 /-!
 # Higher direct images and limits of schemes

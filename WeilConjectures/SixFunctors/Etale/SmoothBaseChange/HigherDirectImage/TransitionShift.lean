@@ -75,6 +75,14 @@ lemma Etale.lowerStarPlusShiftedHomEquiv_add (h : Y ⟶ X) (q : ℤ)
         Etale.lowerStarPlusShiftedHomEquiv Λ h q A K y := by
   simp only [Etale.lowerStarPlusShiftedHomEquiv_apply, Functor.map_add, Preadditive.add_comp]
 
+lemma Etale.lowerStarPlusShiftedHomEquiv_zero (h : Y ⟶ X) (q : ℤ)
+    (A : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    Etale.lowerStarPlusShiftedHomEquiv Λ h q A K 0 = 0 := by
+  have e := Etale.lowerStarPlusShiftedHomEquiv_add Λ h q A K 0 0
+  rw [add_zero] at e
+  exact left_eq_add.mp e
+
 /-- Under `AlgebraicGeometry.Etale.lowerStarPlusShiftedHomEquiv`, composition with the
 transition map `Rh_* K ⟶ Rh'_*(a^* K)` of a triangle `a ≫ h = h'` is the pullback along `a`:
 `h'^* A ≅ a^* h^* A ⟶ a^*(K⟦q⟧) ≅ (a^* K)⟦q⟧`. -/
