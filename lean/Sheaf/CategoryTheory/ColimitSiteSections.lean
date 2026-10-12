@@ -5,8 +5,10 @@ Authors: SHEAF contributors
 -/
 module
 
-public import Sheaf.CategoryTheory.ColimitSites
+public import Mathlib.CategoryTheory.Category.Cat
+public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Sheaf.CategoryTheory.SiteFilteredColimitSections
+import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Sections of the colimit sheaf on a colimit of sites
 Source: Stacks Project, Sites, Lemma 09YN and Modules on Sites, Lemma 03CO
@@ -39,7 +41,8 @@ theorem colimitSite_sections_bijective
           (op ((V.ι.app i).toFunctor.obj U)))
         (((sheafSections Q.toGrothendieck (Type u)).obj
           (op ((V.ι.app i).toFunctor.obj U))).mapCocone c)) := by
-  sorry
+  exact siteFilteredColimit_sections_bijective Q hfinite D c hc
+    ((V.ι.app i).toFunctor.obj U)
 
 /-- Source: Stacks Project, Modules on Sites, Lemma 03CO
 (blueprint: lem-weil-pbc-colimit-of-sites-sections).
@@ -61,6 +64,7 @@ theorem colimitSite_sections_isIso
           (op ((V.ι.app i).toFunctor.obj U)))
         (((sheafSections Q.toGrothendieck AddCommGrpCat.{u}).obj
           (op ((V.ι.app i).toFunctor.obj U))).mapCocone c)) := by
-  sorry
+  exact siteFilteredColimit_sections_isIso Q hfinite D c hc
+    ((V.ι.app i).toFunctor.obj U)
 
 end CategoryTheory

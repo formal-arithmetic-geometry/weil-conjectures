@@ -27,65 +27,25 @@
  ],
  "proof": [
   {
-   "text": "For $a:j\\to i$ and $b:k\\to j$, let $t_b$ be the displayed composite from $\\mathcal F_j(u_aX_i)$ to $\\mathcal F_k(u_{a\\circ b}X_i)$. Naturality of the adjunction unit, the canonical identification $f_{a\\circ b}^{-1}=f_b^{-1}f_a^{-1}$, and $\\varphi_{a\\circ b}=\\varphi_b\\circ f_b^{-1}\\varphi_a$ give $t_{b\\circ c}=t_c\\circ t_b$; the added hypothesis $\\varphi_{\\mathrm{id}}=\\mathrm{id}$ and the unit for the identity adjunction give $t_{\\mathrm{id}}=\\mathrm{id}$. Thus these sets and maps form the asserted filtered diagram. The same calculation after applying $f_j^{-1}$ shows that the maps $f_j^{-1}\\varphi_a$ form the diagram of sheaves whose colimit is $\\mathcal F$, and naturality of the units and coprojections shows that the maps in the statement form a map from the first colimit to $\\mathcal F(u_iX_i)$.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-colimit-of-sites"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma Tag 09YN (lemma-colimit), hypotheses and the transition maps implicit in its two colimits; the identity condition needed for an honest diagram is supplied explicitly"
-   }
+   "text": "For the existing Lean declarations, the diagram D of sheaves on the colimit site and its colimit cocone c are already inputs. Mathlib CategoryTheory.IsFiltered.under gives filteredness of Under i. Evaluate at the object (V.ι.app i).toFunctor.obj U.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "There is a canonical isomorphism $\\varinjlim_{a:j\\to i}\\mathcal F_j(u_aX_i)\\cong\\varinjlim_{a:j\\to i}\\varinjlim_{b:k\\to j}(f_b^{-1}\\mathcal F_j)(u_{a\\circ b}X_i)$. In the forward direction, the component at $a$ is the coprojection into the inner colimit for $b=\\mathrm{id}_j$, after the unit identification $\\mathcal F_j(u_aX_i)=(f_{\\mathrm{id}_j}^{-1}\\mathcal F_j)(u_aX_i)$. In the reverse direction, the component indexed by $(a,b)$ is $\\varphi_b$ evaluated at $u_{a\\circ b}X_i$, followed by the coprojection of $\\mathcal F_k(u_{a\\circ b}X_i)$ into the outer colimit at $a\\circ b$. The universal properties of the two colimits [def-weil-pbc-category-colimit] make these maps well defined: compatibility in $a$ and $b$ is precisely naturality of the units and the cocycle equation. Their composites are identities because $\\varphi_{\\mathrm{id}}=\\mathrm{id}$, and, for a general pair $(a,b)$, the inner coprojection is identified with the identity-stage coprojection at $a\\circ b$ by the transition map indexed by $b$; equality can equivalently be checked with the element criterion for filtered colimits [lem-weil-pbc-filtered-colimit-sets-elementwise]. This writes out the source's 'formal argument'.",
+   "text": "Apply the set-valued and abelian-valued clauses of lem-weil-pbc-site-filtered-colimit-sections-finite-coverings to Q, hfinite, D, c, hc and that object. Their canonical colimit.desc maps are definitionally the maps in the two Lean conclusions. This proves the currently recorded Lean signatures; construction and comparison of the stage-section diagram in the fuller mathematical statement are not asserted by those signatures (see the delivery report).",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "proof of Lemma Tag 09YN, first displayed equality ('A formal argument shows that ...')"
-   }
-  },
-  {
-   "text": "Fix $a:j\\to i$. Apply the inverse-image formula of [lem-weil-pbc-colimit-of-sites] (Tag 0A35) at the stage $j$, to the sheaf $\\mathcal F_j$ and the object $u_a(X_i)\\in\\mathcal C_j$. Since $u_j(u_aX_i)=u_iX_i$ and $u_b(u_aX_i)=u_{a\\circ b}X_i$, it identifies the inner colimit of step 2 with $(f_j^{-1}\\mathcal F_j)(u_iX_i)$, compatibly with the outer transition maps and coprojections. Hence step 2 gives $\\varinjlim_{a:j\\to i}\\mathcal F_j(u_aX_i)\\cong\\varinjlim_{a:j\\to i}(f_j^{-1}\\mathcal F_j)(u_iX_i)$, and the resulting map is the unit-then-coprojection map of the statement.",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "proof of Lemma Tag 09YN, application of equation (equation-compute-pullback-to-limit) from Lemma Tag 0A35"
-   }
-  },
-  {
-   "text": "Every covering of the colimit site $\\mathcal C$ is the image of a finite covering at some stage, hence has finite index set [lem-weil-pbc-colimit-of-sites]. Apply [lem-weil-pbc-site-filtered-colimit-sections-finite-coverings] to the filtered diagram $(f_j^{-1}\\mathcal F_j)_{a:j\\to i}$ on $\\mathcal C$ and the object $u_iX_i$: the canonical map $\\varinjlim_{a:j\\to i}(f_j^{-1}\\mathcal F_j)(u_iX_i)\\to(\\varinjlim_{a:j\\to i}f_j^{-1}\\mathcal F_j)(u_iX_i)=\\mathcal F(u_iX_i)$ is a bijection. Composing with step 3 proves the assertion. The same proof in abelian sheaves uses the abelian clause of that lemma and the abelian inverse-image formula in [lem-weil-pbc-colimit-of-sites]; every map in steps 1-3 is a homomorphism, so the resulting bijection is an isomorphism of abelian groups.",
-   "uses": [
-    "lem-weil-pbc-colimit-of-sites",
     "lem-weil-pbc-site-filtered-colimit-sections-finite-coverings"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "proof of Lemma Tag 09YN, conclusion by Lemma Tag 0738 (lemma-directed-colimits-sections); abelian version: sites-modules.tex Lemma Tag 03CO"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-colimit-of-sites",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-filtered-colimit-sets-elementwise",
   "lem-weil-pbc-site-filtered-colimit-sections-finite-coverings"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Lemma Tag 09YN (lemma-colimit) and its proof; abelian version via sites-modules.tex Lemma Tag 03CO"
+  "place": "Lemma Tag 09YN, final application of Tag 0738; abelian clause via sites-modules.tex Tag 03CO. Specialization to the existing Lean signatures, which already supply the diagram and colimit."
  },
  "mathlib_searches": [
   {
@@ -166,5 +126,15 @@
   "group": "E1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-57be3",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T044747-L-2036570",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered module, node proof/dependencies, import change record, report, and compile result match the stage-3 review requirements and unchanged theorem signatures."
  }
 }
