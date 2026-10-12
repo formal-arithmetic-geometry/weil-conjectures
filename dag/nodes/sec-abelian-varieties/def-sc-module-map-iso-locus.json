@@ -1,0 +1,114 @@
+{
+ "id": "def-sc-module-map-iso-locus",
+ "kind": "definition",
+ "title": "The locally invertible open of a module morphism",
+ "statement": "Let $W$ be a scheme [def-pc-scheme] and $\\varphi:M\\to N$ a morphism of $\\mathcal O_W$-modules [def-weil-sheaf-of-modules-category]. Define $U_\\varphi$ as the union of all open subsets $V\\subseteq W$ for which $\\iota_V^*\\varphi$ is an isomorphism, where $\\iota_V:V\\to W$ is the open subscheme inclusion [def-weil-open-immersion] and pullback is tensor-formula pullback [def-pc-module-pullback]. Thus $x\\in U_\\varphi$ exactly when such a $V$ contains $x$.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/05GD",
+  "place": "Lemma 10.79.4(3), open isomorphism locus, described by invertible neighbourhoods"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-open-immersion",
+  "def-pc-module-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism locus of a morphism between finite locally free sheaves is retrocompact and detects invertibility after pullback",
+   "results": "Service unavailable: Internal Server Error. No conclusion drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finite locally free sheaves is invertible on an open subscheme, and arbitrary pullback is invertible exactly when its image lies in this open",
+   "results": "Eight results including Scheme.Modules.Hom.isIso_iff_isIso_app, isLocalIso_iff and scheme open-immersion app lemmas; none states the requested locus construction, compactness or reflection criterion.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact",
+   "results": "QuasiCompact and quasiCompact_iff_forall_isAffineOpen supply the generic conversion, not compactness of the module-map locus.",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "isIsoLocus|isoLocus|isomorphism locus|exists.*[Ii]so.*[Oo]pen; isIso.*stalk|isIso.*restrict; coversTop_iff",
+   "results": "No module-map iso-locus definition or vector-bundle universal locus theorem in Mathlib or the library. Mathlib has pullback composition, restrictFunctorIsoPullback, overFunctorEquiv and Sheaf.isIso_of_coversTop; used to prove the preservation direction. Blueprint/DAG search finds the parent universal locus, not its strictly smaller components.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic preservation ingredients reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: universal locally closed Picard locus, determinant isomorphism open (Stacks 0BDP, final sentence); Lemma 10.79.4(3), open isomorphism locus, described by invertible neighbourhoods",
+   "via": [
+    "lem-sc-finite-locally-free-map-iso-open",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleMapIsoLocus",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleMapIsoLocus.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleMapIsoLocus",
+  "statement": "def moduleMapIsoLocus {W : Scheme.{u}} {M N : W.Modules} (φ : M ⟶ N) :\n    W.Opens",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.moduleMapIsoLocus",
+   "AlgebraicGeometry.Scheme.Modules.mem_moduleMapIsoLocus"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T225318-L-1808939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T225318-L-1808939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

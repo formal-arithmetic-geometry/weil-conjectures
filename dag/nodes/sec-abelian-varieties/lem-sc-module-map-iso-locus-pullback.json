@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-module-map-iso-locus-pullback",
+ "kind": "statement",
+ "title": "Pullback preserves invertibility over the locally invertible open",
+ "statement": "Let $W,T$ be schemes [def-pc-scheme] and $\\varphi:M\\to N$ any morphism of $\\mathcal O_W$-modules [def-weil-sheaf-of-modules-category]. Let $h:T\\to W$ have topological image contained in $U_\\varphi$ [def-sc-module-map-iso-locus]. Then the tensor-formula pullback $h^*\\varphi$ [def-pc-module-pullback] is an isomorphism. No finite type or local freeness condition on $M,N$ is imposed.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Composition of pullback; Tag 04TN, isomorphisms are local"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-module-map-iso-locus",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The inverse images under h of all opens appearing in the defining supremum cover T. Prove the cover equality pointwise using mem_moduleMapIsoLocus and image containment.",
+   "uses": [
+    "def-sc-module-map-iso-locus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uniqueness of left adjoints identifies tensor pullback with Mathlib pullback. Composition of pullback, morphismRestrict_ι, and pullbackCongr show that on each inverse-image open the map is a further pullback of an isomorphism. RestrictFunctorIsoPullback and overFunctorEquiv identify this with the over restriction.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Forget to abelian sheaves, apply Mathlib Sheaf.isIso_of_coversTop to the cover, then reflect isomorphisms through SheafOfModules.toSheaf. This glues the local inverses, including for the empty test scheme.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-map-iso-locus",
+  "def-pc-module-pullback",
+  "def-weil-open-immersion",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0097",
+  "place": "Composition of pullback; Tag 04TN, isomorphisms are local; explicit formalization of this part of the parent argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The isomorphism locus of a morphism between finite locally free sheaves is retrocompact and detects invertibility after pullback",
+   "results": "Service unavailable: Internal Server Error. No conclusion drawn.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finite locally free sheaves is invertible on an open subscheme, and arbitrary pullback is invertible exactly when its image lies in this open",
+   "results": "Eight results including Scheme.Modules.Hom.isIso_iff_isIso_app, isLocalIso_iff and scheme open-immersion app lemmas; none states the requested locus construction, compactness or reflection criterion.",
+   "date": "2026-10-13",
+   "verdict": "No exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact",
+   "results": "QuasiCompact and quasiCompact_iff_forall_isAffineOpen supply the generic conversion, not compactness of the module-map locus.",
+   "date": "2026-10-13",
+   "verdict": "Generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "isIsoLocus|isoLocus|isomorphism locus|exists.*[Ii]so.*[Oo]pen; isIso.*stalk|isIso.*restrict; coversTop_iff",
+   "results": "No module-map iso-locus definition or vector-bundle universal locus theorem in Mathlib or the library. Mathlib has pullback composition, restrictFunctorIsoPullback, overFunctorEquiv and Sheaf.isIso_of_coversTop; used to prove the preservation direction. Blueprint/DAG search finds the parent universal locus, not its strictly smaller components.",
+   "date": "2026-10-13",
+   "verdict": "No exact match; generic preservation ingredients reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeMapIsoOpen",
+  "date": "2026-10-13",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "proof: universal locally closed Picard locus, determinant isomorphism open (Stacks 0BDP, final sentence); Composition of pullback; Tag 04TN, isomorphisms are local",
+   "via": [
+    "lem-sc-finite-locally-free-map-iso-open",
+    "lem-sc-picard-evaluation-open-locus",
+    "lem-sc-picard-diagonal-locally-closed",
+    "lem-sc-general-theorem-of-cube"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleMapIsoLocusPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleMapIsoLocusPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_tensorPullback_of_range_subset_moduleMapIsoLocus",
+  "statement": "theorem isIso_tensorPullback_of_range_subset_moduleMapIsoLocus {W T : Scheme.{u}}\n    {M N : W.Modules} (φ : M ⟶ N) (h : T ⟶ W)\n    (hh : Set.range h ⊆ (moduleMapIsoLocus φ : Set W)) :\n    IsIso ((tensorPullback h).map φ)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T225318-L-1808939",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T225318-L-1808939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -16,39 +16,49 @@
  ],
  "proof": [
   {
-   "text": "Choose simultaneous local finite free frames. On an equal-rank frame of rank r the isomorphism locus is D(det(phi)); the adjugate gives the inverse there. On an unequal-rank frame the locus is empty, since an isomorphism at a point would reduce to an isomorphism of vector spaces of unequal dimensions. The rank-zero determinant is 1. These local opens agree on overlaps by their intrinsic isomorphism criterion.",
+   "text": "Construct U_phi as the explicit supremum of invertibility opens; take its open subscheme Z and canonical inclusion k. Mathlib supplies IsOpenImmersion k.",
    "uses": [
-    "def-sc-finite-locally-free-sheaf"
+    "def-sc-module-map-iso-locus",
+    "def-weil-open-immersion"
    ],
    "elementary": true
   },
   {
-   "text": "Take the union of the local opens, with its open subscheme structure [def-weil-open-immersion]. On any affine open of W choose finitely many principal affine subopens trivializing both bundles. Its intersection with the union is covered by finitely many principal opens (or empty opens) of these affine subopens. These are quasi-compact, hence the union is retrocompact and its open inclusion is quasi-compact.",
+   "text": "For an affine open V use affine compactness of V intersect U_phi. The embedding k transports compactness to its preimage of V using image_preimage_eq_inter_range and Opens.range_ι. Mathlib quasiCompact_iff_forall_isAffineOpen gives QuasiCompact k.",
    "uses": [
-    "def-weil-open-immersion",
+    "lem-sc-finite-locally-free-map-iso-locus-compact",
     "def-weil-finite-type-morphism"
    ],
    "elementary": true
   },
   {
-   "text": "Tensor-formula pullback in local frames applies the ring map to the matrix. A square matrix is invertible exactly when its determinant is a unit, over every ring, including nonreduced rings. Thus on each local frame h factors through the principal open exactly when the pulled-back matrix is invertible. The local factorizations glue uniquely because the inclusions are open immersions. Rank mismatch is impossible at a point of the test scheme; empty test schemes are vacuous.",
+   "text": "If h factors as l followed by k, its topological range lies in U_phi by range_comp_subset_range. Apply the proved preservation theorem to obtain invertibility after tensor pullback.",
    "uses": [
-    "def-pc-module-pullback",
+    "lem-sc-module-map-iso-locus-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conversely an invertible tensor pullback gives range containment by the finite-locally-free reflection theorem. Opens.range_ι identifies U_phi with range k; Mathlib IsOpenImmersion.lift and lift_fac construct the factorization.",
+   "uses": [
+    "lem-sc-finite-locally-free-map-iso-locus-pullback",
     "def-weil-open-immersion"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sc-finite-locally-free-sheaf",
+  "def-sc-module-map-iso-locus",
   "def-weil-open-immersion",
+  "lem-sc-finite-locally-free-map-iso-locus-compact",
   "def-weil-finite-type-morphism",
-  "def-pc-module-pullback"
+  "lem-sc-module-map-iso-locus-pullback",
+  "lem-sc-finite-locally-free-map-iso-locus-pullback"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/05GD",
-  "place": "Lemma 10.79.4, matrix proof and isomorphism locus; Tag 0BDP, final determinant sentence"
+  "place": "Lemma 10.79.4(3), Tag 0BDP final determinant sentence; constructive union, affine compactness, and local pullback gluing formalized by K1"
  },
  "mathlib_searches": [
   {
@@ -128,9 +138,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "K1",
   "result": "pass",
-  "landing": "20261012T194156-L-470458",
+  "landing": "20261012T225318-L-1808939",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
