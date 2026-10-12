@@ -2182,6 +2182,7 @@ public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
+public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 public import WeilConjectures.ZetaFunction
