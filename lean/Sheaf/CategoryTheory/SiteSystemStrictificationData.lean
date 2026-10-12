@@ -46,6 +46,11 @@ by conjugating v_i(f) with the delta components. Naturality proves it is a funct
 the normalization and cocycle of delta give the two strict equalities. Applying
 v'_j to theta gives delta inverse, including both endpoints as an Arrow equality.
 This constructs the strict site system, without claiming its colimit. -/
+-- STATEMENT-DISPUTED: take I = WithTop ℕ, C i the one-object category, U identity,
+-- and coefficients v i constant at i in Codiscrete I. The strict coefficient equalities
+-- force infinitely many distinct isomorphic objects in F.obj ⊤. Indexed base change
+-- of the singleton identity covering then gives an infinite covering, contradicting
+-- the finiteness clause. See site_system_strictification_obstruction and report.md.
 theorem exists_site_system_strictification_data
     (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (C : I → Cat.{u, u}) (P : ∀ i : I, Precoverage (C i))

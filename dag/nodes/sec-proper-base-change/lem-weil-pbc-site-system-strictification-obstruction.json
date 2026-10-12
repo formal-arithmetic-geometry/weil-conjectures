@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-pbc-site-system-strictification-obstruction",
+ "kind": "statement",
+ "title": "Infinite coefficient labels obstruct strictification of finite precoverages",
+ "statement": "Let I be an infinite small preorder with a greatest element, C a nonempty one-object small category, F:I→Cat a strict diagram, and Q_i precoverages on F_i satisfying HasIsos and indexed IsStableUnderBaseChange. Assume all Q_i-covering presieves have finite uncurry. Let e_i:C→F_i be equivalences and v′_i:F_i→Codiscrete(I) functors. If F_ij⋙v′_j=v′_i strictly for every i≤j, and e_i⋙v′_i is the constant functor at i strictly, then False. The precoverage conventions are those of def-weil-pbc-sites-and-cohomology.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "Mathlib/CategoryTheory/Sites/Precoverage.lean",
+  "place": "Precoverage.HasIsos and Precoverage.IsStableUnderBaseChange, lines 85–101; counterexample to the strictification interface sourced from Categories Tag 004A"
+ },
+ "proof": [
+  {
+   "text": "For each i, let Y_i be the transition image of e_i(c) at the largest index. Evaluating the two strict coefficient equalities at c gives v′_top(Y_i)=i. Thus i↦Y_i is injective.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Essential surjectivity of e_top gives each Y_i as isomorphic to the image of a source object. All source objects equal c, so choose an isomorphism s_i:Y_i≅e_top(c).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The family of identity arrows on e_top(c), indexed by I, has singleton identity presieve, hence covers. For every i the square with both upper legs s_i.hom and both lower legs identity is a pullback, since s_i is invertible. Apply the indexed base-change axiom to this family. The resulting presieve of the s_i.hom is covering.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The map i↦(Y_i,s_i.hom) injects I into the uncurry of this covering. Its finiteness implies Finite I, contrary to Infinite I.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/Sites/Precoverage.lean",
+  "place": "Indexed base-change axiom; explicit counterexample and Lean proof written by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite precoverage stable under arbitrary indexed base change, an injective family of objects isomorphic to a fixed object is finite",
+   "results": "Precoverage.finite, Precoverage.mem_finite_iff, Precoverage.ofArrows_mem_finite and Pretopology.finite; none supplies the obstruction. The finite precoverage has HasIsos but has no indexed IsStableUnderBaseChange instance.",
+   "date": "2026-10-12",
+   "verdict": "No matching obstruction or refutation; proof uses the indexed axiom directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.mem_coverings_of_isPullback",
+   "results": "CategoryTheory.Precoverage.mem_coverings_of_isPullback (Mathlib.CategoryTheory.Sites.Precoverage), with arbitrary indexing type and chosen pullback squares.",
+   "date": "2026-10-12",
+   "verdict": "Used in the proved obstruction helper, not an exact match to the new statements."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*iso.*family|iso.*family.*finite",
+   "results": "Only an unrelated finite-character hit in Order.TeichmullerTukey; repo strictification search found only the original holed interfaces.",
+   "date": "2026-10-12",
+   "verdict": "No existing obstruction/refutation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite precoverage transported along an equivalence of categories",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null,
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteSystemStrictificationData",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Strictification-data proof steps 1–4: incompatibility of finite coverings with strict coefficient compatibility",
+   "via": [
+    "lem-weil-pbc-site-system-strictification-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteSystemStrictificationObstruction",
+  "file": "lean/Sheaf/CategoryTheory/SiteSystemStrictificationObstruction.lean",
+  "declaration": "CategoryTheory.site_system_strictification_obstruction",
+  "statement": "theorem site_system_strictification_obstruction\n    (I : Type u) [Preorder I] [OrderTop I] [Infinite I]\n    (C : Type u) [SmallCategory C] [Subsingleton C] (c : C)\n    (F : I ⥤ Cat.{u, u}) (Q : ∀ i : I, Precoverage (F.obj i))\n    [∀ i, (Q i).HasIsos] [∀ i, (Q i).IsStableUnderBaseChange]\n    (hfinite : ∀ (i : I) (X : F.obj i) (R : Presieve X),\n      R ∈ Q i X → Finite R.uncurry)\n    (e : ∀ i : I, C ⥤ F.obj i) [∀ i, (e i).IsEquivalence]\n    (v' : ∀ i : I, F.obj i ⥤ Codiscrete I)\n    (hstrict : ∀ (i j : I) (h : i ≤ j),\n      (F.map (homOfLE h)).toFunctor ⋙ v' j = v' i)\n    (hretract : ∀ i : I, e i ⋙ v' i = Codiscrete.functor (fun _ : C ↦ i)) :\n    False",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1528c",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1680193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1528c",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1680193",
+  "kind": "interface",
+  "note": "independent Codex review: Both new Lean signatures match their nodes; the proved negation matches the complete original signature at universes zero. All three modules compile cleanly; both new proofs use only permitted axioms."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-site-system-strictification-refuted",
+ "kind": "statement",
+ "title": "The finite-precoverage site-system strictification interface is false",
+ "statement": "The proposition stated by CategoryTheory.exists_site_system_strictification_data in lem-weil-pbc-site-system-strictification-data, specialized to object and morphism universes zero, is false. Equivalently its complete universally quantified signature, including every input hypothesis and every output clause, has a proved negation. The counterexample has I=WithTop Nat, C_i=Codiscrete PUnit, P_i the top precoverage, identity transition functors, D=Codiscrete I, and v_i constant at i.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "source": {
+  "document": "Mathlib/CategoryTheory/Sites/Precoverage.lean",
+  "place": "Precoverage.HasIsos and Precoverage.IsStableUnderBaseChange, lines 85–101; counterexample to the strictification interface sourced from Categories Tag 004A"
+ },
+ "proof": [
+  {
+   "text": "Construct the singleton codiscrete category and its top precoverage. All axioms hold because all presieves cover; all coverings are finite because the type of arrows into any object is finite. Isomorphism pullback squares give all pullbacks.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Set I=WithTop Nat, every C_i to the singleton category and every U_ij to identity. Take gamma to be eqToIso of the identity-composition equality. Identity morphism preservation, continuity and finite-limit preservation follow from the identity-functor instances. The sheaf pullback construction is isomorphic to the abstract left adjoint and therefore preserves finite colimits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take D=Codiscrete I and v_i constant at i. The unique natural isomorphisms supply delta. Identity normalization is equality of isomorphisms after id-comp; the cocycle equations are equalities in singleton hom types. This verifies every input of the original signature.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the hypothetical strictification conclusion to these data and extract Q HasIsos, Q indexed base-change stability, finite coverings, e equivalences and the two strict coefficient equalities. Apply lem-weil-pbc-site-system-strictification-obstruction to obtain False.",
+   "uses": [
+    "lem-weil-pbc-site-system-strictification-obstruction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-system-strictification-obstruction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Mathlib/CategoryTheory/Sites/Precoverage.lean",
+  "place": "Indexed base-change axiom; explicit counterexample and Lean proof written by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a finite precoverage stable under arbitrary indexed base change, an injective family of objects isomorphic to a fixed object is finite",
+   "results": "Precoverage.finite, Precoverage.mem_finite_iff, Precoverage.ofArrows_mem_finite and Pretopology.finite; none supplies the obstruction. The finite precoverage has HasIsos but has no indexed IsStableUnderBaseChange instance.",
+   "date": "2026-10-12",
+   "verdict": "No matching obstruction or refutation; proof uses the indexed axiom directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Precoverage.mem_coverings_of_isPullback",
+   "results": "CategoryTheory.Precoverage.mem_coverings_of_isPullback (Mathlib.CategoryTheory.Sites.Precoverage), with arbitrary indexing type and chosen pullback squares.",
+   "date": "2026-10-12",
+   "verdict": "Used in the proved obstruction helper, not an exact match to the new statements."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*iso.*family|iso.*family.*finite",
+   "results": "Only an unrelated finite-character hit in Order.TeichmullerTukey; repo strictification search found only the original holed interfaces.",
+   "date": "2026-10-12",
+   "verdict": "No existing obstruction/refutation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite precoverage transported along an equivalence of categories",
+   "results": "Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": null,
+   "unavailable": true
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SiteSystemStrictificationData",
+  "date": "2026-10-12",
+  "group": "N2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Strictification-data proof steps 1–4: incompatibility of finite coverings with strict coefficient compatibility",
+   "via": [
+    "lem-weil-pbc-site-system-strictification-data"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteSystemStrictificationRefuted",
+  "file": "lean/Sheaf/CategoryTheory/SiteSystemStrictificationRefuted.lean",
+  "declaration": "CategoryTheory.site_system_strictification_data_refuted",
+  "statement": "theorem site_system_strictification_data_refuted : ¬ (∀\n    (I : Type 0) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (C : I → Cat.{0, 0}) (P : ∀ i : I, Precoverage (C i))\n    [∀ i, (P i).HasIsos] [∀ i, (P i).IsStableUnderComposition]\n    [∀ i, (P i).IsStableUnderBaseChange] [∀ i, (P i).HasPullbacks]\n    (hfinite : ∀ (i : I) (X : C i) (R : Presieve X), R ∈ P i X → Finite R.uncurry)\n    (U : ∀ (i j : I), i ≤ j → C i ⥤ C j)\n    (hUid : ∀ i : I, U i i le_rfl = 𝟭 (C i))\n    (gamma : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k),\n      U i j h ⋙ U j k h' ≅ U i k (h.trans h'))\n    (hgammaLeft : ∀ (i k : I) (h : i ≤ k),\n      HEq (gamma i i k le_rfl h) (Iso.refl (U i k h)))\n    (hgammaRight : ∀ (i k : I) (h : i ≤ k),\n      HEq (gamma i k k h le_rfl) (Iso.refl (U i k h)))\n    (hgamma : ∀ (i j k l : I) (h : i ≤ j) (h' : j ≤ k) (h'' : k ≤ l) (X : C i),\n      (gamma j k l h' h'').hom.app ((U i j h).obj X) ≫\n          (gamma i j l h (h'.trans h'')).hom.app X =\n        (U k l h'').map ((gamma i j k h h').hom.app X) ≫\n          (gamma i k l (h.trans h') h'').hom.app X)\n    (hcover : ∀ (i j : I) (h : i ≤ j) (X : C i) (R : Presieve X),\n      R ∈ P i X → R.map (U i j h) ∈ P j ((U i j h).obj X))\n    (hpullback : ∀ (i j : I) (h : i ≤ j) (X Y Z : C i) (R : Presieve X),\n      R ∈ P i X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n        PreservesLimit (cospan f g) (U i j h))\n    [∀ (i j : I) (h : i ≤ j), (U i j h).IsContinuous\n      (P i).toGrothendieck (P j).toGrothendieck]\n    [∀ (i j : I) (h : i ≤ j), PreservesFiniteLimits\n      (sheafPullback (U i j h) (Type 0) (P i).toGrothendieck (P j).toGrothendieck)]\n    [∀ (i j : I) (h : i ≤ j), PreservesFiniteColimits\n      (sheafPullback (U i j h) (Type 0) (P i).toGrothendieck (P j).toGrothendieck)]\n    (D : Type 0) [Category.{0} D] (v : ∀ i : I, C i ⥤ D)\n    (delta : ∀ (i j : I) (h : i ≤ j), U i j h ⋙ v j ≅ v i)\n    (hdeltaId : ∀ i : I, HEq (delta i i le_rfl) (Iso.refl (v i)))\n    (hdelta : ∀ (i j k : I) (h : i ≤ j) (h' : j ≤ k) (X : C i),\n      (v k).map ((gamma i j k h h').hom.app X) ≫\n          (delta i k (h.trans h')).hom.app X =\n        (delta j k h').hom.app ((U i j h).obj X) ≫ (delta i j h).hom.app X)\n    ,\n    ∃ (F : I ⥤ Cat.{0, 0}) (Q : ∀ i : I, Precoverage (F.obj i))\n      (e : ∀ i : I, C i ⥤ F.obj i),\n      (∀ i : I, (e i).IsEquivalence) ∧\n      (∃ (_ : ∀ i, (Q i).HasIsos) (_ : ∀ i, (Q i).IsStableUnderComposition)\n        (_ : ∀ i, (Q i).IsStableUnderBaseChange) (_ : ∀ i, (Q i).HasPullbacks),\n        (∀ (i : I) (X : F.obj i) (R : Presieve X), R ∈ Q i X → Finite R.uncurry) ∧\n        (∀ (i : I) (X : C i) (R : Presieve X),\n          R ∈ P i X ↔ R.map (e i) ∈ Q i ((e i).obj X)) ∧\n        (∀ (i : I) (X : F.obj i) (K : Type 0) (A : K → F.obj i)\n          (f : ∀ a : K, A a ⟶ X), Presieve.ofArrows A f ∈ Q i X →\n          ∃ (Y : C i) (B : K → C i) (g : ∀ a : K, B a ⟶ Y)\n            (t : (e i).obj Y ≅ X) (s : ∀ a : K, (e i).obj (B a) ≅ A a),\n            Presieve.ofArrows B g ∈ P i Y ∧\n              ∀ a : K, (e i).map (g a) ≫ t.hom = (s a).hom ≫ f a) ∧\n        (∀ (i j : I) (h : i ≤ j) (X : F.obj i) (R : Presieve X), R ∈ Q i X →\n          R.map (F.map (homOfLE h)).toFunctor ∈\n            Q j ((F.map (homOfLE h)).toFunctor.obj X)) ∧\n        (∀ (i j : I) (h : i ≤ j) (X Y Z : F.obj i) (R : Presieve X), R ∈ Q i X →\n          ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →\n            PreservesLimit (cospan f g) (F.map (homOfLE h)).toFunctor) ∧\n        ∃ (_ : ∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor.IsContinuous\n            (Q i).toGrothendieck (Q j).toGrothendieck),\n          (∀ (i j : I) (h : i ≤ j), Nonempty (PreservesFiniteLimits\n            (sheafPullback (F.map (homOfLE h)).toFunctor (Type 0)\n              (Q i).toGrothendieck (Q j).toGrothendieck))) ∧\n          (∀ (i j : I) (h : i ≤ j), Nonempty (PreservesFiniteColimits\n            (sheafPullback (F.map (homOfLE h)).toFunctor (Type 0)\n              (Q i).toGrothendieck (Q j).toGrothendieck))) ∧\n          ∃ (theta : ∀ (i j : I) (h : i ≤ j),\n              e i ⋙ (F.map (homOfLE h)).toFunctor ≅ U i j h ⋙ e j)\n            (v' : ∀ i : I, F.obj i ⥤ D),\n            (∀ (i j : I) (h : i ≤ j), (F.map (homOfLE h)).toFunctor ⋙ v' j = v' i) ∧\n            (∀ i : I, e i ⋙ v' i = v i) ∧\n            (∀ (i j : I) (h : i ≤ j) (X : C i),\n              Arrow.mk ((v' j).map ((theta i j h).hom.app X)) =\n                Arrow.mk ((delta i j h).inv.app X))))",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1528c",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1680193",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-1528c",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261012T135257-L-1680193",
+  "kind": "interface",
+  "note": "independent Codex review: Both new Lean signatures match their nodes; the proved negation matches the complete original signature at universes zero. All three modules compile cleanly; both new proofs use only permitted axioms."
+ }
+}
