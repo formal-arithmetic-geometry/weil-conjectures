@@ -8251,3 +8251,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:47 L: returned deliver/G3/Sheaf.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResiduesCore (reviewer RETURN: (reviewer X-1f91b, head 1f91bc1e4) D1/D2: CompatibleStrictHenselizationResidueLift.lean:42–66 moves the corrected item's)
 
 - 23:00 L: batch 20261012T144049 dependency take-out
+- 15:05 L: returned deliver/K1/Sheaf.AlgebraicGeometry.FullAffineEtaleTopos (reviewer RETURN: (reviewer X-0c5cb, head 0c5cb5de5) E2 (review point 4): lean/Sheaf/AlgebraicGeometry/FullAffineEtaleTopos.lean:437 retai)
