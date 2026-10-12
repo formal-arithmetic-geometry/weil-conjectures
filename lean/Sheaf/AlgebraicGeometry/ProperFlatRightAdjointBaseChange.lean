@@ -10,7 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointAffineBaseChange
-import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointRestrictionOpen
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeHbeta
+import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeGlobal
 
 /-! # Base change for the right adjoint of proper flat direct image
 
@@ -71,6 +72,9 @@ theorem proper_flat_rightAdjoint_baseChange
         IsIso (@dualityEquationBaseChangeMap _ X Y Y'
           (QuasiCompact.compactSpace_of_compactSpace f)
           (quasiSeparatedSpace_of_quasiSeparated f) _ _ _ _ f g a a' adjf adjf' hβ K) := by
-  sorry
+  have hβ := proper_flat_rightAdjoint_baseChange_hβ g f
+  refine ⟨hβ, ?_⟩
+  exact proper_flat_rightAdjoint_baseChange_global g f a a' adjf adjf' hβ
+    (@proper_flat_rightAdjoint_affine_baseChange _)
 
 end AlgebraicGeometry
