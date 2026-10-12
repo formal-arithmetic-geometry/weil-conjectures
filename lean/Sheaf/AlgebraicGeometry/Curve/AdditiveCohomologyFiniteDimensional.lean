@@ -8,10 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import Sheaf.AlgebraicGeometry.IsProperOrIsAffine
-import Sheaf.AlgebraicGeometry.EtaleAffineQcoherentULift
-import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyComparison
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Finite-dimensional scalar model for first additive étale cohomology -/
 
@@ -63,6 +62,34 @@ theorem finiteDimensional_etaleCohomology_one_of_scalar_model
             (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom)
           a U (μ.hom.app U x) = a U x * ρ c) ∧
         ∀ x : T.obj G, T.map μ x = c • x) → FiniteDimensional k (T.obj G) := by
-  sorry
+  classical
+  let : C.Over (Spec (.of k)) := ⟨f⟩
+  let T := DerivedCategory.singleFunctor
+    (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙
+      Etale.cohomology AddCommGrpCat.{u + 1} C (1 : ℤ)
+  dsimp only
+  intro m
+  let := m
+  intro hscalar
+  have := SheafOfModules.isQuasicoherent_unit (R := C.ringCatSheaf)
+  obtain ⟨e, he⟩ := exists_addEquiv_etaleCohomology_one_structureSheaf f G a ha
+  let L : T.obj G →ₗ[k] Scheme.Modules.H (X := C) (SheafOfModules.unit C.ringCatSheaf) 1 :=
+    { e.toAddMonoidHom with
+      map_smul' c x := by
+        obtain ⟨μ, hμ, hmap⟩ := hscalar c
+        rw [← hmap x]
+        exact he c μ hμ x }
+  rcases IsConnectedCurve.isProper_or_isAffine f with hp | haff
+  · have : IsProper (C ↘ Spec (.of k)) := hp
+    have : (SheafOfModules.unit C.ringCatSheaf).IsFinitePresentation :=
+      SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+    let := Scheme.Modules.finiteDimensional_H_of_isProper (k := k)
+      (SheafOfModules.unit C.ringCatSheaf) 1
+    exact FiniteDimensional.of_injective L e.injective
+  · let := haff
+    let := Scheme.Modules.subsingleton_H_succ_of_isAffine
+      (SheafOfModules.unit C.ringCatSheaf) 0
+    let : Subsingleton (T.obj G) := e.injective.subsingleton
+    infer_instance
 
 end AlgebraicGeometry

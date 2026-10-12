@@ -7002,3 +7002,4 @@ One line per change that needs a reason: date, node or file, what changed, why.
 - 08:53 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.UnramifiedOverFieldDiscrete (stage 3; reviewer PASS; first push; landing 20261012T085325-L-34226 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/Q3/Sheaf.Topology.ConstructibleIntersection (stage 3; reviewer PASS; first push; landing 20261012T085325-L-34330 (proof); batch 20261012T085205; modules 1; new nodes 0)
 - 08:53 L: merged deliver/R1/Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated (stage 3; reviewer PASS; first push; landing 20261012T085326-L-34425 (proof); batch 20261012T085205; modules 1; new nodes 0)
+- 08:53 L: merged deliver/R1/Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyFiniteDimensional (stage 3; reviewer PASS; first push; landing 20261012T085326-L-34520 (interface); batch 20261012T085205; modules 2; new nodes 1)

@@ -1,0 +1,140 @@
+{
+ "id": "lem-sc-additive-cohomology-scalar-comparison",
+ "kind": "statement",
+ "title": "Scalar-compatible comparison of derived additive etale and ordinary structure-sheaf first cohomology",
+ "statement": "Let k be a field, f:C -> Spec(k) a separated finite-type curve [def-sc-curves], G a sheaf of abelian groups with coefficients in universe u+1, and a_U:G(U) ≃+ Γ(U,O_U) natural for etale restriction. Let T denote first derived etale cohomology on a sheaf in degree zero [def-weil-pbc-etale-cohomology]. There exists an additive equivalence e:T(G) ≃+ H^1(C,O_C) [pqf-def-cohomology] such that for every c in k and every sheaf endomorphism mu satisfying a_U(mu_U(x)) = a_U(x) times the pullback of c, one has e(T(mu)(x)) = c smul e(x). The action on H^1 is its canonical action induced by f. No smoothness, connectedness, algebraic closure, properness or finite-dimensionality is assumed.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tag 03P2, Theorem 59.22.4, separated-case finite affine cover proof; Tag 03FD, Lemma 21.12.4, natural module/abelian comparison; coefficient lift and scalar encoding supplied by R1."
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-weil-pbc-etale-cohomology",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Identify G with the coefficient lift of the associated etale sheaf of the unit module, using the natural section equivalences a and the unit tensor-pullback identifications. Use the natural Ext/derived comparison on this sheaf placed in degree zero.",
+   "uses": [
+    "def-sc-etale-qcoherent-module",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "IsCurve f makes C quasi-compact and separated over the field, hence absolutely separated. Choose a finite affine open cover; all its finite intersections are affine. Apply affine quasi-coherent acyclicity with small and lifted coefficients. The Cech spectral sequence degenerates to its degree-zero row. Lower each component of the finite cochain groups; this commutes with restrictions and alternating sums, identifies cocycles and boundaries, and gives a natural equivalence in first cohomology. For scalar naturality use this same cover for each scalar endomorphism; its maps act componentwise and commute with lowering. The existing nonempty coefficient-lift equivalence alone does not state this naturality.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-etale-affine-qcoherent-succ",
+    "lem-sc-cech-spectral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the natural etale/Zariski quasi-coherent comparison with the natural module/underlying-abelian comparison. Reindex the Ext universes by the natural Hom-in-the-derived-category equivalences to reach the source library ordinary H model. For a scalar c the section formula determines mu uniquely, and unit pullback identifies it with multiplication by the pulled-back global section f*(c). Every comparison from the preceding steps commutes with that map. The source library defines its canonical k-action on H by this global-section multiplication map, restricted along f, so the final equality is e(T(mu)(x)) = c smul e(x).",
+   "uses": [
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-sc-zariski-module-abelian-cohomology-agree",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-etale-qcoherent-module",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-etale-affine-qcoherent-succ",
+  "lem-sc-cech-spectral",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sc-zariski-module-abelian-cohomology-agree",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "Stacks Project",
+  "place": "Tags 03P2 and 03FD; finite-cover argument applied in both coefficient universes, with scalar naturality checked componentwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar compatible comparison between etale cohomology of the additive structure sheaf and Zariski cohomology",
+   "date": "2026-10-12",
+   "results": "UNAVAILABLE: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional first cohomology of additive structure sheaf on smooth curve",
+   "date": "2026-10-12",
+   "results": "Cotangent cohomology and group cohomology Hilbert90; no etale/Zariski scalar comparison.",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "FiniteDimensional.of_injective",
+   "date": "2026-10-12",
+   "results": "FiniteDimensional.of_injective transports finiteness along an injective linear map; no geometric comparison.",
+   "verdict": "Used for the parent theorem, not a match for this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*zariski|cohomology.*ulift; scalar.*comparison; nonempty_sheafH_extDerivedIso",
+   "date": "2026-10-12",
+   "results": "EtaleZariskiQcohComparison and EtaleSheafHExtDerivedComparison supply natural component comparisons. EtaleQcoherentCohomologyULift gives a nonempty additive equivalence without naturality or scalar compatibility. Mathlib search found only zariskiTopology_le_etaleTopology.",
+   "verdict": "No existing declaration provides the simultaneous scalar-compatible comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyFiniteDimensional",
+  "date": "2026-10-12",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-additive-cohomology-finite-dimensional",
+   "place": "proof steps 1--2, scalar-compatible cohomology comparison only",
+   "via": [
+    "lem-sc-additive-cohomology-finite-dimensional"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.AdditiveCohomologyComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AdditiveCohomologyComparison.lean",
+  "declaration": "AlgebraicGeometry.exists_addEquiv_etaleCohomology_one_structureSheaf",
+  "statement": "theorem exists_addEquiv_etaleCohomology_one_structureSheaf {k : Type u} [Field k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] (G : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤)) (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U), a V (G.obj.map g x) = g.unop.left.appTop (a U x)) : letI : C.Over (Spec (.of k)) := ⟨f⟩ let T := DerivedCategory.singleFunctor (Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1}) 0 ⋙ Etale.cohomology AddCommGrpCat.{u + 1} C (1 : ℤ) ∃ e : T.obj G ≃+ Scheme.Modules.H (X := C) (SheafOfModules.unit C.ringCatSheaf) 1, ∀ (c : k) (μ : G ⟶ G), (∀ (U : C.Etaleᵒᵖ) (x : G.obj.obj U), let ρ : k →+* Γ(U.unop.left, ⊤) := U.unop.hom.appTop.hom.comp (f.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom) a U (μ.hom.app U x) = a U x * ρ c) → ∀ x : T.obj G, e (T.map μ x) = c • e x",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34520",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261012T085326-L-34520",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
