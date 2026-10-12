@@ -9,17 +9,9 @@ public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Sheaf.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
-import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Sheaf.Paper.EtaleRestrictionPullbackUnit
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Sheaf.AlgebraicGeometry.PullbackSectionsDiagram
+import Sheaf.AlgebraicGeometry.PullbackSectionsIsColimit
 
 /-!
 # Sections of a pulled-back module sheaf over a descended affine etale object
@@ -215,6 +207,109 @@ theorem limit_pullback_sections_colimit {I : Type u} [Preorder I] [IsDirected I 
             ((Etale.upperStarComp (ModuleCat.{u + 1} Λ) (D.map (homOfLE h').op)
               (D.map (homOfLE h).op) (D.map (homOfLE (h.trans h')).op)
               (by rw [← Functor.map_comp]; rfl)).inv.app G)).hom.app (op V₀) s') := by
-  sorry
+  set_option maxRecDepth 2000 in
+    let J := {i : I // i₀ ≤ i}
+    let S : J → ModuleCat.{u + 1} Λ := fun i ↦
+      ((lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj
+        ((upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj G)).obj.obj
+          (op V₀)
+    let T : ModuleCat.{u + 1} Λ := ((lowerStar (ModuleCat.{u + 1} Λ) (c.π.app (op i₀))).obj
+      ((upperStar (ModuleCat.{u + 1} Λ) (c.π.app (op i₀))).obj G)).obj.obj (op V₀)
+    let μ : ∀ {i j : J}, (i ⟶ j) → (S i ⟶ S j) := fun {i j} f ↦
+      ((lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).map
+          ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
+            (D.map (homOfLE (show i.val ≤ j.val from leOfHom f)).op)).unit.app
+            ((upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj G)) ≫
+        (lowerStarComp (ModuleCat.{u + 1} Λ)
+          (D.map (homOfLE (show i.val ≤ j.val from leOfHom f)).op)
+          (D.map (homOfLE i.property).op) (D.map (homOfLE j.property).op)
+          (by rw [← Functor.map_comp]; rfl)).hom.app _ ≫
+        (lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE j.property).op)).map
+          ((upperStarComp (ModuleCat.{u + 1} Λ)
+            (D.map (homOfLE (show i.val ≤ j.val from leOfHom f)).op)
+            (D.map (homOfLE i.property).op) (D.map (homOfLE j.property).op)
+            (by rw [← Functor.map_comp]; rfl)).inv.app G)).hom.app (op V₀)
+    let τ : ∀ i : J, S i ⟶ T := fun i ↦
+      ((lowerStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).map
+          ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (c.π.app (op i.val))).unit.app
+            ((upperStar (ModuleCat.{u + 1} Λ) (D.map (homOfLE i.property).op)).obj G)) ≫
+        (lowerStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op i.val))
+          (D.map (homOfLE i.property).op) (c.π.app (op i₀))
+          (c.w (homOfLE i.property).op).symm).hom.app _ ≫
+        (lowerStar (ModuleCat.{u + 1} Λ) (c.π.app (op i₀))).map
+          ((upperStarComp (ModuleCat.{u + 1} Λ) (c.π.app (op i.val))
+            (D.map (homOfLE i.property).op) (c.π.app (op i₀))
+            (c.w (homOfLE i.property).op).symm).inv.app G)).hom.app (op V₀)
+    obtain ⟨F, B, e, eB, hm, ht⟩ := exists_pullbackSections_diagram D c Λ i₀ G V₀
+    obtain ⟨hB⟩ := nonempty_isColimit_pullbackSections D c hc Λ i₀ G V₀ F B e eB hm ht
+    change ∀ (i j : J) (f : i ⟶ j), (e i).inv ≫ F.map f ≫ (e j).hom = μ f at hm
+    change ∀ i : J, (e i).inv ≫ B.ι.app i ≫ eB.hom = τ i at ht
+    let : Nonempty J := ⟨⟨i₀, le_refl i₀⟩⟩
+    let : IsDirected J (· ≤ ·) := ⟨fun a b ↦ by
+      obtain ⟨k, ha, hb⟩ := exists_ge_ge a.val b.val
+      exact ⟨⟨k, a.property.trans ha⟩, ha, hb⟩⟩
+    let : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
+      preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
+    have hμid (i : J) : μ (𝟙 i) = 𝟙 (S i) := by
+      rw [← hm i i (𝟙 i), F.map_id]
+      simp only [Category.id_comp, Iso.inv_hom_id]
+      rfl
+    have hμcomp {i j k : J} (f : i ⟶ j) (g : j ⟶ k) : μ f ≫ μ g = μ (f ≫ g) := by
+      rw [← hm i j f, ← hm j k g, ← hm i k (f ≫ g), F.map_comp]
+      simp [Category.assoc]
+    have hτ {i j : J} (f : i ⟶ j) : μ f ≫ τ j = τ i := by
+      rw [← hm i j f, ← ht j, ← ht i]
+      simp only [Category.assoc, Iso.hom_inv_id_assoc]
+      rw [← Category.assoc (F.map f) (B.ι.app j) eB.hom, B.w f]
+    refine ⟨?_, ?_, ?_, ?_, ?_⟩
+    · intro i h s
+      change μ (𝟙 (⟨i, h⟩ : J)) s = s
+      rw [hμid]
+      rfl
+    · intro i i' i'' h h' h'' s
+      let a : J := ⟨i, h⟩
+      let b : J := ⟨i', h.trans h'⟩
+      let d : J := ⟨i'', (h.trans h').trans h''⟩
+      let f : a ⟶ b := homOfLE h'
+      let g : b ⟶ d := homOfLE h''
+      change μ g (μ f s) = μ (f ≫ g) s
+      exact ConcreteCategory.congr_hom (hμcomp f g) s
+    · intro i i' h h' s
+      let a : J := ⟨i, h⟩
+      let b : J := ⟨i', h.trans h'⟩
+      let f : a ⟶ b := homOfLE h'
+      change τ b (μ f s) = τ a s
+      exact ConcreteCategory.congr_hom (hτ f) s
+    · intro t
+      obtain ⟨i, x, hx⟩ := Concrete.isColimit_exists_rep F hB (eB.inv t)
+      refine ⟨i.val, i.property, (e i).hom x, ?_⟩
+      change τ i ((e i).hom x) = t
+      rw [← ht i]
+      have hex : (e i).inv ((e i).hom x) = x :=
+        ConcreteCategory.congr_hom (e i).hom_inv_id x
+      change eB.hom (B.ι.app i ((e i).inv ((e i).hom x))) = t
+      rw [hex]
+      have heB : eB.hom (eB.inv t) = t :=
+        ConcreteCategory.congr_hom eB.inv_hom_id t
+      exact (congrArg eB.hom hx).trans heB
+    · intro i h s s' hs
+      let a : J := ⟨i, h⟩
+      have hrep : B.ι.app a ((e a).inv s) = B.ι.app a ((e a).inv s') := by
+        apply (ConcreteCategory.bijective_of_isIso eB.hom).1
+        change (eB.hom) (B.ι.app a ((e a).inv s)) =
+          (eB.hom) (B.ι.app a ((e a).inv s'))
+        change (τ a) s = (τ a) s' at hs
+        change ((e a).inv ≫ B.ι.app a ≫ eB.hom) s =
+          ((e a).inv ≫ B.ι.app a ≫ eB.hom) s'
+        rw [ht a]
+        exact hs
+      obtain ⟨j, f, g, hj⟩ :=
+        (Concrete.isColimit_rep_eq_iff_exists F hB ((e a).inv s) ((e a).inv s')).mp hrep
+      have hfg : f = g := Subsingleton.elim _ _
+      subst g
+      refine ⟨j.val, leOfHom f, ?_⟩
+      change μ f s = μ f s'
+      rw [← hm a j f]
+      exact congrArg (e j).hom hj
 
 end AlgebraicGeometry.Etale
