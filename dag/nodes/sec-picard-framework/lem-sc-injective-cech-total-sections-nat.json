@@ -14,38 +14,41 @@
  ],
  "proof": [
   {
-   "text": "Pass from J to its precoverage and choose the covering fibre products. Apply injective Cech acyclicity in the aligned universe v. The chosen-product comparison transports this result to the Mathlib Cech complex. Thus augmenting a row by K^q(X) gives an exact row: degree-zero cohomology is sections and positive cohomology vanishes.",
-   "uses": [
-    "lem-weil-pbc-site-injective-cech-acyclic",
-    "lem-weil-pbc-site-cech-mathlib-comparison"
-   ],
+   "text": "Define restriction0 as the product lift of restrictions along the structure arrows of the degree-zero fibre products. Prove its naturality by the presheaf morphism naturality equation and product projection extensionality. Expand the degree-zero differential as its two alternating cofaces. Both composites of the structural restrictions agree by the Over triangle identities, so their difference is zero. These helpers are fully proved in Lean.",
+   "uses": [],
    "elementary": false
   },
   {
-   "text": "Restriction into the (0,q) summand of the total complex defines the augmentation. Its Cech differential vanishes, restriction commutes with K differential, and the vertical sign is one. The mapping cone, with augmented Cech degrees starting at -1, is bounded below; its row filtration is finite in every total degree.",
+   "text": "Assemble the restriction components into a:A -> D.X 0, where A is the section complex and D is the flipped Cech bicomplex in the statement. Naturality proves the chain-map law; vanishing of the Cech differential proves a >> D.d 0 1=0. Define b degreewise as a.f q followed by the (0,q) total inclusion. Rewrite the total differential on that summand; both signs are one because Cech degree is zero. The first summand vanishes and the second is the chain-map equation for a. This constructs b with its proof, without any existence choice.",
    "uses": [
     "def-sc-cech-resolution-double-complex"
    ],
    "elementary": false
   },
   {
-   "text": "The row spectral sequence of this cone has zero first page, hence zero abutment by finite convergence. The cone is acyclic and the augmentation is a quasi-isomorphism. Invert its homology isomorphism and use extension-by-zero homology comparison in nonnegative degrees. Degree zero has zero incoming differential. For an empty covering, the sheaf condition forces all sections on X to be zero, so the argument still applies.",
+   "text": "For each q, apply the canonical injective Cech row augmentation theorem to K.X q and the fromSingle0Equiv map induced by a.f q. Its degree-zero projection identity follows from Pi.lift_pi; injectivity is hK q. Thus every augmented row is a quasi-isomorphism.",
    "uses": [
-    "thm-sp-double-complex-spectral-sequences"
+    "lem-sc-injective-cech-augmentation-quasi-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the first-quadrant column augmentation criterion to D, A, a, the proved vanishing equation, and b. Its component equality is reflexivity. The criterion gives QuasiIso b, and the inverse of isoOfQuasiIsoAt b n is the isomorphism in the conclusion.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-sc-cech-resolution-double-complex",
-  "lem-weil-pbc-site-cech-mathlib-comparison",
-  "lem-weil-pbc-site-injective-cech-acyclic",
-  "thm-sp-double-complex-spectral-sequences"
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-sc-injective-cech-augmentation-quasi-iso"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-cech/_section.md",
-  "place": "Step 3, row augmentation and injective-resolution computation"
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/0133",
+  "place": "Lemma 12.25.4, second-variable variant; explicit restriction and total-inclusion constructions implement blueprint sk-thm-picard-cech Step 3."
  },
  "mathlib_searches": [
   {
@@ -111,10 +114,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261012T135238-L-1667176",
-  "kind": "proof",
+  "landing": "20261012T150958-L-2232514",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,123 @@
+{
+ "id": "lem-sc-injective-cech-augmentation-quasi-iso",
+ "kind": "statement",
+ "title": "The canonical Cech augmentation of a size-aligned injective sheaf is a quasi-isomorphism",
+ "statement": "Let C have v-small Hom sets and finite wide pullbacks, and let J admit sheafification for v-small abelian groups [def-weil-pbc-sites-and-cohomology]. Let I be an injective abelian sheaf [def-sp-injective-resolutions], X an object, and pi_i:U_i -> X a v-small family generating a covering sieve. Let L be its Mathlib alternating Cech complex, using categorical products in Over X [def-sc-cech-resolution-double-complex]. For any chain map e from I(X) concentrated in degree zero to L, assume that for every tuple t:Fin 1 -> iota, projection of e.f 0 to the t-factor is restriction along the structural arrow from the corresponding product to X. Then e is a quasi-isomorphism. This assertion involves one sheaf and no double complex or totalization.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Lemma 21.10.2, together with Lemma 21.10.1 (03F6) and the canonical degree-zero identification (03AN); blueprint sk-thm-picard-cech Step 3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-injective-resolutions",
+  "def-sc-cech-resolution-double-complex"
+ ],
+ "proof": [
+  {
+   "text": "Construct the augmented free abelian presheaf complex of the covering, using the same categorical fibre products as Mathlib. The representable basis sets are v-small because Hom sets are v-small; their coproducts are v-small because the tuple-index type is v-small. Its augmentation targets the free abelian representable of X. On a localization where an arrow into X lifts to a covering member, insertion of that lift at the beginning of tuples contracts the augmented complex. The covering sieve ensures these localizations cover, hence the sheafified augmented complex is exact. Sheafification is exact and the augmentation becomes an epimorphism.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Hom into I to this exact complex of abelian sheaves. At any cocycle degree, the map out of the free term factors through the image of its boundary; injectivity extends that factor to the preceding term, yielding a coboundary. The free abelian representable adjunction identifies these Hom groups with I evaluated on each fibre product, and Hom out of coproducts with products. Precomposing the alternating face maps gives precisely the alternating coface differential in Mathlib. Thus positive Cech cohomology is zero and the augmented degree-zero kernel is the image of I(X).",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf condition says that compatible sections on the covering uniquely descend to X. Through the single-factor product isomorphisms, the canonical restriction map identifies I(X) with the degree-zero kernel. Projection uniqueness and he identify e.f 0 with that restriction map. Since the source complex is concentrated in degree zero, this gives an isomorphism on degree-zero homology and the zero-object isomorphisms in all positive degrees. If the cover is empty, the sheaf condition gives I(X)=0 and all Cech terms are zero.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/03AW",
+  "place": "Lemma 21.10.2, together with Lemma 21.10.1 (03F6) and the canonical degree-zero identification (03AN); blueprint sk-thm-picard-cech Step 3. Explicit universe-sensitive canonical-map formulation of the source argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical restriction augmentation from the sections of an injective abelian sheaf to its Cech complex is a quasi isomorphism",
+   "date": "2026-10-12",
+   "results": "service unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical restriction augmentation from the sections of an injective abelian sheaf to its Cech complex is a quasi isomorphism",
+   "date": "2026-10-12",
+   "results": "CategoryTheory.InjectiveResolution.instQuasiIsoIntι', CategoryTheory.InjectiveResolution.quasiIso, CochainComplex.cm5b.instQuasiIsoIntP, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self, CategoryTheory.instIsIsoToRightDerivedZero', CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CochainComplex.isKInjective_iff_of_iso",
+   "verdict": "No theorem for the canonical injective Cech augmentation; generic quasi-isomorphism infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "cech.*quasiIso|quasiIso.*cech|augmentation.*injective",
+   "date": "2026-10-12",
+   "results": "No match.",
+   "verdict": "No theorem for the canonical injective Cech augmentation; generic quasi-isomorphism infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.InjectiveCechTotalSections",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-cech-spectral",
+   "place": "Proof of the Cech-to-cohomology spectral sequence, row augmentation part of the abutment calculation; sk-thm-picard-cech Step 3.",
+   "via": [
+    "lem-sc-injective-cech-total-sections-nat",
+    "lem-sc-injective-cech-total-sections",
+    "lem-sc-cech-resolution-total"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-cech",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.InjectiveCechAugmentationQuasiIso",
+  "file": "lean/Sheaf/CategoryTheory/InjectiveCechAugmentationQuasiIso.lean",
+  "declaration": "CategoryTheory.injective_cech_augmentation_quasiIso",
+  "statement": "theorem injective_cech_augmentation_quasiIso {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasFiniteWidePullbacks C] [HasSheafify J AddCommGrpCat.{v}] (I : Sheaf J AddCommGrpCat.{v}) [Injective I] (X : C) {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) (e : (CochainComplex.single₀ AddCommGrpCat.{v}).obj (I.obj.obj (op X)) ⟶ (cechComplexFunctor (fun i ↦ Over.mk (π i))).obj ((Over.forget X).op ⋙ I.obj)) (he : ∀ t : Fin 1 → ι, e.f 0 ≫ Pi.π (fun s : Fin 1 → ι ↦ I.obj.obj (op (∏ᶜ (fun k ↦ Over.mk (π (s k)))).left)) t = I.obj.map (∏ᶜ (fun k ↦ Over.mk (π (t k)))).hom.op) : QuasiIso e",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T150958-L-2232514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T150958-L-2232514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
