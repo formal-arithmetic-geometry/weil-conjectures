@@ -14,22 +14,47 @@
  ],
  "proof": [
   {
-   "text": "The coordinate opens D_+(x_i) cover polynomial Proj. On this chart O(d) has\nbasis x_i^d, and the section induced by f has coefficient f/x_i^d. Its value in the\none-dimensional residue-field fibre is nonzero if and only if that coefficient\nis outside the corresponding prime of the degree-zero localization. By the\nstandard-open dictionary this means the homogeneous prime does not contain f,\nexactly membership in D_+(f). The equality on all charts gives equality of sets.\nFor f=0 both sets are empty, including for positive d.",
+   "text": "The variables generate the polynomial algebra (MvPolynomial.adjoin_range_X_eq_top). Mathlib Proj.iSup_basicOpen_eq_top' therefore covers polynomial Proj by D_+(X_i). At each point choose such a degree-one g; Proj.isInvertible_twist gives invertibility of O(d). This uses the concrete twist construction, not the bundled polynomial chart theorem.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply mem_nonvanishingLocus_iff_generatesAt to identify nonvanishing with local free generation. For the chosen g, homogeneity of g^d follows from SetLike.pow_mem_graded, and Proj.basicOpen_pow (d>0) places the point in D_+(g^d). The theorem Proj.isFreeGenerator_unitToTwist gives the basis induced by g^d on this open.",
    "uses": [
     "def-weil-pbc-proj-twisting-sheaf",
-    "lem-weil-pbc-proj-polynomial-twist-chart"
+    "lem-sc-nonvanishing-iff-generates-at"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Proj.map_unitToTwist_eq_smul writes the restriction of the global f section as c times this basis, where c is Proj.awayToSection of Away.mk representing f/g^d. Compatibility of application to 1 with restriction identifies its basis with the local g^d section. The source generatesAt_iff_mem_basicOpen identifies local generation with membership in the scheme basic open of c.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Proj.mem_basicOpen_iff_isUnit_val identifies that membership with invertibility of the value of c in the full prime localization. ProjectiveSpectrum.Proj.awayToSection_apply, Away.val_mk and IsLocalization.map_mk' compute this value as f/g^d. IsLocalization.AtPrime.isUnit_mk'_iff says this is a unit precisely when f is outside the homogeneous prime. Proj.mem_basicOpen identifies this with membership in D_+(f). Set extensionality proves the stated equality; the same computation covers f=0.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-proj-twisting-sheaf",
-  "lem-weil-pbc-proj-polynomial-twist-chart"
+  "lem-sc-nonvanishing-iff-generates-at",
+  "def-sc-section-generating-locus"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "M1",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01MS (lemma-when-invertible), 01MU (lemma-where-invertible), 01MV (lemma-principal-open), 01NG (lemma-standard-covering-projective-space); multiplication formula equation-multiply"
+  "place": "Tags 01MS, 01MU, 01MV, 01NG; local calculation implemented using the existing source twist and local-generation API and Mathlib localization lemmas"
  },
  "mathlib_searches": [
   {
@@ -102,10 +127,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E3",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261012T112836-L-766375",
-  "kind": "interface",
+  "landing": "20261012T144127-L-2101548",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
