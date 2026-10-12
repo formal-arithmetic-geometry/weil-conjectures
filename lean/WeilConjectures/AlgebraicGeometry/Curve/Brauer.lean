@@ -13,6 +13,10 @@ public import WeilConjectures.FieldTheory.Tsen
 public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+
+import Sheaf.AlgebraicGeometry.Curve.BrauerReductionInjection
+import Sheaf.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection
+import Sheaf.AlgebraicGeometry.ReducedCurveNormalization
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.EtaleAffineQcoherent
 import Sheaf.AlgebraicGeometry.EtaleTensorSectionsSheaf
@@ -190,14 +194,39 @@ theorem subsingleton_cohomologicalBrauerGroup_of_smooth (f : C ⟶ Spec (.of k))
 field `k`, `Br(C) = H²(C_ét, 𝔾ₘ) = 0`. Neither smoothness nor properness is assumed.
 (blueprint: `lem-sc-brauer-zero-all-curves`) -/
 theorem subsingleton_cohomologicalBrauerGroup (f : C ⟶ Spec (.of k)) [IsCurve f] :
-    Subsingleton C.CohomologicalBrauerGroup :=
-  -- Proof sketch.
-  -- * Smooth case: this is `subsingleton_cohomologicalBrauerGroup_of_smooth`.
-  -- * Reduced case: for the normalisation `ν : C̃ ⟶ C` the cokernel `Q` of `𝔾ₘ ⟶ ν_* 𝔾ₘ` is
-  --   supported on the finitely many singular points, so `H¹(C, Q) = 0`, and
-  --   `H²(C, ν_* 𝔾ₘ) = H²(C̃, 𝔾ₘ) = 0` since `ν` is finite and `C̃` is smooth.
-  -- * General case: with `𝒩` the nilradical, `1 + 𝒩` has a finite filtration whose graded
-  --   pieces are coherent, and these have no `H²` on a scheme of dimension at most one.
-  sorry
+    Subsingleton C.CohomologicalBrauerGroup := by
+  let C₀ := C.nilradical.subscheme
+  let i : C₀ ⟶ C := C.nilradical.subschemeι
+  have hi : Function.Surjective i := by
+    apply Set.range_eq_univ.mp
+    change Set.range C.nilradical.subschemeι = Set.univ
+    rw [Scheme.IdealSheafData.range_subschemeι, C.support_nilradical]
+    rfl
+  have hi_homeo : IsHomeomorph i :=
+    isHomeomorph_iff_isEmbedding_surjective.mpr ⟨i.isClosedEmbedding.isEmbedding, hi⟩
+  have : IsCurve (i ≫ f) :=
+    { krullDim_le_one := by
+        rw [IsHomeomorph.topologicalKrullDim_eq i hi_homeo]
+        exact IsCurve.krullDim_le_one f }
+  let : C₀.Over (Spec (.of k)) := ⟨i ≫ f⟩
+  have : IsSeparated (C₀ ↘ Spec (.of k)) := inferInstanceAs (IsSeparated (i ≫ f))
+  have : LocallyOfFiniteType (C₀ ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType (i ≫ f))
+  have : QuasiCompact (C₀ ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact (i ≫ f))
+  obtain ⟨Y, ν, hsep, hft, hqc, hdim, hsm, hfin, V, hV, hiso⟩ :=
+    exists_finite_smooth_modification_of_reduced_curve (k := k) C₀
+      (IsCurve.krullDim_le_one (i ≫ f))
+  have : IsSeparated (ν ≫ (i ≫ f)) := hsep
+  have : LocallyOfFiniteType (ν ≫ (i ≫ f)) := hft
+  have : QuasiCompact (ν ≫ (i ≫ f)) := hqc
+  have : IsCurve (ν ≫ (i ≫ f)) := { krullDim_le_one := hdim }
+  have : Smooth (ν ≫ (i ≫ f)) := hsm
+  have : IsFinite ν := hfin
+  have : IsIso (ν ∣_ V) := hiso
+  have : Subsingleton Y.CohomologicalBrauerGroup :=
+    subsingleton_cohomologicalBrauerGroup_of_smooth (ν ≫ (i ≫ f))
+  have : Subsingleton C₀.CohomologicalBrauerGroup :=
+    (injective_brauer_pullback_finite_modification (i ≫ f) ν V hV).subsingleton
+  exact (injective_brauer_pullback_reduction f).subsingleton
 
 end AlgebraicGeometry.IsCurve

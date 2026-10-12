@@ -1,0 +1,151 @@
+{
+ "id": "lem-sc-brauer-finite-modification-injection",
+ "kind": "statement",
+ "title": "Brauer pullback along finite modifications of reduced curves",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure], and let $f:C\\to\\operatorname{Spec}k$ be a curve [def-sc-curves] which is reduced [def-pc-reduced-scheme]. Let $Y$ be a scheme and $\\nu:Y\\to C$ a finite morphism [def-weil-finite-integral-morphism]. Let $V\\subseteq C$ be a dense open such that $\\nu^{-1}(V)\\to V$ is an isomorphism. Then canonical pullback\n$$H^2(C_{\\mathrm{Et}},\\mathbf G_{m,C})\\longrightarrow H^2(Y_{\\mathrm{Et}},\\mathbf G_{m,Y})$$\nis injective [def-weil-pbc-etale-cohomology, def-br]. The map is cohomology pullback to $\\nu^*\\mathbf G_{m,C}$ followed by $\\nu^*\\mathbf G_{m,C}\\to\\mathbf G_{m,Y}$. No smoothness, reducedness or connectedness is imposed on $Y$, and properness of $C$ is not required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 2 (normalization), units sequence and its cokernel; proof text retained in the parent DAG node"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-etale-cohomology",
+  "def-br"
+ ],
+ "proof": [
+  {
+   "text": "A finite morphism has closed image; the isomorphism over V puts V in this image, so density gives surjectivity. This persists after etale base change. A unit whose pullback is 1 differs from 1 by a function vanishing in every residue field. An etale scheme over reduced C is reduced, so this difference is zero. Thus G_m,C → ν_*G_m,Y is a monomorphism. Let Q be its cokernel. Over V the map is an isomorphism, so Q restricts to zero.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "etale-proposition-etale-reduced"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite type makes C Noetherian. Density of V implies it contains each generic point: if the closed complement contained one, it would contain its entire irreducible component and thus a nonempty open of C. Therefore Z=C minus V contains no generic point. In dimension at most one every non-generic point is closed (a strict specialization beyond it would produce a chain of length two). The closed-point closed subset Z is finite. Each residue field is a finite extension of k by finite type and the field form of the Nullstellensatz, hence equals algebraically closed k.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-closed-points-finite",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A sheaf supported on finitely many closed points with separably closed residue fields has vanishing positive-degree cohomology: on geometric stalks it is the direct sum of the pushforwards of its restrictions to these points; finite pushforward is exact and the point cohomology vanishes for every abelian coefficient sheaf. In particular H^1(C,Q)=0.",
+   "uses": [
+    "lem-sc-finite-support-acyclic",
+    "lem-kun-03qu-sep-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the long exact cohomology sequence of 0 → G_m,C → ν_*G_m,Y → Q → 0. Since H^1(C,Q)=0, its H^2 map is injective. Exact finite pushforward identifies H^2(C,ν_*G_m,Y) with H^2(Y,G_m,Y). By adjunction and naturality of the edge map, this composite is the stated canonical pullback.",
+   "uses": [
+    "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-finite-pushforward-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "etale-proposition-etale-reduced",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-finite-support-acyclic",
+  "lem-kun-03qu-sep-closed",
+  "lem-weil-pbc-sheaf-ext-cohomology-long-exact",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-finite-pushforward-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-sc-brauer-zero-all-curves.md",
+  "place": "Proof, Step 2 (normalization), units sequence and its cokernel; extracted and generalized from the proof quoted in lem-sc-brauer-zero-all-curves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback on the Brauer group is injective along a finite modification of a reduced curve over an algebraically closed field",
+   "results": "UNAVAILABLE: service returned Internal Server Error; no mathematical verdict inferred.",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "second etale cohomology multiplicative group injects into reduction and normalization of a curve",
+   "results": "Eight hits concerning elliptic-curve point maps, coordinate rings, variable changes and Selmer groups; none states the claimed scheme cohomology injection.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CohomologicalBrauerGroup\"",
+   "results": "Zero hits.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*(gmSheaf|Brauer)|nilradical.*cohom|cohom.*nilradical; local rg over WeilConjectures, Sheaf and Mathlib for the corresponding names",
+   "results": "No matching reduction or finite-modification injection. The existing generic-point injection applies only to regular integral schemes. Blueprint searches Brauer reduction, Brauer normalization, nilpotent Brauer and finite modification Brauer each returned zero matches.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Curve.Brauer",
+  "date": "2026-10-12",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero-all-curves",
+   "place": "Proof, Step 2 (normalization), units sequence and its cokernel",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/BrauerFiniteModificationInjection.lean",
+  "declaration": "AlgebraicGeometry.IsCurve.injective_brauer_pullback_finite_modification",
+  "statement": "theorem injective_brauer_pullback_finite_modification {k : Type u} [Field k] [IsAlgClosed k] {C Y : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f] [IsReduced C] (ν : Y ⟶ C) [IsFinite ν] (V : C.Opens) (hV : Dense (V : Set C)) [IsIso (ν ∣_ V)] : Function.Injective (fun x : C.CohomologicalBrauerGroup ↦ Sheaf.H.map (Scheme.upperStarGmSheafToGmSheaf ν) 2 (Etale.cohomologyMap ν C.gmSheaf 2 x))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042419-L-1821106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T042419-L-1821106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
