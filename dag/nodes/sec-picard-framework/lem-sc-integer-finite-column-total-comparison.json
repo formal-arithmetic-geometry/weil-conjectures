@@ -1,0 +1,120 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean",
+  "place": "total.quasiIso_map_of_finitely_many_columns (complete existing Lean proof), corresponding to the finite filtration in Stacks Section 12.25"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean",
+  "place": "Existing Lean proof read by J2; finite-column induction with single-column totalization and the five lemma."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FirstQuadrantTotalComparisonFinite",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-row-total-column-comparison",
+   "place": "Transport between natural and integer totalizations in the finite-column reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    "HomologicalComplex₂.total.quasiIso_map_of_finitely_many_columns"
+   ],
+   "missing": []
+  }
+ },
+ "id": "lem-sc-integer-finite-column-total-comparison",
+ "title": "Total comparison for an integer bicomplex with finitely many columns",
+ "statement": "Let C be an abelian category [def-sp-abelian], K,L integer-indexed double cochain complexes [def-sp-double-complex-total] with total complexes, φ:K→L, and x₀,x₁ integers. Assume K and L have zero columns outside [x₀,x₁], and φ.f i is a quasi-isomorphism for each x₀≤i≤x₁. Then Tot(φ) is a quasi-isomorphism, including when x₁<x₀.",
+ "proof": [
+  {
+   "text": "Induct downwards on the finite number of retained columns using rowFiltrationGE. Above x₁ the truncations and totals are zero. On adjoining one column, shortComplexStupidFiltrationGE is degreewise split, as is its totalization. Its quotient total is the shifted column via singleColumnObjTotal, so the column hypothesis gives a quasi-isomorphism there. HomologicalComplex.HomologySequence.quasiIso_τ₂ and the induction hypothesis give a quasi-isomorphism on the larger truncation. At or below x₀, the truncation inclusions are isomorphisms by strict support; transport along their total isomorphisms. This is the existing complete proof in the recorded source declaration, not an added hole.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_finitely_many_columns",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No matching Mathlib total-extension theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of integer indexed double complexes with finitely many columns and quasi isomorphisms on columns induces a quasi isomorphism on total complexes",
+   "results": "quasiIsoAt_iff'; CochainComplex.cm5b.instQuasiIsoIntP; quasiIsoAt_of_comp_right; quasiIsoAt_of_comp_left; HomologicalComplex.HomologySequence.quasiIso_τ₃; quasiIso_iff; quasiIsoAt_iff_comp_right; quasiIsoAt_comp",
+   "date": "2026-10-13",
+   "verdict": "No matching Mathlib total-extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of double complexes with finitely many nonzero columns induces a total quasi isomorphism if all column maps are quasi isomorphisms",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_map_of_finitely_many_columns in lean/WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean and dag/nodes",
+   "results": "Exact existing Lean theorem at line 939 with no sorry. No existing DAG node records this finite-column statement; the bounded-above double-complex node instead records a different theorem requiring uniform upper bounds on both indices.",
+   "date": "2026-10-13",
+   "verdict": "Reuse existing complete Lean declaration."
+  }
+ ],
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns",
+  "declaration": "HomologicalComplex₂.total.quasiIso_map_of_finitely_many_columns",
+  "statement": "lemma total.quasiIso_map_of_finitely_many_columns {K L : HomologicalComplex₂ C (up ℤ) (up ℤ)}\n    (φ : K ⟶ L) [K.HasTotal (up ℤ)] [L.HasTotal (up ℤ)] (x₀ x₁ : ℤ)\n    [CochainComplex.IsStrictlyGE K x₀] [CochainComplex.IsStrictlyLE K x₁]\n    [CochainComplex.IsStrictlyGE L x₀] [CochainComplex.IsStrictlyLE L x₁]\n    (hφ : ∀ (i : ℤ), x₀ ≤ i → i ≤ x₁ → QuasiIso (φ.f i)) :\n    QuasiIso (total.map φ (up ℤ))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T173836-L-3298505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T173836-L-3298505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

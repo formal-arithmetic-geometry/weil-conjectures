@@ -1,0 +1,124 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/012Z",
+  "place": "Definition 12.18.3, diagonal direct-sum definition of totalization; reindexing verification written by J2"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://stacks.math.columbia.edu/tag/012Z",
+  "place": "Direct verification from Definition 12.18.3, by J2"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FirstQuadrantTotalComparisonFinite",
+  "date": "2026-10-13",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-row-total-column-comparison",
+   "place": "Transport between natural and integer totalizations in the finite-column reduction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sc-total-extension-nat-arrow-iso",
+ "title": "Natural arrow isomorphism commuting extension by zero and totalization",
+ "statement": "Let C be an abelian category [def-sp-abelian], K,L natural-number-indexed double cochain complexes [def-sp-double-complex-total], and f:K→L. Let E extend the inner index by zero along ℕ→ℤ, then extend the outer index by zero along the same embedding. Assuming the integer total complexes of E(K) and E(L) exist, the arrow Tot(E(f)) is isomorphic to the extension by zero of the arrow Tot(f). There are no row bounds or columnwise quasi-isomorphism assumptions.",
+ "proof": [
+  {
+   "text": "In negative total degree every diagonal pair has a negative coordinate, so all summands are zero. In nonnegative degree restrict the integer diagonal to nonnegative pairs and identify it with the natural diagonal. On the surviving summands the two extendXIso isomorphisms give mutually inverse maps of coproducts; maps involving zero summands are unique. Coprojection extensionality proves the inverse equations.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Check the differential on each surviving summand. Both extension steps preserve its horizontal and vertical differentials and the sign (-1)^p agrees with its natural-degree sign. At negative degrees and the boundary -1→0 the source is zero. Other differentials vanish by the shape. Thus these maps give complex isomorphisms. Their components are natural in f because extendXIso and diagonal coprojections are natural; the resulting square yields Arrow.isoMk.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-double-complex-total"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "total complex extension by zero natural number integer quasi isomorphism",
+   "results": "HomologicalComplex.quasiIsoAt_extendMap_iff; HomologicalComplex.quasiIso_extendMap_iff; HomologicalComplex.instQuasiIsoExtendMap; HomologicalComplex.extendHomologyIso; HomologicalComplex.extendSingleIso_hom_f_assoc; HomologicalComplex.extendCyclesIso; HomologicalComplex.extendSingleIso_inv_f_assoc; HomologicalComplex.extendSingleIso",
+   "date": "2026-10-13",
+   "verdict": "No matching Mathlib total-extension theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"total\", \"extend\"",
+   "results": "No hits.",
+   "date": "2026-10-13",
+   "verdict": "No matching Mathlib total-extension theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of a first quadrant double complex commutes with totalization naturally",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "grep",
+   "query": "total.*extend|extend.*total|totalFlipIso in lean/Sheaf, lean/WeilConjectures, and Mathlib/Algebra/Homology",
+   "results": "Related tower reextension and total-symmetry constructions exist; no natural isomorphism commuting extension of both bicomplex indices with totalization. Searched DAG records as well.",
+   "date": "2026-10-13",
+   "verdict": "No exact existing declaration or node."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FirstQuadrantTotalExtension",
+  "file": "lean/Sheaf/Algebra/Homology/FirstQuadrantTotalExtension.lean",
+  "declaration": "HomologicalComplex₂.totalMap_extend_nat_arrow_iso",
+  "statement": "theorem totalMap_extend_nat_arrow_iso\n    {C : Type u} [Category.{v} C] [Abelian C]\n    {K L : HomologicalComplex₂ C (up ℕ) (up ℕ)} (f : K ⟶ L)\n    [HasTotal (((embeddingUpNat.extendFunctor C).mapHomologicalComplex (up ℕ) ⋙\n      embeddingUpNat.extendFunctor (CochainComplex C ℤ)).obj K) (up ℤ)]\n    [HasTotal (((embeddingUpNat.extendFunctor C).mapHomologicalComplex (up ℕ) ⋙\n      embeddingUpNat.extendFunctor (CochainComplex C ℤ)).obj L) (up ℤ)] :\n    Nonempty (Arrow.mk (total.map\n      (((embeddingUpNat.extendFunctor C).mapHomologicalComplex (up ℕ) ⋙\n        embeddingUpNat.extendFunctor (CochainComplex C ℤ)).map f) (up ℤ)) ≅\n      Arrow.mk (HomologicalComplex.extendMap (total.map f (up ℕ)) embeddingUpNat))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T173836-L-3298505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261012T173836-L-3298505",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

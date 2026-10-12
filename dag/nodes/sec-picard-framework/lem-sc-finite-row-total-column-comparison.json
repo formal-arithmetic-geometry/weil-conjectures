@@ -13,30 +13,36 @@
  ],
  "proof": [
   {
-   "text": "For q=0,...,N+1 let F^q Tot(K) consist of the summands with vertical degree at least q, and similarly for L. The horizontal differential preserves q and the vertical differential raises it, so these are subcomplexes. F^{N+1} is zero by the support hypothesis, while F^0 is the full total. Each short exact sequence 0→F^{q+1}→F^q→gr^q→0 splits in every degree by the direct sum decomposition of the diagonal.",
+   "text": "Transpose f so each given horizontal quasi-isomorphism becomes a column map. Extend the inner index then the outer index by zero along embeddingUpNat. Negative coordinates vanish by isZero_extend_X, so hasTotal_of_firstQuadrant gives the integer totals. The outer complexes are strictly ≥0 by extension. For an integer outer degree above N, extendXIso identifies its column with the extension of an original zero column, giving strict ≤N support for both bicomplexes.",
    "uses": [
     "def-sp-double-complex-total"
    ],
    "elementary": true
   },
   {
-   "text": "The quotient gr^q has degree-m object K^{m-q,q}, with zero terms if m<q. Its differential is the horizontal differential; the vertical differential lands in F^{q+1} and disappears. Hence the quotient map is the extension by zero of the horizontal map in degree q, translated by q; it is a quasi-isomorphism by the hypothesis. Equivalently, extend both indices to integers, transpose, and apply HomologicalComplex₂.total.quasiIso_map_of_finitely_many_columns for the outer bounds 0 and N, transporting along totalization and extension identifications.",
-   "uses": [],
-   "elementary": false
+   "text": "In a retained integer degree i≥0 write i as the natural image of q. Outer extendXIso and extendMap_f identify that column map with extendMap of the original flipped q-th column. Mathlib quasiIso_extendMap_iff supplies its quasi-isomorphism. Apply the existing finite-column comparison with bounds 0 and N to get the integer total quasi-isomorphism.",
+   "uses": [
+    "lem-sc-integer-finite-column-total-comparison"
+   ],
+   "elementary": true
   },
   {
-   "text": "Induct downwards on q from N+1. The map on F^{N+1} is a quasi-isomorphism because both sides are zero. If the map on F^{q+1} is a quasi-isomorphism, its map and the quotient map are quasi-isomorphisms; the long exact homology sequences of the two short exact sequences give a quasi-isomorphism on F^q by the five lemma (the existing HomologicalComplex.HomologySequence.quasiIso_τ₂). At q=0 this is the asserted total map. This includes N=0 and requires no horizontal upper bound.",
-   "uses": [],
+   "text": "Use the natural arrow isomorphism commuting double-index extension with totalization. Quasi-isomorphism is invariant under this arrow isomorphism; quasiIso_extendMap_iff reflects it back to the natural-indexed flipped total. Finally totalFlipIso with the explicit natural symmetry sign (-1)^(pq) and its coprojection naturality identifies this map with Tot(f).",
+   "uses": [
+    "lem-sc-total-extension-nat-arrow-iso"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sp-double-complex-total"
+  "def-sp-double-complex-total",
+  "lem-sc-integer-finite-column-total-comparison",
+  "lem-sc-total-extension-nat-arrow-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "https://stacks.math.columbia.edu/tag/012X",
-  "place": "Finite filtration argument; details of the five-lemma induction written by E1"
+  "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/BicomplexColumns.lean",
+  "place": "J2 second reading: finite-column comparison applied to the extended transposed bicomplex; only the independent natural extension/totalization arrow isomorphism remains open."
  },
  "mathlib_searches": [
   {
@@ -122,11 +128,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "X-b8232",
-  "group": "E1",
+  "reviewer": "COMPILER",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T154828-L-2472313",
+  "landing": "20261012T173836-L-3298505",
   "kind": "interface",
-  "note": "independent Codex review: Delivered modules, nodes, report, target signature, and required importer all match the packet and compile cleanly."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
