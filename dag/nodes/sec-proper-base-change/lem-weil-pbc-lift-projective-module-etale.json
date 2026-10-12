@@ -26,100 +26,42 @@
  ],
  "proof": [
   {
-   "text": "*A projector and its lift.* Since $\\overline P$ is a direct summand of a finite free $A/I$-module, choose $n\\ge0$, an $A/I$-module $\\overline K$ and an isomorphism $\\theta:\\overline P\\oplus\\overline K\\xrightarrow{\\sim}(A/I)^{\\oplus n}$. Let $\\bar p=\\theta\\circ(\\mathrm{id}_{\\overline P}\\oplus0)\\circ\\theta^{-1}$, an endomorphism of $(A/I)^{\\oplus n}$ with $\\bar p\\circ\\bar p=\\bar p$ and $\\operatorname{Im}(\\bar p)=\\theta(\\overline P)\\cong\\overline P$; let $\\overline X\\in M_n(A/I)$ be its matrix in the standard basis. Since $A\\to A/I$ is surjective, choose $X\\in M_n(A)$ reducing entrywise to $\\overline X$, and let $\\varphi:A^{\\oplus n}\\to A^{\\oplus n}$ be the $A$-linear map with matrix $X$ (a lift of $\\bar p$).",
+   "text": "Use Mathlib Module.Finite.exists_comp_eq_id_of_projective to choose f:(A/I)^n → Pbar and g:Pbar → (A/I)^n with f∘g=id, f surjective, g injective. Put pbar=g∘f. Composition and f∘g=id prove pbar²=pbar, and surjectivity of f gives range(pbar)=range(g). LinearEquiv.ofInjective g identifies Pbar with range(pbar). This is the proved private helper finite_projective_projector.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M5 (lemma-lift-projective-module), first two sentences ('choose an integer n and a direct sum decomposition (A/I)^n = P-bar (+) K-bar ... Choose a lift phi of the projector p-bar'; Stacks writes R/I for A/I there, a typo)"
-   }
+   "elementary": true
   },
   {
-   "text": "*The ring $B$ and Cayley-Hamilton.* Let $f=\\det(x-\\varphi)\\in A[x]$ be the characteristic polynomial of $\\varphi$ [def-weil-pbc-charpoly-free-module]; it is monic of degree $n$ [lem-weil-pbc-charpoly-free-module-properties] (c). Put $B=A[x]/(f)$; it is a free $A$-module with basis the classes of $1,x,\\dots,x^{n-1}$ [lem-weil-pbc-monic-quotient-free], hence a finite $A$-algebra and integral over $A$ [lem-weil-pbc-finite-algebra-is-integral]. By Cayley-Hamilton [lem-weil-cayley-hamilton-free-module], $f(\\varphi)=0$ in $\\operatorname{End}_A(A^{\\oplus n})=M_n(A)$. The $A$-algebra map $A[x]\\to M_n(A)$, $x\\mapsto X$ (well defined since $A$ acts by central scalar matrices; its image is the commutative subring $A[X]$) kills $f$, so it factors through an $A$-algebra map $\\psi:B\\to M_n(A)$ with $\\psi(x)=X$. Reducing entries modulo $I$ maps $\\psi(IB)$ into $M_n(I)$, so $\\psi$ induces an $A$-algebra map $\\bar\\psi:B/IB\\to M_n(A/I)$ with $\\bar\\psi(\\bar x)=\\overline X$.",
+   "text": "Apply exists_etale_lift_finite_free_projector to pbar. Obtain A′, the étale map, α and its quotient compatibility, and an idempotent p′ on (A′)^n with the prescribed reduced matrix.",
    "uses": [
-    "def-weil-pbc-charpoly-free-module",
-    "lem-weil-pbc-charpoly-free-module-properties",
-    "lem-weil-pbc-monic-quotient-free",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-cayley-hamilton-free-module"
+    "lem-weil-pbc-etale-lift-finite-free-projector"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M5, third to fifth sentences ('Let f in A[x] be the characteristic polynomial of phi. Set B = A[x]/(f). By Cayley-Hamilton (Algebra, Lemma Tag 00DX, lemma-charpoly) there is a map B -> End_A(A^n) mapping x to phi'); integrality of B, used later without mention, written out by the agent"
-   }
+   "elementary": false
   },
   {
-   "text": "*$x(1-x)$ is nilpotent modulo $IB$.* Let $\\mathfrak Q\\subset B$ be a prime with $IB\\subseteq\\mathfrak Q$ and $\\mathfrak p\\subset A$ its preimage, so $I\\subseteq\\mathfrak p$. The map $A/\\mathfrak p\\to B/\\mathfrak Q$ is injective, so it extends to a field embedding $\\kappa(\\mathfrak p)=\\operatorname{Frac}(A/\\mathfrak p)\\to\\kappa(\\mathfrak Q)=\\operatorname{Frac}(B/\\mathfrak Q)$. Let $\\lambda:A\\to\\kappa(\\mathfrak p)$ be the canonical map; it factors through $A/I$, so $\\lambda(X)$ (entrywise) is the image of the idempotent matrix $\\overline X$, hence idempotent. By [lem-weil-pbc-charpoly-free-module-properties] (d) the characteristic polynomial of $\\lambda(X)$ is $\\lambda(f)$, and by [lem-weil-pbc-idempotent-endomorphism-charpoly-field] $\\lambda(f)=(x-1)^rx^{n-r}$ for some $r$, which divides $x^n(x-1)^n$ in $\\kappa(\\mathfrak p)[x]$. Let $\\xi\\in\\kappa(\\mathfrak Q)$ be the image of $x$; the ring map $\\kappa(\\mathfrak p)[x]\\to\\kappa(\\mathfrak Q)$, $x\\mapsto\\xi$, sends $\\lambda(f)$ to the image of $f(x)=0$, hence sends $x^n(x-1)^n$ to $0$: $\\xi^n(\\xi-1)^n=0$ in the field $\\kappa(\\mathfrak Q)$, so $\\xi\\in\\{0,1\\}$ and $\\xi(1-\\xi)=0$, i.e. $x(1-x)\\in\\mathfrak Q$. Thus $x(1-x)$ lies in every prime of $B$ containing $IB$, hence in $\\sqrt{IB}$ [lem-weil-pbc-zero-locus-eq-iff-radical-eq]: there is $N\\ge1$ with $x^N(1-x)^N\\in IB$.",
-   "uses": [
-    "lem-weil-pbc-charpoly-free-module-properties",
-    "lem-weil-pbc-idempotent-endomorphism-charpoly-field",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M5, sixth to ninth sentences ('For every prime p containing I the image of f in kappa(p) is (x-1)^r x^{n-r} ... Hence x^N(1-x)^N is contained in IB for some N >= 1'); the passage from primes of A to primes of B/IB written out by the agent"
-   }
-  },
-  {
-   "text": "*The idempotent $\\bar e$ of $B/IB$ and its image $\\bar p$.* In $\\overline B=B/IB$ put $s=\\bar x^N$, $t=(1-\\bar x)^N$; then $st=0$ (step 3). In $\\mathbf Z[x]$, $1=(x+(1-x))^{2N-1}=\\sum_i\\binom{2N-1}{i}x^i(1-x)^{2N-1-i}$ and each term has $i\\ge N$ or $2N-1-i\\ge N$, so $1=a\\,x^N+b\\,(1-x)^N$ with $a,b\\in\\mathbf Z[x]$; hence $as+bt=1$ in $\\overline B$. Then $s=s(as+bt)=as^2$, $t=bt^2$, and $(s+t)(a^2s+b^2t)=a(as^2)+b(bt^2)=as+bt=1$, so $s+t=\\bar x^N+(1-\\bar x)^N$ is a unit, and $\\bar e:=s(s+t)^{-1}=a^2s^2=as$ satisfies $\\bar e^2=a(as^2)=as=\\bar e$: $\\bar e=\\bar x^N/(\\bar x^N+(1-\\bar x)^N)$ is an idempotent. Since $\\bar\\psi(\\bar x)=\\overline X$ is idempotent, $\\bar\\psi(s)=\\overline X^N=\\overline X$ and $\\bar\\psi(t)=(1-\\overline X)^N=1-\\overline X$, so $\\bar\\psi(s+t)=1$ and $\\bar\\psi(\\bar e)=\\overline X\\cdot1=\\overline X$ (inside the commutative subring $(A/I)[\\overline X]$).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M5, tenth to twelfth sentences ('It follows that x^N + (1-x)^N is a unit in B/IB and that e-bar = image of x^N/(x^N+(1-x)^N) is an idempotent as both assertions hold in Z[x]/(x^N(x-1)^N). The image of e-bar in End_{A/I}((A/I)^n) is ... = p-bar'); the explicit inverse written out by the agent"
-   }
-  },
-  {
-   "text": "*Lifting $\\bar e$ over an etale neighbourhood.* Since $B$ is integral over $A$ (step 2) and $\\bar e\\in B/IB$ is idempotent (step 4), [lem-weil-pbc-lift-idempotent-upstairs] gives a ring map $\\sigma:A\\to A'$ with $\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale [def-weil-etale-morphism] and $\\alpha:A/I\\to A'/IA'$ an isomorphism, and an idempotent $e'\\in B\\otimes_AA'$ with $\\rho(e')=\\bar e$, where $\\rho$ is the composite $B\\otimes_AA'\\to B\\otimes_A(A'/IA')\\xrightarrow{\\mathrm{id}_B\\otimes\\alpha^{-1}}B\\otimes_A(A/I)=B/IB$.",
-   "uses": [
-    "lem-weil-pbc-lift-idempotent-upstairs",
-    "def-weil-etale-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M5, thirteenth sentence ('After replacing A by an etale extension A' as in the lemma, we may assume there exists an idempotent e in B which maps to e-bar in B/IB, see Lemma Tag 07M4')"
-   }
-  },
-  {
-   "text": "*The idempotent matrix $p$ over $A'$ lifts $\\bar p$.* Let $\\sigma(\\psi(b))\\in M_n(A')$ denote entrywise application of $\\sigma$. The map $B\\times A'\\to M_n(A')$, $(b,a')\\mapsto a'\\,\\sigma(\\psi(b))$, is $A$-bilinear, so it induces an additive map $\\psi':B\\otimes_AA'\\to M_n(A')$; it is multiplicative because scalar matrices are central and $\\sigma(\\psi(B))$ is commutative, so $\\psi'$ is a ring map. Put $p=\\psi'(e')$, an idempotent of $M_n(A')$. Let $\\pi':M_n(A')\\to M_n(A'/IA')$ and $\\bar\\alpha:M_n(A/I)\\to M_n(A'/IA')$ be the entrywise maps. The two ring maps $\\pi'\\circ\\psi'$ and $\\bar\\alpha\\circ\\bar\\psi\\circ\\rho$ from $B\\otimes_AA'$ to $M_n(A'/IA')$ agree on $b\\otimes1$ (both give the entrywise image of $\\psi(b)$ under $A\\to A/I\\xrightarrow{\\alpha}A'/IA'$, which equals $A\\xrightarrow{\\sigma}A'\\to A'/IA'$) and on $1\\otimes a'$ (both give the scalar matrix of $a'\\bmod IA'$, as $\\rho(1\\otimes a')=\\alpha^{-1}(a'\\bmod IA')\\cdot1$); since these elements generate $B\\otimes_AA'$ as a ring, the maps are equal. Hence $\\pi'(p)=\\bar\\alpha(\\bar\\psi(\\rho(e')))=\\bar\\alpha(\\bar\\psi(\\bar e))=\\bar\\alpha(\\overline X)$ by step 4.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M5, last two sentences ('Then the image of e under the map B = A[x]/(f) -> End_A(A^n) is an idempotent element p which lifts p-bar'); the compatibility of the maps after the base change to A' written out by the agent"
-   }
-  },
-  {
-   "text": "*Conclusion.* Let $P'=\\operatorname{Im}(p)\\subseteq A'^{\\oplus n}$, $p$ viewed as an endomorphism of $A'^{\\oplus n}$; by [lem-weil-pbc-idempotent-endomorphism-image-base-change] (i) it is a finite projective $A'$-module. By [lem-weil-pbc-idempotent-endomorphism-image-base-change] (ii) for $R=A'$, $S=A'/IA'$ and the idempotent $p$ (step 6): $P'/IP'=P'\\otimes_{A'}A'/IA'\\cong\\operatorname{Im}(\\pi'(p))=\\operatorname{Im}(\\bar\\alpha(\\overline X))$ as $A'/IA'$-modules. By the same lemma (ii) for $R=A/I$, $S=A'/IA'$ via $\\alpha$ and the idempotent $\\bar p$ (matrix $\\overline X$): $\\overline P\\otimes_{A/I}A'/IA'\\cong\\operatorname{Im}(\\bar p)\\otimes_{A/I}A'/IA'\\cong\\operatorname{Im}(\\bar\\alpha(\\overline X))$ (step 1). Composing, $P'/IP'\\cong\\overline P\\otimes_{A/I}A'/IA'$ as $A'/IA'$-modules. Together with step 5 ($\\operatorname{Spec}A'\\to\\operatorname{Spec}A$ etale, $\\alpha$ an isomorphism) this proves the lemma.",
+   "text": "Take P′=range(p′). Apply idempotent_image_baseChange first to p′ with A′ → A′/IA′, and then to pbar with α. The first application supplies Module.Finite and Module.Projective for P′ and identifies (A′/IA′) ⊗_(A′) P′ with the range of the reduced p′. The second identifies (A′/IA′) ⊗_(A/I) range(pbar) with the range of the transported pbar. The matrix equality from the preceding step identifies these two ranges.",
    "uses": [
     "lem-weil-pbc-idempotent-endomorphism-image-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, proof of Lemma Tag 07M5, last sentence ('Setting P = Im(p) we win'); the meaning of 'lifting' (P'/IP' = P-bar via alpha) checked by the agent"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use TensorProduct.quotTensorEquivQuotSMul to identify P′/IA′P′ with (A′/IA′) ⊗_(A′) P′. The private helper quotient_tensor_equiv verifies linearity over A′/IA′: lift a scalar to A′ and a vector to P′, then use the tensor balancing identity on 1⊗x. Tensor the equivalence Pbar ≃ range(pbar) from the first step, and compose the resulting four equivalences. This gives exactly the required quotient-module equivalence and finishes with the witnesses already chosen.",
+   "uses": [
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-charpoly-free-module",
-  "lem-weil-pbc-charpoly-free-module-properties",
-  "lem-weil-pbc-monic-quotient-free",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-cayley-hamilton-free-module",
-  "lem-weil-pbc-idempotent-endomorphism-charpoly-field",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-lift-idempotent-upstairs",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-idempotent-endomorphism-image-base-change"
+  "lem-weil-pbc-etale-lift-finite-free-projector",
+  "lem-weil-pbc-idempotent-endomorphism-image-base-change",
+  "lem-weil-pbc-tensor-over-quotient-ring"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "name": "E3 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.11.8, Tag 07M5 (lemma-lift-projective-module, line 2020) and its proof, with Lemma Tag 07M4 (lemma-lift-idempotent-upstairs) and Algebra Lemma Tag 00DX (lemma-charpoly, Cayley-Hamilton); the verifications Stacks leaves implicit (primes of B/IB, the inverse of x^N+(1-x)^N, the compatibility after base change to A', the identification P'/IP' = P-bar (x) A'/IA') written out by the agent"
+  "place": "Tag 07M5, projector and image construction. Matrix lifting factored through two new proved modules. The nilpotence step is replaced by a direct determinant identity over arbitrary commutative rings and Mathlib polynomial idempotent repair; quotient tensor comparison is upgraded explicitly to quotient-ring linearity."
  },
  "mathlib_searches": [
   {
@@ -196,5 +138,15 @@
   "group": "K1",
   "result": "fix",
   "note": "A comm ring, I ideal, Pbar Module.Finite+Module.Projective over A⧸I; A' CommRingCat.{u}, Algebra A A' tied to g, Etale (Spec.map g); alpha A⧸I ≃+* A'⧸IA' tied to induced map (fixed, was arbitrary bijection); P' finite projective A'-module; P'/IP' ≃ₗ[A'/IA'] (A'/IA') ⊗[A⧸I] Pbar via alpha (fixed, was ≃+ on P'⊗A'/IA')"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085232-L-11530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

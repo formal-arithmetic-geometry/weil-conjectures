@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-integral-model-finite-free-projector",
+ "kind": "statement",
+ "title": "Integral commutative model of a finite free quotient projector",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $n\\geq0$, and $\\bar p$ an idempotent endomorphism of $(A/I)^n$. There exist a commutative integral $A$-algebra $B$, an $A$-algebra map $\\psi:B\\to\\operatorname{Mat}_n(A)$, and $y\\in B$ such that $y\\bmod IB$ is idempotent and the entrywise reduction of $\\psi(y)$ is the standard matrix of $\\bar p$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M5, proof: Integral commutative model of a finite free quotient projector"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Lift the entries of the matrix M of the given projector to X over A using surjectivity of A → A/I. Set f = charpoly X and B = A[x]/(f). Monicity gives Module.Finite A B; Algebra.IsIntegral.of_finite gives integrality. Cayley–Hamilton lets Polynomial.aeval X factor through B, producing ψ and ψ(x)=X.",
+   "uses": [
+    "def-weil-pbc-charpoly-free-module",
+    "lem-weil-pbc-charpoly-free-module-properties",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-cayley-hamilton-free-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In matrices over (A/I)[t], write S = scalar(t) and N = C(M). Since N²=N and SN=NS, expansion gives (S-N)(1-S-N)=scalar(t-t²). Apply Matrix.det_mul and the determinant of a scalar matrix: charpoly(M) * det(1-S-N) = (t-t²)^n. Thus charpoly(M) divides (t-t²)^n. This is the private Lean theorem charpoly_dvd_projector_polynomial; it holds in every commutative ring, including the zero ring.",
+   "uses": [
+    "def-weil-pbc-charpoly-free-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quotient map A/I → B/IB is well defined. Base change of charpoly gives f mod I = charpoly M. Evaluation at the class of x in B/IB sends f mod I to zero because f(x)=0 in B. Divisibility in the preceding step therefore gives (x-x²)^(n+1)=0 after reduction; the exponent n+1 avoids a separate empty-matrix case.",
+   "uses": [
+    "lem-weil-pbc-charpoly-free-module-properties"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Put y = 1-(1-x^(n+1))^(n+1) in B. Apply Mathlib isIdempotentElem_one_sub_one_sub_pow_pow to the preceding nilpotence equality; the class of y is idempotent. This formula follows by the geometric-sum identity: (z-z²)^N divides e-e² for e=1-(1-z^N)^N. Under the composite B → Mat_n(A) → Mat_n(A/I), x goes to M. Since M and 1-M equal every positive power of themselves, y goes to 1-(1-M)=M. This proves all the claims; no residue field or prime-spectrum lemmas occur.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-charpoly-free-module",
+  "lem-weil-cayley-hamilton-free-module",
+  "lem-weil-pbc-charpoly-free-module-properties",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "E3 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M5 matrix and image construction; fully checked Lean proof, using the direct determinant identity and Mathlib polynomial idempotent repair in place of the fibre argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral commutative algebra and homomorphism to matrix ring realizing idempotent quotient matrix",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral commutative algebra and homomorphism to matrix ring realizing idempotent quotient matrix",
+   "results": "Algebra.embeddingsMatrix; Matrix.isRepresentation; nilpotent-kernel idempotent lifting lemmas. No integral-model statement.",
+   "date": "2026-10-12",
+   "verdict": "Related declarations only; none states the integral model or the étale matrix lifting statement."
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly.*[Ii]dempotent|idempotent.*charpoly|one_sub_one_sub_pow_pow",
+   "results": "Mathlib/RingTheory/Idempotents.lean: isIdempotentElem_one_sub_one_sub_pow_pow; Matrix.charpoly_map, Matrix.aeval_self_charpoly, and AdjoinRoot tools found by direct rg.",
+   "date": "2026-10-12",
+   "verdict": "Related tools found, used in the proof; no matching complete declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LiftProjectiveModuleEtale",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Integral commutative model of a finite free quotient projector",
+   "via": [
+    "lem-weil-pbc-lift-projective-module-etale",
+    "lem-weil-pbc-smooth-section-etale-lift",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelFiniteFreeProjector",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelFiniteFreeProjector.lean",
+  "declaration": "AlgebraicGeometry.exists_integral_model_finite_free_projector",
+  "statement": "theorem exists_integral_model_finite_free_projector (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) (pbar : Module.End (A ⧸ I) (Fin n → A ⧸ I)) (hpbar : IsIdempotentElem pbar) : ∃ (B : Type u) (_ : CommRing B) (_ : Algebra A B), Algebra.IsIntegral A B ∧ ∃ (ψ : B →ₐ[A] Matrix (Fin n) (Fin n) A) (y : B), IsIdempotentElem (Ideal.Quotient.mk (I.map (algebraMap A B)) y) ∧ (ψ y).map (Ideal.Quotient.mk I) = LinearMap.toMatrix' pbar",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085232-L-11530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085232-L-11530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

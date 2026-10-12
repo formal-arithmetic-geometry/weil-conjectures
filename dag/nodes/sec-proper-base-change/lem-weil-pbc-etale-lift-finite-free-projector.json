@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-etale-lift-finite-free-projector",
+ "kind": "statement",
+ "title": "Étale lifting of a finite free quotient projector",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $n\\geq0$, and $\\bar p$ an idempotent endomorphism of $(A/I)^n$. There exist an étale ring map $g:A\\to A\\prime$ [def-weil-etale-morphism], an isomorphism $\\alpha:A/I\\xrightarrow\\sim A\\prime/IA\\prime$ with $\\alpha(a\\bmod I)=g(a)\\bmod IA\\prime$, and an idempotent endomorphism $p\\prime$ of $(A\\prime)^n$ whose standard matrix, reduced modulo $IA\\prime$, equals the entrywise image under $\\alpha$ of the standard matrix of $\\bar p$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M5, proof: Étale lifting of a finite free quotient projector"
+ },
+ "stmt_deps": [
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply the integral-model theorem to the given finite free quotient projector. Obtain integral B, ψ:B → Mat_n(A), and y whose quotient class is idempotent and whose reduced matrix is the projector matrix.",
+   "uses": [
+    "lem-weil-pbc-integral-model-finite-free-projector"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply exists_etale_lift_isIdempotentElem (Tag 07M4) to y mod IB. Obtain the étale A → C, quotient isomorphism α with its compatibility on A, an idempotent e in T=B ⊗_A C, and β:B/IB ≃ T/IT satisfying β(y mod IB)=e mod IT and β(b mod IB)=b⊗1 mod IT.",
+   "uses": [
+    "lem-weil-pbc-lift-idempotent-upstairs"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend ψ entrywise to ψC:B → Mat_n(C). Scalar matrices commute with ψC(B), so Algebra.TensorProduct.lift gives Ψ:T → Mat_n(C), Ψ(b⊗c)=ψC(b)*scalar(c). Reduction q:Mat_n(C) → Mat_n(C/IC) sends Ψ(algebraMap a) to zero for a in I, because g(a) belongs to IC. Hence q∘Ψ factors through T/IT by Ideal.Quotient.lift. Apply this factorization to the equality β(y mod IB)=e mod IT. The formula for β gives q(Ψ e)=q(ψC y). Entrywise compatibility of α and g then identifies this last matrix with the matrix of the original quotient projector mapped by α.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Set p′=Matrix.toLinAlgEquiv′(Ψ e). Both maps preserve idempotency. The inverse matrix equivalence gives toMatrix′(p′)=Ψ e, and the preceding equality is exactly the required reduction. Retain the étale map and α from Tag 07M4.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-model-finite-free-projector",
+  "lem-weil-pbc-lift-idempotent-upstairs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "name": "E3 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07M5 matrix and image construction; fully checked Lean proof, using the direct determinant identity and Mathlib polynomial idempotent repair in place of the fibre argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "idempotent matrix over quotient ring lift etale neighbourhood",
+   "results": "Service unavailable: Internal Server Error.",
+   "date": "2026-10-12",
+   "verdict": "unavailable; no mathematical absence verdict"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "idempotent matrix over quotient ring lift etale neighbourhood",
+   "results": "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.FormallyEtale.iff_of_surjective; nilpotent-kernel idempotent lifting lemmas. None lifts a matrix over an arbitrary ideal while preserving the quotient.",
+   "date": "2026-10-12",
+   "verdict": "Related declarations only; none states the integral model or the étale matrix lifting statement."
+  },
+  {
+   "tool": "grep",
+   "query": "idempotent.*[Ee]tale|[Ee]tale.*idempotent",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq and variants isolate primes; no finite free quotient projector lifting statement.",
+   "date": "2026-10-12",
+   "verdict": "Related tools found, used in the proof; no matching complete declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LiftProjectiveModuleEtale",
+  "date": "2026-10-12",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "step 7 of its split (source: Lemma 0GS2, proof: the essential-surjectivity paragraphs); Étale lifting of a finite free quotient projector",
+   "via": [
+    "lem-weil-pbc-lift-projective-module-etale",
+    "lem-weil-pbc-smooth-section-etale-lift",
+    "lem-weil-pbc-henselian-pair-approximation",
+    "lem-weil-pbc-finite-etale-lifting-approximation",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleLiftFiniteFreeProjector",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleLiftFiniteFreeProjector.lean",
+  "declaration": "AlgebraicGeometry.exists_etale_lift_finite_free_projector",
+  "statement": "theorem exists_etale_lift_finite_free_projector (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) (pbar : Module.End (A ⧸ I) (Fin n → A ⧸ I)) (hpbar : IsIdempotentElem pbar) : ∃ (A' : CommRingCat.{u}) (g : CommRingCat.of A ⟶ A'), letI : Algebra A A' := g.hom.toAlgebra; Etale (Spec.map g) ∧ ∃ α : A ⧸ I ≃+* A' ⧸ I.map (algebraMap A A'), (∀ a : A, α (Ideal.Quotient.mk I a) = Ideal.Quotient.mk _ (algebraMap A A' a)) ∧ ∃ p' : Module.End A' (Fin n → A'), IsIdempotentElem p' ∧ (LinearMap.toMatrix' p').map (Ideal.Quotient.mk _) = (LinearMap.toMatrix' pbar).map α.toRingHom",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085232-L-11530",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261012T085232-L-11530",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
