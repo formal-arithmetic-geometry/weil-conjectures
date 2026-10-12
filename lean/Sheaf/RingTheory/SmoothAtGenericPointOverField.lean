@@ -4,10 +4,28 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Sheaf.FieldTheory.SeparableExtension
 public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
 @[expose] public section
 universe u v w
 namespace Algebra
+
+private theorem separablyGenerated_of_algEquiv
+    {k : Type u} {K : Type v} {K' : Type w}
+    [Field k] [Field K] [Field K'] [Algebra k K] [Algebra k K']
+    (e : K ≃ₐ[k] K') (h : IsSeparablyGenerated k K) : IsSeparablyGenerated k K' := by
+  rcases h with ⟨s, hs, hsep⟩
+  refine ⟨e '' s, ?_, ?_⟩
+  · exact (isTranscendenceBasis_image e.injective.injOn).mp
+      (e.isTranscendenceBasis hs)
+  · let ebase : IntermediateField.adjoin k s ≃ₐ[k] IntermediateField.adjoin k (e '' s) :=
+      ((IntermediateField.adjoin k s).equivMap e.toAlgHom).trans
+        (IntermediateField.equivOfEq (IntermediateField.adjoin_map k s e.toAlgHom))
+    let := hsep
+    apply Algebra.IsSeparable.of_equiv_equiv ebase.toRingEquiv e.toRingEquiv
+    ext x
+    change (ebase x : K') = e (x : K)
+    rfl
 
 /-- Core finitely generated subextension transport used to prove separability of the
 zero-prime residue field. Source: Stacks Project, Algebra, Lemma 07ND. The proof
@@ -23,7 +41,14 @@ theorem separableExtension_bot_residueField_finitelyGenerated
     (hsep : IsSeparableExtension k L)
     (F : IntermediateField k (⊥ : Ideal S).ResidueField) (hF : F.FG) :
     IsSeparablyGenerated k F := by
-  sorry
+  let e : (⊥ : Ideal S).ResidueField ≃ₐ[k] L :=
+    (IsLocalization.algEquiv (nonZeroDivisors S) (⊥ : Ideal S).ResidueField L).restrictScalars k
+  have hmap : (F.map e.toAlgHom).FG := by
+    rcases IntermediateField.fg_def.mp hF with ⟨s, hs, hFs⟩
+    rw [← hFs, IntermediateField.adjoin_map]
+    exact IntermediateField.fg_adjoin_of_finite (hs.image e)
+  exact separablyGenerated_of_algEquiv (F.equivMap e.toAlgHom).symm
+    (hsep (F.map e.toAlgHom) hmap)
 
 /-- Separability of the fraction field transfers to the residue field at the generic point.
 Source: Stacks Project, Algebra, Lemma 07ND. The proof identifies the residue field at
