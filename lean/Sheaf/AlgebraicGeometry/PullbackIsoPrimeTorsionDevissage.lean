@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
+import Sheaf.AlgebraicGeometry.PullbackIsoNsmulDevissage
+import Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit
 
 /-!
 # Pullback isomorphisms on cohomology: prime-torsion dévissage
@@ -67,6 +69,9 @@ theorem pullback_cohomology_bijective_of_prime_torsion_devissage
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (hF : Scheme.IsTorsionAbelianSheaf F) :
     ∀ (q : ℕ), Function.Bijective (cohomologyMap u F q) := by
-  sorry
+  apply pullback_cohomology_bijective_of_torsion_colimit u
+  · intro n hn G hG q
+    exact pullback_cohomology_bijective_of_nsmul u hprime hn G hG q
+  · exact hF
 
 end AlgebraicGeometry.Etale

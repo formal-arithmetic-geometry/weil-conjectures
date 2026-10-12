@@ -1,0 +1,156 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-strict-henselian-comparison",
+   "place": "step 3 of its split: application of prime-torsion devissage, filtered-colimit reduction",
+   "via": [
+    "lem-weil-pbc-pullback-iso-prime-torsion-devissage"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), filtered-colimit reduction; Tag 03Q5 (lemma-colimit), constant-scheme case of Theorem 09YQ"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-torsion-etale-sheaf"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), filtered-colimit reduction; Tag 03Q5 (lemma-colimit), constant-scheme case of Theorem 09YQ; transposition to global cohomology"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-pullback-iso-torsion-colimit",
+ "title": "lem-weil-pbc-pullback-iso-torsion-colimit",
+ "statement": "For schemes X Y, morphism u : Y ⟶ X, compact and quasi-separated, if pullback cohomology is bijective for every sheaf annihilated by a positive integer, then it is bijective for every torsion abelian sheaf F. Notation and conventions are those of [def-pc-scheme], [def-weil-pbc-scheme-conventions], [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-cohomology-pullback], [def-weil-pbc-etale-cohomology], [def-weil-pbc-inverse-image], [def-weil-pbc-torsion-etale-sheaf].",
+ "proof": [
+  {
+   "text": "Use the positive-integer kernel diagram and its colimit cocone from the definition of torsion. Multiplication by n on F[n] vanishes by cancelling the kernel inclusion. The divisibility poset is nonempty and filtered (product is an upper bound).",
+   "uses": [
+    "def-weil-pbc-torsion-etale-sheaf",
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Inverse image preserves the colimit cocone. Cohomology on X and Y preserves it by filtered-colimit compatibility, transported to Sheaf.H by the natural Ext-to-derived comparison.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality gives a transformation of the cohomology diagrams. hbounded gives bijective components; their inverses are natural by multiplying the commuting squares by inverses. The induced colimit map is bijective and agrees with pullback on F by naturality on each kernel inclusion and uniqueness of colimit descent.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "def-weil-pbc-category-colimit",
+    "def-weil-directed-colimit-abelian-groups"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-pur-abelian-sheaf-kernel",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "def-weil-pbc-category-colimit",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of sheaves killed by n prime factor devissage",
+   "results": "No direct Mathlib theorem found; only general exact-sequence and abelian-category lemmas.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "torsion sheaf filtered colimit cohomology pullback bijective",
+   "results": "No theorem combining torsion devissage with sheaf cohomology pullback was found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -R 'filtered.*colimit\\|bijective.*cohomology' Mathlib/CategoryTheory Mathlib/Algebra --include='*.lean'",
+   "results": "Only general filtered-colimit and five-lemma infrastructure; no matching result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of cohomological functors closed under extensions and filtered colimits",
+   "results": "Eight derived-category/K-injective hits; no matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective",
+   "results": "Mathlib.Algebra.FiveLemma contains the exact additive five lemma used in the bounded-torsion proof.",
+   "date": "2026-10-12",
+   "verdict": "ingredient used"
+  },
+  {
+   "tool": "grep",
+   "query": "rg prop_of_nsmul|bijective.*cohomology|cohomology.*(colimit|isIso) lean/WeilConjectures lean/Sheaf",
+   "results": "Found proved ObjectProperty.prop_of_nsmul_id_eq_zero and cohomologyMap_map. Found H_map_isColimit_of_isFiltered, a general filtered-colimit ingredient, but no theorem with either new statement.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; induction reused"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackIsoTorsionColimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackIsoTorsionColimit.lean",
+  "declaration": "AlgebraicGeometry.Etale.pullback_cohomology_bijective_of_torsion_colimit",
+  "statement": "theorem pullback_cohomology_bijective_of_torsion_colimit {X Y : Scheme.{u}} (u : Y ⟶ X) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (hbounded : ∀ (n : ℕ), 0 < n → ∀ (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}), n • 𝟙 G = 0 → ∀ (q : ℕ), Function.Bijective (cohomologyMap u G q)) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : Scheme.IsTorsionAbelianSheaf F) : ∀ (q : ℕ), Function.Bijective (cohomologyMap u F q)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff4a6",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T013435-L-839109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff4a6",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T013435-L-839109",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, source reductions, dependency declarations, compilation and axiom results."
+ }
+}

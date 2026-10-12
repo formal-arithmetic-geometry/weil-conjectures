@@ -1,0 +1,139 @@
+{
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-p1-strict-henselian-comparison",
+   "place": "step 3 of its split: application of prime-torsion devissage, bounded-torsion reduction",
+   "via": [
+    "lem-weil-pbc-pullback-iso-prime-torsion-devissage"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), bounded-torsion reduction"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-inverse-image"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PullbackIsoPrimeTorsionDevissage",
+  "date": "2026-10-12",
+  "group": "V1"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), bounded-torsion reduction; transposition to global cohomology"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "id": "lem-weil-pbc-pullback-iso-nsmul-devissage",
+ "title": "lem-weil-pbc-pullback-iso-nsmul-devissage",
+ "statement": "For schemes X Y, morphism u : Y ⟶ X, compact and quasi-separated, if for every prime r and every sheaf G with r • 𝟙 G = 0 all maps cohomologyMap u G q are bijective, then for every n > 0 and sheaf G with n • 𝟙 G = 0 all maps cohomologyMap u G q are bijective. Notation and conventions are those of [def-pc-scheme], [def-weil-pbc-scheme-conventions], [def-weil-pbc-abelian-etale-sheaves], [def-weil-pbc-cohomology-pullback], [def-weil-pbc-etale-cohomology], [def-weil-pbc-inverse-image].",
+ "proof": [
+  {
+   "text": "Define P(G) as bijectivity in every degree. The pullback long exact ladder and the five lemma establish extension closure in positive degrees; degree zero uses the initial injection and the four lemma.",
+   "uses": [
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply ObjectProperty.prop_of_nsmul_id_eq_zero to P, the extension closure just established, and hprime. The library theorem handles the n=1 case by the prime 2 and the inductive kernel-image sequence.",
+   "uses": [
+    "lem-weil-pbc-prime-factor-devissage"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-prime-factor-devissage"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology of sheaves killed by n prime factor devissage",
+   "results": "No direct Mathlib theorem found; only general exact-sequence and abelian-category lemmas.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "torsion sheaf filtered colimit cohomology pullback bijective",
+   "results": "No theorem combining torsion devissage with sheaf cohomology pullback was found.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -R 'filtered.*colimit\\|bijective.*cohomology' Mathlib/CategoryTheory Mathlib/Algebra --include='*.lean'",
+   "results": "Only general filtered-colimit and five-lemma infrastructure; no matching result.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of cohomological functors closed under extensions and filtered colimits",
+   "results": "Eight derived-category/K-injective hits; no matching theorem.",
+   "date": "2026-10-12",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective",
+   "results": "Mathlib.Algebra.FiveLemma contains the exact additive five lemma used in the bounded-torsion proof.",
+   "date": "2026-10-12",
+   "verdict": "ingredient used"
+  },
+  {
+   "tool": "grep",
+   "query": "rg prop_of_nsmul|bijective.*cohomology|cohomology.*(colimit|isIso) lean/WeilConjectures lean/Sheaf",
+   "results": "Found proved ObjectProperty.prop_of_nsmul_id_eq_zero and cohomologyMap_map. Found H_map_isColimit_of_isFiltered, a general filtered-colimit ingredient, but no theorem with either new statement.",
+   "date": "2026-10-12",
+   "verdict": "ingredients only; induction reused"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PullbackIsoNsmulDevissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackIsoNsmulDevissage.lean",
+  "declaration": "AlgebraicGeometry.Etale.pullback_cohomology_bijective_of_nsmul",
+  "statement": "theorem pullback_cohomology_bijective_of_nsmul {X Y : Scheme.{u}} (u : Y ⟶ X) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] (hprime : ∀ (r : ℕ), Nat.Prime r → ∀ (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}), r • 𝟙 G = 0 → ∀ (q : ℕ), Function.Bijective (cohomologyMap u G q)) {n : ℕ} (hn : 0 < n) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : n • 𝟙 G = 0) : ∀ (q : ℕ), Function.Bijective (cohomologyMap u G q)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff4a6",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T013435-L-839109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff4a6",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T013435-L-839109",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, source reductions, dependency declarations, compilation and axiom results."
+ }
+}

@@ -27,76 +27,28 @@
  ],
  "proof": [
   {
-   "text": "*Functoriality of $H^q$ and naturality of $u^*$.* For a scheme $T$ and a morphism $\\varphi:G\\to G'$ of abelian sheaves on $T_{\\Et}$, $H^q(\\varphi):H^q(T_{\\Et},G)\\to H^q(T_{\\Et},G')$ is defined in the statement of [lem-weil-pbc-cohomology-pullback-functorial] from any lift $\\tilde\\varphi:I^\\bullet\\to I'^\\bullet$ of $\\varphi$ to K-injective resolutions $s:G\\to I^\\bullet$, $s':G'\\to I'^\\bullet$, and does not depend on the lift. Hence $\\varphi\\mapsto H^q(\\varphi)$ is a functor: $\\mathrm{id}$ is a lift of $\\mathrm{id}_G$, so $H^q(\\mathrm{id}_G)=\\mathrm{id}$; if $\\tilde\\varphi$ lifts $\\varphi$ and $\\tilde\\psi$ lifts $\\psi:G'\\to G''$ (resolution $s''$), then $\\tilde\\psi\\tilde\\varphi s\\simeq\\tilde\\psi s'\\varphi\\simeq s''\\psi\\varphi$, so $\\tilde\\psi\\tilde\\varphi$ lifts $\\psi\\varphi$ and $H^q(\\psi\\varphi)=H^q(\\psi)H^q(\\varphi)$. In particular $H^q(\\varphi)$ is bijective when $\\varphi$ is an isomorphism (with inverse $H^q(\\varphi^{-1})$). Clause 3 of the same lemma gives, for every morphism $\\varphi:G\\to G'$ of abelian sheaves on $X_{\\Et}$, $u^*\\circ H^q(\\varphi)=H^q(u^{-1}\\varphi)\\circ u^*$ (naturality of $u^*$ in the sheaf).",
+   "text": "Apply the torsion-colimit reduction theorem to F.",
    "uses": [
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-pullback-iso-torsion-colimit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/_section.md",
-    "place": "written by the agent; used implicitly in the colimit and five-lemma arguments of the proof of Stacks Lemma 0A4B (etale-cohomology.tex, lemma-proper-base-change-in-terms-of-injectives)"
-   }
+   "elementary": false
   },
   {
-   "text": "*A torsion sheaf is the colimit of its $n$-torsion subsheaves.* Let $F$ be a torsion abelian sheaf on $X_{\\Et}$ [def-weil-pbc-torsion-etale-sheaf]. Let $N$ be the set of positive integers ordered by divisibility, a directed poset, hence a filtered small category; for $n\\in N$ let $F[n]=\\ker(n:F\\to F)$ [def-pur-abelian-sheaf-kernel], with the inclusions $j_{nm}:F[n]\\subseteq F[m]$ for $n\\mid m$ and $j_n:F[n]\\subseteq F$. Let $(L,(\\iota_n)_n)$ be the colimit of $n\\mapsto F[n]$ in $\\Ab(X_{\\Et})$ [def-weil-pbc-category-colimit]; the canonical map $c_F:L\\to F$, characterized by $c_F\\circ\\iota_n=j_n$, is an isomorphism: this is the definition of a torsion sheaf in [def-weil-pbc-torsion-etale-sheaf]. Moreover $n\\cdot F[n]=0$ for every $n$, since $F[n]$ is the kernel of $n$. (Stacks writes this as $\\mathcal F=\\colim\\mathcal F[n]$. The imported [lemma-weil-pbc-torsion-filtered-union] proves the same for the other definition of torsion, \"every local section is locally killed by a positive integer\"; it is not needed here, since the statement uses [def-weil-pbc-torsion-etale-sheaf], where it is the definition.)",
+   "text": "For every positive n use the prime-factor dévissage theorem.",
    "uses": [
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-pur-abelian-sheaf-kernel",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-pullback-iso-nsmul-devissage"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), second paragraph: \"Then $\\mathcal F=\\colim\\mathcal F[n]$\""
-   }
-  },
-  {
-   "text": "*Sheaves killed by a positive integer.* Claim: for every integer $n\\ge1$ and every abelian sheaf $G$ on $X_{\\Et}$ with $nG=0$ (multiplication by $n$ is the zero endomorphism), $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ is bijective for every $q\\ge0$. Induction on the number $\\Omega(n)$ of prime factors of $n$ counted with multiplicity. If $\\Omega(n)=0$, then $n=1$, $G=0$, so $2G=0$ and the hypothesis of the lemma (with $r=2$) applies. If $\\Omega(n)=1$, $n$ is a prime and the hypothesis applies. Let $\\Omega(n)\\ge2$, choose a prime $r\\mid n$ and put $m=n/r$, so $\\Omega(m)=\\Omega(n)-1\\ge1$. By [lem-weil-pbc-prime-factor-devissage] (for $n>1$, $r\\mid n$, $G$ killed by $n$) there is a short exact sequence $0\\to G_1\\xrightarrow{\\alpha}G\\xrightarrow{\\beta}G_2\\to0$ in $\\Ab(X_{\\Et})$, with $G_1=G[r]=\\ker(r)$, $G_2=rG$ the image of $r:G\\to G$ (isomorphic to Stacks' $G/G[r]$), $\\beta$ the corestriction of $r$, $rG_1=0$ and $mG_2=0$. By [lem-weil-pbc-pullback-cohomology-long-exact-ladder]: (1) $0\\to u^{-1}G_1\\to u^{-1}G\\to u^{-1}G_2\\to0$ is exact on $Y_{\\Et}$ (the ladder lemma derives this from the exactness of $u^{-1}$); (2) both sequences have long exact cohomology sequences with connecting maps $\\delta^q_X,\\delta^q_Y$; (3) the maps $u^*$ commute with $H^q(\\alpha),H^q(\\beta)$ and the $\\delta^q$. Fix $q\\ge0$. In the category of abelian groups consider the commutative diagram whose top row is $H^{q-1}(X,G_2)\\xrightarrow{\\delta^{q-1}_X}H^q(X,G_1)\\xrightarrow{H^q(\\alpha)}H^q(X,G)\\xrightarrow{H^q(\\beta)}H^q(X,G_2)\\xrightarrow{\\delta^q_X}H^{q+1}(X,G_1)$, whose bottom row is the same on $Y$ for the sheaves $u^{-1}G_1,u^{-1}G,u^{-1}G_2$, and whose five vertical maps are the maps $u^*$; for $q=0$ the first entry of each row is replaced by $0$ (and the first vertical map by $0\\to0$), which keeps the rows exact because the long exact sequences begin with $0\\to H^0(G_1)$. The squares commute by (3) (the first one trivially when $q=0$), and the rows are exact at the three middle places by (2). The four outer vertical maps are bijective: $u^*$ on $H^{q-1}(G_2)$ and $H^q(G_2)$ by the induction hypothesis for $G_2$ ($mG_2=0$, $\\Omega(m)<\\Omega(n)$), $u^*$ on $H^q(G_1)$ and $H^{q+1}(G_1)$ by the hypothesis of the lemma for $G_1$ ($rG_1=0$). This uses the induction hypothesis and the hypothesis of the lemma in the degrees $q-1$, $q$, $q+1$ at once, which is why both are stated for all $q$. Bijective homomorphisms are the isomorphisms of the abelian category of abelian groups, so the five lemma [lem-weil-pbc-five-lemma] (Mathlib, in this form for groups: AddMonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective) shows that $u^*:H^q(X_{\\Et},G)\\to H^q(Y_{\\Et},u^{-1}G)$ is bijective. This completes the induction. (The same induction, for another property stable under extensions, is lemma-weil-pbc-prime-factor-induction of unit sk-thm-iff, and in Lean CategoryTheory.ObjectProperty.prop_of_nsmul_id_eq_zero; it is written out here.)",
-   "uses": [
-    "lem-weil-pbc-prime-factor-devissage",
-    "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-    "lem-weil-pbc-five-lemma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), third paragraph: \"If $n=\\ell n'$ ... the long exact sequence of higher direct images (and the 5 lemma). In this way we reduce to the case that $\\mathcal F$ is annihilated by a prime number $\\ell$\"; transposed by the agent from higher direct images to global cohomology"
-   }
-  },
-  {
-   "text": "*Passage to the colimit.* Let $F$ be torsion, with $L,\\iota_n,j_n,j_{nm},c_F$ as in Step 2; fix $q\\ge0$. By Step 3 (each $F[n]$ is killed by $n$) the maps $u^*_n:H^q(X,F[n])\\to H^q(Y,u^{-1}F[n])$ are bijective. (a) On $X$: $n\\mapsto H^q(X,F[n])$, with transition maps $H^q(j_{nm})$, is a directed system of abelian groups (Step 1), with colimit $\\varinjlim_nH^q(X,F[n])$ and coprojections $\\lambda_n$ [def-weil-directed-colimit-abelian-groups]; the maps $H^q(\\iota_n)$ are compatible (Step 1: $\\iota_m j_{nm}=\\iota_n$), and the induced canonical map $\\kappa_X:\\varinjlim_nH^q(X,F[n])\\to H^q(X,L)$, $\\kappa_X\\lambda_n=H^q(\\iota_n)$, is bijective by [lem-weil-pbc-cohomology-filtered-colimit], $X$ being quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. (b) On $Y$: let $(L',(\\iota'_n))$ be the colimit of $n\\mapsto u^{-1}F[n]$ (transition maps $u^{-1}j_{nm}$); the canonical map $\\theta:L'\\to u^{-1}L$, $\\theta\\iota'_n=u^{-1}\\iota_n$, is an isomorphism by [lem-weil-pbc-inverse-image-preserves-colimits], and $\\kappa_Y:\\varinjlim_nH^q(Y,u^{-1}F[n])\\to H^q(Y,L')$, $\\kappa_Y\\lambda'_n=H^q(\\iota'_n)$, is bijective by [lem-weil-pbc-cohomology-filtered-colimit], $Y$ being quasi-compact and quasi-separated. (c) By naturality (Step 1) $u^*_mH^q(j_{nm})=H^q(u^{-1}j_{nm})u^*_n$, so the $u^*_n$ form a morphism of directed systems and induce $\\mu=\\varinjlim u^*_n$ with $\\mu\\lambda_n=\\lambda'_nu^*_n$; since each $u^*_n$ is bijective, the inverses $(u^*_n)^{-1}$ also form a morphism of directed systems, and the map they induce is inverse to $\\mu$ by the uniqueness in the universal property, so $\\mu$ is bijective. (d) For every $n$, using Step 1, $H^q(\\theta)\\kappa_Y\\mu\\lambda_n=H^q(\\theta)H^q(\\iota'_n)u^*_n=H^q(u^{-1}\\iota_n)u^*_n=u^*_LH^q(\\iota_n)=u^*_L\\kappa_X\\lambda_n$, where $u^*_L:H^q(X,L)\\to H^q(Y,u^{-1}L)$; by the uniqueness in the universal property of $\\varinjlim_nH^q(X,F[n])$, $u^*_L\\kappa_X=H^q(\\theta)\\kappa_Y\\mu$. The right side is a composite of bijections ($H^q(\\theta)$ by Step 1, $\\theta$ being an isomorphism) and $\\kappa_X$ is bijective, so $u^*_L$ is bijective. (e) Finally naturality for the isomorphism $c_F:L\\to F$ gives $u^*_F\\circ H^q(c_F)=H^q(u^{-1}c_F)\\circ u^*_L$, with $H^q(c_F)$ and $H^q(u^{-1}c_F)$ bijective (Step 1), so $u^*_F:H^q(X_{\\Et},F)\\to H^q(Y_{\\Et},u^{-1}F)$ is bijective. As $q\\ge0$ was arbitrary, this proves the lemma.",
-   "uses": [
-    "lem-weil-pbc-cohomology-filtered-colimit",
-    "lem-weil-pbc-inverse-image-preserves-colimits",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-directed-colimit-abelian-groups",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-scheme-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), second paragraph (the inverse images commute with colimits, higher direct images commute with filtered colimits by Lemma 09Z1, \"Thus it suffices to prove the result in case F is annihilated by a positive integer n\"), with Theorem 09YQ (etale-cohomology-theorem-colimit) for global cohomology on a qcqs scheme in place of Lemma 09Z1; transposition by the agent"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "def-weil-pbc-torsion-etale-sheaf",
-  "def-pur-abelian-sheaf-kernel",
-  "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-prime-factor-devissage",
-  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
-  "lem-weil-pbc-five-lemma",
-  "lem-weil-pbc-cohomology-filtered-colimit",
-  "lem-weil-pbc-inverse-image-preserves-colimits",
-  "def-weil-directed-colimit-abelian-groups",
-  "def-weil-pbc-scheme-conventions"
+  "lem-weil-pbc-pullback-iso-torsion-colimit",
+  "lem-weil-pbc-pullback-iso-nsmul-devissage"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "the devissage of the proof of Lemma 0A4B (lemma-proper-base-change-in-terms-of-injectives), paragraphs 2-3, transposed by the agent from the exchange maps on higher direct images to the pullback maps on global cohomology, with Theorem 09YQ in place of Lemma 09Z1; Stacks does not state this lemma"
+  "place": "dévissage and filtered-colimit reduction"
  },
  "mathlib_searches": [
   {
@@ -203,5 +155,15 @@
   "group": "T1",
   "result": "pass",
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "X-ff4a6",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261012T013435-L-839109",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all three node records, source reductions, dependency declarations, compilation and axiom results."
  }
 }
