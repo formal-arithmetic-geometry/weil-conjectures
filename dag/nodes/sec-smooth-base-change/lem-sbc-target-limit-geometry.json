@@ -1,0 +1,117 @@
+{
+ "id": "lem-sbc-target-limit-geometry",
+ "kind": "statement",
+ "title": "Geometric hypotheses for the pulled-back target limit",
+ "statement": "Let S be affine and p:X→S, g:T→S be scheme morphisms [def-weil-pbc-scheme-conventions]. Let D:I→Over T be small cofiltered with affine transitions and qcqs stage schemes, and c a cone with limiting underlying scheme cone. Set W=T×_S X [def-pc-fibre-product] and B=Over.pullback(pr_T). Then D followed by B has affine transitions, all its structure maps to X are quasi-compact and quasi-separated, its limit-cone structure map to X is quasi-compact and quasi-separated, and the underlying scheme cone B(c) is limiting.",
+ "source": {
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 09Z1 geometric hypotheses; AffineTransitionLimit.isAffineHom_π_app; Comma.Over.Pullback; Limits.Constructions.Over.Connected"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Paste the pullback square for U×_T W with that for W=T×_S X. Base-change stability transfers quasi-compactness and quasi-separatedness of U→S to U×_T W→X. Each stage U→S is qcqs since U is qcqs and S is affine. MorphismProperty.overPullbackMap gives affine transitions. These assertions are proved directly in the delivered Lean using Mathlib.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a stage (cofilteredness ensures one exists). Mathlib isAffineHom_π_app makes the corresponding original cone projection affine. The cone equation expresses the limit map to S as its composite with the qcqs stage map, so it is qcqs; apply the same pasted pullback square. Over.forget reflects the original limit; Over.pullback, being a right adjoint, preserves it; Over.forget preserves the connected resulting limit. All these assertions are proved directly in the delivered Lean.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent K2 stage 3",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tag 09Z1 geometric hypotheses; AffineTransitionLimit.isAffineHom_π_app; Comma.Over.Pullback; Limits.Constructions.Over.Connected"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale inverse image composition higher direct image base change target functor",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image stalk on inverse limit of schemes zero detected at finite stage",
+   "results": "Structure-sheaf zero-detection theorems only; no target-stalk coefficient comparison. Loogle Over.pullback locates the right adjoint used in the geometry proof.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeTarget.*Iso|higherDirectImage.*baseChangeTarget; Over.pullback; isAffineHom_π_app",
+   "results": "baseChangeTargetFunctorIso in Coefficients identifies the single-complex target with the higher image. No natural comparison for iterated pullback stalk systems. Geometry follows directly from Mathlib overPullbackMap, IsPullback.paste_vert, isAffineHom_π_app and preservation of connected limits.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseChangeTargetLimitZeroDetection",
+  "date": "2026-10-12",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (2): limits; target coefficient identification and base-changed system",
+   "via": [
+    "lem-sbc-target-limit-zero-detection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeTargetLimitGeometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeTargetLimitGeometry.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChange_target_limit_geometry",
+  "statement": "theorem baseChange_target_limit_geometry {X S T : Scheme.{u}} [IsAffine S] (p : X ⟶ S) (g : T ⟶ S) {I : Type u} [Category.{u} I] [IsCofiltered I] (D : I ⥤ Over T) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left] (c : Cone D) (hc : IsLimit ((Over.forget T).mapCone c)) : let B := Over.pullback (pullback.fst g p) (∀ {i j : I} (f : i ⟶ j), IsAffineHom ((D ⋙ B).map f).left) ∧ (∀ i, QuasiCompact (((D ⋙ B).obj i).hom ≫ pullback.snd g p)) ∧ (∀ i, QuasiSeparated (((D ⋙ B).obj i).hom ≫ pullback.snd g p)) ∧ QuasiCompact ((B.mapCone c).pt.hom ≫ pullback.snd g p) ∧ QuasiSeparated ((B.mapCone c).pt.hom ≫ pullback.snd g p) ∧ Nonempty (IsLimit ((Over.forget (pullback g p)).mapCone (B.mapCone c)))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T085258-L-22769",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261012T085258-L-22769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

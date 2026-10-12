@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.BaseChangeTargetStalkHigherImageComparison
+import Sheaf.AlgebraicGeometry.BaseChangeTargetLimitGeometry
 
 /-! # Finite-stage detection of zero in target stalks
 
@@ -50,6 +50,41 @@ theorem baseChange_target_limit_zero_detection (c : Cone D)
     (ζ : baseChangeTargetStalk Λ p g q F x (D.obj i))
     (hζ : (baseChangeTargetStalkMap Λ p g q F x (c.π.app i)).hom ζ = 0) :
     ∃ (j : I) (f : j ⟶ i),
-      (baseChangeTargetStalkMap Λ p g q F x (D.map f)).hom ζ = 0 := by sorry
+      (baseChangeTargetStalkMap Λ p g q F x (D.map f)).hom ζ = 0 := by
+  let B := Over.pullback (pullback.fst g p)
+  let G := ((pullback.fst g p)^*[ModuleCat.{u + 1} Λ]).obj F
+  obtain ⟨ha, hqc, hqs, hlqc, hlqs, hlim⟩ :=
+    baseChange_target_limit_geometry p g D c hc
+  let : ∀ {i j : I} (f : i ⟶ j), IsAffineHom ((D ⋙ B).map f).left := ha
+  let : ∀ i, QuasiCompact (((D ⋙ B).obj i).hom ≫ pullback.snd g p) := hqc
+  let : ∀ i, QuasiSeparated (((D ⋙ B).obj i).hom ≫ pullback.snd g p) := hqs
+  let : QuasiCompact ((B.mapCone c).pt.hom ≫ pullback.snd g p) := hlqc
+  let : QuasiSeparated ((B.mapCone c).pt.hom ≫ pullback.snd g p) := hlqs
+  obtain ⟨E, hE⟩ := baseChange_target_stalk_higher_image_comparison Λ p g q F x
+  have hz : ((X.uliftPointSmallEtale x).sheafFiber.map
+      (higherDirectImageOverMap Λ (pullback.snd g p) G q
+        ((B.mapCone c).π.app i))).hom ((E (D.obj i)).hom.hom ζ) = 0 := by
+    have hw := congrArg (fun f ↦ f.hom ζ) (hE c.pt (D.obj i) (c.π.app i))
+    dsimp only [ModuleCat.hom_comp, LinearMap.comp_apply] at hw
+    change (E c.pt).hom.hom
+      ((baseChangeTargetStalkMap Λ p g q F x (c.π.app i)).hom ζ) = _ at hw
+    rw [hζ, map_zero] at hw
+    exact hw.symm
+  obtain ⟨j, f, hf⟩ :=
+    (higherDirectImage_limit Λ (pullback.snd g p) G (D ⋙ B) (B.mapCone c)
+      hlim.some q x).2 i ((E (D.obj i)).hom.hom ζ) hz
+  refine ⟨j, f, ?_⟩
+  have hw := congrArg (fun h ↦ h.hom ζ) (hE (D.obj j) (D.obj i) (D.map f))
+  have he : (E (D.obj j)).hom.hom
+      ((baseChangeTargetStalkMap Λ p g q F x (D.map f)).hom ζ) = 0 := by
+    dsimp only [ModuleCat.hom_comp, LinearMap.comp_apply] at hw
+    change _ = ((X.uliftPointSmallEtale x).sheafFiber.map
+      (higherDirectImageOverMap Λ (pullback.snd g p) G q
+        ((D ⋙ B).map f))).hom ((E (D.obj i)).hom.hom ζ) at hw
+    rw [hf] at hw
+    exact hw
+  exact (ConcreteCategory.bijective_of_isIso (E (D.obj j)).hom).1
+    (by simpa only [map_zero] using he)
+
 
 end AlgebraicGeometry.Etale
