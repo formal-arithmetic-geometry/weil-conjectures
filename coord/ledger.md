@@ -9630,3 +9630,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:38 L: merged deliver/H3/Sheaf.LinearAlgebra.SymmetricAlgebra.DegreeExact (stage 3; reviewer PASS; first push; landing 20261012T213849-L-1208317 (proof); batch 20261012T213845; modules 1; new nodes 0)
 - 21:38 L: merged deliver/J1/Sheaf.AlgebraicGeometry.ClosedImmersionUnitStalkKernel (stage 3; reviewer PASS; first push; landing 20261012T213849-L-1208466 (interface); batch 20261012T213845; modules 3; new nodes 2)
 - 21:38 L: merged deliver/J1/Sheaf.AlgebraicGeometry.StrictLocalSectionPullback (stage 3; reviewer PASS; after a return; landing 20261012T213850-L-1208603 (proof); batch 20261012T213845; modules 1; new nodes 0)
+- 21:38 L: merged deliver/J1/Sheaf.RingTheory.PseudoCoherentIffAllM (stage 3; reviewer PASS; first push; landing 20261012T213850-L-1208722 (interface); batch 20261012T213845; modules 2; new nodes 1)

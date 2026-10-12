@@ -25,35 +25,45 @@
  ],
  "proof": [
   {
-   "text": "Suppose C is pseudo-coherent, with a quasi-isomorphism from a bounded-above complex P of finite free R-modules. For any integer m, the stupid truncation of P in degrees at least m is bounded and finite free; its map to P, followed by the quasi-isomorphism to C, is an isomorphism on cohomology in degrees greater than m and a surjection in degree m. Thus C is m-pseudo-coherent.",
+   "text": "Given a bounded above finite free representative E and its derived isomorphism to C, take the brutal truncation of E in degrees at least m. Define its inclusion degreewise by the canonical term isomorphisms in degrees at least m and zero below m. The three component maps computing cohomology are isomorphisms above m, so the induced cohomology map is an isomorphism. At m, the middle and next maps are isomorphisms, hence the cycles map is an isomorphism and the homology map is epi. The truncation is bounded and finite free, including when m exceeds the upper bound. Transport its map through Q and compose with the derived isomorphism to C. This is the required m-pseudo-coherent witness.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), proof of (1) implies (2)"
-   }
+   "elementary": true
   },
   {
-   "text": "Conversely assume C is m-pseudo-coherent for every m. The witness for m=0 gives an upper bound b with H^i(C)=0 for i>b. Construct, by descending induction from degree b, a bounded-above complex F of finite free modules and a map F to C which is an isomorphism on H^i for i>n and surjective on H^n at stage n. If the stage-n map has cone M, the long exact sequence gives H^i(M)=0 for i>=n. The stage-n complex F (zero below degree n) is a bounded complex of finite free modules, so the identity shows it is k-pseudo-coherent for every k, in particular n-pseudo-coherent; C is (n-1)-pseudo-coherent by hypothesis. The first clause of [lem-pc-ring-pseudo-coherent-distinguished-triangle] with m=n-1, applied to the triangle F to C to M to F[1], makes M (n-1)-pseudo-coherent. Applying [lem-sc-finite-cohomology] with m=n-1 to M (which has H^i(M)=0 for i>n-1) therefore makes H^{n-1}(M) finite. Choose a finite free module mapping onto this group and lift generators to cycles (f_j,c_j) of the cone, with f_j in Ker(d^n_F) and c_j in C^{n-1} compatible with the differential; sending the j-th basis vector to f_j in F^n and to c_j in C^{n-1} is a chain map; adjoining it in degree n-1 extends F so that the map is an isomorphism in degree n and surjective in degree n-1. Repeating downward constructs F bounded above with a quasi-isomorphism F to C, so C is pseudo-coherent.",
+   "text": "For the converse, write E to C for the degree-zero approximation with upper term bound b. Above max(b,0), E has zero cohomology and its map induces an isomorphism, so C has zero cohomology.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For any bounded finite free complex F and chain map g:F to C, the identity on F witnesses (n+1)-pseudo-coherence. Apply the first clause of the distinguished-triangle lemma to the mapping-cone triangle at n and use the assumed n-pseudo-coherence of C. This gives n-pseudo-coherence of Cone(g). If its cohomology vanishes above n, the finite-cohomology lemma gives finite generation of H^n(Cone(g)). Thus the finite-cone hypothesis of the construction lemma holds.",
    "uses": [
     "lem-pc-ring-pseudo-coherent-distinguished-triangle",
     "lem-sc-finite-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "More on Algebra, Lemma 15.66.5 (Tag 064U), proof of (2) implies (1), using Tags 064R and 064S"
-   }
+   "elementary": false
+  },
+  {
+   "text": "When R fits in the module universe, apply the finite-cone free-model construction to C, its upper cohomology bound and the finite cone groups proved in the preceding step. It yields a bounded above finite free F with a chain-level quasi-isomorphism g:F to C. Q sends g to an isomorphism, giving the defining pseudo-coherent representative.",
+   "uses": [
+    "lem-pc-ring-finite-cone-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For completeness with independent universes, if R does not fit in the module universe, every free module M there is zero. Otherwise a nontrivial free M has faithful scalar action; R injects into the function type M to M by scalar multiplication, contradicting the size assumption. Thus every approximation E is termwise zero. For each i use the (i-1)-approximation to force H^i(C)=0. The zero map from the zero complex to C is a quasi-isomorphism, so the zero complex gives a bounded above finite free representative.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-ring-pseudo-coherent-distinguished-triangle",
-  "lem-sc-finite-cohomology"
+  "lem-sc-finite-cohomology",
+  "lem-pc-ring-finite-cone-free-model"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "More on Algebra, Lemma 15.66.5 (Tag 064U)"
+  "place": "Tag 064U, proof of (1) iff (2); explicit universe-degenerate case added by J1"
  },
  "mathlib_searches": [
   {
@@ -160,5 +170,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261012T213850-L-1208722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
