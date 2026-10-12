@@ -16,70 +16,44 @@
  ],
  "proof": [
   {
-   "text": "Form the pullback diagram with stage U times_S X_i and limit U times_S X, taking maps from pullback universal properties. The same universal property proves the limit assertion. Qcqs morphisms remain qcqs after base change; since U is affine the stages are qcqs schemes. Affine transition morphisms remain affine. Restrict the sheaves and their transition maps along the second projections, transport the identity, composition and H-transition laws through the inverse-image composition isomorphisms, and put all sheaves into degree-zero single complexes, zero below zero. Inverse image, being a left adjoint, preserves the coefficient colimit; termwise colimits of single complexes are again single complexes. This supplies D,c,hc,compact,quasiSeparated,affine,F,phi,hidentity,hcomposition,a,hbelow,G,eG,hG,L,hL in the presentation.",
+   "text": "Apply abelianRawPullback_coherent to obtain natural transformations tau and beta on the whole small etale site, with the prescribed components and identity, composition and cocone equations.",
    "uses": [
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-affine-morphism-permanence"
+    "lem-sbc-abelian-raw-pullback-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/09Z1",
-    "place": "Lemma 59.51.7 proof, base change to affine etale U; Tag 03Q8 restricted-cohomology presentation, and Tag 0EZM canonical maps of complexes"
-   }
+   "elementary": false
   },
   {
-   "text": "Take H to be the stage cohomology groups of these single complexes. Define their maps by the canonical derived pullback followed by the transition complex map. Define P by homology applied to the derived adjunction unit and the composition comparison with global sections: this is exactly hP in the presentation. Pullback and coefficient composition give hH. At the limit take B with these canonical cohomology groups and their pullback/coefficient legs; this gives eH,eB and hB, with no assertion that B is a colimit. Before evaluating on U, construct the raw maps as additive natural transformations tau and beta on the small etale site. Additivity follows because the derived pullback functor is additive and precomposition/postcomposition in a preadditive category are additive. For restriction V to W, naturality of the inverse-image composition comparison and the single-functor comparison moves the source precomposition across these two factors; derived pullback preserves composition. Postcompose with the same shift and coefficient maps. This proves the naturality square; the components are the explicit raw functions by construction. Evaluate tau and beta on U to obtain exactly the prescribed diagram transitions and cocone legs.",
+   "text": "Define K.obj i to be the raw stage group at U and K.map f to be tau f evaluated at U. The identity and composition equations give the functor laws. Define B with the raw limit group as vertex and beta i at U as legs; the cocone equation gives naturality. Stage and limit isomorphisms are identities, so htrans and hleg are reflexivity.",
    "uses": [
-    "def-weil-pbc-etale-cohomology",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-inverse-image-composition"
+    "lem-sbc-abelian-raw-pullback-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/09Z1",
-    "place": "Lemma 59.51.7 proof, base change to affine etale U; Tag 03Q8 restricted-cohomology presentation, and Tag 0EZM canonical maps of complexes"
-   }
+   "elementary": true
   },
   {
-   "text": "The sheafification/free-forgetful/Yoneda adjunctions identify maps from the free abelian represented sheaf with sections on the corresponding etale object. Its inverse image represents sections on U times_S X_i. Restriction to this etale scheme preserves injectives because its left adjoint is exact: extension by zero is the sheafification of the direct sum over lifts, and exactness can be checked on geometric stalks, where it is a direct sum of abelian groups. Apply this sections equivalence to a bounded-below injective resolution and identify derived Hom from the degree-zero free sheaf with restricted cohomology. The fully faithful bounded-below inclusion identifies the resulting Hom groups with unbounded derived cohomology of the single complexes. This supplies additive stageIso and limitIso. Naturality of these adjunctions and of the inverse-image single/shift comparisons identifies each cocone leg with exactly raw pullback and the specified coefficient map, proving compatibility. This construction uses no class descent or continuity conclusion. The same naturality calculation for each stage transition yields K.map a (e_i.hom t) = e_j.hom (rawPullback_a t), not just the coprojection compatibility. Thus the isomorphisms identify both diagrams and cocones with the specified raw functions. The empty affine object has zero groups, and degree zero is the ordinary sections adjunction. In particular all restrictions commute with the components of tau and beta, since these have been constructed as natural transformations; this assertion is before cohomology continuity and asserts no stage vanishing.",
+   "text": "Apply abelianRawCocone_complex_presentation to this K and B. Specializing the component equations of tau and beta to U gives its transition and leg hypotheses. Apply EtaleComplexCohomologyPresentation.isColimit, which applies the complex continuity theorem, to get a colimit after double-opposite reindexing. IsColimit.ofWhiskerEquivalence transports it back to B.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-etale-restriction-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "https://stacks.math.columbia.edu/tag/03Q8",
-    "place": "Restricted cohomology presentation; the proof refers to Cohomology on Sites 21.7.4 and 21.20.3; explicit derived-Hom naturality elaboration by N2"
-   }
-  },
-  {
-   "text": "Apply the existing complex cohomology continuity theorem to the base-changed qcqs scheme system and the single coefficient complexes of common lower bound zero constructed in the preceding steps. Its conclusion says that the canonical cohomology cocone B is colimiting. Hence colimit.desc K B is an isomorphism. In the category of abelian groups every isomorphism is injective, giving the asserted comparison injectivity. Only this half of continuity is retained. Package these canonical maps and their equations in RawAffineColimitComparisonData, whose fields are actual categorical data and proofs; its Nonempty assertion uses no choice to define an object.",
-   "uses": [
+    "lem-sbc-abelian-raw-cocone-complex-presentation",
+    "def-sbc-etale-complex-cohomology-presentation",
     "lem-weil-pbc-etale-cohomology-limit-complex-systems"
    ],
    "elementary": false
+  },
+  {
+   "text": "The unique isomorphism from the chosen colimit cocone of K to the colimiting B has hom equal to colimit.desc K B. ConcreteCategory.bijective_of_isIso makes it bijective and hence injective. Package the constructed data, component equations, identity isomorphisms and this injectivity into RawAffineColimitComparisonData.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "def-weil-pbc-etale-cohomology",
-  "prop-weil-pbc-derived-inverse-image-adjunction",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-sbc-abelian-raw-pullback-coherence",
+  "lem-sbc-abelian-raw-cocone-complex-presentation",
+  "def-sbc-etale-complex-cohomology-presentation",
   "lem-weil-pbc-etale-cohomology-limit-complex-systems"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent C2",
   "document": "https://stacks.math.columbia.edu/tag/09Z1",
-  "place": "lemma-relative-colimit proof, displayed colimit on affine etale test objects; Tag 03Q8 restricted cohomology and Tag 0EZM (lemma-colimit-variant-complexes), degree-zero single complexes; explicit derived-Hom map identifications written by R1"
+  "place": "lemma-relative-colimit affine-object cohomology comparison, implemented via algebraic coherence and geometric presentation, followed by existing Tag 0EZM continuity"
  },
  "mathlib_searches": [
   {
@@ -167,9 +141,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R1",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261012T213853-L-1209537",
+  "landing": "20261012T225300-L-1801689",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

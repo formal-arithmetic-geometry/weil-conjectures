@@ -7,11 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import Sheaf.AlgebraicGeometry.EtaleComplexCohomologyLimit
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.AbelianRawPullbackCoherence
+import Sheaf.AlgebraicGeometry.AbelianRawCoconeComplexPresentation
 
 /-! # Injectivity of the raw affine cohomology colimit comparison
 
@@ -129,6 +126,41 @@ theorem exists_raw_affine_colimit_comparison_injective {S : Scheme.{v}}
         (F i) (F j) (φ f) V t)
       (fun i V t ↦ abelianHigherDirectImageRawPullback (c.π.app (op i)).left
         (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p
-        (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i) V t)) := by sorry
+        (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i) V t)) := by
+  obtain ⟨τ, β, hτ, hβ, hτid, hτcomp, hβcomp⟩ :=
+    abelianRawPullback_coherent D c F φ hφid hφcomp H eH hH p
+  let K : I ⥤ AddCommGrpCat.{v + 1} :=
+    { obj := fun i ↦
+        (abelianHigherDirectImageRawPresheaf (D.obj (op i)).hom p (F i)).obj (op U)
+      map := fun f ↦ (τ f).app (op U)
+      map_id := fun i ↦ by rw [hτid]; rfl
+      map_comp := fun f g ↦ by rw [hτcomp]; rfl }
+  let B : Cocone K :=
+    { pt := (abelianHigherDirectImageRawPresheaf c.pt.hom p (colimit H)).obj (op U)
+      ι :=
+        { app := fun i ↦ (β i).app (op U)
+          naturality := fun i j f ↦ by
+            change (τ f).app (op U) ≫ (β j).app (op U) = (β i).app (op U) ≫ 𝟙 _
+            rw [Category.comp_id]
+            exact congrArg (fun t ↦ t.app (op U)) (hβcomp f) } }
+  have s := abelianRawCocone_complex_presentation D c hc F φ hφid hφcomp H eH hH p U
+    K B (fun i ↦ Iso.refl _) (Iso.refl _) (fun f t ↦ hτ f U t) (fun i t ↦ hβ i U t)
+  obtain ⟨hB'⟩ := s.isColimit
+  have hB : IsColimit B := IsColimit.ofWhiskerEquivalence (opOpEquivalence I) hB'
+  have hinj : Function.Injective (colimit.desc K B) := by
+    let e := (colimit.isColimit K).coconePointUniqueUpToIso hB
+    exact (ConcreteCategory.bijective_of_isIso e.hom).injective
+  exact ⟨
+    { τ := τ
+      β := β
+      K := K
+      B := B
+      eStage := fun i ↦ Iso.refl _
+      eLimit := Iso.refl _
+      hτ := hτ
+      hβ := hβ
+      htrans := fun _ _ ↦ rfl
+      hleg := fun _ _ ↦ rfl
+      hinj := hinj }⟩
 
 end AlgebraicGeometry.Etale
