@@ -22,9 +22,25 @@
  ],
  "proof": [
   {
-   "text": "Well-order a generating set, filter by spans of initial segments, identify each successive quotient with a cyclic quotient R/I, and apply the well-ordered union projective-dimension theorem.",
+   "text": "Use exists_wellFoundedLT to well-order the underlying set of the arbitrary module M. Define F(e) to be the span of all x <= e. Span monotonicity makes F monotone, and x belongs to F(x), so the filtration covers M.",
    "uses": [
-    "lem-weil-pbc-well-ordering-theorem",
+    "lem-weil-pbc-well-ordering-theorem"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each e let P be the supremum of F(i) for i < e and K its comap to F(e). Each generator x <= e either equals e or belongs to F(x) with x < e, hence F(e) is contained in span{e} + P. Write each x in F(e) as r e + b with b in P. Consequently the linear map f:R -> F(e)/K sending r to the class of r e is surjective. Its kernel is an ideal I of R; the linear first isomorphism theorem and ULift.moduleEquiv give ULift(R/I) isomorphic to F(e)/K. This also treats the zero quotient (I=R) and the least filtration index (P=0).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the cyclic bound to I. Transport its projective resolution along the preceding linear isomorphism by keeping its complex and composing the augmentation with the image of the isomorphism under ChainComplex.single₀. The composite remains a quasi-isomorphism and the terms above n remain zero. Thus every successive filtration quotient has the required length bound.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply hasProjectiveResolutionLE_of_wellOrderedUnion to F, its monotonicity, its covering property and the bounds just proved. Since M was arbitrary, this is HasGlobalDimensionLE R n.",
+   "uses": [
     "lem-weil-pbc-well-ordered-union-projective-dimension"
    ],
    "elementary": false
@@ -97,10 +113,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q3",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261012T194134-L-462645",
-  "kind": "interface",
+  "landing": "20261012T213438-L-1178890",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

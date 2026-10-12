@@ -2,8 +2,63 @@ module
 public import Sheaf.RingTheory.GlobalDimension
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Algebra.Module.ULift
+import Sheaf.RingTheory.WellOrderedUnionProjectiveDimension
+import Mathlib.LinearAlgebra.Isomorphisms
+
 @[expose] public section
 universe u v
+
+private theorem resolution_of_linearEquiv
+    {R : Type u} [CommRing R] {A B : Type (max u v)}
+    [AddCommGroup A] [Module R A] [AddCommGroup B] [Module R B]
+    (e : A ≃ₗ[R] B) (n : ℕ)
+    (h : ModuleCat.HasProjectiveResolutionLE (ModuleCat.of R A) n) :
+    ModuleCat.HasProjectiveResolutionLE (ModuleCat.of R B) n := by
+  obtain ⟨P, hP⟩ := h
+  exact ⟨{ complex := P.complex
+           projective := P.projective
+           π := CategoryTheory.CategoryStruct.comp P.π
+             ((ChainComplex.single₀ (ModuleCat R)).map e.toModuleIso.hom) }, hP⟩
+
+private theorem initial_span_quotient_cyclic
+    {R : Type u} [CommRing R] (M : ModuleCat.{max u v} R) [LinearOrder M]
+    (e : M) :
+    ∃ I : Ideal R, Nonempty
+      (ULift.{v} (R ⧸ I) ≃ₗ[R]
+        ((Submodule.span R {x : M | x ≤ e}) ⧸
+          ((⨆ i : {x : M // x < e}, Submodule.span R {x : M | x ≤ i.val}).comap
+            (Submodule.span R {x : M | x ≤ e}).subtype))) := by
+  let F : M → Submodule R M := fun e ↦ Submodule.span R {x : M | x ≤ e}
+  let P : Submodule R M := ⨆ i : {x : M // x < e}, F i.val
+  let K : Submodule R (F e) := P.comap (F e).subtype
+  have he : e ∈ F e := Submodule.subset_span (le_refl e)
+  let q : (F e) →ₗ[R] ((F e) ⧸ K) := K.mkQ
+  let f : R →ₗ[R] ((F e) ⧸ K) := (LinearMap.id : R →ₗ[R] R).smulRight (q ⟨e, he⟩)
+  have hle : F e ≤ Submodule.span R {e} ⊔ P := by
+    apply Submodule.span_le.mpr
+    intro x hx
+    rcases lt_or_eq_of_le hx with hx | rfl
+    · apply Submodule.mem_sup_right
+      exact (le_iSup (fun i : {x : M // x < e} ↦ F i.val) ⟨x, hx⟩)
+        (Submodule.subset_span (le_refl x))
+    · exact Submodule.mem_sup_left (Submodule.mem_span_singleton_self x)
+  have hf : Function.Surjective f := by
+    intro z
+    obtain ⟨x, rfl⟩ := K.mkQ_surjective z
+    obtain ⟨a, ha, b, hb, hab⟩ := Submodule.mem_sup.mp (hle x.property)
+    obtain ⟨r, rfl⟩ := Submodule.mem_span_singleton.mp ha
+    refine ⟨r, ?_⟩
+    change r • K.mkQ ⟨e, he⟩ = K.mkQ x
+    rw [← map_smul]
+    apply (Submodule.Quotient.eq K).mpr
+    change (r • e - x.val) ∈ P
+    have heq : r • e - x.val = -b := by rw [← hab]; abel
+    rw [heq]
+    exact P.neg_mem hb
+  exact ⟨LinearMap.ker f,
+    ⟨(ULift.moduleEquiv : ULift.{v} (R ⧸ LinearMap.ker f) ≃ₗ[R]
+      (R ⧸ LinearMap.ker f)).trans (f.quotKerEquivOfSurjective hf)⟩⟩
+
 namespace Ring
 /-- Cyclic modules control global dimension via the well-ordered filtration argument.
 
@@ -25,5 +80,20 @@ theorem hasGlobalDimensionLE_of_cyclic
       ModuleCat.HasProjectiveResolutionLE
         (ModuleCat.of R (ULift.{v} (R ⧸ I))) n) :
     HasGlobalDimensionLE.{u, max u v} R n := by
-  sorry
+  classical
+  intro M
+  obtain ⟨ord, wf⟩ := exists_wellFoundedLT M
+  let : LinearOrder M := ord
+  let : WellFoundedLT M := wf
+  let F : M → Submodule R M := fun e ↦ Submodule.span R {x : M | x ≤ e}
+  have hF : Monotone F := by
+    intro a b hab
+    exact Submodule.span_mono (fun x hx ↦ le_trans hx hab)
+  have hcover : ∀ x : M, ∃ e : M, x ∈ F e := by
+    intro x
+    exact ⟨x, Submodule.subset_span (le_refl x)⟩
+  apply ModuleCat.hasProjectiveResolutionLE_of_wellOrderedUnion M n F hF hcover
+  intro e
+  obtain ⟨I, ⟨iso⟩⟩ := initial_span_quotient_cyclic M e
+  exact resolution_of_linearEquiv iso n (hcyc I)
 end Ring
