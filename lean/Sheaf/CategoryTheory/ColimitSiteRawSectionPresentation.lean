@@ -5,6 +5,7 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Comma.Over.Basic
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+import Sheaf.CategoryTheory.ColimitSiteRawSectionCompatibility
 
 @[expose] public section
 
@@ -113,6 +114,11 @@ theorem raw_section_presentation
             (E t).hom ≫ (β t).app (op ((F.map t.hom).toFunctor.obj U)) ≫
               (colimit.ι B t).app
                 (op ((V.ι.app t.right).toFunctor.obj ((F.map t.hom).toFunctor.obj U))) ≫
-              eqToHom (congrArg (fun X => (colimit B).obj (op X)) e) := by sorry
+              eqToHom (congrArg (fun X => (colimit B).obj (op X)) e) := by
+  let R : Cocone D := colimit.cocone D
+  have hR : IsColimit R := colimit.isColimit D
+  obtain ⟨q, hq⟩ := raw_section_presentation_compatibility
+    J F P V hobjects harrows Q i G θ hθ B β hβ hβmap U D E hm R hR
+  exact ⟨R, q, ⟨hR⟩, hq⟩
 
 end CategoryTheory
