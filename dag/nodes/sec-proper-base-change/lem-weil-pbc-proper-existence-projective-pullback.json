@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-proper-existence-projective-pullback",
+ "kind": "statement",
+ "title": "A proper formal system algebraizes after projective modification",
+ "statement": "Let $A,I,f:X\\to\\operatorname{Spec}A$ satisfy Noetherianness, I-adic completeness and properness [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring, def-weil-proper-morphism], and assume X Noetherian. Put $J=I\\mathcal O_X$ [def-nagata-extended-ideal]. For every $M\\in\\mathit{Coh}(X,J)$ [def-weil-pbc-coherent-formal-module], there exist a scheme Y, a proper map $q:Y\\to X$, a dense open $U\\subset X$ on which q is an isomorphism, and a coherent module F on Y [pqf-def-coherent], such that the ambient inverse system $M\\circ q^*$ [def-pc-module-pullback] is isomorphic to $(F/(J\\mathcal O_Y)^{n+1}F)_n$. Only the system on Y is algebraized.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088C",
+  "place": "Proposition 30.25.4 (088C), last paragraph: Chow modification, formal pullback and projective algebraization, before pushforward"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the constructed Chow modification q, proper and surjective and isomorphic over a dense open U. Since f is proper, the library instance makes its immersion into finite-index projective space closed. The composite q followed by f supplies Noetherianness of Y.",
+   "uses": [
+    "lem-weil-pbc-chow-noetherian",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use ProjectiveSpace.exists_isClosedImmersion_finite_coordinates to close-embed the finite-index projective space into a standard ULift(Fin(n+1)) projective space over Spec A. Compose with the Chow embedding; its projection is q followed by f. Apply projective existence and ideal comap composition to get equivalence for completion on Y at J.comap q.",
+   "uses": [
+    "lem-weil-pbc-projective-space-finite-coordinates",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Formal-systems pullback supplies P with its specified inclusion equation. Choose F as the object preimage of P(M) under the completion equivalence. This object is determined up to isomorphism by full faithfulness. Apply the formal-category inclusion to the inverse preimage isomorphism, and transport its source along the object equality obtained by evaluating the inclusion equation. Return F and this ambient-system isomorphism with q and U.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-pullback",
+    "def-weil-pbc-coherent-formal-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "def-weil-pbc-coherent-formal-module",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-formal-systems-pullback",
+  "lem-weil-pbc-grothendieck-existence-projective",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-projective-space-finite-coordinates",
+  "lem-weil-pbc-proper-over-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/088C",
+  "place": "Proposition 30.25.4 (088C), last paragraph: Chow modification, formal pullback and projective algebraization, before pushforward"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian induction maximal closed counterexample to essential surjectivity of completion of coherent modules",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Failure of algebraization of coherent formal modules on a proper scheme reduces to a maximal closed subscheme with every nonzero closed quotient algebraizable",
+   "results": "Eight results: affine transition limits, finite morphisms, integral schemes, and a properness criterion over a field. None gives this algebraization reduction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieck_existence|completion_isEquivalence|maximal.*counter|counter.*maximal|projective.*finite.*coordinates",
+   "results": "Library search found full faithfulness, devissage, projective existence, formal pullback, push-pull and the proved ProjectiveSpace.exists_isClosedImmersion_finite_coordinates. No maximal algebraization counterexample theorem or direct proper-existence proof. The 088E Chow comparison has a different conclusion about proper support, and is not applicable on an already proper scheme.",
+   "date": "2026-10-13",
+   "verdict": "existing ingredients, no exact reduction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceProper",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting (Stacks 0GS2), via proper Grothendieck existence: Proposition 30.25.4 (088C), last paragraph: Chow modification, formal pullback and projective algebraization, before pushforward",
+   "via": [
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceProjectivePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceProjectivePullback.lean",
+  "declaration": "AlgebraicGeometry.proper_existence_projective_pullback",
+  "statement": "theorem proper_existence_projective_pullback (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] {X : Scheme.{u}} [IsNoetherian X] (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (M : CoherentFormalModule X ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f)) : let J := (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f ∃ (Y : Scheme.{u}) (q : Y ⟶ X) (_ : IsProper q) (U : X.Opens), Dense (U : Set X) ∧ IsIso (q ∣_ U) ∧ ∃ F : CoherentModules Y, Nonempty (M.obj ⋙ Scheme.Modules.tensorPullback q ≅ formalCompletionSystem (J.comap q) F.obj)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T184357-L-4024740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T184357-L-4024740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

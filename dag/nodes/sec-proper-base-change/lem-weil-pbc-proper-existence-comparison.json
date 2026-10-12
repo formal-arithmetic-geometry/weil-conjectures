@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-proper-existence-comparison",
+ "kind": "statement",
+ "title": "Proper formal systems compare with a completion up to nonzero-ideal power torsion",
+ "statement": "Let $A,I,X,f,J$ be as in proper projective pullback [lem-weil-pbc-proper-existence-projective-pullback], with X nonempty, and M a coherent formal module [def-weil-pbc-coherent-formal-module]. There exist a quasi-coherent ideal K of X [def-sbc-closed-immersion-ideal-sheaf] whose every positive power is nonzero, a coherent module H [pqf-def-coherent], a map $\\alpha:M\\to H^\\wedge$, and t at least one such that a kernel fork k and cokernel cofork c of alpha, with their limiting and colimiting universal properties, have every term annihilated by $K^t$. These universal properties are in the coherent formal category, using its zero morphisms [lem-weil-pbc-coherent-formal-modules-abelian]. No closed-quotient algebraization assumption is made.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/088C",
+  "place": "Proposition 30.25.4 (088C), last paragraph: the complement ideal and proper push-pull comparison, using Lemma 088B"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-coherent-formal-module",
+  "pqf-def-coherent",
+  "def-nagata-extended-ideal",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-weil-pbc-coherent-formal-modules-abelian",
+  "lem-weil-pbc-proper-existence-projective-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Get q:Y -> X, dense open U, F and the ambient pullback algebraization beta from proper_existence_projective_pullback.",
+   "uses": [
+    "lem-weil-pbc-proper-existence-projective-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Set K to Mathlib vanishingIdeal(U.compl). Its support is U.compl by coe_support_vanishingIdeal. For any e>=1, support_pow says the support of K^e is that same complement. If K^e were zero its support would be all of X by support_bot. A dense open in a nonempty space is nonempty; a point of U contradicts this equality. Also K.support.compl=U. The pullback-restriction comparison identifies pullback.snd q U.ι with an isomorphism followed by q restricted to U, hence it is an isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_formalSystemsPushPull to J,K,q,M,F,beta and the preceding pullback-snd isomorphism. It gives coherence of H=q_*F, alpha, t>=1, kernel fork and cokernel cofork, their universal properties, and both termwise annihilation assertions. Reassociate the existential conjunctions to match the stated torsion tuple.",
+   "uses": [
+    "lem-weil-pbc-formal-systems-push-pull"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-formal-systems-push-pull",
+  "lem-weil-pbc-proper-existence-projective-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "https://stacks.math.columbia.edu/tag/088C",
+  "place": "Proposition 30.25.4 (088C), last paragraph: the complement ideal and proper push-pull comparison, using Lemma 088B"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Noetherian induction maximal closed counterexample to essential surjectivity of completion of coherent modules",
+   "results": "Service unavailable: Internal Server Error. No absence verdict inferred.",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Failure of algebraization of coherent formal modules on a proper scheme reduces to a maximal closed subscheme with every nonzero closed quotient algebraizable",
+   "results": "Eight results: affine transition limits, finite morphisms, integral schemes, and a properness criterion over a field. None gives this algebraization reduction.",
+   "date": "2026-10-13",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "grothendieck_existence|completion_isEquivalence|maximal.*counter|counter.*maximal|projective.*finite.*coordinates",
+   "results": "Library search found full faithfulness, devissage, projective existence, formal pullback, push-pull and the proved ProjectiveSpace.exists_isClosedImmersion_finite_coordinates. No maximal algebraization counterexample theorem or direct proper-existence proof. The 088E Chow comparison has a different conclusion about proper support, and is not applicable on an already proper scheme.",
+   "date": "2026-10-13",
+   "verdict": "existing ingredients, no exact reduction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GrothendieckExistenceProper",
+  "date": "2026-10-13",
+  "group": "X2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Step 7 of finite-etale lifting (Stacks 0GS2), via proper Grothendieck existence: Proposition 30.25.4 (088C), last paragraph: the complement ideal and proper push-pull comparison, using Lemma 088B",
+   "via": [
+    "prop-weil-pbc-grothendieck-existence-proper",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GrothendieckExistenceProperComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GrothendieckExistenceProperComparison.lean",
+  "declaration": "AlgebraicGeometry.proper_existence_comparison",
+  "statement": "theorem proper_existence_comparison (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] {X : Scheme.{u}} [IsNoetherian X] [Nonempty X] (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] (M : CoherentFormalModule X ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f)) : let J := (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f ∃ K : X.IdealSheafData, (∀ e : ℕ, 1 ≤ e → K ^ e ≠ ⊥) ∧ ∃ (H : CoherentModules X) (α : M ⟶ (completion X J).obj H), ∃ t : ℕ, 1 ≤ t ∧ ∃ k : KernelFork α, ∃ c : CokernelCofork α, Nonempty (IsLimit k) ∧ Nonempty (IsColimit c) ∧ (∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (k.pt.obj.obj (op n)))) ∧ (∀ n : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι t).2 (c.pt.obj.obj (op n))))",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T184357-L-4024740",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261012T184357-L-4024740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

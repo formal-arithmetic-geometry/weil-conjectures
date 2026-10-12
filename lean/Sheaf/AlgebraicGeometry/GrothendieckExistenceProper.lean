@@ -10,18 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import Sheaf.AlgebraicGeometry.CoherentFormalModulesAbelian
-import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
-import Sheaf.AlgebraicGeometry.FormalSystemsPullback
-import Sheaf.AlgebraicGeometry.FormalSystemsPushPull
+import Sheaf.AlgebraicGeometry.GrothendieckExistenceMaximalFailure
+import Sheaf.AlgebraicGeometry.GrothendieckExistenceProperComparison
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceDevissage
-import Sheaf.AlgebraicGeometry.GrothendieckExistenceProjective
-import Sheaf.AlgebraicGeometry.ModulePullbackIdealQuotient
-import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import WeilConjectures.AlgebraicGeometry.ChowLemma
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-! # Grothendieck existence for proper schemes
 
@@ -75,6 +66,20 @@ theorem grothendieck_existence_proper (A : Type u) [CommRing A] [IsNoetherianRin
     (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f] :
     (@completion X (isNoetherian_of_locallyOfFiniteType f)
       ((Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap f)).IsEquivalence := by
-  sorry
+  classical
+  by_contra hbad
+  obtain ⟨Z, j, hj, hp, hZ, hn, M, hM, hquot⟩ :=
+    proper_existence_maximal_failure A I X f hbad
+  let := hj
+  let := hp
+  let := hZ
+  let := hn
+  let J := (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))).ker.comap (j ≫ f)
+  obtain ⟨K, hK, H, α, htorsion⟩ := proper_existence_comparison A I (j ≫ f) M
+  have hthick : ∀ e : ℕ, 1 ≤ e → ∀ hW : IsNoetherian (K ^ e).subscheme,
+      (@completion (K ^ e).subscheme hW (J.comap (K ^ e).subschemeι)).IsEquivalence := by
+    intro e he hW
+    exact hquot (K ^ e) (hK e he) hW
+  exact hM (grothendieck_existence_devissage J K M hthick H α htorsion)
 
 end AlgebraicGeometry

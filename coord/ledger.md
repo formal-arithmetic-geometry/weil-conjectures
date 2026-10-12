@@ -9107,3 +9107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: merged deliver/W3/Sheaf.AlgebraicGeometry.Morphisms.GaloisCoverStageDescent (stage 3; reviewer PASS; after a return; landing 20261012T184356-L-4024347 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/X2/Sheaf.Algebra.Homology.RoosSplitComparison (stage 3; reviewer PASS; first push; landing 20261012T184356-L-4024447 (proof); batch 20261012T184234; modules 1; new nodes 0)
 - 18:43 L: merged deliver/X2/Sheaf.AlgebraicGeometry.ChangeOfRingsTensorRelationPresentation (stage 3; reviewer PASS; first push; landing 20261012T184357-L-4024593 (interface); batch 20261012T184234; modules 3; new nodes 2)
+- 18:43 L: merged deliver/X2/Sheaf.AlgebraicGeometry.GrothendieckExistenceProper (stage 3; reviewer PASS; first push; landing 20261012T184357-L-4024740 (interface); batch 20261012T184234; modules 4; new nodes 3)
