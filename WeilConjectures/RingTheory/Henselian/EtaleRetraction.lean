@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Etale.QuasiFinite
 public import Mathlib.RingTheory.Unramified.LocalStructure
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import WeilConjectures.Mathlib.RingTheory.Henselian
+public import WeilConjectures.Mathlib.RingTheory.Idempotents
 
 /-!
 # Henselian local rings: étale retractions and idempotent lifting
@@ -257,19 +258,6 @@ theorem exists_algEquiv_pi_isLocalRing_of_forall_exists_algHom
       (hkey _), ⟨?_⟩⟩
   exact (AlgEquiv.ofBijective (AlgHom.pi fun j ↦ Ideal.Quotient.mkₐ R _)
     hJ.bijective_pi).trans (AlgEquiv.piCongrLeft R Q eJ.symm).symm
-
-/-- **Idempotents congruent modulo the Jacobson radical are equal.** If `e, e'` are idempotents
-of a commutative ring `B` with `e - e'` in the Jacobson radical, then `e = e'`. -/
-theorem _root_.IsIdempotentElem.eq_of_sub_mem_jacobson_bot {B : Type*} [CommRing B] {e e' : B}
-    (he : IsIdempotentElem e) (he' : IsIdempotentElem e') (h : e - e' ∈ Ideal.jacobson ⊥) :
-    e = e' := by
-  have hd : (e - e') * (1 + (e - e') * -(e - e')) = 0 := by
-    have he₁ : e * e = e := he
-    have he₂ : e' * e' = e' := he'
-    linear_combination (3 * e' - e - 1) * he₁ + (e' + 1 - 3 * e) * he₂
-  have hu : IsUnit ((e - e') * -(e - e') + 1) := Ideal.mem_jacobson_bot.mp h _
-  rw [add_comm] at hu
-  exact sub_eq_zero.mp (hu.mul_left_eq_zero.mp hd)
 
 /-- In a local ring, an element which is idempotent modulo an ideal `J` is congruent to `0` or to
 `1` modulo `J`. -/
