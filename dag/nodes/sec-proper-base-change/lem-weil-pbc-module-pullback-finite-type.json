@@ -29,35 +29,22 @@
  ],
  "proof": [
   {
-   "text": "*Step 1 (set-up and reduction to $V$).* Let $x\\in X$ and $y=f(x)$. Since $\\mathcal G$ is of finite type [pqf-def-coherent] there are an open $V\\ni y$, an $n\\ge0$ and a surjection $\\varphi:\\mathcal O_V^{\\oplus n}\\to\\mathcal G|_V$ of $\\mathcal O_V$-modules. Put $U=f^{-1}V$, an open neighbourhood of $x$, regard $V$ and $U$ as open subschemes [def-pc-scheme] with inclusions $j:V\\to Y$, $j':U\\to X$, which are open immersions [def-weil-open-immersion], and let $f':U\\to V$ be the restriction of $f$, so $f\\circ j'=j\\circ f'$. Restriction of modules to an open subscheme is the restriction along an open immersion of [lem-weil-pbc-module-restriction-open-immersion-colimits], and by [lem-weil-pbc-open-immersion-module-pullback-restriction] it is isomorphic to the module pullback: $\\mathcal M|_V\\cong j^*\\mathcal M$ and $\\mathcal N|_U\\cong j'^*\\mathcal N$, naturally. With the composition isomorphisms of pullbacks [def-pc-module-pullback] we get isomorphisms of $\\mathcal O_U$-modules $$(f^*\\mathcal G)|_U\\cong j'^*f^*\\mathcal G\\cong(f\\circ j')^*\\mathcal G=(j\\circ f')^*\\mathcal G\\cong f'^*j^*\\mathcal G\\cong f'^*(\\mathcal G|_V),$$ the last one being $f'^*$ applied to the inverse of $\\mathcal G|_V\\cong j^*\\mathcal G$. Call the composite $\\theta:f'^*(\\mathcal G|_V)\\xrightarrow{\\sim}(f^*\\mathcal G)|_U$. (This is the reduction in the proof of Stacks 01B3, which uses Sheaves 0097 for the composition isomorphism.)",
+   "text": "For an open V of Y put U = f^{-1}V and let f′: U → V be the restricted scheme morphism. The equivalences overEquiv V and overEquiv U identify modules on the over sites with modules on the open subschemes. Form F = (overEquiv V).functor followed by the Mathlib scheme-module pullback along f′ and (overEquiv U).inverse. The restriction-pullback isomorphisms, pullback composition and the equation U.ι ≫ f = f′ ≫ V.ι give F(G.over V) ≅ (pullback f G).over U. Uniqueness of left adjoints, using nonempty_tensorPullbackAdjunction f, replaces pullback f by tensorPullback f.",
    "uses": [
-    "pqf-def-coherent",
+    "def-pc-module-pullback",
     "def-pc-scheme",
     "def-weil-open-immersion",
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-pc-module-pullback"
+    "lem-weil-pbc-open-immersion-module-pullback-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01B6 (lemma-pullback-finite-type), proof, first sentence ('Arguing as in the proof of Lemma 01B3 we may assume G is globally generated'); Lemma 01B3 (lemma-pullback-locally-generated), proof, first paragraph, with Sheaves, Lemma 0097 (lemma-push-pull-composition-modules)"
+    "place": "Lemma 01B6 (lemma-pullback-finite-type), proof, using Lemmas 01B3 and 01AJ(2)"
    }
   },
   {
-   "text": "*Step 2 (the pullback of the surjection is an epimorphism).* By [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1) on the scheme $V$, the morphism $\\varphi:\\mathcal O_V^{\\oplus n}\\to\\mathcal G|_V$, being surjective as a map of sheaves, is an epimorphism of $\\Mod(\\mathcal O_V)$. By [lem-weil-pbc-module-pullback-epi-direct-sum](1) applied to $f':U\\to V$, $f'^*\\varphi:f'^*(\\mathcal O_V^{\\oplus n})\\to f'^*(\\mathcal G|_V)$ is an epimorphism of $\\Mod(\\mathcal O_U)$.",
-   "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
-    "lem-weil-pbc-module-pullback-epi-direct-sum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01B6, proof ('f^* ... is right exact, see Lemma 01AJ ... upon applying f^* we obtain the surjection'); Lemma 01AJ (lemma-exactness-pushforward-pullback), part (2)"
-   }
-  },
-  {
-   "text": "*Step 3 (the pullback of $\\mathcal O_V^{\\oplus n}$ is $\\mathcal O_U^{\\oplus n}$).* By [lem-weil-pbc-module-pullback-epi-direct-sum](2) for $f'$ and $\\mathcal G_1=\\dots=\\mathcal G_n=\\mathcal O_V$, the map $\\sigma:\\bigoplus_{i=1}^nf'^*\\mathcal O_V\\to f'^*(\\mathcal O_V^{\\oplus n})$ with components $f'^*(\\iota_i)$ is an isomorphism. By [lem-weil-pbc-module-pullback-structure-sheaf] for $f'$, $\\epsilon_{f'}:f'^*\\mathcal O_V\\to\\mathcal O_U$ is an isomorphism, so $\\bigoplus_i\\epsilon_{f'}^{-1}:\\mathcal O_U^{\\oplus n}\\to\\bigoplus_if'^*\\mathcal O_V$ is an isomorphism (a direct sum of isomorphisms). Hence $\\tau=\\sigma\\circ\\bigoplus_i\\epsilon_{f'}^{-1}:\\mathcal O_U^{\\oplus n}\\xrightarrow{\\sim}f'^*(\\mathcal O_V^{\\oplus n})$ is an isomorphism of $\\mathcal O_U$-modules.",
+   "text": "F preserves colimits and epimorphisms, since its outer functors are equivalences and its middle functor is a left adjoint. The Mathlib pullbackObjUnitToUnit is an isomorphism because the preimage functor on opens is final. Together with sheafOfModulesEquivOverUnit and sheafOfModulesEquivOverInverseUnit this gives unit over U ≅ F(unit over V). Mathlib mapFreeIso then identifies the free sheaf on ULift(Fin n) over U with F applied to the free sheaf with the same index over V. Compose that isomorphism, F.map φ, and the comparison of the previous step. This composite is epi for every epi φ, establishing the second conjunct without a finite-type assumption.",
    "uses": [
     "lem-weil-pbc-module-pullback-epi-direct-sum",
     "lem-weil-pbc-module-pullback-structure-sheaf"
@@ -65,37 +52,46 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01B6, proof (the displayed surjection $\\bigoplus_{i=1}^n\\mathcal O_X\\to f^*\\mathcal G\\to0$, which uses that $f^*$ commutes with direct sums, Lemma 01AJ(2), and $f^*\\mathcal O_Y=\\mathcal O_X$, used there without reference)"
+    "place": "Lemma 01B6 (lemma-pullback-finite-type), proof, using Lemmas 01B3 and 01AJ(2)"
    }
   },
   {
-   "text": "*Step 4 (conclusion).* The composite $\\psi=\\theta\\circ f'^*\\varphi\\circ\\tau:\\mathcal O_U^{\\oplus n}\\to(f^*\\mathcal G)|_U$ is an epimorphism of $\\Mod(\\mathcal O_U)$, being an epimorphism (Step 2) composed on both sides with isomorphisms (Steps 1 and 3). By [lem-weil-pbc-ringed-space-module-exactness-local-lifting](1) on $U$, $\\psi$ is surjective as a map of sheaves. Thus every $x\\in X$ has the open neighbourhood $U=f^{-1}V$ with a surjection $\\mathcal O_U^{\\oplus n}\\twoheadrightarrow(f^*\\mathcal G)|_U$, with the same $n$ as for $\\mathcal G$ on $V$; that is, $f^*\\mathcal G$ is of finite type [pqf-def-coherent].",
+   "text": "Take finite local generators data q for G. For each i, give the finite index type (q.generators i).I a Fintype instance and identify it with ULift(Fin n) using equivFin and ulift. The freeFunctor map of this equivalence composed with the generating epimorphism is an epi φ on q.X i. Apply the second conjunct just proved to obtain an epi ψ on f^{-1}(q.X i) with the same finite rank. Its freeHomEquiv image supplies generating sections.",
    "uses": [
-    "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
     "pqf-def-coherent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Modules, Lemma 01B6, proof, last sentence ('This implies the lemma'), with Definition 01B5 (definition-finite-type)"
+    "place": "Lemma 01B6 (lemma-pullback-finite-type), proof, using Lemmas 01B3 and 01AJ(2)"
+   }
+  },
+  {
+   "text": "The inverse-image opens form a cover: for x in an arbitrary open W of X, the cover q at f(x) supplies an open V containing f(x) and a map V → q.X i. Intersect W with f^{-1}V to obtain a covering-sieve member mapping to f^{-1}(q.X i) and containing x. Thus the constructed local generators data p cover the terminal object; all its generating index types ULift(Fin n) are finite. Apply IsFiniteType.mk to p and its finite-type proof and pair the result with the already proved local epi assertion. Empty opens and n = 0 need no exceptional case.",
+   "uses": [
+    "pqf-def-coherent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Lemma 01B6 (lemma-pullback-finite-type), proof, using Lemmas 01B3 and 01AJ(2)"
    }
   }
  ],
  "proof_deps": [
-  "pqf-def-coherent",
+  "def-pc-module-pullback",
   "def-pc-scheme",
   "def-weil-open-immersion",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-ringed-space-module-exactness-local-lifting",
   "lem-weil-pbc-module-pullback-epi-direct-sum",
-  "lem-weil-pbc-module-pullback-structure-sheaf"
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Modules, Lemma 01B6 (lemma-pullback-finite-type) and its proof, with the reduction of Lemma 01B3 (lemma-pullback-locally-generated), Lemma 01AJ(2) (lemma-exactness-pushforward-pullback) and Sheaves, Lemma 0097 (sheaves.tex, lemma-push-pull-composition-modules)"
+  "place": "Lemma 01B6 (lemma-pullback-finite-type), proof, using Lemmas 01B3 and 01AJ(2); implemented by K1 using Mathlib over-site equivalences, free-sheaf transport, and the tensor adjunction"
  },
  "mathlib_searches": [
   {
@@ -185,5 +181,15 @@
   "group": "C1",
   "result": "pass",
   "note": "X Y : Scheme.{u}, f : X ⟶ Y, G : Y.Modules with [G.IsFiniteType] (Mathlib, as Coherent.lean); conclusion IsFiniteType of (tensorPullback f).obj G; parenthetical U=f⁻¹V same n as second conjunct (Epi from free ULift (Fin n) on V gives Epi on (Opens.map f.base).obj V), true; #check resolves tensorPullback to the recorded declaration; node statement unchanged; no let, no hollow binder"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261012T153259-L-2370143",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
