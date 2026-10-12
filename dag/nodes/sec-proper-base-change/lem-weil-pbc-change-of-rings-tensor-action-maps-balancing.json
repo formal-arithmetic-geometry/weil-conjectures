@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-change-of-rings-tensor-action-maps-balancing",
+ "kind": "statement",
+ "title": "Balancing equality for action maps",
+ "statement": "Let Y be a scheme [def-pc-scheme], B and C sheaves of commutative O_Y-algebras [def-weil-pbc-comm-algebra-sheaf], phi:B to C an O_Y-algebra morphism, and P a sheaf of B-modules [def-weil-sheaf-of-modules-category]. Put P0=P restricted to O_Y, S=C.toModule tensor_O P0, F=B.toModule tensor_O S, and T=(C tensor_B P) restricted to O_Y [def-pur-sheaf-tensor-product]. Let tau be the canonical tensor-section map and eta the change-of-rings presheaf sheafification unit [def-weil-presheaf-modules-sheafification]. For any O_Y-module morphisms a,d:F to S and g:S to T satisfying a_W(tau(b,tau(c,p)))=tau(c,bp), d_W(tau(b,tau(c,p)))=tau(phi_W(b)c,p), and g_W(tau(c,p))=eta_W(c tensor_B p) for every open W, b in B(W), c in C(W), and p in P(W) [lem-weil-pbc-change-of-rings-tensor-action-maps-core], a followed by g equals d followed by g.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules), change of rings assertion; Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules); explicit tensor-balancing argument in steps 1-4 of lem-weil-pbc-change-of-rings-tensor-relation-presentation"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-change-of-rings-tensor-action-maps-core"
+ ],
+ "proof": [
+  {
+   "text": "Cancel the tensor sheafification isomorphism and use injectivity of the sheafification adjunction hom-equivalence. Tensor extensionality then determines a morphism on pure tensor sections. For the right-associated triple tensor, locally lift the inner tensor section through its locally surjective tensorator, induct on the resulting tensor using additivity, and use separatedness of the target to descend equality. This is the fully proved private tensor_right_triple_hom_ext in the Lean module.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On b tensor (c tensor p), rewrite by the three hypotheses. The two results are the images under the change-of-rings unit of c tensor_B bp and phi(b)c tensor_B p. TensorProduct.tmul_smul identifies them using the B-action on C induced by phi.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Morphisms, proof of Lemma 01SB (morphisms-lemma-affine-equivalence-modules), change of rings assertion; Sheaves, Lemma 0089 (sheaves-lemma-sheafification-presheaf-modules); explicit tensor-balancing argument in steps 1-4 of lem-weil-pbc-change-of-rings-tensor-relation-presentation; second-reader Q3 construction/equality decomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equality of maps from iterated tensor products of module sheaves tested on pure tensor sections",
+   "results": "service unavailable: Internal Server Error; no verdict inferred.",
+   "date": "2026-10-13"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms from tensor products of sheaves of modules are determined by elementary tensor sections",
+   "results": "ModuleCat.MonoidalCategory.tensor_ext and tensor_ext₃, SheafOfModules.hom_ext, and Scheme.Modules.hom_ext. These combine with the sheafification adjunction and local tensor generation to prove the specialized balancing identity.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.tmul_smul",
+   "results": "TensorProduct.tmul_smul is the final sectionwise balanced-tensor identity used in the proof. No specialized sheaf-level balancing theorem.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_changeOfRings|ChangeOfRingsTensorAction|tensor_right_triple_hom_ext|sheafificationHomEquiv",
+   "results": "msearch grep found sheafificationHomEquiv in Mathlib. Local rg found the target, but no independent action-map existence theorem. Private tensor_hom_ext and tensor_triple_hom_ext in ModulePullbackTensorCoherence give a model for the balancing proof.",
+   "date": "2026-10-13",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMaps",
+  "date": "2026-10-13",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-etale-lifting",
+   "place": "Construction and balancing parts of lem-weil-pbc-change-of-rings-tensor-action-maps",
+   "via": [
+    "lem-weil-pbc-change-of-rings-tensor-action-maps",
+    "lem-weil-pbc-change-of-rings-tensor-relation-presentation",
+    "lem-weil-pbc-quasi-coherent-algebra-change-of-rings",
+    "lem-weil-pbc-affine-module-correspondence",
+    "lem-weil-pbc-formal-systems-graded-vanishing",
+    "lem-weil-pbc-grothendieck-existence-projective",
+    "prop-weil-pbc-grothendieck-existence",
+    "lem-weil-pbc-algebraize-finite-over-proper",
+    "lem-weil-pbc-finite-etale-lifting-complete",
+    "lem-weil-pbc-finite-etale-lifting-essential-surjectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsBalancing",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChangeOfRingsTensorActionMapsBalancing.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.changeOfRings_tensor_action_comp_eq",
+  "statement": "theorem changeOfRings_tensor_action_comp_eq (Y : Scheme.{u})\n    (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)\n    (P : SheafOfModules.{u} (𝓡 B.right))\n    (a d : tensorObj B.toModule (tensorObj C.toModule\n      ((SheafOfModules.restrictScalars (𝓻 B.hom)).obj P)) ⟶\n      tensorObj C.toModule ((SheafOfModules.restrictScalars (𝓻 B.hom)).obj P))\n    (g : tensorObj C.toModule ((SheafOfModules.restrictScalars (𝓻 B.hom)).obj P) ⟶\n      (SheafOfModules.restrictScalars (𝓻 C.hom)).obj\n        (SheafOfModules.changeOfRings.{u, u, u} φ.right P))\n    (h : ChangeOfRingsTensorActionFormulas Y B C φ P a d g) :\n    a ≫ g = d ≫ g",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043339",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261012T232904-L-2043339",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

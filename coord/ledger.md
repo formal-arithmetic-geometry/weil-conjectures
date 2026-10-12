@@ -10104,3 +10104,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:29 L: merged deliver/P4/Sheaf.AlgebraicGeometry.Curve.IdealAdditiveImageRelativeKernel (stage 3; reviewer PASS; first push; landing 20261012T232903-L-2042992 (proof); batch 20261012T232855; modules 1; new nodes 0)
 - 23:29 L: merged deliver/Q1/Sheaf.RingTheory.ConormalChartUnramifiedLocalization (stage 3; reviewer PASS; first push; landing 20261012T232903-L-2043135 (proof); batch 20261012T232855; modules 1; new nodes 0)
 - 23:29 L: merged deliver/Q1/WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections (stage 3; reviewer PASS; after a return; landing 20261012T232904-L-2043237 (proof); batch 20261012T232855; modules 1; new nodes 3)
+- 23:29 L: merged deliver/Q3/Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMaps (stage 3; reviewer PASS; first push; landing 20261012T232904-L-2043339 (interface); batch 20261012T232855; modules 3; new nodes 2)

@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.CommAlgebraSheaf
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import Sheaf.AlgebraicGeometry.ChangeOfRingsTensorActionMapsBalancing
 
 /-! # Action and balancing maps for change of rings
 
@@ -73,6 +74,10 @@ theorem exists_changeOfRings_tensor_action_maps (Y : Scheme.{u})
           (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C.right).obj)).unit.app
             (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)).app (op W))
               (c ⊗ₜ[B.right.obj.obj (op W), (φ.right.hom.app (op W)).hom] p)) ∧
-      a ≫ g = d ≫ g := by sorry
+      a ≫ g = d ≫ g := by
+  dsimp
+  obtain ⟨a, d, g, h⟩ := exists_changeOfRings_tensor_action_maps_core Y B C φ P
+  refine ⟨a, d, g, h.1, h.2.1, h.2.2, ?_⟩
+  exact changeOfRings_tensor_action_comp_eq Y B C φ P a d g h
 
 end AlgebraicGeometry.Scheme.Modules
