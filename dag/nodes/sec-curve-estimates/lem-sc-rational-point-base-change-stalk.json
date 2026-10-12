@@ -15,42 +15,39 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine neighbourhood Spec A of P. Its residue field A/m is k by the Nullstellensatz. The fibre-prime correspondence of [lem-weil-pbc-fibre-ring-primes-residue-fields] identifies the fibre with Spec k', so the given P' corresponds to m(A tensor_k k').",
+   "text": "A closed point of X has finite residue field over k. Since k is algebraically closed, its residue field is k. Scheme.Hom.exists_fieldPoints_base_eq_iff therefore constructs a rational section through P. Scheme.Hom.baseChangeFieldPoint_eq_of_fst_eq identifies P' with its scalar extension, which is a closed immersion from Spec k'; hence P' is closed.",
    "uses": [
-    "lem-weil-pbc-fibre-ring-primes-residue-fields"
+    "def-pc-rational-point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
-    "note": "The blueprint invokes this as the standard valuation comparison under extension of algebraically closed fields; the available literature gives no separately named lemma."
+    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)"
    }
   },
   {
-   "text": "Smoothness gives regularity by [lem-sc-smooth-regular], and connectedness gives integrality by [lem-sc-regular-connected-integral]. Dimension one and regularity make the source closed stalk a DVR by [lem-sc-regular-dim1-dvr]. Apply [lem-sc-base-change-curve] to obtain the same properties for the target; P' has residue field k' and is closed.",
+   "text": "Apply [lem-sc-base-change-curve] to give the target connected curve structure and smoothness. Smoothness gives regularity by [lem-sc-smooth-regular]; connectedness gives integrality by [lem-sc-regular-connected-integral]. For either smooth integral curve, its dimension-one hypothesis gives SmoothOfRelativeDimension 1, and ringKrullDim_stalk_eq_one_of_smoothOfRelativeDimension_one (WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint) gives dimension one at the closed point. Apply [lem-sc-regular-dim1-dvr] to both closed stalks. Transport the source DVR instance along p(P')=P.",
    "uses": [
+    "lem-sc-base-change-curve",
     "lem-sc-smooth-regular",
     "lem-sc-regular-connected-integral",
-    "lem-sc-regular-dim1-dvr",
-    "lem-sc-base-change-curve"
+    "lem-sc-regular-dim1-dvr"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
-    "note": "The blueprint invokes this as the standard valuation comparison under extension of algebraically closed fields; the available literature gives no separately named lemma."
+    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)"
    }
   },
   {
-   "text": "The target stalk is canonically the localization of O_{X,P} tensor_k k' at the extended maximal ideal. In the source DVR, irreducible t generates the maximal ideal. By [lem-sc-dvr-field-extension-order], the image of t generates the target maximal ideal, hence is irreducible. These identifications commute with the stalk map.",
+   "text": "By [lem-sc-rational-point-base-change-maximal-ideal], the source maximal ideal extends to the target maximal ideal. In a DVR irreducibility is equivalent to generating the maximal ideal (Mathlib IsDiscreteValuationRing.irreducible_iff_uniformizer). If t is irreducible, its maximal ideal is span {t}; Ideal.map_span and Set.image_singleton identify its extension with span {p#(t)}. The target DVR criterion proves irreducibility of p#(t).",
    "uses": [
-    "lem-sc-dvr-field-extension-order"
+    "lem-sc-rational-point-base-change-maximal-ideal"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-ext-invariance/thm-sc-constant-invariance.md",
-    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)",
-    "note": "The blueprint invokes this as the standard valuation comparison under extension of algebraically closed fields; the available literature gives no separately named lemma."
+    "place": "Affine-case proof, unit quotient paragraph (orders at corresponding boundary points)"
    }
   }
  ],
@@ -121,12 +118,12 @@
   "date": "2026-10-12"
  },
  "proof_deps": [
-  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "def-pc-rational-point",
+  "lem-sc-base-change-curve",
   "lem-sc-smooth-regular",
   "lem-sc-regular-connected-integral",
   "lem-sc-regular-dim1-dvr",
-  "lem-sc-base-change-curve",
-  "lem-sc-dvr-field-extension-order"
+  "lem-sc-rational-point-base-change-maximal-ideal"
  ],
  "reviewed": {
   "date": "2026-10-12",
@@ -142,9 +139,9 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "G2",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261012T085242-L-15889",
+  "landing": "20261012T144139-L-2105392",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

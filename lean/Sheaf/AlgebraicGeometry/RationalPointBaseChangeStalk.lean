@@ -9,10 +9,10 @@ public import Sheaf.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.DvrFieldExtensionOrder
-import Sheaf.RingTheory.FibrePrimesResidueFields
+import WeilConjectures.AlgebraicGeometry.DensePoints
 import WeilConjectures.AlgebraicGeometry.Curve.ClosedPoint
 import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.RationalPointBaseChangeMaximalIdeal
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
@@ -61,6 +61,53 @@ theorem Scheme.rational_point_base_change_stalk
           (pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k'))) P'),
         Irreducible t → Irreducible
           ((pullback.fst s (Spec.map (CommRingCat.ofHom (algebraMap k k')))).stalkMap P' t) := by
-  sorry
+  let g := Spec.map (CommRingCat.ofHom (algebraMap k k'))
+  let X' := pullback s g
+  let s' : X' ⟶ Spec (.of k') := pullback.snd s g
+  have hbase := baseChange_curve (k' := k') s
+  let : IsConnectedCurve s' := hbase.2.2.2.2.2 inferInstance
+  let : Smooth s' := hbase.2.2.1 inferInstance
+  let := (s.residueFieldAlgebraMap P).toAlgebra
+  have := s.finite_residueField_of_isClosed P hP
+  let e := RingEquiv.ofBijective (algebraMap k (X.residueField P))
+    (IsSepClosed.algebraMap_bijective k (X.residueField P))
+  obtain ⟨p, hp⟩ := (s.exists_fieldPoints_base_eq_iff k P).mpr
+    ⟨CommRingCat.ofHom e.symm.toRingHom, by
+      ext c
+      exact e.symm_apply_apply c⟩
+  let p' := s.baseChangeFieldPoint k' p
+  have heq : p'.1.base default = P' :=
+    s.baseChangeFieldPoint_eq_of_fst_eq k' p (hP'.trans hp.symm)
+  have hc : P' ∈ closedPoints X' := by
+    have h := p'.1.isClosedEmbedding.isClosedMap {default} isClosed_singleton
+    change IsClosed {P'}
+    simpa only [Set.image_singleton, heq] using h
+  let : IsRegular X := IsRegular.of_smooth s
+  let : IsRegular X' := IsRegular.of_smooth s'
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian s
+  let : IsLocallyNoetherian X' := LocallyOfFiniteType.isLocallyNoetherian s'
+  let : ConnectedSpace X := IsConnectedCurve.connectedSpace' s
+  let : ConnectedSpace X' := IsConnectedCurve.connectedSpace' s'
+  let : IsIntegral X := IsRegular.isIntegral X
+  let : IsIntegral X' := IsRegular.isIntegral X'
+  let : SmoothOfRelativeDimension 1 s :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq s 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := s))
+  let : SmoothOfRelativeDimension 1 s' :=
+    (smoothOfRelativeDimension_iff_topologicalKrullDim_eq s' 1).mpr
+      (IsConnectedCurve.krullDim_eq_one (f := s'))
+  let : IsDiscreteValuationRing (X.presheaf.stalk P) :=
+    IsRegularLocalRing.isDiscreteValuationRing _
+      (ringKrullDim_stalk_eq_one_of_smoothOfRelativeDimension_one s hP)
+  let : IsDiscreteValuationRing (X'.presheaf.stalk P') :=
+    IsRegularLocalRing.isDiscreteValuationRing _
+      (ringKrullDim_stalk_eq_one_of_smoothOfRelativeDimension_one s' hc)
+  let : IsDiscreteValuationRing (X.presheaf.stalk ((pullback.fst s g) P')) :=
+    hP'.symm ▸ (inferInstance : IsDiscreteValuationRing (X.presheaf.stalk P))
+  have hmax := Scheme.rational_point_base_change_maximalIdeal k k' X s p P'
+    (hP'.trans hp.symm)
+  intro t ht
+  apply (IsDiscreteValuationRing.irreducible_iff_uniformizer _).mpr
+  rw [← hmax, ht.maximalIdeal_eq, Ideal.map_span, Set.image_singleton]
 
 end AlgebraicGeometry
