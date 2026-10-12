@@ -26,7 +26,9 @@
   "def-weil-pbc-site-cech-complex",
   "lem-weil-pbc-scheme-modules-enough-injectives",
   "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-sc-boundary-cech-injective-middle"
+  "lem-sc-boundary-cech-injective-middle",
+  "def-sc-module-cech-comparison",
+  "def-sc-module-cohomology-boundary"
  ],
  "proof": [
   {
@@ -153,5 +155,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryCechCompatibility",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.boundary_cech_compatibility",
+  "file": "lean/Sheaf/Paper/BoundaryCechCompatibility.lean",
+  "statement": "theorem boundary_cech_compatibility (X : Scheme.{u}) [HasDerivedCategory.{wC} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wD} (ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))] (S : ShortComplex X.Modules) (hS : S.ShortExact) {ι : Type u} (U : ι → X.Opens) (hcover : iSup U = ⊤) (c : ((CategoryTheory.cechComplexFunctor U).obj S.X₁.presheafModuleCat).homology 1 ⟶ (RingedSpace.moduleCohomology X.toRingedSpace 1).obj S.X₁) (hc : IsModuleCechComparison U S.X₁ 1 c) (s : S.X₃.val.obj (op ⊤)) (t : ∀ i : ι, S.X₂.val.obj (op (U i))) (ht : ∀ i : ι, S.g.val.app (op (U i)) (t i) = S.X₃.val.presheaf.map (homOfLE (le_top : U i ≤ ⊤)).op s) : ∃ z : ((CategoryTheory.cechComplexFunctor U).obj S.X₁.presheafModuleCat).cycles 1, (∀ y : Fin 2 → ι, S.f.val.app (op (∏ᶜ fun k : Fin 2 ↦ U (y k))) ((Pi.π (fun w : Fin 2 → ι ↦ S.X₁.presheafModuleCat.obj (op (∏ᶜ fun k : Fin 2 ↦ U (w k)))) y) (((CategoryTheory.cechComplexFunctor U).obj S.X₁.presheafModuleCat).iCycles 1 z)) = S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 1).op (t (y 1)) - S.X₂.val.presheaf.map (Pi.π (fun k : Fin 2 ↦ U (y k)) 0).op (t (y 0))) ∧ c (((CategoryTheory.cechComplexFunctor U).obj S.X₁.presheafModuleCat).homologyπ 1 z) = RingedSpace.moduleCohomologyBoundary X.toRingedSpace S hS 0 ((RingedSpace.globalSectionsFunctor X.toRingedSpace).toRightDerivedZero.app S.X₃ s)",
+  "branch": "sheaf-dag",
+  "by": "Z2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "Z2-bcc",
+  "group": "Z2",
+  "result": "pass"
  }
 }
