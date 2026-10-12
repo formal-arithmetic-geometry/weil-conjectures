@@ -10,8 +10,10 @@ public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
+import Sheaf.AlgebraicGeometry.SerreSectionModuleFractionLift
+import Sheaf.AlgebraicGeometry.SerreSectionModuleFractionEquality
+import Sheaf.AlgebraicGeometry.SerreSectionModuleFractionAdd
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Canonical additive chart for a graded section module
@@ -84,6 +86,63 @@ theorem serreSectionModuleChartAdditive
             (φ _ (by positivity) y) =
           Scheme.Modules.Hom.app
             ((ρ_ G).inv ≫ G ◁ Proj.unitToTwist (SetLike.pow_mem_graded m hf))
-            (basicOpen (homogeneousSubmodule (Fin 2) k) f) s) := by sorry
+            (basicOpen (homogeneousSubmodule (Fin 2) k) f) s) := by
+  classical
+  let Rel := fun (x : LocalizedModule.Away f M)
+      (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) ↦
+      ∃ (m : ℕ) (y : 𝓜 (0 + ((m • d : ℕ) : ℤ))),
+        x = mk (y : M) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) ∧
+        (G ⊗ Proj.twist (homogeneousSubmodule (Fin 2) k)
+          (0 + ((m • d : ℕ) : ℤ))).presheaf.map
+            (homOfLE le_top : basicOpen (homogeneousSubmodule (Fin 2) k) f ⟶ ⊤).op
+            (φ _ (by positivity) y) =
+          Scheme.Modules.Hom.app
+            ((ρ_ G).inv ≫ G ◁ Proj.unitToTwist (SetLike.pow_mem_graded m hf))
+            (basicOpen (homogeneousSubmodule (Fin 2) k) f) s
+  have heq := serreSectionModuleFractionEquality
+    k G hG M 𝓜 h𝓜 hsmul hneg φ hφ f d hd hf
+  have hadd := serreSectionModuleFractionAdd
+    k G M 𝓜 hsmul φ hφ f d hf
+  have hlift := serreSectionModuleFractionLift
+    k G hG M 𝓜 h𝓜 hsmul hneg φ hφ f d hd hf
+  have htotal : ∀ s, ∃ x, Rel x s := by
+    intro s
+    obtain ⟨m, t, ht⟩ := (serreSectionModuleComparison G hG hd hf).1 s
+    let y := (φ _ (by positivity)).symm t
+    refine ⟨mk (y : M) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f), m, y, rfl, ?_⟩
+    simpa only [y, AddEquiv.apply_symm_apply] using ht
+  choose a ha using htotal
+  have a_add : ∀ s t, a (s + t) = a s + a t := by
+    intro s t
+    exact (heq _ _ _ _ (ha (s + t)) (hadd _ _ _ _ (ha s) (ha t))).2 rfl
+  have a_zero : a 0 = 0 := by
+    have h := a_add 0 0
+    have h' : a 0 + a 0 = a 0 + 0 := by simpa using h.symm
+    exact add_left_cancel h'
+  let alpha : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f)) →+
+      LocalizedModule.Away f M := { toFun := a, map_zero' := a_zero, map_add' := a_add }
+  refine ⟨alpha, ?_, ?_, ?_⟩
+  · intro s t h
+    exact (heq _ _ _ _ (ha s) (ha t)).1 h
+  · apply Set.Subset.antisymm
+    · rintro x ⟨s, rfl⟩
+      obtain ⟨m, y, hy, _⟩ := ha s
+      refine ⟨m • d, y, ⟨f ^ m, ⟨m, rfl⟩⟩, ?_,
+        SetLike.pow_mem_graded m hf, hy.symm⟩
+      simpa using y.property
+    · intro x hx
+      obtain ⟨s, hs, _⟩ := hlift x hx
+      exact ⟨s, (heq _ _ _ _ (ha s) hs).2 rfl⟩
+  · intro m y s
+    constructor
+    · intro h
+      obtain ⟨t, ht, hformula⟩ := hlift _
+        ⟨m • d, y, ⟨f ^ m, ⟨m, rfl⟩⟩, by simpa using y.property,
+          SetLike.pow_mem_graded m hf, rfl⟩
+      have hst := (heq _ _ _ _ (ha s) ht).1 h
+      have hfml := hformula m y rfl
+      simpa only [← hst] using hfml
+    · intro h
+      exact (heq _ _ _ _ (ha s) ⟨m, y, rfl, h⟩).2 rfl
 
 end AlgebraicGeometry.Proj

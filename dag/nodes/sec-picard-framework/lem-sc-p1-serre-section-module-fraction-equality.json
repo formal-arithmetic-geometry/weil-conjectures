@@ -1,0 +1,153 @@
+{
+ "id": "lem-sc-p1-serre-section-module-fraction-equality",
+ "kind": "statement",
+ "title": "Fractions and their represented sections have the same equality",
+ "statement": "Let k be a field, S=k[x0,x1] with its standard grading [def-sc-p1-standard], P=Proj S, G an O_P-module and M a Z-graded S-module with additive pieces M_z and S_n M_z contained in M_(n+z). Let phi_z be additive equivalences M_z -> Gamma(P,G tensor O_P(z)) for z>=0, compatible with homogeneous multiplication [def-weil-pbc-proj-twisting-sheaf]. For f in S_d, define Rel(x,s) to mean that some m>=0 and y in M_(m*d) satisfy x=y/f^m in M_f and that phi_(m*d)(y) restricts to multiplication of s by f^m on D+(f). Assume d>0, G coherent [pqf-def-coherent], M internally graded and M_z=0 for z<0. For all x,z in M_f and s,t in Gamma(D+(f),G), Rel(x,s) and Rel(z,t) imply (x=z iff s=t).",
+ "stmt_deps": [
+  "def-sc-p1-standard",
+  "pqf-def-coherent",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-degree-zero-module-fractions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Proposition 0BXD, final paragraph; parent chart proof step 1"
+ },
+ "proof": [
+  {
+   "text": "Take witnesses y/f^m and z/f^n for the relations. Equality of fractions\nmeans some f^e kills f^n*y-f^m*z. Apply phi in degree (m+n+e)*d.\nCompatibility with homogeneous multiplication and restriction identifies the\nresult with multiplication by f^(m+n+e) on s-t, which is invertible on D+(f),\nso s=t. Conversely, if s=t then the restrictions of phi(f^n*y-f^m*z)\nvanish. The annihilation clause of serreSectionModuleComparison supplies a\npower f^e killing its image under phi. Compatibility and injectivity of phi\nkill f^e*(f^n*y-f^m*z), and LocalizedModule.mk_eq gives equal fractions.\nThe empty open and zero localization when f=0 satisfy both directions.",
+   "uses": [
+    "lem-sc-p1-serre-section-module-comparison",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-serre-section-module-comparison",
+  "def-weil-pbc-proj-twisting-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Expanded homogeneous fraction calculation from Proposition 0BXD, final paragraph (read at https://stacks.math.columbia.edu/tag/0BXD); parent chart proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degree zero fractions in a graded module localization form an additive subgroup and identify sections on standard opens of Proj",
+   "results": "8 hits; ; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.sectionsSubring, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem', AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier, HomogeneousLocalization.Away.isLocalizationElem, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply, HomogeneousLocalization.Away.mk, AlgebraicGeometry.sectionInBasicOpen",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule, AddEquiv",
+   "results": "0 hits; ; ",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "additive subgroup of homogeneous equal degree module fractions",
+   "results": "0 hits; service unavailable: Internal Server Error; ",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "degreeZeroFractions|mk_add_mk|ofBijective",
+   "results": "25 hits; ; Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean, Mathlib/NumberTheory/LocalField/Basic.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/NumberTheory/RamificationInertia/Basic.lean",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equality of homogeneous module fractions is equivalent to equality of sections after inverting a homogeneous section on Proj",
+   "results": "8 hits; ; HomogeneousLocalization.ext_iff_val, HomogeneousLocalization.NumDenSameDeg.ext_iff, HomogeneousLocalization.NumDenSameDeg.ext, HomogeneousLocalization.NumDenSameDeg.mk.inj, AlgebraicGeometry.Proj.ext_iff, HomogeneousLocalization.val_injective_iff, AlgebraicGeometry.Proj.ext, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "twistMul|unitToTwist|degreeZeroFractions",
+   "results": "0 hits; ; ",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "multiplication by homogeneous polynomial trivializes twisting sheaf tensor any module on standard open of Proj",
+   "results": "8 hits; ; AlgebraicGeometry.Proj.mul_apply, AlgebraicGeometry.Proj.awayMap_awayToSection_assoc, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection, AlgebraicGeometry.Proj.awayToSection, AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply, AlgebraicGeometry.sectionInBasicOpen, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.mul_mem'",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "addition of homogeneous fractions compatible with canonical map to sections on standard open of projective spectrum",
+   "results": "0 hits; service unavailable: Internal Server Error; ",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "LocalizedModule.mk_add_mk",
+   "results": "1 hits; ; LocalizedModule.mk_add_mk",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SerreSectionModuleChartAdditive",
+  "date": "2026-10-12",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-p1-graded-resolution",
+   "place": "proof, canonical graded-section-module chart, fraction-equality",
+   "via": [
+    "lem-sc-p1-serre-section-module-chart-additive",
+    "lem-sc-p1-serre-section-module-charts",
+    "lem-sc-p1-coherent-proj-representation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SerreSectionModuleFractionEquality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SerreSectionModuleFractionEquality.lean",
+  "declaration": "AlgebraicGeometry.Proj.serreSectionModuleFractionEquality",
+  "statement": "theorem serreSectionModuleFractionEquality (k : Type u) [Field k] (G : (Proj (homogeneousSubmodule (Fin 2) k)).Modules) (hG : RingedSpace.IsCoherent (Proj (homogeneousSubmodule (Fin 2) k)).toRingedSpace G) (M : ModuleCat.{u} (MvPolynomial (Fin 2) k)) (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜) (hsmul : ∀ (n : ℕ) (z : ℤ) (a : MvPolynomial (Fin 2) k) (y : M), a ∈ homogeneousSubmodule (Fin 2) k n → y ∈ 𝓜 z → a • y ∈ 𝓜 (n + z)) (hneg : ∀ z : ℤ, z < 0 → 𝓜 z = ⊥) (φ : ∀ z : ℤ, 0 ≤ z → (𝓜 z ≃+ Γ(G ⊗ Proj.twist (homogeneousSubmodule (Fin 2) k) z, ⊤))) (hφ : ∀ (z : ℤ) (hz : 0 ≤ z) (e : ℕ) (hze : 0 ≤ z + e) (a : MvPolynomial (Fin 2) k) (ha : a ∈ homogeneousSubmodule (Fin 2) k e) (y : 𝓜 z) (hay : a • (y : M) ∈ 𝓜 (z + e)), φ (z + e) hze ⟨a • (y : M), hay⟩ = Scheme.Modules.Hom.app (G ◁ Proj.twistMul z ha) ⊤ (φ z hz y)) (f : MvPolynomial (Fin 2) k) (d : ℕ) (hd : 0 < d) (hf : f ∈ homogeneousSubmodule (Fin 2) k d) : let Rel := fun (x : LocalizedModule.Away f M) (s : G.val.obj (op (basicOpen (homogeneousSubmodule (Fin 2) k) f))) ↦ ∃ (m : ℕ) (y : 𝓜 (0 + ((m • d : ℕ) : ℤ))), x = mk (y : M) (⟨f ^ m, ⟨m, rfl⟩⟩ : Submonoid.powers f) ∧ (G ⊗ Proj.twist (homogeneousSubmodule (Fin 2) k) (0 + ((m • d : ℕ) : ℤ))).presheaf.map (homOfLE le_top : basicOpen (homogeneousSubmodule (Fin 2) k) f ⟶ ⊤).op (φ _ (by positivity) y) = Scheme.Modules.Hom.app ((ρ_ G).inv ≫ G ◁ Proj.unitToTwist (SetLike.pow_mem_graded m hf)) (basicOpen (homogeneousSubmodule (Fin 2) k) f) s ∀ x z s t, Rel x s → Rel z t → (x = z ↔ s = t)",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T110303-L-615689",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261012T110303-L-615689",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
