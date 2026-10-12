@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.Gm
 public import WeilConjectures.FieldTheory.Cr
+import Sheaf.FieldTheory.BrauerGaloisComparison
+import Sheaf.AlgebraicGeometry.EtaleGaloisUnitsComparison
 
 /-!
 # The Brauer group of a field as étale cohomology
@@ -38,11 +40,10 @@ namespace AlgebraicGeometry.Scheme
 central simple `K`-algebras is in bijection with the cohomological Brauer group
 `H²(Spec(K)_ét, 𝔾ₘ)`. -/
 theorem nonempty_equiv_cohomologicalBrauerGroup (K : Type u) [Field K] :
-    Nonempty (BrauerGroup.{u, u} K ≃ (Spec (.of K)).CohomologicalBrauerGroup) :=
-  -- Proof sketch: both sides are identified with the Galois cohomology group
-  -- `H²(Gal(K^sep/K), (K^sep)ˣ)`, via crossed product algebras resp. the equivalence between
-  -- étale sheaves on `Spec K` and discrete `Gal(K^sep/K)`-sets.
-  sorry
+    Nonempty (BrauerGroup.{u, u} K ≃ (Spec (.of K)).CohomologicalBrauerGroup) := by
+  obtain ⟨eBrauer⟩ := Field.nonempty_equiv_brauerGroup_galoisUnitsH2 K
+  obtain ⟨eEtale⟩ := nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup K
+  exact ⟨eBrauer.trans eEtale⟩
 
 end AlgebraicGeometry.Scheme
 

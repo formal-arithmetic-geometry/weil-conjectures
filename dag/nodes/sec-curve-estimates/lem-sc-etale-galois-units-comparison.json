@@ -1,0 +1,121 @@
+{
+ "id": "lem-sc-etale-galois-units-comparison",
+ "kind": "statement",
+ "title": "Etale multiplicative degree-two cohomology equals Galois cohomology",
+ "statement": "For every field K, H²_G(Ks^×) [def-sc-galois-units-cohomology] is in bijection with H²(Spec(K)_et,G_m), the cohomological Brauer group [def-br].",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Lemmas 04JQ and 03QU; Example 03QV (2); Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology",
+  "def-br"
+ ],
+ "proof": [
+  {
+   "text": "Choose an algebraically closed geometric point containing Ks. The geometric stalk equivalence identifies abelian etale sheaves over Spec K with discrete continuous absolute-Galois modules. The stalk of G_m is Ks^× with its natural action: etale neighbourhoods see finite separable extensions, even for imperfect K.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Under this exact equivalence, global sections correspond to invariants and injective resolutions are transported to injective resolutions. Therefore all right derived functors of sections agree with derived invariants. Continuous homogeneous cochains compute these derived invariants for discrete modules and profinite G. Take degree two, remove canonical universe lifts of the coefficient group, and forget the group structure to get the desired equivalence. Since G is compact Hausdorff, the compact-open exponential law identifies Mathlib iterated continuous maps with continuous maps on finite powers of G. TopModuleCat homology has underlying algebraic kernel modulo image, so forgetting its topology preserves the cocycle classes.",
+   "uses": [
+    "def-sc-galois-units-cohomology",
+    "def-br"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-br",
+  "def-sc-galois-units-cohomology",
+  "lem-exc-abelian-sheaves-gmodules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Lemmas 04JQ and 03QU; Example 03QV (2); Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Brauer group Galois cohomology second",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brauer group of a field equivalent to second Galois cohomology of units of separable closure",
+   "results": "BrauerGroup definition; H1ofAutOnUnitsUnique; no degree-two comparison. Loogle BrauerGroup returns only its definition; continuousCohomology provides the cochain model.",
+   "date": "2026-10-12",
+   "verdict": "no comparison found"
+  },
+  {
+   "tool": "grep",
+   "query": "BrauerGroup|Galois.*cohomolog|continuousCohomology in Mathlib, WeilConjectures, Sheaf; blueprint_refs search Brauer Galois",
+   "results": "Only target comparison is sorry. Existing discreteContinuousCohomologyFunctor requires finite coefficient ring. Mathlib continuousCohomology gives homogeneous cochain model but no Brauer or etale comparison. No matching blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "no match; reuse continuousCohomology for the intermediate object"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: field Brauer vanishing via Tsen; missing algebraic/cohomological field comparison used by the source library",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleGaloisUnitsComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGaloisUnitsComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup",
+  "statement": "theorem nonempty_equiv_galoisUnitsH2_cohomologicalBrauerGroup (K : Type u) [Field K] : Nonempty (Field.GaloisUnitsH2 K ≃ (Spec (.of K)).CohomologicalBrauerGroup)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T042415-L-1819088",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T042415-L-1819088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

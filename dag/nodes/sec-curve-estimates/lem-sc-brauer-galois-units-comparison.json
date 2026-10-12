@@ -1,0 +1,120 @@
+{
+ "id": "lem-sc-brauer-galois-units-comparison",
+ "kind": "statement",
+ "title": "Central simple algebras and continuous Galois degree-two classes",
+ "statement": "For every field K, its set of Brauer equivalence classes of finite-dimensional central simple K-algebras is in bijection with H²_G(Ks^×) [def-sc-galois-units-cohomology].",
+ "source": {
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Theorem 03R7, its scalar-defect construction following Lemma 03R6, and Section 0DVG"
+ },
+ "stmt_deps": [
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "A central simple algebra splits over a finite Galois extension. Its projective-linear descent cocycle lifts to matrices whose scalar defects give a continuous two-cocycle. Changes of lifts give coboundaries; tensor products multiply the scalar defects, and matrix amplification preserves the class. Thus this construction is well-defined on Brauer equivalence.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "When the scalar defect is a coboundary, adjust the lifts to a general-linear cocycle. Matrix Hilbert 90 trivializes that cocycle and descends a vector space V with algebra End_K(V). Thus the kernel consists of split algebras. Applying this to A tensor B^op proves injectivity.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "A continuous class is represented over a finite Galois extension L/K. The twisted algebra with L-basis u_g and relations u_g a=g(a)u_g and u_g u_h=c(g,h)u_gh is central simple and realizes the class (up to the chosen scalar-defect sign convention). Hence the map is surjective. Homogeneous and inhomogeneous continuous cochains are identified by their usual change of variables, giving the indicated bijection. Since G is compact Hausdorff, the compact-open exponential law identifies Mathlib iterated continuous maps with continuous maps on finite powers of G. TopModuleCat homology has underlying algebraic kernel modulo image, so forgetting its topology preserves the cocycle classes.",
+   "uses": [
+    "def-sc-galois-units-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sc-galois-units-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Etale Cohomology",
+  "place": "Theorem 03R7, its scalar-defect construction following Lemma 03R6, and Section 0DVG"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Brauer group Galois cohomology second",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Brauer group of a field equivalent to second Galois cohomology of units of separable closure",
+   "results": "BrauerGroup definition; H1ofAutOnUnitsUnique; no degree-two comparison. Loogle BrauerGroup returns only its definition; continuousCohomology provides the cochain model.",
+   "date": "2026-10-12",
+   "verdict": "no comparison found"
+  },
+  {
+   "tool": "grep",
+   "query": "BrauerGroup|Galois.*cohomolog|continuousCohomology in Mathlib, WeilConjectures, Sheaf; blueprint_refs search Brauer Galois",
+   "results": "Only target comparison is sorry. Existing discreteContinuousCohomologyFunctor requires finite coefficient ring. Mathlib continuousCohomology gives homogeneous cochain model but no Brauer or etale comparison. No matching blueprint node.",
+   "date": "2026-10-12",
+   "verdict": "no match; reuse continuousCohomology for the intermediate object"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup",
+  "date": "2026-10-12",
+  "group": "P2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-brauer-zero",
+   "place": "proper case: field Brauer vanishing via Tsen; missing algebraic/cohomological field comparison used by the source library",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-thm-br",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.BrauerGaloisComparison",
+  "file": "lean/Sheaf/FieldTheory/BrauerGaloisComparison.lean",
+  "declaration": "Field.nonempty_equiv_brauerGroup_galoisUnitsH2",
+  "statement": "theorem nonempty_equiv_brauerGroup_galoisUnitsH2 (K : Type u) [Field K] : Nonempty (BrauerGroup.{u, u} K ≃ GaloisUnitsH2 K)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T042415-L-1819088",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261012T042415-L-1819088",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
