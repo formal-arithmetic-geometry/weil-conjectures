@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Sheaf.RingTheory.StrictlyStandardElement
 public import Sheaf.RingTheory.SingularIdeal
 import Sheaf.RingTheory.DesingularizeStrictlyStandard
-import Sheaf.RingTheory.PopescuLifting
+import Sheaf.RingTheory.PopescuLiftingWitness
 import Sheaf.RingTheory.SingularIdealLocalizationSmooth
 
 /-!
@@ -94,6 +94,63 @@ theorem popescu_desingularize_lifting_apply
           Ideal.map
             (Ideal.Quotient.mk (Ideal.map (algebraMap R Λ) (Ideal.span ({π ^ 8} : Set R))))
             (Ideal.map β.toRingHom (singularIdeal R B)).radical := by
-  sorry
+  obtain ⟨D, instD, instRD, hfpD, δ, hquot, hπD, hsingD⟩ :=
+    popescu_lifting_witness R A Λ π hAnnR hAnnΛ α C σ τ hfactor
+  let : CommRing D := instD
+  let : Algebra R D := instRD
+  let : FinitePresentation R D := hfpD
+  have hR : ∀ r : R, r * π = 0 ↔ r * π ^ 2 = 0 := by
+    intro r
+    have h := SetLike.ext_iff.mp hAnnR r
+    change r ∈ (Ideal.span ({π} : Set R)).annihilator ↔
+      r ∈ (Ideal.span ({π ^ 2} : Set R)).annihilator at h
+    simpa only [Submodule.mem_annihilator_span_singleton, smul_eq_mul] using h
+  have hΛ : ∀ l : Λ, l * algebraMap R Λ π = 0 ↔
+      l * (algebraMap R Λ π) ^ 2 = 0 := by
+    intro l
+    have h := SetLike.ext_iff.mp hAnnΛ l
+    change l ∈ (Ideal.span ({algebraMap R Λ π} : Set Λ)).annihilator ↔
+      l ∈ (Ideal.span ({(algebraMap R Λ π) ^ 2} : Set Λ)).annihilator at h
+    simpa only [Submodule.mem_annihilator_span_singleton, smul_eq_mul] using h
+  obtain ⟨B, instB, instRB, hfpB, β, aB, dB, ha, hd, _, hHD⟩ :=
+    exists_desingularization_strictlyStandard R Λ A D π α δ hR hΛ hstandard hquot
+  let : CommRing B := instB
+  let : Algebra R B := instRB
+  let : FinitePresentation R B := hfpB
+  have hπB : algebraMap R B π ∈ singularIdeal R B := by
+    rw [← dB.commutes π]
+    exact hHD (Ideal.mem_map_of_mem dB.toRingHom hπD)
+  have : Smooth R (Localization.Away (algebraMap R B π)) :=
+    smooth_localization_of_mem_singularIdeal R B _ hπB
+  have hsmooth :
+      @Smooth (Localization.Away π) _ (Localization.Away (algebraMap R B π)) _
+        (Localization.awayMap (algebraMap R B) π).toAlgebra := by
+    let : Algebra (Localization.Away π) (Localization.Away (algebraMap R B π)) :=
+      (Localization.awayMap (algebraMap R B) π).toAlgebra
+    have : IsScalarTower R (Localization.Away π)
+        (Localization.Away (algebraMap R B π)) := by
+      apply IsScalarTower.of_algebraMap_eq
+      intro r
+      change algebraMap B _ (algebraMap R B r) =
+        Localization.awayMap (algebraMap R B) π (algebraMap R _ r)
+      simp [Localization.awayMap, IsLocalization.Away.map, IsLocalization.map_eq]
+    have : FormallyUnramified R (Localization.Away π) :=
+      FormallyUnramified.of_isLocalization (Submonoid.powers π)
+    exact ⟨FormallySmooth.of_restrictScalars R (Localization.Away π)
+        (Localization.Away (algebraMap R B π)),
+      FinitePresentation.of_restrict_scalars_finitePresentation R (Localization.Away π)
+        (Localization.Away (algebraMap R B π))⟩
+  refine ⟨B, instB, instRB, hfpB, β, aB, ha, hsmooth, ?_⟩
+  apply hsingD.trans
+  apply Ideal.map_mono
+  apply Ideal.radical_mono
+  calc
+    Ideal.map δ.toRingHom (singularIdeal R D) =
+        Ideal.map β.toRingHom (Ideal.map dB.toRingHom (singularIdeal R D)) := by
+      rw [Ideal.map_map]
+      change Ideal.map δ.toRingHom (singularIdeal R D) =
+        Ideal.map (β.comp dB).toRingHom (singularIdeal R D)
+      rw [hd]
+    _ ≤ Ideal.map β.toRingHom (singularIdeal R B) := Ideal.map_mono hHD
 
 end Algebra

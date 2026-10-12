@@ -32,117 +32,41 @@
  ],
  "proof": [
   {
-   "text": "(Annihilators of $\\pi^4$.) In any ring $T$ with an element $t$ such that $\\mathrm{Ann}_T(t)=\\mathrm{Ann}_T(t^2)$ one has $\\mathrm{Ann}_T(t^n)=\\mathrm{Ann}_T(t)$ for all $n\\ge1$: by induction on $n$, if $t^{n+1}x=0$ with $n\\ge1$ then $t^2\\cdot(t^{n-1}x)=0$, so $t\\cdot(t^{n-1}x)=0$, i.e. $t^nx=0$, so $x\\in\\mathrm{Ann}_T(t^n)=\\mathrm{Ann}_T(t)$; the inclusion $\\mathrm{Ann}_T(t)\\subset\\mathrm{Ann}_T(t^n)$ is clear. Applied to $T=R$, $t=\\pi$ and to $T=\\Lambda$, $t$ the image of $\\pi$: $\\mathrm{Ann}_R(\\pi^4)=\\mathrm{Ann}_R(\\pi)=\\mathrm{Ann}_R(\\pi^8)=\\mathrm{Ann}_R((\\pi^4)^2)$ and likewise $\\mathrm{Ann}_\\Lambda(\\pi^4)=\\mathrm{Ann}_\\Lambda((\\pi^4)^2)$. So the element $\\pi':=\\pi^4\\in R$ satisfies the annihilator hypotheses of [lem-weil-pbc-popescu-lifting], and $\\pi'^2=\\pi^8$.",
+   "text": "Use the fourth-power lifting lemma to obtain D, δ, compatible quotient φ, π ∈ H_{D/R}, and the singular-ideal comparison from C to D.",
+   "uses": [
+    "new-popescu-lifting-witness"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the equalities of annihilator ideals to the multiplication-kernel equivalences using the annihilator-of-span-singleton criterion. Apply 07CT to α, δ and φ. This gives B, β, aB and dB with β∘aB=α, β∘dB=δ and dB(H_D)B ⊆ H_B.",
+   "uses": [
+    "lem-weil-pbc-popescu-desingularize-strictly-standard"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The image of π in B belongs to H_B by the inclusion and π ∈ H_D. The singular-ideal localization theorem makes B_π smooth over R. Equip B_π with the canonical awayMap R_π-algebra structure; its scalar tower follows from IsLocalization.map_eq. Formal smoothness ascends from R to R_π by FormallySmooth.of_restrictScalars, since R_π is formally unramified over R. FinitePresentation.of_restrict_scalars_finitePresentation gives finite presentation over R_π. Thus R_π → B_π is smooth.",
+   "uses": [
+    "lem-weil-pbc-singular-ideal-localization-smooth"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The equality β∘dB=δ and dB(H_D)B ⊆ H_B give δ(H_D)Λ ⊆ β(H_B)Λ. Apply monotonicity of radical and quotient ideal map to the comparison supplied by the lifting lemma. This proves (b).",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893)"
-   }
-  },
-  {
-   "text": "(Apply Lemma 07CP with $\\pi^4$ in place of $\\pi$.) The structure map $R/\\pi^8R\\to\\bar C$ and the given map $\\bar C\\to\\Lambda/\\pi^8\\Lambda$ are homomorphisms of $R$-algebras (homomorphisms of $R/\\pi^8R$-algebras are $R$-linear), and $\\bar C$ is of finite presentation over $R/\\pi^8R=R/\\pi'^2R$ [def-weil-pbc-finitely-presented-algebra]; $R$ is Noetherian [def-weil-pbc-noetherian-ring] and by Step 1 $\\mathrm{Ann}_R(\\pi')=\\mathrm{Ann}_R(\\pi'^2)$, $\\mathrm{Ann}_\\Lambda(\\pi')=\\mathrm{Ann}_\\Lambda(\\pi'^2)$. So [lem-weil-pbc-popescu-lifting] (Stacks 07CP) applied to $R$, $\\Lambda$, $\\pi'=\\pi^4$ and $R/\\pi^8R\\to\\bar C\\to\\Lambda/\\pi^8\\Lambda$ gives an $R$-algebra $D$, a homomorphism of $R$-algebras $\\delta:D\\to\\Lambda$ and a homomorphism of $R$-algebras $\\rho:\\bar C\\to D/\\pi^4D$ such that (i) the composite $\\bar C\\xrightarrow{\\rho}D/\\pi^4D\\to\\Lambda/\\pi^4\\Lambda$ ($\\delta$ modulo $\\pi^4$) equals $\\bar C\\to\\Lambda/\\pi^8\\Lambda\\to\\Lambda/\\pi^4\\Lambda$ (the right square of the diagram), and with (a') $D$ of finite presentation over $R$; (b') $R\\to D$ smooth at every prime $\\mathfrak q\\subset D$ with $\\pi^4\\notin\\mathfrak q$, i.e. with $\\pi\\notin\\mathfrak q$; (c') $R\\to D$ smooth at every prime $\\mathfrak q\\subset D$ with $\\pi^4\\in\\mathfrak q$ such that the prime $\\rho^{-1}(\\mathfrak q/\\pi^4D)$ of $\\bar C$ is one at which $R/\\pi^8R\\to\\bar C$ is smooth (smooth at a prime in the sense of [def-weil-pbc-singular-ideal]).",
-   "uses": [
-    "lem-weil-pbc-popescu-lifting",
-    "def-weil-pbc-finitely-presented-algebra",
-    "def-weil-pbc-noetherian-ring",
-    "def-weil-pbc-singular-ideal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893); Lemma Tag 07CP (lemma-lifting, line 1421) with $\\pi^4$ for $\\pi$"
-   }
-  },
-  {
-   "text": "(The map $A/\\pi^4A\\to D/\\pi^4D$.) Let $\\sigma:A/\\pi^8A\\to\\bar C$ be the first map of the given factorization and $\\alpha:A\\to\\Lambda$ the given map. The composite $\\psi:A\\to A/\\pi^8A\\xrightarrow{\\sigma}\\bar C\\xrightarrow{\\rho}D/\\pi^4D$ is a homomorphism of $R$-algebras; it sends $\\pi^4A$ to $\\pi^4(D/\\pi^4D)=0$, so it factors through an $R$-algebra map $\\varphi:A/\\pi^4A\\to D/\\pi^4D$. It is compatible with the maps to $\\Lambda/\\pi^4\\Lambda$: for $a\\in A$, the image of $\\varphi(a\\bmod\\pi^4)=\\rho(\\sigma(a\\bmod\\pi^8))$ in $\\Lambda/\\pi^4\\Lambda$ under $\\delta\\bmod\\pi^4$ equals, by (i) of Step 2, the image of $\\sigma(a\\bmod\\pi^8)$ under $\\bar C\\to\\Lambda/\\pi^8\\Lambda\\to\\Lambda/\\pi^4\\Lambda$, which, as $A/\\pi^8A\\to\\bar C\\to\\Lambda/\\pi^8\\Lambda$ factors $\\alpha\\bmod\\pi^8$, is $\\alpha(a)\\bmod\\pi^4\\Lambda$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893)"
-   }
-  },
-  {
-   "text": "(Apply Lemma 07CT.) The hypotheses of [lem-weil-pbc-popescu-desingularize-strictly-standard] (Stacks 07CT) hold for $R$, $\\Lambda$, $\\pi$, $\\alpha:A\\to\\Lambda$ and $\\delta:D\\to\\Lambda$: $R$ is Noetherian; $\\mathrm{Ann}_R(\\pi)=\\mathrm{Ann}_R(\\pi^2)$ and $\\mathrm{Ann}_\\Lambda(\\pi)=\\mathrm{Ann}_\\Lambda(\\pi^2)$ are hypotheses of the lemma; $A$ is of finite presentation over $R$ by hypothesis and $D$ by (a') of Step 2 [def-weil-pbc-finitely-presented-algebra]; (1) the image of $\\pi$ in $A$ is strictly standard in $A$ over $R$ [def-weil-pbc-strictly-standard-element] by hypothesis; (2) $\\varphi$ of Step 3 is an $R$-algebra map $A/\\pi^4A\\to D/\\pi^4D$ compatible with the maps to $\\Lambda/\\pi^4\\Lambda$. It gives an $R$-algebra $B$ of finite presentation over $R$, a homomorphism of $R$-algebras $\\beta:B\\to\\Lambda$ and homomorphisms of $R$-algebras $A\\to B$, $D\\to B$ with $\\beta\\circ(A\\to B)=\\alpha$ and $\\beta\\circ(D\\to B)=\\delta$, such that $H_{D/R}B\\subset H_{B/R}$. In particular $A\\to B\\to\\Lambda$ is a factorization of $\\alpha$ by homomorphisms of $R$-algebras with $B$ of finite presentation, as the lemma requires; it remains to prove (a) and (b).",
-   "uses": [
-    "lem-weil-pbc-popescu-desingularize-strictly-standard",
-    "def-weil-pbc-strictly-standard-element",
-    "def-weil-pbc-finitely-presented-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893); Lemma Tag 07CT (lemma-desingularize-strictly-standard, line 1812)"
-   }
-  },
-  {
-   "text": "($\\pi\\in H_{D/R}$, hence the image of $\\pi$ lies in $H_{B/R}$.) Let $\\mathfrak q\\subset D$ be a prime containing $H_{D/R}$. By [def-weil-pbc-singular-ideal], $V(H_{D/R})$ is the set of primes at which $R\\to D$ is not smooth, so $R\\to D$ is not smooth at $\\mathfrak q$, and by (b') of Step 2, $\\pi\\in\\mathfrak q$. Hence $\\pi$ (its image in $D$) lies in $\\bigcap_{\\mathfrak q\\in V(H_{D/R})}\\mathfrak q=\\sqrt{H_{D/R}}$ [lem-weil-pbc-zero-locus-eq-iff-radical-eq], which is $H_{D/R}$ since $H_{D/R}$ is a radical ideal by definition [def-weil-pbc-singular-ideal]. As $D\\to B$ is an $R$-algebra map, the image $g\\in B$ of $\\pi$ lies in $H_{D/R}B\\subset H_{B/R}$ (Step 4), and the image $\\beta(g)=\\pi\\cdot1_\\Lambda$ of $\\pi$ in $\\Lambda$ lies in $J:=H_{B/R}\\Lambda$, the ideal of $\\Lambda$ generated by $\\beta(H_{B/R})$. Consequently $\\pi^8\\Lambda\\subset J\\subset\\sqrt J$.",
-   "uses": [
-    "def-weil-pbc-singular-ideal",
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893); the final verification, which Stacks omits (\"We omit the verification\"), is written out here"
-   }
-  },
-  {
-   "text": "(Property (a): $R_\\pi\\to B_\\pi$ is smooth.) Let $g\\in B$ be the image of $\\pi$, so $B_\\pi=B_g$. By Step 5, $g\\in H_{B/R}$, so $B_g$ is a smooth $R$-algebra [lem-weil-pbc-singular-ideal-localization-smooth]. By base change [lem-weil-pbc-smooth-ring-map-base-change-composition] (1) with $R'=R_\\pi$, the ring map $R_\\pi\\to R_\\pi\\otimes_RB_g$, $x\\mapsto x\\otimes1$, is smooth [def-weil-pbc-smooth-ring-map]. By [lem-weil-pbc-localization-base-change] (multiplicative set $M=\\{1,\\pi,\\pi^2,\\dots\\}$, $\\psi:R\\to B_g$), the map $B_g\\to B_g\\otimes_RR_\\pi$, $b\\mapsto b\\otimes1$, is a localization of $B_g$ at the powers of $g/1$; since $g/1$ is already a unit of $B_g$, this localization map is bijective (injective: $(g/1)^kb=0$ implies $b=0$; surjective: every element is $b\\cdot(g/1)^{-k}$ times a unit, i.e. $(b(g/1)^{-k})\\otimes1$). Its inverse $\\theta:R_\\pi\\otimes_RB_g\\cong B_g\\otimes_RR_\\pi\\to B_g$ is a ring isomorphism with $\\theta(x\\otimes1)=x\\cdot1_{B_g}$ for $x=r/\\pi^n\\in R_\\pi$, because $(r/\\pi^n)\\otimes1$ and $1\\otimes(r/\\pi^n)$ both equal $(r\\otimes1)(\\pi\\otimes1)^{-n}$ in the tensor product; so $\\theta$ is an isomorphism of $R_\\pi$-algebras onto $B_g=B_\\pi$ with its $R_\\pi$-algebra structure $r/\\pi^n\\mapsto r g^{-n}$. Smoothness of $R_\\pi\\to R_\\pi\\otimes_RB_g$ is therefore smoothness of $R_\\pi\\to B_\\pi$ (the conditions of [def-weil-pbc-smooth-ring-map] are invariant under isomorphism of $R_\\pi$-algebras). This is (a).",
-   "uses": [
-    "lem-weil-pbc-singular-ideal-localization-smooth",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-localization-base-change",
-    "def-weil-pbc-smooth-ring-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893); the final verification, which Stacks omits (\"We omit the verification\"), is written out here"
-   }
-  },
-  {
-   "text": "(Primes of $\\Lambda$ containing $J$.) Let $\\mathfrak p\\subset\\Lambda$ be a prime with $J\\subset\\mathfrak p$, and let $\\bar{\\mathfrak r}\\subset\\bar C$ be the inverse image of the prime $\\mathfrak p/\\pi^8\\Lambda$ of $\\Lambda/\\pi^8\\Lambda$ (defined since $\\pi^8\\Lambda\\subset J\\subset\\mathfrak p$ by Step 5) under $\\bar C\\to\\Lambda/\\pi^8\\Lambda$. Claim: $H_{\\bar C/(R/\\pi^8R)}\\subset\\bar{\\mathfrak r}$. Suppose not. Then $R/\\pi^8R\\to\\bar C$ is smooth at $\\bar{\\mathfrak r}$ [def-weil-pbc-singular-ideal] (the primes not containing the singular ideal are exactly those where the map is smooth). Let $\\mathfrak q=\\delta^{-1}(\\mathfrak p)\\subset D$; then $\\pi^4\\in\\mathfrak q$ since $\\pi\\in\\mathfrak p$ (Step 5), and $\\mathfrak q/\\pi^4D$ is the inverse image of $\\mathfrak p/\\pi^4\\Lambda$ under $\\delta\\bmod\\pi^4:D/\\pi^4D\\to\\Lambda/\\pi^4\\Lambda$. Hence $\\rho^{-1}(\\mathfrak q/\\pi^4D)$ is the inverse image of $\\mathfrak p/\\pi^4\\Lambda$ under $(\\delta\\bmod\\pi^4)\\circ\\rho$, which by (i) of Step 2 is $\\bar C\\to\\Lambda/\\pi^8\\Lambda\\to\\Lambda/\\pi^4\\Lambda$; as the inverse image of $\\mathfrak p/\\pi^4\\Lambda$ in $\\Lambda/\\pi^8\\Lambda$ is $\\mathfrak p/\\pi^8\\Lambda$, we get $\\rho^{-1}(\\mathfrak q/\\pi^4D)=\\bar{\\mathfrak r}$. By (c') of Step 2 [lem-weil-pbc-popescu-lifting], $R\\to D$ is smooth at $\\mathfrak q$, so $H_{D/R}\\not\\subset\\mathfrak q$ [def-weil-pbc-singular-ideal]: pick $d\\in H_{D/R}$ with $d\\notin\\mathfrak q$, i.e. $\\delta(d)\\notin\\mathfrak p$. But the image $d_B$ of $d$ in $B$ lies in $H_{D/R}B\\subset H_{B/R}$ (Step 4), so $\\delta(d)=\\beta(d_B)\\in J\\subset\\mathfrak p$, a contradiction. This proves the claim.",
-   "uses": [
-    "def-weil-pbc-singular-ideal",
-    "lem-weil-pbc-popescu-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893); the final verification, which Stacks omits (\"We omit the verification\"), is written out here"
-   }
-  },
-  {
-   "text": "(Property (b).) Let $\\bar\\lambda\\in\\Lambda/\\pi^8\\Lambda$ be the image of some $h\\in H_{\\bar C/(R/\\pi^8R)}$ and $\\lambda\\in\\Lambda$ any lift of $\\bar\\lambda$. For every prime $\\mathfrak p\\supset J$ of $\\Lambda$, Step 7 gives $h\\in\\bar{\\mathfrak r}$, i.e. $\\bar\\lambda\\in\\mathfrak p/\\pi^8\\Lambda$, i.e. $\\lambda\\in\\mathfrak p$. Hence $\\lambda\\in\\bigcap_{\\mathfrak p\\in V(J)}\\mathfrak p=\\sqrt J$ [lem-weil-pbc-zero-locus-eq-iff-radical-eq], so $\\bar\\lambda$ lies in the image $\\sqrt J/\\pi^8\\Lambda$ of $\\sqrt J=\\sqrt{H_{B/R}\\Lambda}$ in $\\Lambda/\\pi^8\\Lambda$ (it contains $\\pi^8\\Lambda$ by Step 5). This image is an ideal of $\\Lambda/\\pi^8\\Lambda$ (the image of an ideal under a surjective ring map), so it contains the ideal generated by all such $\\bar\\lambda$, i.e. by the image of $H_{\\bar C/(R/\\pi^8R)}$ under $\\bar C\\to\\Lambda/\\pi^8\\Lambda$. This is (b), and with Steps 4 and 6 the lemma is proved.",
-   "uses": [
-    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/smoothing.tex",
-    "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893); the final verification, which Stacks omits (\"We omit the verification\"), is written out here"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-popescu-lifting",
-  "def-weil-pbc-finitely-presented-algebra",
-  "def-weil-pbc-noetherian-ring",
-  "def-weil-pbc-singular-ideal",
+  "new-popescu-lifting-witness",
   "lem-weil-pbc-popescu-desingularize-strictly-standard",
-  "def-weil-pbc-strictly-standard-element",
-  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
-  "lem-weil-pbc-singular-ideal-localization-smooth",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-localization-base-change",
-  "def-weil-pbc-smooth-ring-map"
+  "lem-weil-pbc-singular-ideal-localization-smooth"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/smoothing.tex",
-  "place": "Smoothing Ring Maps, proof of Lemma Tag 07F0 (lemma-desingularize-lifting-apply, lines 1883-1893), applying Lemma Tag 07CP (lemma-lifting, line 1421) with $\\pi^4$ for $\\pi$ and Lemma Tag 07CT (lemma-desingularize-strictly-standard, line 1812); the final verification, which Stacks omits, is written out in Steps 1, 3 and 5-8 by the worker from the statements of 07CP, 07CT and Definition 07C5"
+  "place": "Lemma 07F0: genuine split at the 07CP lifting step, followed by direct application of existing 07CT and a proved localization/ideal-monotonicity verification; second reader S3, 2026-10-13"
  },
  "mathlib_searches": [
   {
@@ -219,5 +143,15 @@
   "group": "F1",
   "result": "fix",
   "note": "Noetherian R; Ann(π)=Ann(π²) in R and Λ via Module.annihilator (H1 07CP form); α : A →ₐ[R] Λ, FinitePresentation R A, IsStrictlyStandardElement; C fp over R/π⁸ with σ, τ R/π⁸-algebra maps via algebraQuotientMapQuotient (C1 form) and hfactor; tied ∃ B (max u v w z) fp, β.comp aB = α; (a) @Smooth R_π B_π via awayMap; (b) map τ H_C ≤ image of radical of map β H_B; reverted the delivery's statement correction of the item (statement, statement_change kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261012T184345-L-4020460",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
