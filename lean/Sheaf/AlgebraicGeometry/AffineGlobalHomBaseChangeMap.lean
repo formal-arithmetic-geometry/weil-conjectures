@@ -16,6 +16,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
 
 /-!
 REPAIR: Construct affineDerivedExtensionAdjunction and canonicalPullbackAdjunction
@@ -96,6 +99,8 @@ def schemeGlobalDerivedHomOver {R : CommRingCat.{u}} {X : Scheme.{u}}
       DerivedCategory (ModuleCat.{u} R) :=
   schemeGlobalDerivedHom X ⋙ (affineGlobalSectionsRestriction f).mapDerivedCategory
 
+set_option linter.unusedSectionVars false in
+-- Preserve the original derived-category instances in the theorem signature.
 /-- Derived extension of scalars, chosen from its adjunction with restriction
 Source: Stacks Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map).
 Proof: resolve complexes of R-modules by K-flat complexes and apply the existing
@@ -106,7 +111,31 @@ extension. Thus derived extension is left adjoint to exact derived restriction. 
 theorem exists_affineDerivedExtension {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R) :
     ∃ E : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B),
       Nonempty (E ⊣ (ModuleCat.restrictScalars.{u} (affineBaseRingMap g)).mapDerivedCategory) := by
-  sorry
+  let ρ := affineBaseRingMap g
+  have : (ModuleCat.extendScalars.{u, u, u} ρ).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj ρ).left_adjoint_additive
+  have : (ModuleCat.extendScalars.{u, u, u} ρ).PreservesKFlatQuasiIso := by
+    constructor
+    intro P Q hP hQ α hα
+    let N := (HomologicalComplex.single (ModuleCat.{u} B) (.up ℤ) 0).obj (𝟙_ _)
+    have h := (CochainComplex.mixedTensor_kFlat_quasiIso ρ).1 N P Q α hα hP hQ
+    let e := CochainComplex.map₂HomologicalComplexFlipObjSingleIso
+      (ModuleCat.mixedTensor ρ).flip (𝟙_ (ModuleCat.{u} B))
+    have h' : QuasiIso
+        ((((ModuleCat.mixedTensor ρ).obj (𝟙_ (ModuleCat.{u} B))).mapHomologicalComplex
+          (.up ℤ)).map α) :=
+      (quasiIso_iff_of_arrow_mk_iso _ _
+        (Arrow.isoMk (e.app P) (e.app Q) (e.hom.naturality α).symm)).1 h
+    let e₀ : (ModuleCat.mixedTensor ρ).obj (𝟙_ (ModuleCat.{u} B)) ≅
+        ModuleCat.extendScalars.{u, u, u} ρ :=
+      Functor.isoWhiskerLeft (ModuleCat.extendScalars ρ)
+        (leftUnitorNatIso (ModuleCat.{u} B)) ≪≫ Functor.rightUnitor _
+    let e₁ := NatIso.mapHomologicalComplex e₀ (.up ℤ)
+    exact (quasiIso_iff_of_arrow_mk_iso _ _
+      (Arrow.isoMk (e₁.app P) (e₁.app Q) (e₁.hom.naturality α).symm)).1 h'
+  refine ⟨(ModuleCat.extendScalars.{u, u, u} ρ).leftDerivedFunctor, ⟨?_⟩⟩
+  exact (ModuleCat.extendRestrictScalarsAdj ρ).derivedAdjunction.ofNatIsoRight
+    (ModuleCat.restrictScalars.{u} ρ).rightDerivedFunctorIsoMapDerivedCategory
 
 /-- Derived tensor with B, chosen as the left adjoint of exact restriction.
 Source: Stacks Tag 0AA7 (blueprint: def-pc-affine-global-hom-base-change-map). -/

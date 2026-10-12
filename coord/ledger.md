@@ -9782,3 +9782,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:34 L: merged deliver/F3/Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalOpenTransfer (stage 3; reviewer PASS; first push; landing 20261012T223403-L-1636170 (interface); batch 20261012T223357; modules 2; new nodes 1)
 - 22:34 L: merged deliver/G1/Sheaf.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemCore (stage 3; reviewer PASS; first push; landing 20261012T223404-L-1636343 (interface); batch 20261012T223357; modules 3; new nodes 2)
 - 22:34 L: merged deliver/G1/Sheaf.AlgebraicGeometry.TorsionControlledAlgebraizationConstruction (stage 3; reviewer PASS; first push; landing 20261012T223404-L-1636443 (interface); batch 20261012T223357; modules 2; new nodes 1)
+- 22:34 L: merged deliver/G2/Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap (stage 3; reviewer PASS; first push; landing 20261012T223405-L-1636623 (proof); batch 20261012T223357; modules 1; new nodes 0)
