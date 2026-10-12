@@ -7,16 +7,8 @@ module
 
 public import Sheaf.Paper.EtaleCETotalSections
 
-import Sheaf.CategoryTheory.CartanEilenbergFunctorial
-import Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence
-import Sheaf.Algebra.Homology.FilteredComplexZBDescription
-import Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.FilteredComplexSpectralSequence
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.Paper.EtaleTermwiseHypercohomology
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.Paper.EtaleCECoherentFirstPageLifts
+import Sheaf.Paper.EtaleCEStationaryPageNaturality
 
 /-! # Coherent filtered maps between CE totals
 
@@ -32,6 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+set_option linter.unusedVariables false in
 set_option maxHeartbeats 1000000 in
 -- Elaborate the dependent simultaneous presentation and stationary-page families.
 /-- Construct the spectral-sequence maps directly on the CE totals, before composing
@@ -125,6 +118,14 @@ theorem exists_etaleHypercohomology_ce_filtered_totals :
                   (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q)
                     (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q))))
                   (t (q + 1)) (t q) (hc q)) := by
-  sorry
+  obtain ⟨D, M, e, hE, hLift⟩ := exists_etaleCE_coherent_first_page_lifts
+  obtain ⟨R, eInf, hStable⟩ := exists_etaleCE_stationary_page_comparisons D e
+  refine ⟨D, M, R, eInf, hE, ?_⟩
+  intro X Y f K L v
+  obtain ⟨u, hu, hPres, hRep⟩ := hLift f K L v
+  refine ⟨u, hu, ?_⟩
+  exact hStable K L
+    ((D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫ (D Y L).totalSectionsIso.inv)
+    (M f K L v) hPres hRep
 
 end AlgebraicGeometry.Etale

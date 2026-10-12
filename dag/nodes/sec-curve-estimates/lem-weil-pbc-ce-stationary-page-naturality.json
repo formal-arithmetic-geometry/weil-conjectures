@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-ce-stationary-page-naturality",
+ "kind": "statement",
+ "title": "Natural stationary-page comparison for maps of CE sections totals",
+ "statement": "Natural stationary-page comparison for maps of CE sections totals. Fix any family D(X,K) of termwise presentations [def-weil-pbc-termwise-hypercohomology-presentation], and any realizations e of their positive page objects [def-sp-spectral-sequence] as the actual cycle/boundary cokernels [lem-sp-filtered-complex-page-differential]. EtaleCEQuotientRealization names this family of isomorphisms. For maps b of their sections totals [lem-weil-pbc-ce-total-sections-comparison] and spectral-sequence maps N, EtaleCEPageMapOnRepresentatives means that, for any abelian-group test object A and maps x,y from A to the respective q-th filtration steps in degree q+p, with b(x)=y, and maps z,zprime to the graded r-cycle subobjects whose inclusions are the graded classes of x,y, the page class of z followed by N equals the page class of zprime. There exist bounds R(X,K,q,n) and comparisons eInf from page r at (q,n-q) to the q-th graded piece of D.H n [def-sp-filtration], whenever r>=1 and R<=r. For every filtered sections-total map b and N obeying the representative equation, there exist step maps t and ht restricting c_X^{-1}H^n(b)c_Y. Past both stationary bounds, eInf intertwines N with cokernel.map(t_(q+1),t_q), for every proof of the successive-inclusion square. The assertion does not mention f,v, a sheaf-total lift, or ordinary first-page cohomology.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012Q and 012W: cycle/boundary quotients, graded image filtration, degreewise finite convergence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-sp-spectral-sequence",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Using D.below, extension by zero, and D.filtration_formula, derive degreewise finite tails of D.L: it is top at the complex-degree lower bound b and bottom at n+1 in degree n. For fixed q,n choose R at least 1 making q+R past the upper tail in n+1 and q-R+1 below the lower tail in n-1. These inequalities persist on all later pages.",
+   "uses": [
+    "lem-sp-bounded-below-second-filtration",
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At these bounds the explicit cycle and boundary formulas become the actual cycles and boundaries of the total in step q. The canonical abelian subquotient comparison identifies their cokernel with the q-th successive homology-image quotient. Transport along D.c n and use D.H_formula. Composing this comparison with the supplied page realization e yields simultaneous eInf. Its choices and bound depend only on X,K,q,n.",
+   "uses": [
+    "lem-sp-degreewise-filtered-stable-quotient",
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an arbitrary filtered chain map b, apply homology to its step restrictions. The inclusion square induces maps on their images; transport by the two c-isomorphisms to obtain t and ht. Cancelling target step inclusions also proves compatibility with successive inclusions.",
+   "uses": [
+    "def-sp-filtration",
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply EtaleCEPageMapOnRepresentatives to genuine cycle representatives in step q. The canonical projections of these representatives to the stationary page and the successive homology-image quotient are epimorphic. After transporting the image maps by c, cancellation gives exactly the displayed cokernel.map square. Its commutativity proof is irrelevant. No CE augmentation, inverse-image map, or ordinary first-page comparison is involved.",
+   "uses": [
+    "lem-sp-degreewise-filtered-stable-quotient",
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-bounded-below-second-filtration",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "lem-sp-degreewise-filtered-stable-quotient",
+  "def-sp-filtration",
+  "lem-sp-filtered-complex-page-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012Q and 012W: cycle/boundary quotients, graded image filtration, degreewise finite convergence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of stationary spectral sequence pages with the graded cohomology image filtration of a degreewise finite filtered complex",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial spectral sequence of degreewise finite filtered cochain complexes and natural stable page comparison with image filtration",
+   "date": "2026-10-13",
+   "results": "8 results about cochain factorizations, mapping cones and derived fractions; no filtered spectral sequence comparison.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap_comp",
+   "date": "2026-10-13",
+   "results": "Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex: HomologicalComplex.homologyMap_comp.",
+   "verdict": "Useful for homology-map transport but does not construct canonical stationary comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence.*[Nn]atur|degreewiseFiltered|filtered.*[Ff]unctor",
+   "date": "2026-10-13",
+   "results": "msearch Mathlib: 25 unrelated filtered-colimit results. Local Sheaf search found DegreewiseFilteredStableQuotient, CartanEilenbergSecondFiltration and the bounded filtered spectral-sequence API; no natural stationary comparison theorem. WeilConjectures search found no replacement.",
+   "verdict": "Existing objectwise statements lack simultaneous natural comparison choices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCEFilteredTotalConstruction",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ce-filtered-total-construction",
+   "place": "Original proof step 5: stationary cycle quotients and naturality for arbitrary sections-total filtered maps",
+   "via": [
+    "lem-weil-pbc-ce-filtered-total-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCEStationaryPageNaturality",
+  "file": "lean/Sheaf/Paper/EtaleCEStationaryPageNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleCE_stationary_page_comparisons",
+  "statement": "theorem exists_etaleCE_stationary_page_comparisons\n    (D : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      EtaleTermwiseHypercohomology X K)\n    (e : ∀ (X : Scheme.{uNatural})\n      (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n      EtaleCEQuotientRealization (D X K)) :\n    ∃ (R : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (q n : ℤ), ℤ)\n      (eInf : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (q n r : ℤ) (hr : 1 ≤ r) (hR : R X K q n ≤ r),\n        ((D X K).sequence.page r hr).X (q, n - q) ≅ ((D X K).H n).gradedPiece q),\n      ∀ {X Y : Scheme.{uNatural}}\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (b : (D X K).sectionsTotal ⟶ (D Y L).sectionsTotal)\n        (N : (D X K).sequence ⟶ (D Y L).sequence),\n        (∀ q : ℤ, ∃ s : ((D X K).L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ) ⟶\n            ((D Y L).L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ),\n          s ≫ ((D Y L).L.step q).arrow = ((D X K).L.step q).arrow ≫ b) →\n        EtaleCEPageMapOnRepresentatives (D X K) (D Y L) (e X K) (e Y L) b N →\n          ∀ n : ℤ,\n            ∃ (t : ∀ q : ℤ, (((D X K).H n).step q : AddCommGrpCat.{uNatural + 1}) ⟶\n            (((D Y L).H n).step q : AddCommGrpCat.{uNatural + 1}))\n          (ht : ∀ q : ℤ, t q ≫ (((D Y L).H n).step q).arrow =\n            (((D X K).H n).step q).arrow ≫\n              (((D X K).c n).inv ≫\n                HomologicalComplex.homologyMap\n                  b n ≫ ((D Y L).c n).hom)),\n          ∀ (hc : ∀ q : ℤ,\n            Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q)\n                (((D X K).H n).antitone_step (Int.le_add_one (le_refl q))) ≫ t q =\n              t (q + 1) ≫\n                Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q)\n                  (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q)))),\n          ∀ (q r : ℤ) (hr : 1 ≤ r) (hX : R X K q n ≤ r) (hY : R Y L q n ≤ r),\n            (N.hom r hr).f (q, n - q) ≫ (eInf Y L q n r hr hY).hom =\n              (eInf X K q n r hr hX).hom ≫\n                cokernel.map\n                  (Subobject.ofLE (((D X K).H n).step (q + 1)) (((D X K).H n).step q)\n                    (((D X K).H n).antitone_step (Int.le_add_one (le_refl q))))\n                  (Subobject.ofLE (((D Y L).H n).step (q + 1)) (((D Y L).H n).step q)\n                    (((D Y L).H n).antitone_step (Int.le_add_one (le_refl q))))\n                  (t (q + 1)) (t q) (hc q)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleCEQuotientRealization",
+   "AlgebraicGeometry.Etale.EtaleCEPageMapOnRepresentatives",
+   "AlgebraicGeometry.Etale.exists_etaleCE_stationary_page_comparisons"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812349",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812349",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

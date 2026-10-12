@@ -1,0 +1,160 @@
+{
+ "id": "lem-weil-pbc-ce-coherent-first-page-lifts",
+ "kind": "statement",
+ "title": "Coherent first-page maps and augmented filtered CE lifts",
+ "statement": "Coherent first-page maps and augmented filtered CE lifts. For every scheme X [def-weil-pbc-scheme-conventions] and bounded-below complex K of abelian etale sheaves [def-weil-pbc-etale-sheaves], simultaneously choose termwise presentations D(X,K) [def-weil-pbc-termwise-hypercohomology-presentation], page maps M for each inverse-image complex map v:f^{-1}K -> L [def-weil-pbc-inverse-image], and realizations e identifying every positive page with the actual cycle/boundary cokernel [lem-sp-filtered-complex-page-differential]. Under the signed first-page comparisons, M is Sheaf.H.map(v.f q) after cohomologyMap [def-weil-pbc-cohomology-pullback]. For every f,v there exists a map u of sheaf CE totals satisfying the strict augmentation square. Its explicitly conjugated sections lift b [lem-weil-pbc-ce-total-sections-comparison] preserves all filtration steps, and M acts on cycle representatives exactly as b, in the sense of EtaleCEPageMapOnRepresentatives [lem-weil-pbc-ce-stationary-page-naturality]. This assertion contains no stationary bounds or abutment-step/graded-piece comparison.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J (lemma-two-ss-complex-functor), Tag 015K (remark-functorial-ss); Homology Tag 012K"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "def-weil-pbc-inverse-image",
+  "lem-sp-filtered-complex-page-differential",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "lem-weil-pbc-ce-stationary-page-naturality"
+ ],
+ "proof": [
+  {
+   "text": "Shift the bounded-below complexes, choose CE resolutions, and shift back. Form the mapped total and its complex-degree filtration, retaining the augmentation and K-injective comparison formulas. Construct its canonical quotient pages together with the signed row and ordinary sheaf-H comparisons.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-exists",
+    "thm-sp-if-e1",
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "def-weil-pbc-termwise-hypercohomology-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use a common uniformly finite upper crop for each finite collection of degrees. The actual cycle/boundary representatives are unchanged in those degrees when the upper crop increases. Use their canonical quotient maps to identify crop page objects, differentials and page-homology maps, and thereby construct coherent choices of D.E and its quotient realizations. The unique representative equation for the concrete page differential gives the same maps.",
+   "uses": [
+    "thm-sp-spectral-object-yields",
+    "lem-sp-filtered-complex-ZB-description",
+    "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+    "lem-sp-filtered-complex-page-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For f,v apply augmented CE comparison, extend, flip and totalize the bicomplex lift. Its degree-zero augmentation identity proves the strict total augmentation square. The sections-total comparison conjugates its sections lift into a map b preserving every complex-degree step. Descend its graded cycle maps to the quotient pages, using common crops to obtain M commuting with page homology. This proves EtaleCEPageMapOnRepresentatives.",
+   "uses": [
+    "lem-weil-pbc-cartesian-eilenberg-functorial",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-ce-total-sections-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The row map at complex degree q is the inverse-image resolution comparison followed by v.f q. Compute ordinary cohomology from this same augmented map. The source and target signed row factors coincide, so their natural comparison computes M on page one as Sheaf.H.map(v.f q) after cohomologyMap. No stationary or abutment quotient comparison is needed.",
+   "uses": [
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartan-eilenberg-exists",
+  "thm-sp-if-e1",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "def-weil-pbc-termwise-hypercohomology-presentation",
+  "thm-sp-spectral-object-yields",
+  "lem-sp-filtered-complex-ZB-description",
+  "lem-sp-filtered-complex-associated-spectral-sequence-construction",
+  "lem-sp-filtered-complex-page-differential",
+  "lem-weil-pbc-cartesian-eilenberg-functorial",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-ce-total-sections-comparison",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "S1",
+  "date": "2026-10-13",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015J (lemma-two-ss-complex-functor), Tag 015K (remark-functorial-ss); Homology Tag 012K"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of stationary spectral sequence pages with the graded cohomology image filtration of a degreewise finite filtered complex",
+   "date": "2026-10-13",
+   "results": "Unavailable: Internal Server Error"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial spectral sequence of degreewise finite filtered cochain complexes and natural stable page comparison with image filtration",
+   "date": "2026-10-13",
+   "results": "8 results about cochain factorizations, mapping cones and derived fractions; no filtered spectral sequence comparison.",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap_comp",
+   "date": "2026-10-13",
+   "results": "Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex: HomologicalComplex.homologyMap_comp.",
+   "verdict": "Useful for homology-map transport but does not construct canonical stationary comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "spectralSequence.*[Nn]atur|degreewiseFiltered|filtered.*[Ff]unctor",
+   "date": "2026-10-13",
+   "results": "msearch Mathlib: 25 unrelated filtered-colimit results. Local Sheaf search found DegreewiseFilteredStableQuotient, CartanEilenbergSecondFiltration and the bounded filtered spectral-sequence API; no natural stationary comparison theorem. WeilConjectures search found no replacement.",
+   "verdict": "Existing objectwise statements lack simultaneous natural comparison choices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCEFilteredTotalConstruction",
+  "date": "2026-10-13",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ce-filtered-total-construction",
+   "place": "Original proof steps 1 through 4: simultaneous quotient pages, first-page computation and filtered augmented lifts, before convergence",
+   "via": [
+    "lem-weil-pbc-ce-filtered-total-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleCECoherentFirstPageLifts",
+  "file": "lean/Sheaf/Paper/EtaleCECoherentFirstPageLifts.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_etaleCE_coherent_first_page_lifts",
+  "statement": "theorem exists_etaleCE_coherent_first_page_lifts :\n    ∃ (D : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        EtaleTermwiseHypercohomology X K)\n      (M : ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),\n        (D X K).sequence ⟶ (D Y L).sequence)\n      (e : ∀ (X : Scheme.{uNatural})\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),\n        EtaleCEQuotientRealization (D X K)),\n      (∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj) (p : ℕ) (q : ℤ),\n        ((M f K L v).hom 1).f (q, (p : ℤ)) ≫ ((D Y L).firstPageIso p q).hom =\n          ((D X K).firstPageIso p q).hom ≫\n            AddCommGrpCat.ofHom ((Sheaf.H.map (v.f q) p).comp\n              (cohomologyMap f (K.obj.X q) p))) ∧\n      (∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)\n        (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (L : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}))\n        (v : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj K.obj ⟶ L.obj),\n        ∃ u : ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n          (ComplexShape.up ℤ)).obj (D X K).sheafTotal ⟶ (D Y L).sheafTotal,\n          ((upperStar AddCommGrpCat.{uNatural + 1} f).mapHomologicalComplex\n            (ComplexShape.up ℤ)).map (D X K).aug ≫ u = v ≫ (D Y L).aug ∧\n          let b := (D X K).totalSectionsIso.hom ≫ ceSectionsLift f u ≫\n            (D Y L).totalSectionsIso.inv\n          (∀ q : ℤ, ∃ s : ((D X K).L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ) ⟶\n              ((D Y L).L.step q : CochainComplex AddCommGrpCat.{uNatural + 1} ℤ),\n            s ≫ ((D Y L).L.step q).arrow = ((D X K).L.step q).arrow ≫ b) ∧\n          EtaleCEPageMapOnRepresentatives (D X K) (D Y L) (e X K) (e Y L)\n            b (M f K L v))",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812349",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261012T225328-L-1812349",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
