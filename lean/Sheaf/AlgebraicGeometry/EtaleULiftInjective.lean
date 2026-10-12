@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.CategoryTheory.Sites.Whiskering
 public import Mathlib.Algebra.Category.Grp.Ulift
 
+import Sheaf.AlgebraicGeometry.EtaleULiftInjectiveExtension
+import Sheaf.AlgebraicGeometry.EtaleSmallInjectiveCriterion
+
 /-! Coefficient universe lift on the small étale site. -/
 
 @[expose] public section
@@ -40,6 +43,8 @@ theorem etale_ulift_injective (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) [Injective I] :
     Injective
       ((sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj I) := by
-  sorry
+  apply etale_injective_of_small_extensions X
+  intro A B hB f hf g
+  exact etale_ulift_injective_extension X I hB f g
 
 end AlgebraicGeometry.Scheme

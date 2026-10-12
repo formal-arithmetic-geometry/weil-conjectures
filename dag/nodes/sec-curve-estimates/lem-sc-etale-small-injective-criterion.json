@@ -1,0 +1,113 @@
+{
+ "id": "lem-sc-etale-small-injective-criterion",
+ "kind": "statement",
+ "title": "Injectivity criterion using small-valued etale sheaves",
+ "statement": "Let X be a scheme [def-weil-pbc-etale-site] in universe u and T an abelian sheaf with coefficients in AddCommGrpCat.{u+1}. Assume that for every monomorphism f : A → B with each B(U) u-small, every g : A → T extends to B. Then T is injective [def-sp-injective-resolutions].",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Injectives, Lemma 19.7.3: extension criterion across subsheaves of free representables."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Replace the affine etale site by a u-small model using essential smallness and transport the topology. The free abelian sheaves on representables on that site have u-small values, since the free presheaves and the diagrams defining sheafification are u-small. They generate the abelian sheaf category. Their extensions to the full etale site also have u-small values: matching families over the u-small affine basis are a u-small limit. The assumed extension property applies to every subobject of each such generator. Apply the generating-family form of Stacks 01DO, equivalently its Zorn extension proof, to conclude that T is injective.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Injectives, Lemma 19.7.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Injective objects in abelian sheaves criterion extension from small sheaves",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universe lift of an injective abelian sheaf on a small site is injective",
+   "date": "2026-10-12",
+   "results": "No direct sheaf result; ModuleCat.ulift_injective_of_injective concerns individual modules.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"sheafCompose\"",
+   "date": "2026-10-12",
+   "results": "0 hits.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ulift.*injective|injective.*ulift",
+   "date": "2026-10-12",
+   "results": "No sheaf injectivity criterion. Generic Injective.factors, ULift full faithfulness, essential-image lifting, and reflection of limits supply the descent proof.",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleULiftInjective",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-ulift-injective",
+   "place": "Small test objects in step 1 and the injectivity criterion in step 2.",
+   "via": [
+    "lem-sc-etale-ulift-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSmallInjectiveCriterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSmallInjectiveCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_injective_of_small_extensions",
+  "statement": "theorem etale_injective_of_small_extensions (X : Scheme.{u}) (T : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hT : ∀ {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}, (∀ U : X.Etaleᵒᵖ, Small.{u} (B.obj.obj U)) → ∀ (f : A ⟶ B) [Mono f] (g : A ⟶ T), ∃ h : B ⟶ T, f ≫ h = g) : Injective T",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T110312-L-619274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T110312-L-619274",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

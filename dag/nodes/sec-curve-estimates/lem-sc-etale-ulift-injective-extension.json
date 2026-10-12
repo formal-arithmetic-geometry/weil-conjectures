@@ -1,0 +1,119 @@
+{
+ "id": "lem-sc-etale-ulift-injective-extension",
+ "kind": "statement",
+ "title": "Extension property for coefficient-lifted etale sheaves",
+ "statement": "Let X be a scheme [def-weil-pbc-etale-site] in universe u and I an injective abelian sheaf [def-sp-injective-resolutions] with coefficients in AddCommGrpCat.{u}. Let f : A → B be a monomorphism of abelian sheaves with coefficients in AddCommGrpCat.{u+1}, with B(U) u-small for every object U of X.Etale. Every map g : A → ULift(I) extends to B: there exists h : B → ULift(I) with f ≫ h = g.",
+ "source": {
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Injectives, Lemma 19.7.3: extension criterion across subsheaves of free representables."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Transport the abelian group structure on Shrink G via equivShrink for every u-small group G. AddEquiv.ulift followed by the transported equivalence gives an isomorphism from a lifted u-small abelian group to G. Apply this pointwise and Mathlib Functor.essImage.liftFunctor to descend a small-valued presheaf; its lift is naturally isomorphic to the original presheaf. A fully faithful functor reflects limits, so the sheaf condition descends too.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A is objectwise u-small because f is objectwise injective and B is u-small. Descend A and B by the preceding construction, conjugate f and g by the lift isomorphisms, and take preimages under the fully faithful sheafCompose. The descended f is mono by faithfulness. Apply Injective.factors to the descended g and f; map the extension by sheafCompose and conjugate back. The factorization identity follows by faithfulness and functoriality.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-sp-injective-resolutions"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "https://stacks.math.columbia.edu/tag/01DO",
+  "place": "Injectives, Lemma 19.7.3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Injective objects in abelian sheaves criterion extension from small sheaves",
+   "date": "2026-10-12",
+   "results": "Service unavailable: Internal Server Error."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universe lift of an injective abelian sheaf on a small site is injective",
+   "date": "2026-10-12",
+   "results": "No direct sheaf result; ModuleCat.ulift_injective_of_injective concerns individual modules.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"sheafCompose\"",
+   "date": "2026-10-12",
+   "results": "0 hits.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ulift.*injective|injective.*ulift",
+   "date": "2026-10-12",
+   "results": "No sheaf injectivity criterion. Generic Injective.factors, ULift full faithfulness, essential-image lifting, and reflection of limits supply the descent proof.",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleULiftInjective",
+  "date": "2026-10-12",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-etale-ulift-injective",
+   "place": "Extension step in the proof of coefficient-lift injectivity.",
+   "via": [
+    "lem-sc-etale-ulift-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleULiftInjectiveExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleULiftInjectiveExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etale_ulift_injective_extension",
+  "statement": "theorem etale_ulift_injective_extension (X : Scheme.{u}) (I : Sheaf X.smallEtaleTopology AddCommGrpCat.{u}) [Injective I] {A B : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (hB : ∀ U : X.Etaleᵒᵖ, Small.{u} (B.obj.obj U)) (f : A ⟶ B) [Mono f] (g : A ⟶ (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj I) : ∃ h : B ⟶ (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj I, f ≫ h = g",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T110312-L-619274",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261012T110312-L-619274",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
