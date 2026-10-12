@@ -35,11 +35,13 @@ open CategoryTheory Limits
 namespace HomotopyCategory
 
 variable {V : Type*} [Category V] [Preadditive V] {ι : Type*} {c : ComplexShape ι}
-  {J : Type*} [HasLimitsOfShape (Discrete J) V]
+  {J : Type*}
 
-/-- A homotopy between two morphisms into a product of complexes, assembled degreewise from
-homotopies between their components. -/
-noncomputable def homotopyOfFan {K : J → HomologicalComplex V c} {P : Fan K} (hP : IsLimit P)
+/-- A homotopy between two morphisms into a product of complexes (computed degreewise),
+assembled degreewise from homotopies between their components. -/
+noncomputable def homotopyOfFan {K : J → HomologicalComplex V c}
+    [∀ q, PreservesLimit (Discrete.functor K) (HomologicalComplex.eval V c q)]
+    {P : Fan K} (hP : IsLimit P)
     {Y : HomologicalComplex V c} {f g : Y ⟶ P.pt}
     (H : ∀ j, Homotopy (f ≫ P.proj j) (g ≫ P.proj j)) : Homotopy f g :=
   let hPq (q : ι) : IsLimit (Fan.mk (P.pt.X q) fun j ↦ (P.proj j).f q :
@@ -61,10 +63,12 @@ noncomputable def homotopyOfFan {K : J → HomologicalComplex V c} {P : Fan K} (
       exact this }
 
 variable (V c) in
-/-- The quotient functor to the homotopy category preserves products: the image of a product
-fan of complexes is a product fan. Morphisms into the product are lifted through the full
-quotient functor, and their uniqueness up to homotopy follows from `homotopyOfFan`. -/
-noncomputable def isLimitFanQuotient {K : J → HomologicalComplex V c} {P : Fan K}
+/-- The quotient functor to the homotopy category preserves products which are computed
+degreewise: the image of such a product fan of complexes is a product fan. Morphisms into the
+product are lifted through the full quotient functor, and their uniqueness up to homotopy
+follows from `homotopyOfFan`. -/
+noncomputable def isLimitFanQuotient {K : J → HomologicalComplex V c}
+    [∀ q, PreservesLimit (Discrete.functor K) (HomologicalComplex.eval V c q)] {P : Fan K}
     (hP : IsLimit P) :
     IsLimit (Fan.mk ((quotient V c).obj P.pt) fun j ↦ (quotient V c).map (P.proj j)) :=
   Fan.IsLimit.mk _
@@ -81,7 +85,8 @@ noncomputable def isLimitFanQuotient {K : J → HomologicalComplex V c} {P : Fan
       rw [Functor.map_comp, Fan.IsLimit.fac]
       exact (hm j).trans ((quotient V c).map_preimage (X := s.pt.as) (Y := K j) (s.proj j)).symm)
 
-instance : HasLimitsOfShape (Discrete J) (HomotopyCategory V c) where
+instance [HasLimitsOfShape (Discrete J) V] :
+    HasLimitsOfShape (Discrete J) (HomotopyCategory V c) where
   has_limit F := by
     have : HasLimit (Discrete.functor (F.obj ∘ Discrete.mk)) :=
       ⟨⟨⟨_, isLimitFanQuotient V c (productIsProduct fun j ↦ (F.obj ⟨j⟩).as)⟩⟩⟩
