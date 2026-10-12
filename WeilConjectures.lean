@@ -2025,6 +2025,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.BaseChange
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Complement
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Conservative
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
@@ -2033,6 +2034,7 @@ public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Inj
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.LocalVanishing
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Mono
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Projection
+public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Stalk
 public import WeilConjectures.SixFunctors.ProEtale.LowerShriek.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
