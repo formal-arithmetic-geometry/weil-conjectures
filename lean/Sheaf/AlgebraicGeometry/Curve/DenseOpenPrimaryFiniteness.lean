@@ -7,17 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenHighCohomology
-import Sheaf.AlgebraicGeometry.CurveCoefficientPair
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder
-import Sheaf.Paper.InverseImageStalkGerm
-import Sheaf.Paper.ZeroDimensionalCohomology
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.OpenClosed.Exact
+import Sheaf.AlgebraicGeometry.Curve.DenseOpenCohomologyFiniteness
+import Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
+import Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases
 
 /-! # Primary vanishing and finiteness across a dense open -/
 
@@ -66,6 +61,67 @@ theorem dense_open_primary_finiteness (Λ : Type (u + 1)) [CommRing Λ] [Finite 
     (VanishingAboveOneOfIsPrimaryTorsionSheaf Λ F k ↔
       VanishingAboveOneOfIsPrimaryTorsionSheaf Λ G k) ∧
     (FiniteOfInvertibleOrder Λ F k ↔ FiniteOfInvertibleOrder Λ G k) ∧
-    (FiniteOfIsProper Λ f F ↔ FiniteOfIsProper Λ f G) := by sorry
+    (FiniteOfIsProper Λ f F ↔ FiniteOfIsProper Λ f G) := by
+  classical
+  let G := (U.ι)_!open[ModuleCat.{u + 1} Λ].obj
+    ((U.ι)^*[ModuleCat.{u + 1} Λ].obj F)
+  let A := sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  have : A.Additive := { map_add := by intros; rfl }
+  let ε : A.obj G ⟶ A.obj F := A.map
+    ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) U.ι).counit.app F)
+  have hG : r • 𝟙 G = 0 := by
+    have h := congrArg
+      (((U.ι)^*[ModuleCat.{u + 1} Λ] ⋙ (U.ι)_!open[ModuleCat.{u + 1} Λ]).map) hF
+    simpa only [Functor.map_nsmul, CategoryTheory.Functor.map_id, Functor.map_zero,
+      Functor.comp_obj] using h
+  have : Scheme.IsConstructibleSheaf G := by
+    have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType f
+    have : TopologicalSpace.NoetherianSpace X := inferInstance
+    have : TopologicalSpace.NoetherianSpace U :=
+      U.ι.isOpenEmbedding.isInducing.noetherianSpace
+    have : QuasiCompact U.ι := ⟨fun V _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+    have : Scheme.IsConstructibleSheaf (((U.ι)^*[ModuleCat.{u + 1} Λ]).obj F) :=
+      Scheme.IsConstructibleSheaf.upperStar _ _
+    exact Scheme.IsConstructibleSheaf.openImmersionLowerShriek U.ι U.closedComplement
+      (by rw [U.range_closedComplement, Scheme.Opens.range_ι]) _
+  have hzero (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      (hM : Limits.IsZero M) (q : ℕ) : Subsingleton (Sheaf.H (A.obj M) q) :=
+    Sheaf.subsingleton_H_of_isZero (A.map_isZero hM) q
+  have hprimaryF := Scheme.prime_annihilated_primary_cases Λ r F hF
+  have hprimaryG := Scheme.prime_annihilated_primary_cases Λ r G hG
+  have hinvertibleF := Scheme.prime_annihilated_invertible_cases Λ (k := k) r F hF
+  have hinvertibleG := Scheme.prime_annihilated_invertible_cases Λ (k := k) r G hG
+  have hfinite := dense_open_cohomology_finiteness Λ f F U hU
+  have hhigh (q : ℕ) (hq : 1 < q) : Function.Bijective (Sheaf.H.map ε q) :=
+    (dense_open_high_cohomology Λ f F U hU).1 q hq
+  refine ⟨?_, ?_, ?_⟩
+  · constructor
+    · intro h p _ _ hp q hq
+      by_cases hrp : r = p
+      · subst p
+        exact (Equiv.ofBijective _ (hhigh q hq)).subsingleton_congr.mpr
+          (h r hprimaryF.1 q hq)
+      · exact hzero G (hprimaryG.2 p hrp hp) q
+    · intro h p _ _ hp q hq
+      by_cases hrp : r = p
+      · subst p
+        exact (Equiv.ofBijective _ (hhigh q hq)).subsingleton_congr.mp
+          (h r hprimaryG.1 q hq)
+      · exact hzero F (hprimaryF.2 p hrp hp) q
+  · by_cases hr : IsUnit (r : Γ(Spec (.of k), ⊤))
+    · have := hinvertibleF.1 hr
+      have := hinvertibleG.1 hr
+      exact ⟨fun h _ _ ↦ hfinite.mp (fun q ↦ h q),
+        fun h _ _ ↦ hfinite.mpr (fun q ↦ h q)⟩
+    · constructor
+      · intro _ _ hGinv q
+        have := hzero G (hinvertibleG.2 hr hGinv) q
+        infer_instance
+      · intro _ _ hFinv q
+        have := hzero F (hinvertibleF.2 hr hFinv) q
+        infer_instance
+  · exact ⟨fun h _ _ ↦ hfinite.mp (fun q ↦ h q),
+      fun h _ _ ↦ hfinite.mpr (fun q ↦ h q)⟩
 
 end AlgebraicGeometry.IsCurve

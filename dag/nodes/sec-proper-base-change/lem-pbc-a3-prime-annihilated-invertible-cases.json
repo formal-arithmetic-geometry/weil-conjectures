@@ -1,0 +1,120 @@
+{
+ "id": "lem-pbc-a3-prime-annihilated-invertible-cases",
+ "kind": "statement",
+ "title": "Invertible-order cases for a prime-annihilated sheaf",
+ "statement": "Let k be a field, Λ a commutative ring, X a scheme and r a prime. For an etale sheaf F of Λ-modules with r id_F = 0, if r is a unit in Γ(Spec k, top), F has invertible-order torsion relative to Spec k. If r is not a unit there, invertible-order torsion forces F to be zero. The coefficient condition is the one of [def-weil-pbc-eight-curve-assertions].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA (lemma-restrict-to-open), proof: the finite stalk product, five-term exact sequence, and remarks (a) and (b)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-eight-curve-assertions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the additive stalk functors to the annihilation equality. If r is a unit, it is a common positive invertible annihilator, as required by the coefficient condition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use ΓSpecIso to pass to k. If r is not a unit, r is zero in k. An integer n invertible in k is not divisible by r. The stalk is killed by both r and n, and nsmul_eq_zero_iff_of_coprime makes it zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use sheafHom_ext_of_sheafFiber_map_algClosurePoint and IsZero.iff_id_eq_zero to conclude that F is zero.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJA, proof; this intermediate and its proof written by A3 during second reading."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf annihilated by a prime r and primary torsion for a distinct prime p is zero; extension by zero across a dense open curve preserves finiteness of cohomology",
+   "results": "Eight hits on localization and scheme sections; no theorem on these etale sheaves.",
+   "date": "2026-10-12",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"nsmul\", \"Coprime\"",
+   "results": "nsmul_eq_zero_iff_of_coprime in Mathlib.Data.Int.GCD, and related coprime multiplication lemmas.",
+   "date": "2026-10-12",
+   "verdict": "Used nsmul_eq_zero_iff_of_coprime to prove the two generic torsion cases."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrimaryTorsionSheaf|subsingleton_H_of_isZero|finite.*cohomology.*open; also rg in lean/Sheaf and lean/WeilConjectures for prime torsion cases and constructibility",
+   "results": "Mathlib Sheaf.subsingleton_H_of_isZero; upstream Scheme.IsConstructibleSheaf.upperStar and openImmersionLowerShriek; no generic prime-annihilated cases or unconditional dense-open finite-cohomology equivalence.",
+   "date": "2026-10-12",
+   "verdict": "Use the existing constructibility and zero-cohomology lemmas; new intermediates are absent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a constructible sheaf on a curve, extension by zero across a dense open preserves finiteness of all cohomology groups. A prime-annihilated sheaf is primary for that prime and is zero if primary for another prime or if its annihilator is noninvertible but it has invertible-order torsion.",
+   "results": "Service unavailable: Internal Server Error. The search was attempted through msearch.py; no hits and no mathematical verdict are inferred.",
+   "date": "2026-10-12",
+   "verdict": null
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Curve.DenseOpenPrimaryFiniteness",
+  "date": "2026-10-12",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pbc-s2-dense-open-primary-finiteness",
+   "place": "proof, prime cases and open-closed finiteness argument",
+   "via": [
+    "lem-pbc-s2-dense-open-primary-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Curve.PrimeAnnihilatedInvertibleCases",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PrimeAnnihilatedInvertibleCases.lean",
+  "declaration": "AlgebraicGeometry.Scheme.prime_annihilated_invertible_cases",
+  "statement": "theorem prime_annihilated_invertible_cases (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] {X : Scheme.{u}} (r : ℕ) [Fact r.Prime] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : r • 𝟙 F = 0) : (IsUnit (r : Γ(Spec (.of k), ⊤)) → IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F) ∧ (¬ IsUnit (r : Γ(Spec (.of k), ⊤)) → IsTorsionSheafOfInvertibleOrder (Spec (.of k)) F → IsZero F)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T053918-L-2628791",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T053918-L-2628791",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
