@@ -25,20 +25,36 @@
  ],
  "proof": [
   {
-   "text": "The long exact homology sequence identifies middle homology as an extension of kernel and cokernel terms; quasi-coherence and vanishing stalks are preserved.",
+   "text": "Use isQuasicoherent_kernel and isQuasicoherent_cokernel, transporting along uniqueness isomorphisms for arbitrary kernel forks and cokernel coforks, to install the ObjectProperty kernel and cokernel closure instances. Use isQuasicoherent_of_shortExact for extension closure.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-pc-quasi-coherent-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each degree n apply ObjectProperty.prop_of_exact_of_exact_of_exact to the three successive exact portions of the derived homology sequence H^(n-1)(M) -> H^n(K) -> H^n(L) -> H^n(M) -> H^(n+1)(K). The outer four terms are quasi-coherent by the two hypotheses, giving quasi-coherence of H^n(L).",
    "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0A9A"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Compose the module-to-additive-sheaf functor with the additive sheaf stalk functor. This composite is additive and preserves finite limits and colimits, hence maps the central homology exact sequence to an exact sequence of additive groups. The two outer groups are zero by the stalk hypotheses at x outside T. ShortComplex.Exact.isZero_of_both_isZero makes the middle group zero, and AddCommGrpCat.subsingleton_of_isZero gives its subsingleton carrier. Apply le_isoClosure to the resulting supported middle object.",
+   "uses": [],
+   "elementary": true
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-pc-quasi-coherent-extension"
+ ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "J2",
+  "date": "2026-10-12",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0A9A"
+  "place": "Tag 0A9A, supported subcategory definition; implementation using Mathlib exact stalks and source-library quasi-coherent closure"
  },
  "mathlib_searches": [
   {
@@ -95,11 +111,11 @@
  "reviewed_proof": {
   "date": "2026-10-12",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D2",
+  "reviewer": "X-f79d5",
+  "group": "J2",
   "result": "pass",
-  "landing": "20261012T135224-L-1658455",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261012T152347-L-2313130",
+  "kind": "interface",
+  "note": "independent Codex review: Matched unchanged Lean statements and definitions with the nodes, proof dependencies, change record, and report; delivered module and direct importer SupportedPerfectGenerator compile cleanly; all eight checked declarations use only permitted axioms."
  }
 }

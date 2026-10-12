@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Mathlib.Algebra.Category.Grp.Zero
+import Mathlib.Topology.Sheaves.Abelian
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
+import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension
 
 /-! # Triangulated closure of supported quasi-coherent complexes
 
@@ -18,6 +24,7 @@ Source: Stacks Project, Tag 0A9A, preceding definition of D_QCoh,T.
 
 universe u w
 open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject
 namespace AlgebraicGeometry
 
 abbrev supportedProperty (X : Scheme.{u})
@@ -26,6 +33,38 @@ abbrev supportedProperty (X : Scheme.{u})
   schemeDerivedQCohProperty X K ∧ ∀ (n : ℤ) (x : X), x ∉ T →
     Subsingleton (↑(TopCat.Presheaf.stalk ((DerivedCategory.homologyFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) n).obj K).val.presheaf x))
+
+private instance moduleToSheaf_additive (X : Scheme.{u}) :
+    (SheafOfModules.toSheaf.{u} (moduleRings X.toRingedSpace)).Additive where
+  map_add := by intros; rfl
+
+private theorem qcoh_kernels (X : Scheme.{u}) :
+    (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).IsClosedUnderKernels := by
+  constructor
+  rintro _ ⟨f, k, hk, hM, hN⟩
+  have := hM
+  have := hN
+  apply (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+    (IsLimit.conePointUniqueUpToIso (kernelIsKernel f) hk)
+  exact Scheme.Modules.isQuasicoherent_kernel (X := X) f
+
+private theorem qcoh_cokernels (X : Scheme.{u}) :
+    (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).IsClosedUnderCokernels := by
+  constructor
+  rintro _ ⟨f, k, hk, hM, hN⟩
+  have := hM
+  have := hN
+  apply (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_iso
+    (IsColimit.coconePointUniqueUpToIso (cokernelIsCokernel f) hk)
+  exact Scheme.Modules.isQuasicoherent_cokernel (X := X) f
+
+private theorem qcoh_extensions (X : Scheme.{u}) :
+    (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).IsClosedUnderExtensions := by
+  constructor
+  intro S hS h₁ h₃
+  have := h₁
+  have := h₃
+  exact Scheme.Modules.isQuasicoherent_of_shortExact (X := X) S hS
 
 /-- The supported quasi-coherent property contains a zero object.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
@@ -40,7 +79,29 @@ sheaves are quasi-coherent and all stalks outside T are subsingleton, independen
 theorem supported_qcoh_containsZero (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (T : Set X) : (supportedProperty X T).ContainsZero := by
-  sorry
+  have hzero : IsZero
+      (SheafOfModules.free (R := moduleRings X.toRingedSpace) PEmpty.{u + 1}) := by
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply (SheafOfModules.freeHomEquiv _).injective
+    funext i
+    exact PEmpty.elim i
+  have : (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).ContainsZero :=
+    ⟨⟨_, hzero, SheafOfModules.isQuasicoherent_free
+      (R := moduleRings X.toRingedSpace) PEmpty.{u + 1}⟩⟩
+  refine ⟨⟨0, isZero_zero _, ?_, ?_⟩⟩
+  · intro n
+    exact (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace)).prop_of_isZero
+      ((DerivedCategory.homologyFunctor _ n).map_isZero (isZero_zero _))
+  · intro n x _
+    let F := SheafOfModules.toSheaf.{u} (moduleRings X.toRingedSpace) ⋙
+      TopCat.Sheaf.forget AddCommGrpCat.{u} X.toTopCat ⋙
+      TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x
+    have : (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).Additive := inferInstance
+    have : (TopCat.Sheaf.forget AddCommGrpCat.{u} X.toTopCat).Additive := inferInstance
+    have : (SheafOfModules.toSheaf.{u} (moduleRings X.toRingedSpace)).Additive := inferInstance
+    have : F.Additive := by dsimp [F]; infer_instance
+    exact AddCommGrpCat.subsingleton_of_isZero
+      (F.map_isZero ((DerivedCategory.homologyFunctor _ n).map_isZero (isZero_zero _)))
 
 /-- The supported quasi-coherent property is stable under every integer shift.
 Source: Stacks Project, Derived Categories of Schemes, definition preceding Tag 0A9A.
@@ -93,7 +154,47 @@ as required by IsTriangulatedClosed₂. The argument also covers empty T and T =
 theorem supported_qcoh_closedMiddle (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (T : Set X) : (supportedProperty X T).IsTriangulatedClosed₂ := by
-  sorry
+  constructor
+  intro D hD h₁ h₃
+  apply (supportedProperty X T).le_isoClosure
+  constructor
+  · have := qcoh_kernels X
+    have := qcoh_cokernels X
+    have := qcoh_extensions X
+    intro n
+    exact ObjectProperty.prop_of_exact_of_exact_of_exact
+      (SheafOfModules.isQuasicoherent (moduleRings X.toRingedSpace))
+      ((DerivedCategory.homologyFunctor _ 0).homologySequence_exact₁ D hD
+        (n - 1) n (by omega))
+      ((DerivedCategory.homologyFunctor _ 0).homologySequence_exact₂ D hD n)
+      ((DerivedCategory.homologyFunctor _ 0).homologySequence_exact₃ D hD n (n + 1) rfl)
+      (h₃.1 (n - 1)) (h₁.1 n) (h₃.1 n) (h₁.1 (n + 1))
+  · intro n x hx
+    let F := SheafOfModules.toSheaf.{u} (moduleRings X.toRingedSpace) ⋙
+      TopCat.Sheaf.forget AddCommGrpCat.{u} X.toTopCat ⋙
+      TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x
+    have : (TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x).Additive := inferInstance
+    have : (TopCat.Sheaf.forget AddCommGrpCat.{u} X.toTopCat).Additive := inferInstance
+    have : (SheafOfModules.toSheaf.{u} (moduleRings X.toRingedSpace)).Additive := inferInstance
+    have : F.Additive := by dsimp [F]; infer_instance
+    have : PreservesFiniteLimits
+        (TopCat.Sheaf.forget AddCommGrpCat.{u} X.toTopCat ⋙
+          TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x) := inferInstance
+    have : PreservesFiniteLimits F := by dsimp [F]; infer_instance
+    have : PreservesFiniteColimits
+        (TopCat.Sheaf.forget AddCommGrpCat.{u} X.toTopCat ⋙
+          TopCat.Presheaf.stalkFunctor AddCommGrpCat.{u} x) := inferInstance
+    have : PreservesFiniteColimits F := by dsimp [F]; infer_instance
+    have : Subsingleton (F.obj ((DerivedCategory.homologyFunctor _ n).obj D.obj₁)) :=
+      h₁.2 n x hx
+    have : Subsingleton (F.obj ((DerivedCategory.homologyFunctor _ n).obj D.obj₃)) :=
+      h₃.2 n x hx
+    have h := ((DerivedCategory.homologyFunctor _ 0).homologySequence_exact₂ D hD n).map F
+    simp only [DerivedCategory.shift_homologyFunctor] at h
+    dsimp only [ShortComplex.map] at h
+    exact AddCommGrpCat.subsingleton_of_isZero
+      (h.isZero_of_both_isZero (AddCommGrpCat.isZero_of_subsingleton _)
+        (AddCommGrpCat.isZero_of_subsingleton _))
 
 /-- Quasi-coherent cohomology with zero stalks off T is stable under triangles.
 No compactness or closedness assumption on T is needed for this closure assertion.
