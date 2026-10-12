@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-sets-eventual-local-stage-matching-compatibility",
+ "kind": "statement",
+ "title": "EtaleSetEventualLocalStageCompatibility",
+ "statement": "Let I be a nonempty directed preorder, D : I^op → Scheme a diagram of quasi-compact quasi-separated schemes with affine transition maps, c a limiting cone with apex X, and i₀ a stage. Fix a sheaf of sets G on D(i₀) [def-weil-pbc-etale-sheaves], an affine étale object W [def-weil-pbc-full-affine-etale-site], and a section t of p_i₀^*G on p_i₀^*W. For j in Over(op i₀), write f_j = D(j.hom), H_j = f_j^*G, Y_j = f_j^*W, L = p_i₀^*G, B_j = base change along p_j, e_j : p_i₀^*W ≅ B_j(Y_j) for iterated base change, and β_j = β(p_j,f_j,p_i₀) [def-weil-pbc-sets-sheaf-comparison]. Given a finite family a_q : V_q → Y_j of affine étale objects and sections s_q ∈ H_j(V_q) satisfying β_j(s_q) = L(B_j(a_q) ≫ e_j.inv)(t), there exists j′ with r : j′ → j such that the transported family is compatible. Precisely, let b = base change along D(r.left), d : Y_j′ ≅ b(Y_j) be the canonical isomorphism, V′_q = b(V_q), a′_q = b(a_q) ≫ d.inv, and s′_q = β(D(r.left), f_j, f_j′)(s_q). For every Z and arrows z : Z → V′_q and z′ : Z → V′_q′ with z ≫ a′_q = z′ ≫ a′_q′, H_j′(z)(s′_q) = H_j′(z′)(s′_q′). No covering assumption or preservation-of-image-equations conclusion is asserted.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-full-affine-etale-site",
+  "def-weil-pbc-sets-sheaf-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit and finite-matching argument; Étale Cohomology 0EYL"
+ },
+ "proof": [
+  {
+   "text": "Y_j is affine because W is affine and f_j is affine. The pairwise fibre products P_qq′ of the affine V_q over affine Y_j are affine étale objects; their structure maps are of finite presentation by qcqs permanence. Restrict the two sections to these overlaps. Naturality of the comparison and the common equations with t identify their limit images.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict to the cofinal upper tail above j. Use the affine-site colimit presentation, full/affine equivalence, and unit-compatible inverse-image comparison. The section formula of Stacks 0A35 for H_j on P_qq′ identifies sections on its limit base change with the filtered colimit of later stage sections. Equality of the two representatives in this colimit gives one later equality witness for each ordered pair.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-colimit",
+    "lem-weil-pbc-affine-etale-site-topos",
+    "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Directedness moves the finitely many witnesses to one common stage, and functoriality preserves their equalities. Base change preserves the overlaps. Every two arrows with equal composites into Y_j′ factor through the corresponding base-changed overlap, so restricting its equality proves compatibility. For n=0 use the identity stage.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-etale-site-colimit",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-sets-affine-etale-inverse-image-comparison",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0A35, equation-compute-pullback-to-limit and finite-matching argument; Étale Cohomology 0EYL"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality and associativity of the adjunction unit of inverse image sheaves preserve section image equations under base change; finitely many section equalities in a filtered colimit hold at one stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction unit of inverse image of a sheaf followed by the composition isomorphism is compatible with composition of two base change functors on arbitrary site objects",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.sheafComposeNatIso, SheafOfModules.pullbackIso, PresheafOfModules.pullbackComp, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+   "date": "2026-10-12",
+   "verdict": "No exact local-stage statement; the covering lemmas are used directly. Existing section-comparison composition is for objects pulled back from the base, not arbitrary stage objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sieve.pullback_ofArrows_of_iso",
+   "results": "1 hits: CategoryTheory.Sieve.pullback_ofArrows_of_iso",
+   "date": "2026-10-12",
+   "verdict": "No exact local-stage statement; the covering lemmas are used directly. Existing section-comparison composition is for objects pulled back from the base, not arbitrary stage objects."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafComparison|pullbackComp_assoc|coverPreserving_overPullback",
+   "results": "8 hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/Light/Monoidal.lean, Mathlib/Condensed/Light/Explicit.lean, Mathlib/Condensed/Equivalence.lean, Mathlib/Condensed/Equivalence.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact local-stage statement; the covering lemmas are used directly. Existing section-comparison composition is for objects pulled back from the base, not arbitrary stage objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageMatching",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-eventual-local-stage-matching",
+   "place": "Finite matching or preservation of its image equations; second-reader repair"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetEventualLocalStageCompatibility.lean",
+  "declaration": "AlgebraicGeometry.etaleSet_eventualLocalStageCompatibility",
+  "statement": "theorem etaleSet_eventualLocalStageCompatibility\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    [∀ i : Iᵒᵖ, CompactSpace (D.obj i)]\n    [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)]\n    [∀ {i j : Iᵒᵖ} (a : i ⟶ j), IsAffineHom (D.map a)]\n    (c : Cone D) (hc : IsLimit c) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))\n    (W : (D.obj (op i₀)).FullAffineEtale)\n    (t : ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W.obj))) :\n    let H := fun j : Over (op i₀) ↦ (Scheme.etaleSetPullback (D.map j.hom)).obj G\n    let L := (Scheme.etaleSetPullback (c.π.app (op i₀))).obj G\n    let B := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (c.π.app j.left)\n    let Y := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W.obj\n    let e := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom).symm).app W.obj\n    let β := fun j : Over (op i₀) ↦\n      etaleSetSheafComparison (c.π.app j.left) (D.map j.hom)\n        (c.π.app (op i₀)) (c.w j.hom) G\n    ∀ (j : Over (op i₀)) (n : ℕ) (V : Fin n → (D.obj j.left).Etale)\n      (a : ∀ q, V q ⟶ Y j) (s : ∀ q, (H j).obj.obj (op (V q))),\n      (∀ q, IsAffine (V q).left) →\n      (∀ q, (β j).hom.app (op (V q)) (s q) =\n        L.obj.map ((B j).map (a q) ≫ (e j).inv).op t) →\n    ∃ (j' : Over (op i₀)) (r : j' ⟶ j),\n      let b := MorphismProperty.Over.pullback @Etale ⊤ (D.map r.left)\n      let hr := (D.map_comp r.left j.hom).symm.trans\n        (congrArg (fun z : j'.left ⟶ op i₀ ↦ D.map z) r.w)\n      let d := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (D.map r.left) (D.map j.hom) (D.map j'.hom) hr.symm).app W.obj\n      let V' := fun q ↦ b.obj (V q)\n      let a' := fun q ↦ b.map (a q) ≫ d.inv\n      let s' := fun q ↦ (etaleSetSheafComparison (D.map r.left) (D.map j.hom)\n        (D.map j'.hom) hr G).hom.app (op (V q)) (s q)\n      Presieve.Arrows.Compatible (H j').obj a' s'",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T202256-L-710118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T202256-L-710118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

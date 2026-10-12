@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.EtaleSetSheafComparison
 public import Sheaf.AlgebraicGeometry.FullAffineEtaleSite
+import Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility
+import Sheaf.AlgebraicGeometry.EtaleSetLocalStageImageEquations
 import Sheaf.AlgebraicGeometry.AffineEtaleInverseImageComparison
 import Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
@@ -92,6 +94,22 @@ theorem etaleSet_eventualLocalStageMatching
       Sieve.ofArrows V' a' ∈ (D.obj j'.left).smallEtaleTopology (Y j') ∧
       (∀ q, (β j').hom.app (op (V' q)) (s' q) =
         L.obj.map ((B j').map (a' q) ≫ (e j').inv).op t) ∧
-      Presieve.Arrows.Compatible (H j').obj a' s' := by sorry
+      Presieve.Arrows.Compatible (H j').obj a' s' := by
+  dsimp only
+  intro j n V a s ha hV hs
+  obtain ⟨j', r, hcompat⟩ :=
+    etaleSet_eventualLocalStageCompatibility D c hc i₀ G W t j n V a s hV hs
+  refine ⟨j', r, ?_, ?_, hcompat⟩
+  · let b := MorphismProperty.Over.pullback @Etale ⊤ (D.map r.left)
+    let hr := (D.map_comp r.left j.hom).symm.trans
+      (congrArg (fun z : j'.left ⟶ op i₀ ↦ D.map z) r.w)
+    let d := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)
+      (D.map r.left) (D.map j.hom) (D.map j'.hom) hr.symm).app W.obj
+    have hb := (Scheme.coverPreserving_overPullback
+      (P := @Etale) (Q := @Etale) (le_refl _) (D.map r.left)).cover_preserve ha
+    rw [Sieve.functorPushforward_ofArrows] at hb
+    have hd := (D.obj j'.left).smallEtaleTopology.pullback_stable d.hom hb
+    rwa [Sieve.pullback_ofArrows_of_iso] at hd
+  · exact etaleSet_localStageImageEquations D c i₀ G W.obj t j n V a s hs j' r
 
 end AlgebraicGeometry

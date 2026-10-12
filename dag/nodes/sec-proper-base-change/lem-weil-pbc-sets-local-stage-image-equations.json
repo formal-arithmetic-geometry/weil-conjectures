@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-sets-local-stage-image-equations",
+ "kind": "statement",
+ "title": "EtaleSetLocalStageImageEquations",
+ "statement": "Let I be any category, D : I^op → Scheme a diagram, c any cone with apex X and projections p_j, i₀ an object, G a sheaf of sets on D(i₀) [def-weil-pbc-etale-sheaves], W an étale object of D(i₀), and t ∈ (p_i₀^*G)(p_i₀^*W). For j in Over(op i₀) set f_j = D(j.hom), H_j = f_j^*G, L = p_i₀^*G, Y_j = f_j^*W, B_j = base change along p_j, e_j : p_i₀^*W ≅ B_j(Y_j) the iterated-base-change isomorphism, and β_j = β(p_j,f_j,p_i₀) [def-weil-pbc-sets-sheaf-comparison]. Given a finite family a_q : V_q → Y_j and sections s_q ∈ H_j(V_q) with β_j(s_q) = L(B_j(a_q) ≫ e_j.inv)(t), for every r : j′ → j put b = base change along D(r.left), d : Y_j′ ≅ b(Y_j), V′_q = b(V_q), a′_q = b(a_q) ≫ d.inv and s′_q = β(D(r.left),f_j,f_j′)(s_q). Then β_j′(s′_q) = L(B_j′(a′_q) ≫ e_j′.inv)(t) for every q. No limit, directedness, affineness, covering, or compatibility assumption is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-sets-sheaf-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites Tags 03CB and 03CC; unit-compatible composition and pullback pasting"
+ },
+ "proof": [
+  {
+   "text": "Expand the comparisons as adjunction units followed by unit-compatible composition isomorphisms. Unit naturality in the sheaf and associativity of the chosen inverse-image comparisons identify the composite comparison with β_j followed by restriction along the base-change pasting isomorphism.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Substitute the equations with t. Combine restrictions by the functor composition law. Naturality and associativity of pullback pasting identify the resulting arrow with B_j′(a′_q) ≫ e_j′.inv: the maps have identical projections to W, V_q and the cone apex. Equality elimination restores the commuting triangle witnesses.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-sets-etale-inverse-image-composition-units"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Sites Tags 03CB and 03CC; unit-compatible composition and pullback pasting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality and associativity of the adjunction unit of inverse image sheaves preserve section image equations under base change; finitely many section equalities in a filtered colimit hold at one stage",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction unit of inverse image of a sheaf followed by the composition isomorphism is compatible with composition of two base change functors on arbitrary site objects",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.sheafComposeNatIso, SheafOfModules.pullbackIso, PresheafOfModules.pullbackComp, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso",
+   "date": "2026-10-12",
+   "verdict": "No exact local-stage statement; the covering lemmas are used directly. Existing section-comparison composition is for objects pulled back from the base, not arbitrary stage objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sieve.pullback_ofArrows_of_iso",
+   "results": "1 hits: CategoryTheory.Sieve.pullback_ofArrows_of_iso",
+   "date": "2026-10-12",
+   "verdict": "No exact local-stage statement; the covering lemmas are used directly. Existing section-comparison composition is for objects pulled back from the base, not arbitrary stage objects."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafComparison|pullbackComp_assoc|coverPreserving_overPullback",
+   "results": "8 hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/Light/Monoidal.lean, Mathlib/Condensed/Light/Explicit.lean, Mathlib/Condensed/Equivalence.lean, Mathlib/Condensed/Equivalence.lean, Mathlib/CategoryTheory/Sites/Over.lean, Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean, Mathlib/CategoryTheory/Sites/Coherent/LocallySurjective.lean",
+   "date": "2026-10-12",
+   "verdict": "No exact local-stage statement; the covering lemmas are used directly. Existing section-comparison composition is for objects pulled back from the base, not arbitrary stage objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSetEventualLocalStageMatching",
+  "date": "2026-10-13",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-sets-eventual-local-stage-matching",
+   "place": "Finite matching or preservation of its image equations; second-reader repair"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSetLocalStageImageEquations",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSetLocalStageImageEquations.lean",
+  "declaration": "AlgebraicGeometry.etaleSet_localStageImageEquations",
+  "statement": "theorem etaleSet_localStageImageEquations\n    {I : Type u} [Category I]\n    (D : Iᵒᵖ ⥤ Scheme.{u})\n    (c : Cone D) (i₀ : I)\n    (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (Type (u + 1)))\n    (W : (D.obj (op i₀)).Etale)\n    (t : ((Scheme.etaleSetPullback (c.π.app (op i₀))).obj G).obj.obj\n      (op ((MorphismProperty.Over.pullback @Etale ⊤ (c.π.app (op i₀))).obj W))) :\n    let H := fun j : Over (op i₀) ↦ (Scheme.etaleSetPullback (D.map j.hom)).obj G\n    let L := (Scheme.etaleSetPullback (c.π.app (op i₀))).obj G\n    let B := fun j : Over (op i₀) ↦ MorphismProperty.Over.pullback @Etale ⊤ (c.π.app j.left)\n    let Y := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullback @Etale ⊤ (D.map j.hom)).obj W\n    let e := fun j : Over (op i₀) ↦\n      (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (c.π.app j.left) (D.map j.hom) (c.π.app (op i₀)) (c.w j.hom).symm).app W\n    let β := fun j : Over (op i₀) ↦\n      etaleSetSheafComparison (c.π.app j.left) (D.map j.hom)\n        (c.π.app (op i₀)) (c.w j.hom) G\n    ∀ (j : Over (op i₀)) (n : ℕ) (V : Fin n → (D.obj j.left).Etale)\n      (a : ∀ q, V q ⟶ Y j) (s : ∀ q, (H j).obj.obj (op (V q))),\n      (∀ q, (β j).hom.app (op (V q)) (s q) =\n        L.obj.map ((B j).map (a q) ≫ (e j).inv).op t) →\n    ∀ (j' : Over (op i₀)) (r : j' ⟶ j),\n      let b := MorphismProperty.Over.pullback @Etale ⊤ (D.map r.left)\n      let hr := (D.map_comp r.left j.hom).symm.trans\n        (congrArg (fun z : j'.left ⟶ op i₀ ↦ D.map z) r.w)\n      let d := (MorphismProperty.Over.pullbackComp (P := @Etale) (Q := ⊤)\n        (D.map r.left) (D.map j.hom) (D.map j'.hom) hr.symm).app W\n      let V' := fun q ↦ b.obj (V q)\n      let a' := fun q ↦ b.map (a q) ≫ d.inv\n      let s' := fun q ↦ (etaleSetSheafComparison (D.map r.left) (D.map j.hom)\n        (D.map j'.hom) hr G).hom.app (op (V q)) (s q)\n      ∀ q, (β j').hom.app (op (V' q)) (s' q) =\n        L.obj.map ((B j').map (a' q) ≫ (e j').inv).op t",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T202256-L-710118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261012T202256-L-710118",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
