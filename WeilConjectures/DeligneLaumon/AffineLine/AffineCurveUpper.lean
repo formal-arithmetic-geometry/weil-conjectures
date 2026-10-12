@@ -10,7 +10,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.Purity
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
 public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineInfinityMap
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.Curve
@@ -345,7 +345,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_isPunctuallyPur
     (D.sheaf.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
   have := D.nonempty_U
   obtain ⟨H, _, _, _, _, _, W, hWtop, hWfin, _, _⟩ :=
-    ProjectiveLine.exists_toProjectiveLine_isFinite_etale_near_infinity D.j
+    exists_toProjectiveLine_isFinite_etale_near_infinity D.j
   exact hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine H W hWtop hWfin
     (isLisse_upperStar_higherLowerShriek_zero_of_isFinite_of_etale H W D.lisse) hw
 

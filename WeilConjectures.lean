@@ -1106,7 +1106,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
-public import WeilConjectures.Mathlib.AlgebraicGeometry.RestrictOpenImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.AffineEtale
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
@@ -1360,7 +1359,6 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSection
 public import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting
 public import WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint
 public import WeilConjectures.Mathlib.RingTheory.Etale.Pi
-public import WeilConjectures.Mathlib.RingTheory.Etale.PolynomialMap
 public import WeilConjectures.Mathlib.RingTheory.Etale.PropertyC
 public import WeilConjectures.Mathlib.RingTheory.Etale.QuasiFinite
 public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField

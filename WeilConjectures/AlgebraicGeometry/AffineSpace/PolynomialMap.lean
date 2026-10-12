@@ -7,8 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.Mathlib.AlgebraicGeometry.RestrictOpenImmersion
-public import WeilConjectures.Mathlib.RingTheory.Etale.PolynomialMap
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.Mathlib.RingTheory.Etale.StandardEtale
 public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Polynomial
 public import Mathlib.FieldTheory.Perfect
 
