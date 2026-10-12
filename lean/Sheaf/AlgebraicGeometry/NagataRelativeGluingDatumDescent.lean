@@ -8,6 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.RelativeFiniteAffinePresentation
 public import Sheaf.AlgebraicGeometry.NagataAffineFpDescent
 public import Sheaf.AlgebraicGeometry.NagataMorphismDescent
+import Sheaf.AlgebraicGeometry.NagataAffineFpDescends
+import Sheaf.AlgebraicGeometry.NagataMorphismDescends
+import Sheaf.AlgebraicGeometry.NagataQCOpenDescent
+import Sheaf.AlgebraicGeometry.NagataQCOpenDescentSpec
+import Sheaf.Order.DirectedFiniteUpperBound
+import Sheaf.RingTheory.FilteredColimitFiniteData
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
 # Finite-stage raw relative gluing datum

@@ -8,6 +8,7 @@ module
 public import Sheaf.Topology.AbelianOpenExtensionByZero
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.Sheaves.Stalks
+import Sheaf.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Zero locus of a section of a locally constant sheaf
