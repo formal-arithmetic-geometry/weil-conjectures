@@ -33,6 +33,35 @@ theorem isRegularRing_tensorProduct_of_formallySmoothAdic
     [Field k'] [Algebra k k'] [Module.Finite k k'] [IsPurelyInseparable k k']
     (h : FormallySmoothAdic k C (IsLocalRing.maximalIdeal C)) :
     IsRegularRing (k' ⊗[k] C) := by
-  sorry
+  let D := C ⊗[k] k'
+  let _ : Algebra k D := Algebra.TensorProduct.leftAlgebra
+  let _ : Algebra k' D := Algebra.TensorProduct.rightAlgebra
+  obtain ⟨_, _, _, _, hnoeth, hlocal, hmax, _⟩ :=
+    Algebra.TensorProduct.purelyInseparable_baseChange_localRing k k' C
+  let _ : IsNoetherianRing D := hnoeth
+  let _ : IsLocalRing D := hlocal
+  have hfsI : FormallySmoothAdic k' D
+      ((IsLocalRing.maximalIdeal C).map
+        (algebraMap C D)) := by
+    simpa [D] using formallySmoothAdic_tensorProduct k C k'
+      (IsLocalRing.maximalIdeal C) h
+  have hle : (IsLocalRing.maximalIdeal C).map
+      (algebraMap C D) ≤ IsLocalRing.maximalIdeal D :=
+    IsLocalRing.map_maximalIdeal_le _
+  have hfs : FormallySmoothAdic k' D (IsLocalRing.maximalIdeal D) := by
+    intro E _ _ J hJ g hg
+    obtain ⟨n, hn, hgn⟩ := hg
+    obtain ⟨f, hf⟩ := hfsI J hJ g ⟨n, hn, fun x hx =>
+      hgn x ((Ideal.pow_right_mono hle n) hx)⟩
+    exact ⟨f, hf⟩
+  have hreglocal : IsRegularLocalRing D :=
+    isRegularLocalRing_of_formallySmoothAdic k' D hfs
+  have hreg : IsRegularRing D := by
+    apply isRegularRing_iff.mpr
+    intro p hp
+    let _ : p.IsPrime := hp
+    exact (IsRegularLocalRing.localization_at_prime_and_isRegularRing p).1
+  exact IsRegularRing.of_ringEquiv
+    (Algebra.TensorProduct.commRight k k' C).symm.toRingEquiv
 
 end Algebra
