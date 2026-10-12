@@ -17,56 +17,41 @@
  ],
  "proof": [
   {
-   "text": "Choose a coinitial functor from the opposite of a nonempty directed partial order into J. Whisker the limit cone and all the structure maps along it; the same apex remains a limit. Every chosen stage and transition inherits the qcqs and affine hypotheses.",
+   "text": "Use Sheaf.ΓNatIsoSheafSections followed by the inverse of Sheaf.H.equiv₀ to identify global sections with degree-zero cohomology. Its naturality for sheaf morphisms and compatibility with cohomologyMap identify every sectionTransition with cohomologyTriangleMap in degree zero. Transport the identity and composition laws of triangle maps across these isomorphisms. These laws construct the global-sections functor H on J opposite and its canonical cocone B with point Γ(c.pt,P inverse image G); the cone equation proves naturality of the legs.",
    "uses": [
-    "lem-weil-pbc-cofiltered-limit-directed-reindex"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "On the directed system set F_i = pi_i inverse image of G and use the inverse-image composition isomorphisms as the transition maps. Their unit and cocycle laws follow from inverse-image coherence. The analogous composition isomorphisms on the limit identify every pulled-back F_i with P inverse image of G and every transition with the identity. Connectedness therefore identifies this sheaf with the colimit of the pulled-back sheaves.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-cohomology-pullback-degree-zero",
+    "lem-weil-pbc-etale-cohomology-triangle-laws",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "Apply the cohomology-limit theorem at degree zero to this system and its constant colimit on the limit site. Naturality of the degree-zero/global-sections identification and its compatibility with pullback identify the maps with globalSectionsUpperStarMap followed by Gamma of the inverse composition isomorphism.",
+   "text": "Apply nonempty_isColimit_cofiltered_fixed_base_cohomology at q=0 to the supplied H and B, with the degree-zero/global-sections isomorphisms as eH and eB. The transition and leg equations follow from the comparison in step 1, cancelling the stage isomorphism for the transition equation. This gives IsColimit B. The cited continuity theorem carries out directed reindexing, compatible pullback-sheaf construction and the degree-zero instance of Tag 09YQ; none is duplicated here.",
    "uses": [
-    "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-    "lem-weil-pbc-cohomology-pullback-degree-zero",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity",
+    "lem-weil-pbc-cohomology-pullback-degree-zero"
    ],
    "elementary": false
   },
   {
-   "text": "The elementwise filtered-colimit criterion gives representatives and eventual vanishing in the directed diagram. A representative is already a representative at its image in J. For a given stage j and a section killed on the limit, choose a coinitial object mapping to j, pull the section there, apply eventual vanishing, and compose its witnessing arrow with the arrow to j. Functoriality of the pullback maps makes the resulting composite kill the original section.",
+   "text": "The forgetful functor from abelian groups preserves filtered colimits. Shrink its preservation instance from universe u+1 to u, the size of J. Apply Concrete.isColimit_exists_rep to H and B to obtain a stage representative of each section. If the leg at j kills s, compare s with zero at the same stage using Concrete.isColimit_exists_of_rep_eq. It supplies k and an arrow op j to k for which H.map sends s to H.map of zero, which is zero. Taking the opposite of that arrow gives k.unop to j and exactly the required eventual-vanishing witness.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-cofiltered-limit-directed-reindex",
-    "lem-weil-pbc-cohomology-pullback-functorial"
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-category-colimit",
-  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity",
   "lem-weil-pbc-cohomology-pullback-degree-zero",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-colimit-constant-connected-diagram",
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-inverse-image-composition"
+  "lem-weil-pbc-etale-cohomology-triangle-laws",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Theorem Tag 09YQ (theorem-colimit), degree p = 0; cofiltered reindexing by Categories Tag 0032 (lemma-directed-category-system).; specialization and comparison to the existing Lean interfaces by P1."
+  "place": "Theorem Tag 09YQ (theorem-colimit), degree zero; supplied cofiltered cocone interface and degree-zero transport by C3, 2026-10-12."
  },
  "mathlib_searches": [
   {
@@ -136,10 +121,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P1",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261012T044750-L-2038147",
-  "kind": "interface",
+  "landing": "20261012T085221-L-6515",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
