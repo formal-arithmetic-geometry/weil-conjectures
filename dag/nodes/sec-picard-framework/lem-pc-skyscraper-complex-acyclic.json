@@ -15,9 +15,23 @@
  ],
  "proof": [
   {
-   "text": "Check exactness degreewise on every open: opens containing x give the exact sequence of M, while opens avoiding x give the zero sequence; sectionwise exactness implies sheaf acyclicity.",
+   "text": "Unfold acyclicity degreewise into exactness of the associated short complex. Map it through the faithful zero-preserving composite SheafOfModules.forget followed by PresheafOfModules.toPresheaf; Functor.reflects_exact_of_faithful reduces the goal to exactness of the underlying abelian presheaf short complex.",
    "uses": [
     "def-pc-cochain-complex-modules",
+    "def-pc-acyclic-complex-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On each open V, the skyscraper sections are functions PLift (x ∈ V) → M and the maps act pointwise. ShortComplex.moduleCat_exact_iff applied to the original short complex supplies a preimage of each value of a section in the kernel; classical choice assembles these into a section. When x is absent the domain is empty and the same construction is vacuous. ShortComplex.ab_exact_iff gives exactness after evaluation at V.",
+   "uses": [
+    "def-pc-ringed-module-skyscraper"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation preserves homology in the abelian functor category. ShortComplex.mapHomologyIso transports the zero homology of every evaluated short complex to each component of presheaf homology. NatTrans.ext shows its identity is zero, so ShortComplex.exact_iff_isZero_homology gives presheaf exactness. Reflect exactness as above in every degree.",
+   "uses": [
     "def-pc-acyclic-complex-modules"
    ],
    "elementary": true
@@ -25,12 +39,13 @@
  ],
  "proof_deps": [
   "def-pc-cochain-complex-modules",
-  "def-pc-acyclic-complex-modules"
+  "def-pc-acyclic-complex-modules",
+  "def-pc-ringed-module-skyscraper"
  ],
  "proof_origin": {
-  "by": "Y2",
+  "by": "F2",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Definition Tag 009A (case (4)) and Lemma Tag 009C, applied degreewise; sectionwise exactness argument"
+  "place": "Sectionwise exactness argument of lem-pc-skyscraper-complex, using the concrete Tag 009A (4) skyscraper sections; formalized with Mathlib faithful reflection of exactness and evaluation homology isomorphisms; independently read by F2."
  },
  "mathlib_searches": [
   {
@@ -119,10 +134,10 @@
   "date": "2026-10-12",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261012T113950-L-822418",
-  "kind": "interface",
+  "landing": "20261012T160134-L-2563497",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
