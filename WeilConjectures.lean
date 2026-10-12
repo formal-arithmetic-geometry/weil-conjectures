@@ -1734,6 +1734,12 @@ public import WeilConjectures.RingTheory.RelativeComponentConstructible
 public import WeilConjectures.RingTheory.RelativeComponentFlatApprox
 public import WeilConjectures.RingTheory.RelativeComponentGeneralization
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+public import WeilConjectures.RingTheory.TateResidue.FinitePotent
+public import WeilConjectures.RingTheory.TateResidue.LocalResidue
+public import WeilConjectures.RingTheory.TateResidue.Residue
+public import WeilConjectures.RingTheory.TateResidue.ResidueProperties
+public import WeilConjectures.RingTheory.TateResidue.ResidueTheorem
+public import WeilConjectures.RingTheory.TateResidue.TateIdeals
 public import WeilConjectures.RingTheory.TensorLocalizationAway
 public import WeilConjectures.RingTheory.TensorProduct.Hilbert90
 public import WeilConjectures.Scratch.ZzCensus
