@@ -11,6 +11,10 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverFiel
 import Sheaf.AlgebraicGeometry.BaseChangeSourceTransitionThickening
 import Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionComp
 import Sheaf.AlgebraicGeometry.BaseChangeTargetTransitionThickening
+import Sheaf.AlgebraicGeometry.BaseChangeSourceImageLimitDescent
+import Sheaf.AlgebraicGeometry.BaseChangeTargetLimitZeroDetection
+import Sheaf.AlgebraicGeometry.BaseChangeTargetStalkRestrictionImage
+import Sheaf.AlgebraicGeometry.BaseChangeStalkTransportComp
 
 /-!
 # Survival of a cokernel element under base change
@@ -260,8 +264,31 @@ theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullb
     [∀ i, CompactSpace (D.obj i).left] [∀ i, QuasiSeparatedSpace (D.obj i).left]
     (c : Cone D) (hc : IsLimit ((Over.forget T).mapCone c))
     (hD : ∀ i, Etale.SurvivesBaseChange Λ q sq F x ξ (D.obj i).hom) :
-    Etale.SurvivesBaseChange Λ q sq F x ξ c.pt.hom :=
-  sorry
+    Etale.SurvivesBaseChange Λ q sq F x ξ c.pt.hom := by
+  rintro ⟨η, hη⟩
+  obtain ⟨i, ηi, hi⟩ :=
+    Etale.baseChange_source_image_limit_descent Λ p g q F x D c hc η
+  let ζ := (Etale.baseChangeStalkMap Λ p g q F x (D.obj i)).hom ηi -
+    (Etale.baseChangeStalkTransport Λ p g q F x sq (D.obj i)).hom ξ
+  have hcomp (U V : Over T) (φ : U ⟶ V) :
+      (Etale.baseChangeTargetStalkMap Λ p g q F x φ).hom
+        ((Etale.baseChangeStalkTransport Λ p g q F x sq V).hom ξ) =
+      (Etale.baseChangeStalkTransport Λ p g q F x sq U).hom ξ := by
+    have ht := congrArg ModuleCat.Hom.hom
+      (Etale.baseChangeStalkTransport_comp Λ p g q F x sq φ)
+    exact LinearMap.congr_fun ht ξ
+  have hζ : (Etale.baseChangeTargetStalkMap Λ p g q F x (c.π.app i)).hom ζ = 0 := by
+    dsimp only [ζ]
+    rw [map_sub, hi, hcomp]
+    exact sub_eq_zero.mpr hη
+  obtain ⟨j, f, hj⟩ :=
+    Etale.baseChange_target_limit_zero_detection Λ p g q F x D c hc i ζ hζ
+  obtain ⟨ηj, hηj⟩ := Etale.baseChangeTargetStalkMap_mem_range Λ p g q F x (D.map f) ηi
+  apply hD j
+  refine ⟨ηj, ?_⟩
+  dsimp only [ζ] at hj
+  rw [map_sub, hcomp] at hj
+  exact hηj.trans (sub_eq_zero.mp hj)
 
 /-- Step (3) of blueprint `sbc-lem-bc-failure-field`: if `ξ` survives over a quasi-compact
 quasi-separated `T'` and `Z ⊆ T'` is closed with quasi-compact complement `V`, then `ξ`

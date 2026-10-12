@@ -1,0 +1,109 @@
+{
+ "id": "lem-sbc-stalk-transport-composition",
+ "kind": "statement",
+ "title": "Composition of transport on canonical stalks",
+ "statement": "With [def-sbc-canonical-base-change-stalk-transitions], for any original Cartesian square sq and any φ:U→V over T, t_V followed by r_φ equals t_U.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0F07 (restriction square and limit condition) and 09Z1 (higher direct image continuity)"
+ },
+ "stmt_deps": [
+  "def-sbc-canonical-base-change-stalk-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Apply target transition composition, including its inverse-image coefficient comparison. Uniqueness of the Cartesian lift proves that the composite of the pullback lifts is the direct lift. The equation φ.left followed by V.hom = U.hom identifies the coefficients. Applying the stalk functor gives the asserted composition equation.",
+   "uses": [
+    "lem-sbc-target-transition-comp"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-target-transition-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0F07 and 09Z1, canonical-transition realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image geometric stalk commutes with inverse limits of qcqs schemes with affine transitions",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "element outside image at all stages stays outside image in filtered colimit of module diagrams",
+   "results": "Concrete.colimit_rep_eq_zero and ModuleCat.FilteredColimits.M.mk_surjective, M.mk_map, M.mk_eq; abstract criteria only, not the geometric realization. Loogle confirmed Concrete.colimit_rep_eq_zero.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(limit|Limit)|Stalk.*Transition|stalk.*Colimit; higherDirectImage_limit",
+   "results": "Existing higherDirectImage_limit supplies stalk continuity for higher images, but not source inverse-image/homology identification or target pullback/coefficient identification. Existing target composition and base-change naturality supply the two proved compatibility lemmas. No canonical stalk wrappers or source-image descent/target-zero detection declarations found.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (2): limits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeStalkTransportComp",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeStalkTransportComp.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangeStalkTransport_comp",
+  "statement": "theorem baseChangeStalkTransport_comp (sq : IsPullback e h g p) {U V : Over T} (φ : U ⟶ V) : baseChangeStalkTransport Λ p g q F x sq V ≫ baseChangeTargetStalkMap Λ p g q F x φ = baseChangeStalkTransport Λ p g q F x sq U",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

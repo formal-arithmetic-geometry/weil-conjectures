@@ -1,0 +1,97 @@
+{
+ "id": "def-sbc-canonical-base-change-stalk-transitions",
+ "kind": "definition",
+ "title": "Canonical base-change stalks and restriction maps",
+ "statement": "For p:X→S, g:T→S, a commutative coefficient ring Λ, q∈ℤ, F a sheaf of Λ-modules on T_et, and x∈X, define A(U) and B(U), for U→T, as the source and target geometric stalks of the canonical Cartesian square X×_S U. Let b_U:A(U)→B(U) be its base-change map. For a morphism φ:U→V over T, define r_φ:B(V)→B(U) by the target transition through the canonical pullback lift followed by the inverse-image composition isomorphism. For any original Cartesian square sq with base g define t_U from its target stalk to B(U) by the canonical pullback lift. These are wrappers for the existing transition maps and geometric stalk functor, with no new choices.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0F07 (restriction square and limit condition) and 09Z1 (higher direct image continuity)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-etale-sheaves",
+  "sbc-def-base-change-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image geometric stalk commutes with inverse limits of qcqs schemes with affine transitions",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "element outside image at all stages stays outside image in filtered colimit of module diagrams",
+   "results": "Concrete.colimit_rep_eq_zero and ModuleCat.FilteredColimits.M.mk_surjective, M.mk_map, M.mk_eq; abstract criteria only, not the geometric realization. Loogle confirmed Concrete.colimit_rep_eq_zero.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(limit|Limit)|Stalk.*Transition|stalk.*Colimit; higherDirectImage_limit",
+   "results": "Existing higherDirectImage_limit supplies stalk continuity for higher images, but not source inverse-image/homology identification or target pullback/coefficient identification. Existing target composition and base-change naturality supply the two proved compatibility lemmas. No canonical stalk wrappers or source-image descent/target-zero detection declarations found.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (2): limits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeStalkTransition",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeStalkTransition.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChangeTargetStalkMap",
+  "statement": "def baseChangeTargetStalkMap {U V : Over T} (φ : U ⟶ V) : baseChangeTargetStalk Λ p g q F x V ⟶ baseChangeTargetStalk Λ p g q F x U",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

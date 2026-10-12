@@ -1,0 +1,116 @@
+{
+ "id": "lem-sbc-target-limit-zero-detection",
+ "kind": "statement",
+ "title": "Zero in the limit target is detected at a finite stage",
+ "statement": "With [def-sbc-canonical-base-change-stalk-transitions], suppose S is affine and D:I→Over T is a small cofiltered diagram of qcqs schemes with affine transitions. Let c be a cone whose underlying scheme cone is limiting. For i∈I and any ζ∈B(D_i) with r_(c.π_i)(ζ)=0, there exist j and f:j→i such that r_(D(f))(ζ)=0. No source image, original element, or survival hypothesis occurs.",
+ "source": {
+  "document": "Stacks Project",
+  "place": "Tags 0F07 (restriction square and limit condition) and 09Z1 (higher direct image continuity)"
+ },
+ "stmt_deps": [
+  "def-sbc-canonical-base-change-stalk-transitions"
+ ],
+ "proof": [
+  {
+   "text": "Base change the limit cone along p. Its transition morphisms are affine and its maps to X are qcqs, being base changes of the qcqs maps to affine S. Pull back the fixed sheaf from T×_S X. Inverse-image composition identifies its restrictions with the coefficient sheaves e_i^*π_i^*F, and the canonical higher-image transitions with r. Apply higher-image stalk continuity to this diagram.",
+   "uses": [
+    "sbc-lem-higher-image-pulledback-stalk-continuity",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The zero-detection clause of continuity provides a stage j→i where ζ vanishes. Equivalently, geometric stalks preserve the filtered colimit and the module elementwise zero criterion provides this j. For q<0 all higher images vanish, and j=i and its identity suffice.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-inverse-image",
+  "sbc-lem-higher-image-pulledback-stalk-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project",
+  "place": "Tags 0F07 and 09Z1, canonical-transition realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "higher direct image geometric stalk commutes with inverse limits of qcqs schemes with affine transitions",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "element outside image at all stages stays outside image in filtered colimit of module diagrams",
+   "results": "Concrete.colimit_rep_eq_zero and ModuleCat.FilteredColimits.M.mk_surjective, M.mk_map, M.mk_eq; abstract criteria only, not the geometric realization. Loogle confirmed Concrete.colimit_rep_eq_zero.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*(limit|Limit)|Stalk.*Transition|stalk.*Colimit; higherDirectImage_limit",
+   "results": "Existing higherDirectImage_limit supplies stalk continuity for higher images, but not source inverse-image/homology identification or target pullback/coefficient identification. Existing target composition and base-change naturality supply the two proved compatibility lemmas. No canonical stalk wrappers or source-image descent/target-zero detection declarations found.",
+   "verdict": "no direct match",
+   "date": "2026-10-12"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Survival",
+  "date": "2026-10-12",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-failure-field",
+   "place": "Proof condition (2): limits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseChangeTargetLimitZeroDetection",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseChangeTargetLimitZeroDetection.lean",
+  "declaration": "AlgebraicGeometry.Etale.baseChange_target_limit_zero_detection",
+  "statement": "theorem baseChange_target_limit_zero_detection (c : Cone D) (hc : IsLimit ((Over.forget T).mapCone c)) (i : I) (ζ : baseChangeTargetStalk Λ p g q F x (D.obj i)) (hζ : (baseChangeTargetStalkMap Λ p g q F x (c.π.app i)).hom ζ = 0) : ∃ (j : I) (f : j ⟶ i), (baseChangeTargetStalkMap Λ p g q F x (D.map f)).hom ζ = 0",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-12"
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261012T063523-L-3161106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
