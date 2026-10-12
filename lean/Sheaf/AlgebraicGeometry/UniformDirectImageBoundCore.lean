@@ -7,12 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.Algebra.Homology.KInjectiveRestrictOpen
-import Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison
-import Sheaf.AlgebraicGeometry.LerayDegenerateSections
+import Sheaf.AlgebraicGeometry.UniformInverseAffineSectionsBound
+import Sheaf.AlgebraicGeometry.DirectImageHomologyAffineDetection
 import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
-import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Uniform upper cohomological bound for quasi-coherent derived direct image
 
@@ -63,6 +61,17 @@ theorem uniform_bound_core
           ((DerivedCategory.homologyFunctor
             (SheafOfModules.{u} (moduleRings X.toRingedSpace)) m).obj E.obj)) →
         ∀ m : ℤ, N ≤ m → IsZero ((schemeHigherDirectImage f m).obj E.obj) := by
-  sorry
+  let : HasDerivedCategory AddCommGrpCat.{u} := HasDerivedCategory.standard _
+  obtain ⟨N, hpos, hN⟩ := exists_uniform_inverse_affine_sections_bound f
+  refine ⟨(N : ℤ), by omega, ?_⟩
+  intro E hE m hm
+  apply isZero_schemeHigherDirectImage_of_affine_sections f E.obj m
+  intro U hU
+  let F := RingedSpace.openModuleSections X.toRingedSpace (f ⁻¹ᵁ U)
+  let : PreservesLimitsOfShape (Discrete ℕ) F := by
+    dsimp [F, RingedSpace.openModuleSections]
+    infer_instance
+  exact isZero_homology_rightDerivedFunctor_of_cohomological_bound
+    X F N (hN U hU) 0 E.obj E.property hE m (by omega)
 
 end AlgebraicGeometry

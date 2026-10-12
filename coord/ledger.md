@@ -8190,3 +8190,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:41 L: merged deliver/R3/Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback (stage 3; reviewer PASS; first push; landing 20261012T144141-L-2106120 (interface); batch 20261012T144049; modules 3; new nodes 2)
 - 14:41 L: merged deliver/R3/Sheaf.AlgebraicGeometry.SectionComponentNoetherianModel (stage 3; reviewer PASS; after a return; landing 20261012T144142-L-2106237 (interface); batch 20261012T144049; modules 3; new nodes 3)
 - 14:41 L: merged deliver/R3/Sheaf.AlgebraicGeometry.TensorSectionAffineOpen (stage 3; reviewer PASS; first push; landing 20261012T144142-L-2106351 (proof); batch 20261012T144049; modules 1; new nodes 0)
+- 14:41 L: merged deliver/R3/Sheaf.AlgebraicGeometry.UniformDirectImageBoundCore (stage 3; reviewer PASS; first push; landing 20261012T144142-L-2106461 (interface); batch 20261012T144049; modules 3; new nodes 2)

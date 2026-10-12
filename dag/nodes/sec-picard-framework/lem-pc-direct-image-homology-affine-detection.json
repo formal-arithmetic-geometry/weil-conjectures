@@ -1,0 +1,121 @@
+{
+ "id": "lem-pc-direct-image-homology-affine-detection",
+ "kind": "statement",
+ "title": "DirectImageHomologyAffineDetection",
+ "statement": "For any scheme morphism $f:X\\to S$ [def-pc-scheme], $E\\in D(\\mathcal O_X)$ [def-pc-derived-category], and $m\\in\\mathbf Z$, if $H^m(R\\Gamma(f^{-1}U,E))=0$ for every affine open $U\\subset S$ [def-pc-open-module-derived-sections], then $H^m(Rf_*E)=0$ [def-pc-derived-direct-image]. No quasi-coherence, support, or quasi-compactness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5, proof of part (2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-open-module-derived-sections",
+  "def-pc-derived-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Represent E by a K-injective complex I, using DerivedCategory.exists_iso_Q_obj_of_isKInjective. The right derived functors of open sections and direct image are computed by their termwise functors on I [def-pc-open-module-derived-sections, def-pc-ringed-spaces-derived-direct-image]. Thus the hypothesis is zero section homology of the complex K=f_*I on every affine open. The Lean proof transports it using rightDerivedFunctorObjQIso and homologyFunctorFactors.",
+   "uses": [
+    "def-pc-open-module-derived-sections",
+    "def-pc-ringed-spaces-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the underlying abelian presheaf complex L of K and its degree-m homology presheaf P. Exact evaluation identifies P(U) with section homology, so P is zero on affine opens. Every stalk element of P has an affine representative by Scheme.isBasis_affineOpens and TopCat.Presheaf.exists_mem_germ_eq_of_isBasis. It is the germ of zero, hence zero. Exactness of filtered abelian colimits identifies this stalk with homology of the stalk complex. Exactness of the module-to-abelian-sheaf functor and of abelian sheaf stalks identifies the latter with the stalk of the cohomology sheaf of K. These are ShortComplex.mapHomologyIso comparisons.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "TopCat.Sheaf.isZero_iff_stalkFunctor_obj_isZero makes the underlying abelian cohomology sheaf zero. Faithfulness of SheafOfModules.toSheaf reflects that its identity is zero, hence the module cohomology sheaf is zero. Transport back along the K-injective right-derived-functor comparison to obtain the conclusion. No support or quasi-coherence hypothesis has been used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-open-module-derived-sections",
+  "def-pc-ringed-spaces-derived-direct-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 08D5, proof of part (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "cohomology sheaf zero from vanishing of derived sections on basis opens",
+   "results": "Service unavailable: Internal Server Error",
+   "date": "2026-10-12",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cohomology sheaf vanishes if homology of derived sections on affine basis vanishes",
+   "results": "TopCat sheaf cohomology and scheme restriction/limit lemmas; no direct match. The proof uses stalk and exact-functor homology comparisons instead.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "openModuleCohomology|openModuleDerivedSections|uniform_bound_core",
+   "results": "msearch grep: 0 hits. Local rg found the ordinary open section functor, its unbounded derived functor, and the existing general unbounded bound; no theorem identifying this affine-basis detection with a zero cohomology sheaf.",
+   "date": "2026-10-12",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.UniformDirectImageBoundCore",
+  "date": "2026-10-12",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-finite-duality",
+   "place": "proof, first step: compare dualizing sheaves; uniform upper bound in Tag 08D5, affine-basis detection",
+   "via": [
+    "lem-pc-uniform-direct-image-bound-core",
+    "lem-pc-derived-direct-image-uniform-truncation-bound",
+    "lem-sc-proper-upper-shriek-composition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-duality",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DirectImageHomologyAffineDetection",
+  "declaration": "AlgebraicGeometry.isZero_schemeHigherDirectImage_of_affine_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/DirectImageHomologyAffineDetection.lean",
+  "statement": "theorem isZero_schemeHigherDirectImage_of_affine_sections {X S : Scheme.{u}} [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings S.toRingedSpace))] [HasDerivedCategory.{wAb} AddCommGrpCat.{u}] (f : X ⟶ S) (E : schemeDerivedCategory X) (m : ℤ) (h : ∀ (U : S.Opens), IsAffineOpen U → IsZero ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} m).obj ((RingedSpace.openModuleDerivedSections X.toRingedSpace (f ⁻¹ᵁ U)).obj E))) : IsZero ((schemeHigherDirectImage f m).obj E)",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144142-L-2106461",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261012T144142-L-2106461",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
